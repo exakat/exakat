@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>19.1. Installation</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="prev" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="next" href="python-embedded-reference-core.html" title="19.2. Core API" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="python-embedded-installation.html#_installation_on_osx_linux" title="19.1.1. Installation on OSX/Linux" /><link rel="subsection" href="python-embedded-installation.html#_installation_on_windows" title="19.1.2. Installation on Windows" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="reference-documentation.html">Reference</a></span> &gt; <span class="breadcrumb-link"><a href="python-embedded.html">Python embedded bindings</a></span> &gt; <span class="breadcrumb-node">Installation</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="python-embedded.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="python-embedded-reference-core.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="python-embedded-installation"></a>19.1. Installation</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="python-embedded-installation.html#_installation_on_osx_linux">19.1.1. Installation on OSX/Linux</a></span></dt><dt><span class="section"><a href="python-embedded-installation.html#_installation_on_windows">19.1.2. Installation on Windows</a></span></dt></dl></div><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/admon/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>The Neo4j database itself (from the <a class="link" href="deployment-installation.html#editions" title="Neo4j editions">Community Edition</a>) is included in the neo4j-embedded distribution.</p></td></tr></table></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_installation_on_osx_linux"></a>19.1.1. Installation on OSX/Linux</h3></div></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_prerequisites"></a>Prerequisites</h4></div></div></div><div class="caution" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Caution]" src="images/icons/admon/caution.png" /></td><th align="left">Caution</th></tr><tr><td align="left" valign="top"><p>Make sure that the entire stack used is either 64bit or 32bit (no mixing, that is). That means the JVM, Python and JPype.</p></td></tr></table></div><p>First, install JPype:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+Download the latest version of JPype from <a class="ulink" href="http://sourceforge.net/projects/jpype/files/JPype/" target="_top">http://sourceforge.net/projects/jpype/files/JPype/</a>.
+</li><li class="listitem">
+Unzip the file.
+</li><li class="listitem">
+Open a console and navigate into the unzipped folder.
+</li><li class="listitem">
+Run <code class="literal">sudo python setup.py install</code>
+</li></ol></div><p>JPype is also available in the Debian repos:</p><pre class="programlisting brush: shell">sudo apt-get install python-jpype</pre><p>Then, make sure the <code class="literal">JAVA_HOME</code> environment variable is set to your <span class="emphasis"><em>jre</em></span> or <span class="emphasis"><em>jdk</em></span> folder, so that JPype can find the JVM.</p><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/admon/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>Installation can be problematic on OSX. See the following Stack Overflow discussion for help: <a class="ulink" href="http://stackoverflow.com/questions/8525193/cannot-install-jpype-on-os-x-lion-to-use-with-neo4j" target="_top">http://stackoverflow.com/questions/8525193/cannot-install-jpype-on-os-x-lion-to-use-with-neo4j</a></p></td></tr></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_installing_neo4j_embedded"></a>Installing neo4j-embedded</h4></div></div></div><p>You can install neo4j-embedded with your python package manager of choice:</p><pre class="programlisting brush: shell">sudo pip install neo4j-embedded</pre><pre class="programlisting brush: shell">sudo easy_install neo4j-embedded</pre><p>Or install manually:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+Download the latest appropriate version of JPype from <a class="ulink" href="http://sourceforge.net/projects/jpype/files/JPype/" target="_top">http://sourceforge.net/projects/jpype/files/JPype/</a> for 32bit or from <a class="ulink" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_top">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a> for 64bit.
+</li><li class="listitem">
+Unzip the file.
+</li><li class="listitem">
+Open a console and navigate into the unzipped folder.
+</li><li class="listitem">
+Run <code class="literal">sudo python setup.py install</code>
+</li></ol></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_installation_on_windows"></a>19.1.2. Installation on Windows</h3></div></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_prerequisites_2"></a>Prerequisites</h4></div></div></div><div class="warning" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Warning"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="images/icons/admon/warning.png" /></td><th align="left">Warning</th></tr><tr><td align="left" valign="top"><p>It is <span class="emphasis"><em>imperative</em></span> that the entire stack used is either 64bit or 32bit (no mixing, that is).
+  That means the JVM, Python, JPype and all extra DLLs (see below).</p></td></tr></table></div><p>First, install JPype:</p><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/admon/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>Notice that JPype only works with Python 2.6 and 2.7.
+Also note that there are different downloads depending on which version you use.</p></td></tr></table></div><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+Download the latest appropriate version of JPype from <a class="ulink" href="http://sourceforge.net/projects/jpype/files/JPype/" target="_top">http://sourceforge.net/projects/jpype/files/JPype/</a> for 32bit or from <a class="ulink" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_top">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a> for 64bit.
+</li><li class="listitem">
+Run the installer.
+</li></ol></div><p>Then, make sure the <code class="literal">JAVA_HOME</code> environment variable is set to your <span class="emphasis"><em>jre</em></span> or <span class="emphasis"><em>jdk</em></span> folder.
+There is a description of how to set environment variables in <a class="xref" href="python-embedded-installation.html#python-embedded-installation-windows-dlls" title="Solving problems with missing DLL files">the section called “Solving problems with missing DLL files”</a>.</p><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/admon/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>There may be DLL files missing from your system that are required by JPype.
+  See <a class="xref" href="python-embedded-installation.html#python-embedded-installation-windows-dlls" title="Solving problems with missing DLL files">the section called “Solving problems with missing DLL files”</a> for instructions for how to fix this.</p></td></tr></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_installing_neo4j_embedded_2"></a>Installing neo4j-embedded</h4></div></div></div><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+Download the latest version from <a class="ulink" href="http://pypi.python.org/pypi/neo4j-embedded/" target="_top">http://pypi.python.org/pypi/neo4j-embedded/</a>.
+</li><li class="listitem">
+Run the installer.
+</li></ol></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="python-embedded-installation-windows-dlls"></a>Solving problems with missing DLL files</h4></div></div></div><p>Certain versions of Windows ship without DLL files needed to programmatically launch a JVM.
+You will need to make <code class="literal">IEShims.dll</code> and certain debugging dlls available on Windows.</p><p><code class="literal">IEShims.dll</code> is normally included with Internet Explorer installs.
+To make windows find this file globally, you need to add the IE install folder to your <code class="literal">PATH</code>.</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+Right click on "My Computer" or "Computer".
+</li><li class="listitem">
+Select "Properties".
+</li><li class="listitem">
+Click on "Advanced" or "Advanced system settings".
+</li><li class="listitem">
+Click the "Environment variables" button.
+</li><li class="listitem">
+Find the path varible, and add <span class="emphasis"><em>C:\Program Files\Internet Explorer</em></span> to it (or the install location of IE, if you have installed it somewhere else).
+</li></ol></div><p>Required debugging dlls are bundled with Microsoft Visual C++ Redistributable libraries.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+32bit Windows: <a class="ulink" href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=5555" target="_top">http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=5555</a>
+</li><li class="listitem">
+64bit Windows: <a class="ulink" href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=14632" target="_top">http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=14632</a>
+</li></ul></div><p>If you are still getting errors about missing DLL files, you can use <a class="ulink" href="http://www.dependencywalker.com/" target="_top">http://www.dependencywalker.com/</a> to open your <code class="literal">jvm.dll</code> (located in <span class="emphasis"><em>JAVA_HOME/bin/client/</em></span> or <span class="emphasis"><em>JAVA_HOME/bin/server/</em></span>), and it will tell you if there are other missing dlls.</p></div></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="python-embedded.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="python-embedded.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="python-embedded-reference-core.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

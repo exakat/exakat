@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 12. Transaction Management</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="reference-documentation.html" title="Part III. Reference" /><link rel="prev" href="capabilities-capacity.html" title="11.5. Capacity" /><link rel="next" href="transactions-interaction.html" title="12.1. Interaction cycle" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="section" href="transactions-interaction.html" title="12.1. Interaction cycle" /><link rel="section" href="transactions-isolation.html" title="12.2. Isolation levels" /><link rel="section" href="transactions-locking.html" title="12.3. Default locking behavior" /><link rel="section" href="transactions-deadlocks.html" title="12.4. Deadlocks" /><link rel="section" href="transactions-delete.html" title="12.5. Delete semantics" /><link rel="section" href="transactions-unique-nodes.html" title="12.6. Creating unique nodes" /><link rel="section" href="transactions-events.html" title="12.7. Transaction events" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="reference-documentation.html">Reference</a></span> &gt; <span class="breadcrumb-node">Transaction Management</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="capabilities-capacity.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="transactions-interaction.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h2 class="title"><a id="transactions"></a>Chapter 12. Transaction Management</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl><dt><span class="section"><a href="transactions-interaction.html">12.1. Interaction cycle</a></span></dt><dt><span class="section"><a href="transactions-isolation.html">12.2. Isolation levels</a></span></dt><dt><span class="section"><a href="transactions-locking.html">12.3. Default locking behavior</a></span></dt><dt><span class="section"><a href="transactions-deadlocks.html">12.4. Deadlocks</a></span></dt><dt><span class="section"><a href="transactions-delete.html">12.5. Delete semantics</a></span></dt><dt><span class="section"><a href="transactions-unique-nodes.html">12.6. Creating unique nodes</a></span></dt><dt><span class="section"><a href="transactions-events.html">12.7. Transaction events</a></span></dt></dl></div><p>In order to fully maintain data integrity and ensure good transactional behavior, Neo4j supports the ACID properties:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+atomicity: If any part of a transaction fails, the database state is left unchanged.
+</li><li class="listitem">
+consistency: Any transaction will leave the database in a consistent state.
+</li><li class="listitem">
+isolation: During a transaction, modified data cannot be accessed by other operations.
+</li><li class="listitem">
+durability: The DBMS can always recover the results of a committed transaction.
+</li></ul></div><p>Specifically:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+All modifications to Neo4j data must be wrapped in transactions.
+</li><li class="listitem">
+The default isolation level is <code class="literal">READ_COMMITTED</code>.
+</li><li class="listitem">
+Data retrieved by traversals is not protected from modification by other transactions.
+</li><li class="listitem">
+Non-repeatable reads may occur (i.e., only write locks are acquired and held until the end of the transaction).
+</li><li class="listitem">
+One can manually acquire write locks on nodes and relationships to achieve higher level of isolation (<code class="literal">SERIALIZABLE</code>).
+</li><li class="listitem">
+Locks are acquired at the Node and Relationship level.
+</li><li class="listitem">
+Deadlock detection is built into the core transaction management.
+</li></ul></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="capabilities-capacity.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="reference-documentation.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="transactions-interaction.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>neo4j-backup</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="manpages.html" title="Appendix A. Manpages" /><link rel="prev" href="re02.html" title="neo4j-shell" /><link rel="next" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="section" href="re03.html#neo4j-backup-manpage-description" title="DESCRIPTION" /><link rel="section" href="re03.html#_backup_type" title="BACKUP TYPE" /><link rel="section" href="re03.html#neo4j-backup-manpage-souceuri" title="SOURCE URI" /><link rel="section" href="re03.html#neo4j-backup-manpage-usage-important" title="IMPORTANT" /><link rel="section" href="re03.html#neo4j-backup-manpage-usage-windows" title="Usage - Windows" /><link rel="section" href="re03.html#neo4j-backup-manpage-examples" title="EXAMPLES" /><link rel="section" href="re03.html#neo4j-backup-manpage-restore" title="RESTORE FROM BACKUP" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="manpages.html">Manpages</a></span> &gt; <span class="breadcrumb-node">neo4j-backup</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="re02.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="questions.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="refentry" lang="en"><a id="idp17896000"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>neo4j-backup — Neo4j Backup Tool</p></div><div class="refsynopsisdiv"><a id="neo4j-backup-manpage"></a><h2>Synopsis</h2><p><span class="strong"><strong>neo4j-backup</strong></span> {-full|-incremental} -from SourceURI -to Directory</p></div><div class="refsect1"><a id="neo4j-backup-manpage-description"></a><h2>DESCRIPTION</h2><p>A tool to perform live backups over the network from a running Neo4j graph database onto a local filesystem.
+Backups can be either full or incremental.
+The first backup must be a full backup, after that incremental backups can be performed.</p><p>The source(s) are given as URIs in a special format, the target is a filesystem location.</p></div><div class="refsect1"><a id="_backup_type"></a><h2>BACKUP TYPE</h2><div class="variablelist"><dl><dt><span class="term">
+<span class="strong"><strong>-full</strong></span>
+</span></dt><dd>
+  copies the entire database to a directory.
+</dd><dt><span class="term">
+<span class="strong"><strong>-incremental</strong></span>
+</span></dt><dd>
+  copies the changes that have taken place since the last full or
+incremental backup to an existing backup store.
+</dd></dl></div></div><div class="refsect1"><a id="neo4j-backup-manpage-souceuri"></a><h2>SOURCE URI</h2><p>Backup sources are given in the following format:</p><p><span class="strong"><strong>&lt;running mode&gt;://&lt;host&gt;[:&lt;port&gt;][,&lt;host&gt;[:&lt;port&gt;]]…</strong></span></p><p>Note that multiple hosts can be defined.</p><div class="variablelist"><dl><dt><span class="term">
+<span class="strong"><strong>running mode</strong></span>
+</span></dt><dd>
+  'single' or 'ha'. 'ha' is for instances in High Availability mode, 'single' is for standalone databases.
+</dd><dt><span class="term">
+<span class="strong"><strong>host</strong></span>
+</span></dt><dd>
+  In single mode, the host of a source database; in ha mode, the cluster address of a cluster member. Note that multiple hosts can be given when using High Availability mode.
+</dd><dt><span class="term">
+<span class="strong"><strong>port</strong></span>
+</span></dt><dd>
+  In single mode, the port of a source database backup service; in ha mode, the port of a cluster instance. If not given, the default value <code class="literal">6362</code> will be used for single mode, <code class="literal">5001</code> for HA
+</dd></dl></div></div><div class="refsect1"><a id="neo4j-backup-manpage-usage-important"></a><h2>IMPORTANT</h2><p>Backups can only be performed on databases which have the configuration parameter <span class="strong"><strong><code class="literal">enable_online_backup=true</code></strong></span> set.
+That will make the backup service available on the default port (<code class="literal">6362</code>).
+To enable the backup service on a different port use for example <span class="strong"><strong><code class="literal">enable_online_backup=port=9999</code></strong></span> instead.</p></div><div class="refsect1"><a id="neo4j-backup-manpage-usage-windows"></a><h2>Usage - Windows</h2><p>The <span class="strong"><strong><code class="literal">Neo4jBackup.bat</code></strong></span> script is used in the same way.</p></div><div class="refsect1"><a id="neo4j-backup-manpage-examples"></a><h2>EXAMPLES</h2><pre class="programlisting brush: shell"># Performing a full backup
+neo4j-backup -full -from single://192.168.1.34 -to /mnt/backup/neo4j-backup
+
+# Performing an incremental backup
+neo4j-backup -incremental -from single://freja -to /mnt/backup/neo4j-backup
+
+# Performing an incremental backup where the service is registered on a custom port
+neo4j-backup -incremental -from single://freja:9999 -to /mnt/backup/neo4j-backup
+
+# Performing a full backup from HA cluster, specifying two cluster members
+./neo4j-backup -full -from ha://oden:5001,loke:5002 -to /mnt/backup/neo4j-backup
+
+# Performing an incremental backup from HA cluster, specifying only one cluster member
+./neo4j-backup -incremental -from ha://oden:5002 -to /mnt/backup/neo4j-backup</pre></div><div class="refsect1"><a id="neo4j-backup-manpage-restore"></a><h2>RESTORE FROM BACKUP</h2><p>The Neo4j backups are fully functional databases.
+To use a backup, replace your database directory with the backup.</p></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="manpages.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="questions.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

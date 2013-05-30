@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>4.1. Include Neo4j in your project</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="prev" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="next" href="tutorials-java-embedded-hello-world.html" title="4.2. Hello World" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="tutorials-java-embedded-setup.html#_add_neo4j_to_the_build_path" title="4.1.1. Add Neo4j to the build path" /><link rel="subsection" href="tutorials-java-embedded-setup.html#_add_neo4j_as_a_dependency" title="4.1.2. Add Neo4j as a dependency" /><link rel="subsection" href="tutorials-java-embedded-setup.html#tutorials-java-embedded-setup-startstop" title="4.1.3. Starting and stopping" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="tutorials.html">Tutorials</a></span> &gt; <span class="breadcrumb-link"><a href="tutorials-java-embedded.html">Using Neo4j embedded in Java applications</a></span> &gt; <span class="breadcrumb-node">Include Neo4j in your project</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="tutorials-java-embedded.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="tutorials-java-embedded-hello-world.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="tutorials-java-embedded-setup"></a>4.1. Include Neo4j in your project</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="tutorials-java-embedded-setup.html#_add_neo4j_to_the_build_path">4.1.1. Add Neo4j to the build path</a></span></dt><dt><span class="section"><a href="tutorials-java-embedded-setup.html#_add_neo4j_as_a_dependency">4.1.2. Add Neo4j as a dependency</a></span></dt><dt><span class="section"><a href="tutorials-java-embedded-setup.html#tutorials-java-embedded-setup-startstop">4.1.3. Starting and stopping</a></span></dt></dl></div><p>After selecting the appropriate <a class="link" href="deployment-installation.html#editions" title="Neo4j editions">edition</a> for your platform, embed Neo4j in your Java application by including the Neo4j library jars in your build.
+The following sections will show how to do this by either altering the build path directly or by using dependency management.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_add_neo4j_to_the_build_path"></a>4.1.1. Add Neo4j to the build path</h3></div></div></div><p>Get the Neo4j libraries from one of these sources:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+Extract a Neo4j <a class="ulink" href="http://neo4j.org/download/" target="_top">download</a> zip/tarball, and use the <span class="emphasis"><em>jar</em></span> files found in the <span class="emphasis"><em>lib/</em></span> directory.
+</li><li class="listitem">
+Use the <span class="emphasis"><em>jar</em></span> files available from <a class="ulink" href="http://search.maven.org/#search|ga|1|g%3A%22org.neo4j%22" target="_top">Maven Central Repository</a>
+</li></ul></div><p>Add the jar files to your project:</p><div class="variablelist"><dl><dt><span class="term">
+JDK tools
+</span></dt><dd>
+ Append to <code class="literal">-classpath</code>
+</dd><dt><span class="term">
+Eclipse
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+Right-click on the project and then go <span class="emphasis"><em>Build Path → Configure Build Path.</em></span>
+   In the dialog, choose <span class="emphasis"><em>Add External JARs</em></span>, browse to the Neo4j <span class="emphasis"><em>lib/</em></span> directory and select all of the jar files.
+</li><li class="listitem">
+Another option is to use <a class="ulink" href="http://help.eclipse.org/indigo/index.jsp?topic=/org.eclipse.jdt.doc.user/reference/preferences/java/buildpath/ref-preferences-user-libraries.htm" target="_top">User Libraries</a>.
+</li></ul></div></dd><dt><span class="term">
+IntelliJ IDEA
+</span></dt><dd>
+ See <a class="ulink" href="http://www.jetbrains.com/idea/webhelp/libraries-global-libraries-and-the-configure-library-dialog.html" target="_top">Libraries, Global Libraries, and the Configure Library dialog</a>
+</dd><dt><span class="term">
+NetBeans
+</span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+Right-click on the <span class="emphasis"><em>Libraries</em></span> node of the project, choose <span class="emphasis"><em>Add JAR/Folder</em></span>, browse to the Neo4j <span class="emphasis"><em>lib/</em></span> directory and select all of the jar files.
+</li><li class="listitem">
+You can also handle libraries from the project node, see <a class="ulink" href="http://netbeans.org/kb/docs/java/project-setup.html#projects-classpath" target="_top">Managing a Project’s Classpath</a>.
+</li></ul></div></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_add_neo4j_as_a_dependency"></a>4.1.2. Add Neo4j as a dependency</h3></div></div></div><p>For an overview of the main Neo4j artifacts, see <a class="xref" href="deployment-installation.html#editions" title="Neo4j editions">Neo4j editions</a>.
+The artifacts listed there are top-level artifacts that will transitively include the actual Neo4j implementation.
+You can either go with the top-level artifact or include the individual components directly.
+The examples included here use the top-level artifact approach.</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_maven"></a>Maven</h4></div></div></div><p><strong>Maven dependency. </strong>
+</p><pre class="programlisting brush: xml">&lt;project&gt;
+...
+ &lt;dependencies&gt;
+  &lt;dependency&gt;
+   &lt;groupId&gt;org.neo4j&lt;/groupId&gt;
+   &lt;artifactId&gt;neo4j&lt;/artifactId&gt;
+   &lt;version&gt;1.9.M04&lt;/version&gt;
+  &lt;/dependency&gt;
+  ...
+ &lt;/dependencies&gt;
+...
+&lt;/project&gt;</pre><p>
+</p><p><span class="emphasis"><em>Where the <code class="literal">artifactId</code> is found in <a class="xref" href="deployment-installation.html#editions" title="Neo4j editions">Neo4j editions</a>.</em></span></p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_eclipse_and_maven"></a>Eclipse and Maven</h4></div></div></div><p>For development in <a class="ulink" href="http://www.eclipse.org" target="_top">Eclipse</a>, it is recommended to install the <a class="ulink" href="http://www.eclipse.org/m2e/" target="_top">m2e plugin</a> and let Maven manage the project build classpath instead, see above.
+This also adds the possibility to build your project both via the command line with Maven and have a working Eclipse setup for development.</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_ivy"></a>Ivy</h4></div></div></div><p>Make sure to resolve dependencies from Maven Central, for example using this configuration in your <span class="emphasis"><em>ivysettings.xml</em></span> file:</p><pre class="programlisting brush: xml">&lt;ivysettings&gt;
+  &lt;settings defaultResolver="main"/&gt;
+  &lt;resolvers&gt;
+    &lt;chain name="main"&gt;
+      &lt;filesystem name="local"&gt;
+        &lt;artifact pattern="${ivy.settings.dir}/repository/[artifact]-[revision].[ext]" /&gt;
+      &lt;/filesystem&gt;
+      &lt;ibiblio name="maven_central" root="http://repo1.maven.org/maven2/" m2compatible="true"/&gt;
+    &lt;/chain&gt;
+  &lt;/resolvers&gt;
+&lt;/ivysettings&gt;</pre><p>With that in place you can add Neo4j to the mix by having something along these lines to your <span class="emphasis"><em>ivy.xml</em></span> file:</p><pre class="programlisting brush: xml">..
+&lt;dependencies&gt;
+  ..
+  &lt;dependency org="org.neo4j" name="neo4j" rev="1.9.M04"/&gt;
+  ..
+&lt;/dependencies&gt;
+..</pre><p><span class="emphasis"><em>Where the <code class="literal">name</code> is found in <a class="xref" href="deployment-installation.html#editions" title="Neo4j editions">Neo4j editions</a>.</em></span></p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_gradle"></a>Gradle</h4></div></div></div><p>The example below shows an example gradle build script for including the Neo4j libraries.</p><pre class="programlisting brush: groovy">def neo4jVersion = "1.9.M04"
+apply plugin: 'java'
+repositories {
+   mavenCentral()
+}
+dependencies {
+   compile "org.neo4j:neo4j:${neo4jVersion}"
+}</pre><p><span class="emphasis"><em>Where the coordinates (<code class="literal">org.neo4j:neo4j</code> in the example) are found in <a class="xref" href="deployment-installation.html#editions" title="Neo4j editions">Neo4j editions</a>.</em></span></p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="tutorials-java-embedded-setup-startstop"></a>4.1.3. Starting and stopping</h3></div></div></div><p>To create a new database or ópen an existing one you instantiate an <code class="literal"><a class="ulink" href="http://components.neo4j.org/neo4j/1.9.M04/apidocs/org/neo4j/kernel/EmbeddedGraphDatabase.html" target="_top">EmbeddedGraphDatabase</a></code>.</p><pre class="programlisting brush: java">graphDb = new GraphDatabaseFactory().newEmbeddedDatabase( DB_PATH );
+registerShutdownHook( graphDb );
+</pre><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/admon/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>The <code class="literal">EmbeddedGraphDatabase</code> instance can be shared among multiple threads.
+Note however that you can’t create multiple instances pointing to the same database.</p></td></tr></table></div><p>To stop the database, call the <code class="literal">shutdown()</code> method:</p><pre class="programlisting brush: java">graphDb.shutdown();
+</pre><p>To make sure Neo4j is shut down properly you can add a shutdown hook:</p><pre class="programlisting brush: java">private static void registerShutdownHook( final GraphDatabaseService graphDb )
+{
+    // Registers a shutdown hook for the Neo4j instance so that it
+    // shuts down nicely when the VM exits (even if you "Ctrl-C" the
+    // running example before it's completed)
+    Runtime.getRuntime().addShutdownHook( new Thread()
+    {
+        @Override
+        public void run()
+        {
+            graphDb.shutdown();
+        }
+    } );
+}
+</pre><p>If you want a <span class="emphasis"><em>read-only view</em></span> of the database, use <code class="literal"><a class="ulink" href="http://components.neo4j.org/neo4j/1.9.M04/apidocs/org/neo4j/kernel/EmbeddedReadOnlyGraphDatabase.html" target="_top">EmbeddedReadOnlyGraphDatabase</a></code>.</p><p>To start Neo4j with configuration settings, a Neo4j properties file can be loaded like this:</p><pre class="programlisting brush: java">
+GraphDatabaseService graphDb = new GraphDatabaseFactory().
+    newEmbeddedDatabaseBuilder( "target/database/location" ).
+    loadPropertiesFromFile( pathToConfig + "neo4j.properties" ).
+    newGraphDatabase();
+
+</pre><p>Or you could of course create you own <code class="literal">Map&lt;String, String&gt;</code> programatically and use that instead.</p><p>For configuration settings, see <a class="xref" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance">Chapter 21, <em>Configuration &amp; Performance</em></a>.</p></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tutorials-java-embedded.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="tutorials-java-embedded.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="tutorials-java-embedded-hello-world.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

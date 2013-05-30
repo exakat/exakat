@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>10.1. Server Plugins</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="prev" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="next" href="server-unmanaged-extensions.html" title="10.2. Unmanaged Extensions" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="tutorials.html">Tutorials</a></span> &gt; <span class="breadcrumb-link"><a href="server-extending.html">Extending the Neo4j Server</a></span> &gt; <span class="breadcrumb-node">Server Plugins</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="server-extending.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="server-unmanaged-extensions.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="server-plugins"></a>10.1. Server Plugins</h2></div></div></div><div class="sidebar"><div class="titlepage"><div><div><p class="title"><strong>Quick info</strong></p></div></div></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+The server’s functionality can be extended by adding plugins.
+</li><li class="listitem">
+Plugins are user-specified code which extend the capabilities of the database, nodes, or relationships.
+</li><li class="listitem">
+The neo4j server will then advertise the plugin functionality within representations as clients interact via HTTP.
+</li></ul></div></div><p>Plugins provide an easy way to extend the Neo4j REST API with new functionality, without the need to
+invent your own API.
+Think of plugins as server-side scripts that can add functions for retrieving and manipulating nodes, relationships, paths, properties or indices.</p><div class="tip" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/icons/admon/tip.png" /></td><th align="left">Tip</th></tr><tr><td align="left" valign="top"><p>If you want to have full control over your API, and are willing to put in the effort, and understand the risks, then Neo4j server also provides hooks for <a class="link" href="server-unmanaged-extensions.html" title="10.2. Unmanaged Extensions">unmanaged extensions</a> based on JAX-RS.</p></td></tr></table></div><p>The needed classes reside in the <a class="ulink" href="http://search.maven.org/#search|gav|1|g%3A%22org.neo4j%22%20AND%20a%3A%22server-api%22" target="_top">org.neo4j:server-api</a> jar file.
+See the linked page for downloads and instructions on how to include it using dependency management.
+For Maven projects, add the Server API dependencies in your <code class="literal">pom.xml</code> like this:</p><pre class="programlisting brush: xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.neo4j&lt;/groupId&gt;
+  &lt;artifactId&gt;server-api&lt;/artifactId&gt;
+  &lt;version&gt;${neo4j-version}&lt;/version&gt;
+&lt;/dependency&gt;</pre><p><span class="emphasis"><em>Where ${neo4j-version} is the intended version.</em></span></p><p>To create a plugin, your code must inherit from the <a class="ulink" href="http://components.neo4j.org/server-api/1.9.M04/apidocs/org/neo4j/server/plugins/ServerPlugin.html" target="_top">ServerPlugin</a> class.
+Your plugin should also:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+ensure that it can produce an (Iterable of) <code class="literal">Node</code>, <code class="literal">Relationship</code> or <code class="literal">Path</code>, any Java primitive or <code class="literal">String</code> or an instance of a <code class="literal">org.neo4j.server.rest.repr.Representation</code>
+</li><li class="listitem">
+specify parameters,
+</li><li class="listitem">
+specify a point of extension and of course
+</li><li class="listitem">
+contain the application logic.
+</li><li class="listitem">
+make sure that the discovery point type in the <code class="literal">@PluginTarget</code> and the <code class="literal">@Source</code> parameter are of the same type.
+</li></ul></div><p>An example of a plugin which augments the database (as opposed to nodes or relationships) follows:</p><p><strong>Get all nodes or relationships plugin. </strong>
+</p><pre class="programlisting brush: java">@Description( "An extension to the Neo4j Server for getting all nodes or relationships" )
+public class GetAll extends ServerPlugin
+{
+    @Name( "get_all_nodes" )
+    @Description( "Get all nodes from the Neo4j graph database" )
+    @PluginTarget( GraphDatabaseService.class )
+    public Iterable&lt;Node&gt; getAllNodes( @Source GraphDatabaseService graphDb )
+    {
+        return GlobalGraphOperations.at( graphDb ).getAllNodes();
+    }
+
+    @Description( "Get all relationships from the Neo4j graph database" )
+    @PluginTarget( GraphDatabaseService.class )
+    public Iterable&lt;Relationship&gt; getAllRelationships( @Source GraphDatabaseService graphDb )
+    {
+        return GlobalGraphOperations.at( graphDb ).getAllRelationships();
+    }
+}
+</pre><p>
+</p><p>The full source code is found here:
+<a class="ulink" href="https://github.com/neo4j/neo4j/blob/1.9.M04/community/server-examples/src/main/java/org/neo4j/examples/server/plugins/GetAll.java" target="_top">GetAll.java</a></p><p><strong>Find the shortest path between two nodes plugin. </strong>
+</p><pre class="programlisting brush: java">public class ShortestPath extends ServerPlugin
+{
+    @Description( "Find the shortest path between two nodes." )
+    @PluginTarget( Node.class )
+    public Iterable&lt;Path&gt; shortestPath(
+            @Source Node source,
+            @Description( "The node to find the shortest path to." )
+                @Parameter( name = "target" ) Node target,
+            @Description( "The relationship types to follow when searching for the shortest path(s). " +
+                    "Order is insignificant, if omitted all types are followed." )
+                @Parameter( name = "types", optional = true ) String[] types,
+            @Description( "The maximum path length to search for, default value (if omitted) is 4." )
+                @Parameter( name = "depth", optional = true ) Integer depth )
+    {
+        Expander expander;
+        if ( types == null )
+        {
+            expander = Traversal.expanderForAllTypes();
+        }
+        else
+        {
+            expander = Traversal.emptyExpander();
+            for ( int i = 0; i &lt; types.length; i++ )
+            {
+                expander = expander.add( DynamicRelationshipType.withName( types[i] ) );
+            }
+        }
+        PathFinder&lt;Path&gt; shortestPath = GraphAlgoFactory.shortestPath(
+                expander, depth == null ? 4 : depth.intValue() );
+        return shortestPath.findAllPaths( source, target );
+    }
+}
+</pre><p>
+</p><p>The full source code is found here:
+<a class="ulink" href="https://github.com/neo4j/neo4j/blob/1.9.M04/community/server-examples/src/main/java/org/neo4j/examples/server/plugins/ShortestPath.java" target="_top">ShortestPath.java</a></p><p>To deploy the code, simply compile it into a .jar file and place it onto the server classpath (which by
+convention is the plugins directory under the Neo4j server home directory).</p><div class="tip" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/icons/admon/tip.png" /></td><th align="left">Tip</th></tr><tr><td align="left" valign="top"><p>Make sure the directories listings are retained in the jarfile by either building with default Maven, or with <code class="literal">jar -cvf myext.jar *</code>, making sure
+to jar directories instead of specifying single files.</p></td></tr></table></div><p>The <span class="emphasis"><em>.jar</em></span> file must include the file <span class="emphasis"><em>META-INF/services/org.neo4j.server.plugins.ServerPlugin</em></span> with the fully qualified name of the implementation class.
+This is an example with multiple entries, each on a separate line:</p><pre class="programlisting brush: plain">org.neo4j.examples.server.plugins.GetAll
+org.neo4j.examples.server.plugins.DepthTwo
+org.neo4j.examples.server.plugins.ShortestPath</pre><p>The code above makes an extension visible in the database representation (via the <code class="literal">@PluginTarget</code> annotation)
+whenever it is served from the Neo4j Server.
+Simply changing the <code class="literal">@PluginTarget</code> parameter to <code class="literal">Node.class</code> or <code class="literal">Relationship.class</code> allows us to target those parts of the data model should we wish.
+The functionality extensions provided by the plugin are automatically advertised in representations on the wire.
+For example, clients can discover the extension implemented by the above plugin easily by examining the representations
+they receive as responses from the server, e.g. by performing a <code class="literal">GET</code> on the default database URI:</p><pre class="programlisting brush: shell">curl -v http://localhost:7474/db/data/</pre><p>The response to the <code class="literal">GET</code> request will contain (by default) a JSON container that itself contains a container
+called "extensions" where the available plugins are listed.
+In the following case, we only have the <code class="literal">GetAll</code> plugin registered with the server, so only its extension functionality is available.
+Extension names will be automatically assigned, based on method names, if not specifically specified using the <code class="literal">@Name</code> annotation.</p><pre class="programlisting brush: javascript">{
+"extensions-info" : "http://localhost:7474/db/data/ext",
+"node" : "http://localhost:7474/db/data/node",
+"node_index" : "http://localhost:7474/db/data/index/node",
+"relationship_index" : "http://localhost:7474/db/data/index/relationship",
+"reference_node" : "http://localhost:7474/db/data/node/0",
+"extensions_info" : "http://localhost:7474/db/data/ext",
+"extensions" : {
+  "GetAll" : {
+    "get_all_nodes" : "http://localhost:7474/db/data/ext/GetAll/graphdb/get_all_nodes",
+    "get_all_relationships" : "http://localhost:7474/db/data/ext/GetAll/graphdb/getAllRelationships"
+  }
+}</pre><p>Performing a <code class="literal">GET</code> on one of the two extension URIs gives back the meta information about the service:</p><pre class="programlisting brush: shell">curl http://localhost:7474/db/data/ext/GetAll/graphdb/get_all_nodes</pre><pre class="programlisting brush: javascript">{
+  "extends" : "graphdb",
+  "description" : "Get all nodes from the Neo4j graph database",
+  "name" : "get_all_nodes",
+  "parameters" : [ ]
+}</pre><p>To use it, just <code class="literal">POST</code> to this URL, with parameters as specified in the description and encoded as JSON data content.
+F.ex for calling the <code class="literal">shortest path</code> extension (URI gotten from a <code class="literal">GET</code> to <a class="ulink" href="http://localhost:7474/db/data/node/123" target="_top">http://localhost:7474/db/data/node/123</a>):</p><pre class="programlisting brush: bash">curl -X POST http://localhost:7474/db/data/ext/GetAll/node/123/shortestPath \
+  -H "Content-Type: application/json" \
+  -d '{"target":"http://localhost:7474/db/data/node/456&amp;depth=5"}'</pre><p>If everything is OK a response code <code class="literal">200</code> and a list of zero or more items will be returned.
+If nothing is returned (null returned from extension) an empty result and response code <code class="literal">204</code> will be returned.
+If the extension throws an exception response code <code class="literal">500</code> and a detailed error message is returned.</p><p>Extensions that do any kind of write operation will have to manage their own transactions, i.e. transactions aren’t managed automatically.</p><p>Through this model, any plugin can naturally fit into the general hypermedia scheme that Neo4j espouses — meaning that
+clients can still take advantage of abstractions like  Nodes, Relationships and Paths with a straightforward upgrade
+path as servers are enriched with plugins (old clients don’t break).</p></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="server-extending.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="server-extending.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="server-unmanaged-extensions.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

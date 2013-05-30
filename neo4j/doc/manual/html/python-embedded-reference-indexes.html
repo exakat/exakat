@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>19.3. Indexes</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="prev" href="python-embedded-reference-core.html" title="19.2. Core API" /><link rel="next" href="python-embedded-reference-cypher.html" title="19.4. Cypher Queries" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="python-embedded-reference-indexes.html#_index_management" title="19.3.1. Index management" /><link rel="subsection" href="python-embedded-reference-indexes.html#_indexing_things" title="19.3.2. Indexing things" /><link rel="subsection" href="python-embedded-reference-indexes.html#_searching_the_index" title="19.3.3. Searching the index" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="reference-documentation.html">Reference</a></span> &gt; <span class="breadcrumb-link"><a href="python-embedded.html">Python embedded bindings</a></span> &gt; <span class="breadcrumb-node">Indexes</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="python-embedded-reference-core.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="python-embedded-reference-cypher.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="python-embedded-reference-indexes"></a>19.3. Indexes</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="python-embedded-reference-indexes.html#_index_management">19.3.1. Index management</a></span></dt><dt><span class="section"><a href="python-embedded-reference-indexes.html#_indexing_things">19.3.2. Indexing things</a></span></dt><dt><span class="section"><a href="python-embedded-reference-indexes.html#_searching_the_index">19.3.3. Searching the index</a></span></dt></dl></div><p>In order to rapidly find nodes or relationship based on properties, Neo4j supports indexing.
+This is commonly used to find start nodes for <a class="link" href="python-embedded-reference-traversal.html" title="19.5. Traversals">traversals</a>.</p><p>By default, the underlying index is powered by <a class="ulink" href="http://lucene.apache.org/java/docs/index.html" target="_top">Apache Lucene</a>, but it is also possible to use Neo4j with other index implementations.</p><p>You can create an arbitrary number of named indexes.
+Each index handles either nodes or relationships, and each index works by indexing key/value/object triplets, object being either a node or a relationship, depending on the index type.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_index_management"></a>19.3.1. Index management</h3></div></div></div><p>Just like the rest of the API, all write operations to the index must be performed from within a transaction.</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_creating_an_index"></a>Creating an index</h4></div></div></div><p>Create a new index, with optional configuration.</p><pre class="programlisting brush: python">with db.transaction:
+    # Create a relationship index
+    rel_idx = db.relationship.indexes.create('my_rels')
+
+    # Create a node index, passing optional
+    # arguments to the index provider.
+    # In this case, enable full-text indexing.
+    node_idx = db.node.indexes.create('my_nodes', type='fulltext')
+</pre></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_retrieving_a_pre_existing_index"></a>Retrieving a pre-existing index</h4></div></div></div><pre class="programlisting brush: python">with db.transaction:
+    node_idx = db.node.indexes.get('my_nodes')
+
+    rel_idx = db.relationship.indexes.get('my_rels')
+</pre></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_deleting_indexes"></a>Deleting indexes</h4></div></div></div><pre class="programlisting brush: python">with db.transaction:
+    node_idx = db.node.indexes.get('my_nodes')
+    node_idx.delete()
+
+    rel_idx = db.relationship.indexes.get('my_rels')
+    rel_idx.delete()
+</pre></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_checking_if_an_index_exists"></a>Checking if an index exists</h4></div></div></div><pre class="programlisting brush: python">exists = db.node.indexes.exists('my_nodes')
+</pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_indexing_things"></a>19.3.2. Indexing things</h3></div></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_adding_nodes_or_relationships_to_an_index"></a>Adding nodes or relationships to an index</h4></div></div></div><pre class="programlisting brush: python">with db.transaction:
+    # Indexing nodes
+    a_node = db.node()
+    node_idx = db.node.indexes.create('my_nodes')
+
+    # Add the node to the index
+    node_idx['akey']['avalue'] = a_node
+
+    # Indexing relationships
+    a_relationship = a_node.knows(db.node())
+    rel_idx = db.relationship.indexes.create('my_rels')
+
+    # Add the relationship to the index
+    rel_idx['akey']['avalue'] = a_relationship
+</pre></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_removing_indexed_items"></a>Removing indexed items</h4></div></div></div><p>Removing items from an index can be done at several levels of granularity.
+See the example below.</p><pre class="programlisting brush: python"># Remove specific key/value/item triplet
+del idx['akey']['avalue'][item]
+
+# Remove all instances under a certain
+# key
+del idx['akey'][item]
+
+# Remove all instances all together
+del idx[item]
+</pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_searching_the_index"></a>19.3.3. Searching the index</h3></div></div></div><p>You can retrieve indexed items in two ways.
+Either you do a direct lookup, or you perform a query.
+The direct lookup is the same across different index providers while the query syntax depends on what index provider you use.
+As mentioned previously, Lucene is the default and by far most common index provider.
+For querying Lucene you will want to use the <a class="ulink" href="http://lucene.apache.org/java/3_5_0/queryparsersyntax.html" target="_top">Lucene query language</a>.</p><p>There is a python library for programatically generating Lucene queries, available at <a class="ulink" href="https://github.com/scholrly/lucene-querybuilder" target="_top">GitHub</a>.</p><div class="important" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Important]" src="images/icons/admon/important.png" /></td><th align="left">Important</th></tr><tr><td align="left" valign="top"><p>Unless you loop through the entire index result, you have to close the result when you are done with it.
+If you do not, the database does not know when it can release the resources the result is taking up.</p></td></tr></table></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_direct_lookups"></a>Direct lookups</h4></div></div></div><pre class="programlisting brush: python">hits = idx['akey']['avalue']
+for item in hits:
+    pass
+
+# Always close index results when you are
+# done, to free up resources.
+hits.close()
+</pre></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_querying"></a>Querying</h4></div></div></div><pre class="programlisting brush: python">hits = idx.query('akey:avalue')
+for item in hits:
+    pass
+
+# Always close index results when you are
+# done, to free up resources.
+hits.close()
+</pre></div></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="python-embedded-reference-core.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="python-embedded.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="python-embedded-reference-cypher.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

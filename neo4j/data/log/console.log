@@ -1,0 +1,22 @@
+29/05/13 17:17:58 org.neo4j.server.AbstractNeoServer INFO: Setting startup timeout to: 120000ms based on -1
+29/05/13 17:17:58 org.neo4j.server.database.Database INFO: Loaded neo4j tuning properties from conf/neo4j.properties
+29/05/13 17:17:59 org.neo4j.server.database.Database INFO: Successfully started database
+29/05/13 17:17:59 org.neo4j.server.AbstractNeoServer INFO: Starting Neo Server on port [7474] with [80] threads available
+29/05/13 17:17:59 org.neo4j.server.AbstractNeoServer INFO: Enabling HTTPS on port [7573]
+29/05/13 17:17:59 org.neo4j.server.modules.DiscoveryModule INFO: Mounted discovery module at [/]
+29/05/13 17:17:59 org.neo4j.server.plugins.PluginManager INFO: Loaded server plugin "CypherPlugin"
+29/05/13 17:17:59 org.neo4j.server.plugins.PluginManager INFO: Loaded server plugin "GremlinPlugin"
+29/05/13 17:17:59 org.neo4j.server.modules.RESTApiModule INFO: Mounted REST API at [/db/data/]
+29/05/13 17:17:59 org.neo4j.server.modules.ManagementApiModule INFO: Mounted management API at [/db/manage/]
+29/05/13 17:17:59 org.neo4j.server.modules.WebAdminModule INFO: Mounted webadmin at [/webadmin]
+17:17:59.985 [main] INFO  org.mortbay.log - Logging to Logger[org.mortbay.log] via org.mortbay.log.Slf4jLog
+29/05/13 17:18:00 org.neo4j.server.web.Jetty6WebServer INFO: Mounting static content at [/webadmin] from [webadmin-html]
+17:18:00.025 [main] INFO  org.mortbay.log - jetty-6.1.25
+17:18:00.094 [main] INFO  org.mortbay.log - NO JSP Support for /webadmin, did not find org.apache.jasper.servlet.JspServlet
+17:18:01.196 [main] INFO  org.mortbay.log - Started SelectChannelConnector@localhost:7474
+17:18:01.329 [main] INFO  org.mortbay.log - Started SslSocketConnector@localhost:7573
+29/05/13 17:18:01 org.neo4j.server.AbstractNeoServer INFO: Server started on [http://localhost:7474/]
+29/05/13 17:18:07 org.neo4j.server.webadmin.rest.console.SessionFactoryImpl INFO: Available console sessions: GREMLIN: class org.neo4j.server.webadmin.console.GremlinSessionCreator
+SHELL: class org.neo4j.server.webadmin.console.ShellSessionCreator
+CYPHER: class org.neo4j.server.webadmin.console.CypherSessionCreator
+

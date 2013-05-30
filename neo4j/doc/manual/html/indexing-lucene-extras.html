@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>14.11. Extra features for Lucene indexes</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="indexing.html" title="Chapter 14. Indexing" /><link rel="prev" href="indexing-create-advanced.html" title="14.10. Configuration and fulltext indexes" /><link rel="next" href="auto-indexing.html" title="14.12. Automatic Indexing" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="indexing-lucene-extras.html#indexing-lucene-numeric-ranges" title="14.11.1. Numeric ranges" /><link rel="subsection" href="indexing-lucene-extras.html#indexing-lucene-sort" title="14.11.2. Sorting" /><link rel="subsection" href="indexing-lucene-extras.html#indexing-lucene-query-objects" title="14.11.3. Querying with Lucene Query objects" /><link rel="subsection" href="indexing-lucene-extras.html#indexing-lucene-compound" title="14.11.4. Compound queries" /><link rel="subsection" href="indexing-lucene-extras.html#indexing-lucene-default-operator" title="14.11.5. Default operator" /><link rel="subsection" href="indexing-lucene-extras.html#indexing-lucene-caching" title="14.11.6. Caching" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="reference-documentation.html">Reference</a></span> &gt; <span class="breadcrumb-link"><a href="indexing.html">Indexing</a></span> &gt; <span class="breadcrumb-node">Extra features for Lucene indexes</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="indexing-create-advanced.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="auto-indexing.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="indexing-lucene-extras"></a>14.11. Extra features for Lucene indexes</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="indexing-lucene-extras.html#indexing-lucene-numeric-ranges">14.11.1. Numeric ranges</a></span></dt><dt><span class="section"><a href="indexing-lucene-extras.html#indexing-lucene-sort">14.11.2. Sorting</a></span></dt><dt><span class="section"><a href="indexing-lucene-extras.html#indexing-lucene-query-objects">14.11.3. Querying with Lucene Query objects</a></span></dt><dt><span class="section"><a href="indexing-lucene-extras.html#indexing-lucene-compound">14.11.4. Compound queries</a></span></dt><dt><span class="section"><a href="indexing-lucene-extras.html#indexing-lucene-default-operator">14.11.5. Default operator</a></span></dt><dt><span class="section"><a href="indexing-lucene-extras.html#indexing-lucene-caching">14.11.6. Caching</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="indexing-lucene-numeric-ranges"></a>14.11.1. Numeric ranges</h3></div></div></div><p>Lucene supports smart indexing of numbers, querying for ranges and sorting such results, and so does its backend for Neo4j.
+To mark a value so that it is indexed as a numeric value, we can make use of the <a class="ulink" href="http://components.neo4j.org/neo4j-lucene-index/1.9.M04/apidocs/org/neo4j/index/lucene/ValueContext.html" target="_top">ValueContext</a> class, like this:</p><pre class="programlisting brush: java">movies.add( theMatrix, "year-numeric", new ValueContext( 1999 ).indexNumeric() );
+movies.add( theMatrixReloaded, "year-numeric", new ValueContext( 2003 ).indexNumeric() );
+movies.add( malena, "year-numeric", new ValueContext( 2000 ).indexNumeric() );
+
+int from = 1997;
+int to = 1999;
+hits = movies.query( QueryContext.numericRange( "year-numeric", from, to ) );
+</pre><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/admon/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>The same type must be used for indexing and querying.
+That is, you can’t index a value as a Long and then query the index using an Integer.</p></td></tr></table></div><p>By giving <code class="literal">null</code> as from/to argument, an open ended query is created.
+In the following example we are doing that, and have added sorting to the query as well:</p><pre class="programlisting brush: java">hits = movies.query(
+        QueryContext.numericRange( "year-numeric", from, null )
+                .sortNumeric( "year-numeric", false ) );
+</pre><p>From/to in the ranges defaults to be <span class="emphasis"><em>inclusive</em></span>, but you can change this behavior by using two extra parameters:</p><pre class="programlisting brush: java">movies.add( theMatrix, "score", new ValueContext( 8.7 ).indexNumeric() );
+movies.add( theMatrixReloaded, "score", new ValueContext( 7.1 ).indexNumeric() );
+movies.add( malena, "score", new ValueContext( 7.4 ).indexNumeric() );
+
+// include 8.0, exclude 9.0
+hits = movies.query( QueryContext.numericRange( "score", 8.0, 9.0, true, false ) );
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="indexing-lucene-sort"></a>14.11.2. Sorting</h3></div></div></div><p>Lucene performs sorting very well, and that is also exposed in the index backend, through the <a class="ulink" href="http://components.neo4j.org/neo4j-lucene-index/1.9.M04/apidocs/org/neo4j/index/lucene/QueryContext.html" target="_top">QueryContext</a> class:</p><pre class="programlisting brush: java">hits = movies.query( "title", new QueryContext( "*" ).sort( "title" ) );
+for ( Node hit : hits )
+{
+    // all movies with a title in the index, ordered by title
+}
+// or
+hits = movies.query( new QueryContext( "title:*" ).sort( "year", "title" ) );
+for ( Node hit : hits )
+{
+    // all movies with a title in the index, ordered by year, then title
+}
+</pre><p>We sort the results by relevance (score) like this:</p><pre class="programlisting brush: java">hits = movies.query( "title", new QueryContext( "The*" ).sortByScore() );
+for ( Node movie : hits )
+{
+    // hits sorted by relevance (score)
+}
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="indexing-lucene-query-objects"></a>14.11.3. Querying with Lucene Query objects</h3></div></div></div><p>Instead of passing in Lucene query syntax queries, you can instantiate such queries programmatically and pass in as argument, for example:</p><pre class="programlisting brush: java">// a TermQuery will give exact matches
+Node actor = actors.query( new TermQuery( new Term( "name", "Keanu Reeves" ) ) ).getSingle();
+</pre><p>Note that the <a class="ulink" href="http://lucene.apache.org/java/3_5_0/api/core/org/apache/lucene/search/TermQuery.html" target="_top">TermQuery</a> is basically the same thing as using the <code class="literal">get</code> method on the index.</p><p>This is how to perform <span class="emphasis"><em>wildcard</em></span> searches using Lucene Query Objects:</p><pre class="programlisting brush: java">hits = movies.query( new WildcardQuery( new Term( "title", "The Matrix*" ) ) );
+for ( Node movie : hits )
+{
+    System.out.println( movie.getProperty( "title" ) );
+}
+</pre><p>Note that this allows for whitespace in the search string.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="indexing-lucene-compound"></a>14.11.4. Compound queries</h3></div></div></div><p>Lucene supports querying for multiple terms in the same query, like so:</p><pre class="programlisting brush: java">hits = movies.query( "title:*Matrix* AND year:1999" );
+</pre><div class="caution" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Caution]" src="images/icons/admon/caution.png" /></td><th align="left">Caution</th></tr><tr><td align="left" valign="top"><p>Compound queries can’t search across committed index entries and those who haven’t got committed yet at the same time.</p></td></tr></table></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="indexing-lucene-default-operator"></a>14.11.5. Default operator</h3></div></div></div><p>The default operator (that is whether <code class="literal">AND</code> or <code class="literal">OR</code> is used in between different terms) in a query is <code class="literal">OR</code>. Changing that behavior is also done via the <a class="ulink" href="http://components.neo4j.org/neo4j-lucene-index/1.9.M04/apidocs/org/neo4j/index/lucene/QueryContext.html" target="_top">QueryContext</a> class:</p><pre class="programlisting brush: java">QueryContext query = new QueryContext( "title:*Matrix* year:1999" )
+        .defaultOperator( Operator.AND );
+hits = movies.query( query );
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="indexing-lucene-caching"></a>14.11.6. Caching</h3></div></div></div><p>If your index lookups becomes a performance bottle neck, caching can be enabled for certain keys in certain indexes (key locations) to speed up get requests.
+The caching is implemented with an <a class="ulink" href="http://en.wikipedia.org/wiki/Cache_algorithms#Least_Recently_Used" target="_top">LRU</a> cache so that only the most recently accessed results are cached (with "results" meaning a query result of a get request, not a single entity).
+You can control the size of the cache (the maximum number of results) per index key.</p><pre class="programlisting brush: java">Index&lt;Node&gt; index = graphDb.index().forNodes( "actors" );
+((LuceneIndex&lt;Node&gt;) index).setCacheCapacity( "name", 300000 );
+</pre><div class="caution" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Caution]" src="images/icons/admon/caution.png" /></td><th align="left">Caution</th></tr><tr><td align="left" valign="top"><p>This setting is not persisted after shutting down the database.
+  This means: set this value after each startup of the database if you want to keep it.</p></td></tr></table></div></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="indexing-create-advanced.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="indexing.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="auto-indexing.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

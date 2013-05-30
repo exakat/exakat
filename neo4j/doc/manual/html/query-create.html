@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>15.18. Create</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="prev" href="query-with.html" title="15.17. With" /><link rel="next" href="query-create-unique.html" title="15.19. Create Unique" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="query-create.html#create-create-single-node" title="15.18.1. Create single node" /><link rel="subsection" href="query-create.html#create-create-single-node-and-set-properties" title="15.18.2. Create single node and set properties" /><link rel="subsection" href="query-create.html#create-return-created-node" title="15.18.3. Return created node" /><link rel="subsection" href="query-create.html#create-create-a-relationship-between-two-nodes" title="15.18.4. Create a relationship between two nodes" /><link rel="subsection" href="query-create.html#create-create-a-relationship-and-set-properties" title="15.18.5. Create a relationship and set properties" /><link rel="subsection" href="query-create.html#create-create-a-full-path" title="15.18.6. Create a full path" /><link rel="subsection" href="query-create.html#create-create-single-node-from-map" title="15.18.7. Create single node from map" /><link rel="subsection" href="query-create.html#create-create-multiple-nodes-from-map" title="15.18.8. Create multiple nodes from maps" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="reference-documentation.html">Reference</a></span> &gt; <span class="breadcrumb-link"><a href="cypher-query-lang.html">Cypher Query Language</a></span> &gt; <span class="breadcrumb-node">Create</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="query-with.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="query-create-unique.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="query-create"></a>15.18. Create</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="query-create.html#create-create-single-node">15.18.1. Create single node</a></span></dt><dt><span class="section"><a href="query-create.html#create-create-single-node-and-set-properties">15.18.2. Create single node and set properties</a></span></dt><dt><span class="section"><a href="query-create.html#create-return-created-node">15.18.3. Return created node</a></span></dt><dt><span class="section"><a href="query-create.html#create-create-a-relationship-between-two-nodes">15.18.4. Create a relationship between two nodes</a></span></dt><dt><span class="section"><a href="query-create.html#create-create-a-relationship-and-set-properties">15.18.5. Create a relationship and set properties</a></span></dt><dt><span class="section"><a href="query-create.html#create-create-a-full-path">15.18.6. Create a full path</a></span></dt><dt><span class="section"><a href="query-create.html#create-create-single-node-from-map">15.18.7. Create single node from map</a></span></dt><dt><span class="section"><a href="query-create.html#create-create-multiple-nodes-from-map">15.18.8. Create multiple nodes from maps</a></span></dt></dl></div><p>Creating graph elements — nodes and relationships, is done with <code class="literal">CREATE</code>.</p><div class="tip" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/icons/admon/tip.png" /></td><th align="left">Tip</th></tr><tr><td align="left" valign="top"><p>In the <code class="literal">CREATE</code> clause, patterns are used a lot.
+Read <a class="xref" href="introduction-pattern.html" title="15.8. Patterns">Section 15.8, “Patterns”</a> for an introduction.</p></td></tr></table></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="create-create-single-node"></a>15.18.1. Create single node</h3></div></div></div><p>Creating a single node is done by issuing the following query.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">CREATE n</pre><p>
+</p><p>Nothing is returned from this query, except the count of affected nodes.</p><div class="queryresult table"><a id="idp9870768"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><tfoot><tr><th align="left" valign="top">Nodes created: 1
+</th></tr><tr><th align="left" valign="top">0 ms</th></tr></tfoot><tbody><tr><td class="emptyresult" align="left" valign="top"><p><code class="literal">(empty result)</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="create-create-single-node-and-set-properties"></a>15.18.2. Create single node and set properties</h3></div></div></div><p>The values for the properties can be any scalar expressions.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">CREATE n = {name : 'Andres', title : 'Developer'}</pre><p>
+</p><p>Nothing is returned from this query.</p><div class="queryresult table"><a id="idp9885120"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><tfoot><tr><th align="left" valign="top">Nodes created: 1
+</th></tr><tr><th align="left" valign="top">Properties set: 2
+</th></tr><tr><th align="left" valign="top">2 ms</th></tr></tfoot><tbody><tr><td class="emptyresult" align="left" valign="top"><p><code class="literal">(empty result)</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="create-return-created-node"></a>15.18.3. Return created node</h3></div></div></div><p>Creating a single node is done by issuing the following query.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">CREATE (a {name : 'Andres'})
+RETURN a</pre><p>
+</p><p>The newly created node is returned. This query uses the alternative syntax for single node creation.</p><div class="queryresult table"><a id="idp9901184"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">a</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">Nodes created: 1
+</th></tr><tr><th align="left" valign="top">Properties set: 1
+</th></tr><tr><th align="left" valign="top">2 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[2]{name:"Andres"}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="create-create-a-relationship-between-two-nodes"></a>15.18.4. Create a relationship between two nodes</h3></div></div></div><p>To create a relationship between two nodes, we first get the two nodes. Once the nodes are loaded, we simply create a relationship between them.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START a=node(1), b=node(2)
+CREATE a-[r:RELTYPE]-&gt;b
+RETURN r</pre><p>
+</p><p>The created relationship is returned by the query.</p><div class="queryresult table"><a id="idp9918912"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">r</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">Relationships created: 1
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">:RELTYPE[1] {}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="create-create-a-relationship-and-set-properties"></a>15.18.5. Create a relationship and set properties</h3></div></div></div><p>Setting properties on relationships is done in a similar manner to how it’s done when creating nodes. Note that the values can be any expression.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START a=node(1), b=node(2)
+CREATE a-[r:RELTYPE {name : a.name + '&lt;-&gt;' + b.name }]-&gt;b
+RETURN r</pre><p>
+</p><p>The newly created relationship is returned by the example query.</p><div class="queryresult table"><a id="idp9935376"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">r</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">Relationships created: 1
+</th></tr><tr><th align="left" valign="top">Properties set: 1
+</th></tr><tr><th align="left" valign="top">2 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">:RELTYPE[1] {name:"Andres&lt;-&gt;Michael"}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="create-create-a-full-path"></a>15.18.6. Create a full path</h3></div></div></div><p>When you use <code class="literal">CREATE</code> and a pattern, all parts of the pattern that are not already in scope at this time
+will be created.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">CREATE p = (andres {name:'Andres'})-[:WORKS_AT]-&gt;neo&lt;-[:WORKS_AT]-(michael {name:'Michael'})
+RETURN p</pre><p>
+</p><p>This query creates three nodes and two relationships in one go, assigns it to a path identifier, and returns it.</p><div class="queryresult table"><a id="idp9954320"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">p</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">Nodes created: 3
+</th></tr><tr><th align="left" valign="top">Relationships created: 2
+</th></tr><tr><th align="left" valign="top">Properties set: 2
+</th></tr><tr><th align="left" valign="top">3 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">[Node[4]{name:"Andres"},:WORKS_AT[2] {},Node[5]{},:WORKS_AT[3] {},Node[6]{name:"Michael"}]</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="create-create-single-node-from-map"></a>15.18.7. Create single node from map</h3></div></div></div><p>You can also create a graph entity from a <code class="literal">Map&lt;String,Object&gt;</code> map. All
+the key/value pairs in the map will be set as properties on the created
+relationship or node.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">create ({props})</pre><p>
+</p><p>This query can be used in the following fashion:</p><pre class="programlisting brush: java">Map&lt;String, Object&gt; props = new HashMap&lt;String, Object&gt;();
+props.put( "name", "Andres" );
+props.put( "position", "Developer" );
+
+Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();
+params.put( "props", props );
+engine.execute( "create ({props})", params );
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="create-create-multiple-nodes-from-map"></a>15.18.8. Create multiple nodes from maps</h3></div></div></div><p>By providing an iterable of maps (<code class="literal">Iterable&lt;Map&lt;String,Object&gt;&gt;</code>), Cypher will create a node for each map
+in the iterable. When you do this, you can’t create anything else in the same create statement.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">create (n {props}) return n</pre><p>
+</p><p>This query can be used in the following fashion:</p><pre class="programlisting brush: java">Map&lt;String, Object&gt; n1 = new HashMap&lt;String, Object&gt;();
+n1.put( "name", "Andres" );
+n1.put( "position", "Developer" );
+
+Map&lt;String, Object&gt; n2 = new HashMap&lt;String, Object&gt;();
+n2.put( "name", "Michael" );
+n2.put( "position", "Developer" );
+
+Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();
+List&lt;Map&lt;String, Object&gt;&gt; maps = Arrays.asList( n1, n2 );
+params.put( "props", maps );
+engine.execute( "create (n {props}) return n", params );
+</pre></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="query-with.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="cypher-query-lang.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="query-create-unique.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>19.5. Traversals</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="prev" href="python-embedded-reference-cypher.html" title="19.4. Cypher Queries" /><link rel="next" href="operations.html" title="Part IV. Operations" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="python-embedded-reference-traversal.html#_basic_traversals" title="19.5.1. Basic traversals" /><link rel="subsection" href="python-embedded-reference-traversal.html#_traversal_results" title="19.5.2. Traversal results" /><link rel="subsection" href="python-embedded-reference-traversal.html#_uniqueness_2" title="19.5.3. Uniqueness" /><link rel="subsection" href="python-embedded-reference-traversal.html#_ordering" title="19.5.4. Ordering" /><link rel="subsection" href="python-embedded-reference-traversal.html#_evaluators_advanced_filtering" title="19.5.5. Evaluators - advanced filtering" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="reference-documentation.html">Reference</a></span> &gt; <span class="breadcrumb-link"><a href="python-embedded.html">Python embedded bindings</a></span> &gt; <span class="breadcrumb-node">Traversals</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="python-embedded-reference-cypher.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="operations.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="python-embedded-reference-traversal"></a>19.5. Traversals</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="python-embedded-reference-traversal.html#_basic_traversals">19.5.1. Basic traversals</a></span></dt><dt><span class="section"><a href="python-embedded-reference-traversal.html#_traversal_results">19.5.2. Traversal results</a></span></dt><dt><span class="section"><a href="python-embedded-reference-traversal.html#_uniqueness_2">19.5.3. Uniqueness</a></span></dt><dt><span class="section"><a href="python-embedded-reference-traversal.html#_ordering">19.5.4. Ordering</a></span></dt><dt><span class="section"><a href="python-embedded-reference-traversal.html#_evaluators_advanced_filtering">19.5.5. Evaluators - advanced filtering</a></span></dt></dl></div><div class="warning" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Warning"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="images/icons/admon/warning.png" /></td><th align="left">Warning</th></tr><tr><td align="left" valign="top"><p>Traversal support in neo4j-embedded for python is <span class="emphasis"><em>deprecated</em></span> as of Neo4j 1.7 GA.
+Please see <a class="xref" href="python-embedded-reference-cypher.html" title="19.4. Cypher Queries">Section 19.4, “Cypher Queries”</a> or the core API instead.
+This is done because the traversal framework requires a very tight coupling between the JVM and python.
+To keep improving performance, we need to break that coupling.</p></td></tr></table></div><p>The below documentation will be removed in neo4j-embedded 1.8, and support for traversals will be dropped in neo4j-embedded 1.9.</p><p>The traversal API used here is essentially the same as the one used in the Java API, with a few modifications.</p><p>Traversals start at a given node and uses a set of rules to move through the graph and to decide what parts of the graph to return.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_basic_traversals"></a>19.5.1. Basic traversals</h3></div></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_following_a_relationship"></a>Following a relationship</h4></div></div></div><p>The most basic traversals simply follow certain relationship types, and return everything they encounter.
+By default, each node is visited only once, so there is no risk of infinite loops.</p><pre class="programlisting brush: python">traverser = db.traversal()\
+    .relationships('related_to')\
+    .traverse(start_node)
+
+# The graph is traversed as
+# you loop through the result.
+for node in traverser.nodes:
+    pass
+</pre></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_following_a_relationship_in_a_specific_direction"></a>Following a relationship in a specific direction</h4></div></div></div><p>You can tell the traverser to only follow relationships in some specific direction.</p><pre class="programlisting brush: python">from neo4j import OUTGOING, INCOMING, ANY
+
+traverser = db.traversal()\
+    .relationships('related_to', OUTGOING)\
+    .traverse(start_node)
+</pre></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_following_multiple_relationship_types"></a>Following multiple relationship types</h4></div></div></div><p>You can specify an arbitrary number of relationship types and directions to follow.</p><pre class="programlisting brush: python">from neo4j import OUTGOING, INCOMING, ANY
+
+traverser = db.traversal()\
+    .relationships('related_to', INCOMING)\
+    .relationships('likes')\
+    .traverse(start_node)
+</pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_traversal_results"></a>19.5.2. Traversal results</h3></div></div></div><p>A traversal can give you one of three different result types: <a class="link" href="python-embedded-reference-core.html#python-embedded-core-nodes" title="19.2.3. Nodes">nodes</a>, <a class="link" href="python-embedded-reference-core.html#python-embedded-core-relationships" title="19.2.4. Relationships">relationships</a> or <a class="link" href="python-embedded-reference-core.html#python-embedded-core-paths" title="19.2.6. Paths">paths</a>.</p><p>Traversals are performed lazily, which means that the graph is traversed as you loop through the result.</p><pre class="programlisting brush: python">traverser = db.traversal()\
+    .relationships('related_to')\
+    .traverse(start_node)
+
+# Get each possible path
+for path in traverser:
+    pass
+
+# Get each node
+for node in traverser.nodes:
+    pass
+
+# Get each relationship
+for relationship in traverser.relationships:
+    pass
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_uniqueness_2"></a>19.5.3. Uniqueness</h3></div></div></div><p>To avoid infinite loops, it’s important to define what parts of the graph can be re-visited during a traversal.
+By default, uniqueness is set to <code class="literal">NODE_GLOBAL</code>, which means that each node is only visited once.</p><p>Here are the other options that are available.</p><pre class="programlisting brush: python">from neo4j import Uniqueness
+
+# Available options are:
+
+Uniqueness.NONE
+# Any position in the graph may be revisited.
+
+Uniqueness.NODE_GLOBAL
+# Default option
+# No node in the entire graph may be visited
+# more than once. This could potentially
+# consume a lot of memory since it requires
+# keeping an in-memory data structure
+# remembering all the visited nodes.
+
+Uniqueness.RELATIONSHIP_GLOBAL
+# No relationship in the entire graph may be
+# visited more than once. For the same
+# reasons as NODE_GLOBAL uniqueness, this
+# could use up a lot of memory. But since
+# graphs typically have a larger number of
+# relationships than nodes, the memory
+# overhead of this uniqueness level could
+# grow even quicker.
+
+Uniqueness.NODE_PATH
+# A node may not occur previously in the
+# path reaching up to it.
+
+Uniqueness.RELATIONSHIP_PATH
+# A relationship may not occur previously in
+# the path reaching up to it.
+
+Uniqueness.NODE_RECENT
+# Similar to NODE_GLOBAL uniqueness in that
+# there is a global collection of visited
+# nodes each position is checked against.
+# This uniqueness level does however have a
+# cap on how much memory it may consume in
+# the form of a collection that only
+# contains the most recently visited nodes.
+# The size of this collection can be
+# specified by providing a number as the
+# second argument to the
+# uniqueness()-method along with the
+# uniqueness level.
+
+Uniqueness.RELATIONSHIP_RECENT
+# works like NODE_RECENT uniqueness, but
+# with relationships instead of nodes.
+
+
+traverser = db.traversal()\
+    .uniqueness(Uniqueness.NODE_PATH)\
+    .traverse(start_node)
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_ordering"></a>19.5.4. Ordering</h3></div></div></div><p>You can traverse either depth first, or breadth first. Depth first is the default, because it has lower memory overhead.</p><pre class="programlisting brush: python"># Depth first traversal, this
+# is the default.
+traverser = db.traversal()\
+    .depthFirst()\
+    .traverse(self.source)
+
+# Breadth first traversal
+traverser = db.traversal()\
+    .breadthFirst()\
+    .traverse(start_node)
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_evaluators_advanced_filtering"></a>19.5.5. Evaluators - advanced filtering</h3></div></div></div><p>In order to traverse based on other critera, such as node properties, or more complex things like neighboring nodes or patterns, we use evaluators.
+An evaluator is a normal Python method that takes a path as an argument, and returns a description of what to do next.</p><p>The path argument is the current position the traverser is at, and the description of what to do can be one of four things, as seen in the example below.</p><pre class="programlisting brush: python">from neo4j import Evaluation
+
+# Evaluation contains the four
+# options that an evaluator can
+# return. They are:
+
+Evaluation.INCLUDE_AND_CONTINUE
+# Include this node in the result and
+# continue the traversal
+
+Evaluation.INCLUDE_AND_PRUNE
+# Include this node in the result, but don't
+# continue the traversal
+
+Evaluation.EXCLUDE_AND_CONTINUE
+# Exclude this node from the result, but
+# continue the traversal
+
+Evaluation.EXCLUDE_AND_PRUNE
+# Exclude this node from the result and
+# don't continue the traversal
+
+# An evaluator
+def my_evaluator(path):
+    # Filter on end node property
+    if path.end['message'] == 'world':
+        return Evaluation.INCLUDE_AND_CONTINUE
+
+    # Filter on last relationship type
+    if path.last_relationship.type.name() == 'related_to':
+        return Evaluation.INCLUDE_AND_PRUNE
+
+    # You can do even more complex things here, like subtraversals.
+
+    return Evaluation.EXCLUDE_AND_CONTINUE
+
+# Use the evaluator
+traverser = db.traversal()\
+    .evaluator(my_evaluator)\
+    .traverse(start_node)
+</pre></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="python-embedded-reference-cypher.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="python-embedded.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="operations.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

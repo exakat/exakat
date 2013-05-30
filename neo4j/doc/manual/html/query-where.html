@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>15.11. Where</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="prev" href="query-match.html" title="15.10. Match" /><link rel="next" href="query-return.html" title="15.12. Return" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="query-where.html#where-boolean-operations" title="15.11.1. Boolean operations" /><link rel="subsection" href="query-where.html#where-filter-on-node-property" title="15.11.2. Filter on node property" /><link rel="subsection" href="query-where.html#where-regular-expressions" title="15.11.3. Regular expressions" /><link rel="subsection" href="query-where.html#where-escaping-in-regular-expressions" title="15.11.4. Escaping in regular expressions" /><link rel="subsection" href="query-where.html#where-case-insensitive-regular-expressions" title="15.11.5. Case insensitive regular expressions" /><link rel="subsection" href="query-where.html#where-filtering-on-relationship-type" title="15.11.6. Filtering on relationship type" /><link rel="subsection" href="query-where.html#where-property-exists" title="15.11.7. Property exists" /><link rel="subsection" href="query-where.html#where-default-true-if-property-is-missing" title="15.11.8. Default true if property is missing" /><link rel="subsection" href="query-where.html#where-default-false-if-property-is-missing" title="15.11.9. Default false if property is missing" /><link rel="subsection" href="query-where.html#where-filter-on-null-values" title="15.11.10. Filter on null values" /><link rel="subsection" href="query-where.html#where-filter-on-patterns" title="15.11.11. Filter on patterns" /><link rel="subsection" href="query-where.html#where-filter-on-patterns-using-not" title="15.11.12. Filter on patterns using NOT" /><link rel="subsection" href="query-where.html#where-in-operator" title="15.11.13. IN operator" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="reference-documentation.html">Reference</a></span> &gt; <span class="breadcrumb-link"><a href="cypher-query-lang.html">Cypher Query Language</a></span> &gt; <span class="breadcrumb-node">Where</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="query-match.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="query-return.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="query-where"></a>15.11. Where</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="query-where.html#where-boolean-operations">15.11.1. Boolean operations</a></span></dt><dt><span class="section"><a href="query-where.html#where-filter-on-node-property">15.11.2. Filter on node property</a></span></dt><dt><span class="section"><a href="query-where.html#where-regular-expressions">15.11.3. Regular expressions</a></span></dt><dt><span class="section"><a href="query-where.html#where-escaping-in-regular-expressions">15.11.4. Escaping in regular expressions</a></span></dt><dt><span class="section"><a href="query-where.html#where-case-insensitive-regular-expressions">15.11.5. Case insensitive regular expressions</a></span></dt><dt><span class="section"><a href="query-where.html#where-filtering-on-relationship-type">15.11.6. Filtering on relationship type</a></span></dt><dt><span class="section"><a href="query-where.html#where-property-exists">15.11.7. Property exists</a></span></dt><dt><span class="section"><a href="query-where.html#where-default-true-if-property-is-missing">15.11.8. Default true if property is missing</a></span></dt><dt><span class="section"><a href="query-where.html#where-default-false-if-property-is-missing">15.11.9. Default false if property is missing</a></span></dt><dt><span class="section"><a href="query-where.html#where-filter-on-null-values">15.11.10. Filter on null values</a></span></dt><dt><span class="section"><a href="query-where.html#where-filter-on-patterns">15.11.11. Filter on patterns</a></span></dt><dt><span class="section"><a href="query-where.html#where-filter-on-patterns-using-not">15.11.12. Filter on patterns using NOT</a></span></dt><dt><span class="section"><a href="query-where.html#where-in-operator">15.11.13. IN operator</a></span></dt></dl></div><p>If you need filtering apart from the pattern of the data that you are looking
+for, you can add clauses in the <code class="literal">WHERE</code> part of the query.</p><div class="figure"><a id="idp8997680"></a><p class="title"><strong>Figure 15.4. Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/cypher-where-graph.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/cypher-where-graph.svg" alt="cypher-where-graph.svg" /></span>
+</a></div></div><br class="figure-break" /><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-boolean-operations"></a>15.11.1. Boolean operations</h3></div></div></div><p>You can use the expected boolean operators <code class="literal">AND</code> and <code class="literal">OR</code>, and also the boolean function <code class="literal">NOT()</code>.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START n=node(3, 1)
+WHERE (n.age &lt; 30 and n.name = "Tobias") or not(n.name = "Tobias")
+RETURN n</pre><p>
+</p><p>This will return both nodes in the start clause.</p><div class="queryresult table"><a id="idp9007568"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">n</th></tr></thead><tfoot><tr><th align="left" valign="top">2 rows
+</th></tr><tr><th align="left" valign="top">0 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[3]{name:"Andres",age:36,belt:"white"}</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">Node[1]{name:"Tobias",age:25}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-filter-on-node-property"></a>15.11.2. Filter on node property</h3></div></div></div><p>To filter on a property, write your clause after the <code class="literal">WHERE</code> keyword. Filtering on relationship properties works just the same way.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START n=node(3, 1)
+WHERE n.age &lt; 30
+RETURN n</pre><p>
+</p><p>The "<code class="literal">Tobias</code>" node will be returned.</p><div class="queryresult table"><a id="idp9025648"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">n</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[1]{name:"Tobias",age:25}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-regular-expressions"></a>15.11.3. Regular expressions</h3></div></div></div><p>You can match on regular expressions by using <code class="literal">=~ "regexp"</code>, like this:</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START n=node(3, 1)
+WHERE n.name =~ 'Tob.*'
+RETURN n</pre><p>
+</p><p>The "<code class="literal">Tobias</code>" node will be returned.</p><div class="queryresult table"><a id="idp9041952"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">n</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[1]{name:"Tobias",age:25}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-escaping-in-regular-expressions"></a>15.11.4. Escaping in regular expressions</h3></div></div></div><p>If you need a forward slash inside of your regular expression, escape it. Remember that back slash needs to be escaped in string literals</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START n=node(3, 1)
+WHERE n.name =~ 'Some\\/thing'
+RETURN n</pre><p>
+</p><p>No nodes match this regular expression.</p><div class="queryresult table"><a id="idp9056976"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">n</th></tr></thead><tfoot><tr><th align="left" valign="top">0 row
+</th></tr><tr><th align="left" valign="top">0 ms</th></tr></tfoot><tbody><tr><td class="emptyresult" align="left" valign="top"><p><code class="literal">(empty result)</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-case-insensitive-regular-expressions"></a>15.11.5. Case insensitive regular expressions</h3></div></div></div><p>By pre-pending a regular expression with <code class="literal">(?i)</code>, the whole expression becomes case insensitive.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START n=node(3, 1)
+WHERE n.name =~ '(?i)ANDR.*'
+RETURN n</pre><p>
+</p><p>The node with name "<code class="literal">Andres</code>" is returned.</p><div class="queryresult table"><a id="idp9074096"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">n</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">0 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[3]{name:"Andres",age:36,belt:"white"}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-filtering-on-relationship-type"></a>15.11.6. Filtering on relationship type</h3></div></div></div><p>You can put the exact relationship type in the <code class="literal">MATCH</code> pattern, but sometimes you want to be able to do more advanced filtering on the type. You can use the special property <code class="literal">TYPE</code> to compare the type with something else. In this example, the query does a regular expression comparison with the name of the relationship type.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START n=node(3)
+MATCH (n)-[r]-&gt;()
+WHERE type(r) =~ 'K.*'
+RETURN r</pre><p>
+</p><p>This returns relationships that has a type whose name starts with K.</p><div class="queryresult table"><a id="idp9090816"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">r</th></tr></thead><tfoot><tr><th align="left" valign="top">2 rows
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">:KNOWS[0] {}</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">:KNOWS[1] {}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-property-exists"></a>15.11.7. Property exists</h3></div></div></div><p>To only include nodes/relationships that have a property, use the <code class="literal">HAS()</code> function and just write out the identifier and the property you expect it to have.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START n=node(3, 1)
+WHERE has(n.belt)
+RETURN n</pre><p>
+</p><p>The node named "<code class="literal">Andres</code>" is returned.</p><div class="queryresult table"><a id="idp9108576"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">n</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[3]{name:"Andres",age:36,belt:"white"}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-default-true-if-property-is-missing"></a>15.11.8. Default true if property is missing</h3></div></div></div><p>If you want to compare a property on a graph element, but only if it exists, use the nullable property syntax. You can use a question mark if you want missing property to return true, like:</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START n=node(3, 1)
+WHERE n.belt? = 'white'
+RETURN n</pre><p>
+</p><p>This returns all nodes, even those without the belt property.</p><div class="queryresult table"><a id="idp9123776"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">n</th></tr></thead><tfoot><tr><th align="left" valign="top">2 rows
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[3]{name:"Andres",age:36,belt:"white"}</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">Node[1]{name:"Tobias",age:25}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-default-false-if-property-is-missing"></a>15.11.9. Default false if property is missing</h3></div></div></div><p>When you need missing property to evaluate to false, use the exclamation mark.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START n=node(3, 1)
+WHERE n.belt! = 'white'
+RETURN n</pre><p>
+</p><p>No nodes without the belt property are returned.</p><div class="queryresult table"><a id="idp9140192"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">n</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[3]{name:"Andres",age:36,belt:"white"}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-filter-on-null-values"></a>15.11.10. Filter on null values</h3></div></div></div><p>Sometimes you might want to test if a value or an identifier is <code class="literal">null</code>. This is done just like SQL does it, with <code class="literal">IS NULL</code>. Also like SQL, the negative is <code class="literal">IS NOT NULL</code>, although <code class="literal">NOT(IS NULL x)</code> also works.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START a=node(1), b=node(3, 2)
+MATCH a&lt;-[r?]-b
+WHERE r is null
+RETURN b</pre><p>
+</p><p>Nodes that Tobias is not connected to are returned.</p><div class="queryresult table"><a id="idp9158000"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">b</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[2]{name:"Peter",age:34}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-filter-on-patterns"></a>15.11.11. Filter on patterns</h3></div></div></div><p>Patterns are expressions in Cypher, expressions that return a collection of paths. Collection
+expressions are also predicates — an empty collection represents <code class="literal">false</code>, and a non-empty represents <code class="literal">true</code>.</p><p>So, patterns are not only expressions, they are also predicates. The only limitation to your pattern is that you must be
+able to express it in a single path. You can not use commas between multiple paths like you do in <code class="literal">MATCH</code>. You can achieve
+the same effect by combining multiple patterns with <code class="literal">AND</code>.</p><p>Note that you can not introduce new identifiers here. Although it might look very similar to the <code class="literal">MATCH</code> patterns, the
+<code class="literal">WHERE</code> clause is all about eliminating matched subgraphs. <code class="literal">MATCH a-[*]-&gt;b</code> is very different from <code class="literal">WHERE a-[*]-&gt;b</code>; the
+first will produce a subgraph for every path it can find between <code class="literal">a</code> and <code class="literal">b</code>, and the latter will eliminate any matched
+subgraphs where <code class="literal">a</code> and <code class="literal">b</code> do not have a directed relationship chain between them.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START tobias=node(1), others=node(3, 2)
+WHERE tobias&lt;--others
+RETURN others</pre><p>
+</p><p>Nodes that have an outgoing relationship to the "<code class="literal">Tobias</code>" node are returned.</p><div class="queryresult table"><a id="idp9184112"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">others</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[3]{name:"Andres",age:36,belt:"white"}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-filter-on-patterns-using-not"></a>15.11.12. Filter on patterns using NOT</h3></div></div></div><p>The <code class="literal">NOT()</code> function can be used to exclude a pattern.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START persons=node(*), peter=node(2)
+WHERE not(persons--&gt;peter)
+RETURN persons</pre><p>
+</p><p>Nodes that do not have an outgoing relationship to the "<code class="literal">Peter</code>" node are returned.</p><div class="queryresult table"><a id="idp9200576"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">persons</th></tr></thead><tfoot><tr><th align="left" valign="top">2 rows
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[1]{name:"Tobias",age:25}</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">Node[2]{name:"Peter",age:34}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="where-in-operator"></a>15.11.13. IN operator</h3></div></div></div><p>To check if an element exists in a collection, you can use the <code class="literal">IN</code> operator.</p><p><strong>Query. </strong>
+</p><pre class="programlisting brush: cypher">START a=node(3, 1, 2)
+WHERE a.name IN ["Peter", "Tobias"]
+RETURN a</pre><p>
+</p><p>This query shows how to check if a property exists in a literal collection.</p><div class="queryresult table"><a id="idp9217728"></a><p class="title"><strong>Result</strong></p><div class="queryresult table-contents"><table summary="Result" cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">a</th></tr></thead><tfoot><tr><th align="left" valign="top">2 rows
+</th></tr><tr><th align="left" valign="top">0 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[1]{name:"Tobias",age:25}</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">Node[2]{name:"Peter",age:34}</code></p></td></tr></tbody></table></div></div><br class="queryresult table-break" /></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="query-match.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="cypher-query-lang.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="query-return.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

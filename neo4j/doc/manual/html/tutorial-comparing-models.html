@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>2.2. Comparing Database Models</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="prev" href="what-is-a-graphdb.html" title="2.1. What is a Graph Database?" /><link rel="next" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="tutorial-comparing-models.html#_a_graph_database_transforms_a_rdbms" title="2.2.1. A Graph Database transforms a RDBMS" /><link rel="subsection" href="tutorial-comparing-models.html#_a_graph_database_elaborates_a_key_value_store" title="2.2.2. A Graph Database elaborates a Key-Value Store" /><link rel="subsection" href="tutorial-comparing-models.html#_a_graph_database_relates_column_family" title="2.2.3. A Graph Database relates Column-Family" /><link rel="subsection" href="tutorial-comparing-models.html#_a_graph_database_navigates_a_document_store" title="2.2.4. A Graph Database navigates a Document Store" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="introduction.html">Introduction</a></span> &gt; <span class="breadcrumb-link"><a href="graphdb-concepts.html">Graph Database Concepts</a></span> &gt; <span class="breadcrumb-node">Comparing Database Models</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="what-is-a-graphdb.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="graphdb-neo4j.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="tutorial-comparing-models"></a>2.2. Comparing Database Models</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="tutorial-comparing-models.html#_a_graph_database_transforms_a_rdbms">2.2.1. A Graph Database transforms a RDBMS</a></span></dt><dt><span class="section"><a href="tutorial-comparing-models.html#_a_graph_database_elaborates_a_key_value_store">2.2.2. A Graph Database elaborates a Key-Value Store</a></span></dt><dt><span class="section"><a href="tutorial-comparing-models.html#_a_graph_database_relates_column_family">2.2.3. A Graph Database relates Column-Family</a></span></dt><dt><span class="section"><a href="tutorial-comparing-models.html#_a_graph_database_navigates_a_document_store">2.2.4. A Graph Database navigates a Document Store</a></span></dt></dl></div><p>A Graph Database stores data structured in the Nodes and Relationships of a graph.
+How does this compare to other persistence models?
+Because a graph is a generic structure, let’s compare how a few models would look in a graph.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_a_graph_database_transforms_a_rdbms"></a>2.2.1. A Graph Database transforms a RDBMS</h3></div></div></div><p>Topple the stacks of records in a relational database while keeping all the relationships, and you’ll see a graph.
+Where an RDBMS is optimized for aggregated data, Neo4j is optimized for highly connected data.</p><div class="figure"><a id="idp5713600"></a><p class="title"><strong>Figure 2.1. RDBMS</strong></p><div class="figure-contents"><a class="ulink" href="images/graphdb-compare-rdbms.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/graphdb-compare-rdbms.svg" width="40%" alt="graphdb-compare-rdbms.svg" /></span>
+</a></div></div><br class="figure-break" /><div class="figure"><a id="idp5717360"></a><p class="title"><strong>Figure 2.2. Graph Database as RDBMS</strong></p><div class="figure-contents"><a class="ulink" href="images/graphdb-compare-rdbms-g.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/graphdb-compare-rdbms-g.svg" width="100%" alt="graphdb-compare-rdbms-g.svg" /></span>
+</a></div></div><br class="figure-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_a_graph_database_elaborates_a_key_value_store"></a>2.2.2. A Graph Database elaborates a Key-Value Store</h3></div></div></div><p>A Key-Value model is great for lookups of simple values or lists.
+When the values are themselves interconnected, you’ve got a graph.
+Neo4j lets you elaborate the simple data structures into more complex, interconnected data.</p><div class="figure"><a id="idp5722768"></a><p class="title"><strong>Figure 2.3. Key-Value Store</strong></p><div class="figure-contents"><a class="ulink" href="images/graphdb-compare-kvstore.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/graphdb-compare-kvstore.svg" alt="graphdb-compare-kvstore.svg" /></span>
+</a></div></div><br class="figure-break" /><p><code class="literal">K*</code> represents a key, <code class="literal">V*</code> a value.
+Note that some keys point to other keys as well as plain values.</p><div class="figure"><a id="idp5727712"></a><p class="title"><strong>Figure 2.4. Graph Database as Key-Value Store</strong></p><div class="figure-contents"><a class="ulink" href="images/graphdb-compare-kvstore-g.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/graphdb-compare-kvstore-g.svg" alt="graphdb-compare-kvstore-g.svg" /></span>
+</a></div></div><br class="figure-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_a_graph_database_relates_column_family"></a>2.2.3. A Graph Database relates Column-Family</h3></div></div></div><p>Column Family (BigTable-style) databases are an evolution of key-value,  using "families" to allow grouping of rows.
+Stored in a graph, the families could become hierarchical, and the relationships among data becomes explicit.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_a_graph_database_navigates_a_document_store"></a>2.2.4. A Graph Database navigates a Document Store</h3></div></div></div><p>The container hierarchy of a document database accommodates nice, schema-free data that can easily be represented as a tree.
+Which is of course a graph.
+Refer to other documents (or document elements) within that tree and you have a more expressive representation of the same data.
+When in Neo4j, those relationships are easily navigable.</p><div class="figure"><a id="idp5734976"></a><p class="title"><strong>Figure 2.5. Document Store</strong></p><div class="figure-contents"><a class="ulink" href="images/graphdb-compare-docdb.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/graphdb-compare-docdb.svg" width="75%" alt="graphdb-compare-docdb.svg" /></span>
+</a></div></div><br class="figure-break" /><p><code class="literal">D</code>=Document, <code class="literal">S</code>=Subdocument, <code class="literal">V</code>=Value, <code class="literal">D2/S2</code> = reference to subdocument in (other) document.</p><div class="figure"><a id="idp5741488"></a><p class="title"><strong>Figure 2.6. Graph Database as Document Store</strong></p><div class="figure-contents"><a class="ulink" href="images/graphdb-compare-docdb-g.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/graphdb-compare-docdb-g.svg" width="75%" alt="graphdb-compare-docdb-g.svg" /></span>
+</a></div></div><br class="figure-break" /></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="what-is-a-graphdb.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="graphdb-concepts.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="graphdb-neo4j.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>20.4. Upgrading</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="prev" href="deployment-installation.html" title="20.3. Installation" /><link rel="next" href="usage-data-collector.html" title="20.5. Usage Data Collector" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="deployment-upgrading.html#_automatic_upgrade" title="20.4.1. Automatic Upgrade" /><link rel="subsection" href="deployment-upgrading.html#_explicit_upgrade" title="20.4.2. Explicit Upgrade" /><link rel="subsection" href="deployment-upgrading.html#deployment-upgrading-one-nine" title="20.4.3. Upgrade 1.8 → 1.9.M02" /><link rel="subsection" href="deployment-upgrading.html#deployment-upgrading-one-eight" title="20.4.4. Upgrade 1.7 → 1.8" /><link rel="subsection" href="deployment-upgrading.html#deployment-upgrading-one-seven" title="20.4.5. Upgrade 1.6 → 1.7" /><link rel="subsection" href="deployment-upgrading.html#deployment-upgrading-one-six" title="20.4.6. Upgrade 1.5 → 1.6" /><link rel="subsection" href="deployment-upgrading.html#deployment-upgrading-one-five" title="20.4.7. Upgrade 1.4 → 1.5" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="operations.html">Operations</a></span> &gt; <span class="breadcrumb-link"><a href="deployment.html">Installation &amp; Deployment</a></span> &gt; <span class="breadcrumb-node">Upgrading</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="deployment-installation.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="usage-data-collector.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="deployment-upgrading"></a>20.4. Upgrading</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="deployment-upgrading.html#_automatic_upgrade">20.4.1. Automatic Upgrade</a></span></dt><dt><span class="section"><a href="deployment-upgrading.html#_explicit_upgrade">20.4.2. Explicit Upgrade</a></span></dt><dt><span class="section"><a href="deployment-upgrading.html#deployment-upgrading-one-nine">20.4.3. Upgrade 1.8 → 1.9.M02</a></span></dt><dt><span class="section"><a href="deployment-upgrading.html#deployment-upgrading-one-eight">20.4.4. Upgrade 1.7 → 1.8</a></span></dt><dt><span class="section"><a href="deployment-upgrading.html#deployment-upgrading-one-seven">20.4.5. Upgrade 1.6 → 1.7</a></span></dt><dt><span class="section"><a href="deployment-upgrading.html#deployment-upgrading-one-six">20.4.6. Upgrade 1.5 → 1.6</a></span></dt><dt><span class="section"><a href="deployment-upgrading.html#deployment-upgrading-one-five">20.4.7. Upgrade 1.4 → 1.5</a></span></dt></dl></div><p>A database can be upgraded from a minor version to the next, e.g. 1.1 → 1.2, and 1.2 → 1.3,
+but you can not jump directly from 1.1 → 1.3. For version 1.8 in particular, it is possible to
+upgrade directly from version 1.5.3 and later, as an explicit upgrade.
+The upgrade process is a one way step; databases cannot be downgraded.</p><p>For most upgrades, only small changes are required to the database store, and these changes proceed
+automatically when you start up the database using the newer version of Neo4j.</p><p>However, some upgrades require more significant changes to the database store.
+In these cases, Neo4j will refuse to start without explicit configuration to allow the upgrade.</p><p>The table below lists recent Neo4j versions, and the type of upgrade required.</p><div class="table"><a id="idp14400240"></a><p class="title"><strong>Upgrade process for Neo4j version</strong></p><div class="table-contents"><table summary="Upgrade process for Neo4j version" cellspacing="0" cellpadding="0" border="1" width="50%"><colgroup><col class="col_1" /><col class="col_2" /><col class="col_3" /></colgroup><thead><tr><th align="left" valign="top">From Version</th><th align="left" valign="top">To Version</th><th align="left" valign="top">Upgrade Type</th></tr></thead><tbody><tr><td align="left" valign="top"><p>1.3</p></td><td align="left" valign="top"><p>1.4</p></td><td align="left" valign="top"><p>Automatic</p></td></tr><tr><td align="left" valign="top"><p>1.4</p></td><td align="left" valign="top"><p>1.5</p></td><td align="left" valign="top"><p>Explicit</p></td></tr><tr><td align="left" valign="top"><p>1.5</p></td><td align="left" valign="top"><p>1.6</p></td><td align="left" valign="top"><p>Explicit</p></td></tr><tr><td align="left" valign="top"><p>1.6</p></td><td align="left" valign="top"><p>1.7</p></td><td align="left" valign="top"><p>Automatic</p></td></tr><tr><td align="left" valign="top"><p>1.7</p></td><td align="left" valign="top"><p>1.8</p></td><td align="left" valign="top"><p>Automatic</p></td></tr><tr><td align="left" valign="top"><p>1.8</p></td><td align="left" valign="top"><p>1.9.M02</p></td><td align="left" valign="top"><p>Automatic</p></td></tr></tbody></table></div></div><br class="table-break" /><div class="note" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/icons/admon/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>Downgrade is supported only between versions which do not have incompatible store layouts.
+That means that if you did an upgrade where you didn’t have to explicitly set the <code class="literal">allow_store_upgrade</code> flag to false then you can downgrade without any problems to the previous version used.
+Otherwise downgrading is not supported.
+In any case, downgrading currently cannot be done in a rolling fashion, even in HA deployments.
+Instead, the whole cluster must be shutdown and each machine downgraded individually and then service can be resumed.</p></td></tr></table></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_automatic_upgrade"></a>20.4.1. Automatic Upgrade</h3></div></div></div><p>To perform a normal upgrade (for minor changes to the database store):</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+download the newer version of Neo4j
+</li><li class="listitem">
+cleanly shutdown the database to upgrade, if it is running
+</li><li class="listitem">
+startup the database with the newer version of Neo4j
+</li></ol></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_explicit_upgrade"></a>20.4.2. Explicit Upgrade</h3></div></div></div><p>To perform a special upgrade (for significant changes to the database store):</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+make sure the database you are upgrading has been cleanly shut down
+</li><li class="listitem">
+set the Neo4j configuration parameter "<code class="literal">allow_store_upgrade=true</code>" in your <span class="emphasis"><em>neo4j.properties</em></span> or embedded configuration
+</li><li class="listitem">
+start the database
+</li><li class="listitem">
+the upgrade will happen during startup and the process is done when the database has been successfully started
+</li><li class="listitem">
+"<code class="literal">allow_store_upgrade=true</code>" configuration parameter should be removed, set to "<code class="literal">false</code>" or commented out
+</li></ol></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="deployment-upgrading-one-nine"></a>20.4.3. Upgrade 1.8 → 1.9.M02</h3></div></div></div><p>There are no store format changes between these versions so upgrading standalone instances simply consists of starting the database with the newer version.
+In the case of High Availability (HA) installations, the communication protocol and the master election algorithm have changed and a new "rolling upgrade"
+feature has been added, removing the need to shut down the entire cluster. For more information, refer to the "Upgrading a Neo4j HA Cluster" chapter
+of the HA section of the Neo4j manual.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="deployment-upgrading-one-eight"></a>20.4.4. Upgrade 1.7 → 1.8</h3></div></div></div><p>There are no store format changes between these versions so upgrading standalone instances simply consists of starting the database with the newer version.
+In the case of High Availability (HA) installations, the communication protocol and the master election algorithm have changed and a new "rolling upgrade"
+feature has been added, removing the need to shut down the entire cluster. For more information, refer to the "Upgrading a Neo4j HA Cluster" chapter
+of the HA section of the Neo4j manual.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="deployment-upgrading-one-seven"></a>20.4.5. Upgrade 1.6 → 1.7</h3></div></div></div><p>There are no store format changes between these versions, which means there is no particular procedure you need to upgrade a single instance.</p><p>In an HA environment these steps need to be performed:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+shut down all the databases in the cluster
+</li><li class="listitem">
+shut down the ZooKeeper cluster and clear the <span class="emphasis"><em>version-2</em></span> directories on all the ZooKeeper instances
+</li><li class="listitem">
+start the ZooKeeper cluster again
+</li><li class="listitem">
+remove the databases except the master and start the master database with 1.7
+</li><li class="listitem">
+start up the other databases so that they get a copy from the master
+</li></ol></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="deployment-upgrading-one-six"></a>20.4.6. Upgrade 1.5 → 1.6</h3></div></div></div><p>This upgrade changes lucene version from 3.1 to 3.5. The upgrade itself is done by Lucene by loading an index.</p><p>In an HA environment these steps need to be performed:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+shut down all the databases in the cluster
+</li><li class="listitem">
+shut down the ZooKeeper cluster and clear the <span class="emphasis"><em>version-2</em></span> directories on all the ZooKeeper instances
+</li><li class="listitem">
+start the ZooKeeper cluster again
+</li><li class="listitem">
+start up the other databases so that they get a copy from the master
+</li></ol></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="deployment-upgrading-one-five"></a>20.4.7. Upgrade 1.4 → 1.5</h3></div></div></div><p>This upgrade includes a significant change to the layout of property store files, which reduces their size on disk,
+and improves IO performance.  To achieve this layout change, the upgrade process takes some time to process the
+whole of the existing database.  You should budget for several minutes per gigabyte of data as part of your upgrade planning.</p><div class="warning" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Warning"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="images/icons/admon/warning.png" /></td><th align="left">Warning</th></tr><tr><td align="left" valign="top"><p>The upgrade process for this upgrade temporarily requires additional disk space, for the period while the
+upgrade is in progress.  Before starting the upgrade to Neo4j 1.5, you should ensure that the machine performing the
+upgrade has free space equal to the current size of of the database on disk.  You can find the current space occupied
+by the database by inspecting the store file directory (<span class="emphasis"><em>data/graph.db</em></span> is the default location in Neo4j server).
+Once the upgrade is complete, this additional space is no longer required.</p></td></tr></table></div></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="deployment-installation.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="deployment.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="usage-data-collector.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

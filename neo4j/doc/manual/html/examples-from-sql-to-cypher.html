@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>15.25. From SQL to Cypher</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="prev" href="cypher-compatibility.html" title="15.24. Compatibility" /><link rel="next" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="examples-from-sql-to-cypher.html#_start" title="15.25.1. Start" /><link rel="subsection" href="examples-from-sql-to-cypher.html#_match" title="15.25.2. Match" /><link rel="subsection" href="examples-from-sql-to-cypher.html#_where" title="15.25.3. Where" /><link rel="subsection" href="examples-from-sql-to-cypher.html#_return" title="15.25.4. Return" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="reference-documentation.html">Reference</a></span> &gt; <span class="breadcrumb-link"><a href="cypher-query-lang.html">Cypher Query Language</a></span> &gt; <span class="breadcrumb-node">From SQL to Cypher</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="cypher-compatibility.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="graph-algo.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="examples-from-sql-to-cypher"></a>15.25. From SQL to Cypher</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="examples-from-sql-to-cypher.html#_start">15.25.1. Start</a></span></dt><dt><span class="section"><a href="examples-from-sql-to-cypher.html#_match">15.25.2. Match</a></span></dt><dt><span class="section"><a href="examples-from-sql-to-cypher.html#_where">15.25.3. Where</a></span></dt><dt><span class="section"><a href="examples-from-sql-to-cypher.html#_return">15.25.4. Return</a></span></dt></dl></div><p>This guide is for people who understand SQL. You can use that prior
+knowledge to quickly get going with Cypher and start exploring Neo4j.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_start"></a>15.25.1. Start</h3></div></div></div><p>SQL starts with the result you want — we <code class="literal">SELECT</code> what we want and then
+declare how to source it. In Cypher, the <code class="literal">START</code> clause is quite a
+different concept which specifies starting points in the graph from which
+the query will execute.</p><p>From a SQL point of view, the identifiers in <code class="literal">START</code> are like table names
+that point to a set of nodes or relationships. The set can be listed
+literally, come via parameters, or as I show in the following example, be
+defined by an index look-up.</p><p>So in fact rather than being <code class="literal">SELECT</code>-like, the <code class="literal">START</code> clause is
+somewhere between the <code class="literal">FROM</code> and the <code class="literal">WHERE</code> clause in SQL.</p><p><strong>SQL Query. </strong>
+</p><pre class="programlisting brush: sql">SELECT *
+FROM "Person"
+WHERE name = 'Anakin'</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /><col class="col3" /><col class="col4" /></colgroup><thead><tr><th align="left" valign="top">NAME</th><th align="left" valign="top">ID</th><th align="left" valign="top">AGE</th><th align="left" valign="top">HAIR</th></tr></thead><tfoot><tr><th colspan="4" align="left" valign="top">1 rows</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Anakin</code></p></td><td align="left" valign="top"><p><code class="literal">1</code></p></td><td align="left" valign="top"><p><code class="literal">20</code></p></td><td align="left" valign="top"><p><code class="literal">blonde</code></p></td></tr></tbody></table></div><p><strong>Cypher Query. </strong>
+</p><pre class="programlisting brush: cypher">START person=node:Person(name = 'Anakin')
+RETURN person</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">person</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[1]{name:"Anakin",id:1,age:20,hair:"blonde"}</code></p></td></tr></tbody></table></div><p>Cypher allows multiple starting points. This should not be strange from a SQL perspective — every table in the <code class="literal">FROM</code> clause is another starting point.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_match"></a>15.25.2. Match</h3></div></div></div><p>Unlike SQL which operates on sets, Cypher predominantly works on sub-graphs.
+The relational equivalent is the current set of tuples being evaluated during a <code class="literal">SELECT</code> query.</p><p>The shape of the sub-graph is specified in the <code class="literal">MATCH</code> clause.
+The <code class="literal">MATCH</code> clause is analogous to the <code class="literal">JOIN</code> in SQL. A normal a→b relationship is an
+inner join between nodes a and b — both sides have to have at least one match, or nothing is returned.</p><p>We’ll start with a simple example, where we find all email addresses that are connected to
+the person “Anakin”. This is an ordinary one-to-many relationship.</p><p><strong>SQL Query. </strong>
+</p><pre class="programlisting brush: sql">SELECT "Email".*
+FROM "Person"
+JOIN "Email" ON "Person".id = "Email".person_id
+WHERE "Person".name = 'Anakin'</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /><col class="col3" /></colgroup><thead><tr><th align="left" valign="top">ADDRESS</th><th align="left" valign="top">COMMENT</th><th align="left" valign="top">PERSON_ID</th></tr></thead><tfoot><tr><th colspan="3" align="left" valign="top">2 rows</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">anakin@example.com</code></p></td><td align="left" valign="top"><p><code class="literal">home</code></p></td><td align="left" valign="top"><p><code class="literal">1</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">anakin@example.org</code></p></td><td align="left" valign="top"><p><code class="literal">work</code></p></td><td align="left" valign="top"><p><code class="literal">1</code></p></td></tr></tbody></table></div><p><strong>Cypher Query. </strong>
+</p><pre class="programlisting brush: cypher">START person=node:Person(name = 'Anakin')
+MATCH person-[:email]-&gt;email
+RETURN email</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">email</th></tr></thead><tfoot><tr><th align="left" valign="top">2 rows
+</th></tr><tr><th align="left" valign="top">0 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[7]{address:"anakin@example.com",comment:"home"}</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">Node[8]{address:"anakin@example.org",comment:"work"}</code></p></td></tr></tbody></table></div><p>There is no join table here, but if one is necessary the next example will show how to do that, writing the pattern relationship like so:
+<code class="literal">-[r:belongs_to]-&gt;</code> will introduce (the equivalent of) join table available as the variable <code class="literal">r</code>.
+In reality this is a named relationship in Cypher, so we’re saying “join <code class="literal">Person</code> to <code class="literal">Group</code> via <code class="literal">belongs_to</code>.”
+To illustrate this, consider this image, comparing the SQL model and Neo4j/Cypher.</p><div class="informalfigure"><a class="ulink" href="images/RDBMSvsGraph.svg.png" target="_top">
+<span class="inlinemediaobject"><img src="images/RDBMSvsGraph.svg.png" width="100%" alt="RDBMSvsGraph.svg.png" /></span>
+</a></div><p>And here are example queries:</p><p><strong>SQL Query. </strong>
+</p><pre class="programlisting brush: sql">SELECT "Group".*, "Person_Group".*
+FROM "Person"
+JOIN "Person_Group" ON "Person".id = "Person_Group".person_id
+JOIN "Group" ON "Person_Group".Group_id="Group".id
+WHERE "Person".name = 'Bridget'</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /><col class="col3" /><col class="col4" /><col class="col5" /></colgroup><thead><tr><th align="left" valign="top">NAME</th><th align="left" valign="top">ID</th><th align="left" valign="top">BELONGS_TO_GROUP_ID</th><th align="left" valign="top">PERSON_ID</th><th align="left" valign="top">GROUP_ID</th></tr></thead><tfoot><tr><th colspan="5" align="left" valign="top">1 rows</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Admin</code></p></td><td align="left" valign="top"><p><code class="literal">4</code></p></td><td align="left" valign="top"><p><code class="literal">3</code></p></td><td align="left" valign="top"><p><code class="literal">2</code></p></td><td align="left" valign="top"><p><code class="literal">4</code></p></td></tr></tbody></table></div><p><strong>Cypher Query. </strong>
+</p><pre class="programlisting brush: cypher">START person=node:Person(name = 'Bridget')
+MATCH person-[r:belongs_to]-&gt;group
+RETURN group, r</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /></colgroup><thead><tr><th align="left" valign="top">group</th><th align="left" valign="top">r</th></tr></thead><tfoot><tr><th colspan="2" align="left" valign="top">1 row
+</th></tr><tr><th colspan="2" align="left" valign="top">0 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[6]{name:"Admin",id:4}</code></p></td><td align="left" valign="top"><p><code class="literal">:belongs_to[0] {}</code></p></td></tr></tbody></table></div><p>An <a class="ulink" href="http://www.codinghorror.com/blog/2007/10/a-visual-explanation-of-sql-joins.html" target="_top">outer join</a> is just as easy.
+Add a question mark <code class="literal">-[?:KNOWS]-&gt;</code> and it’s an optional relationship between nodes — the outer join of Cypher.</p><p>Whether it’s a left outer join, or a right outer join is defined by which side of the pattern has a starting point.
+This example is a left outer join, because the bound node is on the left side:</p><p><strong>SQL Query. </strong>
+</p><pre class="programlisting brush: sql">SELECT "Person".name, "Email".address
+FROM "Person" LEFT
+JOIN "Email" ON "Person".id = "Email".person_id</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /></colgroup><thead><tr><th align="left" valign="top">NAME</th><th align="left" valign="top">ADDRESS</th></tr></thead><tfoot><tr><th colspan="2" align="left" valign="top">3 rows</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Anakin</code></p></td><td align="left" valign="top"><p><code class="literal">anakin@example.com</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">Anakin</code></p></td><td align="left" valign="top"><p><code class="literal">anakin@example.org</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">Bridget</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td></tr></tbody></table></div><p><strong>Cypher Query. </strong>
+</p><pre class="programlisting brush: cypher">START person=node:Person('name: *')
+MATCH person-[?:email]-&gt;email
+RETURN person.name, email.address?</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /></colgroup><thead><tr><th align="left" valign="top">person.name</th><th align="left" valign="top">email.address?</th></tr></thead><tfoot><tr><th colspan="2" align="left" valign="top">3 rows
+</th></tr><tr><th colspan="2" align="left" valign="top">33 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">"Anakin"</code></p></td><td align="left" valign="top"><p><code class="literal">"anakin@example.com"</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"Anakin"</code></p></td><td align="left" valign="top"><p><code class="literal">"anakin@example.org"</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"Bridget"</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td></tr></tbody></table></div><p>Relationships in Neo4j are first class citizens — it’s like the SQL tables are pre-joined with each other.
+So, naturally, Cypher is designed to be able to handle highly connected data easily.</p><p>One such domain is tree structures — anyone that has tried storing tree structures in SQL knows
+that you have to work hard to get around the limitations of the relational model.
+There are even books on the subject.</p><p>To find all the groups and sub-groups that Bridget belongs to, this query is enough in Cypher:</p><p><strong>Cypher Query. </strong>
+</p><pre class="programlisting brush: cypher">START person=node:Person('name: Bridget')
+MATCH person-[:belongs_to*]-&gt;group
+RETURN person.name, group.name</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /></colgroup><thead><tr><th align="left" valign="top">person.name</th><th align="left" valign="top">group.name</th></tr></thead><tfoot><tr><th colspan="2" align="left" valign="top">3 rows
+</th></tr><tr><th colspan="2" align="left" valign="top">5 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">"Bridget"</code></p></td><td align="left" valign="top"><p><code class="literal">"Admin"</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"Bridget"</code></p></td><td align="left" valign="top"><p><code class="literal">"Technichian"</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"Bridget"</code></p></td><td align="left" valign="top"><p><code class="literal">"User"</code></p></td></tr></tbody></table></div><p>The * after the relationship type means that there can be multiple hops across <code class="literal">belongs_to</code> relationships between group and user.
+Some SQL dialects have recursive abilities, that allow the expression of queries like this, but you may have a hard time wrapping your head around those.
+Expressing something like this in SQL is hugely impractical if not practically impossible.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_where"></a>15.25.3. Where</h3></div></div></div><p>This is the easiest thing to understand — it’s the same animal in both languages.
+It filters out result sets/subgraphs.
+Not all predicates have an equivalent in the other language, but the concept is the same.</p><p><strong>SQL Query. </strong>
+</p><pre class="programlisting brush: sql">SELECT *
+FROM "Person"
+WHERE "Person".age &gt; 35 AND "Person".hair = 'blonde'</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /><col class="col3" /><col class="col4" /></colgroup><thead><tr><th align="left" valign="top">NAME</th><th align="left" valign="top">ID</th><th align="left" valign="top">AGE</th><th align="left" valign="top">HAIR</th></tr></thead><tfoot><tr><th colspan="4" align="left" valign="top">1 rows</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Bridget</code></p></td><td align="left" valign="top"><p><code class="literal">2</code></p></td><td align="left" valign="top"><p><code class="literal">40</code></p></td><td align="left" valign="top"><p><code class="literal">blonde</code></p></td></tr></tbody></table></div><p><strong>Cypher Query. </strong>
+</p><pre class="programlisting brush: cypher">START person=node:Person('name: *')
+WHERE person.age &gt; 35 AND person.hair = 'blonde'
+RETURN person</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">person</th></tr></thead><tfoot><tr><th align="left" valign="top">1 row
+</th></tr><tr><th align="left" valign="top">1 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[2]{name:"Bridget",id:2,age:40,hair:"blonde"}</code></p></td></tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_return"></a>15.25.4. Return</h3></div></div></div><p>This is SQL’s <code class="literal">SELECT</code>.
+We just put it in the end because it felt better to have it there — you do a lot of matching and filtering, and finally, you return something.</p><p>Aggregate queries work just like they do in SQL, apart from the fact that there is no explicit <code class="literal">GROUP BY</code> clause.
+Everything in the return clause that is not an aggregate function will be used as the grouping columns.</p><p><strong>SQL Query. </strong>
+</p><pre class="programlisting brush: sql">SELECT "Person".name, count(*)
+FROM "Person"
+GROUP BY "Person".name
+ORDER BY "Person".name</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /></colgroup><thead><tr><th align="left" valign="top">NAME</th><th align="left" valign="top">C2</th></tr></thead><tfoot><tr><th colspan="2" align="left" valign="top">2 rows</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Anakin</code></p></td><td align="left" valign="top"><p><code class="literal">1</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">Bridget</code></p></td><td align="left" valign="top"><p><code class="literal">1</code></p></td></tr></tbody></table></div><p><strong>Cypher Query. </strong>
+</p><pre class="programlisting brush: cypher">START person=node:Person('name: *')
+RETURN person.name, count(*)
+ORDER BY person.name</pre><p>
+</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /></colgroup><thead><tr><th align="left" valign="top">person.name</th><th align="left" valign="top">count(*)</th></tr></thead><tfoot><tr><th colspan="2" align="left" valign="top">2 rows
+</th></tr><tr><th colspan="2" align="left" valign="top">0 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">"Anakin"</code></p></td><td align="left" valign="top"><p><code class="literal">1</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"Bridget"</code></p></td><td align="left" valign="top"><p><code class="literal">1</code></p></td></tr></tbody></table></div><p>Order by is the same in both languages — <code class="literal">ORDER BY</code> expression <code class="literal">ASC</code>/<code class="literal">DESC</code>.
+Nothing weird here.</p></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="cypher-compatibility.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="cypher-query-lang.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="graph-algo.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

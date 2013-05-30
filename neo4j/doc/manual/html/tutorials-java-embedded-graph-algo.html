@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>4.7. Graph Algorithm examples</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="prev" href="tutorials-java-embedded-entities.html" title="4.6. Domain entities" /><link rel="next" href="tutorials-java-embedded-jmx.html" title="4.8. Reading a management attribute" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="tutorials.html">Tutorials</a></span> &gt; <span class="breadcrumb-link"><a href="tutorials-java-embedded.html">Using Neo4j embedded in Java applications</a></span> &gt; <span class="breadcrumb-node">Graph Algorithm examples</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="tutorials-java-embedded-entities.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="tutorials-java-embedded-jmx.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="tutorials-java-embedded-graph-algo"></a>4.7. Graph Algorithm examples</h2></div></div></div><div class="tip" style="margin-left: 0; margin-right: 10%;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/icons/admon/tip.png" /></td><th align="left">Tip</th></tr><tr><td align="left" valign="top"><p>The source code used in the example is found here:
+<a class="ulink" href="https://github.com/neo4j/neo4j/blob/1.9.M04/community/embedded-examples/src/test/java/org/neo4j/examples/PathFindingExamplesTest.java" target="_top">PathFindingExamplesTest.java</a></p></td></tr></table></div><p>Calculating the shortest path (least number of relationships) between two nodes:</p><pre class="programlisting brush: java">Node startNode = graphDb.createNode();
+Node middleNode1 = graphDb.createNode();
+Node middleNode2 = graphDb.createNode();
+Node middleNode3 = graphDb.createNode();
+Node endNode = graphDb.createNode();
+createRelationshipsBetween( startNode, middleNode1, endNode );
+createRelationshipsBetween( startNode, middleNode2, middleNode3, endNode );
+
+// Will find the shortest path between startNode and endNode via
+// "MY_TYPE" relationships (in OUTGOING direction), like f.ex:
+//
+// (startNode)--&gt;(middleNode1)--&gt;(endNode)
+//
+PathFinder&lt;Path&gt; finder = GraphAlgoFactory.shortestPath(
+        Traversal.expanderForTypes( ExampleTypes.MY_TYPE, Direction.OUTGOING ), 15 );
+Iterable&lt;Path&gt; paths = finder.findAllPaths( startNode, endNode );
+</pre><p>Using <a class="ulink" href="http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm" target="_top">Dijkstra’s algorithm</a> to calculate cheapest path between node A and B where each relationship can have a weight (i.e. cost) and the path(s) with least cost are found.</p><pre class="programlisting brush: java">PathFinder&lt;WeightedPath&gt; finder = GraphAlgoFactory.dijkstra(
+        Traversal.expanderForTypes( ExampleTypes.MY_TYPE, Direction.BOTH ), "cost" );
+
+WeightedPath path = finder.findSinglePath( nodeA, nodeB );
+
+// Get the weight for the found path
+path.weight();
+</pre><p>Using <a class="ulink" href="http://en.wikipedia.org/wiki/A*_search_algorithm" target="_top">A*</a> to calculate the cheapest path between node A and B, where cheapest is for example the path in a network of roads which has the shortest length between node A and B.
+Here’s our example graph:</p><div class="informalfigure"><a class="ulink" href="images/graphalgo-astar.png" target="_top">
+<span class="inlinemediaobject"><img src="images/graphalgo-astar.png" width="50%" alt="A* algorithm example graph" /></span>
+</a></div><pre class="programlisting brush: java">Node nodeA = createNode( "name", "A", "x", 0d, "y", 0d );
+Node nodeB = createNode( "name", "B", "x", 7d, "y", 0d );
+Node nodeC = createNode( "name", "C", "x", 2d, "y", 1d );
+Relationship relAB = createRelationship( nodeA, nodeC, "length", 2d );
+Relationship relBC = createRelationship( nodeC, nodeB, "length", 3d );
+Relationship relAC = createRelationship( nodeA, nodeB, "length", 10d );
+
+EstimateEvaluator&lt;Double&gt; estimateEvaluator = new EstimateEvaluator&lt;Double&gt;()
+{
+    public Double getCost( final Node node, final Node goal )
+    {
+        double dx = (Double) node.getProperty( "x" ) - (Double) goal.getProperty( "x" );
+        double dy = (Double) node.getProperty( "y" ) - (Double) goal.getProperty( "y" );
+        double result = Math.sqrt( Math.pow( dx, 2 ) + Math.pow( dy, 2 ) );
+        return result;
+    }
+};
+PathFinder&lt;WeightedPath&gt; astar = GraphAlgoFactory.aStar(
+        Traversal.expanderForAllTypes(),
+        CommonEvaluators.doubleCostEvaluator( "length" ), estimateEvaluator );
+WeightedPath path = astar.findSinglePath( nodeA, nodeB );
+</pre></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tutorials-java-embedded-entities.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="tutorials-java-embedded.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="tutorials-java-embedded-jmx.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>27.1. Starting the shell</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="prev" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="next" href="shell-options.html" title="27.2. Passing options and arguments" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="shell-starting.html#shell-enabling-remote" title="27.1.1. Enabling the shell server" /><link rel="subsection" href="shell-starting.html#_connecting_to_a_shell_server" title="27.1.2. Connecting to a shell server" /><link rel="subsection" href="shell-starting.html#_pointing_the_shell_to_a_path" title="27.1.3. Pointing the shell to a path" /><link rel="subsection" href="shell-starting.html#read-only-mode" title="27.1.4. Read-only mode" /><link rel="subsection" href="shell-starting.html#_run_a_command_and_then_exit" title="27.1.5. Run a command and then exit" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="tools.html">Tools</a></span> &gt; <span class="breadcrumb-link"><a href="shell.html">Neo4j Shell</a></span> &gt; <span class="breadcrumb-node">Starting the shell</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="shell.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="shell-options.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="shell-starting"></a>27.1. Starting the shell</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="shell-starting.html#shell-enabling-remote">27.1.1. Enabling the shell server</a></span></dt><dt><span class="section"><a href="shell-starting.html#_connecting_to_a_shell_server">27.1.2. Connecting to a shell server</a></span></dt><dt><span class="section"><a href="shell-starting.html#_pointing_the_shell_to_a_path">27.1.3. Pointing the shell to a path</a></span></dt><dt><span class="section"><a href="shell-starting.html#read-only-mode">27.1.4. Read-only mode</a></span></dt><dt><span class="section"><a href="shell-starting.html#_run_a_command_and_then_exit">27.1.5. Run a command and then exit</a></span></dt></dl></div><p>When used together with Neo4j started as a server, simply issue the following at the command line:</p><pre class="programlisting brush: shell">./bin/neo4j-shell</pre><p>For the full list of options, see the reference in the <a class="link" href="re02.html#shell-manpage" title="Synopsis">Shell manual page</a>.</p><p>To connect to a running Neo4j database, use <a class="xref" href="shell-starting.html#read-only-mode" title="27.1.4. Read-only mode">Section 27.1.4, “Read-only mode”</a> for local databases
+and see <a class="xref" href="shell-starting.html#shell-enabling-remote" title="27.1.1. Enabling the shell server">Section 27.1.1, “Enabling the shell server”</a> for remote databases.</p><p>You need to make sure that the shell jar file is on the classpath when you start up your Neo4j instance.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="shell-enabling-remote"></a>27.1.1. Enabling the shell server</h3></div></div></div><p>Shell is enabled from the configuration of the Neo4j kernel, see <a class="xref" href="server-configuration.html" title="17.2. Server Configuration">Section 17.2, “Server Configuration”</a>.
+Here’s some sample configurations:</p><pre class="programlisting brush: plain"># Using default values
+enable_remote_shell = true
+# ...or specify custom port, use default values for the others
+enable_remote_shell = port=1234</pre><p>When using the Neo4j server, see <a class="xref" href="server-configuration.html" title="17.2. Server Configuration">Section 17.2, “Server Configuration”</a> for how to add configuration settings in that case.</p><p>There are two ways to start the shell, either by connecting to a remote shell server or by pointing it to a Neo4j store path.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_connecting_to_a_shell_server"></a>27.1.2. Connecting to a shell server</h3></div></div></div><p>To start the shell and connect to a running server, run:</p><pre class="programlisting brush: plain">neo4j-shell</pre><p>Alternatively supply <code class="literal">-port</code> and <code class="literal">-name</code> options depending on how the remote shell server was enabled.
+Then you’ll get the shell prompt like this:</p><pre class="programlisting brush: plain">neo4j-sh (0)$</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_pointing_the_shell_to_a_path"></a>27.1.3. Pointing the shell to a path</h3></div></div></div><p>To start the shell by just pointing it to a Neo4j store path you run the shell jar file.
+Given that the right neo4j-kernel-&lt;version&gt;.jar and jta jar files are in the same path as your neo4j-shell-&lt;version&gt;.jar file you run it with:</p><pre class="programlisting brush: plain">$ neo4j-shell -path path/to/neo4j-db</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="read-only-mode"></a>27.1.4. Read-only mode</h3></div></div></div><p>By issuing the <code class="literal">-readonly</code> switch when starting the shell with a store path,
+changes cannot be made to the database during the session.</p><pre class="programlisting brush: plain">$ neo4j-shell -readonly -path path/to/neo4j-db</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_run_a_command_and_then_exit"></a>27.1.5. Run a command and then exit</h3></div></div></div><p>It is possible to tell the shell to just start, execute a command and then exit.
+This opens up for uses of background jobs and also handling of huge output of f.ex. an <span class="emphasis"><em>''ls</em></span>'' command where you then could pipe the output to <span class="emphasis"><em>''less</em></span>'' or another reader of your choice, or even to a file.
+So some examples of usage:</p><pre class="programlisting brush: plain">$ neo4j-shell -c "cd -a 24 &amp;&amp; set name Mattias"
+$ neo4j-shell -c "trav -r KNOWS" | less</pre></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="shell.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="shell.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="shell-options.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

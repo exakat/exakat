@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Part IV. Operations</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="prev" href="python-embedded-reference-traversal.html" title="19.5. Traversals" /><link rel="next" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-node">Operations</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="python-embedded-reference-traversal.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="deployment.html">Next</a></td></tr></table><hr /></div><div class="part"><div class="titlepage"><div><div><h1 class="title"><a id="operations"></a>Part IV. Operations</h1></div></div></div><div class="partintro"><div></div><p>This part describes how to install and maintain a Neo4j installation.
+This includes topics such as backing up the database and monitoring the health of the database as well as diagnosing issues.</p><div class="toc"><p><strong>Table of Contents</strong></p><dl><dt><span class="chapter"><a href="deployment.html">20. Installation &amp; Deployment</a></span></dt><dd><dl><dt><span class="section"><a href="deployment-scenarios.html">20.1. Deployment Scenarios</a></span></dt><dt><span class="section"><a href="deployment-requirements.html">20.2. System Requirements</a></span></dt><dt><span class="section"><a href="deployment-installation.html">20.3. Installation</a></span></dt><dt><span class="section"><a href="deployment-upgrading.html">20.4. Upgrading</a></span></dt><dt><span class="section"><a href="usage-data-collector.html">20.5. Usage Data Collector</a></span></dt></dl></dd><dt><span class="chapter"><a href="embedded-configuration.html">21. Configuration &amp; Performance</a></span></dt><dd><dl><dt><span class="section"><a href="configuration-introduction.html">21.1. Introduction</a></span></dt><dt><span class="section"><a href="performance-guide.html">21.2. Performance Guide</a></span></dt><dt><span class="section"><a href="kernel-configuration.html">21.3. Kernel configuration</a></span></dt><dt><span class="section"><a href="configuration-caches.html">21.4. Caches in Neo4j</a></span></dt><dt><span class="section"><a href="configuration-logical-logs.html">21.5. Logical logs</a></span></dt><dt><span class="section"><a href="configuration-jvm.html">21.6. JVM Settings</a></span></dt><dt><span class="section"><a href="short-strings.html">21.7. Compressed storage of short strings</a></span></dt><dt><span class="section"><a href="short-arrays.html">21.8. Compressed storage of short arrays</a></span></dt><dt><span class="section"><a href="configuration-io-examples.html">21.9. Memory mapped IO settings</a></span></dt><dt><span class="section"><a href="linux-performance-guide.html">21.10. Linux Performance Guide</a></span></dt><dt><span class="section"><a href="configuration-linux-notes.html">21.11. Linux specific notes</a></span></dt></dl></dd><dt><span class="chapter"><a href="ha.html">22. High Availability</a></span></dt><dd><dl><dt><span class="section"><a href="ha-architecture.html">22.1. Architecture</a></span></dt><dt><span class="section"><a href="ha-configuration.html">22.2. Setup and configuration</a></span></dt><dt><span class="section"><a href="ha-how.html">22.3. How Neo4j HA operates</a></span></dt><dt><span class="section"><a href="upgrade-guide.html">22.4. Upgrading a Neo4j HA Cluster</a></span></dt><dt><span class="section"><a href="ha-setup-tutorial.html">22.5. High Availability setup tutorial</a></span></dt><dt><span class="section"><a href="ha-haproxy.html">22.6. Setting up HAProxy as a load balancer</a></span></dt></dl></dd><dt><span class="chapter"><a href="operations-backup.html">23. Backup</a></span></dt><dd><dl><dt><span class="section"><a href="backup-embedded-and-server.html">23.1. Embedded and Server</a></span></dt><dt><span class="section"><a href="backup-java.html">23.2. Online Backup from Java</a></span></dt><dt><span class="section"><a href="backup-ha.html">23.3. High Availability</a></span></dt><dt><span class="section"><a href="backup-restoring.html">23.4. Restoring Your Data</a></span></dt></dl></dd><dt><span class="chapter"><a href="operations-security.html">24. Security</a></span></dt><dd><dl><dt><span class="section"><a href="security-server.html">24.1. Securing access to the Neo4j Server</a></span></dt></dl></dd><dt><span class="chapter"><a href="operations-monitoring.html">25. Monitoring</a></span></dt><dd><dl><dt><span class="section"><a href="jmx-remote.html">25.1. Adjusting remote JMX access to the Neo4j Server</a></span></dt><dt><span class="section"><a href="jmx-connect-jconsole.html">25.2. How to connect to a Neo4j instance using JMX and JConsole</a></span></dt><dt><span class="section"><a href="jmx-connect-programmatic.html">25.3. How to connect to the JMX monitoring programmatically</a></span></dt><dt><span class="section"><a href="jmx-mxbeans.html">25.4. Reference of supported JMX MBeans</a></span></dt></dl></dd></dl></div></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="python-embedded-reference-traversal.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="deployment.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

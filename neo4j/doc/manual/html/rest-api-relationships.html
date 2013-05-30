@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>18.6. Relationships</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="rest-api.html" title="Chapter 18. REST API" /><link rel="prev" href="rest-api-nodes.html" title="18.5. Nodes" /><link rel="next" href="rest-api-relationship-types.html" title="18.7. Relationship types" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="rest-api-relationships.html#rest-api-get-relationship-by-id" title="18.6.1. Get Relationship by ID" /><link rel="subsection" href="rest-api-relationships.html#rest-api-create-relationship" title="18.6.2. Create relationship" /><link rel="subsection" href="rest-api-relationships.html#rest-api-create-a-relationship-with-properties" title="18.6.3. Create a relationship with properties" /><link rel="subsection" href="rest-api-relationships.html#rest-api-delete-relationship" title="18.6.4. Delete relationship" /><link rel="subsection" href="rest-api-relationships.html#rest-api-get-all-properties-on-a-relationship" title="18.6.5. Get all properties on a relationship" /><link rel="subsection" href="rest-api-relationships.html#rest-api-set-all-properties-on-a-relationship" title="18.6.6. Set all properties on a relationship" /><link rel="subsection" href="rest-api-relationships.html#rest-api-get-single-property-on-a-relationship" title="18.6.7. Get single property on a relationship" /><link rel="subsection" href="rest-api-relationships.html#rest-api-set-single-property-on-a-relationship" title="18.6.8. Set single property on a relationship" /><link rel="subsection" href="rest-api-relationships.html#rest-api-get-all-relationships" title="18.6.9. Get all relationships" /><link rel="subsection" href="rest-api-relationships.html#rest-api-get-incoming-relationships" title="18.6.10. Get incoming relationships" /><link rel="subsection" href="rest-api-relationships.html#rest-api-get-outgoing-relationships" title="18.6.11. Get outgoing relationships" /><link rel="subsection" href="rest-api-relationships.html#rest-api-get-typed-relationships" title="18.6.12. Get typed relationships" /><link rel="subsection" href="rest-api-relationships.html#rest-api-get-relationships-on-a-node-without-relationships" title="18.6.13. Get relationships on a node without relationships" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="reference-documentation.html">Reference</a></span> &gt; <span class="breadcrumb-link"><a href="rest-api.html">REST API</a></span> &gt; <span class="breadcrumb-node">Relationships</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="rest-api-nodes.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="rest-api-relationship-types.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="rest-api-relationships"></a>18.6. Relationships</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="rest-api-relationships.html#rest-api-get-relationship-by-id">18.6.1. Get Relationship by ID</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-create-relationship">18.6.2. Create relationship</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-create-a-relationship-with-properties">18.6.3. Create a relationship with properties</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-delete-relationship">18.6.4. Delete relationship</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-get-all-properties-on-a-relationship">18.6.5. Get all properties on a relationship</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-set-all-properties-on-a-relationship">18.6.6. Set all properties on a relationship</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-get-single-property-on-a-relationship">18.6.7. Get single property on a relationship</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-set-single-property-on-a-relationship">18.6.8. Set single property on a relationship</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-get-all-relationships">18.6.9. Get all relationships</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-get-incoming-relationships">18.6.10. Get incoming relationships</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-get-outgoing-relationships">18.6.11. Get outgoing relationships</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-get-typed-relationships">18.6.12. Get typed relationships</a></span></dt><dt><span class="section"><a href="rest-api-relationships.html#rest-api-get-relationships-on-a-node-without-relationships">18.6.13. Get relationships on a node without relationships</a></span></dt></dl></div><p>Relationships are a first class citizen in the Neo4j REST API. They can be accessed either
+stand-alone or through the nodes they are attached to.</p><p>The general pattern to get relationships from a node is:</p><pre class="programlisting brush: plain">GET http://localhost:7474/db/data/node/123/relationships/{dir}/{-list|&amp;|types}</pre><p>Where <code class="literal">dir</code> is one of <code class="literal">all</code>, <code class="literal">in</code>, <code class="literal">out</code> and <code class="literal">types</code> is an ampersand-separated list of types.
+See the examples below for more information.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-get-relationship-by-id"></a>18.6.1. Get Relationship by ID</h3></div></div></div><div class="figure"><a id="idp11803088"></a><p class="title"><strong>Figure 18.14. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-get-Relationship-by-ID.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-get-Relationship-by-ID.svg" alt="Final-Graph-get-Relationship-by-ID.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">GET</code></strong></span>  <code class="literal">http://localhost:7474/db/data/relationship/5</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">200:</code></strong></span> <code class="literal">OK</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">{
+  "extensions" : {
+  },
+  "start" : "http://localhost:7474/db/data/node/7",
+  "property" : "http://localhost:7474/db/data/relationship/5/properties/{key}",
+  "self" : "http://localhost:7474/db/data/relationship/5",
+  "properties" : "http://localhost:7474/db/data/relationship/5/properties",
+  "type" : "know",
+  "end" : "http://localhost:7474/db/data/node/6",
+  "data" : {
+  }
+}</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-create-relationship"></a>18.6.2. Create relationship</h3></div></div></div><p>Upon successful creation of a relationship, the new relationship is
+returned.</p><div class="figure"><a id="idp11822192"></a><p class="title"><strong>Figure 18.15. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-Create-relationship.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-Create-relationship.svg" alt="Final-Graph-Create-relationship.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">POST</code></strong></span>  <code class="literal">http://localhost:7474/db/data/node/25/relationships</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">{
+  "to" : "http://localhost:7474/db/data/node/24",
+  "type" : "LOVES"
+}</pre><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">201:</code></strong></span> <code class="literal">Created</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Location:</code></strong></span> <code class="literal">http://localhost:7474/db/data/relationship/31</code>
+</li></ul></div><pre class="programlisting brush: javascript">{
+  "extensions" : {
+  },
+  "start" : "http://localhost:7474/db/data/node/25",
+  "property" : "http://localhost:7474/db/data/relationship/31/properties/{key}",
+  "self" : "http://localhost:7474/db/data/relationship/31",
+  "properties" : "http://localhost:7474/db/data/relationship/31/properties",
+  "type" : "LOVES",
+  "end" : "http://localhost:7474/db/data/node/24",
+  "data" : {
+  }
+}</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-create-a-relationship-with-properties"></a>18.6.3. Create a relationship with properties</h3></div></div></div><p>Upon successful creation of a relationship, the new relationship is
+returned.</p><div class="figure"><a id="idp11847744"></a><p class="title"><strong>Figure 18.16. Starting Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Starting-Graph-Add-relationship-with-properties-before.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Starting-Graph-Add-relationship-with-properties-before.svg" alt="Starting-Graph-Add-relationship-with-properties-before.svg" /></span>
+</a></div></div><br class="figure-break" /><div class="figure"><a id="idp11851328"></a><p class="title"><strong>Figure 18.17. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-Create-a-relationship-with-properties.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-Create-a-relationship-with-properties.svg" alt="Final-Graph-Create-a-relationship-with-properties.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">POST</code></strong></span>  <code class="literal">http://localhost:7474/db/data/node/23/relationships</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">{
+  "to" : "http://localhost:7474/db/data/node/22",
+  "type" : "LOVES",
+  "data" : {
+    "foo" : "bar"
+  }
+}</pre><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">201:</code></strong></span> <code class="literal">Created</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Location:</code></strong></span> <code class="literal">http://localhost:7474/db/data/relationship/29</code>
+</li></ul></div><pre class="programlisting brush: javascript">{
+  "extensions" : {
+  },
+  "start" : "http://localhost:7474/db/data/node/23",
+  "property" : "http://localhost:7474/db/data/relationship/29/properties/{key}",
+  "self" : "http://localhost:7474/db/data/relationship/29",
+  "properties" : "http://localhost:7474/db/data/relationship/29/properties",
+  "type" : "LOVES",
+  "end" : "http://localhost:7474/db/data/node/22",
+  "data" : {
+    "foo" : "bar"
+  }
+}</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-delete-relationship"></a>18.6.4. Delete relationship</h3></div></div></div><div class="figure"><a id="idp11876512"></a><p class="title"><strong>Figure 18.18. Starting Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Starting-Graph-Delete-relationship1.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Starting-Graph-Delete-relationship1.svg" alt="Starting-Graph-Delete-relationship1.svg" /></span>
+</a></div></div><br class="figure-break" /><div class="figure"><a id="idp11879984"></a><p class="title"><strong>Figure 18.19. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-Delete-relationship.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-Delete-relationship.svg" alt="Final-Graph-Delete-relationship.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">DELETE</code></strong></span>  <code class="literal">http://localhost:7474/db/data/relationship/11</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">204:</code></strong></span> <code class="literal">No Content</code>
+</li></ul></div><pre class="programlisting brush: javascript"></pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-get-all-properties-on-a-relationship"></a>18.6.5. Get all properties on a relationship</h3></div></div></div><div class="figure"><a id="idp11895520"></a><p class="title"><strong>Figure 18.20. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-get-all-properties-on-a-relationship.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-get-all-properties-on-a-relationship.svg" alt="Final-Graph-get-all-properties-on-a-relationship.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">GET</code></strong></span>  <code class="literal">http://localhost:7474/db/data/relationship/15/properties</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">200:</code></strong></span> <code class="literal">OK</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">{
+  "since" : "1day",
+  "cost" : "high"
+}</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-set-all-properties-on-a-relationship"></a>18.6.6. Set all properties on a relationship</h3></div></div></div><div class="figure"><a id="idp11913728"></a><p class="title"><strong>Figure 18.21. Starting Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Starting-Graph-Set-relationship-property1.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Starting-Graph-Set-relationship-property1.svg" alt="Starting-Graph-Set-relationship-property1.svg" /></span>
+</a></div></div><br class="figure-break" /><div class="figure"><a id="idp11917200"></a><p class="title"><strong>Figure 18.22. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-set-all-properties-on-a-relationship.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-set-all-properties-on-a-relationship.svg" alt="Final-Graph-set-all-properties-on-a-relationship.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">PUT</code></strong></span>  <code class="literal">http://localhost:7474/db/data/relationship/14/properties</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">{
+  "happy" : false
+}</pre><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">204:</code></strong></span> <code class="literal">No Content</code>
+</li></ul></div><pre class="programlisting brush: javascript"></pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-get-single-property-on-a-relationship"></a>18.6.7. Get single property on a relationship</h3></div></div></div><div class="figure"><a id="idp11936560"></a><p class="title"><strong>Figure 18.23. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-get-single-property-on-a-relationship.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-get-single-property-on-a-relationship.svg" alt="Final-Graph-get-single-property-on-a-relationship.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">GET</code></strong></span>  <code class="literal">http://localhost:7474/db/data/relationship/12/properties/cost</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">200:</code></strong></span> <code class="literal">OK</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">"high"</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-set-single-property-on-a-relationship"></a>18.6.8. Set single property on a relationship</h3></div></div></div><div class="figure"><a id="idp11954624"></a><p class="title"><strong>Figure 18.24. Starting Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Starting-Graph-Set-relationship-property1.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Starting-Graph-Set-relationship-property1.svg" alt="Starting-Graph-Set-relationship-property1.svg" /></span>
+</a></div></div><br class="figure-break" /><div class="figure"><a id="idp11958096"></a><p class="title"><strong>Figure 18.25. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-set-single-property-on-a-relationship.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-set-single-property-on-a-relationship.svg" alt="Final-Graph-set-single-property-on-a-relationship.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">PUT</code></strong></span>  <code class="literal">http://localhost:7474/db/data/relationship/13/properties/cost</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">"deadly"</pre><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">204:</code></strong></span> <code class="literal">No Content</code>
+</li></ul></div><pre class="programlisting brush: javascript"></pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-get-all-relationships"></a>18.6.9. Get all relationships</h3></div></div></div><div class="figure"><a id="idp11977376"></a><p class="title"><strong>Figure 18.26. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-Get-all-relationships.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-Get-all-relationships.svg" alt="Final-Graph-Get-all-relationships.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">GET</code></strong></span>  <code class="literal">http://localhost:7474/db/data/node/38/relationships/all</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">200:</code></strong></span> <code class="literal">OK</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">[ {
+  "start" : "http://localhost:7474/db/data/node/38",
+  "data" : {
+  },
+  "self" : "http://localhost:7474/db/data/relationship/22",
+  "property" : "http://localhost:7474/db/data/relationship/22/properties/{key}",
+  "properties" : "http://localhost:7474/db/data/relationship/22/properties",
+  "type" : "LIKES",
+  "extensions" : {
+  },
+  "end" : "http://localhost:7474/db/data/node/39"
+}, {
+  "start" : "http://localhost:7474/db/data/node/40",
+  "data" : {
+  },
+  "self" : "http://localhost:7474/db/data/relationship/23",
+  "property" : "http://localhost:7474/db/data/relationship/23/properties/{key}",
+  "properties" : "http://localhost:7474/db/data/relationship/23/properties",
+  "type" : "LIKES",
+  "extensions" : {
+  },
+  "end" : "http://localhost:7474/db/data/node/38"
+}, {
+  "start" : "http://localhost:7474/db/data/node/38",
+  "data" : {
+  },
+  "self" : "http://localhost:7474/db/data/relationship/24",
+  "property" : "http://localhost:7474/db/data/relationship/24/properties/{key}",
+  "properties" : "http://localhost:7474/db/data/relationship/24/properties",
+  "type" : "HATES",
+  "extensions" : {
+  },
+  "end" : "http://localhost:7474/db/data/node/41"
+} ]</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-get-incoming-relationships"></a>18.6.10. Get incoming relationships</h3></div></div></div><div class="figure"><a id="idp11997536"></a><p class="title"><strong>Figure 18.27. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-Get-incoming-relationships.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-Get-incoming-relationships.svg" alt="Final-Graph-Get-incoming-relationships.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">GET</code></strong></span>  <code class="literal">http://localhost:7474/db/data/node/48/relationships/in</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">200:</code></strong></span> <code class="literal">OK</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">[ {
+  "start" : "http://localhost:7474/db/data/node/50",
+  "data" : {
+  },
+  "self" : "http://localhost:7474/db/data/relationship/29",
+  "property" : "http://localhost:7474/db/data/relationship/29/properties/{key}",
+  "properties" : "http://localhost:7474/db/data/relationship/29/properties",
+  "type" : "LIKES",
+  "extensions" : {
+  },
+  "end" : "http://localhost:7474/db/data/node/48"
+} ]</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-get-outgoing-relationships"></a>18.6.11. Get outgoing relationships</h3></div></div></div><div class="figure"><a id="idp12016368"></a><p class="title"><strong>Figure 18.28. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-Get-outgoing-relationships.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-Get-outgoing-relationships.svg" alt="Final-Graph-Get-outgoing-relationships.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">GET</code></strong></span>  <code class="literal">http://localhost:7474/db/data/node/53/relationships/out</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">200:</code></strong></span> <code class="literal">OK</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">[ {
+  "start" : "http://localhost:7474/db/data/node/53",
+  "data" : {
+  },
+  "self" : "http://localhost:7474/db/data/relationship/31",
+  "property" : "http://localhost:7474/db/data/relationship/31/properties/{key}",
+  "properties" : "http://localhost:7474/db/data/relationship/31/properties",
+  "type" : "LIKES",
+  "extensions" : {
+  },
+  "end" : "http://localhost:7474/db/data/node/54"
+}, {
+  "start" : "http://localhost:7474/db/data/node/53",
+  "data" : {
+  },
+  "self" : "http://localhost:7474/db/data/relationship/33",
+  "property" : "http://localhost:7474/db/data/relationship/33/properties/{key}",
+  "properties" : "http://localhost:7474/db/data/relationship/33/properties",
+  "type" : "HATES",
+  "extensions" : {
+  },
+  "end" : "http://localhost:7474/db/data/node/56"
+} ]</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-get-typed-relationships"></a>18.6.12. Get typed relationships</h3></div></div></div><p>Note that the "<code class="literal">&amp;</code>" needs to be encoded like "<code class="literal">%26</code>" for example when
+using <a class="ulink" href="http://curl.haxx.se/" target="_top">cURL</a> from the terminal.</p><div class="figure"><a id="idp12037824"></a><p class="title"><strong>Figure 18.29. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-Get-typed-relationships.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-Get-typed-relationships.svg" alt="Final-Graph-Get-typed-relationships.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">GET</code></strong></span>  <code class="literal">http://localhost:7474/db/data/node/58/relationships/all/LIKES&amp;HATES</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">200:</code></strong></span> <code class="literal">OK</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">[ {
+  "start" : "http://localhost:7474/db/data/node/58",
+  "data" : {
+  },
+  "self" : "http://localhost:7474/db/data/relationship/34",
+  "property" : "http://localhost:7474/db/data/relationship/34/properties/{key}",
+  "properties" : "http://localhost:7474/db/data/relationship/34/properties",
+  "type" : "LIKES",
+  "extensions" : {
+  },
+  "end" : "http://localhost:7474/db/data/node/59"
+}, {
+  "start" : "http://localhost:7474/db/data/node/60",
+  "data" : {
+  },
+  "self" : "http://localhost:7474/db/data/relationship/35",
+  "property" : "http://localhost:7474/db/data/relationship/35/properties/{key}",
+  "properties" : "http://localhost:7474/db/data/relationship/35/properties",
+  "type" : "LIKES",
+  "extensions" : {
+  },
+  "end" : "http://localhost:7474/db/data/node/58"
+}, {
+  "start" : "http://localhost:7474/db/data/node/58",
+  "data" : {
+  },
+  "self" : "http://localhost:7474/db/data/relationship/36",
+  "property" : "http://localhost:7474/db/data/relationship/36/properties/{key}",
+  "properties" : "http://localhost:7474/db/data/relationship/36/properties",
+  "type" : "HATES",
+  "extensions" : {
+  },
+  "end" : "http://localhost:7474/db/data/node/61"
+} ]</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-get-relationships-on-a-node-without-relationships"></a>18.6.13. Get relationships on a node without relationships</h3></div></div></div><div class="figure"><a id="idp12057824"></a><p class="title"><strong>Figure 18.30. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-Get-relationships-on-a-node-without-relationships.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-Get-relationships-on-a-node-without-relationships.svg" alt="Final-Graph-Get-relationships-on-a-node-without-relationships.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">GET</code></strong></span>  <code class="literal">http://localhost:7474/db/data/node/77/relationships/all</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">200:</code></strong></span> <code class="literal">OK</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">[ ]</pre></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="rest-api-nodes.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="rest-api.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="rest-api-relationship-types.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

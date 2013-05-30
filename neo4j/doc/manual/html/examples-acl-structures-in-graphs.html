@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>7.2. ACL structures in graphs</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v1.9.M04" /><link rel="up" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="prev" href="examples-user-roles-in-graphs.html" title="7.1. User roles in graphs" /><link rel="next" href="cookbook-linked-list.html" title="7.3. Linked Lists" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 4. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 5. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 6. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 7. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 8. Languages" /><link rel="chapter" href="tutorials-python-embedded.html" title="Chapter 9. Using Neo4j embedded in Python applications" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="reference-documentation.html" title="Part III. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 11. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 12. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 13. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 14. Indexing" /><link rel="chapter" href="cypher-query-lang.html" title="Chapter 15. Cypher Query Language" /><link rel="chapter" href="graph-algo.html" title="Chapter 16. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 17. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 18. REST API" /><link rel="chapter" href="python-embedded.html" title="Chapter 19. Python embedded bindings" /><link rel="part" href="operations.html" title="Part IV. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 20. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 21. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 22. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 23. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 24. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 25. Monitoring" /><link rel="part" href="tools.html" title="Part V. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 26. Web Administration" /><link rel="chapter" href="shell.html" title="Chapter 27. Neo4j Shell" /><link rel="part" href="community.html" title="Part VI. Community" /><link rel="chapter" href="community-support.html" title="Chapter 28. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 29. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="appendix" href="questions.html" title="Appendix B. Questions &amp; Answers" /><link rel="subsection" href="examples-acl-structures-in-graphs.html#_generic_approach" title="7.2.1. Generic approach" /><link rel="subsection" href="examples-acl-structures-in-graphs.html#_read_permission_example" title="7.2.2. Read-permission example" /><link rel="copyright" href="ln-idp3423008.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="tutorials.html">Tutorials</a></span> &gt; <span class="breadcrumb-link"><a href="data-modeling-examples.html">Data Modeling Examples</a></span> &gt; <span class="breadcrumb-node">ACL structures in graphs</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="examples-user-roles-in-graphs.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="cookbook-linked-list.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="examples-acl-structures-in-graphs"></a>7.2. ACL structures in graphs</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="examples-acl-structures-in-graphs.html#_generic_approach">7.2.1. Generic approach</a></span></dt><dt><span class="section"><a href="examples-acl-structures-in-graphs.html#_read_permission_example">7.2.2. Read-permission example</a></span></dt></dl></div><p>This example gives a generic overview of an approach to handling Access Control Lists (ACLs) in graphs,
+and a simplified example with concrete queries.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_generic_approach"></a>7.2.1. Generic approach</h3></div></div></div><p>In many scenarios, an application needs to handle security on some form of managed
+objects. This example describes one pattern to handle this through the use of a graph structure and traversers
+that build a full permissions-structure for any managed object with exclude and include overriding
+possibilities. This results in a dynamic construction of ACLs based on the
+position and context of the managed object.</p><p>The result is a complex security scheme that can easily be implemented in a graph structure,
+supporting permissions overriding, principal and content composition, without duplicating data anywhere.</p><div class="informalfigure"><a class="ulink" href="images/ACL.png" target="_top">
+<span class="inlinemediaobject"><img src="images/ACL.png" width="100%" alt="ACL.png" /></span>
+</a></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_technique"></a>Technique</h4></div></div></div><p>As seen in the example graph layout, there are some key concepts in this domain model:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+The managed content (folders and files) that are connected by <code class="literal">HAS_CHILD_CONTENT</code> relationships
+</li><li class="listitem">
+The Principal subtree pointing out principals that can act as ACL members, pointed out by the <code class="literal">PRINCIPAL</code> relationships.
+</li><li class="listitem">
+The aggregation of principals into groups, connected by the <code class="literal">IS_MEMBER_OF</code> relationship. One principal (user or group) can be part of many groups at the same time.
+</li><li class="listitem">
+The <code class="literal">SECURITY</code> — relationships, connecting the content composite structure to the principal composite structure, containing a addition/removal modifier property ("<code class="literal">+RW</code>").
+</li></ul></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_constructing_the_acl"></a>Constructing the ACL</h4></div></div></div><p>The calculation of the effective permissions (e.g. Read, Write, Execute) for a
+principal for any given ACL-managed node (content) follows a number of rules that will be encoded into the permissions-traversal:</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_top_down_traversal"></a>Top-down-Traversal</h4></div></div></div><p>This approach will let you define a generic permission pattern on the root content,
+and then refine that for specific sub-content nodes and specific principals.</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+Start at the content node in question traverse upwards to the content root node to determine the path to it.
+</li><li class="listitem">
+Start with a effective optimistic permissions list of "all permitted" (<code class="literal">111</code> in a bit encoded ReadWriteExecute case)
+  or <code class="literal">000</code> if you like pessimistic security handling (everything is forbidden unless explicitly allowed).
+</li><li class="listitem">
+Beginning from the topmost content node, look for any <code class="literal">SECURITY</code> relationships on it.
+</li><li class="listitem">
+If found, look if the principal in question is part of the end-principal of the <code class="literal">SECURITY</code> relationship.
+</li><li class="listitem">
+If yes, add the "<code class="literal">+</code>" permission modifiers to the existing permission pattern, revoke the "<code class="literal">-</code>" permission modifiers from the pattern.
+</li><li class="listitem">
+If two principal nodes link to the same content node, first apply the more generic prinipals modifiers.
+</li><li class="listitem">
+Repeat the security modifier search all the way down to the target content node, thus overriding more
+  generic permissions with the set on nodes closer to the target node.
+</li></ol></div><p>The same algorithm is applicable for the bottom-up approach, basically just
+traversing from the target content node upwards and applying the security modifiers dynamically
+as the traverser goes up.</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_example"></a>Example</h4></div></div></div><p>Now, to get the resulting access rights for e.g. "<code class="literal">user 1</code>" on the "<code class="literal">My File.pdf</code>" in a Top-Down
+approach on the model in the graph above would go like:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+Traveling upward, we start with "<code class="literal">Root folder</code>", and set the permissions to <code class="literal">11</code> initially (only considering Read, Write).
+</li><li class="listitem">
+There are two <code class="literal">SECURITY</code> relationships to that folder.
+  User 1 is contained in both of them, but "<code class="literal">root</code>" is more generic, so apply it first then "<code class="literal">All principals</code>" <code class="literal">+W</code> <code class="literal">+R</code> → <code class="literal">11</code>.
+</li><li class="listitem">
+"<code class="literal">Home</code>" has no <code class="literal">SECURITY</code> instructions, continue.
+</li><li class="listitem">
+"<code class="literal">user1 Home</code>" has <code class="literal">SECURITY</code>.
+  First apply "<code class="literal">Regular Users</code>" (<code class="literal">-R</code> <code class="literal">-W</code>) → <code class="literal">00</code>, Then "<code class="literal">user 1</code>" (<code class="literal">+R</code> <code class="literal">+W</code>) → <code class="literal">11</code>.
+</li><li class="listitem">
+The target node "<code class="literal">My File.pdf</code>" has no <code class="literal">SECURITY</code> modifiers on it, so the effective permissions for "<code class="literal">User 1</code>" on "<code class="literal">My File.pdf</code>" are <code class="literal">ReadWrite</code> → <code class="literal">11</code>.
+</li></ol></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_read_permission_example"></a>7.2.2. Read-permission example</h3></div></div></div><p>In this example, we are going to examine a tree structure of <code class="literal">directories</code> and
+<code class="literal">files</code>. Also, there are users that own files and roles that can be assigned to
+users. Roles can have permissions on directory or files structures (here we model
+only <code class="literal">canRead</code>, as opposed to full <code class="literal">rwx</code> Unix permissions) and be nested. A more thorough
+example of modeling ACL structures can be found at
+<a class="ulink" href="http://www.xaprb.com/blog/2006/08/16/how-to-build-role-based-access-control-in-sql/" target="_top">How to Build Role-Based Access Control in SQL</a>.</p><div class="informalfigure"><a class="ulink" href="images/The-Domain-Structure-ACL-structures-in-graphs.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/The-Domain-Structure-ACL-structures-in-graphs.svg" alt="The-Domain-Structure-ACL-structures-in-graphs.svg" /></span>
+</a></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_find_all_files_in_the_directory_structure"></a>Find all files in the directory structure</h4></div></div></div><p>In order to find all files contained in this structure, we need a variable length
+query that follows all <code class="literal">contains</code> relationships and retrieves the nodes at the other
+end of the <code class="literal">leaf</code> relationships.</p><pre class="programlisting brush: cypher">START root=node:node_auto_index(name = 'FileRoot')
+MATCH root-[:contains*0..]-&gt;(parentDir)-[:leaf]-&gt;file
+RETURN file</pre><p>resulting in:</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /></colgroup><thead><tr><th align="left" valign="top">file</th></tr></thead><tfoot><tr><th align="left" valign="top">2 rows
+</th></tr><tr><th align="left" valign="top">8 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[11]{name:"File1"}</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">Node[10]{name:"File2"}</code></p></td></tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_what_files_are_owned_by_whom"></a>What files are owned by whom?</h4></div></div></div><p>If we introduce the concept of ownership on files, we then can ask for the owners of the files we find — connected via <code class="literal">owns</code> relationships to file nodes.</p><pre class="programlisting brush: cypher">START root=node:node_auto_index(name = 'FileRoot')
+MATCH root-[:contains*0..]-&gt;()-[:leaf]-&gt;file&lt;-[:owns]-user
+RETURN file, user</pre><p>Returning the owners of all files below the <code class="literal">FileRoot</code> node.</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /></colgroup><thead><tr><th align="left" valign="top">file</th><th align="left" valign="top">user</th></tr></thead><tfoot><tr><th colspan="2" align="left" valign="top">2 rows
+</th></tr><tr><th colspan="2" align="left" valign="top">8 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">Node[11]{name:"File1"}</code></p></td><td align="left" valign="top"><p><code class="literal">Node[8]{name:"User1"}</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">Node[10]{name:"File2"}</code></p></td><td align="left" valign="top"><p><code class="literal">Node[7]{name:"User2"}</code></p></td></tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="_who_has_access_to_a_file"></a>Who has access to a File?</h4></div></div></div><p>If we now want to check what users have read access to all Files, and define our ACL as</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+The root directory has no access granted.
+</li><li class="listitem">
+Any user having a role that has been granted <code class="literal">canRead</code> access to one of the parent folders of a File has read access.
+</li></ul></div><p>In order to find users that can read any part of the parent folder hierarchy above the files,
+Cypher provides optional variable length path.</p><pre class="programlisting brush: cypher">START file=node:node_auto_index('name:File*')
+MATCH file&lt;-[:leaf]-()&lt;-[:contains*0..]-dir&lt;-[?:canRead]-role-[:member]-&gt;readUser
+RETURN file.name, dir.name, role.name, readUser.name</pre><p>This will return the <code class="literal">file</code>, and the directory where the user has the <code class="literal">canRead</code> permission along
+with the <code class="literal">user</code> and their <code class="literal">role</code>.</p><div class="queryresult table"><table cellspacing="0" cellpadding="0" border="1"><colgroup><col class="col1" /><col class="col2" /><col class="col3" /><col class="col4" /></colgroup><thead><tr><th align="left" valign="top">file.name</th><th align="left" valign="top">dir.name</th><th align="left" valign="top">role.name</th><th align="left" valign="top">readUser.name</th></tr></thead><tfoot><tr><th colspan="4" align="left" valign="top">9 rows
+</th></tr><tr><th colspan="4" align="left" valign="top">15 ms</th></tr></tfoot><tbody><tr><td align="left" valign="top"><p><code class="literal">"File2"</code></p></td><td align="left" valign="top"><p><code class="literal">"Desktop"</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"File2"</code></p></td><td align="left" valign="top"><p><code class="literal">"HomeU2"</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"File2"</code></p></td><td align="left" valign="top"><p><code class="literal">"Home"</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"File2"</code></p></td><td align="left" valign="top"><p><code class="literal">"FileRoot"</code></p></td><td align="left" valign="top"><p><code class="literal">"SUDOers"</code></p></td><td align="left" valign="top"><p><code class="literal">"Admin1"</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"File2"</code></p></td><td align="left" valign="top"><p><code class="literal">"FileRoot"</code></p></td><td align="left" valign="top"><p><code class="literal">"SUDOers"</code></p></td><td align="left" valign="top"><p><code class="literal">"Admin2"</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"File1"</code></p></td><td align="left" valign="top"><p><code class="literal">"HomeU1"</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"File1"</code></p></td><td align="left" valign="top"><p><code class="literal">"Home"</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td><td align="left" valign="top"><p><code class="literal">&lt;null&gt;</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"File1"</code></p></td><td align="left" valign="top"><p><code class="literal">"FileRoot"</code></p></td><td align="left" valign="top"><p><code class="literal">"SUDOers"</code></p></td><td align="left" valign="top"><p><code class="literal">"Admin1"</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">"File1"</code></p></td><td align="left" valign="top"><p><code class="literal">"FileRoot"</code></p></td><td align="left" valign="top"><p><code class="literal">"SUDOers"</code></p></td><td align="left" valign="top"><p><code class="literal">"Admin2"</code></p></td></tr></tbody></table></div><p>The results listed above contain <code class="literal">null</code> values for optional path segments, which can be mitigated by either asking several
+queries or returning just the really needed values.</p></div></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp3423008.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="examples-user-roles-in-graphs.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="data-modeling-examples.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="cookbook-linked-list.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>
