@@ -28,7 +28,7 @@ class Token {
     }
 
     static function countLeftToken() {
-        $result = Token::query("g.V.has('class',null).except([g.v(0)]).count()");
+        $result = Token::query("g.V.has('atom',null).except([g.v(0)]).count()");
     	
     	return $result[0][0];
     }

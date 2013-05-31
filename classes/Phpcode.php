@@ -5,21 +5,24 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Node,
 	Everyman\Neo4j\Gremlin;
 
-class Phpcode {
+class Phpcode extends TokenAuto {
     function check() {
+
+
+        $this->conditions = array(0 => array('token' => 'T_OPEN_TAG',
+                                             'atom' => 'none'),
+                                  1 => array('atom' => 'yes'),
+                                  2 => array('token' => 'T_CLOSE_TAG'),
+                                  
+                                  
+        );
         
-        $result = Token::query("g.V.has('token','T_OPEN_TAG').as('init').out('NEXT').hasNot('class',null).out('NEXT').has('token', 'T_CLOSE_TAG').back('init').each{
-            f = it.out('NEXT').out('NEXT').next();
-            g.removeEdge(it.out('NEXT').outE('NEXT').next());
-            g.removeVertex(f);
-
-            g.addEdge(it, it.out('NEXT').next(), 'CODE');
-            g.removeEdge(it.outE('NEXT').next());
-            
-            it.setProperty('class', 'Phpcode');        
-        }");
-
-        return true;
+        $this->actions = array('addEdge'    => array( '1' => 'CODE'),
+                               'changeNext' => array(1),
+                               'dropNext'   => array(1), 
+                               'atom'       => 'Phpcode');
+    
+        return $this->checkAuto();
     }
 }
 

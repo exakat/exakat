@@ -8,7 +8,7 @@ use Everyman\Neo4j\Client,
 class Assignation {
     function check() {
         
-        $result = Token::query("g.V.has('code','=').has('class',null).as('o').out('NEXT').has('class','Integer').back(2).in('NEXT').has('class','Variable').back(2).each{ 
+        $result = Token::query("g.V.has('code','=').has('atom',null).as('o').out('NEXT').has('atom','Integer').back(2).in('NEXT').has('atom','Variable').back(2).each{ 
         g.addEdge(it, it.in('NEXT').next(), 'LEFT'); 
         g.addEdge(it, it.out('NEXT').next(), 'RIGHT');
 
@@ -28,7 +28,7 @@ class Assignation {
             g.removeVertex(it);
         }
         
-        it.setProperty('class', 'Assignation');
+        it.setProperty('atom', 'Assignation');
         
         }");
 

@@ -12,7 +12,7 @@ require_once 'example_bootstrap.php';
 $client = new Client();
 $dot = '';
 
-$queryTemplate = "g.V";
+$queryTemplate = "g.V.except([g.v(0)])";
 $params = array('type' => 'IN');
 $query = new Gremlin\Query($client, $queryTemplate, $params);
 $vertices = $query->getResultSet();

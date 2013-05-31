@@ -48,17 +48,17 @@ foreach($tokens as $id => $token) {
         $previous = $T[$id];
     }
 
-    print_r($token);
 }
 
 $classes = array(
     'Variable', 'Integer',
     'Assignation',
-    'Addition', 'Multiplication',
+    'Multiplication','Addition', 
     'Phpcode',
                 );
 
 include('classes/'.'Token'.'.php');
+include('classes/'.'TokenAuto'.'.php');
 foreach($classes as $class) {
     include('classes/'.$class.'.php');
 }
@@ -71,92 +71,23 @@ foreach($classes as $class) {
 $total = Token::countTotalToken();
 $prev = Token::countLeftToken() + 1;
 $count = $prev - 1; 
+$round = 0;
+
 while($prev > $count) {
+    $round++;
+    
     $prev = $count; 
     foreach($regex as $r) {
         $r->check();
     }
 
     if ($count = Token::countLeftToken()) {
-        print "Remains $count of $total tokens to process! \n";
+        print "$round) Remains $count of $total tokens to process! \n";
     } else {
-        print "All $total tokens have been processed! \n";
+        print "$round) All $total tokens have been processed! \n";
         $prev = $count = 0;
     }
 }
-die();
-
-//$actors = new NodeIndex($client, 'actors');
-//	$keanu->relateTo($matrix, 'IN')->save();
-
-/*
-// Initialize the data
-if ($cmd == 'init') {
-//	
-	$laurence = $client->makeNode()->setProperty('name', 'Laurence Fishburne')->save();
-	$jennifer = $client->makeNode()->setProperty('name', 'Jennifer Connelly')->save();
-	$kevin = $client->makeNode()->setProperty('name', 'Kevin Bacon')->save();
-
-	$actors->add($keanu, 'name', $keanu->getProperty('name'));
-	$actors->add($laurence, 'name', $laurence->getProperty('name'));
-	$actors->add($jennifer, 'name', $jennifer->getProperty('name'));
-	$actors->add($kevin, 'name', $kevin->getProperty('name'));
-
-	$matrix = $client->makeNode()->setProperty('title', 'The Matrix')->save();
-	$higherLearning = $client->makeNode()->setProperty('title', 'Higher Learning')->save();
-	$mysticRiver = $client->makeNode()->setProperty('title', 'Mystic River')->save();
-
-	$laurence->relateTo($matrix, 'IN')->save();
-
-	$laurence->relateTo($higherLearning, 'IN')->save();
-	$jennifer->relateTo($higherLearning, 'IN')->save();
-
-	$laurence->relateTo($mysticRiver, 'IN')->save();
-	$kevin->relateTo($mysticRiver, 'IN')->save();
-
-// Find a path
-} else if ($cmd == 'path' && !empty($argv[2]) && !empty($argv[3])) {
-	$from = $argv[2];
-	$to = $argv[3];
-
-	$fromNode = $actors->findOne('name', $from);
-	if (!$fromNode) {
-		echo "$from not found\n";
-		exit(1);
-	}
-
-	$toNode = $actors->findOne('name', $to);
-	if (!$toNode) {
-		echo "$to not found\n";
-		exit(1);
-	}
-
-	// Each degree is an actor and movie node
-	$maxDegrees = 6;
-	$depth = $maxDegrees * 2;
-
-	$path = $fromNode->findPathsTo($toNode)
-		->setmaxDepth($depth)
-		->getSinglePath();
-
-	if ($path) {
-		foreach ($path as $i => $node) {
-			if ($i % 2 == 0) {
-				$degree = $i/2;
-				echo str_repeat("\t", $degree);
-				echo $degree . ': ' .$node->getProperty('name');
-				if ($i+1 != count($path)) {
-					echo " was in ";
-				}
-			} else {
-				echo $node->getProperty('title') . " with\n";
-			}
-		}
-		echo "\n";
-	}
-}
-
-*/
 
 function array_flatten($array, $level = 1) {
     $r = array();
@@ -170,3 +101,5 @@ function array_flatten($array, $level = 1) {
     
     return $r;
 }
+
+?>

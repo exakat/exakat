@@ -6,4 +6,5 @@ mkdir data
 cd ..
 sleep 1
 php analyzer.php
+php ex2dot.php
 
