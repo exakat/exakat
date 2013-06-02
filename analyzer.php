@@ -7,7 +7,7 @@ use Everyman\Neo4j\Client,
 
 require_once 'example_bootstrap.php';
 
-$php = file_get_contents('tests/test002.php');
+$php = file_get_contents('tests/test010.php');
 $tokens = token_get_all($php);
 
 $client = new Client();

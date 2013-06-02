@@ -7,10 +7,12 @@ use Everyman\Neo4j\Client,
 
 class Addition extends TokenAuto{
     function check() {
-        $this->conditions = array(0 => array('code' => array('+','-'),
+        $operands = array('Integer', 'Multiplication', 'Variable');
+        
+        $this->conditions = array(-1 => array('atom' => $operands ),
+                                  0 => array('code' => array('+','-'),
                                              'atom' => 'none'),
-                                  1 => array('atom' => array('Integer', 'Multiplication')),
-                                  
+                                  1 => array('atom' => $operands),
         );
         
         $this->actions = array('addEdge'    => array( '1' => 'RIGHT',
@@ -18,7 +20,6 @@ class Addition extends TokenAuto{
                                'changeNext' => array(1, -1),
                                'atom'       => 'Addition',
                                'cleansemicolon' => 1);
-
         return $this->checkAuto();
     }
 }

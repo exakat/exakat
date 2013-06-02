@@ -7,10 +7,13 @@ use Everyman\Neo4j\Client,
 
 class Multiplication extends TokenAuto {
     function check() {
-        $this->conditions = array(0 => array('code' => array('*','/','%'),
+
+        $operands = array('Integer', 'Multiplication', 'Variable');
+        
+        $this->conditions = array(-1 => array('atom' => $operands ),
+                                  0 => array('code' => array('*','/','%'),
                                              'atom' => 'none'),
-                                  1 => array('atom' => array('Integer','Multiplication')),
-                                  
+                                  1 => array('atom' => $operands),
         );
         
         $this->actions = array('addEdge'    => array( '1' => 'RIGHT',
