@@ -13,12 +13,12 @@ class Addition extends TokenAuto{
                                   
         );
         
-        $this->actions = array('addEdge'    => array( '1' => 'LEFT',
-                                                      '-1' => 'RIGHT'),
+        $this->actions = array('addEdge'    => array( '1' => 'RIGHT',
+                                                      '-1' => 'LEFT'),
                                'changeNext' => array(1, -1),
                                'atom'       => 'Addition',
                                'cleansemicolon' => 1);
-    
+
         return $this->checkAuto();
     }
 }

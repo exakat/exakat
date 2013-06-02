@@ -5,8 +5,23 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Node,
 	Everyman\Neo4j\Gremlin;
 
-class Assignation {
+class Assignation extends TokenAuto {
     function check() {
+
+        $this->conditions = array(0 => array('code' => array('='),
+                                             'atom' => 'none'),
+                                  1 => array('atom' => array('Integer', 'Multiplication')),
+                                  
+        );
+        
+        $this->actions = array('addEdge'    => array( '1' => 'RIGHT',
+                                                      '-1' => 'LEFT'),
+                               'changeNext' => array(1, -1),
+                               'atom'       => 'Assignation',
+                               'cleansemicolon' => 1);
+
+        return $this->checkAuto();
+/*
         
         $result = Token::query("g.V.has('code','=').has('atom',null).as('o').out('NEXT').has('atom','Integer').back(2).in('NEXT').has('atom','Variable').back(2).each{ 
         g.addEdge(it, it.in('NEXT').next(), 'LEFT'); 
@@ -32,21 +47,7 @@ class Assignation {
         
         }");
 
-        return true;
-    }
+        return true;*/
+    } 
 }
-
-/*
-
-        
-
-
-        
-
-            g.addEdge(it.in('NEXT').next(); it.out('NEXT').next(), 'NEXT'); 
-            g.removeEdge(it.inE('NEXT').next()); 
-            g.removeEdge(it.outE('NEXT').next()); 
-            
-
-*/
 ?>

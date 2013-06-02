@@ -8,6 +8,7 @@ use Everyman\Neo4j\Client,
 
 class Token {
     protected static $client = null;
+    protected static $reserved = array();
     
     function __construct($client) {
         // @todo typehint ? 
@@ -19,6 +20,14 @@ class Token {
         print get_class($this). " has no check yet\n";
 
         return true;
+    }
+    
+    function reserve() {
+        return true;
+    }
+
+    function resetReserve() {
+        Token::$reserved = array();
     }
 
     static function countTotalToken() {

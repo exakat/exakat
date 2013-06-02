@@ -1,10 +1,15 @@
 <?php
 
-class Integer extends Token {
+class Integer extends TokenAuto {
     function check() {
-        $result = Token::query("g.V.has('token','T_LNUMBER').each{ it.setProperty('atom','Integer') }");
+        $this->conditions = array(0 => array('token' => 'T_LNUMBER',
+                                             'atom' => 'none')
+                                  
+        );
         
-        return true;
+        $this->actions = array('atom'       => 'Integer');
+
+        return $this->checkAuto();
     }
 }
 

@@ -7,7 +7,7 @@ use Everyman\Neo4j\Client,
 
 require_once 'example_bootstrap.php';
 
-$php = file_get_contents('tests/test006.php');
+$php = file_get_contents('tests/test002.php');
 $tokens = token_get_all($php);
 
 $client = new Client();
@@ -77,9 +77,16 @@ while($prev > $count) {
     $round++;
     
     $prev = $count; 
+
+    $r = array_pop($regex);
+    $r->resetReserve();
+    array_push($regex, $r);
     foreach($regex as $r) {
         $r->check();
+        
+        $r->reserve();
     }
+    unset($precedence);
 
     if ($count = Token::countLeftToken()) {
         print "$round) Remains $count of $total tokens to process! \n";

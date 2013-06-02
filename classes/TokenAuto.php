@@ -33,11 +33,17 @@ class TokenAuto extends Token {
 
             $qcdts[] = "back('origin')";
         }
+
+        if (count(Token::$reserved) != 0) {
+            $cdt['next'] = max(array_keys($this->conditions));
+            $qcdts[] = "filter{!(it.token in ['".join("', '", Token::$reserved)."'])}";
+        }
         
         $query = $query.".".join('.', $qcdts);
         
         $qactions = $this->readActions($this->actions);
         $query .= ".each{\n".join(";\n", $qactions).";\n}";
+        $qcdts[] = "back('origin')";
         
         return $query;
     }

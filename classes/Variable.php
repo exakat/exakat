@@ -1,10 +1,15 @@
 <?php
 
-class Variable extends Token {
+class Variable extends TokenAuto {
     function check() {
-        $result = Token::query("g.V.has('token','T_VARIABLE').each{ it.setProperty('atom','Variable') }");
+        $this->conditions = array(0 => array('token' => 'T_VARIABLE',
+                                             'atom' => 'none')
+                                  
+        );
         
-        return true;
+        $this->actions = array('atom'       => 'Variable');
+
+        return $this->checkAuto();
     }
 }
 

@@ -10,7 +10,6 @@ class Multiplication extends TokenAuto {
         $this->conditions = array(0 => array('code' => array('*','/','%'),
                                              'atom' => 'none'),
                                   1 => array('atom' => array('Integer','Multiplication')),
-//                                  2 => array('notcode' => array('*', '/', '%')),
                                   
         );
         
@@ -20,9 +19,17 @@ class Multiplication extends TokenAuto {
                                'atom'       => 'Multiplication',
                                'cleansemicolon' => 1);
     
-//        $this->printQuery();
         return $this->checkAuto();
     }
+    
+    function reserve() {
+        Token::$reserved[] = '*';
+        Token::$reserved[] = '/';
+        Token::$reserved[] = '%';
+        
+        return true;
+    }
+
 }
 
 ?>
