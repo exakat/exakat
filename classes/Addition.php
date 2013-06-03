@@ -7,7 +7,7 @@ use Everyman\Neo4j\Client,
 
 class Addition extends TokenAuto{
     function check() {
-        $operands = array('Integer', 'Addition', 'Variable');
+        $operands = array('Integer', 'Addition', 'Variable', 'Multiplication');
         
         $this->conditions = array(-1 => array('atom' => $operands ),
                                   0 => array('code' => array('+','-'),
