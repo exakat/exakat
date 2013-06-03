@@ -1,0 +1,91 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$args = $argv;
+if ($id = array_search('-f', $args)) {
+    $filename = $args[$id + 1];
+    
+} else {
+    $filename = 'tests/test/Addition.03.php';
+}
+
+if (!file_exists($filename)) {
+    print "'$filename' doesn't exists. Aborting\n";
+    die();
+}
+
+if ($id = array_search('-v', $args)) {
+    define('VERBOSE', true);
+} else {
+    define('VERBOSE', false);
+}
+
+$php = file_get_contents($filename);
+$file = realpath($filename);
+$tokens = token_get_all($php);
+
+$client = new Client();
+
+// @doc delete old tokens
+
+$queryTemplate = "g.V.has('file', '$file').outE.each{ g.removeEdge(it); }";
+$params = array('type' => 'IN');
+$query = new Gremlin\Query($client, $queryTemplate, $params);
+$query->getResultSet();
+
+$queryTemplate = "g.V.has('file', '$file').each{ g.removeVertex(it); }";
+$params = array('type' => 'IN');
+$query = new Gremlin\Query($client, $queryTemplate, $params);
+$edges = $query->getResultSet();
+
+// load new tokens
+$line = 0;
+$TPHP = array(";" => 800,
+              "=" => 801,
+              "+" => 802,
+              "-" => 803,
+              "*" => 804,
+              "/" => 805,
+              "%" => 806,
+              );
+
+foreach($tokens as $id => $token) {
+    if ($token[0] == T_WHITESPACE) { continue; }
+    
+    if (is_array($token)) {
+        $T[$id] = $client->makeNode()->setProperty('token', token_name($token[0]))
+                                     ->setProperty('code', $token[1])
+                                     ->setProperty('line', $token[2])
+                                     ->setProperty('file', $file)->save();
+        $line = $token[2];
+    } else {
+        if (!isset($TPHP[$token])) {
+            display("No TPHP for '{$token}'\n");
+            $TPHP[$token] = max($TPHP) + 1;
+        }
+        $T[$id] = $client->makeNode()->setProperty('token', $token)
+                                     ->setProperty('code', $token)
+                                     ->setProperty('line', $line)
+                                     ->setProperty('file', $file)->save();
+    }
+    
+    if ($id == 0) {
+        $T[0]->setProperty('root', 'true')->save();
+    }
+    
+    if (!isset($previous)) {
+        $previous = $T[$id];
+    } else {
+        $previous->relateTo($T[$id], 'NEXT')->save();
+        $previous = $T[$id];
+    }
+}
+?>

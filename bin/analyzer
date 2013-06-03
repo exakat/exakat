@@ -1,0 +1,85 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$args = $argv;
+
+if ($id = array_search('-v', $args)) {
+    define('VERBOSE', true);
+} else {
+    define('VERBOSE', false);
+}
+
+$classes = array(
+    'Variable', 
+    'Integer',
+    'Assignation',
+    'Multiplication',
+    'Addition', 
+    'Phpcode',
+                );
+
+$client = new Client();
+
+$regex = array();
+foreach($classes as $class) {
+    $new = "Tokenizer\\$class";
+    $regex[$class] = new $new($client);
+}
+
+$total = Tokenizer\Token::countTotalToken();
+$prev = Tokenizer\Token::countLeftToken() + 1;
+$count = $prev - 1; 
+$round = 0;
+
+while($prev > $count) {
+    $round++;
+    
+    $prev = $count; 
+
+    $r = array_pop($regex);
+    $r->resetReserve();
+    array_push($regex, $r);
+    foreach($regex as $r) {
+        $r->check();
+        
+        $r->reserve();
+    }
+    unset($precedence);
+
+    if ($count = Token::countLeftToken()) {
+        display( "$round) Remains $count of $total tokens to process! \n");
+    } else {
+        display( "$round) All $total tokens have been processed! \n");
+        $prev = $count = 0;
+    }
+}
+
+function array_flatten($array, $level = 1) {
+    $r = array();
+    
+    foreach($array as $a) {
+        if ($level > 1 && is_array($a)) {
+            $a = array_flatten($a, $level - 1);
+        }
+        $r = array_merge($r, $a);
+    }
+    
+    return $r;
+}
+
+function display($message) {
+    if (VERBOSE) {
+        print $message;
+    }
+    // @todo put in log too ? 
+}
+?>
