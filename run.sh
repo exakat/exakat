@@ -7,4 +7,4 @@ cd ..
 sleep 1
 php analyzer.php
 php ex2dot.php
-
+php ex2text.php

@@ -1,0 +1,7 @@
+Add a filename mention for the tokens (or a relationship to a file? )
+Set up the tests using the old cornac's test
+Create a log for projects and scripts
+Create a bin folder
+Separate tokenizer and analyser
+Support filename in tokenizer
+Support file updates

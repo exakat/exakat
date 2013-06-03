@@ -7,7 +7,26 @@ use Everyman\Neo4j\Client,
 
 require_once 'example_bootstrap.php';
 
-$php = file_get_contents('tests/test010.php');
+$args = $argv;
+if ($id = array_search('-f', $args)) {
+    $filename = $args[$id + 1];
+    
+} else {
+    $filename = 'tests/test/Addition.05.php';
+}
+
+if (!file_exists($filename)) {
+    print "'$filename' doesn't exists. Aborting\n";
+    die();
+}
+
+if ($id = array_search('-v', $args)) {
+    define('VERBOSE', true);
+} else {
+    define('VERBOSE', false);
+}
+
+$php = file_get_contents($filename);
 $tokens = token_get_all($php);
 
 $client = new Client();
@@ -32,13 +51,16 @@ foreach($tokens as $id => $token) {
         $line = $token[2];
     } else {
         if (!isset($TPHP[$token])) {
-            print "No TPHP for '{$token}'\n";
+            display("No TPHP for '{$token}'\n");
             $TPHP[$token] = max($TPHP) + 1;
-            print $TPHP;
         }
         $T[$id] = $client->makeNode()->setProperty('token', $token)
                                      ->setProperty('code', $token)
                                      ->setProperty('line', $line)->save();
+    }
+    
+    if ($id == 0) {
+        $T[0]->setProperty('root', 'true')->save();
     }
     
     if (!isset($previous)) {
@@ -89,9 +111,9 @@ while($prev > $count) {
     unset($precedence);
 
     if ($count = Token::countLeftToken()) {
-        print "$round) Remains $count of $total tokens to process! \n";
+        display( "$round) Remains $count of $total tokens to process! \n");
     } else {
-        print "$round) All $total tokens have been processed! \n";
+        display( "$round) All $total tokens have been processed! \n");
         $prev = $count = 0;
     }
 }
@@ -109,4 +131,10 @@ function array_flatten($array, $level = 1) {
     return $r;
 }
 
+function display($message) {
+    if (VERBOSE) {
+        print $message;
+    }
+    // @todo put in log too ? 
+}
 ?>
