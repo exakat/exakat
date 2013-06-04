@@ -22,6 +22,7 @@ $classes = array(
     'Variable', 
     'Integer',
     'Sign',
+    'Not',
     'Assignation',
     'Multiplication',
     'Addition', 

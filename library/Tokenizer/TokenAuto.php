@@ -15,6 +15,14 @@ class TokenAuto extends Token {
             $qcdts[] = "as('origin')";
         }
 
+        if (!empty($this->conditions[-2])) {
+            $cdt = $this->conditions[-2];
+            $cdt['previous'] = 2;
+            $qcdts = array_merge($qcdts, $this->readConditions($cdt));
+
+            $qcdts[] = "back('origin')";
+        }
+
         if (!empty($this->conditions[-1])) {
             $cdt = $this->conditions[-1];
             $cdt['previous'] = 1;
@@ -150,6 +158,11 @@ g.removeVertex(f);
                 $qcdts[] = "in('NEXT')";
             }
             unset($cdt['previous']);
+        }
+
+        if (isset($cdt['begin'])) {
+            $qcdts[] = "has('begin', true)";
+            unset($cdt['begin']);
         }
         
         if (isset($cdt['code']) && is_array($cdt['code']) && !empty($cdt['code'])) {
