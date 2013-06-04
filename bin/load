@@ -55,6 +55,9 @@ $TPHP = array(";" => 800,
               "*" => 804,
               "/" => 805,
               "%" => 806,
+              "(" => 807,
+              ")" => 808,
+              
               );
 
 foreach($tokens as $id => $token) {
@@ -64,17 +67,28 @@ foreach($tokens as $id => $token) {
         $T[$id] = $client->makeNode()->setProperty('token', token_name($token[0]))
                                      ->setProperty('code', $token[1])
                                      ->setProperty('line', $token[2])
-                                     ->setProperty('file', $file)->save();
+                                     ->setProperty('file', $file);
+        if (in_array($token[0], array(T_OPEN_TAG))) {
+            $T[$id]->setProperty('begin', true)->save();
+        }
+                                     
+        $T[$id]->save();
         $line = $token[2];
     } else {
         if (!isset($TPHP[$token])) {
-            display("No TPHP for '{$token}'\n");
+            print("No TPHP for '{$token}'\n");
             $TPHP[$token] = max($TPHP) + 1;
         }
         $T[$id] = $client->makeNode()->setProperty('token', $token)
                                      ->setProperty('code', $token)
                                      ->setProperty('line', $line)
                                      ->setProperty('file', $file)->save();
+
+        if (in_array($token, array('(','{',))) {
+            $T[$id]->setProperty('begin', true)->save();
+        }
+                                     
+        $T[$id]->save();
     }
     
     if ($id == 0) {

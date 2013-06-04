@@ -1,8 +1,28 @@
 <?php
 
-Label : CODE
-  +
-  Label : RIGHT
-    $x
-  Label : LEFT
-    1
+Label : NEXT
+  1
+  Label : NEXT
+    +
+    Label : SIGN
+      1
+    Label : NEXT
+      -
+      Label : SIGN
+        1
+      Label : NEXT
+        +
+        Label : NEXT
+          (
+          Label : NEXT
+            1
+            Label : NEXT
+              -
+              Label : SIGN
+                1
+              Label : NEXT
+                )
+                Label : NEXT
+                  ;
+                  Label : NEXT
+                    ?>
