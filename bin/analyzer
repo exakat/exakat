@@ -21,6 +21,7 @@ if ($id = array_search('-v', $args)) {
 $classes = array(
     'Variable', 
     'Integer',
+    'String',
     'Sign',
     'Not',
     'Assignation',

@@ -9,9 +9,9 @@ class Tokenizeur extends \PHPUnit_Framework_TestCase {
         // @todo remove this hack : no need to restart neo4j for a test! 
         
         $exp = file_get_contents('exp/'.$file.'.txt');
+        $this->assertNotContains("Label : NEXT", $exp);
         
         $this->assertEquals($exp, $res);
-        $this->assertNotContains("Label : NEXT", $exp);
     }
 }
 
