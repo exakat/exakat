@@ -16,8 +16,9 @@ class Autoload {
 
     static public function autoload_test($name) {
         $path = dirname(__DIR__);
-
+        
         $file = $path.'/tests/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
+        var_dump($file);
         
         if (file_exists($file)) {
             include($file);

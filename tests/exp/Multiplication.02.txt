@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  +
+  Label : RIGHT
+    *
+    Label : RIGHT
+      4
+    Label : LEFT
+      *
+      Label : RIGHT
+        3
+      Label : LEFT
+        2
+  Label : LEFT
+    1

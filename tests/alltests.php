@@ -17,8 +17,9 @@
    +----------------------------------------------------------------------+
  */
 
-include_once('../../library/Cornac/Autoload.php');
-spl_autoload_register('Cornac_Autoload::autoload');
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_test');
+spl_autoload_register('Autoload::autoload_phpunit');
 
 class Framework_AllTests
 {
@@ -27,70 +28,17 @@ class Framework_AllTests
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
  
         $tests = array( 
-        'class.commentaire.test.php',
-        'class.affectation.test.php',
-        'class.ternaryop.test.php',
-        'class.codephp.test.php',
-        'class.constant.test.php',
-        'class.functioncall.test.php',
-        'class.inclusion.test.php',
-        'class.literals.test.php',
-        'class.operation.test.php',
-        'class.sequence.test.php',
-        'class.variable.test.php',
-        'class.concatenation.test.php',
-        'class.noscream.test.php',
-        'class.ifthen.test.php',
-        'class.property.test.php',
-        'class.logical.test.php',
-        'class.not.test.php',
-        'class.array.test.php',
-        'class.method.test.php',
-        'class.plusplus.test.php',
-        'class.block.test.php',
-        'class.foreach.test.php',
-        'class.comparison.test.php',
-        'class.for.test.php',
-        'class.opappend.test.php',
-        'class.break.test.php',
-        'class.new.test.php',
-        'class.rawtext.test.php',
-        'class.arrayfct.test.php',
-        'class.switch.test.php',
-        'class.global.test.php',
-        'class.return.test.php',
-        'class.function.test.php',
-        'class.keyvalue.test.php',
-        'class.class.test.php',
-        'class.while.test.php',
-        'class.reference.test.php',
-        'class.sign.test.php',
-        'class.cast.test.php',
-        'class.method_static.test.php',
-        'class.static.test.php',
-        'class.try.test.php',
-        'class.bitshift.test.php',
-        'class.throw.test.php',
-        'class.constant_static.test.php',
-        'class.dowhile.test.php',
-        'class.invert.test.php',
-        'class.property_static.test.php',
-        'class.constant_class.test.php',
-        'class.continue.test.php',
-        'class.clone.test.php',
-        'class.typehint.test.php',
-        'class.interface.test.php',
-        'class.declare.test.php',
-        'class.shell.test.php',
-        'class.halt_compiler.test.php',
-        'class.namespace.test.php',
-        'class.use.test.php',
-        'class.closure.test.php',
-        'class.goto.test.php',
-        // Prochain tests
+            '\\Test\\Addition',
+            '\\Test\\Multiplication',
+            '\\Test\\Assignation',
         );
         
         foreach($tests as $i => $test ) {
+            $suite->addTestSuite($test);
+            
+            continue;
+        }
+/*
             $fichier = $test;
             if (!file_exists('class/'.$fichier)) {
                 unset($tests[$i]); 
@@ -146,7 +94,7 @@ class Framework_AllTests
 
             $suite->addTestSuite($test);
          }
- 
+*/ 
         return $suite;
     }
 }
