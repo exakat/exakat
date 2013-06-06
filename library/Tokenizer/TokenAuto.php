@@ -31,22 +31,16 @@ class TokenAuto extends Token {
             $qcdts[] = "back('origin')";
         }
         
-        if (!empty($this->conditions[1])) {
-            $cdt = $this->conditions[1];
-            $cdt['next'] = 1;
-            $qcdts = array_merge($qcdts, $this->readConditions($cdt));
+        for($i = 1; $i < 4; $i++) {
+            if (!empty($this->conditions[$i])) {
+                $cdt = $this->conditions[$i];
+                $cdt['next'] = $i;
+                $qcdts = array_merge($qcdts, $this->readConditions($cdt));
 
-            $qcdts[] = "back('origin')";
+                $qcdts[] = "back('origin')";
+            }
         }
-
-        if (!empty($this->conditions[2])) {
-            $cdt = $this->conditions[2];
-            $cdt['next'] = 2;
-            $qcdts = array_merge($qcdts, $this->readConditions($cdt));
-
-            $qcdts[] = "back('origin')";
-        }
-
+        
         if (count(Token::$reserved) != 0) {
             $cdt['next'] = max(array_keys($this->conditions));
             $qcdts[] = "filter{!(it.token in ['".join("', '", Token::$reserved)."'])}";
@@ -77,39 +71,6 @@ class TokenAuto extends Token {
     private function readActions($actions) {
         $qactions = array();
         
-        if (isset($actions['addEdge'])) {
-            foreach($actions['addEdge'] as $destination => $label) {
-                if ($destination > 0) {
-                    $d = str_repeat(".out('NEXT')", $destination);
-                } elseif ($destination < 0) {
-                    $d = str_repeat(".in('NEXT')", abs($destination));
-                } else {
-                    print "Ignoring addEdge for 0\n";
-                }
-                $qactions[] = "    g.addEdge(it, it".$d.".next(), '$label')";
-            }
-        }
-
-        if (isset($actions['changeNext'])) {
-            foreach($actions['changeNext'] as $destination) {
-                if ($destination > 0) {
-                    $d = str_repeat(".out('NEXT')", $destination - 1);
-                    $qactions[] = "
-    g.addEdge(it, it$d.out('NEXT').out('NEXT').next(), 'NEXT');
-    g.removeEdge(it$d.out('NEXT').outE('NEXT').next());
-    g.removeEdge(it$d.outE('NEXT').next())\n";
-                } elseif ($destination < 0) {
-                    $d = str_repeat(".in('NEXT')", abs($destination) - 1);
-                    $qactions[] = "
-    g.addEdge(it$d.in('NEXT').in('NEXT').next(), it, 'NEXT'); 
-    g.removeEdge(it$d.in('NEXT').inE('NEXT').next());
-    g.removeEdge(it$d.inE('NEXT').next());\n";
-                } else {
-                    print "Ignoring changeNext for 0\n";
-                }
-            }
-        }    
-        
         if (isset($actions['cleansemicolon']) && $actions['cleansemicolon']) {
             $qactions[] = "
     it.out('NEXT').has('code',';').has('atom', null).each{ 
@@ -126,20 +87,55 @@ class TokenAuto extends Token {
         }
 
         if (isset($actions['dropNext'])) {
-            foreach($actions['dropNext'] as $id) {
-                $d = str_repeat(".out('NEXT')", $id);
-                $qactions[] = "
-f = it$d.next();
-f.outE('NEXT').each{
-    g.addEdge(it.in('NEXT'), it.out('NEXT'), 'NEXT');
-    g.removeEdge(it.outE('NEXT').next()); 
-    g.removeEdge(it.inE('NEXT').next()); 
-}
+            foreach($actions['dropNext'] as $destination) {
+                if ($destination > 0) {
+                    $d = str_repeat(".out('NEXT')", $destination);
+                    $qactions[] = "
+f = it".$d.".next();
+g.addEdge(it, f.out('NEXT').next(), 'NEXT');
+
 g.removeVertex(f);
-           ";
+
+";
+                } elseif ($destination < 0) {
+                    $d = str_repeat(".in('NEXT')", abs($destination));
+                    $qactions[] = "g.addEdge(it, it".$d.".next(), '$label')";
+                } else {
+                    print "Ignoring addEdge for 0\n";
+                }
             }
         }
         
+        if (isset($actions['makeEdge'])) {
+            foreach($actions['makeEdge'] as $destination => $label) {
+                print "$label\n";
+                if ($destination > 0) {
+                    $d = str_repeat(".out('NEXT')", $destination);
+                    $qactions[] = "
+f =  it".$d.".next();
+g.addEdge(it, f, '$label');
+g.removeEdge(f.inE('NEXT').next());
+
+g.addEdge(it, f.out('NEXT').next(), 'NEXT');
+g.removeEdge(f.outE('NEXT').next());
+";
+                } elseif ($destination < 0) {
+                    $d = str_repeat(".in('NEXT')", abs($destination));
+                    $qactions[] = "
+f =  it".$d.".next();
+g.addEdge(it, f, '$label');
+g.removeEdge(f.outE('NEXT').next());
+
+g.addEdge(f.in('NEXT').next(), it, 'NEXT');
+g.removeEdge(f.inE('NEXT').next());
+
+";
+                } else {
+                    print "Ignoring addEdge for 0\n";
+                }
+            }
+        }
+
         return $qactions;
     }
 
@@ -165,8 +161,12 @@ g.removeVertex(f);
             unset($cdt['begin']);
         }
         
-        if (isset($cdt['code']) && is_array($cdt['code']) && !empty($cdt['code'])) {
-            $qcdts[] = "filter{it.code in ['".join("', '", $cdt['code'])."']}";
+        if (isset($cdt['code'])) {
+            if (is_array($cdt['code']) && !empty($cdt['code'])) {
+                $qcdts[] = "filter{it.code in ['".join("', '", $cdt['code'])."']}";
+            } else {
+                $qcdts[] = "has('code', '".$cdt['code']."')";
+            }
             unset($cdt['code']);
         }
 

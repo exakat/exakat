@@ -11,8 +11,8 @@ class Sign extends TokenAuto {
                                    1 => array('atom' => array('Integer', 'Sign')),
                                  );
         
-        $this->actions = array('addEdge'    => array( '1' => 'SIGN'),
-                               'changeNext' => array(1),
+        $this->actions = array('makeEdge'    => array( '1' => 'SIGN'),
+//                               'changeNext' => array(1),
                                'atom'       => 'Sign',
                                );
         $r = $this->checkAuto();

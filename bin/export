@@ -53,7 +53,12 @@ foreach($edges as $e) {
     if (!isset($E[$id])) {
         $E[$id] = array();
     }
-    $E[$id][$e[0]->getEndNode()->getId()] = $e[0]->getType();
+    
+    if(isset($E[$id][$e[0]->getEndNode()->getId()])) {
+        $E[$id][$e[0]->getEndNode()->getId()] .= ', '.$e[0]->getType();
+    } else {
+        $E[$id][$e[0]->getEndNode()->getId()] = $e[0]->getType();
+    }
 }
 
 if (!isset($root)) {

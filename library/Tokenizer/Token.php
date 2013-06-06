@@ -33,7 +33,7 @@ class Token {
     }
 
     static function countLeftToken() {
-        $result = Token::query("g.V.has('atom',null).except([g.v(0)]).count()");
+        $result = Token::query("g.V.has('atom',null).except([g.v(0)]).hasNot('hidden', true).count()");
     	
     	return $result[0][0];
     }
@@ -41,7 +41,17 @@ class Token {
     static public function query($query) {
     	$queryTemplate = $query;
     	$params = array('type' => 'IN');
-	    $query = new \Everyman\Neo4j\Gremlin\Query(Token::$client, $queryTemplate, $params);
+    	try {
+    	    $query = new \Everyman\Neo4j\Gremlin\Query(Token::$client, $queryTemplate, $params);
+        	return $query->getResultSet();
+    	} catch (\Exception $e) {
+    	    $message = $e->getMessage();
+    	    $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
+    	    print "Exception : ".$message."\n";
+    	    
+    	    print $queryTemplate."\n";
+    	    die();
+    	}
     	return $query->getResultSet();
     }
 }

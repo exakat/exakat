@@ -32,6 +32,10 @@ class Framework_AllTests
             '\\Test\\Multiplication',
             '\\Test\\Assignation',
             '\\Test\\Sign',
+            '\\Test\\_Array',
+            '\\Test\\Integer',
+            '\\Test\\Not',
+            '\\Test\\String',
         );
         
         foreach($tests as $i => $test ) {

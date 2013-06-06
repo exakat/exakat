@@ -58,6 +58,9 @@ $TPHP = array(";" => 800,
               "(" => 807,
               ")" => 808,
               "!" => 809,
+              "[" => 810,
+              "]" => 811,
+              
               );
 
 foreach($tokens as $id => $token) {
@@ -91,10 +94,6 @@ foreach($tokens as $id => $token) {
         $T[$id]->save();
     }
     
-    if ($id == 0) {
-        $T[0]->setProperty('root', 'true')->save();
-    }
-    
     if (!isset($previous)) {
         $previous = $T[$id];
     } else {
@@ -102,4 +101,24 @@ foreach($tokens as $id => $token) {
         $previous = $T[$id];
     }
 }
+
+$T[0]->setProperty('root', 'true')->save();
+
+$T[-1] = $client->makeNode()->setProperty('token', 'T_ROOT')
+                            ->setProperty('code', '/**/')
+                            ->setProperty('line', 0)
+                            ->setProperty('file', $file)
+                            ->setProperty('hidden', true)
+                            ->save();
+
+$last     = $client->makeNode()->setProperty('token', 'T_END')
+                               ->setProperty('code', '/**/')
+                               ->setProperty('line', $line)
+                               ->setProperty('file', $file)
+                               ->setProperty('hidden', true)
+                               ->save();
+                               
+$T[-1]->relateTo($T[0], 'NEXT')->setProperty('__FILE__', true)->save();
+$previous->relateTo($last, 'NEXT')->setProperty('__FILE__', true)->save();
+
 ?>
