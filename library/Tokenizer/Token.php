@@ -13,7 +13,7 @@ class Token {
     
     final function check() {
         
-        print get_class($this)." check \n";
+        display(get_class($this)." check \n");
         if (!method_exists($this, '_check')) {
             print get_class($this). " has no check yet\n";
         } else {

@@ -17,7 +17,6 @@ class Addition extends TokenAuto {
                                                       ),
                                'atom'       => 'Addition',
                                );
-//        $this->printQuery();
         return $this->checkAuto();
     }
 }

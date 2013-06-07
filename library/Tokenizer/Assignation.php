@@ -13,7 +13,6 @@ class Assignation extends TokenAuto {
         
         $this->actions = array('makeEdge'    => array( '1' => 'RIGHT',
                                                       '-1' => 'LEFT'),
-//                               'changeNext' => array(1, -1),
                                'atom'       => 'Assignation',
                                'cleansemicolon' => 1);
 

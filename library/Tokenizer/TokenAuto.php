@@ -89,7 +89,7 @@ class TokenAuto extends Token {
 
         if (isset($actions['makeEdge'])) {
             foreach($actions['makeEdge'] as $destination => $label) {
-                print "makeEdge : $label\n";
+                display("makeEdge : $label\n");
                 if ($destination > 0) {
                     $d = str_repeat(".out('NEXT')", $destination);
                     $qactions[] = "

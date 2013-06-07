@@ -23,7 +23,7 @@ $classes = array(
     'Variable', 
     'Integer',
     'String',
-//    'Sign',
+    'Sign',
     '_Array',
     'Not',
     'Assignation',
@@ -70,7 +70,7 @@ while($prev > $count) {
 
 Token::cleanHidden();
 $end_time = microtime(true);
-print "Total time : ".number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n";
+display("Total time : ".number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n");
 // @todo display checks processed
 
 function array_flatten($array, $level = 1) {

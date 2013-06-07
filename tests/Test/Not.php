@@ -9,5 +9,6 @@ spl_autoload_register('Autoload::autoload_phpunit');
 class Not extends Tokenizeur {
     /* 1 methods */
     public function testNot01()  { $this->generic_test('Not.01'); }
+    public function testNot02()  { $this->generic_test('Not.02'); }
 }
 ?>

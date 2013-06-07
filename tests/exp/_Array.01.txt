@@ -1,8 +1,6 @@
 <?php
 
-Label : NEXT
+Label : CODE
   $_array
-  Label : NEXT
+  Label : INDEX
     1
-    Label : NEXT
-      ?>

@@ -20,15 +20,13 @@ Label : NEXT
  */
   Label : NEXT
     $_array
-    Label : NEXT
+    Label : INDEX
       1
+    Label : INDEX
+      1
+    Label : NEXT
+      ;
       Label : NEXT
-        [
+        ?>
         Label : NEXT
-          1
-          Label : NEXT
-            ]
-            Label : NEXT
-              ;
-              Label : NEXT
-                ?>
+          /**/
