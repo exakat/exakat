@@ -59,6 +59,14 @@ class Token {
     	}
     	return $query->getResultSet();
     }
+
+    static public function cleanHidden() {
+        $query = " g.V.has('token','T_ROOT').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
+    g.removeVertex(it.in('NEXT').in('NEXT').next()); 
+    g.removeVertex(it); 
+}";
+        Token::query($query);
+    }
 }
 
 ?>

@@ -18,6 +18,7 @@ if ($id = array_search('-v', $args)) {
     define('VERBOSE', false);
 }
 
+$begin_time = microtime(true);
 $classes = array(
     'Variable', 
     'Integer',
@@ -66,6 +67,11 @@ while($prev > $count) {
         $prev = $count = 0;
     }
 }
+
+Token::cleanHidden();
+$end_time = microtime(true);
+print "Total time : ".number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n";
+// @todo display checks processed
 
 function array_flatten($array, $level = 1) {
     $r = array();
