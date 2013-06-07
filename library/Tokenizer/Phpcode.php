@@ -3,8 +3,7 @@
 namespace Tokenizer;
 
 class Phpcode extends TokenAuto {
-    function check() {
-        print __METHOD__."\n";
+    function _check() {
         $this->conditions = array(0 => array('token' => 'T_OPEN_TAG',
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
@@ -14,9 +13,8 @@ class Phpcode extends TokenAuto {
         );
         
         $this->actions = array('makeEdge'    => array( '1' => 'CODE'),
-                               'dropNext'   => array(2), 
+                               'dropNext'   => array(1), 
                                'atom'       => 'Phpcode');
-//        $this->printQuery();    
         $r = $this->checkAuto();
         return $r;
     }

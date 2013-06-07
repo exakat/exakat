@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class Integer extends TokenAuto {
-    function check() {
+    function _check() {
 
         $this->conditions = array( 0 => array('token' => 'T_LNUMBER',
                                                'atom' => 'none')

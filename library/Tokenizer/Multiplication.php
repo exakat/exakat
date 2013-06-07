@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class Multiplication extends TokenAuto {
-    function check() {
+    function _check() {
 
         $operands = array('Integer', 'Multiplication', 'Variable');
         

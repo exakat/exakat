@@ -3,14 +3,13 @@
 namespace Tokenizer;
 
 class Not extends TokenAuto {
-    function check() {
+    function _check() {
         $this->conditions = array(0 => array('token' => '!',
                                              'atom' => 'none')
                                   
         );
         
-        $this->actions = array('addEdge'    => array( '1' => 'NOT'),
-                               'changeNext' => array(1),
+        $this->actions = array('makeEdge'    => array( '1' => 'NOT'),
                                'atom'       => 'Not');
 
         return $this->checkAuto();

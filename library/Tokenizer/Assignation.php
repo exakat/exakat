@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class Assignation extends TokenAuto {
-    function check() {
+    function _check() {
 
         $this->conditions = array(0 => array('code' => array('='),
                                              'atom' => 'none'),
@@ -11,9 +11,9 @@ class Assignation extends TokenAuto {
                                   
         );
         
-        $this->actions = array('addEdge'    => array( '1' => 'RIGHT',
+        $this->actions = array('makeEdge'    => array( '1' => 'RIGHT',
                                                       '-1' => 'LEFT'),
-                               'changeNext' => array(1, -1),
+//                               'changeNext' => array(1, -1),
                                'atom'       => 'Assignation',
                                'cleansemicolon' => 1);
 

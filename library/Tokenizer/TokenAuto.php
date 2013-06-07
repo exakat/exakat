@@ -73,6 +73,7 @@ class TokenAuto extends Token {
         
         if (isset($actions['cleansemicolon']) && $actions['cleansemicolon']) {
             $qactions[] = "
+/* cleansemicolon */
     it.out('NEXT').has('code',';').has('atom', null).each{ 
         g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
         g.removeEdge(it.inE('NEXT').next());
@@ -83,35 +84,16 @@ class TokenAuto extends Token {
         }
         
         if (isset($actions['atom'])) {
-           $qactions[] = "    it.setProperty('atom', '".$actions['atom']."')";
+           $qactions[] = " /* atom */   it.setProperty('atom', '".$actions['atom']."')";
         }
 
-        if (isset($actions['dropNext'])) {
-            foreach($actions['dropNext'] as $destination) {
-                if ($destination > 0) {
-                    $d = str_repeat(".out('NEXT')", $destination);
-                    $qactions[] = "
-f = it".$d.".next();
-g.addEdge(it, f.out('NEXT').next(), 'NEXT');
-
-g.removeVertex(f);
-
-";
-                } elseif ($destination < 0) {
-                    $d = str_repeat(".in('NEXT')", abs($destination));
-                    $qactions[] = "g.addEdge(it, it".$d.".next(), '$label')";
-                } else {
-                    print "Ignoring addEdge for 0\n";
-                }
-            }
-        }
-        
         if (isset($actions['makeEdge'])) {
             foreach($actions['makeEdge'] as $destination => $label) {
-                print "$label\n";
+                print "makeEdge : $label\n";
                 if ($destination > 0) {
                     $d = str_repeat(".out('NEXT')", $destination);
                     $qactions[] = "
+/* makeEdge out */
 f =  it".$d.".next();
 g.addEdge(it, f, '$label');
 g.removeEdge(f.inE('NEXT').next());
@@ -122,6 +104,7 @@ g.removeEdge(f.outE('NEXT').next());
                 } elseif ($destination < 0) {
                     $d = str_repeat(".in('NEXT')", abs($destination));
                     $qactions[] = "
+/* makeEdge in */
 f =  it".$d.".next();
 g.addEdge(it, f, '$label');
 g.removeEdge(f.outE('NEXT').next());
@@ -130,6 +113,32 @@ g.addEdge(f.in('NEXT').next(), it, 'NEXT');
 g.removeEdge(f.inE('NEXT').next());
 
 ";
+                } else {
+                    print "Ignoring addEdge for 0\n";
+                }
+            }
+        }
+
+        if (isset($actions['dropNext'])) {
+            foreach($actions['dropNext'] as $destination) {
+                if ($destination > 0) {
+                    $d = str_repeat(".out('NEXT')", $destination);
+                    $qactions[] = "
+/* dropNext out */
+f = [];
+it".$d.".fill(f);
+h = it;
+f.each{
+    i = it; 
+    it.out('NEXT').each{ g.addEdge(h, it, 'NEXT');}
+
+    g.removeVertex(i);
+}
+
+";
+                } elseif ($destination < 0) {
+                    $d = str_repeat(".in('NEXT')", abs($destination));
+                    $qactions[] = "g.addEdge(it, it".$d.".next(), '$label')";
                 } else {
                     print "Ignoring addEdge for 0\n";
                 }

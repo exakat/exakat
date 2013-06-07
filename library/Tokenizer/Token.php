@@ -11,9 +11,14 @@ class Token {
         Token::$client = $client; 
     }
     
-    function check() {
+    final function check() {
         
-        print get_class($this). " has no check yet\n";
+        print get_class($this)." check \n";
+        if (!method_exists($this, '_check')) {
+            print get_class($this). " has no check yet\n";
+        } else {
+            return $this->_check();
+        }
 
         return true;
     }

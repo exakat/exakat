@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class Sign extends TokenAuto {
-    function check() {
+    function _check() {
 
         $this->conditions = array( -1 => array('begin' => true), 
                                    0 => array('token' => array('+', '-'),

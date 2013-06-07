@@ -3,18 +3,17 @@
 namespace Tokenizer;
 
 class _Array extends TokenAuto {
-    function check() {
+    function _check() {
         $this->conditions = array( 0 => array('atom' => array('Variable', 'Array')),
                                    1 => array('code' => '['),
                                    3 => array('code' => ']'),
                                  );
         
-        $this->actions = array('makeEdge'   => array( '1' => 'INDEX'),
-                               'dropNext'   => array(1, 2),
+        $this->actions = array('makeEdge'   => array( '2' => 'INDEX'),
+                               'dropNext'   => array(1),
                                'atom'       => 'Array',
                                );
-                               
-//        $this->printQuery();
+
         $r = $this->checkAuto(); 
 
         return $r;

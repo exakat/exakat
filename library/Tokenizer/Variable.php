@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class Variable extends TokenAuto {
-    function check() {
+    function _check() {
         $this->conditions = array(0 => array('token' => 'T_VARIABLE',
                                              'atom' => 'none')
                                   
