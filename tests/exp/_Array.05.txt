@@ -3,6 +3,6 @@
 Label : CODE
   $_array
   Label : INDEX
-    $_array
-    Label : INDEX
-      1
+    'a'
+  Label : INDEX
+    $x

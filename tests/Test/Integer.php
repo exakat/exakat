@@ -9,5 +9,6 @@ spl_autoload_register('Autoload::autoload_phpunit');
 class Integer extends Tokenizeur {
     /* 1 methods */
     public function testInteger01()  { $this->generic_test('Integer.01'); }
+    public function testInteger02()  { $this->generic_test('Integer.02'); }
 }
 ?>
