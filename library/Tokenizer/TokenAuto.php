@@ -81,10 +81,21 @@ class TokenAuto extends Token {
 
         g.removeVertex(it);
     }";
+            unset($actions['cleansemicolon']);
         }
         
         if (isset($actions['atom'])) {
            $qactions[] = " /* atom */   it.setProperty('atom', '".$actions['atom']."')";
+           unset($actions['atom']);
+        }
+        
+        if (isset($actions['property'])) {
+            if (is_array($actions['property']) && !empty($actions['property'])) {
+                foreach($actions['property'] as $name => $value) {
+                    $qactions[] = " /* property */   it.setProperty('$name', '$value')";
+                }
+            }
+            unset($actions['property']);
         }
 
         if (isset($actions['makeEdge'])) {
@@ -117,6 +128,7 @@ g.removeEdge(f.inE('NEXT').next());
                     print "Ignoring addEdge for 0\n";
                 }
             }
+            unset($actions['makeEdge']);
         }
 
         if (isset($actions['dropNext'])) {
@@ -143,6 +155,11 @@ f.each{
                     print "Ignoring addEdge for 0\n";
                 }
             }
+            unset($actions['dropNext']);
+        }
+        
+        if ($remainder = array_keys($actions)) {
+            print "Warning : the following ".count($remainder)." actions were ignored : ".join(', ', $remainder)."\n";
         }
 
         return $qactions;
