@@ -33,6 +33,7 @@ class Framework_AllTests
             '\\Test\\Assignation',
             '\\Test\\Sign',
             '\\Test\\_Array',
+            '\\Test\\Parenthesis',
             '\\Test\\Integer',
             '\\Test\\Not',
             '\\Test\\String',

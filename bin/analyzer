@@ -29,6 +29,7 @@ $classes = array(
     'Assignation',
     'Multiplication',
     'Addition', 
+    'Parenthesis',
     'Phpcode',
                 );
 
