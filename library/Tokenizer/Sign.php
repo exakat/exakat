@@ -5,10 +5,11 @@ namespace Tokenizer;
 class Sign extends TokenAuto {
     function _check() {
 
+        $operands = array('Integer', 'Sign', 'String', 'Variable', '_Array');
         $this->conditions = array( -1 => array('begin' => true), 
                                    0  => array('token' => array('+', '-'),
                                                'atom' => 'none'),
-                                   1  => array('atom' => array('Integer', 'Sign')),
+                                   1  => array('atom' => $operands),
                                  );
         
         $this->actions = array('makeEdge'    => array( '1' => 'SIGN'),
@@ -19,7 +20,7 @@ class Sign extends TokenAuto {
         $this->conditions = array( -1 => array('token' => array('+', '-', '*', '/', '%' )), 
                                    0  => array('token' => array('+', '-'),
                                                'atom' => 'none'),
-                                   1  => array('atom' => array('Integer', 'Sign')),
+                                   1  => array('atom' => $operands),
                                  );
         
         $this->actions = array('makeEdge'    => array( '1' => 'SIGN'),

@@ -34,6 +34,7 @@ class Framework_AllTests
             '\\Test\\Sign',
             '\\Test\\_Array',
             '\\Test\\Parenthesis',
+            '\\Test\\Concatenation',
             '\\Test\\Integer',
             '\\Test\\Not',
             '\\Test\\String',

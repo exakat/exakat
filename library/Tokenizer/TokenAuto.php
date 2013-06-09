@@ -97,6 +97,20 @@ class TokenAuto extends Token {
             }
             unset($actions['property']);
         }
+        
+        if (isset($actions['order']) && is_array($actions['order'])) {
+            foreach($actions['order'] as $offset => $order) {
+                if ($offset > 0) {
+                    $d = str_repeat(".out('NEXT')", $offset);
+                } elseif ($offset < 0) {
+                    $d = str_repeat(".in('NEXT')", abs($offset));
+                } else {
+                    print "Ignoring order 0\n";
+                }
+                $qactions[] = " /* order */ it$d.each{ it.setProperty('order', $order);}";
+            }
+            unset($actions['order']);
+        }        
 
         if (isset($actions['makeEdge'])) {
             foreach($actions['makeEdge'] as $destination => $label) {
@@ -156,6 +170,27 @@ f.each{
                 }
             }
             unset($actions['dropNext']);
+        }
+
+        if (isset($actions['mergeNext']) && $actions['mergeNext']) {
+            $qactions[] = " /* mergeNext */ 
+f = it;
+c = it.out('CONCAT').out('CONCAT').count();
+it.out('CONCAT').hasNot('order', null).each{
+    it.setProperty('order', it.order + c);
+}
+
+it.as('origin').out('CONCAT').has('atom','Concatenation').each{
+    it.inE('CONCAT').each{ g.removeEdge(it);}
+    
+    it.out('CONCAT').each{ 
+        it.inE('CONCAT').each{ g.removeEdge(it);}
+        g.addEdge(f, it, 'CONCAT');
+    };
+    g.removeVertex(it);    
+}
+            ";
+            unset($actions['mergeNext']);
         }
         
         if ($remainder = array_keys($actions)) {

@@ -27,6 +27,7 @@ $classes = array(
     '_Array',
     'Not',
     'Assignation',
+    'Concatenation',
     'Multiplication',
     'Addition', 
     'Parenthesis',
