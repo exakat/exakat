@@ -1,28 +1,22 @@
 <?php
 
-Label : NEXT
-  -
+Label : CODE
+  +
   Label : RIGHT
-    1
-  Label : NEXT
-    +
-    Label : NEXT
-      (
-      Label : NEXT
-        -
-        Label : RIGHT
-          1
-        Label : NEXT
-          )
-          Label : NEXT
-            ?>
-            Label : NEXT
-              /**/
-        Label : LEFT
-          1
+    (
+    Label : CODE
+      -
+      Label : RIGHT
+        1
+      Label : LEFT
+        1
   Label : LEFT
-    +
+    -
     Label : RIGHT
       1
     Label : LEFT
-      1
+      +
+      Label : RIGHT
+        1
+      Label : LEFT
+        1
