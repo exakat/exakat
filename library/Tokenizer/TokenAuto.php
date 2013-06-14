@@ -163,8 +163,7 @@ f.each{
 
 ";
                 } elseif ($destination < 0) {
-                    $d = str_repeat(".in('NEXT')", abs($destination));
-                    $qactions[] = "g.addEdge(it, it".$d.".next(), '$label')";
+                    die('No support for negative dropNext');
                 } else {
                     print "Ignoring addEdge for 0\n";
                 }
