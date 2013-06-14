@@ -25,6 +25,7 @@ $classes = array(
     'String',
     'Sign',
     '_Array',
+    'Object',
     'Not',
     'Assignation',
     'Concatenation',
