@@ -2,13 +2,13 @@
 
 namespace Tokenizer;
 
-class Addition extends TokenAuto {
+class Comparison extends TokenAuto {
     function _check() {
-        $operands = array('Integer', 'Addition', 'Variable', 'Multiplication','Sign','Not', 'Parenthesis', 'Object', 'Array', 'Concatenation', 'Float',
-                          'String', );
+    
+        $operands = array('Variable', 'Array', 'Object', 'Integer', 'Sign', 'Float', );
         
         $this->conditions = array(-1 => array('atom' => $operands ),
-                                   0 => array('code' => array('+','-'),
+                                   0 => array('code' => array('==','!='),
                                              'atom' => 'none'),
                                    1 => array('atom' => $operands),
         );
@@ -16,15 +16,22 @@ class Addition extends TokenAuto {
         $this->actions = array('makeEdge'    => array('1' => 'RIGHT',
                                                       '-1' => 'LEFT'
                                                       ),
-                               'atom'       => 'Addition',
+                               'atom'       => 'Comparaison',
                                );
-        return $this->checkAuto();
+                               
+//        $this->printQuery();
+
+        $r = $this->checkAuto(); 
+
+        return $r;
     }
 
+    
     function reserve() {
-        Token::$reserved[] = '->';
+        Token::$reserved[] = '==';
         
         return true;
     }
 }
+
 ?>

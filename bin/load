@@ -71,7 +71,7 @@ foreach($tokens as $id => $token) {
                                      ->setProperty('code', $token[1])
                                      ->setProperty('line', $token[2])
                                      ->setProperty('file', $file);
-        if (in_array($token[0], array(T_OPEN_TAG))) {
+        if (in_array($token[0], array(T_OPEN_TAG, T_IS_EQUAL))) {
             $T[$id]->setProperty('begin', true)->save();
         }
                                      
@@ -87,7 +87,7 @@ foreach($tokens as $id => $token) {
                                      ->setProperty('line', $line)
                                      ->setProperty('file', $file)->save();
 
-        if (in_array($token, array('(','{','.','+','-','*','/','%'))) {
+        if (in_array($token, array('(','{','.','+','-','*','/','%', '=='))) {
             $T[$id]->setProperty('begin', true)->save();
         }
                                      

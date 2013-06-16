@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Sign extends TokenAuto {
     function _check() {
 
-        $operands = array('Integer', 'Sign', 'String', 'Variable', '_Array', 'Float');
+        $operands = array('Integer', 'Sign', 'String', 'Variable', '_Array', 'Float', 'Boolean');
         $this->conditions = array( -1 => array('begin' => true), 
                                    0  => array('token' => array('+', '-'),
                                                'atom' => 'none'),
