@@ -20,5 +20,6 @@ class Addition extends Tokenizeur {
     public function testAddition10()  { $this->generic_test('Addition.10'); }
     public function testAddition11()  { $this->generic_test('Addition.11'); }
     public function testAddition12()  { $this->generic_test('Addition.12'); }
+    public function testAddition13()  { $this->generic_test('Addition.13'); }
 }
 ?>

@@ -13,5 +13,6 @@ class _Array extends Tokenizeur {
     public function test_Array03()  { $this->generic_test('_Array.03'); }
     public function test_Array04()  { $this->generic_test('_Array.04'); }
     public function test_Array05()  { $this->generic_test('_Array.05'); }
+    public function test_Array06()  { $this->generic_test('_Array.06'); }
 }
 ?>

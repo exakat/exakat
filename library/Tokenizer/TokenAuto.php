@@ -42,8 +42,12 @@ class TokenAuto extends Token {
         }
         
         if (count(Token::$reserved) != 0) {
-            $cdt['next'] = max(array_keys($this->conditions));
-            $qcdts[] = "filter{!(it.token in ['".join("', '", Token::$reserved)."'])}";
+            $cdt = array();
+            $cdt['next'] = max(array_keys($this->conditions)) + 1;
+            $cdt['filterOut'] = Token::$reserved;
+                        
+            $qcdts = array_merge($qcdts, $this->readConditions($cdt));
+            $qcdts[] = "back('origin')";
         }
         
         $query = $query.".".join('.', $qcdts);
@@ -191,6 +195,7 @@ it.as('origin').out('CONCAT').has('atom','Concatenation').each{
             ";
             unset($actions['mergeNext']);
         }
+
         
         if ($remainder = array_keys($actions)) {
             print "Warning : the following ".count($remainder)." actions were ignored : ".join(', ', $remainder)."\n";
@@ -255,6 +260,16 @@ it.as('origin').out('CONCAT').has('atom','Concatenation').each{
                 $qcdts[] = "has('atom', '".$cdt['atom']."')";
             }
             unset($cdt['atom']);
+        }
+
+        if (isset($cdt['filterOut'])) {
+            if (is_string($cdt['filterOut'])) {
+                $qcdts[] = "filter{it.token != '".$cdt['filterOut']."' }";
+            } else {
+                $qcdts[] = "filter{!(it.token in ['".join("', '", $cdt['filterOut'])."'])}";
+            }
+
+            unset($cdt['filterOut']);
         }
 
         if ($remainder = array_keys($cdt)) {

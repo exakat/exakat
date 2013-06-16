@@ -1,20 +1,12 @@
 <?php
 
-Label : NEXT
-  echo
-  Label : NEXT
+Label : CODE
+  .
+  Label : CONCAT
     -
-    Label : NEXT
+    Label : SIGN
+      'b'
+  Label : CONCAT
+    -
+    Label : SIGN
       'a'
-      Label : NEXT
-        .
-        Label : NEXT
-          -
-          Label : NEXT
-            'b'
-            Label : NEXT
-              ;
-              Label : NEXT
-                ?>
-                Label : NEXT
-                  /**/

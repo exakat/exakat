@@ -18,5 +18,6 @@ class Multiplication extends Tokenizeur {
     public function testMultiplication08()  { $this->generic_test('Multiplication.08'); }
     public function testMultiplication09()  { $this->generic_test('Multiplication.09'); }
     public function testMultiplication10()  { $this->generic_test('Multiplication.10'); }
+    public function testMultiplication11()  { $this->generic_test('Multiplication.11'); }
 }
 ?>

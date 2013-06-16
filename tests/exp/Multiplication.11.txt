@@ -3,6 +3,6 @@
 Label : CODE
   /
   Label : RIGHT
-    34
+    1.4
   Label : LEFT
-    '2'
+    '1'

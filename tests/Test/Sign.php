@@ -18,5 +18,7 @@ class Sign extends Tokenizeur {
     public function testSign08()  { $this->generic_test('Sign.08'); }
     public function testSign09()  { $this->generic_test('Sign.09'); }
     public function testSign10()  { $this->generic_test('Sign.10'); }
+    public function testSign11()  { $this->generic_test('Sign.11'); }
+    public function testSign12()  { $this->generic_test('Sign.12'); }
 }
 ?>

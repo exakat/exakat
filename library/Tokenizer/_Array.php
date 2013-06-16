@@ -4,7 +4,7 @@ namespace Tokenizer;
 
 class _Array extends TokenAuto {
     function _check() {
-        $this->conditions = array( 0 => array('atom' => array('Variable', 'Array')),
+        $this->conditions = array( 0 => array('atom' => array('Variable', 'Array', 'Object' )),
                                    1 => array('code' => '['),
                                    2 => array('atom' => 'yes'),
                                    3 => array('code' => ']'),
@@ -18,6 +18,13 @@ class _Array extends TokenAuto {
         $r = $this->checkAuto(); 
 
         return $r;
+    }
+
+    
+    function reserve() {
+        Token::$reserved[] = '[';
+        
+        return true;
     }
 }
 
