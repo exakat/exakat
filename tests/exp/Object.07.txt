@@ -1,0 +1,14 @@
+<?php
+
+Label : CODE
+  ->
+  Label : OBJECT
+    ->
+    Label : OBJECT
+      $x
+    Label : PROPERTY
+      a
+  Label : PROPERTY
+    b
+  Label : INDEX
+    1

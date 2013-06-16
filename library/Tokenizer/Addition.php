@@ -20,5 +20,11 @@ class Addition extends TokenAuto {
                                );
         return $this->checkAuto();
     }
+
+    function reserve() {
+        Token::$reserved[] = '->';
+        
+        return true;
+    }
 }
 ?>

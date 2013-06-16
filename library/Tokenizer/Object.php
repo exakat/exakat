@@ -4,7 +4,9 @@ namespace Tokenizer;
 
 class Object extends TokenAuto {
     function _check() {
-        $this->conditions = array( -1 => array('atom' => 'Variable'), 
+        
+        $operands = array('Variable', 'Object', '_Array');
+        $this->conditions = array( -1 => array('atom' => $operands), 
                                     0 => array('code' => '->'),
                                     1 => array('atom' => 'none')
                                  );

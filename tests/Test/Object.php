@@ -12,5 +12,8 @@ class Object extends Tokenizeur {
     public function testObject02()  { $this->generic_test('Object.02'); }
     public function testObject03()  { $this->generic_test('Object.03'); }
     public function testObject04()  { $this->generic_test('Object.04'); }
+    public function testObject05()  { $this->generic_test('Object.05'); }
+    public function testObject06()  { $this->generic_test('Object.06'); }
+    public function testObject07()  { $this->generic_test('Object.07'); }
 }
 ?>
