@@ -4,7 +4,7 @@ namespace Tokenizer;
 
 class Concatenation extends TokenAuto {
     function _check() {
-        $operands = array('String', 'Integer','Variable','_Array','Concatenation', 'Sign');
+        $operands = array('String', 'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign');
         
         $this->conditions = array(-1 => array('atom' => $operands ),
                                   0 => array('code' => '.',

@@ -4,7 +4,7 @@ namespace Tokenizer;
 
 class Addition extends TokenAuto {
     function _check() {
-        $operands = array('Integer', 'Addition', 'Variable', 'Multiplication','Sign','Not', 'Parenthesis', 'Object');
+        $operands = array('Integer', 'Addition', 'Variable', 'Multiplication','Sign','Not', 'Parenthesis', 'Object', 'Array', 'Concatenation', 'Float' );
         
         $this->conditions = array(-1 => array('atom' => $operands ),
                                   0 => array('code' => array('+','-'),
