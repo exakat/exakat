@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  +
+  Label : RIGHT
+    3
+  Label : LEFT
+    .
+    Label : CONCAT
+      2
+    Label : CONCAT
+      1

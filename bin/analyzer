@@ -22,16 +22,17 @@ $begin_time = microtime(true);
 $classes = array(
     'Variable', 
     'Integer',
+    'Float',
     'String',
     'Sign',
     '_Array',
     'Object',
     'Not',
-    'Assignation',
     'Concatenation',
     'Multiplication',
     'Addition', 
     'Parenthesis',
+    'Assignation',
     'Phpcode',
                 );
 

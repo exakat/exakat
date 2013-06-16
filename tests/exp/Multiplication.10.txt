@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  *
+  Label : RIGHT
+    $x
+    Label : INDEX
+      2
+  Label : LEFT
+    $x
+    Label : INDEX
+      1
