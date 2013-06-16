@@ -64,8 +64,13 @@ if (FILE) {
         $csv[0] = $key;
         
         foreach($all as $id => $a) {
-            if ($a < $key) { continue; }
-            $csv[$id + 1] = isset($row[$a]) ? $row[$a] : '0';
+            if ($a <= $key) { continue; }
+            if ( isset($row[$a])) {
+                $csv[$id + 1] = $row[$a];
+            } else {
+                $csv[$id + 1] = 0;
+                print "$a <=> $key\n";
+            }
         }
         $csv[$count] = 'N/A';
         
