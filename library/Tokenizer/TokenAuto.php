@@ -235,6 +235,15 @@ it.as('origin').out('CONCAT').has('atom','Concatenation').each{
             unset($cdt['code']);
         }
 
+        if (isset($cdt['icode'])) {
+            if (is_array($cdt['icode']) && !empty($cdt['icode'])) {
+                $qcdts[] = "hasNot('code', null).filter{it.code.toLowerCase() in ['".join("', '", $cdt['icode'])."']}";
+            } else {
+                $qcdts[] = "hasNot('code', null).filter{it.code.toLowerCase() == '".$cdt['icode']."'}";
+            }
+            unset($cdt['icode']);
+        }
+
         if (isset($cdt['notcode']) && is_array($cdt['notcode']) && !empty($cdt['notcode'])) {
             $qcdts[] = "filter{!(it.code in ['".join("', '", $cdt['notcode'])."'])}";
             unset($cdt['notcode']);
