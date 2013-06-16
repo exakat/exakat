@@ -1,0 +1,101 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$client = new Client();
+
+$args = $argv;
+if ($id = array_search('-o', $args)) {
+    define('FILE', $args[$id + 1]);
+} else {
+    define('FILE', false);
+}
+
+$queryTemplate = "g.V.except([g.v(0)]).hasNot('atom',null)";
+$params = array('type' => 'IN');
+$query = new Gremlin\Query($client, $queryTemplate, $params);
+$vertices = $query->getResultSet();
+
+$files = array();
+foreach($vertices as $v) {
+   @$files[$v[0]->getProperty('file')][$v[0]->getProperty('atom')]++;
+}
+
+$final = array();
+$c = 0;
+$all = array();
+foreach($files as $file) {
+    $c++;
+    $r = combine(array_keys($file));
+    
+    foreach($r as $s) {
+        list($x, $y) = $s;
+        
+        @$final[$x][$y]++;
+        $all[] = $x;
+        $all[] = $y;
+    }
+}
+
+$all = array_unique($all);
+sort($all);
+ksort($final);
+
+if (FILE) {
+    $fp = fopen(FILE, 'w+');
+    
+    list($key, $value) = each($final); 
+    $row = array_merge(array(''), $all);
+    $last = $row[count($row) - 1];
+    fputcsv($fp,$row);
+
+    $count = 0;
+    foreach($final as $key => $row) {
+        $count++;
+        $csv = array_fill(0, count($all), '');
+        $csv[0] = $key;
+        
+        foreach($all as $id => $a) {
+            if ($a < $key) { continue; }
+            $csv[$id + 1] = isset($row[$a]) ? $row[$a] : '0';
+        }
+        $csv[$count] = 'N/A';
+        
+        fputcsv($fp,$csv);
+    }
+
+    $csv = array_fill(0, count($all), '');
+    $csv[0] = $last;
+    $csv[$count + 1] = '0';
+    fputcsv($fp,$csv);
+    
+    fclose($fp);
+} else {
+    print $text;
+}
+
+
+function combine($array) {
+    $r = array();
+    
+    sort($array);
+    $x = array_shift($array);
+    foreach($array as $a) {
+        $r[] = array($x, $a);
+    }
+    
+    if (count($array) > 1) {
+        $r = array_merge($r, combine($array));
+    }
+    
+    return $r;
+}
+?>
