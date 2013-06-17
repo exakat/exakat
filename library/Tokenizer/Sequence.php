@@ -4,7 +4,8 @@ namespace Tokenizer;
 
 class Sequence extends TokenAuto {
     function _check() {
-        $operands = array('Addition', 'Multiplication', 'Sequence', 'String', 'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign');
+        $operands = array('Addition', 'Multiplication', 'Sequence', 'String', 'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
+                          'Functioncall', );
         
         
         // @note instructions separated by ; 

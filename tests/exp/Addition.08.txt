@@ -1,34 +1,28 @@
 <?php
 
-Label : NEXT
-  +
-  Label : RIGHT
-    7
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
     ;
-    Label : NEXT
+    Label : ELEMENT
+      +
+      Label : RIGHT
+        6
+      Label : LEFT
+        5
+    Label : ELEMENT
       +
       Label : RIGHT
         4
-      Label : NEXT
-        ;
-        Label : NEXT
-          +
-          Label : RIGHT
-            6
-          Label : NEXT
-            ;
-            Label : NEXT
-              ?>
-              Label : NEXT
-                /**/
-          Label : LEFT
-            5
       Label : LEFT
         3
-  Label : LEFT
-    +
-    Label : RIGHT
-      2
-    Label : LEFT
-      1
+    Label : ELEMENT
+      +
+      Label : RIGHT
+        7
+      Label : LEFT
+        +
+        Label : RIGHT
+          2
+        Label : LEFT
+          1

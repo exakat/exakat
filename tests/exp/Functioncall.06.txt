@@ -1,10 +1,8 @@
 <?php
 
 Label : CODE
-  -
-  Label : SIGN
+  ;
+  Label : ELEMENT
     f
     Label : ARGUMENTS
       void
-      Label : ARGUMENT
-        1

@@ -1,9 +1,4 @@
 <?php
 
-Label : NEXT
+Label : CODE
   FALSE
-  Label : NEXT
-    ?>
-
-    Label : NEXT
-      /**/

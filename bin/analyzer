@@ -33,6 +33,8 @@ $classes = array(
     'Comparison',
     'Multiplication',
     'Addition', 
+    'Arguments',
+    'Functioncall',
     'Parenthesis',
     'Assignation',
     'Sequence',

@@ -149,6 +149,53 @@ g.removeEdge(f.inE('NEXT').next());
             unset($actions['makeEdge']);
         }
 
+        if (isset($actions['insertEdge'])) {
+            foreach($actions['insertEdge'] as $destination => $config) {
+            if ($destination == 0) {
+                list($atom, $link) = each($config);
+                display("addEdge : $atom\n");
+                $qactions[] = "
+/* insertEdge out */
+x = g.addVertex(null, [code:'void', atom:'$atom']);
+f = it.out('NEXT').out('NEXT').next();
+
+g.addEdge(it, x, 'NEXT');
+g.addEdge(x, f, 'NEXT');
+g.addEdge(x, it.out('NEXT').next(), '$link');
+g.removeEdge(it.outE('NEXT').next());
+g.removeEdge(x.out('$link').outE('NEXT').next());
+
+";
+            } else {
+                print "No support for insertEdge with destination 0 or less\n";
+            }
+            unset($actions['insertEdge']);
+            }
+        }
+
+
+        if (isset($actions['addEdge'])) {
+            foreach($actions['addEdge'] as $destination => $config) {
+            if ($destination == 0) {
+                list($atom, $link) = each($config);
+                display("addEdge : $atom\n");
+                $qactions[] = "
+/* addEdge out */
+x = g.addVertex(null, [code:'void', atom:'$atom']);
+f = it.out('NEXT').next();
+
+g.removeEdge(it.outE('NEXT').next());
+g.addEdge(it, x, 'NEXT');
+g.addEdge(x,  f, 'NEXT');
+
+";
+            } else {
+                print "No support for addEdge with destination 0 or less\n";
+            }
+            unset($actions['addEdge']);
+            }
+        }
+        
         if (isset($actions['dropNext'])) {
             foreach($actions['dropNext'] as $destination) {
                 if ($destination > 0) {
@@ -284,7 +331,8 @@ it.as('origin').out('$link').has('atom','$atom').each{
         }
 
         if ($remainder = array_keys($cdt)) {
-            print "Warning : the following ".count($remainder)." conditions were ignored : ".join(', ', $remainder)."\n";
+            print "Warning : the following ".count($remainder)." conditions were ignored : ".join(', ', $remainder)." (".get_class($this).")\n";
+            print_r($cdt);
         }
         
         return $qcdts;

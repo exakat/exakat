@@ -1,14 +1,10 @@
 <?php
 
-Label : NEXT
+Label : CODE
   -
-  Label : NEXT
+  Label : SIGN
     f
-    Label : NEXT
-      (
-      Label : CODE
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         8
-      Label : NEXT
-        ?>
-        Label : NEXT
-          /**/
