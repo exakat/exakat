@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    'd'
+  Label : ELEMENT
+    +
+    Label : RIGHT
+      6
+    Label : LEFT
+      +
+      Label : RIGHT
+        5
+      Label : LEFT
+        +
+        Label : RIGHT
+          4
+        Label : LEFT
+          +
+          Label : RIGHT
+            3
+          Label : LEFT
+            +
+            Label : RIGHT
+              2
+            Label : LEFT
+              1

@@ -35,6 +35,7 @@ $classes = array(
     'Addition', 
     'Parenthesis',
     'Assignation',
+    'Sequence',
     'Phpcode',
 );
 

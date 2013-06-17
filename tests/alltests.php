@@ -33,6 +33,7 @@ class Framework_AllTests
             '\\Test\\Assignation',
             '\\Test\\Sign',
             '\\Test\\_Array',
+            '\\Test\\Sequence',
             '\\Test\\Parenthesis',
             '\\Test\\Concatenation',
             '\\Test\\Object',
