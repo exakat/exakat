@@ -176,19 +176,21 @@ f.each{
         }
 
         if (isset($actions['mergeNext']) && $actions['mergeNext']) {
+            list($atom, $link) = $actions['mergeNext'];
+            
             $qactions[] = " /* mergeNext */ 
 f = it;
-c = it.out('CONCAT').out('CONCAT').count();
-it.out('CONCAT').hasNot('order', null).each{
+c = it.out('$link').out('$link').count();
+it.out('$link').hasNot('order', null).each{
     it.setProperty('order', it.order + c);
 }
 
-it.as('origin').out('CONCAT').has('atom','Concatenation').each{
-    it.inE('CONCAT').each{ g.removeEdge(it);}
+it.as('origin').out('$link').has('atom','$atom').each{
+    it.inE('$link').each{ g.removeEdge(it);}
     
-    it.out('CONCAT').each{ 
-        it.inE('CONCAT').each{ g.removeEdge(it);}
-        g.addEdge(f, it, 'CONCAT');
+    it.out('$link').each{ 
+        it.inE('$link').each{ g.removeEdge(it);}
+        g.addEdge(f, it, '$link');
     };
     g.removeVertex(it);    
 }

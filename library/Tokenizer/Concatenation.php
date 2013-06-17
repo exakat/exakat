@@ -18,7 +18,7 @@ class Concatenation extends TokenAuto {
                                'order'    => array('1'  => '2',
                                                    '-1' => '1'
                                                       ),
-                               'mergeNext'  => true, 
+                               'mergeNext'  => array('Concatenation', 'CONCAT'), 
                                'atom'       => 'Concatenation',
                                );
         
