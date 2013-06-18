@@ -34,7 +34,7 @@ $vertices = $query->getResultSet();
 
 $V = array();
 foreach($vertices as $v) {
-    $V[$v[0]->getId()] =  $v[0]->getProperty('code');
+    $V[$v[0]->getId()] =  $v[0]->getProperties();
     
     if ($v[0]->getProperty('root')) {
         $root = $v[0]->getId();
@@ -74,7 +74,7 @@ if (FORMAT == 'DOT') {
 function display_text($V, $E, $root, $level = 0) {
     $r = '';
     
-    $r .= str_repeat('  ', $level).$V[$root]."\n";
+    $r .= str_repeat('  ', $level).$V[$root]['code']."\n";
     if (isset($E[$root])) {
         foreach($E[$root] as $id => $label) {
             $r .= str_repeat('  ', $level)."Label : $label\n".display_text($V, $E, $id, $level + 1);
@@ -88,12 +88,22 @@ function display_dot($V, $E, $root, $level = 0) {
     $r = '';
 
     foreach($V as $id => $v) {
-        $r .= $id." [label=\"".$v."\"];\n";
+         $R = $id." [label=\"".addslashes($v['code'])."\"";
+         if (isset($v['atom'])) {
+            $R .= " shape=box ";
+         }
+         $R .= "];\n";
+         
+         $r .= $R;
     }
 
     foreach($E as $start => $e) {
         foreach($e as $end => $label) {
-            $r .= "$start -> $end [label=\"$label\"];\n";
+            if ($label == 'NEXT') {
+                $r .= "$start -> $end [label=\"$label\"  color=green];\n";
+            } else {
+                $r .= "$start -> $end [label=\"$label\"];\n";
+            }
         }
     }
 
