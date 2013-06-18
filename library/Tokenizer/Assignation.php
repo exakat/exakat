@@ -5,10 +5,11 @@ namespace Tokenizer;
 class Assignation extends TokenAuto {
     function _check() {
 
-        $operands = array('Integer', 'Multiplication', 'Addition', 'Not', 'Array', 'Float', 'Concatenation', 'Object',
-                          'Concatenation', 'Parenthesis', 'Noscream', );
+        $operands = array('Integer', 'Multiplication', 'Addition', 'Not',
+                          'Array', 'Float', 'Concatenation', 'Property',
+                          'Parenthesis', 'Noscream', );
         
-        $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Object')),
+        $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property')),
                                   0 => array('code' => array('='),
                                              'atom' => 'none'),
                                   1 => array('atom' => $operands),

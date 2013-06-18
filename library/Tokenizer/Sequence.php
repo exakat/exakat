@@ -11,7 +11,7 @@ class Sequence extends TokenAuto {
         
         
         // @note instructions separated by ; 
-        $this->conditions = array(-2 => array('filterOut' => array('T_ECHO', 'T_DOT', 'T_AT')), 
+        $this->conditions = array(-2 => array('filterOut' => array('T_ECHO', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG')), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => ';',
                                              'atom' => 'none'),
@@ -30,7 +30,8 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note End of PHP script
-        $this->conditions = array(-1 => array('atom' => $operands ),
+        $this->conditions = array(-2 => array('filterOut' => array('T_ECHO', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR')), 
+                                  -1 => array('atom' => $operands ),
                                    0 => array('code' => ';',
                                              'atom' => 'none'),
                                    1 => array('token' => 'T_CLOSE_TAG',

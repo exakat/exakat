@@ -3,12 +3,10 @@
 Label : CODE
   f
   Label : ARGUMENTS
-    void
+    ,
     Label : ARGUMENT
-      ,
-      Label : ARGUMENT
-        3
-      Label : ARGUMENT
-        2
-      Label : ARGUMENT
-        1
+      3
+    Label : ARGUMENT
+      2
+    Label : ARGUMENT
+      1

@@ -4,7 +4,7 @@ namespace Tokenizer;
 
 class _Array extends TokenAuto {
     function _check() {
-        $this->conditions = array( 0 => array('atom' => array('Variable', 'Array', 'Object' )),
+        $this->conditions = array( 0 => array('atom' => array('Variable', 'Array', 'Property' )),
                                    1 => array('code' => '['),
                                    2 => array('atom' => 'yes'),
                                    3 => array('code' => ']'),

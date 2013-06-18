@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Comparison extends TokenAuto {
     function _check() {
     
-        $operands = array('Variable', 'Array', 'Object', 'Integer', 'Sign', 'Float', );
+        $operands = array('Variable', 'Array', 'Property', 'Integer', 'Sign', 'Float', );
         $operators = array('==','!=', '>=', '<=', '===', '!==' );
         
         $this->conditions = array(-1 => array('atom' => $operands ),

@@ -5,7 +5,8 @@ namespace Tokenizer;
 class Multiplication extends TokenAuto {
     function _check() {
 
-        $operands = array('Integer', 'Addition', 'Variable', 'Multiplication','Sign','Not', 'Parenthesis', 'Object', 'Array', 'Concatenation', 'Float',
+        $operands = array('Integer', 'Addition', 'Variable', 'Multiplication','Sign','Not',
+                          'Parenthesis', 'Property', 'Array', 'Concatenation', 'Float',
                           'String', );
         
         $this->conditions = array(-1 => array('atom' => $operands ),

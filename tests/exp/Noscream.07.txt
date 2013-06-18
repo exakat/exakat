@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    @
+    Label : AT
+      $x
+      Label : INDEX
+        1
