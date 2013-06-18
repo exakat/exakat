@@ -48,20 +48,21 @@ $edges = $query->getResultSet();
 
 // load new tokens
 $line = 0;
-$TPHP = array(";" => 800,
-              "=" => 801,
-              "+" => 802,
-              "-" => 803,
-              "*" => 804,
-              "/" => 805,
-              "%" => 806,
-              "(" => 807,
-              ")" => 808,
-              "!" => 809,
-              "[" => 810,
-              "]" => 811,
-              '.' => 812,
-              ',' => 813,
+$TPHP = array(";" => 'T_SEMICOLUMN',
+              "=" => 'T_EQUAL',
+              "+" => 'T_PLUS',
+              "-" => 'T_MINUS',
+              "*" => 'T_STAR',
+              "/" => 'T_SLASH',
+              "%" => 'T_PERCENTAGE',
+              "(" => 'T_OPEN_PARENTHESIS',
+              ")" => 'T_CLOSE_PARENTHESIS',
+              "!" => 'T_BANG',
+              "[" => 'T_OPEN_BRACKET',
+              "]" => 'T_CLOSE_BRACKET',
+              '.' => 'T_DOT',
+              ',' => 'T_COMMA',
+              '@' => 'T_AT',
               );
 
 foreach($tokens as $id => $token) {
@@ -83,7 +84,7 @@ foreach($tokens as $id => $token) {
             print("No TPHP for '{$token}'\n");
             $TPHP[$token] = max($TPHP) + 1;
         }
-        $T[$id] = $client->makeNode()->setProperty('token', $token)
+        $T[$id] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                      ->setProperty('code', $token)
                                      ->setProperty('line', $line)
                                      ->setProperty('file', $file)->save();
