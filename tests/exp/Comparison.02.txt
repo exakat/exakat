@@ -1,0 +1,14 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ==
+        Label : RIGHT
+          3
+        Label : LEFT
+          2

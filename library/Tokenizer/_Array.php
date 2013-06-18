@@ -22,7 +22,7 @@ class _Array extends TokenAuto {
 
     
     function reserve() {
-        Token::$reserved[] = '[';
+        Token::$reserved[] = 'T_OPEN_BRACKET';
         
         return true;
     }

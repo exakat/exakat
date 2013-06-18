@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        3.4
+      Label : ARGUMENT
+        1.2

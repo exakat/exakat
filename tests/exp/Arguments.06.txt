@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        true

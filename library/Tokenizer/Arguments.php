@@ -4,8 +4,11 @@ namespace Tokenizer;
 
 class Arguments extends TokenAuto {
     function _check() {
-        $operands = array('Addition', 'Multiplication', 'Sequence', 'String', 'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
-                          'Arguments', 'Functioncall', 'Boolean' );
+        $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 
+                             'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
+                             'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array' );
+        $operands = $operands_wa;
+        $operands[] = 'Arguments';
         
         // @note instructions separated by ; 
         $this->conditions = array(-1 => array('atom' => $operands ),
@@ -46,7 +49,7 @@ class Arguments extends TokenAuto {
                                               'token' => array('T_STRING', 'T_ECHO')),
                                    0 => array('code' => '(',
                                              'atom' => 'none'),
-                                   1 => array('atom' => $operands),
+                                   1 => array('atom' => $operands_wa),
                                    2 => array('code' => ')',
                                               'atom'  => 'none'),
         );
@@ -73,7 +76,9 @@ class Arguments extends TokenAuto {
         $this->conditions = array( 0 => array('atom' => 'none',
                                               'token' => 'T_ECHO'),
                                    1 => array('atom'  => 'yes'),
+                                   2 => array('filterOut' => array('T_DOT')) //, '->','[','+','-','*','/','%', '='
         );
+//        $this->printQuery();
         
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
 

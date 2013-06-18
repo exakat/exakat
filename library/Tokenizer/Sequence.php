@@ -4,12 +4,15 @@ namespace Tokenizer;
 
 class Sequence extends TokenAuto {
     function _check() {
-        $operands = array('Addition', 'Multiplication', 'Sequence', 'String', 'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
-                          'Functioncall', );
+        $operands = array('Addition', 'Multiplication', 'Sequence', 'String', 'Integer', 
+                          'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
+                          'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
+                          'Noscream', );
         
         
         // @note instructions separated by ; 
-        $this->conditions = array(-1 => array('atom' => $operands ),
+        $this->conditions = array(-2 => array('filterOut' => array('T_ECHO', 'T_DOT', 'T_AT')), 
+                                  -1 => array('atom' => $operands ),
                                    0 => array('code' => ';',
                                              'atom' => 'none'),
                                    1 => array('atom' => $operands),

@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ;
+    Label : ELEMENT
+      !
+      Label : NOT
+        $y
+    Label : ELEMENT
+      $x

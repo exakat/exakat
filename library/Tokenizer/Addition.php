@@ -22,7 +22,8 @@ class Addition extends TokenAuto {
     }
 
     function reserve() {
-        Token::$reserved[] = '->';
+        Token::$reserved[] = 'T_PLUS';
+        Token::$reserved[] = 'T_MINUS';
         
         return true;
     }

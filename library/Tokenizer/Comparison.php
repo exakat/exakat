@@ -6,9 +6,10 @@ class Comparison extends TokenAuto {
     function _check() {
     
         $operands = array('Variable', 'Array', 'Object', 'Integer', 'Sign', 'Float', );
+        $operators = array('==','!=', '>=', '<=', '===', '!==' );
         
         $this->conditions = array(-1 => array('atom' => $operands ),
-                                   0 => array('code' => array('==','!='),
+                                   0 => array('code' => $operators,
                                              'atom' => 'none'),
                                    1 => array('atom' => $operands),
         );
@@ -16,11 +17,9 @@ class Comparison extends TokenAuto {
         $this->actions = array('makeEdge'    => array('1' => 'RIGHT',
                                                       '-1' => 'LEFT'
                                                       ),
-                               'atom'       => 'Comparaison',
+                               'atom'       => 'Comparison',
                                );
                                
-//        $this->printQuery();
-
         $r = $this->checkAuto(); 
 
         return $r;
@@ -29,7 +28,12 @@ class Comparison extends TokenAuto {
     
     function reserve() {
         Token::$reserved[] = '==';
-        
+        Token::$reserved[] = '!=';
+        Token::$reserved[] = '>=';
+        Token::$reserved[] = '<=';
+        Token::$reserved[] = '===';
+        Token::$reserved[] = '!==';
+
         return true;
     }
 }

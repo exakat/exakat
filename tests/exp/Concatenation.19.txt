@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      .
+      Label : CONCAT
+        $c
+      Label : CONCAT
+        @
+        Label : AT
+          y
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              1
+      Label : CONCAT
+        "a"
+    Label : LEFT
+      $z

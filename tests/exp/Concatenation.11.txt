@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    (
+    Label : CODE
+      .
+      Label : CONCAT
+        'b'
+      Label : CONCAT
+        'a'

@@ -27,20 +27,16 @@ class Framework_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
  
-        $tests = array( 
-            '\\Test\\Addition',
-            '\\Test\\Multiplication',
-            '\\Test\\Assignation',
-            '\\Test\\Sign',
-            '\\Test\\_Array',
-            '\\Test\\Sequence',
-            '\\Test\\Parenthesis',
-            '\\Test\\Concatenation',
-            '\\Test\\Object',
-            '\\Test\\Integer',
-            '\\Test\\Not',
-            '\\Test\\String',
-        );
+        $tests = glob('Test/*.php');
+        foreach($tests as $id => $t) {
+            if ($t == 'Test/Skeleton.php') { 
+                unset($tests[$id]) ;
+            } elseif ($t == 'Test/Tokenizeur.php') { 
+                unset($tests[$id]) ;
+            } else {
+                $tests[$id] = '\\'.str_replace(array('/','.php'), array('\\',''), $t);
+            }
+        }
         
         foreach($tests as $i => $test ) {
             $name = str_replace('\\Test\\', '', $test);

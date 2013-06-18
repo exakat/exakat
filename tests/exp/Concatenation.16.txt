@@ -1,0 +1,36 @@
+<?php
+
+Label : NEXT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      a
+  Label : NEXT
+    ::
+    Label : NEXT
+      b
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $c
+          Label : INDEX
+            d
+      Label : NEXT
+        .
+        Label : NEXT
+          ;
+          Label : NEXT
+            ?>
+            Label : NEXT
+              /**/
+          Label : ELEMENT
+            .
+            Label : CONCAT
+              'h'
+            Label : CONCAT
+              $f
+              Label : INDEX
+                'g'
+            Label : CONCAT
+              'e'
