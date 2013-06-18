@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Noscream extends Tokenizeur {
-    /* 8 methods */
+    /* 12 methods */
 
     public function testNoscream01()  { $this->generic_test('Noscream.01'); }
     public function testNoscream02()  { $this->generic_test('Noscream.02'); }
@@ -17,5 +17,9 @@ class Noscream extends Tokenizeur {
     public function testNoscream06()  { $this->generic_test('Noscream.06'); }
     public function testNoscream07()  { $this->generic_test('Noscream.07'); }
     public function testNoscream08()  { $this->generic_test('Noscream.08'); }
+    public function testNoscream09()  { $this->generic_test('Noscream.09'); }
+    public function testNoscream10()  { $this->generic_test('Noscream.10'); }
+    public function testNoscream11()  { $this->generic_test('Noscream.11'); }
+    public function testNoscream12()  { $this->generic_test('Noscream.12'); }
 }
 ?>

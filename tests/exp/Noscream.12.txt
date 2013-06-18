@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      @
+      Label : AT
+        $b
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            'b'
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              'a'
+            Label : CONCAT
+              $host
+    Label : LEFT
+      ->
+      Label : OBJECT
+        $this
+      Label : PROPERTY
+        a

@@ -7,6 +7,7 @@ class Noscream extends TokenAuto {
         $this->conditions = array(0 => array('token' => 'T_AT',
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
+                                  2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR')),
                                   
         );
         

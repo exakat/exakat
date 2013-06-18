@@ -48,7 +48,7 @@ $edges = $query->getResultSet();
 
 // load new tokens
 $line = 0;
-$TPHP = array(";" => 'T_SEMICOLUMN',
+$TPHP = array(";" => 'T_SEMICOLON',
               "=" => 'T_EQUAL',
               "+" => 'T_PLUS',
               "-" => 'T_MINUS',
@@ -60,9 +60,13 @@ $TPHP = array(";" => 'T_SEMICOLUMN',
               "!" => 'T_BANG',
               "[" => 'T_OPEN_BRACKET',
               "]" => 'T_CLOSE_BRACKET',
+              "{" => 'T_OPEN_CURLY',
+              "}" => 'T_CLOSE_CURLY',
               '.' => 'T_DOT',
               ',' => 'T_COMMA',
               '@' => 'T_AT',
+              '?' => 'T_QUESTION',
+              ':' => 'T_COLON',
               );
 
 foreach($tokens as $id => $token) {

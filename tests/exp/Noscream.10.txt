@@ -1,0 +1,34 @@
+<?php
+
+Label : NEXT
+  if
+  Label : NEXT
+    (
+    Label : NEXT
+      @
+      Label : AT
+        !
+        Label : NOT
+          function_exists
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'gzopen'
+      Label : NEXT
+        )
+        Label : NEXT
+          {
+          Label : NEXT
+            =
+            Label : RIGHT
+              1
+            Label : NEXT
+              ;
+              Label : NEXT
+                }
+                Label : NEXT
+                  ?>
+                  Label : NEXT
+                    /**/
+            Label : LEFT
+              $x

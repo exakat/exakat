@@ -1,0 +1,18 @@
+<?php
+
+Label : NEXT
+  $x
+  Label : NEXT
+    =
+    Label : NEXT
+      @
+      Label : NEXT
+        new
+        Label : NEXT
+          ;
+          Label : NEXT
+            ?>
+            Label : NEXT
+              /**/
+          Label : ELEMENT
+            y

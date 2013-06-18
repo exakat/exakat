@@ -11,7 +11,8 @@ class Arguments extends TokenAuto {
         $operands[] = 'Arguments';
         
         // @note instructions separated by ; 
-        $this->conditions = array(-1 => array('atom' => $operands ),
+        $this->conditions = array(-2 => array('filterOut' => array('T_DOT', 'T_AT', 'T_NOT') ),
+                                  -1 => array('atom' => $operands ),
                                    0 => array('code' => ',',
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),

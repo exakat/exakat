@@ -1,0 +1,28 @@
+<?php
+
+Label : NEXT
+  =
+  Label : RIGHT
+    @
+    Label : AT
+      function_exists
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'bzopen'
+  Label : NEXT
+    ?
+    Label : NEXT
+      ''
+      Label : NEXT
+        :
+        Label : NEXT
+          ;
+          Label : NEXT
+            ?>
+            Label : NEXT
+              /**/
+          Label : ELEMENT
+            'bzopen'
+  Label : LEFT
+    $functions
