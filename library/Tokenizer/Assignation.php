@@ -7,7 +7,7 @@ class Assignation extends TokenAuto {
 
         $operands = array('Integer', 'Multiplication', 'Addition', 'Not',
                           'Array', 'Float', 'Concatenation', 'Property',
-                          'Parenthesis', 'Noscream', );
+                          'Parenthesis', 'Noscream', 'Ternary', );
         
         $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property')),
                                   0 => array('code' => array('='),
@@ -20,7 +20,6 @@ class Assignation extends TokenAuto {
                                                       '-1' => 'LEFT'),
                                'atom'       => 'Assignation');
 
-//        $this->printQuery();
         return $this->checkAuto();
     } 
 }

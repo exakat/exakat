@@ -6,7 +6,7 @@ Label : CODE
     @
     Label : AT
       ->
-      Label : OBJECT
-        $x
       Label : PROPERTY
         t
+      Label : OBJECT
+        $x

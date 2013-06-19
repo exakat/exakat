@@ -1,28 +1,22 @@
 <?php
 
-Label : NEXT
-  =
-  Label : RIGHT
-    @
-    Label : AT
-      function_exists
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'bzopen'
-  Label : NEXT
-    ?
-    Label : NEXT
-      ''
-      Label : NEXT
-        :
-        Label : NEXT
-          ;
-          Label : NEXT
-            ?>
-            Label : NEXT
-              /**/
-          Label : ELEMENT
-            'bzopen'
-  Label : LEFT
-    $functions
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : ELSE
+        'c'
+      Label : THEN
+        ''
+      Label : CONDITION
+        @
+        Label : AT
+          function_exists
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'b'
+    Label : LEFT
+      $a

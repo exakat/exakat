@@ -20,7 +20,7 @@ Label : CODE
               $host
     Label : LEFT
       ->
-      Label : OBJECT
-        $this
       Label : PROPERTY
         a
+      Label : OBJECT
+        $this

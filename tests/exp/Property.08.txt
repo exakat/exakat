@@ -6,7 +6,7 @@ Label : CODE
     1
   Label : LEFT
     ->
-    Label : OBJECT
-      $x
     Label : PROPERTY
       y
+    Label : OBJECT
+      $x

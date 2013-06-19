@@ -77,9 +77,8 @@ class Arguments extends TokenAuto {
         $this->conditions = array( 0 => array('atom' => 'none',
                                               'token' => 'T_ECHO'),
                                    1 => array('atom'  => 'yes'),
-                                   2 => array('filterOut' => array('T_DOT')) //, '->','[','+','-','*','/','%', '='
+                                   2 => array('filterOut' => array('T_DOT', 'T_DOUBLE_COLON' )) //, '->','[','+','-','*','/','%', '='
         );
-//        $this->printQuery();
         
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
 

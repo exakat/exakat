@@ -1,36 +1,30 @@
 <?php
 
-Label : NEXT
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      a
-  Label : NEXT
-    ::
-    Label : NEXT
-      b
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $c
-          Label : INDEX
-            d
-      Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         .
-        Label : NEXT
-          ;
-          Label : NEXT
-            ?>
-            Label : NEXT
-              /**/
-          Label : ELEMENT
-            .
-            Label : CONCAT
-              'h'
-            Label : CONCAT
-              $f
-              Label : INDEX
-                'g'
-            Label : CONCAT
-              'e'
+        Label : CONCAT
+          ::
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c
+                Label : INDEX
+                  d
+          Label : CLASS
+            a
+        Label : CONCAT
+          'h'
+        Label : CONCAT
+          $f
+          Label : INDEX
+            'g'
+        Label : CONCAT
+          'e'

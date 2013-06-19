@@ -5,10 +5,12 @@ Label : CODE
   Label : ELEMENT
     ?
     Label : ELSE
-      'b'
+      3
     Label : THEN
-      'a'
+      2
     Label : CONDITION
-      !
-      Label : NOT
+      *
+      Label : RIGHT
         $x
+      Label : LEFT
+        '1'
