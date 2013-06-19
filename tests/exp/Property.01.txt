@@ -2,7 +2,7 @@
 
 Label : CODE
   ->
-  Label : OBJECT
-    $x
   Label : PROPERTY
     b
+  Label : OBJECT
+    $x
