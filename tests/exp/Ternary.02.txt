@@ -1,0 +1,12 @@
+<?php
+
+Label : CODEPHP
+  ?
+  Label : ELSE
+    'b'
+  Label : THEN
+    'a'
+  Label : CONDITION
+    !
+    Label : NOT
+      $x

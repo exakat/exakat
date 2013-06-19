@@ -1,0 +1,12 @@
+<?php
+
+Label : CODEPHP
+  ;
+  Label : ELEMENT
+    ?
+    Label : ELSE
+      'c'
+    Label : THEN
+      'b'
+    Label : CONDITION
+      true

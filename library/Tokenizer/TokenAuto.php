@@ -117,6 +117,7 @@ class TokenAuto extends Token {
         }        
 
         if (isset($actions['makeEdge'])) {
+            krsort($actions['makeEdge']);
             foreach($actions['makeEdge'] as $destination => $label) {
                 display("makeEdge : $label\n");
                 if ($destination > 0) {
@@ -149,6 +150,52 @@ g.removeEdge(f.inE('NEXT').next());
             unset($actions['makeEdge']);
         }
 
+        if (isset($actions['dropNext'])) {
+            foreach($actions['dropNext'] as $destination) {
+                if ($destination > 0) {
+                    $d = str_repeat(".out('NEXT')", $destination);
+                    $qactions[] = "
+/* dropNext out */
+f = [];
+it".$d.".fill(f);
+h = it;
+f.each{
+    i = it; 
+    it.out('NEXT').each{ g.addEdge(h, it, 'NEXT');}
+
+    g.removeVertex(i);
+}
+
+";
+                } elseif ($destination < 0) {
+                    die('No support for negative dropNext');
+                } else {
+                    print "Ignoring addEdge for 0\n";
+                }
+            }
+            unset($actions['dropNext']);
+        }
+
+        if (isset($actions['dropNextCode'])) {
+            foreach($actions['dropNextCode'] as $destination) {
+                $d = str_repeat(".out('NEXT')", 1);
+                $qactions[] = "
+/* dropNextCode out */
+f = [];
+it.out('NEXT').has('code', '$destination').fill(f);
+h = it;
+f.each{
+    i = it; 
+    it.out('NEXT').each{ g.addEdge(h, it, 'NEXT');}
+
+    g.removeVertex(i);
+}
+
+";
+            }
+            unset($actions['dropNextCode']);
+        }
+        
         if (isset($actions['insertEdge'])) {
             foreach($actions['insertEdge'] as $destination => $config) {
             if ($destination == 0) {
@@ -196,32 +243,6 @@ g.addEdge(x,  f, 'NEXT');
             }
         }
         
-        if (isset($actions['dropNext'])) {
-            foreach($actions['dropNext'] as $destination) {
-                if ($destination > 0) {
-                    $d = str_repeat(".out('NEXT')", $destination);
-                    $qactions[] = "
-/* dropNext out */
-f = [];
-it".$d.".fill(f);
-h = it;
-f.each{
-    i = it; 
-    it.out('NEXT').each{ g.addEdge(h, it, 'NEXT');}
-
-    g.removeVertex(i);
-}
-
-";
-                } elseif ($destination < 0) {
-                    die('No support for negative dropNext');
-                } else {
-                    print "Ignoring addEdge for 0\n";
-                }
-            }
-            unset($actions['dropNext']);
-        }
-
         if (isset($actions['mergeNext']) && $actions['mergeNext']) {
             list($atom, $link) = $actions['mergeNext'];
             

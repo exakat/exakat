@@ -8,14 +8,13 @@ class Phpcode extends TokenAuto {
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
                                   2 => array('token' => 'T_CLOSE_TAG'),
-                                  
-                                  
         );
         
         $this->actions = array('makeEdge'    => array( '1' => 'CODE'),
                                'dropNext'   => array(1), 
                                'atom'       => 'Phpcode');
         $r = $this->checkAuto();
+        
         return $r;
     }
 }
