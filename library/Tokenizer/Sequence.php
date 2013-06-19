@@ -7,11 +7,12 @@ class Sequence extends TokenAuto {
         $operands = array('Addition', 'Multiplication', 'Sequence', 'String', 'Integer', 
                           'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
                           'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
-                          'Noscream', );
+                          'Noscream', 'Staticproperty', 'Property');
         
+        $yield_operator = array('T_ECHO', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG', 'T_DOUBLE_COLON');
         
         // @note instructions separated by ; 
-        $this->conditions = array(-2 => array('filterOut' => array('T_ECHO', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG')), 
+        $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => ';',
                                              'atom' => 'none'),
@@ -30,10 +31,10 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note End of PHP script
-        $this->conditions = array(-2 => array('filterOut' => array('T_ECHO', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR')), 
+        $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => ';',
-                                             'atom' => 'none'),
+                                              'atom' => 'none'),
                                    1 => array('token' => 'T_CLOSE_TAG',
                                               'atom'  => 'none'),
         );

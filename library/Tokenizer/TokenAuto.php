@@ -324,7 +324,7 @@ it.as('origin').out('$link').has('atom','$atom').each{
             if (is_string($cdt['filterOut'])) {
                 $qcdts[] = "filter{it.token != '".$cdt['filterOut']."' }";
             } else {
-                $qcdts[] = "filter{!(it.token in ['".join("', '", $cdt['filterOut'])."'])}";
+                $qcdts[] = "filter{it.atom != null || !(it.token in ['".join("', '", $cdt['filterOut'])."'])}";
             }
 
             unset($cdt['filterOut']);

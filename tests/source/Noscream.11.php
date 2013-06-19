@@ -1,7 +1,7 @@
 <?php
 
-$functions = @function_exists('bzopen')
+$a = @function_exists('b')
     ? '' :
-    'bzopen';
+    'c';
 
 ?>

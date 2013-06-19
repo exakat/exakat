@@ -28,6 +28,7 @@ $classes = array(
     'Sign',
     '_Array',
     'Property',
+    'Staticproperty',
     'Methodcall',
     'Not',
     'Arguments',

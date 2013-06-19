@@ -17,6 +17,8 @@ if ($id = array_search('-dot', $args)) {
     define('FORMAT', 'DOT');
 } elseif ($id = array_search('-text', $args)) {
     define('FORMAT', 'TEXT');
+} elseif ($id = array_search('-table', $args)) {
+    define('FORMAT', 'TABLE');
 } else {
     define('FORMAT', 'TEXT');
 }
@@ -67,6 +69,8 @@ if (!isset($root)) {
 
 if (FORMAT == 'DOT') {
     $text = display_dot($V, $E, $root);
+} elseif (FORMAT == 'TABLE') {
+    $text = display_table($V, $E, $root);
 } else {
     $text = display_text($V, $E, $root);
 }
@@ -113,6 +117,38 @@ $r
     
     return $r;
 }
+
+function display_table($V, $E, $root, $level = 0) {
+    $r = '<table>';
+    
+    foreach($V as $id => $v) {
+        $row = array();
+        $row[] = highlight_string($v['code'], true);
+        if (isset($v['file'])) { 
+            $row[] = $v['file'];
+        } else {
+            $row[] = 'No file';
+        }
+        if (isset($v['atom'])) { 
+            $row[] = $v['atom'];
+        } else {
+            $row[] = 'No atom';
+        }
+        if (isset($v['token'])) { 
+            $row[] = $v['token'];
+        } else {
+            $row[] = 'No token';
+        }
+        
+
+        $row = "<td>".join("</td><td>", $row)."</td>";
+        $r .= "<tr>$row</tr>\n";
+    }
+    $r .= "</table>";
+    
+    return $r;
+}
+
 
 if (FILE) {
     $fp = fopen(FILE, 'w+');

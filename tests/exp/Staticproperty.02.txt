@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      T
+    Label : PROPERTY
+      $x
