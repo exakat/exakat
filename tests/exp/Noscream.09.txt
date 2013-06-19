@@ -1,18 +1,14 @@
 <?php
 
-Label : NEXT
-  $x
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
     =
-    Label : NEXT
+    Label : RIGHT
       @
-      Label : NEXT
+      Label : AT
         new
-        Label : NEXT
-          ;
-          Label : NEXT
-            ?>
-            Label : NEXT
-              /**/
-          Label : ELEMENT
-            y
+        Label : NEW
+          y
+    Label : LEFT
+      $x

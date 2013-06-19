@@ -32,6 +32,7 @@ $classes = array(
     'Methodcall',
     'Staticmethodcall',
     'Not',
+    '_New',
     'Arguments',
     'Functioncall',
     'Noscream',

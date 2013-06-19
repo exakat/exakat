@@ -1,0 +1,23 @@
+<?php
+
+namespace Test;
+
+include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_test');
+spl_autoload_register('Autoload::autoload_phpunit');
+
+class _New extends Tokenizeur {
+    /* 0 methods */
+    public function test_New01()  { $this->generic_test('_new.01'); }
+    public function test_New02()  { $this->generic_test('_New.02'); }
+    public function test_New03()  { $this->generic_test('_New.03'); }
+    public function test_New04()  { $this->generic_test('_New.04'); }
+    public function test_New05()  { $this->generic_test('_New.05'); }
+    public function test_New06()  { $this->generic_test('_New.06'); }
+    public function test_New07()  { $this->generic_test('_New.07'); }
+    public function test_New08()  { $this->generic_test('_New.08'); }
+    public function test_New09()  { $this->generic_test('_New.09'); }
+    public function test_New10()  { $this->generic_test('_New.10'); }
+
+}
+?>

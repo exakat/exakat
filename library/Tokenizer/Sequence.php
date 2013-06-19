@@ -7,9 +7,9 @@ class Sequence extends TokenAuto {
         $operands = array('Addition', 'Multiplication', 'Sequence', 'String', 'Integer', 
                           'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
                           'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
-                          'Noscream', 'Staticproperty', 'Property', 'Ternary');
+                          'Noscream', 'Staticproperty', 'Property', 'Ternary', 'New');
         
-        $yield_operator = array('T_ECHO', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG', 'T_DOUBLE_COLON', 'T_COLON', 'T_EQUAL');
+        $yield_operator = array('T_ECHO', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG', 'T_DOUBLE_COLON', 'T_COLON', 'T_EQUAL', 'T_NEW');
         
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut' => $yield_operator), 

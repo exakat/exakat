@@ -8,7 +8,7 @@ class Parenthesis extends TokenAuto {
                              'Integer', 'Float', 'Not', 'Variable','_Array', 'Concatenation', 'Sign',
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array' );
 
-        $this->conditions = array(-1 => array('filterOut' => array('T_STRING', 'T_ECHO')), 
+        $this->conditions = array(-1 => array('filterOut' => array('T_STRING', 'T_ECHO', 'T_VARIABLE')), 
                                    0 => array('code' => '(',
                                               'atom' => 'none' ),
                                    1 => array('atom' => $operands),

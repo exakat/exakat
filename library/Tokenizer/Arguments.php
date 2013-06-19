@@ -16,7 +16,8 @@ class Arguments extends TokenAuto {
                                    0 => array('code' => ',',
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
-        );
+                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS') ),
+                            );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
                                                       -1 => 'ARGUMENT'
@@ -46,8 +47,7 @@ class Arguments extends TokenAuto {
         $r = $this->checkAuto();
         
         // @note f(1) : no , 
-        $this->conditions = array(-1 => array('atom' => 'none',
-                                              'token' => array('T_STRING', 'T_ECHO')),
+        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_VARIABLE')),
                                    0 => array('code' => '(',
                                              'atom' => 'none'),
                                    1 => array('atom' => $operands_wa),
@@ -60,8 +60,7 @@ class Arguments extends TokenAuto {
         $r = $this->checkAuto();        
 
         // @note f() : no argument
-        $this->conditions = array(-1 => array('atom' => 'none',
-                                              'token' => 'T_STRING'),
+        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_VARIABLE')),
                                    0 => array('code' => '(',
                                              'atom' => 'none'),
                                    1 => array('code' => ')',
