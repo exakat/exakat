@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     ?
-    Label : ELSE
-      'c'
-    Label : THEN
-      'b'
     Label : CONDITION
       true
+    Label : THEN
+      'b'
+    Label : ELSE
+      'c'

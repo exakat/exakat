@@ -2,11 +2,11 @@
 
 Label : CODE
   ?
-  Label : ELSE
-    'b'
-  Label : THEN
-    'a'
   Label : CONDITION
     !
     Label : NOT
       $x
+  Label : THEN
+    'a'
+  Label : ELSE
+    'b'

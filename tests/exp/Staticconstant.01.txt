@@ -1,0 +1,8 @@
+<?php
+
+Label : CODE
+  ::
+  Label : CONSTANT
+    b
+  Label : CLASS
+    a

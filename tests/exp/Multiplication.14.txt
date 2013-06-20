@@ -4,13 +4,13 @@ Label : CODE
   ;
   Label : ELEMENT
     ?
-    Label : ELSE
-      3
-    Label : THEN
-      2
     Label : CONDITION
       *
       Label : RIGHT
         $x
       Label : LEFT
         '1'
+    Label : THEN
+      2
+    Label : ELSE
+      3
