@@ -6,7 +6,8 @@ class Parenthesis extends TokenAuto {
     function _check() {
         $operands    = array('Addition', 'Multiplication', 'Sequence', 'String', 
                              'Integer', 'Float', 'Not', 'Variable','_Array', 'Concatenation', 'Sign',
-                             'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array' );
+                             'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
+                             'Instanceof', 'Noscream', );
 
         $this->conditions = array(-1 => array('filterOut' => array('T_STRING', 'T_ECHO', 'T_VARIABLE')), 
                                    0 => array('code' => '(',

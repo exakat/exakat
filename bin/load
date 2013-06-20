@@ -129,4 +129,12 @@ $last     = $client->makeNode()->setProperty('token', 'T_END')
 $T[-1]->relateTo($T[0], 'NEXT')->setProperty('__FILE__', true)->save();
 $previous->relateTo($last, 'NEXT')->setProperty('__FILE__', true)->save();
 
+$last2     = $client->makeNode()->setProperty('token', 'T_END')
+                                ->setProperty('code', '/* * */')
+                                ->setProperty('line', $line)
+                                ->setProperty('file', $file)
+                                ->setProperty('hidden', true)
+                                ->save();
+$last->relateTo($last2, 'NEXT')->setProperty('__FILE__', true)->save();
+
 ?>

@@ -3,14 +3,14 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      ?
-      Label : ELSE
-        'c'
-      Label : THEN
-        ''
-      Label : CONDITION
+    ?
+    Label : ELSE
+      'c'
+    Label : THEN
+      ''
+    Label : CONDITION
+      =
+      Label : RIGHT
         @
         Label : AT
           function_exists
@@ -18,5 +18,5 @@ Label : CODE
             void
             Label : ARGUMENT
               'b'
-    Label : LEFT
-      $a
+      Label : LEFT
+        $a

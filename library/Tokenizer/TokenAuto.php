@@ -31,7 +31,7 @@ class TokenAuto extends Token {
             $qcdts[] = "back('origin')";
         }
         
-        for($i = 1; $i < 4; $i++) {
+        for($i = 1; $i < 6; $i++) {
             if (!empty($this->conditions[$i])) {
                 $cdt = $this->conditions[$i];
                 $cdt['next'] = $i;
@@ -148,6 +148,43 @@ g.removeEdge(f.inE('NEXT').next());
                 }
             }
             unset($actions['makeEdge']);
+        }
+
+        if (isset($actions['transform'])) {
+            $c = 0;
+            foreach($actions['transform'] as $destination => $label) {
+                $c++;
+                
+                if ($label == 'DROP') {
+                    $qactions[] = "
+/* makeEdge2 drop ($c) */
+f = [];
+it.out('NEXT').fill(f);
+h = it;
+f.each{
+    i = it; 
+    it.out('NEXT').each{ g.addEdge(h, it, 'NEXT');}
+
+    g.removeVertex(i);
+}
+
+";
+                } else {
+                    $qactions[] = "
+/* makeEdge2 out ($c) */
+f =  it.out('NEXT').next();
+g.addEdge(it, f, '$label');
+g.removeEdge(f.inE('NEXT').next());
+
+g.addEdge(it, f.out('NEXT').next(), 'NEXT');
+g.removeEdge(f.outE('NEXT').next());
+
+";
+                }
+            
+            }
+
+            unset($actions['transform']);
         }
 
         if (isset($actions['dropNext'])) {

@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      >
+      Label : RIGHT
+        0
+      Label : LEFT
+        ::
+        Label : PROPERTY
+          $a
+          Label : INDEX
+            'b'
+        Label : CLASS
+          self
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          ::
+          Label : PROPERTY
+            $f
+            Label : INDEX
+              'g'
+          Label : CLASS
+            e
+        Label : LEFT
+          $c
+          Label : INDEX
+            'd'

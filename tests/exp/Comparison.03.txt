@@ -3,7 +3,7 @@
 Label : CODE
   ;
   Label : ELEMENT
-    >
+    <
     Label : RIGHT
       2
     Label : LEFT

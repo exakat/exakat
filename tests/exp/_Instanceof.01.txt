@@ -3,8 +3,8 @@
 Label : CODE
   ;
   Label : ELEMENT
-    >
+    instanceof
     Label : RIGHT
-      2
+      $y
     Label : LEFT
-      1
+      $x

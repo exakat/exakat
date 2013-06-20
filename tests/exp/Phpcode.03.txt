@@ -3,8 +3,8 @@
 Label : CODE
   ;
   Label : ELEMENT
-    >
+    =
     Label : RIGHT
-      2
+      3
     Label : LEFT
-      1
+      $x

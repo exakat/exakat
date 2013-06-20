@@ -124,11 +124,6 @@ function display_table($V, $E, $root, $level = 0) {
     foreach($V as $id => $v) {
         $row = array();
         $row[] = highlight_string($v['code'], true);
-        if (isset($v['file'])) { 
-            $row[] = $v['file'];
-        } else {
-            $row[] = 'No file';
-        }
         if (isset($v['atom'])) { 
             $row[] = $v['atom'];
         } else {
@@ -138,6 +133,11 @@ function display_table($V, $E, $root, $level = 0) {
             $row[] = $v['token'];
         } else {
             $row[] = 'No token';
+        }
+        if (isset($v['file'])) { 
+            $row[] = $v['file'];
+        } else {
+            $row[] = 'No file';
         }
         
 

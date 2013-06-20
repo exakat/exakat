@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    !==
+    Label : RIGHT
+      +=
+      Label : RIGHT
+        4
+      Label : LEFT
+        $y
+        Label : INDEX
+          3
+    Label : LEFT
+      $x

@@ -2,7 +2,7 @@
 
 Label : CODE
   ::
-  Label : CLASS
-    T
   Label : PROPERTY
     $x
+  Label : CLASS
+    T

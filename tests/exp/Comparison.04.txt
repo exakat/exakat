@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      !=
+      Label : RIGHT
+        $ligne
+        Label : INDEX
+          1
+      Label : LEFT
+        $ligne
+        Label : INDEX
+          0
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        1
+  Label : ELSE
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        2

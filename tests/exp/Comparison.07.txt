@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      instanceof
+      Label : RIGHT
+        Exception
+      Label : LEFT
+        $x
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          false

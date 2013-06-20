@@ -5,15 +5,19 @@ Label : CODE
   Label : CONDITION
     (
     Label : CODE
-      @
-      Label : AT
-        !
-        Label : NOT
-          function_exists
+      ===
+      Label : RIGHT
+        =
+        Label : RIGHT
+          coucou
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              'gzopen'
+              1
+        Label : LEFT
+          $greeting
+      Label : LEFT
+        false
   Label : THEN
     {
     Label : CODE

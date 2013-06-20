@@ -7,9 +7,10 @@ class Sequence extends TokenAuto {
         $operands = array('Addition', 'Multiplication', 'Sequence', 'String', 'Integer', 
                           'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
                           'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
-                          'Noscream', 'Staticproperty', 'Property', 'Ternary', 'New', 'Return',);
+                          'Noscream', 'Staticproperty', 'Property', 'Ternary', 'New', 'Return',
+                          'Instanceof', );
         
-        $yield_operator = array('T_ECHO', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG', 'T_DOUBLE_COLON', 'T_COLON', 'T_EQUAL', 'T_NEW');
+        $yield_operator = array('T_ECHO', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG', 'T_DOUBLE_COLON', 'T_COLON', 'T_EQUAL', 'T_NEW', 'T_INSTANCEOF');
         
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
@@ -35,7 +36,7 @@ class Sequence extends TokenAuto {
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => ';',
                                               'atom' => 'none'),
-                                   1 => array('token' => 'T_CLOSE_TAG',
+                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END'),
                                               'atom'  => 'none'),
         );
         

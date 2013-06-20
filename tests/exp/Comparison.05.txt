@@ -5,6 +5,8 @@ Label : CODE
   Label : ELEMENT
     >
     Label : RIGHT
-      2
+      $y
+      Label : INDEX
+        1
     Label : LEFT
-      1
+      $x
