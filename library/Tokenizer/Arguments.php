@@ -6,7 +6,8 @@ class Arguments extends TokenAuto {
     function _check() {
         $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 
                              'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
-                             'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array' );
+                             'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
+                             'Magicconstant', 'Ternary' );
         $operands = $operands_wa;
         $operands[] = 'Arguments';
         
@@ -47,7 +48,7 @@ class Arguments extends TokenAuto {
         $r = $this->checkAuto();
         
         // @note f(1) : no , 
-        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_VARIABLE')),
+        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_PRINT', 'T_VARIABLE')),
                                    0 => array('code' => '(',
                                              'atom' => 'none'),
                                    1 => array('atom' => $operands_wa),
@@ -60,7 +61,7 @@ class Arguments extends TokenAuto {
         $r = $this->checkAuto();        
 
         // @note f() : no argument
-        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_VARIABLE')),
+        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_PRINT', 'T_VARIABLE')),
                                    0 => array('code' => '(',
                                              'atom' => 'none'),
                                    1 => array('code' => ')',
@@ -74,7 +75,7 @@ class Arguments extends TokenAuto {
 
         // @note echo 's' : no parenthesis
         $this->conditions = array( 0 => array('atom' => 'none',
-                                              'token' => 'T_ECHO'),
+                                              'token' => array('T_ECHO', 'T_PRINT')),
                                    1 => array('atom'  => 'yes'),
                                    2 => array('filterOut' => array('T_DOT', 'T_DOUBLE_COLON' )) //, '->','[','+','-','*','/','%', '='
         );

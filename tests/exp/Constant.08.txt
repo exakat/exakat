@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    chdir
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        __FILE__
+      Label : ARGUMENT
+        __DIR__

@@ -153,11 +153,12 @@ g.removeEdge(f.inE('NEXT').next());
         if (isset($actions['transform'])) {
             $c = 0;
             foreach($actions['transform'] as $destination => $label) {
-                $c++;
+                if ($destination > 0) { 
+                    $c++;
                 
-                if ($label == 'DROP') {
-                    $qactions[] = "
-/* makeEdge2 drop ($c) */
+                    if ($label == 'DROP') {
+                        $qactions[] = "
+/* transform drop out ($c) */
 f = [];
 it.out('NEXT').fill(f);
 h = it;
@@ -169,9 +170,9 @@ f.each{
 }
 
 ";
-                } else {
-                    $qactions[] = "
-/* makeEdge2 out ($c) */
+                    } else {
+                        $qactions[] = "
+/* transform out ($c) */
 f =  it.out('NEXT').next();
 g.addEdge(it, f, '$label');
 g.removeEdge(f.inE('NEXT').next());
@@ -180,8 +181,36 @@ g.addEdge(it, f.out('NEXT').next(), 'NEXT');
 g.removeEdge(f.outE('NEXT').next());
 
 ";
+                    }
+                } else {
+                
+                    if ($label == 'DROP') {
+                        $qactions[] = "
+/* transform drop in ($c) */
+f = [];
+it.in('NEXT').fill(f);
+h = it;
+f.each{
+    i = it; 
+    it.in('NEXT').each{ g.addEdge(it, h, 'NEXT');}
+
+    g.removeVertex(i);
+}
+
+";
+                    } else {
+                        $qactions[] = "
+/* transform in ($c) */
+f =  it.in('NEXT').next();
+g.addEdge(it, f, '$label');
+g.removeEdge(f.outE('NEXT').next());
+
+g.addEdge(f.in('NEXT').next(), it, 'NEXT');
+g.removeEdge(f.inE('NEXT').next());
+
+";
+                    }
                 }
-            
             }
 
             unset($actions['transform']);

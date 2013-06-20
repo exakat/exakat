@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  ::
+  Label : PROPERTY
+    $a
+    Label : INDEX
+      'b'
+  Label : CLASS
+    self
