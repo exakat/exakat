@@ -67,6 +67,8 @@ $TPHP = array(";" => 'T_SEMICOLON',
               '@' => 'T_AT',
               '?' => 'T_QUESTION',
               ':' => 'T_COLON',
+              '>' => 'T_GREATER',
+              '<' => 'T_LESSER',
               );
 
 foreach($tokens as $id => $token) {

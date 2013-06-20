@@ -44,6 +44,7 @@ $classes = array(
     'Constant',
     'Parenthesis',
     'Assignation',
+    '_Return',
     'Sequence',
     'Phpcode',
 );
