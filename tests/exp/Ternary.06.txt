@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ?
+    Label : CONDITION
+      =
+      Label : RIGHT
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $_REQUEST
+            Label : INDEX
+              'rech_ven'
+      Label : LEFT
+        $rech_ven
+    Label : THEN
+      $_REQUEST
+      Label : INDEX
+        'rech_ven'
+    Label : ELSE
+      ""

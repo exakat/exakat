@@ -139,6 +139,11 @@ function display_table($V, $E, $root, $level = 0) {
         } else {
             $row[] = 'No file';
         }
+        if (isset($v['order'])) { 
+            $row[] = $v['order'];
+        } else {
+            $row[] = '';
+        }
         
 
         $row = "<td>".join("</td><td>", $row)."</td>";

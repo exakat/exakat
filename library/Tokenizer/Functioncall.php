@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Functioncall extends TokenAuto {
     function _check() {
         
-        $this->conditions = array( 0 => array('token' => array('T_STRING', 'T_ECHO', 'T_VARIABLE', 'T_PRINT')),
+        $this->conditions = array( 0 => array('token' => array('T_STRING', 'T_ECHO', 'T_VARIABLE', 'T_PRINT', 'T_ISSET')),
                                    1 => array('atom' => 'none',
                                               'code' => '(' ),
                                    2 => array('atom' => 'Arguments'),

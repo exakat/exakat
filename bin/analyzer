@@ -32,6 +32,7 @@ $classes = array(
     'Methodcall',
     'Staticmethodcall',
     'Staticconstant',
+    'Logical',
     'Not',
     '_Instanceof',
     '_New',
@@ -65,11 +66,13 @@ foreach($classes as $class) {
 $total = Tokenizer\Token::countTotalToken();
 $prev = Tokenizer\Token::countLeftToken() + 1;
 $count = $prev - 1; 
+$prevprev = $prev - 1;
 $round = 0;
 
-while($prev > $count) {
+while($prev > $count || $prevprev > $prev) {
     $round++;
     
+    $prevprev = $prev;
     $prev = $count; 
 
     $r = array_pop($regex);

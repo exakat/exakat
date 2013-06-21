@@ -1,0 +1,60 @@
+<?php
+
+Label : NEXT
+  $result
+  Label : NEXT
+    =
+    Label : NEXT
+      <<<EOF
+
+      Label : NEXT
+        
+#Allow smarty {php} tags?  These could be dangerous if you don't trust your users.
+\$config['use_smarty_php_tags'] = 
+        Label : NEXT
+          ${
+          Label : NEXT
+            ?
+            Label : CONDITION
+              $config
+              Label : INDEX
+                'use_smarty_php_tags'
+            Label : THEN
+              'true'
+            Label : ELSE
+              'false'
+            Label : NEXT
+              }
+              Label : NEXT
+                ;
+
+#Automatically assign alias based on page title?
+\$config['auto_alias_content'] = 
+                Label : NEXT
+                  ${
+                  Label : NEXT
+                    ?
+                    Label : CONDITION
+                      $config
+                      Label : INDEX
+                        'auto_alias_content'
+                    Label : THEN
+                      'true'
+                    Label : ELSE
+                      'false'
+                    Label : NEXT
+                      }
+                      Label : NEXT
+                        ;
+
+
+                        Label : NEXT
+                          EOF
+                          Label : NEXT
+                            ;
+                            Label : NEXT
+                              ?>
+                              Label : NEXT
+                                /**/
+                                Label : NEXT
+                                  /* * */

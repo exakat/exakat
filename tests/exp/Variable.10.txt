@@ -1,0 +1,56 @@
+<?php
+
+Label : NEXT
+  $x
+  Label : NEXT
+    =
+    Label : NEXT
+      "
+      Label : NEXT
+        {
+        Label : NEXT
+          $y
+          Label : NEXT
+            }
+            Label : NEXT
+              "
+              Label : NEXT
+                ;
+                Label : NEXT
+                  $x
+                  Label : NEXT
+                    =
+                    Label : NEXT
+                      "
+                      Label : NEXT
+                        ${
+                        Label : NEXT
+                          z
+                          Label : NEXT
+                            }
+                            Label : NEXT
+                              "
+                              Label : NEXT
+                                ;
+                                Label : NEXT
+                                  $x
+                                  Label : NEXT
+                                    =
+                                    Label : NEXT
+                                      "
+                                      Label : NEXT
+                                        ${
+                                        Label : NEXT
+                                          $a
+                                          Label : NEXT
+                                            }
+                                            Label : NEXT
+                                              "
+                                              Label : NEXT
+                                                ;
+                                                Label : NEXT
+                                                  ?>
+                                                  Label : NEXT
+                                                    /**/
+                                                    Label : NEXT
+                                                      /* * */

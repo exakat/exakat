@@ -7,13 +7,13 @@ class Comparison extends TokenAuto {
     
         $operands = array('Variable', 'Array', 'Property', 'Integer', 'Sign', 'Float', 'Constant', 'Boolean',
                           'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall',
-                          'Assignation', 'Magicconstant', 'Staticconstant' );
+                          'Assignation', 'Magicconstant', 'Staticconstant', 'String' );
         $operators = array('==','!=', '>=', '<=', '===', '!==', '>', '<',  );
         
         $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => $operators,
-                                             'atom' => 'none'),
+                                              'atom' => 'none'),
                                    1 => array('atom' => $operands),
                                    
         );

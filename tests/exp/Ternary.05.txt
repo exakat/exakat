@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ?
+    Label : CONDITION
+      =
+      Label : RIGHT
+        (
+        Label : CODE
+          !=
+          Label : RIGHT
+            ""
+          Label : LEFT
+            $categorie_id
+      Label : LEFT
+        $categorie
+    Label : THEN
+      .
+      Label : CONCAT
+        $categorie_nom
+      Label : CONCAT
+        " - "
+      Label : CONCAT
+        $categorie_id
+    Label : ELSE
+      ""

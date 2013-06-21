@@ -5,13 +5,14 @@ namespace Tokenizer;
 class Sequence extends TokenAuto {
     function _check() {
         $operands = array('Addition', 'Multiplication', 'Sequence', 'String', 'Integer', 
-                          'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
+                          'Float', 'Not', 'Variable','Array','Concatenation', 'Sign',
                           'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
                           'Noscream', 'Staticproperty', 'Property', 'Ternary', 'New', 'Return',
-                          'Instanceof', 'Magicconstant', 'Staticconstant', 'Methodcall' );
+                          'Instanceof', 'Magicconstant', 'Staticconstant', 'Methodcall', 'Logical',
+                           );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
-                                 'T_DOUBLE_COLON', 'T_COLON', 'T_EQUAL', 'T_NEW', 'T_INSTANCEOF');
+                                 'T_DOUBLE_COLON', 'T_COLON', 'T_EQUAL', 'T_NEW', 'T_INSTANCEOF', 'T_AND', 'T_QUOTE');
         
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
@@ -27,7 +28,7 @@ class Sequence extends TokenAuto {
                                'order'    => array('1'  => '2',
                                                    '-1' => '1'
                                                       ),
-                               'mergeNext'  => array('Sequence', 'ELEMENT'), 
+                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                );
         $r = $this->checkAuto();

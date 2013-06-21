@@ -26,7 +26,7 @@ class Arguments extends TokenAuto {
                                'order'    => array('1'  => '2',
                                                    '-1' => '1'
                                                       ),
-                               'mergeNext'  => array('Arguments', 'ARGUMENT'), 
+                               'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
                                'atom'       => 'Arguments',
                                );
         $r = $this->checkAuto();
@@ -48,7 +48,7 @@ class Arguments extends TokenAuto {
         $r = $this->checkAuto();
         
         // @note f(1) : no , 
-        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_PRINT', 'T_VARIABLE')),
+        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_PRINT', 'T_VARIABLE', 'T_ISSET')),
                                    0 => array('code' => '(',
                                              'atom' => 'none'),
                                    1 => array('atom' => $operands_wa),

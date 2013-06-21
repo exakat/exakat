@@ -11,7 +11,21 @@ class Variable extends TokenAuto {
         
         $this->actions = array('atom'       => 'Variable');
 
-        return $this->checkAuto();
+        $r = $this->checkAuto();
+        
+        $this->conditions = array(-1 => array('token' => 'T_DOLLAR_OPEN_CURLY_BRACES',
+                                             'atom' => 'none'),
+                                  0 => array('token' => 'T_STRING_VARNAME'),
+                                  1 => array('token' => 'T_CLOSE_CURLY'),
+        );
+        
+        $this->actions = array( 'transform' => array('-1' => 'DROP',
+                                                     '1' => 'DROP'),
+                                'atom'       => 'Variable');
+
+        $r = $this->checkAuto();
+        
+        	
     }
 }
 

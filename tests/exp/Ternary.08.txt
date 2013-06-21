@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ?
+    Label : CONDITION
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $x
+    Label : THEN
+      2
+    Label : ELSE
+      $x
+      Label : INDEX
+        1

@@ -69,10 +69,17 @@ $TPHP = array(";" => 'T_SEMICOLON',
               ':' => 'T_COLON',
               '>' => 'T_GREATER',
               '<' => 'T_LESSER',
+              '&' => 'T_AND',
+              '^' => 'T_OR',
+              '|' => 'T_XOR',
+              '&&' => 'T_ANDAND',
+              '||' => 'T_OROR',
+              '"' => 'T_QUOTE',
               );
 
 foreach($tokens as $id => $token) {
     if ($token[0] == T_WHITESPACE) { continue; }
+    if ($token[0] == T_COMMENT) { continue; }
     
     if (is_array($token)) {
         $T[$id] = $client->makeNode()->setProperty('token', token_name($token[0]))

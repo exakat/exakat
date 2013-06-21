@@ -1,0 +1,24 @@
+<?php
+
+Label : NEXT
+  echo
+  Label : NEXT
+    "
+    Label : NEXT
+      ${
+      Label : NEXT
+        b
+        Label : NEXT
+          }
+          Label : NEXT
+            [1]
+            Label : NEXT
+              "
+              Label : NEXT
+                ;
+                Label : NEXT
+                  ?>
+                  Label : NEXT
+                    /**/
+                    Label : NEXT
+                      /* * */

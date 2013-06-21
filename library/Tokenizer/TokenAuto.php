@@ -109,7 +109,7 @@ class TokenAuto extends Token {
                 } elseif ($offset < 0) {
                     $d = str_repeat(".in('NEXT')", abs($offset));
                 } else {
-                    print "Ignoring order 0\n";
+                    $d = '';
                 }
                 $qactions[] = " /* order */ it$d.each{ it.setProperty('order', $order);}";
             }
@@ -261,6 +261,62 @@ f.each{
             }
             unset($actions['dropNextCode']);
         }
+
+        if (isset($actions['insertConcat'])) {
+                $qactions[] = "
+/* insertConcat */
+x = g.addVertex(null, [code:'{$actions['insertConcat']}', atom:'Concatenation', token:'T_DOT']);
+
+p = it.in('NEXT').next();
+n = it.out('NEXT').out('NEXT').next();
+a = it
+b = it.out('NEXT').next();
+
+
+g.removeEdge(p.outE('NEXT').next());
+g.addEdge(p, x, 'NEXT');
+g.removeEdge(n.inE('NEXT').next());
+g.addEdge(x, n, 'NEXT');
+
+g.addEdge(x, a, 'CONCAT');
+g.addEdge(x, b, 'CONCAT');
+g.removeEdge(b.inE('NEXT').next());
+
+";
+            unset($actions['insertConcat']);
+        }
+
+        if (isset($actions['insertConcat2'])) {
+            $qactions[] = "
+/* insertConcat 2 */
+x = it;
+it.out('NEXT').out('CONCAT').each{ g.addEdge(x, it, 'CONCAT'); };
+it.out('NEXT').outE('CONCAT').each{ g.removeEdge(it); };
+    
+g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
+
+//it.out('NEXT').next().setProperty('code', 'Destroyed');
+g.removeVertex(it.out('NEXT').next());
+
+";
+            unset($actions['insertConcat2']);
+        }        
+
+        if (isset($actions['insertConcat3'])) {
+            $qactions[] = "
+/* insertConcat 3 */
+x = it;
+b = it.out('NEXT').next();
+
+g.addEdge(x, b, 'CONCAT');
+g.addEdge(x, b.out('NEXT').next(), 'NEXT');
+
+b.bothE('NEXT').each{ g.removeEdge(it); }
+    
+
+";
+            unset($actions['insertConcat3']);
+        }           
         
         if (isset($actions['insertEdge'])) {
             foreach($actions['insertEdge'] as $destination => $config) {
@@ -310,9 +366,8 @@ g.addEdge(x,  f, 'NEXT');
         }
         
         if (isset($actions['mergeNext']) && $actions['mergeNext']) {
-            list($atom, $link) = $actions['mergeNext'];
-            
-            $qactions[] = " /* mergeNext */ 
+            foreach($actions['mergeNext'] as $atom => $link) {
+                $qactions[] = " /* mergeNext */ 
 f = it;
 c = it.out('$link').out('$link').count();
 it.out('$link').hasNot('order', null).each{
@@ -328,7 +383,9 @@ it.as('origin').out('$link').has('atom','$atom').each{
     };
     g.removeVertex(it);    
 }
+
             ";
+            }
             unset($actions['mergeNext']);
         }
 

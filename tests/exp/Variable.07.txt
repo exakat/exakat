@@ -1,0 +1,30 @@
+<?php
+
+Label : NEXT
+  class
+  Label : NEXT
+    x
+    Label : NEXT
+      {
+      Label : NEXT
+        protected
+        Label : NEXT
+          ;
+          Label : NEXT
+            }
+            Label : NEXT
+              ?>
+              Label : NEXT
+                /**/
+                Label : NEXT
+                  /* * */
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ::
+              Label : CONSTANT
+                c
+              Label : CLASS
+                b
+            Label : LEFT
+              $a
