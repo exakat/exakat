@@ -7,12 +7,14 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
-        $d
+        "a"
+      Label : CONCAT
+        [
+        Label : VARIABLE
+          $d
         Label : INDEX
           'e'
       Label : CONCAT
         "b"
-      Label : CONCAT
-        "a"
     Label : LEFT
       $query

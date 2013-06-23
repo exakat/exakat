@@ -1,24 +1,12 @@
 <?php
 
-Label : NEXT
-  $a
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
     =
-    Label : NEXT
+    Label : RIGHT
       "
-      Label : NEXT
-        ${
-        Label : NEXT
-          b
-          Label : NEXT
-            }
-            Label : NEXT
-              "
-              Label : NEXT
-                ;
-                Label : NEXT
-                  ?>
-                  Label : NEXT
-                    /**/
-                    Label : NEXT
-                      /* * */
+      Label : CONTAIN
+        b
+    Label : LEFT
+      $a

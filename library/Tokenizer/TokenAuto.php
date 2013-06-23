@@ -182,7 +182,7 @@ g.removeEdge(f.outE('NEXT').next());
 
 ";
                     }
-                } else {
+                } elseif ($destination < 0) {
                 
                     if ($label == 'DROP') {
                         $qactions[] = "
@@ -210,6 +210,8 @@ g.removeEdge(f.inE('NEXT').next());
 
 ";
                     }
+                } else {
+                    die("Destination 0 pour transform ");
                 }
             }
 
@@ -468,7 +470,7 @@ it.as('origin').out('$link').has('atom','$atom').each{
             if (is_string($cdt['filterOut'])) {
                 $qcdts[] = "filter{it.token != '".$cdt['filterOut']."' }";
             } else {
-                $qcdts[] = "filter{it.atom != null || !(it.token in ['".join("', '", $cdt['filterOut'])."'])}";
+                $qcdts[] = "filter{!(it.token in ['".join("', '", $cdt['filterOut'])."'])}";
             }
 
             unset($cdt['filterOut']);

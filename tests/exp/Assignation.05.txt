@@ -9,7 +9,9 @@ Label : CODE
       Label : RIGHT
         4
       Label : LEFT
-        $y
+        [
+        Label : VARIABLE
+          $y
         Label : INDEX
           3
     Label : LEFT

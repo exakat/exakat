@@ -8,10 +8,11 @@ class Assignation extends TokenAuto {
         $operands = array('Integer', 'Multiplication', 'Addition', 'Not',
                           'Array', 'Float', 'Concatenation', 'Property',
                           'Parenthesis', 'Noscream', 'Ternary', 'New', 'String',
-                          'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Property' );
+                          'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Property',
+                          'Heredoc',  );
         
         $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty')),
-                                  0 => array('code' => array('=', '+=',),
+                                  0 => array('code' => array('=', '+=','.=',),
                                              'atom' => 'none'),
                                   1 => array('atom' => $operands),
                                   

@@ -5,6 +5,8 @@ Label : CODE
   Label : ELEMENT
     @
     Label : AT
-      $x
+      [
+      Label : VARIABLE
+        $x
       Label : INDEX
         1

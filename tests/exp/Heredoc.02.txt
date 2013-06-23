@@ -1,0 +1,14 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<<'EOF'
+
+      Label : STRING
+        b
+
+    Label : LEFT
+      $a

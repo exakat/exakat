@@ -13,6 +13,8 @@ Label : CODE
     Label : THEN
       2
     Label : ELSE
-      $x
+      [
+      Label : VARIABLE
+        $x
       Label : INDEX
         1

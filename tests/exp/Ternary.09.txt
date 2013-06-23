@@ -13,10 +13,16 @@ Label : CODE
     Label : THEN
       2
     Label : ELSE
-      $x
-      Label : INDEX
-        1
-      Label : INDEX
-        2
+      [
+      Label : VARIABLE
+        [
+        Label : VARIABLE
+          [
+          Label : VARIABLE
+            $x
+          Label : INDEX
+            1
+        Label : INDEX
+          2
       Label : INDEX
         3

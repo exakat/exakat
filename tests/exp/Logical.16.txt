@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    xor
+    Label : LEFT
+      1
+    Label : RIGHT
+      2

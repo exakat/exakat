@@ -1,0 +1,21 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<<eof
+
+      Label : STRING
+        Concat
+        Label : CONCAT
+          a
+        Label : CONCAT
+          $b
+        Label : CONCAT
+          
+c
+
+    Label : LEFT
+      $b

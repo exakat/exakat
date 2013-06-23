@@ -3,10 +3,14 @@
 Label : CODE
   -
   Label : RIGHT
-    $x
+    [
+    Label : VARIABLE
+      $x
     Label : INDEX
       2
   Label : LEFT
-    $x
+    [
+    Label : VARIABLE
+      $x
     Label : INDEX
       1

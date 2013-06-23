@@ -1,56 +1,74 @@
 <?php
 
-Label : NEXT
-  $x
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        "
+        Label : CONTAIN
+          Concat
+          Label : CONCAT
+            x
+          Label : CONCAT
+            $y
+          Label : CONCAT
+            z
+          Label : CONCAT
+            $a
+      Label : LEFT
+        $f
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        "
+        Label : CONTAIN
+          Concat
+          Label : CONCAT
+            x
+          Label : CONCAT
+            $y
+          Label : CONCAT
+            z
+      Label : LEFT
+        $e
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        "
+        Label : CONTAIN
+          $a
+      Label : LEFT
+        $d
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        "
+        Label : CONTAIN
+          z
+      Label : LEFT
+        $c
+  Label : ELEMENT
     =
-    Label : NEXT
+    Label : RIGHT
       "
-      Label : NEXT
-        {
-        Label : NEXT
+      Label : CONTAIN
+        ?
+        Label : CONDITION
           $y
-          Label : NEXT
-            }
-            Label : NEXT
-              "
-              Label : NEXT
-                ;
-                Label : NEXT
-                  $x
-                  Label : NEXT
-                    =
-                    Label : NEXT
-                      "
-                      Label : NEXT
-                        ${
-                        Label : NEXT
-                          z
-                          Label : NEXT
-                            }
-                            Label : NEXT
-                              "
-                              Label : NEXT
-                                ;
-                                Label : NEXT
-                                  $x
-                                  Label : NEXT
-                                    =
-                                    Label : NEXT
-                                      "
-                                      Label : NEXT
-                                        ${
-                                        Label : NEXT
-                                          $a
-                                          Label : NEXT
-                                            }
-                                            Label : NEXT
-                                              "
-                                              Label : NEXT
-                                                ;
-                                                Label : NEXT
-                                                  ?>
-                                                  Label : NEXT
-                                                    /**/
-                                                    Label : NEXT
-                                                      /* * */
+        Label : THEN
+          1
+        Label : ELSE
+          3
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        $y
+    Label : LEFT
+      $a

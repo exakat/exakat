@@ -33,6 +33,7 @@ $classes = array(
     'Staticmethodcall',
     'Staticconstant',
     'Logical',
+    'Heredoc',
     'Not',
     '_Instanceof',
     '_New',
@@ -69,7 +70,8 @@ $count = $prev - 1;
 $prevprev = $prev - 1;
 $round = 0;
 
-while($prev > $count || $prevprev > $prev) {
+while($prev > $count || $prevprev > $prev) { 
+//    print "$count $prev $prevprev\n";
     $round++;
     
     $prevprev = $prev;

@@ -1,8 +1,12 @@
 <?php
 
 Label : CODE
-  $_array
-  Label : INDEX
+  [
+  Label : VARIABLE
     $_array
+  Label : INDEX
+    [
+    Label : VARIABLE
+      $_array
     Label : INDEX
       1

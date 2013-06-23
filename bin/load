@@ -75,6 +75,7 @@ $TPHP = array(";" => 'T_SEMICOLON',
               '&&' => 'T_ANDAND',
               '||' => 'T_OROR',
               '"' => 'T_QUOTE',
+              '$' => 'T_DOLLAR',
               );
 
 foreach($tokens as $id => $token) {

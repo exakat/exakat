@@ -10,6 +10,7 @@ class Sign extends TokenAuto {
                                    0  => array('token' => array('T_PLUS', 'T_MINUS'),
                                                'atom' => 'none'),
                                    1  => array('atom' => $operands),
+                                   2  => array('filterOut' => array('T_OPEN_PARENTHESIS')),
                                  );
         
         $this->actions = array('makeEdge'    => array( '1' => 'SIGN'),

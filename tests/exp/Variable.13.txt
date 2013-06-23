@@ -1,52 +1,38 @@
 <?php
 
-Label : NEXT
-  $result
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
     =
-    Label : NEXT
+    Label : RIGHT
       <<<EOF
 
-      Label : NEXT
-        
+      Label : STRING
+        Concat
+        Label : CONCAT
+          
 
-        Label : NEXT
-          ${
-          Label : NEXT
-            ->
-            Label : PROPERTY
-              property
-            Label : NEXT
-              }
-              Label : NEXT
-                ;
-
-
-                Label : NEXT
-                  ${
-                  Label : NEXT
-                    ->
-                    Label : METHOD
-                      method
-                      Label : ARGUMENTS
-                        void
-                    Label : NEXT
-                      }
-                      Label : NEXT
-                        ;
+        Label : CONCAT
+          ->
+          Label : PROPERTY
+            property
+          Label : OBJECT
+            $object
+        Label : CONCAT
+          ;
 
 
-                        Label : NEXT
-                          EOF
-                          Label : NEXT
-                            ;
-                            Label : NEXT
-                              ?>
-                              Label : NEXT
-                                /**/
-                                Label : NEXT
-                                  /* * */
-                    Label : OBJECT
-                      $object
-            Label : OBJECT
-              $object
+        Label : CONCAT
+          ->
+          Label : METHOD
+            method
+            Label : ARGUMENTS
+              void
+          Label : OBJECT
+            $object
+        Label : CONCAT
+          ;
+
+
+    Label : LEFT
+      $result

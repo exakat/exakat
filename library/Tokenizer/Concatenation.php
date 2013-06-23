@@ -7,11 +7,12 @@ class Concatenation extends TokenAuto {
         $operands = array('String', 'Integer', 'Float', 'Not', 'Variable','_Array', 'Concatenation', 'Sign', 'Array',
                           'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant' );
         
-        $this->conditions = array(-2 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON')), 
+        $this->conditions = array(-2 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_DOLLAR')), 
                                   -1 => array('atom'  => $operands ),
                                    0 => array('token' => 'T_DOT',
                                               'atom'  => 'none'),
                                    1 => array('atom'  => $operands),
+                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_DOUBLE_COLON')),
         ); 
         
         $this->actions = array('makeEdge'   => array( 1 => 'CONCAT',
@@ -25,26 +26,29 @@ class Concatenation extends TokenAuto {
         
         $r = $this->checkAuto();
 
-        $this->conditions = array( 0 => array('atom' => array('String', 'Variable')),
-                                   1 => array('atom' => array('String', 'Variable')),
+        $this->conditions = array( -1 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_DOLLAR')),
+                                    0 => array('atom' => array('String', 'Variable', 'Property')),
+                                    1 => array('atom' => array('String', 'Variable', 'Property')),
         ); 
 
-        $this->actions = array('insertConcat'   => "concat scalar",
+        $this->actions = array('insertConcat'   => "Concat",
                                 'order' => array(0 => 1, 
                                                  1 => 2),
                                 );
         $r = $this->checkAuto();
 
+
+
         $this->conditions = array( 0 => array('atom' => array('Concatenation')),
                                    1 => array('atom' => array('Concatenation')),
         ); 
 
-        $this->actions = array('insertConcat2'    => "concat concat" );
+        $this->actions = array('insertConcat2'    => "Concat" );
         $r = $this->checkAuto();
 
 
         $this->conditions = array( 0 => array('atom' => array('Concatenation')),
-                                   1 => array('atom' => array('String', 'Variable')),
+                                   1 => array('atom' => array('String', 'Variable', 'Property')),
         ); 
 
         $this->actions = array('insertConcat3'   => true,
@@ -54,31 +58,18 @@ class Concatenation extends TokenAuto {
 
         $r = $this->checkAuto();
 
-/*
-        $this->conditions = array( 0 => array('atom' => array('Concatenation')),
-                                   1 => array('atom' => array('Concatenation')),
-        ); 
-
-        $this->actions = array('insertConcat3'   => true,
-                                'order' => array(0 => 1, 
-                                                 1 => 2),
-                                'mergeNext'  => array('Concatenation' => 'CONCAT'), 
-                                );
-        $r =  $this->checkAuto();
-*/
 // Case of string with interpolation : "a${b}c";
-        $this->conditions = array( -1 => array('token' => array('T_QUOTE'), 'atom' => 'none'),
-                                    0 => array('atom'  => array('Concatenation', 'String')),
-                                    1 => array('token' => array('T_QUOTE'), 'atom' => 'none')
+        $this->conditions = array(  0 => array('token' => array('T_QUOTE'), 'atom' => 'none'),
+                                    1 => array('atom'  => 'yes'),
+                                    2 => array('token' => array('T_QUOTE'), 'atom' => 'none')
                                  );
         
-        $this->actions = array( 'transform' => array(-1 => 'DROP',
-                                                      1 => 'DROP'),
+        $this->actions = array( 'transform' => array( 1 => 'CONTAIN',
+                                                      2 => 'DROP'),
                                 'atom'       => 'Concatenation',
                                 'mergeNext'  => array('Concatenation' => 'CONCAT'), 
                                 );
         $r =  $this->checkAuto();
-//        $this->printQuery();
 
         return $r;
     }

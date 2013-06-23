@@ -1,14 +1,10 @@
 <?php
 
-Label : NEXT
-  $_ENV
-  Label : INDEX
-    'shell'
-  Label : NEXT
-    ;
-    Label : NEXT
-      ?>
-      Label : NEXT
-        /**/
-        Label : NEXT
-          /* * */
+Label : CODE
+  ;
+  Label : ELEMENT
+    [
+    Label : VARIABLE
+      $_ENV
+    Label : INDEX
+      'shell'

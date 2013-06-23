@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Staticproperty extends TokenAuto {
     function _check() {
         
-        $operands = array('Constant');
+        $operands = array('Constant', 'String' );
         $this->conditions = array( -1 => array('atom' => $operands), 
                                     0 => array('token' => 'T_DOUBLE_COLON'),
                                     1 => array('atom' => array('Variable', 'Array')),

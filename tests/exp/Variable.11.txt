@@ -1,20 +1,16 @@
 <?php
 
-Label : NEXT
-  $
-  Label : NEXT
-    ;
-    Label : NEXT
-      ?>
-      Label : NEXT
-        /**/
-        Label : NEXT
-          /* * */
-    Label : ELEMENT
+Label : CODE
+  ;
+  Label : ELEMENT
+    $
+    Label : NAME
       =
       Label : RIGHT
         1
       Label : LEFT
-        $c
+        [
+        Label : VARIABLE
+          $c
         Label : INDEX
           'd'

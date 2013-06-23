@@ -1,14 +1,8 @@
 <?php
 
-Label : NEXT
-  3
-  Label : NEXT
-    |
-    Label : NEXT
-      4
-      Label : NEXT
-        ?>
-        Label : NEXT
-          /**/
-          Label : NEXT
-            /* * */
+Label : CODE
+  |
+  Label : LEFT
+    3
+  Label : RIGHT
+    4

@@ -1,20 +1,8 @@
 <?php
 
-Label : NEXT
-  "
-  Label : NEXT
-    ${
-    Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
+    "
+    Label : CONTAIN
       b
-      Label : NEXT
-        }
-        Label : NEXT
-          "
-          Label : NEXT
-            ;
-            Label : NEXT
-              ?>
-              Label : NEXT
-                /**/
-                Label : NEXT
-                  /* * */

@@ -7,11 +7,15 @@ Label : CODE
     Label : CODE
       !=
       Label : RIGHT
-        $ligne
+        [
+        Label : VARIABLE
+          $ligne
         Label : INDEX
           1
       Label : LEFT
-        $ligne
+        [
+        Label : VARIABLE
+          $ligne
         Label : INDEX
           0
   Label : THEN

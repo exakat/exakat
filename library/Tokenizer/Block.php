@@ -6,7 +6,8 @@ class Block extends TokenAuto {
     function _check() {
     
     // @doc Block
-        $this->conditions = array( 0 => array('token' => 'T_OPEN_CURLY',
+        $this->conditions = array( -1 => array('filterOut' => array('T_VARIABLE', 'T_DOLLAR')),
+                                   0 => array('token' => 'T_OPEN_CURLY',
                                               'atom' => 'none'),
                                    1 => array('atom' => 'yes'),
                                    2 => array('token' => 'T_CLOSE_CURLY',
@@ -14,9 +15,9 @@ class Block extends TokenAuto {
                                    
         );
         
-        $this->actions = array('makeEdge'    => array('1' => 'CODE',
+        $this->actions = array('transform'    => array(1 => 'CODE',
+                                                       2 => 'DROP',
                                                       ),
-                               'dropNext'    => array('1'),
                                'atom'       => 'Block',
                                );
         $r = $this->checkAuto(); 

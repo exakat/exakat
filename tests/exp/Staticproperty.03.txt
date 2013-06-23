@@ -3,7 +3,9 @@
 Label : CODE
   ::
   Label : PROPERTY
-    $a
+    [
+    Label : VARIABLE
+      $a
     Label : INDEX
       'b'
   Label : CLASS

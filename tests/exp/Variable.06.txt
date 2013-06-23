@@ -1,24 +1,16 @@
 <?php
 
-Label : NEXT
-  echo
-  Label : NEXT
-    "
-    Label : NEXT
-      ${
-      Label : NEXT
-        b
-        Label : NEXT
-          }
-          Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "
+        Label : CONTAIN
+          Concat
+          Label : CONCAT
+            b
+          Label : CONCAT
             [1]
-            Label : NEXT
-              "
-              Label : NEXT
-                ;
-                Label : NEXT
-                  ?>
-                  Label : NEXT
-                    /**/
-                    Label : NEXT
-                      /* * */

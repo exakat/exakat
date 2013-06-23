@@ -15,7 +15,9 @@ Label : CODE
             Label : ARGUMENTS
               void
               Label : ARGUMENT
-                $c
+                [
+                Label : VARIABLE
+                  $c
                 Label : INDEX
                   d
           Label : CLASS
@@ -23,7 +25,9 @@ Label : CODE
         Label : CONCAT
           'h'
         Label : CONCAT
-          $f
+          [
+          Label : VARIABLE
+            $f
           Label : INDEX
             'g'
         Label : CONCAT

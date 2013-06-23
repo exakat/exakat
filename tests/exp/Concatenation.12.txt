@@ -11,7 +11,9 @@ Label : CODE
       Label : CONCAT
         "f"
       Label : CONCAT
-        $d
+        [
+        Label : VARIABLE
+          $d
         Label : INDEX
           'e'
       Label : CONCAT

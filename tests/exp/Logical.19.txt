@@ -1,0 +1,34 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      &&
+      Label : LEFT
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $_REQUEST
+            Label : INDEX
+              'opt'
+      Label : RIGHT
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $_REQUEST
+          Label : INDEX
+            'opt'
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        '1'

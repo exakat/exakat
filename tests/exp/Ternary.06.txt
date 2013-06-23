@@ -11,13 +11,17 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $_REQUEST
+            [
+            Label : VARIABLE
+              $_REQUEST
             Label : INDEX
               'rech_ven'
       Label : LEFT
         $rech_ven
     Label : THEN
-      $_REQUEST
+      [
+      Label : VARIABLE
+        $_REQUEST
       Label : INDEX
         'rech_ven'
     Label : ELSE

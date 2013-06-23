@@ -1,32 +1,22 @@
 <?php
 
-Label : NEXT
-  $a
-  Label : NEXT
-    {
-    Label : NEXT
-      $b
-      Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      {
+      Label : VARIABLE
         {
-        Label : CODE
-          "c"
-        Label : NEXT
-          }
-          Label : NEXT
-            {
-            Label : NEXT
-              "d"
-              Label : NEXT
-                }
-                Label : NEXT
-                  =
-                  Label : NEXT
-                    1
-                    Label : NEXT
-                      ;
-                      Label : NEXT
-                        ?>
-                        Label : NEXT
-                          /**/
-                          Label : NEXT
-                            /* * */
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          {
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            "c"
+      Label : INDEX
+        "d"

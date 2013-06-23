@@ -8,7 +8,7 @@ class Property extends TokenAuto {
         $operands = array('Variable', 'Property', '_Array');
         $this->conditions = array( -1 => array('atom' => $operands), 
                                     0 => array('token' => 'T_OBJECT_OPERATOR'),
-                                    1 => array('atom' => 'none'),
+                                    1 => array('atom' => 'String'),
                                     2 => array('filterOut' => array('T_OPEN_PARENTHESIS')),
                                     
                                  );

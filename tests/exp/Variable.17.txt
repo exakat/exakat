@@ -3,8 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
-    Concat
-    Label : CONCAT
-      a
-    Label : CONCAT
-      b
+    "
+    Label : CONTAIN
+      Concat
+      Label : CONCAT
+        a
+      Label : CONCAT
+        b

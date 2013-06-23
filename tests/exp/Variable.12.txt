@@ -1,60 +1,50 @@
 <?php
 
-Label : NEXT
-  $result
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
     =
-    Label : NEXT
+    Label : RIGHT
       <<<EOF
 
-      Label : NEXT
-        
+      Label : STRING
+        Concat
+        Label : CONCAT
+          
 #Allow smarty {php} tags?  These could be dangerous if you don't trust your users.
 \$config['use_smarty_php_tags'] = 
-        Label : NEXT
-          ${
-          Label : NEXT
-            ?
-            Label : CONDITION
+        Label : CONCAT
+          ?
+          Label : CONDITION
+            [
+            Label : VARIABLE
               $config
-              Label : INDEX
-                'use_smarty_php_tags'
-            Label : THEN
-              'true'
-            Label : ELSE
-              'false'
-            Label : NEXT
-              }
-              Label : NEXT
-                ;
+            Label : INDEX
+              'use_smarty_php_tags'
+          Label : THEN
+            'true'
+          Label : ELSE
+            'false'
+        Label : CONCAT
+          ;
 
 #Automatically assign alias based on page title?
 \$config['auto_alias_content'] = 
-                Label : NEXT
-                  ${
-                  Label : NEXT
-                    ?
-                    Label : CONDITION
-                      $config
-                      Label : INDEX
-                        'auto_alias_content'
-                    Label : THEN
-                      'true'
-                    Label : ELSE
-                      'false'
-                    Label : NEXT
-                      }
-                      Label : NEXT
-                        ;
+        Label : CONCAT
+          ?
+          Label : CONDITION
+            [
+            Label : VARIABLE
+              $config
+            Label : INDEX
+              'auto_alias_content'
+          Label : THEN
+            'true'
+          Label : ELSE
+            'false'
+        Label : CONCAT
+          ;
 
 
-                        Label : NEXT
-                          EOF
-                          Label : NEXT
-                            ;
-                            Label : NEXT
-                              ?>
-                              Label : NEXT
-                                /**/
-                                Label : NEXT
-                                  /* * */
+    Label : LEFT
+      $result
