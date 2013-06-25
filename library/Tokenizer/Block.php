@@ -6,7 +6,7 @@ class Block extends TokenAuto {
     function _check() {
     
     // @doc Block
-        $this->conditions = array( -1 => array('filterOut' => array('T_VARIABLE', 'T_DOLLAR')),
+        $this->conditions = array( -1 => array('filterOut2' => array('T_VARIABLE', 'T_DOLLAR')),
                                    0 => array('token' => 'T_OPEN_CURLY',
                                               'atom' => 'none'),
                                    1 => array('atom' => 'yes'),

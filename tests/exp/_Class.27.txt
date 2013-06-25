@@ -26,7 +26,7 @@ Label : CODE
           $a
         Label : VALUE
           1
-      Label : ELEMENT3
+      Label : ELEMENT
         var
         Label : NAME
           $b
@@ -38,3 +38,9 @@ Label : CODE
           $c
         Label : VALUE
           3
+      Label : ELEMENT
+        var
+        Label : NAME
+          $e
+        Label : VALUE
+          5

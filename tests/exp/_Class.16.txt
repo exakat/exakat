@@ -8,19 +8,19 @@ Label : CODE
     {
     Label : CODE
       ;
-      Label : ELEMENT2
+      Label : ELEMENT
         var
         Label : NAME
           $x
         Label : VALUE
           void
-      Label : ELEMENT3
+      Label : ELEMENT
         var
         Label : NAME
           $y
         Label : VALUE
           void
-      Label : ELEMENT3
+      Label : ELEMENT
         var
         Label : NAME
           $z

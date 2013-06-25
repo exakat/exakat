@@ -9,38 +9,50 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        const
+        private
         Label : NAME
-          d
-        Label : VALUE
-          4
-      Label : ELEMENT
-        var
-        Label : VALUE
-          void
-        Label : DEFINE
-          $x
-      Label : ELEMENT
-        const
-        Label : NAME
-          c
+          $g
         Label : VALUE
           3
+      Label : ELEMENT
+        private
+        Label : NAME
+          $h
+        Label : VALUE
+          void
+      Label : ELEMENT
+        private
+        Label : NAME
+          $f
+        Label : VALUE
+          2
+      Label : ELEMENT
+        private
+        Label : NAME
+          $e
+        Label : VALUE
+          void
       Label : ELEMENT
         const
         Label : NAME
           b
         Label : VALUE
-          2
+          3
       Label : ELEMENT
-        const
+        private
         Label : NAME
-          a
+          $c
+        Label : VALUE
+          void
+      Label : ELEMENT
+        private
+        Label : NAME
+          $d
+        Label : VALUE
+          void
+      Label : ELEMENT
+        private
+        Label : NAME
+          $b
         Label : VALUE
           1
-      Label : ELEMENT
-        const
-        Label : NAME
-          e
-        Label : VALUE
-          5

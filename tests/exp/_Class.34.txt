@@ -8,29 +8,27 @@ Label : CODE
     {
     Label : CODE
       ;
-      Label : ELEMENT2
-        ;
-        Label : ELEMENT
-          const
-          Label : NAME
-            b
-          Label : VALUE
-            2
-        Label : ELEMENT
-          var
-          Label : NAME
-            $g
-          Label : VALUE
-            4
-        Label : ELEMENT3
-          var
-          Label : NAME
-            $e
-          Label : VALUE
-            void
-      Label : ELEMENT3
+      Label : ELEMENT
         var
         Label : NAME
           $h
+        Label : VALUE
+          void
+      Label : ELEMENT
+        const
+        Label : NAME
+          b
+        Label : VALUE
+          2
+      Label : ELEMENT
+        var
+        Label : NAME
+          $g
+        Label : VALUE
+          4
+      Label : ELEMENT
+        var
+        Label : NAME
+          $e
         Label : VALUE
           void

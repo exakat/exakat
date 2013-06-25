@@ -176,11 +176,11 @@ var = it;
 arg = it.out('NEXT').next();
 
 root = it;
-root.setProperty('code', 'ROOT2');
-root.setProperty('token', 'T_VAR');
+root.setProperty('code', var.code);
+root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').has('atom', 'Variable').each{
-    x = g.addVertex(null, [code:'var', atom:'Var', token:'T_VAR', 'file':arg.file]);
+    x = g.addVertex(null, [code:var.code, atom:'Var', token:var.token, 'file':arg.file]);
     
     g.addEdge(root, x, 'NEXT');
     root = x;
@@ -191,7 +191,7 @@ arg.out('ARGUMENT').has('atom', 'Variable').each{
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    x = g.addVertex(null, [code:'var', atom:'Var', token:'T_VAR', 'file':arg.file]);
+    x = g.addVertex(null, [code:var.code, atom:'Var', token:var.token, 'file':arg.file]);
     
     g.addEdge(root, x, 'NEXT');
     root = x;
@@ -214,6 +214,21 @@ g.removeVertex(var);
 
 ";
             unset($actions['to_var']);
+        }
+
+        if (isset($actions['to_ppp'])) {
+            $qactions[] = "
+/* to ppp with arguments */
+g.addEdge(it, it.out('NEXT').out('LEFT').next(), 'NAME');
+g.addEdge(it, it.out('NEXT').out('RIGHT').next(), 'VALUE');
+
+assignation = it.out('NEXT').next();
+g.addEdge(it, assignation.out('NEXT').next(), 'NEXT');
+assignation.bothE().each{ g.removeEdge(it); }
+g.removeVertex(assignation);
+
+";
+            unset($actions['to_ppp']);
         }
         
         if (isset($actions['transform'])) {

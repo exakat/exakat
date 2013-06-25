@@ -9,12 +9,13 @@ class Sequence extends TokenAuto {
                           'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
                           'Noscream', 'Staticproperty', 'Property', 'Ternary', 'New', 'Return',
                           'Instanceof', 'Magicconstant', 'Staticconstant', 'Methodcall', 'Logical',
-                          'Var', 'Const', 
+                          'Var', 'Const', 'Ppp',
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
                                 'T_DOUBLE_COLON', 'T_COLON', 'T_EQUAL', 'T_NEW', 'T_INSTANCEOF', 
-                                'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_EQUAL', 'T_COMMA'  );
+                                'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_EQUAL', 'T_COMMA',
+                                'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC'   );
         
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
@@ -40,9 +41,9 @@ class Sequence extends TokenAuto {
                                    0 => array('atom' => 'Sequence')
         );
         
-        $this->actions = array('transform'   => array(-1 => 'ELEMENT3'),
+        $this->actions = array('transform'   => array(-1 => 'ELEMENT'),
                                'order'      => array(-1 =>  1),
-                               'mergeNext'  => array('Sequence' => 'ELEMENT4'), 
+                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                );
         $r = $this->checkAuto();
@@ -57,7 +58,7 @@ class Sequence extends TokenAuto {
                                               'atom'  => 'none'),
         );
         
-        $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT2'
+        $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'
                                                       ),
                                'order'    => array('-1' => '1'),
                                'atom'       => 'Sequence',

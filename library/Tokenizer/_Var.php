@@ -7,7 +7,7 @@ class _Var extends TokenAuto {
     
     // class x { var $x }
         $this->conditions = array( 0 => array('token' => 'T_VAR'),
-                                   1 => array('atom' => array('Variable', 'String')),
+                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant')),
                                    2 => array('filterOut' => array('T_EQUAL', 'T_COMMA')),
                                    // T_SEMICOLON because of _Class 28 test
                                  );
@@ -23,7 +23,7 @@ class _Var extends TokenAuto {
         $this->conditions = array( 0 => array('token' => 'T_VAR'),
                                    1 => array('atom' => 'Variable'),
                                    2 => array('token' => 'T_EQUAL'),
-                                   3 => array('atom' => array('String,', 'Integer')),
+                                   3 => array('atom' => array('String,', 'Integer', 'Staticconstant')),
                                    4 => array('filterOut2' => array('T_COMMA')),
                                  );
         

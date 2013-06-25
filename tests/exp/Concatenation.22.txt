@@ -5,8 +5,6 @@ Label : CODE
   Label : ELEMENT
     .
     Label : CONCAT
-      'a'
-    Label : CONCAT
       $e
     Label : CONCAT
       [
@@ -16,3 +14,5 @@ Label : CODE
         'c'
     Label : CONCAT
       'd'
+    Label : CONCAT
+      'a'

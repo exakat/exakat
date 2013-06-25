@@ -3,24 +3,26 @@
 Label : CODE
   ;
   Label : ELEMENT
-    +
-    Label : RIGHT
-      6
-    Label : LEFT
-      5
-  Label : ELEMENT
-    +
-    Label : RIGHT
-      4
-    Label : LEFT
-      3
-  Label : ELEMENT
-    +
-    Label : RIGHT
-      7
-    Label : LEFT
+    ;
+    Label : ELEMENT
       +
       Label : RIGHT
-        2
+        6
       Label : LEFT
-        1
+        5
+    Label : ELEMENT
+      +
+      Label : RIGHT
+        4
+      Label : LEFT
+        3
+    Label : ELEMENT
+      +
+      Label : RIGHT
+        7
+      Label : LEFT
+        +
+        Label : RIGHT
+          2
+        Label : LEFT
+          1

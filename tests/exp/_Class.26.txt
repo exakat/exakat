@@ -8,31 +8,31 @@ Label : CODE
     {
     Label : CODE
       ;
-      Label : ELEMENT2
+      Label : ELEMENT
         var
         Label : NAME
           $a
         Label : VALUE
           1
-      Label : ELEMENT3
+      Label : ELEMENT
         var
         Label : NAME
           $b
         Label : VALUE
           2
-      Label : ELEMENT3
+      Label : ELEMENT
         var
         Label : NAME
           $c
         Label : VALUE
           3
-      Label : ELEMENT3
+      Label : ELEMENT
         var
         Label : NAME
           $d
         Label : VALUE
           4
-      Label : ELEMENT3
+      Label : ELEMENT
         var
         Label : NAME
           $e

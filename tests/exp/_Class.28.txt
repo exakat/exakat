@@ -14,3 +14,9 @@ Label : CODE
           b
         Label : VALUE
           2
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          a

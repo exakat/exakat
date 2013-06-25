@@ -11,8 +11,7 @@ class Assignation extends TokenAuto {
                           'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Property',
                           'Heredoc',  );
         
-        $this->conditions = array(//-2 => array('filterOut' => array( 'T_VAR')),
-                                  -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty')),
+        $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty')),
                                    0 => array('code' => array('=', '+=','.=',),
                                              'atom' => 'none'),
                                    1 => array('atom' => $operands),

@@ -10,13 +10,11 @@ Label : CODE
       ;
       Label : ELEMENT
         var
-        Label : NAME
-          $c
+        Label : DEFINE
+          $a
         Label : VALUE
-          2
-      Label : ELEMENT
-        var
-        Label : NAME
-          $d
-        Label : VALUE
-          3
+          ::
+          Label : CONSTANT
+            c
+          Label : CLASS
+            b

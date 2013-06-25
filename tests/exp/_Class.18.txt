@@ -8,7 +8,7 @@ Label : CODE
     {
     Label : CODE
       ;
-      Label : ELEMENT2
+      Label : ELEMENT
         const
         Label : NAME
           a

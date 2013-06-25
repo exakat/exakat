@@ -3,32 +3,32 @@
 Label : CODE
   ;
   Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        .
-        Label : CONCAT
+    .
+    Label : CONCAT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           ::
-          Label : METHOD
+          Label : CONSTANT
             b
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $c
-                Label : INDEX
-                  d
           Label : CLASS
             a
-        Label : CONCAT
-          'h'
-        Label : CONCAT
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           [
           Label : VARIABLE
-            $f
+            $c
           Label : INDEX
-            'g'
-        Label : CONCAT
-          'e'
+            d
+    Label : CONCAT
+      'h'
+    Label : CONCAT
+      [
+      Label : VARIABLE
+        $f
+      Label : INDEX
+        'g'
+    Label : CONCAT
+      'e'

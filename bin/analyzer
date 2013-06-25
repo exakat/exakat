@@ -44,6 +44,7 @@ $classes = array(
     'Multiplication',
     'Addition', 
     '_Var',
+    '_Ppp',
     'Assignation',
     'Comparison',
     'Ternary',
@@ -70,7 +71,7 @@ foreach($classes as $class) {
 $total = Tokenizer\Token::countTotalToken();
 $count = Tokenizer\Token::countLeftToken() + 1;
 
-$extra_rounds = 4;
+$extra_rounds = 6;
 $prev = array();
 for($i = 0; $i < $extra_rounds + 1; $i++) {
     $prev[$i] = $count + $i;
