@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  class
+  Label : NAME
+    x
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT2
+        const
+        Label : NAME
+          b
+        Label : VALUE
+          2
+      Label : ELEMENT3
+        const
+        Label : NAME
+          a
+        Label : VALUE
+          1

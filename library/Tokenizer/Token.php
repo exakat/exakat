@@ -43,6 +43,12 @@ class Token {
     	return $result[0][0];
     }
 
+    static function countNextEdge() {
+        $result = Token::query("g.E.has('label','NEXT').count()");
+    	
+    	return $result[0][0];
+    }
+
     static public function query($query) {
     	$queryTemplate = $query;
     	$params = array('type' => 'IN');

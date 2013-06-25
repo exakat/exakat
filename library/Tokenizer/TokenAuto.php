@@ -150,8 +150,74 @@ g.removeEdge(f.inE('NEXT').next());
             unset($actions['makeEdge']);
         }
 
+        if (isset($actions['add_void'])) {
+            foreach($actions['add_void'] as $destination => $label) {
+                if ($destination > 0) {
+                    $d = str_repeat(".out('NEXT')", $destination).".next()";
+                } elseif ($destination < 0) {
+                    $d = str_repeat(".in('NEXT')", $destination).".next()";
+                } else {
+                    $d = '';
+                }
+                $qactions[] = "
+/* add void out ($destination) */
+x = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID']);
+g.addEdge(it$d, x, '$label');
+
+";
+             }
+             unset($actions['add_void']);
+        }
+
+        if (isset($actions['to_var'])) {
+            $qactions[] = "
+/* to var with arguments */
+var = it;
+arg = it.out('NEXT').next();
+
+root = it;
+root.setProperty('code', 'ROOT2');
+root.setProperty('token', 'T_VAR');
+
+arg.out('ARGUMENT').has('atom', 'Variable').each{
+    x = g.addVertex(null, [code:'var', atom:'Var', token:'T_VAR', 'file':arg.file]);
+    
+    g.addEdge(root, x, 'NEXT');
+    root = x;
+
+    g.addEdge(x, it, 'NAME');
+    g.removeEdge(it.inE('ARGUMENT').next());
+    g.addEdge(x, g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID']), 'VALUE');
+}
+
+arg.out('ARGUMENT').has('atom', 'Assignation').each{
+    x = g.addVertex(null, [code:'var', atom:'Var', token:'T_VAR', 'file':arg.file]);
+    
+    g.addEdge(root, x, 'NEXT');
+    root = x;
+
+    g.addEdge(x, it.out('LEFT').next(), 'NAME');
+    g.addEdge(x, it.out('RIGHT').next(), 'VALUE');
+    g.removeEdge(it.outE('LEFT').next());
+    g.removeEdge(it.outE('RIGHT').next());
+    
+    g.removeVertex(it);
+}
+
+g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
+g.removeEdge(var.out('NEXT').outE('NEXT').next());
+g.removeVertex(arg);
+
+g.addEdge(var.in('NEXT').next(), var.out('NEXT').next(), 'NEXT');
+var.bothE('NEXT').each{ g.removeEdge(it); }
+g.removeVertex(var);
+
+";
+            unset($actions['to_var']);
+        }
+        
         if (isset($actions['transform'])) {
-            $c = 0;
+            $c = 0; 
             foreach($actions['transform'] as $destination => $label) {
                 if ($destination > 0) { 
                     $c++;
@@ -168,7 +234,46 @@ f.each{
 
     g.removeVertex(i);
 }
+";
+                    } elseif ($label == 'TO_CONST') {
+                        $link = substr($label, 3);
+                        $qactions[] = "
+/* transform to const ($c) */
+a = it.out('NEXT').next();
 
+a.setProperty('code', 'const');
+a.setProperty('atom', 'Const');
+
+b = a.out('NEXT').next();
+
+f = a.out('NEXT').out('NEXT').out('NEXT').next();
+g.addEdge(a, b, 'NAME');
+g.addEdge(a, f, 'VALUE');
+g.addEdge(a, f.out('NEXT').next(), 'NEXT');
+
+g.removeVertex(b.out('NEXT').next());
+
+b.bothE('NEXT').each{ g.removeEdge(it); }
+f.bothE('NEXT').each{ g.removeEdge(it); }
+
+";                    
+                    } elseif (substr($label, 0, 3) == 'TO_') {
+                        $link = substr($label, 3);
+                        $qactions[] = "
+/* transform to var out ($c) */
+n = it.out('NEXT').next();
+h = it;
+n.out('ARGUMENT').each{
+    g.addEdge(h, it, '$link');
+    g.removeEdge(it.inE('ARGUMENT').next());
+}
+
+f = it.out('NEXT').out('NEXT').next();
+g.removeEdge(it.out('NEXT').outE('NEXT').next());
+g.removeEdge(it.outE('NEXT').next());
+g.addEdge(it, f,  'NEXT');
+
+g.removeVertex(n);
 ";
                     } else {
                         $qactions[] = "
@@ -183,7 +288,6 @@ g.removeEdge(f.outE('NEXT').next());
 ";
                     }
                 } elseif ($destination < 0) {
-                
                     if ($label == 'DROP') {
                         $qactions[] = "
 /* transform drop in ($c) */
@@ -385,7 +489,6 @@ it.as('origin').out('$link').has('atom','$atom').each{
     };
     g.removeVertex(it);    
 }
-
             ";
             }
             unset($actions['mergeNext']);
@@ -470,10 +573,20 @@ it.as('origin').out('$link').has('atom','$atom').each{
             if (is_string($cdt['filterOut'])) {
                 $qcdts[] = "filter{it.token != '".$cdt['filterOut']."' }";
             } else {
-                $qcdts[] = "filter{!(it.token in ['".join("', '", $cdt['filterOut'])."'])}";
+                $qcdts[] = "filter{it.atom != null || !(it.token in ['".join("', '", $cdt['filterOut'])."'])}";
             }
 
             unset($cdt['filterOut']);
+        }
+
+        if (isset($cdt['filterOut2'])) {
+            if (is_string($cdt['filterOut2'])) {
+                $qcdts[] = "filter{it.token != '".$cdt['filterOut2']."' }";
+            } else {
+                $qcdts[] = "filter{!(it.token in ['".join("', '", $cdt['filterOut2'])."'])}";
+            }
+
+            unset($cdt['filterOut2']);
         }
 
         if ($remainder = array_keys($cdt)) {

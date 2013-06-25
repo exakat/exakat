@@ -43,6 +43,7 @@ $classes = array(
     'Concatenation',
     'Multiplication',
     'Addition', 
+    '_Var',
     'Assignation',
     'Comparison',
     'Ternary',
@@ -51,7 +52,9 @@ $classes = array(
     'Parenthesis',
     '_Return',
     'Sequence',
+    '_Const',
     'Block',
+    '_Class',
     'Ifthen',
     'Phpcode',
 );
@@ -65,33 +68,42 @@ foreach($classes as $class) {
 }
 
 $total = Tokenizer\Token::countTotalToken();
-$prev = Tokenizer\Token::countLeftToken() + 1;
-$count = $prev - 1; 
-$prevprev = $prev - 1;
+$count = Tokenizer\Token::countLeftToken() + 1;
+
+$extra_rounds = 4;
+$prev = array();
+for($i = 0; $i < $extra_rounds + 1; $i++) {
+    $prev[$i] = $count + $i;
+}
 $round = 0;
 
-while($prev > $count || $prevprev > $prev) { 
+while(check_prev($prev, $extra_rounds)) { 
 //    print "$count $prev $prevprev\n";
+//    print 'Next count : '.Token::countLeftToken()."\n";
     $round++;
     
-    $prevprev = $prev;
-    $prev = $count; 
+    array_unshift($prev, $count);
+//    print_r($prev);
 
     $r = array_pop($regex);
     $r->resetReserve();
     array_push($regex, $r);
-    foreach($regex as $r) {
+    foreach($regex as $name => $r) {
+//        print count($prev)." $name\n";
         $r->check();
         
+//        if ($name == "Block" && count($prev) == 12) { die(__METHOD__); }
+//        if ($name == "Sequence" && count($prev) == 12) { die(__METHOD__); }
         $r->reserve();
     }
     unset($precedence);
 
+//    print 'Next count : '.Token::countLeftToken()."\n";
     if ($count = Token::countLeftToken()) {
         display( "$round) Remains $count of $total tokens to process! \n");
     } else {
         display( "$round) All $total tokens have been processed! \n");
-        $prev = $count = 0;
+        break 1;
     }
 }
 
@@ -99,6 +111,14 @@ Token::cleanHidden();
 $end_time = microtime(true);
 display("Total time : ".number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n");
 // @todo display checks processed
+
+function check_prev($prev, $extra_rounds) {
+    $b = false;
+    for($i = 0; $i < $extra_rounds; $i++) {
+        $b = $b || ($prev[$i + 1] > $prev[$i]);
+    }
+    return $b;
+}
 
 function array_flatten($array, $level = 1) {
     $r = array();

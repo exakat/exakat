@@ -1,0 +1,40 @@
+<?php
+
+Label : NEXT
+  class
+  Label : NAME
+    x
+  Label : EXTENDS
+    y
+  Label : IMPLEMENTS
+    z
+  Label : NEXT
+    {
+    Label : NEXT
+      function
+      Label : NEXT
+        __construct
+        Label : ARGUMENTS
+          void
+        Label : NEXT
+          {
+          Label : NEXT
+            }
+            Label : NEXT
+              function
+              Label : NEXT
+                __destruct
+                Label : ARGUMENTS
+                  void
+                Label : NEXT
+                  {
+                  Label : NEXT
+                    }
+                    Label : NEXT
+                      }
+                      Label : NEXT
+                        ?>
+                        Label : NEXT
+                          /**/
+                          Label : NEXT
+                            /* * */

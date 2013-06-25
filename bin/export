@@ -92,6 +92,9 @@ function display_dot($V, $E, $root, $level = 0) {
     $r = '';
 
     foreach($V as $id => $v) {
+        if (!isset($v['code'])) {
+            $v['code'] =  'NO CODE PROVIDED';
+        }
          $R = $id." [label=\"".addslashes($v['code'])."\"";
          if (isset($v['atom'])) {
             $R .= " shape=box ";

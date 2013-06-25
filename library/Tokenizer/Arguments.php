@@ -7,17 +7,17 @@ class Arguments extends TokenAuto {
         $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 
                              'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
-                             'Magicconstant', 'Ternary' );
+                             'Magicconstant', 'Ternary', 'Assignation', );
         $operands = $operands_wa;
         $operands[] = 'Arguments';
         
         // @note instructions separated by ; 
-        $this->conditions = array(-2 => array('filterOut' => array('T_DOT', 'T_AT', 'T_NOT') ),
+        $this->conditions = array(-2 => array('filterOut' => array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL') ),
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => ',',
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS') ),
+                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_EQUAL') ),
                             );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',

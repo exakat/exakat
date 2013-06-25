@@ -9,17 +9,17 @@ class Sequence extends TokenAuto {
                           'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
                           'Noscream', 'Staticproperty', 'Property', 'Ternary', 'New', 'Return',
                           'Instanceof', 'Magicconstant', 'Staticconstant', 'Methodcall', 'Logical',
+                          'Var', 'Const', 
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
-                                 'T_DOUBLE_COLON', 'T_COLON', 'T_EQUAL', 'T_NEW', 'T_INSTANCEOF', 'T_AND', 'T_QUOTE',
-                                 'T_DOLLAR', );
+                                'T_DOUBLE_COLON', 'T_COLON', 'T_EQUAL', 'T_NEW', 'T_INSTANCEOF', 
+                                'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_EQUAL', 'T_COMMA'  );
         
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
                                   -1 => array('atom' => $operands ),
-                                   0 => array('code' => ';',
-                                             'atom' => 'none'),
+                                   0 => array('code' => ';'),
                                    1 => array('atom' => $operands),
         );
         
@@ -34,6 +34,20 @@ class Sequence extends TokenAuto {
                                );
         $r = $this->checkAuto();
 
+        // @note sequence next to another instruction
+        $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
+                                  -1 => array('atom' => $operands ),
+                                   0 => array('atom' => 'Sequence')
+        );
+        
+        $this->actions = array('transform'   => array(-1 => 'ELEMENT3'),
+                               'order'      => array(-1 =>  1),
+                               'mergeNext'  => array('Sequence' => 'ELEMENT4'), 
+                               'atom'       => 'Sequence',
+                               );
+        $r = $this->checkAuto();
+//        $this->printQuery();
+        
         // @note End of PHP script
         $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
                                   -1 => array('atom' => $operands ),
@@ -43,7 +57,7 @@ class Sequence extends TokenAuto {
                                               'atom'  => 'none'),
         );
         
-        $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'
+        $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT2'
                                                       ),
                                'order'    => array('-1' => '1'),
                                'atom'       => 'Sequence',

@@ -3,54 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        "
-        Label : CONTAIN
-          Concat
-          Label : CONCAT
-            x
-          Label : CONCAT
-            $y
-          Label : CONCAT
-            z
-          Label : CONCAT
-            $a
-      Label : LEFT
-        $f
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        "
-        Label : CONTAIN
-          Concat
-          Label : CONCAT
-            x
-          Label : CONCAT
-            $y
-          Label : CONCAT
-            z
-      Label : LEFT
-        $e
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        "
-        Label : CONTAIN
-          $a
-      Label : LEFT
-        $d
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        "
-        Label : CONTAIN
-          z
-      Label : LEFT
-        $c
-  Label : ELEMENT
     =
     Label : RIGHT
       "
@@ -64,6 +16,52 @@ Label : CODE
           3
     Label : LEFT
       $b
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concat
+        Label : CONCAT
+          x
+        Label : CONCAT
+          $y
+        Label : CONCAT
+          z
+        Label : CONCAT
+          $a
+    Label : LEFT
+      $f
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concat
+        Label : CONCAT
+          x
+        Label : CONCAT
+          $y
+        Label : CONCAT
+          z
+    Label : LEFT
+      $e
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        $a
+    Label : LEFT
+      $d
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        z
+    Label : LEFT
+      $c
   Label : ELEMENT
     =
     Label : RIGHT
