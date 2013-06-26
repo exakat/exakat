@@ -4,7 +4,8 @@ namespace Tokenizer;
 
 class Postplusplus extends TokenAuto {
     function _check() {
-        $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Functioncall', 'Staticproperty' )),
+        $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR')),
+                                  -1 => array('atom' => array('Variable', 'Array', 'Property', 'Functioncall', 'Staticproperty' )),
                                    0 => array('token' => array('T_INC', 'T_DEC')),
                                    1 => array('filterOut' => array('T_DOUBLECOLON')),
         );

@@ -9,7 +9,7 @@ class Assignation extends TokenAuto {
                           'Array', 'Float', 'Concatenation', 'Property',
                           'Parenthesis', 'Noscream', 'Ternary', 'New', 'String',
                           'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Property',
-                          'Heredoc',  );
+                          'Heredoc', 'Preplusplus', 'Postplusplus',  );
         
         $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty')),
                                    0 => array('code' => array('=', '+=','.=',),
