@@ -5,14 +5,15 @@ namespace Tokenizer;
 class Concatenation extends TokenAuto {
     function _check() {
         $operands = array('String', 'Integer', 'Float', 'Not', 'Variable','_Array', 'Concatenation', 'Sign', 'Array',
-                          'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant' );
+                          'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
+                          'Methodcall', 'Parenthesis', );
         
-        $this->conditions = array(-2 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_DOLLAR')), 
+        $this->conditions = array(-2 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR')), 
                                   -1 => array('atom'  => $operands ),
                                    0 => array('token' => 'T_DOT',
                                               'atom'  => 'none'),
                                    1 => array('atom'  => $operands),
-                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_DOUBLE_COLON')),
+                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
         ); 
         
         $this->actions = array('makeEdge'   => array( 1 => 'CONCAT',

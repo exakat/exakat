@@ -1,0 +1,30 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concat
+        Label : CONCAT
+          a 
+        Label : CONCAT
+          ->
+          Label : PROPERTY
+            c
+          Label : OBJECT
+            $b
+        Label : CONCAT
+           '
+        Label : CONCAT
+          $d
+        Label : CONCAT
+          -
+        Label : CONCAT
+          $e
+        Label : CONCAT
+          -01'
+    Label : LEFT
+      $x

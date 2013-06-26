@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concat
+        Label : CONCAT
+          (
+        Label : CONCAT
+          $derivedSelect
+        Label : CONCAT
+          )
+    Label : LEFT
+      $x

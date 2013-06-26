@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concat
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            ->
+            Label : PROPERTY
+              properties
+            Label : OBJECT
+              $this
+          Label : INDEX
+            'prefix'
+        Label : CONCAT
+          ->
+          Label : PROPERTY
+            id
+          Label : OBJECT
+            $node
+    Label : LEFT
+      $x

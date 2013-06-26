@@ -9,17 +9,18 @@ class Parenthesis extends TokenAuto {
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
                              'Instanceof', 'Noscream', 'Magicconstant', 'Logical', );
 
-        $this->conditions = array(-1 => array('filterOut2' => array('T_STRING', 'T_ECHO', 'T_PRINT', 'T_VARIABLE', 'T_ISSET')), 
-                                   0 => array('code' => '(',
+        $this->conditions = array(-1 => array('filterOut2' => array('T_STRING', 'T_ECHO', 'T_EMPTY', 'T_PRINT', 'T_VARIABLE', 'T_ISSET')), 
+                                   0 => array('token' => 'T_OPEN_PARENTHESIS',
                                               'atom' => 'none' ),
                                    1 => array('atom' => $operands),
-                                   2 => array('code' => ')',
+                                   2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom' => 'none'),
         );
         
         $this->actions = array('makeEdge' => array( '1' => 'CODE'),
                                'dropNext' => array(1),
                                'atom'     => 'Parenthesis');
+//        $this->printQuery();
         
         return $this->checkAuto();
     }

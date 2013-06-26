@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Concatenation extends Tokenizeur {
-    /* 22 methods */
+    /* 35 methods */
     public function testConcatenation01()  { $this->generic_test('Concatenation.01'); }
     public function testConcatenation02()  { $this->generic_test('Concatenation.02'); }
     public function testConcatenation03()  { $this->generic_test('Concatenation.03'); }
@@ -30,5 +30,18 @@ class Concatenation extends Tokenizeur {
     public function testConcatenation20()  { $this->generic_test('Concatenation.20'); }
     public function testConcatenation21()  { $this->generic_test('Concatenation.21'); }
     public function testConcatenation22()  { $this->generic_test('Concatenation.22'); }
+    public function testConcatenation23()  { $this->generic_test('Concatenation.23'); }
+    public function testConcatenation24()  { $this->generic_test('Concatenation.24'); }
+    public function testConcatenation25()  { $this->generic_test('Concatenation.25'); }
+    public function testConcatenation26()  { $this->generic_test('Concatenation.26'); }
+    public function testConcatenation27()  { $this->generic_test('Concatenation.27'); }
+    public function testConcatenation28()  { $this->generic_test('Concatenation.28'); }
+    public function testConcatenation29()  { $this->generic_test('Concatenation.29'); }
+    public function testConcatenation30()  { $this->generic_test('Concatenation.30'); }
+    public function testConcatenation31()  { $this->generic_test('Concatenation.31'); }
+    public function testConcatenation32()  { $this->generic_test('Concatenation.32'); }
+    public function testConcatenation33()  { $this->generic_test('Concatenation.33'); }
+    public function testConcatenation34()  { $this->generic_test('Concatenation.34'); }
+    public function testConcatenation35()  { $this->generic_test('Concatenation.35'); }
 }
 ?>

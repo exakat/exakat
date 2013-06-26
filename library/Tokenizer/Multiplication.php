@@ -7,7 +7,7 @@ class Multiplication extends TokenAuto {
 
         $operands = array('Integer', 'Addition', 'Variable', 'Multiplication','Sign','Not',
                           'Parenthesis', 'Property', 'Array', 'Concatenation', 'Float',
-                          'String', );
+                          'String', 'Preplusplus', 'Postplusplus', );
         
         $this->conditions = array(-1 => array('atom' => $operands ),
                                   0 => array('code' => array('*','/','%'),

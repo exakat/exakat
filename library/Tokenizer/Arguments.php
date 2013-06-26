@@ -48,7 +48,7 @@ class Arguments extends TokenAuto {
         $r = $this->checkAuto();
         
         // @note f(1) : no , 
-        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_PRINT', 'T_VARIABLE', 'T_ISSET')),
+        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_EMPTY', 'T_PRINT', 'T_VARIABLE', 'T_ISSET')),
                                    0 => array('code' => '(',
                                              'atom' => 'none'),
                                    1 => array('atom' => $operands_wa),
@@ -66,6 +66,7 @@ class Arguments extends TokenAuto {
                                              'atom' => 'none'),
                                    1 => array('code' => ')',
                                               'atom'  => 'none'),
+                                   2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON')),
         );
         
         $this->actions = array('addEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
@@ -77,7 +78,7 @@ class Arguments extends TokenAuto {
         $this->conditions = array( 0 => array('atom' => 'none',
                                               'token' => array('T_ECHO', 'T_PRINT')),
                                    1 => array('atom'  => 'yes'),
-                                   2 => array('filterOut' => array('T_DOT', 'T_DOUBLE_COLON' )) //, '->','[','+','-','*','/','%', '='
+                                   2 => array('filterOut' => array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR' )) //, '->','[','+','-','*','/','%', '='
         );
         
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));

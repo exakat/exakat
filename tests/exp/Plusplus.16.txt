@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ;
+    Label : ELEMENT
+      [
+      Label : VARIABLE
+        $b
+      Label : INDEX
+        --
+        Label : PREPLUSPLUS
+          $y
+    Label : ELEMENT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        --
+        Label : POSTPLUSPLUS
+          $x

@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<<EOD
+
+      Label : STRING
+        Concat
+        Label : CONCAT
+          A 
+        Label : CONCAT
+          ->
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'c'
+          Label : OBJECT
+            $a
+        Label : CONCAT
+           B
+
+    Label : LEFT
+      $x

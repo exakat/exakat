@@ -5,12 +5,13 @@ namespace Tokenizer;
 class Functioncall extends TokenAuto {
     function _check() {
         
-        $this->conditions = array( 0 => array('token' => array('T_STRING', 'T_ECHO', 'T_VARIABLE', 'T_PRINT', 'T_ISSET')),
+        $this->conditions = array( 0 => array('token' => array('T_STRING', 'T_ECHO', 'T_EMPTY', 'T_VARIABLE', 'T_PRINT', 'T_ISSET')),
                                    1 => array('atom' => 'none',
                                               'code' => '(' ),
                                    2 => array('atom' => 'Arguments'),
                                    3 => array('atom' => 'none',
                                               'code' => ')' ),
+                                   4 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON')),
         );
         
         $this->actions = array('makeEdge'    => array('2' => 'ARGUMENTS',),
@@ -22,6 +23,7 @@ class Functioncall extends TokenAuto {
         $this->conditions = array( 0 => array('token' => array('T_ECHO', 'T_PRINT'),
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Arguments'),
+                                   2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON')),
         );
         
         $this->actions = array('makeEdge'    => array('1' => 'ARGUMENTS',),

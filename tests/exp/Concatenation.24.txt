@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<<EOD
+
+      Label : STRING
+        
+Oui
+
+
+    Label : LEFT
+      $x

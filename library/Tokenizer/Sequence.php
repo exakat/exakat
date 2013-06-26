@@ -9,13 +9,13 @@ class Sequence extends TokenAuto {
                           'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
                           'Noscream', 'Staticproperty', 'Property', 'Ternary', 'New', 'Return',
                           'Instanceof', 'Magicconstant', 'Staticconstant', 'Methodcall', 'Logical',
-                          'Var', 'Const', 'Ppp',
+                          'Var', 'Const', 'Ppp', 'Postplusplus', 'Preplusplus', 'Global', 
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
                                 'T_DOUBLE_COLON', 'T_COLON', 'T_EQUAL', 'T_NEW', 'T_INSTANCEOF', 
                                 'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_EQUAL', 'T_COMMA',
-                                'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC'   );
+                                'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL',  );
         
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut' => $yield_operator), 

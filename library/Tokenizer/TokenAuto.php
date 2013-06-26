@@ -216,6 +216,15 @@ g.removeVertex(var);
             unset($actions['to_var']);
         }
 
+        if (isset($actions['to_global'])) {
+            $qactions[] = "
+/* to global with arguments */
+
+
+";
+            unset($actions['to_global']);
+        }
+        
         if (isset($actions['to_ppp'])) {
             $qactions[] = "
 /* to ppp with arguments */
