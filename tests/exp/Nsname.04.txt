@@ -1,0 +1,14 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    new
+    Label : NEW
+      \
+      Label : ELEMENT
+        b
+      Label : ELEMENT
+        a
+      Label : ARGUMENTS
+        void

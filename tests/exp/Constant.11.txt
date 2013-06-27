@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    (
+    Label : CODE
+      ?
+      Label : CONDITION
+        $x
+      Label : THEN
+        .
+        Label : CONCAT
+          B
+        Label : CONCAT
+          'a'
+      Label : ELSE
+        'c'
