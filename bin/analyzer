@@ -30,6 +30,7 @@ $classes = array(
     '_Array',
     'Property',
     'Keyvalue',
+    '_Function',
     'Staticproperty',
     'Methodcall',
     'Staticmethodcall',
