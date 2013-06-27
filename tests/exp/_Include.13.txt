@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  @
+  Label : AT
+    include
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ;
+        Label : ELEMENT
+          .
+          Label : CONCAT
+            '/c.php'
+          Label : CONCAT
+            ->
+            Label : METHOD
+              b
+              Label : ARGUMENTS
+                void
+            Label : OBJECT
+              $a

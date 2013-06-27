@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    require
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        fct_lien_page_custom
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        "abs"
+      Label : ARGUMENT
+        "fonctions/sysout_agent.php"

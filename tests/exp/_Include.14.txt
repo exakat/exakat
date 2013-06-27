@@ -1,0 +1,35 @@
+<?php
+
+Label : CODE
+  include
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      (
+      Label : CODE
+        'a.php'
+Label : NEXT
+  <?php 
+  Label : CODE
+    include
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        (
+        Label : CODE
+          'b.php'
+  Label : NEXT
+    
+
+    Label : NEXT
+      <?php 
+      Label : CODE
+        html_page_bottom1
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            1
+      Label : NEXT
+        /**/
+        Label : NEXT
+          /* * */

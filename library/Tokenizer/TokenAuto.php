@@ -596,8 +596,10 @@ it.as('origin').out('$link').has('atom','$atom').each{
         if (isset($cdt['filterOut'])) {
             if (is_string($cdt['filterOut'])) {
                 $qcdts[] = "filter{it.token != '".$cdt['filterOut']."' }";
-            } else {
+            } elseif (is_array($cdt['filterOut'])) {
                 $qcdts[] = "filter{it.atom != null || !(it.token in ['".join("', '", $cdt['filterOut'])."'])}";
+            } else {
+                die("Unsupported type for filterOut\n");
             }
 
             unset($cdt['filterOut']);

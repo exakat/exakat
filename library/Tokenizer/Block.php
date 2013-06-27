@@ -22,6 +22,16 @@ class Block extends TokenAuto {
                                );
         $r = $this->checkAuto(); 
 
+        $this->conditions = array( 0 => array('token' => 'T_OPEN_CURLY',
+                                              'atom' => 'none'),
+                                   1 => array('token' => 'T_CLOSE_CURLY',
+                                              'atom' => 'none'),
+                                   
+        );
+
+        $this->actions = array('addEdge'   => array(0 => array('Block' => 'CODE')));
+        $r = $this->checkAuto(); 
+
         return $r;
     }
 }

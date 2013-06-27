@@ -7,7 +7,7 @@ class Arguments extends TokenAuto {
         $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 
                              'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
-                             'Magicconstant', 'Ternary', 'Assignation', );
+                             'Magicconstant', 'Ternary', 'Assignation', 'Logical', );
         $operands = $operands_wa;
         $operands[] = 'Arguments';
         
@@ -77,9 +77,9 @@ class Arguments extends TokenAuto {
 
         // @note echo 's' : no parenthesis
         $this->conditions = array( 0 => array('atom' => 'none',
-                                              'token' => array('T_ECHO', 'T_PRINT')),
+                                              'token' => array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE',)),
                                    1 => array('atom'  => 'yes'),
-                                   2 => array('filterOut' => array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR' )) //, '->','[','+','-','*','/','%', '='
+                                   2 => array('filterOut' => array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_EQUAL', )) //, '->','[','+','-','*','/','%', '='
         );
         
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));

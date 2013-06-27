@@ -2,32 +2,32 @@
 
 namespace Tokenizer;
 
-class Functioncall extends TokenAuto {
+class _Include extends TokenAuto {
     function _check() {
         
-        $this->conditions = array(  0 => array('token' => array('T_STRING', 'T_ECHO', 'T_EMPTY', 'T_ARRAY', 'T_NS_SEPARATOR', 'T_VARIABLE', 'T_PRINT', 'T_ISSET', 'T_LIST', )),
+        $this->conditions = array(  0 => array('token' => array('T_INCLUDE_ONCE','T_INCLUDE','T_REQUIRE_ONCE','T_REQUIRE',)),
                                     1 => array('atom' => 'none',
                                                'code' => '(' ),
                                     2 => array('atom' => 'Arguments'),
                                     3 => array('atom' => 'none',
                                               'code' => ')' ),
-                                    4 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON')),
+                                    4 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_EQUAL' )),
         );
         
         $this->actions = array('makeEdge'    => array('2' => 'ARGUMENTS',),
                                'dropNext'   => array(1),
-                               'atom'       => 'Functioncall',
+                               'atom'       => 'Include',
                                );
         $r = $this->checkAuto();
 
-        $this->conditions = array( 0 => array('token' => array('T_ECHO', 'T_PRINT'),
+        $this->conditions = array( 0 => array('token' => array('T_INCLUDE_ONCE','T_INCLUDE','T_REQUIRE_ONCE','T_REQUIRE'),
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Arguments'),
-                                   2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON')),
+                                   2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_EQUAL' )),
         );
         
         $this->actions = array('makeEdge'    => array('1' => 'ARGUMENTS',),
-                               'atom'       => 'Functioncall',
+                               'atom'       => 'Include',
                                );
         $r = $this->checkAuto();
         

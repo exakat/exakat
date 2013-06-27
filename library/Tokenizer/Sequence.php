@@ -10,19 +10,23 @@ class Sequence extends TokenAuto {
                           'Noscream', 'Staticproperty', 'Property', 'Ternary', 'New', 'Return',
                           'Instanceof', 'Magicconstant', 'Staticconstant', 'Methodcall', 'Logical',
                           'Var', 'Const', 'Ppp', 'Postplusplus', 'Preplusplus', 'Global', 'Nsname',
-                          'Ifthen',
+                          'Ifthen', 'Include', 
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
-                                'T_DOUBLE_COLON', 'T_COLON', 'T_EQUAL', 'T_NEW', 'T_INSTANCEOF', 
-                                'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_EQUAL', 'T_COMMA',
-                                'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',  );
+                                'T_DOUBLE_COLON', 'T_COLON', 'T_NEW', 'T_INSTANCEOF', 
+                                'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_COMMA',
+                                'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
+                                 );
+        $yield_operator = array_merge($yield_operator, Assignation::$operators);
+        $next_operator = array_merge(array('T_OPEN_PARENTHESIS'), Assignation::$operators);
         
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => ';'),
                                    1 => array('atom' => $operands),
+                                   2 => array('filterOut' => $next_operator),
         );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ELEMENT',

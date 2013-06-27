@@ -39,6 +39,7 @@ $classes = array(
     '_New',
     '_Global',
     'Nsname',
+    '_Include',
     'Preplusplus',
     'Postplusplus',
     'Arguments',
