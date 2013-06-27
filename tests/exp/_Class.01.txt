@@ -6,3 +6,5 @@ Label : CODE
     x
   Label : BLOCK
     {
+    Label : CODE
+      void

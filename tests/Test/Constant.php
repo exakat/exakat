@@ -24,6 +24,6 @@ class Constant extends Tokenizeur {
     public function testConstant14()  { $this->generic_test('Constant.14'); }
     public function testConstant15()  { $this->generic_test('Constant.15'); }
     public function testConstant16()  { $this->generic_test('Constant.16'); }
-    public function testConstant17()  { $this->generic_test('Constant.17'); }
+
 }
 ?>

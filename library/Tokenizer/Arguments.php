@@ -7,12 +7,12 @@ class Arguments extends TokenAuto {
         $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 
                              'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
-                             'Magicconstant', 'Ternary', 'Assignation', 'Logical', );
+                             'Magicconstant', 'Ternary', 'Assignation', 'Logical', 'Keyvalue',  );
         $operands = $operands_wa;
         $operands[] = 'Arguments';
         
         // @note instructions separated by ; 
-        $this->conditions = array(-2 => array('filterOut' => array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL') ),
+        $this->conditions = array(-2 => array('filterOut' => array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS',) ),
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => ',',
                                               'atom' => 'none'),
@@ -32,7 +32,8 @@ class Arguments extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note End of )
-        $this->conditions = array(-1 => array('atom' => $operands),
+        $this->conditions = array(-2 => array('filterOut' => array("T_NS_SEPARATOR")),
+                                  -1 => array('atom' => $operands),
                                    0 => array('code' => ',',
                                              'atom' => 'none'),
                                    1 => array('code' => ')',

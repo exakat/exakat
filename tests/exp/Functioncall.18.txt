@@ -1,0 +1,26 @@
+<?php
+
+Label : NEXT
+  $a
+  Label : NEXT
+    =
+    Label : NEXT
+      array
+      Label : NEXT
+        (
+        Label : NEXT
+          1
+          Label : NEXT
+            =>
+            Label : NEXT
+              2
+              Label : NEXT
+                )
+                Label : NEXT
+                  ;
+                  Label : NEXT
+                    ?>
+                    Label : NEXT
+                      /**/
+                      Label : NEXT
+                        /* * */

@@ -20,6 +20,7 @@ if ($id = array_search('-v', $args)) {
 
 $begin_time = microtime(true);
 $classes = array(
+    'Magicconstant',
     'Variable', 
     'Integer',
     'Float',
@@ -28,6 +29,7 @@ $classes = array(
     'Sign',
     '_Array',
     'Property',
+    'Keyvalue',
     'Staticproperty',
     'Methodcall',
     'Staticmethodcall',
@@ -55,7 +57,6 @@ $classes = array(
     'Comparison',
     'Ternary',
     'Constant',
-    'Magicconstant',
     '_Return',
     'Sequence',
     '_Const',

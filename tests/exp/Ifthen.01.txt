@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      1
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        2
+  Label : ELSE
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        3

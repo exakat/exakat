@@ -10,3 +10,5 @@ Label : CODE
     z
   Label : BLOCK
     {
+    Label : CODE
+      void

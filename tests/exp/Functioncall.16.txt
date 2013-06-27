@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      range
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          0
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          $a

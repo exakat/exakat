@@ -8,3 +8,5 @@ Label : CODE
     y
   Label : BLOCK
     {
+    Label : CODE
+      void
