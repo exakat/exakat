@@ -416,6 +416,24 @@ g.removeEdge(b.inE('NEXT').next());
             unset($actions['insertConcat']);
         }
 
+        if (isset($actions['insertSequence'])) {
+                $qactions[] = "
+/* insertConcat */
+x = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON']);
+
+g.addEdge(x, it, 'ELEMENT');
+g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
+
+g.addEdge(it.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
+
+it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+it.bothE('NEXT').each{ g.removeEdge(it); }
+
+";
+            unset($actions['insertSequence']);
+        }
+
         if (isset($actions['insertConcat2'])) {
             $qactions[] = "
 /* insertConcat 2 */

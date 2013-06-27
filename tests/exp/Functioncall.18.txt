@@ -1,26 +1,18 @@
 <?php
 
-Label : NEXT
-  $a
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
     =
-    Label : NEXT
+    Label : RIGHT
       array
-      Label : NEXT
-        (
-        Label : NEXT
-          1
-          Label : NEXT
-            =>
-            Label : NEXT
-              2
-              Label : NEXT
-                )
-                Label : NEXT
-                  ;
-                  Label : NEXT
-                    ?>
-                    Label : NEXT
-                      /**/
-                      Label : NEXT
-                        /* * */
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            1
+          Label : VALUE
+            2
+    Label : LEFT
+      $a

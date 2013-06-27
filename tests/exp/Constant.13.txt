@@ -11,21 +11,21 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            .
-            Label : CONCAT
-              '\C'
-            Label : CONCAT
-              __NAMESPACE__
-          Label : ARGUMENT
-            array
-            Label : ARGUMENTS
-              void
-          Label : ARGUMENT
             false
           Label : ARGUMENT
             false
           Label : ARGUMENT
             ''
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+              void
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              '\C'
+            Label : CONCAT
+              __NAMESPACE__
       Label : OBJECT
         $this
     Label : LEFT
