@@ -26,11 +26,12 @@ class Assignation extends TokenAuto {
                           'Assignation', 'Variable', 
                          );
         
-        $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall' )),
+        $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall','Noscream', )),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut' => array_merge(Assignation::$operators,
-                                                                         array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', ))),
+                                                                         array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
+                                                                               'T_OPEN_PARENTHESIS',))),
                                   
         );
         

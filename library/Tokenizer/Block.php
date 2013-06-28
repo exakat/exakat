@@ -5,6 +5,17 @@ namespace Tokenizer;
 class Block extends TokenAuto {
     function _check() {
     
+// @doc empty block
+        $this->conditions = array( 0 => array('token' => 'T_OPEN_CURLY',
+                                              'atom' => 'none'),
+                                   1 => array('token' => 'T_CLOSE_CURLY',
+                                              'atom' => 'none'),
+                                   
+        );
+
+        $this->actions = array('addEdge'   => array(0 => array('Block' => 'CODE')));
+        $r = $this->checkAuto(); 
+
     // @doc Block
         $this->conditions = array( -1 => array('filterOut2' => array('T_VARIABLE', 'T_DOLLAR')),
                                    0 => array('token' => 'T_OPEN_CURLY',
@@ -20,16 +31,6 @@ class Block extends TokenAuto {
                                                       ),
                                'atom'       => 'Block',
                                );
-        $r = $this->checkAuto(); 
-
-        $this->conditions = array( 0 => array('token' => 'T_OPEN_CURLY',
-                                              'atom' => 'none'),
-                                   1 => array('token' => 'T_CLOSE_CURLY',
-                                              'atom' => 'none'),
-                                   
-        );
-
-        $this->actions = array('addEdge'   => array(0 => array('Block' => 'CODE')));
         $r = $this->checkAuto(); 
 
         return $r;

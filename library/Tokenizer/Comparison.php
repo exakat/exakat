@@ -3,17 +3,18 @@
 namespace Tokenizer;
 
 class Comparison extends TokenAuto {
+    static public $operators = array('T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER', );
     function _check() {
     
         $operands = array('Variable', 'Array', 'Property', 'Integer', 'Sign', 'Float', 'Constant', 'Boolean',
                           'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall',
                           'Assignation', 'Magicconstant', 'Staticconstant', 'String', 'Addition', 'Multiplication',
                           'Nsname', );
-        $operators = array('==','!=', '>=', '<=', '===', '!==', '>', '<',  );
+        
         
         $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')), 
                                   -1 => array('atom' => $operands ),
-                                   0 => array('code' => $operators,
+                                   0 => array('token' => Comparison::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
                                    
@@ -31,13 +32,8 @@ class Comparison extends TokenAuto {
 
     
     function reserve() {
-        Token::$reserved[] = '==';
-        Token::$reserved[] = '!=';
-        Token::$reserved[] = '>=';
-        Token::$reserved[] = '<=';
-        Token::$reserved[] = 'T_IS_NOT_IDENTICAL';
-        Token::$reserved[] = 'T_IS_IDENTICAL';
-
+        Token::$reserved = array_merge(Token::$reserved, Comparison::$operators);
+        
         return true;
     }
 }

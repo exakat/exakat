@@ -11,7 +11,8 @@ class Keyvalue extends TokenAuto {
                                    0 => array('token' => 'T_DOUBLE_ARROW'),
                                    1 => array('atom' => 'yes'),
                                    2 => array('filterOut' => array_merge( Assignation::$operators, 
-                                            array('T_OPEN_BRACKET', 'T_OBJECT_OPERATOR', 'T_INC', 'T_DEC', 'T_NS_SEPARATOR',))),
+                                            array('T_OPEN_BRACKET', 'T_OBJECT_OPERATOR', 'T_INC', 'T_DEC', 'T_NS_SEPARATOR',
+                                                  'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', ))),
         );
         
         /*

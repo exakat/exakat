@@ -12,12 +12,13 @@ class Arguments extends TokenAuto {
         $operands[] = 'Arguments';
         
         // @note instructions separated by ; 
-        $this->conditions = array(-2 => array('filterOut' => array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS',) ),
+        $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',),
+                                                                         Comparison::$operators) ),
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => ',',
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_EQUAL') ),
+                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_EQUAL', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',) ),
                             );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
@@ -49,7 +50,7 @@ class Arguments extends TokenAuto {
         $r = $this->checkAuto();
         
         // @note f(1) : no , 
-        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_EMPTY', 'T_ARRAY', 'T_PRINT', 'T_VARIABLE', 'T_ISSET')),
+        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 'T_PRINT', 'T_VARIABLE', 'T_ISSET')),
                                    0 => array('code' => '(',
                                              'atom' => 'none'),
                                    1 => array('atom' => $operands_wa),
@@ -63,7 +64,7 @@ class Arguments extends TokenAuto {
 
         // @note f() : no argument
         $this->conditions = array(-2 => array('filterOut' => array('T_NS_SEPARATOR')),
-                                  -1 => array('token' => array('T_STRING', 'T_ECHO', 'T_PRINT', 'T_ARRAY', 'T_VARIABLE', 'T_NS_SEPARATOR')),
+                                  -1 => array('token' => array('T_STRING', 'T_ECHO', 'T_UNSET','T_PRINT', 'T_ARRAY', 'T_VARIABLE', 'T_NS_SEPARATOR')),
                                    0 => array('code' => '(',
                                              'atom' => 'none'),
                                    1 => array('code' => ')',

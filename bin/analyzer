@@ -64,6 +64,7 @@ $classes = array(
     'Block',
     '_Class',
     'Ifthen',
+    '_Foreach',
     'Phpcode',
 );
 
