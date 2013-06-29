@@ -14,7 +14,7 @@ class Block extends TokenAuto {
         );
 
         $this->actions = array('addEdge'   => array(0 => array('Void' => 'CODE')));
-//        $r = $this->checkAuto(); 
+        $r = $this->checkAuto(); 
 
     // @doc Block
         $this->conditions = array( -1 => array('filterOut2' => array('T_VARIABLE', 'T_DOLLAR')),

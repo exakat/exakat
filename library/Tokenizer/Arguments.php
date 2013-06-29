@@ -19,7 +19,8 @@ class Arguments extends TokenAuto {
                              'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
                              'Magicconstant', 'Ternary', 'Assignation', 'Logical', 'Keyvalue', 'Void', 
-                             'Property', 'Staticconstant', 'Staticproperty', 'Nsname', 'Methodcall', 'Staticmethodcall' );
+                             'Property', 'Staticconstant', 'Staticproperty', 'Nsname', 'Methodcall', 'Staticmethodcall',
+                             'Reference',);
         $operands = $operands_wa;
         $operands[] = 'Arguments';
         

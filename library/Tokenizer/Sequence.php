@@ -11,7 +11,7 @@ class Sequence extends TokenAuto {
                           'Noscream', 'Staticproperty', 'Property', 'Ternary', 'New', 'Return',
                           'Instanceof', 'Magicconstant', 'Staticconstant', 'Methodcall', 'Logical',
                           'Var', 'Const', 'Ppp', 'Postplusplus', 'Preplusplus', 'Global', 'Nsname',
-                          'Ifthen', 'Include', 'Function', 'Foreach', 
+                          'Ifthen', 'Include', 'Function', 'Foreach', 'While', 'Arrayappend',
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
@@ -42,7 +42,7 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note instructions not separated by ; 
-        $operands2 = array('Function',);
+        $operands2 = array('Function','Ifthen', );
         $this->conditions = array( 0 => array('atom' => $operands2),
                                    1 => array('atom' => $operands2),
         );

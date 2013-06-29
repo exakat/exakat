@@ -68,7 +68,7 @@ class Framework_AllTests
                 print "\n";
             }
 
-            $diff = array_diff($exp, $methods);
+            $diff = array_diff($methods, $exp);
             if ($diff) {
                 print "missing ".count($diff)." results for tests in Test/$name.php\n";
                 print "   php prepareexp.php $name\n";

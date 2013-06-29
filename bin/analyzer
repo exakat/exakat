@@ -39,6 +39,7 @@ $classes = array(
     'Heredoc',
     'Not',
     'Reference',
+    'Arrayappend',
     '_Instanceof',
     '_New',
     '_Global',
@@ -66,6 +67,7 @@ $classes = array(
     '_Class',
     'Ifthen',
     '_Foreach',
+    '_While',
     'Phpcode',
 // Void
 );

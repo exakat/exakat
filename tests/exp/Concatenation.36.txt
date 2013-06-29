@@ -1,0 +1,46 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      preg_replace
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          $i
+        Label : ARGUMENT
+          .
+          Label : CONCAT
+            "\\2"
+          Label : CONCAT
+            (
+            Label : CODE
+              +
+              Label : RIGHT
+                1
+              Label : LEFT
+                [
+                Label : VARIABLE
+                  $g
+                Label : INDEX
+                  'h'
+          Label : CONCAT
+            "f"
+        Label : ARGUMENT
+          "
+          Label : CONTAIN
+            Concat
+            Label : CONCAT
+              [
+              Label : VARIABLE
+                $c
+              Label : INDEX
+                d
+            Label : CONCAT
+              e
+            Label : CONCAT
+              b
+    Label : LEFT
+      $a

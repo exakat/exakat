@@ -10,7 +10,7 @@ class Parenthesis extends TokenAuto {
                              'Instanceof', 'Noscream', 'Magicconstant', 'Logical', 'Ternary',
                              'Assignation',);
 
-        $this->conditions = array(-1 => array('filterOut2' => array('T_STRING', 'T_ECHO', 'T_UNSET', 'T_EMPTY', 'T_PRINT', 'T_VARIABLE', 'T_ISSET')), 
+        $this->conditions = array(-1 => array('filterOut2' => array('T_STRING', 'T_WHILE', 'T_ECHO', 'T_UNSET', 'T_EMPTY', 'T_PRINT', 'T_VARIABLE', 'T_ISSET')), 
                                    0 => array('token' => 'T_OPEN_PARENTHESIS',
                                               'atom' => 'none' ),
                                    1 => array('atom' => $operands),

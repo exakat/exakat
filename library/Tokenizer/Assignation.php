@@ -26,7 +26,7 @@ class Assignation extends TokenAuto {
                           'Assignation', 'Variable', 'Reference',
                          );
         
-        $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall','Noscream', 'Reference' )),
+        $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall','Noscream', 'Reference', 'Not', 'Arrayappend' )),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut' => array_merge(Assignation::$operators,

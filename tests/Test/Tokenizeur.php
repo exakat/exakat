@@ -13,6 +13,8 @@ class Tokenizeur extends \PHPUnit_Framework_TestCase {
         
         $this->assertEquals($exp, $res);
     }
+    
+    
 }
 
 ?>

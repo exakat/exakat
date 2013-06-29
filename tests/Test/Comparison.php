@@ -24,5 +24,6 @@ class Comparison extends Tokenizeur {
     public function testComparison13()  { $this->generic_test('Comparison.13'); }
     public function testComparison14()  { $this->generic_test('Comparison.14'); }
     public function testComparison15()  { $this->generic_test('Comparison.15'); }
+
 }
 ?>
