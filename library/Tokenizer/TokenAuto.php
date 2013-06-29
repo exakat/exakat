@@ -498,7 +498,7 @@ g.removeEdge(x.out('$link').outE('NEXT').next());
                 display("addEdge : $atom\n");
                 $qactions[] = "
 /* addEdge out */
-x = g.addVertex(null, [code:'void', atom:'$atom']);
+x = g.addVertex(null, [code:'void', atom:'$atom', 'file':it.file]);
 f = it.out('NEXT').next();
 
 g.removeEdge(it.outE('NEXT').next());
