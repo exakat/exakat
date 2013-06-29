@@ -25,7 +25,6 @@ class _Foreach extends TokenAuto {
                                                       ),
                                'atom'       => 'Foreach',
                                );
-//$this->printQuery();
         $r = $this->checkAuto(); 
 
         return $r;

@@ -28,7 +28,7 @@ class Concatenation extends TokenAuto {
         $r = $this->checkAuto();
 
 
-        $this->conditions = array( -1 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_DOLLAR')),
+        $this->conditions = array( -1 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_DOLLAR', 'T_QUOTE',)),
                                     0 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
                                     1 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
         ); 
@@ -61,18 +61,16 @@ class Concatenation extends TokenAuto {
 
         $r = $this->checkAuto();
 
-// Case of string with interpolation : "a${b}c";
-        $this->conditions = array(  0 => array('token' => array('T_QUOTE'), 'atom' => 'none'),
-                                    1 => array('atom'  => 'yes'),
-                                    2 => array('token' => array('T_QUOTE'), 'atom' => 'none')
-                                 );
-        
-        $this->actions = array( 'transform' => array( 1 => 'CONTAIN',
-                                                      2 => 'DROP'),
-                                'atom'       => 'Concatenation',
-                                'mergeNext'  => array('Concatenation' => 'CONCAT'), 
+        $this->conditions = array( 0 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
+                                   1 => array('atom' => array('Concatenation')),
+        ); 
+
+        $this->actions = array('insertConcat4'   => true,
+                                'order' => array(0 => 1, 
+                                                 1 => 2),
                                 );
-        $r =  $this->checkAuto();
+
+        $r = $this->checkAuto();
 
         return $r;
     }

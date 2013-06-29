@@ -31,7 +31,7 @@ class TokenAuto extends Token {
             $qcdts[] = "back('origin')";
         }
         
-        for($i = 1; $i < 6; $i++) {
+        for($i = 1; $i < 7; $i++) {
             if (!empty($this->conditions[$i])) {
                 $cdt = $this->conditions[$i];
                 $cdt['next'] = $i;
@@ -161,7 +161,7 @@ g.removeEdge(f.inE('NEXT').next());
                 }
                 $qactions[] = "
 /* add void out ($destination) */
-x = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID']);
+x = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', 'file':it.file]);
 g.addEdge(it$d, x, '$label');
 
 ";
@@ -187,7 +187,7 @@ arg.out('ARGUMENT').has('atom', 'Variable').each{
 
     g.addEdge(x, it, 'NAME');
     g.removeEdge(it.inE('ARGUMENT').next());
-    g.addEdge(x, g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID']), 'VALUE');
+    g.addEdge(x, g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', 'file':arg.file]), 'VALUE');
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
@@ -395,7 +395,7 @@ f.each{
         if (isset($actions['insertConcat'])) {
                 $qactions[] = "
 /* insertConcat */
-x = g.addVertex(null, [code:'{$actions['insertConcat']}', atom:'Concatenation', token:'T_DOT']);
+x = g.addVertex(null, [code:'{$actions['insertConcat']}', atom:'Concatenation', token:'T_DOT', 'file':it.file]);
 
 p = it.in('NEXT').next();
 n = it.out('NEXT').out('NEXT').next();
@@ -419,7 +419,7 @@ g.removeEdge(b.inE('NEXT').next());
         if (isset($actions['insertSequence'])) {
                 $qactions[] = "
 /* insertConcat */
-x = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON']);
+x = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file]);
 
 g.addEdge(x, it, 'ELEMENT');
 g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
@@ -465,6 +465,23 @@ b.bothE('NEXT').each{ g.removeEdge(it); }
 ";
             unset($actions['insertConcat3']);
         }           
+
+        if (isset($actions['insertConcat4'])) {
+            $qactions[] = "
+/* insertConcat 4 (Scalar, Concat) */
+s = it;
+c = it.out('NEXT').next();
+
+g.addEdge(c, s, 'CONCAT');
+g.addEdge(s.in('NEXT').next(), c, 'NEXT');
+
+s.bothE('NEXT').each{ g.removeEdge(it); }
+    
+
+";
+            unset($actions['insertConcat4']);
+        }           
+        
         
         if (isset($actions['insertEdge'])) {
             foreach($actions['insertEdge'] as $destination => $config) {
@@ -473,7 +490,7 @@ b.bothE('NEXT').each{ g.removeEdge(it); }
                 display("addEdge : $atom\n");
                 $qactions[] = "
 /* insertEdge out */
-x = g.addVertex(null, [code:'void', atom:'$atom']);
+x = g.addVertex(null, [code:'void', atom:'$atom', 'file':it.file]);
 f = it.out('NEXT').out('NEXT').next();
 
 g.addEdge(it, x, 'NEXT');

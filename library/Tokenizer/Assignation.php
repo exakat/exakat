@@ -23,10 +23,10 @@ class Assignation extends TokenAuto {
                           'Parenthesis', 'Noscream', 'Ternary', 'New', 'String',
                           'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Property',
                           'Heredoc', 'Preplusplus', 'Postplusplus', 'Methodcall', 'Nsname', 
-                          'Assignation', 'Variable', 
+                          'Assignation', 'Variable', 'Reference',
                          );
         
-        $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall','Noscream', )),
+        $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall','Noscream', 'Reference' )),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut' => array_merge(Assignation::$operators,

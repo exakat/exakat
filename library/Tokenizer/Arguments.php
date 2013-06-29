@@ -18,18 +18,19 @@ class Arguments extends TokenAuto {
         $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 
                              'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
-                             'Magicconstant', 'Ternary', 'Assignation', 'Logical', 'Keyvalue', 'Void',  );
+                             'Magicconstant', 'Ternary', 'Assignation', 'Logical', 'Keyvalue', 'Void', 
+                             'Property', 'Staticconstant', 'Staticproperty', 'Nsname', 'Methodcall', 'Staticmethodcall' );
         $operands = $operands_wa;
         $operands[] = 'Arguments';
         
-        // @note instructions separated by ; 
-        $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',),
+        // @note arguments separated by ,
+        $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR',),
                                                                          Comparison::$operators) ),
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => ',',
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_EQUAL', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT',) ),
+                                   2 => array('filterOut2' => array('T_OPEN_PARENTHESIS', 'T_EQUAL', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT', 'T_QUOTE', 'T_NS_SEPARATOR') ),
                             );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
@@ -42,6 +43,7 @@ class Arguments extends TokenAuto {
                                'atom'       => 'Arguments',
                                );
         $r = $this->checkAuto();
+
 
         // @note End of )
         $this->conditions = array(-2 => array('filterOut' => array("T_NS_SEPARATOR")),
