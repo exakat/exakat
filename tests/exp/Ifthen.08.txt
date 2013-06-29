@@ -1,0 +1,64 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      1
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        $a
+  Label : ELSE
+    elseif
+    Label : CONDITION
+      (
+      Label : CODE
+        2
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          $b
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          3
+      Label : THEN
+        {
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $c
+      Label : ELSE
+        elseif
+        Label : CONDITION
+          (
+          Label : CODE
+            4
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              $d
+        Label : ELSE
+          elseif
+          Label : CONDITION
+            (
+            Label : CODE
+              5
+          Label : THEN
+            {
+            Label : CODE
+              $e
+          Label : ELSE
+            {
+            Label : CODE
+              $f
