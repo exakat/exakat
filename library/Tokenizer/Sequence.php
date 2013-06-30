@@ -20,7 +20,7 @@ class Sequence extends TokenAuto {
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                  );
         $yield_operator = array_merge($yield_operator, Assignation::$operators, Comparison::$operators);
-        $next_operator = array_merge(array('T_OPEN_PARENTHESIS'), Assignation::$operators);
+        $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), Assignation::$operators);
         
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
