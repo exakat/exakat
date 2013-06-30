@@ -31,7 +31,8 @@ class Arguments extends TokenAuto {
                                    0 => array('code' => ',',
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut2' => array('T_OPEN_PARENTHESIS', 'T_EQUAL', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT', 'T_QUOTE', 'T_NS_SEPARATOR') ),
+                                   2 => array('filterOut2' => array_merge(array('T_OPEN_PARENTHESIS', 'T_EQUAL', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT', 'T_QUOTE', 'T_NS_SEPARATOR'),
+                                                                            Comparison::$operators) ),
                             );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
