@@ -1,0 +1,20 @@
+<?php
+
+Label : NEXT
+  $x
+  Label : NEXT
+    =
+    Label : NEXT
+      (array)
+      Label : CAST
+        ;
+        Label : ELEMENT
+          (boolean)
+          Label : CAST
+            $y
+      Label : NEXT
+        ?>
+        Label : NEXT
+          /**/
+          Label : NEXT
+            /* * */

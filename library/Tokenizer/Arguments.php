@@ -26,13 +26,13 @@ class Arguments extends TokenAuto {
         
         // @note arguments separated by ,
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR',),
-                                                                         Comparison::$operators) ),
+                                                                         Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => ',',
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut2' => array_merge(array('T_OPEN_PARENTHESIS', 'T_EQUAL', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT', 'T_QUOTE', 'T_NS_SEPARATOR'),
-                                                                            Comparison::$operators) ),
+                                   2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR','T_OPEN_PARENTHESIS' ),
+                                                                         Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
                             );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
@@ -65,12 +65,13 @@ class Arguments extends TokenAuto {
         $r = $this->checkAuto();
         
         // @note f(1) : no , 
-        $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_ECHO', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 'T_PRINT', 'T_VARIABLE', 'T_ISSET')),
+        $this->conditions = array(-1 => array('token' => Functioncall::$operators),
                                    0 => array('code' => '(',
                                              'atom' => 'none'),
                                    1 => array('atom' => $operands_wa),
                                    2 => array('code' => ')',
                                               'atom'  => 'none'),
+                                   3 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')),
         );
         
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));

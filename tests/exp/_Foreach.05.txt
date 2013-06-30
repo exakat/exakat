@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  foreach
+  Label : SOURCE
+    (array)
+    Label : CAST
+      $x
+  Label : VALUE
+    $y
+  Label : LOOP
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $i

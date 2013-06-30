@@ -11,15 +11,15 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            ,
-            Label : ARGUMENT
-              4
-            Label : ARGUMENT
-              3
-            Label : ARGUMENT
-              2
-            Label : ARGUMENT
-              1
+            void
+          Label : ARGUMENT
+            4
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            1
       Label : LEFT
         $b
     Label : ELEMENT

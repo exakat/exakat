@@ -1,0 +1,22 @@
+<?php
+
+namespace Tokenizer;
+
+class Cast extends TokenAuto {
+    static $operators = array('T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST');
+
+    function _check() {
+        $this->conditions = array(0 => array('token' => Cast::$operators,
+                                             'atom' => 'none'),
+                                  1 => array('atom' => 'yes'),
+                                  2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+        );
+        
+        $this->actions = array('makeEdge'    => array( '1' => 'CAST'),
+                               'atom'       => 'Cast');
+                               
+        return $this->checkAuto();
+    }
+}
+
+?>

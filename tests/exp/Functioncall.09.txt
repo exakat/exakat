@@ -6,3 +6,5 @@ Label : CODE
     $x
     Label : ARGUMENTS
       void
+      Label : ARGUMENT
+        void

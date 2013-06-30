@@ -21,10 +21,9 @@ include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Framework_AllTests
-{
-    public static function suite()
-    {
+class Framework_AllTests extends PHPUnit_Framework_TestSuite {
+
+    public static function suite() {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
  
         $tests = glob('Test/*.php');

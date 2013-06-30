@@ -38,6 +38,7 @@ $classes = array(
     'Logical',
     'Heredoc',
     'Not',
+    'Cast',
     'Reference',
     'Arrayappend',
     '_Instanceof',
