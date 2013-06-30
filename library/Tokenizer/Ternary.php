@@ -6,7 +6,8 @@ class Ternary extends TokenAuto {
     function _check() {
         
         $operands = array('Constant');
-        $this->conditions = array( -2 => array('filterOut' => array('T_BANG', 'T_AT', 'T_DOUBLE_COLON' )),
+        $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_DOUBLE_COLON' ), 
+                                                                            Comparison::$operators)),
                                    -1 => array('atom' => 'yes'),
                                     0 => array('token' => 'T_QUESTION'),
                                     1 => array('atom' => 'yes'),

@@ -23,7 +23,7 @@ class Assignation extends TokenAuto {
                           'Parenthesis', 'Noscream', 'Ternary', 'New', 'String',
                           'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Property',
                           'Heredoc', 'Preplusplus', 'Postplusplus', 'Methodcall', 'Nsname', 
-                          'Assignation', 'Variable', 'Reference',
+                          'Assignation', 'Variable', 'Reference', 'Boolean', 'Magicconstant',
                          );
         
         $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall','Noscream', 'Reference', 'Not', 'Arrayappend' )),

@@ -49,9 +49,9 @@ $classes = array(
     'Postplusplus',
     'Noscream',
     'Parenthesis',
-    'Concatenation',
     'Arguments',
     'Functioncall',
+    'Concatenation', // because au test concatenation 37
     'Multiplication',
     'Addition', 
     '_Var',

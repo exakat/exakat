@@ -19,7 +19,7 @@ class Sequence extends TokenAuto {
                                 'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_COMMA',
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                  );
-        $yield_operator = array_merge($yield_operator, Assignation::$operators);
+        $yield_operator = array_merge($yield_operator, Assignation::$operators, Comparison::$operators);
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS'), Assignation::$operators);
         
         // @note instructions separated by ; 
@@ -42,7 +42,7 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note instructions not separated by ; 
-        $operands2 = array('Function','Ifthen', );
+        $operands2 = array('Function','Ifthen', 'While', 'Class' );
         $this->conditions = array( 0 => array('atom' => $operands2),
                                    1 => array('atom' => $operands2),
         );

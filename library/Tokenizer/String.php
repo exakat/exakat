@@ -9,8 +9,7 @@ class String extends TokenAuto {
                                                'atom' => 'none')
                                  );
         
-        $this->actions = array('atom'       => 'String',
-                               );
+        $this->actions = array('atom'       => 'String',);
         
         $r =  $this->checkAuto();
 

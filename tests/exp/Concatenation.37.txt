@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      fopen
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          'f'
+        Label : ARGUMENT
+          .
+          Label : CONCAT
+            ->
+            Label : PROPERTY
+              e
+            Label : OBJECT
+              $d
+          Label : CONCAT
+            'c'
+          Label : CONCAT
+            $b
+          Label : CONCAT
+            'a'
+    Label : LEFT
+      $fp

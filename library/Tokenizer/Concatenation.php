@@ -6,7 +6,7 @@ class Concatenation extends TokenAuto {
     function _check() {
         $operands = array('String', 'Integer', 'Float', 'Not', 'Variable','_Array', 'Concatenation', 'Sign', 'Array',
                           'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
-                          'Methodcall', 'Parenthesis', 'Magicconstant',  );
+                          'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', );
         
         $this->conditions = array(-2 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR')), 
                                   -1 => array('atom'  => $operands ),
@@ -28,7 +28,7 @@ class Concatenation extends TokenAuto {
         $r = $this->checkAuto();
 
 
-        $this->conditions = array( -1 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_DOLLAR', 'T_QUOTE',)),
+        $this->conditions = array( -1 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_DOLLAR',)),
                                     0 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
                                     1 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
         ); 
