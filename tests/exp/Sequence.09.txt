@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ;
+    Label : ELEMENT
+      ->
+      Label : METHOD
+        ReadFile
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $datafile_server
+      Label : OBJECT
+        $unzip
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        substr
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            13
+          Label : ARGUMENT
+            8
+          Label : ARGUMENT
+            $datafile_server
+      Label : LEFT
+        $backupdir
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        new
+        Label : NEW
+          SimpleUnzip
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : LEFT
+        $unzip

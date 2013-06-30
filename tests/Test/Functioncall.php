@@ -36,6 +36,5 @@ class Functioncall extends Tokenizeur {
     public function testFunctioncall25()  { $this->generic_test('Functioncall.25'); }
     public function testFunctioncall26()  { $this->generic_test('Functioncall.26'); }
     public function testFunctioncall27()  { $this->generic_test('Functioncall.27'); }
-    public function testFunctioncall27()  { $this->generic_test('Functioncall.27'); }
 }
 ?>

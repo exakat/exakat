@@ -1,0 +1,86 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      &&
+      Label : LEFT
+        $a
+      Label : RIGHT
+        is_array
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          str_replace
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              $k
+            Label : ARGUMENT
+              $j
+            Label : ARGUMENT
+              $i
+        Label : LEFT
+          $h
+      Label : ELEMENT
+        foreach
+        Label : SOURCE
+          $e
+        Label : VALUE
+          =>
+          Label : KEY
+            $k
+          Label : VALUE
+            $v
+        Label : LOOP
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              ;
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  $v
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $g
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  .
+                  Label : CONCAT
+                    '}'
+                  Label : CONCAT
+                    $k
+                  Label : CONCAT
+                    '{'
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $f
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          =
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+          Label : LEFT
+            $d
+        Label : LEFT
+          $c

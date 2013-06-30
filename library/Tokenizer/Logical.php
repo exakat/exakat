@@ -11,7 +11,8 @@ class Logical extends TokenAuto {
                                                                'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR'),
                                               'atom' => 'none' ),
                                     1 => array('atom' => 'yes'),
-                                    2 => array('filterOut' => Comparison::$operators),
+                                    2 => array('filterOut' => array_merge(Comparison::$operators,
+                                                                           array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', ))),
         );
         
         $this->actions = array('transform' => array( '-1' => 'LEFT',
