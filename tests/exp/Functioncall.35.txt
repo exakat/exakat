@@ -1,0 +1,8 @@
+<?php
+
+Label : CODE
+  exit
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      ;

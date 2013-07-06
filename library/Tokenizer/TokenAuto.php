@@ -15,6 +15,16 @@ class TokenAuto extends Token {
             $qcdts[] = "as('origin')";
         }
 
+        for($i = -4; $i < 0; $i++) {
+            if (!empty($this->conditions[$i])) {
+                $cdt = $this->conditions[$i];
+                $cdt['previous'] = abs($i);
+                $qcdts = array_merge($qcdts, $this->readConditions($cdt));
+
+                $qcdts[] = "back('origin')";
+            }
+        }
+/*
         if (!empty($this->conditions[-2])) {
             $cdt = $this->conditions[-2];
             $cdt['previous'] = 2;
@@ -30,7 +40,7 @@ class TokenAuto extends Token {
 
             $qcdts[] = "back('origin')";
         }
-        
+*/
         for($i = 1; $i < 7; $i++) {
             if (!empty($this->conditions[$i])) {
                 $cdt = $this->conditions[$i];
@@ -260,7 +270,6 @@ f.each{
 }
 ";
                     } elseif ($label == 'TO_CONST') {
-                        $link = substr($label, 3);
                         $qactions[] = "
 /* transform to const ($c) */
 a = it.out('NEXT').next();
@@ -281,6 +290,25 @@ b.bothE('NEXT').each{ g.removeEdge(it); }
 f.bothE('NEXT').each{ g.removeEdge(it); }
 
 ";                    
+                    } elseif ($label == 'SEQUENCE') {
+                        $qactions[] = "
+/* transform next to sequence */
+x = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file]);
+
+b = it.out('NEXT').next();
+g.addEdge(it, x, 'NEXT');
+g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
+
+g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
+b.bothE('NEXT').each{ g.removeEdge(it); }
+
+it.out('NEXT').out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
+    it.bothE('NEXT').each{ g.removeEdge(it) ; }
+    g.removeVertex(it);
+}
+
+";
                     } elseif (substr($label, 0, 3) == 'TO_') {
                         $link = substr($label, 3);
                         $qactions[] = "

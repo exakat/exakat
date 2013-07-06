@@ -97,12 +97,24 @@ class Arguments extends TokenAuto {
         $this->conditions = array( 0 => array('atom' => 'none',
                                               'token' => array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE',)),
                                    1 => array('atom'  => 'yes'),
-                                   2 => array('filterOut' => array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_EQUAL', )) //, '->','[','+','-','*','/','%', '='
+                                   2 => array('filterOut' => array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_EQUAL', )) 
         );
         
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
 
         $r = $this->checkAuto();        
+
+        // @note exit; no parenthesis, no argument. 
+        $this->conditions = array( 0 => array('atom' => 'none',
+                                              'token' => array('T_EXIT')),
+                                   1 => array('token'  => 'T_SEMICOLON') 
+        );
+        
+        $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
+
+        $r = $this->checkAuto();        
+
+        
 
         return $r;
     }

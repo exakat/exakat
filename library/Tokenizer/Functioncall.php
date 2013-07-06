@@ -26,7 +26,7 @@ class Functioncall extends TokenAuto {
                                
         $r = $this->checkAuto();
 
-        $this->conditions = array( 0 => array('token' => array('T_ECHO', 'T_PRINT'),
+        $this->conditions = array( 0 => array('token' => array('T_ECHO', 'T_PRINT', 'T_EXIT'),
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Arguments'),
                                    2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_COMMA')),
