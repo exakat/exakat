@@ -10,10 +10,11 @@ class Addition extends TokenAuto {
                           'Property', 'Array', 'Concatenation', 'Float', 'String', 'Preplusplus', 'Postplusplus',
                           'Nsname', );
         
-        $this->conditions = array(-1 => array('atom' => $operands ),
+        // note : Multiplication:: and Addition:: operators are the same! 
+        $this->conditions = array(-1 => array('atom' => Multiplication::$operands ),
                                    0 => array('token' => Addition::$operators,
                                              'atom' => 'none'),
-                                   1 => array('atom' => $operands),
+                                   1 => array('atom' => Multiplication::$operands),
         );
         
         $this->actions = array('makeEdge'    => array('1' => 'RIGHT',

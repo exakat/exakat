@@ -12,7 +12,7 @@ class Sequence extends TokenAuto {
                           'Instanceof', 'Magicconstant', 'Staticconstant', 'Methodcall', 'Logical',
                           'Var', 'Const', 'Ppp', 'Postplusplus', 'Preplusplus', 'Global', 'Nsname',
                           'Ifthen', 'Include', 'Function', 'Foreach', 'While', 'Arrayappend', 'Cast',
-                          'Case', 'Default', 'Break', 'Goto', 'Label', 
+                          'Case', 'Default', 'Break', 'Goto', 'Label', 'Switch',
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
@@ -21,7 +21,7 @@ class Sequence extends TokenAuto {
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                 'T_GOTO',
                                  );
-        $yield_operator = array_merge($yield_operator, Assignation::$operators, Comparison::$operators, Cast::$operators);
+        $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators);
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), Assignation::$operators);
         
         // @note instructions separated by ; 

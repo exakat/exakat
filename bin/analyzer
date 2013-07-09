@@ -55,9 +55,9 @@ $classes = array(
     'Parenthesis',
     'Arguments',
     'Functioncall',
-    'Concatenation', // because au test concatenation 37
     'Multiplication',
     'Addition', 
+    'Concatenation', // because au test concatenation 37
     '_Var',
     '_Ppp',
     'Assignation',

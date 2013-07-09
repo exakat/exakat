@@ -16,7 +16,6 @@ class Functioncall extends TokenAuto {
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
                                     4 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON')),
-                                    //, 'T_COMMA'
         );
         
         $this->actions = array('makeEdge'    => array('2' => 'ARGUMENTS',),
@@ -29,7 +28,7 @@ class Functioncall extends TokenAuto {
         $this->conditions = array( 0 => array('token' => array('T_ECHO', 'T_PRINT', 'T_EXIT'),
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Arguments'),
-                                   2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_COMMA')),
+                                   2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_COMMA', 'T_QUESTION')),
         );
         
         $this->actions = array('makeEdge'    => array('1' => 'ARGUMENTS',),
