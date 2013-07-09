@@ -5,13 +5,15 @@ namespace Tokenizer;
 class Sequence extends TokenAuto {
     function _check() {
  
-        $operands = array('Addition', 'Multiplication', 'Sequence', 'String', 'Integer', 
+ //
+        $operands = array('Addition', 'Multiplication', 'String', 'Integer', 'Sequence', 
                           'Float', 'Not', 'Variable','Array','Concatenation', 'Sign',
                           'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
                           'Noscream', 'Staticproperty', 'Property', 'Ternary', 'New', 'Return',
                           'Instanceof', 'Magicconstant', 'Staticconstant', 'Methodcall', 'Logical',
                           'Var', 'Const', 'Ppp', 'Postplusplus', 'Preplusplus', 'Global', 'Nsname',
                           'Ifthen', 'Include', 'Function', 'Foreach', 'While', 'Arrayappend', 'Cast',
+                          'Case', 'Default',
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
@@ -19,7 +21,7 @@ class Sequence extends TokenAuto {
                                 'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_COMMA',
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                  );
-        $yield_operator = array_merge($yield_operator, Assignation::$operators, Comparison::$operators);
+        $yield_operator = array_merge($yield_operator, Assignation::$operators, Comparison::$operators, Cast::$operators);
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), Assignation::$operators);
         
         // @note instructions separated by ; 
@@ -42,28 +44,12 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note instructions not separated by ; 
-        $operands2 = array('Function','Ifthen', 'While', 'Class' );
+        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Case', 'Default', 'Var', 'Const', 'Ppp');
         $this->conditions = array( 0 => array('atom' => $operands2),
                                    1 => array('atom' => $operands2),
         );
         
-        $this->actions = array('insertSequence'  => true,
-//                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence',
-                               );
-        $r = $this->checkAuto();
-        
-        // @note sequence next to another instruction
-        $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
-                                  -1 => array('atom' => $operands ),
-                                   0 => array('atom' => 'Sequence')
-        );
-        
-        $this->actions = array('transform'   => array(-1 => 'ELEMENT'),
-                               'order'      => array(-1 =>  1),
-                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence',
-                               );
+        $this->actions = array('insertSequence'  => true);
         $r = $this->checkAuto();
 
         // @note sequence next to another instruction
@@ -78,14 +64,37 @@ class Sequence extends TokenAuto {
                                'atom'       => 'Sequence',
                                );
         $r = $this->checkAuto();
+        
+        // @note sequence next to another instruction
+        $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
+                                  -1 => array('atom' => $operands ),
+                                   0 => array('atom' => 'Sequence')
+        );
+        
+        $this->actions = array('transform'   => array(-1 => 'ELEMENT'),
+                               'order'      => array(-1 =>  1),
+// mergeNext doesn't work backward                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
+                               'mergePrev'  => array('Sequence' => 'ELEMENT'), 
+                               'atom'       => 'Sequence',
+                               );
+        $r = $this->checkAuto();
 
+        // @note sequence next to another instruction
+        $this->conditions = array(-1 => array('filterOut' => $yield_operator), 
+                                   0 => array('atom' => 'Sequence' ),
+                                   1 => array('atom' => 'Sequence')
+        );
+        
+        $this->actions = array( 'transform'   => array(1 => 'ELEMENT'),
+                                'mergeNext'  => array('Sequence' => 'ELEMENT'));
+        $r = $this->checkAuto();
 
         // @note End of PHP script
-        $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
+        $this->conditions = array(-2 => array('filterOut2' => $yield_operator), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('code' => ';',
                                               'atom' => 'none'),
-                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END'),
+                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT',),
                                               'atom'  => 'none'),
         );
         
