@@ -18,5 +18,7 @@ Label : CODE
         y
         Label : ARGUMENTS
           void
+          Label : ARGUMENT
+            void
       Label : OBJECT
         $x

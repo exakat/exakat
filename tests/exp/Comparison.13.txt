@@ -20,6 +20,8 @@ Label : CODE
               b
               Label : ARGUMENTS
                 void
+                Label : ARGUMENT
+                  void
             Label : OBJECT
               $a
         Label : ARGUMENT

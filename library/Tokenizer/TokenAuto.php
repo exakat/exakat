@@ -68,6 +68,9 @@ class TokenAuto extends Token {
 
     private function readActions($actions) {
         $qactions = array();
+
+        // @doc audit trail track
+        $qactions[] = "\n it.setProperty('modifiedBy', '".str_replace('Tokenizer\\', '', get_class($this))."'); \n";
         
         if (isset($actions['cleansemicolon']) && $actions['cleansemicolon']) {
             $qactions[] = "
@@ -628,12 +631,6 @@ it.as('origin').in('$link').has('atom','$atom').each{
             }
             unset($actions['mergePrev']);
         }
-
-// @doc audit trail track
-        $qactions[] = "
-it.setProperty('modifiedBy', '".str_replace('Tokenizer\\', '', get_class($this))."');
-";
-        
         
         if ($remainder = array_keys($actions)) {
             print "Warning : the following ".count($remainder)." actions were ignored : ".join(', ', $remainder)."\n";

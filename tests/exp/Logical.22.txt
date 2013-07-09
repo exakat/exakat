@@ -19,20 +19,6 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        =
-        Label : RIGHT
-          str_replace
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $k
-            Label : ARGUMENT
-              $j
-            Label : ARGUMENT
-              $i
-        Label : LEFT
-          $h
-      Label : ELEMENT
         foreach
         Label : SOURCE
           $e
@@ -84,3 +70,17 @@ Label : CODE
             $d
         Label : LEFT
           $c
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          str_replace
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              $k
+            Label : ARGUMENT
+              $j
+            Label : ARGUMENT
+              $i
+        Label : LEFT
+          $h

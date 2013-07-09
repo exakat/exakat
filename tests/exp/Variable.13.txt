@@ -28,6 +28,8 @@ Label : CODE
             method
             Label : ARGUMENTS
               void
+              Label : ARGUMENT
+                void
           Label : OBJECT
             $object
         Label : CONCAT

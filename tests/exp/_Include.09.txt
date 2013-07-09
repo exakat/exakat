@@ -1,12 +1,12 @@
 <?php
 
 Label : CODE
-  require
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      ;
-      Label : ELEMENT
+  ;
+  Label : ELEMENT
+    require
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         (
         Label : CODE
           fct_lien_page_custom

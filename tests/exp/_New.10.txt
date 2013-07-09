@@ -12,6 +12,8 @@ Label : CODE
           a
           Label : ARGUMENTS
             void
+            Label : ARGUMENT
+              void
         Label : OBJECT
           $b
     Label : LEFT

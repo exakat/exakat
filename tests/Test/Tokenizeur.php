@@ -3,6 +3,14 @@
 namespace Test;
 
 class Tokenizeur extends \PHPUnit_Framework_TestCase {
+    function setUp() {
+        shell_exec("cd ../; php bin/delete -all");
+    }
+
+    function tearDown() {
+        // empty
+    }
+    
     function generic_test($file) {
         $shell = 'cd ..; php bin/load -f tests/source/'.$file.'.php; php bin/analyzer; php bin/export -text -f tests/source/'.$file.'';
         $res = shell_exec($shell);

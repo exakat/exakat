@@ -39,6 +39,14 @@ Label : CODE
       Label : RIGHT
         "
         Label : CONTAIN
+          z
+      Label : LEFT
+        $c
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        "
+        Label : CONTAIN
           $a
       Label : LEFT
         $d
@@ -47,28 +55,20 @@ Label : CODE
       Label : RIGHT
         "
         Label : CONTAIN
-          z
+          ?
+          Label : CONDITION
+            $y
+          Label : THEN
+            1
+          Label : ELSE
+            3
       Label : LEFT
-        $c
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        ?
-        Label : CONDITION
+        $b
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        "
+        Label : CONTAIN
           $y
-        Label : THEN
-          1
-        Label : ELSE
-          3
-    Label : LEFT
-      $b
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        $y
-    Label : LEFT
-      $a
+      Label : LEFT
+        $a
