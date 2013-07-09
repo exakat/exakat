@@ -33,14 +33,25 @@ class Block extends TokenAuto {
                                );
         $r = $this->checkAuto(); 
 
-    // @doc Block
+    // @doc Block in a switch/case/default
         $this->conditions = array( -3 => array('token' => 'T_CASE',
                                               'atom' => 'none'),
                                    -2 => array('atom' => 'yes'),
                                    -1 => array('token' => 'T_COLON',
                                               'atom' => 'none'),
                                     0 => array('atom' => 'Sequence'),
-                                    1 => array('token' => array('T_CLOSE_CURLY')),
+                                    1 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT')),
+        );
+        
+        $this->actions = array('createBlockWithSequence'    => true);
+        $r = $this->checkAuto(); 
+
+        $this->conditions = array( -2 => array('token' => 'T_DEFAULT',
+                                              'atom' => 'none'),
+                                   -1 => array('token' => 'T_COLON',
+                                              'atom' => 'none'),
+                                    0 => array('atom' => 'Sequence'),
+                                    1 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT')),
         );
         
         $this->actions = array('createBlockWithSequence'    => true);

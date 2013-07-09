@@ -1,0 +1,88 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    $type
+  Label : CASES
+    {
+    Label : CODE
+      Sequence
+      Label : ELEMENT
+        case
+        Label : CASE
+          'A'
+        Label : CODE
+          Block With Next
+          Label : CODE
+            Sequence With Next
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                &
+                Label : REFERENCE
+                  $c
+              Label : LEFT
+                $b
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+      Label : ELEMENT
+        case
+        Label : CASE
+          'B'
+        Label : CODE
+          Block With Next
+          Label : CODE
+            Sequence With Next
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                &
+                Label : REFERENCE
+                  $d
+              Label : LEFT
+                $b
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                1
+      Label : ELEMENT
+        case
+        Label : CASE
+          'C'
+        Label : CODE
+          Block With Next
+          Label : CODE
+            Sequence With Next
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                &
+                Label : REFERENCE
+                  $d
+              Label : LEFT
+                $b
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                2
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block With Next
+          Label : CODE
+            Sequence With Next
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                @
+                Label : AT
+                  $e
+              Label : LEFT
+                $b
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
