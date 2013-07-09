@@ -7,4 +7,8 @@
 		return ((a::b) ? c($d->e) : f());
 	}
 
+	function c() {
+		return ((a::$b) ? c($d->e) : f());
+	}
+
 ?>
