@@ -42,6 +42,7 @@ $classes = array(
     'Reference',
     'Arrayappend',
     '_Instanceof',
+    '_Break',
     '_New',
     '_Global',
     'Nsname',
