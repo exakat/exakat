@@ -8,7 +8,7 @@ class Functioncall extends TokenAuto {
                               'T_EXIT', 'T_DIE');
     function _check() {
         
-        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION')),
+        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
                                     0 => array('token' => Functioncall::$operators),
                                     1 => array('atom'  => 'none',
                                                'token' => 'T_OPEN_PARENTHESIS' ),
