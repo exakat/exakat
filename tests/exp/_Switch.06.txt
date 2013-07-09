@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    $x
+  Label : CASES
+    {
+    Label : CODE
+      case
+      Label : CASE
+        1
+      Label : CODE
+        Block With Next
+        Label : CODE
+          Sequence With Next
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $x

@@ -24,23 +24,7 @@ class TokenAuto extends Token {
                 $qcdts[] = "back('origin')";
             }
         }
-/*
-        if (!empty($this->conditions[-2])) {
-            $cdt = $this->conditions[-2];
-            $cdt['previous'] = 2;
-            $qcdts = array_merge($qcdts, $this->readConditions($cdt));
 
-            $qcdts[] = "back('origin')";
-        }
-
-        if (!empty($this->conditions[-1])) {
-            $cdt = $this->conditions[-1];
-            $cdt['previous'] = 1;
-            $qcdts = array_merge($qcdts, $this->readConditions($cdt));
-
-            $qcdts[] = "back('origin')";
-        }
-*/
         for($i = 1; $i < 7; $i++) {
             if (!empty($this->conditions[$i])) {
                 $cdt = $this->conditions[$i];
@@ -446,7 +430,7 @@ g.removeEdge(b.inE('NEXT').next());
 
         if (isset($actions['insertSequence'])) {
                 $qactions[] = "
-/* insertConcat */
+/* insertSequence */
 x = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file]);
 
 g.addEdge(x, it, 'ELEMENT');
@@ -560,7 +544,8 @@ g.addEdge(x,  f, 'NEXT');
         
         if (isset($actions['mergeNext']) && $actions['mergeNext']) {
             foreach($actions['mergeNext'] as $atom => $link) {
-                $qactions[] = " /* mergeNext */ 
+                $qactions[] = " 
+/* mergeNext */ 
 f = it;
 c = it.out('$link').out('$link').count();
 it.out('$link').hasNot('order', null).each{
@@ -569,18 +554,86 @@ it.out('$link').hasNot('order', null).each{
 
 it.as('origin').out('$link').has('atom','$atom').each{
     it.inE('$link').each{ g.removeEdge(it);}
+  
+    it.out('$link').each{ 
+        it.inE('$link').each{ g.removeEdge(it);}
+        g.addEdge(f, it, '$link');
+    };
+    g.removeVertex(it);    
+//    it.setProperty('code', it.code + ' mergeNext');
+}
+            ";
+            }
+            unset($actions['mergeNext']);
+        }
+        
+        if (isset($actions['createSequenceWithNext']) && $actions['createSequenceWithNext']) {
+                $qactions[] = " 
+/* createSequenceWithNext */ 
+
+x = g.addVertex(null, [code:'Sequence With Next', atom:'Sequence', 'file':it.file]);
+i = it.out('NEXT').next();
+
+g.addEdge(it, x, 'NEXT');
+g.addEdge(x, i, 'ELEMENT');
+g.addEdge(x, i.out('NEXT').next(), 'NEXT');
+
+i.bothE('NEXT').each{ g.removeEdge(it) ; }
+
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
+    it.bothE('NEXT').each{ g.removeEdge(it) ; }
+    
+    g.removeVertex(it);
+}
+            ";
+            unset($actions['createSequenceWithNext']);
+        }
+
+        if (isset($actions['createBlockWithSequence']) && $actions['createBlockWithSequence']) {
+                $qactions[] = " 
+/* createBlockWithSequence */ 
+x = g.addVertex(null, [code:'Block With Next', atom:'Block', 'file':it.file]);
+
+g.addEdge(it.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, it, 'CODE');
+g.addEdge(x, it.out('NEXT').next(), 'NEXT');
+
+it.bothE('NEXT').each{ g.removeEdge(it) ; }
+            ";
+            unset($actions['createBlockWithSequence']);
+        }
+        
+        if (isset($actions['mergePrev']) && $actions['mergePrev']) {
+            foreach($actions['mergePrev'] as $atom => $link) {
+                $qactions[] = " 
+/* mergePrev */ 
+f = it;
+//c = it.out('$link').out('$link').count();
+//it.out('$link').hasNot('order', null).each{
+//    it.setProperty('order', it.order + c);
+//}
+
+it.as('origin').in('$link').has('atom','$atom').each{
+    it.outE('$link').each{ g.removeEdge(it);}
     
     it.out('$link').each{ 
         it.inE('$link').each{ g.removeEdge(it);}
         g.addEdge(f, it, '$link');
     };
     g.removeVertex(it);    
+//    it.setProperty('code', it.code + ' mergePrev');
 }
             ";
             }
-            unset($actions['mergeNext']);
+            unset($actions['mergePrev']);
         }
 
+// @doc audit trail track
+        $qactions[] = "
+it.setProperty('modifiedBy', '".str_replace('Tokenizer\\', '', get_class($this))."');
+";
+        
         
         if ($remainder = array_keys($actions)) {
             print "Warning : the following ".count($remainder)." actions were ignored : ".join(', ', $remainder)."\n";

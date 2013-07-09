@@ -1,0 +1,74 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    $x
+  Label : CASES
+    {
+    Label : CODE
+      Sequence
+      Label : ELEMENT
+        case
+        Label : CASE
+          9
+        Label : CODE
+          void
+      Label : ELEMENT
+        case
+        Label : CASE
+          10
+        Label : CODE
+          void
+      Label : ELEMENT
+        Sequence
+        Label : ELEMENT
+          case
+          Label : CASE
+            5
+          Label : CODE
+            void
+        Label : ELEMENT
+          case
+          Label : CASE
+            6
+          Label : CODE
+            void
+        Label : ELEMENT
+          case
+          Label : CASE
+            7
+          Label : CODE
+            void
+        Label : ELEMENT
+          case
+          Label : CASE
+            8
+          Label : CODE
+            void
+        Label : ELEMENT
+          Sequence
+          Label : ELEMENT
+            case
+            Label : CASE
+              1
+            Label : CODE
+              void
+          Label : ELEMENT
+            case
+            Label : CASE
+              2
+            Label : CODE
+              void
+          Label : ELEMENT
+            case
+            Label : CASE
+              3
+            Label : CODE
+              void
+          Label : ELEMENT
+            case
+            Label : CASE
+              4
+            Label : CODE
+              void

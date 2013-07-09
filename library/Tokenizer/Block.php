@@ -33,6 +33,19 @@ class Block extends TokenAuto {
                                );
         $r = $this->checkAuto(); 
 
+    // @doc Block
+        $this->conditions = array( -3 => array('token' => 'T_CASE',
+                                              'atom' => 'none'),
+                                   -2 => array('atom' => 'yes'),
+                                   -1 => array('token' => 'T_COLON',
+                                              'atom' => 'none'),
+                                    0 => array('atom' => 'Sequence'),
+                                    1 => array('token' => array('T_CLOSE_CURLY')),
+        );
+        
+        $this->actions = array('createBlockWithSequence'    => true);
+        $r = $this->checkAuto(); 
+        
         return $r;
     }
 }
