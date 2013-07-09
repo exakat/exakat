@@ -4,60 +4,41 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Index\NodeIndex,
 	Everyman\Neo4j\Relationship,
 	Everyman\Neo4j\Node,
-	Everyman\Neo4j\Gremlin;
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$args = $argv;
-if ($id = array_search('-f', $args)) {
-    $file = $args[$id + 1];
-} elseif ($id = array_search('-a', $args)) {
-    $file = 'all';
-} else {
-    die("Nothing to delete\n");
-}
-
-$file = realpath($file);
-if (!file_exists($file)) {
-    print "'$file' doesn't exists. Aborting\n";
-    die();
-}
-
-if ($id = array_search('-v', $args)) {
-    define('VERBOSE', true);
-} else {
-    define('VERBOSE', false);
-}
-
 $client = new Client();
 
-$queryTemplate = "g.V.has('file', '$file').count()";
-$params = array('type' => 'IN');
-$query = new Gremlin\Query($client, $queryTemplate, $params);
-$init = $query->getResultSet();
-if ($init[0][0] == 0) { 
-    print "No files likes '$file' in the database.\n"; 
-    die();
+$args = $argv;
+if ($id = array_search('-all', $args)) {
+    define('FORMAT', 'ALL');
+} elseif ($id = array_search('-file', $args)) {
+    define('FORMAT', 'FILE');
+} else {
+    die("Need an option to run. Aborting\n");
 }
 
-$queryTemplate = "g.V.has('file', '$file').each{ g.removeVertex(it); }";
-$params = array('type' => 'IN');
-$query = new Gremlin\Query($client, $queryTemplate, $params);
-$query->getResultSet();
+if (FORMAT == 'ALL') {
+    $queryTemplate = "g.E.each{ g.removeEdge(it); }";
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $queryTemplate, $params);
+    $edges = $query->getResultSet();
 
-$queryTemplate = "g.V.has('file', '$file').count()";
-$params = array('type' => 'IN');
-$query = new Gremlin\Query($client, $queryTemplate, $params);
-$end = $query->getResultSet();
+    $queryTemplate = "g.V.each{ g.removeVertex(it); }";
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $queryTemplate, $params);
+    $edges = $query->getResultSet();
+    
+    // Also clean index
+} elseif (FORMAT == 'FILE') {
+    die("Unknow delete format of '".FORMAT."'. Aborting\n");
+    // Also clean index
+} else {
+    die("Unknow delete format of '".FORMAT."'. Aborting\n");
+}
 
-print "Removed (".($init[0][0] - $end[0][0]).") vertices\n";
-
-$queryTemplate = "g.V.count()";
-$params = array('type' => 'IN');
-$query = new Gremlin\Query($client, $queryTemplate, $params);
-$count = $query->getResultSet();
-
-print "".($count[0][0]).") vertices left in the database\n";
 
 ?>
