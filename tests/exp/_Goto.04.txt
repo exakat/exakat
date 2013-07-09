@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    :
+    Label : LABEL
+      a1
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'Foo'
+  Label : ELEMENT
+    goto
+    Label : LABEL
+      a2
+  Label : ELEMENT
+    goto
+    Label : LABEL
+      a1
+  Label : ELEMENT
+    :
+    Label : LABEL
+      a2
+  Label : ELEMENT
+    :
+    Label : LABEL
+      a3
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'Bar'

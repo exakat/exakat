@@ -43,6 +43,8 @@ $classes = array(
     'Arrayappend',
     '_Instanceof',
     '_Break',
+    'Label',
+    '_Goto',
     '_New',
     '_Global',
     'Nsname',
