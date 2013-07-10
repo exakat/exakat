@@ -1,12 +1,8 @@
 <?php
 
-Label : NEXT
-  break
-  Label : NEXT
-    ;
-    Label : NEXT
-      ?>
-      Label : NEXT
-        /**/
-        Label : NEXT
-          /* * */
+Label : CODE
+  ;
+  Label : ELEMENT
+    break
+    Label : LEVEL
+      void
