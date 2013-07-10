@@ -104,7 +104,7 @@ foreach($tokens as $id => $token) {
                                      ->setProperty('line', $line)
                                      ->setProperty('file', $file)->save();
 
-        if (in_array($token, array('(','{','.','+','-','*','/','%', '==', ','))) {
+        if (in_array($token, array('(','{','+','-','*','/','%', '==', ','))) {
             $T[$id]->setProperty('begin', true)->save();
         }
                                      

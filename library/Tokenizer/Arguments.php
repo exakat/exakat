@@ -71,7 +71,7 @@ class Arguments extends TokenAuto {
                                    1 => array('atom' => $operands_wa),
                                    2 => array('code' => ')',
                                               'atom'  => 'none'),
-                                   3 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')),
+                                   3 => array('filterOut' => array(/*'T_OBJECT_OPERATOR',*/ 'T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')),
         );
         
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));

@@ -9,6 +9,16 @@ Label : CODE
       Label : ARGUMENT
         .
         Label : CONCAT
+          'h'
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $f
+          Label : INDEX
+            'g'
+        Label : CONCAT
+          'e'
+        Label : CONCAT
           ->
           Label : METHOD
             b
@@ -22,13 +32,3 @@ Label : CODE
                   d
           Label : OBJECT
             $a
-        Label : CONCAT
-          'h'
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $f
-          Label : INDEX
-            'g'
-        Label : CONCAT
-          'e'

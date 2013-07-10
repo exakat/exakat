@@ -15,7 +15,7 @@ class Functioncall extends TokenAuto {
                                     2 => array('atom'  => 'Arguments'),
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
-                                    4 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON')),
+//                                    4 => array('filterOut' => array('T_DOUBLECOLON')), //'T_OBJECT_OPERATOR', 
         );
         
         $this->actions = array('makeEdge'    => array('2' => 'ARGUMENTS',),

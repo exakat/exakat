@@ -7,7 +7,7 @@ class Multiplication extends TokenAuto {
     static public $operands = array('Integer', 'Addition', 'Variable', 'Multiplication', 'Sign', 'Not',
                                     'Parenthesis', 'Property', 'Array', 'Concatenation', 'Float',
                                     'String', 'Preplusplus', 'Postplusplus', 'Nsname', 'Functioncall',
-                                    'Methodcall', 'Staticmethodcall',  );
+                                    'Methodcall', 'Staticmethodcall', 'Concatenation', );
     
     function _check() {
 

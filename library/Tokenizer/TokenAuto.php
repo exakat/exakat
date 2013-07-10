@@ -35,6 +35,7 @@ class TokenAuto extends Token {
             }
         }
         
+        /*
         if (count(Token::$reserved) != 0) {
             $cdt = array();
             $cdt['next'] = max(array_keys($this->conditions)) + 1;
@@ -43,6 +44,7 @@ class TokenAuto extends Token {
             $qcdts = array_merge($qcdts, $this->readConditions($cdt));
             $qcdts[] = "back('origin')";
         }
+        */
         
         $query = $query.".".join('.', $qcdts);
         

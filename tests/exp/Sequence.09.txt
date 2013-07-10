@@ -3,6 +3,18 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        SimpleUnzip
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : LEFT
+      $unzip
+  Label : ELEMENT
     ;
     Label : ELEMENT
       ->
@@ -28,15 +40,3 @@ Label : CODE
             $datafile_server
       Label : LEFT
         $backupdir
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        new
-        Label : NEW
-          SimpleUnzip
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-      Label : LEFT
-        $unzip

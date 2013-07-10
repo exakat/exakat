@@ -33,10 +33,8 @@ Label : CODE
             Label : INDEX
               2
         Label : ARGUMENT
-          void
+          ,
           Label : ARGUMENT
-            ,
-            Label : ARGUMENT
-              $x
-            Label : ARGUMENT
-              '1'
+            $x
+          Label : ARGUMENT
+            '1'
