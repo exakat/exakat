@@ -1,0 +1,58 @@
+<?php
+
+Label : NEXT
+  class
+  Label : NAME
+    a
+  Label : NEXT
+    {
+    Label : NEXT
+      var
+      Label : DEFINE
+        $b
+      Label : VALUE
+        1
+      Label : NEXT
+        ;
+        Label : NEXT
+          var
+          Label : NEXT
+            =
+            Label : RIGHT
+              -
+              Label : SIGN
+                2
+            Label : NEXT
+              ;
+              Label : NEXT
+                var
+                Label : DEFINE
+                  $d
+                Label : VALUE
+                  array
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+                Label : NEXT
+                  ;
+                  Label : NEXT
+                    var
+                    Label : NEXT
+                      =
+                      Label : RIGHT
+                        '23'
+                      Label : NEXT
+                        ;
+                        Label : NEXT
+                          }
+                          Label : NEXT
+                            ?>
+                            Label : NEXT
+                              /**/
+                              Label : NEXT
+                                /* * */
+                      Label : LEFT
+                        $e
+            Label : LEFT
+              $c

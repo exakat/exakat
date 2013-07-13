@@ -23,7 +23,7 @@ class _Var extends TokenAuto {
         $this->conditions = array( 0 => array('token' => 'T_VAR'),
                                    1 => array('atom' => 'Variable'),
                                    2 => array('token' => 'T_EQUAL'),
-                                   3 => array('atom' => array('String,', 'Integer', 'Staticconstant')),
+                                   3 => array('atom' => array('String,', 'Integer', 'Staticconstant', 'Functioncall',)),
                                    4 => array('filterOut2' => array('T_COMMA')),
                                  );
         
