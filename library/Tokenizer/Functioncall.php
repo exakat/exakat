@@ -8,14 +8,15 @@ class Functioncall extends TokenAuto {
                               'T_EXIT', 'T_DIE');
     function _check() {
         
-        $this->conditions = array(  -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
+        // functioncall(with arguments)
+        $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
+                                    -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
                                     0 => array('token' => Functioncall::$operators),
                                     1 => array('atom'  => 'none',
                                                'token' => 'T_OPEN_PARENTHESIS' ),
                                     2 => array('atom'  => 'Arguments'),
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
-//                                    4 => array('filterOut' => array('T_DOUBLECOLON')), //'T_OBJECT_OPERATOR', 
         );
         
         $this->actions = array('makeEdge'    => array('2' => 'ARGUMENTS',),
@@ -25,6 +26,7 @@ class Functioncall extends TokenAuto {
                                
         $r = $this->checkAuto();
 
+        // functioncall(with arguments)
         $this->conditions = array( 0 => array('token' => array('T_ECHO', 'T_PRINT', 'T_EXIT'),
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Arguments'),
