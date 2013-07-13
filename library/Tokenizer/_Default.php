@@ -17,7 +17,7 @@ class _Default extends TokenAuto {
         $this->conditions = array(-1 => array('token' => 'T_DEFAULT',
                                               'atom' => 'none'),
                                    0 => array('token' => 'T_COLON'),
-                                   1 => array('atom' => array('Postplusplus', 'Assignation', 'Break', 'Ifthen' )), 
+                                   1 => array('atom' => array('Postplusplus', 'Assignation', 'Break', 'Ifthen', 'Return', )), 
         );
         
         $this->actions = array('createSequenceWithNext'    => true);

@@ -1,0 +1,56 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    {
+    Label : CODE
+      Sequence
+      Label : ELEMENT
+        case
+        Label : CASE
+          'b'
+        Label : CODE
+          Block With Next
+          Label : CODE
+            Sequence With Next
+            Label : ELEMENT
+              return
+              Label : RETURN
+                'c'
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+      Label : ELEMENT
+        case
+        Label : CASE
+          'd'
+        Label : CODE
+          Block With Next
+          Label : CODE
+            Sequence With Next
+            Label : ELEMENT
+              return
+              Label : RETURN
+                'e'
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block With Next
+          Label : CODE
+            Sequence With Next
+            Label : ELEMENT
+              return
+              Label : RETURN
+                'f'
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void

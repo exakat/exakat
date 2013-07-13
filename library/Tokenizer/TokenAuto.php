@@ -25,7 +25,7 @@ class TokenAuto extends Token {
             }
         }
 
-        for($i = 1; $i < 7; $i++) {
+        for($i = 1; $i < 9; $i++) {
             if (!empty($this->conditions[$i])) {
                 $cdt = $this->conditions[$i];
                 $cdt['next'] = $i;

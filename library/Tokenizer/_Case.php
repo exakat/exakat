@@ -18,7 +18,7 @@ class _Case extends TokenAuto {
                                               'atom' => 'none'),
                                   -1 => array('atom' => 'yes'),
                                    0 => array('token' => 'T_COLON'),
-                                   1 => array('atom' => array('Postplusplus', 'Assignation', 'Break')), 
+                                   1 => array('atom' => array('Postplusplus', 'Assignation', 'Break', 'Return', )), 
         );
         
         $this->actions = array('createSequenceWithNext'    => true);
