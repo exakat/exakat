@@ -45,7 +45,7 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note instructions not separated by ; 
-        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Case', 'Default', 'Var', 'Const', 'Ppp');
+        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Case', 'Default', 'Var', 'Const', 'Ppp', 'Foreach',);
         $this->conditions = array( 0 => array('atom' => $operands2),
                                    1 => array('atom' => $operands2),
         );

@@ -1,0 +1,68 @@
+<?php
+
+Label : CODE
+  Sequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        1
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $x
+  Label : ELEMENT
+    foreach
+    Label : SOURCE
+      $y
+    Label : VALUE
+      $b
+    Label : LOOP
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $c
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        2
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $x
+  Label : ELEMENT
+    foreach
+    Label : SOURCE
+      $y
+    Label : VALUE
+      $b
+    Label : LOOP
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $c
