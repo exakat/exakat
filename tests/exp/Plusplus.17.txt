@@ -14,5 +14,7 @@ Label : CODE
           $a
     Label : ELEMENT
       global
-      Label : GLOBAL
+      Label : VALUE
+        void
+      Label : DEFINE
         $a

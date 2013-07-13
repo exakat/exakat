@@ -15,7 +15,7 @@ class Sign extends TokenAuto {
                                                                     'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
                                  );
         
-        $this->actions = array('makeEdge'    => array( '1' => 'SIGN'),
+        $this->actions = array('makeEdge'    => array( 1 => 'SIGN'),
                                'atom'       => 'Sign',
                                'property'   => array('scalar' => true,
                                                      'instruction' => true,)
@@ -28,7 +28,7 @@ class Sign extends TokenAuto {
                                     1 => array('atom' => Sign::$operands),
                                  );
         
-        $this->actions = array('makeEdge'   => array( '1' => 'SIGN'),
+        $this->actions = array('makeEdge'   => array( 1 => 'SIGN'),
                                'atom'       => 'Sign',
                                'property'   => array('scalar' => true,
                                                      'instruction' => true,)

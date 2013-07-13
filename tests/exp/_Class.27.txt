@@ -30,7 +30,7 @@ Label : CODE
             6
         Label : ELEMENT
           var
-          Label : DEFINE
+          Label : NAME
             $d
           Label : VALUE
             4

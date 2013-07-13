@@ -1,12 +1,16 @@
 <?php
 
 Label : CODE
-  .
-  Label : CONCAT
-    -
-    Label : SIGN
-      'b'
-  Label : CONCAT
-    -
-    Label : SIGN
-      'a'
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      .
+      Label : CONCAT
+        -
+        Label : SIGN
+          'b'
+      Label : CONCAT
+        -
+        Label : SIGN
+          'a'

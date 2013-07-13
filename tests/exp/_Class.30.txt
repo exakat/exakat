@@ -10,7 +10,7 @@ Label : CODE
       ;
       Label : ELEMENT
         var
-        Label : DEFINE
+        Label : NAME
           $b
         Label : VALUE
           1
