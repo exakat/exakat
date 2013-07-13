@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class Sign extends TokenAuto {
-    static public $operands = array('Integer', 'Sign', 'String', 'Variable', '_Array', 'Float', 'Boolean', 'Functioncall',
+    static public $operands = array('Integer', 'Sign', 'String', 'Variable', 'Array', 'Float', 'Boolean', 'Functioncall',
                                     'Staticmethodcall', 'Staticproperty');
     function _check() {
 

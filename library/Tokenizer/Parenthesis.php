@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Parenthesis extends TokenAuto {
     function _check() {
         $operands    = array('Addition', 'Multiplication', 'Sequence', 'String', 
-                             'Integer', 'Float', 'Not', 'Variable','_Array', 'Concatenation', 'Sign',
+                             'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign',
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
                              'Instanceof', 'Noscream', 'Magicconstant', 'Logical', 'Ternary',
                              'Assignation', 'Property', 'Staticproperty', 'Staticconstant', );

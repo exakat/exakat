@@ -16,7 +16,7 @@ class Arguments extends TokenAuto {
         $r = $this->checkAuto();
 
         $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 
-                             'Integer', 'Float', 'Not', 'Variable','_Array','Concatenation', 'Sign',
+                             'Integer', 'Float', 'Not', 'Variable','Array','Concatenation', 'Sign',
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
                              'Magicconstant', 'Ternary', 'Assignation', 'Logical', 'Keyvalue', 'Void', 
                              'Property', 'Staticconstant', 'Staticproperty', 'Nsname', 'Methodcall', 'Staticmethodcall',
