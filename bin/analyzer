@@ -76,9 +76,10 @@ $classes = array(
     '_Switch',
     'Ifthen',
     '_Foreach',
+    '_For',
     '_While',
     'Phpcode',
-// Void
+    'Void',
 );
 
 $client = new Client();

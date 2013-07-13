@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  for
+  Label : INIT
+    void
+  Label : FINAL
+    void
+  Label : INCREMENT
+    ,
+    Label : ARGUMENT
+      ++
+      Label : POSTPLUSPLUS
+        $j
+    Label : ARGUMENT
+      ++
+      Label : POSTPLUSPLUS
+        $i
+  Label : CODE
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $j

@@ -20,7 +20,7 @@ class Arguments extends TokenAuto {
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
                              'Magicconstant', 'Ternary', 'Assignation', 'Logical', 'Keyvalue', 'Void', 
                              'Property', 'Staticconstant', 'Staticproperty', 'Nsname', 'Methodcall', 'Staticmethodcall',
-                             'Reference', 'Cast', );
+                             'Reference', 'Cast', 'Postplusplus', 'Preplusplus',);
         $operands = $operands_wa;
         $operands[] = 'Arguments';
         
@@ -38,8 +38,8 @@ class Arguments extends TokenAuto {
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
                                                       -1 => 'ARGUMENT'
                                                       ),
-                               'order'    => array('1'  => '2',
-                                                   '-1' => '1'),
+                               'order'    => array( 1 => '2',
+                                                   -1 => '1'),
                                'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
                                'atom'       => 'Arguments',
                                );
