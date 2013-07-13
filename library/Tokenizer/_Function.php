@@ -6,7 +6,7 @@ class _Function extends TokenAuto {
     function _check() {
         $this->conditions = array(0 => array('token' => 'T_FUNCTION',
                                              'atom' => 'none'),
-                                  1 => array('atom' => 'String'),
+                                  1 => array('atom' => array('String', 'Reference')),
                                   2 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   3 => array('atom' => 'Arguments'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
@@ -21,7 +21,9 @@ class _Function extends TokenAuto {
                                                 
                                'atom'       => 'Function');
                                
-        return $this->checkAuto();
+        $r = $this->checkAuto();
+
+        return $r;
     }
 }
 
