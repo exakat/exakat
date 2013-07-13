@@ -11,9 +11,10 @@
         print "Usage : create_test.php Testname (case is important)\n ";
     }
     
-    $files = glob('source/'.$test.'*.php');
+    $files = glob('source/'.$test.'.*.php');
     sort($files);
     $last = array_pop($files);
+    print $last;
     $number = str_replace(array($test, '.php', '.', 'source/'), '', $last);
     
     if ($number + 1 == 100) { 
