@@ -1,0 +1,44 @@
+<?php
+
+Label : NEXT
+  global
+  Label : GLOBAL
+    $a
+  Label : NEXT
+    =
+    Label : NEXT
+      1
+      Label : NEXT
+        ;
+        Label : NEXT
+          global
+          Label : GLOBAL
+            $b
+          Label : NEXT
+            =
+            Label : NEXT
+              -
+              Label : SIGN
+                1
+              Label : NEXT
+                ;
+                Label : NEXT
+                  global
+                  Label : GLOBAL
+                    $d
+                  Label : NEXT
+                    =
+                    Label : NEXT
+                      array
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          void
+                      Label : NEXT
+                        ;
+                        Label : NEXT
+                          ?>
+                          Label : NEXT
+                            /**/
+                            Label : NEXT
+                              /* * */

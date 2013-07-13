@@ -1,0 +1,8 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      $a

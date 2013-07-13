@@ -8,6 +8,7 @@ class _Global extends TokenAuto {
     // global $x;
         $this->conditions = array( 0 => array('token' => 'T_GLOBAL'),
                                    1 => array('atom' => array('Variable')),
+                                   2 => array('filterOut' => array('T_COMMA')),
                                  );
         
         $this->actions = array('transform' => array( 1 => 'GLOBAL'),
@@ -17,7 +18,7 @@ class _Global extends TokenAuto {
         $r = $this->checkAuto(); 
 
     // global $x, $y
-        $this->conditions = array( 0 => array('token' => 'T_VAR'),
+        $this->conditions = array( 0 => array('token' => 'T_GLOBAL'),
                                    1 => array('atom' => 'Arguments'),
                                  );
         

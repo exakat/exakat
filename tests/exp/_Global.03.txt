@@ -1,0 +1,20 @@
+<?php
+
+Label : NEXT
+  global
+  Label : NEXT
+    ,
+    Label : ARGUMENT
+      $c
+    Label : NEXT
+      ;
+      Label : NEXT
+        ?>
+        Label : NEXT
+          /**/
+          Label : NEXT
+            /* * */
+    Label : ARGUMENT
+      $b
+    Label : ARGUMENT
+      $a
