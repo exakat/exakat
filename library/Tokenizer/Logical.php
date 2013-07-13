@@ -12,7 +12,9 @@ class Logical extends TokenAuto {
                                               'atom' => 'none' ),
                                     1 => array('atom' => 'yes'),
                                     2 => array('filterOut' => array_merge(Comparison::$operators,
-                                                                           array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', ))),
+                                                                           array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
+                                                                           'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                                                           ))),
         );
         
         $this->actions = array('transform' => array( '-1' => 'LEFT',
