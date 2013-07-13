@@ -14,7 +14,7 @@ class Concatenation extends TokenAuto {
                                    0 => array('token' => 'T_DOT',
                                               'atom'  => 'none'),
                                    1 => array('atom'  => $operands),
-                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
         ); 
         
         $this->actions = array('makeEdge'   => array( 1 => 'CONCAT',
