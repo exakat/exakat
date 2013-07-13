@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  class
+  Label : NAME
+    a
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          static
+          Label : NAME
+            $e
+          Label : VALUE
+            '23'
+        Label : ELEMENT
+          static
+          Label : NAME
+            $d
+          Label : VALUE
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : ELEMENT
+          static
+          Label : NAME
+            $c
+          Label : VALUE
+            -
+            Label : SIGN
+              2
+        Label : ELEMENT
+          static
+          Label : NAME
+            $b
+          Label : VALUE
+            1

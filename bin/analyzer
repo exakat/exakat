@@ -60,6 +60,7 @@ $classes = array(
     'Concatenation', // because au test concatenation 37
     '_Var',
     '_Ppp',
+    '_Static',
     'Assignation',
     'Comparison',
     'Ternary',

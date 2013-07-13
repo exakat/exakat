@@ -1,0 +1,46 @@
+<?php
+
+Label : CODE
+  class
+  Label : NAME
+    a
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          protected
+          Label : VALUE
+            void
+          Label : DEFINE
+            static
+            Label : NAME
+              $c
+            Label : VALUE
+              array
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+        Label : ELEMENT
+          private
+          Label : VALUE
+            void
+          Label : DEFINE
+            static
+            Label : NAME
+              $d
+            Label : VALUE
+              "2"
+        Label : ELEMENT
+          public
+          Label : VALUE
+            void
+          Label : DEFINE
+            static
+            Label : NAME
+              $b
+            Label : VALUE
+              1
