@@ -39,8 +39,7 @@ class Arguments extends TokenAuto {
                                                       -1 => 'ARGUMENT'
                                                       ),
                                'order'    => array('1'  => '2',
-                                                   '-1' => '1'
-                                                      ),
+                                                   '-1' => '1'),
                                'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
                                'atom'       => 'Arguments',
                                );

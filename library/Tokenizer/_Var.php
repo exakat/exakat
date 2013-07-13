@@ -16,7 +16,7 @@ class _Var extends TokenAuto {
         
         $this->actions = array('transform' => array( 1 => 'DEFINE'),
                                'add_void'  => array( 0 => 'VALUE'), 
-                               'atom'      => 'Ppp',
+                               'atom'      => 'Var',
                                );
 
         $r = $this->checkAuto(); 
@@ -28,7 +28,7 @@ class _Var extends TokenAuto {
                                  );
         
         $this->actions = array('to_ppp' => true,
-                               'atom'   => 'Ppp',
+                               'atom'   => 'Var',
                                );
 
         $r = $this->checkAuto(); 
@@ -36,14 +36,14 @@ class _Var extends TokenAuto {
     // class x { var $x, $y }
         $this->conditions = array( 0 => array('token' => $tokens),
                                    1 => array('atom' => 'Arguments'),
+                                   2 => array('filterOut' => array('T_COMMA')),
                                  );
         
-        $this->actions = array('to_var'   => true,
-                               'atom'       => 'Ppp',
+        $this->actions = array('to_var'   => 'Var',
+                               'atom'       => 'Var',
                                );
 
         $r = $this->checkAuto(); 
-
         return $r;    
     }
 }

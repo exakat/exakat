@@ -36,9 +36,10 @@ class _Ppp extends TokenAuto {
     // class x { var $x, $y }
         $this->conditions = array( 0 => array('token' => $tokens),
                                    1 => array('atom' => 'Arguments'),
+                                   2 => array('filterOut' => array('T_COMMA')),
                                  );
         
-        $this->actions = array('to_var'   => true,
+        $this->actions = array('to_var'   => 'Ppp',
                                'atom'       => 'Ppp',
                                );
 

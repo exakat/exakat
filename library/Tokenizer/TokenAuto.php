@@ -169,6 +169,7 @@ g.addEdge(it$d, x, '$label');
         }
 
         if (isset($actions['to_var'])) {
+            $atom = $actions['to_var'];
             $qactions[] = "
 /* to var with arguments */
 var = it;
@@ -179,7 +180,7 @@ root.setProperty('code', var.code);
 root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').has('atom', 'Variable').each{
-    x = g.addVertex(null, [code:var.code, atom:'Var', token:var.token, 'file':arg.file]);
+    x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, 'file':arg.file]);
     
     g.addEdge(root, x, 'NEXT');
     root = x;
@@ -190,7 +191,7 @@ arg.out('ARGUMENT').has('atom', 'Variable').each{
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    x = g.addVertex(null, [code:var.code, atom:'Var', token:var.token, 'file':arg.file]);
+    x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, 'file':arg.file]);
     
     g.addEdge(root, x, 'NEXT');
     root = x;

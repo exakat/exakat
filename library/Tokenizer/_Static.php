@@ -39,7 +39,7 @@ class _Static extends TokenAuto {
                                    1 => array('atom' => 'Arguments'),
                                  );
         
-        $this->actions = array('to_var'   => true,
+        $this->actions = array('to_var'   => 'Static',
                                'atom'       => 'Static',
                                );
 

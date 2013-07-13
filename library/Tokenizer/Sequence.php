@@ -13,7 +13,7 @@ class Sequence extends TokenAuto {
                           'Var', 'Const', 'Ppp', 'Postplusplus', 'Preplusplus', 'Global', 'Nsname',
                           'Ifthen', 'Include', 'Function', 'Foreach', 'While', 'Arrayappend', 'Cast',
                           'Case', 'Default', 'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
-                          'Static', 'Continue', 
+                          'Static', 'Continue', 'Class',
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
@@ -23,7 +23,7 @@ class Sequence extends TokenAuto {
                                 'T_GOTO', 'T_STATIC',
                                  );
         $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators);
-        $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), Assignation::$operators);
+        $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA'), Assignation::$operators);
         
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
@@ -45,7 +45,7 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note instructions not separated by ; 
-        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Case', 'Default', 'Var', 'Const', 'Ppp', 'Foreach',);
+        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Case', 'Default', 'Var', 'Global', 'Static', 'Const', 'Ppp', 'Foreach',);
         $this->conditions = array( 0 => array('atom' => $operands2),
                                    1 => array('atom' => $operands2),
         );
