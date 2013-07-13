@@ -1,58 +1,42 @@
 <?php
 
-Label : NEXT
+Label : CODE
   class
   Label : NAME
     a
-  Label : NEXT
+  Label : BLOCK
     {
-    Label : NEXT
-      var
-      Label : DEFINE
-        $b
-      Label : VALUE
-        1
-      Label : NEXT
+    Label : CODE
+      ;
+      Label : ELEMENT
         ;
-        Label : NEXT
+        Label : ELEMENT
           var
-          Label : NEXT
-            =
-            Label : RIGHT
-              -
-              Label : SIGN
-                2
-            Label : NEXT
-              ;
-              Label : NEXT
-                var
-                Label : DEFINE
-                  $d
-                Label : VALUE
-                  array
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      void
-                Label : NEXT
-                  ;
-                  Label : NEXT
-                    var
-                    Label : NEXT
-                      =
-                      Label : RIGHT
-                        '23'
-                      Label : NEXT
-                        ;
-                        Label : NEXT
-                          }
-                          Label : NEXT
-                            ?>
-                            Label : NEXT
-                              /**/
-                              Label : NEXT
-                                /* * */
-                      Label : LEFT
-                        $e
-            Label : LEFT
-              $c
+          Label : NAME
+            $e
+          Label : VALUE
+            '23'
+        Label : ELEMENT
+          var
+          Label : NAME
+            $d
+          Label : VALUE
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : ELEMENT
+          var
+          Label : NAME
+            $c
+          Label : VALUE
+            -
+            Label : SIGN
+              2
+        Label : ELEMENT
+          var
+          Label : NAME
+            $b
+          Label : VALUE
+            1
