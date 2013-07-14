@@ -12,10 +12,10 @@ class Void extends TokenAuto {
                                              'atom' => 'none'),
         );
         
-        $this->actions = array('addEdge'    => array(0 => array('Block' => 'ASLDJASDLJ')),
+        $this->actions = array('addEdge'    => array(0 => array('Block' => 'BLOCK')),
                                'atom'       => 'Void');
                                
-        return $this->checkAuto();
+        $r = $this->checkAuto();
         
         return $r;
     }

@@ -22,7 +22,6 @@ class Ifthen extends TokenAuto {
                                                       ),
                                'atom'       => 'Ifthen',
                                );
-
         $r = $this->checkAuto(); 
 
     // @doc if then else

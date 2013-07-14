@@ -596,6 +596,29 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             unset($actions['createSequenceWithNext']);
         }
 
+        if (isset($actions['to_block']) && $actions['to_block']) {
+                $qactions[] = " 
+/* to_block */ 
+
+x = g.addVertex(null, [code:'Block With IF', atom:'Block', 'file':it.file]);
+// s'insérer a la place du courant
+g.addEdge(it.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, it.out('NEXT').next(), 'NEXT');
+g.addEdge(x, it, 'CODE');
+it.bothE('NEXT').each{ g.removeEdge(it); }
+
+
+// supprimer le suivant
+g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+semicolon = x.out('NEXT').next();
+semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+g.removeVertex(semicolon);
+
+
+            ";
+            unset($actions['to_block']);
+        }
+        
         if (isset($actions['createBlockWithSequence']) && $actions['createBlockWithSequence']) {
                 $qactions[] = " 
 /* createBlockWithSequence */ 

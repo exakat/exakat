@@ -56,7 +56,26 @@ class Block extends TokenAuto {
         
         $this->actions = array('createBlockWithSequence'    => true);
         $r = $this->checkAuto(); 
+
+        $this->conditions = array( -2 => array('token' => array('T_IF', 'T_ELSEIF'),
+                                               'atom' => 'none'),
+                                   -1 => array('atom' => 'Parenthesis'),
+                                    0 => array('atom' => 'yes'),
+                                    1 => array('token' => 'T_SEMICOLON')
+        );
         
+        $this->actions = array( 'to_block' => true);
+        $r = $this->checkAuto(); 
+
+        $this->conditions = array( -1 => array('token' => 'T_ELSE',
+                                               'atom' => 'none'),
+                                    0 => array('atom' => 'yes'),
+                                    1 => array('token' => 'T_SEMICOLON')
+        );
+        
+        $this->actions = array( 'to_block' => true);
+        $r = $this->checkAuto(); 
+                
         return $r;
     }
 }
