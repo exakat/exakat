@@ -7,7 +7,7 @@ class Sign extends TokenAuto {
                                     'Staticmethodcall', 'Staticproperty');
     function _check() {
 
-        $this->conditions = array( -1 => array('filterOut2' => array('T_STRING', 'T_LNUMBER', 'T_DNUMBER',)), 
+        $this->conditions = array( -1 => array('filterOut2' => array('T_STRING', 'T_LNUMBER', 'T_DNUMBER', 'T_CLOSE_PARENTHESIS',)), 
                                    0  => array('token' => array('T_PLUS', 'T_MINUS'),
                                                'atom' => 'none'),
                                    1  => array('atom' => Sign::$operands),
