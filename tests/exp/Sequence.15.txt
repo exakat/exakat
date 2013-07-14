@@ -1,19 +1,7 @@
 <?php
 
 Label : CODE
-  Sequence
-  Label : ELEMENT
-    global
-    Label : NAME
-      $b
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $a
-    Label : VALUE
-      void
+  ;
   Label : ELEMENT
     class
     Label : NAME
@@ -48,6 +36,18 @@ Label : CODE
               $z
             Label : VALUE
               3
+  Label : ELEMENT
+    global
+    Label : NAME
+      $b
+    Label : VALUE
+      void
+  Label : ELEMENT
+    global
+    Label : NAME
+      $a
+    Label : VALUE
+      void
   Label : ELEMENT
     global
     Label : NAME
