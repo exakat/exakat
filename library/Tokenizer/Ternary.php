@@ -13,7 +13,7 @@ class Ternary extends TokenAuto {
                                     1 => array('atom' => 'yes'),
                                     2 => array('token' => 'T_COLON'),
                                     3 => array('atom' => 'yes'),
-                                    4 => array('filterOut' => array('T_DOT')),
+                                    4 => array('filterOut' => array('T_DOT', 'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',)),
                                  );
         
         $this->actions = array('transform'   => array( -1 => 'CONDITION',
