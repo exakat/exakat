@@ -1,0 +1,30 @@
+<?php
+
+Label : NEXT
+  $a
+  Label : NEXT
+    .=
+    Label : NEXT
+      "
+      Label : NEXT
+        b
+        Label : NEXT
+          $c
+          Label : NEXT
+            [
+            Label : NEXT
+              Concat
+              Label : NEXT
+                "
+                Label : NEXT
+                  ;
+                  Label : NEXT
+                    ?>
+                    Label : NEXT
+                      /**/
+                      Label : NEXT
+                        /* * */
+              Label : CONCAT
+                
+              Label : CONCAT
+                '1']e
