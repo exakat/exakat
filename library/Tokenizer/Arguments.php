@@ -31,7 +31,7 @@ class Arguments extends TokenAuto {
                                    0 => array('code' => ',',
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR','T_OPEN_PARENTHESIS' ),
+                                   2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR','T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', ),
                                                                          Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
                             );
         
@@ -96,7 +96,7 @@ class Arguments extends TokenAuto {
         $this->conditions = array( 0 => array('atom' => 'none',
                                               'token' => array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE',)),
                                    1 => array('atom'  => 'yes'),
-                                   2 => array('filterOut' => array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_EQUAL', 'T_QUESTION' )) 
+                                   2 => array('filterOut' => array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_EQUAL', 'T_QUESTION', 'T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', )) 
         );
         
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));

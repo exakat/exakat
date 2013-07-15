@@ -1,0 +1,92 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          $j
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                $k
+              Label : INDEX
+                'l'
+            Label : INDEX
+              'm'
+          Label : LEFT
+            $k
+    Label : ELSE
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            true
+          Label : LEFT
+            $n
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      str_replace
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                $f
+              Label : INDEX
+                'g'
+            Label : INDEX
+              'h'
+          Label : INDEX
+            'i'
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'd'
+          Label : INDEX
+            'e'
+        Label : ARGUMENT
+          'b'
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    require_once
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ;
+        Label : ELEMENT
+          o
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              'r'
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                $q
+              Label : CONCAT
+                'p'
