@@ -69,7 +69,7 @@ class Block extends TokenAuto {
 
         $this->conditions = array( -1 => array('token' => 'T_ELSE',
                                                'atom' => 'none'),
-                                    0 => array('notAtom' => 'Block'),
+                                    0 => array('notAtom' => 'Block', 'atom' => 'yes', ),
                                     1 => array('token' => 'T_SEMICOLON')
         );
         
