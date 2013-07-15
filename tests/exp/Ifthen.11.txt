@@ -1,0 +1,64 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      $c
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        switch
+        Label : NAME
+          $c
+        Label : CASES
+          {
+          Label : CODE
+            case
+            Label : CASE
+              'a'
+            Label : CODE
+              Block With Next
+              Label : CODE
+                Sequence With Next
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    1
+                  Label : LEFT
+                    $x
+                Label : ELEMENT
+                  break
+                  Label : LEVEL
+                    void
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          3
+        Label : LEFT
+          $e
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          4
+        Label : LEFT
+          $f
+  Label : ELSE
+    elseif
+    Label : CONDITION
+      (
+      Label : CODE
+        $d
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            5
+          Label : LEFT
+            $f

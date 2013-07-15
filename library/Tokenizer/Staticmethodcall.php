@@ -8,7 +8,7 @@ class Staticmethodcall extends TokenAuto {
         $operands = array('Constant', 'String', 'Variable');
         $this->conditions = array( -1 => array('atom' => $operands), 
                                     0 => array('token' => 'T_DOUBLE_COLON'),
-                                    1 => array('atom' => 'Functioncall')
+                                    1 => array('atom' => 'Functioncall'),
                                  );
         
         $this->actions = array('makeEdge'   => array( -1 => 'CLASS',

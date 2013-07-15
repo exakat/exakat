@@ -88,7 +88,7 @@ class TokenAuto extends Token {
         }
         
         if (isset($actions['atom'])) {
-           $qactions[] = " /* atom */   it.setProperty('atom', '".$actions['atom']."')";
+           $qactions[] = " /* atom */\n   it.setProperty('atom', '".$actions['atom']."')";
            unset($actions['atom']);
         }
         
@@ -732,6 +732,15 @@ it.as('origin').in('$link').has('atom','$atom').each{
             unset($cdt['atom']);
         }
 
+        if (isset($cdt['notAtom'])) {
+            if ( is_array($cdt['notAtom']) && !empty($cdt['notAtom'])) {
+                $qcdts[] = "filter{!(it.atom in ['".join("', '", $cdt['notAtom'])."'])}";
+            } else {
+                $qcdts[] = "hasNot('atom', '".$cdt['notAtom']."')";
+            }
+            unset($cdt['notAtom']);
+        }
+        
         if (isset($cdt['filterOut'])) {
             if (is_string($cdt['filterOut'])) {
                 $qcdts[] = "filter{it.token != '".$cdt['filterOut']."' }";

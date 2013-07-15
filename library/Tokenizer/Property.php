@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Property extends TokenAuto {
     function _check() {
         
-        $operands = array('Variable', 'Property', 'Array');
+        $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall');
         $this->conditions = array( -1 => array('atom' => $operands), 
                                     0 => array('token' => 'T_OBJECT_OPERATOR'),
                                     1 => array('atom' => array('String', 'Variable')),
