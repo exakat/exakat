@@ -7,6 +7,6 @@ if(!$j) {
 	$n = true;
 }
 
-require_once o['p'.$q. 'r'];
+require_once $o['p'.$q. 'r'];
 
 ?>

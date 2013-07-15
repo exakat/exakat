@@ -45,6 +45,42 @@ class Arguments extends TokenAuto {
                                );
         $r = $this->checkAuto();
 
+        // @note implements a,b (two only)
+        $this->conditions = array(-2 => array('token' => 'T_IMPLEMENTS' ),
+                                  -1 => array('token' => 'T_STRING'),
+                                   0 => array('code' => ',',
+                                              'atom' => 'none'),
+                                   1 => array('token' => 'T_STRING')
+                            );
+        
+        $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
+                                                      -1 => 'ARGUMENT'
+                                                      ),
+                               'order'    => array( 1 => '2',
+                                                   -1 => '1'),
+                               'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
+                               'atom'       => 'Arguments',
+                               );
+        $r = $this->checkAuto();
+
+        // @note implements a,b,c (three or more)
+        $this->conditions = array(-2 => array('token' => 'T_IMPLEMENTS' ),
+                                  -1 => array('atom' => 'Arguments'),
+                                   0 => array('code' => ',',
+                                              'atom' => 'none'),
+                                   1 => array('token' => 'T_STRING')
+                            );
+        
+        $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
+                                                      -1 => 'ARGUMENT'
+                                                      ),
+                               'order'    => array( 1 => '2',
+                                                   -1 => '1'),
+                               'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
+                               'atom'       => 'Arguments',
+                               );
+        $r = $this->checkAuto();
+
 
         // @note End of )
         $this->conditions = array(-2 => array('filterOut' => array("T_NS_SEPARATOR")),

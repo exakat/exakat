@@ -30,7 +30,8 @@ class _Class extends TokenAuto {
     // class x implements a {}
         $this->conditions = array( 0 => array('atom' => 'Class'),
                                    1 => array('token' => 'T_IMPLEMENTS'),
-                                   2 => array('atom' => 'String')
+                                   2 => array('atom' => 'String'),
+                                   3 => array('filterOut' => array('T_COMMA')),
                                  );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
@@ -41,7 +42,8 @@ class _Class extends TokenAuto {
     // class x implements a,b,c {}
         $this->conditions = array( 0 => array('atom' => 'Class'),
                                    1 => array('token' => 'T_IMPLEMENTS'),
-                                   2 => array('atom' => 'Arguments')
+                                   2 => array('atom' => 'Arguments'),
+                                   3 => array('filterOut' => array('T_COMMA')),
                                  );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
