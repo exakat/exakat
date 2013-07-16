@@ -5,7 +5,6 @@ namespace Tokenizer;
 class Keyvalue extends TokenAuto {
     function _check() {
     
-    // @doc if then else
         $this->conditions = array(-2 => array('filterOut' => array_merge(array( 'T_NS_SEPARATOR', 'T_DOT', ),
                                                                          Addition::$operators, Multiplication::$operators)), 
                                   -1 => array('atom' => 'yes'),
@@ -16,15 +15,8 @@ class Keyvalue extends TokenAuto {
                                                   'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_DOT', 'T_DOUBLE_COLON', ))),
         );
         
-        /*
-        '[','->','++','--','=','.=',
-                                                '*=','+=','-=','/=','%=',
-                                                '>>=','&=','^=','>>>=', '|=',
-                                                '<<=','>>=','?','(','{'
-                                                */
-        
-        $this->actions = array('transform'    => array('-1' => 'KEY',
-                                                       '1' => 'VALUE'
+        $this->actions = array('transform'    => array(-1 => 'KEY',
+                                                        1 => 'VALUE'
                                                       ),
                                'atom'       => 'Keyvalue',
                                );
