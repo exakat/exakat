@@ -1,0 +1,52 @@
+<?php
+
+Label : NEXT
+  ;
+  Label : ELEMENT
+    try
+    Label : CODE
+      {
+      Label : CODE
+        void
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception
+      Label : VARIABLE
+        $e
+      Label : CODE
+        {
+        Label : CODE
+          void
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception2
+      Label : VARIABLE
+        $e
+      Label : CODE
+        {
+        Label : CODE
+          void
+  Label : NEXT
+    catch
+    Label : CLASS
+      Exception3
+    Label : VARIABLE
+      $e
+    Label : CODE
+      {
+      Label : CODE
+        void
+    Label : NEXT
+      ?>
+      Label : NEXT
+        /**/
+        Label : NEXT
+          /* * */
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $x

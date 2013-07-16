@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  try
+  Label : CODE
+    {
+    Label : CODE
+      void
+  Label : CATCH
+    catch
+    Label : CLASS
+      Exception
+    Label : VARIABLE
+      $e
+    Label : CODE
+      {
+      Label : CODE
+        void
+  Label : CATCH
+    catch
+    Label : CLASS
+      Exception2
+    Label : VARIABLE
+      $e
+    Label : CODE
+      {
+      Label : CODE
+        void
+  Label : CATCH
+    catch
+    Label : CLASS
+      Exception3
+    Label : VARIABLE
+      $e
+    Label : CODE
+      {
+      Label : CODE
+        void

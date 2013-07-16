@@ -21,17 +21,18 @@ class Sequence extends TokenAuto {
                                 'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_COMMA',
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                 'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_IF', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
-                                'T_THROW', 'T_CATCH', 'T_FINALY',
+                                'T_THROW', 'T_CATCH',
                                  );
         $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators);
-        $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_CLOSE_PARENTHESIS'), Assignation::$operators);
+        $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CATCH',), 
+                                     Assignation::$operators);
         
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut2' => $yield_operator), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('token' => 'T_SEMICOLON'),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut' => $next_operator),
+                                   2 => array('filterOut2' => $next_operator),
         );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ELEMENT',
@@ -45,7 +46,7 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note instructions not separated by ; 
-        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Case', 'Default', 'Var', 'Global', 'Static', 'Const', 'Ppp', 'Foreach', 'Assignation',);
+        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Case', 'Default', 'Var', 'Global', 'Static', 'Const', 'Ppp', 'Foreach', 'Assignation', /*'Methodcall', 'Staticmethodcall',*/);
         $this->conditions = array(-1 => array('filterOut' => array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', )), 
                                    0 => array('atom' => $operands2),
                                    1 => array('atom' => $operands2),

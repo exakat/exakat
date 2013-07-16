@@ -29,7 +29,7 @@ class Concatenation extends TokenAuto {
         $r = $this->checkAuto();
 
 
-        $this->conditions = array( -1 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_DOLLAR',)),
+        $this->conditions = array( -1 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_DOLLAR', 'T_OPEN_PARENTHESIS')),
                                     0 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
                                     1 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
                                     2 => array('filterOut' => array('T_OPEN_BRACKET')),
@@ -63,8 +63,8 @@ class Concatenation extends TokenAuto {
 
         $r = $this->checkAuto();
 
-        $this->conditions = array( 0 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
-                                   1 => array('atom' => array('Concatenation')),
+        $this->conditions = array(  0 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
+                                    1 => array('atom' => array('Concatenation')),
         ); 
 
         $this->actions = array('insertConcat4'   => true,
