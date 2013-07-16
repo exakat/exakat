@@ -12,9 +12,9 @@ class Logical extends TokenAuto {
                                     0 => array('token' => Logical::$operators,
                                               'atom' => 'none' ),
                                     1 => array('atom' => 'yes'),
-                                    2 => array('filterOut' => array_merge(Comparison::$operators,
+                                    2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators,
                                                                            array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
-                                                                                 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                                                                 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_INC', 'T_DEC',
                                                                            ))),
         );
         
