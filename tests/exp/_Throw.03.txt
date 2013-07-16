@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      ->
+      Label : PROPERTY
+        g
+      Label : OBJECT
+        $e
