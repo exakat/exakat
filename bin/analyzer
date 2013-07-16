@@ -71,6 +71,8 @@ $classes = array(
     '_Const',
     'Block',
     '_Class',
+    '_Abstract',
+    '_Final',
     '_Throw',
     '_Case',
     '_Default',
