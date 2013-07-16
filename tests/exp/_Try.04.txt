@@ -1,6 +1,6 @@
 <?php
 
-Label : NEXT
+Label : CODE
   ;
   Label : ELEMENT
     try
@@ -28,22 +28,16 @@ Label : NEXT
         {
         Label : CODE
           void
-  Label : NEXT
-    catch
-    Label : CLASS
-      Exception3
-    Label : VARIABLE
-      $e
-    Label : CODE
-      {
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception3
+      Label : VARIABLE
+        $e
       Label : CODE
-        void
-    Label : NEXT
-      ?>
-      Label : NEXT
-        /**/
-        Label : NEXT
-          /* * */
+        {
+        Label : CODE
+          void
   Label : ELEMENT
     =
     Label : RIGHT

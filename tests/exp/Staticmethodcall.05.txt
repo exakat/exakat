@@ -1,28 +1,48 @@
 <?php
 
-Label : NEXT
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      !
-      Label : NOT
-        defined
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'A'
-  Label : THEN
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        exit
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'B'
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      f
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          protected
+          Label : VALUE
+            void
+          Label : DEFINE
+            static
+            Label : VALUE
+              void
+            Label : DEFINE
+              $g
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          defined
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'A'
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          exit
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'B'
+  Label : ELEMENT
     ::
     Label : METHOD
       d
@@ -30,31 +50,5 @@ Label : NEXT
         void
         Label : ARGUMENT
           'e'
-    Label : NEXT
-      ;
-      Label : NEXT
-        class
-        Label : NAME
-          f
-        Label : BLOCK
-          {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              protected
-              Label : VALUE
-                void
-              Label : DEFINE
-                static
-                Label : VALUE
-                  void
-                Label : DEFINE
-                  $g
-        Label : NEXT
-          ?>
-          Label : NEXT
-            /**/
-            Label : NEXT
-              /* * */
     Label : CLASS
       C
