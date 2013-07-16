@@ -10,7 +10,7 @@ class _Static extends TokenAuto {
 
     // class x { static $x }
         $this->conditions = array( 0 => array('token' => $tokens),
-                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Ppp', 'Function', )),
+                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Ppp', 'Function', 'Abstract', )),
                                    2 => array('filterOut' => $values),
                                    // T_SEMICOLON because of _Class 28 test
                                  );

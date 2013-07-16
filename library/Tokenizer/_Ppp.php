@@ -9,7 +9,7 @@ class _Ppp extends TokenAuto {
         $values = array('T_EQUAL', 'T_COMMA');
     // class x { protected $x }
         $this->conditions = array( 0 => array('token' => $tokens),
-                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static', 'Function' )),
+                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static', 'Function', 'Abstract'  )),
                                    2 => array('filterOut' => $values),
                                    // T_SEMICOLON because of _Class 28 test
                                  );

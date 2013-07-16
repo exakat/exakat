@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  final
+  Label : FINAL
+    class
+    Label : NAME
+      y
+    Label : BLOCK
+      {
+      Label : CODE
+        void
