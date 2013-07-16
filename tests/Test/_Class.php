@@ -54,10 +54,10 @@ class _Class extends Tokenizeur {
     public function test_Class43()  { $this->generic_test('_Class.43'); }
     public function test_Class44()  { $this->generic_test('_Class.44'); }
     public function test_Class45()  { $this->generic_test('_Class.45'); }
-}    public function test_Class46()  { $this->generic_test('_Class.46'); }
-    public function test_Class47()  { $this->generic_test('_Class.47'); }
+    public function test_Class46()  { $this->generic_test('_Class.46'); }
     public function test_Class47()  { $this->generic_test('_Class.47'); }
     public function test_Class48()  { $this->generic_test('_Class.48'); }
     public function test_Class49()  { $this->generic_test('_Class.49'); }
 
+}
 ?>
