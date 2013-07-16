@@ -1,30 +1,22 @@
 <?php
 
-Label : NEXT
-  $a
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
     .=
-    Label : NEXT
+    Label : RIGHT
       "
-      Label : NEXT
-        b
-        Label : NEXT
-          $c
-          Label : NEXT
-            [
-            Label : NEXT
-              Concat
-              Label : NEXT
-                "
-                Label : NEXT
-                  ;
-                  Label : NEXT
-                    ?>
-                    Label : NEXT
-                      /**/
-                      Label : NEXT
-                        /* * */
-              Label : CONCAT
-                
-              Label : CONCAT
-                '1']e
+      Label : CONTAIN
+        Concat
+        Label : CONCAT
+          b
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            1
+        Label : CONCAT
+          [2]e
+    Label : LEFT
+      $a
