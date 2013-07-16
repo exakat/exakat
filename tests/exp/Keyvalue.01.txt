@@ -1,0 +1,56 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            *
+            Label : RIGHT
+              6
+            Label : LEFT
+              5
+          Label : VALUE
+            *
+            Label : RIGHT
+              8
+            Label : LEFT
+              7
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            +
+            Label : RIGHT
+              2
+            Label : LEFT
+              1
+          Label : VALUE
+            +
+            Label : RIGHT
+              4
+            Label : LEFT
+              3
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            .
+            Label : CONCAT
+              'b'
+            Label : CONCAT
+              'a'
+          Label : VALUE
+            .
+            Label : CONCAT
+              'd'
+            Label : CONCAT
+              'c'
+    Label : LEFT
+      $x

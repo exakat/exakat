@@ -1,0 +1,102 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ::
+            Label : PROPERTY
+              $r
+            Label : CLASS
+              Q
+          Label : VALUE
+            ,
+            Label : ARGUMENT
+              void
+            Label : ARGUMENT
+              ::
+              Label : PROPERTY
+                $t
+              Label : CLASS
+                S
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ::
+            Label : METHOD
+              N
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              M
+          Label : VALUE
+            ::
+            Label : METHOD
+              P
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              O
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ::
+            Label : CONSTANT
+              J
+            Label : CLASS
+              I
+          Label : VALUE
+            ::
+            Label : CONSTANT
+              L
+            Label : CLASS
+              K
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ->
+            Label : METHOD
+              f
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : OBJECT
+              $e
+          Label : VALUE
+            ->
+            Label : METHOD
+              h
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : OBJECT
+              $g
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ->
+            Label : PROPERTY
+              b
+            Label : OBJECT
+              $a
+          Label : VALUE
+            ->
+            Label : PROPERTY
+              d
+            Label : OBJECT
+              $c
+    Label : LEFT
+      $x
