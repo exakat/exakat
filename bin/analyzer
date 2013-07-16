@@ -79,6 +79,8 @@ $classes = array(
     '_Foreach',
     '_For',
     '_While',
+    '_Catch',
+    '_Try',
     'Phpcode',
     'Void',
 );
