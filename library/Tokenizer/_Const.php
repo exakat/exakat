@@ -9,7 +9,7 @@ class _Const extends TokenAuto {
         $this->conditions = array( 0 => array('token' => 'T_CONST'),
                                    1 => array('atom' => 'String'),
                                    2 => array('token' => 'T_EQUAL'),
-                                   3 => array('atom' => array('String,', 'Integer', 'Staticconstant')),
+                                   3 => array('atom' => array('String', 'Integer', 'Staticconstant')),
                                  );
         
         $this->actions = array('transform'   => array(   1 => 'NAME',
@@ -17,7 +17,6 @@ class _Const extends TokenAuto {
                                                          3 => 'VALUE'),
                                'atom'       => 'Const',
                                );
-
         $r = $this->checkAuto(); 
 
     // class x { const a = 2; }
