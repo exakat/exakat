@@ -499,7 +499,24 @@ s.bothE('NEXT').each{ g.removeEdge(it); }
 ";
             unset($actions['insertConcat4']);
         }           
-        
+
+        if (isset($actions['to_typehint'])) {
+            $qactions[] = "
+/* to type hint */
+x = g.addVertex(null, [code:'Typehint', atom:'Typehint', 'file':it.file]);
+
+g.addEdge(it.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
+
+g.addEdge(x, it, 'CLASS');
+g.addEdge(x, it.out('NEXT').next(), 'VARIABLE');
+
+it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it);}    
+it.bothE('NEXT').each{ g.removeEdge(it);}    
+
+";
+            unset($actions['to_typehint']);
+        }              
         
         if (isset($actions['insertEdge'])) {
             foreach($actions['insertEdge'] as $destination => $config) {

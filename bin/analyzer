@@ -73,6 +73,7 @@ $classes = array(
     '_Class',
     '_Abstract',
     '_Final',
+    'Typehint',
     '_Throw',
     '_Case',
     '_Default',
