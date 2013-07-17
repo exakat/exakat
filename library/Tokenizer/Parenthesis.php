@@ -8,7 +8,9 @@ class Parenthesis extends TokenAuto {
                              'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign',
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
                              'Instanceof', 'Noscream', 'Magicconstant', 'Logical', 'Ternary',
-                             'Assignation', 'Property', 'Staticproperty', 'Staticconstant', );
+                             'Assignation', 'Property', 'Staticproperty', 'Staticconstant',
+                             'Methodcall', 'Staticmethodcall', 
+                              );
 
         $this->conditions = array(-1 => array('filterOut2' => array('T_STRING', 'T_CATCH', 'T_EXIT', 'T_FOR', 'T_SWITCH', 'T_WHILE', 'T_ECHO', 'T_UNSET', 'T_EMPTY', 'T_PRINT', 'T_VARIABLE', 'T_ISSET', 'T_ARRAY')), 
                                    0 => array('token' => 'T_OPEN_PARENTHESIS',
