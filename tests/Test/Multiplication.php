@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Multiplication extends Tokenizeur {
-    /* 19 methods */
+    /* 20 methods */
     public function testMultiplication01()  { $this->generic_test('Multiplication.01'); }
     public function testMultiplication02()  { $this->generic_test('Multiplication.02'); }
     public function testMultiplication03()  { $this->generic_test('Multiplication.03'); }
@@ -27,5 +27,6 @@ class Multiplication extends Tokenizeur {
     public function testMultiplication17()  { $this->generic_test('Multiplication.17'); }
     public function testMultiplication18()  { $this->generic_test('Multiplication.18'); }
     public function testMultiplication19()  { $this->generic_test('Multiplication.19'); }
+    public function testMultiplication20()  { $this->generic_test('Multiplication.20'); }
 }
 ?>

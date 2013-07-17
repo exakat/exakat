@@ -12,6 +12,7 @@ class Addition extends TokenAuto {
                                    0 => array('token' => Addition::$operators,
                                              'atom' => 'none'),
                                    1 => array('atom' => Multiplication::$operands),
+                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
         );
         
         $this->actions = array('makeEdge'    => array('1' => 'RIGHT',

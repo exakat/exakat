@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Addition extends Tokenizeur {
-    /* 14 methods */
+    /* 15 methods */
     public function testAddition01()  { $this->generic_test('Addition.01'); }
     public function testAddition02()  { $this->generic_test('Addition.02'); }
     public function testAddition03()  { $this->generic_test('Addition.03'); }
@@ -22,5 +22,6 @@ class Addition extends Tokenizeur {
     public function testAddition12()  { $this->generic_test('Addition.12'); }
     public function testAddition13()  { $this->generic_test('Addition.13'); }
     public function testAddition14()  { $this->generic_test('Addition.14'); }
+    public function testAddition15()  { $this->generic_test('Addition.15'); }
 }
 ?>
