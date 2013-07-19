@@ -17,6 +17,11 @@ if ($id = array_search('-all', $args)) {
     define('FORMAT', 'ALL');
 } elseif ($id = array_search('-file', $args)) {
     define('FORMAT', 'FILE');
+    $file = $args[$id + 1];
+    unset($args[$id]);
+    unset($args[$id + 1]);
+}elseif ($id = array_search('-list', $args)) {
+    define('FORMAT', 'LIST');
 } else {
     die("Need an option to run. Aborting\n");
 }
@@ -34,7 +39,35 @@ if (FORMAT == 'ALL') {
     
     // Also clean index
 } elseif (FORMAT == 'FILE') {
-    die("Unknow delete format of '".FORMAT."'. Aborting\n");
+    $queryTemplate = "g.V.has('file', '$file').count()";
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $queryTemplate, $params);
+    $count = $query->getResultSet();
+    $count = $count[0][0];
+
+    $queryTemplate = "g.V.has('file', '$file').each{ g.removeVertex(it); }";
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $queryTemplate, $params);
+    $files = $query->getResultSet();
+
+    print "Deleted $count elements for file '$file'\n";
+
+    // Also clean index
+} elseif (FORMAT == 'LIST') {
+    $queryTemplate = "g.V.file";
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $queryTemplate, $params);
+    $files = $query->getResultSet();
+    
+    $names = array();
+    foreach($files as $file) {
+        @$names[$file[0]]++;
+    }
+    
+    ksort($names);
+    print join("\n", array_keys($names))."\n\n";
+    
+    print count($names)." distinct files\n";
     // Also clean index
 } else {
     die("Unknow delete format of '".FORMAT."'. Aborting\n");
