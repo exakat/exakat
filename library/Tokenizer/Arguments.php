@@ -115,7 +115,7 @@ class Arguments extends TokenAuto {
 
         // @note f() : no argument
         $this->conditions = array(-2 => array('filterOut' => array('T_NS_SEPARATOR')),
-                                  -1 => array('token' => array('T_STRING', 'T_ECHO', 'T_UNSET','T_PRINT', 'T_ARRAY', 'T_VARIABLE', 'T_NS_SEPARATOR')),
+                                  -1 => array('token' => array('T_STRING', 'T_ECHO', 'T_UNSET', 'T_EVAL', 'T_PRINT', 'T_ARRAY', 'T_VARIABLE', 'T_NS_SEPARATOR')),
                                    0 => array('code' => '(',
                                              'atom' => 'none'),
                                    1 => array('code' => ')',
