@@ -5,6 +5,7 @@ namespace Tokenizer;
 class String extends TokenAuto {
     function _check() {
 
+/*
         $this->conditions = array( 0 => array('token' => array('T_STRING', 'T_CONSTANT_ENCAPSED_STRING', 'T_CONSTANT_ENCAPSED_STRING', 'T_ENCAPSED_AND_WHITESPACE'),
                                                'atom' => 'none')
                                  );
@@ -12,7 +13,7 @@ class String extends TokenAuto {
         $this->actions = array('atom'       => 'String',);
         
         $r =  $this->checkAuto();
-
+*/
 // Case of string with interpolation : "a${b}c";
         $this->conditions = array(  0 => array('token' => array('T_QUOTE'), 'atom' => 'none'),
                                     1 => array('atom'  => 'yes'),

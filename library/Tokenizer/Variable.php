@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Variable extends TokenAuto {
     function _check() {
+    /*
         $this->conditions = array(0 => array('token' => 'T_VARIABLE',
                                              'atom' => 'none')
                                   
@@ -12,7 +13,7 @@ class Variable extends TokenAuto {
         $this->actions = array('atom'       => 'Variable');
 
         $r = $this->checkAuto();
-        
+        */
         $this->conditions = array(-1 => array('token' => 'T_DOLLAR_OPEN_CURLY_BRACES',
                                              'atom' => 'none'),
                                   0 => array('token' => 'T_STRING_VARNAME'),

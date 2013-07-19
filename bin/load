@@ -78,6 +78,24 @@ $TPHP = array(";" => 'T_SEMICOLON',
               '$' => 'T_DOLLAR',
               );
 
+$atoms = array( 'T_STRING'                   => 'String', 
+                'T_CONSTANT_ENCAPSED_STRING' => 'String', 
+                'T_CONSTANT_ENCAPSED_STRING' => 'String', 
+                'T_ENCAPSED_AND_WHITESPACE'  => 'String',
+                'T_VARIABLE'                 => 'Variable',
+                'T_LNUMBER'                  => 'Integer', 
+                'T_NUM_STRING'               => 'Integer',
+                'T_DNUMBER'                  => 'Float', 
+                'T_CLASS_C'                  => 'Magicconstant', 
+                'T_FUNC_C'                   => 'Magicconstant', 
+                'T_DIR'                      => 'Magicconstant', 
+                'T_FILE'                     => 'Magicconstant', 
+                'T_LINE'                     => 'Magicconstant', 
+                'T_METHOD_C'                 => 'Magicconstant', 
+                'T_NS_C'                     => 'Magicconstant', 
+                );
+        
+
 foreach($tokens as $id => $token) {
     if ($token[0] == T_WHITESPACE) { continue; }
     if ($token[0] == T_COMMENT) { continue; }
@@ -91,7 +109,11 @@ foreach($tokens as $id => $token) {
         if (in_array($token[0], array(T_OPEN_TAG, T_IS_EQUAL, T_ECHO, T_DOUBLE_ARROW, T_CASE, T_DEFAULT,
                                       T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_PLUS_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL
                                       ))) {
-            $T[$id]->setProperty('begin', true)->save();
+            $T[$id]->setProperty('begin', true);
+        }
+        
+        if (isset($atoms[token_name($token[0])])) {
+            $T[$id]->setProperty('atom', $atoms[token_name($token[0])]);
         }
                                      
         $T[$id]->save();
