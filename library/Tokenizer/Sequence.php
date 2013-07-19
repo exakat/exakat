@@ -4,7 +4,6 @@ namespace Tokenizer;
 
 class Sequence extends TokenAuto {
     function _check() {
- 
         $operands = array('Addition', 'Multiplication', 'String', 'Integer', 'Sequence', 
                           'Float', 'Not', 'Variable','Array','Concatenation', 'Sign',
                           'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
@@ -54,7 +53,6 @@ class Sequence extends TokenAuto {
                                    0 => array('atom' => $operands2),
                                    1 => array('atom' => $operands2),
         );
-        
         $this->actions = array('insertSequence'  => true);
         $r = $this->checkAuto();
 
@@ -80,7 +78,6 @@ class Sequence extends TokenAuto {
         
         $this->actions = array('transform'   => array(-1 => 'ELEMENT'),
                                'order'      => array(-1 =>  1),
-// mergeNext doesn't work backward                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'mergePrev'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                );

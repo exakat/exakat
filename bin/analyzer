@@ -118,11 +118,7 @@ while(check_prev($prev, $extra_rounds)) {
     $r->resetReserve();
     array_push($regex, $r);
     foreach($regex as $name => $r) {
-//        print count($prev)." $name\n";
         $r->check();
-        
-//        if ($name == "Block" && count($prev) == 12) { die(__METHOD__); }
-//        if ($name == "Sequence" && count($prev) == 12) { die(__METHOD__); }
         $r->reserve();
     }
     unset($precedence);
@@ -136,7 +132,11 @@ while(check_prev($prev, $extra_rounds)) {
     }
 }
 
+if (Token::countLeftNext() > 3) {
+    Token::finishSequence();
+}
 Token::cleanHidden();
+
 $end_time = microtime(true);
 display("Total time : ".number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n");
 // @todo display checks processed

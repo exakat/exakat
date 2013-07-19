@@ -43,6 +43,12 @@ class Token {
     	return $result[0][0];
     }
 
+    static function countLeftNext() {
+        $result = Token::query("g.E.has('label','NEXT').count()");
+    	
+    	return $result[0][0];
+    }
+
     static function countNextEdge() {
         $result = Token::query("g.E.has('label','NEXT').count()");
     	
@@ -72,6 +78,26 @@ class Token {
     g.removeVertex(it.out('NEXT').next()); 
     g.removeVertex(it); 
 }";
+        Token::query($query);
+    }
+
+    static public function finishSequence() {
+        $query = "
+x = g.addVertex(null, [code:'Final sequence', atom:'Sequence', token:'T_SEMICOLON']);
+
+g.removeEdge(g.V.has('token','T_ROOT').outE('NEXT').next());
+g.addEdge(g.V.has('token','T_ROOT').next(), x, 'NEXT');
+
+g.V.as('o').out('NEXT').back('o').hasNot('hidden', true).each{
+    g.addEdge(x, it, 'ELEMENT');
+    y = it.out('NEXT').next();
+    g.removeEdge(it.outE('NEXT').next());
+}
+g.addEdge(x, y, 'NEXT');
+x.setProperty('file', y.file);
+g.V.has('file', y.file).has('root', true).each{ it.setProperty('root', false); }
+x.setProperty('root', true);
+       ";
         Token::query($query);
     }
 }

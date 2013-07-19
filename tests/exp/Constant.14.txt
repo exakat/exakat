@@ -1,28 +1,28 @@
-<?php
+Final sequence
+Label : ELEMENT
+  <?php
 
-Label : NEXT
+Label : ELEMENT
   if
-  Label : NEXT
-    (
-    Label : CODE
-      $e
-    Label : NEXT
-      :
-      Label : NEXT
-        ?>
-        Label : NEXT
-          a
-          Label : NEXT
-            <?php// $b ?>C
-            Label : NEXT
-              <?php 
-              Label : NEXT
-                endif
-                Label : NEXT
-                  ;
-                  Label : NEXT
-                    ?>
-                    Label : NEXT
-                      /**/
-                      Label : NEXT
-                        /* * */
+Label : ELEMENT
+  (
+  Label : CODE
+    $e
+Label : ELEMENT
+  :
+Label : ELEMENT
+  ?>
+Label : ELEMENT, NEXT
+  <?php 
+Label : ELEMENT
+  endif
+Label : ELEMENT
+  ;
+Label : ELEMENT
+  ?>
+Label : ELEMENT
+  Concat
+  Label : CONCAT
+    a
+  Label : CONCAT
+    <?php// $b ?>C
