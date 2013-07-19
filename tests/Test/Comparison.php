@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Comparison extends Tokenizeur {
-    /* 18 methods */
+    /* 19 methods */
 
     public function testComparison01()  { $this->generic_test('Comparison.01'); }
     public function testComparison02()  { $this->generic_test('Comparison.02'); }
@@ -28,5 +28,6 @@ class Comparison extends Tokenizeur {
     public function testComparison16()  { $this->generic_test('Comparison.16'); }
     public function testComparison17()  { $this->generic_test('Comparison.17'); }
     public function testComparison18()  { $this->generic_test('Comparison.18'); }
+    public function testComparison19()  { $this->generic_test('Comparison.19'); }
 }
 ?>
