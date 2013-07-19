@@ -75,6 +75,17 @@ class Block extends TokenAuto {
         
         $this->actions = array( 'to_block' => true);
         $r = $this->checkAuto(); 
+
+        $this->conditions = array(-4 => array('token' => 'T_WHILE'),
+                                  -3 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  -2 => array('atom'  => 'yes'),
+                                  -1 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                   0 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'BLOCK'),
+                                'atom' => 'Block');
+        $r = $this->checkAuto();
                 
         return $r;
     }

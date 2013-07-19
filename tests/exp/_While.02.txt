@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  while
+  Label : LOOP
+    {
+    Label : CODE
+      void
+  Label : CONDITION
+    1
