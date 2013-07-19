@@ -76,7 +76,8 @@ class Block extends TokenAuto {
         $this->actions = array( 'to_block' => true);
         $r = $this->checkAuto(); 
 
-        $this->conditions = array(-4 => array('token' => 'T_WHILE'),
+        $this->conditions = array(-5 => array('filterOut2' => array('T_CLOSE_CURLY', 'T_OPEN_CURLY')),
+                                  -4 => array('token' => 'T_WHILE'),
                                   -3 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   -2 => array('atom'  => 'yes'),
                                   -1 => array('token' => 'T_CLOSE_PARENTHESIS'),

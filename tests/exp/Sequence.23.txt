@@ -1,10 +1,26 @@
-<?php
+Final sequence
+Label : ELEMENT
+  <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
+  Label : CODE
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $a
+Label : ELEMENT
+  b
+
+Label : ELEMENT
+  <?php
+
+  Label : CODE
+    ;
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $c

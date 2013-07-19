@@ -15,7 +15,7 @@ class TokenAuto extends Token {
             $qcdts[] = "as('origin')";
         }
 
-        for($i = -4; $i < 0; $i++) {
+        for($i = -5; $i < 0; $i++) {
             if (!empty($this->conditions[$i])) {
                 $cdt = $this->conditions[$i];
                 $cdt['previous'] = abs($i);
