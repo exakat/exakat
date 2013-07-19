@@ -17,7 +17,7 @@ class Comparison extends TokenAuto {
                                    0 => array('token' => Comparison::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS'), 
+                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY'), 
                                                            Addition::$operators, Multiplication::$operators )),
         );
         
