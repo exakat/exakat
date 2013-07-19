@@ -20,10 +20,10 @@ if ($id = array_search('-v', $args)) {
 
 $begin_time = microtime(true);
 $classes = array(
-    'Magicconstant',
+//    'Magicconstant',
     'Variable', 
     'Integer',
-    'Float',
+//    'Float',
     'Boolean',
     'String',
     'Sign',
