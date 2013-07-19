@@ -128,13 +128,13 @@ while(check_prev($prev, $extra_rounds)) {
         display( "$round) Remains $count of $total tokens to process! \n");
     } else {
         display( "$round) All $total tokens have been processed! \n");
+        if (Token::countLeftNext() > 3) {
+            Token::finishSequence();
+        }
         break 1;
     }
 }
 
-if (Token::countLeftNext() > 3) {
-    Token::finishSequence();
-}
 Token::cleanHidden();
 
 $end_time = microtime(true);
