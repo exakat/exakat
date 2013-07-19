@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  &&
+  Label : LEFT
+    !
+    Label : NOT
+      a
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'b'
+  Label : RIGHT
+    ;
+    Label : ELEMENT
+      c
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'd'
