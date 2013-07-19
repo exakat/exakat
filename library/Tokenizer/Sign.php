@@ -40,10 +40,12 @@ class Sign extends TokenAuto {
         $r = $this->checkAuto();
 
 //Special cases like 1 * -2 or 2 + -2         
-        $this->conditions = array( -1 => array('token' => array('T_PLUS', 'T_MINUS', 'T_STAR', 'T_SLASH', 'T_PERCENTAGE')), 
+        $this->conditions = array( -1 => array('token' => array_merge(Addition::$operators, Multiplication::$operators)), 
                                     0 => array('token' => array('T_PLUS', 'T_MINUS'),
                                                'atom' => 'none'),
                                     1 => array('atom' => Sign::$operands),
+                                    2  => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                                                     'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
                                  );
         
         $this->actions = array('makeEdge'   => array( 1 => 'SIGN'),
