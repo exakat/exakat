@@ -7,10 +7,10 @@ Label : CODE
   Label : ARGUMENTS
     void
     Label : ARGUMENT
-      Concat
-      Label : CONCAT
+      Typehint
+      Label : CLASS
         Stdclass
-      Label : CONCAT
+      Label : VARIABLE
         $a
   Label : BLOCK
     {

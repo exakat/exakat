@@ -9,7 +9,7 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        ;
+        Sequence
         Label : ELEMENT
           const
           Label : NAME
@@ -17,17 +17,17 @@ Label : CODE
           Label : VALUE
             4
         Label : ELEMENT
-          var
-          Label : VALUE
-            void
-          Label : DEFINE
-            $x
-        Label : ELEMENT
           const
           Label : NAME
             e
           Label : VALUE
             5
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $x
       Label : ELEMENT
         const
         Label : NAME
