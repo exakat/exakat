@@ -48,7 +48,7 @@ class Sequence extends TokenAuto {
         // @note instructions not separated by ; 
         $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Case', 'Default', 'Var', 'Global', 'Static', 
                            'Const', 'Ppp', 'Foreach', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
-                           'Abstract', 'Final', 'Switch', 'Include', 'Return', );
+                           'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary');
         $this->conditions = array(-1 => array('filterOut' => array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', 'T_ABSTRACT', 'T_FINAL')), 
                                    0 => array('atom' => $operands2),
                                    1 => array('atom' => $operands2),
