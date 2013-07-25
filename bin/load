@@ -17,158 +17,162 @@ if ($id = array_search('-f', $args)) {
     $filename = 'tests/test/Addition.03.php';
 }
 
-if (!file_exists($filename)) {
-    print "'$filename' doesn't exists. Aborting\n";
-    die();
-}
-
 if ($id = array_search('-v', $args)) {
     define('VERBOSE', true);
 } else {
     define('VERBOSE', false);
 }
 
-$php = file_get_contents($filename);
-$file = realpath($filename);
-$tokens = token_get_all($php);
+process_file($filename);
 
-$client = new Client();
-
-// @doc delete old tokens
-
-$queryTemplate = "g.V.has('file', '$file').outE.each{ g.removeEdge(it); }";
-$params = array('type' => 'IN');
-$query = new Gremlin\Query($client, $queryTemplate, $params);
-$query->getResultSet();
-
-$queryTemplate = "g.V.has('file', '$file').each{ g.removeVertex(it); }";
-$params = array('type' => 'IN');
-$query = new Gremlin\Query($client, $queryTemplate, $params);
-$edges = $query->getResultSet();
-
-// load new tokens
-$line = 0;
-$TPHP = array(";" => 'T_SEMICOLON',
-              "=" => 'T_EQUAL',
-              "+" => 'T_PLUS',
-              "-" => 'T_MINUS',
-              "*" => 'T_STAR',
-              "/" => 'T_SLASH',
-              "%" => 'T_PERCENTAGE',
-              "(" => 'T_OPEN_PARENTHESIS',
-              ")" => 'T_CLOSE_PARENTHESIS',
-              "!" => 'T_BANG',
-              "[" => 'T_OPEN_BRACKET',
-              "]" => 'T_CLOSE_BRACKET',
-              "{" => 'T_OPEN_CURLY',
-              "}" => 'T_CLOSE_CURLY',
-              '.' => 'T_DOT',
-              ',' => 'T_COMMA',
-              '@' => 'T_AT',
-              '?' => 'T_QUESTION',
-              ':' => 'T_COLON',
-              '>' => 'T_GREATER',
-              '<' => 'T_SMALLER',
-              '&' => 'T_AND',
-              '^' => 'T_OR',
-              '|' => 'T_XOR',
-              '&&' => 'T_ANDAND',
-              '||' => 'T_OROR',
-              '"' => 'T_QUOTE',
-              '$' => 'T_DOLLAR',
-              );
-
-$atoms = array( 'T_STRING'                   => 'String', 
-                'T_CONSTANT_ENCAPSED_STRING' => 'String', 
-                'T_CONSTANT_ENCAPSED_STRING' => 'String', 
-                'T_ENCAPSED_AND_WHITESPACE'  => 'String',
-                'T_INLINE_HTML'              => 'String',
-                'T_VARIABLE'                 => 'Variable',
-                'T_LNUMBER'                  => 'Integer', 
-                'T_NUM_STRING'               => 'Integer',
-                'T_DNUMBER'                  => 'Float', 
-                'T_CLASS_C'                  => 'Magicconstant', 
-                'T_FUNC_C'                   => 'Magicconstant', 
-                'T_DIR'                      => 'Magicconstant', 
-                'T_FILE'                     => 'Magicconstant', 
-                'T_LINE'                     => 'Magicconstant', 
-                'T_METHOD_C'                 => 'Magicconstant', 
-                'T_NS_C'                     => 'Magicconstant', 
-                );
-        
-
-foreach($tokens as $id => $token) {
-    if ($token[0] == T_WHITESPACE) { continue; }
-    if ($token[0] == T_COMMENT) { continue; }
-    if ($token[0] == T_DOC_COMMENT) { continue; }
-    
-    if (is_array($token)) {
-        $T[$id] = $client->makeNode()->setProperty('token', token_name($token[0]))
-                                     ->setProperty('code', $token[1])
-                                     ->setProperty('line', $token[2])
-                                     ->setProperty('file', $file);
-        if (in_array($token[0], array(T_OPEN_TAG, T_IS_EQUAL, T_ECHO, T_DOUBLE_ARROW, T_CASE, T_DEFAULT,
-                                      T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_PLUS_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL
-                                      ))) {
-            $T[$id]->setProperty('begin', true);
-        }
-        
-        if (isset($atoms[token_name($token[0])])) {
-            $T[$id]->setProperty('atom', $atoms[token_name($token[0])]);
-        }
-                                     
-        $T[$id]->save();
-        $line = $token[2];
-    } else {
-        if (!isset($TPHP[$token])) {
-            print("No TPHP for '{$token}'\n");
-            $TPHP[$token] = max($TPHP) + 1;
-        }
-        $T[$id] = $client->makeNode()->setProperty('token', $TPHP[$token])
-                                     ->setProperty('code', $token)
-                                     ->setProperty('line', $line)
-                                     ->setProperty('file', $file)->save();
-
-        if (in_array($token, array('(','{','+','-','*','/','%', '==', ',', '=', '.'))) {
-            $T[$id]->setProperty('begin', true)->save();
-        }
-                                     
-        $T[$id]->save();
+function process_file($filename) {
+    if (!file_exists($filename)) {
+        print "'$filename' doesn't exists. Aborting\n";
+        die();
     }
     
-    if (!isset($previous)) {
-        $previous = $T[$id];
-    } else {
-        $previous->relateTo($T[$id], 'NEXT')->save();
-        $previous = $T[$id];
+    
+    $php = file_get_contents($filename);
+    $file = realpath($filename);
+    $tokens = token_get_all($php);
+    
+    $client = new Client();
+    
+    // @doc delete old tokens
+    
+    $queryTemplate = "g.V.has('file', '$file').outE.each{ g.removeEdge(it); }";
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $queryTemplate, $params);
+    $query->getResultSet();
+    
+    $queryTemplate = "g.V.has('file', '$file').each{ g.removeVertex(it); }";
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $queryTemplate, $params);
+    $edges = $query->getResultSet();
+    
+    // load new tokens
+    $line = 0;
+    $TPHP = array(";" => 'T_SEMICOLON',
+                  "=" => 'T_EQUAL',
+                  "+" => 'T_PLUS',
+                  "-" => 'T_MINUS',
+                  "*" => 'T_STAR',
+                  "/" => 'T_SLASH',
+                  "%" => 'T_PERCENTAGE',
+                  "(" => 'T_OPEN_PARENTHESIS',
+                  ")" => 'T_CLOSE_PARENTHESIS',
+                  "!" => 'T_BANG',
+                  "[" => 'T_OPEN_BRACKET',
+                  "]" => 'T_CLOSE_BRACKET',
+                  "{" => 'T_OPEN_CURLY',
+                  "}" => 'T_CLOSE_CURLY',
+                  '.' => 'T_DOT',
+                  ',' => 'T_COMMA',
+                  '@' => 'T_AT',
+                  '?' => 'T_QUESTION',
+                  ':' => 'T_COLON',
+                  '>' => 'T_GREATER',
+                  '<' => 'T_SMALLER',
+                  '&' => 'T_AND',
+                  '^' => 'T_OR',
+                  '|' => 'T_XOR',
+                  '&&' => 'T_ANDAND',
+                  '||' => 'T_OROR',
+                  '"' => 'T_QUOTE',
+                  '$' => 'T_DOLLAR',
+                  );
+    
+    $atoms = array( 'T_STRING'                   => 'String', 
+                    'T_CONSTANT_ENCAPSED_STRING' => 'String', 
+                    'T_CONSTANT_ENCAPSED_STRING' => 'String', 
+                    'T_ENCAPSED_AND_WHITESPACE'  => 'String',
+                    'T_INLINE_HTML'              => 'String',
+                    'T_VARIABLE'                 => 'Variable',
+                    'T_LNUMBER'                  => 'Integer', 
+                    'T_NUM_STRING'               => 'Integer',
+                    'T_DNUMBER'                  => 'Float', 
+                    'T_CLASS_C'                  => 'Magicconstant', 
+                    'T_FUNC_C'                   => 'Magicconstant', 
+                    'T_DIR'                      => 'Magicconstant', 
+                    'T_FILE'                     => 'Magicconstant', 
+                    'T_LINE'                     => 'Magicconstant', 
+                    'T_METHOD_C'                 => 'Magicconstant', 
+                    'T_NS_C'                     => 'Magicconstant', 
+                    );
+            
+    
+    foreach($tokens as $id => $token) {
+        if ($token[0] == T_WHITESPACE) { continue; }
+        if ($token[0] == T_COMMENT) { continue; }
+        if ($token[0] == T_DOC_COMMENT) { continue; }
+        
+        if (is_array($token)) {
+            $T[$id] = $client->makeNode()->setProperty('token', token_name($token[0]))
+                                         ->setProperty('code', $token[1])
+                                         ->setProperty('line', $token[2])
+                                         ->setProperty('file', $file);
+            if (in_array($token[0], array(T_OPEN_TAG, T_IS_EQUAL, T_ECHO, T_DOUBLE_ARROW, T_CASE, T_DEFAULT,
+                                          T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_PLUS_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL
+                                          ))) {
+                $T[$id]->setProperty('begin', true);
+            }
+            
+            if (isset($atoms[token_name($token[0])])) {
+                $T[$id]->setProperty('atom', $atoms[token_name($token[0])]);
+            }
+                                         
+            $T[$id]->save();
+            $line = $token[2];
+        } else {
+            if (!isset($TPHP[$token])) {
+                print("No TPHP for '{$token}'\n");
+                $TPHP[$token] = max($TPHP) + 1;
+            }
+            $T[$id] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                                         ->setProperty('code', $token)
+                                         ->setProperty('line', $line)
+                                         ->setProperty('file', $file)->save();
+    
+            if (in_array($token, array('(','{','+','-','*','/','%', '==', ',', '=', '.'))) {
+                $T[$id]->setProperty('begin', true)->save();
+            }
+                                         
+            $T[$id]->save();
+        }
+        
+        if (!isset($previous)) {
+            $previous = $T[$id];
+        } else {
+            $previous->relateTo($T[$id], 'NEXT')->save();
+            $previous = $T[$id];
+        }
     }
-}
-
-$T[0]->setProperty('root', 'true')->save();
-
-$T[-1] = $client->makeNode()->setProperty('token', 'T_ROOT')
-                            ->setProperty('code', '/**/')
-                            ->setProperty('line', 0)
-                            ->setProperty('file', $file)
-                            ->setProperty('hidden', true)
-                            ->save();
-
-$last     = $client->makeNode()->setProperty('token', 'T_END')
-                               ->setProperty('code', '/**/')
-                               ->setProperty('line', $line)
-                               ->setProperty('file', $file)
-                               ->setProperty('hidden', true)
-                               ->save();
-                               
-$T[-1]->relateTo($T[0], 'NEXT')->setProperty('__FILE__', true)->save();
-$previous->relateTo($last, 'NEXT')->setProperty('__FILE__', true)->save();
-
-$last2     = $client->makeNode()->setProperty('token', 'T_END')
-                                ->setProperty('code', '/* * */')
-                                ->setProperty('line', $line)
+    
+    $T[0]->setProperty('root', 'true')->save();
+    
+    $T[-1] = $client->makeNode()->setProperty('token', 'T_ROOT')
+                                ->setProperty('code', '/**/')
+                                ->setProperty('line', 0)
                                 ->setProperty('file', $file)
                                 ->setProperty('hidden', true)
                                 ->save();
-$last->relateTo($last2, 'NEXT')->setProperty('__FILE__', true)->save();
-
+    
+    $last     = $client->makeNode()->setProperty('token', 'T_END')
+                                   ->setProperty('code', '/**/')
+                                   ->setProperty('line', $line)
+                                   ->setProperty('file', $file)
+                                   ->setProperty('hidden', true)
+                                   ->save();
+                                   
+    $T[-1]->relateTo($T[0], 'NEXT')->setProperty('__FILE__', true)->save();
+    $previous->relateTo($last, 'NEXT')->setProperty('__FILE__', true)->save();
+    
+    $last2     = $client->makeNode()->setProperty('token', 'T_END')
+                                    ->setProperty('code', '/* * */')
+                                    ->setProperty('line', $line)
+                                    ->setProperty('file', $file)
+                                    ->setProperty('hidden', true)
+                                    ->save();
+    $last->relateTo($last2, 'NEXT')->setProperty('__FILE__', true)->save();
+}
 ?>
