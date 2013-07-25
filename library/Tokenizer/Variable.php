@@ -32,8 +32,8 @@ class Variable extends TokenAuto {
                                   1 => array('token' => 'T_CLOSE_CURLY'),
         );
         
-        $this->actions = array( 'transform' => array('-1' => 'DROP',
-                                                     '1' => 'DROP'),
+        $this->actions = array( 'transform' => array(-1 => 'DROP',
+                                                      1 => 'DROP'),
                                 'atom'       => 'Variable');
         $r = $this->checkAuto();
 
@@ -47,8 +47,21 @@ class Variable extends TokenAuto {
                                 'atom'      => 'Variable');
 
         $r = $this->checkAuto();
+
+        $this->conditions = array(0 => array('token' => 'T_DOLLAR',
+                                             'atom' => 'none'),
+                                  1 => array('token' => 'T_OPEN_CURLY'),
+                                  2 => array('atom' => 'yes'),
+                                  3 => array('token' => 'T_CLOSE_CURLY'),
+        );
         
-        	
+        $this->actions = array( 'transform' => array(1 => 'DROP',
+                                                     2 => 'NAME',
+                                                     3 => 'DROP'),
+                                'atom'       => 'Variable');
+        $r = $this->checkAuto();
+        
+        return $r;
     }
 }
 
