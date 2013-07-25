@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $x
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          $y
+    Label : ELSE
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          $z

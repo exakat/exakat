@@ -12,7 +12,7 @@ class Sequence extends TokenAuto {
                           'Var', 'Const', 'Ppp', 'Postplusplus', 'Preplusplus', 'Global', 'Nsname',
                           'Ifthen', 'Include', 'Function', 'Foreach', 'While', 'Arrayappend', 'Cast',
                           'Case', 'Default', 'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
-                          'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final', 
+                          'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final'
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
@@ -24,7 +24,7 @@ class Sequence extends TokenAuto {
                                  );
         $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators);
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CATCH',
-                                           'T_OPEN_BRACKET', 'T_OPEN_CURLY', ), 
+                                           'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_ELSEIF' ), 
                                      Assignation::$operators);
         
         // @note instructions separated by ; 
@@ -95,20 +95,37 @@ class Sequence extends TokenAuto {
 
         // @note End of PHP script
         $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS')),), 
-                                  -1 => array('atom' => $operands ),
-                                   0 => array('code' => ';',
+                                  -1 => array('atom' => $operands,
+                                              'notToken' => 'T_ELSEIF', ),
+                                   0 => array('token' => 'T_SEMICOLON',
                                               'atom' => 'none'),
-                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT',),
+                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', ),
                                               'atom'  => 'none'),
         );
         
         $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'),
-                               'order'    => array(-1 => 1),
-                               'atom'       => 'Sequence',
+                               'order'       => array(-1 => 1),
+                               'atom'        => 'Sequence',
                                );
-
         $r = $this->checkAuto();
+
+        // @note End of PHP script
+        $this->conditions = array(-3 => array('token' => array('T_ELSE', 'T_ELSEIF', 'T_IF', 'T_OPEN_PARENTHESIS',)), 
+                                  -2 => array('token' => 'T_COLON',), 
+                                  -1 => array('atom' => $operands,
+                                              'notToken' => 'T_ELSEIF', ),
+                                   0 => array('token' => 'T_SEMICOLON',
+                                              'atom' => 'none'),
+                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', ),
+                                              'atom'  => 'none'),
+        );
         
+        $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'),
+                               'order'       => array(-1 => 1),
+                               'atom'        => 'Sequence',
+                               );
+        $r = $this->checkAuto(); 
+       
         return $r;
     }
 }

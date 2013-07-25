@@ -57,6 +57,68 @@ class Ifthen extends TokenAuto {
 
         $r = $this->checkAuto(); 
 
+    // @doc if ( ) : endif
+        $this->conditions = array( 0 => array('token' => array('T_IF', 'T_ELSEIF'),
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => 'Parenthesis'),
+                                   2 => array('token' => 'T_COLON'),
+                                   3 => array('atom'  => 'yes'),
+                                   4 => array('token' => 'T_ENDIF'),
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'CONDITION',
+                                                        2 => 'DROP',    
+                                                        3 => 'THEN',    
+                                                        4 => 'DROP', 
+                                                      ),
+                               'atom'       => 'Ifthen',
+                               );
+        $r = $this->checkAuto(); 
+
+    // @doc if ( ) : else: endif
+        $this->conditions = array( 0 => array('token' => array('T_IF', 'T_ELSEIF'),
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => 'Parenthesis'),
+                                   2 => array('token' => 'T_COLON'),
+                                   3 => array('atom'  => 'yes'),
+                                   4 => array('token' => 'T_ELSE'),
+                                   5 => array('token' => 'T_COLON'),
+                                   6 => array('atom' => 'yes'),
+                                   7 => array('token' => array('T_ENDIF', 'T_ELSEIF')),
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'CONDITION',
+                                                        2 => 'DROP',    
+                                                        3 => 'THEN',    
+                                                        4 => 'DROP', 
+                                                        5 => 'DROP', 
+                                                        6 => 'ELSE', 
+                                                        7 => 'DROP', 
+                                                      ),
+                               'atom'       => 'Ifthen',
+                               'property'   => array('Alternative' => true),
+                               );
+
+        $r = $this->checkAuto(); 
+
+    // @doc if ( ) : elseif
+        $this->conditions = array( 0 => array('token' => array('T_IF', 'T_ELSEIF'),
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => 'Parenthesis'),
+                                   2 => array('token' => 'T_COLON'),
+                                   3 => array('atom'  => 'yes'),
+                                   4 => array('atom' => 'Ifthen'),
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'CONDITION',
+                                                        2 => 'DROP',    
+                                                        3 => 'THEN', 
+                                                        4 => 'ELSE',
+                                                      ),
+                               'atom'       => 'Ifthen',
+                               );
+        $r = $this->checkAuto(); 
+
         return $r;
     }
 }

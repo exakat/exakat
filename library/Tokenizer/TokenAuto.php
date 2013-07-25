@@ -242,7 +242,9 @@ g.removeVertex(assignation);
         
         if (isset($actions['transform'])) {
             $c = 0; 
+            
             foreach($actions['transform'] as $destination => $label) {
+                if ($label == 'NONE') { continue; }
                 if ($destination > 0) { 
                     $c++;
                 
@@ -357,7 +359,20 @@ g.removeEdge(f.inE('NEXT').next());
 ";
                     }
                 } else {
-                    die("Destination 0 pour transform ");
+                    if ($label == 'DROP') {
+                        $qactions[] = "
+/* transform drop in (0) */
+a = it.in('NEXT').next();
+b = it.out('NEXT').next();
+
+it.bothE('NEXT').each{    g.removeEdge(it); } 
+
+g.removeVertex(it);
+g.addEdge(a, b, 'NEXT');
+";
+                    } else {
+                        die("Destination 0 for transform\n");
+                    }
                 }
             }
 
@@ -734,6 +749,15 @@ it.as('origin').in('$link').has('atom','$atom').each{
                 $qcdts[] = "has('token', '".$cdt['token']."')";
             }
             unset($cdt['token']);
+        }
+
+        if (isset($cdt['notToken'])) {
+            if ( is_array($cdt['notToken']) && !empty($cdt['notToken'])) {
+                $qcdts[] = "filter{!(it.token in ['".join("', '", $cdt['notToken'])."'])}";
+            } else {
+                $qcdts[] = "hasNot('token', '".$cdt['notToken']."')";
+            }
+            unset($cdt['notToken']);
         }
         
         if (isset($cdt['atom'])) {
