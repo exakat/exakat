@@ -7,4 +7,4 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        "ls -la"
+        "echo 1;"

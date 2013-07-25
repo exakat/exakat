@@ -1,72 +1,60 @@
 <?php
 
-Label : NEXT
+Label : CODE
   function
-  Label : NEXT
+  Label : NAME
     a
-    Label : NEXT
-      (
-      Label : NEXT
-        void
-        Label : NEXT
-          )
-          Label : NEXT
-            {
-            Label : NEXT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  !
-                  Label : NOT
-                    $c
-              Label : THEN
-                {
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    return
-                    Label : RETURN
-                      false
-              Label : NEXT
-                return
-                Label : RETURN
-                  ->
-                  Label : METHOD
-                    f
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        .
-                        Label : CONCAT
-                          "
-                          Label : CONTAIN
-                            Concat
-                            Label : CONCAT
-                              c
-                            Label : CONCAT
-                              $d
-                            Label : CONCAT
-                              '
-                        Label : CONCAT
-                          b
-                        Label : CONCAT
-                          "a"
-                  Label : OBJECT
-                    ->
-                    Label : PROPERTY
-                      e
-                    Label : OBJECT
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      $b
+  Label : BLOCK
+    {
+    Label : CODE
+      Sequence
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            !
+            Label : NOT
+              $c
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                false
+      Label : ELEMENT
+        return
+        Label : RETURN
+          ->
+          Label : METHOD
+            f
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  "
+                  Label : CONTAIN
+                    Concat
+                    Label : CONCAT
+                      c
+                    Label : CONCAT
                       $d
-                Label : NEXT
-                  ;
-                  Label : NEXT
-                    }
-                    Label : NEXT
-                      ?>
-                      Label : NEXT
-                        /**/
-                        Label : NEXT
-                          /* * */
-        Label : ARGUMENT
-          $b
+                    Label : CONCAT
+                      '
+                Label : CONCAT
+                  b
+                Label : CONCAT
+                  "a"
+          Label : OBJECT
+            ->
+            Label : PROPERTY
+              e
+            Label : OBJECT
+              $d
