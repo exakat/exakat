@@ -34,10 +34,29 @@ class _While extends TokenAuto {
                                                          3 => 'DROP',
                                                         ),
                                'atom'       => 'While');
+        $r = $this->checkAuto();
+
+        $this->conditions = array(0 => array('token' => 'T_WHILE'),
+                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  2 => array('atom'  => 'yes'),
+                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                  4 => array('token' => 'T_COLON'),
+                                  5 => array('atom'  => 'yes'),
+                                  6 => array('token'  => 'T_ENDWHILE'),
+        );
+        
+        $this->actions = array('transform'    => array(  1 => 'DROP',
+                                                         2 => 'CONDITION',
+                                                         3 => 'DROP',
+                                                         4 => 'DROP',
+                                                         5 => 'LOOP',
+                                                         6 => 'DROP',
+                                                        ),
+                               'atom'       => 'While');
                                
-        return $this->checkAuto();
-
-
+        $r = $this->checkAuto();
+        
+        return $r;
     }
 }
 

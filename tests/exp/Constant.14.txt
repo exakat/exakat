@@ -1,28 +1,16 @@
-Final sequence
-Label : ELEMENT
-  <?php
+<?php
 
-Label : ELEMENT
-  if
-Label : ELEMENT
-  (
-  Label : CODE
-    $e
-Label : ELEMENT
-  :
-Label : ELEMENT
-  ?>
-Label : ELEMENT, NEXT
-  <?php 
-Label : ELEMENT
-  endif
-Label : ELEMENT
+Label : CODE
   ;
-Label : ELEMENT
-  ?>
-Label : ELEMENT
-  Concat
-  Label : CONCAT
-    a
-  Label : CONCAT
-    <?php// $b ?>C
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $e
+    Label : THEN
+      Concat
+      Label : CONCAT
+        a
+      Label : CONCAT
+        C
