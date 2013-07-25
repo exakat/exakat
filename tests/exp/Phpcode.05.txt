@@ -1,5 +1,5 @@
 Final sequence
 Label : ELEMENT
-  <?php 
+  A
 Label : ELEMENT
-  ?>
+  B
