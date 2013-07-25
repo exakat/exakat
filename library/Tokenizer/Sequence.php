@@ -112,13 +112,22 @@ class Sequence extends TokenAuto {
                                 'mergeNext'  => array('Sequence' => 'ELEMENT'));
         $r = $this->checkAuto();
 
+
+        // @note sequence next to another instruction
+        $this->conditions = array( 0 => array('atom' => 'Sequence' ),
+                                   1 => array('token' => 'T_SEMICOLON')
+        );
+        
+        $this->actions = array( 'transform'   => array(1 => 'DROP'));
+        $r = $this->checkAuto();
+
         // @note End of PHP script
         $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS')),), 
                                   -1 => array('atom' => $operands,
                                               'notToken' => 'T_ELSEIF', ),
                                    0 => array('token' => 'T_SEMICOLON',
                                               'atom' => 'none'),
-                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE'),
+                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR'),
                                               'atom'  => 'none'),
         );
         
@@ -135,7 +144,7 @@ class Sequence extends TokenAuto {
                                               'notToken' => 'T_ELSEIF', ),
                                    0 => array('token' => 'T_SEMICOLON',
                                               'atom' => 'none'),
-                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', ),
+                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', ),
                                               'atom'  => 'none'),
         );
         
