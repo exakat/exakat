@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      &
+      Label : REFERENCE
+        ->
+        Label : PROPERTY
+          c
+        Label : OBJECT
+          $y
+    Label : LEFT
+      $x
