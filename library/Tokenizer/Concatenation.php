@@ -76,11 +76,15 @@ class Concatenation extends TokenAuto {
 
         $r = $this->checkAuto();
 
-        return $r;
-    }
+// Fusion of string and PHPcode
+        $this->conditions = array( 0 => array('atom' => array('String', 'Phpcode' )),
+                                   1 => array('atom' => array('String', 'Phpcode' )),
+        ); 
 
-    function reserve() {
-        Token::$reserved[] = 'T_DOT';
+        $this->actions = array('insertConcat'    => "Concat" );
+        $r = $this->checkAuto();
+
+        return $r;
     }
 }
 ?>

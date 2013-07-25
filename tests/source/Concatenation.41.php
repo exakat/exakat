@@ -1,0 +1,1 @@
+<?php if ($a) { ?>A<?php echo $b; ?>B<?php } ?>
