@@ -1,0 +1,50 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        (
+        Label : CODE
+          ||
+          Label : LEFT
+            b
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                "
+                Label : CONTAIN
+                  Concat
+                  Label : CONCAT
+                    e
+                  Label : CONCAT
+                    [
+                    Label : VARIABLE
+                      $f
+                    Label : INDEX
+                      g
+                  Label : CONCAT
+                    h
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $c
+                Label : INDEX
+                  'd'
+          Label : RIGHT
+            !
+            Label : NOT
+              [
+              Label : VARIABLE
+                $i
+              Label : INDEX
+                'j'
+      Label : THEN
+        'k'
+      Label : ELSE
+        'l'
+    Label : LEFT
+      $a
