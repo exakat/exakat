@@ -1,0 +1,66 @@
+<?php
+
+Label : CODE
+  function
+  Label : NAME
+    x
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      void
+  Label : BLOCK
+    {
+    Label : CODE
+      Sequence
+      Label : ELEMENT
+        for
+        Label : INIT
+          =
+          Label : RIGHT
+            0
+          Label : LEFT
+            $i
+        Label : FINAL
+          <
+          Label : RIGHT
+            2
+          Label : LEFT
+            $i
+        Label : INCREMENT
+          ++
+          Label : POSTPLUSPLUS
+            $i
+        Label : CODE
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $j
+      Label : ELEMENT
+        for
+        Label : INIT
+          =
+          Label : RIGHT
+            0
+          Label : LEFT
+            $a
+        Label : FINAL
+          <
+          Label : RIGHT
+            2
+          Label : LEFT
+            $a
+        Label : INCREMENT
+          ++
+          Label : POSTPLUSPLUS
+            $a
+        Label : CODE
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $j
