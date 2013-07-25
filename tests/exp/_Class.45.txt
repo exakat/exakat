@@ -3,46 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    class
-    Label : NAME
-      dbstuff
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          var
-          Label : NAME
-            $a
-          Label : VALUE
-            0
-        Label : ELEMENT
-          ;
-          Label : ELEMENT
-            var
-            Label : VALUE
-              void
-            Label : DEFINE
-              $e
-          Label : ELEMENT
-            var
-            Label : VALUE
-              void
-            Label : DEFINE
-              $d
-          Label : ELEMENT
-            var
-            Label : VALUE
-              void
-            Label : DEFINE
-              $c
-          Label : ELEMENT
-            var
-            Label : VALUE
-              void
-            Label : DEFINE
-              $b
-  Label : ELEMENT
     define
     Label : ARGUMENTS
       ,
@@ -130,3 +90,41 @@ Label : CODE
         0
       Label : ARGUMENT
         'a'
+  Label : ELEMENT
+    class
+    Label : NAME
+      dbstuff
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          var
+          Label : NAME
+            $a
+          Label : VALUE
+            0
+        Label : ELEMENT
+          var
+          Label : VALUE
+            void
+          Label : DEFINE
+            $e
+        Label : ELEMENT
+          var
+          Label : VALUE
+            void
+          Label : DEFINE
+            $d
+        Label : ELEMENT
+          var
+          Label : VALUE
+            void
+          Label : DEFINE
+            $c
+        Label : ELEMENT
+          var
+          Label : VALUE
+            void
+          Label : DEFINE
+            $b

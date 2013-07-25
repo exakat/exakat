@@ -15,28 +15,26 @@ Label : CODE
     Label : LEFT
       $unzip
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      ->
-      Label : METHOD
-        ReadFile
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $datafile_server
-      Label : OBJECT
-        $unzip
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        substr
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            13
-          Label : ARGUMENT
-            8
-          Label : ARGUMENT
-            $datafile_server
-      Label : LEFT
-        $backupdir
+    ->
+    Label : METHOD
+      ReadFile
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $datafile_server
+    Label : OBJECT
+      $unzip
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      substr
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          13
+        Label : ARGUMENT
+          8
+        Label : ARGUMENT
+          $datafile_server
+    Label : LEFT
+      $backupdir

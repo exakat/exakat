@@ -11,23 +11,7 @@ Label : CODE
   Label : BLOCK
     {
     Label : CODE
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            $d
-        Label : THEN
-          {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                2
-              Label : LEFT
-                $e
+      Sequence
       Label : ELEMENT
         if
         Label : CONDITION
@@ -54,3 +38,19 @@ Label : CODE
               stack
             Label : OBJECT
               $this
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $d
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                2
+              Label : LEFT
+                $e

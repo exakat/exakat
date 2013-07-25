@@ -13,31 +13,29 @@ Label : CODE
     Label : RIGHT
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            |
-            Label : LEFT
-              $b
-            Label : RIGHT
-              ::
-              Label : PROPERTY
-                $E
-              Label : CLASS
-                D
+        =
+        Label : RIGHT
+          |
           Label : LEFT
-            $a
-        Label : ELEMENT
-          ::
-          Label : METHOD
-            E
-            Label : ARGUMENTS
+            $b
+          Label : RIGHT
+            ::
+            Label : PROPERTY
+              $E
+            Label : CLASS
+              D
+        Label : LEFT
+          $a
+      Label : ELEMENT
+        ::
+        Label : METHOD
+          E
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
               void
-              Label : ARGUMENT
-                void
-          Label : CLASS
-            D
+        Label : CLASS
+          D
   Label : ELEMENT
     &
     Label : LEFT

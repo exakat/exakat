@@ -19,11 +19,9 @@ Label : CODE
       Label : THEN
         ;
         Label : ELEMENT
-          ;
-          Label : ELEMENT
-            $ww2
-          Label : ELEMENT
-            $ww
+          $ww2
+        Label : ELEMENT
+          $ww
       Label : ELSE
         elseif
         Label : CONDITION
@@ -33,11 +31,9 @@ Label : CODE
         Label : THEN
           ;
           Label : ELEMENT
-            ;
-            Label : ELEMENT
-              $vv2
-            Label : ELEMENT
-              $vv
+            $vv2
+          Label : ELEMENT
+            $vv
         Label : ELSE
           elseif
           Label : CONDITION
@@ -47,11 +43,9 @@ Label : CODE
           Label : THEN
             ;
             Label : ELEMENT
-              ;
-              Label : ELEMENT
-                $uu2
-              Label : ELEMENT
-                $uu
+              $uu2
+            Label : ELEMENT
+              $uu
           Label : ELSE
             elseif
             Label : CONDITION
@@ -61,16 +55,12 @@ Label : CODE
             Label : THEN
               ;
               Label : ELEMENT
-                ;
-                Label : ELEMENT
-                  $tt2
-                Label : ELEMENT
-                  $tt
+                $tt2
+              Label : ELEMENT
+                $tt
             Label : ELSE
               ;
               Label : ELEMENT
-                ;
-                Label : ELEMENT
-                  $zz2
-                Label : ELEMENT
-                  $zz
+                $zz2
+              Label : ELEMENT
+                $zz

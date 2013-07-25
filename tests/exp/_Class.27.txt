@@ -7,27 +7,7 @@ Label : CODE
   Label : BLOCK
     {
     Label : CODE
-      ;
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          var
-          Label : NAME
-            $f
-          Label : VALUE
-            6
-        Label : ELEMENT
-          var
-          Label : NAME
-            $d
-          Label : VALUE
-            4
-        Label : ELEMENT
-          var
-          Label : NAME
-            $e
-          Label : VALUE
-            5
+      Sequence
       Label : ELEMENT
         var
         Label : NAME
@@ -46,3 +26,21 @@ Label : CODE
           $a
         Label : VALUE
           1
+      Label : ELEMENT
+        var
+        Label : NAME
+          $f
+        Label : VALUE
+          6
+      Label : ELEMENT
+        var
+        Label : NAME
+          $d
+        Label : VALUE
+          4
+      Label : ELEMENT
+        var
+        Label : NAME
+          $e
+        Label : VALUE
+          5

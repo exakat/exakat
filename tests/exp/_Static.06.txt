@@ -9,38 +9,36 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          static
+        static
+        Label : VALUE
+          void
+        Label : DEFINE
+          protected
+          Label : NAME
+            $c
           Label : VALUE
-            void
-          Label : DEFINE
-            protected
-            Label : NAME
-              $c
-            Label : VALUE
-              array
-              Label : ARGUMENTS
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
                 void
-                Label : ARGUMENT
-                  void
-        Label : ELEMENT
-          static
+      Label : ELEMENT
+        static
+        Label : VALUE
+          void
+        Label : DEFINE
+          private
+          Label : NAME
+            $d
           Label : VALUE
-            void
-          Label : DEFINE
-            private
-            Label : NAME
-              $d
-            Label : VALUE
-              '2'
-        Label : ELEMENT
-          static
+            '2'
+      Label : ELEMENT
+        static
+        Label : VALUE
+          void
+        Label : DEFINE
+          public
+          Label : NAME
+            $b
           Label : VALUE
-            void
-          Label : DEFINE
-            public
-            Label : NAME
-              $b
-            Label : VALUE
-              1
+            1

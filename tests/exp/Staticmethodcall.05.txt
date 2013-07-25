@@ -1,25 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : NAME
-      f
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          protected
-          Label : VALUE
-            void
-          Label : DEFINE
-            static
-            Label : VALUE
-              void
-            Label : DEFINE
-              $g
+  Sequence
   Label : ELEMENT
     if
     Label : CONDITION
@@ -52,3 +34,21 @@ Label : CODE
           'e'
     Label : CLASS
       C
+  Label : ELEMENT
+    class
+    Label : NAME
+      f
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          protected
+          Label : VALUE
+            void
+          Label : DEFINE
+            static
+            Label : VALUE
+              void
+            Label : DEFINE
+              $g

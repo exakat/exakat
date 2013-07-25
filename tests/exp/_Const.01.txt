@@ -9,26 +9,6 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        public
-        Label : VALUE
-          void
-        Label : DEFINE
-          static
-          Label : VALUE
-            void
-          Label : DEFINE
-            function
-            Label : NAME
-              f
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-            Label : BLOCK
-              {
-              Label : CODE
-                void
-      Label : ELEMENT
         protected
         Label : VALUE
           void
@@ -66,3 +46,23 @@ Label : CODE
           $a
         Label : VALUE
           'b'
+      Label : ELEMENT
+        public
+        Label : VALUE
+          void
+        Label : DEFINE
+          static
+          Label : VALUE
+            void
+          Label : DEFINE
+            function
+            Label : NAME
+              f
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+            Label : BLOCK
+              {
+              Label : CODE
+                void

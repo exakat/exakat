@@ -3,24 +3,22 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      :
-      Label : LABEL
-        a1
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'Foo'
-    Label : ELEMENT
-      goto
-      Label : LABEL
-        a1
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'Bar'
+    :
+    Label : LABEL
+      a1
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'Foo'
+  Label : ELEMENT
+    goto
+    Label : LABEL
+      a1
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'Bar'

@@ -3,18 +3,16 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      unset
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          $a
-    Label : ELEMENT
-      unset
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $x
+    unset
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        $a
+  Label : ELEMENT
+    unset
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $x
