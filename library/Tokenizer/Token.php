@@ -83,21 +83,26 @@ class Token {
 
     static public function finishSequence() {
         $query = "
-g.V.has('token', 'T_ROOT').each{ 
-    x = g.addVertex(null, [code:'Final sequence', atom:'Sequence', token:'T_SEMICOLON'], file:it.file);
+g.V.has('root', 'true').as('root').out('NEXT').hasNot('token', 'T_END').back('root').each{ 
+    x = g.addVertex(null, [code:'Final sequence', atom:'Sequence', token:'T_SEMICOLON', file:it.file]);
 
-    g.removeEdge(it.outE('NEXT').next());
-    g.addEdge(it, x, 'NEXT');
-
-    g.V.as('o').out('NEXT').back('o').hasNot('hidden', true).each{
+//    g.removeEdge(it.outE('NEXT').next());
+    a = it.in('NEXT').next();
+  
+    g.V.hasNot('hidden', true).has('file', it.file).as('o').in('NEXT').back('o').each{
         g.addEdge(x, it, 'ELEMENT');
         y = it.out('NEXT').next();
-        g.removeEdge(it.outE('NEXT').next());
+        g.removeEdge(it.inE('NEXT').next());
     }
 
     g.addEdge(x, y, 'NEXT');
+    g.addEdge(a, x, 'NEXT');
+
+/*
     g.V.has('file', y.file).has('root', true).each{ it.setProperty('root', false); }
     x.setProperty('root', true);
+*/
+
 }
        ";
         Token::query($query);
