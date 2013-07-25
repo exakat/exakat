@@ -45,6 +45,25 @@ class Sequence extends TokenAuto {
                                );
         $r = $this->checkAuto();
 
+        // @note instructions separated by ; with a special case for alternative syntax
+        $this->conditions = array(-3 => array('token' => array('T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_ELSE')),
+                                  -2 => array('token' => 'T_COLON'), 
+                                  -1 => array('atom' => $operands ),
+                                   0 => array('token' => 'T_SEMICOLON'),
+                                   1 => array('atom' => $operands),
+                                   2 => array('filterOut2' => $next_operator),
+        );
+        
+        $this->actions = array('makeEdge'    => array( 1 => 'ELEMENT',
+                                                      -1 => 'ELEMENT'
+                                                      ),
+                               'order'    => array( 1 => 2,
+                                                   -1 => 1 ),
+                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
+                               'atom'       => 'Sequence',
+                               );
+        $r = $this->checkAuto();
+
         // @note instructions not separated by ; 
         $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Case', 'Default', 'Var', 'Global', 'Static', 
                            'Const', 'Ppp', 'Foreach', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
@@ -99,7 +118,7 @@ class Sequence extends TokenAuto {
                                               'notToken' => 'T_ELSEIF', ),
                                    0 => array('token' => 'T_SEMICOLON',
                                               'atom' => 'none'),
-                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', ),
+                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE'),
                                               'atom'  => 'none'),
         );
         
@@ -110,13 +129,13 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note End of PHP script
-        $this->conditions = array(-3 => array('token' => array('T_ELSE', 'T_ELSEIF', 'T_IF', 'T_OPEN_PARENTHESIS',)), 
+        $this->conditions = array(-3 => array('token' => array('T_ELSE', 'T_ELSEIF', 'T_IF', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', )), 
                                   -2 => array('token' => 'T_COLON',), 
                                   -1 => array('atom' => $operands,
                                               'notToken' => 'T_ELSEIF', ),
                                    0 => array('token' => 'T_SEMICOLON',
                                               'atom' => 'none'),
-                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', ),
+                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', ),
                                               'atom'  => 'none'),
         );
         
