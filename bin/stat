@@ -1,0 +1,102 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$client = new Client();
+
+$args = $argv;
+if ($id = array_search('-json', $args)) {
+    define('FORMAT', 'JSON');
+} elseif ($id = array_search('-text', $args)) {
+    define('FORMAT', 'TEXT');
+} elseif ($id = array_search('-table', $args)) {
+    define('FORMAT', 'TABLE');
+} else {
+    define('FORMAT', 'TEXT');
+}
+
+if ($id = array_search('-o', $args)) {
+    define('OUTPUT', $args[$id + 1]);
+} else {
+    define('OUTPUT', false);
+}
+
+if ($id = array_search('-f', $args)) {
+    $file = $args[$id + 1];
+    unset($args[$id]);
+    unset($args[$id + 1]);
+    
+    $file_filter = ".has('file', '$file')";
+} else {
+    $file_filter = '';
+}
+
+$stats = array();
+$stats['tokens_count'] = queryOne("g.V.except([g.v(0)])$file_filter.count()");
+$stats['atoms_count'] = queryOne("g.V.except([g.v(0)]).hasNot('atom', 'null')$file_filter.count()");
+$stats['NEXT_count'] = queryOne("g.E.has('label', 'NEXT').inV$file_filter.count()");
+
+function queryOne($query) {
+    $r = query($query);
+    return $r[0][0];
+}
+
+function query($query) {
+    global $client;
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $query, $params);
+    return $query->getResultSet();
+}
+
+if (FORMAT == 'JSON') {
+    $output = json_encode($stats);
+} elseif (FORMAT == 'TABLE') {
+    $output = table_encode($stats);
+} else {
+    $output = text_encode($stats);
+}
+
+function table_encode($stats) {
+    $html = "<html><body>";
+    
+    foreach($stats as $name => $value) {
+        $html .= "<tr><td>$name</td><td>$value</td></tr>\n";
+    }
+    
+    $html .= "</body></html>";
+    return $html;
+}
+
+function text_encode($stats) {
+    global $file;
+    if ($file) {
+        $html = "Statistics for the file '$file'\n\n";
+    } else {
+        $html = "Statistics for the whole server\n\n";
+    }
+    
+    foreach($stats as $name => $value) {
+        $html .= "$name : $value\n";
+    }
+    
+    $html .= "\n";
+    return $html;
+}
+
+if (OUTPUT) {
+    $fp = fopen(FILE, 'w+');
+    fwrite($fp, $output);
+    fclose($fp);
+} else {
+    print $output;
+}
+
+?>
