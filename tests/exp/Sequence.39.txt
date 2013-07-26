@@ -1,0 +1,38 @@
+<?php
+
+Label : NEXT
+  =
+  Label : RIGHT
+    1
+  Label : NEXT
+    ;
+    Label : NEXT
+      void
+      Label : NEXT
+        ;
+        Label : NEXT
+          void
+          Label : NEXT
+            ;
+            Label : NEXT
+              void
+              Label : NEXT
+                ;
+                Label : NEXT
+                  ;
+                  Label : NEXT
+                    ?>
+                    Label : NEXT
+                      /**/
+                      Label : NEXT
+                        /* * */
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      2
+                    Label : LEFT
+                      &
+                      Label : REFERENCE
+                        $b
+  Label : LEFT
+    $a

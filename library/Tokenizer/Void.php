@@ -12,8 +12,9 @@ class Void extends TokenAuto {
                                              'atom' => 'none'),
         );
         
-        $this->actions = array('addEdge'    => array(0 => array('Block' => 'BLOCK')),
-                               'atom'       => 'Void');
+        $this->actions = array('addEdge'    => array(0 => array('Void' => 'BLOCK')),
+//                               'atom'       => 'Void'
+                               );
                                
         $r = $this->checkAuto();
         
