@@ -10,12 +10,6 @@ include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
 $args = $argv;
-if ($id = array_search('-f', $args)) {
-    $filename = $args[$id + 1];
-    
-} else {
-    $filename = 'tests/test/Addition.03.php';
-}
 
 if ($id = array_search('-v', $args)) {
     define('VERBOSE', true);
@@ -23,7 +17,46 @@ if ($id = array_search('-v', $args)) {
     define('VERBOSE', false);
 }
 
-process_file($filename);
+if ($id = array_search('-r', $args)) {
+    define('RECURSIVE', true);
+} else {
+    define('RECURSIVE', false);
+}
+
+if ($id = array_search('-f', $args)) {
+    $filename = $args[$id + 1];
+    
+    process_file($filename);
+} elseif ($id = array_search('-d', $args)) {
+    $dir = $args[$id + 1];
+    
+    if ($dir{strlen($dir) - 1} == '/') {
+        $dir = substr($dir, 0, -1);
+    }
+    
+    process_dir($dir);
+} else {
+    print "No file to process. Aborting\n";
+    die();
+}
+
+function process_dir($dir) {
+
+    $dirr = opendir($dir);
+    while ($filename = readdir($dirr)) {
+        if ($filename{0} == '.') { continue; }
+        
+        if (is_dir($dir.'/'.$filename)) {
+            if (RECURSIVE) {
+                process_dir($dir.'/'.$filename);
+            }
+        } else {
+            if (substr($filename, -4) != '.php') { continue; }
+            print $dir.'/'.$filename."\n";
+            process_file($dir.'/'.$filename);
+        }
+    }
+}
 
 function process_file($filename) {
     if (!file_exists($filename)) {
