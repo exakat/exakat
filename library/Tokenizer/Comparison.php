@@ -14,7 +14,7 @@ class Comparison extends TokenAuto {
         
         
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), 
-                                                                         Addition::$operators, Bitshift::$operators, Multiplication::$operators, Logical::$operators)), 
+                                                                         Addition::$operators, Bitshift::$operators, Multiplication::$operators)), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('token' => Comparison::$operators,
                                               'atom' => 'none'),
