@@ -15,6 +15,8 @@ class Assignation extends TokenAuto {
                                      'T_SL_EQUAL',
                                      'T_SR_EQUAL',
                                      'T_XOR_EQUAL',
+                                     'T_SL_EQUAL',
+                                     'T_SR_EQUAL',
                                      );
     
     function _check() {
@@ -24,7 +26,7 @@ class Assignation extends TokenAuto {
                           'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Property',
                           'Heredoc', 'Preplusplus', 'Postplusplus', 'Methodcall', 'Nsname', 
                           'Assignation', 'Variable', 'Reference', 'Boolean', 'Magicconstant',
-                          'Cast', 'Staticmethodcall', 'Sign', 'Logical', 
+                          'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 
                          );
         
         $this->conditions = array(-2 => array('filterOut2' => 'T_STRING'),
