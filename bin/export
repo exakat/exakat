@@ -32,13 +32,22 @@ if ($id = array_search('-o', $args)) {
 $queryTemplate = "g.V.except([g.v(0)])";
 $params = array('type' => 'IN');
 $query = new Gremlin\Query($client, $queryTemplate, $params);
-$vertices = $query->getResultSet();
+try { 
+    $vertices = $query->getResultSet();
+} catch (Exception $e) {
+    print "Error reading the Vertices\n";
+    print $e->getmessage()."\n";
+    die();
+}
+
+print count($vertices)." vertices found\n";
 
 $V = array();
 foreach($vertices as $v) {
-    $V[$v[0]->getId()] =  $v[0]->getProperties();
+    $x = $v[0]->getId();
+    $V[$x] =  $v[0]->getProperties();
     
-    if ($v[0]->getProperty('root')) {
+    if (isset($V[$x]['root'])) {
         $root = $v[0]->getId();
     }
 }
@@ -64,7 +73,10 @@ foreach($edges as $e) {
 }
 
 if (!isset($root)) {
-    print "No root! Check the tree in Neo4j\n Aborting\n";die();
+    print "No root! Check the tree in Neo4j\n Aborting\n";
+    print number_format(memory_get_usage() / 1024 / 1024, 0)." Mo\n";
+    
+    die();
 }
 
 if (FORMAT == 'DOT') {
@@ -165,5 +177,6 @@ if (FILE) {
 } else {
     print $text;
 }
+
 
 ?>
