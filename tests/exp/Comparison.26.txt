@@ -1,0 +1,64 @@
+<?php
+
+Label : NEXT
+  if
+  Label : NEXT
+    (
+    Label : NEXT
+      [
+      Label : VARIABLE
+        $a
+      Label : NEXT
+        &&
+        Label : NEXT
+          (
+          Label : NEXT
+            c
+            Label : NEXT
+              ||
+              Label : NEXT
+                $h
+                Label : NEXT
+                  <
+                  Label : NEXT
+                    0
+                    Label : NEXT
+                      )
+                      Label : NEXT
+                        )
+                        Label : NEXT
+                          {
+                          Label : CODE
+                            ;
+                            Label : ELEMENT
+                              i
+                              Label : ARGUMENTS
+                                ,
+                                Label : ARGUMENT
+                                  'k'
+                                Label : ARGUMENT
+                                  'j'
+                          Label : NEXT
+                            ?>
+                            Label : NEXT
+                              /**/
+                              Label : NEXT
+                                /* * */
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  .
+                  Label : CONCAT
+                    'f'
+                  Label : CONCAT
+                    $g
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'e'
+                  Label : VARIABLE
+                    $d
+      Label : INDEX
+        'b'

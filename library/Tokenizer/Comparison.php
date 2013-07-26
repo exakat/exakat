@@ -9,10 +9,12 @@ class Comparison extends TokenAuto {
         $operands = array('Variable', 'Array', 'Property', 'Integer', 'Sign', 'Float', 'Constant', 'Boolean',
                           'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall',
                           'Assignation', 'Magicconstant', 'Staticconstant', 'String', 'Addition', 'Multiplication',
-                          'Nsname', 'Not', 'Reference', 'Assignation', 'Parenthesis', 'Noscream', 'Preplusplus', 'Postplusplus', );
+                          'Nsname', 'Not', 'Reference', 'Assignation', 'Parenthesis', 'Noscream', 'Preplusplus', 'Postplusplus',
+                          'Bitshift',  );
         
         
-        $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')), 
+        $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), 
+                                                                         Addition::$operators, Bitshift::$operators, Multiplication::$operators, Logical::$operators)), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('token' => Comparison::$operators,
                                               'atom' => 'none'),
