@@ -1,0 +1,71 @@
+<?php
+
+Label : NEXT
+  if
+  Label : NEXT
+    (
+    Label : NEXT
+      &&
+      Label : LEFT
+        !
+        Label : NOT
+          [
+          Label : INDEX
+            'c'
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'b'
+      Label : NEXT
+        &&
+        Label : NEXT
+          >>
+          Label : RIGHT
+            [
+            Label : VARIABLE
+              $h
+            Label : INDEX
+              'i'
+          Label : NEXT
+            >
+            Label : NEXT
+              *
+              Label : RIGHT
+                1
+              Label : NEXT
+                )
+                Label : NEXT
+                  {
+                  Label : NEXT
+                    ?>
+
+                    Label : NEXT
+                      /**/
+                      Label : NEXT
+                        /* * */
+                  Label : CODE
+                    void
+              Label : LEFT
+                [
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'k'
+                  Label : VARIABLE
+                    $j
+                Label : INDEX
+                  'l'
+          Label : LEFT
+            G
+      Label : RIGHT
+        [
+        Label : VARIABLE
+          [
+          Label : INDEX
+            'e'
+          Label : VARIABLE
+            $d
+        Label : INDEX
+          'f'

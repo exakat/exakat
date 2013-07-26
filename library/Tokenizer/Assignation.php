@@ -33,7 +33,7 @@ class Assignation extends TokenAuto {
                                   -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall','Noscream', 'Reference', 'Not', 'Arrayappend' , 'Typehint',)),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut' => array_merge(Assignation::$operators, Addition::$operators, Multiplication::$operators,
+                                   2 => array('filterOut' => array_merge(Assignation::$operators, Addition::$operators, Multiplication::$operators, Logical::$operators, Bitshift::$operators, 
                                                                          array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
                                                                                'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_QUESTION', ))),
                                   

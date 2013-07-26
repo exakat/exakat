@@ -12,7 +12,7 @@ class Logical extends TokenAuto {
                                     0 => array('token' => Logical::$operators,
                                               'atom' => 'none', 'notAtom' => 'Sequence'  ),
                                     1 => array('atom' => 'yes'),
-                                    2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators,
+                                    2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators, Addition::$operators, Multiplication::$operators, Bitshift::$operators, 
                                                                            array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
                                                                                  'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_INC', 'T_DEC',
                                                                            ))),
