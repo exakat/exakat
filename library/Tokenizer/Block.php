@@ -112,7 +112,6 @@ class Block extends TokenAuto {
                                     0 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                     1 => array('token' => 'T_SEMICOLON'),
         );
-//        $this->actions = array('insertEdge'   => array(0 => array('Block' => 'ARGUMENT')));        
         $this->actions = array('addEdge'   => array(0 => array('Void' => 'LEVEL')));
         $r = $this->checkAuto();
 
