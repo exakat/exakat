@@ -40,7 +40,7 @@ try {
     die();
 }
 
-print count($vertices)." vertices found\n";
+//print count($vertices)." vertices found\n";
 
 $V = array();
 foreach($vertices as $v) {
