@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
+  Label : THEN
+    Block With control structure
+    Label : CODE
+      while
+      Label : CONDITION
+        $x
+      Label : LOOP
+        {
+        Label : CODE
+          void

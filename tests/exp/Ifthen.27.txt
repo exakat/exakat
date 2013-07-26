@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  Sequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        [
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          'b'
+    Label : THEN
+      {
+      Label : CODE
+        void
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      $x
+    Label : LOOP
+      ;
+      Label : BLOCK
+        ?>

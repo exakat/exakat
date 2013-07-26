@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
+  Label : THEN
+    Block With control structure
+    Label : CODE
+      for
+      Label : INIT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $c
+      Label : FINAL
+        <=
+        Label : RIGHT
+          8
+        Label : LEFT
+          $d
+      Label : INCREMENT
+        ++
+        Label : POSTPLUSPLUS
+          $e
+      Label : CODE
+        {
+        Label : CODE
+          void

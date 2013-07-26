@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  if
+  Label : THEN
+    Block With control structure
+    Label : CODE
+      while
+      Label : LOOP
+        {
+        Label : CODE
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              3
+            Label : LEFT
+              $c
+      Label : CONDITION
+        $x
+  Label : CONDITION
+    (
+    Label : CODE
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
