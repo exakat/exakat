@@ -58,7 +58,8 @@ $classes = array(
     'Staticconstant',
     'Multiplication',
     'Addition', 
-    'Concatenation', // because au test concatenation 37
+    'Bitshift',
+    'Concatenation', // because test concatenation 37
     '_Var',
     '_Ppp',
     '_Static',
