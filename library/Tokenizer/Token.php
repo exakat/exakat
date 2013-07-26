@@ -97,11 +97,7 @@ g.V.has('root', 'true').as('root').out('NEXT').hasNot('token', 'T_END').back('ro
 
     g.addEdge(x, y, 'NEXT');
     g.addEdge(a, x, 'NEXT');
-
-/*
-    g.V.has('file', y.file).has('root', true).each{ it.setProperty('root', false); }
     x.setProperty('root', true);
-*/
 
 }
        ";

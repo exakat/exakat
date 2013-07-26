@@ -1,6 +1,6 @@
 <?php
 
 
-  $categorie=($categorie_id!="") ? $categorie_id." - ".$categorie_nom : "";
+  $a = ($b!="") ? $c."d".$e : "f";
   
 ?>

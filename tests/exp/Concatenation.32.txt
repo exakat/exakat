@@ -3,10 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ?
-    Label : CONDITION
-      =
-      Label : RIGHT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
         !
         Label : NOT
           empty
@@ -18,19 +18,19 @@ Label : CODE
                 $b
               Label : INDEX
                 'd'
-      Label : LEFT
-        $a
-    Label : THEN
-      .
-      Label : CONCAT
-        'i'
-      Label : CONCAT
-        $g
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'h'
-      Label : CONCAT
-        'f'
-    Label : ELSE
-      'j'
+      Label : THEN
+        .
+        Label : CONCAT
+          'i'
+        Label : CONCAT
+          $g
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'h'
+        Label : CONCAT
+          'f'
+      Label : ELSE
+        'j'
+    Label : LEFT
+      $a

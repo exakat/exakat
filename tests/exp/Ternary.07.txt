@@ -3,18 +3,18 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ?
-    Label : CONDITION
-      =
-      Label : RIGHT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
         1
-      Label : LEFT
-        $x
-    Label : THEN
-      2
-    Label : ELSE
-      ->
-      Label : PROPERTY
-        y
-      Label : OBJECT
-        $x
+      Label : THEN
+        2
+      Label : ELSE
+        ->
+        Label : PROPERTY
+          b
+        Label : OBJECT
+          $a
+    Label : LEFT
+      $x

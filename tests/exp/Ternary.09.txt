@@ -3,26 +3,26 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ?
-    Label : CONDITION
-      =
-      Label : RIGHT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
         1
-      Label : LEFT
-        $x
-    Label : THEN
-      2
-    Label : ELSE
-      [
-      Label : VARIABLE
+      Label : THEN
+        2
+      Label : ELSE
         [
         Label : VARIABLE
           [
           Label : VARIABLE
-            $x
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              3
           Label : INDEX
-            1
+            4
         Label : INDEX
-          2
-      Label : INDEX
-        3
+          5
+    Label : LEFT
+      $a

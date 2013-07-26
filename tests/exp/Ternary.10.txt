@@ -3,22 +3,22 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ?
-    Label : CONDITION
-      =
-      Label : RIGHT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
         1
-      Label : LEFT
-        $x
-    Label : THEN
-      2
-    Label : ELSE
-      ->
-      Label : METHOD
-        y
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+      Label : THEN
+        2
+      Label : ELSE
+        ->
+        Label : METHOD
+          c
+          Label : ARGUMENTS
             void
-      Label : OBJECT
-        $x
+            Label : ARGUMENT
+              'd'
+        Label : OBJECT
+          $b
+    Label : LEFT
+      $a

@@ -39,7 +39,7 @@ Label : CODE
               Label : INDEX
                 'd'
   Label : THEN
-    Block With IF
+    Block With control structure
     Label : CODE
       =
       Label : RIGHT

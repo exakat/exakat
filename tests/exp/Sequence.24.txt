@@ -27,16 +27,18 @@ Label : ELEMENT
             Label : LEFT
               $a
 Label : ELEMENT
-  b
+  Concat
+  Label : CONCAT
+    b
 
-Label : ELEMENT
-  <?php
+  Label : CONCAT
+    <?php
 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $c
+    Label : CODE
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $c

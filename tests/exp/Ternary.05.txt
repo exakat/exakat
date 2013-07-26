@@ -3,26 +3,26 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ?
-    Label : CONDITION
-      =
-      Label : RIGHT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
         (
         Label : CODE
           !=
           Label : RIGHT
             ""
           Label : LEFT
-            $categorie_id
-      Label : LEFT
-        $categorie
-    Label : THEN
-      .
-      Label : CONCAT
-        $categorie_nom
-      Label : CONCAT
-        " - "
-      Label : CONCAT
-        $categorie_id
-    Label : ELSE
-      ""
+            $b
+      Label : THEN
+        .
+        Label : CONCAT
+          $e
+        Label : CONCAT
+          "d"
+        Label : CONCAT
+          $c
+      Label : ELSE
+        "f"
+    Label : LEFT
+      $a

@@ -1,33 +1,35 @@
 Final sequence
 Label : ELEMENT
-  <?php
-
-  Label : CODE
-    include
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        (
-        Label : CODE
-          'a.php'
-Label : ELEMENT
   <?php 
   Label : CODE
-    include
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        (
-        Label : CODE
-          'b.php'
+    Sequence
+    Label : ELEMENT
+      include
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          (
+          Label : CODE
+            'a.php'
+    Label : ELEMENT
+      A
+    Label : ELEMENT
+      include
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          (
+          Label : CODE
+            'b.php'
 Label : ELEMENT
-  
-
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    html_page_bottom1
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        1
+  Concat
+  Label : CONCAT
+    B
+  Label : CONCAT
+    <?php 
+    Label : CODE
+      b
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'c'

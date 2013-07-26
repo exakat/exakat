@@ -1,7 +1,4 @@
 <?php
 
-$a = @function_exists('b')
-    ? '' :
-    'c';
-
+$a = @function_exists('b') ? 'c' :'d';
 ?>

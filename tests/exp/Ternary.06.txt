@@ -3,26 +3,26 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ?
-    Label : CONDITION
-      =
-      Label : RIGHT
-        isset
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        b
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             [
             Label : VARIABLE
-              $_REQUEST
+              $c
             Label : INDEX
-              'rech_ven'
-      Label : LEFT
-        $rech_ven
-    Label : THEN
-      [
-      Label : VARIABLE
-        $_REQUEST
-      Label : INDEX
-        'rech_ven'
-    Label : ELSE
-      ""
+              'd'
+      Label : THEN
+        [
+        Label : VARIABLE
+          $e
+        Label : INDEX
+          'f'
+      Label : ELSE
+        "g"
+    Label : LEFT
+      $a
