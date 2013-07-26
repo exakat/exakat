@@ -1,0 +1,60 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    &&
+    Label : LEFT
+      =
+      Label : RIGHT
+        i
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'i'
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $g
+        Label : INDEX
+          'h'
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        in_array
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            $l
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $j
+            Label : INDEX
+              'k'
+      Label : THEN
+        [
+        Label : VARIABLE
+          $m
+        Label : INDEX
+          'n'
+      Label : ELSE
+        'o'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          'f'
+        Label : ARGUMENT
+          'e'
+        Label : ARGUMENT
+          'd'
+        Label : ARGUMENT
+          'c'
+        Label : ARGUMENT
+          'b'
+    Label : LEFT
+      $a

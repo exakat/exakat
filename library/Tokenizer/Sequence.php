@@ -12,7 +12,8 @@ class Sequence extends TokenAuto {
                           'Var', 'Const', 'Ppp', 'Postplusplus', 'Preplusplus', 'Global', 'Nsname',
                           'Ifthen', 'Include', 'Function', 'Foreach', 'While', 'Arrayappend', 'Cast',
                           'Case', 'Default', 'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
-                          'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final'
+                          'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
+                          'Bitshift',
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
@@ -22,10 +23,10 @@ class Sequence extends TokenAuto {
                                 'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_IF', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
                                 'T_THROW', 'T_CATCH', 'T_ABSTRACT', 
                                  );
-        $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators);
+        $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators );
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CATCH',
                                            'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_ELSEIF' ), 
-                                     Assignation::$operators);
+                                     Assignation::$operators, Logical::$operators);
         
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut2' => $yield_operator), 
