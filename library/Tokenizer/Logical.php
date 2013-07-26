@@ -8,9 +8,9 @@ class Logical extends TokenAuto {
                                      'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR');
     function _check() {
         $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', ), Comparison::$operators)),
-                                   -1 => array('atom' => 'yes'), 
+                                   -1 => array('atom' => 'yes', 'notAtom' => 'Sequence' ), 
                                     0 => array('token' => Logical::$operators,
-                                              'atom' => 'none' ),
+                                              'atom' => 'none', 'notAtom' => 'Sequence'  ),
                                     1 => array('atom' => 'yes'),
                                     2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators,
                                                                            array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 

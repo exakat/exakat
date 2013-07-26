@@ -10,7 +10,6 @@ class Block extends TokenAuto {
                                               'atom' => 'none'),
                                    1 => array('token' => 'T_CLOSE_CURLY',
                                               'atom' => 'none'),
-                                   
         );
 
         $this->actions = array('addEdge'   => array(0 => array('Void' => 'CODE')));

@@ -12,7 +12,6 @@ class Label extends TokenAuto {
         $this->actions = array('transform'   => array(-1 => 'LABEL'),
                                'atom' => 'Label');
                                
-//        $this->printQuery();
         $r = $this->checkAuto();
 
         return $r;
