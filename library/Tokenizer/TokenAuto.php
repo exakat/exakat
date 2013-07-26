@@ -640,12 +640,13 @@ g.addEdge(x, it, 'CODE');
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
 
-// supprimer le suivant
+// remove the next, if this is a ; 
 g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
-semicolon = x.out('NEXT').next();
-semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-g.removeVertex(semicolon);
-
+x.out('NEXT').has('token', 'T_SEMICOLON').each{
+    semicolon = it;
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(semicolon);
+}
 
             ";
             unset($actions['to_block']);

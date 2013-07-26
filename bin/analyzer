@@ -83,6 +83,7 @@ $classes = array(
     '_Foreach',
     '_For',
     '_While',
+    '_Dowhile',
     '_Catch',
     '_Try',
     'Phpcode',

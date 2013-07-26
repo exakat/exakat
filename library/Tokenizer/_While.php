@@ -14,13 +14,11 @@ class _While extends TokenAuto {
         $this->actions = array('transform'    => array(  1 => 'DROP',
                                                          2 => 'CONDITION',
                                                          3 => 'DROP',
-                                                         4 => 'LOOP',
-                                                        ),
+                                                         4 => 'LOOP',      ),
                                'atom'       => 'While');
-                               
         $r = $this->checkAuto();
         
-        $this->conditions = array(-2 => array('filterOut2' => array('T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS')),
+        $this->conditions = array(-2 => array('filterOut2' => array('T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS', 'T_DO',)),
                                   -1 => array('atom'  => 'Block'),
                                    0 => array('token' => 'T_WHILE'),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
