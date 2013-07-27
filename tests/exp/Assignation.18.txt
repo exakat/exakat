@@ -1,20 +1,20 @@
 <?php
 
 Label : CODE
-  .=
-  Label : RIGHT
-    ^
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $b
-      Label : INDEX
-        ++
-        Label : PREPLUSPLUS
-          $c
+  ;
+  Label : ELEMENT
+    .=
     Label : RIGHT
-      ;
-      Label : ELEMENT
+      ^
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          ++
+          Label : PREPLUSPLUS
+            $c
+      Label : RIGHT
         $d
-  Label : LEFT
-    $a
+    Label : LEFT
+      $a
