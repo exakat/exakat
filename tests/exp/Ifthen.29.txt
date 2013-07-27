@@ -2,6 +2,14 @@
 
 Label : CODE
   if
+  Label : CONDITION
+    (
+    Label : CODE
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
   Label : THEN
     Block With control structure
     Label : CODE
@@ -18,11 +26,3 @@ Label : CODE
               $c
       Label : CONDITION
         $x
-  Label : CONDITION
-    (
-    Label : CODE
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        'b'

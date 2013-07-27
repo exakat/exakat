@@ -6,10 +6,10 @@ Label : CODE
     (
     Label : CODE
       [
-      Label : INDEX
-        'b'
       Label : VARIABLE
         $a
+      Label : INDEX
+        'b'
   Label : THEN
     Block With control structure
     Label : CODE

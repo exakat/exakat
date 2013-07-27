@@ -3,14 +3,14 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ?
-    Label : CONDITION
-      >
-      Label : RIGHT
-        127
-      Label : LEFT
-        .=
+    .=
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        >
         Label : RIGHT
+          127
+        Label : LEFT
           ord
           Label : ARGUMENTS
             void
@@ -20,27 +20,27 @@ Label : CODE
                 $b
               Label : INDEX
                 $i
-        Label : LEFT
-          $a
-    Label : THEN
-      .
-      Label : CONCAT
+      Label : THEN
+        .
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $d
+          Label : INDEX
+            ++
+            Label : PREPLUSPLUS
+              $l
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            $e
+      Label : ELSE
         [
         Label : VARIABLE
-          $d
-        Label : INDEX
-          ++
-          Label : PREPLUSPLUS
-            $l
-      Label : CONCAT
-        [
-        Label : VARIABLE
-          $c
-        Label : INDEX
           $e
-    Label : ELSE
-      [
-      Label : VARIABLE
-        $e
-      Label : INDEX
-        $k
+        Label : INDEX
+          $k
+    Label : LEFT
+      $a

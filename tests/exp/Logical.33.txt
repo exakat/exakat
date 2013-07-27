@@ -14,10 +14,10 @@ Label : CODE
             [
             Label : VARIABLE
               [
-              Label : INDEX
-                'b'
               Label : VARIABLE
                 $a
+              Label : INDEX
+                'b'
             Label : INDEX
               'c'
         Label : RIGHT

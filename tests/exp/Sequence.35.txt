@@ -3,35 +3,29 @@
 Label : CODE
   ;
   Label : ELEMENT
-    &&
-    Label : LEFT
-      =
-      Label : RIGHT
-        i
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'i'
-      Label : LEFT
-        [
-        Label : VARIABLE
-          $g
-        Label : INDEX
-          'h'
+    =
     Label : RIGHT
       ?
       Label : CONDITION
-        in_array
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            $l
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $j
-            Label : INDEX
-              'k'
+        &&
+        Label : LEFT
+          i
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'i'
+        Label : RIGHT
+          in_array
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              $l
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $j
+              Label : INDEX
+                'k'
       Label : THEN
         [
         Label : VARIABLE
@@ -40,6 +34,12 @@ Label : CODE
           'n'
       Label : ELSE
         'o'
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $g
+      Label : INDEX
+        'h'
   Label : ELEMENT
     =
     Label : RIGHT

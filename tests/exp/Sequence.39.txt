@@ -4,12 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      2
     Label : LEFT
       &
       Label : REFERENCE
         $b
-    Label : RIGHT
-      2
+  Label : ELEMENT
+    void
   Label : ELEMENT
     void
   Label : ELEMENT
@@ -20,5 +22,3 @@ Label : CODE
       1
     Label : LEFT
       $a
-  Label : ELEMENT
-    void
