@@ -3,42 +3,42 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ?
-    Label : CONDITION
-      ||
-      Label : LEFT
-        ==
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        ||
         Label : LEFT
-          =
+          ==
           Label : RIGHT
+            2
+          Label : LEFT
             [
-            Label : INDEX
-              'd'
             Label : VARIABLE
               [
-              Label : INDEX
-                'c'
               Label : VARIABLE
                 $b
+              Label : INDEX
+                'c'
+            Label : INDEX
+              'd'
+        Label : RIGHT
+          ==
+          Label : RIGHT
+            3
           Label : LEFT
-            $a
-        Label : RIGHT
-          2
-      Label : RIGHT
-        ==
-        Label : RIGHT
-          3
-        Label : LEFT
-          [
-          Label : VARIABLE
             [
             Label : VARIABLE
-              $e
+              [
+              Label : VARIABLE
+                $e
+              Label : INDEX
+                'f'
             Label : INDEX
-              'f'
-          Label : INDEX
-            'g'
-    Label : THEN
-      'h'
-    Label : ELSE
-      'i'
+              'g'
+      Label : THEN
+        'h'
+      Label : ELSE
+        'i'
+    Label : LEFT
+      $a
