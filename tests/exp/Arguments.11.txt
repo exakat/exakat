@@ -1,79 +1,77 @@
 <?php
 
 Label : CODE
-  &&
-  Label : LEFT
+  ;
+  Label : ELEMENT
     =
     Label : RIGHT
-      !
-      Label : NOT
-        in_array
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            $e
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              ->
-              Label : PROPERTY
-                c
-              Label : OBJECT
-                $b
-            Label : INDEX
-              'd'
-    Label : LEFT
-      $a
-  Label : RIGHT
-    ;
-    Label : ELEMENT
       ?
       Label : CONDITION
-        (
-        Label : CODE
-          ||
-          Label : LEFT
-            !
-            Label : NOT
-              preg_match
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    ->
-                    Label : PROPERTY
-                      g
-                    Label : OBJECT
-                      $f
-                  Label : INDEX
-                    'h'
-                Label : ARGUMENT
-                  '/^\w+$/'
-          Label : RIGHT
-            !
-            Label : NOT
-              file_exists
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'n'
-                  Label : CONCAT
+        &&
+        Label : LEFT
+          !
+          Label : NOT
+            in_array
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  ->
+                  Label : PROPERTY
+                    c
+                  Label : OBJECT
+                    $b
+                Label : INDEX
+                  'd'
+        Label : RIGHT
+          (
+          Label : CODE
+            ||
+            Label : LEFT
+              !
+              Label : NOT
+                preg_match
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
                     [
                     Label : VARIABLE
                       ->
                       Label : PROPERTY
-                        l
+                        g
                       Label : OBJECT
-                        $k
+                        $f
                     Label : INDEX
-                      'm'
-                  Label : CONCAT
-                    'j'
-                  Label : CONCAT
-                    I
+                      'h'
+                  Label : ARGUMENT
+                    '/^\w+$/'
+            Label : RIGHT
+              !
+              Label : NOT
+                file_exists
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      'n'
+                    Label : CONCAT
+                      [
+                      Label : VARIABLE
+                        ->
+                        Label : PROPERTY
+                          l
+                        Label : OBJECT
+                          $k
+                      Label : INDEX
+                        'm'
+                    Label : CONCAT
+                      'j'
+                    Label : CONCAT
+                      I
       Label : THEN
         'o'
       Label : ELSE
@@ -86,3 +84,5 @@ Label : CODE
             $p
         Label : INDEX
           'r'
+    Label : LEFT
+      $a
