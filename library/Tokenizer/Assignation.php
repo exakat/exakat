@@ -26,7 +26,7 @@ class Assignation extends TokenAuto {
                           'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Property',
                           'Heredoc', 'Preplusplus', 'Postplusplus', 'Methodcall', 'Nsname', 
                           'Assignation', 'Variable', 'Reference', 'Boolean', 'Magicconstant',
-                          'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 
+                          'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison', 
                          );
         
         $this->conditions = array(-2 => array('filterOut2' => 'T_STRING'),
