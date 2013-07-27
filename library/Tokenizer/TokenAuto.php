@@ -639,10 +639,9 @@ g.addEdge(x, it.out('NEXT').next(), 'NEXT');
 g.addEdge(x, it, 'CODE');
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
-
 // remove the next, if this is a ; 
 g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
-x.out('NEXT').has('token', 'T_SEMICOLON').each{
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     semicolon = it;
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
     g.removeVertex(semicolon);

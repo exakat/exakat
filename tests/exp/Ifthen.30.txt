@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $c
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        <
+        Label : RIGHT
+          0
+        Label : LEFT
+          $a
+    Label : THEN
+      Block With control structure
+      Label : CODE
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $b
