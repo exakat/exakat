@@ -6,6 +6,12 @@ Label : CODE
     (
     Label : CODE
       &&
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          'b'
       Label : RIGHT
         (
         Label : CODE
@@ -14,6 +20,8 @@ Label : CODE
             0
           Label : LEFT
             -
+            Label : RIGHT
+              $h
             Label : LEFT
               c
               Label : ARGUMENTS
@@ -29,17 +37,9 @@ Label : CODE
                   Label : INDEX
                     .
                     Label : CONCAT
-                      'f'
-                    Label : CONCAT
                       $g
-            Label : RIGHT
-              $h
-      Label : LEFT
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          'b'
+                    Label : CONCAT
+                      'f'
   Label : THEN
     {
     Label : CODE
@@ -49,6 +49,6 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            'j'
-          Label : ARGUMENT
             'k'
+          Label : ARGUMENT
+            'j'

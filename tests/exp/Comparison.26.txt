@@ -1,64 +1,54 @@
 <?php
 
-Label : NEXT
+Label : CODE
   if
-  Label : NEXT
+  Label : CONDITION
     (
-    Label : NEXT
-      [
-      Label : VARIABLE
-        $a
-      Label : NEXT
-        &&
-        Label : NEXT
-          (
-          Label : NEXT
+    Label : CODE
+      &&
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          'b'
+      Label : RIGHT
+        (
+        Label : CODE
+          ||
+          Label : LEFT
             c
-            Label : NEXT
-              ||
-              Label : NEXT
-                $h
-                Label : NEXT
-                  <
-                  Label : NEXT
-                    0
-                    Label : NEXT
-                      )
-                      Label : NEXT
-                        )
-                        Label : NEXT
-                          {
-                          Label : CODE
-                            ;
-                            Label : ELEMENT
-                              i
-                              Label : ARGUMENTS
-                                ,
-                                Label : ARGUMENT
-                                  'k'
-                                Label : ARGUMENT
-                                  'j'
-                          Label : NEXT
-                            ?>
-                            Label : NEXT
-                              /**/
-                              Label : NEXT
-                                /* * */
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 [
+                Label : VARIABLE
+                  [
+                  Label : VARIABLE
+                    $d
+                  Label : INDEX
+                    'e'
                 Label : INDEX
                   .
                   Label : CONCAT
-                    'f'
-                  Label : CONCAT
                     $g
-                Label : VARIABLE
-                  [
-                  Label : INDEX
-                    'e'
-                  Label : VARIABLE
-                    $d
-      Label : INDEX
-        'b'
+                  Label : CONCAT
+                    'f'
+          Label : RIGHT
+            <
+            Label : RIGHT
+              0
+            Label : LEFT
+              $h
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        i
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            'k'
+          Label : ARGUMENT
+            'j'

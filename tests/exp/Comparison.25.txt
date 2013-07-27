@@ -2,26 +2,22 @@
 
 Label : CODE
   if
-  Label : THEN
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        i
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            'j'
-          Label : ARGUMENT
-            'k'
   Label : CONDITION
     (
     Label : CODE
       &&
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          'b'
       Label : RIGHT
         (
         Label : CODE
           <
+          Label : RIGHT
+            0
           Label : LEFT
             *
             Label : RIGHT
@@ -32,23 +28,27 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   [
+                  Label : VARIABLE
+                    [
+                    Label : VARIABLE
+                      $d
+                    Label : INDEX
+                      'e'
                   Label : INDEX
                     .
                     Label : CONCAT
-                      'f'
-                    Label : CONCAT
                       $g
-                  Label : VARIABLE
-                    [
-                    Label : INDEX
-                      'e'
-                    Label : VARIABLE
-                      $d
-          Label : RIGHT
-            0
-      Label : LEFT
-        [
-        Label : INDEX
-          'b'
-        Label : VARIABLE
-          $a
+                    Label : CONCAT
+                      'f'
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        i
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            'k'
+          Label : ARGUMENT
+            'j'

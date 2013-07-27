@@ -1,26 +1,52 @@
 <?php
 
-Label : NEXT
+Label : CODE
   if
-  Label : NEXT
+  Label : CONDITION
     (
-    Label : NEXT
+    Label : CODE
       &&
       Label : LEFT
-        !
-        Label : NOT
+        &&
+        Label : LEFT
+          !
+          Label : NOT
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                $a
+              Label : INDEX
+                'b'
+            Label : INDEX
+              'c'
+        Label : RIGHT
           [
-          Label : INDEX
-            'c'
           Label : VARIABLE
             [
             Label : VARIABLE
-              $a
+              $d
             Label : INDEX
-              'b'
-      Label : NEXT
-        &&
-        Label : NEXT
+              'e'
+          Label : INDEX
+            'f'
+      Label : RIGHT
+        >
+        Label : RIGHT
+          *
+          Label : RIGHT
+            1
+          Label : LEFT
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                $j
+              Label : INDEX
+                'k'
+            Label : INDEX
+              'l'
+        Label : LEFT
           >>
           Label : RIGHT
             [
@@ -28,44 +54,9 @@ Label : NEXT
               $h
             Label : INDEX
               'i'
-          Label : NEXT
-            >
-            Label : NEXT
-              *
-              Label : RIGHT
-                1
-              Label : NEXT
-                )
-                Label : NEXT
-                  {
-                  Label : NEXT
-                    ?>
-
-                    Label : NEXT
-                      /**/
-                      Label : NEXT
-                        /* * */
-                  Label : CODE
-                    void
-              Label : LEFT
-                [
-                Label : VARIABLE
-                  [
-                  Label : INDEX
-                    'k'
-                  Label : VARIABLE
-                    $j
-                Label : INDEX
-                  'l'
           Label : LEFT
             G
-      Label : RIGHT
-        [
-        Label : VARIABLE
-          [
-          Label : INDEX
-            'e'
-          Label : VARIABLE
-            $d
-        Label : INDEX
-          'f'
+  Label : THEN
+    {
+    Label : CODE
+      void

@@ -6,6 +6,12 @@ Label : CODE
     (
     Label : CODE
       &&
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          'b'
       Label : RIGHT
         (
         Label : CODE
@@ -14,32 +20,26 @@ Label : CODE
             0
           Label : LEFT
             *
+            Label : RIGHT
+              $h
             Label : LEFT
               c
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   [
+                  Label : VARIABLE
+                    [
+                    Label : VARIABLE
+                      $d
+                    Label : INDEX
+                      'e'
                   Label : INDEX
                     .
                     Label : CONCAT
                       $g
                     Label : CONCAT
                       'f'
-                  Label : VARIABLE
-                    [
-                    Label : INDEX
-                      'e'
-                    Label : VARIABLE
-                      $d
-            Label : RIGHT
-              $h
-      Label : LEFT
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          'b'
   Label : THEN
     {
     Label : CODE
