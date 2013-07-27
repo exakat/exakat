@@ -2,10 +2,6 @@
 
 Label : CODE
   if
-  Label : THEN
-    {
-    Label : CODE
-      void
   Label : CONDITION
     (
     Label : CODE
@@ -60,3 +56,7 @@ Label : CODE
               'i'
           Label : LEFT
             G
+  Label : THEN
+    {
+    Label : CODE
+      void
