@@ -17,17 +17,17 @@ Label : CODE
           Label : CODE
             Block With Next
             Label : CODE
-              Sequence With Next
+              ;
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
               Label : ELEMENT
                 =
                 Label : RIGHT
                   2
                 Label : LEFT
                   $b
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
         Label : ELEMENT
           default
           Label : CODE

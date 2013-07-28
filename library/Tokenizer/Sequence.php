@@ -65,11 +65,32 @@ class Sequence extends TokenAuto {
                                );
         $r = $this->checkAuto();
 
+        // @note instructions separated by ; with a special case for 'case'
+        $this->conditions = array(-4 => array('token' => 'T_CASE'),
+                                  -3 => array('atom' => 'yes'),
+                                  -2 => array('token' => 'T_COLON'), 
+                                  -1 => array('atom' => $operands ),
+                                   0 => array('token' => 'T_SEMICOLON'),
+                                   1 => array('atom' => $operands),
+                                   2 => array('filterOut2' => $next_operator),
+        );
+        
+        $this->actions = array('makeEdge'    => array( 1 => 'ELEMENT',
+                                                      -1 => 'ELEMENT'
+                                                      ),
+                               'order'    => array( 1 => 2,
+                                                   -1 => 1 ),
+                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
+                               'atom'       => 'Sequence',
+                               );
+        $r = $this->checkAuto();
+
         // @note instructions not separated by ; 
         $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Case', 'Default', 'Var', 'Global', 'Static', 
                            'Const', 'Ppp', 'Foreach', 'For', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
-                           'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile',  );
-        $this->conditions = array(-1 => array('filterOut' => array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', 'T_ABSTRACT', 'T_FINAL')), 
+                           'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison', );
+        $this->conditions = array(-1 => array('filterOut' => array_merge(array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', 'T_ABSTRACT', 'T_FINAL'),
+                                                             Assignation::$operators)), 
                                    0 => array('atom' => $operands2),
                                    1 => array('atom' => $operands2),
         );
