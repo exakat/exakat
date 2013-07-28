@@ -69,6 +69,7 @@ $classes = array(
     'Constant',
     '_Return',
     'Sequence',
+    'SequenceCaseDefault',
     '_Const',
     'Block',
     '_Class',
