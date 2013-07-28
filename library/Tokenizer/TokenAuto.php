@@ -467,6 +467,33 @@ it.bothE('NEXT').each{ g.removeEdge(it); }
             unset($actions['insertSequence']);
         }
 
+        if (isset($actions['insertSequenceCaseDefault'])) {
+                $qactions[] = "
+/* insertSequenceCaseDefault */
+x = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', 'file':it.file, virtual:true]);
+
+g.addEdge(x, it, 'ELEMENT');
+g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
+
+g.addEdge(it.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
+
+it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+it.bothE('NEXT').each{ g.removeEdge(it); }
+
+x.out('ELEMENT').has('atom', 'SequenceCaseDefault').each{
+    it.out('ELEMENT').each{
+        it.inE('ELEMENT').each{ g.removeEdge(it);}
+        g.addEdge(x, it, 'ELEMENT');
+    }
+    g.removeEdge(it.inE('ELEMENT').next());
+    g.removeVertex(it);
+}
+
+";
+            unset($actions['insertSequenceCaseDefault']);
+        }
+
         if (isset($actions['insertConcat2'])) {
             $qactions[] = "
 /* insertConcat 2 */

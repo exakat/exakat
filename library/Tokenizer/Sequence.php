@@ -11,7 +11,7 @@ class Sequence extends TokenAuto {
                           'Instanceof', 'Magicconstant', 'Staticconstant', 'Methodcall', 'Logical',
                           'Var', 'Const', 'Ppp', 'Postplusplus', 'Preplusplus', 'Global', 'Nsname',
                           'Ifthen', 'Include', 'Function', 'Foreach', 'While', 'Arrayappend', 'Cast',
-                          'Case', 'Default', 'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
+                          'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
                           'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
                           'Bitshift', 'Void', 'Dowhile', 
                            );
@@ -31,7 +31,8 @@ class Sequence extends TokenAuto {
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut2' => $yield_operator), 
                                   -1 => array('atom' => $operands ),
-                                   0 => array('token' => 'T_SEMICOLON'),
+                                   0 => array('token' => 'T_SEMICOLON',
+                                              'atom' => 'none'),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut2' => $next_operator),
         );
@@ -50,7 +51,8 @@ class Sequence extends TokenAuto {
         $this->conditions = array(-3 => array('token' => array('T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_ELSE')),
                                   -2 => array('token' => 'T_COLON'), 
                                   -1 => array('atom' => $operands ),
-                                   0 => array('token' => 'T_SEMICOLON'),
+                                   0 => array('token' => 'T_SEMICOLON',
+                                              'atom' => 'none'),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut2' => $next_operator),
         );
@@ -66,17 +68,20 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note instructions separated by ; with a special case for 'case'
-        $this->conditions = array(-4 => array('token' => 'T_CASE'),
-                                  -3 => array('atom' => 'yes'),
-                                  -2 => array('token' => 'T_COLON'), 
-                                  -1 => array('atom' => $operands ),
-                                   0 => array('token' => 'T_SEMICOLON'),
-                                   1 => array('atom' => $operands),
+        $this->conditions = array(-4 => array('token' => 'T_CASE', 
+                                              'atom'  => 'none',),
+                                  -3 => array('atom'  => 'yes'),
+                                  -2 => array('token' => 'T_COLON',
+                                              'atom'  => 'none', ), 
+                                  -1 => array('atom'  => $operands ),
+                                   0 => array('token' => 'T_SEMICOLON',
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => $operands),
                                    2 => array('filterOut2' => $next_operator),
         );
         
-        $this->actions = array('makeEdge'    => array( 1 => 'ELEMENT',
-                                                      -1 => 'ELEMENT'
+        $this->actions = array('transform'    => array( 1 => 'ELEMENT',
+                                                       -1 => 'ELEMENT'
                                                       ),
                                'order'    => array( 1 => 2,
                                                    -1 => 1 ),
@@ -86,7 +91,7 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note instructions not separated by ; 
-        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Case', 'Default', 'Var', 'Global', 'Static', 
+        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Var', 'Global', 'Static', 
                            'Const', 'Ppp', 'Foreach', 'For', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
                            'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison', );
         $this->conditions = array(-1 => array('filterOut' => array_merge(array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', 'T_ABSTRACT', 'T_FINAL'),
@@ -124,7 +129,7 @@ class Sequence extends TokenAuto {
                                );
         $r = $this->checkAuto();
 
-        // @note sequence next to another instruction
+        // @note sequence next to another sequence
         $this->conditions = array(-1 => array('filterOut' => $yield_operator), 
                                    0 => array('atom' => 'Sequence' ),
                                    1 => array('atom' => 'Sequence')
@@ -134,10 +139,10 @@ class Sequence extends TokenAuto {
                                 'mergeNext'  => array('Sequence' => 'ELEMENT'));
         $r = $this->checkAuto();
 
-
         // @note sequence next to another instruction
         $this->conditions = array( 0 => array('atom' => 'Sequence' ),
-                                   1 => array('token' => 'T_SEMICOLON')
+                                   1 => array('token' => 'T_SEMICOLON',
+                                              'atom'  => 'none'),
         );
         
         $this->actions = array( 'transform'   => array(1 => 'DROP'));

@@ -39,7 +39,7 @@ class Block extends TokenAuto {
                                    -1 => array('token' => 'T_COLON',
                                               'atom' => 'none'),
                                     0 => array('atom' => 'Sequence'),
-                                    1 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT')),
+                                    1 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')),
         );
         
         $this->actions = array('createBlockWithSequence'    => true);
@@ -50,7 +50,7 @@ class Block extends TokenAuto {
                                    -1 => array('token' => 'T_COLON',
                                               'atom' => 'none'),
                                     0 => array('atom' => 'Sequence'),
-                                    1 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT')),
+                                    1 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT',)),
         );
         
         $this->actions = array('createBlockWithSequence'    => true);

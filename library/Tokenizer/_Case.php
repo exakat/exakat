@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Case extends TokenAuto {
     function _check() {
+        // Case is empty (case 'a': )
         $this->conditions = array(-2 => array('token' => 'T_CASE',
                                              'atom' => 'none'),
                                   -1 => array('atom' => 'yes'),
@@ -14,6 +15,7 @@ class _Case extends TokenAuto {
         $this->actions = array('addEdge'    => array(0 => array('Block' => 'CODE')));
         $r = $this->checkAuto();
 
+        // Case has only one instruction empty (case 'a': $x++)
         $this->conditions = array(-2 => array('token' => 'T_CASE',
                                               'atom' => 'none'),
                                   -1 => array('atom' => 'yes'),
@@ -24,6 +26,7 @@ class _Case extends TokenAuto {
         $this->actions = array('createSequenceWithNext'    => true);
         $r = $this->checkAuto();
 
+        // Case is followed by 2 sequences
         $this->conditions = array(-3 => array('token' => 'T_CASE',
                                               'atom' => 'none'),
                                   -2 => array('atom' => 'yes'),
@@ -35,6 +38,7 @@ class _Case extends TokenAuto {
                                 'mergeNext' => array('Sequence' => 'ELEMENT'));
         $r = $this->checkAuto();
 
+        // Case is followed by a block
         $this->conditions = array(0 => array('token' => 'T_CASE',
                                               'atom' => 'none'),
                                   1 => array('atom' => 'yes'),

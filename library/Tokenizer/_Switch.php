@@ -17,7 +17,6 @@ class _Switch extends TokenAuto {
                                                         3 => 'DROP',
                                                         4 => 'CASES'),
                                'atom'       => 'Switch');
-                               
         return $this->checkAuto();
     }
 }
