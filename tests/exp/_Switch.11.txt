@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    {
+    Label : CODE
+      case
+      Label : CASE
+        'a'
+      Label : CODE
+        Block With Next
+        Label : CODE
+          ;
+          Label : ELEMENT
+            &&
+            Label : LEFT
+              [
+              Label : VARIABLE
+                [
+                Label : VARIABLE
+                  $b
+                Label : INDEX
+                  'c'
+              Label : INDEX
+                'd'
+            Label : RIGHT
+              =
+              Label : RIGHT
+                'f'
+              Label : LEFT
+                $e
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void

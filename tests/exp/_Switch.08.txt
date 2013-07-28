@@ -15,7 +15,11 @@ Label : CODE
         Label : CODE
           Block With Next
           Label : CODE
-            Sequence With Next
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
             Label : ELEMENT
               =
               Label : RIGHT
@@ -24,10 +28,6 @@ Label : CODE
                   $c
               Label : LEFT
                 $b
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
       Label : ELEMENT
         case
         Label : CASE
@@ -35,7 +35,11 @@ Label : CODE
         Label : CODE
           Block With Next
           Label : CODE
-            Sequence With Next
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                1
             Label : ELEMENT
               =
               Label : RIGHT
@@ -44,10 +48,6 @@ Label : CODE
                   $d
               Label : LEFT
                 $b
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                1
       Label : ELEMENT
         case
         Label : CASE
@@ -55,7 +55,11 @@ Label : CODE
         Label : CODE
           Block With Next
           Label : CODE
-            Sequence With Next
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                2
             Label : ELEMENT
               =
               Label : RIGHT
@@ -64,10 +68,6 @@ Label : CODE
                   $d
               Label : LEFT
                 $b
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                2
       Label : ELEMENT
         default
         Label : CODE
