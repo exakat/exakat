@@ -1,0 +1,60 @@
+<?php
+
+Label : CODE
+  Sequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            c
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                'd'
+          Label : LEFT
+            $b
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      k
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              =>
+              Label : KEY
+                'g'
+              Label : VALUE
+                .
+                Label : CONCAT
+                  $j
+                Label : CONCAT
+                  "i"
+                Label : CONCAT
+                  H
+        Label : ARGUMENT
+          $f
+    Label : OBJECT
+      ::
+      Label : METHOD
+        l
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'e'
+      Label : CLASS
+        M

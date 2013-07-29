@@ -93,11 +93,13 @@ class Sequence extends TokenAuto {
         // @note instructions not separated by ; 
         $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Var', 'Global', 'Static', 
                            'Const', 'Ppp', 'Foreach', 'For', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
-                           'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison', );
+                           'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison',
+                           'Noscream',  );
         $this->conditions = array(-1 => array('filterOut' => array_merge(array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', 'T_ABSTRACT', 'T_FINAL'),
                                                              Assignation::$operators)), 
                                    0 => array('atom' => $operands2),
                                    1 => array('atom' => $operands2),
+                                   2 => array('filterOut2' => $next_operator),
         );
         $this->actions = array('insertSequence'  => true);
         $r = $this->checkAuto();
