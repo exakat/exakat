@@ -430,21 +430,23 @@ f.each{
 /* insertConcat */
 x = g.addVertex(null, [code:'{$actions['insertConcat']}', atom:'Concatenation', token:'T_DOT', 'file':it.file, virtual:true]);
 
-p = it.in('NEXT').next();
-n = it.out('NEXT').out('NEXT').next();
-a = it
-b = it.out('NEXT').next();
+g.addEdge(x, it, 'CONCAT');
+g.addEdge(x, it.out('NEXT').next(), 'CONCAT');
 
+g.addEdge(it.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
 
-g.removeEdge(p.outE('NEXT').next());
-g.addEdge(p, x, 'NEXT');
-g.removeEdge(n.inE('NEXT').next());
-g.addEdge(x, n, 'NEXT');
+it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+it.bothE('NEXT').each{ g.removeEdge(it); }
 
-g.addEdge(x, a, 'CONCAT');
-g.addEdge(x, b, 'CONCAT');
-g.removeEdge(b.inE('NEXT').next());
-
+x.out('CONCAT').has('atom', 'Concatenation').each{
+    it.out('CONCAT').each{
+        it.inE('CONCAT').each{ g.removeEdge(it);}
+        g.addEdge(x, it, 'CONCAT');
+    }
+    g.removeEdge(it.inE('CONCAT').next());
+    g.removeVertex(it);
+}
 ";
             unset($actions['insertConcat']);
         }
