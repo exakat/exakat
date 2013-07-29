@@ -77,8 +77,8 @@ class Concatenation extends TokenAuto {
         $r = $this->checkAuto();
 
 // Fusion of string and PHPcode
-        $this->conditions = array( 0 => array('atom' => array('String', 'Phpcode' )),
-                                   1 => array('atom' => array('String', 'Phpcode' )),
+        $this->conditions = array( 0 => array('atom' => array('String', 'Phpcode', 'Concatenation', )),
+                                   1 => array('atom' => array('String', 'Phpcode', 'Concatenation', )),
         ); 
 
         $this->actions = array('insertConcat'    => "Concat" );

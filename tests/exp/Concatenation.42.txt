@@ -1,0 +1,119 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      $a
+  Label : THEN
+    {
+    Label : CODE
+      Concat
+      Label : CONCAT
+        A
+
+      Label : CONCAT
+        <?php 
+        Label : CODE
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $b
+      Label : CONCAT
+        B
+
+      Label : CONCAT
+        <?php 
+        Label : CODE
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c
+      Label : CONCAT
+        C
+
+      Label : CONCAT
+        <?php 
+        Label : CODE
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $d
+      Label : CONCAT
+        D
+
+      Label : CONCAT
+        <?php 
+        Label : CODE
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $e
+      Label : CONCAT
+        <?php 
+        Label : CODE
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $g
+      Label : CONCAT
+        I
+
+      Label : CONCAT
+        E
+
+      Label : CONCAT
+        <?php 
+        Label : CODE
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $f
+      Label : CONCAT
+        F
+
+      Label : CONCAT
+        G
+
+      Label : CONCAT
+        <?php 
+        Label : CODE
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $h
+      Label : CONCAT
+        H
+
+      Label : CONCAT
+        <?php 
+        Label : CODE
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $i
