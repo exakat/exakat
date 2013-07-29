@@ -11,7 +11,7 @@ class _Foreach extends TokenAuto {
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 
                                                               'Staticmethodcall', 'Methodcall','Cast', 'Parenthesis', 'Ternary', 
-                                                              'Noscream', 'Not', )),
+                                                              'Noscream', 'Not', 'Assignation', )),
                                    3 => array('token' => 'T_AS'),
                                    4 => array('atom' => array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property' )),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
