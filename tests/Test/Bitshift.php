@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Bitshift extends Tokenizeur {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testBitshift01()  { $this->generic_test('Bitshift.01'); }
     public function testBitshift02()  { $this->generic_test('Bitshift.02'); }
@@ -17,5 +17,6 @@ class Bitshift extends Tokenizeur {
     public function testBitshift06()  { $this->generic_test('Bitshift.06'); }
     public function testBitshift07()  { $this->generic_test('Bitshift.07'); }
     public function testBitshift08()  { $this->generic_test('Bitshift.08'); }
+    public function testBitshift09()  { $this->generic_test('Bitshift.09'); }
 }
 ?>
