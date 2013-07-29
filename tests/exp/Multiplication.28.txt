@@ -1,0 +1,68 @@
+<?php
+
+Label : NEXT
+  =
+  Label : RIGHT
+    /
+    Label : RIGHT
+      ->
+      Label : METHOD
+        f
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $g
+      Label : OBJECT
+        ::
+        Label : METHOD
+          d
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'e'
+        Label : CLASS
+          C
+    Label : LEFT
+      $b
+  Label : NEXT
+    ;
+    Label : NEXT
+      Sequence
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          Concat
+          Label : CONCAT
+            $b
+          Label : CONCAT
+            mod
+        Label : LEFT
+          $a
+      Label : ELEMENT
+        ::
+        Label : METHOD
+          d
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'e'
+        Label : CLASS
+          C
+      Label : NEXT
+        ->
+        Label : NEXT
+          f
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g
+          Label : NEXT
+            ;
+            Label : NEXT
+              ?>
+              Label : NEXT
+                /**/
+                Label : NEXT
+                  /* * */
+  Label : LEFT
+    $a

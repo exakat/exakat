@@ -7,7 +7,9 @@ class Multiplication extends TokenAuto {
     static public $operands = array('Integer', 'Addition', 'Variable', 'Multiplication', 'Sign', 'Not',
                                     'Parenthesis', 'Property', 'Array', 'Concatenation', 'Float',
                                     'String', 'Preplusplus', 'Postplusplus', 'Nsname', 'Functioncall',
-                                    'Methodcall', 'Staticmethodcall', 'Concatenation', );
+                                    'Methodcall', 'Staticmethodcall', 'Concatenation', 'Cast',
+                                    'Noscream', 'Staticconstant', 'Staticproperty', 'Constant', 
+                                    'Boolean',  );
     
     function _check() {
 
@@ -17,7 +19,7 @@ class Multiplication extends TokenAuto {
                                    0 => array('token' => Multiplication::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => Multiplication::$operands),
-                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
+                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR',)),
         );
         
         $this->actions = array('makeEdge'    => array( '1' => 'RIGHT',
