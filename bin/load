@@ -23,6 +23,12 @@ if ($id = array_search('-r', $args)) {
     define('RECURSIVE', false);
 }
 
+if ($id = array_search('-N', $args)) {
+    define('NEO_VERSION', true);
+} else {
+    define('NEO_VERSION', false);
+}
+
 if ($id = array_search('-f', $args)) {
     $filename = $args[$id + 1];
     
@@ -59,6 +65,7 @@ function process_dir($dir) {
 }
 
 function process_file($filename) {
+    
     if (!file_exists($filename)) {
         print "'$filename' doesn't exists. Aborting\n";
         die();
@@ -70,15 +77,17 @@ function process_file($filename) {
     
     $client = new Client();
 
-    $racines = new NodeIndex($client, 'racines');
-    $regex = array('Multiplication', '_Break');
-    $regexIndex = array();
-    foreach($regex as $r) {
-        $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
-                                             ->setProperty('code', 'Index for '.$r)
-                                             ->setProperty('file', $filename)
-                                             ->setProperty('index', 'yes')->save();
-        $racines->add($regexIndex[$r], 'token', $r);
+    if (NEO_VERSION) {
+        $racines = new NodeIndex($client, 'racines');
+        $regex = array('Multiplication', '_Break', 'Not', );
+        $regexIndex = array();
+        foreach($regex as $r) {
+            $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
+                                                 ->setProperty('code', 'Index for '.$r)
+                                                 ->setProperty('file', $filename)
+                                                 ->setProperty('index', 'yes')->save();
+            $racines->add($regexIndex[$r], 'token', $r);
+        }
     }
 
     
@@ -186,18 +195,22 @@ function process_file($filename) {
             $T[$id]->save();
         }
 
-        if (in_array($token_value, Tokenizer\Multiplication::$operators)) { 
-            $regexIndex['Multiplication']->relateTo($T[$id], 'INDEX')->save();
-        } elseif (in_array($token_value, Tokenizer\_Break::$operators)) { 
-            $regexIndex['_Break']->relateTo($T[$id], 'INDEX')->save();
+        if (NEO_VERSION) {
+            if (in_array($token_value, Tokenizer\Multiplication::$operators)) { 
+                $regexIndex['Multiplication']->relateTo($T[$id], 'INDEX')->save();
+            } elseif (in_array($token_value, Tokenizer\_Break::$operators)) { 
+                $regexIndex['_Break']->relateTo($T[$id], 'INDEX')->save();
+            } elseif (in_array($token_value, Tokenizer\Not::$operators)) { 
+                $regexIndex['Not']->relateTo($T[$id], 'INDEX')->save();
+            }
         }
         
-        if (!isset($previous)) {
-            $previous = $T[$id];
-        } else {
-            $previous->relateTo($T[$id], 'NEXT')->save();
-            $previous = $T[$id];
-        }
+            if (!isset($previous)) {
+                $previous = $T[$id];
+            } else {
+                $previous->relateTo($T[$id], 'NEXT')->save();
+                $previous = $T[$id];
+            }
     }
     
     $T[0]->setProperty('root', 'true')->save();

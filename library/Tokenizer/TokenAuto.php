@@ -7,7 +7,7 @@ class TokenAuto extends Token {
     
     public function prepareQuery() {
         $class = str_replace("Tokenizer\\", '', get_class($this));
-        if (in_array($class, array("Multiplication", "_Break"))) {
+        if (NEO_VERSION && in_array($class, array("Multiplication", "_Break"))) {
             $query = "g.idx('racines')[['token':'$class']].out('INDEX')";
         } else {
             $query = "g.V";

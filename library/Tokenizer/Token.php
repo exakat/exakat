@@ -38,7 +38,7 @@ class Token {
     }
 
     static function countLeftToken() {
-        $result = Token::query("g.V.has('atom',null).except([g.v(0)]).hasNot('hidden', true).count()");
+        $result = Token::query("g.V.has('atom',null).except([g.v(0)]).hasNot('hidden', true).hasNot('index', 'yes').count()");
     	
     	return $result[0][0];
     }
@@ -79,8 +79,9 @@ class Token {
     }
     
     public function checkRemaining() {
+        if (!NEO_VERSION) { return true; }
         $class = str_replace("Tokenizer\\", '', get_class($this));
-        if (in_array($class, array("Multiplication", "_Break"))) {
+        if (in_array($class, array("Multiplication", "_Break", 'Not' ))) {
             $query = "g.idx('racines')[['token':'$class']].out('INDEX').count()";
 
             return Token::queryOne($query) > 0;
