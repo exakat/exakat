@@ -6,7 +6,12 @@ class TokenAuto extends Token {
     protected $conditions = array();
     
     public function prepareQuery() {
-        $query = "g.V";
+        $class = str_replace("Tokenizer\\", '', get_class($this));
+        if (in_array($class, array("Multiplication", "_Break"))) {
+            $query = "g.idx('racines')[['token':'$class']].out('INDEX')";
+        } else {
+            $query = "g.V";
+        }
         $qcdts = array();
         
         if (!empty($this->conditions[0])) {
@@ -717,6 +722,12 @@ it.as('origin').in('$link').has('atom','$atom').each{
             ";
             }
             unset($actions['mergePrev']);
+        }
+
+        if (get_class($this) == "Tokenizer\\Multiplication") {
+                $qactions[] = " 
+/* Multiplication */  it.inE('INDEX').each{ g.removeEdge(it); }
+                ";
         }
         
         if ($remainder = array_keys($actions)) {

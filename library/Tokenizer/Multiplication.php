@@ -13,7 +13,6 @@ class Multiplication extends TokenAuto {
     
     function _check() {
 
-        
         $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT')),
                                   -1 => array('atom' => Multiplication::$operands ),
                                    0 => array('token' => Multiplication::$operators,
@@ -26,7 +25,9 @@ class Multiplication extends TokenAuto {
                                                       '-1' => 'LEFT'
                                                       ),
                                'atom'       => 'Multiplication');
-        return $this->checkAuto();
+        $this->checkAuto();
+        
+        return $this->checkRemaining();
     }
 }
 

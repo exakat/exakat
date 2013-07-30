@@ -3,8 +3,10 @@
 namespace Tokenizer;
 
 class _Break extends TokenAuto {
+    static public $operators = array('T_BREAK');
+    
     function _check() {
-        $this->conditions = array(0 => array('token' => 'T_BREAK',
+        $this->conditions = array(0 => array('token' => _Break::$operators,
                                              'atom' => 'none'),
                                   1 => array('token' => 'T_SEMICOLON')
                                   );
@@ -13,7 +15,7 @@ class _Break extends TokenAuto {
                                
         $r = $this->checkAuto();
 
-        $this->conditions = array(0 => array('token' => 'T_BREAK',
+        $this->conditions = array(0 => array('token' => _Break::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('Integer', 'Void'))
                                   );
@@ -23,7 +25,7 @@ class _Break extends TokenAuto {
                                
         $r = $this->checkAuto();
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 

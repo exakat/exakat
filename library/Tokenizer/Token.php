@@ -72,6 +72,23 @@ class Token {
     	return $query->getResultSet();
     }
 
+    static public function queryOne($query) {
+        $result = Token::query($query);
+    	
+    	return $result[0][0];
+    }
+    
+    public function checkRemaining() {
+        $class = str_replace("Tokenizer\\", '', get_class($this));
+        if (in_array($class, array("Multiplication", "_Break"))) {
+            $query = "g.idx('racines')[['token':'$class']].out('INDEX').count()";
+
+            return Token::queryOne($query) > 0;
+        } else {
+            return true;
+        }
+    }
+
     static public function cleanHidden() {
         $query = " g.V.has('token','T_ROOT').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
     g.removeVertex(it.in('NEXT').in('NEXT').next()); 
