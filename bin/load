@@ -64,15 +64,25 @@ function process_file($filename) {
         die();
     }
     
-    
     $php = file_get_contents($filename);
     $file = realpath($filename);
     $tokens = token_get_all($php);
     
     $client = new Client();
+
+    $racines = new NodeIndex($client, 'racines');
+    $regex = array('Multiplication', '_Break');
+    $regexIndex = array();
+    foreach($regex as $r) {
+        $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
+                                             ->setProperty('code', 'Index for '.$r)
+                                             ->setProperty('file', $filename)
+                                             ->setProperty('index', 'yes')->save();
+        $racines->add($regexIndex[$r], 'token', $r);
+    }
+
     
     // @doc delete old tokens
-    
     $queryTemplate = "g.V.has('file', '$file').outE.each{ g.removeEdge(it); }";
     $params = array('type' => 'IN');
     $query = new Gremlin\Query($client, $queryTemplate, $params);
@@ -145,7 +155,8 @@ function process_file($filename) {
                                          ->setProperty('line', $token[2])
                                          ->setProperty('file', $file);
             if (in_array($token[0], array(T_OPEN_TAG, T_IS_EQUAL, T_ECHO, T_DOUBLE_ARROW, T_CASE, T_DEFAULT,
-                                          T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_PLUS_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL
+                                          T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL,
+                                          T_MUL_EQUAL, T_OR_EQUAL, T_PLUS_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL
                                           ))) {
                 $T[$id]->setProperty('begin', true);
             }
@@ -153,7 +164,8 @@ function process_file($filename) {
             if (isset($atoms[token_name($token[0])])) {
                 $T[$id]->setProperty('atom', $atoms[token_name($token[0])]);
             }
-                                         
+            
+            $token_value = token_name($token[0]);
             $T[$id]->save();
             $line = $token[2];
         } else {
@@ -169,8 +181,15 @@ function process_file($filename) {
             if (in_array($token, array('(','{','+','-','*','/','%', '==', ',', '=', '.'))) {
                 $T[$id]->setProperty('begin', true)->save();
             }
-                                         
+
+            $token_value = $TPHP[$token];
             $T[$id]->save();
+        }
+
+        if (in_array($token_value, Tokenizer\Multiplication::$operators)) { 
+            $regexIndex['Multiplication']->relateTo($T[$id], 'INDEX')->save();
+        } elseif (in_array($token_value, Tokenizer\_Break::$operators)) { 
+            $regexIndex['_Break']->relateTo($T[$id], 'INDEX')->save();
         }
         
         if (!isset($previous)) {
