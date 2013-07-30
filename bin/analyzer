@@ -34,11 +34,11 @@ $classes = array(
     'String',       // Fait
     'Sign',         // Fait
     '_Array',       // Fait
-    'Property',
-    'Keyvalue',
+    'Property',     // Fait
+    'Keyvalue',     // Fait
     '_Function',
-    'Staticproperty',
-    'Logical',
+    'Staticproperty',// Fait
+    'Logical',      // Fait
     'Heredoc',
     'Not',          // Fait
     'Cast',

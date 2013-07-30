@@ -11,6 +11,8 @@ class Token {
                                  'String', 
                                  'Sign',
                                  '_Array', 
+                                 'Property', 
+                                 'Staticproperty',
                                  'Not', 
                                  '_Break', 
                                  'Multiplication', 
