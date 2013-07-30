@@ -22,7 +22,7 @@ $begin_time = microtime(true);
 $classes = array(
 //    'Magicconstant',
     'Variable', 
-    'Integer',
+//    'Integer',
 //    'Float',
     'Boolean',
     'String',
@@ -109,24 +109,33 @@ for($i = 0; $i < $extra_rounds + 1; $i++) {
 }
 $round = 0;
 
+$log = fopen('log/analyzer.log', 'w');
+
+$wbegin = microtime(true);
+$regex_next = $regex;
 while(check_prev($prev, $extra_rounds)) { 
-//    print "$count $prev $prevprev\n";
-//    print 'Next count : '.Token::countLeftToken()."\n";
+    $rbegin = microtime(true);
     $round++;
+    fwrite($log, "round $round)\n");
     
     array_unshift($prev, $count);
-//    print_r($prev);
 
-    $r = array_pop($regex);
-    $r->resetReserve();
-    array_push($regex, $r);
+    $regex = $regex_next;
+    $regex_next = array();
     foreach($regex as $name => $r) {
-        $r->check();
-        $r->reserve();
+        $begin = microtime(true);
+        if ($r->check()) {
+            $regex_next[$name] = $r;
+        }
+        $end = microtime(true);
+
+        fwrite($log, get_class($r)."\t".(($end - $begin) * 1000)."\n");
     }
     unset($precedence);
 
-//    print 'Next count : '.Token::countLeftToken()."\n";
+    $rend = microtime(true);
+    fwrite($log, "round $round)\t".(($rend - $rbegin)*1000)."\n");
+
     if ($count = Token::countLeftToken()) {
         display( "$round) Remains $count of $total tokens to process! \n");
     } else {
@@ -137,11 +146,15 @@ while(check_prev($prev, $extra_rounds)) {
         break 1;
     }
 }
+$wend = microtime(true);
+fwrite($log, "total while $round)\t".(($wend - $wbegin)*1000)."\n");
 
 Token::cleanHidden();
 
 $end_time = microtime(true);
 display("Total time : ".number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n");
+fwrite($log, "total script \t".(($end_time - $begin_time)*1000)."\n");
+fclose($log);
 // @todo display checks processed
 
 function check_prev($prev, $extra_rounds) {
