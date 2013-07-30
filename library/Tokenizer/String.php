@@ -17,9 +17,8 @@ class String extends TokenAuto {
         $this->actions = array( 'transform' => array( 1 => 'CONTAIN',
                                                       2 => 'DROP'),
                                 'atom'       => 'String',
-                                'mergeNext'  => array('Concatenation' => 'CONCAT'), 
-                                );
-        $r =  $this->checkAuto();
+                                'mergeNext'  => array('Concatenation' => 'CONCAT'));
+        $this->checkAuto();
 
         return $this->checkRemaining();
     }

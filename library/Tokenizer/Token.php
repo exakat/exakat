@@ -9,6 +9,8 @@ class Token {
     public static $types = array('Variable', 
                                  'Boolean', 
                                  'String', 
+                                 'Sign',
+                                 '_Array', 
                                  'Not', 
                                  '_Break', 
                                  'Multiplication', 

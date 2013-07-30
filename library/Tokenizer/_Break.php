@@ -12,18 +12,16 @@ class _Break extends TokenAuto {
                                   );
         
         $this->actions = array('addEdge'   => array(0 => array('Void' => 'LEVEL')));
-                               
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
         $this->conditions = array(0 => array('token' => _Break::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('Integer', 'Void'))
                                   );
         
-        $this->actions = array('transform'    => array( '1' => 'LEVEL'),
+        $this->actions = array('transform'  => array( 1 => 'LEVEL'),
                                'atom'       => 'Break');
-                               
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
         return $this->checkRemaining();
     }

@@ -32,7 +32,7 @@ $classes = array(
 //    'Float',
     'Boolean',      // Fait
     'String',       // Fait
-    'Sign',
+    'Sign',         // Fait
     '_Array',       // Fait
     'Property',
     'Keyvalue',
@@ -40,7 +40,7 @@ $classes = array(
     'Staticproperty',
     'Logical',
     'Heredoc',
-    'Not',
+    'Not',          // Fait
     'Cast',
     'Reference',
     'Arrayappend',

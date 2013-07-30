@@ -3,7 +3,8 @@
 namespace Tokenizer;
 
 class Variable extends TokenAuto {
-    static public $operators = array('T_DOLLAR_OPEN_CURLY_BRACES', 'T_CURLY_OPEN', 'T_DOLLAR_OPEN_CURLY_BRACES',
+    static public $operators = array('T_DOLLAR_OPEN_CURLY_BRACES', 
+                                     'T_CURLY_OPEN', 
                                      'T_DOLLAR', );
     
     function _check() {
@@ -16,8 +17,7 @@ class Variable extends TokenAuto {
         $this->actions = array( 'transform' => array('-1' => 'DROP',
                                                      '1' => 'DROP'),
                                 'atom'       => 'Variable');
-
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
         $this->conditions = array(-1 => array('token' => array('T_CURLY_OPEN', 'T_DOLLAR_OPEN_CURLY_BRACES'),
                                              'atom' => 'none'),
@@ -28,7 +28,7 @@ class Variable extends TokenAuto {
         $this->actions = array( 'transform' => array(-1 => 'DROP',
                                                       1 => 'DROP'),
                                 'atom'       => 'Variable');
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
         $this->conditions = array(0 => array('token' => 'T_DOLLAR',
                                              'atom' => 'none'),
@@ -38,8 +38,7 @@ class Variable extends TokenAuto {
         
         $this->actions = array( 'transform' => array('1' => 'NAME'),
                                 'atom'      => 'Variable');
-
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
         $this->conditions = array(0 => array('token' => 'T_DOLLAR',
                                              'atom' => 'none'),
@@ -52,7 +51,7 @@ class Variable extends TokenAuto {
                                                      2 => 'NAME',
                                                      3 => 'DROP'),
                                 'atom'       => 'Variable');
-        $r = $this->checkAuto();
+        $this->checkAuto();
         
         return $this->checkRemaining();
     }
