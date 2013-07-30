@@ -7,9 +7,12 @@ class Token {
     protected static $reserved = array();
     
     public static $types = array('Variable', 
-                                 'Multiplication', 
+                                 'Boolean', 
+                                 'String', 
+                                 'Not', 
                                  '_Break', 
-                                 'Not', );
+                                 'Multiplication', 
+                                );
     
     function __construct($client) {
         // @todo typehint ? 

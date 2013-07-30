@@ -27,13 +27,13 @@ if ($id = array_search('-N', $args)) {
 $begin_time = microtime(true);
 $classes = array(
 //    'Magicconstant',
-    'Variable', 
+    'Variable',     // Fait 
 //    'Integer',
 //    'Float',
-    'Boolean',
-    'String',
+    'Boolean',      // Fait
+    'String',       // Fait
     'Sign',
-    '_Array',
+    '_Array',       // Fait
     'Property',
     'Keyvalue',
     '_Function',
@@ -45,7 +45,7 @@ $classes = array(
     'Reference',
     'Arrayappend',
     '_Instanceof',
-    '_Break',
+    '_Break',       // Fait
     '_Continue',
     'Label',
     '_Goto',
@@ -62,7 +62,7 @@ $classes = array(
     'Methodcall',
     'Staticmethodcall',
     'Staticconstant',
-    'Multiplication',
+    'Multiplication',   // Fait
     'Addition', 
     'Bitshift',
     'Concatenation', // because test concatenation 37

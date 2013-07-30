@@ -3,12 +3,15 @@
 namespace Tokenizer;
 
 class String extends TokenAuto {
-    function _check() {
+    static public $operators = array('T_QUOTE');
 
+    function _check() {
 // Case of string with interpolation : "a${b}c";
-        $this->conditions = array(  0 => array('token' => array('T_QUOTE'), 'atom' => 'none'),
+        $this->conditions = array(  0 => array('token' => String::$operators, 
+                                               'atom' => 'none'),
                                     1 => array('atom'  => 'yes'),
-                                    2 => array('token' => array('T_QUOTE'), 'atom' => 'none')
+                                    2 => array('token' => String::$operators, 
+                                               'atom' => 'none')
                                  );
         
         $this->actions = array( 'transform' => array( 1 => 'CONTAIN',
@@ -18,7 +21,7 @@ class String extends TokenAuto {
                                 );
         $r =  $this->checkAuto();
 
-        return $this->checkAuto();
+        return $this->checkRemaining();
     }
 }
 
