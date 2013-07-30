@@ -6,6 +6,10 @@ class Token {
     protected static $client = null;
     protected static $reserved = array();
     
+    public static $types = array('Multiplication', 
+                                 '_Break', 
+                                 'Not', );
+    
     function __construct($client) {
         // @todo typehint ? 
         Token::$client = $client; 
@@ -81,7 +85,7 @@ class Token {
     public function checkRemaining() {
         if (!NEO_VERSION) { return true; }
         $class = str_replace("Tokenizer\\", '', get_class($this));
-        if (in_array($class, array("Multiplication", "_Break", 'Not' ))) {
+        if (in_array($class, Token::$types)) {
             $query = "g.idx('racines')[['token':'$class']].out('INDEX').count()";
 
             return Token::queryOne($query) > 0;

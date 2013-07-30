@@ -79,7 +79,7 @@ function process_file($filename) {
 
     if (NEO_VERSION) {
         $racines = new NodeIndex($client, 'racines');
-        $regex = array('Multiplication', '_Break', 'Not', );
+        $regex = Token::$types; 
         $regexIndex = array();
         foreach($regex as $r) {
             $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
@@ -196,21 +196,21 @@ function process_file($filename) {
         }
 
         if (NEO_VERSION) {
-            if (in_array($token_value, Tokenizer\Multiplication::$operators)) { 
-                $regexIndex['Multiplication']->relateTo($T[$id], 'INDEX')->save();
-            } elseif (in_array($token_value, Tokenizer\_Break::$operators)) { 
-                $regexIndex['_Break']->relateTo($T[$id], 'INDEX')->save();
-            } elseif (in_array($token_value, Tokenizer\Not::$operators)) { 
-                $regexIndex['Not']->relateTo($T[$id], 'INDEX')->save();
+            $regex = Token::$operators; 
+            foreach($regex as $r) {
+                $class = "Tokenizer\$r";
+                if (in_array($token_value, $r::$operators)) { 
+                   $regexIndex[$r]->relateTo($T[$id], 'INDEX')->save();
+                }
             }
         }
         
-            if (!isset($previous)) {
-                $previous = $T[$id];
-            } else {
-                $previous->relateTo($T[$id], 'NEXT')->save();
-                $previous = $T[$id];
-            }
+        if (!isset($previous)) {
+            $previous = $T[$id];
+        } else {
+            $previous->relateTo($T[$id], 'NEXT')->save();
+            $previous = $T[$id];
+        }
     }
     
     $T[0]->setProperty('root', 'true')->save();
