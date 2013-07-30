@@ -12,6 +12,8 @@ class Token {
                                  'Sign',
                                  '_Array', 
                                  'Property', 
+                                 'Keyvalue', 
+                                 '_Function',
                                  'Staticproperty',
                                  'Not', 
                                  '_Break', 

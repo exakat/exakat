@@ -3,8 +3,10 @@
 namespace Tokenizer;
 
 class _Function extends TokenAuto {
+    static public $operators = array('T_FUNCTION');
+    
     function _check() {
-        $this->conditions = array(0 => array('token' => 'T_FUNCTION',
+        $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('String', 'Reference')),
                                   2 => array('token' => 'T_OPEN_PARENTHESIS'),
@@ -20,10 +22,9 @@ class _Function extends TokenAuto {
                                                         5 => 'BLOCK'),
                                                 
                                'atom'       => 'Function');
-                               
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
-        $this->conditions = array(0 => array('token' => 'T_FUNCTION',
+        $this->conditions = array(0 => array('token' =>  _Function::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('String', 'Reference')),
                                   2 => array('token' => 'T_OPEN_PARENTHESIS'),
@@ -37,12 +38,11 @@ class _Function extends TokenAuto {
                                                         3 => 'ARGUMENTS',
                                                         4 => 'DROP', 
                                                         5 => 'DROP'),
-                                                
                                'atom'       => 'Function');
                                
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 

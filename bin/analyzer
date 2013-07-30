@@ -36,10 +36,10 @@ $classes = array(
     '_Array',       // Fait
     'Property',     // Fait
     'Keyvalue',     // Fait
-    '_Function',
+    '_Function',    // Fait
     'Staticproperty',// Fait
     'Logical',      // Fait
-    'Heredoc',
+    'Heredoc',      // Fait
     'Not',          // Fait
     'Cast',
     'Reference',
