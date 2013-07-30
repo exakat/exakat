@@ -6,7 +6,8 @@ class Token {
     protected static $client = null;
     protected static $reserved = array();
     
-    public static $types = array('Multiplication', 
+    public static $types = array('Variable', 
+                                 'Multiplication', 
                                  '_Break', 
                                  'Not', );
     
