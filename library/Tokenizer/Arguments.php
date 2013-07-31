@@ -8,12 +8,27 @@ class Arguments extends TokenAuto {
     function _check() {
         
         // @note End of )
-        $this->conditions = array( 0 => array('token' => Arguments::$operators,
+        $this->conditions = array( 0 => array('token' => 'T_COMMA',
                                               'atom' => 'none'),
-                                   1 => array('token' => Arguments::$operators,
+                                   1 => array('token' => 'T_COMMA',
                                               'atom'  => 'none'),
         );
-        
+        $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')));
+        $this->checkAuto();
+
+        $this->conditions = array( 0 => array('token' => 'T_COMMA',
+                                              'atom' => 'none'),
+                                   1 => array('token' => 'T_CLOSE_PARENTHESIS',
+                                              'atom'  => 'none'),
+        );
+        $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')));
+        $this->checkAuto();
+
+        $this->conditions = array( 0 => array('token' => 'T_OPEN_PARENTHESIS',
+                                              'atom' => 'none'),
+                                   1 => array('token' => 'T_COMMA',
+                                              'atom'  => 'none'),
+        );
         $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')));
         $this->checkAuto();
 
