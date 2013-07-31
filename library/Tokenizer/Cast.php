@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class Cast extends TokenAuto {
-    static $operators = array('T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST');
+    static public $operators = array('T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST');
 
     function _check() {
         $this->conditions = array(0 => array('token' => Cast::$operators,
@@ -14,8 +14,9 @@ class Cast extends TokenAuto {
         
         $this->actions = array('makeEdge'    => array( '1' => 'CAST'),
                                'atom'       => 'Cast');
-                               
-        return $this->checkAuto();
+        $this->checkAuto();
+        
+        return $this->checkRemaining();
     }
 }
 

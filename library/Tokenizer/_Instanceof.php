@@ -3,10 +3,11 @@
 namespace Tokenizer;
 
 class _Instanceof extends TokenAuto {
-    function _check() {
+    static public $operators = array('T_INSTANCEOF');
 
+    function _check() {
         $this->conditions = array(-1 => array('atom' => 'yes'),
-                                  0 => array('token' => 'T_INSTANCEOF',
+                                  0 => array('token' => _Instanceof::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
                                   
@@ -15,15 +16,9 @@ class _Instanceof extends TokenAuto {
         $this->actions = array('makeEdge'    => array( '1' => 'RIGHT',
                                                       '-1' => 'LEFT'),
                                'atom'       => 'Instanceof');
-
-        return $this->checkAuto();
+        $this->checkAuto();
+        
+        return $this->checkRemaining();
     } 
-    
-    function reserve() {
-        Token::$reserved[] = 'T_INSTANCEOF';
-
-        return true;
-    }
-    
 }
 ?>
