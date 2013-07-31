@@ -10,8 +10,6 @@ Label : CODE
       array
       Label : ARGUMENTS
         void
-        Label : ARGUMENT
-          void
   Label : ELEMENT
     global
     Label : NAME

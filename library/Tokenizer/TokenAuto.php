@@ -78,7 +78,22 @@ class TokenAuto extends Token {
 
         // @doc audit trail track
         $qactions[] = "\n it.setProperty('modifiedBy', '".str_replace('Tokenizer\\', '', get_class($this))."'); \n";
-        
+
+        if (isset($actions['keepIndexed'])) {
+            if(!$actions['keepIndexed']) {
+                $qactions[] = " 
+/* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
+                ";
+            } else {
+//                print "Not removing indexing for ".get_class($this)."\n";
+            }
+            unset($actions['keepIndexed']);
+        } else {
+                $qactions[] = " 
+/* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
+                ";
+        }
+                
         if (isset($actions['cleansemicolon']) && $actions['cleansemicolon']) {
             $qactions[] = "
 /* cleansemicolon */
@@ -721,21 +736,6 @@ it.as('origin').in('$link').has('atom','$atom').each{
             ";
             }
             unset($actions['mergePrev']);
-        }
-
-        if (isset($actions['keepIndexed'])) {
-            if(!$actions['keepIndexed']) {
-                $qactions[] = " 
-/* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
-                ";
-            } else {
-//                print "Not removing indexing for ".get_class($this)."\n";
-            }
-            unset($actions['keepIndexed']);
-        } else {
-                $qactions[] = " 
-/* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
-                ";
         }
 
         if (isset($actions['cleanIndex'])) {
