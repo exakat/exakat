@@ -14,6 +14,7 @@ class Token {
                                  'Property', 
                                  'Keyvalue', 
                                  '_Function',
+                                 '_Include', 
                                  'Staticproperty',
                                  'Not', 
                                  '_Break', 

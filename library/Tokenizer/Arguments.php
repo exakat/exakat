@@ -131,7 +131,7 @@ class Arguments extends TokenAuto {
         // @note echo 's' : no parenthesis
         $this->conditions = array( 0 => array('atom' => 'none',
                                               'token' => array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE',)),
-                                   1 => array('atom'  => 'yes'),
+                                   1 => array('atom'  => 'yes', 'notAtom' => 'Sequence'),
                                    2 => array('filterOut' => array_merge(array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_EQUAL', 'T_QUESTION', 'T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', ),
                                                                         Addition::$operators, Multiplication::$operators)) 
         );

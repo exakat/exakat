@@ -23,7 +23,8 @@ class Sequence extends TokenAuto {
                                 'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_IF', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
                                 'T_THROW', 'T_CATCH', 'T_ABSTRACT', 
                                  );
-        $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators );
+        $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators, 
+                                        _Include::$operators );
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CATCH',
                                            'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_ELSEIF' ), 
                                      Assignation::$operators, Logical::$operators);
@@ -94,7 +95,7 @@ class Sequence extends TokenAuto {
         $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Var', 'Global', 'Static', 
                            'Const', 'Ppp', 'Foreach', 'For', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
                            'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison',
-                           'Noscream',  );
+                           'Noscream', 'Property', 'Staticproperty', );
         $this->conditions = array(-1 => array('filterOut' => array_merge(array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', 'T_ABSTRACT', 'T_FINAL'),
                                                              Assignation::$operators)), 
                                    0 => array('atom' => $operands2),

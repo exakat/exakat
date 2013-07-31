@@ -1,0 +1,64 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    {
+    Label : CODE
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          'b'
+        Label : CODE
+          Block With Next
+          Label : CODE
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $d
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $c
+            Label : ELEMENT
+              require_once
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  e
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'f'
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              g
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'h'
+      Label : ELEMENT
+        case
+        Label : CASE
+          'i'
+        Label : CODE
+          void
+      Label : ELEMENT
+        case
+        Label : CASE
+          'j'
+        Label : CODE
+          Block With Next
+          Label : CODE
+            Sequence With Next
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                1
