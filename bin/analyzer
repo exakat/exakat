@@ -146,6 +146,7 @@ while(check_prev($prev, $extra_rounds)) {
     fwrite($log, "round $round)\t".(($rend - $rbegin)*1000)."\n");
 
     $count = Token::countLeftToken();
+    fwrite($log, "Remaining token to process : $count\n");
 
     if ($count) {
         display( "$round) Remains $count of $total tokens to process! \n");
