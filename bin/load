@@ -77,20 +77,6 @@ function process_file($filename) {
     
     $client = new Client();
 
-    if (NEO_VERSION) {
-        $racines = new NodeIndex($client, 'racines');
-        $regex = Token::$types; 
-        $regexIndex = array();
-        foreach($regex as $r) {
-            $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
-                                                 ->setProperty('code', 'Index for '.$r)
-                                                 ->setProperty('file', $filename)
-                                                 ->setProperty('index', 'yes')->save();
-            $racines->add($regexIndex[$r], 'token', $r);
-        }
-    }
-
-    
     // @doc delete old tokens
     $queryTemplate = "g.V.has('file', '$file').outE.each{ g.removeEdge(it); }";
     $params = array('type' => 'IN');
@@ -101,6 +87,20 @@ function process_file($filename) {
     $params = array('type' => 'IN');
     $query = new Gremlin\Query($client, $queryTemplate, $params);
     $edges = $query->getResultSet();
+
+    if (NEO_VERSION) {
+        $racines = new NodeIndex($client, 'racines');
+        $regex = Tokenizer\Token::$types; 
+        $regexIndex = array();
+        foreach($regex as $r) {
+            $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
+                                                 ->setProperty('code', 'Index for '.$r)
+                                                 ->setProperty('file', $filename)
+                                                 ->setProperty('index', 'yes')
+                                                 ->save();
+            $racines->add($regexIndex[$r], 'token', $r);
+        }
+    }
     
     // load new tokens
     $line = 0;
@@ -196,11 +196,11 @@ function process_file($filename) {
         }
 
         if (NEO_VERSION) {
-            $regex = Token::$operators; 
+            $regex = Tokenizer\Token::$types; 
             foreach($regex as $r) {
-                $class = "Tokenizer\$r";
-                if (in_array($token_value, $r::$operators)) { 
-                   $regexIndex[$r]->relateTo($T[$id], 'INDEX')->save();
+                $class = "Tokenizer\\$r";
+                if (in_array($token_value, $class::$operators)) { 
+                    $regexIndex[$r]->relateTo($T[$id], 'INDEXED')->save();
                 }
             }
         }

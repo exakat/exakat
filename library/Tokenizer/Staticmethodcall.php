@@ -3,21 +3,22 @@
 namespace Tokenizer;
 
 class Staticmethodcall extends TokenAuto {
+    static public $operators = array('T_DOUBLE_COLON');
+
     function _check() {
-        
-        $operands = array('Constant', 'String', 'Variable');
+        $operands = array('Constant', 'String', 'Variable', 'Array');
+
         $this->conditions = array( -1 => array('atom' => $operands), 
-                                    0 => array('token' => 'T_DOUBLE_COLON'),
+                                    0 => array('token' => Staticmethodcall::$operators),
                                     1 => array('atom' => 'Functioncall'),
                                  );
         
         $this->actions = array('makeEdge'   => array( -1 => 'CLASS',
                                                        1 => 'METHOD'),
-                               'atom'       => 'Staticmethodcall',
-                               );
-        $r = $this->checkAuto(); 
+                               'atom'       => 'Staticmethodcall');
+        $this->checkAuto(); 
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 

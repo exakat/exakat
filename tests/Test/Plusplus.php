@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Plusplus extends Tokenizeur {
-    /* 22 methods */
+    /* 25 methods */
 
     public function testPlusplus01()  { $this->generic_test('Plusplus.01'); }
     public function testPlusplus02()  { $this->generic_test('Plusplus.02'); }
@@ -33,5 +33,7 @@ class Plusplus extends Tokenizeur {
     public function testPlusplus22()  { $this->generic_test('Plusplus.22'); }
     public function testPlusplus23()  { $this->generic_test('Plusplus.23'); }
 
-}
+}    public function testPlusplus24()  { $this->generic_test('Plusplus.24'); }
+    public function testPlusplus25()  { $this->generic_test('Plusplus.25'); }
+
 ?>

@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concat
+        Label : CONCAT
+          b
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            d
+        Label : CONCAT
+          e
+    Label : LEFT
+      $a

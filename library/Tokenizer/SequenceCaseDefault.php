@@ -10,7 +10,8 @@ class SequenceCaseDefault extends TokenAuto {
         $this->conditions = array( 0 => array('atom' => $operands),
                                    1 => array('atom' => $operands),
         );
-        $this->actions = array('insertSequenceCaseDefault'  => true);
+        $this->actions = array('insertSequenceCaseDefault'  => true,
+                               'keepIndexed' => true);
         $r = $this->checkAuto();
         
         return $r;

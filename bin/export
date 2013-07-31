@@ -29,7 +29,7 @@ if ($id = array_search('-o', $args)) {
     define('FILE', false);
 }
 
-$queryTemplate = "g.V.except([g.v(0)])";
+$queryTemplate = "g.V.except([g.v(0)])"; // .hasNot('index', 'yes')
 $params = array('type' => 'IN');
 $query = new Gremlin\Query($client, $queryTemplate, $params);
 try { 

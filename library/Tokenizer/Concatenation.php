@@ -81,7 +81,8 @@ class Concatenation extends TokenAuto {
                                    1 => array('atom' => array('String', 'Phpcode', 'Concatenation', )),
         ); 
 
-        $this->actions = array('insertConcat'    => "Concat" );
+        $this->actions = array('insertConcat' => "Concat",
+                               'keepIndexed'  => true);
         $r = $this->checkAuto();
 
         return $r;

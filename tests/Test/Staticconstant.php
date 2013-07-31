@@ -7,8 +7,10 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Staticconstant extends Tokenizeur {
-    /* 1 methods */
+    /* 3 methods */
 
     public function testStaticconstant01()  { $this->generic_test('Staticconstant.01'); }
+    public function testStaticconstant02()  { $this->generic_test('Staticconstant.02'); }
+    public function testStaticconstant03()  { $this->generic_test('Staticconstant.03'); }
 }
 ?>

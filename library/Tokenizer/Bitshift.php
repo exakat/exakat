@@ -20,7 +20,9 @@ class Bitshift extends TokenAuto {
                                                       ),
                                'atom'       => 'Bitshift',
                                );
-        return $this->checkAuto();
+        $this->checkAuto();
+        
+        return $this->checkRemaining();
     }
 }
 ?>

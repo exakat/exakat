@@ -27,7 +27,7 @@ class _Include extends TokenAuto {
                                    2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_EQUAL' )),
         );
         
-        $this->actions = array('makeEdge'    => array('1' => 'ARGUMENTS',),
+        $this->actions = array('makeEdge'    => array(1 => 'ARGUMENTS',),
                                'atom'       => 'Include');
         $this->checkAuto();
         

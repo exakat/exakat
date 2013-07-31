@@ -152,7 +152,7 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note End of PHP script
-        $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS')),), 
+        $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS', 'T_BREAK')),), 
                                   -1 => array('atom' => $operands,
                                               'notToken' => 'T_ELSEIF', ),
                                    0 => array('token' => 'T_SEMICOLON',

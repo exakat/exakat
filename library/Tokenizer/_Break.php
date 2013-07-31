@@ -11,7 +11,9 @@ class _Break extends TokenAuto {
                                   1 => array('token' => 'T_SEMICOLON')
                                   );
         
-        $this->actions = array('addEdge'   => array(0 => array('Void' => 'LEVEL')));
+        $this->actions = array('addEdge'     => array(0 => array('Void' => 'LEVEL')),
+                               'keepIndexed' => true
+                               );
         $this->checkAuto();
 
         $this->conditions = array(0 => array('token' => _Break::$operators,

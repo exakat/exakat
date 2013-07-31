@@ -1,0 +1,44 @@
+<?php
+
+Label : NEXT
+  $a
+  Label : NEXT
+    =
+    Label : NEXT
+      $b
+      Label : NEXT
+        ?
+        Label : NEXT
+          d
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $e
+          Label : NEXT
+            :
+            Label : NEXT
+              {
+              Label : VARIABLE
+                [
+                Label : VARIABLE
+                  $x
+                Label : INDEX
+                  "y"
+              Label : INDEX
+                2
+              Label : NEXT
+                ::
+                Label : NEXT
+                  h
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $i
+                  Label : NEXT
+                    ;
+                    Label : NEXT
+                      ?>
+                      Label : NEXT
+                        /**/
+                        Label : NEXT
+                          /* * */

@@ -8,7 +8,7 @@ class TokenAuto extends Token {
     public function prepareQuery() {
         $class = str_replace("Tokenizer\\", '', get_class($this));
         if (NEO_VERSION && in_array($class, Token::$types)) {
-            $query = "g.idx('racines')[['token':'$class']].out('INDEX')";
+            $query = "g.idx('racines')[['token':'$class']].out('INDEXED')";
         } else {
             $query = "g.V";
         }
@@ -717,16 +717,24 @@ it.as('origin').in('$link').has('atom','$atom').each{
         g.addEdge(f, it, '$link');
     };
     g.removeVertex(it);    
-//    it.setProperty('code', it.code + ' mergePrev');
 }
             ";
             }
             unset($actions['mergePrev']);
         }
 
-        if (get_class($this) == "Tokenizer\\Multiplication") {
+        if (isset($actions['keepIndexed'])) {
+            if(!$actions['keepIndexed']) {
                 $qactions[] = " 
-/* Multiplication */  it.inE('INDEX').each{ g.removeEdge(it); }
+/* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
+                ";
+            } else {
+//                print "Not removing indexing for ".get_class($this)."\n";
+            }
+            unset($actions['keepIndexed']);
+        } else {
+                $qactions[] = " 
+/* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
                 ";
         }
         

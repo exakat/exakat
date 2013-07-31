@@ -5,10 +5,12 @@ namespace Tokenizer;
 class Token {
     protected static $client = null;
     protected static $reserved = array();
+
+//  Cannot be used, because T_QUOTE is used both for opening and closing. 
+//                                 'String', 
     
-    public static $types = array('Variable', 
+    public static $types = array(//'Variable', conflict between transform and indexes. 
                                  'Boolean', 
-                                 'String', 
                                  'Sign',
                                  '_Array', 
                                  'Property', 
@@ -16,7 +18,7 @@ class Token {
                                  '_Function',
                                  '_Include', 
                                  'Cast',
-                                 
+                                 'Bitshift', 
                                  'Arrayappend',  
                                  '_Instanceof',  
                                  '_Break',       
@@ -25,8 +27,14 @@ class Token {
                                  '_Goto',        
                                  'Staticproperty',
                                  'Not', 
-                                 '_Break', 
                                  'Multiplication', 
+                                 'Addition', 
+                                 'Parenthesis', 
+                                 'Logical',
+                                 'Heredoc',
+                                 'Reference',
+                                 'Ternary', 
+                                 'Noscream', 
                                 );
     
     function __construct($client) {
@@ -105,7 +113,7 @@ class Token {
         if (!NEO_VERSION) { return true; }
         $class = str_replace("Tokenizer\\", '', get_class($this));
         if (in_array($class, Token::$types)) {
-            $query = "g.idx('racines')[['token':'$class']].out('INDEX').count()";
+            $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
 
             return Token::queryOne($query) > 0;
         } else {

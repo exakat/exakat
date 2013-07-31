@@ -31,7 +31,6 @@ $classes = array(
 //    'Integer',
 //    'Float',
     'Boolean',      // Fait
-    'String',       // Fait
     'Sign',         // Fait
     '_Array',       // Fait
     'Property',     // Fait
@@ -62,10 +61,11 @@ $classes = array(
     'Methodcall',
     'Staticmethodcall',
     'Staticconstant',
-    'Multiplication',   // Fait
-    'Addition', 
-    'Bitshift',
+    'Multiplication',// Fait
+    'Addition',     // Fait
+    'Bitshift',     // Fait
     'Concatenation', // because test concatenation 37
+    'String',       // Fait
     '_Var',
     '_Ppp',
     '_Static',
@@ -102,8 +102,9 @@ $client = new Client();
 $regex = array();
 foreach($classes as $class) {
     $new = "Tokenizer\\$class";
+    
     $r = new $new($client);
-    if ($r->checkRemaining()) {
+    if ($new.$r->checkRemaining()) {
         $regex[$class] = $r;
     }
 }
