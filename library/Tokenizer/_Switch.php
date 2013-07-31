@@ -3,8 +3,10 @@
 namespace Tokenizer;
 
 class _Switch extends TokenAuto {
+    static public $operators = array('T_SWITCH');
+
     function _check() {
-        $this->conditions = array(0 => array('token' => 'T_SWITCH',
+        $this->conditions = array(0 => array('token' => _Switch::$operators,
                                              'atom' => 'none'),
                                   1 => array('token' => array('T_OPEN_PARENTHESIS')),
                                   2 => array('atom' => 'yes'),
@@ -17,7 +19,9 @@ class _Switch extends TokenAuto {
                                                         3 => 'DROP',
                                                         4 => 'CASES'),
                                'atom'       => 'Switch');
-        return $this->checkAuto();
+        $this->checkAuto();
+        
+        return $this->checkRemaining();
     }
 }
 

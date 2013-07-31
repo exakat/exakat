@@ -3,12 +3,12 @@
 namespace Tokenizer;
 
 class _Ppp extends TokenAuto {
+    static public $operators = array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC');
+
     function _check() {
-    
-        $tokens = array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC');
         $values = array('T_EQUAL', 'T_COMMA');
     // class x { protected $x }
-        $this->conditions = array( 0 => array('token' => $tokens),
+        $this->conditions = array( 0 => array('token' => _Ppp::$operators),
                                    1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static', 'Function', 'Abstract'  )),
                                    2 => array('filterOut' => $values),
                                    // T_SEMICOLON because of _Class 28 test
@@ -19,10 +19,10 @@ class _Ppp extends TokenAuto {
                                'atom'      => 'Ppp',
                                );
 
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
     // class x { var $x = 2 }
-        $this->conditions = array( 0 => array('token' => $tokens),
+        $this->conditions = array( 0 => array('token' =>  _Ppp::$operators),
                                    1 => array('atom' => 'Assignation'),
                                    2 => array('token' => array('T_SEMICOLON')),
                                  );
@@ -31,10 +31,10 @@ class _Ppp extends TokenAuto {
                                'atom'   => 'Ppp',
                                );
 
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
     // class x { var $x, $y }
-        $this->conditions = array( 0 => array('token' => $tokens),
+        $this->conditions = array( 0 => array('token' => _Ppp::$operators),
                                    1 => array('atom' => 'Arguments'),
                                    2 => array('filterOut' => array('T_COMMA')),
                                  );
@@ -43,9 +43,9 @@ class _Ppp extends TokenAuto {
                                'atom'       => 'Ppp',
                                );
 
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 ?>

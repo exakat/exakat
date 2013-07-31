@@ -43,8 +43,9 @@ class Assignation extends TokenAuto {
                                                       '-1' => 'LEFT'),
                                'atom'       => 'Assignation');
 
-        return $this->checkAuto();
+        $this->checkAuto();
+
+        return $this->checkRemaining();
     } 
-    
 }
 ?>

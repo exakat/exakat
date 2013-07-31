@@ -3,8 +3,10 @@
 namespace Tokenizer;
 
 class _Catch extends TokenAuto {
+    static public $operators = array('T_CATCH');
+
     function _check() {
-        $this->conditions = array(0 => array('token' => 'T_CATCH',
+        $this->conditions = array(0 => array('token' => _Catch::$operators,
                                              'atom' => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom' => 'String'), 
@@ -19,10 +21,12 @@ class _Catch extends TokenAuto {
                                                         4 => 'DROP',
                                                         5 => 'CODE',
                                                         ),
-        
+                               'cleanIndex' => true,
                                'atom'       => 'Catch');
                                
-        return $this->checkAuto();
+        $this->checkAuto();
+
+        return $this->checkRemaining();
     }
 }
 

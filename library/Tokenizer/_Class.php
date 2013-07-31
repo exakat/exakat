@@ -3,10 +3,12 @@
 namespace Tokenizer;
 
 class _Class extends TokenAuto {
+    static public $operators = array('T_CLASS');
+
     function _check() {
     
     // class x {}
-        $this->conditions = array( 0 => array('token' => 'T_CLASS'),
+        $this->conditions = array( 0 => array('token' => _Class::$operators),
                                    1 => array('atom' => 'String')
                                  );
         
@@ -14,7 +16,7 @@ class _Class extends TokenAuto {
                                'atom'       => 'Class_tmp',
                                );
 
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
     // class x extends y {}
         $this->conditions = array( 0 => array('atom' => 'Class_tmp'),
@@ -25,7 +27,7 @@ class _Class extends TokenAuto {
         $this->actions = array('transform'   => array( 1 => 'DROP',
                                                        2 => 'EXTENDS')
                                );
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
     // class x implements a {}
         $this->conditions = array( 0 => array('atom' => 'Class_tmp'),
@@ -37,7 +39,7 @@ class _Class extends TokenAuto {
         $this->actions = array('transform'   => array( 1 => 'DROP',
                                                        2 => 'IMPLEMENTS')
                                );
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
     // class x implements a,b,c {}
         $this->conditions = array( 0 => array('atom' => 'Class_tmp'),
@@ -49,7 +51,7 @@ class _Class extends TokenAuto {
         $this->actions = array('transform'   => array( 1 => 'DROP',
                                                        2 => 'TO_IMPLEMENTS')
                                );
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
     // class x {}
         $this->conditions = array( 0 => array('atom' => 'Class_tmp'),
@@ -62,7 +64,7 @@ class _Class extends TokenAuto {
                                'atom'       => 'Class',
                                 );
 
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
     // class x { // some real code}
         $this->conditions = array( 0 => array('atom' => 'Class_tmp'),
@@ -73,9 +75,9 @@ class _Class extends TokenAuto {
                                'atom'       => 'Class',
                                 );
 
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 ?>

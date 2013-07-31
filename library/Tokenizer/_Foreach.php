@@ -3,10 +3,11 @@
 namespace Tokenizer;
 
 class _Foreach extends TokenAuto {
+    static public $operators = array('T_FOREACH');
+
     function _check() {
-    
     // @doc foreach($x as $y) { code }
-        $this->conditions = array( 0 => array('token' => 'T_FOREACH',
+        $this->conditions = array( 0 => array('token' => _Foreach::$operators,
                                               'atom' => 'none'),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 
@@ -27,9 +28,9 @@ class _Foreach extends TokenAuto {
                                                       ),
                                'atom'       => 'Foreach',
                                );
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 

@@ -3,12 +3,12 @@
 namespace Tokenizer;
 
 class _Var extends TokenAuto {
+    static public $operators = array('T_VAR');
+
     function _check() {
-    
-        $tokens = array('T_VAR');
         $values = array('T_EQUAL', 'T_COMMA');
     // class x { var $x }
-        $this->conditions = array( 0 => array('token' => $tokens),
+        $this->conditions = array( 0 => array('token' => _Var::$operators),
                                    1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static' )),
                                    2 => array('filterOut' => $values),
                                    // T_SEMICOLON because of _Class 28 test
@@ -19,10 +19,10 @@ class _Var extends TokenAuto {
                                'atom'      => 'Var',
                                );
 
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
     // class x { var $x = 2 }
-        $this->conditions = array( 0 => array('token' => $tokens),
+        $this->conditions = array( 0 => array('token' => _Var::$operators),
                                    1 => array('atom' => 'Assignation'),
                                    2 => array('token' => array('T_SEMICOLON')),
                                  );
@@ -31,10 +31,10 @@ class _Var extends TokenAuto {
                                'atom'   => 'Var',
                                );
 
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
     // class x { var $x, $y }
-        $this->conditions = array( 0 => array('token' => $tokens),
+        $this->conditions = array( 0 => array('token' => _Var::$operators),
                                    1 => array('atom' => 'Arguments'),
                                    2 => array('filterOut' => array('T_COMMA')),
                                  );
@@ -43,8 +43,9 @@ class _Var extends TokenAuto {
                                'atom'       => 'Var',
                                );
 
-        $r = $this->checkAuto(); 
-        return $r;    
+        $this->checkAuto(); 
+
+        return $this->checkRemaining();
     }
 }
 ?>

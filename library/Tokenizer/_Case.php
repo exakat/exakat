@@ -54,7 +54,7 @@ class _Case extends TokenAuto {
                                 'atom' => 'Case' );
         $r = $this->checkAuto();
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 

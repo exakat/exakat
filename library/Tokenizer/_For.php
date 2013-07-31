@@ -3,10 +3,12 @@
 namespace Tokenizer;
 
 class _For extends TokenAuto {
+    static public $operators = array('T_FOR');
+
     function _check() {
     
     // @doc for(a; b; c) { code }
-        $this->conditions = array( 0 => array('token' => 'T_FOR',
+        $this->conditions = array( 0 => array('token' => _For::$operators,
                                               'atom' => 'none'),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom' => 'yes'),
@@ -29,10 +31,10 @@ class _For extends TokenAuto {
                                                       ),
                                'atom'       => 'For',
                                );
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
     // @doc for(a; b; c) : code endfor
-        $this->conditions = array( 0  => array('token' => 'T_FOR',
+        $this->conditions = array( 0  => array('token' => _For::$operators,
                                                'atom' => 'none'),
                                    1  => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2  => array('atom' => 'yes'),
@@ -60,9 +62,9 @@ class _For extends TokenAuto {
                                'atom'       => 'For',
                                'property' => array('Alternative' => 'yes'),
                                );
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 

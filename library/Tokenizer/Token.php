@@ -37,7 +37,6 @@ class Token {
                                  'Logical',
                                  'Heredoc',
                                  'Reference',
-                                 'Ternary', 
                                  'Noscream', 
                                  'Preplusplus',
                                  'Postplusplus',
@@ -47,6 +46,26 @@ class Token {
                                  '_Global',
                                  '_New',
                                  'Nsname',
+                                 '_Var',
+                                 '_Ppp',
+                                 '_Static',
+                                 'Assignation',
+                                 'Comparison',
+                                 'Ternary',
+                                 '_Return',
+                                 '_Const',
+                                 //'_Class' Because to Class_tmp
+                                 '_Abstract',
+                                 '_Final',
+                                 // '_Case', Check index in the regex
+                                 // '_Default', Check index in the regex
+                                 '_Switch',
+                                 '_Try',
+                                 '_Catch',
+                                 '_Foreach',
+                                 '_For',
+                                 '_Dowhile',
+                                 '_While',
                                 );
     
     function __construct($client) {

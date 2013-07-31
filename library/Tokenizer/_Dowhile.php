@@ -3,8 +3,10 @@
 namespace Tokenizer;
 
 class _Dowhile extends TokenAuto {
+    static public $operators = array('T_DO');
+
     function _check() {
-        $this->conditions = array(-2 => array('token' => 'T_DO'),
+        $this->conditions = array(-2 => array('token' => _Dowhile::$operators),
                                   -1 => array('atom'  => 'Block'),
                                    0 => array('token' => 'T_WHILE'),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
@@ -20,9 +22,9 @@ class _Dowhile extends TokenAuto {
                                                         ),
                                'atom'       => 'Dowhile');
                                
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 

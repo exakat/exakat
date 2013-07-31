@@ -3,8 +3,10 @@
 namespace Tokenizer;
 
 class _While extends TokenAuto {
+    static public $operators = array('T_WHILE');
+
     function _check() {
-        $this->conditions = array(0 => array('token' => 'T_WHILE'),
+        $this->conditions = array(0 => array('token' => _While::$operators),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom'  => 'yes'),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
@@ -16,11 +18,11 @@ class _While extends TokenAuto {
                                                          3 => 'DROP',
                                                          4 => 'LOOP',      ),
                                'atom'       => 'While');
-        $r = $this->checkAuto();
+        $this->checkAuto();
         
         $this->conditions = array(-2 => array('filterOut2' => array('T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS', 'T_DO',)),
                                   -1 => array('atom'  => 'Block'),
-                                   0 => array('token' => 'T_WHILE'),
+                                   0 => array('token' => _While::$operators),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => 'yes'),
                                    3 => array('token' => 'T_CLOSE_PARENTHESIS'),
@@ -32,9 +34,9 @@ class _While extends TokenAuto {
                                                          3 => 'DROP',
                                                         ),
                                'atom'       => 'While');
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
-        $this->conditions = array(0 => array('token' => 'T_WHILE'),
+        $this->conditions = array(0 => array('token' => _While::$operators),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom'  => 'yes'),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
@@ -52,9 +54,9 @@ class _While extends TokenAuto {
                                                         ),
                                'atom'       => 'While');
                                
-        $r = $this->checkAuto();
+        $this->checkAuto();
         
-        return $r;
+        return $this->checkRemaining();
     }
 }
 

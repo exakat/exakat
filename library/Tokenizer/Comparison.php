@@ -4,8 +4,8 @@ namespace Tokenizer;
 
 class Comparison extends TokenAuto {
     static public $operators = array('T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER', );
+
     function _check() {
-    
         $operands = array('Variable', 'Array', 'Property', 'Integer', 'Sign', 'Float', 'Constant', 'Boolean',
                           'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall',
                            'Magicconstant', 'Staticconstant', 'String', 'Addition', 'Multiplication',
@@ -27,16 +27,9 @@ class Comparison extends TokenAuto {
                                                       ),
                                'atom'       => 'Comparison',
                                );
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
-        return $r;
-    }
-
-    
-    function reserve() {
-        Token::$reserved = array_merge(Token::$reserved, Comparison::$operators);
-        
-        return true;
+        return $this->checkRemaining();
     }
 }
 

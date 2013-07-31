@@ -47,7 +47,7 @@ $classes = array(
     '_New',         // Fait
     '_Global',      // Fait
     'Nsname',       // Fait
-    '_Include',
+    '_Include',     // Fait
     'Preplusplus',  // Fait
     'Postplusplus', // Fait
     'Noscream',     // Fait
@@ -56,40 +56,40 @@ $classes = array(
     'ArgumentsNoParenthesis', // Fait
     'Functioncall', // Fait
     'Methodcall',   // Fait
-    'Staticmethodcall',
+    'Staticmethodcall', // Fait
     'Staticconstant',//Fait
     'Multiplication',// Fait
     'Addition',     // Fait
     'Bitshift',     // Fait
     'Concatenation', // because test concatenation 37
     'String',       // Fait
-    '_Var',
-    '_Ppp',
-    '_Static',
-    'Assignation',
-    'Comparison',
-    'Ternary',
-    'Constant',
-    '_Return',
+    '_Var',         // Fait
+    '_Ppp',         // Fait
+    '_Static',      // Fait
+    'Assignation',  // Fait
+    'Comparison',   // Fait
+    'Ternary',      // Fait
+    'Constant',     // Fait
+    '_Return',      // Fait
     'Sequence',
     'SequenceCaseDefault',
-    '_Const',
-    'Block',
-    '_Class',
-    '_Abstract',
-    '_Final',
-    'Typehint',
+    '_Const',       // Fait
+    'Block',    
+    '_Class',       // Fait
+    '_Abstract',    // Fait
+    '_Final',       // Fait
+    'Typehint', 
     '_Throw',       // Fait
-    '_Case',
-    '_Default',
-    '_Switch',
+    '_Case',        // Fait
+    '_Default',     // Fait
+    '_Switch',      // Fait
     'Ifthen',
     '_Foreach',
     '_For',
     '_While',
-    '_Dowhile',
-    '_Catch',
-    '_Try',
+    '_Dowhile',     // 
+    '_Catch',       // Fait
+    '_Try',         // Fait
     'Phpcode',
     'Void',
 );

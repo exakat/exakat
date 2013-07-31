@@ -742,7 +742,7 @@ it.as('origin').in('$link').has('atom','$atom').each{
             $e = $actions['cleanIndex'];
             $qactions[] = " 
 /* Remove children's index */  
-it.out('$e').each{ 
+it.out('ELEMENT').each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 
