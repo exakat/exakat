@@ -77,16 +77,14 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        ;
-        Label : ELEMENT
-          o
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              'r'
-            Label : ARGUMENT
-              .
-              Label : CONCAT
-                $q
-              Label : CONCAT
-                'p'
+        o
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            'r'
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              $q
+            Label : CONCAT
+              'p'

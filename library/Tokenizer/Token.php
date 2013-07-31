@@ -27,6 +27,8 @@ class Token {
                                  '_Goto',        
                                  'Staticproperty',
                                  'Staticconstant',
+                                 'Functioncall',
+                                 'Methodcall',
                                  'Not', 
                                  'Multiplication', 
                                  'Addition', 
@@ -39,6 +41,8 @@ class Token {
                                  'Preplusplus',
                                  'Postplusplus',
                                  '_Throw',
+                                 'ArgumentsNoParenthesis',
+                                 'Arguments',
                                 );
     
     function __construct($client) {

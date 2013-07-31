@@ -6,6 +6,7 @@ class Functioncall extends TokenAuto {
     static $operators = array('T_STRING', 'T_ECHO', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 'T_NS_SEPARATOR', 
                               'T_VARIABLE', 'T_PRINT', 'T_ISSET', 'T_LIST', 'T_EVAL', 
                               'T_EXIT', 'T_DIE');
+
     function _check() {
         
         // functioncall(with arguments)
@@ -24,7 +25,7 @@ class Functioncall extends TokenAuto {
                                'atom'       => 'Functioncall',
                                );
                                
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
         // functioncall(with arguments)
         $this->conditions = array( 0 => array('token' => array('T_ECHO', 'T_PRINT', 'T_EXIT'),
@@ -37,9 +38,9 @@ class Functioncall extends TokenAuto {
         $this->actions = array('makeEdge'    => array('1' => 'ARGUMENTS',),
                                'atom'       => 'Functioncall',
                                );
-        $r = $this->checkAuto();
+        $this->checkAuto();
         
-        return $r;
+        return $this->checkRemaining();
     }
 }
 ?>

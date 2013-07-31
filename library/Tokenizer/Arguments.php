@@ -3,17 +3,18 @@
 namespace Tokenizer;
 
 class Arguments extends TokenAuto {
+    static public $operators = array('T_OPEN_PARENTHESIS', 'T_COMMA');
     function _check() {
         
         // @note End of )
-        $this->conditions = array( 0 => array('token' => array('T_OPEN_PARENTHESIS', 'T_COMMA'),
-                                             'atom' => 'none'),
-                                   1 => array('token' => array('T_CLOSE_PARENTHESIS', 'T_COMMA'),
+        $this->conditions = array( 0 => array('token' => Arguments::$operators,
+                                              'atom' => 'none'),
+                                   1 => array('token' => Arguments::$operators,
                                               'atom'  => 'none'),
         );
         
         $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')));
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
         $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 
                              'Integer', 'Float', 'Not', 'Variable','Array','Concatenation', 'Sign',
@@ -28,7 +29,7 @@ class Arguments extends TokenAuto {
         $this->conditions = array(-2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR', 'T_STRING'),
                                                                          Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
                                   -1 => array('atom' => $operands ),
-                                   0 => array('code' => ',',
+                                   0 => array('token' => 'T_COMMA',
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR','T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_VARIABLE',),
@@ -43,12 +44,12 @@ class Arguments extends TokenAuto {
                                'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
                                'atom'       => 'Arguments',
                                );
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
         // @note implements a,b (two only)
         $this->conditions = array(-2 => array('token' => 'T_IMPLEMENTS' ),
                                   -1 => array('token' => 'T_STRING'),
-                                   0 => array('code' => ',',
+                                   0 => array('token' => 'T_COMMA',
                                               'atom' => 'none'),
                                    1 => array('token' => 'T_STRING')
                             );
@@ -61,12 +62,12 @@ class Arguments extends TokenAuto {
                                'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
                                'atom'       => 'Arguments',
                                );
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
         // @note implements a,b,c (three or more)
         $this->conditions = array(-2 => array('token' => 'T_IMPLEMENTS' ),
                                   -1 => array('atom' => 'Arguments'),
-                                   0 => array('code' => ',',
+                                   0 => array('token' => 'T_COMMA',
                                               'atom' => 'none'),
                                    1 => array('token' => 'T_STRING')
                             );
@@ -79,15 +80,14 @@ class Arguments extends TokenAuto {
                                'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
                                'atom'       => 'Arguments',
                                );
-        $r = $this->checkAuto();
-
+        $this->checkAuto();
 
         // @note End of )
         $this->conditions = array(-2 => array('filterOut' => array("T_NS_SEPARATOR")),
                                   -1 => array('atom' => $operands),
-                                   0 => array('code' => ',',
-                                             'atom' => 'none'),
-                                   1 => array('code' => ')',
+                                   0 => array('token' => 'T_COMMA',
+                                              'atom' => 'none'),
+                                   1 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
         );
         
@@ -96,65 +96,35 @@ class Arguments extends TokenAuto {
                                'order'    => array('-1' => '1'),
                                'atom'       => 'Arguments',
                                );
-
-        $r = $this->checkAuto();
+        $this->checkAuto();
         
         // @note f(1) : no , 
         $this->conditions = array(-1 => array('token' => Functioncall::$operators),
-                                   0 => array('code' => '(',
-                                             'atom' => 'none'),
+                                   0 => array('token' => 'T_OPEN_PARENTHESIS',
+                                              'atom' => 'none'),
                                    1 => array('atom' => $operands_wa),
-                                   2 => array('code' => ')',
+                                   2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
-                                   3 => array('filterOut' => array(/*'T_OBJECT_OPERATOR',*/ 'T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')),
+                                   3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')),
         );
         
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
-
-        $r = $this->checkAuto();        
+        $this->checkAuto();
 
         // @note f() : no argument
         $this->conditions = array(-2 => array('filterOut' => array('T_NS_SEPARATOR')),
                                   -1 => array('token' => array('T_STRING', 'T_ECHO', 'T_UNSET', 'T_EVAL', 'T_PRINT', 'T_ARRAY', 'T_VARIABLE', 'T_NS_SEPARATOR')),
-                                   0 => array('code' => '(',
-                                             'atom' => 'none'),
-                                   1 => array('code' => ')',
+                                   0 => array('token' => 'T_OPEN_PARENTHESIS',
+                                              'atom' => 'none'),
+                                   1 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
                                    2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON')),
         );
         
         $this->actions = array('addEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
+        $this->checkAuto();
 
-        $r = $this->checkAuto();        
-
-
-        // @note echo 's' : no parenthesis
-        $this->conditions = array( 0 => array('atom' => 'none',
-                                              'token' => array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE',)),
-                                   1 => array('atom'  => 'yes', 'notAtom' => array('Sequence', 'Arguments')),
-                                   2 => array('filterOut' => array_merge(array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_EQUAL', 'T_QUESTION', 'T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', ),
-                                                                        Addition::$operators, Multiplication::$operators)) 
-        );
-        
-        $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'keepIndexed' => true);
-
-        $r = $this->checkAuto();        
-
-        // @note exit; no parenthesis, no argument. 
-        $this->conditions = array( 0 => array('atom' => 'none',
-                                              'token' => array('T_EXIT')),
-                                   1 => array('token'  => 'T_SEMICOLON') 
-        );
-        
-        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'keepIndexed' => true);
-
-        $r = $this->checkAuto();        
-
-        
-
-        return $r;
+        return $this->checkRemaining();
     }
 }
 ?>
