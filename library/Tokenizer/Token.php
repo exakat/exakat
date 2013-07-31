@@ -43,6 +43,9 @@ class Token {
                                  '_Throw',
                                  'ArgumentsNoParenthesis',
                                  'Arguments',
+                                 '_Global',
+                                 '_New',
+                                 'Nsname',
                                 );
     
     function __construct($client) {

@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Arguments extends TokenAuto {
     static public $operators = array('T_OPEN_PARENTHESIS', 'T_COMMA');
+
     function _check() {
         
         // @note End of )

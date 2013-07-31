@@ -737,6 +737,20 @@ it.as('origin').in('$link').has('atom','$atom').each{
 /* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
                 ";
         }
+
+        if (isset($actions['cleanIndex'])) {
+            $e = $actions['cleanIndex'];
+            $qactions[] = " 
+/* Remove children's index */  
+it.out('$e').each{ 
+    it.inE('INDEXED').each{    
+        g.removeEdge(it);
+    } 
+}
+                ";
+            unset($actions['cleanIndex']);
+        }        
+        
         
         if ($remainder = array_keys($actions)) {
             print "Warning : the following ".count($remainder)." actions were ignored : ".join(', ', $remainder)."\n";

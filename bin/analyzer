@@ -44,9 +44,9 @@ $classes = array(
     '_Continue',    // Fait
     'Label',        // Fait
     '_Goto',        // Fait
-    '_New',
-    '_Global',
-    'Nsname',
+    '_New',         // Fait
+    '_Global',      // Fait
+    'Nsname',       // Fait
     '_Include',
     'Preplusplus',  // Fait
     'Postplusplus', // Fait

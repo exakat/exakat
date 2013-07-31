@@ -9,13 +9,13 @@ class Functioncall extends TokenAuto {
 
     function _check() {
         
-        // functioncall(with arguments)
+        // functioncall(with arguments or void)
         $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
                                     -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
                                     0 => array('token' => Functioncall::$operators),
                                     1 => array('atom'  => 'none',
                                                'token' => 'T_OPEN_PARENTHESIS' ),
-                                    2 => array('atom'  => 'Arguments'),
+                                    2 => array('atom'  =>  array('Arguments', 'Void')),
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
         );
