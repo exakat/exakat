@@ -95,7 +95,7 @@ class Sequence extends TokenAuto {
         $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Var', 'Global', 'Static', 
                            'Const', 'Ppp', 'Foreach', 'For', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
                            'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison',
-                           'Noscream', 'Property', 'Staticproperty', );
+                           'Noscream', 'Property', 'Staticproperty', 'Label',);
         $this->conditions = array(-1 => array('filterOut' => array_merge(array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', 'T_ABSTRACT', 'T_FINAL'),
                                                              Assignation::$operators)), 
                                    0 => array('atom' => $operands2),

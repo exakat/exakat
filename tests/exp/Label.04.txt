@@ -1,0 +1,34 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    goto
+    Label : LABEL
+      A
+  Label : ELEMENT
+    Sequence
+    Label : ELEMENT
+      :
+      Label : LABEL
+        A
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $a
+    Label : ELEMENT
+      :
+      Label : LABEL
+        C
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        2
+      Label : LEFT
+        $b
+    Label : ELEMENT
+      :
+      Label : LABEL
+        B
