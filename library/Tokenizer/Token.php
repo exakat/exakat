@@ -27,6 +27,7 @@ class Token {
                                  '_Goto',        
                                  'Staticproperty',
                                  'Staticconstant',
+                                 'Staticmethodcall',
                                  'Functioncall',
                                  'Methodcall',
                                  'Not', 
