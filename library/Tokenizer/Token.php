@@ -35,6 +35,8 @@ class Token {
                                  'Reference',
                                  'Ternary', 
                                  'Noscream', 
+                                 'Preplusplus',
+                                 'Postplusplus',
                                 );
     
     function __construct($client) {
