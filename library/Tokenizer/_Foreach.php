@@ -13,7 +13,7 @@ class _Foreach extends TokenAuto {
                                                               'Staticmethodcall', 'Methodcall','Cast', 'Parenthesis', 'Ternary', 
                                                               'Noscream', 'Not', 'Assignation', )),
                                    3 => array('token' => 'T_AS'),
-                                   4 => array('atom' => array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property' )),
+                                   4 => array('atom' => array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Reference' )),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('atom' => 'Block'),
         );
