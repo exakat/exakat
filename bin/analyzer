@@ -41,14 +41,14 @@ $classes = array(
     'Logical',      // Fait
     'Heredoc',      // Fait
     'Not',          // Fait
-    'Cast',
-    'Reference',
-    'Arrayappend',
-    '_Instanceof',
+    'Cast',         // Fait
+    'Reference',    // Fait
+    'Arrayappend',  // Fait
+    '_Instanceof',  // Fait
     '_Break',       // Fait
-    '_Continue',
-    'Label',
-    '_Goto',
+    '_Continue',    // Fait
+    'Label',        // Fait
+    '_Goto',        // Fait
     '_New',
     '_Global',
     'Nsname',
