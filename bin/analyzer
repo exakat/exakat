@@ -52,15 +52,15 @@ $classes = array(
     '_Global',
     'Nsname',
     '_Include',
-    'Preplusplus',
-    'Postplusplus',
-    'Noscream',
-    'Parenthesis',
+    'Preplusplus',  // Fait
+    'Postplusplus', // Fait
+    'Noscream',     // Fait
+    'Parenthesis',  // Fait
     'Arguments',
     'Functioncall',
     'Methodcall',
     'Staticmethodcall',
-    'Staticconstant',
+    'Staticconstant',//Fait
     'Multiplication',// Fait
     'Addition',     // Fait
     'Bitshift',     // Fait
@@ -82,7 +82,7 @@ $classes = array(
     '_Abstract',
     '_Final',
     'Typehint',
-    '_Throw',
+    '_Throw',       // Fait
     '_Case',
     '_Default',
     '_Switch',

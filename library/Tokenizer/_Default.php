@@ -7,7 +7,7 @@ class _Default extends TokenAuto {
     // case where default is empty
         $this->conditions = array(-1 => array('token' => 'T_DEFAULT',
                                              'atom' => 'none'),
-                                  0 => array('token' => 'T_COLON'),
+                                  0 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                   1 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT')),
         );
         
@@ -16,7 +16,7 @@ class _Default extends TokenAuto {
 
         $this->conditions = array(-1 => array('token' => 'T_DEFAULT',
                                               'atom' => 'none'),
-                                   0 => array('token' => 'T_COLON'),
+                                   0 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                    1 => array('atom' => array('Postplusplus', 'Assignation', 'Break', 'Ifthen', 'Return', 'Ternary' , )), 
         );
         
@@ -25,7 +25,7 @@ class _Default extends TokenAuto {
 
         $this->conditions = array(-2 => array('token' => 'T_DEFAULT',
                                               'atom' => 'none'),
-                                  -1 => array('token' => 'T_COLON'),
+                                  -1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                    0 => array('atom' => 'Sequence'), 
                                    1 => array('atom' => 'Sequence'), 
         );
@@ -35,7 +35,7 @@ class _Default extends TokenAuto {
 
         $this->conditions = array(0 => array('token' => 'T_DEFAULT',
                                               'atom' => 'none'),
-                                  1 => array('token' => 'T_COLON'),
+                                  1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                   2 => array('atom' => array('Block')), // everything except block or Sequence is not a Block, as selected before
         );
         

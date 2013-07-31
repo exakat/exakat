@@ -10,9 +10,9 @@ class Token {
 //                                 'String', 
     
     public static $types = array(//'Variable', conflict between transform and indexes. 
-                                 'Boolean', 
-                                 'Sign',
+                                 'Boolean',  
                                  '_Array', 
+                                 'Sign',
                                  'Property', 
                                  'Keyvalue', 
                                  '_Function',
@@ -26,6 +26,7 @@ class Token {
                                  'Label',        
                                  '_Goto',        
                                  'Staticproperty',
+                                 'Staticconstant',
                                  'Not', 
                                  'Multiplication', 
                                  'Addition', 
@@ -37,6 +38,7 @@ class Token {
                                  'Noscream', 
                                  'Preplusplus',
                                  'Postplusplus',
+                                 '_Throw',
                                 );
     
     function __construct($client) {

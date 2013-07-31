@@ -3,8 +3,10 @@
 namespace Tokenizer;
 
 class _Throw extends TokenAuto {
+    static public $operators = array('T_THROW');
+    
     function _check() {
-        $this->conditions = array(0 => array('token' => 'T_THROW',
+        $this->conditions = array(0 => array('token' => _Throw::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall', 
                                                               'Staticmethodcall', 'Staticproperty' ))
@@ -13,7 +15,9 @@ class _Throw extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'THROW'),
                                'atom'       => 'Throw');
                                
-        return $this->checkAuto();
+        $this->checkAuto();
+        
+        return $this->checkRemaining();
     }
 }
 

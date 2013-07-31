@@ -3,12 +3,12 @@
 namespace Tokenizer;
 
 class Staticconstant extends TokenAuto {
+    static public $operators = array('T_DOUBLE_COLON');
+
     function _check() {
-        
-        $operands = array('Constant', 'String', 'Variable');
-        $this->conditions = array( -1 => array('atom' => $operands), 
-                                    0 => array('token' => 'T_DOUBLE_COLON'),
-                                    1 => array('atom' => $operands), 
+        $this->conditions = array( -1 => array('atom' => array('Constant', 'String', 'Variable', 'Array')), 
+                                    0 => array('token' => Staticconstant::$operators),
+                                    1 => array('atom' => array('Constant', 'String')), 
                                     2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),
                                  );
         
@@ -16,13 +16,9 @@ class Staticconstant extends TokenAuto {
                                                        1 => 'CONSTANT'),
                                'atom'       => 'Staticconstant',
                                );
-        $r = $this->checkAuto(); 
+        $this->checkAuto(); 
 
-        return $r;
-    }
-
-    function reserve() {
-        Token::$reserved[] = 'T_DOUBLE_COLON';
+        return $this->checkRemaining();
     }
 }
 

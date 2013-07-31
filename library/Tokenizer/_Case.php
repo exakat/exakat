@@ -3,12 +3,14 @@
 namespace Tokenizer;
 
 class _Case extends TokenAuto {
+    static public $operators = array('T_CASE');
+    
     function _check() {
         // Case is empty (case 'a': )
         $this->conditions = array(-2 => array('token' => 'T_CASE',
                                              'atom' => 'none'),
                                   -1 => array('atom' => 'yes'),
-                                  0 => array('token' => 'T_COLON'),
+                                  0 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                   1 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT')),
         );
         
@@ -19,7 +21,7 @@ class _Case extends TokenAuto {
         $this->conditions = array(-2 => array('token' => 'T_CASE',
                                               'atom' => 'none'),
                                   -1 => array('atom' => 'yes'),
-                                   0 => array('token' => 'T_COLON'),
+                                   0 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                    1 => array('atom' => array('Postplusplus', 'Assignation', 'Break', 'Return', 'Ifthen', 'Ternary', 'Include',   )), 
         );
         
@@ -30,7 +32,7 @@ class _Case extends TokenAuto {
         $this->conditions = array(-3 => array('token' => 'T_CASE',
                                               'atom' => 'none'),
                                   -2 => array('atom' => 'yes'),
-                                  -1 => array('token' => 'T_COLON'),
+                                  -1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                    0 => array('atom' => 'Sequence'), 
                                    1 => array('atom' => 'Sequence'), 
         );
@@ -42,7 +44,7 @@ class _Case extends TokenAuto {
         $this->conditions = array(0 => array('token' => 'T_CASE',
                                               'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
-                                  2 => array('token' => 'T_COLON'),
+                                  2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                   3 => array('atom' => array('Block')), 
         );
         

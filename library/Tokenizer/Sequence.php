@@ -21,7 +21,7 @@ class Sequence extends TokenAuto {
                                 'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_COMMA',
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                 'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_IF', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
-                                'T_THROW', 'T_CATCH', 'T_ABSTRACT', 
+                                'T_THROW', 'T_CATCH', 'T_ABSTRACT', 'T_CASE', 
                                  );
         $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators, 
                                         _Include::$operators );
@@ -58,14 +58,12 @@ class Sequence extends TokenAuto {
                                    2 => array('filterOut2' => $next_operator),
         );
         
-        $this->actions = array('makeEdge'    => array( 1 => 'ELEMENT',
-                                                      -1 => 'ELEMENT'
-                                                      ),
-                               'order'    => array( 1 => 2,
-                                                   -1 => 1 ),
+        $this->actions = array('makeEdge'   => array( 1 => 'ELEMENT',
+                                                     -1 => 'ELEMENT'),
+                               'order'      => array( 1 => 2,
+                                                     -1 => 1 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence',
-                               );
+                               'atom'       => 'Sequence');
         $r = $this->checkAuto();
 
         // @note instructions separated by ; with a special case for 'case'
@@ -92,7 +90,7 @@ class Sequence extends TokenAuto {
         $r = $this->checkAuto();
 
         // @note instructions not separated by ; 
-        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Var', 'Global', 'Static', 
+        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Var', 'Global', 'Static', 'Logical', 
                            'Const', 'Ppp', 'Foreach', 'For', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
                            'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison',
                            'Noscream', 'Property', 'Staticproperty', 'Label',);
