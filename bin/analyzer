@@ -18,11 +18,7 @@ if ($id = array_search('-v', $args)) {
     define('VERBOSE', false);
 }
 
-if ($id = array_search('-N', $args)) {
-    define('NEO_VERSION', true);
-} else {
-    define('NEO_VERSION', false);
-}
+define('NEO_VERSION', true);
 
 $begin_time = microtime(true);
 $classes = array(
@@ -56,9 +52,10 @@ $classes = array(
     'Postplusplus', // Fait
     'Noscream',     // Fait
     'Parenthesis',  // Fait
-    'Arguments',
-    'Functioncall',
-    'Methodcall',
+    'Arguments',    // Fait
+    'ArgumentsNoParenthesis', // Fait
+    'Functioncall', // Fait
+    'Methodcall',   // Fait
     'Staticmethodcall',
     'Staticconstant',//Fait
     'Multiplication',// Fait

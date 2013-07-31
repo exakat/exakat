@@ -23,11 +23,7 @@ if ($id = array_search('-r', $args)) {
     define('RECURSIVE', false);
 }
 
-if ($id = array_search('-N', $args)) {
-    define('NEO_VERSION', true);
-} else {
-    define('NEO_VERSION', false);
-}
+define('NEO_VERSION', true);
 
 if ($id = array_search('-f', $args)) {
     $filename = $args[$id + 1];
