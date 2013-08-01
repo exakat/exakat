@@ -13,8 +13,9 @@ class Reference extends TokenAuto {
                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', )),
         );
         
-        $this->actions = array('makeEdge' => array( '1' => 'REFERENCE'),
-                               'atom'     => 'Reference');
+        $this->actions = array('makeEdge'   => array( '1' => 'REFERENCE'),
+                               'atom'       => 'Reference',
+                               'cleanIndex' => true);
         $this->checkAuto();
 
         $this->conditions = array(-1 => array('token' => 'T_FUNCTION',
@@ -27,8 +28,8 @@ class Reference extends TokenAuto {
                                   5 => array('atom' => 'Block'),
         );
         
-        $this->actions = array('transform' => array( 1 => 'REFERENCE'),
-                               'atom'      => 'Reference');
+        $this->actions = array('transform'  => array( 1 => 'REFERENCE'),
+                               'cleanIndex' => 'Reference');
         $this->checkAuto();
 
         return $this->checkRemaining();

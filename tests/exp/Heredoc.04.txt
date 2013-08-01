@@ -8,18 +8,18 @@ Label : CODE
       <<<eof
 
       Label : STRING
-        Concat
-        Label : CONCAT
+        Concatenation
+        Label : ELEMENT
+          
+d
+
+        Label : ELEMENT
           a
-        Label : CONCAT
+        Label : ELEMENT
           ->
           Label : PROPERTY
             c
           Label : OBJECT
             $b
-        Label : CONCAT
-          
-d
-
     Label : LEFT
       $b

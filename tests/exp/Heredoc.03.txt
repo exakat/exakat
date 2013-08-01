@@ -8,14 +8,14 @@ Label : CODE
       <<<eof
 
       Label : STRING
-        Concat
-        Label : CONCAT
-          a
-        Label : CONCAT
-          $b
-        Label : CONCAT
+        Concatenation
+        Label : ELEMENT
           
 c
 
+        Label : ELEMENT
+          a
+        Label : ELEMENT
+          $b
     Label : LEFT
       $b
