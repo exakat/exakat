@@ -11,18 +11,6 @@ Label : CODE
       Label : ELEMENT
         public
         Label : NAME
-          $h
-        Label : VALUE
-          void
-      Label : ELEMENT
-        public
-        Label : NAME
-          $f
-        Label : VALUE
-          2
-      Label : ELEMENT
-        public
-        Label : NAME
           $g
         Label : VALUE
           3
@@ -31,13 +19,25 @@ Label : CODE
         Label : ELEMENT
           public
           Label : NAME
-            $d
+            $e
+          Label : VALUE
+            void
+        Label : ELEMENT
+          const
+          Label : NAME
+            b
+          Label : VALUE
+            3
+        Label : ELEMENT
+          public
+          Label : NAME
+            $c
           Label : VALUE
             void
         Label : ELEMENT
           public
           Label : NAME
-            $c
+            $d
           Label : VALUE
             void
         Label : ELEMENT
@@ -55,12 +55,12 @@ Label : CODE
         Label : ELEMENT
           public
           Label : NAME
-            $e
+            $h
           Label : VALUE
             void
         Label : ELEMENT
-          const
+          public
           Label : NAME
-            b
+            $f
           Label : VALUE
-            3
+            2

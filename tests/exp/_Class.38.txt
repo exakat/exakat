@@ -11,23 +11,23 @@ Label : CODE
       Label : ELEMENT
         private
         Label : NAME
-          $h
-        Label : VALUE
-          void
-      Label : ELEMENT
-        private
-        Label : NAME
-          $f
-        Label : VALUE
-          2
-      Label : ELEMENT
-        private
-        Label : NAME
           $g
         Label : VALUE
           3
       Label : ELEMENT
         ;
+        Label : ELEMENT
+          private
+          Label : NAME
+            $e
+          Label : VALUE
+            void
+        Label : ELEMENT
+          const
+          Label : NAME
+            b
+          Label : VALUE
+            3
         Label : ELEMENT
           private
           Label : NAME
@@ -49,12 +49,12 @@ Label : CODE
         Label : ELEMENT
           private
           Label : NAME
-            $e
+            $h
           Label : VALUE
             void
         Label : ELEMENT
-          const
+          private
           Label : NAME
-            b
+            $f
           Label : VALUE
-            3
+            2

@@ -7,7 +7,25 @@ Label : CODE
   Label : BLOCK
     {
     Label : CODE
-      Sequence
+      ;
+      Label : ELEMENT
+        const
+        Label : NAME
+          d
+        Label : VALUE
+          4
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $x
+      Label : ELEMENT
+        const
+        Label : NAME
+          e
+        Label : VALUE
+          5
       Label : ELEMENT
         const
         Label : NAME
@@ -26,21 +44,3 @@ Label : CODE
           c
         Label : VALUE
           3
-      Label : ELEMENT
-        var
-        Label : VALUE
-          void
-        Label : DEFINE
-          $x
-      Label : ELEMENT
-        const
-        Label : NAME
-          d
-        Label : VALUE
-          4
-      Label : ELEMENT
-        const
-        Label : NAME
-          e
-        Label : VALUE
-          5

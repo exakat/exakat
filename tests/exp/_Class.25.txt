@@ -7,42 +7,44 @@ Label : CODE
   Label : BLOCK
     {
     Label : CODE
-      Sequence
-      Label : ELEMENT
-        var
-        Label : NAME
-          $b
-        Label : VALUE
-          2
-      Label : ELEMENT
-        var
-        Label : NAME
-          $a
-        Label : VALUE
-          1
+      ;
       Label : ELEMENT
         Sequence
         Label : ELEMENT
           var
           Label : NAME
-            $g
+            $b
           Label : VALUE
-            6
+            2
         Label : ELEMENT
           var
           Label : NAME
-            $f
+            $a
           Label : VALUE
-            5
+            1
         Label : ELEMENT
-          var
-          Label : NAME
-            $d
-          Label : VALUE
-            4
-        Label : ELEMENT
-          var
-          Label : NAME
-            $c
-          Label : VALUE
-            3
+          Sequence
+          Label : ELEMENT
+            var
+            Label : NAME
+              $g
+            Label : VALUE
+              6
+          Label : ELEMENT
+            var
+            Label : NAME
+              $f
+            Label : VALUE
+              5
+          Label : ELEMENT
+            var
+            Label : NAME
+              $d
+            Label : VALUE
+              4
+          Label : ELEMENT
+            var
+            Label : NAME
+              $c
+            Label : VALUE
+              3

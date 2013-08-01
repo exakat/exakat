@@ -7,16 +7,18 @@ Label : CODE
   Label : BLOCK
     {
     Label : CODE
-      Sequence
+      ;
       Label : ELEMENT
-        const
-        Label : NAME
-          a
-        Label : VALUE
-          1
-      Label : ELEMENT
-        const
-        Label : NAME
-          b
-        Label : VALUE
-          2
+        Sequence
+        Label : ELEMENT
+          const
+          Label : NAME
+            a
+          Label : VALUE
+            1
+        Label : ELEMENT
+          const
+          Label : NAME
+            b
+          Label : VALUE
+            2
