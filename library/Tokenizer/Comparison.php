@@ -26,6 +26,7 @@ class Comparison extends TokenAuto {
                                                       '-1' => 'LEFT'
                                                       ),
                                'atom'       => 'Comparison',
+                               'cleanIndex' => true,
                                );
         $this->checkAuto(); 
 

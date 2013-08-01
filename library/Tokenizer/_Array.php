@@ -12,12 +12,12 @@ class _Array extends TokenAuto {
                                     2 => array('token' => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                  );
         
-        $this->actions = array('transform' => array(  -1 => 'VARIABLE', 
-                                                       1 => 'INDEX',
-                                                       2 => 'DROP'),
-                               'atom'      => 'Array',
+        $this->actions = array('transform'   => array(  -1 => 'VARIABLE', 
+                                                         1 => 'INDEX',
+                                                         2 => 'DROP'),
+                               'atom'        => 'Array',
                                'keepIndexed' => true,
-                               'cleanIndex' => true);
+                               'cleanIndex'  => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();

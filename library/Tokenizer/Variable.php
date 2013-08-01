@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Variable extends TokenAuto {
     static public $operators = array('T_DOLLAR_OPEN_CURLY_BRACES', 
                                      'T_CURLY_OPEN', 
-                                     'T_DOLLAR', );
+                                     'T_DOLLAR');
     
     function _check() {
         $this->conditions = array(0 => array('token' => 'T_DOLLAR_OPEN_CURLY_BRACES',
@@ -16,7 +16,8 @@ class Variable extends TokenAuto {
         
         $this->actions = array( 'transform' => array( 1 => 'NAME',
                                                       2 => 'DROP'),
-                                'atom'       => 'Variable');
+                                'atom'       => 'Variable',
+                                'cleanIndex' => true);
         $this->checkAuto();
 
         $this->conditions = array(0 => array('token' => array('T_CURLY_OPEN', 'T_DOLLAR_OPEN_CURLY_BRACES'),

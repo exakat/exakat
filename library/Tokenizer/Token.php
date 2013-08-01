@@ -46,7 +46,7 @@ class Token {
                                  '_Throw',
                                  'ArgumentsNoParenthesis',
                                  'Argumentsnocomma',
-                                 'Arguments', //need to make keepIndexed better.
+                                 'Arguments', 
                                  '_Global',
                                  '_New',
                                  'Nsname',

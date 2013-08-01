@@ -598,6 +598,10 @@ g.addEdge(x, it.out('NEXT').next(), '$link');
 g.removeEdge(it.outE('NEXT').next());
 g.removeEdge(x.out('$link').outE('NEXT').next());
 
+x.out('$link').inE('INDEXED').each{    
+    g.removeEdge(it);
+} 
+
 ";
             } else {
                 print "No support for insertEdge with destination 0 or less\n";
@@ -769,7 +773,7 @@ x.as('origin').out('ELEMENT').has('atom','Concatenation').each{
 }
 
 /* Clean index */
-x.out().each{ 
+x.out('ELEMENT').each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 
@@ -795,7 +799,7 @@ x.setProperty('atom', 'Block');
             $e = $actions['cleanIndex'];
             $qactions[] = " 
 /* Remove children's index */  
-it.out().each{ 
+it.outE.hasNot('label', 'NEXT').inV.each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 

@@ -162,6 +162,7 @@ class Sequence extends TokenAuto {
         $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'),
                                'order'       => array(-1 => 1),
                                'atom'        => 'Sequence',
+                               'cleanIndex'  => true,
                                );
         $r = $this->checkAuto();
 

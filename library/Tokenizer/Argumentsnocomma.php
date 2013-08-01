@@ -9,13 +9,13 @@ class Argumentsnocomma extends TokenAuto {
         // @note f(1) : no , 
         $this->conditions = array(-1 => array('token' => Functioncall::$operators),
                                    0 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'atom' => 'none'),
-                                   1 => array('atom' => Arguments::$operands_wa),
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => Arguments::$operands_wa),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
                                    3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')),
         );
-        
+
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
         $this->checkAuto();
 
@@ -29,7 +29,8 @@ class Argumentsnocomma extends TokenAuto {
                                    2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON')),
         );
         
-        $this->actions = array('addEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
+        $this->actions = array('addEdge'   => array(0 => array('Arguments' => 'ARGUMENT')),
+                               'cleanIndex' => true);
         $this->checkAuto();
 
         return $this->checkRemaining();
