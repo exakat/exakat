@@ -12,8 +12,9 @@ class Cast extends TokenAuto {
                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
         );
         
-        $this->actions = array('makeEdge'    => array( '1' => 'CAST'),
-                               'atom'       => 'Cast');
+        $this->actions = array('makeEdge'   => array( '1' => 'CAST'),
+                               'atom'       => 'Cast',
+                               'cleanIndex' => true);
         $this->checkAuto();
         
         return $this->checkRemaining();
