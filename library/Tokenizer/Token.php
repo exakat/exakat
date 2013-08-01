@@ -10,8 +10,11 @@ class Token {
 //                                 'String', 
     
     public static $types = array(//'Variable', conflict between transform and indexes. 
+                                 'Variabledollar',
                                  'Boolean',  
                                  '_Array', 
+                                 '_Arraydollarcurly', 
+                                 'Constant',
                                  'Sign',
                                  'Property', 
                                  'Keyvalue', 
@@ -42,7 +45,8 @@ class Token {
                                  'Postplusplus',
                                  '_Throw',
                                  'ArgumentsNoParenthesis',
-                                 'Arguments',
+                                 'Argumentsnocomma',
+                                 'Arguments', //need to make keepIndexed better.
                                  '_Global',
                                  '_New',
                                  'Nsname',
@@ -66,6 +70,10 @@ class Token {
                                  '_For',
                                  '_Dowhile',
                                  '_While',
+                                 'Phpcode',
+                                 'Phpcodemiddle',
+                                 'Block',
+                                 //'Blockspecial', // conflict with 0th element.
                                 );
     
     function __construct($client) {

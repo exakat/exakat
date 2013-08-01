@@ -41,7 +41,8 @@ class Assignation extends TokenAuto {
         
         $this->actions = array('makeEdge'    => array( '1' => 'RIGHT',
                                                       '-1' => 'LEFT'),
-                               'atom'       => 'Assignation');
+                               'atom'       => 'Assignation',
+                               'cleanIndex' => true);
 
         $this->checkAuto();
 

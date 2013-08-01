@@ -11,7 +11,8 @@ class _Return extends TokenAuto {
                                    1 => array('token' => array('T_SEMICOLON'))
         );
         
-        $this->actions = array('addEdge'   => array(0 => array('Void' => 'CODE')));
+        $this->actions = array('addEdge'   => array(0 => array('Void' => 'CODE')),
+                               'keepIndexed' => true);
         $this->checkAuto();
 
         $this->conditions = array( 0 => array('token' => _Return::$operators,

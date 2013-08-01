@@ -15,7 +15,8 @@ class Property extends TokenAuto {
         
         $this->actions = array('makeEdge'   => array( -1 => 'OBJECT',
                                                        1 => 'PROPERTY'),
-                               'atom'       => 'Property');
+                               'atom'       => 'Property',
+                               'cleanIndex' => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();

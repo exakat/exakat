@@ -12,7 +12,8 @@ class Preplusplus extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 1 => 'PREPLUSPLUS'),
-                               'atom'       => 'Preplusplus');
+                               'atom'       => 'Preplusplus',
+                               'cleanIndex' => true);
         $this->checkAuto();
         
         return $this->checkRemaining();

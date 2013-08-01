@@ -647,7 +647,6 @@ it.as('origin').out('$link').has('atom','$atom').each{
         g.addEdge(f, it, '$link');
     };
     g.removeVertex(it);    
-//    it.setProperty('code', it.code + ' mergeNext');
 }
             ";
             }
@@ -738,11 +737,65 @@ it.as('origin').in('$link').has('atom','$atom').each{
             unset($actions['mergePrev']);
         }
 
+        if (isset($actions['mergeConcat'])) {
+            $qactions[] = " 
+/* mergeConcat */ 
+x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', 'file':it.file, virtual:true]);
+
+z = it.in('NEXT').next();
+a = it;
+b = it.out('NEXT').next();
+c = it.out('NEXT').out('NEXT').next();
+
+g.addEdge(x, a, 'ELEMENT');
+g.addEdge(x, b, 'ELEMENT');
+
+b.bothE('NEXT').each{ g.removeEdge(it); }
+
+g.addEdge(z, x, 'NEXT');
+g.addEdge(x, c, 'NEXT');
+
+a.bothE('NEXT').each{ g.removeEdge(it); }
+
+x.as('origin').out('ELEMENT').has('atom','Concatenation').each{
+    it.inE('ELEMENT').each{ g.removeEdge(it);}
+  
+    it.out('ELEMENT').each{ 
+        it.inE('ELEMENT').each{ g.removeEdge(it);}
+        g.addEdge(x, it, 'ELEMENT');
+    };
+
+    g.removeVertex(it);    
+}
+
+/* Clean index */
+x.out().each{ 
+    it.inE('INDEXED').each{    
+        g.removeEdge(it);
+    } 
+}
+
+            ";
+            unset($actions['mergeConcat']);
+        }
+        
+        if (isset($actions['while_to_block'])) {
+            $qactions[] = " 
+/* create an empty Block in place of a semi colon, after a while statment.  */  
+
+x = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+x.setProperty('code', 'Block with While');
+x.setProperty('atom', 'Block');
+
+                ";
+            unset($actions['while_to_block']);
+        }        
+
         if (isset($actions['cleanIndex'])) {
             $e = $actions['cleanIndex'];
             $qactions[] = " 
 /* Remove children's index */  
-it.out('ELEMENT').each{ 
+it.out().each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 

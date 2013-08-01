@@ -12,9 +12,9 @@ class Postplusplus extends TokenAuto {
                                    1 => array('filterOut' => array('T_DOUBLECOLON')),
         );
         
-        $this->actions = array('transform'    => array( '-1' => 'POSTPLUSPLUS'),
-                               'atom'       => 'Postplusplus');
-                               
+        $this->actions = array('transform'  => array( -1 => 'POSTPLUSPLUS'),
+                               'atom'       => 'Postplusplus',
+                               'cleanIndex' => true);
         $this->checkAuto();
         
         return $this->checkRemaining();

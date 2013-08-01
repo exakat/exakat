@@ -27,65 +27,26 @@ class Concatenation extends TokenAuto {
                                'atom'       => 'Concatenation',
                                );
         
-        $r = $this->checkAuto();
-
-
-        $this->conditions = array( -1 => array('filterOut' => array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_DOLLAR', 'T_OPEN_PARENTHESIS')),
-                                    0 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
-                                    1 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
-                                    2 => array('filterOut' => array_merge( array('T_OPEN_BRACKET'),
-                                                                            Assignation::$operators)),
-        ); 
-
-        $this->actions = array('insertConcat'   => "Concat",
-                                'order' => array(0 => 1, 
-                                                 1 => 2),
-                                );
-        $r = $this->checkAuto();
-
+        $this->checkAuto();
 
 // Fusion of 2 concatenations
-        $this->conditions = array( 0 => array('atom' => array('Concatenation')),
-                                   1 => array('atom' => array('Concatenation')),
+        $this->conditions = array( 0 => array('atom' => array('String', 'Variable', 'Property', 'Array', 'Phpcode', 'Concatenation')),
+                                   1 => array('atom' => array('String', 'Variable', 'Property', 'Array', 'Phpcode', 'Concatenation')),
         ); 
+        $this->actions = array('mergeConcat' => "Concat");
+        $this->checkAuto();
 
-        $this->actions = array('insertConcat2'    => "Concat" );
-        $r = $this->checkAuto();
-
-
-// Concatenation with another string structure
-        $this->conditions = array( 0 => array('atom' => array('Concatenation')),
-                                   1 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
-        ); 
-
-        $this->actions = array('insertConcat3'   => true,
-                                'order' => array(0 => 1, 
-                                                 1 => 2),
-                                );
-
-        $r = $this->checkAuto();
-
-        $this->conditions = array(  0 => array('atom' => array('String', 'Variable', 'Property', 'Array',)),
-                                    1 => array('atom' => array('Concatenation')),
-        ); 
-
-        $this->actions = array('insertConcat4'   => true,
-                                'order' => array(0 => 1, 
-                                                 1 => 2),
-                                );
-
-        $r = $this->checkAuto();
 
 // Fusion of string and PHPcode
-        $this->conditions = array( 0 => array('atom' => array('String', 'Phpcode', 'Concatenation', )),
+        $this->conditions = array( 0 => array('atom' => array('String',  'Concatenation', )),
                                    1 => array('atom' => array('String', 'Phpcode', 'Concatenation', )),
         ); 
 
         $this->actions = array('insertConcat' => "Concat",
                                'keepIndexed'  => true);
-        $r = $this->checkAuto();
+//        $r = $this->checkAuto();
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 ?>

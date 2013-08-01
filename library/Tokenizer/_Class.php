@@ -13,9 +13,7 @@ class _Class extends TokenAuto {
                                  );
         
         $this->actions = array('transform'   => array(   1 => 'NAME'),
-                               'atom'       => 'Class_tmp',
-                               );
-
+                               'atom'       => 'Class_tmp',);
         $this->checkAuto(); 
 
     // class x extends y {}
@@ -63,7 +61,6 @@ class _Class extends TokenAuto {
                                                       2 => 'DROP',),
                                'atom'       => 'Class',
                                 );
-
         $this->checkAuto(); 
 
     // class x { // some real code}
@@ -72,9 +69,7 @@ class _Class extends TokenAuto {
                                  );
         
         $this->actions = array('transform'   => array(1 => 'BLOCK'),
-                               'atom'       => 'Class',
-                                );
-
+                               'atom'       => 'Class',);
         $this->checkAuto(); 
 
         return $this->checkRemaining();
