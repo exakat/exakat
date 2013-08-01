@@ -43,6 +43,7 @@ $stats = array();
 $stats['tokens_count'] = queryOne("g.V.except([g.v(0)])$file_filter.count()");
 $stats['atoms_count'] = queryOne("g.V.except([g.v(0)]).hasNot('atom', 'null')$file_filter.count()");
 $stats['NEXT_count'] = queryOne("g.E.has('label', 'NEXT').inV$file_filter.count()");
+$stats['INDEXED_count'] = queryOne("g.E.has('label', 'INDEXED').inV$file_filter.count()");
 
 function queryOne($query) {
     $r = query($query);
