@@ -74,6 +74,7 @@ class Token {
                                  'Phpcodemiddle',
                                  'Block',
                                  //'Blockspecial', // conflict with 0th element.
+                                 'Sequence', 
                                 );
     
     function __construct($client) {
