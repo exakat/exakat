@@ -5,6 +5,4 @@ Label : CODE
   Label : CONDITION
     1
   Label : LOOP
-    ;
-    Label : BLOCK
-      ?>
+    Block with While

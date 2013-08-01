@@ -8,9 +8,11 @@ Label : CODE
       "
       Label : CONTAIN
         ${
-        Label : VARIABLE
-          b
-        Label : INDEX
-          'c'
+        Label : NAME
+          [
+          Label : VARIABLE
+            b
+          Label : INDEX
+            'c'
     Label : LEFT
       $a

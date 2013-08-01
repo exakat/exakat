@@ -14,34 +14,38 @@ Label : CODE
 #Allow smarty {php} tags?  These could be dangerous if you don't trust your users.
 \$config['use_smarty_php_tags'] = 
         Label : CONCAT
-          ?
-          Label : CONDITION
-            [
-            Label : VARIABLE
-              $config
-            Label : INDEX
-              'use_smarty_php_tags'
-          Label : THEN
-            'true'
-          Label : ELSE
-            'false'
+          ${
+          Label : NAME
+            ?
+            Label : CONDITION
+              [
+              Label : VARIABLE
+                $config
+              Label : INDEX
+                'use_smarty_php_tags'
+            Label : THEN
+              'true'
+            Label : ELSE
+              'false'
         Label : CONCAT
           ;
 
 #Automatically assign alias based on page title?
 \$config['auto_alias_content'] = 
         Label : CONCAT
-          ?
-          Label : CONDITION
-            [
-            Label : VARIABLE
-              $config
-            Label : INDEX
-              'auto_alias_content'
-          Label : THEN
-            'true'
-          Label : ELSE
-            'false'
+          ${
+          Label : NAME
+            ?
+            Label : CONDITION
+              [
+              Label : VARIABLE
+                $config
+              Label : INDEX
+                'auto_alias_content'
+            Label : THEN
+              'true'
+            Label : ELSE
+              'false'
         Label : CONCAT
           ;
 

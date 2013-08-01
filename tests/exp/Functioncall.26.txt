@@ -12,8 +12,6 @@ Label : CODE
           i
           Label : ARGUMENTS
             void
-            Label : ARGUMENT
-              void
         Label : CLASS
           Stdclass
       Label : ARGUMENT
@@ -22,8 +20,6 @@ Label : CODE
           h
           Label : ARGUMENTS
             void
-            Label : ARGUMENT
-              void
         Label : OBJECT
           $this
       Label : ARGUMENT

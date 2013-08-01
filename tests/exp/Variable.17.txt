@@ -9,4 +9,6 @@ Label : CODE
       Label : CONCAT
         a
       Label : CONCAT
-        b
+        ${
+        Label : NAME
+          b

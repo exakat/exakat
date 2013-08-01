@@ -9,12 +9,18 @@ Label : CODE
       Label : CONCAT
         a
       Label : CONCAT
-        b
+        ${
+        Label : NAME
+          b
       Label : CONCAT
         c
       Label : CONCAT
-        d
+        ${
+        Label : NAME
+          d
       Label : CONCAT
         e
       Label : CONCAT
-        f
+        ${
+        Label : NAME
+          f

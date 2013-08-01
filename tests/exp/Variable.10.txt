@@ -7,53 +7,19 @@ Label : CODE
     Label : RIGHT
       "
       Label : CONTAIN
-        ?
-        Label : CONDITION
-          $y
-        Label : THEN
-          1
-        Label : ELSE
-          3
-    Label : LEFT
-      $b
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        $y
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        $a
-    Label : LEFT
-      $d
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        z
-    Label : LEFT
-      $c
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
         Concat
         Label : CONCAT
           x
         Label : CONCAT
-          $y
+          {
+          Label : NAME
+            $y
         Label : CONCAT
           z
         Label : CONCAT
-          $a
+          {
+          Label : NAME
+            $a
     Label : LEFT
       $f
   Label : ELEMENT
@@ -65,8 +31,56 @@ Label : CODE
         Label : CONCAT
           x
         Label : CONCAT
-          $y
+          {
+          Label : NAME
+            $y
         Label : CONCAT
           z
     Label : LEFT
       $e
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        ${
+        Label : NAME
+          $a
+    Label : LEFT
+      $d
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        ${
+        Label : NAME
+          z
+    Label : LEFT
+      $c
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        {
+        Label : NAME
+          ?
+          Label : CONDITION
+            $y
+          Label : THEN
+            1
+          Label : ELSE
+            3
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        {
+        Label : NAME
+          $y
+    Label : LEFT
+      $a

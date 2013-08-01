@@ -7,6 +7,8 @@ Label : CODE
     Label : RIGHT
       "
       Label : CONTAIN
-        b
+        ${
+        Label : NAME
+          b
     Label : LEFT
       $a

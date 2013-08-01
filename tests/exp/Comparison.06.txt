@@ -14,8 +14,6 @@ Label : CODE
           methode
           Label : ARGUMENTS
             void
-            Label : ARGUMENT
-              void
         Label : OBJECT
           $this
   Label : THEN

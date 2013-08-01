@@ -28,8 +28,6 @@ Label : CODE
           E
           Label : ARGUMENTS
             void
-            Label : ARGUMENT
-              void
         Label : CLASS
           D
     Label : LEFT
@@ -60,8 +58,6 @@ Label : CODE
           d
           Label : ARGUMENTS
             void
-            Label : ARGUMENT
-              void
         Label : OBJECT
           $c
     Label : LEFT

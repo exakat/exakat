@@ -11,6 +11,8 @@ Label : CODE
         Label : CONTAIN
           Concat
           Label : CONCAT
-            b
+            ${
+            Label : NAME
+              b
           Label : CONCAT
             [1]

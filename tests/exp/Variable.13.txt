@@ -13,25 +13,27 @@ Label : CODE
           
 
         Label : CONCAT
-          ->
-          Label : PROPERTY
-            property
-          Label : OBJECT
-            $object
+          ${
+          Label : NAME
+            ->
+            Label : PROPERTY
+              property
+            Label : OBJECT
+              $object
         Label : CONCAT
           ;
 
 
         Label : CONCAT
-          ->
-          Label : METHOD
-            method
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
+          ${
+          Label : NAME
+            ->
+            Label : METHOD
+              method
+              Label : ARGUMENTS
                 void
-          Label : OBJECT
-            $object
+            Label : OBJECT
+              $object
         Label : CONCAT
           ;
 

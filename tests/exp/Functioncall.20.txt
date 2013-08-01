@@ -1,14 +1,14 @@
 <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
+Label : NEXT
+  $a
+  Label : NEXT
     =
-    Label : RIGHT
+    Label : NEXT
       array
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
+      Label : NEXT
+        (
+        Label : NEXT
           =>
           Label : KEY
             ,
@@ -63,14 +63,22 @@ Label : CODE
               Label : VALUE
                 $b
           Label : VALUE
+            \
+            Label : ELEMENT
+              n
+            Label : ELEMENT
+              m
+          Label : NEXT
             ,
-            Label : ARGUMENT
+            Label : NEXT
               void
-            Label : ARGUMENT
-              \
-              Label : ELEMENT
-                n
-              Label : ELEMENT
-                m
-    Label : LEFT
-      $a
+              Label : NEXT
+                )
+                Label : NEXT
+                  ;
+                  Label : NEXT
+                    ?>
+                    Label : NEXT
+                      /**/
+                      Label : NEXT
+                        /* * */
