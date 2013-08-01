@@ -1,22 +1,24 @@
 <?php
 
 Label : CODE
-  Sequence
+  ;
   Label : ELEMENT
-    global
-    Label : NAME
-      $c
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $a
-    Label : VALUE
-      2
-  Label : ELEMENT
-    global
-    Label : NAME
-      $b
-    Label : VALUE
-      1
+    Sequence
+    Label : ELEMENT
+      global
+      Label : NAME
+        $c
+      Label : VALUE
+        void
+    Label : ELEMENT
+      global
+      Label : NAME
+        $a
+      Label : VALUE
+        2
+    Label : ELEMENT
+      global
+      Label : NAME
+        $b
+      Label : VALUE
+        1

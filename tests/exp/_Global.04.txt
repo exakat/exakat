@@ -3,24 +3,26 @@
 Label : CODE
   ;
   Label : ELEMENT
-    global
-    Label : NAME
-      $d
-    Label : VALUE
-      array
-      Label : ARGUMENTS
-        void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $b
-    Label : VALUE
-      -
-      Label : SIGN
+    ;
+    Label : ELEMENT
+      global
+      Label : NAME
+        $d
+      Label : VALUE
+        array
+        Label : ARGUMENTS
+          void
+    Label : ELEMENT
+      global
+      Label : NAME
+        $b
+      Label : VALUE
+        -
+        Label : SIGN
+          1
+    Label : ELEMENT
+      global
+      Label : NAME
+        $a
+      Label : VALUE
         1
-  Label : ELEMENT
-    global
-    Label : NAME
-      $a
-    Label : VALUE
-      1

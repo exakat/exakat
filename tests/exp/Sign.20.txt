@@ -9,23 +9,23 @@ Label : CODE
       Label : CONCAT
         "
         Label : CONTAIN
-          Concat
-          Label : CONCAT
-             = 
-          Label : CONCAT
-            $f
-          Label : CONCAT
+          Concatenation
+          Label : ELEMENT
             ;\r\n
+          Label : ELEMENT
+             = 
+          Label : ELEMENT
+            $f
       Label : CONCAT
         "
         Label : CONTAIN
-          Concat
-          Label : CONCAT
-            ['
-          Label : CONCAT
-            $e
-          Label : CONCAT
+          Concatenation
+          Label : ELEMENT
             ']
+          Label : ELEMENT
+            ['
+          Label : ELEMENT
+            $e
       Label : CONCAT
         [
         Label : VARIABLE
