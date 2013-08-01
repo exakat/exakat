@@ -18,8 +18,6 @@ Label : CODE
               a
             Label : ARGUMENTS
               void
-              Label : ARGUMENT
-                void
         Label : ELEMENT
           abstract
           Label : ABSTRACT
@@ -28,8 +26,6 @@ Label : CODE
               b
             Label : ARGUMENTS
               void
-              Label : ARGUMENT
-                void
         Label : ELEMENT
           abstract
           Label : ABSTRACT
@@ -38,5 +34,3 @@ Label : CODE
               c
             Label : ARGUMENTS
               void
-              Label : ARGUMENT
-                void

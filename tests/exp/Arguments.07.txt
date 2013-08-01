@@ -3,16 +3,18 @@
 Label : CODE
   ;
   Label : ELEMENT
-    f
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        x
-  Label : ELEMENT
-    define
-    Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        3
-      Label : ARGUMENT
-        'x'
+    ;
+    Label : ELEMENT
+      f
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          x
+    Label : ELEMENT
+      define
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          'x'

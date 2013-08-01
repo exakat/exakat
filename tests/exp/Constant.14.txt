@@ -9,8 +9,8 @@ Label : CODE
       Label : CODE
         $e
     Label : THEN
-      Concat
-      Label : CONCAT
+      Concatenation
+      Label : ELEMENT
         a
-      Label : CONCAT
+      Label : ELEMENT
         C

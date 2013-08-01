@@ -9,62 +9,28 @@ Label : CODE
   Label : THEN
     {
     Label : CODE
-      Concat
-      Label : CONCAT
-        A
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $i
+      Label : ELEMENT
+        I
 
-      Label : CONCAT
-        <?php 
-        Label : CODE
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $b
-      Label : CONCAT
-        B
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $h
+        Label : ELEMENT
+          H
 
-      Label : CONCAT
-        <?php 
-        Label : CODE
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $c
-      Label : CONCAT
-        C
-
-      Label : CONCAT
-        <?php 
-        Label : CODE
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $d
-      Label : CONCAT
-        D
-
-      Label : CONCAT
-        <?php 
-        Label : CODE
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $e
-      Label : CONCAT
-        <?php 
-        Label : CODE
+        Label : ELEMENT
           ;
           Label : ELEMENT
             echo
@@ -72,48 +38,64 @@ Label : CODE
               void
               Label : ARGUMENT
                 $g
-      Label : CONCAT
-        I
-
-      Label : CONCAT
-        E
-
-      Label : CONCAT
-        <?php 
-        Label : CODE
-          ;
           Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $f
-      Label : CONCAT
-        F
+            G
 
-      Label : CONCAT
-        G
-
-      Label : CONCAT
-        <?php 
-        Label : CODE
-          ;
           Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $h
-      Label : CONCAT
-        H
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $f
+            Label : ELEMENT
+              F
 
-      Label : CONCAT
-        <?php 
-        Label : CODE
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $i
+            Label : ELEMENT
+              ;
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $e
+              Label : ELEMENT
+                E
+
+              Label : ELEMENT
+                ;
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $d
+                Label : ELEMENT
+                  D
+
+                Label : ELEMENT
+                  ;
+                  Label : ELEMENT
+                    echo
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $c
+                  Label : ELEMENT
+                    C
+
+                  Label : ELEMENT
+                    ;
+                    Label : ELEMENT
+                      echo
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          $b
+                    Label : ELEMENT
+                      B
+
+                    Label : ELEMENT
+                      A
+

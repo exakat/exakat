@@ -7,24 +7,24 @@ Label : CODE
     Label : RIGHT
       "
       Label : CONTAIN
-        Concat
-        Label : CONCAT
-          a 
-        Label : CONCAT
+        Concatenation
+        Label : ELEMENT
           ->
           Label : PROPERTY
             c
           Label : OBJECT
             $b
-        Label : CONCAT
+        Label : ELEMENT
+          a 
+        Label : ELEMENT
            '
-        Label : CONCAT
+        Label : ELEMENT
           $d
-        Label : CONCAT
-          -
-        Label : CONCAT
-          $e
-        Label : CONCAT
+        Label : ELEMENT
           -01'
+        Label : ELEMENT
+          -
+        Label : ELEMENT
+          $e
     Label : LEFT
       $x

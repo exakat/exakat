@@ -3,32 +3,34 @@
 Label : CODE
   ;
   Label : ELEMENT
-    <<=
-    Label : RIGHT
-      <<=
-      Label : RIGHT
-        $c
-      Label : LEFT
-        $b
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    <<=
-    Label : RIGHT
-      $b
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    <<=
-    Label : RIGHT
+    ;
+    Label : ELEMENT
       <<=
       Label : RIGHT
         <<=
         Label : RIGHT
-          $d
+          <<=
+          Label : RIGHT
+            $d
+          Label : LEFT
+            $c
         Label : LEFT
-          $c
+          $b
       Label : LEFT
+        $a
+    Label : ELEMENT
+      <<=
+      Label : RIGHT
+        <<=
+        Label : RIGHT
+          $c
+        Label : LEFT
+          $b
+      Label : LEFT
+        $a
+    Label : ELEMENT
+      <<=
+      Label : RIGHT
         $b
-    Label : LEFT
-      $a
+      Label : LEFT
+        $a

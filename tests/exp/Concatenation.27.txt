@@ -8,19 +8,23 @@ Label : CODE
       <<<EOD
 
       Label : STRING
-        ::
-        Label : METHOD
-          b
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'c'
-        Label : CLASS
-          $a
-        Label : CONSTANT
+        Concatenation
+        Label : ELEMENT
            B
 
-        Label : CLASS
+        Label : ELEMENT
           A 
+        Label : ELEMENT
+          {
+          Label : NAME
+            ::
+            Label : METHOD
+              b
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'c'
+            Label : CLASS
+              $a
     Label : LEFT
       $x

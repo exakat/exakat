@@ -5,42 +5,42 @@ Label : CODE
   Label : CONDITION
     (
     Label : CODE
-      &&
+      ||
       Label : LEFT
-        ||
+        &&
         Label : LEFT
-          &&
-          Label : LEFT
-            defined
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'a'
+          defined
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'a'
+        Label : RIGHT
+          !=
           Label : RIGHT
-            !=
-            Label : RIGHT
+            [
+            Label : VARIABLE
+              $f
+            Label : INDEX
+              'g'
+          Label : LEFT
+            .
+            Label : CONCAT
+              d
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  1
+                Label : ARGUMENT
+                  E
+            Label : CONCAT
               [
               Label : VARIABLE
-                $f
+                $b
               Label : INDEX
-                'g'
-            Label : LEFT
-              .
-              Label : CONCAT
-                d
-                Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    E
-              Label : CONCAT
-                [
-                Label : VARIABLE
-                  $b
-                Label : INDEX
-                  'c'
-        Label : RIGHT
+                'c'
+      Label : RIGHT
+        &&
+        Label : LEFT
           !
           Label : NOT
             defined
@@ -48,42 +48,42 @@ Label : CODE
               void
               Label : ARGUMENT
                 'H'
-      Label : RIGHT
-        !=
         Label : RIGHT
-          substr
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              +
-              Label : RIGHT
-                1
-              Label : LEFT
-                strrpos
-                Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    'n'
-                  Label : ARGUMENT
-                    [
-                    Label : VARIABLE
-                      $m
-                    Label : INDEX
+          !=
+          Label : RIGHT
+            substr
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                +
+                Label : RIGHT
+                  1
+                Label : LEFT
+                  strrpos
+                  Label : ARGUMENTS
+                    ,
+                    Label : ARGUMENT
                       'n'
-            Label : ARGUMENT
-              0
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $k
-              Label : INDEX
-                'l'
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $i
-          Label : INDEX
-            'j'
+                    Label : ARGUMENT
+                      [
+                      Label : VARIABLE
+                        $m
+                      Label : INDEX
+                        'n'
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $k
+                Label : INDEX
+                  'l'
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $i
+            Label : INDEX
+              'j'
   Label : THEN
     Block With control structure
     Label : CODE

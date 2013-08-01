@@ -34,8 +34,6 @@ Label : CODE
                 time
                 Label : ARGUMENTS
                   void
-                  Label : ARGUMENT
-                    void
               Label : LEFT
                 substr
                 Label : ARGUMENTS

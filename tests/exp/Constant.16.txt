@@ -3,42 +3,44 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      +
+    ;
+    Label : ELEMENT
+      =
       Label : RIGHT
-        1
+        +
+        Label : RIGHT
+          1
+        Label : LEFT
+          \
+          Label : ELEMENT
+            l
+          Label : ELEMENT
+            k
+          Label : ELEMENT
+            j
       Label : LEFT
+        $a
+    Label : ELEMENT
+      =
+      Label : RIGHT
         \
         Label : ELEMENT
-          l
+          i
         Label : ELEMENT
-          k
+          h
         Label : ELEMENT
-          j
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      \
-      Label : ELEMENT
-        i
-      Label : ELEMENT
-        h
-      Label : ELEMENT
-        g
-    Label : LEFT
-      $x
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        \
-        Label : ELEMENT
-          f
-        Label : ELEMENT
-          e
-        Label : ELEMENT
-          d
+          g
+      Label : LEFT
+        $x
+    Label : ELEMENT
+      print
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          \
+          Label : ELEMENT
+            f
+          Label : ELEMENT
+            e
+          Label : ELEMENT
+            d

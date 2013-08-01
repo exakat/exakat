@@ -8,17 +8,17 @@ Label : CODE
       <<<EOD
 
       Label : STRING
-        Concat
-        Label : CONCAT
+        Concatenation
+        Label : ELEMENT
+          
+
+
+        Label : ELEMENT
           
 Oui
 
 
-        Label : CONCAT
+        Label : ELEMENT
           $x
-        Label : CONCAT
-          
-
-
     Label : LEFT
       $x

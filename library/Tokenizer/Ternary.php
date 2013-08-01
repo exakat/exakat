@@ -23,7 +23,8 @@ class Ternary extends TokenAuto {
                                                         2 => 'DROP',
                                                         3 => 'ELSE',
                                                        ),
-                               'atom'       => 'Ternary');
+                               'atom'       => 'Ternary',
+                               'cleanIndex' => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();

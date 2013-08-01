@@ -17,17 +17,17 @@ Label : CODE
               Label : ARGUMENT
                 "
                 Label : CONTAIN
-                  Concat
-                  Label : CONCAT
+                  Concatenation
+                  Label : ELEMENT
+                    h
+                  Label : ELEMENT
                     e
-                  Label : CONCAT
+                  Label : ELEMENT
                     [
                     Label : VARIABLE
                       $f
                     Label : INDEX
                       g
-                  Label : CONCAT
-                    h
               Label : ARGUMENT
                 [
                 Label : VARIABLE

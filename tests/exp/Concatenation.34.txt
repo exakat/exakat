@@ -7,22 +7,26 @@ Label : CODE
     Label : RIGHT
       "
       Label : CONTAIN
-        Concat
-        Label : CONCAT
-          [
-          Label : VARIABLE
+        Concatenation
+        Label : ELEMENT
+          {
+          Label : NAME
+            [
+            Label : VARIABLE
+              ->
+              Label : PROPERTY
+                properties
+              Label : OBJECT
+                $this
+            Label : INDEX
+              'prefix'
+        Label : ELEMENT
+          {
+          Label : NAME
             ->
             Label : PROPERTY
-              properties
+              id
             Label : OBJECT
-              $this
-          Label : INDEX
-            'prefix'
-        Label : CONCAT
-          ->
-          Label : PROPERTY
-            id
-          Label : OBJECT
-            $node
+              $node
     Label : LEFT
       $x

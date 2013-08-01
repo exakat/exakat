@@ -7,12 +7,14 @@ Label : CODE
     Label : RIGHT
       "
       Label : CONTAIN
-        Concat
-        Label : CONCAT
-          (
-        Label : CONCAT
-          $derivedSelect
-        Label : CONCAT
+        Concatenation
+        Label : ELEMENT
           )
+        Label : ELEMENT
+          (
+        Label : ELEMENT
+          {
+          Label : NAME
+            $derivedSelect
     Label : LEFT
       $x

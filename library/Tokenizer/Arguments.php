@@ -15,7 +15,7 @@ class Arguments extends TokenAuto {
     function _check() {
         
         // @note End of )
-        $this->conditions = array( 0 => array('token' => 'T_COMMA',
+        $this->conditions = array( 0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('token' => 'T_COMMA',
                                               'atom'  => 'none'),
@@ -23,7 +23,7 @@ class Arguments extends TokenAuto {
         $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')));
         $this->checkAuto();
 
-        $this->conditions = array( 0 => array('token' => 'T_COMMA',
+        $this->conditions = array( 0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
@@ -31,12 +31,12 @@ class Arguments extends TokenAuto {
         $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')));
         $this->checkAuto();
 
-        $this->conditions = array( 0 => array('token' => 'T_OPEN_PARENTHESIS',
+        $this->conditions = array(-1 => array('token' => 'T_OPEN_PARENTHESIS',
                                               'atom' => 'none'),
-                                   1 => array('token' => 'T_COMMA',
+                                   0 => array('token' => Arguments::$operators,
                                               'atom'  => 'none'),
         );
-        $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')));
+        $this->actions = array('addEdge'    => array(0 => array('Void' => 'ARGUMENT')));
         $this->checkAuto();
 
         $operands = Arguments::$operands_wa;
@@ -46,7 +46,7 @@ class Arguments extends TokenAuto {
         $this->conditions = array(-2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR', 'T_STRING', 'T_DOUBLE_ARROW'),
                                                                          Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
                                   -1 => array('atom' => $operands ),
-                                   0 => array('token' => 'T_COMMA',
+                                   0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR','T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_VARIABLE', 'T_DOUBLE_ARROW'),
@@ -60,14 +60,14 @@ class Arguments extends TokenAuto {
                                                       -1 => '1'),
                                'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
                                'atom'        => 'Arguments',
-//                               'keepIndexed' => true,
+                               'cleanIndex' => true
                                );
         $this->checkAuto();
 
         // @note implements a,b (two only)
         $this->conditions = array(-2 => array('token' => 'T_IMPLEMENTS' ),
                                   -1 => array('token' => 'T_STRING'),
-                                   0 => array('token' => 'T_COMMA',
+                                   0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('token' => 'T_STRING')
                             );
@@ -85,7 +85,7 @@ class Arguments extends TokenAuto {
         // @note implements a,b,c (three or more)
         $this->conditions = array(-2 => array('token' => 'T_IMPLEMENTS' ),
                                   -1 => array('atom' => 'Arguments'),
-                                   0 => array('token' => 'T_COMMA',
+                                   0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('token' => 'T_STRING')
                             );
@@ -103,7 +103,7 @@ class Arguments extends TokenAuto {
         // @note End of )
         $this->conditions = array(-2 => array('filterOut' => array("T_NS_SEPARATOR")),
                                   -1 => array('atom' => $operands),
-                                   0 => array('token' => 'T_COMMA',
+                                   0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),

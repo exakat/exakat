@@ -8,21 +8,23 @@ Label : CODE
       <<<EOD
 
       Label : STRING
-        Concat
-        Label : CONCAT
-          A 
-        Label : CONCAT
-          ->
-          Label : METHOD
-            b
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'c'
-          Label : OBJECT
-            $a
-        Label : CONCAT
+        Concatenation
+        Label : ELEMENT
            B
 
+        Label : ELEMENT
+          A 
+        Label : ELEMENT
+          {
+          Label : NAME
+            ->
+            Label : METHOD
+              b
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'c'
+            Label : OBJECT
+              $a
     Label : LEFT
       $x

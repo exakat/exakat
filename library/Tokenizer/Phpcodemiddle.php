@@ -7,15 +7,13 @@ class Phpcodemiddle extends TokenAuto {
 
     function _check() {
 // ? >A<?php 
-        $this->conditions = array(-1 => array('token' => array('T_CLOSE_TAG'),
+        $this->conditions = array( 0 => array('token' => Phpcodemiddle::$operators,
                                               'atom' => 'none'),
-                                   0 => array('atom' => 'yes'),
-                                   1 => array('token' => 'T_OPEN_TAG',
+                                   1 => array('atom' => 'yes'),
+                                   2 => array('token' => 'T_OPEN_TAG',
                                               'atom' => 'none'),
         );
-        $this->actions = array('transform'    => array( -1 => 'DROP',
-                                                         1 => 'DROP',)
-                              );
+        $this->actions = array('Phpcodemiddle'    => true);
         $this->checkAuto();
         
         return $this->checkRemaining();

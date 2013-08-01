@@ -168,7 +168,12 @@ class Token {
     g.removeVertex(it.in('NEXT').in('NEXT').next()); 
     g.removeVertex(it.out('NEXT').next()); 
     g.removeVertex(it); 
-}";
+}
+
+g.V.has('index', 'yes').filter{it.out('INDEXED').count() == 0}.each{
+    g.removeVertex(it);
+}
+";
         Token::query($query);
     }
 
@@ -189,8 +194,9 @@ g.V.has('root', 'true').as('root').out('NEXT').hasNot('token', 'T_END').back('ro
     g.addEdge(x, y, 'NEXT');
     g.addEdge(a, x, 'NEXT');
     x.setProperty('root', true);
-
 }
+
+
        ";
         Token::query($query);
     }

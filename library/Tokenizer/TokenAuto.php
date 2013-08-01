@@ -7,7 +7,7 @@ class TokenAuto extends Token {
     
     public function prepareQuery() {
         $class = str_replace("Tokenizer\\", '', get_class($this));
-        if (NEO_VERSION && in_array($class, Token::$types)) {
+        if (in_array($class, Token::$types)) {
             $query = "g.idx('racines')[['token':'$class']].out('INDEXED')";
         } else {
             $query = "g.V";
@@ -531,6 +531,29 @@ g.removeVertex(it.out('NEXT').next());
 ";
             unset($actions['insertConcat2']);
         }        
+        
+if (isset($actions['Phpcodemiddle'])) {
+            $qactions[] = "
+/* Phpcodemiddle */
+a = it.in('NEXT').next();
+c = it.out('NEXT').next();
+d = c.out('NEXT').next();
+e = d.out('NEXT').next();
+
+it.setProperty('code', 'Phpcodemiddle');
+
+g.addEdge(a, c, 'NEXT');
+g.addEdge(c, e, 'NEXT');
+
+d.bothE('NEXT').each{ g.removeEdge(it); }
+it.bothE('NEXT').each{ g.removeEdge(it); }
+
+g.removeVertex(d);
+g.removeVertex(it);
+
+";
+            unset($actions['Phpcodemiddle']);
+        }                
 
         if (isset($actions['insertConcat3'])) {
             $qactions[] = "
@@ -626,8 +649,21 @@ g.addEdge(it, x, 'NEXT');
 g.addEdge(x,  f, 'NEXT');
 
 ";
+            } elseif ($destination == -1) {
+                list($atom, $link) = each($config);
+                display("addEdge : $atom\n");
+                $qactions[] = "
+/* addEdge in */
+x = g.addVertex(null, [code:'void', atom:'$atom', 'file':it.file, virtual:true]);
+f = it.in('NEXT').next();
+
+g.removeEdge(it.inE('NEXT').next());
+g.addEdge(x, it, 'NEXT');
+g.addEdge(f, x, 'NEXT');
+
+";
             } else {
-                print "No support for addEdge with destination 0 or less\n";
+                print "Only support for addEdge with destination -1 or 0\n";
             }
             unset($actions['addEdge']);
             }
