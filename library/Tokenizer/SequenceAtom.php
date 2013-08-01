@@ -55,7 +55,7 @@ class SequenceAtom extends TokenAuto {
                                'order'      => array(1 =>  1),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
-                               );
+                               'cleanIndex' => true );
         $this->checkAuto();
         
         // @note sequence next to another instruction
@@ -77,8 +77,9 @@ class SequenceAtom extends TokenAuto {
                                    1 => array('atom' => 'Sequence')
         );
         
-        $this->actions = array( 'transform'   => array(1 => 'ELEMENT'),
-                                'mergeNext'  => array('Sequence' => 'ELEMENT'));
+        $this->actions = array( 'transform'  => array(1 => 'ELEMENT'),
+                                'mergeNext'  => array('Sequence' => 'ELEMENT'),
+                                'cleanIndex' => true);
         $this->checkAuto();
        
         return $this->checkRemaining();

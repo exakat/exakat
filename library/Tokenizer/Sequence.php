@@ -91,7 +91,7 @@ class Sequence extends TokenAuto {
                                );
         $this->checkAuto();
 
-        // @note sequence next to another instruction
+        // @note ; next to another instruction
         $this->conditions = array( 0 => array('atom' => 'Sequence' ),
                                    1 => array('token' => Sequence::$operators,
                                               'atom'  => 'none'),
@@ -113,8 +113,7 @@ class Sequence extends TokenAuto {
         $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'),
                                'order'       => array(-1 => 1),
                                'atom'        => 'Sequence',
-                               'cleanIndex'  => true,
-                               );
+                               'cleanIndex'  => true);
         $this->checkAuto();
 
         // @note End of PHP script
@@ -131,6 +130,7 @@ class Sequence extends TokenAuto {
         $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'),
                                'order'       => array(-1 => 1),
                                'atom'        => 'Sequence',
+                               'cleanIndex'  => true
                                );
         $this->checkAuto(); 
        

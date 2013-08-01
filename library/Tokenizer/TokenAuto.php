@@ -288,6 +288,8 @@ a = it.out('NEXT').next();
 
 a.setProperty('code', 'const');
 a.setProperty('atom', 'Const');
+a.setProperty('token', 'T_CONST');
+g.addEdge(g.idx('racines')[['token':'_Const']].next(), a, 'INDEXED');
 
 b = a.out('NEXT').next();
 
