@@ -15,7 +15,7 @@ class Staticconstant extends TokenAuto {
         $this->actions = array('makeEdge'   => array( -1 => 'CLASS',
                                                        1 => 'CONSTANT'),
                                'atom'       => 'Staticconstant',
-                               );
+                               'cleanIndex' => true );
         $this->checkAuto(); 
 
         return $this->checkRemaining();

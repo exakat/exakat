@@ -5,20 +5,18 @@ Label : CODE
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      void
+      ,
       Label : ARGUMENT
-        ,
-        Label : ARGUMENT
+        [
+        Label : VARIABLE
           [
           Label : VARIABLE
-            [
-            Label : VARIABLE
-              $y
-            Label : INDEX
-              1
+            $y
           Label : INDEX
-            2
-        Label : ARGUMENT
-          $x
-        Label : ARGUMENT
-          '1'
+            1
+        Label : INDEX
+          2
+      Label : ARGUMENT
+        $x
+      Label : ARGUMENT
+        '1'

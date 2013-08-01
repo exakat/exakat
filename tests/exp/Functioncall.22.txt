@@ -11,32 +11,6 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            ,
-            Label : ARGUMENT
-              'volume'
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                'method'
-              Label : VALUE
-                [
-                Label : VARIABLE
-                  $identify
-                Label : INDEX
-                  3
-          Label : VALUE
-            intval
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $identify
-                Label : INDEX
-                  4
-        Label : ARGUMENT
-          =>
-          Label : KEY
             'dbcharset'
           Label : VALUE
             [
@@ -54,5 +28,29 @@ Label : CODE
               $identify
             Label : INDEX
               5
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'volume'
+          Label : VALUE
+            intval
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $identify
+                Label : INDEX
+                  4
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'method'
+          Label : VALUE
+            [
+            Label : VARIABLE
+              $identify
+            Label : INDEX
+              3
     Label : LEFT
       $dumpinfo

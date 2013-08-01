@@ -16,7 +16,8 @@ class Methodcall extends TokenAuto {
         
         $this->actions = array('makeEdge'   => array( -1 => 'OBJECT',
                                                        1 => 'METHOD'),
-                               'atom'       => 'Methodcall');
+                               'atom'       => 'Methodcall',
+                               'cleanIndex' => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();

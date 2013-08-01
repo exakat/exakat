@@ -12,8 +12,6 @@ Label : CODE
         array
         Label : ARGUMENTS
           void
-          Label : ARGUMENT
-            void
       Label : LEFT
         $d
     Label : ARGUMENT
@@ -22,8 +20,6 @@ Label : CODE
         array
         Label : ARGUMENTS
           void
-          Label : ARGUMENT
-            void
       Label : LEFT
         $c
     Label : ARGUMENT
@@ -32,8 +28,6 @@ Label : CODE
         array
         Label : ARGUMENTS
           void
-          Label : ARGUMENT
-            void
       Label : LEFT
         $b
   Label : BLOCK

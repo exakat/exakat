@@ -13,45 +13,52 @@ class Arguments extends TokenAuto {
                                        'Reference', 'Cast', 'Postplusplus', 'Preplusplus', 'Typehint', 'Bitshift', 'Noscream', );
 
     function _check() {
+
+        // Argument next to ( 
+        $this->conditions = array(-1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                              'atom' => 'none'),
+                                   0 => array('token' => Arguments::$operators,
+                                              'atom'  => 'none'),
+        );
+        $this->actions = array('addEdge'     => array(-1 => array('Void' => 'ARGUMENT')),
+                               'keepIndexed' => true);
+        $this->checkAuto();
         
+        // Argument next to ) 
+        $this->conditions = array( 0 => array('token' => Arguments::$operators,
+                                              'atom' => 'none'),
+                                   1 => array('token' => 'T_CLOSE_PARENTHESIS',
+                                              'atom'  => 'none'),
+        );
+        $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')),
+                               'keepIndexed' => true);
+        $this->checkAuto();
+
         // @note End of )
         $this->conditions = array( 0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('token' => 'T_COMMA',
                                               'atom'  => 'none'),
         );
-        $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')));
-        $this->checkAuto();
-
-        $this->conditions = array( 0 => array('token' => Arguments::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('token' => 'T_CLOSE_PARENTHESIS',
-                                              'atom'  => 'none'),
-        );
-        $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')));
-        $this->checkAuto();
-
-        $this->conditions = array(-1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'atom' => 'none'),
-                                   0 => array('token' => Arguments::$operators,
-                                              'atom'  => 'none'),
-        );
-        $this->actions = array('addEdge'    => array(0 => array('Void' => 'ARGUMENT')));
+        $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')),
+                               'keepIndexed' => true);
         $this->checkAuto();
 
         $operands = Arguments::$operands_wa;
         $operands[] = 'Arguments';
         
         // @note arguments separated by ,
-        $this->conditions = array(-2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR', 'T_STRING', 'T_DOUBLE_ARROW'),
-                                                                         Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
+        $this->conditions = array(//-2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR', 'T_STRING', 'T_DOUBLE_ARROW'),
+                                  //                                       Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
+                                  -2 => array('token' => array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_ECHO')),
                                   -1 => array('atom' => $operands ),
                                    0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR','T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_VARIABLE', 'T_DOUBLE_ARROW'),
-                                                                         Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
-                            );
+                                   2 => array('token' => array('T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_SEMICOLON')),
+                                   //2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR','T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_VARIABLE', 'T_DOUBLE_ARROW'),
+                                   //                                       Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
+                                 );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
                                                       -1 => 'ARGUMENT'

@@ -1,84 +1,72 @@
 <?php
 
-Label : NEXT
-  $a
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
     =
-    Label : NEXT
+    Label : RIGHT
       array
-      Label : NEXT
-        (
-        Label : NEXT
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          void
+        Label : ARGUMENT
           =>
           Label : KEY
-            ,
-            Label : ARGUMENT
-              \
-              Label : ELEMENT
-                l
-              Label : ELEMENT
-                k
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                ->
-                Label : PROPERTY
-                  g
-                Label : OBJECT
-                  $f
-              Label : VALUE
-                ->
-                Label : PROPERTY
-                  i
-                Label : OBJECT
-                  $h
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                -
-                Label : SIGN
-                  4
-              Label : VALUE
-                -
-                Label : SIGN
-                  5
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                [
-                Label : VARIABLE
-                  $c
-                Label : INDEX
-                  'd'
-              Label : VALUE
-                [
-                Label : VARIABLE
-                  $e
-                Label : INDEX
-                  'f'
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                $a
-              Label : VALUE
-                $b
+            \
+            Label : ELEMENT
+              l
+            Label : ELEMENT
+              k
           Label : VALUE
             \
             Label : ELEMENT
               n
             Label : ELEMENT
               m
-          Label : NEXT
-            ,
-            Label : NEXT
-              void
-              Label : NEXT
-                )
-                Label : NEXT
-                  ;
-                  Label : NEXT
-                    ?>
-                    Label : NEXT
-                      /**/
-                      Label : NEXT
-                        /* * */
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ->
+            Label : PROPERTY
+              g
+            Label : OBJECT
+              $f
+          Label : VALUE
+            ->
+            Label : PROPERTY
+              i
+            Label : OBJECT
+              $h
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            -
+            Label : SIGN
+              4
+          Label : VALUE
+            -
+            Label : SIGN
+              5
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'd'
+          Label : VALUE
+            [
+            Label : VARIABLE
+              $e
+            Label : INDEX
+              'f'
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            $a
+          Label : VALUE
+            $b
+    Label : LEFT
+      $a

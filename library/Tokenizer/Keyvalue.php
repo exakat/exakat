@@ -15,9 +15,10 @@ class Keyvalue extends TokenAuto {
                                             array('T_OPEN_BRACKET', 'T_OBJECT_OPERATOR', 'T_INC', 'T_DEC', 'T_NS_SEPARATOR',
                                                   'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_DOT', 'T_DOUBLE_COLON', ))));
         
-        $this->actions = array('transform'    => array(-1 => 'KEY',
-                                                        1 => 'VALUE'),
-                               'atom'       => 'Keyvalue');
+        $this->actions = array('transform'  => array(-1 => 'KEY',
+                                                      1 => 'VALUE'),
+                               'atom'       => 'Keyvalue',
+                               'cleanIndex' => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();
