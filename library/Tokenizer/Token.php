@@ -61,7 +61,7 @@ class Token {
                                  //'_Class' Because to Class_tmp
                                  '_Abstract',
                                  '_Final',
-                                 // '_Case', Check index in the regex
+                                 '_Case', //Check index in the regex
                                  // '_Default', Check index in the regex
                                  '_Switch',
                                  '_Try',
@@ -75,6 +75,8 @@ class Token {
                                  'Block',
                                  //'Blockspecial', // conflict with 0th element.
                                  'Sequence', 
+//                                 'SequenceAtom', 
+                                 'Ifthen', 
                                 );
     
     function __construct($client) {

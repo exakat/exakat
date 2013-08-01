@@ -13,7 +13,7 @@ Label : CODE
   Label : THEN
     Block With control structure
     Label : CODE
-      while
+      do
       Label : LOOP
         {
         Label : CODE

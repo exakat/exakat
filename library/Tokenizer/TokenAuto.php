@@ -716,6 +716,29 @@ it.bothE('NEXT').each{ g.removeEdge(it) ; }
             ";
             unset($actions['createBlockWithSequence']);
         }
+
+        if (isset($actions['createBlockWithSequenceForCase']) && $actions['createBlockWithSequenceForCase']) {
+            $qactions[] = " 
+/* createBlockWithSequenceForCase */ 
+x = g.addVertex(null, [code:'Block With Sequence For Case', atom:'Block', 'file':it.file, virtual:true]);
+
+a = it.out('NEXT').out('NEXT').out('NEXT').next();
+
+a.out('NEXT').has('token', 'T_SEMICOLON').each{
+    g.addEdge(a, it.out('NEXT').next(), 'NEXT');
+    it.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(it);
+}
+
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, a, 'CODE');
+g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+
+a.bothE('NEXT').each{ g.removeEdge(it) ; }
+
+            ";
+            unset($actions['createBlockWithSequenceForCase']);
+        }
         
         if (isset($actions['mergePrev']) && $actions['mergePrev']) {
             foreach($actions['mergePrev'] as $atom => $link) {

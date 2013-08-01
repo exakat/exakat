@@ -91,57 +91,6 @@ class Sequence extends TokenAuto {
                                );
         $this->checkAuto();
 
-        // @note instructions not separated by ; 
-        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Var', 'Global', 'Static', 'Logical', 
-                           'Const', 'Ppp', 'Foreach', 'For', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
-                           'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison',
-                           'Noscream', 'Property', 'Staticproperty', 'Label',);
-        $this->conditions = array(-1 => array('filterOut' => array_merge(array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', 'T_ABSTRACT', 'T_FINAL'),
-                                                             Assignation::$operators)), 
-                                   0 => array('atom' => $operands2),
-                                   1 => array('atom' => $operands2),
-                                   2 => array('filterOut2' => $next_operator),
-        );
-        $this->actions = array('insertSequence'  => true);
-        $this->checkAuto();
-
-        // @note sequence next to another instruction
-        $this->conditions = array(-1 => array('filterOut' => $yield_operator), 
-                                   0 => array('atom' => 'Sequence'),
-                                   1 => array('atom' => $operands),
-                                   2 => array('filterOut' => $next_operator),
-        );
-        
-        $this->actions = array('transform'   => array(1 => 'ELEMENT'),
-                               'order'      => array(1 =>  1),
-                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence',
-                               );
-        $this->checkAuto();
-        
-        // @note sequence next to another instruction
-        $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
-                                  -1 => array('atom' => $operands ),
-                                   0 => array('atom' => 'Sequence')
-        );
-        
-        $this->actions = array('transform'   => array(-1 => 'ELEMENT'),
-                               'order'      => array(-1 =>  1),
-                               'mergePrev'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence',
-                               );
-        $this->checkAuto();
-
-        // @note sequence next to another sequence
-        $this->conditions = array(-1 => array('filterOut' => $yield_operator), 
-                                   0 => array('atom' => 'Sequence' ),
-                                   1 => array('atom' => 'Sequence')
-        );
-        
-        $this->actions = array( 'transform'   => array(1 => 'ELEMENT'),
-                                'mergeNext'  => array('Sequence' => 'ELEMENT'));
-        $this->checkAuto();
-
         // @note sequence next to another instruction
         $this->conditions = array( 0 => array('atom' => 'Sequence' ),
                                    1 => array('token' => Sequence::$operators,

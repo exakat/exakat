@@ -6,18 +6,6 @@ class Blockspecial extends TokenAuto {
 
     function _check() {
     // @doc Block in a switch/case/default
-        $this->conditions = array( -3 => array('token' => 'T_CASE',
-                                               'atom' => 'none'),
-                                   -2 => array('atom' => 'yes'),
-                                   -1 => array('token' => array('T_COLON', 'T_SEMICOLON'),
-                                               'atom' => 'none'),
-                                    0 => array('atom' => 'Sequence'),
-                                    1 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')),
-        );
-        
-        $this->actions = array('createBlockWithSequence'    => true);
-        $this->checkAuto(); 
-
         $this->conditions = array( -2 => array('token' => 'T_DEFAULT',
                                                'atom' => 'none'),
                                    -1 => array('token' => array('T_COLON', 'T_SEMICOLON'),

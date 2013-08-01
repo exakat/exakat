@@ -11,18 +11,6 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        =
-        Label : RIGHT
-          3
-        Label : LEFT
-          $e
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          4
-        Label : LEFT
-          $f
-      Label : ELEMENT
         switch
         Label : NAME
           $c
@@ -33,7 +21,7 @@ Label : CODE
             Label : CASE
               'a'
             Label : CODE
-              Block With Next
+              Block With Sequence For Case
               Label : CODE
                 ;
                 Label : ELEMENT
@@ -46,6 +34,18 @@ Label : CODE
                     1
                   Label : LEFT
                     $x
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          3
+        Label : LEFT
+          $e
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          4
+        Label : LEFT
+          $f
   Label : ELSE
     elseif
     Label : CONDITION

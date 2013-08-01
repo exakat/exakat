@@ -21,6 +21,4 @@ Label : CODE
     Label : CONDITION
       $x
     Label : LOOP
-      ;
-      Label : BLOCK
-        ?>
+      Block with While

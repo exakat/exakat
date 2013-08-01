@@ -74,7 +74,8 @@ $classes = array(
     'Ternary',      // Fait
     'Constant',     // Fait
     '_Return',      // Fait
-    'Sequence',
+    'Sequence',     // Fait
+    'SequenceAtom',
     'SequenceCaseDefault',
     '_Const',       // Fait
     'Block',        // Fait

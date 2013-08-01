@@ -3,7 +3,7 @@
 Label : CODE
   ;
   Label : ELEMENT
-    while
+    do
     Label : LOOP
       {
       Label : CODE

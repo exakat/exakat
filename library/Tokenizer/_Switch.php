@@ -18,7 +18,8 @@ class _Switch extends TokenAuto {
                                                         2 => 'NAME',
                                                         3 => 'DROP',
                                                         4 => 'CASES'),
-                               'atom'       => 'Switch');
+                               'atom'       => 'Switch',
+                               'cleanIndex' => true);
         $this->checkAuto();
         
         return $this->checkRemaining();

@@ -3,10 +3,12 @@
 namespace Tokenizer;
 
 class Ifthen extends TokenAuto {
+    static public $operators = array('T_IF', 'T_ELSEIF');
+
     function _check() {
     
     // @doc if then else
-        $this->conditions = array( 0 => array('token' => array('T_IF', 'T_ELSEIF'),
+        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => 'Block'),
@@ -25,7 +27,7 @@ class Ifthen extends TokenAuto {
         $r = $this->checkAuto(); 
 
     // @doc if then else
-        $this->conditions = array( 0 => array('token' => array('T_IF', 'T_ELSEIF')),
+        $this->conditions = array( 0 => array('token' => Ifthen::$operators),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => 'Block'),
                                    3 => array('atom' => 'Ifthen'),
@@ -42,7 +44,7 @@ class Ifthen extends TokenAuto {
         $r = $this->checkAuto(); 
 
     // @doc if then NO ELSE
-        $this->conditions = array( 0 => array('token' => array('T_IF', 'T_ELSEIF'),
+        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => 'Block'),
@@ -58,7 +60,7 @@ class Ifthen extends TokenAuto {
         $r = $this->checkAuto(); 
 
     // @doc if ( ) : endif
-        $this->conditions = array( 0 => array('token' => array('T_IF', 'T_ELSEIF'),
+        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
@@ -76,7 +78,7 @@ class Ifthen extends TokenAuto {
         $r = $this->checkAuto(); 
 
     // @doc if ( ) : else: endif
-        $this->conditions = array( 0 => array('token' => array('T_IF', 'T_ELSEIF'),
+        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
@@ -102,7 +104,7 @@ class Ifthen extends TokenAuto {
         $r = $this->checkAuto(); 
 
     // @doc if ( ) : elseif
-        $this->conditions = array( 0 => array('token' => array('T_IF', 'T_ELSEIF'),
+        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
@@ -119,7 +121,7 @@ class Ifthen extends TokenAuto {
                                );
         $r = $this->checkAuto(); 
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 

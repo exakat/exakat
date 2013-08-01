@@ -24,7 +24,8 @@ class Parenthesis extends TokenAuto {
         
         $this->actions = array('makeEdge' => array( '1' => 'CODE'),
                                'dropNext' => array(1),
-                               'atom'     => 'Parenthesis');
+                               'atom'     => 'Parenthesis',
+                               'cleanIndex' => true);
         
         $this->checkAuto();
         
