@@ -16,21 +16,23 @@ class _Const extends TokenAuto {
         $this->actions = array('transform'   => array(   1 => 'NAME',
                                                          2 => 'DROP',
                                                          3 => 'VALUE'),
-                               'atom'       => 'Const',
-                               );
+                               'atom'        => 'Const',
+                               'keepIndexed' => true,
+                               'cleanIndex'  => true);
         $this->checkAuto(); 
 
     // class x { const a = 2; }
-        $this->conditions = array( 0 => array('atom' => 'Const'),
+        $this->conditions = array( 0 => array('token' => _Const::$operators),
                                    1 => array('token' => 'T_COMMA'),
-                                   2 => array('atom' => 'String'),
+                                   2 => array('atom'  => 'String'),
                                    3 => array('token' => 'T_EQUAL'),
-                                   4 => array('atom' => array('String,', 'Integer', 'Staticconstant')),
+                                   4 => array('atom'  => array('String,', 'Integer', 'Staticconstant')),
                                  );
         
         $this->actions = array('transform'   => array(   1 => 'TO_CONST' ),
                                'atom'       => 'Const',
-                               );
+                               'keepIndexed' => true,
+                               'cleanIndex'  => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();

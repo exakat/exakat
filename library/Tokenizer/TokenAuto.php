@@ -301,6 +301,13 @@ g.removeVertex(b.out('NEXT').next());
 b.bothE('NEXT').each{ g.removeEdge(it); }
 f.bothE('NEXT').each{ g.removeEdge(it); }
 
+/* Remove children's index */  
+a.outE.hasNot('label', 'NEXT').inV.each{ 
+    it.inE('INDEXED').each{    
+        g.removeEdge(it);
+    } 
+}
+
 ";                    
                     } elseif ($label == 'SEQUENCE') {
                         $qactions[] = "
@@ -484,6 +491,13 @@ g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
 
 it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
 it.bothE('NEXT').each{ g.removeEdge(it); }
+
+/* Remove children's index */  
+x.outE.hasNot('label', 'NEXT').inV.each{ 
+    it.inE('INDEXED').each{    
+        g.removeEdge(it);
+    } 
+}
 
 ";
             unset($actions['insertSequence']);

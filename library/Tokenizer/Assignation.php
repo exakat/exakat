@@ -30,21 +30,23 @@ class Assignation extends TokenAuto {
                          );
         
         $this->conditions = array(-2 => array('filterOut2' => 'T_STRING'),
-                                  -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall','Noscream', 'Reference', 'Not', 'Arrayappend' , 'Typehint',)),
+                                  -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 'Noscream', 'Reference', 'Not', 'Arrayappend' , 'Typehint')),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut' => array_merge(Assignation::$operators, Addition::$operators, Multiplication::$operators, Logical::$operators, Bitshift::$operators, Comparison::$operators, 
+                                   2 => array('filterOut' => array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators, 
+                                                                         Comparison::$operators, Logical::$operators, Multiplication::$operators, 
                                                                          array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
-                                                                               'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_QUESTION', ))),
+                                                                               'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
+                                                                               'T_QUESTION', ))),
                                   
         );
         
-        $this->actions = array('makeEdge'    => array( '1' => 'RIGHT',
-                                                      '-1' => 'LEFT'),
+        $this->actions = array('makeEdge'    => array( 1 => 'RIGHT',
+                                                      -1 => 'LEFT'),
                                'atom'       => 'Assignation',
                                'cleanIndex' => true);
-
         $this->checkAuto();
+//        $this->printQuery();
 
         return $this->checkRemaining();
     } 
