@@ -10,13 +10,13 @@ class _Var extends TokenAuto {
     // class x { var $x }
         $this->conditions = array( 0 => array('token' => _Var::$operators),
                                    1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static' )),
-                                   2 => array('filterOut' => $values),
-                                   // T_SEMICOLON because of _Class 28 test
+                                   2 => array('filterOut' => $values)
                                  );
         
         $this->actions = array('transform' => array( 1 => 'DEFINE'),
                                'add_void'  => array( 0 => 'VALUE'), 
                                'atom'      => 'Var',
+                               'cleanIndex'=> true
                                );
 
         $this->checkAuto(); 
