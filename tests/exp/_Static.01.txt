@@ -9,32 +9,32 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        static
-        Label : NAME
-          $e
-        Label : VALUE
-          '23'
-      Label : ELEMENT
-        static
-        Label : NAME
-          $d
-        Label : VALUE
-          array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
+        ;
+        Label : ELEMENT
+          static
+          Label : NAME
+            $e
+          Label : VALUE
+            '23'
+        Label : ELEMENT
+          static
+          Label : NAME
+            $d
+          Label : VALUE
+            array
+            Label : ARGUMENTS
               void
-      Label : ELEMENT
-        static
-        Label : NAME
-          $c
-        Label : VALUE
-          -
-          Label : SIGN
-            2
-      Label : ELEMENT
-        static
-        Label : NAME
-          $b
-        Label : VALUE
-          1
+        Label : ELEMENT
+          static
+          Label : NAME
+            $c
+          Label : VALUE
+            -
+            Label : SIGN
+              2
+        Label : ELEMENT
+          static
+          Label : NAME
+            $b
+          Label : VALUE
+            1
