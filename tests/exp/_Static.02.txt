@@ -7,54 +7,56 @@ Label : CODE
   Label : BLOCK
     {
     Label : CODE
-      Sequence
-      Label : ELEMENT
-        static
-        Label : NAME
-          $e
-        Label : VALUE
-          void
-      Label : ELEMENT
-        static
-        Label : NAME
-          $d
-        Label : VALUE
-          void
-      Label : ELEMENT
-        static
-        Label : NAME
-          $c
-        Label : VALUE
-          void
-      Label : ELEMENT
-        static
-        Label : NAME
-          $b
-        Label : VALUE
-          void
+      ;
       Label : ELEMENT
         Sequence
         Label : ELEMENT
           static
           Label : NAME
-            $i
+            $e
           Label : VALUE
             void
         Label : ELEMENT
           static
           Label : NAME
-            $h
+            $d
           Label : VALUE
             void
         Label : ELEMENT
           static
           Label : NAME
-            $g
+            $c
           Label : VALUE
             void
         Label : ELEMENT
           static
           Label : NAME
-            $f
+            $b
           Label : VALUE
             void
+        Label : ELEMENT
+          Sequence
+          Label : ELEMENT
+            static
+            Label : NAME
+              $i
+            Label : VALUE
+              void
+          Label : ELEMENT
+            static
+            Label : NAME
+              $h
+            Label : VALUE
+              void
+          Label : ELEMENT
+            static
+            Label : NAME
+              $g
+            Label : VALUE
+              void
+          Label : ELEMENT
+            static
+            Label : NAME
+              $f
+            Label : VALUE
+              void

@@ -9,26 +9,28 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        var
-        Label : VALUE
-          void
-        Label : DEFINE
-          $e
-      Label : ELEMENT
-        var
-        Label : VALUE
-          void
-        Label : DEFINE
-          $d
-      Label : ELEMENT
-        var
-        Label : VALUE
-          void
-        Label : DEFINE
-          $c
-      Label : ELEMENT
-        var
-        Label : VALUE
-          void
-        Label : DEFINE
-          $b
+        ;
+        Label : ELEMENT
+          var
+          Label : VALUE
+            void
+          Label : DEFINE
+            $e
+        Label : ELEMENT
+          var
+          Label : VALUE
+            void
+          Label : DEFINE
+            $d
+        Label : ELEMENT
+          var
+          Label : VALUE
+            void
+          Label : DEFINE
+            $c
+        Label : ELEMENT
+          var
+          Label : VALUE
+            void
+          Label : DEFINE
+            $b
