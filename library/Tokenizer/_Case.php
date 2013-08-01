@@ -6,18 +6,19 @@ class _Case extends TokenAuto {
     static public $operators = array('T_CASE');
     
     function _check() {
-        /*
         // Case is empty (case 'a': )
-        $this->conditions = array(-2 => array('token' => _Case::$operators,
+        $this->conditions = array(0 => array('token' => _Case::$operators,
                                              'atom' => 'none'),
-                                  -1 => array('atom' => 'yes'),
-                                  0 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  1 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT')),
+                                  1 => array('atom' => 'yes'),
+                                  2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
+                                  3 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT')),
         );
         
-        $this->actions = array('addEdge'    => array(0 => array('Block' => 'CODE')));
-        $r = $this->checkAuto();
+        $this->actions = array('createVoidForCase' => true,
+                               'keepIndexed'       => true);
+        $this->checkAuto();
 
+        /*
         // Case has only one instruction empty (case 'a': $x++)
         $this->conditions = array(-2 => array('token' => _Case::$operators,
                                               'atom' => 'none'),

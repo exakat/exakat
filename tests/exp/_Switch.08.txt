@@ -7,13 +7,13 @@ Label : CODE
   Label : CASES
     {
     Label : CODE
-      Sequence
+      Sequence Case Default
       Label : ELEMENT
         case
         Label : CASE
           'A'
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
             ;
             Label : ELEMENT
@@ -33,7 +33,7 @@ Label : CODE
         Label : CASE
           'B'
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
             ;
             Label : ELEMENT
@@ -53,7 +53,7 @@ Label : CODE
         Label : CASE
           'C'
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
             ;
             Label : ELEMENT

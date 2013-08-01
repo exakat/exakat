@@ -21,8 +21,9 @@ class _Return extends TokenAuto {
                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT')),
         );
         
-        $this->actions = array('makeEdge' => array( '1' => 'RETURN'),
-                               'atom'     => 'Return');
+        $this->actions = array('makeEdge'   => array( '1' => 'RETURN'),
+                               'atom'       => 'Return',
+                               'cleanIndex' => true);
         $this->checkAuto();
         
         return $this->checkRemaining();

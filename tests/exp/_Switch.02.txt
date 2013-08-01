@@ -11,4 +11,6 @@ Label : CODE
       Label : CASE
         1
       Label : CODE
-        void
+        Block With Sequence For Case
+        Label : CODE
+          Void

@@ -7,16 +7,20 @@ Label : CODE
   Label : CASES
     {
     Label : CODE
-      Sequence
+      Sequence Case Default
       Label : ELEMENT
         case
         Label : CASE
           1
         Label : CODE
-          void
+          Block With Sequence For Case
+          Label : CODE
+            Void
       Label : ELEMENT
         case
         Label : CASE
           2
         Label : CODE
-          void
+          Block With Sequence For Case
+          Label : CODE
+            Void

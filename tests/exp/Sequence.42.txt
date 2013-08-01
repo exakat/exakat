@@ -1,68 +1,70 @@
 <?php
 
 Label : CODE
-  Sequence
+  ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'b'
-        Label : LEFT
-          $a
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $c
-    Label : ELSE
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $d
-  Label : ELEMENT
-    &&
-    Label : LEFT
-      !
-      Label : NOT
-        e
+    Sequence
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            'b'
+          Label : LEFT
+            $a
+      Label : THEN
+        {
+        Label : CODE
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $c
+      Label : ELSE
+        {
+        Label : CODE
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $d
+    Label : ELEMENT
+      &&
+      Label : LEFT
+        !
+        Label : NOT
+          e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $f
+      Label : RIGHT
+        g
         Label : ARGUMENTS
-          void
+          ,
           Label : ARGUMENT
-            $f
-    Label : RIGHT
-      g
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
             [
             Label : VARIABLE
               [
               Label : VARIABLE
-                $l
+                [
+                Label : VARIABLE
+                  $l
+                Label : INDEX
+                  'm'
               Label : INDEX
-                'm'
+                'n'
             Label : INDEX
-              'n'
-          Label : INDEX
-            $o
-        Label : ARGUMENT
-          'k'
-        Label : ARGUMENT
-          0
-        Label : ARGUMENT
-          $j
-        Label : ARGUMENT
-          $i
-        Label : ARGUMENT
-          $h
+              $o
+          Label : ARGUMENT
+            'k'
+          Label : ARGUMENT
+            0
+          Label : ARGUMENT
+            $j
+          Label : ARGUMENT
+            $i
+          Label : ARGUMENT
+            $h

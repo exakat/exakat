@@ -617,6 +617,13 @@ g.addEdge(x, it.out('NEXT').next(), 'VARIABLE');
 it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it);}    
 it.bothE('NEXT').each{ g.removeEdge(it);}    
 
+/* Remove children's index */  
+x.outE.hasNot('label', 'NEXT').inV.each{ 
+    it.inE('INDEXED').each{    
+        g.removeEdge(it);
+    } 
+}
+
 ";
             unset($actions['to_typehint']);
         }              
@@ -790,6 +797,22 @@ a.bothE('NEXT').each{ g.removeEdge(it) ; }
 
             ";
             unset($actions['createBlockWithSequenceForCase']);
+        }
+
+        if (isset($actions['createVoidForCase']) && $actions['createVoidForCase']) {
+            $qactions[] = " 
+/* createBlockWithSequenceForCase */ 
+x = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', 'file':it.file, virtual:true]);
+
+a = it.out('NEXT').out('NEXT').next();
+b = a.out('NEXT').next();
+
+a.outE('NEXT').each{ g.removeEdge(it) ; }
+g.addEdge(a, x, 'NEXT');
+g.addEdge(x, b, 'NEXT');
+
+            ";
+            unset($actions['createVoidForCase']);
         }
         
         if (isset($actions['mergePrev']) && $actions['mergePrev']) {

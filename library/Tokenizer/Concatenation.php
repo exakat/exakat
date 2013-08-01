@@ -15,7 +15,9 @@ class Concatenation extends TokenAuto {
                                    0 => array('token' => 'T_DOT',
                                               'atom'  => 'none'),
                                    1 => array('atom'  => $operands),
-                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
+                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
+                                                                               'T_OPEN_CURLY', 'T_OPEN_BRACKET'),
+                                                                    Assignation::$operators)),
         ); 
         
         $this->actions = array('makeEdge'   => array( 1 => 'CONCAT',
@@ -32,6 +34,7 @@ class Concatenation extends TokenAuto {
 // Fusion of 2 concatenations
         $this->conditions = array( 0 => array('atom' => array('String', 'Variable', 'Property', 'Array', 'Phpcode', 'Concatenation')),
                                    1 => array('atom' => array('String', 'Variable', 'Property', 'Array', 'Phpcode', 'Concatenation')),
+                                   2 => array('filterOut' => Assignation::$operators),
         ); 
         $this->actions = array('mergeConcat' => "Concat");
         $this->checkAuto();

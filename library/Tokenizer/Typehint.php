@@ -9,11 +9,11 @@ class Typehint extends TokenAuto {
                                    1 => array('atom' => 'Variable'),
         );
         
-        $this->actions = array('to_typehint'    => true,
-                               'atom' => 'Typehint');
-        $r = $this->checkAuto();
+        $this->actions = array('to_typehint'  => true,
+                               'atom'         => 'Typehint');
+        $this->checkAuto();
 
-        return $r;
+        return $this->checkRemaining();
     }
 }
 
