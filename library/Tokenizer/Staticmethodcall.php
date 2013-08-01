@@ -15,7 +15,8 @@ class Staticmethodcall extends TokenAuto {
         
         $this->actions = array('makeEdge'   => array( -1 => 'CLASS',
                                                        1 => 'METHOD'),
-                               'atom'       => 'Staticmethodcall');
+                               'atom'       => 'Staticmethodcall',
+                               'cleanIndex' => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();

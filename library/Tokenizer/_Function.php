@@ -20,8 +20,8 @@ class _Function extends TokenAuto {
                                                         3 => 'ARGUMENTS',
                                                         4 => 'DROP', 
                                                         5 => 'BLOCK'),
-                                                
-                               'atom'       => 'Function');
+                               'atom'       => 'Function',
+                               'cleanIndex' => true);
         $this->checkAuto();
 
         $this->conditions = array(0 => array('token' =>  _Function::$operators,
@@ -38,7 +38,8 @@ class _Function extends TokenAuto {
                                                         3 => 'ARGUMENTS',
                                                         4 => 'DROP', 
                                                         5 => 'DROP'),
-                               'atom'       => 'Function');
+                               'atom'       => 'Function',
+                               'cleanIndex' => true);
                                
         $this->checkAuto();
 

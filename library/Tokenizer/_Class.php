@@ -13,7 +13,8 @@ class _Class extends TokenAuto {
                                  );
         
         $this->actions = array('transform'   => array(   1 => 'NAME'),
-                               'atom'       => 'Class_tmp',);
+                               'atom'       => 'Class_tmp',
+                               'cleanIndex' => true);
         $this->checkAuto(); 
 
     // class x extends y {}

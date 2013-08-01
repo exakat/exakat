@@ -15,7 +15,8 @@ class Staticproperty extends TokenAuto {
         
         $this->actions = array('makeEdge'   => array( -1 => 'CLASS',
                                                        1 => 'PROPERTY'),
-                               'atom'       => 'Staticproperty');
+                               'atom'       => 'Staticproperty',
+                               'cleanIndex' => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();
