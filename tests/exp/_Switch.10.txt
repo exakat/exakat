@@ -11,22 +11,20 @@ Label : CODE
       Label : CASE
         'b'
       Label : CODE
-        Block With Next
+        Block With Sequence For Case
         Label : CODE
-          Sequence With Next
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                $c
-            Label : THEN
-              {
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    1
-                  Label : LEFT
-                    $d
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              $c
+          Label : THEN
+            {
+            Label : CODE
+              ;
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  1
+                Label : LEFT
+                  $d

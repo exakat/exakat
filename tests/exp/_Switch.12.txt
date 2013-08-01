@@ -13,10 +13,10 @@ Label : CODE
         Label : CASE
           'f'
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
-            Sequence With Next
-            Label : ELEMENT
+            Block With Sequence For Case
+            Label : CODE
               =
               Label : RIGHT
                 2
@@ -27,10 +27,10 @@ Label : CODE
         Label : CASE
           'c'
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
-            Sequence With Next
-            Label : ELEMENT
+            Block With Sequence For Case
+            Label : CODE
               =
               Label : RIGHT
                 3
@@ -41,10 +41,10 @@ Label : CODE
         Label : CASE
           'e'
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
-            Sequence With Next
-            Label : ELEMENT
+            Block With Sequence For Case
+            Label : CODE
               =
               Label : RIGHT
                 1
@@ -55,10 +55,10 @@ Label : CODE
         Label : CASE
           'b'
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
-            Sequence With Next
-            Label : ELEMENT
+            Block With Sequence For Case
+            Label : CODE
               =
               Label : RIGHT
                 4
@@ -69,7 +69,7 @@ Label : CODE
         Label : CASE
           'd'
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
             ;
             Label : ELEMENT

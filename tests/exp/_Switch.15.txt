@@ -13,17 +13,9 @@ Label : CODE
         Label : CASE
           'b'
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
             ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $d
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $c
             Label : ELEMENT
               require_once
               Label : ARGUMENTS
@@ -35,30 +27,42 @@ Label : CODE
                     Label : ARGUMENT
                       'f'
             Label : ELEMENT
-              break
-              Label : LEVEL
-                void
+              ;
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+              Label : ELEMENT
+                g
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'h'
             Label : ELEMENT
-              g
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'h'
+              ++
+              Label : POSTPLUSPLUS
+                $d
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $c
       Label : ELEMENT
         case
         Label : CASE
           'i'
         Label : CODE
-          void
+          Block With Sequence For Case
+          Label : CODE
+            Void
       Label : ELEMENT
         case
         Label : CASE
           'j'
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
-            Sequence With Next
-            Label : ELEMENT
+            Block With Sequence For Case
+            Label : CODE
               break
               Label : LEVEL
                 1

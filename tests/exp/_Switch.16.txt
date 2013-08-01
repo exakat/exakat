@@ -13,7 +13,7 @@ Label : CODE
         Label : CASE
           'a'
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
             ;
             Label : ELEMENT

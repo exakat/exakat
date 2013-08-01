@@ -7,39 +7,7 @@ Label : CODE
   Label : CASES
     {
     Label : CODE
-      Sequence
-      Label : ELEMENT
-        case
-        Label : CASE
-          'b'
-        Label : CODE
-          Block With Next
-          Label : CODE
-            ;
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-            Label : ELEMENT
-              return
-              Label : RETURN
-                'c'
-      Label : ELEMENT
-        case
-        Label : CASE
-          'd'
-        Label : CODE
-          Block With Next
-          Label : CODE
-            ;
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-            Label : ELEMENT
-              return
-              Label : RETURN
-                'e'
+      Sequence Case Default
       Label : ELEMENT
         default
         Label : CODE
@@ -54,3 +22,39 @@ Label : CODE
               break
               Label : LEVEL
                 void
+      Label : ELEMENT
+        case
+        Label : CASE
+          'b'
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            Block With Sequence For Case
+            Label : CODE
+              ;
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  'c'
+      Label : ELEMENT
+        case
+        Label : CASE
+          'd'
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            Block With Sequence For Case
+            Label : CODE
+              ;
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  'e'
