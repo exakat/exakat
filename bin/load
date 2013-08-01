@@ -136,6 +136,7 @@ function process_file($filename) {
                     'T_ENCAPSED_AND_WHITESPACE'  => 'String',
                     'T_INLINE_HTML'              => 'String',
                     'T_VARIABLE'                 => 'Variable',
+                    'T_STRING_VARNAME'           => 'Variable',
                     'T_LNUMBER'                  => 'Integer', 
                     'T_NUM_STRING'               => 'Integer',
                     'T_DNUMBER'                  => 'Float', 
