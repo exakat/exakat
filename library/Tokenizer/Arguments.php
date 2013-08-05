@@ -50,7 +50,8 @@ class Arguments extends TokenAuto {
         // @note arguments separated by ,
         $this->conditions = array(//-2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR', 'T_STRING', 'T_DOUBLE_ARROW'),
                                   //                                       Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
-                                  -2 => array('token' => array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_ECHO')),
+                                  -2 => array('token' => array_merge(array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_ECHO', 'T_GLOBAL', 'T_IMPLEMENTS', 'T_VAR', 'T_SEMICOLON', 'T_STATIC' ), 
+                                                                     _Ppp::$operators)),
                                   -1 => array('atom' => $operands ),
                                    0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
@@ -86,6 +87,7 @@ class Arguments extends TokenAuto {
                                                    -1 => '1'),
                                'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
                                'atom'       => 'Arguments',
+                               'cleanIndex' => true
                                );
         $this->checkAuto();
 
@@ -104,6 +106,7 @@ class Arguments extends TokenAuto {
                                                    -1 => '1'),
                                'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
                                'atom'       => 'Arguments',
+                               'cleanIndex' => true
                                );
         $this->checkAuto();
 

@@ -29,7 +29,7 @@ class Assignation extends TokenAuto {
                           'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison', 
                          );
         
-        $this->conditions = array(-2 => array('filterOut2' => 'T_STRING'),
+        $this->conditions = array(//-2 => array('filterOut2' => 'T_STRING'),
                                   -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 'Noscream', 'Reference', 'Not', 'Arrayappend' , 'Typehint')),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),

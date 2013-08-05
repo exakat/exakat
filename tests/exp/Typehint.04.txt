@@ -7,22 +7,22 @@ Label : CODE
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
-      Concat
-      Label : CONCAT
+      Typehint
+      Label : CLASS
         Stdclass
-      Label : CONCAT
+      Label : VARIABLE
         $d
     Label : ARGUMENT
-      Concat
-      Label : CONCAT
+      Typehint
+      Label : CLASS
         Stdclass
-      Label : CONCAT
+      Label : VARIABLE
         $c
     Label : ARGUMENT
-      Concat
-      Label : CONCAT
+      Typehint
+      Label : CLASS
         Stdclass
-      Label : CONCAT
+      Label : VARIABLE
         $b
     Label : ARGUMENT
       Typehint

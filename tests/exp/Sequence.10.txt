@@ -9,25 +9,27 @@ Label : CODE
     Label : CASES
       {
       Label : CODE
-        Sequence
+        Sequence Case Default
         Label : ELEMENT
           case
           Label : CASE
             1
           Label : CODE
-            Block With Next
+            Block With Sequence For Case
             Label : CODE
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  2
-                Label : LEFT
-                  $b
+              Block With Sequence For Case
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  break
+                  Label : LEVEL
+                    void
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    2
+                  Label : LEFT
+                    $b
         Label : ELEMENT
           default
           Label : CODE

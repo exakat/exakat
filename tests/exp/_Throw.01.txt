@@ -10,5 +10,3 @@ Label : CODE
         Exception
         Label : ARGUMENTS
           void
-          Label : ARGUMENT
-            void

@@ -17,6 +17,7 @@ class _Ppp extends TokenAuto {
         $this->actions = array('transform' => array( 1 => 'DEFINE'),
                                'add_void'  => array( 0 => 'VALUE'), 
                                'atom'      => 'Ppp',
+                               'cleanIndex' => true,
                                );
 
         $this->checkAuto(); 

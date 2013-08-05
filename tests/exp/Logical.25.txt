@@ -24,8 +24,6 @@ Label : CODE
               e
               Label : ARGUMENTS
                 void
-                Label : ARGUMENT
-                  void
             Label : OBJECT
               [
               Label : VARIABLE

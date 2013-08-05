@@ -8,12 +8,12 @@ Label : CODE
       <<<EOF
 
       Label : STRING
-        Concat
-        Label : CONCAT
-          
-#Allow smarty {php} tags?  These could be dangerous if you don't trust your users.
-\$config['use_smarty_php_tags'] = 
-        Label : CONCAT
+        Concatenation
+        Label : ELEMENT
+          ;
+
+
+        Label : ELEMENT
           ${
           Label : NAME
             ?
@@ -27,12 +27,16 @@ Label : CODE
               'true'
             Label : ELSE
               'false'
-        Label : CONCAT
+        Label : ELEMENT
+          
+#Allow smarty {php} tags?  These could be dangerous if you don't trust your users.
+\$config['use_smarty_php_tags'] = 
+        Label : ELEMENT
           ;
 
 #Automatically assign alias based on page title?
 \$config['auto_alias_content'] = 
-        Label : CONCAT
+        Label : ELEMENT
           ${
           Label : NAME
             ?
@@ -46,9 +50,5 @@ Label : CODE
               'true'
             Label : ELSE
               'false'
-        Label : CONCAT
-          ;
-
-
     Label : LEFT
       $result

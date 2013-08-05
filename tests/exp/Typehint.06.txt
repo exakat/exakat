@@ -9,10 +9,10 @@ Label : CODE
     Label : ARGUMENT
       $c
     Label : ARGUMENT
-      Concat
-      Label : CONCAT
+      Typehint
+      Label : CLASS
         Stdclass
-      Label : CONCAT
+      Label : VARIABLE
         $b
     Label : ARGUMENT
       Typehint

@@ -5,12 +5,12 @@ Label : CODE
   Label : ELEMENT
     "
     Label : CONTAIN
-      Concat
-      Label : CONCAT
+      Concatenation
+      Label : ELEMENT
+        c
+      Label : ELEMENT
         a
-      Label : CONCAT
+      Label : ELEMENT
         ${
         Label : NAME
           b
-      Label : CONCAT
-        c

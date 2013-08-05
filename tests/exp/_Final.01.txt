@@ -18,8 +18,6 @@ Label : CODE
               a
             Label : ARGUMENTS
               void
-              Label : ARGUMENT
-                void
             Label : BLOCK
               {
               Label : CODE
@@ -36,8 +34,6 @@ Label : CODE
                 b
               Label : ARGUMENTS
                 void
-                Label : ARGUMENT
-                  void
               Label : BLOCK
                 {
                 Label : CODE
@@ -54,8 +50,6 @@ Label : CODE
                 c
               Label : ARGUMENTS
                 void
-                Label : ARGUMENT
-                  void
               Label : BLOCK
                 {
                 Label : CODE

@@ -33,27 +33,29 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
-              =
-              Label : RIGHT
-                $v
-              Label : LEFT
-                [
-                Label : VARIABLE
-                  $g
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                .
-                Label : CONCAT
-                  '}'
-                Label : CONCAT
-                  $k
-                Label : CONCAT
-                  '{'
-              Label : LEFT
-                [
-                Label : VARIABLE
-                  $f
+              ;
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  $v
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $g
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  .
+                  Label : CONCAT
+                    '}'
+                  Label : CONCAT
+                    $k
+                  Label : CONCAT
+                    '{'
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $f
       Label : ELEMENT
         =
         Label : RIGHT

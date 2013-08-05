@@ -22,6 +22,8 @@ Label : CODE
           exit
           Label : ARGUMENTS
             void
+            Label : ARGUMENT
+              void
         Label : ELEMENT
           ob_flush
           Label : ARGUMENTS

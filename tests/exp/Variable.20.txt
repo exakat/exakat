@@ -5,54 +5,54 @@ Label : CODE
   Label : ELEMENT
     "
     Label : CONTAIN
-      Concat
-      Label : CONCAT
-        a
-      Label : CONCAT
-        ${
-        Label : NAME
-          b
-      Label : CONCAT
-        c
-      Label : CONCAT
-        ${
-        Label : NAME
-          d
-      Label : CONCAT
-        ea
-      Label : CONCAT
-        ${
-        Label : NAME
-          b
-      Label : CONCAT
-        c
-      Label : CONCAT
-        ${
-        Label : NAME
-          d
-      Label : CONCAT
-        ${
-        Label : NAME
-          d
-      Label : CONCAT
+      Concatenation
+      Label : ELEMENT
         e
-      Label : CONCAT
-        ea
-      Label : CONCAT
+      Label : ELEMENT
+        ${
+        Label : NAME
+          d
+      Label : ELEMENT
+        ${
+        Label : NAME
+          d
+      Label : ELEMENT
         ${
         Label : NAME
           b
-      Label : CONCAT
+      Label : ELEMENT
+        a
+      Label : ELEMENT
         c
-      Label : CONCAT
-        ea
-      Label : CONCAT
+      Label : ELEMENT
         ${
         Label : NAME
           b
-      Label : CONCAT
+      Label : ELEMENT
+        ea
+      Label : ELEMENT
         c
-      Label : CONCAT
+      Label : ELEMENT
+        ${
+        Label : NAME
+          d
+      Label : ELEMENT
+        ${
+        Label : NAME
+          b
+      Label : ELEMENT
+        ea
+      Label : ELEMENT
+        c
+      Label : ELEMENT
+        ${
+        Label : NAME
+          b
+      Label : ELEMENT
+        ea
+      Label : ELEMENT
+        c
+      Label : ELEMENT
         ${
         Label : NAME
           d

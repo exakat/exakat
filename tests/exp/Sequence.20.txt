@@ -34,22 +34,22 @@ Label : CODE
       <<<EOF
 
       Label : STRING
-        Concat
-        Label : CONCAT
-          |
-        Label : CONCAT
+        Concatenation
+        Label : ELEMENT
           $g
-        Label : CONCAT
+        Label : ELEMENT
           |
-        Label : CONCAT
+        Label : ELEMENT
+          |
+        Label : ELEMENT
           $h
-        Label : CONCAT
-          |
-        Label : CONCAT
-          $i
-        Label : CONCAT
+        Label : ELEMENT
           
 
+        Label : ELEMENT
+          |
+        Label : ELEMENT
+          $i
     Label : LEFT
       $f
   Label : ELEMENT

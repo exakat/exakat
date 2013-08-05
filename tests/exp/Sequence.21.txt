@@ -13,10 +13,10 @@ Label : CODE
         Label : CASE
           1
         Label : CODE
-          Block With Next
+          Block With Sequence For Case
           Label : CODE
-            Sequence With Next
-            Label : ELEMENT
+            Block With Sequence For Case
+            Label : CODE
               =
               Label : RIGHT
                 1

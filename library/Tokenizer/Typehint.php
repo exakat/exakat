@@ -6,7 +6,8 @@ class Typehint extends TokenAuto {
     function _check() {
         $this->conditions = array(-2 => array('filterOut' => 'T_CATCH'),
                                    0 => array('atom' => 'String'),
-                                   1 => array('atom' => 'Variable'),
+                                   1 => array('atom' => array('Variable', 'Assignation')),
+                                   2 => array('filterOut' => Assignation::$operators),
         );
         
         $this->actions = array('to_typehint'  => true,
