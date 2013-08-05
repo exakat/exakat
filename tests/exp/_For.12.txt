@@ -23,24 +23,26 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        =
-        Label : RIGHT
-          +
+        ;
+        Label : ELEMENT
+          =
           Label : RIGHT
-            $c
+            +
+            Label : RIGHT
+              $c
+            Label : LEFT
+              $a
+          Label : LEFT
+            $b
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            b
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                $c
+              Label : ARGUMENT
+                'c'
           Label : LEFT
             $a
-        Label : LEFT
-          $b
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          b
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $c
-            Label : ARGUMENT
-              'c'
-        Label : LEFT
-          $a

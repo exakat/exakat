@@ -42,8 +42,6 @@ Label : CODE
                   microtime
                   Label : ARGUMENTS
                     void
-                    Label : ARGUMENT
-                      void
     Label : ELSE
       ;
       Label : ELEMENT

@@ -25,14 +25,16 @@ Label : CODE
           Label : CONCAT
             "
             Label : CONTAIN
-              Concat
-              Label : CONCAT
+              Concatenation
+              Label : ELEMENT
                 e
-              Label : CONCAT
-                $f
-              Label : CONCAT
+              Label : ELEMENT
+                {
+                Label : NAME
+                  $f
+              Label : ELEMENT
                 g
-              Label : CONCAT
+              Label : ELEMENT
                 [
                 Label : VARIABLE
                   $h
@@ -57,15 +59,25 @@ Label : CODE
         Label : ELSE
           .
           Label : CONCAT
-            "aj"
-          Label : CONCAT
-            ah
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'ai'
-          Label : CONCAT
-            "ag"
+            "
+            Label : CONTAIN
+              Concatenation
+              Label : ELEMENT
+                u
+              Label : ELEMENT
+                {
+                Label : NAME
+                  $q
+              Label : ELEMENT
+                p
+              Label : ELEMENT
+                r
+              Label : ELEMENT
+                [
+                Label : VARIABLE
+                  $s
+                Label : INDEX
+                  t
           Label : CONCAT
             (
             Label : CODE
@@ -107,22 +119,14 @@ Label : CODE
                 Label : CONCAT
                   "ac"
           Label : CONCAT
-            "
-            Label : CONTAIN
-              Concat
-              Label : CONCAT
-                p
-              Label : CONCAT
-                $q
-              Label : CONCAT
-                r
-              Label : CONCAT
-                [
-                Label : VARIABLE
-                  $s
-                Label : INDEX
-                  t
-              Label : CONCAT
-                u
+            "aj"
+          Label : CONCAT
+            ah
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'ai'
+          Label : CONCAT
+            "ag"
     Label : CONCAT
       'a'
