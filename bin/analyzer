@@ -52,6 +52,7 @@ $classes = array(
     'Postplusplus', // Fait
     'Noscream',     // Fait
     'Parenthesis',  // Fait
+    '_Clone',       // Fait
     'Arguments',    // Fait
     'ArgumentsNoParenthesis', // Fait
     'Argumentsnocomma', // Fait

@@ -77,6 +77,7 @@ class Token {
                                  'Sequence', 
 //                                 'SequenceAtom', 
                                  'Ifthen', 
+                                 '_Clone', 
                                 );
     
     function __construct($client) {

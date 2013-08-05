@@ -9,7 +9,7 @@ class Reference extends TokenAuto {
         $this->conditions = array(0 => array('token' => Reference::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('Variable', 'Array', 'Property', 'Functioncall', 'Methodcall', 'Staticmethodcall', 
-                                                             'Staticproperty', 'Staticconstant' )),
+                                                             'Staticproperty', 'Staticconstant', 'New',  )),
                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', )),
         );
         

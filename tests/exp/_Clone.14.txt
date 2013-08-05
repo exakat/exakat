@@ -1,0 +1,54 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              ->
+              Label : PROPERTY
+                c
+              Label : OBJECT
+                $b
+            Label : INDEX
+              'd'
+      Label : THEN
+        clone
+        Label : CLONE
+          [
+          Label : VARIABLE
+            ->
+            Label : PROPERTY
+              d
+            Label : OBJECT
+              $c
+          Label : INDEX
+            'e'
+      Label : ELSE
+        ->
+        Label : METHOD
+          ->
+          Label : METHOD
+            h
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'i'
+          Label : OBJECT
+            g
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : OBJECT
+          $f
+    Label : LEFT
+      $a

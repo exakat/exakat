@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Reference extends Tokenizeur {
-    /* 11 methods */
+    /* 25 methods */
     
     public function testReference01()  { $this->generic_test('Reference.01'); }
     public function testReference02()  { $this->generic_test('Reference.02'); }
@@ -21,5 +21,19 @@ class Reference extends Tokenizeur {
     public function testReference10()  { $this->generic_test('Reference.10'); }
     public function testReference11()  { $this->generic_test('Reference.11'); }
 
-}
+}    public function testReference12()  { $this->generic_test('Reference.12'); }
+    public function testReference13()  { $this->generic_test('Reference.13'); }
+    public function testReference14()  { $this->generic_test('Reference.14'); }
+    public function testReference15()  { $this->generic_test('Reference.15'); }
+    public function testReference16()  { $this->generic_test('Reference.16'); }
+    public function testReference17()  { $this->generic_test('Reference.17'); }
+    public function testReference18()  { $this->generic_test('Reference.18'); }
+    public function testReference19()  { $this->generic_test('Reference.19'); }
+    public function testReference20()  { $this->generic_test('Reference.20'); }
+    public function testReference21()  { $this->generic_test('Reference.21'); }
+    public function testReference22()  { $this->generic_test('Reference.22'); }
+    public function testReference23()  { $this->generic_test('Reference.23'); }
+    public function testReference24()  { $this->generic_test('Reference.24'); }
+    public function testReference25()  { $this->generic_test('Reference.25'); }
+
 ?>

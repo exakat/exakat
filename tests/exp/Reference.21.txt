@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (
+      Label : CODE
+        chr
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            |
+            Label : LEFT
+              0xC0
+            Label : RIGHT
+              >>
+              Label : RIGHT
+                12
+              Label : LEFT
+                $char
+    Label : LEFT
+      $x

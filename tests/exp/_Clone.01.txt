@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      clone
+      Label : CLONE
+        $b
+    Label : LEFT
+      $a

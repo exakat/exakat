@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    clone
+    Label : CLONE
+      .
+      Label : CONCAT
+        "
+        Label : CONTAIN
+          Concatenation
+          Label : ELEMENT
+            $d
+          Label : ELEMENT
+            $b
+          Label : ELEMENT
+             c 
+      Label : CONCAT
+        "a"
