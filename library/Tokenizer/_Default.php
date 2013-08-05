@@ -65,7 +65,7 @@ class _Default extends TokenAuto {
                                 'atom'       => 'Default',
                                 'cleanIndex' => true );
         $this->checkAuto();
-
+        
         return $this->checkRemaining();
     }
 }

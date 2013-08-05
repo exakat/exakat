@@ -15,7 +15,7 @@ class Blockspecial extends TokenAuto {
         );
         
         $this->actions = array('createBlockWithSequence'    => true);
-        $this->checkAuto(); 
+//        $this->checkAuto(); 
 
         $this->conditions = array( -2 => array('token' => array('T_IF', 'T_ELSEIF'),
                                                'atom' => 'none'),
@@ -25,7 +25,7 @@ class Blockspecial extends TokenAuto {
         );
         
         $this->actions = array( 'to_block' => true);
-        $this->checkAuto(); 
+//        $this->checkAuto(); 
 
         $this->conditions = array( -2 => array('token' => array('T_IF', 'T_ELSEIF'),
                                                'atom' => 'none'),
