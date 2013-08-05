@@ -5,37 +5,6 @@ namespace Tokenizer;
 class Blockspecial extends TokenAuto {
 
     function _check() {
-    // @doc Block in a switch/case/default
-        $this->conditions = array( -2 => array('token' => 'T_DEFAULT',
-                                               'atom' => 'none'),
-                                   -1 => array('token' => array('T_COLON', 'T_SEMICOLON'),
-                                               'atom' => 'none'),
-                                    0 => array('atom' => 'Sequence'),
-                                    1 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT',)),
-        );
-        
-        $this->actions = array('createBlockWithSequence'    => true);
-//        $this->checkAuto(); 
-
-        $this->conditions = array( -2 => array('token' => array('T_IF', 'T_ELSEIF'),
-                                               'atom' => 'none'),
-                                   -1 => array('atom' => 'Parenthesis'),
-                                    0 => array('notAtom' => 'Block', 'atom' => 'yes', ),
-                                    1 => array('token' => 'T_SEMICOLON')
-        );
-        
-        $this->actions = array( 'to_block' => true);
-//        $this->checkAuto(); 
-
-        $this->conditions = array( -2 => array('token' => array('T_IF', 'T_ELSEIF'),
-                                               'atom' => 'none'),
-                                   -1 => array('atom' => 'Parenthesis'),
-                                    0 => array('atom' => array('For', 'Switch', 'Foreach', 'While', 'Dowhile', ))
-        );
-        
-        $this->actions = array( 'to_block' => true);
-        $this->checkAuto(); 
-
         $this->conditions = array( -1 => array('token' => 'T_ELSE',
                                                'atom' => 'none'),
                                     0 => array('notAtom' => 'Block', 'atom' => 'yes', ),

@@ -55,6 +55,16 @@ class Ifthen extends TokenAuto {
                                 'keepIndexed'       => true);
         $this->checkAuto(); 
 
+        $this->conditions = array(  0 => array('token' => array('T_IF', 'T_ELSEIF'),
+                                               'atom' => 'none'),
+                                    1 => array('atom' => 'Parenthesis'),
+                                    2 => array('atom' => array('For', 'Switch', 'Foreach', 'While', 'Dowhile', 'Ifthen' ))
+        );
+        
+        $this->actions = array( 'to_block_ifelseif_instruction' => true,
+                                'keepIndexed'       => true);
+        $this->checkAuto(); 
+
     // @doc if then NO ELSE
         $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom' => 'none'),

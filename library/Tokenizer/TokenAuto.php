@@ -786,6 +786,23 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             ";
             unset($actions['to_block_ifelseif']);
         }
+
+        if (isset($actions['to_block_ifelseif_instruction']) && $actions['to_block_ifelseif_instruction']) {
+                $qactions[] = " 
+/* to_block_ifelseif_instruction */ 
+
+x = g.addVertex(null, [code:'Block With control if elseif', token:'T_BLOCK', atom:'Block', 'file':it.file, virtual:true]);
+
+a = it.out('NEXT').out('NEXT').next();
+
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+g.addEdge(x, a, 'CODE');
+a.bothE('NEXT').each{ g.removeEdge(it); }
+
+";
+            unset($actions['to_block_ifelseif_instruction']);
+        }
                 
         if (isset($actions['createBlockWithSequence']) && $actions['createBlockWithSequence']) {
                 $qactions[] = " 

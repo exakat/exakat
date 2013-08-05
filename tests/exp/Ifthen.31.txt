@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      $a
+  Label : THEN
+    Block With control if elseif
+    Label : CODE
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          $b
+      Label : THEN
+        Block With control structure
+        Label : CODE
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $c
