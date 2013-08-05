@@ -152,7 +152,6 @@ class Token {
     }
     
     public function checkRemaining() {
-        if (!NEO_VERSION) { return true; }
         $class = str_replace("Tokenizer\\", '', get_class($this));
         if (in_array($class, Token::$types)) {
             $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";

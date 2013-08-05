@@ -18,8 +18,6 @@ if ($id = array_search('-v', $args)) {
     define('VERBOSE', false);
 }
 
-define('NEO_VERSION', true);
-
 $begin_time = microtime(true);
 $classes = array(
 //    'Magicconstant',
