@@ -3,16 +3,18 @@
 Label : CODE
   ;
   Label : ELEMENT
-    --
-    Label : POSTPLUSPLUS
-      ->
-      Label : PROPERTY
-        b
-      Label : OBJECT
+    ;
+    Label : ELEMENT
+      --
+      Label : POSTPLUSPLUS
+        ->
+        Label : PROPERTY
+          b
+        Label : OBJECT
+          $a
+    Label : ELEMENT
+      global
+      Label : VALUE
+        void
+      Label : DEFINE
         $a
-  Label : ELEMENT
-    global
-    Label : VALUE
-      void
-    Label : DEFINE
-      $a

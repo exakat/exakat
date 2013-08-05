@@ -8,78 +8,70 @@ Label : ELEMENT
     Label : ELEMENT
       =
       Label : RIGHT
-        1
-      Label : LEFT
-        $x
-Label : ELEMENT
-  b
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        2
-      Label : LEFT
-        $x
-Label : ELEMENT
-  c
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        3
-      Label : LEFT
-        $x
-Label : ELEMENT
-  d
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        4
-      Label : LEFT
-        $x
-Label : ELEMENT
-  e
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        5
-      Label : LEFT
-        $x
-Label : ELEMENT
-  f
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
-    Label : ELEMENT
-      =
-      Label : RIGHT
         6
       Label : LEFT
         $x
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    ;
     Label : ELEMENT
-      =
-      Label : RIGHT
-        7
-      Label : LEFT
-        $x
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          5
+        Label : LEFT
+          $x
+      Label : ELEMENT
+        f
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            4
+          Label : LEFT
+            $x
+        Label : ELEMENT
+          e
+        Label : ELEMENT
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              3
+            Label : LEFT
+              $x
+          Label : ELEMENT
+            d
+          Label : ELEMENT
+            ;
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                2
+              Label : LEFT
+                $x
+            Label : ELEMENT
+              c
+            Label : ELEMENT
+              ;
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  1
+                Label : LEFT
+                  $x
+              Label : ELEMENT
+                b
 Label : ELEMENT
-  g
+  Concatenation
+  Label : ELEMENT
+    <?php 
+    Label : CODE
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          7
+        Label : LEFT
+          $x
+  Label : ELEMENT
+    g

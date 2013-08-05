@@ -8,5 +8,3 @@ Label : CODE
       stdclass
       Label : ARGUMENTS
         void
-        Label : ARGUMENT
-          void

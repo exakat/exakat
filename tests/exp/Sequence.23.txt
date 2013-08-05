@@ -1,8 +1,14 @@
-Final sequence
-Label : ELEMENT
-  <?php
+<?php
 
-  Label : CODE
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $c
+  Label : ELEMENT
     ;
     Label : ELEMENT
       echo
@@ -10,17 +16,6 @@ Label : ELEMENT
         void
         Label : ARGUMENT
           $a
-Label : ELEMENT
-  b
-
-Label : ELEMENT
-  <?php
-
-  Label : CODE
-    ;
     Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $c
+      b
+

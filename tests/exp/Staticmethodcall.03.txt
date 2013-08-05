@@ -3,66 +3,68 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      %
+    ;
+    Label : ELEMENT
+      =
       Label : RIGHT
-        2
+        %
+        Label : RIGHT
+          2
+        Label : LEFT
+          ::
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              void
+          Label : CLASS
+            b
       Label : LEFT
-        ::
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            void
-        Label : CLASS
-          b
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      /
+        $a
+    Label : ELEMENT
+      =
       Label : RIGHT
-        2
+        /
+        Label : RIGHT
+          2
+        Label : LEFT
+          ::
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              void
+          Label : CLASS
+            b
       Label : LEFT
-        ::
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            void
-        Label : CLASS
-          b
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      +
+        $a
+    Label : ELEMENT
+      =
       Label : RIGHT
-        2
+        +
+        Label : RIGHT
+          2
+        Label : LEFT
+          ::
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              void
+          Label : CLASS
+            b
       Label : LEFT
-        ::
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            void
-        Label : CLASS
-          b
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      *
+        $a
+    Label : ELEMENT
+      =
       Label : RIGHT
-        2
+        *
+        Label : RIGHT
+          2
+        Label : LEFT
+          ::
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              void
+          Label : CLASS
+            b
       Label : LEFT
-        ::
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            void
-        Label : CLASS
-          b
-    Label : LEFT
-      $a
+        $a

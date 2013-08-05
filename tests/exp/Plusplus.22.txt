@@ -3,18 +3,20 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ++
-    Label : PREPLUSPLUS
-      ->
-      Label : PROPERTY
-        $d
-      Label : OBJECT
-        $e
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      ->
-      Label : PROPERTY
-        $b
-      Label : OBJECT
-        $a
+    ;
+    Label : ELEMENT
+      ++
+      Label : PREPLUSPLUS
+        ->
+        Label : PROPERTY
+          $d
+        Label : OBJECT
+          $e
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        ->
+        Label : PROPERTY
+          $b
+        Label : OBJECT
+          $a

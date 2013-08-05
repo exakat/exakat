@@ -3,18 +3,20 @@
 Label : CODE
   ;
   Label : ELEMENT
-    [
-    Label : VARIABLE
-      $y
-    Label : INDEX
-      --
-      Label : PREPLUSPLUS
+    ;
+    Label : ELEMENT
+      [
+      Label : VARIABLE
         $y
-  Label : ELEMENT
-    [
-    Label : VARIABLE
-      $x
-    Label : INDEX
-      ++
-      Label : POSTPLUSPLUS
-        $i
+      Label : INDEX
+        --
+        Label : PREPLUSPLUS
+          $y
+    Label : ELEMENT
+      [
+      Label : VARIABLE
+        $x
+      Label : INDEX
+        ++
+        Label : POSTPLUSPLUS
+          $i

@@ -3,58 +3,60 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        +
-        Label : RIGHT
-          in_array
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $l
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $j
-              Label : INDEX
-                'k'
-        Label : LEFT
-          i
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'i'
-      Label : THEN
+    ;
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        ?
+        Label : CONDITION
+          +
+          Label : RIGHT
+            in_array
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                $l
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $j
+                Label : INDEX
+                  'k'
+          Label : LEFT
+            i
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'i'
+        Label : THEN
+          [
+          Label : VARIABLE
+            $m
+          Label : INDEX
+            'n'
+        Label : ELSE
+          'o'
+      Label : LEFT
         [
         Label : VARIABLE
-          $m
+          $g
         Label : INDEX
-          'n'
-      Label : ELSE
-        'o'
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $g
-      Label : INDEX
-        'h'
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          'f'
-        Label : ARGUMENT
-          'e'
-        Label : ARGUMENT
-          'd'
-        Label : ARGUMENT
-          'c'
-        Label : ARGUMENT
-          'b'
-    Label : LEFT
-      $a
+          'h'
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        array
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            'f'
+          Label : ARGUMENT
+            'e'
+          Label : ARGUMENT
+            'd'
+          Label : ARGUMENT
+            'c'
+          Label : ARGUMENT
+            'b'
+      Label : LEFT
+        $a
