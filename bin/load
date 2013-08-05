@@ -84,18 +84,16 @@ function process_file($filename) {
     $query = new Gremlin\Query($client, $queryTemplate, $params);
     $edges = $query->getResultSet();
 
-    if (NEO_VERSION) {
-        $racines = new NodeIndex($client, 'racines');
-        $regex = Tokenizer\Token::$types; 
-        $regexIndex = array();
-        foreach($regex as $r) {
-            $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
-                                                 ->setProperty('code', 'Index for '.$r)
-                                                 ->setProperty('file', $filename)
-                                                 ->setProperty('index', 'yes')
-                                                 ->save();
-            $racines->add($regexIndex[$r], 'token', $r);
-        }
+    $racines = new NodeIndex($client, 'racines');
+    $regex = Tokenizer\Token::$types; 
+    $regexIndex = array();
+    foreach($regex as $r) {
+        $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
+                                             ->setProperty('code', 'Index for '.$r)
+                                             ->setProperty('file', $filename)
+                                             ->setProperty('index', 'yes')
+                                             ->save();
+        $racines->add($regexIndex[$r], 'token', $r);
     }
     
     // load new tokens
@@ -151,12 +149,21 @@ function process_file($filename) {
             
     
     foreach($tokens as $id => $token) {
-        if ($token[0] == T_WHITESPACE) { continue; }
-        if ($token[0] == T_COMMENT) { continue; }
-        if ($token[0] == T_DOC_COMMENT) { continue; }
-        
+        if ($token[0] == T_WHITESPACE)  { unset($tokens[$id]); }
+        if ($token[0] == T_COMMENT)     { unset($tokens[$id]); }
+        if ($token[0] == T_DOC_COMMENT) { unset($tokens[$id]); }
+    }
+    $tokens = array_values($tokens);
+    
+    $nb = count($tokens);
+    $Tid = -1;
+    for($id = 0; $id < $nb; $id++) {
+        if (empty($tokens[$id])) { continue; }
+        $Tid++;
+        $token = $tokens[$id];
+
         if (is_array($token)) {
-            $T[$id] = $client->makeNode()->setProperty('token', token_name($token[0]))
+            $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
                                          ->setProperty('code', $token[1])
                                          ->setProperty('line', $token[2])
                                          ->setProperty('file', $file);
@@ -164,49 +171,65 @@ function process_file($filename) {
                                           T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL,
                                           T_MUL_EQUAL, T_OR_EQUAL, T_PLUS_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL
                                           ))) {
-                $T[$id]->setProperty('begin', true);
+                $T[$Tid]->setProperty('begin', true);
             }
             
             if (isset($atoms[token_name($token[0])])) {
-                $T[$id]->setProperty('atom', $atoms[token_name($token[0])]);
+                $T[$Tid]->setProperty('atom', $atoms[token_name($token[0])]);
             }
             
             $token_value = token_name($token[0]);
-            $T[$id]->save();
+            $T[$Tid]->save();
             $line = $token[2];
         } else {
             if (!isset($TPHP[$token])) {
                 print("No TPHP for '{$token}'\n");
                 $TPHP[$token] = max($TPHP) + 1;
             }
-            $T[$id] = $client->makeNode()->setProperty('token', $TPHP[$token])
-                                         ->setProperty('code', $token)
-                                         ->setProperty('line', $line)
-                                         ->setProperty('file', $file)->save();
+            
+            if ($token == '{' && $tokens[$id + 1] == '}') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                                             ->setProperty('code', $token)
+                                             ->setProperty('line', $line)
+                                             ->setProperty('file', $file)
+                                             ->setProperty('atom', 'Block')->save();
+
+                $void   = $client->makeNode()->setProperty('token', 'T_VOID')
+                                             ->setProperty('code', 'void')
+                                             ->setProperty('line', $line)
+                                             ->setProperty('file', $file)
+                                             ->setProperty('atom', 'Void')->save();
+
+                $T[$Tid]->relateTo($void, 'CODE')->save();
+                unset($tokens[$id + 1]);
+            } else {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                                             ->setProperty('code', $token)
+                                             ->setProperty('line', $line)
+                                             ->setProperty('file', $file)->save();
+            }
     
             if (in_array($token, array('(','{','+','-','*','/','%', '==', ',', '=', '.'))) {
-                $T[$id]->setProperty('begin', true)->save();
+                $T[$Tid]->setProperty('begin', true)->save();
             }
 
             $token_value = $TPHP[$token];
-            $T[$id]->save();
+            $T[$Tid]->save();
         }
 
-        if (NEO_VERSION) {
             $regex = Tokenizer\Token::$types; 
             foreach($regex as $r) {
                 $class = "Tokenizer\\$r";
                 if (in_array($token_value, $class::$operators)) { 
-                    $regexIndex[$r]->relateTo($T[$id], 'INDEXED')->save();
+                    $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
                 }
             }
-        }
         
         if (!isset($previous)) {
-            $previous = $T[$id];
+            $previous = $T[$Tid];
         } else {
-            $previous->relateTo($T[$id], 'NEXT')->save();
-            $previous = $T[$id];
+            $previous->relateTo($T[$Tid], 'NEXT')->save();
+            $previous = $T[$Tid];
         }
     }
     
