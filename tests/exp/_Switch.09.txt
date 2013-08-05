@@ -11,17 +11,19 @@ Label : CODE
       Label : ELEMENT
         default
         Label : CODE
-          Block With Next
+          Block With Sequence For Default
           Label : CODE
-            Sequence With Next
-            Label : ELEMENT
-              return
-              Label : RETURN
-                'f'
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
+            Block With Sequence For Default
+            Label : CODE
+              ;
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  'f'
       Label : ELEMENT
         case
         Label : CASE

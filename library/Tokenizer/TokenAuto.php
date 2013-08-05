@@ -799,6 +799,29 @@ a.bothE('NEXT').each{ g.removeEdge(it) ; }
             unset($actions['createBlockWithSequenceForCase']);
         }
 
+        if (isset($actions['createBlockWithSequenceForDefault']) && $actions['createBlockWithSequenceForDefault']) {
+            $qactions[] = " 
+/* createBlockWithSequenceForDefault */ 
+x = g.addVertex(null, [code:'Block With Sequence For Default', atom:'Block', token:'T_SEMICOLON', 'file':it.file, virtual:true]);
+
+a = it.out('NEXT').out('NEXT').next();
+
+a.out('NEXT').has('token', 'T_SEMICOLON').each{
+    g.addEdge(a, it.out('NEXT').next(), 'NEXT');
+    it.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(it);
+}
+
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, a, 'CODE');
+g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+
+a.bothE('NEXT').each{ g.removeEdge(it) ; }
+
+            ";
+            unset($actions['createBlockWithSequenceForDefault']);
+        }
+
         if (isset($actions['createVoidForCase']) && $actions['createVoidForCase']) {
             $qactions[] = " 
 /* createBlockWithSequenceForCase */ 
@@ -813,6 +836,22 @@ g.addEdge(x, b, 'NEXT');
 
             ";
             unset($actions['createVoidForCase']);
+        }
+
+        if (isset($actions['createVoidForDefault']) && $actions['createVoidForDefault']) {
+            $qactions[] = " 
+/* createVoidForDefault */ 
+x = g.addVertex(null, [code:'Void2', atom:'Void', token:'T_VOID', 'file':it.file, virtual:true]);
+
+a = it.out('NEXT').next();
+b = a.out('NEXT').next();
+
+a.outE('NEXT').each{ g.removeEdge(it) ; }
+g.addEdge(a, x, 'NEXT');
+g.addEdge(x, b, 'NEXT');
+
+            ";
+            unset($actions['createVoidForDefault']);
         }
         
         if (isset($actions['mergePrev']) && $actions['mergePrev']) {
@@ -931,11 +970,12 @@ it.outE.hasNot('label', 'NEXT').inV.each{
             unset($cdt['previous']);
         }
 
+/*
         if (isset($cdt['begin'])) {
             $qcdts[] = "has('begin', true)";
             unset($cdt['begin']);
         }
-        
+        */
         if (isset($cdt['code'])) {
             if (is_array($cdt['code']) && !empty($cdt['code'])) {
                 $qcdts[] = "filter{it.code in ['".join("', '", $cdt['code'])."']}";

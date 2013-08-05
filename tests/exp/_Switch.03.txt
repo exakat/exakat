@@ -9,4 +9,6 @@ Label : CODE
     Label : CODE
       default
       Label : CODE
-        void
+        Block With Sequence For Default
+        Label : CODE
+          Void2

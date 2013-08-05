@@ -22,7 +22,7 @@ class SequenceAtom extends TokenAuto {
                                 'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_COMMA',
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                 'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_IF', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
-                                'T_THROW', 'T_CATCH', 'T_ABSTRACT', 'T_CASE', 
+                                'T_THROW', 'T_CATCH', 'T_ABSTRACT', 'T_CASE', 'T_DEFAULT', 
                                  );
         $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators, 
                                         _Include::$operators );

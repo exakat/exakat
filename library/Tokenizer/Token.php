@@ -61,8 +61,8 @@ class Token {
                                  //'_Class' Because to Class_tmp
                                  '_Abstract',
                                  '_Final',
-                                 '_Case', //Check index in the regex
-                                 // '_Default', Check index in the regex
+                                 '_Case',    //Check index in the regex
+                                 '_Default', //Check index in the regex
                                  '_Switch',
                                  '_Try',
                                  '_Catch',

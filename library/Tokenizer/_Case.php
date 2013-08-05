@@ -31,21 +31,7 @@ class _Case extends TokenAuto {
                                'keepIndexed'                       => true);
         $r = $this->checkAuto();
 
-        /*
-        // Case is followed by 2 sequences
-        $this->conditions = array(-3 => array('token' => _Case::$operators,
-                                              'atom' => 'none'),
-                                  -2 => array('atom' => 'yes'),
-                                  -1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   0 => array('atom' => 'Sequence'), 
-                                   1 => array('atom' => 'Sequence'), 
-        );
-        $this->actions = array( 'transform' => array(1 => 'ELEMENT'), 
-                                'mergeNext' => array('Sequence' => 'ELEMENT'));
-        $r = $this->checkAuto();
-    */
     // create block for Case  case 'a' : $x++; (or a sequence).
-    
         $this->conditions = array(  0 => array('token' => _Case::$operators,
                                                'atom' => 'none'),
                                     1 => array('atom' => 'yes'),
@@ -73,7 +59,7 @@ class _Case extends TokenAuto {
                                                        3 => 'CODE',),
                                 'atom'       => 'Case',
                                 'cleanIndex' => true );
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
         return $this->checkRemaining();
     }

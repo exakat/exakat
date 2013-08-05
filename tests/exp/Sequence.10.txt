@@ -33,10 +33,10 @@ Label : CODE
         Label : ELEMENT
           default
           Label : CODE
-            Block With Next
+            Block With Sequence For Default
             Label : CODE
-              Sequence With Next
-              Label : ELEMENT
+              Block With Sequence For Default
+              Label : CODE
                 =
                 Label : RIGHT
                   3
