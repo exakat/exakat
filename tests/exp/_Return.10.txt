@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  function
+  Label : NAME
+    cmp1
+  Label : ARGUMENTS
+    ,
+    Label : ARGUMENT
+      $b
+    Label : ARGUMENT
+      $a
+  Label : BLOCK
+    {
+    Label : CODE
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              'd'
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'c'
+      Label : THEN
+        Block With control structure
+        Label : CODE
+          return
+          Label : RETURN
+            0

@@ -20,8 +20,7 @@ class Reference extends Tokenizeur {
     public function testReference09()  { $this->generic_test('Reference.09'); }
     public function testReference10()  { $this->generic_test('Reference.10'); }
     public function testReference11()  { $this->generic_test('Reference.11'); }
-
-}    public function testReference12()  { $this->generic_test('Reference.12'); }
+    public function testReference12()  { $this->generic_test('Reference.12'); }
     public function testReference13()  { $this->generic_test('Reference.13'); }
     public function testReference14()  { $this->generic_test('Reference.14'); }
     public function testReference15()  { $this->generic_test('Reference.15'); }
@@ -35,5 +34,5 @@ class Reference extends Tokenizeur {
     public function testReference23()  { $this->generic_test('Reference.23'); }
     public function testReference24()  { $this->generic_test('Reference.24'); }
     public function testReference25()  { $this->generic_test('Reference.25'); }
-
+}
 ?>
