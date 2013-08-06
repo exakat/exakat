@@ -91,6 +91,7 @@ class Sequence extends TokenAuto {
                                );
         $this->checkAuto();
 
+        // @note instructions separated by ; with a special case for 'default'
         $this->conditions = array(-3 => array('token' => 'T_DEFAULT', 
                                               'atom'  => 'none',),
                                   -2 => array('token' => 'T_COLON',

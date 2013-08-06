@@ -166,6 +166,12 @@ class Token {
         }
     }
 
+    static public function leftInIndex($class) {
+        $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
+
+        return Token::queryOne($query);
+    }
+    
     static public function cleanHidden() {
         $query = " g.V.has('token','T_ROOT').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
     g.removeVertex(it.in('NEXT').in('NEXT').next()); 
@@ -185,7 +191,6 @@ g.V.has('index', 'yes').filter{it.out('INDEXED').count() == 0}.each{
 g.V.has('root', 'true').as('root').out('NEXT').hasNot('token', 'T_END').back('root').each{ 
     x = g.addVertex(null, [code:'Final sequence', atom:'Sequence', token:'T_SEMICOLON', file:it.file]);
 
-//    g.removeEdge(it.outE('NEXT').next());
     a = it.in('NEXT').next();
   
     g.V.hasNot('hidden', true).has('file', it.file).as('o').in('NEXT').back('o').each{

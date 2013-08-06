@@ -688,13 +688,13 @@ g.addEdge(f, x, 'NEXT');
             } elseif ($destination > 0) {
                 list($atom, $link) = each($config);
                 display("addEdge : $atom\n");
-                $next = str_repeat(".out('NEXT')", $destination);
+                $next = str_repeat(".out('NEXT')", $destination - 1);
                 
                 $qactions[] = "
-/* addEdge out $destination */
+/* addEdge out $destination */ 
 x = g.addVertex(null, [code:'void', token:'T_VOID', atom:'$atom', 'file':it.file, virtual:true]);
 
-a = it.$next.next();
+a = it$next.next();
 b = a.out('NEXT').next();
 
 g.removeEdge(a.outE('NEXT').next());
@@ -781,18 +781,17 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 
         if (isset($actions['to_block_for']) && $actions['to_block_for']) {
                 $qactions[] = " 
-/* to_block */ 
+/* to_block_for */ 
 
-x = g.addVertex(null, [code:'Block With control structure', token:'T_BLOCK', atom:'Block', 'file':it.file, virtual:true]);
+x = g.addVertex(null, [code:'Block With For', token:'T_BLOCK', atom:'Block', 'file':it.file, virtual:true]);
 
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 
-a.setProperty('code', 'to_block_for');
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+g.addEdge(x, a, 'CODE');
+a.bothE('NEXT').each{ g.removeEdge(it); }
 
-g.addEdge(it.in('NEXT').next(), x, 'NEXT');
-g.addEdge(x, it.out('NEXT').next(), 'NEXT');
-g.addEdge(x, it, 'CODE');
-it.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
 g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
@@ -801,7 +800,6 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
     g.removeVertex(semicolon);
 }
-
             ";
             unset($actions['to_block_for']);
         }

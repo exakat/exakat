@@ -59,7 +59,7 @@ class SequenceAtom extends TokenAuto {
         $this->checkAuto();
         
         // @note sequence next to another instruction
-        $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
+        $this->conditions = array(-2 => array('filterOut2' => $yield_operator), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('atom' => 'Sequence')
         );
