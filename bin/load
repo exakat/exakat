@@ -123,8 +123,10 @@ function process_file($filename) {
                   '&&' => 'T_ANDAND',
                   '||' => 'T_OROR',
                   '"' => 'T_QUOTE',
+                  '"_CLOSE' => 'T_QUOTE_CLOSE',
                   '$' => 'T_DOLLAR',
                   '`' => 'T_SHELL_QUOTE',
+                  '`_CLOSE' => 'T_SHELL_QUOTE_CLOSE',
                   );
     
     $atoms = array( 'T_STRING'                   => 'String', 
@@ -147,6 +149,7 @@ function process_file($filename) {
                     );
             
     
+    $count = array();
     foreach($tokens as $id => $token) {
         if ($token[0] == T_WHITESPACE)  { unset($tokens[$id]); }
         if ($token[0] == T_COMMENT)     { unset($tokens[$id]); }
@@ -185,6 +188,15 @@ function process_file($filename) {
                 print("No TPHP for '{$token}'\n");
                 $TPHP[$token] = max($TPHP) + 1;
             }
+
+            $token_value = $TPHP[$token];
+            if (in_array($TPHP[$token], array('T_QUOTE', 'T_SHELL_QUOTE'))) {
+                @$count[$TPHP[$token]]++;
+                if ($count[$TPHP[$token]] % 2 == 0) {
+                    $token .= '_CLOSE';
+                    $token_value .= '_CLOSE';
+                }
+            }
             
             if ($token == '{' && $tokens[$id + 1] == '}') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
@@ -201,34 +213,6 @@ function process_file($filename) {
 
                 $T[$Tid]->relateTo($void, 'CODE')->save();
                 unset($tokens[$id + 1]);
-            } elseif ($token == '`') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
-                                              ->setProperty('code', $token)
-                                              ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
-                                              ->setProperty('atom', 'Shell')->save();
-
-                $i = 1;
-                while (($token2 = $tokens[$id + $i++]) != '`') {
-                    if (is_array($token2)) {
-                        $part = $client->makeNode()->setProperty('token', token_name($token2[0]))
-                                                      ->setProperty('code', $token2[1])
-                                                      ->setProperty('line', $token2[2])
-                                                      ->setProperty('file', $file)
-                                                      ->setProperty('atom', @$atoms[token_name($token2[0])] ?: $token2[0])->save();
-                    } else {
-                        $part = $client->makeNode()->setProperty('token', $TPHP[$token2])
-                                                   ->setProperty('code', $token2)
-                                                   ->setProperty('line', $line)
-                                                   ->setProperty('file', $file)
-                                                   ->setProperty('order', $i)
-                                                   ->setProperty('atom', 'String')->save();
-                    }
-
-                    $T[$Tid]->relateTo($part, 'CONCAT')->save();
-//                    $Tid++;
-                }
-                $id = $id + $i;
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
@@ -240,17 +224,16 @@ function process_file($filename) {
 //                $T[$Tid]->setProperty('begin', true)->save();
             }
 
-            $token_value = $TPHP[$token];
             $T[$Tid]->save();
         }
 
-            $regex = Tokenizer\Token::$types; 
-            foreach($regex as $r) {
-                $class = "Tokenizer\\$r";
-                if (in_array($token_value, $class::$operators)) { 
-                    $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
-                }
+        $regex = Tokenizer\Token::$types; 
+        foreach($regex as $r) {
+            $class = "Tokenizer\\$r";
+            if (in_array($token_value, $class::$operators)) { 
+                $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
             }
+        }
         
         if (!isset($previous)) {
             $previous = $T[$Tid];

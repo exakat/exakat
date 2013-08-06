@@ -10,7 +10,7 @@ class String extends TokenAuto {
         $this->conditions = array(  0 => array('token' => String::$operators, 
                                                'atom' => 'none'),
                                     1 => array('atom'  => array('String', 'Variable', 'Concatenation', 'Array')),
-                                    2 => array('token' => String::$operators, 
+                                    2 => array('token' => 'T_QUOTE_CLOSE', 
                                                'atom' => 'none')
                                  );
         

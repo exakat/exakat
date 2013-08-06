@@ -80,6 +80,7 @@ class Token {
                                  '_Clone', 
                                  '_Interface', 
                                  'Shell', 
+                                 'String', 
                                 );
     
     function __construct($client) {
