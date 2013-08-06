@@ -124,6 +124,7 @@ function process_file($filename) {
                   '||' => 'T_OROR',
                   '"' => 'T_QUOTE',
                   '$' => 'T_DOLLAR',
+                  '`' => 'T_SHELL_QUOTE',
                   );
     
     $atoms = array( 'T_STRING'                   => 'String', 
@@ -162,14 +163,14 @@ function process_file($filename) {
 
         if (is_array($token)) {
             $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
-                                         ->setProperty('code', $token[1])
-                                         ->setProperty('line', $token[2])
-                                         ->setProperty('file', $file);
+                                          ->setProperty('code', $token[1])
+                                          ->setProperty('line', $token[2])
+                                          ->setProperty('file', $file);
             if (in_array($token[0], array(T_OPEN_TAG, T_IS_EQUAL, T_ECHO, T_DOUBLE_ARROW, T_CASE, T_DEFAULT,
                                           T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL,
                                           T_MUL_EQUAL, T_OR_EQUAL, T_PLUS_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL
                                           ))) {
-                $T[$Tid]->setProperty('begin', true);
+//                $T[$Tid]->setProperty('begin', true);
             }
             
             if (isset($atoms[token_name($token[0])])) {
@@ -200,15 +201,43 @@ function process_file($filename) {
 
                 $T[$Tid]->relateTo($void, 'CODE')->save();
                 unset($tokens[$id + 1]);
+            } elseif ($token == '`') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                                              ->setProperty('code', $token)
+                                              ->setProperty('line', $line)
+                                              ->setProperty('file', $file)
+                                              ->setProperty('atom', 'Shell')->save();
+
+                $i = 1;
+                while (($token2 = $tokens[$id + $i++]) != '`') {
+                    if (is_array($token2)) {
+                        $part = $client->makeNode()->setProperty('token', token_name($token2[0]))
+                                                      ->setProperty('code', $token2[1])
+                                                      ->setProperty('line', $token2[2])
+                                                      ->setProperty('file', $file)
+                                                      ->setProperty('atom', @$atoms[token_name($token2[0])] ?: $token2[0])->save();
+                    } else {
+                        $part = $client->makeNode()->setProperty('token', $TPHP[$token2])
+                                                   ->setProperty('code', $token2)
+                                                   ->setProperty('line', $line)
+                                                   ->setProperty('file', $file)
+                                                   ->setProperty('order', $i)
+                                                   ->setProperty('atom', 'String')->save();
+                    }
+
+                    $T[$Tid]->relateTo($part, 'CONCAT')->save();
+//                    $Tid++;
+                }
+                $id = $id + $i;
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
-                                             ->setProperty('code', $token)
-                                             ->setProperty('line', $line)
-                                             ->setProperty('file', $file)->save();
+                                              ->setProperty('code', $token)
+                                              ->setProperty('line', $line)
+                                              ->setProperty('file', $file)->save();
             }
     
             if (in_array($token, array('(','{','+','-','*','/','%', '==', ',', '=', '.'))) {
-                $T[$Tid]->setProperty('begin', true)->save();
+//                $T[$Tid]->setProperty('begin', true)->save();
             }
 
             $token_value = $TPHP[$token];
