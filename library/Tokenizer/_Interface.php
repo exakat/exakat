@@ -1,0 +1,43 @@
+<?php
+
+namespace Tokenizer;
+
+class _Interface extends TokenAuto {
+    static public $operators = array('T_INTERFACE');
+
+    function _check() {
+        $this->conditions = array(0 => array('token' => _Interface::$operators,
+                                             'atom' => 'none'),
+                                  1 => array('atom' => 'String'),
+                                  2 => array('atom' => 'Block'),
+        );
+        
+        $this->actions = array('transform'  => array( 1 => 'NAME',
+                                                      2 => 'CODE'),
+                               'atom'       => 'Interface',
+                               'cleanIndex' => true);
+        $this->checkAuto();
+
+        $this->conditions = array(0 => array('token' => _Interface::$operators,
+                                             'atom' => 'none'),
+                                  1 => array('atom' => 'String'),
+                                  2 => array('token' => 'T_EXTENDS'),
+                                  3 => array('atom' => array('Arguments', 'String')),
+                                  4 => array('atom' => 'Block'),
+        );
+        
+        $this->actions = array('transform'  => array( 1 => 'NAME',
+                                                      2 => 'DROP',
+                                                      3 => 'EXTENDS',
+                                                      4 => 'CODE'),
+                               'atom'       => 'Interface',
+                               'arguments2extends' => true,
+                               'cleanIndex' => true);
+        $this->checkAuto();
+
+        
+        return $this->checkRemaining();
+    }
+}
+
+?>

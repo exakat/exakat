@@ -25,7 +25,7 @@ class Reference extends TokenAuto {
                                   2 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   3 => array('atom' => 'Arguments'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('atom' => 'Block'),
+//                                  5 => array('atom' => 'Block'),
         );
         
         $this->actions = array('transform'   => array( 1 => 'REFERENCE'),

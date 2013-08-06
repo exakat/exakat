@@ -804,6 +804,13 @@ a.bothE('NEXT').each{ g.removeEdge(it); }
             unset($actions['to_block_ifelseif_instruction']);
         }
                 
+        if (isset($actions['arguments2extends']) && $actions['arguments2extends']) {
+                $qactions[] = " 
+/* arguments2extends */ 
+            ";
+            unset($actions['arguments2extends']);
+        }
+
         if (isset($actions['createBlockWithSequence']) && $actions['createBlockWithSequence']) {
                 $qactions[] = " 
 /* createBlockWithSequence */ 
@@ -817,7 +824,7 @@ it.bothE('NEXT').each{ g.removeEdge(it) ; }
             ";
             unset($actions['createBlockWithSequence']);
         }
-
+        
         if (isset($actions['createBlockWithSequenceForCase']) && $actions['createBlockWithSequenceForCase']) {
             $qactions[] = " 
 /* createBlockWithSequenceForCase */ 
