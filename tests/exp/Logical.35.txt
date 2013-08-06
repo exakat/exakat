@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      !=
+      Label : RIGHT
+        (bool)
+        Label : CAST
+          $c
+      Label : LEFT
+        (bool)
+        Label : CAST
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            'b'
+  Label : THEN
+    {
+    Label : CODE
+      void
