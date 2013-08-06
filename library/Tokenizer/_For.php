@@ -6,6 +6,33 @@ class _For extends TokenAuto {
     static public $operators = array('T_FOR');
 
     function _check() {
+        $this->conditions = array(  0 => array('token' => _For::$operators,
+                                              'atom' => 'none'),
+                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                    2 => array('atom' => 'yes'),
+                                    3 => array('token' => 'T_SEMICOLON'),
+                                    4 => array('atom' => 'yes'),
+                                    5 => array('token' => 'T_SEMICOLON'),
+                                    6 => array('atom' => 'yes'),
+                                    7 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                    8 => array('atom' => 'yes', 'notAtom' => 'Block',),
+        );                
+        $this->actions = array( 'to_block_for' => true);
+//        $this->checkAuto();
+
+        $this->conditions = array(  0 => array('token' => _For::$operators,
+                                               'atom' => 'none'),
+                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                    2 => array('atom' => 'yes'),
+                                    3 => array('token' => 'T_SEMICOLON'),
+                                    4 => array('atom' => 'yes'),
+                                    5 => array('token' => 'T_SEMICOLON'),
+                                    6 => array('atom' => 'yes'),
+                                    7 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                    8 => array('token' => 'T_SEMICOLON'),
+        );
+        $this->actions = array('addEdge'   => array(8 => array('Void' => 'LEVEL')));
+        $this->checkAuto();
     
     // @doc for(a; b; c) { code }
         $this->conditions = array( 0 => array('token' => _For::$operators,
