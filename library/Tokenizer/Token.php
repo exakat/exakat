@@ -79,6 +79,7 @@ class Token {
                                  'Ifthen', 
                                  '_Clone', 
                                  '_Interface', 
+                                 'Shell', 
                                 );
     
     function __construct($client) {

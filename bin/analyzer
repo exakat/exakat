@@ -78,6 +78,7 @@ $classes = array(
     'SequenceCaseDefault',
     '_Const',       // Fait
     'Block',        // Fait
+    'Shell',        // Fait
     '_Interface',   // Fait
     '_Class',       // Fait
     '_Abstract',    // Fait

@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      `
+      Label : CONTAIN
+        Concatenation
+        Label : ELEMENT
+          {
+          Label : NAME
+            ::
+            Label : CONSTANT
+              c
+            Label : CLASS
+              $b
+        Label : ELEMENT
+           d 
+    Label : LEFT
+      $a
