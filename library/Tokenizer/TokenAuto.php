@@ -685,6 +685,23 @@ g.addEdge(x, it, 'NEXT');
 g.addEdge(f, x, 'NEXT');
 
 ";
+            } elseif ($destination > 0) {
+                list($atom, $link) = each($config);
+                display("addEdge : $atom\n");
+                $next = str_repeat(".out('NEXT')", $destination);
+                
+                $qactions[] = "
+/* addEdge out $destination */
+x = g.addVertex(null, [code:'void', token:'T_VOID', atom:'$atom', 'file':it.file, virtual:true]);
+
+a = it.$next.next();
+b = a.out('NEXT').next();
+
+g.removeEdge(a.outE('NEXT').next());
+g.addEdge(a, x, 'NEXT');
+g.addEdge(x, b, 'NEXT');
+
+";
             } else {
                 print "Only support for addEdge with destination -1 or 0\n";
             }
@@ -760,6 +777,33 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 
             ";
             unset($actions['to_block']);
+        }
+
+        if (isset($actions['to_block_for']) && $actions['to_block_for']) {
+                $qactions[] = " 
+/* to_block */ 
+
+x = g.addVertex(null, [code:'Block With control structure', token:'T_BLOCK', atom:'Block', 'file':it.file, virtual:true]);
+
+a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+
+a.setProperty('code', 'to_block_for');
+
+g.addEdge(it.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, it.out('NEXT').next(), 'NEXT');
+g.addEdge(x, it, 'CODE');
+it.bothE('NEXT').each{ g.removeEdge(it); }
+
+// remove the next, if this is a ; 
+g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    semicolon = it;
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(semicolon);
+}
+
+            ";
+            unset($actions['to_block_for']);
         }
 
         if (isset($actions['to_block_ifelseif']) && $actions['to_block_ifelseif']) {
