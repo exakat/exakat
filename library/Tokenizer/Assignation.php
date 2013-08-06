@@ -27,11 +27,10 @@ class Assignation extends TokenAuto {
                           'Heredoc', 'Preplusplus', 'Postplusplus', 'Methodcall', 'Nsname', 
                           'Assignation', 'Variable', 'Reference', 'Boolean', 'Magicconstant',
                           'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison', 
-                          'Clone', 
+                          'Clone', 'Shell', 
                          );
         
-        $this->conditions = array(//-2 => array('filterOut2' => 'T_STRING'),
-                                  -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 'Noscream', 'Reference', 'Not', 'Arrayappend' , 'Typehint')),
+        $this->conditions = array(-1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 'Noscream', 'Reference', 'Not', 'Arrayappend' , 'Typehint')),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut' => array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators, 
@@ -39,7 +38,6 @@ class Assignation extends TokenAuto {
                                                                          array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
                                                                                'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
                                                                                'T_QUESTION', ))),
-                                  
         );
         
         $this->actions = array('makeEdge'    => array( 1 => 'RIGHT',
@@ -47,7 +45,6 @@ class Assignation extends TokenAuto {
                                'atom'       => 'Assignation',
                                'cleanIndex' => true);
         $this->checkAuto();
-//        $this->printQuery();
 
         return $this->checkRemaining();
     } 
