@@ -7,7 +7,7 @@ Label : CODE
     Label : CODE
       $a
   Label : THEN
-    Block With control structure
+    Block With if/elseif
     Label : CODE
       ?
       Label : CONDITION

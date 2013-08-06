@@ -757,8 +757,8 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         }
 
         if (isset($actions['to_block']) && $actions['to_block']) {
-                $qactions[] = " 
-/* to_block */ 
+            $qactions[] = " 
+/* to_block */
 
 x = g.addVertex(null, [code:'Block With control structure', token:'T_BLOCK', atom:'Block', 'file':it.file, virtual:true]);
 
@@ -768,7 +768,7 @@ g.addEdge(x, it, 'CODE');
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
-g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+//g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT5');
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     semicolon = it;
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
@@ -806,9 +806,9 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 
         if (isset($actions['to_block_ifelseif']) && $actions['to_block_ifelseif']) {
                 $qactions[] = " 
-/* to_block */ 
+/* to_block_ifelseif */ 
 
-x = g.addVertex(null, [code:'Block With control structure', token:'T_BLOCK', atom:'Block', 'file':it.file, virtual:true]);
+x = g.addVertex(null, [code:'Block With if/elseif', token:'T_BLOCK', atom:'Block', 'file':it.file, virtual:true]);
 
 a = it.out('NEXT').out('NEXT').next();
 

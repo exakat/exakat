@@ -11,7 +11,7 @@ Label : CODE
       Label : INDEX
         'b'
   Label : THEN
-    Block With control structure
+    Block With control if elseif
     Label : CODE
       while
       Label : CONDITION

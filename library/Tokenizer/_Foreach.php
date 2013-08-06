@@ -27,6 +27,7 @@ class _Foreach extends TokenAuto {
                                                        '6' => 'LOOP',
                                                       ),
                                'atom'       => 'Foreach',
+                               'cleanIndex' => true,
                                );
         $this->checkAuto(); 
 

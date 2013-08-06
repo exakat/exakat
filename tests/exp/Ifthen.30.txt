@@ -19,7 +19,7 @@ Label : CODE
         Label : LEFT
           $a
     Label : THEN
-      Block With control structure
+      Block With if/elseif
       Label : CODE
         =
         Label : RIGHT

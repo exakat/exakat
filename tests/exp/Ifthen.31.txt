@@ -15,7 +15,7 @@ Label : CODE
         Label : CODE
           $b
       Label : THEN
-        Block With control structure
+        Block With if/elseif
         Label : CODE
           =
           Label : RIGHT
