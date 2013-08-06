@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  function
+  Label : NAME
+    a
+  Label : ARGUMENTS
+    ,
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        StdClass
+      Label : VARIABLE
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          &
+          Label : REFERENCE
+            $b
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        StdClass
+      Label : VARIABLE
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          &
+          Label : REFERENCE
+            $x
+  Label : BLOCK
+    {
+    Label : CODE
+      void

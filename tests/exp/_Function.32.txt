@@ -1,0 +1,50 @@
+<?php
+
+Label : CODE
+  function
+  Label : NAME
+    &
+    Label : REFERENCE
+      _getRules
+  Label : ARGUMENTS
+    ,
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        null
+      Label : LEFT
+        $f
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        null
+      Label : LEFT
+        $e
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        null
+      Label : LEFT
+        $d
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        null
+      Label : LEFT
+        $c
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        null
+      Label : LEFT
+        $b
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        null
+      Label : LEFT
+        $a
+  Label : BLOCK
+    {
+    Label : CODE
+      void

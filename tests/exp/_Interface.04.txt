@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  interface
+  Label : NAME
+    a
+  Label : EXTENDS
+    ,
+    Label : ARGUMENT
+      c
+    Label : ARGUMENT
+      b
+  Label : CODE
+    {
+    Label : CODE
+      function
+      Label : NAME
+        x
+      Label : ARGUMENTS
+        void

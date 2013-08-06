@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  interface
+  Label : NAME
+    a
+  Label : CODE
+    {
+    Label : CODE
+      void

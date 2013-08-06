@@ -1,0 +1,30 @@
+<?php
+
+Label : NEXT
+  interface
+  Label : NEXT
+    a
+    Label : NEXT
+      {
+      Label : NEXT
+        public
+        Label : NEXT
+          function
+          Label : NEXT
+            &
+            Label : NEXT
+              b
+              Label : NEXT
+                (
+                Label : NEXT
+                  void
+                  Label : NEXT
+                    )
+                    Label : NEXT
+                      ;
+                      Label : NEXT
+                        }
+                        Label : NEXT
+                          /**/
+                          Label : NEXT
+                            /* * */
