@@ -1,0 +1,204 @@
+<?php
+
+Label : CODE
+  class
+  Label : NAME
+    x
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        const
+        Label : NAME
+          A
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          B
+        Label : VALUE
+          '2'
+      Label : ELEMENT
+        const
+        Label : NAME
+          C
+        Label : VALUE
+          ::
+          Label : CONSTANT
+            E
+          Label : CLASS
+            D
+      Label : ELEMENT
+        const
+        Label : NAME
+          F
+        Label : VALUE
+          4
+      Label : ELEMENT
+        const
+        Label : NAME
+          F
+        Label : VALUE
+          4
+      Label : ELEMENT
+        const
+        Label : NAME
+          A
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          B
+        Label : VALUE
+          '2'
+      Label : ELEMENT
+        const
+        Label : NAME
+          C
+        Label : VALUE
+          ::
+          Label : CONSTANT
+            E
+          Label : CLASS
+            D
+      Label : ELEMENT
+        const
+        Label : NAME
+          B
+        Label : VALUE
+          '2'
+      Label : ELEMENT
+        const
+        Label : NAME
+          C
+        Label : VALUE
+          ::
+          Label : CONSTANT
+            E
+          Label : CLASS
+            D
+      Label : ELEMENT
+        const
+        Label : NAME
+          A
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          A
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          A
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          B
+        Label : VALUE
+          '2'
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          const
+          Label : NAME
+            G
+          Label : VALUE
+            5
+        Label : ELEMENT
+          Sequence
+          Label : ELEMENT
+            const
+            Label : NAME
+              A
+            Label : VALUE
+              1
+          Label : ELEMENT
+            const
+            Label : NAME
+              B
+            Label : VALUE
+              '2'
+          Label : ELEMENT
+            const
+            Label : NAME
+              C
+            Label : VALUE
+              ::
+              Label : CONSTANT
+                E
+              Label : CLASS
+                D
+          Label : ELEMENT
+            const
+            Label : NAME
+              F
+            Label : VALUE
+              4
+        Label : ELEMENT
+          const
+          Label : NAME
+            G
+          Label : VALUE
+            5
+        Label : ELEMENT
+          const
+          Label : NAME
+            I
+          Label : VALUE
+            6
+        Label : ELEMENT
+          const
+          Label : NAME
+            J
+          Label : VALUE
+            true
+        Label : ELEMENT
+          const
+          Label : NAME
+            G
+          Label : VALUE
+            5
+        Label : ELEMENT
+          const
+          Label : NAME
+            I
+          Label : VALUE
+            6
+        Label : ELEMENT
+          Sequence
+          Label : ELEMENT
+            const
+            Label : NAME
+              A
+            Label : VALUE
+              1
+          Label : ELEMENT
+            const
+            Label : NAME
+              B
+            Label : VALUE
+              '2'
+          Label : ELEMENT
+            const
+            Label : NAME
+              C
+            Label : VALUE
+              ::
+              Label : CONSTANT
+                E
+              Label : CLASS
+                D
+          Label : ELEMENT
+            const
+            Label : NAME
+              F
+            Label : VALUE
+              4
