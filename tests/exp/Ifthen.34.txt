@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      $a
+  Label : THEN
+    Block With if/elseif
+    Label : CODE
+      ++
+      Label : POSTPLUSPLUS
+        $b
+  Label : ELSE
+    Block With control structure
+    Label : CODE
+      ++
+      Label : POSTPLUSPLUS
+        $c

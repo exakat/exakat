@@ -11,6 +11,5 @@ class _Const extends Tokenizeur {
 
     public function test_Const01()  { $this->generic_test('_Const.01'); }
     public function test_Const02()  { $this->generic_test('_Const.02'); }
-    public function test_Const02()  { $this->generic_test('_Const.02'); }
 }
 ?>
