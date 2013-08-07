@@ -85,7 +85,7 @@ Label : CODE
             Label : INDEX
               'j'
   Label : THEN
-    Block With control structure
+    Block With if/elseif
     Label : CODE
       ++
       Label : POSTPLUSPLUS

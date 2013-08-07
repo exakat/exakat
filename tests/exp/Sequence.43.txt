@@ -43,7 +43,7 @@ Label : CODE
               Label : INDEX
                 'd'
     Label : THEN
-      Block With control structure
+      Block With if/elseif
       Label : CODE
         foreach
         Label : SOURCE

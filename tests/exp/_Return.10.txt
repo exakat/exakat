@@ -31,7 +31,7 @@ Label : CODE
             Label : INDEX
               'c'
       Label : THEN
-        Block With control structure
+        Block With if/elseif
         Label : CODE
           return
           Label : RETURN
