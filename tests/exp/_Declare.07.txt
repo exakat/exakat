@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  declare
+  Label : TICKS
+    void
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        'ISO-8859-1'
+      Label : LEFT
+        encODing

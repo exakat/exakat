@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  declare
+  Label : TICKS
+    void
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        2
+      Label : LEFT
+        tIcks
