@@ -81,6 +81,7 @@ class Token {
                                  '_Interface', 
                                  'Shell', 
                                  'String', 
+                                 '_Declare',
                                 );
     
     function __construct($client) {
