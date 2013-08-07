@@ -283,7 +283,8 @@ f.each{
 ";
                     } elseif ($label == 'TO_CONST') {
                         $qactions[] = "
-/* transform to const ($c) */
+/* transform to const a=1   ,  b=2 => const a=1; const b=2 */
+
 a = it.out('NEXT').next();
 
 a.setProperty('code', 'const');
@@ -292,24 +293,15 @@ a.setProperty('token', 'T_CONST');
 g.addEdge(g.idx('racines')[['token':'_Const']].next(), a, 'INDEXED');
 
 b = a.out('NEXT').next();
+b.setProperty('code', 'BBB');
+//f = a.out('NEXT').out('NEXT').out('NEXT').next();
+g.addEdge(a, b.out('LEFT').next(), 'NAME');
+g.addEdge(a, b.out('RIGHT').next(), 'VALUE');
+g.removeEdge(b.outE('LEFT').next());
+g.removeEdge(b.outE('RIGHT').next());
 
-f = a.out('NEXT').out('NEXT').out('NEXT').next();
-g.addEdge(a, b, 'NAME');
-g.addEdge(a, f, 'VALUE');
-g.addEdge(a, f.out('NEXT').next(), 'NEXT');
-
-g.removeVertex(b.out('NEXT').next());
-
-b.bothE('NEXT').each{ g.removeEdge(it); }
-f.bothE('NEXT').each{ g.removeEdge(it); }
-
-/* Remove children's index */  
-a.outE.hasNot('label', 'NEXT').inV.each{ 
-    it.inE('INDEXED').each{    
-        g.removeEdge(it);
-    } 
-}
-
+g.addEdge(a, b.out('NEXT').next(), 'NEXT');
+g.removeVertex(b);
 ";                    
                     } elseif ($label == 'SEQUENCE') {
                         $qactions[] = "
@@ -768,9 +760,9 @@ g.addEdge(x, it, 'CODE');
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
-//g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT5');
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     semicolon = it;
+    g.addEdge(x, it.out('NEXT').next(), 'NEXT');
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
     g.removeVertex(semicolon);
 }
