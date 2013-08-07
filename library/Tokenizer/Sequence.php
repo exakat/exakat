@@ -15,7 +15,7 @@ class Sequence extends TokenAuto {
                           'Ifthen', 'Include', 'Function', 'Foreach', 'While', 'Arrayappend', 'Cast',
                           'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
                           'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
-                          'Bitshift', 'Void', 'Dowhile', 'Clone', 
+                          'Bitshift', 'Void', 'Dowhile', 'Clone', 'Declare', 
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
@@ -23,7 +23,7 @@ class Sequence extends TokenAuto {
                                 'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_COMMA',
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                 'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_IF', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
-                                'T_THROW', 'T_CATCH', 'T_ABSTRACT', 'T_CASE', 'T_DEFAULT', 'T_CLONE',
+                                'T_THROW', 'T_CATCH', 'T_ABSTRACT', 'T_CASE', 'T_DEFAULT', 'T_CLONE', 'T_DECLARE',
                                  );
         $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators, 
                                         _Include::$operators );
@@ -40,13 +40,13 @@ class Sequence extends TokenAuto {
                                    2 => array('filterOut2' => $next_operator),
         );
         
-        $this->actions = array('makeEdge'    => array( 1 => 'ELEMENT',
-                                                      -1 => 'ELEMENT'
-                                                      ),
-                               'order'    => array( 1 => 2,
-                                                   -1 => 1 ),
+        $this->actions = array('makeEdge'   => array( 1 => 'ELEMENT',
+                                                     -1 => 'ELEMENT'),
+                               'order'      => array( 1 => 2,
+                                                     -1 => 1 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
+                               'cleanIndex' => true
                                );
         $this->checkAuto();
 
@@ -145,7 +145,7 @@ class Sequence extends TokenAuto {
                                               'notToken' => 'T_ELSEIF', ),
                                    0 => array('token' => Sequence::$operators,
                                               'atom' => 'none'),
-                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', ),
+                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_ENDDECLARE', ),
                                               'atom'  => 'none'),
         );
         

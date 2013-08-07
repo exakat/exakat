@@ -49,17 +49,13 @@ class Arguments extends TokenAuto {
         $operands[] = 'Arguments';
         
         // @note arguments separated by ,
-        $this->conditions = array(//-2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR', 'T_STRING', 'T_DOUBLE_ARROW'),
-                                  //                                       Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
-                                  -2 => array('token' => array_merge(array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_ECHO', 'T_GLOBAL', 'T_IMPLEMENTS', 'T_EXTENDS', 'T_VAR', 'T_SEMICOLON', 'T_STATIC' ), 
+        $this->conditions = array(-2 => array('token' => array_merge(array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_ECHO', 'T_GLOBAL', 'T_IMPLEMENTS', 'T_EXTENDS', 'T_VAR', 'T_SEMICOLON', 'T_STATIC', 'T_DECLARE' ), 
                                                                      _Ppp::$operators)),
                                   -1 => array('atom' => $operands ),
                                    0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
                                    2 => array('token' => array('T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_OPEN_CURLY', )),
-                                   //2 => array('filterOut2' => array_merge(array('T_DOT', 'T_AT', 'T_NOT', 'T_EQUAL', 'T_MINUS', 'T_PLUS','T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR','T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_VARIABLE', 'T_DOUBLE_ARROW'),
-                                   //                                       Comparison::$operators, Addition::$operators, Multiplication::$operators) ),
                                  );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
