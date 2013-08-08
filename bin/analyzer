@@ -57,6 +57,7 @@ $classes = array(
     'ArgumentsNoParenthesis', // Fait
     'Argumentsnocomma', // Fait
     'Functioncall', // Fait
+    'FunctioncallArray',
     'Methodcall',   // Fait
     'Staticmethodcall', // Fait
     'Staticconstant',//Fait
