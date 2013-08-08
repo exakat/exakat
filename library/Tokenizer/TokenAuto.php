@@ -770,7 +770,32 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             ";
             unset($actions['to_block']);
         }
+        
+        if (isset($actions['to_block_foreach']) && $actions['to_block_foreach']) {
+                $qactions[] = " 
+/* to_block_foreach */  
 
+x = g.addVertex(null, [code:'Block With Foreach', token:'T_BLOCK', atom:'Block', 'file':it.file, virtual:true]);
+
+a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+g.addEdge(x, a, 'CODE');
+a.bothE('NEXT').each{ g.removeEdge(it); }
+
+
+// remove the next, if this is a ; 
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+    semicolon = it;
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(semicolon);
+}
+            ";
+            unset($actions['to_block_foreach']);
+        }
+        
         if (isset($actions['to_block_for']) && $actions['to_block_for']) {
                 $qactions[] = " 
 /* to_block_for */ 
@@ -786,8 +811,8 @@ a.bothE('NEXT').each{ g.removeEdge(it); }
 
 
 // remove the next, if this is a ; 
-g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
     g.removeVertex(semicolon);
