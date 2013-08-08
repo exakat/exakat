@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class Not extends TokenAuto {
-    static public $operators = array('T_BANG');
+    static public $operators = array('T_BANG', 'T_TILDE');
 
     function _check() {
         $this->conditions = array(0 => array('token' => Not::$operators,
@@ -13,8 +13,9 @@ class Not extends TokenAuto {
                                                                   'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', )),
         );
         
-        $this->actions = array('makeEdge'    => array( '1' => 'NOT'),
-                               'atom'       => 'Not');
+        $this->actions = array('makeEdge'   => array( 1 => 'NOT'),
+                               'atom'       => 'Not',
+                               'cleanIndex' => true);
         $this->checkAuto();
         
         return $this->checkRemaining();

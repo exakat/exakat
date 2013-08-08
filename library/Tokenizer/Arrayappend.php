@@ -11,9 +11,10 @@ class Arrayappend extends TokenAuto {
                                    1 => array('token' => 'T_CLOSE_BRACKET'),
         );
         
-        $this->actions = array('transform'    => array(  -1 => 'VARIABLE',
-                                                         '1' => 'DROP'),
-                               'atom'       => 'Arrayappend');
+        $this->actions = array('transform'  => array(  -1 => 'VARIABLE',
+                                                        1 => 'DROP'),
+                               'atom'       => 'Arrayappend',
+                               'cleanIndex' => true);
         $this->checkAuto();
         
         return $this->checkRemaining();

@@ -16,10 +16,11 @@ class Sign extends TokenAuto {
                                                                     'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
                                  );
         
-        $this->actions = array('makeEdge'    => array( 1 => 'SIGN'),
+        $this->actions = array('makeEdge'   => array( 1 => 'SIGN'),
                                'atom'       => 'Sign',
                                'property'   => array('scalar' => true,
-                                                     'instruction' => true,)
+                                                     'instruction' => true),
+                               'cleanIndex' => true
                                );
         $this->checkAuto();
 
@@ -36,7 +37,8 @@ class Sign extends TokenAuto {
         $this->actions = array('makeEdge'   => array( 1 => 'SIGN'),
                                'atom'       => 'Sign',
                                'property'   => array('scalar' => true,
-                                                     'instruction' => true));
+                                                     'instruction' => true),
+                               'cleanIndex' => true);
         $this->checkAuto();
 
 //Special cases like 1 * -2 or 2 + -2         
@@ -50,7 +52,8 @@ class Sign extends TokenAuto {
         $this->actions = array('makeEdge'   => array( 1 => 'SIGN'),
                                'atom'       => 'Sign',
                                'property'   => array('scalar' => true,
-                                                     'instruction' => true));
+                                                     'instruction' => true),
+                               'cleanIndex' => true);
         $this->checkAuto();
         
         return $this->checkRemaining();

@@ -15,10 +15,11 @@ class Bitshift extends TokenAuto {
                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR',)),
         );
         
-        $this->actions = array('makeEdge'    => array('1' => 'RIGHT',
-                                                      '-1' => 'LEFT'
+        $this->actions = array('makeEdge'   => array( 1 => 'RIGHT',
+                                                     -1 => 'LEFT'
                                                       ),
                                'atom'       => 'Bitshift',
+                               'cleanIndex' => true
                                );
         $this->checkAuto();
         

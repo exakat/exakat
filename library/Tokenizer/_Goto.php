@@ -11,8 +11,9 @@ class _Goto extends TokenAuto {
                                   1 => array('atom' => 'String')
                                   );
         
-        $this->actions = array('transform'   => array(1 => 'LABEL'),
-                               'atom' => 'Goto');
+        $this->actions = array('transform'  => array(1 => 'LABEL'),
+                               'atom'       => 'Goto',
+                               'cleanIndex' => true);
         $this->checkAuto();
 
         return $this->checkRemaining();

@@ -11,8 +11,9 @@ class Label extends TokenAuto {
                                   -1 => array('atom' => 'String'),
                                    0 => array('token' => 'T_COLON'));
         
-        $this->actions = array('transform'   => array(-1 => 'LABEL'),
-                               'atom' => 'Label');
+        $this->actions = array('transform'  => array(-1 => 'LABEL'),
+                               'atom'       => 'Label',
+                               'cleanIndex' => true);
         $this->checkAuto();
 
         return $this->checkRemaining();

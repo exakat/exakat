@@ -12,9 +12,9 @@ class _New extends TokenAuto {
                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_NS_SEPARATOR')),
         );
         
-        $this->actions = array('makeEdge'    => array( '1' => 'NEW'),
-                               'atom'       => 'New');
-
+        $this->actions = array('makeEdge'   => array( 1 => 'NEW'),
+                               'atom'       => 'New',
+                               'cleanIndex' => true);
         $this->checkAuto();
         
         return $this->checkRemaining();
