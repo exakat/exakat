@@ -10,7 +10,7 @@ class Staticproperty extends TokenAuto {
         
         $this->conditions = array( -1 => array('atom' => $operands), 
                                     0 => array('token' => Staticproperty::$operators),
-                                    1 => array('atom' => array('Variable', 'Array')),
+                                    1 => array('atom' => array('Variable', 'Array', 'Property', )),
                                     2 => array('filterOut' => array('T_OPEN_PARENTHESIS')));
         
         $this->actions = array('makeEdge'   => array( -1 => 'CLASS',

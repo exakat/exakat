@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Staticmethodcall extends Tokenizeur {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testStaticmethodcall01()  { $this->generic_test('Staticmethodcall.01'); }
     public function testStaticmethodcall02()  { $this->generic_test('Staticmethodcall.02'); }
@@ -17,5 +17,6 @@ class Staticmethodcall extends Tokenizeur {
     public function testStaticmethodcall06()  { $this->generic_test('Staticmethodcall.06'); }
     public function testStaticmethodcall07()  { $this->generic_test('Staticmethodcall.07'); }
     public function testStaticmethodcall08()  { $this->generic_test('Staticmethodcall.08'); }
+    public function testStaticmethodcall09()  { $this->generic_test('Staticmethodcall.09'); }
 }
 ?>

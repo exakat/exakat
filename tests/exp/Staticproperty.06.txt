@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        $e
+        Label : ARGUMENTS
+          void
+    Label : LEFT
+      ::
+      Label : PROPERTY
+        ->
+        Label : PROPERTY
+          d
+        Label : OBJECT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            $b
+      Label : CLASS
+        self
