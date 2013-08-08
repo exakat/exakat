@@ -15,7 +15,8 @@ class Ternary extends TokenAuto {
                                     1 => array('atom' => 'yes'),
                                     2 => array('token' => 'T_COLON'),
                                     3 => array('atom' => 'yes'),
-                                    4 => array('filterOut' => array('T_DOT', 'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+                                    4 => array('filterOut' => array_merge(array('T_DOT', 'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'),
+                                                                          Multiplication::$operators, Addition::$operators)),
                                  );
         
         $this->actions = array('transform'   => array( -1 => 'CONDITION',
