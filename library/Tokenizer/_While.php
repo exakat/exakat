@@ -15,7 +15,8 @@ class _While extends TokenAuto {
         );
         
         $this->actions = array('while_to_block'    => true,
-                               'keepIndexed'       => true);
+                               'keepIndexed'       => true,
+                               'cleanIndex' => true);
         $this->checkAuto();        
 
         $this->conditions = array(0 => array('token' => _While::$operators),
@@ -29,7 +30,8 @@ class _While extends TokenAuto {
                                                          2 => 'CONDITION',
                                                          3 => 'DROP',
                                                          4 => 'LOOP',      ),
-                               'atom'       => 'While');
+                               'atom'       => 'While',
+                               'cleanIndex' => true);
         $this->checkAuto();
         
         $this->conditions = array(-2 => array('filterOut2' => array('T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS', 'T_DO',)),
@@ -45,7 +47,8 @@ class _While extends TokenAuto {
                                                          2 => 'CONDITION',
                                                          3 => 'DROP',
                                                         ),
-                               'atom'       => 'While');
+                               'atom'       => 'While',
+                               'cleanIndex' => true);
         $this->checkAuto();
 
         $this->conditions = array(0 => array('token' => _While::$operators),
@@ -64,22 +67,10 @@ class _While extends TokenAuto {
                                                          5 => 'LOOP',
                                                          6 => 'DROP',
                                                         ),
-                               'atom'       => 'While');
+                               'atom'       => 'While',
+                               'cleanIndex' => true);
                                
         $this->checkAuto();
-
-/*
-        $this->conditions = array(-5 => array('filterOut2' => array('T_CLOSE_CURLY', 'T_OPEN_CURLY')),
-                                  -4 => array('token' => 'T_WHILE'),
-                                  -3 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  -2 => array('atom'  => 'yes'),
-                                  -1 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   0 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
-        );
-        
-        $this->actions = array('transform'    => array(1 => 'BLOCK'),
-                               'atom' => 'Block');
-        $this->checkAuto();*/
         
         return $this->checkRemaining();
     }

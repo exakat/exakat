@@ -65,7 +65,8 @@ class Sequence extends TokenAuto {
                                'order'      => array( 1 => 2,
                                                      -1 => 1 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence');
+                               'atom'       => 'Sequence',
+                               'cleanIndex' => true);
         $this->checkAuto();
 
         // @note instructions separated by ; with a special case for 'case'

@@ -164,7 +164,8 @@ function process_file($filename) {
         if (empty($tokens[$id])) { continue; }
         $Tid++;
         $token = $tokens[$id];
-
+        $to_index = true;
+        
         if (is_array($token)) {
             $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
                                           ->setProperty('code', $token[1])
@@ -173,6 +174,7 @@ function process_file($filename) {
             
             if (token_name($token[0]) == 'T_STRING' && (strtolower($token[1]) == 'true' || strtolower($token[1]) == 'false')) {
                 $T[$Tid]->setProperty('atom', 'Boolean');
+                $to_index = false;
             } elseif (isset($atoms[token_name($token[0])])) {
                 $T[$Tid]->setProperty('atom', $atoms[token_name($token[0])]);
             }
@@ -210,6 +212,7 @@ function process_file($filename) {
 
                 $T[$Tid]->relateTo($void, 'CODE')->save();
                 unset($tokens[$id + 1]);
+                $to_index = false;
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
@@ -221,7 +224,7 @@ function process_file($filename) {
         }
     
         // test is for booleans. 
-        if (!is_array($token) || token_name($token[0]) != 'T_STRING' || !in_array(strtolower($token[1]), array('true', 'false'))) {
+        if ($to_index) {
             $regex = Tokenizer\Token::$types; 
             foreach($regex as $r) {
                 $class = "Tokenizer\\$r";
@@ -229,7 +232,7 @@ function process_file($filename) {
                     $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
                 }
             }
-        } 
+        }
         
         if (!isset($previous)) {
             $previous = $T[$Tid];

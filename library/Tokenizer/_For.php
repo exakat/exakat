@@ -18,7 +18,8 @@ class _For extends TokenAuto {
                                     8 => array('token' => 'T_SEMICOLON'),
         );
         $this->actions = array('addEdge'     => array(8 => array('Void' => 'LEVEL')),
-                               'keepIndexed' => true);
+                               'keepIndexed' => true,
+                               'cleanIndex' => true);
         $this->checkAuto();
 
         $this->conditions = array(  0 => array('token' => _For::$operators,
@@ -33,7 +34,8 @@ class _For extends TokenAuto {
                                     8 => array('atom' => 'yes', 'notAtom' => 'Block'),
         );                
         $this->actions = array( 'to_block_for' => true,
-                                'keepIndexed' => true);
+                                'keepIndexed' => true,
+                               'cleanIndex' => true);
         $this->checkAuto();
     
     // @doc for(a; b; c) { code }
@@ -59,6 +61,7 @@ class _For extends TokenAuto {
                                                        '8' => 'CODE',
                                                       ),
                                'atom'       => 'For',
+                               'cleanIndex' => true
                                );
         $this->checkAuto(); 
 
@@ -90,6 +93,7 @@ class _For extends TokenAuto {
                                                       ),
                                'atom'       => 'For',
                                'property' => array('Alternative' => 'yes'),
+                               'cleanIndex' => true
                                );
         $this->checkAuto(); 
 

@@ -40,6 +40,7 @@ class Ifthen extends TokenAuto {
                                                        '3' => 'ELSE'
                                                       ),
                                'atom'       => 'Ifthen',
+                               'cleanIndex' => true
                                );
 
         $this->checkAuto(); 
@@ -90,12 +91,12 @@ class Ifthen extends TokenAuto {
                                    4 => array('token' => 'T_ENDIF'),
         );
         
-        $this->actions = array('transform'    => array( 1 => 'CONDITION',
-                                                        2 => 'DROP',    
-                                                        3 => 'THEN',    
-                                                        4 => 'DROP', 
-                                                      ),
+        $this->actions = array('transform'   => array( 1 => 'CONDITION',
+                                                       2 => 'DROP',    
+                                                       3 => 'THEN',    
+                                                       4 => 'DROP'),
                                'atom'       => 'Ifthen',
+                               'cleanIndex' => true
                                );
         $this->checkAuto(); 
 
@@ -121,6 +122,7 @@ class Ifthen extends TokenAuto {
                                                       ),
                                'atom'       => 'Ifthen',
                                'property'   => array('Alternative' => true),
+                               'cleanIndex' => true
                                );
 
         $this->checkAuto(); 
@@ -140,6 +142,7 @@ class Ifthen extends TokenAuto {
                                                         4 => 'ELSE',
                                                       ),
                                'atom'       => 'Ifthen',
+                               'cleanIndex' => true
                                );
         $this->checkAuto(); 
 
