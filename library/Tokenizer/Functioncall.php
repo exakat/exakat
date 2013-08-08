@@ -31,7 +31,8 @@ class Functioncall extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Arguments'),
                                    2 => array('filterOut2' => array_merge( array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_COMMA', 'T_QUESTION'),
-                                                                           Addition::$operators, Multiplication::$operators)),
+                                                                           Addition::$operators, Multiplication::$operators, Bitshift::$operators, 
+                                                                           Logical::$operators)),
         );
         
         $this->actions = array('makeEdge'   => array('1' => 'ARGUMENTS'),
