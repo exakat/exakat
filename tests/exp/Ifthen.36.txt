@@ -1,0 +1,44 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      $a
+  Label : THEN
+    Block With if/elseif
+    Label : CODE
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $b
+  Label : ELSE
+    Block With control structure
+    Label : CODE
+      =
+      Label : RIGHT
+        "
+        Label : CONTAIN
+          Concatenation
+          Label : ELEMENT
+            {
+            Label : NAME
+              ->
+              Label : PROPERTY
+                g
+              Label : OBJECT
+                $f
+          Label : ELEMENT
+            {
+            Label : NAME
+              ->
+              Label : PROPERTY
+                e
+              Label : OBJECT
+                $d
+          Label : ELEMENT
+            :
+      Label : LEFT
+        $c
