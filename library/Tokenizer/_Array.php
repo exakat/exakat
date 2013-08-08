@@ -16,8 +16,8 @@ class _Array extends TokenAuto {
                                                          1 => 'INDEX',
                                                          2 => 'DROP'),
                                'atom'        => 'Array',
-                               'cleanIndex'  => true,
-                               'keepIndexed' => true);
+                               'cleanIndex'  => true
+                               );
         $this->checkAuto(); 
 
         return $this->checkRemaining();
