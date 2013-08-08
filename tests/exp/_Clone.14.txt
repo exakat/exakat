@@ -46,8 +46,6 @@ Label : CODE
             g
             Label : ARGUMENTS
               void
-              Label : ARGUMENT
-                void
         Label : OBJECT
           $f
     Label : LEFT

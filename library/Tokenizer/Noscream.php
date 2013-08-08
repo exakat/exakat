@@ -15,7 +15,6 @@ class Noscream extends TokenAuto {
         $this->actions = array('makeEdge'   => array( '1' => 'AT'),
                                'atom'       => 'Noscream',
                                'cleanIndex' => true);
-
         $this->checkAuto();
         
         return $this->checkRemaining();

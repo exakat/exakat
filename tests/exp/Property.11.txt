@@ -16,8 +16,6 @@ Label : CODE
             c
             Label : ARGUMENTS
               void
-              Label : ARGUMENT
-                void
           Label : CLASS
             B
       Label : INDEX

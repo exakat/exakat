@@ -26,8 +26,6 @@ Label : CODE
             a
             Label : ARGUMENTS
               void
-              Label : ARGUMENT
-                void
           Label : CLASS
             C
     Label : RIGHT
