@@ -28,6 +28,23 @@ class Parenthesis extends TokenAuto {
                                'cleanIndex' => true);
         
         $this->checkAuto();
+
+// this applies to situations like print ($a * $b) + $c; where parenthesis actually belong to the following expression. 
+        $this->conditions = array(-1 => array('token' => array( 'T_ECHO', 'T_PRINT' )), 
+                                   0 => array('token' => Parenthesis::$operators,
+                                              'atom'  => 'none' ),
+                                   1 => array('atom'  => $operands),
+                                   2 => array('token' => 'T_CLOSE_PARENTHESIS',
+                                              'atom'  => 'none'),
+                                   3 => array('token' => array_merge(Logical::$operators, Multiplication::$operators, Addition::$operators)),
+        );
+        
+        $this->actions = array('makeEdge' => array( '1' => 'CODE'),
+                               'dropNext' => array(1),
+                               'atom'     => 'Parenthesis',
+                               'cleanIndex' => true);
+        
+        $this->checkAuto();
         
         return $this->checkRemaining();
     }
