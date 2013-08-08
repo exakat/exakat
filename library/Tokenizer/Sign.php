@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Sign extends TokenAuto {
     static public $operators = array('T_PLUS', 'T_MINUS');
     static public $operands = array('Integer', 'Sign', 'String', 'Variable', 'Array', 'Float', 'Boolean', 'Functioncall',
-                                    'Staticmethodcall', 'Staticproperty', 'Multiplication', );
+                                    'Staticmethodcall', 'Staticproperty', 'Multiplication', 'Property', 'Parenthesis', );
 
     function _check() {
         $this->conditions = array( -1 => array('filterOut2' => array('T_STRING', 'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER', 'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT',  'T_CLOSE_BRACKET')), 
