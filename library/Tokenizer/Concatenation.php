@@ -3,16 +3,18 @@
 namespace Tokenizer;
 
 class Concatenation extends TokenAuto {
+    public static $operators = array('T_DOT');
+    
     function _check() {
         $operands = array('String', 'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign', 'Array',
                           'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
                           'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 
-                          'Preplusplus', 'Postplusplus',);
+                          'Preplusplus', 'Postplusplus', 'Cast',);
         
         $this->conditions = array(-2 => array('filterOut' => array_merge(Addition::$operators, Multiplication::$operators,
                                                             array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR'))), 
                                   -1 => array('atom'  => $operands ),
-                                   0 => array('token' => 'T_DOT',
+                                   0 => array('token' => Concatenation::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => $operands),
                                    2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
@@ -40,16 +42,6 @@ class Concatenation extends TokenAuto {
         ); 
         $this->actions = array('mergeConcat' => "Concat");
         $this->checkAuto();
-
-
-// Fusion of string and PHPcode
-        $this->conditions = array( 0 => array('atom' => array('String',  'Concatenation', )),
-                                   1 => array('atom' => array('String', 'Phpcode', 'Concatenation', )),
-        ); 
-
-        $this->actions = array('insertConcat' => "Concat",
-                               'keepIndexed'  => true);
-//        $r = $this->checkAuto();
 
         return $this->checkRemaining();
     }
