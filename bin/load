@@ -167,10 +167,29 @@ function process_file($filename) {
         $to_index = true;
         
         if (is_array($token)) {
-            $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
-                                          ->setProperty('code', $token[1])
-                                          ->setProperty('line', $token[2])
-                                          ->setProperty('file', $file);
+            if (token_name($token[0]) == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
+                                              ->setProperty('code', $token[1])
+                                              ->setProperty('line', $token[2])
+                                              ->setProperty('file', $file)->save();
+                $previous->relateTo($T[$Tid], 'NEXT')->save();
+                $regexIndex["_Break"]->relateTo($T[$Tid], 'INDEXED')->save();
+                $previous = $T[$Tid];
+                
+                $Tid++;
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_LNUMBER')
+                                              ->setProperty('code', 'void')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('file', $file)
+                                              ->setProperty('atom', 'Void')->save();
+
+                $to_index = false;
+            } else {
+                $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
+                                              ->setProperty('code', $token[1])
+                                              ->setProperty('line', $token[2])
+                                              ->setProperty('file', $file);
+            }
             
             if (token_name($token[0]) == 'T_STRING' && (strtolower($token[1]) == 'true' || strtolower($token[1]) == 'false')) {
                 $T[$Tid]->setProperty('atom', 'Boolean');
