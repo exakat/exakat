@@ -14,7 +14,6 @@ class Arguments extends TokenAuto {
                                        'Clone', 'New' );
 
     function _check() {
-
         // Argument next to ( 
         $this->conditions = array(-1 => array('token' => 'T_OPEN_PARENTHESIS',
                                               'atom' => 'none'),

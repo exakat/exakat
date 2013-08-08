@@ -79,6 +79,7 @@ class TokenAuto extends Token {
         // @doc audit trail track
         $qactions[] = "\n it.setProperty('modifiedBy', '".str_replace('Tokenizer\\', '', get_class($this))."'); \n";
 
+
         if (isset($actions['keepIndexed'])) {
             if(!$actions['keepIndexed']) {
                 $qactions[] = " 
@@ -93,7 +94,7 @@ class TokenAuto extends Token {
 /* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
                 ";
         }
-                
+
         if (isset($actions['cleansemicolon']) && $actions['cleansemicolon']) {
             $qactions[] = "
 /* cleansemicolon */
@@ -845,7 +846,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             ";
             unset($actions['to_block_ifelseif']);
         }
-
+        
         if (isset($actions['to_block_ifelseif_instruction']) && $actions['to_block_ifelseif_instruction']) {
                 $qactions[] = " 
 /* to_block_ifelseif_instruction */ 
@@ -1052,6 +1053,7 @@ it.outE.hasNot('label', 'NEXT').inV.each{
                 ";
             unset($actions['cleanIndex']);
         }        
+
         
         
         if ($remainder = array_keys($actions)) {
