@@ -12,19 +12,20 @@ class Phpcode extends TokenAuto {
                                   2 => array('token' => 'T_CLOSE_TAG'),
         );
         
-        $this->actions = array('transform'    => array( '1' => 'CODE',
-                                                        '2' => 'DROP'),
-                               'atom'       => 'Phpcode');
+        $this->actions = array('transform'   => array( 1 => 'CODE',
+                                                       2 => 'DROP'),
+                               'atom'       => 'Phpcode',
+                               'cleanIndex' => true);
         $this->checkAuto();
 
 // <?php echo 3 ( No closing tag)
         $this->conditions = array(0 => array('token' => array('T_OPEN_TAG'),
-                                             'atom' => 'none'),
-                                  1 => array('atom' => 'yes'),
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => 'yes'),
                                   2 => array('token' => 'T_END'),
         );
         
-        $this->actions = array('transform'    => array( '1' => 'CODE'),
+        $this->actions = array('transform'  => array( 1 => 'CODE'),
                                'atom'       => 'Phpcode');
         $this->checkAuto();
 
