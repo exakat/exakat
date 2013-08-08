@@ -6,23 +6,35 @@ Label : CODE
     ;
     Label : ELEMENT
       global
-      Label : NAME
-        $d
       Label : VALUE
-        array
-        Label : ARGUMENTS
-          void
+        void
+      Label : DEFINE
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            void
+        Label : LEFT
+          $d
     Label : ELEMENT
       global
-      Label : NAME
-        $b
       Label : VALUE
-        -
-        Label : SIGN
+        void
+      Label : DEFINE
+        =
+        Label : RIGHT
+          -
+          Label : SIGN
+            1
+        Label : LEFT
+          $b
+    Label : ELEMENT
+      global
+      Label : VALUE
+        void
+      Label : DEFINE
+        =
+        Label : RIGHT
           1
-    Label : ELEMENT
-      global
-      Label : NAME
-        $a
-      Label : VALUE
-        1
+        Label : LEFT
+          $a

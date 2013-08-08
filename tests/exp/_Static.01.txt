@@ -12,29 +12,45 @@ Label : CODE
         ;
         Label : ELEMENT
           static
-          Label : NAME
-            $e
           Label : VALUE
-            '23'
+            void
+          Label : DEFINE
+            =
+            Label : RIGHT
+              '23'
+            Label : LEFT
+              $e
         Label : ELEMENT
           static
-          Label : NAME
-            $d
           Label : VALUE
-            array
-            Label : ARGUMENTS
-              void
+            void
+          Label : DEFINE
+            =
+            Label : RIGHT
+              array
+              Label : ARGUMENTS
+                void
+            Label : LEFT
+              $d
         Label : ELEMENT
           static
-          Label : NAME
-            $c
           Label : VALUE
-            -
-            Label : SIGN
-              2
+            void
+          Label : DEFINE
+            =
+            Label : RIGHT
+              -
+              Label : SIGN
+                2
+            Label : LEFT
+              $c
         Label : ELEMENT
           static
-          Label : NAME
-            $b
           Label : VALUE
-            1
+            void
+          Label : DEFINE
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $b

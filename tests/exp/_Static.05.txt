@@ -16,29 +16,41 @@ Label : CODE
             void
           Label : DEFINE
             static
-            Label : NAME
-              $c
             Label : VALUE
-              array
-              Label : ARGUMENTS
-                void
+              void
+            Label : DEFINE
+              =
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  void
+              Label : LEFT
+                $c
         Label : ELEMENT
           private
           Label : VALUE
             void
           Label : DEFINE
             static
-            Label : NAME
-              $d
             Label : VALUE
-              "2"
+              void
+            Label : DEFINE
+              =
+              Label : RIGHT
+                "2"
+              Label : LEFT
+                $d
         Label : ELEMENT
           public
           Label : VALUE
             void
           Label : DEFINE
             static
-            Label : NAME
-              $b
             Label : VALUE
-              1
+              void
+            Label : DEFINE
+              =
+              Label : RIGHT
+                1
+              Label : LEFT
+                $b
