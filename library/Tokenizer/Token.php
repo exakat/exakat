@@ -45,7 +45,7 @@ class Token {
                                  'Postplusplus',
                                  '_Throw',
                                  'ArgumentsNoParenthesis',
-                                 'Argumentsnocomma',
+                                 'ArgumentsNoComma',
                                  'Arguments', 
                                  '_Global',
                                  '_New',
