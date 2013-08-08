@@ -11,7 +11,7 @@ class Arguments extends TokenAuto {
                                        'Magicconstant', 'Ternary', 'Assignation', 'Logical', 'Keyvalue', 'Void', 
                                        'Property', 'Staticconstant', 'Staticproperty', 'Nsname', 'Methodcall', 'Staticmethodcall',
                                        'Reference', 'Cast', 'Postplusplus', 'Preplusplus', 'Typehint', 'Bitshift', 'Noscream',
-                                       'Clone',  );
+                                       'Clone', 'New' );
 
     function _check() {
 
