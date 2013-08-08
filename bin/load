@@ -127,6 +127,7 @@ function process_file($filename) {
                   '$' => 'T_DOLLAR',
                   '`' => 'T_SHELL_QUOTE',
                   '`_CLOSE' => 'T_SHELL_QUOTE_CLOSE',
+                  '~' => 'T_TILDE',
                   );
     
     $atoms = array( 'T_STRING'                   => 'String', 
@@ -169,14 +170,10 @@ function process_file($filename) {
                                           ->setProperty('code', $token[1])
                                           ->setProperty('line', $token[2])
                                           ->setProperty('file', $file);
-            if (in_array($token[0], array(T_OPEN_TAG, T_IS_EQUAL, T_ECHO, T_DOUBLE_ARROW, T_CASE, T_DEFAULT,
-                                          T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL,
-                                          T_MUL_EQUAL, T_OR_EQUAL, T_PLUS_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL
-                                          ))) {
-//                $T[$Tid]->setProperty('begin', true);
-            }
             
-            if (isset($atoms[token_name($token[0])])) {
+            if (token_name($token[0]) == 'T_STRING' && (strtolower($token[1]) == 'true' || strtolower($token[1]) == 'false')) {
+                $T[$Tid]->setProperty('atom', 'Boolean');
+            } elseif (isset($atoms[token_name($token[0])])) {
                 $T[$Tid]->setProperty('atom', $atoms[token_name($token[0])]);
             }
             
@@ -200,10 +197,10 @@ function process_file($filename) {
             
             if ($token == '{' && $tokens[$id + 1] == '}') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
-                                             ->setProperty('code', $token)
-                                             ->setProperty('line', $line)
-                                             ->setProperty('file', $file)
-                                             ->setProperty('atom', 'Block')->save();
+                                              ->setProperty('code', $token)
+                                              ->setProperty('line', $line)
+                                              ->setProperty('file', $file)
+                                              ->setProperty('atom', 'Block')->save();
 
                 $void   = $client->makeNode()->setProperty('token', 'T_VOID')
                                              ->setProperty('code', 'void')
@@ -220,20 +217,19 @@ function process_file($filename) {
                                               ->setProperty('file', $file)->save();
             }
     
-            if (in_array($token, array('(','{','+','-','*','/','%', '==', ',', '=', '.'))) {
-//                $T[$Tid]->setProperty('begin', true)->save();
-            }
-
             $T[$Tid]->save();
         }
-
-        $regex = Tokenizer\Token::$types; 
-        foreach($regex as $r) {
-            $class = "Tokenizer\\$r";
-            if (in_array($token_value, $class::$operators)) { 
-                $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
+    
+        // test is for booleans. 
+        if (!is_array($token) || token_name($token[0]) != 'T_STRING' || !in_array(strtolower($token[1]), array('true', 'false'))) {
+            $regex = Tokenizer\Token::$types; 
+            foreach($regex as $r) {
+                $class = "Tokenizer\\$r";
+                if (in_array($token_value, $class::$operators)) { 
+                    $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
+                }
             }
-        }
+        } 
         
         if (!isset($previous)) {
             $previous = $T[$Tid];
