@@ -9,7 +9,7 @@ class Property extends TokenAuto {
         $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall');
         $this->conditions = array( -1 => array('atom' => $operands), 
                                     0 => array('token' => Property::$operators),
-                                    1 => array('atom' => array('String', 'Variable')),
+                                    1 => array('atom' => array('String', 'Variable', 'Block')),
                                     2 => array('filterOut' => array('T_OPEN_PARENTHESIS')),
                                     );
         

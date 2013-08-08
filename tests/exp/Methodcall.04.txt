@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $a
+    Label : METHOD
+      {
+      Label : CODE
+        [
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          'c'
+    Label : ARGUMENTS
+      void
