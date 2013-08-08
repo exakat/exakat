@@ -1,0 +1,40 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      .
+      Label : CONCAT
+        (
+        Label : CODE
+          ++
+          Label : PREPLUSPLUS
+            $h
+      Label : CONCAT
+        "
+        Label : CONTAIN
+          Concatenation
+          Label : ELEMENT
+            g
+          Label : ELEMENT
+            d
+          Label : ELEMENT
+            {
+            Label : NAME
+              [
+              Label : VARIABLE
+                $e
+              Label : INDEX
+                f
+    Label : LEFT
+      ::
+      Label : PROPERTY
+        [
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          'c'
+      Label : CLASS
+        a
