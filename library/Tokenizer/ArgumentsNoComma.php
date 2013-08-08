@@ -2,7 +2,7 @@
 
 namespace Tokenizer;
 
-class Argumentsnocomma extends TokenAuto {
+class ArgumentsNoComma extends TokenAuto {
     static public $operators = array('T_OPEN_PARENTHESIS');
 
     function _check() {
