@@ -232,6 +232,23 @@ function process_file($filename) {
                 $T[$Tid]->relateTo($void, 'CODE')->save();
                 unset($tokens[$id + 1]);
                 $to_index = false;
+            } elseif ($token == '(' && $tokens[$id + 1] == ')') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                                              ->setProperty('code', $token)
+                                              ->setProperty('line', $line)
+                                              ->setProperty('file', $file)->save();
+                $previous->relateTo($T[$Tid], 'NEXT')->save();
+//                $regexIndex["Functioncall"]->relateTo($T[$Tid], 'INDEXED')->save();
+                $previous = $T[$Tid];
+                
+                $Tid++;
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
+                                              ->setProperty('code', 'void')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('file', $file)
+                                              ->setProperty('atom', 'Arguments')->save();
+
+                $to_index = false;
             } elseif ($token == '{' && $tokens[$id + 1] == ';' && $tokens[$id + 2] == '}' ) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
