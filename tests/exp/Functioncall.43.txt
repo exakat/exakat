@@ -1,0 +1,98 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    >>
+    Label : RIGHT
+      $c
+    Label : LEFT
+      print
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          +
+          Label : RIGHT
+            $b
+          Label : LEFT
+            $a
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        %
+        Label : RIGHT
+          $c
+        Label : LEFT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              $b
+            Label : LEFT
+              $a
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        &
+        Label : LEFT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              $b
+            Label : LEFT
+              $a
+        Label : RIGHT
+          $c
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        *
+        Label : RIGHT
+          $c
+        Label : LEFT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              $b
+            Label : LEFT
+              $a
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        +
+        Label : RIGHT
+          $c
+        Label : LEFT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              $b
+            Label : LEFT
+              $a
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        +
+        Label : RIGHT
+          $c
+        Label : LEFT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              $b
+            Label : LEFT
+              $a
