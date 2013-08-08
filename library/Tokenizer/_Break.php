@@ -14,7 +14,7 @@ class _Break extends TokenAuto {
         $this->actions = array('addEdge'     => array(0 => array('Void' => 'LEVEL')),
                                'keepIndexed' => true
                                );
-        $this->checkAuto();
+//        $this->checkAuto();
 
         $this->conditions = array(0 => array('token' => _Break::$operators,
                                              'atom' => 'none'),
