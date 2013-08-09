@@ -1,0 +1,4 @@
+<?php
+
+Label : CODE
+  __HALT_COMPILER
