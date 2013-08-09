@@ -11,72 +11,74 @@ Label : CODE
       Label : CODE
         Block With Sequence For Default
         Label : CODE
-          Block With Sequence For Default
-          Label : CODE
-            ;
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $a
-              Label : THEN
-                {
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    foreach
-                    Label : SOURCE
-                      $a
+          ;
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $a
+            Label : THEN
+              {
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  foreach
+                  Label : SOURCE
+                    $a
+                  Label : VALUE
+                    =>
+                    Label : KEY
+                      $b
                     Label : VALUE
-                      =>
-                      Label : KEY
-                        $b
-                      Label : VALUE
-                        $c
-                    Label : LOOP
-                      {
-                      Label : CODE
-                        if
-                        Label : CONDITION
-                          (
-                          Label : CODE
+                      $c
+                  Label : LOOP
+                    {
+                    Label : CODE
+                      if
+                      Label : CONDITION
+                        (
+                        Label : CODE
+                          =
+                          Label : RIGHT
+                            $e
+                          Label : LEFT
+                            $d
+                      Label : THEN
+                        {
+                        Label : CODE
+                          ;
+                          Label : ELEMENT
                             =
                             Label : RIGHT
-                              $e
+                              4
                             Label : LEFT
-                              $d
-                        Label : THEN
-                          {
-                          Label : CODE
-                            ;
-                            Label : ELEMENT
-                              =
-                              Label : RIGHT
-                                4
-                              Label : LEFT
-                                $f
-                  Label : ELEMENT
-                    =
-                    Label : RIGHT
-                      2
-                    Label : LEFT
-                      $j
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                1
-              Label : LEFT
-                $g
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                3
-              Label : LEFT
-                $i
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                2
-              Label : LEFT
-                $h
+                              $f
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    2
+                  Label : LEFT
+                    $j
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $g
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              3
+            Label : LEFT
+              $i
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              2
+            Label : LEFT
+              $h
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void

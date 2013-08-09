@@ -1,0 +1,78 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    $b
+  Label : CASES
+    {
+    Label : CODE
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          'a'
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              foreach
+              Label : SOURCE
+                $data
+              Label : VALUE
+                =>
+                Label : KEY
+                  $key
+                Label : VALUE
+                  $value
+              Label : LOOP
+                {
+                Label : CODE
+                  void
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                0
+              Label : LEFT
+                $count
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  void
+              Label : LEFT
+                $associative
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  void
+              Label : LEFT
+                $indexed
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  $c
+              Label : THEN
+                {
+                Label : CODE
+                  ;
+                  Label : ELEMENT
+                    ++
+                    Label : POSTPLUSPLUS
+                      $d
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block With Sequence For Default
+          Label : CODE
+            Block With Sequence For Default
+            Label : CODE
+              return
+              Label : RETURN
+                'e'
