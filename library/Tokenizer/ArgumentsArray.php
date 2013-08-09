@@ -2,12 +2,9 @@
 
 namespace Tokenizer;
 
-class ArgumentsNoComma extends TokenAuto {
-    static public $operators = array('T_OPEN_PARENTHESIS');
-
+class ArgumentsArray extends TokenAuto {
     function _check() {
-        // @note f(1) : no comma 
-        $this->conditions = array(-1 => array('token' => array_merge(Functioncall::$operators, array('T_DECLARE'))),
+        $this->conditions = array(-1 => array('atom'  => 'Array'),
                                    0 => array('token' => 'T_OPEN_PARENTHESIS',
                                               'atom'  => 'none'),
                                    1 => array('atom'  => Arguments::$operands_wa),
