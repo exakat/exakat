@@ -66,7 +66,8 @@ $classes = array(
     'Multiplication',// Fait
     'Addition',     // Fait
     'Bitshift',     // Fait
-    'Concatenation', // because test concatenation 37
+    'Concatenation', // Fait
+    'ConcatenationAtom', 
     'String',       // Fait
     '_Var',         // Fait
     '_Ppp',         // Fait

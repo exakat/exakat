@@ -83,6 +83,8 @@ class Token {
                                  'String', 
                                  '_Declare',
                                  'Halt', 
+                                 'Concatenation',
+                                 // 'ConcatenationAtom', 
                                 );
     
     function __construct($client) {

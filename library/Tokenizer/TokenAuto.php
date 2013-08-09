@@ -1031,6 +1031,30 @@ x.out('ELEMENT').each{
         
         if (isset($actions['while_to_block'])) {
             $qactions[] = " 
+/* while_to_block */  
+
+x = g.addVertex(null, [code:'Block With While', token:'T_BLOCK', atom:'Block', 'file':it.file, virtual:true]);
+
+a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+g.addEdge(x, a, 'CODE');
+a.bothE('NEXT').each{ g.removeEdge(it); }
+
+// remove the next, if this is a ; 
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+    semicolon = it;
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(semicolon);
+}
+                ";
+            unset($actions['while_to_block']);
+        }        
+
+        if (isset($actions['while_to_empty_block'])) {
+            $qactions[] = " 
 /* create an empty Block in place of a semi colon, after a while statment.  */  
 
 x = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
@@ -1038,7 +1062,7 @@ x.setProperty('code', 'Block with While');
 x.setProperty('atom', 'Block');
 
                 ";
-            unset($actions['while_to_block']);
+            unset($actions['while_to_empty_block']);
         }        
 
         if (isset($actions['cleanIndex'])) {
@@ -1054,6 +1078,7 @@ it.outE.hasNot('label', 'NEXT').inV.each{
             unset($actions['cleanIndex']);
         }        
 
+        
         
         
         if ($remainder = array_keys($actions)) {
