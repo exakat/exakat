@@ -82,6 +82,7 @@ class Token {
                                  'Shell', 
                                  'String', 
                                  '_Declare',
+                                 'Halt', 
                                 );
     
     function __construct($client) {
