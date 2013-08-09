@@ -45,7 +45,7 @@ class _Default extends TokenAuto {
                                                'atom' => 'none'),
                                     1 => array('token' => array('T_COLON', 'T_SEMICOLON'),
                                                'atom' => 'none'),
-                                    2 => array('atom' => 'yes', 'notAtom' => array('Case', 'Default', 'SequenceCaseDefault')),
+                                    2 => array('atom' => 'yes', 'notAtom' => array('Case', 'Default', 'SequenceCaseDefault', 'Block')),
                                     3 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')),
         );
         
