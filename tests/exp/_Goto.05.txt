@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    :
+    Label : LABEL
+      cleanupCookie
+  Label : ELEMENT
+    GOTO
+    Label : LABEL
+      cleanupCookie
