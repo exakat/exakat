@@ -68,8 +68,8 @@ class Arguments extends TokenAuto {
                                );
         $this->checkAuto();
 
-        // @note arguments separated by ,
-        $this->conditions = array(-1 => array('atom' => 'String' ),
+        // @note arguments separated by , (interface), ending on a {
+        $this->conditions = array(-1 => array('atom' => array('String', 'Arguments') ),
                                    0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => 'String'),
