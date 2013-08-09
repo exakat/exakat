@@ -30,7 +30,7 @@ class Assignation extends TokenAuto {
                           'Clone', 'Shell', 'Include', 
                          );
         
-        $this->conditions = array(-2 => array('filterOut2' => array('T_CONST', 'T_DOUBLE_COLON',)),
+        $this->conditions = array(-2 => array('filterOut2' => array('T_CONST', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')),
                                   -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 'Noscream', 'Reference', 'Not', 'Arrayappend' , 'Typehint', 'String', 'Static',  )),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
