@@ -38,7 +38,7 @@ class Sequence extends TokenAuto {
                                   -1 => array('atom' => $operands ),
                                    0 => array('token' => Sequence::$operators,
                                               'atom' => 'none'),
-                                   1 => array('atom' => $operands),
+                                   1 => array('atom' => $operands, 'notToken' => 'T_ELSEIF'),
                                    2 => array('filterOut2' => $next_operator),
         );
         
@@ -142,7 +142,8 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note End of PHP script, alternative syntax
-        $this->conditions = array(-3 => array('token' => array('T_ELSE', 'T_ELSEIF', 'T_IF', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', )), 
+        //, 'T_ELSEIF', 'T_IF', 
+        $this->conditions = array(-3 => array('token' => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', )), 
                                   -2 => array('token' => 'T_COLON',), 
                                   -1 => array('atom' => $operands,
                                               'notToken' => 'T_ELSEIF', ),
@@ -158,6 +159,7 @@ class Sequence extends TokenAuto {
                                'cleanIndex'  => true
                                );
         $this->checkAuto(); 
+//        $this->printQuery();
        
         return $this->checkRemaining();
     }

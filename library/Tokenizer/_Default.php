@@ -22,24 +22,24 @@ class _Default extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                    2 => array('atom'  => 'yes'), 
-                                   3 => array('token' => 'T_SEMICOLON'),
+                                   3 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
                                    4 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')));
         
         $this->actions = array('createBlockWithSequenceForDefault' => true,
                                'keepIndexed'                       => true);
         $this->checkAuto();
 
-/*
-        $this->conditions = array(-2 => array('token' => _Default::$operators,
-                                              'atom' => 'none'),
-                                  -1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   0 => array('atom' => 'Sequence'), 
-                                   1 => array('atom' => 'Sequence'), 
-        );
-        $this->actions = array( 'transform' => array(1 => 'ELEMENT'), 
-                                'mergeNext' => array('Sequence' => 'ELEMENT'));
+        // Case has only one instruction no semi-colon (case 'a': $x++;)
+        $this->conditions = array( 0 => array('token' => _Default::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
+                                   2 => array('atom'  => 'yes'), 
+                                   3 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')));
+        
+        $this->actions = array('createBlockWithSequenceForDefault' => true,
+                               'keepIndexed'                       => true);
         $this->checkAuto();
-*/
+
    // create block for Default  default : $x++ (or a sequence).
         $this->conditions = array(  0 => array('token' => _Default::$operators,
                                                'atom' => 'none'),

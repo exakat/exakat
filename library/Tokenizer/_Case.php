@@ -24,12 +24,24 @@ class _Case extends TokenAuto {
                                    1 => array('atom'  => 'yes'),
                                    2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                    3 => array('atom'  => 'yes'), 
-                                   4 => array('token' => 'T_SEMICOLON'),
+                                   4 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
                                    5 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')));
         
         $this->actions = array('createBlockWithSequenceForCase'    => true,
                                'keepIndexed'                       => true);
-//        $r = $this->checkAuto();
+        $r = $this->checkAuto();
+
+        // Case has only one instruction and no ; (case 'a': $x++)
+        $this->conditions = array( 0 => array('token' => _Case::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => 'yes'),
+                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
+                                   3 => array('atom'  => 'yes'), 
+                                   4 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')));
+        
+        $this->actions = array('createBlockWithSequenceForCase'    => true,
+                               'keepIndexed'                       => true);
+        $r = $this->checkAuto();
 
     // create block for Case  case 'a' : $x++; (or a sequence).
         $this->conditions = array(  0 => array('token' => _Case::$operators,
