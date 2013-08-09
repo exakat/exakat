@@ -22,6 +22,7 @@ $begin_time = microtime(true);
 $classes = array(
 //    'Magicconstant',
     'Variable',     // Fait 
+    'Halt',         // Fait
     'Variabledollar',// Fait 
 //    'Integer',
 //    'Float',
@@ -55,7 +56,8 @@ $classes = array(
     '_Clone',       // Fait
     'Arguments',    // Fait
     'ArgumentsNoParenthesis', // Fait
-    'Argumentsnocomma', // Fait
+    'ArgumentsNoComma', // Fait
+    'ArgumentsArray', 
     'Functioncall', // Fait
     'FunctioncallArray',
     'Methodcall',   // Fait
