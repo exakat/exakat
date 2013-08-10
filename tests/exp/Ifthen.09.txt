@@ -13,7 +13,7 @@ Label : CODE
       Label : ELEMENT
         $a
   Label : ELSE
-    Block With control structure
+    Block With else
     Label : CODE
       if
       Label : CONDITION
@@ -27,7 +27,7 @@ Label : CODE
           Label : ELEMENT
             $b
       Label : ELSE
-        Block With control structure
+        Block With else
         Label : CODE
           if
           Label : CONDITION
@@ -41,7 +41,7 @@ Label : CODE
               Label : ELEMENT
                 $c
           Label : ELSE
-            Block With control structure
+            Block With else
             Label : CODE
               if
               Label : CONDITION
@@ -55,7 +55,7 @@ Label : CODE
                   Label : ELEMENT
                     $d
               Label : ELSE
-                Block With control structure
+                Block With else
                 Label : CODE
                   if
                   Label : CONDITION

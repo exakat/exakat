@@ -10,7 +10,7 @@ class Token {
 //                                 'String', 
     
     public static $types = array(//'Variable', conflict between transform and indexes. 
-                                 'Variabledollar',
+                                 'VariableDollar',
                                  'Boolean',  
                                  '_Array', 
                                  '_Arraydollarcurly', 
@@ -73,9 +73,9 @@ class Token {
                                  'Phpcode',
                                  'Phpcodemiddle',
                                  'Block',
-                                 //'Blockspecial', // conflict with 0th element.
                                  'Sequence', 
 //                                 'SequenceAtom', 
+                                 'IfthenElse', 
                                  'Ifthen', 
                                  '_Clone', 
                                  '_Interface', 

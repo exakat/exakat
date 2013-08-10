@@ -13,7 +13,7 @@ Label : CODE
       Label : POSTPLUSPLUS
         $b
   Label : ELSE
-    Block With control structure
+    Block With else
     Label : CODE
       ++
       Label : POSTPLUSPLUS

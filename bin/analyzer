@@ -94,13 +94,13 @@ $classes = array(
     '_Default',     // Fait
     '_Switch',      // Fait
     'Ifthen',
+    'IfthenElse',   // Fait
     '_Foreach',
     '_For',
     '_While',
     '_Dowhile',     // Fait
     '_Catch',       // Fait
     '_Try',         // Fait
-    'Blockspecial',  // pas fait
     'Phpcodemiddle',// Fait
     'Phpcode',      // Fait
     'Void',
