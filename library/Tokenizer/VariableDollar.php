@@ -6,6 +6,7 @@ class VariableDollar extends TokenAuto {
     static public $operators = array('T_DOLLAR');
     
     function _check() {
+        // $x or $$x or $$$
         $this->conditions = array(0 => array('token' => VariableDollar::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
@@ -17,6 +18,7 @@ class VariableDollar extends TokenAuto {
                                 'cleanIndex' => true);
         $this->checkAuto();
 
+        // ${x}
         $this->conditions = array(0 => array('token' => VariableDollar::$operators,
                                              'atom' => 'none'),
                                   1 => array('token' => 'T_OPEN_CURLY'),
