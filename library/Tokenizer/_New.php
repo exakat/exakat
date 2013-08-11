@@ -9,7 +9,7 @@ class _New extends TokenAuto {
         $this->conditions = array(0 => array('token' => _New::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('Functioncall', 'Constant', 'Variable', 'Methodcall', 'String', 'Array' )),
-                                  2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_NS_SEPARATOR')),
+                                  2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_NS_SEPARATOR', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', )),
         );
         
         $this->actions = array('makeEdge'   => array( 1 => 'NEW'),
