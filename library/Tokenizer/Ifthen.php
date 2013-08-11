@@ -20,11 +20,9 @@ class Ifthen extends TokenAuto {
         $this->actions = array('transform'   => array(1 => 'CONDITION',
                                                       2 => 'THEN',    
                                                       3 => 'DROP',
-                                                      4 => 'ELSE'
-                                                      ),
+                                                      4 => 'ELSE'),
                                'atom'       => 'Ifthen',
-                               'cleanIndex' => true
-                               );
+                               'cleanIndex' => true);
         $this->checkAuto(); 
 
     // @doc if then without else
