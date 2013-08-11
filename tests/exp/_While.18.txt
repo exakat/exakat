@@ -1,0 +1,68 @@
+<?php
+
+Label : CODE
+  Sequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          'a'
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            'b'
+    Label : THEN
+      {
+      Label : CODE
+        void
+    Label : ELSE
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $t
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      =
+      Label : RIGHT
+        b
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $c
+      Label : LEFT
+        $a
+    Label : LOOP
+      {
+      Label : CODE
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $d
+        Label : THEN
+          {
+          Label : CODE
+            void
+        Label : ELSE
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              $s
+          Label : THEN
+            {
+            Label : CODE
+              void
+          Label : ELSE
+            {
+            Label : CODE
+              void

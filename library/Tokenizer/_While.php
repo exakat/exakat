@@ -53,7 +53,7 @@ class _While extends TokenAuto {
         $this->checkAuto();
         
         //  syntax  {} While( );
-        $this->conditions = array(-2 => array('filterOut2' => array('T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS', 'T_DO',)),
+        $this->conditions = array(-2 => array('filterOut2' => array('T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS', 'T_DO', 'T_ELSE' )),
                                   -1 => array('atom'  => 'Block'),
                                    0 => array('token' => _While::$operators),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
