@@ -6,7 +6,7 @@ class Keyvalue extends TokenAuto {
     static public $operators = array('T_DOUBLE_ARROW');
 
     function _check() {
-        $this->conditions = array(-2 => array('filterOut' => array_merge(array( 'T_NS_SEPARATOR', 'T_DOT', ),
+        $this->conditions = array(-2 => array('filterOut' => array_merge(array( 'T_NS_SEPARATOR', 'T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR',  ),
                                                                          Addition::$operators, Multiplication::$operators, Comparison::$operators)), 
                                   -1 => array('atom' => 'yes', 'notAtom' => 'Arguments'),
                                    0 => array('token' => Keyvalue::$operators),
