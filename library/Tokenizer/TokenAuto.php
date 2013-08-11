@@ -969,6 +969,14 @@ a.outE('NEXT').each{ g.removeEdge(it) ; }
 g.addEdge(a, x, 'NEXT');
 g.addEdge(x, b, 'NEXT');
 
+// remove the next, if this is a ; 
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+    semicolon = it;
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(semicolon);
+}
+
             ";
             unset($actions['createVoidForCase']);
         }
@@ -976,7 +984,7 @@ g.addEdge(x, b, 'NEXT');
         if (isset($actions['createVoidForDefault']) && $actions['createVoidForDefault']) {
             $qactions[] = " 
 /* createVoidForDefault */ 
-x = g.addVertex(null, [code:'Void2', atom:'Void', token:'T_VOID', 'file':it.file, virtual:true]);
+x = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', 'file':it.file, virtual:true]);
 
 a = it.out('NEXT').next();
 b = a.out('NEXT').next();
@@ -984,6 +992,14 @@ b = a.out('NEXT').next();
 a.outE('NEXT').each{ g.removeEdge(it) ; }
 g.addEdge(a, x, 'NEXT');
 g.addEdge(x, b, 'NEXT');
+
+// remove the next, if this is a ; 
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+    semicolon = it;
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(semicolon);
+}
 
             ";
             unset($actions['createVoidForDefault']);
