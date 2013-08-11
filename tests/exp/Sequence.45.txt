@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    Sequence
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          $a
+      Label : THEN
+        {
+        Label : CODE
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+    Label : ELEMENT
+      interface
+      Label : NAME
+        x
+      Label : CODE
+        {
+        Label : CODE
+          void
