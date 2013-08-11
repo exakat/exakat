@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ->
+      Label : PROPERTY
+        d
+      Label : OBJECT
+        a
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            $c
+          Label : ARGUMENT
+            $b
