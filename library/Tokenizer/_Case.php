@@ -23,7 +23,7 @@ class _Case extends TokenAuto {
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
+                                  3 => array('token' => array('T_COLON', 'T_SEMICOLON'), 'atom' => 'none'),
                                   4 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')),
         );
         
