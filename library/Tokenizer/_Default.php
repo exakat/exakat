@@ -32,7 +32,7 @@ class _Default extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Default::$operators,
                                               'atom'  => 'none'),
                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   2 => array('atom'  => 'yes'), 
+                                   2 => array('atom'  => 'yes', 'notAtom' => 'Block' ), 
                                    3 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
                                    4 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')));
         
@@ -44,7 +44,7 @@ class _Default extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Default::$operators,
                                               'atom'  => 'none'),
                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   2 => array('atom'  => 'yes'), 
+                                   2 => array('atom'  => 'yes', 'notAtom' => 'Block'), 
                                    3 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')));
         
         $this->actions = array('createBlockWithSequenceForDefault' => true,
