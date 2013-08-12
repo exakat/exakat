@@ -17,6 +17,16 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
+              require_once
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  a
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'b'
+            Label : ELEMENT
               if
               Label : CONDITION
                 (
@@ -70,23 +80,11 @@ Label : CODE
                   {
                   Label : CODE
                     void
-            Label : ELEMENT
-              require_once
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  a
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      'b'
       Label : ELEMENT
         default
         Label : CODE
           Block With Sequence For Default
           Label : CODE
-            Block With Sequence For Default
-            Label : CODE
-              return
-              Label : RETURN
-                false
+            return
+            Label : RETURN
+              false

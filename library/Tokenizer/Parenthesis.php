@@ -28,7 +28,6 @@ class Parenthesis extends TokenAuto {
                                'dropNext' => array(1),
                                'atom'     => 'Parenthesis',
                                'cleanIndex' => true);
-        
         $this->checkAuto();
 
 // this applies to situations like print ($a * $b) + $c; where parenthesis actually belong to the following expression. 

@@ -476,7 +476,7 @@ x.out('CONCAT').has('atom', 'Concatenation').each{
         if (isset($actions['insertSequence'])) {
                 $qactions[] = "
 /* insertSequence */
-x = g.addVertex(null, [code:'Sequence ' + it.in('NEXT').next().token, atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true]);
+x = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true]);
 
 g.addEdge(x, it, 'ELEMENT');
 g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
@@ -914,7 +914,7 @@ it.bothE('NEXT').each{ g.removeEdge(it) ; }
         if (isset($actions['createBlockWithSequenceForCase']) && $actions['createBlockWithSequenceForCase']) {
             $qactions[] = " 
 /* createBlockWithSequenceForCase */ 
-x = g.addVertex(null, [code:'Block With Sequence For Case', atom:'Block', 'file':it.file, virtual:true]);
+x = g.addVertex(null, [code:'Block With Sequence For Case', token:'T_SEMICOLON', atom:'Block', 'file':it.file, virtual:true]);
 
 a = it.out('NEXT').out('NEXT').out('NEXT').next();
 
@@ -1008,22 +1008,51 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         if (isset($actions['mergePrev']) && $actions['mergePrev']) {
             foreach($actions['mergePrev'] as $atom => $link) {
                 $qactions[] = " 
-/* mergePrev */ 
-f = it;
-//c = it.out('$link').out('$link').count();
-//it.out('$link').hasNot('order', null).each{
-//    it.setProperty('order', it.order + c);
-//}
+/* mergeConcat */ 
+x = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true]);
 
-it.as('origin').in('$link').has('atom','$atom').each{
-    it.outE('$link').each{ g.removeEdge(it);}
-    
-    it.out('$link').each{ 
-        it.inE('$link').each{ g.removeEdge(it);}
-        g.addEdge(f, it, '$link');
+z = it.in('NEXT').next();
+a = it;
+b = it.out('NEXT').next();
+c = it.out('NEXT').out('NEXT').next();
+
+g.addEdge(x, a, 'ELEMENT');
+g.addEdge(x, b, 'ELEMENT');
+
+b.bothE('NEXT').each{ g.removeEdge(it); }
+
+g.addEdge(z, x, 'NEXT');
+g.addEdge(x, c, 'NEXT');
+
+a.bothE('NEXT').each{ g.removeEdge(it); }
+
+
+x.as('origin').out('ELEMENT').has('atom','Sequence').each{
+    it.inE('ELEMENT').each{ g.removeEdge(it);}
+  
+    it.out('ELEMENT').each{ 
+        it.inE('ELEMENT').each{ g.removeEdge(it);}
+        g.addEdge(x, it, 'ELEMENT');
     };
+
     g.removeVertex(it);    
 }
+
+// remove the next, if this is a ; 
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+    semicolon = it;
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(semicolon);
+}
+
+/* Clean index */
+x.out('ELEMENT').each{ 
+    it.inE('INDEXED').each{    
+        g.removeEdge(it);
+    } 
+}
+
             ";
             }
             unset($actions['mergePrev']);
@@ -1218,6 +1247,7 @@ it.outE.hasNot('label', 'NEXT').inV.each{
         
         if (isset($cdt['filterOut'])) {
             if (is_string($cdt['filterOut'])) {
+                // no check on atom here ? 
                 $qcdts[] = "filter{it.token != '".$cdt['filterOut']."' }";
             } elseif (is_array($cdt['filterOut'])) {
                 $qcdts[] = "filter{it.atom != null || !(it.token in ['".join("', '", $cdt['filterOut'])."'])}";
