@@ -1,7 +1,7 @@
 <?php
 
 class x {
-    var a;
+    var $a;
     const b = 2;
 }
 

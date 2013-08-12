@@ -49,21 +49,8 @@ class _Class extends TokenAuto {
                                  );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
-                                                       2 => 'TO_IMPLEMENTS')
-                               );
-        $this->checkAuto(); 
-
-    // class x {}
-        $this->conditions = array( 0 => array('token' => _Class::$operators, 'atom' => 'Class_tmp'),
-                                   1 => array('token' => 'T_OPEN_CURLY'),
-                                   2 => array('token' => 'T_CLOSE_CURLY'),
-                                 );
-        
-        $this->actions = array('transform'   => array(1 => 'BLOCK',
-                                                      2 => 'DROP',),
-                               'atom'       => 'Class',
-                               'keepIndexed' => true
-                                );
+                                                       2 => 'TO_IMPLEMENTS'),
+                               'keepIndexed' => true );
         $this->checkAuto(); 
 
     // class x { // some real code}

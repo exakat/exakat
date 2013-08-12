@@ -21,4 +21,4 @@ Label : CODE
           Label : VALUE
             void
           Label : DEFINE
-            a
+            $a

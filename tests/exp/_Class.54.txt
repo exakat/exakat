@@ -13,42 +13,40 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
+        function
+        Label : NAME
+          b
+        Label : ARGUMENTS
+          void
+        Label : BLOCK
+          {
+          Label : CODE
+            void
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $a
+      Label : ELEMENT
+        function
+        Label : NAME
+          c
+        Label : ARGUMENTS
+          void
+        Label : BLOCK
+          {
+          Label : CODE
+            void
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $c
+      Label : ELEMENT
         var
         Label : VALUE
           void
         Label : DEFINE
           $d
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          function
-          Label : NAME
-            b
-          Label : ARGUMENTS
-            void
-          Label : BLOCK
-            {
-            Label : CODE
-              void
-        Label : ELEMENT
-          var
-          Label : VALUE
-            void
-          Label : DEFINE
-            $a
-        Label : ELEMENT
-          function
-          Label : NAME
-            c
-          Label : ARGUMENTS
-            void
-          Label : BLOCK
-            {
-            Label : CODE
-              void
-        Label : ELEMENT
-          var
-          Label : VALUE
-            void
-          Label : DEFINE
-            $c

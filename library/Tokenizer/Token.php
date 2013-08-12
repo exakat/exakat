@@ -58,7 +58,7 @@ class Token {
                                  'Ternary',
                                  '_Return',
                                  '_Const',
-                                 //'_Class' Because to Class_tmp
+                                 '_Class', // Because to Class_tmp
                                  '_Abstract',
                                  '_Final',
                                  '_Case',    //Check index in the regex

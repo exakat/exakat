@@ -7,13 +7,7 @@ Label : CODE
   Label : BLOCK
     {
     Label : CODE
-      ;
-      Label : ELEMENT
-        const
-        Label : NAME
-          b
-        Label : VALUE
-          2
+      Sequence
       Label : ELEMENT
         var
         Label : NAME
@@ -32,3 +26,9 @@ Label : CODE
           $g
         Label : VALUE
           4
+      Label : ELEMENT
+        const
+        Label : NAME
+          b
+        Label : VALUE
+          2
