@@ -13,14 +13,6 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        ?
-        Label : CONDITION
-          $a
-        Label : THEN
-          $b
-        Label : ELSE
-          $c
-      Label : ELEMENT
         if
         Label : CONDITION
           (
@@ -36,3 +28,11 @@ Label : CODE
               return
               Label : RETURN
                 false
+      Label : ELEMENT
+        ?
+        Label : CONDITION
+          $a
+        Label : THEN
+          $b
+        Label : ELSE
+          $c

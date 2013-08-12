@@ -17,31 +17,27 @@ Label : CODE
           Label : CODE
             Block With Sequence For Case
             Label : CODE
-              Block With Sequence For Case
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  break
-                  Label : LEVEL
-                    void
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    2
-                  Label : LEFT
-                    $b
+              ;
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  2
+                Label : LEFT
+                  $b
         Label : ELEMENT
           default
           Label : CODE
             Block With Sequence For Default
             Label : CODE
-              Block With Sequence For Default
-              Label : CODE
-                =
-                Label : RIGHT
-                  3
-                Label : LEFT
-                  $b
+              =
+              Label : RIGHT
+                3
+              Label : LEFT
+                $b
   Label : ELEMENT
     =
     Label : RIGHT

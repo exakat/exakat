@@ -3,20 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      [
-      Label : VARIABLE
-        $m
-      Label : INDEX
-        'n'
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $k
-      Label : INDEX
-        'l'
-  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -76,3 +62,17 @@ Label : CODE
                   1
                 Label : LEFT
                   $i
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      [
+      Label : VARIABLE
+        $m
+      Label : INDEX
+        'n'
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $k
+      Label : INDEX
+        'l'

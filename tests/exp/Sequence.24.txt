@@ -25,11 +25,11 @@ Label : CODE
           Label : LEFT
             $a
   Label : ELEMENT
+    b
+
+  Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         $c
-  Label : ELEMENT
-    b
-

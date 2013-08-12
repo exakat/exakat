@@ -7,15 +7,13 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        $c
+        $a
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $a
-    Label : ELEMENT
-      b
+    b
 
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $c

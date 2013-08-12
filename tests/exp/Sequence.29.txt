@@ -15,22 +15,6 @@ Label : CODE
         Label : CONDITION
           (
           Label : CODE
-            $d
-        Label : THEN
-          {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                2
-              Label : LEFT
-                $e
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
             $b
         Label : THEN
           {
@@ -42,6 +26,22 @@ Label : CODE
                 1
               Label : LEFT
                 $c
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $d
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                2
+              Label : LEFT
+                $e
       Label : ELEMENT
         array_pop
         Label : ARGUMENTS

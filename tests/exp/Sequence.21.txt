@@ -15,13 +15,11 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              =
-              Label : RIGHT
-                1
-              Label : LEFT
-                $x
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $x
   Label : ELEMENT
     if
     Label : CONDITION

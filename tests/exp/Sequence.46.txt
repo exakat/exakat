@@ -1,0 +1,46 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      $z
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    [
+                    Label : VARIABLE
+                      $b
+                    Label : INDEX
+                      'c'
+                  Label : INDEX
+                    'd'
+        Label : THEN
+          {
+          Label : CODE
+            void
+      Label : ELEMENT
+        ->
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g
+        Label : OBJECT
+          $e
