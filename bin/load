@@ -65,6 +65,12 @@ function process_file($filename) {
         die();
     }
     
+    $shell = shell_exec('php -l '.$filename.' 2>&1');
+    if (trim($shell) != 'No syntax errors detected in '.$filename) {
+        print "Error : |$shell|\n";
+        return false;
+    }
+    
     $php = file_get_contents($filename);
     $file = realpath($filename);
     $tokens = token_get_all($php);
@@ -238,7 +244,6 @@ function process_file($filename) {
                                               ->setProperty('line', $line)
                                               ->setProperty('file', $file)->save();
                 $previous->relateTo($T[$Tid], 'NEXT')->save();
-//                $regexIndex["Functioncall"]->relateTo($T[$Tid], 'INDEXED')->save();
                 $previous = $T[$Tid];
                 
                 $Tid++;
@@ -300,6 +305,11 @@ function process_file($filename) {
         } else {
             $previous->relateTo($T[$Tid], 'NEXT')->save();
             $previous = $T[$Tid];
+            
+            // Saving on memory, we don't keep the previous ones.
+            if ($Tid > 1) {
+                unset($T[$Tid - 1]);
+            }
         }
     }
     
