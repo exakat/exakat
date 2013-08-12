@@ -15,7 +15,7 @@ class Sequence extends TokenAuto {
                           'Ifthen', 'Include', 'Function', 'Foreach', 'While', 'Arrayappend', 'Cast',
                           'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
                           'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
-                          'Bitshift', 'Void', 'Dowhile', 'Clone', 'Declare', 'Halt', 'Interface',
+                          'Bitshift', 'Void', 'Dowhile', 'Clone', 'Declare', 'Halt', 'Interface', 'Block', 
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
@@ -26,15 +26,15 @@ class Sequence extends TokenAuto {
                                 'T_THROW', 'T_CATCH', 'T_ABSTRACT', 'T_CASE', 'T_DEFAULT', 'T_CLONE', 'T_DECLARE',
                                  );
                                  
-//                                 
-        $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators, 
-                                        _Include::$operators );
-        $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CATCH',
-                                           'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_ELSEIF' ), 
+        $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, 
+                                      Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators, 
+                                      _Include::$operators );
+        $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 
+                                           'T_CLOSE_PARENTHESIS', 'T_CATCH', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_ELSEIF' ), 
                                      Assignation::$operators, Logical::$operators);
         
         // @note instructions separated by ; 
-        $this->conditions = array(-2 => array('filterOut2' => $yield_operator), 
+        $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('token' => Sequence::$operators,
                                               'atom' => 'none'),
