@@ -8,7 +8,7 @@ class Sign extends TokenAuto {
                                     'Staticmethodcall', 'Staticproperty', 'Multiplication', 'Property', 'Parenthesis', );
 
     function _check() {
-        $this->conditions = array( -1 => array('filterOut2' => array('T_STRING', 'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER', 'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT',  'T_CLOSE_BRACKET')), 
+        $this->conditions = array( -1 => array('filterOut2' => array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER', 'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT',  'T_CLOSE_BRACKET')), 
                                     0 => array('token' => Sign::$operators,
                                                'atom' => 'none'),
                                     1 => array('atom' => Sign::$operands),
