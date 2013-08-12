@@ -1009,23 +1009,22 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             foreach($actions['mergePrev'] as $atom => $link) {
                 $qactions[] = " 
 /* mergeConcat */ 
-x = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true]);
+x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true]);
 
+y = it.in('NEXT').in('NEXT').next();
 z = it.in('NEXT').next();
 a = it;
 b = it.out('NEXT').next();
-c = it.out('NEXT').out('NEXT').next();
 
+g.addEdge(x, z, 'ELEMENT');
 g.addEdge(x, a, 'ELEMENT');
-g.addEdge(x, b, 'ELEMENT');
 
-b.bothE('NEXT').each{ g.removeEdge(it); }
+z.bothE('NEXT').each{ g.removeEdge(it); }
 
-g.addEdge(z, x, 'NEXT');
-g.addEdge(x, c, 'NEXT');
+g.addEdge(y, x, 'NEXT');
+g.addEdge(x, b, 'NEXT');
 
 a.bothE('NEXT').each{ g.removeEdge(it); }
-
 
 x.as('origin').out('ELEMENT').has('atom','Sequence').each{
     it.inE('ELEMENT').each{ g.removeEdge(it);}
@@ -1046,13 +1045,13 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.removeVertex(semicolon);
 }
 
-/* Clean index */
+/* Clean index 
 x.out('ELEMENT').each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 
 }
-
+*/
             ";
             }
             unset($actions['mergePrev']);

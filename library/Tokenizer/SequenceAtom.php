@@ -66,8 +66,7 @@ class SequenceAtom extends TokenAuto {
                                    0 => array('atom' => 'Sequence')
         );
         
-        $this->actions = array('transform'  => array(-1 => 'ELEMENT'),
-                               'order'      => array(-1 =>  1),
+        $this->actions = array('order'      => array(-1 =>  1),
                                'mergePrev'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                );
