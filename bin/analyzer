@@ -78,9 +78,6 @@ $classes = array(
     'Constant',     // Fait
     '_Return',      // Fait
     '_Declare',     // Fait
-    'Sequence',     // Fait
-    'SequenceAtom',
-    'SequenceCaseDefault',
     '_Const',       // Fait
     'Block',        // Fait
     'Shell',        // Fait
@@ -101,6 +98,9 @@ $classes = array(
     '_Dowhile',     // Fait
     '_Catch',       // Fait
     '_Try',         // Fait
+    'Sequence',     // Fait
+    'SequenceAtom',
+    'SequenceCaseDefault',
     'Phpcodemiddle',// Fait
     'Phpcode',      // Fait
     'Void',
@@ -151,7 +151,7 @@ while(check_prev($prev, $extra_rounds)) {
         fwrite($log, get_class($r)."\t".(($end - $begin) * 1000)."\t".Token::leftInIndex($name)."\n");
     }
     unset($precedence);
-
+    
     $rend = microtime(true);
     fwrite($log, "round $round)\t".(($rend - $rbegin)*1000)."\n");
 
