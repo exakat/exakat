@@ -1,0 +1,54 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    [
+    Label : VARIABLE
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        $b
+    Label : INDEX
+      'c'
+  Label : CASES
+    {
+    Label : CODE
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          'D'
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            Sequence
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  $e
+              Label : THEN
+                {
+                Label : CODE
+                  ;
+                  Label : ELEMENT
+                    ++
+                    Label : POSTPLUSPLUS
+                      $f
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+      Label : ELEMENT
+        case
+        Label : CASE
+          'G'
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            ++
+            Label : POSTPLUSPLUS
+              $h
