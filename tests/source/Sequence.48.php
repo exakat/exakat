@@ -1,0 +1,1 @@
+<?php print a('b', "c") ?>A<?php f($d); ?>

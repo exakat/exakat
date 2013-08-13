@@ -1,0 +1,23 @@
+<?php 
+Label : CODE
+  Sequence
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        a
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            "c"
+          Label : ARGUMENT
+            'b'
+  Label : ELEMENT
+    A
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $d

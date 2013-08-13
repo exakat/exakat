@@ -142,7 +142,6 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note End of PHP script, alternative syntax
-        //, 'T_ELSEIF', 'T_IF', 
         $this->conditions = array(-3 => array('token' => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', )), 
                                   -2 => array('token' => 'T_COLON',), 
                                   -1 => array('atom' => $operands,
