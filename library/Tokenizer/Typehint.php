@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Typehint extends TokenAuto {
     function _check() {
         $this->conditions = array(-2 => array('filterOut' => 'T_CATCH'),
-                                   0 => array('atom' => 'String'),
+                                   0 => array('atom' => 'yes', 'token' => 'T_STRING'),
                                    1 => array('atom' => array('Variable', 'Assignation', 'Reference'    )),
                                    2 => array('filterOut' => Assignation::$operators),
         );
