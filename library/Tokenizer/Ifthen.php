@@ -130,7 +130,7 @@ class Ifthen extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
-                                   3 => array('atom'  => 'yes'),
+                                   3 => array('atom'  => array('Block', 'Sequence')),
                                    4 => array('atom' => 'Ifthen'),
         );
         
