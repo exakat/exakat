@@ -149,7 +149,7 @@ class Sequence extends TokenAuto {
                                               'notToken' => 'T_ELSEIF', ),
                                    0 => array('token' => Sequence::$operators,
                                               'atom' => 'none'),
-                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_ENDDECLARE', ),
+                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_ENDDECLARE', 'T_ENDFOREACH', ),
                                               'atom'  => 'none'),
         );
         
