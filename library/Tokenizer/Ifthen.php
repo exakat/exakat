@@ -103,10 +103,10 @@ class Ifthen extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
-                                   3 => array('atom'  => 'yes'),
+                                   3 => array('atom'  => array('Block', 'Sequence')),
                                    4 => array('token' => 'T_ELSE'),
                                    5 => array('token' => 'T_COLON'),
-                                   6 => array('atom' => 'yes'),
+                                   6 => array('atom'  => array('Block', 'Sequence')),
                                    7 => array('token' => array('T_ENDIF', 'T_ELSEIF')),
         );
         
@@ -126,7 +126,7 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
 
     // @doc if ( ) : elseif
-        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
+        $this->conditions = array( 0 => array('token' => array('T_ELSEIF'),
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),

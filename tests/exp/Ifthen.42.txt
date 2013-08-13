@@ -1,0 +1,54 @@
+<?php 
+Label : NEXT
+  ;
+  Label : ELEMENT
+    F
+  Label : NEXT
+    endif
+    Label : NEXT
+      ;
+      Label : NEXT
+        ?>
+
+        Label : NEXT
+          /**/
+          Label : NEXT
+            /* * */
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        A
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+      Label : ELEMENT
+        B
+    Label : ELSE
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          $c
+      Label : THEN
+        ;
+        Label : ELEMENT
+          C
+        Label : ELEMENT
+          E
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              $d
+          Label : THEN
+            D
