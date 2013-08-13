@@ -10,7 +10,7 @@ Label : CODE
       Label : STRING
         Concatenation
         Label : ELEMENT
-          ;
+          
 
 
         Label : ELEMENT
@@ -20,22 +20,19 @@ Label : CODE
             Label : CONDITION
               [
               Label : VARIABLE
-                $config
+                $b
               Label : INDEX
-                'use_smarty_php_tags'
+                'c'
             Label : THEN
               'true'
             Label : ELSE
               'false'
         Label : ELEMENT
-          
-#Allow smarty {php} tags?  These could be dangerous if you don't trust your users.
-\$config['use_smarty_php_tags'] = 
+          A
         Label : ELEMENT
-          ;
+          
 
-#Automatically assign alias based on page title?
-\$config['auto_alias_content'] = 
+D
         Label : ELEMENT
           ${
           Label : NAME
@@ -43,9 +40,9 @@ Label : CODE
             Label : CONDITION
               [
               Label : VARIABLE
-                $config
+                $e
               Label : INDEX
-                'auto_alias_content'
+                'f'
             Label : THEN
               'true'
             Label : ELSE
