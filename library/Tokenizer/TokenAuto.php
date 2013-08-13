@@ -95,6 +95,20 @@ class TokenAuto extends Token {
                 ";
         }
 
+        if (isset($actions['transfert'])) {
+            list($what, $where) = each($actions['transfert']);
+            $next = str_repeat(".out('NEXT')", $where);
+            $qactions[] = " 
+/* transfert property root away  */  
+it.has('root', 'true')$next.each{ 
+    it.setProperty('root', 'true');
+    it.setProperty('test', 'true');
+}
+it.setProperty('root', 'null');
+                ";
+            unset($actions['transfert']);
+        }                
+
         if (isset($actions['cleansemicolon']) && $actions['cleansemicolon']) {
             $qactions[] = "
 /* cleansemicolon */
@@ -1148,9 +1162,6 @@ it.outE.hasNot('label', 'NEXT').inV.each{
             unset($actions['cleanIndex']);
         }        
 
-        
-        
-        
         if ($remainder = array_keys($actions)) {
             print "Warning : the following ".count($remainder)." actions were ignored : ".join(', ', $remainder)."\n";
         }

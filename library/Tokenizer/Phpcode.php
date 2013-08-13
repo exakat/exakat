@@ -37,7 +37,8 @@ class Phpcode extends TokenAuto {
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
                                                         0 => 'DROP'), // Yes, 0 must be last.
-                               'atom'       => 'Phpcode');
+                               'atom'       => 'Phpcode',
+                               'transfert'  => array('root' => 2));
         $this->checkAuto();
         
         return $this->checkRemaining();

@@ -166,8 +166,11 @@ function process_file($filename) {
     
     $nb = count($tokens);
     $Tid = -1;
+    $root = 0;
     for($id = 0; $id < $nb; $id++) {
-        if (empty($tokens[$id])) { continue; }
+        if (empty($tokens[$id])) { 
+            continue; 
+        }
         $Tid++;
         $token = $tokens[$id];
         $to_index = true;
@@ -190,6 +193,9 @@ function process_file($filename) {
                                               ->setProperty('atom', 'Void')->save();
 
                 $to_index = false;
+            } elseif (token_name($token[0]) == 'T_CLOSE_TAG' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  && token_name($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
+                $id++;
+                continue 1;
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
                                               ->setProperty('code', $token[1])
