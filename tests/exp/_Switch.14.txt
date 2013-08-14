@@ -13,12 +13,10 @@ Label : CODE
       Label : CODE
         Block With Sequence For Case
         Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            require
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                (
-                Label : CODE
-                  'c.php'
+          require
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              (
+              Label : CODE
+                'c.php'

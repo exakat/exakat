@@ -8,7 +8,7 @@ $c;
 } elseif (4) {
 $d;
 } else {
-$e
+$e;
 }
 
 

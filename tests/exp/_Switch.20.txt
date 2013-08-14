@@ -73,6 +73,12 @@ Label : CODE
             Label : ELEMENT
               =
               Label : RIGHT
+                'n'
+              Label : LEFT
+                $m
+            Label : ELEMENT
+              =
+              Label : RIGHT
                 .
                 Label : CONCAT
                   'l'
@@ -92,9 +98,3 @@ Label : CODE
                   'h'
               Label : LEFT
                 $b
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                'n'
-              Label : LEFT
-                $m

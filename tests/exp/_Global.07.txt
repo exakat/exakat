@@ -7,18 +7,18 @@ Label : CODE
     Label : ELEMENT
       global
       Label : NAME
-        $a
+        $c
       Label : VALUE
         void
     Label : ELEMENT
       global
       Label : NAME
-        $c
+        $b
       Label : VALUE
-        3
+        void
     Label : ELEMENT
       global
       Label : NAME
-        $b
+        $a
       Label : VALUE
-        1
+        void

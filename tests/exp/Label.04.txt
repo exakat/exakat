@@ -3,7 +3,7 @@
 Label : CODE
   ;
   Label : ELEMENT
-    goto
+    :
     Label : LABEL
       A
   Label : ELEMENT
@@ -11,22 +11,22 @@ Label : CODE
     Label : LABEL
       B
   Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $a
+  Label : ELEMENT
     :
     Label : LABEL
       C
+  Label : ELEMENT
+    goto
+    Label : LABEL
+      A
   Label : ELEMENT
     =
     Label : RIGHT
       2
     Label : LEFT
       $b
-  Label : ELEMENT
-    :
-    Label : LABEL
-      A
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $a

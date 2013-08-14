@@ -65,8 +65,12 @@ Label : CODE
                   Label : THEN
                     {
                     Label : CODE
-                      $e
+                      ;
+                      Label : ELEMENT
+                        $e
                   Label : ELSE
                     {
                     Label : CODE
-                      $f
+                      ;
+                      Label : ELEMENT
+                        $f

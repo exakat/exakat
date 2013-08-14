@@ -15,18 +15,14 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $x
+            ++
+            Label : POSTPLUSPLUS
+              $x
       Label : ELEMENT
         default
         Label : CODE
           Block With Sequence For Default
           Label : CODE
-            ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $y
+            ++
+            Label : POSTPLUSPLUS
+              $y

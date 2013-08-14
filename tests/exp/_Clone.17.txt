@@ -5,6 +5,4 @@ Label : CODE
   Label : ELEMENT
     clone
     Label : CLONE
-      &
-      Label : REFERENCE
-        $x
+      $x

@@ -9,32 +9,16 @@ Label : CODE
       Label : VALUE
         void
       Label : DEFINE
-        =
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            void
-        Label : LEFT
-          $d
+        $d
     Label : ELEMENT
       global
       Label : VALUE
         void
       Label : DEFINE
-        =
-        Label : RIGHT
-          -
-          Label : SIGN
-            1
-        Label : LEFT
-          $b
+        $b
     Label : ELEMENT
       global
       Label : VALUE
         void
       Label : DEFINE
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          $a
+        $a

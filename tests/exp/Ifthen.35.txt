@@ -3,6 +3,32 @@
 Label : CODE
   ;
   Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      Block With if/elseif
+      Label : CODE
+        foreach
+        Label : SOURCE
+          $b
+        Label : VALUE
+          =>
+          Label : KEY
+            $c
+          Label : VALUE
+            $d
+        Label : LOOP
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $e
+  Label : ELEMENT
     foreach
     Label : SOURCE
       $h
@@ -30,29 +56,3 @@ Label : CODE
     f
     Label : ARGUMENTS
       void
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        $a
-    Label : THEN
-      Block With if/elseif
-      Label : CODE
-        foreach
-        Label : SOURCE
-          $b
-        Label : VALUE
-          =>
-          Label : KEY
-            $c
-          Label : VALUE
-            $d
-        Label : LOOP
-          {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $e

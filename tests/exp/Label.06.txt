@@ -3,68 +3,66 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      :
-      Label : LABEL
-        G
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        6
-      Label : LEFT
-        $g
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        5
-      Label : LEFT
-        $f
-    Label : ELEMENT
-      :
-      Label : LABEL
-        F
-    Label : ELEMENT
-      :
-      Label : LABEL
-        D
-    Label : ELEMENT
-      :
-      Label : LABEL
-        E
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        4
-      Label : LEFT
-        $e
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        3
-      Label : LEFT
-        $c
-    Label : ELEMENT
-      :
-      Label : LABEL
-        C
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        2
-      Label : LEFT
-        $b
-    Label : ELEMENT
-      :
-      Label : LABEL
-        B
-    Label : ELEMENT
-      :
-      Label : LABEL
-        A
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        1
-      Label : LEFT
-        $a
+    =
+    Label : RIGHT
+      5
+    Label : LEFT
+      $f
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      4
+    Label : LEFT
+      $e
+  Label : ELEMENT
+    :
+    Label : LABEL
+      C
+  Label : ELEMENT
+    :
+    Label : LABEL
+      D
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      3
+    Label : LEFT
+      $c
+  Label : ELEMENT
+    :
+    Label : LABEL
+      E
+  Label : ELEMENT
+    :
+    Label : LABEL
+      F
+  Label : ELEMENT
+    :
+    Label : LABEL
+      G
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      6
+    Label : LEFT
+      $g
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    :
+    Label : LABEL
+      B
+  Label : ELEMENT
+    :
+    Label : LABEL
+      A
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $a

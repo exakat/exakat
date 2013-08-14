@@ -8,9 +8,9 @@ $c;
 } elseif (4) {
 $d;
 } elseif (5) {
-$e
+$e;
 } else {
-$f
+$f;
 }
 
 

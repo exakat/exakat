@@ -5,11 +5,9 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      2
+      $x2
     Label : LEFT
-      &
-      Label : REFERENCE
-        $b
+      $b
   Label : ELEMENT
     void
   Label : ELEMENT

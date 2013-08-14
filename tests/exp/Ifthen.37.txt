@@ -17,6 +17,36 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  $c
+              Label : THEN
+                {
+                Label : CODE
+                  ;
+                  Label : ELEMENT
+                    $e
+              Label : ELSE
+                elseif
+                Label : CONDITION
+                  (
+                  Label : CODE
+                    empty
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        [
+                        Label : VARIABLE
+                          $g
+                        Label : INDEX
+                          'h'
+                Label : THEN
+                  {
+                  Label : CODE
+                    void
+            Label : ELEMENT
               require_once
               Label : ARGUMENTS
                 void
@@ -50,36 +80,6 @@ Label : CODE
               break
               Label : LEVEL
                 void
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $c
-              Label : THEN
-                {
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    $e
-              Label : ELSE
-                elseif
-                Label : CONDITION
-                  (
-                  Label : CODE
-                    empty
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        [
-                        Label : VARIABLE
-                          $g
-                        Label : INDEX
-                          'h'
-                Label : THEN
-                  {
-                  Label : CODE
-                    void
       Label : ELEMENT
         default
         Label : CODE

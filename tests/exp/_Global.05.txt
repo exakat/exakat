@@ -13,12 +13,12 @@ Label : CODE
     Label : ELEMENT
       global
       Label : NAME
-        $a
+        $b
       Label : VALUE
         void
     Label : ELEMENT
       global
       Label : NAME
-        $b
+        $a
       Label : VALUE
-        1
+        void

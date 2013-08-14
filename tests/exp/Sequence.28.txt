@@ -46,16 +46,6 @@ Label : ELEMENT
     Label : ELEMENT
       f
     Label : ELEMENT
-      =
-      Label : RIGHT
-        6
-      Label : LEFT
-        $x
-Label : ELEMENT
-  Concatenation
-  Label : ELEMENT
-    <?php 
-    Label : CODE
       ;
       Label : ELEMENT
         =
@@ -63,5 +53,11 @@ Label : ELEMENT
           7
         Label : LEFT
           $x
-  Label : ELEMENT
-    g
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          6
+        Label : LEFT
+          $x
+Label : ELEMENT
+  g

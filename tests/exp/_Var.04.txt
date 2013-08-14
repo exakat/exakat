@@ -9,54 +9,50 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        Sequence
-        Label : ELEMENT
-          var
-          Label : NAME
-            $e
-          Label : VALUE
-            void
-        Label : ELEMENT
-          var
-          Label : NAME
-            $d
-          Label : VALUE
-            void
-        Label : ELEMENT
-          var
-          Label : NAME
-            $c
-          Label : VALUE
-            void
-        Label : ELEMENT
-          var
-          Label : NAME
-            $b
-          Label : VALUE
-            void
-        Label : ELEMENT
-          Sequence
-          Label : ELEMENT
-            var
-            Label : NAME
-              $i
-            Label : VALUE
-              void
-          Label : ELEMENT
-            var
-            Label : NAME
-              $h
-            Label : VALUE
-              void
-          Label : ELEMENT
-            var
-            Label : NAME
-              $g
-            Label : VALUE
-              void
-          Label : ELEMENT
-            var
-            Label : NAME
-              $f
-            Label : VALUE
-              void
+        var
+        Label : NAME
+          $i
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $h
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $g
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $f
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $e
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $d
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $c
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $b
+        Label : VALUE
+          void

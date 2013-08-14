@@ -1,5 +1,5 @@
 <?php
-    global $a, $b, $c = 1;
+    global $a, $b, $c;
     
     class x {
         protected $x, $y, $z = 3, $a;

@@ -51,4 +51,6 @@ Label : CODE
         Label : ELSE
           {
           Label : CODE
-            $e
+            ;
+            Label : ELEMENT
+              $e

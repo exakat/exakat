@@ -15,21 +15,19 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  &
-                  Label : REFERENCE
-                    $c
-                Label : LEFT
-                  $b
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                &
+                Label : REFERENCE
+                  $c
+              Label : LEFT
+                $b
       Label : ELEMENT
         case
         Label : CASE
@@ -37,21 +35,19 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  1
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  &
-                  Label : REFERENCE
-                    $d
-                Label : LEFT
-                  $b
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                1
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                &
+                Label : REFERENCE
+                  $d
+              Label : LEFT
+                $b
       Label : ELEMENT
         case
         Label : CASE
@@ -59,38 +55,34 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  2
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  &
-                  Label : REFERENCE
-                    $d
-                Label : LEFT
-                  $b
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                2
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                &
+                Label : REFERENCE
+                  $d
+              Label : LEFT
+                $b
       Label : ELEMENT
         default
         Label : CODE
           Block With Sequence For Default
           Label : CODE
-            Block With Sequence For Default
-            Label : CODE
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  @
-                  Label : AT
-                    $e
-                Label : LEFT
-                  $b
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                @
+                Label : AT
+                  $e
+              Label : LEFT
+                $b

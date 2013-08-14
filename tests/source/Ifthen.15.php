@@ -1,6 +1,6 @@
 <?php
-if ($x) : $y 
+if ($x) : $y ;
 elseif ($w) : $ww;
-else : $z 
+else : $z ;
 endif;
 ?>

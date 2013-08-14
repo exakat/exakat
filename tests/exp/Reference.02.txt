@@ -5,8 +5,16 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      $y
-    Label : LEFT
       &
       Label : REFERENCE
+        [
+        Label : VARIABLE
+          $y
+        Label : INDEX
+          4
+    Label : LEFT
+      [
+      Label : VARIABLE
         $x
+      Label : INDEX
+        3

@@ -47,16 +47,6 @@ Label : CODE
         Label : CONTAIN
           ${
           Label : NAME
-            z
-      Label : LEFT
-        $c
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        "
-        Label : CONTAIN
-          ${
-          Label : NAME
             $a
       Label : LEFT
         $d
@@ -65,17 +55,11 @@ Label : CODE
       Label : RIGHT
         "
         Label : CONTAIN
-          {
+          ${
           Label : NAME
-            ?
-            Label : CONDITION
-              $y
-            Label : THEN
-              1
-            Label : ELSE
-              3
+            z
       Label : LEFT
-        $b
+        $c
     Label : ELEMENT
       =
       Label : RIGHT

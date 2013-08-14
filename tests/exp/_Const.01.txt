@@ -37,6 +37,12 @@ Label : CODE
           Label : DEFINE
             $E
       Label : ELEMENT
+        private
+        Label : NAME
+          $a
+        Label : VALUE
+          'b'
+      Label : ELEMENT
         const
         Label : NAME
           E
@@ -58,9 +64,3 @@ Label : CODE
           C
         Label : VALUE
           1
-      Label : ELEMENT
-        private
-        Label : NAME
-          $a
-        Label : VALUE
-          'b'

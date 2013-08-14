@@ -1,3 +1,3 @@
 <?php
-    global $a, $b = 1, $c = 3;
+    global $a, $b, $c;
 ?>

@@ -27,17 +27,15 @@ Label : CODE
                     Label : ARGUMENT
                       'f'
             Label : ELEMENT
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
-                g
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'h'
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              g
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'h'
             Label : ELEMENT
               ++
               Label : POSTPLUSPLUS
@@ -61,8 +59,6 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              break
-              Label : LEVEL
-                1
+            break
+            Label : LEVEL
+              1

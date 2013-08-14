@@ -10,6 +10,8 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
+        A
+      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -17,5 +19,3 @@ Label : CODE
             $b
       Label : ELEMENT
         B
-      Label : ELEMENT
-        A

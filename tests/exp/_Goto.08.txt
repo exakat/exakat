@@ -23,8 +23,6 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              ++
-              Label : POSTPLUSPLUS
-                $y
+            ++
+            Label : POSTPLUSPLUS
+              $y

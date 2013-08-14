@@ -1,19 +1,6 @@
 <?php 
-Label : NEXT
+Label : CODE
   ;
-  Label : ELEMENT
-    F
-  Label : NEXT
-    endif
-    Label : NEXT
-      ;
-      Label : NEXT
-        ?>
-
-        Label : NEXT
-          /**/
-          Label : NEXT
-            /* * */
   Label : ELEMENT
     if
     Label : CONDITION
@@ -32,23 +19,25 @@ Label : NEXT
             $b
       Label : ELEMENT
         B
-    Label : ELSE
-      if
-      Label : CONDITION
-        (
-        Label : CODE
-          $c
-      Label : THEN
-        ;
-        Label : ELEMENT
-          C
-        Label : ELEMENT
-          E
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              $d
-          Label : THEN
-            D
+      Label : ELEMENT
+        F
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $c
+        Label : THEN
+          ;
+          Label : ELEMENT
+            C
+          Label : ELEMENT
+            E
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $d
+            Label : THEN
+              D

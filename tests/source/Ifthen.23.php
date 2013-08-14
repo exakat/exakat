@@ -1,5 +1,5 @@
 <?php
-if ($x) : $y 
+if ($x) : $y ;
 elseif ($w) : $ww; $ww2;
 elseif ($v) : $vv; $vv2;
 elseif ($u) : $uu; $uu2;

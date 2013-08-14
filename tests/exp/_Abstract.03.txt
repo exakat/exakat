@@ -37,24 +37,12 @@ Label : CODE
         Label : ELEMENT
           abstract
           Label : ABSTRACT
-            private
-            Label : VALUE
-              void
-            Label : DEFINE
-              function
-              Label : NAME
-                c
-              Label : ARGUMENTS
-                void
-        Label : ELEMENT
-          abstract
-          Label : ABSTRACT
             static
             Label : VALUE
               void
             Label : DEFINE
               function
               Label : NAME
-                c
+                d
               Label : ARGUMENTS
                 void

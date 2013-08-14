@@ -3,6 +3,18 @@
 Label : CODE
   ;
   Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        1
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          1
+  Label : ELEMENT
     ;
     Label : ELEMENT
       =
@@ -28,13 +40,3 @@ Label : CODE
         1
       Label : LEFT
         $x
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        (
-        Label : CODE
-          1
-      Label : THEN
-        {
-        Label : CODE
-          1

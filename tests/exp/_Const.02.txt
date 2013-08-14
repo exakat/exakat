@@ -11,19 +11,31 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
-          A
+          A2
         Label : VALUE
           1
       Label : ELEMENT
         const
         Label : NAME
-          B
+          A1
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          A3
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          B2
         Label : VALUE
           '2'
       Label : ELEMENT
         const
         Label : NAME
-          C
+          C4
         Label : VALUE
           ::
           Label : CONSTANT
@@ -33,172 +45,154 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
-          F
+          B3
+        Label : VALUE
+          '2'
+      Label : ELEMENT
+        const
+        Label : NAME
+          A4
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          C3
+        Label : VALUE
+          ::
+          Label : CONSTANT
+            E
+          Label : CLASS
+            D
+      Label : ELEMENT
+        const
+        Label : NAME
+          B4
+        Label : VALUE
+          '2'
+      Label : ELEMENT
+        const
+        Label : NAME
+          A5
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          F4
         Label : VALUE
           4
       Label : ELEMENT
         const
         Label : NAME
-          F
+          B5
+        Label : VALUE
+          '2'
+      Label : ELEMENT
+        const
+        Label : NAME
+          C5
+        Label : VALUE
+          ::
+          Label : CONSTANT
+            E
+          Label : CLASS
+            D
+      Label : ELEMENT
+        const
+        Label : NAME
+          C7
+        Label : VALUE
+          ::
+          Label : CONSTANT
+            E
+          Label : CLASS
+            D
+      Label : ELEMENT
+        const
+        Label : NAME
+          C6
+        Label : VALUE
+          ::
+          Label : CONSTANT
+            E
+          Label : CLASS
+            D
+      Label : ELEMENT
+        const
+        Label : NAME
+          F5
         Label : VALUE
           4
       Label : ELEMENT
         const
         Label : NAME
-          A
+          A6
         Label : VALUE
           1
       Label : ELEMENT
         const
         Label : NAME
-          B
+          G5
+        Label : VALUE
+          5
+      Label : ELEMENT
+        const
+        Label : NAME
+          B6
         Label : VALUE
           '2'
       Label : ELEMENT
         const
         Label : NAME
-          C
+          F6
         Label : VALUE
-          ::
-          Label : CONSTANT
-            E
-          Label : CLASS
-            D
+          4
       Label : ELEMENT
         const
         Label : NAME
-          B
+          G6
+        Label : VALUE
+          5
+      Label : ELEMENT
+        const
+        Label : NAME
+          A7
+        Label : VALUE
+          1
+      Label : ELEMENT
+        const
+        Label : NAME
+          I6
+        Label : VALUE
+          6
+      Label : ELEMENT
+        const
+        Label : NAME
+          B7
         Label : VALUE
           '2'
       Label : ELEMENT
         const
         Label : NAME
-          C
+          F7
         Label : VALUE
-          ::
-          Label : CONSTANT
-            E
-          Label : CLASS
-            D
+          4
       Label : ELEMENT
         const
         Label : NAME
-          A
+          G7
         Label : VALUE
-          1
+          5
       Label : ELEMENT
         const
         Label : NAME
-          A
+          I7
         Label : VALUE
-          1
+          6
       Label : ELEMENT
         const
         Label : NAME
-          A
+          J7
         Label : VALUE
-          1
-      Label : ELEMENT
-        const
-        Label : NAME
-          B
-        Label : VALUE
-          '2'
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          const
-          Label : NAME
-            G
-          Label : VALUE
-            5
-        Label : ELEMENT
-          Sequence
-          Label : ELEMENT
-            const
-            Label : NAME
-              A
-            Label : VALUE
-              1
-          Label : ELEMENT
-            const
-            Label : NAME
-              B
-            Label : VALUE
-              '2'
-          Label : ELEMENT
-            const
-            Label : NAME
-              C
-            Label : VALUE
-              ::
-              Label : CONSTANT
-                E
-              Label : CLASS
-                D
-          Label : ELEMENT
-            const
-            Label : NAME
-              F
-            Label : VALUE
-              4
-        Label : ELEMENT
-          const
-          Label : NAME
-            G
-          Label : VALUE
-            5
-        Label : ELEMENT
-          const
-          Label : NAME
-            I
-          Label : VALUE
-            6
-        Label : ELEMENT
-          const
-          Label : NAME
-            J
-          Label : VALUE
-            true
-        Label : ELEMENT
-          const
-          Label : NAME
-            G
-          Label : VALUE
-            5
-        Label : ELEMENT
-          const
-          Label : NAME
-            I
-          Label : VALUE
-            6
-        Label : ELEMENT
-          Sequence
-          Label : ELEMENT
-            const
-            Label : NAME
-              A
-            Label : VALUE
-              1
-          Label : ELEMENT
-            const
-            Label : NAME
-              B
-            Label : VALUE
-              '2'
-          Label : ELEMENT
-            const
-            Label : NAME
-              C
-            Label : VALUE
-              ::
-              Label : CONSTANT
-                E
-              Label : CLASS
-                D
-          Label : ELEMENT
-            const
-            Label : NAME
-              F
-            Label : VALUE
-              4
+          true

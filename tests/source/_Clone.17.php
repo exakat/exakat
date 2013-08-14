@@ -1,4 +1,4 @@
 <?php
-clone &$x;
+clone $x;
 
 ?>

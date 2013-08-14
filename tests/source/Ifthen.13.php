@@ -1,3 +1,3 @@
 <?php
-if ($x) : $y endif;
+if ($x) : $y; endif;
 ?>

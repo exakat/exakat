@@ -2,9 +2,9 @@
 
 abstract class x { 
     abstract function a(); 
-    protected function b(); 
+    protected function b() {} 
     abstract function c(); 
-    static function d(); 
+    static function d() {}
 }
 
 ?>

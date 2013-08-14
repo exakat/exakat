@@ -13,17 +13,15 @@ Label : CODE
         Label : CODE
           Block With Sequence For Default
           Label : CODE
-            Block With Sequence For Default
-            Label : CODE
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  'f'
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              return
+              Label : RETURN
+                'f'
       Label : ELEMENT
         case
         Label : CASE
@@ -31,17 +29,15 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  'c'
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              return
+              Label : RETURN
+                'c'
       Label : ELEMENT
         case
         Label : CASE
@@ -49,14 +45,12 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  'e'
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              return
+              Label : RETURN
+                'e'

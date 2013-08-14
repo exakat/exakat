@@ -13,12 +13,10 @@ Label : CODE
       Label : CODE
         Block With Sequence For Case
         Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ?
-            Label : CONDITION
-              $x
-            Label : THEN
-              'a'
-            Label : ELSE
-              'b'
+          ?
+          Label : CONDITION
+            $x
+          Label : THEN
+            'a'
+          Label : ELSE
+            'b'

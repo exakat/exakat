@@ -11,6 +11,72 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
+        G
+
+      Label : ELEMENT
+        F
+
+      Label : ELEMENT
+        E
+
+      Label : ELEMENT
+        D
+
+      Label : ELEMENT
+        C
+
+      Label : ELEMENT
+        B
+
+      Label : ELEMENT
+        A
+
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $c
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $d
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $f
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $g
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $h
+      Label : ELEMENT
+        H
+
+      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -18,84 +84,4 @@ Label : CODE
             $i
       Label : ELEMENT
         I
-
-      Label : ELEMENT
-        ;
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $h
-        Label : ELEMENT
-          H
-
-        Label : ELEMENT
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $g
-          Label : ELEMENT
-            G
-
-          Label : ELEMENT
-            ;
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $f
-            Label : ELEMENT
-              F
-
-            Label : ELEMENT
-              ;
-              Label : ELEMENT
-                echo
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $e
-              Label : ELEMENT
-                E
-
-              Label : ELEMENT
-                ;
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $d
-                Label : ELEMENT
-                  D
-
-                Label : ELEMENT
-                  ;
-                  Label : ELEMENT
-                    echo
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        $c
-                  Label : ELEMENT
-                    C
-
-                  Label : ELEMENT
-                    ;
-                    Label : ELEMENT
-                      echo
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          $b
-                    Label : ELEMENT
-                      B
-
-                    Label : ELEMENT
-                      A
 

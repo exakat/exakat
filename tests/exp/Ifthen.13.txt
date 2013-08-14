@@ -9,4 +9,6 @@ Label : CODE
       Label : CODE
         $x
     Label : THEN
-      $y
+      ;
+      Label : ELEMENT
+        $y

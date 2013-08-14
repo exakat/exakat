@@ -7,16 +7,6 @@ Label : CODE
     Label : RIGHT
       `
       Label : CONTAIN
-        Concatenation
-        Label : ELEMENT
-          {
-          Label : NAME
-            ::
-            Label : CONSTANT
-              c
-            Label : CLASS
-              $b
-        Label : ELEMENT
-           d 
+        {b::c} d 
     Label : LEFT
       $a

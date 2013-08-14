@@ -1,22 +1,28 @@
 <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
-    clone
-    Label : CLONE
-      &
-      Label : REFERENCE
-        $x
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            +
-            Label : RIGHT
-              4
-            Label : LEFT
-              +
-              Label : RIGHT
-                3
-              Label : LEFT
-                1
+Label : NEXT
+  clone
+  Label : CLONE
+    $x
+  Label : NEXT
+    (
+    Label : NEXT
+      +
+      Label : RIGHT
+        4
+      Label : NEXT
+        )
+        Label : NEXT
+          ;
+          Label : NEXT
+            ?>
+            Label : NEXT
+              /**/
+              Label : NEXT
+                /* * */
+      Label : LEFT
+        +
+        Label : RIGHT
+          3
+        Label : LEFT
+          1

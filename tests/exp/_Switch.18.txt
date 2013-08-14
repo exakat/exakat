@@ -17,6 +17,12 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
+              =
+              Label : RIGHT
+                0
+              Label : LEFT
+                $count
+            Label : ELEMENT
               foreach
               Label : SOURCE
                 $data
@@ -30,12 +36,6 @@ Label : CODE
                 {
                 Label : CODE
                   void
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                0
-              Label : LEFT
-                $count
             Label : ELEMENT
               =
               Label : RIGHT
@@ -71,8 +71,6 @@ Label : CODE
         Label : CODE
           Block With Sequence For Default
           Label : CODE
-            Block With Sequence For Default
-            Label : CODE
-              return
-              Label : RETURN
-                'e'
+            return
+            Label : RETURN
+              'e'

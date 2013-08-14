@@ -13,18 +13,16 @@ Label : CODE
       Label : CODE
         Block With Sequence For Case
         Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                3
-              Label : LEFT
-                $y
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                1
-              Label : LEFT
-                $x
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              3
+            Label : LEFT
+              $y
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $x
