@@ -126,12 +126,13 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
 
     // @doc if ( ) : elseif
-        $this->conditions = array( 0 => array('token' => array('T_ELSEIF'),
+        $this->conditions = array( 0 => array('token' => array('T_IF', 'T_ELSEIF'),
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
                                    3 => array('atom'  => array('Block', 'Sequence')),
-                                   4 => array('atom' => 'Ifthen'),
+                                   4 => array('atom'  => 'Ifthen', 'token' => 'T_ELSEIF' ),
+                                   5 => array('filterOut2' => 'T_ENDIF'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'CONDITION',
