@@ -1,0 +1,48 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      $a
+  Label : THEN
+    Block With if/elseif
+    Label : CODE
+      ->
+      Label : METHOD
+        c
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              e
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'f'
+            Label : OBJECT
+              $d
+      Label : OBJECT
+        $b
+  Label : ELSE
+    Block With else
+    Label : CODE
+      ->
+      Label : METHOD
+        cc
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              ee
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'ff'
+            Label : OBJECT
+              $dd
+      Label : OBJECT
+        $bb
