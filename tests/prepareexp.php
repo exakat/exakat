@@ -42,6 +42,9 @@ function run($test, $number) {
     print shell_exec($shell);
     
     $exp = file_get_contents('./exp/'."$test.$number".'.txt');
+    if (strpos($exp, 'Parse error') !== false) {
+        print "This script doesn't compile.\n";
+    }
     if (strpos($exp, 'Label : NEXT') !== false) {
         print "There are some unprocessed link in this script\n";
     }
