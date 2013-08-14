@@ -35,7 +35,7 @@ class _Foreach extends TokenAuto {
                                    4 => array('atom' => $blind_variables),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('atom' => 'yes', 'notAtom' => 'Block'),
-                                   7 => array('token' => 'T_SEMICOLON')
+                                   //7 => array('token' => 'T_SEMICOLON')
         );
         $this->actions = array( 'to_block_foreach' => true,
                                 'keepIndexed'      => true,

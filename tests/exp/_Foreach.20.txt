@@ -1,0 +1,54 @@
+<?php
+
+Label : CODE
+  foreach
+  Label : SOURCE
+    $a
+  Label : VALUE
+    =>
+    Label : KEY
+      $b
+    Label : VALUE
+      $c
+  Label : LOOP
+    Block With Foreach
+    Label : CODE
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          &&
+          Label : LEFT
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $d
+                Label : INDEX
+                  'e'
+          Label : RIGHT
+            !
+            Label : NOT
+              f
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  (array)
+                  Label : CAST
+                    $h
+                Label : ARGUMENT
+                  $g
+      Label : THEN
+        Block With if/elseif
+        Label : CODE
+          unset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $j
+              Label : INDEX
+                $k
