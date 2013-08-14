@@ -19,7 +19,7 @@ class Comparison extends TokenAuto {
                                               'atom' => 'none'),
                                    1 => array('atom' => array_merge($operands, array('Assignation'))),
                                    2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), 
-                                                           Addition::$operators, Multiplication::$operators )),
+                                                           Addition::$operators, Multiplication::$operators, Assignation::$operators )),
         );
         
         $this->actions = array('makeEdge'    => array('1' => 'RIGHT',

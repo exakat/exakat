@@ -10,7 +10,7 @@ class IfthenElse extends TokenAuto {
                                                'atom'      => 'none'),
                                     1 => array('notAtom'   => 'Block', 'atom' => 'yes'),
                                     2 => array('filterOut' => array_merge(Assignation::$operators, Multiplication::$operators, 
-                                                                          array('T_OPEN_PARENTHESIS'))),
+                                                                          array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 'T_OPEN_CURLY'))),
         );
         
         $this->actions = array( 'to_block_else' => true);
