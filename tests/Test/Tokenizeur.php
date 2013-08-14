@@ -17,6 +17,7 @@ class Tokenizeur extends \PHPUnit_Framework_TestCase {
         
         $exp = file_get_contents('exp/'.$file.'.txt');
         $this->assertNotContains("Label : NEXT", $exp);
+        $this->assertNotContains("Parse error", $exp);
         
         $this->assertEquals($exp, $res);
 
