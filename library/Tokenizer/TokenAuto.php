@@ -1018,11 +1018,31 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             ";
             unset($actions['createVoidForDefault']);
         }
+
+        if (isset($actions['mergePrev2']) && $actions['mergePrev2']) {
+            foreach($actions['mergePrev2'] as $atom => $link) {
+                $qactions[] = " 
+/* mergePrev */ 
+x = it;
+it.as('origin').out('ELEMENT').has('atom','Sequence').each{
+    it.inE('ELEMENT').each{ g.removeEdge(it);}
+  
+    it.out('ELEMENT').each{ 
+        it.inE('ELEMENT').each{ g.removeEdge(it);}
+        g.addEdge(x, it, 'ELEMENT');
+    };
+
+    g.removeVertex(it);    
+}
+";
+            }
+            unset($actions['mergePrev2']);
+        }
         
         if (isset($actions['mergePrev']) && $actions['mergePrev']) {
             foreach($actions['mergePrev'] as $atom => $link) {
                 $qactions[] = " 
-/* mergeConcat */ 
+/* mergePrev */ 
 x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true]);
 
 y = it.in('NEXT').in('NEXT').next();

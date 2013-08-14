@@ -42,8 +42,8 @@ class Sequence extends TokenAuto {
                                    2 => array('filterOut2' => $next_operator),
         );
         
-        $this->actions = array('makeEdge'   => array( 1 => 'ELEMENT',
-                                                     -1 => 'ELEMENT'),
+        $this->actions = array('transform'   => array( 1 => 'ELEMENT',
+                                                      -1 => 'ELEMENT'),
                                'order'      => array( 1 => 2,
                                                      -1 => 1 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
@@ -106,18 +106,17 @@ class Sequence extends TokenAuto {
                                    2 => array('filterOut2' => $next_operator),
         );
         
-        $this->actions = array('transform'    => array( 1 => 'ELEMENT',
-                                                       -1 => 'ELEMENT'
-                                                      ),
-                               'order'    => array( 1 => 2,
-                                                   -1 => 1 ),
+        $this->actions = array('transform'  => array( 1 => 'ELEMENT',
+                                                     -1 => 'ELEMENT'),
+                               'order'      => array( 1 => 2,
+                                                     -1 => 1 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence',
+                               'atom'       => 'Sequence'
                                );
         $this->checkAuto();
 
         // @note ; next to another instruction
-        $this->conditions = array( 0 => array('atom' => 'Sequence' ),
+        $this->conditions = array( 0 => array('atom'  => 'Sequence' ),
                                    1 => array('token' => Sequence::$operators,
                                               'atom'  => 'none'),
         );
@@ -127,29 +126,30 @@ class Sequence extends TokenAuto {
 
         // @note End of PHP script
         $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS', 'T_BREAK')),), 
-                                  -1 => array('atom' => $operands,
-                                              'notToken' => 'T_ELSEIF', ),
-                                   0 => array('token' => Sequence::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR'),
-                                              'atom'  => 'none'),
+                                  -1 => array('atom'       => $operands,
+                                              'notToken'   => 'T_ELSEIF', ),
+                                   0 => array('token'      => Sequence::$operators,
+                                              'atom'       => 'none'),
+                                   1 => array('token'      => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR'),
+                                              'atom'       => 'none'),
         );
         
-        $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'),
-                               'order'       => array(-1 => 1),
+        $this->actions = array('transform'    => array(-1 => 'ELEMENT'),
+                               //'order'       => array(-1 => 1),
                                'atom'        => 'Sequence',
+                               'mergePrev2'   => array('Sequence' => 'ELEMENT'),
                                'cleanIndex'  => true);
         $this->checkAuto();
 
         // @note End of PHP script, alternative syntax
-        $this->conditions = array(-3 => array('token' => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', )), 
-                                  -2 => array('token' => 'T_COLON',), 
-                                  -1 => array('atom' => $operands,
+        $this->conditions = array(-3 => array('token'    => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', )), 
+                                  -2 => array('token'    => 'T_COLON',), 
+                                  -1 => array('atom'     => $operands,
                                               'notToken' => 'T_ELSEIF', ),
-                                   0 => array('token' => Sequence::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('token' => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_ENDDECLARE', 'T_ENDFOREACH', ),
-                                              'atom'  => 'none'),
+                                   0 => array('token'    => Sequence::$operators,
+                                              'atom'     => 'none'),
+                                   1 => array('token'    => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_ENDDECLARE', 'T_ENDFOREACH', ),
+                                              'atom'     => 'none'),
         );
         
         $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'),
@@ -158,7 +158,6 @@ class Sequence extends TokenAuto {
                                'cleanIndex'  => true
                                );
         $this->checkAuto(); 
-//        $this->printQuery();
        
         return $this->checkRemaining();
     }

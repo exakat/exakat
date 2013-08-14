@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      $a
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $c
+        Label : LEFT
+          $b
+      Label : ELEMENT
+        void
