@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Reference extends Tokenizeur {
-    /* 28 methods */
+    /* 29 methods */
     
     public function testReference01()  { $this->generic_test('Reference.01'); }
     public function testReference02()  { $this->generic_test('Reference.02'); }
@@ -37,6 +37,7 @@ class Reference extends Tokenizeur {
     public function testReference26()  { $this->generic_test('Reference.26'); }
     public function testReference27()  { $this->generic_test('Reference.27'); }
     public function testReference28()  { $this->generic_test('Reference.28'); }
+    public function testReference29()  { $this->generic_test('Reference.29'); }
 
 }
 ?>

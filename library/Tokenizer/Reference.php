@@ -6,7 +6,7 @@ class Reference extends TokenAuto {
     static public $operators = array('T_AND');
 
     function _check() {
-        $this->conditions = array(-1 => array('filterOut2' => array_merge(Logical::$operators, array('T_VARIABLE', 'T_LNUMBER', 'T_DNUMBER', 'T_MINUS', 'T_PLUS', 'T_CLOSE_PARENTHESIS' ))),
+        $this->conditions = array(-1 => array('filterOut2' => array_merge(Logical::$operators, array('T_VARIABLE', 'T_LNUMBER', 'T_DNUMBER', 'T_MINUS', 'T_PLUS', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', ))),
                                    0 => array('token' => Reference::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => array('Variable', 'Array', 'Property', 'Functioncall', 'Methodcall', 'Staticmethodcall', 

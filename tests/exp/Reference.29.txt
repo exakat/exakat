@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      <<
+      Label : RIGHT
+        $f
+      Label : LEFT
+        (
+        Label : CODE
+          &
+          Label : LEFT
+            [
+            Label : VARIABLE
+              ->
+              Label : PROPERTY
+                c
+              Label : OBJECT
+                $b
+            Label : INDEX
+              $d
+          Label : RIGHT
+            $e
+    Label : LEFT
+      $a
