@@ -99,6 +99,12 @@ function process_file($filename) {
                                              ->save();
         $racines->add($regexIndex[$r], 'token', $r);
     }
+        $regexIndex['DELETE'] = $client->makeNode()->setProperty('token', 'DELETE')
+                                                 ->setProperty('code', 'Index for DELETE')
+                                                 ->setProperty('file', $filename)
+                                                 ->setProperty('index', 'yes')
+                                                 ->save();
+        $racines->add($regexIndex['DELETE'], 'token', 'DELETE');
     
     // load new tokens
     $line = 0;
@@ -181,7 +187,6 @@ function process_file($filename) {
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])
                                               ->setProperty('file', $file)->save();
-                $previous->relateTo($T[$Tid], 'NEXT')->save();
                 $regexIndex["_Break"]->relateTo($T[$Tid], 'INDEXED')->save();
                 $previous = $T[$Tid];
                 
@@ -202,16 +207,20 @@ function process_file($filename) {
                                               ->setProperty('line', $token[2])
                                               ->setProperty('file', $file);
             }
+            $T[$Tid]->save();
             
             if (token_name($token[0]) == 'T_STRING' && (strtolower($token[1]) == 'true' || strtolower($token[1]) == 'false')) {
-                $T[$Tid]->setProperty('atom', 'Boolean');
+                $T[$Tid]->setProperty('atom', 'Boolean')->save();
                 $to_index = false;
             } elseif (isset($atoms[token_name($token[0])])) {
-                $T[$Tid]->setProperty('atom', $atoms[token_name($token[0])]);
+                $T[$Tid]->setProperty('atom', $atoms[token_name($token[0])])->save();
             }
             
             $token_value = token_name($token[0]);
-            $T[$Tid]->save();
+            if ($token_value == 'T_OPEN_CURLY') {
+                $token_value = 'T_CURLY_OPEN';
+                
+            }
             $line = $token[2];
         } else {
             if (!isset($TPHP[$token])) {
