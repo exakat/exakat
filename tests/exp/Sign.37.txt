@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      b
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          -
+          Label : SIGN
+            ->
+            Label : METHOD
+              h
+              Label : ARGUMENTS
+                void
+            Label : OBJECT
+              $g
+        Label : ARGUMENT
+          -
+          Label : SIGN
+            ->
+            Label : METHOD
+              f
+              Label : ARGUMENTS
+                void
+            Label : OBJECT
+              $e
+        Label : ARGUMENT
+          -
+          Label : SIGN
+            ->
+            Label : METHOD
+              d
+              Label : ARGUMENTS
+                void
+            Label : OBJECT
+              $c
+    Label : OBJECT
+      $a
