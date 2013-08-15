@@ -4,7 +4,7 @@ default:
 	$g = 1;
 	$h = 2;
 	$i = 3;
-	if($a) {
+	if ($a) {
 		$j = 2;
 		foreach($a as $b => $c) {
 			if($d = $e) {

@@ -8,8 +8,7 @@ class Block extends TokenAuto {
     function _check() {
     // @doc Block
         $this->conditions = array( -1 => array('filterOut2' => array('T_VARIABLE', 'T_DOLLAR', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET' )),
-                                   0 => array('token' => 'T_OPEN_CURLY',
-                                              'atom' => 'none'),
+                                   0 => array('token' => Block::$operators),
                                    1 => array('atom' => 'yes'),
                                    2 => array('token' => 'T_CLOSE_CURLY',
                                               'atom' => 'none'),

@@ -5,11 +5,8 @@ namespace Tokenizer;
 class Token {
     protected static $client = null;
     protected static $reserved = array();
-
-//  Cannot be used, because T_QUOTE is used both for opening and closing. 
-//                                 'String', 
     
-    public static $types = array(//'Variable', conflict between transform and indexes. 
+    public static $types = array('Variable', 
                                  'VariableDollar',
                                  'Boolean',  
                                  '_Array', 
@@ -177,15 +174,22 @@ class Token {
     }
     
     static public function cleanHidden() {
-        $query = " g.V.has('token','T_ROOT').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
+        $query = " 
+g.V.has('token','T_ROOT').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
     g.removeVertex(it.in('NEXT').in('NEXT').next()); 
     g.removeVertex(it.out('NEXT').next()); 
     g.removeVertex(it); 
 }
 
-g.V.has('index', 'yes').filter{it.out('INDEXED').count() == 0}.each{
+g.idx('racines')[['token':'DELETE']].out('DELETE').each{
     g.removeVertex(it);
 }
+
+g.V.has('index', 'yes').filter{it.out().count() == 0}.each{
+    g.removeVertex(it);
+}
+
+
 ";
         Token::query($query);
     }

@@ -11,18 +11,6 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CASE
-          'b'
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            =
-            Label : RIGHT
-              4
-            Label : LEFT
-              $x
-      Label : ELEMENT
-        case
-        Label : CASE
           'c'
         Label : CODE
           Block With Sequence For Case
@@ -109,13 +97,13 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CASE
-          'e'
+          'b'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
             =
             Label : RIGHT
-              1
+              4
             Label : LEFT
               $x
       Label : ELEMENT
@@ -136,5 +124,17 @@ Label : CODE
             =
             Label : RIGHT
               2
+            Label : LEFT
+              $x
+      Label : ELEMENT
+        case
+        Label : CASE
+          'e'
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            =
+            Label : RIGHT
+              1
             Label : LEFT
               $x

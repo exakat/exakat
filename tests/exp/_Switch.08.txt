@@ -9,11 +9,9 @@ Label : CODE
     Label : CODE
       Sequence Case Default
       Label : ELEMENT
-        case
-        Label : CASE
-          'A'
+        default
         Label : CODE
-          Block With Sequence For Case
+          Block With Sequence For Default
           Label : CODE
             ;
             Label : ELEMENT
@@ -23,9 +21,9 @@ Label : CODE
             Label : ELEMENT
               =
               Label : RIGHT
-                &
-                Label : REFERENCE
-                  $c
+                @
+                Label : AT
+                  $e
               Label : LEFT
                 $b
       Label : ELEMENT
@@ -69,9 +67,11 @@ Label : CODE
               Label : LEFT
                 $b
       Label : ELEMENT
-        default
+        case
+        Label : CASE
+          'A'
         Label : CODE
-          Block With Sequence For Default
+          Block With Sequence For Case
           Label : CODE
             ;
             Label : ELEMENT
@@ -81,8 +81,8 @@ Label : CODE
             Label : ELEMENT
               =
               Label : RIGHT
-                @
-                Label : AT
-                  $e
+                &
+                Label : REFERENCE
+                  $c
               Label : LEFT
                 $b

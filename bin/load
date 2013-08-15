@@ -187,6 +187,7 @@ function process_file($filename) {
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])
                                               ->setProperty('file', $file)->save();
+                $previous->relateTo($T[$Tid], 'NEXT')->save();
                 $regexIndex["_Break"]->relateTo($T[$Tid], 'INDEXED')->save();
                 $previous = $T[$Tid];
                 

@@ -6,11 +6,14 @@ class TokenAuto extends Token {
     protected $conditions = array();
     
     public function prepareQuery() {
+        $query = " ";
         $class = str_replace("Tokenizer\\", '', get_class($this));
         if (in_array($class, Token::$types)) {
-            $query = "g.idx('racines')[['token':'$class']].out('INDEXED')";
+            $query .= "g.idx('racines')[['token':'$class']].out('INDEXED')";
         } else {
-            $query = "g.V";
+//            $query .= "g.V";
+//            $query .= "g.idx('racines')[['token':'NEXT']].out('INDEXED')";
+            $query .= "g.V.has('root', 'true').in('NEXT').out('NEXT').loop(1){it.object.token != 'T_END'}{true}";
         }
         $qcdts = array();
         
@@ -54,8 +57,7 @@ class TokenAuto extends Token {
         $query = $query.".".join('.', $qcdts);
         
         $qactions = $this->readActions($this->actions);
-        $query .= ".each{\n".join(";\n", $qactions).";\n}";
-        $qcdts[] = "back('origin')";
+        $query .= ".each{\n".join(";\n", $qactions).";\n};"; // m.each{ g.removeVertex(it); };   ";
         
         return $query;
     }
@@ -79,7 +81,6 @@ class TokenAuto extends Token {
         // @doc audit trail track
         $qactions[] = "\n it.setProperty('modifiedBy', '".str_replace('Tokenizer\\', '', get_class($this))."'); \n";
 
-
         if (isset($actions['keepIndexed'])) {
             if(!$actions['keepIndexed']) {
                 $qactions[] = " 
@@ -95,20 +96,6 @@ class TokenAuto extends Token {
                 ";
         }
 
-        if (isset($actions['transfert'])) {
-            list($what, $where) = each($actions['transfert']);
-            $next = str_repeat(".out('NEXT')", $where);
-            $qactions[] = " 
-/* transfert property root away  */  
-it.has('root', 'true')$next.each{ 
-    it.setProperty('root', 'true');
-    it.setProperty('test', 'true');
-}
-it.setProperty('root', 'null');
-                ";
-            unset($actions['transfert']);
-        }                
-
         if (isset($actions['cleansemicolon']) && $actions['cleansemicolon']) {
             $qactions[] = "
 /* cleansemicolon */
@@ -121,7 +108,20 @@ it.setProperty('root', 'null');
     }";
             unset($actions['cleansemicolon']);
         }
-        
+
+         if (isset($actions['transfert'])) {
+            list($what, $where) = each($actions['transfert']);
+            $next = str_repeat(".out('NEXT')", $where);
+            $qactions[] = " 
+/* transfert property root away  */  
+it.has('root', 'true')$next.each{ 
+    it.setProperty('root', 'true');
+    it.setProperty('test', 'true');
+}
+it.setProperty('root', 'null');
+                ";
+            unset($actions['transfert']);
+        }                        
         if (isset($actions['atom'])) {
            $qactions[] = " /* atom */\n   it.setProperty('atom', '".$actions['atom']."')";
            unset($actions['atom']);
@@ -236,7 +236,9 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.removeEdge(it.outE('LEFT').next());
     g.removeEdge(it.outE('RIGHT').next());
     
-    g.removeVertex(it);
+    
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+    //g.removeVertex(it);
 }
 
 g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
@@ -481,7 +483,8 @@ x.out('CONCAT').has('atom', 'Concatenation').each{
         g.addEdge(x, it, 'CONCAT');
     }
     g.removeEdge(it.inE('CONCAT').next());
-    g.removeVertex(it);
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+    //g.removeVertex(it);
 }
 ";
             unset($actions['insertConcat']);
@@ -532,7 +535,8 @@ x.out('ELEMENT').has('atom', 'SequenceCaseDefault').each{
         g.addEdge(x, it, 'ELEMENT');
     }
     g.removeEdge(it.inE('ELEMENT').next());
-    g.removeVertex(it);
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+//    g.removeVertex(it);
 }
 
 ";
@@ -880,7 +884,8 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    g.removeVertex(semicolon);
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), semicolon, 'DELETE');   
+//    g.removeVertex(semicolon);
 }
 
             ";
@@ -1032,7 +1037,8 @@ it.as('origin').out('ELEMENT').has('atom','Sequence').each{
         g.addEdge(x, it, 'ELEMENT');
     };
 
-    g.removeVertex(it);    
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+    //g.removeVertex(it);
 }
 ";
             }
@@ -1068,7 +1074,8 @@ x.as('origin').out('ELEMENT').has('atom','Sequence').each{
         g.addEdge(x, it, 'ELEMENT');
     };
 
-    g.removeVertex(it);    
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+    //g.removeVertex(it);
 }
 
 // remove the next, if this is a ; 
@@ -1119,7 +1126,8 @@ x.as('origin').out('ELEMENT').has('atom','Concatenation').each{
         g.addEdge(x, it, 'ELEMENT');
     };
 
-    g.removeVertex(it);    
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+//    g.removeVertex(it);    
 }
 
 /* Clean index */

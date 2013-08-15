@@ -53,7 +53,7 @@ class Ifthen extends TokenAuto {
         
         $this->actions = array( 'to_block_ifelseif' => true,
                                 'keepIndexed'       => true);
-        $this->checkAuto(); 
+//        $this->checkAuto(); 
 
         // if, elseif followed by a single instruction without a ;
         $this->conditions = array(  0 => array('token' => array('T_IF', 'T_ELSEIF'),
