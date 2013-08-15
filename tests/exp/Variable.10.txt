@@ -3,70 +3,68 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        "
-        Label : CONTAIN
-          Concatenation
-          Label : ELEMENT
-            x
-          Label : ELEMENT
-            {
-            Label : NAME
-              $y
-          Label : ELEMENT
-            z
-          Label : ELEMENT
-            {
-            Label : NAME
-              $a
-      Label : LEFT
-        $f
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        "
-        Label : CONTAIN
-          Concatenation
-          Label : ELEMENT
-            z
-          Label : ELEMENT
-            x
-          Label : ELEMENT
-            {
-            Label : NAME
-              $y
-      Label : LEFT
-        $e
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        "
-        Label : CONTAIN
-          ${
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : ELEMENT
+          {
           Label : NAME
             $a
-      Label : LEFT
-        $d
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        "
-        Label : CONTAIN
-          ${
-          Label : NAME
-            z
-      Label : LEFT
-        $c
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        "
-        Label : CONTAIN
+        Label : ELEMENT
+          z
+        Label : ELEMENT
+          x
+        Label : ELEMENT
           {
           Label : NAME
             $y
-      Label : LEFT
-        $a
+    Label : LEFT
+      $f
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : ELEMENT
+          z
+        Label : ELEMENT
+          x
+        Label : ELEMENT
+          {
+          Label : NAME
+            $y
+    Label : LEFT
+      $e
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        ${
+        Label : NAME
+          $a
+    Label : LEFT
+      $d
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        ${
+        Label : NAME
+          z
+    Label : LEFT
+      $c
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        {
+        Label : NAME
+          $y
+    Label : LEFT
+      $a

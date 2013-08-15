@@ -7,14 +7,14 @@ Label : CODE
     Label : CONTAIN
       Concatenation
       Label : ELEMENT
+        ${
+        Label : NAME
+          d
+      Label : ELEMENT
+        c
+      Label : ELEMENT
         a
       Label : ELEMENT
         ${
         Label : NAME
           b
-      Label : ELEMENT
-        c
-      Label : ELEMENT
-        ${
-        Label : NAME
-          d

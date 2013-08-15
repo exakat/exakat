@@ -3,68 +3,66 @@
 Label : CODE
   ;
   Label : ELEMENT
-    Sequence
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : RIGHT
-            'b'
-          Label : LEFT
-            $a
-      Label : THEN
-        {
-        Label : CODE
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $c
-      Label : ELSE
-        {
-        Label : CODE
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $d
-    Label : ELEMENT
-      &&
-      Label : LEFT
-        !
-        Label : NOT
-          e
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $f
-      Label : RIGHT
-        g
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          'b'
+        Label : LEFT
+          $a
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $c
+    Label : ELSE
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $d
+  Label : ELEMENT
+    &&
+    Label : LEFT
+      !
+      Label : NOT
+        e
         Label : ARGUMENTS
-          ,
+          void
           Label : ARGUMENT
+            $f
+    Label : RIGHT
+      g
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
             [
             Label : VARIABLE
               [
               Label : VARIABLE
-                [
-                Label : VARIABLE
-                  $l
-                Label : INDEX
-                  'm'
+                $l
               Label : INDEX
-                'n'
+                'm'
             Label : INDEX
-              $o
-          Label : ARGUMENT
-            'k'
-          Label : ARGUMENT
-            0
-          Label : ARGUMENT
-            $j
-          Label : ARGUMENT
-            $i
-          Label : ARGUMENT
-            $h
+              'n'
+          Label : INDEX
+            $o
+        Label : ARGUMENT
+          'k'
+        Label : ARGUMENT
+          0
+        Label : ARGUMENT
+          $j
+        Label : ARGUMENT
+          $i
+        Label : ARGUMENT
+          $h

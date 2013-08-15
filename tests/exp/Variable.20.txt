@@ -1,58 +1,66 @@
 <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
-    "
-    Label : CONTAIN
-      Concatenation
-      Label : ELEMENT
-        e
-      Label : ELEMENT
-        ${
-        Label : NAME
-          d
-      Label : ELEMENT
-        ${
-        Label : NAME
-          d
-      Label : ELEMENT
-        ${
-        Label : NAME
-          b
-      Label : ELEMENT
-        a
-      Label : ELEMENT
+Label : NEXT
+  "
+  Label : NEXT
+    Concatenation
+    Label : ELEMENT
+      ea
+    Label : NEXT
+      ${
+      Label : NAME
+        b
+      Label : NEXT
         c
-      Label : ELEMENT
-        ${
-        Label : NAME
-          b
-      Label : ELEMENT
-        ea
-      Label : ELEMENT
-        c
-      Label : ELEMENT
-        ${
-        Label : NAME
-          d
-      Label : ELEMENT
-        ${
-        Label : NAME
-          b
-      Label : ELEMENT
-        ea
-      Label : ELEMENT
-        c
-      Label : ELEMENT
-        ${
-        Label : NAME
-          b
-      Label : ELEMENT
-        ea
-      Label : ELEMENT
-        c
-      Label : ELEMENT
-        ${
-        Label : NAME
-          d
+        Label : NEXT
+          ${
+          Label : NAME
+            d
+          Label : NEXT
+            e
+            Label : NEXT
+              "_CLOSE
+              Label : NEXT
+                ;
+                Label : NEXT
+                  ?>
+                  Label : NEXT
+                    /**/
+                    Label : NEXT
+                      /* * */
+    Label : ELEMENT
+      ${
+      Label : NAME
+        d
+    Label : ELEMENT
+      c
+    Label : ELEMENT
+      ${
+      Label : NAME
+        b
+    Label : ELEMENT
+      ea
+    Label : ELEMENT
+      ${
+      Label : NAME
+        d
+    Label : ELEMENT
+      c
+    Label : ELEMENT
+      ${
+      Label : NAME
+        b
+    Label : ELEMENT
+      ea
+    Label : ELEMENT
+      ${
+      Label : NAME
+        d
+    Label : ELEMENT
+      c
+    Label : ELEMENT
+      a
+    Label : ELEMENT
+      ${
+      Label : NAME
+        b

@@ -3,34 +3,18 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      !
-      Label : NOT
-        {
-        Label : VARIABLE
-          $x
-        Label : INDEX
-          1
-    Label : ELEMENT
-      !
-      Label : NOT
-        [
-        Label : VARIABLE
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $x
-            Label : INDEX
-              1
-          Label : INDEX
-            2
-        Label : INDEX
-          3
-    Label : ELEMENT
-      !
-      Label : NOT
+    !
+    Label : NOT
+      {
+      Label : VARIABLE
+        $x
+      Label : INDEX
+        1
+  Label : ELEMENT
+    !
+    Label : NOT
+      [
+      Label : VARIABLE
         [
         Label : VARIABLE
           [
@@ -40,11 +24,25 @@ Label : CODE
             1
         Label : INDEX
           2
-    Label : ELEMENT
-      !
-      Label : NOT
+      Label : INDEX
+        3
+  Label : ELEMENT
+    !
+    Label : NOT
+      [
+      Label : VARIABLE
         [
         Label : VARIABLE
           $x
         Label : INDEX
           1
+      Label : INDEX
+        2
+  Label : ELEMENT
+    !
+    Label : NOT
+      [
+      Label : VARIABLE
+        $x
+      Label : INDEX
+        1

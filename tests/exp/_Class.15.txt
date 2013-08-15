@@ -9,40 +9,38 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          const
-          Label : NAME
-            e
-          Label : VALUE
-            6
-        Label : ELEMENT
-          var
-          Label : VALUE
-            void
-          Label : DEFINE
-            $d
-        Label : ELEMENT
-          const
-          Label : NAME
-            c
-          Label : VALUE
-            4
-        Label : ELEMENT
-          var
-          Label : VALUE
-            void
-          Label : DEFINE
-            $b
-        Label : ELEMENT
-          const
-          Label : NAME
-            b
-          Label : VALUE
-            2
-        Label : ELEMENT
-          var
-          Label : VALUE
-            void
-          Label : DEFINE
-            $a
+        const
+        Label : NAME
+          e
+        Label : VALUE
+          6
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $d
+      Label : ELEMENT
+        const
+        Label : NAME
+          c
+        Label : VALUE
+          4
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $b
+      Label : ELEMENT
+        const
+        Label : NAME
+          b
+        Label : VALUE
+          2
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $a

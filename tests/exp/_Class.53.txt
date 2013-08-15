@@ -13,28 +13,26 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          var
-          Label : VALUE
-            void
-          Label : DEFINE
-            $d
-        Label : ELEMENT
-          var
-          Label : VALUE
-            void
-          Label : DEFINE
-            $c
-        Label : ELEMENT
-          var
-          Label : VALUE
-            void
-          Label : DEFINE
-            $b
-        Label : ELEMENT
-          var
-          Label : VALUE
-            void
-          Label : DEFINE
-            $a
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $d
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $c
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $b
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $a

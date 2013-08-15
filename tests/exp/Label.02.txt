@@ -3,24 +3,22 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      :
-      Label : LABEL
-        B
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        2
-      Label : LEFT
-        $b
-    Label : ELEMENT
-      :
-      Label : LABEL
-        A
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        1
-      Label : LEFT
-        $a
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    :
+    Label : LABEL
+      B
+  Label : ELEMENT
+    :
+    Label : LABEL
+      A
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $a

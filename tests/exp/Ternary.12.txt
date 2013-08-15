@@ -27,19 +27,19 @@ Label : CODE
             Label : CONTAIN
               Concatenation
               Label : ELEMENT
-                e
-              Label : ELEMENT
-                {
-                Label : NAME
-                  $f
-              Label : ELEMENT
-                g
-              Label : ELEMENT
                 [
                 Label : VARIABLE
                   $h
                 Label : INDEX
                   i
+              Label : ELEMENT
+                g
+              Label : ELEMENT
+                e
+              Label : ELEMENT
+                {
+                Label : NAME
+                  $f
           Label : CONCAT
             "o"
           Label : CONCAT
@@ -65,19 +65,19 @@ Label : CODE
               Label : ELEMENT
                 u
               Label : ELEMENT
-                {
-                Label : NAME
-                  $q
-              Label : ELEMENT
-                p
-              Label : ELEMENT
-                r
-              Label : ELEMENT
                 [
                 Label : VARIABLE
                   $s
                 Label : INDEX
                   t
+              Label : ELEMENT
+                r
+              Label : ELEMENT
+                p
+              Label : ELEMENT
+                {
+                Label : NAME
+                  $q
           Label : CONCAT
             (
             Label : CODE

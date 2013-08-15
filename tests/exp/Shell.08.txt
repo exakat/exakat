@@ -9,45 +9,7 @@ Label : CODE
       Label : CONTAIN
         Concatenation
         Label : ELEMENT
-           d 
-        Label : ELEMENT
-           b 
-        Label : ELEMENT
-          $a
-        Label : ELEMENT
-          $c
-        Label : ELEMENT
            
-        Label : ELEMENT
-          {
-          Label : NAME
-            ->
-            Label : PROPERTY
-              f
-            Label : OBJECT
-              $e
-        Label : ELEMENT
-          {
-          Label : NAME
-            ->
-            Label : METHOD
-              h
-              Label : ARGUMENTS
-                void
-            Label : OBJECT
-              $g
-        Label : ELEMENT
-           i j 
-        Label : ELEMENT
-           
-        Label : ELEMENT
-          {
-          Label : NAME
-            [
-            Label : VARIABLE
-              $k
-            Label : INDEX
-              'l'
         Label : ELEMENT
           {
           Label : NAME
@@ -62,5 +24,43 @@ Label : CODE
               'o'
         Label : ELEMENT
            
+        Label : ELEMENT
+          {
+          Label : NAME
+            [
+            Label : VARIABLE
+              $k
+            Label : INDEX
+              'l'
+        Label : ELEMENT
+           i j 
+        Label : ELEMENT
+          {
+          Label : NAME
+            ->
+            Label : METHOD
+              h
+              Label : ARGUMENTS
+                void
+            Label : OBJECT
+              $g
+        Label : ELEMENT
+           
+        Label : ELEMENT
+          {
+          Label : NAME
+            ->
+            Label : PROPERTY
+              f
+            Label : OBJECT
+              $e
+        Label : ELEMENT
+           d 
+        Label : ELEMENT
+          $c
+        Label : ELEMENT
+          $a
+        Label : ELEMENT
+           b 
     Label : LEFT
       $x

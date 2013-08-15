@@ -9,16 +9,14 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        Sequence
-        Label : ELEMENT
-          var
-          Label : NAME
-            $b
-          Label : VALUE
-            2
-        Label : ELEMENT
-          var
-          Label : NAME
-            $a
-          Label : VALUE
-            1
+        var
+        Label : NAME
+          $b
+        Label : VALUE
+          2
+      Label : ELEMENT
+        var
+        Label : NAME
+          $a
+        Label : VALUE
+          1

@@ -10,5 +10,5 @@ Label : CODE
     {
     Label : CODE
       ;
-      Label : CODE
+      Label : ELEMENT
         void

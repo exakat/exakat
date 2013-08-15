@@ -3,34 +3,32 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      while
-      Label : CONDITION
-        <=
-        Label : RIGHT
-          10
-        Label : LEFT
-          $i
-      Label : LOOP
-        ;
-        Label : ELEMENT
-          ;
-          Label : ELEMENT
-            ?
-            Label : CONDITION
-              $a
-            Label : THEN
-              $b
-            Label : ELSE
-              $c
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $x
-    Label : ELEMENT
-      =
+    while
+    Label : CONDITION
+      <=
       Label : RIGHT
-        1
+        10
       Label : LEFT
         $i
+    Label : LOOP
+      ;
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          ?
+          Label : CONDITION
+            $a
+          Label : THEN
+            $b
+          Label : ELSE
+            $c
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $x
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $i

@@ -35,16 +35,6 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
-          C4
-        Label : VALUE
-          ::
-          Label : CONSTANT
-            E
-          Label : CLASS
-            D
-      Label : ELEMENT
-        const
-        Label : NAME
           B3
         Label : VALUE
           '2'
@@ -73,6 +63,16 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
+          C4
+        Label : VALUE
+          ::
+          Label : CONSTANT
+            E
+          Label : CLASS
+            D
+      Label : ELEMENT
+        const
+        Label : NAME
           A5
         Label : VALUE
           1
@@ -92,26 +92,6 @@ Label : CODE
         const
         Label : NAME
           C5
-        Label : VALUE
-          ::
-          Label : CONSTANT
-            E
-          Label : CLASS
-            D
-      Label : ELEMENT
-        const
-        Label : NAME
-          C7
-        Label : VALUE
-          ::
-          Label : CONSTANT
-            E
-          Label : CLASS
-            D
-      Label : ELEMENT
-        const
-        Label : NAME
-          C6
         Label : VALUE
           ::
           Label : CONSTANT
@@ -145,6 +125,16 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
+          C6
+        Label : VALUE
+          ::
+          Label : CONSTANT
+            E
+          Label : CLASS
+            D
+      Label : ELEMENT
+        const
+        Label : NAME
           F6
         Label : VALUE
           4
@@ -172,6 +162,16 @@ Label : CODE
           B7
         Label : VALUE
           '2'
+      Label : ELEMENT
+        const
+        Label : NAME
+          C7
+        Label : VALUE
+          ::
+          Label : CONSTANT
+            E
+          Label : CLASS
+            D
       Label : ELEMENT
         const
         Label : NAME

@@ -5,15 +5,19 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      5
+      6
     Label : LEFT
-      $f
+      $g
+  Label : ELEMENT
+    :
+    Label : LABEL
+      G
   Label : ELEMENT
     =
     Label : RIGHT
-      4
+      5
     Label : LEFT
-      $e
+      $f
   Label : ELEMENT
     :
     Label : LABEL
@@ -33,19 +37,15 @@ Label : CODE
     Label : LABEL
       E
   Label : ELEMENT
+    =
+    Label : RIGHT
+      4
+    Label : LEFT
+      $e
+  Label : ELEMENT
     :
     Label : LABEL
       F
-  Label : ELEMENT
-    :
-    Label : LABEL
-      G
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      6
-    Label : LEFT
-      $g
   Label : ELEMENT
     =
     Label : RIGHT

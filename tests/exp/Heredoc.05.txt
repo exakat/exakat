@@ -17,22 +17,20 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          exit
-          Label : ARGUMENTS
-            void
-        Label : ELEMENT
-          ob_flush
-          Label : ARGUMENTS
-            void
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              <<< C
+        exit
+        Label : ARGUMENTS
+          void
+      Label : ELEMENT
+        ob_flush
+        Label : ARGUMENTS
+          void
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            <<< C
 
-              Label : STRING
-                D
+            Label : STRING
+              D
 

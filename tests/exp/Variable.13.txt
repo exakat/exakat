@@ -17,25 +17,25 @@ Label : CODE
           ${
           Label : NAME
             ->
-            Label : PROPERTY
-              property
+            Label : METHOD
+              method
+              Label : ARGUMENTS
+                void
             Label : OBJECT
               $object
-        Label : ELEMENT
-          
-
         Label : ELEMENT
           ;
 
 
         Label : ELEMENT
+          
+
+        Label : ELEMENT
           ${
           Label : NAME
             ->
-            Label : METHOD
-              method
-              Label : ARGUMENTS
-                void
+            Label : PROPERTY
+              property
             Label : OBJECT
               $object
     Label : LEFT

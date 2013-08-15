@@ -3,12 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      (object)
-      Label : CAST
-        $y
-    Label : ELEMENT
-      (object)
-      Label : CAST
-        $x
+    (object)
+    Label : CAST
+      $y
+  Label : ELEMENT
+    (object)
+    Label : CAST
+      $x

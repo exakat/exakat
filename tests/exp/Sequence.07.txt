@@ -3,10 +3,8 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      !
-      Label : NOT
-        $y
-    Label : ELEMENT
-      $x
+    !
+    Label : NOT
+      $y
+  Label : ELEMENT
+    $x

@@ -9,28 +9,26 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        Sequence
-        Label : ELEMENT
-          var
-          Label : NAME
-            $a
-          Label : VALUE
-            void
-        Label : ELEMENT
-          var
-          Label : NAME
-            $z
-          Label : VALUE
-            void
-        Label : ELEMENT
-          var
-          Label : NAME
-            $y
-          Label : VALUE
-            void
-        Label : ELEMENT
-          var
-          Label : NAME
-            $x
-          Label : VALUE
-            void
+        var
+        Label : NAME
+          $a
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $z
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $y
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $x
+        Label : VALUE
+          void

@@ -20,19 +20,19 @@ Label : CODE
             Label : CONDITION
               [
               Label : VARIABLE
-                $b
+                $e
               Label : INDEX
-                'c'
+                'f'
             Label : THEN
               'true'
             Label : ELSE
               'false'
         Label : ELEMENT
-          A
-        Label : ELEMENT
           
 
 D
+        Label : ELEMENT
+          A
         Label : ELEMENT
           ${
           Label : NAME
@@ -40,9 +40,9 @@ D
             Label : CONDITION
               [
               Label : VARIABLE
-                $e
+                $b
               Label : INDEX
-                'f'
+                'c'
             Label : THEN
               'true'
             Label : ELSE

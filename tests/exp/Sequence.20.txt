@@ -36,20 +36,20 @@ Label : CODE
       Label : STRING
         Concatenation
         Label : ELEMENT
-          $g
+          
+
         Label : ELEMENT
-          |
+          $i
         Label : ELEMENT
           |
         Label : ELEMENT
           $h
         Label : ELEMENT
-          
-
+          |
         Label : ELEMENT
           |
         Label : ELEMENT
-          $i
+          $g
     Label : LEFT
       $f
   Label : ELEMENT

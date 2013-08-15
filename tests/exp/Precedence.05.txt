@@ -3,44 +3,42 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          "\n"
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          &
-          Label : LEFT
-            &&
-            Label : LEFT
-              2
-            Label : RIGHT
-              3
-          Label : RIGHT
-            4
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          "\n"
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "\n"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        &
+        Label : LEFT
           &&
           Label : LEFT
-            &
-            Label : LEFT
-              2
-            Label : RIGHT
-              3
+            2
           Label : RIGHT
-            4
+            3
+        Label : RIGHT
+          4
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "\n"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        &&
+        Label : LEFT
+          &
+          Label : LEFT
+            2
+          Label : RIGHT
+            3
+        Label : RIGHT
+          4

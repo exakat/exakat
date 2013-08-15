@@ -17,11 +17,7 @@ Label : CODE
             Label : OBJECT
               $e
         Label : ELEMENT
-          /
-        Label : ELEMENT
-          {
-          Label : NAME
-            $a
+          A
         Label : ELEMENT
           {
           Label : NAME
@@ -33,8 +29,12 @@ Label : CODE
         Label : ELEMENT
           {
           Label : NAME
+            $a
+        Label : ELEMENT
+          {
+          Label : NAME
             $d
         Label : ELEMENT
-          !
+          B
     Label : LEFT
       $x

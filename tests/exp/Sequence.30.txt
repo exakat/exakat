@@ -13,50 +13,48 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        Sequence
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              !
-              Label : NOT
-                $c
-          Label : THEN
-            {
-            Label : CODE
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  false
-        Label : ELEMENT
-          return
-          Label : RETURN
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            !
+            Label : NOT
+              $c
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                false
+      Label : ELEMENT
+        return
+        Label : RETURN
+          ->
+          Label : METHOD
+            f
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  "
+                  Label : CONTAIN
+                    Concatenation
+                    Label : ELEMENT
+                      '
+                    Label : ELEMENT
+                      c
+                    Label : ELEMENT
+                      $d
+                Label : CONCAT
+                  b
+                Label : CONCAT
+                  "a"
+          Label : OBJECT
             ->
-            Label : METHOD
-              f
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    "
-                    Label : CONTAIN
-                      Concatenation
-                      Label : ELEMENT
-                        '
-                      Label : ELEMENT
-                        c
-                      Label : ELEMENT
-                        $d
-                  Label : CONCAT
-                    b
-                  Label : CONCAT
-                    "a"
+            Label : PROPERTY
+              e
             Label : OBJECT
-              ->
-              Label : PROPERTY
-                e
-              Label : OBJECT
-                $d
+              $d

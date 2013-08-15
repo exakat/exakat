@@ -3,40 +3,38 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      return
-      Label : RETURN
-        f
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            $z
-          Label : ARGUMENT
-            $y
-          Label : ARGUMENT
-            $x
-    Label : ELEMENT
-      return
-      Label : RETURN
-        ::
-        Label : PROPERTY
+    return
+    Label : RETURN
+      f
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          $z
+        Label : ARGUMENT
           $y
-        Label : CLASS
-          b
-    Label : ELEMENT
-      return
-      Label : RETURN
-        ::
-        Label : CONSTANT
-          y
-        Label : CLASS
-          a
-    Label : ELEMENT
-      return
-      Label : RETURN
-        ->
-        Label : PROPERTY
-          x
-        Label : OBJECT
-          $this
+        Label : ARGUMENT
+          $x
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ::
+      Label : PROPERTY
+        $y
+      Label : CLASS
+        b
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ::
+      Label : CONSTANT
+        y
+      Label : CLASS
+        a
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ->
+      Label : PROPERTY
+        x
+      Label : OBJECT
+        $this

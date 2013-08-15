@@ -3,28 +3,26 @@
 Label : CODE
   ;
   Label : ELEMENT
-    Sequence
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        (
-        Label : CODE
-          1
-      Label : THEN
-        {
-        Label : CODE
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              true
-    Label : ELEMENT
-      require_once
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          b
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'c'
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        1
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            true
+  Label : ELEMENT
+    require_once
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        b
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'c'

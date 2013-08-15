@@ -9,16 +9,14 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          var
-          Label : VALUE
-            void
-          Label : DEFINE
-            $a
-        Label : ELEMENT
-          const
-          Label : NAME
-            b
-          Label : VALUE
-            2
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $a
+      Label : ELEMENT
+        const
+        Label : NAME
+          b
+        Label : VALUE
+          2
