@@ -1,51 +1,47 @@
-Final sequence
-Label : ELEMENT
-  <?php 
-  Label : CODE
-    Sequence
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          __
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'B'
-    Label : ELEMENT
-      A
-    Label : ELEMENT
-      ->
-      Label : METHOD
-        g
+<?php 
+Label : CODE
+  Sequence
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        __
         Label : ARGUMENTS
           void
-      Label : OBJECT
-        ::
-        Label : METHOD
-          D
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              __
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'F'
-        Label : CLASS
-          C
-    Label : ELEMENT
-      H
-    Label : ELEMENT
-      echo
+          Label : ARGUMENT
+            'B'
+  Label : ELEMENT
+    A
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      g
       Label : ARGUMENTS
         void
-        Label : ARGUMENT
-          I
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'J'
-Label : ELEMENT
-  K
+    Label : OBJECT
+      ::
+      Label : METHOD
+        D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            __
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'F'
+      Label : CLASS
+        C
+  Label : ELEMENT
+    H
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        I
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'J'

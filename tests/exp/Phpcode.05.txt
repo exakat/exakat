@@ -1,5 +1,1 @@
-Final sequence
-Label : ELEMENT
-  A
-Label : ELEMENT
-  B
+A
