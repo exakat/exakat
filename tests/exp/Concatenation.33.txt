@@ -9,22 +9,22 @@ Label : CODE
       Label : CONTAIN
         Concatenation
         Label : ELEMENT
+          -01'
+        Label : ELEMENT
+          $e
+        Label : ELEMENT
+          -
+        Label : ELEMENT
+          $d
+        Label : ELEMENT
+           '
+        Label : ELEMENT
+          a 
+        Label : ELEMENT
           ->
           Label : PROPERTY
             c
           Label : OBJECT
             $b
-        Label : ELEMENT
-          a 
-        Label : ELEMENT
-           '
-        Label : ELEMENT
-          $d
-        Label : ELEMENT
-          -01'
-        Label : ELEMENT
-          -
-        Label : ELEMENT
-          $e
     Label : LEFT
       $x

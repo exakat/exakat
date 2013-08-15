@@ -121,7 +121,7 @@ foreach($classes as $class) {
 $total = Tokenizer\Token::countTotalToken();
 $count = Tokenizer\Token::countLeftToken() + 1;
 
-$extra_rounds = 4;
+$extra_rounds = 5;
 $prev = array();
 for($i = 0; $i < $extra_rounds + 1; $i++) {
     $prev[$i] = $count + $i;
@@ -155,11 +155,12 @@ while(check_prev($prev, $extra_rounds)) {
     $rend = microtime(true);
     fwrite($log, "round $round)\t".(($rend - $rbegin)*1000)."\n");
 
-    $count = Token::countLeftToken();
+//    $count = Token::countLeftToken();
+    $count = Token::countLeftNext();
     fwrite($log, "Remaining token to process : $count\n");
-    fwrite($log, "Remaining regex : ".count($regex)."\n");
+    fwrite($log, "Remaining regex : ".count($regex_next)." (".(count($regex) - count($regex_next)).")\n");
 
-    if ($count) {
+    if ($count > 3) {
         display( "$round) Remains $count of $total tokens to process! \n");
     } else {
         display( "$round) All $total tokens have been processed! \n");

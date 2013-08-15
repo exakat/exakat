@@ -58,8 +58,8 @@ class Token {
                                  '_Class', // Because to Class_tmp
                                  '_Abstract',
                                  '_Final',
-                                 '_Case',    //Check index in the regex
-                                 '_Default', //Check index in the regex
+                                 '_Case',   
+                                 '_Default',
                                  '_Switch',
                                  '_Try',
                                  '_Catch',
@@ -167,11 +167,23 @@ class Token {
         }
     }
 
+    public function checkRemaining2() {
+        $class = str_replace("Tokenizer\\", '', get_class($this));
+        if (in_array($class, Token::$types)) {
+            $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
+
+            return Token::queryOne($query) > 0;
+        } else {
+            return true;
+        }
+    }
+    
     static public function leftInIndex($class) {
         $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
 
         return Token::queryOne($query);
     }
+
     
     static public function cleanHidden() {
         $query = " 

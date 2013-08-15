@@ -3,12 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
-    Sequence
-    Label : ELEMENT
-      :
-      Label : LABEL
-        cleanupCookie
-    Label : ELEMENT
-      GOTO
-      Label : LABEL
-        cleanupCookie
+    :
+    Label : LABEL
+      cleanupCookie
+  Label : ELEMENT
+    GOTO
+    Label : LABEL
+      cleanupCookie

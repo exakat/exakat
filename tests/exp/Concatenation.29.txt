@@ -9,45 +9,23 @@ Label : CODE
       Label : CONTAIN
         Concatenation
         Label : ELEMENT
-          .
-        Label : ELEMENT
-          .
-        Label : ELEMENT
           {
           Label : NAME
             [
             Label : VARIABLE
-              $i
+              [
+              Label : VARIABLE
+                [
+                Label : VARIABLE
+                  $i
+                Label : INDEX
+                  'g'
+              Label : INDEX
+                'x'
             Label : INDEX
-              'a'
-        Label : ELEMENT
-          {
-          Label : NAME
-            [
-            Label : VARIABLE
-              $i
-            Label : INDEX
-              'b'
+              'x'
         Label : ELEMENT
           .
-        Label : ELEMENT
-          {
-          Label : NAME
-            [
-            Label : VARIABLE
-              $i
-            Label : INDEX
-              'c'
-        Label : ELEMENT
-          {
-          Label : NAME
-            [
-            Label : VARIABLE
-              $i
-            Label : INDEX
-              'd'
-        Label : ELEMENT
-          -
         Label : ELEMENT
           {
           Label : NAME
@@ -65,22 +43,44 @@ Label : CODE
             Label : INDEX
               'e'
         Label : ELEMENT
+          -
+        Label : ELEMENT
+          {
+          Label : NAME
+            [
+            Label : VARIABLE
+              $i
+            Label : INDEX
+              'd'
+        Label : ELEMENT
           .
         Label : ELEMENT
           {
           Label : NAME
             [
             Label : VARIABLE
-              [
-              Label : VARIABLE
-                [
-                Label : VARIABLE
-                  $i
-                Label : INDEX
-                  'g'
-              Label : INDEX
-                'x'
+              $i
             Label : INDEX
-              'x'
+              'c'
+        Label : ELEMENT
+          .
+        Label : ELEMENT
+          {
+          Label : NAME
+            [
+            Label : VARIABLE
+              $i
+            Label : INDEX
+              'b'
+        Label : ELEMENT
+          {
+          Label : NAME
+            [
+            Label : VARIABLE
+              $i
+            Label : INDEX
+              'a'
+        Label : ELEMENT
+          .
     Label : LEFT
       $x

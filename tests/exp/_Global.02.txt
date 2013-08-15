@@ -3,28 +3,26 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      global
-      Label : VALUE
-        void
-      Label : DEFINE
-        $d
-    Label : ELEMENT
-      global
-      Label : VALUE
-        void
-      Label : DEFINE
-        $c
-    Label : ELEMENT
-      global
-      Label : VALUE
-        void
-      Label : DEFINE
-        $b
-    Label : ELEMENT
-      global
-      Label : VALUE
-        void
-      Label : DEFINE
-        $a
+    global
+    Label : VALUE
+      void
+    Label : DEFINE
+      $d
+  Label : ELEMENT
+    global
+    Label : VALUE
+      void
+    Label : DEFINE
+      $c
+  Label : ELEMENT
+    global
+    Label : VALUE
+      void
+    Label : DEFINE
+      $b
+  Label : ELEMENT
+    global
+    Label : VALUE
+      void
+    Label : DEFINE
+      $a

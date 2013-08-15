@@ -1,66 +1,58 @@
 <?php
 
-Label : NEXT
-  "
-  Label : NEXT
-    Concatenation
-    Label : ELEMENT
-      ea
-    Label : NEXT
-      ${
-      Label : NAME
-        b
-      Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
+    "
+    Label : CONTAIN
+      Concatenation
+      Label : ELEMENT
+        r
+      Label : ELEMENT
+        ${
+        Label : NAME
+          q
+      Label : ELEMENT
+        p
+      Label : ELEMENT
+        ${
+        Label : NAME
+          o
+      Label : ELEMENT
+        n
+      Label : ELEMENT
+        {
+        Label : NAME
+          $m
+      Label : ELEMENT
+        l
+      Label : ELEMENT
+        ${
+        Label : NAME
+          k
+      Label : ELEMENT
+        j
+      Label : ELEMENT
+        ${
+        Label : NAME
+          i
+      Label : ELEMENT
+        h
+      Label : ELEMENT
+        ${
+        Label : NAME
+          g
+      Label : ELEMENT
+        ef
+      Label : ELEMENT
+        ${
+        Label : NAME
+          d
+      Label : ELEMENT
         c
-        Label : NEXT
-          ${
-          Label : NAME
-            d
-          Label : NEXT
-            e
-            Label : NEXT
-              "_CLOSE
-              Label : NEXT
-                ;
-                Label : NEXT
-                  ?>
-                  Label : NEXT
-                    /**/
-                    Label : NEXT
-                      /* * */
-    Label : ELEMENT
-      ${
-      Label : NAME
-        d
-    Label : ELEMENT
-      c
-    Label : ELEMENT
-      ${
-      Label : NAME
-        b
-    Label : ELEMENT
-      ea
-    Label : ELEMENT
-      ${
-      Label : NAME
-        d
-    Label : ELEMENT
-      c
-    Label : ELEMENT
-      ${
-      Label : NAME
-        b
-    Label : ELEMENT
-      ea
-    Label : ELEMENT
-      ${
-      Label : NAME
-        d
-    Label : ELEMENT
-      c
-    Label : ELEMENT
-      a
-    Label : ELEMENT
-      ${
-      Label : NAME
-        b
+      Label : ELEMENT
+        a
+      Label : ELEMENT
+        ${
+        Label : NAME
+          b

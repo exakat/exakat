@@ -3,22 +3,20 @@
 Label : CODE
   ;
   Label : ELEMENT
-    Sequence
-    Label : ELEMENT
-      global
-      Label : NAME
-        $c
-      Label : VALUE
-        void
-    Label : ELEMENT
-      global
-      Label : NAME
-        $b
-      Label : VALUE
-        void
-    Label : ELEMENT
-      global
-      Label : NAME
-        $a
-      Label : VALUE
-        void
+    global
+    Label : NAME
+      $c
+    Label : VALUE
+      void
+  Label : ELEMENT
+    global
+    Label : NAME
+      $b
+    Label : VALUE
+      void
+  Label : ELEMENT
+    global
+    Label : NAME
+      $a
+    Label : VALUE
+      void

@@ -11,18 +11,18 @@ Label : CODE
         Label : ELEMENT
           {
           Label : NAME
-            $b
-        Label : ELEMENT
-          a=
-        Label : ELEMENT
-          &
-        Label : ELEMENT
-          $c
+            $d
         Label : ELEMENT
           =
         Label : ELEMENT
+          $c
+        Label : ELEMENT
+          &
+        Label : ELEMENT
+          a=
+        Label : ELEMENT
           {
           Label : NAME
-            $d
+            $b
     Label : LEFT
       $x

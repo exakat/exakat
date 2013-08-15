@@ -3,40 +3,38 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ;
-    Label : ELEMENT
-      new
-      Label : NEW
-        \
-        Label : ELEMENT
-          f
-        Label : ELEMENT
-          e
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            2
-          Label : ARGUMENT
-            3
-    Label : ELEMENT
-      new
-      Label : NEW
-        \
-        Label : ELEMENT
-          d
-        Label : ELEMENT
-          c
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            1
-    Label : ELEMENT
-      new
-      Label : NEW
-        \
-        Label : ELEMENT
-          b
-        Label : ELEMENT
-          a
-        Label : ARGUMENTS
-          void
+    new
+    Label : NEW
+      \
+      Label : ELEMENT
+        f
+      Label : ELEMENT
+        e
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+  Label : ELEMENT
+    new
+    Label : NEW
+      \
+      Label : ELEMENT
+        d
+      Label : ELEMENT
+        c
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          1
+  Label : ELEMENT
+    new
+    Label : NEW
+      \
+      Label : ELEMENT
+        b
+      Label : ELEMENT
+        a
+      Label : ARGUMENTS
+        void

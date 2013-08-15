@@ -9,48 +9,46 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          static
-          Label : VALUE
-            void
-          Label : DEFINE
-            =
-            Label : RIGHT
-              '23'
-            Label : LEFT
-              $e
-        Label : ELEMENT
-          static
-          Label : VALUE
-            void
-          Label : DEFINE
-            =
-            Label : RIGHT
-              array
-              Label : ARGUMENTS
-                void
-            Label : LEFT
-              $d
-        Label : ELEMENT
-          static
-          Label : VALUE
-            void
-          Label : DEFINE
-            =
-            Label : RIGHT
-              -
-              Label : SIGN
-                2
-            Label : LEFT
-              $c
-        Label : ELEMENT
-          static
-          Label : VALUE
-            void
-          Label : DEFINE
-            =
-            Label : RIGHT
-              1
-            Label : LEFT
-              $b
+        static
+        Label : VALUE
+          void
+        Label : DEFINE
+          =
+          Label : RIGHT
+            '23'
+          Label : LEFT
+            $e
+      Label : ELEMENT
+        static
+        Label : VALUE
+          void
+        Label : DEFINE
+          =
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void
+          Label : LEFT
+            $d
+      Label : ELEMENT
+        static
+        Label : VALUE
+          void
+        Label : DEFINE
+          =
+          Label : RIGHT
+            -
+            Label : SIGN
+              2
+          Label : LEFT
+            $c
+      Label : ELEMENT
+        static
+        Label : VALUE
+          void
+        Label : DEFINE
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $b
