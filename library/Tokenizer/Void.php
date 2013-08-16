@@ -3,11 +3,11 @@
 namespace Tokenizer;
 
 class Void extends TokenAuto {
+    static public $operators = array('T_OPEN_PARENTHESIS', 'T_SEMICOLON');
     function _check() {
     // needed for for(;;)
     
-        $this->conditions = array(0 => array('token' => array('T_OPEN_PARENTHESIS', 'T_SEMICOLON'),
-                                             'atom' => 'none'),
+        $this->conditions = array(0 => array('token' => Void::$operators),
                                   1 => array('token' => array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON'),
                                              'atom' => 'none'),
         );
