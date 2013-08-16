@@ -11,6 +11,7 @@ include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
 $args = $argv;
+$begin = microtime(true);
 
 if ($id = array_search('-v', $args)) {
     define('VERBOSE', true);
@@ -131,7 +132,11 @@ $round = 0;
 $log = fopen('log/analyzer.log', 'w');
 
 $wbegin = microtime(true);
+$regex_time = 0;
 $regex_next = $regex;
+$end = microtime(true);
+fwrite($log, "initialisation : ".(($end - $begin) * 1000)."\n");
+
 while(check_prev($prev, $extra_rounds)) { 
     $rbegin = microtime(true);
     $round++;
@@ -147,19 +152,25 @@ while(check_prev($prev, $extra_rounds)) {
             $regex_next[$name] = $r;
         }
         $end = microtime(true);
+        
+        $regex_time += $end - $begin;
 
         fwrite($log, get_class($r)."\t".(($end - $begin) * 1000)."\t".Token::leftInIndex($name)."\n");
     }
     unset($precedence);
     
     $rend = microtime(true);
+    $begin = microtime(true);
     fwrite($log, "round $round)\t".(($rend - $rbegin)*1000)."\n");
 
 //    $count = Token::countLeftToken();
     $count = Token::countLeftNext();
+    $end = microtime(true);
+    fwrite($log, "countLeftNext : ".(($end - $begin) * 1000)."\n");
+
     fwrite($log, "Remaining token to process : $count\n");
     fwrite($log, "Remaining regex : ".count($regex_next)." (".(count($regex) - count($regex_next)).")\n");
-
+    
     if ($count > 3) {
         display( "$round) Remains $count of $total tokens to process! \n");
     } else {
@@ -169,9 +180,11 @@ while(check_prev($prev, $extra_rounds)) {
         }
         break 1;
     }
+    
 }
 $wend = microtime(true);
-fwrite($log, "total while $round)\t".(($wend - $wbegin)*1000)."\n");
+fwrite($log, "Total while $round)\t".(($wend - $wbegin)*1000)."\n");
+fwrite($log, "Total regex time\t".(($regex_time) * 1000)."\t\n");
 
 Token::cleanHidden();
 
