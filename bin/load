@@ -345,7 +345,12 @@ function process_file($filename) {
             }
         }
     }
-    
+
+
+    if (!isset($T)) { 
+        print "Empty script. Ignoring\n";    
+        return false;
+    }
     $T[0]->setProperty('root', 'true')->save();
     
     $T[-1] = $client->makeNode()->setProperty('token', 'T_ROOT')
