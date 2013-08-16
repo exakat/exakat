@@ -4,14 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     if
-    Label : THEN
-      {
-      Label : CODE
-        void
     Label : CONDITION
       (
       Label : CODE
         $a
+    Label : THEN
+      {
+      Label : CODE
+        void
   Label : ELEMENT
     throw
     Label : THROW

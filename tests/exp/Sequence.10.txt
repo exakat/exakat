@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  Sequence
   Label : ELEMENT
     switch
     Label : NAME

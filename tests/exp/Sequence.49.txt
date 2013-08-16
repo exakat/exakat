@@ -14,6 +14,16 @@ Label : CODE
   Label : ELEMENT
     A
   Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        I
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'J'
+  Label : ELEMENT
     ->
     Label : METHOD
       g
@@ -35,13 +45,3 @@ Label : CODE
         C
   Label : ELEMENT
     H
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        I
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'J'
