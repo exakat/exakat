@@ -2,6 +2,24 @@
 
 Label : CODE
   function
+  Label : NAME
+    x
+  Label : ARGUMENTS
+    ,
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        Stdclass
+      Label : VARIABLE
+        $c
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        Stdclass
+      Label : VARIABLE
+        $b
+    Label : ARGUMENT
+      $a
   Label : BLOCK
     {
     Label : CODE
@@ -10,21 +28,3 @@ Label : CODE
         return
         Label : RETURN
           1
-  Label : NAME
-    x
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        $b
-      Label : CLASS
-        Stdclass
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        Stdclass
-      Label : VARIABLE
-        $c
-    Label : ARGUMENT
-      $a

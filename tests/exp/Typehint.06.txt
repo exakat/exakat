@@ -4,16 +4,10 @@ Label : CODE
   function
   Label : NAME
     x
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          1
   Label : ARGUMENTS
     ,
+    Label : ARGUMENT
+      $c
     Label : ARGUMENT
       Typehint
       Label : CLASS
@@ -22,9 +16,15 @@ Label : CODE
         $b
     Label : ARGUMENT
       Typehint
-      Label : VARIABLE
-        $a
       Label : CLASS
         Stdclass
-    Label : ARGUMENT
-      $c
+      Label : VARIABLE
+        $a
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          1

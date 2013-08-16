@@ -2,20 +2,20 @@
 
 Label : CODE
   function
+  Label : NAME
+    x
   Label : ARGUMENTS
     ,
-    Label : ARGUMENT
-      $a
-    Label : ARGUMENT
-      $b
     Label : ARGUMENT
       Typehint
       Label : CLASS
         Stdclass
       Label : VARIABLE
         $c
-  Label : NAME
-    x
+    Label : ARGUMENT
+      $b
+    Label : ARGUMENT
+      $a
   Label : BLOCK
     {
     Label : CODE

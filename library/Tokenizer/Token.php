@@ -83,6 +83,7 @@ class Token {
                                  'Concatenation',
                                  // 'ConcatenationAtom', 
                                  'Void', 
+                                 'Typehint',
                                 );
     
     function __construct($client) {
@@ -117,7 +118,8 @@ class Token {
     }
 
     static function countLeftToken() {
-        $result = Token::query("g.V.has('atom',null).except([g.v(0)]).hasNot('hidden', true).hasNot('index', 'yes').count()");
+//        $result = Token::query("g.V.has('atom',null).except([g.v(0)]).hasNot('hidden', true).hasNot('index', 'yes').count()");
+        $result = Token::query("g.V.has('root', 'true').in('NEXT').out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
     	
     	return $result[0][0];
     }

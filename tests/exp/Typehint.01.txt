@@ -2,14 +2,6 @@
 
 Label : CODE
   function
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          1
   Label : NAME
     x
   Label : ARGUMENTS
@@ -20,3 +12,11 @@ Label : CODE
         Stdclass
       Label : VARIABLE
         $a
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          1

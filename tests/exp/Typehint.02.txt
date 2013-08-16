@@ -2,14 +2,16 @@
 
 Label : CODE
   function
+  Label : NAME
+    x
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
       Typehint
-      Label : VARIABLE
-        $b
       Label : CLASS
         Stdclass
+      Label : VARIABLE
+        $b
     Label : ARGUMENT
       Typehint
       Label : CLASS
@@ -24,5 +26,3 @@ Label : CODE
         return
         Label : RETURN
           1
-  Label : NAME
-    x
