@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  for
+  Label : CODE
+    Block With For
+    Label : CODE
+      =
+      Label : LEFT
+        [
+        Label : INDEX
+          $f
+        Label : VARIABLE
+          ->
+          Label : OBJECT
+            $d
+          Label : PROPERTY
+            e
+      Label : RIGHT
+        $g
+  Label : INCREMENT
+    ++
+    Label : POSTPLUSPLUS
+      $i
+  Label : INIT
+    =
+    Label : RIGHT
+      0
+    Label : LEFT
+      $i
+  Label : FINAL
+    <
+    Label : LEFT
+      $i
+    Label : RIGHT
+      10
