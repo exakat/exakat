@@ -16,6 +16,14 @@ Label : CODE
   Label : ELEMENT
     A
   Label : ELEMENT
+    =
+    Label : LEFT
+      $d
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -37,11 +45,3 @@ Label : CODE
             [
             Label : VARIABLE
               $f
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
-    Label : LEFT
-      $d

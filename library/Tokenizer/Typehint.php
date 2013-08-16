@@ -15,7 +15,7 @@ class Typehint extends TokenAuto {
         $this->checkAuto();
 
         $this->conditions = array(-2 => array('filterOut' => 'T_CATCH'),
-                                   0 => array('token' => 'T_ARRAY'),
+                                   0 => array('token' => 'T_ARRAY', 'atom' => 'none'),
                                    1 => array('atom' => array('Variable', 'Assignation', 'Reference'    )),
                                    2 => array('filterOut' => Assignation::$operators),
         );
