@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  Sequence
   Label : ELEMENT
     if
     Label : CONDITION

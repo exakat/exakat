@@ -11,7 +11,7 @@ Label : CODE
       Label : CODE
         Block With Sequence For Default
         Label : CODE
-          ;
+          Sequence
           Label : ELEMENT
             if
             Label : CONDITION

@@ -2,15 +2,13 @@
 Label : CODE
   Sequence
   Label : ELEMENT
-    include
+    b
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        (
-        Label : CODE
-          'a.php'
+        'c'
   Label : ELEMENT
-    A
+    B
   Label : ELEMENT
     include
     Label : ARGUMENTS
@@ -20,10 +18,12 @@ Label : CODE
         Label : CODE
           'b.php'
   Label : ELEMENT
-    B
-  Label : ELEMENT
-    b
+    include
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        'c'
+        (
+        Label : CODE
+          'a.php'
+  Label : ELEMENT
+    A

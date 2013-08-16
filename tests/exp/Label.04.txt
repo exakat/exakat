@@ -1,7 +1,11 @@
 <?php
 
 Label : CODE
-  ;
+  Sequence
+  Label : ELEMENT
+    :
+    Label : LABEL
+      C
   Label : ELEMENT
     :
     Label : LABEL
@@ -16,10 +20,6 @@ Label : CODE
       1
     Label : LEFT
       $a
-  Label : ELEMENT
-    :
-    Label : LABEL
-      C
   Label : ELEMENT
     goto
     Label : LABEL

@@ -15,7 +15,21 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            ;
+            Sequence
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  $c
+              Label : THEN
+                {
+                Label : CODE
+                  ;
+                  Label : ELEMENT
+                    ++
+                    Label : POSTPLUSPLUS
+                      $d
             Label : ELEMENT
               =
               Label : RIGHT
@@ -52,20 +66,6 @@ Label : CODE
                   void
               Label : LEFT
                 $indexed
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $c
-              Label : THEN
-                {
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    ++
-                    Label : POSTPLUSPLUS
-                      $d
       Label : ELEMENT
         default
         Label : CODE

@@ -9,63 +9,9 @@ Label : CODE
   Label : THEN
     {
     Label : CODE
-      ;
+      Sequence
       Label : ELEMENT
-        A
-
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
-      Label : ELEMENT
-        B
-
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $c
-      Label : ELEMENT
-        C
-
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $d
-      Label : ELEMENT
-        D
-
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $e
-      Label : ELEMENT
-        E
-
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $f
-      Label : ELEMENT
-        F
-
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $g
-      Label : ELEMENT
-        G
+        I
 
       Label : ELEMENT
         echo
@@ -81,7 +27,61 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $i
+            $g
       Label : ELEMENT
-        I
+        G
 
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $f
+      Label : ELEMENT
+        F
+
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
+      Label : ELEMENT
+        E
+
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $d
+      Label : ELEMENT
+        D
+
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $c
+      Label : ELEMENT
+        C
+
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+      Label : ELEMENT
+        B
+
+      Label : ELEMENT
+        A
+
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $i

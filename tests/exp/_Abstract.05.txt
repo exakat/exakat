@@ -11,21 +11,13 @@ Label : CODE
       Label : CODE
         Sequence
         Label : ELEMENT
-          abstract
-          Label : ABSTRACT
-            function
-            Label : NAME
-              a
-            Label : ARGUMENTS
-              void
-        Label : ELEMENT
-          protected
+          static
           Label : VALUE
             void
           Label : DEFINE
             function
             Label : NAME
-              b
+              d
             Label : ARGUMENTS
               void
             Label : BLOCK
@@ -41,13 +33,21 @@ Label : CODE
             Label : ARGUMENTS
               void
         Label : ELEMENT
-          static
+          abstract
+          Label : ABSTRACT
+            function
+            Label : NAME
+              a
+            Label : ARGUMENTS
+              void
+        Label : ELEMENT
+          protected
           Label : VALUE
             void
           Label : DEFINE
             function
             Label : NAME
-              d
+              b
             Label : ARGUMENTS
               void
             Label : BLOCK

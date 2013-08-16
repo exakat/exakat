@@ -2,14 +2,6 @@
 
 Label : CODE
   if
-  Label : THEN
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $x
   Label : CONDITION
     (
     Label : CODE
@@ -18,24 +10,6 @@ Label : CODE
         (
         Label : CODE
           ||
-          Label : RIGHT
-            instanceof
-            Label : RIGHT
-              ArrayAccess
-            Label : LEFT
-              ->
-              Label : OBJECT
-                [
-                Label : INDEX
-                  $g
-                Label : VARIABLE
-                  ->
-                  Label : PROPERTY
-                    f
-                  Label : OBJECT
-                    $e
-              Label : PROPERTY
-                h
           Label : LEFT
             is_array
             Label : ARGUMENTS
@@ -54,3 +28,29 @@ Label : CODE
                       $a
                   Label : INDEX
                     $c
+          Label : RIGHT
+            instanceof
+            Label : RIGHT
+              ArrayAccess
+            Label : LEFT
+              ->
+              Label : PROPERTY
+                h
+              Label : OBJECT
+                [
+                Label : VARIABLE
+                  ->
+                  Label : PROPERTY
+                    f
+                  Label : OBJECT
+                    $e
+                Label : INDEX
+                  $g
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x

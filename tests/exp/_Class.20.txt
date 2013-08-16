@@ -11,6 +11,12 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
+          c
+        Label : VALUE
+          3
+      Label : ELEMENT
+        const
+        Label : NAME
           a
         Label : VALUE
           1
@@ -20,9 +26,3 @@ Label : CODE
           b
         Label : VALUE
           2
-      Label : ELEMENT
-        const
-        Label : NAME
-          c
-        Label : VALUE
-          3

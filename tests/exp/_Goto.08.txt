@@ -1,15 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    :
-    Label : LABEL
-      cleanupCookie
-  Label : ELEMENT
-    GOTO
-    Label : LABEL
-      cleanupCookie
+  Sequence
   Label : ELEMENT
     switch
     Label : NAME
@@ -26,3 +18,11 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $y
+  Label : ELEMENT
+    :
+    Label : LABEL
+      cleanupCookie
+  Label : ELEMENT
+    GOTO
+    Label : LABEL
+      cleanupCookie

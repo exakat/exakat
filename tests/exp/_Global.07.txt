@@ -5,6 +5,12 @@ Label : CODE
   Label : ELEMENT
     global
     Label : NAME
+      $a
+    Label : VALUE
+      void
+  Label : ELEMENT
+    global
+    Label : NAME
       $c
     Label : VALUE
       void
@@ -12,11 +18,5 @@ Label : CODE
     global
     Label : NAME
       $b
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $a
     Label : VALUE
       void

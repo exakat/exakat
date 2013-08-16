@@ -15,6 +15,14 @@ Label : CODE
           Label : ABSTRACT
             function
             Label : NAME
+              c
+            Label : ARGUMENTS
+              void
+        Label : ELEMENT
+          abstract
+          Label : ABSTRACT
+            function
+            Label : NAME
               a
             Label : ARGUMENTS
               void
@@ -24,13 +32,5 @@ Label : CODE
             function
             Label : NAME
               b
-            Label : ARGUMENTS
-              void
-        Label : ELEMENT
-          abstract
-          Label : ABSTRACT
-            function
-            Label : NAME
-              c
             Label : ARGUMENTS
               void

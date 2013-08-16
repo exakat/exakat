@@ -7,7 +7,13 @@ Label : CODE
   Label : BLOCK
     {
     Label : CODE
-      ;
+      Sequence
+      Label : ELEMENT
+        var
+        Label : NAME
+          $y
+        Label : VALUE
+          void
       Label : ELEMENT
         var
         Label : NAME
@@ -18,12 +24,6 @@ Label : CODE
         var
         Label : NAME
           $z
-        Label : VALUE
-          void
-      Label : ELEMENT
-        var
-        Label : NAME
-          $y
         Label : VALUE
           void
       Label : ELEMENT

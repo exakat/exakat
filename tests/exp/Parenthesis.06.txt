@@ -5,6 +5,44 @@ Label : CODE
   Label : ELEMENT
     function
     Label : NAME
+      c
+    Label : ARGUMENTS
+      void
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            (
+            Label : CODE
+              ?
+              Label : CONDITION
+                (
+                Label : CODE
+                  ::
+                  Label : PROPERTY
+                    $b
+                  Label : CLASS
+                    a
+              Label : THEN
+                c
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ->
+                    Label : PROPERTY
+                      e
+                    Label : OBJECT
+                      $d
+              Label : ELSE
+                f
+                Label : ARGUMENTS
+                  void
+  Label : ELEMENT
+    function
+    Label : NAME
       a
     Label : ARGUMENTS
       void
@@ -62,44 +100,6 @@ Label : CODE
                   ::
                   Label : CONSTANT
                     b
-                  Label : CLASS
-                    a
-              Label : THEN
-                c
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : PROPERTY
-                      e
-                    Label : OBJECT
-                      $d
-              Label : ELSE
-                f
-                Label : ARGUMENTS
-                  void
-  Label : ELEMENT
-    function
-    Label : NAME
-      c
-    Label : ARGUMENTS
-      void
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            (
-            Label : CODE
-              ?
-              Label : CONDITION
-                (
-                Label : CODE
-                  ::
-                  Label : PROPERTY
-                    $b
                   Label : CLASS
                     a
               Label : THEN

@@ -17,7 +17,11 @@ Label : CODE
               Label : ARGUMENTS
                 ,
                 Label : ARGUMENT
-                  0
+                  ->
+                  Label : PROPERTY
+                    year
+                  Label : OBJECT
+                    $b
                 Label : ARGUMENT
                   0
                 Label : ARGUMENT
@@ -26,17 +30,13 @@ Label : CODE
                     1
                   Label : LEFT
                     ->
-                    Label : OBJECT
-                      $a
                     Label : PROPERTY
                       month
+                    Label : OBJECT
+                      $a
                 Label : ARGUMENT
                   0
                 Label : ARGUMENT
-                  ->
-                  Label : PROPERTY
-                    year
-                  Label : OBJECT
-                    $b
+                  0
                 Label : ARGUMENT
                   0

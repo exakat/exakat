@@ -1,27 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $y
-    Label : RIGHT
-      'a'
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      new
-      Label : NEW
-        ::
-        Label : CLASS
-          C
-        Label : METHOD
-          $y
-          Label : ARGUMENTS
-            void
-    Label : LEFT
-      $x
+  Sequence
   Label : ELEMENT
     class
     Label : NAME
@@ -58,3 +38,23 @@ Label : CODE
                 'f'
               Label : LEFT
                 $y
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'a'
+    Label : LEFT
+      $y
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        ::
+        Label : METHOD
+          $y
+          Label : ARGUMENTS
+            void
+        Label : CLASS
+          C
+    Label : LEFT
+      $x

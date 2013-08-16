@@ -4,14 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      [
-      Label : VARIABLE
-        ->
-        Label : PROPERTY
-          b
-        Label : OBJECT
-          $a
     Label : RIGHT
       c
       Label : ARGUMENTS
@@ -32,3 +24,11 @@ Label : CODE
                 g
               Label : OBJECT
                 $f
+    Label : LEFT
+      [
+      Label : VARIABLE
+        ->
+        Label : PROPERTY
+          b
+        Label : OBJECT
+          $a

@@ -3,71 +3,7 @@
 Label : CODE
   Sequence
   Label : ELEMENT
-    while
-    Label : LOOP
-      Block With While
-      Label : CODE
-        {
-        Label : CODE
-          ;
-          Label : ELEMENT
-            if
-            Label : THEN
-              {
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  break
-                  Label : LEVEL
-                    void
-            Label : CONDITION
-              (
-              Label : CODE
-                ||
-                Label : LEFT
-                  !=
-                  Label : LEFT
-                    substr
-                    Label : ARGUMENTS
-                      ,
-                      Label : ARGUMENT
-                        6
-                      Label : ARGUMENT
-                        7
-                      Label : ARGUMENT
-                        $c
-                  Label : RIGHT
-                    'd'
-                Label : RIGHT
-                  empty
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $e
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              h
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  $g
-                Label : ARGUMENT
-                  8
-            Label : LEFT
-              $f
-    Label : CONDITION
-      1
-  Label : ELEMENT
     if
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            false
     Label : CONDITION
       (
       Label : CODE
@@ -81,11 +17,11 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                $a
-              Label : ARGUMENT
                 1
               Label : ARGUMENT
                 0
+              Label : ARGUMENT
+                $a
         Label : RIGHT
           !=
           Label : RIGHT
@@ -95,8 +31,72 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                $b
+                4
               Label : ARGUMENT
                 3
               Label : ARGUMENT
-                4
+                $b
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            false
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      1
+    Label : LOOP
+      Block With While
+      Label : CODE
+        {
+        Label : CODE
+          Sequence
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ||
+                Label : LEFT
+                  !=
+                  Label : RIGHT
+                    'd'
+                  Label : LEFT
+                    substr
+                    Label : ARGUMENTS
+                      ,
+                      Label : ARGUMENT
+                        7
+                      Label : ARGUMENT
+                        6
+                      Label : ARGUMENT
+                        $c
+                Label : RIGHT
+                  empty
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $e
+            Label : THEN
+              {
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  break
+                  Label : LEVEL
+                    void
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              h
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  8
+                Label : ARGUMENT
+                  $g
+            Label : LEFT
+              $f

@@ -4,20 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      [
-      Label : VARIABLE
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          b
     Label : RIGHT
       c
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           {
+          Label : VARIABLE
+            ->
+            Label : PROPERTY
+              e
+            Label : OBJECT
+              $d
           Label : INDEX
             ++
             Label : POSTPLUSPLUS
@@ -26,9 +24,11 @@ Label : CODE
                 g
               Label : OBJECT
                 $f
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $d
-            Label : PROPERTY
-              e
+    Label : LEFT
+      [
+      Label : VARIABLE
+        ->
+        Label : PROPERTY
+          b
+        Label : OBJECT
+          $a

@@ -3,6 +3,16 @@
 Label : CODE
   ;
   Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'Bar'
+  Label : ELEMENT
+    :
+    Label : LABEL
+      a2
+  Label : ELEMENT
     :
     Label : LABEL
       a1
@@ -16,13 +26,3 @@ Label : CODE
     goto
     Label : LABEL
       a1
-  Label : ELEMENT
-    :
-    Label : LABEL
-      a2
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        'Bar'

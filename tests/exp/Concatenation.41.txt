@@ -8,7 +8,9 @@ Label : CODE
   Label : THEN
     {
     Label : CODE
-      ;
+      Sequence
+      Label : ELEMENT
+        B
       Label : ELEMENT
         A
       Label : ELEMENT
@@ -17,5 +19,3 @@ Label : CODE
           void
           Label : ARGUMENT
             $b
-      Label : ELEMENT
-        B

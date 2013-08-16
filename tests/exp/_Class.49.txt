@@ -7,7 +7,21 @@ Label : CODE
   Label : BLOCK
     {
     Label : CODE
-      ;
+      Sequence
+      Label : ELEMENT
+        static
+        Label : VALUE
+          void
+        Label : DEFINE
+          function
+          Label : NAME
+            c
+          Label : ARGUMENTS
+            void
+          Label : BLOCK
+            {
+            Label : CODE
+              void
       Label : ELEMENT
         static
         Label : VALUE
@@ -36,17 +50,3 @@ Label : CODE
             void
           Label : DEFINE
             $a
-      Label : ELEMENT
-        static
-        Label : VALUE
-          void
-        Label : DEFINE
-          function
-          Label : NAME
-            c
-          Label : ARGUMENTS
-            void
-          Label : BLOCK
-            {
-            Label : CODE
-              void

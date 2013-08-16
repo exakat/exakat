@@ -31,16 +31,18 @@ Label : CODE
       Label : OBJECT
         $a
   Label : LOOP
-    {
+    Block With While
     Label : CODE
-      ;
-      Label : ELEMENT
-        +=
-        Label : RIGHT
-          1
-        Label : LEFT
-          ->
-          Label : PROPERTY
-            j
-          Label : OBJECT
-            $i
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          +=
+          Label : RIGHT
+            1
+          Label : LEFT
+            ->
+            Label : PROPERTY
+              j
+            Label : OBJECT
+              $i

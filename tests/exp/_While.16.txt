@@ -2,11 +2,11 @@
 
 Label : CODE
   while
+  Label : CONDITION
+    $a
   Label : LOOP
     Block With While
     Label : CODE
       ++
       Label : POSTPLUSPLUS
         $c
-  Label : CONDITION
-    $a

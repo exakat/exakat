@@ -7,12 +7,10 @@ Label : CODE
     Label : OBJECT
       $a
     Label : METHOD
-      {
-      Label : CODE
-        [
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          'c'
+      [
+      Label : VARIABLE
+        $b
+      Label : INDEX
+        'c'
     Label : ARGUMENTS
       void
