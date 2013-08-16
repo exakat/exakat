@@ -1,0 +1,60 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $y
+    Label : RIGHT
+      'a'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        ::
+        Label : CLASS
+          C
+        Label : METHOD
+          $y
+          Label : ARGUMENTS
+            void
+    Label : LEFT
+      $x
+  Label : ELEMENT
+    class
+    Label : NAME
+      C
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          function
+          Label : NAME
+            a
+          Label : ARGUMENTS
+            void
+          Label : BLOCK
+            {
+            Label : CODE
+              ;
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  'b'
+        Label : ELEMENT
+          public
+          Label : VALUE
+            void
+          Label : DEFINE
+            static
+            Label : VALUE
+              void
+            Label : DEFINE
+              =
+              Label : RIGHT
+                'f'
+              Label : LEFT
+                $y
