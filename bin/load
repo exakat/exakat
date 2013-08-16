@@ -23,6 +23,12 @@ if ($id = array_search('-r', $args)) {
     define('RECURSIVE', false);
 }
 
+if ($id = array_search('-l', $args)) {
+    define('LINT', true);
+} else {
+    define('LINT', false);
+}
+
 if ($id = array_search('-f', $args)) {
     $filename = $args[$id + 1];
     
@@ -60,20 +66,27 @@ function process_dir($dir) {
 
 function process_file($filename) {
     
+    $log = fopen('log/load.log', 'a');
+    $begin = microtime(true);
+    
     if (!file_exists($filename)) {
         print "'$filename' doesn't exists. Aborting\n";
         die();
     }
     
-    $shell = shell_exec('php -l '.$filename.' 2>&1');
-    if (trim($shell) != 'No syntax errors detected in '.$filename) {
-        print "Error : |$shell|\n";
-        return false;
+    
+    if (LINT) {
+        $shell = shell_exec('php -l '.$filename.' 2>&1');
+        if (trim($shell) != 'No syntax errors detected in '.$filename) {
+            print "Error : |$shell|\n";
+            return false;
+        }
     }
     
     $php = file_get_contents($filename);
     $file = realpath($filename);
     $tokens = token_get_all($php);
+    fwrite($log, "$filename\t".count($tokens)."\n");
     
     $client = new Client();
 
@@ -146,7 +159,7 @@ function process_file($filename) {
                     'T_CONSTANT_ENCAPSED_STRING' => 'String', 
                     'T_CONSTANT_ENCAPSED_STRING' => 'String', 
                     'T_ENCAPSED_AND_WHITESPACE'  => 'String',
-                    'T_INLINE_HTML'              => 'String',
+                    'T_INLINE_HTML'              => 'RawString',
                     'T_VARIABLE'                 => 'Variable',
                     'T_STRING_VARNAME'           => 'Variable',
                     'T_LNUMBER'                  => 'Integer', 
@@ -169,6 +182,7 @@ function process_file($filename) {
         if ($token[0] == T_DOC_COMMENT) { unset($tokens[$id]); }
     }
     $tokens = array_values($tokens);
+    fwrite($log, "$filename\t".count($tokens)."\n");
     
     $nb = count($tokens);
     $Tid = -1;
@@ -346,7 +360,8 @@ function process_file($filename) {
         }
     }
 
-
+    $end = microtime(true);
+    fwrite($log, "$filename\t".(($end - $begin)*1000)."\n");
     if (!isset($T)) { 
         print "Empty script. Ignoring\n";    
         return false;
