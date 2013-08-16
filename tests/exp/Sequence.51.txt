@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : THEN
+      {
+      Label : CODE
+        void
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+  Label : ELEMENT
+    throw
+    Label : THROW
+      new
+      Label : NEW
+        Stdclass
+        Label : ARGUMENTS
+          void
