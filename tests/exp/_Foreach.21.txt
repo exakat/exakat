@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  foreach
+  Label : LOOP
+    Block With Foreach
+    Label : CODE
+      =
+      Label : RIGHT
+        $g
+      Label : LEFT
+        [
+        Label : INDEX
+          $f
+        Label : VARIABLE
+          ->
+          Label : PROPERTY
+            e
+          Label : OBJECT
+            $d
+  Label : SOURCE
+    $a
+  Label : VALUE
+    =>
+    Label : KEY
+      $b
+    Label : VALUE
+      $c
