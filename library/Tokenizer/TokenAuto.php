@@ -504,6 +504,19 @@ g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
 it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
+x.as('origin').out('ELEMENT').has('atom','Sequence').each{
+    it.inE('ELEMENT').each{ g.removeEdge(it);}
+  
+    it.out('ELEMENT').each{ 
+        it.inE('ELEMENT').each{ g.removeEdge(it);}
+        g.addEdge(x, it, 'ELEMENT');
+    };
+
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+//    g.removeVertex(it);    
+}
+
+
 /* Remove children's index */  
 x.outE.hasNot('label', 'NEXT').inV.each{ 
     it.inE('INDEXED').each{    
@@ -619,14 +632,17 @@ s.bothE('NEXT').each{ g.removeEdge(it); }
 /* to type hint */
 x = g.addVertex(null, [code:'Typehint', atom:'Typehint', 'file':it.file, virtual:true]);
 
-g.addEdge(it.in('NEXT').next(), x, 'NEXT');
-g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
+a = it.out('NEXT').next();
+a.setProperty('atom', 'Typehint');
 
-g.addEdge(x, it, 'CLASS');
-g.addEdge(x, it.out('NEXT').next(), 'VARIABLE');
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, a.out('NEXT').out('NEXT').next(), 'NEXT');
 
-it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it);}    
-it.bothE('NEXT').each{ g.removeEdge(it);}    
+g.addEdge(x, a, 'CLASS');
+g.addEdge(x, a.out('NEXT').next(), 'VARIABLE');
+
+a.out('NEXT').bothE('NEXT').each{ g.removeEdge(it);}    
+a.bothE('NEXT').each{ g.removeEdge(it);}    
 
 /* Remove children's index */  
 x.outE.hasNot('label', 'NEXT').inV.each{ 
