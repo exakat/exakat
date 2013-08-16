@@ -82,6 +82,7 @@ class Token {
                                  'Halt', 
                                  'Concatenation',
                                  // 'ConcatenationAtom', 
+                                 'Void', 
                                 );
     
     function __construct($client) {
