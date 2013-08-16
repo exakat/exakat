@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $x
+    Label : RIGHT
+      instanceof
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          $z
+        Label : PROPERTY
+          c
+      Label : LEFT
+        $y
