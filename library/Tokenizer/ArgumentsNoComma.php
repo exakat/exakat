@@ -8,7 +8,7 @@ class ArgumentsNoComma extends TokenAuto {
     function _check() {
         // @note f(1) : no comma 
         $this->conditions = array(-1 => array('token' => array_merge(Functioncall::$operators, array('T_DECLARE'))),
-                                   0 => array('token' => 'T_OPEN_PARENTHESIS',
+                                   0 => array('token' => ArgumentsNoComma::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => Arguments::$operands_wa),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
