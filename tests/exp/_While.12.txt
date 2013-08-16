@@ -3,26 +3,26 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : LEFT
+      $i
+    Label : RIGHT
+      1
+  Label : ELEMENT
     while
     Label : CONDITION
       <=
-      Label : RIGHT
-        10
       Label : LEFT
         $i
+      Label : RIGHT
+        10
     Label : LOOP
       ;
       Label : ELEMENT
         ?
-        Label : CONDITION
-          $a
         Label : THEN
           $b
+        Label : CONDITION
+          $a
         Label : ELSE
           $c
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $i

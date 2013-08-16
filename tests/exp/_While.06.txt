@@ -5,14 +5,16 @@ Label : CODE
   Label : CONDITION
     1
   Label : LOOP
-    {
+    Block With While
     Label : CODE
-      ;
-      Label : ELEMENT
-        while
-        Label : LOOP
-          {
-          Label : CODE
-            void
-        Label : CONDITION
-          1
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          while
+          Label : CONDITION
+            1
+          Label : LOOP
+            {
+            Label : CODE
+              void

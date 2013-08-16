@@ -4,40 +4,14 @@ Label : CODE
   Sequence
   Label : ELEMENT
     if
-    Label : CONDITION
-      (
+    Label : ELSE
+      {
       Label : CODE
-        1
+        void
     Label : THEN
       {
       Label : CODE
         ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            +
-            Label : RIGHT
-              {
-              Label : VARIABLE
-                $y
-              Label : INDEX
-                4
-            Label : LEFT
-              +
-              Label : RIGHT
-                4
-              Label : LEFT
-                +
-                Label : RIGHT
-                  3
-                Label : LEFT
-                  +
-                  Label : RIGHT
-                    2
-                  Label : LEFT
-                    1
-          Label : LEFT
-            $c
         Label : ELEMENT
           =
           Label : RIGHT
@@ -52,18 +26,44 @@ Label : CODE
               $x
             Label : INDEX
               3
-    Label : ELSE
-      {
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            +
+            Label : LEFT
+              +
+              Label : RIGHT
+                4
+              Label : LEFT
+                +
+                Label : LEFT
+                  +
+                  Label : LEFT
+                    1
+                  Label : RIGHT
+                    2
+                Label : RIGHT
+                  3
+            Label : RIGHT
+              {
+              Label : VARIABLE
+                $y
+              Label : INDEX
+                4
+          Label : LEFT
+            $c
+    Label : CONDITION
+      (
       Label : CODE
-        void
+        1
   Label : ELEMENT
     while
     Label : CONDITION
       ==
-      Label : RIGHT
-        2
       Label : LEFT
         $x
+      Label : RIGHT
+        2
     Label : LOOP
       {
       Label : CODE

@@ -1,0 +1,44 @@
+<?php
+
+Label : CODE
+  function
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      $n
+  Label : NAME
+    a2
+  Label : BLOCK
+    {
+    Label : CODE
+      while
+      Label : CONDITION
+        >=
+        Label : LEFT
+          $b
+        Label : RIGHT
+          1
+      Label : LOOP
+        Block With While
+        Label : CODE
+          for
+          Label : INCREMENT
+            ++
+            Label : POSTPLUSPLUS
+              $i
+          Label : CODE
+            Block With For
+            Label : CODE
+              void
+          Label : FINAL
+            <
+            Label : LEFT
+              $i
+            Label : RIGHT
+              2
+          Label : INIT
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $i
