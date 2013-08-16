@@ -1,0 +1,56 @@
+<?php
+
+Label : CODE
+  if
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x
+  Label : CONDITION
+    (
+    Label : CODE
+      !
+      Label : NOT
+        (
+        Label : CODE
+          ||
+          Label : RIGHT
+            instanceof
+            Label : RIGHT
+              ArrayAccess
+            Label : LEFT
+              ->
+              Label : OBJECT
+                [
+                Label : INDEX
+                  $g
+                Label : VARIABLE
+                  ->
+                  Label : PROPERTY
+                    f
+                  Label : OBJECT
+                    $e
+              Label : PROPERTY
+                h
+          Label : LEFT
+            is_array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : PROPERTY
+                  d
+                Label : OBJECT
+                  [
+                  Label : VARIABLE
+                    ->
+                    Label : PROPERTY
+                      b
+                    Label : OBJECT
+                      $a
+                  Label : INDEX
+                    $c
