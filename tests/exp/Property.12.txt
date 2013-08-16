@@ -4,13 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
-    Label : PROPERTY
-      {
-      Label : CODE
-        [
-        Label : VARIABLE
-          $extend
-        Label : INDEX
-          'method'
     Label : OBJECT
       $obj
+    Label : PROPERTY
+      [
+      Label : VARIABLE
+        $extend
+      Label : INDEX
+        'method'
