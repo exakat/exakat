@@ -8,7 +8,9 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      ;
+      Sequence
+      Label : ELEMENT
+        B
       Label : ELEMENT
         A
       Label : ELEMENT
@@ -18,8 +20,6 @@ Label : CODE
           Label : ARGUMENT
             $b
       Label : ELEMENT
-        B
-      Label : ELEMENT
         F
       Label : ELEMENT
         if
@@ -28,7 +28,7 @@ Label : CODE
           Label : CODE
             $c
         Label : THEN
-          ;
+          Sequence
           Label : ELEMENT
             C
           Label : ELEMENT

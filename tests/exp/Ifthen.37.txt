@@ -15,7 +15,7 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            ;
+            Sequence
             Label : ELEMENT
               if
               Label : CONDITION
@@ -57,6 +57,10 @@ Label : CODE
                     Label : ARGUMENT
                       'b'
             Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
               if
               Label : CONDITION
                 (
@@ -76,10 +80,6 @@ Label : CODE
                 {
                 Label : CODE
                   void
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
       Label : ELEMENT
         default
         Label : CODE
