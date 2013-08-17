@@ -45,6 +45,7 @@ $stats['atoms_count'] = queryOne("g.V.except([g.v(0)]).hasNot('atom', 'null')$fi
 $stats['NEXT_count'] = queryOne("g.E.has('label', 'NEXT').inV$file_filter.count()");
 $stats['INDEXED_count'] = queryOne("g.E.has('label', 'INDEXED').inV$file_filter.count()");
 $stats['file_count'] = queryOne("m = [:]; g.V.groupCount(m){it.file}.iterate(); m.size();");
+//$stats['test'] = queryOne("m = []; g.V.fill(m); m.size();");
 
 function queryOne($query) {
     $r = query($query);
