@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  try
+  Label : CODE
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $c
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $b
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a
+  Label : CATCH
+    catch
+    Label : CLASS
+      Exception
+    Label : VARIABLE
+      $e
+    Label : CODE
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $h
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $g
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $f
