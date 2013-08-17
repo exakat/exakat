@@ -66,7 +66,7 @@ function process_dir($dir) {
 
 function process_file($filename) {
     
-    $log = fopen('log/load.log', 'a');
+    $log = array();
     $begin = microtime(true);
     
     if (!file_exists($filename)) {
@@ -86,7 +86,7 @@ function process_file($filename) {
     $php = file_get_contents($filename);
     $file = realpath($filename);
     $tokens = token_get_all($php);
-    fwrite($log, "$filename\t".count($tokens)."\n");
+    $log['token_initial'] = count($tokens);
     
     $client = new Client();
 
@@ -107,17 +107,24 @@ function process_file($filename) {
     foreach($regex as $r) {
         $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
                                              ->setProperty('code', 'Index for '.$r)
-                                             ->setProperty('file', $filename)
+                                             ->setProperty('file', $file)
                                              ->setProperty('index', 'yes')
                                              ->save();
         $racines->add($regexIndex[$r], 'token', $r);
     }
         $regexIndex['DELETE'] = $client->makeNode()->setProperty('token', 'DELETE')
                                                  ->setProperty('code', 'Index for DELETE')
-                                                 ->setProperty('file', $filename)
+                                                 ->setProperty('file', $file)
                                                  ->setProperty('index', 'yes')
                                                  ->save();
         $racines->add($regexIndex['DELETE'], 'token', 'DELETE');
+
+        $regexIndex['ROOT'] = $client->makeNode()->setProperty('token', 'ROOT')
+                                                 ->setProperty('code', 'Index for ROOT')
+                                                 ->setProperty('file', $file)
+                                                 ->setProperty('index', 'yes')
+                                                 ->save();
+        $racines->add($regexIndex['ROOT'], 'token', 'ROOT');
     
     // load new tokens
     $line = 0;
@@ -182,7 +189,7 @@ function process_file($filename) {
         if ($token[0] == T_DOC_COMMENT) { unset($tokens[$id]); }
     }
     $tokens = array_values($tokens);
-    fwrite($log, "$filename\t".count($tokens)."\n");
+    $log['token_cleaned'] = count($tokens);
     
     $nb = count($tokens);
     $Tid = -1;
@@ -361,7 +368,10 @@ function process_file($filename) {
     }
 
     $end = microtime(true);
-    fwrite($log, "$filename\t".(($end - $begin)*1000)."\n");
+    $log_file = fopen('log/load.log', 'a');
+    $log['memory_usage'] = memory_get_usage(true);
+    $log['memory_max_usage'] = memory_get_peak_usage(true);
+    fwrite($log_file, "$filename\t".(($end - $begin)*1000)."\t".join("\t", $log)."\n");
     if (!isset($T)) { 
         print "Empty script. Ignoring\n";    
         return false;
@@ -374,6 +384,7 @@ function process_file($filename) {
                                 ->setProperty('file', $file)
                                 ->setProperty('hidden', true)
                                 ->save();
+    $regexIndex['ROOT']->relateTo($T[-1], 'INDEXED')->save();
     
     $last     = $client->makeNode()->setProperty('token', 'T_END')
                                    ->setProperty('code', '/**/')
