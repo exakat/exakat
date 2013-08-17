@@ -14,7 +14,7 @@ class SequenceAtom extends TokenAuto {
                           'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
                           'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
                           'Bitshift', 'Void', 'Dowhile', 'Halt', 'Interface', 'Block', 'RawString', 
-                          'Phpcode', 
+                          'Phpcode', 'Namespace', 
                            );
         
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CATCH',

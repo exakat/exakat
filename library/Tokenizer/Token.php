@@ -25,6 +25,7 @@ class Token {
                                  '_Continue',    
                                  'Label',        
                                  '_Goto',        
+                                 '_Namespace',        
                                  'Staticproperty',
                                  'Staticconstant',
                                  'Staticmethodcall',
