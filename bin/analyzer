@@ -49,6 +49,7 @@ $classes = array(
     '_New',         // Fait
     '_Global',      // Fait
     'Nsname',       // Fait
+    '_Namespace',   // Fait
     '_Include',     // Fait
     'Preplusplus',  // Fait
     'Postplusplus', // Fait
