@@ -3,9 +3,11 @@
 namespace Tokenizer;
 
 class ArgumentsArray extends TokenAuto {
+    static public $operators = array('T_OPEN_PARENTHESIS');
+    
     function _check() {
         $this->conditions = array(-1 => array('atom'  => 'Array'),
-                                   0 => array('token' => 'T_OPEN_PARENTHESIS',
+                                   0 => array('token' => ArgumentsArray::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => Arguments::$operands_wa),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
