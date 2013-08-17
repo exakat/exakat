@@ -119,7 +119,8 @@ class Token {
 
     static function countLeftToken() {
 //        $result = Token::query("g.V.has('atom',null).except([g.v(0)]).hasNot('hidden', true).hasNot('index', 'yes').count()");
-        $result = Token::query("g.V.has('root', 'true').in('NEXT').out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
+//        $result = Token::query("g.V.has('root', 'true').in('NEXT').out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
+        $result = Token::query("g.idx('racines')[['token':'ROOT']].out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
     	
     	return $result[0][0];
     }
@@ -190,7 +191,7 @@ class Token {
     
     static public function cleanHidden() {
         $query = " 
-g.V.has('token','T_ROOT').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
+g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
     g.removeVertex(it.in('NEXT').in('NEXT').next()); 
     g.removeVertex(it.out('NEXT').next()); 
     g.removeVertex(it); 
@@ -200,7 +201,7 @@ g.idx('racines')[['token':'DELETE']].out('DELETE').each{
     g.removeVertex(it);
 }
 
-g.V.has('index', 'yes').filter{it.out().count() == 0}.each{
+g.idx('racines')[['token':'DELETE']].filter{it.out().count() == 0}.each{
     g.removeVertex(it);
 }
 
@@ -211,7 +212,7 @@ g.V.has('index', 'yes').filter{it.out().count() == 0}.each{
 
     static public function finishSequence() {
         $query = "
-g.V.has('root', 'true').as('root').out('NEXT').hasNot('token', 'T_END').back('root').each{ 
+g.idx('racines')[['token':'ROOT']].as('root').out('NEXT').hasNot('token', 'T_END').back('root').each{ 
     x = g.addVertex(null, [code:'Final sequence', atom:'Sequence', token:'T_SEMICOLON', file:it.file]);
 
     a = it.in('NEXT').next();
@@ -225,6 +226,8 @@ g.V.has('root', 'true').as('root').out('NEXT').hasNot('token', 'T_END').back('ro
     g.addEdge(x, y, 'NEXT');
     g.addEdge(a, x, 'NEXT');
     x.setProperty('root', true);
+    g.addEdge(g.idx('racines')[['token':'ROOT']].next(), it, 'INDEXED');   
+
 }
 
 
