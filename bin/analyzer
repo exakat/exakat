@@ -163,7 +163,6 @@ while(check_prev($prev, $extra_rounds)) {
     $begin = microtime(true);
     fwrite($log, "round $round)\t".(($rend - $rbegin)*1000)."\n");
 
-//    $count = Token::countLeftToken();
     $count = Token::countLeftNext();
     $end = microtime(true);
     fwrite($log, "countLeftNext : ".(($end - $begin) * 1000)."\n");

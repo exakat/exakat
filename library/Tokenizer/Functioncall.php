@@ -23,7 +23,6 @@ class Functioncall extends TokenAuto {
         $this->actions = array('makeEdge'   => array(2 => 'ARGUMENTS'),
                                'dropNext'   => array(1),
                                'atom'       => 'Functioncall');
-                               
         $this->checkAuto();
 
         // functioncall(with arguments)
