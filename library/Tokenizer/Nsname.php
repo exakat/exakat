@@ -13,8 +13,8 @@ class Nsname extends TokenAuto {
                                    1 => array('atom' => 'String'),
         );
         
-        $this->actions = array('makeEdge'    => array( 1 => 'ELEMENT',
-                                                      -1 => 'ELEMENT'
+        $this->actions = array('transform'    => array( 1 => 'ELEMENT',
+                                                       -1 => 'ELEMENT'
                                                       ),
                                'order'    => array('1'  => '2',
                                                    '-1' => '1'
@@ -32,11 +32,11 @@ class Nsname extends TokenAuto {
                                     1 => array('atom' => 'String'),
         );
         
-        $this->actions = array('makeEdge' => array( 1 => 'ELEMENT'),
-                               'order'    => array('1'  => '1'),
-                               'atom'     => 'Nsname',
+        $this->actions = array('transform'   => array( 1 => 'ELEMENT'),
+                               'order'       => array('1'  => '1'),
+                               'atom'        => 'Nsname',
                                'keepIndexed' => true,
-                               'cleanIndex' => 'ELEMENT',
+                               'cleanIndex'  => 'ELEMENT',
                                );
         $this->checkAuto();
 

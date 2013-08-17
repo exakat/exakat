@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    \
+    Label : ELEMENT
+      C
+    Label : ELEMENT
+      B
+    Label : ELEMENT
+      A
+    Label : ARGUMENTS
+      void
+  Label : ELEMENT
+    \
+    Label : ELEMENT
+      B
+    Label : ELEMENT
+      A
+    Label : ARGUMENTS
+      void
+  Label : ELEMENT
+    \
+    Label : ELEMENT
+      A
+    Label : ARGUMENTS
+      void

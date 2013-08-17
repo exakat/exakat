@@ -16,6 +16,7 @@ class Sequence extends TokenAuto {
                           'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
                           'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
                           'Bitshift', 'Void', 'Dowhile', 'Clone', 'Declare', 'Halt', 'Interface', 'Block', 
+                          'RawString', 
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
@@ -30,7 +31,7 @@ class Sequence extends TokenAuto {
                                       Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators, 
                                       _Include::$operators );
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 
-                                           'T_CLOSE_PARENTHESIS', 'T_CATCH', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_ELSEIF' ), 
+                                           'T_CLOSE_PARENTHESIS', 'T_CATCH', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_ELSEIF', 'T_NS_SEPARATOR' ), 
                                      Assignation::$operators, Logical::$operators);
         
         // @note instructions separated by ; 

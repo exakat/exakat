@@ -753,7 +753,8 @@ it.as('origin').out('$link').has('atom','$atom').each{
         it.inE('$link').each{ g.removeEdge(it);}
         g.addEdge(f, it, '$link');
     };
-    g.removeVertex(it);    
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+//    g.removeVertex(it);    
 }
             ";
             }
