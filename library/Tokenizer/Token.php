@@ -43,6 +43,7 @@ class Token {
                                  '_Throw',
                                  'ArgumentsNoParenthesis',
                                  'ArgumentsNoComma',
+                                 'ArgumentsArray',
                                  'Arguments', 
                                  '_Global',
                                  '_New',
