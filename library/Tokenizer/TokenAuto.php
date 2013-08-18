@@ -966,6 +966,13 @@ g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
 
+/* Clean index */
+x.out('CODE').each{ 
+    it.inE('INDEXED').each{    
+        g.removeEdge(it);
+    } 
+}
+
             ";
             unset($actions['createBlockWithSequenceForCase']);
         }
@@ -988,6 +995,13 @@ g.addEdge(x, a, 'CODE');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
+
+/* Clean index */
+x.out('CODE').each{ 
+    it.inE('INDEXED').each{    
+        g.removeEdge(it);
+    } 
+}
 
             ";
             unset($actions['createBlockWithSequenceForDefault']);
@@ -1103,13 +1117,6 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.removeVertex(semicolon);
 }
 
-/* Clean index 
-x.out('ELEMENT').each{ 
-    it.inE('INDEXED').each{    
-        g.removeEdge(it);
-    } 
-}
-*/
             ";
             }
             unset($actions['mergePrev']);

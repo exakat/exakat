@@ -16,7 +16,7 @@ class Sequence extends TokenAuto {
                           'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
                           'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
                           'Bitshift', 'Void', 'Dowhile', 'Clone', 'Declare', 'Halt', 'Interface', 'Block', 
-                          'RawString', 'Namespace', 
+                          'RawString', 'Namespace', 'Boolean',
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
@@ -92,6 +92,7 @@ class Sequence extends TokenAuto {
                                                    -1 => 1 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
+                               'cleanIndex' => true
                                );
         $this->checkAuto();
 
@@ -112,7 +113,8 @@ class Sequence extends TokenAuto {
                                'order'      => array( 1 => 2,
                                                      -1 => 1 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence'
+                               'atom'       => 'Sequence',
+                               'cleanIndex' => true
                                );
         $this->checkAuto();
 
