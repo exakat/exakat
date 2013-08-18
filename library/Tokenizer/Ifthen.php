@@ -7,6 +7,18 @@ class Ifthen extends TokenAuto {
 
     function _check() {
     
+    // @doc if () with only ;
+        $this->conditions = array( 0 => array('token' => Ifthen::$operators),
+                                   1 => array('atom' => 'Parenthesis'),
+                                   2 => array('token' => 'T_SEMICOLON', 'atom' => 'none')
+        );
+        
+        $this->actions = array('addEdge'     => array(2 => array('Void' => 'LEVEL')),
+                               'keepIndexed' => true,
+                               'cleanIndex' => true);
+
+        $this->checkAuto(); 
+            
     // @doc if then else
         $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom' => 'none'),
@@ -29,7 +41,7 @@ class Ifthen extends TokenAuto {
         $this->conditions = array( 0 => array('token' => Ifthen::$operators),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => 'Block'),
-                                   3 => array('atom' => 'Ifthen'),
+                                   3 => array('atom' => 'Ifthen', 'token' => 'T_ELSEIF'),
                                    4 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
         );
         
@@ -40,7 +52,6 @@ class Ifthen extends TokenAuto {
                                'atom'       => 'Ifthen',
                                'cleanIndex' => true
                                );
-
         $this->checkAuto(); 
 
         // Make a bloc from sequence after a if/elseif
@@ -48,7 +59,8 @@ class Ifthen extends TokenAuto {
                                                'atom' => 'none'),
                                     1 => array('atom' => 'Parenthesis'),
                                     2 => array('notAtom' => 'Block', 'atom' => 'yes'),
-                                    3 => array('filterOut' => array('T_OBJECT_OPERATOR')),
+                                    3 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR'), 
+                                                                          Assignation::$operators)),
         );
         
         $this->actions = array( 'to_block_ifelseif' => true,
@@ -143,7 +155,7 @@ class Ifthen extends TokenAuto {
                                'atom'       => 'Ifthen',
                                'cleanIndex' => true
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return $this->checkRemaining();
     }

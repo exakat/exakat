@@ -8,7 +8,7 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      Sequence
+      ;
       Label : ELEMENT
         B
       Label : ELEMENT
@@ -28,7 +28,7 @@ Label : CODE
           Label : CODE
             $c
         Label : THEN
-          Sequence
+          ;
           Label : ELEMENT
             C
           Label : ELEMENT
