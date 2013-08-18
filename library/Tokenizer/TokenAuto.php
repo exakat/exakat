@@ -1313,6 +1313,15 @@ it.outE.hasNot('label', 'NEXT').inV.each{
             }
             unset($cdt['notAtom']);
         }
+
+        if (isset($cdt['in_quote'])) {
+            if ( $cdt['in_quote'] == 'none' ) {
+                $qcdts[] = "has('in_quote', null)";
+            } else {
+                $qcdts[] = "has('in_quote', 'true')";
+            }
+            unset($cdt['in_quote']);
+        }
         
         if (isset($cdt['filterOut'])) {
             if (is_string($cdt['filterOut'])) {
