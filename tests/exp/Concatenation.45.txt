@@ -1,0 +1,98 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    foreach
+    Label : SOURCE
+      a
+      Label : ARGUMENTS
+        void
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
+    Label : LOOP
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $items
+            Label : INDEX
+              "
+              Label : CONTAIN
+                Concatenation
+                Label : ELEMENT
+                  $h
+                Label : ELEMENT
+                   
+                Label : ELEMENT
+                  $g
+                Label : ELEMENT
+                   
+                Label : ELEMENT
+                  d 
+                Label : ELEMENT
+                  ->
+                  Label : PROPERTY
+                    f
+                  Label : OBJECT
+                    $e
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $i
+              Label : INDEX
+                'j'
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $items
+            Label : INDEX
+              "
+              Label : CONTAIN
+                Concatenation
+                Label : ELEMENT
+                   o
+                Label : ELEMENT
+                  $n
+                Label : ELEMENT
+                   
+                Label : ELEMENT
+                  k 
+                Label : ELEMENT
+                  ->
+                  Label : PROPERTY
+                    m
+                  Label : OBJECT
+                    $l
