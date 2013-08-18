@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Ifthen extends Tokenizeur {
-    /* 45 methods */
+    /* 47 methods */
 
     public function testIfthen01()  { $this->generic_test('Ifthen.01'); }
     public function testIfthen02()  { $this->generic_test('Ifthen.02'); }
@@ -54,6 +54,7 @@ class Ifthen extends Tokenizeur {
     public function testIfthen43()  { $this->generic_test('Ifthen.43'); }
     public function testIfthen44()  { $this->generic_test('Ifthen.44'); }
     public function testIfthen45()  { $this->generic_test('Ifthen.45'); }
-    public function testIfthen45()  { $this->generic_test('Ifthen.45'); }
+    public function testIfthen46()  { $this->generic_test('Ifthen.46'); }
+    public function testIfthen47()  { $this->generic_test('Ifthen.47'); }
 }
 ?>

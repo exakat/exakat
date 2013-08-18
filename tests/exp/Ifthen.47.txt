@@ -1,0 +1,33 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      Sequence
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        A
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              'c'
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          $d
+      Label : THEN
+        C

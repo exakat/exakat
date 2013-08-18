@@ -60,7 +60,7 @@ class Sequence extends TokenAuto {
                                    0 => array('token' => Sequence::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut2' => $next_operator),
+                                   2 => array('filterOut' => $next_operator),
         );
         
         $this->actions = array('makeEdge'   => array( 1 => 'ELEMENT',
