@@ -203,7 +203,7 @@ g.idx('racines')[['token':'DELETE']].out('DELETE').each{
     g.removeVertex(it);
 }
 
-g.idx('racines')[['token':'DELETE']].filter{it.out().count() == 0}.each{
+g.V.has('index', 'true').filter{it.out().count() == 0}.each{
     g.removeVertex(it);
 }
 

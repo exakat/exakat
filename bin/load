@@ -108,23 +108,24 @@ function process_file($filename) {
         $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
                                              ->setProperty('code', 'Index for '.$r)
                                              ->setProperty('file', $file)
-                                             ->setProperty('index', 'yes')
+                                             ->setProperty('index', 'true')
                                              ->save();
         $racines->add($regexIndex[$r], 'token', $r);
     }
-        $regexIndex['DELETE'] = $client->makeNode()->setProperty('token', 'DELETE')
-                                                 ->setProperty('code', 'Index for DELETE')
-                                                 ->setProperty('file', $file)
-                                                 ->setProperty('index', 'yes')
-                                                 ->save();
-        $racines->add($regexIndex['DELETE'], 'token', 'DELETE');
+    
+    $regexIndex['DELETE'] = $client->makeNode()->setProperty('token', 'DELETE')
+                                               ->setProperty('code', 'Index for DELETE')
+                                               ->setProperty('file', $file)
+                                               ->setProperty('index', 'true')
+                                               ->save();
+    $racines->add($regexIndex['DELETE'], 'token', 'DELETE');
 
-        $regexIndex['ROOT'] = $client->makeNode()->setProperty('token', 'ROOT')
-                                                 ->setProperty('code', 'Index for ROOT')
-                                                 ->setProperty('file', $file)
-                                                 ->setProperty('index', 'yes')
-                                                 ->save();
-        $racines->add($regexIndex['ROOT'], 'token', 'ROOT');
+    $regexIndex['ROOT'] = $client->makeNode()->setProperty('token', 'ROOT')
+                                             ->setProperty('code', 'Index for ROOT')
+                                             ->setProperty('file', $file)
+                                             ->setProperty('index', 'true')
+                                             ->save();
+    $racines->add($regexIndex['ROOT'], 'token', 'ROOT');
     
     // load new tokens
     $line = 0;
