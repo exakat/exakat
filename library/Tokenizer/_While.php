@@ -29,13 +29,12 @@ class _While extends TokenAuto {
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => 'yes'),
                                    3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('atom'  => 'yes'),
+                                   4 => array('atom'  => 'yes', 'notAtom' => 'Block'),
 //                                   5 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
         );
         
         $this->actions = array('while_to_block'    => true,
-                               'keepIndexed'       => true,
-                               'cleanIndex' => true);
+                               'keepIndexed'       => true);
         $this->checkAuto();      
         
          //  syntax   While( ) {}

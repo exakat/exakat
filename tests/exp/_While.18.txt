@@ -3,6 +3,32 @@
 Label : CODE
   Sequence
   Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          'a'
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            'b'
+    Label : THEN
+      {
+      Label : CODE
+        void
+    Label : ELSE
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $t
+  Label : ELEMENT
     while
     Label : CONDITION
       =
@@ -15,56 +41,28 @@ Label : CODE
       Label : LEFT
         $a
     Label : LOOP
-      Block With While
+      {
       Label : CODE
-        {
-        Label : CODE
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $d
+        Label : THEN
+          {
+          Label : CODE
+            void
+        Label : ELSE
           if
+          Label : CONDITION
+            (
+            Label : CODE
+              $s
           Label : THEN
             {
             Label : CODE
               void
           Label : ELSE
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                $s
-            Label : THEN
-              {
-              Label : CODE
-                void
-            Label : ELSE
-              {
-              Label : CODE
-                void
-          Label : CONDITION
-            (
+            {
             Label : CODE
-              $d
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'a'
-        Label : LEFT
-          [
-          Label : INDEX
-            'b'
-          Label : VARIABLE
-            $c
-    Label : ELSE
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $t
-    Label : THEN
-      {
-      Label : CODE
-        void
+              void

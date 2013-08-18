@@ -5,8 +5,6 @@ Label : CODE
   Label : CONDITION
     1
   Label : LOOP
-    Block With While
+    {
     Label : CODE
-      {
-      Label : CODE
-        void
+      void
