@@ -159,16 +159,18 @@ while(check_prev($prev, $extra_rounds)) {
         fwrite($log, get_class($r)."\t".(($end - $begin) * 1000)."\t".Token::leftInIndex($name)."\n");
     }
     unset($precedence);
-    
+    Token::finishSequence();
+                
     $rend = microtime(true);
     $begin = microtime(true);
     fwrite($log, "round $round)\t".(($rend - $rbegin)*1000)."\n");
 
     $count = Token::countLeftNext();
     $end = microtime(true);
-    fwrite($log, "countLeftNext : ".(($end - $begin) * 1000)."\n");
+    fwrite($log, "countLeftNext time : ".(($end - $begin) * 1000)."\n");
 
     fwrite($log, "Remaining token to process : $count\n");
+    fwrite($log, "Remaining files to process : ".Token::countFileToProcess()."\n");
     fwrite($log, "Remaining regex : ".count($regex_next)." (".(count($regex) - count($regex_next)).")\n");
     
     if ($count > 3) {
@@ -176,7 +178,7 @@ while(check_prev($prev, $extra_rounds)) {
     } else {
         display( "$round) All $total tokens have been processed! \n");
         if (Token::countLeftNext() > 3) {
-            Token::finishSequence();
+//            Token::finishSequence();
         }
         break 1;
     }

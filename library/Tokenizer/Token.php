@@ -190,6 +190,12 @@ class Token {
         return Token::queryOne($query);
     }
 
+    static public function countFileToProcess() {
+        $query = "g.idx('racines')[['token':'ROOT']].out('INDEXED').count()";
+
+        return Token::queryOne($query);
+    }
+
     
     static public function cleanHidden() {
         $query = " 
@@ -213,6 +219,28 @@ g.V.has('index', 'true').filter{it.out().count() == 0}.each{
     }
 
     static public function finishSequence() {
+        $query = " 
+g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
+    g.removeVertex(it.in('NEXT').in('NEXT').next()); 
+    g.removeVertex(it.out('NEXT').next()); 
+    g.removeVertex(it); 
+}
+
+g.idx('racines')[['token':'DELETE']].out('DELETE').each{
+    g.removeVertex(it);
+}
+
+/*
+g.V.has('index', 'true').filter{it.out().count() == 0}.each{
+    g.removeVertex(it);
+}
+*/
+
+";
+        Token::query($query);
+    }
+    
+    static public function finishSequenceOld() {
         $query = "
 g.idx('racines')[['token':'ROOT']].as('root').out('NEXT').hasNot('token', 'T_END').back('root').each{ 
     x = g.addVertex(null, [code:'Final sequence', atom:'Sequence', token:'T_SEMICOLON', file:it.file]);
