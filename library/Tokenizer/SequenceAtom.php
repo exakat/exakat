@@ -21,8 +21,12 @@ class SequenceAtom extends TokenAuto {
                            'Throw', 'Sequence','RawString', 'Phpcode', 
                              );
         $this->conditions = array(-1 => array('filterOut2' => $yield_operators), 
-                                   0 => array('atom' => $operands2, 'notToken' => 'T_ELSEIF'),
-                                   1 => array('atom' => $operands2, 'notToken' => 'T_ELSEIF'),
+                                   0 => array('atom' => $operands2, 
+                                              'notToken' => 'T_ELSEIF',
+                                              'in_quote' => 'none'),
+                                   1 => array('atom' => $operands2, 
+                                              'notToken' => 'T_ELSEIF',
+                                              'in_quote' => 'none'),
                                    2 => array('filterOut' => $next_operator),
         );
         $this->actions = array('insertSequence'  => true);

@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Sequence extends Tokenizeur {
-    /* 52 methods */
+    /* 54 methods */
 
     public function testSequence01()  { $this->generic_test('Sequence.01'); }
     public function testSequence02()  { $this->generic_test('Sequence.02'); }
@@ -61,5 +61,7 @@ class Sequence extends Tokenizeur {
     public function testSequence50()  { $this->generic_test('Sequence.50'); }
     public function testSequence51()  { $this->generic_test('Sequence.51'); }
     public function testSequence52()  { $this->generic_test('Sequence.52'); }
+    public function testSequence53()  { $this->generic_test('Sequence.53'); }
+    public function testSequence54()  { $this->generic_test('Sequence.54'); }
 }
 ?>
