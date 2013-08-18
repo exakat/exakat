@@ -323,7 +323,7 @@ g.removeVertex(b);
                     } elseif ($label == 'SEQUENCE') {
                         $qactions[] = "
 /* transform next to sequence */
-x = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true]);
+x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true]);
 
 b = it.out('NEXT').next();
 g.addEdge(it, x, 'NEXT');
@@ -493,7 +493,7 @@ x.out('CONCAT').has('atom', 'Concatenation').each{
         if (isset($actions['insertSequence'])) {
                 $qactions[] = "
 /* insertSequence */
-x = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true, modifiedBy:'SequenceAtom']);
+x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true, modifiedBy:'SequenceAtom']);
 
 g.addEdge(x, it, 'ELEMENT');
 g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
