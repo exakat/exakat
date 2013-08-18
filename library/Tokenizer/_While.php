@@ -17,9 +17,9 @@ class _While extends TokenAuto {
                                    4 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
         );
         
-        $this->actions = array('while_to_empty_block'    => true,
-                               'keepIndexed'       => true,
-                               'cleanIndex' => true);
+        $this->actions = array('addEdge'     => array(4 => array('Void' => 'LEVEL')),
+                               'keepIndexed'          => true,
+                               'cleanIndex'           => true);
         $this->checkAuto();        
 
          //  syntax   While( ) $x++; 
@@ -30,7 +30,7 @@ class _While extends TokenAuto {
                                    2 => array('atom'  => 'yes'),
                                    3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    4 => array('atom'  => 'yes', 'notAtom' => 'Block'),
-//                                   5 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
+                                   5 => array('filterOut2' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
         );
         
         $this->actions = array('while_to_block'    => true,

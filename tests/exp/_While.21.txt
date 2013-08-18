@@ -1,0 +1,8 @@
+<?php
+
+Label : CODE
+  while
+  Label : CONDITION
+    $x
+  Label : LOOP
+    Block with While
