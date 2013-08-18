@@ -54,5 +54,6 @@ class Ifthen extends Tokenizeur {
     public function testIfthen43()  { $this->generic_test('Ifthen.43'); }
     public function testIfthen44()  { $this->generic_test('Ifthen.44'); }
     public function testIfthen45()  { $this->generic_test('Ifthen.45'); }
+    public function testIfthen45()  { $this->generic_test('Ifthen.45'); }
 }
 ?>
