@@ -15,7 +15,7 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            Sequence
+            ;
             Label : ELEMENT
               if
               Label : CONDITION
@@ -36,6 +36,14 @@ Label : CODE
                 0
               Label : LEFT
                 $count
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  void
+              Label : LEFT
+                $indexed
             Label : ELEMENT
               foreach
               Label : SOURCE
@@ -58,14 +66,6 @@ Label : CODE
                   void
               Label : LEFT
                 $associative
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                array
-                Label : ARGUMENTS
-                  void
-              Label : LEFT
-                $indexed
       Label : ELEMENT
         default
         Label : CODE
