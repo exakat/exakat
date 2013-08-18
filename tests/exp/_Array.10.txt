@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    !==
+    Label : RIGHT
+      D
+    Label : LEFT
+      [
+      Label : VARIABLE
+        [
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              1
+            Label : LEFT
+              $b
+      Label : INDEX
+        'c'
