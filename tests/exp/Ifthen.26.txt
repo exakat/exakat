@@ -11,14 +11,12 @@ Label : CODE
       Label : INDEX
         'b'
   Label : THEN
-    Block With control if elseif
+    Block With if/elseif
     Label : CODE
       while
       Label : CONDITION
         $x
       Label : LOOP
-        Block With While
+        {
         Label : CODE
-          {
-          Label : CODE
-            void
+          void

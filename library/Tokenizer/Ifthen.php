@@ -48,7 +48,7 @@ class Ifthen extends TokenAuto {
                                                'atom' => 'none'),
                                     1 => array('atom' => 'Parenthesis'),
                                     2 => array('notAtom' => 'Block', 'atom' => 'yes'),
-                                    3 => array('token' => 'T_SEMICOLON')
+                                    3 => array('filterOut' => array('T_OBJECT_OPERATOR')),
         );
         
         $this->actions = array( 'to_block_ifelseif' => true,

@@ -7,7 +7,7 @@ Label : CODE
     Label : CODE
       $a
   Label : THEN
-    Block With control if elseif
+    Block With if/elseif
     Label : CODE
       if
       Label : CONDITION

@@ -11,7 +11,7 @@ Label : CODE
       Label : INDEX
         'b'
   Label : THEN
-    Block With control if elseif
+    Block With if/elseif
     Label : CODE
       do
       Label : LOOP
