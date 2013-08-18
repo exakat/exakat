@@ -2,10 +2,28 @@
 
 Label : CODE
   for
+  Label : INIT
+    =
+    Label : RIGHT
+      0
+    Label : LEFT
+      $i
+  Label : FINAL
+    <
+    Label : RIGHT
+      10
+    Label : LEFT
+      $i
+  Label : INCREMENT
+    ++
+    Label : POSTPLUSPLUS
+      $i
   Label : CODE
     Block With For
     Label : CODE
       >>
+      Label : RIGHT
+        $g
       Label : LEFT
         ::
         Label : METHOD
@@ -16,21 +34,3 @@ Label : CODE
               $f
         Label : CLASS
           $d
-      Label : RIGHT
-        $g
-  Label : FINAL
-    <
-    Label : LEFT
-      $i
-    Label : RIGHT
-      10
-  Label : INCREMENT
-    ++
-    Label : POSTPLUSPLUS
-      $i
-  Label : INIT
-    =
-    Label : LEFT
-      $i
-    Label : RIGHT
-      0

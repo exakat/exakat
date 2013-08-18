@@ -5,19 +5,7 @@ Label : CODE
   Label : ELEMENT
     global
     Label : NAME
-      $f
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $e
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $d
+      $b
     Label : VALUE
       void
   Label : ELEMENT
@@ -29,7 +17,19 @@ Label : CODE
   Label : ELEMENT
     global
     Label : NAME
-      $b
+      $d
+    Label : VALUE
+      void
+  Label : ELEMENT
+    global
+    Label : NAME
+      $f
+    Label : VALUE
+      void
+  Label : ELEMENT
+    global
+    Label : NAME
+      $e
     Label : VALUE
       void
   Label : ELEMENT

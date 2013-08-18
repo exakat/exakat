@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  Sequence
+  ;
   Label : ELEMENT
     if
     Label : CONDITION
@@ -51,7 +51,7 @@ Label : CODE
     Label : LOOP
       {
       Label : CODE
-        Sequence
+        ;
         Label : ELEMENT
           if
           Label : CONDITION

@@ -7,7 +7,7 @@ Label : CODE
   Label : BLOCK
     {
     Label : CODE
-      Sequence
+      ;
       Label : ELEMENT
         protected
         Label : VALUE

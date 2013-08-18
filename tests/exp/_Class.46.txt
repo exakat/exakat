@@ -13,6 +13,20 @@ Label : CODE
         Label : VALUE
           void
         Label : DEFINE
+          function
+          Label : NAME
+            c
+          Label : ARGUMENTS
+            void
+          Label : BLOCK
+            {
+            Label : CODE
+              void
+      Label : ELEMENT
+        protected
+        Label : VALUE
+          void
+        Label : DEFINE
           static
           Label : VALUE
             void
@@ -36,17 +50,3 @@ Label : CODE
             void
           Label : DEFINE
             $a
-      Label : ELEMENT
-        protected
-        Label : VALUE
-          void
-        Label : DEFINE
-          function
-          Label : NAME
-            c
-          Label : ARGUMENTS
-            void
-          Label : BLOCK
-            {
-            Label : CODE
-              void

@@ -11,7 +11,7 @@ Label : CODE
   Label : BLOCK
     {
     Label : CODE
-      Sequence
+      ;
       Label : ELEMENT
         if
         Label : CONDITION

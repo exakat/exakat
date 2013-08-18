@@ -21,12 +21,10 @@ Label : CODE
       Label : LEFT
         $b
   Label : LOOP
-    Block With While
+    {
     Label : CODE
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $f
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $f

@@ -9,7 +9,7 @@ Label : CODE
     Label : BLOCK
       {
       Label : CODE
-        Sequence
+        ;
         Label : ELEMENT
           static
           Label : VALUE

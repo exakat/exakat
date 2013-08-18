@@ -68,28 +68,28 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $d
-      Label : ELSE
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : RIGHT
-              1
-            Label : LEFT
-              $l
-        Label : THEN
-          {
-          Label : CODE
-            void
-        Label : ELSE
-          {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $a
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $l
+    Label : THEN
+      {
+      Label : CODE
+        void
+    Label : ELSE
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $a
   Label : ELEMENT
     if
     Label : CONDITION

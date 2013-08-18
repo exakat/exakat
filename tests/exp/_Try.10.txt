@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      new
+      Label : NEW
+        a
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            "
+            Label : CONTAIN
+              Concatenation
+              Label : ELEMENT
+                ' d
+              Label : ELEMENT
+                b '
+              Label : ELEMENT
+                {
+                Label : NAME
+                  $c

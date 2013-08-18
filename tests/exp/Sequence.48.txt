@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  Sequence
+  ;
   Label : ELEMENT
     print
     Label : ARGUMENTS

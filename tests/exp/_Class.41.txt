@@ -11,13 +11,25 @@ Label : CODE
       Label : ELEMENT
         var
         Label : NAME
-          $b
+          $a2
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $b2
         Label : VALUE
           void
       Label : ELEMENT
         var
         Label : NAME
           $a
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
+          $b
         Label : VALUE
           void
       Label : ELEMENT
@@ -32,18 +44,6 @@ Label : CODE
           $c
         Label : VALUE
           3
-      Label : ELEMENT
-        var
-        Label : NAME
-          $b2
-        Label : VALUE
-          void
-      Label : ELEMENT
-        var
-        Label : NAME
-          $a2
-        Label : VALUE
-          void
       Label : ELEMENT
         var
         Label : NAME

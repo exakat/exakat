@@ -9,7 +9,7 @@ Label : CODE
       Label : CODE
         $e
     Label : THEN
-      Concatenation
+      ;
       Label : ELEMENT
         a
       Label : ELEMENT

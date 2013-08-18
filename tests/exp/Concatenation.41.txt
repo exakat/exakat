@@ -8,7 +8,7 @@ Label : CODE
   Label : THEN
     {
     Label : CODE
-      Sequence
+      ;
       Label : ELEMENT
         B
       Label : ELEMENT

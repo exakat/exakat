@@ -1,18 +1,6 @@
 <?php 
 Label : CODE
-  Sequence
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        __
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'B'
-  Label : ELEMENT
-    A
+  ;
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -23,6 +11,8 @@ Label : CODE
           void
           Label : ARGUMENT
             'J'
+  Label : ELEMENT
+    H
   Label : ELEMENT
     ->
     Label : METHOD
@@ -44,4 +34,14 @@ Label : CODE
       Label : CLASS
         C
   Label : ELEMENT
-    H
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        __
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'B'
+  Label : ELEMENT
+    A

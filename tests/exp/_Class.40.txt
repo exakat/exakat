@@ -15,6 +15,16 @@ Label : CODE
       Label : ELEMENT
         function
         Label : NAME
+          __destruct
+        Label : ARGUMENTS
+          void
+        Label : BLOCK
+          {
+          Label : CODE
+            void
+      Label : ELEMENT
+        function
+        Label : NAME
           __construct
         Label : ARGUMENTS
           void
@@ -28,13 +38,3 @@ Label : CODE
           void
         Label : DEFINE
           $a
-      Label : ELEMENT
-        function
-        Label : NAME
-          __destruct
-        Label : ARGUMENTS
-          void
-        Label : BLOCK
-          {
-          Label : CODE
-            void

@@ -10,6 +10,18 @@ Label : CODE
       ;
       Label : ELEMENT
         protected
+        Label : VALUE
+          void
+        Label : DEFINE
+          $a
+      Label : ELEMENT
+        protected
+        Label : NAME
+          $e
+        Label : VALUE
+          void
+      Label : ELEMENT
+        protected
         Label : NAME
           $c
         Label : VALUE
@@ -32,18 +44,6 @@ Label : CODE
           $b
         Label : VALUE
           1
-      Label : ELEMENT
-        protected
-        Label : VALUE
-          void
-        Label : DEFINE
-          $a
-      Label : ELEMENT
-        protected
-        Label : NAME
-          $e
-        Label : VALUE
-          void
       Label : ELEMENT
         protected
         Label : NAME

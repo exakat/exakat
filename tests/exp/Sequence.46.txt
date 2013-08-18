@@ -9,7 +9,7 @@ Label : CODE
   Label : THEN
     {
     Label : CODE
-      Sequence
+      ;
       Label : ELEMENT
         if
         Label : CONDITION

@@ -2,26 +2,6 @@
 
 Label : CODE
   for
-  Label : CODE
-    Block With For
-    Label : CODE
-      =
-      Label : LEFT
-        [
-        Label : INDEX
-          $f
-        Label : VARIABLE
-          ->
-          Label : OBJECT
-            $d
-          Label : PROPERTY
-            e
-      Label : RIGHT
-        $g
-  Label : INCREMENT
-    ++
-    Label : POSTPLUSPLUS
-      $i
   Label : INIT
     =
     Label : RIGHT
@@ -30,7 +10,27 @@ Label : CODE
       $i
   Label : FINAL
     <
-    Label : LEFT
-      $i
     Label : RIGHT
       10
+    Label : LEFT
+      $i
+  Label : INCREMENT
+    ++
+    Label : POSTPLUSPLUS
+      $i
+  Label : CODE
+    Block With For
+    Label : CODE
+      =
+      Label : RIGHT
+        $g
+      Label : LEFT
+        [
+        Label : VARIABLE
+          ->
+          Label : PROPERTY
+            e
+          Label : OBJECT
+            $d
+        Label : INDEX
+          $f

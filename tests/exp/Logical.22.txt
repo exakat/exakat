@@ -17,7 +17,7 @@ Label : CODE
   Label : THEN
     {
     Label : CODE
-      Sequence
+      ;
       Label : ELEMENT
         foreach
         Label : SOURCE

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  Sequence
+  ;
   Label : ELEMENT
     if
     Label : CONDITION
@@ -43,16 +43,18 @@ Label : CODE
     Label : LOOP
       {
       Label : CODE
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            $d
-        Label : THEN
-          {
-          Label : CODE
-            void
-        Label : ELSE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              $d
+          Label : THEN
+            {
+            Label : CODE
+              void
+        Label : ELEMENT
           if
           Label : CONDITION
             (

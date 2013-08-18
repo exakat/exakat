@@ -1,13 +1,43 @@
 <?php
 
 Label : CODE
-  Sequence
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      5
+    Label : LEFT
+      $f
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      6
+    Label : LEFT
+      $g
+  Label : ELEMENT
+    :
+    Label : LABEL
+      G
+  Label : ELEMENT
+    :
+    Label : LABEL
+      F
   Label : ELEMENT
     =
     Label : RIGHT
       3
     Label : LEFT
       $c
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      4
+    Label : LEFT
+      $e
+  Label : ELEMENT
+    :
+    Label : LABEL
+      E
   Label : ELEMENT
     :
     Label : LABEL
@@ -36,33 +66,3 @@ Label : CODE
       1
     Label : LEFT
       $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      6
-    Label : LEFT
-      $g
-  Label : ELEMENT
-    :
-    Label : LABEL
-      G
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      5
-    Label : LEFT
-      $f
-  Label : ELEMENT
-    :
-    Label : LABEL
-      F
-  Label : ELEMENT
-    :
-    Label : LABEL
-      E
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      4
-    Label : LEFT
-      $e
