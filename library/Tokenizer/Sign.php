@@ -15,8 +15,9 @@ class Sign extends TokenAuto {
                                                'atom' => 'none'
                                                ),
                                     1 => array('atom' => Sign::$operands),
-                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                                                    'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
+                                    2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                                                                'T_OPEN_CURLY', 'T_OPEN_BRACKET'),
+                                                                    Multiplication::$operators)),
                                  );
         
         $this->actions = array('makeEdge'   => array( 1 => 'SIGN'),

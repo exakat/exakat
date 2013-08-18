@@ -1,0 +1,69 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      +
+      Label : RIGHT
+        *
+        Label : RIGHT
+          cos
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              deg2rad
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  abs
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      -
+                      Label : RIGHT
+                        ->
+                        Label : METHOD
+                          getX
+                          Label : ARGUMENTS
+                            void
+                        Label : OBJECT
+                          $e
+                      Label : LEFT
+                        ->
+                        Label : METHOD
+                          d
+                          Label : ARGUMENTS
+                            void
+                        Label : OBJECT
+                          $c
+        Label : LEFT
+          *
+          Label : RIGHT
+            cos
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $d
+          Label : LEFT
+            cos
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c
+      Label : LEFT
+        *
+        Label : RIGHT
+          sin
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $b
+        Label : LEFT
+          sin
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
+    Label : LEFT
+      $z
