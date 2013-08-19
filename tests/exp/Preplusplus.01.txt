@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      $c
+    Label : LEFT
+      [
+      Label : VARIABLE
+        [
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          (int)
+          Label : CAST
+            /
+            Label : RIGHT
+              1
+            Label : LEFT
+              ++
+              Label : POSTPLUSPLUS
+                $b
