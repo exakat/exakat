@@ -24,13 +24,13 @@ class Assignation extends TokenAuto {
                           'Array', 'Float', 'Concatenation', 'Property',
                           'Parenthesis', 'Noscream', 'Ternary', 'New', 'String',
                           'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Property',
-                          'Heredoc', 'Preplusplus', 'Postplusplus', 'Methodcall', 'Nsname', 
+                          'Heredoc', 'Preplusplus', 'Postplusplus', 'Nsname', 
                           'Assignation', 'Variable', 'Reference', 'Boolean', 'Magicconstant',
-                          'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison', 
+                          'Cast', 'Sign', 'Logical', 'Bitshift', 'Comparison', 
                           'Clone', 'Shell', 'Include', 'Instanceof', 
                          );
         
-        $this->conditions = array(-2 => array('filterOut2' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')),
+        $this->conditions = array(-2 => array('filterOut2' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_AND',)),
                                   -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 'Noscream', 'Reference', 'Not', 'Arrayappend' , 'Typehint', 'String', 'Static',  )),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),

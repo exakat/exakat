@@ -34,8 +34,7 @@ class _For extends TokenAuto {
                                     6 => array('atom' => 'yes'),
                                     7 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                     8 => array('atom' => 'yes'),
-                                    9 => array('filterOut2' => array_merge(array('T_OPEN_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), 
-                                                                Assignation::$operators, Addition::$operators, Multiplication::$operators)),
+                                    9 => array('filterOut2' => Token::$instruction_ending),
         );                
         $this->actions = array( 'to_block_for' => true,
                                 'keepIndexed'  => true,

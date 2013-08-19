@@ -87,11 +87,20 @@ class Token {
                                  'Void', 
                                  'Typehint',
                                 );
+
+    static public $instruction_ending = array();
     
     function __construct($client) {
         // @todo typehint ? 
         Token::$client = $client; 
-    }
+        
+        Token::$instruction_ending = array_merge(Preplusplus::$operators, 
+                                                 Postplusplus::$operators,
+                                                 Assignation::$operators, 
+                                                 Addition::$operators, 
+                                                 Multiplication::$operators,
+                                                 array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET'));
+        }
     
     final function check() {
         

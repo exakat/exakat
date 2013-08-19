@@ -10,7 +10,7 @@ class Property extends TokenAuto {
         $this->conditions = array( -1 => array('atom' => $operands), 
                                     0 => array('token' => Property::$operators),
                                     1 => array('atom' => array('String', 'Variable')),
-                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS')),
+                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET')),
                                     );
         
         $this->actions = array('makeEdge'   => array( -1 => 'OBJECT',
