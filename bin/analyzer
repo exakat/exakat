@@ -19,6 +19,12 @@ if ($id = array_search('-v', $args)) {
     define('VERBOSE', false);
 }
 
+if ($id = array_search('-s', $args)) {
+    define('SHUFFLE', true);
+} else {
+    define('SHUFFLE', false);
+}
+
 $begin_time = microtime(true);
 $classes = array(
 //    'Magicconstant',
@@ -108,6 +114,16 @@ $classes = array(
     'Void',
 );
 
+if (file_exists('classes.php')) {
+    include('classes.php');
+} else {
+    if (SHUFFLE) {
+        shuffle($classes);
+    }
+    
+    file_put_contents('classes.php', '<?php '."\n".'$classes = '.var_export($classes, true).'; ?>');
+}
+
 $client = new Client();
 
 $regex = array();
@@ -129,6 +145,7 @@ for($i = 0; $i < $extra_rounds + 1; $i++) {
     $prev[$i] = $count + $i;
 }
 $round = 0;
+$cost = 0;
 
 $log = fopen('log/analyzer.log', 'w');
 
@@ -163,7 +180,9 @@ while(check_prev($prev, $extra_rounds)) {
                 
     $rend = microtime(true);
     $begin = microtime(true);
-    fwrite($log, "round $round)\t".(($rend - $rbegin)*1000)."\n");
+    fwrite($log, "round : $round\t".(($rend - $rbegin)*1000)."\n");
+    $cost += count($regex_next);
+    fwrite($log, "cost : $cost\n");
 
     $count = Token::countLeftNext();
     $end = microtime(true);
@@ -187,6 +206,7 @@ while(check_prev($prev, $extra_rounds)) {
 $wend = microtime(true);
 fwrite($log, "Total while $round)\t".(($wend - $wbegin)*1000)."\n");
 fwrite($log, "Total regex time\t".(($regex_time) * 1000)."\t\n");
+fwrite($log, "final cost : $cost\n");
 
 Token::cleanHidden();
 
