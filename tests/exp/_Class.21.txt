@@ -11,6 +11,18 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
+          e
+        Label : VALUE
+          5
+      Label : ELEMENT
+        const
+        Label : NAME
+          c
+        Label : VALUE
+          3
+      Label : ELEMENT
+        const
+        Label : NAME
           b
         Label : VALUE
           2
@@ -21,12 +33,6 @@ Label : CODE
         Label : VALUE
           1
       Label : ELEMENT
-        const
-        Label : NAME
-          d
-        Label : VALUE
-          4
-      Label : ELEMENT
         var
         Label : VALUE
           void
@@ -35,12 +41,6 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
-          c
+          d
         Label : VALUE
-          3
-      Label : ELEMENT
-        const
-        Label : NAME
-          e
-        Label : VALUE
-          5
+          4

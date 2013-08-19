@@ -35,18 +35,18 @@ Label : CODE
       Label : ELSE
         ->
         Label : METHOD
+          h
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'i'
+        Label : OBJECT
           ->
           Label : METHOD
-            h
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'i'
-          Label : OBJECT
             g
             Label : ARGUMENTS
               void
-        Label : OBJECT
-          $f
+          Label : OBJECT
+            $f
     Label : LEFT
       $a

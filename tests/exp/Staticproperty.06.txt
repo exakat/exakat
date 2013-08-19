@@ -11,16 +11,16 @@ Label : CODE
         Label : ARGUMENTS
           void
     Label : LEFT
-      ::
+      ->
       Label : PROPERTY
-        ->
+        d
+      Label : OBJECT
+        ::
         Label : PROPERTY
-          d
-        Label : OBJECT
           [
           Label : VARIABLE
             $a
           Label : INDEX
             $b
-      Label : CLASS
-        self
+        Label : CLASS
+          self
