@@ -1,62 +1,110 @@
 <?php
 
-Label : CODE
+Label : NEXT
   ;
   Label : ELEMENT
     =
     Label : RIGHT
       1
     Label : LEFT
-      ->
+      ::
       Label : PROPERTY
-        c
-      Label : OBJECT
         ->
         Label : PROPERTY
-          b
+          e
         Label : OBJECT
           ->
           Label : PROPERTY
-            a
+            d
           Label : OBJECT
-            $C
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      ->
-      Label : PROPERTY
-        c
-      Label : OBJECT
+            ->
+            Label : PROPERTY
+              c
+            Label : OBJECT
+              b
+              Label : ARGUMENTS
+                void
+      Label : CLASS
+        A
+  Label : NEXT
+    ;
+    Label : NEXT
+      $A
+      Label : NEXT
         ->
-        Label : PROPERTY
-          b
-        Label : OBJECT
+        Label : NEXT
           ->
-          Label : METHOD
-            a
-            Label : ARGUMENTS
-              void
+          Label : PROPERTY
+            d
+          Label : NEXT
+            =
+            Label : NEXT
+              2
+              Label : NEXT
+                ;
+                Label : NEXT
+                  ;
+                  Label : NEXT
+                    ?>
+                    Label : NEXT
+                      /**/
+                      Label : NEXT
+                        /* * */
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      3
+                    Label : LEFT
+                      ->
+                      Label : PROPERTY
+                        d
+                      Label : OBJECT
+                        ->
+                        Label : PROPERTY
+                          c
+                        Label : OBJECT
+                          ->
+                          Label : PROPERTY
+                            b
+                          Label : OBJECT
+                            $A
           Label : OBJECT
-            $C
+            ->
+            Label : PROPERTY
+              c
+            Label : OBJECT
+              b
+              Label : ARGUMENTS
+                void
   Label : ELEMENT
     =
     Label : RIGHT
       1
     Label : LEFT
-      ->
+      ::
       Label : PROPERTY
-        c
-      Label : OBJECT
         ->
         Label : PROPERTY
-          b
+          c
         Label : OBJECT
-          ::
-          Label : METHOD
-            a
-            Label : ARGUMENTS
-              void
-          Label : CLASS
-            C
+          b
+          Label : ARGUMENTS
+            void
+      Label : CLASS
+        A
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      ::
+      Label : PROPERTY
+        ->
+        Label : PROPERTY
+          c
+        Label : OBJECT
+          b
+          Label : ARGUMENTS
+            void
+      Label : CLASS
+        A

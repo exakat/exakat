@@ -24,9 +24,9 @@ class Assignation extends TokenAuto {
                           'Array', 'Float', 'Concatenation', 'Property',
                           'Parenthesis', 'Noscream', 'Ternary', 'New', 'String',
                           'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Property',
-                          'Heredoc', 'Preplusplus', 'Postplusplus', 'Nsname', 
+                          'Heredoc', 'Preplusplus', 'Postplusplus', 'Methodcall', 'Nsname', 
                           'Assignation', 'Variable', 'Reference', 'Boolean', 'Magicconstant',
-                          'Cast', 'Sign', 'Logical', 'Bitshift', 'Comparison', 
+                          'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison', 
                           'Clone', 'Shell', 'Include', 'Instanceof', 
                          );
         

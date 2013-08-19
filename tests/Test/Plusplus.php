@@ -34,7 +34,8 @@ class Plusplus extends Tokenizeur {
     public function testPlusplus23()  { $this->generic_test('Plusplus.23'); }
     public function testPlusplus24()  { $this->generic_test('Plusplus.24'); }
     public function testPlusplus25()  { $this->generic_test('Plusplus.25'); }
-}    public function testPlusplus26()  { $this->generic_test('Plusplus.26'); }
+    public function testPlusplus26()  { $this->generic_test('Plusplus.26'); }
     public function testPlusplus27()  { $this->generic_test('Plusplus.27'); }
 
+}
 ?>
