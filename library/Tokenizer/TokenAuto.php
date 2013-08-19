@@ -298,28 +298,6 @@ f.each{
     g.removeVertex(i);
 }
 ";
-                    } elseif ($label == 'TO_CONST') {
-                        $qactions[] = "
-/* transform to const a=1   ,  b=2 => const a=1; const b=2 */
-
-a = it.out('NEXT').next();
-
-a.setProperty('code', 'const');
-a.setProperty('atom', 'Const');
-a.setProperty('token', 'T_CONST');
-g.addEdge(g.idx('racines')[['token':'_Const']].next(), a, 'INDEXED');
-
-b = a.out('NEXT').next();
-b.setProperty('code', 'BBB');
-//f = a.out('NEXT').out('NEXT').out('NEXT').next();
-g.addEdge(a, b.out('LEFT').next(), 'NAME');
-g.addEdge(a, b.out('RIGHT').next(), 'VALUE');
-g.removeEdge(b.outE('LEFT').next());
-g.removeEdge(b.outE('RIGHT').next());
-
-g.addEdge(a, b.out('NEXT').next(), 'NEXT');
-g.removeVertex(b);
-";                    
                     } elseif ($label == 'SEQUENCE') {
                         $qactions[] = "
 /* transform next to sequence */
@@ -441,6 +419,67 @@ f.each{
                 }
             }
             unset($actions['dropNext']);
+        }
+
+        if (isset($actions['to_const_assignation'])) {
+            $qactions[] = "
+/* transform to const assignation to const a=1; */
+    a = it.in('NEXT').next();
+    b = it.out('NEXT').out('NEXT').next();
+    x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', 'file':it.file, virtual:true]);
+    
+    g.addEdge(x, it.out('NEXT').out('LEFT').next(), 'NAME');
+    g.addEdge(x, it.out('NEXT').out('RIGHT').next(), 'VALUE');
+    
+    g.removeEdge(it.out('NEXT').outE('LEFT').next());
+    g.removeEdge(it.out('NEXT').outE('RIGHT').next());
+    
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('NEXT').next(), 'DELETE');
+    it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
+    it.inE('NEXT').each{ g.removeEdge(it); }
+
+    g.addEdge(a, x, 'NEXT');
+    g.addEdge(x, b, 'NEXT');
+
+"; 
+            unset($actions['to_const_assignation']);
+        }
+        
+        if (isset($actions['to_const'])) {
+            $qactions[] = "
+/* transform to const a=1 ,  b=2 => const a=1; const b=2 */
+
+var = it;
+arg = it.out('NEXT').next();
+
+root = it;
+root.setProperty('code', 'const');
+root.setProperty('token', 'T_CONST');
+
+arg.out('ARGUMENT').has('atom', 'Assignation').each{
+    x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', 'file':arg.file, virtual:true]);
+    
+    g.addEdge(root, x, 'NEXT');
+    root = x;
+
+    g.addEdge(x, it.out('LEFT').next(), 'NAME');
+    g.addEdge(x, it.out('RIGHT').next(), 'VALUE');
+    g.removeEdge(it.outE('LEFT').next());
+    g.removeEdge(it.outE('RIGHT').next());
+    
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+    //g.removeVertex(it);
+}
+
+g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
+g.removeEdge(var.out('NEXT').outE('NEXT').next());
+g.removeVertex(arg);
+
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), var, 'DELETE');   
+
+"; 
+            unset($actions['to_const']);
         }
 
         if (isset($actions['dropNextCode'])) {

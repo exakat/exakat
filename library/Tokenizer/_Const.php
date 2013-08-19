@@ -6,29 +6,26 @@ class _Const extends TokenAuto {
     static public $operators = array('T_CONST');
 
     function _check() {
-    // class x {}
-        $this->conditions = array( 0 => array('token' =>  _Const::$operators),
-                                   1 => array('atom' => 'String'),
-                                   2 => array('token' => 'T_EQUAL'),
-                                   3 => array('atom' => array('String', 'Integer', 'Staticconstant', 'Sign' )),
+    // class x { const a = 2, b = 2, c = 3; }
+        $this->conditions = array( 0 => array('token' => _Const::$operators),
+                                   1 => array('atom'  => 'Arguments'),
+                                   2 => array('filterOut' => 'T_COMMA'),
                                  );
         
-        $this->actions = array('transform'   => array(   1 => 'NAME',
-                                                         2 => 'DROP',
-                                                         3 => 'VALUE'),
-                               'atom'        => 'Const',
+        $this->actions = array('to_const'   => true,
+                               'atom'       => 'Const',
                                'keepIndexed' => true,
                                'cleanIndex'  => true);
         $this->checkAuto(); 
 
-    // class x { const a = 2; }
-        $this->conditions = array( 0 => array('token' => _Const::$operators),
-                                   1 => array('token' => 'T_COMMA'),
-                                   2 => array('atom'  => 'Assignation')
+    // class x {const a = 2; } only one.
+        $this->conditions = array( 0 => array('token' =>  _Const::$operators),
+                                   1 => array('atom'  => 'Assignation'),
+                                   2 => array('token' => 'T_SEMICOLON')
                                  );
         
-        $this->actions = array('transform'   => array(   1 => 'TO_CONST' ),
-                               'atom'       => 'Const',
+        $this->actions = array('to_const_assignation' => true,
+                               'atom'        => 'Const',
                                'keepIndexed' => true,
                                'cleanIndex'  => true);
         $this->checkAuto(); 
