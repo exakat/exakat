@@ -59,7 +59,7 @@ class Ifthen extends TokenAuto {
                                                'atom' => 'none'),
                                     1 => array('atom' => 'Parenthesis'),
                                     2 => array('notAtom' => 'Block', 'atom' => 'yes'),
-                                    3 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR'), 
+                                    3 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS'), 
                                                                           Assignation::$operators)),
         );
         
