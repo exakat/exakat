@@ -13,13 +13,15 @@ class Comparison extends TokenAuto {
                           'Bitshift', 'Concatenation', 'Cast',  );
         
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), 
-                                                                         Addition::$operators, Bitshift::$operators, Multiplication::$operators)), 
+                                                                         Addition::$operators, Bitshift::$operators, 
+                                                                         Multiplication::$operators, Preplusplus::$operators, 
+                                                                         Concatenation::$operators)), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('token' => Comparison::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => array_merge($operands, array('Assignation'))),
                                    2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), 
-                                                           Addition::$operators, Multiplication::$operators, Assignation::$operators )),
+                                                           Addition::$operators, Multiplication::$operators, Assignation::$operators, Concatenation::$operators )),
         );
         
         $this->actions = array('makeEdge'    => array('1' => 'RIGHT',

@@ -12,6 +12,7 @@ class Concatenation extends TokenAuto {
                           'Preplusplus', 'Postplusplus', 'Cast',);
         
         $this->conditions = array(-2 => array('filterOut' => array_merge(Addition::$operators, Multiplication::$operators,
+                                                                         Preplusplus::$operators, 
                                                             array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR'))), 
                                   -1 => array('atom'  => $operands ),
                                    0 => array('token' => Concatenation::$operators,

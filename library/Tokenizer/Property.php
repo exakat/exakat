@@ -7,10 +7,11 @@ class Property extends TokenAuto {
     
     function _check() {
         $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall', 'Methodcall', 'Functioncall');
-        $this->conditions = array( -1 => array('atom' => $operands), 
+        $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+                                   -1 => array('atom' => $operands), 
                                     0 => array('token' => Property::$operators),
                                     1 => array('atom' => array('String', 'Variable')),
-                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET')),
+                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS')), //'T_OPEN_BRACKET'
                                     );
         
         $this->actions = array('makeEdge'   => array( -1 => 'OBJECT',
