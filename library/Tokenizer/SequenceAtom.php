@@ -6,7 +6,7 @@ class SequenceAtom extends TokenAuto {
     function _check() {
         $yield_operators =  array_merge(array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', 'T_ABSTRACT', 'T_FINAL', 
                                               'T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS', 'T_CLASS', 'T_EXTENDS', 'T_IMPLEMENTS', 
-                                              'T_INTERFACE', 'T_ELSE', 'T_OBJECT_OPERATOR', 'T_QUOTE'),
+                                              'T_INTERFACE', 'T_ELSE', 'T_OBJECT_OPERATOR', 'T_QUOTE', 'T_COMMA', ),
                                         Assignation::$operators, Functioncall::$operators);
         
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CATCH',

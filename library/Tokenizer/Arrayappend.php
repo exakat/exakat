@@ -6,7 +6,8 @@ class Arrayappend extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET');
     
     function _check() {
-        $this->conditions = array(-1 => array('atom' => array('Variable', 'Property', 'Staticproperty', 'Array')),
+        $this->conditions = array(-2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')), 
+                                  -1 => array('atom' => array('Variable', 'Property', 'Staticproperty', 'Array')),
                                    0 => array('token' => Arrayappend::$operators),
                                    1 => array('token' => 'T_CLOSE_BRACKET'),
         );
