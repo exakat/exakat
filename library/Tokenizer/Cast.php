@@ -9,7 +9,9 @@ class Cast extends TokenAuto {
         $this->conditions = array(0 => array('token' => Cast::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
-                                  2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+                                  2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 
+                                                                              'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'),
+                                                                        Preplusplus::$operators, Postplusplus::$operators)),
         );
         
         $this->actions = array('makeEdge'   => array( '1' => 'CAST'),

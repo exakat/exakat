@@ -9,8 +9,8 @@ class Label extends TokenAuto {
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_QUESTION','T_CASE', 'T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'),
                                                                          Assignation::$operators, Addition::$operators, Multiplication::$operators,
                                                                          Comparison::$operators)), 
-                                  -1 => array('atom' => 'String'),
-                                   0 => array('token' => 'T_COLON'));
+                                  -1 => array('atom'      => 'String'),
+                                   0 => array('token'     => Label::$operators));
         
         $this->actions = array('transform'  => array(-1 => 'LABEL'),
                                'atom'       => 'Label',

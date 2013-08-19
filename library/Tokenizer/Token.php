@@ -161,7 +161,7 @@ class Token {
     	
     	return $result[0][0];
     }
-    
+
     public function checkRemaining() {
         $class = str_replace("Tokenizer\\", '', get_class($this));
         if (in_array($class, Token::$types)) {
