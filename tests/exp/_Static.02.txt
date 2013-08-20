@@ -10,49 +10,21 @@ Label : CODE
       ;
       Label : ELEMENT
         static
-        Label : NAME
-          $c
-        Label : VALUE
-          void
-      Label : ELEMENT
-        static
-        Label : NAME
-          $d
-        Label : VALUE
-          void
-      Label : ELEMENT
-        static
-        Label : NAME
-          $e
-        Label : VALUE
-          void
-      Label : ELEMENT
-        static
-        Label : NAME
-          $f
-        Label : VALUE
-          void
-      Label : ELEMENT
-        static
-        Label : NAME
-          $g
-        Label : VALUE
-          void
-      Label : ELEMENT
-        static
-        Label : NAME
-          $i
-        Label : VALUE
-          void
-      Label : ELEMENT
-        static
-        Label : NAME
-          $h
-        Label : VALUE
-          void
-      Label : ELEMENT
-        static
-        Label : NAME
-          $b
-        Label : VALUE
-          void
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            $i
+          Label : ARGUMENT
+            $h
+          Label : ARGUMENT
+            $g
+          Label : ARGUMENT
+            $f
+          Label : ARGUMENT
+            $e
+          Label : ARGUMENT
+            $d
+          Label : ARGUMENT
+            $c
+          Label : ARGUMENT
+            $b

@@ -8,12 +8,12 @@ Label : CODE
       new
       Label : NEW
         ->
+        Label : OBJECT
+          $b
         Label : METHOD
           a
           Label : ARGUMENTS
             void
-        Label : OBJECT
-          $b
     Label : LEFT
       ->
       Label : PROPERTY
