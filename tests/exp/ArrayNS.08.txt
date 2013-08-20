@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    .=
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $x
+    Label : RIGHT
+      ::
+      Label : CLASS
+        C
+      Label : METHOD
+        b
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            [
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENTS
+                void
+          Label : ARGUMENT
+            [
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENTS
+                void
+          Label : ARGUMENT
+            [
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENTS
+                void
