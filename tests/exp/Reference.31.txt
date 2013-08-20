@@ -1,0 +1,46 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      &
+      Label : LEFT
+        +
+        Label : RIGHT
+          "0"
+        Label : LEFT
+          $d
+      Label : RIGHT
+        ==
+        Label : RIGHT
+          $c
+        Label : LEFT
+          ->
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              void
+          Label : OBJECT
+            $a
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          void
+      Label : ELEMENT
+        true
+  Label : ELSE
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          void
+      Label : ELEMENT
+        false
