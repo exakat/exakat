@@ -9,7 +9,7 @@ class ArgumentsNoComma extends TokenAuto {
         // @note f(1) : no comma 
         $this->conditions = array(-1 => array('token' => array('T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 'T_NS_SEPARATOR', 
                                                                'T_VARIABLE', 'T_ISSET', 'T_LIST', 'T_EVAL', 
-                                                               'T_EXIT', 'T_DIE', 'T_DECLARE', 'T_STATIC',)),
+                                                               'T_EXIT', 'T_DIE', 'T_DECLARE', 'T_STATIC', 'T_FUNCTION', )),
                                    0 => array('token' => ArgumentsNoComma::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => Arguments::$operands_wa),
