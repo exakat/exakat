@@ -8,7 +8,7 @@ class _Use extends TokenAuto {
     function _check() {
     // use \a\b;
         $this->conditions = array( 0 => array('token' => _Use::$operators),
-                                   1 => array('atom' => 'Nsname'),
+                                   1 => array('atom' => array('Nsname', 'String')),
                                    2 => array('token' => 'T_SEMICOLON'),
                                  );
         

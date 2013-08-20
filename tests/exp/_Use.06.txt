@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : ELEMENT
+        K
+    Label : USE
+      \
+      Label : ELEMENT
+        N
+    Label : USE
+      \
+      Label : ELEMENT
+        M
+    Label : USE
+      \
+      Label : ELEMENT
+        L
+    Label : USE
+      \
+      Label : ELEMENT
+        X
+      Label : ELEMENT
+        Z
+    Label : USE
+      \
+      Label : ELEMENT
+        E
+      Label : ELEMENT
+        D
+    Label : USE
+      \
+      Label : ELEMENT
+        C
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        A
