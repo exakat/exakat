@@ -21,6 +21,6 @@ class _Static extends Tokenizeur {
     public function test_Static10()  { $this->generic_test('_Static.10'); }
     public function test_Static11()  { $this->generic_test('_Static.11'); }
     public function test_Static12()  { $this->generic_test('_Static.12'); }
-    public function test_Static12()  { $this->generic_test('_Static.12'); }
+
 }
 ?>

@@ -275,13 +275,76 @@ g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');
             unset($actions['to_use']);
         }
 
-        if (isset($actions['to_global'])) {
+        if (isset($actions['to_lambda'])) {
             $qactions[] = "
-/* to global with arguments */
+/* to to_lambda function */
 
+x = g.addVertex(null, [code:'lambda', atom:'String', token:'T_STRING', 'file':it.file, virtual:true]);
+g.addEdge(it, x, 'NAME');
+
+op = it.out('NEXT').next();
+cp = it.out('NEXT').out('NEXT').out('NEXT').next();
+
+g.addEdge(it, it.out('NEXT').out('NEXT').next(), 'ARGUMENT');
+block = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+g.addEdge(it, block, 'BLOCK');
+
+g.addEdge(it, block.out('NEXT').next(), 'NEXT');
+
+g.removeEdge(block.outE('NEXT').next());
+
+op.bothE('NEXT').each{ g.removeEdge(it); }
+cp.bothE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), op, 'DELETE');   
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), cp, 'DELETE');   
 
 ";
-            unset($actions['to_global']);
+            unset($actions['to_lambda']);
+        }
+
+        if (isset($actions['to_lambda_use'])) {
+            $qactions[] = "
+/* to to_lambda function with use */
+
+x = g.addVertex(null, [code:'lambda', atom:'String', token:'T_STRING', 'file':it.file, virtual:true]);
+g.addEdge(it, x, 'NAME');
+
+x = it.out('NEXT').next();
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
+x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+
+x = x.out('NEXT').next();
+x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(it, x, 'ARGUMENT');
+
+x = x.out('NEXT').next();
+x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
+
+x = x.out('NEXT').next();
+x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
+
+x = x.out('NEXT').next();
+x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
+
+x = x.out('NEXT').next();
+g.addEdge(it, x, 'USE');
+
+x = x.out('NEXT').next();
+x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
+
+x = x.out('NEXT').next();
+g.addEdge(it, x, 'Block');
+
+x = x.out('NEXT').next();
+g.removeEdge(x.inE('NEXT').next());
+g.addEdge(it, x, 'NEXT');   
+
+";
+            unset($actions['to_lambda_use']);
         }
         
         if (isset($actions['to_ppp'])) {

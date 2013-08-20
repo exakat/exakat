@@ -27,7 +27,7 @@ class Assignation extends TokenAuto {
                           'Heredoc', 'Preplusplus', 'Postplusplus', 'Methodcall', 'Nsname', 
                           'Assignation', 'Variable', 'Reference', 'Boolean', 'Magicconstant',
                           'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison', 
-                          'Clone', 'Shell', 'Include', 'Instanceof', 
+                          'Clone', 'Shell', 'Include', 'Instanceof', 'Function', 
                          );
         
         $this->conditions = array(-2 => array('filterOut2' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_AND',)),
