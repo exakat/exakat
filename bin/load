@@ -84,6 +84,8 @@ function process_file($filename) {
     }
     
     $php = file_get_contents($filename);
+//    print mb_detect_encoding($php)."\n";
+    
     $file = realpath($filename);
     $tokens = token_get_all($php);
     $log['token_initial'] = count($tokens);
@@ -216,6 +218,25 @@ function process_file($filename) {
                 
                 $Tid++;
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_LNUMBER')
+                                              ->setProperty('code', 'void')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('file', $file)
+                                              ->setProperty('atom', 'Void')->save();
+
+                $to_index = false;
+            } elseif (token_name($token[0]) == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
+                $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
+                                              ->setProperty('code', $token[1])
+                                              ->setProperty('line', $token[2])
+                                              ->setProperty('file', $file)->save();
+                if (isset($previous)) {
+                    $previous->relateTo($T[$Tid], 'NEXT')->save();
+                }
+                $regexIndex["Phpcode"]->relateTo($T[$Tid], 'INDEXED')->save();
+                $previous = $T[$Tid];
+                
+                $Tid++;
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
                                               ->setProperty('file', $file)
