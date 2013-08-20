@@ -58,7 +58,7 @@ class Ifthen extends TokenAuto {
         $this->conditions = array(  0 => array('token' => Ifthen::$operators,
                                                'atom' => 'none'),
                                     1 => array('atom' => 'Parenthesis'),
-                                    2 => array('notAtom' => 'Block', 'atom' => 'yes'),
+                                    2 => array('notAtom' => array('Block', 'Sequence'), 'atom' => 'yes'),
                                     3 => array('filterOut' => Token::$instruction_ending),
         );
         
@@ -67,7 +67,7 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
 
         // if, elseif followed by a single instruction without a ;
-        $this->conditions = array(  0 => array('token' => array('T_IF', 'T_ELSEIF'),
+        $this->conditions = array(  0 => array('token' => Ifthen::$operators,
                                                'atom' => 'none'),
                                     1 => array('atom' => 'Parenthesis'),
                                     2 => array('atom' => array('For', 'Switch', 'Foreach', 'While', 'Dowhile', 'Ifthen' ))
@@ -88,7 +88,6 @@ class Ifthen extends TokenAuto {
         $this->actions = array('transform'    => array(1 => 'CONDITION',
                                                        2 => 'THEN'),
                                'atom'       => 'Ifthen');
-
         $this->checkAuto(); 
 
     // @doc if ( ) : endif

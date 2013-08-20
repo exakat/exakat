@@ -57,10 +57,10 @@ class Sequence extends TokenAuto {
         // @note instructions separated by ; with a special case for alternative syntax
         $this->conditions = array(-3 => array('token' => array('T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_ELSE')),
                                   -2 => array('token' => 'T_COLON'), 
-                                  -1 => array('atom' => $operands ),
+                                  -1 => array('atom'  => $operands, 'notToken' => 'T_ELSEIF' ),
                                    0 => array('token' => Sequence::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('atom' => $operands),
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => $operands, 'notToken' => 'T_ELSEIF' ),
                                    2 => array('filterOut' => $next_operator),
         );
         
@@ -161,6 +161,17 @@ class Sequence extends TokenAuto {
                                'atom'        => 'Sequence',
                                'cleanIndex'  => true
                                );
+        $this->checkAuto(); 
+
+        // Sequence followed by ; followed by elseif atom.
+        $this->conditions = array(  -1 => array('atom'  => 'Sequence'),
+                                     0 => array('token' => Sequence::$operators),
+                                     1 => array('token' => 'T_ELSEIF',
+                                                'atom'  => 'Ifthen')
+        );
+        
+        $this->actions = array('transform'   => array(0 => 'DROP'),
+                               'keepIndexed' => true);
         $this->checkAuto(); 
        
         return $this->checkRemaining();
