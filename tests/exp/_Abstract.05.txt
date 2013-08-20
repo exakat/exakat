@@ -12,18 +12,18 @@ Label : CODE
         ;
         Label : ELEMENT
           static
-          Label : VALUE
+          Label : ARGUMENTS
             void
-          Label : DEFINE
-            function
-            Label : NAME
-              d
-            Label : ARGUMENTS
-              void
-            Label : BLOCK
-              {
-              Label : CODE
+            Label : ARGUMENT
+              function
+              Label : NAME
+                d
+              Label : ARGUMENTS
                 void
+              Label : BLOCK
+                {
+                Label : CODE
+                  void
         Label : ELEMENT
           abstract
           Label : ABSTRACT
