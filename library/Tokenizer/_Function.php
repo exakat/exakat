@@ -56,17 +56,17 @@ class _Function extends TokenAuto {
                                'cleanIndex' => true);
         $this->checkAuto();
 
-        // lambda function ($x use $y)
+        // lambda function ($x) use ($y)
         $this->conditions = array(0 => array('token' =>  _Function::$operators,
-                                             'atom' => 'none'),
+                                             'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('atom' => 'Arguments'),
+                                  2 => array('atom'  => 'Arguments'),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token' => 'T_USE'),
                                   5 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  6 => array('atom' => 'Arguments'),
+                                  6 => array('atom'  => 'Arguments'),
                                   7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  8 => array('atom' => 'Block')
+                                  8 => array('atom'  => 'Block')
         );
         
         $this->actions = array('to_lambda_use'  => true,

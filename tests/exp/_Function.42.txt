@@ -1,0 +1,32 @@
+<?php
+
+Label : CODE
+  function
+  Label : ARGUMENT
+    ,
+    Label : ARGUMENT
+      $c
+    Label : ARGUMENT
+      $b
+    Label : ARGUMENT
+      $a
+  Label : NAME
+    lambda
+  Label : USE
+    void
+    Label : ARGUMENT
+      $d
+  Label : Block
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ->
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g
+        Label : OBJECT
+          $e
