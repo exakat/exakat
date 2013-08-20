@@ -9,7 +9,7 @@ class Phpcodemiddle extends TokenAuto {
 // ? >A<?php 
         $this->conditions = array( 0 => array('token' => Phpcodemiddle::$operators,
                                               'atom' => 'none'),
-                                   1 => array('atom' => 'RawString'),
+                                   1 => array('atom' =>  array('RawString', 'Sequence')),
                                    2 => array('token' => 'T_OPEN_TAG',
                                               'atom' => 'none'),
         );
