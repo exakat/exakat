@@ -6,8 +6,9 @@ class ArrayNS extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET');
     
     function _check() {
+        $yields =  array('T_VARIABLE', 'T_CLOSE_BRACKET', 'T_STRING', 'T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', );
         $this->conditions = array(//-2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')), 
-                                  //-1 => array('atom' => array('Variable', 'Property', 'Staticproperty', 'Array')),
+                                  -1 => array('filterOut2' => $yields),
                                    0 => array('token' => ArrayNS::$operators),
                                    1 => array('atom'  => 'yes', 'notAtom' => 'Arguments'),
                                    2 => array('token' => 'T_CLOSE_BRACKET'),
@@ -18,7 +19,7 @@ class ArrayNS extends TokenAuto {
         $this->checkAuto();
 
         $this->conditions = array(//-2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')), 
-                                  //-1 => array('atom' => array('Variable', 'Property', 'Staticproperty', 'Array')),
+                                  -1 => array('filterOut2' => $yields),
                                    0 => array('token' => ArrayNS::$operators),
                                    1 => array('token' => 'T_CLOSE_BRACKET'),
         );
@@ -29,7 +30,7 @@ class ArrayNS extends TokenAuto {
         $this->checkAuto();
 
         $this->conditions = array(//-2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')), 
-                                  //-1 => array('atom' => array('Variable', 'Property', 'Staticproperty', 'Array')),
+                                  -1 => array('filterOut2' => $yields),
                                    0 => array('token' => ArrayNS::$operators),
                                    1 => array('atom'  => 'Arguments'),
                                    2 => array('token' => 'T_CLOSE_BRACKET'),
