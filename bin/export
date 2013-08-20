@@ -24,12 +24,21 @@ if ($id = array_search('-dot', $args)) {
 }
 
 if ($id = array_search('-o', $args)) {
+    define('OUTPUT', $args[$id + 1]);
+} else {
+    define('OUTPUT', false);
+}
+
+if ($id = array_search('-f', $args)) {
     define('FILE', $args[$id + 1]);
 } else {
     define('FILE', false);
 }
 
 $queryTemplate = "g.V.except([g.v(0)])"; // .hasNot('index', 'yes')
+if (FILE) {
+    $queryTemplate .= ".has('file', '".FILE."')";
+}
 $params = array('type' => 'IN');
 $query = new Gremlin\Query($client, $queryTemplate, $params);
 try { 
@@ -52,7 +61,8 @@ foreach($vertices as $v) {
     }
 }
 
-$queryTemplate = "g.E";
+//$queryTemplate = "g.E";
+$queryTemplate .= ".outE()";
 $params = array('type' => 'IN');
 $query = new Gremlin\Query($client, $queryTemplate, $params);
 $edges = $query->getResultSet();
@@ -170,8 +180,8 @@ function display_table($V, $E, $root, $level = 0) {
 }
 
 
-if (FILE) {
-    $fp = fopen(FILE, 'w+');
+if (OUTPUT) {
+    $fp = fopen(OUTPUT, 'w+');
     fwrite($fp, $text);
     fclose($fp);
 } else {
