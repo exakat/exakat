@@ -87,6 +87,7 @@ class Token {
                                  'Void', 
                                  'Typehint',
                                  '_Use', 
+                                 'ArrayNS',
                                 );
 
     static public $instruction_ending = array();
