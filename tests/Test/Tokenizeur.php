@@ -12,7 +12,7 @@ class Tokenizeur extends \PHPUnit_Framework_TestCase {
     }
     
     function generic_test($file) {
-        $shell = 'cd ..; php bin/load -f tests/source/'.$file.'.php; php bin/analyzer; php bin/export -text -f tests/source/'.$file.'';
+        $shell = 'cd ..; php bin/load -f tests/source/'.$file.'.php; php bin/analyzer; php bin/export -text -f '.dirname(__DIR__).'/source/'.$file.'.php';
         $res = shell_exec($shell);
         
         $exp = file_get_contents('exp/'.$file.'.txt');
