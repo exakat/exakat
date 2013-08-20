@@ -57,6 +57,7 @@ $classes = array(
     'Nsname',       // Fait
     '_Namespace',   // Fait
     '_Use',         // Fait
+    'ArrayNS',      // Fait
     '_Include',     // Fait
     'Preplusplus',  // Fait
     'Postplusplus', // Fait
