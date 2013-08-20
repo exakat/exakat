@@ -1,0 +1,10 @@
+<?php
+
+Label : CODE
+  new
+  Label : NEW
+    static
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ;

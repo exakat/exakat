@@ -48,7 +48,7 @@ class Arguments extends TokenAuto {
         $operands[] = 'Arguments';
         
         // @note arguments separated by ,
-        $this->conditions = array(-2 => array('token' => array_merge(array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_ECHO', 'T_GLOBAL', 'T_IMPLEMENTS', 'T_EXTENDS', 'T_VAR', 'T_SEMICOLON', 'T_STATIC', 'T_DECLARE', 'T_CONST' ), 
+        $this->conditions = array(-2 => array('token' => array_merge(array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_ECHO', 'T_GLOBAL', 'T_USE', 'T_IMPLEMENTS', 'T_EXTENDS', 'T_VAR', 'T_SEMICOLON', 'T_STATIC', 'T_DECLARE', 'T_CONST' ), 
                                                                      _Ppp::$operators)),
                                   -1 => array('atom' => $operands),
                                    0 => array('token' => Arguments::$operators,

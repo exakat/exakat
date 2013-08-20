@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Functioncall extends TokenAuto {
     static $operators = array('T_STRING', 'T_ECHO', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 'T_NS_SEPARATOR', 
                               'T_VARIABLE', 'T_PRINT', 'T_ISSET', 'T_LIST', 'T_EVAL', 
-                              'T_EXIT', 'T_DIE');
+                              'T_EXIT', 'T_DIE', 'T_STATIC',);
 
     function _check() {
         
@@ -26,7 +26,7 @@ class Functioncall extends TokenAuto {
         $this->checkAuto();
 
         // functioncall(with arguments)
-        $this->conditions = array( 0 => array('token' => array('T_ECHO', 'T_PRINT', 'T_EXIT'),
+        $this->conditions = array( 0 => array('token' => array('T_ECHO', 'T_PRINT', 'T_EXIT', 'T_STATIC',),
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Arguments'),
                                    2 => array('filterOut2' => array_merge( array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_COMMA', 'T_QUESTION'),

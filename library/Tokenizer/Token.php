@@ -86,6 +86,7 @@ class Token {
                                  // 'ConcatenationAtom', 
                                  'Void', 
                                  'Typehint',
+                                 '_Use', 
                                 );
 
     static public $instruction_ending = array();

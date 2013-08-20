@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class ArgumentsNoParenthesis extends TokenAuto {
-    static public $operators = array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE', 'T_EXIT');
+    static public $operators = array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE', 'T_EXIT', 'T_STATIC', );
 
     function _check() {
         // @note echo 's' : no parenthesis
@@ -21,7 +21,7 @@ class ArgumentsNoParenthesis extends TokenAuto {
 
         // @note exit; no parenthesis, no argument. 
         $this->conditions = array( 0 => array('atom' => 'none',
-                                              'token' => array('T_EXIT')),
+                                              'token' => array('T_EXIT', 'T_STATIC',)),
                                    1 => array('token'  => 'T_SEMICOLON') 
         );
         

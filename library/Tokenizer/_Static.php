@@ -23,7 +23,8 @@ class _Static extends TokenAuto {
         $this->checkAuto(); 
 
     // class x { static $x, $y }
-        $this->conditions = array( 0 => array('token' => _Static::$operators),
+        $this->conditions = array(-1 => array('filterOut2' => array('T_NEW')),
+                                   0 => array('token' => _Static::$operators),
                                    1 => array('atom' => 'Arguments'),
                                  );
         

@@ -16,7 +16,7 @@ class Sequence extends TokenAuto {
                           'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
                           'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
                           'Bitshift', 'Void', 'Dowhile', 'Clone', 'Declare', 'Halt', 'Interface', 'Block', 
-                          'RawString', 'Namespace', 'Boolean',
+                          'RawString', 'Namespace', 'Boolean', 'Use',
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
@@ -129,7 +129,7 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note End of PHP script
-        $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS', 'T_BREAK')),), 
+        $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS', 'T_BREAK', 'T_USE')),), 
                                   -1 => array('atom'       => $operands,
                                               'notToken'   => 'T_ELSEIF', ),
                                    0 => array('token'      => Sequence::$operators,
@@ -146,7 +146,7 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note End of PHP script, alternative syntax
-        $this->conditions = array(-3 => array('token'    => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', )), 
+        $this->conditions = array(-3 => array('token'    => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_USE')), 
                                   -2 => array('token'    => 'T_COLON',), 
                                   -1 => array('atom'     => $operands,
                                               'notToken' => 'T_ELSEIF', ),

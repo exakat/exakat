@@ -253,6 +253,28 @@ g.removeVertex(var);
             unset($actions['to_var']);
         }
 
+        if (isset($actions['to_use'])) {
+            $qactions[] = "
+/* to use with arguments */
+var = it;
+arg = it.out('NEXT').next();
+
+var.out('NEXT').has('atom', 'Arguments').out('ARGUMENT').each{
+    
+    g.addEdge(var, it, 'USE');
+    g.removeEdge(it.inE('ARGUMENT').next());
+}
+
+d = it.out('NEXT').out('NEXT').next();
+it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
+
+g.addEdge(var, d, 'NEXT');
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');   
+
+";
+            unset($actions['to_use']);
+        }
+
         if (isset($actions['to_global'])) {
             $qactions[] = "
 /* to global with arguments */
