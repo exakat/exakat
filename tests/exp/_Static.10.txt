@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ::
+    Label : METHOD
+      B
+      Label : ARGUMENTS
+        void
+    Label : CLASS
+      static

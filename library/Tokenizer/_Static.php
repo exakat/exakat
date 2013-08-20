@@ -34,6 +34,15 @@ class _Static extends TokenAuto {
 
         $this->checkAuto(); 
 
+    // static :: ....
+        $this->conditions = array( 0 => array('token' => _Static::$operators),
+                                   1 => array('token' => 'T_DOUBLE_COLON'),
+                                 );
+        
+        $this->actions = array('atom'     => 'Static');
+
+        $this->checkAuto(); 
+
         return $this->checkRemaining();
     }
 }

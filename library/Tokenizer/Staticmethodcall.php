@@ -6,7 +6,7 @@ class Staticmethodcall extends TokenAuto {
     static public $operators = array('T_DOUBLE_COLON');
 
     function _check() {
-        $operands = array('Constant', 'String', 'Variable', 'Array', 'Nsname');
+        $operands = array('Constant', 'String', 'Variable', 'Array', 'Nsname', 'Static');
 
         $this->conditions = array( -1 => array('atom' => $operands), 
                                     0 => array('token' => Staticmethodcall::$operators),
