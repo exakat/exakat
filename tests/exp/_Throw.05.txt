@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      new
+      Label : NEW
+        \
+        Label : ELEMENT
+          C
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          A

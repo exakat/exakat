@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      new
+      Label : NEW
+        \
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            b
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                $f
+              Label : ARGUMENT
+                ->
+                Label : PROPERTY
+                  e
+                Label : OBJECT
+                  $d
+              Label : ARGUMENT
+                'C'
+        Label : ELEMENT
+          A
