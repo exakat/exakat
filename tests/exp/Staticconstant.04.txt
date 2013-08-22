@@ -1,0 +1,34 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      \
+      Label : ELEMENT
+        D
+      Label : ELEMENT
+        C
+      Label : ELEMENT
+        A
+    Label : CONSTANT
+      B
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      \
+      Label : ELEMENT
+        C
+      Label : ELEMENT
+        A
+    Label : CONSTANT
+      B
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      \
+      Label : ELEMENT
+        A
+    Label : CONSTANT
+      B

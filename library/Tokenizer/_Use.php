@@ -28,6 +28,20 @@ class _Use extends TokenAuto {
                                'atom'     => 'Use' );
         $this->checkAuto(); 
 
+    // use \b\c as d;
+        $this->conditions = array( 0 => array('token' => _Use::$operators),
+                                   1 => array('atom'  => array('Nsname', 'String')),
+                                   2 => array('token' => 'T_AS'),
+                                   3 => array('atom' => array('String')),
+                                 );
+        
+        $this->actions = array('transform'  => array( 1 => 'USE',
+                                                      2 => 'DROP',
+                                                      3 => 'AS'),
+                               'atom'       => 'Use',
+                               'cleanIndex' => true );
+        $this->checkAuto(); 
+
         return $this->checkRemaining();
     }
 }

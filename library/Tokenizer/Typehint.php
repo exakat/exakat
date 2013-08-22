@@ -8,7 +8,7 @@ class Typehint extends TokenAuto {
     function _check() {
         $this->conditions = array(-1 => array('filterOut' => 'T_CATCH'),
                                    0 => array('token' => Typehint::$operators),
-                                   1 => array('atom' => 'yes', 'token' => 'T_STRING'),
+                                   1 => array('atom' => 'yes', 'token' => array('T_STRING', 'T_NS_SEPARATOR')),
                                    2 => array('atom' => array('Variable', 'Assignation', 'Reference'    )),
                                    3 => array('filterOut' => Assignation::$operators),
         );

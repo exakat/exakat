@@ -1,0 +1,40 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ::
+    Label : METHOD
+      B
+      Label : ARGUMENTS
+        void
+    Label : CLASS
+      \
+      Label : ELEMENT
+        D
+      Label : ELEMENT
+        C
+      Label : ELEMENT
+        A
+  Label : ELEMENT
+    ::
+    Label : METHOD
+      B
+      Label : ARGUMENTS
+        void
+    Label : CLASS
+      \
+      Label : ELEMENT
+        C
+      Label : ELEMENT
+        A
+  Label : ELEMENT
+    ::
+    Label : METHOD
+      B
+      Label : ARGUMENTS
+        void
+    Label : CLASS
+      \
+      Label : ELEMENT
+        A

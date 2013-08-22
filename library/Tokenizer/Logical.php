@@ -10,7 +10,8 @@ class Logical extends TokenAuto {
     function _check() {
         $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', ), 
                                                                           Comparison::$operators, Bitshift::$operators, Addition::$operators,
-                                                                          Multiplication::$operators, Concatenation::$operators)),
+                                                                          Multiplication::$operators, Concatenation::$operators, 
+                                                                          Preplusplus::$operators)),
                                    -1 => array('atom' => 'yes', 'notAtom' => 'Sequence' ), 
                                     0 => array('token' => Logical::$operators,
                                                'atom' => 'none'),

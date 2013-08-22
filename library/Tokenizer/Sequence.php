@@ -25,7 +25,7 @@ class Sequence extends TokenAuto {
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                 'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
                                 'T_THROW', 'T_CATCH', 'T_ABSTRACT', 'T_CASE', 'T_DEFAULT', 'T_CLONE', 'T_DECLARE',
-                                'T_STRING', 'T_USE',
+                                'T_STRING', 'T_USE', 'T_AS'
                                  );
                                  
         $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, 
@@ -129,7 +129,7 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note End of PHP script
-        $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS', 'T_BREAK', 'T_USE')),), 
+        $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS', 'T_BREAK', 'T_USE', 'T_AS')),), 
                                   -1 => array('atom'       => $operands,
                                               'notToken'   => 'T_ELSEIF', ),
                                    0 => array('token'      => Sequence::$operators,
@@ -146,7 +146,7 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note End of PHP script, alternative syntax
-        $this->conditions = array(-3 => array('token'    => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_USE')), 
+        $this->conditions = array(-3 => array('token'    => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_USE', 'T_AS')), 
                                   -2 => array('token'    => 'T_COLON',), 
                                   -1 => array('atom'     => $operands,
                                               'notToken' => 'T_ELSEIF', ),

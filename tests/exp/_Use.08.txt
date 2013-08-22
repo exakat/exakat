@@ -1,0 +1,30 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : ELEMENT
+        A
+    Label : AS
+      F
+  Label : ELEMENT
+    use
+    Label : USE
+      A
+    Label : AS
+      E
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : ELEMENT
+        C
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        A
+    Label : AS
+      D

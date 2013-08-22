@@ -6,9 +6,10 @@ class Staticproperty extends TokenAuto {
     static public $operators = array('T_DOUBLE_COLON');
 
     function _check() {
-        $operands = array('Constant', 'String', 'Variable', 'Array', 'Static' );
+        $operands = array('Constant', 'String', 'Variable', 'Array', 'Static', 'Nsname', );
         
-        $this->conditions = array( -1 => array('atom' => $operands), 
+        $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),
+                                   -1 => array('atom' => $operands), 
                                     0 => array('token' => Staticproperty::$operators),
                                     1 => array('atom' => array('Variable', 'Array', 'Property', )),
                                     2 => array('filterOut' => array('T_OPEN_PARENTHESIS')));
