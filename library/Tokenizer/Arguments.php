@@ -58,6 +58,7 @@ class Arguments extends TokenAuto {
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
                                    2 => array('token' => array('T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_SEMICOLON', 'T_OPEN_CURLY')),
+                                   // removed T_OPEN_CURLY, which is supported below.
                                  );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
@@ -70,13 +71,14 @@ class Arguments extends TokenAuto {
                                'cleanIndex' => true
                                );
         $this->checkAuto();
+
 
         // @note arguments separated by , (interface), ending on a {
         $this->conditions = array(-1 => array('atom' => array('String', 'Arguments') ),
                                    0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => 'String'),
-                                   2 => array('token' => 'T_OPEN_CURLY'),
+                                   2 => array('token' => 'T_OPEN_CURLY')
                                  );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
@@ -89,7 +91,6 @@ class Arguments extends TokenAuto {
                                'cleanIndex' => true
                                );
         $this->checkAuto();
-
 
         // @note implements a,b (two only)
         $this->conditions = array(-2 => array('token' => 'T_IMPLEMENTS' ),
