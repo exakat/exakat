@@ -8,20 +8,6 @@ Label : CODE
       ?
       Label : CONDITION
         ||
-        Label : LEFT
-          ==
-          Label : RIGHT
-            2
-          Label : LEFT
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                'c'
-            Label : INDEX
-              'd'
         Label : RIGHT
           ==
           Label : RIGHT
@@ -36,6 +22,20 @@ Label : CODE
                 'f'
             Label : INDEX
               'g'
+        Label : LEFT
+          ==
+          Label : RIGHT
+            2
+          Label : LEFT
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                'c'
+            Label : INDEX
+              'd'
       Label : THEN
         'h'
       Label : ELSE

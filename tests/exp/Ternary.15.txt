@@ -8,12 +8,6 @@ Label : CODE
       ?
       Label : CONDITION
         ||
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            'd'
         Label : RIGHT
           ::
           Label : METHOD
@@ -24,6 +18,12 @@ Label : CODE
                 'e'
           Label : CLASS
             C
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            'd'
       Label : THEN
         1
       Label : ELSE
