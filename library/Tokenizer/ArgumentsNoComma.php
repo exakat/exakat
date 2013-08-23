@@ -27,8 +27,9 @@ class ArgumentsNoComma extends TokenAuto {
                                    1 => array('atom'  => Arguments::$operands_wa),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
-                                   3 => array('filterOut' => array_merge(array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS'),
-                                                                        Logical::$operators)),
+                                   3 => array('filterOut2' => array_merge(array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS'),
+                                                                        Logical::$operators, Addition::$operators,
+                                                                        Multiplication::$operators, Bitshift::$operators)),
         );
 
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));

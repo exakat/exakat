@@ -37,7 +37,8 @@ class Parenthesis extends TokenAuto {
                                    1 => array('atom'  => $operands),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
-                                   3 => array('token' => array_merge(Logical::$operators, Multiplication::$operators, Addition::$operators)),
+                                   3 => array('token' => array_merge(Logical::$operators, Multiplication::$operators, Addition::$operators, 
+                                                                     Bitshift::$operators)),
         );
         
         $this->actions = array('makeEdge' => array( '1' => 'CODE'),

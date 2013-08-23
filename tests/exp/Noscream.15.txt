@@ -8,13 +8,13 @@ Label : CODE
       @
       Label : AT
         ::
+        Label : CLASS
+          B
         Label : METHOD
           c
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $d
-        Label : CLASS
-          B
     Label : LEFT
       $a

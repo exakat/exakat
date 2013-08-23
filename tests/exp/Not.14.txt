@@ -8,18 +8,18 @@ Label : CODE
       !
       Label : NOT
         ::
-        Label : METHOD
-          C
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $D
         Label : CLASS
           \
           Label : ELEMENT
             B
           Label : ELEMENT
             A
+        Label : METHOD
+          C
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $D
   Label : THEN
     {
     Label : CODE

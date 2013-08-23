@@ -542,6 +542,8 @@ root = it;
 root.setProperty('code', 'const');
 root.setProperty('token', 'T_CONST');
 
+g.removeEdge(it.outE('NEXT').next());
+
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
     x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', 'file':arg.file, virtual:true]);
     
@@ -554,14 +556,13 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.removeEdge(it.outE('RIGHT').next());
     
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
-    //g.removeVertex(it);
 }
 
-g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
-g.removeEdge(var.out('NEXT').outE('NEXT').next());
-g.removeVertex(arg);
+g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
+g.addEdge(root, arg.out('NEXT').next(), 'NEXT');
 
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), var, 'DELETE');   
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');   
 
 "; 
             unset($actions['to_const']);
