@@ -9,7 +9,11 @@ class Sign extends TokenAuto {
 
     function _check() {
         //  + -1 
-        $this->conditions = array( -1 => array('filterOut2' => array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER', 'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT',  'T_CLOSE_BRACKET', 'T_BANG',),
+        $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
+                                                                                 'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER', 
+                                                                                 'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT', 
+                                                                                 'T_CLOSE_BRACKET', 'T_BANG',),
+                                                                          Magicconstant::$operators),
                                                'notAtom' => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication',  )), 
                                     0 => array('token' => Sign::$operators,
                                                'atom' => 'none'

@@ -29,7 +29,6 @@ class Arguments extends TokenAuto {
                                    1 => array('atom' => $operands),
                                    2 => array('token' => array('T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_SEMICOLON', 
                                                                'T_OPEN_CURLY', )),
-                                                               //'T_DOT', 
                                  );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',

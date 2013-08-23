@@ -9,7 +9,7 @@ class Multiplication extends TokenAuto {
                                     'String', 'Preplusplus', 'Postplusplus', 'Nsname', 'Functioncall',
                                     'Methodcall', 'Staticmethodcall', 'Concatenation', 'Cast',
                                     'Noscream', 'Staticconstant', 'Staticproperty', 'Constant', 
-                                    'Boolean',  );
+                                    'Boolean', 'Magicconstant', );
     
     function _check() {
 

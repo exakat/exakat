@@ -6,7 +6,7 @@ class _Array extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET', 'T_OPEN_CURLY');
     
     function _check() {
-        $this->conditions = array( -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty' )),
+        $this->conditions = array( -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend', )),
                                     0 => array('token' => _Array::$operators),
                                     1 => array('atom' => 'yes'),
                                     2 => array('token' => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
