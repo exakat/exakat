@@ -15,37 +15,6 @@ class Arguments extends TokenAuto {
                                        'ArrayNS', );
 
     function _check() {
-    /*
-        // Argument next to ( 
-        $this->conditions = array(-1 => array('token' => 'T_OPEN_PARENTHESIS',
-                                              'atom' => 'none'),
-                                   0 => array('token' => Arguments::$operators,
-                                              'atom'  => 'none'),
-        );
-        $this->actions = array('addEdge'     => array(-1 => array('Void' => 'ARGUMENT')),
-                               'keepIndexed' => true);
-        $this->checkAuto();
-
-        // Argument next to ) 
-        $this->conditions = array( 0 => array('token' => Arguments::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('token' => 'T_CLOSE_PARENTHESIS',
-                                              'atom'  => 'none'),
-        );
-        $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')),
-                               'keepIndexed' => true);
-        $this->checkAuto();
-
-        // @note End of )
-        $this->conditions = array( 0 => array('token' => Arguments::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('token' => 'T_COMMA',
-                                              'atom'  => 'none'),
-        );
-        $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')),
-                               'keepIndexed' => true);
-        $this->checkAuto();
-*/
         $operands = Arguments::$operands_wa;
         $operands[] = 'Arguments';
         
@@ -72,7 +41,6 @@ class Arguments extends TokenAuto {
                                );
         $this->checkAuto();
 
-
         // @note arguments separated by , (interface), ending on a {
         $this->conditions = array(-1 => array('atom' => array('String', 'Arguments') ),
                                    0 => array('token' => Arguments::$operators,
@@ -88,44 +56,6 @@ class Arguments extends TokenAuto {
                                                       -1 => '1'),
                                'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
                                'atom'        => 'Arguments',
-                               'cleanIndex' => true
-                               );
-        $this->checkAuto();
-
-        // @note implements a,b (two only)
-        $this->conditions = array(-2 => array('token' => 'T_IMPLEMENTS' ),
-                                  -1 => array('token' => 'T_STRING'),
-                                   0 => array('token' => Arguments::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('token' => 'T_STRING')
-                            );
-        
-        $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
-                                                      -1 => 'ARGUMENT'
-                                                      ),
-                               'order'    => array( 1 => '2',
-                                                   -1 => '1'),
-                               'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
-                               'atom'       => 'Arguments',
-                               'cleanIndex' => true
-                               );
-        $this->checkAuto();
-
-        // @note implements a,b,c (three or more)
-        $this->conditions = array(-2 => array('token' => 'T_IMPLEMENTS' ),
-                                  -1 => array('atom' => 'Arguments'),
-                                   0 => array('token' => Arguments::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('token' => 'T_STRING')
-                            );
-        
-        $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
-                                                      -1 => 'ARGUMENT'
-                                                      ),
-                               'order'    => array( 1 => '2',
-                                                   -1 => '1'),
-                               'mergeNext'  => array('Arguments' => 'ARGUMENT'), 
-                               'atom'       => 'Arguments',
                                'cleanIndex' => true
                                );
         $this->checkAuto();

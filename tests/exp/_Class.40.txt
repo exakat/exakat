@@ -4,8 +4,6 @@ Label : CODE
   class
   Label : NAME
     x
-  Label : EXTENDS
-    y
   Label : IMPLEMENTS
     z
   Label : BLOCK
@@ -16,25 +14,27 @@ Label : CODE
         function
         Label : NAME
           __destruct
-        Label : ARGUMENTS
-          void
         Label : BLOCK
           {
           Label : CODE
             void
+        Label : ARGUMENTS
+          void
       Label : ELEMENT
         function
         Label : NAME
           __construct
-        Label : ARGUMENTS
-          void
         Label : BLOCK
           {
           Label : CODE
             void
+        Label : ARGUMENTS
+          void
       Label : ELEMENT
         var
         Label : VALUE
           void
         Label : DEFINE
           $a
+  Label : EXTENDS
+    y

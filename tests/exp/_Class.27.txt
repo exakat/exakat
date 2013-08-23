@@ -17,9 +17,9 @@ Label : CODE
       Label : ELEMENT
         var
         Label : NAME
-          $c
+          $d
         Label : VALUE
-          3
+          4
       Label : ELEMENT
         var
         Label : NAME
@@ -29,15 +29,15 @@ Label : CODE
       Label : ELEMENT
         var
         Label : NAME
-          $d
-        Label : VALUE
-          4
-      Label : ELEMENT
-        var
-        Label : NAME
           $a
         Label : VALUE
           1
+      Label : ELEMENT
+        var
+        Label : NAME
+          $c
+        Label : VALUE
+          3
       Label : ELEMENT
         var
         Label : NAME

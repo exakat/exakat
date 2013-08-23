@@ -11,6 +11,12 @@ Label : CODE
       Label : ELEMENT
         var
         Label : NAME
+          $f
+        Label : VALUE
+          5
+      Label : ELEMENT
+        var
+        Label : NAME
           $b
         Label : VALUE
           2
@@ -32,12 +38,6 @@ Label : CODE
           $g
         Label : VALUE
           6
-      Label : ELEMENT
-        var
-        Label : NAME
-          $f
-        Label : VALUE
-          5
       Label : ELEMENT
         var
         Label : NAME

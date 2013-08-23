@@ -4,12 +4,6 @@ Label : CODE
   class
   Label : NAME
     A
-  Label : EXTENDS
-    \
-    Label : ELEMENT
-      D
-    Label : ELEMENT
-      E
   Label : IMPLEMENTS
     \
     Label : ELEMENT
@@ -20,3 +14,9 @@ Label : CODE
     {
     Label : CODE
       void
+  Label : EXTENDS
+    \
+    Label : ELEMENT
+      D
+    Label : ELEMENT
+      E

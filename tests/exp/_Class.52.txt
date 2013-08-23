@@ -4,8 +4,6 @@ Label : CODE
   class
   Label : NAME
     x
-  Label : EXTENDS
-    y
   Label : IMPLEMENTS
     z
   Label : BLOCK
@@ -16,19 +14,21 @@ Label : CODE
         function
         Label : NAME
           a
-        Label : ARGUMENTS
-          void
         Label : BLOCK
           {
           Label : CODE
             void
+        Label : ARGUMENTS
+          void
       Label : ELEMENT
         function
         Label : NAME
           b
-        Label : ARGUMENTS
-          void
         Label : BLOCK
           {
           Label : CODE
             void
+        Label : ARGUMENTS
+          void
+  Label : EXTENDS
+    y

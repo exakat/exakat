@@ -909,30 +909,6 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             unset($actions['createSequenceWithNext']);
         }
 
-        if (isset($actions['to_block']) && $actions['to_block']) {
-            die('to_block');
-            $qactions[] = " 
-/* to_block */
-
-x = g.addVertex(null, [code:'Block With control structure', token:'T_BLOCK', atom:'Block', 'file':it.file, virtual:true]);
-
-g.addEdge(it.in('NEXT').next(), x, 'NEXT');
-g.addEdge(x, it.out('NEXT').next(), 'NEXT');
-g.addEdge(x, it, 'CODE');
-it.bothE('NEXT').each{ g.removeEdge(it); }
-
-// remove the next, if this is a ; 
-x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    semicolon = it;
-    g.addEdge(x, it.out('NEXT').next(), 'NEXT');
-    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    g.removeVertex(semicolon);
-}
-
-            ";
-            unset($actions['to_block_else']);
-        }
-
         if (isset($actions['to_block_else']) && $actions['to_block_else']) {
             $qactions[] = " 
 /* to_block_else */

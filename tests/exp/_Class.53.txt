@@ -4,8 +4,6 @@ Label : CODE
   class
   Label : NAME
     x
-  Label : EXTENDS
-    y
   Label : IMPLEMENTS
     z
   Label : BLOCK
@@ -36,3 +34,5 @@ Label : CODE
           void
         Label : DEFINE
           $a
+  Label : EXTENDS
+    y

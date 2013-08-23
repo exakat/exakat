@@ -14,9 +14,3 @@ Label : CODE
           a
         Label : VALUE
           1
-      Label : ELEMENT
-        const
-        Label : NAME
-          b
-        Label : VALUE
-          2

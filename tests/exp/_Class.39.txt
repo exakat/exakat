@@ -10,6 +10,12 @@ Label : CODE
       ;
       Label : ELEMENT
         public
+        Label : NAME
+          $f
+        Label : VALUE
+          2
+      Label : ELEMENT
+        public
         Label : VALUE
           void
         Label : DEFINE
@@ -20,6 +26,12 @@ Label : CODE
           $e
         Label : VALUE
           void
+      Label : ELEMENT
+        const
+        Label : NAME
+          b
+        Label : VALUE
+          3
       Label : ELEMENT
         public
         Label : NAME
@@ -33,12 +45,6 @@ Label : CODE
         Label : VALUE
           void
       Label : ELEMENT
-        const
-        Label : NAME
-          b
-        Label : VALUE
-          3
-      Label : ELEMENT
         public
         Label : NAME
           $b
@@ -50,12 +56,6 @@ Label : CODE
           $h
         Label : VALUE
           void
-      Label : ELEMENT
-        public
-        Label : NAME
-          $f
-        Label : VALUE
-          2
       Label : ELEMENT
         public
         Label : NAME

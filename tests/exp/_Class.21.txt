@@ -9,6 +9,12 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $x
+      Label : ELEMENT
         const
         Label : NAME
           e
@@ -17,9 +23,9 @@ Label : CODE
       Label : ELEMENT
         const
         Label : NAME
-          c
+          d
         Label : VALUE
-          3
+          4
       Label : ELEMENT
         const
         Label : NAME
@@ -32,15 +38,3 @@ Label : CODE
           a
         Label : VALUE
           1
-      Label : ELEMENT
-        var
-        Label : VALUE
-          void
-        Label : DEFINE
-          $x
-      Label : ELEMENT
-        const
-        Label : NAME
-          d
-        Label : VALUE
-          4

@@ -4,13 +4,13 @@ Label : CODE
   class
   Label : NAME
     A
+  Label : BLOCK
+    {
+    Label : CODE
+      void
   Label : EXTENDS
     \
     Label : ELEMENT
       C
     Label : ELEMENT
       B
-  Label : BLOCK
-    {
-    Label : CODE
-      void
