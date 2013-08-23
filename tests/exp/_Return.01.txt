@@ -26,10 +26,10 @@ Label : CODE
     return
     Label : RETURN
       ::
-      Label : CONSTANT
-        y
       Label : CLASS
         a
+      Label : CONSTANT
+        y
   Label : ELEMENT
     return
     Label : RETURN

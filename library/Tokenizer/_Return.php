@@ -18,8 +18,7 @@ class _Return extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Return::$operators,
                                               'atom' => 'none' ),
                                    1 => array('atom' => 'yes'),
-                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT'),
-                                                                Addition::$operators, Multiplication::$operators, Bitshift::$operators, Comparison::$operators)),
+                                   2 => array('filterOut' => Token::$instruction_ending),
         );
         
         $this->actions = array('makeEdge'   => array( 1 => 'RETURN'),

@@ -18,7 +18,7 @@ class SequenceAtom extends TokenAuto {
                            'Const', 'Ppp', 'Foreach', 'For', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
                            'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison',
                            'Noscream', 'Property', 'Staticproperty', 'Label', 'Goto', 'Halt', 'Interface', 'Block', 'Break', 'Try', 
-                           'Throw', 'Sequence','RawString', 'Phpcode', 'Use', 
+                           'Throw', 'Sequence','RawString', 'Phpcode', 'Use', 'Preplusplus', 'Postplusplus',
                              );
         $this->conditions = array(-1 => array('filterOut2' => $yield_operators), 
                                    0 => array('atom' => $operands2, 
