@@ -3,6 +3,40 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      str_replace
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                $f
+              Label : INDEX
+                'g'
+            Label : INDEX
+              'h'
+          Label : INDEX
+            'i'
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'd'
+          Label : INDEX
+            'e'
+        Label : ARGUMENT
+          'b'
+    Label : LEFT
+      $a
+  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -38,40 +72,6 @@ Label : CODE
             true
           Label : LEFT
             $n
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      str_replace
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $f
-              Label : INDEX
-                'g'
-            Label : INDEX
-              'h'
-          Label : INDEX
-            'i'
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $c
-            Label : INDEX
-              'd'
-          Label : INDEX
-            'e'
-        Label : ARGUMENT
-          'b'
-    Label : LEFT
-      $a
   Label : ELEMENT
     require_once
     Label : ARGUMENTS

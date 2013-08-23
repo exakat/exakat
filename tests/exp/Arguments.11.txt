@@ -8,28 +8,34 @@ Label : CODE
       ?
       Label : CONDITION
         &&
-        Label : LEFT
-          !
-          Label : NOT
-            in_array
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                $e
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  ->
-                  Label : PROPERTY
-                    c
-                  Label : OBJECT
-                    $b
-                Label : INDEX
-                  'd'
         Label : RIGHT
           (
           Label : CODE
             ||
+            Label : RIGHT
+              !
+              Label : NOT
+                file_exists
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      [
+                      Label : VARIABLE
+                        ->
+                        Label : PROPERTY
+                          l
+                        Label : OBJECT
+                          $k
+                      Label : INDEX
+                        'm'
+                    Label : CONCAT
+                      'n'
+                    Label : CONCAT
+                      'j'
+                    Label : CONCAT
+                      I
             Label : LEFT
               !
               Label : NOT
@@ -48,30 +54,24 @@ Label : CODE
                       'h'
                   Label : ARGUMENT
                     '/^\w+$/'
-            Label : RIGHT
-              !
-              Label : NOT
-                file_exists
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      'n'
-                    Label : CONCAT
-                      [
-                      Label : VARIABLE
-                        ->
-                        Label : PROPERTY
-                          l
-                        Label : OBJECT
-                          $k
-                      Label : INDEX
-                        'm'
-                    Label : CONCAT
-                      'j'
-                    Label : CONCAT
-                      I
+        Label : LEFT
+          !
+          Label : NOT
+            in_array
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  ->
+                  Label : PROPERTY
+                    c
+                  Label : OBJECT
+                    $b
+                Label : INDEX
+                  'd'
       Label : THEN
         'o'
       Label : ELSE
