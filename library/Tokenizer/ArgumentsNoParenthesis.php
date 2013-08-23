@@ -13,7 +13,8 @@ class ArgumentsNoParenthesis extends TokenAuto {
                                     1 => array('atom'  => 'yes', 'notAtom' => array('Sequence', 'Arguments', 'Function', 'Ppp', 'Final', 'Abstract')),
                                     2 => array('filterOut2' => array_merge(array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_EQUAL', 'T_QUESTION', 'T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_COMMA',),
                                                                            Addition::$operators, Multiplication::$operators, 
-                                                                           Bitshift::$operators, Logical::$operators)) 
+                                                                           Bitshift::$operators, Logical::$operators,
+                                                                           Postplusplus::$operators)) 
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),

@@ -7,6 +7,12 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
+        "\n"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         .
         Label : CONCAT
           ++
@@ -14,12 +20,6 @@ Label : CODE
             $b
         Label : CONCAT
           $a
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        "\n"
   Label : ELEMENT
     print
     Label : ARGUMENTS

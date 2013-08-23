@@ -7,6 +7,12 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
+        "\n"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         +
         Label : RIGHT
           4
@@ -16,12 +22,6 @@ Label : CODE
             2
           Label : CONCAT
             1
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        "\n"
   Label : ELEMENT
     print
     Label : ARGUMENTS
