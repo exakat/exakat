@@ -101,6 +101,7 @@ class Token {
                                                  Assignation::$operators, 
                                                  Addition::$operators, 
                                                  Multiplication::$operators,
+                                                 Preplusplus::$operators,
                                                  array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET'));
         }
     

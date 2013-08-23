@@ -9,8 +9,7 @@ class IfthenElse extends TokenAuto {
         $this->conditions = array(  0 => array('token'     => IfthenElse::$operators,
                                                'atom'      => 'none'),
                                     1 => array('notAtom'   => 'Block', 'atom' => 'yes'),
-                                    2 => array('filterOut' => array_merge(Assignation::$operators, Multiplication::$operators, 
-                                                                          array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 'T_OPEN_CURLY'))),
+                                    2 => array('filterOut' => Token::$instruction_ending),
         );
         
         $this->actions = array( 'to_block_else' => true);
