@@ -816,7 +816,7 @@ x.out('$link').inE('INDEXED').each{
                 display("addEdge : $atom\n");
                 $qactions[] = "
 /* addEdge out */
-x = g.addVertex(null, [code:'void', atom:'$atom', 'file':it.file, virtual:true]);
+x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_VOID', 'file':it.file, virtual:true]);
 f = it.out('NEXT').next();
 
 g.removeEdge(it.outE('NEXT').next());

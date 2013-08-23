@@ -15,6 +15,7 @@ class Arguments extends TokenAuto {
                                        'ArrayNS', );
 
     function _check() {
+    /*
         // Argument next to ( 
         $this->conditions = array(-1 => array('token' => 'T_OPEN_PARENTHESIS',
                                               'atom' => 'none'),
@@ -24,7 +25,7 @@ class Arguments extends TokenAuto {
         $this->actions = array('addEdge'     => array(-1 => array('Void' => 'ARGUMENT')),
                                'keepIndexed' => true);
         $this->checkAuto();
-        
+
         // Argument next to ) 
         $this->conditions = array( 0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
@@ -44,7 +45,7 @@ class Arguments extends TokenAuto {
         $this->actions = array('addEdge'   => array(0 => array('Void' => 'ARGUMENT')),
                                'keepIndexed' => true);
         $this->checkAuto();
-
+*/
         $operands = Arguments::$operands_wa;
         $operands[] = 'Arguments';
         
