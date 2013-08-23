@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Array extends Tokenizeur {
-    /* 11 methods */
+    /* 12 methods */
     public function test_Array01()  { $this->generic_test('_Array.01'); }
     public function test_Array02()  { $this->generic_test('_Array.02'); }
     public function test_Array03()  { $this->generic_test('_Array.03'); }
@@ -19,5 +19,6 @@ class _Array extends Tokenizeur {
     public function test_Array09()  { $this->generic_test('_Array.09'); }
     public function test_Array10()  { $this->generic_test('_Array.10'); }
     public function test_Array11()  { $this->generic_test('_Array.11'); }
+    public function test_Array12()  { $this->generic_test('_Array.12'); }
 }
 ?>
