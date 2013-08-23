@@ -20,7 +20,7 @@ class Concatenation extends TokenAuto {
                                    1 => array('atom'  => $operands),
                                    2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
                                                                                'T_OPEN_CURLY', 'T_OPEN_BRACKET'),
-                                                                    Assignation::$operators)),
+                                                                    Assignation::$operators, Preplusplus::$operators)),
         ); 
         
         $this->actions = array('makeEdge'   => array( 1 => 'CONCAT',

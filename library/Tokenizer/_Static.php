@@ -19,7 +19,6 @@ class _Static extends TokenAuto {
                                'atom'      => 'Static',
                                'cleanIndex' => true
                                );
-
         $this->checkAuto(); 
 
     // class x { static $x, $y }
@@ -31,16 +30,14 @@ class _Static extends TokenAuto {
         $this->actions = array('to_var'   => 'Static',
                                'atom'     => 'Static',
                                );
-
         $this->checkAuto(); 
 
     // static :: ....
         $this->conditions = array( 0 => array('token' => _Static::$operators),
                                    1 => array('token' => 'T_DOUBLE_COLON'),
                                  );
-        
-        $this->actions = array('atom'     => 'Static');
 
+        $this->actions = array('atom'     => 'Static');
         $this->checkAuto(); 
 
         return $this->checkRemaining();

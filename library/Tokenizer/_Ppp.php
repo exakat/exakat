@@ -19,7 +19,6 @@ class _Ppp extends TokenAuto {
                                'atom'      => 'Ppp',
                                'cleanIndex' => true,
                                );
-
         $this->checkAuto(); 
 
     // class x { var $x = 2 }
@@ -41,7 +40,7 @@ class _Ppp extends TokenAuto {
                                  );
         
         $this->actions = array('to_var'   => 'Ppp',
-                               'atom'       => 'Ppp',
+                               'atom'     => 'Ppp',
                                );
 
         $this->checkAuto(); 

@@ -36,7 +36,7 @@ class Sequence extends TokenAuto {
                                      Assignation::$operators, Logical::$operators, Preplusplus::$operators, Postplusplus::$operators);
         
         // @note instructions separated by ; 
-        $this->conditions = array(-2 => array('filterOut' => $yield_operator), 
+        $this->conditions = array(-2 => array('filterOut2' => $yield_operator), 
                                   -1 => array('atom' => $operands, 'notToken' => 'T_ELSEIF' ),
                                    0 => array('token' => Sequence::$operators,
                                               'atom' => 'none'),

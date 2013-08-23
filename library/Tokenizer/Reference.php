@@ -23,6 +23,19 @@ class Reference extends TokenAuto {
                                'cleanIndex'  => true);
         $this->checkAuto();
 
+        // special case for Stdclass &$x = 
+        $this->conditions = array(-1 => array('token' => 'T_STRING'), 
+                                   0 => array('token' => Reference::$operators,
+                                              'atom' => 'none'),
+                                   1 => array('atom' => array('Variable')),
+                                   2 => array('token' => array('T_COMMA', 'T_EQUAL', 'T_CLOSE_PARENTHESIS')),
+        );
+        
+        $this->actions = array('makeEdge'    => array( 1 => 'REFERENCE'),
+                               'atom'        => 'Reference',
+                               'cleanIndex'  => true);
+        $this->checkAuto();
+
         $this->conditions = array(-1 => array('token' => 'T_FUNCTION',
                                              'atom' => 'none'),
                                   0 => array('token' => Reference::$operators),
