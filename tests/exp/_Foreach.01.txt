@@ -2,11 +2,11 @@
 
 Label : CODE
   foreach
-  Label : SOURCE
-    $x
   Label : VALUE
     $y
   Label : LOOP
     {
     Label : CODE
       void
+  Label : SOURCE
+    $x

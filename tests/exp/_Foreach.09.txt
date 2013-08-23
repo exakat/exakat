@@ -2,6 +2,12 @@
 
 Label : CODE
   foreach
+  Label : VALUE
+    $e
+  Label : LOOP
+    {
+    Label : CODE
+      void
   Label : SOURCE
     (
     Label : CODE
@@ -22,9 +28,3 @@ Label : CODE
             $d
           Label : ARGUMENT
             'd'
-  Label : VALUE
-    $e
-  Label : LOOP
-    {
-    Label : CODE
-      void

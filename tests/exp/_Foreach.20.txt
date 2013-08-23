@@ -2,14 +2,12 @@
 
 Label : CODE
   foreach
-  Label : SOURCE
-    $a
   Label : VALUE
     =>
-    Label : KEY
-      $b
     Label : VALUE
       $c
+    Label : KEY
+      $b
   Label : LOOP
     Block With Foreach
     Label : CODE
@@ -18,16 +16,6 @@ Label : CODE
         (
         Label : CODE
           &&
-          Label : LEFT
-            isset
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $d
-                Label : INDEX
-                  'e'
           Label : RIGHT
             !
             Label : NOT
@@ -40,6 +28,16 @@ Label : CODE
                     $h
                 Label : ARGUMENT
                   $g
+          Label : LEFT
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $d
+                Label : INDEX
+                  'e'
       Label : THEN
         Block With if/elseif
         Label : CODE
@@ -52,3 +50,5 @@ Label : CODE
                 $j
               Label : INDEX
                 $k
+  Label : SOURCE
+    $a

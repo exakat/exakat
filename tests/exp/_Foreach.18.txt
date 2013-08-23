@@ -2,11 +2,11 @@
 
 Label : CODE
   foreach
-  Label : SOURCE
-    $a
   Label : VALUE
     $b
   Label : LOOP
     Block With Foreach
     Label : CODE
       void
+  Label : SOURCE
+    $a

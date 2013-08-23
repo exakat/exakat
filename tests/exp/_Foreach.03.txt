@@ -2,12 +2,6 @@
 
 Label : CODE
   foreach
-  Label : SOURCE
-    ->
-    Label : PROPERTY
-      b
-    Label : OBJECT
-      $x
   Label : VALUE
     $y
   Label : LOOP
@@ -20,3 +14,9 @@ Label : CODE
           2
         Label : LEFT
           $y
+  Label : SOURCE
+    ->
+    Label : PROPERTY
+      b
+    Label : OBJECT
+      $x

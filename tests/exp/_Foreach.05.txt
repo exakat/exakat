@@ -2,10 +2,6 @@
 
 Label : CODE
   foreach
-  Label : SOURCE
-    (array)
-    Label : CAST
-      $x
   Label : VALUE
     $y
   Label : LOOP
@@ -16,3 +12,7 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $i
+  Label : SOURCE
+    (array)
+    Label : CAST
+      $x

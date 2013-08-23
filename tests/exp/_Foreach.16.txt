@@ -2,20 +2,18 @@
 
 Label : CODE
   foreach
-  Label : SOURCE
-    $a
   Label : VALUE
     =>
+    Label : VALUE
+      &
+      Label : REFERENCE
+        $y
     Label : KEY
       ->
       Label : PROPERTY
         a
       Label : OBJECT
         $x
-    Label : VALUE
-      &
-      Label : REFERENCE
-        $y
   Label : LOOP
     {
     Label : CODE
@@ -24,3 +22,5 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $z
+  Label : SOURCE
+    $a

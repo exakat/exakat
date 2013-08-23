@@ -3,17 +3,17 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $a
     Label : VALUE
       =>
-      Label : KEY
-        $b
       Label : VALUE
         $c
+      Label : KEY
+        $b
     Label : LOOP
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $d
+    Label : SOURCE
+      $a

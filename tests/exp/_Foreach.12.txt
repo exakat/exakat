@@ -2,13 +2,13 @@
 
 Label : CODE
   foreach
-  Label : SOURCE
-    @
-    Label : AT
-      $array
   Label : VALUE
     $e
   Label : LOOP
     {
     Label : CODE
       void
+  Label : SOURCE
+    @
+    Label : AT
+      $array

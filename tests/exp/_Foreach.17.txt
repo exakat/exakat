@@ -2,8 +2,6 @@
 
 Label : CODE
   foreach
-  Label : SOURCE
-    $a
   Label : VALUE
     $b
   Label : LOOP
@@ -14,3 +12,5 @@ Label : CODE
         $d
       Label : LEFT
         $c
+  Label : SOURCE
+    $a

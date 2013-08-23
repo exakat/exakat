@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     ::
-    Label : PROPERTY
-      $B
     Label : CLASS
       \
       Label : ELEMENT
@@ -14,21 +12,23 @@ Label : CODE
         C
       Label : ELEMENT
         A
-  Label : ELEMENT
-    ::
     Label : PROPERTY
       $B
+  Label : ELEMENT
+    ::
     Label : CLASS
       \
       Label : ELEMENT
         C
       Label : ELEMENT
         A
-  Label : ELEMENT
-    ::
     Label : PROPERTY
       $B
+  Label : ELEMENT
+    ::
     Label : CLASS
       \
       Label : ELEMENT
         A
+    Label : PROPERTY
+      $B

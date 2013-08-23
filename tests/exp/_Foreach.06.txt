@@ -2,8 +2,6 @@
 
 Label : CODE
   foreach
-  Label : SOURCE
-    $a
   Label : VALUE
     [
     Label : VARIABLE
@@ -18,3 +16,5 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $j
+  Label : SOURCE
+    $a

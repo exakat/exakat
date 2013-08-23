@@ -2,15 +2,15 @@
 
 Label : CODE
   foreach
-  Label : SOURCE
-    =
-    Label : RIGHT
-      $y
-    Label : LEFT
-      $x
   Label : VALUE
     $z
   Label : LOOP
     {
     Label : CODE
       void
+  Label : SOURCE
+    =
+    Label : RIGHT
+      $y
+    Label : LEFT
+      $x

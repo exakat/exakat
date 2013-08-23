@@ -2,14 +2,12 @@
 
 Label : CODE
   foreach
-  Label : SOURCE
-    $a
   Label : VALUE
     =>
-    Label : KEY
-      $b
     Label : VALUE
       $c
+    Label : KEY
+      $b
   Label : LOOP
     Block With Foreach
     Label : CODE
@@ -26,3 +24,5 @@ Label : CODE
             $d
         Label : INDEX
           $f
+  Label : SOURCE
+    $a
