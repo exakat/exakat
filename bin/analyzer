@@ -27,12 +27,9 @@ if ($id = array_search('-s', $args)) {
 
 $begin_time = microtime(true);
 $classes = array(
-//    'Magicconstant',
     'Variable',     // Fait 
     'Halt',         // Fait
     'Variabledollar',// Fait 
-//    'Integer',
-//    'Float',
     'Boolean',      // Fait
     'Sign',         // Fait
     '_Array',       // Fait
@@ -179,7 +176,7 @@ while(check_prev($prev, $extra_rounds)) {
     }
     unset($precedence);
     Token::finishSequence();
-                
+    
     $rend = microtime(true);
     $begin = microtime(true);
     fwrite($log, "round : $round\t".(($rend - $rbegin)*1000)."\n");
