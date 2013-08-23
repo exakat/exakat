@@ -8,20 +8,6 @@ Label : CODE
     {
     Label : CODE
       case
-      Label : CASE
-        ==
-        Label : RIGHT
-          'c'
-        Label : LEFT
-          substr
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              0
-            Label : ARGUMENT
-              $b
       Label : CODE
         Block With Sequence For Case
         Label : CODE
@@ -36,3 +22,17 @@ Label : CODE
                 $e
               Label : INDEX
                 'f'
+      Label : CASE
+        ==
+        Label : RIGHT
+          'c'
+        Label : LEFT
+          substr
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              $b

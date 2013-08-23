@@ -6,26 +6,12 @@ Label : CODE
     =
     Label : RIGHT
       ->
+      Label : OBJECT
+        $b
       Label : METHOD
         c
         Label : ARGUMENTS
           ,
-          Label : ARGUMENT
-            (
-            Label : CODE
-              /
-              Label : RIGHT
-                $o
-              Label : LEFT
-                (
-                Label : CODE
-                  -
-                  Label : RIGHT
-                    $n
-                  Label : LEFT
-                    -
-                    Label : SIGN
-                      $m
           Label : ARGUMENT
             (
             Label : CODE
@@ -42,6 +28,22 @@ Label : CODE
                     -
                     Label : SIGN
                       $j
+          Label : ARGUMENT
+            (
+            Label : CODE
+              /
+              Label : RIGHT
+                $o
+              Label : LEFT
+                (
+                Label : CODE
+                  -
+                  Label : RIGHT
+                    $n
+                  Label : LEFT
+                    -
+                    Label : SIGN
+                      $m
           Label : ARGUMENT
             (
             Label : CODE
@@ -70,7 +72,5 @@ Label : CODE
                     $e
                   Label : LEFT
                     $d
-      Label : OBJECT
-        $b
     Label : LEFT
       $a

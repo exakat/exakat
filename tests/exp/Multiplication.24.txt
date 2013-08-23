@@ -24,10 +24,10 @@ Label : CODE
                 'g'
             Label : LEFT
               ::
-              Label : CONSTANT
-                E
               Label : CLASS
                 D
+              Label : CONSTANT
+                E
     Label : LEFT
       [
       Label : VARIABLE

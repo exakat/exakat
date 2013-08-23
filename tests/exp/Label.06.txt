@@ -23,11 +23,9 @@ Label : CODE
     Label : LABEL
       F
   Label : ELEMENT
-    =
-    Label : RIGHT
-      3
-    Label : LEFT
-      $c
+    :
+    Label : LABEL
+      E
   Label : ELEMENT
     =
     Label : RIGHT
@@ -37,15 +35,17 @@ Label : CODE
   Label : ELEMENT
     :
     Label : LABEL
-      E
+      D
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      3
+    Label : LEFT
+      $c
   Label : ELEMENT
     :
     Label : LABEL
       C
-  Label : ELEMENT
-    :
-    Label : LABEL
-      D
   Label : ELEMENT
     =
     Label : RIGHT

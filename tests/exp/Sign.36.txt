@@ -18,10 +18,10 @@ Label : CODE
               (
               Label : CODE
                 &
-                Label : LEFT
-                  $c
                 Label : RIGHT
                   5
+                Label : LEFT
+                  $c
             Label : LEFT
               4
         Label : LEFT

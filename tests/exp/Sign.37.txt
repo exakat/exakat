@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
+    Label : OBJECT
+      $a
     Label : METHOD
       b
       Label : ARGUMENTS
@@ -12,31 +14,29 @@ Label : CODE
           -
           Label : SIGN
             ->
+            Label : OBJECT
+              $g
             Label : METHOD
               h
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $g
         Label : ARGUMENT
           -
           Label : SIGN
             ->
+            Label : OBJECT
+              $e
             Label : METHOD
               f
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $e
         Label : ARGUMENT
           -
           Label : SIGN
             ->
+            Label : OBJECT
+              $c
             Label : METHOD
               d
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $c
-    Label : OBJECT
-      $a

@@ -23,20 +23,20 @@ Label : CODE
                       -
                       Label : RIGHT
                         ->
+                        Label : OBJECT
+                          $e
                         Label : METHOD
                           getX
                           Label : ARGUMENTS
                             void
-                        Label : OBJECT
-                          $e
                       Label : LEFT
                         ->
+                        Label : OBJECT
+                          $c
                         Label : METHOD
                           d
                           Label : ARGUMENTS
                             void
-                        Label : OBJECT
-                          $c
         Label : LEFT
           *
           Label : RIGHT
