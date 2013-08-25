@@ -11,7 +11,7 @@ class ConcatenationAtom extends TokenAuto {
                                     2 => array('filterOut' => array_merge(Assignation::$operators, array('T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET', )) ),
         ); 
         $this->actions = array('mergeConcat' => "Concat");
-        $this->checkAuto();
+//        $this->checkAuto();
 
         return $this->checkRemaining();
     }

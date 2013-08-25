@@ -83,7 +83,6 @@ class Token {
                                  '_Declare',
                                  'Halt', 
                                  'Concatenation',
-                                 // 'ConcatenationAtom', 
                                  'Void', 
                                  'Typehint',
                                  '_Use', 
