@@ -10,28 +10,26 @@ Label : CODE
         ,
         Label : ARGUMENT
           =>
-          Label : KEY
-            'dbcharset'
-          Label : VALUE
-            [
-            Label : VARIABLE
-              $identify
-            Label : INDEX
-              6
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'tablepre'
           Label : VALUE
             [
             Label : VARIABLE
               $identify
             Label : INDEX
               5
+          Label : KEY
+            'tablepre'
         Label : ARGUMENT
           =>
+          Label : VALUE
+            [
+            Label : VARIABLE
+              $identify
+            Label : INDEX
+              6
           Label : KEY
-            'volume'
+            'dbcharset'
+        Label : ARGUMENT
+          =>
           Label : VALUE
             intval
             Label : ARGUMENTS
@@ -42,15 +40,17 @@ Label : CODE
                   $identify
                 Label : INDEX
                   4
+          Label : KEY
+            'volume'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'method'
           Label : VALUE
             [
             Label : VARIABLE
               $identify
             Label : INDEX
               3
+          Label : KEY
+            'method'
     Label : LEFT
       $dumpinfo

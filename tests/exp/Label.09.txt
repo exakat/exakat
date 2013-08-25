@@ -1,0 +1,30 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      =
+      Label : RIGHT
+        ?
+        Label : CONDITION
+          ->
+          Label : PROPERTY
+            d
+          Label : OBJECT
+            $c
+        Label : THEN
+          new
+          Label : NEW
+            e
+        Label : ELSE
+          new
+          Label : NEW
+            f
+      Label : LEFT
+        ->
+        Label : PROPERTY
+          b
+        Label : OBJECT
+          $a

@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     [
+    Label : ARGUMENTS
+      void
     Label : VARIABLE
       $x
     Label : INDEX
       1
-    Label : ARGUMENTS
-      void

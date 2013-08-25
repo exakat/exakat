@@ -12,14 +12,14 @@ Label : CODE
       Block With if/elseif
       Label : CODE
         foreach
-        Label : SOURCE
-          $b
         Label : VALUE
           =>
           Label : KEY
             $c
           Label : VALUE
             $d
+        Label : SOURCE
+          $b
         Label : LOOP
           {
           Label : CODE
@@ -30,10 +30,10 @@ Label : CODE
                 $e
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $h
     Label : VALUE
       $i
+    Label : SOURCE
+      $h
     Label : LOOP
       {
       Label : CODE

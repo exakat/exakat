@@ -4,13 +4,13 @@ Label : CODE
   foreach
   Label : VALUE
     $y
-  Label : LOOP
-    {
-    Label : CODE
-      void
   Label : SOURCE
     $x
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         'a'
+  Label : LOOP
+    {
+    Label : CODE
+      void

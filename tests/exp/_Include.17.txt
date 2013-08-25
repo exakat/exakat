@@ -1,0 +1,32 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'a'
+          Label : VALUE
+            require
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  'c'
+                Label : CONCAT
+                  dirname
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      __FILE__
+    Label : LEFT
+      $x

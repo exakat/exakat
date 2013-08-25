@@ -14,16 +14,12 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        (
-        Label : CODE
-          'b.php'
+        'b.php'
   Label : ELEMENT
     include
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        (
-        Label : CODE
-          'a.php'
+        'a.php'
   Label : ELEMENT
     A

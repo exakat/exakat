@@ -1,0 +1,44 @@
+<?php
+
+Label : NEXT
+  $x
+  Label : NEXT
+    =
+    Label : NEXT
+      array
+      Label : NEXT
+        (
+        Label : NEXT
+          'a'
+          Label : NEXT
+            =>
+            Label : NEXT
+              require
+              Label : NEXT
+                (
+                Label : NEXT
+                  .
+                  Label : NEXT
+                    )
+                    Label : NEXT
+                      ,
+                      Label : NEXT
+                        void
+                        Label : NEXT
+                          )
+                          Label : NEXT
+                            ;
+                            Label : NEXT
+                              ?>
+                              Label : NEXT
+                                /**/
+                                Label : NEXT
+                                  /* * */
+                  Label : CONCAT
+                    'c'
+                  Label : CONCAT
+                    b
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        __FILE__

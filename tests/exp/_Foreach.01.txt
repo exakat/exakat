@@ -4,9 +4,9 @@ Label : CODE
   foreach
   Label : VALUE
     $y
+  Label : SOURCE
+    $x
   Label : LOOP
     {
     Label : CODE
       void
-  Label : SOURCE
-    $x

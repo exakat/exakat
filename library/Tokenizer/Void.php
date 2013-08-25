@@ -3,6 +3,8 @@
 namespace Tokenizer;
 
 class Void extends TokenAuto {
+    // @todo move this to load 
+    
     static public $operators = array('T_OPEN_PARENTHESIS', 'T_SEMICOLON');
     function _check() {
     // needed for for(;;)

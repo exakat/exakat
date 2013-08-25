@@ -26,6 +26,16 @@ Label : CODE
             Label : ARGUMENTS
               void
               Label : ARGUMENT
+                t
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'd'
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
                 $c
           Label : ELEMENT
             C
@@ -33,16 +43,6 @@ Label : CODE
             B
           Label : ELEMENT
             D
-          Label : ELEMENT
-            print
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                t
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'd'
           Label : ELEMENT
             F
           Label : ELEMENT

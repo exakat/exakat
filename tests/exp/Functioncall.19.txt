@@ -10,21 +10,21 @@ Label : CODE
         ,
         Label : ARGUMENT
           =>
-          Label : KEY
-            5
           Label : VALUE
             6
+          Label : KEY
+            5
         Label : ARGUMENT
           =>
-          Label : KEY
-            3
           Label : VALUE
             4
+          Label : KEY
+            3
         Label : ARGUMENT
           =>
-          Label : KEY
-            1
           Label : VALUE
             2
+          Label : KEY
+            1
     Label : LEFT
       $a

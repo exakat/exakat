@@ -8,6 +8,8 @@ Label : CODE
       d
     Label : OBJECT
       $b
+  Label : SOURCE
+    $a
   Label : LOOP
     {
     Label : CODE
@@ -16,5 +18,3 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $j
-  Label : SOURCE
-    $a

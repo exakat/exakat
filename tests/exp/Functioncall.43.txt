@@ -3,19 +3,21 @@
 Label : CODE
   ;
   Label : ELEMENT
-    >>
-    Label : RIGHT
-      $c
-    Label : LEFT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          +
-          Label : RIGHT
-            $b
-          Label : LEFT
-            $a
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        >>
+        Label : RIGHT
+          $c
+        Label : LEFT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              $b
+            Label : LEFT
+              $a
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -38,6 +40,8 @@ Label : CODE
       void
       Label : ARGUMENT
         &
+        Label : RIGHT
+          $c
         Label : LEFT
           (
           Label : CODE
@@ -46,8 +50,6 @@ Label : CODE
               $b
             Label : LEFT
               $a
-        Label : RIGHT
-          $c
   Label : ELEMENT
     print
     Label : ARGUMENTS

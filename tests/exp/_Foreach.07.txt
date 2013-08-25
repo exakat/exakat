@@ -4,10 +4,12 @@ Label : CODE
   foreach
   Label : VALUE
     ::
-    Label : CLASS
-      C
     Label : PROPERTY
       $d
+    Label : CLASS
+      C
+  Label : SOURCE
+    $a
   Label : LOOP
     {
     Label : CODE
@@ -16,5 +18,3 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $j
-  Label : SOURCE
-    $a

@@ -10,15 +10,15 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        B
-      Label : ELEMENT
-        A
-      Label : ELEMENT
         print
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $b
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        A
       Label : ELEMENT
         F
       Label : ELEMENT

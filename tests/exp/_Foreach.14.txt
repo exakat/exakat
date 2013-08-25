@@ -6,6 +6,8 @@ Label : CODE
     &
     Label : REFERENCE
       $y
+  Label : SOURCE
+    $a
   Label : LOOP
     {
     Label : CODE
@@ -14,5 +16,3 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $z
-  Label : SOURCE
-    $a

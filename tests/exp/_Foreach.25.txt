@@ -4,6 +4,12 @@ Label : CODE
   foreach
   Label : VALUE
     $b
+  Label : SOURCE
+    new
+    Label : NEW
+      \
+      Label : ELEMENT
+        A
   Label : LOOP
     {
     Label : CODE
@@ -14,15 +20,9 @@ Label : CODE
           void
           Label : ARGUMENT
             ->
+            Label : OBJECT
+              $c
             Label : METHOD
               d
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $c
-  Label : SOURCE
-    new
-    Label : NEW
-      \
-      Label : ELEMENT
-        A

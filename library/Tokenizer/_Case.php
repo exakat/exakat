@@ -6,6 +6,7 @@ class _Case extends TokenAuto {
     static public $operators = array('T_CASE');
     
     function _check() {
+        // @todo move to load
         // Case is empty (case 'a': )
         $this->conditions = array(0 => array('token' => _Case::$operators,
                                              'atom' => 'none'),
@@ -19,6 +20,7 @@ class _Case extends TokenAuto {
         $this->checkAuto();
 
         // Case is empty (case 'a':; )
+        // @todo move to load
         $this->conditions = array(0 => array('token' => _Case::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),

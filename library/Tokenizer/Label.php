@@ -7,7 +7,7 @@ class Label extends TokenAuto {
     
     function _check() {
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_QUESTION','T_CASE', 'T_DOT', 
-                                                                               'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'),
+                                                                               'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NEW',),
                                                                          Assignation::$operators, Addition::$operators, 
                                                                          Multiplication::$operators, Comparison::$operators,
                                                                          Logical::$operators)), 

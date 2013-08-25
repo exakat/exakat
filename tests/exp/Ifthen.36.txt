@@ -10,27 +10,21 @@ Label : CODE
     Block With if/elseif
     Label : CODE
       =
-      Label : RIGHT
-        1
       Label : LEFT
         $b
+      Label : RIGHT
+        1
   Label : ELSE
     Block With else
     Label : CODE
       =
+      Label : LEFT
+        $c
       Label : RIGHT
         "
         Label : CONTAIN
           Concatenation
-          Label : ELEMENT
-            {
-            Label : NAME
-              ->
-              Label : PROPERTY
-                g
-              Label : OBJECT
-                $f
-          Label : ELEMENT
+          Label : CONCAT
             {
             Label : NAME
               ->
@@ -38,7 +32,13 @@ Label : CODE
                 e
               Label : OBJECT
                 $d
-          Label : ELEMENT
+          Label : CONCAT
             :
-      Label : LEFT
-        $c
+          Label : CONCAT
+            {
+            Label : NAME
+              ->
+              Label : PROPERTY
+                g
+              Label : OBJECT
+                $f

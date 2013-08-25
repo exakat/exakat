@@ -10,12 +10,34 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          'b'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
             ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  $g
+              Label : THEN
+                {
+                Label : CODE
+                  void
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  $h
+              Label : THEN
+                {
+                Label : CODE
+                  void
             Label : ELEMENT
               if
               Label : CONDITION
@@ -56,30 +78,8 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       'b'
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $h
-              Label : THEN
-                {
-                Label : CODE
-                  void
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $g
-              Label : THEN
-                {
-                Label : CODE
-                  void
+        Label : CASE
+          'b'
       Label : ELEMENT
         default
         Label : CODE

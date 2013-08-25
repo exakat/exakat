@@ -14,15 +14,15 @@ Label : CODE
     Block With if/elseif
     Label : CODE
       do
+      Label : CONDITION
+        $x
       Label : LOOP
         {
         Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              3
             Label : LEFT
               $c
-      Label : CONDITION
-        $x
+            Label : RIGHT
+              3

@@ -2,8 +2,6 @@
 
 Label : CODE
   function
-  Label : NAME
-    a
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -22,6 +20,8 @@ Label : CODE
           void
       Label : LEFT
         $b
+  Label : NAME
+    a
   Label : BLOCK
     {
     Label : CODE

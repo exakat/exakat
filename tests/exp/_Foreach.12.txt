@@ -4,11 +4,11 @@ Label : CODE
   foreach
   Label : VALUE
     $e
-  Label : LOOP
-    {
-    Label : CODE
-      void
   Label : SOURCE
     @
     Label : AT
       $array
+  Label : LOOP
+    {
+    Label : CODE
+      void

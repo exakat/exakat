@@ -24,10 +24,6 @@ Label : CODE
                 1
     Label : THEN
       [
-      Label : VARIABLE
-        $d
-      Label : INDEX
-        0
       Label : ARGUMENTS
         void
         Label : ARGUMENT
@@ -44,6 +40,10 @@ Label : CODE
                 $f
               Label : INDEX
                 3
+      Label : VARIABLE
+        $d
+      Label : INDEX
+        0
     Label : ELSE
       ;
       Label : ELEMENT

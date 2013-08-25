@@ -1,0 +1,68 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      $c
+    Label : SOURCE
+      ->
+      Label : PROPERTY
+        b
+      Label : OBJECT
+        $a
+    Label : LOOP
+      Block With Foreach
+      Label : CODE
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            is_array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : PROPERTY
+                  f
+                Label : OBJECT
+                  ->
+                  Label : PROPERTY
+                    e
+                  Label : OBJECT
+                    $d
+        Label : THEN
+          Block With if/elseif
+          Label : CODE
+            =
+            Label : RIGHT
+              h
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  ->
+                  Label : PROPERTY
+                    l
+                  Label : OBJECT
+                    ->
+                    Label : PROPERTY
+                      k
+                    Label : OBJECT
+                      $j
+                Label : ARGUMENT
+                  $i
+            Label : LEFT
+              $g
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        m
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $o
+    Label : LEFT
+      $m

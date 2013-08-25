@@ -7,6 +7,14 @@ Label : CODE
     Label : ARGUMENTS
       ,
       Label : ARGUMENT
+        ->
+        Label : OBJECT
+          $this
+        Label : METHOD
+          h
+          Label : ARGUMENTS
+            void
+      Label : ARGUMENT
         ::
         Label : METHOD
           i
@@ -14,14 +22,6 @@ Label : CODE
             void
         Label : CLASS
           Stdclass
-      Label : ARGUMENT
-        ->
-        Label : METHOD
-          h
-          Label : ARGUMENTS
-            void
-        Label : OBJECT
-          $this
       Label : ARGUMENT
         ::
         Label : PROPERTY
@@ -36,10 +36,10 @@ Label : CODE
           e
       Label : ARGUMENT
         ::
-        Label : CONSTANT
-          d
         Label : CLASS
           Stdclass
+        Label : CONSTANT
+          d
       Label : ARGUMENT
         ->
         Label : PROPERTY

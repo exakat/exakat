@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Parenthesis extends Tokenizeur {
-    /* 14 methods */
+    /* 17 methods */
     public function testParenthesis01()  { $this->generic_test('Parenthesis.01'); }
     public function testParenthesis02()  { $this->generic_test('Parenthesis.02'); }
     public function testParenthesis03()  { $this->generic_test('Parenthesis.03'); }
@@ -22,5 +22,8 @@ class Parenthesis extends Tokenizeur {
     public function testParenthesis12()  { $this->generic_test('Parenthesis.12'); }
     public function testParenthesis13()  { $this->generic_test('Parenthesis.13'); }
     public function testParenthesis14()  { $this->generic_test('Parenthesis.14'); }
+    public function testParenthesis15()  { $this->generic_test('Parenthesis.15'); }
+    public function testParenthesis16()  { $this->generic_test('Parenthesis.16'); }
+    public function testParenthesis17()  { $this->generic_test('Parenthesis.17'); }
 }
 ?>

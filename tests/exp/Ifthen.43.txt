@@ -10,39 +10,39 @@ Label : CODE
     Block With if/elseif
     Label : CODE
       ->
+      Label : OBJECT
+        $b
       Label : METHOD
         c
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ->
+            Label : OBJECT
+              $d
             Label : METHOD
               e
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   'f'
-            Label : OBJECT
-              $d
-      Label : OBJECT
-        $b
   Label : ELSE
     Block With else
     Label : CODE
       ->
+      Label : OBJECT
+        $bb
       Label : METHOD
         cc
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ->
+            Label : OBJECT
+              $dd
             Label : METHOD
               ee
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   'ff'
-            Label : OBJECT
-              $dd
-      Label : OBJECT
-        $bb

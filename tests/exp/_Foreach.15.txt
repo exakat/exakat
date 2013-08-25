@@ -4,12 +4,14 @@ Label : CODE
   foreach
   Label : VALUE
     =>
+    Label : KEY
+      $x
     Label : VALUE
       &
       Label : REFERENCE
         $y
-    Label : KEY
-      $x
+  Label : SOURCE
+    $a
   Label : LOOP
     {
     Label : CODE
@@ -18,5 +20,3 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $z
-  Label : SOURCE
-    $a
