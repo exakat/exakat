@@ -32,6 +32,8 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
                 unset($tests[$id]) ;
             } elseif ($t == 'Test/Tokenizeur.php') { 
                 unset($tests[$id]) ;
+            } elseif ($t == 'Test/Random.php') { 
+                unset($tests[$id]) ;
             } else {
                 $tests[$id] = '\\'.str_replace(array('/','.php'), array('\\',''), $t);
             }
