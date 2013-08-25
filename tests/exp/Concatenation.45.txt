@@ -4,16 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      a
-      Label : ARGUMENTS
-        void
     Label : VALUE
       =>
       Label : KEY
         $b
       Label : VALUE
         $c
+    Label : SOURCE
+      a
+      Label : ARGUMENTS
+        void
     Label : LOOP
       {
       Label : CODE
@@ -32,22 +32,22 @@ Label : CODE
               "
               Label : CONTAIN
                 Concatenation
-                Label : ELEMENT
-                  $h
-                Label : ELEMENT
-                   
-                Label : ELEMENT
-                  $g
-                Label : ELEMENT
-                   
-                Label : ELEMENT
+                Label : CONCAT
                   d 
-                Label : ELEMENT
+                Label : CONCAT
                   ->
                   Label : PROPERTY
                     f
                   Label : OBJECT
                     $e
+                Label : CONCAT
+                   
+                Label : CONCAT
+                  $g
+                Label : CONCAT
+                   
+                Label : CONCAT
+                  $h
   Label : ELEMENT
     if
     Label : CONDITION
@@ -82,17 +82,17 @@ Label : CODE
               "
               Label : CONTAIN
                 Concatenation
-                Label : ELEMENT
-                   o
-                Label : ELEMENT
-                  $n
-                Label : ELEMENT
-                   
-                Label : ELEMENT
+                Label : CONCAT
                   k 
-                Label : ELEMENT
+                Label : CONCAT
                   ->
                   Label : PROPERTY
                     m
                   Label : OBJECT
                     $l
+                Label : CONCAT
+                   
+                Label : CONCAT
+                  $n
+                Label : CONCAT
+                   o

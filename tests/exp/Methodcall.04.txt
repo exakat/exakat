@@ -6,11 +6,11 @@ Label : CODE
     ->
     Label : OBJECT
       $a
+    Label : ARGUMENTS
+      void
     Label : METHOD
       [
       Label : VARIABLE
         $b
       Label : INDEX
         'c'
-    Label : ARGUMENTS
-      void

@@ -17,13 +17,13 @@ Label : CODE
               Label : ARGUMENTS
                 ,
                 Label : ARGUMENT
+                  0
+                Label : ARGUMENT
                   ->
                   Label : PROPERTY
                     year
                   Label : OBJECT
                     $b
-                Label : ARGUMENT
-                  0
                 Label : ARGUMENT
                   +
                   Label : RIGHT

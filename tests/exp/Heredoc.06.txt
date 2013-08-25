@@ -5,17 +5,12 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      <<<eof
+      <<<'NOWDOC'
 
       Label : CONTAIN
         Concatenation
         Label : CONCAT
-          a
-        Label : CONCAT
-          $b
-        Label : CONCAT
-          
-c
+          abc
 
     Label : LEFT
-      $b
+      $a

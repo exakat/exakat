@@ -8,7 +8,7 @@ Label : CODE
       `
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
+        Label : CONCAT
           {
           Label : NAME
             ->
@@ -16,7 +16,7 @@ Label : CODE
               c
             Label : OBJECT
               $b
-        Label : ELEMENT
+        Label : CONCAT
            d 
     Label : LEFT
       $a

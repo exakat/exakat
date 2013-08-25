@@ -7,18 +7,18 @@ Label : CODE
     Label : RIGHT
       <<<EOD
 
-      Label : STRING
+      Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-          
-
-
-        Label : ELEMENT
+        Label : CONCAT
           
 Oui
 
 
-        Label : ELEMENT
+        Label : CONCAT
           $x
+        Label : CONCAT
+          
+
+
     Label : LEFT
       $x

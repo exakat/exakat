@@ -10,16 +10,9 @@ class Shell extends TokenAuto {
         $this->conditions = array(  0 => array('token' => Shell::$operators, 
                                                'atom' => 'none'),
                                     1 => array('atom'  => array('String', 'Variable', 'Concatenation', 'Array')),
-                                    2 => array('token' => 'T_SHELL_QUOTE_CLOSE', 
-                                               'atom' => 'none')
                                  );
         
-        $this->actions = array( 'transform' => array( 1 => 'CONTAIN',
-                                                      2 => 'DROP'),
-                                'atom'       => 'String',
-                                'mergeNext'  => array('Concatenation' => 'CONCAT'),
-                                'cleanIndex' => true,
-                                );
+        $this->actions = array( 'make_quoted_string' => 'Shell');
         $this->checkAuto();
 
         return $this->checkRemaining();

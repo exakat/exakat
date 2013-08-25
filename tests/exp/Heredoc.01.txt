@@ -7,8 +7,10 @@ Label : CODE
     Label : RIGHT
       <<<EOF
 
-      Label : STRING
-        a
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          a
 
     Label : LEFT
       $q

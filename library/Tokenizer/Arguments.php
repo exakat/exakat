@@ -12,7 +12,7 @@ class Arguments extends TokenAuto {
                                        'Property', 'Staticconstant', 'Staticproperty', 'Nsname', 'Methodcall', 'Staticmethodcall',
                                        'Reference', 'Cast', 'Postplusplus', 'Preplusplus', 'Typehint', 'Bitshift', 'Noscream',
                                        'Clone', 'New', 'Arrayappend', 'Include', 'Instanceof', 'Function', 'Keyvalue', 
-                                       'ArrayNS', );
+                                       'ArrayNS', 'Shell' );
 
     function _check() {
         $operands = Arguments::$operands_wa;
@@ -28,7 +28,8 @@ class Arguments extends TokenAuto {
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
                                    2 => array('token' => array('T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_SEMICOLON', 
-                                                               'T_OPEN_CURLY', )),
+                                                               )),
+                                                               //'T_OPEN_CURLY',  open curly are capture in another regex. One must avoic $a, $c{d} that let {d} alone.
                                  );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',

@@ -7,19 +7,19 @@ Label : CODE
     Label : RIGHT
       <<<eof
 
-      Label : STRING
+      Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-          
-d
-
-        Label : ELEMENT
+        Label : CONCAT
           a
-        Label : ELEMENT
+        Label : CONCAT
           ->
           Label : PROPERTY
             c
           Label : OBJECT
             $b
+        Label : CONCAT
+          
+d
+
     Label : LEFT
       $b

@@ -5,50 +5,50 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      ?
-      Label : CONDITION
-        >
-        Label : RIGHT
+      ||
+      Label : RIGHT
+        (
+        Label : CODE
+          /
+          Label : RIGHT
+            [
+            Label : VARIABLE
+              ->
+              Label : PROPERTY
+                n
+              Label : OBJECT
+                $m
+            Label : INDEX
+              'o'
+          Label : LEFT
+            $l
+      Label : LEFT
+        ?
+        Label : CONDITION
+          >
+          Label : RIGHT
+            [
+            Label : VARIABLE
+              ->
+              Label : PROPERTY
+                d
+              Label : OBJECT
+                $c
+            Label : INDEX
+              'e'
+          Label : LEFT
+            $b
+        Label : THEN
           [
           Label : VARIABLE
             ->
             Label : PROPERTY
-              d
+              g
             Label : OBJECT
-              $c
+              $f
           Label : INDEX
-            'e'
-        Label : LEFT
-          $b
-      Label : THEN
-        [
-        Label : VARIABLE
-          ->
-          Label : PROPERTY
-            g
-          Label : OBJECT
-            $f
-        Label : INDEX
-          'h'
-      Label : ELSE
-        ||
-        Label : RIGHT
-          (
-          Label : CODE
-            /
-            Label : RIGHT
-              [
-              Label : VARIABLE
-                ->
-                Label : PROPERTY
-                  n
-                Label : OBJECT
-                  $m
-              Label : INDEX
-                'o'
-            Label : LEFT
-              $l
-        Label : LEFT
+            'h'
+        Label : ELSE
           [
           Label : VARIABLE
             ->

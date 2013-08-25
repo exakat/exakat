@@ -8,11 +8,11 @@ Label : CODE
       `
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-           d
-        Label : ELEMENT
+        Label : CONCAT
           b
-        Label : ELEMENT
+        Label : CONCAT
           $c
+        Label : CONCAT
+           d
     Label : LEFT
       $a

@@ -8,59 +8,67 @@ Label : CODE
       `
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-           
-        Label : ELEMENT
-          {
-          Label : NAME
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $m
-              Label : INDEX
-                'n'
-            Label : INDEX
-              'o'
-        Label : ELEMENT
-           
-        Label : ELEMENT
-          {
-          Label : NAME
-            [
-            Label : VARIABLE
-              $k
-            Label : INDEX
-              'l'
-        Label : ELEMENT
-           i j 
-        Label : ELEMENT
-          {
-          Label : NAME
-            ->
-            Label : METHOD
-              h
-              Label : ARGUMENTS
-                void
-            Label : OBJECT
-              $g
-        Label : ELEMENT
-           
-        Label : ELEMENT
-          {
-          Label : NAME
-            ->
-            Label : PROPERTY
-              f
-            Label : OBJECT
-              $e
-        Label : ELEMENT
-           d 
-        Label : ELEMENT
-          $c
-        Label : ELEMENT
+        Label : CONCAT
           $a
-        Label : ELEMENT
+        Label : CONCAT
            b 
+        Label : CONCAT
+          $c
+        Label : CONCAT
+           d 
+        Label : CONCAT
+          {
+        Label : CONCAT
+          ->
+          Label : PROPERTY
+            f
+          Label : OBJECT
+            $e
+        Label : CONCAT
+          }
+        Label : CONCAT
+           
+        Label : CONCAT
+          {
+        Label : CONCAT
+          ->
+          Label : OBJECT
+            $g
+          Label : METHOD
+            h
+            Label : ARGUMENTS
+              void
+        Label : CONCAT
+          }
+        Label : CONCAT
+           i j 
+        Label : CONCAT
+          {
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $k
+          Label : INDEX
+            'l'
+        Label : CONCAT
+          }
+        Label : CONCAT
+           
+        Label : CONCAT
+          {
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              $m
+            Label : INDEX
+              'n'
+          Label : INDEX
+            'o'
+        Label : CONCAT
+          }
+        Label : CONCAT
+           
     Label : LEFT
       $x

@@ -8,13 +8,13 @@ Label : CODE
       "
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-          )
-        Label : ELEMENT
+        Label : CONCAT
           (
-        Label : ELEMENT
+        Label : CONCAT
           {
           Label : NAME
             $derivedSelect
+        Label : CONCAT
+          )
     Label : LEFT
       $x

@@ -7,6 +7,8 @@ Label : CODE
     Label : RIGHT
       `
       Label : CONTAIN
-        ls -la
+        Concatenation
+        Label : CONCAT
+          ls -la
     Label : LEFT
       $x

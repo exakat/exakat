@@ -80,6 +80,7 @@ class _Case extends TokenAuto {
                                   1 => array('atom' => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                   3 => array('atom' => array('Block')), 
+                                  4 => array('token' => array('T_CASE', 'T_DEFAULT', 'T_CLOSE_CURLY', 'T_SEQUENCE_CASEDEFAULT')),
         );
         
         $this->actions = array('transform'   => array( 1 => 'CASE',

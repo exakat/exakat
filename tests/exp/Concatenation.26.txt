@@ -7,24 +7,28 @@ Label : CODE
     Label : RIGHT
       <<<EOD
 
-      Label : STRING
+      Label : CONTAIN
         Concatenation
-        Label : ELEMENT
+        Label : CONCAT
+          A 
+        Label : CONCAT
+          {
+        Label : CONCAT
+          $a
+        Label : CONCAT
+          ->
+        Label : CONCAT
+          b
+        Label : CONCAT
+          (
+        Label : CONCAT
+          'c'
+        Label : CONCAT
+          )
+        Label : CONCAT
+          }
+        Label : CONCAT
            B
 
-        Label : ELEMENT
-          A 
-        Label : ELEMENT
-          {
-          Label : NAME
-            ->
-            Label : METHOD
-              b
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'c'
-            Label : OBJECT
-              $a
     Label : LEFT
       $x

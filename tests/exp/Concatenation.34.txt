@@ -8,7 +8,7 @@ Label : CODE
       "
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
+        Label : CONCAT
           {
           Label : NAME
             [
@@ -20,7 +20,7 @@ Label : CODE
                 $this
             Label : INDEX
               'prefix'
-        Label : ELEMENT
+        Label : CONCAT
           {
           Label : NAME
             ->

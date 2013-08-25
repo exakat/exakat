@@ -6,6 +6,8 @@ Label : CODE
     (
     Label : CODE
       ->
+      Label : OBJECT
+        $x
       Label : METHOD
         b
         Label : ARGUMENTS
@@ -14,8 +16,6 @@ Label : CODE
             3
           Label : ARGUMENT
             'c'
-      Label : OBJECT
-        $x
   Label : THEN
     {
     Label : CODE

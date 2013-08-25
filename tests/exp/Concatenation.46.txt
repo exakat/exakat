@@ -8,35 +8,35 @@ Label : CODE
       "
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-           k 
-        Label : ELEMENT
-          [
-          Label : VARIABLE
-            $j
-          Label : INDEX
-            d
-        Label : ELEMENT
-           i 
-        Label : ELEMENT
-          [
-          Label : VARIABLE
-            $h
-          Label : INDEX
-            1
-        Label : ELEMENT
-           g 
-        Label : ELEMENT
+        Label : CONCAT
+          b 
+        Label : CONCAT
+          $c
+        Label : CONCAT
+           d 
+        Label : CONCAT
           ->
           Label : PROPERTY
             f
           Label : OBJECT
             $e
-        Label : ELEMENT
-           d 
-        Label : ELEMENT
-          b 
-        Label : ELEMENT
-          $c
+        Label : CONCAT
+           g 
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $h
+          Label : INDEX
+            1
+        Label : CONCAT
+           i 
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $j
+          Label : INDEX
+            d
+        Label : CONCAT
+           k 
     Label : LEFT
       $a

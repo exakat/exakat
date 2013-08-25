@@ -2,8 +2,6 @@
 
 Label : CODE
   function
-  Label : NAME
-    a
   Label : ARGUMENTS
     void
     Label : ARGUMENT
@@ -12,6 +10,8 @@ Label : CODE
         true
       Label : LEFT
         $b
+  Label : NAME
+    a
   Label : BLOCK
     {
     Label : CODE
@@ -31,6 +31,8 @@ Label : CODE
           Label : ARGUMENT
             <<< C
 
-            Label : STRING
-              D
+            Label : CONTAIN
+              Concatenation
+              Label : CONCAT
+                D
 

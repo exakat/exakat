@@ -8,23 +8,23 @@ Label : CODE
       "
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-          -01'
-        Label : ELEMENT
-          $e
-        Label : ELEMENT
-          -
-        Label : ELEMENT
-          $d
-        Label : ELEMENT
-           '
-        Label : ELEMENT
+        Label : CONCAT
           a 
-        Label : ELEMENT
+        Label : CONCAT
           ->
           Label : PROPERTY
             c
           Label : OBJECT
             $b
+        Label : CONCAT
+           '
+        Label : CONCAT
+          $d
+        Label : CONCAT
+          -
+        Label : CONCAT
+          $e
+        Label : CONCAT
+          -01'
     Label : LEFT
       $x

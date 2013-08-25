@@ -9,9 +9,7 @@ Label : CODE
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          (
-          Label : CODE
-            'a.php'
+          'a.php'
   Label : THEN
     {
     Label : CODE

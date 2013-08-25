@@ -11,8 +11,6 @@ Label : CODE
         Label : ARGUMENT
           .
           Label : CONCAT
-            'i'
-          Label : CONCAT
             preg_replace
             Label : ARGUMENTS
               ,
@@ -36,6 +34,8 @@ Label : CODE
                 ''
               Label : ARGUMENT
                 "e"
+          Label : CONCAT
+            'i'
           Label : CONCAT
             [
             Label : VARIABLE

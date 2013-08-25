@@ -11,10 +11,10 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        ?
-        Label : CONDITION
-          return
-          Label : RETURN
+        return
+        Label : RETURN
+          ?
+          Label : CONDITION
             >=
             Label : RIGHT
               0
@@ -34,25 +34,25 @@ Label : CODE
                         $d
                 Label : LEFT
                   $b
-        Label : THEN
-          $f
-        Label : ELSE
-          ->
-          Label : OBJECT
-            $g
-          Label : METHOD
-            h
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                9
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $this
-                Label : METHOD
-                  i
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      "J"
+          Label : THEN
+            $f
+          Label : ELSE
+            ->
+            Label : OBJECT
+              $g
+            Label : METHOD
+              h
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  9
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : METHOD
+                    i
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        "J"

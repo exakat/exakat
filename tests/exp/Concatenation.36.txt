@@ -32,15 +32,15 @@ Label : CODE
           "
           Label : CONTAIN
             Concatenation
-            Label : ELEMENT
-              e
-            Label : ELEMENT
+            Label : CONCAT
               b
-            Label : ELEMENT
+            Label : CONCAT
               [
               Label : VARIABLE
                 $c
               Label : INDEX
                 d
+            Label : CONCAT
+              e
     Label : LEFT
       $a

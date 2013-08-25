@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
+    Label : OBJECT
+      $c
     Label : METHOD
       e
       Label : ARGUMENTS
         void
-    Label : OBJECT
-      $c

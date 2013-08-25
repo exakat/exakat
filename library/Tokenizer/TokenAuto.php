@@ -1224,12 +1224,13 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         }
 
         if (isset($actions['make_quoted_string'])) {
+            $atom = $actions['make_quoted_string'];
             $qactions[] = " 
 /* make_quoted_string */ 
 
 x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', 'file':it.file, virtual:true]);
 
-it.out('NEXT').loop(1){it.object.token != 'T_QUOTE_CLOSE'}{it.object.token != 'T_QUOTE_CLOSE'}.each{
+it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}{!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.each{
     g.addEdge(x, it, 'CONCAT');
     it.inE('NEXT').each{ g.removeEdge(it);}
     f = it;
@@ -1241,45 +1242,14 @@ g.addEdge(it, f.out('NEXT').out('NEXT').next(), 'NEXT');
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), f.out('NEXT').next(), 'DELETE');
 g.removeEdge(f.out('NEXT').outE('NEXT').next());
 
-it.setProperty('atom', 'String');
+it.setProperty('atom', '$atom');
 
-/*
-
-z = it.in('NEXT').next();
-a = it;
-b = it.out('NEXT').next();
-c = it.out('NEXT').out('NEXT').next();
-
-g.addEdge(x, a, 'ELEMENT');
-g.addEdge(x, b, 'ELEMENT');
-
-b.bothE('NEXT').each{ g.removeEdge(it); }
-
-g.addEdge(z, x, 'NEXT');
-g.addEdge(x, c, 'NEXT');
-
-a.bothE('NEXT').each{ g.removeEdge(it); }
-
-x.as('origin').out('ELEMENT').has('atom','Concatenation').each{
-    it.inE('ELEMENT').each{ g.removeEdge(it);}
-  
-    it.out('ELEMENT').each{ 
-        it.inE('ELEMENT').each{ g.removeEdge(it);}
-        g.addEdge(x, it, 'ELEMENT');
-    };
-
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
-//    g.removeVertex(it);    
-}
-*/
-
-/* Clean index 
-x.out('ELEMENT').each{ 
+/* Clean index */
+x.out('CONCAT').each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 
 }
-*/
             ";
             unset($actions['make_quoted_string']);
         }

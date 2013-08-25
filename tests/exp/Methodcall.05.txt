@@ -6,10 +6,6 @@ Label : CODE
     return
     Label : RETURN
       ->
-      Label : METHOD
-        d
-        Label : ARGUMENTS
-          void
       Label : OBJECT
         a
         Label : ARGUMENTS
@@ -18,3 +14,7 @@ Label : CODE
             $c
           Label : ARGUMENT
             $b
+      Label : METHOD
+        d
+        Label : ARGUMENTS
+          void

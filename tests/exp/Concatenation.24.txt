@@ -7,8 +7,10 @@ Label : CODE
     Label : RIGHT
       <<<EOD
 
-      Label : STRING
-        
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          
 Oui
 
 

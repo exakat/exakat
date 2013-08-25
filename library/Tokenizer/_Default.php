@@ -69,6 +69,7 @@ class _Default extends TokenAuto {
                                               'atom' => 'none'),
                                   1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                   2 => array('atom' => array('Block')), 
+                                  3 => array('token' => array('T_CASE', 'T_DEFAULT', 'T_CLOSE_CURLY', 'T_SEQUENCE_CASEDEFAULT')),
         );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',

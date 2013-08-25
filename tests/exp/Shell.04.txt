@@ -12,7 +12,7 @@ Label : CODE
           `
           Label : CONTAIN
             Concatenation
-            Label : ELEMENT
+            Label : CONCAT
               {
               Label : NAME
                 ->
@@ -20,7 +20,7 @@ Label : CODE
                   x
                 Label : OBJECT
                   $file
-            Label : ELEMENT
+            Label : CONCAT
                sf 
     Label : LEFT
       $x

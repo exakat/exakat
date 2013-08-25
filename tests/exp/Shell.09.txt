@@ -7,6 +7,8 @@ Label : CODE
     Label : RIGHT
       `
       Label : CONTAIN
-        {b::c} d 
+        Concatenation
+        Label : CONCAT
+          {b::c} d 
     Label : LEFT
       $a
