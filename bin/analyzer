@@ -33,6 +33,7 @@ $classes = array(
     'Boolean',      // Fait
     'Sign',         // Fait
     '_Array',       // Fait
+    'String',       // Fait
     '_Arraydollarcurly',// Fait
     'Property',     // Fait
     'Keyvalue',     // Fait
@@ -74,8 +75,6 @@ $classes = array(
     'Addition',     // Fait
     'Bitshift',     // Fait
     'Concatenation', // Fait
-    'ConcatenationAtom', 
-    'String',       // Fait
     '_Var',         // Fait
     '_Ppp',         // Fait
     '_Static',      // Fait
