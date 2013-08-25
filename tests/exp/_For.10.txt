@@ -2,6 +2,16 @@
 
 Label : CODE
   for
+  Label : CODE
+    Block With For
+    Label : CODE
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $j
   Label : INIT
     void
   Label : FINAL
@@ -16,13 +26,3 @@ Label : CODE
       ++
       Label : POSTPLUSPLUS
         $i
-  Label : CODE
-    Block With For
-    Label : CODE
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $j

@@ -2,12 +2,6 @@
 
 Label : CODE
   for
-  Label : INIT
-    void
-  Label : FINAL
-    void
-  Label : INCREMENT
-    void
   Label : CODE
     Block With For
     Label : CODE
@@ -18,3 +12,9 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $j
+  Label : INIT
+    void
+  Label : FINAL
+    void
+  Label : INCREMENT
+    void

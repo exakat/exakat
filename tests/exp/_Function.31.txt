@@ -2,8 +2,6 @@
 
 Label : CODE
   interface
-  Label : NAME
-    a
   Label : CODE
     {
     Label : CODE
@@ -18,3 +16,5 @@ Label : CODE
             b
         Label : ARGUMENTS
           void
+  Label : NAME
+    a

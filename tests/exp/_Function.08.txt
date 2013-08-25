@@ -10,9 +10,9 @@ Label : CODE
       function
       Label : NAME
         x
-      Label : ARGUMENTS
-        void
       Label : BLOCK
         {
         Label : CODE
           void
+      Label : ARGUMENTS
+        void

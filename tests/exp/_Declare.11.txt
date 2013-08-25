@@ -2,14 +2,6 @@
 
 Label : CODE
   declare
-  Label : TICKS
-    void
-    Label : ARGUMENT
-      =
-      Label : RIGHT
-        1
-      Label : LEFT
-        ticks
   Label : BLOCK
     {
     Label : CODE
@@ -20,3 +12,11 @@ Label : CODE
           $a
         Label : LEFT
           $b
+  Label : TICKS
+    void
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        ticks

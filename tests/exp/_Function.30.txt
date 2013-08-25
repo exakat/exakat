@@ -4,12 +4,14 @@ Label : CODE
   function
   Label : NAME
     x
+  Label : BLOCK
+    {
+    Label : CODE
+      void
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
       Typehint
-      Label : CLASS
-        StdClass
       Label : VARIABLE
         =
         Label : RIGHT
@@ -18,10 +20,10 @@ Label : CODE
           &
           Label : REFERENCE
             $c
-    Label : ARGUMENT
-      Typehint
       Label : CLASS
         StdClass
+    Label : ARGUMENT
+      Typehint
       Label : VARIABLE
         =
         Label : RIGHT
@@ -30,10 +32,10 @@ Label : CODE
           &
           Label : REFERENCE
             $b
-    Label : ARGUMENT
-      Typehint
       Label : CLASS
         StdClass
+    Label : ARGUMENT
+      Typehint
       Label : VARIABLE
         =
         Label : RIGHT
@@ -42,7 +44,5 @@ Label : CODE
           &
           Label : REFERENCE
             $x
-  Label : BLOCK
-    {
-    Label : CODE
-      void
+      Label : CLASS
+        StdClass

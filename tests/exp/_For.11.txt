@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     for
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $i
     Label : INIT
       =
       Label : RIGHT
@@ -20,9 +26,3 @@ Label : CODE
       ++
       Label : POSTPLUSPLUS
         $c
-    Label : CODE
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $i

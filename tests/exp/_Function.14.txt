@@ -14,21 +14,21 @@ Label : CODE
           &
           Label : REFERENCE
             x
-        Label : ARGUMENTS
-          void
         Label : BLOCK
           {
           Label : CODE
             void
+        Label : ARGUMENTS
+          void
   Label : ELEMENT
     function
     Label : NAME
       &
       Label : REFERENCE
         z
-    Label : ARGUMENTS
-      void
     Label : BLOCK
       {
       Label : CODE
         void
+    Label : ARGUMENTS
+      void

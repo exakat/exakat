@@ -4,8 +4,6 @@ Label : CODE
   function
   Label : NAME
     x
-  Label : ARGUMENTS
-    void
   Label : BLOCK
     {
     Label : CODE
@@ -14,3 +12,5 @@ Label : CODE
         return
         Label : RETURN
           1
+  Label : ARGUMENTS
+    void

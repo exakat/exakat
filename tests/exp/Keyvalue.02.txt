@@ -46,34 +46,34 @@ Label : CODE
           =>
           Label : KEY
             ::
-            Label : CONSTANT
-              J
             Label : CLASS
               I
+            Label : CONSTANT
+              J
           Label : VALUE
             ::
-            Label : CONSTANT
-              L
             Label : CLASS
               K
+            Label : CONSTANT
+              L
         Label : ARGUMENT
           =>
           Label : KEY
             ->
+            Label : OBJECT
+              $e
             Label : METHOD
               f
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $e
           Label : VALUE
             ->
+            Label : OBJECT
+              $g
             Label : METHOD
               h
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $g
         Label : ARGUMENT
           =>
           Label : KEY

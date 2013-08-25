@@ -4,14 +4,6 @@ Label : CODE
   function
   Label : NAME
     test
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        array
-      Label : VARIABLE
-        $x
   Label : BLOCK
     {
     Label : CODE
@@ -20,3 +12,11 @@ Label : CODE
         return
         Label : RETURN
           $x
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      Typehint
+      Label : VARIABLE
+        $x
+      Label : CLASS
+        array

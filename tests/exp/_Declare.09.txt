@@ -4,6 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     declare
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $x
     Label : TICKS
       ,
       Label : ARGUMENT
@@ -18,11 +26,3 @@ Label : CODE
           2
         Label : LEFT
           ticks
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          $x

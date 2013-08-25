@@ -10,9 +10,9 @@ Label : CODE
       function
       Label : NAME
         __destruct
-      Label : ARGUMENTS
-        void
       Label : BLOCK
         {
         Label : CODE
           void
+      Label : ARGUMENTS
+        void

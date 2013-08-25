@@ -17,7 +17,7 @@ class _Implements extends TokenAuto {
         $this->actions = array('implement2arguments' => true,
                                'cleanIndex' => true
                                );
-        $this->checkAuto();
+//        $this->checkAuto();
 
 /*
         // @note implements a,b,c (three or more)

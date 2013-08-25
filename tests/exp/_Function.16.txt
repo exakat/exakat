@@ -4,12 +4,6 @@ Label : CODE
   function
   Label : NAME
     a
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      $c
-    Label : ARGUMENT
-      $b
   Label : BLOCK
     {
     Label : CODE
@@ -18,3 +12,9 @@ Label : CODE
         return
         Label : RETURN
           1
+  Label : ARGUMENTS
+    ,
+    Label : ARGUMENT
+      $c
+    Label : ARGUMENT
+      $b

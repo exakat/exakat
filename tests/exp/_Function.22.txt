@@ -4,6 +4,10 @@ Label : CODE
   function
   Label : NAME
     a
+  Label : BLOCK
+    {
+    Label : CODE
+      void
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -18,7 +22,3 @@ Label : CODE
         null
       Label : LEFT
         $x
-  Label : BLOCK
-    {
-    Label : CODE
-      void

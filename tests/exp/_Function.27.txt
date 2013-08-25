@@ -4,6 +4,16 @@ Label : CODE
   function
   Label : NAME
     a
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        print_r
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -44,13 +54,3 @@ Label : CODE
         &
         Label : REFERENCE
           $c
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        print_r
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b

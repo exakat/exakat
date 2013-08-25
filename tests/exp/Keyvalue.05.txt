@@ -22,10 +22,10 @@ Label : CODE
           =>
           Label : KEY
             ::
-            Label : CONSTANT
-              C
             Label : CLASS
               B
+            Label : CONSTANT
+              C
           Label : VALUE
             'd'
     Label : LEFT

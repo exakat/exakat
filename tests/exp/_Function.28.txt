@@ -4,21 +4,21 @@ Label : CODE
   function
   Label : NAME
     a
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      &
-      Label : LEFT
-        StdClass
-      Label : RIGHT
-        $b
-    Label : ARGUMENT
-      &
-      Label : LEFT
-        StdClass
-      Label : RIGHT
-        $x
   Label : BLOCK
     {
     Label : CODE
       void
+  Label : ARGUMENTS
+    ,
+    Label : ARGUMENT
+      &
+      Label : RIGHT
+        $b
+      Label : LEFT
+        StdClass
+    Label : ARGUMENT
+      &
+      Label : RIGHT
+        $x
+      Label : LEFT
+        StdClass

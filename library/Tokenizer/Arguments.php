@@ -44,10 +44,10 @@ class Arguments extends TokenAuto {
         $this->checkAuto();
 
         // @note arguments separated by , (interface), ending on a {
-        $this->conditions = array(-1 => array('atom' => array('String', 'Arguments') ),
+        $this->conditions = array(-1 => array('atom' => array('String', 'Arguments', 'Nsname') ),
                                    0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
-                                   1 => array('atom' => 'String'),
+                                   1 => array('atom' => array('String', 'Nsname')),
                                    2 => array('token' => 'T_OPEN_CURLY')
                                  );
         

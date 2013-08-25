@@ -4,10 +4,10 @@ Label : CODE
   =
   Label : RIGHT
     function
-    Label : ARGUMENT
-      void
     Label : NAME
       lambda
+    Label : ARGUMENT
+      void
     Label : BLOCK
       {
       Label : CODE
