@@ -73,7 +73,6 @@ class _Function extends TokenAuto {
                                'atom'       => 'Function',
                                'cleanIndex' => true);
         $this->checkAuto();
-//        $this->printQuery();
 
         return $this->checkRemaining();
     }
