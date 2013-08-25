@@ -1,0 +1,53 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          $a
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $b
+  Label : ELEMENT
+    ?
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      b
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          $e
+        Label : ARGUMENT
+          ->
+          Label : PROPERTY
+            d
+          Label : OBJECT
+            $c
+    Label : ELSE
+      f
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          ->
+          Label : PROPERTY
+            j
+          Label : OBJECT
+            $i
+        Label : ARGUMENT
+          ->
+          Label : PROPERTY
+            h
+          Label : OBJECT
+            $g
