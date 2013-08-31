@@ -4,12 +4,6 @@ Label : CODE
   class
   Label : NAME
     A
-  Label : IMPLEMENTS
-    \
-    Label : ELEMENT
-      C
-    Label : ELEMENT
-      B
   Label : BLOCK
     {
     Label : CODE
@@ -18,3 +12,9 @@ Label : CODE
     \
     Label : ELEMENT
       D
+  Label : IMPLEMENTS
+    \
+    Label : ELEMENT
+      C
+    Label : ELEMENT
+      B

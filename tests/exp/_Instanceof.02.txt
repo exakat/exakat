@@ -10,42 +10,42 @@ Label : CODE
         (
         Label : CODE
           ||
-          Label : LEFT
-            is_array
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : PROPERTY
-                  d
-                Label : OBJECT
-                  [
-                  Label : VARIABLE
-                    ->
-                    Label : PROPERTY
-                      b
-                    Label : OBJECT
-                      $a
-                  Label : INDEX
-                    $c
           Label : RIGHT
             instanceof
             Label : RIGHT
               ArrayAccess
             Label : LEFT
               ->
-              Label : PROPERTY
-                h
               Label : OBJECT
                 [
                 Label : VARIABLE
                   ->
-                  Label : PROPERTY
-                    f
                   Label : OBJECT
                     $e
+                  Label : PROPERTY
+                    f
                 Label : INDEX
                   $g
+              Label : PROPERTY
+                h
+          Label : LEFT
+            is_array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  [
+                  Label : VARIABLE
+                    ->
+                    Label : OBJECT
+                      $a
+                    Label : PROPERTY
+                      b
+                  Label : INDEX
+                    $c
+                Label : PROPERTY
+                  d
   Label : THEN
     {
     Label : CODE

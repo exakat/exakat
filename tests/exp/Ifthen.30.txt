@@ -8,21 +8,21 @@ Label : CODE
       (
       Label : CODE
         <
-        Label : LEFT
-          $a
         Label : RIGHT
           0
+        Label : LEFT
+          $a
     Label : THEN
       Block With if/elseif
       Label : CODE
         =
-        Label : LEFT
-          $b
         Label : RIGHT
           1
+        Label : LEFT
+          $b
   Label : ELEMENT
     =
-    Label : LEFT
-      $c
     Label : RIGHT
       2
+    Label : LEFT
+      $c

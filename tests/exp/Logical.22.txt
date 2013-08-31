@@ -6,28 +6,40 @@ Label : CODE
     (
     Label : CODE
       &&
-      Label : LEFT
-        $a
       Label : RIGHT
         is_array
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $b
+      Label : LEFT
+        $a
   Label : THEN
     {
     Label : CODE
       ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          =
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void
+          Label : LEFT
+            $d
+        Label : LEFT
+          $c
       Label : ELEMENT
         foreach
         Label : SOURCE
           $e
         Label : VALUE
           =>
-          Label : KEY
-            $k
           Label : VALUE
             $v
+          Label : KEY
+            $k
         Label : LOOP
           {
           Label : CODE
@@ -54,18 +66,6 @@ Label : CODE
                 [
                 Label : VARIABLE
                   $f
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          =
-          Label : RIGHT
-            array
-            Label : ARGUMENTS
-              void
-          Label : LEFT
-            $d
-        Label : LEFT
-          $c
       Label : ELEMENT
         =
         Label : RIGHT

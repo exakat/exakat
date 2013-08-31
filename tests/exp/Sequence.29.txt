@@ -4,28 +4,10 @@ Label : CODE
   function
   Label : NAME
     a
-  Label : ARGUMENTS
-    void
   Label : BLOCK
     {
     Label : CODE
       ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            $b
-        Label : THEN
-          {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                1
-              Label : LEFT
-                $c
       Label : ELEMENT
         if
         Label : CONDITION
@@ -43,6 +25,22 @@ Label : CODE
               Label : LEFT
                 $e
       Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $b
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                1
+              Label : LEFT
+                $c
+      Label : ELEMENT
         array_pop
         Label : ARGUMENTS
           void
@@ -52,3 +50,5 @@ Label : CODE
               stack
             Label : OBJECT
               $this
+  Label : ARGUMENTS
+    void

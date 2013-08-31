@@ -10,8 +10,6 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          'a'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
@@ -42,10 +40,10 @@ Label : CODE
                 $data
               Label : VALUE
                 =>
-                Label : KEY
-                  $key
                 Label : VALUE
                   $value
+                Label : KEY
+                  $key
               Label : LOOP
                 {
                 Label : CODE
@@ -66,6 +64,8 @@ Label : CODE
                   void
               Label : LEFT
                 $indexed
+        Label : CASE
+          'a'
       Label : ELEMENT
         default
         Label : CODE

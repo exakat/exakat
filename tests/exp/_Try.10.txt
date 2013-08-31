@@ -14,11 +14,11 @@ Label : CODE
             "
             Label : CONTAIN
               Concatenation
-              Label : ELEMENT
-                ' d
-              Label : ELEMENT
+              Label : CONCAT
                 b '
-              Label : ELEMENT
+              Label : CONCAT
                 {
                 Label : NAME
                   $c
+              Label : CONCAT
+                ' d

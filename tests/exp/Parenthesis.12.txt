@@ -16,18 +16,20 @@ Label : CODE
         "
         Label : CONTAIN
           Concatenation
-          Label : ELEMENT
-            g
-          Label : ELEMENT
+          Label : CONCAT
             d
-          Label : ELEMENT
+          Label : CONCAT
             {
-            Label : NAME
-              [
-              Label : VARIABLE
-                $e
-              Label : INDEX
-                f
+          Label : CONCAT
+            [
+            Label : VARIABLE
+              $e
+            Label : INDEX
+              f
+          Label : CONCAT
+            }
+          Label : CONCAT
+            g
     Label : LEFT
       ::
       Label : PROPERTY

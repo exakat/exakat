@@ -22,6 +22,8 @@ Label : CODE
                 void
               Label : DEFINE
                 function
+                Label : ARGUMENTS
+                  void
                 Label : NAME
                   a
                 Label : BLOCK
@@ -34,8 +36,6 @@ Label : CODE
                         1
                       Label : LEFT
                         $x
-                Label : ARGUMENTS
-                  void
         Label : ELEMENT
           abstract
           Label : ABSTRACT
@@ -48,7 +48,7 @@ Label : CODE
                 void
               Label : DEFINE
                 function
-                Label : NAME
-                  b
                 Label : ARGUMENTS
                   void
+                Label : NAME
+                  b

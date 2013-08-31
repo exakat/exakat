@@ -4,9 +4,9 @@ Label : CODE
   class
   Label : NAME
     x
-  Label : IMPLEMENTS
-    z
   Label : BLOCK
     {
     Label : CODE
       void
+  Label : IMPLEMENTS
+    z

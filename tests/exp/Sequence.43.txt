@@ -8,16 +8,6 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : LEFT
-          isset
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $a
-              Label : INDEX
-                'b'
         Label : RIGHT
           is_array
           Label : ARGUMENTS
@@ -28,22 +18,32 @@ Label : CODE
                 $c
               Label : INDEX
                 'd'
+        Label : LEFT
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $a
+              Label : INDEX
+                'b'
     Label : THEN
       Block With if/elseif
       Label : CODE
         foreach
-        Label : SOURCE
-          [
-          Label : VARIABLE
-            $e
-          Label : INDEX
-            'f'
         Label : VALUE
           =>
           Label : KEY
             $g
           Label : VALUE
             $h
+        Label : SOURCE
+          [
+          Label : VARIABLE
+            $e
+          Label : INDEX
+            'f'
         Label : LOOP
           {
           Label : CODE

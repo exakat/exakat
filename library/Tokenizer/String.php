@@ -9,7 +9,7 @@ class String extends TokenAuto {
 // Case of string with interpolation : "a${b}c";
         $this->conditions = array(  0 => array('token' => String::$operators, 
                                                'atom' => 'none'),
-                                    1 => array('atom'  => array('String', 'Variable', 'Concatenation', 'Array')),
+                                    1 => array('atom'  => array('String', 'Variable', 'Concatenation', 'Array', 'Property')),
                                  );
 
         $this->actions = array( 'make_quoted_string' => 'String');

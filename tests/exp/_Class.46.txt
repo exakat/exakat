@@ -14,14 +14,14 @@ Label : CODE
           void
         Label : DEFINE
           function
+          Label : ARGUMENTS
+            void
           Label : NAME
             c
           Label : BLOCK
             {
             Label : CODE
               void
-          Label : ARGUMENTS
-            void
       Label : ELEMENT
         protected
         Label : VALUE
@@ -32,14 +32,14 @@ Label : CODE
             void
           Label : DEFINE
             function
+            Label : ARGUMENTS
+              void
             Label : NAME
               b
             Label : BLOCK
               {
               Label : CODE
                 void
-            Label : ARGUMENTS
-              void
       Label : ELEMENT
         protected
         Label : VALUE

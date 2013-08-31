@@ -8,8 +8,6 @@ Label : CODE
     {
     Label : CODE
       case
-      Label : CASE
-        'b'
       Label : CODE
         Block With Sequence For Case
         Label : CODE
@@ -17,6 +15,6 @@ Label : CODE
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              (
-              Label : CODE
-                'c.php'
+              'c.php'
+      Label : CASE
+        'b'

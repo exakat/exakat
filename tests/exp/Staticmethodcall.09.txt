@@ -10,11 +10,11 @@ Label : CODE
         void
     Label : OBJECT
       ::
+      Label : CLASS
+        self
       Label : PROPERTY
         [
         Label : VARIABLE
           $a
         Label : INDEX
           $b
-      Label : CLASS
-        self

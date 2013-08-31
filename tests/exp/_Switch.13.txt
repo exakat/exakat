@@ -9,9 +9,15 @@ Label : CODE
     Label : CODE
       Sequence Case Default
       Label : ELEMENT
+        default
+        Label : CODE
+          Block With Sequence For Default
+          Label : CODE
+            break
+            Label : LEVEL
+              void
+      Label : ELEMENT
         case
-        Label : CASE
-          'j'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
@@ -20,10 +26,10 @@ Label : CODE
               10
             Label : LEFT
               $x
+        Label : CASE
+          'j'
       Label : ELEMENT
         case
-        Label : CASE
-          'c'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
@@ -32,10 +38,10 @@ Label : CODE
               3
             Label : LEFT
               $x
+        Label : CASE
+          'c'
       Label : ELEMENT
         case
-        Label : CASE
-          'i'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
@@ -44,10 +50,10 @@ Label : CODE
               9
             Label : LEFT
               $x
+        Label : CASE
+          'i'
       Label : ELEMENT
         case
-        Label : CASE
-          'e'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
@@ -56,10 +62,10 @@ Label : CODE
               5
             Label : LEFT
               $x
+        Label : CASE
+          'e'
       Label : ELEMENT
         case
-        Label : CASE
-          'h'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
@@ -68,10 +74,10 @@ Label : CODE
               8
             Label : LEFT
               $x
+        Label : CASE
+          'h'
       Label : ELEMENT
         case
-        Label : CASE
-          'a'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
@@ -80,10 +86,10 @@ Label : CODE
               1
             Label : LEFT
               $x
+        Label : CASE
+          'a'
       Label : ELEMENT
         case
-        Label : CASE
-          'g'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
@@ -92,10 +98,10 @@ Label : CODE
               7
             Label : LEFT
               $x
+        Label : CASE
+          'g'
       Label : ELEMENT
         case
-        Label : CASE
-          'd'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
@@ -104,10 +110,10 @@ Label : CODE
               4
             Label : LEFT
               $x
+        Label : CASE
+          'd'
       Label : ELEMENT
         case
-        Label : CASE
-          'f'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
@@ -116,10 +122,10 @@ Label : CODE
               6
             Label : LEFT
               $x
+        Label : CASE
+          'f'
       Label : ELEMENT
         case
-        Label : CASE
-          'b'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
@@ -128,11 +134,5 @@ Label : CODE
               2
             Label : LEFT
               $x
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block With Sequence For Default
-          Label : CODE
-            break
-            Label : LEVEL
-              void
+        Label : CASE
+          'b'

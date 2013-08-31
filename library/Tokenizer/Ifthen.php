@@ -113,10 +113,10 @@ class Ifthen extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
-                                   3 => array('atom'  => array('Block', 'Sequence', 'RawString')),
+                                   3 => array('atom'  => array('Block', 'Sequence', 'RawString', 'Void')),
                                    4 => array('token' => 'T_ELSE'),
                                    5 => array('token' => 'T_COLON'),
-                                   6 => array('atom'  => array('Block', 'Sequence', 'RawString')),
+                                   6 => array('atom'  => array('Block', 'Sequence', 'RawString', 'Void')),
                                    7 => array('token' => array('T_ENDIF', 'T_ELSEIF')),
         );
         
@@ -140,7 +140,7 @@ class Ifthen extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
-                                   3 => array('atom'  => array('Block', 'Sequence', 'RawString')),
+                                   3 => array('atom'  => 'yes'), //array('Block', 'Sequence', 'RawString', 'Void')),
                                    4 => array('atom'  => 'Ifthen', 'token' => 'T_ELSEIF' ),
                                    5 => array('filterOut2' => 'T_ENDIF'),
         );

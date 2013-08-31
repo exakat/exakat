@@ -7,8 +7,10 @@ Label : CODE
     Label : RIGHT
       "
       Label : CONTAIN
-        ${
-        Label : NAME
-          b
+        Concatenation
+        Label : CONCAT
+          ${
+          Label : NAME
+            b
     Label : LEFT
       $a

@@ -1,0 +1,19 @@
+<?php 
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      &
+      Label : LEFT
+        ::
+        Label : CLASS
+          A
+        Label : CONSTANT
+          B
+      Label : RIGHT
+        $c
+  Label : THEN
+    {
+    Label : CODE
+      void

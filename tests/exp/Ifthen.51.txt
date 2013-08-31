@@ -6,14 +6,16 @@ Label : CODE
     (
     Label : CODE
       ->
-      Label : PROPERTY
-        b
       Label : OBJECT
         $a
+      Label : PROPERTY
+        b
   Label : THEN
     Block With if/elseif
     Label : CODE
       =
+      Label : RIGHT
+        1
       Label : LEFT
         [
         Label : VARIABLE
@@ -28,12 +30,12 @@ Label : CODE
                 $e
               Label : INDEX
                 $f
-      Label : RIGHT
-        1
   Label : ELSE
     Block With else
     Label : CODE
       =
+      Label : RIGHT
+        1
       Label : LEFT
         [
         Label : VARIABLE
@@ -44,5 +46,3 @@ Label : CODE
             $h
           Label : INDEX
             $i
-      Label : RIGHT
-        1

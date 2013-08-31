@@ -7,12 +7,14 @@ Label : CODE
     Label : RIGHT
       "
       Label : CONTAIN
-        ${
-        Label : NAME
-          [
-          Label : VARIABLE
-            b
-          Label : INDEX
-            'c'
+        Concatenation
+        Label : CONCAT
+          ${
+          Label : NAME
+            [
+            Label : VARIABLE
+              b
+            Label : INDEX
+              'c'
     Label : LEFT
       $a

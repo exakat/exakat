@@ -2,6 +2,14 @@
 
 Label : CODE
   function
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        StdClass
+      Label : VARIABLE
+        $b
   Label : NAME
     a
   Label : BLOCK
@@ -12,11 +20,3 @@ Label : CODE
         return
         Label : RETURN
           1
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        $b
-      Label : CLASS
-        StdClass

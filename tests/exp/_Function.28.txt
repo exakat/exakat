@@ -2,12 +2,6 @@
 
 Label : CODE
   function
-  Label : NAME
-    a
-  Label : BLOCK
-    {
-    Label : CODE
-      void
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -22,3 +16,9 @@ Label : CODE
         $x
       Label : LEFT
         StdClass
+  Label : NAME
+    a
+  Label : BLOCK
+    {
+    Label : CODE
+      void

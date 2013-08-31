@@ -6,13 +6,15 @@ class _Case extends TokenAuto {
     static public $operators = array('T_CASE');
     
     function _check() {
+        $final_token = array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_ENDSWITCH');
+
         // @todo move to load
         // Case is empty (case 'a': )
         $this->conditions = array(0 => array('token' => _Case::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  3 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')),
+                                  3 => array('token' => $final_token),
         );
         
         $this->actions = array('createVoidForCase' => true,
@@ -26,7 +28,7 @@ class _Case extends TokenAuto {
                                   1 => array('atom' => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                   3 => array('token' => array('T_COLON', 'T_SEMICOLON'), 'atom' => 'none'),
-                                  4 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')),
+                                  4 => array('token' => $final_token),
         );
         
         $this->actions = array('createVoidForCase' => true,
@@ -40,7 +42,7 @@ class _Case extends TokenAuto {
                                    2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                    3 => array('atom'  => 'yes', 'notAtom' => 'Block'), 
                                    4 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
-                                   5 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')));
+                                   5 => array('token' => $final_token));
         
         $this->actions = array('createBlockWithSequenceForCase'    => true,
                                'keepIndexed'                       => true);
@@ -52,7 +54,7 @@ class _Case extends TokenAuto {
                                    1 => array('atom'  => 'yes'),
                                    2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                    3 => array('atom'  => 'yes', 'notAtom' => 'Block'), 
-                                   4 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT')));
+                                   4 => array('token' => $final_token));
         
         $this->actions = array('createBlockWithSequenceForCase'    => true,
                                'keepIndexed'                       => true);
@@ -65,7 +67,7 @@ class _Case extends TokenAuto {
                                     2 => array('token' => array('T_COLON', 'T_SEMICOLON'),
                                                'atom' => 'none'),
                                     3 => array('atom' => 'yes', 'notAtom' => array('Case', 'Default', 'SequenceCaseDefault', 'Block', )),
-                                    4 => array('token' => array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT'),
+                                    4 => array('token' => $final_token,
                                                 'atom' => 'yes'),
                                     //, 'T_SEMICOLON'
         );
@@ -77,10 +79,10 @@ class _Case extends TokenAuto {
         // Case is followed by a block
         $this->conditions = array(0 => array('token' => _Case::$operators,
                                               'atom' => 'none'),
-                                  1 => array('atom' => 'yes'),
+                                  1 => array('atom'  => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  3 => array('atom' => array('Block')), 
-                                  4 => array('token' => array('T_CASE', 'T_DEFAULT', 'T_CLOSE_CURLY', 'T_SEQUENCE_CASEDEFAULT')),
+                                  3 => array('atom'  => array('Block')), 
+                                  4 => array('token' => $final_token),
         );
         
         $this->actions = array('transform'   => array( 1 => 'CASE',

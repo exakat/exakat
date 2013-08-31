@@ -6,23 +6,23 @@ Label : CODE
     "
     Label : CONTAIN
       Concatenation
-      Label : ELEMENT
-        g
-      Label : ELEMENT
-        ${
-        Label : NAME
-          f
-      Label : ELEMENT
-        e
-      Label : ELEMENT
-        ${
-        Label : NAME
-          d
-      Label : ELEMENT
-        c
-      Label : ELEMENT
+      Label : CONCAT
         a
-      Label : ELEMENT
+      Label : CONCAT
         ${
         Label : NAME
           b
+      Label : CONCAT
+        c
+      Label : CONCAT
+        ${
+        Label : NAME
+          d
+      Label : CONCAT
+        e
+      Label : CONCAT
+        ${
+        Label : NAME
+          f
+      Label : CONCAT
+        g

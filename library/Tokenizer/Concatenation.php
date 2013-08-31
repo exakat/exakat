@@ -9,7 +9,7 @@ class Concatenation extends TokenAuto {
         $operands = array('String', 'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign', 'Array',
                           'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
                           'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 
-                          'Preplusplus', 'Postplusplus', 'Cast',);
+                          'Preplusplus', 'Postplusplus', 'Cast', 'Assignation' );
         
         $this->conditions = array(-2 => array('filterOut' => array_merge(Addition::$operators, Multiplication::$operators,
                                                                          Preplusplus::$operators, 

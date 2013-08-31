@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      2
     Label : LEFT
       [
       Label : VARIABLE
@@ -12,5 +14,3 @@ Label : CODE
           b
         Label : OBJECT
           $a
-    Label : RIGHT
-      2

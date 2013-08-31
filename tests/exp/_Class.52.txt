@@ -4,31 +4,31 @@ Label : CODE
   class
   Label : NAME
     x
-  Label : IMPLEMENTS
-    z
   Label : BLOCK
     {
     Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
         Label : NAME
           a
         Label : BLOCK
           {
           Label : CODE
             void
-        Label : ARGUMENTS
-          void
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
         Label : NAME
           b
         Label : BLOCK
           {
           Label : CODE
             void
-        Label : ARGUMENTS
-          void
   Label : EXTENDS
     y
+  Label : IMPLEMENTS
+    z

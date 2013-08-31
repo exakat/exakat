@@ -12,14 +12,14 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $j
+  Label : FINAL
+    void
   Label : INIT
     =
     Label : RIGHT
       0
     Label : LEFT
       $i
-  Label : FINAL
-    void
   Label : INCREMENT
     ++
     Label : POSTPLUSPLUS

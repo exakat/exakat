@@ -10,39 +10,39 @@ Label : CODE
     catch
     Label : CLASS
       Exception
-    Label : VARIABLE
-      $e
     Label : CODE
       {
       Label : CODE
         void
+    Label : VARIABLE
+      $e
   Label : CATCH
     catch
     Label : CLASS
       Exception2
-    Label : VARIABLE
-      $e
     Label : CODE
       {
       Label : CODE
         void
+    Label : VARIABLE
+      $e
   Label : CATCH
     catch
     Label : CLASS
       Exception3
-    Label : VARIABLE
-      $e
     Label : CODE
       {
       Label : CODE
         void
+    Label : VARIABLE
+      $e
   Label : CATCH
     catch
     Label : CLASS
       Exception4
-    Label : VARIABLE
-      $e
     Label : CODE
       {
       Label : CODE
         void
+    Label : VARIABLE
+      $e

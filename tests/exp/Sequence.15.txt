@@ -13,6 +13,12 @@ Label : CODE
         Label : ELEMENT
           protected
           Label : NAME
+            $y
+          Label : VALUE
+            void
+        Label : ELEMENT
+          protected
+          Label : NAME
             $x
           Label : VALUE
             void
@@ -20,12 +26,6 @@ Label : CODE
           protected
           Label : NAME
             $a
-          Label : VALUE
-            void
-        Label : ELEMENT
-          protected
-          Label : NAME
-            $y
           Label : VALUE
             void
         Label : ELEMENT

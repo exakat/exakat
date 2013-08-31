@@ -2,6 +2,10 @@
 
 Label : CODE
   for
+  Label : CODE
+    Block With For
+    Label : CODE
+      void
   Label : INIT
     =
     Label : RIGHT
@@ -18,7 +22,3 @@ Label : CODE
     ++
     Label : POSTPLUSPLUS
       $a
-  Label : CODE
-    Block With For
-    Label : CODE
-      void

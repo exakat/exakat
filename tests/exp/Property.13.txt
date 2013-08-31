@@ -5,26 +5,6 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      2
-    Label : LEFT
-      ->
-      Label : PROPERTY
-        d
-      Label : OBJECT
-        ->
-        Label : PROPERTY
-          c
-        Label : OBJECT
-          ->
-          Label : METHOD
-            b
-            Label : ARGUMENTS
-              void
-          Label : OBJECT
-            $A
-  Label : ELEMENT
-    =
-    Label : RIGHT
       3
     Label : LEFT
       ->
@@ -40,6 +20,26 @@ Label : CODE
             b
           Label : OBJECT
             $A
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      ->
+      Label : PROPERTY
+        d
+      Label : OBJECT
+        ->
+        Label : PROPERTY
+          c
+        Label : OBJECT
+          ->
+          Label : OBJECT
+            $A
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              void
   Label : ELEMENT
     =
     Label : RIGHT

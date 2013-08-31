@@ -10,12 +10,16 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          'b'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
             ;
+            Label : ELEMENT
+              g
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'h'
             Label : ELEMENT
               require_once
               Label : ARGUMENTS
@@ -31,12 +35,6 @@ Label : CODE
               Label : LEVEL
                 void
             Label : ELEMENT
-              g
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'h'
-            Label : ELEMENT
               ++
               Label : POSTPLUSPLUS
                 $d
@@ -44,21 +42,23 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $c
+        Label : CASE
+          'b'
       Label : ELEMENT
         case
-        Label : CASE
-          'i'
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-      Label : ELEMENT
-        case
-        Label : CASE
-          'j'
         Label : CODE
           Block With Sequence For Case
           Label : CODE
             break
             Label : LEVEL
               1
+        Label : CASE
+          'j'
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            Void
+        Label : CASE
+          'i'

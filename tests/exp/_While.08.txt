@@ -8,20 +8,6 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : LEFT
-          !=
-          Label : RIGHT
-            2
-          Label : LEFT
-            substr
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                1
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                $a
         Label : RIGHT
           !=
           Label : RIGHT
@@ -36,6 +22,20 @@ Label : CODE
                 3
               Label : ARGUMENT
                 $b
+        Label : LEFT
+          !=
+          Label : RIGHT
+            2
+          Label : LEFT
+            substr
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                $a
     Label : THEN
       {
       Label : CODE
@@ -46,8 +46,6 @@ Label : CODE
             false
   Label : ELEMENT
     while
-    Label : CONDITION
-      1
     Label : LOOP
       {
       Label : CODE
@@ -58,6 +56,12 @@ Label : CODE
             (
             Label : CODE
               ||
+              Label : RIGHT
+                empty
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $e
               Label : LEFT
                 !=
                 Label : RIGHT
@@ -72,12 +76,6 @@ Label : CODE
                       6
                     Label : ARGUMENT
                       $c
-              Label : RIGHT
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $e
           Label : THEN
             {
             Label : CODE
@@ -98,3 +96,5 @@ Label : CODE
                 $g
           Label : LEFT
             $f
+    Label : CONDITION
+      1

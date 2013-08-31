@@ -2,13 +2,13 @@
 
 Label : CODE
   interface
-  Label : NAME
-    x
   Label : CODE
     {
     Label : CODE
       function
-      Label : NAME
-        y
       Label : ARGUMENTS
         void
+      Label : NAME
+        y
+  Label : NAME
+    x

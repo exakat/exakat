@@ -12,18 +12,18 @@ Label : CODE
         (
         Label : CODE
           &
-          Label : LEFT
-            x
-            Label : ARGUMENTS
-              void
           Label : RIGHT
             ->
+            Label : OBJECT
+              $y
             Label : METHOD
               z
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $y
+          Label : LEFT
+            x
+            Label : ARGUMENTS
+              void
   Label : THEN
     {
     Label : CODE

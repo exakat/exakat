@@ -2,10 +2,26 @@
 
 Label : CODE
   while
+  Label : LOOP
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        +=
+        Label : RIGHT
+          1
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $i
+          Label : PROPERTY
+            j
   Label : CONDITION
     <
     Label : RIGHT
       ::
+      Label : CLASS
+        c
       Label : METHOD
         d
         Label : ARGUMENTS
@@ -22,25 +38,9 @@ Label : CODE
             $h
           Label : ARGUMENT
             $g
-      Label : CLASS
-        c
     Label : LEFT
       ->
-      Label : PROPERTY
-        b
       Label : OBJECT
         $a
-  Label : LOOP
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        +=
-        Label : RIGHT
-          1
-        Label : LEFT
-          ->
-          Label : PROPERTY
-            j
-          Label : OBJECT
-            $i
+      Label : PROPERTY
+        b

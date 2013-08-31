@@ -2,14 +2,6 @@
 
 Label : CODE
   function
-  Label : NAME
-    &
-    Label : REFERENCE
-      z
-  Label : BLOCK
-    {
-    Label : CODE
-      void
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -48,3 +40,11 @@ Label : CODE
         null
       Label : LEFT
         $a
+  Label : NAME
+    &
+    Label : REFERENCE
+      z
+  Label : BLOCK
+    {
+    Label : CODE
+      void

@@ -28,16 +28,16 @@ Label : CODE
           =>
           Label : VALUE
             ->
-            Label : PROPERTY
-              i
             Label : OBJECT
               $h
+            Label : PROPERTY
+              i
           Label : KEY
             ->
-            Label : PROPERTY
-              g
             Label : OBJECT
               $f
+            Label : PROPERTY
+              g
         Label : ARGUMENT
           =>
           Label : VALUE

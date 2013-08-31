@@ -10,16 +10,14 @@ Label : CODE
     Block With if/elseif
     Label : CODE
       =
-      Label : LEFT
-        $b
       Label : RIGHT
         1
+      Label : LEFT
+        $b
   Label : ELSE
     Block With else
     Label : CODE
       =
-      Label : LEFT
-        $c
       Label : RIGHT
         "
         Label : CONTAIN
@@ -28,17 +26,19 @@ Label : CODE
             {
             Label : NAME
               ->
-              Label : PROPERTY
-                e
               Label : OBJECT
                 $d
+              Label : PROPERTY
+                e
           Label : CONCAT
             :
           Label : CONCAT
             {
             Label : NAME
               ->
-              Label : PROPERTY
-                g
               Label : OBJECT
                 $f
+              Label : PROPERTY
+                g
+      Label : LEFT
+        $c

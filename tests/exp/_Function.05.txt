@@ -2,6 +2,14 @@
 
 Label : CODE
   function
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $a
   Label : NAME
     x
   Label : BLOCK
@@ -12,11 +20,3 @@ Label : CODE
         return
         Label : RETURN
           1
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      =
-      Label : RIGHT
-        1
-      Label : LEFT
-        $a

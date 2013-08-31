@@ -2,7 +2,7 @@
 
 Label : CODE
   |
-  Label : LEFT
-    3
   Label : RIGHT
     4
+  Label : LEFT
+    3

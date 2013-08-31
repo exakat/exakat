@@ -12,8 +12,6 @@ Label : CODE
           void
     Label : LEFT
       ->
-      Label : PROPERTY
-        d
       Label : OBJECT
         ::
         Label : CLASS
@@ -24,3 +22,5 @@ Label : CODE
             $a
           Label : INDEX
             $b
+      Label : PROPERTY
+        d

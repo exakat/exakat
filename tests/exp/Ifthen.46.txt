@@ -11,18 +11,18 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $e
         Label : RIGHT
           1
+        Label : LEFT
+          $e
       Label : ELEMENT
         [
         Label : VARIABLE
           ->
-          Label : PROPERTY
-            c
           Label : OBJECT
             $b
+          Label : PROPERTY
+            c
         Label : INDEX
           d
         Label : ARGUMENTS

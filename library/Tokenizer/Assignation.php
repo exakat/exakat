@@ -33,7 +33,7 @@ class Assignation extends TokenAuto {
         // check for preplusplus in the yield filterout.
         $this->conditions = array(-2 => array('filterOut2' => array_merge(array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_AND',),
                                                                            Preplusplus::$operators )),
-                                  -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 'Noscream', 'Reference', 'Not', 'Arrayappend' , 'Typehint', 'String', 'Static',  )),
+                                  -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 'Noscream', 'Reference', 'Not', 'Arrayappend' , 'Typehint', 'String', 'Static', 'Cast' )),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut2' => array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators, 

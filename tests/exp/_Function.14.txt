@@ -10,6 +10,8 @@ Label : CODE
       {
       Label : CODE
         function
+        Label : ARGUMENTS
+          void
         Label : NAME
           &
           Label : REFERENCE
@@ -18,10 +20,10 @@ Label : CODE
           {
           Label : CODE
             void
-        Label : ARGUMENTS
-          void
   Label : ELEMENT
     function
+    Label : ARGUMENTS
+      void
     Label : NAME
       &
       Label : REFERENCE
@@ -30,5 +32,3 @@ Label : CODE
       {
       Label : CODE
         void
-    Label : ARGUMENTS
-      void

@@ -15,10 +15,6 @@ Label : CODE
     H
   Label : ELEMENT
     ->
-    Label : METHOD
-      g
-      Label : ARGUMENTS
-        void
     Label : OBJECT
       ::
       Label : METHOD
@@ -33,6 +29,10 @@ Label : CODE
                 'F'
       Label : CLASS
         C
+    Label : METHOD
+      g
+      Label : ARGUMENTS
+        void
   Label : ELEMENT
     echo
     Label : ARGUMENTS

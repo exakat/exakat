@@ -3,6 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
+    goto
+    Label : LABEL
+      a
+  Label : ELEMENT
     :
     Label : LABEL
       a
@@ -12,10 +16,6 @@ Label : CODE
       void
       Label : ARGUMENT
         'Foo'
-  Label : ELEMENT
-    goto
-    Label : LABEL
-      a
   Label : ELEMENT
     echo
     Label : ARGUMENTS

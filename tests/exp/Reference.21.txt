@@ -12,13 +12,13 @@ Label : CODE
           void
           Label : ARGUMENT
             |
-            Label : LEFT
-              0xC0
             Label : RIGHT
               >>
               Label : RIGHT
                 12
               Label : LEFT
                 $char
+            Label : LEFT
+              0xC0
     Label : LEFT
       $x

@@ -12,7 +12,7 @@ class Arguments extends TokenAuto {
                                        'Property', 'Staticconstant', 'Staticproperty', 'Nsname', 'Methodcall', 'Staticmethodcall',
                                        'Reference', 'Cast', 'Postplusplus', 'Preplusplus', 'Typehint', 'Bitshift', 'Noscream',
                                        'Clone', 'New', 'Arrayappend', 'Include', 'Instanceof', 'Function', 'Keyvalue', 
-                                       'ArrayNS', 'Shell' );
+                                       'ArrayNS', 'Shell', 'Heredoc', );
 
     function _check() {
         $operands = Arguments::$operands_wa;

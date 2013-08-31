@@ -6,14 +6,14 @@ Label : CODE
     (
     Label : CODE
       ||
+      Label : RIGHT
+        $c
       Label : LEFT
         ==
         Label : RIGHT
           $b
         Label : LEFT
           $a
-      Label : RIGHT
-        $c
   Label : THEN
     {
     Label : CODE

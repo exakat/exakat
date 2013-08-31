@@ -8,33 +8,37 @@ Label : CODE
       "
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-          {
-          Label : NAME
-            ->
-            Label : PROPERTY
-              f
-            Label : OBJECT
-              $e
-        Label : ELEMENT
-          A
-        Label : ELEMENT
-          {
-          Label : NAME
-            ->
-            Label : PROPERTY
-              c
-            Label : OBJECT
-              $b
-        Label : ELEMENT
+        Label : CONCAT
           {
           Label : NAME
             $a
-        Label : ELEMENT
+        Label : CONCAT
+          A
+        Label : CONCAT
+          {
+        Label : CONCAT
+          ->
+          Label : PROPERTY
+            c
+          Label : OBJECT
+            $b
+        Label : CONCAT
+          }
+        Label : CONCAT
           {
           Label : NAME
             $d
-        Label : ELEMENT
+        Label : CONCAT
           B
+        Label : CONCAT
+          {
+        Label : CONCAT
+          ->
+          Label : PROPERTY
+            f
+          Label : OBJECT
+            $e
+        Label : CONCAT
+          }
     Label : LEFT
       $x

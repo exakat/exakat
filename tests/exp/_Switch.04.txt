@@ -10,17 +10,17 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            Void
         Label : CASE
           1
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
       Label : ELEMENT
         case
-        Label : CASE
-          2
         Label : CODE
           Block With Sequence For Case
           Label : CODE
             Void
+        Label : CASE
+          2

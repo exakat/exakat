@@ -214,7 +214,7 @@ root = it;
 root.setProperty('code', var.code);
 root.setProperty('token', var.token);
 
-arg.out('ARGUMENT').has('atom', 'Variable').each{
+arg.out('ARGUMENT').filter{it.atom in ['Variable', 'Static', 'Ppp']}.each{
     x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, 'file':arg.file, virtual:true]);
     
     g.addEdge(root, x, 'NEXT');
@@ -238,7 +238,6 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     
     
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
-    //g.removeVertex(it);
 }
 
 g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
@@ -251,6 +250,30 @@ g.removeVertex(var);
 
 ";
             unset($actions['to_var']);
+        }
+
+        if (isset($actions['to_var_ppp'])) {
+            $atom = $actions['to_var_ppp'];
+            $qactions[] = "
+/* to var with another ppp before */
+
+var = it;
+arg = it.out('NEXT').next();
+
+it.out('NEXT').out('ARGUMENT').each{
+    x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, 'file':it.file, virtual:true]);
+
+    g.addEdge(x, it, 'DEFINE');
+    g.removeEdge( it.inE('ARGUMENT').next() );
+    g.addEdge(arg, x, 'ARGUMENT');
+}
+
+g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
+it.bothE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+
+";
+            unset($actions['to_var_ppp']);
         }
 
         if (isset($actions['to_use'])) {
@@ -1102,6 +1125,14 @@ x.out('CODE').each{
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 
+}
+
+// remove the next, if this is a ; 
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+    semicolon = it;
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(semicolon);
 }
 
             ";

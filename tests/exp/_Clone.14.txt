@@ -14,10 +14,10 @@ Label : CODE
             [
             Label : VARIABLE
               ->
-              Label : PROPERTY
-                c
               Label : OBJECT
                 $b
+              Label : PROPERTY
+                c
             Label : INDEX
               'd'
       Label : THEN
@@ -26,10 +26,10 @@ Label : CODE
           [
           Label : VARIABLE
             ->
-            Label : PROPERTY
-              d
             Label : OBJECT
               $c
+            Label : PROPERTY
+              d
           Label : INDEX
             'e'
       Label : ELSE

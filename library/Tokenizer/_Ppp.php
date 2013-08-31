@@ -9,7 +9,7 @@ class _Ppp extends TokenAuto {
         $values = array('T_EQUAL', 'T_COMMA');
     // class x { protected $x }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),
-                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static', 'Function', 'Abstract'  )),
+                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static', 'Function', 'Abstract', 'Final', 'Static',  )),
                                    2 => array('filterOut' => $values),
                                    // T_SEMICOLON because of _Class 28 test
                                  );
@@ -34,7 +34,8 @@ class _Ppp extends TokenAuto {
         $this->checkAuto(); 
 
     // class x { var $x, $y }
-        $this->conditions = array( 0 => array('token' => _Ppp::$operators),
+        $this->conditions = array(-1 => array('filterOut2' => array('T_STATIC')),
+                                   0 => array('token' => _Ppp::$operators),
                                    1 => array('atom' => 'Arguments'),
                                    2 => array('filterOut' => array('T_COMMA')),
                                  );
@@ -42,7 +43,16 @@ class _Ppp extends TokenAuto {
         $this->actions = array('to_var'   => 'Ppp',
                                'atom'     => 'Ppp',
                                );
+        $this->checkAuto(); 
 
+    // class x { static private $x, $y }
+        $this->conditions = array(-1 => array('token' => array('T_STATIC')),
+                                   0 => array('token' => _Ppp::$operators),
+                                   1 => array('atom'  => 'Arguments'),
+                                 );
+        
+        $this->actions = array('to_var_ppp' => 'Ppp',
+                               'atom'       => 'Ppp');
         $this->checkAuto(); 
 
         return $this->checkRemaining();

@@ -8,6 +8,8 @@ Label : CODE
       new
       Label : NEW
         \
+        Label : ELEMENT
+          A
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -18,11 +20,9 @@ Label : CODE
                 $f
               Label : ARGUMENT
                 ->
-                Label : PROPERTY
-                  e
                 Label : OBJECT
                   $d
+                Label : PROPERTY
+                  e
               Label : ARGUMENT
                 'C'
-        Label : ELEMENT
-          A

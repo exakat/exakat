@@ -2,43 +2,43 @@
 
 Label : CODE
   function
-  Label : NAME
-    a2
   Label : ARGUMENTS
     void
     Label : ARGUMENT
       $n
+  Label : NAME
+    a2
   Label : BLOCK
     {
     Label : CODE
       while
-      Label : CONDITION
-        >=
-        Label : RIGHT
-          1
-        Label : LEFT
-          $b
       Label : LOOP
         Block With While
         Label : CODE
           for
-          Label : INIT
-            =
-            Label : RIGHT
-              1
-            Label : LEFT
-              $i
+          Label : CODE
+            Block With For
+            Label : CODE
+              void
           Label : FINAL
             <
             Label : RIGHT
               2
             Label : LEFT
               $i
+          Label : INIT
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $i
           Label : INCREMENT
             ++
             Label : POSTPLUSPLUS
               $i
-          Label : CODE
-            Block With For
-            Label : CODE
-              void
+      Label : CONDITION
+        >=
+        Label : RIGHT
+          1
+        Label : LEFT
+          $b

@@ -13,6 +13,12 @@ Label : CODE
         Label : CODE
           ;
           Label : ELEMENT
+            =
+            Label : RIGHT
+              2
+            Label : LEFT
+              $h
+          Label : ELEMENT
             if
             Label : CONDITION
               (
@@ -28,10 +34,10 @@ Label : CODE
                     $a
                   Label : VALUE
                     =>
-                    Label : KEY
-                      $b
                     Label : VALUE
                       $c
+                    Label : KEY
+                      $b
                   Label : LOOP
                     {
                     Label : CODE
@@ -72,12 +78,6 @@ Label : CODE
               3
             Label : LEFT
               $i
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              2
-            Label : LEFT
-              $h
           Label : ELEMENT
             break
             Label : LEVEL

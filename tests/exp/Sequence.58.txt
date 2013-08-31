@@ -1,0 +1,44 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      ->
+      Label : OBJECT
+        $a
+      Label : METHOD
+        b
+        Label : ARGUMENTS
+          void
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        declare
+        Label : TICKS
+          void
+          Label : ARGUMENT
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              ticks
+      Label : ELEMENT
+        while
+        Label : CONDITION
+          true
+        Label : LOOP
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                $this
+              Label : METHOD
+                b
+                Label : ARGUMENTS
+                  void

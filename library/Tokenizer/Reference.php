@@ -24,7 +24,8 @@ class Reference extends TokenAuto {
         $this->checkAuto();
 
         // special case for Stdclass &$x = 
-        $this->conditions = array(-1 => array('token' => 'T_STRING'), 
+        $this->conditions = array(-2 => array('filterOut' => 'T_DOUBLE_COLON'),
+                                  -1 => array('token' => 'T_STRING'), 
                                    0 => array('token' => Reference::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => array('Variable')),

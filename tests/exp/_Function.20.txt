@@ -2,18 +2,6 @@
 
 Label : CODE
   function
-  Label : NAME
-    a
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        print_r
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
   Label : ARGUMENTS
     void
     Label : ARGUMENT
@@ -26,8 +14,6 @@ Label : CODE
             3
           Label : ARGUMENT
             =>
-            Label : KEY
-              2
             Label : VALUE
               array
               Label : ARGUMENTS
@@ -36,7 +22,21 @@ Label : CODE
                   2
                 Label : ARGUMENT
                   3
+            Label : KEY
+              2
           Label : ARGUMENT
             1
       Label : LEFT
         $b
+  Label : NAME
+    a
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        print_r
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b

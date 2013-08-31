@@ -4,13 +4,13 @@ Label : CODE
   class
   Label : NAME
     x
+  Label : BLOCK
+    {
+    Label : CODE
+      void
   Label : IMPLEMENTS
     c
   Label : IMPLEMENTS
     b
   Label : IMPLEMENTS
     a
-  Label : BLOCK
-    {
-    Label : CODE
-      void

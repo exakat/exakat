@@ -11,20 +11,20 @@ Label : CODE
         Label : ARGUMENT
           2
         Label : ARGUMENT
-          (int)
-          Label : CAST
-            *
+          *
+          Label : RIGHT
+            1
+          Label : LEFT
+            /
             Label : RIGHT
-              1
+              [
+              Label : VARIABLE
+                $f
+              Label : INDEX
+                'g'
             Label : LEFT
-              /
-              Label : RIGHT
-                [
-                Label : VARIABLE
-                  $f
-                Label : INDEX
-                  'g'
-              Label : LEFT
+              (int)
+              Label : CAST
                 [
                 Label : VARIABLE
                   $d

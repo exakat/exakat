@@ -26,6 +26,16 @@ Label : CODE
             $b
   Label : ELEMENT
     ->
+    Label : OBJECT
+      ::
+      Label : METHOD
+        l
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'e'
+      Label : CLASS
+        M
     Label : METHOD
       k
       Label : ARGUMENTS
@@ -48,13 +58,3 @@ Label : CODE
                   H
         Label : ARGUMENT
           $f
-    Label : OBJECT
-      ::
-      Label : METHOD
-        l
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'e'
-      Label : CLASS
-        M

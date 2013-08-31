@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $y
     Label : VALUE
       $b
+    Label : SOURCE
+      $y
     Label : LOOP
       {
       Label : CODE
@@ -52,10 +52,10 @@ Label : CODE
             $x
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $y
     Label : VALUE
       $b
+    Label : SOURCE
+      $y
     Label : LOOP
       {
       Label : CODE

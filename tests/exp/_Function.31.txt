@@ -10,11 +10,11 @@ Label : CODE
         void
       Label : DEFINE
         function
+        Label : ARGUMENTS
+          void
         Label : NAME
           &
           Label : REFERENCE
             b
-        Label : ARGUMENTS
-          void
   Label : NAME
     a

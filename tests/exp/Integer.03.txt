@@ -4,19 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     .=
-    Label : LEFT
-      $a
     Label : RIGHT
       "
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-          e
-        Label : ELEMENT
+        Label : CONCAT
           b
-        Label : ELEMENT
+        Label : CONCAT
           [
           Label : VARIABLE
             $c
           Label : INDEX
             1
+        Label : CONCAT
+          e
+    Label : LEFT
+      $a

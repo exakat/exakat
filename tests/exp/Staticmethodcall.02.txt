@@ -10,11 +10,11 @@ Label : CODE
         'd'
       Label : CONCAT
         ::
+        Label : CLASS
+          b
         Label : METHOD
           c
           Label : ARGUMENTS
             void
-        Label : CLASS
-          b
     Label : LEFT
       $a

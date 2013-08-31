@@ -2,12 +2,6 @@
 
 Label : CODE
   function
-  Label : NAME
-    x
-  Label : BLOCK
-    {
-    Label : CODE
-      void
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -26,3 +20,9 @@ Label : CODE
         $b
     Label : ARGUMENT
       $a
+  Label : NAME
+    x
+  Label : BLOCK
+    {
+    Label : CODE
+      void

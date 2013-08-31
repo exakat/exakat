@@ -4,14 +4,22 @@ Label : CODE
   function
   Label : NAME
     x
-  Label : ARGUMENTS
-    void
   Label : BLOCK
     {
     Label : CODE
       ;
       Label : ELEMENT
         for
+        Label : CODE
+          Block With For
+          Label : CODE
+            {
+            Label : CODE
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $j
         Label : INIT
           =
           Label : RIGHT
@@ -28,18 +36,18 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $i
-        Label : CODE
-          Block With For
-          Label : CODE
-            {
-            Label : CODE
-              ;
-              Label : ELEMENT
-                ++
-                Label : POSTPLUSPLUS
-                  $j
       Label : ELEMENT
         for
+        Label : CODE
+          Block With For
+          Label : CODE
+            {
+            Label : CODE
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $j
         Label : INIT
           =
           Label : RIGHT
@@ -56,13 +64,5 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $a
-        Label : CODE
-          Block With For
-          Label : CODE
-            {
-            Label : CODE
-              ;
-              Label : ELEMENT
-                ++
-                Label : POSTPLUSPLUS
-                  $j
+  Label : ARGUMENTS
+    void

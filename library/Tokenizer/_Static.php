@@ -22,7 +22,7 @@ class _Static extends TokenAuto {
         $this->checkAuto(); 
 
     // class x { static $x, $y }
-        $this->conditions = array(-1 => array('filterOut2' => array('T_NEW')),
+        $this->conditions = array(-1 => array('filterOut2' => array('T_NEW', 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC')),
                                    0 => array('token' => _Static::$operators),
                                    1 => array('atom' => 'Arguments'),
                                  );
@@ -30,6 +30,16 @@ class _Static extends TokenAuto {
         $this->actions = array('to_var'   => 'Static',
                                'atom'     => 'Static',
                                );
+        $this->checkAuto(); 
+
+    // class x { private static $x, $y }
+        $this->conditions = array(-1 => array('token' => array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC')),
+                                   0 => array('token' => _Static::$operators),
+                                   1 => array('atom'  => 'Arguments'),
+                                 );
+        
+        $this->actions = array('to_var_ppp' => 'Static',
+                               'atom'       => 'Static');
         $this->checkAuto(); 
 
     // static :: ....

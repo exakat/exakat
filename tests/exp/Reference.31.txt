@@ -6,24 +6,24 @@ Label : CODE
     (
     Label : CODE
       &
-      Label : LEFT
-        +
-        Label : RIGHT
-          "0"
-        Label : LEFT
-          $d
       Label : RIGHT
         ==
         Label : RIGHT
           $c
         Label : LEFT
           ->
+          Label : OBJECT
+            $a
           Label : METHOD
             b
             Label : ARGUMENTS
               void
-          Label : OBJECT
-            $a
+      Label : LEFT
+        +
+        Label : RIGHT
+          "0"
+        Label : LEFT
+          $d
   Label : THEN
     {
     Label : CODE
@@ -31,9 +31,7 @@ Label : CODE
       Label : ELEMENT
         return
         Label : RETURN
-          void
-      Label : ELEMENT
-        true
+          true
   Label : ELSE
     {
     Label : CODE
@@ -41,6 +39,4 @@ Label : CODE
       Label : ELEMENT
         return
         Label : RETURN
-          void
-      Label : ELEMENT
-        false
+          false

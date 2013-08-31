@@ -30,14 +30,6 @@ Label : CODE
             $d
   Label : ELEMENT
     &&
-    Label : LEFT
-      !
-      Label : NOT
-        e
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $f
     Label : RIGHT
       g
       Label : ARGUMENTS
@@ -66,3 +58,11 @@ Label : CODE
           $i
         Label : ARGUMENT
           $h
+    Label : LEFT
+      !
+      Label : NOT
+        e
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $f

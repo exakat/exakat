@@ -1,0 +1,54 @@
+<?php
+
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      class_exists
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $d
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            !
+            Label : NOT
+              isset
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : PROPERTY
+                    b
+                  Label : OBJECT
+                    $a
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $c
+      Label : ELEMENT
+        new
+        Label : NEW
+          $a
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              (array)
+              Label : CAST
+                (
+                Label : CODE
+                  $c
+            Label : ARGUMENT
+              $b

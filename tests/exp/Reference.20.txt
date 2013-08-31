@@ -8,21 +8,21 @@ Label : CODE
       "
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-          {
-          Label : NAME
-            $d
-        Label : ELEMENT
-          =
-        Label : ELEMENT
-          $c
-        Label : ELEMENT
-          &
-        Label : ELEMENT
+        Label : CONCAT
           a=
-        Label : ELEMENT
+        Label : CONCAT
           {
           Label : NAME
             $b
+        Label : CONCAT
+          &
+        Label : CONCAT
+          $c
+        Label : CONCAT
+          =
+        Label : CONCAT
+          {
+          Label : NAME
+            $d
     Label : LEFT
       $x

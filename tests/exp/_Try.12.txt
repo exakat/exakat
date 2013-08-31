@@ -1,0 +1,151 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    try
+    Label : CODE
+      {
+      Label : CODE
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            ==
+            Label : LEFT
+              [
+              Label : VARIABLE
+                $e
+              Label : INDEX
+                'r'
+            Label : RIGHT
+              't'
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                ->
+                Label : PROPERTY
+                  f
+                Label : OBJECT
+                  $this
+              Label : METHOD
+                g
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    t
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        'h'
+    Label : CATCH
+      catch
+      Label : CODE
+        {
+        Label : CODE
+          void
+      Label : VARIABLE
+        $e
+      Label : CLASS
+        Router_ArgNoExist
+    Label : CATCH
+      catch
+      Label : CODE
+        {
+        Label : CODE
+          void
+      Label : VARIABLE
+        $e
+      Label : CLASS
+        Ugmanager_GroupNoExist
+    Label : CATCH
+      catch
+      Label : CODE
+        {
+        Label : CODE
+          ;
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $x
+            Label : THEN
+              {
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ->
+                  Label : OBJECT
+                    $x
+                  Label : METHOD
+                    d
+                    Label : ARGUMENTS
+                      void
+          Label : ELEMENT
+            ->
+            Label : OBJECT
+              ->
+              Label : PROPERTY
+                a
+              Label : OBJECT
+                $d
+            Label : METHOD
+              e
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  f
+                  Label : ARGUMENTS
+                    ,
+                    Label : ARGUMENT
+                      [
+                      Label : VARIABLE
+                        $h
+                      Label : INDEX
+                        'i'
+                    Label : ARGUMENT
+                      t
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          'g'
+      Label : VARIABLE
+        $e
+      Label : CLASS
+        ACL_RoleNoExist
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          $b
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              A
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $this
+    Label : METHOD
+      a
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          ::
+          Label : CLASS
+            B
+          Label : CONSTANT
+            D

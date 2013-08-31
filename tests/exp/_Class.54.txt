@@ -4,8 +4,6 @@ Label : CODE
   class
   Label : NAME
     x
-  Label : IMPLEMENTS
-    z
   Label : BLOCK
     {
     Label : CODE
@@ -24,24 +22,24 @@ Label : CODE
           $a
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
         Label : NAME
           b
         Label : BLOCK
           {
           Label : CODE
             void
-        Label : ARGUMENTS
-          void
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
         Label : NAME
           c
         Label : BLOCK
           {
           Label : CODE
             void
-        Label : ARGUMENTS
-          void
       Label : ELEMENT
         var
         Label : VALUE
@@ -50,3 +48,5 @@ Label : CODE
           $d
   Label : EXTENDS
     y
+  Label : IMPLEMENTS
+    z

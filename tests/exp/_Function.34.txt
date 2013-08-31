@@ -2,6 +2,44 @@
 
 Label : CODE
   function
+  Label : ARGUMENTS
+    ,
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        CLASSE
+      Label : VARIABLE
+        $f
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        CLASSE
+      Label : VARIABLE
+        $e
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        CLASSE
+      Label : VARIABLE
+        $d
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        CLASSE
+      Label : VARIABLE
+        $c
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        CLASSE
+      Label : VARIABLE
+        $b
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        CLASSE
+      Label : VARIABLE
+        $a
   Label : NAME
     &
     Label : REFERENCE
@@ -10,41 +48,3 @@ Label : CODE
     {
     Label : CODE
       void
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        $f
-      Label : CLASS
-        CLASSE
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        $e
-      Label : CLASS
-        CLASSE
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        $d
-      Label : CLASS
-        CLASSE
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        $c
-      Label : CLASS
-        CLASSE
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        $b
-      Label : CLASS
-        CLASSE
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        $a
-      Label : CLASS
-        CLASSE

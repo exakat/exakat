@@ -2,6 +2,8 @@
 
 Label : CODE
   function
+  Label : ARGUMENTS
+    void
   Label : NAME
     x
   Label : BLOCK
@@ -12,5 +14,3 @@ Label : CODE
         return
         Label : RETURN
           1
-  Label : ARGUMENTS
-    void

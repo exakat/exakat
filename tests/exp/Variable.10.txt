@@ -8,18 +8,18 @@ Label : CODE
       "
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-          {
-          Label : NAME
-            $a
-        Label : ELEMENT
-          z
-        Label : ELEMENT
+        Label : CONCAT
           x
-        Label : ELEMENT
+        Label : CONCAT
           {
           Label : NAME
             $y
+        Label : CONCAT
+          z
+        Label : CONCAT
+          {
+          Label : NAME
+            $a
     Label : LEFT
       $f
   Label : ELEMENT
@@ -28,14 +28,14 @@ Label : CODE
       "
       Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-          z
-        Label : ELEMENT
+        Label : CONCAT
           x
-        Label : ELEMENT
+        Label : CONCAT
           {
           Label : NAME
             $y
+        Label : CONCAT
+          z
     Label : LEFT
       $e
   Label : ELEMENT
@@ -43,9 +43,11 @@ Label : CODE
     Label : RIGHT
       "
       Label : CONTAIN
-        ${
-        Label : NAME
-          $a
+        Concatenation
+        Label : CONCAT
+          ${
+          Label : NAME
+            $a
     Label : LEFT
       $d
   Label : ELEMENT
@@ -53,9 +55,11 @@ Label : CODE
     Label : RIGHT
       "
       Label : CONTAIN
-        ${
-        Label : NAME
-          z
+        Concatenation
+        Label : CONCAT
+          ${
+          Label : NAME
+            z
     Label : LEFT
       $c
   Label : ELEMENT
@@ -63,8 +67,10 @@ Label : CODE
     Label : RIGHT
       "
       Label : CONTAIN
-        {
-        Label : NAME
-          $y
+        Concatenation
+        Label : CONCAT
+          {
+          Label : NAME
+            $y
     Label : LEFT
       $a

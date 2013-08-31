@@ -4,10 +4,6 @@ Label : CODE
   function
   Label : NAME
     a
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      $b
   Label : BLOCK
     {
     Label : CODE
@@ -32,6 +28,12 @@ Label : CODE
         return
         Label : RETURN
           ->
+          Label : OBJECT
+            ->
+            Label : PROPERTY
+              e
+            Label : OBJECT
+              $d
           Label : METHOD
             f
             Label : ARGUMENTS
@@ -42,19 +44,17 @@ Label : CODE
                   "
                   Label : CONTAIN
                     Concatenation
-                    Label : ELEMENT
-                      '
-                    Label : ELEMENT
+                    Label : CONCAT
                       c
-                    Label : ELEMENT
+                    Label : CONCAT
                       $d
+                    Label : CONCAT
+                      '
                 Label : CONCAT
                   b
                 Label : CONCAT
                   "a"
-          Label : OBJECT
-            ->
-            Label : PROPERTY
-              e
-            Label : OBJECT
-              $d
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      $b

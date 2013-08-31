@@ -11,6 +11,12 @@ Label : CODE
       Label : ELEMENT
         var
         Label : NAME
+          $h
+        Label : VALUE
+          void
+      Label : ELEMENT
+        var
+        Label : NAME
           $c
         Label : VALUE
           void
@@ -42,12 +48,6 @@ Label : CODE
         var
         Label : NAME
           $i
-        Label : VALUE
-          void
-      Label : ELEMENT
-        var
-        Label : NAME
-          $h
         Label : VALUE
           void
       Label : ELEMENT

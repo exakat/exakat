@@ -30,8 +30,6 @@ Label : CODE
     catch
     Label : CLASS
       Exception
-    Label : VARIABLE
-      $e
     Label : CODE
       {
       Label : CODE
@@ -52,3 +50,5 @@ Label : CODE
                 'Y-m-d-H-i-s'
           Label : LEFT
             $c
+    Label : VARIABLE
+      $e

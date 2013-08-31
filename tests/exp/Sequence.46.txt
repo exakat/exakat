@@ -36,11 +36,11 @@ Label : CODE
             void
       Label : ELEMENT
         ->
+        Label : OBJECT
+          $e
         Label : METHOD
           f
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $g
-        Label : OBJECT
-          $e

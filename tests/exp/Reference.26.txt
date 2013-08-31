@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     &
+    Label : RIGHT
+      $d
     Label : LEFT
       |
-      Label : LEFT
-        $a
       Label : RIGHT
         >>
         Label : RIGHT
@@ -16,33 +16,33 @@ Label : CODE
             3
         Label : LEFT
           $c
-    Label : RIGHT
-      $d
-  Label : ELEMENT
-    &
-    Label : LEFT
-      |
       Label : LEFT
         $a
+  Label : ELEMENT
+    &
+    Label : RIGHT
+      $d
+    Label : LEFT
+      |
       Label : RIGHT
         >>
         Label : RIGHT
           1.2
         Label : LEFT
           $c
-    Label : RIGHT
-      $d
-  Label : ELEMENT
-    &
-    Label : LEFT
-      |
       Label : LEFT
         $a
+  Label : ELEMENT
+    &
+    Label : RIGHT
+      $d
+    Label : LEFT
+      |
       Label : RIGHT
         >>
         Label : RIGHT
           1
         Label : LEFT
           $c
-    Label : RIGHT
-      $d
+      Label : LEFT
+        $a

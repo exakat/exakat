@@ -18,9 +18,9 @@ Label : CODE
             $b
   Label : ELEMENT
     interface
-    Label : NAME
-      x
     Label : CODE
       {
       Label : CODE
         void
+    Label : NAME
+      x

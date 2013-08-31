@@ -6,21 +6,21 @@ Label : CODE
     &
     Label : REFERENCE
       a
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      &
-      Label : LEFT
-        C
-      Label : RIGHT
-        $d
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        b
-      Label : VARIABLE
-        $c
   Label : BLOCK
     {
     Label : CODE
       void
+  Label : ARGUMENTS
+    ,
+    Label : ARGUMENT
+      &
+      Label : RIGHT
+        $d
+      Label : LEFT
+        C
+    Label : ARGUMENT
+      Typehint
+      Label : VARIABLE
+        $c
+      Label : CLASS
+        b

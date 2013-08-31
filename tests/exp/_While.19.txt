@@ -2,22 +2,16 @@
 
 Label : CODE
   function
-  Label : NAME
-    a
   Label : ARGUMENTS
     void
     Label : ARGUMENT
       $n
+  Label : NAME
+    a
   Label : BLOCK
     {
     Label : CODE
       while
-      Label : CONDITION
-        >=
-        Label : RIGHT
-          1
-        Label : LEFT
-          $b
       Label : LOOP
         Block With While
         Label : CODE
@@ -26,3 +20,9 @@ Label : CODE
             2
           Label : LEFT
             $n
+      Label : CONDITION
+        >=
+        Label : RIGHT
+          1
+        Label : LEFT
+          $b

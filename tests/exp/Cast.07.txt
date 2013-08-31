@@ -6,10 +6,10 @@ Label : CODE
     (double)
     Label : CAST
       ->
-      Label : PROPERTY
-        h
       Label : OBJECT
         $z
+      Label : PROPERTY
+        h
   Label : ELEMENT
     (float)
     Label : CAST
@@ -22,7 +22,7 @@ Label : CODE
     (real)
     Label : CAST
       ::
-      Label : PROPERTY
-        $y
       Label : CLASS
         x
+      Label : PROPERTY
+        $y

@@ -5,6 +5,8 @@ Label : CODE
   Label : ELEMENT
     "
     Label : CONTAIN
-      ${
-      Label : NAME
-        b
+      Concatenation
+      Label : CONCAT
+        ${
+        Label : NAME
+          b

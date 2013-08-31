@@ -14,12 +14,12 @@ Label : CODE
       void
       Label : ARGUMENT
         &
+        Label : RIGHT
+          $d
         Label : LEFT
           (
           Label : CODE
             |
-            Label : LEFT
-              $a
             Label : RIGHT
               (
               Label : CODE
@@ -28,8 +28,8 @@ Label : CODE
                   1
                 Label : LEFT
                   $c
-        Label : RIGHT
-          $d
+            Label : LEFT
+              $a
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -42,12 +42,12 @@ Label : CODE
       void
       Label : ARGUMENT
         |
-        Label : LEFT
-          $a
         Label : RIGHT
           (
           Label : CODE
             &
+            Label : RIGHT
+              $d
             Label : LEFT
               (
               Label : CODE
@@ -56,5 +56,5 @@ Label : CODE
                   1
                 Label : LEFT
                   $c
-            Label : RIGHT
-              $d
+        Label : LEFT
+          $a

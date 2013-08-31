@@ -2,11 +2,11 @@
 
 Label : CODE
   function
+  Label : ARGUMENTS
+    void
   Label : NAME
     a
   Label : BLOCK
     {
     Label : CODE
       void
-  Label : ARGUMENTS
-    void

@@ -4,8 +4,6 @@ Label : CODE
   class
   Label : NAME
     x
-  Label : IMPLEMENTS
-    z
   Label : BLOCK
     {
     Label : CODE
@@ -18,3 +16,5 @@ Label : CODE
           $a
   Label : EXTENDS
     y
+  Label : IMPLEMENTS
+    z

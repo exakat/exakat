@@ -15,21 +15,21 @@ Label : CODE
           Label : CONCAT
             {
           Label : CONCAT
+            $this
+          Label : CONCAT
             ->
-            Label : PROPERTY
-              b
-            Label : OBJECT
-              $this
+          Label : CONCAT
+            b
           Label : CONCAT
             }
           Label : CONCAT
              c 
           Label : CONCAT
+            $item
+          Label : CONCAT
             ->
-            Label : PROPERTY
-              d
-            Label : OBJECT
-              $item
+          Label : CONCAT
+            d
           Label : CONCAT
              
           Label : CONCAT

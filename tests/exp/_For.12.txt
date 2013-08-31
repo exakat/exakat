@@ -30,18 +30,18 @@ Label : CODE
                 'c'
           Label : LEFT
             $a
-    Label : INIT
-      =
-      Label : RIGHT
-        0
-      Label : LEFT
-        $a
     Label : FINAL
       <
       Label : RIGHT
         1
       Label : LEFT
         $b
+    Label : INIT
+      =
+      Label : RIGHT
+        0
+      Label : LEFT
+        $a
     Label : INCREMENT
       ++
       Label : POSTPLUSPLUS

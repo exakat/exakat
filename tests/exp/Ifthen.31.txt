@@ -18,7 +18,7 @@ Label : CODE
         Block With if/elseif
         Label : CODE
           =
-          Label : LEFT
-            $c
           Label : RIGHT
             3
+          Label : LEFT
+            $c

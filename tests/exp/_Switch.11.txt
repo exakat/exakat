@@ -8,14 +8,18 @@ Label : CODE
     {
     Label : CODE
       case
-      Label : CASE
-        'a'
       Label : CODE
         Block With Sequence For Case
         Label : CODE
           ;
           Label : ELEMENT
             &&
+            Label : RIGHT
+              =
+              Label : RIGHT
+                'f'
+              Label : LEFT
+                $e
             Label : LEFT
               [
               Label : VARIABLE
@@ -26,13 +30,9 @@ Label : CODE
                   'c'
               Label : INDEX
                 'd'
-            Label : RIGHT
-              =
-              Label : RIGHT
-                'f'
-              Label : LEFT
-                $e
           Label : ELEMENT
             break
             Label : LEVEL
               void
+      Label : CASE
+        'a'

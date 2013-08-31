@@ -10,9 +10,9 @@ Label : CODE
         "
         Label : CONTAIN
           Concatenation
-          Label : ELEMENT
+          Label : CONCAT
             ${
             Label : NAME
               b
-          Label : ELEMENT
+          Label : CONCAT
             [1]

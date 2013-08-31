@@ -2,6 +2,20 @@
 
 Label : CODE
   while
+  Label : LOOP
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        +=
+        Label : RIGHT
+          1
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $i
+          Label : PROPERTY
+            j
   Label : CONDITION
     <
     Label : RIGHT
@@ -26,21 +40,7 @@ Label : CODE
         $c
     Label : LEFT
       ->
-      Label : PROPERTY
-        b
       Label : OBJECT
         $a
-  Label : LOOP
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        +=
-        Label : RIGHT
-          1
-        Label : LEFT
-          ->
-          Label : PROPERTY
-            j
-          Label : OBJECT
-            $i
+      Label : PROPERTY
+        b

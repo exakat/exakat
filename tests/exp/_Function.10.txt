@@ -8,11 +8,11 @@ Label : CODE
     {
     Label : CODE
       function
+      Label : ARGUMENTS
+        void
       Label : NAME
         __destruct
       Label : BLOCK
         {
         Label : CODE
           void
-      Label : ARGUMENTS
-        void

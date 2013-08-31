@@ -6,12 +6,6 @@ Label : CODE
     (
     Label : CODE
       ||
-      Label : LEFT
-        ==
-        Label : RIGHT
-          $b
-        Label : LEFT
-          $a
       Label : RIGHT
         (
         Label : CODE
@@ -30,6 +24,12 @@ Label : CODE
                 $c
               Label : INDEX
                 'd'
+      Label : LEFT
+        ==
+        Label : RIGHT
+          $b
+        Label : LEFT
+          $a
   Label : THEN
     {
     Label : CODE

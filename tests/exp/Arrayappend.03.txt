@@ -4,17 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      2
     Label : LEFT
       [
       Label : VARIABLE
         ::
-        Label : CLASS
-          $a
         Label : PROPERTY
           [
           Label : VARIABLE
             $b
           Label : INDEX
             2
-    Label : RIGHT
-      2
+        Label : CLASS
+          $a

@@ -3,6 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      'a'
+    Label : LEFT
+      $y
+  Label : ELEMENT
     class
     Label : NAME
       C
@@ -12,10 +18,10 @@ Label : CODE
         ;
         Label : ELEMENT
           function
-          Label : NAME
-            a
           Label : ARGUMENTS
             void
+          Label : NAME
+            a
           Label : BLOCK
             {
             Label : CODE
@@ -41,20 +47,14 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      'a'
-    Label : LEFT
-      $y
-  Label : ELEMENT
-    =
-    Label : RIGHT
       new
       Label : NEW
         ::
+        Label : CLASS
+          C
         Label : METHOD
           $y
           Label : ARGUMENTS
             void
-        Label : CLASS
-          C
     Label : LEFT
       $x

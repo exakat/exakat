@@ -20,18 +20,18 @@ Label : CODE
           {
           Label : CODE
             void
-      Label : INIT
-        =
-        Label : LEFT
-          $c
-        Label : RIGHT
-          1
       Label : FINAL
         <=
-        Label : LEFT
-          $d
         Label : RIGHT
           8
+        Label : LEFT
+          $d
+      Label : INIT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $c
       Label : INCREMENT
         ++
         Label : POSTPLUSPLUS

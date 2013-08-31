@@ -7,36 +7,44 @@ Label : CODE
     Label : RIGHT
       <<<EOF
 
-      Label : STRING
+      Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-          ;
-
-
-        Label : ELEMENT
-          ${
-          Label : NAME
-            ->
-            Label : METHOD
-              method
-              Label : ARGUMENTS
-                void
-            Label : OBJECT
-              $object
-        Label : ELEMENT
-          ;
-
-
-        Label : ELEMENT
+        Label : CONCAT
           
 
-        Label : ELEMENT
+        Label : CONCAT
           ${
-          Label : NAME
-            ->
-            Label : PROPERTY
-              property
-            Label : OBJECT
-              $object
+        Label : CONCAT
+          ->
+          Label : OBJECT
+            $object
+          Label : PROPERTY
+            property
+        Label : CONCAT
+          }
+        Label : CONCAT
+          ;
+
+
+        Label : CONCAT
+          ${
+        Label : CONCAT
+          $object
+        Label : CONCAT
+          ->
+        Label : CONCAT
+          method
+        Label : CONCAT
+          (
+        Label : CONCAT
+          void
+        Label : CONCAT
+          )
+        Label : CONCAT
+          }
+        Label : CONCAT
+          ;
+
+
     Label : LEFT
       $result

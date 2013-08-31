@@ -8,8 +8,6 @@ Label : CODE
     {
     Label : CODE
       case
-      Label : CASE
-        '1'
       Label : CODE
         Block With Sequence For Case
         Label : CODE
@@ -20,3 +18,5 @@ Label : CODE
             'a'
           Label : ELSE
             'b'
+      Label : CASE
+        '1'

@@ -15,7 +15,7 @@ class Ternary extends TokenAuto {
                                     0 => array('token' => Ternary::$operators),
                                     1 => array('atom' => 'yes'),
                                     2 => array('token' => 'T_COLON'),
-                                    3 => array('atom' => 'yes'),
+                                    3 => array('atom' => 'yes', 'notAtom' => 'Sequence'),
                                     4 => array('filterOut' => Token::$instruction_ending),
                                  );
         
@@ -34,7 +34,7 @@ class Ternary extends TokenAuto {
                                    -1 => array('atom' => 'yes'),
                                     0 => array('token' => Ternary::$operators),
                                     1 => array('token' => 'T_COLON'),
-                                    2 => array('atom' => 'yes'),
+                                    2 => array('atom' => 'yes', 'notAtom' => 'Sequence'),
                                     3 => array('filterOut' => array('T_DOT', 'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
                                  );
         

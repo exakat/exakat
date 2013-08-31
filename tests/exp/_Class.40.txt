@@ -4,32 +4,30 @@ Label : CODE
   class
   Label : NAME
     x
-  Label : IMPLEMENTS
-    z
   Label : BLOCK
     {
     Label : CODE
       ;
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
         Label : NAME
           __destruct
         Label : BLOCK
           {
           Label : CODE
             void
-        Label : ARGUMENTS
-          void
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
         Label : NAME
           __construct
         Label : BLOCK
           {
           Label : CODE
             void
-        Label : ARGUMENTS
-          void
       Label : ELEMENT
         var
         Label : VALUE
@@ -38,3 +36,5 @@ Label : CODE
           $a
   Label : EXTENDS
     y
+  Label : IMPLEMENTS
+    z

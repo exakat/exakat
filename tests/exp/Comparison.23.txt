@@ -6,12 +6,6 @@ Label : CODE
     (
     Label : CODE
       &&
-      Label : LEFT
-        ==
-        Label : RIGHT
-          1
-        Label : LEFT
-          $a
       Label : RIGHT
         >
         Label : RIGHT
@@ -20,10 +14,16 @@ Label : CODE
           --
           Label : PREPLUSPLUS
             ->
-            Label : PROPERTY
-              c
             Label : OBJECT
               $b
+            Label : PROPERTY
+              c
+      Label : LEFT
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a
   Label : THEN
     {
     Label : CODE

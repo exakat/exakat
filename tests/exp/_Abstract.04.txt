@@ -12,16 +12,16 @@ Label : CODE
         ;
         Label : ELEMENT
           static
-          Label : ARGUMENTS
+          Label : VALUE
             void
-            Label : ARGUMENT
-              abstract
-              Label : ABSTRACT
-                function
-                Label : NAME
-                  d
-                Label : ARGUMENTS
-                  void
+          Label : DEFINE
+            abstract
+            Label : ABSTRACT
+              function
+              Label : ARGUMENTS
+                void
+              Label : NAME
+                d
         Label : ELEMENT
           public
           Label : VALUE
@@ -30,10 +30,10 @@ Label : CODE
             abstract
             Label : ABSTRACT
               function
-              Label : NAME
-                a
               Label : ARGUMENTS
                 void
+              Label : NAME
+                a
         Label : ELEMENT
           protected
           Label : VALUE
@@ -42,7 +42,7 @@ Label : CODE
             abstract
             Label : ABSTRACT
               function
-              Label : NAME
-                b
               Label : ARGUMENTS
                 void
+              Label : NAME
+                b

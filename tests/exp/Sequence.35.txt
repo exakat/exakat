@@ -8,12 +8,6 @@ Label : CODE
       ?
       Label : CONDITION
         &&
-        Label : LEFT
-          i
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'i'
         Label : RIGHT
           in_array
           Label : ARGUMENTS
@@ -26,6 +20,12 @@ Label : CODE
                 $j
               Label : INDEX
                 'k'
+        Label : LEFT
+          i
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'i'
       Label : THEN
         [
         Label : VARIABLE

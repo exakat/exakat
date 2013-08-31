@@ -2,6 +2,8 @@
 Label : CODE
   ;
   Label : ELEMENT
+    A
+  Label : ELEMENT
     print
     Label : ARGUMENTS
       void
@@ -13,8 +15,6 @@ Label : CODE
             "c"
           Label : ARGUMENT
             'b'
-  Label : ELEMENT
-    A
   Label : ELEMENT
     f
     Label : ARGUMENTS

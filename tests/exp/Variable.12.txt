@@ -7,45 +7,53 @@ Label : CODE
     Label : RIGHT
       <<<EOF
 
-      Label : STRING
+      Label : CONTAIN
         Concatenation
-        Label : ELEMENT
-          
-
-
-        Label : ELEMENT
+        Label : CONCAT
+          A
+        Label : CONCAT
           ${
-          Label : NAME
-            ?
-            Label : CONDITION
-              [
-              Label : VARIABLE
-                $e
-              Label : INDEX
-                'f'
-            Label : THEN
-              'true'
-            Label : ELSE
-              'false'
-        Label : ELEMENT
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            'c'
+        Label : CONCAT
+          ?
+        Label : CONCAT
+          'true'
+        Label : CONCAT
+          :
+        Label : CONCAT
+          'false'
+        Label : CONCAT
+          }
+        Label : CONCAT
           
 
 D
-        Label : ELEMENT
-          A
-        Label : ELEMENT
+        Label : CONCAT
           ${
-          Label : NAME
-            ?
-            Label : CONDITION
-              [
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                'c'
-            Label : THEN
-              'true'
-            Label : ELSE
-              'false'
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $e
+          Label : INDEX
+            'f'
+        Label : CONCAT
+          ?
+        Label : CONCAT
+          'true'
+        Label : CONCAT
+          :
+        Label : CONCAT
+          'false'
+        Label : CONCAT
+          }
+        Label : CONCAT
+          
+
+
     Label : LEFT
       $result

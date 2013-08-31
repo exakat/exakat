@@ -6,9 +6,9 @@ Label : CODE
     "
     Label : CONTAIN
       Concatenation
-      Label : ELEMENT
+      Label : CONCAT
         a
-      Label : ELEMENT
+      Label : CONCAT
         ${
         Label : NAME
           b

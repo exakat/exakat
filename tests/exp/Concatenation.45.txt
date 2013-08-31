@@ -35,11 +35,11 @@ Label : CODE
                 Label : CONCAT
                   d 
                 Label : CONCAT
+                  $e
+                Label : CONCAT
                   ->
-                  Label : PROPERTY
-                    f
-                  Label : OBJECT
-                    $e
+                Label : CONCAT
+                  f
                 Label : CONCAT
                    
                 Label : CONCAT
@@ -85,11 +85,11 @@ Label : CODE
                 Label : CONCAT
                   k 
                 Label : CONCAT
+                  $l
+                Label : CONCAT
                   ->
-                  Label : PROPERTY
-                    m
-                  Label : OBJECT
-                    $l
+                Label : CONCAT
+                  m
                 Label : CONCAT
                    
                 Label : CONCAT

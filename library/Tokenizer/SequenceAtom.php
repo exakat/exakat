@@ -10,7 +10,7 @@ class SequenceAtom extends TokenAuto {
                                         Assignation::$operators, Functioncall::$operators);
         
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CATCH',
-                                           'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_ELSEIF', 'T_QUOTE_CLOSE', ), 
+                                           'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_QUOTE_CLOSE', ), 
                                      Assignation::$operators, Logical::$operators);
 
         // @note instructions not separated by ; 
@@ -18,7 +18,7 @@ class SequenceAtom extends TokenAuto {
                            'Const', 'Ppp', 'Foreach', 'For', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
                            'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison',
                            'Noscream', 'Property', 'Staticproperty', 'Label', 'Goto', 'Halt', 'Interface', 'Block', 'Break', 'Try', 
-                           'Throw', 'Sequence','RawString', 'Phpcode', 'Use', 'Preplusplus', 'Postplusplus',
+                           'Throw', 'Sequence','RawString', 'Phpcode', 'Use', 'Preplusplus', 'Postplusplus', 'New', 'Declare',
                              );
         $this->conditions = array(-1 => array('filterOut2' => $yield_operators), 
                                    0 => array('atom' => $operands2, 
@@ -27,7 +27,7 @@ class SequenceAtom extends TokenAuto {
                                    1 => array('atom' => $operands2, 
                                               'notToken' => 'T_ELSEIF',
                                               'in_quote' => 'none'),
-                                   2 => array('filterOut' => $next_operator),
+                                   2 => array('filterOut2' => $next_operator),
         );
         $this->actions = array('insertSequence'  => true);
         $this->checkAuto();

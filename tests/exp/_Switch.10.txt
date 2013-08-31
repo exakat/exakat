@@ -8,8 +8,6 @@ Label : CODE
     {
     Label : CODE
       case
-      Label : CASE
-        'b'
       Label : CODE
         Block With Sequence For Case
         Label : CODE
@@ -28,3 +26,5 @@ Label : CODE
                   1
                 Label : LEFT
                   $d
+      Label : CASE
+        'b'

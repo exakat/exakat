@@ -2,6 +2,12 @@
 
 Label : CODE
   function
+  Label : ARGUMENTS
+    ,
+    Label : ARGUMENT
+      $c
+    Label : ARGUMENT
+      $b
   Label : NAME
     a
   Label : BLOCK
@@ -12,9 +18,3 @@ Label : CODE
         return
         Label : RETURN
           1
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      $c
-    Label : ARGUMENT
-      $b

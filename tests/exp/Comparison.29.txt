@@ -6,48 +6,8 @@ Label : CODE
     (
     Label : CODE
       ||
-      Label : LEFT
-        &&
-        Label : LEFT
-          defined
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'a'
-        Label : RIGHT
-          !=
-          Label : RIGHT
-            [
-            Label : VARIABLE
-              $f
-            Label : INDEX
-              'g'
-          Label : LEFT
-            .
-            Label : CONCAT
-              d
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  1
-                Label : ARGUMENT
-                  E
-            Label : CONCAT
-              [
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                'c'
       Label : RIGHT
         &&
-        Label : LEFT
-          !
-          Label : NOT
-            defined
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'H'
         Label : RIGHT
           !=
           Label : RIGHT
@@ -84,6 +44,46 @@ Label : CODE
               $i
             Label : INDEX
               'j'
+        Label : LEFT
+          !
+          Label : NOT
+            defined
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'H'
+      Label : LEFT
+        &&
+        Label : RIGHT
+          !=
+          Label : RIGHT
+            [
+            Label : VARIABLE
+              $f
+            Label : INDEX
+              'g'
+          Label : LEFT
+            .
+            Label : CONCAT
+              d
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  1
+                Label : ARGUMENT
+                  E
+            Label : CONCAT
+              [
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                'c'
+        Label : LEFT
+          defined
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'a'
   Label : THEN
     Block With if/elseif
     Label : CODE
