@@ -1,0 +1,63 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    for
+    Label : CODE
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $h
+            Label : METHOD
+              i
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'j'
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $e
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g
+    Label : INIT
+      ,
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          count
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : PROPERTY
+                d
+              Label : OBJECT
+                $c
+        Label : LEFT
+          $n
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          0
+        Label : LEFT
+          $i
+    Label : FINAL
+      <
+      Label : RIGHT
+        $n
+      Label : LEFT
+        $i
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $i

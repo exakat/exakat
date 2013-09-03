@@ -14,6 +14,8 @@ Label : CODE
     Block With if/elseif
     Label : CODE
       do
+      Label : CONDITION
+        $x
       Label : LOOP
         {
         Label : CODE
@@ -24,5 +26,3 @@ Label : CODE
               3
             Label : LEFT
               $c
-      Label : CONDITION
-        $x

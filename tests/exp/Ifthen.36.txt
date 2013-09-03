@@ -26,19 +26,19 @@ Label : CODE
             {
             Label : NAME
               ->
-              Label : OBJECT
-                $d
               Label : PROPERTY
                 e
+              Label : OBJECT
+                $d
           Label : CONCAT
             :
           Label : CONCAT
             {
             Label : NAME
               ->
-              Label : OBJECT
-                $f
               Label : PROPERTY
                 g
+              Label : OBJECT
+                $f
       Label : LEFT
         $c

@@ -16,9 +16,9 @@ Label : CODE
           Label : ARGUMENT
             $b
       Label : ELEMENT
-        B
-      Label : ELEMENT
         A
+      Label : ELEMENT
+        B
       Label : ELEMENT
         F
       Label : ELEMENT

@@ -131,7 +131,7 @@ class Sequence extends TokenAuto {
 
         // @note instructions separated by ; with a special case for 'foreach' and 'for'. 
         // @note this is not sufficient, but it seems to works pretty well and be enough.
-        $this->conditions = array(-5 => array('token'  => 'T_SEMICOLON',),
+        $this->conditions = array(-5 => array('token'  => array('T_SEMICOLON', 'T_AS')),
                                   -4 => array('atom'  => 'yes',),
                                   -3 => array('token'  => 'T_CLOSE_PARENTHESIS'),
                                   -2 => array('token' => 'T_COLON',
@@ -181,7 +181,7 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note End of PHP script, alternative syntax
-        $this->conditions = array(-3 => array('token'    => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_USE', 'T_AS')), 
+        $this->conditions = array(-3 => array('token'    => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_USE', 'T_AS')), //'T_CLOSE_PARENTHESIS', 
                                   -2 => array('token'    => 'T_COLON',), 
                                   -1 => array('atom'     => $operands,
                                               'notToken' => 'T_ELSEIF', ),
@@ -201,13 +201,12 @@ class Sequence extends TokenAuto {
         // Sequence followed by ; followed by elseif atom.
         $this->conditions = array(  -1 => array('atom'  => 'Sequence'),
                                      0 => array('token' => Sequence::$operators),
-                                     1 => array('token' => 'T_ELSEIF',
-                                                'atom'  => 'Ifthen')
+                                     1 => array('token' => 'T_ENDFOREACH')
         );
         
         $this->actions = array('transform'   => array(0 => 'DROP'),
                                'keepIndexed' => true);
-//        $this->checkAuto(); 
+        $this->checkAuto(); 
        
         return $this->checkRemaining();
     }

@@ -38,9 +38,9 @@ Label : CODE
               Label : ARGUMENT
                 $c
           Label : ELEMENT
-            C
-          Label : ELEMENT
             B
+          Label : ELEMENT
+            C
           Label : ELEMENT
             D
           Label : ELEMENT

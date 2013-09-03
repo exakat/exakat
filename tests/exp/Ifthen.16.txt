@@ -9,9 +9,7 @@ Label : CODE
       Label : CODE
         $x
     Label : THEN
-      ;
-      Label : ELEMENT
-        $y
+      $y
     Label : ELSE
       elseif
       Label : CONDITION
@@ -19,9 +17,7 @@ Label : CODE
         Label : CODE
           $w
       Label : THEN
-        ;
-        Label : ELEMENT
-          $ww
+        $ww
       Label : ELSE
         elseif
         Label : CONDITION

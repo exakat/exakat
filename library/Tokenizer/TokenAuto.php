@@ -11,9 +11,10 @@ class TokenAuto extends Token {
         if (in_array($class, Token::$types)) {
             $query .= "g.idx('racines')[['token':'$class']].out('INDEXED')";
         } else {
-//            $query .= "g.V";
+            $query .= "g.V";
 //            $query .= "g.idx('racines')[['token':'NEXT']].out('INDEXED')";
-            $query .= "g.V.has('root', 'true').in('NEXT').out('NEXT').loop(1){it.object.token != 'T_END'}{true}";
+//            $query .= "g.V.has('root', 'true').in('NEXT').out('NEXT').loop(1){it.object.token != 'T_END'}{true}";
+//            $query .= "g.V.has('root', 'true').in('NEXT').out('NEXT').as('x').out('NEXT').loop(2){it.object.token != 'T_END'}{true}.back('x')";
         }
         $qcdts = array();
         
@@ -33,7 +34,7 @@ class TokenAuto extends Token {
             }
         }
 
-        for($i = 1; $i < 11; $i++) {
+        for($i = 1; $i < 12; $i++) {
             if (!empty($this->conditions[$i])) {
                 $cdt = $this->conditions[$i];
                 $cdt['next'] = $i;
@@ -639,9 +640,11 @@ x.out('CONCAT').has('atom', 'Concatenation').each{
         }
 
         if (isset($actions['insertSequence'])) {
-                $qactions[] = "
+            $index = $actions['insertSequence'];
+            $qactions[] = "
 /* insertSequence */
 x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true, modifiedBy:'SequenceAtom']);
+x.setProperty('special_test', '$index');
 
 g.addEdge(x, it, 'ELEMENT');
 g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');

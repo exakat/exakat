@@ -19,6 +19,10 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
+                $f
+              Label : ARGUMENT
+                "z"
+              Label : ARGUMENT
                 "
                 Label : CONTAIN
                   Concatenation
@@ -28,10 +32,6 @@ Label : CODE
                     $y
                   Label : CONCAT
                     /
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                "z"
           Label : LEFT
             $a
   Label : ELEMENT

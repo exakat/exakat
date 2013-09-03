@@ -29,7 +29,10 @@ class SequenceAtom extends TokenAuto {
                                               'in_quote' => 'none'),
                                    2 => array('filterOut2' => $next_operator),
         );
-        $this->actions = array('insertSequence'  => true);
+        global $INDEX;
+        if (!isset($INDEX)) { $INDEX = 1;}
+        $INDEX ++;
+        $this->actions = array('insertSequence'  => $INDEX);
         $this->checkAuto();
        
         return $this->checkRemaining();

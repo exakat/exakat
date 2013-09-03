@@ -93,6 +93,36 @@ class _Foreach extends TokenAuto {
                                'cleanIndex' => true
                                );
         $this->checkAuto(); 
+
+    // @doc foreach($a as $b) : code ; endforeach
+        $this->conditions = array( 0  => array('token' => _Foreach::$operators,
+                                               'atom' => 'none'),
+                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   2 => array('atom' => $operands), 
+                                   3 => array('token' => 'T_AS'),
+                                   4 => array('atom'  => array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Reference' )),
+                                   5 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                   6 => array('token' => 'T_COLON'),
+                                   7 => array('atom'  => 'yes'),
+                                   8 => array('token'  => 'T_SEMICOLON'),
+                                   9 => array('token' => 'T_ENDFOREACH'),
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'DROP',
+                                                        2 => 'SOURCE',    
+                                                        3 => 'DROP',
+                                                        4 => 'VALUE',
+                                                        5 => 'DROP',
+                                                        6 => 'DROP',
+                                                        7 => 'LOOP',
+                                                        8 => 'DROP',
+                                                        9 => 'DROP',
+                                                      ),
+                               'atom'       => 'For',
+                               'property' => array('Alternative' => 'yes'),
+                               'cleanIndex' => true
+                               );
+        $this->checkAuto(); 
         return $this->checkRemaining();
     }
 }

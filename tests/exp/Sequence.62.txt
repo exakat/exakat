@@ -1,0 +1,43 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ?
+        Label : CONDITION
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : PROPERTY
+                b
+              Label : OBJECT
+                $a
+        Label : THEN
+          htmlspecialchars
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $c
+              Label : METHOD
+                d
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ->
+                    Label : PROPERTY
+                      f
+                    Label : OBJECT
+                      $e
+            Label : ARGUMENT
+              'H'
+            Label : ARGUMENT
+              G
+        Label : ELSE
+          'I'

@@ -6,10 +6,10 @@ Label : CODE
     (
     Label : CODE
       ->
-      Label : OBJECT
-        $a
       Label : PROPERTY
         b
+      Label : OBJECT
+        $a
   Label : THEN
     Block With if/elseif
     Label : CODE
