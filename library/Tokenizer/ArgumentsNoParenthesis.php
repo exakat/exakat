@@ -3,7 +3,8 @@
 namespace Tokenizer;
 
 class ArgumentsNoParenthesis extends TokenAuto {
-    static public $operators = array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE', 'T_EXIT', 'T_STATIC', );
+    static public $operators = array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 
+                                     'T_REQUIRE', 'T_EXIT', 'T_STATIC', );
 
     function _check() {
         // @note echo 's' : no parenthesis
@@ -27,7 +28,7 @@ class ArgumentsNoParenthesis extends TokenAuto {
                                    1 => array('token'  => 'T_SEMICOLON') 
         );
         
-        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
+        $this->actions = array('addEdge'     => array(0 => array('Arguments' => 'ARGUMENT')),
                                'keepIndexed' => true);
         $this->checkAuto();
 

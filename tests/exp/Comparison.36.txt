@@ -1,0 +1,23 @@
+<?php 
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      ===
+      Label : RIGHT
+        include_once
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+      Label : LEFT
+        false
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a

@@ -6,6 +6,7 @@ class _Return extends TokenAuto {
     static public $operators = array('T_RETURN');
 
     function _check() {
+        // return ; 
         $this->conditions = array( 0 => array('token' => _Return::$operators,
                                               'atom' => 'none' ),
                                    1 => array('token' => array('T_SEMICOLON'))
@@ -15,6 +16,7 @@ class _Return extends TokenAuto {
                                'keepIndexed' => true);
         $this->checkAuto();
 
+        // return with something ;
         $this->conditions = array( 0 => array('token' => _Return::$operators,
                                               'atom' => 'none' ),
                                    1 => array('atom' => 'yes'),

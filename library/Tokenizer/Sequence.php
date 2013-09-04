@@ -36,11 +36,14 @@ class Sequence extends TokenAuto {
                                      Assignation::$operators, Logical::$operators, Preplusplus::$operators, Postplusplus::$operators);
         
         // @note instructions separated by ; 
-        $this->conditions = array(-2 => array('filterOut2' => $yield_operator, 'notAtom' => 'Parenthesis'), 
-                                  -1 => array('atom' => $operands, 'notToken' => 'T_ELSEIF' ),
-                                   0 => array('token' => Sequence::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('atom' => $operands, 'notToken' => 'T_ELSEIF'),
+        $this->conditions = array(-2 => array('filterOut2' => $yield_operator, 
+                                              'notAtom'    => 'Parenthesis'), 
+                                  -1 => array('atom'       => $operands, 
+                                              'notToken'   => 'T_ELSEIF' ),
+                                   0 => array('token'      => Sequence::$operators,
+                                              'atom'       => 'none'),
+                                   1 => array('atom'       => $operands, 
+                                              'notToken'   => 'T_ELSEIF'),
                                    2 => array('filterOut2' => $next_operator),
         );
         
@@ -55,10 +58,11 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note instructions separated by ; but ; is useless 
-        $this->conditions = array(-1 => array('atom'  => $operands, 'notToken' => 'T_ELSEIF' ),
-                                   0 => array('token' => Sequence::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('token' => array('T_ELSEIF')),
+        $this->conditions = array(-1 => array('atom'     => $operands, 
+                                              'notToken' => 'T_ELSEIF' ),
+                                   0 => array('token'    => Sequence::$operators,
+                                              'atom'     => 'none'),
+                                   1 => array('token'    => array('T_ELSEIF', 'T_ELSE', 'T_ENDIF')),
         );
         
         $this->actions = array('transform'   => array( 0 => 'DROP'));
@@ -164,7 +168,7 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note End of PHP script
-        $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS', 'T_BREAK', 'T_USE', 'T_AS')),), 
+        $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS', 'T_BREAK', 'T_USE', 'T_AS'))), 
                                   -1 => array('atom'       => $operands,
                                               'notToken'   => 'T_ELSEIF', ),
                                    0 => array('token'      => Sequence::$operators,
@@ -181,7 +185,8 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note End of PHP script, alternative syntax
-        $this->conditions = array(-3 => array('token'    => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_USE', 'T_AS')), //'T_CLOSE_PARENTHESIS', 
+        $this->conditions = array(-3 => array('token'    => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_USE', 'T_AS'), 
+                                              'atom'     => 'none'), //'T_CLOSE_PARENTHESIS', 
                                   -2 => array('token'    => 'T_COLON',), 
                                   -1 => array('atom'     => $operands,
                                               'notToken' => 'T_ELSEIF', ),

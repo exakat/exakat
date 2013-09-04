@@ -1,0 +1,27 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      .
+      Label : CONCAT
+        'f'
+      Label : CONCAT
+        ::
+        Label : METHOD
+          d
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'e'
+        Label : CLASS
+          \
+          Label : ELEMENT
+            C
+          Label : ELEMENT
+            B
+          Label : ELEMENT
+            A
+    Label : LEFT
+      $a

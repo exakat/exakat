@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  do
+  Label : CONDITION
+    <
+    Label : RIGHT
+      4
+    Label : LEFT
+      $x
+  Label : LOOP
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x

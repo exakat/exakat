@@ -34,7 +34,7 @@ class _For extends TokenAuto {
                                     6 => array('atom' => 'yes'),
                                     7 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                     8 => array('atom' => 'yes'),
-                                    9 => array('filterOut2' => Token::$instruction_ending),
+                                    9 => array('filterOut' => Token::$instruction_ending),
         );                
         $this->actions = array( 'to_block_for' => true,
                                 'keepIndexed'  => true,

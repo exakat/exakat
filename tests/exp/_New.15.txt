@@ -16,14 +16,14 @@ Label : CODE
             3
         Label : INDEX
           +
-          Label : RIGHT
-            *
-            Label : RIGHT
-              5
-            Label : LEFT
-              4
           Label : LEFT
             3
+          Label : RIGHT
+            *
+            Label : LEFT
+              4
+            Label : RIGHT
+              5
       Label : INDEX
         d
         Label : ARGUMENTS

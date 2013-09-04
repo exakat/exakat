@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      <
+      Label : RIGHT
+        4
+      Label : LEFT
+        $x
     Label : LOOP
       {
       Label : CODE
@@ -12,9 +18,3 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $x
-    Label : CONDITION
-      <
-      Label : RIGHT
-        4
-      Label : LEFT
-        $x

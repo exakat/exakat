@@ -55,10 +55,10 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
 
         // Make a bloc from sequence after a if/elseif
-        $this->conditions = array(  0 => array('token' => Ifthen::$operators,
-                                               'atom' => 'none'),
-                                    1 => array('atom' => 'Parenthesis'),
-                                    2 => array('notAtom' => array('Block', 'Sequence'), 'atom' => 'yes'),
+        $this->conditions = array(  0 => array('token'     => Ifthen::$operators,
+                                               'atom'      => 'none'),
+                                    1 => array('atom'      => 'Parenthesis'),
+                                    2 => array('notAtom'   => array('Block', 'Sequence'), 'atom' => 'yes'),
                                     3 => array('filterOut' => Token::$instruction_ending),
         );
         
@@ -113,10 +113,10 @@ class Ifthen extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
-                                   3 => array('atom'  => array('Block', 'Sequence', 'RawString', 'Void')),
+                                   3 => array('atom'  => 'yes',),
                                    4 => array('token' => 'T_ELSE'),
                                    5 => array('token' => 'T_COLON'),
-                                   6 => array('atom'  => array('Block', 'Sequence', 'RawString', 'Void')),
+                                   6 => array('atom'  => 'yes',),
                                    7 => array('token' => array('T_ENDIF', 'T_ELSEIF')),
         );
         

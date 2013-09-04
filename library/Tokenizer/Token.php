@@ -104,6 +104,7 @@ class Token {
                                                  Concatenation::$operators,
                                                  Comparison::$operators,
                                                  Bitshift::$operators,
+                                                 Logical::$operators,
                                                  array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS'));
         }
     

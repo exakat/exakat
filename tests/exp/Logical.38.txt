@@ -1,0 +1,35 @@
+<?php 
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      instanceof
+      Label : RIGHT
+        &&
+        Label : RIGHT
+          $d
+        Label : LEFT
+          \
+          Label : ELEMENT
+            C
+          Label : ELEMENT
+            B
+      Label : LEFT
+        $a
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $f
+          Label : METHOD
+            g
+            Label : ARGUMENTS
+              void
+        Label : LEFT
+          $e

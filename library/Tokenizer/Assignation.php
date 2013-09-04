@@ -41,7 +41,7 @@ class Assignation extends TokenAuto {
                                                                           PostPlusplus::$operators, 
                                                                           array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
                                                                                 'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
-                                                                                'T_QUESTION', ))),
+                                                                                'T_QUESTION', 'T_NS_SEPARATOR' ))),
         );
         
         $this->actions = array('makeEdge'    => array( 1 => 'RIGHT',

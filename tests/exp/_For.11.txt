@@ -5,23 +5,21 @@ Label : CODE
   Label : ELEMENT
     for
     Label : CODE
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $i
-    Label : FINAL
-      <
-      Label : RIGHT
-        1
-      Label : LEFT
-        $b
+      ++
+      Label : POSTPLUSPLUS
+        $i
     Label : INIT
       =
       Label : RIGHT
         0
       Label : LEFT
         $a
+    Label : FINAL
+      <
+      Label : RIGHT
+        1
+      Label : LEFT
+        $b
     Label : INCREMENT
       ++
       Label : POSTPLUSPLUS

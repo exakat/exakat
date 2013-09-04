@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      'a'
     Label : LEFT
       $y
+    Label : RIGHT
+      'a'
   Label : ELEMENT
     class
     Label : NAME
@@ -18,10 +18,10 @@ Label : CODE
         ;
         Label : ELEMENT
           function
-          Label : ARGUMENTS
-            void
           Label : NAME
             a
+          Label : ARGUMENTS
+            void
           Label : BLOCK
             {
             Label : CODE
@@ -40,12 +40,14 @@ Label : CODE
               void
             Label : DEFINE
               =
-              Label : RIGHT
-                'f'
               Label : LEFT
                 $y
+              Label : RIGHT
+                'f'
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       new
       Label : NEW
@@ -56,5 +58,3 @@ Label : CODE
           $y
           Label : ARGUMENTS
             void
-    Label : LEFT
-      $x

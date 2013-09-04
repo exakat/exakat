@@ -9,7 +9,7 @@ class Multiplication extends TokenAuto {
                                     'String', 'Preplusplus', 'Postplusplus', 'Nsname', 'Functioncall',
                                     'Methodcall', 'Staticmethodcall', 'Concatenation', 'Cast',
                                     'Noscream', 'Staticconstant', 'Staticproperty', 'Constant', 
-                                    'Boolean', 'Magicconstant', );
+                                    'Boolean', 'Magicconstant', 'Assignation' );
     
     function _check() {
 
@@ -19,7 +19,9 @@ class Multiplication extends TokenAuto {
                                    0 => array('token' => Multiplication::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => Multiplication::$operands),
-                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR',)),
+                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
+                                                                               'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR'),
+                                                                          Assignation::$operators)),
         );
         
         $this->actions = array('makeEdge'   => array(  1 => 'RIGHT',

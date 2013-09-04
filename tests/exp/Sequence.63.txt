@@ -1,0 +1,21 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    ?
+    Label : CONDITION
+      return
+      Label : RETURN
+        $a
+    Label : THEN
+      (int)
+      Label : CAST
+        (
+        Label : CODE
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            'c'
+    Label : ELSE
+      true

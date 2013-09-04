@@ -1,0 +1,51 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ::
+              Label : PROPERTY
+                $a
+              Label : CLASS
+                self
+    Label : THEN
+      =
+      Label : RIGHT
+        new
+        Label : NEW
+          C
+      Label : LEFT
+        ::
+        Label : PROPERTY
+          $b
+        Label : CLASS
+          self
+    Label : ELSE
+      ->
+      Label : OBJECT
+        ::
+        Label : PROPERTY
+          $d
+        Label : CLASS
+          self
+      Label : METHOD
+        E
+        Label : ARGUMENTS
+          void
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ::
+      Label : PROPERTY
+        $f
+      Label : CLASS
+        self

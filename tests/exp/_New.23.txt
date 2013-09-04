@@ -18,10 +18,10 @@ Label : CODE
             void
           Label : DEFINE
             =
-            Label : RIGHT
-              'f'
             Label : LEFT
               $y4
+            Label : RIGHT
+              'f'
       Label : ELEMENT
         private
         Label : VALUE
@@ -32,10 +32,10 @@ Label : CODE
             void
           Label : DEFINE
             =
-            Label : RIGHT
-              'f'
             Label : LEFT
               $y3
+            Label : RIGHT
+              'f'
       Label : ELEMENT
         public
         Label : VALUE
@@ -46,7 +46,7 @@ Label : CODE
             void
           Label : DEFINE
             =
-            Label : RIGHT
-              'f'
             Label : LEFT
               $y
+            Label : RIGHT
+              'f'

@@ -8,7 +8,8 @@ class Logical extends TokenAuto {
                                      'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR');
 
     function _check() {
-        $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', ), 
+        $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                                                                 'T_NS_SEPARATOR', ), 
                                                                           Comparison::$operators, Bitshift::$operators, Addition::$operators,
                                                                           Multiplication::$operators, Concatenation::$operators, 
                                                                           Preplusplus::$operators)),
@@ -16,10 +17,12 @@ class Logical extends TokenAuto {
                                     0 => array('token' => Logical::$operators,
                                                'atom' => 'none'),
                                     1 => array('atom' => 'yes'),
-                                    2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators, Addition::$operators, 
-                                                                          Multiplication::$operators, Bitshift::$operators, Concatenation::$operators, 
+                                    2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators, 
+                                                                          Addition::$operators, Multiplication::$operators, 
+                                                                          Bitshift::$operators, Concatenation::$operators, 
                                                                            array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
                                                                                  'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_INC', 'T_DEC',
+                                                                                 'T_NS_SEPARATOR',
                                                                            ))));
         
         $this->actions = array('transform'  => array( -1 => 'LEFT',

@@ -1,0 +1,1 @@
+<?php if(!empty($a)): foreach($b as $c => $d) : $e++; endforeach; endif; ?>

@@ -1,0 +1,53 @@
+<?php 
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      !
+      Label : NOT
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              0
+  Label : THEN
+    Block With if/elseif
+    Label : CODE
+      return
+      Label : RETURN
+        null
+  Label : ELSE
+    Block With else
+    Label : CODE
+      return
+      Label : RETURN
+        &&
+        Label : RIGHT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              $d
+            Label : INDEX
+              0
+          Label : INDEX
+            'e'
+        Label : LEFT
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                [
+                Label : VARIABLE
+                  $b
+                Label : INDEX
+                  0
+              Label : INDEX
+                'c'
