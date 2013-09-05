@@ -28,14 +28,14 @@ Label : CODE
             void
           Label : DEFINE
             function
-            Label : ARGUMENTS
-              void
             Label : NAME
               f
             Label : BLOCK
               {
               Label : CODE
                 void
+            Label : ARGUMENTS
+              void
       Label : ELEMENT
         private
         Label : NAME

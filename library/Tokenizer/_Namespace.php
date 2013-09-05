@@ -6,6 +6,31 @@ class _Namespace extends TokenAuto {
     static public $operators = array('T_NAMESPACE');
 
     function _check() {
+        // namespace myproject {} 
+        $this->conditions = array(0 => array('token' => _Namespace::$operators,
+                                             'atom' => 'none'),
+                                  1 => array('atom' => array('String', 'Nsname')),
+                                  2 => array('atom' => 'Block'),
+        );
+        
+        $this->actions = array('transform'   => array( 1 => 'NAMESPACE',
+                                                       2 => 'BLOCK'),
+                               'atom'       => 'Namespace',
+                               'cleanIndex' => true);
+        $this->checkAuto();
+
+        // namespace myproject {} 
+        $this->conditions = array(0 => array('token' => _Namespace::$operators,
+                                             'atom' => 'none'),
+                                  1 => array('atom' => 'Block'),
+        );
+        
+        $this->actions = array('transform'   => array( 1 => 'BLOCK'),
+                               'atom'       => 'Namespace',
+                               'cleanIndex' => true);
+        $this->checkAuto();
+
+        // namespace myproject ; 
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('String', 'Nsname')),

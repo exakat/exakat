@@ -17,17 +17,17 @@ Label : CODE
             Label : ELEMENT
               break
               Label : LEVEL
-                void
+                1
             Label : ELEMENT
               =
               Label : RIGHT
                 &
                 Label : REFERENCE
-                  $c
+                  $d
               Label : LEFT
                 $b
         Label : CASE
-          'A'
+          'B'
       Label : ELEMENT
         default
         Label : CODE
@@ -55,17 +55,17 @@ Label : CODE
             Label : ELEMENT
               break
               Label : LEVEL
-                1
+                void
             Label : ELEMENT
               =
               Label : RIGHT
                 &
                 Label : REFERENCE
-                  $d
+                  $c
               Label : LEFT
                 $b
         Label : CASE
-          'B'
+          'A'
       Label : ELEMENT
         case
         Label : CODE

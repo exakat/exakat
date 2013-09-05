@@ -19,9 +19,9 @@ Label : CODE
               Label : LEVEL
                 void
             Label : ELEMENT
-              $i
+              $j
         Label : CASE
-          1
+          2
       Label : ELEMENT
         default
         Label : CODE
@@ -45,9 +45,9 @@ Label : CODE
               Label : LEVEL
                 void
             Label : ELEMENT
-              $j
+              $i
         Label : CASE
-          2
+          1
       Label : ELEMENT
         case
         Label : CODE

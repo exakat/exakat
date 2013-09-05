@@ -15,7 +15,7 @@ Label : CODE
           Label : CODE
             Void
         Label : CASE
-          3
+          5
       Label : ELEMENT
         case
         Label : CODE
@@ -31,39 +31,7 @@ Label : CODE
           Label : CODE
             Void
         Label : CASE
-          5
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          9
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          1
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          8
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          4
+          3
       Label : ELEMENT
         case
         Label : CODE
@@ -87,4 +55,36 @@ Label : CODE
           Label : CODE
             Void
         Label : CASE
+          4
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            Void
+        Label : CASE
+          1
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            Void
+        Label : CASE
           6
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            Void
+        Label : CASE
+          8
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            Void
+        Label : CASE
+          9

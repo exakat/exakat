@@ -11,11 +11,9 @@ Label : CODE
       Label : LEFT
         $i
     Label : LOOP
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $i
+      ++
+      Label : POSTPLUSPLUS
+        $i
   Label : ELEMENT
     =
     Label : RIGHT

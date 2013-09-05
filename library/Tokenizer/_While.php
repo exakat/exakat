@@ -7,14 +7,16 @@ class _While extends TokenAuto {
 
     function _check() {
 
-         //  syntax   While( ) {}
-        $this->conditions = array(-1 => array('filterOut2' => array('T_CLOSE_CURLY'),
-                                              'notAtom'    => array('Block')),
+         //  While( condition ) ;
+         // T_SEMICOLON here will prevent while to be create too hastily, and give a chance to do...while.
+        $this->conditions = array(-1 => array('filterOut2' => array('T_CLOSE_CURLY', 'T_SEMICOLON'),
+                                              //'notAtom'    => array('Block')
+                                              ),
                                    0 => array('token' => _While::$operators),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => 'yes'),
                                    3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token' => 'T_SEMICOLON', 
+                                   4 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'), 
                                               'atom' => 'none'),
         );
         
@@ -25,7 +27,8 @@ class _While extends TokenAuto {
 
          //  syntax   While() $x++; 
         $this->conditions = array(-1 => array('filterOut2' => array('T_CLOSE_CURLY'),
-                                              'notAtom'    => array('Block')),
+//                                              'notAtom'    => array('Block')
+                                              ),
                                    0 => array('token'      => _While::$operators),
                                    1 => array('token'      => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'       => 'yes'),
@@ -44,7 +47,7 @@ class _While extends TokenAuto {
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom'  => 'yes'),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('atom'  => 'Block'),
+                                  4 => array('atom'  => array('Block', 'Void')),
         );
         
         $this->actions = array('transform'    => array(  1 => 'DROP',

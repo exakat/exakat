@@ -36,8 +36,6 @@ Label : CODE
                 $count
             Label : ELEMENT
               foreach
-              Label : SOURCE
-                $data
               Label : VALUE
                 =>
                 Label : VALUE
@@ -48,6 +46,8 @@ Label : CODE
                 {
                 Label : CODE
                   void
+              Label : SOURCE
+                $data
             Label : ELEMENT
               =
               Label : RIGHT

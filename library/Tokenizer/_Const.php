@@ -13,9 +13,10 @@ class _Const extends TokenAuto {
                                  );
         
         $this->actions = array('to_const'   => true,
-                               'atom'       => 'Const',
-                               'keepIndexed' => true,
-                               'cleanIndex'  => true);
+//                               'atom'       => 'Const',
+//                               'keepIndexed' => true,
+//                               'cleanIndex'  => true
+);
         $this->checkAuto(); 
 
     // class x {const a = 2; } only one.

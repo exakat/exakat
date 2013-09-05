@@ -559,6 +559,40 @@ f.each{
             $qactions[] = "
 /* transform to const a=1 ,  b=2 => const a=1; const b=2 */
 
+sequence = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true]);
+_const = it;
+arg = _const.out('NEXT').next(); 
+
+g.addEdge(_const.in('NEXT').next(), sequence, 'NEXT');
+g.addEdge(sequence, _const.out('NEXT').out('NEXT').out('NEXT').next(), 'NEXT');
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), _const.out('NEXT').out('NEXT').next(), 'DELETE');   
+
+g.removeEdge(_const.out('NEXT').out('NEXT').outE('NEXT').next());
+g.removeEdge(_const.out('NEXT').outE('NEXT').next());
+_const.bothE('NEXT').each{ g.removeEdge(it); }
+
+arg.out('ARGUMENT').has('atom', 'Assignation').each{
+    x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', 'file':arg.file, virtual:true]);
+    
+    g.addEdge(sequence, x, 'ELEMENT');
+    root = x;
+
+    g.addEdge(x, it.out('LEFT').next(), 'NAME');
+    g.addEdge(x, it.out('RIGHT').next(), 'VALUE');
+    g.removeEdge(it.outE('LEFT').next());
+    g.removeEdge(it.outE('RIGHT').next());
+    
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+}
+
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');   
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+
+//FINISH
+"; 
+            unset($actions['to_const']);
+
+/*
 var = it;
 arg = it.out('NEXT').next();
 
@@ -587,10 +621,7 @@ g.addEdge(root, arg.out('NEXT').next(), 'NEXT');
 
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), var, 'DELETE');   
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');   
-
-"; 
-            unset($actions['to_const']);
-        }
+*/        }
 
         if (isset($actions['dropNextCode'])) {
             foreach($actions['dropNextCode'] as $destination) {
@@ -640,11 +671,9 @@ x.out('CONCAT').has('atom', 'Concatenation').each{
         }
 
         if (isset($actions['insertSequence'])) {
-            $index = $actions['insertSequence'];
             $qactions[] = "
 /* insertSequence */
 x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', 'file':it.file, virtual:true, modifiedBy:'SequenceAtom']);
-x.setProperty('special_test', '$index');
 
 g.addEdge(x, it, 'ELEMENT');
 g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');

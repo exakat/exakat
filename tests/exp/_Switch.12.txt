@@ -15,35 +15,35 @@ Label : CODE
           Label : CODE
             =
             Label : RIGHT
-              4
-            Label : LEFT
-              $x
-        Label : CASE
-          'b'
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            =
-            Label : RIGHT
-              1
-            Label : LEFT
-              $x
-        Label : CASE
-          'e'
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            =
-            Label : RIGHT
               3
             Label : LEFT
               $x
         Label : CASE
           'c'
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            =
+            Label : RIGHT
+              2
+            Label : LEFT
+              $x
+        Label : CASE
+          'f'
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            =
+            Label : RIGHT
+              4
+            Label : LEFT
+              $x
+        Label : CASE
+          'b'
       Label : ELEMENT
         case
         Label : CODE
@@ -119,6 +119,18 @@ Label : CODE
         Label : CASE
           'd'
       Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $x
+        Label : CASE
+          'e'
+      Label : ELEMENT
         default
         Label : CODE
           Block With Sequence For Default
@@ -126,15 +138,3 @@ Label : CODE
             break
             Label : LEVEL
               void
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            =
-            Label : RIGHT
-              2
-            Label : LEFT
-              $x
-        Label : CASE
-          'f'

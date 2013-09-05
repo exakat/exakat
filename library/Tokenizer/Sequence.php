@@ -25,7 +25,7 @@ class Sequence extends TokenAuto {
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                 'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
                                 'T_THROW', 'T_CATCH', 'T_ABSTRACT', 'T_CASE', 'T_DEFAULT', 'T_CLONE', 'T_DECLARE',
-                                'T_STRING', 'T_USE', 'T_AS', 'T_NAMESPACE',
+                                'T_STRING', 'T_USE', 'T_AS', 'T_NAMESPACE', 'T_DO',
                                  );
                                  
         $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, 
@@ -62,7 +62,7 @@ class Sequence extends TokenAuto {
                                               'notToken' => 'T_ELSEIF' ),
                                    0 => array('token'    => Sequence::$operators,
                                               'atom'     => 'none'),
-                                   1 => array('token'    => array('T_ELSEIF', 'T_ELSE', 'T_ENDIF')),
+                                   1 => array('token'    => array('T_ELSEIF', 'T_ELSE', 'T_ENDIF', 'T_ENDWHILE', 'T_ENDDECLARE')),
         );
         
         $this->actions = array('transform'   => array( 0 => 'DROP'));
@@ -133,6 +133,29 @@ class Sequence extends TokenAuto {
                                );
         $this->checkAuto();
 
+        // @note instructions separated by ; with a special case for 'while'
+        $this->conditions = array(-6 => array('token' => 'T_WHILE', ),
+                                  -5 => array('token' => 'T_OPEN_PARENTHESIS', ),
+                                  -4 => array('atom' => 'yes', ),
+                                  -3 => array('token' => 'T_CLOSE_PARENTHESIS', ),
+                                  -2 => array('token' => 'T_COLON',
+                                              'atom'  => 'none', ), 
+                                  -1 => array('atom'  => $operands ),
+                                   0 => array('token' => Sequence::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => $operands),
+                                   2 => array('filterOut2' => $next_operator),
+        );
+        
+        $this->actions = array('transform'  => array( 1 => 'ELEMENT',
+                                                     -1 => 'ELEMENT'),
+                               'order'      => array( 1 => 2,
+                                                     -1 => 1 ),
+                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
+                               'atom'       => 'Sequence',
+                               'cleanIndex' => true
+                               );
+        $this->checkAuto();
         // @note instructions separated by ; with a special case for 'foreach' and 'for'. 
         // @note this is not sufficient, but it seems to works pretty well and be enough.
         $this->conditions = array(-5 => array('token'  => array('T_SEMICOLON', 'T_AS')),

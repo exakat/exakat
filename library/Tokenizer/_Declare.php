@@ -13,7 +13,7 @@ class _Declare extends TokenAuto {
                                   2 => array('atom'  => 'Arguments'),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token' => 'T_COLON'),
-                                  5 => array('token'  => 'T_SEMICOLON'),
+                                  5 => array('atom'  => 'yes'),
                                   6 => array('token' => 'T_ENDDECLARE'),
         );
         

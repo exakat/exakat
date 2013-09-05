@@ -1,56 +1,40 @@
 <?php
 
-Label : NEXT
-  switch
-  Label : NEXT
-    (
-    Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
+    switch
+    Label : NAME
       $a
-      Label : NEXT
-        )
-        Label : NEXT
-          :
-          Label : NEXT
-            Sequence Case Default
-            Label : NEXT
-              case
-              Label : NEXT
-                'left'
-                Label : NEXT
-                  :
-                  Label : NEXT
-                    ++
-                    Label : NEXT
-                      ;
-                      Label : NEXT
-                        endswitch
-                        Label : NEXT
-                          ;
-                          Label : NEXT
-                            ?>
-                            Label : NEXT
-                              /**/
-                              Label : NEXT
-                                /* * */
-                    Label : POSTPLUSPLUS
-                      $e
-            Label : ELEMENT
-              case
-              Label : CODE
-                Block With Sequence For Case
-                Label : CODE
-                  ++
-                  Label : POSTPLUSPLUS
-                    $b
-              Label : CASE
-                'b'
-            Label : ELEMENT
-              case
-              Label : CODE
-                Block With Sequence For Case
-                Label : CODE
-                  ++
-                  Label : POSTPLUSPLUS
-                    $c
-              Label : CASE
-                'c'
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            ++
+            Label : POSTPLUSPLUS
+              $c
+        Label : CASE
+          'c'
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            ++
+            Label : POSTPLUSPLUS
+              $e
+        Label : CASE
+          'left'
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            ++
+            Label : POSTPLUSPLUS
+              $b
+        Label : CASE
+          'b'

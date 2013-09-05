@@ -30,8 +30,6 @@ Label : CODE
                 ;
                 Label : ELEMENT
                   foreach
-                  Label : SOURCE
-                    $a
                   Label : VALUE
                     =>
                     Label : VALUE
@@ -60,6 +58,8 @@ Label : CODE
                               4
                             Label : LEFT
                               $f
+                  Label : SOURCE
+                    $a
                 Label : ELEMENT
                   =
                   Label : RIGHT
