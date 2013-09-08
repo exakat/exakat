@@ -25,9 +25,9 @@ if ($id = array_search('-r', $args)) {
 }
 
 if ($id = array_search('-l', $args)) {
-    define('LINT', true);
-} else {
     define('LINT', false);
+} else {
+    define('LINT', true);
 }
 
 if ($id = array_search('-f', $args)) {
@@ -47,6 +47,7 @@ if ($id = array_search('-f', $args)) {
     die();
 }
 fclose($log_file);
+die();
 
 function process_dir($dir, $log_file) {
 
@@ -76,7 +77,6 @@ function process_file($filename, $log_file) {
         print "'$filename' doesn't exists. Aborting\n";
         die();
     }
-    
     
     if (LINT) {
         $shell = shell_exec('php -l '.$filename.' 2>&1');
@@ -249,9 +249,32 @@ function process_file($filename, $log_file) {
                                               ->setProperty('atom', 'Void')->save();
 
                 $to_index = false;
+            } elseif (token_name($token[0]) == 'T_OPEN_TAG' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1]) && token_name($tokens[$id + 1][0]) == 'T_CLOSE_TAG') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
+                                              ->setProperty('code', $token[1])
+                                              ->setProperty('line', $token[2])
+                                              ->setProperty('file', $file)->save();
+                if (isset($previous)) {
+                    $previous->relateTo($T[$Tid], 'NEXT')->save();
+                }
+                $regexIndex["Phpcode"]->relateTo($T[$Tid], 'INDEXED')->save();
+                $previous = $T[$Tid];
+                
+                $Tid++;
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
+                                              ->setProperty('code', 'void')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('file', $file)
+                                              ->setProperty('atom', 'Void')->save();
+
+                $to_index = false;
             } elseif (token_name($token[0]) == 'T_CLOSE_TAG' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  && token_name($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
+                                              ->setProperty('code', 'void')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('file', $file)
+                                              ->setProperty('atom', 'Void')->save();
                 $id++;
-                continue 1;
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
                                               ->setProperty('code', $token[1])
@@ -319,6 +342,22 @@ function process_file($filename, $log_file) {
                                               ->setProperty('line', $line)
                                               ->setProperty('file', $file)
                                               ->setProperty('atom', 'Arguments')->save();
+
+                $to_index = false;
+            } elseif ($token == ':' && is_array($tokens[$id + 1]) && in_array(token_name($tokens[$id + 1][0]), array('T_ENDIF', 'T_ELSE', 'T_ELSEIF'))) {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                                              ->setProperty('code', $token)
+                                              ->setProperty('line', $line)
+                                              ->setProperty('file', $file)->save();
+                $previous->relateTo($T[$Tid], 'NEXT')->save();
+                $previous = $T[$Tid];
+                
+                $Tid++;
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
+                                              ->setProperty('code', 'void')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('file', $file)
+                                              ->setProperty('atom', 'Void')->save();
 
                 $to_index = false;
             } elseif ($token == '{' && $tokens[$id + 1] == ';') {
@@ -469,6 +508,7 @@ function process_file($filename, $log_file) {
         print "Empty script. Ignoring\n";    
         return false;
     }
+
     $T[0]->setProperty('root', 'true')->save();
     
     $T[-1] = $client->makeNode()->setProperty('token', 'T_ROOT')
