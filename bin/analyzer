@@ -182,12 +182,28 @@ while(check_prev($prev, $extra_rounds)) {
     $cost += count($regex_next);
     fwrite($log, "cost : $cost\n");
 
-    $count = Token::countLeftNext();
+    if (isset($count)) {
+        $count_prev = $count;
+        $count = Token::countLeftNext();
+    } else {
+        $count = Token::countLeftNext();
+        $count_prev = $count;
+    }
+    
+
+    if (isset($count_file)) {
+        $count_file_prev = $count_file;
+        $count_file = Token::countFileToProcess();
+    } else {
+        $count_file = Token::countFileToProcess();
+        $count_file_prev = $count_file;
+    }
+    
     $end = microtime(true);
     fwrite($log, "countLeftNext time : ".(($end - $begin) * 1000)."\n");
 
-    fwrite($log, "Remaining token to process : $count\n");
-    fwrite($log, "Remaining files to process : ".Token::countFileToProcess()."\n");
+    fwrite($log, "Remaining token to process : $count (".($count - $count_prev).")\n");
+    fwrite($log, "Remaining files to process : $count_file (".($count_file - $count_file_prev).")\n");
     fwrite($log, "Remaining regex : ".count($regex_next)." (".(count($regex) - count($regex_next)).")\n");
     
     if ($count > 3) {
