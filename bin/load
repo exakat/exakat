@@ -1,13 +1,17 @@
-#!/usr/bin/env php
+#!/usr/bin/env php 
 <?php
-use Everyman\Neo4j\Client,
+
+use Loader\Csv, Everyman\Neo4j\Client,
 	Everyman\Neo4j\Index\NodeIndex,
 	Everyman\Neo4j\Relationship,
 	Everyman\Neo4j\Node,
-	Everyman\Neo4j\Gremlin;
+	Everyman\Neo4j\Gremlin,
+	
+	Loader\Neo4jphp;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
+
 $log_file = fopen('log/load.log', 'a');
 
 $args = $argv;
@@ -25,9 +29,15 @@ if ($id = array_search('-r', $args)) {
 }
 
 if ($id = array_search('-l', $args)) {
-    define('LINT', false);
-} else {
     define('LINT', true);
+} else {
+    define('LINT', false);
+}
+
+if ($id = array_search('-q', $args)) {
+    $_PILOT = 'Loader\Csv';
+} else {
+    $_PILOT = 'Loader\Neo4jphp';
 }
 
 if ($id = array_search('-f', $args)) {
@@ -47,13 +57,13 @@ if ($id = array_search('-f', $args)) {
     die();
 }
 fclose($log_file);
-die();
+$_PILOT::finalize();
 
 function process_dir($dir, $log_file) {
-
     $dirr = opendir($dir);
     while ($filename = readdir($dirr)) {
         if ($filename{0} == '.') { continue; }
+        if (is_link($filename)) { continue; }
         
         if (is_dir($dir.'/'.$filename)) {
             if (RECURSIVE) {
@@ -73,6 +83,7 @@ function process_file($filename, $log_file) {
     $log = array();
     $begin = microtime(true);
     
+    if (is_link($filename)) { return true; }
     if (!file_exists($filename)) {
         print "'$filename' doesn't exists. Aborting\n";
         die();
@@ -88,6 +99,9 @@ function process_file($filename, $log_file) {
     
 //    $php = file_get_contents($filename);
     $fp = fopen($filename, 'r');
+    if (filesize($filename) == 0) {
+        return false;
+    }
     $php = fread($fp, filesize($filename));
     fclose($fp);
 //    print mb_detect_encoding($php)."\n";
@@ -96,20 +110,12 @@ function process_file($filename, $log_file) {
     $tokens = token_get_all($php);
     $log['token_initial'] = count($tokens);
     
-    $client = new Client();
+    global $_PILOT;
+    $client = new $_PILOT();
 
     // @doc delete old tokens
-    $queryTemplate = "g.V.has('file', '$file').outE.each{ g.removeEdge(it); }";
-    $params = array('type' => 'IN');
-    $query = new Gremlin\Query($client, $queryTemplate, $params);
-    $query->getResultSet();
-    
-    $queryTemplate = "g.V.has('file', '$file').each{ g.removeVertex(it); }";
-    $params = array('type' => 'IN');
-    $query = new Gremlin\Query($client, $queryTemplate, $params);
-    $edges = $query->getResultSet();
 
-    $racines = new NodeIndex($client, 'racines');
+//    $racines = new NodeIndex($client, 'racines');
     $regex = Tokenizer\Token::$types; 
     $regexIndex = array();
     foreach($regex as $r) {
@@ -118,7 +124,7 @@ function process_file($filename, $log_file) {
                                              ->setProperty('file', $file)
                                              ->setProperty('index', 'true')
                                              ->save();
-        $racines->add($regexIndex[$r], 'token', $r);
+//        $racines->add($regexIndex[$r], 'token', $r);
     }
     
     $regexIndex['DELETE'] = $client->makeNode()->setProperty('token', 'DELETE')
@@ -126,15 +132,15 @@ function process_file($filename, $log_file) {
                                                ->setProperty('file', $file)
                                                ->setProperty('index', 'true')
                                                ->save();
-    $racines->add($regexIndex['DELETE'], 'token', 'DELETE');
+//    $racines->add($regexIndex['DELETE'], 'token', 'DELETE');
 
     $regexIndex['ROOT'] = $client->makeNode()->setProperty('token', 'ROOT')
                                              ->setProperty('code', 'Index for ROOT')
                                              ->setProperty('file', $file)
                                              ->setProperty('index', 'true')
                                              ->save();
-    $racines->add($regexIndex['ROOT'], 'token', 'ROOT');
-    
+//    $racines->add($regexIndex['ROOT'], 'token', 'ROOT');
+
     // load new tokens
     $line = 0;
     $TPHP = array(";" => 'T_SEMICOLON',
@@ -249,32 +255,9 @@ function process_file($filename, $log_file) {
                                               ->setProperty('atom', 'Void')->save();
 
                 $to_index = false;
-            } elseif (token_name($token[0]) == 'T_OPEN_TAG' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1]) && token_name($tokens[$id + 1][0]) == 'T_CLOSE_TAG') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
-                                              ->setProperty('code', $token[1])
-                                              ->setProperty('line', $token[2])
-                                              ->setProperty('file', $file)->save();
-                if (isset($previous)) {
-                    $previous->relateTo($T[$Tid], 'NEXT')->save();
-                }
-                $regexIndex["Phpcode"]->relateTo($T[$Tid], 'INDEXED')->save();
-                $previous = $T[$Tid];
-                
-                $Tid++;
-                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
-                                              ->setProperty('code', 'void')
-                                              ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
-                                              ->setProperty('atom', 'Void')->save();
-
-                $to_index = false;
             } elseif (token_name($token[0]) == 'T_CLOSE_TAG' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  && token_name($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
-                                              ->setProperty('code', 'void')
-                                              ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
-                                              ->setProperty('atom', 'Void')->save();
                 $id++;
+                continue 1;
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
                                               ->setProperty('code', $token[1])
@@ -342,22 +325,6 @@ function process_file($filename, $log_file) {
                                               ->setProperty('line', $line)
                                               ->setProperty('file', $file)
                                               ->setProperty('atom', 'Arguments')->save();
-
-                $to_index = false;
-            } elseif ($token == ':' && is_array($tokens[$id + 1]) && in_array(token_name($tokens[$id + 1][0]), array('T_ENDIF', 'T_ELSE', 'T_ELSEIF'))) {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
-                                              ->setProperty('code', $token)
-                                              ->setProperty('line', $line)
-                                              ->setProperty('file', $file)->save();
-                $previous->relateTo($T[$Tid], 'NEXT')->save();
-                $previous = $T[$Tid];
-                
-                $Tid++;
-                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
-                                              ->setProperty('code', 'void')
-                                              ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
-                                              ->setProperty('atom', 'Void')->save();
 
                 $to_index = false;
             } elseif ($token == '{' && $tokens[$id + 1] == ';') {
@@ -508,7 +475,6 @@ function process_file($filename, $log_file) {
         print "Empty script. Ignoring\n";    
         return false;
     }
-
     $T[0]->setProperty('root', 'true')->save();
     
     $T[-1] = $client->makeNode()->setProperty('token', 'T_ROOT')
@@ -536,5 +502,7 @@ function process_file($filename, $log_file) {
                                     ->setProperty('hidden', true)
                                     ->save();
     $last->relateTo($last2, 'NEXT')->setProperty('__FILE__', true)->save();
+
+    $client->save_chunk();
 }
 ?>
