@@ -9,10 +9,10 @@ Label : CODE
     Label : LEFT
       $a
   Label : ELEMENT
-    'string'
-  Label : ELEMENT
     =
     Label : RIGHT
       2
     Label : LEFT
       $z
+  Label : ELEMENT
+    'string'

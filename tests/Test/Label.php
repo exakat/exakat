@@ -6,7 +6,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Label extends Tokenizeur {
+class Label extends Tokenizer {
     /* 9 methods */
 
     public function testLabel01()  { $this->generic_test('Label.01'); }

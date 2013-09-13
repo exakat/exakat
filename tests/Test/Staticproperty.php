@@ -6,7 +6,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Staticproperty extends Tokenizeur {
+class Staticproperty extends Tokenizer {
     /* 7 methods */
 
     public function testStaticproperty01()  { $this->generic_test('Staticproperty.01'); }

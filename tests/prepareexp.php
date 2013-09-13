@@ -37,7 +37,7 @@ if ($number == 0) {
 
 function run($test, $number) {
     print "$test.$number\n";
-    $shell = 'cd ../; php bin/delete -all; php ./bin/load -f ./tests/source/'."$test.$number".'.php; php ./bin/analyzer; php ./bin/export -text -o ./tests/exp/'."$test.$number".'.txt';
+    $shell = 'cd ../; php bin/delete -all; php ./bin/load -f ./tests/source/'."$test.$number".'.php; php ./bin/tokenizer; php ./bin/export -text -o ./tests/exp/'."$test.$number".'.txt';
     
     print shell_exec($shell);
     

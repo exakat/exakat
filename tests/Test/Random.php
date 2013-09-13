@@ -6,7 +6,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Random extends Tokenizeur {
+class Random extends Tokenizer {
     /* 15 methods */
     public function testRandom01()  { $this->random_test(); }
     public function testRandom02()  { $this->random_test(); }
@@ -16,7 +16,7 @@ class Random extends Tokenizeur {
 
     public function random_test()  { 
         $tests = glob('Test/*.php');
-        if ($id = array_search('Test/Tokenizeur.php', $tests)) {
+        if ($id = array_search('Test/Tokenizer.php', $tests)) {
             unset($tests[$id]);
         }
         if ($id = array_search('Test/Random.php', $tests)) {

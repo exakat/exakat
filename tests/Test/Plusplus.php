@@ -6,7 +6,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Plusplus extends Tokenizeur {
+class Plusplus extends Tokenizer {
     /* 27 methods */
 
     public function testPlusplus01()  { $this->generic_test('Plusplus.01'); }

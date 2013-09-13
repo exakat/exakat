@@ -6,7 +6,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Functioncall extends Tokenizeur {
+class Functioncall extends Tokenizer {
     /* 45 methods */
 
     public function testFunctioncall01()  { $this->generic_test('Functioncall.01'); }

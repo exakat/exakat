@@ -6,7 +6,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Heredoc extends Tokenizeur {
+class Heredoc extends Tokenizer {
     /* 6 methods */
 
     public function testHeredoc01()  { $this->generic_test('Heredoc.01'); }

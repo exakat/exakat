@@ -6,7 +6,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Cast extends Tokenizeur {
+class Cast extends Tokenizer {
     /* 24 methods */
 
     public function testCast01()  { $this->generic_test('Cast.01'); }

@@ -6,7 +6,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class ArrayNS extends Tokenizeur {
+class ArrayNS extends Tokenizer {
     /* 14 methods */
 
     public function testArrayNS01()  { $this->generic_test('ArrayNS.01'); }

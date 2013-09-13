@@ -6,7 +6,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Comparison extends Tokenizeur {
+class Comparison extends Tokenizer {
     /* 36 methods */
 
     public function testComparison01()  { $this->generic_test('Comparison.01'); }

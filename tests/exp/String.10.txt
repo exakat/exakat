@@ -13,11 +13,11 @@ Label : CODE
         Label : CONCAT
            
         Label : CONCAT
+          $a
+        Label : CONCAT
           ->
-          Label : PROPERTY
-            b
-          Label : OBJECT
-            $a
+        Label : CONCAT
+          b
         Label : CONCAT
            c
     Label : LEFT
@@ -29,15 +29,15 @@ Label : CODE
       Label : CONTAIN
         Concatenation
         Label : CONCAT
-          $d
+          $a
+        Label : CONCAT
+          ->
+        Label : CONCAT
+          b
         Label : CONCAT
            c 
         Label : CONCAT
-          ->
-          Label : PROPERTY
-            b
-          Label : OBJECT
-            $a
+          $d
     Label : LEFT
       $loc
   Label : ELEMENT
@@ -47,14 +47,14 @@ Label : CODE
       Label : CONTAIN
         Concatenation
         Label : CONCAT
-          ->
-          Label : PROPERTY
-            b
-          Label : OBJECT
-            $a
+          $d
         Label : CONCAT
            c 
         Label : CONCAT
-          $d
+          $a
+        Label : CONCAT
+          ->
+        Label : CONCAT
+          b
     Label : LEFT
       $loc

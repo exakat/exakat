@@ -6,7 +6,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Nsname extends Tokenizeur {
+class Nsname extends Tokenizer {
     /* 11 methods */
 
     public function testNsname01()  { $this->generic_test('Nsname.01'); }

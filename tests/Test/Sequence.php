@@ -6,7 +6,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Sequence extends Tokenizeur {
+class Sequence extends Tokenizer {
     /* 64 methods */
 
     public function testSequence01()  { $this->generic_test('Sequence.01'); }
