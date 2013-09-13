@@ -21,20 +21,20 @@ class Csv {
     }
 
     static function finalize() {
-        shell_exec(<<<SHELL
+        print shell_exec(<<<SHELL
 mv nodes.csv ./batch-import/sampleme/
 mv rels.csv ./batch-import/sampleme/
 
-cd neo4j
-./bin/neo4j stop
-cd ../batch-import
+cd ./batch-import
 sh sampleme/import.sh
 cd -
-./bin/neo4j start
-cd ..        
-php bin/build_root
+sh scripts/restart.sh
 SHELL
 );
+//php bin/build_root
+//
+
+
     }
     
     function save_chunk() {

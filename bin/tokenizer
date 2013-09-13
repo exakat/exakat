@@ -27,88 +27,88 @@ if ($id = array_search('-s', $args)) {
 
 $begin_time = microtime(true);
 $classes = array(
-    'Variable',     // Fait 
-    'Halt',         // Fait
-    'Variabledollar',// Fait 
-    'Boolean',      // Fait
-    'Sign',         // Fait
-    '_Array',       // Fait
-    'String',       // Fait
-    '_Arraydollarcurly',// Fait
-    'Property',     // Fait
-    'Keyvalue',     // Fait
-    '_Function',    // Fait
-    'Staticproperty',// Fait
-    'Logical',      // Fait
-    'Heredoc',      // Fait
-    'Not',          // Fait
-    'Cast',         // Fait
-    'Reference',    // Fait
-    'Arrayappend',  // Fait
-    '_Instanceof',  // Fait
-    '_Break',       // Fait
-    '_Continue',    // Fait
-    'Label',        // Fait
-    '_Goto',        // Fait
-    '_New',         // Fait
-    '_Global',      // Fait
-    'Nsname',       // Fait
-    '_Namespace',   // Fait
-    '_Use',         // Fait
-    'ArrayNS',      // Fait
-    '_Include',     // Fait
-    'Preplusplus',  // Fait
-    'Postplusplus', // Fait
-    'Noscream',     // Fait
-    'Parenthesis',  // Fait
-    '_Clone',       // Fait
-    'Arguments',    // Fait
-    'ArgumentsNoParenthesis', // Fait
-    'ArgumentsNoComma', // Fait
+    'Variable',     
+    'Halt',         
+    'Variabledollar',
+    'Boolean',      
+    'Sign',         
+    '_Array',       
+    'String',       
+    '_Arraydollarcurly',
+    'Property',     
+    'Keyvalue',     
+    '_Function',    
+    'Staticproperty',
+    'Logical',      
+    'Heredoc',      
+    'Not',          
+    'Cast',         
+    'Reference',    
+    'Arrayappend',  
+    '_Instanceof',  
+    '_Break',       
+    '_Continue',    
+    'Label',        
+    '_Goto',        
+    '_New',         
+    '_Global',      
+    'Nsname',       
+    '_Namespace',   
+    '_Use',         
+    'ArrayNS',      
+    '_Include',     
+    'Preplusplus',  
+    'Postplusplus', 
+    'Noscream',     
+    'Parenthesis',  
+    '_Clone',       
+    'Arguments',    
+    'ArgumentsNoParenthesis', 
+    'ArgumentsNoComma', 
     'ArgumentsArray', 
-    'Functioncall', // Fait
+    'Functioncall', 
     'FunctioncallArray',
-    'Methodcall',   // Fait
-    'Staticmethodcall', // Fait
-    'Staticconstant',//Fait
-    'Multiplication',// Fait
-    'Addition',     // Fait
-    'Bitshift',     // Fait
-    'Concatenation', // Fait
-    '_Var',         // Fait
-    '_Ppp',         // Fait
-    '_Static',      // Fait
-    'Assignation',  // Fait
-    'Comparison',   // Fait
-    'Ternary',      // Fait
-    'Constant',     // Fait
-    '_Return',      // Fait
-    '_Declare',     // Fait
-    '_Const',       // Fait
-    'Block',        // Fait
-    'Shell',        // Fait
-    '_Interface',   // Fait
-    '_Class',       // Fait
-    '_Abstract',    // Fait
-    '_Final',       // Fait
+    'Methodcall',   
+    'Staticmethodcall', 
+    'Staticconstant',
+    'Multiplication',
+    'Addition',     
+    'Bitshift',     
+    'Concatenation', 
+    '_Var',         
+    '_Ppp',         
+    '_Static',      
+    'Assignation',  
+    'Comparison',   
+    'Ternary',      
+    'Constant',     
+    '_Return',      
+    '_Declare',     
+    '_Const',       
+    'Block',        
+    'Shell',        
+    '_Interface',   
+    '_Class',       
+    '_Abstract',    
+    '_Final',       
     'Typehint', 
-    '_Throw',       // Fait
-    '_Case',        // Fait
-    '_Default',     // Fait
-    '_Switch',      // Fait
+    '_Throw',       
+    '_Case',        
+    '_Default',     
+    '_Switch',      
     'Ifthen',
-    'IfthenElse',   // Fait
+    'IfthenElse',   
     '_Foreach',
     '_For',
     '_While',
-    '_Dowhile',     // Fait
-    '_Catch',       // Fait
-    '_Try',         // Fait
-    'Sequence',     // Fait
+    '_Dowhile',     
+    '_Catch',       
+    '_Try',         
+    'Sequence',     
     'SequenceAtom',
     'SequenceCaseDefault',
-    'Phpcodemiddle',// Fait
-    'Phpcode',      // Fait
+    'Phpcodemiddle',
+    'Phpcode',      
     'Void',
 );
 
@@ -131,6 +131,8 @@ foreach($classes as $class) {
     $r = new $new($client);
     if ($r->checkRemaining()) {
         $regex[$class] = $r;
+    } else {
+//        print "No $class to process\n";
     }
 }
 
@@ -145,7 +147,7 @@ for($i = 0; $i < $extra_rounds + 1; $i++) {
 $round = 0;
 $cost = 0;
 
-$log = fopen('log/analyzer.log', 'w');
+$log = fopen('log/tokenizer.log', 'w');
 
 $wbegin = microtime(true);
 $regex_time = 0;
