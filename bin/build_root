@@ -12,9 +12,13 @@ spl_autoload_register('Autoload::autoload_library');
 
 $client = new Client();
 
-query("g.createManualIndex('racines', Vertex)");
+//
+$result = query("g.idx('racines')");
+if ($result[0][0] != 'MANUAL[racines:Vertex]') {
+    query("g.createManualIndex('racines', Vertex)");
+}
 query("g.V.has('index', 'true').each{ g.idx('racines').put('token', it.token, it); };");
-print "Done";
+print "Indexing done\n";
 
 function query($query) {
     global $client;
