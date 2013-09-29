@@ -5,3 +5,12 @@
 /log
 /tests/phpMyAdmin-4.0.5/
 /tests/phpmyadmin.sh
+/tests/snappy.sh
+/tests/snappy/
+/tests/faker.sh
+/tests/Faker/
+/tests/yii-1.1.14/
+/tests/yii.sh
+/tests/wardrobe/
+/tests/php-analyzer/
+/classes.php

@@ -1,0 +1,35 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$args = $argv;
+$begin = microtime(true);
+
+if ($id = array_search('-v', $args)) {
+    define('VERBOSE', true);
+} else {
+    define('VERBOSE', false);
+}
+
+$client = new Client();
+
+$analyzers = new NodeIndex($client, 'analyzers');
+
+$analyzers_class = array('Analyzer\Type\Integer', 
+                         'Analyzer\Type\String',
+                         'Analyzer\Type\Real');
+
+foreach($analyzers_class as $analyzer_class) {
+    $analyzer = new $analyzer_class($client);
+    $analyzer->analyze();
+    print "$analyzer_class fait\n";
+}
+?>

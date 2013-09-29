@@ -1,0 +1,249 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$client = new Client();
+
+$args = $argv;
+if ($id = array_search('-dot', $args)) {
+    define('FORMAT', 'DOT');
+} elseif ($id = array_search('-text', $args)) {
+    define('FORMAT', 'TEXT');
+} elseif ($id = array_search('-table', $args)) {
+    define('FORMAT', 'TABLE');
+} else {
+    define('FORMAT', 'TEXT');
+}
+
+if ($id = array_search('-o', $args)) {
+    define('OUTPUT', $args[$id + 1]);
+} else {
+    define('OUTPUT', false);
+}
+
+if ($id = array_search('-f', $args)) {
+    define('FILE', $args[$id + 1]);
+} else {
+    define('FILE', false);
+}
+
+if ($id = array_search('-D', $args)) {
+    define('STYLE', 'DISTINCT');
+} elseif ($id = array_search('-C', $args)) {
+    define('STYLE', 'COUNTED');
+} else {
+    define('STYLE', 'ALL');
+}
+
+$analyzer = $argv[1];
+if (STYLE == 'ALL') {
+    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code"; 
+    $vertices = query($client, $queryTemplate);
+
+    $return = array();
+    foreach($vertices as $k => $v) {
+        $return[] = $v[0][0];
+    }
+} elseif (STYLE == 'DISTINCT') {
+    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code.unique()"; 
+    $vertices = query($client, $queryTemplate);
+
+    $return = array();
+    foreach($vertices as $k => $v) {
+        $return[] = $v[0][0];
+    }
+} elseif (STYLE == 'COUNTED') {
+    $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.groupCount(m){it.code}.cap"; 
+    $vertices = query($client, $queryTemplate);
+
+    $return = array();
+    foreach($vertices[0][0] as $k => $v) {
+        $return[$k] = $v;
+    }
+}
+/*
+//$queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code.unique()"; 
+$params = array('type' => 'IN');
+$vertices = query($client, $queryTemplate);
+
+foreach($vertices[0][0] as $k => $v) {
+//    print $v[0]->code."\n";
+//    print $v[0]."\n";
+//    print $k;
+    print $k;
+    print $v;
+    print "\n";
+//    print_r($v);
+}
+*/
+
+print_r($return);
+
+die();
+
+//print count($vertices)." vertices found\n";
+
+$V = array();
+foreach($vertices as $v) {
+    $x = $v[0]->getId();
+    $V[$x] =  $v[0]->getProperties();
+    
+    if (isset($V[$x]['root'])) {
+        $root = $v[0]->getId();
+    }
+}
+
+//$queryTemplate = "g.E";
+$queryTemplate .= ".outE()";
+$params = array('type' => 'IN');
+$query = new Gremlin\Query($client, $queryTemplate, $params);
+$edges = $query->getResultSet();
+
+$E = array();
+foreach($edges as $e) {
+    $id = $e[0]->getStartNode()->getId();
+    
+    if (!isset($E[$id])) {
+        $E[$id] = array();
+    }
+    
+    if(isset($E[$id][$e[0]->getEndNode()->getId()])) {
+        $E[$id][$e[0]->getEndNode()->getId()] .= ', '.$e[0]->getType();
+    } else {
+        $E[$id][$e[0]->getEndNode()->getId()] = $e[0]->getType();
+    }
+}
+
+if (!isset($root)) {
+    print "No root! Check the tree in Neo4j\n Aborting\n";
+    print number_format(memory_get_usage() / 1024 / 1024, 0)." Mo\n";
+    
+    die();
+}
+
+if (FORMAT == 'DOT') {
+    $text = display_dot($V, $E, $root);
+} elseif (FORMAT == 'TABLE') {
+    $text = display_table($V, $E, $root);
+} else {
+    $text = display_text($V, $E, $root);
+}
+
+function display_text($V, $E, $root, $level = 0) {
+    $r = '';
+    
+    $r .= str_repeat('  ', $level).$V[$root]['code']."\n";
+    if (isset($E[$root])) {
+        foreach($E[$root] as $id => $label) {
+            $r .= str_repeat('  ', $level)."Label : $label\n".display_text($V, $E, $id, $level + 1);
+        }
+    }
+    
+    return $r;
+}
+
+function display_dot($V, $E, $root, $level = 0) {
+    $r = '';
+
+    foreach($V as $id => $v) {
+        if (!isset($v['code'])) {
+            $v['code'] =  'NO CODE PROVIDED';
+        }
+         $R = $id." [label=\"".addslashes($v['code'])."\"";
+         if (isset($v['atom'])) {
+            $R .= " shape=box ";
+         }
+         $R .= "];\n";
+         
+         $r .= $R;
+    }
+
+    foreach($E as $start => $e) {
+        foreach($e as $end => $label) {
+            if ($label == 'NEXT') {
+                $r .= "$start -> $end [label=\"$label\"  color=green];\n";
+            } else {
+                $r .= "$start -> $end [label=\"$label\"];\n";
+            }
+        }
+    }
+
+    $r = " digraph graphname {
+$r
+ }";
+    
+    return $r;
+}
+
+function display_table($V, $E, $root, $level = 0) {
+    $r = '<table>';
+    
+    foreach($V as $id => $v) {
+        $row = array();
+        $row[] = highlight_string($v['code'], true);
+        if (isset($v['atom'])) { 
+            $row[] = $v['atom'];
+        } else {
+            $row[] = 'No atom';
+        }
+        if (isset($v['token'])) { 
+            $row[] = $v['token'];
+        } else {
+            $row[] = 'No token';
+        }
+        if (isset($v['file'])) { 
+            $row[] = $v['file'];
+        } else {
+            $row[] = 'No file';
+        }
+        if (isset($v['order'])) { 
+            $row[] = $v['order'];
+        } else {
+            $row[] = '';
+        }
+        
+
+        $row = "<td>".join("</td><td>", $row)."</td>";
+        $r .= "<tr>$row</tr>\n";
+    }
+    $r .= "</table>";
+    
+    return $r;
+}
+
+
+if (OUTPUT) {
+    $fp = fopen(OUTPUT, 'w+');
+    fwrite($fp, $text);
+    fclose($fp);
+} else {
+    print $text;
+}
+
+    function query($client, $query) {
+    	$queryTemplate = $query;
+    	$params = array('type' => 'IN');
+    	try {
+    	    $query = new \Everyman\Neo4j\Gremlin\Query($client, $queryTemplate, $params);
+        	return $query->getResultSet();
+    	} catch (\Exception $e) {
+    	    $message = $e->getMessage();
+    	    $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
+    	    print "Exception : ".$message."\n";
+    	    
+    	    print $queryTemplate."\n";
+    	    die();
+    	}
+    	return $query->getResultSet();
+    }
+
+
+?>
