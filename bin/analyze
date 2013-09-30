@@ -23,13 +23,18 @@ $client = new Client();
 
 $analyzers = new NodeIndex($client, 'analyzers');
 
-$analyzers_class = array('Analyzer\Type\Integer', 
-                         'Analyzer\Type\String',
-                         'Analyzer\Type\Real');
+$analyzers_class = array(//'Analyzer\Type\Integer', 
+                         //'Analyzer\Type\String',
+                         //'Analyzer\Type\Real',
+//                         'Analyzer\Type',
+//                        'Analyzer\Classes\Classnames',
+//                        'Analyzer\Classes\PropertyDefinition',
+                        'Analyzer\Variables\Variablenames',
+                         );
 
 foreach($analyzers_class as $analyzer_class) {
     $analyzer = new $analyzer_class($client);
-    $analyzer->analyze();
+    $analyzer->run();
     print "$analyzer_class fait\n";
 }
 ?>
