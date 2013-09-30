@@ -14,5 +14,6 @@ class Dowhile extends Tokenizer {
     public function testDowhile03()  { $this->generic_test('Dowhile.03'); }
     public function testDowhile04()  { $this->generic_test('Dowhile.04'); }
     public function testDowhile05()  { $this->generic_test('Dowhile.05'); }
+    public function testDowhile06()  { $this->generic_test('Dowhile.06'); }
 }
 ?>

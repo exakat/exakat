@@ -719,8 +719,14 @@ g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
 g.addEdge(it.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
 
+it.setProperty('order2', 1);
+it.out('NEXT').next().setProperty('order2', 2);
+
 it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
 it.bothE('NEXT').each{ g.removeEdge(it); }
+
+m  = [];
+x.out('ELEMENT').store(m).out('ELEMENT').store(m).iterate();
 
 x.out('ELEMENT').has('atom', 'SequenceCaseDefault').each{
     it.out('ELEMENT').each{
@@ -729,7 +735,6 @@ x.out('ELEMENT').has('atom', 'SequenceCaseDefault').each{
     }
     g.removeEdge(it.inE('ELEMENT').next());
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
-//    g.removeVertex(it);
 }
 
 ";
@@ -745,7 +750,6 @@ it.out('NEXT').outE('CONCAT').each{ g.removeEdge(it); };
     
 g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
 
-//it.out('NEXT').next().setProperty('code', 'Destroyed');
 g.removeVertex(it.out('NEXT').next());
 
 ";
@@ -934,7 +938,6 @@ it.as('origin').out('$link').has('atom','$atom').each{
         g.addEdge(f, it, '$link');
     };
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
-//    g.removeVertex(it);    
 }
             ";
             }
@@ -1233,7 +1236,6 @@ it.as('origin').out('ELEMENT').has('atom','Sequence').each{
     };
 
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
-    //g.removeVertex(it);
 }
 ";
             }

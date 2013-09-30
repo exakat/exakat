@@ -13,6 +13,8 @@ class SequenceCaseDefault extends TokenAuto {
                                    1 => array('atom' => $operands),
         );
         $this->actions = array('insertSequenceCaseDefault'  => true,
+                               'order'      => array( 0 => 1,
+                                                      1 => 2 ),
                                'keepIndexed' => true);
         $r = $this->checkAuto();
         
