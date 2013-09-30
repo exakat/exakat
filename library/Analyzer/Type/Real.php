@@ -6,6 +6,10 @@ use Analyzer;
 
 class Real extends Analyzer\Common\Type {
 
+    function dependsOn() {
+        return array();
+    }
+
     function analyze() {
         $this->type = 'Float';
 
