@@ -1,8 +1,8 @@
 <?php
 
-namespace Analyzer\Abstract;
+namespace Analyzer\Common;
 
-class Type extends Analyzer {
+class Type extends \Analyzer\Analyzer {
     
     protected $type = null;
 

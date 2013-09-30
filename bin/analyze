@@ -5,7 +5,7 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Relationship,
 	Everyman\Neo4j\Node,
 	Everyman\Neo4j\Gremlin,
-	Tokenizer\Token;
+	Analyzer\Common\Type;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');

@@ -38,19 +38,33 @@ if ($id = array_search('-f', $args)) {
 if ($id = array_search('-D', $args)) {
     define('STYLE', 'DISTINCT');
 } elseif ($id = array_search('-C', $args)) {
+    define('STYLE', 'COUNTED_ALL');
+} elseif ($id = array_search('-B', $args)) {
+    define('STYLE', 'BOOLEAN');
+} elseif ($id = array_search('-G', $args)) {
     define('STYLE', 'COUNTED');
 } else {
     define('STYLE', 'ALL');
 }
 
 $analyzer = $argv[1];
-if (STYLE == 'ALL') {
+if (STYLE == 'BOOLEAN') {
+    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.any()"; 
+    $vertices = query($client, $queryTemplate);
+
+    $return = $vertices[0][0];
+} elseif (STYLE == 'COUNTED_ALL') {
+    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.count()"; 
+    $vertices = query($client, $queryTemplate);
+
+    $return = $vertices[0][0];
+} elseif (STYLE == 'ALL') {
     $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code"; 
     $vertices = query($client, $queryTemplate);
 
     $return = array();
     foreach($vertices as $k => $v) {
-        $return[] = $v[0][0];
+        $return[] = $v[0];
     }
 } elseif (STYLE == 'DISTINCT') {
     $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code.unique()"; 
@@ -58,7 +72,7 @@ if (STYLE == 'ALL') {
 
     $return = array();
     foreach($vertices as $k => $v) {
-        $return[] = $v[0][0];
+        $return[] = $v[0];
     }
 } elseif (STYLE == 'COUNTED') {
     $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.groupCount(m){it.code}.cap"; 
