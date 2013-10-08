@@ -11,6 +11,7 @@ class Analyzer {
     function __construct($client) {
         $this->client = $client;
         $this->methods = array();
+        $this->queries = array();
 
         $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
         if ($result[0][0] == 'false') {
@@ -75,6 +76,16 @@ GREMLIN;
         return $this;
     }
 
+    function atomIsNot($atom) {
+        if (is_array($atom)) {
+            $this->methods[] = 'filter{!(it.atom in [\''.join("', '", $atom).'\']) }';
+        } else {
+            $this->methods[] = 'hasNot("atom", "'.$atom.'")';
+        }
+        
+        return $this;
+    }
+
     function analyzerIsNot($analyzer) {
         if (is_array($analyzer)) {
             $this->methods[] = 'filter{ it.in("ANALYZED").filter{ not (it.analyzer in [\''.join("', '", $atom).'\'])}.count() == 0}';
@@ -93,6 +104,40 @@ GREMLIN;
         
         return $this;
     }
+
+    function in($edge_name) {
+        if (is_array($edge_name)) {
+            // @todo
+            die(" I don't understand arrays in out()");
+        } else {
+            $this->methods[] = "in('$edge_name')";
+        }
+        
+        return $this;
+    }
+
+    function hasIn($edge_name) {
+        if (is_array($edge_name)) {
+            // @todo
+            die(" I don't understand arrays in out()");
+        } else {
+            $this->methods[] = 'filter{ it.in("'.$edge_name.'").count() != 0}';
+        }
+        
+        return $this;
+    }
+    
+    function hasNoIn($edge_name) {
+        if (is_array($edge_name)) {
+            // @todo
+            die(" I don't understand arrays in out()");
+        } else {
+            $this->methods[] = 'filter{ it.in("'.$edge_name.'").count() == 0}';
+        }
+        
+        return $this;
+    }
+    
     
     function run() {
         $nodes = $this->dependsOn();
@@ -131,16 +176,17 @@ GREMLIN;
 
         $this->analyze();
         $this->prepareQuery();
+
         return $this->execQuery();
     }
 
     function analyze() { return true; } 
-    // log errors when using this ? 
+    // @todo log errors when using this ? 
 
     function printQuery() {
         $this->prepareQuery();
         
-        print $this->query;
+        print_r($this->queries);
         die();
     }
 
@@ -148,18 +194,20 @@ GREMLIN;
         // @doc This is when the object is a placeholder for others. 
         if (empty($this->methods)) { return true; }
         
-        $this->query = join('.', $this->methods);
+        $this->analyzerIsNot(addslashes(get_class($this)));
+        
+        $query = join('.', $this->methods);
         
         // search what ? All ? 
-        $this->query = <<<GREMLIN
+        $query = <<<GREMLIN
 
 c = 0;
-g.V.{$this->query}
+g.V.{$query}
 GREMLIN;
 
         // Indexed results
         $analyzer = str_replace('\\', '\\\\', get_class($this));
-        $this->query .= <<<GREMLIN
+        $query .= <<<GREMLIN
 .each{
     g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED');
     c = c + 1;
@@ -167,18 +215,27 @@ GREMLIN;
 c;
 
 GREMLIN;
+
+        $this->queries[] = $query;
+        $this->methods = array();
+        
         return true;
     }
     
     function execQuery() {
-        if (empty($this->query)) { return true; }
+        if (empty($this->queries)) { return true; }
 
         // @todo add a test here ? 
-        $r = $this->query($this->query);
+        foreach($this->queries as $query) {
+            $r = $this->query($query);
+        }
 
+        // reset for the next
+        $this->queries = array(); 
+        
+        // @todo multiple results ? 
         // @todo store result in the object until reading. 
         return $r[0][0];
-
     }
     
     function topological_sort($nodeids, $edges) {
