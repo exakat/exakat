@@ -48,6 +48,8 @@ if ($id = array_search('-D', $args)) {
 }
 
 $analyzer = $argv[1];
+$analyzer = str_replace('_', '\\\\', $analyzer);
+
 if (STYLE == 'BOOLEAN') {
     $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.any()"; 
     $vertices = query($client, $queryTemplate);
