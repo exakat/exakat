@@ -13,36 +13,42 @@ Label : CODE
         Label : ELEMENT
           abstract
           Label : ABSTRACT
-            static
+            Ppp
             Label : VALUE
-              void
+              Void
             Label : DEFINE
               function
-              Label : ARGUMENTS
-                void
-              Label : NAME
-                d
-        Label : ELEMENT
-          abstract
-          Label : ABSTRACT
-            public
-            Label : VALUE
-              void
-            Label : DEFINE
-              function
-              Label : ARGUMENTS
-                void
               Label : NAME
                 a
+              Label : ARGUMENTS
+                void
+            Label : PUBLIC
+              public
         Label : ELEMENT
           abstract
           Label : ABSTRACT
-            protected
+            Ppp
             Label : VALUE
-              void
+              Void
             Label : DEFINE
               function
-              Label : ARGUMENTS
-                void
               Label : NAME
                 b
+              Label : ARGUMENTS
+                void
+            Label : PROTECTED
+              protected
+        Label : ELEMENT
+          abstract
+          Label : ABSTRACT
+            Ppp
+            Label : VALUE
+              Void
+            Label : DEFINE
+              function
+              Label : NAME
+                d
+              Label : ARGUMENTS
+                void
+            Label : STATIC
+              static

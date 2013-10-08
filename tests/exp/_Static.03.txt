@@ -9,32 +9,32 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        static
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
+          $c
+        Label : STATIC
+          static
+        Label : PROTECTED
           protected
-          Label : VALUE
-            void
-          Label : DEFINE
-            $c
       Label : ELEMENT
-        static
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
-          private
-          Label : VALUE
-            void
-          Label : DEFINE
-            $d
-      Label : ELEMENT
-        static
-        Label : VALUE
-          void
-        Label : DEFINE
+          $b
+        Label : STATIC
+          static
+        Label : PUBLIC
           public
-          Label : VALUE
-            void
-          Label : DEFINE
-            $b
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $d
+        Label : STATIC
+          static
+        Label : PRIVATE
+          private

@@ -9,50 +9,6 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        protected
-        Label : VALUE
-          void
-        Label : DEFINE
-          static
-          Label : VALUE
-            void
-          Label : DEFINE
-            $E
-      Label : ELEMENT
-        public
-        Label : VALUE
-          void
-        Label : DEFINE
-          static
-          Label : VALUE
-            void
-          Label : DEFINE
-            function
-            Label : NAME
-              f
-            Label : BLOCK
-              {
-              Label : CODE
-                void
-            Label : ARGUMENTS
-              void
-      Label : ELEMENT
-        private
-        Label : NAME
-          $a
-        Label : VALUE
-          'b'
-      Label : ELEMENT
-        const
-        Label : NAME
-          E
-        Label : VALUE
-          ::
-          Label : CONSTANT
-            G
-          Label : CLASS
-            F
-      Label : ELEMENT
         const
         Label : NAME
           D
@@ -64,3 +20,49 @@ Label : CODE
           C
         Label : VALUE
           1
+      Label : ELEMENT
+        const
+        Label : NAME
+          E
+        Label : VALUE
+          ::
+          Label : CLASS
+            F
+          Label : CONSTANT
+            G
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $E
+        Label : STATIC
+          static
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          function
+          Label : NAME
+            f
+          Label : ARGUMENTS
+            void
+          Label : BLOCK
+            {
+            Label : CODE
+              void
+        Label : STATIC
+          static
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          'b'
+        Label : DEFINE
+          $a
+        Label : PRIVATE
+          private

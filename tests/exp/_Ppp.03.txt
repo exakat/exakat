@@ -9,56 +9,56 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        protected
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
-          static
-          Label : VALUE
+          function
+          Label : NAME
+            a
+          Label : ARGUMENTS
             void
-          Label : DEFINE
-            function
-            Label : ARGUMENTS
+          Label : BLOCK
+            {
+            Label : CODE
               void
-            Label : NAME
-              c
-            Label : BLOCK
-              {
-              Label : CODE
-                void
+        Label : STATIC
+          static
+        Label : PUBLIC
+          public
       Label : ELEMENT
-        public
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
-          static
-          Label : VALUE
+          function
+          Label : NAME
+            b
+          Label : ARGUMENTS
             void
-          Label : DEFINE
-            function
-            Label : ARGUMENTS
+          Label : BLOCK
+            {
+            Label : CODE
               void
-            Label : NAME
-              a
-            Label : BLOCK
-              {
-              Label : CODE
-                void
+        Label : STATIC
+          static
+        Label : PRIVATE
+          private
       Label : ELEMENT
-        private
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
-          static
-          Label : VALUE
+          function
+          Label : NAME
+            c
+          Label : ARGUMENTS
             void
-          Label : DEFINE
-            function
-            Label : ARGUMENTS
+          Label : BLOCK
+            {
+            Label : CODE
               void
-            Label : NAME
-              b
-            Label : BLOCK
-              {
-              Label : CODE
-                void
+        Label : STATIC
+          static
+        Label : PROTECTED
+          protected

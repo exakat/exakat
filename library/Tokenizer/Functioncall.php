@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Functioncall extends TokenAuto {
     static $operators = array('T_STRING', 'T_ECHO', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 'T_NS_SEPARATOR', 
                               'T_VARIABLE', 'T_PRINT', 'T_ISSET', 'T_LIST', 'T_EVAL', 
-                              'T_EXIT', 'T_DIE', 'T_STATIC',);
+                              'T_EXIT', 'T_DIE');
 
     function _check() {
         

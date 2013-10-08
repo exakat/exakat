@@ -8,50 +8,56 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        protected
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
           final
           Label : FINAL
             function
-            Label : ARGUMENTS
-              void
             Label : NAME
               __clone
+            Label : ARGUMENTS
+              void
             Label : BLOCK
               {
               Label : CODE
                 void
+        Label : PRIVATE
+          private
       Label : ELEMENT
-        private
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
           final
           Label : FINAL
             function
-            Label : ARGUMENTS
-              void
             Label : NAME
               __clone
+            Label : ARGUMENTS
+              void
             Label : BLOCK
               {
               Label : CODE
                 void
+        Label : PUBLIC
+          public
       Label : ELEMENT
-        public
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
           final
           Label : FINAL
             function
-            Label : ARGUMENTS
-              void
             Label : NAME
               __clone
+            Label : ARGUMENTS
+              void
             Label : BLOCK
               {
               Label : CODE
                 void
+        Label : PROTECTED
+          protected

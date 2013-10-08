@@ -13,12 +13,10 @@ class _Var extends TokenAuto {
                                    2 => array('filterOut' => $values)
                                  );
         
-        $this->actions = array('transform' => array( 1 => 'DEFINE'),
-                               'add_void'  => array( 0 => 'VALUE'), 
-                               'atom'      => 'Var',
-                               'cleanIndex'=> true
+        $this->actions = array('to_ppp'     => 1,
+                               'atom'       => 'Var',
+                               'cleanIndex' => true
                                );
-
         $this->checkAuto(); 
 
     // class x { var $x = 2 }
@@ -27,7 +25,7 @@ class _Var extends TokenAuto {
                                    2 => array('token' => array('T_SEMICOLON')),
                                  );
         
-        $this->actions = array('to_ppp' => true,
+        $this->actions = array('to_ppp_assignation' => true,
                                'atom'   => 'Var',
                                );
 
@@ -39,10 +37,8 @@ class _Var extends TokenAuto {
                                    2 => array('filterOut' => array('T_COMMA')),
                                  );
         
-        $this->actions = array('to_var'   => 'Var',
-                               'atom'       => 'Var',
-                               );
-
+        $this->actions = array('to_var_new' => 'Var',
+                               'atom'       => 'Var',);
         $this->checkAuto(); 
 
         return $this->checkRemaining();

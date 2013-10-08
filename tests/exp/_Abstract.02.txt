@@ -14,23 +14,23 @@ Label : CODE
           abstract
           Label : ABSTRACT
             function
-            Label : ARGUMENTS
-              void
-            Label : NAME
-              c
-        Label : ELEMENT
-          abstract
-          Label : ABSTRACT
-            function
-            Label : ARGUMENTS
-              void
             Label : NAME
               a
+            Label : ARGUMENTS
+              void
         Label : ELEMENT
           abstract
           Label : ABSTRACT
             function
-            Label : ARGUMENTS
-              void
             Label : NAME
               b
+            Label : ARGUMENTS
+              void
+        Label : ELEMENT
+          abstract
+          Label : ABSTRACT
+            function
+            Label : NAME
+              c
+            Label : ARGUMENTS
+              void

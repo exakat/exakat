@@ -1,0 +1,392 @@
+<?php
+
+Label : CODE
+  class
+  Label : NAME
+    a
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $s2
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          1
+        Label : DEFINE
+          $sp1
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $pr2
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $sp2
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          1
+        Label : DEFINE
+          $pr1
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          1
+        Label : DEFINE
+          $s1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          2
+        Label : DEFINE
+          $p7
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $y8
+        Label : VALUE
+          1
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          2
+        Label : DEFINE
+          $p6
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $y11
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $z9
+        Label : VALUE
+          void
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $x11
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $p4
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $p2
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $z11
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $p1
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $p3
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        var
+        Label : VALUE
+          void
+        Label : DEFINE
+          $p5
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $y9
+        Label : VALUE
+          void
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $x9
+        Label : VALUE
+          void
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $a8
+        Label : VALUE
+          1
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $x3
+        Label : VALUE
+          1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $x4
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $y6
+        Label : VALUE
+          1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $y5
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $a5
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $z5
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $x5
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $y4
+        Label : VALUE
+          1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $x2
+        Label : VALUE
+          1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $y1
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $x1
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $ps2
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $y2
+        Label : VALUE
+          1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $y3
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $y7
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $x6
+        Label : VALUE
+          1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $a7
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $x8
+        Label : VALUE
+          void
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $x7
+        Label : VALUE
+          1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $z8
+        Label : VALUE
+          void
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $z7
+        Label : VALUE
+          1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $z6
+        Label : VALUE
+          1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $a6
+        Label : VALUE
+          1
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          1
+        Label : DEFINE
+          $ps1
+        Label : PRIVATE
+          private
+        Label : STATIC
+          static

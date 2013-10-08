@@ -3,24 +3,28 @@
 Label : CODE
   ;
   Label : ELEMENT
+    Ppp
+    Label : VALUE
+      Void
+    Label : DEFINE
+      $x
+    Label : STATIC
+      static
+  Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
     Label : NAME
       y
+    Label : ARGUMENTS
+      void
     Label : BLOCK
       {
       Label : CODE
         ;
         Label : ELEMENT
-          static
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $z
-  Label : ELEMENT
-    static
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $x
+          Ppp
+          Label : VALUE
+            Void
+          Label : DEFINE
+            $z
+          Label : STATIC
+            static

@@ -11,46 +11,50 @@ Label : CODE
       Label : CODE
         ;
         Label : ELEMENT
-          static
-          Label : VALUE
-            void
-          Label : DEFINE
-            function
-            Label : ARGUMENTS
-              void
-            Label : NAME
-              d
-            Label : BLOCK
-              {
-              Label : CODE
-                void
-        Label : ELEMENT
           abstract
           Label : ABSTRACT
             function
-            Label : ARGUMENTS
-              void
             Label : NAME
               c
-        Label : ELEMENT
-          abstract
-          Label : ABSTRACT
-            function
             Label : ARGUMENTS
               void
-            Label : NAME
-              a
         Label : ELEMENT
-          protected
+          Ppp
           Label : VALUE
-            void
+            Void
           Label : DEFINE
             function
+            Label : NAME
+              d
             Label : ARGUMENTS
               void
-            Label : NAME
-              b
             Label : BLOCK
               {
               Label : CODE
                 void
+          Label : STATIC
+            static
+        Label : ELEMENT
+          abstract
+          Label : ABSTRACT
+            function
+            Label : NAME
+              a
+            Label : ARGUMENTS
+              void
+        Label : ELEMENT
+          Ppp
+          Label : VALUE
+            Void
+          Label : DEFINE
+            function
+            Label : NAME
+              b
+            Label : ARGUMENTS
+              void
+            Label : BLOCK
+              {
+              Label : CODE
+                void
+          Label : PROTECTED
+            protected

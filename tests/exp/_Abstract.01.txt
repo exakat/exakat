@@ -12,7 +12,7 @@ Label : CODE
         abstract
         Label : ABSTRACT
           function
-          Label : ARGUMENTS
-            void
           Label : NAME
             x
+          Label : ARGUMENTS
+            void

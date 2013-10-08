@@ -9,56 +9,56 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        static
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
-          protected
-          Label : VALUE
+          function
+          Label : NAME
+            a
+          Label : ARGUMENTS
             void
-          Label : DEFINE
-            function
-            Label : ARGUMENTS
+          Label : BLOCK
+            {
+            Label : CODE
               void
-            Label : NAME
-              c
-            Label : BLOCK
-              {
-              Label : CODE
-                void
-      Label : ELEMENT
-        static
-        Label : VALUE
-          void
-        Label : DEFINE
+        Label : STATIC
+          static
+        Label : PUBLIC
           public
-          Label : VALUE
-            void
-          Label : DEFINE
-            function
-            Label : ARGUMENTS
-              void
-            Label : NAME
-              a
-            Label : BLOCK
-              {
-              Label : CODE
-                void
       Label : ELEMENT
-        static
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
-          private
-          Label : VALUE
+          function
+          Label : NAME
+            b
+          Label : ARGUMENTS
             void
-          Label : DEFINE
-            function
-            Label : ARGUMENTS
+          Label : BLOCK
+            {
+            Label : CODE
               void
-            Label : NAME
-              b
-            Label : BLOCK
-              {
-              Label : CODE
-                void
+        Label : STATIC
+          static
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          function
+          Label : NAME
+            c
+          Label : ARGUMENTS
+            void
+          Label : BLOCK
+            {
+            Label : CODE
+              void
+        Label : STATIC
+          static
+        Label : PROTECTED
+          protected

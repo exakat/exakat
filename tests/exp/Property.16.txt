@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  class
+  Label : NAME
+    foo
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          <<<'EOT'
+
+          Label : CONTAIN
+            Concatenation
+            Label : CONCAT
+              bar
+
+        Label : DEFINE
+          $bar
+        Label : PUBLIC
+          public

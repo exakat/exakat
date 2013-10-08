@@ -9,22 +9,66 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        static
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            $i
-          Label : ARGUMENT
-            $h
-          Label : ARGUMENT
-            $g
-          Label : ARGUMENT
-            $f
-          Label : ARGUMENT
-            $e
-          Label : ARGUMENT
-            $d
-          Label : ARGUMENT
-            $c
-          Label : ARGUMENT
-            $b
+        Ppp
+        Label : NAME
+          $e
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $c
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $i
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $g
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $f
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $h
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $b
+        Label : VALUE
+          void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        Ppp
+        Label : NAME
+          $d
+        Label : VALUE
+          void
+        Label : STATIC
+          static
