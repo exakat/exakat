@@ -76,6 +76,17 @@ GREMLIN;
         return $this;
     }
 
+    function atomInside($atom) {
+        if (is_array($atom)) {
+            // @todo
+            die(" I don't understand arrays in atomInside()");
+        } else {
+            $this->methods[] = 'as("loop").out().loop("loop"){true}{it.object.atom == "'.$atom.'"}';
+        }
+        
+        return $this;
+    }
+
     function atomIsNot($atom) {
         if (is_array($atom)) {
             $this->methods[] = 'filter{!(it.atom in [\''.join("', '", $atom).'\']) }';

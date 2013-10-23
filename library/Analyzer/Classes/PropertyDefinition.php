@@ -8,7 +8,9 @@ class PropertyDefinition extends Analyzer\Analyzer {
 
     function analyze() {
         $this->atomIs("Ppp")
-             ->out('DEFINE');
+             ->out('DEFINE')
+             ->atomIs('Variable');
+             
     }
 }
 

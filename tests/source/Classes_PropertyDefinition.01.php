@@ -15,6 +15,10 @@ class a {
     public static $p7 = 2;
     private static $p8 = 2;
     protected static $p9 = 2;
+
+    function method() {}
+    
+    private function method_private() {}
 }
 
 $v1 = 1;

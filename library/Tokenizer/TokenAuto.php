@@ -465,7 +465,9 @@ g.addEdge(it, x, 'NEXT');
 x = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', 'file':it.file, virtual:true]);
 
 g.addEdge(x, it.out('NEXT').next(), 'DEFINE');
-g.addEdge(x, g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', 'file':it.file, virtual:true]), 'VALUE');
+it.out('NEXT').has('atom', 'Variable').each {
+    g.addEdge(x, g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', 'file':it.file, virtual:true]), 'VALUE');
+}
 g.addEdge(x, it, it.code.toUpperCase());
 
 g.addEdge(it.in('NEXT').next(), x, 'NEXT');

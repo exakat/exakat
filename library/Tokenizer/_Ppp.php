@@ -13,7 +13,6 @@ class _Ppp extends TokenAuto {
                                    2 => array('filterOut' => $values),
                                    // T_SEMICOLON because of _Class 28 test
                                  );
-        
         $this->actions = array('to_ppp' => 1,
                                'atom'   => 'Ppp', );
         $this->checkAuto(); 
