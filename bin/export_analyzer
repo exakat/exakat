@@ -5,7 +5,8 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Relationship,
 	Everyman\Neo4j\Node,
 	Everyman\Neo4j\Gremlin,
-	Tokenizer\Token;
+	Tokenizer\Token,
+	Michelf\Markdown;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
@@ -13,18 +14,36 @@ spl_autoload_register('Autoload::autoload_library');
 $client = new Client();
 
 $args = $argv;
-if ($id = array_search('-dot', $args)) {
+if ($id = array_search('-json', $args)) {
     define('FORMAT', 'DOT');
+    unset($args[$id]);
+    $args = array_values($args);
 } elseif ($id = array_search('-text', $args)) {
     define('FORMAT', 'TEXT');
-} elseif ($id = array_search('-table', $args)) {
-    define('FORMAT', 'TABLE');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-odt', $args)) {
+    define('FORMAT', 'ODT');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-markdown', $args)) {
+    define('FORMAT', 'MARKDOWN');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-csv', $args)) {
+    define('FORMAT', 'CSV');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-html', $args)) {
+    define('FORMAT', 'HTML');
+    unset($args[$id]);
+    $args = array_values($args);
 } else {
     define('FORMAT', 'TEXT');
 }
 
 if ($id = array_search('-o', $args)) {
-    define('OUTPUT', $args[$id + 1]);
+    define('OUTPUT', true);
 } else {
     define('OUTPUT', false);
 }
@@ -47,19 +66,42 @@ if ($id = array_search('-D', $args)) {
     define('STYLE', 'ALL');
 }
 
-$analyzer = $argv[1];
+$analyzer = $args[1];
+$component_file = 'library/Analyzer/'.str_replace('_', '/', $analyzer).'.php';
+if (!file_exists($component_file)) {
+    print "'$analyzer' doesn't exists. Aborting\n";
+    
+    $list = glob('library/Analyzer/*/*.php');
+    $r = array();
+    foreach($list as $id => $c) {
+        $c = substr($c, 17, -4);
+        $c = str_replace('/', '_', $c);
+        $l = levenshtein($c, $analyzer);
+        if ($l < 8) {
+            $r[] = $c;
+        }
+    }
+    
+    if (count($r) > 0) {
+        print "did you mean : ".join(', ', $r)."\n";
+    }
+    
+    die();
+}
+
 $analyzer = str_replace('_', '\\\\', $analyzer);
 
+$return = array();
 if (STYLE == 'BOOLEAN') {
     $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.any()"; 
     $vertices = query($client, $queryTemplate);
 
-    $return = $vertices[0][0];
+    $return[] = $vertices[0][0];
 } elseif (STYLE == 'COUNTED_ALL') {
     $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.count()"; 
     $vertices = query($client, $queryTemplate);
 
-    $return = $vertices[0][0];
+    $return[] = $vertices[0][0];
 } elseif (STYLE == 'ALL') {
     $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code"; 
     $vertices = query($client, $queryTemplate);
@@ -85,23 +127,77 @@ if (STYLE == 'BOOLEAN') {
         $return[$k] = $v;
     }
 }
-/*
-//$queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code.unique()"; 
-$params = array('type' => 'IN');
-$vertices = query($client, $queryTemplate);
 
-foreach($vertices[0][0] as $k => $v) {
-//    print $v[0]->code."\n";
-//    print $v[0]."\n";
-//    print $k;
-    print $k;
-    print $v;
-    print "\n";
-//    print_r($v);
+if (FORMAT == 'TEXT') {
+    $text = '';
+    foreach($return as $k => $v) {
+        if (STYLE == 'COUNTED') {
+            $text .= "$k => $v\n";
+        } else {
+            $text .= "$v\n";
+        }
+    }
+    
+} elseif (FORMAT == 'JSON') {
+    $text .= json_encode($return);
+} elseif (FORMAT == 'CSV') {
+    $text = array();
+    foreach($return as $k => $v) {
+        $text[] = array($k, $v);
+    }
+} elseif (FORMAT == 'MARKDOWN' || FORMAT == 'HTML' || FORMAT == 'ODT') {
+    $text = '';
+    foreach($return as $k => $r) {
+        if (STYLE == 'COUNTED') {
+            $text .= "+ $k => $r\n";
+        } else {
+            $text .= "+ $r\n";
+        }
+    }
+} else {
+// default behavior
+    print_r($return);
 }
-*/
 
-print_r($return);
+if (FORMAT == 'HTML'|| FORMAT == 'ODT') {
+    $text = Markdown::defaultTransform($text);
+}
+
+if (OUTPUT) {
+    print $text;
+}
+
+$extensions = array('JSON' => 'json',
+                    'HTML' => 'html',
+                    'MARKDOWN' => 'md',
+                    'ODT' => 'odt',
+                    'TEXT' => 'txt',
+                    'CSV' => 'csv');
+
+if (FILE) {
+    $name = FILE.'.'.$extensions[FORMAT];
+    if (file_exists($name)) {
+        print "$name already exists. Aborting\n";
+        die();
+    }
+
+    if (FORMAT == 'ODT') {
+        $name1 = FILE.'.'.$extensions['HTML'];
+        file_put_contents($name1, $text);
+
+        $name = FILE.'.'.$extensions[FORMAT];
+        shell_exec('pandoc -o '.$name.' '.$name1);
+        unlink($name1);
+    } elseif (FORMAT == 'CSV') {
+        $fp = fopen($name, 'w');
+        foreach($text as $t) {
+            fputcsv($fp, $t);
+        }
+        fclose($fp);
+    } else {
+        file_put_contents($name, $text);
+    }
+}
 
 die();
 

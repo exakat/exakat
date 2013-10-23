@@ -28,8 +28,9 @@ $analyzers_class = array(//'Analyzer\Type\Integer',
                          //'Analyzer\Type\Real',
 //                         'Analyzer\Type',
 //                        'Analyzer\Classes\Classnames',
-//                        'Analyzer\Classes\PropertyDefinition',
-                        'Analyzer\Variables\Variablenames',
+//                        'Analyzer\Classes',
+//                        'Analyzer\Variables\Variablenames',
+                        'Analyzer\Structures\Iffectation',
                          );
 
 foreach($analyzers_class as $analyzer_class) {
