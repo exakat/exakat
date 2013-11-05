@@ -15,7 +15,7 @@ $client = new Client();
 
 $args = $argv;
 if ($id = array_search('-json', $args)) {
-    define('FORMAT', 'DOT');
+    define('FORMAT', 'JSON');
     unset($args[$id]);
     $args = array_values($args);
 } elseif ($id = array_search('-text', $args)) {
@@ -103,12 +103,25 @@ if (STYLE == 'BOOLEAN') {
 
     $return[] = $vertices[0][0];
 } elseif (STYLE == 'ALL') {
-    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code"; 
+//    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code"; 
+    $queryTemplate = <<<GREMLIN
+g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.as('x')
+    .inE('FILE').as('file').back('x')
+    .inE('NAMESPACE').as('namespace').back('x')
+    .inE('CLASS').as('class').back('x')
+    .inE('FUNCTION').as('function').back('x')
+    .select{it.code}{it.file}{it.namespace}{it.classname}{it.function}
+GREMLIN;
     $vertices = query($client, $queryTemplate);
 
     $return = array();
     foreach($vertices as $k => $v) {
-        $return[] = $v[0];
+        $row = array();
+        foreach($v[0] as $V) {
+            $row[] = $V;
+        }
+        $return[] = $row;
+        
     }
 } elseif (STYLE == 'DISTINCT') {
     $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code.unique()"; 
@@ -134,16 +147,20 @@ if (FORMAT == 'TEXT') {
         if (STYLE == 'COUNTED') {
             $text .= "$k => $v\n";
         } else {
-            $text .= "$v\n";
+            $text .= join(', ', $v)."\n";
         }
     }
     
 } elseif (FORMAT == 'JSON') {
-    $text .= json_encode($return);
+    $text = json_encode($return);
 } elseif (FORMAT == 'CSV') {
-    $text = array();
+    $text = array(array('Code', 'File', 'Namespace', 'Class', 'Function'));
     foreach($return as $k => $v) {
-        $text[] = array($k, $v);
+        if (is_array($v)) {
+            $text[] = $v;
+        } else {
+            $text[] = array($k, $v);
+        }
     }
 } elseif (FORMAT == 'MARKDOWN' || FORMAT == 'HTML' || FORMAT == 'ODT') {
     $text = '';
@@ -151,7 +168,12 @@ if (FORMAT == 'TEXT') {
         if (STYLE == 'COUNTED') {
             $text .= "+ $k => $r\n";
         } else {
-            $text .= "+ $r\n";
+            $text .= "+ $k\n";
+            if (is_array($r)) {
+                $text .= "  + ".join("\n  + ", $r)."\n";
+            } else {
+                $text .= "+ $r\n";
+            }
         }
     }
 } else {
@@ -199,163 +221,22 @@ if (FILE) {
     }
 }
 
-die();
-
-//print count($vertices)." vertices found\n";
-
-$V = array();
-foreach($vertices as $v) {
-    $x = $v[0]->getId();
-    $V[$x] =  $v[0]->getProperties();
-    
-    if (isset($V[$x]['root'])) {
-        $root = $v[0]->getId();
-    }
-}
-
-//$queryTemplate = "g.E";
-$queryTemplate .= ".outE()";
-$params = array('type' => 'IN');
-$query = new Gremlin\Query($client, $queryTemplate, $params);
-$edges = $query->getResultSet();
-
-$E = array();
-foreach($edges as $e) {
-    $id = $e[0]->getStartNode()->getId();
-    
-    if (!isset($E[$id])) {
-        $E[$id] = array();
-    }
-    
-    if(isset($E[$id][$e[0]->getEndNode()->getId()])) {
-        $E[$id][$e[0]->getEndNode()->getId()] .= ', '.$e[0]->getType();
-    } else {
-        $E[$id][$e[0]->getEndNode()->getId()] = $e[0]->getType();
-    }
-}
-
-if (!isset($root)) {
-    print "No root! Check the tree in Neo4j\n Aborting\n";
-    print number_format(memory_get_usage() / 1024 / 1024, 0)." Mo\n";
-    
-    die();
-}
-
-if (FORMAT == 'DOT') {
-    $text = display_dot($V, $E, $root);
-} elseif (FORMAT == 'TABLE') {
-    $text = display_table($V, $E, $root);
-} else {
-    $text = display_text($V, $E, $root);
-}
-
-function display_text($V, $E, $root, $level = 0) {
-    $r = '';
-    
-    $r .= str_repeat('  ', $level).$V[$root]['code']."\n";
-    if (isset($E[$root])) {
-        foreach($E[$root] as $id => $label) {
-            $r .= str_repeat('  ', $level)."Label : $label\n".display_text($V, $E, $id, $level + 1);
-        }
-    }
-    
-    return $r;
-}
-
-function display_dot($V, $E, $root, $level = 0) {
-    $r = '';
-
-    foreach($V as $id => $v) {
-        if (!isset($v['code'])) {
-            $v['code'] =  'NO CODE PROVIDED';
-        }
-         $R = $id." [label=\"".addslashes($v['code'])."\"";
-         if (isset($v['atom'])) {
-            $R .= " shape=box ";
-         }
-         $R .= "];\n";
-         
-         $r .= $R;
-    }
-
-    foreach($E as $start => $e) {
-        foreach($e as $end => $label) {
-            if ($label == 'NEXT') {
-                $r .= "$start -> $end [label=\"$label\"  color=green];\n";
-            } else {
-                $r .= "$start -> $end [label=\"$label\"];\n";
-            }
-        }
-    }
-
-    $r = " digraph graphname {
-$r
- }";
-    
-    return $r;
-}
-
-function display_table($V, $E, $root, $level = 0) {
-    $r = '<table>';
-    
-    foreach($V as $id => $v) {
-        $row = array();
-        $row[] = highlight_string($v['code'], true);
-        if (isset($v['atom'])) { 
-            $row[] = $v['atom'];
-        } else {
-            $row[] = 'No atom';
-        }
-        if (isset($v['token'])) { 
-            $row[] = $v['token'];
-        } else {
-            $row[] = 'No token';
-        }
-        if (isset($v['file'])) { 
-            $row[] = $v['file'];
-        } else {
-            $row[] = 'No file';
-        }
-        if (isset($v['order'])) { 
-            $row[] = $v['order'];
-        } else {
-            $row[] = '';
-        }
+function query($client, $query) {
+    $queryTemplate = $query;
+    $params = array('type' => 'IN');
+    try {
+        $query = new \Everyman\Neo4j\Gremlin\Query($client, $queryTemplate, $params);
+        return $query->getResultSet();
+    } catch (\Exception $e) {
+        $message = $e->getMessage();
+        $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
+        print "Exception : ".$message."\n";
         
-
-        $row = "<td>".join("</td><td>", $row)."</td>";
-        $r .= "<tr>$row</tr>\n";
+        print $queryTemplate."\n";
+        die();
     }
-    $r .= "</table>";
-    
-    return $r;
+    return $query->getResultSet();
 }
-
-
-if (OUTPUT) {
-    $fp = fopen(OUTPUT, 'w+');
-    fwrite($fp, $text);
-    fclose($fp);
-} else {
-    print $text;
-}
-
-    function query($client, $query) {
-    	$queryTemplate = $query;
-    	$params = array('type' => 'IN');
-    	try {
-    	    $query = new \Everyman\Neo4j\Gremlin\Query($client, $queryTemplate, $params);
-        	return $query->getResultSet();
-    	} catch (\Exception $e) {
-    	    $message = $e->getMessage();
-    	    $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-    	    print "Exception : ".$message."\n";
-    	    
-    	    print $queryTemplate."\n";
-    	    die();
-    	}
-    	return $query->getResultSet();
-    }
 
 
 ?>
