@@ -1,0 +1,154 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token,
+	Michelf\Markdown;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$client = new Client();
+
+$args = $argv;
+if ($id = array_search('-json', $args)) {
+    define('FORMAT', 'DOT');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-text', $args)) {
+    define('FORMAT', 'TEXT');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-odt', $args)) {
+    define('FORMAT', 'ODT');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-markdown', $args)) {
+    define('FORMAT', 'MARKDOWN');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-csv', $args)) {
+    define('FORMAT', 'CSV');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-html', $args)) {
+    define('FORMAT', 'HTML');
+    unset($args[$id]);
+    $args = array_values($args);
+} else {
+    define('FORMAT', 'TEXT');
+}
+
+if ($id = array_search('-o', $args)) {
+    define('OUTPUT', false);
+} else {
+    define('OUTPUT', true);
+}
+
+if ($id = array_search('-f', $args)) {
+    define('FILE', $args[$id + 1]);
+} else {
+    define('FILE', false);
+}
+
+$queryTemplate = "g.V.has('index', 'true')"; 
+$vertices = query($client, $queryTemplate);
+
+$return = array();
+foreach($vertices as $k => $v) {
+    $return[] = $v[0]->analyzer;
+}
+
+if (FORMAT == 'TEXT') {
+    $text = count($return)." analyzers found\n\n";
+    foreach($return as $k => $v) {
+        $v = str_replace('Analyzer\\', '', $v);
+        $v = str_replace('\\', '_', $v);
+        $text .= "+ $v\n";
+    }
+    $text .= "\n";
+    
+} elseif (FORMAT == 'JSON') {
+    $text .= json_encode($return);
+} elseif (FORMAT == 'CSV') {
+    $text = array();
+    foreach($return as $k => $v) {
+        $text[] = array($k, $v);
+    }
+} elseif (FORMAT == 'MARKDOWN' || FORMAT == 'HTML' || FORMAT == 'ODT') {
+    $text = '';
+    foreach($return as $k => $r) {
+        if (STYLE == 'COUNTED') {
+            $text .= "+ $k => $r\n";
+        } else {
+            $text .= "+ $r\n";
+        }
+    }
+} else {
+// default behavior
+    print_r($return);
+}
+
+if (FORMAT == 'HTML'|| FORMAT == 'ODT') {
+    $text = Markdown::defaultTransform($text);
+}
+
+if (OUTPUT) {
+    print $text;
+}
+
+$extensions = array('JSON' => 'json',
+                    'HTML' => 'html',
+                    'MARKDOWN' => 'md',
+                    'ODT' => 'odt',
+                    'TEXT' => 'txt',
+                    'CSV' => 'csv');
+
+if (FILE) {
+    $name = FILE.'.'.$extensions[FORMAT];
+    if (file_exists($name)) {
+        print "$name already exists. Aborting\n";
+        die();
+    }
+
+    if (FORMAT == 'ODT') {
+        $name1 = FILE.'.'.$extensions['HTML'];
+        file_put_contents($name1, $text);
+
+        $name = FILE.'.'.$extensions[FORMAT];
+        shell_exec('pandoc -o '.$name.' '.$name1);
+        unlink($name1);
+    } elseif (FORMAT == 'CSV') {
+        $fp = fopen($name, 'w');
+        foreach($text as $t) {
+            fputcsv($fp, $t);
+        }
+        fclose($fp);
+    } else {
+        file_put_contents($name, $text);
+    }
+}
+
+
+    function query($client, $query) {
+    	$queryTemplate = $query;
+    	$params = array('type' => 'IN');
+    	try {
+    	    $query = new \Everyman\Neo4j\Gremlin\Query($client, $queryTemplate, $params);
+        	return $query->getResultSet();
+    	} catch (\Exception $e) {
+    	    $message = $e->getMessage();
+    	    $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
+    	    print "Exception : ".$message."\n";
+    	    
+    	    print $queryTemplate."\n";
+    	    die();
+    	}
+    	return $query->getResultSet();
+    }
+
+
+?>
