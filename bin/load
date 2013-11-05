@@ -6,7 +6,7 @@ use Loader\Csv, Everyman\Neo4j\Client,
 	Everyman\Neo4j\Relationship,
 	Everyman\Neo4j\Node,
 	Everyman\Neo4j\Gremlin,
-	
+	Loader\Environnement,
 	Loader\Neo4jphp;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
@@ -97,14 +97,12 @@ function process_file($filename, $log_file) {
         }
     }
     
-//    $php = file_get_contents($filename);
     $fp = fopen($filename, 'r');
     if (filesize($filename) == 0) {
         return false;
     }
     $php = fread($fp, filesize($filename));
     fclose($fp);
-//    print mb_detect_encoding($php)."\n";
     
     $file = realpath($filename);
     $tokens = token_get_all($php);
@@ -114,32 +112,47 @@ function process_file($filename, $log_file) {
     $client = new $_PILOT();
 
     // @doc delete old tokens
+    // This index should be only created once. It will hold all the index for files.
+    $regexIndex['FILE'] = $client->makeNode()->setProperty('token', 'FILE')
+                                             ->setProperty('code', 'Index for FILE')
+                                             ->setProperty('index', 'true')
+                                             ->save();
+    $regexIndex['CLASS'] = $client->makeNode()->setProperty('token', 'CLASS')
+                                             ->setProperty('code', 'Index for CLASS')
+                                             ->setProperty('index', 'true')
+                                             ->save();
 
-//    $racines = new NodeIndex($client, 'racines');
+/*
+    $fileNode = $client->makeNode()->setProperty('token', 'E_FILE')
+                                   ->setProperty('code', 'Index for file '.$file)
+                                   ->setProperty('file', $file)
+                                   ->save();
+    $fileNode->relateTo($regexIndex['FILE'], 'INDEX')->save();
+*/
+    $classNode = new Environnement($client, $file); 
+    $classNode->init($regexIndex['CLASS']);
+
     $regex = Tokenizer\Token::$types; 
     $regexIndex = array();
     foreach($regex as $r) {
         $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
                                              ->setProperty('code', 'Index for '.$r)
-                                             ->setProperty('file', $file)
                                              ->setProperty('index', 'true')
                                              ->save();
-//        $racines->add($regexIndex[$r], 'token', $r);
+//        $fileNode->relateTo($regexIndex[$r], 'FILE')->save();
     }
     
     $regexIndex['DELETE'] = $client->makeNode()->setProperty('token', 'DELETE')
                                                ->setProperty('code', 'Index for DELETE')
-                                               ->setProperty('file', $file)
                                                ->setProperty('index', 'true')
                                                ->save();
-//    $racines->add($regexIndex['DELETE'], 'token', 'DELETE');
+//    $fileNode->relateTo($regexIndex['DELETE'], 'FILE')->save();
 
     $regexIndex['ROOT'] = $client->makeNode()->setProperty('token', 'ROOT')
                                              ->setProperty('code', 'Index for ROOT')
-                                             ->setProperty('file', $file)
                                              ->setProperty('index', 'true')
                                              ->save();
-//    $racines->add($regexIndex['ROOT'], 'token', 'ROOT');
+//    $fileNode->relateTo($regexIndex['ROOT'], 'FILE')->save();
 
     // load new tokens
     $line = 0;
@@ -218,12 +231,15 @@ function process_file($filename, $log_file) {
         $token = $tokens[$id];
         $to_index = true;
         
+        $classNode->process($token);
         if (is_array($token)) {
             if (token_name($token[0]) == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
                                               ->setProperty('code', $token[1])
-                                              ->setProperty('line', $token[2])
-                                              ->setProperty('file', $file)->save();
+                                              ->setProperty('line', $token[2])->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
+
                 $previous->relateTo($T[$Tid], 'NEXT')->save();
                 $regexIndex["_Break"]->relateTo($T[$Tid], 'INDEXED')->save();
                 $previous = $T[$Tid];
@@ -232,15 +248,19 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_LNUMBER')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
                                               ->setProperty('atom', 'Void')->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $to_index = false;
             } elseif (token_name($token[0]) == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])
-                                              ->setProperty('file', $file)->save();
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
+
                 if (isset($previous)) {
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                 }
@@ -251,8 +271,10 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
-                                              ->setProperty('atom', 'Void')->save();
+                                              ->setProperty('atom', 'Void')
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $to_index = false;
             } elseif (token_name($token[0]) == 'T_CLOSE_TAG' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  && token_name($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
@@ -261,10 +283,11 @@ function process_file($filename, $log_file) {
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
                                               ->setProperty('code', $token[1])
-                                              ->setProperty('line', $token[2])
-                                              ->setProperty('file', $file);
+                                              ->setProperty('line', $token[2]);
             }
             $T[$Tid]->save();
+//            $fileNode->relateTo($T[$Tid], 'FILE')->save();
+            $classNode->relateTo($T[$Tid]);
             
             if (token_name($token[0]) == 'T_STRING' && (strtolower($token[1]) == 'true' || strtolower($token[1]) == 'false')) {
                 $T[$Tid]->setProperty('atom', 'Boolean')->save();
@@ -299,23 +322,32 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
-                                              ->setProperty('atom', 'Block')->save();
+                                              ->setProperty('atom', 'Block')
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $void   = $client->makeNode()->setProperty('token', 'T_VOID')
                                              ->setProperty('code', 'void')
                                              ->setProperty('line', $line)
-                                             ->setProperty('file', $file)
-                                             ->setProperty('atom', 'Void')->save();
+                                             ->setProperty('atom', 'Void')
+                                             ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $T[$Tid]->relateTo($void, 'CODE')->save();
+
+                $classNode->process($tokens[$id + 1]);
                 unset($tokens[$id + 1]);
                 $to_index = false;
             } elseif ($token == '(' && $tokens[$id + 1] == ')') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)->save();
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
+
                 $previous->relateTo($T[$Tid], 'NEXT')->save();
                 $previous = $T[$Tid];
                 
@@ -323,15 +355,20 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
-                                              ->setProperty('atom', 'Arguments')->save();
+                                              ->setProperty('atom', 'Arguments')
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $to_index = false;
             } elseif ($token == '{' && $tokens[$id + 1] == ';') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)->save();
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
+
                 $previous->relateTo($T[$Tid], 'NEXT')->save();
                 $previous = $T[$Tid];
                 $regexIndex["Block"]->relateTo($T[$Tid], 'INDEXED')->save();                
@@ -340,15 +377,20 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
-                                              ->setProperty('atom', 'Void')->save();
+                                              ->setProperty('atom', 'Void')
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $to_index = false;
             } elseif ($token == '(' && $tokens[$id + 1] == ',') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)->save();
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
+
                 $previous->relateTo($T[$Tid], 'NEXT')->save();
                 $previous = $T[$Tid];
                 
@@ -356,16 +398,20 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
                                               ->setProperty('modifiedBy', 'load')
-                                              ->setProperty('atom', 'Void')->save();
+                                              ->setProperty('atom', 'Void')
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $to_index = false;
             } elseif ($token == ',' && $tokens[$id + 1] == ')') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)->save();
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+
                 $previous->relateTo($T[$Tid], 'NEXT')->save();
                 $regexIndex["Arguments"]->relateTo($T[$Tid], 'INDEXED')->save();              
                 $previous = $T[$Tid];
@@ -374,16 +420,21 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
                                               ->setProperty('modifiedBy', 'load')
-                                              ->setProperty('atom', 'Void')->save();
+                                              ->setProperty('atom', 'Void')
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $to_index = false;
             } elseif ($token == ',' && $tokens[$id + 1] == ',') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)->save();
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
+
                 $previous->relateTo($T[$Tid], 'NEXT')->save();
                 $regexIndex["Arguments"]->relateTo($T[$Tid], 'INDEXED')->save();              
                 $previous = $T[$Tid];
@@ -392,41 +443,53 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
                                               ->setProperty('modifiedBy', 'load')
-                                              ->setProperty('atom', 'Void')->save();
+                                              ->setProperty('atom', 'Void')
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $to_index = false;
             } elseif ($token == '{' && $tokens[$id + 1] == ';' && $tokens[$id + 2] == '}' ) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)
-                                              ->setProperty('atom', 'Block')->save();
+                                              ->setProperty('atom', 'Block')
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $void   = $client->makeNode()->setProperty('token', 'T_VOID')
                                              ->setProperty('code', 'void')
                                              ->setProperty('line', $line)
-                                             ->setProperty('file', $file)
-                                             ->setProperty('atom', 'Void')->save();
+                                             ->setProperty('atom', 'Void')
+                                             ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $sequence = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                ->setProperty('code', ';')
                                                ->setProperty('line', $line)
-                                               ->setProperty('file', $file)
-                                               ->setProperty('atom', 'Sequence')->save();
+                                               ->setProperty('atom', 'Sequence')
+                                               ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
 
                 $T[$Tid]->relateTo($sequence, 'CODE')->save();
                 $sequence->relateTo($void, 'CODE')->save();
 
                 unset($tokens[$id + 1]);
+                $classNode->process($tokens[$id + 1]);
                 unset($tokens[$id + 2]);
+                $classNode->process($tokens[$id + 2]);
                 $to_index = false;
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
-                                              ->setProperty('file', $file)->save();
+                                              ->save();
+//                $fileNode->relateTo($T[$Tid], 'FILE')->save();
+                $classNode->relateTo($T[$Tid]);
             }
     
             $T[$Tid]->save();
@@ -480,27 +543,28 @@ function process_file($filename, $log_file) {
     $T[-1] = $client->makeNode()->setProperty('token', 'T_ROOT')
                                 ->setProperty('code', '/**/')
                                 ->setProperty('line', 0)
-                                ->setProperty('file', $file)
                                 ->setProperty('hidden', true)
                                 ->save();
     $regexIndex['ROOT']->relateTo($T[-1], 'INDEXED')->save();
+//    $fileNode->relateTo($T[-1], 'FILE')->save();
     
     $last     = $client->makeNode()->setProperty('token', 'T_END')
                                    ->setProperty('code', '/**/')
                                    ->setProperty('line', $line)
-                                   ->setProperty('file', $file)
                                    ->setProperty('hidden', true)
                                    ->save();
-                                   
+//    $fileNode->relateTo($last, 'FILE')->save();
+
     $T[-1]->relateTo($T[0], 'NEXT')->setProperty('__FILE__', true)->save();
     $previous->relateTo($last, 'NEXT')->setProperty('__FILE__', true)->save();
     
     $last2     = $client->makeNode()->setProperty('token', 'T_END')
                                     ->setProperty('code', '/* * */')
                                     ->setProperty('line', $line)
-                                    ->setProperty('file', $file)
                                     ->setProperty('hidden', true)
                                     ->save();
+//    $fileNode->relateTo($last, 'FILE')->save();
+
     $last->relateTo($last2, 'NEXT')->setProperty('__FILE__', true)->save();
 
     $client->save_chunk();
