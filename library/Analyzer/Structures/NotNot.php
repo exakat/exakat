@@ -11,6 +11,13 @@ class NotNot extends Analyzer\Analyzer {
              ->out('NOT')
              ->atomIs('Not');
         $this->prepareQuery();
+
+        $this->atomIs("Not")
+             ->out('NOT')
+             ->atomIs('Parenthesis')
+             ->out('CODE')
+             ->atomIs('Not');
+        $this->prepareQuery();
     }
 }
 

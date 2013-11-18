@@ -23,7 +23,6 @@ class Used extends Analyzer\Analyzer {
              ->out('ANALYZED')
              ->back('result');
 
-//        $this->printQuery();
         $this->prepareQuery();
     }
 }
