@@ -29,7 +29,6 @@ class StrposCompare extends Analyzer\Analyzer {
              ->back('result');
         $this->prepareQuery();
 
-
         $this->atomIs("Functioncall")
              ->_as('result')
              ->code('strpos')

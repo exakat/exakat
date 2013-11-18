@@ -10,5 +10,6 @@ class Classes_PropertyDefinition extends Analyzer {
     /* 1 methods */
 
     public function testClasses_PropertyDefinition01()  { $this->generic_test('Classes_PropertyDefinition.01'); }
+    public function testClasses_PropertyDefinition02()  { $this->generic_test('Classes_PropertyDefinition.02'); }
 }
 ?>
