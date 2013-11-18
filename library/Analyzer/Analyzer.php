@@ -65,6 +65,18 @@ GREMLIN;
     	}
     	return $query->getResultSet();
     }
+
+    function _as($name) {
+        $this->methods[] = 'as("'.$name.'")';
+        
+        return $this;
+    }
+
+    function back($name) {
+        $this->methods[] = 'back("'.$name.'")';
+        
+        return $this;
+    }
     
     function atomIs($atom) {
         if (is_array($atom)) {
@@ -105,6 +117,19 @@ GREMLIN;
         }
     }
 
+    function code($code) {
+        if (is_array($code)) {
+            // @todo
+            foreach($code as $k => $v) { $code[$k] = strtolower($v); }
+            $this->methods[] = "filter{it.code.toLowerCase() in ['".join("', '", $code)."']}";
+        } else {
+            $code = strtolower($code);
+            $this->methods[] = "filter{it.code.toLowerCase() == '$code'}";
+        }
+        
+        return $this;
+    }
+
     function out($edge_name) {
         if (is_array($edge_name)) {
             // @todo
@@ -119,7 +144,7 @@ GREMLIN;
     function in($edge_name) {
         if (is_array($edge_name)) {
             // @todo
-            die(" I don't understand arrays in out()");
+            $this->methods[] = "inE.filter{it.label in ['".join("', '", $edge_name)."']}.outV";
         } else {
             $this->methods[] = "in('$edge_name')";
         }
