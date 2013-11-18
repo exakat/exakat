@@ -1,29 +1,28 @@
 <?php
 
+$before = 1;
+
 class a {
-    public    $p1;
-    private   $p2;
-    protected $p3;
-    
-    static $p4;
-    static $p10 = 1;
-    
-    var $p5;
-    
-    public    $p6 = 2;
+    var              $p1;
+    public           $p2;
+    protected        $p3;
+    private          $p4;
+    public    static $p5;
+    protected static $p6;
+    private   static $p7;
 
-    public static $p7 = 2;
-    private static $p8 = 2;
-    protected static $p9 = 2;
-
-    function method() {}
+    var              $p11 = 1;
+    public           $p12 = 2;
+    protected        $p13 = 3;
+    private          $p14 = 4;
+    public    static $p15 = 5;
+    protected static $p16 = 6;
+    private   static $p17 = 7;
     
+
     private function method_private() {}
 }
 
-$v1 = 1;
-$$v2 = 2;
-
-new static(1);
+$after = 2;
 
 ?>

@@ -7,11 +7,14 @@ use Everyman\Neo4j\Client,
 
 class Analyzer {
     private $client = null;
+    protected $code = null;
     
     function __construct($client) {
         $this->client = $client;
         $this->methods = array();
         $this->queries = array();
+        
+        $this->code = get_class($this);
 
         $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
         if ($result[0][0] == 'false') {
@@ -33,10 +36,16 @@ GREMLIN;
             $this->query($query);
         } else {
             print "new $analyzer\n";
+            $this->code = addslashes($this->code);
             $query = <<<GREMLIN
-x = g.addVertex(null, [analyzer:'$analyzer', index:'true', code:'Analyzer index for $analyzer']);
+x = g.addVertex(null, [analyzer:'$analyzer', index:'true', description:'Analyzer index for $analyzer', code:'{$this->code}', atom:'Index', token:'T_INDEX']);
 
 g.idx('analyzers').put('analyzer', '$analyzer', x);
+
+g.V.has('token', 'E_CLASS')[0].each{     g.addEdge(it, x, 'CLASS'); }
+g.V.has('token', 'E_FUNCTION')[0].each{     g.addEdge(it, x, 'FUNCTION'); }
+g.V.has('token', 'E_NAMESPACE')[0].each{     g.addEdge(it, x, 'NAMESPACE'); }
+g.V.has('token', 'E_FILE')[0].each{     g.addEdge(it, x, 'FILE'); }
 
 GREMLIN;
             $this->query($query);
@@ -109,12 +118,24 @@ GREMLIN;
         return $this;
     }
 
+    function analyzerIs($analyzer) {
+        if (is_array($analyzer)) {
+            $this->methods[] = 'filter{ it.analyzer in [\''.join("', '", $analyzer).'\'])}.count() != 0}';
+        } else {
+            $this->methods[] = 'has("analyzer", \''.$analyzer.'\')';
+        }
+        
+        return $this;
+    }
+
     function analyzerIsNot($analyzer) {
         if (is_array($analyzer)) {
             $this->methods[] = 'filter{ it.in("ANALYZED").filter{ not (it.analyzer in [\''.join("', '", $atom).'\'])}.count() == 0}';
         } else {
             $this->methods[] = 'filter{ it.in("ANALYZED").has("analyzer", \''.$analyzer.'\').count() == 0}';
         }
+
+        return $this;
     }
 
     function code($code) {
