@@ -19,7 +19,13 @@ class Autoload {
     static public function autoload_test($name) {
         $path = dirname(__DIR__);
         
-        $file = $path.'/tests/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
+        $file = $path.'/tests/analyzer/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
+        
+        if (file_exists($file)) {
+            include($file);
+        } 
+
+        $file = $path.'/tests/tokenizer/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
         
         if (file_exists($file)) {
             include($file);

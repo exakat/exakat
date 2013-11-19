@@ -4,7 +4,7 @@ namespace Test;
 
 class Analyzer extends \PHPUnit_Framework_TestCase {
     function setUp() {
-        shell_exec("cd ../; php bin/delete -all");
+        shell_exec("cd ../..; php bin/delete -all");
     }
 
     function tearDown() {
@@ -14,9 +14,9 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
     function generic_test($file) {
         list($analyzer, $number) = explode('.', $file);
         
-        $shell = 'cd ..; php bin/load -f tests/source/'.$file.'.php; php bin/tokenizer; php bin/analyze;';
+        $shell = 'cd ../..; php bin/load -f tests/analyzer/source/'.$file.'.php; php bin/tokenizer; php bin/analyze;';
         $res = shell_exec($shell);
-        $shell = 'cd ..; php bin/export_analyzer '.$analyzer.' -o -json';
+        $shell = 'cd ../..; php bin/export_analyzer '.$analyzer.' -o -json';
         $res = json_decode(shell_exec($shell));
         $this->assertNotEmpty($res, 'No values were read from the analyzer' );
 
