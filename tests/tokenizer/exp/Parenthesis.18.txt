@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    require
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        .
+        Label : CONCAT
+          (
+          Label : CODE
+            ?
+            Label : CONDITION
+              !==
+              Label : RIGHT
+                'c'
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  b
+            Label : THEN
+              .
+              Label : CONCAT
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  e
+              Label : CONCAT
+                F
+            Label : ELSE
+              'g'
+        Label : CONCAT
+          $h
