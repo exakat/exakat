@@ -1,0 +1,60 @@
+<?php
+
+$args = $argv;
+
+$dir = $args[1];
+//$dir = "./tests/library/Spoon";
+$files = glob_recursive($dir."/");
+
+$stats = array();
+$unknown = array();
+
+$exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl',  ),
+              'images' => array('jpg', 'gif', 'ico', 'png', 'svg', 'eps', 'psd', ),
+              'media' => array('ttf', 'swf',  ),
+              'text' => array('ini', 'xml', 'wsdl', 'txt', 'rst', 'md', 'markdown', ),
+              'web' => array('html', 'htm', 'css', 'js', 'json', 'less', ),
+              'document' => array('doc', 'xls'),
+              'archives' => array('tgz', 'bz2' ,'z', 'zip', 'gz', ),
+              'audio' => array('mp3',),
+              'data' => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install', ),
+              'prog' => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt',),
+             );
+             
+
+foreach($files as $file) { 
+    if (is_dir($file)) { continue; }
+
+    $found = false;
+    foreach($exts as $e => $ext) {
+        if (preg_match('#\.('.join('|', $ext).')$#', $file)) {
+            @$stats[$e]++;
+            $found = true;
+            break 1;
+        }
+    }
+    
+    if (!$found) {  
+        @$stats['unknown']++; 
+        $unknown[] = basename($file);
+    }
+}
+
+print_r($stats);
+print_r($unknown);
+
+function glob_recursive($dir, $prefix = '') {
+  $dir = rtrim($dir, '\\/');
+  $result = array();
+
+    foreach (glob("$dir/*", GLOB_MARK) as $f) {
+      if (substr($f, -1) === '/') {
+        $result = array_merge($result, glob_recursive($f, $prefix.basename($f).'/'));
+      } else {
+        $result[] = $f;
+      }
+    }
+
+  return $result;
+}
+?>
