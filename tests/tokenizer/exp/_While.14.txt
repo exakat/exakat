@@ -13,19 +13,17 @@ Label : CODE
     Label : LOOP
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          ?
-          Label : CONDITION
-            $a
-          Label : THEN
-            $b
-          Label : ELSE
-            $c
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $x
+        ++
+        Label : POSTPLUSPLUS
+          $x
+      Label : ELEMENT
+        ?
+        Label : CONDITION
+          $a
+        Label : THEN
+          $b
+        Label : ELSE
+          $c
   Label : ELEMENT
     =
     Label : RIGHT

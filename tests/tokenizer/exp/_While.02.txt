@@ -1,10 +1,24 @@
 <?php
 
 Label : CODE
-  while
-  Label : LOOP
+  ;
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      <
+      Label : RIGHT
+        10
+      Label : LEFT
+        $a
+    Label : LOOP
+      Block With While
+      Label : CODE
+        void
+  Label : ELEMENT
     {
     Label : CODE
-      void
-  Label : CONDITION
-    1
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a

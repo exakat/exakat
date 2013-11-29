@@ -4,15 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     while
-    Label : LOOP
-      {
-      Label : CODE
-        void
     Label : CONDITION
       1
+    Label : LOOP
+      Block With While
+      Label : CODE
+        =
+        Label : RIGHT
+          2
+        Label : LEFT
+          $x
   Label : ELEMENT
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      $x
+    {
+    Label : CODE
+      void

@@ -19,9 +19,9 @@ Label : CODE
           Label : ARGUMENTS
             ,
             Label : ARGUMENT
-              1
-            Label : ARGUMENT
               $b
+            Label : ARGUMENT
+              1
         Label : LEFT
           $a
   Label : LOOP

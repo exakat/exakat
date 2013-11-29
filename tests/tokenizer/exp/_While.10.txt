@@ -13,17 +13,15 @@ Label : CODE
     Label : LOOP
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
             $i
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $i
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $i
   Label : ELEMENT
     =
     Label : RIGHT

@@ -3,6 +3,14 @@
 Label : CODE
   ;
   Label : ELEMENT
+    while
+    Label : CONDITION
+      1
+    Label : LOOP
+      {
+      Label : CODE
+        void
+  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -10,10 +18,10 @@ Label : CODE
         -
         Label : RIGHT
           [
-          Label : VARIABLE
-            $r
           Label : INDEX
             $s
+          Label : VARIABLE
+            $r
         Label : LEFT
           +
           Label : RIGHT
@@ -27,14 +35,6 @@ Label : CODE
             Label : LEFT
               1
     Label : THEN
-      {
-      Label : CODE
-        void
-  Label : ELEMENT
-    while
-    Label : CONDITION
-      1
-    Label : LOOP
       {
       Label : CODE
         void

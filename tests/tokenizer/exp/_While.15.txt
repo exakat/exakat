@@ -13,15 +13,13 @@ Label : CODE
     Label : LOOP
       ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          ++
-          Label : PREPLUSPLUS
-            $a
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $x
+        ++
+        Label : POSTPLUSPLUS
+          $x
+      Label : ELEMENT
+        ++
+        Label : PREPLUSPLUS
+          $a
   Label : ELEMENT
     =
     Label : RIGHT

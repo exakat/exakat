@@ -11,15 +11,13 @@ Label : CODE
       Label : LEFT
         $i
     Label : LOOP
-      ;
-      Label : ELEMENT
-        ?
-        Label : CONDITION
-          $a
-        Label : THEN
-          $b
-        Label : ELSE
-          $c
+      ?
+      Label : CONDITION
+        $a
+      Label : THEN
+        $b
+      Label : ELSE
+        $c
   Label : ELEMENT
     =
     Label : RIGHT

@@ -3,53 +3,25 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        &&
-        Label : RIGHT
-          !=
-          Label : RIGHT
-            5
-          Label : LEFT
-            substr
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                4
-              Label : ARGUMENT
-                3
-              Label : ARGUMENT
-                $b
-        Label : LEFT
-          !=
-          Label : RIGHT
-            2
-          Label : LEFT
-            substr
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                1
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                $a
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            false
-  Label : ELEMENT
     while
+    Label : CONDITION
+      1
     Label : LOOP
       {
       Label : CODE
         ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            h
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                $g
+              Label : ARGUMENT
+                8
+          Label : LEFT
+            $f
         Label : ELEMENT
           if
           Label : CONDITION
@@ -71,11 +43,11 @@ Label : CODE
                   Label : ARGUMENTS
                     ,
                     Label : ARGUMENT
-                      7
-                    Label : ARGUMENT
                       6
                     Label : ARGUMENT
                       $c
+                    Label : ARGUMENT
+                      7
           Label : THEN
             {
             Label : CODE
@@ -84,17 +56,45 @@ Label : CODE
                 break
                 Label : LEVEL
                   void
-        Label : ELEMENT
-          =
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        &&
+        Label : RIGHT
+          !=
           Label : RIGHT
-            h
+            5
+          Label : LEFT
+            substr
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                8
+                3
               Label : ARGUMENT
-                $g
+                $b
+              Label : ARGUMENT
+                4
+        Label : LEFT
+          !=
+          Label : RIGHT
+            2
           Label : LEFT
-            $f
-    Label : CONDITION
-      1
+            substr
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                $a
+              Label : ARGUMENT
+                1
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            false

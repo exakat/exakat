@@ -2,17 +2,21 @@
 
 Label : CODE
   while
+  Label : CONDITION
+    1
   Label : LOOP
     {
     Label : CODE
       ;
       Label : ELEMENT
         while
-        Label : LOOP
-          {
-          Label : CODE
-            void
         Label : CONDITION
           1
-  Label : CONDITION
-    1
+        Label : LOOP
+          Block With While
+          Label : CODE
+            void
+      Label : ELEMENT
+        {
+        Label : CODE
+          void

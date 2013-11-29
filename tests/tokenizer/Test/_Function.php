@@ -2,12 +2,12 @@
 
 namespace Test;
 
-include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
+include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Function extends Tokenizer {
-    /* 45 methods */
+    /* 46 methods */
 
     public function test_Function01()  { $this->generic_test('_Function.01'); }
     public function test_Function02()  { $this->generic_test('_Function.02'); }
@@ -54,5 +54,6 @@ class _Function extends Tokenizer {
     public function test_Function43()  { $this->generic_test('_Function.43'); }
     public function test_Function44()  { $this->generic_test('_Function.44'); }
     public function test_Function45()  { $this->generic_test('_Function.45'); }
+    public function test_Function46()  { $this->generic_test('_Function.46'); }
 }
 ?>

@@ -3,32 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'a'
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            'b'
-    Label : THEN
-      {
-      Label : CODE
-        void
-    Label : ELSE
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $t
-  Label : ELEMENT
     while
     Label : CONDITION
       =
@@ -49,16 +23,6 @@ Label : CODE
           Label : CONDITION
             (
             Label : CODE
-              $d
-          Label : THEN
-            {
-            Label : CODE
-              void
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
               $s
           Label : THEN
             {
@@ -68,3 +32,39 @@ Label : CODE
             {
             Label : CODE
               void
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              $d
+          Label : THEN
+            {
+            Label : CODE
+              void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          'a'
+        Label : LEFT
+          [
+          Label : INDEX
+            'b'
+          Label : VARIABLE
+            $c
+    Label : THEN
+      {
+      Label : CODE
+        void
+    Label : ELSE
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $t
