@@ -6,6 +6,7 @@ class _Dowhile extends TokenAuto {
     static public $operators = array('T_DO');
 
     function _check() {
+        // do ; while()
         $this->conditions = array( 0 => array('token' => _Dowhile::$operators),
                                    1 => array('atom'  => 'yes'),
                                    2 => array('token'  => 'T_SEMICOLON'),
@@ -26,6 +27,7 @@ class _Dowhile extends TokenAuto {
                                'cleanIndex' => true);
         $this->checkAuto();
 
+        // do { block } while()
         $this->conditions = array( 0 => array('token' => _Dowhile::$operators),
                                    1 => array('atom'  => 'Block'),
                                    2 => array('token' => 'T_WHILE'),

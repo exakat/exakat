@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class FunctioncallArray extends TokenAuto {
-    static $operators = array();
+    static public $operators = array('S_ARRAY');
 
     function _check() {
         
@@ -20,6 +20,7 @@ class FunctioncallArray extends TokenAuto {
                                                       2 => 'ARGUMENTS',
                                                       3 => 'DROP'),
                                'atom'        => 'Functioncall' );
+//        $this->printQuery();
         $this->checkAuto();
         
         return $this->checkRemaining();

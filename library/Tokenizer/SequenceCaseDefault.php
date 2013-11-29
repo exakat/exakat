@@ -3,6 +3,7 @@
 namespace Tokenizer;
 
 class SequenceCaseDefault extends TokenAuto {
+    static public $operators = array('T_SWITCH');
     // @todo set up a new index for storing those and speed up the localisation
     
     function _check() {

@@ -18,6 +18,22 @@ class _Throw extends TokenAuto {
                                'cleanIndex' => true);
                                
         $this->checkAuto();
+
+        $this->conditions = array(0 => array('token'     => _Throw::$operators,
+                                             'atom'      => 'none'),
+                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  2 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall', 
+                                                                  'Staticmethodcall', 'Staticproperty', 'String')),
+                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                  );
+        
+        $this->actions = array('transform'  => array( 1 => 'DROP',
+                                                      2 => 'THROW',
+                                                      3 => 'DROP',),
+                               'atom'       => 'Throw',
+                               'cleanIndex' => true);
+                               
+        $this->checkAuto();
         
         return $this->checkRemaining();
     }

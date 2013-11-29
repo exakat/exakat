@@ -27,8 +27,8 @@ class _Global extends TokenAuto {
                                    2 => array('filterOut' => array('T_COMMA')),
                                  );
         
-        $this->actions = array('to_var'   => 'Global',
-                               'atom'     => 'Global' );
+        $this->actions = array('to_var'      => 'Global',
+                               'atom'        => 'Global');
         $this->checkAuto(); 
 
         return $this->checkRemaining();

@@ -30,6 +30,7 @@ class Token {
                                  'Staticconstant',
                                  'Staticmethodcall',
                                  'Functioncall',
+                                 'FunctioncallArray',
                                  'Methodcall',
                                  'Not', 
                                  'Multiplication', 
@@ -73,6 +74,7 @@ class Token {
                                  'Phpcodemiddle',
                                  'Block',
                                  'Sequence', 
+                                 'SequenceCaseDefault', 
 //                                 'SequenceAtom', 
                                  'IfthenElse', 
                                  'Ifthen', 
@@ -228,7 +230,6 @@ g.V.has('index', 'true').filter{it.out().count() == 0}.each{
     g.removeVertex(it);
 }
 
-
 ";
         Token::query($query);
     }
@@ -245,11 +246,6 @@ g.idx('racines')[['token':'DELETE']].out('DELETE').each{
     g.removeVertex(it);
 }
 
-/*
-g.V.has('index', 'true').filter{it.out().count() == 0}.each{
-    g.removeVertex(it);
-}
-*/
 
 ";
         Token::query($query);

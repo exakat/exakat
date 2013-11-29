@@ -12,7 +12,7 @@ class _Include extends TokenAuto {
                                     2 => array('atom'  => 'Arguments'),
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
-                                    4 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_EQUAL' )),
+                                    4 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_EQUAL', 'T_DOT' )),
         );
         
         $this->actions = array('makeEdge'    => array('2' => 'ARGUMENTS',),

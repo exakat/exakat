@@ -7,7 +7,7 @@ class ArgumentsNoComma extends TokenAuto {
 
     function _check() {
         // @note f(1) : no comma 
-        $this->conditions = array(-1 => array('token' => array_merge(Functioncall::$operators, _Include::$operators, 
+        $this->conditions = array(-1 => array('token' => array_merge(Functioncall::$operators, 
                                                          array('T_FUNCTION', 'T_DECLARE', 'T_USE'))),
                                    0 => array('token' => ArgumentsNoComma::$operators,
                                               'atom'  => 'none'),
@@ -15,6 +15,19 @@ class ArgumentsNoComma extends TokenAuto {
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
                                    3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')),
+        );
+
+        $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
+        $this->checkAuto();
+
+        // @note require (1).$d : no comma 
+        $this->conditions = array(-1 => array('token' => _Include::$operators),
+                                   0 => array('token' => ArgumentsNoComma::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => Arguments::$operands_wa),
+                                   2 => array('token' => 'T_CLOSE_PARENTHESIS',
+                                              'atom'  => 'none'),
+                                   3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS', 'T_DOT')),
         );
 
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));

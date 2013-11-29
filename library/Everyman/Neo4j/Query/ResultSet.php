@@ -101,4 +101,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 	{
 		return isset($this->data[$this->position]);
 	}
+
+	public function toArray() {
+	    return $this->data;
+	}
 }
