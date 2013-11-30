@@ -80,6 +80,20 @@ class _Default extends TokenAuto {
                                 'atom'       => 'Default',
                                 'cleanIndex' => true );
         $this->checkAuto();
+
+        // @note instructions after a default, but not separated by ;
+        $this->conditions = array( 0 => array('token' => 'T_DEFAULT', 
+                                              'atom'  => 'none',),
+                                   1 => array('token' => array('T_COLON', 'T_SEMICOLON'),
+                                              'atom'  => 'none', ), 
+                                   2 => array('atom'  => array('Ifthen')),
+                                   3 => array('atom'  => array('Ifthen', 'Sequence')),
+                                   4 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF',)),
+        );
+        
+        $this->actions = array('createSequenceForDefaultWithoutSemicolon' => true,
+                               'keepIndexed'                              => true);
+        $this->checkAuto();
         
         return $this->checkRemaining();
     }

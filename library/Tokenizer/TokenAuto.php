@@ -875,22 +875,54 @@ x.out('ELEMENT').has('atom', 'SequenceCaseDefault').each{
 ";
             unset($actions['insertSequenceCaseDefault']);
         }
-
-        if (isset($actions['insertConcat2'])) {
+        
+        if (isset($actions['createSequenceForCaseWithoutSemicolon'])) {
             $qactions[] = "
-/* insertConcat 2 */
-x = it;
-it.out('NEXT').out('CONCAT').each{ g.addEdge(x, it, 'CONCAT'); };
-it.out('NEXT').outE('CONCAT').each{ g.removeEdge(it); };
-    
-g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
 
-g.removeVertex(it.out('NEXT').next());
+/* createBlockWithSequenceForCase */ 
+x = g.addVertex(null, [code:'Block With Sequence For Case Without Semicolon', token:'T_SEMICOLON', atom:'Block', virtual:true]);
+
+a = it.out('NEXT').out('NEXT').out('NEXT').next();
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, a, 'ELEMENT');
+g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+
+a.bothE('NEXT').each{ g.removeEdge(it) ; }
+
+
+a = x.out('NEXT').next();
+g.addEdge(x, a, 'ELEMENT');
+g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+a.bothE('NEXT').each{ g.removeEdge(it) ; }
 
 ";
-            unset($actions['insertConcat2']);
+            unset($actions['createSequenceForCaseWithoutSemicolon']);
         }        
         
+        if (isset($actions['createSequenceForDefaultWithoutSemicolon'])) {
+            $qactions[] = "
+
+/* createBlockWithSequenceForCase */ 
+x = g.addVertex(null, [code:'Block With Sequence For Default Without Semicolon', token:'T_SEMICOLON', atom:'Block', virtual:true]);
+
+a = it.out('NEXT').out('NEXT').next();
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, a, 'ELEMENT');
+g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+
+a.bothE('NEXT').each{ g.removeEdge(it) ; }
+
+
+a = x.out('NEXT').next();
+g.addEdge(x, a, 'ELEMENT');
+g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+a.bothE('NEXT').each{ g.removeEdge(it) ; }
+
+";
+            unset($actions['createSequenceForDefaultWithoutSemicolon']);
+        }        
+        
+
 if (isset($actions['Phpcodemiddle'])) {
             $qactions[] = "
 /* Phpcodemiddle */

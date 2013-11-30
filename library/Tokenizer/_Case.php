@@ -92,6 +92,21 @@ class _Case extends TokenAuto {
                                 'cleanIndex' => true );
         $this->checkAuto();
 
+        // @note instructions after a case, but not separated by ;
+        $this->conditions = array( 0 => array('token' => 'T_CASE', 
+                                              'atom'  => 'none',),
+                                   1 => array('atom'  => 'yes'),
+                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON'),
+                                              'atom'  => 'none', ), 
+                                   3 => array('atom'  => array('Ifthen')),
+                                   4 => array('atom'  => array('Ifthen', 'Sequence', 'Break', )),
+                                   5 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF',)),
+        );
+        
+        $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,
+                               'keepIndexed'                       => true);
+        $this->checkAuto();
+
         return $this->checkRemaining();
     }
 }

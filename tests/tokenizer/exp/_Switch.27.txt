@@ -1,0 +1,60 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    {
+    Label : CODE
+      Sequence Case Default
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block With Sequence For Default Without Semicolon
+          Label : ELEMENT
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ==
+                Label : RIGHT
+                  0
+                Label : LEFT
+                  $e
+            Label : THEN
+              {
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    $f
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                *
+                Label : RIGHT
+                  $d
+                Label : LEFT
+                  $c
+              Label : LEFT
+                $b
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+        Label : CASE
+          '1'
