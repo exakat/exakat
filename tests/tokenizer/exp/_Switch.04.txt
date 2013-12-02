@@ -15,7 +15,7 @@ Label : CODE
           Label : CODE
             Void
         Label : CASE
-          1
+          2
       Label : ELEMENT
         case
         Label : CODE
@@ -23,4 +23,4 @@ Label : CODE
           Label : CODE
             Void
         Label : CASE
-          2
+          1

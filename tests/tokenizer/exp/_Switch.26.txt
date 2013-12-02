@@ -15,6 +15,16 @@ Label : CODE
           Label : CODE
             ++
             Label : POSTPLUSPLUS
+              $b
+        Label : CASE
+          'b'
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            ++
+            Label : POSTPLUSPLUS
               $c
         Label : CASE
           'c'
@@ -28,13 +38,3 @@ Label : CODE
               $e
         Label : CASE
           'left'
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ++
-            Label : POSTPLUSPLUS
-              $b
-        Label : CASE
-          'b'

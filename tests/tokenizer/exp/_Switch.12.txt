@@ -13,13 +13,95 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              &&
+              Label : RIGHT
+                =
+                Label : RIGHT
+                  'p'
+                Label : LEFT
+                  $o
+              Label : LEFT
+                &&
+                Label : RIGHT
+                  [
+                  Label : INDEX
+                    'n'
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      'm'
+                    Label : VARIABLE
+                      $l
+                Label : LEFT
+                  ==
+                  Label : RIGHT
+                    'k'
+                  Label : LEFT
+                    $j
+            Label : ELEMENT
+              &&
+              Label : RIGHT
+                &&
+                Label : RIGHT
+                  =
+                  Label : RIGHT
+                    'i'
+                  Label : LEFT
+                    $h
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    'g'
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      'f'
+                    Label : VARIABLE
+                      $e
+              Label : LEFT
+                (
+                Label : CODE
+                  ||
+                  Label : RIGHT
+                    ==
+                    Label : RIGHT
+                      'd'
+                    Label : LEFT
+                      $c
+                  Label : LEFT
+                    ==
+                    Label : RIGHT
+                      'b'
+                    Label : LEFT
+                      $a
+        Label : CASE
+          'd'
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
             =
             Label : RIGHT
-              3
+              1
             Label : LEFT
               $x
         Label : CASE
-          'c'
+          'e'
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block With Sequence For Default
+          Label : CODE
+            break
+            Label : LEVEL
+              void
       Label : ELEMENT
         case
         Label : CODE
@@ -49,92 +131,10 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            ;
-            Label : ELEMENT
-              &&
-              Label : RIGHT
-                &&
-                Label : RIGHT
-                  =
-                  Label : RIGHT
-                    'i'
-                  Label : LEFT
-                    $h
-                Label : LEFT
-                  [
-                  Label : VARIABLE
-                    [
-                    Label : VARIABLE
-                      $e
-                    Label : INDEX
-                      'f'
-                  Label : INDEX
-                    'g'
-              Label : LEFT
-                (
-                Label : CODE
-                  ||
-                  Label : RIGHT
-                    ==
-                    Label : RIGHT
-                      'd'
-                    Label : LEFT
-                      $c
-                  Label : LEFT
-                    ==
-                    Label : RIGHT
-                      'b'
-                    Label : LEFT
-                      $a
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-            Label : ELEMENT
-              &&
-              Label : RIGHT
-                =
-                Label : RIGHT
-                  'p'
-                Label : LEFT
-                  $o
-              Label : LEFT
-                &&
-                Label : RIGHT
-                  [
-                  Label : VARIABLE
-                    [
-                    Label : VARIABLE
-                      $l
-                    Label : INDEX
-                      'm'
-                  Label : INDEX
-                    'n'
-                Label : LEFT
-                  ==
-                  Label : RIGHT
-                    'k'
-                  Label : LEFT
-                    $j
-        Label : CASE
-          'd'
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
             =
             Label : RIGHT
-              1
+              3
             Label : LEFT
               $x
         Label : CASE
-          'e'
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block With Sequence For Default
-          Label : CODE
-            break
-            Label : LEVEL
-              void
+          'c'

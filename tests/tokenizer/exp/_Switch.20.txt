@@ -9,6 +9,48 @@ Label : CODE
     Label : CODE
       Sequence Case Default
       Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                .
+                Label : CONCAT
+                  i
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        k
+                        Label : ARGUMENTS
+                          void
+                      Label : OBJECT
+                        $j
+                Label : CONCAT
+                  'h'
+                Label : CONCAT
+                  'l'
+              Label : LEFT
+                $b
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                'n'
+              Label : LEFT
+                $m
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                'a'
+              Label : LEFT
+                $a
+        Label : CASE
+          "b"
+      Label : ELEMENT
         default
         Label : CODE
           Block With Sequence For Default
@@ -17,12 +59,6 @@ Label : CODE
             Label : ELEMENT
               =
               Label : RIGHT
-                'a'
-              Label : LEFT
-                $a
-            Label : ELEMENT
-              =
-              Label : RIGHT
                 'n'
               Label : LEFT
                 $m
@@ -30,8 +66,6 @@ Label : CODE
               =
               Label : RIGHT
                 .
-                Label : CONCAT
-                  'l'
                 Label : CONCAT
                   i
                   Label : ARGUMENTS
@@ -46,8 +80,16 @@ Label : CODE
                         $j
                 Label : CONCAT
                   'h'
+                Label : CONCAT
+                  'l'
               Label : LEFT
                 $b
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                'a'
+              Label : LEFT
+                $a
       Label : ELEMENT
         case
         Label : CODE
@@ -56,45 +98,3 @@ Label : CODE
             Void
         Label : CASE
           'b'
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                'a'
-              Label : LEFT
-                $a
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                .
-                Label : CONCAT
-                  'l'
-                Label : CONCAT
-                  i
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      ->
-                      Label : METHOD
-                        k
-                        Label : ARGUMENTS
-                          void
-                      Label : OBJECT
-                        $j
-                Label : CONCAT
-                  'h'
-              Label : LEFT
-                $b
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                'n'
-              Label : LEFT
-                $m
-        Label : CASE
-          "b"

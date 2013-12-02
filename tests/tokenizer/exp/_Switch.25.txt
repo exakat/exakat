@@ -13,11 +13,9 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            ++
-            Label : POSTPLUSPLUS
-              $c
+            Void
         Label : CASE
-          'c'
+          'left'
       Label : ELEMENT
         default
         Label : CODE
@@ -41,6 +39,8 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            Void
+            ++
+            Label : POSTPLUSPLUS
+              $c
         Label : CASE
-          'left'
+          'c'

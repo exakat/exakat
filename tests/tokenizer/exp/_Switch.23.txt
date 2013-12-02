@@ -8,60 +8,60 @@ Label : CODE
     Label : CODE
       Sequence Case Default
       Label : ELEMENT
-        case
+        default
         Label : CODE
-          Block With Sequence For Case
-          Label : CODE
+          Block With Sequence For Default Without Semicolon
+          Label : ELEMENT
             ;
             Label : ELEMENT
-              {
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  ++
-                  Label : POSTPLUSPLUS
-                    $a
+              ++
+              Label : POSTPLUSPLUS
+                $b
+          Label : ELEMENT
+            {
+            Label : CODE
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $d
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case Without Semicolon
+          Label : ELEMENT
+            ;
             Label : ELEMENT
               break
               Label : LEVEL
                 void
+          Label : ELEMENT
+            {
+            Label : CODE
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $a
         Label : CASE
           'a'
       Label : ELEMENT
         case
         Label : CODE
-          Block With Sequence For Case
-          Label : CODE
+          Block With Sequence For Case Without Semicolon
+          Label : ELEMENT
             ;
-            Label : ELEMENT
-              {
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  ++
-                  Label : POSTPLUSPLUS
-                    $b
             Label : ELEMENT
               break
               Label : LEVEL
                 void
+          Label : ELEMENT
+            {
+            Label : CODE
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $b
         Label : CASE
           'b'
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block With Sequence For Default
-          Label : CODE
-            ;
-            Label : ELEMENT
-              {
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  ++
-                  Label : POSTPLUSPLUS
-                    $d
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $b

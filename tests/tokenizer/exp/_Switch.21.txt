@@ -15,13 +15,13 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
+              $k
+            Label : ELEMENT
               break
               Label : LEVEL
                 void
-            Label : ELEMENT
-              $j
         Label : CASE
-          2
+          3
       Label : ELEMENT
         default
         Label : CODE
@@ -29,11 +29,11 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
+              $l
+            Label : ELEMENT
               break
               Label : LEVEL
                 void
-            Label : ELEMENT
-              $l
       Label : ELEMENT
         case
         Label : CODE
@@ -41,11 +41,11 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
+              $i
+            Label : ELEMENT
               break
               Label : LEVEL
                 void
-            Label : ELEMENT
-              $i
         Label : CASE
           1
       Label : ELEMENT
@@ -55,10 +55,10 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
+              $j
+            Label : ELEMENT
               break
               Label : LEVEL
                 void
-            Label : ELEMENT
-              $k
         Label : CASE
-          3
+          2

@@ -15,10 +15,6 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
-              break
-              Label : LEVEL
-                1
-            Label : ELEMENT
               =
               Label : RIGHT
                 &
@@ -26,18 +22,18 @@ Label : CODE
                   $d
               Label : LEFT
                 $b
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                2
         Label : CASE
-          'B'
+          'C'
       Label : ELEMENT
         default
         Label : CODE
           Block With Sequence For Default
           Label : CODE
             ;
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
             Label : ELEMENT
               =
               Label : RIGHT
@@ -46,16 +42,16 @@ Label : CODE
                   $e
               Label : LEFT
                 $b
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
       Label : ELEMENT
         case
         Label : CODE
           Block With Sequence For Case
           Label : CODE
             ;
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
             Label : ELEMENT
               =
               Label : RIGHT
@@ -64,6 +60,10 @@ Label : CODE
                   $c
               Label : LEFT
                 $b
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
         Label : CASE
           'A'
       Label : ELEMENT
@@ -73,10 +73,6 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
-              break
-              Label : LEVEL
-                2
-            Label : ELEMENT
               =
               Label : RIGHT
                 &
@@ -84,5 +80,9 @@ Label : CODE
                   $d
               Label : LEFT
                 $b
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                1
         Label : CASE
-          'C'
+          'B'

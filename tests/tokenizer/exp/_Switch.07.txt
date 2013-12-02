@@ -15,14 +15,14 @@ Label : CODE
           Label : ELEMENT
             =
             Label : RIGHT
-              3
-            Label : LEFT
-              $y
-          Label : ELEMENT
-            =
-            Label : RIGHT
               1
             Label : LEFT
               $x
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              3
+            Label : LEFT
+              $y
       Label : CASE
         1
