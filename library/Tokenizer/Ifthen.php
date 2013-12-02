@@ -108,7 +108,7 @@ class Ifthen extends TokenAuto {
                                );
         $this->checkAuto(); 
 
-    // @doc if ( ) : else: endif
+    // @doc if ( ) : else: endif (alternative syntax)
         $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
@@ -153,6 +153,20 @@ class Ifthen extends TokenAuto {
                                'atom'       => 'Ifthen',
                                'cleanIndex' => true
                                );
+        $this->checkAuto();
+
+        // @note instructions after a if, but not separated by ;
+        $this->conditions = array( 0 => array('token' => 'T_IF', 
+                                              'atom'  => 'none',),
+                                   1 => array('atom'  => 'Parenthesis'),
+                                   2 => array('token' => 'T_COLON',
+                                              'atom'  => 'none', ), 
+                                   3 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Block', 'Switch', 'Return', 'For', 'Foreach',  'String', 'RawString')),
+                                   4 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Break', 'Block', 'Switch', 'Return', 'For', 'Foreach', 'String', 'RawString')),
+        );
+        
+        $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,
+                               'keepIndexed'                           => true);
         $this->checkAuto();
 
         return $this->checkRemaining();

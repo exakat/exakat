@@ -98,13 +98,13 @@ class _Case extends TokenAuto {
                                    1 => array('atom'  => 'yes'),
                                    2 => array('token' => array('T_COLON', 'T_SEMICOLON'),
                                               'atom'  => 'none', ), 
-                                   3 => array('atom'  => array('Ifthen')),
-                                   4 => array('atom'  => array('Ifthen', 'Sequence', 'Break', )),
-                                   5 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF',)),
+                                   3 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Block', 'Switch', 'Return', 'For', 'Foreach',  'String', 'RawString')),
+                                   4 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Break', 'Block', 'Switch', 'Return', 'For', 'Foreach', 'String', 'RawString')),
+                                   5 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
         );
         
         $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,
-                               'keepIndexed'                       => true);
+                               'keepIndexed'                           => true);
         $this->checkAuto();
 
         return $this->checkRemaining();

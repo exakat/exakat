@@ -69,7 +69,8 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note instructions separated by ; with a special case for alternative syntax
-        $this->conditions = array(-3 => array('token' => array('T_OPEN_PARENTHESIS', 'T_ELSE')), //'T_CLOSE_PARENTHESIS', 
+        $this->conditions = array(-4 => array('token' => array('T_QUESTION')), 
+                                  -3 => array('token' => array('T_OPEN_PARENTHESIS', 'T_ELSE')), //'T_CLOSE_PARENTHESIS', 
                                   -2 => array('token' => 'T_COLON'), 
                                   -1 => array('atom'  => $operands, 'notToken' => 'T_ELSEIF' ),
                                    0 => array('token' => Sequence::$operators,
@@ -196,8 +197,9 @@ class Sequence extends TokenAuto {
                                               'notToken'   => 'T_ELSEIF', ),
                                    0 => array('token'      => Sequence::$operators,
                                               'atom'       => 'none'),
-                                   1 => array('token'      => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR'),
-                                              'atom'       => 'none'),
+                                   1 => array('token'      => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_CLOSE_CURLY'),
+//                                              'atom'       => 'none'
+                                              ),
         );
         
         $this->actions = array('transform'    => array(-1 => 'ELEMENT'),

@@ -86,8 +86,8 @@ class _Default extends TokenAuto {
                                               'atom'  => 'none',),
                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON'),
                                               'atom'  => 'none', ), 
-                                   2 => array('atom'  => array('Ifthen')),
-                                   3 => array('atom'  => array('Ifthen', 'Sequence')),
+                                   2 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Block', 'Switch', 'Return', 'For', 'Foreach',  'String', 'RawString')),
+                                   3 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Block', 'Break', 'Switch', 'Return', 'For', 'Foreach',  'String', 'RawString')),
                                    4 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF',)),
         );
         

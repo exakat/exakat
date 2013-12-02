@@ -198,7 +198,7 @@ g.removeEdge(f.inE('NEXT').next());
                 }
                 $qactions[] = "
 /* add void out ($destination) */
-x = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true]);
+x = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line]);
 g.addEdge(it$d, x, '$label');
 
 ";
@@ -218,19 +218,19 @@ root.setProperty('code', var.code);
 root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
-    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true]);
+    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
     
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
 
     g.addEdge(ppp, it, 'NAME');
     g.removeEdge(it.inE('ARGUMENT').next());
-    g.addEdge(ppp, g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true]), 'VALUE');
-    g.addEdge(ppp, g.addVertex(null, [code:var.code, atom:'$atom', token:'T_STATIC', virtual:true]), var.code.toUpperCase());
+    g.addEdge(ppp, g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line]), 'VALUE');
+    g.addEdge(ppp, g.addVertex(null, [code:var.code, atom:'$atom', token:'T_STATIC', virtual:true, line:it.line]), var.code.toUpperCase());
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true]);
+    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
 
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
@@ -240,7 +240,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.removeEdge(it.outE('LEFT').next());
     g.removeEdge(it.outE('RIGHT').next());
     
-    g.addEdge(ppp, g.addVertex(null, [code:var.code, atom:'$atom', token:'T_STATIC', virtual:true]), var.code.toUpperCase());
+    g.addEdge(ppp, g.addVertex(null, [code:var.code, atom:'$atom', token:'T_STATIC', virtual:true, line:it.line]), var.code.toUpperCase());
     
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
 }
@@ -269,18 +269,18 @@ root.setProperty('code', var.code);
 root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').filter{it.atom in ['Variable', 'Static', 'Ppp']}.each{
-    x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, virtual:true]);
+    x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, virtual:true, line:it.line]);
     
     g.addEdge(root, x, 'NEXT');
     root = x;
 
     g.addEdge(x, it, 'NAME');
     g.removeEdge(it.inE('ARGUMENT').next());
-    g.addEdge(x, g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true]), 'VALUE');
+    g.addEdge(x, g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line]), 'VALUE');
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, virtual:true]);
+    x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, virtual:true, line:it.line]);
     
     g.addEdge(root, x, 'NEXT');
     root = x;
@@ -321,21 +321,21 @@ root.setProperty('code', var.code);
 root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
-    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true]);
+    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
 
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
 
     g.addEdge(ppp, it, 'NAME');
     g.removeEdge(it.inE('ARGUMENT').next());
-    g.addEdge(ppp, g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true]), 'VALUE');
+    g.addEdge(ppp, g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line]), 'VALUE');
     
-    g.addEdge(ppp, g.addVertex(null, [code:var.code, atom:'$atom1', token:var.token, virtual:true]), var.code.toUpperCase());
-    g.addEdge(ppp, g.addVertex(null, [code:arg2.code, atom:'$atom2', token:arg2.token, virtual:true]), arg2.code.toUpperCase());
+    g.addEdge(ppp, g.addVertex(null, [code:var.code, atom:'$atom1', token:var.token, virtual:true, line:it.line]), var.code.toUpperCase());
+    g.addEdge(ppp, g.addVertex(null, [code:arg2.code, atom:'$atom2', token:arg2.token, virtual:true, line:it.line]), arg2.code.toUpperCase());
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true]);
+    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
 
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
@@ -345,8 +345,8 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.removeEdge(it.outE('LEFT').next());
     g.removeEdge(it.outE('RIGHT').next());
     
-    g.addEdge(ppp, g.addVertex(null, [code:var.code, atom:'$atom1', token:var.token, virtual:true]), var.code.toUpperCase());
-    g.addEdge(ppp, g.addVertex(null, [code:arg2.code, atom:'$atom2', token:arg2.token, virtual:true]), arg2.code.toUpperCase());
+    g.addEdge(ppp, g.addVertex(null, [code:var.code, atom:'$atom1', token:var.token, virtual:true, line:it.line]), var.code.toUpperCase());
+    g.addEdge(ppp, g.addVertex(null, [code:arg2.code, atom:'$atom2', token:arg2.token, virtual:true, line:it.line]), arg2.code.toUpperCase());
     
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
 }
@@ -391,7 +391,7 @@ g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');
             $qactions[] = "
 /* to to_lambda function */
 
-x = g.addVertex(null, [code:'lambda', atom:'String', token:'T_STRING', virtual:true]);
+x = g.addVertex(null, [code:'lambda', atom:'String', token:'T_STRING', virtual:true, line:it.line]);
 g.addEdge(it, x, 'NAME');
 
 op = it.out('NEXT').next();
@@ -418,7 +418,7 @@ g.addEdge(g.idx('racines')[['token':'DELETE']].next(), cp, 'DELETE');
             $qactions[] = "
 /* to to_lambda function with use */
 
-x = g.addVertex(null, [code:'lambda', atom:'String', token:'T_STRING', virtual:true]);
+x = g.addVertex(null, [code:'lambda', atom:'String', token:'T_STRING', virtual:true, line:it.line]);
 g.addEdge(it, x, 'NAME');
 
 x = it.out('NEXT').next();
@@ -462,11 +462,11 @@ g.addEdge(it, x, 'NEXT');
         if (isset($actions['to_ppp'])) {
             $qactions[] = "
 /* to ppp alone */
-x = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true]);
+x = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
 
 g.addEdge(x, it.out('NEXT').next(), 'DEFINE');
 it.out('NEXT').has('atom', 'Variable').each {
-    g.addEdge(x, g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true]), 'VALUE');
+    g.addEdge(x, g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true, line:it.line]), 'VALUE');
 }
 g.addEdge(x, it, it.code.toUpperCase());
 
@@ -503,7 +503,7 @@ g.addEdge(p, ppp, 'NEXT');
             $qactions[] = "
 /* to ppp with assignation */
 
-x = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true]);
+x = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
 
 g.addEdge(x, it.out('NEXT').out('LEFT').next(), 'DEFINE');
 g.addEdge(x, it.out('NEXT').out('RIGHT').next(), 'VALUE');
@@ -545,7 +545,7 @@ f.each{
                     } elseif ($label == 'SEQUENCE') {
                         $qactions[] = "
 /* transform next to sequence */
-x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true]);
+x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
 
 b = it.out('NEXT').next();
 g.addEdge(it, x, 'NEXT');
@@ -670,7 +670,7 @@ f.each{
 /* transform to const assignation to const a=1; */
     a = it.in('NEXT').next();
     b = it.out('NEXT').out('NEXT').next();
-    x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', virtual:true]);
+    x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', virtual:true, line:it.line]);
     
     g.addEdge(x, it.out('NEXT').out('LEFT').next(), 'NAME');
     g.addEdge(x, it.out('NEXT').out('RIGHT').next(), 'VALUE');
@@ -694,7 +694,7 @@ f.each{
             $qactions[] = "
 /* transform to const a=1 ,  b=2 => const a=1; const b=2 */
 
-sequence = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true]);
+sequence = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
 _const = it;
 arg = _const.out('NEXT').next(); 
 
@@ -707,7 +707,7 @@ g.removeEdge(_const.out('NEXT').outE('NEXT').next());
 _const.bothE('NEXT').each{ g.removeEdge(it); }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', virtual:true]);
+    x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', virtual:true, line:it.line]);
     
     g.addEdge(sequence, x, 'ELEMENT');
     root = x;
@@ -738,7 +738,7 @@ root.setProperty('token', 'T_CONST');
 g.removeEdge(it.outE('NEXT').next());
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', virtual:true]);
+    x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', virtual:true, line:it.line]);
     
     g.addEdge(root, x, 'NEXT');
     root = x;
@@ -781,7 +781,7 @@ f.each{
         if (isset($actions['insertConcat'])) {
                 $qactions[] = "
 /* insertConcat */
-x = g.addVertex(null, [code:'{$actions['insertConcat']}', atom:'Concatenation', token:'T_DOT', virtual:true]);
+x = g.addVertex(null, [code:'{$actions['insertConcat']}', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
 
 g.addEdge(x, it, 'CONCAT');
 g.addEdge(x, it.out('NEXT').next(), 'CONCAT');
@@ -808,7 +808,7 @@ x.out('CONCAT').has('atom', 'Concatenation').each{
         if (isset($actions['insertSequence'])) {
             $qactions[] = "
 /* insertSequence */
-x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, modifiedBy:'SequenceAtom']);
+x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, modifiedBy:'SequenceAtom', line:it.line]);
 
 g.addEdge(x, it, 'ELEMENT');
 g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
@@ -846,7 +846,7 @@ x.outE.hasNot('label', 'NEXT').inV.each{
         if (isset($actions['insertSequenceCaseDefault'])) {
                 $qactions[] = "
 /* insertSequenceCaseDefault */
-x = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', virtual:true]);
+x = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', virtual:true, line:it.line]);
 
 g.addEdge(x, it, 'ELEMENT');
 g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
@@ -879,8 +879,8 @@ x.out('ELEMENT').has('atom', 'SequenceCaseDefault').each{
         if (isset($actions['createSequenceForCaseWithoutSemicolon'])) {
             $qactions[] = "
 
-/* createBlockWithSequenceForCase */ 
-x = g.addVertex(null, [code:'Block With Sequence For Case Without Semicolon', token:'T_SEMICOLON', atom:'Block', virtual:true]);
+/* createSequenceForCaseWithoutSemicolon */ 
+x = g.addVertex(null, [code:'Block With Sequence For Case Without Semicolon', token:'T_SEMICOLON', atom:'Block', virtual:true, line:it.line]);
 
 a = it.out('NEXT').out('NEXT').out('NEXT').next();
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
@@ -895,6 +895,22 @@ g.addEdge(x, a, 'ELEMENT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
 
+x.out('ELEMENT').has('token', 'T_SEMICOLON').each{
+    it.out('ELEMENT').each{
+        g.addEdge(x, it, 'ELEMENT');
+        g.removeEdge(it.inE('ELEMENT').next());
+    }
+    
+    g.removeVertex(it);
+}
+
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
+    it.bothE('NEXT').each{ g.removeEdge(it) ; }
+    
+    g.removeVertex(it);
+}
+
 ";
             unset($actions['createSequenceForCaseWithoutSemicolon']);
         }        
@@ -902,8 +918,8 @@ a.bothE('NEXT').each{ g.removeEdge(it) ; }
         if (isset($actions['createSequenceForDefaultWithoutSemicolon'])) {
             $qactions[] = "
 
-/* createBlockWithSequenceForCase */ 
-x = g.addVertex(null, [code:'Block With Sequence For Default Without Semicolon', token:'T_SEMICOLON', atom:'Block', virtual:true]);
+/* createSequenceForDefaultWithoutSemicolon */ 
+x = g.addVertex(null, [code:'Block With Sequence For Default Without Semicolon', token:'T_SEMICOLON', atom:'Block', virtual:true, line:it.line]);
 
 a = it.out('NEXT').out('NEXT').next();
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
@@ -917,6 +933,22 @@ a = x.out('NEXT').next();
 g.addEdge(x, a, 'ELEMENT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
+
+x.out('ELEMENT').has('token', 'T_SEMICOLON').each{
+    it.out('ELEMENT').each{
+        g.addEdge(x, it, 'ELEMENT');
+        g.removeEdge(it.inE('ELEMENT').next());
+    }
+    
+    g.removeVertex(it);
+}
+
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
+    it.bothE('NEXT').each{ g.removeEdge(it) ; }
+    
+    g.removeVertex(it);
+}
 
 ";
             unset($actions['createSequenceForDefaultWithoutSemicolon']);
@@ -981,7 +1013,7 @@ s.bothE('NEXT').each{ g.removeEdge(it); }
         if (isset($actions['to_typehint'])) {
             $qactions[] = "
 /* to type hint */
-x = g.addVertex(null, [code:'Typehint', atom:'Typehint', virtual:true]);
+x = g.addVertex(null, [code:'Typehint', atom:'Typehint', virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
 a.setProperty('atom', 'Typehint');
@@ -1013,7 +1045,7 @@ x.outE.hasNot('label', 'NEXT').inV.each{
                 display("addEdge : $atom\n");
                 $qactions[] = "
 /* insertEdge out */
-x = g.addVertex(null, [code:'void', atom:'$atom', virtual:true]);
+x = g.addVertex(null, [code:'void', atom:'$atom', virtual:true, line:it.line, line:it.line]);
 f = it.out('NEXT').out('NEXT').next();
 
 g.addEdge(it, x, 'NEXT');
@@ -1042,7 +1074,7 @@ x.out('$link').inE('INDEXED').each{
                 display("addEdge : $atom\n");
                 $qactions[] = "
 /* addEdge out */
-x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_VOID', virtual:true]);
+x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_VOID', virtual:true, line:it.line]);
 f = it.out('NEXT').next();
 
 g.removeEdge(it.outE('NEXT').next());
@@ -1055,7 +1087,7 @@ g.addEdge(x,  f, 'NEXT');
                 display("addEdge : $atom\n");
                 $qactions[] = "
 /* addEdge in */
-x = g.addVertex(null, [code:'void', atom:'$atom', virtual:true]);
+x = g.addVertex(null, [code:'void', atom:'$atom', virtual:true, line:it.line]);
 f = it.in('NEXT').next();
 
 g.removeEdge(it.inE('NEXT').next());
@@ -1070,7 +1102,7 @@ g.addEdge(f, x, 'NEXT');
                 
                 $qactions[] = "
 /* addEdge out $destination */ 
-x = g.addVertex(null, [code:'void', token:'T_VOID', atom:'$atom', virtual:true]);
+x = g.addVertex(null, [code:'void', token:'T_VOID', atom:'$atom', virtual:true, line:it.line]);
 
 a = it$next.next();
 b = a.out('NEXT').next();
@@ -1115,7 +1147,7 @@ it.as('origin').out('$link').has('atom','$atom').each{
                 $qactions[] = " 
 /* createSequenceWithNext */ 
 
-x = g.addVertex(null, [code:'Sequence With Next', atom:'Sequence', virtual:true]);
+x = g.addVertex(null, [code:'Sequence With Next', atom:'Sequence', virtual:true, line:it.line]);
 i = it.out('NEXT').next();
 
 g.addEdge(it, x, 'NEXT');
@@ -1138,7 +1170,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $qactions[] = " 
 /* to_block_else */
 
-x = g.addVertex(null, [code:'Block With else', token:'T_BLOCK', atom:'Block', virtual:true]);
+x = g.addVertex(null, [code:'Block With else', token:'T_BLOCK', atom:'Block', virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
 
@@ -1163,7 +1195,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
                 $qactions[] = " 
 /* to_block_foreach */  
 
-x = g.addVertex(null, [code:'Block With Foreach', token:'T_BLOCK', atom:'Block', virtual:true]);
+x = g.addVertex(null, [code:'Block With Foreach', token:'T_BLOCK', atom:'Block', virtual:true, line:it.line, line:it.line]);
 
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 
@@ -1188,7 +1220,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
                 $qactions[] = " 
 /* to_block_for */ 
 
-x = g.addVertex(null, [code:'Block With For', token:'T_BLOCK', atom:'Block', virtual:true]);
+x = g.addVertex(null, [code:'Block With For', token:'T_BLOCK', atom:'Block', virtual:true, line:it.line]);
 
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 
@@ -1213,7 +1245,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
                 $qactions[] = " 
 /* to_block_ifelseif */ 
 
-x = g.addVertex(null, [code:'Block With if/elseif', token:'T_BLOCK', atom:'Block', virtual:true]);
+x = g.addVertex(null, [code:'Block With if/elseif', token:'T_BLOCK', atom:'Block', virtual:true, line:it.line]);
 
 a = it.out('NEXT').out('NEXT').next();
 
@@ -1239,7 +1271,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
                 $qactions[] = " 
 /* to_block_ifelseif_instruction */ 
 
-x = g.addVertex(null, [code:'Block With control if elseif', token:'T_BLOCK', atom:'Block', virtual:true]);
+x = g.addVertex(null, [code:'Block With control if elseif', token:'T_BLOCK', atom:'Block', virtual:true, line:it.line]);
 
 a = it.out('NEXT').out('NEXT').next();
 
@@ -1262,7 +1294,7 @@ a.bothE('NEXT').each{ g.removeEdge(it); }
         if (isset($actions['createBlockWithSequence']) && $actions['createBlockWithSequence']) {
                 $qactions[] = " 
 /* createBlockWithSequence */ 
-x = g.addVertex(null, [code:'Block With Next', atom:'Block', virtual:true]);
+x = g.addVertex(null, [code:'Block With Next', atom:'Block', virtual:true, line:it.line]);
 
 g.addEdge(it.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, it, 'CODE');
@@ -1276,7 +1308,7 @@ it.bothE('NEXT').each{ g.removeEdge(it) ; }
         if (isset($actions['createBlockWithSequenceForCase']) && $actions['createBlockWithSequenceForCase']) {
             $qactions[] = " 
 /* createBlockWithSequenceForCase */ 
-x = g.addVertex(null, [code:'Block With Sequence For Case', token:'T_SEMICOLON', atom:'Block', virtual:true]);
+x = g.addVertex(null, [code:'Block With Sequence For Case', token:'T_SEMICOLON', atom:'Block', virtual:true, line:it.line]);
 
 a = it.out('NEXT').out('NEXT').out('NEXT').next();
 
@@ -1306,7 +1338,7 @@ x.out('CODE').each{
         if (isset($actions['createBlockWithSequenceForDefault']) && $actions['createBlockWithSequenceForDefault']) {
             $qactions[] = " 
 /* createBlockWithSequenceForDefault */ 
-x = g.addVertex(null, [code:'Block With Sequence For Default', atom:'Block', token:'T_SEMICOLON', virtual:true]);
+x = g.addVertex(null, [code:'Block With Sequence For Default', atom:'Block', token:'T_SEMICOLON', virtual:true, line:it.line]);
 
 a = it.out('NEXT').out('NEXT').next();
 
@@ -1343,8 +1375,8 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 
         if (isset($actions['createVoidForCase']) && $actions['createVoidForCase']) {
             $qactions[] = " 
-/* createBlockWithSequenceForCase */ 
-x = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true]);
+/* createVoidForCase */ 
+x = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true, line:it.line]);
 
 a = it.out('NEXT').out('NEXT').next();
 b = a.out('NEXT').next();
@@ -1368,7 +1400,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         if (isset($actions['createVoidForDefault']) && $actions['createVoidForDefault']) {
             $qactions[] = " 
 /* createVoidForDefault */ 
-x = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true]);
+x = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
 b = a.out('NEXT').next();
@@ -1413,7 +1445,7 @@ it.as('origin').out('ELEMENT').has('atom','Sequence').each{
             foreach($actions['mergePrev'] as $atom => $link) {
                 $qactions[] = " 
 /* mergePrev */ 
-x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true]);
+x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
 
 y = it.in('NEXT').in('NEXT').next();
 z = it.in('NEXT').next();
@@ -1460,7 +1492,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $qactions[] = " 
 /* make_quoted_string */ 
 
-x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true]);
+x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
 
 it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}{!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.each{
     g.addEdge(x, it, 'CONCAT');
@@ -1489,7 +1521,7 @@ x.out('CONCAT').each{
         if (isset($actions['mergeConcat'])) {
             $qactions[] = " 
 /* mergeConcat */ 
-x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true]);
+x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
 
 z = it.in('NEXT').next();
 a = it;
@@ -1533,7 +1565,7 @@ x.out('ELEMENT').each{
             $qactions[] = " 
 /* while_to_block */  
 
-x = g.addVertex(null, [code:'Block With While', token:'T_BLOCK', atom:'Block', virtual:true]);
+x = g.addVertex(null, [code:'Block With While', token:'T_BLOCK', atom:'Block', virtual:true, line:it.line]);
 
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 
