@@ -44,9 +44,12 @@ class E_function {
     }
     
     function process($token) {
-        if ($this->getNext) {
+        if ($this->getNext && $token == '(') { // anonymous function... Ignore.
+            $this->getNext = false;
+        } elseif ($this->getNext && $token != '&') {
             $this->global = $this->node;
             
+            if (!is_array($token)) { print_r($token); die(); }
             $this->class = $token[1];
             $this->node = $this->client
                                ->makeNode()
