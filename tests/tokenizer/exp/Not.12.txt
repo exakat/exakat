@@ -17,11 +17,11 @@ Label : CODE
         Label : CONCAT
           {
         Label : CONCAT
+          $b
+        Label : CONCAT
           ->
-          Label : PROPERTY
-            c
-          Label : OBJECT
-            $b
+        Label : CONCAT
+          c
         Label : CONCAT
           }
         Label : CONCAT
@@ -33,11 +33,11 @@ Label : CODE
         Label : CONCAT
           {
         Label : CONCAT
+          $e
+        Label : CONCAT
           ->
-          Label : PROPERTY
-            f
-          Label : OBJECT
-            $e
+        Label : CONCAT
+          f
         Label : CONCAT
           }
     Label : LEFT

@@ -9,8 +9,6 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          'g'
-        Label : ARGUMENT
           =>
           Label : KEY
             'b'
@@ -26,6 +24,8 @@ Label : CODE
               'e'
             Label : ELSE
               'f'
+        Label : ARGUMENT
+          'g'
     Label : LEFT
       $y
   Label : ELEMENT

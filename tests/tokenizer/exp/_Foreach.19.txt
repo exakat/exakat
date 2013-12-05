@@ -12,8 +12,6 @@ Label : CODE
     Label : SOURCE
       $a
     Label : LOOP
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $d
+      ++
+      Label : POSTPLUSPLUS
+        $d

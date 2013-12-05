@@ -9,12 +9,14 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        protected
-        Label : NAME
-          $a
+        Ppp
         Label : VALUE
           ::
-          Label : CONSTANT
-            c
           Label : CLASS
             b
+          Label : CONSTANT
+            c
+        Label : DEFINE
+          $a
+        Label : PROTECTED
+          protected

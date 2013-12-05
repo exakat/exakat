@@ -16,21 +16,21 @@ Label : CODE
             $e
       Label : ELSE
         ::
+        Label : CLASS
+          {
+          Label : INDEX
+            2
+          Label : VARIABLE
+            [
+            Label : INDEX
+              "y"
+            Label : VARIABLE
+              $x
         Label : METHOD
           h
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $i
-        Label : CLASS
-          {
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $x
-            Label : INDEX
-              "y"
-          Label : INDEX
-            2
     Label : LEFT
       $a

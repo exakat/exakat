@@ -9,44 +9,58 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        var
-        Label : NAME
-          $a
+        Ppp
         Label : VALUE
           void
-      Label : ELEMENT
-        var
-        Label : NAME
-          $a2
-        Label : VALUE
-          void
-      Label : ELEMENT
-        var
-        Label : NAME
-          $b2
-        Label : VALUE
-          void
-      Label : ELEMENT
-        var
         Label : NAME
           $c2
-        Label : VALUE
-          void
+        Label : VAR
+          var
       Label : ELEMENT
-        var
+        Ppp
+        Label : VALUE
+          3
         Label : NAME
           $c
-        Label : VALUE
-          3
+        Label : VAR
+          var
       Label : ELEMENT
-        var
-        Label : NAME
-          $b
+        Ppp
         Label : VALUE
           void
-      Label : ELEMENT
-        var
         Label : NAME
-          $d2
+          $a2
+        Label : VAR
+          var
+      Label : ELEMENT
+        Ppp
         Label : VALUE
           3
+        Label : NAME
+          $d2
+        Label : VAR
+          var
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          void
+        Label : NAME
+          $b2
+        Label : VAR
+          var
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          void
+        Label : NAME
+          $b
+        Label : VAR
+          var
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          void
+        Label : NAME
+          $a
+        Label : VAR
+          var

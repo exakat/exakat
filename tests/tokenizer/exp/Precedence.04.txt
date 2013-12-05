@@ -7,37 +7,37 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        "\n"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
         .
-        Label : CONCAT
-          ++
-          Label : POSTPLUSPLUS
-            $b
-        Label : CONCAT
-          $a
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        "\n"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        .
-        Label : CONCAT
-          $b
         Label : CONCAT
           ++
           Label : POSTPLUSPLUS
             $a
+        Label : CONCAT
+          $b
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        .
+        Label : CONCAT
+          $a
+        Label : CONCAT
+          ++
+          Label : POSTPLUSPLUS
+            $b
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "\n"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "\n"
   Label : ELEMENT
     =
     Label : RIGHT

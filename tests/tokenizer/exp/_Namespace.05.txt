@@ -3,47 +3,11 @@
 Label : CODE
   ;
   Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      MyProject
-  Label : ELEMENT
     function
     Label : ARGUMENTS
       void
     Label : NAME
       connect
-    Label : BLOCK
-      {
-      Label : CODE
-        void
-  Label : ELEMENT
-    class
-    Label : NAME
-      Connection
-    Label : BLOCK
-      {
-      Label : CODE
-        void
-  Label : ELEMENT
-    const
-    Label : VALUE
-      1
-    Label : NAME
-      CONNECT_OK
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      void
-    Label : NAME
-      connect
-    Label : BLOCK
-      {
-      Label : CODE
-        void
-  Label : ELEMENT
-    class
-    Label : NAME
-      Connection
     Label : BLOCK
       {
       Label : CODE
@@ -58,3 +22,39 @@ Label : CODE
     namespace
     Label : NAMESPACE
       AnotherProject
+  Label : ELEMENT
+    class
+    Label : NAME
+      Connection
+    Label : BLOCK
+      {
+      Label : CODE
+        void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+    Label : NAME
+      connect
+    Label : BLOCK
+      {
+      Label : CODE
+        void
+  Label : ELEMENT
+    const
+    Label : VALUE
+      1
+    Label : NAME
+      CONNECT_OK
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      MyProject
+  Label : ELEMENT
+    class
+    Label : NAME
+      Connection
+    Label : BLOCK
+      {
+      Label : CODE
+        void

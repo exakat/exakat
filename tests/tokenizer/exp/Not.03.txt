@@ -8,14 +8,14 @@ Label : CODE
       ->
       Label : OBJECT
         ::
+        Label : CLASS
+          C
         Label : METHOD
           D
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'd'
-        Label : CLASS
-          C
       Label : METHOD
         e
         Label : ARGUMENTS

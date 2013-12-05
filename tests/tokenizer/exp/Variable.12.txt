@@ -15,10 +15,10 @@ Label : CODE
           ${
         Label : CONCAT
           [
-          Label : VARIABLE
-            $b
           Label : INDEX
             'c'
+          Label : VARIABLE
+            $b
         Label : CONCAT
           ?
         Label : CONCAT
@@ -37,10 +37,10 @@ D
           ${
         Label : CONCAT
           [
-          Label : VARIABLE
-            $e
           Label : INDEX
             'f'
+          Label : VARIABLE
+            $e
         Label : CONCAT
           ?
         Label : CONCAT

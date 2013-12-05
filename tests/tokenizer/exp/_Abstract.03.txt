@@ -1,8 +1,8 @@
 <?php
 
 Label : CODE
-  abstract
-  Label : ABSTRACT
+  Ppp
+  Label : DEFINE
     class
     Label : NAME
       x
@@ -11,44 +11,40 @@ Label : CODE
       Label : CODE
         ;
         Label : ELEMENT
-          abstract
+          Ppp
+          Label : DEFINE
+            function
+            Label : ARGUMENTS
+              void
+            Label : NAME
+              a
+          Label : PUBLIC
+            public
           Label : ABSTRACT
-            Ppp
-            Label : VALUE
-              Void
-            Label : DEFINE
-              function
-              Label : NAME
-                a
-              Label : ARGUMENTS
-                void
-            Label : PUBLIC
-              public
+            abstract
         Label : ELEMENT
-          abstract
+          Ppp
+          Label : DEFINE
+            function
+            Label : ARGUMENTS
+              void
+            Label : NAME
+              b
+          Label : PROTECTED
+            protected
           Label : ABSTRACT
-            Ppp
-            Label : VALUE
-              Void
-            Label : DEFINE
-              function
-              Label : NAME
-                b
-              Label : ARGUMENTS
-                void
-            Label : PROTECTED
-              protected
+            abstract
         Label : ELEMENT
-          abstract
+          Ppp
+          Label : DEFINE
+            function
+            Label : ARGUMENTS
+              void
+            Label : NAME
+              d
+          Label : STATIC
+            static
           Label : ABSTRACT
-            Ppp
-            Label : VALUE
-              Void
-            Label : DEFINE
-              function
-              Label : NAME
-                d
-              Label : ARGUMENTS
-                void
-            Label : STATIC
-              static
+            abstract
+  Label : ABSTRACT
+    abstract

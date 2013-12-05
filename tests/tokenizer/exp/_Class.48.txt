@@ -9,9 +9,33 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        public
+        Ppp
+        Label : DEFINE
+          function
+          Label : ARGUMENTS
+            void
+          Label : NAME
+            b
+          Label : BLOCK
+            {
+            Label : CODE
+              void
+        Label : STATIC
+          static
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        Ppp
         Label : VALUE
-          void
+          Void
+        Label : DEFINE
+          $a
+        Label : STATIC
+          static
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        Ppp
         Label : DEFINE
           function
           Label : ARGUMENTS
@@ -22,31 +46,5 @@ Label : CODE
             {
             Label : CODE
               void
-      Label : ELEMENT
-        public
-        Label : VALUE
-          void
-        Label : DEFINE
-          static
-          Label : VALUE
-            void
-          Label : DEFINE
-            function
-            Label : ARGUMENTS
-              void
-            Label : NAME
-              b
-            Label : BLOCK
-              {
-              Label : CODE
-                void
-      Label : ELEMENT
-        public
-        Label : VALUE
-          void
-        Label : DEFINE
-          static
-          Label : VALUE
-            void
-          Label : DEFINE
-            $a
+        Label : PUBLIC
+          public

@@ -8,10 +8,10 @@ Label : CODE
       D
     Label : LEFT
       [
+      Label : INDEX
+        'c'
       Label : VARIABLE
         [
-        Label : VARIABLE
-          $a
         Label : INDEX
           (
           Label : CODE
@@ -20,5 +20,5 @@ Label : CODE
               1
             Label : LEFT
               $b
-      Label : INDEX
-        'c'
+        Label : VARIABLE
+          $a

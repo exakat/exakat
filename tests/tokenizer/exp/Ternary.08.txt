@@ -12,9 +12,9 @@ Label : CODE
         2
       Label : ELSE
         [
-        Label : VARIABLE
-          $b
         Label : INDEX
           1
+        Label : VARIABLE
+          $b
     Label : LEFT
       $a

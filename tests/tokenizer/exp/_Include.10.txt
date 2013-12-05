@@ -8,7 +8,7 @@ Label : CODE
       void
       Label : ARGUMENT
         ->
-        Label : OBJECT
-          $a
         Label : PROPERTY
           b
+        Label : OBJECT
+          $a

@@ -9,56 +9,72 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        protected
-        Label : NAME
-          $f
-        Label : VALUE
-          2
-      Label : ELEMENT
-        protected
-        Label : VALUE
-          void
-        Label : DEFINE
-          $a
-      Label : ELEMENT
-        protected
-        Label : NAME
-          $e
-        Label : VALUE
-          void
-      Label : ELEMENT
-        const
-        Label : NAME
-          b
+        Ppp
         Label : VALUE
           3
-      Label : ELEMENT
-        protected
-        Label : NAME
-          $c
-        Label : VALUE
-          void
-      Label : ELEMENT
-        protected
-        Label : NAME
-          $d
-        Label : VALUE
-          void
-      Label : ELEMENT
-        protected
-        Label : NAME
-          $b
-        Label : VALUE
-          1
-      Label : ELEMENT
-        protected
-        Label : NAME
-          $h
-        Label : VALUE
-          void
-      Label : ELEMENT
-        protected
         Label : NAME
           $g
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          1
+        Label : DEFINE
+          $b
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          void
+        Label : NAME
+          $c
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          void
+        Label : NAME
+          $d
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        const
         Label : VALUE
           3
+        Label : NAME
+          b
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          void
+        Label : NAME
+          $e
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $a
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          2
+        Label : NAME
+          $f
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          void
+        Label : NAME
+          $h
+        Label : PROTECTED
+          protected

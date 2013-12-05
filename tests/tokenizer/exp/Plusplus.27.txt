@@ -10,8 +10,6 @@ Label : CODE
       [
       Label : VARIABLE
         [
-        Label : VARIABLE
-          $a
         Label : INDEX
           (int)
           Label : CAST
@@ -22,3 +20,5 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $b
+        Label : VARIABLE
+          $a

@@ -12,32 +12,30 @@ Label : CODE
         Label : LEFT
           $a
     Label : THEN
-      ;
-      Label : ELEMENT
-        foreach
-        Label : VALUE
-          $g
-        Label : SOURCE
+      foreach
+      Label : VALUE
+        $g
+      Label : SOURCE
+        ->
+        Label : OBJECT
           ->
+          Label : PROPERTY
+            d
           Label : OBJECT
-            ->
-            Label : PROPERTY
-              d
-            Label : OBJECT
-              $c
-          Label : METHOD
-            e
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'f'
-        Label : LOOP
-          echo
+            $c
+        Label : METHOD
+          e
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              ->
-              Label : PROPERTY
-                i
-              Label : OBJECT
-                $h
+              'f'
+      Label : LOOP
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : PROPERTY
+              i
+            Label : OBJECT
+              $h

@@ -9,17 +9,21 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        var
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
-          $c
+          $d
+        Label : VAR
+          var
       Label : ELEMENT
-        var
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
           $a
+        Label : VAR
+          var
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -31,6 +35,14 @@ Label : CODE
           Label : CODE
             void
       Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $c
+        Label : VAR
+          var
+      Label : ELEMENT
         function
         Label : ARGUMENTS
           void
@@ -40,12 +52,6 @@ Label : CODE
           {
           Label : CODE
             void
-      Label : ELEMENT
-        var
-        Label : VALUE
-          void
-        Label : DEFINE
-          $d
   Label : EXTENDS
     y
   Label : IMPLEMENTS

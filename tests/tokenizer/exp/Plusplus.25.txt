@@ -8,37 +8,37 @@ Label : CODE
       ?
       Label : CONDITION
         [
-        Label : VARIABLE
-          $e
         Label : INDEX
           [
-          Label : VARIABLE
-            $f
           Label : INDEX
             'f'
+          Label : VARIABLE
+            $f
+        Label : VARIABLE
+          $e
       Label : THEN
         --
         Label : POSTPLUSPLUS
           [
-          Label : VARIABLE
-            $g
           Label : INDEX
             [
-            Label : VARIABLE
-              $h
             Label : INDEX
               'i'
+            Label : VARIABLE
+              $h
+          Label : VARIABLE
+            $g
       Label : ELSE
         -
         Label : SIGN
           1
     Label : LEFT
       [
-      Label : VARIABLE
-        $a
       Label : INDEX
         [
-        Label : VARIABLE
-          $b
         Label : INDEX
           'c'
+        Label : VARIABLE
+          $b
+      Label : VARIABLE
+        $a

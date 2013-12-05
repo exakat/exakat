@@ -12,10 +12,10 @@ Label : CODE
           b
         Label : CONCAT
           [
-          Label : VARIABLE
-            $c
           Label : INDEX
             1
+          Label : VARIABLE
+            $c
         Label : CONCAT
           e
     Label : LEFT

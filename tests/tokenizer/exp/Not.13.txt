@@ -10,10 +10,10 @@ Label : CODE
         !
         Label : NOT
           {
-          Label : VARIABLE
-            $a
           Label : INDEX
             0
+          Label : VARIABLE
+            $a
       Label : LEFT
         !
         Label : NOT
@@ -22,10 +22,10 @@ Label : CODE
             void
             Label : ARGUMENT
               {
-              Label : VARIABLE
-                $a
               Label : INDEX
                 0
+              Label : VARIABLE
+                $a
   Label : THEN
     {
     Label : CODE

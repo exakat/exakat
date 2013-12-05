@@ -3,44 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    namespace
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ::
-              Label : METHOD
-                start
-                Label : ARGUMENTS
-                  void
-              Label : CLASS
-                \
-                Label : ELEMENT
-                  Connection
-                Label : ELEMENT
-                  MyProject
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            \
-            Label : ELEMENT
-              connect
-            Label : ELEMENT
-              MyProject
-            Label : ARGUMENTS
-              void
-          Label : LEFT
-            $a
-        Label : ELEMENT
-          session_start
-          Label : ARGUMENTS
-            void
-  Label : ELEMENT
     declare
     Label : TICKS
       void
@@ -51,23 +13,9 @@ Label : CODE
         Label : LEFT
           encoding
   Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      MyProject
-  Label : ELEMENT
     {
     Label : CODE
       ;
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-        Label : NAME
-          connect
-        Label : BLOCK
-          {
-          Label : CODE
-            void
       Label : ELEMENT
         class
         Label : NAME
@@ -82,3 +30,55 @@ Label : CODE
           1
         Label : NAME
           CONNECT_OK
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+        Label : NAME
+          connect
+        Label : BLOCK
+          {
+          Label : CODE
+            void
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      MyProject
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                \
+                Label : ELEMENT
+                  MyProject
+                Label : ELEMENT
+                  Connection
+              Label : METHOD
+                start
+                Label : ARGUMENTS
+                  void
+        Label : ELEMENT
+          session_start
+          Label : ARGUMENTS
+            void
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            \
+            Label : ELEMENT
+              MyProject
+            Label : ELEMENT
+              connect
+            Label : ARGUMENTS
+              void
+          Label : LEFT
+            $a

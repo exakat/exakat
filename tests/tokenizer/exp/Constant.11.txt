@@ -11,8 +11,8 @@ Label : CODE
       Label : THEN
         .
         Label : CONCAT
-          B
-        Label : CONCAT
           'a'
+        Label : CONCAT
+          B
       Label : ELSE
         'c'

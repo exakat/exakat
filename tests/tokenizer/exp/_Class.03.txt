@@ -13,7 +13,7 @@ Label : CODE
         Label : ARGUMENTS
           void
         Label : NAME
-          __construct
+          __destruct
         Label : BLOCK
           {
           Label : CODE
@@ -23,7 +23,7 @@ Label : CODE
         Label : ARGUMENTS
           void
         Label : NAME
-          __destruct
+          __construct
         Label : BLOCK
           {
           Label : CODE

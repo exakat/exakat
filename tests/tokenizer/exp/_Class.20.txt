@@ -10,13 +10,19 @@ Label : CODE
       ;
       Label : ELEMENT
         const
-        Label : NAME
-          a
         Label : VALUE
-          1
+          3
+        Label : NAME
+          c
       Label : ELEMENT
         const
+        Label : VALUE
+          1
         Label : NAME
-          b
+          a
+      Label : ELEMENT
+        const
         Label : VALUE
           2
+        Label : NAME
+          b

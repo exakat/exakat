@@ -9,14 +9,16 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        var
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
           $a
+        Label : VAR
+          var
       Label : ELEMENT
         const
-        Label : NAME
-          b
         Label : VALUE
           2
+        Label : NAME
+          b

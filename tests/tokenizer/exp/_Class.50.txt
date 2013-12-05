@@ -9,11 +9,13 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        var
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
           $a
+        Label : VAR
+          var
   Label : EXTENDS
     y
   Label : IMPLEMENTS

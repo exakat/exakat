@@ -9,64 +9,64 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          =>
-          Label : VALUE
-            \
-            Label : ELEMENT
-              n
-            Label : ELEMENT
-              m
-          Label : KEY
-            \
-            Label : ELEMENT
-              l
-            Label : ELEMENT
-              k
-        Label : ARGUMENT
           void
         Label : ARGUMENT
           =>
-          Label : VALUE
-            ->
-            Label : OBJECT
-              $h
-            Label : PROPERTY
-              i
           Label : KEY
-            ->
-            Label : OBJECT
-              $f
-            Label : PROPERTY
-              g
+            \
+            Label : ELEMENT
+              k
+            Label : ELEMENT
+              l
+          Label : VALUE
+            \
+            Label : ELEMENT
+              m
+            Label : ELEMENT
+              n
         Label : ARGUMENT
           =>
+          Label : KEY
+            ->
+            Label : PROPERTY
+              g
+            Label : OBJECT
+              $f
           Label : VALUE
-            -
-            Label : SIGN
-              5
+            ->
+            Label : PROPERTY
+              i
+            Label : OBJECT
+              $h
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            [
+            Label : INDEX
+              'd'
+            Label : VARIABLE
+              $c
+          Label : VALUE
+            [
+            Label : INDEX
+              'f'
+            Label : VARIABLE
+              $e
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            $a
+          Label : VALUE
+            $b
+        Label : ARGUMENT
+          =>
           Label : KEY
             -
             Label : SIGN
               4
-        Label : ARGUMENT
-          =>
           Label : VALUE
-            [
-            Label : VARIABLE
-              $e
-            Label : INDEX
-              'f'
-          Label : KEY
-            [
-            Label : VARIABLE
-              $c
-            Label : INDEX
-              'd'
-        Label : ARGUMENT
-          =>
-          Label : VALUE
-            $b
-          Label : KEY
-            $a
+            -
+            Label : SIGN
+              5
     Label : LEFT
       $a

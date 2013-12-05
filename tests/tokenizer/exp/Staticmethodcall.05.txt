@@ -3,24 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    class
-    Label : NAME
-      f
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          protected
-          Label : VALUE
-            void
-          Label : DEFINE
-            static
-            Label : VALUE
-              void
-            Label : DEFINE
-              $g
-  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -44,11 +26,29 @@ Label : CODE
               'B'
   Label : ELEMENT
     ::
+    Label : CLASS
+      C
     Label : METHOD
       d
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           'e'
-    Label : CLASS
-      C
+  Label : ELEMENT
+    class
+    Label : NAME
+      f
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          Ppp
+          Label : VALUE
+            Void
+          Label : DEFINE
+            $g
+          Label : STATIC
+            static
+          Label : PROTECTED
+            protected

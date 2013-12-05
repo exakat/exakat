@@ -2,7 +2,7 @@
 
 Label : CODE
   [
-  Label : VARIABLE
-    $_array
   Label : INDEX
     1
+  Label : VARIABLE
+    $_array

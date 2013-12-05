@@ -8,11 +8,11 @@ Label : CODE
       clone
       Label : CLONE
         ::
+        Label : CLASS
+          y
         Label : METHOD
           w
           Label : ARGUMENTS
             void
-        Label : CLASS
-          y
     Label : LEFT
       $x

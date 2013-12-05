@@ -10,12 +10,6 @@ Label : CODE
         void
         Label : ARGUMENT
           {
-          Label : VARIABLE
-            ->
-            Label : PROPERTY
-              e
-            Label : OBJECT
-              $d
           Label : INDEX
             ++
             Label : POSTPLUSPLUS
@@ -24,6 +18,12 @@ Label : CODE
                 g
               Label : OBJECT
                 $f
+          Label : VARIABLE
+            ->
+            Label : PROPERTY
+              e
+            Label : OBJECT
+              $d
     Label : LEFT
       [
       Label : VARIABLE

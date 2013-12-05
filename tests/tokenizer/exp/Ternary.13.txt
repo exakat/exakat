@@ -1,50 +1,50 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    ?
-    Label : CONDITION
-      $b
-    Label : THEN
-      (
-      Label : CODE
-        ?
-        Label : CONDITION
-          ==
-          Label : RIGHT
-            'd'
-          Label : LEFT
-            $c
-        Label : THEN
-          substr
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $f
-            Label : ARGUMENT
-              0
-            Label : ARGUMENT
-              $e
-        Label : ELSE
-          substr
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              -
-              Label : SIGN
-                $g
-            Label : ARGUMENT
-              md5
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  microtime
-                  Label : ARGUMENTS
-                    void
-    Label : ELSE
-      ;
-      Label : ELEMENT
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        $b
+      Label : THEN
+        (
+        Label : CODE
+          ?
+          Label : CONDITION
+            ==
+            Label : RIGHT
+              'd'
+            Label : LEFT
+              $c
+          Label : THEN
+            substr
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                $f
+          Label : ELSE
+            substr
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                md5
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    microtime
+                    Label : ARGUMENTS
+                      void
+              Label : ARGUMENT
+                -
+                Label : SIGN
+                  $g
+      Label : ELSE
         'h'
-  Label : LEFT
-    $a
+    Label : LEFT
+      $a

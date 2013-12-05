@@ -3,6 +3,18 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        m
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $o
+    Label : LEFT
+      $m
+  Label : ELEMENT
     foreach
     Label : VALUE
       $c
@@ -41,6 +53,8 @@ Label : CODE
               Label : ARGUMENTS
                 ,
                 Label : ARGUMENT
+                  $i
+                Label : ARGUMENT
                   ->
                   Label : PROPERTY
                     l
@@ -50,19 +64,5 @@ Label : CODE
                       k
                     Label : OBJECT
                       $j
-                Label : ARGUMENT
-                  $i
             Label : LEFT
               $g
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      new
-      Label : NEW
-        m
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $o
-    Label : LEFT
-      $m

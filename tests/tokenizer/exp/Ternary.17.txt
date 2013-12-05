@@ -18,14 +18,14 @@ Label : CODE
         ->
         Label : OBJECT
           ::
+          Label : CLASS
+            E
           Label : METHOD
             f
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'g'
-          Label : CLASS
-            E
         Label : METHOD
           h
           Label : ARGUMENTS

@@ -6,27 +6,27 @@ Label : CODE
     =
     Label : RIGHT
       ->
+      Label : OBJECT
+        $this
       Label : METHOD
         b
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            ''
-          Label : ARGUMENT
-            false
-          Label : ARGUMENT
-            false
-          Label : ARGUMENT
             array
             Label : ARGUMENTS
               void
           Label : ARGUMENT
+            false
+          Label : ARGUMENT
+            ''
+          Label : ARGUMENT
+            false
+          Label : ARGUMENT
             .
             Label : CONCAT
-              '\C'
-            Label : CONCAT
               __NAMESPACE__
-      Label : OBJECT
-        $this
+            Label : CONCAT
+              '\C'
     Label : LEFT
       $a

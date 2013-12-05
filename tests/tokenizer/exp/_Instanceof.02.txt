@@ -16,36 +16,36 @@ Label : CODE
               ArrayAccess
             Label : LEFT
               ->
-              Label : OBJECT
-                [
-                Label : VARIABLE
-                  ->
-                  Label : OBJECT
-                    $e
-                  Label : PROPERTY
-                    f
-                Label : INDEX
-                  $g
               Label : PROPERTY
                 h
+              Label : OBJECT
+                [
+                Label : INDEX
+                  $g
+                Label : VARIABLE
+                  ->
+                  Label : PROPERTY
+                    f
+                  Label : OBJECT
+                    $e
           Label : LEFT
             is_array
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 ->
-                Label : OBJECT
-                  [
-                  Label : VARIABLE
-                    ->
-                    Label : OBJECT
-                      $a
-                    Label : PROPERTY
-                      b
-                  Label : INDEX
-                    $c
                 Label : PROPERTY
                   d
+                Label : OBJECT
+                  [
+                  Label : INDEX
+                    $c
+                  Label : VARIABLE
+                    ->
+                    Label : PROPERTY
+                      b
+                    Label : OBJECT
+                      $a
   Label : THEN
     {
     Label : CODE

@@ -9,10 +9,10 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          'c'
-        Label : ARGUMENT
           'b'
         Label : ARGUMENT
           'a'
+        Label : ARGUMENT
+          'c'
     Label : LEFT
       $a

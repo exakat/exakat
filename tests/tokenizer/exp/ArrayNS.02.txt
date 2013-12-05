@@ -1,24 +1,33 @@
 <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
+Label : NEXT
+  $a
+  Label : NEXT
     =
-    Label : RIGHT
+    Label : NEXT
       [
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
+      Label : NEXT
+        'a'
+        Label : NEXT
           =>
-          Label : KEY
-            'c'
-          Label : VALUE
-            's'
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'a'
-          Label : VALUE
+          Label : NEXT
             'b'
-    Label : LEFT
-      $a
+            Label : NEXT
+              ,
+              Label : NEXT
+                'c'
+                Label : NEXT
+                  =>
+                  Label : NEXT
+                    's'
+                    Label : NEXT
+                      ]
+                      Label : NEXT
+                        ;
+                        Label : NEXT
+                          ?>
+
+                          Label : NEXT
+                            /**/
+                            Label : NEXT
+                              /* * */

@@ -29,15 +29,11 @@ Label : CODE
       Label : CONTAIN
         Concatenation
         Label : CONCAT
-          x
-        Label : CONCAT
-          {
+          ${
           Label : NAME
-            $y
-        Label : CONCAT
-          z
+            $a
     Label : LEFT
-      $e
+      $d
   Label : ELEMENT
     =
     Label : RIGHT
@@ -45,11 +41,11 @@ Label : CODE
       Label : CONTAIN
         Concatenation
         Label : CONCAT
-          ${
+          {
           Label : NAME
-            $a
+            $y
     Label : LEFT
-      $d
+      $a
   Label : ELEMENT
     =
     Label : RIGHT
@@ -69,8 +65,12 @@ Label : CODE
       Label : CONTAIN
         Concatenation
         Label : CONCAT
+          x
+        Label : CONCAT
           {
           Label : NAME
             $y
+        Label : CONCAT
+          z
     Label : LEFT
-      $a
+      $e

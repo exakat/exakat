@@ -7,30 +7,30 @@ Label : CODE
     Label : ARGUMENTS
       ,
       Label : ARGUMENT
+        $x
+      Label : ARGUMENT
+        '1'
+      Label : ARGUMENT
         .
         Label : CONCAT
+          '2'
+        Label : CONCAT
+          [
+          Label : INDEX
+            2
+          Label : VARIABLE
+            [
+            Label : INDEX
+              1
+            Label : VARIABLE
+              $y
+        Label : CONCAT
           ::
+          Label : CLASS
+            a
           Label : METHOD
             b
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 3
-          Label : CLASS
-            a
-        Label : CONCAT
-          '2'
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $y
-            Label : INDEX
-              1
-          Label : INDEX
-            2
-      Label : ARGUMENT
-        $x
-      Label : ARGUMENT
-        '1'

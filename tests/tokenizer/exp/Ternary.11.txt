@@ -45,8 +45,6 @@ Label : CODE
               Label : ARGUMENTS
                 ,
                 Label : ARGUMENT
-                  9
-                Label : ARGUMENT
                   ->
                   Label : OBJECT
                     $this
@@ -56,3 +54,5 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         "J"
+                Label : ARGUMENT
+                  9

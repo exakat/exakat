@@ -17,11 +17,11 @@ Label : CODE
       Label : THEN
         .
         Label : CONCAT
-          $e
-        Label : CONCAT
           "d"
         Label : CONCAT
           $c
+        Label : CONCAT
+          $e
       Label : ELSE
         "f"
     Label : LEFT

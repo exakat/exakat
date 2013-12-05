@@ -9,12 +9,6 @@ Label : CODE
       Label : ARGUMENT
         'path'
   Label : ELEMENT
-    require_once
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        'path'
-  Label : ELEMENT
     include
     Label : ARGUMENTS
       void
@@ -22,6 +16,12 @@ Label : CODE
         'path'
   Label : ELEMENT
     include_once
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'path'
+  Label : ELEMENT
+    require_once
     Label : ARGUMENTS
       void
       Label : ARGUMENT

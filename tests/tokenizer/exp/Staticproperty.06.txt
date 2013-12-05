@@ -12,15 +12,15 @@ Label : CODE
           void
     Label : LEFT
       ->
+      Label : PROPERTY
+        d
       Label : OBJECT
         ::
         Label : CLASS
           self
         Label : PROPERTY
           [
-          Label : VARIABLE
-            $a
           Label : INDEX
             $b
-      Label : PROPERTY
-        d
+          Label : VARIABLE
+            $a

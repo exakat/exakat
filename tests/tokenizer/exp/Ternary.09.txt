@@ -12,17 +12,17 @@ Label : CODE
         2
       Label : ELSE
         [
-        Label : VARIABLE
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $b
-            Label : INDEX
-              3
-          Label : INDEX
-            4
         Label : INDEX
           5
+        Label : VARIABLE
+          [
+          Label : INDEX
+            4
+          Label : VARIABLE
+            [
+            Label : INDEX
+              3
+            Label : VARIABLE
+              $b
     Label : LEFT
       $a

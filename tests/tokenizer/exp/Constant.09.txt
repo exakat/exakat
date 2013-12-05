@@ -8,13 +8,13 @@ Label : CODE
       $x
     Label : THEN
       ::
-      Label : CONSTANT
-        b
       Label : CLASS
         a
+      Label : CONSTANT
+        b
     Label : ELSE
       ::
-      Label : CONSTANT
-        d
       Label : CLASS
         c
+      Label : CONSTANT
+        d

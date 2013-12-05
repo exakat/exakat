@@ -6,7 +6,7 @@ Label : CODE
     self
   Label : PROPERTY
     [
-    Label : VARIABLE
-      $a
     Label : INDEX
       'b'
+    Label : VARIABLE
+      $a

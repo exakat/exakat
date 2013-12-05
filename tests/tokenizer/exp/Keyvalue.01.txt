@@ -9,8 +9,6 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          void
-        Label : ARGUMENT
           =>
           Label : KEY
             *
@@ -27,6 +25,20 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
+            .
+            Label : CONCAT
+              'a'
+            Label : CONCAT
+              'b'
+          Label : VALUE
+            .
+            Label : CONCAT
+              'c'
+            Label : CONCAT
+              'd'
+        Label : ARGUMENT
+          =>
+          Label : KEY
             +
             Label : RIGHT
               2
@@ -39,18 +51,6 @@ Label : CODE
             Label : LEFT
               3
         Label : ARGUMENT
-          =>
-          Label : KEY
-            .
-            Label : CONCAT
-              'b'
-            Label : CONCAT
-              'a'
-          Label : VALUE
-            .
-            Label : CONCAT
-              'd'
-            Label : CONCAT
-              'c'
+          void
     Label : LEFT
       $x

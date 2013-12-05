@@ -13,27 +13,29 @@ Label : CODE
         Label : ARGUMENTS
           void
         Label : NAME
-          __destruct
-        Label : BLOCK
-          {
-          Label : CODE
-            void
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-        Label : NAME
           __construct
         Label : BLOCK
           {
           Label : CODE
             void
       Label : ELEMENT
-        var
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
           $a
+        Label : VAR
+          var
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+        Label : NAME
+          __destruct
+        Label : BLOCK
+          {
+          Label : CODE
+            void
   Label : EXTENDS
     y
   Label : IMPLEMENTS

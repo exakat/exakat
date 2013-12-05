@@ -7,14 +7,14 @@ Label : CODE
     Label : RETURN
       .
       Label : CONCAT
+        'z'
+      Label : CONCAT
         str_replace
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            $c
-          Label : ARGUMENT
             "b"
           Label : ARGUMENT
             "a"
-      Label : CONCAT
-        'z'
+          Label : ARGUMENT
+            $c

@@ -6,23 +6,23 @@ Label : CODE
     =
     Label : RIGHT
       [
-      Label : VARIABLE
-        $f
       Label : INDEX
         'e'
+      Label : VARIABLE
+        $f
     Label : LEFT
       [
       Label : VARIABLE
         [
-        Label : VARIABLE
-          [
-          Label : VARIABLE
-            $a
-          Label : INDEX
-            [
-            Label : VARIABLE
-              $b
-            Label : INDEX
-              'c'
         Label : INDEX
           'd'
+        Label : VARIABLE
+          [
+          Label : INDEX
+            [
+            Label : INDEX
+              'c'
+            Label : VARIABLE
+              $b
+          Label : VARIABLE
+            $a

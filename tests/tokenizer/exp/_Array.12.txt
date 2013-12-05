@@ -9,35 +9,29 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          -
-          Label : RIGHT
-            1
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $i
-            Label : INDEX
-              $j
-        Label : ARGUMENT
           +
           Label : RIGHT
             1
           Label : LEFT
             [
-            Label : VARIABLE
-              $g
             Label : INDEX
               $h
+            Label : VARIABLE
+              $g
+        Label : ARGUMENT
+          -
+          Label : RIGHT
+            1
+          Label : LEFT
+            [
+            Label : INDEX
+              $j
+            Label : VARIABLE
+              $i
     Label : LEFT
       [
-      Label : VARIABLE
-        [
-        Label : VARIABLE
-          $a
       Label : INDEX
         .
-        Label : CONCAT
-          "f"
         Label : CONCAT
           ->
           Label : OBJECT
@@ -48,3 +42,9 @@ Label : CODE
               void
               Label : ARGUMENT
                 $e
+        Label : CONCAT
+          "f"
+      Label : VARIABLE
+        [
+        Label : VARIABLE
+          $a

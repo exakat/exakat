@@ -9,8 +9,8 @@ Label : CODE
       Label : CODE
         $e
     Label : THEN
-      ;
-      Label : ELEMENT
-        a
+      Block With Sequence For Case Without Semicolon
       Label : ELEMENT
         C
+      Label : ELEMENT
+        a

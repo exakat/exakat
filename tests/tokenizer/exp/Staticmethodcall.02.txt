@@ -7,8 +7,6 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
-        'd'
-      Label : CONCAT
         ::
         Label : CLASS
           b
@@ -16,5 +14,7 @@ Label : CODE
           c
           Label : ARGUMENTS
             void
+      Label : CONCAT
+        'd'
     Label : LEFT
       $a

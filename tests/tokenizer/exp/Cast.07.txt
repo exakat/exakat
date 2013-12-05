@@ -3,21 +3,21 @@
 Label : CODE
   ;
   Label : ELEMENT
-    (double)
-    Label : CAST
-      ->
-      Label : OBJECT
-        $z
-      Label : PROPERTY
-        h
-  Label : ELEMENT
     (float)
     Label : CAST
       ::
-      Label : CONSTANT
-        y
       Label : CLASS
         y
+      Label : CONSTANT
+        y
+  Label : ELEMENT
+    (double)
+    Label : CAST
+      ->
+      Label : PROPERTY
+        h
+      Label : OBJECT
+        $z
   Label : ELEMENT
     (real)
     Label : CAST

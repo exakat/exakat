@@ -2,11 +2,11 @@
 
 Label : CODE
   [
-  Label : VARIABLE
-    [
-    Label : VARIABLE
-      $_array
-    Label : INDEX
-      'a'
   Label : INDEX
     $x
+  Label : VARIABLE
+    [
+    Label : INDEX
+      'a'
+    Label : VARIABLE
+      $_array

@@ -6,10 +6,10 @@ Label : CODE
     $y
   Label : SOURCE
     [
-    Label : VARIABLE
-      $x
     Label : INDEX
       'a'
+    Label : VARIABLE
+      $x
   Label : LOOP
     {
     Label : CODE

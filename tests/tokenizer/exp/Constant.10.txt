@@ -4,10 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
+    Label : OBJECT
+      $d
     Label : METHOD
       a
       Label : ARGUMENTS
         ,
+        Label : ARGUMENT
+          $x
         Label : ARGUMENT
           ?
           Label : CONDITION
@@ -16,7 +20,3 @@ Label : CODE
             null
           Label : ELSE
             $c
-        Label : ARGUMENT
-          $x
-    Label : OBJECT
-      $d

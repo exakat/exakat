@@ -6,9 +6,9 @@ Label : CODE
     ::
     Label : CLASS
       [
-      Label : VARIABLE
-        $x
       Label : INDEX
         1
+      Label : VARIABLE
+        $x
     Label : PROPERTY
       $b

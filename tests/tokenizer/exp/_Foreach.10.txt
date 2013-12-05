@@ -19,9 +19,9 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          $d
-        Label : ARGUMENT
           'd'
+        Label : ARGUMENT
+          $d
   Label : LOOP
     {
     Label : CODE

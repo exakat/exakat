@@ -8,7 +8,7 @@ Label : CODE
       (string)
       Label : CAST
         {
-        Label : VARIABLE
-          $a
         Label : INDEX
           $b
+        Label : VARIABLE
+          $a

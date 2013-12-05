@@ -11,9 +11,9 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            $c
-          Label : ARGUMENT
             $b
+          Label : ARGUMENT
+            $c
       Label : METHOD
         d
         Label : ARGUMENTS

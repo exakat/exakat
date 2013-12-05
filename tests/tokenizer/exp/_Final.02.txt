@@ -1,8 +1,8 @@
 <?php
 
 Label : CODE
-  final
-  Label : FINAL
+  Ppp
+  Label : DEFINE
     class
     Label : NAME
       y
@@ -10,3 +10,5 @@ Label : CODE
       {
       Label : CODE
         void
+  Label : FINAL
+    final

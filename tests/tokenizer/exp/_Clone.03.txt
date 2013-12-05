@@ -8,9 +8,9 @@ Label : CODE
       clone
       Label : CLONE
         [
-        Label : VARIABLE
-          $y
         Label : INDEX
           0
+        Label : VARIABLE
+          $y
     Label : LEFT
       $x

@@ -5,9 +5,9 @@ Label : CODE
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
-      $b
-    Label : ARGUMENT
       $a
+    Label : ARGUMENT
+      $b
   Label : NAME
     cmp1
   Label : BLOCK
@@ -20,16 +20,16 @@ Label : CODE
           ==
           Label : RIGHT
             [
-            Label : VARIABLE
-              $b
             Label : INDEX
               'd'
+            Label : VARIABLE
+              $b
           Label : LEFT
             [
-            Label : VARIABLE
-              $a
             Label : INDEX
               'c'
+            Label : VARIABLE
+              $a
       Label : THEN
         Block With if/elseif
         Label : CODE

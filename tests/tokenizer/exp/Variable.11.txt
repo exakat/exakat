@@ -10,7 +10,7 @@ Label : CODE
         1
       Label : LEFT
         [
-        Label : VARIABLE
-          $c
         Label : INDEX
           'd'
+        Label : VARIABLE
+          $c

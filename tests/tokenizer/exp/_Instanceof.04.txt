@@ -7,12 +7,12 @@ Label : CODE
     Label : RIGHT
       \
       Label : ELEMENT
-        D
-      Label : ELEMENT
         C
+      Label : ELEMENT
+        A
       Label : ELEMENT
         B
       Label : ELEMENT
-        A
+        D
     Label : LEFT
       $x

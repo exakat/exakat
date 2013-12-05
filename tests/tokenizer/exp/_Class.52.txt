@@ -13,7 +13,7 @@ Label : CODE
         Label : ARGUMENTS
           void
         Label : NAME
-          a
+          b
         Label : BLOCK
           {
           Label : CODE
@@ -23,7 +23,7 @@ Label : CODE
         Label : ARGUMENTS
           void
         Label : NAME
-          b
+          a
         Label : BLOCK
           {
           Label : CODE

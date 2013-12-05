@@ -15,11 +15,11 @@ Label : CODE
         Label : RETURN
           .
           Label : CONCAT
-            "g"
-          Label : CONCAT
             b
             Label : ARGUMENTS
               ,
+              Label : ARGUMENT
+                "c"
               Label : ARGUMENT
                 ?
                 Label : CONDITION
@@ -36,7 +36,7 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       $f
-              Label : ARGUMENT
-                "c"
           Label : CONCAT
             "a"
+          Label : CONCAT
+            "g"

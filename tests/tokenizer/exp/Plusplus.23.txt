@@ -4,17 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     [
-    Label : VARIABLE
-      $y
     Label : INDEX
       --
       Label : PREPLUSPLUS
         $y
+    Label : VARIABLE
+      $y
   Label : ELEMENT
     [
-    Label : VARIABLE
-      $x
     Label : INDEX
       ++
       Label : POSTPLUSPLUS
         $i
+    Label : VARIABLE
+      $x

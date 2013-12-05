@@ -10,27 +10,27 @@ Label : CODE
         ||
         Label : RIGHT
           ::
+          Label : CLASS
+            C
           Label : METHOD
             t
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'e'
-          Label : CLASS
-            C
         Label : LEFT
           [
-          Label : VARIABLE
-            $c
           Label : INDEX
             'd'
+          Label : VARIABLE
+            $c
       Label : THEN
         1
       Label : ELSE
         2
     Label : LEFT
       [
-      Label : VARIABLE
-        $a
       Label : INDEX
         'b'
+      Label : VARIABLE
+        $a

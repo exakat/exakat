@@ -6,10 +6,10 @@ Label : CODE
     ->
     Label : OBJECT
       [
-      Label : VARIABLE
-        $c
       Label : INDEX
         'd'
+      Label : VARIABLE
+        $c
     Label : METHOD
       e
       Label : ARGUMENTS

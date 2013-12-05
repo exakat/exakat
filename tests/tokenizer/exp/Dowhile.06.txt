@@ -8,6 +8,8 @@ Label : CODE
       !
       Label : NOT
         ->
+        Label : OBJECT
+          $f
         Label : METHOD
           g
           Label : ARGUMENTS
@@ -16,8 +18,6 @@ Label : CODE
               ++
               Label : PREPLUSPLUS
                 $h
-        Label : OBJECT
-          $f
     Label : LOOP
       {
       Label : CODE
@@ -26,6 +26,8 @@ Label : CODE
           =
           Label : RIGHT
             ->
+            Label : OBJECT
+              $b
             Label : METHOD
               c
               Label : ARGUMENTS
@@ -34,7 +36,5 @@ Label : CODE
                   $d
                 Label : ARGUMENT
                   $e
-            Label : OBJECT
-              $b
           Label : LEFT
             $a

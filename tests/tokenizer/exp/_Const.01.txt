@@ -10,26 +10,26 @@ Label : CODE
       ;
       Label : ELEMENT
         const
-        Label : NAME
-          D
         Label : VALUE
           '2'
+        Label : NAME
+          D
       Label : ELEMENT
         const
-        Label : NAME
-          C
         Label : VALUE
           1
+        Label : NAME
+          C
       Label : ELEMENT
         const
-        Label : NAME
-          E
         Label : VALUE
           ::
           Label : CLASS
             F
           Label : CONSTANT
             G
+        Label : NAME
+          E
       Label : ELEMENT
         Ppp
         Label : VALUE
@@ -42,14 +42,12 @@ Label : CODE
           protected
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          Void
         Label : DEFINE
           function
-          Label : NAME
-            f
           Label : ARGUMENTS
             void
+          Label : NAME
+            f
           Label : BLOCK
             {
             Label : CODE

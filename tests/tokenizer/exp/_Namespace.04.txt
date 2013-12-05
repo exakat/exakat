@@ -7,8 +7,8 @@ Label : CODE
     Label : NAMESPACE
       \
       Label : ELEMENT
-        C
-      Label : ELEMENT
         B
       Label : ELEMENT
         A
+      Label : ELEMENT
+        C

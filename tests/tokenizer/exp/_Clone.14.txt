@@ -12,41 +12,41 @@ Label : CODE
           void
           Label : ARGUMENT
             [
-            Label : VARIABLE
-              ->
-              Label : OBJECT
-                $b
-              Label : PROPERTY
-                c
             Label : INDEX
               'd'
+            Label : VARIABLE
+              ->
+              Label : PROPERTY
+                c
+              Label : OBJECT
+                $b
       Label : THEN
         clone
         Label : CLONE
           [
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $c
-            Label : PROPERTY
-              d
           Label : INDEX
             'e'
+          Label : VARIABLE
+            ->
+            Label : PROPERTY
+              d
+            Label : OBJECT
+              $c
       Label : ELSE
         ->
+        Label : OBJECT
+          ->
+          Label : OBJECT
+            $f
+          Label : METHOD
+            g
+            Label : ARGUMENTS
+              void
         Label : METHOD
           h
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'i'
-        Label : OBJECT
-          ->
-          Label : METHOD
-            g
-            Label : ARGUMENTS
-              void
-          Label : OBJECT
-            $f
     Label : LEFT
       $a

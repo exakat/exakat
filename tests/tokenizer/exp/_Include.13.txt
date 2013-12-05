@@ -11,12 +11,12 @@ Label : CODE
         Label : ARGUMENT
           .
           Label : CONCAT
-            '/c.php'
-          Label : CONCAT
             ->
+            Label : OBJECT
+              $a
             Label : METHOD
               b
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $a
+          Label : CONCAT
+            '/c.php'

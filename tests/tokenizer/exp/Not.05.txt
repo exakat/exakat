@@ -6,59 +6,59 @@ Label : CODE
     !
     Label : NOT
       [
-      Label : VARIABLE
-        $y
       Label : INDEX
         &
         Label : RIGHT
           2
         Label : LEFT
           1
+      Label : VARIABLE
+        $y
   Label : ELEMENT
     !
     Label : NOT
       [
-      Label : VARIABLE
-        $y
-      Label : INDEX
-        &&
-        Label : RIGHT
-          2
-        Label : LEFT
-          1
-  Label : ELEMENT
-    !
-    Label : NOT
-      [
-      Label : VARIABLE
-        $y
       Label : INDEX
         %
         Label : RIGHT
           2
         Label : LEFT
           1
+      Label : VARIABLE
+        $y
   Label : ELEMENT
     !
     Label : NOT
       [
-      Label : VARIABLE
-        $y
-      Label : INDEX
-        .
-        Label : CONCAT
-          2
-        Label : CONCAT
-          1
-  Label : ELEMENT
-    !
-    Label : NOT
-      [
-      Label : VARIABLE
-        $y
       Label : INDEX
         +
         Label : RIGHT
           2
         Label : LEFT
           1
+      Label : VARIABLE
+        $y
+  Label : ELEMENT
+    !
+    Label : NOT
+      [
+      Label : INDEX
+        .
+        Label : CONCAT
+          1
+        Label : CONCAT
+          2
+      Label : VARIABLE
+        $y
+  Label : ELEMENT
+    !
+    Label : NOT
+      [
+      Label : INDEX
+        &&
+        Label : RIGHT
+          2
+        Label : LEFT
+          1
+      Label : VARIABLE
+        $y

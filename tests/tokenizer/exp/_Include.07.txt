@@ -9,6 +9,6 @@ Label : CODE
       Label : ARGUMENT
         .
         Label : CONCAT
-          "autre"
-        Label : CONCAT
           "literal"
+        Label : CONCAT
+          "autre"

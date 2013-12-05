@@ -19,24 +19,6 @@ Label : CODE
         Label : ELEMENT
           continue
           Label : LEVEL
-            23
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        a
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          continue
-          Label : LEVEL
             void
   Label : ELEMENT
     if
@@ -56,3 +38,21 @@ Label : CODE
           continue
           Label : LEVEL
             1
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        a
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          continue
+          Label : LEVEL
+            23

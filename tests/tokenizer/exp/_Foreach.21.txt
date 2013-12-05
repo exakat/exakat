@@ -18,11 +18,11 @@ Label : CODE
         $g
       Label : LEFT
         [
+        Label : INDEX
+          $f
         Label : VARIABLE
           ->
           Label : PROPERTY
             e
           Label : OBJECT
             $d
-        Label : INDEX
-          $f

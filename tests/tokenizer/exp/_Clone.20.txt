@@ -7,6 +7,8 @@ Label : CODE
     Label : CLONE
       .
       Label : CONCAT
+        "a"
+      Label : CONCAT
         "
         Label : CONTAIN
           Concatenation
@@ -16,5 +18,3 @@ Label : CODE
              c 
           Label : CONCAT
             $d
-      Label : CONCAT
-        "a"

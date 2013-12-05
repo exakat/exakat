@@ -7,6 +7,6 @@ Label : CODE
     Label : NAMESPACE
       \
       Label : ELEMENT
-        B
-      Label : ELEMENT
         A
+      Label : ELEMENT
+        B

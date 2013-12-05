@@ -9,20 +9,26 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        var
+        Ppp
         Label : VALUE
-          void
+          Void
         Label : DEFINE
           $z
+        Label : VAR
+          var
       Label : ELEMENT
-        var
+        Ppp
         Label : VALUE
-          void
-        Label : DEFINE
-          $y
-      Label : ELEMENT
-        var
-        Label : VALUE
-          void
+          Void
         Label : DEFINE
           $x
+        Label : VAR
+          var
+      Label : ELEMENT
+        Ppp
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $y
+        Label : VAR
+          var

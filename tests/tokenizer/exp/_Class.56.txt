@@ -1,8 +1,8 @@
 <?php
 
 Label : CODE
-  abstract
-  Label : ABSTRACT
+  Ppp
+  Label : DEFINE
     class
     Label : NAME
       x
@@ -11,44 +11,42 @@ Label : CODE
       Label : CODE
         ;
         Label : ELEMENT
-          static
-          Label : VALUE
-            void
+          Ppp
           Label : DEFINE
-            final
-            Label : FINAL
-              public
-              Label : VALUE
-                void
-              Label : DEFINE
-                function
-                Label : ARGUMENTS
-                  void
-                Label : NAME
-                  a
-                Label : BLOCK
-                  {
-                  Label : CODE
-                    ;
-                    Label : ELEMENT
-                      =
-                      Label : RIGHT
-                        1
-                      Label : LEFT
-                        $x
-        Label : ELEMENT
-          abstract
-          Label : ABSTRACT
-            static
-            Label : VALUE
+            function
+            Label : ARGUMENTS
               void
-            Label : DEFINE
-              protected
-              Label : VALUE
-                void
-              Label : DEFINE
-                function
-                Label : ARGUMENTS
-                  void
-                Label : NAME
-                  b
+            Label : NAME
+              b
+          Label : STATIC
+            static
+          Label : PROTECTED
+            protected
+          Label : ABSTRACT
+            abstract
+        Label : ELEMENT
+          Ppp
+          Label : DEFINE
+            function
+            Label : ARGUMENTS
+              void
+            Label : NAME
+              a
+            Label : BLOCK
+              {
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    1
+                  Label : LEFT
+                    $x
+          Label : STATIC
+            static
+          Label : PUBLIC
+            public
+          Label : FINAL
+            final
+  Label : ABSTRACT
+    abstract

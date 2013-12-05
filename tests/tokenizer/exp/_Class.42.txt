@@ -11,6 +11,6 @@ Label : CODE
   Label : IMPLEMENTS
     u
   Label : IMPLEMENTS
-    t
-  Label : IMPLEMENTS
     s
+  Label : IMPLEMENTS
+    t

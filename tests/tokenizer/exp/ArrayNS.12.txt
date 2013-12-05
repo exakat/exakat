@@ -12,18 +12,18 @@ Label : CODE
         $j
     Label : LEFT
       [
-      Label : VARIABLE
-        [
-        Label : VARIABLE
-          $f
-        Label : INDEX
-          $g
       Label : INDEX
         [
-        Label : VARIABLE
-          $h
         Label : INDEX
           $i
+        Label : VARIABLE
+          $h
+      Label : VARIABLE
+        [
+        Label : INDEX
+          $g
+        Label : VARIABLE
+          $f
   Label : ELEMENT
     =
     Label : RIGHT
@@ -35,20 +35,20 @@ Label : CODE
           Label : ARGUMENTS
             ,
             Label : ARGUMENT
-              1
-            Label : ARGUMENT
               $e
+            Label : ARGUMENT
+              1
     Label : LEFT
       [
-      Label : VARIABLE
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          $b
       Label : INDEX
         [
-        Label : VARIABLE
-          $c
         Label : INDEX
           $d
+        Label : VARIABLE
+          $c
+      Label : VARIABLE
+        [
+        Label : INDEX
+          $b
+        Label : VARIABLE
+          $a

@@ -1,8 +1,8 @@
 <?php
 
 Label : CODE
-  abstract
-  Label : ABSTRACT
+  Ppp
+  Label : DEFINE
     class
     Label : NAME
       x
@@ -11,46 +11,50 @@ Label : CODE
       Label : CODE
         ;
         Label : ELEMENT
-          final
-          Label : FINAL
+          Ppp
+          Label : DEFINE
             function
-            Label : NAME
-              a
             Label : ARGUMENTS
               void
+            Label : NAME
+              b
             Label : BLOCK
               {
               Label : CODE
                 void
-        Label : ELEMENT
-          final
-          Label : FINAL
+          Label : PUBLIC
             public
-            Label : VALUE
-              void
-            Label : DEFINE
-              function
-              Label : NAME
-                b
-              Label : ARGUMENTS
-                void
-              Label : BLOCK
-                {
-                Label : CODE
-                  void
-        Label : ELEMENT
-          final
           Label : FINAL
-            static
-            Label : VALUE
+            final
+        Label : ELEMENT
+          Ppp
+          Label : DEFINE
+            function
+            Label : ARGUMENTS
               void
-            Label : DEFINE
-              function
-              Label : NAME
-                c
-              Label : ARGUMENTS
+            Label : NAME
+              c
+            Label : BLOCK
+              {
+              Label : CODE
                 void
-              Label : BLOCK
-                {
-                Label : CODE
-                  void
+          Label : STATIC
+            static
+          Label : FINAL
+            final
+        Label : ELEMENT
+          Ppp
+          Label : DEFINE
+            function
+            Label : ARGUMENTS
+              void
+            Label : NAME
+              a
+            Label : BLOCK
+              {
+              Label : CODE
+                void
+          Label : FINAL
+            final
+  Label : ABSTRACT
+    abstract

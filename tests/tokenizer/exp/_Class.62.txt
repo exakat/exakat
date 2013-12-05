@@ -11,12 +11,12 @@ Label : CODE
   Label : EXTENDS
     \
     Label : ELEMENT
-      D
-    Label : ELEMENT
       E
+    Label : ELEMENT
+      D
   Label : IMPLEMENTS
     \
     Label : ELEMENT
-      C
-    Label : ELEMENT
       B
+    Label : ELEMENT
+      C

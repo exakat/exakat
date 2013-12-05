@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     ::
-    Label : CONSTANT
-      b
     Label : CLASS
       {
-      Label : VARIABLE
-        $x
       Label : INDEX
         1
+      Label : VARIABLE
+        $x
+    Label : CONSTANT
+      b

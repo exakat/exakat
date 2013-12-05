@@ -25,21 +25,21 @@ Label : CODE
               Label : ARGUMENTS
                 ,
                 Label : ARGUMENT
+                  $g
+                Label : ARGUMENT
                   (array)
                   Label : CAST
                     $h
-                Label : ARGUMENT
-                  $g
           Label : LEFT
             isset
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  $d
                 Label : INDEX
                   'e'
+                Label : VARIABLE
+                  $d
       Label : THEN
         Block With if/elseif
         Label : CODE
@@ -48,7 +48,7 @@ Label : CODE
             void
             Label : ARGUMENT
               [
-              Label : VARIABLE
-                $j
               Label : INDEX
                 $k
+              Label : VARIABLE
+                $j

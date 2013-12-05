@@ -3,20 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    foreach
-    Label : SOURCE
-      $a
-    Label : VALUE
-      $b
-    Label : LOOP
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a
-  Label : ELEMENT
     {
     Label : CODE
       ;
@@ -26,3 +12,17 @@ Label : CODE
           1
         Label : LEFT
           $b
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      $b
+    Label : SOURCE
+      $a
+    Label : LOOP
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $a

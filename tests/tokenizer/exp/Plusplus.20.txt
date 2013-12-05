@@ -6,7 +6,7 @@ Label : CODE
     ++
     Label : PREPLUSPLUS
       ::
-      Label : PROPERTY
-        $count
       Label : CLASS
         self
+      Label : PROPERTY
+        $count

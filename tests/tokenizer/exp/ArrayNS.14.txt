@@ -8,23 +8,23 @@ Label : CODE
       $i
     Label : LEFT
       [
+      Label : INDEX
+        [
+        Label : INDEX
+          'h'
+        Label : VARIABLE
+          $g
       Label : VARIABLE
         ::
         Label : CLASS
           C
         Label : PROPERTY
           [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $d
-            Label : INDEX
-              $e
           Label : INDEX
             $f
-      Label : INDEX
-        [
-        Label : VARIABLE
-          $g
-        Label : INDEX
-          'h'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              $e
+            Label : VARIABLE
+              $d

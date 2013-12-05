@@ -13,16 +13,16 @@ Label : CODE
         Label : THEN
           .
           Label : CONCAT
-            'd'
-          Label : CONCAT
             e
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'h'
           Label : CONCAT
+            $b
+          Label : CONCAT
             $c
           Label : CONCAT
-            $b
+            'd'
         Label : ELSE
           $e

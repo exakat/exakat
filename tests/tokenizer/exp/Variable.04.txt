@@ -4,7 +4,7 @@ Label : CODE
   ;
   Label : ELEMENT
     [
-    Label : VARIABLE
-      $_ENV
     Label : INDEX
       'shell'
+    Label : VARIABLE
+      $_ENV

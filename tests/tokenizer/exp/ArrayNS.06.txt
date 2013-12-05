@@ -1,42 +1,55 @@
 <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
+Label : NEXT
+  $a
+  Label : NEXT
     =
-    Label : RIGHT
+    Label : NEXT
       [
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
+      Label : NEXT
+        'a'
+        Label : NEXT
           =>
-          Label : KEY
-            'i'
-          Label : VALUE
-            'j'
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'g'
-          Label : VALUE
-            'h'
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'e'
-          Label : VALUE
-            'f'
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'c'
-          Label : VALUE
-            's'
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'a'
-          Label : VALUE
+          Label : NEXT
             'b'
-    Label : LEFT
-      $a
+            Label : NEXT
+              ,
+              Label : NEXT
+                ,
+                Label : NEXT
+                  ,
+                  Label : NEXT
+                    'i'
+                    Label : NEXT
+                      =>
+                      Label : NEXT
+                        'j'
+                        Label : NEXT
+                          ]
+                          Label : NEXT
+                            ;
+                            Label : NEXT
+                              ?>
+
+                              Label : NEXT
+                                /**/
+                                Label : NEXT
+                                  /* * */
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    'e'
+                  Label : VALUE
+                    'f'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    'c'
+                  Label : VALUE
+                    's'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    'g'
+                  Label : VALUE
+                    'h'

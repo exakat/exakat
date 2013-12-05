@@ -10,28 +10,12 @@ Label : CODE
         2
       Label : LEFT
         ::
+        Label : CLASS
+          b
         Label : METHOD
           c
           Label : ARGUMENTS
             void
-        Label : CLASS
-          b
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      /
-      Label : RIGHT
-        2
-      Label : LEFT
-        ::
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            void
-        Label : CLASS
-          b
     Label : LEFT
       $a
   Label : ELEMENT
@@ -42,12 +26,12 @@ Label : CODE
         2
       Label : LEFT
         ::
+        Label : CLASS
+          b
         Label : METHOD
           c
           Label : ARGUMENTS
             void
-        Label : CLASS
-          b
     Label : LEFT
       $a
   Label : ELEMENT
@@ -58,11 +42,27 @@ Label : CODE
         2
       Label : LEFT
         ::
+        Label : CLASS
+          b
         Label : METHOD
           c
           Label : ARGUMENTS
             void
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      /
+      Label : RIGHT
+        2
+      Label : LEFT
+        ::
         Label : CLASS
           b
+        Label : METHOD
+          c
+          Label : ARGUMENTS
+            void
     Label : LEFT
       $a

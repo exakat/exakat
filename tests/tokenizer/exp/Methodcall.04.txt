@@ -10,7 +10,7 @@ Label : CODE
       void
     Label : METHOD
       [
-      Label : VARIABLE
-        $b
       Label : INDEX
         'c'
+      Label : VARIABLE
+        $b

@@ -1,47 +1,36 @@
 <?php
 
-Label : NEXT
+Label : CODE
   function
-  Label : NEXT
+  Label : ARGUMENTS
+    ,
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        \
+        Label : ELEMENT
+          A
+      Label : VARIABLE
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          $c
+    Label : ARGUMENT
+      $b
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        \
+        Label : ELEMENT
+          C
+        Label : ELEMENT
+          D
+      Label : VARIABLE
+        $d
+  Label : NAME
     a
-    Label : NEXT
-      (
-      Label : NEXT
-        $b
-        Label : NEXT
-          ,
-          Label : NEXT
-            \
-            Label : NEXT
-              $c
-              Label : NEXT
-                =
-                Label : NEXT
-                  null
-                  Label : NEXT
-                    ,
-                    Label : NEXT
-                      Typehint
-                      Label : CLASS
-                        \
-                        Label : ELEMENT
-                          C
-                        Label : ELEMENT
-                          D
-                      Label : NEXT
-                        )
-                        Label : NEXT
-                          {
-                          Label : NEXT
-                            ?>
-
-                            Label : NEXT
-                              /**/
-                              Label : NEXT
-                                /* * */
-                          Label : CODE
-                            void
-                      Label : VARIABLE
-                        $d
-            Label : ELEMENT
-              A
+  Label : BLOCK
+    {
+    Label : CODE
+      void

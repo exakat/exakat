@@ -15,11 +15,11 @@ Label : CODE
         Label : CONCAT
           ${
         Label : CONCAT
+          $object
+        Label : CONCAT
           ->
-          Label : OBJECT
-            $object
-          Label : PROPERTY
-            property
+        Label : CONCAT
+          property
         Label : CONCAT
           }
         Label : CONCAT

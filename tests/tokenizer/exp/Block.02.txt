@@ -3,6 +3,16 @@
 Label : CODE
   ;
   Label : ELEMENT
+    ->
+    Label : OBJECT
+      $r
+    Label : METHOD
+      setOptions
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $options
+  Label : ELEMENT
     {
     Label : CODE
       ;
@@ -12,13 +22,3 @@ Label : CODE
           1
         Label : LEFT
           $b
-  Label : ELEMENT
-    ->
-    Label : METHOD
-      setOptions
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $options
-    Label : OBJECT
-      $r

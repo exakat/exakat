@@ -9,15 +9,15 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          void
-        Label : ARGUMENT
           4
-        Label : ARGUMENT
-          3
         Label : ARGUMENT
           2
         Label : ARGUMENT
           1
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          void
     Label : LEFT
       $b
   Label : ELEMENT
@@ -27,10 +27,10 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          3
-        Label : ARGUMENT
           2
         Label : ARGUMENT
           1
+        Label : ARGUMENT
+          3
     Label : LEFT
       $x

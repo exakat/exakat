@@ -7,6 +7,6 @@ Label : CODE
     Label : ARGUMENTS
       ,
       Label : ARGUMENT
-        __FILE__
-      Label : ARGUMENT
         __DIR__
+      Label : ARGUMENT
+        __FILE__

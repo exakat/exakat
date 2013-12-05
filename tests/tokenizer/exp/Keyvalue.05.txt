@@ -10,23 +10,23 @@ Label : CODE
         ,
         Label : ARGUMENT
           =>
-          Label : VALUE
-            $d
-          Label : KEY
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
-              c
-        Label : ARGUMENT
-          =>
-          Label : VALUE
-            'd'
           Label : KEY
             ::
-            Label : CONSTANT
-              C
             Label : CLASS
               B
+            Label : CONSTANT
+              C
+          Label : VALUE
+            'd'
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ->
+            Label : PROPERTY
+              c
+            Label : OBJECT
+              $b
+          Label : VALUE
+            $d
     Label : LEFT
       $a

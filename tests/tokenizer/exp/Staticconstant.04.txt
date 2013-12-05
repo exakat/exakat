@@ -7,9 +7,17 @@ Label : CODE
     Label : CLASS
       \
       Label : ELEMENT
+        C
+      Label : ELEMENT
+        A
+      Label : ELEMENT
         D
-      Label : ELEMENT
-        C
+    Label : CONSTANT
+      B
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      \
       Label : ELEMENT
         A
     Label : CONSTANT
@@ -19,16 +27,8 @@ Label : CODE
     Label : CLASS
       \
       Label : ELEMENT
+        A
+      Label : ELEMENT
         C
-      Label : ELEMENT
-        A
-    Label : CONSTANT
-      B
-  Label : ELEMENT
-    ::
-    Label : CLASS
-      \
-      Label : ELEMENT
-        A
     Label : CONSTANT
       B

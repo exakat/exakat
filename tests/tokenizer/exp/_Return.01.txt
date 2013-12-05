@@ -9,19 +9,11 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          $z
-        Label : ARGUMENT
           $y
         Label : ARGUMENT
           $x
-  Label : ELEMENT
-    return
-    Label : RETURN
-      ::
-      Label : PROPERTY
-        $y
-      Label : CLASS
-        b
+        Label : ARGUMENT
+          $z
   Label : ELEMENT
     return
     Label : RETURN
@@ -38,3 +30,11 @@ Label : CODE
         x
       Label : OBJECT
         $this
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ::
+      Label : CLASS
+        b
+      Label : PROPERTY
+        $y

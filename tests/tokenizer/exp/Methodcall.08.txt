@@ -11,9 +11,9 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          2
-        Label : ARGUMENT
           1
+        Label : ARGUMENT
+          2
       Label : METHOD
         'c'
     Label : LEFT

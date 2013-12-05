@@ -9,12 +9,12 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
+          $b
+        Label : ARGUMENT
           (array)
           Label : CAST
             $c
             Label : ARGUMENTS
               void
-        Label : ARGUMENT
-          $b
     Label : LEFT
       $a

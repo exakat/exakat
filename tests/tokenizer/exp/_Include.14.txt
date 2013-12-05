@@ -2,11 +2,13 @@
 Label : CODE
   ;
   Label : ELEMENT
-    b
+    A
+  Label : ELEMENT
+    include
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        'c'
+        'a.php'
   Label : ELEMENT
     B
   Label : ELEMENT
@@ -16,10 +18,8 @@ Label : CODE
       Label : ARGUMENT
         'b.php'
   Label : ELEMENT
-    include
+    b
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        'a.php'
-  Label : ELEMENT
-    A
+        'c'

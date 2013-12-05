@@ -3,28 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          \
-          Label : ELEMENT
-            b
-          Label : ELEMENT
-            a
-        Label : LEFT
-          $x
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $y
-  Label : ELEMENT
     =
     Label : RIGHT
       a
@@ -35,22 +13,44 @@ Label : CODE
     Label : RIGHT
       \
       Label : ELEMENT
-        d
-      Label : ELEMENT
-        c
+        a
       Label : ELEMENT
         b
-      Label : ELEMENT
-        a
     Label : LEFT
-      $x2
+      $x
   Label : ELEMENT
     =
     Label : RIGHT
       \
       Label : ELEMENT
-        b
+        c
       Label : ELEMENT
         a
+      Label : ELEMENT
+        b
+      Label : ELEMENT
+        d
     Label : LEFT
-      $x
+      $x2
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          \
+          Label : ELEMENT
+            a
+          Label : ELEMENT
+            b
+        Label : LEFT
+          $x
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $y

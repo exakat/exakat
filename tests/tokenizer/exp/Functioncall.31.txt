@@ -11,14 +11,6 @@ Label : CODE
         Label : ARGUMENTS
           void
       Label : LEFT
-        $d
-    Label : ARGUMENT
-      =
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          void
-      Label : LEFT
         $c
     Label : ARGUMENT
       =
@@ -28,6 +20,14 @@ Label : CODE
           void
       Label : LEFT
         $b
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        array
+        Label : ARGUMENTS
+          void
+      Label : LEFT
+        $d
   Label : NAME
     a
   Label : BLOCK

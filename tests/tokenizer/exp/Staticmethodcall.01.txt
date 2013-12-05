@@ -6,11 +6,11 @@ Label : CODE
     =
     Label : RIGHT
       ::
+      Label : CLASS
+        b
       Label : METHOD
         c
         Label : ARGUMENTS
           void
-      Label : CLASS
-        b
     Label : LEFT
       $a

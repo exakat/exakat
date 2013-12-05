@@ -11,6 +11,6 @@ Label : CODE
   Label : IMPLEMENTS
     \
     Label : ELEMENT
-      C
-    Label : ELEMENT
       B
+    Label : ELEMENT
+      C

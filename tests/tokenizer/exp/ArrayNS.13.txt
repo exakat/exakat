@@ -4,13 +4,13 @@ Label : CODE
   ;
   Label : ELEMENT
     [
+    Label : INDEX
+      $c
     Label : VARIABLE
       $
       Label : NAME
         .
         Label : CONCAT
-          $b
-        Label : CONCAT
           'a'
-    Label : INDEX
-      $c
+        Label : CONCAT
+          $b

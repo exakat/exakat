@@ -28,13 +28,13 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          $e
-        Label : ARGUMENT
           ->
           Label : PROPERTY
             d
           Label : OBJECT
             $c
+        Label : ARGUMENT
+          $e
     Label : ELSE
       f
       Label : ARGUMENTS
@@ -42,12 +42,12 @@ Label : CODE
         Label : ARGUMENT
           ->
           Label : PROPERTY
-            j
-          Label : OBJECT
-            $i
-        Label : ARGUMENT
-          ->
-          Label : PROPERTY
             h
           Label : OBJECT
             $g
+        Label : ARGUMENT
+          ->
+          Label : PROPERTY
+            j
+          Label : OBJECT
+            $i

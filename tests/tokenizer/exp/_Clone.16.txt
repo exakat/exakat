@@ -7,6 +7,16 @@ Label : CODE
     Label : ARGUMENTS
       void
     Label : NAME
+      d
+    Label : BLOCK
+      {
+      Label : CODE
+        void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+    Label : NAME
       c
     Label : BLOCK
       {
@@ -24,13 +34,3 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     $b
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      void
-    Label : NAME
-      d
-    Label : BLOCK
-      {
-      Label : CODE
-        void

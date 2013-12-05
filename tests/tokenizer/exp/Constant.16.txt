@@ -11,25 +11,13 @@ Label : CODE
       Label : LEFT
         \
         Label : ELEMENT
-          l
-        Label : ELEMENT
           k
         Label : ELEMENT
           j
+        Label : ELEMENT
+          l
     Label : LEFT
       $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      \
-      Label : ELEMENT
-        i
-      Label : ELEMENT
-        h
-      Label : ELEMENT
-        g
-    Label : LEFT
-      $x
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -37,8 +25,20 @@ Label : CODE
       Label : ARGUMENT
         \
         Label : ELEMENT
-          f
-        Label : ELEMENT
           e
         Label : ELEMENT
           d
+        Label : ELEMENT
+          f
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      \
+      Label : ELEMENT
+        h
+      Label : ELEMENT
+        g
+      Label : ELEMENT
+        i
+    Label : LEFT
+      $x

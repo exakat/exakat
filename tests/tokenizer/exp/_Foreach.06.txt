@@ -4,10 +4,10 @@ Label : CODE
   foreach
   Label : VALUE
     [
-    Label : VARIABLE
-      $b
     Label : INDEX
       3
+    Label : VARIABLE
+      $b
   Label : SOURCE
     $a
   Label : LOOP

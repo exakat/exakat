@@ -9,26 +9,32 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        const
-        Label : NAME
-          b
-        Label : VALUE
-          2
-      Label : ELEMENT
-        var
-        Label : NAME
-          $g
+        Ppp
         Label : VALUE
           4
-      Label : ELEMENT
-        var
         Label : NAME
-          $h
+          $g
+        Label : VAR
+          var
+      Label : ELEMENT
+        const
+        Label : VALUE
+          2
+        Label : NAME
+          b
+      Label : ELEMENT
+        Ppp
         Label : VALUE
           void
-      Label : ELEMENT
-        var
         Label : NAME
           $e
+        Label : VAR
+          var
+      Label : ELEMENT
+        Ppp
         Label : VALUE
           void
+        Label : NAME
+          $h
+        Label : VAR
+          var

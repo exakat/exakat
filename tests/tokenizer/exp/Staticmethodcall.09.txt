@@ -4,17 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
-    Label : METHOD
-      d
-      Label : ARGUMENTS
-        void
     Label : OBJECT
       ::
       Label : CLASS
         self
       Label : PROPERTY
         [
-        Label : VARIABLE
-          $a
         Label : INDEX
           $b
+        Label : VARIABLE
+          $a
+    Label : METHOD
+      d
+      Label : ARGUMENTS
+        void

@@ -11,9 +11,9 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            'r+b'
-          Label : ARGUMENT
             '/tmp/test'
+          Label : ARGUMENT
+            'r+b'
       Label : LEFT
         !
         Label : NOT

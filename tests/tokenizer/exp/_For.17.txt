@@ -2,13 +2,9 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
-    Label : LEFT
-      $f
+    return
+    Label : RETURN
+      $n
   Label : ELEMENT
     for
     Label : CODE
@@ -31,22 +27,30 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $e
-    Label : INIT
-      =
-      Label : RIGHT
-        0
-      Label : LEFT
-        $i
     Label : FINAL
       <
       Label : RIGHT
         $b
       Label : LEFT
         $i
+    Label : INIT
+      =
+      Label : RIGHT
+        0
+      Label : LEFT
+        $i
     Label : INCREMENT
       ++
       Label : PREPLUSPLUS
         $i
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+    Label : LEFT
+      $f
   Label : ELEMENT
     foreach
     Label : VALUE
@@ -75,7 +79,3 @@ Label : CODE
               $l
         Label : LEFT
           $k
-  Label : ELEMENT
-    return
-    Label : RETURN
-      $n

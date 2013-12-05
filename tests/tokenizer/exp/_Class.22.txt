@@ -9,8 +9,10 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        var
-        Label : NAME
-          $x
+        Ppp
         Label : VALUE
           1
+        Label : DEFINE
+          $x
+        Label : VAR
+          var
