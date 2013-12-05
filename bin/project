@@ -1,0 +1,43 @@
+<?php
+
+$args = $argv;
+
+if (!isset($argv[1])) {
+    print "Usage : php bin/project [Project name]\n";
+    die();
+}
+
+
+$project = $args[1]; //'idiorm';
+
+if (!file_exists('./projects/'.$project)) {
+    print "Project '$project' doesn't exists in projects folder. Aborting\n";
+    die();
+}
+
+if (!file_exists('./projects/'.$project.'/config.ini')) {
+    print "Project '$project' exists but has no config file. Aborting\n";
+    die();
+}
+
+if (!file_exists('./projects/'.$project.'/code')) {
+    print "Project '$project' exists but has no code folder. Aborting\n";
+    die();
+}
+
+if (!file_exists('./projects/'.$project.'/log')) {
+    print "Project '$project' exists but has no log folder. Aborting\n";
+    die();
+}
+
+shell_exec('sh scripts/clean.sh'); // or php bin/delete
+shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/');
+shell_exec('php bin/build_root; php bin/tokenizer');
+shell_exec('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
+shell_exec('php bin/analyze');
+
+shell_exec('php bin/export -dot -o ./projects/'.$project.'/export.dot');
+shell_exec('php bin/stat > ./projects/'.$project.'/stats.txt');
+shell_exec('php bin/report -f ./projects/'.$project.'/test -markdown');
+
+?>
