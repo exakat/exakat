@@ -95,18 +95,18 @@ $classes = array(
     '_Throw',       
     '_Case',        
     '_Default',     
+//    'SequenceCaseDefault', // must be before _Switch, as they share the same Token for dectetion
     '_Switch',      
     'Ifthen',
     'IfthenElse',   
     '_Foreach',
     '_For',
-    '_While',
     '_Dowhile',     
+    '_While',
     '_Catch',       
     '_Try',         
     'Sequence',     
     'SequenceAtom',
-    'SequenceCaseDefault',
     'Phpcodemiddle',
     'Phpcode',      
     'Void',
@@ -129,7 +129,9 @@ foreach($classes as $class) {
     $new = "Tokenizer\\$class";
     
     $r = new $new($client);
-    if ($r->checkRemaining()) {
+    if ($new == 'Tokenizer\\FunctioncallArray') {
+        $regex[$class] = $r;
+    } elseif ($r->checkRemaining()) {
         $regex[$class] = $r;
     } else {
 //        print "No $class to process\n";
@@ -166,7 +168,7 @@ while(check_prev($prev, $extra_rounds)) {
     $regex_next = array();
     foreach($regex as $name => $r) {
         $begin = microtime(true);
-        if ($r->check()) {
+        if ($r->check() || $name == "FunctioncallArray") {
             $regex_next[$name] = $r;
         }
         $end = microtime(true);
