@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Arguments extends TokenAuto {
     static public $operators = array('T_COMMA');
 
-    static public $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 
+    static public $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 'Identifier', 
                                        'Integer', 'Float', 'Not', 'Variable', 'Array', 'Concatenation', 'Sign',
                                        'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
                                        'Magicconstant', 'Ternary', 'Assignation', 'Logical', 'Keyvalue', 'Void', 
@@ -44,10 +44,10 @@ class Arguments extends TokenAuto {
         $this->checkAuto();
 
         // @note arguments separated by , (interface), ending on a {
-        $this->conditions = array(-1 => array('atom' => array('String', 'Arguments', 'Nsname') ),
+        $this->conditions = array(-1 => array('atom' => array('Identifier', 'Arguments', 'Nsname') ),
                                    0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
-                                   1 => array('atom' => array('String', 'Nsname')),
+                                   1 => array('atom' => array('Identifier', 'Nsname')),
                                    2 => array('token' => 'T_OPEN_CURLY')
                                  );
         

@@ -6,7 +6,7 @@ class Multiplication extends TokenAuto {
     static public $operators = array('T_STAR', 'T_SLASH', 'T_PERCENTAGE');
     static public $operands = array('Integer', 'Addition', 'Variable', 'Multiplication', 'Sign', 'Not',
                                     'Parenthesis', 'Property', 'Array', 'Concatenation', 'Float',
-                                    'String', 'Preplusplus', 'Postplusplus', 'Nsname', 'Functioncall',
+                                    'String', 'Identifier', 'Preplusplus', 'Postplusplus', 'Nsname', 'Functioncall',
                                     'Methodcall', 'Staticmethodcall', 'Concatenation', 'Cast',
                                     'Noscream', 'Staticconstant', 'Staticproperty', 'Constant', 
                                     'Boolean', 'Magicconstant', 'Assignation' );

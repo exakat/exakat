@@ -8,7 +8,7 @@ class _Interface extends TokenAuto {
     function _check() {
         $this->conditions = array(0 => array('token' => _Interface::$operators,
                                              'atom' => 'none'),
-                                  1 => array('atom' => 'String'),
+                                  1 => array('atom' => 'Identifier'),
                                   2 => array('atom' => 'Block'),
         );
         
@@ -20,9 +20,9 @@ class _Interface extends TokenAuto {
 
         $this->conditions = array(0 => array('token' => _Interface::$operators,
                                              'atom' => 'none'),
-                                  1 => array('atom' => 'String'),
+                                  1 => array('atom' => 'Identifier'),
                                   2 => array('token' => 'T_EXTENDS'),
-                                  3 => array('atom' => array('Arguments', 'String')),
+                                  3 => array('atom' => array('Arguments', 'Identifier')),
                                   4 => array('atom' => 'Block'),
         );
         

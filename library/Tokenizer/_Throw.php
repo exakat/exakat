@@ -9,7 +9,7 @@ class _Throw extends TokenAuto {
         $this->conditions = array(0 => array('token'     => _Throw::$operators,
                                              'atom'      => 'none'),
                                   1 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall', 
-                                                                  'Staticmethodcall', 'Staticproperty', 'String')),
+                                                                  'Staticmethodcall', 'Staticproperty', 'Identifier')),
                                   2 => array('filterOut' => Token::$instruction_ending),
                                   );
         
@@ -23,7 +23,7 @@ class _Throw extends TokenAuto {
                                              'atom'      => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall', 
-                                                                  'Staticmethodcall', 'Staticproperty', 'String')),
+                                                                  'Staticmethodcall', 'Staticproperty', 'Identifier')),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   );
         

@@ -9,7 +9,7 @@ class _Namespace extends TokenAuto {
         // namespace myproject {} 
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom' => 'none'),
-                                  1 => array('atom' => array('String', 'Nsname')),
+                                  1 => array('atom' => array('Identifier', 'Nsname')),
                                   2 => array('atom' => 'Block'),
         );
         
@@ -33,7 +33,7 @@ class _Namespace extends TokenAuto {
         // namespace myproject ; 
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom' => 'none'),
-                                  1 => array('atom' => array('String', 'Nsname')),
+                                  1 => array('atom' => array('Identifier', 'Nsname')),
                                   2 => array('filterOut' => array('T_NS_SEPARATOR')),
         );
         

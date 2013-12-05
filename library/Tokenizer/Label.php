@@ -11,7 +11,7 @@ class Label extends TokenAuto {
                                                                          Assignation::$operators, Addition::$operators, 
                                                                          Multiplication::$operators, Comparison::$operators,
                                                                          Logical::$operators)), 
-                                  -1 => array('atom'      => 'String'),
+                                  -1 => array('atom'      => 'Identifier'),
                                    0 => array('token'     => Label::$operators));
         
         $this->actions = array('transform'  => array(-1 => 'LABEL'),

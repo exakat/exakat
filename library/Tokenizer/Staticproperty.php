@@ -6,7 +6,7 @@ class Staticproperty extends TokenAuto {
     static public $operators = array('T_DOUBLE_COLON');
 
     function _check() {
-        $operands = array('Constant', 'String', 'Variable', 'Array', 'Static', 'Nsname', );
+        $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname', );
         
         $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),
                                    -1 => array('atom' => $operands), 

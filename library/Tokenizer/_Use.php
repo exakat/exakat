@@ -8,7 +8,7 @@ class _Use extends TokenAuto {
     function _check() {
     // use \a\b;
         $this->conditions = array( 0 => array('token' => _Use::$operators),
-                                   1 => array('atom' => array('Nsname', 'String')),
+                                   1 => array('atom' => array('Nsname', 'Identifier')),
                                    2 => array('token' => 'T_SEMICOLON'),
                                  );
         
@@ -30,9 +30,9 @@ class _Use extends TokenAuto {
 
     // use \b\c as d;
         $this->conditions = array( 0 => array('token' => _Use::$operators),
-                                   1 => array('atom'  => array('Nsname', 'String')),
+                                   1 => array('atom'  => array('Nsname', 'Identifier')),
                                    2 => array('token' => 'T_AS'),
-                                   3 => array('atom' => array('String')),
+                                   3 => array('atom' => array('Identifier')),
                                  );
         
         $this->actions = array('transform'  => array( 1 => 'USE',

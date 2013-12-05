@@ -6,7 +6,7 @@ class Concatenation extends TokenAuto {
     public static $operators = array('T_DOT');
     
     function _check() {
-        $operands = array('String', 'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign', 'Array',
+        $operands = array('String', 'Identifier', 'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign', 'Array',
                           'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
                           'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 
                           'Preplusplus', 'Postplusplus', 'Cast', 'Assignation' );

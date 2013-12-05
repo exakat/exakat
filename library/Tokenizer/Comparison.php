@@ -10,7 +10,7 @@ class Comparison extends TokenAuto {
                           'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall',
                            'Magicconstant', 'Staticconstant', 'String', 'Addition', 'Multiplication',
                           'Nsname', 'Not', 'Reference', 'Parenthesis', 'Noscream', 'Preplusplus', 'Postplusplus',
-                          'Bitshift', 'Concatenation', 'Cast', 'New', 'Include'  );
+                          'Bitshift', 'Concatenation', 'Cast', 'New', 'Include' , 'Identifier', );
         
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), 
                                                                          Addition::$operators, Bitshift::$operators, 

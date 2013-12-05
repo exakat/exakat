@@ -15,7 +15,7 @@ class Parenthesis extends TokenAuto {
                              'Include', 'New',
                               );
 
-        $this->conditions = array(-1 => array('filterOut2' => array_merge(Functioncall::$operators, 
+        $this->conditions = array(-1 => array('filterOut2' => array_merge(Functioncall::$operators, _Include::$operators, 
                                                                     array('T_STRING', 'T_CATCH', 'T_EXIT', 'T_FOR', 'T_SWITCH', 
                                                                     'T_WHILE', 'T_ECHO', 'T_UNSET', 'T_EMPTY', 'T_PRINT', 
                                                                     'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST', 
