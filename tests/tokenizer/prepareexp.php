@@ -4,13 +4,30 @@ $args = $argv;
 
 if (count($args) < 2) {
     print "Usage : prepareexp.php Test Number\n Aborting\n";
-    die();
+//    die();
 }
 
-$file = $argv[1];
-$number = @$argv[2];
+@$file = $argv[1];
+@$number = @$argv[2];
 
-if ($number == 0) {
+if (empty($file)) {
+    $sources = glob('source/*.php');
+    foreach($sources as $k => $v) {
+        $sources[$k] = preg_replace('/(.*\.\d+)\..*$/', '\1', basename($v));
+    }
+    
+    $exp = glob('exp/*.txt');
+    foreach($exp as $k => $v) {
+        $exp[$k] = preg_replace('/(.*\.\d+)\..*$/', '\1', basename($v));
+    }
+    
+    $diff = array_diff($sources, $exp);
+    
+    foreach($diff as $d) {
+        list($file, $d) = split('\\.', $d);
+        run($file, $d);
+    }
+} elseif (empty($number)) {
     $sources = glob('source/'.$file.'.*.php');
     foreach($sources as $k => $v) {
         $sources[$k] = preg_replace('/.*\.(\d+)\..*/', '\1', $v);
