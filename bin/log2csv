@@ -1,13 +1,15 @@
 <?php
 
-$in = fopen('log/analyzer.log', 'r');
+$in = fopen('log/tokenizer.log', 'r');
 
 $matrix = array();
 $matrix2 = array();
 
 $result = array();
+$total = 0;
 while($row = fgets($in, 1000)) {
     if (preg_match("/Tokenizer\\\\(.*?)	(\d+\.\d+)	(\d+)/", $row, $r)) {
+        $total++;
         if (isset($result[$r[1]])) {
             $result[$r[1]]['Time'] += $r[2];
             $result[$r[1]]['Times']++;
@@ -20,9 +22,10 @@ while($row = fgets($in, 1000)) {
             $matrix[$r[1]] = array($r[2]);
             $matrix2[$r[1]] = array($r[3]);
         }
-    }
+    } 
 }
 
+print "Processed $total rows\n";
 fclose($in);
 
 $out = fopen('log/analyzer.csv', 'w+');
