@@ -54,12 +54,12 @@ if ($id = array_search('-f', $args)) {
     define('FILE', false);
 }
 
-$queryTemplate = "g.V.has('index', 'true')"; 
+$queryTemplate = "g.V.has('analyzer', 'true')"; 
 $vertices = query($client, $queryTemplate);
 
 $return = array();
 foreach($vertices as $k => $v) {
-    $return[] = $v[0]->analyzer;
+    $return[] = $v[0]->code;
 }
 
 if (FORMAT == 'TEXT') {
