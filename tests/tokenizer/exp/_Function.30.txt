@@ -15,18 +15,6 @@ Label : CODE
         Label : LEFT
           &
           Label : REFERENCE
-            $c
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        StdClass
-      Label : VARIABLE
-        =
-        Label : RIGHT
-          null
-        Label : LEFT
-          &
-          Label : REFERENCE
             $b
     Label : ARGUMENT
       Typehint
@@ -40,6 +28,18 @@ Label : CODE
           &
           Label : REFERENCE
             $x
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        StdClass
+      Label : VARIABLE
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          &
+          Label : REFERENCE
+            $c
   Label : NAME
     x
   Label : BLOCK

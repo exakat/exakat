@@ -33,17 +33,15 @@ Label : CODE
             Label : CODE
               /
               Label : RIGHT
-                $o
+                $f
               Label : LEFT
                 (
                 Label : CODE
                   -
                   Label : RIGHT
-                    $n
+                    $e
                   Label : LEFT
-                    -
-                    Label : SIGN
-                      $m
+                    $d
           Label : ARGUMENT
             (
             Label : CODE
@@ -63,14 +61,16 @@ Label : CODE
             Label : CODE
               /
               Label : RIGHT
-                $f
+                $o
               Label : LEFT
                 (
                 Label : CODE
                   -
                   Label : RIGHT
-                    $e
+                    $n
                   Label : LEFT
-                    $d
+                    -
+                    Label : SIGN
+                      $m
     Label : LEFT
       $a

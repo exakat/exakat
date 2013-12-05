@@ -6,11 +6,11 @@ Label : CODE
     new
     Label : NEW
       {
-      Label : VARIABLE
-        [
-        Label : VARIABLE
-          $x
-        Label : INDEX
-          1
       Label : INDEX
         2
+      Label : VARIABLE
+        [
+        Label : INDEX
+          1
+        Label : VARIABLE
+          $x

@@ -2,6 +2,8 @@
 
 Label : CODE
   function
+  Label : ARGUMENTS
+    void
   Label : NAME
     x
   Label : BLOCK
@@ -20,22 +22,22 @@ Label : CODE
                 ++
                 Label : POSTPLUSPLUS
                   $j
-        Label : INIT
-          =
-          Label : RIGHT
-            0
-          Label : LEFT
-            $i
         Label : FINAL
           <
           Label : RIGHT
             2
           Label : LEFT
-            $i
+            $a
+        Label : INIT
+          =
+          Label : RIGHT
+            0
+          Label : LEFT
+            $a
         Label : INCREMENT
           ++
           Label : POSTPLUSPLUS
-            $i
+            $a
       Label : ELEMENT
         for
         Label : CODE
@@ -48,21 +50,19 @@ Label : CODE
                 ++
                 Label : POSTPLUSPLUS
                   $j
-        Label : INIT
-          =
-          Label : RIGHT
-            0
-          Label : LEFT
-            $a
         Label : FINAL
           <
           Label : RIGHT
             2
           Label : LEFT
-            $a
+            $i
+        Label : INIT
+          =
+          Label : RIGHT
+            0
+          Label : LEFT
+            $i
         Label : INCREMENT
           ++
           Label : POSTPLUSPLUS
-            $a
-  Label : ARGUMENTS
-    void
+            $i

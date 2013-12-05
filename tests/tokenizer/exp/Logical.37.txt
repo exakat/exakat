@@ -9,16 +9,16 @@ Label : CODE
         ->
         Label : OBJECT
           ::
+          Label : CLASS
+            \
+            Label : ELEMENT
+              B
+            Label : ELEMENT
+              C
           Label : METHOD
             d
             Label : ARGUMENTS
               void
-          Label : CLASS
-            \
-            Label : ELEMENT
-              C
-            Label : ELEMENT
-              B
         Label : METHOD
           e
           Label : ARGUMENTS

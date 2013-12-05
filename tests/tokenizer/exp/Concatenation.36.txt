@@ -9,11 +9,7 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          $i
-        Label : ARGUMENT
           .
-          Label : CONCAT
-            "\\2"
           Label : CONCAT
             (
             Label : CODE
@@ -22,12 +18,14 @@ Label : CODE
                 1
               Label : LEFT
                 [
-                Label : VARIABLE
-                  $g
                 Label : INDEX
                   'h'
+                Label : VARIABLE
+                  $g
           Label : CONCAT
             "f"
+          Label : CONCAT
+            "\\2"
         Label : ARGUMENT
           "
           Label : CONTAIN
@@ -36,11 +34,13 @@ Label : CODE
               b
             Label : CONCAT
               [
-              Label : VARIABLE
-                $c
               Label : INDEX
                 d
+              Label : VARIABLE
+                $c
             Label : CONCAT
               e
+        Label : ARGUMENT
+          $i
     Label : LEFT
       $a

@@ -7,11 +7,11 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
+        'b'
+      Label : CONCAT
         ++
         Label : POSTPLUSPLUS
           $c
-      Label : CONCAT
-        'b'
     Label : LEFT
       $y
   Label : ELEMENT
@@ -19,10 +19,10 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
+        'a'
+      Label : CONCAT
         ++
         Label : POSTPLUSPLUS
           $b
-      Label : CONCAT
-        'a'
     Label : LEFT
       $x

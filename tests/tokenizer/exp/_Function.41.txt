@@ -4,22 +4,22 @@ Label : CODE
   =
   Label : RIGHT
     function
-    Label : NAME
-      lambda
     Label : ARGUMENT
       ,
       Label : ARGUMENT
-        Typehint
-        Label : VARIABLE
-          $e
-        Label : CLASS
-          Stdclass
-      Label : ARGUMENT
         $d
+      Label : ARGUMENT
+        $b
       Label : ARGUMENT
         $c
       Label : ARGUMENT
-        $b
+        Typehint
+        Label : CLASS
+          Stdclass
+        Label : VARIABLE
+          $e
+    Label : NAME
+      lambda
     Label : BLOCK
       {
       Label : CODE

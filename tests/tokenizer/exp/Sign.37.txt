@@ -15,16 +15,6 @@ Label : CODE
           Label : SIGN
             ->
             Label : OBJECT
-              $g
-            Label : METHOD
-              h
-              Label : ARGUMENTS
-                void
-        Label : ARGUMENT
-          -
-          Label : SIGN
-            ->
-            Label : OBJECT
               $e
             Label : METHOD
               f
@@ -38,5 +28,15 @@ Label : CODE
               $c
             Label : METHOD
               d
+              Label : ARGUMENTS
+                void
+        Label : ARGUMENT
+          -
+          Label : SIGN
+            ->
+            Label : OBJECT
+              $g
+            Label : METHOD
+              h
               Label : ARGUMENTS
                 void

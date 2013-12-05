@@ -5,6 +5,6 @@ Label : CODE
   Label : ELEMENT
     .
     Label : CONCAT
-      "b"
-    Label : CONCAT
       'a'
+    Label : CONCAT
+      "b"

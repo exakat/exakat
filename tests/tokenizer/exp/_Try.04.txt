@@ -3,6 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $x
+  Label : ELEMENT
     try
     Label : CODE
       {
@@ -11,7 +17,7 @@ Label : CODE
     Label : CATCH
       catch
       Label : CLASS
-        Exception
+        Exception3
       Label : CODE
         {
         Label : CODE
@@ -31,16 +37,10 @@ Label : CODE
     Label : CATCH
       catch
       Label : CLASS
-        Exception3
+        Exception
       Label : CODE
         {
         Label : CODE
           void
       Label : VARIABLE
         $e
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      $x

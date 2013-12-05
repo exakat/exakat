@@ -9,8 +9,8 @@ Label : CODE
       Label : CONCAT
         -
         Label : SIGN
-          'b'
+          'a'
       Label : CONCAT
         -
         Label : SIGN
-          'a'
+          'b'

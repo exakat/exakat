@@ -1,29 +1,40 @@
 <?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          1
-        Label : LEFT
-          $a
-    Label : THEN
-      void
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : RIGHT
-            1
-          Label : LEFT
-            $b
-      Label : THEN
-        void
-      Label : ELSE
-        void
+Label : NEXT
+  if
+  Label : NEXT
+    (
+    Label : NEXT
+      :
+      Label : NEXT
+        elseif
+        Label : NEXT
+          (
+          Label : NEXT
+            :
+            Label : NEXT
+              else
+              Label : NEXT
+                :
+                Label : NEXT
+                  endif
+                  Label : NEXT
+                    ;
+                    Label : NEXT
+                      ?>
+
+                      Label : NEXT
+                        /**/
+                        Label : NEXT
+                          /* * */
+          Label : CODE
+            ==
+            Label : RIGHT
+              1
+            Label : LEFT
+              $b
+    Label : CODE
+      ==
+      Label : RIGHT
+        1
+      Label : LEFT
+        $a

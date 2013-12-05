@@ -7,17 +7,17 @@ Label : CODE
     Label : ARGUMENT
       =
       Label : RIGHT
-        4
-      Label : LEFT
-        $d
-    Label : ARGUMENT
-      =
-      Label : RIGHT
         3
       Label : LEFT
         $c
     Label : ARGUMENT
       $b
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        4
+      Label : LEFT
+        $d
   Label : NAME
     a
   Label : BLOCK

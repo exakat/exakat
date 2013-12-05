@@ -10,14 +10,14 @@ Label : CODE
         -
         Label : RIGHT
           [
-          Label : VARIABLE
-            $y
           Label : INDEX
             b
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'c'
+          Label : VARIABLE
+            $y
         Label : LEFT
           +
           Label : RIGHT

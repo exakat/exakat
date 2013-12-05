@@ -9,66 +9,22 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        Ppp
-        Label : NAME
-          $e
-        Label : VALUE
-          void
-        Label : STATIC
-          static
-      Label : ELEMENT
-        Ppp
-        Label : NAME
-          $c
-        Label : VALUE
-          void
-        Label : STATIC
-          static
-      Label : ELEMENT
-        Ppp
-        Label : NAME
-          $i
-        Label : VALUE
-          void
-        Label : STATIC
-          static
-      Label : ELEMENT
-        Ppp
-        Label : NAME
-          $g
-        Label : VALUE
-          void
-        Label : STATIC
-          static
-      Label : ELEMENT
-        Ppp
-        Label : NAME
-          $f
-        Label : VALUE
-          void
-        Label : STATIC
-          static
-      Label : ELEMENT
-        Ppp
-        Label : NAME
-          $h
-        Label : VALUE
-          void
-        Label : STATIC
-          static
-      Label : ELEMENT
-        Ppp
-        Label : NAME
-          $b
-        Label : VALUE
-          void
-        Label : STATIC
-          static
-      Label : ELEMENT
-        Ppp
-        Label : NAME
-          $d
-        Label : VALUE
-          void
-        Label : STATIC
-          static
+        static
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            $h
+          Label : ARGUMENT
+            $f
+          Label : ARGUMENT
+            $d
+          Label : ARGUMENT
+            $b
+          Label : ARGUMENT
+            $c
+          Label : ARGUMENT
+            $e
+          Label : ARGUMENT
+            $g
+          Label : ARGUMENT
+            $i

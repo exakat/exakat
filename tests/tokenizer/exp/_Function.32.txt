@@ -9,19 +9,7 @@ Label : CODE
       Label : RIGHT
         null
       Label : LEFT
-        $f
-    Label : ARGUMENT
-      =
-      Label : RIGHT
-        null
-      Label : LEFT
         $e
-    Label : ARGUMENT
-      =
-      Label : RIGHT
-        null
-      Label : LEFT
-        $d
     Label : ARGUMENT
       =
       Label : RIGHT
@@ -33,13 +21,25 @@ Label : CODE
       Label : RIGHT
         null
       Label : LEFT
+        $a
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        null
+      Label : LEFT
         $b
     Label : ARGUMENT
       =
       Label : RIGHT
         null
       Label : LEFT
-        $a
+        $d
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        null
+      Label : LEFT
+        $f
   Label : NAME
     &
     Label : REFERENCE

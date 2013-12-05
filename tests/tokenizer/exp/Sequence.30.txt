@@ -2,6 +2,10 @@
 
 Label : CODE
   function
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      $b
   Label : NAME
     a
   Label : BLOCK
@@ -41,6 +45,10 @@ Label : CODE
               Label : ARGUMENT
                 .
                 Label : CONCAT
+                  b
+                Label : CONCAT
+                  "a"
+                Label : CONCAT
                   "
                   Label : CONTAIN
                     Concatenation
@@ -50,11 +58,3 @@ Label : CODE
                       $d
                     Label : CONCAT
                       '
-                Label : CONCAT
-                  b
-                Label : CONCAT
-                  "a"
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      $b

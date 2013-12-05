@@ -10,7 +10,5 @@ class SequenceAtom extends Tokenizer {
     /* 2 methods */
 
     public function testSequenceAtom01()  { $this->generic_test('SequenceAtom.01'); }
-    public function testSequenceAtom02()  { $this->generic_test('SequenceAtom.02'); }
-    public function testSequenceAtom02()  { $this->generic_test('SequenceAtom.02'); }
 }
 ?>

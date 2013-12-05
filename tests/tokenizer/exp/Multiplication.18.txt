@@ -9,6 +9,6 @@ Label : CODE
     Label : LEFT
       .
       Label : CONCAT
-        $s
-      Label : CONCAT
         '1'
+      Label : CONCAT
+        $s

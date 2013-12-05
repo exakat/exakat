@@ -9,14 +9,14 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          ==
-          Label : LEFT
-            $c
-          Label : RIGHT
-            4
-        Label : ARGUMENT
           3
+        Label : ARGUMENT
+          1
         Label : ARGUMENT
           2
         Label : ARGUMENT
-          1
+          ==
+          Label : RIGHT
+            4
+          Label : LEFT
+            $c

@@ -5,13 +5,17 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      new
-      Label : NEW
-        SimpleUnzip
-        Label : ARGUMENTS
-          void
+      substr
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          8
+        Label : ARGUMENT
+          $datafile_server
+        Label : ARGUMENT
+          13
     Label : LEFT
-      $unzip
+      $backupdir
   Label : ELEMENT
     ->
     Label : OBJECT
@@ -25,14 +29,10 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      substr
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          13
-        Label : ARGUMENT
-          8
-        Label : ARGUMENT
-          $datafile_server
+      new
+      Label : NEW
+        SimpleUnzip
+        Label : ARGUMENTS
+          void
     Label : LEFT
-      $backupdir
+      $unzip

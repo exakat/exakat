@@ -3,19 +3,15 @@
 Label : CODE
   ;
   Label : ELEMENT
-    goto
+    :
     Label : LABEL
       a1
   Label : ELEMENT
-    :
-    Label : LABEL
-      a3
-  Label : ELEMENT
-    :
+    goto
     Label : LABEL
       a2
   Label : ELEMENT
-    :
+    goto
     Label : LABEL
       a1
   Label : ELEMENT
@@ -25,7 +21,7 @@ Label : CODE
       Label : ARGUMENT
         'Foo'
   Label : ELEMENT
-    goto
+    :
     Label : LABEL
       a2
   Label : ELEMENT
@@ -34,3 +30,7 @@ Label : CODE
       void
       Label : ARGUMENT
         'Bar'
+  Label : ELEMENT
+    :
+    Label : LABEL
+      a3

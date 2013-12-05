@@ -2,6 +2,14 @@
 Label : CODE
   ;
   Label : ELEMENT
+    return
+    Label : RETURN
+      ::
+      Label : CLASS
+        self
+      Label : PROPERTY
+        $f
+  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -13,10 +21,10 @@ Label : CODE
             void
             Label : ARGUMENT
               ::
-              Label : PROPERTY
-                $a
               Label : CLASS
                 self
+              Label : PROPERTY
+                $a
     Label : THEN
       =
       Label : RIGHT
@@ -25,27 +33,19 @@ Label : CODE
           C
       Label : LEFT
         ::
-        Label : PROPERTY
-          $b
         Label : CLASS
           self
+        Label : PROPERTY
+          $b
     Label : ELSE
       ->
       Label : OBJECT
         ::
-        Label : PROPERTY
-          $d
         Label : CLASS
           self
+        Label : PROPERTY
+          $d
       Label : METHOD
         E
         Label : ARGUMENTS
           void
-  Label : ELEMENT
-    return
-    Label : RETURN
-      ::
-      Label : PROPERTY
-        $f
-      Label : CLASS
-        self

@@ -13,9 +13,9 @@ Label : CODE
         (
         Label : CODE
           [
-          Label : VARIABLE
-            $b
           Label : INDEX
             'c'
+          Label : VARIABLE
+            $b
     Label : ELSE
       true

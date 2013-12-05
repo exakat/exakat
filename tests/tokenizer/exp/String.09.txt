@@ -23,10 +23,10 @@ Label : CODE
           {
         Label : CONCAT
           [
-          Label : VARIABLE
-            $d
           Label : INDEX
             3
+          Label : VARIABLE
+            $d
         Label : CONCAT
           }
     Label : LEFT

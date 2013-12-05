@@ -12,14 +12,14 @@ Label : CODE
           {
           Label : NAME
             [
+            Label : INDEX
+              'prefix'
             Label : VARIABLE
               ->
               Label : PROPERTY
                 properties
               Label : OBJECT
                 $this
-            Label : INDEX
-              'prefix'
         Label : CONCAT
           {
           Label : NAME

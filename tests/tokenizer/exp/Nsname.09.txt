@@ -5,17 +5,15 @@ Label : CODE
   Label : ELEMENT
     \
     Label : ELEMENT
+      B
+    Label : ELEMENT
+      A
+    Label : ELEMENT
       C
-    Label : ELEMENT
-      B
-    Label : ELEMENT
-      A
     Label : ARGUMENTS
       void
   Label : ELEMENT
     \
-    Label : ELEMENT
-      B
     Label : ELEMENT
       A
     Label : ARGUMENTS
@@ -24,5 +22,7 @@ Label : CODE
     \
     Label : ELEMENT
       A
+    Label : ELEMENT
+      B
     Label : ARGUMENTS
       void

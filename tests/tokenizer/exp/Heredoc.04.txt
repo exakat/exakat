@@ -12,11 +12,11 @@ Label : CODE
         Label : CONCAT
           a
         Label : CONCAT
+          $b
+        Label : CONCAT
           ->
-          Label : PROPERTY
-            c
-          Label : OBJECT
-            $b
+        Label : CONCAT
+          c
         Label : CONCAT
           
 d

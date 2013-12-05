@@ -27,7 +27,7 @@ Label : CODE
       Label : RIGHT
         >>
         Label : RIGHT
-          1.2
+          1
         Label : LEFT
           $c
       Label : LEFT
@@ -41,7 +41,7 @@ Label : CODE
       Label : RIGHT
         >>
         Label : RIGHT
-          1
+          1.2
         Label : LEFT
           $c
       Label : LEFT

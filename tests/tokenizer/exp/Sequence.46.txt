@@ -11,6 +11,16 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
+        ->
+        Label : OBJECT
+          $e
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g
+      Label : ELEMENT
         if
         Label : CONDITION
           (
@@ -22,25 +32,15 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   [
-                  Label : VARIABLE
-                    [
-                    Label : VARIABLE
-                      $b
-                    Label : INDEX
-                      'c'
                   Label : INDEX
                     'd'
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      'c'
+                    Label : VARIABLE
+                      $b
         Label : THEN
           {
           Label : CODE
             void
-      Label : ELEMENT
-        ->
-        Label : OBJECT
-          $e
-        Label : METHOD
-          f
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $g

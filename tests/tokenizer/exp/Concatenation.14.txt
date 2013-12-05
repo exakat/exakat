@@ -3,30 +3,30 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $x
+  Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         .
         Label : CONCAT
-          'c'
-        Label : CONCAT
           date
           Label : ARGUMENTS
             ,
+            Label : ARGUMENT
+              "Y"
             Label : ARGUMENT
               strtotime
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   $b
-            Label : ARGUMENT
-              "Y"
         Label : CONCAT
           'a'
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      $x
+        Label : CONCAT
+          'c'

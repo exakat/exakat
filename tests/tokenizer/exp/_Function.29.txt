@@ -15,7 +15,7 @@ Label : CODE
         Label : LEFT
           &
           Label : REFERENCE
-            $b
+            $x
     Label : ARGUMENT
       Typehint
       Label : CLASS
@@ -27,7 +27,7 @@ Label : CODE
         Label : LEFT
           &
           Label : REFERENCE
-            $x
+            $b
   Label : NAME
     a
   Label : BLOCK

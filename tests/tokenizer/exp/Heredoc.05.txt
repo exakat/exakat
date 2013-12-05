@@ -21,10 +21,6 @@ Label : CODE
         Label : ARGUMENTS
           void
       Label : ELEMENT
-        ob_flush
-        Label : ARGUMENTS
-          void
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -36,3 +32,7 @@ Label : CODE
               Label : CONCAT
                 D
 
+      Label : ELEMENT
+        ob_flush
+        Label : ARGUMENTS
+          void

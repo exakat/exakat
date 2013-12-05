@@ -7,6 +7,6 @@ Label : CODE
     Label : CODE
       .
       Label : CONCAT
-        'b'
-      Label : CONCAT
         'a'
+      Label : CONCAT
+        'b'

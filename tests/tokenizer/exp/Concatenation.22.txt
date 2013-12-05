@@ -5,14 +5,14 @@ Label : CODE
   Label : ELEMENT
     .
     Label : CONCAT
-      $e
-    Label : CONCAT
       [
-      Label : VARIABLE
-        $b
       Label : INDEX
         'c'
+      Label : VARIABLE
+        $b
+    Label : CONCAT
+      'a'
     Label : CONCAT
       'd'
     Label : CONCAT
-      'a'
+      $e

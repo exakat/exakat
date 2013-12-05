@@ -8,9 +8,9 @@ Label : CODE
       &
       Label : REFERENCE
         ::
-        Label : PROPERTY
-          $_forms
         Label : CLASS
           self
+        Label : PROPERTY
+          $_forms
     Label : LEFT
       $forms

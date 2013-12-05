@@ -18,7 +18,7 @@ Label : CODE
           [
           Label : VARIABLE
             [
-            Label : VARIABLE
-              $a
             Label : INDEX
               'b'
+            Label : VARIABLE
+              $a

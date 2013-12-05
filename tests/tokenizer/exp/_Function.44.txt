@@ -11,22 +11,22 @@ Label : CODE
   Label : USE
     ,
     Label : ARGUMENT
-      $c
-    Label : ARGUMENT
       $b
     Label : ARGUMENT
       $d
+    Label : ARGUMENT
+      $c
   Label : Block
     {
     Label : CODE
       ;
       Label : ELEMENT
         ->
+        Label : OBJECT
+          $e
         Label : METHOD
           f
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $g
-        Label : OBJECT
-          $e

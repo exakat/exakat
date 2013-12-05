@@ -3,6 +3,14 @@
 Label : CODE
   ;
   Label : ELEMENT
+    interface
+    Label : CODE
+      {
+      Label : CODE
+        void
+    Label : NAME
+      x
+  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -16,11 +24,3 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $b
-  Label : ELEMENT
-    interface
-    Label : CODE
-      {
-      Label : CODE
-        void
-    Label : NAME
-      x

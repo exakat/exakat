@@ -3,24 +3,24 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          'b'
-    Label : THEN
-      {
-      Label : CODE
-        void
-  Label : ELEMENT
     while
     Label : CONDITION
       $x
     Label : LOOP
       Block With While
+      Label : CODE
+        void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        [
+        Label : INDEX
+          'b'
+        Label : VARIABLE
+          $a
+    Label : THEN
+      {
       Label : CODE
         void

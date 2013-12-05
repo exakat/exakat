@@ -5,15 +5,15 @@ Label : CODE
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
+      $b
+    Label : ARGUMENT
+      $a
+    Label : ARGUMENT
       Typehint
       Label : CLASS
         Stdclass
       Label : VARIABLE
         $c
-    Label : ARGUMENT
-      $b
-    Label : ARGUMENT
-      $a
   Label : NAME
     x
   Label : BLOCK

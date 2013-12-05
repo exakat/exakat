@@ -10,14 +10,14 @@ Label : CODE
         0
       Label : LEFT
         ::
-        Label : PROPERTY
-          [
-          Label : VARIABLE
-            $a
-          Label : INDEX
-            'b'
         Label : CLASS
           self
+        Label : PROPERTY
+          [
+          Label : INDEX
+            'b'
+          Label : VARIABLE
+            $a
   Label : THEN
     {
     Label : CODE
@@ -26,17 +26,17 @@ Label : CODE
         =
         Label : RIGHT
           ::
-          Label : PROPERTY
-            [
-            Label : VARIABLE
-              $f
-            Label : INDEX
-              'g'
           Label : CLASS
             e
+          Label : PROPERTY
+            [
+            Label : INDEX
+              'g'
+            Label : VARIABLE
+              $f
         Label : LEFT
           [
-          Label : VARIABLE
-            $c
           Label : INDEX
             'd'
+          Label : VARIABLE
+            $c

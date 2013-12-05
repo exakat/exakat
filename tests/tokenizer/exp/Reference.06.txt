@@ -8,12 +8,12 @@ Label : CODE
       &
       Label : REFERENCE
         ::
+        Label : CLASS
+          y
         Label : METHOD
           $c
           Label : ARGUMENTS
             void
-        Label : CLASS
-          y
     Label : LEFT
       $x
   Label : ELEMENT
@@ -22,23 +22,23 @@ Label : CODE
       &
       Label : REFERENCE
         ::
+        Label : CLASS
+          y
+        Label : PROPERTY
+          $c
+    Label : LEFT
+      $x
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      &
+      Label : REFERENCE
+        ::
+        Label : CLASS
+          y
         Label : METHOD
           c
           Label : ARGUMENTS
             void
-        Label : CLASS
-          y
-    Label : LEFT
-      $x
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      &
-      Label : REFERENCE
-        ::
-        Label : PROPERTY
-          $c
-        Label : CLASS
-          y
     Label : LEFT
       $x

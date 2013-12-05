@@ -9,78 +9,6 @@ Label : CODE
     Label : CODE
       Sequence Case Default
       Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $g
-              Label : THEN
-                {
-                Label : CODE
-                  void
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $h
-              Label : THEN
-                {
-                Label : CODE
-                  void
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $c
-              Label : THEN
-                {
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    $e
-              Label : ELSE
-                elseif
-                Label : CONDITION
-                  (
-                  Label : CODE
-                    empty
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        [
-                        Label : VARIABLE
-                          $g
-                        Label : INDEX
-                          'h'
-                Label : THEN
-                  {
-                  Label : CODE
-                    void
-            Label : ELEMENT
-              require_once
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  a
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      'b'
-        Label : CASE
-          'b'
-      Label : ELEMENT
         default
         Label : CODE
           Block With Sequence For Default
@@ -88,3 +16,73 @@ Label : CODE
             return
             Label : RETURN
               false
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case Without Semicolon
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $c
+            Label : THEN
+              {
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  $e
+            Label : ELSE
+              elseif
+              Label : CONDITION
+                (
+                Label : CODE
+                  empty
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'h'
+                      Label : VARIABLE
+                        $g
+              Label : THEN
+                {
+                Label : CODE
+                  void
+          Label : ELEMENT
+            require_once
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                a
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'b'
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $h
+            Label : THEN
+              {
+              Label : CODE
+                void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $g
+            Label : THEN
+              {
+              Label : CODE
+                void
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+        Label : CASE
+          'b'

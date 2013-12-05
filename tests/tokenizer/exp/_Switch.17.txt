@@ -11,76 +11,72 @@ Label : CODE
       Label : CODE
         Block With Sequence For Default Without Semicolon
         Label : ELEMENT
-          ;
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-        Label : ELEMENT
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              1
-            Label : LEFT
-              $g
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              2
-            Label : LEFT
-              $h
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              3
-            Label : LEFT
-              $i
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                $a
-            Label : THEN
-              {
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    2
-                  Label : LEFT
-                    $j
-                Label : ELEMENT
-                  foreach
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              $a
+          Label : THEN
+            {
+            Label : CODE
+              ;
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  2
+                Label : LEFT
+                  $j
+              Label : ELEMENT
+                foreach
+                Label : VALUE
+                  =>
+                  Label : KEY
+                    $b
                   Label : VALUE
-                    =>
-                    Label : KEY
-                      $b
-                    Label : VALUE
-                      $c
-                  Label : SOURCE
-                    $a
-                  Label : LOOP
-                    {
-                    Label : CODE
-                      if
-                      Label : CONDITION
-                        (
-                        Label : CODE
+                    $c
+                Label : SOURCE
+                  $a
+                Label : LOOP
+                  {
+                  Label : CODE
+                    if
+                    Label : CONDITION
+                      (
+                      Label : CODE
+                        =
+                        Label : RIGHT
+                          $e
+                        Label : LEFT
+                          $d
+                    Label : THEN
+                      {
+                      Label : CODE
+                        ;
+                        Label : ELEMENT
                           =
                           Label : RIGHT
-                            $e
+                            4
                           Label : LEFT
-                            $d
-                      Label : THEN
-                        {
-                        Label : CODE
-                          ;
-                          Label : ELEMENT
-                            =
-                            Label : RIGHT
-                              4
-                            Label : LEFT
-                              $f
+                            $f
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $i
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $h
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $g
+        Label : ELEMENT
+          break
+          Label : LEVEL
+            void

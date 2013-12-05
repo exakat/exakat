@@ -21,6 +21,12 @@ Label : CODE
           Label : ARGUMENTS
             ,
             Label : ARGUMENT
+              [
+              Label : INDEX
+                'h'
+              Label : VARIABLE
+                $g
+            Label : ARGUMENT
               +
               Label : RIGHT
                 1
@@ -29,31 +35,19 @@ Label : CODE
                 Label : ARGUMENTS
                   ,
                   Label : ARGUMENT
-                    'l'
-                  Label : ARGUMENT
                     [
-                    Label : VARIABLE
-                      $j
                     Label : INDEX
                       'k'
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $g
-              Label : INDEX
-                'h'
+                    Label : VARIABLE
+                      $j
+                  Label : ARGUMENT
+                    'l'
         Label : LEFT
           [
-          Label : VARIABLE
-            $d
           Label : INDEX
             'e'
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          3
-        Label : LEFT
-          $c
+          Label : VARIABLE
+            $d
       Label : ELEMENT
         =
         Label : RIGHT
@@ -66,3 +60,9 @@ Label : CODE
           1
         Label : LEFT
           $a
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          3
+        Label : LEFT
+          $c

@@ -7,18 +7,18 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
-        ")"
-      Label : CONCAT
         @
         Label : AT
           ++
           Label : PREPLUSPLUS
             [
-            Label : VARIABLE
-              $n
             Label : INDEX
               $boucle
+            Label : VARIABLE
+              $n
       Label : CONCAT
         '&nbsp;('
+      Label : CONCAT
+        ")"
     Label : LEFT
       $x

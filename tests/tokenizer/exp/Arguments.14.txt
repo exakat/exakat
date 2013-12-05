@@ -7,18 +7,18 @@ Label : CODE
     Label : ARGUMENTS
       ,
       Label : ARGUMENT
+        1
+      Label : ARGUMENT
         {
+        Label : INDEX
+          4
         Label : VARIABLE
           [
+          Label : INDEX
+            3
           Label : VARIABLE
             ->
             Label : PROPERTY
               var
             Label : OBJECT
               $x
-          Label : INDEX
-            3
-        Label : INDEX
-          4
-      Label : ARGUMENT
-        1

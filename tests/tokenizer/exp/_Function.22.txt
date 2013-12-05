@@ -1,24 +1,34 @@
 <?php
 
-Label : CODE
+Label : NEXT
   function
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      =
-      Label : RIGHT
-        true
-      Label : LEFT
-        $y
-    Label : ARGUMENT
-      =
-      Label : RIGHT
-        null
-      Label : LEFT
-        $x
-  Label : NAME
+  Label : NEXT
     a
-  Label : BLOCK
-    {
-    Label : CODE
-      void
+    Label : NEXT
+      (
+      Label : NEXT
+        $x
+        Label : NEXT
+          =
+          Label : NEXT
+            null
+            Label : NEXT
+              ,
+              Label : NEXT
+                =
+                Label : NEXT
+                  )
+                  Label : NEXT
+                    {
+                    Label : NEXT
+                      ?>
+                      Label : NEXT
+                        /**/
+                        Label : NEXT
+                          /* * */
+                    Label : CODE
+                      void
+                Label : RIGHT
+                  true
+                Label : LEFT
+                  $y

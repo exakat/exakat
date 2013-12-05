@@ -15,9 +15,9 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                1
-              Label : ARGUMENT
                 $c
+              Label : ARGUMENT
+                1
       Label : LEFT
         1
     Label : LEFT

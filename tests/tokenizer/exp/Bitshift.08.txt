@@ -9,9 +9,9 @@ Label : CODE
       Label : RIGHT
         .
         Label : CONCAT
-          'g'
-        Label : CONCAT
           4
+        Label : CONCAT
+          'g'
       Label : LEFT
         b
         Label : ARGUMENTS

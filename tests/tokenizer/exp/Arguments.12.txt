@@ -3,39 +3,21 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      str_replace
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $f
-              Label : INDEX
-                'g'
-            Label : INDEX
-              'h'
-          Label : INDEX
-            'i'
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $c
-            Label : INDEX
-              'd'
-          Label : INDEX
-            'e'
-        Label : ARGUMENT
-          'b'
-    Label : LEFT
-      $a
+    require_once
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        o
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              'p'
+            Label : CONCAT
+              $q
+          Label : ARGUMENT
+            'r'
   Label : ELEMENT
     if
     Label : CONDITION
@@ -52,14 +34,14 @@ Label : CODE
           =
           Label : RIGHT
             [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $k
-              Label : INDEX
-                'l'
             Label : INDEX
               'm'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'l'
+              Label : VARIABLE
+                $k
           Label : LEFT
             $k
     Label : ELSE
@@ -73,18 +55,36 @@ Label : CODE
           Label : LEFT
             $n
   Label : ELEMENT
-    require_once
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        o
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            'r'
-          Label : ARGUMENT
-            .
-            Label : CONCAT
-              $q
-            Label : CONCAT
-              'p'
+    =
+    Label : RIGHT
+      str_replace
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          [
+          Label : INDEX
+            'e'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              'd'
+            Label : VARIABLE
+              $c
+        Label : ARGUMENT
+          'b'
+        Label : ARGUMENT
+          [
+          Label : INDEX
+            'i'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              'h'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'g'
+              Label : VARIABLE
+                $f
+    Label : LEFT
+      $a

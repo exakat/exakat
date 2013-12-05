@@ -12,11 +12,9 @@ Label : CODE
         Label : CODE
           Block With Sequence For Default Without Semicolon
           Label : ELEMENT
-            ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $b
+            ++
+            Label : POSTPLUSPLUS
+              $b
           Label : ELEMENT
             {
             Label : CODE
@@ -30,11 +28,9 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case Without Semicolon
           Label : ELEMENT
-            ;
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
+            break
+            Label : LEVEL
+              void
           Label : ELEMENT
             {
             Label : CODE

@@ -14,16 +14,16 @@ Label : CODE
             4.1
           Label : LEFT
             ->
+            Label : OBJECT
+              [
+              Label : INDEX
+                'd'
+              Label : VARIABLE
+                $c
             Label : METHOD
               e
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                'd'
       Label : LEFT
         ==
         Label : RIGHT

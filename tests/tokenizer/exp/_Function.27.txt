@@ -5,32 +5,6 @@ Label : CODE
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
-      =
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            3
-          Label : ARGUMENT
-            =>
-            Label : VALUE
-              array
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  2
-                Label : ARGUMENT
-                  3
-            Label : KEY
-              2
-          Label : ARGUMENT
-            1
-      Label : LEFT
-        &
-        Label : REFERENCE
-          $b
-    Label : ARGUMENT
       &
       Label : REFERENCE
         $d
@@ -42,6 +16,32 @@ Label : CODE
         &
         Label : REFERENCE
           $c
+    Label : ARGUMENT
+      =
+      Label : RIGHT
+        array
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            =>
+            Label : KEY
+              2
+            Label : VALUE
+              array
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  3
+                Label : ARGUMENT
+                  2
+          Label : ARGUMENT
+            1
+      Label : LEFT
+        &
+        Label : REFERENCE
+          $b
   Label : NAME
     a
   Label : BLOCK

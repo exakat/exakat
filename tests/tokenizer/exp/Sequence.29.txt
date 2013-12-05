@@ -2,28 +2,14 @@
 
 Label : CODE
   function
+  Label : ARGUMENTS
+    void
   Label : NAME
     a
   Label : BLOCK
     {
     Label : CODE
       ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            $d
-        Label : THEN
-          {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                2
-              Label : LEFT
-                $e
       Label : ELEMENT
         if
         Label : CONDITION
@@ -50,5 +36,19 @@ Label : CODE
               stack
             Label : OBJECT
               $this
-  Label : ARGUMENTS
-    void
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $d
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                2
+              Label : LEFT
+                $e

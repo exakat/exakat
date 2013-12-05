@@ -13,11 +13,9 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case Without Semicolon
           Label : ELEMENT
-            ;
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
+            break
+            Label : LEVEL
+              void
           Label : ELEMENT
             if
             Label : CONDITION

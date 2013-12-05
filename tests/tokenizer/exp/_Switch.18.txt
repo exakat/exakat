@@ -21,6 +21,42 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case Without Semicolon
           Label : ELEMENT
+            =
+            Label : RIGHT
+              0
+            Label : LEFT
+              $count
+          Label : ELEMENT
+            foreach
+            Label : VALUE
+              =>
+              Label : KEY
+                $key
+              Label : VALUE
+                $value
+            Label : SOURCE
+              $data
+            Label : LOOP
+              {
+              Label : CODE
+                void
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              array
+              Label : ARGUMENTS
+                void
+            Label : LEFT
+              $associative
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              array
+              Label : ARGUMENTS
+                void
+            Label : LEFT
+              $indexed
+          Label : ELEMENT
             if
             Label : CONDITION
               (
@@ -34,43 +70,5 @@ Label : CODE
                   ++
                   Label : POSTPLUSPLUS
                     $d
-          Label : ELEMENT
-            ;
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                array
-                Label : ARGUMENTS
-                  void
-              Label : LEFT
-                $indexed
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                array
-                Label : ARGUMENTS
-                  void
-              Label : LEFT
-                $associative
-            Label : ELEMENT
-              foreach
-              Label : VALUE
-                =>
-                Label : KEY
-                  $key
-                Label : VALUE
-                  $value
-              Label : SOURCE
-                $data
-              Label : LOOP
-                {
-                Label : CODE
-                  void
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                0
-              Label : LEFT
-                $count
         Label : CASE
           'a'

@@ -6,9 +6,9 @@ Label : CODE
     >
     Label : RIGHT
       [
-      Label : VARIABLE
-        $y
       Label : INDEX
         1
+      Label : VARIABLE
+        $y
     Label : LEFT
       $x

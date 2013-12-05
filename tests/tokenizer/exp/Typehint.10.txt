@@ -2,20 +2,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        a
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            $c
-          Label : ARGUMENT
-            $b
-  Label : ELEMENT
-    A
-  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -45,3 +31,17 @@ Label : CODE
         void
     Label : LEFT
       $d
+  Label : ELEMENT
+    A
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        a
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            $b
+          Label : ARGUMENT
+            $c

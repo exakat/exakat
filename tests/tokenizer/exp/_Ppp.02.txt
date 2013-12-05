@@ -10,14 +10,12 @@ Label : CODE
       ;
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          Void
         Label : DEFINE
           function
-          Label : NAME
-            a
           Label : ARGUMENTS
             void
+          Label : NAME
+            a
           Label : BLOCK
             {
             Label : CODE
@@ -28,14 +26,12 @@ Label : CODE
           public
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          Void
         Label : DEFINE
           function
-          Label : NAME
-            b
           Label : ARGUMENTS
             void
+          Label : NAME
+            b
           Label : BLOCK
             {
             Label : CODE
@@ -46,14 +42,12 @@ Label : CODE
           private
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          Void
         Label : DEFINE
           function
-          Label : NAME
-            c
           Label : ARGUMENTS
             void
+          Label : NAME
+            c
           Label : BLOCK
             {
             Label : CODE

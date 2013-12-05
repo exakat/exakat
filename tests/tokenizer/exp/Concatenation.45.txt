@@ -3,6 +3,54 @@
 Label : CODE
   ;
   Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'j'
+              Label : VARIABLE
+                $i
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void
+          Label : LEFT
+            [
+            Label : INDEX
+              "
+              Label : CONTAIN
+                Concatenation
+                Label : CONCAT
+                  k 
+                Label : CONCAT
+                  $l
+                Label : CONCAT
+                  ->
+                Label : CONCAT
+                  m
+                Label : CONCAT
+                   
+                Label : CONCAT
+                  $n
+                Label : CONCAT
+                   o
+            Label : VARIABLE
+              $items
+  Label : ELEMENT
     foreach
     Label : VALUE
       =>
@@ -26,8 +74,6 @@ Label : CODE
               void
           Label : LEFT
             [
-            Label : VARIABLE
-              $items
             Label : INDEX
               "
               Label : CONTAIN
@@ -48,51 +94,5 @@ Label : CODE
                    
                 Label : CONCAT
                   $h
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $i
-              Label : INDEX
-                'j'
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            array
-            Label : ARGUMENTS
-              void
-          Label : LEFT
-            [
             Label : VARIABLE
               $items
-            Label : INDEX
-              "
-              Label : CONTAIN
-                Concatenation
-                Label : CONCAT
-                  k 
-                Label : CONCAT
-                  $l
-                Label : CONCAT
-                  ->
-                Label : CONCAT
-                  m
-                Label : CONCAT
-                   
-                Label : CONCAT
-                  $n
-                Label : CONCAT
-                   o

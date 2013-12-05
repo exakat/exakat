@@ -1,43 +1,58 @@
 <?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          $e
-      Label : ELEMENT
-        [
-        Label : VARIABLE
-          ->
-          Label : PROPERTY
-            c
-          Label : OBJECT
-            $b
-        Label : INDEX
-          d
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            34
-      Label : ELEMENT
+Label : NEXT
+  if
+  Label : NEXT
+    (
+    Label : NEXT
+      :
+      Label : NEXT
         ++
+        Label : NEXT
+          ;
+          Label : NEXT
+            [
+            Label : INDEX
+              d
+            Label : NEXT
+              (
+              Label : NEXT
+                void
+                Label : NEXT
+                  )
+                  Label : NEXT
+                    ;
+                    Label : NEXT
+                      =
+                      Label : NEXT
+                        elseif
+                        Label : NEXT
+                          ;
+                          Label : NEXT
+                            ?>
+
+                            Label : NEXT
+                              /**/
+                              Label : NEXT
+                                /* * */
+                        Label : CONDITION
+                          (
+                          Label : CODE
+                            $b
+                        Label : THEN
+                          B
+                      Label : RIGHT
+                        1
+                      Label : LEFT
+                        $e
+                Label : ARGUMENT
+                  34
+            Label : VARIABLE
+              ->
+              Label : PROPERTY
+                c
+              Label : OBJECT
+                $b
         Label : POSTPLUSPLUS
           $a
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        (
-        Label : CODE
-          $b
-      Label : THEN
-        B
+    Label : CODE
+      $a

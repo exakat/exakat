@@ -13,10 +13,10 @@ Label : CODE
     Label : VALUE
       void
     Label : DEFINE
-      $b
+      $a
   Label : ELEMENT
     global
     Label : VALUE
       void
     Label : DEFINE
-      $a
+      $b

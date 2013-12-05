@@ -9,7 +9,7 @@ class _Class extends TokenAuto {
     
     // class x {}
         $this->conditions = array( 0 => array('token' => _Class::$operators),
-                                   1 => array('atom' => 'String')
+                                   1 => array('atom' => 'Identifier')
                                  );
         
         $this->actions = array('transform'   => array(   1 => 'NAME'),
@@ -20,7 +20,7 @@ class _Class extends TokenAuto {
     // class x extends y {}
         $this->conditions = array( 0 => array('token' => _Class::$operators, 'atom' => 'Class_tmp'),
                                    1 => array('token' => 'T_EXTENDS'),
-                                   2 => array('atom'  => array('String', 'Nsname')),
+                                   2 => array('atom'  => array('Identifier', 'Nsname')),
                                    3 => array('filterOut2' => 'T_NS_SEPARATOR'),
                                  );
         
@@ -33,7 +33,7 @@ class _Class extends TokenAuto {
     // class x implements a {}
         $this->conditions = array( 0 => array('token'     => _Class::$operators, 'atom' => 'Class_tmp'),
                                    1 => array('token'     => 'T_IMPLEMENTS'),
-                                   2 => array('atom'      => array('String', 'Nsname')),
+                                   2 => array('atom'      => array('Identifier', 'Nsname')),
                                    3 => array('filterOut' => array('T_COMMA', 'T_NS_SEPARATOR'))
                                  );
         

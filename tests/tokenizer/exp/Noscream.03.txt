@@ -5,8 +5,8 @@ Label : CODE
   Label : ELEMENT
     .
     Label : CONCAT
-      '23'
-    Label : CONCAT
       @
       Label : AT
         $y
+    Label : CONCAT
+      '23'

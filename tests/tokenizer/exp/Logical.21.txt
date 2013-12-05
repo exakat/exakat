@@ -11,9 +11,9 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            $f
-          Label : ARGUMENT
             "e"
+          Label : ARGUMENT
+            $f
       Label : LEFT
         &&
         Label : RIGHT
@@ -22,20 +22,20 @@ Label : CODE
             1
           Label : LEFT
             [
-            Label : VARIABLE
-              $c
             Label : INDEX
               4
+            Label : VARIABLE
+              $c
         Label : LEFT
           ==
           Label : RIGHT
             'b'
           Label : LEFT
             [
-            Label : VARIABLE
-              $a
             Label : INDEX
               3
+            Label : VARIABLE
+              $a
   Label : THEN
     {
     Label : CODE

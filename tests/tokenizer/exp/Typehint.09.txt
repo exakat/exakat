@@ -9,16 +9,6 @@ Label : CODE
       Label : CLASS
         Stdclass
       Label : VARIABLE
-        =
-        Label : RIGHT
-          null
-        Label : LEFT
-          $c
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        Stdclass
-      Label : VARIABLE
         $b
     Label : ARGUMENT
       Typehint
@@ -26,6 +16,16 @@ Label : CODE
         Stdclass
       Label : VARIABLE
         $a
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        Stdclass
+      Label : VARIABLE
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          $c
   Label : NAME
     x
   Label : BLOCK

@@ -2,12 +2,12 @@
 
 Label : CODE
   function
-  Label : NAME
-    lambda
   Label : ARGUMENT
     void
     Label : ARGUMENT
       $a
+  Label : NAME
+    lambda
   Label : USE
     void
     Label : ARGUMENT

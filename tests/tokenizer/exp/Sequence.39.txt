@@ -3,15 +3,15 @@
 Label : CODE
   ;
   Label : ELEMENT
+    void
+  Label : ELEMENT
+    void
+  Label : ELEMENT
     =
     Label : RIGHT
       $x2
     Label : LEFT
       $b
-  Label : ELEMENT
-    void
-  Label : ELEMENT
-    void
   Label : ELEMENT
     void
   Label : ELEMENT

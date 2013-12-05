@@ -15,6 +15,6 @@ Label : CODE
   Label : EXTENDS
     ,
     Label : ARGUMENT
-      c
-    Label : ARGUMENT
       b
+    Label : ARGUMENT
+      c

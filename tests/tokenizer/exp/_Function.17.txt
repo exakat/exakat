@@ -5,13 +5,13 @@ Label : CODE
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
+      $b
+    Label : ARGUMENT
       =
       Label : RIGHT
         3
       Label : LEFT
         $c
-    Label : ARGUMENT
-      $b
   Label : NAME
     a
   Label : BLOCK

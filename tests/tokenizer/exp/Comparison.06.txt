@@ -10,12 +10,12 @@ Label : CODE
         false
       Label : LEFT
         ->
+        Label : OBJECT
+          $this
         Label : METHOD
           methode
           Label : ARGUMENTS
             void
-        Label : OBJECT
-          $this
   Label : THEN
     {
     Label : CODE

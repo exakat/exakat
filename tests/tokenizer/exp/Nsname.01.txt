@@ -7,8 +7,8 @@ Label : CODE
     Label : NEW
       \
       Label : ELEMENT
-        b
-      Label : ELEMENT
         a
+      Label : ELEMENT
+        b
       Label : ARGUMENTS
         void

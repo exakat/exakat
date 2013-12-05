@@ -12,9 +12,9 @@ Label : CODE
         Label : LEFT
           \
           Label : ELEMENT
-            C
-          Label : ELEMENT
             B
+          Label : ELEMENT
+            C
       Label : LEFT
         $a
   Label : THEN

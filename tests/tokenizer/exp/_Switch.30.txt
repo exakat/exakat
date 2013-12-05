@@ -1,0 +1,104 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    {
+    Label : CODE
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case Without Semicolon
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ::
+                Label : CLASS
+                  P
+                Label : METHOD
+                  q
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'r'
+            Label : THEN
+              Block With if/elseif
+              Label : CODE
+                .=
+                Label : RIGHT
+                  "t"
+                Label : LEFT
+                  $s
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              'o'
+            Label : LEFT
+              $n
+          Label : ELEMENT
+            return
+            Label : RETURN
+              $u
+        Label : CASE
+          'm'
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block With Sequence For Default
+          Label : CODE
+            return
+            Label : RETURN
+              'v'
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            return
+            Label : RETURN
+              'c'
+        Label : CASE
+          'b'
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case Without Semicolon
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ::
+                Label : CLASS
+                  G
+                Label : METHOD
+                  h
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'i'
+            Label : THEN
+              Block With if/elseif
+              Label : CODE
+                .=
+                Label : RIGHT
+                  "k"
+                Label : LEFT
+                  $j
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              'f'
+            Label : LEFT
+              $e
+          Label : ELEMENT
+            return
+            Label : RETURN
+              $l
+        Label : CASE
+          'd'

@@ -3,10 +3,10 @@
 Label : CODE
   .
   Label : CONCAT
-    'd'
-  Label : CONCAT
     'c'
+  Label : CONCAT
+    'a'
   Label : CONCAT
     'b'
   Label : CONCAT
-    'a'
+    'd'

@@ -5,10 +5,10 @@ Label : CODE
   Label : ELEMENT
     .
     Label : CONCAT
-      'b'
-    Label : CONCAT
       (string)
       Label : CAST
         $x
     Label : CONCAT
       'a'
+    Label : CONCAT
+      'b'

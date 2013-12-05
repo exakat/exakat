@@ -19,27 +19,29 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                $e
-              Label : ARGUMENT
                 'd'
+              Label : ARGUMENT
+                $e
           Label : LEFT
             $b
   Label : ELEMENT
     ->
     Label : OBJECT
       ::
+      Label : CLASS
+        M
       Label : METHOD
         l
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             'e'
-      Label : CLASS
-        M
     Label : METHOD
       k
       Label : ARGUMENTS
         ,
+        Label : ARGUMENT
+          $f
         Label : ARGUMENT
           array
           Label : ARGUMENTS
@@ -51,10 +53,8 @@ Label : CODE
               Label : VALUE
                 .
                 Label : CONCAT
-                  $j
-                Label : CONCAT
                   "i"
                 Label : CONCAT
                   H
-        Label : ARGUMENT
-          $f
+                Label : CONCAT
+                  $j

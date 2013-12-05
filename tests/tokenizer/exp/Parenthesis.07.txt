@@ -13,9 +13,9 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            3
-          Label : ARGUMENT
             'c'
+          Label : ARGUMENT
+            3
   Label : THEN
     {
     Label : CODE

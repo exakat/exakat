@@ -15,13 +15,13 @@ Label : CODE
           Label : ARGUMENTS
             ,
             Label : ARGUMENT
-              'g'
-            Label : ARGUMENT
               [
-              Label : VARIABLE
-                $e
               Label : INDEX
                 'f'
+              Label : VARIABLE
+                $e
+            Label : ARGUMENT
+              'g'
       Label : CASE
         ==
         Label : RIGHT
@@ -31,8 +31,8 @@ Label : CODE
           Label : ARGUMENTS
             ,
             Label : ARGUMENT
-              1
-            Label : ARGUMENT
               0
             Label : ARGUMENT
               $b
+            Label : ARGUMENT
+              1

@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      {
+      Label : CODE
+        function
+        Label : ARGUMENTS
+          void
+        Label : NAME
+          &
+          Label : REFERENCE
+            MethodDefinedWithAReference
+        Label : BLOCK
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                $x
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+    Label : NAME
+      &
+      Label : REFERENCE
+        DefinedWithAReference
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            $x

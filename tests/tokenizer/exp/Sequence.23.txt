@@ -7,7 +7,7 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        $a
+        $c
   Label : ELEMENT
     b
 
@@ -16,4 +16,4 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        $c
+        $a

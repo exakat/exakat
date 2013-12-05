@@ -8,7 +8,7 @@ Label : CODE
       void
       Label : ARGUMENT
         [
-        Label : VARIABLE
-          $x
         Label : INDEX
           3
+        Label : VARIABLE
+          $x

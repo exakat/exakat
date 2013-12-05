@@ -9,13 +9,13 @@ Label : CODE
       Label : CLASS
         Stdclass
       Label : VARIABLE
-        $b
+        $a
     Label : ARGUMENT
       Typehint
       Label : CLASS
         Stdclass
       Label : VARIABLE
-        $a
+        $b
   Label : NAME
     x
   Label : BLOCK

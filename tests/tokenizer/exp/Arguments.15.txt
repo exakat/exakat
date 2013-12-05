@@ -18,34 +18,34 @@ Label : CODE
                 ||
                 Label : RIGHT
                   [
-                  Label : VARIABLE
-                    $h
                   Label : INDEX
                     'i'
+                  Label : VARIABLE
+                    $h
                 Label : LEFT
                   [
-                  Label : VARIABLE
-                    $f
                   Label : INDEX
                     'g'
+                  Label : VARIABLE
+                    $f
             Label : LEFT
               [
-              Label : VARIABLE
-                [
-                Label : VARIABLE
-                  $C
-                Label : INDEX
-                  'd'
               Label : INDEX
                 'e'
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  'd'
+                Label : VARIABLE
+                  $C
         Label : LEFT
           (
           Label : CODE
             [
-            Label : VARIABLE
-              $a
             Label : INDEX
               'b'
+            Label : VARIABLE
+              $a
   Label : THEN
     {
     Label : CODE

@@ -12,20 +12,20 @@ Label : CODE
         -
         Label : RIGHT
           [
-          Label : VARIABLE
-            $d
           Label : INDEX
             'E'
+          Label : VARIABLE
+            $d
         Label : LEFT
           [
+          Label : INDEX
+            'c'
           Label : VARIABLE
             ->
             Label : PROPERTY
               b
             Label : OBJECT
               $a
-          Label : INDEX
-            'c'
   Label : THEN
     {
     Label : CODE

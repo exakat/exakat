@@ -17,10 +17,6 @@ Label : CODE
         Label : CODE
           $w
       Label : THEN
-        ;
-        Label : ELEMENT
-          $ww
+        $ww
       Label : ELSE
-        ;
-        Label : ELEMENT
-          $z
+        $z

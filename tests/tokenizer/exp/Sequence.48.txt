@@ -2,7 +2,11 @@
 Label : CODE
   ;
   Label : ELEMENT
-    A
+    f
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $d
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -12,12 +16,8 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            "c"
-          Label : ARGUMENT
             'b'
+          Label : ARGUMENT
+            "c"
   Label : ELEMENT
-    f
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $d
+    A

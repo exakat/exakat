@@ -7,44 +7,6 @@ Label : CODE
     Label : ARGUMENTS
       void
     Label : NAME
-      c
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            (
-            Label : CODE
-              ?
-              Label : CONDITION
-                (
-                Label : CODE
-                  ::
-                  Label : PROPERTY
-                    $b
-                  Label : CLASS
-                    a
-              Label : THEN
-                c
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : PROPERTY
-                      e
-                    Label : OBJECT
-                      $d
-              Label : ELSE
-                f
-                Label : ARGUMENTS
-                  void
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      void
-    Label : NAME
       a
     Label : BLOCK
       {
@@ -102,6 +64,44 @@ Label : CODE
                     a
                   Label : CONSTANT
                     b
+              Label : THEN
+                c
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ->
+                    Label : PROPERTY
+                      e
+                    Label : OBJECT
+                      $d
+              Label : ELSE
+                f
+                Label : ARGUMENTS
+                  void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+    Label : NAME
+      c
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            (
+            Label : CODE
+              ?
+              Label : CONDITION
+                (
+                Label : CODE
+                  ::
+                  Label : CLASS
+                    a
+                  Label : PROPERTY
+                    $b
               Label : THEN
                 c
                 Label : ARGUMENTS

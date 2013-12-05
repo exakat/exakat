@@ -9,24 +9,24 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          G
-        Label : ARGUMENT
           >
           Label : RIGHT
             'f'
           Label : LEFT
             ->
+            Label : OBJECT
+              $d
             Label : METHOD
               e
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $d
         Label : ARGUMENT
           trim
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $c
+        Label : ARGUMENT
+          G
     Label : LEFT
       $a

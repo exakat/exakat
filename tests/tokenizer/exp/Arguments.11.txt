@@ -21,17 +21,17 @@ Label : CODE
                   Label : ARGUMENT
                     .
                     Label : CONCAT
+                      'n'
+                    Label : CONCAT
                       [
+                      Label : INDEX
+                        'm'
                       Label : VARIABLE
                         ->
                         Label : PROPERTY
                           l
                         Label : OBJECT
                           $k
-                      Label : INDEX
-                        'm'
-                    Label : CONCAT
-                      'n'
                     Label : CONCAT
                       'j'
                     Label : CONCAT
@@ -43,17 +43,17 @@ Label : CODE
                 Label : ARGUMENTS
                   ,
                   Label : ARGUMENT
+                    '/^\w+$/'
+                  Label : ARGUMENT
                     [
+                    Label : INDEX
+                      'h'
                     Label : VARIABLE
                       ->
                       Label : PROPERTY
                         g
                       Label : OBJECT
                         $f
-                    Label : INDEX
-                      'h'
-                  Label : ARGUMENT
-                    '/^\w+$/'
         Label : LEFT
           !
           Label : NOT
@@ -61,28 +61,28 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                $e
-              Label : ARGUMENT
                 [
+                Label : INDEX
+                  'd'
                 Label : VARIABLE
                   ->
                   Label : PROPERTY
                     c
                   Label : OBJECT
                     $b
-                Label : INDEX
-                  'd'
+              Label : ARGUMENT
+                $e
       Label : THEN
         'o'
       Label : ELSE
         [
+        Label : INDEX
+          'r'
         Label : VARIABLE
           ->
           Label : PROPERTY
             q
           Label : OBJECT
             $p
-        Label : INDEX
-          'r'
     Label : LEFT
       $a

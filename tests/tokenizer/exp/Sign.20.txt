@@ -7,35 +7,35 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
-        "
-        Label : CONTAIN
-          Concatenation
-          Label : ELEMENT
-            ;\r\n
-          Label : ELEMENT
-             = 
-          Label : ELEMENT
-            $f
-      Label : CONCAT
-        "
-        Label : CONTAIN
-          Concatenation
-          Label : ELEMENT
-            ']
-          Label : ELEMENT
-            ['
-          Label : ELEMENT
-            $e
-      Label : CONCAT
         [
-        Label : VARIABLE
-          $c
         Label : INDEX
           -
           Label : RIGHT
             1
           Label : LEFT
             $d
+        Label : VARIABLE
+          $c
+      Label : CONCAT
+        "
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+            ['
+          Label : CONCAT
+            $e
+          Label : CONCAT
+            ']
+      Label : CONCAT
+        "
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+             = 
+          Label : CONCAT
+            $f
+          Label : CONCAT
+            ;\r\n
       Label : CONCAT
         $b
     Label : LEFT

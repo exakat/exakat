@@ -9,8 +9,6 @@ Label : CODE
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          (
-          Label : CODE
-            'y.php'
+          'y.php'
     Label : LEFT
       $x

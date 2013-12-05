@@ -3,34 +3,34 @@
 Label : CODE
   ;
   Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : ELEMENT
+        H
+      Label : ELEMENT
+        F
+      Label : ELEMENT
+        G
+      Label : ELEMENT
+        I
+    Label : AS
+      J
+  Label : ELEMENT
     namespace
     Label : NAMESPACE
       \
       Label : ELEMENT
-        B
-      Label : ELEMENT
         A
+      Label : ELEMENT
+        B
   Label : ELEMENT
     use
     Label : USE
       \
-      Label : ELEMENT
-        I
-      Label : ELEMENT
-        H
-      Label : ELEMENT
-        G
-      Label : ELEMENT
-        F
-    Label : AS
-      J
-  Label : ELEMENT
-    use
-    Label : USE
-      \
-      Label : ELEMENT
-        E
       Label : ELEMENT
         D
       Label : ELEMENT
         C
+      Label : ELEMENT
+        E

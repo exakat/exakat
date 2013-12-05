@@ -7,6 +7,6 @@ Label : CODE
   Label : LEFT
     .
     Label : CONCAT
-      2
-    Label : CONCAT
       1
+    Label : CONCAT
+      2

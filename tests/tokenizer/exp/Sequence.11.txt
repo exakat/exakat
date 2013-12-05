@@ -3,22 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    foreach
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $y
-    Label : LOOP
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $c
-  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -34,6 +18,22 @@ Label : CODE
             2
           Label : LEFT
             $x
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      $b
+    Label : SOURCE
+      $y
+    Label : LOOP
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $c
   Label : ELEMENT
     if
     Label : CONDITION

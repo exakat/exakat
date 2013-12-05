@@ -14,10 +14,10 @@ Label : CODE
         (bool)
         Label : CAST
           [
-          Label : VARIABLE
-            $a
           Label : INDEX
             'b'
+          Label : VARIABLE
+            $a
   Label : THEN
     {
     Label : CODE

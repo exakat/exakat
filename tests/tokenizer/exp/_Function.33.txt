@@ -9,12 +9,6 @@ Label : CODE
       Label : CLASS
         CLASSE
       Label : VARIABLE
-        $c
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        CLASSE
-      Label : VARIABLE
         $b
     Label : ARGUMENT
       Typehint
@@ -22,6 +16,12 @@ Label : CODE
         CLASSE
       Label : VARIABLE
         $a
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        CLASSE
+      Label : VARIABLE
+        $c
   Label : NAME
     &
     Label : REFERENCE

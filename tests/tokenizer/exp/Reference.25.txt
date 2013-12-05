@@ -2,6 +2,20 @@
 
 Label : CODE
   function
+  Label : ARGUMENTS
+    ,
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        b
+      Label : VARIABLE
+        $c
+    Label : ARGUMENT
+      &
+      Label : RIGHT
+        $d
+      Label : LEFT
+        C
   Label : NAME
     &
     Label : REFERENCE
@@ -10,17 +24,3 @@ Label : CODE
     {
     Label : CODE
       void
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      &
-      Label : RIGHT
-        $d
-      Label : LEFT
-        C
-    Label : ARGUMENT
-      Typehint
-      Label : VARIABLE
-        $c
-      Label : CLASS
-        b

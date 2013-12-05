@@ -6,10 +6,10 @@ Label : CODE
     (
     Label : CODE
       [
-      Label : VARIABLE
-        $a
       Label : INDEX
         'b'
+      Label : VARIABLE
+        $a
   Label : THEN
     Block With if/elseif
     Label : CODE
@@ -20,18 +20,18 @@ Label : CODE
           {
           Label : CODE
             void
-      Label : INIT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          $c
       Label : FINAL
         <=
         Label : RIGHT
           8
         Label : LEFT
           $d
+      Label : INIT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $c
       Label : INCREMENT
         ++
         Label : POSTPLUSPLUS

@@ -13,11 +13,11 @@ Label : CODE
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
-          $b
+          $a
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
-          $a
+          $b
   Label : CATCH
     catch
     Label : CLASS
@@ -33,10 +33,10 @@ Label : CODE
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
-            $g
+            $f
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
-            $f
+            $g
     Label : VARIABLE
       $e

@@ -10,10 +10,10 @@ Label : CODE
         void
         Label : ARGUMENT
           [
-          Label : VARIABLE
-            $g
           Label : INDEX
             'h'
+          Label : VARIABLE
+            $g
     Label : LEFT
       ->
       Label : OBJECT
@@ -22,19 +22,19 @@ Label : CODE
           b
         Label : OBJECT
           ::
+          Label : CLASS
+            C
           Label : METHOD
             a
             Label : ARGUMENTS
               void
-          Label : CLASS
-            C
       Label : METHOD
         c
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             [
-            Label : VARIABLE
-              $d
             Label : INDEX
               'e'
+            Label : VARIABLE
+              $d

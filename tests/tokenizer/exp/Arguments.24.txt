@@ -11,16 +11,6 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          ::
-          Label : METHOD
-            e
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $f
-          Label : CLASS
-            D
-        Label : ARGUMENT
           <<<EOF
 
           Label : CONTAIN
@@ -34,3 +24,13 @@ Label : CODE
 
         Label : ARGUMENT
           2
+        Label : ARGUMENT
+          ::
+          Label : CLASS
+            D
+          Label : METHOD
+            e
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $f

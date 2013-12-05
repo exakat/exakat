@@ -14,14 +14,20 @@ Label : CODE
             !
             Label : NOT
               [
-              Label : VARIABLE
-                $i
               Label : INDEX
                 'j'
+              Label : VARIABLE
+                $i
           Label : LEFT
             b
             Label : ARGUMENTS
               ,
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'd'
+                Label : VARIABLE
+                  $c
               Label : ARGUMENT
                 "
                 Label : CONTAIN
@@ -30,18 +36,12 @@ Label : CODE
                     e
                   Label : CONCAT
                     [
-                    Label : VARIABLE
-                      $f
                     Label : INDEX
                       g
+                    Label : VARIABLE
+                      $f
                   Label : CONCAT
                     h
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $c
-                Label : INDEX
-                  'd'
       Label : THEN
         'k'
       Label : ELSE

@@ -11,9 +11,9 @@ Label : CODE
   Label : ELEMENT
     :
     Label : LABEL
-      a2
+      a1
   Label : ELEMENT
-    :
+    goto
     Label : LABEL
       a1
   Label : ELEMENT
@@ -23,6 +23,6 @@ Label : CODE
       Label : ARGUMENT
         'Foo'
   Label : ELEMENT
-    goto
+    :
     Label : LABEL
-      a1
+      a2

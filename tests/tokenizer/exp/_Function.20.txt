@@ -14,16 +14,16 @@ Label : CODE
             3
           Label : ARGUMENT
             =>
+            Label : KEY
+              2
             Label : VALUE
               array
               Label : ARGUMENTS
                 ,
                 Label : ARGUMENT
-                  2
-                Label : ARGUMENT
                   3
-            Label : KEY
-              2
+                Label : ARGUMENT
+                  2
           Label : ARGUMENT
             1
       Label : LEFT

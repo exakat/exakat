@@ -21,10 +21,10 @@ Label : CODE
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
-            $b
+            $a
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
-            $a
+            $b
     Label : VARIABLE
       $e

@@ -5,9 +5,9 @@ Label : CODE
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
-      $b
-    Label : ARGUMENT
       $a
+    Label : ARGUMENT
+      $b
   Label : NAME
     x
   Label : BLOCK

@@ -7,8 +7,6 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
-        'g'
-      Label : CONCAT
         +
         Label : RIGHT
           4
@@ -26,5 +24,7 @@ Label : CODE
                   1
                 Label : LEFT
                   $c
+      Label : CONCAT
+        'g'
     Label : LEFT
       $a

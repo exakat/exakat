@@ -3,10 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    :
-    Label : LABEL
-      C
-  Label : ELEMENT
     =
     Label : RIGHT
       2
@@ -15,14 +11,18 @@ Label : CODE
   Label : ELEMENT
     :
     Label : LABEL
-      B
+      C
   Label : ELEMENT
     :
     Label : LABEL
-      A
+      B
   Label : ELEMENT
     =
     Label : RIGHT
       1
     Label : LEFT
       $a
+  Label : ELEMENT
+    :
+    Label : LABEL
+      A

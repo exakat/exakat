@@ -5,7 +5,11 @@ Label : CODE
   Label : ELEMENT
     .
     Label : CONCAT
+      "b"
+    Label : CONCAT
       'c'
+    Label : CONCAT
+      'a'
     Label : CONCAT
       "b"
     Label : CONCAT
@@ -18,7 +22,3 @@ Label : CODE
       'a'
     Label : CONCAT
       'c'
-    Label : CONCAT
-      "b"
-    Label : CONCAT
-      'a'

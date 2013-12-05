@@ -9,19 +9,7 @@ Label : CODE
       Label : CLASS
         CLASSE
       Label : VARIABLE
-        $f
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        CLASSE
-      Label : VARIABLE
         $e
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        CLASSE
-      Label : VARIABLE
-        $d
     Label : ARGUMENT
       Typehint
       Label : CLASS
@@ -33,13 +21,25 @@ Label : CODE
       Label : CLASS
         CLASSE
       Label : VARIABLE
+        $a
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        CLASSE
+      Label : VARIABLE
         $b
     Label : ARGUMENT
       Typehint
       Label : CLASS
         CLASSE
       Label : VARIABLE
-        $a
+        $d
+    Label : ARGUMENT
+      Typehint
+      Label : CLASS
+        CLASSE
+      Label : VARIABLE
+        $f
   Label : NAME
     &
     Label : REFERENCE

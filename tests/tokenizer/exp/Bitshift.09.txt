@@ -8,12 +8,6 @@ Label : CODE
       >>
       Label : RIGHT
         ->
-        Label : METHOD
-          f
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $g
         Label : OBJECT
           ::
           Label : CLASS
@@ -24,6 +18,12 @@ Label : CODE
               void
               Label : ARGUMENT
                 'e'
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g
       Label : LEFT
         $b
     Label : LEFT

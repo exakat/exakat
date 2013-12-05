@@ -8,11 +8,11 @@ Label : CODE
       &
       Label : REFERENCE
         ::
+        Label : CLASS
+          classe
         Label : METHOD
           method_static
           Label : ARGUMENTS
             void
-        Label : CLASS
-          classe
     Label : LEFT
       $x

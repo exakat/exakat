@@ -12,18 +12,18 @@ Label : CODE
           ,
           Label : ARGUMENT
             ->
+            Label : PROPERTY
+              d
+            Label : OBJECT
+              $this
+          Label : ARGUMENT
+            ->
             Label : OBJECT
               $e
             Label : METHOD
               f
               Label : ARGUMENTS
                 void
-          Label : ARGUMENT
-            ->
-            Label : PROPERTY
-              d
-            Label : OBJECT
-              $this
       Label : LEFT
         ===
         Label : RIGHT

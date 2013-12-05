@@ -3,6 +3,14 @@
 Label : CODE
   ;
   Label : ELEMENT
+    :
+    Label : LABEL
+      cleanupCookie
+  Label : ELEMENT
+    GOTO
+    Label : LABEL
+      cleanupCookie
+  Label : ELEMENT
     switch
     Label : NAME
       $x
@@ -18,11 +26,3 @@ Label : CODE
               $y
         Label : CASE
           1
-  Label : ELEMENT
-    :
-    Label : LABEL
-      cleanupCookie
-  Label : ELEMENT
-    GOTO
-    Label : LABEL
-      cleanupCookie

@@ -10,11 +10,11 @@ Label : CODE
         $d
       Label : LEFT
         [
-        Label : VARIABLE
-          $b
         Label : INDEX
           ++
           Label : PREPLUSPLUS
             $c
+        Label : VARIABLE
+          $b
     Label : LEFT
       $a

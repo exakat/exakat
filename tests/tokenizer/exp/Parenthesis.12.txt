@@ -7,12 +7,6 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
-        (
-        Label : CODE
-          ++
-          Label : PREPLUSPLUS
-            $h
-      Label : CONCAT
         "
         Label : CONTAIN
           Concatenation
@@ -22,21 +16,27 @@ Label : CODE
             {
           Label : CONCAT
             [
-            Label : VARIABLE
-              $e
             Label : INDEX
               f
+            Label : VARIABLE
+              $e
           Label : CONCAT
             }
           Label : CONCAT
             g
+      Label : CONCAT
+        (
+        Label : CODE
+          ++
+          Label : PREPLUSPLUS
+            $h
     Label : LEFT
       ::
-      Label : PROPERTY
-        [
-        Label : VARIABLE
-          $b
-        Label : INDEX
-          'c'
       Label : CLASS
         a
+      Label : PROPERTY
+        [
+        Label : INDEX
+          'c'
+        Label : VARIABLE
+          $b

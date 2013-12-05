@@ -21,25 +21,27 @@ Label : CODE
       Label : ELEMENT
         =
         Label : RIGHT
-          =
-          Label : RIGHT
-            array
-            Label : ARGUMENTS
-              void
-          Label : LEFT
-            $d
+          str_replace
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              $j
+            Label : ARGUMENT
+              $i
+            Label : ARGUMENT
+              $k
         Label : LEFT
-          $c
+          $h
       Label : ELEMENT
         foreach
-        Label : SOURCE
-          $e
         Label : VALUE
           =>
-          Label : VALUE
-            $v
           Label : KEY
             $k
+          Label : VALUE
+            $v
+        Label : SOURCE
+          $e
         Label : LOOP
           {
           Label : CODE
@@ -57,11 +59,11 @@ Label : CODE
               Label : RIGHT
                 .
                 Label : CONCAT
-                  '}'
-                Label : CONCAT
                   $k
                 Label : CONCAT
                   '{'
+                Label : CONCAT
+                  '}'
               Label : LEFT
                 [
                 Label : VARIABLE
@@ -69,14 +71,12 @@ Label : CODE
       Label : ELEMENT
         =
         Label : RIGHT
-          str_replace
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $k
-            Label : ARGUMENT
-              $j
-            Label : ARGUMENT
-              $i
+          =
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void
+          Label : LEFT
+            $d
         Label : LEFT
-          $h
+          $c

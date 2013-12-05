@@ -7,8 +7,6 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
-        " b"
-      Label : CONCAT
         (
         Label : CODE
           +
@@ -18,5 +16,7 @@ Label : CODE
             1
       Label : CONCAT
         "a"
+      Label : CONCAT
+        " b"
     Label : LEFT
       $x

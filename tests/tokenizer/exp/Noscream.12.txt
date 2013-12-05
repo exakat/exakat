@@ -11,13 +11,13 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            'b'
-          Label : ARGUMENT
             .
             Label : CONCAT
-              'a'
-            Label : CONCAT
               $host
+            Label : CONCAT
+              'a'
+          Label : ARGUMENT
+            'b'
     Label : LEFT
       ->
       Label : PROPERTY

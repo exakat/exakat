@@ -9,7 +9,7 @@ Label : CODE
   Label : CATCH
     catch
     Label : CLASS
-      Exception
+      Exception3
     Label : CODE
       {
       Label : CODE
@@ -29,7 +29,7 @@ Label : CODE
   Label : CATCH
     catch
     Label : CLASS
-      Exception3
+      Exception
     Label : CODE
       {
       Label : CODE

@@ -43,15 +43,15 @@ Label : CODE
                     Label : ARGUMENT
                       'f'
             Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
               g
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   'h'
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
             Label : ELEMENT
               ++
               Label : POSTPLUSPLUS

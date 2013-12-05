@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     >
-    Label : LEFT
-      $x
     Label : RIGHT
       new
       Label : NEW
         D
         Label : ARGUMENTS
           void
+    Label : LEFT
+      $x

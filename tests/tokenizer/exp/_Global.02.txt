@@ -13,12 +13,6 @@ Label : CODE
     Label : VALUE
       void
     Label : DEFINE
-      $c
-  Label : ELEMENT
-    global
-    Label : VALUE
-      void
-    Label : DEFINE
       $b
   Label : ELEMENT
     global
@@ -26,3 +20,9 @@ Label : CODE
       void
     Label : DEFINE
       $a
+  Label : ELEMENT
+    global
+    Label : VALUE
+      void
+    Label : DEFINE
+      $c

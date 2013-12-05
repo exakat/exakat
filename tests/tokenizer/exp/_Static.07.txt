@@ -12,10 +12,10 @@ Label : CODE
       static
   Label : ELEMENT
     function
-    Label : NAME
-      y
     Label : ARGUMENTS
       void
+    Label : NAME
+      y
     Label : BLOCK
       {
       Label : CODE

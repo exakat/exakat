@@ -8,10 +8,10 @@ Label : CODE
       --
       Label : POSTPLUSPLUS
         [
-        Label : VARIABLE
-          $b
         Label : INDEX
           'c'
+        Label : VARIABLE
+          $b
     Label : LEFT
       !
       Label : NOT

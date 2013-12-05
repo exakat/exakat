@@ -13,31 +13,31 @@ Label : CODE
           Label : ARGUMENTS
             ,
             Label : ARGUMENT
+              [
+              Label : INDEX
+                'd'
+              Label : VARIABLE
+                $c
+            Label : ARGUMENT
               array
               Label : ARGUMENTS
                 ,
                 Label : ARGUMENT
-                  'g'
-                Label : ARGUMENT
                   'f'
                 Label : ARGUMENT
                   'e'
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                'd'
+                Label : ARGUMENT
+                  'g'
       Label : LEFT
         empty
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             [
-            Label : VARIABLE
-              $a
             Label : INDEX
               'b'
+            Label : VARIABLE
+              $a
   Label : THEN
     Block With if/elseif
     Label : CODE
@@ -46,7 +46,7 @@ Label : CODE
         'j'
       Label : LEFT
         [
-        Label : VARIABLE
-          $h
         Label : INDEX
           'i'
+        Label : VARIABLE
+          $h

@@ -15,6 +15,8 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
+                $a
+              Label : ARGUMENT
                 new
                 Label : NEW
                   DateTimeZone
@@ -22,8 +24,6 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       $b
-              Label : ARGUMENT
-                $a
         Label : LEFT
           $d
   Label : CATCH
@@ -41,13 +41,13 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
+                'Y-m-d-H-i-s'
+              Label : ARGUMENT
                 strtotime
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     $d
-              Label : ARGUMENT
-                'Y-m-d-H-i-s'
           Label : LEFT
             $c
     Label : VARIABLE

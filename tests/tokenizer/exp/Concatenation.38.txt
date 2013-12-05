@@ -11,37 +11,37 @@ Label : CODE
         Label : ARGUMENT
           .
           Label : CONCAT
+            'i'
+          Label : CONCAT
             preg_replace
             Label : ARGUMENTS
               ,
+              Label : ARGUMENT
+                ''
+              Label : ARGUMENT
+                "e"
               Label : ARGUMENT
                 substr
                 Label : ARGUMENTS
                   ,
                   Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    $f
+                  Label : ARGUMENT
                     strrpos
                     Label : ARGUMENTS
                       ,
                       Label : ARGUMENT
-                        'h'
-                      Label : ARGUMENT
                         $g
-                  Label : ARGUMENT
-                    0
-                  Label : ARGUMENT
-                    $f
-              Label : ARGUMENT
-                ''
-              Label : ARGUMENT
-                "e"
-          Label : CONCAT
-            'i'
+                      Label : ARGUMENT
+                        'h'
           Label : CONCAT
             [
-            Label : VARIABLE
-              $c
             Label : INDEX
               'd'
+            Label : VARIABLE
+              $c
           Label : CONCAT
             'b'
     Label : LEFT

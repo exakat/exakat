@@ -9,15 +9,11 @@ Label : CODE
       Label : ARGUMENT
         .
         Label : CONCAT
-          'h'
-        Label : CONCAT
           [
-          Label : VARIABLE
-            $f
           Label : INDEX
             'g'
-        Label : CONCAT
-          'e'
+          Label : VARIABLE
+            $f
         Label : CONCAT
           ->
           Label : OBJECT
@@ -28,7 +24,11 @@ Label : CODE
               void
               Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  $c
                 Label : INDEX
                   d
+                Label : VARIABLE
+                  $c
+        Label : CONCAT
+          'e'
+        Label : CONCAT
+          'h'

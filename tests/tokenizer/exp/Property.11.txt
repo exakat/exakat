@@ -6,19 +6,19 @@ Label : CODE
     =
     Label : RIGHT
       [
+      Label : INDEX
+        'e'
       Label : VARIABLE
         ->
         Label : PROPERTY
           d
         Label : OBJECT
           ::
+          Label : CLASS
+            B
           Label : METHOD
             c
             Label : ARGUMENTS
               void
-          Label : CLASS
-            B
-      Label : INDEX
-        'e'
     Label : LEFT
       $a

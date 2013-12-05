@@ -14,14 +14,12 @@ Label : CODE
             void
             Label : ARGUMENT
               [
-              Label : VARIABLE
-                $b
               Label : INDEX
                 'd'
+              Label : VARIABLE
+                $b
       Label : THEN
         .
-        Label : CONCAT
-          'i'
         Label : CONCAT
           $g
           Label : ARGUMENTS
@@ -30,6 +28,8 @@ Label : CODE
               'h'
         Label : CONCAT
           'f'
+        Label : CONCAT
+          'i'
       Label : ELSE
         'j'
     Label : LEFT

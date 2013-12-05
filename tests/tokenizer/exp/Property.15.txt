@@ -11,21 +11,21 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $d
-            Label : INDEX
-              $e
-          Label : ARGUMENT
             ->
             Label : PROPERTY
               [
-              Label : VARIABLE
-                $b
               Label : INDEX
                 $c
+              Label : VARIABLE
+                $b
             Label : OBJECT
               $a
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              $e
+            Label : VARIABLE
+              $d
   Label : THEN
     {
     Label : CODE

@@ -15,8 +15,6 @@ Label : CODE
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              (
-              Label : CODE
-                'c.php'
+              'c.php'
       Label : CASE
         'b'

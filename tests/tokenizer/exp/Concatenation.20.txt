@@ -7,18 +7,18 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
-        "7"
-      Label : CONCAT
         "6"
       Label : CONCAT
-        "5"
-      Label : CONCAT
         "4"
-      Label : CONCAT
-        "3"
       Label : CONCAT
         "2"
       Label : CONCAT
         "1"
+      Label : CONCAT
+        "3"
+      Label : CONCAT
+        "5"
+      Label : CONCAT
+        "7"
     Label : LEFT
       $a

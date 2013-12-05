@@ -12,18 +12,18 @@ Label : CODE
           true
         Label : LEFT
           ->
+          Label : OBJECT
+            $b
           Label : METHOD
             c
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                $d
-              Label : ARGUMENT
                 array
                 Label : ARGUMENTS
                   void
-          Label : OBJECT
-            $b
+              Label : ARGUMENT
+                $d
       Label : LEFT
         $a
   Label : THEN

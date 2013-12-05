@@ -3,6 +3,22 @@
 Label : CODE
   ;
   Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $x
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $y
+  Label : ELEMENT
     switch
     Label : NAME
       $x
@@ -20,19 +36,3 @@ Label : CODE
               $x
         Label : CASE
           1
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        $x
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            2
-          Label : LEFT
-            $y

@@ -16,31 +16,31 @@ Label : CODE
             void
             Label : ARGUMENT
               [
-              Label : VARIABLE
-                $b
               Label : INDEX
                 $i
+              Label : VARIABLE
+                $b
       Label : THEN
         .
         Label : CONCAT
           [
+          Label : INDEX
+            $e
           Label : VARIABLE
-            $d
+            $c
+        Label : CONCAT
+          [
           Label : INDEX
             ++
             Label : PREPLUSPLUS
               $l
-        Label : CONCAT
-          [
           Label : VARIABLE
-            $c
-          Label : INDEX
-            $e
+            $d
       Label : ELSE
         [
-        Label : VARIABLE
-          $e
         Label : INDEX
           $k
+        Label : VARIABLE
+          $e
     Label : LEFT
       $a

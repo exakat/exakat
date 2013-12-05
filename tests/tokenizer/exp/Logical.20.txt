@@ -6,9 +6,9 @@ Label : CODE
     ||
     Label : RIGHT
       ->
-      Label : OBJECT
-        $y
       Label : PROPERTY
         z
+      Label : OBJECT
+        $y
     Label : LEFT
       $x

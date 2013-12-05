@@ -15,10 +15,6 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-            Label : ELEMENT
               &&
               Label : RIGHT
                 =
@@ -44,6 +40,10 @@ Label : CODE
                     'k'
                   Label : LEFT
                     $j
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
             Label : ELEMENT
               &&
               Label : RIGHT

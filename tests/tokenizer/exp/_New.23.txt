@@ -9,44 +9,32 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        protected
+        Ppp
         Label : VALUE
-          void
+          'f'
         Label : DEFINE
+          $y4
+        Label : STATIC
           static
-          Label : VALUE
-            void
-          Label : DEFINE
-            =
-            Label : LEFT
-              $y4
-            Label : RIGHT
-              'f'
+        Label : PROTECTED
+          protected
       Label : ELEMENT
-        private
+        Ppp
         Label : VALUE
-          void
+          'f'
         Label : DEFINE
+          $y
+        Label : STATIC
           static
-          Label : VALUE
-            void
-          Label : DEFINE
-            =
-            Label : LEFT
-              $y3
-            Label : RIGHT
-              'f'
+        Label : PUBLIC
+          public
       Label : ELEMENT
-        public
+        Ppp
         Label : VALUE
-          void
+          'f'
         Label : DEFINE
+          $y3
+        Label : STATIC
           static
-          Label : VALUE
-            void
-          Label : DEFINE
-            =
-            Label : LEFT
-              $y
-            Label : RIGHT
-              'f'
+        Label : PRIVATE
+          private

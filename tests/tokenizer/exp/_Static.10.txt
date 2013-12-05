@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     ::
+    Label : CLASS
+      static
     Label : METHOD
       B
       Label : ARGUMENTS
         void
-    Label : CLASS
-      static

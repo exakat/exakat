@@ -24,12 +24,12 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       ->
+                      Label : OBJECT
+                        $j
                       Label : METHOD
                         k
                         Label : ARGUMENTS
                           void
-                      Label : OBJECT
-                        $j
                 Label : CONCAT
                   'h'
                 Label : CONCAT
@@ -59,12 +59,6 @@ Label : CODE
             Label : ELEMENT
               =
               Label : RIGHT
-                'n'
-              Label : LEFT
-                $m
-            Label : ELEMENT
-              =
-              Label : RIGHT
                 .
                 Label : CONCAT
                   i
@@ -72,18 +66,24 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       ->
+                      Label : OBJECT
+                        $j
                       Label : METHOD
                         k
                         Label : ARGUMENTS
                           void
-                      Label : OBJECT
-                        $j
                 Label : CONCAT
                   'h'
                 Label : CONCAT
                   'l'
               Label : LEFT
                 $b
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                'n'
+              Label : LEFT
+                $m
             Label : ELEMENT
               =
               Label : RIGHT

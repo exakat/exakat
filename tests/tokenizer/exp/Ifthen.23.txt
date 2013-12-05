@@ -1,70 +1,88 @@
 <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        $x
-    Label : THEN
-      $y
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        (
-        Label : CODE
-          $w
-      Label : THEN
-        ;
-        Label : ELEMENT
-          $ww2
-        Label : ELEMENT
-          $ww
-      Label : ELSE
-        elseif
-        Label : CONDITION
-          (
-          Label : CODE
-            $v
-        Label : THEN
-          ;
-          Label : ELEMENT
-            $vv2
-          Label : ELEMENT
-            $vv
-        Label : ELSE
+Label : NEXT
+  if
+  Label : NEXT
+    (
+    Label : NEXT
+      :
+      Label : NEXT
+        $y
+        Label : NEXT
           elseif
-          Label : CONDITION
+          Label : NEXT
             (
+            Label : NEXT
+              :
+              Label : NEXT
+                $ww
+                Label : NEXT
+                  ;
+                  Label : NEXT
+                    $ww2
+                    Label : NEXT
+                      elseif
+                      Label : NEXT
+                        (
+                        Label : NEXT
+                          :
+                          Label : NEXT
+                            $vv
+                            Label : NEXT
+                              ;
+                              Label : NEXT
+                                $vv2
+                                Label : NEXT
+                                  elseif
+                                  Label : NEXT
+                                    (
+                                    Label : NEXT
+                                      :
+                                      Label : NEXT
+                                        $uu
+                                        Label : NEXT
+                                          ;
+                                          Label : NEXT
+                                            $uu2
+                                            Label : NEXT
+                                              elseif
+                                              Label : NEXT
+                                                (
+                                                Label : NEXT
+                                                  :
+                                                  Label : NEXT
+                                                    $tt
+                                                    Label : NEXT
+                                                      ;
+                                                      Label : NEXT
+                                                        $tt2
+                                                        Label : NEXT
+                                                          else
+                                                          Label : NEXT
+                                                            :
+                                                            Label : NEXT
+                                                              $zz
+                                                              Label : NEXT
+                                                                ;
+                                                                Label : NEXT
+                                                                  $zz2
+                                                                  Label : NEXT
+                                                                    endif
+                                                                    Label : NEXT
+                                                                      ;
+                                                                      Label : NEXT
+                                                                        ?>
+                                                                        Label : NEXT
+                                                                          /**/
+                                                                          Label : NEXT
+                                                                            /* * */
+                                                Label : CODE
+                                                  $t
+                                    Label : CODE
+                                      $u
+                        Label : CODE
+                          $v
             Label : CODE
-              $u
-          Label : THEN
-            ;
-            Label : ELEMENT
-              $uu2
-            Label : ELEMENT
-              $uu
-          Label : ELSE
-            elseif
-            Label : CONDITION
-              (
-              Label : CODE
-                $t
-            Label : THEN
-              ;
-              Label : ELEMENT
-                ;
-                Label : ELEMENT
-                  $tt2
-                Label : ELEMENT
-                  $tt
-            Label : ELSE
-              ;
-              Label : ELEMENT
-                ;
-                Label : ELEMENT
-                  $zz2
-                Label : ELEMENT
-                  $zz
+              $w
+    Label : CODE
+      $x

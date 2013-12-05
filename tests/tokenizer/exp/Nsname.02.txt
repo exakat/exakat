@@ -7,10 +7,10 @@ Label : CODE
     Label : NEW
       \
       Label : ELEMENT
-        c
-      Label : ELEMENT
         b
       Label : ELEMENT
         a
+      Label : ELEMENT
+        c
       Label : ARGUMENTS
         void

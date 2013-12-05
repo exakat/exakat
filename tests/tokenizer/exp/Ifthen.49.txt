@@ -7,38 +7,6 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
-        $a
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            preg_replace
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                "z"
-              Label : ARGUMENT
-                "
-                Label : CONTAIN
-                  Concatenation
-                  Label : CONCAT
-                    /x
-                  Label : CONCAT
-                    $y
-                  Label : CONCAT
-                    /
-          Label : LEFT
-            $a
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
         $b
     Label : THEN
       Block With if/elseif
@@ -68,3 +36,35 @@ Label : CODE
               $g
         Label : LEFT
           $f
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            preg_replace
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                "z"
+              Label : ARGUMENT
+                "
+                Label : CONTAIN
+                  Concatenation
+                  Label : CONCAT
+                    /x
+                  Label : CONCAT
+                    $y
+                  Label : CONCAT
+                    /
+              Label : ARGUMENT
+                $f
+          Label : LEFT
+            $a

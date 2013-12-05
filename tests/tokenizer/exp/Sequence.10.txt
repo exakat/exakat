@@ -5,9 +5,9 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      1
+      2
     Label : LEFT
-      $a
+      $c
   Label : ELEMENT
     switch
     Label : NAME
@@ -16,24 +16,6 @@ Label : CODE
       {
       Label : CODE
         Sequence Case Default
-        Label : ELEMENT
-          case
-          Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  2
-                Label : LEFT
-                  $b
-          Label : CASE
-            1
         Label : ELEMENT
           default
           Label : CODE
@@ -44,9 +26,27 @@ Label : CODE
                 3
               Label : LEFT
                 $b
+        Label : ELEMENT
+          case
+          Label : CODE
+            Block With Sequence For Case
+            Label : CODE
+              ;
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  2
+                Label : LEFT
+                  $b
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+          Label : CASE
+            1
   Label : ELEMENT
     =
     Label : RIGHT
-      2
+      1
     Label : LEFT
-      $c
+      $a

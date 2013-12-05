@@ -3,6 +3,24 @@
 Label : CODE
   ;
   Label : ELEMENT
+    global
+    Label : VALUE
+      void
+    Label : NAME
+      $c
+  Label : ELEMENT
+    global
+    Label : VALUE
+      void
+    Label : NAME
+      $a
+  Label : ELEMENT
+    global
+    Label : VALUE
+      void
+    Label : NAME
+      $b
+  Label : ELEMENT
     class
     Label : NAME
       x
@@ -11,44 +29,34 @@ Label : CODE
       Label : CODE
         ;
         Label : ELEMENT
-          protected
-          Label : NAME
-            $y
+          Ppp
           Label : VALUE
             void
-        Label : ELEMENT
-          protected
           Label : NAME
             $x
-          Label : VALUE
-            void
+          Label : PROTECTED
+            protected
         Label : ELEMENT
-          protected
-          Label : NAME
-            $a
-          Label : VALUE
-            void
-        Label : ELEMENT
-          protected
-          Label : NAME
-            $z
+          Ppp
           Label : VALUE
             3
-  Label : ELEMENT
-    global
-    Label : NAME
-      $a
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $c
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $b
-    Label : VALUE
-      void
+          Label : NAME
+            $z
+          Label : PROTECTED
+            protected
+        Label : ELEMENT
+          Ppp
+          Label : VALUE
+            void
+          Label : NAME
+            $a
+          Label : PROTECTED
+            protected
+        Label : ELEMENT
+          Ppp
+          Label : VALUE
+            void
+          Label : NAME
+            $y
+          Label : PROTECTED
+            protected

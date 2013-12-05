@@ -9,20 +9,20 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          'f'
-        Label : ARGUMENT
           .
+          Label : CONCAT
+            'c'
+          Label : CONCAT
+            'a'
+          Label : CONCAT
+            $b
           Label : CONCAT
             ->
             Label : PROPERTY
               e
             Label : OBJECT
               $d
-          Label : CONCAT
-            'c'
-          Label : CONCAT
-            $b
-          Label : CONCAT
-            'a'
+        Label : ARGUMENT
+          'f'
     Label : LEFT
       $fp

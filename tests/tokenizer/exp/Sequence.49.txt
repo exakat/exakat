@@ -17,6 +17,8 @@ Label : CODE
     ->
     Label : OBJECT
       ::
+      Label : CLASS
+        C
       Label : METHOD
         D
         Label : ARGUMENTS
@@ -27,8 +29,6 @@ Label : CODE
               void
               Label : ARGUMENT
                 'F'
-      Label : CLASS
-        C
     Label : METHOD
       g
       Label : ARGUMENTS

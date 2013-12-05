@@ -13,18 +13,18 @@ Label : CODE
   Label : ELEMENT
     use
     Label : USE
-      A
-    Label : AS
-      E
-  Label : ELEMENT
-    use
-    Label : USE
       \
-      Label : ELEMENT
-        C
       Label : ELEMENT
         B
       Label : ELEMENT
         A
+      Label : ELEMENT
+        C
     Label : AS
       D
+  Label : ELEMENT
+    use
+    Label : USE
+      A
+    Label : AS
+      E

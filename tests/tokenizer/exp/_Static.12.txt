@@ -4,25 +4,25 @@ Label : CODE
   ;
   Label : ELEMENT
     +
+    Label : RIGHT
+      ::
+      Label : CLASS
+        static
+      Label : METHOD
+        d
+        Label : ARGUMENTS
+          void
     Label : LEFT
       +
-      Label : LEFT
-        ::
-        Label : PROPERTY
-          $B
-        Label : CLASS
-          static
       Label : RIGHT
         ::
         Label : CLASS
           static
         Label : CONSTANT
           C
-    Label : RIGHT
-      ::
-      Label : METHOD
-        d
-        Label : ARGUMENTS
-          void
-      Label : CLASS
-        static
+      Label : LEFT
+        ::
+        Label : CLASS
+          static
+        Label : PROPERTY
+          $B

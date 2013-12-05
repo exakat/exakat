@@ -18,18 +18,18 @@ Label : CODE
                 'c'
               Label : LEFT
                 ->
-                Label : OBJECT
-                  $a
                 Label : PROPERTY
                   b
+                Label : OBJECT
+                  $a
             Label : THEN
               .
               Label : CONCAT
                 ->
-                Label : OBJECT
-                  $d
                 Label : PROPERTY
                   e
+                Label : OBJECT
+                  $d
               Label : CONCAT
                 F
             Label : ELSE

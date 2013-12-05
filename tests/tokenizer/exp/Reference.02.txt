@@ -8,13 +8,13 @@ Label : CODE
       &
       Label : REFERENCE
         [
-        Label : VARIABLE
-          $y
         Label : INDEX
           4
+        Label : VARIABLE
+          $y
     Label : LEFT
       [
-      Label : VARIABLE
-        $x
       Label : INDEX
         3
+      Label : VARIABLE
+        $x

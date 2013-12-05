@@ -6,7 +6,7 @@ Label : CODE
     new
     Label : NEW
       [
-      Label : VARIABLE
-        $x
       Label : INDEX
         1
+      Label : VARIABLE
+        $x

@@ -16,13 +16,13 @@ Label : CODE
             $e
           Label : LEFT
             [
+            Label : INDEX
+              $d
             Label : VARIABLE
               ->
               Label : PROPERTY
                 c
               Label : OBJECT
                 $b
-            Label : INDEX
-              $d
     Label : LEFT
       $a

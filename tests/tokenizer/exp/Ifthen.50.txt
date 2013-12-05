@@ -3,6 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
+    exit
+    Label : ARGUMENTS
+      void
+  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -70,9 +74,3 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         "l"
-  Label : ELEMENT
-    exit
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ;

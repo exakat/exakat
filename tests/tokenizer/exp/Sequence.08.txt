@@ -7,7 +7,7 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
-        $x
+        $y
     Label : THEN
       {
       Label : CODE
@@ -23,7 +23,7 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
-        $y
+        $x
     Label : THEN
       {
       Label : CODE

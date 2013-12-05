@@ -4,16 +4,16 @@ Label : CODE
   =
   Label : RIGHT
     function
-    Label : NAME
-      lambda
     Label : ARGUMENT
       ,
-      Label : ARGUMENT
-        $d
       Label : ARGUMENT
         $c
       Label : ARGUMENT
         $b
+      Label : ARGUMENT
+        $d
+    Label : NAME
+      lambda
     Label : BLOCK
       {
       Label : CODE

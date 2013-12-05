@@ -3,6 +3,6 @@
 Label : CODE
   .
   Label : CONCAT
-    $x
-  Label : CONCAT
     '1'
+  Label : CONCAT
+    $x

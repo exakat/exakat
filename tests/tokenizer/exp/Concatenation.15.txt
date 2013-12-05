@@ -7,6 +7,10 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
+        $c
+      Label : CONCAT
+        "a"
+      Label : CONCAT
         @
         Label : AT
           y
@@ -14,9 +18,5 @@ Label : CODE
             void
             Label : ARGUMENT
               1
-      Label : CONCAT
-        $c
-      Label : CONCAT
-        "a"
     Label : LEFT
       $z

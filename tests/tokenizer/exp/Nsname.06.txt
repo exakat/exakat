@@ -5,8 +5,8 @@ Label : CODE
   Label : ELEMENT
     \
     Label : ELEMENT
-      b
-    Label : ELEMENT
       a
+    Label : ELEMENT
+      b
     Label : ARGUMENTS
       void

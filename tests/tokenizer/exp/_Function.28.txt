@@ -7,13 +7,13 @@ Label : CODE
     Label : ARGUMENT
       &
       Label : RIGHT
-        $b
+        $x
       Label : LEFT
         StdClass
     Label : ARGUMENT
       &
       Label : RIGHT
-        $x
+        $b
       Label : LEFT
         StdClass
   Label : NAME

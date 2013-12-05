@@ -22,24 +22,24 @@ Label : CODE
               void
               Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  [
-                  Label : VARIABLE
-                    $d
-                  Label : INDEX
-                    'e'
                 Label : INDEX
                   .
                   Label : CONCAT
-                    $g
-                  Label : CONCAT
                     'f'
+                  Label : CONCAT
+                    $g
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'e'
+                  Label : VARIABLE
+                    $d
       Label : LEFT
         [
-        Label : VARIABLE
-          $a
         Label : INDEX
           'b'
+        Label : VARIABLE
+          $a
   Label : THEN
     {
     Label : CODE
@@ -49,6 +49,6 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
-            'k'
-          Label : ARGUMENT
             'j'
+          Label : ARGUMENT
+            'k'

@@ -9,8 +9,6 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          void
-        Label : ARGUMENT
           =>
           Label : KEY
             'a'
@@ -21,12 +19,14 @@ Label : CODE
               Label : ARGUMENT
                 .
                 Label : CONCAT
-                  'c'
-                Label : CONCAT
                   b
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
                       __FILE__
+                Label : CONCAT
+                  'c'
+        Label : ARGUMENT
+          void
     Label : LEFT
       $x

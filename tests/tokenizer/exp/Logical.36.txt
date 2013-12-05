@@ -8,8 +8,6 @@ Label : CODE
       $c
     Label : LEFT
       [
-      Label : VARIABLE
-        $a
       Label : INDEX
         &
         Label : RIGHT
@@ -18,3 +16,5 @@ Label : CODE
           ++
           Label : PREPLUSPLUS
             $b
+      Label : VARIABLE
+        $a

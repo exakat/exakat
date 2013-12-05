@@ -5,13 +5,9 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      2
+      1
     Label : LEFT
-      $b
-  Label : ELEMENT
-    :
-    Label : LABEL
-      B
+      $a
   Label : ELEMENT
     :
     Label : LABEL
@@ -19,6 +15,10 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      1
+      2
     Label : LEFT
-      $a
+      $b
+  Label : ELEMENT
+    :
+    Label : LABEL
+      B

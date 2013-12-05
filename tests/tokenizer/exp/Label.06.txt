@@ -5,9 +5,23 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
+      4
+    Label : LEFT
+      $e
+  Label : ELEMENT
+    :
+    Label : LABEL
+      E
+  Label : ELEMENT
+    =
+    Label : RIGHT
       5
     Label : LEFT
       $f
+  Label : ELEMENT
+    :
+    Label : LABEL
+      F
   Label : ELEMENT
     =
     Label : RIGHT
@@ -21,21 +35,11 @@ Label : CODE
   Label : ELEMENT
     :
     Label : LABEL
-      F
-  Label : ELEMENT
-    :
-    Label : LABEL
-      E
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      4
-    Label : LEFT
-      $e
-  Label : ELEMENT
-    :
-    Label : LABEL
       D
+  Label : ELEMENT
+    :
+    Label : LABEL
+      C
   Label : ELEMENT
     =
     Label : RIGHT
@@ -43,9 +47,15 @@ Label : CODE
     Label : LEFT
       $c
   Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $a
+  Label : ELEMENT
     :
     Label : LABEL
-      C
+      A
   Label : ELEMENT
     =
     Label : RIGHT
@@ -56,13 +66,3 @@ Label : CODE
     :
     Label : LABEL
       B
-  Label : ELEMENT
-    :
-    Label : LABEL
-      A
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $a

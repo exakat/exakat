@@ -3,28 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        -
-        Label : RIGHT
-          [
-          Label : VARIABLE
-            $y
-          Label : INDEX
-            b
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'c'
-        Label : LEFT
-          +
-          Label : RIGHT
-            2
-          Label : LEFT
-            $a
-  Label : ELEMENT
     b
 
   Label : ELEMENT
@@ -33,3 +11,25 @@ Label : CODE
       void
       Label : ARGUMENT
         $c
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        -
+        Label : RIGHT
+          [
+          Label : INDEX
+            b
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'c'
+          Label : VARIABLE
+            $y
+        Label : LEFT
+          +
+          Label : RIGHT
+            2
+          Label : LEFT
+            $a

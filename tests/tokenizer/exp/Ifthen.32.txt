@@ -16,7 +16,7 @@ Label : CODE
         $c
       Label : ELSE
         [
-        Label : VARIABLE
-          $d
         Label : INDEX
           3
+        Label : VARIABLE
+          $d

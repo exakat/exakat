@@ -9,6 +9,6 @@ Label : CODE
       Label : ARGUMENT
         .
         Label : CONCAT
-          'b'
-        Label : CONCAT
           'a'
+        Label : CONCAT
+          'b'

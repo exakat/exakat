@@ -10,9 +10,9 @@ Label : CODE
         'd'
       Label : LEFT
         [
-        Label : VARIABLE
-          $b
         Label : INDEX
           'c'
+        Label : VARIABLE
+          $b
     Label : LEFT
       $a

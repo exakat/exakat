@@ -9,15 +9,15 @@ Label : CODE
       Label : CLASS
         Stdclass
       Label : VARIABLE
-        $c
+        $b
+    Label : ARGUMENT
+      $a
     Label : ARGUMENT
       Typehint
       Label : CLASS
         Stdclass
       Label : VARIABLE
-        $b
-    Label : ARGUMENT
-      $a
+        $c
   Label : NAME
     x
   Label : BLOCK

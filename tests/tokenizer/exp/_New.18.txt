@@ -4,50 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $y
-    Label : RIGHT
-      'a'
-  Label : ELEMENT
-    class
-    Label : NAME
-      C
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          function
-          Label : NAME
-            a
-          Label : ARGUMENTS
-            void
-          Label : BLOCK
-            {
-            Label : CODE
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  'b'
-        Label : ELEMENT
-          public
-          Label : VALUE
-            void
-          Label : DEFINE
-            static
-            Label : VALUE
-              void
-            Label : DEFINE
-              =
-              Label : LEFT
-                $y
-              Label : RIGHT
-                'f'
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
     Label : RIGHT
       new
       Label : NEW
@@ -58,3 +14,43 @@ Label : CODE
           $y
           Label : ARGUMENTS
             void
+    Label : LEFT
+      $x
+  Label : ELEMENT
+    class
+    Label : NAME
+      C
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          Ppp
+          Label : VALUE
+            'f'
+          Label : DEFINE
+            $y
+          Label : STATIC
+            static
+          Label : PUBLIC
+            public
+        Label : ELEMENT
+          function
+          Label : ARGUMENTS
+            void
+          Label : NAME
+            a
+          Label : BLOCK
+            {
+            Label : CODE
+              ;
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  'b'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'a'
+    Label : LEFT
+      $y

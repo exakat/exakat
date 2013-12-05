@@ -5,9 +5,7 @@ Label : CODE
   Label : CODE
     {
     Label : CODE
-      public
-      Label : VALUE
-        void
+      Ppp
       Label : DEFINE
         function
         Label : ARGUMENTS
@@ -16,5 +14,7 @@ Label : CODE
           &
           Label : REFERENCE
             b
+      Label : PUBLIC
+        public
   Label : NAME
     a

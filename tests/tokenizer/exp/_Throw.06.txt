@@ -17,12 +17,12 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                $f
-              Label : ARGUMENT
                 ->
-                Label : OBJECT
-                  $d
                 Label : PROPERTY
                   e
+                Label : OBJECT
+                  $d
               Label : ARGUMENT
                 'C'
+              Label : ARGUMENT
+                $f

@@ -22,6 +22,10 @@ Label : CODE
           Label : ARGUMENTS
             ,
             Label : ARGUMENT
+              'H'
+            Label : ARGUMENT
+              G
+            Label : ARGUMENT
               ->
               Label : OBJECT
                 $c
@@ -35,9 +39,5 @@ Label : CODE
                       f
                     Label : OBJECT
                       $e
-            Label : ARGUMENT
-              'H'
-            Label : ARGUMENT
-              G
         Label : ELSE
           'I'

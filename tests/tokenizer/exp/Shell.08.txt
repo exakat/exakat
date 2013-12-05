@@ -46,10 +46,10 @@ Label : CODE
           {
         Label : CONCAT
           [
-          Label : VARIABLE
-            $k
           Label : INDEX
             'l'
+          Label : VARIABLE
+            $k
         Label : CONCAT
           }
         Label : CONCAT
@@ -58,14 +58,14 @@ Label : CODE
           {
         Label : CONCAT
           [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              $m
-            Label : INDEX
-              'n'
           Label : INDEX
             'o'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              'n'
+            Label : VARIABLE
+              $m
         Label : CONCAT
           }
         Label : CONCAT

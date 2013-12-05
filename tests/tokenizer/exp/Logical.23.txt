@@ -5,13 +5,15 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      |
+      ||
       Label : RIGHT
-        ::
-        Label : CLASS
-          D
-        Label : PROPERTY
-          $E
+        ->
+        Label : OBJECT
+          $c
+        Label : METHOD
+          d
+          Label : ARGUMENTS
+            void
       Label : LEFT
         $b
     Label : LEFT
@@ -35,13 +37,13 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      &
+      |
       Label : RIGHT
         ::
-        Label : CONSTANT
-          E
         Label : CLASS
           D
+        Label : PROPERTY
+          $E
       Label : LEFT
         $b
     Label : LEFT
@@ -49,15 +51,13 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      ||
+      &
       Label : RIGHT
-        ->
-        Label : METHOD
-          d
-          Label : ARGUMENTS
-            void
-        Label : OBJECT
-          $c
+        ::
+        Label : CLASS
+          D
+        Label : CONSTANT
+          E
       Label : LEFT
         $b
     Label : LEFT
@@ -68,10 +68,10 @@ Label : CODE
       &&
       Label : RIGHT
         ->
-        Label : OBJECT
-          $c
         Label : PROPERTY
           d
+        Label : OBJECT
+          $c
       Label : LEFT
         $b
     Label : LEFT

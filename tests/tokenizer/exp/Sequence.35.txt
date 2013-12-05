@@ -13,13 +13,13 @@ Label : CODE
           Label : ARGUMENTS
             ,
             Label : ARGUMENT
-              $l
-            Label : ARGUMENT
               [
-              Label : VARIABLE
-                $j
               Label : INDEX
                 'k'
+              Label : VARIABLE
+                $j
+            Label : ARGUMENT
+              $l
         Label : LEFT
           i
           Label : ARGUMENTS
@@ -28,18 +28,18 @@ Label : CODE
               'i'
       Label : THEN
         [
-        Label : VARIABLE
-          $m
         Label : INDEX
           'n'
+        Label : VARIABLE
+          $m
       Label : ELSE
         'o'
     Label : LEFT
       [
-      Label : VARIABLE
-        $g
       Label : INDEX
         'h'
+      Label : VARIABLE
+        $g
   Label : ELEMENT
     =
     Label : RIGHT
@@ -47,14 +47,14 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          'f'
-        Label : ARGUMENT
           'e'
-        Label : ARGUMENT
-          'd'
         Label : ARGUMENT
           'c'
         Label : ARGUMENT
           'b'
+        Label : ARGUMENT
+          'd'
+        Label : ARGUMENT
+          'f'
     Label : LEFT
       $a

@@ -33,10 +33,6 @@ Label : CODE
             Label : CODE
               $u
           Label : THEN
-            ;
-            Label : ELEMENT
-              $uu
+            $uu
           Label : ELSE
-            ;
-            Label : ELEMENT
-              $z
+            $z

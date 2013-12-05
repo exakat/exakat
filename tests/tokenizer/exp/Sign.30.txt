@@ -7,14 +7,14 @@ Label : CODE
     Label : RIGHT
       *
       Label : RIGHT
-        ->
-        Label : PROPERTY
-          h
-        Label : OBJECT
-          $g
-      Label : LEFT
         *
         Label : RIGHT
+          ->
+          Label : PROPERTY
+            h
+          Label : OBJECT
+            $g
+        Label : LEFT
           (
           Label : CODE
             -
@@ -26,17 +26,17 @@ Label : CODE
                 2
             Label : LEFT
               1
-        Label : LEFT
-          ->
-          Label : PROPERTY
-            d
-          Label : OBJECT
-            $c
+      Label : LEFT
+        ->
+        Label : PROPERTY
+          d
+        Label : OBJECT
+          $c
     Label : LEFT
       ::
+      Label : CLASS
+        a
       Label : METHOD
         b
         Label : ARGUMENTS
           void
-      Label : CLASS
-        a

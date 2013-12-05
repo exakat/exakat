@@ -7,20 +7,20 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
-        $g
-      Label : CONCAT
         "f"
-      Label : CONCAT
-        [
-        Label : VARIABLE
-          $d
-        Label : INDEX
-          'e'
       Label : CONCAT
         "c"
       Label : CONCAT
+        "a"
+      Label : CONCAT
         $b
       Label : CONCAT
-        "a"
+        [
+        Label : INDEX
+          'e'
+        Label : VARIABLE
+          $d
+      Label : CONCAT
+        $g
     Label : LEFT
       $query

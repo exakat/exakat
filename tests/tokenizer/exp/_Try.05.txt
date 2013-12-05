@@ -9,17 +9,7 @@ Label : CODE
   Label : CATCH
     catch
     Label : CLASS
-      Exception
-    Label : CODE
-      {
-      Label : CODE
-        void
-    Label : VARIABLE
-      $e
-  Label : CATCH
-    catch
-    Label : CLASS
-      Exception2
+      Exception4
     Label : CODE
       {
       Label : CODE
@@ -39,7 +29,17 @@ Label : CODE
   Label : CATCH
     catch
     Label : CLASS
-      Exception4
+      Exception2
+    Label : CODE
+      {
+      Label : CODE
+        void
+    Label : VARIABLE
+      $e
+  Label : CATCH
+    catch
+    Label : CLASS
+      Exception
     Label : CODE
       {
       Label : CODE

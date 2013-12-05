@@ -1,92 +1,106 @@
 <?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    H
-
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
-    Label : THEN
-      ;
-      Label : ELEMENT
-        E
-
-      Label : ELEMENT
-        D
+Label : NEXT
+  if
+  Label : NEXT
+    (
+    Label : NEXT
+      :
+      Label : NEXT
+        Block With Sequence For Case Without Semicolon
+        Label : NEXT
+          elseif
+          Label : NEXT
+            (
+            Label : NEXT
+              :
+              Label : NEXT
+                F
     
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        (
-        Label : CODE
-          !
-          Label : NOT
-            empty
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $c
-      Label : THEN
-        ;
-        Label : ELEMENT
-          G
+                Label : NEXT
+                  ;
+                  Label : NEXT
+                    endif
+                    Label : NEXT
+                      ;
+                      Label : NEXT
+                        ;
+                        Label : NEXT
+                          ?>
+                          Label : NEXT
+                            /**/
+                            Label : NEXT
+                              /* * */
+                        Label : ELEMENT
+                          if
+                          Label : CONDITION
+                            (
+                            Label : CODE
+                              !
+                              Label : NOT
+                                empty
+                                Label : ARGUMENTS
+                                  void
+                                  Label : ARGUMENT
+                                    $e
+                          Label : THEN
+                            Block With Sequence For Case Without Semicolon
+                            Label : ELEMENT
+                              J
+    
+                            Label : ELEMENT
+                              print
+                              Label : ARGUMENTS
+                                void
+                                Label : ARGUMENT
+                                  .
+                                  Label : CONCAT
+                                    f
+                                    Label : ARGUMENTS
+                                      void
+                                      Label : ARGUMENT
+                                        'g'
+                                  Label : CONCAT
+                                    $h
+                            Label : ELEMENT
+                              K
 
+                        Label : ELEMENT
+                          H
+
+                  Label : ELEMENT
+                    print
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $d
+                  Label : ELEMENT
+                    G
+
+            Label : CODE
+              !
+              Label : NOT
+                empty
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $c
         Label : ELEMENT
-          F
+          D
     
         Label : ELEMENT
           print
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              $d
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $e
-    Label : THEN
-      ;
-      Label : ELEMENT
-        J
-    
-      Label : ELEMENT
-        K
+              $b
+        Label : ELEMENT
+          E
 
-      Label : ELEMENT
-        print
+    Label : CODE
+      !
+      Label : NOT
+        empty
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            .
-            Label : CONCAT
-              $h
-            Label : CONCAT
-              f
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'g'
+            $a

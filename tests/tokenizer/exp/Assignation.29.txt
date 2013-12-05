@@ -6,22 +6,22 @@ Label : CODE
     Label : RIGHT
       .
       Label : CONCAT
-        'f'
-      Label : CONCAT
         ::
+        Label : CLASS
+          \
+          Label : ELEMENT
+            B
+          Label : ELEMENT
+            A
+          Label : ELEMENT
+            C
         Label : METHOD
           d
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'e'
-        Label : CLASS
-          \
-          Label : ELEMENT
-            C
-          Label : ELEMENT
-            B
-          Label : ELEMENT
-            A
+      Label : CONCAT
+        'f'
     Label : LEFT
       $a

@@ -35,29 +35,29 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $l
-              Label : INDEX
-                'm'
-            Label : INDEX
-              'n'
-          Label : INDEX
-            $o
-        Label : ARGUMENT
           'k'
-        Label : ARGUMENT
-          0
         Label : ARGUMENT
           $j
         Label : ARGUMENT
+          $h
+        Label : ARGUMENT
           $i
         Label : ARGUMENT
-          $h
+          0
+        Label : ARGUMENT
+          [
+          Label : INDEX
+            $o
+          Label : VARIABLE
+            [
+            Label : INDEX
+              'n'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'm'
+              Label : VARIABLE
+                $l
     Label : LEFT
       !
       Label : NOT

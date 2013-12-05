@@ -21,17 +21,11 @@ Label : CODE
           Label : ARGUMENT
             .
             Label : CONCAT
-              'l'
-            Label : CONCAT
               $k
             Label : CONCAT
               'j'
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          $i
+            Label : CONCAT
+              'l'
       Label : ELEMENT
         ?
         Label : CONDITION
@@ -54,3 +48,9 @@ Label : CODE
             'h'
           Label : LEFT
             $g
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $i

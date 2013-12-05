@@ -8,7 +8,7 @@ Label : CODE
       e
     Label : OBJECT
       [
-      Label : VARIABLE
-        $c
       Label : INDEX
         'd'
+      Label : VARIABLE
+        $c

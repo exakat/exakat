@@ -41,10 +41,6 @@ Label : CODE
               Label : CODE
                 $t
             Label : THEN
-              ;
-              Label : ELEMENT
-                $tt
+              $tt
             Label : ELSE
-              ;
-              Label : ELEMENT
-                $z
+              $z

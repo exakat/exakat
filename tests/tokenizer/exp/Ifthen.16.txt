@@ -25,10 +25,6 @@ Label : CODE
           Label : CODE
             $v
         Label : THEN
-          ;
-          Label : ELEMENT
-            $vv
+          $vv
         Label : ELSE
-          ;
-          Label : ELEMENT
-            $z
+          $z

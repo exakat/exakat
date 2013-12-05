@@ -9,8 +9,6 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          'J'
-        Label : ARGUMENT
           (
           Label : CODE
             ?
@@ -30,6 +28,8 @@ Label : CODE
               I
         Label : ARGUMENT
           $d
+        Label : ARGUMENT
+          'J'
     Label : LEFT
       ->
       Label : PROPERTY

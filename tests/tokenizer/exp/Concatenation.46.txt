@@ -24,18 +24,18 @@ Label : CODE
            g 
         Label : CONCAT
           [
-          Label : VARIABLE
-            $h
           Label : INDEX
             1
+          Label : VARIABLE
+            $h
         Label : CONCAT
            i 
         Label : CONCAT
           [
-          Label : VARIABLE
-            $j
           Label : INDEX
             d
+          Label : VARIABLE
+            $j
         Label : CONCAT
            k 
     Label : LEFT

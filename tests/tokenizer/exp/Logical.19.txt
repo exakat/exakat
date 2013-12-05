@@ -12,20 +12,20 @@ Label : CODE
           1
         Label : LEFT
           [
-          Label : VARIABLE
-            $_REQUEST
           Label : INDEX
             'opt'
+          Label : VARIABLE
+            $_REQUEST
       Label : LEFT
         isset
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             [
-            Label : VARIABLE
-              $_REQUEST
             Label : INDEX
               'opt'
+            Label : VARIABLE
+              $_REQUEST
   Label : THEN
     {
     Label : CODE

@@ -7,11 +7,17 @@ Label : CODE
     Label : USE
       \
       Label : ELEMENT
-        K
+        B
+      Label : ELEMENT
+        A
+      Label : ELEMENT
+        C
     Label : USE
       \
       Label : ELEMENT
-        N
+        Z
+      Label : ELEMENT
+        X
     Label : USE
       \
       Label : ELEMENT
@@ -19,24 +25,18 @@ Label : CODE
     Label : USE
       \
       Label : ELEMENT
+        K
+    Label : USE
+      \
+      Label : ELEMENT
         L
     Label : USE
       \
       Label : ELEMENT
-        X
-      Label : ELEMENT
-        Z
+        N
     Label : USE
       \
-      Label : ELEMENT
-        E
       Label : ELEMENT
         D
-    Label : USE
-      \
       Label : ELEMENT
-        C
-      Label : ELEMENT
-        B
-      Label : ELEMENT
-        A
+        E

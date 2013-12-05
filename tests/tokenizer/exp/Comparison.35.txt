@@ -5,18 +5,12 @@ Label : CODE
     (
     Label : CODE
       &&
-      Label : LEFT
-        >
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $a
-          Label : INDEX
-            'b'
-        Label : RIGHT
-          0
       Label : RIGHT
         <=
+        Label : RIGHT
+          new
+          Label : NEW
+            F
         Label : LEFT
           new
           Label : NEW
@@ -25,14 +19,20 @@ Label : CODE
               void
               Label : ARGUMENT
                 [
-                Label : VARIABLE
-                  $d
                 Label : INDEX
                   'e'
+                Label : VARIABLE
+                  $d
+      Label : LEFT
+        >
         Label : RIGHT
-          new
-          Label : NEW
-            F
+          0
+        Label : LEFT
+          [
+          Label : INDEX
+            'b'
+          Label : VARIABLE
+            $a
   Label : THEN
     {
     Label : CODE
