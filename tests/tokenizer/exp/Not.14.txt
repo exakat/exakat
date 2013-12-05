@@ -1,25 +1,9 @@
 <?php
 
-Label : NEXT
+Label : CODE
   if
-  Label : NEXT
+  Label : CONDITION
     (
-    Label : NEXT
-      {
-      Label : NEXT
-        throw
-        Label : NEXT
-          R
-          Label : NEXT
-            ;
-            Label : NEXT
-              }
-              Label : NEXT
-                ?>
-                Label : NEXT
-                  /**/
-                  Label : NEXT
-                    /* * */
     Label : CODE
       !
       Label : NOT
@@ -36,3 +20,11 @@ Label : NEXT
             void
             Label : ARGUMENT
               $D
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        throw
+        Label : THROW
+          R

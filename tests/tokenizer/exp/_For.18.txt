@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    for
+    Label : CODE
+      void2
+    Label : FINAL
+      <
+      Label : RIGHT
+        1
+      Label : LEFT
+        $b
+    Label : INIT
+      =
+      Label : RIGHT
+        0
+      Label : LEFT
+        $a
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $c

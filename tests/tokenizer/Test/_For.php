@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _For extends Tokenizer {
-    /* 17 methods */
+    /* 18 methods */
 
     public function test_For01()  { $this->generic_test('_For.01'); }
     public function test_For02()  { $this->generic_test('_For.02'); }
@@ -26,5 +26,6 @@ class _For extends Tokenizer {
     public function test_For15()  { $this->generic_test('_For.15'); }
     public function test_For16()  { $this->generic_test('_For.16'); }
     public function test_For17()  { $this->generic_test('_For.17'); }
+    public function test_For18()  { $this->generic_test('_For.18'); }
 }
 ?>

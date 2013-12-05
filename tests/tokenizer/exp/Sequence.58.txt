@@ -1,49 +1,9 @@
 <?php
 
-Label : NEXT
+Label : CODE
   if
-  Label : NEXT
+  Label : CONDITION
     (
-    Label : NEXT
-      {
-      Label : NEXT
-        declare
-        Label : NEXT
-          (
-          Label : NEXT
-            ticks
-            Label : NEXT
-              =
-              Label : NEXT
-                1
-                Label : NEXT
-                  )
-                  Label : NEXT
-                    ;
-                    Label : NEXT
-                      while
-                      Label : NEXT
-                        }
-                        Label : NEXT
-                          ?>
-                          Label : NEXT
-                            /**/
-                            Label : NEXT
-                              /* * */
-                      Label : CONDITION
-                        true
-                      Label : LOOP
-                        {
-                        Label : CODE
-                          ;
-                          Label : ELEMENT
-                            ->
-                            Label : OBJECT
-                              $this
-                            Label : METHOD
-                              b
-                              Label : ARGUMENTS
-                                void
     Label : CODE
       ->
       Label : OBJECT
@@ -52,3 +12,33 @@ Label : NEXT
         b
         Label : ARGUMENTS
           void
+  Label : THEN
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        while
+        Label : CONDITION
+          true
+        Label : LOOP
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                $this
+              Label : METHOD
+                b
+                Label : ARGUMENTS
+                  void
+      Label : ELEMENT
+        declare
+        Label : TICKS
+          void
+          Label : ARGUMENT
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              ticks

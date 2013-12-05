@@ -1,76 +1,66 @@
 <?php
 
-Label : NEXT
-  if
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      3
+    Label : LEFT
+      $c
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'w'
+              Label : VARIABLE
+                $v
+    Label : THEN
+      Block With if/elseif
+      Label : CODE
+        continue
+        Label : LEVEL
+          void
+  Label : ELEMENT
     try
-    Label : NEXT
+    Label : CODE
       {
-      Label : NEXT
-        catch
-        Label : NEXT
-          (
-          Label : NEXT
-            Exception
-            Label : NEXT
-              $e
-              Label : NEXT
-                )
-                Label : NEXT
-                  {
-                  Label : NEXT
-                    ;
-                    Label : NEXT
-                      ?>
-                      Label : NEXT
-                        /**/
-                        Label : NEXT
-                          /* * */
-                    Label : ELEMENT
-                      =
-                      Label : RIGHT
-                        3
-                      Label : LEFT
-                        $c
-                    Label : ELEMENT
-                      ++
-                      Label : POSTPLUSPLUS
-                        $a
-                    Label : ELEMENT
-                      =
-                      Label : RIGHT
-                        2
-                      Label : LEFT
-                        $b
-                  Label : CODE
-                    ;
-                    Label : ELEMENT
-                      continue
-                      Label : LEVEL
-                        void
       Label : CODE
         ;
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
             $d
-  Label : CONDITION
-    (
-    Label : CODE
-      !
-      Label : NOT
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'w'
-            Label : VARIABLE
-              $v
-  Label : THEN
-    Block With if/elseif
-    Label : CODE
-      continue
-      Label : LEVEL
-        void
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception
+      Label : CODE
+        {
+        Label : CODE
+          ;
+          Label : ELEMENT
+            continue
+            Label : LEVEL
+              void
+      Label : VARIABLE
+        $e

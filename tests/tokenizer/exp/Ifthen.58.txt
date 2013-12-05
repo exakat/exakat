@@ -1,0 +1,153 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a
+    Label : THEN
+      void2
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            2
+          Label : LEFT
+            $b
+      Label : THEN
+        void2
+      Label : ELSE
+        elseif
+        Label : CONDITION
+          (
+          Label : CODE
+            ==
+            Label : RIGHT
+              3
+            Label : LEFT
+              $c
+        Label : THEN
+          void2
+        Label : ELSE
+          void2
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a
+    Label : THEN
+      void2
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            2
+          Label : LEFT
+            $b
+      Label : THEN
+        void2
+      Label : ELSE
+        void2
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a
+    Label : THEN
+      void2
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            2
+          Label : LEFT
+            $b
+      Label : THEN
+        void2
+      Label : ELSE
+        elseif
+        Label : CONDITION
+          (
+          Label : CODE
+            ==
+            Label : RIGHT
+              3
+            Label : LEFT
+              $c
+        Label : THEN
+          void2
+        Label : ELSE
+          elseif
+          Label : CONDITION
+            (
+            Label : CODE
+              ==
+              Label : RIGHT
+                4
+              Label : LEFT
+                $d
+          Label : THEN
+            void2
+          Label : ELSE
+            void2
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a
+    Label : THEN
+      void2
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            1
+          Label : LEFT
+            $b
+      Label : THEN
+        void2
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a
+    Label : THEN
+      void2

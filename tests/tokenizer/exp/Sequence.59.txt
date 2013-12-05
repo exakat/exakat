@@ -1,75 +1,58 @@
 <?php
 
-Label : NEXT
-  foreach
-  Label : NEXT
-    (
-    Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      $b
+    Label : SOURCE
       $a
-      Label : NEXT
-        as
-        Label : NEXT
-          $b
-          Label : NEXT
-            )
-            Label : NEXT
-              :
-              Label : NEXT
-                ;
-                Label : NEXT
-                  if
-                  Label : NEXT
-                    endforeach
-                    Label : NEXT
-                      ;
-                      Label : NEXT
-                        ?>
-
-                        Label : NEXT
-                          /**/
-                          Label : NEXT
-                            /* * */
-                  Label : CONDITION
-                    (
-                    Label : CODE
-                      $k
-                  Label : THEN
-                    {
-                    Label : CODE
-                      ;
-                      Label : ELEMENT
-                        .=
-                        Label : RIGHT
-                          'm'
-                        Label : LEFT
-                          $l
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    .
-                    Label : CONCAT
-                      'e'
-                    Label : CONCAT
-                      ->
-                      Label : PROPERTY
-                        g
-                      Label : OBJECT
-                        $f
-                  Label : LEFT
-                    $d
-                Label : ELEMENT
-                  if
-                  Label : CONDITION
-                    (
-                    Label : CODE
-                      $h
-                  Label : THEN
-                    {
-                    Label : CODE
-                      ;
-                      Label : ELEMENT
-                        .=
-                        Label : RIGHT
-                          'j'
-                        Label : LEFT
-                          $i
+    Label : LOOP
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $h
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              .=
+              Label : RIGHT
+                'j'
+              Label : LEFT
+                $i
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          .
+          Label : CONCAT
+            'e'
+          Label : CONCAT
+            ->
+            Label : PROPERTY
+              g
+            Label : OBJECT
+              $f
+        Label : LEFT
+          $d
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $k
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              .=
+              Label : RIGHT
+                'm'
+              Label : LEFT
+                $l

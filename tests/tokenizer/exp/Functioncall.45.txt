@@ -1,64 +1,52 @@
 <?php
 
-Label : NEXT
-  $a
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
     =
-    Label : NEXT
-      isset
-      Label : NEXT
-        ?
-        Label : NEXT
-          [
-          Label : INDEX
-            0
-          Label : NEXT
-            (
-            Label : NEXT
-              void
-              Label : NEXT
-                )
-                Label : NEXT
-                  :
-                  Label : NEXT
-                    '5'
-                    Label : NEXT
-                      ;
-                      Label : NEXT
-                        ?>
-                        Label : NEXT
-                          /**/
-                          Label : NEXT
-                            /* * */
-              Label : ARGUMENT
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              .
+              Label : CONCAT
                 [
                 Label : INDEX
-                  .
-                  Label : CONCAT
-                    [
-                    Label : INDEX
-                      3
-                    Label : VARIABLE
-                      $f
-                  Label : CONCAT
-                    '4'
+                  1
                 Label : VARIABLE
-                  $e
-          Label : VARIABLE
-            $d
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          [
-          Label : INDEX
-            .
-            Label : CONCAT
-              [
-              Label : INDEX
-                1
-              Label : VARIABLE
-                $c
-            Label : CONCAT
-              '2'
-          Label : VARIABLE
-            $b
+                  $c
+              Label : CONCAT
+                '2'
+            Label : VARIABLE
+              $b
+      Label : THEN
+        [
+        Label : INDEX
+          0
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              .
+              Label : CONCAT
+                [
+                Label : INDEX
+                  3
+                Label : VARIABLE
+                  $f
+              Label : CONCAT
+                '4'
+            Label : VARIABLE
+              $e
+        Label : VARIABLE
+          $d
+      Label : ELSE
+        '5'
+    Label : LEFT
+      $a
