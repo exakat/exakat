@@ -69,8 +69,27 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note instructions separated by ; with a special case for alternative syntax
+        $this->conditions = array(-3 => array('token' => array('T_OPEN_PARENTHESIS', 'T_ELSE')), //'T_CLOSE_PARENTHESIS', 
+                                  -2 => array('token' => 'T_COLON'), 
+                                  -1 => array('atom'  => $operands, 'notToken' => 'T_ELSEIF' ),
+                                   0 => array('token' => Sequence::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => $operands, 'notToken' => 'T_ELSEIF' ),
+                                   2 => array('filterOut' => $next_operator),
+        );
+        
+        $this->actions = array('makeEdge'   => array( 1 => 'ELEMENT',
+                                                     -1 => 'ELEMENT'),
+                               'order'      => array( 1 => 2,
+                                                     -1 => 1 ),
+                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
+                               'atom'       => 'Sequence',
+                               'cleanIndex' => true);
+        $this->checkAuto();
+        
+        // @note instructions separated by ; with a special case for ternary operator
         $this->conditions = array(-4 => array('token' => array('T_QUESTION')), 
-                                  -3 => array('token' => array('T_OPEN_PARENTHESIS', 'T_ELSE')), //'T_CLOSE_PARENTHESIS', 
+                                  -3 => array('token' => array('T_OPEN_PARENTHESIS', 'T_ELSE')), 
                                   -2 => array('token' => 'T_COLON'), 
                                   -1 => array('atom'  => $operands, 'notToken' => 'T_ELSEIF' ),
                                    0 => array('token' => Sequence::$operators,
@@ -210,7 +229,7 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note End of PHP script, alternative syntax
-        $this->conditions = array(-3 => array('token'    => array('T_ELSE','T_OPEN_PARENTHESIS', 'T_USE', 'T_AS'), 
+        $this->conditions = array(-3 => array('token'    => array('T_ELSE', 'T_OPEN_PARENTHESIS', 'T_USE', 'T_AS'), 
                                               'atom'     => 'none'), //'T_CLOSE_PARENTHESIS', 
                                   -2 => array('token'    => 'T_COLON',), 
                                   -1 => array('atom'     => $operands,
@@ -227,6 +246,7 @@ class Sequence extends TokenAuto {
                                'cleanIndex'  => true
                                );
         $this->checkAuto(); 
+//        $this->printQuery();
 
         // Sequence followed by ; followed by elseif atom.
         $this->conditions = array(  -1 => array('atom'  => 'Sequence'),

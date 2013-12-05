@@ -58,7 +58,7 @@ class Ifthen extends TokenAuto {
         $this->conditions = array(  0 => array('token'     => Ifthen::$operators,
                                                'atom'      => 'none'),
                                     1 => array('atom'      => 'Parenthesis'),
-                                    2 => array('notAtom'   => array('Block', 'Sequence'), 'atom' => 'yes'),
+                                    2 => array('notAtom'   => array('Block', 'Sequence', 'Void'), 'atom' => 'yes'),
                                     3 => array('filterOut' => Token::$instruction_ending),
         );
         
