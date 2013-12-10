@@ -4,18 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      2
     Label : LEFT
       @
       Label : AT
         [
         Label : INDEX
           +
-          Label : RIGHT
-            3
           Label : LEFT
             2
+          Label : RIGHT
+            3
         Label : VARIABLE
           [
           Label : INDEX
@@ -26,3 +24,5 @@ Label : CODE
               1
             Label : VARIABLE
               $x
+    Label : RIGHT
+      2

@@ -6,14 +6,6 @@ Label : CODE
     (
     Label : CODE
       ||
-      Label : RIGHT
-        !
-        Label : NOT
-          {
-          Label : INDEX
-            0
-          Label : VARIABLE
-            $a
       Label : LEFT
         !
         Label : NOT
@@ -26,13 +18,21 @@ Label : CODE
                 0
               Label : VARIABLE
                 $a
+      Label : RIGHT
+        !
+        Label : NOT
+          {
+          Label : INDEX
+            0
+          Label : VARIABLE
+            $a
   Label : THEN
     {
     Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          false
         Label : LEFT
           $b
+        Label : RIGHT
+          false

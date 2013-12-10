@@ -8,10 +8,10 @@ Label : CODE
       [
       Label : INDEX
         &
-        Label : RIGHT
-          2
         Label : LEFT
           1
+        Label : RIGHT
+          2
       Label : VARIABLE
         $y
   Label : ELEMENT
@@ -20,10 +20,10 @@ Label : CODE
       [
       Label : INDEX
         %
-        Label : RIGHT
-          2
         Label : LEFT
           1
+        Label : RIGHT
+          2
       Label : VARIABLE
         $y
   Label : ELEMENT
@@ -32,10 +32,10 @@ Label : CODE
       [
       Label : INDEX
         +
-        Label : RIGHT
-          2
         Label : LEFT
           1
+        Label : RIGHT
+          2
       Label : VARIABLE
         $y
   Label : ELEMENT
@@ -56,9 +56,9 @@ Label : CODE
       [
       Label : INDEX
         &&
-        Label : RIGHT
-          2
         Label : LEFT
           1
+        Label : RIGHT
+          2
       Label : VARIABLE
         $y

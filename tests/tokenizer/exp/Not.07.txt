@@ -6,6 +6,10 @@ Label : CODE
     (
     Label : CODE
       =
+      Label : LEFT
+        !
+        Label : NOT
+          $handle
       Label : RIGHT
         fopen
         Label : ARGUMENTS
@@ -14,10 +18,6 @@ Label : CODE
             '/tmp/test'
           Label : ARGUMENT
             'r+b'
-      Label : LEFT
-        !
-        Label : NOT
-          $handle
   Label : THEN
     {
     Label : CODE
