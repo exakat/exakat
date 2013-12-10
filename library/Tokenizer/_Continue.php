@@ -27,6 +27,10 @@ class _Continue extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "continue " + it.out("LEVEL").next().code; ';
+    }
 }
 
 ?>

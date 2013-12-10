@@ -33,5 +33,10 @@ class _Include extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = it.code + "( " + it.out("ARGUMENTS").next().fullcode + " )"; ';
+    }
+
 }
 ?>

@@ -76,6 +76,10 @@ class _Function extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "function " + it.out("NAME").next().fullcode + " " + it.out("ARGUMENTS").next().fullcode + " " + it.out("BLOCK").next().fullcode;';
+    }
 }
 
 ?>

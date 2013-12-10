@@ -4,12 +4,11 @@ namespace Analyzer\Type;
 
 use Analyzer;
 
-class String extends Analyzer\Common\Type {
+class String extends Analyzer\Analyzer {
 
     function analyze() {
-        $this->type = array('String', 'HereDoc', 'NowDoc');
-
-        parent::analyze();
+        $this->atomIs(array('String', 'HereDoc', 'NowDoc'))
+             ->tokenIsNot('T_QUOTE');
     }
 }
 

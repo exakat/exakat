@@ -1,0 +1,61 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$client = new Client();
+
+$offset = 0000;
+$limit = 20000;
+
+
+$end = $offset + $limit;
+
+
+$result = query("g.V[$offset..$end].hasNot('token', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX'])}.has('fullcode', null).sideEffect{ it.fullcode = 'Not available.'}.iterate()");
+
+$result = query("m = [:]; g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX'])}.has('fullcode', 'Not available.').groupCount(m){it.atom}.iterate(); m.each{}");
+
+$tokens = array('_Global', 'String', 'Integer', 'Real', "Void", 'Identifier', '_Return', 'Multiplication', 'Variable', 'Concatenation', 'Comparison', '_Break', 'Magicconstant',
+                'Parenthesis', 'Addition', 'Arguments', 'Functioncall', 'Parenthesis', 'Assignation', '_Case', '_Default', '_Include', 'Noscream', 
+                'Preplusplus', 'Postplusplus', 'Sign', 'Boolean', '_Array', '_Static', '_Final', 'Not', 'Reference', 'Keyvalue', '_Ppp', 
+                'Property', 'Methodcall', 'Logical', 'Ternary', 'Arrayappend', 'Staticmethodcall', 'Staticproperty', 'Staticconstant', 
+                '_New', 'Cast', 'Sequence', 'Block', 'Ifthen', '_Foreach', '_Function', '_While', '_Abstract', '_Continue', 'RawString', 'PhpCode', 
+                '_For', );
+foreach($tokens as $token) {
+    print "$token\n";
+    $atom = str_replace('_', '', $token);
+    $class = "Tokenizer\\".$token;
+    $object = new $class($client);
+    $query = " g.V[$offset..$end].hasNot('token', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX'])}.has('fullcode', 'Not available.').has('atom', '".$atom."').filter{it.out.has('fullcode', 'Not available.').count() == 0}.each{ ".$object->fullcode()." }";
+    $result = query($query);
+}
+
+print "fin\n";
+print "m = [:]; g.V[$offset..$end].hasNot('token', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX'])}.has('fullcode', 'Not available.').filter{it.out.has('fullcode', 'Not available.').count() == 0}.groupCount(m){it.atom}.iterate(); m.each{}";
+$result = query("m = [:]; g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX'])}.has('fullcode', 'Not available.').filter{it.out.has('fullcode', 'Not available.').count() == 0}.groupCount(m){it.atom}.iterate(); m.each{}");
+print_r($result->toArray());
+die();
+
+
+if ($result[0][0] != 'MANUAL[racines:Vertex]') {
+    query("g.createManualIndex('racines', Vertex)");
+}
+query("g.V.has('index', 'true').each{ g.idx('racines').put('token', it.token, it); };");
+print "Indexing done\n";
+
+function query($query) {
+    global $client;
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $query, $params);
+    return $query->getResultSet();
+}
+
+?>

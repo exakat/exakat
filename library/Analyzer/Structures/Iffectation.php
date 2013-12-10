@@ -10,7 +10,6 @@ class Iffectation extends Analyzer\Analyzer {
         $this->atomIs("Ifthen")
              ->out('CONDITION')
              ->atomInside('Assignation');
-//        $this->printQuery();
         $this->prepareQuery();
     }
 }

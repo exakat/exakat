@@ -2,7 +2,7 @@
 
 namespace Tokenizer;
 
-class Integer extends TokenAuto {
+class Identifier extends TokenAuto {
     function _check() {
         return false;
     }

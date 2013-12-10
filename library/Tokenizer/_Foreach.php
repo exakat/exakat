@@ -125,6 +125,10 @@ class _Foreach extends TokenAuto {
         $this->checkAuto(); 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "foreach(" + it.out("SOURCE").next().fullcode + " as " + it.out("VALUE").next().fullcode + ")" + it.out("LOOP").next().fullcode;';
+    }
 }
 
 ?>

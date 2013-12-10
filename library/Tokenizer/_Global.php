@@ -14,7 +14,7 @@ class _Global extends TokenAuto {
                                    2 => array('token' => 'T_SEMICOLON'),
                                  );
         
-        $this->actions = array('transform'  => array( 1 => 'DEFINE'),
+        $this->actions = array('transform'  => array( 1 => 'NAME'),
                                'add_void'   => array( 0 => 'VALUE'), 
                                'atom'       => 'Global',
                                'cleanIndex' => true
@@ -33,5 +33,14 @@ class _Global extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "global " + it.out("DEFINE").next().fullcode;
+';
+    }
+
 }
+/*current = it;
+it.out("VALUE").each{ global.fullcode = current.fullcode + " = " + it.fullcode;}
+*/
 ?>

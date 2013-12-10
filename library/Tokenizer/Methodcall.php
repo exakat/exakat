@@ -46,6 +46,10 @@ class Methodcall extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = it.out("OBJECT").next().fullcode + "->" + it.out("METHOD").next().fullcode; ';
+    }
 }
 
 ?>

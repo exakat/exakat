@@ -20,6 +20,10 @@ class Arrayappend extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = it.out("VARIABLE").next().fullcode + "[]";';
+    }
 }
 
 ?>

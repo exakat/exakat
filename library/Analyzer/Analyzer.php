@@ -15,7 +15,9 @@ class Analyzer {
         $this->queries = array();
         
         $this->code = get_class($this);
-
+    } 
+    
+    function init() {
         $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
         if ($result[0][0] == 'false') {
             $this->query("g.createManualIndex('analyzers', Vertex)");
@@ -83,6 +85,26 @@ GREMLIN;
 
     function back($name) {
         $this->methods[] = 'back("'.$name.'")';
+        
+        return $this;
+    }
+
+    function tokenIs($atom) {
+        if (is_array($atom)) {
+            $this->methods[] = 'filter{it.token in [\''.join("', '", $atom).'\']}';
+        } else {
+            $this->methods[] = 'has("token", "'.$atom.'")';
+        }
+        
+        return $this;
+    }
+
+    function tokenIsNot($atom) {
+        if (is_array($atom)) {
+            $this->methods[] = 'filter{it.token not in [\''.join("', '", $atom).'\']}';
+        } else {
+            $this->methods[] = 'hasNot("token", "'.$atom.'")';
+        }
         
         return $this;
     }
@@ -341,5 +363,37 @@ GREMLIN;
 	}
 	return $L;
 }
+
+    function toArray() {
+        $analyzer = str_replace('\\', '\\\\', get_class($this));
+        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out"; 
+        $vertices = query($this->client, $queryTemplate);
+
+        $report = array();
+        if (count($vertices) > 0) {
+            foreach($vertices as $v) {
+                $report[] = $v[0]->fullcode;
+            }   
+        } 
+        
+        return $report;
+    }
+
+    function toCountedArray() {
+        $analyzer = str_replace('\\', '\\\\', get_class($this));
+        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){it.fullcode}.cap"; 
+        $vertices = query($this->client, $queryTemplate);
+
+        $report = array();
+        if (count($vertices) > 0) {
+            foreach($vertices[0][0] as $k => $v) {
+                $report[$k] = $v;
+            }   
+        } 
+        
+        return $report;
+    }
+
+
 }
 ?>

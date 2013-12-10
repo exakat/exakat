@@ -19,6 +19,11 @@ class Postplusplus extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = it.code + it.out("POSTPLUSPLUS").next().fullcode; ';
+    }
+
 }
 
 ?>

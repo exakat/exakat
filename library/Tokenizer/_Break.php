@@ -17,6 +17,11 @@ class _Break extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "break " + it.out("LEVEL").next().fullcode; ';
+    }
+
 }
 
 ?>

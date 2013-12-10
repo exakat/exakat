@@ -26,6 +26,10 @@ class Keyvalue extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = it.out("KEY").next().code + " => " + it.out("VALUE").next().code; ';
+    }
 }
 
 ?>

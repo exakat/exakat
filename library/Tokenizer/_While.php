@@ -97,6 +97,11 @@ class _While extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "while " + it.out("CONDITION").next().fullcode + " " + it.out("LOOP").next().fullcode;';
+    }
+
 }
 
 ?>

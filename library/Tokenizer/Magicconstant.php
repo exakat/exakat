@@ -13,6 +13,10 @@ class Magicconstant extends TokenAuto {
         
         return $this->checkAuto();
     }
+
+    function fullcode() {
+        return 'it.fullcode = it.code; ';
+    }
 }
 
 ?>

@@ -43,6 +43,10 @@ class Phpcode extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "<?php " + it.out("CODE").next().fullcode + "?>";';
+    }
 }
 
 ?>

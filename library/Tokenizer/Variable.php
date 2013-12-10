@@ -20,6 +20,10 @@ class Variable extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = it.code; ';
+    }
 }
 
 ?>

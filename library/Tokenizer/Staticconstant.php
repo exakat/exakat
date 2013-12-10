@@ -21,6 +21,10 @@ class Staticconstant extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = it.out("CLASS").next().fullcode + "::" + it.out("CONSTANT").next().fullcode; ';
+    }
 }
 
 ?>

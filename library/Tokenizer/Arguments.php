@@ -80,5 +80,9 @@ class Arguments extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 's = []; it.out("CONCAT").each{ s.add(it.fullcode); } ;it.fullcode = "(" + s.join(", ") + " )";';
+    }
 }
 ?>

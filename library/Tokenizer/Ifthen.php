@@ -171,6 +171,13 @@ class Ifthen extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "if " + it.out("CONDITION").next().fullcode + " " + it.out("THEN").next().fullcode;
+                ifthen = it;
+                it.out("ELSE").each{ it.fullcode = ifthen.fullcode + " else " + it.fullcode; }';
+    }
+
 }
 
 ?>

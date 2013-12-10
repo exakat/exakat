@@ -25,5 +25,10 @@ class _Abstract extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = it.code';
+    }
+
 }
 ?>

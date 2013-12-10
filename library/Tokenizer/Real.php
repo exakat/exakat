@@ -2,7 +2,7 @@
 
 namespace Tokenizer;
 
-class Integer extends TokenAuto {
+class Real extends TokenAuto {
     function _check() {
         return false;
     }

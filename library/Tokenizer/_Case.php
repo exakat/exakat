@@ -109,6 +109,10 @@ class _Case extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "case " + it.out("CASE").next().fullcode + " : " + it.out("CODE").next().fullcode; ';
+    }
 }
 
 ?>
