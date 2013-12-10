@@ -6,7 +6,7 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Node,
 	Everyman\Neo4j\Gremlin,
 	Tokenizer\Token,
-	Michelf\Markdown;
+	Michelf\MarkdownExtra;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
@@ -14,6 +14,16 @@ spl_autoload_register('Autoload::autoload_library');
 $client = new Client();
 
 $args = $argv;
+if (!isset($args[1])) {
+    $project = 'default';
+} else {
+    $project = $args[1];
+}
+if (!file_exists('./projects/'.$project.'/config.ini')) {
+    print "No such project as '$project'. Aborting\n";
+    die();
+}
+
 if ($id = array_search('-json', $args)) {
     define('FORMAT', 'JSON');
     unset($args[$id]);
@@ -66,160 +76,64 @@ if ($id = array_search('-D', $args)) {
     define('STYLE', 'ALL');
 }
 
-$report = "";
-$summary = new Report\Summary();
+$report = new Report\Report($client);
+$report->createH1('Report presentation');
 
-// Presentation of the report
-    $section = new Report\Text($client);
-//    $section->setText('Here the text for th report');
-    $report .= $section->toMarkdown();
+$report->createH2('Report synopsis'); 
+$report->addContent('Text', 'Presentation of the report process');
 
-// Application configuration (Things we know before starting)
+$report->createH2('Report configuration'); 
+$ReportInfo = new Report\ReportInfo($project);
+$report->addContent('HashTable', $ReportInfo->toArray()); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
-    $report .= "## <a name=\"report_presentation\"></a>Report presentation\n";
-    $section = new Report\Text($client);
-//    $section->setText('Here the text for th report');
-    $report .= $section->toMarkdown();
-    $summary->addH1("Application configuration");
+$report->createH2('Analyser list'); 
+$AnalyzerList = new Report\AnalyzerList($project);
+$report->addContent('Liste', $AnalyzerList->toArray()); 
 
-    $report .= "## <a name=\"application_configuration\"></a>Application configuration\n";
-    $section = new Report\Text($client);
-//    $section->setText('Here the text for th report');
-    $report .= $section->toMarkdown();
-    $summary->addH1("Application configuration");
+/*
+human review of the audit, and 3 paragraph explation + table with priorities
+$report->createH2('Executive summary');
+$report->addContent('Text');
+*/
 
-// Report configuration (What we did)
-$report .= "## <a name=\"report_configuration\"></a>Report configuration\n";
-$queryTemplate = "g.V.has('analyzer', 'true')"; 
-$vertices = query($client, $queryTemplate);
+$report->createH1('Appinfo'); // phpinfo for the application
+$Appinfo = new Report\Appinfo($client);
+$report->addContent('HashTable', $Appinfo->toArray());
 
-$return = array();
-foreach($vertices as $k => $v) {
-    $report .= "+ ".str_replace('Analyzer_', '', str_replace('\\', '_', $v[0]->code))."\n";
-}
-$report .= "\n";
+$report->createH1('Analyzes'); 
+$analyzes = array('Structures\\StrposCompare', 
+                  'Structures\\Iffectation',
+                  'Structures\\NotNot',
+                  );
 
-$summary->addH1("Report configuration");
+foreach($analyzes as $a) {
+    $report->createH2($a); 
+    $a = "Analyzer\\$a";
+    $analyzer = new $a($client); 
 
-// Executive summary
-$report .= "## <a name=\"executive_summary\"></a>Executive summary\n";
-    $section = new Report\Text($client);
-//    $section->setText('Here the text for th report');
-    $report .= $section->toMarkdown();
-    $summary->addH1("Executive summary");
-
-// Application info (Things we know after analyze)
-$report .= "## <a name=\"application_information\"></a>Application information\n";
-
-$report .= "\n| Tables        | Usage          | 
-| -------:        | -------:          |\n";
-// use extensions ? 
-$extensions = array('Mcrypt', 'Mysql', 'Kdm5');
-
-foreach($extensions as $ext) {
-    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\Extensions\\\\$ext']].out.any()"; 
-    $vertices = query($client, $queryTemplate);
-
-    $v = $vertices[0][0];
-    $report .= "| $ext        | ".($v == "true" ? "Yes" : "No")."          | \n";
+    $report->addContent('Liste', $analyzer->toArray());
 }
 
-$report .= "\n";
-$summary->addH1("Application information");
+$report->createH1('Application inventory'); // list of named elements and semantic analysis
+$analyzes = array('Type\\Integer', 
+                  'Type\\Real', 
+                  'Type\\String', 
+                  'Classes\\Classnames',
+                  'Variables\\Variablenames',
+                  );
 
-// Special reports (Recommendations)
-$report .= "## <a name=\"special_reports\"></a>Special reports\n";
+foreach($analyzes as $a) {
+    $report->createH2($a); 
+    $a = "Analyzer\\$a";
+    $analyzer = new $a($client); 
 
-$analyzer = 'StrposCompare';
-$report .= "### $analyzer\n";
-$report .= "Presentation of $analyzer\n\n";
-
-    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\Structures\\\\$analyzer']].out"; 
-    $vertices = query($client, $queryTemplate);
-
-    foreach($vertices as $v) {
-        $report .= "+ ".$v[0]->line."\n";
-    }
-    $report .= "\n";
-$summary->addH2("StrposCompare");
-
-$analyzer = 'NotNot';
-$report .= "### $analyzer\n";
-$report .= "Presentation of $analyzer\n\n";
-
-    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\Structures\\\\$analyzer']].out"; 
-    $vertices = query($client, $queryTemplate);
-
-    if (count($vertices) > 0) {
-        foreach($vertices as $v) {
-            $report .= "+ ".$v[0]->line."\n";
-        }   
-        $report .= "\n";
-    } else {
-        $report .= "Nothing to report for $analyzer\n";
-    }
-
-$analyzer = 'Iffectation';
-$report .= "### $analyzer\n";
-$report .= "Presentation of $analyzer\n\n";
-
-    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\Structures\\\\$analyzer']].out"; 
-    $vertices = query($client, $queryTemplate);
-
-    if (count($vertices) > 0) {
-        foreach($vertices as $v) {
-            $report .= "+ ".$v[0]->line."\n";
-        }   
-        $report .= "\n";
-    } else {
-        $report .= "Nothing to report for $analyzer\n";
-    }
-
-$summary->addH1("Special reports");
-
-
-// Glossary
-$report .= "## <a name=\"application_glossary\"></a>Application glossary\n";
-
-    $section = new Report\TableCounted($client);
-    $section->setQuery("m = [:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\Type\\\\Integer']].out.groupCount(m){it.code}.cap");
-    $section->setName('Integer');
-    $report .= $section->toMarkdown();
-
-    $section = new Report\TableCounted($client);
-    $section->setQuery("m = [:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\Type\\\\String']].out.groupCount(m){it.code}.cap");
-    $section->setName('String');
-    $report .= $section->toMarkdown();
-
-    $section = new Report\TableCounted($client);
-    $section->setQuery("m = [:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\Type\\\\Real']].out.groupCount(m){it.code}.cap");
-    $section->setName('Real');
-    $report .= $section->toMarkdown();
-
-    $section = new Report\TableCounted($client);
-    $section->setQuery("m = [:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\Classes\\\\Classesnames']].out.groupCount(m){it.code}.cap");
-    $section->setName('Classnames');
-    $report .= $section->toMarkdown();
-
-    $section = new Report\TableCounted($client);
-    $section->setQuery("m = [:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\Variables\\\\Variablenames']].out.groupCount(m){it.code}.cap");
-    $section->setName('Variablenames');
-    $report .= $section->toMarkdown();
-
-$summary->addH1("Application glossary");
-
-// Generating summary and title page and disclaimer
-
-$report_fore = "\n\n\n\nApplication Audit Report \n\n\n\n\n\n";
-$report_fore .= $summary->toMarkdown();
-$report_fore .= "\n\n\n\n";
-
-$report = $report_fore.$report;
+    $report->addContent('HashTable', $analyzer->toCountedArray());
+}
 
 if (FORMAT == 'TEXT') {
-    $text = $report;
+    $text = $report->toText();
 } elseif (FORMAT == 'JSON') {
-    $text = json_encode($return);
+    $text = $report->toJson();
 } elseif (FORMAT == 'CSV') {
     $text = array(array('Code', 'File', 'Namespace', 'Class', 'Function'));
     foreach($return as $k => $v) {
@@ -229,15 +143,15 @@ if (FORMAT == 'TEXT') {
             $text[] = array($k, $v);
         }
     }
-} elseif (FORMAT == 'MARKDOWN' || FORMAT == 'HTML' || FORMAT == 'ODT') {
-    $text = $report;
+} elseif (FORMAT == 'MARKDOWN' || FORMAT == 'HTML' || FORMAT == 'ODT' || FORMAT == 'PDF') {
+    $text = $report->toMarkdown();
 } else {
-// default behavior
-    print_r($return);
+    $text = $report->toText();
+    print $text;
 }
 
-if (FORMAT == 'HTML'|| FORMAT == 'ODT') {
-    $text = Markdown::defaultTransform($text);
+if (FORMAT == 'HTML'|| FORMAT == 'ODT' || FORMAT == 'PDF') {
+    $text = MarkdownExtra::defaultTransform($text);
 }
 
 if (OUTPUT) {
@@ -264,6 +178,13 @@ if (FILE) {
 
         $name = FILE.'.'.$extensions[FORMAT];
         shell_exec('pandoc -o '.$name.' '.$name1);
+        unlink($name1);
+    } elseif (FORMAT == 'PDF') {
+        $name1 = FILE.'.'.$extensions['HTML'];
+        file_put_contents($name1, $text);
+
+        $name = FILE.'.'.$extensions[FORMAT];
+        shell_exec('wkhtmltopdf -o '.$name.' '.$name1);
         unlink($name1);
     } elseif (FORMAT == 'CSV') {
         $fp = fopen($name, 'w');
