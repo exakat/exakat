@@ -1,0 +1,48 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+            a
+          Label : CONCAT
+            {
+            Label : NAME
+              [
+              Label : INDEX
+                1
+              Label : VARIABLE
+                $b
+          Label : CONCAT
+            c
+          Label : CONCAT
+            {
+            Label : NAME
+              [
+              Label : INDEX
+                4
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  2
+                Label : VARIABLE
+                  $d
+          Label : CONCAT
+            e
+          Label : CONCAT
+            {
+            Label : NAME
+              ->
+              Label : PROPERTY
+                h
+              Label : OBJECT
+                $f
+          Label : CONCAT
+            g
