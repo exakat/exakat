@@ -50,7 +50,7 @@ class HashTable {
     }
 
     function escapeString($string) {
-        $string = htmlentities($string);
+        $string = htmlentities($string, ENT_QUOTES, 'UTF-8');
         $string = str_replace( "\n", '<BR />', $string );
         $string = str_replace('\\', '\\\\', $string);
         $string = str_replace('|', '\\|', $string);

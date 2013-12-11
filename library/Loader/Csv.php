@@ -26,15 +26,12 @@ mv nodes.csv ./batch-import/sampleme/
 mv rels.csv ./batch-import/sampleme/
 
 cd ./batch-import
-sh sampleme/import.sh
+#sh sampleme/import.sh
+java -server -Xmx1G -Dfile.encoding=UTF-8 -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db sampleme/nodes.csv sampleme/rels.csv
 cd -
 sh scripts/restart.sh
 SHELL
 );
-//php bin/build_root
-//
-
-
     }
     
     function save_chunk() {
