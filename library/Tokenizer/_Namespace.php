@@ -44,6 +44,10 @@ class _Namespace extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "namespace " + it.out("NAMESPACE").next().code; ';
+    }
 }
 
 ?>

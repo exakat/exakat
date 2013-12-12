@@ -38,6 +38,17 @@ class _Interface extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "interface " + it.out("NAME").next().code; 
+current = it;
+
+// extends
+it.out("EXTENDS").each{ current.fullcode = current.fullcode + " extends " + it.fullcode;}
+        
+        ';
+    }
+
 }
 
 ?>

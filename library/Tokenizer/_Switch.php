@@ -45,6 +45,10 @@ class _Switch extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "switch " + it.out("NAME").next().code + it.out("CASES").next().code; ';
+    }
 }
 
 ?>

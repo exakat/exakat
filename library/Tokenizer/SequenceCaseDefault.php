@@ -21,5 +21,12 @@ class SequenceCaseDefault extends TokenAuto {
         
         return $r;
     }
+
+    function fullcode() {
+        return '
+s = [];
+it.out("ELEMENT").each{ s.add(it.fullcode); }
+it.fullcode =  s.join("\n");';
+    }
 }
 ?>

@@ -30,6 +30,10 @@ class Typehint extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = it.out("CLASS").next().code + " " + it.out("VARIABLE").next().code; ';
+    }
 }
 
 ?>

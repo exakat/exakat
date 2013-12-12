@@ -36,6 +36,10 @@ class _Clone extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "clone " + it.out("CLONE").next().code; ';
+    }
 }
 
 ?>

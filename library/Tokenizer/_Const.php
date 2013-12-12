@@ -12,11 +12,7 @@ class _Const extends TokenAuto {
                                    2 => array('filterOut' => 'T_COMMA'),
                                  );
         
-        $this->actions = array('to_const'   => true,
-//                               'atom'       => 'Const',
-//                               'keepIndexed' => true,
-//                               'cleanIndex'  => true
-);
+        $this->actions = array('to_const'   => true);
         $this->checkAuto(); 
 
     // class x {const a = 2; } only one.
@@ -32,6 +28,10 @@ class _Const extends TokenAuto {
         $this->checkAuto(); 
 
         return $this->checkRemaining();
+    }
+
+    function fullcode() {
+        return 'it.fullcode = "const " + it.out("NAME").next().code + " " + it.out("VALUE").next().code; ';
     }
 }
 ?>

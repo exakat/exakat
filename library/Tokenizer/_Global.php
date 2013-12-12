@@ -35,12 +35,11 @@ class _Global extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = "global " + it.out("DEFINE").next().fullcode;
+        return 'it.fullcode = "global " + it.out("NAME").next().fullcode;
+current = it;
+it.out("VALUE").hasNot("token", "T_VOID").each{ current.fullcode = current.fullcode + " = " + it.fullcode;}
 ';
     }
 
 }
-/*current = it;
-it.out("VALUE").each{ global.fullcode = current.fullcode + " = " + it.fullcode;}
-*/
 ?>

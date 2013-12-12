@@ -44,5 +44,11 @@ class _Use extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "use " + it.out("USE").next().code;
+x = it;
+it.out("AS").each{ x.fullcode = x.fullcode + " as " + it.fullcode} ';
+    }
 }
 ?>

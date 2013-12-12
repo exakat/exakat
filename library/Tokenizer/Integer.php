@@ -8,7 +8,7 @@ class Integer extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.code; ';
+        return 'it.fullcode = it.code ';
     }
 
 }

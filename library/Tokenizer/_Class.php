@@ -66,5 +66,22 @@ class _Class extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "class " + it.out("NAME").next().code; 
+current = it;
+
+// extends
+it.out("EXTENDS").each{ current.fullcode = current.fullcode + " extends " + it.fullcode;}
+
+// implements
+i = [];
+it.out("IMPLEMENTS").each{ i.add(it.fullcode); }
+current.fullcode = current.fullcode + " implements " + i.join(", ");
+        
+        ';
+// didn't added code, it seems too much....
+    }
+
 }
 ?>

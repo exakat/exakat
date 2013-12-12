@@ -42,5 +42,9 @@ class Nsname extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 's = []; it.out("ELEMENT").each{ s.add(it.fullcode); } ;it.fullcode = s.join("\\\\");';
+    }
 }
 ?>

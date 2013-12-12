@@ -48,7 +48,14 @@ class Methodcall extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.out("OBJECT").next().fullcode + "->" + it.out("METHOD").next().fullcode; ';
+        return '
+x = it;
+
+it.out("NAME").each{ x = it; }
+
+x.fullcode = x.out("OBJECT").next().fullcode + "->" + x.out("METHOD").next().fullcode; 
+
+';
     }
 }
 

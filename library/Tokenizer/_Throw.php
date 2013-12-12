@@ -37,6 +37,10 @@ class _Throw extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return 'it.fullcode = "throw " + it.out("THROW").next().code; ';
+    }
 }
 
 ?>
