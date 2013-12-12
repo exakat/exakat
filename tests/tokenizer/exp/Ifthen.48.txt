@@ -11,9 +11,7 @@ Label : CODE
       Label : LEFT
         $a
   Label : THEN
-    Block With if/elseif
-    Label : CODE
-      void
+    void
   Label : ELSE
     Block With else
     Label : CODE

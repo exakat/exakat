@@ -12,7 +12,7 @@ Label : CODE
         Label : LEFT
           $a
     Label : THEN
-      void2
+      void
     Label : ELSE
       elseif
       Label : CONDITION
@@ -24,7 +24,7 @@ Label : CODE
           Label : LEFT
             $b
       Label : THEN
-        void2
+        void
       Label : ELSE
         elseif
         Label : CONDITION
@@ -36,9 +36,11 @@ Label : CODE
             Label : LEFT
               $c
         Label : THEN
-          void2
+          void
         Label : ELSE
-          void2
+          Block With else
+          Label : CODE
+            void
   Label : ELEMENT
     if
     Label : CONDITION
@@ -50,7 +52,7 @@ Label : CODE
         Label : LEFT
           $a
     Label : THEN
-      void2
+      void
     Label : ELSE
       elseif
       Label : CONDITION
@@ -62,33 +64,7 @@ Label : CODE
           Label : LEFT
             $b
       Label : THEN
-        void2
-      Label : ELSE
-        void2
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          1
-        Label : LEFT
-          $a
-    Label : THEN
-      void2
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : RIGHT
-            2
-          Label : LEFT
-            $b
-      Label : THEN
-        void2
+        void
       Label : ELSE
         elseif
         Label : CONDITION
@@ -100,7 +76,7 @@ Label : CODE
             Label : LEFT
               $c
         Label : THEN
-          void2
+          void
         Label : ELSE
           elseif
           Label : CONDITION
@@ -112,9 +88,11 @@ Label : CODE
               Label : LEFT
                 $d
           Label : THEN
-            void2
+            void
           Label : ELSE
-            void2
+            Block With else
+            Label : CODE
+              void
   Label : ELEMENT
     if
     Label : CONDITION
@@ -126,7 +104,47 @@ Label : CODE
         Label : LEFT
           $a
     Label : THEN
-      void2
+      void
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            2
+          Label : LEFT
+            $b
+      Label : THEN
+        void
+      Label : ELSE
+        Block With else
+        Label : CODE
+          void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a
+    Label : THEN
+      void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a
+    Label : THEN
+      void
     Label : ELSE
       elseif
       Label : CONDITION
@@ -138,16 +156,4 @@ Label : CODE
           Label : LEFT
             $b
       Label : THEN
-        void2
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          1
-        Label : LEFT
-          $a
-    Label : THEN
-      void2
+        void

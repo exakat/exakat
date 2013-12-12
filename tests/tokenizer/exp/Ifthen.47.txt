@@ -8,21 +8,23 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      Block With Sequence For Case Without Semicolon
-      Label : ELEMENT
-        A
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'c'
-            Label : VARIABLE
-              $b
+      ;
       Label : ELEMENT
         B
+      Label : ELEMENT
+        Block With Sequence For Case Without Semicolon
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'c'
+              Label : VARIABLE
+                $b
+        Label : ELEMENT
+          A
     Label : ELSE
       elseif
       Label : CONDITION

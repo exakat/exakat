@@ -1,8 +1,18 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      ==
+      Label : RIGHT
+        1
+      Label : LEFT
+        $a
+  Label : THEN
+    void
+  Label : ELSE
+    elseif
     Label : CONDITION
       (
       Label : CODE
@@ -10,20 +20,10 @@ Label : CODE
         Label : RIGHT
           1
         Label : LEFT
-          $a
+          $b
     Label : THEN
-      void2
+      void
     Label : ELSE
-      elseif
-      Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : RIGHT
-            1
-          Label : LEFT
-            $b
-      Label : THEN
-        void2
-      Label : ELSE
-        void2
+      Block With else
+      Label : CODE
+        void

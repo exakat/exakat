@@ -8,54 +8,58 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      Block With Sequence For Case Without Semicolon
+      ;
       Label : ELEMENT
-        A
+        G
       Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            $b
-        Label : THEN
-          Block With Sequence For Case Without Semicolon
-          Label : ELEMENT
-            B
-          Label : ELEMENT
-            print
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $c
-          Label : ELEMENT
-            D
-          Label : ELEMENT
-            print
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                t
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'd'
-          Label : ELEMENT
-            C
-          Label : ELEMENT
-            print
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                .
-                Label : CONCAT
+        Block With Sequence For Case Without Semicolon
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              $b
+          Label : THEN
+            ;
+            Label : ELEMENT
+              D
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
                   t
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
-                      'e'
-                Label : CONCAT
-                  $f
-          Label : ELEMENT
-            F
-      Label : ELEMENT
-        G
+                      'd'
+            Label : ELEMENT
+              C
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    t
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        'e'
+                  Label : CONCAT
+                    $f
+            Label : ELEMENT
+              F
+            Label : ELEMENT
+              Block With Sequence For Case Without Semicolon
+              Label : ELEMENT
+                print
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $c
+              Label : ELEMENT
+                B
+        Label : ELEMENT
+          A

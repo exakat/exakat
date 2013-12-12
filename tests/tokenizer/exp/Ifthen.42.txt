@@ -8,7 +8,9 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      Block With Sequence For Case Without Semicolon
+      ;
+      Label : ELEMENT
+        F
       Label : ELEMENT
         if
         Label : CONDITION
@@ -16,28 +18,30 @@ Label : CODE
           Label : CODE
             $c
         Label : THEN
-          Block With Sequence For Case Without Semicolon
-          Label : ELEMENT
-            C
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                $d
-            Label : THEN
-              D
+          ;
           Label : ELEMENT
             E
+          Label : ELEMENT
+            Block With Sequence For Case Without Semicolon
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  $d
+              Label : THEN
+                D
+            Label : ELEMENT
+              C
       Label : ELEMENT
-        A
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
-      Label : ELEMENT
-        B
-      Label : ELEMENT
-        F
+        Block With Sequence For Case Without Semicolon
+        Label : ELEMENT
+          A
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $b
+        Label : ELEMENT
+          B
