@@ -35,10 +35,11 @@ if ($id = array_search('-f', $args)) {
     define('FILE', false);
 }
 
-$queryTemplate = "g.V.except([g.v(0)])"; // .hasNot('index', 'yes')
+$queryTemplate = "g.V.as('x').except([g.v(0)]).hasNot('token', 'E_FILE').hasNot('token', 'E_NAMESPACE').hasNot('token', 'E_FUNCTION').hasNot('token', 'E_CLASS')"; 
 if (FILE) {
-    $queryTemplate .= ".has('file', '".FILE."')";
+    $queryTemplate .= ".inE('FILE').has('file', '".FILE."').back('x')";
 }
+
 $params = array('type' => 'IN');
 $query = new Gremlin\Query($client, $queryTemplate, $params);
 try { 
@@ -48,8 +49,6 @@ try {
     print $e->getmessage()."\n";
     die();
 }
-
-//print count($vertices)." vertices found\n";
 
 $V = array();
 foreach($vertices as $v) {
@@ -61,7 +60,6 @@ foreach($vertices as $v) {
     }
 }
 
-//$queryTemplate = "g.E";
 $queryTemplate .= ".outE()";
 $params = array('type' => 'IN');
 $query = new Gremlin\Query($client, $queryTemplate, $params);
@@ -100,7 +98,9 @@ if (FORMAT == 'DOT') {
 function display_text($V, $E, $root, $level = 0) {
     $r = '';
     
-    $r .= str_repeat('  ', $level).$V[$root]['code']."\n";
+    if (isset($V[$root])) {
+        $r .= str_repeat('  ', $level).$V[$root]['code']."\n";
+    }
     if (isset($E[$root])) {
         foreach($E[$root] as $id => $label) {
             $r .= str_repeat('  ', $level)."Label : $label\n".display_text($V, $E, $id, $level + 1);
