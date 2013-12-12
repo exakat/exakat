@@ -1,0 +1,23 @@
+<?php 
+Label : CODE
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      true
+  Label : THEN
+    Block With if/elseif
+    Label : CODE
+      EMPTY_TRASH_DAYS
+  Label : ELSE
+    elseif
+    Label : CONDITION
+      (
+      Label : CODE
+        EMPTY_TRASH_DAYS
+    Label : THEN
+      Block With if/elseif
+      Label : CODE
+        ++
+        Label : POSTPLUSPLUS
+          $b

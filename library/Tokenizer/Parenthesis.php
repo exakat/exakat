@@ -12,7 +12,7 @@ class Parenthesis extends TokenAuto {
                              'Instanceof', 'Noscream', 'Magicconstant', 'Logical', 'Ternary',
                              'Assignation', 'Property', 'Staticproperty', 'Staticconstant',
                              'Methodcall', 'Staticmethodcall', 'Bitshift', 'Cast', 'Preplusplus', 'Postplusplus',
-                             'Include', 'New',
+                             'Include', 'New', 'Identifier', 
                               );
 
         $this->conditions = array(-1 => array('filterOut2' => array_merge(Functioncall::$operators, _Include::$operators, 
