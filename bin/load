@@ -370,6 +370,26 @@ function process_file($filename, $log_file) {
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Void')
                                               ->save();
+            } elseif ($token == ':' 
+                      && isset($tokens[$id + 1]) && is_string($tokens[$id + 1])  
+                      && $tokens[$id + 1] == ';'
+                      && isset($tokens[$id + 2]) && is_array($tokens[$id + 2])  
+                      && in_array(token_name($tokens[$id + 2][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                                              ->setProperty('code', $token)
+                                              ->setProperty('line', $line)
+                                              ->save();
+                $classNode->relateTo($T[$Tid]);
+                $previous->relateTo($T[$Tid], 'NEXT')->save();
+                $previous = $T[$Tid];
+
+                $Tid++;
+                $Tid++;
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
+                                              ->setProperty('code', 'void')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('atom', 'Void')
+                                              ->save();
             } elseif ($token == '(' && $tokens[$id + 1] == ')') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)

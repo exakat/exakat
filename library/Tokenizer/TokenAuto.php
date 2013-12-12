@@ -1218,6 +1218,13 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.removeVertex(semicolon);
 }
 
+/* Clean index */
+x.out('CODE').each{ 
+    it.inE('INDEXED').each{    
+        g.removeEdge(it);
+    } 
+}
+
             ";
             unset($actions['to_block_else']);
         }
