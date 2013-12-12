@@ -26,7 +26,9 @@ if ($id = array_search('-json', $args)) {
 define('OUTPUT', false);
 
 $stats = array();
-$stats['files with next'] = queryColumn("g.idx('racines')[['token':'ROOT']].out('INDEXED').file");
+$stats['files with next'] = queryColumn("g.idx('racines')[['token':'ROOT']].out('INDEXED').out('NEXT').in('FILE').file");
+$stats['Switch'] = queryColumn("g.idx('racines')[['token':'_Switch']].out('INDEXED').filter{it.out('NEXT').count() > 0}.transform{it.in('FILE').next().file +  ' ' + it.line}");
+/*
 $stats['Function with next'] = queryColumn("g.idx('racines')[['token':'_Function']].out('INDEXED').out('NEXT').transform{it.file + ' ' + it.code + ' ' + it.line}");
 $stats['Addition'] = queryColumn("g.idx('racines')[['token':'Addition']].out('INDEXED').transform{it.file +  ' ' + it.line}");
 $stats['New'] = queryColumn("g.idx('racines')[['token':'_New']].out('INDEXED').transform{it.file +  ' ' + it.line}");
@@ -37,6 +39,7 @@ $stats['Property'] = queryColumn("g.idx('racines')[['token':'Property']].out('IN
 $stats['String'] = queryColumn("g.idx('racines')[['token':'String']].out('INDEXED').transform{it.file +  ' ' + it.line}");
 $stats['Arguments'] = queryColumn("g.idx('racines')[['token':'Arguments']].out('INDEXED').transform{it.file +  ' ' + it.line}");
 $stats['PPP'] = queryColumn("g.idx('racines')[['token':'_Ppp']].out('INDEXED').transform{it.file +  ' ' + it.line}");
+*/
 //$stats['test'] = queryOne("m = []; g.V.fill(m); m.size();");
 //print_r($stats);
 
