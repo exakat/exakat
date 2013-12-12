@@ -32,12 +32,22 @@ if (!file_exists('./projects/'.$project.'/log')) {
 
 shell_exec('sh scripts/clean.sh'); // or php bin/delete
 shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/');
+print "Project loaded\n";
+
 shell_exec('php bin/build_root; php bin/tokenizer');
+print "Project tokenized\n";
+
 shell_exec('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
 shell_exec('php bin/analyze');
+print "Project analyzed\n";
+
+shell_exec('php bin/fullcode');
+print "Project fullcoded\n";
 
 shell_exec('php bin/export -dot -o ./projects/'.$project.'/export.dot');
 shell_exec('php bin/stat > ./projects/'.$project.'/stats.txt');
-shell_exec('php bin/report -f ./projects/'.$project.'/test -markdown');
+shell_exec('rm ./projects/'.$project.'/report.md; php bin/report '.$project.' -f ./projects/'.$project.'/report -markdown');
+print "Project reported\n";
+
 
 ?>
