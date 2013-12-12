@@ -8,18 +8,9 @@ class _Abstract extends TokenAuto {
     function _check() {
     // abstract class x { abstract function x() }
         $this->conditions = array( 0 => array('token' => _Abstract::$operators),
-                                   1 => array('atom' => array('Class', 'Function', 'Static')),
+                                   1 => array('token' => array('T_CLASS', 'T_FUNCTION')),
                                  );
-        $this->actions = array('to_ppp' => 1,
-                               'atom'   => 'Abstract');
-        $this->checkAuto(); 
-
-    // class x { abstract protected $x }
-        $this->conditions = array( 0 => array('token' => _Abstract::$operators),
-                                   1 => array('atom' => 'Ppp'),
-                                 );
-        
-        $this->actions = array('to_ppp2' => 1,
+        $this->actions = array('to_option' => 1,
                                'atom'   => 'Abstract');
         $this->checkAuto(); 
 

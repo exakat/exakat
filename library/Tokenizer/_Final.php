@@ -8,19 +8,10 @@ class _Final extends TokenAuto {
     function _check() {
     // final class x { final function x() }
         $this->conditions = array( 0 => array('token' => _Final::$operators),
-                                   1 => array('atom' => array('Function', 'Static', 'Abstract', 'Class', 'Static')),
+                                   1 => array('token' => array('T_CLASS', 'T_FUNCTION')),
                                  );
-        $this->actions = array('to_ppp' => 1,
-                               'atom'   => 'Final', );
-        $this->checkAuto(); 
-
-    // class x { final protected $x }
-        $this->conditions = array( 0 => array('token' => _Final::$operators),
-                                   1 => array('atom' => 'Ppp'),
-                                 );
-        
-        $this->actions = array('to_ppp2' => 1,
-                               'atom'   => 'Final', );
+        $this->actions = array('to_option' => 1,
+                               'atom'   => 'Final');
         $this->checkAuto(); 
 
         return $this->checkRemaining();

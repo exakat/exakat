@@ -9,13 +9,22 @@ class _Ppp extends TokenAuto {
         $values = array('T_EQUAL', 'T_COMMA');
     // class x { protected $x }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),
-                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Function', 'Abstract', 'Final', )),
+                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', )),// 'Function', 'Abstract', 'Final',
                                    2 => array('filterOut' => $values),
                                    // T_SEMICOLON because of _Class 28 test
                                  );
         $this->actions = array('to_ppp' => 1,
                                'atom'   => 'Ppp', );
         $this->checkAuto(); 
+
+    // class x { protected function f()  }
+        $this->conditions = array( 0 => array('token' => _Ppp::$operators),
+                                   1 => array('token' => 'T_FUNCTION'),
+                                 );
+        $this->actions = array('to_option' => 1,
+                               'atom'   => 'Ppp');
+        $this->checkAuto(); 
+
 
     // class x { protected static $x }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),

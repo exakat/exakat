@@ -78,7 +78,19 @@ class _Function extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = "function " + it.out("NAME").next().fullcode + " " + it.out("ARGUMENTS").next().fullcode + " " + it.out("BLOCK").next().fullcode;';
+        return '
+x = it;
+
+
+it.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ it.fullcode = "function " + it.out("NAME").next().fullcode + " " + it.out("ARGUMENTS").next().fullcode + " ;";}
+
+it.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ it.fullcode = "function " + it.out("NAME").next().fullcode + " " + it.out("ARGUMENTS").next().fullcode + " " + it.out("BLOCK").next().fullcode;}
+
+it.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0}.each{ it.fullcode = "function " + it.out("ARGUMENTS").next().fullcode + " " + it.out("BLOCK").next().fullcode;}
+
+it.filter{it.out("USE").count() == 1}.each{ it.fullcode = "function " + it.out("ARGUMENTS").next().fullcode + " use " + it.out("USE").next().fullcode + " " + it.out("BLOCK").next().fullcode;}
+
+';
     }
 }
 

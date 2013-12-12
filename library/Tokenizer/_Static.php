@@ -10,7 +10,7 @@ class _Static extends TokenAuto {
 
     // class x { static $x }
         $this->conditions = array( 0 => array('token' => _Static::$operators),
-                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Function', 'Abstract', 'Final')),
+                                   1 => array('atom' => array('Variable', 'String', 'Staticconstant', )), //'Function', 'Abstract', 'Final'
                                    2 => array('filterOut' => $values)
                                  );
         
@@ -18,6 +18,14 @@ class _Static extends TokenAuto {
                                'atom'       => 'Static',
                                'cleanIndex' => true
                                );
+        $this->checkAuto(); 
+
+    // class x { static function f() }
+        $this->conditions = array( 0 => array('token' => _Static::$operators),
+                                   1 => array('token' => 'T_FUNCTION'),
+                                 );
+        $this->actions = array('to_option' => 1,
+                               'atom'   => 'Static');
         $this->checkAuto(); 
 
     // class x { static private $x }
