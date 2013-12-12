@@ -34,6 +34,8 @@ if (!file_exists('./projects/'.$project.'/config.ini')) {
 if (!file_exists('./projects/'.$project.'/code/')) {
     if (strpos($git_url, 'bitbucket.org') !== false) {
         print shell_exec("cd ./projects/$project; hg clone $git_url code");
+    } elseif (strpos($git_url, 'svn.code.sf.net') !== false) {
+        print shell_exec("cd ./projects/$project; svn checkout $git_url code");
     } else {
         print shell_exec("cd ./projects/$project; git clone $git_url code");
     }
