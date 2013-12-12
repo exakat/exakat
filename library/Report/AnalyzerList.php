@@ -11,8 +11,13 @@ class AnalyzerList {
 
     function setProject($project) {
         // todo add Checks
+
         $ini = parse_ini_file('./projects/'.$project.'/config.ini');
         
+        if (!isset($ini['analyzer'])) {
+            $ini = parse_ini_file('./projects/default/config.ini');
+        }
+
         $this->list = $ini['analyzer'];
     }
     
