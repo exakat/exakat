@@ -3,16 +3,29 @@
 $args = $argv;
 
 $dir = $args[1];
-//$dir = "./tests/library/Spoon";
-$files = glob_recursive($dir."/");
+
+if (strpos($dir, '/') === false) {
+    // trying as a project name
+    if (file_exists('./projects/'.$dir.'/code/')) {
+        $files = glob_recursive('./projects/'.$dir.'/code/');
+    }
+}
+
+if (!isset($files)) {
+    if (!file_exists($dir)) {
+        print "No such dir as '$dir'. Aborting\n";
+        die();
+    }
+    $files = glob_recursive($dir."/");
+}
 
 $stats = array();
 $unknown = array();
 
 $exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl',  ),
               'images' => array('jpg', 'gif', 'ico', 'png', 'svg', 'eps', 'psd', ),
-              'media' => array('ttf', 'swf',  ),
-              'text' => array('ini', 'xml', 'wsdl', 'txt', 'rst', 'md', 'markdown', ),
+              'media' => array('ttf', 'swf', 'woff',  ),
+              'text' => array('ini', 'xml', 'wsdl', 'txt', 'rst', 'md', 'markdown', 'po', 'mo',  ),
               'web' => array('html', 'htm', 'css', 'js', 'json', 'less', ),
               'document' => array('doc', 'xls'),
               'archives' => array('tgz', 'bz2' ,'z', 'zip', 'gz', ),
