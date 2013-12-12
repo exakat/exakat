@@ -10,46 +10,66 @@ use Everyman\Neo4j\Client,
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
+$log = new Log('fullcode');
+
 $client = new Client();
 
 $offset = 0000;
-$limit = 20000;
-
-
+$limit = 40000;
 $end = $offset + $limit;
 
+print "Work on $limit tokens\n";
+$log->log("Limit\t$limit");
 
-$result = query("g.V[$offset..$end].hasNot('token', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX'])}.has('fullcode', null).sideEffect{ it.fullcode = 'Not available.'}.iterate()");
+$result = query("g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX', 'T_ROOT', 'T_END'])}.has('fullcode', null).sideEffect{ it.fullcode = 'Not available.'}.iterate()");
 
-$result = query("m = [:]; g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX'])}.has('fullcode', 'Not available.').groupCount(m){it.atom}.iterate(); m.each{}");
+$tokens = array( 'Integer', 'Float', '_Function', 'SequenceCaseDefault', '_Global', 'String',  'Real', "Void", 'Identifier', '_Return', 'Multiplication', 
+                 'Variable', 'Concatenation', 'Comparison', '_Break', 'Magicconstant', '_Throw', 
+                 'Parenthesis', 'Addition', 'Arguments', 'Functioncall', 'Parenthesis', 'Assignation', '_Case', '_Default', '_Include', 'Noscream', 
+                 'Preplusplus', 'Postplusplus', 'Sign', 'Boolean', '_Array', '_Static', '_Final', 'Not', 'Reference', 'Keyvalue', '_Ppp', 
+                 'Property', 'Methodcall', 'Logical', 'Ternary', 'Arrayappend', 'Staticmethodcall', 'Staticproperty', 'Staticconstant', 
+                 '_New', 'Cast', 'Sequence', 'Block', 'Ifthen', '_Foreach', '_While', '_Abstract', '_Continue', 'RawString', 'Phpcode', 
+                 '_For', '_Class', '_Switch', 'Nsname', '_Namespace', '_Clone', 'Typehint', '_Const', '_Try', '_Use', '_Interface', '_Instanceof',   );
 
-$tokens = array('_Global', 'String', 'Integer', 'Real', "Void", 'Identifier', '_Return', 'Multiplication', 'Variable', 'Concatenation', 'Comparison', '_Break', 'Magicconstant',
-                'Parenthesis', 'Addition', 'Arguments', 'Functioncall', 'Parenthesis', 'Assignation', '_Case', '_Default', '_Include', 'Noscream', 
-                'Preplusplus', 'Postplusplus', 'Sign', 'Boolean', '_Array', '_Static', '_Final', 'Not', 'Reference', 'Keyvalue', '_Ppp', 
-                'Property', 'Methodcall', 'Logical', 'Ternary', 'Arrayappend', 'Staticmethodcall', 'Staticproperty', 'Staticconstant', 
-                '_New', 'Cast', 'Sequence', 'Block', 'Ifthen', '_Foreach', '_Function', '_While', '_Abstract', '_Continue', 'RawString', 'PhpCode', 
-                '_For', );
-foreach($tokens as $token) {
-    print "$token\n";
-    $atom = str_replace('_', '', $token);
-    $class = "Tokenizer\\".$token;
-    $object = new $class($client);
-    $query = " g.V[$offset..$end].hasNot('token', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX'])}.has('fullcode', 'Not available.').has('atom', '".$atom."').filter{it.out.has('fullcode', 'Not available.').count() == 0}.each{ ".$object->fullcode()." }";
-    $result = query($query);
+$prev = $limit + 2;
+$current = $limit + 1;
+
+$round = 0;
+while ($current < $prev && $current > 0) {
+    print "\n";
+    $round++;
+    $log->log("round\t$round");
+    foreach($tokens as $id => $token) {
+        print "$token\n";
+        $atom = str_replace('_', '', $token);
+        $class = "Tokenizer\\".$token;
+        $object = new $class($client);
+        $query = "c = 0; g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX', 'T_ROOT', 'T_END'])}.has('fullcode', 'Not available.').has('atom', '".$atom."').filter{it.out.has('fullcode', 'Not available.').count() == 0}.each{ ".$object->fullcode()."; c++; }; c;";
+        $result = query($query);
+
+        $log->log("$token\t".$result[0][0]);
+        if ($result[0][0] == 0) {
+//            unset($tokens[$id]);
+        }
+        print ".";
+    }
+
+    $result = query("m = [:]; g.V[$offset..$end].hasNot('atom', null).has('fullcode', 'Not available.').groupCount(m){it.atom}.iterate(); m.each{}");
+    $r = $result->toArray();
+
+    $prev = $current;
+    $current = 0;
+    foreach($r as $s) { $current += $s[0]; }
+    $log->log("Left token\t$current");
 }
 
-print "fin\n";
-print "m = [:]; g.V[$offset..$end].hasNot('token', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX'])}.has('fullcode', 'Not available.').filter{it.out.has('fullcode', 'Not available.').count() == 0}.groupCount(m){it.atom}.iterate(); m.each{}";
-$result = query("m = [:]; g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX'])}.has('fullcode', 'Not available.').filter{it.out.has('fullcode', 'Not available.').count() == 0}.groupCount(m){it.atom}.iterate(); m.each{}");
-print_r($result->toArray());
-die();
-
-
-if ($result[0][0] != 'MANUAL[racines:Vertex]') {
-    query("g.createManualIndex('racines', Vertex)");
+$log->log("Left token\t$current");
+if ($current > 0) {
+    foreach($r as $t => $s) { 
+        $log->log("$t\t".$s[0]);
+    }
 }
-query("g.V.has('index', 'true').each{ g.idx('racines').put('token', it.token, it); };");
-print "Indexing done\n";
+print "\nFinished with $current tokens left.\n";    
 
 function query($query) {
     global $client;
