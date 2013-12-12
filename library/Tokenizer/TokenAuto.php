@@ -125,8 +125,13 @@ it.setProperty('root', 'null');
                 ";
             unset($actions['transfert']);
         }                        
+
         if (isset($actions['atom'])) {
-           $qactions[] = " /* atom */\n   it.setProperty('atom', '".$actions['atom']."')";
+            if (is_string($actions['atom'])) {
+                $qactions[] = " /* atom */\n   it.setProperty('atom', '".$actions['atom']."')";
+            } elseif (is_int($actions['atom'])) {
+                $qactions[] = " /* atom */\n  it.setProperty('atom', it.out('NEXT').next().atom)";
+            }
            unset($actions['atom']);
         }
         
@@ -397,7 +402,7 @@ g.addEdge(it, x, 'NAME');
 op = it.out('NEXT').next();
 cp = it.out('NEXT').out('NEXT').out('NEXT').next();
 
-g.addEdge(it, it.out('NEXT').out('NEXT').next(), 'ARGUMENT');
+g.addEdge(it, it.out('NEXT').out('NEXT').next(), 'ARGUMENTS');
 block = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 g.addEdge(it, block, 'BLOCK');
 
@@ -427,7 +432,7 @@ x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
 
 x = x.out('NEXT').next();
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(it, x, 'ARGUMENT');
+g.addEdge(it, x, 'ARGUMENTS');
 
 x = x.out('NEXT').next();
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
@@ -449,7 +454,7 @@ x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
 
 x = x.out('NEXT').next();
-g.addEdge(it, x, 'Block');
+g.addEdge(it, x, 'BLOCK');
 
 x = x.out('NEXT').next();
 g.removeEdge(x.inE('NEXT').next());
@@ -497,6 +502,19 @@ g.addEdge(p, ppp, 'NEXT');
 ";
             unset($actions['to_ppp2']);
         }        
+
+        if (isset($actions['to_option'])) {
+            $qactions[] = "
+/* turn the current token to an option of the next */
+
+g.addEdge(it.out('NEXT').next() , it, it.code.toUpperCase());
+g.addEdge(it.in('NEXT').next() , it.out('NEXT').next(), 'NEXT');
+
+it.bothE('NEXT').each{ g.removeEdge(it); }
+
+";
+            unset($actions['to_option']);
+        }    
         
         
         if (isset($actions['to_ppp_assignation'])) {
@@ -1016,7 +1034,6 @@ s.bothE('NEXT').each{ g.removeEdge(it); }
 x = g.addVertex(null, [code:'Typehint', atom:'Typehint', virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
-a.setProperty('atom', 'Typehint');
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').out('NEXT').next(), 'NEXT');
@@ -1653,12 +1670,12 @@ it.outE.hasNot('label', 'NEXT').inV.each{
             unset($cdt['previous']);
         }
 
-/*
-        if (isset($cdt['begin'])) {
-            $qcdts[] = "has('begin', true)";
-            unset($cdt['begin']);
+        if (isset($cdt['check_for_string'])) {
+            $classes = "'".join("', '", $cdt['check_for_string'])."'";
+            $qcdts[] = "as('cfs').out('NEXT').filter{ it.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}{true}.back('cfs')";
+            unset($cdt['check_for_string']);
         }
-        */
+
         if (isset($cdt['code'])) {
             if (is_array($cdt['code']) && !empty($cdt['code'])) {
                 $qcdts[] = "filter{it.code in ['".join("', '", $cdt['code'])."']}";
