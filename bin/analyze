@@ -19,34 +19,51 @@ if ($id = array_search('-v', $args)) {
     define('VERBOSE', false);
 }
 
+if (!isset($argv[1])) {
+    $project = 'default';
+} else {
+    $project = $argv[1];
+}
+if (!file_exists('./projects/'.$project.'/config.ini')) {
+    print "No such project as '$project'. Aborting\n";
+    die();
+}
+
 $client = new Client();
+$log = fopen("log/analyzer.log", 'w+');
 
 $analyzers = new NodeIndex($client, 'analyzers');
 
-$analyzers_class = array(
-                         'Analyzer\Classes\PropertyDefinition',
-                         'Analyzer\Classes\MethodDefinition',
-                         'Analyzer\Classes\Classnames',
-                         'Analyzer\Classes\ConstantDefinition',
+$INI = parse_ini_file('./projects/'.$project.'/config.ini');
 
-                         'Analyzer\Extensions\Mcrypt',
-                         'Analyzer\Extensions\Kdm5',
-                         'Analyzer\Extensions\Used',
-                        
-                         'Analyzer\Structures\Iffectation',
-                         'Analyzer\Structures\NotNot',
-                         'Analyzer\Structures\StrposCompare',
-                         
-                         'Analyzer\Type\Integer', 
-                         'Analyzer\Type\String',
-                         'Analyzer\Type\Real',
+if (!isset($INI['analyzer']) || empty($INI['analyzer'])) {
+    print "No analyzers list in config.ini. Aborting\n";
+    die();
+}
 
-                         'Analyzer\Variables\Variablenames',
-                         );
+$analyzers_class = array();
+fwrite($log, "Configured analyzers\t".count($INI['analyzer'])."\n");
+
+foreach($INI['analyzer'] as $analyzer) {
+    if (!file_exists("library/Analyzer/$analyzer.php")) {
+        print "No such analyzer as '$analyzer'. Ignoring\n";
+        fwrite($log, "Ignored analyzer\t$analyzer\n");
+        continue; 
+    }
+    $analyzers_class[] = 'Analyzer\\'.str_replace('/', '\\', $analyzer);
+}
+
+fwrite($log, "Runnable analyzers\t".count($analyzers_class)."\n");
 
 foreach($analyzers_class as $analyzer_class) {
+    $begin = microtime(true);
     $analyzer = new $analyzer_class($client);
-    $analyzer->run();
+    $analyzer->init();
+    $count = $analyzer->run();
     print "$analyzer_class fait\n";
+    $end = microtime(true);
+    fwrite($log, "$analyzer_class\t".($end - $begin)."\t$count\n");
 }
+
+print "Done\n";
 ?>
