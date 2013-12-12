@@ -1187,6 +1187,20 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $qactions[] = " 
 /* to_block_else */
 
+it.out('NEXT').has('token', 'T_COLON').each{
+    endif = it.out('NEXT').out('NEXT').next();
+    
+    // removing the colon
+    g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
+    it.bothE('NEXT').each{ g.removeEdge(it); }
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+
+    // removing the endif
+    g.addEdge(endif.in('NEXT').next(), endif.out('NEXT').next(), 'NEXT');
+    endif.bothE('NEXT').each{ g.removeEdge(it); }
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), endif, 'DELETE');
+}
+
 x = g.addVertex(null, [code:'Block With else', token:'T_BLOCK', atom:'Block', virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
@@ -1277,7 +1291,6 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     semicolon = it;
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), semicolon, 'DELETE');   
-//    g.removeVertex(semicolon);
 }
 
             ";
