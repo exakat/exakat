@@ -1,0 +1,79 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        a
+        Label : ARGUMENTS
+          void
+    Label : THEN
+      ;
+      Label : ELEMENT
+        while
+        Label : CONDITION
+          f
+          Label : ARGUMENTS
+            void
+        Label : LOOP
+          ;
+          Label : ELEMENT
+            		
+          Label : ELEMENT
+            h
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                '1'
+              Label : ARGUMENT
+                '2'
+          Label : ELEMENT
+            			
+          Label : ELEMENT
+            g
+            Label : ARGUMENTS
+              void
+      Label : ELEMENT
+        	
+      Label : ELEMENT
+        l
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'm'
+      Label : ELEMENT
+        void
+      Label : ELEMENT
+        	
+      Label : ELEMENT
+        k
+        Label : ARGUMENTS
+          void
+      Label : ELEMENT
+        Block With Sequence For Case Without Semicolon
+        Label : ELEMENT
+          b
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'c'
+        Label : ELEMENT
+          	
+      Label : ELEMENT
+        d
+        Label : ARGUMENTS
+          void
+      Label : ELEMENT
+        	
+      Label : ELEMENT
+        e
+        Label : ARGUMENTS
+          void
+      Label : ELEMENT
+        		
+      Label : ELEMENT
+        		
+    Label : ELSE
+      void

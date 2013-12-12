@@ -34,6 +34,7 @@ class SequenceAtom extends TokenAuto {
         $this->actions = array('insertSequence'  => 1);
         $this->checkAuto();
        
+        // special situation for alternative syntax
         $this->conditions = array(-1 => array('token' => 'T_COLON'), 
                                    0 => array('atom' => $operands2, 
                                               'notToken' => 'T_ELSEIF',
@@ -41,7 +42,7 @@ class SequenceAtom extends TokenAuto {
                                    1 => array('atom' => $operands2, 
                                               'notToken' => 'T_ELSEIF',
                                               'in_quote' => 'none'),
-                                   2 => array('token' => array('T_ENDIF', 'T_ENDFOR', 'T_ENDDECLARE', 'T_ENDFOREACH', 'T_ELSE', 'T_ELSEIF', 'T_WHILE')),
+                                   2 => array('token' => array('T_ENDIF', 'T_ENDFOR', 'T_ENDDECLARE', 'T_ENDFOREACH', 'T_ELSE', 'T_ELSEIF', 'T_WHILE', 'T_ENDWHILE', 'T_ENDSWITCH', )),
         );
         $this->actions = array('insertSequence'  => 1);
         $this->checkAuto();
