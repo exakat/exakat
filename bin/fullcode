@@ -29,7 +29,8 @@ $tokens = array( 'Integer', 'Float', '_Function', 'SequenceCaseDefault', '_Globa
                  'Preplusplus', 'Postplusplus', 'Sign', 'Boolean', '_Array', '_Static', '_Final', 'Not', 'Reference', 'Keyvalue', '_Ppp', 
                  'Property', 'Methodcall', 'Logical', 'Ternary', 'Arrayappend', 'Staticmethodcall', 'Staticproperty', 'Staticconstant', 
                  '_New', 'Cast', 'Sequence', 'Block', 'Ifthen', '_Foreach', '_While', '_Abstract', '_Continue', 'RawString', 'Phpcode', 
-                 '_For', '_Class', '_Switch', 'Nsname', '_Namespace', '_Clone', 'Typehint', '_Const', '_Try', '_Use', '_Interface', '_Instanceof',   );
+                 '_For', '_Class', '_Switch', 'Nsname', '_Namespace', '_Clone', 'Typehint', '_Const', '_Try', '_Use', '_Interface', '_Instanceof',
+                 '_Catch',    );
 
 $prev = $limit + 2;
 $current = $limit + 1;

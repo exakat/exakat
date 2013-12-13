@@ -28,6 +28,11 @@ class _Catch extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return '
+it.fullcode = "catch " + it.out("CLASS").next().code + " " + it.out.("VARIABLE").next() + " " + it.out.("CODE").next(); ';
+    }
 }
 
 ?>
