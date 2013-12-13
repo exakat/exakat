@@ -338,7 +338,7 @@ arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
     g.removeEdge(it.inE('ARGUMENT').next());
     tvoid = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line]);
     g.addEdge(it.in('FILE').next(), tvoid, 'FILE');
-    g.addEdge(ppp, void, 'VALUE');
+    g.addEdge(ppp, tvoid, 'VALUE');
     
     atom1 = g.addVertex(null, [code:var.code, atom:'$atom1', token:var.token, virtual:true, line:it.line]);
     g.addEdge(it.in('FILE').next(), atom1, 'FILE');
