@@ -23,7 +23,25 @@ class _While extends TokenAuto {
                                'keepIndexed'          => true,
                                'cleanIndex'           => true);
         $this->checkAuto();        
+
+         //  ; While( condition ) ;
+         // T_SEMICOLON here will prevent while to be create too hastily, and give a chance to do...while.
+        $this->conditions = array(-3 => array('notToken'  => 'T_DO', 'atom' => 'yes'), 
+                                  -2 => array('atom'  => 'yes'), 
+                                  -1 => array('token' => 'T_SEMICOLON',
+                                              'atom'  => 'none'), 
+                                   0 => array('token' => _While::$operators),
+                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   2 => array('atom'  => 'yes'),
+                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                   4 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'), 
+                                              'atom' => 'none'),
+        );
         
+        $this->actions = array('addEdge'     => array(4 => array('Void' => 'LEVEL')),
+                               'keepIndexed'          => true,
+                               'cleanIndex'           => true);
+        $this->checkAuto();        
         
          // { lone block } While( condition ) ;
         $this->conditions = array(-2 => array('filterOut' => "T_DO"),

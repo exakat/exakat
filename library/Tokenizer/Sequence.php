@@ -20,7 +20,7 @@ class Sequence extends TokenAuto {
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
-                                'T_DOUBLE_COLON', 'T_COLON', 'T_NEW', 'T_INSTANCEOF', 'T_IF', 
+                                'T_DOUBLE_COLON', 'T_COLON', 'T_NEW', 'T_INSTANCEOF', 
                                 'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_COMMA',
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                 'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
@@ -36,7 +36,8 @@ class Sequence extends TokenAuto {
                                      Assignation::$operators, Logical::$operators, Preplusplus::$operators, Postplusplus::$operators);
         
         // @note instructions separated by ; 
-        $this->conditions = array(-2 => array('filterOut2' => $yield_operator, 
+        $this->conditions = array(-2 => array('filterOut2' => $yield_operator,
+                                              'filterOut'  => array('T_IF'),  
                                               'notAtom'    => 'Parenthesis'), 
                                   -1 => array('atom'       => $operands, 
                                               'notToken'   => 'T_ELSEIF' ),
@@ -176,6 +177,7 @@ class Sequence extends TokenAuto {
                                'cleanIndex' => true
                                );
         $this->checkAuto();
+
         // @note instructions separated by ; with a special case for 'foreach' and 'for'. 
         // @note this is not sufficient, but it seems to works pretty well and be enough.
         $this->conditions = array(-5 => array('token'  => array('T_SEMICOLON', 'T_AS')),
@@ -216,8 +218,7 @@ class Sequence extends TokenAuto {
                                               'notToken'   => 'T_ELSEIF', ),
                                    0 => array('token'      => Sequence::$operators,
                                               'atom'       => 'none'),
-                                   1 => array('token'      => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_CLOSE_CURLY'),
-//                                              'atom'       => 'none'
+                                   1 => array('token'      => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDDECLARE', ),
                                               ),
         );
         
@@ -246,7 +247,6 @@ class Sequence extends TokenAuto {
                                'cleanIndex'  => true
                                );
         $this->checkAuto(); 
-//        $this->printQuery();
 
         // Sequence followed by ; followed by elseif atom.
         $this->conditions = array(  -1 => array('atom'  => 'Sequence'),
@@ -262,6 +262,7 @@ class Sequence extends TokenAuto {
     }
 
     function fullcode() {
+        // fullcode is not meant to reproduce the whole code, but give a quick peek at some smaller code. Just ignoring for the moment.
         return 'it.fullcode = " "';
     }
 }

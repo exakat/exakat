@@ -10,7 +10,7 @@ class Variable extends TokenAuto {
         // "  {$variable}  "
         $this->conditions = array(0 => array('token' => Variable::$operators,
                                              'atom' => 'none'),
-                                  1 => array('atom' => array('Variable', 'Array', 'Property', 'Methodcall')),
+                                  1 => array('atom' => String::$allowed_classes,),
                                   2 => array('token' => 'T_CLOSE_CURLY'),
         );
         

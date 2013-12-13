@@ -46,7 +46,7 @@ class SequenceAtom extends TokenAuto {
         );
         $this->actions = array('insertSequence'  => 1);
         $this->checkAuto();
-       
+
         return $this->checkRemaining();
     }
 }

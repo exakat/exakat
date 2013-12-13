@@ -238,11 +238,12 @@ function process_file($filename, $log_file) {
                 $previous = $T[$Tid];
                 
                 $Tid++;
-                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_LNUMBER')
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
-                                              ->setProperty('atom', 'Void')->save();
-                $classNode->relateTo($T[$Tid]);
+                                              ->setProperty('modifiedBy', 'bin/load13')
+                                              ->setProperty('atom', 'Void')
+                                              ->save();
 
                 $to_index = false;
             } elseif (token_name($token[0]) == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
@@ -263,6 +264,7 @@ function process_file($filename, $log_file) {
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Void')
+                                              ->setProperty('modifiedBy', 'bin/load1')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
 
@@ -274,8 +276,8 @@ function process_file($filename, $log_file) {
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Void')
+                                              ->setProperty('modifiedBy', 'bin/load2')
                                               ->save();
-                $classNode->relateTo($T[$Tid]);
 
                 $id++;
             } else {
@@ -300,7 +302,6 @@ function process_file($filename, $log_file) {
             $token_value = token_name($token[0]);
             if ($token_value == 'T_OPEN_CURLY') {
                 $token_value = 'T_CURLY_OPEN';
-                
             }
 
             $line = $token[2];
@@ -324,6 +325,7 @@ function process_file($filename, $log_file) {
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Block')
+                                              ->setProperty('modifiedBy', 'bin/load12')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
 
@@ -331,10 +333,9 @@ function process_file($filename, $log_file) {
                                              ->setProperty('code', 'void')
                                              ->setProperty('line', $line)
                                              ->setProperty('atom', 'Void')
-                                             ->setProperty('modifiedBy', 'bin/load')
+                                             ->setProperty('modifiedBy', 'bin/load3')
                                              ->save();
                 $classNode->relateTo($void);
-                $classNode->relateTo($T[$Tid]);
 
                 $T[$Tid]->relateTo($void, 'CODE')->save();
 
@@ -356,8 +357,9 @@ function process_file($filename, $log_file) {
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Void')
-                                              ->setProperty('modifiedBy', 'bin/load')
+                                              ->setProperty('modifiedBy', 'bin/load4')
                                               ->save();
+                $classNode->relateTo($T[$Tid]);
             } elseif ($token == ':' 
                       && isset($tokens[$id + 1]) && is_string($tokens[$id + 1])  
                       && $tokens[$id + 1] == ';'
@@ -377,8 +379,9 @@ function process_file($filename, $log_file) {
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Void')
-                                              ->setProperty('modifiedBy', 'bin/load')
+                                              ->setProperty('modifiedBy', 'bin/load5')
                                               ->save();
+                $classNode->relateTo($T[$Tid]);
             } elseif ($token == '(' && $tokens[$id + 1] == ')') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
                                               ->setProperty('code', $token)
@@ -394,6 +397,7 @@ function process_file($filename, $log_file) {
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Arguments')
+                                             ->setProperty('modifiedBy', 'bin/load6')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
 
@@ -414,6 +418,7 @@ function process_file($filename, $log_file) {
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Void')
+                                              ->setProperty('modifiedBy', 'bin/load7')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
 
@@ -432,7 +437,7 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
-                                              ->setProperty('modifiedBy', 'load')
+                                              ->setProperty('modifiedBy', 'bin/load8')
                                               ->setProperty('atom', 'Void')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
@@ -452,7 +457,7 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
-                                              ->setProperty('modifiedBy', 'load')
+                                              ->setProperty('modifiedBy', 'bin/load9')
                                               ->setProperty('atom', 'Void')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
@@ -473,7 +478,7 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('line', $line)
-                                              ->setProperty('modifiedBy', 'load')
+                                              ->setProperty('modifiedBy', 'bin/load10')
                                               ->setProperty('atom', 'Void')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
@@ -490,9 +495,10 @@ function process_file($filename, $log_file) {
                 $void   = $client->makeNode()->setProperty('token', 'T_VOID')
                                              ->setProperty('code', 'void')
                                              ->setProperty('line', $line)
+                                             ->setProperty('modifiedBy', 'bin/load11')
                                              ->setProperty('atom', 'Void')
                                              ->save();
-                $classNode->relateTo($T[$Tid]);
+                $classNode->relateTo($void);
 
                 $sequence = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                ->setProperty('code', ';')
