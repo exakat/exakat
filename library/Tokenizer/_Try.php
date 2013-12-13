@@ -36,7 +36,7 @@ class _Try extends TokenAuto {
         return '
 s = [];
 it.out("CATCH").each{ s.add(it.fullcode); }        
-it.fullcode = "try " + it.out("CODE").next().code + s.join(" "); ';
+it.fullcode = "try " + it.out("CODE").next().fullcode + s.join(" "); ';
     }
 }
 

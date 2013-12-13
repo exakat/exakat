@@ -43,5 +43,10 @@ class _Var extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    function fullcode() {
+        return '
+it.fullcode = "var " + it.out("NAME").next().fullcode; ';
+    }
 }
 ?>
