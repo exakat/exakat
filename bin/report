@@ -23,6 +23,7 @@ if (!file_exists('./projects/'.$project.'/config.ini')) {
     print "No such project as '$project'. Aborting\n";
     die();
 }
+$config = parse_ini_file('./projects/'.$project.'/config.ini');
 
 if ($id = array_search('-json', $args)) {
     define('FORMAT', 'JSON');
@@ -107,11 +108,13 @@ $analyzes = array('Structures\\StrposCompare',
                   );
 
 foreach($analyzes as $a) {
-    $report->createH2($a); 
-    $a = "Analyzer\\$a";
-    $analyzer = new $a($client); 
+    if (in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
+        $report->createH2($a); 
+        $a = "Analyzer\\$a";
+        $analyzer = new $a($client); 
 
-    $report->addContent('Liste', $analyzer->toArray());
+        $report->addContent('Liste', $analyzer->toArray());
+    }
 }
 
 $report->createH1('Application inventory'); // list of named elements and semantic analysis
@@ -123,11 +126,13 @@ $analyzes = array('Type\\Integer',
                   );
 
 foreach($analyzes as $a) {
-    $report->createH2($a); 
-    $a = "Analyzer\\$a";
-    $analyzer = new $a($client); 
+    if (in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
+        $report->createH2($a); 
+        $a = "Analyzer\\$a";
+        $analyzer = new $a($client); 
 
-    $report->addContent('HashTable', $analyzer->toCountedArray());
+        $report->addContent('HashTable', $analyzer->toCountedArray());
+    }
 }
 
 if (FORMAT == 'TEXT') {
