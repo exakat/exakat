@@ -21,6 +21,40 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case Without Semicolon
           Label : ELEMENT
+            require_once
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                a
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'b'
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $h
+            Label : THEN
+              {
+              Label : CODE
+                void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $g
+            Label : THEN
+              {
+              Label : CODE
+                void
+          Label : ELEMENT
             if
             Label : CONDITION
               (
@@ -50,39 +84,5 @@ Label : CODE
                 {
                 Label : CODE
                   void
-          Label : ELEMENT
-            require_once
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                a
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'b'
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                $h
-            Label : THEN
-              {
-              Label : CODE
-                void
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                $g
-            Label : THEN
-              {
-              Label : CODE
-                void
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
         Label : CASE
           'b'

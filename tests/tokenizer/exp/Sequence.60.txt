@@ -52,16 +52,16 @@ Label : CODE
                 'm'
               Label : LEFT
                 $l
-    Label : FINAL
-      <
-      Label : RIGHT
-        10
-      Label : LEFT
-        $a
     Label : INIT
       =
       Label : RIGHT
         0
+      Label : LEFT
+        $a
+    Label : FINAL
+      <
+      Label : RIGHT
+        10
       Label : LEFT
         $a
     Label : INCREMENT

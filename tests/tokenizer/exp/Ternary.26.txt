@@ -12,16 +12,16 @@ Label : CODE
           void
           Label : ARGUMENT
             ->
-            Label : PROPERTY
-              c
             Label : OBJECT
               $b
+            Label : PROPERTY
+              c
     Label : THEN
       ->
-      Label : PROPERTY
-        e
       Label : OBJECT
         $d
+      Label : PROPERTY
+        e
     Label : ELSE
       =
       Label : RIGHT
@@ -32,13 +32,13 @@ Label : CODE
             void
             Label : ARGUMENT
               ->
-              Label : PROPERTY
-                j
               Label : OBJECT
                 $i
+              Label : PROPERTY
+                j
       Label : LEFT
         ->
-        Label : PROPERTY
-          g
         Label : OBJECT
           $f
+        Label : PROPERTY
+          g

@@ -16,10 +16,10 @@ Label : CODE
            d 
         Label : CONCAT
           ->
-          Label : PROPERTY
-            f
           Label : OBJECT
             $e
+          Label : PROPERTY
+            f
         Label : CONCAT
            g 
         Label : CONCAT

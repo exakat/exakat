@@ -10,7 +10,7 @@ Label : CODE
       [
       Label : VARIABLE
         ->
-        Label : PROPERTY
-          b
         Label : OBJECT
           $a
+        Label : PROPERTY
+          b

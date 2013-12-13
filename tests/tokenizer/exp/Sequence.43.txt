@@ -46,18 +46,18 @@ Label : CODE
       Block With if/elseif
       Label : CODE
         foreach
-        Label : VALUE
-          =>
-          Label : KEY
-            $g
-          Label : VALUE
-            $h
         Label : SOURCE
           [
           Label : INDEX
             'f'
           Label : VARIABLE
             $e
+        Label : VALUE
+          =>
+          Label : VALUE
+            $h
+          Label : KEY
+            $g
         Label : LOOP
           {
           Label : CODE

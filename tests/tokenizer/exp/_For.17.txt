@@ -55,10 +55,10 @@ Label : CODE
     foreach
     Label : VALUE
       =>
-      Label : KEY
-        $h
       Label : VALUE
         $i
+      Label : KEY
+        $h
     Label : SOURCE
       $g
     Label : LOOP

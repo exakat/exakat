@@ -10,31 +10,31 @@ Label : CODE
       ;
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          'f'
         Label : DEFINE
           $y4
-        Label : STATIC
-          static
+        Label : VALUE
+          'f'
         Label : PROTECTED
           protected
+        Label : STATIC
+          static
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          'f'
         Label : DEFINE
           $y
-        Label : STATIC
-          static
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        Ppp
         Label : VALUE
           'f'
-        Label : DEFINE
-          $y3
+        Label : PUBLIC
+          public
         Label : STATIC
           static
+      Label : ELEMENT
+        Ppp
+        Label : DEFINE
+          $y3
+        Label : VALUE
+          'f'
         Label : PRIVATE
           private
+        Label : STATIC
+          static

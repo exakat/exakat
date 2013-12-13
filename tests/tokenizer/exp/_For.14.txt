@@ -6,14 +6,14 @@ Label : CODE
     Block With For
     Label : CODE
       ->
-      Label : OBJECT
-        $d
       Label : METHOD
         e
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $f
+      Label : OBJECT
+        $d
   Label : FINAL
     <
     Label : RIGHT

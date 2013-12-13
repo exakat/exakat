@@ -12,61 +12,61 @@ Label : CODE
           void
         Label : ARGUMENT
           =>
-          Label : KEY
-            \
-            Label : ELEMENT
-              k
-            Label : ELEMENT
-              l
           Label : VALUE
             \
             Label : ELEMENT
               m
             Label : ELEMENT
               n
+          Label : KEY
+            \
+            Label : ELEMENT
+              k
+            Label : ELEMENT
+              l
         Label : ARGUMENT
           =>
-          Label : KEY
-            ->
-            Label : PROPERTY
-              g
-            Label : OBJECT
-              $f
           Label : VALUE
             ->
-            Label : PROPERTY
-              i
             Label : OBJECT
               $h
+            Label : PROPERTY
+              i
+          Label : KEY
+            ->
+            Label : OBJECT
+              $f
+            Label : PROPERTY
+              g
         Label : ARGUMENT
           =>
-          Label : KEY
-            [
-            Label : INDEX
-              'd'
-            Label : VARIABLE
-              $c
           Label : VALUE
             [
             Label : INDEX
               'f'
             Label : VARIABLE
               $e
+          Label : KEY
+            [
+            Label : INDEX
+              'd'
+            Label : VARIABLE
+              $c
         Label : ARGUMENT
           =>
-          Label : KEY
-            $a
           Label : VALUE
             $b
+          Label : KEY
+            $a
         Label : ARGUMENT
           =>
-          Label : KEY
-            -
-            Label : SIGN
-              4
           Label : VALUE
             -
             Label : SIGN
               5
+          Label : KEY
+            -
+            Label : SIGN
+              4
     Label : LEFT
       $a

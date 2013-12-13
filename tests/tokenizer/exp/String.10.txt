@@ -11,6 +11,24 @@ Label : CODE
         Label : CONCAT
           $d
         Label : CONCAT
+           c 
+        Label : CONCAT
+          $a
+        Label : CONCAT
+          ->
+        Label : CONCAT
+          b
+    Label : LEFT
+      $loc
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          $d
+        Label : CONCAT
            
         Label : CONCAT
           $a
@@ -29,32 +47,14 @@ Label : CODE
       Label : CONTAIN
         Concatenation
         Label : CONCAT
-          $a
-        Label : CONCAT
           ->
-        Label : CONCAT
-          b
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            b
         Label : CONCAT
            c 
         Label : CONCAT
           $d
-    Label : LEFT
-      $loc
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          $d
-        Label : CONCAT
-           c 
-        Label : CONCAT
-          $a
-        Label : CONCAT
-          ->
-        Label : CONCAT
-          b
     Label : LEFT
       $loc

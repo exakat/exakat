@@ -14,10 +14,10 @@ Label : CODE
           $f
         Label : VARIABLE
           ->
-          Label : PROPERTY
-            e
           Label : OBJECT
             $d
+          Label : PROPERTY
+            e
   Label : FINAL
     <
     Label : RIGHT

@@ -6,16 +6,16 @@ Label : CODE
     Block With For
     Label : CODE
       void
-  Label : FINAL
-    <
-    Label : RIGHT
-      2
-    Label : LEFT
-      $a
   Label : INIT
     =
     Label : RIGHT
       0
+    Label : LEFT
+      $a
+  Label : FINAL
+    <
+    Label : RIGHT
+      2
     Label : LEFT
       $a
   Label : INCREMENT

@@ -3,6 +3,14 @@
 Label : CODE
   ;
   Label : ELEMENT
+    throw
+    Label : THROW
+      new
+      Label : NEW
+        Stdclass
+        Label : ARGUMENTS
+          void
+  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -12,11 +20,3 @@ Label : CODE
       {
       Label : CODE
         void
-  Label : ELEMENT
-    throw
-    Label : THROW
-      new
-      Label : NEW
-        Stdclass
-        Label : ARGUMENTS
-          void

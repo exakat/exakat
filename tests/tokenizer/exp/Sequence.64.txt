@@ -15,14 +15,14 @@ Label : CODE
               $a
     Label : THEN
       foreach
-      Label : VALUE
-        =>
-        Label : KEY
-          $c
-        Label : VALUE
-          $d
       Label : SOURCE
         $b
+      Label : VALUE
+        =>
+        Label : VALUE
+          $d
+        Label : KEY
+          $c
       Label : LOOP
         ++
         Label : POSTPLUSPLUS

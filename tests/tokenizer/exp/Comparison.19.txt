@@ -18,16 +18,16 @@ Label : CODE
               'g'
             Label : VARIABLE
               ->
-              Label : PROPERTY
-                f
               Label : OBJECT
                 $e
+              Label : PROPERTY
+                f
         Label : LEFT
           ->
-          Label : PROPERTY
-            d
           Label : OBJECT
             $c
+          Label : PROPERTY
+            d
       Label : LEFT
         [
         Label : INDEX

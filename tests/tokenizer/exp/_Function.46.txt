@@ -9,42 +9,38 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
-        Ppp
-        Label : DEFINE
-          function
-          Label : ARGUMENTS
-            void
-          Label : NAME
-            FALSE
-          Label : BLOCK
-            {
-            Label : CODE
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  FALSE
-        Label : STATIC
-          static
+        function
+        Label : ARGUMENTS
+          void
+        Label : NAME
+          FALSE
+        Label : BLOCK
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                FALSE
         Label : PUBLIC
           public
+        Label : STATIC
+          static
       Label : ELEMENT
-        Ppp
-        Label : DEFINE
-          function
-          Label : ARGUMENTS
-            void
-          Label : NAME
-            TRUE
-          Label : BLOCK
-            {
-            Label : CODE
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  TRUE
-        Label : STATIC
-          static
+        function
+        Label : ARGUMENTS
+          void
+        Label : NAME
+          TRUE
+        Label : BLOCK
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                TRUE
         Label : PUBLIC
           public
+        Label : STATIC
+          static

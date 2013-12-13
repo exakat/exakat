@@ -1,14 +1,12 @@
 <?php
 
 Label : CODE
-  Ppp
-  Label : DEFINE
-    class
-    Label : NAME
-      y
-    Label : BLOCK
-      {
-      Label : CODE
-        void
+  class
+  Label : NAME
+    y
+  Label : BLOCK
+    {
+    Label : CODE
+      void
   Label : FINAL
     final

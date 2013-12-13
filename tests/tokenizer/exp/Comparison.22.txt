@@ -14,10 +14,10 @@ Label : CODE
           --
           Label : POSTPLUSPLUS
             ->
-            Label : PROPERTY
-              c
             Label : OBJECT
               $b
+            Label : PROPERTY
+              c
       Label : LEFT
         ==
         Label : RIGHT

@@ -6,8 +6,6 @@ Label : CODE
     =
     Label : RIGHT
       ->
-      Label : OBJECT
-        $this
       Label : METHOD
         b
         Label : ARGUMENTS
@@ -28,5 +26,7 @@ Label : CODE
               __NAMESPACE__
             Label : CONCAT
               '\C'
+      Label : OBJECT
+        $this
     Label : LEFT
       $a

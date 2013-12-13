@@ -18,7 +18,7 @@ Label : CODE
         =
         Label : RIGHT
           function
-          Label : ARGUMENT
+          Label : ARGUMENTS
             void
           Label : NAME
             lambda
@@ -38,21 +38,21 @@ Label : CODE
                         ,
                         Label : ARGUMENT
                           =>
-                          Label : KEY
-                            'c'
                           Label : VALUE
                             'd'
+                          Label : KEY
+                            'c'
                         Label : ARGUMENT
                           =>
-                          Label : KEY
-                            'e'
                           Label : VALUE
                             'f'
+                          Label : KEY
+                            'e'
                     Label : ARGUMENT
                       void
         Label : LEFT
           ->
-          Label : PROPERTY
-            b
           Label : OBJECT
             $a
+          Label : PROPERTY
+            b

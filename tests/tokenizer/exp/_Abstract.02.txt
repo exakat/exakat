@@ -1,44 +1,36 @@
 <?php
 
 Label : CODE
-  Ppp
-  Label : DEFINE
-    class
-    Label : NAME
-      x
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          Ppp
-          Label : DEFINE
-            function
-            Label : ARGUMENTS
-              void
-            Label : NAME
-              a
-          Label : ABSTRACT
-            abstract
-        Label : ELEMENT
-          Ppp
-          Label : DEFINE
-            function
-            Label : ARGUMENTS
-              void
-            Label : NAME
-              b
-          Label : ABSTRACT
-            abstract
-        Label : ELEMENT
-          Ppp
-          Label : DEFINE
-            function
-            Label : ARGUMENTS
-              void
-            Label : NAME
-              c
-          Label : ABSTRACT
-            abstract
+  class
+  Label : NAME
+    x
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+        Label : NAME
+          a
+        Label : ABSTRACT
+          abstract
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+        Label : NAME
+          b
+        Label : ABSTRACT
+          abstract
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+        Label : NAME
+          c
+        Label : ABSTRACT
+          abstract
   Label : ABSTRACT
     abstract

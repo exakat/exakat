@@ -20,10 +20,10 @@ Label : CODE
         !
         Label : NOT
           ->
-          Label : PROPERTY
-            a
           Label : OBJECT
             $this
+          Label : PROPERTY
+            a
   Label : THEN
     {
     Label : CODE

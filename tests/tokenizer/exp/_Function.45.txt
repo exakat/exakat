@@ -1,7 +1,7 @@
 <?php 
 Label : CODE
   function
-  Label : ARGUMENT
+  Label : ARGUMENTS
     void
     Label : ARGUMENT
       $a
@@ -13,9 +13,9 @@ Label : CODE
       ;
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          NULL
         Label : DEFINE
           $b
+        Label : VALUE
+          NULL
         Label : STATIC
           static

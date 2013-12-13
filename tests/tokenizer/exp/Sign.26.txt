@@ -6,7 +6,7 @@ Label : CODE
     -
     Label : SIGN
       ->
-      Label : PROPERTY
-        b
       Label : OBJECT
         $a
+      Label : PROPERTY
+        b

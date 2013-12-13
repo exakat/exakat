@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $b
     Label : SOURCE
       $a
+    Label : VALUE
+      $b
     Label : LOOP
       {
       Label : CODE

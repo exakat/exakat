@@ -36,10 +36,10 @@ Label : CODE
         foreach
         Label : VALUE
           =>
-          Label : KEY
-            $k
           Label : VALUE
             $v
+          Label : KEY
+            $k
         Label : SOURCE
           $e
         Label : LOOP

@@ -30,10 +30,10 @@ Label : CODE
             foreach
             Label : VALUE
               =>
-              Label : KEY
-                $key
               Label : VALUE
                 $value
+              Label : KEY
+                $key
             Label : SOURCE
               $data
             Label : LOOP

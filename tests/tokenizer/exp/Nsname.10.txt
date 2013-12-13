@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       I
     Label : ELEMENT
@@ -24,10 +26,10 @@ Label : CODE
       H
     Label : ELEMENT
       K
-    Label : ARGUMENTS
-      void
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       G
     Label : ELEMENT
@@ -44,10 +46,10 @@ Label : CODE
       F
     Label : ELEMENT
       H
-    Label : ARGUMENTS
-      void
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       E
     Label : ELEMENT
@@ -60,10 +62,10 @@ Label : CODE
       D
     Label : ELEMENT
       F
-    Label : ARGUMENTS
-      void
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       C
     Label : ELEMENT
@@ -72,34 +74,34 @@ Label : CODE
       B
     Label : ELEMENT
       D
-    Label : ARGUMENTS
-      void
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       A
     Label : ELEMENT
       B
-    Label : ARGUMENTS
-      void
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       A
-    Label : ARGUMENTS
-      void
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       B
     Label : ELEMENT
       A
     Label : ELEMENT
       C
-    Label : ARGUMENTS
-      void
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       D
     Label : ELEMENT
@@ -110,10 +112,10 @@ Label : CODE
       C
     Label : ELEMENT
       E
-    Label : ARGUMENTS
-      void
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       F
     Label : ELEMENT
@@ -128,10 +130,10 @@ Label : CODE
       E
     Label : ELEMENT
       G
-    Label : ARGUMENTS
-      void
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       H
     Label : ELEMENT
@@ -150,5 +152,3 @@ Label : CODE
       G
     Label : ELEMENT
       I
-    Label : ARGUMENTS
-      void

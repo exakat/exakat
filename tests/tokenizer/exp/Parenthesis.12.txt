@@ -14,14 +14,12 @@ Label : CODE
             d
           Label : CONCAT
             {
-          Label : CONCAT
-            [
-            Label : INDEX
-              f
-            Label : VARIABLE
-              $e
-          Label : CONCAT
-            }
+            Label : NAME
+              [
+              Label : INDEX
+                f
+              Label : VARIABLE
+                $e
           Label : CONCAT
             g
       Label : CONCAT

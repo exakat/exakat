@@ -20,19 +20,19 @@ Label : CODE
                 'g'
               Label : VARIABLE
                 ->
-                Label : PROPERTY
-                  f
                 Label : OBJECT
                   $e
+                Label : PROPERTY
+                  f
             Label : LEFT
               [
               Label : INDEX
                 'd'
               Label : VARIABLE
                 ->
-                Label : PROPERTY
-                  c
                 Label : OBJECT
                   $b
+                Label : PROPERTY
+                  c
     Label : LEFT
       $a

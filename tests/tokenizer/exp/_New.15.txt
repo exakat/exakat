@@ -18,10 +18,10 @@ Label : CODE
               $x
           Label : ARGUMENT
             ->
-            Label : PROPERTY
-              d
             Label : OBJECT
               $y
+            Label : PROPERTY
+              d
       Label : VARIABLE
         [
         Label : INDEX

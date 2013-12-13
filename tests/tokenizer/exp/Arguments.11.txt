@@ -28,10 +28,10 @@ Label : CODE
                         'm'
                       Label : VARIABLE
                         ->
-                        Label : PROPERTY
-                          l
                         Label : OBJECT
                           $k
+                        Label : PROPERTY
+                          l
                     Label : CONCAT
                       'j'
                     Label : CONCAT
@@ -50,10 +50,10 @@ Label : CODE
                       'h'
                     Label : VARIABLE
                       ->
-                      Label : PROPERTY
-                        g
                       Label : OBJECT
                         $f
+                      Label : PROPERTY
+                        g
         Label : LEFT
           !
           Label : NOT
@@ -66,10 +66,10 @@ Label : CODE
                   'd'
                 Label : VARIABLE
                   ->
-                  Label : PROPERTY
-                    c
                   Label : OBJECT
                     $b
+                  Label : PROPERTY
+                    c
               Label : ARGUMENT
                 $e
       Label : THEN
@@ -80,9 +80,9 @@ Label : CODE
           'r'
         Label : VARIABLE
           ->
-          Label : PROPERTY
-            q
           Label : OBJECT
             $p
+          Label : PROPERTY
+            q
     Label : LEFT
       $a

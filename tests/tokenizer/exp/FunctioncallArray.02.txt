@@ -16,7 +16,7 @@ Label : CODE
         d
       Label : VARIABLE
         ->
-        Label : PROPERTY
-          c
         Label : OBJECT
           $b
+        Label : PROPERTY
+          c

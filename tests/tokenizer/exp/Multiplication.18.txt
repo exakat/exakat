@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     *
+    Label : RIGHT
+      1
     Label : LEFT
       .
       Label : CONCAT
         '1'
       Label : CONCAT
         $s
-    Label : RIGHT
-      1

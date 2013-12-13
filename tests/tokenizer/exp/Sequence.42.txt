@@ -3,32 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'b'
-        Label : LEFT
-          $a
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $c
-    Label : ELSE
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $d
-  Label : ELEMENT
     &&
     Label : RIGHT
       g
@@ -66,3 +40,29 @@ Label : CODE
           void
           Label : ARGUMENT
             $f
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          'b'
+        Label : LEFT
+          $a
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $c
+    Label : ELSE
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $d

@@ -2,12 +2,26 @@
 
 Label : CODE
   function
-  Label : ARGUMENT
+  Label : ARGUMENTS
     void
     Label : ARGUMENT
       $a
   Label : NAME
     lambda
+  Label : BLOCK
+    {
+    Label : CODE
+      ;
+      Label : ELEMENT
+        ->
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g
+        Label : OBJECT
+          $e
   Label : USE
     ,
     Label : ARGUMENT
@@ -16,17 +30,3 @@ Label : CODE
       $d
     Label : ARGUMENT
       $c
-  Label : Block
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        ->
-        Label : OBJECT
-          $e
-        Label : METHOD
-          f
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $g

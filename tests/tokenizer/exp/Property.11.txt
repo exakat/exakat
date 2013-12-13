@@ -10,8 +10,6 @@ Label : CODE
         'e'
       Label : VARIABLE
         ->
-        Label : PROPERTY
-          d
         Label : OBJECT
           ::
           Label : CLASS
@@ -20,5 +18,7 @@ Label : CODE
             c
             Label : ARGUMENTS
               void
+        Label : PROPERTY
+          d
     Label : LEFT
       $a

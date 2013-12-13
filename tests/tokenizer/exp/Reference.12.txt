@@ -8,9 +8,9 @@ Label : CODE
       &
       Label : REFERENCE
         ->
-        Label : PROPERTY
-          y
         Label : OBJECT
           $x
+        Label : PROPERTY
+          y
     Label : LEFT
       $z

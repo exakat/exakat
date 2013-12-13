@@ -14,7 +14,7 @@ Label : CODE
             C
       Label : LEFT
         ->
-        Label : PROPERTY
-          b
         Label : OBJECT
           $a
+        Label : PROPERTY
+          b

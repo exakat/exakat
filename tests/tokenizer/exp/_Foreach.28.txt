@@ -17,25 +17,25 @@ Label : CODE
         $g
       Label : SOURCE
         ->
-        Label : OBJECT
-          ->
-          Label : PROPERTY
-            d
-          Label : OBJECT
-            $c
         Label : METHOD
           e
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'f'
+        Label : OBJECT
+          ->
+          Label : OBJECT
+            $c
+          Label : PROPERTY
+            d
       Label : LOOP
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ->
-            Label : PROPERTY
-              i
             Label : OBJECT
               $h
+            Label : PROPERTY
+              i

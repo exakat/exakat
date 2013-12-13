@@ -2,32 +2,16 @@
 
 Label : CODE
   function
+  Label : NAME
+    a
   Label : ARGUMENTS
     void
     Label : ARGUMENT
       $b
-  Label : NAME
-    a
   Label : BLOCK
     {
     Label : CODE
       ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            !
-            Label : NOT
-              $c
-        Label : THEN
-          {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              return
-              Label : RETURN
-                false
       Label : ELEMENT
         return
         Label : RETURN
@@ -58,3 +42,19 @@ Label : CODE
                       $d
                     Label : CONCAT
                       '
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            !
+            Label : NOT
+              $c
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                false

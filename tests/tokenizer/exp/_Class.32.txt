@@ -10,25 +10,25 @@ Label : CODE
       ;
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          5
         Label : NAME
           $h
+        Label : VALUE
+          5
         Label : VAR
           var
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          void
         Label : NAME
           $g
+        Label : VALUE
+          void
         Label : VAR
           var
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          4
         Label : NAME
           $e
+        Label : VALUE
+          4
         Label : VAR
           var

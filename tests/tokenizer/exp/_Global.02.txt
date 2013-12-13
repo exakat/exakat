@@ -4,25 +4,25 @@ Label : CODE
   ;
   Label : ELEMENT
     global
-    Label : VALUE
-      void
-    Label : DEFINE
+    Label : NAME
       $d
-  Label : ELEMENT
-    global
     Label : VALUE
       void
-    Label : DEFINE
+  Label : ELEMENT
+    global
+    Label : NAME
       $b
-  Label : ELEMENT
-    global
     Label : VALUE
       void
-    Label : DEFINE
+  Label : ELEMENT
+    global
+    Label : NAME
       $a
-  Label : ELEMENT
-    global
     Label : VALUE
       void
-    Label : DEFINE
+  Label : ELEMENT
+    global
+    Label : NAME
       $c
+    Label : VALUE
+      void

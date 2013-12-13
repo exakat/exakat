@@ -14,22 +14,20 @@ Label : CODE
             a 
           Label : CONCAT
             {
-          Label : CONCAT
-            $this
-          Label : CONCAT
-            ->
-          Label : CONCAT
-            b
-          Label : CONCAT
-            }
+            Label : NAME
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                b
           Label : CONCAT
              c 
           Label : CONCAT
-            $item
-          Label : CONCAT
             ->
-          Label : CONCAT
-            d
+            Label : OBJECT
+              $item
+            Label : PROPERTY
+              d
           Label : CONCAT
              
           Label : CONCAT

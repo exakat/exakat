@@ -14,12 +14,12 @@ Label : CODE
             'c'
           Label : LEFT
             ->
-            Label : OBJECT
-              $a
             Label : METHOD
               b
               Label : ARGUMENTS
                 void
+            Label : OBJECT
+              $a
         Label : ARGUMENT
           1
         Label : ARGUMENT

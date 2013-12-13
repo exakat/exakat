@@ -13,44 +13,36 @@ Label : CODE
           A
         Label : CONCAT
           ${
-        Label : CONCAT
-          [
-          Label : INDEX
-            'c'
-          Label : VARIABLE
-            $b
-        Label : CONCAT
-          ?
-        Label : CONCAT
-          'true'
-        Label : CONCAT
-          :
-        Label : CONCAT
-          'false'
-        Label : CONCAT
-          }
+          Label : NAME
+            ?
+            Label : CONDITION
+              [
+              Label : INDEX
+                'c'
+              Label : VARIABLE
+                $b
+            Label : THEN
+              'true'
+            Label : ELSE
+              'false'
         Label : CONCAT
           
 
 D
         Label : CONCAT
           ${
-        Label : CONCAT
-          [
-          Label : INDEX
-            'f'
-          Label : VARIABLE
-            $e
-        Label : CONCAT
-          ?
-        Label : CONCAT
-          'true'
-        Label : CONCAT
-          :
-        Label : CONCAT
-          'false'
-        Label : CONCAT
-          }
+          Label : NAME
+            ?
+            Label : CONDITION
+              [
+              Label : INDEX
+                'f'
+              Label : VARIABLE
+                $e
+            Label : THEN
+              'true'
+            Label : ELSE
+              'false'
         Label : CONCAT
           
 

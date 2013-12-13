@@ -10,9 +10,9 @@ Label : CODE
         void
         Label : ARGUMENT
           =>
-          Label : KEY
-            1
           Label : VALUE
             2
+          Label : KEY
+            1
     Label : LEFT
       $a

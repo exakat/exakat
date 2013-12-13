@@ -7,28 +7,6 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
-        1
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            2
-          Label : LEFT
-            $b
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
         3
     Label : THEN
       {
@@ -50,3 +28,25 @@ Label : CODE
             4
           Label : LEFT
             $d
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        1
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $b

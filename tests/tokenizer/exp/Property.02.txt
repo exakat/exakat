@@ -4,7 +4,7 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
-    Label : PROPERTY
-      b
     Label : OBJECT
       $x
+    Label : PROPERTY
+      b

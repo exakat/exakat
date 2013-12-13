@@ -22,18 +22,18 @@ Label : CODE
                     1
                   Label : LEFT
                     ->
-                    Label : PROPERTY
-                      month
                     Label : OBJECT
                       $a
+                    Label : PROPERTY
+                      month
                 Label : ARGUMENT
                   0
                 Label : ARGUMENT
                   ->
-                  Label : PROPERTY
-                    year
                   Label : OBJECT
                     $b
+                  Label : PROPERTY
+                    year
                 Label : ARGUMENT
                   0
                 Label : ARGUMENT

@@ -20,10 +20,10 @@ Label : CODE
             void
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          Void
         Label : DEFINE
           $a
+        Label : VALUE
+          Void
         Label : VAR
           var
       Label : ELEMENT

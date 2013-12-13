@@ -20,12 +20,12 @@ Label : CODE
           $g
       Label : ARGUMENT
         ->
-        Label : OBJECT
-          $this
         Label : METHOD
           h
           Label : ARGUMENTS
             void
+        Label : OBJECT
+          $this
       Label : ARGUMENT
         ::
         Label : CLASS
@@ -42,9 +42,9 @@ Label : CODE
           f
       Label : ARGUMENT
         ->
-        Label : PROPERTY
-          c
         Label : OBJECT
           $this
+        Label : PROPERTY
+          c
       Label : ARGUMENT
         "b"

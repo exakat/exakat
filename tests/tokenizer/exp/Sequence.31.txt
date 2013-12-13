@@ -2,12 +2,12 @@
 
 Label : CODE
   function
+  Label : NAME
+    a
   Label : ARGUMENTS
     void
     Label : ARGUMENT
       $b
-  Label : NAME
-    a
   Label : BLOCK
     {
     Label : CODE

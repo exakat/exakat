@@ -13,20 +13,16 @@ Label : CODE
           A 
         Label : CONCAT
           {
-        Label : CONCAT
-          $a
-        Label : CONCAT
-          ::
-        Label : CONCAT
-          b
-        Label : CONCAT
-          (
-        Label : CONCAT
-          'c'
-        Label : CONCAT
-          )
-        Label : CONCAT
-          }
+          Label : NAME
+            ::
+            Label : CLASS
+              $a
+            Label : METHOD
+              b
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'c'
         Label : CONCAT
            B
 

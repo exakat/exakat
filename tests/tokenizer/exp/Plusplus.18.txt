@@ -6,13 +6,13 @@ Label : CODE
     --
     Label : POSTPLUSPLUS
       ->
-      Label : PROPERTY
-        b
       Label : OBJECT
         $a
+      Label : PROPERTY
+        b
   Label : ELEMENT
     global
+    Label : NAME
+      $a
     Label : VALUE
       void
-    Label : DEFINE
-      $a

@@ -10,11 +10,11 @@ Label : CODE
       ;
       Label : ELEMENT
         const
+        Label : NAME
+          a
         Label : VALUE
           ::
           Label : CLASS
             b
           Label : CONSTANT
             c
-        Label : NAME
-          a

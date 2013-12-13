@@ -3,28 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        $a
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            c
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                'd'
-              Label : ARGUMENT
-                $e
-          Label : LEFT
-            $b
-  Label : ELEMENT
     ->
     Label : OBJECT
       ::
@@ -48,8 +26,6 @@ Label : CODE
             void
             Label : ARGUMENT
               =>
-              Label : KEY
-                'g'
               Label : VALUE
                 .
                 Label : CONCAT
@@ -58,3 +34,27 @@ Label : CODE
                   H
                 Label : CONCAT
                   $j
+              Label : KEY
+                'g'
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            c
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                'd'
+              Label : ARGUMENT
+                $e
+          Label : LEFT
+            $b

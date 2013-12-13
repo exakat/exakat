@@ -8,12 +8,6 @@ Label : CODE
       {
       Label : CODE
         void
-  Label : FINAL
-    <
-    Label : RIGHT
-      $f
-    Label : LEFT
-      $e
   Label : INIT
     =
     Label : RIGHT
@@ -34,6 +28,12 @@ Label : CODE
         0
     Label : LEFT
       $a
+  Label : FINAL
+    <
+    Label : RIGHT
+      $f
+    Label : LEFT
+      $e
   Label : INCREMENT
     ++
     Label : PREPLUSPLUS

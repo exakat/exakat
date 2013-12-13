@@ -21,8 +21,6 @@ Label : CODE
               A
   Label : ELEMENT
     ->
-    Label : OBJECT
-      $this
     Label : METHOD
       a
       Label : ARGUMENTS
@@ -33,6 +31,8 @@ Label : CODE
             B
           Label : CONSTANT
             D
+    Label : OBJECT
+      $this
   Label : ELEMENT
     try
     Label : CODE
@@ -57,12 +57,6 @@ Label : CODE
             ;
             Label : ELEMENT
               ->
-              Label : OBJECT
-                ->
-                Label : PROPERTY
-                  f
-                Label : OBJECT
-                  $this
               Label : METHOD
                 g
                 Label : ARGUMENTS
@@ -73,6 +67,12 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         'h'
+              Label : OBJECT
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  f
     Label : CATCH
       catch
       Label : CLASS
@@ -83,12 +83,6 @@ Label : CODE
           ;
           Label : ELEMENT
             ->
-            Label : OBJECT
-              ->
-              Label : PROPERTY
-                a
-              Label : OBJECT
-                $d
             Label : METHOD
               e
               Label : ARGUMENTS
@@ -109,6 +103,12 @@ Label : CODE
                         'i'
                       Label : VARIABLE
                         $h
+            Label : OBJECT
+              ->
+              Label : OBJECT
+                $d
+              Label : PROPERTY
+                a
           Label : ELEMENT
             if
             Label : CONDITION
@@ -121,12 +121,12 @@ Label : CODE
                 ;
                 Label : ELEMENT
                   ->
-                  Label : OBJECT
-                    $x
                   Label : METHOD
                     d
                     Label : ARGUMENTS
                       void
+                  Label : OBJECT
+                    $x
       Label : VARIABLE
         $e
     Label : CATCH

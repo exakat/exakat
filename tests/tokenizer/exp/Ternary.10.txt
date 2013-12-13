@@ -12,13 +12,13 @@ Label : CODE
         2
       Label : ELSE
         ->
-        Label : OBJECT
-          $b
         Label : METHOD
           c
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'd'
+        Label : OBJECT
+          $b
     Label : LEFT
       $a

@@ -10,80 +10,80 @@ Label : CODE
         ,
         Label : ARGUMENT
           =>
-          Label : KEY
-            ::
-            Label : CLASS
-              Q
-            Label : PROPERTY
-              $r
           Label : VALUE
             ::
             Label : CLASS
               S
             Label : PROPERTY
               $t
-        Label : ARGUMENT
-          =>
           Label : KEY
             ::
             Label : CLASS
-              I
-            Label : CONSTANT
-              J
+              Q
+            Label : PROPERTY
+              $r
+        Label : ARGUMENT
+          =>
           Label : VALUE
             ::
             Label : CLASS
               K
             Label : CONSTANT
               L
+          Label : KEY
+            ::
+            Label : CLASS
+              I
+            Label : CONSTANT
+              J
         Label : ARGUMENT
           =>
-          Label : KEY
-            ->
-            Label : PROPERTY
-              b
-            Label : OBJECT
-              $a
           Label : VALUE
             ->
-            Label : PROPERTY
-              d
             Label : OBJECT
               $c
-        Label : ARGUMENT
-          =>
+            Label : PROPERTY
+              d
           Label : KEY
             ->
             Label : OBJECT
-              $e
-            Label : METHOD
-              f
-              Label : ARGUMENTS
-                void
+              $a
+            Label : PROPERTY
+              b
+        Label : ARGUMENT
+          =>
           Label : VALUE
             ->
-            Label : OBJECT
-              $g
             Label : METHOD
               h
               Label : ARGUMENTS
                 void
-        Label : ARGUMENT
-          =>
+            Label : OBJECT
+              $g
           Label : KEY
-            ::
-            Label : CLASS
-              M
+            ->
             Label : METHOD
-              N
+              f
               Label : ARGUMENTS
                 void
+            Label : OBJECT
+              $e
+        Label : ARGUMENT
+          =>
           Label : VALUE
             ::
             Label : CLASS
               O
             Label : METHOD
               P
+              Label : ARGUMENTS
+                void
+          Label : KEY
+            ::
+            Label : CLASS
+              M
+            Label : METHOD
+              N
               Label : ARGUMENTS
                 void
         Label : ARGUMENT

@@ -26,14 +26,14 @@ Label : CODE
         ;
         Label : ELEMENT
           Ppp
-          Label : VALUE
-            'f'
           Label : DEFINE
             $y
-          Label : STATIC
-            static
+          Label : VALUE
+            'f'
           Label : PUBLIC
             public
+          Label : STATIC
+            static
         Label : ELEMENT
           function
           Label : ARGUMENTS

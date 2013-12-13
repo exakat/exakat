@@ -8,16 +8,10 @@ Label : CODE
       1
     Label : LEFT
       ->
-      Label : PROPERTY
-        e
       Label : OBJECT
         ->
-        Label : PROPERTY
-          d
         Label : OBJECT
           ->
-          Label : PROPERTY
-            c
           Label : OBJECT
             ::
             Label : CLASS
@@ -26,52 +20,56 @@ Label : CODE
               b
               Label : ARGUMENTS
                 void
+          Label : PROPERTY
+            c
+        Label : PROPERTY
+          d
+      Label : PROPERTY
+        e
   Label : ELEMENT
     =
     Label : RIGHT
       3
     Label : LEFT
       ->
-      Label : PROPERTY
-        d
       Label : OBJECT
         ->
-        Label : PROPERTY
-          c
         Label : OBJECT
           ->
-          Label : PROPERTY
-            b
           Label : OBJECT
             $A
+          Label : PROPERTY
+            b
+        Label : PROPERTY
+          c
+      Label : PROPERTY
+        d
   Label : ELEMENT
     =
     Label : RIGHT
       2
     Label : LEFT
       ->
-      Label : PROPERTY
-        d
       Label : OBJECT
         ->
-        Label : PROPERTY
-          c
         Label : OBJECT
           ->
-          Label : OBJECT
-            $A
           Label : METHOD
             b
             Label : ARGUMENTS
               void
+          Label : OBJECT
+            $A
+        Label : PROPERTY
+          c
+      Label : PROPERTY
+        d
   Label : ELEMENT
     =
     Label : RIGHT
       1
     Label : LEFT
       ->
-      Label : PROPERTY
-        c
       Label : OBJECT
         ::
         Label : CLASS
@@ -80,14 +78,14 @@ Label : CODE
           b
           Label : ARGUMENTS
             void
+      Label : PROPERTY
+        c
   Label : ELEMENT
     =
     Label : RIGHT
       1
     Label : LEFT
       ->
-      Label : PROPERTY
-        c
       Label : OBJECT
         ::
         Label : CLASS
@@ -96,3 +94,5 @@ Label : CODE
           b
           Label : ARGUMENTS
             void
+      Label : PROPERTY
+        c

@@ -10,11 +10,11 @@ Label : CODE
       ;
       Label : ELEMENT
         Ppp
+        Label : DEFINE
+          $x
         Label : VALUE
           array
           Label : ARGUMENTS
             void
-        Label : DEFINE
-          $x
         Label : VAR
           var

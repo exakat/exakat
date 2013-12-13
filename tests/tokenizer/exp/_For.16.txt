@@ -7,28 +7,28 @@ Label : CODE
       ;
       Label : ELEMENT
         ->
-        Label : OBJECT
-          $e
         Label : METHOD
           f
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $g
+        Label : OBJECT
+          $e
       Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ->
-            Label : OBJECT
-              $h
             Label : METHOD
               i
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   'j'
+            Label : OBJECT
+              $h
     Label : FINAL
       <
       Label : RIGHT
@@ -51,10 +51,10 @@ Label : CODE
             void
             Label : ARGUMENT
               ->
-              Label : PROPERTY
-                d
               Label : OBJECT
                 $c
+              Label : PROPERTY
+                d
         Label : LEFT
           $n
     Label : INCREMENT

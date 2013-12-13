@@ -12,18 +12,18 @@ Label : CODE
           ,
           Label : ARGUMENT
             ->
-            Label : PROPERTY
-              d
             Label : OBJECT
               $this
+            Label : PROPERTY
+              d
           Label : ARGUMENT
             ->
-            Label : OBJECT
-              $e
             Label : METHOD
               f
               Label : ARGUMENTS
                 void
+            Label : OBJECT
+              $e
       Label : LEFT
         ===
         Label : RIGHT
@@ -32,10 +32,10 @@ Label : CODE
             &
             Label : RIGHT
               ->
-              Label : PROPERTY
-                c
               Label : OBJECT
                 $this
+              Label : PROPERTY
+                c
             Label : LEFT
               ::
               Label : CLASS

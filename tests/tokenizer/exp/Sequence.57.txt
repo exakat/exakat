@@ -15,6 +15,20 @@ Label : CODE
     Label : CODE
       ;
       Label : ELEMENT
+        new
+        Label : NEW
+          $a
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              (array)
+              Label : CAST
+                (
+                Label : CODE
+                  $c
+      Label : ELEMENT
         if
         Label : CONDITION
           (
@@ -38,17 +52,3 @@ Label : CODE
               ++
               Label : POSTPLUSPLUS
                 $c
-      Label : ELEMENT
-        new
-        Label : NEW
-          $a
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $b
-            Label : ARGUMENT
-              (array)
-              Label : CAST
-                (
-                Label : CODE
-                  $c

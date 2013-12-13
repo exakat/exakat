@@ -2,7 +2,7 @@
 
 Label : CODE
   function
-  Label : ARGUMENT
+  Label : ARGUMENTS
     ,
     Label : ARGUMENT
       $b
@@ -12,21 +12,21 @@ Label : CODE
       $c
   Label : NAME
     lambda
-  Label : USE
-    void
-    Label : ARGUMENT
-      $d
-  Label : Block
+  Label : BLOCK
     {
     Label : CODE
       ;
       Label : ELEMENT
         ->
-        Label : OBJECT
-          $e
         Label : METHOD
           f
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $g
+        Label : OBJECT
+          $e
+  Label : USE
+    void
+    Label : ARGUMENT
+      $d

@@ -11,4 +11,4 @@ Label : CODE
       Label : LEFT
         $i
     Label : LOOP
-      void2
+      void

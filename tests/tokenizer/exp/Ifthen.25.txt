@@ -14,10 +14,10 @@ Label : CODE
     Block With if/elseif
     Label : CODE
       foreach
-      Label : SOURCE
-        $x
       Label : VALUE
         $y
+      Label : SOURCE
+        $x
       Label : LOOP
         {
         Label : CODE

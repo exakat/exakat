@@ -9,4 +9,4 @@ Label : CODE
     Label : SOURCE
       $a
     Label : LOOP
-      void2
+      void

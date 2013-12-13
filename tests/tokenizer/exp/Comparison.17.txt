@@ -28,7 +28,7 @@ Label : CODE
           @
           Label : AT
             ->
-            Label : PROPERTY
-              e
             Label : OBJECT
               $d
+            Label : PROPERTY
+              e

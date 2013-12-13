@@ -6,7 +6,7 @@ Label : CODE
     new
     Label : NEW
       ->
-      Label : PROPERTY
-        y
       Label : OBJECT
         $x
+      Label : PROPERTY
+        y

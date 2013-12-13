@@ -10,39 +10,39 @@ Label : CODE
       ;
       Label : ELEMENT
         Ppp
-        Label : VALUE
-          Void
         Label : DEFINE
           $x
+        Label : VALUE
+          Void
         Label : VAR
           var
       Label : ELEMENT
         const
-        Label : VALUE
-          5
         Label : NAME
           e
+        Label : VALUE
+          5
       Label : ELEMENT
         const
-        Label : VALUE
-          4
         Label : NAME
           d
+        Label : VALUE
+          4
       Label : ELEMENT
         const
-        Label : VALUE
-          2
         Label : NAME
           b
+        Label : VALUE
+          2
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           a
+        Label : VALUE
+          1
       Label : ELEMENT
         const
-        Label : VALUE
-          3
         Label : NAME
           c
+        Label : VALUE
+          3

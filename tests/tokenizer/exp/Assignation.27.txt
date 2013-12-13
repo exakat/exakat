@@ -14,7 +14,7 @@ Label : CODE
           $b
     Label : LEFT
       ->
-      Label : PROPERTY
-        a
       Label : OBJECT
         $this
+      Label : PROPERTY
+        a

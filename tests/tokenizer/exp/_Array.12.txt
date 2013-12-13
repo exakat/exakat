@@ -34,14 +34,14 @@ Label : CODE
         .
         Label : CONCAT
           ->
-          Label : OBJECT
-            $c
           Label : METHOD
             d
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 $e
+          Label : OBJECT
+            $c
         Label : CONCAT
           "f"
       Label : VARIABLE

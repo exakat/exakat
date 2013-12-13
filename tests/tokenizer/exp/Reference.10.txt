@@ -8,13 +8,13 @@ Label : CODE
       &
       Label : REFERENCE
         ->
-        Label : OBJECT
-          $y
         Label : METHOD
           c
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'd'
+        Label : OBJECT
+          $y
     Label : LEFT
       $x

@@ -24,12 +24,12 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       ->
-                      Label : OBJECT
-                        $j
                       Label : METHOD
                         k
                         Label : ARGUMENTS
                           void
+                      Label : OBJECT
+                        $j
                 Label : CONCAT
                   'h'
                 Label : CONCAT
@@ -66,12 +66,12 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       ->
-                      Label : OBJECT
-                        $j
                       Label : METHOD
                         k
                         Label : ARGUMENTS
                           void
+                      Label : OBJECT
+                        $j
                 Label : CONCAT
                   'h'
                 Label : CONCAT

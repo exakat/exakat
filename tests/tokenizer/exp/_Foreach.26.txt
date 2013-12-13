@@ -20,10 +20,10 @@ Label : CODE
       $c
     Label : SOURCE
       ->
-      Label : PROPERTY
-        b
       Label : OBJECT
         $a
+      Label : PROPERTY
+        b
     Label : LOOP
       Block With Foreach
       Label : CODE
@@ -36,14 +36,14 @@ Label : CODE
               void
               Label : ARGUMENT
                 ->
-                Label : PROPERTY
-                  f
                 Label : OBJECT
                   ->
-                  Label : PROPERTY
-                    e
                   Label : OBJECT
                     $d
+                  Label : PROPERTY
+                    e
+                Label : PROPERTY
+                  f
         Label : THEN
           Block With if/elseif
           Label : CODE
@@ -56,13 +56,13 @@ Label : CODE
                   $i
                 Label : ARGUMENT
                   ->
-                  Label : PROPERTY
-                    l
                   Label : OBJECT
                     ->
-                    Label : PROPERTY
-                      k
                     Label : OBJECT
                       $j
+                    Label : PROPERTY
+                      k
+                  Label : PROPERTY
+                    l
             Label : LEFT
               $g

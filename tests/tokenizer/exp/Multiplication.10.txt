@@ -2,7 +2,7 @@
 
 Label : CODE
   /
-  Label : LEFT
-    '2'
   Label : RIGHT
     34
+  Label : LEFT
+    '2'

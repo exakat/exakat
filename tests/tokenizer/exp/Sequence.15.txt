@@ -4,22 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     global
-    Label : VALUE
-      void
     Label : NAME
       $c
-  Label : ELEMENT
-    global
     Label : VALUE
       void
+  Label : ELEMENT
+    global
     Label : NAME
       $a
-  Label : ELEMENT
-    global
     Label : VALUE
       void
+  Label : ELEMENT
+    global
     Label : NAME
       $b
+    Label : VALUE
+      void
   Label : ELEMENT
     class
     Label : NAME
@@ -30,33 +30,33 @@ Label : CODE
         ;
         Label : ELEMENT
           Ppp
-          Label : VALUE
-            void
           Label : NAME
             $x
+          Label : VALUE
+            void
           Label : PROTECTED
             protected
         Label : ELEMENT
           Ppp
-          Label : VALUE
-            3
           Label : NAME
             $z
+          Label : VALUE
+            3
           Label : PROTECTED
             protected
         Label : ELEMENT
           Ppp
-          Label : VALUE
-            void
           Label : NAME
             $a
+          Label : VALUE
+            void
           Label : PROTECTED
             protected
         Label : ELEMENT
           Ppp
-          Label : VALUE
-            void
           Label : NAME
             $y
+          Label : VALUE
+            void
           Label : PROTECTED
             protected
