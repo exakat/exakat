@@ -15,7 +15,7 @@ $log = new Log('fullcode');
 $client = new Client();
 
 $offset = 0000;
-$limit = 300000;
+$limit = 900000;
 $end = $offset + $limit;
 
 print "Work on $limit tokens\n";
@@ -26,7 +26,7 @@ $result = query("g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['
 $tokens = array( 'Integer', 'Float', '_Function', 'SequenceCaseDefault', '_Global', 'String',  'Real', "Void", 'Identifier', '_Return', 'Multiplication', 
                  'Variable', 'Concatenation', 'Comparison', '_Break', 'Magicconstant', '_Throw', 
                  'Parenthesis', 'Addition', 'Arguments', 'Functioncall', 'Parenthesis', 'Assignation', '_Case', '_Default', '_Include', 'Noscream', 
-                 'Preplusplus', 'Postplusplus', 'Sign', 'Boolean', '_Array', '_Static', '_Final', 'Not', 'Reference', 'Keyvalue', '_Ppp', 
+                 'Preplusplus', 'Bitshift', 'Postplusplus', 'Sign', 'Boolean', '_Array', '_Static', '_Final', 'Not', 'Reference', 'Keyvalue', '_Ppp', 
                  'Property', 'Methodcall', 'Logical', 'Ternary', 'Arrayappend', 'Staticmethodcall', 'Staticproperty', 'Staticconstant', 
                  '_New', 'Cast', 'Sequence', 'Block', 'Ifthen', '_Foreach', '_While', '_Abstract', '_Continue', 'RawString', 'Phpcode', 
                  '_For', '_Class', '_Switch', 'Nsname', '_Namespace', '_Clone', 'Typehint', '_Const', '_Try', '_Use', '_Interface', '_Instanceof',
