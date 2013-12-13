@@ -30,7 +30,7 @@ $exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl',  ),
               'document' => array('doc', 'xls'),
               'archives' => array('tgz', 'bz2' ,'z', 'zip', 'gz', ),
               'audio' => array('mp3',),
-              'data' => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install', ),
+              'data' => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install', 'sqlite',),
               'prog' => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt',),
              );
              
@@ -38,23 +38,30 @@ $exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl',  ),
 foreach($files as $file) { 
     if (is_dir($file)) { continue; }
 
-    $found = false;
-    foreach($exts as $e => $ext) {
-        if (preg_match('#\.('.join('|', $ext).')$#', $file)) {
-            @$stats[$e]++;
-            $found = true;
-            break 1;
+    if (strpos(basename($file), '.') === false) {
+        @$stats['none']++;
+    } else {
+        $found = false;
+        foreach($exts as $e => $ext) {
+            if (preg_match('#\.('.join('|', $ext).')$#', $file)) {
+                @$stats[$e]++;
+                $found = true;
+                break 1;
+            }
         }
-    }
-    
-    if (!$found) {  
-        @$stats['unknown']++; 
-        $unknown[] = basename($file);
+
+        if (!$found) {  
+            @$stats['unknown']++; 
+            $unknown[] = basename($file);
+        }
+
     }
 }
 
 print_r($stats);
-print_r($unknown);
+if ($unknown) {
+    print_r($unknown);
+}
 
 function glob_recursive($dir, $prefix = '') {
   $dir = rtrim($dir, '\\/');
