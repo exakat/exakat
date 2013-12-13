@@ -38,7 +38,7 @@ shell_exec('php bin/build_root; php bin/tokenizer');
 print "Project tokenized\n";
 
 shell_exec('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
-shell_exec('php bin/analyze');
+shell_exec('php bin/analyze '.$project);
 print "Project analyzed\n";
 
 shell_exec('php bin/fullcode');
