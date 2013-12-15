@@ -266,11 +266,9 @@ function process_file($filename, $log_file) {
                                               ->setProperty('atom', 'Void')
                                               ->setProperty('modifiedBy', 'bin/load1')
                                               ->save();
-                $classNode->relateTo($T[$Tid]);
 
                 $to_index = false;
             } elseif (token_name($token[0]) == 'T_CLOSE_TAG' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  && token_name($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
-
                 $Tid++;
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
