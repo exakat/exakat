@@ -48,7 +48,7 @@ Label : CODE
             Void
           Label : DEFINE
             $g
-          Label : STATIC
-            static
           Label : PROTECTED
             protected
+          Label : STATIC
+            static

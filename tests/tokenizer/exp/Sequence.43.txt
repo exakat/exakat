@@ -4,34 +4,24 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      [
-      Label : INDEX
-        'n'
-      Label : VARIABLE
-        $m
     Label : LEFT
       [
       Label : INDEX
         'l'
       Label : VARIABLE
         $k
+    Label : RIGHT
+      [
+      Label : INDEX
+        'n'
+      Label : VARIABLE
+        $m
   Label : ELEMENT
     if
     Label : CONDITION
       (
       Label : CODE
         &&
-        Label : RIGHT
-          is_array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'd'
-              Label : VARIABLE
-                $c
         Label : LEFT
           isset
           Label : ARGUMENTS
@@ -42,35 +32,45 @@ Label : CODE
                 'b'
               Label : VARIABLE
                 $a
+        Label : RIGHT
+          is_array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'd'
+              Label : VARIABLE
+                $c
     Label : THEN
       Block With if/elseif
       Label : CODE
         foreach
+        Label : VALUE
+          =>
+          Label : KEY
+            $g
+          Label : VALUE
+            $h
         Label : SOURCE
           [
           Label : INDEX
             'f'
           Label : VARIABLE
             $e
-        Label : VALUE
-          =>
-          Label : VALUE
-            $h
-          Label : KEY
-            $g
         Label : LOOP
           {
           Label : CODE
             ;
             Label : ELEMENT
               =
-              Label : RIGHT
-                2
               Label : LEFT
                 $j
+              Label : RIGHT
+                2
             Label : ELEMENT
               =
-              Label : RIGHT
-                1
               Label : LEFT
                 $i
+              Label : RIGHT
+                1

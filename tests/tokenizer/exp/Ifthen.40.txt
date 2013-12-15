@@ -8,10 +8,10 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          1
         Label : LEFT
           $l
+        Label : RIGHT
+          1
     Label : THEN
       {
       Label : CODE
@@ -30,10 +30,10 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          2
         Label : LEFT
           $l
+        Label : RIGHT
+          2
     Label : THEN
       {
       Label : CODE
@@ -52,10 +52,10 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          3
         Label : LEFT
           $l
+        Label : RIGHT
+          3
     Label : THEN
       {
       Label : CODE
@@ -64,10 +64,10 @@ Label : CODE
           (
           Label : CODE
             =
-            Label : RIGHT
-              1
             Label : LEFT
               $b
+            Label : RIGHT
+              1
         Label : THEN
           {
           Label : CODE
@@ -82,10 +82,10 @@ Label : CODE
             (
             Label : CODE
               =
-              Label : RIGHT
-                2
               Label : LEFT
                 $b
+              Label : RIGHT
+                2
           Label : THEN
             {
             Label : CODE

@@ -2,12 +2,12 @@
 
 Label : CODE
   function
-  Label : ARGUMENTS
-    void
   Label : NAME
     &
     Label : REFERENCE
       getValue
+  Label : ARGUMENTS
+    void
   Label : BLOCK
     {
     Label : CODE

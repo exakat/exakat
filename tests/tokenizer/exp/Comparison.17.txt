@@ -6,8 +6,6 @@ Label : CODE
     (
     Label : CODE
       !=
-      Label : RIGHT
-        'c'
       Label : LEFT
         @
         Label : AT
@@ -16,19 +14,21 @@ Label : CODE
             'b'
           Label : VARIABLE
             $a
+      Label : RIGHT
+        'c'
   Label : THEN
     {
     Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          'f'
         Label : LEFT
           @
           Label : AT
             ->
-            Label : OBJECT
-              $d
             Label : PROPERTY
               e
+            Label : OBJECT
+              $d
+        Label : RIGHT
+          'f'

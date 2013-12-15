@@ -6,6 +6,14 @@ Label : CODE
     (
     Label : CODE
       =
+      Label : LEFT
+        !
+        Label : NOT
+          ->
+          Label : PROPERTY
+            a
+          Label : OBJECT
+            $this
       Label : RIGHT
         b
         Label : ARGUMENTS
@@ -16,14 +24,6 @@ Label : CODE
             $c
           Label : ARGUMENT
             $e
-      Label : LEFT
-        !
-        Label : NOT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            a
   Label : THEN
     {
     Label : CODE

@@ -4,10 +4,10 @@ Label : CODE
   foreach
   Label : VALUE
     =>
-    Label : VALUE
-      $c
     Label : KEY
       $b
+    Label : VALUE
+      $c
   Label : SOURCE
     $a
   Label : LOOP
@@ -18,6 +18,16 @@ Label : CODE
         (
         Label : CODE
           &&
+          Label : LEFT
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'e'
+                Label : VARIABLE
+                  $d
           Label : RIGHT
             !
             Label : NOT
@@ -30,16 +40,6 @@ Label : CODE
                   (array)
                   Label : CAST
                     $h
-          Label : LEFT
-            isset
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'e'
-                Label : VARIABLE
-                  $d
       Label : THEN
         Block With if/elseif
         Label : CODE

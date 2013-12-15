@@ -4,6 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     &&
+    Label : LEFT
+      !
+      Label : NOT
+        $a
     Label : RIGHT
       --
       Label : POSTPLUSPLUS
@@ -12,7 +16,3 @@ Label : CODE
           'c'
         Label : VARIABLE
           $b
-    Label : LEFT
-      !
-      Label : NOT
-        $a

@@ -6,34 +6,34 @@ Label : CODE
     (
     Label : CODE
       >
-      Label : RIGHT
-        -
-        Label : RIGHT
-          *
-          Label : RIGHT
-            1
-          Label : LEFT
-            [
-            Label : INDEX
-              'g'
-            Label : VARIABLE
-              ->
-              Label : OBJECT
-                $e
-              Label : PROPERTY
-                f
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $c
-          Label : PROPERTY
-            d
       Label : LEFT
         [
         Label : INDEX
           'b'
         Label : VARIABLE
           $a
+      Label : RIGHT
+        -
+        Label : LEFT
+          ->
+          Label : PROPERTY
+            d
+          Label : OBJECT
+            $c
+        Label : RIGHT
+          *
+          Label : LEFT
+            [
+            Label : INDEX
+              'g'
+            Label : VARIABLE
+              ->
+              Label : PROPERTY
+                f
+              Label : OBJECT
+                $e
+          Label : RIGHT
+            1
   Label : THEN
     {
     Label : CODE

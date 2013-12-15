@@ -16,6 +16,8 @@ Label : CODE
             ;
             Label : ELEMENT
               =
+              Label : LEFT
+                $b
               Label : RIGHT
                 .
                 Label : CONCAT
@@ -24,30 +26,28 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       ->
+                      Label : OBJECT
+                        $j
                       Label : METHOD
                         k
                         Label : ARGUMENTS
                           void
-                      Label : OBJECT
-                        $j
                 Label : CONCAT
                   'h'
                 Label : CONCAT
                   'l'
-              Label : LEFT
-                $b
             Label : ELEMENT
               =
-              Label : RIGHT
-                'n'
               Label : LEFT
                 $m
+              Label : RIGHT
+                'n'
             Label : ELEMENT
               =
-              Label : RIGHT
-                'a'
               Label : LEFT
                 $a
+              Label : RIGHT
+                'a'
         Label : CASE
           "b"
       Label : ELEMENT
@@ -58,6 +58,8 @@ Label : CODE
             ;
             Label : ELEMENT
               =
+              Label : LEFT
+                $b
               Label : RIGHT
                 .
                 Label : CONCAT
@@ -66,30 +68,28 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       ->
+                      Label : OBJECT
+                        $j
                       Label : METHOD
                         k
                         Label : ARGUMENTS
                           void
-                      Label : OBJECT
-                        $j
                 Label : CONCAT
                   'h'
                 Label : CONCAT
                   'l'
-              Label : LEFT
-                $b
             Label : ELEMENT
               =
-              Label : RIGHT
-                'n'
               Label : LEFT
                 $m
+              Label : RIGHT
+                'n'
             Label : ELEMENT
               =
-              Label : RIGHT
-                'a'
               Label : LEFT
                 $a
+              Label : RIGHT
+                'a'
       Label : ELEMENT
         case
         Label : CODE

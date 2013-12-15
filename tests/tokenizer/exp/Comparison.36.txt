@@ -5,14 +5,14 @@ Label : CODE
     (
     Label : CODE
       ===
+      Label : LEFT
+        false
       Label : RIGHT
         include_once
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $b
-      Label : LEFT
-        false
   Label : THEN
     {
     Label : CODE

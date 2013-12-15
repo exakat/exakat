@@ -24,8 +24,6 @@ Label : CODE
               'g'
       Label : CASE
         ==
-        Label : RIGHT
-          'c'
         Label : LEFT
           substr
           Label : ARGUMENTS
@@ -36,3 +34,5 @@ Label : CODE
               $b
             Label : ARGUMENT
               1
+        Label : RIGHT
+          'c'

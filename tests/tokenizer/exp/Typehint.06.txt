@@ -2,6 +2,8 @@
 
 Label : CODE
   function
+  Label : NAME
+    x
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -18,8 +20,6 @@ Label : CODE
         $a
     Label : ARGUMENT
       $c
-  Label : NAME
-    x
   Label : BLOCK
     {
     Label : CODE

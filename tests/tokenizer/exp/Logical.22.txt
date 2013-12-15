@@ -6,20 +6,22 @@ Label : CODE
     (
     Label : CODE
       &&
+      Label : LEFT
+        $a
       Label : RIGHT
         is_array
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $b
-      Label : LEFT
-        $a
   Label : THEN
     {
     Label : CODE
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $h
         Label : RIGHT
           str_replace
           Label : ARGUMENTS
@@ -30,16 +32,14 @@ Label : CODE
               $i
             Label : ARGUMENT
               $k
-        Label : LEFT
-          $h
       Label : ELEMENT
         foreach
         Label : VALUE
           =>
-          Label : VALUE
-            $v
           Label : KEY
             $k
+          Label : VALUE
+            $v
         Label : SOURCE
           $e
         Label : LOOP
@@ -48,14 +48,18 @@ Label : CODE
             ;
             Label : ELEMENT
               =
-              Label : RIGHT
-                $v
               Label : LEFT
                 [
                 Label : VARIABLE
                   $g
+              Label : RIGHT
+                $v
             Label : ELEMENT
               =
+              Label : LEFT
+                [
+                Label : VARIABLE
+                  $f
               Label : RIGHT
                 .
                 Label : CONCAT
@@ -64,19 +68,15 @@ Label : CODE
                   '{'
                 Label : CONCAT
                   '}'
-              Label : LEFT
-                [
-                Label : VARIABLE
-                  $f
       Label : ELEMENT
         =
+        Label : LEFT
+          $c
         Label : RIGHT
           =
+          Label : LEFT
+            $d
           Label : RIGHT
             array
             Label : ARGUMENTS
               void
-          Label : LEFT
-            $d
-        Label : LEFT
-          $c

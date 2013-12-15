@@ -10,7 +10,7 @@ Label : CODE
     Block With Foreach
     Label : CODE
       .=
-      Label : RIGHT
-        $d
       Label : LEFT
         $c
+      Label : RIGHT
+        $d

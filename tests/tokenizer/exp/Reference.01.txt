@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $y
     Label : RIGHT
       &
       Label : REFERENCE
         $x
-    Label : LEFT
-      $y

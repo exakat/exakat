@@ -14,8 +14,6 @@ Label : CODE
     Block With if/elseif
     Label : CODE
       =
-      Label : RIGHT
-        1
       Label : LEFT
         [
         Label : INDEX
@@ -30,12 +28,12 @@ Label : CODE
                 $e
         Label : VARIABLE
           $c
+      Label : RIGHT
+        1
   Label : ELSE
     Block With else
     Label : CODE
       =
-      Label : RIGHT
-        1
       Label : LEFT
         [
         Label : INDEX
@@ -46,3 +44,5 @@ Label : CODE
             $h
         Label : VARIABLE
           $g
+      Label : RIGHT
+        1

@@ -4,6 +4,12 @@ Label : CODE
   while
   Label : CONDITION
     <
+    Label : LEFT
+      ->
+      Label : PROPERTY
+        b
+      Label : OBJECT
+        $a
     Label : RIGHT
       ::
       Label : CLASS
@@ -24,23 +30,17 @@ Label : CODE
               f
               Label : ARGUMENTS
                 void
-    Label : LEFT
-      ->
-      Label : PROPERTY
-        b
-      Label : OBJECT
-        $a
   Label : LOOP
     {
     Label : CODE
       ;
       Label : ELEMENT
         +=
-        Label : RIGHT
-          1
         Label : LEFT
           ->
           Label : PROPERTY
             j
           Label : OBJECT
             $i
+        Label : RIGHT
+          1

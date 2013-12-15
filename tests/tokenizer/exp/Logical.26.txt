@@ -6,48 +6,48 @@ Label : CODE
     (
     Label : CODE
       ||
+      Label : LEFT
+        ==
+        Label : LEFT
+          $a
+        Label : RIGHT
+          $b
       Label : RIGHT
         (
         Label : CODE
           &&
-          Label : RIGHT
-            >
-            Label : RIGHT
-              4.1
-            Label : LEFT
-              ->
-              Label : METHOD
-                h
-                Label : ARGUMENTS
-                  void
-              Label : OBJECT
-                [
-                Label : INDEX
-                  'g'
-                Label : VARIABLE
-                  $f
           Label : LEFT
             >
-            Label : RIGHT
-              4.1
             Label : LEFT
               ->
-              Label : METHOD
-                e
-                Label : ARGUMENTS
-                  void
               Label : OBJECT
                 [
                 Label : INDEX
                   'd'
                 Label : VARIABLE
                   $c
-      Label : LEFT
-        ==
-        Label : RIGHT
-          $b
-        Label : LEFT
-          $a
+              Label : METHOD
+                e
+                Label : ARGUMENTS
+                  void
+            Label : RIGHT
+              4.1
+          Label : RIGHT
+            >
+            Label : LEFT
+              ->
+              Label : OBJECT
+                [
+                Label : INDEX
+                  'g'
+                Label : VARIABLE
+                  $f
+              Label : METHOD
+                h
+                Label : ARGUMENTS
+                  void
+            Label : RIGHT
+              4.1
   Label : THEN
     {
     Label : CODE

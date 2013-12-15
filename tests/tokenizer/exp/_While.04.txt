@@ -6,10 +6,10 @@ Label : CODE
     while
     Label : CONDITION
       ==
-      Label : RIGHT
-        2
       Label : LEFT
         $x
+      Label : RIGHT
+        2
     Label : LOOP
       {
       Label : CODE
@@ -26,44 +26,44 @@ Label : CODE
         ;
         Label : ELEMENT
           =
+          Label : LEFT
+            $c
           Label : RIGHT
             +
+            Label : LEFT
+              +
+              Label : LEFT
+                +
+                Label : LEFT
+                  +
+                  Label : LEFT
+                    1
+                  Label : RIGHT
+                    2
+                Label : RIGHT
+                  3
+              Label : RIGHT
+                4
             Label : RIGHT
               {
               Label : INDEX
                 4
               Label : VARIABLE
                 $y
-            Label : LEFT
-              +
-              Label : RIGHT
-                4
-              Label : LEFT
-                +
-                Label : RIGHT
-                  3
-                Label : LEFT
-                  +
-                  Label : RIGHT
-                    2
-                  Label : LEFT
-                    1
-          Label : LEFT
-            $c
         Label : ELEMENT
           =
-          Label : RIGHT
-            b
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $c
           Label : LEFT
             [
             Label : INDEX
               3
             Label : VARIABLE
               $x
+          Label : RIGHT
+            b
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c
     Label : ELSE
       {
       Label : CODE

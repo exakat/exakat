@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       [
       Label : INDEX
@@ -18,5 +20,3 @@ Label : CODE
           b
         Label : PROPERTY
           $c
-    Label : LEFT
-      $a

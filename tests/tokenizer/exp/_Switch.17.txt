@@ -22,18 +22,18 @@ Label : CODE
               ;
               Label : ELEMENT
                 =
-                Label : RIGHT
-                  2
                 Label : LEFT
                   $j
+                Label : RIGHT
+                  2
               Label : ELEMENT
                 foreach
                 Label : VALUE
                   =>
-                  Label : VALUE
-                    $c
                   Label : KEY
                     $b
+                  Label : VALUE
+                    $c
                 Label : SOURCE
                   $a
                 Label : LOOP
@@ -44,38 +44,38 @@ Label : CODE
                       (
                       Label : CODE
                         =
-                        Label : RIGHT
-                          $e
                         Label : LEFT
                           $d
+                        Label : RIGHT
+                          $e
                     Label : THEN
                       {
                       Label : CODE
                         ;
                         Label : ELEMENT
                           =
-                          Label : RIGHT
-                            4
                           Label : LEFT
                             $f
+                          Label : RIGHT
+                            4
         Label : ELEMENT
           =
-          Label : RIGHT
-            3
           Label : LEFT
             $i
+          Label : RIGHT
+            3
         Label : ELEMENT
           =
-          Label : RIGHT
-            2
           Label : LEFT
             $h
+          Label : RIGHT
+            2
         Label : ELEMENT
           =
-          Label : RIGHT
-            1
           Label : LEFT
             $g
+          Label : RIGHT
+            1
         Label : ELEMENT
           break
           Label : LEVEL

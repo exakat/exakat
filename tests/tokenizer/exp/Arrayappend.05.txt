@@ -4,13 +4,13 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      (integer)
-      Label : CAST
-        $b
     Label : LEFT
       [
       Label : VARIABLE
         [
         Label : VARIABLE
           $a
+    Label : RIGHT
+      (integer)
+      Label : CAST
+        $b

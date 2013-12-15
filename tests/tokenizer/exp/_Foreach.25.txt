@@ -20,9 +20,9 @@ Label : CODE
           void
           Label : ARGUMENT
             ->
+            Label : OBJECT
+              $c
             Label : METHOD
               d
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $c

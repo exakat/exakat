@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -16,10 +18,10 @@ Label : CODE
               'd'
             Label : VARIABLE
               ->
-              Label : OBJECT
-                $b
               Label : PROPERTY
                 c
+              Label : OBJECT
+                $b
       Label : THEN
         clone
         Label : CLONE
@@ -28,25 +30,23 @@ Label : CODE
             'e'
           Label : VARIABLE
             ->
-            Label : OBJECT
-              $c
             Label : PROPERTY
               d
+            Label : OBJECT
+              $c
       Label : ELSE
         ->
+        Label : OBJECT
+          ->
+          Label : OBJECT
+            $f
+          Label : METHOD
+            g
+            Label : ARGUMENTS
+              void
         Label : METHOD
           h
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'i'
-        Label : OBJECT
-          ->
-          Label : METHOD
-            g
-            Label : ARGUMENTS
-              void
-          Label : OBJECT
-            $f
-    Label : LEFT
-      $a

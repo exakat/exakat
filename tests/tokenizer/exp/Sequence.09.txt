@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $backupdir
     Label : RIGHT
       substr
       Label : ARGUMENTS
@@ -14,8 +16,6 @@ Label : CODE
           $datafile_server
         Label : ARGUMENT
           13
-    Label : LEFT
-      $backupdir
   Label : ELEMENT
     ->
     Label : OBJECT
@@ -28,11 +28,11 @@ Label : CODE
           $datafile_server
   Label : ELEMENT
     =
+    Label : LEFT
+      $unzip
     Label : RIGHT
       new
       Label : NEW
         SimpleUnzip
         Label : ARGUMENTS
           void
-    Label : LEFT
-      $unzip

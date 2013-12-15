@@ -4,22 +4,24 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       b
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
           >
-          Label : RIGHT
-            'f'
           Label : LEFT
             ->
+            Label : OBJECT
+              $d
             Label : METHOD
               e
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $d
+          Label : RIGHT
+            'f'
         Label : ARGUMENT
           trim
           Label : ARGUMENTS
@@ -28,5 +30,3 @@ Label : CODE
               $c
         Label : ARGUMENT
           G
-    Label : LEFT
-      $a

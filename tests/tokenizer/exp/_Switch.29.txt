@@ -34,6 +34,8 @@ Label : CODE
                     ;
                     Label : ELEMENT
                       =
+                      Label : LEFT
+                        $f
                       Label : RIGHT
                         ::
                         Label : CLASS
@@ -46,8 +48,6 @@ Label : CODE
                               $i
                             Label : ARGUMENT
                               $j
-                      Label : LEFT
-                        $f
                     Label : ELEMENT
                       break
                       Label : LEVEL
@@ -60,10 +60,10 @@ Label : CODE
                     ;
                     Label : ELEMENT
                       =
-                      Label : RIGHT
-                        ""
                       Label : LEFT
                         $e
+                      Label : RIGHT
+                        ""
                     Label : ELEMENT
                       break
                       Label : LEVEL

@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     instanceof
+    Label : LEFT
+      $x
     Label : RIGHT
       \
       Label : ELEMENT
@@ -14,5 +16,3 @@ Label : CODE
         B
       Label : ELEMENT
         D
-    Label : LEFT
-      $x

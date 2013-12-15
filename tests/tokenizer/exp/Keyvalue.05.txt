@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -28,5 +30,3 @@ Label : CODE
               $b
           Label : VALUE
             $d
-    Label : LEFT
-      $a

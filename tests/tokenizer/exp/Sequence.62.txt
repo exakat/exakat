@@ -13,10 +13,10 @@ Label : CODE
             void
             Label : ARGUMENT
               ->
-              Label : OBJECT
-                $a
               Label : PROPERTY
                 b
+              Label : OBJECT
+                $a
         Label : THEN
           htmlspecialchars
           Label : ARGUMENTS
@@ -27,17 +27,17 @@ Label : CODE
               G
             Label : ARGUMENT
               ->
+              Label : OBJECT
+                $c
               Label : METHOD
                 d
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     ->
-                    Label : OBJECT
-                      $e
                     Label : PROPERTY
                       f
-              Label : OBJECT
-                $c
+                    Label : OBJECT
+                      $e
         Label : ELSE
           'I'

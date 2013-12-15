@@ -30,16 +30,16 @@ Label : CODE
               Block With if/elseif
               Label : CODE
                 .=
-                Label : RIGHT
-                  "t"
                 Label : LEFT
                   $s
+                Label : RIGHT
+                  "t"
           Label : ELEMENT
             =
-            Label : RIGHT
-              'o'
             Label : LEFT
               $n
+            Label : RIGHT
+              'o'
           Label : ELEMENT
             return
             Label : RETURN
@@ -86,16 +86,16 @@ Label : CODE
               Block With if/elseif
               Label : CODE
                 .=
-                Label : RIGHT
-                  "k"
                 Label : LEFT
                   $j
+                Label : RIGHT
+                  "k"
           Label : ELEMENT
             =
-            Label : RIGHT
-              'f'
             Label : LEFT
               $e
+            Label : RIGHT
+              'f'
           Label : ELEMENT
             return
             Label : RETURN

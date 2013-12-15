@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      2
     Label : LEFT
       $c
+    Label : RIGHT
+      2
   Label : ELEMENT
     switch
     Label : NAME
@@ -22,10 +22,10 @@ Label : CODE
             Block With Sequence For Default
             Label : CODE
               =
-              Label : RIGHT
-                3
               Label : LEFT
                 $b
+              Label : RIGHT
+                3
         Label : ELEMENT
           case
           Label : CODE
@@ -34,10 +34,10 @@ Label : CODE
               ;
               Label : ELEMENT
                 =
-                Label : RIGHT
-                  2
                 Label : LEFT
                   $b
+                Label : RIGHT
+                  2
               Label : ELEMENT
                 break
                 Label : LEVEL
@@ -46,7 +46,7 @@ Label : CODE
             1
   Label : ELEMENT
     =
-    Label : RIGHT
-      1
     Label : LEFT
       $a
+    Label : RIGHT
+      1

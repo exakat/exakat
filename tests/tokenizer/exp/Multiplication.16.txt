@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     *
-    Label : RIGHT
-      1
     Label : LEFT
       ->
+      Label : OBJECT
+        $a
       Label : METHOD
         x
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             1
-      Label : OBJECT
-        $a
+    Label : RIGHT
+      1

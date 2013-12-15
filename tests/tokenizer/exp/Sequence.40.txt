@@ -12,10 +12,10 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          3
         Label : LEFT
           $c
+        Label : RIGHT
+          3
       Label : ELEMENT
         @
         Label : AT

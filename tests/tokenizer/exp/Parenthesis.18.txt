@@ -14,22 +14,22 @@ Label : CODE
             ?
             Label : CONDITION
               !==
-              Label : RIGHT
-                'c'
               Label : LEFT
                 ->
-                Label : OBJECT
-                  $a
                 Label : PROPERTY
                   b
+                Label : OBJECT
+                  $a
+              Label : RIGHT
+                'c'
             Label : THEN
               .
               Label : CONCAT
                 ->
-                Label : OBJECT
-                  $d
                 Label : PROPERTY
                   e
+                Label : OBJECT
+                  $d
               Label : CONCAT
                 F
             Label : ELSE

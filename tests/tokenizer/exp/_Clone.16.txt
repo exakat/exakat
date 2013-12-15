@@ -4,20 +4,20 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
     Label : NAME
       d
+    Label : ARGUMENTS
+      void
     Label : BLOCK
       {
       Label : CODE
         void
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
     Label : NAME
       c
+    Label : ARGUMENTS
+      void
     Label : BLOCK
       {
       Label : CODE

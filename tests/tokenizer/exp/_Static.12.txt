@@ -4,6 +4,20 @@ Label : CODE
   ;
   Label : ELEMENT
     +
+    Label : LEFT
+      +
+      Label : LEFT
+        ::
+        Label : CLASS
+          static
+        Label : PROPERTY
+          $B
+      Label : RIGHT
+        ::
+        Label : CLASS
+          static
+        Label : CONSTANT
+          C
     Label : RIGHT
       ::
       Label : CLASS
@@ -12,17 +26,3 @@ Label : CODE
         d
         Label : ARGUMENTS
           void
-    Label : LEFT
-      +
-      Label : RIGHT
-        ::
-        Label : CLASS
-          static
-        Label : CONSTANT
-          C
-      Label : LEFT
-        ::
-        Label : CLASS
-          static
-        Label : PROPERTY
-          $B

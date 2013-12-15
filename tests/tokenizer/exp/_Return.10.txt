@@ -2,14 +2,14 @@
 
 Label : CODE
   function
+  Label : NAME
+    cmp1
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
       $a
     Label : ARGUMENT
       $b
-  Label : NAME
-    cmp1
   Label : BLOCK
     {
     Label : CODE
@@ -18,18 +18,18 @@ Label : CODE
         (
         Label : CODE
           ==
-          Label : RIGHT
-            [
-            Label : INDEX
-              'd'
-            Label : VARIABLE
-              $b
           Label : LEFT
             [
             Label : INDEX
               'c'
             Label : VARIABLE
               $a
+          Label : RIGHT
+            [
+            Label : INDEX
+              'd'
+            Label : VARIABLE
+              $b
       Label : THEN
         Block With if/elseif
         Label : CODE

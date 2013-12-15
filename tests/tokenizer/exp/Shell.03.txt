@@ -1,22 +1,28 @@
 <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
+Label : NEXT
+  $a
+  Label : NEXT
     =
-    Label : RIGHT
+    Label : NEXT
       `
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          {
-          Label : NAME
-            ->
-            Label : PROPERTY
-              c
-            Label : OBJECT
-              $b
-        Label : CONCAT
+      Label : NEXT
+        {
+        Label : NEXT
            d 
-    Label : LEFT
-      $a
+          Label : NEXT
+            `_CLOSE
+            Label : NEXT
+              ;
+              Label : NEXT
+                ?>
+                Label : NEXT
+                  /**/
+                  Label : NEXT
+                    /* * */
+        Label : NAME
+          ->
+          Label : PROPERTY
+            c
+          Label : OBJECT
+            $b

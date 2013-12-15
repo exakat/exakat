@@ -4,10 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      [
+      Label : INDEX
+        'h'
+      Label : VARIABLE
+        $g
     Label : RIGHT
       ?
       Label : CONDITION
         &&
+        Label : LEFT
+          i
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'i'
         Label : RIGHT
           in_array
           Label : ARGUMENTS
@@ -20,12 +32,6 @@ Label : CODE
                 $j
             Label : ARGUMENT
               $l
-        Label : LEFT
-          i
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'i'
       Label : THEN
         [
         Label : INDEX
@@ -34,14 +40,10 @@ Label : CODE
           $m
       Label : ELSE
         'o'
-    Label : LEFT
-      [
-      Label : INDEX
-        'h'
-      Label : VARIABLE
-        $g
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -56,5 +58,3 @@ Label : CODE
           'd'
         Label : ARGUMENT
           'f'
-    Label : LEFT
-      $a

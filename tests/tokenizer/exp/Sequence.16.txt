@@ -14,26 +14,26 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            3
           Label : LEFT
             $c
+          Label : RIGHT
+            3
     Label : ELSE
       {
       Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            4
           Label : LEFT
             $d
+          Label : RIGHT
+            4
   Label : ELEMENT
     =
-    Label : RIGHT
-      1
     Label : LEFT
       $a
+    Label : RIGHT
+      1
   Label : ELEMENT
     if
     Label : CONDITION
@@ -46,7 +46,7 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            2
           Label : LEFT
             $b
+          Label : RIGHT
+            2

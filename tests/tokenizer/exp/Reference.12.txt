@@ -4,13 +4,13 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $z
     Label : RIGHT
       &
       Label : REFERENCE
         ->
-        Label : OBJECT
-          $x
         Label : PROPERTY
           y
-    Label : LEFT
-      $z
+        Label : OBJECT
+          $x

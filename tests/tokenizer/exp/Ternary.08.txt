@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -16,5 +18,3 @@ Label : CODE
           1
         Label : VARIABLE
           $b
-    Label : LEFT
-      $a

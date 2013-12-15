@@ -6,15 +6,15 @@ Label : CODE
     ++
     Label : PREPLUSPLUS
       ->
-      Label : OBJECT
-        $e
       Label : PROPERTY
         $d
+      Label : OBJECT
+        $e
   Label : ELEMENT
     ++
     Label : POSTPLUSPLUS
       ->
-      Label : OBJECT
-        $a
       Label : PROPERTY
         $b
+      Label : OBJECT
+        $a

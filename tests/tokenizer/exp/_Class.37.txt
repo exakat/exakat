@@ -18,10 +18,10 @@ Label : CODE
           protected
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $b
         Label : VALUE
           1
+        Label : DEFINE
+          $b
         Label : PROTECTED
           protected
       Label : ELEMENT
@@ -56,10 +56,10 @@ Label : CODE
           protected
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $a
         Label : VALUE
           Void
+        Label : DEFINE
+          $a
         Label : PROTECTED
           protected
       Label : ELEMENT

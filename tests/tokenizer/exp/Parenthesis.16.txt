@@ -4,12 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       array
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
           =>
+          Label : KEY
+            'a'
           Label : VALUE
             require_once
             Label : ARGUMENTS
@@ -24,9 +28,5 @@ Label : CODE
                       __FILE__
                 Label : CONCAT
                   'c'
-          Label : KEY
-            'a'
         Label : ARGUMENT
           void
-    Label : LEFT
-      $x

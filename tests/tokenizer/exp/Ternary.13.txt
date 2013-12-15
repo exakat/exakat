@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -14,10 +16,10 @@ Label : CODE
           ?
           Label : CONDITION
             ==
-            Label : RIGHT
-              'd'
             Label : LEFT
               $c
+            Label : RIGHT
+              'd'
           Label : THEN
             substr
             Label : ARGUMENTS
@@ -46,5 +48,3 @@ Label : CODE
                   $g
       Label : ELSE
         'h'
-    Label : LEFT
-      $a

@@ -14,10 +14,10 @@ Label : CODE
             $j
   Label : FINAL
     <
-    Label : RIGHT
-      5
     Label : LEFT
       $i
+    Label : RIGHT
+      5
   Label : INIT
     void
   Label : INCREMENT

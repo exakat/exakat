@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      2
     Label : LEFT
       $x
+    Label : RIGHT
+      2
   Label : ELEMENT
     echo
     Label : ARGUMENTS

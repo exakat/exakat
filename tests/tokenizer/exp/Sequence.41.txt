@@ -26,6 +26,8 @@ Label : CODE
             void
             Label : ARGUMENT
               =>
+              Label : KEY
+                'g'
               Label : VALUE
                 .
                 Label : CONCAT
@@ -34,8 +36,6 @@ Label : CODE
                   H
                 Label : CONCAT
                   $j
-              Label : KEY
-                'g'
   Label : ELEMENT
     if
     Label : CONDITION
@@ -48,6 +48,8 @@ Label : CODE
         ;
         Label : ELEMENT
           =
+          Label : LEFT
+            $b
           Label : RIGHT
             c
             Label : ARGUMENTS
@@ -56,5 +58,3 @@ Label : CODE
                 'd'
               Label : ARGUMENT
                 $e
-          Label : LEFT
-            $b

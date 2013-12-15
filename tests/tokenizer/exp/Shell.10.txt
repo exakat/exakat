@@ -23,11 +23,11 @@ Label : NEXT
                     /* * */
         Label : NAME
           ->
-          Label : OBJECT
-            ->
-            Label : OBJECT
-              $b
-            Label : PROPERTY
-              c
           Label : PROPERTY
             d
+          Label : OBJECT
+            ->
+            Label : PROPERTY
+              c
+            Label : OBJECT
+              $b

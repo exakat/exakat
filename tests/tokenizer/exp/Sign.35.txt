@@ -6,16 +6,8 @@ Label : CODE
     (
     Label : CODE
       -
-      Label : RIGHT
-        $f
       Label : LEFT
         -
-        Label : RIGHT
-          [
-          Label : INDEX
-            'E'
-          Label : VARIABLE
-            $d
         Label : LEFT
           [
           Label : INDEX
@@ -26,6 +18,14 @@ Label : CODE
               b
             Label : OBJECT
               $a
+        Label : RIGHT
+          [
+          Label : INDEX
+            'E'
+          Label : VARIABLE
+            $d
+      Label : RIGHT
+        $f
   Label : THEN
     {
     Label : CODE

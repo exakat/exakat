@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       &
       Label : REFERENCE
@@ -12,5 +14,3 @@ Label : CODE
           void
           Label : ARGUMENT
             'c'
-    Label : LEFT
-      $x

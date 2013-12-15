@@ -2,21 +2,21 @@
 
 Label : CODE
   +
+  Label : LEFT
+    -
+    Label : LEFT
+      +
+      Label : LEFT
+        1
+      Label : RIGHT
+        1
+    Label : RIGHT
+      1
   Label : RIGHT
     (
     Label : CODE
       -
-      Label : RIGHT
-        1
       Label : LEFT
         1
-  Label : LEFT
-    -
-    Label : RIGHT
-      1
-    Label : LEFT
-      +
       Label : RIGHT
-        1
-      Label : LEFT
         1

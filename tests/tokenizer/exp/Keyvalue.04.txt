@@ -20,25 +20,25 @@ Label : CODE
               $b
           Label : THEN
             -
-            Label : RIGHT
-              H
             Label : LEFT
               +
-              Label : RIGHT
-                *
-                Label : RIGHT
-                  1
-                Label : LEFT
-                  [
-                  Label : INDEX
-                    'g'
-                  Label : VARIABLE
-                    $f
               Label : LEFT
                 [
                 Label : INDEX
                   'e'
                 Label : VARIABLE
                   $d
+              Label : RIGHT
+                *
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    'g'
+                  Label : VARIABLE
+                    $f
+                Label : RIGHT
+                  1
+            Label : RIGHT
+              H
           Label : ELSE
             2

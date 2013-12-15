@@ -16,6 +16,8 @@ Label : CODE
             $f
         Label : CONCAT
           ->
+          Label : OBJECT
+            $a
           Label : METHOD
             b
             Label : ARGUMENTS
@@ -26,8 +28,6 @@ Label : CODE
                   d
                 Label : VARIABLE
                   $c
-          Label : OBJECT
-            $a
         Label : CONCAT
           'e'
         Label : CONCAT

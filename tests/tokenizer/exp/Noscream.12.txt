@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      ->
+      Label : PROPERTY
+        a
+      Label : OBJECT
+        $this
     Label : RIGHT
       @
       Label : AT
@@ -18,9 +24,3 @@ Label : CODE
               'a'
           Label : ARGUMENT
             'b'
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $this
-      Label : PROPERTY
-        a

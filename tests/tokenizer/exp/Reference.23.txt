@@ -6,24 +6,24 @@ Label : CODE
     (
     Label : CODE
       &
+      Label : LEFT
+        ==
+        Label : LEFT
+          $d
+        Label : RIGHT
+          "0"
       Label : RIGHT
         ==
-        Label : RIGHT
-          $c
         Label : LEFT
           ->
+          Label : OBJECT
+            $a
           Label : METHOD
             b
             Label : ARGUMENTS
               void
-          Label : OBJECT
-            $a
-      Label : LEFT
-        ==
         Label : RIGHT
-          "0"
-        Label : LEFT
-          $d
+          $c
   Label : THEN
     {
     Label : CODE

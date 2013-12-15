@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       &
       Label : REFERENCE
         new
         Label : NEW
           x
-    Label : LEFT
-      $x

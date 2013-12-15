@@ -8,18 +8,18 @@ Label : CODE
       !
       Label : NOT
         ->
+        Label : OBJECT
+          $a
         Label : METHOD
           b
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               ->
-              Label : OBJECT
-                $c
               Label : PROPERTY
                 d
-        Label : OBJECT
-          $a
+              Label : OBJECT
+                $c
   Label : THEN
     {
     Label : CODE
@@ -28,11 +28,11 @@ Label : CODE
         return
         Label : RETURN
           =
-          Label : RIGHT
-            'g'
           Label : LEFT
             ->
-            Label : OBJECT
-              $e
             Label : PROPERTY
               f
+            Label : OBJECT
+              $e
+          Label : RIGHT
+            'g'

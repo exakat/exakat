@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       "
       Label : CONTAIN
@@ -16,5 +18,3 @@ Label : CODE
             $derivedSelect
         Label : CONCAT
           )
-    Label : LEFT
-      $x

@@ -2,11 +2,11 @@
 
 Label : CODE
   +
-  Label : RIGHT
-    3
   Label : LEFT
     .
     Label : CONCAT
       1
     Label : CONCAT
       2
+  Label : RIGHT
+    3

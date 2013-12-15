@@ -4,19 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      ->
+      Label : PROPERTY
+        c
+      Label : OBJECT
+        $a
     Label : RIGHT
       new
       Label : NEW
         ->
+        Label : OBJECT
+          $b
         Label : METHOD
           a
           Label : ARGUMENTS
             void
-        Label : OBJECT
-          $b
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        c

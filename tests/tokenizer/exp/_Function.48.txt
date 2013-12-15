@@ -2,10 +2,10 @@
 
 Label : CODE
   function
-  Label : ARGUMENTS
-    void
   Label : NAME
     a
+  Label : ARGUMENTS
+    void
   Label : BLOCK
     {
     Label : CODE
@@ -16,12 +16,18 @@ Label : CODE
           3
       Label : ELEMENT
         =
+        Label : LEFT
+          ->
+          Label : PROPERTY
+            b
+          Label : OBJECT
+            $a
         Label : RIGHT
           function
-          Label : ARGUMENTS
-            void
           Label : NAME
             lambda
+          Label : ARGUMENTS
+            void
           Label : BLOCK
             {
             Label : CODE
@@ -38,21 +44,15 @@ Label : CODE
                         ,
                         Label : ARGUMENT
                           =>
-                          Label : VALUE
-                            'd'
                           Label : KEY
                             'c'
+                          Label : VALUE
+                            'd'
                         Label : ARGUMENT
                           =>
-                          Label : VALUE
-                            'f'
                           Label : KEY
                             'e'
+                          Label : VALUE
+                            'f'
                     Label : ARGUMENT
                       void
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            b

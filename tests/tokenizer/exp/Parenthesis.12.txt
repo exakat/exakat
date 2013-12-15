@@ -4,6 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      ::
+      Label : CLASS
+        a
+      Label : PROPERTY
+        [
+        Label : INDEX
+          'c'
+        Label : VARIABLE
+          $b
     Label : RIGHT
       .
       Label : CONCAT
@@ -28,13 +38,3 @@ Label : CODE
           ++
           Label : PREPLUSPLUS
             $h
-    Label : LEFT
-      ::
-      Label : CLASS
-        a
-      Label : PROPERTY
-        [
-        Label : INDEX
-          'c'
-        Label : VARIABLE
-          $b

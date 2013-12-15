@@ -4,7 +4,7 @@ Label : CODE
   ;
   Label : ELEMENT
     global
+    Label : NAME
+      $a
     Label : VALUE
       void
-    Label : DEFINE
-      $a

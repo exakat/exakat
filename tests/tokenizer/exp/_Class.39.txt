@@ -18,10 +18,10 @@ Label : CODE
           public
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $b
         Label : VALUE
           1
+        Label : DEFINE
+          $b
         Label : PUBLIC
           public
       Label : ELEMENT
@@ -56,10 +56,10 @@ Label : CODE
           public
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $a
         Label : VALUE
           Void
+        Label : DEFINE
+          $a
         Label : PUBLIC
           public
       Label : ELEMENT

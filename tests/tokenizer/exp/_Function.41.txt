@@ -2,8 +2,12 @@
 
 Label : CODE
   =
+  Label : LEFT
+    $x
   Label : RIGHT
     function
+    Label : NAME
+      lambda
     Label : ARGUMENTS
       ,
       Label : ARGUMENT
@@ -18,8 +22,6 @@ Label : CODE
           Stdclass
         Label : VARIABLE
           $e
-    Label : NAME
-      lambda
     Label : BLOCK
       {
       Label : CODE
@@ -28,5 +30,3 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $a
-  Label : LEFT
-    $x

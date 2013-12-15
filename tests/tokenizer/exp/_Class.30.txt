@@ -10,9 +10,9 @@ Label : CODE
       ;
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $b
         Label : VALUE
           1
+        Label : DEFINE
+          $b
         Label : VAR
           var

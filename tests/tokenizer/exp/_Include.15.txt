@@ -8,15 +8,15 @@ Label : CODE
       void
       Label : ARGUMENT
         =
+        Label : LEFT
+          $a
         Label : RIGHT
           ->
+          Label : OBJECT
+            $b
           Label : METHOD
             c
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 $d
-          Label : OBJECT
-            $b
-        Label : LEFT
-          $a

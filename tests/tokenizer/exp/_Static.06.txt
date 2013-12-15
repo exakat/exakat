@@ -16,27 +16,27 @@ Label : CODE
             void
         Label : DEFINE
           $c
-        Label : STATIC
-          static
         Label : PROTECTED
           protected
+        Label : STATIC
+          static
       Label : ELEMENT
         Ppp
         Label : VALUE
           1
         Label : DEFINE
           $b
-        Label : STATIC
-          static
         Label : PUBLIC
           public
+        Label : STATIC
+          static
       Label : ELEMENT
         Ppp
         Label : VALUE
           '2'
         Label : DEFINE
           $d
-        Label : STATIC
-          static
         Label : PRIVATE
           private
+        Label : STATIC
+          static

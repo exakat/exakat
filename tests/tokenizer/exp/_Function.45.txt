@@ -1,21 +1,21 @@
 <?php 
 Label : CODE
   function
+  Label : NAME
+    lambda
   Label : ARGUMENTS
     void
     Label : ARGUMENT
       $a
-  Label : NAME
-    lambda
   Label : BLOCK
     {
     Label : CODE
       ;
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $b
         Label : VALUE
           NULL
+        Label : DEFINE
+          $b
         Label : STATIC
           static

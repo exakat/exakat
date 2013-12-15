@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $y
     Label : RIGHT
       &
       Label : REFERENCE
@@ -12,5 +14,3 @@ Label : CODE
           1
         Label : VARIABLE
           $x
-    Label : LEFT
-      $y

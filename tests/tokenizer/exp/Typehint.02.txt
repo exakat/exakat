@@ -2,6 +2,8 @@
 
 Label : CODE
   function
+  Label : NAME
+    x
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -16,8 +18,6 @@ Label : CODE
         Stdclass
       Label : VARIABLE
         $b
-  Label : NAME
-    x
   Label : BLOCK
     {
     Label : CODE

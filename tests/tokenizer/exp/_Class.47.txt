@@ -10,10 +10,10 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           b
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE
@@ -24,20 +24,20 @@ Label : CODE
           static
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $a
         Label : VALUE
           Void
+        Label : DEFINE
+          $a
         Label : PRIVATE
           private
         Label : STATIC
           static
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           c
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE

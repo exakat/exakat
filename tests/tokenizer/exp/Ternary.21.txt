@@ -4,59 +4,59 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         >
+        Label : LEFT
+          $b
         Label : RIGHT
           [
           Label : INDEX
             'e'
           Label : VARIABLE
             ->
-            Label : OBJECT
-              $c
             Label : PROPERTY
               d
-        Label : LEFT
-          $b
+            Label : OBJECT
+              $c
       Label : THEN
         [
         Label : INDEX
           'h'
         Label : VARIABLE
           ->
-          Label : OBJECT
-            $f
           Label : PROPERTY
             g
+          Label : OBJECT
+            $f
       Label : ELSE
         +
-        Label : RIGHT
-          (
-          Label : CODE
-            /
-            Label : RIGHT
-              [
-              Label : INDEX
-                'o'
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $m
-                Label : PROPERTY
-                  n
-            Label : LEFT
-              $l
         Label : LEFT
           [
           Label : INDEX
             'k'
           Label : VARIABLE
             ->
-            Label : OBJECT
-              $i
             Label : PROPERTY
               j
-    Label : LEFT
-      $a
+            Label : OBJECT
+              $i
+        Label : RIGHT
+          (
+          Label : CODE
+            /
+            Label : LEFT
+              $l
+            Label : RIGHT
+              [
+              Label : INDEX
+                'o'
+              Label : VARIABLE
+                ->
+                Label : PROPERTY
+                  n
+                Label : OBJECT
+                  $m

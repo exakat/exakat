@@ -2,6 +2,8 @@
 
 Label : CODE
   function
+  Label : NAME
+    x
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -22,12 +24,10 @@ Label : CODE
         Stdclass
       Label : VARIABLE
         =
-        Label : RIGHT
-          null
         Label : LEFT
           $c
-  Label : NAME
-    x
+        Label : RIGHT
+          null
   Label : BLOCK
     {
     Label : CODE

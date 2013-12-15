@@ -3,6 +3,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       .
       Label : CONCAT
@@ -23,5 +25,3 @@ Label : CODE
               'e'
       Label : CONCAT
         'f'
-    Label : LEFT
-      $a

@@ -8,26 +8,18 @@ Label : CODE
       (
       Label : CODE
         ||
+        Label : LEFT
+          (
+          Label : CODE
+            [
+            Label : INDEX
+              'b'
+            Label : VARIABLE
+              $a
         Label : RIGHT
           (
           Label : CODE
             &&
-            Label : RIGHT
-              (
-              Label : CODE
-                ||
-                Label : RIGHT
-                  [
-                  Label : INDEX
-                    'i'
-                  Label : VARIABLE
-                    $h
-                Label : LEFT
-                  [
-                  Label : INDEX
-                    'g'
-                  Label : VARIABLE
-                    $f
             Label : LEFT
               [
               Label : INDEX
@@ -38,14 +30,22 @@ Label : CODE
                   'd'
                 Label : VARIABLE
                   $C
-        Label : LEFT
-          (
-          Label : CODE
-            [
-            Label : INDEX
-              'b'
-            Label : VARIABLE
-              $a
+            Label : RIGHT
+              (
+              Label : CODE
+                ||
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    'g'
+                  Label : VARIABLE
+                    $f
+                Label : RIGHT
+                  [
+                  Label : INDEX
+                    'i'
+                  Label : VARIABLE
+                    $h
   Label : THEN
     {
     Label : CODE

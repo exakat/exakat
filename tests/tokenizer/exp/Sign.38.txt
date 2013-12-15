@@ -3,10 +3,40 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $z
     Label : RIGHT
       +
+      Label : LEFT
+        *
+        Label : LEFT
+          sin
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
+        Label : RIGHT
+          sin
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $b
       Label : RIGHT
         *
+        Label : LEFT
+          *
+          Label : LEFT
+            cos
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c
+          Label : RIGHT
+            cos
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $d
         Label : RIGHT
           cos
           Label : ARGUMENTS
@@ -21,14 +51,6 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       -
-                      Label : RIGHT
-                        ->
-                        Label : OBJECT
-                          $e
-                        Label : METHOD
-                          getX
-                          Label : ARGUMENTS
-                            void
                       Label : LEFT
                         ->
                         Label : OBJECT
@@ -37,33 +59,11 @@ Label : CODE
                           d
                           Label : ARGUMENTS
                             void
-        Label : LEFT
-          *
-          Label : RIGHT
-            cos
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $d
-          Label : LEFT
-            cos
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $c
-      Label : LEFT
-        *
-        Label : RIGHT
-          sin
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $b
-        Label : LEFT
-          sin
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
-    Label : LEFT
-      $z
+                      Label : RIGHT
+                        ->
+                        Label : OBJECT
+                          $e
+                        Label : METHOD
+                          getX
+                          Label : ARGUMENTS
+                            void

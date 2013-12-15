@@ -2,10 +2,14 @@
 
 Label : CODE
   function
+  Label : NAME
+    a
   Label : ARGUMENTS
     void
     Label : ARGUMENT
       =
+      Label : LEFT
+        $b
       Label : RIGHT
         array
         Label : ARGUMENTS
@@ -16,10 +20,6 @@ Label : CODE
             1
           Label : ARGUMENT
             3
-      Label : LEFT
-        $b
-  Label : NAME
-    a
   Label : BLOCK
     {
     Label : CODE

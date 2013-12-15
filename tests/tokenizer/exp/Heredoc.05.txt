@@ -2,16 +2,16 @@
 
 Label : CODE
   function
+  Label : NAME
+    a
   Label : ARGUMENTS
     void
     Label : ARGUMENT
       =
-      Label : RIGHT
-        true
       Label : LEFT
         $b
-  Label : NAME
-    a
+      Label : RIGHT
+        true
   Label : BLOCK
     {
     Label : CODE

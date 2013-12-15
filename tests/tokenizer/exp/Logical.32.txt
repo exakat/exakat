@@ -6,44 +6,8 @@ Label : CODE
     (
     Label : CODE
       &&
-      Label : RIGHT
-        >
-        Label : RIGHT
-          *
-          Label : RIGHT
-            1
-          Label : LEFT
-            [
-            Label : INDEX
-              'l'
-            Label : VARIABLE
-              [
-              Label : INDEX
-                'k'
-              Label : VARIABLE
-                $j
-        Label : LEFT
-          -
-          Label : RIGHT
-            [
-            Label : INDEX
-              'i'
-            Label : VARIABLE
-              $h
-          Label : LEFT
-            G
       Label : LEFT
         &&
-        Label : RIGHT
-          [
-          Label : INDEX
-            'f'
-          Label : VARIABLE
-            [
-            Label : INDEX
-              'e'
-            Label : VARIABLE
-              $d
         Label : LEFT
           !
           Label : NOT
@@ -56,6 +20,42 @@ Label : CODE
                 'b'
               Label : VARIABLE
                 $a
+        Label : RIGHT
+          [
+          Label : INDEX
+            'f'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              'e'
+            Label : VARIABLE
+              $d
+      Label : RIGHT
+        >
+        Label : LEFT
+          -
+          Label : LEFT
+            G
+          Label : RIGHT
+            [
+            Label : INDEX
+              'i'
+            Label : VARIABLE
+              $h
+        Label : RIGHT
+          *
+          Label : LEFT
+            [
+            Label : INDEX
+              'l'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'k'
+              Label : VARIABLE
+                $j
+          Label : RIGHT
+            1
   Label : THEN
     {
     Label : CODE

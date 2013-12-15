@@ -4,6 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     .=
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $x
     Label : RIGHT
       ::
       Label : CLASS
@@ -30,7 +34,3 @@ Label : CODE
               void
               Label : ARGUMENTS
                 void
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $x

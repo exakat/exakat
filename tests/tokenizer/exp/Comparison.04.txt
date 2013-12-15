@@ -6,16 +6,16 @@ Label : CODE
     (
     Label : CODE
       !=
-      Label : RIGHT
-        [
-        Label : INDEX
-          1
-        Label : VARIABLE
-          $ligne
       Label : LEFT
         [
         Label : INDEX
           0
+        Label : VARIABLE
+          $ligne
+      Label : RIGHT
+        [
+        Label : INDEX
+          1
         Label : VARIABLE
           $ligne
   Label : THEN

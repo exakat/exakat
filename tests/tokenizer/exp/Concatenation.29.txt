@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       "
       Label : CONTAIN
@@ -82,5 +84,3 @@ Label : CODE
                   'g'
                 Label : VARIABLE
                   $i
-    Label : LEFT
-      $x

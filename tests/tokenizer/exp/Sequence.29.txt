@@ -2,10 +2,10 @@
 
 Label : CODE
   function
-  Label : ARGUMENTS
-    void
   Label : NAME
     a
+  Label : ARGUMENTS
+    void
   Label : BLOCK
     {
     Label : CODE
@@ -22,20 +22,20 @@ Label : CODE
             ;
             Label : ELEMENT
               =
-              Label : RIGHT
-                2
               Label : LEFT
                 $e
+              Label : RIGHT
+                2
       Label : ELEMENT
         array_pop
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ->
-            Label : OBJECT
-              $this
             Label : PROPERTY
               stack
+            Label : OBJECT
+              $this
       Label : ELEMENT
         if
         Label : CONDITION
@@ -48,7 +48,7 @@ Label : CODE
             ;
             Label : ELEMENT
               =
-              Label : RIGHT
-                1
               Label : LEFT
                 $c
+              Label : RIGHT
+                1

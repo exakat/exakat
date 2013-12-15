@@ -2,6 +2,8 @@
 
 Label : CODE
   function
+  Label : NAME
+    a
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -10,26 +12,24 @@ Label : CODE
         StdClass
       Label : VARIABLE
         =
-        Label : RIGHT
-          null
         Label : LEFT
           &
           Label : REFERENCE
             $x
+        Label : RIGHT
+          null
     Label : ARGUMENT
       Typehint
       Label : CLASS
         StdClass
       Label : VARIABLE
         =
-        Label : RIGHT
-          null
         Label : LEFT
           &
           Label : REFERENCE
             $b
-  Label : NAME
-    a
+        Label : RIGHT
+          null
   Label : BLOCK
     {
     Label : CODE

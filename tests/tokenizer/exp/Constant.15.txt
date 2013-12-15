@@ -4,22 +4,24 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      a
     Label : LEFT
       $y
+    Label : RIGHT
+      a
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       \
       Label : ELEMENT
         a
       Label : ELEMENT
         b
-    Label : LEFT
-      $x
   Label : ELEMENT
     =
+    Label : LEFT
+      $x2
     Label : RIGHT
       \
       Label : ELEMENT
@@ -30,22 +32,20 @@ Label : CODE
         b
       Label : ELEMENT
         d
-    Label : LEFT
-      $x2
   Label : ELEMENT
     if
     Label : CONDITION
       (
       Label : CODE
         ==
+        Label : LEFT
+          $x
         Label : RIGHT
           \
           Label : ELEMENT
             a
           Label : ELEMENT
             b
-        Label : LEFT
-          $x
     Label : THEN
       {
       Label : CODE

@@ -2,6 +2,10 @@
 
 Label : CODE
   function
+  Label : NAME
+    &
+    Label : REFERENCE
+      b
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -22,10 +26,6 @@ Label : CODE
         CLASSE
       Label : VARIABLE
         $c
-  Label : NAME
-    &
-    Label : REFERENCE
-      b
   Label : BLOCK
     {
     Label : CODE

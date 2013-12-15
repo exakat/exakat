@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      instanceof
-      Label : RIGHT
-        ->
-        Label : OBJECT
-          $z
-        Label : PROPERTY
-          c
-      Label : LEFT
-        $y
     Label : LEFT
       $x
+    Label : RIGHT
+      instanceof
+      Label : LEFT
+        $y
+      Label : RIGHT
+        ->
+        Label : PROPERTY
+          c
+        Label : OBJECT
+          $z

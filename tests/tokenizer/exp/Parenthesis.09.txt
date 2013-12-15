@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $x
     Label : RIGHT
       @
       Label : AT
@@ -16,9 +22,3 @@ Label : CODE
             2
           Label : ARGUMENT
             5
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $x

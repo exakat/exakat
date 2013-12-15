@@ -4,45 +4,45 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       -
-      Label : RIGHT
-        6
       Label : LEFT
         +
-        Label : RIGHT
-          (
-          Label : CODE
-            +
-            Label : RIGHT
-              (
-              Label : CODE
-                &
-                Label : RIGHT
-                  5
-                Label : LEFT
-                  $c
-            Label : LEFT
-              4
         Label : LEFT
           (
           Label : CODE
             <<
-            Label : RIGHT
-              3
             Label : LEFT
               (
               Label : CODE
                 +
+                Label : LEFT
+                  1
                 Label : RIGHT
                   (
                   Label : CODE
                     >>
-                    Label : RIGHT
-                      2
                     Label : LEFT
                       $b
+                    Label : RIGHT
+                      2
+            Label : RIGHT
+              3
+        Label : RIGHT
+          (
+          Label : CODE
+            +
+            Label : LEFT
+              4
+            Label : RIGHT
+              (
+              Label : CODE
+                &
                 Label : LEFT
-                  1
-    Label : LEFT
-      $a
+                  $c
+                Label : RIGHT
+                  5
+      Label : RIGHT
+        6

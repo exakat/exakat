@@ -22,22 +22,22 @@ Label : CODE
                 $x
             Label : ARGUMENT
               ->
-              Label : OBJECT
-                $y
               Label : PROPERTY
                 d
+              Label : OBJECT
+                $y
         Label : VARIABLE
           [
           Label : INDEX
             +
-            Label : RIGHT
-              *
-              Label : RIGHT
-                5
-              Label : LEFT
-                4
             Label : LEFT
               3
+            Label : RIGHT
+              *
+              Label : LEFT
+                4
+              Label : RIGHT
+                5
           Label : VARIABLE
             [
             Label : INDEX

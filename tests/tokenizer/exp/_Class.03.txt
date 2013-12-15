@@ -10,20 +10,20 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           __destruct
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE
             void
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           __construct
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE

@@ -6,6 +6,8 @@ Label : CODE
     new
     Label : NEW
       \
+      Label : ARGUMENTS
+        void
       Label : ELEMENT
         c
       Label : ELEMENT
@@ -14,5 +16,3 @@ Label : CODE
         b
       Label : ELEMENT
         d
-      Label : ARGUMENTS
-        void

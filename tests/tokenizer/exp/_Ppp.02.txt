@@ -10,24 +10,10 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
-        Label : NAME
-          a
-        Label : BLOCK
-          {
-          Label : CODE
-            void
-        Label : PUBLIC
-          public
-        Label : STATIC
-          static
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
         Label : NAME
           b
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE
@@ -38,15 +24,29 @@ Label : CODE
           static
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           c
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE
             void
         Label : PROTECTED
           protected
+        Label : STATIC
+          static
+      Label : ELEMENT
+        function
+        Label : NAME
+          a
+        Label : ARGUMENTS
+          void
+        Label : BLOCK
+          {
+          Label : CODE
+            void
+        Label : PUBLIC
+          public
         Label : STATIC
           static

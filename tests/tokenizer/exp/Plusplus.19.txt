@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      ->
+      Label : PROPERTY
+        a
+      Label : OBJECT
+        $this
     Label : RIGHT
       ++
       Label : POSTPLUSPLUS
@@ -12,9 +18,3 @@ Label : CODE
           self
         Label : PROPERTY
           $b
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $this
-      Label : PROPERTY
-        a

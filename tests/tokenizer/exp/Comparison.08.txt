@@ -6,8 +6,6 @@ Label : CODE
     (
     Label : CODE
       >
-      Label : RIGHT
-        0
       Label : LEFT
         ::
         Label : CLASS
@@ -18,12 +16,20 @@ Label : CODE
             'b'
           Label : VARIABLE
             $a
+      Label : RIGHT
+        0
   Label : THEN
     {
     Label : CODE
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          [
+          Label : INDEX
+            'd'
+          Label : VARIABLE
+            $c
         Label : RIGHT
           ::
           Label : CLASS
@@ -34,9 +40,3 @@ Label : CODE
               'g'
             Label : VARIABLE
               $f
-        Label : LEFT
-          [
-          Label : INDEX
-            'd'
-          Label : VARIABLE
-            $c

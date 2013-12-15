@@ -13,24 +13,24 @@ Label : CODE
         ;
         Label : ELEMENT
           =
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $f
           Label : RIGHT
             g
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 $h
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $f
   Label : ELEMENT
     =
+    Label : LEFT
+      $d
     Label : RIGHT
       array
       Label : ARGUMENTS
         void
-    Label : LEFT
-      $d
   Label : ELEMENT
     A
   Label : ELEMENT

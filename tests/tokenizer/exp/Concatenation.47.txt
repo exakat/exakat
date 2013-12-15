@@ -4,12 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       .
       Label : CONCAT
         'b'
       Label : CONCAT
         =
+        Label : LEFT
+          $c
         Label : RIGHT
           .
           Label : CONCAT
@@ -22,7 +26,3 @@ Label : CODE
                 $e
           Label : CONCAT
             'f'
-        Label : LEFT
-          $c
-    Label : LEFT
-      $a

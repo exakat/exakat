@@ -4,12 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     .=
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         >
-        Label : RIGHT
-          127
         Label : LEFT
           ord
           Label : ARGUMENTS
@@ -20,6 +20,8 @@ Label : CODE
                 $i
               Label : VARIABLE
                 $b
+        Label : RIGHT
+          127
       Label : THEN
         .
         Label : CONCAT
@@ -42,5 +44,3 @@ Label : CODE
           $k
         Label : VARIABLE
           $e
-    Label : LEFT
-      $a

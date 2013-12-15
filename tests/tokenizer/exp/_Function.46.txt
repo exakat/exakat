@@ -10,10 +10,10 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           FALSE
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE
@@ -28,10 +28,10 @@ Label : CODE
           static
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           TRUE
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE

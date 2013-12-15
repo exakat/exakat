@@ -6,8 +6,56 @@ Label : CODE
     (
     Label : CODE
       &&
+      Label : LEFT
+        (
+        Label : CODE
+          ||
+          Label : LEFT
+            ==
+            Label : LEFT
+              substr
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  0
+                Label : ARGUMENT
+                  $a
+                Label : ARGUMENT
+                  1
+            Label : RIGHT
+              0
+          Label : RIGHT
+            >
+            Label : LEFT
+              -
+              Label : LEFT
+                substr
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    $b
+                  Label : ARGUMENT
+                    3
+              Label : RIGHT
+                time
+                Label : ARGUMENTS
+                  void
+            Label : RIGHT
+              0
       Label : RIGHT
         ==
+        Label : LEFT
+          substr
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              4
+            Label : ARGUMENT
+              $c
+            Label : ARGUMENT
+              5
         Label : RIGHT
           substr
           Label : ARGUMENTS
@@ -32,71 +80,23 @@ Label : CODE
                         6
                   Label : CONCAT
                     $e
-        Label : LEFT
-          substr
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              4
-            Label : ARGUMENT
-              $c
-            Label : ARGUMENT
-              5
-      Label : LEFT
-        (
-        Label : CODE
-          ||
-          Label : RIGHT
-            >
-            Label : RIGHT
-              0
-            Label : LEFT
-              -
-              Label : RIGHT
-                time
-                Label : ARGUMENTS
-                  void
-              Label : LEFT
-                substr
-                Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    $b
-                  Label : ARGUMENT
-                    3
-          Label : LEFT
-            ==
-            Label : RIGHT
-              0
-            Label : LEFT
-              substr
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  0
-                Label : ARGUMENT
-                  $a
-                Label : ARGUMENT
-                  1
   Label : THEN
     {
     Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          2
         Label : LEFT
           $x
+        Label : RIGHT
+          2
   Label : ELSE
     {
     Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          3
         Label : LEFT
           $x
+        Label : RIGHT
+          3

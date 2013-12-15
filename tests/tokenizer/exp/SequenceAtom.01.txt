@@ -9,8 +9,6 @@ Label : CODE
         ?
         Label : CONDITION
           ==
-          Label : RIGHT
-            'g'
           Label : LEFT
             @
             Label : AT
@@ -35,6 +33,8 @@ Label : CODE
                       $c
                     Label : VARIABLE
                       $b
+          Label : RIGHT
+            'g'
         Label : THEN
           'h'
         Label : ELSE
@@ -50,8 +50,6 @@ Label : CODE
         ?
         Label : CONDITION
           ==
-          Label : RIGHT
-            'G'
           Label : LEFT
             @
             Label : AT
@@ -76,6 +74,8 @@ Label : CODE
                       $C
                     Label : VARIABLE
                       $B
+          Label : RIGHT
+            'G'
         Label : THEN
           'H'
         Label : ELSE

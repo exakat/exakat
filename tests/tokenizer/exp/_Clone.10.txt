@@ -4,13 +4,13 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       clone
       Label : CLONE
         ->
-        Label : OBJECT
-          $y
         Label : PROPERTY
           z
-    Label : LEFT
-      $x
+        Label : OBJECT
+          $y

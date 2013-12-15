@@ -34,10 +34,10 @@ Label : CODE
           (
           Label : CODE
             ==
-            Label : RIGHT
-              1
             Label : LEFT
               $d
+            Label : RIGHT
+              1
         Label : THEN
           Block With if/elseif
           Label : CODE
@@ -58,10 +58,10 @@ Label : CODE
               (
               Label : CODE
                 ==
-                Label : RIGHT
-                  2
                 Label : LEFT
                   $h
+                Label : RIGHT
+                  2
             Label : THEN
               Block With if/elseif
               Label : CODE

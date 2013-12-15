@@ -2,15 +2,15 @@
 
 Label : CODE
   -
-  Label : RIGHT
-    [
-    Label : INDEX
-      2
-    Label : VARIABLE
-      $x
   Label : LEFT
     [
     Label : INDEX
       1
+    Label : VARIABLE
+      $x
+  Label : RIGHT
+    [
+    Label : INDEX
+      2
     Label : VARIABLE
       $x

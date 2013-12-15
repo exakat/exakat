@@ -13,10 +13,10 @@ Label : CODE
         ,
         Label : ARGUMENT
           ->
-          Label : OBJECT
-            $c
           Label : PROPERTY
             d
+          Label : OBJECT
+            $c
         Label : ARGUMENT
           $e
     Label : ELSE
@@ -25,16 +25,16 @@ Label : CODE
         ,
         Label : ARGUMENT
           ->
-          Label : OBJECT
-            $g
           Label : PROPERTY
             h
+          Label : OBJECT
+            $g
         Label : ARGUMENT
           ->
-          Label : OBJECT
-            $i
           Label : PROPERTY
             j
+          Label : OBJECT
+            $i
   Label : ELEMENT
     if
     Label : CONDITION

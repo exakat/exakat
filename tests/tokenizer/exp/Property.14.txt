@@ -6,6 +6,8 @@ Label : CODE
     return
     Label : RETURN
       ->
+      Label : PROPERTY
+        d
       Label : OBJECT
         a
         Label : ARGUMENTS
@@ -14,5 +16,3 @@ Label : CODE
             $b
           Label : ARGUMENT
             $c
-      Label : PROPERTY
-        d

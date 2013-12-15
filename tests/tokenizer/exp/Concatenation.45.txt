@@ -24,10 +24,6 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            array
-            Label : ARGUMENTS
-              void
           Label : LEFT
             [
             Label : INDEX
@@ -50,14 +46,18 @@ Label : CODE
                    o
             Label : VARIABLE
               $items
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void
   Label : ELEMENT
     foreach
     Label : VALUE
       =>
-      Label : VALUE
-        $c
       Label : KEY
         $b
+      Label : VALUE
+        $c
     Label : SOURCE
       a
       Label : ARGUMENTS
@@ -68,10 +68,6 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            array
-            Label : ARGUMENTS
-              void
           Label : LEFT
             [
             Label : INDEX
@@ -96,3 +92,7 @@ Label : CODE
                   $h
             Label : VARIABLE
               $items
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void

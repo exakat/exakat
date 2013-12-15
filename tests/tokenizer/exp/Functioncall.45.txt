@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -28,6 +30,8 @@ Label : CODE
         [
         Label : INDEX
           0
+        Label : VARIABLE
+          $d
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -44,9 +48,5 @@ Label : CODE
                 '4'
             Label : VARIABLE
               $e
-        Label : VARIABLE
-          $d
       Label : ELSE
         '5'
-    Label : LEFT
-      $a

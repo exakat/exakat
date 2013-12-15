@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
+    Label : OBJECT
+      $r
     Label : METHOD
       setOptions
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           $options
-    Label : OBJECT
-      $r
   Label : ELEMENT
     {
     Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          1
         Label : LEFT
           $b
+        Label : RIGHT
+          1

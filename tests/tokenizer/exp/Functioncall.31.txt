@@ -2,34 +2,34 @@
 
 Label : CODE
   function
+  Label : NAME
+    a
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
       =
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          void
       Label : LEFT
         $c
-    Label : ARGUMENT
-      =
       Label : RIGHT
         array
         Label : ARGUMENTS
           void
+    Label : ARGUMENT
+      =
       Label : LEFT
         $b
-    Label : ARGUMENT
-      =
       Label : RIGHT
         array
         Label : ARGUMENTS
           void
+    Label : ARGUMENT
+      =
       Label : LEFT
         $d
-  Label : NAME
-    a
+      Label : RIGHT
+        array
+        Label : ARGUMENTS
+          void
   Label : BLOCK
     {
     Label : CODE

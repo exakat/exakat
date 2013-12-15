@@ -16,14 +16,14 @@ Label : CODE
             ;
             Label : ELEMENT
               &&
-              Label : RIGHT
-                =
-                Label : RIGHT
-                  'p'
-                Label : LEFT
-                  $o
               Label : LEFT
                 &&
+                Label : LEFT
+                  ==
+                  Label : LEFT
+                    $j
+                  Label : RIGHT
+                    'k'
                 Label : RIGHT
                   [
                   Label : INDEX
@@ -34,26 +34,36 @@ Label : CODE
                       'm'
                     Label : VARIABLE
                       $l
+              Label : RIGHT
+                =
                 Label : LEFT
-                  ==
-                  Label : RIGHT
-                    'k'
-                  Label : LEFT
-                    $j
+                  $o
+                Label : RIGHT
+                  'p'
             Label : ELEMENT
               break
               Label : LEVEL
                 void
             Label : ELEMENT
               &&
+              Label : LEFT
+                (
+                Label : CODE
+                  ||
+                  Label : LEFT
+                    ==
+                    Label : LEFT
+                      $a
+                    Label : RIGHT
+                      'b'
+                  Label : RIGHT
+                    ==
+                    Label : LEFT
+                      $c
+                    Label : RIGHT
+                      'd'
               Label : RIGHT
                 &&
-                Label : RIGHT
-                  =
-                  Label : RIGHT
-                    'i'
-                  Label : LEFT
-                    $h
                 Label : LEFT
                   [
                   Label : INDEX
@@ -64,22 +74,12 @@ Label : CODE
                       'f'
                     Label : VARIABLE
                       $e
-              Label : LEFT
-                (
-                Label : CODE
-                  ||
-                  Label : RIGHT
-                    ==
-                    Label : RIGHT
-                      'd'
-                    Label : LEFT
-                      $c
+                Label : RIGHT
+                  =
                   Label : LEFT
-                    ==
-                    Label : RIGHT
-                      'b'
-                    Label : LEFT
-                      $a
+                    $h
+                  Label : RIGHT
+                    'i'
         Label : CASE
           'd'
       Label : ELEMENT
@@ -88,10 +88,10 @@ Label : CODE
           Block With Sequence For Case
           Label : CODE
             =
-            Label : RIGHT
-              1
             Label : LEFT
               $x
+            Label : RIGHT
+              1
         Label : CASE
           'e'
       Label : ELEMENT
@@ -108,10 +108,10 @@ Label : CODE
           Block With Sequence For Case
           Label : CODE
             =
-            Label : RIGHT
-              2
             Label : LEFT
               $x
+            Label : RIGHT
+              2
         Label : CASE
           'f'
       Label : ELEMENT
@@ -120,10 +120,10 @@ Label : CODE
           Block With Sequence For Case
           Label : CODE
             =
-            Label : RIGHT
-              4
             Label : LEFT
               $x
+            Label : RIGHT
+              4
         Label : CASE
           'b'
       Label : ELEMENT
@@ -132,9 +132,9 @@ Label : CODE
           Block With Sequence For Case
           Label : CODE
             =
-            Label : RIGHT
-              3
             Label : LEFT
               $x
+            Label : RIGHT
+              3
         Label : CASE
           'c'

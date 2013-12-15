@@ -10,10 +10,10 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           b
+        Label : ARGUMENTS
+          void
         Label : PROTECTED
           protected
         Label : STATIC
@@ -22,20 +22,20 @@ Label : CODE
           abstract
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           a
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE
             ;
             Label : ELEMENT
               =
-              Label : RIGHT
-                1
               Label : LEFT
                 $x
+              Label : RIGHT
+                1
         Label : PUBLIC
           public
         Label : STATIC

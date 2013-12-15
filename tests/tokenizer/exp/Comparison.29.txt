@@ -6,62 +6,16 @@ Label : CODE
     (
     Label : CODE
       ||
-      Label : RIGHT
-        &&
-        Label : RIGHT
-          !=
-          Label : RIGHT
-            substr
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'l'
-                Label : VARIABLE
-                  $k
-              Label : ARGUMENT
-                +
-                Label : RIGHT
-                  1
-                Label : LEFT
-                  strrpos
-                  Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'n'
-                      Label : VARIABLE
-                        $m
-                    Label : ARGUMENT
-                      'n'
-          Label : LEFT
-            [
-            Label : INDEX
-              'j'
-            Label : VARIABLE
-              $i
-        Label : LEFT
-          !
-          Label : NOT
-            defined
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'H'
       Label : LEFT
         &&
+        Label : LEFT
+          defined
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'a'
         Label : RIGHT
           !=
-          Label : RIGHT
-            [
-            Label : INDEX
-              'g'
-            Label : VARIABLE
-              $f
           Label : LEFT
             .
             Label : CONCAT
@@ -78,12 +32,58 @@ Label : CODE
                   E
                 Label : ARGUMENT
                   1
+          Label : RIGHT
+            [
+            Label : INDEX
+              'g'
+            Label : VARIABLE
+              $f
+      Label : RIGHT
+        &&
         Label : LEFT
-          defined
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'a'
+          !
+          Label : NOT
+            defined
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'H'
+        Label : RIGHT
+          !=
+          Label : LEFT
+            [
+            Label : INDEX
+              'j'
+            Label : VARIABLE
+              $i
+          Label : RIGHT
+            substr
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'l'
+                Label : VARIABLE
+                  $k
+              Label : ARGUMENT
+                +
+                Label : LEFT
+                  strrpos
+                  Label : ARGUMENTS
+                    ,
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'n'
+                      Label : VARIABLE
+                        $m
+                    Label : ARGUMENT
+                      'n'
+                Label : RIGHT
+                  1
   Label : THEN
     Block With if/elseif
     Label : CODE

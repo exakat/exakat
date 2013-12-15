@@ -4,6 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      [
+      Label : INDEX
+        [
+        Label : INDEX
+          'c'
+        Label : VARIABLE
+          $b
+      Label : VARIABLE
+        $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -32,13 +42,3 @@ Label : CODE
         -
         Label : SIGN
           1
-    Label : LEFT
-      [
-      Label : INDEX
-        [
-        Label : INDEX
-          'c'
-        Label : VARIABLE
-          $b
-      Label : VARIABLE
-        $a

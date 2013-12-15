@@ -10,8 +10,6 @@ Label : CODE
       ;
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $bar
         Label : VALUE
           <<<'EOT'
 
@@ -20,5 +18,7 @@ Label : CODE
             Label : CONCAT
               bar
 
+        Label : DEFINE
+          $bar
         Label : PUBLIC
           public

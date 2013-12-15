@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      new
-      Label : NEW
-        $e
-        Label : ARGUMENTS
-          void
     Label : LEFT
       ->
       Label : PROPERTY
@@ -24,3 +18,9 @@ Label : CODE
             $b
           Label : VARIABLE
             $a
+    Label : RIGHT
+      new
+      Label : NEW
+        $e
+        Label : ARGUMENTS
+          void

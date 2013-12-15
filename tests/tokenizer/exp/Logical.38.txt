@@ -5,24 +5,26 @@ Label : CODE
     (
     Label : CODE
       instanceof
+      Label : LEFT
+        $a
       Label : RIGHT
         &&
-        Label : RIGHT
-          $d
         Label : LEFT
           \
           Label : ELEMENT
             B
           Label : ELEMENT
             C
-      Label : LEFT
-        $a
+        Label : RIGHT
+          $d
   Label : THEN
     {
     Label : CODE
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $e
         Label : RIGHT
           ->
           Label : OBJECT
@@ -31,5 +33,3 @@ Label : CODE
             g
             Label : ARGUMENTS
               void
-        Label : LEFT
-          $e

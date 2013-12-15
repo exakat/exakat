@@ -6,10 +6,10 @@ Label : CODE
     (
     Label : CODE
       =
-      Label : RIGHT
-        $b
       Label : LEFT
         $a
+      Label : RIGHT
+        $b
   Label : THEN
     {
     Label : CODE
@@ -32,25 +32,25 @@ Label : CODE
           (
           Label : CODE
             ==
-            Label : RIGHT
-              'd'
             Label : LEFT
               $c
+            Label : RIGHT
+              'd'
         Label : THEN
           =
-          Label : RIGHT
-            'f'
           Label : LEFT
             $e
+          Label : RIGHT
+            'f'
         Label : ELSE
           =
-          Label : RIGHT
-            'h'
           Label : LEFT
             $g
+          Label : RIGHT
+            'h'
       Label : ELEMENT
         =
-        Label : RIGHT
-          1
         Label : LEFT
           $i
+        Label : RIGHT
+          1

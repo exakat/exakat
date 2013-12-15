@@ -20,16 +20,16 @@ Label : CODE
             void
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           CONNECT_OK
+        Label : VALUE
+          1
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           connect
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE
@@ -52,16 +52,16 @@ Label : CODE
             void
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           CONNECT_OK
+        Label : VALUE
+          1
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           connect
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE

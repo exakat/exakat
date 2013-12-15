@@ -6,10 +6,10 @@ Label : CODE
     $z
   Label : SOURCE
     =
-    Label : RIGHT
-      $y
     Label : LEFT
       $x
+    Label : RIGHT
+      $y
   Label : LOOP
     {
     Label : CODE

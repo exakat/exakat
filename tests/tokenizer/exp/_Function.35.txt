@@ -2,12 +2,14 @@
 
 Label : CODE
   =
+  Label : LEFT
+    $x
   Label : RIGHT
     function
-    Label : ARGUMENTS
-      void
     Label : NAME
       lambda
+    Label : ARGUMENTS
+      void
     Label : BLOCK
       {
       Label : CODE
@@ -16,5 +18,3 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $a
-  Label : LEFT
-    $x

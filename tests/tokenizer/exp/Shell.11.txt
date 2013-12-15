@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       `
       Label : CONTAIN
@@ -16,10 +18,10 @@ Label : CODE
            d 
         Label : CONCAT
           ->
-          Label : OBJECT
-            $e
           Label : PROPERTY
             f
+          Label : OBJECT
+            $e
         Label : CONCAT
            g 
         Label : CONCAT
@@ -38,5 +40,3 @@ Label : CODE
             $j
         Label : CONCAT
            k 
-    Label : LEFT
-      $a

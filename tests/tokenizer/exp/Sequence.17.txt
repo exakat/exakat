@@ -6,6 +6,16 @@ Label : CODE
     (
     Label : CODE
       ||
+      Label : LEFT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'b'
+            Label : VARIABLE
+              $a
       Label : RIGHT
         !
         Label : NOT
@@ -28,25 +38,15 @@ Label : CODE
                   'e'
                 Label : ARGUMENT
                   'g'
-      Label : LEFT
-        empty
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : INDEX
-              'b'
-            Label : VARIABLE
-              $a
   Label : THEN
     Block With if/elseif
     Label : CODE
       =
-      Label : RIGHT
-        'j'
       Label : LEFT
         [
         Label : INDEX
           'i'
         Label : VARIABLE
           $h
+      Label : RIGHT
+        'j'

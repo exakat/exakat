@@ -4,22 +4,24 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      [
+      Label : INDEX
+        'b'
+      Label : VARIABLE
+        $a
     Label : RIGHT
       ?
       Label : CONDITION
         ||
+        Label : LEFT
+          [
+          Label : INDEX
+            'd'
+          Label : VARIABLE
+            $c
         Label : RIGHT
           ->
-          Label : METHOD
-            f
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'h'
-                Label : VARIABLE
-                  $g
           Label : OBJECT
             ::
             Label : CLASS
@@ -30,19 +32,17 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'e'
-        Label : LEFT
-          [
-          Label : INDEX
-            'd'
-          Label : VARIABLE
-            $c
+          Label : METHOD
+            f
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'h'
+                Label : VARIABLE
+                  $g
       Label : THEN
         1
       Label : ELSE
         2
-    Label : LEFT
-      [
-      Label : INDEX
-        'b'
-      Label : VARIABLE
-        $a

@@ -6,11 +6,11 @@ Label : CODE
     $
     Label : NAME
       =
-      Label : RIGHT
-        1
       Label : LEFT
         [
         Label : INDEX
           'd'
         Label : VARIABLE
           $c
+      Label : RIGHT
+        1

@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $forms
     Label : RIGHT
       &
       Label : REFERENCE
@@ -12,5 +14,3 @@ Label : CODE
           self
         Label : PROPERTY
           $_forms
-    Label : LEFT
-      $forms

@@ -8,10 +8,10 @@ Label : CODE
     {
     Label : CODE
       function
-      Label : ARGUMENTS
-        void
       Label : NAME
         x
+      Label : ARGUMENTS
+        void
       Label : BLOCK
         {
         Label : CODE

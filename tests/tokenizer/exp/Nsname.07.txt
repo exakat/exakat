@@ -6,7 +6,7 @@ Label : CODE
     new
     Label : NEW
       \
-      Label : ELEMENT
-        a
       Label : ARGUMENTS
         void
+      Label : ELEMENT
+        a

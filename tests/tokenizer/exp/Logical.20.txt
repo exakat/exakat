@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     ||
-    Label : RIGHT
-      ->
-      Label : OBJECT
-        $y
-      Label : PROPERTY
-        z
     Label : LEFT
       $x
+    Label : RIGHT
+      ->
+      Label : PROPERTY
+        z
+      Label : OBJECT
+        $y

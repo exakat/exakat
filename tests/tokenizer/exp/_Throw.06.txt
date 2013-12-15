@@ -8,8 +8,6 @@ Label : CODE
       new
       Label : NEW
         \
-        Label : ELEMENT
-          A
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -26,3 +24,5 @@ Label : CODE
                 'C'
               Label : ARGUMENT
                 $f
+        Label : ELEMENT
+          A

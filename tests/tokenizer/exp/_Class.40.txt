@@ -10,28 +10,28 @@ Label : CODE
       ;
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           __construct
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE
             void
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $a
         Label : VALUE
           Void
+        Label : DEFINE
+          $a
         Label : VAR
           var
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           __destruct
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE

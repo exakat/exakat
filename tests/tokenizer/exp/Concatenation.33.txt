@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       "
       Label : CONTAIN
@@ -26,5 +28,3 @@ Label : CODE
           $e
         Label : CONCAT
           -01'
-    Label : LEFT
-      $x

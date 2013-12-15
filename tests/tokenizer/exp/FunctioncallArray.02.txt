@@ -6,17 +6,17 @@ Label : CODE
     [
     Label : INDEX
       'e'
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        34
     Label : VARIABLE
       [
       Label : INDEX
         d
       Label : VARIABLE
         ->
-        Label : OBJECT
-          $b
         Label : PROPERTY
           c
+        Label : OBJECT
+          $b
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        34

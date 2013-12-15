@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
+    Label : OBJECT
+      $d
     Label : METHOD
       a
       Label : ARGUMENTS
@@ -18,5 +20,3 @@ Label : CODE
             null
           Label : ELSE
             $c
-    Label : OBJECT
-      $d

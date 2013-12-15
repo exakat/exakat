@@ -29,10 +29,10 @@ Label : CODE
           $a
       Label : ELEMENT
         =
-        Label : RIGHT
-          1
         Label : LEFT
           $e
+        Label : RIGHT
+          1
     Label : ELSE
       elseif
       Label : CONDITION

@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -12,61 +14,59 @@ Label : CODE
           void
         Label : ARGUMENT
           =>
-          Label : VALUE
-            \
-            Label : ELEMENT
-              m
-            Label : ELEMENT
-              n
           Label : KEY
             \
             Label : ELEMENT
               k
             Label : ELEMENT
               l
+          Label : VALUE
+            \
+            Label : ELEMENT
+              m
+            Label : ELEMENT
+              n
         Label : ARGUMENT
           =>
-          Label : VALUE
-            ->
-            Label : OBJECT
-              $h
-            Label : PROPERTY
-              i
           Label : KEY
             ->
-            Label : OBJECT
-              $f
             Label : PROPERTY
               g
+            Label : OBJECT
+              $f
+          Label : VALUE
+            ->
+            Label : PROPERTY
+              i
+            Label : OBJECT
+              $h
         Label : ARGUMENT
           =>
-          Label : VALUE
-            [
-            Label : INDEX
-              'f'
-            Label : VARIABLE
-              $e
           Label : KEY
             [
             Label : INDEX
               'd'
             Label : VARIABLE
               $c
+          Label : VALUE
+            [
+            Label : INDEX
+              'f'
+            Label : VARIABLE
+              $e
         Label : ARGUMENT
           =>
-          Label : VALUE
-            $b
           Label : KEY
             $a
+          Label : VALUE
+            $b
         Label : ARGUMENT
           =>
-          Label : VALUE
-            -
-            Label : SIGN
-              5
           Label : KEY
             -
             Label : SIGN
               4
-    Label : LEFT
-      $a
+          Label : VALUE
+            -
+            Label : SIGN
+              5

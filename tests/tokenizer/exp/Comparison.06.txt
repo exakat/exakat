@@ -6,8 +6,6 @@ Label : CODE
     (
     Label : CODE
       ==
-      Label : RIGHT
-        false
       Label : LEFT
         ->
         Label : OBJECT
@@ -16,6 +14,8 @@ Label : CODE
           methode
           Label : ARGUMENTS
             void
+      Label : RIGHT
+        false
   Label : THEN
     {
     Label : CODE

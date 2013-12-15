@@ -6,16 +6,6 @@ Label : CODE
     (
     Label : CODE
       &&
-      Label : RIGHT
-        ==
-        Label : RIGHT
-          1
-        Label : LEFT
-          [
-          Label : INDEX
-            'opt'
-          Label : VARIABLE
-            $_REQUEST
       Label : LEFT
         isset
         Label : ARGUMENTS
@@ -26,6 +16,16 @@ Label : CODE
               'opt'
             Label : VARIABLE
               $_REQUEST
+      Label : RIGHT
+        ==
+        Label : LEFT
+          [
+          Label : INDEX
+            'opt'
+          Label : VARIABLE
+            $_REQUEST
+        Label : RIGHT
+          1
   Label : THEN
     {
     Label : CODE

@@ -6,11 +6,11 @@ Label : CODE
     new
     Label : NEW
       \
+      Label : ARGUMENTS
+        void
       Label : ELEMENT
         b
       Label : ELEMENT
         a
       Label : ELEMENT
         c
-      Label : ARGUMENTS
-        void

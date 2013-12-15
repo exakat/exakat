@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       a
     Label : ELEMENT
       b
-    Label : ARGUMENTS
-      void

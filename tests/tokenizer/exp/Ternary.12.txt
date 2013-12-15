@@ -12,14 +12,14 @@ Label : CODE
         ?
         Label : CONDITION
           ==
-          Label : RIGHT
-            'd'
           Label : LEFT
             [
             Label : INDEX
               'c'
             Label : VARIABLE
               $b
+          Label : RIGHT
+            'd'
         Label : THEN
           .
           Label : CONCAT
@@ -66,14 +66,14 @@ Label : CODE
                 (
                 Label : CODE
                   !=
-                  Label : RIGHT
-                    X
                   Label : LEFT
                     [
                     Label : INDEX
                       'w'
                     Label : VARIABLE
                       $v
+                  Label : RIGHT
+                    X
               Label : THEN
                 .
                 Label : CONCAT

@@ -4,10 +4,10 @@ Label : CODE
   do
   Label : CONDITION
     <
-    Label : RIGHT
-      4
     Label : LEFT
       $x
+    Label : RIGHT
+      4
   Label : LOOP
     {
     Label : CODE

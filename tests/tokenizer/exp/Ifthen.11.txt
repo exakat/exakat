@@ -12,16 +12,16 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          3
         Label : LEFT
           $e
+        Label : RIGHT
+          3
       Label : ELEMENT
         =
-        Label : RIGHT
-          4
         Label : LEFT
           $f
+        Label : RIGHT
+          4
       Label : ELEMENT
         switch
         Label : NAME
@@ -36,10 +36,10 @@ Label : CODE
                 ;
                 Label : ELEMENT
                   =
-                  Label : RIGHT
-                    1
                   Label : LEFT
                     $x
+                  Label : RIGHT
+                    1
                 Label : ELEMENT
                   break
                   Label : LEVEL
@@ -58,7 +58,7 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            5
           Label : LEFT
             $f
+          Label : RIGHT
+            5

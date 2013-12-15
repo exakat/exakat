@@ -4,16 +4,16 @@ Label : CODE
   foreach
   Label : VALUE
     =>
+    Label : KEY
+      ->
+      Label : PROPERTY
+        a
+      Label : OBJECT
+        $x
     Label : VALUE
       &
       Label : REFERENCE
         $y
-    Label : KEY
-      ->
-      Label : OBJECT
-        $x
-      Label : PROPERTY
-        a
   Label : SOURCE
     $a
   Label : LOOP

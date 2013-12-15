@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       &
       Label : REFERENCE
@@ -14,10 +16,10 @@ Label : CODE
           $c
           Label : ARGUMENTS
             void
-    Label : LEFT
-      $x
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       &
       Label : REFERENCE
@@ -26,10 +28,10 @@ Label : CODE
           y
         Label : PROPERTY
           $c
-    Label : LEFT
-      $x
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       &
       Label : REFERENCE
@@ -40,5 +42,3 @@ Label : CODE
           c
           Label : ARGUMENTS
             void
-    Label : LEFT
-      $x

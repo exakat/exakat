@@ -2,6 +2,8 @@
 
 Label : CODE
   =
+  Label : LEFT
+    $x
   Label : RIGHT
     [
     Label : INDEX
@@ -12,5 +14,3 @@ Label : CODE
         2
       Label : VARIABLE
         $y
-  Label : LEFT
-    $x

@@ -6,10 +6,10 @@ Label : CODE
     {
     Label : CODE
       function
-      Label : ARGUMENTS
-        void
       Label : NAME
         x
+      Label : ARGUMENTS
+        void
   Label : NAME
     a
   Label : EXTENDS

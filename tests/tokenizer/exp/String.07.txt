@@ -3,24 +3,26 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a10
     Label : RIGHT
       +
-      Label : RIGHT
-        ->
-        Label : PROPERTY
-          $e10
-        Label : OBJECT
-          $d10
       Label : LEFT
         ->
         Label : PROPERTY
           $c10
         Label : OBJECT
           $b10
-    Label : LEFT
-      $a10
+      Label : RIGHT
+        ->
+        Label : PROPERTY
+          $e10
+        Label : OBJECT
+          $d10
   Label : ELEMENT
     =
+    Label : LEFT
+      $a8
     Label : RIGHT
       "
       Label : CONTAIN
@@ -33,10 +35,10 @@ Label : CODE
             $b8
         Label : CONCAT
           C
-    Label : LEFT
-      $a8
   Label : ELEMENT
     =
+    Label : LEFT
+      $a6
     Label : RIGHT
       "
       Label : CONTAIN
@@ -53,10 +55,10 @@ Label : CODE
             c6
         Label : CONCAT
           C
-    Label : LEFT
-      $a6
   Label : ELEMENT
     =
+    Label : LEFT
+      $a4
     Label : RIGHT
       "
       Label : CONTAIN
@@ -75,10 +77,10 @@ Label : CODE
           {
           Label : NAME
             $d4
-    Label : LEFT
-      $a4
   Label : ELEMENT
     =
+    Label : LEFT
+      $a2
     Label : RIGHT
       "
       Label : CONTAIN
@@ -91,10 +93,10 @@ Label : CODE
             $b2
         Label : CONCAT
           C
-    Label : LEFT
-      $a2
   Label : ELEMENT
     =
+    Label : LEFT
+      $a0
     Label : RIGHT
       "
       Label : CONTAIN
@@ -107,10 +109,10 @@ Label : CODE
             $b
         Label : CONCAT
           C
-    Label : LEFT
-      $a0
   Label : ELEMENT
     =
+    Label : LEFT
+      $a1
     Label : RIGHT
       "
       Label : CONTAIN
@@ -127,28 +129,28 @@ Label : CODE
             c
         Label : CONCAT
           C
-    Label : LEFT
-      $a1
   Label : ELEMENT
     =
+    Label : LEFT
+      $a3
     Label : RIGHT
       +
-      Label : RIGHT
-        ->
-        Label : PROPERTY
-          $e3
-        Label : OBJECT
-          $d3
       Label : LEFT
         ->
         Label : PROPERTY
           $c3
         Label : OBJECT
           $b3
-    Label : LEFT
-      $a3
+      Label : RIGHT
+        ->
+        Label : PROPERTY
+          $e3
+        Label : OBJECT
+          $d3
   Label : ELEMENT
     =
+    Label : LEFT
+      $a5
     Label : RIGHT
       "
       Label : CONTAIN
@@ -161,10 +163,10 @@ Label : CODE
             $b
         Label : CONCAT
           C
-    Label : LEFT
-      $a5
   Label : ELEMENT
     =
+    Label : LEFT
+      $a7
     Label : RIGHT
       "
       Label : CONTAIN
@@ -181,10 +183,10 @@ Label : CODE
             c
         Label : CONCAT
           C
-    Label : LEFT
-      $a7
   Label : ELEMENT
     =
+    Label : LEFT
+      $a9
     Label : RIGHT
       "
       Label : CONTAIN
@@ -201,5 +203,3 @@ Label : CODE
             c
         Label : CONCAT
           C
-    Label : LEFT
-      $a9

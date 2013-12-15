@@ -100,41 +100,41 @@ Label : CODE
         ;
         Label : ELEMENT
           Ppp
+          Label : VALUE
+            Void
           Label : DEFINE
             $d
-          Label : VALUE
-            Void
           Label : VAR
             var
         Label : ELEMENT
           Ppp
+          Label : VALUE
+            Void
           Label : DEFINE
             $b
-          Label : VALUE
-            Void
           Label : VAR
             var
         Label : ELEMENT
           Ppp
+          Label : VALUE
+            Void
           Label : DEFINE
             $c
-          Label : VALUE
-            Void
           Label : VAR
             var
         Label : ELEMENT
           Ppp
+          Label : VALUE
+            Void
           Label : DEFINE
             $e
-          Label : VALUE
-            Void
           Label : VAR
             var
         Label : ELEMENT
           Ppp
-          Label : DEFINE
-            $a
           Label : VALUE
             0
+          Label : DEFINE
+            $a
           Label : VAR
             var

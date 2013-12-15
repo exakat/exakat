@@ -4,25 +4,25 @@ Label : CODE
   ;
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       B
     Label : ELEMENT
       A
     Label : ELEMENT
       C
-    Label : ARGUMENTS
-      void
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       A
-    Label : ARGUMENTS
-      void
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
     Label : ELEMENT
       A
     Label : ELEMENT
       B
-    Label : ARGUMENTS
-      void

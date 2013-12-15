@@ -4,37 +4,37 @@ Label : CODE
   ;
   Label : ELEMENT
     +
+    Label : LEFT
+      ->
+      Label : PROPERTY
+        b
+      Label : OBJECT
+        $a
     Label : RIGHT
       *
+      Label : LEFT
+        ->
+        Label : PROPERTY
+          d
+        Label : OBJECT
+          $c
       Label : RIGHT
         *
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $g
-          Label : PROPERTY
-            h
         Label : LEFT
           (
           Label : CODE
             -
-            Label : RIGHT
-              /
-              Label : RIGHT
-                $e
-              Label : LEFT
-                2
             Label : LEFT
               1
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $c
-        Label : PROPERTY
-          d
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        b
+            Label : RIGHT
+              /
+              Label : LEFT
+                2
+              Label : RIGHT
+                $e
+        Label : RIGHT
+          ->
+          Label : PROPERTY
+            h
+          Label : OBJECT
+            $g

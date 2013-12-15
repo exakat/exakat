@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $result
     Label : RIGHT
       <<<EOF
 
@@ -16,10 +18,10 @@ Label : CODE
           ${
           Label : NAME
             ->
-            Label : OBJECT
-              $object
             Label : PROPERTY
               property
+            Label : OBJECT
+              $object
         Label : CONCAT
           ;
 
@@ -28,15 +30,13 @@ Label : CODE
           ${
           Label : NAME
             ->
+            Label : OBJECT
+              $object
             Label : METHOD
               method
               Label : ARGUMENTS
                 void
-            Label : OBJECT
-              $object
         Label : CONCAT
           ;
 
 
-    Label : LEFT
-      $result

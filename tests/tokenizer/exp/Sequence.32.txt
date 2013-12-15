@@ -2,10 +2,10 @@
 
 Label : CODE
   function
-  Label : ARGUMENTS
-    void
   Label : NAME
     x
+  Label : ARGUMENTS
+    void
   Label : BLOCK
     {
     Label : CODE
@@ -24,16 +24,16 @@ Label : CODE
                   $j
         Label : FINAL
           <
+          Label : LEFT
+            $a
           Label : RIGHT
             2
-          Label : LEFT
-            $a
         Label : INIT
           =
-          Label : RIGHT
-            0
           Label : LEFT
             $a
+          Label : RIGHT
+            0
         Label : INCREMENT
           ++
           Label : POSTPLUSPLUS
@@ -52,16 +52,16 @@ Label : CODE
                   $j
         Label : FINAL
           <
+          Label : LEFT
+            $i
           Label : RIGHT
             2
-          Label : LEFT
-            $i
         Label : INIT
           =
-          Label : RIGHT
-            0
           Label : LEFT
             $i
+          Label : RIGHT
+            0
         Label : INCREMENT
           ++
           Label : POSTPLUSPLUS

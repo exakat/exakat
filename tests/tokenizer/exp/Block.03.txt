@@ -7,38 +7,6 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
-        empty
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $a
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            strrchr
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                $c
-              Label : ARGUMENT
-                'd'
-          Label : LEFT
-            $b
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $e
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
         !
         Label : NOT
           empty
@@ -52,11 +20,43 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            $i
           Label : LEFT
             [
             Label : INDEX
               'h'
             Label : VARIABLE
               $g
+          Label : RIGHT
+            $i
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $e
+    Label : RIGHT
+      1
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            strrchr
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                $c
+              Label : ARGUMENT
+                'd'

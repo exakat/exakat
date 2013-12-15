@@ -2,7 +2,7 @@
 
 Label : CODE
   +
-  Label : RIGHT
-    $x
   Label : LEFT
     1
+  Label : RIGHT
+    $x

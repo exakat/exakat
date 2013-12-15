@@ -10,14 +10,16 @@ Label : CODE
     Block With if/elseif
     Label : CODE
       =
-      Label : RIGHT
-        1
       Label : LEFT
         $b
+      Label : RIGHT
+        1
   Label : ELSE
     Block With else
     Label : CODE
       =
+      Label : LEFT
+        $c
       Label : RIGHT
         "
         Label : CONTAIN
@@ -40,5 +42,3 @@ Label : CODE
                 g
               Label : OBJECT
                 $f
-      Label : LEFT
-        $c

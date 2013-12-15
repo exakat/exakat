@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $a
     Label : VALUE
       $b
+    Label : SOURCE
+      $a
     Label : LOOP
       ;
       Label : ELEMENT
@@ -22,12 +22,14 @@ Label : CODE
             ;
             Label : ELEMENT
               .=
-              Label : RIGHT
-                'j'
               Label : LEFT
                 $i
+              Label : RIGHT
+                'j'
       Label : ELEMENT
         =
+        Label : LEFT
+          $d
         Label : RIGHT
           .
           Label : CONCAT
@@ -38,8 +40,6 @@ Label : CODE
               g
             Label : OBJECT
               $f
-        Label : LEFT
-          $d
       Label : ELEMENT
         if
         Label : CONDITION
@@ -52,7 +52,7 @@ Label : CODE
             ;
             Label : ELEMENT
               .=
-              Label : RIGHT
-                'm'
               Label : LEFT
                 $l
+              Label : RIGHT
+                'm'

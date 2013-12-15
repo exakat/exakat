@@ -6,14 +6,14 @@ Label : CODE
     while
     Label : CONDITION
       =
+      Label : LEFT
+        $a
       Label : RIGHT
         b
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $c
-      Label : LEFT
-        $a
     Label : LOOP
       {
       Label : CODE
@@ -48,14 +48,14 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          'a'
         Label : LEFT
           [
           Label : INDEX
             'b'
           Label : VARIABLE
             $c
+        Label : RIGHT
+          'a'
     Label : THEN
       {
       Label : CODE

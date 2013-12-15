@@ -6,10 +6,10 @@ Label : CODE
     (
     Label : CODE
       >
-      Label : RIGHT
-        1
       Label : LEFT
         $a
+      Label : RIGHT
+        1
   Label : THEN
     void
   Label : ELSE
@@ -20,31 +20,31 @@ Label : CODE
         (
         Label : CODE
           <
-          Label : RIGHT
-            2
           Label : LEFT
             $b
+          Label : RIGHT
+            2
       Label : THEN
         Block With if/elseif
         Label : CODE
           =
-          Label : RIGHT
-            3
           Label : LEFT
             [
             Label : INDEX
               $d
             Label : VARIABLE
               $c
+          Label : RIGHT
+            3
       Label : ELSE
         Block With else
         Label : CODE
           =
-          Label : RIGHT
-            5
           Label : LEFT
             [
             Label : INDEX
               $f
             Label : VARIABLE
               $e
+          Label : RIGHT
+            5

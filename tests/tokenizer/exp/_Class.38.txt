@@ -48,10 +48,10 @@ Label : CODE
           private
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $b
         Label : VALUE
           1
+        Label : DEFINE
+          $b
         Label : PRIVATE
           private
       Label : ELEMENT

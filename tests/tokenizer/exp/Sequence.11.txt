@@ -14,10 +14,10 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            2
           Label : LEFT
             $x
+          Label : RIGHT
+            2
   Label : ELEMENT
     foreach
     Label : VALUE
@@ -30,10 +30,10 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            3
           Label : LEFT
             $c
+          Label : RIGHT
+            3
   Label : ELEMENT
     if
     Label : CONDITION
@@ -46,10 +46,10 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            1
           Label : LEFT
             $x
+          Label : RIGHT
+            1
   Label : ELEMENT
     foreach
     Label : VALUE
@@ -62,7 +62,7 @@ Label : CODE
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            2
           Label : LEFT
             $c
+          Label : RIGHT
+            2

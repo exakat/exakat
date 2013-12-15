@@ -10,13 +10,13 @@ Label : CODE
       ;
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $a
         Label : VALUE
           ::
           Label : CLASS
             b
           Label : CONSTANT
             c
+        Label : DEFINE
+          $a
         Label : VAR
           var

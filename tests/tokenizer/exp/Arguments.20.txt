@@ -8,12 +8,12 @@ Label : CODE
       void
       Label : ARGUMENT
         function
+        Label : NAME
+          lambda
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $a
-        Label : NAME
-          lambda
         Label : BLOCK
           {
           Label : CODE

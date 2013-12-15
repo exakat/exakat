@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $siteurl
     Label : RIGHT
       a
       Label : ARGUMENTS
@@ -44,5 +46,3 @@ Label : CODE
               $c
           Label : CONCAT
             'b'
-    Label : LEFT
-      $siteurl

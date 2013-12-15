@@ -6,10 +6,16 @@ Label : CODE
     (
     Label : CODE
       !==
+      Label : LEFT
+        true
       Label : RIGHT
         =
+        Label : LEFT
+          $a
         Label : RIGHT
           ->
+          Label : OBJECT
+            $b
           Label : METHOD
             c
             Label : ARGUMENTS
@@ -20,12 +26,6 @@ Label : CODE
                   void
               Label : ARGUMENT
                 $d
-          Label : OBJECT
-            $b
-        Label : LEFT
-          $a
-      Label : LEFT
-        true
   Label : THEN
     Block With if/elseif
     Label : CODE

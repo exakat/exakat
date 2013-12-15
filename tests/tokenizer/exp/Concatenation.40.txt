@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $y
     Label : RIGHT
       .
       Label : CONCAT
@@ -12,10 +14,10 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $c
-    Label : LEFT
-      $y
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       .
       Label : CONCAT
@@ -24,5 +26,3 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $b
-    Label : LEFT
-      $x

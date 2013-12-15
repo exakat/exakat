@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     instanceof
+    Label : LEFT
+      $x
     Label : RIGHT
       [
       Label : INDEX
         3
       Label : VARIABLE
         $y
-    Label : LEFT
-      $x

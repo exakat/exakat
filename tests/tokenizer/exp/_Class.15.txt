@@ -28,25 +28,25 @@ Label : CODE
           2
       Label : ELEMENT
         Ppp
+        Label : VALUE
+          Void
         Label : DEFINE
           $a
-        Label : VALUE
-          Void
         Label : VAR
           var
       Label : ELEMENT
         Ppp
+        Label : VALUE
+          Void
         Label : DEFINE
           $b
-        Label : VALUE
-          Void
         Label : VAR
           var
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $d
         Label : VALUE
           Void
+        Label : DEFINE
+          $d
         Label : VAR
           var

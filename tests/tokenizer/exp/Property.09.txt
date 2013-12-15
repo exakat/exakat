@@ -2,11 +2,11 @@
 
 Label : CODE
   *
-  Label : RIGHT
-    1
   Label : LEFT
     ->
     Label : PROPERTY
       y
     Label : OBJECT
       $x
+  Label : RIGHT
+    1

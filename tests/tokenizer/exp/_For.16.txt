@@ -7,56 +7,56 @@ Label : CODE
       ;
       Label : ELEMENT
         ->
+        Label : OBJECT
+          $e
         Label : METHOD
           f
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $g
-        Label : OBJECT
-          $e
       Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ->
+            Label : OBJECT
+              $h
             Label : METHOD
               i
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   'j'
-            Label : OBJECT
-              $h
     Label : FINAL
       <
-      Label : RIGHT
-        $n
       Label : LEFT
         $i
+      Label : RIGHT
+        $n
     Label : INIT
       ,
       Label : ARGUMENT
         =
-        Label : RIGHT
-          0
         Label : LEFT
           $i
+        Label : RIGHT
+          0
       Label : ARGUMENT
         =
+        Label : LEFT
+          $n
         Label : RIGHT
           count
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               ->
-              Label : OBJECT
-                $c
               Label : PROPERTY
                 d
-        Label : LEFT
-          $n
+              Label : OBJECT
+                $c
     Label : INCREMENT
       ++
       Label : POSTPLUSPLUS

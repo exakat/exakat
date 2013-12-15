@@ -18,12 +18,6 @@ Label : CODE
               void
           Label : ELEMENT
             &&
-            Label : RIGHT
-              =
-              Label : RIGHT
-                'f'
-              Label : LEFT
-                $e
             Label : LEFT
               [
               Label : INDEX
@@ -34,5 +28,11 @@ Label : CODE
                   'c'
                 Label : VARIABLE
                   $b
+            Label : RIGHT
+              =
+              Label : LEFT
+                $e
+              Label : RIGHT
+                'f'
       Label : CASE
         'a'

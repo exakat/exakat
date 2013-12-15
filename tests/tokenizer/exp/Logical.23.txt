@@ -4,24 +4,28 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ||
+      Label : LEFT
+        $b
       Label : RIGHT
         ->
+        Label : OBJECT
+          $c
         Label : METHOD
           d
           Label : ARGUMENTS
             void
-        Label : OBJECT
-          $c
-      Label : LEFT
-        $b
-    Label : LEFT
-      $a
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ^
+      Label : LEFT
+        $b
       Label : RIGHT
         ::
         Label : CLASS
@@ -30,49 +34,45 @@ Label : CODE
           E
           Label : ARGUMENTS
             void
-      Label : LEFT
-        $b
-    Label : LEFT
-      $a
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       |
+      Label : LEFT
+        $b
       Label : RIGHT
         ::
         Label : CLASS
           D
         Label : PROPERTY
           $E
-      Label : LEFT
-        $b
-    Label : LEFT
-      $a
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       &
+      Label : LEFT
+        $b
       Label : RIGHT
         ::
         Label : CLASS
           D
         Label : CONSTANT
           E
-      Label : LEFT
-        $b
-    Label : LEFT
-      $a
   Label : ELEMENT
     =
-    Label : RIGHT
-      &&
-      Label : RIGHT
-        ->
-        Label : OBJECT
-          $c
-        Label : PROPERTY
-          d
-      Label : LEFT
-        $b
     Label : LEFT
       $a
+    Label : RIGHT
+      &&
+      Label : LEFT
+        $b
+      Label : RIGHT
+        ->
+        Label : PROPERTY
+          d
+        Label : OBJECT
+          $c

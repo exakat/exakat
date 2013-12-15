@@ -4,17 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     +=
+    Label : LEFT
+      $b
     Label : RIGHT
       +
       Label : SIGN
         2
-    Label : LEFT
-      $b
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       -
       Label : SIGN
         3
-    Label : LEFT
-      $x

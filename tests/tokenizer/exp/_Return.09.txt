@@ -8,7 +8,7 @@ Label : CODE
       $x
   Label : ELEMENT
     =
-    Label : RIGHT
-      1
     Label : LEFT
       $x
+    Label : RIGHT
+      1

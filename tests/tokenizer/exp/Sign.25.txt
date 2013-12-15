@@ -4,35 +4,35 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       -
       Label : SIGN
         /
-        Label : RIGHT
-          2
         Label : LEFT
           (
           Label : CODE
             -
-            Label : RIGHT
-              [
-              Label : INDEX
-                'g'
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $e
-                Label : PROPERTY
-                  f
             Label : LEFT
               [
               Label : INDEX
                 'd'
               Label : VARIABLE
                 ->
-                Label : OBJECT
-                  $b
                 Label : PROPERTY
                   c
-    Label : LEFT
-      $a
+                Label : OBJECT
+                  $b
+            Label : RIGHT
+              [
+              Label : INDEX
+                'g'
+              Label : VARIABLE
+                ->
+                Label : PROPERTY
+                  f
+                Label : OBJECT
+                  $e
+        Label : RIGHT
+          2

@@ -27,16 +27,6 @@ Label : CODE
       return
       Label : RETURN
         &&
-        Label : RIGHT
-          [
-          Label : INDEX
-            'e'
-          Label : VARIABLE
-            [
-            Label : INDEX
-              0
-            Label : VARIABLE
-              $d
         Label : LEFT
           isset
           Label : ARGUMENTS
@@ -51,3 +41,13 @@ Label : CODE
                   0
                 Label : VARIABLE
                   $b
+        Label : RIGHT
+          [
+          Label : INDEX
+            'e'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              0
+            Label : VARIABLE
+              $d

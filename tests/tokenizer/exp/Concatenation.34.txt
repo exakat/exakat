@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       "
       Label : CONTAIN
@@ -28,5 +30,3 @@ Label : CODE
               id
             Label : OBJECT
               $node
-    Label : LEFT
-      $x

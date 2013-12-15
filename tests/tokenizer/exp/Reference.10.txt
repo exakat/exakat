@@ -4,17 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       &
       Label : REFERENCE
         ->
+        Label : OBJECT
+          $y
         Label : METHOD
           c
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'd'
-        Label : OBJECT
-          $y
-    Label : LEFT
-      $x

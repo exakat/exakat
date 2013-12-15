@@ -16,18 +16,18 @@ Label : CODE
             {
             Label : NAME
               ->
-              Label : OBJECT
-                $this
               Label : PROPERTY
                 b
+              Label : OBJECT
+                $this
           Label : CONCAT
              c 
           Label : CONCAT
             ->
-            Label : OBJECT
-              $item
             Label : PROPERTY
               d
+            Label : OBJECT
+              $item
           Label : CONCAT
              
           Label : CONCAT

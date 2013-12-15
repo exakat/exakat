@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       %
-      Label : RIGHT
-        2
       Label : LEFT
         ::
         Label : CLASS
@@ -16,14 +16,14 @@ Label : CODE
           c
           Label : ARGUMENTS
             void
-    Label : LEFT
-      $a
+      Label : RIGHT
+        2
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       +
-      Label : RIGHT
-        2
       Label : LEFT
         ::
         Label : CLASS
@@ -32,14 +32,14 @@ Label : CODE
           c
           Label : ARGUMENTS
             void
-    Label : LEFT
-      $a
+      Label : RIGHT
+        2
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       *
-      Label : RIGHT
-        2
       Label : LEFT
         ::
         Label : CLASS
@@ -48,14 +48,14 @@ Label : CODE
           c
           Label : ARGUMENTS
             void
-    Label : LEFT
-      $a
+      Label : RIGHT
+        2
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       /
-      Label : RIGHT
-        2
       Label : LEFT
         ::
         Label : CLASS
@@ -64,5 +64,5 @@ Label : CODE
           c
           Label : ARGUMENTS
             void
-    Label : LEFT
-      $a
+      Label : RIGHT
+        2

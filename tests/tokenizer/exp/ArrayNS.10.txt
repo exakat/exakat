@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      [
-      Label : INDEX
-        'e'
-      Label : VARIABLE
-        $f
     Label : LEFT
       [
       Label : VARIABLE
@@ -26,3 +20,9 @@ Label : CODE
               $b
           Label : VARIABLE
             $a
+    Label : RIGHT
+      [
+      Label : INDEX
+        'e'
+      Label : VARIABLE
+        $f

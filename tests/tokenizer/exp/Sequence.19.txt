@@ -4,27 +4,27 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      1
     Label : LEFT
       {
       Label : INDEX
         +
-        Label : RIGHT
-          $c
         Label : LEFT
           $b
+        Label : RIGHT
+          $c
       Label : VARIABLE
         $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      $y
-  Label : ELEMENT
-    =
     Label : RIGHT
       1
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $y
+    Label : RIGHT
+      2
+  Label : ELEMENT
+    =
     Label : LEFT
       $x
+    Label : RIGHT
+      1

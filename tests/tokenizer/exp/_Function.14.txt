@@ -4,12 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
     Label : NAME
       &
       Label : REFERENCE
         z
+    Label : ARGUMENTS
+      void
     Label : BLOCK
       {
       Label : CODE
@@ -22,12 +22,12 @@ Label : CODE
       {
       Label : CODE
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           &
           Label : REFERENCE
             x
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE

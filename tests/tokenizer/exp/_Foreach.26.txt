@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $m
     Label : RIGHT
       new
       Label : NEW
@@ -12,18 +14,16 @@ Label : CODE
           void
           Label : ARGUMENT
             $o
-    Label : LEFT
-      $m
   Label : ELEMENT
     foreach
     Label : VALUE
       $c
     Label : SOURCE
       ->
-      Label : OBJECT
-        $a
       Label : PROPERTY
         b
+      Label : OBJECT
+        $a
     Label : LOOP
       Block With Foreach
       Label : CODE
@@ -36,18 +36,20 @@ Label : CODE
               void
               Label : ARGUMENT
                 ->
-                Label : OBJECT
-                  ->
-                  Label : OBJECT
-                    $d
-                  Label : PROPERTY
-                    e
                 Label : PROPERTY
                   f
+                Label : OBJECT
+                  ->
+                  Label : PROPERTY
+                    e
+                  Label : OBJECT
+                    $d
         Label : THEN
           Block With if/elseif
           Label : CODE
             =
+            Label : LEFT
+              $g
             Label : RIGHT
               h
               Label : ARGUMENTS
@@ -56,13 +58,11 @@ Label : CODE
                   $i
                 Label : ARGUMENT
                   ->
-                  Label : OBJECT
-                    ->
-                    Label : OBJECT
-                      $j
-                    Label : PROPERTY
-                      k
                   Label : PROPERTY
                     l
-            Label : LEFT
-              $g
+                  Label : OBJECT
+                    ->
+                    Label : PROPERTY
+                      k
+                    Label : OBJECT
+                      $j

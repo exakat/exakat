@@ -8,7 +8,7 @@ Label : CODE
       void
       Label : ARGUMENT
         instanceof
-        Label : RIGHT
-          c
         Label : LEFT
           $b
+        Label : RIGHT
+          c

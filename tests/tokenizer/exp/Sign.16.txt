@@ -2,9 +2,9 @@
 
 Label : CODE
   ==
+  Label : LEFT
+    1
   Label : RIGHT
     -
     Label : SIGN
       1
-  Label : LEFT
-    1

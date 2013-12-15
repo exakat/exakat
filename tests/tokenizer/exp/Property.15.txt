@@ -12,14 +12,14 @@ Label : CODE
           ,
           Label : ARGUMENT
             ->
-            Label : OBJECT
-              $a
             Label : PROPERTY
               [
               Label : INDEX
                 $c
               Label : VARIABLE
                 $b
+            Label : OBJECT
+              $a
           Label : ARGUMENT
             [
             Label : INDEX

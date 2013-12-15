@@ -6,6 +6,28 @@ Label : CODE
     (
     Label : CODE
       &&
+      Label : LEFT
+        &&
+        Label : LEFT
+          ==
+          Label : LEFT
+            [
+            Label : INDEX
+              3
+            Label : VARIABLE
+              $a
+          Label : RIGHT
+            'b'
+        Label : RIGHT
+          ==
+          Label : LEFT
+            [
+            Label : INDEX
+              4
+            Label : VARIABLE
+              $c
+          Label : RIGHT
+            1
       Label : RIGHT
         d
         Label : ARGUMENTS
@@ -14,28 +36,6 @@ Label : CODE
             "e"
           Label : ARGUMENT
             $f
-      Label : LEFT
-        &&
-        Label : RIGHT
-          ==
-          Label : RIGHT
-            1
-          Label : LEFT
-            [
-            Label : INDEX
-              4
-            Label : VARIABLE
-              $c
-        Label : LEFT
-          ==
-          Label : RIGHT
-            'b'
-          Label : LEFT
-            [
-            Label : INDEX
-              3
-            Label : VARIABLE
-              $a
   Label : THEN
     {
     Label : CODE

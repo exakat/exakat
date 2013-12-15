@@ -10,12 +10,12 @@ Label : CODE
       {
       Label : CODE
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           &
           Label : REFERENCE
             MethodDefinedWithAReference
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE
@@ -26,12 +26,12 @@ Label : CODE
                 $x
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
     Label : NAME
       &
       Label : REFERENCE
         DefinedWithAReference
+    Label : ARGUMENTS
+      void
     Label : BLOCK
       {
       Label : CODE

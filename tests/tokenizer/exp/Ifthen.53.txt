@@ -5,10 +5,10 @@ Label : CODE
     (
     Label : CODE
       ==
-      Label : RIGHT
-        1
       Label : LEFT
         $a
+      Label : RIGHT
+        1
   Label : THEN
     void
   Label : ELSE
@@ -17,10 +17,10 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          1
         Label : LEFT
           $b
+        Label : RIGHT
+          1
     Label : THEN
       void
     Label : ELSE

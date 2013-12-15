@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       +
-      Label : RIGHT
-        1
       Label : LEFT
         \
         Label : ELEMENT
@@ -16,8 +16,8 @@ Label : CODE
           j
         Label : ELEMENT
           l
-    Label : LEFT
-      $a
+      Label : RIGHT
+        1
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -32,6 +32,8 @@ Label : CODE
           f
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       \
       Label : ELEMENT
@@ -40,5 +42,3 @@ Label : CODE
         g
       Label : ELEMENT
         i
-    Label : LEFT
-      $x

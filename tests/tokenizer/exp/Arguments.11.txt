@@ -4,14 +4,52 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         &&
+        Label : LEFT
+          !
+          Label : NOT
+            in_array
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'd'
+                Label : VARIABLE
+                  ->
+                  Label : PROPERTY
+                    c
+                  Label : OBJECT
+                    $b
+              Label : ARGUMENT
+                $e
         Label : RIGHT
           (
           Label : CODE
             ||
+            Label : LEFT
+              !
+              Label : NOT
+                preg_match
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    '/^\w+$/'
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'h'
+                    Label : VARIABLE
+                      ->
+                      Label : PROPERTY
+                        g
+                      Label : OBJECT
+                        $f
             Label : RIGHT
               !
               Label : NOT
@@ -28,50 +66,14 @@ Label : CODE
                         'm'
                       Label : VARIABLE
                         ->
-                        Label : OBJECT
-                          $k
                         Label : PROPERTY
                           l
+                        Label : OBJECT
+                          $k
                     Label : CONCAT
                       'j'
                     Label : CONCAT
                       I
-            Label : LEFT
-              !
-              Label : NOT
-                preg_match
-                Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    '/^\w+$/'
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'h'
-                    Label : VARIABLE
-                      ->
-                      Label : OBJECT
-                        $f
-                      Label : PROPERTY
-                        g
-        Label : LEFT
-          !
-          Label : NOT
-            in_array
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'd'
-                Label : VARIABLE
-                  ->
-                  Label : OBJECT
-                    $b
-                  Label : PROPERTY
-                    c
-              Label : ARGUMENT
-                $e
       Label : THEN
         'o'
       Label : ELSE
@@ -80,9 +82,7 @@ Label : CODE
           'r'
         Label : VARIABLE
           ->
-          Label : OBJECT
-            $p
           Label : PROPERTY
             q
-    Label : LEFT
-      $a
+          Label : OBJECT
+            $p

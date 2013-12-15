@@ -10,52 +10,50 @@ Label : CODE
       ;
       Label : ELEMENT
         const
-        Label : VALUE
-          '2'
         Label : NAME
           D
+        Label : VALUE
+          '2'
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           C
+        Label : VALUE
+          1
       Label : ELEMENT
         const
+        Label : NAME
+          E
         Label : VALUE
           ::
           Label : CLASS
             F
           Label : CONSTANT
             G
-        Label : NAME
-          E
       Label : ELEMENT
         Ppp
         Label : VALUE
           Void
         Label : DEFINE
           $E
-        Label : STATIC
-          static
         Label : PROTECTED
           protected
-      Label : ELEMENT
-        Ppp
-        Label : DEFINE
-          function
-          Label : ARGUMENTS
-            void
-          Label : NAME
-            f
-          Label : BLOCK
-            {
-            Label : CODE
-              void
         Label : STATIC
           static
+      Label : ELEMENT
+        function
+        Label : NAME
+          f
+        Label : ARGUMENTS
+          void
+        Label : BLOCK
+          {
+          Label : CODE
+            void
         Label : PUBLIC
           public
+        Label : STATIC
+          static
       Label : ELEMENT
         Ppp
         Label : VALUE

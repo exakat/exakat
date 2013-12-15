@@ -3,6 +3,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a6
     Label : RIGHT
       "
       Label : CONTAIN
@@ -29,5 +31,3 @@ Label : CODE
             $d
         Label : CONCAT
           }
-    Label : LEFT
-      $a6

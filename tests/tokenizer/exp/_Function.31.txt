@@ -2,17 +2,17 @@
 
 Label : CODE
   interface
-  Label : NAME
-    a
   Label : CODE
     {
     Label : CODE
       function
-      Label : ARGUMENTS
-        void
       Label : NAME
         &
         Label : REFERENCE
           b
+      Label : ARGUMENTS
+        void
       Label : PUBLIC
         public
+  Label : NAME
+    a

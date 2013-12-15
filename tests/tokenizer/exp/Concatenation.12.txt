@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $query
     Label : RIGHT
       .
       Label : CONCAT
@@ -22,5 +24,3 @@ Label : CODE
           $d
       Label : CONCAT
         $g
-    Label : LEFT
-      $query

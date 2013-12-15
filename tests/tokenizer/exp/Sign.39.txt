@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       -
       Label : SIGN
         (int)
         Label : CAST
           $b
-    Label : LEFT
-      $a

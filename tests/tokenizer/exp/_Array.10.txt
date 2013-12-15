@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     !==
-    Label : RIGHT
-      D
     Label : LEFT
       [
       Label : INDEX
@@ -16,9 +14,11 @@ Label : CODE
           (
           Label : CODE
             +
-            Label : RIGHT
-              1
             Label : LEFT
               $b
+            Label : RIGHT
+              1
         Label : VARIABLE
           $a
+    Label : RIGHT
+      D

@@ -4,45 +4,45 @@ Label : CODE
   ;
   Label : ELEMENT
     &
-    Label : RIGHT
-      $d
     Label : LEFT
       |
+      Label : LEFT
+        $a
       Label : RIGHT
         >>
+        Label : LEFT
+          $c
         Label : RIGHT
           -
           Label : SIGN
             3
-        Label : LEFT
-          $c
-      Label : LEFT
-        $a
-  Label : ELEMENT
-    &
     Label : RIGHT
       $d
+  Label : ELEMENT
+    &
     Label : LEFT
       |
+      Label : LEFT
+        $a
       Label : RIGHT
         >>
+        Label : LEFT
+          $c
         Label : RIGHT
           1
-        Label : LEFT
-          $c
-      Label : LEFT
-        $a
-  Label : ELEMENT
-    &
     Label : RIGHT
       $d
+  Label : ELEMENT
+    &
     Label : LEFT
       |
-      Label : RIGHT
-        >>
-        Label : RIGHT
-          1.2
-        Label : LEFT
-          $c
       Label : LEFT
         $a
+      Label : RIGHT
+        >>
+        Label : LEFT
+          $c
+        Label : RIGHT
+          1.2
+    Label : RIGHT
+      $d

@@ -27,16 +27,16 @@ Label : CODE
                 $a
     Label : THEN
       =
-      Label : RIGHT
-        new
-        Label : NEW
-          C
       Label : LEFT
         ::
         Label : CLASS
           self
         Label : PROPERTY
           $b
+      Label : RIGHT
+        new
+        Label : NEW
+          C
     Label : ELSE
       ->
       Label : OBJECT

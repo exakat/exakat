@@ -22,18 +22,18 @@ Label : CODE
           Block With Sequence For Case Without Semicolon
           Label : ELEMENT
             =
-            Label : RIGHT
-              0
             Label : LEFT
               $count
+            Label : RIGHT
+              0
           Label : ELEMENT
             foreach
             Label : VALUE
               =>
-              Label : VALUE
-                $value
               Label : KEY
                 $key
+              Label : VALUE
+                $value
             Label : SOURCE
               $data
             Label : LOOP
@@ -42,20 +42,20 @@ Label : CODE
                 void
           Label : ELEMENT
             =
-            Label : RIGHT
-              array
-              Label : ARGUMENTS
-                void
             Label : LEFT
               $associative
-          Label : ELEMENT
-            =
             Label : RIGHT
               array
               Label : ARGUMENTS
                 void
+          Label : ELEMENT
+            =
             Label : LEFT
               $indexed
+            Label : RIGHT
+              array
+              Label : ARGUMENTS
+                void
           Label : ELEMENT
             if
             Label : CONDITION

@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
+    Label : OBJECT
+      $a
     Label : METHOD
       b
       Label : ARGUMENTS
@@ -20,5 +22,3 @@ Label : CODE
             Label : CONCAT
                C
 
-    Label : OBJECT
-      $a

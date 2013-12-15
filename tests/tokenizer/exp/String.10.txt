@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $loc
     Label : RIGHT
       "
       Label : CONTAIN
@@ -18,10 +20,10 @@ Label : CODE
           ->
         Label : CONCAT
           b
-    Label : LEFT
-      $loc
   Label : ELEMENT
     =
+    Label : LEFT
+      $loc
     Label : RIGHT
       "
       Label : CONTAIN
@@ -38,23 +40,21 @@ Label : CODE
           b
         Label : CONCAT
            c
-    Label : LEFT
-      $loc
   Label : ELEMENT
     =
+    Label : LEFT
+      $loc
     Label : RIGHT
       "
       Label : CONTAIN
         Concatenation
         Label : CONCAT
           ->
-          Label : OBJECT
-            $a
           Label : PROPERTY
             b
+          Label : OBJECT
+            $a
         Label : CONCAT
            c 
         Label : CONCAT
           $d
-    Label : LEFT
-      $loc

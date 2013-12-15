@@ -4,20 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         (
         Label : CODE
           ||
-          Label : RIGHT
-            !
-            Label : NOT
-              [
-              Label : INDEX
-                'j'
-              Label : VARIABLE
-                $i
           Label : LEFT
             b
             Label : ARGUMENTS
@@ -42,9 +36,15 @@ Label : CODE
                       $f
                   Label : CONCAT
                     h
+          Label : RIGHT
+            !
+            Label : NOT
+              [
+              Label : INDEX
+                'j'
+              Label : VARIABLE
+                $i
       Label : THEN
         'k'
       Label : ELSE
         'l'
-    Label : LEFT
-      $a

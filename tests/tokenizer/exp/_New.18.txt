@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       new
       Label : NEW
@@ -14,8 +16,6 @@ Label : CODE
           $y
           Label : ARGUMENTS
             void
-    Label : LEFT
-      $x
   Label : ELEMENT
     class
     Label : NAME
@@ -26,20 +26,20 @@ Label : CODE
         ;
         Label : ELEMENT
           Ppp
-          Label : DEFINE
-            $y
           Label : VALUE
             'f'
+          Label : DEFINE
+            $y
           Label : PUBLIC
             public
           Label : STATIC
             static
         Label : ELEMENT
           function
-          Label : ARGUMENTS
-            void
           Label : NAME
             a
+          Label : ARGUMENTS
+            void
           Label : BLOCK
             {
             Label : CODE
@@ -50,7 +50,7 @@ Label : CODE
                   'b'
   Label : ELEMENT
     =
-    Label : RIGHT
-      'a'
     Label : LEFT
       $y
+    Label : RIGHT
+      'a'

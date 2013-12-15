@@ -6,9 +6,9 @@ Label : CODE
     new
     Label : NEW
       \
+      Label : ARGUMENTS
+        void
       Label : ELEMENT
         a
       Label : ELEMENT
         b
-      Label : ARGUMENTS
-        void

@@ -2,24 +2,24 @@
 
 Label : CODE
   function
+  Label : NAME
+    a
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
       =
-      Label : RIGHT
-        3
       Label : LEFT
         $c
+      Label : RIGHT
+        3
     Label : ARGUMENT
       $b
     Label : ARGUMENT
       =
-      Label : RIGHT
-        4
       Label : LEFT
         $d
-  Label : NAME
-    a
+      Label : RIGHT
+        4
   Label : BLOCK
     {
     Label : CODE

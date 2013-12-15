@@ -10,44 +10,44 @@ Label : CODE
       ;
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $d
         Label : VALUE
           Void
+        Label : DEFINE
+          $d
         Label : VAR
           var
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $a
         Label : VALUE
           Void
+        Label : DEFINE
+          $a
         Label : VAR
           var
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           b
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE
             void
       Label : ELEMENT
         Ppp
-        Label : DEFINE
-          $c
         Label : VALUE
           Void
+        Label : DEFINE
+          $c
         Label : VAR
           var
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
         Label : NAME
           c
+        Label : ARGUMENTS
+          void
         Label : BLOCK
           {
           Label : CODE

@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       -
       Label : SIGN
@@ -14,5 +16,3 @@ Label : CODE
           c
           Label : ARGUMENTS
             void
-    Label : LEFT
-      $a

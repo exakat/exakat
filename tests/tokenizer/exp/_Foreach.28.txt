@@ -7,35 +7,35 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          'b'
         Label : LEFT
           $a
+        Label : RIGHT
+          'b'
     Label : THEN
       foreach
       Label : VALUE
         $g
       Label : SOURCE
         ->
+        Label : OBJECT
+          ->
+          Label : PROPERTY
+            d
+          Label : OBJECT
+            $c
         Label : METHOD
           e
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'f'
-        Label : OBJECT
-          ->
-          Label : OBJECT
-            $c
-          Label : PROPERTY
-            d
       Label : LOOP
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ->
-            Label : OBJECT
-              $h
             Label : PROPERTY
               i
+            Label : OBJECT
+              $h

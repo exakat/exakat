@@ -2,6 +2,8 @@
 
 Label : CODE
   function
+  Label : NAME
+    a
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -12,10 +14,10 @@ Label : CODE
           A
       Label : VARIABLE
         =
-        Label : RIGHT
-          null
         Label : LEFT
           $c
+        Label : RIGHT
+          null
     Label : ARGUMENT
       $b
     Label : ARGUMENT
@@ -28,8 +30,6 @@ Label : CODE
           D
       Label : VARIABLE
         $d
-  Label : NAME
-    a
   Label : BLOCK
     {
     Label : CODE

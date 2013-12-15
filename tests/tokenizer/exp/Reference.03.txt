@@ -2,17 +2,17 @@
 
 Label : CODE
   =
+  Label : LEFT
+    $a
   Label : RIGHT
     &
     Label : REFERENCE
       [
       Label : INDEX
         +
-        Label : RIGHT
-          3
         Label : LEFT
           1
+        Label : RIGHT
+          3
       Label : VARIABLE
         $b
-  Label : LEFT
-    $a

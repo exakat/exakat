@@ -2,6 +2,8 @@
 
 Label : CODE
   function
+  Label : NAME
+    a
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -10,14 +12,18 @@ Label : CODE
         $d
     Label : ARGUMENT
       =
-      Label : RIGHT
-        1
       Label : LEFT
         &
         Label : REFERENCE
           $c
+      Label : RIGHT
+        1
     Label : ARGUMENT
       =
+      Label : LEFT
+        &
+        Label : REFERENCE
+          $b
       Label : RIGHT
         array
         Label : ARGUMENTS
@@ -26,6 +32,8 @@ Label : CODE
             3
           Label : ARGUMENT
             =>
+            Label : KEY
+              2
             Label : VALUE
               array
               Label : ARGUMENTS
@@ -34,16 +42,8 @@ Label : CODE
                   3
                 Label : ARGUMENT
                   2
-            Label : KEY
-              2
           Label : ARGUMENT
             1
-      Label : LEFT
-        &
-        Label : REFERENCE
-          $b
-  Label : NAME
-    a
   Label : BLOCK
     {
     Label : CODE

@@ -22,16 +22,16 @@ Label : CODE
             void
       Label : FINAL
         <=
-        Label : RIGHT
-          8
         Label : LEFT
           $d
+        Label : RIGHT
+          8
       Label : INIT
         =
-        Label : RIGHT
-          1
         Label : LEFT
           $c
+        Label : RIGHT
+          1
       Label : INCREMENT
         ++
         Label : POSTPLUSPLUS

@@ -6,15 +6,15 @@ Label : CODE
     return
     Label : RETURN
       ===
+      Label : LEFT
+        ->
+        Label : PROPERTY
+          b
+        Label : OBJECT
+          $a
       Label : RIGHT
         array
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             C
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          b

@@ -2,6 +2,8 @@
 
 Label : CODE
   function
+  Label : NAME
+    test
   Label : ARGUMENTS
     void
     Label : ARGUMENT
@@ -10,8 +12,6 @@ Label : CODE
         array
       Label : VARIABLE
         $x
-  Label : NAME
-    test
   Label : BLOCK
     {
     Label : CODE

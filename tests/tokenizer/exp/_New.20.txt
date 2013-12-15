@@ -16,7 +16,7 @@ Label : CODE
           2
         Label : ARGUMENT
           ==
-          Label : RIGHT
-            4
           Label : LEFT
             $c
+          Label : RIGHT
+            4

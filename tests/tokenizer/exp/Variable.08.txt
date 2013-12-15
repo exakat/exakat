@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       "
       Label : CONTAIN
@@ -12,5 +14,3 @@ Label : CODE
           ${
           Label : NAME
             b
-    Label : LEFT
-      $a

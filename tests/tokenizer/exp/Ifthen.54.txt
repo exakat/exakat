@@ -21,25 +21,25 @@ Label : CODE
         Block With if/elseif
         Label : CODE
           =
-          Label : RIGHT
-            $d
           Label : LEFT
             $c
+          Label : RIGHT
+            $d
       Label : ELSE
         {
         Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              3
             Label : LEFT
               $b
+            Label : RIGHT
+              3
   Label : ELSE
     Block With else
     Label : CODE
       =
-      Label : RIGHT
-        2
       Label : LEFT
         $a
+      Label : RIGHT
+        2

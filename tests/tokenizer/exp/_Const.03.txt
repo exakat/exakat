@@ -10,9 +10,9 @@ Label : CODE
       ;
       Label : ELEMENT
         const
+        Label : NAME
+          x
         Label : VALUE
           -
           Label : SIGN
             2
-        Label : NAME
-          x
