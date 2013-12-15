@@ -46,7 +46,13 @@ print "Project fullcoded\n";
 
 shell_exec('php bin/export -dot -o ./projects/'.$project.'/export.dot');
 shell_exec('php bin/stat > ./projects/'.$project.'/stats.txt');
+
+shell_exec('rm ./projects/'.$project.'/report.html; php bin/report '.$project.' -f ./projects/'.$project.'/report -html');
 shell_exec('rm ./projects/'.$project.'/report.md; php bin/report '.$project.' -f ./projects/'.$project.'/report -markdown');
+shell_exec('rm ./projects/'.$project.'/report.pdf; php bin/report '.$project.' -f ./projects/'.$project.'/report -pdf');
+shell_exec('rm ./projects/'.$project.'/report.odt; php bin/report '.$project.' -f ./projects/'.$project.'/report -odt');
+shell_exec('rm ./projects/'.$project.'/report.txt; php bin/report '.$project.' -f ./projects/'.$project.'/report -text');
+
 print "Project reported\n";
 
 
