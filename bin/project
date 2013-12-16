@@ -7,8 +7,11 @@ if (!isset($argv[1])) {
     die();
 }
 
-
-$project = $args[1]; //'idiorm';
+if ($id = array_search('-p', $args)) {
+    $project = $args[$id + 1];
+} else {
+    $project = $args[1];
+}
 
 if (!file_exists('./projects/'.$project)) {
     print "Project '$project' doesn't exists in projects folder. Aborting\n";
@@ -31,24 +34,24 @@ if (!file_exists('./projects/'.$project.'/log')) {
 }
 
 shell_exec('sh scripts/clean.sh'); // or php bin/delete
-shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/');
+shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/ -p '.$project.'');
 print "Project loaded\n";
 
-shell_exec('php bin/build_root; php bin/tokenizer');
+shell_exec('php bin/build_root; php bin/tokenizer -p '.$project.'');
 print "Project tokenized\n";
 
 shell_exec('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
-shell_exec('php bin/analyze '.$project);
+shell_exec('php bin/analyze -p '.$project);
 print "Project analyzed\n";
 
-shell_exec('php bin/fullcode');
+shell_exec('php bin/fullcode -p '.$project.'');
 print "Project fullcoded\n";
 
 shell_exec('php bin/export -dot -o ./projects/'.$project.'/export.dot');
 shell_exec('php bin/stat > ./projects/'.$project.'/stats.txt');
 
-shell_exec('rm ./projects/'.$project.'/report.html; php bin/report '.$project.' -f ./projects/'.$project.'/report -html');
 shell_exec('rm ./projects/'.$project.'/report.md; php bin/report '.$project.' -f ./projects/'.$project.'/report -markdown');
+shell_exec('rm ./projects/'.$project.'/report.html; php bin/report '.$project.' -f ./projects/'.$project.'/report -html');
 shell_exec('rm ./projects/'.$project.'/report.pdf; php bin/report '.$project.' -f ./projects/'.$project.'/report -pdf');
 shell_exec('rm ./projects/'.$project.'/report.odt; php bin/report '.$project.' -f ./projects/'.$project.'/report -odt');
 shell_exec('rm ./projects/'.$project.'/report.txt; php bin/report '.$project.' -f ./projects/'.$project.'/report -text');
