@@ -25,6 +25,12 @@ if ($id = array_search('-s', $args)) {
     define('SHUFFLE', false);
 }
 
+if ($id = array_search('-p', $args)) {
+    $project = $args[$id + 1];
+} else {
+    $project = 'default';
+}
+
 $begin_time = microtime(true);
 $classes = array(
     'Variable',     
@@ -138,6 +144,12 @@ foreach($classes as $class) {
     }
 }
 
+$server_stat = new Stats($client);
+$server_stat->collect();
+$stats = array('token_in' => $server_stat->tokens_count, 'token_out' => 2, 
+               'relation_in' => $server_stat->relations_count, 'relation_out' => 4,
+               'project' => $project);
+
 $total = Tokenizer\Token::countTotalToken();
 $count = Tokenizer\Token::countLeftToken() + 1;
 
@@ -149,18 +161,18 @@ for($i = 0; $i < $extra_rounds + 1; $i++) {
 $round = 0;
 $cost = 0;
 
-$log = fopen('log/tokenizer.log', 'w');
+$log = new Log('tokenizer');
 
 $wbegin = microtime(true);
 $regex_time = 0;
 $regex_next = $regex;
 $end = microtime(true);
-fwrite($log, "initialisation : ".(($end - $begin) * 1000)."\n");
+$log->log( "initialisation : ".(($end - $begin) * 1000));
 
 while(check_prev($prev, $extra_rounds)) { 
     $rbegin = microtime(true);
     $round++;
-    fwrite($log, "round $round)\n");
+    $log->log("round $round)");
     
     array_unshift($prev, $count);
 
@@ -175,16 +187,16 @@ while(check_prev($prev, $extra_rounds)) {
         
         $regex_time += $end - $begin;
 
-        fwrite($log, get_class($r)."\t".(($end - $begin) * 1000)."\t".Token::leftInIndex($name)."\n");
+        $log->log( get_class($r)."\t".(($end - $begin) * 1000)."\t".Token::leftInIndex($name));
     }
     unset($precedence);
     Token::finishSequence();
     
     $rend = microtime(true);
     $begin = microtime(true);
-    fwrite($log, "round : $round\t".(($rend - $rbegin)*1000)."\n");
+    $log->log("round : $round\t".(($rend - $rbegin)*1000));
     $cost += count($regex_next);
-    fwrite($log, "cost : $cost\n");
+    $log->log("cost : $cost");
 
     if (isset($count)) {
         $count_prev = $count;
@@ -204,11 +216,11 @@ while(check_prev($prev, $extra_rounds)) {
     }
     
     $end = microtime(true);
-    fwrite($log, "countLeftNext time : ".(($end - $begin) * 1000)."\n");
+    $log->log("countLeftNext time : ".(($end - $begin) * 1000)."");
 
-    fwrite($log, "Remaining token to process : $count (".($count - $count_prev).")\n");
-    fwrite($log, "Remaining files to process : $count_file (".($count_file - $count_file_prev).")\n");
-    fwrite($log, "Remaining regex : ".count($regex_next)." (".(count($regex) - count($regex_next)).")\n");
+    $log->log("Remaining token to process : $count (".($count - $count_prev).")");
+    $log->log("Remaining files to process : $count_file (".($count_file - $count_file_prev).")");
+    $log->log("Remaining regex : ".count($regex_next)." (".(count($regex) - count($regex_next)).")");
     
     if ($count > 3) {
         display( "$round) Remains $count of $total tokens to process! \n");
@@ -222,16 +234,19 @@ while(check_prev($prev, $extra_rounds)) {
     
 }
 $wend = microtime(true);
-fwrite($log, "Total while $round)\t".(($wend - $wbegin)*1000)."\n");
-fwrite($log, "Total regex time\t".(($regex_time) * 1000)."\t\n");
-fwrite($log, "final cost : $cost\n");
+$log->log("Total while $round)\t".(($wend - $wbegin)*1000)."");
+$log->log("Total regex time\t".(($regex_time) * 1000)."");
+$log->log("final cost : $cost");
+
+$server_stat->collect();
+$stats['token_out'] = $server_stat->tokens_count;
+$stats['relation_out'] = $server_stat->relations_count;
 
 Token::cleanHidden();
 
 $end_time = microtime(true);
 display("Total time : ".number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n");
-fwrite($log, "total script \t".(($end_time - $begin_time)*1000)."\n");
-fclose($log);
+$log->report('tokenizer', $stats);
 // @todo display checks processed
 
 function check_prev($prev, $extra_rounds) {
