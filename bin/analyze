@@ -19,18 +19,19 @@ if ($id = array_search('-v', $args)) {
     define('VERBOSE', false);
 }
 
-if (!isset($argv[1])) {
-    $project = 'default';
+if ($id = array_search('-p', $args)) {
+    $project = $args[$id + 1];
 } else {
-    $project = $argv[1];
+    $project = 'default';
 }
+
 if (!file_exists('./projects/'.$project.'/config.ini')) {
     print "No such project as '$project'. Aborting\n";
     die();
 }
 
 $client = new Client();
-$log = fopen("log/analyzer.log", 'w+');
+$log = new Log();
 
 $analyzers = new NodeIndex($client, 'analyzers');
 
@@ -42,28 +43,37 @@ if (!isset($INI['analyzer']) || empty($INI['analyzer'])) {
 }
 
 $analyzers_class = array();
-fwrite($log, "Configured analyzers\t".count($INI['analyzer'])."\n");
+$log->log("Configured analyzers\t".count($INI['analyzer']));
 
 foreach($INI['analyzer'] as $analyzer) {
     if (!file_exists("library/Analyzer/$analyzer.php")) {
         print "No such analyzer as '$analyzer'. Ignoring\n";
-        fwrite($log, "Ignored analyzer\t$analyzer\n");
+        $log->log("Ignored analyzer\t$analyzer");
         continue; 
     }
     $analyzers_class[] = 'Analyzer\\'.str_replace('/', '\\', $analyzer);
 }
 
-fwrite($log, "Runnable analyzers\t".count($analyzers_class)."\n");
+$log->log("Runnable analyzers\t".count($analyzers_class)."");
 
+$total_results = 0;
 foreach($analyzers_class as $analyzer_class) {
     $begin = microtime(true);
     $analyzer = new $analyzer_class($client);
     $analyzer->init();
     $count = $analyzer->run();
-    print "$analyzer_class fait\n";
+    $total_results += $count;
+    print "$analyzer_class fait ($count)\n";
     $end = microtime(true);
-    fwrite($log, "$analyzer_class\t".($end - $begin)."\t$count\n");
+    $log->log("$analyzer_class\t".($end - $begin)."\t$count");
 }
+
+$server_stat = new Stats($client);
+$server_stat->collect();
+$log->report('analyze', array('project' => $project, 
+                              'analyzer' => count($analyzers_class),
+                              'tokens' => $server_stat->tokens_count,
+                              'results' => $total_results));
 
 print "Done\n";
 ?>
