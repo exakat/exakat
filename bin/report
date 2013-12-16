@@ -41,6 +41,10 @@ if ($id = array_search('-json', $args)) {
     define('FORMAT', 'MARKDOWN');
     unset($args[$id]);
     $args = array_values($args);
+} elseif ($id = array_search('-pdf', $args)) {
+    define('FORMAT', 'PDF');
+    unset($args[$id]);
+    $args = array_values($args);
 } elseif ($id = array_search('-csv', $args)) {
     define('FORMAT', 'CSV');
     unset($args[$id]);
@@ -101,14 +105,21 @@ $report->createH1('Appinfo'); // phpinfo for the application
 $Appinfo = new Report\Appinfo($client);
 $report->addContent('HashTable', $Appinfo->toArray());
 
-$report->createH1('Analyzes'); 
+///// Application analyzes 
 $analyzes = array('Structures\\StrposCompare', 
                   'Structures\\Iffectation',
                   'Structures\\NotNot',
                   );
 
-foreach($analyzes as $a) {
-    if (in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
+foreach($analyzes as $id => $a) {
+    if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
+        unset($analyzes[$id]);
+    }
+}
+
+if (count($analyzes) > 0) {
+    $report->createH1('Analyzes'); 
+    foreach($analyzes as $a) {
         $report->createH2($a); 
         $a = "Analyzer\\$a";
         $analyzer = new $a($client); 
@@ -117,23 +128,32 @@ foreach($analyzes as $a) {
     }
 }
 
-$report->createH1('Application inventory'); // list of named elements and semantic analysis
+
+///// Application inventory 
 $analyzes = array('Type\\Integer', 
                   'Type\\Real', 
                   'Type\\String', 
                   'Classes\\Classnames',
                   'Variables\\Variablenames',
                   );
-
-foreach($analyzes as $a) {
-    if (in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
-        $report->createH2($a); 
-        $a = "Analyzer\\$a";
-        $analyzer = new $a($client); 
-
-        $report->addContent('HashTable', $analyzer->toCountedArray());
+foreach($analyzes as $id => $a) {
+    if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
+        unset($analyzes[$id]);
     }
 }
+
+if (count($analyzes) > 0) {
+    $report->createH1('Application inventory'); // list of named elements and semantic analysis
+
+    foreach($analyzes as $a) {
+       $report->createH2($a); 
+       $a = "Analyzer\\$a";
+       $analyzer = new $a($client); 
+
+       $report->addContent('HashTable', $analyzer->toCountedArray());
+    }
+}
+
 
 if (FORMAT == 'TEXT') {
     $text = $report->toText();
@@ -155,8 +175,28 @@ if (FORMAT == 'TEXT') {
     print $text;
 }
 
-if (FORMAT == 'HTML'|| FORMAT == 'ODT' || FORMAT == 'PDF') {
+if (FORMAT == 'ODT') {
     $text = MarkdownExtra::defaultTransform($text);
+} elseif ( FORMAT == 'HTML' || FORMAT == 'PDF') {
+    $text = MarkdownExtra::defaultTransform($text);
+    
+    $text = <<<HTML
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+    <head>
+        <title>Application report for $project</title>
+        <link rel="stylesheet" href="media/hartija.css" type="text/css" media="print" charset="utf-8">
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	</head>
+
+    <body>
+$text
+    </body>
+</html>
+HTML;
 }
 
 if (OUTPUT) {
@@ -167,6 +207,7 @@ $extensions = array('JSON' => 'json',
                     'HTML' => 'html',
                     'MARKDOWN' => 'md',
                     'ODT' => 'odt',
+                    'PDF' => 'pdf',
                     'TEXT' => 'txt',
                     'CSV' => 'csv');
 
@@ -178,18 +219,18 @@ if (FILE) {
     }
 
     if (FORMAT == 'ODT') {
-        $name1 = FILE.'.'.$extensions['HTML'];
+        $name1 = FILE.'.tmp.'.$extensions['HTML'];
         file_put_contents($name1, $text);
 
         $name = FILE.'.'.$extensions[FORMAT];
         shell_exec('pandoc -o '.$name.' '.$name1);
         unlink($name1);
     } elseif (FORMAT == 'PDF') {
-        $name1 = FILE.'.'.$extensions['HTML'];
+        $name1 = FILE.'.tmp.'.$extensions['HTML'];
         file_put_contents($name1, $text);
 
         $name = FILE.'.'.$extensions[FORMAT];
-        shell_exec('wkhtmltopdf -o '.$name.' '.$name1);
+        shell_exec('wkhtmltopdf '.$name1.' '.$name);
         unlink($name1);
     } elseif (FORMAT == 'CSV') {
         $fp = fopen($name, 'w');
@@ -197,6 +238,13 @@ if (FILE) {
             fputcsv($fp, $t);
         }
         fclose($fp);
+    } elseif (FORMAT == 'HTML') {
+        file_put_contents($name, $text);
+        
+        if (!file_exists( dirname($name).'/media')) {
+            mkdir(dirname($name).'/media', 0755);
+        }
+        copy('media/hartija.css', dirname($name).'/media/hartija.css');
     } else {
         file_put_contents($name, $text);
     }
