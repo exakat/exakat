@@ -1,7 +1,79 @@
-Add a filename mention for the tokens (or a relationship to a file? )
-Set up the tests using the old cornac's test
+Architecture
+Add a install checker, that will check how is the installation of the analyzer
 Create a log for projects and scripts
-Create a bin folder
-Separate tokenizer and analyser
-Support filename in tokenizer
-Support file updates
+Support file updates in VCS (just change those files, not reload all the application, serve évolutions, not status)
+Make use of index for better speed
+Make so that it is possible to run simultaneous scripts on the server (Not just using delete all).
+Add an order attribute for long list of elements (in Sequence, concatenation, etc.)
+Make load concurrent proof
+Make analyzer concurrent proof
+Finish running shuffle tests on analyzer
+Add a instant log to show progression of analyzer / loader
+Make loader run simultaneous scripts
+Rank the regex in terms of probability for faster processing
+Make tokenizer with 2 stages : low stage, with simple expressions, and upper stage, with more complexe structures.
+Find a way to reduce the number of stored objects and link in the loader
+Note stats at each stage of the processing for later analitical review
+Log information about speed of process (tokens, files, etc).
+Export to SQLITE
+Stabilize the Unit tests for tokenizer
+Break done tokenizer to blocks : analyze happens within blocks, not the whole file. Smaller analyze, faster results, even concurrency, and less analyzers. 
+Export progress/ETA in processing (tokenizer, analyzer...)
+Prepare documentation
+
+
+Start analyzer programm
++ Statistics
++ Dependencies
++ PHP version
++ Security
++ Maintenance
++ Framework specific rules / Good practises
++ Status
+
+Cooccurences : structures that are next to each other in sequences.
+
+
+Support environnment information : 
+file, namespace, class, method.
+Add link information (indexed, location, normal).
+
+
+Analyzers
++ Interpret values and have a dictionary of special meaning : 22 => port, 86400 => day list, etc.
++ Make a list of files and extensions along the way
+
+
+Variables are not variables when : 
+they are used in compact (look for collision between string and variables)
+they are indeed an argument (but unused arguments? come on)
+they are a property
+they have a { for name (variable variable)
+projects/proxyplus/code/includes/parser.php:			$parseFunction = $block == 'style' ? 'CSS' : 'JS' ;
+projects/proxyplus/code/includes/parser.php:			$new .= $this->$parseFunction(substr($input, $innerStart, $innerEnd - $innerStart));
+
+
+Update variables with the above code
+Make report configurable (configuration of the actual analyzers to be run), and automatically build.
+
+Continue spoting the ghost bug, and find a faster reproduction case (best case : )
+Test neo4j on a linux machine : more stable ? faster ? 
+Rerun all tests unit and make them stable
+Check all unit test with the new Identifier token
+Change Class to support options like we do for functions
+
+Differentiate octal/hexa/decimal/binary for integers
+Reconcile String with some detectors : list of country, SQL code, JS code, CSS code, HTML code, regex, HTTP headers, etc. 
+
+Variable that bear special names (PHP variables, other library variables, global, Formating, spelling).
+
+Detect encoding for the strings ? 
+
+
+_Try stay indexed and shouldn't.
+
+
+Reintroduce the php -l tests in the loader
+Check for short tags opening and list them in the Appinfo()
+
+Centralize all option reading in one class/file.
