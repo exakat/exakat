@@ -24,12 +24,38 @@ class Log {
         } else {
             print "Log already destroyed.";
         }
+
     }
     
     public function log($message) {
         if (is_null($this->log)) { return true; }
         
         fwrite($this->log, $message."\n");
+    }
+
+    public function report($script, $info) {
+        $user = 'exakat';
+        $pass = 'exakat';
+        
+        $mysql = new PDO('mysql:host=localhost;dbname=exakat', $user, $pass);
+        if (!$mysql) { return false; }
+        
+        $values = array('project' => $info['project'],
+                        'time' => (microtime(true) - $this->begin) * 1000,
+                        );
+                        
+        $query = "DESCRIBE `$script`";
+        $res = $mysql->query($query);
+        while($row = $res->fetch()) {
+            if (isset($info[$row['Field']])) {
+                $values[$row['Field']] = $info[$row['Field']];
+            }
+        }
+
+        $query = "INSERT INTO `$script` (".join(", ", array_keys($values)).") VALUES ('".join("', '", array_values($values))."')";
+        $mysql->query($query);
+        
+        return true;
     }
 }
 
