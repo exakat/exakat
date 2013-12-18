@@ -22,7 +22,7 @@ if (!isset($files)) {
 $stats = array();
 $unknown = array();
 
-$exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl',  ),
+$exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps',  ),
               'images' => array('jpg', 'gif', 'ico', 'png', 'svg', 'eps', 'psd', 'dot'),
               'media' => array('ttf', 'swf', 'woff',  ),
               'text' => array('ini', 'xml', 'wsdl', 'txt', 'rst', 'md', 'markdown', 'po', 'mo',  ),
@@ -31,7 +31,8 @@ $exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl',  ),
               'archives' => array('tgz', 'bz2' ,'z', 'zip', 'gz', ),
               'audio' => array('mp3',),
               'data' => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install', 'sqlite',),
-              'prog' => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt',),
+              'prog' => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt', 'sass', 'scss', 'xsl'),
+              'misc' => array('test')
              );
              
 
