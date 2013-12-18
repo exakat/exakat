@@ -77,3 +77,4 @@ Reintroduce the php -l tests in the loader
 Check for short tags opening and list them in the Appinfo()
 
 Centralize all option reading in one class/file.
+Scope change between a method and the one in the parent classes.
