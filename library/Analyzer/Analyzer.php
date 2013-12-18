@@ -56,7 +56,7 @@ GREMLIN;
 
     // @doc return the list of dependences that must be prepared before the execution of an analyzer
     // @doc by default, nothing. 
-	protected function dependsOn() {
+	function dependsOn() {
 	    return array();
 	}
 
