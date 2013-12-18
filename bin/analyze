@@ -56,6 +56,43 @@ foreach($INI['analyzer'] as $analyzer) {
 
 $log->log("Runnable analyzers\t".count($analyzers_class)."");
 
+$dependencies = array();
+$dependencies2 = array();
+foreach($analyzers_class as $a) {
+    $d = new $a($client);
+    $d = $d->dependsOn();
+    if (empty($d)) {
+        $dependencies2[] = $a;
+    } else {
+        $diff = array_diff($d, $dependencies2);
+        if (empty($diff)) {
+            $dependencies2[] = $a;
+        } else {
+            $dependencies[$a] = $diff;
+        }
+    }
+}
+
+$c = count($dependencies) + 1;
+while(!empty($dependencies) && $c > count($dependencies)) {
+    $c = count($dependencies);
+    foreach($dependencies as $a => $d) {
+        $diff = array_diff($d, $dependencies2);
+        if (empty($diff)) {
+            $dependencies2[] = $a;
+            unset($dependencies[$a]);
+        } else {
+            $dependencies[$a] = $diff;
+        }
+    }
+}
+
+if (!empty($dependencies)) {
+    print "Dependencies depending on each other : can't finalize. Aborting\n";
+    print_r($dependencies);
+    die();
+}
+
 $total_results = 0;
 foreach($analyzers_class as $analyzer_class) {
     $begin = microtime(true);
