@@ -41,7 +41,6 @@ while ($current < $prev && $current > 0) {
     $round++;
     $log->log("round\t$round");
     foreach($tokens as $id => $token) {
-        print "$token\n";
         $atom = str_replace('_', '', $token);
         $class = "Tokenizer\\".$token;
         $object = new $class($client);
