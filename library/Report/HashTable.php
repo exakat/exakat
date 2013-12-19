@@ -76,6 +76,8 @@ $report .= "\n\n";
         $string = str_replace( "\n", '<BR />', $string );
         $string = str_replace('\\', '\\\\', $string);
         $string = str_replace('|', '\\|', $string);
+        $string = str_replace('[', '\\[', $string);
+        $string = str_replace(']', '\\]', $string);
         if (strlen($string) > 255) {
             $string = substr($string, 0, 250).' ...';
         }
