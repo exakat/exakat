@@ -8,6 +8,43 @@ use Everyman\Neo4j\Client,
 class Analyzer {
     private $client = null;
     protected $code = null;
+
+    protected $name = null;
+    protected $description = null;
+    
+    function getDescription($lang = 'en') {
+        if (is_null($this->description)) {
+            $filename = "./human/$lang/".str_replace("\\", "/", str_replace("Analyzer\\", "", get_class($this))).".ini";
+            
+            if (!file_exists($filename)) {
+                $human = array();
+            } else {
+                $human = @parse_ini_file($filename);
+            }
+
+            if (isset($human['description'])) {
+                $this->description = $human['description'];
+            } else {
+                $this->description = "";
+            }
+
+            if (isset($human['name'])) {
+                $this->name = $human['name'];
+            } else {
+                $this->name = get_class($this);
+            }
+        }
+        
+        return $this->description;
+    }
+
+    function getName($lang = 'en') {
+        if (is_null($this->name)) {
+            $this->getDescription($lang);
+        }
+
+        return $this->name;
+    }
     
     function __construct($client) {
         $this->client = $client;

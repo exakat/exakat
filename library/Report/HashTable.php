@@ -5,6 +5,7 @@ namespace Report;
 class HashTable {
     private $hash = array('Empty' => 'hash');
     private $sort = TableCounted::SORT_NONE;
+    private $summary = false;
     
     const SORT_NONE = 1;
     const SORT_COUNT = 2;
@@ -24,10 +25,17 @@ class HashTable {
         }
     }
 
+    function setSummary($summary) {
+        $this->summary = (bool) $summary;
+    }
+
     function toMarkdown() {
         if (count($this->hash) == 0)  {
-            $report = "Nothing special to report. ";
-        } else {
+            return "Nothing special to report. ";
+        } 
+        
+        $report = "\n\n";
+        if ($this->summary) {
             $report = "| Item        | Usage          | 
 | -------:        | -------:          |\n";
 $report .= "|Total number of element|".array_sum($this->hash)."|\n";
@@ -36,14 +44,15 @@ $report .= "|Largest element|".max($this->hash)." (".array_search(max($this->has
 $report .= "|Smaller element|".min($this->hash)." (".array_search(min($this->hash), $this->hash).")|\n";
 $report .= "\n\n";
 
-            $report .= "| Libel        | Value          | 
-| -------:        | -------:          |\n";
+         }
 
-            foreach($this->hash as $key => $value) {
-                $key = $this->escapeString($key);
-                $report .= "|$key|$value|\n";
-            }
-        }
+         $report .= "| Libel        | Value          | 
+| -------:        | -------:          |\n";
+            
+         foreach($this->hash as $key => $value) {
+            $key = $this->escapeString($key);
+            $report .= "|$key|$value|\n";
+         }
         
         $report .= "\n";
         
@@ -52,18 +61,18 @@ $report .= "\n\n";
 
     function toText() {
         if (count($this->hash) == 0)  {
-            $report = "Nothing special to report. ";
-        } else {
-            $report = 
+            return "Nothing special to report. ";
+        } 
+        
+        $report = 
 "+-------------------------------+
 | Libel        | Value          | 
 +-------------------------------+\n";
-            foreach($this->hash as $key => $value) {
-                if (strlen($key) > 255) {
-                    $key = substr($key, 0, 250).' ...';
-                }
-                $report .= "|$key|$value|\n";
+        foreach($this->hash as $key => $value) {
+            if (strlen($key) > 255) {
+                $key = substr($key, 0, 250).' ...';
             }
+            $report .= "|$key|$value|\n";
         }
         
         $report .= "+-------------------------------+\n";
@@ -78,6 +87,7 @@ $report .= "\n\n";
         $string = str_replace('|', '\\|', $string);
         $string = str_replace('[', '\\[', $string);
         $string = str_replace(']', '\\]', $string);
+        $string = str_replace('`', '\\`', $string);
         if (strlen($string) > 255) {
             $string = substr($string, 0, 250).' ...';
         }

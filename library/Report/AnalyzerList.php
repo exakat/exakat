@@ -19,9 +19,12 @@ class AnalyzerList {
         }
 
         $this->list = $ini['analyzer'];
-    }
-    
-    function toMarkdown() {
+        
+        foreach($this->list as $id => $a) {
+            $a = "Analyzer\\".str_replace('/', '\\', $a);
+            $analyzer = new $a(null); 
+            $this->list[$id] = $analyzer->getName();
+        }
     }
     
     function toArray() {

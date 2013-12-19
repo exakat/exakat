@@ -82,6 +82,8 @@ if ($id = array_search('-D', $args)) {
 }
 
 $report = new Report\Report($client);
+$report->addContent('Text', 'Audit report for application');
+
 $report->createH1('Report presentation');
 
 $report->createH2('Report synopsis'); 
@@ -120,9 +122,10 @@ foreach($analyzes as $id => $a) {
 if (count($analyzes) > 0) {
     $report->createH1('Analyzes'); 
     foreach($analyzes as $a) {
-        $report->createH2($a); 
         $a = "Analyzer\\$a";
         $analyzer = new $a($client); 
+
+        $report->createH2($analyzer->getName()); 
 
         $report->addContent('Liste', $analyzer->toArray());
     }
@@ -146,10 +149,12 @@ if (count($analyzes) > 0) {
     $report->createH1('Application inventory'); // list of named elements and semantic analysis
 
     foreach($analyzes as $a) {
-       $report->createH2($a); 
        $a = "Analyzer\\$a";
        $analyzer = new $a($client); 
 
+       $report->createH2($analyzer->getName()); 
+
+       $report->addContent('Text', $analyzer->getDescription());
        $report->addContent('HashTable', $analyzer->toCountedArray());
     }
 }

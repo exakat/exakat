@@ -12,14 +12,19 @@ class Liste {
     }
     
     function toMarkdown() {
+        if (empty($this->list)) {
+            return "Nothing special to report\n\n";
+        } 
+        
+        return "\n+ ".join("\n+ ", $this->list)."\n\n";
     }
     
     function toText() {
         if (empty($this->list)) {
             return "Nothing special to report\n\n";
-        } else {
-            return "\n+ ".join("\n+ ", $this->list)."\n\n";
-        }
+        } 
+
+        return "\n+ ".join("\n+ ", $this->list)."\n\n";
     }
 }
 

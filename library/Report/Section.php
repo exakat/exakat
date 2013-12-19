@@ -9,7 +9,7 @@ class Section {
     private $sections = array();
     private $currentSection = null;
 
-    private $content = null;
+    private $content = array();
     
     function __construct($name) {
         $this->name = $name;
@@ -25,8 +25,9 @@ class Section {
     
     function addContent($type, $data = null) {
         $type = 'Report\\'.$type;
-        $this->content = new $type();
-        $this->content->setContent($data);
+        $content = new $type();
+        $content->setContent($data);
+        $this->content[] = $content;
     }
 
     function setLevel($level = 0) {
@@ -56,7 +57,10 @@ class Section {
         $report = str_repeat('#', $this->level).$this->getName()."\n";
         
         if (!is_null($this->content)) {
-            $report .= $this->content->toText();
+            foreach($this->content as $content) {
+                $report .= $content->toText();
+                $report .= "\n";
+            }
         }
         
         if (count($this->sections) > 0) {
@@ -75,7 +79,10 @@ class Section {
         $report = str_repeat('#', $this->level)." <a name=\"".$this->getId()."\"></a>".$this->getName()."\n";
         
         if (!is_null($this->content)) {
-            $report .= $this->content->toMarkDown();
+            foreach($this->content as $content) {
+                $report .= $content->toMarkDown();
+                $report .= "\n";
+            }
         }
         
         if (count($this->sections) > 0) {
