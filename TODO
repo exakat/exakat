@@ -78,3 +78,8 @@ Check for short tags opening and list them in the Appinfo()
 
 Centralize all option reading in one class/file.
 Scope change between a method and the one in the parent classes.
+
+Variables : 
+Camel case, underscore separated, Spelling, $[type]Name ($sString, $iId,), variables with numbers or sharing prefixes).
+
+Export analyze to Sqlite for reuse.
