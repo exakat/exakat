@@ -18,13 +18,16 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $res = shell_exec($shell);
         $shell = 'cd ../..; php bin/export_analyzer '.$analyzer.' -o -json';
         $res = json_decode(shell_exec($shell));
-        $this->assertNotEmpty($res, 'No values were read from the analyzer' );
 
-        $list = array();
-        foreach($res as $r) {
-            $list[] = $r[0];
+        if (empty($res)) {
+            $list = array();
+        } else {
+            $list = array();
+            foreach($res as $r) {
+                $list[] = $r[0];
+            }
+            $this->assertNotEquals(count($list), 0, 'No values were read from the analyzer' );
         }
-        $this->assertNotEquals(count($list), 0, 'No values were read from the analyzer' );
         
         include('exp/'.$file.'.php');
         
