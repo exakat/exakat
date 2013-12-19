@@ -219,7 +219,7 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
 
-    g.addEdge(ppp, it, 'NAME');
+    g.addEdge(ppp, it, 'DEFINE');
     g.removeEdge(it.inE('ARGUMENT').next());
     tvoid = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line]);
     g.addEdge(it.in('FILE').next(), tvoid, 'FILE');
@@ -237,7 +237,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
 
-    g.addEdge(ppp, it.out('LEFT').next(), 'NAME');
+    g.addEdge(ppp, it.out('LEFT').next(), 'DEFINE');
     g.addEdge(ppp, it.out('RIGHT').next(), 'VALUE');
     g.removeEdge(it.outE('LEFT').next());
     g.removeEdge(it.outE('RIGHT').next());
@@ -279,7 +279,7 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable', 'Static', 'Ppp']}.each{
     g.addEdge(root, x, 'NEXT');
     root = x;
 
-    g.addEdge(x, it, 'NAME');
+    g.addEdge(x, it, 'DEFINE');
     g.removeEdge(it.inE('ARGUMENT').next());
     tvoid = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line]);
     g.addEdge(it.in('FILE').next(), tvoid, 'FILE');
@@ -293,7 +293,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.addEdge(root, x, 'NEXT');
     root = x;
 
-    g.addEdge(x, it.out('LEFT').next(), 'NAME');
+    g.addEdge(x, it.out('LEFT').next(), 'DEFINE');
     g.addEdge(x, it.out('RIGHT').next(), 'VALUE');
     g.removeEdge(it.outE('LEFT').next());
     g.removeEdge(it.outE('RIGHT').next());
@@ -334,7 +334,7 @@ arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
 
-    g.addEdge(ppp, it, 'NAME');
+    g.addEdge(ppp, it, 'DEFINE');
     g.removeEdge(it.inE('ARGUMENT').next());
     tvoid = g.addVertex(null, [code:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line]);
     g.addEdge(it.in('FILE').next(), tvoid, 'FILE');
@@ -356,7 +356,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
 
-    g.addEdge(ppp, it.out('LEFT').next(), 'NAME');
+    g.addEdge(ppp, it.out('LEFT').next(), 'DEFINE');
     g.addEdge(ppp, it.out('RIGHT').next(), 'VALUE');
     g.removeEdge(it.outE('LEFT').next());
     g.removeEdge(it.outE('RIGHT').next());

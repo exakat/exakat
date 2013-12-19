@@ -10,6 +10,7 @@ class Variablenames extends Analyzer\Analyzer {
         $this->atomIs("Variable")
              ->hasNoIn('DEFINE')
              ->hasNoIn('PROPERTY') // avoid static properties
+//             ->hasNoIn('NAME') 
              ;
     }
 }
