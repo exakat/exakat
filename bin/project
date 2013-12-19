@@ -33,30 +33,45 @@ if (!file_exists('./projects/'.$project.'/log')) {
     die();
 }
 
+$progress = 2;
+$total_steps = 9 / 100; // number of usage of logProgress - 1
+logProgress($project, $progress++ / $total_steps);
+
 shell_exec('sh scripts/clean.sh'); // or php bin/delete
+logProgress($project, $progress++ / $total_steps);
+
 shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/ -p '.$project.'');
+logProgress($project, $progress++ / $total_steps);
 print "Project loaded\n";
 
 shell_exec('php bin/build_root; php bin/tokenizer -p '.$project.'');
+logProgress($project, $progress++ / $total_steps);
 print "Project tokenized\n";
 
 shell_exec('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
 shell_exec('php bin/analyze -p '.$project);
+logProgress($project, $progress++ / $total_steps);
 print "Project analyzed\n";
 
 shell_exec('php bin/fullcode -p '.$project.'');
+logProgress($project, $progress++ / $total_steps);
 print "Project fullcoded\n";
 
 shell_exec('php bin/export -dot -o ./projects/'.$project.'/export.dot');
+logProgress($project, $progress++ / $total_steps);
 shell_exec('php bin/stat > ./projects/'.$project.'/stats.txt');
+logProgress($project, $progress++ / $total_steps);
 
 shell_exec('rm ./projects/'.$project.'/report.md; php bin/report '.$project.' -f ./projects/'.$project.'/report -markdown');
 shell_exec('rm ./projects/'.$project.'/report.html; php bin/report '.$project.' -f ./projects/'.$project.'/report -html');
 shell_exec('rm ./projects/'.$project.'/report.pdf; php bin/report '.$project.' -f ./projects/'.$project.'/report -pdf');
 shell_exec('rm ./projects/'.$project.'/report.odt; php bin/report '.$project.' -f ./projects/'.$project.'/report -odt');
 shell_exec('rm ./projects/'.$project.'/report.txt; php bin/report '.$project.' -f ./projects/'.$project.'/report -text');
+logProgress($project, $progress++ / $total_steps);
 
 print "Project reported\n";
 
-
+function logProgress($project, $percent) {
+    file_put_contents("./projects/$project/progress.log", $percent);
+}
 ?>
