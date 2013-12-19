@@ -20,10 +20,10 @@ $end = $offset + $limit;
 
 print "Work on $limit tokens\n";
 $log->log("Limit\t$limit");
+//.has('fullcode', null)
+$result = query("g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX', 'T_ROOT', 'T_END'])}.sideEffect{ it.fullcode = 'Not available.'}.iterate()");
 
-$result = query("g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX', 'T_ROOT', 'T_END'])}.has('fullcode', null).sideEffect{ it.fullcode = 'Not available.'}.iterate()");
-
-$tokens = array( 'Integer', 'Float', '_Function', 'SequenceCaseDefault', '_Global', 'String',  'Real', "Void", 'Identifier', '_Return', 'Multiplication', 
+$tokens = array( 'Float', 'Integer', '_Function', 'SequenceCaseDefault', '_Global', 'String',  'Real', "Void", 'Identifier', '_Return', 'Multiplication', 
                  'Variable', 'Concatenation', 'Comparison', '_Break', 'Magicconstant', '_Throw', 
                  'Parenthesis', 'Addition', 'Arguments', 'Functioncall', 'Parenthesis', 'Assignation', '_Case', '_Default', '_Include', 'Noscream', 
                  'Preplusplus', 'Bitshift', 'Postplusplus', 'Sign', 'Boolean', '_Array', '_Static', '_Final', 'Not', 'Reference', 'Keyvalue', '_Ppp', 
@@ -44,7 +44,7 @@ while ($current < $prev && $current > 0) {
         $atom = str_replace('_', '', $token);
         $class = "Tokenizer\\".$token;
         $object = new $class($client);
-        $query = "c = 0; g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX', 'T_ROOT', 'T_END'])}.has('fullcode', 'Not available.').has('atom', '".$atom."').filter{it.out.has('fullcode', 'Not available.').count() == 0}.each{ ".$object->fullcode()."; c++; }; c;";
+        $query = "c = 0; t = 0; g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX', 'T_ROOT', 'T_END'])}.has('fullcode', 'Not available.').has('atom', '".$atom."').sideEffect{t++; }.filter{it.out.has('fullcode', 'Not available.').count() == 0}.each{ ".$object->fullcode()."; c++; }; t - c;";
         $result = query($query);
 
         $log->log("$token\t".$result[0][0]);

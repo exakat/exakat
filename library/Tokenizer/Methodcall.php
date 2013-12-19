@@ -51,11 +51,9 @@ class Methodcall extends TokenAuto {
         return '
 x = it;
 
-it.out("NAME").each{ x = it; }
+it.out("NAME").each{ x.fullcode = it.fullcode }
 
-x.fullcode = x.out("OBJECT").next().fullcode + "->" + x.out("METHOD").next().fullcode; 
-
-';
+it.filter{ it.out("METHOD").count() == 1}.each{ x.fullcode = x.out("OBJECT").next().fullcode + "->" + x.out("METHOD").next().fullcode;  }';
     }
 }
 

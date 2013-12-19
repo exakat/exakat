@@ -82,7 +82,7 @@ class Arguments extends TokenAuto {
     }
 
     function fullcode() {
-        return 's = []; it.out("CONCAT").each{ s.add(it.fullcode); } ;it.fullcode = "(" + s.join(", ") + " )";';
+        return 's = []; it.out("ARGUMENT").each{ s.add(it.fullcode); } ;it.fullcode = "(" + s.join(", ") + " )";';
     }
 }
 ?>
