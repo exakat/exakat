@@ -2,12 +2,16 @@
 
 $args = $argv;
 
-if (!isset($args[1]) || !isset($args[2]) ) {
+if (!isset($args[1]) ) {
     print "Usage : bin/project_init project_name repository";
     die();
 }
 $project = $args[1];
-$git_url = $args[2];
+if (isset($args[2])) {
+    $git_url = $args[2];
+} else {
+    $git_url = null;
+}
 
 print "Initializing $project with '$git_url'\n";
 sleep(2);
@@ -31,7 +35,7 @@ if (!file_exists('./projects/'.$project.'/config.ini')) {
     print './projects/'.$project.'/config.ini already exists. Ignoring'."\n";
 }
 
-if (!file_exists('./projects/'.$project.'/code/')) {
+if (!empty($git_url) && !file_exists('./projects/'.$project.'/code/')) {
     if (strpos($git_url, 'bitbucket.org') !== false) {
         print shell_exec("cd ./projects/$project; hg clone $git_url code");
     } elseif (strpos($git_url, 'svn.code.sf.net') !== false) {
@@ -39,12 +43,13 @@ if (!file_exists('./projects/'.$project.'/code/')) {
     } else {
         print shell_exec("cd ./projects/$project; git clone $git_url code");
     }
-} else {
-    print "code folder is already there. Leaving it intact.\n";
+
+    if (!file_exists("./projects/$project/code")) {
+        print "Error : code was not cloned\n";
+    }
+} elseif (file_exists('./projects/'.$project.'/code/')) {
+    print "Code folder is already there. Leaving it intact.\n";
 }
 
-if (!file_exists("./projects/$project/code")) {
-    print "Error : code was not cloned\n";
-}
 
 ?>
