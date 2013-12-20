@@ -31,7 +31,7 @@ if (!file_exists('./projects/'.$project.'/config.ini')) {
 }
 
 $client = new Client();
-$log = new Log();
+$log = new Log('analyze');
 
 $analyzers = new NodeIndex($client, 'analyzers');
 
@@ -41,6 +41,7 @@ if (!isset($INI['analyzer']) || empty($INI['analyzer'])) {
     print "No analyzers list in config.ini. Aborting\n";
     die();
 }
+$log->log("Analyzing project $project");
 
 $analyzers_class = array();
 $log->log("Configured analyzers\t".count($INI['analyzer']));
