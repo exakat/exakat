@@ -138,6 +138,9 @@ $analyzes = array('Type\\Integer',
                   'Type\\String', 
                   'Classes\\Classnames',
                   'Variables\\Variablenames',
+                  'Variables\\VariableOneLetter',
+                  'Variables\\VariableLong',
+                  'Variables\\VariablePhp',
                   );
 foreach($analyzes as $id => $a) {
     if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
