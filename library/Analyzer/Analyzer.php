@@ -197,17 +197,33 @@ GREMLIN;
         return $this;
     }
 
-    function code($code) {
+    function code($code, $caseSensitive = false) {
+        if ($caseSensitive) {
+            $caseSensitive = '';
+        } else {
+            if (is_array($code)) {
+                foreach($code as $k => $v) { 
+                    $code[$k] = strtolower($v); 
+                }
+            } else {
+                $code = strtolower($code);
+            }
+            $caseSensitive = '.toLowerCase()';
+        }
+        
         if (is_array($code)) {
             // @todo
-            foreach($code as $k => $v) { $code[$k] = strtolower($v); }
-            $this->methods[] = "filter{it.code.toLowerCase() in ['".join("', '", $code)."']}";
+            $this->methods[] = "filter{it.code$caseSensitive in ['".join("', '", $code)."']}";
         } else {
-            $code = strtolower($code);
-            $this->methods[] = "filter{it.code.toLowerCase() == '$code'}";
+            $this->methods[] = "filter{it.code$caseSensitive == '$code'}";
         }
         
         return $this;
+    }
+    
+    function codeLength($length = " == 1 ") {
+        // @todo add some tests ? Like Operator / value ? 
+        $this->methods[] = "filter{it.code.length() $length}";
     }
 
     function out($edge_name) {
