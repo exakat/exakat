@@ -33,7 +33,7 @@ if (!file_exists('./projects/'.$project.'/log')) {
     die();
 }
 
-$progress = 2;
+$progress = 1;
 $total_steps = 9 / 100; // number of usage of logProgress - 1
 logProgress($project, $progress++ / $total_steps);
 
@@ -73,5 +73,9 @@ print "Project reported\n";
 
 function logProgress($project, $percent) {
     file_put_contents("./projects/$project/progress.log", $percent);
+
+    $mid = mysqli_connect('localhost', 'wordpress', 'wordpress', 'wordpress');
+    mysqli_query($mid, "UPDATE exakat_projects SET progress = $percent WHERE name='$project'");
+    print mysqli_error($mid);
 }
 ?>
