@@ -11,8 +11,9 @@ class VariableOneLetter extends Analyzer\Analyzer {
     
     function analyze() {
         $this->atomIs("Variable")
+             ->hasNoIn('DEFINE')
+             ->hasNoIn('PROPERTY')
              ->codeLength(" == 2 ");
-//        $this->printQuery();
     }
 }
 
