@@ -49,6 +49,8 @@ class Analyzer {
     function __construct($client) {
         $this->client = $client;
         $this->methods = array();
+        $this->analyzerIsNot(addslashes(get_class($this)));
+
         $this->queries = array();
         
         $this->code = get_class($this);
@@ -220,10 +222,56 @@ GREMLIN;
         
         return $this;
     }
+
+    function noCode($code, $caseSensitive = false) {
+        if ($caseSensitive) {
+            $caseSensitive = '';
+        } else {
+            if (is_array($code)) {
+                foreach($code as $k => $v) { 
+                    $code[$k] = strtolower($v); 
+                }
+            } else {
+                $code = strtolower($code);
+            }
+            $caseSensitive = '.toLowerCase()';
+        }
+        
+        if (is_array($code)) {
+            // @todo
+            $this->methods[] = "filter{!(it.code$caseSensitive in ['".join("', '", $code)."'])}";
+        } else {
+            $this->methods[] = "filter{it.code$caseSensitive != '$code'}";
+        }
+        
+        return $this;
+    }
     
     function codeLength($length = " == 1 ") {
         // @todo add some tests ? Like Operator / value ? 
         $this->methods[] = "filter{it.code.length() $length}";
+    }
+
+    function fullcodeLength($length = " == 1 ") {
+        // @todo add some tests ? Like Operator / value ? 
+        $this->methods[] = "filter{it.fullcode.length() $length}";
+
+        return $this;
+    }
+
+    function groupCount($column) {
+        $this->methods[] = "groupCount(m){it.$column}";
+//        array_unshift($this->methods, "m = [:]; ");
+        
+        return $this;
+    }
+
+    function eachCounted($column, $times) {
+        $this->groupCount($column);
+        
+        $this->methods[] = "iterate(); m.findAll{ it.value == 1 }.eachWithIndex{ it, b -> g.V.has('fullcode', it.key).fill(n)}; n";
+        
+        return $this;
     }
 
     function out($edge_name) {
@@ -326,14 +374,14 @@ GREMLIN;
         // @doc This is when the object is a placeholder for others. 
         if (empty($this->methods)) { return true; }
         
-        $this->analyzerIsNot(addslashes(get_class($this)));
-        
         $query = join('.', $this->methods);
         
         // search what ? All ? 
         $query = <<<GREMLIN
 
 c = 0;
+m = [:];
+n = [];
 g.V.{$query}
 GREMLIN;
 
@@ -435,6 +483,7 @@ GREMLIN;
     function toCountedArray() {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){it.fullcode}.cap"; 
+        print $queryTemplate;
         $vertices = query($this->client, $queryTemplate);
 
         $report = array();
