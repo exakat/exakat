@@ -28,6 +28,7 @@ class Variable extends TokenAuto {
     function fullcode() {
         return 'it.fullcode = it.code; 
 x = it;
+it.has("token", "T_STRING_VARNAME").each{ x.fullcode = "\\$" + it.code; }
 it.out("NAME").each{ x.fullcode = it.fullcode; }
         ';
     }
