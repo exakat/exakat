@@ -30,10 +30,24 @@ if (!file_exists('./projects/'.$project.'/log/')) {
 }
 
 if (!file_exists('./projects/'.$project.'/config.ini')) {
-    file_put_contents('./projects/'.$project.'/config.ini', '  ');
+    $files = glob('library/Analyzer/*/*.php');
+    
+    $config = '';
+    foreach($files as $file) {
+        if (basename(dirname($file)) == 'Common') { continue; }
+
+        $analyzer = basename(dirname($file)).'/'.basename($file);
+        $analyzer = substr($analyzer, 0, -4);
+        $config .= "analyzer[] = $analyzer;\n";
+    }
+
+    file_put_contents('./projects/'.$project.'/config.ini', $config);
 } else {
     print './projects/'.$project.'/config.ini already exists. Ignoring'."\n";
 }
+
+file_put_contents('./projects/'.$project.'/progress.log', '0');
+print shell_exec('chmod -R g+w ./projects/'.$project);
 
 if (!empty($git_url) && !file_exists('./projects/'.$project.'/code/')) {
     if (strpos($git_url, 'bitbucket.org') !== false) {
