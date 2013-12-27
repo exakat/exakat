@@ -49,13 +49,14 @@ logProgress($project, $progress++ / $total_steps);
 print "Project tokenized\n";
 
 shell_exec('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
-shell_exec('php bin/analyze -p '.$project);
-logProgress($project, $progress++ / $total_steps);
-print "Project analyzed\n";
 
 shell_exec('php bin/fullcode -p '.$project.'');
 logProgress($project, $progress++ / $total_steps);
 print "Project fullcoded\n";
+
+shell_exec('php bin/analyze -p '.$project);
+logProgress($project, $progress++ / $total_steps);
+print "Project analyzed\n";
 
 shell_exec('php bin/export -dot -o ./projects/'.$project.'/export.dot');
 logProgress($project, $progress++ / $total_steps);
