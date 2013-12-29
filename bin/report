@@ -142,14 +142,13 @@ $analyzes = array('Type\\Integer',
                   'Variables\\VariableLong',
                   'Variables\\VariablePhp',
                   'Variables\\VariableUsedOnce',
+                  'Variables\\Blind',
                   );
 foreach($analyzes as $id => $a) {
     if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
         unset($analyzes[$id]);
     }
 }
-
-print_r($analyzes);
 
 if (count($analyzes) > 0) {
     $report->createH1('Application inventory'); // list of named elements and semantic analysis
@@ -162,7 +161,6 @@ if (count($analyzes) > 0) {
 
        $report->addContent('Text', $analyzer->getDescription());
        $report->addContent('HashTable', $analyzer->toCountedArray());
-       print_r($analyzer->toCountedArray());
     }
 }
 
