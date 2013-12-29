@@ -12,6 +12,8 @@ class Analyzer {
     protected $name = null;
     protected $description = null;
     
+    protected $row_count = 0;
+    
     function getDescription($lang = 'en') {
         if (is_null($this->description)) {
             $filename = "./human/$lang/".str_replace("\\", "/", str_replace("Analyzer\\", "", get_class($this))).".ini";
@@ -190,10 +192,12 @@ GREMLIN;
     }
 
     function analyzerIsNot($analyzer) {
+        $analyzer = str_replace('\\', '\\\\', $analyzer);
+
         if (is_array($analyzer)) {
-            $this->methods[] = 'filter{ it.in("ANALYZED").filter{ not (it.analyzer in [\''.join("', '", $atom).'\'])}.count() == 0}';
+            $this->methods[] = 'filter{ it.in("ANALYZED").filter{ not (it.code in [\''.join("', '", $atom).'\'])}.count() == 0}';
         } else {
-            $this->methods[] = 'filter{ it.in("ANALYZED").has("analyzer", \''.$analyzer.'\').count() == 0}';
+            $this->methods[] = 'filter{ it.in("ANALYZED").has("code", \''.$analyzer.'\').count() == 0}';
         }
 
         return $this;
@@ -357,7 +361,13 @@ GREMLIN;
         $this->analyze();
         $this->prepareQuery();
 
-        return $this->execQuery();
+        $this->execQuery();
+        
+        return $this->row_count;
+    }
+    
+    function get_row_count() {
+        return $this->row_count;
     }
 
     function analyze() { return true; } 
@@ -397,6 +407,8 @@ c;
 GREMLIN;
 
         $this->queries[] = $query;
+        $this->analyzerIsNot(addslashes(get_class($this)));
+
         $this->methods = array();
         
         return true;
@@ -408,6 +420,7 @@ GREMLIN;
         // @todo add a test here ? 
         foreach($this->queries as $query) {
             $r = $this->query($query);
+            $this->row_count += $r[0][0];
         }
 
         // reset for the next
@@ -415,7 +428,7 @@ GREMLIN;
         
         // @todo multiple results ? 
         // @todo store result in the object until reading. 
-        return $r[0][0];
+        return $this->row_count;
     }
     
     function topological_sort($nodeids, $edges) {
@@ -483,7 +496,6 @@ GREMLIN;
     function toCountedArray() {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){it.fullcode}.cap"; 
-        print $queryTemplate;
         $vertices = query($this->client, $queryTemplate);
 
         $report = array();
