@@ -7,9 +7,10 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Variables_VariableUsedOnce extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testVariables_VariableUsedOnce01()  { $this->generic_test('Variables_VariableUsedOnce.01'); }
     public function testVariables_VariableUsedOnce02()  { $this->generic_test('Variables_VariableUsedOnce.02'); }
+    public function testVariables_VariableUsedOnce03()  { $this->generic_test('Variables_VariableUsedOnce.03'); }
 }
 ?>
