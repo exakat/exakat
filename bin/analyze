@@ -76,9 +76,20 @@ foreach($analyzers_class as $a) {
 
 $c = count($dependencies) + 1;
 while(!empty($dependencies) && $c > count($dependencies)) {
+    print "New Round\n\n";
     $c = count($dependencies);
     foreach($dependencies as $a => $d) {
         $diff = array_diff($d, $dependencies2);
+        
+        foreach($diff as $k => $v) {
+            if (!isset($dependencies[$v])) {
+                $x = new $v($client);
+                $dependencies[$v] = $x->dependsOn();
+                unset($diff[$k]);
+                $c++;
+            }
+        }
+        
         if (empty($diff)) {
             $dependencies2[] = $a;
             unset($dependencies[$a]);
@@ -88,6 +99,7 @@ while(!empty($dependencies) && $c > count($dependencies)) {
     }
 }
 
+
 if (!empty($dependencies)) {
     print "Dependencies depending on each other : can't finalize. Aborting\n";
     print_r($dependencies);
@@ -95,11 +107,12 @@ if (!empty($dependencies)) {
 }
 
 $total_results = 0;
-foreach($analyzers_class as $analyzer_class) {
+foreach($dependencies2 as $analyzer_class) {
     $begin = microtime(true);
     $analyzer = new $analyzer_class($client);
     $analyzer->init();
-    $count = $analyzer->run();
+    $analyzer->run();
+    $count = $analyzer->get_row_count();
     $total_results += $count;
     print "$analyzer_class fait ($count)\n";
     $end = microtime(true);

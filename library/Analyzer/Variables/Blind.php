@@ -5,9 +5,6 @@ namespace Analyzer\Variables;
 use Analyzer;
 
 class Blind extends Analyzer\Analyzer {
-    function dependsOn() {
-        return array('Analyzer\\Extensions\\Mcrypt');
-    }
     
     function analyze() {
         $this->atomIs("Variable")
