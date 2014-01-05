@@ -7,8 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Skeleton extends Analyzer {
-    /* 1 methods */
+    /* 0 methods */
 
-    public function testSkeleton01()  { $this->generic_test('Skeleton.01'); }
 }
 ?>
