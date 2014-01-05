@@ -97,25 +97,25 @@ GREMLIN;
 
     // @doc return the list of dependences that must be prepared before the execution of an analyzer
     // @doc by default, nothing. 
-	function dependsOn() {
-	    return array();
-	}
+    function dependsOn() {
+        return array();
+    }
 
     public function query($query) {
-    	$queryTemplate = $query;
-    	$params = array('type' => 'IN');
-    	try {
-    	    $query = new \Everyman\Neo4j\Gremlin\Query($this->client, $queryTemplate, $params);
-        	return $query->getResultSet();
-    	} catch (\Exception $e) {
-    	    $message = $e->getMessage();
-    	    $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-    	    print "Exception : ".$message."\n";
-    	    
-    	    print $queryTemplate."\n";
-    	    die();
-    	}
-    	return $query->getResultSet();
+        $queryTemplate = $query;
+        $params = array('type' => 'IN');
+        try {
+            $query = new \Everyman\Neo4j\Gremlin\Query($this->client, $queryTemplate, $params);
+            return $query->getResultSet();
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
+            print "Exception : ".$message."\n";
+            
+            print $queryTemplate."\n";
+            die();
+        }
+        return $query->getResultSet();
     }
 
     function _as($name) {
@@ -182,10 +182,12 @@ GREMLIN;
     }
 
     function analyzerIs($analyzer) {
+        $analyzer = str_replace('\\', '\\\\', $analyzer);
+
         if (is_array($analyzer)) {
             $this->methods[] = 'filter{ it.analyzer in [\''.join("', '", $analyzer).'\'])}.count() != 0}';
         } else {
-            $this->methods[] = 'has("analyzer", \''.$analyzer.'\')';
+            $this->methods[] = 'filter{ it.in("ANALYZED").has("code", \''.$analyzer.'\').count() != 0}';
         }
         
         return $this;
@@ -314,7 +316,7 @@ GREMLIN;
     function hasNoIn($edge_name) {
         if (is_array($edge_name)) {
             // @todo
-            die(" I don't understand arrays in out()");
+            die(" I don't understand arrays in out() ".__METHOD__);
         } else {
             $this->methods[] = 'filter{ it.in("'.$edge_name.'").count() == 0}';
         }
@@ -322,6 +324,27 @@ GREMLIN;
         return $this;
     }
     
+    function hasParent($parent_class) {
+        if (is_array($parent_class)) {
+            // @todo
+            die(" I don't understand arrays in hasParent() ".__METHOD__);
+        } else {
+            $this->methods[] = 'filter{ it.in.has("atom", "'.$parent_class.'").count() != 0}';
+        }
+        
+        return $this;
+    }
+
+    function hasNoParent($parent_class) {
+        if (is_array($parent_class)) {
+            // @todo
+            die(" I don't understand arrays in hasNoParent() ".__METHOD__);
+        } else {
+            $this->methods[] = 'filter{ it.in.has("atom", "'.$parent_class.'").count() == 0}';
+        }
+        
+        return $this;
+    }
     
     function run() {
         $nodes = $this->dependsOn();
@@ -433,49 +456,49 @@ GREMLIN;
     
     function topological_sort($nodeids, $edges) {
 
-	// initialize variables
-	$L = $S = $nodes = array(); 
+    // initialize variables
+    $L = $S = $nodes = array(); 
 
-	// remove duplicate nodes
-	$nodeids = array_unique($nodeids); 	
+    // remove duplicate nodes
+    $nodeids = array_unique($nodeids);     
 
-	// remove duplicate edges
-	$hashes = array();
-	foreach($edges as $k=>$e) {
-		$hash = md5(serialize($e));
-		if (in_array($hash, $hashes)) { unset($edges[$k]); }
-		else { $hashes[] = $hash; }; 
-	}
+    // remove duplicate edges
+    $hashes = array();
+    foreach($edges as $k=>$e) {
+        $hash = md5(serialize($e));
+        if (in_array($hash, $hashes)) { unset($edges[$k]); }
+        else { $hashes[] = $hash; }; 
+    }
 
-	// Build a lookup table of each node's edges
-	foreach($nodeids as $id) {
-		$nodes[$id] = array('in'=>array(), 'out'=>array());
-		foreach($edges as $e) {
-			if ($id==$e[0]) { $nodes[$id]['out'][]=$e[1]; }
-			if ($id==$e[1]) { $nodes[$id]['in'][]=$e[0]; }
-		}
-	}
+    // Build a lookup table of each node's edges
+    foreach($nodeids as $id) {
+        $nodes[$id] = array('in'=>array(), 'out'=>array());
+        foreach($edges as $e) {
+            if ($id==$e[0]) { $nodes[$id]['out'][]=$e[1]; }
+            if ($id==$e[1]) { $nodes[$id]['in'][]=$e[0]; }
+        }
+    }
 
-	// While we have nodes left, we pick a node with no inbound edges, 
-	// remove it and its edges from the graph, and add it to the end 
-	// of the sorted list.
-	foreach ($nodes as $id=>$n) { if (empty($n['in'])) $S[]=$id; }
-	while (!empty($S)) {
-		$L[] = $id = array_shift($S);
-		foreach($nodes[$id]['out'] as $m) {
-			$nodes[$m]['in'] = array_diff($nodes[$m]['in'], array($id));
-			if (empty($nodes[$m]['in'])) { $S[] = $m; }
-		}
-		$nodes[$id]['out'] = array();
-	}
+    // While we have nodes left, we pick a node with no inbound edges, 
+    // remove it and its edges from the graph, and add it to the end 
+    // of the sorted list.
+    foreach ($nodes as $id=>$n) { if (empty($n['in'])) $S[]=$id; }
+    while (!empty($S)) {
+        $L[] = $id = array_shift($S);
+        foreach($nodes[$id]['out'] as $m) {
+            $nodes[$m]['in'] = array_diff($nodes[$m]['in'], array($id));
+            if (empty($nodes[$m]['in'])) { $S[] = $m; }
+        }
+        $nodes[$id]['out'] = array();
+    }
 
-	// Check if we have any edges left unprocessed
-	foreach($nodes as $n) {
-		if (!empty($n['in']) or !empty($n['out'])) {
-			return null; // not sortable as graph is cyclic
-		}
-	}
-	return $L;
+    // Check if we have any edges left unprocessed
+    foreach($nodes as $n) {
+        if (!empty($n['in']) or !empty($n['out'])) {
+            return null; // not sortable as graph is cyclic
+        }
+    }
+    return $L;
 }
 
     function toArray() {
@@ -507,7 +530,5 @@ GREMLIN;
         
         return $report;
     }
-
-
 }
 ?>
