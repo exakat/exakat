@@ -10,6 +10,7 @@ class InterfaceArguments extends Analyzer\Analyzer {
     }
     
     function analyze() {
+// When there is function in an interface, we have no sequence.
         $this->analyzerIs("Analyzer\\Variables\\Arguments")
              ->_as('x')
              ->in('ARGUMENT')
@@ -19,6 +20,20 @@ class InterfaceArguments extends Analyzer\Analyzer {
              ->in('CODE')
              ->atomIs('Interface')
              ->back('x');
+        $this->prepareQuery();
+
+// When there are several functions in one interface, we have a sequence.
+        $this->analyzerIs("Analyzer\\Variables\\Arguments")
+             ->_as('x')
+             ->in('ARGUMENT')
+             ->in('ARGUMENTS')
+             ->atomIs('Function')
+             ->in('ELEMENT')
+             ->in('CODE')
+             ->in('CODE')
+             ->atomIs('Interface')
+             ->back('x');
+        $this->prepareQuery();
     }
     
 }
