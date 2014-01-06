@@ -13,6 +13,8 @@ class Analyzer {
     protected $description = null;
     
     protected $row_count = 0;
+
+    private $apply_below = false;
     
     function getDescription($lang = 'en') {
         if (is_null($this->description)) {
@@ -21,7 +23,7 @@ class Analyzer {
             if (!file_exists($filename)) {
                 $human = array();
             } else {
-                $human = @parse_ini_file($filename);
+                $human = parse_ini_file($filename);
             }
 
             if (isset($human['description'])) {
@@ -99,6 +101,10 @@ GREMLIN;
     // @doc by default, nothing. 
     function dependsOn() {
         return array();
+    }
+    
+    function setApplyBelow($apply_below = true) {
+        $this->apply_below = $apply_below;
     }
 
     public function query($query) {
@@ -347,39 +353,6 @@ GREMLIN;
     }
     
     function run() {
-        $nodes = $this->dependsOn();
-        $tocheck = $nodes;
-        $edges = array();
-        $class = get_class($this);
-        foreach($nodes as $n) {
-            $edges[] = array($class, $n);
-        }
-        
-        while (count($tocheck) > 0) {
-            $class = array_shift($tocheck);
-            $x = new $class($this->client);
-
-            foreach($x->dependsOn() as $n) {
-                if (!in_array($n, $nodes)) {
-                    $nodes[] = $n;
-                }
-                $edges[] = array($n, $class);
-            }
-        }
-        $nodes[] = get_class($this);
-
-        if(($x = $this->topological_sort($nodes, $edges)) === null) {
-            print "There are circular dependencies in the analyzers. Check all dependsOn() and remove cyclic dependencies in ".join(', ', $nodes).". Aborting\n";
-            die();
-        }
-        
-        array_pop($nodes); // @doc remove itself
-        foreach($nodes as $n) {
-            $x = new $n($this->client);
-            
-            // @warning : run will test again the dependencies! We haven't solved this problem yet here.
-            $x->run();
-        }
 
         $this->analyze();
         $this->prepareQuery();
@@ -405,7 +378,7 @@ GREMLIN;
 
     function prepareQuery() {
         // @doc This is when the object is a placeholder for others. 
-        if (empty($this->methods)) { return true; }
+        if (count($this->methods) == 1) { return true; }
         
         $query = join('.', $this->methods);
         
@@ -420,9 +393,24 @@ GREMLIN;
 
         // Indexed results
         $analyzer = str_replace('\\', '\\\\', get_class($this));
+        if ($this->apply_below) {
+            $apply_below = <<<GREMLIN
+x = it;
+it.in("VALUE").out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
+//it.in('KEY').in("VALUE").out('LOOP').out.loop(1){it.loops < 100}{it.object.code = x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED2'); }
+//it.in('VALUE').in("VALUE").out('LOOP').out.loop(1){it.loops < 100}{it.object.code = x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED3'); }
+
+GREMLIN;
+        } else {
+            $apply_below = "";
+        }
         $query .= <<<GREMLIN
 .each{
     g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED');
+    
+    // Apply below
+    {$apply_below}
+    
     c = c + 1;
 }
 c;
@@ -430,9 +418,9 @@ c;
 GREMLIN;
 
         $this->queries[] = $query;
-        $this->analyzerIsNot(addslashes(get_class($this)));
 
         $this->methods = array();
+        $this->analyzerIsNot(addslashes(get_class($this)));
         
         return true;
     }
@@ -454,53 +442,6 @@ GREMLIN;
         return $this->row_count;
     }
     
-    function topological_sort($nodeids, $edges) {
-
-    // initialize variables
-    $L = $S = $nodes = array(); 
-
-    // remove duplicate nodes
-    $nodeids = array_unique($nodeids);     
-
-    // remove duplicate edges
-    $hashes = array();
-    foreach($edges as $k=>$e) {
-        $hash = md5(serialize($e));
-        if (in_array($hash, $hashes)) { unset($edges[$k]); }
-        else { $hashes[] = $hash; }; 
-    }
-
-    // Build a lookup table of each node's edges
-    foreach($nodeids as $id) {
-        $nodes[$id] = array('in'=>array(), 'out'=>array());
-        foreach($edges as $e) {
-            if ($id==$e[0]) { $nodes[$id]['out'][]=$e[1]; }
-            if ($id==$e[1]) { $nodes[$id]['in'][]=$e[0]; }
-        }
-    }
-
-    // While we have nodes left, we pick a node with no inbound edges, 
-    // remove it and its edges from the graph, and add it to the end 
-    // of the sorted list.
-    foreach ($nodes as $id=>$n) { if (empty($n['in'])) $S[]=$id; }
-    while (!empty($S)) {
-        $L[] = $id = array_shift($S);
-        foreach($nodes[$id]['out'] as $m) {
-            $nodes[$m]['in'] = array_diff($nodes[$m]['in'], array($id));
-            if (empty($nodes[$m]['in'])) { $S[] = $m; }
-        }
-        $nodes[$id]['out'] = array();
-    }
-
-    // Check if we have any edges left unprocessed
-    foreach($nodes as $n) {
-        if (!empty($n['in']) or !empty($n['out'])) {
-            return null; // not sortable as graph is cyclic
-        }
-    }
-    return $L;
-}
-
     function toArray() {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out"; 
