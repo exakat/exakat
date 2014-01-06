@@ -2,7 +2,7 @@
 
 namespace Report;
 
-class TableCounted {
+class TableCounted extends Dataset {
     private $name = "Unnamed";
     private $sort = TableCounted::SORT_NONE;
     
@@ -43,13 +43,7 @@ $report .= "\n\n";
 | -------:        | -------:          |\n";
             
             foreach($vertices[0][0] as $k => $v) {
-                $k = str_replace( "\n", '<BR />', $k );
-                $k = str_replace('|', '\\|', $k);
-                $k = str_replace('\\', '\\\\', $k);
-                if (strlen($k) > 255) {
-                    $k = substr($k, 0, 250).' ...';
-                }
-                $k = str_replace("\n", '`<br />\n`', $k);
+                $k = $this->escapeForMarkdown($k);
                 $report .= "|`$k`|$v|\n";
             }
         } else {
