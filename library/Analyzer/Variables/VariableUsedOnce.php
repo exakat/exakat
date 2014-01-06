@@ -18,7 +18,7 @@ class VariableUsedOnce extends Analyzer\Analyzer {
              ->analyzerIsNot("Analyzer\\Variables\\Blind")
              ->analyzerIsNot("Analyzer\\Variables\\InterfaceArguments")
              ->hasNoParent('Staticproperty')
-             ->noCode(VariablePhp::$variables)
+             ->noCode(VariablePhp::$variables, true)
              ->eachCounted('fullcode', 1)
              ;
     }
