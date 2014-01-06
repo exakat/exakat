@@ -396,9 +396,9 @@ GREMLIN;
         if ($this->apply_below) {
             $apply_below = <<<GREMLIN
 x = it;
-it.in("VALUE").out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
-//it.in('KEY').in("VALUE").out('LOOP').out.loop(1){it.loops < 100}{it.object.code = x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED2'); }
-//it.in('VALUE').in("VALUE").out('LOOP').out.loop(1){it.loops < 100}{it.object.code = x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED3'); }
+it.in("VALUE").            out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
+it.in('KEY').in("VALUE").  out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
+it.in('VALUE').in("VALUE").out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
 
 GREMLIN;
         } else {
