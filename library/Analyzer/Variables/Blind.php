@@ -7,6 +7,9 @@ use Analyzer;
 class Blind extends Analyzer\Analyzer {
     
     function analyze() {
+        $this->setApplyBelow(true);
+        
+// foreach($source as $blind)
         $this->atomIs("Variable")
              ->_as('x')
              ->in('VALUE')
@@ -14,6 +17,7 @@ class Blind extends Analyzer\Analyzer {
              ->back('x');
         $this->prepareQuery();
 
+// foreach($source as $blindKey => $blindValue)
         $this->atomIs("Variable")
              ->_as('x')
              ->in('VALUE')
@@ -33,6 +37,16 @@ class Blind extends Analyzer\Analyzer {
         $this->prepareQuery();
 
 // cases of references
+// foreach($source as &$blind)
+        $this->atomIs("Variable")
+             ->_as('x')
+             ->in('REFERENCE')
+             ->in('VALUE')
+             ->atomIs('Foreach')
+             ->back('x');
+        $this->prepareQuery();
+
+// foreach($source as $blindKey => &$blindValue)
         $this->atomIs("Variable")
              ->_as('x')
              ->in('REFERENCE')
@@ -43,13 +57,7 @@ class Blind extends Analyzer\Analyzer {
              ->back('x');
         $this->prepareQuery();
 
-        $this->atomIs("Variable")
-             ->_as('x')
-             ->in('REFERENCE')
-             ->in('VALUE')
-             ->atomIs('Foreach')
-             ->back('x');
-        $this->prepareQuery();
+// Keys can't be references
     }
 }
 
