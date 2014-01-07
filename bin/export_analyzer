@@ -110,7 +110,7 @@ g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.as('x')
     .inE('NAMESPACE').as('namespace').back('x')
     .inE('CLASS').as('class').back('x')
     .inE('FUNCTION').as('function').back('x')
-    .select{it.code}{it.file}{it.namespace}{it.classname}{it.function}
+    .select{it.fullcode}{it.file}{it.namespace}{it.classname}{it.function}
 GREMLIN;
     $vertices = query($client, $queryTemplate);
 
