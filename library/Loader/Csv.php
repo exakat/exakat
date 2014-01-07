@@ -11,6 +11,9 @@ class Csv {
     private static $count = 0;
     private $id = 0;
     
+    
+    private $isLink = false;
+    
     function __construct() {
         if (file_exists('nodes.csv') && static::$file_saved == 0) {
             unlink('nodes.csv');
@@ -58,7 +61,7 @@ SHELL
         
         $fp = fopen('rels.csv', 'a');
         if (static::$file_saved == 0) {
-            fputcsv($fp, array('start', 'end', 'type'), "\t");
+            fputcsv($fp, array('start', 'end', 'type', 'classname', 'function', 'namespace', 'file'), "\t");
         }
         foreach(static::$links as $link) {
             fputcsv($fp, $link, "\t");
@@ -66,7 +69,6 @@ SHELL
         fclose($fp);
         static::$links = array();
         static::$file_saved++;
-        
     }
     
     function makeNode() {
@@ -74,11 +76,15 @@ SHELL
     }
     
     function setProperty($name, $value) {
-        if (!isset(static::$cols[$name])) { 
-            static::$cols[$name] = true; 
-        }
+        if ($this->isLink) {
+            static::$links[count(static::$links) - 1][$name] = $value;
+        } else {
+            if (!isset(static::$cols[$name])) { 
+                static::$cols[$name] = true; 
+            }
 
-        $this->node[$name] = $value;
+            $this->node[$name] = $value;
+        }
         
         return $this;
     }
@@ -92,13 +98,21 @@ SHELL
             static::$nodes[$this->id] = $this->node;
         }
         
+        $this->isLink = false;
+        
         return $this;
     }
 
     function relateTo($destination, $label) {
         static::$links[] = array('origin' => $this->id, 
                                  'destination' => $destination->id, 
-                                 'label' => $label);
+                                 'label' => $label,
+                                 'classname' =>  '',
+                                 'function' => '',
+                                 'namespace' => '',
+                                 'file' => '',
+                                 );
+        $this->isLink = true;
 
         return $this;
     }
