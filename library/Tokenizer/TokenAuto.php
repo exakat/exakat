@@ -1678,6 +1678,23 @@ x.setProperty('atom', 'Block');
             unset($actions['while_to_empty_block']);
         }        
 
+
+        if (isset($actions['variable_to_functioncall'])) {
+            $qactions[] = " 
+/* create a functioncall, and hold the variable as property.  */  
+
+x = g.addVertex(null, [code:it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line, modifiedBy:'FunctionCall']);
+
+g.addEdge(it, x, 'NAME');
+
+g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
+
+                ";
+            unset($actions['variable_to_functioncall']);
+        }        
         if (isset($actions['cleanIndex'])) {
             $e = $actions['cleanIndex'];
             $qactions[] = " 
