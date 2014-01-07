@@ -76,17 +76,23 @@ foreach($analyzers_class as $a) {
 
 $c = count($dependencies) + 1;
 while(!empty($dependencies) && $c > count($dependencies)) {
-    print "New Round\n\n";
     $c = count($dependencies);
     foreach($dependencies as $a => $d) {
         $diff = array_diff($d, $dependencies2);
         
         foreach($diff as $k => $v) {
+            $c++;
             if (!isset($dependencies[$v])) {
                 $x = new $v($client);
-                $dependencies[$v] = $x->dependsOn();
+                $dep = $x->dependsOn();
+                if (count($dep) == 0) {
+                    $dependencies2[] = $v;
+                } else {
+                    $dependencies[$v] = $dep;
+                }
+            } elseif (count($dependencies[$v]) == 0) {
+                $dependencies2[] = $v;
                 unset($diff[$k]);
-                $c++;
             }
         }
         
