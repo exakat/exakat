@@ -7,8 +7,7 @@ use Analyzer;
 class VariableLong extends Analyzer\Analyzer {
     function analyze() {
         $this->atomIs("Variable")
-             ->hasNoIn('DEFINE')
-             ->hasNoIn('PROPERTY') // avoid static properties
+             ->analyzerIs('Analyzer\\Variables\\Variablenames')
              ->codeLength(" > 20 ");
     }
 }

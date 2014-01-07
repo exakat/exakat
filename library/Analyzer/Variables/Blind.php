@@ -9,8 +9,10 @@ class Blind extends Analyzer\Analyzer {
     function analyze() {
         $this->setApplyBelow(true);
         
+        $blinds = array("Variable", 'Staticproperty', 'Property', 'Array');
+        
 // foreach($source as $blind)
-        $this->atomIs("Variable")
+        $this->atomIs($blinds)
              ->_as('x')
              ->in('VALUE')
              ->atomIs('Foreach')
@@ -18,7 +20,7 @@ class Blind extends Analyzer\Analyzer {
         $this->prepareQuery();
 
 // foreach($source as $blindKey => $blindValue)
-        $this->atomIs("Variable")
+        $this->atomIs($blinds)
              ->_as('x')
              ->in('VALUE')
              ->atomIs('Keyvalue')
@@ -27,7 +29,7 @@ class Blind extends Analyzer\Analyzer {
              ->back('x');
         $this->prepareQuery();
 
-        $this->atomIs("Variable")
+        $this->atomIs($blinds)
              ->_as('x')
              ->in('KEY')
              ->atomIs('Keyvalue')
@@ -38,7 +40,7 @@ class Blind extends Analyzer\Analyzer {
 
 // cases of references
 // foreach($source as &$blind)
-        $this->atomIs("Variable")
+        $this->atomIs($blinds)
              ->_as('x')
              ->in('REFERENCE')
              ->in('VALUE')
@@ -47,7 +49,7 @@ class Blind extends Analyzer\Analyzer {
         $this->prepareQuery();
 
 // foreach($source as $blindKey => &$blindValue)
-        $this->atomIs("Variable")
+        $this->atomIs($blinds)
              ->_as('x')
              ->in('REFERENCE')
              ->in('VALUE')
