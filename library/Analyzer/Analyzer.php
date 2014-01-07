@@ -279,10 +279,14 @@ GREMLIN;
     }
 
     function eachCounted($column, $times) {
-        $this->groupCount($column);
+//        $this->groupCount($column);
         
-        $this->methods[] = "iterate(); m.findAll{ it.value == 1 }.eachWithIndex{ it, b -> g.V.has('fullcode', it.key).fill(n)}; n";
-        
+        $this->methods[] = <<<GREMLIN
+groupBy(m){it.$column}{it}.iterate(); 
+m.findAll{ it.value.size() == $times}.values().flatten().each{ n.add(it); };
+n
+GREMLIN;
+
         return $this;
     }
 
@@ -330,23 +334,58 @@ GREMLIN;
         return $this;
     }
     
-    function hasParent($parent_class) {
+    function hasParent($parent_class, $ins = array()) {
+        if (empty($ins)) {
+            $in = '.in';
+        } else {
+            $in = array();
+            
+            if (!is_array($ins)) { $ins = array($ins); }
+            foreach($ins as $i) {
+                if (empty($i)) {
+                    $in[] = ".in";
+                } else {
+                    $in[] = ".in('$i')";
+                }
+            }
+            
+            $in = join('', $in);
+        }
+        
         if (is_array($parent_class)) {
             // @todo
             die(" I don't understand arrays in hasParent() ".__METHOD__);
         } else {
-            $this->methods[] = 'filter{ it.in.has("atom", "'.$parent_class.'").count() != 0}';
+            $this->methods[] = 'filter{ it.'.$in.'.has("atom", "'.$parent_class.'").count() != 0}';
         }
         
         return $this;
     }
 
-    function hasNoParent($parent_class) {
+    function hasNoParent($parent_class, $ins = array()) {
+        
+        if (empty($ins)) {
+            $in = '.in';
+        } else {
+            $in = array();
+            
+            if (!is_array($ins)) { $ins = array($ins); }
+            foreach($ins as $i) {
+                if (empty($i)) {
+                    $in[] = ".in";
+                } else {
+                    $in[] = ".in('$i')";
+                }
+            }
+            
+            $in = join('', $in);
+        }
+        
         if (is_array($parent_class)) {
             // @todo
             die(" I don't understand arrays in hasNoParent() ".__METHOD__);
         } else {
-            $this->methods[] = 'filter{ it.in.has("atom", "'.$parent_class.'").count() == 0}';
+            $this->methods[] = 'filter{ it'.$in.'.has("atom", "'.$parent_class.'").count() == 0}';
         }
         
         return $this;
