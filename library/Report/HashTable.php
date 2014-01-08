@@ -2,10 +2,13 @@
 
 namespace Report;
 
-class HashTable {
+class HashTable extends Dataset {
     private $hash = array('Empty' => 'hash');
     private $sort = TableCounted::SORT_NONE;
     private $summary = false;
+
+    private $headerName = 'Item';
+    private $headerCount = 'Count';
     
     const SORT_NONE = 1;
     const SORT_COUNT = 2;
@@ -29,14 +32,22 @@ class HashTable {
         $this->summary = (bool) $summary;
     }
 
+    function setHeaderName($name) {
+        $this->headerName = $name; 
+    }
+
+    function setHeaderCount($name) {
+        $this->headerCount = $name; 
+    }
+
     function toMarkdown() {
         if (count($this->hash) == 0)  {
             return "Nothing special to report. ";
         } 
         
         $report = "\n\n";
-        if ($this->summary) {
-            $report = "| Item        | Usage          | 
+        if ($this->summary && count($this->hash) > 5 ) {
+            $report = "|  Item      |  Value         | 
 | -------:        | -------:          |\n";
 $report .= "|Total number of element|".array_sum($this->hash)."|\n";
 $report .= "|Number of distinct element|".count($this->hash)."|\n";
@@ -46,13 +57,13 @@ $report .= "\n\n";
 
          }
 
-         $report .= "| Libel        | Value          | 
+         $report .= "| {$this->headerName}        | {$this->headerCount}          | 
 | -------:        | -------:          |\n";
             
-         foreach($this->hash as $key => $value) {
-            $key = $this->escapeString($key);
-            $report .= "|$key|$value|\n";
-         }
+            foreach($this->hash as $k => $v) {
+                $k = $this->escapeForMarkdown($k);
+                $report .= "|$k|$v|\n";
+            }
         
         $report .= "\n";
         
@@ -78,22 +89,6 @@ $report .= "\n\n";
         $report .= "+-------------------------------+\n";
         
         return $report;
-    }
-
-    function escapeString($string) {
-        $string = htmlentities($string, ENT_QUOTES, 'UTF-8');
-        $string = str_replace( "\n", '<BR />', $string );
-        $string = str_replace('\\', '\\\\', $string);
-        $string = str_replace('|', '\\|', $string);
-        $string = str_replace('[', '\\[', $string);
-        $string = str_replace(']', '\\]', $string);
-        $string = str_replace('`', '\\`', $string);
-        if (strlen($string) > 255) {
-            $string = substr($string, 0, 250).' ...';
-        }
-        $string = str_replace("\n", '`<br />\n`', $string);
-        
-        return $string;
     }
 }
 
