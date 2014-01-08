@@ -273,18 +273,23 @@ GREMLIN;
 
     function groupCount($column) {
         $this->methods[] = "groupCount(m){it.$column}";
-//        array_unshift($this->methods, "m = [:]; ");
         
         return $this;
     }
 
     function eachCounted($column, $times) {
-//        $this->groupCount($column);
-        
         $this->methods[] = <<<GREMLIN
 groupBy(m){it.$column}{it}.iterate(); 
 m.findAll{ it.value.size() == $times}.values().flatten().each{ n.add(it); };
 n
+GREMLIN;
+
+        return $this;
+    }
+
+    function regex($column, $regex) {
+        $this->methods[] = <<<GREMLIN
+filter{ it.$column.matches("$regex") }
 GREMLIN;
 
         return $this;
