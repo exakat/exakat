@@ -31,7 +31,7 @@ class Report {
     }
 
     function addContent($type, $data = null) {
-        $this->current->addContent($type, $data);
+        return $this->current->addContent($type, $data);
     }
 
     function toMarkdown() {

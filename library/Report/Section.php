@@ -28,6 +28,8 @@ class Section {
         $content = new $type();
         $content->setContent($data);
         $this->content[] = $content;
+        
+        return $content;
     }
 
     function setLevel($level = 0) {
