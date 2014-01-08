@@ -3,6 +3,7 @@
 namespace Report;
 
 class TableCounted extends Dataset {
+/*
     private $name = "Unnamed";
     private $sort = TableCounted::SORT_NONE;
     
@@ -12,12 +13,23 @@ class TableCounted extends Dataset {
     const SORT_KEY = 4;
     const SORT_REV_KEY = 4;
     
+    private $headerName = 'Item';
+    private $headerCount = 'Count';
+    
     function setQuery($query) {
         $this->queryTemplate = $query; 
     }
 
     function setContent($name) {
         $this->name = $name; 
+    }
+
+    function setHeaderName($name) {
+        $this->headerName = $name; 
+    }
+
+    function setHeaderCount($name) {
+        $this->headerCount = $name; 
     }
 
     function setSort($sort) {
@@ -32,7 +44,7 @@ class TableCounted extends Dataset {
         $report = "###{$this->name}\n";
         if (!empty($vertices[0][0])) {
             // report
-            $report .= "| Item        | Usage          | 
+            $report .= "|  {$this->headerName}        | {$this->headerCount}          | 
 | -------:        | -------:          |\n";
 $report .= "|Number|".count($vertices)."|\n";
 $report .= "|Total|".array_sum($vertices)."|\n";
@@ -53,6 +65,7 @@ $report .= "\n\n";
         
         return $report;
     }
+*/
 }
 
 ?>
