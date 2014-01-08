@@ -1,0 +1,64 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      !==
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          $d
+        Label : METHOD
+          e
+          Label : ARGUMENTS
+            void
+      Label : LEFT
+        false
+    Label : LOOP
+      Block With While
+      Label : CODE
+        void
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ->
+      Label : PROPERTY
+        c
+      Label : OBJECT
+        $b
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !=
+        Label : RIGHT
+          strlen
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : PROPERTY
+                i
+              Label : OBJECT
+                $h
+        Label : LEFT
+          ->
+          Label : PROPERTY
+            g
+          Label : OBJECT
+            $f
+    Label : THEN
+      Block With if/elseif
+      Label : CODE
+        ->
+        Label : OBJECT
+          $j
+        Label : METHOD
+          k
+          Label : ARGUMENTS
+            void

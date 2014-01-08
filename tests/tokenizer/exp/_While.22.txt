@@ -6,9 +6,9 @@ Label : CODE
     while
     Label : CONDITION
       <=
-      Label : LEFT
-        $i
       Label : RIGHT
         10
+      Label : LEFT
+        $i
     Label : LOOP
       void

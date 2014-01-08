@@ -26,7 +26,7 @@ class _While extends TokenAuto {
 
          //  ; While( condition ) ;
          // T_SEMICOLON here will prevent while to be create too hastily, and give a chance to do...while.
-        $this->conditions = array(-3 => array('notToken'  => 'T_DO', 'atom' => 'yes'), 
+        $this->conditions = array(-3 => array('notToken'  => 'T_DO'), 
                                   -2 => array('atom'  => 'yes'), 
                                   -1 => array('token' => 'T_SEMICOLON',
                                               'atom'  => 'none'), 

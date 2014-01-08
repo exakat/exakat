@@ -6,10 +6,10 @@ Label : CODE
     while
     Label : CONDITION
       <=
-      Label : LEFT
-        $i
       Label : RIGHT
         10
+      Label : LEFT
+        $i
     Label : LOOP
       ;
       Label : ELEMENT
@@ -24,7 +24,7 @@ Label : CODE
           $i
   Label : ELEMENT
     =
-    Label : LEFT
-      $i
     Label : RIGHT
       1
+    Label : LEFT
+      $i

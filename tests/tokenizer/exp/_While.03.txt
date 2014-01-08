@@ -10,10 +10,10 @@ Label : CODE
       Block With While
       Label : CODE
         =
-        Label : LEFT
-          $x
         Label : RIGHT
           2
+        Label : LEFT
+          $x
   Label : ELEMENT
     {
     Label : CODE
