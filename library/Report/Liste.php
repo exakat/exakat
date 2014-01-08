@@ -4,7 +4,7 @@ namespace Report;
 
 class Liste extends Dataset {
     private $list = array('a', 'b' ,'c' ,'d', 'e');
-    private $sort = TableCounted::SORT_NONE;
+    private $sort = Liste::SORT_NONE;
     private $summary = false;
 
     const SORT_NONE = 0;

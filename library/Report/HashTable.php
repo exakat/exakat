@@ -4,7 +4,7 @@ namespace Report;
 
 class HashTable extends Dataset {
     private $hash = array('Empty' => 'hash');
-    private $sort = TableCounted::SORT_NONE;
+    private $sort = HashTable::SORT_NONE;
     private $summary = false;
 
     private $headerName = 'Item';
