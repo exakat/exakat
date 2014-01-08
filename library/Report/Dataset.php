@@ -12,13 +12,20 @@ class Dataset {
         }
         
         $value = str_replace( "\n", '<BR />', $value );
-        $value = str_replace('|', '\\|', $value);
         $value = str_replace('\\', '\\\\', $value);
-        $value = str_replace('_', '\\_', $value);
+        $value = str_replace('|', '\\|', $value);
+//        $value = str_replace('_', '\\_', $value); // Not for values within ``
+        $value = str_replace('*', '\\*', $value);
         if (strlen($value) > 255) {
             $value = substr($value, 0, 250).' ...';
         }
         $value = str_replace("\n", '`<br />\n`', $value);
+        
+        if (strpos($value, '`') !== false ) {
+            $value = "`` $value ``";
+        } else {
+            $value = "` $value `";
+        }
 
         return $value;
     }
