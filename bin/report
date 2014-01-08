@@ -6,7 +6,9 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Node,
 	Everyman\Neo4j\Gremlin,
 	Tokenizer\Token,
-	Michelf\MarkdownExtra;
+	Michelf\MarkdownExtra,
+	Report\Liste,
+	Report\HashTable;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
@@ -107,6 +109,8 @@ $report->createH1('Appinfo'); // phpinfo for the application
 $Appinfo = new Report\Appinfo($client);
 $report->addContent('HashTable', $Appinfo->toArray());
 
+$no_output = array();
+
 ///// Application analyzes 
 $analyzes = array('Structures\\StrposCompare', 
                   'Structures\\Iffectation',
@@ -124,16 +128,27 @@ if (count($analyzes) > 0) {
     foreach($analyzes as $a) {
         $a = "Analyzer\\$a";
         $analyzer = new $a($client); 
+        $results = $analyzer->toArray();
+        
+        if (empty($results)) {
+            $no_output[] = $analyzer->getName();
+            continue;
+        }
 
         $report->createH2($analyzer->getName()); 
 
-        $report->addContent('Liste', $analyzer->toArray());
+        $list = $report->addContent('Liste', $results);
+        $list->setSummary(true);
+        $list->setSort(Liste::SORT_NORMAL);
     }
 }
 
 
 ///// Application inventory 
 $analyzes = array('Type\\Integer', 
+                  'Type\\Hexadecimal', 
+                  'Type\\Octal', 
+                  'Type\\Binary', 
                   'Type\\Real', 
                   'Type\\String', 
                   'Classes\\Classnames',
@@ -154,14 +169,31 @@ if (count($analyzes) > 0) {
     $report->createH1('Application inventory'); // list of named elements and semantic analysis
 
     foreach($analyzes as $a) {
-       $a = "Analyzer\\$a";
-       $analyzer = new $a($client); 
+        $a = "Analyzer\\$a";
+        $analyzer = new $a($client); 
+        $results = $analyzer->toCountedArray();
 
-       $report->createH2($analyzer->getName()); 
+        if (empty($results)) {
+            $no_output[] = $analyzer->getName();
+            continue;
+        }
 
-       $report->addContent('Text', $analyzer->getDescription());
-       $report->addContent('HashTable', $analyzer->toCountedArray());
+        $report->createH2($analyzer->getName()); 
+
+        $report->addContent('Text', $analyzer->getDescription());
+        $ht = $report->addContent('HashTable', $results);
+        $ht->setSummary(true);
+        $ht->setSort(HashTable::SORT_KEY);
     }
+}
+
+if (count($no_output) > 0) {
+    $report->createH1('Other used analyzers'); // le last analyzers
+
+       $report->addContent('Text', "The following analyzers were also used, but yielded no feedback.");
+       $ht = $report->addContent('Liste', $no_output);
+       $ht->setSummary(true);
+       $ht->setSort(HashTable::SORT_KEY);
 }
 
 
