@@ -33,6 +33,10 @@ if (!file_exists('./projects/'.$project.'/log')) {
     die();
 }
 
+$mysql = new mysqli('localhost', 'root', '', 'exakat');
+$mysql->query('INSERT INTO project_runs (`id`, `date_start`, `folder`) VALUES (0, now(), "'.$project.'");');
+$project_run = $mysql->insert_id;
+
 $progress = 1;
 $total_steps = 9 / 100; // number of usage of logProgress - 1
 logProgress($project, $progress++ / $total_steps);
@@ -71,6 +75,7 @@ shell_exec('rm ./projects/'.$project.'/report.txt; php bin/report '.$project.' -
 logProgress($project, $progress++ / $total_steps);
 
 print "Project reported\n";
+$mysql->query('UPDATE project_runs SET `date_finish` = now() WHERE id = '.$project_run);
 
 function logProgress($project, $percent) {
     file_put_contents("./projects/$project/progress.log", $percent);
