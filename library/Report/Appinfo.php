@@ -22,10 +22,14 @@ class Appinfo {
 
         foreach($extensions as $name => $ext) {
             $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.any()"; 
-            $vertices = $this->query($this->client, $queryTemplate);
+            try {
+                $vertices = $this->query($this->client, $queryTemplate);
 
-            $v = $vertices[0][0];
-            $this->info[$name] = $v == "true" ? "Yes" : "No";
+                $v = $vertices[0][0];
+                $this->info[$name] = $v == "true" ? "Yes" : "No";
+            } catch (Exception $e) {
+            
+            }
         }
 
 
