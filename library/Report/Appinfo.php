@@ -11,15 +11,24 @@ class Appinfo {
         $this->client = $client;
 
         // Which extension are being used ? 
-        $extensions = array('Mcrypt', 'Mysql', 'Kdm5');
+        $extensions = array('ext/mcrypt' => 'Ext/Mcrypt',
+                            'ext/mysql'  => 'Ext/Mysql',
+                            'ext/kdm5'   => 'Ext/Kdm5',
+                            
+                            'Iffectations' => 'Structures/Iffectation',
+                            'Variable variables' => 'Variables/VariableVariables',
+                            
+                            );
 
-        foreach($extensions as $ext) {
-            $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\Extensions\\\\$ext']].out.any()"; 
+        foreach($extensions as $name => $ext) {
+            $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.any()"; 
             $vertices = $this->query($this->client, $queryTemplate);
 
             $v = $vertices[0][0];
-            $this->info[$ext] = $v == "true" ? "Yes" : "No";
+            $this->info[$name] = $v == "true" ? "Yes" : "No";
         }
+
+
     }
     
     function toMarkdown() {

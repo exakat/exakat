@@ -63,13 +63,11 @@ $report .= "\n\n";
         } 
 
         $report = '';
-        if ($this->summary) {
-            $report = "| {$this->headerName}        | {$this->headerCount}          | 
+        if ($this->summary && count($this->list) > 7) {
+            $report = "| Item        | Element          | 
 | -------:        | -------:          |\n";
-$report .= "|Total number of element|".array_sum($this->hash)."|\n";
-$report .= "|Number of distinct element|".count($this->hash)."|\n";
-$report .= "|Largest element|".max($this->hash)." (".array_search(max($this->hash), $this->hash).")|\n";
-$report .= "|Smaller element|".min($this->hash)." (".array_search(min($this->hash), $this->hash).")|\n";
+$report .= "|Total number of element|".count($this->list)."|\n";
+$report .= "|Number of distinct element|".count(array_unique($this->list))."|\n";
 $report .= "\n\n";
 
          }

@@ -107,7 +107,10 @@ $report->addContent('Text');
 
 $report->createH1('Appinfo'); // phpinfo for the application
 $Appinfo = new Report\Appinfo($client);
-$report->addContent('HashTable', $Appinfo->toArray());
+$ht = $report->addContent('HashTable', $Appinfo->toArray());
+$ht->setHeaderName('Feature');
+$ht->setHeaderCount('Present');
+
 
 $no_output = array();
 
@@ -124,7 +127,7 @@ foreach($analyzes as $id => $a) {
 }
 
 if (count($analyzes) > 0) {
-    $report->createH1('Analyzes'); 
+    $h1 = false;
     foreach($analyzes as $a) {
         $a = "Analyzer\\$a";
         $analyzer = new $a($client); 
@@ -135,8 +138,13 @@ if (count($analyzes) > 0) {
             continue;
         }
 
+        if (!$h1) {
+            $report->createH1('Analyzes'); 
+            $h1 = true;
+        }
         $report->createH2($analyzer->getName()); 
 
+        $report->addContent('Text', $analyzer->getDescription());
         $list = $report->addContent('Liste', $results);
         $list->setSummary(true);
         $list->setSort(Liste::SORT_NORMAL);
@@ -149,14 +157,19 @@ $analyzes = array('Type\\Integer',
                   'Type\\Hexadecimal', 
                   'Type\\Octal', 
                   'Type\\Binary', 
+                  'Type\\Ports', 
+                  'Type\\HttpStatus', 
+
                   'Type\\Real', 
                   'Type\\String', 
+                  'Type\\Pcre', 
                   'Classes\\Classnames',
                   'Variables\\Variablenames',
                   'Variables\\VariableOneLetter',
                   'Variables\\VariableLong',
                   'Variables\\VariablePhp',
                   'Variables\\VariableUsedOnce',
+                  'Variables\\VariableVariables',
 //                  'Variables\\Blind',
                   );
 foreach($analyzes as $id => $a) {
@@ -166,7 +179,7 @@ foreach($analyzes as $id => $a) {
 }
 
 if (count($analyzes) > 0) {
-    $report->createH1('Application inventory'); // list of named elements and semantic analysis
+    $h1 = false;
 
     foreach($analyzes as $a) {
         $a = "Analyzer\\$a";
@@ -176,6 +189,11 @@ if (count($analyzes) > 0) {
         if (empty($results)) {
             $no_output[] = $analyzer->getName();
             continue;
+        }
+
+        if (!$h1) {
+            $report->createH1('Application inventory'); // list of named elements and semantic analysis
+            $h1 = true;
         }
 
         $report->createH2($analyzer->getName()); 
