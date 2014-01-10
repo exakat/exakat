@@ -1,6 +1,6 @@
 <?php
-    $dumpinfo = array('method' => $identify[3], 
-                      'volume' => intval($identify[4]), 
-                      'tablepre' => $identify[5], 
-                      'dbcharset' => $identify[6]);
+    $z = array('a' => $f[3], 
+               'b' => intval($g[4]), 
+               'c' => $h[5], 
+               'd' => $i[6]);
 ?>

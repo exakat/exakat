@@ -4,16 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $dumpinfo
     Label : RIGHT
       array
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
           =>
-          Label : KEY
-            'volume'
           Label : VALUE
             intval
             Label : ARGUMENTS
@@ -23,34 +19,38 @@ Label : CODE
                 Label : INDEX
                   4
                 Label : VARIABLE
-                  $identify
+                  $g
+          Label : KEY
+            'b'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'tablepre'
           Label : VALUE
             [
             Label : INDEX
               5
             Label : VARIABLE
-              $identify
+              $h
+          Label : KEY
+            'c'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'dbcharset'
           Label : VALUE
             [
             Label : INDEX
               6
             Label : VARIABLE
-              $identify
+              $i
+          Label : KEY
+            'd'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'method'
           Label : VALUE
             [
             Label : INDEX
               3
             Label : VARIABLE
-              $identify
+              $f
+          Label : KEY
+            'a'
+    Label : LEFT
+      $z

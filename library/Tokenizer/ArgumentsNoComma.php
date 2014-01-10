@@ -6,15 +6,28 @@ class ArgumentsNoComma extends TokenAuto {
     static public $operators = array('T_OPEN_PARENTHESIS');
 
     function _check() {
+        
         // @note f(1) : no comma 
-        $this->conditions = array(-1 => array('token' => array_merge(Functioncall::$operators, 
+        $this->conditions = array(-1 => array('token' => array_merge(Functioncall::$operators_without_echo, 
                                                          array('T_FUNCTION', 'T_DECLARE', 'T_USE'))),
                                    0 => array('token' => ArgumentsNoComma::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => Arguments::$operands_wa),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
-                                   3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')),
+                                   3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR')),
+        );
+
+        $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
+        $this->checkAuto();
+
+        $this->conditions = array(-1 => array('token' => 'T_ECHO'),
+                                   0 => array('token' => ArgumentsNoComma::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => Arguments::$operands_wa),
+                                   2 => array('token' => 'T_CLOSE_PARENTHESIS',
+                                              'atom'  => 'none'),
+                                   3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS', 'T_COMMA', 'T_OBJECT_OPERATOR')),
         );
 
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
@@ -55,7 +68,7 @@ class ArgumentsNoComma extends TokenAuto {
                                    1 => array('atom'  => Arguments::$operands_wa),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
-                                   3 => array('filterOut2' => Token::$instruction_ending),
+                                   3 => array('filterOut2' => array_merge(array('T_COMMA'), Token::$instruction_ending)),
         );
 
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));

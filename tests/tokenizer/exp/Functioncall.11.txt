@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     $x
+    Label : NAME
+      $x
     Label : ARGUMENTS
       ,
       Label : ARGUMENT
@@ -12,6 +14,8 @@ Label : CODE
         1
       Label : ARGUMENT
         $y
+        Label : NAME
+          $y
         Label : ARGUMENTS
           void
           Label : ARGUMENT

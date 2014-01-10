@@ -6,7 +6,7 @@ Label : CODE
     [
     Label : INDEX
       1
-    Label : VARIABLE
-      $x
     Label : ARGUMENTS
       void
+    Label : VARIABLE
+      $x

@@ -8,28 +8,28 @@ Label : CODE
     ,
     Label : ARGUMENT
       =
+      Label : RIGHT
+        array
+        Label : ARGUMENTS
+          void
       Label : LEFT
         $c
+    Label : ARGUMENT
+      =
       Label : RIGHT
         array
         Label : ARGUMENTS
           void
-    Label : ARGUMENT
-      =
       Label : LEFT
         $b
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          void
     Label : ARGUMENT
       =
-      Label : LEFT
-        $d
       Label : RIGHT
         array
         Label : ARGUMENTS
           void
+      Label : LEFT
+        $d
   Label : BLOCK
     {
     Label : CODE

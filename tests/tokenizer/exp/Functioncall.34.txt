@@ -8,24 +8,24 @@ Label : CODE
     ,
     Label : ARGUMENT
       =
-      Label : LEFT
-        $c
       Label : RIGHT
         '2'
+      Label : LEFT
+        $c
     Label : ARGUMENT
       =
-      Label : LEFT
-        $b
       Label : RIGHT
         array
         Label : ARGUMENTS
           void
+      Label : LEFT
+        $b
     Label : ARGUMENT
       =
-      Label : LEFT
-        $d
       Label : RIGHT
         2.3
+      Label : LEFT
+        $d
   Label : BLOCK
     {
     Label : CODE

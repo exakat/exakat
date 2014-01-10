@@ -4,27 +4,27 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       array
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
           =>
-          Label : KEY
-            3
           Label : VALUE
             4
+          Label : KEY
+            3
         Label : ARGUMENT
           =>
-          Label : KEY
-            1
           Label : VALUE
             2
+          Label : KEY
+            1
         Label : ARGUMENT
           =>
-          Label : KEY
-            5
           Label : VALUE
             6
+          Label : KEY
+            5
+    Label : LEFT
+      $a

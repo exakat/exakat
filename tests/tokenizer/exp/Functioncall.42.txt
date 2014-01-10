@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       intval
       Label : ARGUMENTS
@@ -14,29 +12,31 @@ Label : CODE
           @
           Label : AT
             /
-            Label : LEFT
-              (
-              Label : CODE
-                +
-                Label : LEFT
-                  [
-                  Label : INDEX
-                    'c'
-                  Label : VARIABLE
-                    $b
-                Label : RIGHT
-                  $d
             Label : RIGHT
               abs
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   +
+                  Label : RIGHT
+                    $g
                   Label : LEFT
                     [
                     Label : INDEX
                       'f'
                     Label : VARIABLE
                       $e
-                  Label : RIGHT
-                    $g
+            Label : LEFT
+              (
+              Label : CODE
+                +
+                Label : RIGHT
+                  $d
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    'c'
+                  Label : VARIABLE
+                    $b
+    Label : LEFT
+      $a

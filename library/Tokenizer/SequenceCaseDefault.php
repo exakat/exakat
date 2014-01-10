@@ -26,7 +26,9 @@ class SequenceCaseDefault extends TokenAuto {
         return '
 s = [];
 it.out("ELEMENT").each{ s.add(it.fullcode); }
-it.fullcode =  s.join("\n");';
+it.fullcode =  s.join("\n");
+
+';
     }
 }
 ?>

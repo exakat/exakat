@@ -6,13 +6,13 @@ Label : CODE
     [
     Label : INDEX
       d
-    Label : VARIABLE
-      ->
-      Label : PROPERTY
-        c
-      Label : OBJECT
-        $b
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         34
+    Label : VARIABLE
+      ->
+      Label : OBJECT
+        $b
+      Label : PROPERTY
+        c
