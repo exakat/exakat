@@ -49,7 +49,7 @@ if ($id = array_search('-p', $args)) {
 if ($id = array_search('-f', $args)) {
     $filename = $args[$id + 1];
     
-    process_file($filename, $log);
+    $nb_tokens = process_file($filename, $log);
     $nb_files = 1;
 } elseif ($id = array_search('-d', $args)) {
     $dir = $args[$id + 1];
@@ -58,39 +58,42 @@ if ($id = array_search('-f', $args)) {
         $dir = substr($dir, 0, -1);
     }
     
-    $nb_files = process_dir($dir, $log);
+    $res = process_dir($dir, $log);
+    $nb_files = $res['files'];
+    $nb_tokens = $res['tokens'];
 } else {
     print "No file to process. Aborting\n";
     die();
 }
 
 $_PILOT::finalize();
-$log->report('load', array('project' => $project, 'files' => $nb_files));
+$log->report('load', array('project' => $project, 'files' => $nb_files, 'tokens' => $nb_tokens));
 
 function process_dir($dir, $log) {
     $dirr = opendir($dir);
     $nb_files = 0;
+    $nb_tokens = 0;
     while ($filename = readdir($dirr)) {
         if ($filename{0} == '.') { continue; }
         if (is_link($filename)) { continue; }
         
         if (is_dir($dir.'/'.$filename)) {
             if (RECURSIVE) {
-                $nb_files += process_dir($dir.'/'.$filename, $log);
+                $res = process_dir($dir.'/'.$filename, $log);
+                $nb_tokens += $res['tokens'];
+                $nb_files  += $res['files'];
             }
         } else {
             if (substr($filename, -4) != '.php') { continue; }
-            print $dir.'/'.$filename."\n";
-            $nb_files += process_file($dir.'/'.$filename, $log);
+            $nb_tokens += process_file($dir.'/'.$filename, $log);
+            $nb_files++;
         }
     }
-
-    return $nb_files;
+    return array('files' => $nb_files, 'tokens' => $nb_tokens);
 }
 
 
 function process_file($filename, $log_file) {
-    
     $log = array();
     $begin = microtime(true);
     
@@ -279,6 +282,26 @@ function process_file($filename, $log_file) {
                                               ->save();
 
                 $to_index = false;
+            } elseif (token_name($token[0]) == 'T_OPEN_TAG_WITH_ECHO') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_OPEN_TAG')
+                                              ->setProperty('code', str_replace('=', 'php', $token[1]))
+                                              ->setProperty('line', $token[2])
+                                              ->save();
+                $classNode->relateTo($T[$Tid]);
+                $regexIndex["Phpcode"]->relateTo($T[$Tid], 'INDEXED')->save();
+                if (isset($previous)) {
+                    $previous->relateTo($T[$Tid], 'NEXT')->save();
+                }
+                $previous = $T[$Tid];
+                
+                $Tid++;
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_ECHO')
+                                              ->setProperty('code', 'echo')
+                                              ->setProperty('line', $line)
+                                              ->save();
+                $regexIndex["ArgumentsNoParenthesis"]->relateTo($T[$Tid], 'INDEXED')->save();
+                $regexIndex["Functioncall"]->relateTo($T[$Tid], 'INDEXED')->save();
+
             } elseif (token_name($token[0]) == 'T_CLOSE_TAG' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  && token_name($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
                 $Tid++;
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
@@ -607,6 +630,6 @@ function process_file($filename, $log_file) {
 
     $client->save_chunk();
     
-    return 1;
+    return $Tid;
 }
 ?>
