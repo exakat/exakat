@@ -95,9 +95,11 @@ $report->createH2('Report configuration');
 $ReportInfo = new Report\ReportInfo($project);
 $report->addContent('HashTable', $ReportInfo->toArray()); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
+/*
 $report->createH2('Analyser list'); 
 $AnalyzerList = new Report\AnalyzerList($project);
 $report->addContent('Liste', $AnalyzerList->toArray()); 
+*/
 
 /*
 human review of the audit, and 3 paragraph explation + table with priorities
@@ -170,7 +172,6 @@ $analyzes = array('Type\\Integer',
                   'Variables\\VariablePhp',
                   'Variables\\VariableUsedOnce',
                   'Variables\\VariableVariables',
-//                  'Variables\\Blind',
                   );
 foreach($analyzes as $id => $a) {
     if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
