@@ -15,29 +15,28 @@ class _Global extends TokenAuto {
                                  );
         
         $this->actions = array('transform'  => array( 1 => 'NAME'),
-                               'add_void'   => array( 0 => 'VALUE'), 
                                'atom'       => 'Global',
                                'cleanIndex' => true
                                );
         $this->checkAuto(); 
 
-    // class x { var $x, $y }
+    // global $x, $y, $z;
         $this->conditions = array( 0 => array('token' => _Global::$operators),
                                    1 => array('atom' => 'Arguments'),
                                    2 => array('filterOut' => array('T_COMMA')),
                                  );
         
-        $this->actions = array('to_var'      => 'Global',
-                               'atom'        => 'Global');
+        $this->actions = array('to_global'   => 'Global',
+                               'keepIndexed' => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();
     }
 
     function fullcode() {
-        return 'it.fullcode = "global " + it.out("NAME").next().fullcode;
-current = it;
-it.out("VALUE").hasNot("token", "T_VOID").each{ current.fullcode = current.fullcode + " = " + it.fullcode;}
+        return '
+it.fullcode = "global " + it.out("NAME").next().fullcode;
+
 ';
     }
 
