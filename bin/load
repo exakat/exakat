@@ -284,7 +284,7 @@ function process_file($filename, $log_file) {
                 $to_index = false;
             } elseif (token_name($token[0]) == 'T_OPEN_TAG_WITH_ECHO') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_OPEN_TAG')
-                                              ->setProperty('code', str_replace('=', 'php', $token[1]))
+                                              ->setProperty('code', str_replace('<?=', '<?php', $token[1]))
                                               ->setProperty('line', $token[2])
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
@@ -317,6 +317,13 @@ function process_file($filename, $log_file) {
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2]);
             }
+
+            $x = $T[$Tid]->getProperty('code');
+            // one may also use 4, 8 or any chr that is supposed to be non ascii. 
+            if (strpos($x, chr(2)) !== false) { 
+                $T[$Tid]->setProperty('code', "Binary data <length ".strlen($x)." bytes>");
+            }
+
             $T[$Tid]->save();
             $classNode->relateTo($T[$Tid]);
             
