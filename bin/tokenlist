@@ -1,0 +1,29 @@
+<?php
+
+if (!isset($argv[1])) {
+    print "Usage : tokenlist <file>";
+}
+$file = $argv[1];
+
+if (!file_exists($file)) {
+    print "Usage : tokenlist <file>\n '$file' doesn't exist.\n\n";
+}
+
+if (!is_readable($file)) {
+    print "Usage : tokenlist <file>\n '$file' is not readable.\n\n";
+}
+
+$res = shell_exec('php -l '.$file);
+if (strpos($res, 'No syntax errors') !== 0) {
+    print "Usage : tokenlist <file>\n '$file' is not compilable PHP script.\n\n";
+}
+
+$tokens = (token_get_all(file_get_contents($file))); 
+foreach($tokens as $token) { 
+    if(count($token) == 3) { 
+        echo $token[0]." : ".token_name($token[0])." ({$token[1]})\n"; 
+    } else {
+        print "$token\n";
+    }
+}
+?>
