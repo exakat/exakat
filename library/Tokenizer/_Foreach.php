@@ -8,7 +8,7 @@ class _Foreach extends TokenAuto {
     function _check() {
         $operands = array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 
                           'Staticmethodcall', 'Methodcall','Cast', 'Parenthesis', 'Ternary', 
-                          'Noscream', 'Not', 'Assignation', 'New',);
+                          'Noscream', 'Not', 'Assignation', 'New', 'Addition');
         $blind_variables = array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Reference' );
 
         // foreach(); (empty)
