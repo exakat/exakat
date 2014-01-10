@@ -313,6 +313,39 @@ g.removeVertex(var);
             unset($actions['to_var']);
         }
 
+        if (isset($actions['to_global'])) {
+            $atom = $actions['to_global'];
+            $qactions[] = "
+/* to global with arguments */
+var = it;
+arg = it.out('NEXT').next();
+
+root = it;
+root.setProperty('code', var.code);
+root.setProperty('token', var.token);
+
+arg.out('ARGUMENT').each{
+    x = g.addVertex(null, [code:'global', atom:'Global', token:'T_GLOBAL', virtual:true, line:it.line]);
+    
+    g.addEdge(var, x, 'ELEMENT');
+    g.addEdge(x,  it, 'NAME');
+    
+    it.inE('ARGUMENT').each{ g.removeEdge(it); }
+}
+
+g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
+g.removeEdge(var.out('NEXT').outE('NEXT').next());
+g.removeVertex(arg);
+
+var.setProperty('code', ';');
+var.setProperty('atom', 'Sequence');
+var.setProperty('token', 'T_GLOBAL');
+var.inE('INDEXED').each{ g.removeEdge(it); }
+
+";
+            unset($actions['to_global']);
+        }
+
         if (isset($actions['to_var_ppp'])) {
             list($atom1, $atom2) = $actions['to_var_ppp'];
             $qactions[] = "
