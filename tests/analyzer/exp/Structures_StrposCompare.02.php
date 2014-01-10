@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('Strpos', 'STrpos');
+$expected     = array('Strpos($a, $b )', 'STrpos($a, $b )');
 
-$expected_not = array('strpoS');
+$expected_not = array('strpoS($a, $b )');
 
 ?>
