@@ -6,7 +6,7 @@ class Phpcode extends TokenAuto {
     static public $operators = array('T_OPEN_TAG');
 
     function _check() {
-        $this->conditions = array(0 => array('token' => array('T_OPEN_TAG'),
+        $this->conditions = array(0 => array('token' => Phpcode::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
                                   2 => array('token' => 'T_CLOSE_TAG'),
@@ -19,7 +19,7 @@ class Phpcode extends TokenAuto {
         $this->checkAuto();
 
 // <?php echo 3 ( No closing tag)
-        $this->conditions = array(0 => array('token' => array('T_OPEN_TAG'),
+        $this->conditions = array(0 => array('token' => Phpcode::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'yes'),
                                   2 => array('token' => 'T_END'),
@@ -30,7 +30,7 @@ class Phpcode extends TokenAuto {
         $this->checkAuto();
 
 // <?php ? > (empty script 
-        $this->conditions = array(0 => array('token' => array('T_OPEN_TAG'),
+        $this->conditions = array(0 => array('token' => Phpcode::$operators,
                                              'atom' => 'none'),
                                   1 => array('token' => 'T_CLOSE_TAG'),
         );
