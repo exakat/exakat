@@ -424,6 +424,7 @@ GREMLIN;
         // @doc This is when the object is a placeholder for others. 
         if (count($this->methods) == 1) { return true; }
         
+        array_splice($this->methods, 2, 0, array('as("first")'));
         $query = join('.', $this->methods);
         
         // search what ? All ? 
