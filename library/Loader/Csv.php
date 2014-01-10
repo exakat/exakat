@@ -88,6 +88,14 @@ SHELL
         
         return $this;
     }
+
+    function getProperty($name) {
+        if ($this->isLink) {
+            return static::$links[count(static::$links) - 1][$name];
+        } else {
+            return $this->node[$name];
+        }
+    }
     
     function save() {
         if (empty($this->id)) {
