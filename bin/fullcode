@@ -23,14 +23,14 @@ $log->log("Limit\t$limit");
 //.has('fullcode', null)
 $result = query("g.V[$offset..$end].hasNot('atom', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE', 'E_FILE', 'T_INDEX', 'T_ROOT', 'T_END'])}.sideEffect{ it.fullcode = 'Not available.'}.iterate()");
 
-$tokens = array( 'Float', 'Integer', '_Function', 'SequenceCaseDefault', '_Global', 'String',  'Real', "Void", 'Identifier', '_Return', 'Multiplication', 
+$tokens = array( 'Float', 'Integer', '_Function', '_Global', 'String',  'Real', "Void", 'Identifier', '_Return', 'Multiplication', 
                  'Variable', 'Concatenation', 'Comparison', '_Break', 'Magicconstant', '_Throw', 
                  'Parenthesis', 'Addition', 'Arguments', 'Functioncall', 'Parenthesis', 'Assignation', '_Case', '_Default', '_Include', 'Noscream', 
                  'Preplusplus', 'Bitshift', 'Postplusplus', 'Sign', 'Boolean', '_Array', '_Static', '_Final', 'Not', 'Reference', 'Keyvalue', '_Ppp', 
                  'Property', 'Methodcall', 'Logical', 'Ternary', 'Arrayappend', 'Staticmethodcall', 'Staticproperty', 'Staticconstant', 
                  '_New', 'Cast', 'Sequence', 'Block', 'Ifthen', '_Foreach', '_While', '_Abstract', '_Continue', 'RawString', 'Phpcode', 
                  '_For', '_Class', '_Switch', 'Nsname', '_Namespace', '_Clone', 'Typehint', '_Const', '_Try', '_Use', '_Interface', '_Instanceof',
-                 '_Catch',    );
+                 '_Catch', 'SequenceCaseDefault',    );
 
 $prev = $limit + 2;
 $current = $limit + 1;
