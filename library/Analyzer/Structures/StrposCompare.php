@@ -10,7 +10,7 @@ class StrposCompare extends Analyzer\Analyzer {
         // if (.. == strpos(..)) {}
         $this->atomIs("Functioncall")
              ->_as('result')
-             ->code('strpos')
+             ->code(array('strpos', 'stripos'))
              ->in('RIGHT')
              ->atomIs('Comparison')
              ->code(array('==', '!='))
@@ -22,7 +22,7 @@ class StrposCompare extends Analyzer\Analyzer {
         // if (strpos(..) == ..) {}
         $this->atomIs("Functioncall")
              ->_as('result')
-             ->code('strpos')
+             ->code(array('strpos', 'stripos'))
              ->in('LEFT')
              ->atomIs('Comparison')
              ->code(array('==', '!='))
@@ -34,7 +34,7 @@ class StrposCompare extends Analyzer\Analyzer {
         // if (strpos(..)) {}
         $this->atomIs("Functioncall")
              ->_as('result')
-             ->code('strpos')
+             ->code(array('strpos', 'stripos'))
              ->in('CODE')
              ->in('CONDITION')
              ->atomIs('Ifthen')
@@ -43,7 +43,7 @@ class StrposCompare extends Analyzer\Analyzer {
 
         // if ($x = strpos(..)) {}
         $this->atomIs("Functioncall")
-             ->code('strpos')
+             ->code(array('strpos', 'stripos'))
              ->in('RIGHT')
              ->atomIs('Assignation')
              ->_as('result')
