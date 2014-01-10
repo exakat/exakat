@@ -19,9 +19,10 @@ if (strpos($res, 'No syntax errors') !== 0) {
 }
 
 $tokens = (token_get_all(file_get_contents($file))); 
-foreach($tokens as $token) { 
+//$tokens = array_slice($tokens, 0, 200);
+foreach($tokens as $id => $token) { 
     if(count($token) == 3) { 
-        echo $token[0]." : ".token_name($token[0])." ({$token[1]})\n"; 
+        echo $id." => ".$token[0]." : ".token_name($token[0])." ({$token[1]})\n"; 
     } else {
         print "$token\n";
     }
