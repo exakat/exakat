@@ -120,6 +120,7 @@ $no_output = array();
 $analyzes = array('Structures\\StrposCompare', 
                   'Structures\\Iffectation',
                   'Structures\\NotNot',
+                  'Structures\\ErrorReportingWithInteger',
                   );
 
 foreach($analyzes as $id => $a) {
