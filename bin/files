@@ -4,6 +4,12 @@ $args = $argv;
 
 $dir = $args[1];
 
+if (in_array('-json', $args)) {
+    define('OUTPUT', 'JSON');
+} else {
+    define('OUTPUT', 'PRINT_R');
+}
+
 if (strpos($dir, '/') === false) {
     // trying as a project name
     if (file_exists('./projects/'.$dir.'/code/')) {
@@ -25,14 +31,15 @@ $unknown = array();
 $exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps',  ),
               'images' => array('jpg', 'gif', 'ico', 'png', 'svg', 'eps', 'psd', 'dot'),
               'media' => array('ttf', 'swf', 'woff', 'eot', 'otf', ),
-              'text' => array('ini', 'xml', 'wsdl', 'txt', 'rst', 'md', 'markdown', 'po', 'mo',  ),
+              'text' => array('ini', 'xml', 'wsdl', 'txt', 'rst', 'md', 'markdown', 'po', 'mo', 'pot', 'dtd', 'TXT', 'WEBHELP', 'mxml',  ),
               'web' => array('html', 'htm', 'css', 'js', 'json', 'less', ),
-              'document' => array('doc', 'xls', 'docx', 'pdf', 'odt'),
+              'document' => array('doc', 'xls', 'docx', 'pdf', 'odt', 'epub', 'book' ),
               'archives' => array('tgz', 'bz2' ,'z', 'zip', 'gz', ),
-              'audio' => array('mp3',),
-              'data' => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install', 'sqlite',),
-              'prog' => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt', 'sass', 'scss', 'xsl'),
-              'misc' => array('test')
+              'audio' => array('mp3', 'fla', 'wav', ),
+              'data' => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install', 'sqlite', 'lang', 'conf', 'db',  ),
+              'prog' => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt', 'sass', 'scss', 'xsl', 'as'),
+              'misc' => array('test', 'table', 'dat', 'admin', 'cur', 'git', 'rng', 'bin',  'ser', ),
+              'security' => array('pub'),
              );
              
 
@@ -59,9 +66,16 @@ foreach($files as $file) {
     }
 }
 
-print_r($stats);
-if ($unknown) {
-    print_r($unknown);
+if (OUTPUT == 'JSON') {
+    if ($unknown) {
+        $stats['unknown'] = $unknown;
+    }
+    print json_encode($stats);
+} else {
+    print_r($stats);
+    if ($unknown) {
+        print_r($unknown);
+    }
 }
 
 function glob_recursive($dir, $prefix = '') {
