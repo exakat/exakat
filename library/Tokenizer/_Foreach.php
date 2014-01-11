@@ -118,7 +118,7 @@ class _Foreach extends TokenAuto {
                                                         8 => 'DROP',
                                                         9 => 'DROP',
                                                       ),
-                               'atom'       => 'For',
+                               'atom'       => 'Foreach',
                                'property' => array('Alternative' => 'yes'),
                                'cleanIndex' => true
                                );
