@@ -15,7 +15,7 @@ class ArgumentsNoComma extends TokenAuto {
                                    1 => array('atom'  => Arguments::$operands_wa),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
-                                   3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR')),
+                                   3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')), //, 'T_OBJECT_OPERATOR'
         );
 
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
@@ -62,6 +62,7 @@ class ArgumentsNoComma extends TokenAuto {
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
         $this->checkAuto();
 
+        // echo $e
         $this->conditions = array(-1 => array('token' => array('T_PRINT', 'T_ECHO')),
                                    0 => array('token' => ArgumentsNoComma::$operators,
                                               'atom'  => 'none'),
