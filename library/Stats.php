@@ -40,8 +40,7 @@ class Stats {
         $this->stats['atoms_count']   = $this->queryOne("g.V.except([g.v(0)]).hasNot('atom', 'null'){$this->file_filter}.count()");
         $this->stats['NEXT_count']    = $this->queryOne("g.E.has('label', 'NEXT').inV{$this->file_filter}.count()");
         $this->stats['INDEXED_count'] = $this->queryOne("g.E.has('label', 'INDEXED').inV{$this->file_filter}.count()");
-        $this->stats['file_count']    = $this->queryOne("m = [:]; g.V.groupCount(m){it.file}.iterate(); m.size();");
-        //$this->stats['test']        = $this->queryOne("m = []; g.V.fill(m); m.size();");
+        $this->stats['file_count']    = $this->queryOne("m = [:]; g.V.inE('FILE').file.groupCount(m).iterate(); m.size();");
     }
     
     function queryOne($query) {
