@@ -1,0 +1,30 @@
+<?php
+
+$projects = glob('./projects/*');
+
+$runs = array();
+foreach($projects as $p) {
+    if ($p == './projects/default') { continue; }
+    
+    $res = shell_exec('php bin/files '.$p.' -json');
+    $stats = json_decode($res);
+    
+    if (isset($stats->unknown)) { print_r($stats->unknown); }
+    if (!isset($stats->php)) { continue; }
+    if (!file_exists($p.'/report.md')) {
+        $runs[$p] = 0;
+    } elseif ($stats->php < 200) { 
+        $runs[$p] = @filemtime($p.'/report.md');
+    }
+}
+
+asort($runs);
+
+foreach($runs as $r => $date) {
+    print "Running $r\n".date('r')."\n\n";
+    $begin = microtime(true);
+    print shell_exec('php bin/project '.basename($r));
+    $end = microtime(true);
+    print "Done on ".date('r').", after ".($end - $begin)."s\n\n";
+}
+?>
