@@ -11,13 +11,17 @@ class Dataset {
             return $value;
         }
         
-        $value = str_replace('<', '&lt;', $value);
-        $value = str_replace('>', '&gt;', $value);
+//        $value = str_replace('<', '&lt;', $value);
+//        $value = str_replace('>', '&gt;', $value);
         $value = str_replace( "\n", '<BR />', $value );
 //        $value = str_replace('\\', '\\\\', $value);
+
+//|` ' == $key \|| in_array($key,$' `|1|
+
         $value = preg_replace('/([^\\\\])\|/', '$1\\|', $value);
 //        $value = str_replace('_', '\\_', $value); // Not for values within ``
-        $value = str_replace('*', '\\*', $value);
+        $value = preg_replace('/([^\\\\])\*/', '$1\\*', $value);
+//        $value = str_replace('*', '\\*', $value);
         if (strlen($value) > 255) {
             $value = substr($value, 0, 250).' ...';
         }
