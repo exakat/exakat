@@ -45,7 +45,9 @@ class Section {
     }
 
     function getId() {
-        return str_replace(' ', '-', $this->name);
+        return str_replace(array(' ', '('  , ')'  ), 
+                           array('-', '', ''),
+                           $this->name);
     }
     
     function getSections() {
