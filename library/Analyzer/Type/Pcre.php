@@ -12,6 +12,11 @@ class Pcre extends Analyzer\Analyzer {
     function analyze() {
         $this->atomIs('String')
              ->regex('code', '([\'\\"])([\\\\/\\$#]).*?([\\\\/\\$#])[ius]*[\'\\"]');
+        $this->prepareQuery();
+
+        $this->atomIs('String')
+             ->regex('code', '([\'\\"])\\\\{.*?\\\\}[ius]*[\'\\"]');
+        $this->prepareQuery();
     }
 }
 

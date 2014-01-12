@@ -11,9 +11,10 @@ class Appinfo {
         $this->client = $client;
 
         // Which extension are being used ? 
-        $extensions = array('ext/mcrypt' => 'Ext/Mcrypt',
-                            'ext/mysql'  => 'Ext/Mysql',
-                            'ext/kdm5'   => 'Ext/Kdm5',
+        $extensions = array('ext/mcrypt' => 'Extensions/Extmcrypt',
+                            'ext/mysqli'  => 'Extensions/Extmysqli',
+                            'ext/pcre'  => 'Extensions/Extpcre',
+                            'ext/kdm5'   => 'Extensions/Extkdm5',
                             
                             'Iffectations' => 'Structures/Iffectation',
                             'Variable variables' => 'Variables/VariableVariables',

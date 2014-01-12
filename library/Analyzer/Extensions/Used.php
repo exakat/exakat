@@ -7,8 +7,11 @@ use Analyzer;
 class Used extends Analyzer\Analyzer {
 
     function dependsOn() {
-        return array('Analyzer\\Extensions\\Mcrypt', 
-                     'Analyzer\\Extensions\\Kdm5');
+        return array('Analyzer\\Extensions\\Extmcrypt', 
+                     'Analyzer\\Extensions\\Extpcre',
+                     'Analyzer\\Extensions\\Extmysqli',
+                     'Analyzer\\Extensions\\Extkdm5',
+                     );
     }
 
     function analyze() {

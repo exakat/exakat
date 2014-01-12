@@ -258,7 +258,11 @@ GREMLIN;
         
         return $this;
     }
-    
+
+    function codeIsUppercase() {
+        $this->methods[] = "filter{it.code == it.code.toUpperCase()}";
+    }
+
     function codeLength($length = " == 1 ") {
         // @todo add some tests ? Like Operator / value ? 
         $this->methods[] = "filter{it.code.length() $length}";
