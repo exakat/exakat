@@ -29,7 +29,11 @@ class Variable extends TokenAuto {
         return 'it.fullcode = it.code; 
 x = it;
 it.has("token", "T_STRING_VARNAME").each{ x.fullcode = "\\$" + it.code; }
-it.out("NAME").each{ x.fullcode = it.fullcode; }
+it.has("token", "T_DOLLAR").filter{it.out("NAME").has("atom", "Variable").count() != 0}.out("NAME").each{ x.fullcode = "\\$" + it.fullcode; }
+it.has("token", "T_DOLLAR").filter{it.out("NAME").has("atom", "Variable").count() == 0}.out("NAME").each{ x.fullcode = "\\${" + it.fullcode + "}"; }
+
+it.has("token", "T_DOLLAR_OPEN_CURLY_BRACES").filter{it.out("NAME").has("atom", "Variable").count() == 0}.out("NAME").each{ x.fullcode = "\\${" + it.fullcode + "}"; }
+//it.out("NAME").each{ x.fullcode = it.fullcode; }
         ';
     }
 }
