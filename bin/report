@@ -173,6 +173,7 @@ $analyzes = array('Type\\Integer',
                   'Variables\\VariablePhp',
                   'Variables\\VariableUsedOnce',
                   'Variables\\VariableVariables',
+                  'Variables\\VariableUppercase',
                   );
 foreach($analyzes as $id => $a) {
     if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
