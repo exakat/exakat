@@ -44,7 +44,10 @@ $exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps
              
 
 foreach($files as $file) { 
-    if (is_dir($file)) { continue; }
+    if (is_dir($file)) { 
+        @$stats['dir']++;
+        continue; 
+    }
 
     if (strpos(basename($file), '.') === false) {
         @$stats['none']++;
@@ -54,6 +57,15 @@ foreach($files as $file) {
             if (preg_match('#\.('.join('|', $ext).')$#', $file)) {
                 @$stats[$e]++;
                 $found = true;
+
+                if ($e == 'php') {
+                    $res = shell_exec('php -l '.$file);
+                    if (substr($res, 0, 25) != 'No syntax errors detected') {
+                        @$stats['not compilable']++;
+                    } else {
+                        @$stats['tokens'] += count(token_get_all(file_get_contents($file)));
+                    }
+                }
                 break 1;
             }
         }
@@ -62,7 +74,6 @@ foreach($files as $file) {
             @$stats['unknown']++; 
             $unknown[] = basename($file);
         }
-
     }
 }
 
