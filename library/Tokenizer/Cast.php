@@ -23,7 +23,7 @@ class Cast extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = "( " + it.code + ") " + it.out("CAST").next().code; ';
+        return 'it.fullcode = it.code + it.out("CAST").next().fullcode; ';
     }
 }
 
