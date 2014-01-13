@@ -119,8 +119,12 @@ $no_output = array();
 ///// Application analyzes 
 $analyzes = array('Structures\\StrposCompare', 
                   'Structures\\Iffectation',
-                  'Structures\\NotNot',
                   'Structures\\ErrorReportingWithInteger',
+                  'Structures\\ForWithFunctioncall',
+                  'Structures\\ForeachSourceNotVariable',
+                  'Variables\\VariableUsedOnce',
+
+                  'Structures\\NotNot',
                   );
 
 foreach($analyzes as $id => $a) {
@@ -164,14 +168,17 @@ $analyzes = array('Type\\Integer',
                   'Type\\HttpStatus', 
 
                   'Type\\Real', 
+                  
                   'Type\\String', 
+                  
                   'Type\\Pcre', 
+                  
                   'Classes\\Classnames',
+                  
                   'Variables\\Variablenames',
                   'Variables\\VariableOneLetter',
                   'Variables\\VariableLong',
                   'Variables\\VariablePhp',
-                  'Variables\\VariableUsedOnce',
                   'Variables\\VariableVariables',
                   'Variables\\VariableUppercase',
                   );
