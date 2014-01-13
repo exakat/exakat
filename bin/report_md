@@ -1,0 +1,45 @@
+<?php
+
+if (!isset($argv[1])) {
+    print "Usage : report_md <project_name>\n";
+    die();
+}
+
+$args = $argv[1];
+if (file_exists($args)) {
+    $path = $args;
+} elseif (file_exists('./projects/'.$args)) {
+    $path = './projects/'.$args;
+} elseif (file_exists('./tests/library/'.$args)) {
+    $path = './tests/library/'.$args;
+} else {
+    print "Couldn't find '$args'. Aborting\n";
+}
+
+$begin = microtime(true);
+$res = shell_exec('rm -rf '.$path.'/report.md; php bin/report '.basename($path).' -f '.$path.'/report -markdown');
+$end = microtime(true);
+
+if (empty($res)) {
+    print "Generated report in ".number_format(($end - $begin) * 1000, 2)." ms (".humanfilesize("$path/report.md").")\n";
+} else {
+    print "Error : $res\n\n";
+    if (file_exists("$path/report.md")) {
+        print "Generated report in ".number_format(($end - $begin) * 1000, 2)." ms\n";
+    } else {
+        print "No report generated for '$args'\n\n";
+    }
+}
+
+function humanfilesize($file) {
+    $size = filesize($file);
+    if ($size < 1024) {
+        return "$size b";
+    } elseif ($size < 1024 * 1024) {
+        return number_format($size / 1024, 1)." kb";
+    } else {
+        return number_format($size / pow(1024, 2), 1)." Mb";
+    }
+}
+
+?>
