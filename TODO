@@ -62,18 +62,21 @@ Rerun all tests unit and make them stable
 Check all unit test with the new Identifier token
 Change Class to support options like we do for functions
 
-Differentiate octal/hexa/decimal/binary for integers
 Reconcile String with some detectors : list of country, SQL code, JS code, CSS code, HTML code, regex, HTTP headers, etc. 
+Detect databases : large arrays of values. 
+
+Detect PHP extensions : php, php3, inc : search for the files.
+
+@$stats['dir']++; : $stats should be 
+Inventory of keys in array.
+Variables that are looking like : $var1 and $varl, $var0 and $varO, $var and $vars
+
 
 Variable that bear special names (PHP variables, other library variables, global, Formating, spelling).
 
 Detect encoding for the strings ? 
 
-
-_Try stay indexed and shouldn't.
-
-
-Reintroduce the php -l tests in the loader
+Reintroduce the php -l tests in the loader : add a cache to avoir re-test ? 
 Check for short tags opening and list them in the Appinfo()
 
 Centralize all option reading in one class/file.
@@ -82,4 +85,25 @@ Scope change between a method and the one in the parent classes.
 Variables : 
 Camel case, underscore separated, Spelling, $[type]Name ($sString, $iId,), variables with numbers or sharing prefixes).
 
-Export analyze to Sqlite for reuse.
+Export analyze to Sqlite for stats
+
+Supporting different versions of PHP : in the analyzer (so as to test situations), and as the engine (can we run the application as PHP-xxx ? ).
+Centralize config.ini : add new values, have an overview of the configs.
+Centralize results : define a format for centralizing information (start with appinfo ? With some of the inventory ? )
+Export to database : CSV or Sqlite or SQL, for reuse. 
+Add a deamon to project, that scans then start
+Build a test project for the reports styles (avoid md/pdf pb)
+Brush up the report 
+Add exemples from the found code to the explanations. 
+Make a summary to the report (how to share this ? When to involve the author ? Needs a special intermediate report ? )
+Apply all the old analyzers from cornac
+Check spelling in variables/classe names
+Inventory for functions and constants
+Export tool for extensions (versioning ?)
+Long variables with "" that should actually be ' because they don't contain any variable.
+Add a config for the whole analyzer
+Add logs in project : stops if tokenizer/fullcode do break. Alert me.
+Export data collected in mysql to a graph
+
+Mettre wordpress sous git
+Avoir un outil pour pousser le site en ligne depuis Git
