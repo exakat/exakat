@@ -1,0 +1,76 @@
+<?php
+
+$mysqli = new mysqli('localhost', 'root', '', 'wordpress');
+
+$wait = 0;
+while(1) {
+    $res = $mysqli->query("SELECT name FROM exakat_projects WHERE progress = 0");
+    $wait++;
+
+    while($row = $res->fetch_Row()) {
+        print "Processing {$row[0]}\n";
+        
+        for ($i = 0; $i < 10; $i++) {
+            if (!file_exists('./projects/'.$row[0].'/code/')) { 
+                sleep(3);
+                print "*";
+            }
+        }
+        if (!file_exists('./projects/'.$row[0].'/code/')) { 
+            continue 1;
+        }
+
+        $sockets = array();
+        for($i = 0; $i < 6; $i++) {
+    //        print 'sleep '.(1 + $i).'; echo "'.$row[0].$i.'"; sleep '.(3 * $i).'; echo '.$i."\n";
+    //        $fp = popen('sleep '.(1 + $i).'; echo "'.$row[0].$i.'" 2>&1; sleep '.(2 * $i).'; echo '.$i.' 2>&1', 'r');
+    //        stream_set_blocking($fp, 1);
+    //        $sockets[] = $fp;
+        }
+        $fp = popen('php bin/project '.$row[0].'', 'r');
+        $sockets[] = $fp;
+            
+        $read = $sockets;
+        $timeout = 2;
+        $i = 0;
+        while(count($read)) {
+            $i++;
+            $n = stream_select($read, $w=null, $e=null, 0, $timeout * 1000000);
+    //        print "Round $i : ".$n." / ".count($sockets)."\n";
+            print ".";
+            if ($i % 30 == 0) { print "\n"; }
+        
+            if ($n > 0) {
+                foreach($read as $r) {
+                    $id=array_search($r, $sockets); 
+                    $ss = fread($r, 2096);
+                    if (strlen($ss) == 0) {
+                        unset($sockets[$id]);
+                        print "Finish $id\n";
+                    } else {
+                        print "read in $id : $ss\n";
+                    }
+                }
+            } 
+        
+            $read = $sockets;
+        
+            if ($i == 2200) { 
+                foreach($sockets as $id => $fp) {
+                    pclose($fp);
+                    print "Killed $id\n";
+                }
+                print "Final die\n";
+                die(); 
+            }
+        }
+
+        print "Done with {$row[0]}\n";
+        die();
+    }
+    
+    sleep(2);
+    print ".";
+    if ($wait % 60 == 0) { print "\n"; }
+}
+?>
