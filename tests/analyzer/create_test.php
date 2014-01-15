@@ -7,6 +7,34 @@
     }
     $test = $args[1];
     
+    if (strpos($test, '_') === false) {
+        print "The test should look like 'X_Y'. Aborting\n";
+        die();
+    }
+    
+    list($dir, $test) = explode('_', $test);
+    
+    if (!file_exists(dirname(dirname(__DIR__)).'/library/Analyzer/'.$dir)) {
+        $groups = array_map('basename', glob(dirname(dirname(__DIR__)).'/library/Analyzer/*' , GLOB_ONLYDIR));
+        $closest = closest_string($dir, $groups);
+        print "No such analyzer group '$dir'. Did you mean '$closest' ? \nChoose among : ".join(', ', $groups);
+        
+        print ". Aborting.\n";
+        die();
+    }
+
+    if (!file_exists(dirname(dirname(__DIR__)).'/library/Analyzer/'.$dir.'/'.$test.'.php')) {
+        $groups = array_map( function ($name) { return substr(basename($name), 0, -4); }, 
+                             glob(dirname(dirname(__DIR__)).'/library/Analyzer/'.$dir.'/*'));
+        $closest = closest_string($dir, $groups);
+        print "No such analyzer '{$dir}_$test'. Did you mean '$closest' ? \nChoose among : ".join(', ', $groups);
+        
+        print ". Aborting.\n";
+        die();
+    }
+    
+    // restore $test value
+    $test = $dir.'_'.$test;
     $files = glob('source/'.$test.'.*.php');
     sort($files);
     $last = array_pop($files);
@@ -18,9 +46,6 @@
     }
     $next = substr("00".($number + 1), -2);
 
-    print $test;
-    print $next;
-    
     if (file_exists('Test/'.$test.'.php')) {
         $code = file_get_contents('Test/'.$test.'.php');
     } else {
@@ -51,4 +76,30 @@
 ?>");
     shell_exec('bbedit ./source/'.$test.'.'.$next.'.php');
     
+    $config = file_get_contents(basename(basename(__DIR__)).'/projects/tests/config.ini');
+    if (strpos($config, str_replace('_', '/', $test) === false) {
+        print "$test is not configured. Adding it.";
+    }
+    
+    function closest_string($string, $array) {
+        $shortest = -1;
+
+        foreach ($array as $a) {
+            $lev = levenshtein($string, $a);
+
+            if ($lev == 0) {
+                $closest = $a;
+                $shortest = 0;
+                break;
+            }
+
+            if ($lev <= $shortest || $shortest < 0) {
+                // set the closest match, and shortest distance
+                $closest  = $a;
+                $shortest = $lev;
+            }
+        }
+        
+        return $closest;
+    }
 ?>
