@@ -76,7 +76,12 @@ class Functioncall extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.code + it.out("ARGUMENTS").next().fullcode; ';
+        return '
+it.fullcode = it.code + it.out("ARGUMENTS").next().fullcode; 
+
+// count the number of elements in the array
+it.filter{ it.code.toLowerCase() == "array" }.each{ it.setProperty("count", it.out("ARGUMENTS").out("ARGUMENT").count()); }
+';
     }
 
 }

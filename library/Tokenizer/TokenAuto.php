@@ -214,7 +214,11 @@ root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
     ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
-    g.addEdge(it.in('FILE').next(), ppp, 'FILE');
+
+    g.addEdge(null, it.in('CLASS').next(),     ppp, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+    g.addEdge(null, it.in('FUNCTION').next(),  ppp, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+    g.addEdge(null, it.in('NAMESPACE').next(), ppp, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+    g.addEdge(null, it.in('FILE').next(),      ppp, 'FILE',      [file: it.inE('FILE').next().file]);
     
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
@@ -232,7 +236,10 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
     ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
-    g.addEdge(it.in('FILE').next(), ppp, 'FILE');
+    g.addEdge(null, it.in('CLASS').next(),     ppp, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+    g.addEdge(null, it.in('FUNCTION').next(),  ppp, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+    g.addEdge(null, it.in('NAMESPACE').next(), ppp, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+    g.addEdge(null, it.in('FILE').next(),      ppp, 'FILE',      [file: it.inE('FILE').next().file]);
 
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
@@ -362,7 +369,10 @@ root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
     ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
-    g.addEdge(it.in('FILE').next(), ppp, 'FILE');
+    g.addEdge(null, it.in('CLASS').next(),     ppp, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+    g.addEdge(null, it.in('FUNCTION').next(),  ppp, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+    g.addEdge(null, it.in('NAMESPACE').next(), ppp, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+    g.addEdge(null, it.in('FILE').next(),      ppp, 'FILE',      [file: it.inE('FILE').next().file]);
 
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
@@ -384,7 +394,10 @@ arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
     ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
-    g.addEdge(it.in('FILE').next(), ppp, 'FILE');
+    g.addEdge(null, it.in('CLASS').next(),     ppp, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+    g.addEdge(null, it.in('FUNCTION').next(),  ppp, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+    g.addEdge(null, it.in('NAMESPACE').next(), ppp, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+    g.addEdge(null, it.in('FILE').next(),      ppp, 'FILE',      [file: it.inE('FILE').next().file]);
 
     g.addEdge(root, ppp, 'NEXT');
     root = ppp;
@@ -517,7 +530,10 @@ g.addEdge(it, x, 'NEXT');
             $qactions[] = "
 /* to ppp alone */
 x = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
-g.addEdge(it.in('FILE').next(), x, 'FILE');
+g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
 g.addEdge(x, it.out('NEXT').next(), 'DEFINE');
 it.out('NEXT').has('atom', 'Variable').each {
@@ -574,7 +590,10 @@ it.bothE('NEXT').each{ g.removeEdge(it); }
 /* to ppp with assignation */
 
 x = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
-g.addEdge(it.in('FILE').next(), x, 'FILE');
+g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
 g.addEdge(x, it.out('NEXT').out('LEFT').next(), 'DEFINE');
 g.addEdge(x, it.out('NEXT').out('RIGHT').next(), 'VALUE');
