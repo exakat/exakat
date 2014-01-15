@@ -76,9 +76,13 @@
 ?>");
     shell_exec('bbedit ./source/'.$test.'.'.$next.'.php');
     
-    $config = file_get_contents(basename(basename(__DIR__)).'/projects/tests/config.ini');
-    if (strpos($config, str_replace('_', '/', $test) === false) {
-        print "$test is not configured. Adding it.";
+    $config = file_get_contents(dirname(dirname(__DIR__)).'/projects/test/config.ini');
+    if (strpos($config, str_replace('_', '/', $test)) === false) {
+        print "$test is not configured. Adding it.\n";
+        
+        $config .= "analyzer[] = '".str_replace('_', '/', $test)."'\n";
+
+        file_put_contents(dirname(dirname(__DIR__)).'/projects/test/config.ini', $config);
     }
     
     function closest_string($string, $array) {
