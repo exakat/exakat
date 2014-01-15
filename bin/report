@@ -35,6 +35,10 @@ if ($id = array_search('-json', $args)) {
     define('FORMAT', 'TEXT');
     unset($args[$id]);
     $args = array_values($args);
+} elseif ($id = array_search('-sqlite', $args)) {
+    define('FORMAT', 'SQLITE');
+    unset($args[$id]);
+    $args = array_values($args);
 } elseif ($id = array_search('-odt', $args)) {
     define('FORMAT', 'ODT');
     unset($args[$id]);
@@ -83,7 +87,11 @@ if ($id = array_search('-D', $args)) {
     define('STYLE', 'ALL');
 }
 
-$report = new Report\Report($client);
+if (FORMAT == 'SQLITE') {
+    $report = new Report\Sqlite(null);
+} else {
+    $report = new Report\Report($client);
+}
 $report->addContent('Text', 'Audit report for application');
 
 $report->createH1('Report presentation');
@@ -106,13 +114,6 @@ human review of the audit, and 3 paragraph explation + table with priorities
 $report->createH2('Executive summary');
 $report->addContent('Text');
 */
-
-$report->createH1('Appinfo'); // phpinfo for the application
-$Appinfo = new Report\Appinfo($client);
-$ht = $report->addContent('HashTable', $Appinfo->toArray());
-$ht->setHeaderName('Feature');
-$ht->setHeaderCount('Present');
-
 
 $no_output = array();
 
@@ -147,15 +148,29 @@ if (count($analyzes) > 0) {
 
         if (!$h1) {
             $report->createH1('Analyzes'); 
+            $report->addContent('Text', "Here are some point in the application code that should be reviewed");
+            
             $h1 = true;
         }
         $report->createH2($analyzer->getName()); 
 
         $report->addContent('Text', $analyzer->getDescription());
         $list = $report->addContent('Liste', $results);
-        $list->setSummary(true);
-        $list->setSort(Liste::SORT_NORMAL);
+        if (!is_null($list)) { 
+            $list->setSummary(true);
+            $list->setSort(Liste::SORT_NORMAL);
+        }
     }
+}
+
+///// Application information 
+
+$report->createH1('Appinfo'); // phpinfo for the application
+$Appinfo = new Report\Appinfo($client);
+$ht = $report->addContent('HashTable', $Appinfo->toArray());
+if (!is_null($ht)) {
+    $ht->setHeaderName('Feature');
+    $ht->setHeaderCount('Present');
 }
 
 
@@ -210,8 +225,10 @@ if (count($analyzes) > 0) {
 
         $report->addContent('Text', $analyzer->getDescription());
         $ht = $report->addContent('HashTable', $results);
-        $ht->setSummary(true);
-        $ht->setSort(HashTable::SORT_KEY);
+        if (!is_null($ht)) {
+            $ht->setSummary(true);
+            $ht->setSort(HashTable::SORT_KEY);
+        }
     }
 }
 
@@ -220,8 +237,10 @@ if (count($no_output) > 0) {
 
        $report->addContent('Text', "The following analyzers were also used, but yielded no feedback.");
        $ht = $report->addContent('Liste', $no_output);
-       $ht->setSummary(true);
-       $ht->setSort(HashTable::SORT_KEY);
+       if (!is_null($ht)) {
+           $ht->setSummary(true);
+           $ht->setSort(HashTable::SORT_KEY);
+        }
 }
 
 
@@ -229,6 +248,8 @@ if (FORMAT == 'TEXT') {
     $text = $report->toText();
 } elseif (FORMAT == 'JSON') {
     $text = $report->toJson();
+} elseif (FORMAT == 'SQLITE') {
+    $text = $report->toArray();
 } elseif (FORMAT == 'CSV') {
     $text = array(array('Code', 'File', 'Namespace', 'Class', 'Function'));
     foreach($return as $k => $v) {
@@ -279,6 +300,7 @@ $extensions = array('JSON' => 'json',
                     'ODT' => 'odt',
                     'PDF' => 'pdf',
                     'TEXT' => 'txt',
+                    'SQLITE' => 'sqlite',
                     'CSV' => 'csv');
 
 if (FILE) {
@@ -308,6 +330,17 @@ if (FILE) {
             fputcsv($fp, $t);
         }
         fclose($fp);
+    } elseif (FORMAT == 'SQLITE') {
+        $db = new SQLite3($name);
+
+        $results = $db->query('CREATE TABLE reports (id INTEGER PRIMARY KEY AUTOINCREMENT, analyzer TEXT, value TEXT, count INT)');
+        print $db->lastErrorMsg();
+        foreach($text as $t) {
+            foreach($t as $k => $v) {
+                $t[$k] = $db->escapeString($v);
+            }
+            $db->query("INSERT INTO reports (analyzer, value, count) VALUES ('".join("', '", $t)."')");
+        }
     } elseif (FORMAT == 'HTML') {
         file_put_contents($name, $text);
         
