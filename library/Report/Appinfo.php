@@ -18,6 +18,10 @@ class Appinfo {
                             
                             'Iffectations' => 'Structures/Iffectation',
                             'Variable variables' => 'Variables/VariableVariables',
+                            'Static variables' => 'Variables/StaticVariables',
+
+                            'Classes' => 'Classes/Classesnames',
+                            'Namespaces' => 'Namespaces/Namespacesnames',
                             
                             );
 
