@@ -242,8 +242,8 @@ class Sequence extends TokenAuto {
         );
         
         $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'),
-                               'order'       => array( 1 => 1,
-                                                      -1 => 0 ),
+                               'order'       => array(-1 => 0 ),
+                               'mergeNext'   => array('Sequence' => 'ELEMENT'), 
                                'atom'        => 'Sequence',
                                'cleanIndex'  => true
                                );
