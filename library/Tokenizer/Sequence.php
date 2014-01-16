@@ -224,6 +224,7 @@ class Sequence extends TokenAuto {
         
         $this->actions = array('transform'    => array(-1 => 'ELEMENT'),
                                'atom'        => 'Sequence',
+                               'order'      => array(-1 => 0 ),
                                'mergePrev2'   => array('Sequence' => 'ELEMENT'),
                                'cleanIndex'  => true);
         $this->checkAuto();
