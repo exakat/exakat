@@ -26,8 +26,8 @@ class Concatenation extends TokenAuto {
         $this->actions = array('makeEdge'   => array( 1 => 'CONCAT',
                                                      -1 => 'CONCAT'
                                                       ),
-                               'order'      => array( 1 => 2,
-                                                     -1 => 1 ),
+                               'order'      => array( 1 => 1,
+                                                     -1 => 0 ),
                                'mergeNext'  => array('Concatenation' => 'CONCAT'), 
                                'atom'       => 'Concatenation',
                                'cleanIndex' => true

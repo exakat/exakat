@@ -35,8 +35,8 @@ class Arguments extends TokenAuto {
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
                                                       -1 => 'ARGUMENT'
                                                       ),
-                               'order'       => array( 1 => '2',
-                                                      -1 => '1'),
+                               'order'       => array( 1 => '1',
+                                                      -1 => '0'),
                                'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
                                'atom'        => 'Arguments',
                                'cleanIndex' => true
@@ -54,8 +54,8 @@ class Arguments extends TokenAuto {
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
                                                       -1 => 'ARGUMENT'
                                                       ),
-                               'order'       => array( 1 => '2',
-                                                      -1 => '1'),
+                               'order'       => array( 1 => '1',
+                                                      -1 => '0'),
                                'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
                                'atom'        => 'Arguments',
                                'cleanIndex' => true
@@ -73,7 +73,8 @@ class Arguments extends TokenAuto {
         
         $this->actions = array('makeEdge'    => array(-1 => 'ARGUMENT'
                                                       ),
-                               'order'    => array('-1' => '1'),
+                               'order'       => array( 1 => '1',
+                                                      -1 => '0'),
                                'atom'       => 'Arguments',
                                );
         $this->checkAuto();
@@ -82,7 +83,11 @@ class Arguments extends TokenAuto {
     }
 
     function fullcode() {
-        return 's = []; it.out("ARGUMENT").each{ s.add(it.fullcode); } ;it.fullcode = "(" + s.join(", ") + ")";';
+        return <<<GREMLIN
+s = [];
+it.out("ARGUMENT").sort{it.order}._().each{ s.add(it.fullcode); };
+it.fullcode = "(" + s.join(", ") + ")";
+GREMLIN;
     }
 }
 ?>

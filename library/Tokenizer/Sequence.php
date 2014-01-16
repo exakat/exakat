@@ -50,8 +50,8 @@ class Sequence extends TokenAuto {
         
         $this->actions = array('transform'   => array( 1 => 'ELEMENT',
                                                       -1 => 'ELEMENT'),
-                               'order'      => array( 1 => 2,
-                                                     -1 => 1 ),
+                               'order'      => array( 1 => 1,
+                                                     -1 => 0 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                'cleanIndex' => true
@@ -81,8 +81,8 @@ class Sequence extends TokenAuto {
         
         $this->actions = array('makeEdge'   => array( 1 => 'ELEMENT',
                                                      -1 => 'ELEMENT'),
-                               'order'      => array( 1 => 2,
-                                                     -1 => 1 ),
+                               'order'      => array( 1 => 1,
+                                                     -1 => 0 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                'cleanIndex' => true);
@@ -101,8 +101,8 @@ class Sequence extends TokenAuto {
         
         $this->actions = array('makeEdge'   => array( 1 => 'ELEMENT',
                                                      -1 => 'ELEMENT'),
-                               'order'      => array( 1 => 2,
-                                                     -1 => 1 ),
+                               'order'      => array( 1 => 1,
+                                                     -1 => 0 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                'cleanIndex' => true);
@@ -124,8 +124,8 @@ class Sequence extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'ELEMENT',
                                                        -1 => 'ELEMENT'
                                                       ),
-                               'order'    => array( 1 => 2,
-                                                   -1 => 1 ),
+                               'order'      => array( 1 => 1,
+                                                     -1 => 0 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                'cleanIndex' => true
@@ -146,8 +146,8 @@ class Sequence extends TokenAuto {
         
         $this->actions = array('transform'  => array( 1 => 'ELEMENT',
                                                      -1 => 'ELEMENT'),
-                               'order'      => array( 1 => 2,
-                                                     -1 => 1 ),
+                               'order'      => array( 1 => 1,
+                                                     -1 => 0 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                'cleanIndex' => true
@@ -170,8 +170,8 @@ class Sequence extends TokenAuto {
         
         $this->actions = array('transform'  => array( 1 => 'ELEMENT',
                                                      -1 => 'ELEMENT'),
-                               'order'      => array( 1 => 2,
-                                                     -1 => 1 ),
+                               'order'      => array( 1 => 1,
+                                                     -1 => 0 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                'cleanIndex' => true
@@ -195,8 +195,8 @@ class Sequence extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'ELEMENT',
                                                        -1 => 'ELEMENT'
                                                       ),
-                               'order'    => array( 1 => 2,
-                                                   -1 => 1 ),
+                               'order'      => array( 1 => 1,
+                                                     -1 => 0 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                'cleanIndex' => true
@@ -223,7 +223,6 @@ class Sequence extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array(-1 => 'ELEMENT'),
-                               //'order'       => array(-1 => 1),
                                'atom'        => 'Sequence',
                                'mergePrev2'   => array('Sequence' => 'ELEMENT'),
                                'cleanIndex'  => true);
@@ -242,7 +241,8 @@ class Sequence extends TokenAuto {
         );
         
         $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'),
-                               'order'       => array(-1 => 1),
+                               'order'       => array( 1 => 1,
+                                                      -1 => 0 ),
                                'atom'        => 'Sequence',
                                'cleanIndex'  => true
                                );

@@ -46,7 +46,7 @@ class _Namespace extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = "namespace " + it.out("NAMESPACE").next().code; ';
+        return 'it.fullcode = "namespace " + it.out("NAMESPACE").next().fullcode; ';
     }
 }
 

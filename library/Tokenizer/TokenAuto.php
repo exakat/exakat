@@ -1200,8 +1200,13 @@ g.addEdge(x, b, 'NEXT');
 /* mergeNext */ 
 f = it;
 c = it.out('$link').out('$link').count();
-it.out('$link').hasNot('order', null).each{
-    it.setProperty('order', it.order + c);
+if (c > 0) {
+    it.out('$link').each{
+        it.setProperty('order', it.order * c);
+    }
+    it.out('$link').out('$link').each{
+        it.setProperty('order', it.in('$link').next().order + it.order);
+    }
 }
 
 it.as('origin').out('$link').has('atom','$atom').each{
