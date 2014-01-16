@@ -20,7 +20,7 @@ class Preplusplus extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.out("PREPLUSPLUS").next().fullcode + it.code; ';
+        return 'it.fullcode = it.code + it.out("PREPLUSPLUS").next().fullcode; ';
     }
 }
 

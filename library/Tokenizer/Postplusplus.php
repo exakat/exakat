@@ -21,7 +21,7 @@ class Postplusplus extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.code + it.out("POSTPLUSPLUS").next().fullcode; ';
+        return 'it.fullcode = it.out("POSTPLUSPLUS").next().fullcode + it.code; ';
     }
 
 }
