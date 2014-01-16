@@ -49,6 +49,7 @@ logProgress($project, $progress++ / $total_steps);
 print "Project loaded\n";
 
 shell_exec('php bin/build_root; php bin/tokenizer -p '.$project.'');
+shell_exec('php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
 logProgress($project, $progress++ / $total_steps);
 print "Project tokenized\n";
 
