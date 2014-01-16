@@ -181,6 +181,8 @@ $analyzes = array('Type\\Integer',
                   'Type\\Binary', 
                   'Type\\Ports', 
                   'Type\\HttpStatus', 
+                  'Type\\Heredoc', 
+                  'Type\\Nowdoc', 
 
                   'Type\\Real', 
                   

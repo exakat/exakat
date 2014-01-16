@@ -20,20 +20,31 @@ class Appinfo {
                             'Variable variables' => 'Variables/VariableVariables',
                             'Static variables' => 'Variables/StaticVariables',
 
-                            'Classes' => 'Classes/Classesnames',
+                            'Classes'    => 'Classes/Classnames',
                             'Namespaces' => 'Namespaces/Namespacesnames',
+
+                            'Heredoc'    => 'Types/Heredoc',
+                            'Nowdoc'     => 'Types/Nowdoc',
                             
                             );
 
         foreach($extensions as $name => $ext) {
-            $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.any()"; 
-            try {
-                $vertices = $this->query($this->client, $queryTemplate);
+            $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].count()"; 
+            $vertices = $this->query($this->client, $queryTemplate);
 
-                $v = $vertices[0][0];
-                $this->info[$name] = $v == "true" ? "Yes" : "No";
-            } catch (Exception $e) {
-            
+            $v = $vertices[0][0];
+            if ($v == 0) {
+                $this->info[$name] = "NC";
+            } else {
+                $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.any()"; 
+                try {
+                    $vertices = $this->query($this->client, $queryTemplate);
+    
+                    $v = $vertices[0][0];
+                    $this->info[$name] = $v == "true" ? "Yes" : "No";
+                } catch (Exception $e) {
+                
+                }
             }
         }
 
