@@ -31,7 +31,7 @@ class _Const extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = "const " + it.out("NAME").next().code + " " + it.out("VALUE").next().code; ';
+        return 'it.fullcode = "const " + it.out("NAME").next().code + " = " + it.out("VALUE").next().code; ';
     }
 }
 ?>
