@@ -183,6 +183,7 @@ $analyzes = array('Type\\Integer',
                   'Type\\HttpStatus', 
                   'Type\\Heredoc', 
                   'Type\\Nowdoc', 
+                  'Type\\Continents', 
 
                   'Type\\Real', 
                   
@@ -190,9 +191,11 @@ $analyzes = array('Type\\Integer',
                   
                   'Type\\Pcre', 
                   
+                  'Namespaces\\Namespacesnames',
+
                   'Classes\\Classnames',
 
-                  'Namespaces\\Namespacesnames',
+                  'Functions\\Functionnames',
                   
                   'Variables\\Variablenames',
                   'Variables\\VariableOneLetter',
