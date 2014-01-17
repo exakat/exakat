@@ -20,11 +20,13 @@ class Appinfo {
                             'Variable variables' => 'Variables/VariableVariables',
                             'Static variables' => 'Variables/StaticVariables',
 
-                            'Classes'    => 'Classes/Classnames',
                             'Namespaces' => 'Namespaces/Namespacesnames',
+                            'Classes'    => 'Classes/Classnames',
+                            'Interfaces' => 'Interfaces/Interfacenames',
+                            'Functions'  => 'Functions/Functionnames',
 
-                            'Heredoc'    => 'Types/Heredoc',
-                            'Nowdoc'     => 'Types/Nowdoc',
+                            'Heredoc'    => 'Type/Heredoc',
+                            'Nowdoc'     => 'Type/Nowdoc',
                             
                             );
 
