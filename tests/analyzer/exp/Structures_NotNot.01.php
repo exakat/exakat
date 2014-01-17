@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('!');
+$expected     = array('!$y');
 
 $expected_not = array();
 
