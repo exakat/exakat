@@ -166,6 +166,47 @@ GREMLIN;
         return $this;
     }
 
+    function classIsNot($class) {
+        if (is_array($class)) {
+            $this->methods[] = 'as("classIsNot").inE("CLASS").filter{it.classname not in [\''.join("', '", $class).'\']}.back("classIsNot")';
+        } else {
+            $this->methods[] = 'as("classIsNot").inE("CLASS").hasNot("classname", "'.$class.'").back("classIsNot")';
+        }
+        
+        return $this;
+    }
+    
+    function functionIs($function) {
+        if (is_array($function)) {
+            $this->methods[] = 'as("functionIs").inE("FUNCTION").filter{it.function in [\''.join("', '", $class).'\']}.back("functionIs")';
+        } else {
+            $this->methods[] = 'as("functionIs").inE("FUNCTION").has("function", "'.$function.'").back("functionIs")';
+        }
+        
+        return $this;
+    }
+
+    function functionIsNot($function) {
+        if (is_array($function)) {
+            $this->methods[] = 'as("functionIsNot").inE("FUNCTION").filter{it.function not in [\''.join("', '", $function).'\']}.back("functionIsNot")';
+        } else {
+            $this->methods[] = 'as("functionIsNot").inE("FUNCTION").hasNot("function", "'.$function.'").back("functionIsNot")';
+        }
+        
+        return $this;
+    }
+    
+    function classIs($class) {
+        if (is_array($class)) {
+            $this->methods[] = 'as("classIs").inE("CLASS").filter{it.classname in [\''.join("', '", $class).'\']}.back("classIs")';
+        } else {
+//            $this->methods[] = 'filter{it.inE("CLASS").classname == "'.$class.'"}';
+// @note I don't understand why filter won,t work.
+            $this->methods[] = 'as("classIs").inE("CLASS").has("classname", "'.$class.'").back("classIs")';
+        }
+        
+        return $this;
+    }
     function atomInside($atom) {
         if (is_array($atom)) {
             // @todo
@@ -175,6 +216,10 @@ GREMLIN;
         }
         
         return $this;
+    }
+    
+    function trim($property, $chars = ' ') {
+        $this->methods[] = 'transform{it.code.replaceFirst("^[\'\"]?(.*?)[\'\"]?\$", "\$1")}';
     }
 
     function atomIsNot($atom) {
@@ -235,7 +280,7 @@ GREMLIN;
         return $this;
     }
 
-    function noCode($code, $caseSensitive = false) {
+    function codeIsNot($code, $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
         } else {
@@ -254,6 +299,54 @@ GREMLIN;
             $this->methods[] = "filter{!(it.code$caseSensitive in ['".join("', '", $code)."'])}";
         } else {
             $this->methods[] = "filter{it.code$caseSensitive != '$code'}";
+        }
+        
+        return $this;
+    }
+
+    function fullcode($code, $caseSensitive = false) {
+        if ($caseSensitive) {
+            $caseSensitive = '';
+        } else {
+            if (is_array($code)) {
+                foreach($code as $k => $v) { 
+                    $code[$k] = strtolower($v); 
+                }
+            } else {
+                $code = strtolower($code);
+            }
+            $caseSensitive = '.toLowerCase()';
+        }
+        
+        if (is_array($code)) {
+            // @todo
+            $this->methods[] = "filter{it.fullcode$caseSensitive in ['".join("', '", $code)."']}";
+        } else {
+            $this->methods[] = "filter{it.fullcode$caseSensitive == '$code'}";
+        }
+        
+        return $this;
+    }
+    
+    function fullcodeIsNot($code, $caseSensitive = false) {
+        if ($caseSensitive) {
+            $caseSensitive = '';
+        } else {
+            if (is_array($code)) {
+                foreach($code as $k => $v) { 
+                    $code[$k] = strtolower($v); 
+                }
+            } else {
+                $code = strtolower($code);
+            }
+            $caseSensitive = '.toLowerCase()';
+        }
+        
+        if (is_array($code)) {
+            // @todo
+            $this->methods[] = "filter{!(it.fullcode$caseSensitive in ['".join("', '", $code)."'])}";
+        } else {
+            $this->methods[] = "filter{it.fullcode$caseSensitive != '$code'}";
         }
         
         return $this;
