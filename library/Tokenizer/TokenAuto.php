@@ -696,30 +696,6 @@ f.each{
     g.removeVertex(i);
 }
 ";
-                    } elseif ($label == 'SEQUENCE') {
-                        $qactions[] = "
-/* transform next to sequence */
-x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
-g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
-g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
-g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
-g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
-
-
-b = it.out('NEXT').next();
-g.addEdge(it, x, 'NEXT');
-g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
-
-g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
-b.bothE('NEXT').each{ g.removeEdge(it); }
-
-it.out('NEXT').out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
-    it.bothE('NEXT').each{ g.removeEdge(it) ; }
-    g.removeVertex(it);
-}
-
-";
                     } elseif (substr($label, 0, 3) == 'TO_') {
                         $link = substr($label, 3);
                         $qactions[] = "
@@ -876,6 +852,7 @@ _const.bothE('NEXT').each{ g.removeEdge(it); }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
     x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', virtual:true, line:it.line]);
+    x.setProperty('order', it.order);
     g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
     g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -895,7 +872,6 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');   
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
 
-//FINISH
 "; 
             unset($actions['to_const']);
 }
