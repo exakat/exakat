@@ -18,6 +18,8 @@ class ReportInfo {
         
         $this->list['Audit execution date'] = date('r', strtotime($res['date_start']));
         $this->list['Report production date'] = date('r', strtotime('now'));
+        
+        $this->list['PHP version'] = substr(shell_exec('php -v'), 0, 11);
     }
     
     function toMarkdown() {
