@@ -357,8 +357,10 @@ root = it;
 root.setProperty('code', var.code);
 root.setProperty('token', var.token);
 
+c = -1;
 arg.out('ARGUMENT').each{
-    x = g.addVertex(null, [code:'global', atom:'Global', token:'T_GLOBAL', virtual:true, line:it.line]);
+    c = c + 1;
+    x = g.addVertex(null, [code:'global', atom:'Global', token:'T_GLOBAL', virtual:true, line:it.line, order:c]);
     g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
     g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
