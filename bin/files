@@ -43,6 +43,7 @@ $exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps
              );
              
 
+$not_compilable = array();
 foreach($files as $file) { 
     if (is_dir($file)) { 
         @$stats['dir']++;
@@ -59,9 +60,10 @@ foreach($files as $file) {
                 $found = true;
 
                 if ($e == 'php') {
-                    $res = shell_exec('php -l '.$file);
+                    $res = shell_exec('php -l '.$file.' 2>&1' );
                     if (substr($res, 0, 25) != 'No syntax errors detected') {
                         @$stats['not compilable']++;
+                        $not_compilable[] = $file;
                     } else {
                         @$stats['tokens'] += count(token_get_all(file_get_contents($file)));
                     }
@@ -75,6 +77,10 @@ foreach($files as $file) {
             $unknown[] = basename($file);
         }
     }
+}
+
+if (count($not_compilable) != 0) {
+    file_put_contents('log/not_compilable.log', join("\n", $not_compilable));
 }
 
 if (OUTPUT == 'JSON') {
