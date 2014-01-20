@@ -16,6 +16,8 @@ class Analyzer {
 
     private $apply_below = false;
     
+    static $analyzers = array();
+    
     function getDescription($lang = 'en') {
         if (is_null($this->description)) {
             $filename = "./human/$lang/".str_replace("\\", "/", str_replace("Analyzer\\", "", get_class($this))).".ini";
@@ -58,7 +60,13 @@ class Analyzer {
         $this->queries = array();
         
         $this->code = get_class($this);
+        
+        
     } 
+    
+    static function getAnalyzers($theme) {
+        return Analyzer::$analyzers[$theme];
+    }
     
     function init() {
         $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
@@ -253,6 +261,18 @@ GREMLIN;
             $this->methods[] = 'filter{ it.in("ANALYZED").has("code", \''.$analyzer.'\').count() == 0}';
         }
 
+        return $this;
+    }
+
+    function is($property) {
+        $this->methods[] = "has('$property', true)";
+
+        return $this;
+    }
+
+    function isNot($property) {
+        $this->methods[] = "hasNot('$property', true)";
+        
         return $this;
     }
 
