@@ -126,6 +126,7 @@ $analyzes = array('Structures\\StrposCompare',
                   'Variables\\VariableUsedOnce',
 
                   'Structures\\NotNot',
+                  'Structures\\Noscream',
                   );
 
 foreach($analyzes as $id => $a) {
