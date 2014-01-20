@@ -15,6 +15,7 @@ class Appinfo {
                             'ext/mysqli'  => 'Extensions/Extmysqli',
                             'ext/pcre'  => 'Extensions/Extpcre',
                             'ext/kdm5'   => 'Extensions/Extkdm5',
+                            'ext/mssql'   => 'Extensions/Extmssql',
                             
                             'Iffectations' => 'Structures/Iffectation',
                             'Variable variables' => 'Variables/VariableVariables',
@@ -24,11 +25,15 @@ class Appinfo {
                             'Classes'    => 'Classes/Classnames',
                             'Interfaces' => 'Interfaces/Interfacenames',
                             'Functions'  => 'Functions/Functionnames',
+                            'Functions'  => 'Functions/Closure',
 
                             'Heredoc'    => 'Type/Heredoc',
                             'Nowdoc'     => 'Type/Nowdoc',
+
+                            '@'  => 'Structures/Noscream',
                             
                             );
+//            $extensions = Analyzer::getAnalyzers('Appinfo');
 
         foreach($extensions as $name => $ext) {
             $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].count()"; 
