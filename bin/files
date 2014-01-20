@@ -31,15 +31,15 @@ $unknown = array();
 $exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps',  ),
               'images' => array('jpg', 'gif', 'ico', 'png', 'svg', 'eps', 'psd', 'dot'),
               'media' => array('ttf', 'swf', 'woff', 'eot', 'otf', ),
-              'text' => array('ini', 'xml', 'wsdl', 'txt', 'rst', 'md', 'markdown', 'po', 'mo', 'pot', 'dtd', 'TXT', 'WEBHELP', 'mxml',  ),
+              'text' => array('ini', 'xml', 'wsdl', 'txt', 'rst', 'md', 'markdown', 'po', 'mo', 'pot', 'dtd', 'TXT', 'WEBHELP', 'mxml', 'mime',  ),
               'web' => array('html', 'htm', 'css', 'js', 'json', 'less', ),
               'document' => array('doc', 'xls', 'docx', 'pdf', 'odt', 'epub', 'book' ),
               'archives' => array('tgz', 'bz2' ,'z', 'zip', 'gz', ),
               'audio' => array('mp3', 'fla', 'wav', ),
-              'data' => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install', 'sqlite', 'lang', 'conf', 'db',  ),
+              'data' => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install', 'sqlite', 'lang', 'conf', 'db', 'phar', ),
               'prog' => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt', 'sass', 'scss', 'xsl', 'as'),
-              'misc' => array('test', 'table', 'dat', 'admin', 'cur', 'git', 'rng', 'bin',  'ser', ),
-              'security' => array('pub'),
+              'misc' => array('test', 'table', 'dat', 'admin', 'cur', 'git', 'rng', 'bin',  'ser', 'mgc',),
+              'security' => array('pub', 'pem', ),
              );
              
 
