@@ -510,13 +510,14 @@ g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');
             $qactions[] = "
 /* to to_lambda function */
 
-x = g.addVertex(null, [code:'lambda', atom:'String', token:'T_STRING', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
 g.addEdge(it, x, 'NAME');
+it.setProperty('lambda', true);
 
 op = it.out('NEXT').next();
 cp = it.out('NEXT').out('NEXT').out('NEXT').next();
@@ -542,13 +543,14 @@ g.addEdge(g.idx('racines')[['token':'DELETE']].next(), cp, 'DELETE');
             $qactions[] = "
 /* to to_lambda function with use */
 
-x = g.addVertex(null, [code:'lambda', atom:'String', token:'T_STRING', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
 g.addEdge(it, x, 'NAME');
+it.setProperty('lambda', true);
 
 x = it.out('NEXT').next();
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
@@ -998,8 +1000,8 @@ g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
 g.addEdge(it.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
 
-it.setProperty('order2', 1);
-it.out('NEXT').next().setProperty('order2', 2);
+it.setProperty('order', 0);
+it.out('NEXT').next().setProperty('order', 1);
 
 it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
 it.bothE('NEXT').each{ g.removeEdge(it); }
@@ -1077,12 +1079,14 @@ g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE')
 a = it.out('NEXT').out('NEXT').next();
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
+a.setProperty('order', 0);
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
 
 a = x.out('NEXT').next();
 g.addEdge(x, a, 'ELEMENT');
+a.setProperty('order', 1);
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
 
@@ -1334,6 +1338,7 @@ i = it.out('NEXT').next();
 
 g.addEdge(it, x, 'NEXT');
 g.addEdge(x, i, 'ELEMENT');
+i.setProperty('order', 0);
 g.addEdge(x, i.out('NEXT').next(), 'NEXT');
 
 i.bothE('NEXT').each{ g.removeEdge(it) ; }
@@ -1690,7 +1695,47 @@ it.as('origin').out('ELEMENT').has('atom','Sequence').each{
             }
             unset($actions['mergePrev2']);
         }
-        
+
+        if (isset($actions['to_variable'])) {
+            $qactions[] = " 
+/* to variable */ 
+variable = it.out('NEXT').next();
+variable.setProperty('delimiter', it.code);
+
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+g.addEdge(it.in('NEXT').next(), variable, 'NEXT');
+it.bothE('NEXT').each{ g.removeEdge(it); }
+
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), variable.out('NEXT').next(), 'DELETE');   
+close_curly = variable.out('NEXT').next();
+g.addEdge(variable, variable.out('NEXT').out('NEXT').next(), 'NEXT');
+close_curly.bothE('NEXT').each{ g.removeEdge(it); }
+
+";
+            unset($actions['to_variable']);
+        }
+
+        if (isset($actions['to_variable_dollar'])) {
+            $qactions[] = " 
+/* to variable */ 
+variable = it.out('NEXT').out('NEXT').next();
+variable.setProperty('delimiter', '\${');
+
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('NEXT').next(), 'DELETE');   
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+g.addEdge(it.in('NEXT').next(), variable, 'NEXT');
+it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
+it.bothE('NEXT').each{ g.removeEdge(it); }
+
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), variable.out('NEXT').next(), 'DELETE');   
+close_curly = variable.out('NEXT').next();
+g.addEdge(variable, variable.out('NEXT').out('NEXT').next(), 'NEXT');
+close_curly.bothE('NEXT').each{ g.removeEdge(it); }
+
+";
+            unset($actions['to_variable_dollar']);
+        }
+                        
         if (isset($actions['mergePrev']) && $actions['mergePrev']) {
             foreach($actions['mergePrev'] as $atom => $link) {
                 $qactions[] = " 
@@ -1806,8 +1851,7 @@ x.as('origin').out('ELEMENT').has('atom','Concatenation').each{
         g.addEdge(x, it, 'ELEMENT');
     };
 
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
-//    g.removeVertex(it);    
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
 }
 
 /* Clean index */
