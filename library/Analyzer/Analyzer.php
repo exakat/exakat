@@ -6,7 +6,7 @@ use Everyman\Neo4j\Client,
     Everyman\Neo4j\Index\NodeIndex;
 
 class Analyzer {
-    private $client = null;
+    protected $client = null;
     protected $code = null;
 
     protected $name = null;

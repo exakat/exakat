@@ -9,7 +9,7 @@ class VariableDollar extends TokenAuto {
         // $x or $$x or $$$
         $this->conditions = array(0 => array('token' => VariableDollar::$operators,
                                              'atom' => 'none'),
-                                  1 => array('atom' => 'yes'),
+                                  1 => array('atom' => 'Variable'),
                                   2 => array('filterOut' => array('T_OPEN_BRACKET')),
         );
         

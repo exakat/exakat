@@ -24,11 +24,7 @@ class String extends TokenAuto {
     function fullcode() {
         return <<<GREMLIN
 it.setProperty("delimiter", it.code.substring(0, 1));
-if (it.token == "T_CONSTANT_ENCAPSED_STRING") {
-    it.fullcode = it.code.replaceFirst("^['\"]?(.*?)['\"]?\\\$", "\\\$1");
-} else {
-    it.fullcode = it.code;
-}
+it.fullcode = it.code;
 
 GREMLIN;
     }
