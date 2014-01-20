@@ -46,7 +46,7 @@ class _Var extends TokenAuto {
 
     function fullcode() {
         return '
-it.fullcode = "var " + it.out("NAME").next().fullcode; ';
+it.fullcode = "var "; ';
     }
 }
 ?>
