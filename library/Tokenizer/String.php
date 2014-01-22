@@ -23,7 +23,7 @@ class String extends TokenAuto {
 
     function fullcode() {
         return <<<GREMLIN
-it.filter{ it.code.substring(0, 1) in ["'", '"']}.each{ it.setProperty("delimiter", it.code.substring(0, 1))};
+it.hasNot('code', '').filter{ it.code.substring(0, 1) in ["'", '"']}.each{ it.setProperty("delimiter", it.code.substring(0, 1))};
 it.fullcode = it.code;
 
 GREMLIN;
