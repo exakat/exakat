@@ -4,7 +4,7 @@ namespace Analyzer\Type;
 
 use Analyzer;
 
-class SpecialInteger extends Analyzer\Analyzer {
+class SpecialIntegers extends Analyzer\Analyzer {
     function dependsOn() {
         return array("Analyzer\\Type\\Integer");
     }
