@@ -27,9 +27,11 @@ class Dataset {
 
         if (strpos($value, '`') !== false ) {
             $value = str_replace( "\n", '``<BR />``', $value );
+            $value = str_replace( "<BR />``<BR />", '<BR /><BR />', $value );
             $value = "`` $value ``";
         } else {
             $value = str_replace( "\n", '`<BR />`', $value );
+            $value = str_replace( "<BR />``<BR />", '<BR /><BR />', $value );
             $value = "` $value `";
         }
 
