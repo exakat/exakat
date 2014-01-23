@@ -11,6 +11,8 @@ class Used extends Analyzer\Analyzer {
                      'Analyzer\\Extensions\\Extpcre',
                      'Analyzer\\Extensions\\Extmysqli',
                      'Analyzer\\Extensions\\Extkdm5',
+                     'Analyzer\\Extensions\\Extbcmath',
+                     'Analyzer\\Extensions\\Extbzip2',
                      );
     }
 
@@ -22,9 +24,8 @@ class Used extends Analyzer\Analyzer {
         
         $this->atomIs('Index')
              ->code($depends)
-             ->_as('result')
              ->out('ANALYZED')
-             ->back('result');
+             ->back('first');
 
         $this->prepareQuery();
     }
