@@ -1307,10 +1307,11 @@ d = it.out('$link').has('order', 1).has('atom', '$atom').count();
 if (c == 1) { // there is a list of argument in order 0
     if (d == 1) { // 0 and 1 are multiple list
         sub = it.out('$link').has('order', 0).next();
-
+        n = it.out('$link').has('order', 0).out('$link').count() ;
+        
         it.out('$link').has('order', 1).out('$link').each{
             g.addEdge(sub, it, '$link');
-            it.setProperty('order', it.getProperty('order') + it.out('$link').has('order', 0).out('$link').count() );
+            it.setProperty('order', it.getProperty('order') + n);
         }
 
         it.out('$link').has('order', 1).outE('$link').each{
@@ -1328,9 +1329,11 @@ if (c == 1) { // there is a list of argument in order 0
         clean = sub;
     } else { // 0 is multiple, 1 is single
         sub = it.out('$link').has('order', 0).next();
+        n = sub.out('$link').count();
+
         g.addEdge(sub, it.out('$link').has('order', 1).next(), '$link');
         it.out('$link').has('order', 1).next().setProperty('orderedby', 'zero_is_multiple');
-        it.out('$link').has('order', 1).next().setProperty('order', it.out('$link').has('order', 0).out('$link').count());
+        it.out('$link').has('order', 1).next().setProperty('order', n);
         
         g.addEdge(it.in('NEXT').next(), sub, 'NEXT');
         g.addEdge(sub, it.out('NEXT').next(), 'NEXT');
@@ -1364,7 +1367,7 @@ if (c == 1) { // there is a list of argument in order 0
 }
 
 // automated clean Index
-clean.out('ELEMENT').inE('INDEXED').each{
+clean.out('$link').inE('INDEXED').each{
     g.removeEdge(it);
 }
 
