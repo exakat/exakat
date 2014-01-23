@@ -1300,26 +1300,74 @@ g.addEdge(x, b, 'NEXT');
             foreach($actions['mergeNext'] as $atom => $link) {
                 $qactions[] = " 
 /* mergeNext */ 
-f = it;
-c = it.out('$link').out('$link').count();
-if (c > 0) {
-    it.out('$link').each{
-        it.setProperty('order', it.order * c);
+
+c = it.out('$link').has('order', 0).has('atom', '$atom').count();
+d = it.out('$link').has('order', 1).has('atom', '$atom').count();
+
+if (c == 1) { // there is a list of argument in order 0
+    if (d == 1) { // 0 and 1 are multiple list
+        sub = it.out('$link').has('order', 0).next();
+
+        it.out('$link').has('order', 1).out('$link').each{
+            g.addEdge(sub, it, '$link');
+            it.setProperty('order', it.getProperty('order') + it.out('$link').has('order', 0).out('$link').count() );
+        }
+
+        it.out('$link').has('order', 1).outE('$link').each{
+            g.removeEdge(it);
+        }
+
+        g.addEdge(it.in('NEXT').next(), sub, 'NEXT');
+        g.addEdge(sub, it.out('NEXT').next(), 'NEXT');
+
+        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('$link').has('order', 1).next(), 'DELETE');
+        it.bothE('NEXT').each{ g.removeEdge(it); }
+        it.outE('$link').each{ g.removeEdge(it); }
+
+        clean = sub;
+    } else { // 0 is multiple, 1 is single
+        sub = it.out('$link').has('order', 0).next();
+        g.addEdge(sub, it.out('$link').has('order', 1).next(), '$link');
+        it.out('$link').has('order', 1).next().setProperty('orderedby', 'zero_is_multiple');
+        it.out('$link').has('order', 1).next().setProperty('order', it.out('$link').has('order', 0).out('$link').count());
+        
+        g.addEdge(it.in('NEXT').next(), sub, 'NEXT');
+        g.addEdge(sub, it.out('NEXT').next(), 'NEXT');
+        
+        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+        it.bothE('NEXT').each{ g.removeEdge(it); }
+        it.outE('$link').each{ g.removeEdge(it); }
+
+        clean = sub;
     }
-    it.out('$link').out('$link').each{
-        it.setProperty('order', it.in('$link').next().order + it.order);
+} else { // order 0 is single
+    if (d == 1) {
+        it.out('$link').has('order', 0).next().setProperty('orderedby', 'one_is_multiple');
+        sub = it.out('$link').has('order', 1).next();
+        sub.out('$link').each{ it.setProperty( 'order', it.order + 1); };
+        g.addEdge(sub, it.out('$link').has('order', 0).next(), '$link');
+        
+        g.addEdge(it.in('NEXT').next(), sub, 'NEXT');
+        g.addEdge(sub, it.out('NEXT').next(), 'NEXT');
+        
+        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+        it.bothE('NEXT').each{ g.removeEdge(it); }
+        it.outE('$link').each{ g.removeEdge(it); }
+        clean = sub;
+
+    } else {
+        // order 1 and 0 are both singles : Nothing to do.
+        it.out('$link').each{ it.setProperty('orderedby', 'both_are_single')};
+        clean = it;
     }
 }
 
-it.as('origin').out('$link').has('atom','$atom').each{
-    it.inE('$link').each{ g.removeEdge(it);}
-  
-    it.out('$link').each{ 
-        it.inE('$link').each{ g.removeEdge(it);}
-        g.addEdge(f, it, '$link');
-    };
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+// automated clean Index
+clean.out('ELEMENT').inE('INDEXED').each{
+    g.removeEdge(it);
 }
+
             ";
             }
             unset($actions['mergeNext']);
