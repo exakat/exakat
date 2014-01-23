@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$noScream', "opendir('.')");
+$expected     = array('@$noScream', "@opendir('.')");
 
 $expected_not = array('@');
 
