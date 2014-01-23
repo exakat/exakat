@@ -4,7 +4,7 @@ namespace Test;
 
 class Analyzer extends \PHPUnit_Framework_TestCase {
     function setUp() {
-        shell_exec("cd ../..; php bin/delete -all");
+        shell_exec("cd ../..; sh scripts/clean.sh");
     }
 
     function tearDown() {
