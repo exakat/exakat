@@ -39,7 +39,12 @@ class Concatenation extends TokenAuto {
     }
 
     function fullcode() {
-        return 's = []; it.out("CONCAT").each{ s.add(it.fullcode); } ;it.fullcode = s.join(" . ");';
+        return <<<GREMLIN
+s = [];
+it.out("CONCAT").sort{it.order}._().each{ s.add(it.fullcode); };
+it.fullcode = "" + s.join(" . ") + "";
+        
+GREMLIN;
     }
 
 }
