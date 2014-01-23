@@ -324,6 +324,31 @@ GREMLIN;
         return $this;
     }
 
+    function fullcodeTrimmed($code, $trim = "\"'", $caseSensitive = false) {
+        if ($caseSensitive) {
+            $caseSensitive = '';
+        } else {
+            if (is_array($code)) {
+                foreach($code as $k => $v) { 
+                    $code[$k] = strtolower($v); 
+                }
+            } else {
+                $code = strtolower($code);
+            }
+            $caseSensitive = '.toLowerCase()';
+        }
+        
+        $trim = addslashes($trim);
+        if (is_array($code)) {
+            // @todo
+            $this->methods[] = "filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") in ['".join("', '", $code)."']}";
+        } else {
+            $this->methods[] = "filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") == '$code'}";
+        }
+        
+        return $this;
+    }
+    
     function fullcode($code, $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
