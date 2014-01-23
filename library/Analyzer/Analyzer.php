@@ -91,7 +91,7 @@ GREMLIN;
             print "new $analyzer\n";
             $this->code = addslashes($this->code);
             $query = <<<GREMLIN
-x = g.addVertex(null, [analyzer:'$analyzer', analyzer:'true', description:'Analyzer index for $analyzer', code:'{$this->code}', atom:'Index', token:'T_INDEX']);
+x = g.addVertex(null, [analyzer:'$analyzer', analyzer:'true', description:'Analyzer index for $analyzer', code:'{$this->code}', fullcode:'{$this->code}',  atom:'Index', token:'T_INDEX']);
 
 g.idx('analyzers').put('analyzer', '$analyzer', x);
 
