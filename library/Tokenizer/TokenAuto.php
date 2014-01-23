@@ -1166,6 +1166,23 @@ s.bothE('NEXT').each{ g.removeEdge(it); }
             unset($actions['insertConcat4']);
         }           
 
+        if (isset($actions['insert_global_ns'])) {
+            $qactions[] = "
+/* insert global namespace */
+x = g.addVertex(null, [code:'Global', atom:'Identifier', virtual:true, line:it.line]);
+g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
+
+g.addEdge(x, it.out('NEXT').next(), 'NEXT');
+it.outE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(it, x, 'NEXT');
+
+";
+            unset($actions['insertConcat4']);
+        }           
+
         if (isset($actions['to_typehint'])) {
             $qactions[] = "
 /* to type hint */
