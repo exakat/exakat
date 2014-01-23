@@ -21,9 +21,9 @@ class Dataset {
         $value = preg_replace('/([^\\\\])\|/', '$1\\|', $value);
         $value = preg_replace('/^\|/', '\\|', $value); // first of the string
 
-        $value = preg_replace('/([^\\\\])\*\*/', '$1\\*\\*', $value);
-        $value = preg_replace('/([^\\\\])\*/', '$1\\*', $value);
-        $value = preg_replace('/^\*/', '\\*', $value);
+//        $value = preg_replace('/([^\\\\])\*\*/', '$1\\*\\*', $value);
+//        $value = preg_replace('/([^\\\\])\*/', '$1\\*', $value);
+//        $value = preg_replace('/^\*/', '\\*', $value);
 
         if (strpos($value, '`') !== false ) {
             $value = str_replace( "\n", '``<BR />``', $value );
