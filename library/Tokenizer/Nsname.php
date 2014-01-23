@@ -13,11 +13,10 @@ class Nsname extends TokenAuto {
         );
         
         $this->actions = array('transform'   => array( 1 => 'ELEMENT'),
-                               'order'       => array( '1'  => '1',
-                                                      '-1' => '0'),
+                               'order'       => array( '1'  => '0'),
                                'atom'        => 'Nsname',
                                'keepIndexed' => true,
-                               'cleanIndex'  => 'ELEMENT',
+                               'cleanIndex'  => true,
                                );
         $this->checkAuto();
 
@@ -36,7 +35,7 @@ class Nsname extends TokenAuto {
                                'mergeNext'   => array('Nsname' => 'ELEMENT'), 
                                'keepIndexed' => true,
                                'atom'        => 'Nsname',
-                               'cleanIndex'  => 'ELEMENT',
+                               'cleanIndex'  => true,
                                );
         $this->checkAuto();
 
