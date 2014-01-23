@@ -19,7 +19,6 @@ class a {
     protected static $p16 = 6;
     private   static $p17 = 7;
     
-
     private function method_private() {}
 }
 
