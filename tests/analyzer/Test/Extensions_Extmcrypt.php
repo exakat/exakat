@@ -6,9 +6,9 @@ include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Extensions_Mcrypt extends Analyzer {
+class Extensions_Extmcrypt extends Analyzer {
     /* 1 methods */
 
-    public function testExtensions_Mcrypt01()  { $this->generic_test('Extensions_Mcrypt.01'); }
+    public function testExtensions_Extmcrypt01()  { $this->generic_test('Extensions_Extmcrypt.01'); }
 }
 ?>
