@@ -124,6 +124,7 @@ $analyzes = array('Structures\\StrposCompare',
                   'Structures\\ForWithFunctioncall',
                   'Structures\\ForeachSourceNotVariable',
                   'Variables\\VariableUsedOnce',
+                  'Variables\\VariableNonAscii',
 
                   'Structures\\NotNot',
                   'Structures\\Noscream',
