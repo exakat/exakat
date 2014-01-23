@@ -16,6 +16,8 @@ class Appinfo {
                             'ext/pcre'  => 'Extensions/Extpcre',
                             'ext/kdm5'   => 'Extensions/Extkdm5',
                             'ext/mssql'   => 'Extensions/Extmssql',
+                            'ext/bcmath'   => 'Extensions/Extbcmath',
+                            'ext/bzip2'   => 'Extensions/Extbzip2',
                             
                             'Iffectations' => 'Structures/Iffectation',
                             'Variable variables' => 'Variables/VariableVariables',
