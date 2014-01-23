@@ -1,9 +1,9 @@
 <?php 
 
-namespace A;
+namespace A {}
 
-namespace ;
+namespace {}
 
-namespace B;
+namespace B {}
 
 ?>
