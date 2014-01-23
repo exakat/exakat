@@ -194,7 +194,7 @@ while(check_prev($prev, $extra_rounds)) {
     
     $rend = microtime(true);
     $begin = microtime(true);
-    $log->log("round : $round\t".(($rend - $rbegin)*1000));
+    $log->log("round : $round\t".(($rend - $rbegin) * 1000));
     $cost += count($regex_next);
     $log->log("cost : $cost");
 
