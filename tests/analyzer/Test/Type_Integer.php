@@ -7,8 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Type_Integer extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testType_Integer01()  { $this->generic_test('Type_Integer.01'); }
+    public function testType_Integer02()  { $this->generic_test('Type_Integer.02'); }
 }
 ?>
