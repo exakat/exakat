@@ -40,7 +40,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
                     $missing[] = $e;
                 }
             }
-            $this->assertEquals(count($missing), 0, count($missing)." expected values were not found : ".join(', ', $missing)." in the received values of '".join(', ', $list)."'");
+            $this->assertEquals(count($missing), 0, count($missing)." expected values were not found : '".join("', '", $missing)."' in the received values of '".join("', '", $list)."'");
         }
         
         if (isset($expected_not) && is_array($expected)) {
