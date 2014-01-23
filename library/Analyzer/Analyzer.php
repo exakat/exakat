@@ -453,6 +453,17 @@ GREMLIN;
         return $this;
     }
 
+    function outIsnt($edge_name) {
+        if (is_array($edge_name)) {
+            // @todo
+            die(" I don't understand arrays in out()");
+        } else {
+            $this->methods[] = "filter{ it.out('$edge_name').count() == 0}";
+        }
+        
+        return $this;
+    }
+
     function in($edge_name) {
         if (is_array($edge_name)) {
             // @todo
