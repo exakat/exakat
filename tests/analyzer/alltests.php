@@ -1,7 +1,7 @@
 <?php
 /*
    +----------------------------------------------------------------------+
-   | Cornac, PHP code inventory                                           |
+   | Exakat, PHP static code analysis                                     |
    +----------------------------------------------------------------------+
    | Copyright (c) 2010 - 2011                                            |
    +----------------------------------------------------------------------+
@@ -39,7 +39,10 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
             }
         }
         
+        $offset = 0;
+        $number = 100;
         foreach($tests as $i => $test ) {
+            if ($i < $offset) continue;
             $name = str_replace('\\Test\\', '', $test);
 
             // check code
@@ -77,66 +80,11 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
             }
 
             $suite->addTestSuite($test);
+            if ($i > $offset + $number) { return $suite; }
             
             continue;
         }
-/*
-            $fichier = $test;
-            if (!file_exists('class/'.$fichier)) {
-                unset($tests[$i]); 
-                print "Tests $test can't be found (no file $fichier) : omitted\n";
-                continue;
-            }
-            
-            $code = file_get_contents(dirname(__FILE__)."/class/".$fichier);
-            if (!preg_match('$class (.*?_Test) $', $code, $r)) {
-                print "Couldn't find test class in '$fichier'\n";
-                die();
-            }
-            
-            include('class/'.$test);
-            $class = $r[1];
-            $methods = get_class_methods($class);
-            $methods = preg_grep('$^test$', $methods);
-        
-            preg_match('$test(.*)(\d+)$', $methods[0], $r);
-            $nom = strtolower($r[1]);
-            
-            foreach($methods as $id => $method) {
-                $methods[$id] = preg_replace('$\D+$', '', $method);
-            }
-            
-            $lestests = glob('scripts/'.$nom.'.*');
-            
-            foreach($lestests as $id => $test) {
-                $script = preg_replace('$\D+$', '', $test);
-                
-                if (!in_array($script, $methods)) {
-                    print "There is a test method missing for script $script with name $nom\n";
-                }
-            }
-        
-            $lestests = glob('exp/'.$nom.'.*');
-            
-            foreach($lestests as $id => $test) {
-                $script = preg_replace('$\D+$', '', $test);
-                
-                if (!in_array($script, $methods)) {
-                    print "The result file is missing for $script with name $nom\n";
-                }
-            }
-        }
-          
-         foreach($tests as $test) {
-             $test = substr($test, 6); // exit le class.
-             $test = substr($test, 0, -4); // exist le .php
-             $test = str_replace('.','_', $test); // exit le .
-             $test = ucwords($test);
-             $test = str_replace('_test','_Test', $test);
 
-            $suite->addTestSuite($test);
-         }
-*/ 
         return $suite;
     }
 }
