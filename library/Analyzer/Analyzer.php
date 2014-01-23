@@ -411,7 +411,7 @@ GREMLIN;
 
     function regex($column, $regex) {
         $this->methods[] = <<<GREMLIN
-filter{ it.$column.matches("$regex") }
+filter{ (it.$column =~ "$regex" ).getCount() > 0 }
 GREMLIN;
 
         return $this;
