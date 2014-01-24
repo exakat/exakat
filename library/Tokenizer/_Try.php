@@ -14,8 +14,8 @@ class _Try extends TokenAuto {
                                   );
         
         $this->actions = array('transform'  => array( 1 => 'CODE',
-                                                      2 => 'CATCH', 
-                                                        ),
+                                                      2 => 'CATCH'),
+                               'order'      => array( 2 => 0),
                                'atom'       => 'Try',
                                'keepIndexed' => true);
         $this->checkAuto();
@@ -25,8 +25,17 @@ class _Try extends TokenAuto {
                                              'token' => _Try::$operators),
                                   1 => array('atom'  => 'Catch')
                                   );
-        $this->actions = array('transform'    => array( 1 => 'CATCH' ),
-                               'keepIndexed' => true);
+        $this->actions = array('to_catch'    => array( 1 => 'CATCH' ),
+                               'keepIndexed' => true,
+                               'order'       => array(1 => 0));
+        $this->checkAuto();
+
+        // Try () NO catch 
+        $this->conditions = array(0 => array('atom'  => 'yes', 
+                                             'token' => _Try::$operators),
+                                  1 => array('notToken'  => 'T_CATCH')
+                                  );
+        $this->actions = array('cleanIndex'  => true);
         $this->checkAuto();
 
         return $this->checkRemaining();

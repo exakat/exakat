@@ -31,7 +31,7 @@ class _Catch extends TokenAuto {
 
     function fullcode() {
         return '
-it.fullcode = "catch " + it.out("CLASS").next().code + " " + it.out.("VARIABLE").next() + " " + it.out.("CODE").next(); ';
+it.fullcode = "catch (" + it.out("CLASS").next().code + " " + it.out("VARIABLE").next().fullcode + ") " + it.out("CODE").next().fullcode; ';
     }
 }
 
