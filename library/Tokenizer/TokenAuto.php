@@ -1180,7 +1180,22 @@ it.outE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(it, x, 'NEXT');
 
 ";
-            unset($actions['insertConcat4']);
+            unset($actions['insert_global_ns']);
+        }           
+
+        if (isset($actions['to_catch'])) {
+            $qactions[] = "
+/* to_catch */
+thecatch = it.out('NEXT').next();
+next = thecatch.out('NEXT').next();
+
+thecatch.setProperty('order', it.out('CATCH').count());
+g.addEdge(it, thecatch, 'CATCH');
+g.addEdge(it, next, 'NEXT');
+thecatch.bothE('NEXT').each{ g.removeEdge(it); }
+
+";
+            unset($actions['to_catch']);
         }           
 
         if (isset($actions['to_typehint'])) {
