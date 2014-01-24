@@ -11,15 +11,20 @@ class Appinfo {
         $this->client = $client;
 
         // Which extension are being used ? 
-        $extensions = array('ext/mcrypt' => 'Extensions/Extmcrypt',
-                            'ext/mysqli'  => 'Extensions/Extmysqli',
-                            'ext/pcre'  => 'Extensions/Extpcre',
-                            'ext/kdm5'   => 'Extensions/Extkdm5',
-                            'ext/mssql'   => 'Extensions/Extmssql',
-                            'ext/bcmath'   => 'Extensions/Extbcmath',
-                            'ext/bzip2'   => 'Extensions/Extbzip2',
+        $extensions = array(
+                            'ext/bcmath'     => 'Extensions/Extbcmath',
+                            'ext/bzip2'      => 'Extensions/Extbzip2',
+                            'ext/calendar'   => 'Extensions/Extcalendar',
+                            'ext/ctype'      => 'Extensions/Extctype',
+                            'ext/ctype'      => 'Extensions/Extcurl',
+                            'ext/kdm5'       => 'Extensions/Extkdm5',
+                            'ext/mcrypt'     => 'Extensions/Extmcrypt',
+                            'ext/mssql'      => 'Extensions/Extmssql',
+                            'ext/mysqli'     => 'Extensions/Extmysqli',
+                            'ext/pcre'       => 'Extensions/Extpcre',
+                            'ext/ssh2'       => 'Extensions/Extssh2',
                             
-                            'Iffectations' => 'Structures/Iffectation',
+                            'Iffectations'   => 'Structures/Iffectation',
                             'Variable variables' => 'Variables/VariableVariables',
                             'Static variables' => 'Variables/StaticVariables',
 
@@ -27,7 +32,7 @@ class Appinfo {
                             'Classes'    => 'Classes/Classnames',
                             'Interfaces' => 'Interfaces/Interfacenames',
                             'Functions'  => 'Functions/Functionnames',
-                            'Functions'  => 'Functions/Closure',
+                            'Closures'  => 'Functions/Closures',
 
                             'Heredoc'    => 'Type/Heredoc',
                             'Nowdoc'     => 'Type/Nowdoc',
