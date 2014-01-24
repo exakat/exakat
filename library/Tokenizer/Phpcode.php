@@ -26,7 +26,8 @@ class Phpcode extends TokenAuto {
         );
         
         $this->actions = array('transform'  => array( 1 => 'CODE'),
-                               'atom'       => 'Phpcode');
+                               'atom'       => 'Phpcode',
+                               'property'   => array('closing_tag' => 'false'));
         $this->checkAuto();
 
 // <?php ? > (empty script 
@@ -45,7 +46,16 @@ class Phpcode extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = "<?php " + it.out("CODE").next().fullcode + "?>";';
+        return <<<GREMLIN
+if (it.code == '<script language=\\"php\\">') {
+    it.fullcode = "<script language=\\"php\\">" + it.out("CODE").next().fullcode + "</script>";
+} else if (it.code in ['<%', '<%=']) {
+    it.fullcode = it.code.trim() + " " + it.out("CODE").next().fullcode + "%>";
+} else {
+    it.fullcode = it.code.trim() + " " + it.out("CODE").next().fullcode + "?>";
+}
+
+GREMLIN;
     }
 }
 
