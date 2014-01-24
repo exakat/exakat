@@ -7,7 +7,7 @@ use Analyzer;
 class Extssh2 extends Analyzer\Common\Extension {
 
     public function analyze() {
-        $this->source = 'curl.ini';
+        $this->source = 'ssh2.ini';
         
         parent::analyze();
     }
