@@ -5,6 +5,7 @@ $total = 0;
 $missing = 0;
 foreach($tests as $test) {
     $type = basename(dirname($test));
+    if ($type == 'Common') { continue; }
     $analyzer = basename($test);
     $analyzer = substr($analyzer, 0, -4);
     
