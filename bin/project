@@ -49,7 +49,11 @@ shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/ -p '.$project.''
 logProgress($project, $progress++ / $total_steps);
 print "Project loaded\n";
 
-shell_exec('php bin/build_root; php bin/tokenizer -p '.$project.'');
+$res = shell_exec('php bin/build_root; php bin/tokenizer -p '.$project.'');
+if (strpos('javax.script.ScriptException', $res) !== false) {
+    file_put_contents('log/tokenizer_error.log', $res);
+    die();
+}
 shell_exec('php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
 logProgress($project, $progress++ / $total_steps);
 print "Project tokenized\n";
@@ -74,7 +78,7 @@ shell_exec('rm ./projects/'.$project.'/report.html; php bin/report '.$project.' 
 shell_exec('rm ./projects/'.$project.'/report.pdf; php bin/report '.$project.' -f ./projects/'.$project.'/report -pdf');
 shell_exec('rm ./projects/'.$project.'/report.odt; php bin/report '.$project.' -f ./projects/'.$project.'/report -odt');
 shell_exec('rm ./projects/'.$project.'/report.txt; php bin/report '.$project.' -f ./projects/'.$project.'/report -text');
-shell_exec('rm ./projects/'.$project.'/report.txt; php bin/report '.$project.' -f ./projects/'.$project.'/report -sqlite');
+shell_exec('rm ./projects/'.$project.'/report.sqlite; php bin/report '.$project.' -f ./projects/'.$project.'/report -sqlite');
 logProgress($project, $progress++ / $total_steps);
 
 print "Project reported\n";
