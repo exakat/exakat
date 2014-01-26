@@ -47,27 +47,28 @@ class HashTable extends Dataset {
         
         $report = "\n\n";
         if ($this->summary && count($this->hash) > 5 ) {
-            $report = "|  Item      |  Value         | 
-| -------:        | -------:          |\n";
-$report .= "|Total number of element|".array_sum($this->hash)."|\n";
-$report .= "|Number of distinct element|".count($this->hash)."|\n";
-$report .= "|Largest element|".max($this->hash)." (".array_search(max($this->hash), $this->hash).")|\n";
-$report .= "|Smaller element|".min($this->hash)." (".array_search(min($this->hash), $this->hash).")|\n";
-$report .= "\n\n";
+            $values = array(array('Item', ''),
+                            array('---', '---'),
+                            array('Total number of element', array_sum($this->hash)),
+                            array('Number of distinct element', count($this->hash)),
+                            );
+            $report = $this->toMdTable($values)."\n\n";
+
+//$report .= "|Largest element|".max($this->hash)." (".array_search(max($this->hash), $this->hash).")|\n";
+//$report .= "|Smaller element|".min($this->hash)." (".array_search(min($this->hash), $this->hash).")|\n";
 
          }
-
-         $report .= "| {$this->headerName}        | {$this->headerCount}          | 
-| -------:        | -------:          |\n";
-            
-            foreach($this->hash as $k => $v) {
-                $k = $this->escapeForMarkdown($k);
-                $report .= "|$k|$v|\n";
-            }
+         
+         $values = array(array($this->headerName, $this->headerCount), 
+                         array('---', '---'));
+                         
+         foreach($this->hash as $k => $v) {
+             $values[] = array($this->escapeForMarkdown($k), $v);
+         }
+         $report .= $this->toMdTable($values);
+         $report .= "\n";
         
-        $report .= "\n";
-        
-        return $report;
+         return $report;
     }
 
     function toText() {
@@ -89,6 +90,34 @@ $report .= "\n\n";
         $report .= "+-------------------------------+\n";
         
         return $report;
+    }
+    
+    private function toMdTable($array) {
+        $r = "";
+
+        $max = array_pad(array(), count($array[0]), 0);
+        foreach($array as $row) {
+            foreach($row as $id => $value) {
+                $max[$id] = max($max[$id], strlen($value));
+            }
+        }
+        
+        foreach($array as $row) {
+            $r .= "| ";
+            foreach($row as $id => $value) {
+                if ($value == '---') {
+                    $r .= str_repeat('-', $max[$id])." | ";
+                } else {
+                    // todo support multiligne
+                    $r .= str_repeat(' ', $max[$id] - strlen($value)).$value." | ";
+                }
+            }
+            $r .= "\n";
+        }
+        
+        print $r;
+        
+        return $r;
     }
 }
 
