@@ -11,7 +11,7 @@ class Octal extends Analyzer\Analyzer {
     
     function analyze() {
         $this->atomIs('Integer')
-             ->regex('code', '0[0-7]+');
+             ->regex('code', '^-?0[0-7]+\\$');
     }
 }
 
