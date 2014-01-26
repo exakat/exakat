@@ -103,13 +103,13 @@ function process_file($filename, $log_file) {
         die();
     }
     
-    if (LINT) {
+//    if (LINT) {
         $shell = shell_exec('php -l '.$filename.' 2>&1');
         if (trim($shell) != 'No syntax errors detected in '.$filename) {
-            print "Error : |$shell|\n";
+            print "Ignoring file $filename\n";
             return false;
         }
-    }
+//    }
     
     $fp = fopen($filename, 'r');
     if (filesize($filename) == 0) {
