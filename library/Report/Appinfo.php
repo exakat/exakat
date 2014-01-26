@@ -22,7 +22,10 @@ class Appinfo {
                             'ext/mssql'      => 'Extensions/Extmssql',
                             'ext/mysqli'     => 'Extensions/Extmysqli',
                             'ext/pcre'       => 'Extensions/Extpcre',
+                            'ext/pgsql'      => 'Extensions/Extpgsql',
                             'ext/ssh2'       => 'Extensions/Extssh2',
+
+                            'Short tags'     => 'Structures/Shortags',
                             
                             'Iffectations'   => 'Structures/Iffectation',
                             'Variable variables' => 'Variables/VariableVariables',
@@ -41,6 +44,24 @@ class Appinfo {
                             
                             );
 //            $extensions = Analyzer::getAnalyzers('Appinfo');
+/*        $extensions = array();
+
+        $files = glob(__DIR__.'/../Analyzer/* /*.php');
+        foreach($files as $file) {
+            $type = basename(dirname($file));
+            if ($type == 'Common') { continue; }
+            $analyzer = substr(basename($file), 0, -4);
+            
+            $class = "\\Analyzer\\".$type."\\".$analyzer;
+            $analyzer = new $class(null);
+            $themes = $analyzer->getThemes();
+            if (in_array('Appinfo', $themes)) {
+                $extensions[$analyzer->getAppinfoHeader()] = 'Functions/Functionnames';
+            }
+        }
+*/
+//        print_r($extensions);
+//        die(__METHOD__);
 
         foreach($extensions as $name => $ext) {
             $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].count()"; 
