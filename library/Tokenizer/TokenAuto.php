@@ -1183,6 +1183,25 @@ g.addEdge(it, x, 'NEXT');
             unset($actions['insert_global_ns']);
         }           
 
+        if (isset($actions['sign'])) {
+            $qactions[] = "
+/* Sign the integer */
+if (it.code == '-') { 
+    it.setProperty('code', '-' + it.out('NEXT').next().code);
+//    it.setProperty('code', - Integer.parseInt(it.out('NEXT').next().code));
+} else {
+    it.setProperty('code', it.out('NEXT').next().code);
+}
+
+nextnext = it.out('NEXT').out('NEXT').next();
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('NEXT').next(), 'DELETE');
+it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(it, nextnext, 'NEXT');
+
+";
+            unset($actions['sign']);
+        }           
+
         if (isset($actions['to_catch'])) {
             $qactions[] = "
 /* to_catch */
