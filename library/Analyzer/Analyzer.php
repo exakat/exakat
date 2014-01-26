@@ -11,6 +11,7 @@ class Analyzer {
 
     protected $name = null;
     protected $description = null;
+    protected $appinfo = null;
     
     protected $row_count = 0;
 
@@ -39,6 +40,12 @@ class Analyzer {
             } else {
                 $this->name = get_class($this);
             }
+
+            if (isset($human['appinfo'])) {
+                $this->appinfo = $human['appinfo'];
+            } else {
+                $this->appinfo = get_class($this);
+            }
         }
         
         return $this->description;
@@ -50,6 +57,22 @@ class Analyzer {
         }
 
         return $this->name;
+    }
+
+    function getThemes() {
+        if (empty($this->themes)) {
+            return array();
+        } else {
+            return $this->themes;
+        }
+    }
+
+    function getAppinfoHeader($lang = 'en') {
+        if (is_null($this->appinfo)) {
+            $this->getDescription($lang);
+        }
+
+        return $this->appinfo;
     }
     
     function __construct($client) {
