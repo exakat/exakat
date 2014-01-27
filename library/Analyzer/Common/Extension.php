@@ -7,6 +7,10 @@ use Analyzer;
 class Extension extends Analyzer\Analyzer {
     protected $source = '';
     
+    public function dependsOn() {
+        return array("Analyzer\\Classes\\ClassUsage");
+    }
+    
     public function analyze() {
         if (substr($this->source, -4) == '.ini') {
             $ini = parse_ini_file(dirname(dirname(dirname(__DIR__))).'/data/'.$this->source);
@@ -32,13 +36,12 @@ class Extension extends Analyzer\Analyzer {
                  ->code($functions);
             $this->prepareQuery();
         }
+        */
 
         if (!empty($classes)) {
-            $this->atomIs("ClasseUsage")
-                 ->code($functions);
-            $this->prepareQuery();
+            $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
+                 ->code($classes);
         }
-        */
     }
 }
 
