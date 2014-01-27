@@ -103,8 +103,7 @@ if (STYLE == 'BOOLEAN') {
 
     $return[] = $vertices[0][0];
 } elseif (STYLE == 'ALL') {
-//    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code"; 
-    $queryTemplate = <<<GREMLIN
+     $queryTemplate = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.as('x')
     .inE('FILE').as('file').back('x')
     .inE('NAMESPACE').as('namespace').back('x')
