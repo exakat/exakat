@@ -8,17 +8,21 @@ class Extension extends Analyzer\Analyzer {
     protected $source = '';
     
     public function dependsOn() {
-        return array("Analyzer\\Classes\\ClassUsage");
+        return array("Analyzer\\Classes\\ClassUsage",
+                     "Analyzer\\Interfaces\\InterfaceUsage");
     }
     
     public function analyze() {
+        $functions = array();
+        $constants = array();
+        $classes = array();
+        $interfaces = array();
+
         if (substr($this->source, -4) == '.ini') {
             $ini = parse_ini_file(dirname(dirname(dirname(__DIR__))).'/data/'.$this->source);
             extract($ini);
         } elseif (substr($this->source, -4) == '.txt') {
             $functions = file(dirname(dirname(dirname(__DIR__))).'/data/'.$this->source);
-            $constants = array();
-            $classes = array();
         } else {
             print "Cannot process the '{$this->source}' file. Sorry\n";
             return true;
@@ -41,6 +45,22 @@ class Extension extends Analyzer\Analyzer {
         if (!empty($classes)) {
             $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
                  ->code($classes);
+            $this->prepareQuery();
+
+            $classes = array_map(function ($x) { return "\\\\".$x; } ,  $classes);
+            $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
+                 ->fullcode($classes);
+            $this->prepareQuery();
+
+            $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
+                 ->code($classes);
+            $this->prepareQuery();
+        }
+
+        if (!empty($interfaces)) {
+            $this->analyzerIs("Analyzer\\Interfaces\\InterfaceUsage")
+                 ->code($interfaces);
+            $this->prepareQuery();
         }
     }
 }
