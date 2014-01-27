@@ -21,6 +21,7 @@ class Appinfo {
                             'ext/mcrypt'     => 'Extensions/Extmcrypt',
                             'ext/mssql'      => 'Extensions/Extmssql',
                             'ext/mysqli'     => 'Extensions/Extmysqli',
+                            'ext/mongo'      => 'Extensions/Extmongo',
                             'ext/pcre'       => 'Extensions/Extpcre',
                             'ext/pgsql'      => 'Extensions/Extpgsql',
                             'ext/ssh2'       => 'Extensions/Extssh2',
