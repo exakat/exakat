@@ -14,8 +14,6 @@ class SequenceCaseDefault extends TokenAuto {
                                    1 => array('atom' => $operands),
         );
         $this->actions = array('insertSequenceCaseDefault'  => true,
-                               'order'      => array( 0 => 0,
-                                                      1 => 1 ),
                                'keepIndexed' => true);
         $r = $this->checkAuto();
         
@@ -23,12 +21,11 @@ class SequenceCaseDefault extends TokenAuto {
     }
 
     function fullcode() {
-        return '
+        return <<<GREMLIN
 s = [];
-it.out("ELEMENT").each{ s.add(it.fullcode); }
+it.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); }
 it.fullcode =  s.join("\n");
-
-';
+GREMLIN;
     }
 }
 ?>
