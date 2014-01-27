@@ -1,19 +1,19 @@
 <?php
 
-class y {
+abstract class y {
     private $private_property;
     
     const CONSTANT_DE_CLASSE = 1;
     
-    function alone_method() ;
+    abstract function alone_method() ;
 
-    protected function protected_method() ;
+    abstract protected function protected_method() ;
 
-    static function static_method() ;
+    abstract static function static_method() ;
 
-    static protected function static_protected() ;
-    protected static function protected_static() ;
-    public static function public_static() ;
+    abstract static protected function static_protected() ;
+    abstract protected static function protected_static() ;
+    abstract public static function public_static() ;
 }
 
 ?>
