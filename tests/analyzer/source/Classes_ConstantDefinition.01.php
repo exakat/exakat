@@ -7,7 +7,7 @@ class x {
     const REAL_CLASS_CONSTANT2 = 2, REAL_CLASS_CONSTANT3 = 3;
     
     function f() {
-        const IN_METHOD_CONSTANT = 4;
+//        const IN_METHOD_CONSTANT = 4;
     }
 }
 
