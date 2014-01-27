@@ -83,8 +83,10 @@ if (it.token == 'T_NS_SEPARATOR') {
 
     if (it.absolutens == 'true') {
         it.setProperty('fullcode', "\\\\" + s.join("\\\\") + it.out("ARGUMENTS").next().fullcode);
+        it.setProperty('code', "\\\\" + s.join("\\\\"));
     } else {
         it.setProperty('fullcode', s.join("\\\\") + it.out("ARGUMENTS").next().fullcode);
+        it.setProperty('code', s.join("\\\\"));
     }
 } else {
     it.fullcode = it.code + it.out("ARGUMENTS").next().fullcode;
