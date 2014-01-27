@@ -6,7 +6,7 @@ use Analyzer;
 
 class InterfaceUsage extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Class")
              ->out('IMPLEMENTS');
     }
