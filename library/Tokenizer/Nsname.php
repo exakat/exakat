@@ -17,6 +17,7 @@ class Nsname extends TokenAuto {
                                'atom'        => 'Nsname',
                                'keepIndexed' => true,
                                'cleanIndex'  => true,
+                               'property'    => array('absolutens' => 'true'),
                                );
         $this->checkAuto();
 
@@ -46,7 +47,12 @@ class Nsname extends TokenAuto {
         return <<<GREMLIN
 s = []; 
 it.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); };
-it.setProperty('fullcode', s.join("\\\\"));
+
+if (it.absolutens == 'true') {
+    it.setProperty('fullcode', "\\\\" + s.join("\\\\"));
+} else {
+    it.setProperty('fullcode', s.join("\\\\"));
+}
 GREMLIN;
     }
 }
