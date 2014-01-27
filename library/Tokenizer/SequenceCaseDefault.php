@@ -24,7 +24,7 @@ class SequenceCaseDefault extends TokenAuto {
         return <<<GREMLIN
 s = [];
 it.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); }
-it.fullcode =  s.join("\n");
+it.fullcode =  s.join("\\n");
 GREMLIN;
     }
 }
