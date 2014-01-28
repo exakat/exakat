@@ -17,6 +17,7 @@ class Appinfo {
                             'ext/calendar'   => 'Extensions/Extcalendar',
                             'ext/ctype'      => 'Extensions/Extctype',
                             'ext/ctype'      => 'Extensions/Extcurl',
+                            'ext/dba'        => 'Extensions/Extdba',
                             'ext/kdm5'       => 'Extensions/Extkdm5',
                             'ext/mcrypt'     => 'Extensions/Extmcrypt',
                             'ext/mssql'      => 'Extensions/Extmssql',
