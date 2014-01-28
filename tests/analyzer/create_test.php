@@ -74,7 +74,7 @@
 \$expected_not = array();
 
 ?>");
-    shell_exec('bbedit ./source/'.$test.'.'.$next.'.php');
+    shell_exec('bbedit ./exp/'.$test.'.'.$next.'.php');
     
     $config = file_get_contents(dirname(dirname(__DIR__)).'/projects/test/config.ini');
     if (strpos($config, str_replace('_', '/', $test)) === false) {
