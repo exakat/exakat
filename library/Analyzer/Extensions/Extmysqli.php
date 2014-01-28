@@ -7,7 +7,7 @@ use Analyzer;
 class Extmysqli extends Analyzer\Common\Extension {
 
     public function analyze() {
-        $this->source = 'pcre.ini';
+        $this->source = 'mysqli.ini';
         
         parent::analyze();
     }
