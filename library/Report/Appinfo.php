@@ -36,7 +36,10 @@ class Appinfo {
                             'Classes'    => 'Classes/Classnames',
                             'Interfaces' => 'Interfaces/Interfacenames',
                             'Functions'  => 'Functions/Functionnames',
-                            'Closures'  => 'Functions/Closures',
+                            'Closures'   => 'Functions/Closures',
+                            'Eval'       => 'Structures/EvalUsage',
+                            'var_dump'   => 'Structures/VardumpUsage',
+                            '_once'      => 'Structures/OnceUsage',
 
                             'Heredoc'    => 'Type/Heredoc',
                             'Nowdoc'     => 'Type/Nowdoc',
