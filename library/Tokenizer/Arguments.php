@@ -11,8 +11,9 @@ class Arguments extends TokenAuto {
                                        'Magicconstant', 'Ternary', 'Assignation', 'Logical', 'Keyvalue', 'Void', 
                                        'Property', 'Staticconstant', 'Staticproperty', 'Nsname', 'Methodcall', 'Staticmethodcall',
                                        'Reference', 'Cast', 'Postplusplus', 'Preplusplus', 'Typehint', 'Bitshift', 'Noscream',
-                                       'Clone', 'New', 'Arrayappend', 'Include', 'Instanceof', 'Function', 'Keyvalue', 
+                                       'Clone', 'New', 'Arrayappend', 'Instanceof', 'Function', 'Keyvalue', 
                                        'ArrayNS', 'Shell', 'Heredoc', );
+                                       //'Include',
 
     function _check() {
         $operands = Arguments::$operands_wa;

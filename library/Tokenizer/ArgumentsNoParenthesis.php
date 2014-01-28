@@ -8,11 +8,13 @@ class ArgumentsNoParenthesis extends TokenAuto {
 
     function _check() {
         // @note echo 's' : no parenthesis
-        $this->conditions = array( -1 => array('filterOut' => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
-                                    0 => array('atom' => 'none',
-                                               'token' => ArgumentsNoParenthesis::$operators,
-                                               'notToken' => 'T_STATIC'),
-                                    1 => array('atom'  => 'yes', 'notAtom' => array('Sequence', 'Arguments', 'Function', 'Ppp', 'Final', 'Abstract')),
+        $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
+                                    0 => array('atom'       => 'none',
+                                               'token'      => ArgumentsNoParenthesis::$operators,
+                                               'notToken'   => 'T_STATIC'),
+                                    1 => array('atom'       => 'yes', 
+                                               'notAtom'    => array('Sequence', 'Arguments', 'Function', 
+                                                                   'Ppp', 'Final', 'Abstract')),
                                     2 => array('filterOut2' => array_merge(array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 
                                                                            'T_EQUAL', 'T_QUESTION', 'T_OPEN_PARENTHESIS', 
                                                                            'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_COMMA', ),
@@ -22,7 +24,8 @@ class ArgumentsNoParenthesis extends TokenAuto {
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'keepIndexed' => true);
+                               'keepIndexed' => true,
+                               'property'    => array('noParenthesis' => 'true'));
         $this->checkAuto();
 
         // @note exit; no parenthesis, no argument. 
