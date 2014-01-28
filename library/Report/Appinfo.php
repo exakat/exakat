@@ -18,6 +18,7 @@ class Appinfo {
                             'ext/ctype'      => 'Extensions/Extctype',
                             'ext/ctype'      => 'Extensions/Extcurl',
                             'ext/dba'        => 'Extensions/Extdba',
+                            'ext/enchant'    => 'Extensions/Extenchant',
                             'ext/kdm5'       => 'Extensions/Extkdm5',
                             'ext/mcrypt'     => 'Extensions/Extmcrypt',
                             'ext/mssql'      => 'Extensions/Extmssql',
