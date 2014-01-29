@@ -1,8 +1,8 @@
 <?php
 
-$good = 404;
-$good2 = 418;
-$bad = 1033;
-$bad2 = 450;
+$good = "Content-Type: application/octet-stream";
+$good2 = "Max-Forwards: 34";
+$bad = "Transfer-Encoding UTF-8";
+$bad2 = 'normal string';
 
 ?>
