@@ -115,8 +115,6 @@ class HashTable extends Dataset {
             $r .= "\n";
         }
         
-        print $r;
-        
         return $r;
     }
 }
