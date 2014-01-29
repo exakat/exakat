@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array("DOMDocument::loadXML('<node>old content</node>')",
-                      'DOMDocument',
+$expected     = array('DOMDocument',
                       'domcharacterdata',
-                      'DOMNODELIST');
+                      'DOMNODELIST',
+                      "DOMText('new content')");
 
 $expected_not = array();
 
