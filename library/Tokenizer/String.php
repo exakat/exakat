@@ -26,6 +26,10 @@ class String extends TokenAuto {
 it.hasNot('code', '').filter{ it.code.substring(0, 1) in ["'", '"']}.each{ it.setProperty("delimiter", it.code.substring(0, 1))};
 it.fullcode = it.code;
 
+if (it.code.length() > 0) {
+    it.setProperty('unicode_block', it.code.toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString());
+}
+
 GREMLIN;
     }
 }
