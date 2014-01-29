@@ -191,6 +191,7 @@ $analyzes = array('Type\\Integer',
                   'Type\\Heredoc', 
                   'Type\\Nowdoc', 
                   'Type\\Continents', 
+                  'Type\\UnicodeBlock', 
 
                   'Type\\Real', 
                   
