@@ -21,7 +21,7 @@ class Appinfo {
                             'ext/enchant'    => 'Extensions/Extenchant',
                             'ext/ereg'       => 'Extensions/Extereg',
                             'ext/exif'       => 'Extensions/Extexif',
-                            'ext/fileinfo'   => 'Extensions/Extfilefino',
+                            'ext/fileinfo'   => 'Extensions/Extfileinfo',
                             'ext/filter'     => 'Extensions/Extfilter',
                             'ext/ftp'        => 'Extensions/Extftp',
                             'ext/gd'         => 'Extensions/Extgd',
@@ -41,7 +41,7 @@ class Appinfo {
                             'ext/sqlite'     => 'Extensions/Extsqlite',
                             'ext/sqlite3'    => 'Extensions/Extsqlite3',
 
-                            'Short tags'     => 'Structures/Shortags',
+                            'Short tags'     => 'Structures/ShorTags',
                             
                             'Iffectations'       => 'Structures/Iffectation',
                             'Variable variables' => 'Variables/VariableVariables',
