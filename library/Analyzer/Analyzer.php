@@ -487,12 +487,36 @@ GREMLIN;
         return $this;
     }
 
+    function orderIs($edge_name, $order) {
+        $order = intval($order);
+        if (is_array($edge_name)) {
+            // @todo
+            die(" I don't understand arrays in orderIs()");
+        } else {
+            $this->methods[] = "out('$edge_name').has('order', $order)";
+        }
+        
+        return $this;
+    }
+
     function in($edge_name) {
         if (is_array($edge_name)) {
             // @todo
             $this->methods[] = "inE.filter{it.label in ['".join("', '", $edge_name)."']}.outV";
         } else {
             $this->methods[] = "in('$edge_name')";
+        }
+        
+        return $this;
+    }
+
+    function inIsnot($edge_name) {
+        if (is_array($edge_name)) {
+            die(" I don't understand arrays in inIsnot()");
+            // @todo
+//            $this->methods[] = "inE.filter{!(it.label in ['".join("', '", $edge_name)."'])}.outV";
+        } else {
+            $this->methods[] = "filter{ it.in('$edge_name').count() == 0}";
         }
         
         return $this;
