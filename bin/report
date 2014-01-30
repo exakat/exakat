@@ -213,6 +213,8 @@ $analyzes = array('Type\\Integer',
                   'Variables\\VariableVariables',
                   'Variables\\VariableUppercase',
                   'Variables\\StaticVariables',
+
+                  'Constants\\Constantnames',
                   );
 foreach($analyzes as $id => $a) {
     if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
