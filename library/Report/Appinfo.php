@@ -52,6 +52,7 @@ class Appinfo {
                             'Interfaces' => 'Interfaces/Interfacenames',
                             'Functions'  => 'Functions/Functionnames',
                             'Closures'   => 'Functions/Closures',
+                            'Constants'  => 'Constants/Constantnames',
                             'Eval'       => 'Structures/EvalUsage',
                             'var_dump'   => 'Structures/VardumpUsage',
                             '_once'      => 'Structures/OnceUsage',
