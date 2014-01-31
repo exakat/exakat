@@ -24,7 +24,7 @@ class UnicodeBlock extends Analyzer\Analyzer {
         return $report;
     }
 
-    function toCountedArray() {
+    public function toCountedArray($load = "it.fullcode") {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.hasNot('unicode_block', null).groupCount(m){it.unicode_block}.cap"; 
         $vertices = query($this->client, $queryTemplate);
