@@ -49,6 +49,9 @@ class Appinfo {
                             'Static variables'   => 'Variables/StaticVariables',
 
                             'Namespaces' => 'Namespaces/Namespacesnames',
+                            'Vendor'     => 'Namespaces/Vendor',
+                            'Alias'      => 'Namespaces/Alias',
+
                             'Classes'    => 'Classes/Classnames',
                             'Interfaces' => 'Interfaces/Interfacenames',
                             'Functions'  => 'Functions/Functionnames',
