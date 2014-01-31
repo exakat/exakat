@@ -49,6 +49,12 @@ class Environnement {
         
         return true;
     }
+
+    public function initFile() {
+        $this->files->init();
+
+        return true;
+    }
 }
 
 ?>

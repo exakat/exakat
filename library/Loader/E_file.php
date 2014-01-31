@@ -12,14 +12,20 @@ class E_file {
         $this->file = $file;
     }
     
-    public function init($index) {
+    public function init($index = null) {
         $this->node = $this->client
                            ->makeNode()
                            ->setProperty('token', 'E_FILE')
                            ->setProperty('code', 'Index for file "'.$this->file.'"')
+                           ->setProperty('fullcode', $this->file)
                            ->save();
-        $this->index = $index;
-        $this->node->relateTo($index, 'INDEX')->save();
+        if (!is_null($index)) {
+            $this->index = $index;
+            $this->node->relateTo($index, 'INDEX')->save();
+        } else {
+            $this->node->setProperty('compile', 'false')
+                       ->save();
+        }
         
         return true;
     }
