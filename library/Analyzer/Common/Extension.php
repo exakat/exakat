@@ -30,11 +30,18 @@ class Extension extends Analyzer\Analyzer {
         
         if (!empty($functions)) {
             $this->atomIs("Functioncall")
+                 ->namespaceIs('Global')
+                 ->code($functions);
+            $this->prepareQuery();
+
+            $functions = array_map(function ($x) { return "\\\\".$x; } ,  $functions);
+            $this->atomIs("Functioncall")
                  ->code($functions);
             $this->prepareQuery();
         }
         
         /*
+        Not yet supported.
         if (!empty($constants)) {
             $this->atomIs("ConstantUsage")
                  ->code($functions);
