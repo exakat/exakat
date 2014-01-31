@@ -109,7 +109,6 @@ Mettre wordpress sous git
 Avoir un outil pour pousser le site en ligne depuis Git
 
 Namespace inventory as a tree.
-Collect non-compilable scripts
 Mention file extensions/list used for testing in audit information
 Set up the themes for the analyzers
 Remove Class_tmp
@@ -131,3 +130,10 @@ List Nsnames aliases and overlap
 Spot obsolete functions
 
 Check for argument number (PHP doesn't, but yells at runtime).
+Faire la liste des extensions standards de PHP (et donc, celles non standards)
+Faire un extracteur d'extensions PHP (Notamment PECL, mais aussi via code source, avec versionnage).
+Mark analyzers as file or application wide analyzer. 
+Inconsistent constants casing (null/NULL)
+
+Make the php script idempotent (can be run again and finish the job, leave a note where it left...)
+Spot function that are defined with php-function names (also spot overwriting).
