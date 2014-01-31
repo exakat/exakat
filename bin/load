@@ -102,28 +102,33 @@ function process_file($filename, $log_file) {
         print "'$filename' doesn't exists. Aborting\n";
         die();
     }
-    
+
+    global $_PILOT;
+    $client = new $_PILOT();
+
+    $file = realpath($filename);
+
 //    if (LINT) {
         $shell = shell_exec('php -l '.$filename.' 2>&1');
         if (trim($shell) != 'No syntax errors detected in '.$filename) {
-            print "Ignoring file $filename\n";
+            $environnement = new Environnement($client, $file); 
+            $environnement->initFile();
+            
+            print "Ignoring file $filename as it won't compile\n";
             return false;
         }
 //    }
     
-    $fp = fopen($filename, 'r');
     if (filesize($filename) == 0) {
         return false;
     }
+    $fp = fopen($filename, 'r');
     $php = fread($fp, filesize($filename));
     fclose($fp);
     
-    $file = realpath($filename);
     $tokens = token_get_all($php);
     $log['token_initial'] = count($tokens);
     
-    global $_PILOT;
-    $client = new $_PILOT();
 
     // @doc delete old tokens
     // This index should be only created once. It will hold all the index for files.
