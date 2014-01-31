@@ -138,3 +138,9 @@ Inconsistent constants casing (null/NULL)
 Make the php script idempotent (can be run again and finish the job, leave a note where it left...)
 Spot function that are defined with php-function names (also spot overwriting).
 Faire un dashboard avec les indicateurs du projet lui-même : manquent de tests, manques de traductions / documentations.
+Extract the list of Vendors from the namespaces.
+
+Check for size of ODT: 
+rm: ./projects/wave/report.odt: No such file or directory
+Stack space overflow: current size 8388608 bytes.
+Use `+RTS -Ksize -RTS' to increase it.
