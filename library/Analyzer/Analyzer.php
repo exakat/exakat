@@ -287,14 +287,14 @@ GREMLIN;
         return $this;
     }
 
-    function is($property) {
-        $this->methods[] = "has('$property', true)";
+    function is($property, $value= "'true'") {
+        $this->methods[] = "has('$property', $value)";
 
         return $this;
     }
 
-    function isNot($property) {
-        $this->methods[] = "hasNot('$property', true)";
+    function isNot($property, $value= "'true'") {
+        $this->methods[] = "hasNot('$property', $value)";
         
         return $this;
     }
