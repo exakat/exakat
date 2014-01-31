@@ -238,6 +238,18 @@ GREMLIN;
         
         return $this;
     }
+
+    function namespaceIs($namespace) {
+        if (is_array($namespace)) {
+            $this->methods[] = 'as("namespaceIs").inE("NAMESPACE").filter{it.namespace in [\''.join("', '", $namespace).'\']}.back("namespaceIs")';
+        } else {
+// @note I don't understand why filter won,t work.
+            $this->methods[] = 'as("namespaceIs").inE("NAMESPACE").has("namespace", "'.$namespace.'").back("namespaceIs")';
+        }
+        
+        return $this;
+    }
+
     function atomInside($atom) {
         if (is_array($atom)) {
             // @todo
