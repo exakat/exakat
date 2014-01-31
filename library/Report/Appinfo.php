@@ -42,6 +42,7 @@ class Appinfo {
                             'ext/sqlite3'    => 'Extensions/Extsqlite3',
 
                             'Short tags'     => 'Structures/ShorTags',
+                            'Incompilable'   => 'Php/Incompilable',
                             
                             'Iffectations'       => 'Structures/Iffectation',
                             'Variable variables' => 'Variables/VariableVariables',
