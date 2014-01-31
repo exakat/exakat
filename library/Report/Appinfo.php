@@ -52,7 +52,18 @@ class Appinfo {
                             'Interfaces' => 'Interfaces/Interfacenames',
                             'Functions'  => 'Functions/Functionnames',
                             'Closures'   => 'Functions/Closures',
+
                             'Constants'  => 'Constants/Constantnames',
+
+                            'Labels'     => 'Php/Labelnames',
+                            'Goto'       => 'Php/Gotonames',
+
+                            'Integers'    => 'Type/Integer',
+                            'Hexadecimal' => 'Type/Hexadecimal',
+                            'Octal'       => 'Type/Octal',
+                            'Binary'      => 'Type/Binary',
+                            'Real'        => 'Type/Real',
+
                             'Eval'       => 'Structures/EvalUsage',
                             'var_dump'   => 'Structures/VardumpUsage',
                             '_once'      => 'Structures/OnceUsage',
