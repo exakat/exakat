@@ -421,7 +421,7 @@ GREMLIN;
     }
 
     function codeIsUppercase() {
-        $this->methods[] = "filter{it.code == it.code.toUpperCase()}";
+        $this->methods[] = "filter{it.fullcode == it.code.toUpperCase()}";
     }
 
 
@@ -707,9 +707,9 @@ GREMLIN;
         return $report;
     }
 
-    function toCountedArray() {
+    public function toCountedArray($load = "it.fullcode") {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
-        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){it.fullcode}.cap"; 
+        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){{$load}}.cap"; 
         $vertices = query($this->client, $queryTemplate);
 
         $report = array();
