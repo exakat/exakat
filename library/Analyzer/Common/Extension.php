@@ -54,9 +54,10 @@ class Extension extends Analyzer\Analyzer {
                  ->code($classes);
             $this->prepareQuery();
 
-            $classes = array_map(function ($x) { return "\\\\".$x; } ,  $classes);
+            $classes = array_map(function ($x) { return "\\".$x; } ,  $classes);
             $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
                  ->fullcode($classes);
+                 ;
             $this->prepareQuery();
 
             $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
@@ -67,6 +68,11 @@ class Extension extends Analyzer\Analyzer {
         if (!empty($interfaces)) {
             $this->analyzerIs("Analyzer\\Interfaces\\InterfaceUsage")
                  ->code($interfaces);
+            $this->prepareQuery();
+
+            $interfaces = array_map(function ($x) { return "\\".$x; } ,  $interfaces);
+            $this->analyzerIs("Analyzer\\Interfaces\\InterfaceUsage")
+                 ->fullcode($interfaces);
             $this->prepareQuery();
         }
     }
