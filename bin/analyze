@@ -86,14 +86,15 @@ while(!empty($dependencies) && $c > count($dependencies)) {
         $diff = array_diff($d, $dependencies2);
         
         foreach($diff as $k => $v) {
-            $c++;
             if (!isset($dependencies[$v])) {
                 $x = new $v($client);
                 $dep = $x->dependsOn();
                 if (count($dep) == 0) {
                     $dependencies2[] = $v;
+                    $c++;
                 } else {
                     $dependencies[$v] = $dep;
+                    $c += count($dep);
                 }
             } elseif (count($dependencies[$v]) == 0) {
                 $dependencies2[] = $v;
@@ -109,7 +110,6 @@ while(!empty($dependencies) && $c > count($dependencies)) {
         }
     }
 }
-
 
 if (!empty($dependencies)) {
     print "Dependencies depending on each other : can't finalize. Aborting\n";
