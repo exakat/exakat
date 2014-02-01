@@ -22,9 +22,9 @@ Label : CODE
               ;
               Label : ELEMENT
                 =
-                Label : LEFT
-                  $d
                 Label : RIGHT
                   1
+                Label : LEFT
+                  $d
       Label : CASE
         'b'

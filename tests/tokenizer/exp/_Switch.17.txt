@@ -11,6 +11,24 @@ Label : CODE
       Label : CODE
         Block With Sequence For Default Without Semicolon
         Label : ELEMENT
+          =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $i
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            2
+          Label : LEFT
+            $h
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $g
+        Label : ELEMENT
           if
           Label : CONDITION
             (
@@ -22,10 +40,10 @@ Label : CODE
               ;
               Label : ELEMENT
                 =
-                Label : LEFT
-                  $j
                 Label : RIGHT
                   2
+                Label : LEFT
+                  $j
               Label : ELEMENT
                 foreach
                 Label : VALUE
@@ -44,38 +62,20 @@ Label : CODE
                       (
                       Label : CODE
                         =
-                        Label : LEFT
-                          $d
                         Label : RIGHT
                           $e
+                        Label : LEFT
+                          $d
                     Label : THEN
                       {
                       Label : CODE
                         ;
                         Label : ELEMENT
                           =
-                          Label : LEFT
-                            $f
                           Label : RIGHT
                             4
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $i
-          Label : RIGHT
-            3
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $h
-          Label : RIGHT
-            2
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $g
-          Label : RIGHT
-            1
+                          Label : LEFT
+                            $f
         Label : ELEMENT
           break
           Label : LEVEL

@@ -15,9 +15,9 @@ Label : CODE
           Label : CODE
             ++
             Label : POSTPLUSPLUS
-              $b
+              $e
         Label : CASE
-          'b'
+          'left'
       Label : ELEMENT
         case
         Label : CODE
@@ -35,6 +35,6 @@ Label : CODE
           Label : CODE
             ++
             Label : POSTPLUSPLUS
-              $e
+              $b
         Label : CASE
-          'left'
+          'b'

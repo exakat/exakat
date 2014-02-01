@@ -11,29 +11,31 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CODE
-          Block With Sequence For Case Without Semicolon
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                ==
-                Label : LEFT
-                  $e
-                Label : RIGHT
-                  0
-            Label : THEN
-              {
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  return
-                  Label : RETURN
-                    $f
+          Block With Sequence For Case
+          Label : CODE
+            Block With Sequence For Case Without Semicolon
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  ==
+                  Label : RIGHT
+                    0
+                  Label : LEFT
+                    $e
+              Label : THEN
+                {
+                Label : CODE
+                  ;
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      $f
         Label : CASE
           '2'
       Label : ELEMENT
@@ -44,14 +46,14 @@ Label : CODE
             ;
             Label : ELEMENT
               =
-              Label : LEFT
-                $b
               Label : RIGHT
                 *
-                Label : LEFT
-                  $c
                 Label : RIGHT
                   $d
+                Label : LEFT
+                  $c
+              Label : LEFT
+                $b
             Label : ELEMENT
               break
               Label : LEVEL

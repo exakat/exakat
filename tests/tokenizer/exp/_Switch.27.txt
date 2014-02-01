@@ -22,10 +22,10 @@ Label : CODE
               (
               Label : CODE
                 ==
-                Label : LEFT
-                  $e
                 Label : RIGHT
                   0
+                Label : LEFT
+                  $e
             Label : THEN
               {
               Label : CODE
@@ -42,14 +42,14 @@ Label : CODE
             ;
             Label : ELEMENT
               =
-              Label : LEFT
-                $b
               Label : RIGHT
                 *
-                Label : LEFT
-                  $c
                 Label : RIGHT
                   $d
+                Label : LEFT
+                  $c
+              Label : LEFT
+                $b
             Label : ELEMENT
               break
               Label : LEVEL

@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    {
+    Label : CODE
+      case
+      Label : CODE
+        Block With Sequence For Case
+        Label : CODE
+          break
+          Label : LEVEL
+            void
+      Label : CASE
+        ?
+        Label : CONDITION
+          <
+          Label : RIGHT
+            3
+          Label : LEFT
+            B
+        Label : THEN
+          -4
+        Label : ELSE
+          C

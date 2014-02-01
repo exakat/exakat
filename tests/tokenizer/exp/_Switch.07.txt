@@ -14,15 +14,15 @@ Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : LEFT
-              $x
             Label : RIGHT
               1
+            Label : LEFT
+              $x
           Label : ELEMENT
             =
-            Label : LEFT
-              $y
             Label : RIGHT
               3
+            Label : LEFT
+              $y
       Label : CASE
         1

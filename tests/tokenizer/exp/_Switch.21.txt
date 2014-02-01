@@ -41,20 +41,6 @@ Label : CODE
           Label : CODE
             ;
             Label : ELEMENT
-              $i
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-        Label : CASE
-          1
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
               $j
             Label : ELEMENT
               break
@@ -62,3 +48,17 @@ Label : CODE
                 void
         Label : CASE
           2
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              $i
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+        Label : CASE
+          1

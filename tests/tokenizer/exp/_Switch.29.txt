@@ -9,66 +9,68 @@ Label : CODE
     Label : CODE
       case
       Label : CODE
-        Block With Sequence For Case Without Semicolon
-        Label : ELEMENT
-          ++
-          Label : PREPLUSPLUS
-            $k
-        Label : ELEMENT
-          break
-          Label : LEVEL
-            void
-        Label : ELEMENT
-          switch
-          Label : NAME
-            $c
-          Label : CASES
-            {
-            Label : CODE
-              Sequence Case Default
-              Label : ELEMENT
-                default
-                Label : CODE
-                  Block With Sequence For Default
+        Block With Sequence For Case
+        Label : CODE
+          Block With Sequence For Case Without Semicolon
+          Label : ELEMENT
+            ++
+            Label : PREPLUSPLUS
+              $k
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            switch
+            Label : NAME
+              $c
+            Label : CASES
+              {
+              Label : CODE
+                Sequence Case Default
+                Label : ELEMENT
+                  default
                   Label : CODE
-                    ;
-                    Label : ELEMENT
-                      =
-                      Label : LEFT
-                        $f
-                      Label : RIGHT
-                        ::
-                        Label : CLASS
-                          G
-                        Label : METHOD
-                          h
-                          Label : ARGUMENTS
-                            ,
-                            Label : ARGUMENT
-                              $i
-                            Label : ARGUMENT
-                              $j
-                    Label : ELEMENT
-                      break
-                      Label : LEVEL
-                        void
-              Label : ELEMENT
-                case
-                Label : CODE
-                  Block With Sequence For Case
+                    Block With Sequence For Default
+                    Label : CODE
+                      ;
+                      Label : ELEMENT
+                        =
+                        Label : RIGHT
+                          ::
+                          Label : CLASS
+                            G
+                          Label : METHOD
+                            h
+                            Label : ARGUMENTS
+                              ,
+                              Label : ARGUMENT
+                                $i
+                              Label : ARGUMENT
+                                $j
+                        Label : LEFT
+                          $f
+                      Label : ELEMENT
+                        break
+                        Label : LEVEL
+                          void
+                Label : ELEMENT
+                  case
                   Label : CODE
-                    ;
-                    Label : ELEMENT
-                      =
-                      Label : LEFT
-                        $e
-                      Label : RIGHT
-                        ""
-                    Label : ELEMENT
-                      break
-                      Label : LEVEL
-                        void
-                Label : CASE
-                  'd'
+                    Block With Sequence For Case
+                    Label : CODE
+                      ;
+                      Label : ELEMENT
+                        =
+                        Label : RIGHT
+                          ""
+                        Label : LEFT
+                          $e
+                      Label : ELEMENT
+                        break
+                        Label : LEVEL
+                          void
+                  Label : CASE
+                    'd'
       Label : CASE
         'b'

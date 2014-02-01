@@ -16,12 +16,12 @@ Label : CODE
             ;
             Label : ELEMENT
               =
-              Label : LEFT
-                $b
               Label : RIGHT
                 &
                 Label : REFERENCE
                   $d
+              Label : LEFT
+                $b
             Label : ELEMENT
               break
               Label : LEVEL
@@ -36,12 +36,12 @@ Label : CODE
             ;
             Label : ELEMENT
               =
-              Label : LEFT
-                $b
               Label : RIGHT
                 @
                 Label : AT
                   $e
+              Label : LEFT
+                $b
             Label : ELEMENT
               break
               Label : LEVEL
@@ -54,35 +54,35 @@ Label : CODE
             ;
             Label : ELEMENT
               =
-              Label : LEFT
-                $b
-              Label : RIGHT
-                &
-                Label : REFERENCE
-                  $c
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-        Label : CASE
-          'A'
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : LEFT
-                $b
               Label : RIGHT
                 &
                 Label : REFERENCE
                   $d
+              Label : LEFT
+                $b
             Label : ELEMENT
               break
               Label : LEVEL
                 1
         Label : CASE
           'B'
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block With Sequence For Case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                &
+                Label : REFERENCE
+                  $c
+              Label : LEFT
+                $b
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+        Label : CASE
+          'A'

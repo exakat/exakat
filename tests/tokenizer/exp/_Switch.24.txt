@@ -10,19 +10,21 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CODE
-          Block With Sequence For Case Without Semicolon
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            {
-            Label : CODE
-              ;
-              Label : ELEMENT
-                ++
-                Label : POSTPLUSPLUS
-                  $a
+          Block With Sequence For Case
+          Label : CODE
+            Block With Sequence For Case Without Semicolon
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              {
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $a
         Label : CASE
           'a'
       Label : ELEMENT

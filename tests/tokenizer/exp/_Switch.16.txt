@@ -21,8 +21,10 @@ Label : CODE
         Label : CODE
           Block With Sequence For Case
           Label : CODE
-            ++
-            Label : POSTPLUSPLUS
-              $x
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $x
         Label : CASE
           'a'

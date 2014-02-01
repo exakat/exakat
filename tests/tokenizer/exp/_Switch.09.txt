@@ -9,21 +9,19 @@ Label : CODE
     Label : CODE
       Sequence Case Default
       Label : ELEMENT
-        case
+        default
         Label : CODE
-          Block With Sequence For Case
+          Block With Sequence For Default
           Label : CODE
             ;
             Label : ELEMENT
               return
               Label : RETURN
-                'c'
+                'f'
             Label : ELEMENT
               break
               Label : LEVEL
                 void
-        Label : CASE
-          'b'
       Label : ELEMENT
         case
         Label : CODE
@@ -41,16 +39,18 @@ Label : CODE
         Label : CASE
           'd'
       Label : ELEMENT
-        default
+        case
         Label : CODE
-          Block With Sequence For Default
+          Block With Sequence For Case
           Label : CODE
             ;
             Label : ELEMENT
               return
               Label : RETURN
-                'f'
+                'c'
             Label : ELEMENT
               break
               Label : LEVEL
                 void
+        Label : CASE
+          'b'
