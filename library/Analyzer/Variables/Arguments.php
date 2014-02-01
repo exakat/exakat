@@ -9,9 +9,9 @@ class Arguments extends Analyzer\Analyzer {
     function analyze() {
         $this->atomIs("Variable")
              ->_as('x')
-             ->in('ARGUMENT')
+             ->inIs('ARGUMENT')
              ->atomIs('Arguments')
-             ->in('ARGUMENTS')
+             ->inIs('ARGUMENTS')
              ->atomIs('Function')
              ->back('x');
     }

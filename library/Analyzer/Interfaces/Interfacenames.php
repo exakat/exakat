@@ -8,7 +8,7 @@ class Interfacenames extends Analyzer\Analyzer {
 
     function analyze() {
         $this->atomIs("Interface")
-             ->out('NAME');
+             ->outIs('NAME');
     }
 }
 

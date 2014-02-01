@@ -13,9 +13,9 @@ class StaticVariables extends Analyzer\Analyzer {
     function analyze() {
         $this->atomIs("Variable")
              ->analyzerIs('Analyzer\\Variables\\Variablenames')
-             ->in('DEFINE')
+             ->inIs('DEFINE')
              ->atomIs('Ppp')
-             ->out('STATIC')
+             ->outIs('STATIC')
              ->back('first');
     }
 }

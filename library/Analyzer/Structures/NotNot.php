@@ -8,14 +8,14 @@ class NotNot extends Analyzer\Analyzer {
 
     function analyze() {
         $this->atomIs("Not")
-             ->out('NOT')
+             ->outIs('NOT')
              ->atomIs('Not');
         $this->prepareQuery();
 
         $this->atomIs("Not")
-             ->out('NOT')
+             ->outIs('NOT')
              ->atomIs('Parenthesis')
-             ->out('CODE')
+             ->outIs('CODE')
              ->atomIs('Not');
         $this->prepareQuery();
     }

@@ -8,7 +8,7 @@ class ForeachSourceNotVariable extends Analyzer\Analyzer {
 
     function analyze() {
         $this->atomIs("Foreach")
-             ->out('SOURCE')
+             ->outIs('SOURCE')
              ->atomIsNot(array('Variable', 'Staticproperty', 'Property', 'Array'))
              ->back('first');
         $this->prepareQuery();

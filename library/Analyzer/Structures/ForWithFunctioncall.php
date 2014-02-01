@@ -8,13 +8,13 @@ class ForWithFunctioncall extends Analyzer\Analyzer {
 
     function analyze() {
         $this->atomIs("For")
-             ->out('FINAL')
+             ->outIs('FINAL')
              ->atomInside('Functioncall')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs("For")
-             ->out('INCREMENT')
+             ->outIs('INCREMENT')
              ->atomInside('Functioncall')
              ->back('first');
         $this->prepareQuery();

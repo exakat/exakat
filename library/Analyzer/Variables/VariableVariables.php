@@ -6,11 +6,11 @@ use Analyzer;
 
 class VariableVariables extends Analyzer\Analyzer {
     
-    function dependsOn() {
+    public function dependsOn() {
         return array('Analyzer\\Variables\\Variablenames');
     }
     
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Variable")
              ->analyzerIs('Analyzer\\Variables\\Variablenames')
              ->tokenIs(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))

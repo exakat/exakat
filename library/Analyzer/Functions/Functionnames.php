@@ -11,7 +11,7 @@ class Functionnames extends Analyzer\Analyzer {
              ->isNot('lambda')
              ->classIs('Global')
              ->hasNoParent('Interface', array('ELEMENT', 'CODE', 'CODE'))
-             ->out('NAME');
+             ->outIs('NAME');
     }
 }
 

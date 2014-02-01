@@ -6,14 +6,13 @@ use Analyzer;
 
 class MethodDefinition extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Class")
-             ->out('BLOCK')
-             ->out('CODE')
-             ->out('ELEMENT')
+             ->outIs('BLOCK')
+             ->outIs('CODE')
+             ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->out('NAME');
-        $this->prepareQuery();
+             ->outIs('NAME');
     }
 }
 

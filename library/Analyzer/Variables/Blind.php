@@ -14,7 +14,7 @@ class Blind extends Analyzer\Analyzer {
 // foreach($source as $blind)
         $this->atomIs($blinds)
              ->_as('x')
-             ->in('VALUE')
+             ->inIs('VALUE')
              ->atomIs('Foreach')
              ->back('x');
         $this->prepareQuery();
@@ -22,18 +22,18 @@ class Blind extends Analyzer\Analyzer {
 // foreach($source as $blindKey => $blindValue)
         $this->atomIs($blinds)
              ->_as('x')
-             ->in('VALUE')
+             ->inIs('VALUE')
              ->atomIs('Keyvalue')
-             ->in('VALUE')
+             ->inIs('VALUE')
              ->atomIs('Foreach')
              ->back('x');
         $this->prepareQuery();
 
         $this->atomIs($blinds)
              ->_as('x')
-             ->in('KEY')
+             ->inIs('KEY')
              ->atomIs('Keyvalue')
-             ->in('VALUE')
+             ->inIs('VALUE')
              ->atomIs('Foreach')
              ->back('x');
         $this->prepareQuery();
@@ -42,8 +42,8 @@ class Blind extends Analyzer\Analyzer {
 // foreach($source as &$blind)
         $this->atomIs($blinds)
              ->_as('x')
-             ->in('REFERENCE')
-             ->in('VALUE')
+             ->inIs('REFERENCE')
+             ->inIs('VALUE')
              ->atomIs('Foreach')
              ->back('x');
         $this->prepareQuery();
@@ -51,10 +51,10 @@ class Blind extends Analyzer\Analyzer {
 // foreach($source as $blindKey => &$blindValue)
         $this->atomIs($blinds)
              ->_as('x')
-             ->in('REFERENCE')
-             ->in('VALUE')
+             ->inIs('REFERENCE')
+             ->inIs('VALUE')
              ->atomIs('Keyvalue')
-             ->in('VALUE')
+             ->inIs('VALUE')
              ->atomIs('Foreach')
              ->back('x');
         $this->prepareQuery();

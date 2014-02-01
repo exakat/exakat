@@ -8,21 +8,20 @@ class ClassUsage extends Analyzer\Analyzer {
 
     function analyze() {
         $this->atomIs("New")
-             ->out('NEW');
+             ->outIs('NEW');
         $this->prepareQuery();
         
         $this->atomIs("Staticmethodcall")
-             ->out('CLASS');
+             ->outIs('CLASS');
         $this->prepareQuery();
 
         $this->atomIs("Staticproperty")
-             ->out('CLASS');
+             ->outIs('CLASS');
         $this->prepareQuery();
 
         $this->atomIs("Staticconstant")
-             ->out('CLASS');
+             ->outIs('CLASS');
         $this->prepareQuery();
-        
     }
 }
 

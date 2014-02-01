@@ -6,11 +6,10 @@ use Analyzer;
 
 class PropertyDefinition extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Ppp")
-             ->out('DEFINE')
+             ->outIs('DEFINE')
              ->atomIs('Variable');
-             
     }
 }
 

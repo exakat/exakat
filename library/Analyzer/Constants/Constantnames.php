@@ -9,9 +9,8 @@ class Constantnames extends Analyzer\Analyzer {
         $this->atomIs("Functioncall")
              ->code('define', false)
              ->inIsnot('METHOD')
-             ->out('ARGUMENTS')
+             ->outIs('ARGUMENTS')
              ->orderIs('ARGUMENT', 0);
-//        $this->printQuery();
     }
 }
 

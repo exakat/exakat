@@ -14,11 +14,11 @@ class InterfaceArguments extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->analyzerIs("Analyzer\\Variables\\Arguments")
              ->_as('x')
-             ->in('ARGUMENT')
-             ->in('ARGUMENTS')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
              ->atomIs('Function')
-             ->in('CODE')
-             ->in('CODE')
+             ->inIs('CODE')
+             ->inIs('CODE')
              ->atomIs('Interface')
              ->back('x');
         $this->prepareQuery();
@@ -27,12 +27,12 @@ class InterfaceArguments extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->analyzerIs("Analyzer\\Variables\\Arguments")
              ->_as('x')
-             ->in('ARGUMENT')
-             ->in('ARGUMENTS')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
              ->atomIs('Function')
-             ->in('ELEMENT')
-             ->in('CODE')
-             ->in('CODE')
+             ->inIs('ELEMENT')
+             ->inIs('CODE')
+             ->inIs('CODE')
              ->atomIs('Interface')
              ->back('x');
         $this->prepareQuery();

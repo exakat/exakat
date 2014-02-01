@@ -7,8 +7,8 @@ use Analyzer;
 class InterfaceUsage extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Class")
-             ->out('IMPLEMENTS');
+        $this->atomIs('Class')
+             ->outIs('IMPLEMENTS');
     }
 }
 

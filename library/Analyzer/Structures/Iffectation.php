@@ -8,7 +8,7 @@ class Iffectation extends Analyzer\Analyzer {
 
     function analyze() {
         $this->atomIs("Ifthen")
-             ->out('CONDITION')
+             ->outIs('CONDITION')
              ->atomInside('Assignation')
              ->hasNoIn('ARGUMENT');
         $this->prepareQuery();

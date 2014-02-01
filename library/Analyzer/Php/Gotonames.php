@@ -8,7 +8,7 @@ class Gotonames extends Analyzer\Analyzer {
 
     function analyze() {
         $this->atomIs("Goto")
-             ->out('LABEL');
+             ->outIs('LABEL');
     }
 }
 

@@ -8,7 +8,7 @@ class Labelnames extends Analyzer\Analyzer {
 
     function analyze() {
         $this->atomIs("Label")
-             ->out('LABEL');
+             ->outIs('LABEL');
     }
 }
 

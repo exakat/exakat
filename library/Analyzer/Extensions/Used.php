@@ -18,16 +18,11 @@ class Used extends Analyzer\Analyzer {
 
     function analyze() {
         $depends = $this->dependsOn();
-        foreach($depends as $k => $v) {
-            $depends[$k] = addslashes($v);
-        }
-        
-        $this->atomIs('Index')
-             ->code($depends)
-             ->out('ANALYZED')
-             ->back('first');
 
-        $this->prepareQuery();
+        $this->atomIs('Index')
+             ->code($depends, true)
+             ->outIs('ANALYZED')
+             ->back('first');
     }
 }
 

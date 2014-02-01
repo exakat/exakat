@@ -8,7 +8,7 @@ class Classnames extends Analyzer\Analyzer {
 
     function analyze() {
         $this->atomIs("Class")
-             ->out('NAME');
+             ->outIs('NAME');
     }
 }
 

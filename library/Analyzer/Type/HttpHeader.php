@@ -54,7 +54,7 @@ class HttpHeader extends Analyzer\Analyzer {
 'Vary',
 'Via',
 'Warning',
-'WWW-Authenticate    ',
+'WWW-Authenticate',
     );
 
     function dependsOn() {

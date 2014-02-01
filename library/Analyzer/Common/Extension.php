@@ -34,7 +34,7 @@ class Extension extends Analyzer\Analyzer {
                  ->code($functions);
             $this->prepareQuery();
 
-            $functions = array_map(function ($x) { return "\\\\".$x; } ,  $functions);
+            $functions = array_map(function ($x) { return "\\".$x; } ,  $functions);
             $this->atomIs("Functioncall")
                  ->code($functions);
             $this->prepareQuery();

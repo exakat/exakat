@@ -10,7 +10,7 @@ class ConstantDefinition extends Analyzer\Analyzer {
         $this->atomIs("Const")
              ->classIsNot('Global')
              ->functionIs('Global')
-             ->out('NAME');
+             ->outIs('NAME');
         $this->prepareQuery();
     }
 }
