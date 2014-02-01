@@ -16,10 +16,22 @@ class Analyzer {
     protected $row_count = 0;
 
     private $apply_below = false;
+
+    private $queries = array();
+    private $queries_arguments = array();
+    private $methods = array();
+    private $arguments = array();
     
     static $analyzers = array();
+
+    public function __construct($client) {
+        $this->client = $client;
+        $this->analyzerIsNot(addslashes(get_class($this)));
+
+        $this->code = get_class($this);
+    } 
     
-    function getDescription($lang = 'en') {
+    public function getDescription($lang = 'en') {
         if (is_null($this->description)) {
             $filename = "./human/$lang/".str_replace("\\", "/", str_replace("Analyzer\\", "", get_class($this))).".ini";
             
@@ -75,23 +87,23 @@ class Analyzer {
         return $this->appinfo;
     }
     
-    function __construct($client) {
-        $this->client = $client;
-        $this->methods = array();
-        $this->analyzerIsNot(addslashes(get_class($this)));
-
-        $this->queries = array();
-        
-        $this->code = get_class($this);
-        
-        
-    } 
-    
     static function getAnalyzers($theme) {
         return Analyzer::$analyzers[$theme];
     }
+
+    private function addMethod($method, $arguments = null) {
+        if (!is_null($arguments)) {
+            $argname = 'arg'.count($this->methods);
+            $this->arguments[$argname] = $arguments;
+            $this->methods[] = str_replace('***', $argname, $method);
+        } else {
+            $this->methods[] = $method;
+        }
+
+        return $this;
+    }
     
-    function init() {
+    public function init() {
         $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
         if ($result[0][0] == 'false') {
             $this->query("g.createManualIndex('analyzers', Vertex)");
@@ -138,11 +150,13 @@ GREMLIN;
         $this->apply_below = $apply_below;
     }
 
-    public function query($query) {
+    public function query($query, $arguments = null) {
         $queryTemplate = $query;
-        $params = array('type' => 'IN');
+        if (is_null($arguments)) {
+            $arguments = array('type' => 'IN');
+        }
         try {
-            $query = new \Everyman\Neo4j\Gremlin\Query($this->client, $queryTemplate, $params);
+            $query = new \Everyman\Neo4j\Gremlin\Query($this->client, $queryTemplate, $arguments);
             return $query->getResultSet();
         } catch (\Exception $e) {
             $message = $e->getMessage();
@@ -150,6 +164,7 @@ GREMLIN;
             print "Exception : ".$message."\n";
             
             print $queryTemplate."\n";
+            print_r($this->arguments);
             die();
         }
         return $query->getResultSet();
@@ -169,9 +184,11 @@ GREMLIN;
 
     function tokenIs($atom) {
         if (is_array($atom)) {
-            $this->methods[] = 'filter{it.token in [\''.join("', '", $atom).'\']}';
+            $this->addMethod('filter{it.token in *** }', $atom);
+            //$this->methods[] = 'filter{it.token in [\''.join("', '", $atom).'\']}';
         } else {
-            $this->methods[] = 'has("token", "'.$atom.'")';
+            $this->addMethod('has("token", ***)', $atom);
+            //$this->methods[] = 'has("token", "'.$atom.'")';
         }
         
         return $this;
@@ -189,9 +206,11 @@ GREMLIN;
     
     function atomIs($atom) {
         if (is_array($atom)) {
-            $this->methods[] = 'filter{it.atom in [\''.join("', '", $atom).'\']}';
+            $this->addMethod('filter{it.atom in ***}', $atom);
+//            $this->methods[] = 'filter{it.atom in [\''.join("', '", $atom).'\']}';
         } else {
-            $this->methods[] = 'has("atom", "'.$atom.'")';
+            $this->addMethod('has("atom", ***)', $atom);
+//            $this->methods[] = 'has("atom", "'.$atom.'")';
         }
         
         return $this;
@@ -276,12 +295,10 @@ GREMLIN;
     }
 
     function analyzerIs($analyzer) {
-        $analyzer = str_replace('\\', '\\\\', $analyzer);
-
         if (is_array($analyzer)) {
-            $this->methods[] = 'filter{ it.analyzer in [\''.join("', '", $analyzer).'\'])}.count() != 0}';
+            $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.count() != 0}', $analyzer);
         } else {
-            $this->methods[] = 'filter{ it.in("ANALYZED").has("code", \''.$analyzer.'\').count() != 0}';
+            $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).count() != 0}', $analyzer);
         }
         
         return $this;
@@ -326,10 +343,9 @@ GREMLIN;
         }
         
         if (is_array($code)) {
-            // @todo
-            $this->methods[] = "filter{it.code$caseSensitive in ['".join("', '", $code)."']}";
+            $this->addMethod('filter{it.code'.$caseSensitive.' in ***}', $code);
         } else {
-            $this->methods[] = "filter{it.code$caseSensitive == '$code'}";
+            $this->addMethod('filter{it.code'.$caseSensitive.' == ***}', $code);
         }
         
         return $this;
@@ -350,10 +366,9 @@ GREMLIN;
         }
         
         if (is_array($code)) {
-            // @todo
-            $this->methods[] = "filter{!(it.code$caseSensitive in ['".join("', '", $code)."'])}";
+            $this->addMethod('filter{!(it.code'.$caseSensitive.' in ***)}', $code);
         } else {
-            $this->methods[] = "filter{it.code$caseSensitive != '$code'}";
+            $this->addMethod('filter{it.code'.$caseSensitive.' != ***}', $code);
         }
         
         return $this;
@@ -399,10 +414,11 @@ GREMLIN;
         }
         
         if (is_array($code)) {
-            // @todo
-            $this->methods[] = "filter{it.fullcode$caseSensitive in ['".join("', '", $code)."']}";
+            $this->addMethod('filter{it.fullcode'.$caseSensitive.' in ***}', $code);
+//            $this->methods[] = "filter{it.fullcode$caseSensitive in ['".join("', '", $code)."']}";
         } else {
-            $this->methods[] = "filter{it.fullcode$caseSensitive == '$code'}";
+            $this->addMethod('filter{it.fullcode'.$caseSensitive.' == ***}', $code);
+//            $this->methods[] = "filter{it.fullcode$caseSensitive == '$code'}";
         }
         
         return $this;
@@ -432,8 +448,8 @@ GREMLIN;
         return $this;
     }
 
-    function codeIsUppercase() {
-        $this->methods[] = "filter{it.fullcode == it.code.toUpperCase()}";
+    function fullcodeIsUppercase() {
+        $this->methods[] = "filter{it.fullcode == it.fullcode.toUpperCase()}";
     }
 
 
@@ -477,12 +493,11 @@ GREMLIN;
         return $this;
     }
 
-    function out($edge_name) {
+    protected function outIs($edge_name) {
         if (is_array($edge_name)) {
-            // @todo
-            die(" I don't understand arrays in out()");
+            $this->addMethod("outE.filter{it.label in ***}.inV", $edge_name);
         } else {
-            $this->methods[] = "out('$edge_name')";
+            $this->addMethod("out(***)", $edge_name);
         }
         
         return $this;
@@ -511,12 +526,14 @@ GREMLIN;
         return $this;
     }
 
-    function in($edge_name) {
+    function inIs($edge_name) {
         if (is_array($edge_name)) {
             // @todo
-            $this->methods[] = "inE.filter{it.label in ['".join("', '", $edge_name)."']}.outV";
+            $this->addMethod("inE.filter{it.label in ***}.outV", $edge_name);
+//            $this->methods[] = "inE.filter{it.label in ['".join("', '", $edge_name)."']}.outV";
         } else {
-            $this->methods[] = "in('$edge_name')";
+            $this->addMethod("in(***)", $edge_name);
+//            $this->methods[] = "in('$edge_name')";
         }
         
         return $this;
@@ -633,7 +650,13 @@ GREMLIN;
     function printQuery() {
         $this->prepareQuery();
         
-        print_r($this->queries);
+        foreach($this->queries as $id => $query) {
+            print "$id)\n";
+            print_r($query);
+            print_r($this->queries_arguments[$id]);
+            
+            print "\n\n";
+        }
         die();
     }
 
@@ -680,8 +703,10 @@ c;
 GREMLIN;
 
         $this->queries[] = $query;
+        $this->queries_arguments[] = $this->arguments;
 
         $this->methods = array();
+        $this->arguments = array();
         $this->analyzerIsNot(addslashes(get_class($this)));
         
         return true;
@@ -691,13 +716,14 @@ GREMLIN;
         if (empty($this->queries)) { return true; }
 
         // @todo add a test here ? 
-        foreach($this->queries as $query) {
-            $r = $this->query($query);
+        foreach($this->queries as $id => $query) {
+            $r = $this->query($query, $this->queries_arguments[$id]);
             $this->row_count += $r[0][0];
         }
 
         // reset for the next
         $this->queries = array(); 
+        $this->queries_arguments = array(); 
         
         // @todo multiple results ? 
         // @todo store result in the object until reading. 
