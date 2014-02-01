@@ -4,7 +4,10 @@ namespace Test;
 
 class Analyzer extends \PHPUnit_Framework_TestCase {
     function setUp() {
-        shell_exec("cd ../..; sh scripts/clean.sh");
+// @doc scripts/clean is safer, but longer
+//        shell_exec("cd ../..; sh scripts/clean.sh");
+// @doc delete is faster, and will leave the query cache on. 
+        shell_exec("cd ../..; php bin/delete -all");
     }
 
     function tearDown() {
@@ -14,7 +17,8 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
     function generic_test($file) {
         list($analyzer, $number) = explode('.', $file);
         
-        $shell = 'cd ../..; php bin/load -f tests/analyzer/source/'.$file.'.php; php bin/tokenizer -p test;  php bin/fullcode -p test; php bin/analyze -p test;';
+        $test_config = 'Analyzer\\'.str_replace('_', '\\\\', str_replace('Test', '', get_class($this)));
+        $shell = 'cd ../..; php bin/load -f tests/analyzer/source/'.$file.'.php; php bin/tokenizer -p test;  php bin/fullcode -p test; php bin/analyze -P '.$test_config;
         $res = shell_exec($shell);
         $shell = 'cd ../..; php bin/export_analyzer '.$analyzer.' -o -json';
         $res = json_decode(shell_exec($shell));

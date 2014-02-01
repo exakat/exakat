@@ -21,13 +21,16 @@ if ($id = array_search('-v', $args)) {
 
 if ($id = array_search('-p', $args)) {
     $project = $args[$id + 1];
+
+    if (!file_exists('./projects/'.$project.'/config.ini')) {
+        print "No such project as '$project'. Aborting\n";
+        die();
+    }
+} elseif ($id = array_search('-P', $args)) {
+    $project = '';
+    $analyzers_class = array($args[$id + 1]);
 } else {
     $project = 'default';
-}
-
-if (!file_exists('./projects/'.$project.'/config.ini')) {
-    print "No such project as '$project'. Aborting\n";
-    die();
 }
 
 $client = new Client();
@@ -35,24 +38,26 @@ $log = new Log('analyze');
 
 $analyzers = new NodeIndex($client, 'analyzers');
 
-$INI = parse_ini_file('./projects/'.$project.'/config.ini');
+if (!isset($analyzers_class)) {
+    $INI = parse_ini_file('./projects/'.$project.'/config.ini');
 
-if (!isset($INI['analyzer']) || empty($INI['analyzer'])) {
-    print "No analyzers list in config.ini. Aborting\n";
-    die();
-}
-$log->log("Analyzing project $project");
-
-$analyzers_class = array();
-$log->log("Configured analyzers\t".count($INI['analyzer']));
-
-foreach($INI['analyzer'] as $analyzer) {
-    if (!file_exists("library/Analyzer/$analyzer.php")) {
-        print "No such analyzer as '$analyzer'. Ignoring\n";
-        $log->log("Ignored analyzer\t$analyzer");
-        continue; 
+    if (!isset($INI['analyzer']) || empty($INI['analyzer'])) {
+        print "No analyzers list in config.ini. Aborting\n";
+        die();
     }
-    $analyzers_class[] = 'Analyzer\\'.str_replace('/', '\\', $analyzer);
+    $log->log("Analyzing project $project");
+
+    $analyzers_class = array();
+    $log->log("Configured analyzers\t".count($INI['analyzer']));
+
+    foreach($INI['analyzer'] as $analyzer) {
+        if (!file_exists("library/Analyzer/$analyzer.php")) {
+            print "No such analyzer as '$analyzer'. Ignoring\n";
+            $log->log("Ignored analyzer\t$analyzer");
+            continue; 
+        }
+        $analyzers_class[] = 'Analyzer\\'.str_replace('/', '\\', $analyzer);
+    }
 }
 
 $log->log("Runnable analyzers\t".count($analyzers_class)."");
