@@ -374,6 +374,18 @@ GREMLIN;
         return $this;
     }
 
+    function samePropertyAs($property, $name) {
+        $this->methods[] = "filter{ it.$property == $name}";
+
+        return $this;
+    }
+
+    function savePropertyAs($property, $name) {
+        $this->methods[] = "sideEffect{ $name = it.$property }";
+
+        return $this;
+    }
+
     function fullcodeTrimmed($code, $trim = "\"'", $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
