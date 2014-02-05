@@ -205,6 +205,10 @@ $analyzes = array('Type\\Integer',
                   'Namespaces\\Vendor',
                   'Namespaces\\Alias',
 
+                  'Arrays\\Arrayindex',
+                  'Arrays\\Multidimensional',
+                  'Arrays\\Phparrayindex',
+
                   'Classes\\Classnames',
 
                   'Functions\\Functionnames',
