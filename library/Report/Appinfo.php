@@ -41,7 +41,7 @@ class Appinfo {
                             'ext/sqlite'     => 'Extensions/Extsqlite',
                             'ext/sqlite3'    => 'Extensions/Extsqlite3',
 
-                            'Short tags'     => 'Structures/ShorTags',
+                            'Short tags'     => 'Structures/ShortTags',
                             'Incompilable'   => 'Php/Incompilable',
                             
                             'Iffectations'       => 'Structures/Iffectation',
@@ -51,6 +51,12 @@ class Appinfo {
                             'Namespaces' => 'Namespaces/Namespacesnames',
                             'Vendor'     => 'Namespaces/Vendor',
                             'Alias'      => 'Namespaces/Alias',
+
+                            'Array'      => 'Arrays/Arrayindex',
+                            'Multidimensional arrays' => 'Arrays/Multidimensional',
+                            'PHP arrays' => 'Arrays/Phparrayindex',
+                  
+                  
 
                             'Classes'    => 'Classes/Classnames',
                             'Interfaces' => 'Interfaces/Interfacenames',
