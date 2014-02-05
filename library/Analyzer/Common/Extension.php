@@ -21,6 +21,22 @@ class Extension extends Analyzer\Analyzer {
         if (substr($this->source, -4) == '.ini') {
             $ini = parse_ini_file(dirname(dirname(dirname(__DIR__))).'/data/'.$this->source);
             extract($ini);
+            
+            if (count($functions) == 1 && empty($functions[0])) {
+                $functions = array();
+            }
+
+            if (count($constants) == 1 && empty($constants[0])) {
+                $constants = array();
+            }
+
+            if (count($classes) == 1 && empty($classes[0])) {
+                $classes = array();
+            }
+
+            if (count($interfaces) == 1 && empty($interfaces[0])) {
+                $interfaces = array();
+            }
         } elseif (substr($this->source, -4) == '.txt') {
             $functions = file(dirname(dirname(dirname(__DIR__))).'/data/'.$this->source);
         } else {
