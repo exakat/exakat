@@ -5,12 +5,12 @@ namespace Analyzer\Type;
 use Analyzer;
 
 class HttpStatus extends Analyzer\Analyzer {
-    function dependsOn() {
+    public function dependsOn() {
         return array("Analyzer\\Type\\Integer");
     }
     
-    function analyze() {
-        $ini = parse_ini_file('data/HttpStatus.ini');
+    public function analyze() {
+        $ini = $this->loadIni('HttpStatus.ini');
         
         $this->atomIs('Integer')
              ->code(array_keys($ini['code']));

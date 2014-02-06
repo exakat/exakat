@@ -10,7 +10,7 @@ class Continents extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $ini = parse_ini_file('data/Continents_en.ini');
+        $ini = $this->loadIni('Continents_en.ini');
         
         $this->atomIs('String')
              ->fullcodeTrimmed(array_values($ini['continents_en']));

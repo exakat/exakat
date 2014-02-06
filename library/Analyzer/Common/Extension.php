@@ -19,7 +19,7 @@ class Extension extends Analyzer\Analyzer {
         $interfaces = array();
 
         if (substr($this->source, -4) == '.ini') {
-            $ini = parse_ini_file(dirname(dirname(dirname(__DIR__))).'/data/'.$this->source);
+            $ini = $this->loadIni($this->source);
             extract($ini);
             
             if (count($functions) == 1 && empty($functions[0])) {

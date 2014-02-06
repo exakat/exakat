@@ -10,7 +10,7 @@ class Ports extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $ini = parse_ini_file('data/ports.ini');
+        $ini = $this->loadIni('ports.ini');
         
         $this->atomIs('Integer')
              ->code(array_keys($ini['port']));
