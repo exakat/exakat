@@ -668,6 +668,16 @@ GREMLIN;
             print "$id)\n";
             print_r($query);
             print_r($this->queries_arguments[$id]);
+
+            foreach($this->queries_arguments[$id] as $name => $value) {
+                if (is_string($value)) {
+                    $query = str_replace($name, "'".str_replace('\\', '\\\\', $value)."'", $query);
+                } else {
+                    $query = str_replace($name, "['".join("', '", $value)."']", $query);
+                }
+            }
+            
+            print $query;
             
             print "\n\n";
         }
