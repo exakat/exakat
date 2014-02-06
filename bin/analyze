@@ -123,7 +123,7 @@ foreach($dependencies2 as $analyzer_class) {
     $analyzer = new $analyzer_class($client);
     $analyzer->init();
     $analyzer->run();
-    $count = $analyzer->get_row_count();
+    $count = $analyzer->getRowCount();
     $total_results += $count;
     print "$analyzer_class fait ($count)\n";
     $end = microtime(true);
