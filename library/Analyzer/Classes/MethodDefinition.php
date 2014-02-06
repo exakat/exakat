@@ -13,6 +13,14 @@ class MethodDefinition extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs('Function')
              ->outIs('NAME');
+        $this->prepareQuery();
+
+        $this->atomIs("Class")
+             ->outIs('BLOCK')
+             ->outIs('CODE')
+             ->atomIs('Function')
+             ->outIs('NAME');
+        $this->prepareQuery();
     }
 }
 
