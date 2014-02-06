@@ -93,9 +93,21 @@ class Analyzer {
 
     private function addMethod($method, $arguments = null) {
         if (!is_null($arguments)) {
-            $argname = 'arg'.count($this->methods);
-            $this->arguments[$argname] = $arguments;
-            $this->methods[] = str_replace('***', $argname, $method);
+            if (func_num_args() > 2) {
+                $arguments = func_get_args();
+                array_shift($arguments);
+                $argnames = array(str_replace('***', "%s", $method));
+                foreach($arguments as $id => $arg) {
+                    $argname = 'arg'.(count($this->arguments));
+                    $this->arguments[$argname] = $arg;
+                    $argnames[] = $argname;
+                }
+                $this->methods[] = call_user_func_array('sprintf', $argnames);
+            } else {
+                $argname = 'arg'.count($this->arguments);
+                $this->arguments[$argname] = $arguments;
+                $this->methods[] = str_replace('***', $argname, $method);
+            }
         } else {
             $this->methods[] = $method;
         }
@@ -185,10 +197,8 @@ GREMLIN;
     function tokenIs($atom) {
         if (is_array($atom)) {
             $this->addMethod('filter{it.token in *** }', $atom);
-            //$this->methods[] = 'filter{it.token in [\''.join("', '", $atom).'\']}';
         } else {
             $this->addMethod('has("token", ***)', $atom);
-            //$this->methods[] = 'has("token", "'.$atom.'")';
         }
         
         return $this;
@@ -207,10 +217,8 @@ GREMLIN;
     function atomIs($atom) {
         if (is_array($atom)) {
             $this->addMethod('filter{it.atom in ***}', $atom);
-//            $this->methods[] = 'filter{it.atom in [\''.join("', '", $atom).'\']}';
         } else {
             $this->addMethod('has("atom", ***)', $atom);
-//            $this->methods[] = 'has("atom", "'.$atom.'")';
         }
         
         return $this;
@@ -427,10 +435,8 @@ GREMLIN;
         
         if (is_array($code)) {
             $this->addMethod('filter{it.fullcode'.$caseSensitive.' in ***}', $code);
-//            $this->methods[] = "filter{it.fullcode$caseSensitive in ['".join("', '", $code)."']}";
         } else {
             $this->addMethod('filter{it.fullcode'.$caseSensitive.' == ***}', $code);
-//            $this->methods[] = "filter{it.fullcode$caseSensitive == '$code'}";
         }
         
         return $this;
@@ -532,7 +538,7 @@ GREMLIN;
             // @todo
             die(" I don't understand arrays in orderIs()");
         } else {
-            $this->methods[] = "out('$edge_name').has('order', $order)";
+            $this->addMethod("out(***).has('order', ***)", $edge_name, $order);
         }
         
         return $this;
@@ -542,10 +548,8 @@ GREMLIN;
         if (is_array($edge_name)) {
             // @todo
             $this->addMethod("inE.filter{it.label in ***}.outV", $edge_name);
-//            $this->methods[] = "inE.filter{it.label in ['".join("', '", $edge_name)."']}.outV";
         } else {
             $this->addMethod("in(***)", $edge_name);
-//            $this->methods[] = "in('$edge_name')";
         }
         
         return $this;
@@ -555,7 +559,6 @@ GREMLIN;
         if (is_array($edge_name)) {
             die(" I don't understand arrays in inIsnot()");
             // @todo
-//            $this->methods[] = "inE.filter{!(it.label in ['".join("', '", $edge_name)."'])}.outV";
         } else {
             $this->methods[] = "filter{ it.in('$edge_name').count() == 0}";
         }
@@ -652,7 +655,7 @@ GREMLIN;
         return $this->row_count;
     }
     
-    function get_row_count() {
+    function getRowCount() {
         return $this->row_count;
     }
 
@@ -770,6 +773,15 @@ GREMLIN;
         } 
         
         return $report;
+    }
+    
+    protected function loadIni($file) {
+        $fullpath = dirname(dirname(dirname(__DIR__))).'/data/'.$file;
+        if (!file_exists($fullpath)) {
+            return null;
+        } else {
+            return parse_ini_file($fullpath);
+        }
     }
 }
 ?>
