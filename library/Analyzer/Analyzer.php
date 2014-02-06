@@ -162,20 +162,20 @@ GREMLIN;
         $this->apply_below = $apply_below;
     }
 
-    public function query($query, $arguments = null) {
-        $queryTemplate = $query;
+    public function query($queryString, $arguments = null) {
         if (is_null($arguments)) {
             $arguments = array('type' => 'IN');
         }
+
         try {
-            $query = new \Everyman\Neo4j\Gremlin\Query($this->client, $queryTemplate, $arguments);
-            return $query->getResultSet();
+            $result = new \Everyman\Neo4j\Gremlin\Query($this->client, $queryString, $arguments);
+            return $result->getResultSet();
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
             print "Exception : ".$message."\n";
             
-            print $queryTemplate."\n";
+            print $queryString."\n";
             print_r($this->arguments);
             die();
         }
@@ -279,10 +279,9 @@ GREMLIN;
 
     function atomInside($atom) {
         if (is_array($atom)) {
-            // @todo
-            die(" I don't understand arrays in atomInside()");
+            $this->addMethod('as("loop").out().loop("loop"){true}{it.object.atom in ***}', $atom);
         } else {
-            $this->methods[] = 'as("loop").out().loop("loop"){true}{it.object.atom == "'.$atom.'"}';
+            $this->addMethod('as("loop").out().loop("loop"){true}{it.object.atom == ***}', $atom);
         }
         
         return $this;
@@ -748,7 +747,7 @@ GREMLIN;
     function toArray() {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out"; 
-        $vertices = query($this->client, $queryTemplate);
+        $vertices = $this->query($queryTemplate);
 
         $report = array();
         if (count($vertices) > 0) {
@@ -763,7 +762,7 @@ GREMLIN;
     public function toCountedArray($load = "it.fullcode") {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){{$load}}.cap"; 
-        $vertices = query($this->client, $queryTemplate);
+        $vertices = $this->query($queryTemplate);
 
         $report = array();
         if (count($vertices) > 0) {
@@ -784,5 +783,24 @@ GREMLIN;
             return parse_ini_file($fullpath);
         }
     }
+
+/*
+    private function query($client, $query) {
+    $queryTemplate = $query;
+    $params = array('type' => 'IN');
+    try {
+        $query = new \Everyman\Neo4j\Gremlin\Query($client, $queryTemplate, $params);
+        return $query->getResultSet();
+    } catch (\Exception $e) {
+        $message = $e->getMessage();
+        $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
+        print "Exception : ".$message."\n";
+        
+        print $queryTemplate."\n";
+        die();
+    }
+    return $query->getResultSet();
+}
+*/
 }
 ?>
