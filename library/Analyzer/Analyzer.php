@@ -776,7 +776,8 @@ GREMLIN;
     }
     
     protected function loadIni($file) {
-        $fullpath = dirname(dirname(dirname(__DIR__))).'/data/'.$file;
+        $fullpath = dirname(dirname(__DIR__)).'/data/'.$file;
+        
         if (!file_exists($fullpath)) {
             return null;
         } else {
