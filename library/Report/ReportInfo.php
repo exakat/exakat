@@ -2,30 +2,47 @@
 
 namespace Report;
 
+
+
 class ReportInfo {
     private $list = array();
+    private $project = null;
     
-    function __construct($project) {
-        $this->setProject($project);
+    public function __construct($project) {
+        $this->project = $project;
     }
 
-    function setProject($project) {
+    public function collect() {
         include(dirname(__DIR__).'/App.php');
         $this->list['Audit software version'] = $app['version'];
         
-        $mysqli = new \mysqli('localhost', 'root', '', 'exakat');
-        $res = $mysqli->query("SELECT * FROM project_runs WHERE folder='$project' ORDER BY date_finish DESC LIMIT 1")->fetch_assoc();
+        $res = $this->mysql->query("SELECT * FROM project_runs WHERE folder='{$this->project}' ORDER BY date_finish DESC LIMIT 1")->fetch_assoc();
         
         $this->list['Audit execution date'] = date('r', strtotime($res['date_start']));
         $this->list['Report production date'] = date('r', strtotime('now'));
         
         $this->list['PHP version'] = substr(shell_exec('php -v'), 0, 11);
+
+        $queryTemplate = "g.V.has('token', 'E_FILE').count()";
+        $params = array('type' => 'IN');
+        $query = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryTemplate, $params);
+        $vertices = $query->getResultSet();
+
+        $this->list['Number of PHP files'] = $vertices[0][0];
+        $this->list['Number of lines of code'] = "42";
     }
     
-    function toMarkdown() {
+    public function setNeo4j($client) {
+        $this->neo4j = $client;
+    }
+
+    public function setMysql($client) {
+        $this->mysql = $client;
     }
     
-    function toArray() {
+    public function toMarkdown() { }
+    
+    public function toArray() {
         return $this->list;
     }
 }
