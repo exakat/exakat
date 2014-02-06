@@ -172,7 +172,7 @@ if (count($analyzes) > 0) {
 
 $report->createH1('Appinfo'); // phpinfo for the application
 $Appinfo = new Report\Appinfo($client);
-$ht = $report->addContent('HashTable', $Appinfo->toArray());
+$ht = $report->addContent('SectionedHashTable', $Appinfo->toArray());
 if (!is_null($ht)) {
     $ht->setHeaderName('Feature');
     $ht->setHeaderCount('Present');

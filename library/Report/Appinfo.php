@@ -12,6 +12,7 @@ class Appinfo {
 
         // Which extension are being used ? 
         $extensions = array(
+                    'Extensions' => array(
                             'ext/bcmath'     => 'Extensions/Extbcmath',
                             'ext/bzip2'      => 'Extensions/Extbzip2',
                             'ext/calendar'   => 'Extensions/Extcalendar',
@@ -41,86 +42,78 @@ class Appinfo {
                             'ext/ssh2'       => 'Extensions/Extssh2',
                             'ext/sqlite'     => 'Extensions/Extsqlite',
                             'ext/sqlite3'    => 'Extensions/Extsqlite3',
-
+                    ),
+                    'PHP' => array(
                             'Short tags'     => 'Structures/ShortTags',
                             'Incompilable'   => 'Php/Incompilable',
                             
                             'Iffectations'       => 'Structures/Iffectation',
                             'Variable variables' => 'Variables/VariableVariables',
-                            'Static variables'   => 'Variables/StaticVariables',
 
+                            '@'  => 'Structures/Noscream',
+                            'Eval'       => 'Structures/EvalUsage',
+                            'var_dump'   => 'Structures/VardumpUsage',
+                            '_once'      => 'Structures/OnceUsage',
+                    ),
+                    'Namespaces' => array(
                             'Namespaces' => 'Namespaces/Namespacesnames',
                             'Vendor'     => 'Namespaces/Vendor',
                             'Alias'      => 'Namespaces/Alias',
-
+                    ),
+                    'Arrays' => array(
                             'Array'      => 'Arrays/Arrayindex',
                             'Multidimensional arrays' => 'Arrays/Multidimensional',
                             'PHP arrays' => 'Arrays/Phparrayindex',
-                  
-                  
-
+                    ),
+                    'Functions' => array(
+                            'Functions'  => 'Functions/Functionnames',
+                            'Redeclared Function'  => 'Functions/RedeclaredPhpFunctions',
+                    ),
+                    'Classes' => array(
                             'Classes'    => 'Classes/Classnames',
                             'Interfaces' => 'Interfaces/Interfacenames',
-                            'Functions'  => 'Functions/Functionnames',
                             'Closures'   => 'Functions/Closures',
-
+                            'Static variables'   => 'Variables/StaticVariables',
+                    ),
+                    'Constants' => array(
                             'Constants'  => 'Constants/Constantnames',
-
+                    ),
+                    'Goto' => array(
                             'Labels'     => 'Php/Labelnames',
                             'Goto'       => 'Php/Gotonames',
-
+                    ),
+                    'Integers' => array(
                             'Integers'    => 'Type/Integer',
                             'Hexadecimal' => 'Type/Hexadecimal',
                             'Octal'       => 'Type/Octal',
                             'Binary'      => 'Type/Binary',
                             'Real'        => 'Type/Real',
-
-                            'Eval'       => 'Structures/EvalUsage',
-                            'var_dump'   => 'Structures/VardumpUsage',
-                            '_once'      => 'Structures/OnceUsage',
-
+                    ),
+                    'Strings' => array(
                             'Heredoc'    => 'Type/Heredoc',
                             'Nowdoc'     => 'Type/Nowdoc',
+                        )
+                    );
 
-                            '@'  => 'Structures/Noscream',
-                            
-                            );
-//            $extensions = Analyzer::getAnalyzers('Appinfo');
-/*        $extensions = array();
+        foreach($extensions as $section => $hash) {
+            $this->info[$section] = '';
+            foreach($hash as $name => $ext) {
+                $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].count()"; 
+                $vertices = $this->query($this->client, $queryTemplate);
 
-        $files = glob(__DIR__.'/../Analyzer/* /*.php');
-        foreach($files as $file) {
-            $type = basename(dirname($file));
-            if ($type == 'Common') { continue; }
-            $analyzer = substr(basename($file), 0, -4);
-            
-            $class = "\\Analyzer\\".$type."\\".$analyzer;
-            $analyzer = new $class(null);
-            $themes = $analyzer->getThemes();
-            if (in_array('Appinfo', $themes)) {
-                $extensions[$analyzer->getAppinfoHeader()] = 'Functions/Functionnames';
-            }
-        }
-*/
-//        print_r($extensions);
-//        die(__METHOD__);
-
-        foreach($extensions as $name => $ext) {
-            $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].count()"; 
-            $vertices = $this->query($this->client, $queryTemplate);
-
-            $v = $vertices[0][0];
-            if ($v == 0) {
-                $this->info[$name] = "NC";
-            } else {
-                $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.any()"; 
-                try {
-                    $vertices = $this->query($this->client, $queryTemplate);
+                $v = $vertices[0][0];
+                if ($v == 0) {
+                    $this->info[$name] = "NC";
+                } else {
+                    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.any()"; 
+                    try {
+                        $vertices = $this->query($this->client, $queryTemplate);
     
-                    $v = $vertices[0][0];
-                    $this->info[$name] = $v == "true" ? "Yes" : "No";
-                } catch (Exception $e) {
+                        $v = $vertices[0][0];
+                        $this->info[$name] = $v == "true" ? "Yes" : "No";
+                    } catch (Exception $e) {
                 
+                    }
                 }
             }
         }
