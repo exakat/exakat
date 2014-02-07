@@ -11,7 +11,7 @@ class Vendor extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs("Namespace")
-             ->regex('fullcode', '^namespace \\\\\\\\');
+             ->regex('fullcode', '^namespace [a-zA-Z0-9_]+\\\\\\\\');
     }
 
     public function toArray() {
