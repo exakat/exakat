@@ -42,6 +42,7 @@ class Appinfo {
                             'ext/ssh2'       => 'Extensions/Extssh2',
                             'ext/sqlite'     => 'Extensions/Extsqlite',
                             'ext/sqlite3'    => 'Extensions/Extsqlite3',
+//                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
                     'PHP' => array(
                             'Short tags'     => 'Structures/ShortTags',
