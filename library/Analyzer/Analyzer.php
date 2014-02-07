@@ -160,6 +160,8 @@ GREMLIN;
     
     function setApplyBelow($apply_below = true) {
         $this->apply_below = $apply_below;
+        
+        return $this;
     }
 
     public function query($queryString, $arguments = null) {
@@ -708,6 +710,7 @@ x = it;
 it.in("VALUE").            out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
 it.in('KEY').in("VALUE").  out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
 it.in('VALUE').in("VALUE").out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
+it.in('ARGUMENT').in("ARGUMENTS").out('BLOCK').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
 
 GREMLIN;
         } else {
