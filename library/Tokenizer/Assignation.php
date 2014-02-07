@@ -28,6 +28,7 @@ class Assignation extends TokenAuto {
                           'Assignation', 'Variable', 'Reference', 'Boolean', 'Magicconstant',
                           'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison', 
                           'Clone', 'Shell', 'Include', 'Instanceof', 'Function', 'ArrayNS', 'Identifier',
+                          'Arrayappend',
                          );
         
         // check for preplusplus in the yield filterout.
