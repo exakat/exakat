@@ -44,6 +44,7 @@ class Appinfo {
                             'ext/sqlite3'    => 'Extensions/Extsqlite3',
                             'ext/sockets'   => 'Extensions/Extsockets',
                             'ext/soap'   => 'Extensions/Extsoap',
+                            'ext/spl'   => 'Extensions/Extspl',
 //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
                     'PHP' => array(
