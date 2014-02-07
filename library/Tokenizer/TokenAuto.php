@@ -526,7 +526,7 @@ g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('N
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
 g.addEdge(it, x, 'NAME');
-it.setProperty('lambda', true);
+it.setProperty('lambda', 'true');
 
 op = it.out('NEXT').next();
 cp = it.out('NEXT').out('NEXT').out('NEXT').next();
@@ -559,7 +559,7 @@ g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('N
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
 g.addEdge(it, x, 'NAME');
-it.setProperty('lambda', true);
+it.setProperty('lambda', 'true');
 
 x = it.out('NEXT').next();
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
