@@ -63,7 +63,7 @@ class SectionedHashTable extends Dataset {
                          array('---','---', '---'));
          foreach($this->hash as $section => $hash) {
             if (empty($hash)) {
-                $values[] = array($section, ' ',' ');
+                $values[] = array(substr($section, 2), ' ',' ');
             } else {
                 $values[] = array(' ', $this->escapeForMarkdown($section), $hash);
             }
