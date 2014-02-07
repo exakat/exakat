@@ -29,7 +29,12 @@ class ReportInfo {
         $vertices = $query->getResultSet();
 
         $this->list['Number of PHP files'] = $vertices[0][0];
-        $this->list['Number of lines of code'] = "42";
+        
+        $queryTemplate = "g.V.has('token', 'E_FILE').transform{ x = it.out.line.unique().count()}.sum()";
+        $params = array('type' => 'IN');
+        $query = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryTemplate, $params);
+        $vertices = $query->getResultSet();
+        $this->list['Number of lines of code'] = $vertices[0][0];
     }
     
     public function setNeo4j($client) {
