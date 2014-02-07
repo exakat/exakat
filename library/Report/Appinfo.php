@@ -47,6 +47,7 @@ class Appinfo {
                             'ext/spl'   => 'Extensions/Extspl',
                             'ext/zip'   => 'Extensions/Extzip',
                             'ext/zlib'   => 'Extensions/Extzlib',
+                            'ext/tokenizer'   => 'Extensions/Exttokenizer',
 //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
                     'PHP' => array(
