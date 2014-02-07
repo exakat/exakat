@@ -1,34 +1,24 @@
 <?php
 
-Label : NEXT
-  $x
-  Label : NEXT
+Label : CODE
+  ;
+  Label : ELEMENT
     =
-    Label : NEXT
+    Label : RIGHT
       strtolower
-      Label : NEXT
-        (
-        Label : NEXT
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
           `
-          Label : NEXT
-            {
-            Label : NEXT
-               sf 
-              Label : NEXT
-                `_CLOSE
-                Label : NEXT
-                  )
-                  Label : NEXT
-                    ;
-                    Label : NEXT
-                      ?>
-                      Label : NEXT
-                        /**/
-                        Label : NEXT
-                          /* * */
-            Label : NAME
+          Label : CONTAIN
+            Concatenation
+            Label : CONCAT
               ->
               Label : PROPERTY
                 x
               Label : OBJECT
                 $file
+            Label : CONCAT
+               sf 
+    Label : LEFT
+      $x

@@ -9,7 +9,7 @@ class Shell extends TokenAuto {
 // Case of string with interpolation : `a${b}c`;
         $this->conditions = array(  0 => array('token' => Shell::$operators, 
                                                'atom' => 'none'),
-                                    1 => array('atom'  => array('String', 'Variable', 'Concatenation', 'Array')),
+                                    1 => array('atom'  => String::$allowed_classes),
                                  );
         
         $this->actions = array( 'make_quoted_string' => 'Shell');
