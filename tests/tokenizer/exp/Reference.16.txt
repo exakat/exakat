@@ -4,11 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      new
+      Label : NEW
+        x
     Label : LEFT
       $x
-    Label : RIGHT
-      &
-      Label : REFERENCE
-        new
-        Label : NEW
-          x

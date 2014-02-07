@@ -132,6 +132,15 @@ it.setProperty('root', 'null');
             }
             unset($actions['property']);
         }
+
+        if (isset($actions['propertyNext'])) {
+            if (is_array($actions['propertyNext']) && !empty($actions['propertyNext'])) {
+                foreach($actions['propertyNext'] as $name => $value) {
+                    $qactions[] = " /* propertyNext */   it.out('NEXT').next().setProperty('$name', '$value')";
+                }
+            }
+            unset($actions['propertyNext']);
+        }
         
         if (isset($actions['order']) && is_array($actions['order'])) {
             foreach($actions['order'] as $offset => $order) {
@@ -688,7 +697,16 @@ g.removeEdge( it.inE('NEXT').next());
                     $c++;
                 
                     if ($label == 'DROP') {
-                        $qactions[] = "
+                        if ($destination == 0) {
+                            $qactions[] = "
+/* transform drop out (0) */
+g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
+it.bothE('NEXT').each{ g.removeEdge(it); }
+
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+";
+                        } else {
+                            $qactions[] = "
 /* transform drop out ($c) */
 f = [];
 it.out('NEXT').fill(f);
@@ -700,6 +718,7 @@ f.each{
     g.removeVertex(i);
 }
 ";
+                        }
                     } elseif (substr($label, 0, 3) == 'TO_') {
                         $link = substr($label, 3);
                         $qactions[] = "

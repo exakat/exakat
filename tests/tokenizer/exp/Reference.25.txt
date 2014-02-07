@@ -3,9 +3,7 @@
 Label : CODE
   function
   Label : NAME
-    &
-    Label : REFERENCE
-      a
+    a
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -15,10 +13,10 @@ Label : CODE
       Label : VARIABLE
         $c
     Label : ARGUMENT
-      &
-      Label : LEFT
+      Typehint
+      Label : CLASS
         C
-      Label : RIGHT
+      Label : VARIABLE
         $d
   Label : BLOCK
     {

@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       "
       Label : CONTAIN
@@ -13,9 +11,7 @@ Label : CODE
         Label : CONCAT
           a=
         Label : CONCAT
-          {
-          Label : NAME
-            $b
+          $b
         Label : CONCAT
           &
         Label : CONCAT
@@ -23,6 +19,6 @@ Label : CODE
         Label : CONCAT
           =
         Label : CONCAT
-          {
-          Label : NAME
-            $d
+          $d
+    Label : LEFT
+      $x

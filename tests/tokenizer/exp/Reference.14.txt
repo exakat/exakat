@@ -4,13 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      [
+      Label : INDEX
+        1
+      Label : VARIABLE
+        $x
     Label : LEFT
       $y
-    Label : RIGHT
-      &
-      Label : REFERENCE
-        [
-        Label : INDEX
-          1
-        Label : VARIABLE
-          $x

@@ -3,9 +3,7 @@
 Label : CODE
   function
   Label : NAME
-    &
-    Label : REFERENCE
-      a
+    a
   Label : ARGUMENTS
     ,
     Label : ARGUMENT
@@ -19,9 +17,7 @@ Label : CODE
       Label : CLASS
         array
       Label : VARIABLE
-        &
-        Label : REFERENCE
-          $d
+        $d
   Label : BLOCK
     {
     Label : CODE

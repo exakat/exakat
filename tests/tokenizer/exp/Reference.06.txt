@@ -4,41 +4,37 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      ::
+      Label : CLASS
+        y
+      Label : METHOD
+        c
+        Label : ARGUMENTS
+          void
     Label : LEFT
       $x
-    Label : RIGHT
-      &
-      Label : REFERENCE
-        ::
-        Label : CLASS
-          y
-        Label : METHOD
-          $c
-          Label : ARGUMENTS
-            void
   Label : ELEMENT
     =
+    Label : RIGHT
+      ::
+      Label : CLASS
+        y
+      Label : PROPERTY
+        $c
     Label : LEFT
       $x
-    Label : RIGHT
-      &
-      Label : REFERENCE
-        ::
-        Label : CLASS
-          y
-        Label : PROPERTY
-          $c
   Label : ELEMENT
     =
+    Label : RIGHT
+      ::
+      Label : CLASS
+        y
+      Label : METHOD
+        $c
+        Label : NAME
+          $c
+        Label : ARGUMENTS
+          void
     Label : LEFT
       $x
-    Label : RIGHT
-      &
-      Label : REFERENCE
-        ::
-        Label : CLASS
-          y
-        Label : METHOD
-          c
-          Label : ARGUMENTS
-            void

@@ -18,9 +18,12 @@ class Reference extends TokenAuto {
                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', )),
         );
         
-        $this->actions = array('makeEdge'    => array( 1 => 'REFERENCE'),
-                               'atom'        => 'Reference',
-                               'cleanIndex'  => true);
+        $this->actions = array('transform'    => array( 0 => 'DROP'),
+                               'propertyNext' => array('reference' => 'true'),
+//                               'property'    => array('reference' => 'true'),
+//                               'atom'        => 'Reference',
+//                               'cleanIndex'  => true
+                               );
         $this->checkAuto();
 
         // special case for Stdclass &$x = 
@@ -32,9 +35,12 @@ class Reference extends TokenAuto {
                                    2 => array('token' => array('T_COMMA', 'T_EQUAL', 'T_CLOSE_PARENTHESIS')),
         );
         
-        $this->actions = array('makeEdge'    => array( 1 => 'REFERENCE'),
-                               'atom'        => 'Reference',
-                               'cleanIndex'  => true);
+        $this->actions = array('transform'    => array( 0 => 'DROP'),
+                               'propertyNext' => array('reference' => 'true'),
+//                             'makeEdge'    => array( 1 => 'REFERENCE'),
+//                               'atom'        => 'Reference',
+//                               'cleanIndex'  => true
+                               );
         $this->checkAuto();
 
         $this->conditions = array(-1 => array('token' => 'T_FUNCTION',
@@ -46,9 +52,12 @@ class Reference extends TokenAuto {
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS')
         );
         
-        $this->actions = array('transform'   => array( 1 => 'REFERENCE'),
-                               'cleanIndex'  => true,
-                               'atom'        => 'Reference');
+        $this->actions = array('transform'    => array( 0 => 'DROP'),
+                               'propertyNext' => array('reference' => 'true'),
+//                             'transform'   => array( 1 => 'REFERENCE'),
+//                               'cleanIndex'  => true,
+//                               'atom'        => 'Reference'
+);
         $this->checkAuto();
 
         return $this->checkRemaining();

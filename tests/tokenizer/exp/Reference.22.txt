@@ -6,14 +6,12 @@ Label : CODE
     (
     Label : CODE
       ===
+      Label : RIGHT
+        FALSE
       Label : LEFT
         (
         Label : CODE
           &
-          Label : LEFT
-            x
-            Label : ARGUMENTS
-              void
           Label : RIGHT
             ->
             Label : OBJECT
@@ -22,8 +20,10 @@ Label : CODE
               z
               Label : ARGUMENTS
                 void
-      Label : RIGHT
-        FALSE
+          Label : LEFT
+            x
+            Label : ARGUMENTS
+              void
   Label : THEN
     {
     Label : CODE

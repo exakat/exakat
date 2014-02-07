@@ -7,7 +7,23 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        "\n"
+        |
+        Label : RIGHT
+          (
+          Label : CODE
+            &
+            Label : RIGHT
+              $d
+            Label : LEFT
+              (
+              Label : CODE
+                >>
+                Label : RIGHT
+                  1
+                Label : LEFT
+                  $c
+        Label : LEFT
+          $a
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -20,41 +36,25 @@ Label : CODE
       void
       Label : ARGUMENT
         &
+        Label : RIGHT
+          $d
         Label : LEFT
           (
           Label : CODE
             |
-            Label : LEFT
-              $a
             Label : RIGHT
               (
               Label : CODE
                 >>
-                Label : LEFT
-                  $c
                 Label : RIGHT
                   1
-        Label : RIGHT
-          $d
+                Label : LEFT
+                  $c
+            Label : LEFT
+              $a
   Label : ELEMENT
     print
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        |
-        Label : LEFT
-          $a
-        Label : RIGHT
-          (
-          Label : CODE
-            &
-            Label : LEFT
-              (
-              Label : CODE
-                >>
-                Label : LEFT
-                  $c
-                Label : RIGHT
-                  1
-            Label : RIGHT
-              $d
+        "\n"
