@@ -45,6 +45,7 @@ class Appinfo {
                             'ext/sockets'   => 'Extensions/Extsockets',
                             'ext/soap'   => 'Extensions/Extsoap',
                             'ext/spl'   => 'Extensions/Extspl',
+                            'ext/zip'   => 'Extensions/Extzip',
 //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
                     'PHP' => array(
