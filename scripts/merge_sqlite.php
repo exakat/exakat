@@ -38,5 +38,6 @@ foreach($exts as $ext) {
     $results = $db->query('INSERT INTO stats SELECT NULL, "'.$ext.'", COUNT(*), SUM(CASE count WHEN "Yes" THEN 1 ELSE 0 END) FROM reports WHERE analyzer="Appinfo" AND value="ext/'.$ext.'" ');
 }
 
+$results = $db->query('INSERT INTO stats SELECT NULL, value, COUNT(project), COUNT(project) FROM reports WHERE analyzer="Analyzer\\Type\\UnicodeBlock" GROUP BY value ');
 
 ?>
