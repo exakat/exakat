@@ -8,7 +8,7 @@ class Constantnames extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Functioncall")
              ->code('define', false)
-             ->inIsnot('METHOD')
+             ->inIsnt('METHOD')
              ->outIs('ARGUMENTS')
              ->orderIs('ARGUMENT', 0);
     }

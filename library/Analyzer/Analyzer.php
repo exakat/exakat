@@ -26,7 +26,7 @@ class Analyzer {
 
     public function __construct($client) {
         $this->client = $client;
-        $this->analyzerIsNot(addslashes(get_class($this)));
+        $this->analyzerIsNot(get_class($this));
 
         $this->code = get_class($this);
     } 
@@ -527,7 +527,7 @@ GREMLIN;
             // @todo
             die(" I don't understand arrays in out()");
         } else {
-            $this->methods[] = "filter{ it.out('$edge_name').count() == 0}";
+            $this->addMethod("filter{ it.out(***).count() == 0}", $edge_name);
         }
         
         return $this;
@@ -556,12 +556,12 @@ GREMLIN;
         return $this;
     }
 
-    function inIsnot($edge_name) {
+    function inIsnt($edge_name) {
         if (is_array($edge_name)) {
             die(" I don't understand arrays in inIsnot()");
             // @todo
         } else {
-            $this->methods[] = "filter{ it.in('$edge_name').count() == 0}";
+            $this->addMethod("filter{ it.in(***).count() == 0}", $edge_name);
         }
         
         return $this;
