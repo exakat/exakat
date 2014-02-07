@@ -9,7 +9,7 @@ class _Foreach extends TokenAuto {
         $operands = array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 
                           'Staticmethodcall', 'Methodcall','Cast', 'Parenthesis', 'Ternary', 
                           'Noscream', 'Not', 'Assignation', 'New', 'Addition');
-        $blind_variables = array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Reference' );
+        $blind_variables = array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property' );
 
         // foreach(); (empty)
         $this->conditions = array( 0 => array('token' => _Foreach::$operators,
@@ -49,7 +49,7 @@ class _Foreach extends TokenAuto {
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => $operands), 
                                    3 => array('token' => 'T_AS'),
-                                   4 => array('atom'  => array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Reference' )),
+                                   4 => array('atom'  => array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property' )),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('atom'  => 'Block'),
         );
@@ -72,7 +72,7 @@ class _Foreach extends TokenAuto {
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom' => $operands), 
                                    3 => array('token' => 'T_AS'),
-                                   4 => array('atom'  => array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Reference' )),
+                                   4 => array('atom'  => array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property' )),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('token' => 'T_COLON'),
                                    7 => array('atom'  => 'yes'),
@@ -100,7 +100,7 @@ class _Foreach extends TokenAuto {
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom' => $operands), 
                                    3 => array('token' => 'T_AS'),
-                                   4 => array('atom'  => array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Reference' )),
+                                   4 => array('atom'  => array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property' )),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('token' => 'T_COLON'),
                                    7 => array('atom'  => 'yes'),

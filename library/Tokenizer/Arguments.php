@@ -10,7 +10,7 @@ class Arguments extends TokenAuto {
                                        'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
                                        'Magicconstant', 'Ternary', 'Assignation', 'Logical', 'Keyvalue', 'Void', 
                                        'Property', 'Staticconstant', 'Staticproperty', 'Nsname', 'Methodcall', 'Staticmethodcall',
-                                       'Reference', 'Cast', 'Postplusplus', 'Preplusplus', 'Typehint', 'Bitshift', 'Noscream',
+                                       'Cast', 'Postplusplus', 'Preplusplus', 'Typehint', 'Bitshift', 'Noscream',
                                        'Clone', 'New', 'Arrayappend', 'Instanceof', 'Function', 'Keyvalue', 
                                        'ArrayNS', 'Shell', 'Heredoc', );
                                        //'Include',
