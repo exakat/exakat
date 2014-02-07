@@ -48,6 +48,7 @@ class Appinfo {
                             'ext/zip'   => 'Extensions/Extzip',
                             'ext/zlib'   => 'Extensions/Extzlib',
                             'ext/tokenizer'   => 'Extensions/Exttokenizer',
+                            'ext/standard'   => 'Extensions/Extstandard',
 //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
                     'PHP' => array(
@@ -67,7 +68,8 @@ class Appinfo {
                             'Vendor'     => 'Namespaces/Vendor',
                             'Alias'      => 'Namespaces/Alias',
                     ),
-                    'Arrays' => array(
+                    'Variables' => array(
+                            'References' => 'Variables/References',
                             'Array'      => 'Arrays/Arrayindex',
                             'Multidimensional arrays' => 'Arrays/Multidimensional',
                             'PHP arrays' => 'Arrays/Phparrayindex',
@@ -83,7 +85,8 @@ class Appinfo {
                             'Static variables'   => 'Variables/StaticVariables',
                     ),
                     'Constants' => array(
-                            'Constants'  => 'Constants/Constantnames',
+                            'Constants'     => 'Constants/ConstantDefinition',
+                            'PHP constants' => 'Constants/PhpConstantUsage',
                     ),
                     'Goto' => array(
                             'Labels'     => 'Php/Labelnames',
@@ -103,7 +106,7 @@ class Appinfo {
                     );
 
         foreach($extensions as $section => $hash) {
-            $this->info[$section] = '';
+            $this->info['--'.$section] = '';
             foreach($hash as $name => $ext) {
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].count()"; 
                 $vertices = $this->query($this->client, $queryTemplate);
@@ -119,13 +122,11 @@ class Appinfo {
                         $v = $vertices[0][0];
                         $this->info[$name] = $v == "true" ? "Yes" : "No";
                     } catch (Exception $e) {
-                
+                        // empty catch ? 
                     }
                 }
             }
         }
-
-
     }
     
     function toMarkdown() {
