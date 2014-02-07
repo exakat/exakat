@@ -10,6 +10,9 @@ class Multidimensional extends Analyzer\Analyzer {
         $this->atomIs("Array")
              ->outIs('VARIABLE')
              ->atomIs('Array')
+             ->back('first')
+             ->inIsnt('VARIABLE')
+             ->back('first')
              ;
     }
 }
