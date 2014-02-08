@@ -55,6 +55,7 @@ if (strpos('javax.script.ScriptException', $res) !== false) {
     die();
 }
 shell_exec('php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
+shell_exec('php bin/stat > ./projects/'.$project.'/log/stat.log');
 logProgress($project, $progress++ / $total_steps);
 print "Project tokenized\n";
 
