@@ -10,7 +10,7 @@ class Property extends TokenAuto {
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
                                    -1 => array('atom' => $operands), 
                                     0 => array('token' => Property::$operators),
-                                    1 => array('atom' => array('String', 'Variable', 'Array', 'Identifier')),
+                                    1 => array('atom' => array('String', 'Variable', 'Array', 'Identifier', 'Boolean')),
                                     2 => array('filterOut' => array('T_OPEN_PARENTHESIS')), //'T_OPEN_BRACKET'
                                     );
         
