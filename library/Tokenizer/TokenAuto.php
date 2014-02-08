@@ -2095,7 +2095,6 @@ g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');
             unset($actions['add_to_index']);
         }        
 
-
         if (isset($actions['while_to_empty_block'])) {
             $qactions[] = " 
 /* create an empty Block in place of a semi colon, after a while statment.  */  
@@ -2108,7 +2107,27 @@ x.setProperty('atom', 'Block');
             unset($actions['while_to_empty_block']);
         }        
 
+        if (isset($actions['checkTypehint'])) {
+            $qactions[] = " 
+/* Turn a & b into a typehint  */  
 
+it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each {
+    it.setProperty('atom', 'Typehint');
+    it.setProperty('code', 'Typehint');
+    
+    g.addEdge(it, it.out('LEFT').next(), 'CLASS');
+    g.removeEdge(it.outE('LEFT').next());
+
+    g.addEdge(it, it.out('RIGHT').next(), 'VARIABLE');
+    g.removeEdge(it.outE('RIGHT').next());
+    
+    it.out('VARIABLE').next().setProperty('reference', 'true');
+}
+
+                ";
+            unset($actions['checkTypehint']);
+        }  
+        
         if (isset($actions['variable_to_functioncall'])) {
             $qactions[] = " 
 /* create a functioncall, and hold the variable as property.  */  

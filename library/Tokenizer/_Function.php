@@ -6,6 +6,7 @@ class _Function extends TokenAuto {
     static public $operators = array('T_FUNCTION');
     
     function _check() {
+        // function x(args) {}
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('Identifier', 'Boolean')),
@@ -21,9 +22,11 @@ class _Function extends TokenAuto {
                                                         4 => 'DROP', 
                                                         5 => 'BLOCK'),
                                'atom'       => 'Function',
+                               'checkTypehint' => 'Function',
                                'cleanIndex' => true);
         $this->checkAuto();
 
+        // function x(args); for interfaces
         $this->conditions = array(0 => array('token' =>  _Function::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('Identifier', 'Boolean')),
@@ -39,6 +42,7 @@ class _Function extends TokenAuto {
                                                         4 => 'DROP', 
                                                         5 => 'DROP'),
                                'atom'       => 'Function',
+                               'checkTypehint' => 'Function',
                                'cleanIndex' => true);
         $this->checkAuto();
 
@@ -53,6 +57,7 @@ class _Function extends TokenAuto {
         
         $this->actions = array('to_lambda'  => true,
                                'atom'       => 'Function',
+                               'checkTypehint' => 'Function',
                                'cleanIndex' => true);
         $this->checkAuto();
 
@@ -71,6 +76,7 @@ class _Function extends TokenAuto {
         
         $this->actions = array('to_lambda_use'  => true,
                                'atom'       => 'Function',
+                               'checkTypehint' => 'Function',
                                'cleanIndex' => true);
         $this->checkAuto();
 
