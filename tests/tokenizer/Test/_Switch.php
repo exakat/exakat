@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Switch extends Tokenizer {
-    /* 31 methods */
+    /* 32 methods */
 
     public function test_Switch01()  { $this->generic_test('_Switch.01'); }
     public function test_Switch02()  { $this->generic_test('_Switch.02'); }
@@ -40,5 +40,6 @@ class _Switch extends Tokenizer {
     public function test_Switch29()  { $this->generic_test('_Switch.29'); }
     public function test_Switch30()  { $this->generic_test('_Switch.30'); }
     public function test_Switch31()  { $this->generic_test('_Switch.31'); }
+    public function test_Switch32()  { $this->generic_test('_Switch.32'); }
 }
 ?>

@@ -10,7 +10,7 @@ class _While extends TokenAuto {
          //  While( condition ) ;
          // T_SEMICOLON here will prevent while to be create too hastily, and give a chance to do...while.
         $this->conditions = array(-1 => array('filterOut2' => array('T_CLOSE_CURLY', 'T_SEMICOLON'),
-                                              'notAtom' => "Block"),
+                                              'notAtom' => array("Block", 'Ifthen', 'Foreach', 'For', 'Switch')),
                                    0 => array('token' => _While::$operators),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => 'yes'),
@@ -44,8 +44,8 @@ class _While extends TokenAuto {
         $this->checkAuto();        
         
          // { lone block } While( condition ) ;
-        $this->conditions = array(-2 => array('filterOut' => "T_DO"),
-                                  -1 => array('atom' => "Block"),
+        $this->conditions = array(-2 => array('filterOut' => array("T_DO" , 'T_ELSE')),
+                                  -1 => array('atom'  => "Block"),
                                    0 => array('token' => _While::$operators),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => 'yes'),
@@ -61,6 +61,7 @@ class _While extends TokenAuto {
 
          //  syntax   While() $x++; 
         $this->conditions = array(-1 => array('filterOut2' => array('T_CLOSE_CURLY'),
+                                              'notAtom'    => array('Ifthen', 'Foreach', 'Switch', 'For')
 //                                              'notAtom'    => array('Block')
                                               ),
                                    0 => array('token'      => _While::$operators),

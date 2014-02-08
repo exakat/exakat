@@ -1,0 +1,130 @@
+<?php
+
+Label : CODE
+  switch
+  Label : NAME
+    $a
+  Label : CASES
+    {
+    Label : CODE
+      case
+      Label : CODE
+        Block With Sequence For Case
+        Label : CODE
+          Block With Sequence For Case Without Semicolon
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $g
+            Label : THEN
+              Block With if/elseif
+              Label : CODE
+                return
+                Label : RETURN
+                  $h
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              $k
+            Label : LEFT
+              list
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  $j
+                Label : ARGUMENT
+                  void
+                Label : ARGUMENT
+                  $i
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ==
+                Label : RIGHT
+                  "%"
+                Label : LEFT
+                  $l
+            Label : THEN
+              Block With if/elseif
+              Label : CODE
+                =
+                Label : RIGHT
+                  "n"
+                Label : LEFT
+                  $m
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ->
+              Label : OBJECT
+                $d
+              Label : METHOD
+                e
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $f
+            Label : LEFT
+              $c
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                is_callable
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $y
+            Label : THEN
+              {
+              Label : CODE
+                void
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ?
+              Label : CONDITION
+                isset
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      $r
+                    Label : VARIABLE
+                      ->
+                      Label : PROPERTY
+                        q
+                      Label : OBJECT
+                        $p
+              Label : THEN
+                [
+                Label : INDEX
+                  $u
+                Label : VARIABLE
+                  ->
+                  Label : PROPERTY
+                    t
+                  Label : OBJECT
+                    $s
+              Label : ELSE
+                array
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    $v
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      'w'
+                    Label : CONCAT
+                      $x
+            Label : LEFT
+              $o
+      Label : CASE
+        "b"

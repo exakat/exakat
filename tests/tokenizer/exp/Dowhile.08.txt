@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    do
+    Label : LOOP
+      foreach
+      Label : SOURCE
+        $a
+      Label : VALUE
+        $b
+      Label : LOOP
+        {
+        Label : CODE
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $c
+    Label : CONDITION
+      $z

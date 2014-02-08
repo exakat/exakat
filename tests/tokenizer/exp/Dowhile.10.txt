@@ -1,0 +1,32 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    do
+    Label : LOOP
+      switch
+      Label : NAME
+        $a
+      Label : CASES
+        {
+        Label : CODE
+          Sequence Case Default
+          Label : ELEMENT
+            default
+            Label : CODE
+              Block With Sequence For Default
+              Label : CODE
+                Void
+          Label : ELEMENT
+            case
+            Label : CODE
+              Block With Sequence For Case
+              Label : CODE
+                break
+                Label : LEVEL
+                  1
+            Label : CASE
+              1
+    Label : CONDITION
+      $z
