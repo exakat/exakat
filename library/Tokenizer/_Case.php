@@ -100,7 +100,8 @@ class _Case extends TokenAuto {
                                               'atom'  => 'none', ), 
                                    3 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Block', 'Switch', 'Return', 'For', 'Foreach',  'String', 'RawString')),
                                    4 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Break', 'Block', 'Switch', 'Return', 'For', 'Foreach', 'String', 'RawString')),
-                                   5 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
+                                   5 => array('filterOut2' => array_merge(array('T_ELSE', 'T_ELSEIF'),
+                                                                        Assignation::$operators)),
         );
         
         $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,
