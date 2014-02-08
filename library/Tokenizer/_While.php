@@ -9,7 +9,7 @@ class _While extends TokenAuto {
 
          //  While( condition ) ;
          // T_SEMICOLON here will prevent while to be create too hastily, and give a chance to do...while.
-        $this->conditions = array(-1 => array('filterOut2' => array('T_CLOSE_CURLY', 'T_SEMICOLON'),
+        $this->conditions = array(-1 => array('filterOut' => array('T_CLOSE_CURLY', 'T_SEMICOLON'),
                                               'notAtom' => array("Block", 'Ifthen', 'Foreach', 'For', 'Switch')),
                                    0 => array('token' => _While::$operators),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
@@ -24,12 +24,28 @@ class _While extends TokenAuto {
                                'cleanIndex'           => true);
         $this->checkAuto();        
 
-         //  ; While( condition ) ;
-         // T_SEMICOLON here will prevent while to be create too hastily, and give a chance to do...while.
+         //  (instruction + ;) While( condition ) ;
         $this->conditions = array(-3 => array('notToken'  => 'T_DO'), 
                                   -2 => array('atom'  => 'yes'), 
                                   -1 => array('token' => 'T_SEMICOLON',
                                               'atom'  => 'none'), 
+                                   0 => array('token' => _While::$operators),
+                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   2 => array('atom'  => 'yes'),
+                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                   4 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'), 
+                                              'atom' => 'none'),
+        );
+        
+        $this->actions = array('addEdge'     => array(4 => array('Void' => 'LEVEL')),
+                               'keepIndexed'          => true,
+                               'cleanIndex'           => true);
+        $this->checkAuto();        
+
+         //  (Instruction no ;) While( condition ) ;
+        $this->conditions = array(-2 => array('notToken'  => 'T_DO'), 
+                                  -1 => array('atom'  => 'yes',
+                                              'notToken' => array('T_ELSE', 'T_ELSEIF', 'T_OPEN_CURLY')), 
                                    0 => array('token' => _While::$operators),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => 'yes'),
