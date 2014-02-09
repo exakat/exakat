@@ -6,7 +6,6 @@ class Variable extends TokenAuto {
     static public $operators = array('T_DOLLAR_OPEN_CURLY_BRACES', 'T_CURLY_OPEN');
     
     function _check() {
-
         // "  {$variable}  " or " ${x} "
         $this->conditions = array(0 => array('token' => Variable::$operators,
                                              'atom' => 'none'),
@@ -24,7 +23,13 @@ class Variable extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.code; 
+        return '
+        
+it.fullcode = it.code; 
+if (it.reference == "true") {
+    it.fullcode = "&" + it.fullcode;
+}
+
 x = it;
 it.has("token", "T_STRING_VARNAME").each{ x.fullcode = "\\$" + it.code; }
 it.has("token", "T_DOLLAR").filter{   it.out("NAME").next().atom in ["Variable", "Identifier"] }.out("NAME").each{ x.fullcode = "\\$" + it.fullcode; }
@@ -32,7 +37,8 @@ it.has("token", "T_DOLLAR").filter{ !(it.out("NAME").next().atom in ["Variable",
 
 it.has("token", "T_DOLLAR_OPEN_CURLY_BRACES").out("NAME").has("atom", "Identifier").each{ x.fullcode = "\\${" + it.fullcode + "}"; }
 it.has("token", "T_CURLY_OPEN").out("NAME").each{ x.fullcode = it.fullcode; }
-        ';
+
+';
     }
 }
 
