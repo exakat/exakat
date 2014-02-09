@@ -8,7 +8,8 @@ class _Break extends TokenAuto {
     function _check() {
         $this->conditions = array(0 => array('token' => _Break::$operators,
                                              'atom' => 'none'),
-                                  1 => array('atom' => array('Integer', 'Void', 'Parenthesis'))
+                                  1 => array('atom' => 'yes'),
+                                  2 => array('filterOut' => array_merge(Addition::$operators, Multiplication::$operators)),
                                   );
         
         $this->actions = array('transform'  => array( 1 => 'LEVEL'),
