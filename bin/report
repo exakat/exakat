@@ -133,10 +133,14 @@ $analyzes = array('Structures\\StrposCompare',
                   'Variables\\EvalUsage',
                   'Variables\\OnceUsage',
                   'Variables\\VardumpUsage',
+                  'Variables\\PhpinfoUsage',
 
                   'Structures\\NotNot',
                   'Structures\\Noscream',
                   'Structures\\toStringThrowsException',
+                  'Structures\\CalltimePassByReference',
+                  'Structures\\Break0',
+                  'Structures\\BreakNonInteger',
                   );
 
 foreach($analyzes as $id => $a) {
