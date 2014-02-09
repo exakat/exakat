@@ -6,7 +6,7 @@ use Analyzer;
 
 class toStringThrowsException extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\MethodDefinition');
+        return array('MethodDefinition');
     }
     
     public function analyze() {

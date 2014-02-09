@@ -28,7 +28,20 @@ if ($id = array_search('-p', $args)) {
     }
 } elseif ($id = array_search('-P', $args)) {
     $project = '';
-    $analyzers_class = array($args[$id + 1]);
+    $analyzer = $args[$id + 1];
+    if (Analyzer\Analyzer::getClass($analyzer)) {
+        $analyzers_class = array($analyzer);
+    } else {
+        die("No such class as $analyzer. Aborting\n");
+    }
+} elseif ($id = array_search('-T', $args)) {
+    $project = '';
+    $analyzer = $args[$id + 1];
+    if (Analyzer\Analyzer::getClass('Themes\\'.$analyzer)) {
+        $analyzers_class = array($analyzer);
+    } else {
+        die("No such class as $analyzer. Aborting\n");
+    }
 } else {
     $project = 'default';
 }
@@ -51,12 +64,13 @@ if (!isset($analyzers_class)) {
     $log->log("Configured analyzers\t".count($INI['analyzer']));
 
     foreach($INI['analyzer'] as $analyzer) {
-        if (!file_exists("library/Analyzer/$analyzer.php")) {
+        if (Analyzer\Analyzer::getClass($analyzer)) {
+            $analyzers_class[] = $analyzer;
+        } else {
             print "No such analyzer as '$analyzer'. Ignoring\n";
             $log->log("Ignored analyzer\t$analyzer");
             continue; 
         }
-        $analyzers_class[] = 'Analyzer\\'.str_replace('/', '\\', $analyzer);
     }
 }
 
@@ -65,7 +79,7 @@ $log->log("Runnable analyzers\t".count($analyzers_class)."");
 $dependencies = array();
 $dependencies2 = array();
 foreach($analyzers_class as $a) {
-    $d = new $a($client);
+    $d = Analyzer\Analyzer::getInstance($a, $client);
     $d = $d->dependsOn();
     if (empty($d)) {
         $dependencies2[] = $a;
@@ -87,7 +101,7 @@ while(!empty($dependencies) && $c > count($dependencies)) {
         
         foreach($diff as $k => $v) {
             if (!isset($dependencies[$v])) {
-                $x = new $v($client);
+                $x = Analyzer\Analyzer::getInstance($v, $client);
                 $dep = $x->dependsOn();
                 if (count($dep) == 0) {
                     $dependencies2[] = $v;
@@ -120,7 +134,7 @@ if (!empty($dependencies)) {
 $total_results = 0;
 foreach($dependencies2 as $analyzer_class) {
     $begin = microtime(true);
-    $analyzer = new $analyzer_class($client);
+    $analyzer = Analyzer\Analyzer::getInstance($analyzer_class, $client);
     $analyzer->init();
     $analyzer->run();
     $count = $analyzer->getRowCount();

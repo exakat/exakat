@@ -8,6 +8,7 @@ use Everyman\Neo4j\Client,
 class Analyzer {
     protected $client = null;
     protected $code = null;
+    protected $human_classname = null;
 
     protected $name = null;
     protected $description = null;
@@ -29,7 +30,55 @@ class Analyzer {
         $this->analyzerIsNot(get_class($this));
 
         $this->code = get_class($this);
+        
+        $this->human_classname = str_replace('\\', '/', substr(get_class($this), 9));
     } 
+    
+    public static function getClass($name) {
+        // accepted names : 
+        // PHP full name : Analyzer\\Type\\Class
+        // PHP short name : Type\\Class
+        // Human short name : Type/Class
+        // Human shortcut : Class (must be unique among the classes)
+        
+        if (strpos($name, '\\') !== false) {
+            if (substr($name, 0, 9) == 'Analyzer\\') {
+                $class = $name;
+            } else {
+                $class = 'Analyzer\\'.$name;
+            }
+        } elseif (strpos($name, '/') !== false) {
+            $class = 'Analyzer\\'.str_replace('/', '\\', $name);
+        } elseif (strpos($name, '/') === false) {
+            $files = glob('library/Analyzer/*/'.$name.'.php');
+            if (count($files) == 0) {
+                return false; // no class found
+            } elseif (count($files) == 1) {
+                $class = str_replace('/', '\\', substr($files[0], 8, -4));
+            } else {
+                // too many options here...
+                return false;
+            }
+        } else {
+            $class = $name;
+        }
+        
+        if (class_exists($class)) {
+            return $class;
+        } else {
+            return false;
+        }
+    }
+    
+
+    public static function getInstance($name, $client) {
+        if ($analyzer = Analyzer::getClass($name)) {
+            return new $analyzer($client);
+        } else {
+            print "No such class as '$name'\n";
+            return null;
+        }
+    }
     
     public function getDescription($lang = 'en') {
         if (is_null($this->description)) {
@@ -126,7 +175,7 @@ class Analyzer {
         $res = $this->query($query);
         
         if (isset($res[0]) && count($res[0]) == 1) {
-            print "cleaning $analyzer\n";
+            print "cleaning {$this->human_classname}\n";
             $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].outE('ANALYZED').each{
     g.removeEdge(it);
