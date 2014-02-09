@@ -6,7 +6,7 @@ use Analyzer;
 
 class PlusEgalOne extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Assignation")
              ->code(array('+=', '-='))
              ->outIs('RIGHT')

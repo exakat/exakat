@@ -6,7 +6,7 @@ use Analyzer;
 
 class Iffectation extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Ifthen")
              ->outIs('CONDITION')
              ->atomInside('Assignation')

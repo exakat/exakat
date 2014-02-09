@@ -7,7 +7,7 @@ use Analyzer;
 class StrposCompare extends Analyzer\Analyzer {
     static public $operator = array('strpos', 'stripos', 'strrpos', 'strripos');
     
-    function analyze() {
+    public function analyze() {
         // if (.. == strpos(..)) {}
         $this->atomIs("Functioncall")
              ->_as('result')

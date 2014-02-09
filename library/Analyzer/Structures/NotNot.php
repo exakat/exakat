@@ -6,7 +6,7 @@ use Analyzer;
 
 class NotNot extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Not")
              ->outIs('NOT')
              ->atomIs('Not');

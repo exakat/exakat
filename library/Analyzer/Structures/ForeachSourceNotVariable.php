@@ -6,7 +6,7 @@ use Analyzer;
 
 class ForeachSourceNotVariable extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Foreach")
              ->outIs('SOURCE')
              ->atomIsNot(array('Variable', 'Staticproperty', 'Property', 'Array'))

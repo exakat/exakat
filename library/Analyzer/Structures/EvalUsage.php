@@ -6,7 +6,7 @@ use Analyzer;
 
 class EvalUsage extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Functioncall")
              ->code('eval', false);
         $this->prepareQuery();

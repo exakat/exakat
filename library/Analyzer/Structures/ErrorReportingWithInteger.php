@@ -6,7 +6,7 @@ use Analyzer;
 
 class ErrorReportingWithInteger extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Functioncall")
              ->code('error_reporting', false)
              ->outIs('ARGUMENTS')

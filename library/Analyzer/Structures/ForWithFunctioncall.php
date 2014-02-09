@@ -6,7 +6,7 @@ use Analyzer;
 
 class ForWithFunctioncall extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("For")
              ->outIs('FINAL')
              ->atomInside('Functioncall')

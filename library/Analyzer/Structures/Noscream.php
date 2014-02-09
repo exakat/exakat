@@ -6,7 +6,7 @@ use Analyzer;
 
 class Noscream extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Noscream");
         $this->prepareQuery();
     }
