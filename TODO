@@ -153,3 +153,5 @@ Check __set_state : if there is a new in the parent, and the set state isn't ove
 
 For UnicodeBlock, merge the blocks into languages 
 Unset non existing variable (useless)
+
+List errors of visibilit between classes 
