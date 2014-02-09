@@ -10,7 +10,6 @@ class UnicodeBlock extends Analyzer\Analyzer {
     }
 
     public function toArray() {
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\Type\\UnicodeBlock']].out.hasNot('unicode_block', null)"; 
         $vertices = $this->query($queryTemplate);
 
@@ -25,8 +24,7 @@ class UnicodeBlock extends Analyzer\Analyzer {
     }
 
     public function toCountedArray($load = "it.fullcode") {
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
-        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.hasNot('unicode_block', null).groupCount(m){it.unicode_block}.cap"; 
+        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'Analyzer\\Type\\UnicodeBlock']].out.hasNot('unicode_block', null).groupCount(m){it.unicode_block}.cap"; 
         $vertices = $this->query($queryTemplate);
 
         $report = array();
