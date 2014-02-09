@@ -108,7 +108,6 @@ function process_file($filename, $log_file) {
 
     $file = realpath($filename);
 
-//    if (LINT) {
         $shell = shell_exec('php -l '.$filename.' 2>&1');
         if (trim($shell) != 'No syntax errors detected in '.$filename) {
             $environnement = new Environnement($client, $file); 
@@ -117,16 +116,14 @@ function process_file($filename, $log_file) {
             print "Ignoring file $filename as it won't compile\n";
             return false;
         }
-//    }
     
     if (filesize($filename) == 0) {
         return false;
     }
-    $fp = fopen($filename, 'r');
-    $php = fread($fp, filesize($filename));
-    fclose($fp);
     
-    $tokens = token_get_all($php);
+    shell_exec('php -r "print \'<?php \\$tokens = \'; var_export(token_get_all(file_get_contents(\''.$filename.'\'))); print \'; ?>\';" > tokens.php');
+    include('tokens.php');
+
     $log['token_initial'] = count($tokens);
     
 
