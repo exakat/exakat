@@ -227,7 +227,7 @@ root.setProperty('code', var.code);
 root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
-    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
+    ppp = g.addVertex(null, [code:'var', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
 
     g.addEdge(null, it.in('CLASS').next(),     ppp, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  ppp, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
@@ -257,7 +257,7 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
+    ppp = g.addVertex(null, [code:'var', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
     g.addEdge(null, it.in('CLASS').next(),     ppp, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  ppp, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
     g.addEdge(null, it.in('NAMESPACE').next(), ppp, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -409,7 +409,7 @@ root.setProperty('code', var.code);
 root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
-    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
+    ppp = g.addVertex(null, [code:'var', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
     g.addEdge(null, it.in('CLASS').next(),     ppp, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  ppp, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
     g.addEdge(null, it.in('NAMESPACE').next(), ppp, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -446,7 +446,7 @@ arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    ppp = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
+    ppp = g.addVertex(null, [code:'var', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
     g.addEdge(null, it.in('CLASS').next(),     ppp, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  ppp, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
     g.addEdge(null, it.in('NAMESPACE').next(), ppp, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -602,7 +602,7 @@ g.addEdge(it, x, 'NEXT');
         if (isset($actions['to_ppp'])) {
             $qactions[] = "
 /* to ppp alone */
-x = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:it.code, atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -666,7 +666,7 @@ it.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = "
 /* to ppp with assignation */
 
-x = g.addVertex(null, [code:'Ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:it.code, atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);

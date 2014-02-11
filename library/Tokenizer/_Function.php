@@ -84,7 +84,7 @@ class _Function extends TokenAuto {
     }
 
     function fullcode() {
-        return '
+        return <<<GREMLIN
 x = it;
 
 
@@ -96,7 +96,18 @@ it.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0}.each{ it.fu
 
 it.filter{it.out("USE").count() == 1}.each{ it.fullcode = "function " + it.out("ARGUMENTS").next().fullcode + " use " + it.out("USE").next().fullcode + " " + it.out("BLOCK").next().fullcode;}
 
-';
+if (it.out('ABSTRACT').count() == 1) { it.fullcode = 'abstract ' + it.fullcode; }
+if (it.out('FINAL').count() == 1) { it.fullcode = 'final ' + it.fullcode; }
+if (it.out('STATIC').count() == 1) { it.fullcode = 'static ' + it.fullcode; }
+
+if (it.out('PUBLIC').count() == 1) { it.fullcode = 'public ' + it.fullcode; }
+if (it.out('PROTECTED').count() == 1) { it.fullcode = 'protected ' + it.fullcode; }
+if (it.out('PRIVATE').count() == 1) { it.fullcode = 'private ' + it.fullcode; }
+
+//if (it.out('DEFINE').count() == 1) { it.fullcode = it.fullcode + it.out('DEFINE').next().code; }
+
+
+GREMLIN;
     }
 }
 

@@ -75,7 +75,21 @@ class _Ppp extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.code; ';
+        return <<<GREMLIN
+it.fullcode = '';
+
+if (it.out('ABSTRACT').count() == 1) { it.fullcode = 'abstract ' + it.fullcode; }
+if (it.out('FINAL').count() == 1) { it.fullcode = 'final ' + it.fullcode; }
+if (it.out('STATIC').count() == 1) { it.fullcode = 'static ' + it.fullcode; }
+if (it.out('VAR').count() == 1) { it.fullcode = 'var ' + it.fullcode; }
+
+if (it.out('PUBLIC').count() == 1) { it.fullcode = 'public ' + it.fullcode; }
+if (it.out('PROTECTED').count() == 1) { it.fullcode = 'protected ' + it.fullcode; }
+if (it.out('PRIVATE').count() == 1) { it.fullcode = 'private ' + it.fullcode; }
+
+if (it.out('DEFINE').count() == 1) { it.fullcode = it.fullcode + it.out('DEFINE').next().code; }
+
+GREMLIN;
     }
 
 }
