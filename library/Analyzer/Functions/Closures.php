@@ -10,7 +10,7 @@ class Closures extends Analyzer\Analyzer {
     
     function analyze() {
         $this->atomIs("Function")
-             ->is('lambda', 'true');
+             ->is('lambda');
     }
 }
 
