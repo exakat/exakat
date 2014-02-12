@@ -154,4 +154,28 @@ Check __set_state : if there is a new in the parent, and the set state isn't ove
 For UnicodeBlock, merge the blocks into languages 
 Unset non existing variable (useless)
 
-List errors of visibilit between classes 
+List errors of visibility between classes 
+Detect strings that are used as an Array (then, spot the index, and check for the strings in those indexes)
+
+Function called with too many or too few arguments
+Prepare nodes to be added to new network (function calls, variable track...)
+
+Spot several definition for constants
+Spot variable used in definitions
+
+Update dashboard with number of analyzer and inventory or appinfo
+Test treemap to export from bin/file
+bin/file should also sort PHP files/directories by type : see fb treemap : code, scripts, media, tests, config. ...
+
+Separate analyzers in : file/application, inventory/analyse; themes
+produce a dot graph of classes
+support PHP vesrions in config
+Check for PHP 5.5 and 5.6 : loader has some problem...
+
+Automate testing and dashboard
+install myself as a project
+
+hardcoded logins // pass
+paraleliser les analyzers
+
+Spot the exceptions and the one that are thrown, and the one caught. 
