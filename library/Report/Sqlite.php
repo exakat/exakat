@@ -34,6 +34,10 @@ class Sqlite {
             foreach($data as $k => $d) {
                 $this->data[] = array($this->current, $k, $d);
             }
+        } elseif ($type == 'SectionedHashTable') {
+            foreach($data as $k => $d) {
+                $this->data[] = array($this->current, $k, $d);
+            }
         } elseif ($type == 'Text') {
             return null;
         }
