@@ -1,0 +1,79 @@
+<?php
+
+$mysql = new mysqli('localhost', 'root', '', 'wordpress');
+
+if (isset($argv[1])) {
+    $exakat = array('id' => $argv[1] + 0);
+
+    $res = $mysql->query('SELECT id, code FROM exakat_files WHERE id = '.$exakat['id']);
+    if (!$res) { 
+        print "No id {$exakat['id']} to process; Stopping\n";
+        die();
+    }
+    
+    $exakat = $res->fetch_array();
+    $exakat['id'] = $argv[1] + 0;
+
+    $mysql->query('UPDATE exakat_files SET started=NOW() WHERE id = "'.$exakat['id'].'";');
+} else {
+    $res = $mysql->query('SELECT id, code FROM exakat_files WHERE started IS NULL;');
+    if (!$res) { 
+        print "No files to process; Stopping\n";
+        die();
+    }
+
+    // Warning : Race condition ! 
+    $exakat = $res->fetch_array();
+    $mysql->query('UPDATE exakat_files SET started=NOW() WHERE id = "'.$exakat['id'].'";');
+}
+
+print "Running test {$exakat['id']}\n";
+$file = tempnam('/tmp/', 'exakat');
+file_put_contents($file, $exakat['code']);
+$project = 'default'; // move it ot web
+
+$progress = 1;
+$total_steps = 9 / 100; // number of usage of logProgress - 1
+logProgress($project, $progress++ / $total_steps);
+
+shell_exec('sh scripts/clean.sh'); // or php bin/delete
+logProgress($project, $progress++ / $total_steps);
+
+shell_exec('php bin/load -q -f '.$file.' -p default');
+logProgress($project, $progress++ / $total_steps);
+print "File loaded\n";
+
+$res = shell_exec('php bin/build_root; php bin/tokenizer -p '.$project.'');
+if (strpos('javax.script.ScriptException', $res) !== false) {
+    file_put_contents('log/tokenizer_error.log', $res);
+    die();
+}
+print "Project tokenized\n";
+
+shell_exec('php bin/fullcode -p '.$project.'');
+logProgress($project, $progress++ / $total_steps);
+print "Project fullcoded\n";
+
+shell_exec('php bin/analyze -P Web ');
+logProgress($project, $progress++ / $total_steps);
+print "Project analyzed\n";
+
+$report = tempnam('/tmp/', 'exakat');
+shell_exec('php bin/report_web '.$project.' -f '.$report.' -web');
+logProgress($project, $progress++ / $total_steps);
+
+print "Project reported\n";
+$mysql->query('UPDATE exakat_files SET `finished` = now(), `result` = "'.$mysql->escape_string(file_get_contents($report.'.php')).'" WHERE id = '.$exakat['id']);
+print $mysql->error;
+//unlink($file);
+//unlink($report.'.php');
+
+function logProgress($project, $percent) {
+    return true;
+    file_put_contents("./projects/$project/progress.log", $percent);
+
+    $mid = mysqli_connect('localhost', 'wordpress', 'wordpress', 'wordpress');
+    mysqli_query($mid, "UPDATE exakat_projects SET progress = $percent WHERE name='$project'");
+    print mysqli_error($mid);
+}
+?>
