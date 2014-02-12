@@ -13,6 +13,7 @@ if ($c = preg_match_all('/project(\S*)/', $r, $R)) {
 }
 print "\n\n";
 
+// checking fullcode.log
 $errors = array();
 $Class_tmp = array();
 $files = glob('projects/*/log/fullcode.log');
@@ -54,7 +55,7 @@ $res = shell_exec('cd tests/analyzer/; php list.php');
 preg_match_all('/\s(\w*)\s*(\d+)/is', $res, $R);
 print array_sum($R[2])." total analyzer tests\n";
 
-if (preg_match_all('/\s(\w*)\s*0/is', $res, $R)) {
+if (preg_match_all('/\s([\w\/]*)\s*0/is', $res, $R)) {
     print count($R[1])." total analyzer without tests\n";
     print "  + ".join("\n  + ", $R[1])."\n\n";
 } else {
@@ -62,27 +63,71 @@ if (preg_match_all('/\s(\w*)\s*0/is', $res, $R)) {
 }
 
 
-$tokens = array();
+// checking fullcode.log
+
+$tokens = 0;
 $indexed = array();
+$next = array();
 $files = glob('projects/*/log/stat.log');
 foreach($files as $file) {
-    $log = file($file);
-    $R = preg_grep('/Left token	(\d+)$/', $log);
-    $last = substr(array_pop($R), 11) + 0 ;
-    
-    if ($last != 0) {
-        $errors[] = $file." ($last)";
+    $log = file_get_contents($file);
+    if (preg_match('/INDEXED_count : (\d+)/', $log, $R) && $R[1] != 0) {
+        $indexed[] = $file." ({$R[0]})";
     }
-    
-    // spot Class_tmp
-    $R = preg_grep('/Class_tmp	(\d+)$/', $log);
-    $last = substr(array_pop($R), 10) + 0 ;
-    
-    if ($last != 0) {
-        $Class_tmp[] = $file." ($last)";
+
+    if (preg_match('/NEXT_count : (\d+)/', $log, $R) && $R[1] != 0) {
+        $next[] = $file." ({$R[0]})";
+    }
+
+    if (preg_match('/tokens_count : (\d+)/', $log, $R) && $R[1] != 0) {
+        $tokens += $R[1];
     }
 }
 
+if ($indexed) {
+    print count($indexed)." stat.log have INDEXED\n";
+    print "  + ".join("\n  + ", $indexed)."\n\n";
+} else {
+    print "All ".count($files)." stat.log are free of INDEXED\n";
+}
 
+if ($next) {
+    print count($next)." stat.log have NEXT\n";
+    print "  + ".join("\n  + ", $next)."\n\n";
+} else {
+    print "All ".count($files)." stat.log are free of NEXT\n";
+}
+
+print count($files)." projects collecting ".number_format($tokens,0)." tokens\n";
+
+$files = glob('projects/*/');
+$sqlite_md = array();
+$report_md = array();
+foreach($files as $file) {
+    if ($file == 'projects/default/') { continue; }
+    if ($file == 'projects/tests/') { continue; }
+    
+    if (!file_exists($file.'report.md')) {
+        $report_md[] = $file;
+    }
+
+    if (!file_exists($file.'report.sqlite')) {
+        $sqlite_md[] = $file;
+    }
+}
+
+if ($report_md) {
+    print count($report_md)." projects are missing markdown export\n";
+    print "  + ".join("\n  + ", $report_md)."\n\n";
+} else {
+    print "All ".count($report_md)." projects have the markdown export\n";
+}
+
+if ($sqlite_md) {
+    print count($sqlite_md)." projects are missing sqlite export\n";
+    print "  + ".join("\n  + ", $sqlite_md)."\n\n";
+} else {
+    print "All ".count($files)." projects have the sqlite export\n";
+}
 
 ?>
