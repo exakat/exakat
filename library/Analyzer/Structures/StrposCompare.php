@@ -5,7 +5,8 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class StrposCompare extends Analyzer\Analyzer {
-    static public $operator = array('strpos', 'stripos', 'strrpos', 'strripos');
+    static public $operator = array('strpos', 'stripos', 'strrpos', 'strripos', 
+                                    'strstr', 'stristr', );
     
     public function analyze() {
         // if (.. == strpos(..)) {}
