@@ -51,9 +51,12 @@ if ($Class_tmp) {
     print "All ".count($files)." fullcode.log are free of Class_tmp\n";
 }
 
-$res = shell_exec('cd tests/analyzer/; php list.php');
+$res = shell_exec('cd tests/analyzer/; php list.php -0');
+preg_match('/Total : (\d+) tests/is', $res, $R);
+$total_UT = $R[1];
+print $total_UT." total analyzer tests\n";
+
 preg_match_all('/\s(\w*)\s*(\d+)/is', $res, $R);
-print array_sum($R[2])." total analyzer tests\n";
 
 if (preg_match_all('/\s([\w\/]*)\s*0/is', $res, $R)) {
     print count($R[1])." total analyzer without tests\n";
@@ -62,6 +65,33 @@ if (preg_match_all('/\s([\w\/]*)\s*0/is', $res, $R)) {
     print "All analyzers have tests\n";
 }
 
+if (!file_exists('tests/analyzer/phpunit.txt')) {
+    print "No recent unit test on Analyzers! Please, run php scripts/phpunit.php\n";
+} elseif (time() - filemtime('tests/analyzer/phpunit.txt') > 86400) {
+    print "Phpunit test is more than a day! Please, run php scripts/phpunit.php\n";
+} else {
+    $results = file_get_contents('tests/analyzer/phpunit.txt');
+    
+
+    if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+)\./is', $results, $R)) {
+        print "There were {$R[3]} failures! Check the tests! \n";
+        preg_match_all('/\d+\) Test\\\\(\w+)::/is', $results, $R2);
+        print "  + ".join("\n  + ", $R2[1])."\n\n";
+        
+        if ($R[1] != $total_UT) {
+            print "Not all the tests were run! Only {$R[1]} out of $total_UT. Please, run php scripts/phpunit.php\n";
+        } else {
+            print "All tests where recently run and OK\n";
+        }
+    } elseif (preg_match('/OK \((\d+) test, (\d+) assertions\)/is', $results, $R)) {
+        if ($R[1] != $total_UT) {
+            print "Not all the tests were run! Only {$R[1]} out of $total_UT. Please, run php scripts/phpunit.php\n";
+        } else {
+            print "All tests where recently run and OK\n";
+        }
+    }
+}
+print "\n";
 
 // checking fullcode.log
 
