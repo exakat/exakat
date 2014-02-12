@@ -60,6 +60,10 @@ if ($id = array_search('-json', $args)) {
     define('FORMAT', 'HTML');
     unset($args[$id]);
     $args = array_values($args);
+} elseif ($id = array_search('-web', $args)) {
+    define('FORMAT', 'WEB');
+    unset($args[$id]);
+    $args = array_values($args);
 } else {
     define('FORMAT', 'TEXT');
 }
@@ -88,7 +92,7 @@ if ($id = array_search('-D', $args)) {
     define('STYLE', 'ALL');
 }
 
-if (FORMAT == 'SQLITE') {
+if (FORMAT == 'SQLITE' || FORMAT == 'WEB') {
     $report = new Report\Sqlite(null);
 } else {
     $report = new Report\Report($client);
@@ -130,10 +134,11 @@ $analyzes = array('Structures\\StrposCompare',
                   'Structures\\ForeachSourceNotVariable',
                   'Variables\\VariableUsedOnce',
                   'Variables\\VariableNonAscii',
-                  'Variables\\EvalUsage',
-                  'Variables\\OnceUsage',
-                  'Variables\\VardumpUsage',
-                  'Variables\\PhpinfoUsage',
+                  'Structures\\EvalUsage',
+                  'Structures\\OnceUsage',
+                  'Structures\\VardumpUsage',
+                  'Structures\\PhpinfoUsage',
+                  'Classes\\NonPpp',
 
                   'Structures\\NotNot',
                   'Structures\\Noscream',
@@ -287,6 +292,9 @@ if (FORMAT == 'TEXT') {
     $text = $report->toJson();
 } elseif (FORMAT == 'SQLITE') {
     $text = $report->toArray();
+} elseif (FORMAT == 'WEB') {
+    $text = $report->toArray();
+    print_r($text);die();
 } elseif (FORMAT == 'CSV') {
     $text = array(array('Code', 'File', 'Namespace', 'Class', 'Function'));
     foreach($return as $k => $v) {
