@@ -620,8 +620,9 @@ GREMLIN;
         if (is_array($edge_name)) {
             // @todo
             die(" I don't understand arrays in out()");
+            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.outV.count() == 0}", $edge_name);
         } else {
-            $this->methods[] = 'filter{ it.in("'.$edge_name.'").count() != 0}';
+            $this->addMethod("filter{ it.in(***).count() != 0}", $edge_name);
         }
         
         return $this;
@@ -631,13 +632,37 @@ GREMLIN;
         if (is_array($edge_name)) {
             // @todo
             die(" I don't understand arrays in out() ".__METHOD__);
+            $this->addMethod("filter{ it.inE.filter{ !(it.label in ***)}.outV.count() == 0}", $edge_name);
         } else {
-            $this->methods[] = 'filter{ it.in("'.$edge_name.'").count() == 0}';
+            $this->addMethod("filter{ it.in(***).count() == 0}", $edge_name);
+        }
+        
+        return $this;
+    }
+
+    function hasOut($edge_name) {
+        if (is_array($edge_name)) {
+            // @todo
+            die(" I don't understand arrays in out()");
+            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.count() == 0}", $edge_name);
+        } else {
+            $this->addMethod("filter{ it.out(***).count() != 0}", $edge_name);
         }
         
         return $this;
     }
     
+    function hasNoOut($edge_name) {
+        if (is_array($edge_name)) {
+            // @todo
+            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.count() == 0}", $edge_name);
+        } else {
+            $this->addMethod("filter{ it.out(***).count() == 0}", $edge_name);
+        }
+        
+        return $this;
+    }
+        
     function hasParent($parent_class, $ins = array()) {
         if (empty($ins)) {
             $in = '.in';
@@ -815,6 +840,21 @@ GREMLIN;
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
                 $report[] = $v[0]->fullcode;
+            }   
+        } 
+        
+        return $report;
+    }
+
+    function toFullArray() {
+        $analyzer = str_replace('\\', '\\\\', get_class($this));
+        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out"; 
+        $vertices = $this->query($queryTemplate);
+
+        $report = array();
+        if (count($vertices) > 0) {
+            foreach($vertices as $v) {
+                $report[] = array($v[0]->fullcode, $v[0]->line);
             }   
         } 
         
