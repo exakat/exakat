@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($argv[1])) {
-    print "Usage : report_md <project_name>\n";
+    print "Usage : report_sqlite <project_name>\n";
     die();
 }
 
