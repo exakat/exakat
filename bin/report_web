@@ -1,0 +1,285 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token,
+	Michelf\MarkdownExtra,
+	Report\Liste,
+	Report\HashTable;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$client = new Client();
+$mysqli = new \mysqli('localhost', 'root', '', 'exakat');
+
+$args = $argv;
+if (!isset($args[1])) {
+    $project = 'default';
+} else {
+    $project = $args[1];
+}
+if (!file_exists('./projects/'.$project.'/config.ini')) {
+    print "No such project as '$project'. Aborting\n";
+    die();
+}
+$config = parse_ini_file('./projects/'.$project.'/config.ini');
+
+if ($id = array_search('-json', $args)) {
+    define('FORMAT', 'JSON');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-text', $args)) {
+    define('FORMAT', 'TEXT');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-sqlite', $args)) {
+    define('FORMAT', 'SQLITE');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-odt', $args)) {
+    define('FORMAT', 'ODT');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-markdown', $args)) {
+    define('FORMAT', 'MARKDOWN');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-pdf', $args)) {
+    define('FORMAT', 'PDF');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-csv', $args)) {
+    define('FORMAT', 'CSV');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-html', $args)) {
+    define('FORMAT', 'HTML');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-web', $args)) {
+    define('FORMAT', 'WEB');
+    unset($args[$id]);
+    $args = array_values($args);
+} else {
+    define('FORMAT', 'TEXT');
+}
+
+if ($id = array_search('-o', $args)) {
+    define('OUTPUT', true);
+} else {
+    define('OUTPUT', false);
+}
+
+if ($id = array_search('-f', $args)) {
+    define('FILE', $args[$id + 1]);
+} else {
+    define('FILE', false);
+}
+
+if ($id = array_search('-D', $args)) {
+    define('STYLE', 'DISTINCT');
+} elseif ($id = array_search('-C', $args)) {
+    define('STYLE', 'COUNTED_ALL');
+} elseif ($id = array_search('-B', $args)) {
+    define('STYLE', 'BOOLEAN');
+} elseif ($id = array_search('-G', $args)) {
+    define('STYLE', 'COUNTED');
+} else {
+    define('STYLE', 'ALL');
+}
+
+if (FORMAT == 'SQLITE' || FORMAT == 'WEB') {
+    $report = new Report\Sqlite(null);
+} else {
+    $report = new Report\Report($client);
+}
+$report->addContent('Text', 'Audit report for application');
+
+$report->createH1('Report presentation');
+
+$report->createH2('Report synopsis'); 
+$report->addContent('Text', 'Presentation of the report process');
+
+$report->createH2('Report configuration'); 
+$ReportInfo = new Report\ReportInfo($project);
+$ReportInfo->setNeo4j($client);
+$ReportInfo->setMySQL($mysqli);
+$ReportInfo->collect();
+
+$report->addContent('HashTable', $ReportInfo->toArray()); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+
+/*
+$report->createH2('Analyser list'); 
+$AnalyzerList = new Report\AnalyzerList($project);
+$report->addContent('Liste', $AnalyzerList->toArray()); 
+*/
+
+/*
+human review of the audit, and 3 paragraph explation + table with priorities
+$report->createH2('Executive summary');
+$report->addContent('Text');
+*/
+
+$no_output = array();
+
+///// Application analyzes 
+$analyzes = array('Structures\\StrposCompare', 
+                  'Structures\\Iffectation',
+                  'Structures\\ErrorReportingWithInteger',
+                  'Structures\\ForWithFunctioncall',
+                  'Structures\\ForeachSourceNotVariable',
+                  'Variables\\VariableUsedOnce',
+                  'Variables\\VariableNonAscii',
+                  'Structures\\EvalUsage',
+                  'Structures\\OnceUsage',
+                  'Structures\\VardumpUsage',
+                  'Structures\\PhpinfoUsage',
+                  'Classes\\NonPPP',
+
+                  'Structures\\NotNot',
+                  'Structures\\Noscream',
+                  'Structures\\toStringThrowsException',
+                  'Structures\\CalltimePassByReference',
+                  'Structures\\Break0',
+                  'Structures\\BreakNonInteger',
+                  );
+
+foreach($analyzes as $id => $a) {
+    if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
+        print "Ignoring $a\n";
+        unset($analyzes[$id]);
+    }
+}
+
+$report = array();
+if (count($analyzes) > 0) {
+    $h1 = false;
+    foreach($analyzes as $a) {
+        $a = "Analyzer\\$a";
+        $analyzer = new $a($client); 
+        $results = $analyzer->toFullArray();
+        if (count($results)) {
+            $report[$analyzer->getName()] = $results;
+        }
+    }
+}
+
+if (FORMAT == 'TEXT') {
+    $text = $report->toText();
+} elseif (FORMAT == 'JSON') {
+    $text = $report->toJson();
+} elseif (FORMAT == 'SQLITE') {
+    $text = $report->toArray();
+} elseif (FORMAT == 'WEB') {
+    $text = $report;
+} elseif (FORMAT == 'CSV') {
+    $text = array(array('Code', 'File', 'Namespace', 'Class', 'Function'));
+    foreach($return as $k => $v) {
+        if (is_array($v)) {
+            $text[] = $v;
+        } else {
+            $text[] = array($k, $v);
+        }
+    }
+} elseif (FORMAT == 'MARKDOWN' || FORMAT == 'HTML' || FORMAT == 'ODT' || FORMAT == 'PDF') {
+    $text = $report->toMarkdown();
+} else {
+    $text = $report->toText();
+    print $text;
+}
+
+if (FORMAT == 'ODT') {
+    $text = MarkdownExtra::defaultTransform($text);
+} elseif (FORMAT == 'WEB') {
+    $text = '<?php $report = '.var_export($text, true).'; ?'.">";
+} elseif ( FORMAT == 'HTML' || FORMAT == 'PDF') {
+    $text = MarkdownExtra::defaultTransform($text);
+    
+    $text = <<<HTML
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+    <head>
+        <title>Application report for $project</title>
+        <link rel="stylesheet" href="media/hartija.css" type="text/css" media="print" charset="utf-8">
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	</head>
+
+    <body>
+$text
+    </body>
+</html>
+HTML;
+}
+
+if (OUTPUT) {
+    print $text;
+}
+
+$extensions = array('JSON' => 'json',
+                    'HTML' => 'html',
+                    'MARKDOWN' => 'md',
+                    'ODT' => 'odt',
+                    'PDF' => 'pdf',
+                    'TEXT' => 'txt',
+                    'WEB' => 'php',
+                    'SQLITE' => 'sqlite',
+                    'CSV' => 'csv');
+
+if (FILE) {
+    $name = FILE.'.'.$extensions[FORMAT];
+    if (file_exists($name)) {
+        print "$name already exists. Aborting\n";
+        die();
+    }
+
+    if (FORMAT == 'ODT') {
+        $name1 = FILE.'.tmp.'.$extensions['HTML'];
+        file_put_contents($name1, $text);
+
+        $name = FILE.'.'.$extensions[FORMAT];
+        shell_exec('pandoc -o '.$name.' '.$name1);
+        unlink($name1);
+    } elseif (FORMAT == 'PDF') {
+        $name1 = FILE.'.tmp.'.$extensions['HTML'];
+        file_put_contents($name1, $text);
+
+        $name = FILE.'.'.$extensions[FORMAT];
+        shell_exec('wkhtmltopdf '.$name1.' '.$name);
+        unlink($name1);
+    } elseif (FORMAT == 'CSV') {
+        $fp = fopen($name, 'w');
+        foreach($text as $t) {
+            fputcsv($fp, $t);
+        }
+        fclose($fp);
+    } elseif (FORMAT == 'SQLITE') {
+        $db = new SQLite3($name);
+
+        $results = $db->query('CREATE TABLE reports (id INTEGER PRIMARY KEY AUTOINCREMENT, analyzer TEXT, value TEXT, count INT)');
+        print $db->lastErrorMsg();
+        foreach($text as $t) {
+            foreach($t as $k => $v) {
+                $t[$k] = $db->escapeString($v);
+            }
+            $db->query("INSERT INTO reports (analyzer, value, count) VALUES ('".join("', '", $t)."')");
+        }
+    } elseif (FORMAT == 'HTML') {
+        file_put_contents($name, $text);
+        
+        if (!file_exists( dirname($name).'/media')) {
+            mkdir(dirname($name).'/media', 0755);
+        }
+        copy('media/hartija.css', dirname($name).'/media/hartija.css');
+    } else {
+        file_put_contents($name, $text);
+    }
+}
+
+?>
