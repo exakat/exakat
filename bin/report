@@ -125,6 +125,7 @@ $report->addContent('Text');
 */
 
 $no_output = array();
+$incompatible = array();
 
 ///// Application analyzes 
 $analyzes = array('Structures\\StrposCompare', 
@@ -158,7 +159,12 @@ if (count($analyzes) > 0) {
     $h1 = false;
     foreach($analyzes as $a) {
         $a = "Analyzer\\$a";
-        $analyzer = new $a($client); 
+        $analyzer = new $a($client);
+        
+        if (!$analyzer->checkPhpVersion('5.3.26')) {
+            $incompatible[] = $analyzer->getName();
+            continue; 
+        }
         $results = $analyzer->toArray();
         
         if (empty($results)) {
@@ -279,6 +285,17 @@ if (count($no_output) > 0) {
 
        $report->addContent('Text', "The following analyzers were also used, but yielded no feedback.");
        $ht = $report->addContent('Liste', $no_output);
+       if (!is_null($ht)) {
+           $ht->setSummary(true);
+           $ht->setSort(HashTable::SORT_KEY);
+        }
+}
+
+if (count($incompatible) > 0) {
+    $report->createH1('Incompatible analyzers'); // le last analyzers
+
+       $report->addContent('Text', "The following analyzers were requested, but cannot be run as they are not compatible with the requested PHP version.");
+       $ht = $report->addContent('Liste', $incompatible);
        if (!is_null($ht)) {
            $ht->setSummary(true);
            $ht->setSort(HashTable::SORT_KEY);
