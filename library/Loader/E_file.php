@@ -38,7 +38,7 @@ class E_file {
         return true;
     }
     
-    function process($token) {
+    function process($token, $token_name) {
         return true;
     }
 }

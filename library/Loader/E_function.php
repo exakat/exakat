@@ -43,7 +43,7 @@ class E_function {
         return true;
     }
     
-    function process($token) {
+    function process($token, $token_name) {
         if ($this->getNext && $token == '(') { // anonymous function... Ignore.
             $this->getNext = false;
         } elseif ($this->getNext && $token != '&') {
@@ -61,7 +61,7 @@ class E_function {
             
             $this->curly_first = $this->curly_count;
             $this->getNext = false;
-        } elseif (is_array($token) && token_name($token[0]) == 'T_FUNCTION') {
+        } elseif (is_array($token) && $token_name == 'T_FUNCTION') {
             $this->getNext = true;
         } elseif (is_string($token) && $token == '{') {
             $this->curly_count++;

@@ -43,7 +43,7 @@ class E_class {
         return true;
     }
     
-    function process($token) {
+    function process($token, $token_name) {
         if ($this->getNext) {
             $this->global = $this->node;
             
@@ -58,7 +58,7 @@ class E_class {
             
             $this->curly_first = $this->curly_count;
             $this->getNext = false;
-        } elseif (is_array($token) && token_name($token[0]) == 'T_CLASS') {
+        } elseif (is_array($token) && ($token_name == 'T_CLASS')) {
             $this->getNext = true;
         } elseif (is_string($token) && $token == '{') {
             $this->curly_count++;

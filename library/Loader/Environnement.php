@@ -41,11 +41,11 @@ class Environnement {
         return true;
     }
     
-    function process($token) {
-        $this->classes->process($token);
-        $this->files->process($token);
-        $this->functions->process($token);
-        $this->namespaces->process($token);
+    function process($token, $token_name) {
+        $this->classes->process($token, $token_name);
+        $this->files->process($token, $token_name);
+        $this->functions->process($token, $token_name);
+        $this->namespaces->process($token, $token_name);
         
         return true;
     }
