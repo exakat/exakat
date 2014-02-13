@@ -128,6 +128,9 @@ if (file_exists('classes.php')) {
     file_put_contents('classes.php', '<?php '."\n".'$classes = '.var_export($classes, true).'; ?>');
 }
 
+$log = new Log('tokenizer');
+$log->log( "Starting time : ".date('r'));
+
 $client = new Client();
 
 $regex = array();
@@ -143,6 +146,8 @@ foreach($classes as $class) {
 //        print "No $class to process\n";
     }
 }
+
+$log->log( "Finished loading classes");
 
 $server_stat = new Stats($client);
 $server_stat->collect();
@@ -161,7 +166,6 @@ for($i = 0; $i < $extra_rounds + 1; $i++) {
 $round = 0;
 $cost = 0;
 
-$log = new Log('tokenizer');
 
 $wbegin = microtime(true);
 $regex_time = 0;
