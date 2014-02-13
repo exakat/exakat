@@ -25,6 +25,8 @@ class Analyzer {
     
     static $analyzers = array();
 
+    protected $phpversion = "Any";
+
     public function __construct($client) {
         $this->client = $client;
         $this->analyzerIsNot(get_class($this));
@@ -199,6 +201,41 @@ g.V.has('token', 'E_FILE')[0].each{     g.addEdge(it, x, 'FILE'); }
 GREMLIN;
             $this->query($query);
         }
+    }
+    
+    public function checkPhpVersion($version) {
+        // this handles Any version of PHP
+        if ($this->phpversion == 'Any') {
+            return true;
+        }
+
+        // version and above 
+        if ((substr($this->phpversion, -1) == '+') && version_compare($version, $this->phpversion) >= 0) {
+            return true;
+        } 
+
+        // up to version  
+        if ((substr($this->phpversion, -1) == '-') && version_compare($version, $this->phpversion) <= 0) {
+            return true;
+        } 
+
+        // version range 1.2.3-4.5.6
+        if (strpos($this->phpversion, '-') !== false) {
+            list($lower, $upper) = explode('-', $this->phpversion);
+            if (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } 
+        
+        // One version only
+        if (version_compare($version, $this->phpversion) == 0) {
+            return true;
+        } 
+        
+        // Default behavior if we don't understand : 
+        return false;
     }
 
     // @doc return the list of dependences that must be prepared before the execution of an analyzer
