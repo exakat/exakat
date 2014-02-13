@@ -15,7 +15,7 @@ $log = new Log('fullcode');
 $client = new Client();
 
 $offset = 0000;
-$limit = 900000;
+$limit = 1100000;
 $end = $offset + $limit;
 
 print "Work on $limit tokens\n";
