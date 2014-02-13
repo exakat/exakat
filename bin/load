@@ -46,6 +46,18 @@ if ($id = array_search('-p', $args)) {
     $project = 'default';
 }
 
+if (!file_exists('./projects/'.$project.'/config.ini')) {
+    print "No such project as '$project'. Aborting\n";
+    die();
+}
+
+$config = parse_ini_file('./projects/'.$project.'/config.ini');
+if (isset($config['phpversion'])) {
+    $Php = new Phpexec($config['phpversion']);
+} else {
+    $Php = new Phpexec(phpversion());
+}
+
 if ($id = array_search('-f', $args)) {
     $filename = $args[$id + 1];
     
@@ -103,13 +115,15 @@ function process_file($filename, $log_file) {
         die();
     }
 
-    global $_PILOT;
+    global $_PILOT, $Php;
     $client = new $_PILOT();
 
     $file = realpath($filename);
+    if (filesize($filename) == 0) {
+        return false;
+    }
 
-    $shell = shell_exec('php -l '.$filename.' 2>&1');
-    if (trim($shell) != 'No syntax errors detected in '.$filename) {
+    if (!$Php->compile($filename)) {
         $environnement = new Environnement($client, $file); 
         $environnement->initFile();
         
@@ -117,17 +131,9 @@ function process_file($filename, $log_file) {
         return false;
     }
     
-    if (filesize($filename) == 0) {
-        return false;
-    }
-    
-    shell_exec('php -r "print \'<?php \\$tokens = \'; var_export(token_get_all(file_get_contents(\''.$filename.'\'))); print \'; ?>\';" > tokens.php');
-    include('tokens.php');
-    unlink('tokens.php');
-
+    $tokens = $Php->getTokenFromFile($filename);
     $log['token_initial'] = count($tokens);
     
-
     // @doc delete old tokens
     // This index should be only created once. It will hold all the index for files.
     $regexIndex['FILE'] = $client->makeNode()->setProperty('token', 'FILE')
@@ -168,39 +174,6 @@ function process_file($filename, $log_file) {
 
     // load new tokens
     $line = 0;
-    $TPHP = array(";" => 'T_SEMICOLON',
-                  "=" => 'T_EQUAL',
-                  "+" => 'T_PLUS',
-                  "-" => 'T_MINUS',
-                  "*" => 'T_STAR',
-                  "/" => 'T_SLASH',
-                  "%" => 'T_PERCENTAGE',
-                  "(" => 'T_OPEN_PARENTHESIS',
-                  ")" => 'T_CLOSE_PARENTHESIS',
-                  "!" => 'T_BANG',
-                  "[" => 'T_OPEN_BRACKET',
-                  "]" => 'T_CLOSE_BRACKET',
-                  "{" => 'T_OPEN_CURLY',
-                  "}" => 'T_CLOSE_CURLY',
-                  '.' => 'T_DOT',
-                  ',' => 'T_COMMA',
-                  '@' => 'T_AT',
-                  '?' => 'T_QUESTION',
-                  ':' => 'T_COLON',
-                  '>' => 'T_GREATER',
-                  '<' => 'T_SMALLER',
-                  '&' => 'T_AND',
-                  '^' => 'T_OR',
-                  '|' => 'T_XOR',
-                  '&&' => 'T_ANDAND',
-                  '||' => 'T_OROR',
-                  '"' => 'T_QUOTE',
-                  '"_CLOSE' => 'T_QUOTE_CLOSE',
-                  '$' => 'T_DOLLAR',
-                  '`' => 'T_SHELL_QUOTE',
-                  '`_CLOSE' => 'T_SHELL_QUOTE_CLOSE',
-                  '~' => 'T_TILDE',
-                  );
     
     $atoms = array( 'T_STRING'                   => 'Identifier', 
                     'T_CONSTANT_ENCAPSED_STRING' => 'String', 
@@ -221,11 +194,10 @@ function process_file($filename, $log_file) {
                     );
             
     
-    $count = array();
+    $delimitedStrings = array('T_QUOTE' => 0, 'T_SHELL_QUOTE' => 0);
+    $whiteCode = $Php->getWhiteCode();
     foreach($tokens as $id => $token) {
-        if ($token[0] == T_WHITESPACE)  { unset($tokens[$id]); }
-        if ($token[0] == T_COMMENT)     { unset($tokens[$id]); }
-        if ($token[0] == T_DOC_COMMENT) { unset($tokens[$id]); }
+        if (isset($whiteCode[$token[0]])) { unset($tokens[$id]); }
     }
     $tokens = array_values($tokens);
     $log['token_cleaned'] = count($tokens);
@@ -235,17 +207,15 @@ function process_file($filename, $log_file) {
     $root = 0;
     $in_quote = false;
     for($id = 0; $id < $nb; $id++) {
-        if (empty($tokens[$id])) { 
-            continue; 
-        }
+        if (empty($tokens[$id])) { continue; }
         $Tid++;
         $token = $tokens[$id];
         $to_index = true;
         
-        $classNode->process($token);
         if (is_array($token)) {
-            if (token_name($token[0]) == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
+            $classNode->process($token, $Php->getTokenname($token[0]));
+            if ($Php->getTokenname($token[0]) == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])->save();
                 $classNode->relateTo($T[$Tid]);
@@ -263,8 +233,8 @@ function process_file($filename, $log_file) {
                                               ->save();
 
                 $to_index = false;
-            } elseif (token_name($token[0]) == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
-                $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
+            } elseif ($Php->getTokenname($token[0]) == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])
                                               ->save();
@@ -285,7 +255,7 @@ function process_file($filename, $log_file) {
                                               ->save();
 
                 $to_index = false;
-            } elseif (token_name($token[0]) == 'T_OPEN_TAG_WITH_ECHO') {
+            } elseif ($Php->getTokenname($token[0]) == 'T_OPEN_TAG_WITH_ECHO') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_OPEN_TAG')
                                               ->setProperty('code', str_replace('<?=', '<?php', $token[1]))
                                               ->setProperty('line', $token[2])
@@ -305,7 +275,10 @@ function process_file($filename, $log_file) {
                 $regexIndex["ArgumentsNoParenthesis"]->relateTo($T[$Tid], 'INDEXED')->save();
                 $regexIndex["Functioncall"]->relateTo($T[$Tid], 'INDEXED')->save();
 
-            } elseif (token_name($token[0]) == 'T_CLOSE_TAG' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  && token_name($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
+            } elseif ($Php->getTokenname($token[0]) == 'T_CLOSE_TAG' && 
+                      isset($tokens[$id + 1]) && 
+                      is_array($tokens[$id + 1]) && 
+                      $Php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
                 $Tid++;
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
@@ -316,7 +289,7 @@ function process_file($filename, $log_file) {
 
                 $id++;
             } else {
-                $T[$Tid] = $client->makeNode()->setProperty('token', token_name($token[0]))
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2]);
             }
@@ -330,40 +303,37 @@ function process_file($filename, $log_file) {
             $T[$Tid]->save();
             $classNode->relateTo($T[$Tid]);
             
-            if (token_name($token[0]) == 'T_STRING' && (strtolower($token[1]) == 'true' || strtolower($token[1]) == 'false')) {
+            if ($Php->getTokenname($token[0]) == 'T_STRING' && (strtolower($token[1]) == 'true' || strtolower($token[1]) == 'false')) {
                 $T[$Tid]->setProperty('atom', 'Boolean')->save();
                 $to_index = false;
-            } elseif (isset($atoms[token_name($token[0])])) {
-                if (token_name($token[0]) == 'T_STRING') {
-                    $T[$Tid]->setProperty('atom', $atoms[token_name($token[0])])->save();
+            } elseif (isset($atoms[$Php->getTokenname($token[0])])) {
+                if ($Php->getTokenname($token[0]) == 'T_STRING') {
+                    $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])->save();
                 } else {
-                    $T[$Tid]->setProperty('atom', $atoms[token_name($token[0])])->save();
+                    $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])->save();
                 }
             }
 
-            $token_value = token_name($token[0]);
+            $token_value = $Php->getTokenname($token[0]);
             if ($token_value == 'T_OPEN_CURLY') {
                 $token_value = 'T_CURLY_OPEN';
             }
 
             $line = $token[2];
         } else {
-            if (!isset($TPHP[$token])) {
-                print("No TPHP for '{$token}'\n");
-                $TPHP[$token] = max($TPHP) + 1;
-            }
-
-            $token_value = $TPHP[$token];
-            if (in_array($TPHP[$token], array('T_QUOTE', 'T_SHELL_QUOTE'))) {
-                @$count[$TPHP[$token]]++;
-                if ($count[$TPHP[$token]] % 2 == 0) {
+            $token_value = $Php->getTokenname($token);
+            $classNode->process($token, $token_value);
+            
+            if (in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE'))) {
+                $delimitedStrings[$token_value]++;
+                if ($delimitedStrings[$token_value] % 2 == 0) {
                     $token .= '_CLOSE';
                     $token_value .= '_CLOSE';
                 }
             }
             
             if ($token == '{' && $tokens[$id + 1] == '}') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Block')
@@ -381,12 +351,12 @@ function process_file($filename, $log_file) {
 
                 $T[$Tid]->relateTo($void, 'CODE')->save();
 
-                $classNode->process($tokens[$id + 1]);
+                $classNode->process($tokens[$id + 1], $Php->getTokenName($tokens[$id + 1]));
                 unset($tokens[$id + 1]);
                 $to_index = false;
             } elseif ($token == ':' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  
-                      && in_array(token_name($tokens[$id + 1][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                      && in_array($Php->getTokenname($tokens[$id + 1][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->save();
@@ -406,8 +376,8 @@ function process_file($filename, $log_file) {
                       && isset($tokens[$id + 1]) && is_string($tokens[$id + 1])  
                       && $tokens[$id + 1] == ';'
                       && isset($tokens[$id + 2]) && is_array($tokens[$id + 2])  
-                      && in_array(token_name($tokens[$id + 2][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                      && in_array($Php->getTokenname($tokens[$id + 2][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->save();
@@ -425,7 +395,7 @@ function process_file($filename, $log_file) {
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
             } elseif ($token == '(' && $tokens[$id + 1] == ')') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->save();
@@ -445,7 +415,7 @@ function process_file($filename, $log_file) {
 
                 $to_index = false;
             } elseif ($token == '{' && $tokens[$id + 1] == ';') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->save();
@@ -466,7 +436,7 @@ function process_file($filename, $log_file) {
 
                 $to_index = false;
             } elseif ($token == '(' && $tokens[$id + 1] == ',') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->save();
@@ -486,7 +456,7 @@ function process_file($filename, $log_file) {
 
                 $to_index = false;
             } elseif ($token == ',' && $tokens[$id + 1] == ')') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->save();
@@ -506,7 +476,7 @@ function process_file($filename, $log_file) {
 
                 $to_index = false;
             } elseif ($token == ',' && $tokens[$id + 1] == ',') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->save();
@@ -527,7 +497,7 @@ function process_file($filename, $log_file) {
 
                 $to_index = false;
             } elseif ($token == '{' && $tokens[$id + 1] == ';' && $tokens[$id + 2] == '}' ) {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Block')
@@ -553,12 +523,12 @@ function process_file($filename, $log_file) {
                 $sequence->relateTo($void, 'CODE')->save();
 
                 unset($tokens[$id + 1]);
-                $classNode->process($tokens[$id + 1]);
+                $classNode->process($tokens[$id + 1], $Php->getTokenName($tokens[$id + 1]));
                 unset($tokens[$id + 2]);
-                $classNode->process($tokens[$id + 2]);
+                $classNode->process($tokens[$id + 2], $Php->getTokenName($tokens[$id + 2]));
                 $to_index = false;
             } else {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $TPHP[$token])
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->save();
