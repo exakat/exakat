@@ -1,5 +1,8 @@
 <?php
 
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
 if (!isset($argv[1])) {
     print "Usage : tokenlist <file>";
 }
@@ -13,18 +16,21 @@ if (!is_readable($file)) {
     print "Usage : tokenlist <file>\n '$file' is not readable.\n\n";
 }
 
-$res = shell_exec('php -l '.$file);
+$Php = new Phpexec('5.4');
+
+$res = shell_exec($Php->getExec().' -l '.$file);
 if (strpos($res, 'No syntax errors') !== 0) {
     print "Usage : tokenlist <file>\n '$file' is not compilable PHP script.\n\n";
 }
 
-$tokens = (token_get_all(file_get_contents($file))); 
-//$tokens = array_slice($tokens, 0, 200);
+$tokens = $Php->getTokenFromFile($file);
+
 foreach($tokens as $id => $token) { 
     if(count($token) == 3) { 
-        echo $id." => ".$token[0]." : ".token_name($token[0])." ({$token[1]})\n"; 
+        echo $id." => ".$token[0]." : ".$Php->getTokenName($token[0])." ({$token[1]})\n"; 
     } else {
         print "$token\n";
     }
 }
+
 ?>
