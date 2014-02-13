@@ -108,22 +108,30 @@ class Appinfo {
         foreach($extensions as $section => $hash) {
             $this->info['--'.$section] = '';
             foreach($hash as $name => $ext) {
+                $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].hasNot('notCompatibleWithPhpVersion', null).count()"; 
+                $vertices = $this->query($this->client, $queryTemplate);
+                $v = $vertices[0][0];
+                if ($v == 1) {
+                    $this->info[$name] = "Incomp.";
+                    continue ;
+                } 
+
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].count()"; 
                 $vertices = $this->query($this->client, $queryTemplate);
-
                 $v = $vertices[0][0];
                 if ($v == 0) {
-                    $this->info[$name] = "NC";
-                } else {
-                    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.any()"; 
-                    try {
-                        $vertices = $this->query($this->client, $queryTemplate);
+                    $this->info[$name] = "Not run";
+                    continue;
+                } 
+
+                $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.any()"; 
+                try {
+                    $vertices = $this->query($this->client, $queryTemplate);
     
-                        $v = $vertices[0][0];
-                        $this->info[$name] = $v == "true" ? "Yes" : "No";
-                    } catch (Exception $e) {
-                        // empty catch ? 
-                    }
+                    $v = $vertices[0][0];
+                    $this->info[$name] = $v == "true" ? "Yes" : "No";
+                } catch (Exception $e) {
+                    // empty catch ? 
                 }
             }
         }
