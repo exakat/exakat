@@ -100,7 +100,7 @@ class _Case extends TokenAuto {
                                               'atom'  => 'none', ), 
                                    3 => array('atom'  => 'yes'), 
                                    4 => array('atom'  => 'yes'), 
-                                   4 => array('filterOut2' => array_merge(array('T_ELSE', 'T_ELSEIF'),
+                                   5 => array('filterOut2' => array_merge(array('T_ELSE', 'T_ELSEIF'),
                                                                         Assignation::$operators, Property::$operators, StaticProperty::$operators,
                                                                         _Array::$operators, Bitshift::$operators, Comparison::$operators, Logical::$operators)),
         );
