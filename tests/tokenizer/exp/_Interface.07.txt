@@ -1,0 +1,120 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    interface
+    Label : CODE
+      {
+      Label : CODE
+        function
+        Label : NAME
+          D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              E
+            Label : VARIABLE
+              $f
+    Label : NAME
+      A
+    Label : EXTENDS
+      ,
+      Label : ARGUMENT
+        I
+      Label : ARGUMENT
+        \
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          C
+      Label : ARGUMENT
+        G
+  Label : ELEMENT
+    interface
+    Label : CODE
+      {
+      Label : CODE
+        function
+        Label : NAME
+          D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              E
+            Label : VARIABLE
+              $f
+    Label : NAME
+      A
+    Label : EXTENDS
+      ,
+      Label : ARGUMENT
+        \
+        Label : ELEMENT
+          I
+        Label : ELEMENT
+          H
+      Label : ARGUMENT
+        \
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          C
+      Label : ARGUMENT
+        G
+  Label : ELEMENT
+    interface
+    Label : CODE
+      {
+      Label : CODE
+        function
+        Label : NAME
+          D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              E
+            Label : VARIABLE
+              $f
+    Label : NAME
+      A
+    Label : EXTENDS
+      \
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        C
+  Label : ELEMENT
+    interface
+    Label : CODE
+      {
+      Label : CODE
+        function
+        Label : NAME
+          D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              E
+            Label : VARIABLE
+              $f
+    Label : NAME
+      A
+    Label : EXTENDS
+      ,
+      Label : ARGUMENT
+        \
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          C
+      Label : ARGUMENT
+        G

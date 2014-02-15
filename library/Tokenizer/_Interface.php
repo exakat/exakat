@@ -22,7 +22,7 @@ class _Interface extends TokenAuto {
                                              'atom' => 'none'),
                                   1 => array('atom' => 'Identifier'),
                                   2 => array('token' => 'T_EXTENDS'),
-                                  3 => array('atom' => array('Arguments', 'Identifier')),
+                                  3 => array('atom' => array('Arguments', 'Identifier', 'Nsname')),
                                   4 => array('atom' => 'Block'),
         );
         
