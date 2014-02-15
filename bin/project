@@ -65,7 +65,7 @@ shell_exec('php bin/fullcode -p '.$project.'');
 logProgress($project, $progress++ / $total_steps);
 print "Project fullcoded\n";
 
-shell_exec('php bin/analyze -p '.$project.' > ./projects/'.$project.'/log/analyze.final.log');
+shell_exec('php bin/analyze -p '.$project.' 2>&1 > ./projects/'.$project.'/log/analyze.final.log');
 logProgress($project, $progress++ / $total_steps);
 print "Project analyzed\n";
 
