@@ -26,6 +26,7 @@ class Analyzer {
     static $analyzers = array();
 
     protected $phpversion = "Any";
+    protected $phpconfiguration = "Any";
 
     public function __construct($client) {
         $this->client = $client;
@@ -201,6 +202,22 @@ g.V.has('token', 'E_FILE')[0].each{     g.addEdge(it, x, 'FILE'); }
 GREMLIN;
             $this->query($query);
         }
+    }
+
+    public function checkPhpConfiguration($Php) {
+        // this handles Any version of PHP
+        if ($this->phpconfiguration == 'Any') {
+            return true;
+        }
+        
+        die(__METHOD__);
+        foreach($this->phpconfiguration as $ini => $value) {
+            if (ini_get($ini) != $value) {
+                return false;
+            }
+        }
+        
+        return false;
     }
     
     public function checkPhpVersion($version) {
@@ -470,7 +487,7 @@ GREMLIN;
     }
 
     function samePropertyAs($property, $name) {
-        $this->methods[] = "filter{ it.$property == $name}";
+        $this->addMethod('filter{ it.'.$property.' == ***}', $name);
 
         return $this;
     }
@@ -661,6 +678,12 @@ GREMLIN;
         } else {
             $this->addMethod("filter{ it.in(***).count() != 0}", $edge_name);
         }
+        
+        return $this;
+    }
+
+    function raw($query) {
+        $this->methods[] = $query;
         
         return $this;
     }
@@ -883,7 +906,7 @@ GREMLIN;
         return $report;
     }
 
-    function toFullArray() {
+    public function toFullArray() {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out"; 
         $vertices = $this->query($queryTemplate);
