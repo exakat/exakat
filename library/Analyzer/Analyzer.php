@@ -487,7 +487,7 @@ GREMLIN;
     }
 
     function samePropertyAs($property, $name) {
-        $this->addMethod('filter{ it.'.$property.' == ***}', $name);
+        $this->addMethod('filter{ it.'.$property.' == '.$name.'}');
 
         return $this;
     }
