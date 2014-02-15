@@ -7,6 +7,6 @@ Label : CODE
     Label : USE
       \
       Label : ELEMENT
-        A
-      Label : ELEMENT
         B
+      Label : ELEMENT
+        A

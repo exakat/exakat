@@ -7,24 +7,24 @@ Label : CODE
     Label : USE
       \
       Label : ELEMENT
+        C
+      Label : ELEMENT
         A
-    Label : AS
-      F
+      Label : ELEMENT
+        B
+      Label : AS
+        D
+  Label : ELEMENT
+    use
+    Label : USE
+      A
+      Label : AS
+        E
   Label : ELEMENT
     use
     Label : USE
       \
       Label : ELEMENT
-        B
-      Label : ELEMENT
         A
-      Label : ELEMENT
-        C
-    Label : AS
-      D
-  Label : ELEMENT
-    use
-    Label : USE
-      A
-    Label : AS
-      E
+      Label : AS
+        F

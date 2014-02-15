@@ -6,3 +6,7 @@ Label : CODE
     use
     Label : USE
       A
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      B

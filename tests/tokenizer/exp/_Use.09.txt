@@ -1,0 +1,66 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    use
+    Label : USE
+      G
+      Label : AS
+        I
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      \
+      Label : ELEMENT
+        A
+      Label : ELEMENT
+        B
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : ELEMENT
+        E
+      Label : AS
+        F
+  Label : ELEMENT
+    use
+    Label : USE
+      B
+    Label : USE
+      A
+    Label : USE
+      \
+      Label : ELEMENT
+        C
+      Label : ELEMENT
+        A
+      Label : ELEMENT
+        B
+      Label : AS
+        D
+  Label : ELEMENT
+    use
+    Label : USE
+      S
+      Label : AS
+        T
+    Label : USE
+      R
+    Label : USE
+      O
+      Label : AS
+        Q
+    Label : USE
+      O
+      Label : AS
+        P
+    Label : USE
+      N
+    Label : USE
+      L
+      Label : AS
+        M
+    Label : USE
+      K
