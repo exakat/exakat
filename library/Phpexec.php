@@ -74,9 +74,10 @@ class Phpexec {
     }
     
     public function getTokenFromFile($file) {
-        shell_exec($this->phpexec.' -r "print \'<?php \\$tokens = \'; var_export(token_get_all(file_get_contents(\''.$file.'\'))); print \'; ?>\';" > /tmp/tokens.php');
-        include('/tmp/tokens.php');
-        unlink('/tmp/tokens.php');
+        $tmpFile = tempnam("/tmp", "Phpexec");
+        shell_exec($this->phpexec.' -r "print \'<?php \\$tokens = \'; var_export(token_get_all(file_get_contents(\''.$file.'\'))); print \'; ?>\';" > '.$tmpFile);
+        include($tmpFile);
+        unlink($tmpFile);
         
         return $tokens;
     }
