@@ -179,3 +179,7 @@ hardcoded logins // pass
 paraleliser les analyzers
 
 Spot the exceptions and the one that are thrown, and the one caught. 
+Spot twice created keys in an array
+Keys with ambiguous keys (2 and '2')
+spot use with no compound name and no namespace. They are ignored.
+Spot try {} that are stopped below by another try.
