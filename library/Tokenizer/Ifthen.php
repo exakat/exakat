@@ -186,7 +186,8 @@ class Ifthen extends TokenAuto {
                                               'atom'  => 'none', ), 
                                    3 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Block', 'Switch', 'Return', 'For', 'Foreach',  'String', 'RawString')),
                                    4 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Break', 'Block', 'Switch', 'Return', 'For', 'Foreach', 'String', 'RawString')),
-                                   5 => array('filterOut' => array_merge(Assignation::$operators, array('T_OBJECT_OPERATOR'))),
+                                   5 => array('filterOut' => array_merge( Assignation::$operators, Property::$operators, StaticProperty::$operators,
+                                                                          _Array::$operators, Bitshift::$operators, Comparison::$operators, Logical::$operators)),
         );
         
         $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,
