@@ -5,6 +5,7 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class ShortTags extends Analyzer\Analyzer {
+    protected $phpconfiguration = array("short_open_tags" => true);
 
     public function analyze() {
         $this->atomIs("Phpcode")
