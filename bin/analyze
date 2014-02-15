@@ -136,12 +136,44 @@ foreach($dependencies2 as $analyzer_class) {
     $begin = microtime(true);
     $analyzer = Analyzer\Analyzer::getInstance($analyzer_class, $client);
     $analyzer->init();
-    $analyzer->run();
-    $count = $analyzer->getRowCount();
-    $total_results += $count;
-    print "$analyzer_class fait ($count)\n";
-    $end = microtime(true);
-    $log->log("$analyzer_class\t".($end - $begin)."\t$count");
+
+    if (isset($INI['phpversion'])) {
+        $version = $INI['phpversion'];
+    } else {
+        print "Using self phpversion for analyze\n";
+        $version = phpversion();
+    }
+    $Php = new Phpexec($version);
+
+    if (!$analyzer->checkPhpVersion($version)) {
+        $analyzer = str_replace('\\', '\\\\', get_class($this));
+            
+        $query = <<<GREMLIN
+g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpVersion', '$version');
+GREMLIN;
+        $arguments = array('type' => 'IN');
+        $result = new \Everyman\Neo4j\Gremlin\Query($client, $queryString, $arguments);
+
+        print "$analyzer_class is not compatible with PHP version $version. Ignoring\n";
+    } elseif (!$analyzer->checkPhpConfiguration($Php)) {
+        $analyzer = str_replace('\\', '\\\\', get_class($this));
+            
+        $query = <<<GREMLIN
+g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpConfiguration', '$version');
+GREMLIN;
+        $arguments = array('type' => 'IN');
+        $result = new \Everyman\Neo4j\Gremlin\Query($client, $queryString, $arguments);
+
+        print "$analyzer_class is not compatible with PHP configuration of this version. Ignoring\n";
+    } else {
+        $analyzer->run();
+
+        $count = $analyzer->getRowCount();
+        $total_results += $count;
+        print "$analyzer_class fait ($count)\n";
+        $end = microtime(true);
+        $log->log("$analyzer_class\t".($end - $begin)."\t$count");
+    }
 }
 
 $server_stat = new Stats($client);
