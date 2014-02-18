@@ -3,6 +3,17 @@
 $args = $argv;
 
 $dir = $args[1];
+if ($dir == "-P") {
+    $projects = glob('projects/*');
+    foreach($projects as $project) {
+        $p = basename($project);
+        print "$p\n";
+        if ($p == 'test') { continue; }
+        if ($p == 'default') { continue; }
+        shell_exec('php bin/files '.$p);
+    }
+    die();
+}
 
 if (in_array('-json', $args)) {
     define('OUTPUT', 'JSON');
@@ -83,6 +94,9 @@ foreach($files as $file) {
 if (count($not_compilable) != 0) {
     file_put_contents('log/not_compilable.log', join("\n", $not_compilable));
 }
+
+$mysql = new mysqli('localhost', 'root', '', 'exakat');
+$mysql->query('INSERT INTO projects (id, date, notCompilable, project, php, tokens) VALUES (NULL, NOW(), '.count($not_compilable).', "'.$dir.'", '.$stats['php'].', '.$stats['tokens'].')');
 
 if (OUTPUT == 'JSON') {
     if ($unknown) {
