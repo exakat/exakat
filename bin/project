@@ -49,7 +49,7 @@ shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/ -p '.$project.''
 logProgress($project, $progress++ / $total_steps);
 print "Project loaded\n";
 
-$res = shell_exec('php bin/build_root; php bin/tokenizer -p '.$project.'');
+$res = shell_exec('php bin/build_root; php bin/tokenizer -p '.$project.' > ./projects/'.$project.'/log/tokenizer.final.log');
 if (strpos('javax.script.ScriptException', $res) !== false) {
     file_put_contents('log/tokenizer_error.log', $res);
     die();
@@ -65,7 +65,7 @@ shell_exec('php bin/fullcode -p '.$project.'');
 logProgress($project, $progress++ / $total_steps);
 print "Project fullcoded\n";
 
-shell_exec('php bin/analyze -p '.$project.' 2>&1 > ./projects/'.$project.'/log/analyze.final.log');
+shell_exec('php bin/analyze -p '.$project.' > ./projects/'.$project.'/log/analyze.final.log');
 logProgress($project, $progress++ / $total_steps);
 print "Project analyzed\n";
 
