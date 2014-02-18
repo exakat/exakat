@@ -1,0 +1,16 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    throw
+    Label : THROW
+      =
+      Label : RIGHT
+        new
+        Label : NEW
+          Exception
+          Label : ARGUMENTS
+            void
+      Label : LEFT
+        $a
