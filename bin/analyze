@@ -146,23 +146,23 @@ foreach($dependencies2 as $analyzer_class) {
     $Php = new Phpexec($version);
 
     if (!$analyzer->checkPhpVersion($version)) {
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
+        $analyzer = str_replace('\\', '\\\\', $analyzer_class);
             
         $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpVersion', '$version');
 GREMLIN;
         $arguments = array('type' => 'IN');
-        $result = new \Everyman\Neo4j\Gremlin\Query($client, $queryString, $arguments);
+        $result = new \Everyman\Neo4j\Gremlin\Query($client, $query, $arguments);
 
         print "$analyzer_class is not compatible with PHP version $version. Ignoring\n";
     } elseif (!$analyzer->checkPhpConfiguration($Php)) {
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
+        $analyzer = str_replace('\\', '\\\\', $analyzer_class);
             
         $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpConfiguration', '$version');
 GREMLIN;
         $arguments = array('type' => 'IN');
-        $result = new \Everyman\Neo4j\Gremlin\Query($client, $queryString, $arguments);
+        $result = new \Everyman\Neo4j\Gremlin\Query($client, $query, $arguments);
 
         print "$analyzer_class is not compatible with PHP configuration of this version. Ignoring\n";
     } else {
