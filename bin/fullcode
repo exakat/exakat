@@ -35,6 +35,8 @@ $tokens = array( 'Float', 'Integer', '_Function', '_Global', 'String',  'Real', 
 $prev = $limit + 2;
 $current = $limit + 1;
 
+// synopsis : first round, either do the fullcode, or link it to some index. subsequent rounds, only use the 
+
 $round = 0;
 while ($current < $prev && $current > 0) {
     print "\n";
