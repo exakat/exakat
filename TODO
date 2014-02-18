@@ -183,3 +183,8 @@ Spot twice created keys in an array
 Keys with ambiguous keys (2 and '2')
 spot use with no compound name and no namespace. They are ignored.
 Spot try {} that are stopped below by another try.
+
+add support for phar
+lighten the FILE link in the database (not the size of the produced CSV ).
+Check that Namespaces (specially Global) cannot be there several times.
+You should not throw an extension exception yourself (PDO)
