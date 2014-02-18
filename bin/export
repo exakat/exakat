@@ -37,7 +37,7 @@ if ($id = array_search('-f', $args)) {
 
 $queryTemplate = "g.V.as('x').except([g.v(0)]).hasNot('token', 'E_FILE').hasNot('token', 'E_NAMESPACE').hasNot('token', 'E_FUNCTION').hasNot('token', 'E_CLASS')"; 
 if (FILE) {
-    $queryTemplate .= ".filter{ it.in('FILE').count() == 1}";
+    $queryTemplate .= ".in('FILE').has('fullcode', '".FILE."').back('x')";
 }
 
 $params = array('type' => 'IN');
