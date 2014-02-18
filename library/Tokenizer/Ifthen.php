@@ -184,8 +184,8 @@ class Ifthen extends TokenAuto {
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON',
                                               'atom'  => 'none', ), 
-                                   3 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Block', 'Switch', 'Return', 'For', 'Foreach',  'String', 'RawString')),
-                                   4 => array('atom'  => 'yes'), //array('Ifthen', 'Sequence', 'Break', 'Block', 'Switch', 'Return', 'For', 'Foreach', 'String', 'RawString')),
+                                   3 => array('atom'  => 'yes'), 
+                                   4 => array('atom'  => 'yes'), 
                                    5 => array('filterOut' => array_merge( Assignation::$operators, Property::$operators, StaticProperty::$operators,
                                                                           _Array::$operators, Bitshift::$operators, Comparison::$operators, Logical::$operators)),
         );
