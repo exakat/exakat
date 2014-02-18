@@ -31,7 +31,7 @@ mv rels.csv ./batch-import/sampleme/
 cd ./batch-import
 #sh sampleme/import.sh
 java -server -Xmx1G -Dfile.encoding=UTF-8 -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db sampleme/nodes.csv sampleme/rels.csv
-cd -
+cd ..
 sh scripts/restart.sh
 SHELL
 );
@@ -39,7 +39,8 @@ SHELL
     
     function save_chunk() {
         $fp = fopen('nodes.csv', 'a');
-        $les_cols = array_keys(static::$cols);
+        // adding in_quote here, as it may not appear on the first token.
+        $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 'in_quote', 'modifiedBy', );
         if (static::$file_saved == 0) {
             fputcsv($fp, $les_cols, "\t");
         }
@@ -50,6 +51,10 @@ SHELL
                     $row[$col] = $node[$col];
                 } else {
                     $row[$col] = '';
+                }
+                if ($diff = array_diff(array_keys($row), $les_cols)) {
+                    print_r($diff);
+                    print "Some columns were not processed.\n";
                 }
             }
             $row['code'] = str_replace("\\", "\\\\", $row['code']);
