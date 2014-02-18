@@ -49,7 +49,7 @@ class TokenAuto extends Token {
         $query = $query.".".join('.', $qcdts);
         
         $qactions = $this->readActions($this->actions);
-        $query .= ".each{\n".join(";\n", $qactions).";\n};"; // m.each{ g.removeVertex(it); };   ";
+        $query .= ".each{\n".join(";\n", $qactions)."; \n};";
         
         return $query;
     }
@@ -1115,35 +1115,30 @@ g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('N
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
 a = it.out('NEXT').out('NEXT').out('NEXT').next();
-g.addEdge(a.in('NEXT').next(), x, 'NEXT');
-g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 0);
-g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+b = a.out('NEXT').next();
 
-a.bothE('NEXT').each{ g.removeEdge(it) ; }
-
-a = x.out('NEXT').next();
-g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 1);
-g.addEdge(x, a.out('NEXT').next(), 'NEXT');
-a.bothE('NEXT').each{ g.removeEdge(it) ; }
-
-x.out('ELEMENT').has('token', 'T_SEMICOLON').each{
-    it.out('ELEMENT').each{
+if (a.out('ELEMENT').count() > 0) {
+    a.out('ELEMENT').each{
         g.addEdge(x, it, 'ELEMENT');
-        g.removeEdge(it.inE('ELEMENT').next());
+        it.setProperty('order', it.order); // this is in case b is also a sequence. May be a is also a sequence....
+        it.inE('ELEMENT').each{ g.removeEdge(it);}
     }
     
-    g.removeVertex(it);
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), a, 'DELETE');
+} else {
+    g.addEdge(x, a, 'ELEMENT');
 }
 
-x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
-    it.bothE('NEXT').each{ g.removeEdge(it) ; }
-    
-    g.removeVertex(it);
-}
+g.addEdge(x, b, 'ELEMENT');
 
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, b.out('NEXT').next(), 'NEXT');
+
+a.setProperty('order', 0);
+b.setProperty('order', 1);
+
+a.bothE('NEXT').each{ g.removeEdge(it) ; }
+b.outE('NEXT').each{ g.removeEdge(it) ; }
 ";
             unset($actions['createSequenceForCaseWithoutSemicolon']);
         }        
@@ -1159,34 +1154,29 @@ g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('N
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
 a = it.out('NEXT').out('NEXT').next();
-g.addEdge(a.in('NEXT').next(), x, 'NEXT');
-g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 0);
-g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+b = a.out('NEXT').next();
 
-a.bothE('NEXT').each{ g.removeEdge(it) ; }
-
-a = x.out('NEXT').next();
-g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 1);
-g.addEdge(x, a.out('NEXT').next(), 'NEXT');
-a.bothE('NEXT').each{ g.removeEdge(it) ; }
-
-x.out('ELEMENT').has('token', 'T_SEMICOLON').each{
-    it.out('ELEMENT').each{
+if (a.out('ELEMENT').count() > 0) {
+    a.out('ELEMENT').each{
         g.addEdge(x, it, 'ELEMENT');
-        g.removeEdge(it.inE('ELEMENT').next());
+        it.setProperty('order', it.order); // this is in case b is also a sequence. May be a is also a sequence....
+        it.inE('ELEMENT').each{ g.removeEdge(it);}
     }
     
-    g.removeVertex(it);
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), a, 'DELETE');
+} else {
+    g.addEdge(x, a, 'ELEMENT');
 }
+g.addEdge(x, b, 'ELEMENT');
 
-x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
-    it.bothE('NEXT').each{ g.removeEdge(it) ; }
-    
-    g.removeVertex(it);
-}
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, b.out('NEXT').next(), 'NEXT');
+
+a.setProperty('order', 0);
+b.setProperty('order', 1);
+
+a.bothE('NEXT').each{ g.removeEdge(it) ; }
+b.outE('NEXT').each{ g.removeEdge(it) ; }
 
 ";
             unset($actions['createSequenceForDefaultWithoutSemicolon']);
