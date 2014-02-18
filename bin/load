@@ -542,12 +542,12 @@ function process_file($filename, $log_file) {
             $in_quote = true;
         } elseif (in_array($token_value, array('T_QUOTE_CLOSE', 'T_SHELL_QUOTE_CLOSE', 'T_END_HEREDOC'))) {
             $in_quote = false;
-            $T[$Tid]->setProperty('in_quote', 'true')->save();
+            $T[$Tid]->setProperty('in_quote', "'true'")->save();
         }
         
         if ($in_quote) {
-            $T[$Tid]->setProperty('in_quote', 'true')->save();
-        }
+            $T[$Tid]->setProperty('in_quote', "'true'")->save();
+        } 
 
         // test is for booleans. 
         if ($to_index) {
@@ -597,8 +597,8 @@ function process_file($filename, $log_file) {
                                    ->setProperty('hidden', true)
                                    ->save();
 
-    $T[-1]->relateTo($T[0], 'NEXT')->setProperty('__FILE__', true)->save();
-    $previous->relateTo($last, 'NEXT')->setProperty('__FILE__', true)->save();
+    $T[-1]->relateTo($T[0], 'NEXT')->setProperty('file', true)->save();
+    $previous->relateTo($last, 'NEXT')->setProperty('file', true)->save();
     
     $last2     = $client->makeNode()->setProperty('token', 'T_END')
                                     ->setProperty('code', '/* * */')
@@ -606,7 +606,7 @@ function process_file($filename, $log_file) {
                                     ->setProperty('hidden', true)
                                     ->save();
 
-    $last->relateTo($last2, 'NEXT')->setProperty('__FILE__', true)->save();
+    $last->relateTo($last2, 'NEXT')->setProperty('file', true)->save();
 
     $client->save_chunk();
     
