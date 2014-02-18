@@ -40,7 +40,7 @@ class _Case extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'yes'),
                                    2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   3 => array('atom'  => 'yes', 'notAtom' => 'Block'), 
+                                   3 => array('atom'  => 'yes', 'notAtom' => array('Block', 'Sequence')), 
                                    4 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
                                    5 => array('token' => $final_token));
         
@@ -53,7 +53,7 @@ class _Case extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'yes'),
                                    2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   3 => array('atom'  => 'yes', 'notAtom' => 'Block'), 
+                                   3 => array('atom'  => 'yes', 'notAtom' => array('Block', 'Sequence')), 
                                    4 => array('token' => $final_token));
         
         $this->actions = array('createBlockWithSequenceForCase'    => true,
@@ -67,9 +67,9 @@ class _Case extends TokenAuto {
                                     2 => array('token' => array('T_COLON', 'T_SEMICOLON'),
                                                'atom' => 'none'),
                                     3 => array('atom' => 'yes', 'notAtom' => array('Case', 'Default', 'SequenceCaseDefault', 'Block', )),
-                                    4 => array('token' => $final_token,
-                                                'atom' => 'yes'),
-                                    //, 'T_SEMICOLON'
+                                    4 => array('token' => 'T_SEMICOLON',
+                                               'atom' => 'none'),
+                                    5 => array('token' => $final_token),
         );
         
         $this->actions = array('createBlockWithSequenceForCase'    => true,
@@ -81,7 +81,7 @@ class _Case extends TokenAuto {
                                               'atom' => 'none'),
                                   1 => array('atom'  => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  3 => array('atom'  => array('Block')), 
+                                  3 => array('atom'  => array('Block', 'Sequence')), 
                                   4 => array('token' => $final_token),
         );
         
