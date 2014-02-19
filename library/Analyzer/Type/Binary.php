@@ -13,7 +13,7 @@ class Binary extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Integer')
-             ->regex('code', '0b[01]+');
+             ->regex('code', '0[bB][01]+');
     }
 }
 
