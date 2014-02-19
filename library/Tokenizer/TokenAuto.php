@@ -2081,7 +2081,7 @@ x.out('CODE').each{
 
 g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');   
 
-                ";
+";
             unset($actions['add_to_index']);
         }        
 
@@ -2134,7 +2134,6 @@ g.addEdge(it, x, 'NAME');
             unset($actions['variable_to_functioncall']);
         }        
         if (isset($actions['cleanIndex'])) {
-            $e = $actions['cleanIndex'];
             $qactions[] = " 
 /* Remove children's index */  
 it.outE.hasNot('label', 'NEXT').inV.each{ 
