@@ -188,3 +188,7 @@ add support for phar
 lighten the FILE link in the database (not the size of the produced CSV ).
 Check that Namespaces (specially Global) cannot be there several times.
 You should not throw an extension exception yourself (PDO)
+
+AND / && and OR / ||. http://stackoverflow.com/questions/2803321/and-vs-as-operator
+Commented Code
+exit and die
