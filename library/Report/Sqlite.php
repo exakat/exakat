@@ -3,7 +3,7 @@
 namespace Report;
 
 class Sqlite {
-    function __construct($client) { 
+    function __construct() { 
         $this->data = array();
     }
     
