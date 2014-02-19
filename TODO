@@ -169,8 +169,6 @@ bin/file should also sort PHP files/directories by type : see fb treemap : code,
 
 Separate analyzers in : file/application, inventory/analyse; themes
 produce a dot graph of classes
-support PHP vesrions in config
-Check for PHP 5.5 and 5.6 : loader has some problem...
 
 Automate testing and dashboard
 install myself as a project
@@ -179,8 +177,6 @@ hardcoded logins // pass
 paraleliser les analyzers
 
 Spot the exceptions and the one that are thrown, and the one caught. 
-Spot twice created keys in an array
-Keys with ambiguous keys (2 and '2')
 spot use with no compound name and no namespace. They are ignored.
 Spot try {} that are stopped below by another try.
 
@@ -190,5 +186,7 @@ Check that Namespaces (specially Global) cannot be there several times.
 You should not throw an extension exception yourself (PDO)
 
 AND / && and OR / ||. http://stackoverflow.com/questions/2803321/and-vs-as-operator
+Complex logical expression, without ().
 Commented Code
-exit and die
+
+Un paramètre inutilisé dans une méthode qui en étant une autre est OK (C'est alors a relier à la généralisation induite par la classe du dessus, on peut aussi commenter les autres classes.)
