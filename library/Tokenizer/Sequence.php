@@ -34,7 +34,7 @@ class Sequence extends TokenAuto {
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 
                                            'T_CLOSE_PARENTHESIS', 'T_CATCH', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR' ), 
                                      Assignation::$operators, Logical::$operators, Preplusplus::$operators, Postplusplus::$operators);
-        //'T_ELSEIF',
+
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut2' => $yield_operator,
                                               'filterOut'  => array('T_IF'),  
@@ -70,7 +70,8 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note instructions separated by ; with a special case for alternative syntax
-        $this->conditions = array(-3 => array('token' => array('T_OPEN_PARENTHESIS', 'T_ELSE')), //'T_CLOSE_PARENTHESIS', 
+        $this->conditions = array(-4 => array('notToken' => array_merge(Addition::$operators, Multiplication::$operators, Ternary::$operators)),
+                                  -3 => array('token' => array('T_OPEN_PARENTHESIS', 'T_ELSE')),
                                   -2 => array('token' => 'T_COLON'), 
                                   -1 => array('atom'  => $operands, 'notToken' => 'T_ELSEIF' ),
                                    0 => array('token' => Sequence::$operators,
@@ -213,7 +214,9 @@ class Sequence extends TokenAuto {
         $this->checkAuto();
 
         // @note End of PHP script
-        $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, array('T_OPEN_PARENTHESIS', 'T_BREAK', 'T_USE', 'T_AS'))), 
+        $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, 
+                                                                        array('T_OPEN_PARENTHESIS', 'T_BREAK', 'T_USE', 
+                                                                              'T_AS', 'T_IF', 'T_ELSEIF'))), 
                                   -1 => array('atom'       => $operands,
                                               'notToken'   => 'T_ELSEIF', ),
                                    0 => array('token'      => Sequence::$operators,
@@ -231,7 +234,7 @@ class Sequence extends TokenAuto {
 
         // @note End of PHP script, alternative syntax
         $this->conditions = array(-3 => array('token'    => array('T_ELSE', 'T_OPEN_PARENTHESIS', 'T_USE', 'T_AS'), 
-                                              'atom'     => 'none'), //'T_CLOSE_PARENTHESIS', 
+                                              'atom'     => 'none'), 
                                   -2 => array('token'    => 'T_COLON',), 
                                   -1 => array('atom'     => $operands,
                                               'notToken' => 'T_ELSEIF', ),
