@@ -1,0 +1,1 @@
+<?php echo a('b' . $c->d, e($f->g == 'h' ? 'i' : 'j'), 'k') . 'l' ?>M<?php echo n('o' . $p->q, r('s'));?>T<?php echo u('v' . $w->x, y('z'), array('aa'=>'ab')); ?>
