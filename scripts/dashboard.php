@@ -58,7 +58,7 @@ print $total_UT." total analyzer tests\n";
 
 preg_match_all('/\s(\w*)\s*(\d+)/is', $res, $R);
 
-if (preg_match_all('/\s([\w\/]*)\s*0/is', $res, $R)) {
+if (preg_match_all('/(\w+\/\w+)\s*0/is', $res, $R)) {
     print count($R[1])." total analyzer without tests\n";
     print "  + ".join("\n  + ", $R[1])."\n\n";
 } else {
