@@ -6,8 +6,6 @@ class _Global extends TokenAuto {
     static public $operators = array('T_GLOBAL');
 
     function _check() {
-        $values = array('T_EQUAL', 'T_COMMA');
-
     // global $x; (nothing more)
         $this->conditions = array( 0 => array('token' => _Global::$operators),
                                    1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static' )),
