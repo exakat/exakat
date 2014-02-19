@@ -148,7 +148,7 @@ class Analyzer {
                 $arguments = func_get_args();
                 array_shift($arguments);
                 $argnames = array(str_replace('***', "%s", $method));
-                foreach($arguments as $id => $arg) {
+                foreach($arguments as $arg) {
                     $argname = 'arg'.(count($this->arguments));
                     $this->arguments[$argname] = $arg;
                     $argnames[] = $argname;
@@ -283,7 +283,6 @@ GREMLIN;
             print_r($this->arguments);
             die();
         }
-        return $query->getResultSet();
     }
 
     function _as($name) {
@@ -340,7 +339,7 @@ GREMLIN;
     
     function functionIs($function) {
         if (is_array($function)) {
-            $this->methods[] = 'as("functionIs").inE("FUNCTION").filter{it.function in [\''.join("', '", $class).'\']}.back("functionIs")';
+            $this->methods[] = 'as("functionIs").inE("FUNCTION").filter{it.function in [\''.join("', '", $function).'\']}.back("functionIs")';
         } else {
             $this->methods[] = 'as("functionIs").inE("FUNCTION").has("function", "'.$function.'").back("functionIs")';
         }
@@ -391,8 +390,8 @@ GREMLIN;
         return $this;
     }
     
-    function trim($property, $chars = ' ') {
-        $this->methods[] = 'transform{it.code.replaceFirst("^[\'\"]?(.*?)[\'\"]?\$", "\$1")}';
+    function trim($property, $chars = '\'\"') {
+        $this->methods[] = 'transform{it.'.$property.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1")}';
     }
 
     function atomIsNot($atom) {
@@ -419,7 +418,7 @@ GREMLIN;
         $analyzer = str_replace('\\', '\\\\', $analyzer);
 
         if (is_array($analyzer)) {
-            $this->methods[] = 'filter{ it.in("ANALYZED").filter{ not (it.code in [\''.join("', '", $atom).'\'])}.count() == 0}';
+            $this->methods[] = 'filter{ it.in("ANALYZED").filter{ not (it.code in [\''.join("', '", $analyzer).'\'])}.count() == 0}';
         } else {
             $this->methods[] = 'filter{ it.in("ANALYZED").has("code", \''.$analyzer.'\').count() == 0}';
         }

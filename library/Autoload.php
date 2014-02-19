@@ -33,8 +33,6 @@ class Autoload {
     }
 
     static public function autoload_phpunit($name) {
-        $path = dirname(__DIR__);
-
         $file = str_replace('_', DIRECTORY_SEPARATOR, $name).'.php';
         $file = str_replace('Test\\', '', $file);
         include($file);
