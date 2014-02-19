@@ -1,5 +1,8 @@
 <?php
 
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
 // report errorlog problems
 $count = trim(shell_exec('ls -hla projects/*/log/errors.log| wc -l '));
 
@@ -158,6 +161,22 @@ if ($sqlite_md) {
     print "  + ".join("\n  + ", $sqlite_md)."\n\n";
 } else {
     print "All ".count($files)." projects have the sqlite export\n";
+}
+
+$analyzers = Analyzer\Analyzer::listAnalyzers();
+$missing_doc = array();
+foreach($analyzers as $a) {
+    $o = Analyzer\Analyzer::getInstance($a, null);
+    if ($o->getDescription() === '') {
+        $missing_doc[] = $a;
+    }
+}
+
+if ($missing_doc) {
+    print count($missing_doc)." analyzer are missing their documentation\n";
+    print "  + ".join("\n  + ", $missing_doc)."\n\n";
+} else {
+    print "All ".count($analyzers)." analyzers have their documentation\n";
 }
 
 ?>
