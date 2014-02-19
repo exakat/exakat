@@ -73,7 +73,6 @@ class Analyzer {
         }
     }
     
-
     public static function getInstance($name, $client) {
         if ($analyzer = Analyzer::getClass($name)) {
             return new $analyzer($client);
@@ -945,24 +944,20 @@ GREMLIN;
             return parse_ini_file($fullpath);
         }
     }
+    
+    public static function listAnalyzers() {
+        $files = glob('library/Analyzer/*/*.php');
 
-/*
-    private function query($client, $query) {
-    $queryTemplate = $query;
-    $params = array('type' => 'IN');
-    try {
-        $query = new \Everyman\Neo4j\Gremlin\Query($client, $queryTemplate, $params);
-        return $query->getResultSet();
-    } catch (\Exception $e) {
-        $message = $e->getMessage();
-        $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-        print "Exception : ".$message."\n";
-        
-        print $queryTemplate."\n";
-        die();
+        $analyzers = array();
+        foreach($files as $file) {
+            $type = basename(dirname($file));
+            if ($type == 'Common') { continue; }
+            if ($type == 'Test') { continue; }
+            if ($type == 'Group') { continue; }
+            if ($type == 'Themes') { continue; }
+            $analyzers[] = $type.'/'.substr(basename($file), 0, -4);
+        }
+        return $analyzers;
     }
-    return $query->getResultSet();
-}
-*/
 }
 ?>
