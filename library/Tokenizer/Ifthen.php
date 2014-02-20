@@ -40,7 +40,7 @@ class Ifthen extends TokenAuto {
     // @doc if then without else
         $this->conditions = array( 0 => array('token' => Ifthen::$operators),
                                    1 => array('atom' => 'Parenthesis'),
-                                   2 => array('atom' => 'Block'),
+                                   2 => array('atom' => array('Void', 'Block')),
                                    3 => array('atom' => 'Ifthen', 'token' => 'T_ELSEIF'),
                                    4 => array('filterOut' => array('T_ELSE', 'T_ELSEIF')),
         );
@@ -81,7 +81,7 @@ class Ifthen extends TokenAuto {
         $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Parenthesis'),
-                                   2 => array('atom' => 'Block'),
+                                   2 => array('atom' => array('Block', 'Void')),
                                    3 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
         );
         
