@@ -81,6 +81,13 @@ class _Static extends TokenAuto {
         $this->actions = array('atom'     => 'Static');
         $this->checkAuto(); 
 
+    // static :: ....
+        $this->conditions = array( -1 => array('token' => 'T_INSTANCEOF'),
+                                   0  => array('token' => _Static::$operators),
+                                 );
+        $this->actions = array('atom'     => 'Static');
+        $this->checkAuto(); 
+        
         return $this->checkRemaining();
     }
 
