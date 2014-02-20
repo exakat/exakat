@@ -1,0 +1,109 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        n
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              'o'
+            Label : CONCAT
+              ->
+              Label : PROPERTY
+                q
+              Label : OBJECT
+                $p
+          Label : ARGUMENT
+            r
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                's'
+  Label : ELEMENT
+    T
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        u
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'aa'
+                Label : VALUE
+                  'ab'
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              'v'
+            Label : CONCAT
+              ->
+              Label : PROPERTY
+                x
+              Label : OBJECT
+                $w
+          Label : ARGUMENT
+            y
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'z'
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        .
+        Label : CONCAT
+          a
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                'b'
+              Label : CONCAT
+                ->
+                Label : PROPERTY
+                  d
+                Label : OBJECT
+                  $c
+            Label : ARGUMENT
+              e
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ?
+                  Label : CONDITION
+                    ==
+                    Label : LEFT
+                      ->
+                      Label : PROPERTY
+                        g
+                      Label : OBJECT
+                        $f
+                    Label : RIGHT
+                      'h'
+                  Label : THEN
+                    'i'
+                  Label : ELSE
+                    'j'
+            Label : ARGUMENT
+              'k'
+        Label : CONCAT
+          'l'
+  Label : ELEMENT
+    M
