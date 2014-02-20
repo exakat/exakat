@@ -29,9 +29,10 @@ class ArgumentsNoParenthesis extends TokenAuto {
         $this->checkAuto();
 
         // @note exit; no parenthesis, no argument. 
-        $this->conditions = array( 0 => array('atom' => 'none',
-                                              'token' => array('T_EXIT', 'T_STATIC',)),
-                                   1 => array('token'  => 'T_SEMICOLON') 
+        $this->conditions = array( -1 => array('notToken' => 'T_INSTANCEOF'),
+                                    0 => array('atom' => 'none',
+                                               'token' => array('T_EXIT', 'T_STATIC',)),
+                                    1 => array('token'  => 'T_SEMICOLON') 
         );
         
         $this->actions = array('addEdge'     => array(0 => array('Arguments' => 'ARGUMENT')),

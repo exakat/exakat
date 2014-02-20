@@ -1,0 +1,21 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        instanceof
+        Label : LEFT
+          $a
+        Label : RIGHT
+          static
+    Label : THEN
+      void
+  Label : ELEMENT
+    instanceof
+    Label : LEFT
+      $a
+    Label : RIGHT
+      static
