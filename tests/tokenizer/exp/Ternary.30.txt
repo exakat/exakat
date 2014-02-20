@@ -1,0 +1,113 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $number
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        (
+        Label : CODE
+          ===
+          Label : LEFT
+            $count
+          Label : RIGHT
+            3
+      Label : THEN
+        +
+        Label : LEFT
+          +
+          Label : LEFT
+            (
+            Label : CODE
+              *
+              Label : LEFT
+                (
+                Label : CODE
+                  %
+                  Label : LEFT
+                    [
+                    Label : INDEX
+                      0
+                    Label : VARIABLE
+                      $temp
+                  Label : RIGHT
+                    16
+              Label : RIGHT
+                4096
+          Label : RIGHT
+            (
+            Label : CODE
+              *
+              Label : LEFT
+                (
+                Label : CODE
+                  %
+                  Label : LEFT
+                    [
+                    Label : INDEX
+                      1
+                    Label : VARIABLE
+                      $temp
+                  Label : RIGHT
+                    64
+              Label : RIGHT
+                64
+        Label : RIGHT
+          (
+          Label : CODE
+            %
+            Label : LEFT
+              [
+              Label : INDEX
+                2
+              Label : VARIABLE
+                $temp
+            Label : RIGHT
+              64
+      Label : ELSE
+        +
+        Label : LEFT
+          (
+          Label : CODE
+            *
+            Label : LEFT
+              (
+              Label : CODE
+                %
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    0
+                  Label : VARIABLE
+                    $temp
+                Label : RIGHT
+                  32
+            Label : RIGHT
+              64
+        Label : RIGHT
+          (
+          Label : CODE
+            %
+            Label : LEFT
+              [
+              Label : INDEX
+                1
+              Label : VARIABLE
+                $temp
+            Label : RIGHT
+              64
+  Label : ELEMENT
+    .=
+    Label : LEFT
+      $out
+    Label : RIGHT
+      .
+      Label : CONCAT
+        ';'
+      Label : CONCAT
+        '&#'
+      Label : CONCAT
+        $number

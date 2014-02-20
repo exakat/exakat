@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Ternary extends Tokenizer {
-    /* 29 methods */
+    /* 30 methods */
 
     public function testTernary01()  { $this->generic_test('Ternary.01'); }
     public function testTernary02()  { $this->generic_test('Ternary.02'); }
@@ -38,5 +38,6 @@ class Ternary extends Tokenizer {
     public function testTernary27()  { $this->generic_test('Ternary.27'); }
     public function testTernary28()  { $this->generic_test('Ternary.28'); }
     public function testTernary29()  { $this->generic_test('Ternary.29'); }
+    public function testTernary30()  { $this->generic_test('Ternary.30'); }
 }
 ?>
