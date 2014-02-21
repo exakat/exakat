@@ -100,7 +100,7 @@ class _Case extends TokenAuto {
                                               'atom'  => 'none', ), 
                                    3 => array('atom'  => 'yes'), 
                                    4 => array('atom'  => 'yes'), 
-                                   5 => array('filterOut2' => array_merge(array('T_ELSE', 'T_ELSEIF'),
+                                   5 => array('filterOut2' => array_merge(array('T_ELSE', 'T_ELSEIF', 'T_OPEN_PARENTHESIS'),
                                                                         Assignation::$operators, Property::$operators, StaticProperty::$operators,
                                                                         _Array::$operators, Bitshift::$operators, Comparison::$operators, Logical::$operators)),
         );
@@ -113,7 +113,7 @@ class _Case extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = "case " + it.out("CASE").next().fullcode + " : " + it.out("CODE").next().fullcode; ';
+        return 'fullcode.fullcode = "case " + fullcode.out("CASE").next().fullcode + " : " + fullcode.out("CODE").next().fullcode; ';
     }
 }
 
