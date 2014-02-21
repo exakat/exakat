@@ -30,7 +30,7 @@ mv rels.csv ./batch-import/sampleme/
 
 cd ./batch-import
 #sh sampleme/import.sh
-/Library/Java/Home/bin/java -server -Xmx1G -Dfile.encoding=UTF-8 -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db sampleme/nodes.csv sampleme/rels.csv
+java -server -Xmx1G -Dfile.encoding=UTF-8 -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db sampleme/nodes.csv sampleme/rels.csv
 cd ..
 sh scripts/restart.sh
 SHELL
@@ -69,6 +69,11 @@ SHELL
         
         $fp = fopen('rels.csv', 'a');
         if (static::$file_saved == 0) {
+            if (isset($row['namespace'])) {
+                $row['namespace'] = str_replace("\\", "\\\\", $row['namespace']);
+                $row['namespace'] = str_replace("\"", "\\\"", $row['namespace']);
+            }
+
             fputcsv($fp, array('start', 'end', 'type', 'classname', 'function', 'namespace', 'file'), "\t");
         }
         foreach(static::$links as $link) {
