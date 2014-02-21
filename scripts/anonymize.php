@@ -1,0 +1,100 @@
+<?php
+
+$file = $argv[1];
+print "Processing file $file\n";
+
+$php = file_get_contents($file);
+$tokens = token_get_all($php);
+
+$lnumber = 0;
+$variables = "a";
+$strings = "A";
+
+$php = '';
+foreach($tokens as $t) {
+    if (is_array($t)) {
+        switch($t[0]) {
+            case T_LNUMBER: 
+                $t[1] = $lnumber++;
+                break;
+            case T_VARIABLE: 
+                $t[1] = '$'.$variables++;
+                break;
+            case T_CONSTANT_ENCAPSED_STRING:
+                if (in_array($strings++, array('IF', 'AS', 'DO', 'OR'))) { print $strings; $strings++; }
+                $t[1] = "'".$strings++."'";
+                break;
+            case T_STRING:
+            case T_ENCAPSED_AND_WHITESPACE :
+                if (in_array($strings++, array('IF', 'AS', 'DO', 'OR'))) { print $strings; $strings++; }
+                $t[1] = $strings;
+                break;
+            case T_DOC_COMMENT:
+            case T_COMMENT:
+                $t[1] = "";
+                break;
+                
+            case T_RETURN :
+            case T_CURLY_OPEN:
+            case T_ELSE : 
+            case T_PUBLIC : 
+            case T_PROTECTED : 
+            case T_PRIVATE : 
+            case T_SL : 
+            case T_SR : 
+            case T_IS_EQUAL :
+            case T_MINUS_EQUAL :
+            case T_WHILE : 
+            case T_IS_GREATER_OR_EQUAL : 
+            case T_PLUS_EQUAL : 
+            case T_CLASS : 
+            case T_CONTINUE :
+            case T_WHITESPACE : 
+            case T_AS : 
+            case T_BOOLEAN_OR :
+            case T_BOOLEAN_AND :
+            case T_IS_GREATER_OR_EQUAL :
+            case T_BREAK : 
+            case T_CLASS_C : 
+            case T_DEC :
+            case T_DO :
+            case T_FUNC_C :
+            case T_IS_NOT_IDENTICAL : 
+            case T_SR_EQUAL : 
+            case T_XOR_EQUAL :
+            case T_OR_EQUAL : 
+            case T_IS_NOT_EQUAL : 
+            case T_FOR :
+            case T_FOREACH : 
+            case T_FUNCTION : 
+            case T_INC:
+            case T_DOUBLE_COLON:
+            case T_THROW:
+            case T_NEW:
+            case T_NS_SEPARATOR:
+            case T_OBJECT_OPERATOR:
+            case T_REQUIRE_ONCE:
+            case T_DIR:
+            case T_STATIC:
+            case T_WHITESPACE:
+            case T_OPEN_TAG:
+            case T_CLOSE_TAG:
+            case T_INSTANCEOF:
+            case T_IF:
+            case T_ELSEIF:
+            case T_IS_IDENTICAL:
+            case T_CONCAT_EQUAL:
+                // simply ignore
+                break;
+            default: 
+                print token_name($t[0])."\n";
+        }
+
+        $php .= $t[1];
+    } else {
+        $php .= $t;
+    }
+}
+file_put_contents($file.'.anon', $php);
+
+?>
