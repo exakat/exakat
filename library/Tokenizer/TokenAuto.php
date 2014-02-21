@@ -1587,7 +1587,8 @@ clean.out('$link').inE('INDEXED').each{
     g.removeEdge(it);
 }
 
-            ";
+fullcode = clean;
+";
             }
             unset($actions['mergeNext']);
         }
