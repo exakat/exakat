@@ -80,7 +80,7 @@ class Ifthen extends TokenAuto {
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => array('Block', 'Void')),
-                                   3 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF', 'T_SEMICOLON')),
+                                   3 => array('filterOut' => array('T_ELSE', 'T_ELSEIF', 'T_SEMICOLON')),
         );
         
         $this->actions = array('transform'    => array(1 => 'CONDITION',
