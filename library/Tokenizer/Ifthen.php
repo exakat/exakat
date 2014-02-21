@@ -13,10 +13,9 @@ class Ifthen extends TokenAuto {
                                    2 => array('token' => 'T_SEMICOLON', 'atom' => 'none')
         );
         
-        $this->actions = array('addEdge'     => array(2 => array('Void' => 'LEVEL')),
+        $this->actions = array('to_void'     => 2,
                                'keepIndexed' => true,
-                               'cleanIndex' => true);
-
+                               'cleanIndex'  => true);
         $this->checkAuto(); 
             
     // @doc if then else
@@ -26,7 +25,6 @@ class Ifthen extends TokenAuto {
                                    2 => array('atom' =>  array('Block', 'Void')),
                                    3 => array('token' => 'T_ELSE', 'atom' => 'none'),
                                    4 => array('atom' => array('Block')),
-                                   //5 => array('filterOut' => 'T_ELSEIF'), // 'T_ELSE'
         );
         
         $this->actions = array('transform'   => array(1 => 'CONDITION',
@@ -37,12 +35,12 @@ class Ifthen extends TokenAuto {
                                'cleanIndex' => true);
         $this->checkAuto(); 
 
-    // @doc if then without else
+    // @doc if then elseif without else
         $this->conditions = array( 0 => array('token' => Ifthen::$operators),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => array('Void', 'Block')),
                                    3 => array('atom' => 'Ifthen', 'token' => 'T_ELSEIF'),
-                                   4 => array('filterOut' => array('T_ELSE', 'T_ELSEIF')),
+                                   4 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
         );
         
         $this->actions = array('transform'    => array('1' => 'CONDITION',
@@ -82,7 +80,7 @@ class Ifthen extends TokenAuto {
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => array('Block', 'Void')),
-                                   3 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
+                                   3 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF', 'T_SEMICOLON')),
         );
         
         $this->actions = array('transform'    => array(1 => 'CONDITION',
@@ -186,8 +184,9 @@ class Ifthen extends TokenAuto {
                                               'atom'  => 'none', ), 
                                    3 => array('atom'  => 'yes'), 
                                    4 => array('atom'  => 'yes'), 
-                                   5 => array('filterOut' => array_merge( Assignation::$operators, Property::$operators, StaticProperty::$operators,
-                                                                          _Array::$operators, Bitshift::$operators, Comparison::$operators, Logical::$operators)),
+                                   5 => array('filterOut2' => array_merge(array('T_OPEN_PARENTHESIS'),
+                                                                        Assignation::$operators, Property::$operators, StaticProperty::$operators,
+                                                                        _Array::$operators, Bitshift::$operators, Comparison::$operators, Logical::$operators)),
         );
         
         $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,
