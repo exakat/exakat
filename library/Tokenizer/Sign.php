@@ -93,7 +93,11 @@ class Sign extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.code + it.out("SIGN").next().fullcode; ';
+        return <<<GREMLIN
+if (it.out('SIGN').count() > 0) {
+    it.fullcode = it.code + it.out("SIGN").next().fullcode; 
+}
+GREMLIN;
     }
 }
 

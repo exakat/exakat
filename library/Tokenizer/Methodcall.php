@@ -48,12 +48,11 @@ class Methodcall extends TokenAuto {
     }
 
     function fullcode() {
-        return '
-x = it;
+        return <<<GREMLIN
+fullcode.out("NAME").each{ fullcode.fullcode = it.fullcode }
 
-it.out("NAME").each{ x.fullcode = it.fullcode }
-
-it.filter{ it.out("METHOD").count() == 1}.each{ x.fullcode = x.out("OBJECT").next().fullcode + "->" + x.out("METHOD").next().fullcode;  }';
+fullcode.filter{ it.out("METHOD").count() == 1}.each{ fullcode.fullcode = fullcode.out("OBJECT").next().fullcode + "->" + fullcode.out("METHOD").next().fullcode;  }
+GREMLIN;
     }
 }
 

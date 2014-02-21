@@ -26,7 +26,7 @@ class IfthenElse extends TokenAuto {
         );
         
         $this->actions = array( 'to_block_else' => true);
-        $this->checkAuto(); 
+//        $this->checkAuto(); 
 
         return $this->checkRemaining();
     }

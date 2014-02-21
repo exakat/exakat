@@ -60,7 +60,21 @@ class Ifthen extends TokenAuto {
                                     3 => array('filterOut' => Token::$instruction_ending),
         );
         
-        $this->actions = array( 'to_block_ifelseif' => true,
+        $this->actions = array( 'to_block_ifelseif' => 2,
+                                'keepIndexed'       => true);
+        $this->checkAuto(); 
+
+        // Make a block from sequence after a if/elseif (alternative syntax)
+        $this->conditions = array(  0 => array('token'     => Ifthen::$operators,
+                                               'atom'      => 'none'),
+                                    1 => array('atom'      => 'Parenthesis'),
+                                    2 => array('token'     => array('T_COLON', 'T_SEMICOLON')),
+                                    3 => array('atom' => 'yes'),
+                                    4 => array('token'     => 'T_SEMICOLON'),
+                                    5 => array('filterOut' => Token::$instruction_ending ),
+        );
+        
+        $this->actions = array( 'to_block_ifelseif' => 3,
                                 'keepIndexed'       => true);
         $this->checkAuto(); 
 
@@ -80,7 +94,20 @@ class Ifthen extends TokenAuto {
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => array('Block', 'Void')),
-                                   3 => array('filterOut' => array('T_ELSE', 'T_ELSEIF', 'T_SEMICOLON')),
+                                   3 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'CONDITION',
+                                                       2 => 'THEN'),
+                               'atom'       => 'Ifthen');
+        $this->checkAuto(); 
+
+    // @doc if then NO ELSE, with a sequence behind
+        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
+                                              'atom' => 'none'),
+                                   1 => array('atom' => 'Parenthesis'),
+                                   2 => array('atom' => array('Block', 'Void')),
+                                   3 => array('atom' => 'Sequence'),
         );
         
         $this->actions = array('transform'    => array(1 => 'CONDITION',
@@ -111,7 +138,7 @@ class Ifthen extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
-                                   3 => array('atom'  => 'yes',),
+                                   3 => array('atom'  => 'yes'),
                                    4 => array('token' => 'T_ELSE'),
                                    5 => array('token' => 'T_COLON'),
                                    6 => array('atom'  => 'yes',),

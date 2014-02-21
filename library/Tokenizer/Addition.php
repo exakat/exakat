@@ -29,7 +29,7 @@ class Addition extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode; ';
+        return 'fullcode.fullcode = fullcode.out("LEFT").next().fullcode + " " + fullcode.code + " " + fullcode.out("RIGHT").next().fullcode; ';
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace Tokenizer;
 
-class ArgumentsArray extends TokenAuto {
+class ArgumentsArray extends Arguments {
     static public $operators = array('T_OPEN_PARENTHESIS');
     
     function _check() {

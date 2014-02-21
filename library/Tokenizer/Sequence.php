@@ -63,7 +63,19 @@ class Sequence extends TokenAuto {
                                               'notToken' => 'T_ELSEIF' ),
                                    0 => array('token'    => Sequence::$operators,
                                               'atom'     => 'none'),
-                                   1 => array('token'    => array('T_ELSEIF', 'T_ELSE', 'T_ENDIF', 'T_ENDWHILE', 'T_ENDDECLARE')),
+                                   1 => array('token'    => array('T_ENDIF', 'T_ENDWHILE', 'T_ENDDECLARE')),
+        );
+        
+        $this->actions = array('transform'   => array( 0 => 'DROP'));
+        $this->checkAuto();
+
+        // @note instructions separated by ; but ; is useless (special case for if/elseif
+        $this->conditions = array(-1 => array('atom'     => $operands, 
+                                              'notToken' => 'T_ELSEIF' ),
+                                   0 => array('token'    => Sequence::$operators,
+                                              'atom'     => 'none'),
+                                   1 => array('token'    => array('T_ELSEIF', 'T_ELSE'),
+                                              'atom'     => 'yes'),
         );
         
         $this->actions = array('transform'   => array( 0 => 'DROP'));
@@ -267,7 +279,7 @@ class Sequence extends TokenAuto {
 
     function fullcode() {
         // fullcode is not meant to reproduce the whole code, but give a quick peek at some smaller code. Just ignoring for the moment.
-        return 'it.fullcode = " "';
+        return 'fullcode.setProperty("fullcode", " ")';
     }
 }
 ?>

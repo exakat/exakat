@@ -23,8 +23,8 @@ class SequenceCaseDefault extends TokenAuto {
     function fullcode() {
         return <<<GREMLIN
 s = [];
-it.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); }
-it.fullcode =  s.join("\\n");
+fullcode.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); }
+fullcode.fullcode =  s.join("\\n");
 GREMLIN;
     }
 }

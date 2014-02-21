@@ -32,7 +32,7 @@ class Typehint extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.out("CLASS").next().code + " " + it.out("VARIABLE").next().code; ';
+        return 'fullcode.fullcode = fullcode.out("CLASS").next().code + " " + fullcode.out("VARIABLE").next().code; ';
     }
 }
 

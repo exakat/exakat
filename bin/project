@@ -60,10 +60,11 @@ logProgress($project, $progress++ / $total_steps);
 print "Project tokenized\n";
 
 shell_exec('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
+sleep(2);
 
-shell_exec('php bin/fullcode -p '.$project.'');
+//shell_exec('php bin/fullcode -p '.$project.'');
 logProgress($project, $progress++ / $total_steps);
-print "Project fullcoded\n";
+//print "Project fullcoded\n";
 
 shell_exec('php bin/analyze -p '.$project.' > ./projects/'.$project.'/log/analyze.final.log');
 logProgress($project, $progress++ / $total_steps);

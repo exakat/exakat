@@ -2,7 +2,7 @@
 
 namespace Tokenizer;
 
-class SequenceAtom extends TokenAuto {
+class SequenceAtom extends Sequence {
     function _check() {
         $yield_operators =  array_merge(array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', 'T_ABSTRACT', 'T_FINAL', 
                                               'T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS', 'T_CLASS', 'T_EXTENDS', 'T_IMPLEMENTS', 

@@ -27,7 +27,7 @@ class Block extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = "{ /**/ } "; ';
+        return 'fullcode.fullcode = "{ /**/ } "; ';
     }
 }
 

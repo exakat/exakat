@@ -39,11 +39,11 @@ class _Include extends TokenAuto {
     function fullcode() {
         return <<<GREMLIN
 
-if (it.noParenthesis == 'true') {
-    s = it.out("ARGUMENTS").next().fullcode;
-    it.fullcode = it.code + " " + s.substring(1, s.length() - 1);
+if (fullcode.noParenthesis == 'true') {
+    s = fullcode.out("ARGUMENTS").next().fullcode;
+    fullcode.fullcode = it.code + " " + s.substring(1, s.length() - 1);
 } else {
-    it.fullcode = it.code + it.out("ARGUMENTS").next().fullcode;
+    fullcode.fullcode = fullcode.code + fullcode.out("ARGUMENTS").next().fullcode;
 }
 
 GREMLIN;

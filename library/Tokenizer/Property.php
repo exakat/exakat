@@ -40,12 +40,11 @@ class Property extends TokenAuto {
     }
 
     function fullcode() {
-        return '
-x = it;
+        return <<<GREMLIN
+fullcode.out("NAME").each{ fullcode.fullcode = it.fullcode }
 
-it.out("NAME").each { x.fullcode = it.fullcode }
-
-it.filter{ it.out("PROPERTY").count() == 1}.each{ it.fullcode = it.out("OBJECT").next().fullcode + "->" + it.out("PROPERTY").next().fullcode; }';
+fullcode.filter{ it.out("PROPERTY").count() == 1}.each{ fullcode.fullcode = fullcode.out("OBJECT").next().fullcode + "->" + fullcode.out("PROPERTY").next().fullcode; }
+GREMLIN;
     }
 }
 

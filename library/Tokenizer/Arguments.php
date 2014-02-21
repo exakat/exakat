@@ -85,12 +85,12 @@ class Arguments extends TokenAuto {
     function fullcode() {
         return <<<GREMLIN
 s = [];
-it.out("ARGUMENT").sort{it.order}._().each{ s.add(it.fullcode); };
+fullcode.out("ARGUMENT").sort{it.order}._().each{ s.add(it.fullcode); };
 
 if ((s.size() == 0) && (it.virtual == true)) {
-    it.fullcode = '';
+    fullcode.fullcode = '';
 } else {
-    it.fullcode = "(" + s.join(", ") + ")";
+    fullcode.fullcode = "(" + s.join(", ") + ")";
 }
 GREMLIN;
     }

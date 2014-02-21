@@ -32,7 +32,7 @@ class _Use extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = "use " + it.out("USE").next().code;';
+        return 'fullcode.fullcode = "use " + fullcode.out("USE").next().code;';
     }
 }
 ?>

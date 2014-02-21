@@ -77,23 +77,24 @@ class Functioncall extends TokenAuto {
 
     function fullcode() {
         return <<<GREMLIN
-if (it.token == 'T_NS_SEPARATOR') {
+if (fullcode.token == 'T_NS_SEPARATOR') {
     s = []; 
-    it.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); };
+    fullcode.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); };
 
-    if (it.absolutens == 'true') {
-        it.setProperty('fullcode', "\\\\" + s.join("\\\\") + it.out("ARGUMENTS").next().fullcode);
-        it.setProperty('code', "\\\\" + s.join("\\\\"));
+    if (fullcode.absolutens == 'true') {
+        fullcode.setProperty('fullcode', "\\\\" + s.join("\\\\") + fullcode.out("ARGUMENTS").next().fullcode);
+        fullcode.setProperty('code', "\\\\" + s.join("\\\\"));
     } else {
-        it.setProperty('fullcode', s.join("\\\\") + it.out("ARGUMENTS").next().fullcode);
-        it.setProperty('code', s.join("\\\\"));
+        fullcode.setProperty('fullcode', s.join("\\\\") + fullcode.out("ARGUMENTS").next().fullcode);
+        fullcode.setProperty('code', s.join("\\\\"));
     }
 } else {
-    it.fullcode = it.code + it.out("ARGUMENTS").next().fullcode;
+    fullcode.fullcode = it.code + it.out("ARGUMENTS").next().fullcode;
 }
 
-// count the number of elements in the array
-it.filter{ it.code.toLowerCase() == "array" }.each{ it.setProperty("count", it.out("ARGUMENTS").out("ARGUMENT").count()); }
+// count the number of arguments
+// filter out void ? 
+fullcode.setProperty("count", fullcode.out("ARGUMENTS").out("ARGUMENT").count()); 
 GREMLIN;
     }
 

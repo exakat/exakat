@@ -76,18 +76,18 @@ class _Ppp extends TokenAuto {
 
     function fullcode() {
         return <<<GREMLIN
-it.fullcode = '';
+fullcode.fullcode = '';
 
-if (it.out('ABSTRACT').count() == 1) { it.fullcode = 'abstract ' + it.fullcode; }
-if (it.out('FINAL').count() == 1) { it.fullcode = 'final ' + it.fullcode; }
-if (it.out('STATIC').count() == 1) { it.fullcode = 'static ' + it.fullcode; }
-if (it.out('VAR').count() == 1) { it.fullcode = 'var ' + it.fullcode; }
+if (fullcode.out('ABSTRACT').count() == 1) { fullcode.fullcode = 'abstract ' + fullcode.fullcode; }
+if (fullcode.out('FINAL').count() == 1) { fullcode.fullcode = 'final ' + fullcode.fullcode; }
+if (fullcode.out('STATIC').count() == 1) { fullcode.fullcode = 'static ' + fullcode.fullcode; }
+if (fullcode.out('VAR').count() == 1) { fullcode.fullcode = 'var ' + fullcode.fullcode; }
 
-if (it.out('PUBLIC').count() == 1) { it.fullcode = 'public ' + it.fullcode; }
-if (it.out('PROTECTED').count() == 1) { it.fullcode = 'protected ' + it.fullcode; }
-if (it.out('PRIVATE').count() == 1) { it.fullcode = 'private ' + it.fullcode; }
+if (fullcode.out('PUBLIC').count() == 1) { fullcode.fullcode = 'public ' + fullcode.fullcode; }
+if (fullcode.out('PROTECTED').count() == 1) { fullcode.fullcode = 'protected ' + fullcode.fullcode; }
+if (fullcode.out('PRIVATE').count() == 1) { fullcode.fullcode = 'private ' + fullcode.fullcode; }
 
-if (it.out('DEFINE').count() == 1) { it.fullcode = it.fullcode + it.out('DEFINE').next().code; }
+if (fullcode.out('DEFINE').count() == 1) { fullcode.fullcode = fullcode.fullcode + fullcode.out('DEFINE').next().code; }
 
 GREMLIN;
     }
