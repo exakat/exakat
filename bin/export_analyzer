@@ -6,7 +6,8 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Node,
 	Everyman\Neo4j\Gremlin,
 	Tokenizer\Token,
-	Michelf\Markdown;
+	Michelf\Markdown,
+	Analyzer\Analyzer;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
@@ -67,21 +68,10 @@ if ($id = array_search('-D', $args)) {
 }
 
 $analyzer = $args[1];
-$component_file = 'library/Analyzer/'.str_replace('_', '/', $analyzer).'.php';
-if (!file_exists($component_file)) {
+if (!($analyzer = Analyzer::getClass($analyzer))) {
     print "'$analyzer' doesn't exists. Aborting\n";
     
-    $list = glob('library/Analyzer/*/*.php');
-    $r = array();
-    foreach($list as $id => $c) {
-        $c = substr($c, 17, -4);
-        $c = str_replace('/', '_', $c);
-        $l = levenshtein($c, $analyzer);
-        if ($l < 8) {
-            $r[] = $c;
-        }
-    }
-    
+    $r = Analyzer::getSuggestionClass($analyzer);
     if (count($r) > 0) {
         print "did you mean : ".join(', ', $r)."\n";
     }
@@ -89,22 +79,22 @@ if (!file_exists($component_file)) {
     die();
 }
 
-$analyzer = str_replace('_', '\\\\', $analyzer);
+$analyzer = str_replace('\\', '\\\\', $analyzer);
 
 $return = array();
 if (STYLE == 'BOOLEAN') {
-    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.any()"; 
+    $queryTemplate = "g.idx('analyzers')[['analyzer':'$analyzer']].out.any()"; 
     $vertices = query($client, $queryTemplate);
 
     $return[] = $vertices[0][0];
 } elseif (STYLE == 'COUNTED_ALL') {
-    $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.count()"; 
+    $queryTemplate = "g.idx('analyzers')[['analyzer':'$analyzer']].out.count()"; 
     $vertices = query($client, $queryTemplate);
 
     $return[] = $vertices[0][0];
 } elseif (STYLE == 'ALL') {
      $queryTemplate = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.as('x')
+g.idx('analyzers')[['analyzer':'$analyzer']].out.as('x')
     .inE('FILE').as('file').back('x')
     .inE('NAMESPACE').as('namespace').back('x')
     .inE('CLASS').as('class').back('x')
