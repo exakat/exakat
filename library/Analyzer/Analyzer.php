@@ -73,6 +73,21 @@ class Analyzer {
         }
     }
     
+    public static function getSuggestionClass($analyzer) {
+        $list = glob('library/Analyzer/*/*.php');
+        $r = array();
+        foreach($list as $id => $c) {
+            $c = substr($c, 17, -4);
+            $c = str_replace('/', '_', $c);
+            $l = levenshtein($c, $analyzer);
+            if ($l < 8) {
+                $r[] = $c;
+            }
+        }
+        
+        return $r;
+    }
+    
     public static function getInstance($name, $client) {
         if ($analyzer = Analyzer::getClass($name)) {
             return new $analyzer($client);
