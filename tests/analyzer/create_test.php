@@ -7,12 +7,12 @@
     }
     $test = $args[1];
     
-    if (strpos($test, '_') === false) {
-        print "The test should look like 'X_Y'. Aborting\n";
+    if (strpos($test, '/') === false) {
+        print "The test should look like 'X/Y'. Aborting\n";
         die();
     }
     
-    list($dir, $test) = explode('_', $test);
+    list($dir, $test) = explode('/', $test);
     
     if (!file_exists(dirname(dirname(__DIR__)).'/library/Analyzer/'.$dir)) {
         $groups = array_map('basename', glob(dirname(dirname(__DIR__)).'/library/Analyzer/*' , GLOB_ONLYDIR));
@@ -27,7 +27,7 @@
         $groups = array_map( function ($name) { return substr(basename($name), 0, -4); }, 
                              glob(dirname(dirname(__DIR__)).'/library/Analyzer/'.$dir.'/*'));
         $closest = closest_string($dir, $groups);
-        print "No such analyzer '{$dir}_$test'. Did you mean '$closest' ? \nChoose among : ".join(', ', $groups);
+        print "No such analyzer '{$dir}/$test'. Did you mean '$closest' ? \nChoose among : ".join(', ', $groups);
         
         print ". Aborting.\n";
         die();
