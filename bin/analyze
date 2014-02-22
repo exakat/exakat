@@ -32,7 +32,7 @@ if ($id = array_search('-p', $args)) {
     if (Analyzer\Analyzer::getClass($analyzer)) {
         $analyzers_class = array($analyzer);
     } else {
-        die("No such class as $analyzer. Aborting\n");
+        die("No such class as '$analyzer'. Aborting\n");
     }
 } elseif ($id = array_search('-T', $args)) {
     $project = '';
