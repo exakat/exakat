@@ -190,3 +190,9 @@ Complex logical expression, without ().
 Commented Code
 
 Un paramètre inutilisé dans une méthode qui en étant une autre est OK (C'est alors a relier à la généralisation induite par la classe du dessus, on peut aussi commenter les autres classes.)
+
+Faire une class MySQL separée
+Faire une class Stats separée
+
+Spot identical files and avoir double analyse (.... ?)
+Spot useless domain names (namespace x; no function/classs/interface/constant)
