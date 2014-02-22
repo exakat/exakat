@@ -25,6 +25,6 @@ $mysql = new mysqli('localhost', 'root', '', 'exakat');
 $query = "INSERT INTO unittests (`".join("`, `", array_keys($row))."`) VALUES (".join(", ", array_values($row)).")";
 $mysql->query($query);
     
-print "OK\n";
+print $row['tests']." tests ran : {$row['fails']} failed (".number_format($row['fails'] / $row['tests'] * 100, 2)." %)\n";
 
 ?>
