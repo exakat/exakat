@@ -7,8 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Functions_Closures extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testFunctions_Closures01()  { $this->generic_test('Functions_Closures.01'); }
+    public function testFunctions_Closures02()  { $this->generic_test('Functions_Closures.02'); }
 }
 ?>
