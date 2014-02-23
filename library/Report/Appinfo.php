@@ -77,6 +77,7 @@ class Appinfo {
                     'Functions' => array(
                             'Functions'  => 'Functions/Functionnames',
                             'Redeclared Function'  => 'Functions/RedeclaredPhpFunctions',
+                            'Recursive Function'  => 'Functions/Recursive',
                     ),
                     'Classes' => array(
                             'Classes'    => 'Classes/Classnames',
