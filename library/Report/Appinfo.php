@@ -83,6 +83,7 @@ class Appinfo {
                             'Interfaces' => 'Interfaces/Interfacenames',
                             'Closures'   => 'Functions/Closures',
                             'Static variables'   => 'Variables/StaticVariables',
+                            'Magic methods'   => 'Variables/MagicMethod',
                     ),
                     'Constants' => array(
                             'Constants'     => 'Constants/ConstantDefinition',
