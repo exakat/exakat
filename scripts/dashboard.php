@@ -16,44 +16,6 @@ if ($c = preg_match_all('/project(\S*)/', $r, $R)) {
 }
 print "\n\n";
 
-// checking fullcode.log
-$errors = array();
-$Class_tmp = array();
-$files = glob('projects/*/log/fullcode.log');
-foreach($files as $file) {
-    $log = file($file);
-    $R = preg_grep('/Left token	(\d+)$/', $log);
-    $last = substr(array_pop($R), 11) + 0 ;
-    
-    if ($last != 0) {
-        $errors[] = $file." ($last)";
-    }
-    
-    // spot Class_tmp
-    $R = preg_grep('/Class_tmp	(\d+)$/', $log);
-    $last = substr(array_pop($R), 10) + 0 ;
-    
-    if ($last != 0) {
-        $Class_tmp[] = $file." ($last)";
-    }
-}
-
-if ($errors) {
-    print count($errors)." fullcode.log are wrong\n";
-    print "  + ".join("\n  + ", $errors)."\n\n";
-    print "Total of $count error.logs\n";
-} else {
-    print "All ".count($files)." fullcode.log are OK\n";
-}
-print "\n\n";
-
-if ($Class_tmp) {
-    print count($Class_tmp)." fullcode.log have Class_tmp\n";
-    print "  + ".join("\n  + ", $Class_tmp)."\n\n";
-} else {
-    print "All ".count($files)." fullcode.log are free of Class_tmp\n";
-}
-
 $res = shell_exec('cd tests/analyzer/; php list.php -0');
 preg_match('/Total : (\d+) tests/is', $res, $R);
 $total_UT = $R[1];
@@ -96,8 +58,6 @@ if (!file_exists('tests/analyzer/phpunit.txt')) {
 }
 print "\n";
 
-// checking fullcode.log
-
 $tokens = 0;
 $indexed = array();
 $next = array();
@@ -131,7 +91,7 @@ if ($next) {
     print "All ".count($files)." stat.log are free of NEXT\n";
 }
 
-print count($files)." projects collecting ".number_format($tokens,0)." tokens\n";
+print count($files)." projects collecting ".number_format($tokens,0)." tokens\n\n";
 
 $files = glob('projects/*/');
 $sqlite_md = array();
