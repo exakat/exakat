@@ -6,11 +6,10 @@ class _Var extends TokenAuto {
     static public $operators = array('T_VAR');
 
     function _check() {
-        $values = array('T_EQUAL', 'T_COMMA');
     // class x { var $x }
         $this->conditions = array( 0 => array('token' => _Var::$operators),
                                    1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static' )),
-                                   2 => array('filterOut' => $values)
+                                   2 => array('filterOut' => array('T_EQUAL', 'T_COMMA'))
                                  );
         
         $this->actions = array('to_ppp'     => 1,
@@ -45,8 +44,10 @@ class _Var extends TokenAuto {
     }
 
     function fullcode() {
-        return '
-it.fullcode = "var "; ';
+        return <<<GREMLIN
+if (fullcode.out('VAR').count() == 1) { fullcode.fullcode = 'var ' + fullcode.out('DEFINE').next().code; }
+if (fullcode.out('VALUE').hasNot('token', 'T_VOID').count() == 1) { fullcode.fullcode = fullcode.fullcode + ' = ' + fullcode.out('VALUE').next().fullcode; }
+GREMLIN;
     }
 }
 ?>

@@ -40,7 +40,7 @@ class Ifthen extends TokenAuto {
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => array('Void', 'Block')),
                                    3 => array('atom' => 'Ifthen', 'token' => 'T_ELSEIF'),
-                                   4 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
+                                   //4 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
         );
         
         $this->actions = array('transform'    => array('1' => 'CONDITION',

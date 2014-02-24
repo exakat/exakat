@@ -96,6 +96,8 @@ class Sign extends TokenAuto {
         return <<<GREMLIN
 if (it.out('SIGN').count() > 0) {
     it.fullcode = it.code + it.out("SIGN").next().fullcode; 
+} else {
+    it.fullcode = it.code; 
 }
 GREMLIN;
     }

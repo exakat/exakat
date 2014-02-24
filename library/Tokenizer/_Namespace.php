@@ -47,9 +47,8 @@ class _Namespace extends TokenAuto {
     function fullcode() {
         return <<<GREMLIN
 
-token = it;
-it.out("NAMESPACE").each{ token.fullcode = "namespace " + it.fullcode;} 
-it.filter{ it.out('NAMESPACE').count() == 0}.each{ token.fullcode = "namespace Global";} 
+fullcode.out("NAMESPACE").each{ fullcode.fullcode = "namespace " + it.fullcode;} 
+fullcode.filter{ it.out('NAMESPACE').count() == 0}.each{ fullcode.fullcode = "namespace Global";} 
 
 GREMLIN;
     }

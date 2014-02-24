@@ -13,7 +13,7 @@ class _Interface extends TokenAuto {
         );
         
         $this->actions = array('transform'  => array( 1 => 'NAME',
-                                                      2 => 'CODE'),
+                                                      2 => 'BLOCK'),
                                'atom'       => 'Interface',
                                'cleanIndex' => true);
         $this->checkAuto();
@@ -29,7 +29,7 @@ class _Interface extends TokenAuto {
         $this->actions = array('transform'  => array( 1 => 'NAME',
                                                       2 => 'DROP',
                                                       3 => 'EXTENDS',
-                                                      4 => 'CODE'),
+                                                      4 => 'BLOCK'),
                                'atom'       => 'Interface',
                                'arguments2extends' => true,
                                'cleanIndex' => true);

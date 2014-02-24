@@ -75,9 +75,11 @@ current = it;
 it.out("EXTENDS").each{ current.fullcode = current.fullcode + " extends " + it.fullcode;}
 
 // implements
-i = [];
-it.out("IMPLEMENTS").each{ i.add(it.fullcode); }
-current.fullcode = current.fullcode + " implements " + i.join(", ");
+if (it.out("IMPLEMENTS").count() > 0) {
+    i = [];
+    it.out("IMPLEMENTS").each{ i.add(it.fullcode); }
+    current.fullcode = current.fullcode + " implements " + i.join(", ");
+}
         
         ';
 // didn't added code, it seems too much....

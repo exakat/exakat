@@ -18,7 +18,9 @@ class _Abstract extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.code';
+        return <<<GREMLIN
+if (fullcode.out('ABSTRACT').count() == 1) { fullcode.fullcode = 'abstract ' + fullcode.fullcode; }
+GREMLIN;
     }
 
 }

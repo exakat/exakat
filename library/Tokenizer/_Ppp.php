@@ -76,13 +76,6 @@ class _Ppp extends TokenAuto {
 
     function fullcode() {
         return <<<GREMLIN
-fullcode.fullcode = '';
-
-if (fullcode.out('ABSTRACT').count() == 1) { fullcode.fullcode = 'abstract ' + fullcode.fullcode; }
-if (fullcode.out('FINAL').count() == 1) { fullcode.fullcode = 'final ' + fullcode.fullcode; }
-if (fullcode.out('STATIC').count() == 1) { fullcode.fullcode = 'static ' + fullcode.fullcode; }
-if (fullcode.out('VAR').count() == 1) { fullcode.fullcode = 'var ' + fullcode.fullcode; }
-
 if (fullcode.out('PUBLIC').count() == 1) { fullcode.fullcode = 'public ' + fullcode.fullcode; }
 if (fullcode.out('PROTECTED').count() == 1) { fullcode.fullcode = 'protected ' + fullcode.fullcode; }
 if (fullcode.out('PRIVATE').count() == 1) { fullcode.fullcode = 'private ' + fullcode.fullcode; }

@@ -18,7 +18,9 @@ class _Final extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = it.code; ';
+        return <<<GREMLIN
+if (fullcode.out('FINAL').count() == 1) { fullcode.fullcode = 'final ' + fullcode.fullcode; }
+GREMLIN;
     }
 }
 ?>

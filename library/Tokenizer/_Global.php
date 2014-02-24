@@ -32,10 +32,12 @@ class _Global extends TokenAuto {
     }
 
     function fullcode() {
-        return '
-it.fullcode = "global " + it.out("NAME").next().fullcode;
+        return <<<GREMLIN
+if (fullcode.out('NAME').count() == 1) {
+    fullcode.fullcode = "global " + fullcode.out("NAME").next().fullcode;
+}
 
-';
+GREMLIN;
     }
 
 }

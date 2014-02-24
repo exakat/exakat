@@ -75,9 +75,9 @@ class _Function extends TokenAuto {
         );
         
         $this->actions = array('to_lambda_use'  => true,
-                               'atom'       => 'Function',
-                               'checkTypehint' => 'Function',
-                               'cleanIndex' => true);
+                               'atom'           => 'Function',
+                               'checkTypehint'  => 'Function',
+                               'cleanIndex'     => true);
         $this->checkAuto();
 
         return $this->checkRemaining();
@@ -85,27 +85,21 @@ class _Function extends TokenAuto {
 
     function fullcode() {
         return <<<GREMLIN
-x = it;
+fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " " + fullcode.out("ARGUMENTS").next().fullcode + " ;";}
 
+fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " " + fullcode.out("ARGUMENTS").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
 
-it.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ it.fullcode = "function " + it.out("NAME").next().fullcode + " " + it.out("ARGUMENTS").next().fullcode + " ;";}
+fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0}.each{ fullcode.fullcode = "function " + fullcode.out("ARGUMENTS").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
 
-it.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ it.fullcode = "function " + it.out("NAME").next().fullcode + " " + it.out("ARGUMENTS").next().fullcode + " " + it.out("BLOCK").next().fullcode;}
+fullcode.filter{it.out("USE").count() == 1}.each{ fullcode.fullcode = "function " + fullcode.out("ARGUMENTS").next().fullcode + " use " + fullcode.out("USE").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
 
-it.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0}.each{ it.fullcode = "function " + it.out("ARGUMENTS").next().fullcode + " " + it.out("BLOCK").next().fullcode;}
+if (fullcode.out('ABSTRACT').count() == 1) { fullcode.fullcode = 'abstract ' + fullcode.fullcode; }
+if (fullcode.out('FINAL').count() == 1) { fullcode.fullcode = 'final ' + fullcode.fullcode; }
+if (fullcode.out('STATIC').count() == 1) { fullcode.fullcode = 'static ' + fullcode.fullcode; }
 
-it.filter{it.out("USE").count() == 1}.each{ it.fullcode = "function " + it.out("ARGUMENTS").next().fullcode + " use " + it.out("USE").next().fullcode + " " + it.out("BLOCK").next().fullcode;}
-
-if (it.out('ABSTRACT').count() == 1) { it.fullcode = 'abstract ' + it.fullcode; }
-if (it.out('FINAL').count() == 1) { it.fullcode = 'final ' + it.fullcode; }
-if (it.out('STATIC').count() == 1) { it.fullcode = 'static ' + it.fullcode; }
-
-if (it.out('PUBLIC').count() == 1) { it.fullcode = 'public ' + it.fullcode; }
-if (it.out('PROTECTED').count() == 1) { it.fullcode = 'protected ' + it.fullcode; }
-if (it.out('PRIVATE').count() == 1) { it.fullcode = 'private ' + it.fullcode; }
-
-//if (it.out('DEFINE').count() == 1) { it.fullcode = it.fullcode + it.out('DEFINE').next().code; }
-
+if (fullcode.out('PUBLIC').count() == 1) { fullcode.fullcode = 'public ' + fullcode.fullcode; }
+if (fullcode.out('PROTECTED').count() == 1) { fullcode.fullcode = 'protected ' + fullcode.fullcode; }
+if (fullcode.out('PRIVATE').count() == 1) { fullcode.fullcode = 'private ' + fullcode.fullcode; }
 
 GREMLIN;
     }

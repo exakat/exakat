@@ -27,9 +27,7 @@ class Arguments extends TokenAuto {
                                    0 => array('token' => Arguments::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => $operands),
-                                   2 => array('token' => array('T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_SEMICOLON', 
-                                                               )),
-                                                               //'T_OPEN_CURLY',  open curly are capture in another regex. One must avoic $a, $c{d} that let {d} alone.
+                                   2 => array('token' => array('T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_SEMICOLON')),
                                  );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
@@ -39,15 +37,15 @@ class Arguments extends TokenAuto {
                                                       -1 => '0'),
                                'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
                                'atom'        => 'Arguments',
-                               'cleanIndex' => true
+                               'cleanIndex'  => true
                                );
         $this->checkAuto();
 
         // @note arguments separated by , (interface), ending on a {
-        $this->conditions = array(-1 => array('atom' => array('Identifier', 'Arguments', 'Nsname') ),
+        $this->conditions = array(-1 => array('atom'  => array('Identifier', 'Arguments', 'Nsname') ),
                                    0 => array('token' => Arguments::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('atom' => array('Identifier', 'Nsname')),
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => array('Identifier', 'Nsname')),
                                    2 => array('token' => 'T_OPEN_CURLY')
                                  );
         
@@ -58,7 +56,7 @@ class Arguments extends TokenAuto {
                                                       -1 => '0'),
                                'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
                                'atom'        => 'Arguments',
-                               'cleanIndex' => true
+                               'cleanIndex'  => true
                                );
         $this->checkAuto();
 
@@ -75,7 +73,7 @@ class Arguments extends TokenAuto {
                                                       ),
                                'order'       => array( 1 => '1',
                                                       -1 => '0'),
-                               'atom'       => 'Arguments',
+                               'atom'        => 'Arguments',
                                );
         $this->checkAuto();
 

@@ -552,7 +552,7 @@ g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');
             $qactions[] = "
 /* to to_lambda function */
 
-x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line, fullcode:'']);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -585,7 +585,7 @@ g.addEdge(g.idx('racines')[['token':'DELETE']].next(), cp, 'DELETE');
             $qactions[] = "
 /* to to_lambda function with use */
 
-x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line, fullcode:'']);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -633,9 +633,12 @@ g.addEdge(it, x, 'NEXT');
         }
 
         if (isset($actions['to_ppp'])) {
+            $fullcode = $this->fullcode();
+            
             $qactions[] = "
+
 /* to ppp alone */
-x = g.addVertex(null, [code:it.code, atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:it.code, atom:'Ppp', token:'T_PPP', virtual:true, line:it.line, fullcode:'' ]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -661,11 +664,17 @@ variable.bothE('NEXT').each{ g.removeEdge(it); }
 variable.bothE('INDEXED').each{ g.removeEdge(it); }
 
 g.removeEdge( it.inE('NEXT').next());
+
+fullcode = x;
+$fullcode
 ";
             unset($actions['to_ppp']);
         }        
 
         if (isset($actions['to_ppp2'])) {
+            $ppp = new _Ppp(Token::$client);
+            $fullcode = $ppp->fullcode();
+
             $qactions[] = "
 /* to ppp already ppp */
 
@@ -677,18 +686,29 @@ ppp = it.out('NEXT').next();
 it.bothE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(p, ppp, 'NEXT');
 
+fullcode = ppp;
+$fullcode
+
 ";
             unset($actions['to_ppp2']);
         }        
 
         if (isset($actions['to_option'])) {
+            $ppp = new _Ppp(Token::$client);
+            $fullcode = $ppp->fullcode();
+
             $qactions[] = "
 /* turn the current token to an option of the next */
 
-g.addEdge(it.out('NEXT').next() , it, it.code.toUpperCase());
-g.addEdge(it.in('NEXT').next() , it.out('NEXT').next(), 'NEXT');
+ppp = it.out('NEXT').next();
+g.addEdge(ppp, it, it.code.toUpperCase());
+g.addEdge(it.in('NEXT').next() , ppp, 'NEXT');
 
 it.bothE('NEXT').each{ g.removeEdge(it); }
+
+fullcode = ppp;
+ppp.setProperty('avant', 'oui');
+$fullcode
 
 ";
             unset($actions['to_option']);
@@ -696,6 +716,9 @@ it.bothE('NEXT').each{ g.removeEdge(it); }
         
         
         if (isset($actions['to_ppp_assignation'])) {
+            $ppp = new _Ppp(Token::$client);
+            $fullcode = $ppp->fullcode();
+
             $qactions[] = "
 /* to ppp with assignation */
 
@@ -717,6 +740,9 @@ assignation.bothE('NEXT').each{ g.removeEdge(it); }
 g.removeVertex(assignation);
 
 g.removeEdge( it.inE('NEXT').next());
+
+fullcode = x;
+$fullcode
 ";
             unset($actions['to_ppp_assignation']);
         }
@@ -1327,7 +1353,7 @@ s.bothE('NEXT').each{ g.removeEdge(it); }
         if (isset($actions['insert_global_ns'])) {
             $qactions[] = "
 /* insert global namespace */
-x = g.addVertex(null, [code:'Global', atom:'Identifier', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'Global', atom:'Identifier', virtual:true, line:it.line, fullcode:'Global']);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);

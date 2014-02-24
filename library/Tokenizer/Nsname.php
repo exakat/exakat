@@ -59,16 +59,15 @@ class Nsname extends TokenAuto {
     function fullcode() {
         return <<<GREMLIN
 s = []; 
-it.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); };
+fullcode.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); };
 
-if (it.absolutens == 'true') {
-    it.setProperty('fullcode', "\\\\" + s.join("\\\\"));
+if (fullcode.absolutens == 'true') {
+    fullcode.setProperty('fullcode', "\\\\" + s.join("\\\\"));
 } else {
-    it.setProperty('fullcode', s.join("\\\\"));
+    fullcode.setProperty('fullcode', s.join("\\\\"));
 }
 
-x = it;
-it.out('AS').each{ x.fullcode = x.fullcode + ' as ' + it.code; }
+fullcode.out('AS').each{ fullcode.fullcode = fullcode.fullcode + ' as ' + fullcode.code; }
 GREMLIN;
     }
 }
