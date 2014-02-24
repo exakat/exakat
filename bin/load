@@ -314,6 +314,12 @@ function process_file($filename, $log_file) {
                 if ($Php->getTokenname($token[0]) == 'T_STRING') {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
                             ->setProperty('fullcode', $token[1])->save();
+                } elseif ($Php->getTokenname($token[0]) == 'T_CONSTANT_ENCAPSED_STRING') {
+                            print $Php->getTokenname($token[0]);
+                    $T[$Tid]->setProperty('delimiter', in_array($token[1][0], array("'", '"')) ? $token[1][0] : '')
+                            ->setProperty('noDelimiter', trim($token[1], '"\''))
+                            ->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
+                            ->setProperty('fullcode', $token[1])->save();
                 } else {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
                             ->setProperty('fullcode', $token[1])->save();
@@ -341,7 +347,7 @@ function process_file($filename, $log_file) {
             if ($token == '{' && $tokens[$id + 1] == '}') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
-                                              ->setProperty('fullcode', ' ')
+                                              ->setProperty('fullcode', '{ /**/ } ')
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Block')
                                               ->setProperty('modifiedBy', 'bin/load12')
@@ -417,10 +423,10 @@ function process_file($filename, $log_file) {
                 $Tid++;
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
-                                              ->setProperty('fullcode', ' ')
+                                              ->setProperty('fullcode', '()')
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Arguments')
-                                             ->setProperty('modifiedBy', 'bin/load6')
+                                              ->setProperty('modifiedBy', 'bin/load6')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
 
