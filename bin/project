@@ -44,6 +44,8 @@ logProgress($project, $progress++ / $total_steps);
 shell_exec('sh scripts/clean.sh'); // or php bin/delete
 logProgress($project, $progress++ / $total_steps);
 
+print "Running project '$project'\n";
+
 shell_exec('php bin/files '.$project.'');
 shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/ -p '.$project.'');
 logProgress($project, $progress++ / $total_steps);
