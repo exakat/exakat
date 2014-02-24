@@ -16,6 +16,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
     
     function generic_test($file) {
         list($analyzer, $number) = explode('.', $file);
+        $analyzer = str_replace('_', '/', $analyzer);
         
         $test_config = 'Analyzer\\'.str_replace('_', '\\\\', str_replace('Test', '', get_class($this)));
         $shell = 'cd ../..; php bin/load -p test -f tests/analyzer/source/'.$file.'.php; php bin/build_root -p test; php bin/tokenizer -p test;  php bin/fullcode -p test; php bin/analyze -P '.$test_config;
