@@ -499,8 +499,13 @@ GREMLIN;
         return $this;
     }
 
-    function samePropertyAs($property, $name) {
-        $this->addMethod('filter{ it.'.$property.' == '.$name.'}');
+    function samePropertyAs($property, $name, $caseSensitive = false) {
+        if ($caseSensitive) {
+            $caseSensitive = '';
+        } else {
+            $caseSensitive = '.toLowerCase()';
+        }
+        $this->addMethod('filter{ it.'.$property.$caseSensitive.' == '.$name.$caseSensitive.'}');
 
         return $this;
     }
