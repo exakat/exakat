@@ -57,11 +57,10 @@ SHELL
                     print "Some columns were not processed.\n";
                 }
             }
-            $row['code'] = str_replace("\\", "\\\\", $row['code']);
-            $row['code'] = str_replace("\"", "\\\"", $row['code']);
-
-            $row['fullcode'] = str_replace("\\", "\\\\", $row['fullcode']);
-            $row['fullcode'] = str_replace("\"", "\\\"", $row['fullcode']);
+            $row['code'] = $this->escapeString($row['code']);
+            $row['fullcode'] = $this->escapeString($row['fullcode']);
+            $row['delimiter'] = $this->escapeString($row['delimiter']);
+            $row['noDelimiter'] = $this->escapeString($row['noDelimiter']);
             fputcsv($fp, $row, "\t");
         }
         fclose($fp);
@@ -136,6 +135,11 @@ SHELL
         $this->isLink = true;
 
         return $this;
+    }
+    
+    function escapeString($string) {
+        $x = str_replace("\\", "\\\\", $string);
+        return str_replace("\"", "\\\"", $x);
     }
 }
 ?>
