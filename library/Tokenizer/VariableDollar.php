@@ -5,7 +5,7 @@ namespace Tokenizer;
 class VariableDollar extends TokenAuto {
     static public $operators = array('T_DOLLAR');
     
-    function _check() {
+    public function _check() {
         // $x or $$x or $$$
         $this->conditions = array(0 => array('token' => VariableDollar::$operators,
                                              'atom' => 'none'),
@@ -35,6 +35,14 @@ class VariableDollar extends TokenAuto {
         
         return $this->checkRemaining();
     }
-}
 
+    public function fullcode() {
+        return <<<GREMLIN
+
+it.fullcode = "\\$" + it.code; 
+
+GREMLIN;
+
+    }
+}
 ?>

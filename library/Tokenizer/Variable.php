@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Variable extends TokenAuto {
     static public $operators = array('T_DOLLAR_OPEN_CURLY_BRACES', 'T_CURLY_OPEN');
     
-    function _check() {
+    public function _check() {
         // "  {$variable}  " or " ${x} "
         $this->conditions = array(0 => array('token' => Variable::$operators,
                                              'atom' => 'none'),
@@ -22,7 +22,7 @@ class Variable extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return '
         
 it.fullcode = it.code; 

@@ -639,7 +639,7 @@ g.addEdge(it, x, 'NEXT');
             $qactions[] = "
 
 /* to ppp alone */
-x = g.addVertex(null, [code:it.code, atom:'Ppp', token:'T_PPP', virtual:true, line:it.line, fullcode:'' ]);
+x = g.addVertex(null, [code:it.code, atom:'Ppp', token:'T_PPP', virtual:true, line:it.line, fullcode:it.code ]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -656,6 +656,7 @@ it.out('NEXT').has('atom', 'Variable').each {
     g.addEdge(x, tvoid, 'VALUE');
 }
 g.addEdge(x, it, it.code.toUpperCase());
+it.fullcode = it.code;
 
 g.addEdge(it.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
@@ -706,9 +707,9 @@ g.addEdge(ppp, it, it.code.toUpperCase());
 g.addEdge(it.in('NEXT').next() , ppp, 'NEXT');
 
 it.bothE('NEXT').each{ g.removeEdge(it); }
+it.fullcode = it.code;
 
 fullcode = ppp;
-ppp.setProperty('avant', 'oui');
 $fullcode
 
 ";
@@ -1407,6 +1408,8 @@ thecatch.bothE('NEXT').each{ g.removeEdge(it); }
         }           
 
         if (isset($actions['to_typehint'])) {
+            $fullcode = $this->fullcode();
+
             $qactions[] = "
 /* to type hint */
 x = g.addVertex(null, [code:'Typehint', atom:'Typehint', virtual:true, line:it.line]);
@@ -1416,6 +1419,7 @@ g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('N
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
 a = it.out('NEXT').next();
+a.fullcode = a.code;
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').out('NEXT').next(), 'NEXT');
@@ -1434,6 +1438,7 @@ x.outE.hasNot('label', 'NEXT').inV.each{
 }
 
 fullcode = x;
+$fullcode
 ";
             $this->set_atom = true;
             unset($actions['to_typehint']);
