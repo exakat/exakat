@@ -41,8 +41,8 @@ class Concatenation extends TokenAuto {
     function fullcode() {
         return <<<GREMLIN
 s = [];
-it.out("CONCAT").sort{it.order}._().each{ s.add(it.fullcode); };
-it.fullcode = "" + s.join(" . ") + "";
+fullcode.out("CONCAT").sort{it.order}._().each{ s.add(it.fullcode); };
+fullcode.fullcode = "" + s.join(" . ") + "";
         
 GREMLIN;
     }

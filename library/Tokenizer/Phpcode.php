@@ -47,12 +47,12 @@ class Phpcode extends TokenAuto {
 
     function fullcode() {
         return <<<GREMLIN
-if (it.code == '<script language=\\"php\\">') {
-    it.fullcode = "<script language=\\"php\\">" + it.out("CODE").next().fullcode + "</script>";
-} else if (it.code in ['<%', '<%=']) {
-    it.fullcode = it.code.trim() + " " + it.out("CODE").next().fullcode + "%>";
+if (fullcode.code == '<script language=\\"php\\">') {
+    fullcode.fullcode = "<script language=\\"php\\">" + fullcode.out("CODE").next().fullcode + "</script>";
+} else if (fullcode.code in ['<%', '<%=']) {
+    fullcode.fullcode = fullcode.code.trim() + " " + fullcode.out("CODE").next().fullcode + "%>";
 } else {
-    it.fullcode = it.code.trim() + " " + it.out("CODE").next().fullcode + "?>";
+    fullcode.fullcode = fullcode.code.trim() + " " + fullcode.out("CODE").next().fullcode + "?>";
 }
 
 GREMLIN;

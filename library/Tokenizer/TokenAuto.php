@@ -376,11 +376,12 @@ g.removeVertex(var);
         }
 
         if (isset($actions['to_global'])) {
-            $fullcode = $this->fullcode();
+            $_global = new _Global(Token::$client);
+            $fullcode = $_global->fullcode();
 
             $atom = $actions['to_global'];
             $qactions[] = "
-/* to global with arguments */
+/* to global without arguments */
 var = it;
 arg = it.out('NEXT').next();
 
@@ -397,13 +398,13 @@ arg.out('ARGUMENT').each{
     g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
     g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
     
-    fullcode = x;
-    $fullcode
-    
     g.addEdge(var, x, 'ELEMENT');
     g.addEdge(x,  it, 'NAME');
     
     it.inE('ARGUMENT').each{ g.removeEdge(it); }
+
+    fullcode = x;
+    $fullcode
 }
 
 g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
@@ -718,7 +719,7 @@ $fullcode
         if (isset($actions['to_ppp_assignation'])) {
             $ppp = new _Ppp(Token::$client);
             $fullcode = $ppp->fullcode();
-
+            
             $qactions[] = "
 /* to ppp with assignation */
 
@@ -731,6 +732,7 @@ g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE')
 g.addEdge(x, it.out('NEXT').out('LEFT').next(), 'DEFINE');
 g.addEdge(x, it.out('NEXT').out('RIGHT').next(), 'VALUE');
 g.addEdge(x, it, it.code.toUpperCase());
+it.fullcode = it.code;
 
 g.addEdge(it.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
@@ -764,6 +766,7 @@ it.bothE('NEXT').each{ g.removeEdge(it); }
 
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
 ";
+                            $this->set_atom = false;
                         } else {
                             $qactions[] = "
 /* transform drop out ($c) */
@@ -847,6 +850,7 @@ it.bothE('NEXT').each{    g.removeEdge(it); }
 g.removeVertex(it);
 g.addEdge(a, b, 'NEXT');
 ";
+                        $this->set_atom = false;
                     } else {
                         die("Destination 0 for transform\n");
                     }
@@ -993,19 +997,17 @@ f.each{
             unset($actions['dropNextCode']);
         }
 
+/*
         if (isset($actions['insertConcat'])) {
             $fullcode = $this->fullcode();
             
             $qactions[] = "
-/* insertConcat */
+/* insertConcat * /
 x = g.addVertex(null, [code:'{$actions['insertConcat']}', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
-
-fullcode = x;
-$fullcode
 
 g.addEdge(x, it, 'CONCAT');
 g.addEdge(x, it.out('NEXT').next(), 'CONCAT');
@@ -1015,6 +1017,9 @@ g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
 
 it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
 it.bothE('NEXT').each{ g.removeEdge(it); }
+
+fullcode = x;
+$fullcode
 
 x.out('CONCAT').has('atom', 'Concatenation').each{
     it.out('CONCAT').each{
@@ -1027,7 +1032,7 @@ x.out('CONCAT').has('atom', 'Concatenation').each{
 ";
             unset($actions['insertConcat']);
         }
-
+*/
         if (isset($actions['insertSequence'])) {
             $fullcode = $this->fullcode();
             
@@ -1353,7 +1358,7 @@ s.bothE('NEXT').each{ g.removeEdge(it); }
         if (isset($actions['insert_global_ns'])) {
             $qactions[] = "
 /* insert global namespace */
-x = g.addVertex(null, [code:'Global', atom:'Identifier', virtual:true, line:it.line, fullcode:'Global']);
+x = g.addVertex(null, [code:'Global', atom:'Identifier', token:'T_STRING', virtual:true, line:it.line, fullcode:'Global']);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -1591,6 +1596,7 @@ if (c == 1) { // there is a list of argument in order 0
         it.out('$link').has('order', 0).next().setProperty('orderedby', 'one_is_multiple');
         sub = it.out('$link').has('order', 1).next();
         sub.out('$link').each{ it.setProperty( 'order', it.order + 1); };
+
         g.addEdge(sub, it.out('$link').has('order', 0).next(), '$link');
         
         g.addEdge(it.in('NEXT').next(), sub, 'NEXT');
@@ -2116,7 +2122,8 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         }
 
         if (isset($actions['make_quoted_string'])) {
-            $fullcode = $this->fullcode();
+            $concatenation = new Concatenation(Token::$client);
+            $fullcode = $concatenation->fullcode();
             
             $atom = $actions['make_quoted_string'];
             $qactions[] = " 
@@ -2126,9 +2133,6 @@ g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('C
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
-
-fullcode = x;
-$fullcode
 
 it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}{!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.each{
     g.addEdge(x, it, 'CONCAT');
@@ -2168,9 +2172,6 @@ g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FU
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
-fullcode = x;
-$fullcode
-
 z = it.in('NEXT').next();
 a = it;
 b = it.out('NEXT').next();
@@ -2197,6 +2198,9 @@ x.as('origin').out('ELEMENT').has('atom','Concatenation').each{
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
 }
 
+fullcode = x;
+$fullcode
+
 /* Clean index */
 x.out('ELEMENT').each{ 
     it.inE('INDEXED').each{    
@@ -2212,7 +2216,7 @@ x.out('ELEMENT').each{
             $qactions[] = " 
 /* while_to_block */  
 
-x = g.addVertex(null, [code:'Block With While', token:'T_BLOCK', atom:'Block', virtual:true, line:it.line, modifiedBy:'_While']);
+x = g.addVertex(null, [code:'Block With While', token:'T_BLOCK', atom:'Block', virtual:true, line:it.line, modifiedBy:'_While', fullcode:'{ /**/ } ']);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);

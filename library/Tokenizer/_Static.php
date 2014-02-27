@@ -93,8 +93,9 @@ class _Static extends TokenAuto {
 
     function fullcode() {
         return <<<GREMLIN
-if (fullcode.out('STATIC').count() == 1) { fullcode.fullcode = 'static ' + fullcode.fullcode; }
-if (fullcode.out('DEFINE').count() == 1) { fullcode.fullcode = 'static ' + fullcode.out('DEFINE').next().code; }
+
+if (fullcode.out('STATIC').count() == 1) { fullcode.fullcode = 'static ' + fullcode.code; }
+if (fullcode.out('DEFINE').count() == 1) { fullcode.fullcode = 'static ' + fullcode.out('DEFINE').next().fullcode; }
 if (fullcode.out('VALUE').hasNot('token', 'T_VOID').count() == 1) { fullcode.fullcode = fullcode.fullcode + ' = ' + fullcode.out('VALUE').next().fullcode; }
 
 GREMLIN;

@@ -23,15 +23,15 @@ class String extends TokenAuto {
 
     function fullcode() {
         return <<<GREMLIN
-it.fullcode = it.code;
+fullcode.fullcode = fullcode.code;
 
-if (it.code.length() > 1) {
-    if (it.code.substring(0, 1) in ["'", '"']) {
-        it.setProperty("delimiter", it.code.substring(0, 1));
-        it.setProperty("noDelimiter", it.code.substring(1, it.code.length() - 1));
+if (fullcode.code.length() > 1) {
+    if (fullcode.code.substring(0, 1) in ["'", '"']) {
+        fullcode.setProperty("delimiter", fullcode.code.substring(0, 1));
+        fullcode.setProperty("noDelimiter", fullcode.code.substring(1, fullcode.code.length() - 1));
     }
     // @note : only the first delimiter is removed, it is sufficients
-    it.setProperty('unicode_block', it.code.replaceAll(/^['"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString());
+    fullcode.setProperty('unicode_block', fullcode.code.replaceAll(/^['"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString());
 }
 
 GREMLIN;

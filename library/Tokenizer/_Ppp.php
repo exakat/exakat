@@ -76,11 +76,13 @@ class _Ppp extends TokenAuto {
 
     function fullcode() {
         return <<<GREMLIN
+        
+fullcode.fullcode = 'init';
 if (fullcode.out('PUBLIC').count() == 1) { fullcode.fullcode = 'public ' + fullcode.fullcode; }
 if (fullcode.out('PROTECTED').count() == 1) { fullcode.fullcode = 'protected ' + fullcode.fullcode; }
 if (fullcode.out('PRIVATE').count() == 1) { fullcode.fullcode = 'private ' + fullcode.fullcode; }
 
-if (fullcode.out('DEFINE').count() == 1) { fullcode.fullcode = fullcode.fullcode + fullcode.out('DEFINE').next().code; }
+if (fullcode.out('DEFINE').count() == 1) { fullcode.fullcode = fullcode.fullcode + fullcode.out('DEFINE').next().fullcode; }
 
 GREMLIN;
     }
