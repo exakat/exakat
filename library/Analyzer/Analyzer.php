@@ -224,6 +224,8 @@ GREMLIN;
             return true;
         }
         
+        // @todo this must be updated.
+        return true;
         die(__METHOD__);
         foreach($this->phpconfiguration as $ini => $value) {
             if (ini_get($ini) != $value) {
