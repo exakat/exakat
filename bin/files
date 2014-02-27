@@ -47,7 +47,7 @@ $exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps
               'web' => array('html', 'htm', 'css', 'js', 'json', 'less', 'webloc', 'wsdl',  ),
               'document' => array('doc', 'xls', 'docx', 'pdf', 'odt', 'epub', 'book' ),
               'archives' => array('tgz', 'bz2' ,'z', 'zip', 'gz', 'tar', 'bz', 'tbz', ),
-              'audio' => array('mp3', 'fla', 'wav', 'xap'),
+              'audio' => array('mp3', 'fla', 'wav', 'xap', 'ses'),
               'data' => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install', 'sqlite', 'lang', 'conf', 'config', 'db', 'phar', 'db3', 'neon',),
               'prog' => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt', 'sass', 'scss', 'xsl', 'as', 'cmd','m4', 'dsp', 'sln', 'vcproj', 'w32',),
               'misc' => array('test', 'table', 'dat', 'admin', 'cur', 'git', 'rng', 'bin',  'ser', 'mgc',),
