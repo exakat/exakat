@@ -36,17 +36,16 @@ if (!file_exists('tests/analyzer/phpunit.txt')) {
     print "Phpunit test is more than a day! Please, run php scripts/phpunit.php\n";
 } else {
     $results = file_get_contents('tests/analyzer/phpunit.txt');
-    
 
     if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+)\./is', $results, $R)) {
-        print "There were {$R[3]} failures! Check the tests! \n";
         preg_match_all('/\d+\) Test\\\\(\w+)::/is', $results, $R2);
-        print "  + ".join("\n  + ", $R2[1])."\n\n";
+        print "There were {$R[3]} failures in ".count(array_unique($R2[1]))." tests! Check the tests! \n";
+        print "  + ".join("\n  + ", array_unique($R2[1]))."\n\n";
         
         if ($R[1] != $total_UT) {
             print "Not all the tests were run! Only {$R[1]} out of $total_UT. Please, run php scripts/phpunit.php\n";
         } else {
-            print "All tests where recently run and OK\n";
+            print "All tests where recently run, some are KO\n";
         }
     } elseif (preg_match('/OK \((\d+) test, (\d+) assertions\)/is', $results, $R)) {
         if ($R[1] != $total_UT) {
