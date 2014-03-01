@@ -123,9 +123,16 @@ if ($sqlite_md) {
     print "All ".count($files)." projects have the sqlite export\n";
 }
 
+$files = glob('human/en/*/*');
+$extra_docs = array();
+foreach($files as $k => $v) {
+    $extra_docs[substr($v, 9, -4)] = 1;
+}
+
 $analyzers = Analyzer\Analyzer::listAnalyzers();
 $missing_doc = array();
 foreach($analyzers as $a) {
+    unset($extra_docs[$a]);
     $o = Analyzer\Analyzer::getInstance($a, null);
     if ($o->getDescription() === '') {
         $missing_doc[] = $a;
@@ -136,7 +143,14 @@ if ($missing_doc) {
     print count($missing_doc)." analyzer are missing their documentation\n";
     print "  + ".join("\n  + ", $missing_doc)."\n\n";
 } else {
-    print "All ".count($analyzers)." analyzers have their documentation\n";
+    print "All ".count($analyzers)." analyzers have their documentation\n\n";
+}
+
+if ($extra_docs) {
+    print count($extra_docs)." docs are available without analyzer\n";
+    print "  + ".join("\n  + ", array_keys($extra_docs))."\n\n";
+} else {
+    print "All ".count($analyzers)." docs have analyzers\n\n";
 }
 
 ?>
