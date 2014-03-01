@@ -25,7 +25,6 @@ foreach($tests as $test) {
     if (!DISPLAY_0 || count($files) == 0) {
         print $type."/".$analyzer."   ".count($files)."\n";
     }
-    
 }
 
 print "\n";

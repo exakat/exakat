@@ -40,7 +40,7 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
         }
         
         $offset = 0;
-        $number = 100;
+        $number = 1000;
         foreach($tests as $i => $test ) {
             if ($i < $offset) continue;
             $name = str_replace('\\Test\\', '', $test);
@@ -84,7 +84,7 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
             
             continue;
         }
-
+        
         return $suite;
     }
 }
