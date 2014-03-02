@@ -1,5 +1,8 @@
 <?php
 
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
 $args = $argv;
 
 if (!isset($argv[1])) {
@@ -33,9 +36,9 @@ if (!file_exists('./projects/'.$project.'/log')) {
     die();
 }
 
-$mysql = new mysqli('localhost', 'root', '', 'exakat');
-$mysql->query('INSERT INTO project_runs (`id`, `date_start`, `folder`) VALUES (0, now(), "'.$project.'");');
-$project_run = $mysql->insert_id;
+$db = new Db();
+$db->insert('project_runs', array('date_start', 'folder'), array(date('Y-m-d h:i:s'), $project));
+$project_run = $db->insert_id();
 
 $progress = 1;
 $total_steps = 9 / 100; // number of usage of logProgress - 1
@@ -86,7 +89,7 @@ shell_exec('rm ./projects/'.$project.'/report.sqlite; php bin/report '.$project.
 logProgress($project, $progress++ / $total_steps);
 
 print "Project reported\n";
-$mysql->query('UPDATE project_runs SET `date_finish` = now() WHERE id = '.$project_run);
+$db->query('UPDATE project_runs SET `date_finish` = NOW() WHERE id = '.$project_run);
 
 function logProgress($project, $percent) {
     file_put_contents("./projects/$project/progress.log", $percent);

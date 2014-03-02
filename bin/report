@@ -14,7 +14,7 @@ include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
 $client = new Client();
-$mysqli = new \mysqli('localhost', 'root', '', 'exakat');
+$db = new Db();
 
 $args = $argv;
 if (!isset($args[1])) {
@@ -107,7 +107,7 @@ $report->addContent('Text', 'Presentation of the report process');
 $report->createH2('Report configuration'); 
 $ReportInfo = new Report\ReportInfo($project);
 $ReportInfo->setNeo4j($client);
-$ReportInfo->setMySQL($mysqli);
+$ReportInfo->setMySQL($db);
 $ReportInfo->collect();
 
 $report->addContent('HashTable', $ReportInfo->toArray()); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
