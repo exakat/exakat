@@ -687,6 +687,7 @@ ppp = it.out('NEXT').next();
 
 it.bothE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(p, ppp, 'NEXT');
+it.fullcode = it.code;
 
 fullcode = ppp;
 $fullcode
@@ -696,9 +697,6 @@ $fullcode
         }        
 
         if (isset($actions['to_option'])) {
-            $ppp = new _Ppp(Token::$client);
-            $fullcode = $ppp->fullcode();
-
             $qactions[] = "
 /* turn the current token to an option of the next */
 
@@ -710,17 +708,12 @@ it.bothE('NEXT').each{ g.removeEdge(it); }
 it.fullcode = it.code;
 
 fullcode = ppp;
-$fullcode
-
 ";
             unset($actions['to_option']);
         }    
         
         
         if (isset($actions['to_ppp_assignation'])) {
-            $ppp = new _Ppp(Token::$client);
-            $fullcode = $ppp->fullcode();
-            
             $qactions[] = "
 /* to ppp with assignation */
 
@@ -745,7 +738,6 @@ g.removeVertex(assignation);
 g.removeEdge( it.inE('NEXT').next());
 
 fullcode = x;
-$fullcode
 ";
             unset($actions['to_ppp_assignation']);
         }

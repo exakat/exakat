@@ -68,20 +68,26 @@ class _Class extends TokenAuto {
     }
 
     function fullcode() {
-        return 'it.fullcode = "class " + it.out("NAME").next().code; 
-current = it;
+        return <<<GREMLIN
+fullcode.fullcode = "class " + it.out("NAME").next().code; 
+
+// abstract
+fullcode.out("ABSTRACT").each{ fullcode.fullcode = 'abstract ' + fullcode.fullcode;}
+
+// final
+fullcode.out("FINAL").each{ fullcode.fullcode = 'final ' + fullcode.fullcode;}
 
 // extends
-it.out("EXTENDS").each{ current.fullcode = current.fullcode + " extends " + it.fullcode;}
+fullcode.out("EXTENDS").each{ fullcode.fullcode = fullcode.fullcode + " extends " + it.fullcode;}
 
 // implements
-if (it.out("IMPLEMENTS").count() > 0) {
+if (fullcode.out("IMPLEMENTS").count() > 0) {
     i = [];
     it.out("IMPLEMENTS").each{ i.add(it.fullcode); }
-    current.fullcode = current.fullcode + " implements " + i.join(", ");
+    fullcode.fullcode = fullcode.fullcode + " implements " + i.join(", ");
 }
         
-        ';
+GREMLIN;
 // didn't added code, it seems too much....
     }
 

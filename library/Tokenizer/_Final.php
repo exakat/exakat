@@ -11,16 +11,16 @@ class _Final extends TokenAuto {
                                    1 => array('token' => array('T_CLASS', 'T_FUNCTION')),
                                  );
         $this->actions = array('to_option' => 1,
-                               'atom'   => 'Final');
+                               'atom'      => 'Final');
         $this->checkAuto(); 
 
         return $this->checkRemaining();
     }
 
     function fullcode() {
-        return <<<GREMLIN
-if (fullcode.out('FINAL').count() == 1) { fullcode.fullcode = 'final ' + fullcode.fullcode; }
-GREMLIN;
+        $function = new _Function(Token::$client);
+        return $function->fullcode();
+
     }
 }
 ?>

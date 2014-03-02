@@ -25,7 +25,7 @@ class _Static extends TokenAuto {
                                    1 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('to_option' => 1,
-                               'atom'   => 'Static');
+                               'atom'      => 'Static');
         $this->checkAuto(); 
 
     // class x { static private $x }
@@ -47,7 +47,7 @@ class _Static extends TokenAuto {
                                  );
         
         $this->actions = array('to_ppp_assignation' => 1,
-                               'atom'   => 'Static', );
+                               'atom'               => 'Static', );
         $this->checkAuto(); 
 
     // class x { static $x, $y }
@@ -92,13 +92,8 @@ class _Static extends TokenAuto {
     }
 
     function fullcode() {
-        return <<<GREMLIN
-
-if (fullcode.out('STATIC').count() == 1) { fullcode.fullcode = 'static ' + fullcode.code; }
-if (fullcode.out('DEFINE').count() == 1) { fullcode.fullcode = 'static ' + fullcode.out('DEFINE').next().fullcode; }
-if (fullcode.out('VALUE').hasNot('token', 'T_VOID').count() == 1) { fullcode.fullcode = fullcode.fullcode + ' = ' + fullcode.out('VALUE').next().fullcode; }
-
-GREMLIN;
+        $ppp = new _Function(Token::$client);
+        return $ppp->fullcode();
     }
 }
 ?>

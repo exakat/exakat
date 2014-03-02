@@ -85,14 +85,23 @@ class _Function extends TokenAuto {
 
     function fullcode() {
         return <<<GREMLIN
+
+fullcode.fullcode = '';
+
+// for function
 fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " " + fullcode.out("ARGUMENTS").next().fullcode + " ;";}
 
 fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " " + fullcode.out("ARGUMENTS").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
 
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0}.each{ fullcode.fullcode = "function " + fullcode.out("ARGUMENTS").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
+fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = "function " + fullcode.out("ARGUMENTS").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
 
 fullcode.filter{it.out("USE").count() == 1}.each{ fullcode.fullcode = "function " + fullcode.out("ARGUMENTS").next().fullcode + " use " + fullcode.out("USE").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
 
+// for PPP
+if (fullcode.out('DEFINE').count() == 1) { fullcode.fullcode = fullcode.fullcode + fullcode.out('DEFINE').next().fullcode; }
+if (fullcode.out('VALUE').hasNot('atom', 'Void').count() == 1) { fullcode.fullcode = fullcode.fullcode + ' = ' + fullcode.out('VALUE').next().fullcode; }
+
+// optional attributesæ
 if (fullcode.out('ABSTRACT').count() == 1) { fullcode.fullcode = 'abstract ' + fullcode.fullcode; }
 if (fullcode.out('FINAL').count() == 1) { fullcode.fullcode = 'final ' + fullcode.fullcode; }
 if (fullcode.out('STATIC').count() == 1) { fullcode.fullcode = 'static ' + fullcode.fullcode; }
