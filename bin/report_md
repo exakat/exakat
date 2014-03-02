@@ -6,6 +6,10 @@ if (!isset($argv[1])) {
 }
 
 $args = $argv[1];
+if ($argv[1] == '-p') {
+    $args = $argv[2];
+}
+
 if (file_exists($args)) {
     $path = $args;
 } elseif (file_exists('./projects/'.$args)) {
