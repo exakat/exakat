@@ -197,3 +197,5 @@ upgrade regex search with result from thinkphp
 Spot URL in strings
 Improve regex for PCRE
 spot usage of ereg 
+
+Mark Namespaces that are constants as such 

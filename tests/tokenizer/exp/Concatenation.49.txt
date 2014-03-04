@@ -1,0 +1,20 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      .
+      Label : CONCAT
+        'D'
+      Label : CONCAT
+        \
+        Label : ELEMENT
+          C
+      Label : CONCAT
+        'A'
+      Label : CONCAT
+        __DIR__
+    Label : LEFT
+      $x
