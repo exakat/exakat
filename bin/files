@@ -9,6 +9,8 @@ $dir = $args[1];
 if ($dir == "-P") {
     $projects = glob('projects/*');
     foreach($projects as $project) {
+        if (!is_dir($project)) { continue; }
+
         $p = basename($project);
         print "$p\n";
         if ($p == 'test') { continue; }
