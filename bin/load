@@ -314,6 +314,9 @@ function process_file($filename, $log_file) {
                 if ($Php->getTokenname($token[0]) == 'T_STRING') {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
                             ->setProperty('fullcode', $token[1])->save();
+                } elseif ($Php->getTokenname($token[0]) == 'T_STRING_VARNAME') {
+                    $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
+                            ->setProperty('fullcode', '$'.$token[1])->save();
                 } elseif ($Php->getTokenname($token[0]) == 'T_CONSTANT_ENCAPSED_STRING') {
                     $T[$Tid]->setProperty('delimiter', in_array($token[1][0], array("'", '"')) ? $token[1][0] : '')
                             ->setProperty('noDelimiter', trim($token[1], '"\''))
