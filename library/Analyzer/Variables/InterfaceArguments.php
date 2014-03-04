@@ -18,7 +18,7 @@ class InterfaceArguments extends Analyzer\Analyzer {
              ->inIs('ARGUMENTS')
              ->atomIs('Function')
              ->inIs('CODE')
-             ->inIs('CODE')
+             ->inIs('BLOCK')
              ->atomIs('Interface')
              ->back('x');
         $this->prepareQuery();
@@ -32,7 +32,7 @@ class InterfaceArguments extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->inIs('ELEMENT')
              ->inIs('CODE')
-             ->inIs('CODE')
+             ->inIs('BLOCK')
              ->atomIs('Interface')
              ->back('x');
         $this->prepareQuery();
