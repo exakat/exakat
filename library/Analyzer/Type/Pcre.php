@@ -10,16 +10,29 @@ class Pcre extends Analyzer\Analyzer {
     }
     
     function analyze() {
+        // regex like $....$is
         $this->atomIs('String')
-             ->regex('code', '([\'\\"])([\\$#]).*?([\\$#])[imsxeADSUXJu]*[\'\\"]');
+             ->regex('code', '([\'\\"])\\$[^\\$].*?\\$[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
 
+        // regex like #....#is
         $this->atomIs('String')
-             ->regex('code', '([\'\\"])\\\\/[^\\\\/]*?\\\\/[imsxeADSUXJu]*[\'\\"]');
+             ->regex('code', '([\'\\"])#[^#].*?#[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
 
+        // regex like ~....~is
         $this->atomIs('String')
-             ->regex('code', '([\'\\"])\\\\{.*?\\\\}[imsxeADSUXJu]*[\'\\"]');
+             ->regex('code', '([\'\\"])~[^~].*?~[imsxeADSUXJu]*[\'\\"]');
+        $this->prepareQuery();
+
+        // regex like /..../
+        $this->atomIs('String')
+             ->regex('code', '([\'\\"])\\\\/[^\\\\/*][^\\\\/]*?\\\\/[imsxeADSUXJu]*[\'\\"]');
+        $this->prepareQuery();
+
+        // regex like {....}
+        $this->atomIs('String')
+             ->regex('code', '([\'\\"])\\\\{.+?\\\\}[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
     }
 }
