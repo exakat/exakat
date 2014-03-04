@@ -24,11 +24,18 @@ if (in_array('-json', $args)) {
     define('OUTPUT', 'PRINT_R');
 }
 
+$stats = array();
+$unknown = array();
+
 if (strpos($dir, '/') === false) {
     // trying as a project name
     if (file_exists('./projects/'.$dir.'/code/')) {
         $files = glob_recursive('./projects/'.$dir.'/code/');
     }
+
+    $res = shell_exec('phploc ./projects/'.$dir.'/code/');
+    preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
+    $stats['loc'] = $r[1];
 }
 
 if (!isset($files)) {
@@ -37,10 +44,11 @@ if (!isset($files)) {
         die();
     }
     $files = glob_recursive($dir."/");
-}
 
-$stats = array();
-$unknown = array();
+    $res = shell_exec('phploc '.$dir);
+    preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
+    $stats['loc'] = $r[1];
+}
 
 $exts = array('php' => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps',  ),
               'images' => array('jpg', 'gif', 'ico', 'png', 'svg', 'eps', 'psd', 'dot', 'dhp'),
@@ -99,7 +107,7 @@ if (count($not_compilable) != 0) {
 }
 
 $db = new Db();
-$db->insert('projects', array('notCompilable', 'project', 'php', 'tokens'), array(count($not_compilable), $dir, $stats['php'], $stats['tokens']));
+$db->insert('projects', array('notCompilable', 'project', 'php', 'tokens', 'loc'), array(count($not_compilable), $dir, $stats['php'], $stats['tokens'], $stats['loc']));
 
 if (OUTPUT == 'JSON') {
     if ($unknown) {
