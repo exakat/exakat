@@ -1,11 +1,8 @@
 Architecture
 Add a install checker, that will check how is the installation of the analyzer
-Create a log for projects and scripts
 Support file updates in VCS (just change those files, not reload all the application, serve évolutions, not status)
 Make use of index for better speed
 Make so that it is possible to run simultaneous scripts on the server (Not just using delete all).
-Add an order attribute for long list of elements (in Sequence, concatenation, etc.)
-Make load concurrent proof
 Make analyzer concurrent proof
 Finish running shuffle tests on analyzer
 Add a instant log to show progression of analyzer / loader
@@ -171,7 +168,6 @@ Separate analyzers in : file/application, inventory/analyse; themes
 produce a dot graph of classes
 
 Automate testing and dashboard
-install myself as a project
 
 hardcoded logins // pass
 paraleliser les analyzers
@@ -195,4 +191,9 @@ Faire une class MySQL separée
 Faire une class Stats separée
 
 Spot identical files and avoir double analyse (.... ?)
-Spot useless domain names (namespace x; no function/classs/interface/constant)
+Spot useless namespaces (namespace x; no function/classs/interface/constant)
+
+upgrade regex search with result from thinkphp
+Spot URL in strings
+Improve regex for PCRE
+spot usage of ereg 
