@@ -14,7 +14,7 @@ class Arguments extends TokenAuto {
                                        'Clone', 'New', 'Arrayappend', 'Instanceof', 'Function', 'Keyvalue', 
                                        'ArrayNS', 'Shell', 'Heredoc', 'Include' );
 
-    function _check() {
+    public function _check() {
         $operands = Arguments::$operands_wa;
         $operands[] = 'Arguments';
         
@@ -80,7 +80,7 @@ class Arguments extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 s = [];
 fullcode.out("ARGUMENT").sort{it.order}._().each{ s.add(it.fullcode); };

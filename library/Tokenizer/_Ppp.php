@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Ppp extends TokenAuto {
     static public $operators = array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC');
 
-    function _check() {
+    public function _check() {
         $values = array('T_EQUAL', 'T_COMMA');
     // class x { protected $x }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),
@@ -74,7 +74,7 @@ class _Ppp extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         $ppp = new _Function(Token::$client);
         return $ppp->fullcode();
     }

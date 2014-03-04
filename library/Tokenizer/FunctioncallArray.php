@@ -5,7 +5,7 @@ namespace Tokenizer;
 class FunctioncallArray extends TokenAuto {
     static public $operators = array('S_ARRAY');
 
-    function _check() {
+    public function _check() {
         // $x[3]()
         $this->conditions = array(   0 => array('atom'  => 'Array'),
                                      1 => array('atom'  => 'none',

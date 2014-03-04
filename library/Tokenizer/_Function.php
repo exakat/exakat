@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Function extends TokenAuto {
     static public $operators = array('T_FUNCTION');
     
-    function _check() {
+    public function _check() {
         // function x(args) {}
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom' => 'none'),
@@ -83,7 +83,7 @@ class _Function extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 
 fullcode.fullcode = '';

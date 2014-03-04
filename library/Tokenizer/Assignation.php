@@ -19,7 +19,7 @@ class Assignation extends TokenAuto {
                                      'T_SR_EQUAL',
                                      );
     
-    function _check() {
+    public function _check() {
         $operands = array('Integer', 'Multiplication', 'Addition', 'Not',
                           'Array', 'Float', 'Concatenation', 'Property',
                           'Parenthesis', 'Noscream', 'Ternary', 'New', 'String',
@@ -56,7 +56,7 @@ class Assignation extends TokenAuto {
         return $this->checkRemaining();
     } 
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode; ';
     }
 }

@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _For extends TokenAuto {
     static public $operators = array('T_FOR');
 
-    function _check() {
+    public function _check() {
         // for (;;) ; (Empty loop)
         $this->conditions = array(  0 => array('token' => _For::$operators,
                                                'atom' => 'none'),
@@ -137,7 +137,7 @@ class _For extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "for(" + it.out("INIT").next().fullcode + " ; " + it.out("FINAL").next().fullcode + " ; " + it.out("INCREMENT").next().fullcode + ") " + it.out("CODE").next().fullcode;';
     }
 }

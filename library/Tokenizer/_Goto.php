@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Goto extends TokenAuto {
     static public $operators = array('T_GOTO');
     
-    function _check() {
+    public function _check() {
         $this->conditions = array(0 => array('token' => _Goto::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'Identifier')

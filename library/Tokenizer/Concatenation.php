@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Concatenation extends TokenAuto {
     public static $operators = array('T_DOT');
     
-    function _check() {
+    public function _check() {
         $operands = array('String', 'Identifier', 'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign', 'Array',
                           'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
                           'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 
@@ -38,7 +38,7 @@ class Concatenation extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 s = [];
 fullcode.out("CONCAT").sort{it.order}._().each{ s.add(it.fullcode); };

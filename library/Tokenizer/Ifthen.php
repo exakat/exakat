@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Ifthen extends TokenAuto {
     static public $operators = array('T_IF', 'T_ELSEIF');
 
-    function _check() {
+    public function _check() {
     
     // @doc if () with only ;
         $this->conditions = array( 0 => array('token' => Ifthen::$operators),
@@ -223,7 +223,7 @@ class Ifthen extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "if " + it.out("CONDITION").next().fullcode + " " + it.out("THEN").next().fullcode;
                 ifthen = it;
                 it.out("ELSE").each{ it.fullcode = ifthen.fullcode + " else " + it.fullcode; }';

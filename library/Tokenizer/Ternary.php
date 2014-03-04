@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Ternary extends TokenAuto {
     static public $operators = array('T_QUESTION');
     
-    function _check() {
+    public function _check() {
         
         // $a ? $b : $c
         $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' ), 
@@ -49,7 +49,7 @@ class Ternary extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.out("CONDITION").next().fullcode + " ? " + it.out("THEN").next().fullcode + " : " + it.out("ELSE").next().fullcode; ';
     }
 }

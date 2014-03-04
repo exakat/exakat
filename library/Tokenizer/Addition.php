@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Addition extends TokenAuto {
     static public $operators = array('T_PLUS','T_MINUS');
     
-    function _check() {
+    public function _check() {
         // note : Multiplication:: and Addition:: operators are the same! 
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), 
                                                                         Concatenation::$operators, Sign::$operators)),
@@ -28,7 +28,7 @@ class Addition extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'fullcode.fullcode = fullcode.out("LEFT").next().fullcode + " " + fullcode.code + " " + fullcode.out("RIGHT").next().fullcode; ';
     }
 

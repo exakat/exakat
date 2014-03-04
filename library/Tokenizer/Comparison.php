@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Comparison extends TokenAuto {
     static public $operators = array('T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER', );
 
-    function _check() {
+    public function _check() {
         $operands = array('Variable', 'Array', 'Property', 'Integer', 'Sign', 'Float', 'Constant', 'Boolean',
                           'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall',
                            'Magicconstant', 'Staticconstant', 'String', 'Addition', 'Multiplication',
@@ -36,7 +36,7 @@ class Comparison extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode; ';
     }
 }

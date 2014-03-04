@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _While extends TokenAuto {
     static public $operators = array('T_WHILE');
 
-    function _check() {
+    public function _check() {
 
          //  While( condition ) ;
          // T_SEMICOLON here will prevent while to be create too hastily, and give a chance to do...while.
@@ -133,7 +133,7 @@ class _While extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "while " + it.out("CONDITION").next().fullcode + " " + it.out("LOOP").next().fullcode;';
     }
 

@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Throw extends TokenAuto {
     static public $operators = array('T_THROW');
     
-    function _check() {
+    public function _check() {
         $this->conditions = array(0 => array('token'     => _Throw::$operators,
                                              'atom'      => 'none'),
                                   1 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall', 
@@ -38,7 +38,7 @@ class _Throw extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "throw " + it.out("THROW").next().code; ';
     }
 }

@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Nsname extends TokenAuto {
     static public $operators = array('T_NS_SEPARATOR');
 
-    function _check() {
+    public function _check() {
         // @note \a\b\c (\ initial)
         $this->conditions = array( -1 => array('filterOut2' => array('T_NS_SEPARATOR', 'T_STRING')),
                                     0 => array('token' => Nsname::$operators),
@@ -56,7 +56,7 @@ class Nsname extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 s = []; 
 fullcode.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); };

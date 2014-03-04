@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Return extends TokenAuto {
     static public $operators = array('T_RETURN');
 
-    function _check() {
+    public function _check() {
         // return ; 
         $this->conditions = array( 0 => array('token' => _Return::$operators,
                                               'atom' => 'none' ),
@@ -31,7 +31,7 @@ class _Return extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.code + " " + it.out("RETURN").next().fullcode; ';
     }
 }

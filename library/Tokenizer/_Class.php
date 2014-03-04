@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Class extends TokenAuto {
     static public $operators = array('T_CLASS');
 
-    function _check() {
+    public function _check() {
     
     // class x {}
         $this->conditions = array( 0 => array('token' => _Class::$operators),
@@ -67,7 +67,7 @@ class _Class extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 fullcode.fullcode = "class " + it.out("NAME").next().code; 
 

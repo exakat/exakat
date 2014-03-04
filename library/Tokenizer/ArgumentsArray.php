@@ -5,7 +5,7 @@ namespace Tokenizer;
 class ArgumentsArray extends Arguments {
     static public $operators = array('T_OPEN_PARENTHESIS');
     
-    function _check() {
+    public function _check() {
         $this->conditions = array(-1 => array('atom'  => 'Array'),
                                    0 => array('token' => ArgumentsArray::$operators,
                                               'atom'  => 'none'),

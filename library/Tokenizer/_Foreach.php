@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Foreach extends TokenAuto {
     static public $operators = array('T_FOREACH');
 
-    function _check() {
+    public function _check() {
         $operands = array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 
                           'Staticmethodcall', 'Methodcall','Cast', 'Parenthesis', 'Ternary', 
                           'Noscream', 'Not', 'Assignation', 'New', 'Addition', 'Clone');
@@ -126,7 +126,7 @@ class _Foreach extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "foreach(" + it.out("SOURCE").next().fullcode + " as " + it.out("VALUE").next().fullcode + ")" + it.out("LOOP").next().fullcode;';
     }
 }

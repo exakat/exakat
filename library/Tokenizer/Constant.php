@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Constant extends TokenAuto {
     static public $operators = array('T_CONSTANT_ENCAPSED_STRING', 'T_STRING');
 
-    function _check() {
+    public function _check() {
         // @note a\b\c as F
         $this->conditions = array( 0 => array('token' => 'T_STRING',
                                               'atom'  => 'Identifier'), 

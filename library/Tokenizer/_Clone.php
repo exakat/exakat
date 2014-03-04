@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Clone extends TokenAuto {
     static public $operators = array('T_CLONE');
 
-    function _check() {
+    public function _check() {
         $operands = array('Variable', 'Property', 'Array', 'Staticproperty', 'Staticmethodcall', 'Staticconstant', 'Functioncall', 
                           'Methodcall', 'New', 'Noscream', "Concatenation",  );
         $this->conditions = array(0 => array('token' => _Clone::$operators,
@@ -37,7 +37,7 @@ class _Clone extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "clone " + it.out("CLONE").next().code; ';
     }
 }

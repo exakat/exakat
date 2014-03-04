@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Phpcodemiddle extends TokenAuto {
     static public $operators = array('T_CLOSE_TAG');
 
-    function _check() {
+    public function _check() {
 // ? >A<?php 
         $this->conditions = array( 0 => array('token' => Phpcodemiddle::$operators,
                                               'atom' => 'none'),

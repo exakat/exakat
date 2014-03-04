@@ -6,7 +6,7 @@ class Void extends TokenAuto {
     // @todo move this to load 
     
     static public $operators = array('T_OPEN_PARENTHESIS', 'T_SEMICOLON');
-    function _check() {
+    public function _check() {
     // needed for for(;;)
     
         $this->conditions = array(0 => array('token' => Void::$operators),
@@ -21,7 +21,7 @@ class Void extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = ""; ';
     }
 }

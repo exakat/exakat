@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Staticproperty extends TokenAuto {
     static public $operators = array('T_DOUBLE_COLON');
 
-    function _check() {
+    public function _check() {
         $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname', );
         
         $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),
@@ -23,7 +23,7 @@ class Staticproperty extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.out("CLASS").next().fullcode + "::" + it.out("PROPERTY").next().fullcode; ';
     }
 }

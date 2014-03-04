@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Try extends TokenAuto {
     static public $operators = array('T_TRY');
 
-    function _check() {
+    public function _check() {
         // Try () { } catch
         $this->conditions = array(0 => array('token' => _Try::$operators,
                                              'atom' => 'none'),
@@ -41,7 +41,7 @@ class _Try extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return '
 s = [];
 it.out("CATCH").each{ s.add(it.fullcode); }        

@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Case extends TokenAuto {
     static public $operators = array('T_CASE');
     
-    function _check() {
+    public function _check() {
         $final_token = array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_ENDSWITCH');
 
         // @todo move to load
@@ -112,7 +112,7 @@ class _Case extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'fullcode.fullcode = "case " + fullcode.out("CASE").next().fullcode + " : " + fullcode.out("CODE").next().fullcode; ';
     }
 }

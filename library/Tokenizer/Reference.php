@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Reference extends TokenAuto {
     static public $operators = array('T_AND');
 
-    function _check() {
+    public function _check() {
         $this->conditions = array(-1 => array('filterOut2' => array_merge(Logical::$operators, 
                                                                 array('T_VARIABLE', 'T_LNUMBER', 'T_DNUMBER', 'T_STRING',
                                                                       'T_MINUS', 'T_PLUS', 'T_CLOSE_PARENTHESIS', 
@@ -20,10 +20,12 @@ class Reference extends TokenAuto {
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
                                'propertyNext' => array('reference' => 'true'),
+                               'fullcode'     => true,
 //                               'property'    => array('reference' => 'true'),
 //                               'atom'        => 'Reference',
 //                               'cleanIndex'  => true
                                );
+        $this->set_atom = true;
         $this->checkAuto();
 
         // special case for Stdclass &$x = 
@@ -63,8 +65,8 @@ class Reference extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
-        return 'it.fullcode = "&" + it.out("REFERENCE").next().code; ';
+    public function fullcode() {
+        return 'fullcode.fullcode = "&" + fullcode.code; ';
     }
 }
 

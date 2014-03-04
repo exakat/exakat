@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class TokenAuto extends Token {
     protected $conditions = array();
+    protected $set_atom = false;
     
     public function prepareQuery() {
         $query = " ";
@@ -138,7 +139,7 @@ it.setProperty('root', 'null');
         if (isset($actions['propertyNext'])) {
             if (is_array($actions['propertyNext']) && !empty($actions['propertyNext'])) {
                 foreach($actions['propertyNext'] as $name => $value) {
-                    $qactions[] = " /* propertyNext */   it.out('NEXT').next().setProperty('$name', '$value')";
+                    $qactions[] = " /* propertyNext */   fullcode = it.out('NEXT').next(); fullcode.setProperty('$name', '$value')";
                 }
             }
             unset($actions['propertyNext']);
@@ -1436,6 +1437,11 @@ $fullcode
             unset($actions['to_typehint']);
         }              
         
+        if (isset($actions['fullcode'])) {
+            $this->set_atom = true;
+            unset($actions['fullcode']);
+        }
+        
         if (isset($actions['insertEdge'])) {
             foreach($actions['insertEdge'] as $destination => $config) {
             if ($destination == 0) {
@@ -2453,7 +2459,7 @@ it.outE.hasNot('label', 'NEXT').inV.each{
         return $qcdts;
     }
 
-    function fullcode() {
+    public function fullcode() {
         return '';
     }
 }

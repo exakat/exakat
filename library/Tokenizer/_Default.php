@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Default extends TokenAuto {
     static public $operators = array('T_DEFAULT');
 
-    function _check() {
+    public function _check() {
         $final_token = array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_ENDSWITCH');
         
      // default : with nothing 
@@ -100,7 +100,7 @@ class _Default extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "default : " + it.out("CODE").next().fullcode; ';
     }
 

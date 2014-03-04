@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Global extends TokenAuto {
     static public $operators = array('T_GLOBAL');
 
-    function _check() {
+    public function _check() {
     // global $x; (nothing more)
         $this->conditions = array( 0 => array('token' => _Global::$operators),
                                    1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static' )),
@@ -31,7 +31,7 @@ class _Global extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 if (fullcode.out('NAME').count() == 1) {
     fullcode.fullcode = "global " + fullcode.out("NAME").next().fullcode;

@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Phpcode extends TokenAuto {
     static public $operators = array('T_OPEN_TAG');
 
-    function _check() {
+    public function _check() {
         $this->conditions = array(0 => array('token' => Phpcode::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
@@ -45,7 +45,7 @@ class Phpcode extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 if (fullcode.code == '<script language=\\"php\\">') {
     fullcode.fullcode = "<script language=\\"php\\">" + fullcode.out("CODE").next().fullcode + "</script>";

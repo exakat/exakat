@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Sequence extends TokenAuto {
     static public $operators = array('T_SEMICOLON');
     
-    function _check() {
+    public function _check() {
         $operands = array('Addition', 'Multiplication', 'String', 'Integer', 'Sequence', 
                           'Float', 'Not', 'Variable','Array','Concatenation', 'Sign',
                           'Functioncall', 'Constant', 'Parenthesis', 'Comparison', 'Assignation',
@@ -277,7 +277,7 @@ class Sequence extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         // fullcode is not meant to reproduce the whole code, but give a quick peek at some smaller code. Just ignoring for the moment.
         return 'fullcode.setProperty("fullcode", " ")';
     }

@@ -7,7 +7,7 @@ class Sign extends TokenAuto {
     static public $operands = array('Integer', 'Sign', 'String', 'Variable', 'Array', 'Float', 'Boolean', 'Functioncall',
                                     'Staticmethodcall', 'Staticproperty', 'Multiplication', 'Property', 'Parenthesis', 'Methodcall', 'Cast');
 
-    function _check() {
+    public function _check() {
         //  + -1 
         $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
                                                                                  'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER', 
@@ -92,7 +92,7 @@ class Sign extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 if (it.out('SIGN').count() > 0) {
     it.fullcode = it.code + it.out("SIGN").next().fullcode; 

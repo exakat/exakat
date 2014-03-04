@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Switch extends TokenAuto {
     static public $operators = array('T_SWITCH');
 
-    function _check() {
+    public function _check() {
         $this->conditions = array(0 => array('token' => _Switch::$operators,
                                              'atom' => 'none'),
                                   1 => array('token' => array('T_OPEN_PARENTHESIS')),
@@ -46,7 +46,7 @@ class _Switch extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "switch " + it.out("NAME").next().code + it.out("CASES").next().code; ';
     }
 }

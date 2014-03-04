@@ -6,7 +6,7 @@ class SequenceCaseDefault extends TokenAuto {
     static public $operators = array('T_SWITCH');
     // @todo set up a new index for storing those and speed up the localisation
     
-    function _check() {
+    public function _check() {
         // special case for Case and default, that are in a switch statement. 
         $operands = array('Case', 'Default', 'SequenceCaseDefault');
 
@@ -20,7 +20,7 @@ class SequenceCaseDefault extends TokenAuto {
         return $r;
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 s = [];
 fullcode.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); }

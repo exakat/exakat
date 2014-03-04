@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Shell extends TokenAuto {
     static public $operators = array('T_SHELL_QUOTE');
 
-    function _check() {
+    public function _check() {
 // Case of string with interpolation : `a${b}c`;
         $this->conditions = array(  0 => array('token' => Shell::$operators, 
                                                'atom' => 'none'),

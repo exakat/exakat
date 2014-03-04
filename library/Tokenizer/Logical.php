@@ -7,7 +7,7 @@ class Logical extends TokenAuto {
                                      'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
                                      'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR');
 
-    function _check() {
+    public function _check() {
         $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                                                                  'T_NS_SEPARATOR', ), 
                                                                           Comparison::$operators, Bitshift::$operators, Addition::$operators,
@@ -35,7 +35,7 @@ class Logical extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode; ';
     }
 }

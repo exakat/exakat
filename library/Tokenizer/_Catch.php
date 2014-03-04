@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Catch extends TokenAuto {
     static public $operators = array('T_CATCH');
 
-    function _check() {
+    public function _check() {
         $this->conditions = array(0 => array('token' => _Catch::$operators,
                                              'atom' => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
@@ -29,7 +29,7 @@ class _Catch extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 fullcode.fullcode = "catch (" + fullcode.out("CLASS").next().code + " " + fullcode.out("VARIABLE").next().fullcode + ") " + fullcode.out("CODE").next().fullcode; 
 GREMLIN;

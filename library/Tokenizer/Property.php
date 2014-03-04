@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Property extends TokenAuto {
     static public $operators = array('T_OBJECT_OPERATOR');
     
-    function _check() {
+    public function _check() {
         $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall', 'Staticproperty', 'Methodcall', 'Functioncall');
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
                                    -1 => array('atom' => $operands), 
@@ -39,7 +39,7 @@ class Property extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 fullcode.out("NAME").each{ fullcode.fullcode = it.fullcode }
 

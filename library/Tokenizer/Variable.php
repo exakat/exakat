@@ -23,7 +23,7 @@ class Variable extends TokenAuto {
     }
 
     public function fullcode() {
-        return '
+        return <<<GREMLIN
         
 it.fullcode = it.code; 
 if (it.reference == "true") {
@@ -38,7 +38,7 @@ it.has("token", "T_DOLLAR").filter{ !(it.out("NAME").next().atom in ["Variable",
 it.has("token", "T_DOLLAR_OPEN_CURLY_BRACES").out("NAME").has("atom", "Identifier").each{ x.fullcode = "\\${" + it.fullcode + "}"; }
 it.has("token", "T_CURLY_OPEN").out("NAME").each{ x.fullcode = it.fullcode; }
 
-';
+GREMLIN;
     }
 }
 

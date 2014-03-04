@@ -7,7 +7,7 @@ class String extends TokenAuto {
     static public $allowed_classes = array('String', 'Variable', 'Concatenation', 'Array', 'Property', 'Methodcall', 
                                            'Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Ternary', );
 
-    function _check() {
+    public function _check() {
 // Case of string with interpolation : "a${b}c";
         $this->conditions = array(  0 => array('token' => String::$operators, 
                                                'atom' => 'none'),
@@ -21,7 +21,7 @@ class String extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 fullcode.fullcode = fullcode.code;
 

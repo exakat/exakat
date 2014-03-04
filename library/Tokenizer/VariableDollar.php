@@ -39,7 +39,12 @@ class VariableDollar extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-it.fullcode = "\\$" + it.code; 
+name = fullcode.out('NAME').next();
+if (name.atom in ['Variable', 'Identifier'] ) {
+    fullcode.fullcode = "\\\$" + name.fullcode; 
+} else {
+    fullcode.fullcode = "\\\${" + name.fullcode + "}"; 
+}
 
 GREMLIN;
 

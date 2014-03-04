@@ -10,7 +10,7 @@ class Functioncall extends TokenAuto {
                                            'T_NS_SEPARATOR', 'T_PRINT', 'T_ISSET', 'T_LIST', 'T_EVAL', 
                                            'T_EXIT', 'T_DIE', 'T_STATIC');       
 
-    function _check() {
+    public function _check() {
         // functioncall(with arguments or void) with a variable as name
         $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
                                     -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
@@ -75,7 +75,7 @@ class Functioncall extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 if (fullcode.token == 'T_NS_SEPARATOR') {
     s = []; 

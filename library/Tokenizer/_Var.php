@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Var extends TokenAuto {
     static public $operators = array('T_VAR');
 
-    function _check() {
+    public function _check() {
     // class x { var $x }
         $this->conditions = array( 0 => array('token' => _Var::$operators),
                                    1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static' )),
@@ -43,7 +43,7 @@ class _Var extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 if (fullcode.out('VAR').count() == 1) { fullcode.fullcode = 'var ' + fullcode.out('DEFINE').next().code; }
 if (fullcode.out('VALUE').hasNot('token', 'T_VOID').count() == 1) { fullcode.fullcode = fullcode.fullcode + ' = ' + fullcode.out('VALUE').next().fullcode; }

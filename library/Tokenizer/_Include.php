@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Include extends TokenAuto {
     static public $operators = array('T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE');
 
-    function _check() {
+    public function _check() {
         // include( );
         $this->conditions = array(  0 => array('token' => _Include::$operators),
                                     1 => array('atom'  => 'none',
@@ -36,7 +36,7 @@ class _Include extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 
 if (fullcode.noParenthesis == 'true') {

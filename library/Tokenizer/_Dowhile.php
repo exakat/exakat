@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Dowhile extends TokenAuto {
     static public $operators = array('T_DO');
 
-    function _check() {
+    public function _check() {
         // do ; while() (no block...)
         $this->conditions = array( 0 => array('token' => _Dowhile::$operators),
                                    1 => array('atom'  => 'yes'),
@@ -68,7 +68,7 @@ class _Dowhile extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "do " + it.out("LOOP").next().fullcode + " while " + it.out("CONDITION").next().fullcode;';
     }
 }

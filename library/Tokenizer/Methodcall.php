@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Methodcall extends TokenAuto {
     static public $operators = array('T_OBJECT_OPERATOR');
 
-    function _check() {
+    public function _check() {
         $operands = array('Variable', 'Property', 'Array', 'Functioncall', 'Methodcall', 'Staticmethodcall', 'Staticproperty' );
 
         // $this->x($args);
@@ -47,7 +47,7 @@ class Methodcall extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 fullcode.out("NAME").each{ fullcode.fullcode = it.fullcode }
 

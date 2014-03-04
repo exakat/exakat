@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Break extends TokenAuto {
     static public $operators = array('T_BREAK');
     
-    function _check() {
+    public function _check() {
         $this->conditions = array(0 => array('token' => _Break::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
@@ -19,7 +19,7 @@ class _Break extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "break " + it.out("LEVEL").next().fullcode; ';
     }
 

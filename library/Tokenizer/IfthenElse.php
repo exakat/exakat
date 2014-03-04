@@ -5,7 +5,7 @@ namespace Tokenizer;
 class IfthenElse extends TokenAuto {
     public static $operators = array('T_ELSE');
     
-    function _check() {
+    public function _check() {
         // else { /* block */ }
         $this->conditions = array(  0 => array('token'     => IfthenElse::$operators,
                                                'atom'      => 'none'),

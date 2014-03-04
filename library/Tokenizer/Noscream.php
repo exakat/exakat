@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Noscream extends TokenAuto {
     static public $operators = array('T_AT');
     
-    function _check() {
+    public function _check() {
         $this->conditions = array(0 => array('token' => Noscream::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
@@ -20,7 +20,7 @@ class Noscream extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "@" + it.out("AT").next().fullcode; ';
     }
 }

@@ -5,11 +5,11 @@ namespace Tokenizer;
 class Boolean extends TokenAuto {
     static public $operators = array();
 
-    function _check() {
+    public function _check() {
         return 0;
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.code; ';
     }
 }

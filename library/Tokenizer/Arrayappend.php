@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Arrayappend extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET');
     
-    function _check() {
+    public function _check() {
         $this->conditions = array(-2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')), 
                                   -1 => array('atom' => array('Variable', 'Property', 'Staticproperty', 'Array', 'Arrayappend')),
                                    0 => array('token' => Arrayappend::$operators),
@@ -21,7 +21,7 @@ class Arrayappend extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.out("VARIABLE").next().fullcode + "[]";';
     }
 }

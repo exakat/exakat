@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _New extends TokenAuto {
     static public $operators = array('T_NEW');
 
-    function _check() {
+    public function _check() {
         $this->conditions = array(0 => array('token' => _New::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('Functioncall', 'Constant', 'Variable', 'Methodcall', 'String', 
@@ -23,7 +23,7 @@ class _New extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "new " + it.out("NEW").next().code; ';
     }
 }

@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Use extends TokenAuto {
     static public $operators = array('T_USE');
 
-    function _check() {
+    public function _check() {
     // use \a\b;
         $this->conditions = array( 0 => array('token' => _Use::$operators),
                                    1 => array('atom' => array('Nsname', 'Identifier')),
@@ -31,7 +31,7 @@ class _Use extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'fullcode.fullcode = "use " + fullcode.out("USE").next().code;';
     }
 }

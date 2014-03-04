@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Continue extends TokenAuto {
     static public $operators = array('T_CONTINUE');
 
-    function _check() {
+    public function _check() {
         // continue ;
         $this->conditions = array(0 => array('token' => _Continue::$operators,
                                              'atom' => 'none'),
@@ -44,7 +44,7 @@ class _Continue extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "continue " + it.out("LEVEL").next().code; ';
     }
 }

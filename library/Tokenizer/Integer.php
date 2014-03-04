@@ -3,11 +3,11 @@
 namespace Tokenizer;
 
 class Integer extends TokenAuto {
-    function _check() {
+    public function _check() {
         return false;
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.code ';
     }
 

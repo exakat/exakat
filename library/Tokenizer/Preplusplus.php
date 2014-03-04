@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Preplusplus extends TokenAuto {
     static public $operators = array('T_INC', 'T_DEC');
     
-    function _check() {
+    public function _check() {
         $this->conditions = array( 0 => array('token' => Preplusplus::$operators),
                                    1 => array('atom' => array('Variable', 'Array', 'Property', 'Functioncall', 'Staticproperty' )),
                                    2 => array('filterOut' => array('T_DOUBLECOLON', 'T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_DOUBLE_COLON', 'T_OBJECT_OPEARTOR' )),
@@ -19,7 +19,7 @@ class Preplusplus extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.code + it.out("PREPLUSPLUS").next().fullcode; ';
     }
 }

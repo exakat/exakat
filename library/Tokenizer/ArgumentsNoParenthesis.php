@@ -6,7 +6,7 @@ class ArgumentsNoParenthesis extends Arguments {
     static public $operators = array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 
                                      'T_REQUIRE', 'T_EXIT', 'T_STATIC', );
 
-    function _check() {
+    public function _check() {
         // @note echo 's' : no parenthesis
         $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                     0 => array('atom'       => 'none',

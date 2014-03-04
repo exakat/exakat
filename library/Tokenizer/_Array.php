@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Array extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET', 'T_OPEN_CURLY');
     
-    function _check() {
+    public function _check() {
         // $x[3]
         $this->conditions = array( -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend', )),
                                     0 => array('token' => _Array::$operators),
@@ -44,7 +44,7 @@ class _Array extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return '
 x = it;
 it.out("NAME").each { x.fullcode = it.fullcode }

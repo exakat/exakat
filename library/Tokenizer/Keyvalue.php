@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Keyvalue extends TokenAuto {
     static public $operators = array('T_DOUBLE_ARROW');
 
-    function _check() {
+    public function _check() {
         $this->conditions = array(/*-2 => array('filterOut' => array_merge(array( 'T_NS_SEPARATOR', 'T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR',  ),
                                                                          Addition::$operators, Multiplication::$operators, Comparison::$operators)), */
                                   -2 => array('token' => array('T_OPEN_PARENTHESIS', 'T_COMMA', 'T_AS')),
@@ -27,7 +27,7 @@ class Keyvalue extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.out("KEY").next().code + " => " + it.out("VALUE").next().code; ';
     }
 }

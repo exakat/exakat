@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Namespace extends TokenAuto {
     static public $operators = array('T_NAMESPACE');
 
-    function _check() {
+    public function _check() {
         // namespace {} 
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom' => 'none'),
@@ -44,7 +44,7 @@ class _Namespace extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return <<<GREMLIN
 
 fullcode.out("NAMESPACE").each{ fullcode.fullcode = "namespace " + it.fullcode;} 

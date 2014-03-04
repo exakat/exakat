@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Declare extends TokenAuto {
     static public $operators = array('T_DECLARE');
 
-    function _check() {
+    public function _check() {
         // declare(ticks = 2) : block endblock;
         $this->conditions = array(0 => array('token' => _Declare::$operators,
                                              'atom'  => 'none'),

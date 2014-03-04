@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Bitshift extends TokenAuto {
     static public $operators = array('T_SR','T_SL');
     
-    function _check() {
+    public function _check() {
         // note : Multiplication:: and Bitshift:: operators are the same! 
         $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT')),
                                   -1 => array('atom' => Multiplication::$operands ),
@@ -26,7 +26,7 @@ class Bitshift extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode; ';
     }
 }

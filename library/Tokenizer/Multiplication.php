@@ -11,7 +11,7 @@ class Multiplication extends TokenAuto {
                                     'Noscream', 'Staticconstant', 'Staticproperty', 'Constant', 
                                     'Boolean', 'Magicconstant', 'Assignation' );
     
-    function _check() {
+    public function _check() {
 
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT'),
                                                                     Preplusplus::$operators)),
@@ -34,7 +34,7 @@ class Multiplication extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'fullcode.fullcode = fullcode.out("LEFT").next().fullcode + " " + fullcode.code + " " + fullcode.out("RIGHT").next().fullcode; ';
     }
 }

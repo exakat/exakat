@@ -5,7 +5,7 @@ namespace Tokenizer;
 class ArgumentsNoComma extends Arguments {
     static public $operators = array('T_OPEN_PARENTHESIS');
 
-    function _check() {
+    public function _check() {
         
         // @note f(1) : no comma 
         $this->conditions = array(-1 => array('token' => array_merge(Functioncall::$operators_without_echo, 

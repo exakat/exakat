@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Block extends TokenAuto {
     static public $operators = array('T_OPEN_CURLY');
 
-    function _check() {
+    public function _check() {
     // @doc Block
         $this->conditions = array( -1 => array('filterOut2' => array('T_VARIABLE', 'T_DOLLAR', 'T_CLOSE_CURLY', 'T_OPEN_CURLY',
                                                                      'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 
@@ -26,7 +26,7 @@ class Block extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'fullcode.fullcode = "{ /**/ } "; ';
     }
 }

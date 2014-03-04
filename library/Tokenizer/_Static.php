@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Static extends TokenAuto {
     static public $operators = array('T_STATIC');
 
-    function _check() {
+    public function _check() {
         $values = array('T_EQUAL', 'T_COMMA');
 
     // class x { static $x }
@@ -91,7 +91,7 @@ class _Static extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         $ppp = new _Function(Token::$client);
         return $ppp->fullcode();
     }

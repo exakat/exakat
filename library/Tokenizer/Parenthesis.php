@@ -5,7 +5,7 @@ namespace Tokenizer;
 class Parenthesis extends TokenAuto {
     static public $operators = array('T_OPEN_PARENTHESIS');
     
-    function _check() {
+    public function _check() {
         $operands    = array('Addition', 'Multiplication', 'Sequence', 'String', 
                              'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign',
                              'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
@@ -58,7 +58,7 @@ class Parenthesis extends TokenAuto {
         return $this->checkRemaining();
     }
 
-    function fullcode() {
+    public function fullcode() {
         return 'it.fullcode = "(" + it.out("CODE").next().fullcode + ")"; ';
     }
 }
