@@ -81,7 +81,7 @@ class _Case extends TokenAuto {
                                               'atom' => 'none'),
                                   1 => array('atom'  => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  3 => array('atom'  => array('Block', 'Sequence')), 
+                                  3 => array('atom'  => array('Block', 'Sequence', 'Void')), 
                                   4 => array('token' => $final_token),
         );
         
@@ -89,7 +89,8 @@ class _Case extends TokenAuto {
                                                        2 => 'DROP',
                                                        3 => 'CODE',),
                                 'atom'       => 'Case',
-                                'cleanIndex' => true );
+                                'cleanIndex' => true ,
+                                'caseDefaultSequence'              => true);
         $this->checkAuto();
 
         // @note instructions after a case, but not separated by ;

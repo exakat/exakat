@@ -1277,6 +1277,14 @@ b.setProperty('order', 1);
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
 b.outE('NEXT').each{ g.removeEdge(it) ; }
 
+// remove the next, if this is a ; 
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+    semicolon = it;
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(semicolon);
+}
+
 ";
             unset($actions['createSequenceForDefaultWithoutSemicolon']);
         }        
@@ -2013,6 +2021,70 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 
             ";
             unset($actions['createVoidForDefault']);
+        }
+
+        if (isset($actions['caseDefaultSequence'])) {
+            $qactions[] = <<<GREMLIN
+ /* caseDefaultSequence */   
+
+    if (it.both('NEXT').has('atom', 'SequenceCaseDefault').count() == 2) {
+        cds = it.in('NEXT').next();
+
+        g.addEdge(cds, it, 'ELEMENT');
+        c = cds.out('ELEMENT').count();
+        it.setProperty('order', c - 1);
+        
+        cds2 = it.out('NEXT').next();
+        cds2.out('ELEMENT').each{
+            it.inE('ELEMENT').each {
+                g.removeEdge(it);
+            }
+
+            g.addEdge(cds, it, 'ELEMENT');
+            it.setProperty('order', c++);
+        }
+        
+        g.addEdge(cds, cds2.out('NEXT').next(), 'NEXT');
+        cds2.bothE('NEXT').each { g.removeEdge(it); }
+        it.inE('NEXT').each { g.removeEdge(it); }
+        
+        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), cds2, 'DELETE');   
+    } else if (it.out('NEXT').has('atom', 'SequenceCaseDefault').any()) {
+            cds = it.out('NEXT').next();
+            it.setProperty('order', cds.out('ELEMENT').count());
+            
+            g.addEdge(it.in('NEXT').next(), cds, 'NEXT');
+            g.addEdge(cds, it, 'ELEMENT');
+            it.bothE('NEXT').each{ g.removeEdge(it); }
+    } else if (it.in('NEXT').has('atom', 'SequenceCaseDefault').any()) {
+            cds = it.in('NEXT').next();
+
+            it.setProperty('order', 0);
+            cds.out('ELEMENT').each{ it.setProperty('order', it.order + 1); }
+            
+            g.addEdge(cds, it.out('NEXT').next(), 'NEXT');
+            g.addEdge(cds, it, 'ELEMENT');
+            it.bothE('NEXT').each{ g.removeEdge(it); }
+    } else {
+        // no caseDefaultSequence anywhere
+        cds = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', virtual:true, line:it.line]);
+        g.addEdge(null, it.in('CLASS').next(),     cds, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+        g.addEdge(null, it.in('FUNCTION').next(),  cds, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+        g.addEdge(null, it.in('NAMESPACE').next(), cds, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+        g.addEdge(null, it.in('FILE').next(),      cds, 'FILE',      [file: it.inE('FILE').next().file]);
+
+        it.setProperty('order', 0);
+
+        g.addEdge(it.in('NEXT').next(), cds, 'NEXT');
+        g.addEdge(cds, it.out('NEXT').next(), 'NEXT');
+        g.addEdge(cds, it, 'ELEMENT');
+    
+        it.bothE('NEXT').each{ g.removeEdge(it); }
+    }
+
+    
+GREMLIN;
+            unset($actions['caseDefaultSequence']);
         }
 
         if (isset($actions['mergePrev2']) && $actions['mergePrev2']) {

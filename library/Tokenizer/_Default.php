@@ -16,7 +16,7 @@ class _Default extends TokenAuto {
         );
         
         $this->actions = array('createVoidForDefault' => true,
-                               'keepIndexed'       => true);
+                               'keepIndexed'          => true);
         $this->checkAuto();
 
         // default : ; // rest of the code
@@ -75,10 +75,11 @@ class _Default extends TokenAuto {
                                   3 => array('token' => $final_token),
         );
         
-        $this->actions = array('transform'   => array( 1 => 'DROP',
-                                                       2 => 'CODE',),
-                                'atom'       => 'Default',
-                                'cleanIndex' => true );
+        $this->actions = array('transform'                         => array( 1 => 'DROP',
+                                                                             2 => 'CODE',),
+                                'atom'                             => 'Default',
+                                'cleanIndex'                       => true,
+                                'caseDefaultSequence'              => true );
         $this->checkAuto();
 
         // @note instructions after a default, but not separated by ;

@@ -101,7 +101,6 @@ $classes = array(
     '_Throw',       
     '_Case',        
     '_Default',     
-//    'SequenceCaseDefault', // must be before _Switch, as they share the same Token for dectetion
     '_Switch',      
     'Ifthen',
     'IfthenElse',   
