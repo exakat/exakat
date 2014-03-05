@@ -3,16 +3,12 @@
 namespace Test;
 
 class Tokenizer extends \PHPUnit_Framework_TestCase {
-    function setUp() {
+    public function setUp() {
         shell_exec("cd ../..; php bin/delete -all");
     }
 
-    function tearDown() {
-        // empty
-    }
-    
-    function generic_test($file) {
-        $shell = 'cd ../..; php bin/load -f tests/tokenizer/source/'.$file.'.php; php bin/tokenizer; php bin/export -text -f '.dirname(__DIR__).'/source/'.$file.'.php';
+    public function generic_test($file) {
+        print $shell = 'cd ../..; php bin/load -f tests/tokenizer/source/'.$file.'.php; php bin/build_root; php bin/tokenizer -p test; php bin/export -text -f '.dirname(__DIR__).'/source/'.$file.'.php';
         $res = shell_exec($shell);
         
         $exp = file_get_contents('exp/'.$file.'.txt');
@@ -26,8 +22,6 @@ class Tokenizer extends \PHPUnit_Framework_TestCase {
         
         $this->assertEquals($decode->INDEXED_count, 0, 'There are '.$decode->INDEXED_count.' INDEXED left');
     }
-    
-    
 }
 
 ?>
