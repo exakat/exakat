@@ -204,3 +204,6 @@ print_r(xxx, true) is not a pb.
 Check report for incompilable : they don't show in appinfo nor as an analyzer
 Check appinfo for constant names, redeclared PHP functions, empty classes
 Report variable : warning, should not be mistaken by references
+
+SectionedHashtable : Ignore empty sections
+Report : indicate when the value is N/A (trait for PHP 5.3)
