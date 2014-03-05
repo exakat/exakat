@@ -20,6 +20,9 @@ if ($result[0][0] != 'MANUAL[racines:Vertex]') {
 query("g.V.has('index', 'true').each{ g.idx('racines').put('token', it.token, it); };");
 print "Indexing done\n";
 
+query("g.V.has('atom', 'String').filter{it.code.size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
+print "String unicode done\n";
+
 function query($query) {
     global $client;
     $params = array('type' => 'IN');
