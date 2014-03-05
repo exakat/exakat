@@ -76,23 +76,26 @@ class Appinfo {
                     ),
                     'Functions' => array(
                             'Functions'  => 'Functions/Functionnames',
-                            'Redeclared Function'  => 'Functions/RedeclaredPhpFunctions',
+                            'Redeclared Function'  => 'Functions/RedeclaredPhpFunction',
                             'Recursive Function'  => 'Functions/Recursive',
                             'Closures'   => 'Functions/Closures',
-                            'Empty Function'   => 'Functions/EmptyFunctions',
+                            'Empty Function'   => 'Functions/EmptyFunction',
                     ),
                     'Classes' => array(
                             'Classes'       => 'Classes/Classnames',
-                            'Empty classes' => 'Classes/EmptyClasses',
-                            'Interfaces'    => 'Interfaces/Interfacenames',
-                            'Empty interfaces' => 'Interfaces/EmptyInterface',
-//                            'Trait'      => 'Trait/Traitnames',
+                            'Empty classes' => 'Classes/EmptyClass',
                             'Static variables'   => 'Variables/StaticVariables',
                             'Magic methods'   => 'Classes/MagicMethod',
-                            'Empty classes'   => 'Classes/EmptyClasses',
+                    ),
+                    'Interfaces' => array(
+                            'Interfaces'    => 'Interfaces/Interfacenames',
+                            'Empty interfaces' => 'Interfaces/EmptyInterface',
+                    ),
+                    'Trait' => array(
+//                            'Trait'      => 'Trait/Traitnames',
                     ),
                     'Constants' => array(
-                            'Constants'     => 'Constants/ConstantDefinition',
+                            'Constants'     => 'Constants/Constantnames',
                             'PHP constants' => 'Constants/PhpConstantUsage',
                     ),
                     'Goto' => array(
