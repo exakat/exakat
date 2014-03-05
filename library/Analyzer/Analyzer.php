@@ -635,6 +635,14 @@ GREMLIN;
         return $this;
     }
 
+    function regexNot($column, $regex) {
+        $this->methods[] = <<<GREMLIN
+filter{ (it.$column =~ "$regex" ).getCount() == 0 }
+GREMLIN;
+
+        return $this;
+    }
+
     protected function outIs($edge_name) {
         if (is_array($edge_name)) {
             $this->addMethod("outE.filter{it.label in ***}.inV", $edge_name);
@@ -710,9 +718,7 @@ GREMLIN;
     
     function hasNoIn($edge_name) {
         if (is_array($edge_name)) {
-            // @todo
-            die(" I don't understand arrays in out() ".__METHOD__);
-            $this->addMethod("filter{ it.inE.filter{ !(it.label in ***)}.outV.count() == 0}", $edge_name);
+            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.count() == 0}", $edge_name);
         } else {
             $this->addMethod("filter{ it.in(***).count() == 0}", $edge_name);
         }
