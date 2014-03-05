@@ -36,7 +36,6 @@ class UnicodeBlock extends Analyzer\Analyzer {
         
         return $report;
     }
-
 }
 
 ?>
