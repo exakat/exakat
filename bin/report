@@ -140,6 +140,8 @@ $analyzes = array('Structures\\StrposCompare',
                   'Structures\\VardumpUsage',
                   'Structures\\PhpinfoUsage',
                   'Classes\\NonPpp',
+                  'Php/Incompilable',
+                  'Constants/ConstantStrangeNames',
 
                   'Structures\\NotNot',
                   'Structures\\Noscream',
@@ -158,8 +160,7 @@ foreach($analyzes as $id => $a) {
 if (count($analyzes) > 0) {
     $h1 = false;
     foreach($analyzes as $a) {
-        $a = "Analyzer\\$a";
-        $analyzer = new $a($client);
+        $analyzer = Analyzer\Analyzer::getInstance($a, $client);
         
         if (!$analyzer->checkPhpVersion('5.3.26')) {
             $incompatible[] = $analyzer->getName();
