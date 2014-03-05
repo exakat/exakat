@@ -199,3 +199,8 @@ Improve regex for PCRE
 spot usage of ereg 
 
 Mark Namespaces that are constants as such 
+
+print_r(xxx, true) is not a pb.
+Check report for incompilable : they don't show in appinfo nor as an analyzer
+Check appinfo for constant names, redeclared PHP functions, empty classes
+Report variable : warning, should not be mistaken by references
