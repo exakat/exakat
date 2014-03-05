@@ -74,7 +74,7 @@ class Token {
                                  'Phpcodemiddle',
                                  'Block',
                                  'Sequence', 
-                                 'SequenceCaseDefault', 
+//                                 'SequenceCaseDefault', 
 //                                 'SequenceAtom', 
                                  'IfthenElse', 
                                  'Ifthen', 
