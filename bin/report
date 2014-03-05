@@ -255,8 +255,7 @@ if (count($analyzes) > 0) {
     $h1 = false;
 
     foreach($analyzes as $a) {
-        $a = "Analyzer\\$a";
-        $analyzer = new $a($client); 
+        $analyzer = Analyzer\Analyzer::getInstance($a, $client); 
         $results = $analyzer->toCountedArray();
 
         if (empty($results)) {
