@@ -54,12 +54,18 @@ shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/ -p '.$project.''
 logProgress($project, $progress++ / $total_steps);
 print "Project loaded\n";
 
-$res = shell_exec('php bin/build_root; php bin/tokenizer -p '.$project.' > ./projects/'.$project.'/log/tokenizer.final.log');
-if (strpos('javax.script.ScriptException', $res) !== false) {
+$res = shell_exec('php bin/build_root;');
+print "Build root\n";
+
+$res = shell_exec('php bin/tokenizer -p '.$project.' > ./projects/'.$project.'/log/tokenizer.final.log');
+if (!empty($res) && strpos('javax.script.ScriptException', $res) !== false) {
     file_put_contents('log/tokenizer_error.log', $res);
     die();
 }
+
 shell_exec('php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
+print "Got the errors (if any)\n";
+
 shell_exec('php bin/stat > ./projects/'.$project.'/log/stat.log');
 logProgress($project, $progress++ / $total_steps);
 print "Project tokenized\n";
