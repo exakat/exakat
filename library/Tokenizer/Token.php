@@ -6,7 +6,7 @@ class Token {
     protected static $client = null;
     protected static $reserved = array();
     
-    public static $types = array('Variable', 
+    protected static $types = array('Variable', 
                                  'VariableDollar',
                                  'Boolean',  
                                  '_Array', 
@@ -74,8 +74,6 @@ class Token {
                                  'Phpcodemiddle',
                                  'Block',
                                  'Sequence', 
-//                                 'SequenceCaseDefault', 
-//                                 'SequenceAtom', 
                                  'IfthenElse', 
                                  'Ifthen', 
                                  '_Clone', 
@@ -91,9 +89,11 @@ class Token {
                                  'ArrayNS',
                                 );
 
+    protected $phpversion = 'Any';
+
     static public $instruction_ending = array();
     
-    function __construct($client) {
+    public function __construct($client) {
         // @todo typehint ? 
         Token::$client = $client; 
         
@@ -108,9 +108,62 @@ class Token {
                                                  Bitshift::$operators,
                                                  Logical::$operators,
                                                  array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS'));
+    }
+
+    public static function getTokenizers($version = null) {
+        if (empty($version)) {
+            return Token::$types;
         }
+        
+        $r = array();
+        foreach(Token::$types as $type) {
+            $class = "Tokenizer\\$type";
+            $x = new $class(null);
+            
+            if ($x->isCompatible($version)) {
+                $r[] = $type;
+            }
+        }
+        
+        return $r;
+    }
     
-    final function check() {
+    protected function isCompatible($version) {
+        // this handles Any version of PHP
+        if ($this->phpversion == 'Any') {
+            return true;
+        }
+
+        // version and above 
+        if ((substr($this->phpversion, -1) == '+') && version_compare($version, $this->phpversion) >= 0) {
+            return true;
+        } 
+
+        // up to version  
+        if ((substr($this->phpversion, -1) == '-') && version_compare($version, $this->phpversion) <= 0) {
+            return true;
+        } 
+
+        // version range 1.2.3-4.5.6
+        if (strpos($this->phpversion, '-') !== false) {
+            list($lower, $upper) = explode('-', $this->phpversion);
+            if (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } 
+        
+        // One version only
+        if (version_compare($version, $this->phpversion) == 0) {
+            return true;
+        } 
+        
+        // Default behavior if we don't understand : 
+        return false;
+    }
+
+    final public function check() {
         
         display(get_class($this)." check \n");
         if (!method_exists($this, '_check')) {
@@ -122,11 +175,11 @@ class Token {
         return true;
     }
     
-    function reserve() {
+    public function reserve() {
         return true;
     }
 
-    function resetReserve() {
+    public function resetReserve() {
         Token::$reserved = array();
     }
 
