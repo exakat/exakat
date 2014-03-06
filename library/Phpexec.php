@@ -23,7 +23,6 @@ class Phpexec {
                 break 1;
 
             default: 
-//                print "Didn't understand '$phpversion'. Will run it with default 'php' exec, version ".phpversion()."\n";
                 $this->phpexec = 'php';
         }    
 
