@@ -148,7 +148,7 @@ function process_file($filename, $log_file) {
     $classNode = new Environnement($client, $file); 
     $classNode->init($regexIndex['CLASS']);
 
-    $regex = Tokenizer\Token::$types; 
+    $regex = Tokenizer\Token::getTokenizers(); 
     $regexIndex = array();
     foreach($regex as $r) {
         $regexIndex[$r] = $client->makeNode()->setProperty('token', $r)
@@ -585,7 +585,7 @@ function process_file($filename, $log_file) {
 
         // test is for booleans. 
         if ($to_index) {
-            $regex = Tokenizer\Token::$types; 
+            $regex = Tokenizer\Token::getTokenizers(); 
             foreach($regex as $r) {
                 $class = "Tokenizer\\$r";
                 if (in_array($token_value, $class::$operators)) { 
