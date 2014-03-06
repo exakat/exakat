@@ -20,14 +20,24 @@ if ($result[0][0] != 'MANUAL[racines:Vertex]') {
 query("g.V.has('index', 'true').each{ g.idx('racines').put('token', it.token, it); };");
 print "Indexing done\n";
 
-query("g.V.has('atom', 'String').filter{it.code.size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
+query("g.V.has('atom', 'String').filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
 print "String unicode done\n";
 
 function query($query) {
     global $client;
     $params = array('type' => 'IN');
-    $query = new Gremlin\Query($client, $query, $params);
-    return $query->getResultSet();
+    try {
+        $GremlinQuery = new Gremlin\Query($client, $query, $params);
+        return $GremlinQuery->getResultSet();
+    } catch (Exception $e) {
+        $fp = fopen('log/build_root.log', 'a');
+        fwrite($fp, "Sleeping...\n");
+        fwrite($fp, $query."\n");
+        fclose($fp);
+        
+        sleep(2);
+        query($query);
+    }
 }
 
 ?>
