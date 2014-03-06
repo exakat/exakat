@@ -31,92 +31,22 @@ if ($id = array_search('-p', $args)) {
     $project = 'default';
 }
 
-$begin_time = microtime(true);
-$classes = array(
-    'Variable',     
-    'Halt',         
-    'Variabledollar',
-    'Boolean',      
-    'Sign',         
-    '_Array',       
-    'String',       
-    '_Arraydollarcurly',
-    'Property',     
-    'Keyvalue',     
-    '_Function',    
-    'Staticproperty',
-    'Logical',      
-    'Heredoc',      
-    'Not',          
-    'Cast',         
-    'Reference',    
-    'Arrayappend',  
-    '_Instanceof',  
-    '_Break',       
-    '_Continue',    
-    'Label',        
-    '_Goto',        
-    '_New',         
-    '_Global',      
-    'Nsname',       
-    '_Namespace',   
-    '_Use',         
-    'ArrayNS',      
-    '_Include',     
-    'Preplusplus',  
-    'Postplusplus', 
-    'Noscream',     
-    'Parenthesis',  
-    '_Clone',       
-    'Arguments',    
-    'ArgumentsNoParenthesis', 
-    'ArgumentsNoComma', 
-    'ArgumentsArray', 
-    'Functioncall', 
-    'FunctioncallArray',
-    'Methodcall',   
-    'Staticmethodcall', 
-    'Staticconstant',
-    'Multiplication',
-    'Addition',     
-    'Bitshift',     
-    'Concatenation', 
-    '_Var',         
-    '_Ppp',         
-    '_Static',      
-    'Assignation',  
-    'Comparison',   
-    'Ternary',      
-    'Constant',     
-    '_Return',      
-    '_Declare',     
-    '_Const',       
-    'Block',        
-    'Shell',        
-    '_Interface',   
-    '_Class',       
-    '_Abstract',    
-    '_Final',       
-    'Typehint', 
-    '_Throw',       
-    '_Case',        
-    '_Default',     
-    '_Switch',      
-    'Ifthen',
-    'IfthenElse',   
-    '_Foreach',
-    '_For',
-    '_Dowhile',     
-    '_While',
-    '_Catch',       
-    '_Try',         
-    'Sequence',     
-    'SequenceAtom',
-    'Phpcodemiddle',
-    'Phpcode',      
-    'Void',
-);
+if (!file_exists('./projects/'.$project.'/config.ini')) {
+    print "No such config.ini in project '$project'. Aborting\n";
+    die();
+}
 
+$config = parse_ini_file('./projects/'.$project.'/config.ini');
+
+$begin_time = microtime(true);
+if (empty($config['phpversion'])) {
+    $classes = Token::getTokenizers(PHP_VERSION);
+} else {
+    $classes = Token::getTokenizers($config['phpversion']);
+}
+print_r($classes);
+
+/*
 if (file_exists('classes.php')) {
     include('classes.php');
 } else {
@@ -126,6 +56,7 @@ if (file_exists('classes.php')) {
     
     file_put_contents('classes.php', '<?php '."\n".'$classes = '.var_export($classes, true).'; ?>');
 }
+*/
 
 $log = new Log('tokenizer');
 $log->log( "Starting time : ".date('r'));
