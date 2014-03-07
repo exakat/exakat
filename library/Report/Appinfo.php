@@ -23,6 +23,7 @@ class Appinfo {
                             'ext/ereg'       => 'Extensions/Extereg',
                             'ext/exif'       => 'Extensions/Extexif',
                             'ext/fileinfo'   => 'Extensions/Extfileinfo',
+                            'ext/fdf'        => 'Extensions/Extfdf',
                             'ext/filter'     => 'Extensions/Extfilter',
                             'ext/ftp'        => 'Extensions/Extftp',
                             'ext/gd'         => 'Extensions/Extgd',
