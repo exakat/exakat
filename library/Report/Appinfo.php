@@ -113,8 +113,13 @@ class Appinfo {
                     'Strings' => array(
                             'Heredoc'    => 'Type/Heredoc',
                             'Nowdoc'     => 'Type/Nowdoc',
-                        )
-                    );
+                    )
+                    'Exceptions' => array(
+                            'Define'        => 'Exceptions/ExceptionDefinition',
+                            'Try/Catch'     => 'Exceptions/CaughtExceptions',
+                            'Throws'        => 'Exceptions/ThrownExceptions',
+                    )
+               );
 
         foreach($extensions as $section => $hash) {
             $this->info['--'.$section] = '';
