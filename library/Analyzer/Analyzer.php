@@ -946,13 +946,15 @@ GREMLIN;
 
     public function toFullArray() {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
-        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out"; 
+        $queryTemplate = <<<GREMLIN
+g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').in('FILE').as('file').back('fullcode').as('line').select{it.fullcode}{it.line}{it.fullcode}
+GREMLIN;
         $vertices = $this->query($queryTemplate);
 
         $report = array();
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
-                $report[] = array($v[0]->fullcode, $v[0]->line);
+                $report[] = array($v[0][0], $v[0][2], $v[0][1], $this->getName());
             }   
         } 
         
