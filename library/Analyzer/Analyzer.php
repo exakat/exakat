@@ -444,7 +444,7 @@ GREMLIN;
     }
 
     function is($property, $value= "'true'") {
-        $this->methods[] = "has('$property', $value)";
+        $this->methods[] = "filter{ it.$property == $value;}";
 
         return $this;
     }
@@ -452,6 +452,18 @@ GREMLIN;
     function isNot($property, $value= "'true'") {
         $this->methods[] = "hasNot('$property', $value)";
         
+        return $this;
+    }
+
+    function hasOrder($value = "0") {
+        if ($value == 'first') {
+            $this->addMethod("filter{it.order == 0}");
+        } elseif ($value == 'last') {
+            $this->addMethod("filter{it.order == it.in('ELEMENT').out('ELEMENT').count() - 1}");
+        } else {
+            $this->addMethod("filter{it.order == ***}", abs(intval($value)));
+        }
+
         return $this;
     }
 
