@@ -38,6 +38,7 @@ class Appinfo {
                             'ext/mysqli'     => 'Extensions/Extmysqli',
                             'ext/openssl'    => 'Extensions/Extopenssl',
                             'ext/pcre'       => 'Extensions/Extpcre',
+                            'ext/phar'       => 'Extensions/Extphar',
                             'ext/pgsql'      => 'Extensions/Extpgsql',
                             'ext/soap'       => 'Extensions/Extsoap',
                             'ext/sockets'    => 'Extensions/Extsockets',
