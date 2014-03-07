@@ -32,7 +32,6 @@ if (preg_match('/command not found/is', $res)) {
 }
 
 // phploc
-// wkhtmltopdf
 $res = shell_exec('phploc --version 2>&1');
 if (preg_match('/command not found/is', $res)) {
     $stats['phploc']['installed'] = 'No';
@@ -41,6 +40,17 @@ if (preg_match('/command not found/is', $res)) {
     $stats['phploc']['version'] = $r[1];
 } else {
     $stats['phploc']['error'] = $res;
+}
+
+// phpunit
+$res = shell_exec('phpunit --version 2>&1');
+if (preg_match('/command not found/is', $res)) {
+    $stats['phpunit']['installed'] = 'No';
+} elseif (preg_match('/PHPUnit\s+([0-9\.]+)/is', $res, $r)) {
+    $stats['phpunit']['installed'] = 'Yes';
+    $stats['phpunit']['version'] = $r[1];
+} else {
+    $stats['phpunit']['error'] = $res;
 }
 
 foreach($stats as $section => $details) {
