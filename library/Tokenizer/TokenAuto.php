@@ -11,7 +11,7 @@ class TokenAuto extends Token {
         $class = str_replace("Tokenizer\\", '', get_class($this));
         if (in_array($class, array('FunctioncallArray'))) {
             $query .= "g.idx('racines')[['token':'S_ARRAY']].out('INDEXED')";
-        } elseif (in_array($class, Token::$types) && !in_array($class, array('SequenceCaseDefault'))) {
+        } elseif (in_array($class, Token::$types)) {
             $query .= "g.idx('racines')[['token':'$class']].out('INDEXED')";
         } else {
             $query .= "g.V";
@@ -713,7 +713,6 @@ fullcode = ppp;
             unset($actions['to_option']);
         }    
         
-        
         if (isset($actions['to_ppp_assignation'])) {
             $qactions[] = "
 /* to ppp with assignation */
@@ -1073,7 +1072,12 @@ if (c > 0) {
 
 x.as('origin').out('ELEMENT').has('atom','Sequence').each{
     it.inE('ELEMENT').each{ g.removeEdge(it);}
-  
+
+    if (it.has('root', 'true').any()) {
+        it.removeProperty('root');
+        x.setProperty('root', 'true');
+    }
+    
     it.out('ELEMENT').each{ 
         it.inE('ELEMENT').each{ g.removeEdge(it);}
         g.addEdge(f, it, 'ELEMENT');
@@ -1081,7 +1085,13 @@ x.as('origin').out('ELEMENT').has('atom','Sequence').each{
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
 }
 
-
+if (x.out('ELEMENT').has('root', 'true').any()) {
+    x.out('ELEMENT').has('root', 'true').each{ 
+        it.removeProperty('root');
+    }
+    
+    x.setProperty('root', 'true');
+}
 ";
             unset($actions['insertSequence']);
         }

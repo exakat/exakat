@@ -87,6 +87,7 @@ class Token {
                                  'Typehint',
                                  '_Use', 
                                  'ArrayNS',
+//                                 'SequenceAtom',
                                 );
 
     protected $phpversion = 'Any';
