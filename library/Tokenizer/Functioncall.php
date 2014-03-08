@@ -42,6 +42,7 @@ class Functioncall extends TokenAuto {
                                'atom'       => 'Functioncall');
         $this->checkAuto();
 
+        // functioncall special case for Echo
         $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
                                     -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
                                      0 => array('token' => 'T_ECHO'),
