@@ -28,6 +28,7 @@ class Appinfo {
                             'ext/ftp'        => 'Extensions/Extftp',
                             'ext/gd'         => 'Extensions/Extgd',
                             'ext/gmp'        => 'Extensions/Extgmp',
+                            'ext/gnupg'      => 'Extensions/Extgnupg',
                             'ext/hash'       => 'Extensions/Exthash',
                             'ext/kdm5'       => 'Extensions/Extkdm5',
                             'ext/ldap'       => 'Extensions/Extldap',
@@ -114,7 +115,7 @@ class Appinfo {
                     'Strings' => array(
                             'Heredoc'    => 'Type/Heredoc',
                             'Nowdoc'     => 'Type/Nowdoc',
-                    )
+                    ),
                     'Exceptions' => array(
                             'Define'        => 'Exceptions/ExceptionDefinition',
                             'Try/Catch'     => 'Exceptions/CaughtExceptions',
