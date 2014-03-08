@@ -119,6 +119,11 @@ function process_file($filename, $log_file) {
     $client = new $_PILOT();
 
     $file = realpath($filename);
+    if (strpos($file, '/code/') !== false) {
+        $file = substr($file, strpos($file, '/code/') + 5);
+    } else {
+        $file = $filename;
+    }
     if (filesize($filename) == 0) {
         return false;
     }
