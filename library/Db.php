@@ -2,8 +2,8 @@
 
 class Db  {
     
-    public function __construct() {
-        $this->mysqli = new \mysqli('localhost', 'root', '', 'exakat');
+    public function __construct($db = 'exakat') {
+        $this->mysqli = new \mysqli('localhost', 'root', '', $db);
     }
     
     public function insert($table, $cols, $values) {
