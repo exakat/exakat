@@ -13,12 +13,12 @@ class _Class extends TokenAuto {
                                  );
         
         $this->actions = array('transform'   => array(   1 => 'NAME'),
-                               'atom'        => 'Class_tmp',
-                               'keepIndexed' => true);
+                               'keepIndexed' => true,
+                               'atom'        => 'Class');
         $this->checkAuto(); 
 
     // class x extends y {}
-        $this->conditions = array( 0 => array('token' => _Class::$operators, 'atom' => 'Class_tmp'),
+        $this->conditions = array( 0 => array('token' => _Class::$operators),
                                    1 => array('token' => 'T_EXTENDS'),
                                    2 => array('atom'  => array('Identifier', 'Nsname')),
                                    3 => array('filterOut2' => 'T_NS_SEPARATOR'),
@@ -31,7 +31,7 @@ class _Class extends TokenAuto {
         $this->checkAuto(); 
 
     // class x implements a {}
-        $this->conditions = array( 0 => array('token'     => _Class::$operators, 'atom' => 'Class_tmp'),
+        $this->conditions = array( 0 => array('token'     => _Class::$operators),
                                    1 => array('token'     => 'T_IMPLEMENTS'),
                                    2 => array('atom'      => array('Identifier', 'Nsname')),
                                    3 => array('filterOut' => array('T_COMMA', 'T_NS_SEPARATOR'))
@@ -43,7 +43,7 @@ class _Class extends TokenAuto {
         $this->checkAuto(); 
 
     // class x implements a,b,c {}
-        $this->conditions = array( 0 => array('token' => _Class::$operators, 'atom' => 'Class_tmp'),
+        $this->conditions = array( 0 => array('token' => _Class::$operators),
                                    1 => array('token' => 'T_IMPLEMENTS'),
                                    2 => array('atom' => 'Arguments'),
                                    3 => array('filterOut' => array('T_COMMA')),
@@ -55,11 +55,11 @@ class _Class extends TokenAuto {
         $this->checkAuto(); 
 
     // class x { // some real code}
-        $this->conditions = array( 0 => array('token' => _Class::$operators, 'atom' => 'Class_tmp'),
+        $this->conditions = array( 0 => array('token' => _Class::$operators),
                                    1 => array('atom' => 'Block')
                                  );
         
-        $this->actions = array('transform'   => array(1 => 'BLOCK'),
+        $this->actions = array('transform'  => array(1 => 'BLOCK'),
                                'atom'       => 'Class',
                                'cleanIndex' => true);
         $this->checkAuto(); 
@@ -86,7 +86,12 @@ if (fullcode.out("IMPLEMENTS").count() > 0) {
     it.out("IMPLEMENTS").each{ i.add(it.fullcode); }
     fullcode.fullcode = fullcode.fullcode + " implements " + i.join(", ");
 }
-        
+
+fullcode.out("EXTENDS").each{ 
+    extend = it;
+    g.addEdge(it, g.V.has('atom', 'Class').filter{it.out('NAME').next().code == extend.code}.next(), 'DEFINES');
+}
+
 GREMLIN;
 // didn't added code, it seems too much....
     }
