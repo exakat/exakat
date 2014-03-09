@@ -40,13 +40,21 @@ class _Interface extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "interface " + it.out("NAME").next().code; 
-current = it;
+        return <<<GREMLIN
+
+fullcode.fullcode = "interface " + fullcode.out("NAME").next().code; 
 
 // extends
-it.out("EXTENDS").each{ current.fullcode = current.fullcode + " extends " + it.fullcode;}
+fullcode.out("EXTENDS").each{ fullcode.fullcode = fullcode.fullcode + " extends " + it.fullcode;}
+
+fullcode.out("EXTENDS").each{ 
+    extend = it;
+    g.V.has('atom', 'Interface').filter{it.out('NAME').next().code == extend.code}.each{
+        g.addEdge(it , extend, 'DEFINES');
+    }
+}
         
-        ';
+GREMLIN;
     }
 
 }
