@@ -92,37 +92,7 @@ if ($id = array_search('-D', $args)) {
     define('STYLE', 'ALL');
 }
 
-if (FORMAT == 'SQLITE' || FORMAT == 'WEB') {
-    $report = new Report\Sqlite(null);
-} else {
-    $report = new Report\Report($client);
-}
-$report->addContent('Text', 'Audit report for application');
-
-$report->createH1('Report presentation');
-
-$report->createH2('Report synopsis'); 
-$report->addContent('Text', 'Presentation of the report process');
-
-$report->createH2('Report configuration'); 
-$ReportInfo = new Report\ReportInfo($project);
-$ReportInfo->setNeo4j($client);
-$ReportInfo->setMySQL($mysqli);
-$ReportInfo->collect();
-
-$report->addContent('HashTable', $ReportInfo->toArray()); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
-/*
-$report->createH2('Analyser list'); 
-$AnalyzerList = new Report\AnalyzerList($project);
-$report->addContent('Liste', $AnalyzerList->toArray()); 
-*/
-
-/*
-human review of the audit, and 3 paragraph explation + table with priorities
-$report->createH2('Executive summary');
-$report->addContent('Text');
-*/
+$report = new Report\Flat($client);
 
 $no_output = array();
 
@@ -138,7 +108,9 @@ $analyzes = array('Structures\\StrposCompare',
                   'Structures\\OnceUsage',
                   'Structures\\VardumpUsage',
                   'Structures\\PhpinfoUsage',
-                  'Classes\\NonPPP',
+                  'Classes\\NonPpp',
+                  'Php/Incompilable',
+                  'Constants/ConstantStrangeNames',
 
                   'Structures\\NotNot',
                   'Structures\\Noscream',
@@ -155,15 +127,15 @@ foreach($analyzes as $id => $a) {
     }
 }
 
-$report = array();
 if (count($analyzes) > 0) {
     $h1 = false;
     foreach($analyzes as $a) {
-        $a = "Analyzer\\$a";
-        $analyzer = new $a($client); 
+        $analyzer = Analyzer\Analyzer::getInstance($a, $client); 
         $results = $analyzer->toFullArray();
-        if (count($results)) {
-            $report[$analyzer->getName()] = $results;
+        if (count($results) > 0) {
+            $report->addContent('Horizontal', $results);
+        } else {
+            $no_output[] = $a;
         }
     }
 }

@@ -54,6 +54,10 @@ class Section {
         return $this->sections;
     }
 
+    function getContent() {
+        return $this->content;
+    }
+
     function toText() {
         if ($this->level == 0) { 
             return ''; // case of the root section
