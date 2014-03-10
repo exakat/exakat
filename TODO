@@ -182,6 +182,8 @@ Check that Namespaces (specially Global) cannot be there several times.
 You should not throw an extension exception yourself (PDO)
 
 AND / && and OR / ||. http://stackoverflow.com/questions/2803321/and-vs-as-operator
+// display the actual hierarchy (add parenthesis?)
+
 Complex logical expression, without ().
 Commented Code
 
@@ -207,3 +209,9 @@ Report variable : warning, should not be mistaken by references
 
 SectionedHashtable : Ignore empty sections
 Report : indicate when the value is N/A (trait for PHP 5.3)
+Spot useless code, such as variable or scalar alone on an instruction.
+
+Desactiver ArrayNS en fonction des versions de PHP qui tournent.
+Spot trailing white space on PHP code (before and after <?php ?>)
+Support phar files (digg them and find the local php files).
+spot MD5 strings ("8660281B6051D071D94B5B230549F9DC851566DC")
