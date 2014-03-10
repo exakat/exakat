@@ -90,14 +90,14 @@ if (fullcode.out("IMPLEMENTS").count() > 0) {
 fullcode.out("EXTENDS").each{ 
     extend = it;
     g.V.has('atom', 'Class').filter{it.out('NAME').next().code == extend.code}.each{
-        g.addEdge(it , extend, 'DEFINES');
+        g.addEdge(it , fullcode, 'DEFINES');
     }
 }
 
 fullcode.out("IMPLEMENTS").each{ 
     implement = it;
     g.V.has('atom', 'Interface').filter{it.out('NAME').next().code == implement.code}.each{
-        g.addEdge(it , implement, 'DEFINES');
+        g.addEdge(it , fullcode, 'DEFINES');
     }
 }
 
