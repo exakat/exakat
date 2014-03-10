@@ -10,18 +10,23 @@ use Everyman\Neo4j\Client,
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
+if (in_array('-V', $argv)) {
+    define('DISPLAY', false);
+} else {
+    define('DISPLAY', true);
+}
+
 $client = new Client();
 
-//
 $result = query("g.idx('racines')");
 if ($result[0][0] != 'MANUAL[racines:Vertex]') {
     query("g.createManualIndex('racines', Vertex)");
 }
 query("g.V.has('index', 'true').each{ g.idx('racines').put('token', it.token, it); };");
-print "Indexing done\n";
+if (DISPLAY) print "Indexing done\n";
 
 query("g.V.has('atom', 'String').filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
-print "String unicode done\n";
+if (DISPLAY) print "String unicode done\n";
 
 function query($query) {
     global $client;
