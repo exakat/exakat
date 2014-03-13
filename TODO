@@ -215,3 +215,5 @@ Desactiver ArrayNS en fonction des versions de PHP qui tournent.
 Spot trailing white space on PHP code (before and after <?php ?>)
 Support phar files (digg them and find the local php files).
 spot MD5 strings ("8660281B6051D071D94B5B230549F9DC851566DC")
+
+Check for ordering with case/default
