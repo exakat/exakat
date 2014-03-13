@@ -1,0 +1,95 @@
+/** jQuery UI Slider */
+.ui-slider {
+ background-color:#CCC;
+}
+.ui-slider-horizontal {
+  height:9px;
+}
+.ui-slider-vertical {
+  width:9px;
+}
+.ui-slider-handle {
+  border-radius:0;
+
+  background-color:#F5F5F5;
+  border:1px solid;
+
+  &:before {
+	display:inline-block;
+	content:"|||";
+	font-size:7px;
+	font-family:Arial, Helvetica, sans-serif;	
+	
+	position:absolute; top:0; bottom:0; left:0; right:0;
+	text-align:center; line-height:14px;
+  }
+  &:hover {
+	background-color:#FFF;
+  }
+  &:hover , &:focus  , &:active{
+	outline:none;
+	box-shadow: 1px 1px 1px 0px rgba(0,0,0,.3);
+	text-decoration:none;
+	&:before {
+		text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+	}
+  }
+}
+
+.ui-slider-small {
+	&.ui-slider-horizontal {
+		height:5px;
+	}
+	&.ui-slider-vertical {
+		width:5px;
+	}
+	.ui-slider-handle {
+		border-radius:24px;
+		width:14px; height:14px;
+		top:-5px;
+
+		&:before {
+			font-size:6px;
+			line-height:13px;
+		}
+	}
+}
+
+/* colors */
+.ui-slider-range {
+	background-color:@slider-color;
+}
+.ui-slider-handle {
+	outline:none !important;
+	& , &:hover , &:focus, &:active {
+		border-color:@slider-color;
+		color:@slider-color;
+	}
+}
+
+
+
+//slider color
+.slider-color(@color) {
+   @slider-class:~`"slider-@{color}"`;
+   @slider-bg:@@slider-class;
+   @slider-class2:~`"ui-@{slider-class}"`;
+
+  .@{slider-class2} {
+	 .ui-slider-range {
+		background-color:@slider-bg;
+	 }
+	 .ui-slider-handle {
+		& , &:hover , &:focus, &:active {
+			border-color:@slider-bg;
+			color:@slider-bg;
+		}
+	 }
+  }
+}
+.slider-color(~"green");
+.slider-color(~"red");
+.slider-color(~"purple");
+.slider-color(~"orange");
+.slider-color(~"dark");
+.slider-color(~"pink");

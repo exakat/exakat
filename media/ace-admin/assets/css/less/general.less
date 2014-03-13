@@ -1,0 +1,82 @@
+//some page-content variables
+@content-bg:#FFF;
+@content-header-border:#E2E2E2;
+@content-header-color:#2679B5;
+@content-header-size:24px;
+@content-header-small-color:#8089A0;
+@content-header-small-size:14px;
+
+
+
+html {
+  min-height:100%;
+  position:relative;
+}
+
+body {
+  padding-bottom: 0;
+  background-color:@body-bg;
+  min-height:100%;
+
+  font-family: 'Open Sans';
+  font-size:13px;
+  color:@text-color;
+  
+
+  &:before{ //this is the actual content background, for example in fixed-width layouts, extra space out of content will be @body-bg colored
+	 content:"";
+	 display:block;
+	 position:fixed;
+	 top:0; bottom:0; left:0; right:0; z-index:-1;
+	 background-color:#FFF;
+  }
+  &.navbar-fixed {
+	padding-top:@navbar-mh;
+  }
+  &.breadcrumbs-fixed {
+	padding-top:@navbar-mh + @breadcrumb-height + 1;
+  }
+}
+
+
+
+/* ace default theme layout sections */
+.main-container {
+  padding:0;
+  position:relative;
+}
+
+
+.main-content {
+ margin-left:(@sidebar-width + 1);
+ margin-right:0; margin-top:0;
+ min-height:100%;
+ padding:0;
+}
+
+.page-content {
+ background:@content-bg;
+ margin:0;
+ padding:8px 20px 24px;
+
+ .page-header:first-child {
+	margin:0 0 12px;
+	border-bottom:1px dotted @content-header-border;
+
+	h1 {
+	  padding:0;
+	  margin:0 8px;
+	  font-size:@content-header-size;
+	  font-weight:lighter;
+	  color:@content-header-color;
+
+	  small {
+		margin:0 6px;
+		font-size:@content-header-small-size;
+		font-weight:normal;
+		color:@content-header-small-color;
+	  }//small
+	}//h1
+ }//.page-header:first-child
+}//.page-content
+
