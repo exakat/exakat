@@ -2051,7 +2051,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             }
 
             g.addEdge(cds, it, 'ELEMENT');
-            it.setProperty('order', c++);
+            it.setProperty('order', c + it.order);
         }
         
         g.addEdge(cds, cds2.out('NEXT').next(), 'NEXT');
@@ -2061,7 +2061,9 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         g.addEdge(g.idx('racines')[['token':'DELETE']].next(), cds2, 'DELETE');   
     } else if (it.out('NEXT').has('atom', 'SequenceCaseDefault').any()) {
             cds = it.out('NEXT').next();
-            it.setProperty('order', cds.out('ELEMENT').count());
+
+            it.setProperty('order', 0);
+            cds.out('ELEMENT').each{ it.setProperty('order', it.order + 1); }
             
             g.addEdge(it.in('NEXT').next(), cds, 'NEXT');
             g.addEdge(cds, it, 'ELEMENT');
@@ -2069,15 +2071,14 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     } else if (it.in('NEXT').has('atom', 'SequenceCaseDefault').any()) {
             cds = it.in('NEXT').next();
 
-            it.setProperty('order', 0);
-            cds.out('ELEMENT').each{ it.setProperty('order', it.order + 1); }
+            it.setProperty('order', cds.out('ELEMENT').count());
             
             g.addEdge(cds, it.out('NEXT').next(), 'NEXT');
             g.addEdge(cds, it, 'ELEMENT');
             it.bothE('NEXT').each{ g.removeEdge(it); }
     } else {
         // no caseDefaultSequence anywhere
-        cds = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', virtual:true, line:it.line]);
+        cds = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', virtual:true, line:it.line, fullcode:'Sequence Case Default']);
         g.addEdge(null, it.in('CLASS').next(),     cds, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
         g.addEdge(null, it.in('FUNCTION').next(),  cds, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
         g.addEdge(null, it.in('NAMESPACE').next(), cds, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);

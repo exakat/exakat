@@ -5,6 +5,7 @@ namespace Report\Format;
 class Ace { 
     private $output = '';
     private $last = '';
+    private $files = array();
     
     public function render($output, $data) {
         print get_class($data)."\n";
@@ -24,7 +25,20 @@ class Ace {
     }
     
     public function toFile($filename) {
-    
+        list($dir, $ext) = explode('.', $filename);
+        if (file_exists($dir)) {
+            print "$dir exists, remove it first. Aborting\n"; 
+            die();
+        }
+        mkdir($dir, 0755);
+        print shell_exec('cp -r media/ace-admin/assets '.$dir);
+        
+        $total = 0;
+        foreach($this->files as $name => $html) {
+            $total += file_put_contents($dir.'/'.$name, $html);
+        }
+        
+        return $total;
     }
     
     protected function toFile2($filename, $data) {
@@ -235,7 +249,7 @@ class Ace {
 </html>
 
 HTML;
-        file_put_contents($filename, $html);
+        $this->files[$filename] = $html;
 
         $this->output = '';
         

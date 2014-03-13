@@ -27,6 +27,10 @@ if ($id = array_search('-json', $args)) {
     define('FORMAT', 'Text');
     unset($args[$id]);
     $args = array_values($args);
+} elseif ($id = array_search('-ace', $args)) {
+    define('FORMAT', 'Ace');
+    unset($args[$id]);
+    $args = array_values($args);
 } elseif ($id = array_search('-sqlite', $args)) {
     die("No Sqlite");
     define('FORMAT', 'SQLITE');

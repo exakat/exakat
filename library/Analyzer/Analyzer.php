@@ -954,7 +954,10 @@ GREMLIN;
         $report = array();
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
-                $report[] = array($v[0][0], $v[0][2], $v[0][1], $this->getName());
+                $report[] = array('code' => $v[0][0], 
+                                  'file' => $v[0][2], 
+                                  'line' => $v[0][1], 
+                                  'desc' => $this->getName());
             }   
         } 
         

@@ -11,7 +11,7 @@ class Section extends \Report\Format\Ace {
             foreach($data->getContent() as $content) {
                 $content->render($output);
             }
-            $output->toFile2('ace/'.$data->getId().".html", $data);
+            $output->toFile2($data->getId().".html", $data);
         } else {
             $output->push("								<h{$data->getLevel()} class=\"header smaller lighter blue\">{$data->getName()}</h{$data->getLevel()}>");
         }
