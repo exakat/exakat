@@ -1,8 +1,6 @@
 <?php
 
-namespace Report;
-
-
+namespace Report\Content;
 
 class ReportInfo {
     private $list = array();
@@ -13,7 +11,7 @@ class ReportInfo {
     }
 
     public function collect() {
-        include(dirname(__DIR__).'/App.php');
+        include(dirname(dirname(__DIR__)).'/App.php');
         $this->list['Audit software version'] = $app['version'];
         
         $res = $this->mysql->query("SELECT * FROM project_runs WHERE folder='{$this->project}' ORDER BY date_finish DESC LIMIT 1")->fetch_assoc();

@@ -1,10 +1,10 @@
 <?php
 
-namespace Report;
+namespace Report\Template;
 
-class Horizontal extends Dataset {
+class Summary {
     private $hash = array('Empty' => 'hash');
-    private $sort = HashTable::SORT_NONE;
+//    private $sort = HashTable::SORT_NONE;
     private $summary = false;
 
     private $headerName = 'Item';
@@ -16,9 +16,14 @@ class Horizontal extends Dataset {
     const SORT_KEY = 4;
     const SORT_REV_KEY = 4;
     
-    function setContent($hash = array()) {
-        if (!is_null($hash)) {
-            $this->hash = $hash; 
+    public function render($output) {
+        $renderer = $output->getRenderer('Summary');
+        $renderer->render($output, $this->data->getContent());
+    }
+    
+    function setContent($data) {
+        if (!is_null($data)) {
+            $this->data = $data; 
         } 
     }
 

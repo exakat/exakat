@@ -1,6 +1,6 @@
 <?php
 
-namespace Report;
+namespace Report\Template;
 
 class Section {
     private $name = 'No named section';
@@ -11,11 +11,10 @@ class Section {
 
     private $content = array();
     
-    function __construct($name) {
-        $this->name = $name;
+    function __construct() {
     }
     
-    function addSection($name, $level) {
+    function addSection($name, $level = 1) {
         $this->currentSection = new Section($name);
         $this->currentSection->setLevel($level);
         $this->sections[] = $this->currentSection;
@@ -24,16 +23,34 @@ class Section {
     }
     
     function addContent($type, $data = null) {
-        $type = 'Report\\'.$type;
+        $type = 'Report\\Template\\'.$type;
         $content = new $type();
         $content->setContent($data);
         $this->content[] = $content;
         
         return $content;
     }
+    
+    public function setContent($name) {
+        $this->name = $name;
+    }
+
+    public function render($output) {
+        $renderer = $output->getRenderer('Section');
+        
+        $renderer->render($output, $this);
+        
+        foreach($this->content as $content) {
+            $content->render($output);
+        }
+    }
 
     function setLevel($level = 0) {
         $this->level = $level;
+    }
+
+    function getLevel() {
+        return $this->level;
     }
 
     function getCurrent() {

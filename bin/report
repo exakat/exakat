@@ -17,6 +17,76 @@ $client = new Client();
 $db = new Db();
 
 $args = $argv;
+
+if ($id = array_search('-json', $args)) {
+    die("No JSON");
+    define('FORMAT', 'JSON');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-text', $args)) {
+    define('FORMAT', 'Text');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-sqlite', $args)) {
+    die("No Sqlite");
+    define('FORMAT', 'SQLITE');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-odt', $args)) {
+    die("No ODT");
+    define('FORMAT', 'ODT');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-markdown', $args)) {
+    define('FORMAT', 'Markdown');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-pdf', $args)) {
+    die("No PDF");
+    define('FORMAT', 'PDF');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-csv', $args)) {
+    define('FORMAT', 'Csv');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-html', $args)) {
+    define('FORMAT', 'Html');
+    unset($args[$id]);
+    $args = array_values($args);
+} elseif ($id = array_search('-web', $args)) {
+    die("No Web");
+    define('FORMAT', 'Web');
+    unset($args[$id]);
+    $args = array_values($args);
+} else {
+    define('FORMAT', 'Text');
+}
+
+if ($id = array_search('-o', $args)) {
+    define('OUTPUT', true);
+} else {
+    define('OUTPUT', false);
+}
+
+if ($id = array_search('-f', $args)) {
+    define('FILE', $args[$id + 1]);
+    unset($args[$id]);
+    unset($args[$id + 1]);
+} else {
+    define('FILE', 'report');
+}
+
+if ($id = array_search('-r', $args)) {
+    define('REPORT', $args[$id + 1]);
+    unset($args[$id]);
+    unset($args[$id + 1]);
+} else {
+    define('REPORT', 'Premier');
+}
+
+$args = array_values($args);
+
 if (!isset($args[1])) {
     $project = 'default';
 } else {
@@ -28,393 +98,25 @@ if (!file_exists('./projects/'.$project.'/config.ini')) {
 }
 $config = parse_ini_file('./projects/'.$project.'/config.ini');
 
-if ($id = array_search('-json', $args)) {
-    define('FORMAT', 'JSON');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-text', $args)) {
-    define('FORMAT', 'TEXT');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-sqlite', $args)) {
-    define('FORMAT', 'SQLITE');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-odt', $args)) {
-    define('FORMAT', 'ODT');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-markdown', $args)) {
-    define('FORMAT', 'MARKDOWN');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-pdf', $args)) {
-    define('FORMAT', 'PDF');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-csv', $args)) {
-    define('FORMAT', 'CSV');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-html', $args)) {
-    define('FORMAT', 'HTML');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-web', $args)) {
-    define('FORMAT', 'WEB');
-    unset($args[$id]);
-    $args = array_values($args);
+print "Building report ".REPORT." for project $project in file ".FILE.", with format ".FORMAT."\n";
+$begin = microtime(true);
+
+$reportClass = "\\Report\\Report\\".REPORT;
+$report = new $reportClass($client, $db);
+$report->setProject($project);
+$report->prepare();
+$size = $report->render(FORMAT, FILE);
+
+$end = microtime(true);
+
+if ($size < 1024) {
+    $size = "$size b";
+} else if ($size < 1024 * 1024) {
+    $size = floor($size / 1024)." kb";
 } else {
-    define('FORMAT', 'TEXT');
+    $size = floor($size / pow(1024, 2))." Mb";
 }
 
-if ($id = array_search('-o', $args)) {
-    define('OUTPUT', true);
-} else {
-    define('OUTPUT', false);
-}
-
-if ($id = array_search('-f', $args)) {
-    define('FILE', $args[$id + 1]);
-} else {
-    define('FILE', false);
-}
-
-if ($id = array_search('-D', $args)) {
-    define('STYLE', 'DISTINCT');
-} elseif ($id = array_search('-C', $args)) {
-    define('STYLE', 'COUNTED_ALL');
-} elseif ($id = array_search('-B', $args)) {
-    define('STYLE', 'BOOLEAN');
-} elseif ($id = array_search('-G', $args)) {
-    define('STYLE', 'COUNTED');
-} else {
-    define('STYLE', 'ALL');
-}
-
-if (FORMAT == 'SQLITE' || FORMAT == 'WEB') {
-    $report = new Report\Sqlite(null);
-} else {
-    $report = new Report\Report($client);
-}
-$report->addContent('Text', 'Audit report for application');
-
-$report->createH1('Report presentation');
-
-$report->createH2('Report synopsis'); 
-$report->addContent('Text', 'Presentation of the report process');
-
-$report->createH2('Report configuration'); 
-$ReportInfo = new Report\ReportInfo($project);
-$ReportInfo->setNeo4j($client);
-$ReportInfo->setMySQL($db);
-$ReportInfo->collect();
-
-$report->addContent('HashTable', $ReportInfo->toArray()); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
-/*
-$report->createH2('Analyser list'); 
-$AnalyzerList = new Report\AnalyzerList($project);
-$report->addContent('Liste', $AnalyzerList->toArray()); 
-*/
-
-/*
-human review of the audit, and 3 paragraph explation + table with priorities
-$report->createH2('Executive summary');
-$report->addContent('Text');
-*/
-
-$no_output = array();
-$incompatible = array();
-
-///// Application analyzes 
-$analyzes = array('Structures\\StrposCompare', 
-                  'Structures\\Iffectation',
-                  'Structures\\ErrorReportingWithInteger',
-                  'Structures\\ForWithFunctioncall',
-                  'Structures\\ForeachSourceNotVariable',
-                  'Variables\\VariableUsedOnce',
-                  'Variables\\VariableNonAscii',
-                  'Structures\\EvalUsage',
-                  'Structures\\OnceUsage',
-                  'Structures\\VardumpUsage',
-                  'Structures\\PhpinfoUsage',
-                  'Classes\\NonPpp',
-                  'Php/Incompilable',
-                  'Constants/ConstantStrangeNames',
-
-                  'Structures\\NotNot',
-                  'Structures\\Noscream',
-                  'Structures\\toStringThrowsException',
-                  'Structures\\CalltimePassByReference',
-                  'Structures\\Break0',
-                  'Structures\\BreakNonInteger',
-                  );
-
-foreach($analyzes as $id => $a) {
-    if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
-        unset($analyzes[$id]);
-    }
-}
-
-if (count($analyzes) > 0) {
-    $h1 = false;
-    foreach($analyzes as $a) {
-        $analyzer = Analyzer\Analyzer::getInstance($a, $client);
-        
-        if (!$analyzer->checkPhpVersion('5.3.26')) {
-            $incompatible[] = $analyzer->getName();
-            continue; 
-        }
-        $results = $analyzer->toArray();
-        
-        if (empty($results)) {
-            $no_output[] = $analyzer->getName();
-            continue;
-        }
-
-        if (!$h1) {
-            $report->createH1('Analyzes'); 
-            $report->addContent('Text', "Here are some point in the application code that should be reviewed");
-            
-            $h1 = true;
-        }
-        $report->createH2($analyzer->getName()); 
-
-        $report->addContent('Text', $analyzer->getDescription());
-        $list = $report->addContent('Liste', $results);
-        if (!is_null($list)) { 
-            $list->setSummary(true);
-            $list->setSort(Liste::SORT_NORMAL);
-        }
-    }
-}
-
-///// Application information 
-
-$report->createH1('Appinfo'); // phpinfo for the application
-$Appinfo = new Report\Appinfo($client);
-$ht = $report->addContent('SectionedHashTable', $Appinfo->toArray());
-if (!is_null($ht)) {
-    $ht->setHeaderName('Feature');
-    $ht->setHeaderCount('Present');
-}
-
-
-///// Application inventory 
-$analyzes = array('Type\\Integer', 
-                  'Type\\Hexadecimal', 
-                  'Type\\Octal', 
-                  'Type\\Binary', 
-                  'Type\\Ports', 
-                  'Type\\HttpStatus', 
-                  'Type\\SpecialIntegers', 
-                  'Type\\HttpHeader', 
-                  'Type\\Heredoc', 
-                  'Type\\Nowdoc', 
-                  'Type\\Continents', 
-                  'Type\\UnicodeBlock', 
-
-                  'Type\\Real', 
-                  
-                  'Type\\String', 
-                  'Type\\Email', 
-                  'Type\\Url', 
-                  
-                  'Type\\Pcre', 
-                  
-                  'Php\\Incompatible',
-
-                  'Namespaces\\Namespacesnames',
-                  'Namespaces\\Vendor',
-                  'Namespaces\\Alias',
-
-                  'Arrays\\Arrayindex',
-                  'Arrays\\Multidimensional',
-                  'Arrays\\Phparrayindex',
-
-                  'Classes\\Classnames',
-
-                  'Functions\\Functionnames',
-                  'Functions\\Closures',
-                  
-                  'Variables\\Variablenames',
-                  'Variables\\VariableOneLetter',
-                  'Variables\\VariableLong',
-                  'Variables\\VariablePhp',
-                  'Variables\\VariableVariables',
-                  'Variables\\VariableUppercase',
-                  'Variables\\StaticVariables',
-
-                  'Constants\\Constantnames',
-                  );
-foreach($analyzes as $id => $a) {
-    if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
-        unset($analyzes[$id]);
-    }
-}
-
-if (count($analyzes) > 0) {
-    $h1 = false;
-
-    foreach($analyzes as $a) {
-        $analyzer = Analyzer\Analyzer::getInstance($a, $client); 
-        $results = $analyzer->toCountedArray();
-
-        if (empty($results)) {
-            $no_output[] = $analyzer->getName();
-            continue;
-        }
-
-        if (!$h1) {
-            $report->createH1('Application inventory'); // list of named elements and semantic analysis
-            $h1 = true;
-        }
-
-        $report->createH2($analyzer->getName()); 
-
-        $report->addContent('Text', $analyzer->getDescription());
-        $ht = $report->addContent('HashTable', $results);
-        if (!is_null($ht)) {
-            $ht->setSummary(true);
-            $ht->setSort(HashTable::SORT_KEY);
-        }
-    }
-}
-
-if (count($no_output) > 0) {
-    $report->createH1('Other used analyzers'); // le last analyzers
-
-       $report->addContent('Text', "The following analyzers were also used, but yielded no feedback.");
-       $ht = $report->addContent('Liste', $no_output);
-       if (!is_null($ht)) {
-           $ht->setSummary(true);
-           $ht->setSort(HashTable::SORT_KEY);
-        }
-}
-
-if (count($incompatible) > 0) {
-    $report->createH1('Incompatible analyzers'); // le last analyzers
-
-       $report->addContent('Text', "The following analyzers were requested, but cannot be run as they are not compatible with the requested PHP version.");
-       $ht = $report->addContent('Liste', $incompatible);
-       if (!is_null($ht)) {
-           $ht->setSummary(true);
-           $ht->setSort(HashTable::SORT_KEY);
-        }
-}
-
-
-if (FORMAT == 'TEXT') {
-    $text = $report->toText();
-} elseif (FORMAT == 'JSON') {
-    $text = $report->toJson();
-} elseif (FORMAT == 'SQLITE') {
-    $text = $report->toArray();
-} elseif (FORMAT == 'WEB') {
-    $text = $report->toArray();
-    print_r($text);die();
-} elseif (FORMAT == 'CSV') {
-    $text = array(array('Code', 'File', 'Namespace', 'Class', 'Function'));
-    foreach($return as $k => $v) {
-        if (is_array($v)) {
-            $text[] = $v;
-        } else {
-            $text[] = array($k, $v);
-        }
-    }
-} elseif (FORMAT == 'MARKDOWN' || FORMAT == 'HTML' || FORMAT == 'ODT' || FORMAT == 'PDF') {
-    $text = $report->toMarkdown();
-} else {
-    $text = $report->toText();
-    print $text;
-}
-
-if (FORMAT == 'ODT') {
-    $text = MarkdownExtra::defaultTransform($text);
-} elseif ( FORMAT == 'HTML' || FORMAT == 'PDF') {
-    $text = MarkdownExtra::defaultTransform($text);
-    
-    $text = <<<HTML
-<!DOCTYPE html
-PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-
-    <head>
-        <title>Application report for $project</title>
-        <link rel="stylesheet" href="media/hartija.css" type="text/css" media="print" charset="utf-8">
-	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	</head>
-
-    <body>
-$text
-    </body>
-</html>
-HTML;
-}
-
-if (OUTPUT) {
-    print $text;
-}
-
-$extensions = array('JSON' => 'json',
-                    'HTML' => 'html',
-                    'MARKDOWN' => 'md',
-                    'ODT' => 'odt',
-                    'PDF' => 'pdf',
-                    'TEXT' => 'txt',
-                    'SQLITE' => 'sqlite',
-                    'CSV' => 'csv');
-
-if (FILE) {
-    $name = FILE.'.'.$extensions[FORMAT];
-    if (file_exists($name)) {
-        print "$name already exists. Aborting\n";
-        die();
-    }
-
-    if (FORMAT == 'ODT') {
-        $name1 = FILE.'.tmp.'.$extensions['HTML'];
-        file_put_contents($name1, $text);
-
-        $name = FILE.'.'.$extensions[FORMAT];
-        shell_exec('pandoc -o '.$name.' '.$name1);
-        unlink($name1);
-    } elseif (FORMAT == 'PDF') {
-        $name1 = FILE.'.tmp.'.$extensions['HTML'];
-        file_put_contents($name1, $text);
-
-        $name = FILE.'.'.$extensions[FORMAT];
-        shell_exec('wkhtmltopdf '.$name1.' '.$name);
-        unlink($name1);
-    } elseif (FORMAT == 'CSV') {
-        $fp = fopen($name, 'w');
-        foreach($text as $t) {
-            fputcsv($fp, $t);
-        }
-        fclose($fp);
-    } elseif (FORMAT == 'SQLITE') {
-        $db = new SQLite3($name);
-
-        $results = $db->query('CREATE TABLE reports (id INTEGER PRIMARY KEY AUTOINCREMENT, analyzer TEXT, value TEXT, count INT)');
-        print $db->lastErrorMsg();
-        foreach($text as $t) {
-            foreach($t as $k => $v) {
-                $t[$k] = $db->escapeString($v);
-            }
-            $db->query("INSERT INTO reports (analyzer, value, count) VALUES ('".join("', '", $t)."')");
-        }
-    } elseif (FORMAT == 'HTML') {
-        file_put_contents($name, $text);
-        
-        if (!file_exists( dirname($name).'/media')) {
-            mkdir(dirname($name).'/media', 0755);
-        }
-        copy('media/hartija.css', dirname($name).'/media/hartija.css');
-    } else {
-        file_put_contents($name, $text);
-    }
-}
+print "Done in ".number_format(($end - $begin) * 1000, 2)."ms. Produced $size\n";
 
 ?>
