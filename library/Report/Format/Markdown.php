@@ -14,14 +14,11 @@ class Markdown {
     }
     
     public function toFile($filename) {
-        file_put_contents($filename, $this->output);
-        
-        return true;
+        return file_put_contents($filename, $this->output);
     }
     
     public function getRenderer($class) {
         $class = "\\Report\\Format\\Markdown\\$class";
-        print $class."\n";
         return new $class();
     }
 
