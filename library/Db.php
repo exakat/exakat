@@ -3,7 +3,11 @@
 class Db  {
     
     public function __construct($db = 'exakat') {
-        $this->mysqli = new \mysqli('localhost', 'root', '', $db);
+        if ($db == 'exakat') {
+            $this->mysqli = new \mysqli('localhost', 'exakat', 'exakat', 'exakat');
+        } else {
+            $this->mysqli = new \mysqli('localhost', 'wordpress', 'wordpress', 'wordpress');
+        }
     }
     
     public function insert($table, $cols, $values) {

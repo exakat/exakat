@@ -84,12 +84,12 @@ logProgress($project, $progress++ / $total_steps);
 shell_exec('php bin/stat > ./projects/'.$project.'/stats.txt');
 logProgress($project, $progress++ / $total_steps);
 
-shell_exec('rm ./projects/'.$project.'/report.md; php bin/report '.$project.' -f ./projects/'.$project.'/report -markdown');
-shell_exec('rm ./projects/'.$project.'/report.html; php bin/report '.$project.' -f ./projects/'.$project.'/report -html');
-shell_exec('rm ./projects/'.$project.'/report.pdf; php bin/report '.$project.' -f ./projects/'.$project.'/report -pdf');
-shell_exec('rm ./projects/'.$project.'/report.odt; php bin/report '.$project.' -f ./projects/'.$project.'/report -odt');
-shell_exec('rm ./projects/'.$project.'/report.txt; php bin/report '.$project.' -f ./projects/'.$project.'/report -text');
-shell_exec('rm ./projects/'.$project.'/report.sqlite; php bin/report '.$project.' -f ./projects/'.$project.'/report -sqlite');
+shell_exec('rm -f ./projects/'.$project.'/report.md; php bin/report '.$project.' -f ./projects/'.$project.'/report -markdown');
+shell_exec('rm -f ./projects/'.$project.'/report.html; php bin/report '.$project.' -f ./projects/'.$project.'/report -html');
+shell_exec('rm -f ./projects/'.$project.'/report.pdf; php bin/report '.$project.' -f ./projects/'.$project.'/report -pdf');
+shell_exec('rm -f ./projects/'.$project.'/report.odt; php bin/report '.$project.' -f ./projects/'.$project.'/report -odt');
+shell_exec('rm -f ./projects/'.$project.'/report.txt; php bin/report '.$project.' -f ./projects/'.$project.'/report -text');
+shell_exec('rm -f ./projects/'.$project.'/report.sqlite; php bin/report '.$project.' -f ./projects/'.$project.'/report -sqlite');
 logProgress($project, $progress++ / $total_steps);
 
 print "Project reported\n";
