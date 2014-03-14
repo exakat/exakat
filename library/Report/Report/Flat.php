@@ -29,7 +29,7 @@ class Flat {
                           'Structures\\ForWithFunctioncall',
                           'Structures\\ForeachSourceNotVariable',
                           'Variables\\VariableUsedOnce',
-                          'Variables\\VariableNonAscii',
+                          'Variables\\VariableNonascii',
                           'Structures\\EvalUsage',
                           'Structures\\OnceUsage',
                           'Structures\\VardumpUsage',
