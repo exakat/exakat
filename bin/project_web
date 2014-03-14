@@ -6,16 +6,45 @@ spl_autoload_register('Autoload::autoload_library');
 $db = new Db('wordpress');
 
 if (isset($argv[1])) {
-    $project_id = $argv[1] + 0;
+    if ($project_id = intval($argv[1])) {
+        print "Doing the project id $project_id\n";
 
-    $res = $db->query('SELECT id, name, vcs_url FROM exakat_projects WHERE id = '.$project_id);
-    if (!$res) { 
-        print "No project for id {$exakat['id']}; Stopping\n";
+        $res = $db->query('SELECT id, name, vcs_url FROM exakat_projects WHERE id = '.$project_id);
+        if (!$res) { 
+            print "No project for id {$exakat['id']}; Stopping\n";
+            die();
+        }
+    
+        $exakat = $res->fetch_array();
+        process_project($exakat);
+    } elseif ($argv[1] == '-D') {
+        print "Starting demon system\n";
+        $wait = 0;
+        
+        do {
+            $res = $db->query('SELECT count(*) FROM exakat_projects WHERE progress = 0');
+            $count = $res->fetch_array();
+            if ($count[0] > 0) { 
+                $res = $db->query('SELECT name, vcs_url, id FROM exakat_projects WHERE progress = 0 ORDER BY id LIMIT 1');
+                $exakat = $res->fetch_array();
+                print ("\n");
+                process_project($exakat);
+            } else {
+                $wait++;
+                print ".";
+                if($wait % 100 == 0) {
+                    print " ($wait)\n";
+                }
+                sleep(5);
+            }
+        } while (1);
+        
+    } else {
+        print "Don't know what to do. Aborting\n";
         die();
     }
-    
-    $exakat = $res->fetch_array();
 } else {
+    print "Doing only one project\n";
     $res = $db->query('SELECT name, vcs_url, id FROM exakat_projects WHERE progress = 0 ORDER BY id LIMIT 1');
     if (!$res) { 
         print "No projects to process; Stopping\n";
@@ -24,48 +53,52 @@ if (isset($argv[1])) {
 
     // Warning : Race condition ! 
     $exakat = $res->fetch_array();
+    process_project($exakat);
 }
 
-print "Running test {$exakat['id']} : {$exakat['vcs_url']}\n";
+function process_project($exakat) {
+    $db = new Db('wordpress');
 
-if (!file_exists('projects/'.$exakat['name'])) {
-    print "Initializing project ".$exakat['name']."\n";
-    shell_exec('php bin/project_init '.$exakat['name'].' '.$exakat['vcs_url']); 
-} else {
-    print "Project ".$exakat['name']." already initialized.\n";
+    print "Running test {$exakat['id']} : {$exakat['vcs_url']}\n";
+
+    if (!file_exists('projects/'.$exakat['name'])) {
+        print "Initializing project ".$exakat['name']."\n";
+        shell_exec('php bin/project_init '.$exakat['name'].' '.$exakat['vcs_url']); 
+    } else {
+        print "Project ".$exakat['name']." already initialized.\n";
+    }
+
+    print "Cleaning neo4j\n";
+    shell_exec('sh scripts/clean.sh'); // or php bin/delete
+
+    print "Getting files stats\n";
+    shell_exec('php bin/files '.$exakat['name'].'');
+
+    print "Loading data\n";
+    shell_exec('php bin/load -q -r -d ./projects/'.$exakat['name'].'/code/ -p '.$exakat['name']);
+
+    print "Building root\n";
+    shell_exec('php bin/build_root');
+
+    print "Tokenizing the code\n";
+    $res = shell_exec('php bin/tokenizer -p '.$exakat['name'].'');
+
+    shell_exec('php bin/extract_errors > ./projects/'.$exakat['name'].'/log/errors.log');
+    print "Got the errors (if any)\n";
+
+    shell_exec('php bin/log2csv; mv log/* ./projects/'.$exakat['name'].'/log/');
+    sleep(2);
+
+    print "Analyzing the code\n";
+    shell_exec('php bin/analyze -P Web ');
+
+    print "Preparing the report\n";
+    shell_exec('php bin/report -ace '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/web');
+
+    print "Project {$exakat['name']} reported\n";
+    $db->query('UPDATE exakat_projects SET `progress` = 100 WHERE id = '.$exakat['id']);
+    print $db->error();
+
+    print "Finished\n";
 }
-
-print "Cleaning neo4j\n";
-shell_exec('sh scripts/clean.sh'); // or php bin/delete
-
-print "Getting files stats\n";
-shell_exec('php bin/files '.$exakat['name'].'');
-
-print "Loading data\n";
-shell_exec('php bin/load -q -r -d ./projects/'.$exakat['name'].'/code/ -p '.$exakat['name']);
-
-print "Building root\n";
-shell_exec('php bin/build_root');
-
-print "Tokenizing the code\n";
-$res = shell_exec('php bin/tokenizer -p '.$exakat['name'].'');
-
-shell_exec('php bin/extract_errors > ./projects/'.$exakat['name'].'/log/errors.log');
-print "Got the errors (if any)\n";
-
-shell_exec('php bin/log2csv; mv log/* ./projects/'.$exakat['name'].'/log/');
-sleep(2);
-
-print "Analyzing the code\n";
-shell_exec('php bin/analyze -P Web ');
-
-print "Preparing the report\n";
-shell_exec('php bin/report_web '.$exakat['name'].' -f report');
-
-print "Project {$exakat['name']} reported\n";
-$db->query('UPDATE exakat_projects SET `progress` = 100 WHERE id = '.$exakat['id']);
-print $db->error();
-
-print "Finished\n";
-
 ?>
