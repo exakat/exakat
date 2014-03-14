@@ -4,6 +4,7 @@ $stats = array();
 
 // check PHP
 $stats['php']['version'] = phpversion();
+$stats['php']['curl'] = extension_loaded('curl') ? 'Yes' : 'No';
 
 // check PHP 5.2
 $stats['PHP 5.2']['version'] = shell_exec('php52 -r "echo phpversion();" 2>&1');
@@ -52,6 +53,40 @@ if (preg_match('/command not found/is', $res)) {
 } else {
     $stats['phpunit']['error'] = $res;
 }
+
+// java
+$res = shell_exec('java -version 2>/tmp/javaversion.txt; cat /tmp/javaversion.txt; rm /tmp/javaversion.txt');
+if (preg_match('/command not found/is', $res)) {
+    $stats['java']['installed'] = 'No';
+} elseif (preg_match('/java version "(.*)"/is', $res, $r)) {
+    $stats['java']['installed'] = 'Yes';
+    $stats['java']['version'] = $r[1];
+} else {
+    $stats['java']['error'] = $res;
+}
+
+// neo4j
+if (!file_exists('neo4j')) {
+    $stats['neo4j']['installed'] = 'No';
+} else {
+    $file = file('neo4j/README.txt');
+    $stats['neo4j']['version'] = trim($file[0]);
+
+    $file = file_get_contents('neo4j/conf/neo4j-wrapper.conf');
+    if (!preg_match('/wrapper.java.additional=-XX:MaxPermSize=(\d+\w)/is', $file, $r)) {
+        $stats['neo4j']['MaxPermSize'] = 'Unset (64M)';
+    } else {
+        $stats['neo4j']['MaxPermSize'] = $r[1];
+    }
+
+    $file = file_get_contents('neo4j/conf/neo4j-server.properties');
+    if (!preg_match('/org.neo4j.server.webserver.port=(\d+)/is', $file, $r)) {
+        $stats['neo4j']['port'] = 'Unset (7474)';
+    } else {
+        $stats['neo4j']['port'] = $r[1];
+    }
+}
+
 
 foreach($stats as $section => $details) {
     print "$section : \n";
