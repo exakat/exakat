@@ -19,7 +19,7 @@ class Web extends \Analyzer\Analyzer {
             'NotNot',
             'Noscream',
             'ForeachSourceNotVariable',
-            'NonPPP',
+            'NonPpp',
             
         );
         return $dependencies;
