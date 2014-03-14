@@ -28,7 +28,6 @@ class Ace {
         $dir = substr($filename, 0, - (1 + strlen($ext)));
         if (file_exists($dir)) {
             shell_exec("rm -rf $dir"); 
-            die();
         }
         mkdir($dir, 0755);
         print shell_exec('cp -r media/ace-admin/assets '.$dir);
