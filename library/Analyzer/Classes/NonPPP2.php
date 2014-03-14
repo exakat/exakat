@@ -4,7 +4,7 @@ namespace Analyzer\Classes;
 
 use Analyzer;
 
-class NonPPP extends Analyzer\Analyzer {
+class NonPpp extends Analyzer\Analyzer {
     public function dependsOn() {
         return array("MethodDefinition");
     }
