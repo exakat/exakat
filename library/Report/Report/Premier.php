@@ -33,9 +33,7 @@ class Premier {
         $this->createH1('Report presentation');
 
         $this->createH2('Report synopsis'); 
-        $this->addContent('Text', 'Presentation of the report process');
-        $this->addContent('Text', 'Presentation of the report process2');
-        $this->addContent('Text', 'Presentation of the report process3');
+        $this->addContent('Text', ' ');
 
         $this->createH2('Report configuration'); 
 
@@ -113,6 +111,57 @@ class Premier {
             $defs->setAnalyzers($analyzes);
         }
 
+        $this->createH1('Inventories');
+        ///// Application analyzes 
+        $analyzes = array('Php/Incompilable',
+                          'Variables/Variablenames',
+                          );
+        // hash with config
+        /*
+        foreach($analyzes as $id => $a) {
+            if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
+                unset($analyzes[$id]);
+            }
+        }
+        */
+
+        if (count($analyzes) > 0) {
+            $h1 = false;
+            
+            foreach($analyzes as $name) {
+                $analyse = \Analyzer\Analyzer::getInstance($name, $this->client);
+                
+                /*
+                if (!$analyzer->checkPhpVersion('5.3.26')) {
+                    $this->incompatible[] = $analyzer->getName();
+                    continue; 
+                }
+
+                if (!$analyzer->checkPhpConfiguration('aspTags')) {
+                    $this->incompatible[] = $analyzer->getName();
+                    continue; 
+                }
+                */
+                
+                /*
+                
+                if ($analyzer->hasResults()) {
+                    $this->no_output[] = $analyzer->getName();
+                    continue;
+                }
+                */
+
+                $this->createH2($analyse->getName());
+                $this->addContent('Text', $analyse->getDescription());
+                if (in_array($name, array('Php/Compilable'))) {
+                    $this->addContent('Liste', $analyse);
+                } else {
+                    $ht = $this->addContent('HashTable', $analyse);
+                    $ht->setCountedValues();
+                }
+            }
+        }
+
         $this->createH1('Documentation');
         $this->addContent('Definitions', $defs->getDefinitions());
         
@@ -178,11 +227,11 @@ class Premier {
         }
     }
     
-    function addSummary($add) {
+    public function addSummary($add) {
         $this->summary = (bool) $add;
     }
 
-    function createH1($name) {
+    private function createH1($name) {
         $section = $this->root->addContent('Section', $name);
         $section->setLevel(1);
 

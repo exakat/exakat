@@ -11,13 +11,13 @@ class Incompilable extends Analyzer\Analyzer {
              ->is('compile', "'false'");
     }
     
-    public function toCountedArray($load = "it.fullcode") {
-        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\Php\\\\Incompilable']].out.hasNot('unicode_block', null).groupCount(m){it.unicode_block}.cap"; 
+    public function toArray() {
+        $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\Php\\\\Incompilable']].out.fullcode"; 
         $vertices = $this->query($queryTemplate);
 
         $report = array();
         if (count($vertices) > 0) {
-            foreach($vertices[0][0] as $k => $v) {
+            foreach($vertices[0] as $k => $v) {
                 $report[$k] = $v;
             }   
         } 

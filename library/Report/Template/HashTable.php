@@ -10,6 +10,8 @@ class HashTable {
     private $headerName = 'Item';
     private $headerCount = 'Count';
     
+    private $countedValues = false;
+    
     const SORT_NONE = 1;
     const SORT_COUNT = 2;
     const SORT_REV_COUNT = 3;
@@ -19,13 +21,21 @@ class HashTable {
     public function render($output) {
         $renderer = $output->getRenderer('HashTable');
         
-        $renderer->render($output, $this->data->toArray());
+        if ($this->countedValues) {
+            $renderer->render($output, $this->data->toCountedArray());
+        } else {
+            $renderer->render($output, $this->data->toArray());
+        }
     }
     
     function setContent($data) {
         if (!is_null($data)) {
             $this->data = $data; 
         } 
+    }
+
+    function setCountedValues($counting = true) {
+        $this->countedValues = true;
     }
 
     function setSort($sort) {
