@@ -8,7 +8,6 @@ class Ace {
     private $files = array();
     
     public function render($output, $data) {
-        print get_class($data)."\n";
         $output->push(" Text for ".get_class($this)."\n");
     }
     
@@ -25,9 +24,10 @@ class Ace {
     }
     
     public function toFile($filename) {
-        list($dir, $ext) = explode('.', $filename);
+        $ext = $this->getExtension();
+        $dir = substr($filename, 0, - (1 + strlen($ext)));
         if (file_exists($dir)) {
-            print "$dir exists, remove it first. Aborting\n"; 
+            shell_exec("rm -rf $dir"); 
             die();
         }
         mkdir($dir, 0755);
@@ -37,6 +37,8 @@ class Ace {
         foreach($this->files as $name => $html) {
             $total += file_put_contents($dir.'/'.$name, $html);
         }
+        
+        shell_exec('cd '.dirname($dir).'; zip -r web web 2 >> /dev/null');
         
         return $total;
     }
