@@ -32,6 +32,17 @@ if (preg_match('/command not found/is', $res)) {
     $stats['wkhtmltopdf']['error'] = $res;
 }
 
+// zip
+$res = shell_exec('zip -v');
+if (preg_match('/command not found/is', $res)) {
+    $stats['zip']['installed'] = 'No';
+} elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {
+    $stats['zip']['installed'] = 'Yes';
+    $stats['zip']['version'] = $r[1];
+} else {
+    $stats['zip']['error'] = $res;
+}
+
 // phploc
 $res = shell_exec('phploc --version 2>&1');
 if (preg_match('/command not found/is', $res)) {
