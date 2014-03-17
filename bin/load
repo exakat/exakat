@@ -296,6 +296,14 @@ function process_file($filename, $log_file) {
                                               ->save();
 
                 $id++;
+            } elseif ($Php->getTokenname($token[0]) == 'T_CLOSE_TAG' && 
+                      !isset($tokens[$id + 1])) {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
+                                              ->setProperty('code', $token[1])
+                                              ->setProperty('line', $token[2]);
+                // No need to index the last 'closing ? >'
+                $to_index = false; 
+                print "Spotted ONE final\n";
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
                                               ->setProperty('code', $token[1])
