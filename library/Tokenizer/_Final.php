@@ -16,7 +16,7 @@ class _Final extends TokenAuto {
 
     // final class x { final public function x() }
         $this->conditions = array( 0 => array('token' => _Final::$operators),
-                                   2 => array('token' => array('T_FUNCTION')), // 'T_CLASS',  ?
+                                   2 => array('token' => array('T_FUNCTION')),
                                  );
         $this->actions = array('to_option' => 2,
                                'atom'      => 'Final');

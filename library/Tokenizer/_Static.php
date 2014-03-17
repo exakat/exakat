@@ -8,6 +8,22 @@ class _Static extends TokenAuto {
     public function _check() {
         $values = array('T_EQUAL', 'T_COMMA');
 
+    // class x { static function f() }
+        $this->conditions = array( 0 => array('token' => _Static::$operators),
+                                   1 => array('token' => 'T_FUNCTION'),
+                                 );
+        $this->actions = array('to_option' => 1,
+                               'atom'      => 'Static');
+        $this->checkAuto(); 
+
+    // class x { static public function x() }
+        $this->conditions = array( 0 => array('token' => _Static::$operators),
+                                   2 => array('token' => array('T_FUNCTION')),
+                                 );
+        $this->actions = array('to_option' => 2,
+                               'atom'      => 'Static');
+        $this->checkAuto(); 
+
     // class x { static $x }
         $this->conditions = array( 0 => array('token' => _Static::$operators),
                                    1 => array('atom' => array('Variable', 'String', 'Staticconstant', )), //'Function', 'Abstract', 'Final'
@@ -18,14 +34,6 @@ class _Static extends TokenAuto {
                                'atom'       => 'Static',
                                'cleanIndex' => true
                                );
-        $this->checkAuto(); 
-
-    // class x { static function f() }
-        $this->conditions = array( 0 => array('token' => _Static::$operators),
-                                   1 => array('token' => 'T_FUNCTION'),
-                                 );
-        $this->actions = array('to_option' => 1,
-                               'atom'      => 'Static');
         $this->checkAuto(); 
 
     // class x { static private $x }
@@ -87,7 +95,7 @@ class _Static extends TokenAuto {
                                  );
         $this->actions = array('atom'     => 'Static');
         $this->checkAuto(); 
-        
+
         return $this->checkRemaining();
     }
 
