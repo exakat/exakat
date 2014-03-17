@@ -71,8 +71,8 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
                 }
                 print "\n";
             }
-
-            $diff = array_diff($methods, $exp);
+            
+            $diff = array_diff($exp, $methods);
             if ($diff) {
                 print "missing ".count($diff)." results for tests in Test/$name.php\n";
                 print "   php prepareexp.php $name\n";
@@ -80,7 +80,10 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
             }
 
             $suite->addTestSuite($test);
-            if ($i > $offset + $number) { return $suite; }
+            if ($i > $offset + $number) { 
+                print "Limited at $number element from $offset position\n";
+                return $suite; 
+            }
             
             continue;
         }
