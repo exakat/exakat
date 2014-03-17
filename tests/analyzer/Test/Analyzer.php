@@ -3,18 +3,18 @@
 namespace Test;
 
 class Analyzer extends \PHPUnit_Framework_TestCase {
-    function setUp() {
+    public function setUp() {
 // @doc scripts/clean is safer, but longer
 //        shell_exec("cd ../..; sh scripts/clean.sh");
 // @doc delete is faster, and will leave the query cache on. 
         shell_exec("cd ../..; php bin/delete -all");
     }
 
-    function tearDown() {
+    public function tearDown() {
         // empty
     }
     
-    function generic_test($file) {
+    public function generic_test($file) {
         list($analyzer, $number) = explode('.', $file);
         $analyzer = str_replace('_', '/', $analyzer);
         
@@ -63,8 +63,6 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         // the remainings
         $this->assertEquals(count($list), 0, count($list)." values were found and are unprocessed : ".join(', ', $list)."");
     }
-    
-    
 }
 
 ?>
