@@ -12,10 +12,11 @@ class Phpcode extends TokenAuto {
                                   2 => array('token' => 'T_CLOSE_TAG'),
         );
         
-        $this->actions = array('transform'   => array( 1 => 'CODE',
-                                                       2 => 'DROP'),
-                               'atom'       => 'Phpcode',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'     => array( 1 => 'CODE',
+                                                         2 => 'DROP'),
+                               'makeSequence'  => 'it',
+                               'atom'          => 'Phpcode',
+                               'cleanIndex'    => true);
         $this->checkAuto();
 
 // <?php echo 3 ( No closing tag)
@@ -36,10 +37,10 @@ class Phpcode extends TokenAuto {
                                   1 => array('token' => 'T_CLOSE_TAG'),
         );
         
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        0 => 'DROP'), // Yes, 0 must be last.
-                               'atom'       => 'Phpcode',
-                               'transfert'  => array('root' => 2));
+        $this->actions = array('transform'     => array( 1 => 'DROP',
+                                                         0 => 'DROP'), // Yes, 0 must be last.
+                               'atom'          => 'Phpcode',
+                               'transfert'     => array('root' => 2));
         $this->checkAuto();
         
         return $this->checkRemaining();

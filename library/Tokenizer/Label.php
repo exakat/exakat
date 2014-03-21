@@ -14,9 +14,10 @@ class Label extends TokenAuto {
                                   -1 => array('atom'      => 'Identifier'),
                                    0 => array('token'     => Label::$operators));
         
-        $this->actions = array('transform'  => array(-1 => 'LABEL'),
-                               'atom'       => 'Label',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array(-1 => 'LABEL'),
+                               'atom'         => 'Label',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         return $this->checkRemaining();

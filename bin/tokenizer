@@ -68,6 +68,8 @@ foreach($classes as $class) {
     if ($new == 'Tokenizer\\FunctioncallArray') {
         $regex[$class] = $r;
     } elseif ($new == 'Tokenizer\\SequenceAtom') {
+//        $regex[$class] = $r;
+    } elseif ($new == 'Tokenizer\\Sequence') {
         $regex[$class] = $r;
     } elseif ($r->checkRemaining()) {
         $regex[$class] = $r;
@@ -113,7 +115,7 @@ while(check_prev($prev, $extra_rounds)) {
     $regex_next = array();
     foreach($regex as $name => $r) {
         $begin = microtime(true);
-        if ($r->check() || $name == "FunctioncallArray") {
+        if ($r->check() || in_array($name , array("FunctioncallArray", 'Sequence'))) {
             $regex_next[$name] = $r;
         }
         $end = microtime(true);

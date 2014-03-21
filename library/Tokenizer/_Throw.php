@@ -13,9 +13,10 @@ class _Throw extends TokenAuto {
                                   2 => array('filterOut' => Token::$instruction_ending),
                                   );
         
-        $this->actions = array('transform'  => array( 1 => 'THROW'),
-                               'atom'       => 'Throw',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( 1 => 'THROW'),
+                               'atom'         => 'Throw',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
                                
         $this->checkAuto();
 
@@ -27,11 +28,12 @@ class _Throw extends TokenAuto {
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   );
         
-        $this->actions = array('transform'  => array( 1 => 'DROP',
-                                                      2 => 'THROW',
-                                                      3 => 'DROP',),
-                               'atom'       => 'Throw',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( 1 => 'DROP',
+                                                        2 => 'THROW',
+                                                        3 => 'DROP',),
+                               'atom'         => 'Throw',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
                                
         $this->checkAuto();
         
@@ -39,7 +41,9 @@ class _Throw extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "throw " + it.out("THROW").next().code; ';
+        return <<<GREMLIN
+fullcode.fullcode = "throw " + fullcode.out("THROW").next().code; 
+GREMLIN;
     }
 }
 

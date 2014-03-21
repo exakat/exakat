@@ -20,38 +20,40 @@ class _For extends TokenAuto {
         );
         $this->actions = array('addEdge'     => array(8 => array('Void' => 'LEVEL')),
                                'keepIndexed' => true,
-                               'cleanIndex' => true);
+                               'cleanIndex'  => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         // for (;;) $x++; (one line instruction, with or without )
         $this->conditions = array(  0 => array('token' => _For::$operators,
-                                               'atom' => 'none'),
+                                               'atom'  => 'none'),
                                     1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                    2 => array('atom' => 'yes'),
+                                    2 => array('atom'  => 'yes'),
                                     3 => array('token' => 'T_SEMICOLON'),
-                                    4 => array('atom' => 'yes'),
+                                    4 => array('atom'  => 'yes'),
                                     5 => array('token' => 'T_SEMICOLON'),
-                                    6 => array('atom' => 'yes'),
+                                    6 => array('atom'  => 'yes'),
                                     7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                    8 => array('atom' => 'yes'),
+                                    8 => array('atom'  => 'yes',
+                                               'notAtom' => 'Sequence'),
                                     9 => array('filterOut' => Token::$instruction_ending),
         );                
-        $this->actions = array( 'to_block_for' => true,
-                                'keepIndexed'  => true,
-                                'cleanIndex'   => true);
+        $this->actions = array('to_block_for' => true,
+                               'keepIndexed'  => true,
+                               'cleanIndex'   => true);
         $this->checkAuto();
     
     // @doc for(a; b; c) { code }
         $this->conditions = array( 0 => array('token' => _For::$operators,
-                                              'atom' => 'none'),
+                                              'atom'  => 'none'),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                   2 => array('atom' => 'yes'),
+                                   2 => array('atom'  => 'yes'),
                                    3 => array('token' => 'T_SEMICOLON'),
-                                   4 => array('atom' => 'yes'),
+                                   4 => array('atom'  => 'yes'),
                                    5 => array('token' => 'T_SEMICOLON'),
-                                   6 => array('atom' => 'yes'),
+                                   6 => array('atom'  => 'yes'),
                                    7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   8 => array('atom' => 'Block'),
+                                   8 => array('atom'  => 'Sequence'),
         );
         
         $this->actions = array('transform'    => array('1' => 'DROP',
@@ -63,8 +65,9 @@ class _For extends TokenAuto {
                                                        '7' => 'DROP',
                                                        '8' => 'CODE',
                                                       ),
-                               'atom'       => 'For',
-                               'cleanIndex' => true
+                               'atom'         => 'For',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto(); 
 
@@ -94,9 +97,10 @@ class _For extends TokenAuto {
                                                         9 => 'CODE',
                                                        10 => 'DROP', 
                                                       ),
-                               'atom'       => 'For',
-                               'property' => array('Alternative' => 'yes'),
-                               'cleanIndex' => true
+                               'atom'         => 'For',
+                               'property'     => array('Alternative' => 'yes'),
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto(); 
 
@@ -128,9 +132,10 @@ class _For extends TokenAuto {
                                                        10 => 'DROP', 
                                                        11 => 'DROP', 
                                                       ),
-                               'atom'       => 'For',
-                               'property' => array('Alternative' => 'yes'),
-                               'cleanIndex' => true
+                               'atom'         => 'For',
+                               'property'     => array('Alternative' => 'yes'),
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto(); 
 
@@ -138,7 +143,10 @@ class _For extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "for(" + it.out("INIT").next().fullcode + " ; " + it.out("FINAL").next().fullcode + " ; " + it.out("INCREMENT").next().fullcode + ") " + it.out("CODE").next().fullcode;';
+        return <<<GREMLIN
+it.fullcode = "for(" + it.out("INIT").next().fullcode + " ; " + it.out("FINAL").next().fullcode + " ; " + it.out("INCREMENT").next().fullcode + ") " + it.out("CODE").next().fullcode;
+
+GREMLIN;
     }
 }
 

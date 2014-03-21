@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class SequenceAtom extends Sequence {
     public function _check() {
+        return true;
         $yield_operators =  array_merge(array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_STATIC', 'T_ABSTRACT', 'T_FINAL', 
                                               'T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS', 'T_CLASS', 'T_EXTENDS', 'T_IMPLEMENTS', 
                                               'T_INTERFACE', 'T_ELSE', 'T_OBJECT_OPERATOR', 'T_QUOTE', 'T_DOT', 'T_COMMA', 
@@ -16,9 +17,17 @@ class SequenceAtom extends Sequence {
                                      Assignation::$operators, Logical::$operators);
 
         // @note instructions not separated by ; 
-        $operands2 = array('Function', 'Ifthen', 'While', 'Class', 'Var', 'Global', 'Static', 'Logical', 
-                           'Const', 'Ppp', 'Foreach', 'For', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
-                           'Abstract', 'Final', 'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison',
+        $operands2 = array('Function', 'Var', 'Abstract', 'Final', 
+        'Ppp', 
+        
+        
+        'Ifthen', 'While', 
+        
+        'Class',  'Global', 'Static', 
+        
+        'Logical', 
+        'Const', 'Foreach', 'For', 'Assignation', 'Functioncall', 'Methodcall', 'Staticmethodcall',
+                           'Switch', 'Include', 'Return', 'Ternary', 'String', 'Void', 'Dowhile', 'Comparison',
                            'Noscream', 'Property', 'Staticproperty', 'Label', 'Goto', 'Halt', 'Interface', 'Block', 'Break', 'Try', 
                            'Throw', 'Sequence','RawString', 'Phpcode', 'Use', 'Preplusplus', 'Postplusplus', 'New', 'Declare',
                            'Namespace', 

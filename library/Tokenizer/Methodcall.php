@@ -15,10 +15,11 @@ class Methodcall extends TokenAuto {
                                     1 => array('atom'      => array('Functioncall', 'Methodcall'))
                                  );
         
-        $this->actions = array('makeEdge'   => array( -1 => 'OBJECT',
-                                                       1 => 'METHOD'),
-                               'atom'       => 'Methodcall',
-                               'cleanIndex' => true);
+        $this->actions = array('makeEdge'     => array( -1 => 'OBJECT',
+                                                         1 => 'METHOD'),
+                               'atom'         => 'Methodcall',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto(); 
 
         // $this->{$x}($args);
@@ -33,15 +34,16 @@ class Methodcall extends TokenAuto {
                                     6 => array('token'     => 'T_CLOSE_PARENTHESIS')
                                  );
         
-        $this->actions = array('transform'   => array( -1 => 'OBJECT',
-                                                        1 => 'DROP',
-                                                        2 => 'METHOD',
-                                                        3 => 'DROP',
-                                                        4 => 'DROP',
-                                                        5 => 'ARGUMENTS',
-                                                        6 => 'DROP'),
-                               'atom'       => 'Methodcall',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( -1 => 'OBJECT',
+                                                         1 => 'DROP',
+                                                         2 => 'METHOD',
+                                                         3 => 'DROP',
+                                                         4 => 'DROP',
+                                                         5 => 'ARGUMENTS',
+                                                         6 => 'DROP'),
+                               'atom'         => 'Methodcall',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto(); 
         
         return $this->checkRemaining();

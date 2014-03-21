@@ -15,16 +15,20 @@ class _New extends TokenAuto {
                                                                    'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_DOUBLE_COLON' )),
         );
         
-        $this->actions = array('makeEdge'   => array( 1 => 'NEW'),
-                               'atom'       => 'New',
-                               'cleanIndex' => true);
+        $this->actions = array('makeEdge'     => array( 1 => 'NEW'),
+                               'atom'         => 'New',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
-        
+
         return $this->checkRemaining();
     }
 
     public function fullcode() {
-        return 'it.fullcode = "new " + it.out("NEW").next().code; ';
+        return <<<GREMLIN
+it.fullcode = "new " + it.out("NEW").next().code;
+
+GREMLIN;
     }
 }
 

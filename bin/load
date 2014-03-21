@@ -296,6 +296,30 @@ function process_file($filename, $log_file) {
                                               ->save();
 
                 $id++;
+            } elseif ($Php->getTokenname($token[0]) == 'T_INLINE_HTML' && 
+                      $id == 0) {
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                              ->setProperty('code', ';')
+                                              ->setProperty('fullcode', ';')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('atom', 'Sequence')
+                                              ->setProperty('modifiedBy', 'bin/load13')
+                                              ->setProperty('root', 'true')
+                                              ->save();
+                $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();
+                $classNode->relateTo($T[$Tid]);
+
+                $inline =  $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
+                                              ->setProperty('atom', 'RawString')
+                                              ->setProperty('fullcode', $token[1])
+                                              ->setProperty('line', $token[2])
+                                              ->setProperty('order', 0)
+                                              ->setProperty('code', $token[1])
+                                              ->save();
+                                              ;
+                $classNode->relateTo($inline);
+                $T[$Tid]->relateTo($inline, 'ELEMENT')->save();
+
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
                                               ->setProperty('code', $token[1])
@@ -303,7 +327,7 @@ function process_file($filename, $log_file) {
             }
 
             $x = $T[$Tid]->getProperty('code');
-            // one may also use 4, 8 or any chr that is supposed to be non ascii. 
+            // guessing binary code : one may also use 4, 8 or any chr that is supposed to be non ascii. 
             if (strpos($x, chr(2)) !== false) { 
                 $T[$Tid]->setProperty('code', "Binary data <length ".strlen($x)." bytes>");
             }
@@ -322,6 +346,8 @@ function process_file($filename, $log_file) {
                 } elseif ($Php->getTokenname($token[0]) == 'T_STRING_VARNAME') {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
                             ->setProperty('fullcode', '$'.$token[1])->save();
+                } elseif ($Php->getTokenname($token[0]) == 'T_INLINE_HTML' && $id == 0) {
+                    // ignore
                 } elseif ($Php->getTokenname($token[0]) == 'T_CONSTANT_ENCAPSED_STRING') {
                     $T[$Tid]->setProperty('delimiter', in_array($token[1][0], array("'", '"')) ? $token[1][0] : '')
                             ->setProperty('noDelimiter', trim($token[1], '"\''))
@@ -329,6 +355,7 @@ function process_file($filename, $log_file) {
                             ->setProperty('fullcode', $token[1])->save();
                 } else {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
+                            ->setProperty('modifiedBy', 'bin/load15')
                             ->setProperty('fullcode', $token[1])->save();
                 }
             }
@@ -356,7 +383,7 @@ function process_file($filename, $log_file) {
                                               ->setProperty('code', $token)
                                               ->setProperty('fullcode', '{ /**/ } ')
                                               ->setProperty('line', $line)
-                                              ->setProperty('atom', 'Block')
+                                              ->setProperty('atom', 'Sequence')
                                               ->setProperty('modifiedBy', 'bin/load12')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);

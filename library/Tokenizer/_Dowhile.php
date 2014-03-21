@@ -48,7 +48,7 @@ class _Dowhile extends TokenAuto {
 
         // do { block } while()
         $this->conditions = array( 0 => array('token' => _Dowhile::$operators),
-                                   1 => array('atom'  => 'Block'),
+                                   1 => array('atom'  => 'Sequence'),
                                    2 => array('token' => 'T_WHILE'),
                                    3 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    4 => array('atom'  => 'yes'),

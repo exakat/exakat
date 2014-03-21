@@ -35,7 +35,7 @@ class _Default extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Default::$operators,
                                               'atom'  => 'none'),
                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   2 => array('atom'  => 'yes', 'notAtom' => 'Block' ), 
+                                   2 => array('atom'  => 'yes', 'notAtom' => 'Sequence' ), 
                                    3 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
                                    4 => array('token' => $final_token));
         
@@ -47,7 +47,7 @@ class _Default extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Default::$operators,
                                               'atom'  => 'none'),
                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   2 => array('atom'  => 'yes', 'notAtom' => 'Block'), 
+                                   2 => array('atom'  => 'yes', 'notAtom' => 'Sequence'), 
                                    3 => array('token' => $final_token));
         
         $this->actions = array('createBlockWithSequenceForDefault' => true,
@@ -55,12 +55,13 @@ class _Default extends TokenAuto {
         $this->checkAuto();
 
    // create block for Default  default : $x++ (or a sequence).
-        $this->conditions = array(  0 => array('token' => _Default::$operators,
-                                               'atom' => 'none'),
-                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON'),
-                                               'atom' => 'none'),
-                                    2 => array('atom' => 'yes', 'notAtom' => array('Case', 'Default', 'SequenceCaseDefault', 'Block')),
-                                    3 => array('token' => $final_token),
+        $this->conditions = array(  0 => array('token'   => _Default::$operators,
+                                               'atom'    => 'none'),
+                                    1 => array('token'   => array('T_COLON', 'T_SEMICOLON'),
+                                               'atom'    => 'none'),
+                                    2 => array('atom'    => 'yes', 
+                                               'notAtom' => array('Case', 'Default', 'SequenceCaseDefault', 'Sequence')),
+                                    3 => array('token'   => $final_token),
         );
         
         $this->actions = array('createBlockWithSequenceForDefault' => true,
@@ -71,7 +72,7 @@ class _Default extends TokenAuto {
         $this->conditions = array(0 => array('token' => _Default::$operators,
                                               'atom' => 'none'),
                                   1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  2 => array('atom' => array('Block')), 
+                                  2 => array('atom' => array('Sequence')), 
                                   3 => array('token' => $final_token),
         );
         
@@ -90,8 +91,10 @@ class _Default extends TokenAuto {
                                    2 => array('atom'  => 'yes'), 
                                    3 => array('atom'  => 'yes'), 
                                    4 => array('filterOut2' => array_merge(array('T_ELSE', 'T_ELSEIF', 'T_OPEN_PARENTHESIS'),
-                                                                        Assignation::$operators, Property::$operators, StaticProperty::$operators,
-                                                                        _Array::$operators, Bitshift::$operators, Comparison::$operators, Logical::$operators)),
+                                                                        Assignation::$operators, Property::$operators, 
+                                                                        _Array::$operators,      Bitshift::$operators, 
+                                                                        Comparison::$operators,  Logical::$operators,
+                                                                        StaticProperty::$operators)),
         );
         
         $this->actions = array('createSequenceForDefaultWithoutSemicolon' => true,

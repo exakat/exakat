@@ -7,20 +7,20 @@ class _Catch extends TokenAuto {
 
     public function _check() {
         $this->conditions = array(0 => array('token' => _Catch::$operators,
-                                             'atom' => 'none'),
+                                             'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('atom' => array('Identifier', 'Nsname')), 
-                                  3 => array('atom' => 'Variable'),
+                                  2 => array('atom'  => array('Identifier', 'Nsname')), 
+                                  3 => array('atom'  => 'Variable'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('atom' => 'Block'),
+                                  5 => array('atom'  => 'Sequence'),
                                   );
         
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'CLASS', 
-                                                        3 => 'VARIABLE',
-                                                        4 => 'DROP',
-                                                        5 => 'CODE',
-                                                        ),
+        $this->actions = array('transform'   => array( 1 => 'DROP',
+                                                       2 => 'CLASS', 
+                                                       3 => 'VARIABLE',
+                                                       4 => 'DROP',
+                                                       5 => 'CODE',
+                                                       ),
                                'cleanIndex' => true,
                                'atom'       => 'Catch');
                                

@@ -15,7 +15,7 @@ class Sequence extends TokenAuto {
                           'Ifthen', 'Include', 'Function', 'Foreach', 'While', 'Arrayappend', 'Cast',
                           'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
                           'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
-                          'Bitshift', 'Void', 'Dowhile', 'Clone', 'Declare', 'Halt', 'Interface', 'Block', 
+                          'Bitshift', 'Void', 'Dowhile', 'Clone', 'Declare', 'Halt', 'Interface', 
                           'RawString', 'Namespace', 'Boolean', 'Use', 'ArrayNS', 'Identifier', 
                            );
         
@@ -54,7 +54,8 @@ class Sequence extends TokenAuto {
                                                      -1 => 0 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
-                               'cleanIndex' => true
+                               'cleanIndex' => true,
+                               'keepIndexed' => true,
                                );
         $this->checkAuto();
 
@@ -68,7 +69,7 @@ class Sequence extends TokenAuto {
         
         $this->actions = array('transform'   => array( 0 => 'DROP'));
         $this->checkAuto();
-
+        
         // @note instructions separated by ; but ; is useless (special case for if/elseif
         $this->conditions = array(-1 => array('atom'     => $operands, 
                                               'notToken' => 'T_ELSEIF' ),
@@ -98,7 +99,8 @@ class Sequence extends TokenAuto {
                                                      -1 => 0 ),
                                'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
-                               'cleanIndex' => true);
+                               'cleanIndex' => true,
+                               'keepIndexed' => true,);
         $this->checkAuto();
         
         // @note instructions separated by ; with a special case for ternary operator
@@ -112,13 +114,14 @@ class Sequence extends TokenAuto {
                                    2 => array('filterOut' => $next_operator),
         );
         
-        $this->actions = array('makeEdge'   => array( 1 => 'ELEMENT',
-                                                     -1 => 'ELEMENT'),
-                               'order'      => array( 1 => 1,
-                                                     -1 => 0 ),
-                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence',
-                               'cleanIndex' => true);
+        $this->actions = array('makeEdge'     => array( 1 => 'ELEMENT',
+                                                       -1 => 'ELEMENT'),
+                               'order'        => array( 1 => 1,
+                                                       -1 => 0 ),
+                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+                               'atom'         => 'Sequence',
+                               'cleanIndex'   => true,
+                               'keepIndexed'  => true);
         $this->checkAuto();
 
         // @note instructions separated by ; with a special case for 'case'
@@ -135,13 +138,13 @@ class Sequence extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 1 => 'ELEMENT',
-                                                       -1 => 'ELEMENT'
-                                                      ),
-                               'order'      => array( 1 => 1,
-                                                     -1 => 0 ),
-                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence',
-                               'cleanIndex' => true
+                                                       -1 => 'ELEMENT'),
+                               'order'        => array( 1 => 1,
+                                                       -1 => 0 ),
+                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+                               'atom'         => 'Sequence',
+                               'cleanIndex'   => true,
+                               'keepIndexed'  => true
                                );
         $this->checkAuto();
 
@@ -157,13 +160,14 @@ class Sequence extends TokenAuto {
                                    2 => array('filterOut2' => $next_operator),
         );
         
-        $this->actions = array('transform'  => array( 1 => 'ELEMENT',
-                                                     -1 => 'ELEMENT'),
-                               'order'      => array( 1 => 1,
-                                                     -1 => 0 ),
-                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence',
-                               'cleanIndex' => true
+        $this->actions = array('transform'    => array( 1 => 'ELEMENT',
+                                                       -1 => 'ELEMENT'),
+                               'order'        => array( 1 => 1,
+                                                       -1 => 0 ),
+                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+                               'atom'         => 'Sequence',
+                               'cleanIndex'   => true,
+                               'keepIndexed'  => true
                                );
         $this->checkAuto();
 
@@ -181,13 +185,14 @@ class Sequence extends TokenAuto {
                                    2 => array('filterOut2' => $next_operator),
         );
         
-        $this->actions = array('transform'  => array( 1 => 'ELEMENT',
-                                                     -1 => 'ELEMENT'),
-                               'order'      => array( 1 => 1,
-                                                     -1 => 0 ),
-                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence',
-                               'cleanIndex' => true
+        $this->actions = array('transform'    => array( 1 => 'ELEMENT',
+                                                       -1 => 'ELEMENT'),
+                               'order'        => array( 1 => 1,
+                                                       -1 => 0 ),
+                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+                               'atom'         => 'Sequence',
+                               'cleanIndex'   => true,
+                               'keepIndexed'  => true
                                );
         $this->checkAuto();
 
@@ -206,13 +211,13 @@ class Sequence extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 1 => 'ELEMENT',
-                                                       -1 => 'ELEMENT'
-                                                      ),
-                               'order'      => array( 1 => 1,
-                                                     -1 => 0 ),
-                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
-                               'atom'       => 'Sequence',
-                               'cleanIndex' => true
+                                                       -1 => 'ELEMENT'),
+                               'order'        => array( 1 => 1,
+                                                       -1 => 0 ),
+                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+                               'atom'         => 'Sequence',
+                               'cleanIndex'   => true,
+                               'keepIndexed'  => true
                                );
         $this->checkAuto();
         
@@ -222,7 +227,8 @@ class Sequence extends TokenAuto {
                                               'atom'  => 'none'),
         );
         
-        $this->actions = array( 'transform'   => array(1 => 'DROP'));
+        $this->actions = array('transform'   => array(1 => 'DROP'),
+                               'keepIndexed' => true);
         $this->checkAuto();
 
         // @note End of PHP script
@@ -233,15 +239,18 @@ class Sequence extends TokenAuto {
                                               'notToken'   => 'T_ELSEIF', ),
                                    0 => array('token'      => Sequence::$operators,
                                               'atom'       => 'none'),
-                                   1 => array('token'      => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDDECLARE', ),
+                                   1 => array('token'      => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 
+                                                                    'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 
+                                                                    'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDDECLARE'),
                                               ),
         );
         
         $this->actions = array('transform'    => array(-1 => 'ELEMENT'),
-                               'atom'        => 'Sequence',
-                               'order'      => array(-1 => 0 ),
+                               'atom'         => 'Sequence',
+                               'order'        => array(-1 => 0 ),
                                'mergePrev2'   => array('Sequence' => 'ELEMENT'),
-                               'cleanIndex'  => true);
+                               'cleanIndex'   => true,
+                               'keepIndexed'  => true);
         $this->checkAuto();
 
         // @note End of PHP script, alternative syntax
@@ -256,11 +265,12 @@ class Sequence extends TokenAuto {
                                               'atom'     => 'none'),
         );
         
-        $this->actions = array('makeEdge'    => array(-1 => 'ELEMENT'),
-                               'order'       => array(-1 => 0 ),
-                               'mergeNext'   => array('Sequence' => 'ELEMENT'), 
-                               'atom'        => 'Sequence',
-                               'cleanIndex'  => true
+        $this->actions = array('makeEdge'     => array(-1 => 'ELEMENT'),
+                               'order'        => array(-1 => 0 ),
+                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+                               'atom'         => 'Sequence',
+                               'cleanIndex'   => true,
+                               'keepIndexed'  => true
                                );
         $this->checkAuto(); 
 
@@ -273,7 +283,25 @@ class Sequence extends TokenAuto {
         $this->actions = array('transform'   => array(0 => 'DROP'),
                                'keepIndexed' => true);
         $this->checkAuto(); 
-       
+
+        // Sequence followed by another instruction
+        $this->conditions = array(   0 => array('token' => Sequence::$operators,
+                                                'atom'  => 'Sequence'),
+                                     1 => array('atom'  => array('Array', 'RawString', 'Functioncall',  )),
+                                     2 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_END')),
+        );
+        
+        $this->actions = array('addToSequence' => 1,
+                               'keepIndexed'   => true);
+        $this->checkAuto(); 
+
+        // @note ; without nore more NEXT
+        $this->conditions = array( 0 => array('atom'  => 'Sequence' ));
+        
+        $this->actions = array('checkForNext' => true,
+                               'keepIndexed'  => true);
+        $this->checkAuto();
+        
         return $this->checkRemaining();
     }
 

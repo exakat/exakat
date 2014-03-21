@@ -12,7 +12,7 @@ class _Const extends TokenAuto {
                                    2 => array('filterOut' => 'T_COMMA'),
                                  );
         
-        $this->actions = array('to_const'   => true);
+        $this->actions = array('to_const'     => true);
         $this->checkAuto(); 
 
     // class x {const a = 2; } only one.
@@ -22,16 +22,17 @@ class _Const extends TokenAuto {
                                  );
         
         $this->actions = array('to_const_assignation' => true,
-                               'atom'        => 'Const',
-                               'keepIndexed' => true,
-                               'cleanIndex'  => true);
+                               'atom'                 => 'Const',
+                               'cleanIndex'           => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();
     }
 
     public function fullcode() {
-        return 'fullcode.fullcode = "const " + fullcode.out("NAME").next().code + " = " + fullcode.out("VALUE").next().code; ';
+        return <<<GREMLIN
+fullcode.fullcode = "const " + fullcode.out("NAME").next().code + " = " + fullcode.out("VALUE").next().code;
+GREMLIN;
     }
 }
 ?>

@@ -9,15 +9,15 @@ class _Try extends TokenAuto {
         // Try () { } catch
         $this->conditions = array(0 => array('token' => _Try::$operators,
                                              'atom' => 'none'),
-                                  1 => array('atom' => 'Block'), 
+                                  1 => array('atom' => 'Sequence'), 
                                   2 => array('atom' => 'Catch'),
                                   );
         
-        $this->actions = array('transform'  => array( 1 => 'CODE',
-                                                      2 => 'CATCH'),
-                               'order'      => array( 2 => 0),
-                               'atom'       => 'Try',
-                               'keepIndexed' => true);
+        $this->actions = array('transform'    => array( 1 => 'CODE',
+                                                        2 => 'CATCH'),
+                               'order'        => array( 2 => 0),
+                               'atom'         => 'Try',
+                               'keepIndexed'  => true);
         $this->checkAuto();
 
         // Try () { } catch + new catch
@@ -35,17 +35,20 @@ class _Try extends TokenAuto {
                                              'token' => _Try::$operators),
                                   1 => array('notToken'  => 'T_CATCH')
                                   );
-        $this->actions = array('cleanIndex'  => true);
+        $this->actions = array('cleanIndex'  => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         return $this->checkRemaining();
     }
 
     public function fullcode() {
-        return '
+        return <<<GREMLIN
 s = [];
 it.out("CATCH").each{ s.add(it.fullcode); }        
-it.fullcode = "try " + it.out("CODE").next().fullcode + s.join(" "); ';
+it.fullcode = "try " + it.out("CODE").next().fullcode + s.join(" "); 
+
+GREMLIN;
     }
 }
 

@@ -14,13 +14,28 @@ class _Final extends TokenAuto {
                                'atom'      => 'Final');
         $this->checkAuto(); 
 
+    // final class x { final private function x() }
+        $this->conditions = array( 0 => array('token' => _Final::$operators),
+                                   2 => array('token' => 'T_FUNCTION'),
+                                 );
+        $this->actions = array('to_option' => 2,
+                               'atom'      => 'Final');
+        $this->checkAuto(); 
+
+    // final class x { final private static function x() }
+        $this->conditions = array( 0 => array('token' => _Final::$operators),
+                                   3 => array('token' => 'T_FUNCTION'),
+                                 );
+        $this->actions = array('to_option' => 3,
+                               'atom'      => 'Final');
+        $this->checkAuto(); 
+
         return $this->checkRemaining();
     }
 
     public function fullcode() {
         $function = new _Function(Token::$client);
         return $function->fullcode();
-
     }
 }
 ?>
