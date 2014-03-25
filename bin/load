@@ -211,6 +211,8 @@ function process_file($filename, $log_file) {
     $Tid = -1;
     $root = 0;
     $in_quote = false;
+    $in_for = 0;
+    
     for($id = 0; $id < $nb; $id++) {
         if (empty($tokens[$id])) { continue; }
         $Tid++;
@@ -610,9 +612,29 @@ function process_file($filename, $log_file) {
                 $T[$Tid]->setProperty('fullcode', $token)->save();
             }
         }
-        
+
         if ($in_quote) {
             $T[$Tid]->setProperty('in_quote', "'true'")->save();
+        } 
+
+
+        if (in_array($token_value, array('T_FOR'))) {
+            $in_for = 1;
+        }
+
+        if ($in_for > 0) {
+            if (in_array($token_value, array('T_OPEN_PARENTHESIS'))) {
+                $in_for++;
+            } elseif (in_array($token_value, array('T_CLOSE_PARENTHESIS'))) {
+                $in_for--;
+                if ($in_for == 1) {
+                    $in_for = 0;
+                }
+            } 
+        }
+
+        if ($in_for > 1) {
+            $T[$Tid]->setProperty('in_for', "'true'")->save();
         } 
 
         // test is for booleans. 

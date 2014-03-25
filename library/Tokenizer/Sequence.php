@@ -307,7 +307,10 @@ class Sequence extends TokenAuto {
 
     public function fullcode() {
         // fullcode is not meant to reproduce the whole code, but give a quick peek at some smaller code. Just ignoring for the moment.
-        return 'fullcode.setProperty("fullcode", " ")';
+        return <<<GREMLIN
+
+fullcode.setProperty("fullcode", " ")
+GREMLIN;
     }
 }
 ?>

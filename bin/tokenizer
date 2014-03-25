@@ -89,7 +89,7 @@ $stats = array('token_in' => $server_stat->tokens_count, 'token_out' => 2,
 $total = Tokenizer\Token::countTotalToken();
 $count = Tokenizer\Token::countLeftToken() + 1;
 
-$extra_rounds = 5;
+$extra_rounds = 4;
 $prev = array();
 for($i = 0; $i < $extra_rounds + 1; $i++) {
     $prev[$i] = $count + $i;

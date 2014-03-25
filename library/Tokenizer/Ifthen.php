@@ -10,7 +10,8 @@ class Ifthen extends TokenAuto {
     // @doc if () with only ;
         $this->conditions = array( 0 => array('token' => Ifthen::$operators),
                                    1 => array('atom' => 'Parenthesis'),
-                                   2 => array('token' => 'T_SEMICOLON', 'atom' => 'none')
+                                   2 => array('token' => 'T_SEMICOLON', 
+                                              'atom' => 'none')
         );
         
         $this->actions = array('to_void'     => 2,
@@ -37,12 +38,25 @@ class Ifthen extends TokenAuto {
                                'cleanIndex'   => true);
         $this->checkAuto(); 
 
+        // Make a block from sequence after a if/elseif
+        $this->conditions = array(  0 => array('token'     => Ifthen::$operators,
+                                               'atom'      => 'none'),
+                                    1 => array('atom'      => 'Parenthesis'),
+                                    2 => array('notAtom'   => array('Sequence', 'Void'), 
+                                               'atom'      => 'yes'),
+                                    3 => array('token'     => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE')),
+        );
+        
+        $this->actions = array( 'to_block_ifelseif' => 2,
+                                'keepIndexed'       => true);
+        $this->checkAuto(); 
+
     // @doc if then elseif without else
         $this->conditions = array( 0 => array('token' => Ifthen::$operators),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => array('Void', 'Sequence')),
-                                   3 => array('atom' => 'Ifthen', 'token' => 'T_ELSEIF'),
-                                   //4 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
+                                   3 => array('atom' => 'Ifthen', 
+                                              'token' => 'T_ELSEIF'),
         );
         
         $this->actions = array('transform'    => array('1' => 'CONDITION',
@@ -53,18 +67,6 @@ class Ifthen extends TokenAuto {
                                'atom'         => 'Ifthen',
                                'cleanIndex'   => true
                                );
-        $this->checkAuto(); 
-
-        // Make a block from sequence after a if/elseif
-        $this->conditions = array(  0 => array('token'     => Ifthen::$operators,
-                                               'atom'      => 'none'),
-                                    1 => array('atom'      => 'Parenthesis'),
-                                    2 => array('notAtom'   => array('Sequence', 'Void'), 'atom' => 'yes'),
-                                    3 => array('filterOut' => Token::$instruction_ending),
-        );
-        
-        $this->actions = array( 'to_block_ifelseif' => 2,
-                                'keepIndexed'       => true);
         $this->checkAuto(); 
 
         // Make a block from sequence after a if/elseif (alternative syntax)
@@ -87,7 +89,7 @@ class Ifthen extends TokenAuto {
         $this->conditions = array(  0 => array('token' => Ifthen::$operators,
                                                'atom' => 'none'),
                                     1 => array('atom' => 'Parenthesis'),
-                                    2 => array('atom' => array('For', 'Switch', 'Foreach', 'While', 'Dowhile', 'Ifthen', 'Sequence' ))
+                                    2 => array('atom' => array('For', 'Switch', 'Foreach', 'While', 'Dowhile', 'Ifthen' ))
         );
         
         $this->actions = array( 'to_block_ifelseif_instruction' => true,
@@ -105,7 +107,8 @@ class Ifthen extends TokenAuto {
         $this->actions = array('transform'    => array(1 => 'CONDITION',
                                                        2 => 'THEN'),
                                'makeSequence' => 'it',
-                               'atom'         => 'Ifthen');
+                               'atom'         => 'Ifthen',
+                               'cleanIndex'   => true);
         $this->checkAuto(); 
 
     // @doc if then NO ELSE, with a sequence behind
@@ -114,6 +117,7 @@ class Ifthen extends TokenAuto {
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => array('Sequence', 'Void')),
                                    3 => array('atom' => 'Sequence'),
+                                   4 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF'))
         );
         
         $this->actions = array('transform'    => array(1 => 'CONDITION',

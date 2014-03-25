@@ -27,17 +27,21 @@ class Logical extends TokenAuto {
                                                                                  'T_NS_SEPARATOR',
                                                                            ))));
         
-        $this->actions = array('transform'  => array( -1 => 'LEFT',
-                                                       1 => 'RIGHT'),
-                               'atom'       => 'Logical',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( -1 => 'LEFT',
+                                                         1 => 'RIGHT'),
+                               'atom'         => 'Logical',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
         
         return $this->checkRemaining();
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode; ';
+        return <<<GREMLIN
+it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode; 
+
+GREMLIN;
     }
 }
 ?>
