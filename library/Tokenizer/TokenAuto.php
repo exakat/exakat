@@ -1353,7 +1353,7 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = "
 /* Check for Next */
 
-if (it.in('NEXT').filter{ it.'atom' in ['RawString', 'Void', 'Ifthen', 'Function' ]}.any()) {
+if (it.in('NEXT').filter{ it.'atom' in ['RawString', 'Void', 'Ifthen', 'Function', 'For', ]}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
     
@@ -1385,6 +1385,16 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), next, 'DELETE');
 }
 
+if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For' ]}.any()) {
+    sequence = it;
+    next = it.out('NEXT').next();
+    
+    next.setProperty('order', sequence.out('ELEMENT').count());
+    g.addEdge(sequence, next, 'ELEMENT');
+    
+    g.addEdge(sequence, next.out('NEXT').next(), 'NEXT');
+    next.bothE('NEXT').each{ g.removeEdge(it); }
+}
 
 if (it.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).any()) {
     semicolon = it.out('NEXT').next();
@@ -2156,9 +2166,10 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
         'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
         
-        'T_THROW', 'T_CLONE', 
+        'T_THROW', 'T_CLONE', 'T_RETURN', 
         'T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES',
-        'T_ABSTRACT', 'T_FINAL', 'T_STATIC', 'T_CONST'
+        'T_ABSTRACT', 'T_FINAL', 'T_STATIC', 'T_CONST', 
+        'T_AT',
         ];
 
 list_after = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
@@ -2174,6 +2185,7 @@ list_after = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMAL
         'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
         'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
 
+        'T_ELSE', 'T_ELSEIF', 
         'T_CATCH', ];
 
 if ($it.token != 'T_ELSEIF' && 
@@ -2181,7 +2193,12 @@ if ($it.token != 'T_ELSEIF' &&
     && ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))
     && (!($it.out('NEXT').next().token in list_after) )
     && $it.in_quote != \"'true'\"
+    && $it.in_for != \"'true'\"
+    && $it.in('NEXT').next().atom != 'Class'
     ) {
+
+    $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
+    $it.setProperty('makeSequence4',  $it.out('NEXT').next().token);
 
     if ($it.both('NEXT').has('atom', 'Sequence').count() == 2) {
         count = $it.in('NEXT').out('ELEMENT').count();
@@ -2239,12 +2256,15 @@ if ($it.token != 'T_ELSEIF' &&
     
         $it.bothE('NEXT').each{ g.removeEdge(it); }
     }
+
 } else {
     $it.setProperty('makeSequence1', $it.token != 'T_ELSEIF');
     $it.setProperty('makeSequence2', ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' ));
-    $it.setProperty('makeSequence3', ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before)));
-    $it.setProperty('makeSequence4', !($it.out('NEXT').next().token in list_after) );
+    $it.setProperty('makeSequence31', $it.in('NEXT').next().atom != null);
+    $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
+    $it.setProperty('makeSequence4',  $it.out('NEXT').next().token);
     $it.setProperty('makeSequence5', $it.in_quote != 'true' );
+    $it.setProperty('makeSequence6', $it.in_for != 'true' );
 }
 
 ";
