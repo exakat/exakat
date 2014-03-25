@@ -62,11 +62,11 @@ class Arguments extends TokenAuto {
 
         // @note End of )
         $this->conditions = array(-2 => array('filterOut' => array("T_NS_SEPARATOR")),
-                                  -1 => array('atom' => $operands),
-                                   0 => array('token' => Arguments::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('token' => 'T_CLOSE_PARENTHESIS',
-                                              'atom'  => 'none'),
+                                  -1 => array('atom'      => $operands),
+                                   0 => array('token'     => Arguments::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('token'     => 'T_CLOSE_PARENTHESIS',
+                                              'atom'      => 'none'),
         );
         
         $this->actions = array('makeEdge'    => array(-1 => 'ARGUMENT'

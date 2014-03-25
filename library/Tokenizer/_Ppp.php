@@ -63,6 +63,7 @@ class _Ppp extends TokenAuto {
 
     // class x { protected private function f()  }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),
+                                   1 => array('token' => array('T_ABSTRACT', 'T_FINAL', 'T_STATIC')),
                                    2 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('to_option' => 2,
@@ -71,6 +72,8 @@ class _Ppp extends TokenAuto {
 
     // class x { protected private static function f()  }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),
+                                   1 => array('token' => array('T_ABSTRACT', 'T_FINAL', 'T_STATIC')),
+                                   2 => array('token' => array('T_ABSTRACT', 'T_FINAL', 'T_STATIC')),
                                    3 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('to_option' => 3,
@@ -78,10 +81,10 @@ class _Ppp extends TokenAuto {
         $this->checkAuto(); 
 
     // class x { var $x, $y }
-        $this->conditions = array(-1 => array('filterOut2' => array('T_STATIC')),
-                                   0 => array('token' => _Ppp::$operators),
-                                   1 => array('atom' => 'Arguments'),
-                                   2 => array('filterOut' => array('T_COMMA')),
+        $this->conditions = array(-1 => array('filterOut2' => 'T_STATIC'),
+                                   0 => array('token'      => _Ppp::$operators),
+                                   1 => array('atom'       => 'Arguments'),
+                                   2 => array('filterOut'  => array('T_COMMA')),
                                  );
         
         $this->actions = array('to_var_new' => 'Ppp',
