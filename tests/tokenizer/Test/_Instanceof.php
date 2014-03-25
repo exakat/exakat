@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Instanceof extends Tokenizer {
-    /* 5 methods */
+    /* 6 methods */
 
     public function test_Instanceof01()  { $this->generic_test('_Instanceof.01'); }
     public function test_Instanceof02()  { $this->generic_test('_Instanceof.02'); }
@@ -15,5 +15,6 @@ class _Instanceof extends Tokenizer {
 
     public function test_Instanceof04()  { $this->generic_test('_Instanceof.04'); }
     public function test_Instanceof05()  { $this->generic_test('_Instanceof.05'); }
+    public function test_Instanceof06()  { $this->generic_test('_Instanceof.06'); }
 }
 ?>

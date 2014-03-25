@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    instanceof
+    Label : RIGHT
+      makeSequence
+      Label : ELEMENT
+        ?
+        Label : CONDITION
+          \
+          Label : ELEMENT
+            E
+          Label : ELEMENT
+            D
+          Label : ELEMENT
+            C
+          Label : ELEMENT
+            B
+        Label : THEN
+          ->
+          Label : OBJECT
+            $c
+          Label : METHOD
+            F
+            Label : ARGUMENTS
+              void
+        Label : ELSE
+          $d
+    Label : LEFT
+      makeSequence
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $b
+        Label : LEFT
+          $a
