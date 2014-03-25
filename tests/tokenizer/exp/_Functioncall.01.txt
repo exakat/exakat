@@ -1,0 +1,33 @@
+<?php 
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $c
+      Label : VALUE
+        $d
+    Label : SOURCE
+      $b
+    Label : LOOP
+      F
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ?
+        Label : CONDITION
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
+        Label : THEN
+          'B'
+        Label : ELSE
+          'D'
+  Label : ELEMENT
+    E

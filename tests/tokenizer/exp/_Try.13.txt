@@ -1,0 +1,88 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    try
+    Label : CODE
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            [
+            Label : INDEX
+              'B'
+            Label : VARIABLE
+              $b
+          Label : LEFT
+            $a
+    Label : CATCH
+      catch
+      Label : CLASS
+        D
+      Label : VARIABLE
+        $c
+      Label : CODE
+        {
+        Label : CODE
+          makeSequence
+          Label : ELEMENT
+            return
+            Label : RETURN
+              void
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      G
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          'H'
+        Label : ARGUMENT
+          array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              =>
+              Label : KEY
+                'J'
+              Label : VALUE
+                .
+                Label : CONCAT
+                  ->
+                  Label : METHOD
+                    R
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        'S'
+                  Label : OBJECT
+                    $g
+                Label : CONCAT
+                  ->
+                  Label : METHOD
+                    O
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        'P'
+                  Label : OBJECT
+                    $f
+                Label : CONCAT
+                  ->
+                  Label : METHOD
+                    L
+                    Label : ARGUMENTS
+                      void
+                  Label : OBJECT
+                    $e
+                Label : CONCAT
+                  'M'
+    Label : OBJECT
+      [
+      Label : INDEX
+        'E'
+      Label : VARIABLE
+        $d

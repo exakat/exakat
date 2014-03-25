@@ -1353,7 +1353,8 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = "
 /* Check for Next */
 
-if (it.in('NEXT').filter{ it.'atom' in ['RawString', 'Void', 'Ifthen', 'Function', 'For', ]}.any()) {
+if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Try', 'Ternary', ]}.any() && 
+    it.in('NEXT').in('NEXT').filter{ !(it.token in ['T_ECHO'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
     
@@ -1405,6 +1406,9 @@ if (it.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).any()) {
     
 }
 
+if (it.both('NEXT').count() == 0) {
+    it.inE('INDEXED').each{ g.removeEdge(it); }
+}
 ";
             unset($actions['checkForNext']);
         }
@@ -2169,7 +2173,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_THROW', 'T_CLONE', 'T_RETURN', 
         'T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES',
         'T_ABSTRACT', 'T_FINAL', 'T_STATIC', 'T_CONST', 
-        'T_AT',
+        'T_AT', 
         ];
 
 list_after = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
@@ -2194,7 +2198,7 @@ if ($it.token != 'T_ELSEIF' &&
     && (!($it.out('NEXT').next().token in list_after) )
     && $it.in_quote != \"'true'\"
     && $it.in_for != \"'true'\"
-    && $it.in('NEXT').next().atom != 'Class'
+    && !($it.in('NEXT').next().atom in ['Class', 'Identifier'])
     ) {
 
     $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
@@ -2250,6 +2254,11 @@ if ($it.token != 'T_ELSEIF' &&
     
         g.addEdge(sequence, $it, 'ELEMENT');
         $it.setProperty('order', 0);
+        
+        if ($it.root == 'true') { 
+            sequence.setProperty('root', 'true'); 
+            $it.setProperty('root', 'false'); 
+        }
 
         g.addEdge($it.in('NEXT').next(), sequence, 'NEXT');
         g.addEdge(sequence, $it.out('NEXT').next(), 'NEXT');
