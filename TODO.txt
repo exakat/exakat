@@ -214,7 +214,6 @@ Spot useless code, such as variable or scalar alone on an instruction.
 Desactiver ArrayNS en fonction des versions de PHP qui tournent.
 Spot trailing white space on PHP code (before and after <?php ?>)
 Support phar files (digg them and find the local php files).
-spot MD5 strings ("8660281B6051D071D94B5B230549F9DC851566DC")
 
 Check for ordering with case/default
 Add time of processing in the ReportInfo
@@ -224,3 +223,8 @@ Check for for() and remove arguments
 
 reinstall sqlite export
 fix the last 'indexed' in tokenizer
+
+spot #! lines and mark the file as executable commandline
+check that report are all done in default
+
+Check for empty __construct();
