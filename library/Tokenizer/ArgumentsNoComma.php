@@ -27,7 +27,7 @@ class ArgumentsNoComma extends Arguments {
                                    1 => array('atom'  => Arguments::$operands_wa),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
-                                   3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS', 'T_COMMA', 'T_OBJECT_OPERATOR')),
+                                   3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS', 'T_COMMA', 'T_OBJECT_OPERATOR', 'T_DOT',)),
         );
 
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));

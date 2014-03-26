@@ -211,6 +211,8 @@ function process_file($filename, $log_file) {
     $Tid = -1;
     $root = 0;
     $in_quote = false;
+    $in_for = 0;
+    
     for($id = 0; $id < $nb; $id++) {
         if (empty($tokens[$id])) { continue; }
         $Tid++;
@@ -296,14 +298,29 @@ function process_file($filename, $log_file) {
                                               ->save();
 
                 $id++;
-            } elseif ($Php->getTokenname($token[0]) == 'T_CLOSE_TAG' && 
-                      !isset($tokens[$id + 1])) {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
+            } elseif ($Php->getTokenname($token[0]) == 'T_INLINE_HTML' && 
+                      $id == 0) {
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                              ->setProperty('code', ';')
+                                              ->setProperty('fullcode', ';')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('atom', 'Sequence')
+                                              ->setProperty('modifiedBy', 'bin/load13')
+                                              ->setProperty('root', 'true')
+                                              ->save();
+                $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();
+                $classNode->relateTo($T[$Tid]);
+
+                $inline =  $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
+                                              ->setProperty('atom', 'RawString')
+                                              ->setProperty('fullcode', $token[1])
+                                              ->setProperty('line', $token[2])
+                                              ->setProperty('order', 0)
                                               ->setProperty('code', $token[1])
-                                              ->setProperty('line', $token[2]);
-                // No need to index the last 'closing ? >'
-                $to_index = false; 
-                print "Spotted ONE final\n";
+                                              ->save();
+                                              ;
+                $classNode->relateTo($inline);
+                $T[$Tid]->relateTo($inline, 'ELEMENT')->save();
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
                                               ->setProperty('code', $token[1])
@@ -311,7 +328,7 @@ function process_file($filename, $log_file) {
             }
 
             $x = $T[$Tid]->getProperty('code');
-            // one may also use 4, 8 or any chr that is supposed to be non ascii. 
+            // guessing binary code : one may also use 4, 8 or any chr that is supposed to be non ascii. 
             if (strpos($x, chr(2)) !== false) { 
                 $T[$Tid]->setProperty('code', "Binary data <length ".strlen($x)." bytes>");
             }
@@ -330,6 +347,8 @@ function process_file($filename, $log_file) {
                 } elseif ($Php->getTokenname($token[0]) == 'T_STRING_VARNAME') {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
                             ->setProperty('fullcode', '$'.$token[1])->save();
+                } elseif ($Php->getTokenname($token[0]) == 'T_INLINE_HTML' && $id == 0) {
+                    // ignore
                 } elseif ($Php->getTokenname($token[0]) == 'T_CONSTANT_ENCAPSED_STRING') {
                     $T[$Tid]->setProperty('delimiter', in_array($token[1][0], array("'", '"')) ? $token[1][0] : '')
                             ->setProperty('noDelimiter', trim($token[1], '"\''))
@@ -337,6 +356,7 @@ function process_file($filename, $log_file) {
                             ->setProperty('fullcode', $token[1])->save();
                 } else {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
+                            ->setProperty('modifiedBy', 'bin/load15')
                             ->setProperty('fullcode', $token[1])->save();
                 }
             }
@@ -364,7 +384,7 @@ function process_file($filename, $log_file) {
                                               ->setProperty('code', $token)
                                               ->setProperty('fullcode', '{ /**/ } ')
                                               ->setProperty('line', $line)
-                                              ->setProperty('atom', 'Block')
+                                              ->setProperty('atom', 'Sequence')
                                               ->setProperty('modifiedBy', 'bin/load12')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
@@ -591,9 +611,29 @@ function process_file($filename, $log_file) {
                 $T[$Tid]->setProperty('fullcode', $token)->save();
             }
         }
-        
+
         if ($in_quote) {
             $T[$Tid]->setProperty('in_quote', "'true'")->save();
+        } 
+
+
+        if (in_array($token_value, array('T_FOR'))) {
+            $in_for = 1;
+        }
+
+        if ($in_for > 0) {
+            if (in_array($token_value, array('T_OPEN_PARENTHESIS'))) {
+                $in_for++;
+            } elseif (in_array($token_value, array('T_CLOSE_PARENTHESIS'))) {
+                $in_for--;
+                if ($in_for == 1) {
+                    $in_for = 0;
+                }
+            } 
+        }
+
+        if ($in_for > 1) {
+            $T[$Tid]->setProperty('in_for', "'true'")->save();
         } 
 
         // test is for booleans. 

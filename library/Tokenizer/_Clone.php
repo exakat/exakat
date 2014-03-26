@@ -15,9 +15,10 @@ class _Clone extends TokenAuto {
                                                                   'T_OPEN_PARENTHESIS',  )),
         );
         
-        $this->actions = array('transform'  => array( 1 => 'CLONE'),
-                               'atom'       => 'Clone',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( 1 => 'CLONE'),
+                               'atom'         => 'Clone',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         $this->conditions = array(0 => array('token' => _Clone::$operators,
@@ -27,11 +28,12 @@ class _Clone extends TokenAuto {
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'), 
         );
         
-        $this->actions = array('transform'  => array( 1 => 'DROP',
-                                                      2 => 'CLONE',
-                                                      3 => 'DROP',),
-                               'atom'       => 'Clone',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( 1 => 'DROP',
+                                                        2 => 'CLONE',
+                                                        3 => 'DROP',),
+                               'atom'         => 'Clone',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
         
         return $this->checkRemaining();

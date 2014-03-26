@@ -1,7 +1,11 @@
 <?php
 
 $file = $argv[1];
-print "Processing file $file\n";
+
+if (!file_exists($file)) {
+    die("Usage : php script/anonymize.php <filename>");
+}
+print "Processing file $file into $file.anon\n";
 
 $php = file_get_contents($file);
 $tokens = token_get_all($php);
@@ -33,8 +37,20 @@ foreach($tokens as $t) {
             case T_COMMENT:
                 $t[1] = "";
                 break;
-                
+
+            case T_INLINE_HTML : 
+                $t[1] = $strings++;
+                break;
+
             case T_RETURN :
+            case T_ECHO : 
+            case T_ENDFOREACH : 
+            case T_EMPTY : 
+            case T_ARRAY :
+            case T_GLOBAL : 
+            case T_TRY : 
+            case T_CATCH : 
+            case T_DOUBLE_ARROW : 
             case T_CURLY_OPEN:
             case T_ELSE : 
             case T_PUBLIC : 

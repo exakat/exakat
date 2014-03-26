@@ -15,10 +15,11 @@ class _Instanceof extends TokenAuto {
                                   
         );
         
-        $this->actions = array('makeEdge'   => array(  1 => 'RIGHT',
-                                                      -1 => 'LEFT'),
-                               'atom'       => 'Instanceof',
-                               'cleanIndex' => true);
+        $this->actions = array('makeEdge'     => array(  1 => 'RIGHT',
+                                                        -1 => 'LEFT'),
+                               'atom'         => 'Instanceof',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it' );
         $this->checkAuto();
         
         return $this->checkRemaining();

@@ -9,7 +9,7 @@ class _Namespace extends TokenAuto {
         // namespace {} 
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom' => 'none'),
-                                  1 => array('atom' => 'Block'),
+                                  1 => array('atom' => 'Sequence'),
         );
         
         $this->actions = array('insert_global_ns' => 1,
@@ -20,13 +20,14 @@ class _Namespace extends TokenAuto {
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => array('Identifier', 'Nsname')),
-                                  2 => array('atom' => 'Block'),
+                                  2 => array('atom' => 'Sequence'),
         );
         
-        $this->actions = array('transform'   => array( 1 => 'NAMESPACE',
-                                                       2 => 'BLOCK'),
-                               'atom'       => 'Namespace',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( 1 => 'NAMESPACE',
+                                                        2 => 'BLOCK'),
+                               'atom'         => 'Namespace',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         // namespace myproject ; 
@@ -36,9 +37,10 @@ class _Namespace extends TokenAuto {
                                   2 => array('filterOut' => array('T_NS_SEPARATOR')),
         );
         
-        $this->actions = array('transform'   => array( 1 => 'NAMESPACE'),
-                               'atom'       => 'Namespace',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( 1 => 'NAMESPACE'),
+                               'atom'         => 'Namespace',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
         
         return $this->checkRemaining();

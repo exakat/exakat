@@ -10,7 +10,7 @@ class _While extends TokenAuto {
          //  While( condition ) ;
          // T_SEMICOLON here will prevent while to be create too hastily, and give a chance to do...while.
         $this->conditions = array(-1 => array('filterOut' => array('T_CLOSE_CURLY', 'T_SEMICOLON'),
-                                              'notAtom' => array("Block", 'Ifthen', 'Foreach', 'For', 'Switch')),
+                                              'notAtom' => array("Sequence", 'Ifthen', 'Foreach', 'For', 'Switch')),
                                    0 => array('token' => _While::$operators),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => 'yes'),
@@ -55,13 +55,13 @@ class _While extends TokenAuto {
         );
         
         $this->actions = array('addEdge'     => array(4 => array('Void' => 'LEVEL')),
-                               'keepIndexed'          => true,
-                               'cleanIndex'           => true);
+                               'keepIndexed' => true,
+                               'cleanIndex'  => true);
         $this->checkAuto();        
         
          // { lone block } While( condition ) ;
         $this->conditions = array(-2 => array('filterOut' => array("T_DO" , 'T_ELSE')),
-                                  -1 => array('atom'      => "Block"),
+                                  -1 => array('atom'      => "Sequence"),
                                    0 => array('token'     => _While::$operators),
                                    1 => array('token'     => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'      => 'yes'),
@@ -82,12 +82,12 @@ class _While extends TokenAuto {
                                    2 => array('atom'       => 'yes'),
                                    3 => array('token'      => 'T_CLOSE_PARENTHESIS'),
                                    4 => array('atom'       => 'yes', 
-                                              'notAtom'    => 'Block'),
+                                              'notAtom'    => 'Sequence'),
                                    5 => array('filterOut2' => Token::$instruction_ending),
         );
         
-        $this->actions = array('while_to_block'    => true,
-                               'keepIndexed'       => true);
+        $this->actions = array('while_to_block' => true,
+                               'keepIndexed'    => true);
         $this->checkAuto();      
         
          //  syntax   While( ) {}
@@ -95,15 +95,16 @@ class _While extends TokenAuto {
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom'  => 'yes'),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('atom'  => array('Block', 'Void')),
+                                  4 => array('atom'  => array('Sequence', 'Void')),
         );
         
         $this->actions = array('transform'    => array(  1 => 'DROP',
                                                          2 => 'CONDITION',
                                                          3 => 'DROP',
                                                          4 => 'LOOP',      ),
-                               'atom'       => 'While',
-                               'cleanIndex' => true);
+                               'makeSequence' => 'it',
+                               'atom'         => 'While',
+                               'cleanIndex'   => true);
         $this->checkAuto();
         
         // alternative syntax While( ) : endwhile
@@ -123,15 +124,20 @@ class _While extends TokenAuto {
                                                          5 => 'LOOP',
                                                          6 => 'DROP',
                                                         ),
-                               'atom'       => 'While',
-                               'cleanIndex' => true);
+                               'makeSequence' => 'it',
+                               'atom'         => 'While',
+                               'cleanIndex'   => true);
         $this->checkAuto();
         
         return $this->checkRemaining();
     }
 
     public function fullcode() {
-        return 'it.fullcode = "while " + it.out("CONDITION").next().fullcode + " " + it.out("LOOP").next().fullcode;';
+        return <<<GREMLIN
+
+fullcode.fullcode = "while " + fullcode.out("CONDITION").next().fullcode + " " + fullcode.out("LOOP").next().fullcode;
+GREMLIN;
+
     }
 
 }

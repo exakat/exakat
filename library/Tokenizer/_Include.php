@@ -16,9 +16,10 @@ class _Include extends TokenAuto {
                                     4 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_EQUAL', 'T_DOT' )),
         );
         
-        $this->actions = array('makeEdge'    => array('2' => 'ARGUMENTS',),
-                               'dropNext'   => array(1),
-                               'atom'       => 'Include',
+        $this->actions = array('makeEdge'     => array('2' => 'ARGUMENTS'),
+                               'dropNext'     => array(1),
+                               'atom'         => 'Include',
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto();
 
@@ -29,8 +30,9 @@ class _Include extends TokenAuto {
                                    2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_EQUAL' )),
         );
         
-        $this->actions = array('makeEdge'    => array(1 => 'ARGUMENTS',),
-                               'atom'       => 'Include');
+        $this->actions = array('makeEdge'     => array(1 => 'ARGUMENTS',),
+                               'atom'         => 'Include',
+                               'makeSequence' => 'it');
         $this->checkAuto();
         
         return $this->checkRemaining();

@@ -12,8 +12,9 @@ class _Break extends TokenAuto {
                                   2 => array('filterOut' => array_merge(Addition::$operators, Multiplication::$operators)),
                                   );
         
-        $this->actions = array('transform'  => array( 1 => 'LEVEL'),
-                               'atom'       => 'Break');
+        $this->actions = array('transform'    => array( 1 => 'LEVEL'),
+                               'atom'         => 'Break',
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         return $this->checkRemaining();

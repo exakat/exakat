@@ -16,10 +16,21 @@ class _Abstract extends TokenAuto {
 
     // abstract class x { abstract public function x() }
         $this->conditions = array( 0 => array('token' => _Abstract::$operators),
-                                   2 => array('token' => array('T_FUNCTION')),
+                                   1 => array('token' => array('T_PRIVATE', 'T_PROTECTED', 'T_PUBLIC', 'T_STATIC')),
+                                   2 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('to_option' => 2,
-                               'atom'      => 'Abstract');
+                               'atom'   => 'Abstract');
+        $this->checkAuto(); 
+
+    // abstract class x { abstract public static function x() }
+        $this->conditions = array( 0 => array('token' => _Abstract::$operators),
+                                   1 => array('token' => array('T_PRIVATE', 'T_PROTECTED', 'T_PUBLIC', 'T_STATIC')),
+                                   2 => array('token' => array('T_PRIVATE', 'T_PROTECTED', 'T_PUBLIC', 'T_STATIC')),
+                                   3 => array('token' => 'T_FUNCTION'),
+                                 );
+        $this->actions = array('to_option' => 3,
+                               'atom'   => 'Abstract');
         $this->checkAuto(); 
 
         return $this->checkRemaining();

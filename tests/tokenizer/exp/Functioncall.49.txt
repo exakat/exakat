@@ -1,0 +1,43 @@
+<?php 
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        .
+        Label : CONCAT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              0
+            Label : LEFT
+              $a
+        Label : CONCAT
+          'B'
+        Label : CONCAT
+          D
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              'E'
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                G
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'H'
+              Label : OBJECT
+                $b
+      Label : ARGUMENT
+        .
+        Label : CONCAT
+          'N'
+        Label : CONCAT
+          'J'
+        Label : CONCAT
+          'L'

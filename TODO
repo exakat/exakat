@@ -220,3 +220,7 @@ Check for ordering with case/default
 Add time of processing in the ReportInfo
 
 Create a dummy project for fast testing of installation
+Check for for() and remove arguments 
+
+reinstall sqlite export
+fix the last 'indexed' in tokenizer

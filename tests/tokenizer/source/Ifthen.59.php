@@ -1,7 +1,8 @@
 <?php 
 if ($a)     { $b++; }
 elseif ($b) { $c++; }
-else : 
+else { 
     $d++;
-endif;
+}
+;
  ?>

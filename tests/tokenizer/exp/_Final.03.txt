@@ -1,0 +1,156 @@
+<?php
+
+Label : NEXT
+  class
+  Label : NEXT
+    {
+    Label : NEXT
+      makeSequence
+      Label : NEXT
+        function
+        Label : NEXT
+          function
+          Label : NEXT
+            function
+            Label : NEXT
+              function
+              Label : NEXT
+                function
+                Label : NEXT
+                  function
+                  Label : NEXT
+                    function
+                    Label : NEXT
+                      function
+                      Label : NEXT
+                        }
+                        Label : NEXT
+                          ?>
+                          Label : NEXT
+                            /**/
+                            Label : NEXT
+                              /* * */
+                      Label : STATIC
+                        static
+                      Label : NAME
+                        c6
+                      Label : ARGUMENTS
+                        void
+                      Label : BLOCK
+                        {
+                        Label : CODE
+                          void
+                      Label : FINAL
+                        final
+                      Label : PRIVATE
+                        private
+                    Label : STATIC
+                      static
+                    Label : NAME
+                      c5
+                    Label : ARGUMENTS
+                      void
+                    Label : BLOCK
+                      {
+                      Label : CODE
+                        void
+                    Label : FINAL
+                      final
+                    Label : PRIVATE
+                      private
+                  Label : STATIC
+                    static
+                  Label : NAME
+                    c4
+                  Label : ARGUMENTS
+                    void
+                  Label : BLOCK
+                    {
+                    Label : CODE
+                      void
+                  Label : FINAL
+                    final
+                  Label : PRIVATE
+                    private
+                Label : STATIC
+                  static
+                Label : NAME
+                  c3
+                Label : ARGUMENTS
+                  void
+                Label : BLOCK
+                  {
+                  Label : CODE
+                    void
+                Label : FINAL
+                  final
+                Label : PRIVATE
+                  private
+              Label : STATIC
+                static
+              Label : NAME
+                c2
+              Label : ARGUMENTS
+                void
+              Label : BLOCK
+                {
+                Label : CODE
+                  void
+              Label : FINAL
+                final
+              Label : PRIVATE
+                private
+            Label : STATIC
+              static
+            Label : NAME
+              c1
+            Label : ARGUMENTS
+              void
+            Label : BLOCK
+              {
+              Label : CODE
+                void
+            Label : FINAL
+              final
+            Label : PRIVATE
+              private
+          Label : STATIC
+            static
+          Label : NAME
+            c
+          Label : ARGUMENTS
+            void
+          Label : BLOCK
+            {
+            Label : CODE
+              void
+          Label : FINAL
+            final
+        Label : NAME
+          b
+        Label : ARGUMENTS
+          void
+        Label : PUBLIC
+          public
+        Label : BLOCK
+          {
+          Label : CODE
+            void
+        Label : FINAL
+          final
+      Label : ELEMENT
+        function
+        Label : NAME
+          a
+        Label : ARGUMENTS
+          void
+        Label : BLOCK
+          {
+          Label : CODE
+            void
+        Label : FINAL
+          final
+  Label : ABSTRACT
+    abstract
+  Label : NAME
+    x

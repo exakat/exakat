@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    return
+    Label : RETURN
+      false
+  Label : ELEMENT
+    @
+    Label : AT
+      g
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $h
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      e
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'f'
+    Label : OBJECT
+      $d
+  Label : ELEMENT
+    a
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        [
+        Label : INDEX
+          'c'
+        Label : VARIABLE
+          $b
+      Label : ARGUMENT
+        -1

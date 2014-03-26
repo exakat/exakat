@@ -1,0 +1,46 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
+    Label : THEN
+      Block With control if elseif
+      Label : CODE
+        Block With if/elseif
+        Label : CODE
+          .=
+          Label : RIGHT
+            'B'
+          Label : LEFT
+            $b
+  Label : ELEMENT
+    .=
+    Label : RIGHT
+      .
+      Label : CONCAT
+        'I'
+      Label : CONCAT
+        H
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
+      Label : CONCAT
+        'F'
+      Label : CONCAT
+        'D'
+      Label : CONCAT
+        $d
+    Label : LEFT
+      $c

@@ -9,13 +9,14 @@ class _Interface extends TokenAuto {
         $this->conditions = array(0 => array('token' => _Interface::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'Identifier'),
-                                  2 => array('atom' => 'Block'),
+                                  2 => array('atom' => 'Sequence'),
         );
         
-        $this->actions = array('transform'  => array( 1 => 'NAME',
-                                                      2 => 'BLOCK'),
-                               'atom'       => 'Interface',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( 1 => 'NAME',
+                                                        2 => 'BLOCK'),
+                               'atom'         => 'Interface',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         $this->conditions = array(0 => array('token' => _Interface::$operators,
@@ -23,16 +24,17 @@ class _Interface extends TokenAuto {
                                   1 => array('atom' => 'Identifier'),
                                   2 => array('token' => 'T_EXTENDS'),
                                   3 => array('atom' => array('Arguments', 'Identifier', 'Nsname')),
-                                  4 => array('atom' => 'Block'),
+                                  4 => array('atom' => 'Sequence'),
         );
         
-        $this->actions = array('transform'  => array( 1 => 'NAME',
-                                                      2 => 'DROP',
-                                                      3 => 'EXTENDS',
-                                                      4 => 'BLOCK'),
-                               'atom'       => 'Interface',
+        $this->actions = array('transform'         => array( 1 => 'NAME',
+                                                             2 => 'DROP',
+                                                             3 => 'EXTENDS',
+                                                             4 => 'BLOCK'),
+                               'atom'              => 'Interface',
                                'arguments2extends' => true,
-                               'cleanIndex' => true);
+                               'cleanIndex'        => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         

@@ -21,9 +21,6 @@ class Reference extends TokenAuto {
         $this->actions = array('transform'    => array( 0 => 'DROP'),
                                'propertyNext' => array('reference' => 'true'),
                                'fullcode'     => true,
-//                               'property'    => array('reference' => 'true'),
-//                               'atom'        => 'Reference',
-//                               'cleanIndex'  => true
                                );
         $this->set_atom = true;
         $this->checkAuto();
@@ -39,9 +36,6 @@ class Reference extends TokenAuto {
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
                                'propertyNext' => array('reference' => 'true'),
-//                             'makeEdge'    => array( 1 => 'REFERENCE'),
-//                               'atom'        => 'Reference',
-//                               'cleanIndex'  => true
                                );
         $this->checkAuto();
 
@@ -56,9 +50,6 @@ class Reference extends TokenAuto {
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
                                'propertyNext' => array('reference' => 'true'),
-//                             'transform'   => array( 1 => 'REFERENCE'),
-//                               'cleanIndex'  => true,
-//                               'atom'        => 'Reference'
 );
         $this->checkAuto();
 

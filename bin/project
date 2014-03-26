@@ -57,12 +57,14 @@ print "Project loaded\n";
 $res = shell_exec('php bin/build_root;');
 print "Build root\n";
 
+unlink('./projects/'.$project.'/log/tokenizer.final.log');
 $res = shell_exec('php bin/tokenizer -p '.$project.' > ./projects/'.$project.'/log/tokenizer.final.log');
 if (!empty($res) && strpos('javax.script.ScriptException', $res) !== false) {
     file_put_contents('log/tokenizer_error.log', $res);
     die();
 }
 
+unlink('./projects/'.$project.'/log/errors.log');
 shell_exec('php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
 print "Got the errors (if any)\n";
 
@@ -75,21 +77,23 @@ sleep(2);
 
 logProgress($project, $progress++ / $total_steps);
 
+unlink('./projects/'.$project.'/log/analyze.final.log');
 shell_exec('php bin/analyze -p '.$project.' > ./projects/'.$project.'/log/analyze.final.log');
 logProgress($project, $progress++ / $total_steps);
 print "Project analyzed\n";
 
-shell_exec('php bin/export -dot -o ./projects/'.$project.'/export.dot');
-logProgress($project, $progress++ / $total_steps);
+unlink('./projects/'.$project.'/log/stats.txt');
 shell_exec('php bin/stat > ./projects/'.$project.'/stats.txt');
 logProgress($project, $progress++ / $total_steps);
 
-shell_exec('rm -f ./projects/'.$project.'/report.md; php bin/report '.$project.' -f ./projects/'.$project.'/report -markdown');
-shell_exec('rm -f ./projects/'.$project.'/report.html; php bin/report '.$project.' -f ./projects/'.$project.'/report -html');
-shell_exec('rm -f ./projects/'.$project.'/report.pdf; php bin/report '.$project.' -f ./projects/'.$project.'/report -pdf');
-shell_exec('rm -f ./projects/'.$project.'/report.odt; php bin/report '.$project.' -f ./projects/'.$project.'/report -odt');
-shell_exec('rm -f ./projects/'.$project.'/report.txt; php bin/report '.$project.' -f ./projects/'.$project.'/report -text');
-shell_exec('rm -f ./projects/'.$project.'/report.sqlite; php bin/report '.$project.' -f ./projects/'.$project.'/report -sqlite');
+shell_exec('rm ./projects/'.$project.'/report.md; php bin/report '.$project.' -f ./projects/'.$project.'/report -markdown');
+shell_exec('rm ./projects/'.$project.'/report.sqlite; php bin/report '.$project.' -f ./projects/'.$project.'/report -sqlite');
+shell_exec('rm ./projects/'.$project.'/report.html; php bin/report '.$project.' -f ./projects/'.$project.'/report -ace');
+shell_exec('rm ./projects/'.$project.'/report.html; php bin/report '.$project.' -f ./projects/'.$project.'/report -html');
+shell_exec('rm ./projects/'.$project.'/report.pdf; php bin/report '.$project.' -f ./projects/'.$project.'/report -pdf');
+shell_exec('rm ./projects/'.$project.'/report.odt; php bin/report '.$project.' -f ./projects/'.$project.'/report -odt');
+shell_exec('rm ./projects/'.$project.'/report.txt; php bin/report '.$project.' -f ./projects/'.$project.'/report -text');
+
 logProgress($project, $progress++ / $total_steps);
 
 print "Project reported\n";

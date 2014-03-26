@@ -1,0 +1,68 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    array
+    Label : ARGUMENTS
+      void
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      G
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          [
+          Label : INDEX
+            'J'
+          Label : VARIABLE
+            [
+            Label : INDEX
+              'H'
+            Label : VARIABLE
+              $e
+    Label : LEFT
+      $d
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        void
+    Label : LEFT
+      $f
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          B
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'E'
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  'C'
+                Label : VARIABLE
+                  $c
+    Label : THEN
+      Block With if/elseif
+      Label : CODE
+        return
+        Label : RETURN
+          void
+  Label : ELEMENT
+    global
+    Label : NAME
+      $a
+  Label : ELEMENT
+    global
+    Label : NAME
+      $b

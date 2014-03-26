@@ -56,12 +56,13 @@ class _Class extends TokenAuto {
 
     // class x { // some real code}
         $this->conditions = array( 0 => array('token' => _Class::$operators),
-                                   1 => array('atom' => 'Block')
+                                   1 => array('atom'  => 'Sequence')
                                  );
         
-        $this->actions = array('transform'  => array(1 => 'BLOCK'),
-                               'atom'       => 'Class',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array(1 => 'BLOCK'),
+                               'atom'         => 'Class',
+                               'makeSequence' => 'it',
+                               'cleanIndex'   => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();

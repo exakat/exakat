@@ -13,7 +13,9 @@ class Phpcodemiddle extends TokenAuto {
                                    2 => array('token' => 'T_OPEN_TAG',
                                               'atom' => 'none'),
         );
-        $this->actions = array('Phpcodemiddle' => true);
+        $this->actions = array('Phpcodemiddle' => true,
+                               'makeSequence'  => 'c'
+                               );
         $this->checkAuto();
         
         return $this->checkRemaining();

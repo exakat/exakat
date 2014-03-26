@@ -13,17 +13,18 @@ class _Function extends TokenAuto {
                                   2 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   3 => array('atom' => 'Arguments'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('atom' => 'Block'),
+                                  5 => array('atom' => 'Sequence'),
         );
         
-        $this->actions = array('transform'    => array( 1 => 'NAME',
-                                                        2 => 'DROP',
-                                                        3 => 'ARGUMENTS',
-                                                        4 => 'DROP', 
-                                                        5 => 'BLOCK'),
-                               'atom'       => 'Function',
+        $this->actions = array('transform'     => array( 1 => 'NAME',
+                                                         2 => 'DROP',
+                                                         3 => 'ARGUMENTS',
+                                                         4 => 'DROP', 
+                                                         5 => 'BLOCK'),
+                               'makeSequence'  => 'it',
+                               'atom'          => 'Function',
                                'checkTypehint' => 'Function',
-                               'cleanIndex' => true);
+                               'cleanIndex'    => true);
         $this->checkAuto();
 
         // function x(args); for interfaces
@@ -36,14 +37,15 @@ class _Function extends TokenAuto {
                                   5 => array('token' => 'T_SEMICOLON'),
         );
         
-        $this->actions = array('transform'    => array( 1 => 'NAME',
-                                                        2 => 'DROP',
-                                                        3 => 'ARGUMENTS',
-                                                        4 => 'DROP', 
-                                                        5 => 'DROP'),
-                               'atom'       => 'Function',
+        $this->actions = array('transform'     => array( 1 => 'NAME',
+                                                         2 => 'DROP',
+                                                         3 => 'ARGUMENTS',
+                                                         4 => 'DROP', 
+                                                         5 => 'DROP'),
+                               'atom'          => 'Function',
                                'checkTypehint' => 'Function',
-                               'cleanIndex' => true);
+                               'makeSequence'  => 'it',
+                               'cleanIndex'    => true);
         $this->checkAuto();
 
         // lambda function (no name)
@@ -52,7 +54,7 @@ class _Function extends TokenAuto {
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom' => 'Arguments'),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('atom' => 'Block')
+                                  4 => array('atom' => 'Sequence')
         );
         
         $this->actions = array('to_lambda'  => true,
@@ -71,7 +73,7 @@ class _Function extends TokenAuto {
                                   5 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   6 => array('atom'  => 'Arguments'),
                                   7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  8 => array('atom'  => 'Block')
+                                  8 => array('atom'  => 'Sequence')
         );
         
         $this->actions = array('to_lambda_use'  => true,

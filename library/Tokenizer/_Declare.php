@@ -17,15 +17,16 @@ class _Declare extends TokenAuto {
                                   6 => array('token' => 'T_ENDDECLARE'),
         );
         
-        $this->actions = array('transform'  => array( 1 => 'DROP',
-                                                      2 => 'TICKS',
-                                                      3 => 'DROP',
-                                                      4 => 'DROP',
-                                                      5 => 'BLOCK',
-                                                      6 => 'DROP',
-                                                      ),
-                               'atom'       => 'Declare',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'   => array( 1 => 'DROP',
+                                                       2 => 'TICKS',
+                                                       3 => 'DROP',
+                                                       4 => 'DROP',
+                                                       5 => 'BLOCK',
+                                                       6 => 'DROP',
+                                                       ),
+                               'atom'         => 'Declare',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         // declare(ticks = 2); 
@@ -37,12 +38,13 @@ class _Declare extends TokenAuto {
                                   4 => array('token'  => 'T_SEMICOLON')
         );
         
-        $this->actions = array('transform'  => array( 1 => 'DROP',
-                                                      2 => 'TICKS',
-                                                      3 => 'DROP',
-                                                      4 => 'DROP'),
-                               'atom'       => 'Declare',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( 1 => 'DROP',
+                                                        2 => 'TICKS',
+                                                        3 => 'DROP',
+                                                        4 => 'DROP'),
+                               'atom'         => 'Declare',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         // declare(ticks = 2) { block }
@@ -52,15 +54,16 @@ class _Declare extends TokenAuto {
                                     2 => array('atom'  =>  array('Arguments', 'Void')),
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
-                                    4 => array('atom'  => array('Block')),
+                                    4 => array('atom'  => array('Sequence')),
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
                                                         2 => 'TICKS',
                                                         3 => 'DROP',
                                                         4 => 'BLOCK'),
-                               'atom'       => 'Declare',
-                               'cleanIndex' => true,
+                               'atom'         => 'Declare',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto();
         

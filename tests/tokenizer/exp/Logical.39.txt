@@ -1,0 +1,90 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      B
+    Label : LEFT
+      [
+      Label : INDEX
+        --
+        Label : PREPLUSPLUS
+          $d
+      Label : VARIABLE
+        $c
+  Label : ELEMENT
+    &&
+    Label : RIGHT
+      H
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'I'
+    Label : LEFT
+      G
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      [
+      Label : INDEX
+        --
+        Label : PREPLUSPLUS
+          $j
+      Label : VARIABLE
+        $i
+    Label : LOOP
+      Block With While
+      Label : CODE
+        continue
+        Label : LEVEL
+          void
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      &&
+      Label : RIGHT
+        [
+        Label : INDEX
+          -
+          Label : RIGHT
+            2
+          Label : LEFT
+            $g
+        Label : VARIABLE
+          $f
+      Label : LEFT
+        >
+        Label : RIGHT
+          1
+        Label : LEFT
+          $e
+    Label : LOOP
+      Block With While
+      Label : CODE
+        --
+        Label : POSTPLUSPLUS
+          $h
+  Label : ELEMENT
+    &&
+    Label : RIGHT
+      D
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'E'
+    Label : LEFT
+      C
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      0
+    Label : LEFT
+      [
+      Label : INDEX
+        --
+        Label : PREPLUSPLUS
+          $b
+      Label : VARIABLE
+        $a

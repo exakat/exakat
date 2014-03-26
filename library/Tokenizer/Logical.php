@@ -13,11 +13,12 @@ class Logical extends TokenAuto {
                                                                           Comparison::$operators, Bitshift::$operators, Addition::$operators,
                                                                           Multiplication::$operators, Concatenation::$operators, 
                                                                           Preplusplus::$operators)),
-//                                   -1 => array('atom' => 'yes', 'notAtom' => array('Sequence', 'Identifier')), 
-                                   -1 => array('atom' => 'yes', 'notAtom' => 'Sequence'), 
-                                    0 => array('token' => Logical::$operators,
-                                               'atom' => 'none'),
-                                    1 => array('atom' => 'yes'),
+                                   -1 => array('atom'      => 'yes', 
+                                               'notAtom'   => 'Sequence'), 
+                                    0 => array('token'     => Logical::$operators,
+                                               'atom'      => 'none'),
+                                    1 => array('atom'      => 'yes',
+                                               'notAtom'   => 'Sequence'),
                                     2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators, 
                                                                           Addition::$operators, Multiplication::$operators, 
                                                                           Bitshift::$operators, Concatenation::$operators, 
@@ -26,17 +27,21 @@ class Logical extends TokenAuto {
                                                                                  'T_NS_SEPARATOR',
                                                                            ))));
         
-        $this->actions = array('transform'  => array( -1 => 'LEFT',
-                                                       1 => 'RIGHT'),
-                               'atom'       => 'Logical',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( -1 => 'LEFT',
+                                                         1 => 'RIGHT'),
+                               'atom'         => 'Logical',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
         
         return $this->checkRemaining();
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode; ';
+        return <<<GREMLIN
+it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode; 
+
+GREMLIN;
     }
 }
 ?>
