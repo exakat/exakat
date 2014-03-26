@@ -4,6 +4,7 @@ namespace Report\Format;
 
 class Html { 
     private $output = '';
+    protected static $analyzer = null;
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
@@ -26,6 +27,10 @@ class Html {
 
     public function getExtension() {
         return 'html';
+    }
+
+    public function setAnalyzer($name) {
+        \Report\Format\Html::$analyzer = $name;
     }
 
 }

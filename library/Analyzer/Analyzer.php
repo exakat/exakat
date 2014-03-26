@@ -761,7 +761,7 @@ GREMLIN;
         return $this;
     }
         
-    function hasParent($parent_class, $ins = array()) {
+    public function hasParent($parent_class, $ins = array()) {
         if (empty($ins)) {
             $in = '.in';
         } else {
@@ -789,7 +789,7 @@ GREMLIN;
         return $this;
     }
 
-    function hasNoParent($parent_class, $ins = array()) {
+    public function hasNoParent($parent_class, $ins = array()) {
         
         if (empty($ins)) {
             $in = '.in';
@@ -818,7 +818,7 @@ GREMLIN;
         return $this;
     }
     
-    function run() {
+    public function run() {
 
         $this->analyze();
         $this->prepareQuery();
@@ -828,11 +828,11 @@ GREMLIN;
         return $this->row_count;
     }
     
-    function getRowCount() {
+    public function getRowCount() {
         return $this->row_count;
     }
 
-    function analyze() { return true; } 
+    public function analyze() { return true; } 
     // @todo log errors when using this ? 
 
     function printQuery() {
@@ -858,7 +858,7 @@ GREMLIN;
         die();
     }
 
-    function prepareQuery() {
+    public function prepareQuery() {
         // @doc This is when the object is a placeholder for others. 
         if (count($this->methods) == 1) { return true; }
         
@@ -911,7 +911,7 @@ GREMLIN;
         return true;
     }
     
-    function execQuery() {
+    public function execQuery() {
         if (empty($this->queries)) { return true; }
 
         // @todo add a test here ? 
@@ -928,8 +928,12 @@ GREMLIN;
         // @todo store result in the object until reading. 
         return $this->row_count;
     }
+
+    public function toCount() {
+        return count($this->toArray());
+    }
     
-    function toArray() {
+    public function toArray() {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out"; 
         $vertices = $this->query($queryTemplate);
@@ -951,6 +955,7 @@ g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').in('FILE').as('f
 GREMLIN;
         $vertices = $this->query($queryTemplate);
 
+        $analyzer = get_class($this);
         $report = array();
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
@@ -1002,6 +1007,14 @@ GREMLIN;
             $analyzers[] = $type.'/'.substr(basename($file), 0, -4);
         }
         return $analyzers;
+    }
+    
+    public function hasResults() {
+        $analyzer = str_replace('\\', '\\\\', get_class($this));
+        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out.count()"; 
+        $vertices = $this->query($queryTemplate);
+        
+        return $vertices[0][0] > 0;
     }
 }
 ?>

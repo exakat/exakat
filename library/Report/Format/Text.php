@@ -4,6 +4,7 @@ namespace Report\Format;
 
 class Text { 
     private $output = '';
+    protected static $analyzer = null;
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
@@ -24,6 +25,10 @@ class Text {
 
     public function getExtension() {
         return 'txt';
+    }
+
+    public function setAnalyzer($name) {
+        \Report\Format\Text::$analyzer = $name;
     }
 }
 

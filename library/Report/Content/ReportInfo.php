@@ -43,8 +43,6 @@ class ReportInfo {
         $this->mysql = $client;
     }
     
-    public function toMarkdown() { }
-    
     public function toArray() {
         return $this->list;
     }

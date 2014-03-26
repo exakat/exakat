@@ -2,9 +2,8 @@
 
 namespace Report\Template;
 
-class HashTable {
+class HashTable extends \Report\Template {
     private $hash = array('Empty' => 'hash');
-//    private $sort = HashTable::SORT_NONE;
     private $summary = false;
 
     private $headerName = 'Item';
@@ -19,13 +18,14 @@ class HashTable {
     const SORT_REV_KEY = 4;
     
     public function render($output) {
-        $renderer = $output->getRenderer('HashTable');
-        
         if ($this->countedValues) {
-            $renderer->render($output, $this->data->toCountedArray());
+            $data = $this->data->toCountedArray();
         } else {
-            $renderer->render($output, $this->data->toArray());
+            $data = $this->data->toArray();
         }
+        
+        $renderer = $output->getRenderer('HashTable');
+        $renderer->render($output, $data);
     }
     
     function setContent($data) {

@@ -42,8 +42,9 @@ class Premier {
         $ReportInfo->setMySQL($this->db);
         $ReportInfo->collect();
 
-        $this->addContent('HashTable', $ReportInfo); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
+        $ht = $this->addContent('HashTable', $ReportInfo); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+        $ht->setAnalyzer('ReportInfo');
+        
         $this->createH1('Analyzer report');
 
         ///// Application analyzes 
@@ -80,9 +81,18 @@ class Premier {
 
         if (count($analyzes) > 0) {
             $h1 = false;
+
+            $analyzer = new \Report\Content\AnalyzerResultCounts();
+            $analyzer->setNeo4j($this->client);
+            $analyzer->setAnalyzers($analyzes);
+            $h = $this->createH2($analyzer->getName());
+            $h = $this->addContent('HashTable', $analyzer);
+
+            foreach($analyzes as $a) {
+                $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
             
-            $analyzer = \Analyzer\Analyzer::getInstance('Common/Bunch', $this->client);
-            $analyzer->setBunch($analyzes);
+//            $analyzer = \Analyzer\Analyzer::getInstance('Common/Bunch', $this->client);
+//            $analyzer->setBunch($analyzes);
             
                 /*
                 if (!$analyzer->checkPhpVersion('5.3.26')) {
@@ -103,8 +113,12 @@ class Premier {
                     continue;
                 }
                 */
-
-            $this->addContent('Horizontal', $analyzer);
+                
+                if ($analyzer->hasResults()) {
+                    $h = $this->createH2($analyzer->getName());
+                    $h = $this->addContent('Horizontal', $analyzer);
+                }
+            }
                 
             // defined here, but for later use
             $defs = new \Report\Content\Definitions($client);
@@ -163,7 +177,7 @@ class Premier {
         }
 
         $this->createH1('Documentation');
-        $this->addContent('Definitions', $defs->getDefinitions());
+        $this->addContent('Definitions', $defs);
         
         return true;
     }

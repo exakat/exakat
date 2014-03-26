@@ -2,7 +2,7 @@
 
 namespace Report\Format\Csv;
 
-class Horizontal extends \Report\Format\Html { 
+class Horizontal extends \Report\Format\Csv { 
     public function render($output, $data) {
         foreach($data as $row) {
             $array = array();

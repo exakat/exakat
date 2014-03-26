@@ -4,6 +4,7 @@ namespace Report\Format;
 
 class Markdown { 
     private $output = '';
+    protected static $analyzer = null;
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
@@ -24,6 +25,10 @@ class Markdown {
 
     public function getExtension() {
         return 'md';
+    }
+
+    public function setAnalyzer($name) {
+        \Report\Format\Markdown::$analyzer = $name;
     }
 }
 

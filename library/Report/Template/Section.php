@@ -11,10 +11,7 @@ class Section {
 
     private $content = array();
     
-    function __construct() {
-    }
-    
-    function addSection($name, $level = 1) {
+    public function addSection($name, $level = 1) {
         $this->currentSection = new Section($name);
         $this->currentSection->setLevel($level);
         $this->sections[] = $this->currentSection;
@@ -22,7 +19,7 @@ class Section {
         return $this->currentSection;
     }
     
-    function addContent($type, $data = null) {
+    public function addContent($type, $data = null) {
         $type = 'Report\\Template\\'.$type;
         $content = new $type();
         $content->setContent($data);
@@ -45,37 +42,37 @@ class Section {
         }
     }
 
-    function setLevel($level = 0) {
+    public function setLevel($level = 0) {
         $this->level = $level;
     }
 
-    function getLevel() {
+    public function getLevel() {
         return $this->level;
     }
 
-    function getCurrent() {
+    public function getCurrent() {
         return $this->currentSection;
     }
 
-    function getName() {
+    public function getName() {
         return $this->name;
     }
 
-    function getId() {
+    public function getId() {
         return str_replace(array(' ', '('  , ')'  ), 
                            array('-', '', ''),
                            $this->name);
     }
     
-    function getSections() {
+    public function getSections() {
         return $this->sections;
     }
 
-    function getContent() {
+    public function getContent() {
         return $this->content;
     }
 
-    function toText() {
+    public function toText() {
         if ($this->level == 0) { 
             return ''; // case of the root section
         }
@@ -97,7 +94,7 @@ class Section {
         return $report;
     }
 
-    function toMarkDown() {
+    public function toMarkDown() {
         if ($this->level == 0) { 
             return ''; // case of the root section
         }

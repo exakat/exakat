@@ -3,7 +3,11 @@
 namespace Report\Format\Ace;
 
 class Horizontal extends \Report\Format\Ace { 
+    static $horizontal_counter = 1;
+    
     public function render($output, $data) {
+        $count = \Report\Format\Ace\Horizontal::$horizontal_counter++;
+
         $html = '';
         foreach($data as $row) {
 $html .= <<<HTML
@@ -18,7 +22,7 @@ HTML;
             }
 
         $html = <<<HTML
-								<table id="sample-table-2" class="table table-striped table-bordered table-hover">
+								<table id="sample-table-$count" class="table table-striped table-bordered table-hover">
 									<thead>
 										<tr>
 											<th>Code</th>

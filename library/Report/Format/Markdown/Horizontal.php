@@ -4,6 +4,7 @@ namespace Report\Format\Markdown;
 
 class Horizontal extends \Report\Format\Markdown { 
     public function render($output, $data) {
+        if (count($data) == 0) { return "\nNo results to display\n"; }
         $markdown = '';
         foreach($data as $row) {
 $markdown .= <<<MARKDOWN
@@ -20,6 +21,7 @@ MARKDOWN;
 | A |B |
 | -------:        | -------:          |
 $markdown
+
 MARKDOWN;
 
         $output->push("\n".trim($markdown)."\n");

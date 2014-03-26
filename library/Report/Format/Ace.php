@@ -6,6 +6,7 @@ class Ace {
     private $output = '';
     private $last = '';
     private $files = array();
+    protected static $analyzer = null;
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
@@ -44,6 +45,8 @@ class Ace {
     
     protected function toFile2($filename, $data) {
         $section_name = $data->getName();
+        
+        $table_count = \Report\Format\Ace\Horizontal::$horizontal_counter; 
         
         $html = <<<HTML
 <!DOCTYPE html>
@@ -214,7 +217,8 @@ class Ace {
 
 		<script type="text/javascript">
 			jQuery(function($) {
-				var oTable1 = $('#sample-table-2').dataTable( {
+			    for (var i=0; i < {$table_count} ;i++)
+				var oTable1 = $('#sample-table-' + i).dataTable( {
 				"aoColumns": [
 			      null, null,null, null, 
 				] } );
@@ -266,6 +270,10 @@ HTML;
 
     public function getExtension() {
         return 'html';
+    }
+
+    public function setAnalyzer($name) {
+        \Report\Format\Ace::$analyzer = $name;
     }
 }
 

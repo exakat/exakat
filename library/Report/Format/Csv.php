@@ -4,6 +4,7 @@ namespace Report\Format;
 
 class Csv { 
     private $output = array();
+    protected static $analyzer = null;
     
     public function render($output, $data) {
         $output->push(array(" Text for ".get_class($this).""));
@@ -31,6 +32,10 @@ class Csv {
 
     public function getExtension() {
         return 'csv';
+    }
+
+    public function setAnalyzer($name) {
+        \Report\Format\Csv::$analyzer = $name;
     }
 }
 

@@ -7,7 +7,8 @@ class Definitions {
     public function render($output) {
         $renderer = $output->getRenderer('Definitions');
         
-        $renderer->render($output, $this->data);
+        $renderer->setAnalyzer($this->data->getName());
+        $renderer->render($output, $this->data->getDefinitions());
     }
     
     function setContent($data) {

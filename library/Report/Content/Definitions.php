@@ -10,7 +10,6 @@ class Definitions {
     }
     
     public function getDefinitions() {
-
         $return = array();
         
         foreach($this->analyzers as $analyzer) {
@@ -19,6 +18,10 @@ class Definitions {
         }
         
         return $return;
+    }
+    
+    public function getName() {
+        return 'Definitions';
     }
 }
 

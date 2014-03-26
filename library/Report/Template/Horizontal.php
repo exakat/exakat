@@ -2,9 +2,8 @@
 
 namespace Report\Template;
 
-class Horizontal {
+class Horizontal extends \Report\Template {
     private $hash = array('Empty' => 'hash');
-//    private $sort = HashTable::SORT_NONE;
     private $summary = false;
 
     private $headerName = 'Item';
@@ -18,7 +17,16 @@ class Horizontal {
     
     public function render($output) {
         $renderer = $output->getRenderer('Horizontal');
-        
+
+        $renderer->setAnalyzer($this->data->getName());
+
+/*
+        if (!empty($this->analyzer)) {
+            foreach($data as $k => &$v) {
+                $v['analyzer'] = $this->analyzer;
+            }
+        }
+*/      
         $renderer->render($output, $this->data->toFullArray());
     }
     
@@ -44,25 +52,6 @@ class Horizontal {
 
     function setHeaderCount($name) {
         $this->headerCount = $name; 
-    }
-
-    function toMarkdown() {
-    }
-
-    function toText() {
-        $report = "";
-        
-        foreach($this->hash as $r) {
-            $row = "";
-            foreach($r as $id => $cell) {
-                $row .= " $id : $cell\n";
-            }
-            $row .= str_repeat('-', 100)."\n";
-            
-            $report .= $row;
-        }
-        
-        return $report;
     }
 }
 

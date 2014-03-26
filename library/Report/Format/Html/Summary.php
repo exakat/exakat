@@ -21,7 +21,7 @@ TEXT;
             if ($row->getName() == "Summary") { continue; }
             $text .= "<li>".$row->getName()."</li>\n";
 
-            $text .= $this->render2($row->getContent());
+            $text .= $this->render2($row->getSections());
         }
         
         $text .= "</ul>";
