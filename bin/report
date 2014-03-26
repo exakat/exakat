@@ -32,7 +32,6 @@ if ($id = array_search('-json', $args)) {
     unset($args[$id]);
     $args = array_values($args);
 } elseif ($id = array_search('-sqlite', $args)) {
-    die("No Sqlite");
     define('FORMAT', 'SQLITE');
     unset($args[$id]);
     $args = array_values($args);
@@ -42,7 +41,7 @@ if ($id = array_search('-json', $args)) {
     unset($args[$id]);
     $args = array_values($args);
 } elseif ($id = array_search('-markdown', $args)) {
-    define('FORMAT', 'Markdown');
+    define('FORMAT', 'MARKDOWN');
     unset($args[$id]);
     $args = array_values($args);
 } elseif ($id = array_search('-pdf', $args)) {
@@ -123,64 +122,6 @@ if ($size < 1024) {
 
 if (OUTPUT) {
     print $text;
-}
-
-$extensions = array('JSON' => 'json',
-                    'HTML' => 'html',
-                    'MARKDOWN' => 'md',
-                    'ODT' => 'odt',
-                    'PDF' => 'pdf',
-                    'TEXT' => 'txt',
-                    'SQLITE' => 'sqlite',
-                    'CSV' => 'csv');
-
-if (FILE) {
-    $name = FILE.'.'.$extensions[FORMAT];
-    if (file_exists($name)) {
-        print "$name already exists. Aborting\n";
-        die();
-    }
-
-    if (FORMAT == 'ODT') {
-        $name1 = FILE.'.tmp.'.$extensions['HTML'];
-        file_put_contents($name1, $text);
-
-        $name = FILE.'.'.$extensions[FORMAT];
-        shell_exec('pandoc -o '.$name.' '.$name1);
-        unlink($name1);
-    } elseif (FORMAT == 'PDF') {
-        $name1 = FILE.'.tmp.'.$extensions['HTML'];
-        file_put_contents($name1, $text);
-
-        $name = FILE.'.'.$extensions[FORMAT];
-        shell_exec('wkhtmltopdf '.$name1.' '.$name);
-        unlink($name1);
-    } elseif (FORMAT == 'CSV') {
-        $fp = fopen($name, 'w');
-        foreach($text as $t) {
-            fputcsv($fp, $t);
-        }
-        fclose($fp);
-    } elseif (FORMAT == 'SQLITE') {
-        $db = new SQLite3($name);
-
-        $results = $db->query('CREATE TABLE reports (id INTEGER PRIMARY KEY AUTOINCREMENT, analyzer TEXT, value TEXT, count INT)');
-        foreach($text as $t) {
-            foreach($t as $k => $v) {
-                $t[$k] = $db->escapeString($v);
-            }
-            $db->query("INSERT INTO reports (analyzer, value, count) VALUES ('".join("', '", $t)."')");
-        }
-    } elseif (FORMAT == 'HTML') {
-        file_put_contents($name, $text);
-        
-        if (!file_exists( dirname($name).'/media')) {
-            mkdir(dirname($name).'/media', 0755);
-        }
-        copy('media/hartija.css', dirname($name).'/media/hartija.css');
-    } else {
-        file_put_contents($name, $text);
-    }
 }
 
 ?>
