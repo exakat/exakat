@@ -26,9 +26,10 @@ class Phpcode extends TokenAuto {
                                   2 => array('token' => 'T_END'),
         );
         
-        $this->actions = array('transform'  => array( 1 => 'CODE'),
-                               'atom'       => 'Phpcode',
-                               'property'   => array('closing_tag' => 'false'));
+        $this->actions = array('transform'     => array( 1 => 'CODE'),
+                               'atom'          => 'Phpcode',
+                               'property'      => array('closing_tag' => 'false'),
+                               'cleanIndex'    => true);
         $this->checkAuto();
 
 // <?php ? > (empty script 

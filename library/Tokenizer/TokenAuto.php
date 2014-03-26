@@ -271,7 +271,7 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
     g.addEdge(it.in('FILE').next(), tvoid, 'FILE');
     g.addEdge(ppp, tvoid, 'VALUE');
 
-    tstatic = g.addVertex(null, [code:var.code, atom:'$atom', token:'T_STATIC', virtual:true, line:it.line]);
+    tstatic = g.addVertex(null, [code:var.code, atom:'$atom', token:'T_STATIC', virtual:true, line:it.line, fullcode: var.code]);
     g.addEdge(null, it.in('CLASS').next(),     tstatic, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  tstatic, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
     g.addEdge(null, it.in('NAMESPACE').next(), tstatic, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -303,7 +303,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.removeEdge(it.outE('LEFT').next());
     g.removeEdge(it.outE('RIGHT').next());
     
-    tstatic = g.addVertex(null, [code:var.code, atom:'$atom', token:'T_STATIC', virtual:true, line:it.line]);
+    tstatic = g.addVertex(null, [code:var.code, atom:'$atom', token:'T_STATIC', virtual:true, line:it.line, fullcode: var.code]);
     g.addEdge(null, it.in('CLASS').next(),     tstatic, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  tstatic, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
     g.addEdge(null, it.in('NAMESPACE').next(), tstatic, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -732,6 +732,9 @@ $fullcode
 
         if (isset($actions['to_option'])) {
             $position = str_repeat(".out('NEXT')", $actions['to_option']);
+
+            $ppp = new _Ppp(Token::$client);
+            $fullcode = $ppp->fullcode();
             
             $qactions[] = "
 /* turn the current token to an option of one of the next tokens (default 1)*/
@@ -745,6 +748,7 @@ it.bothE('NEXT').each{ g.removeEdge(it); }
 it.fullcode = it.code;
 
 fullcode = ppp;
+$fullcode
 ";
             unset($actions['to_option']);
         }    
@@ -1418,6 +1422,8 @@ if (it.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).any()) {
 if (it.both('NEXT').count() == 0) {
     it.inE('INDEXED').each{ g.removeEdge(it); }
 }
+
+it.setProperty('NEXT_COUNT', it.both('NEXT').count());
 ";
             unset($actions['checkForNext']);
         }
