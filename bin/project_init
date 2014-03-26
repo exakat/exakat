@@ -46,7 +46,6 @@ if (!file_exists('./projects/'.$project.'/config.ini')) {
     print './projects/'.$project.'/config.ini already exists. Ignoring'."\n";
 }
 
-file_put_contents('./projects/'.$project.'/progress.log', '0');
 print shell_exec('chmod -R g+w ./projects/'.$project);
 
 if (!empty($git_url) && !file_exists('./projects/'.$project.'/code/')) {
