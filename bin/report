@@ -398,7 +398,6 @@ if (FILE) {
         $db = new SQLite3($name);
 
         $results = $db->query('CREATE TABLE reports (id INTEGER PRIMARY KEY AUTOINCREMENT, analyzer TEXT, value TEXT, count INT)');
-        print $db->lastErrorMsg();
         foreach($text as $t) {
             foreach($t as $k => $v) {
                 $t[$k] = $db->escapeString($v);
