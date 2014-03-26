@@ -1353,7 +1353,7 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = "
 /* Check for Next */
 
-if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Try', 'Ternary', ]}.any() && 
+if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Try', 'Ternary', 'While' ]}.any() && 
     it.in('NEXT').in('NEXT').filter{ !(it.token in ['T_ECHO'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
@@ -1364,29 +1364,29 @@ if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function',
     g.addEdge(sequence, previous, 'ELEMENT');
     previous.setProperty('order', 0);
     
-    g.addEdge(previous.in('NEXT').next(), sequence, 'NEXT');
+    previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
     previous.bothE('NEXT').each{ g.removeEdge(it); }
 }
 
 if (it.out('NEXT').has('atom', 'Sequence').any()) {
     sequence = it;
     c = sequence.out('ELEMENT').count();
-    next = it.out.next();
+    suivant = it.out('NEXT').next();
     
-    next.out('ELEMENT').each{
+    suivant.out('ELEMENT').each{
         g.removeEdge(it.inE('ELEMENT').next());
         
         g.addEdge(sequence, it, 'ELEMENT');
         it.setProperty('order', c + it.order);
     }
     
-    g.addEdge(sequence, next.out('NEXT').next(), 'NEXT');
+    g.addEdge(sequence, suivant.out('NEXT').next(), 'NEXT');
 
-    next.bothE('NEXT').each{ g.removeEdge(it); }
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), next, 'DELETE');
+    suivant.bothE('NEXT').each{ g.removeEdge(it); }
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), suivant, 'DELETE');
 }
 
-if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For' ]}.any()) {
+if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode' ]}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     

@@ -55,8 +55,8 @@ class _While extends TokenAuto {
         );
         
         $this->actions = array('addEdge'     => array(4 => array('Void' => 'LEVEL')),
-                               'keepIndexed'          => true,
-                               'cleanIndex'           => true);
+                               'keepIndexed' => true,
+                               'cleanIndex'  => true);
         $this->checkAuto();        
         
          // { lone block } While( condition ) ;
@@ -86,8 +86,8 @@ class _While extends TokenAuto {
                                    5 => array('filterOut2' => Token::$instruction_ending),
         );
         
-        $this->actions = array('while_to_block'    => true,
-                               'keepIndexed'       => true);
+        $this->actions = array('while_to_block' => true,
+                               'keepIndexed'    => true);
         $this->checkAuto();      
         
          //  syntax   While( ) {}
@@ -133,7 +133,11 @@ class _While extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "while " + it.out("CONDITION").next().fullcode + " " + it.out("LOOP").next().fullcode;';
+        return <<<GREMLIN
+
+fullcode.fullcode = "while " + fullcode.out("CONDITION").next().fullcode + " " + fullcode.out("LOOP").next().fullcode;
+GREMLIN;
+
     }
 
 }
