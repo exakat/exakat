@@ -77,22 +77,28 @@ sleep(2);
 
 logProgress($project, $progress++ / $total_steps);
 
-unlink('./projects/'.$project.'/log/analyze.final.log');
+if (file_exists('./projects/'.$project.'/log/analyze.final.log')) {
+    unlink('./projects/'.$project.'/log/analyze.final.log');
+}
+
 shell_exec('php bin/analyze -p '.$project.' > ./projects/'.$project.'/log/analyze.final.log');
 logProgress($project, $progress++ / $total_steps);
 print "Project analyzed\n";
 
-unlink('./projects/'.$project.'/log/stats.txt');
+if (file_exists('./projects/'.$project.'/log/stats.txt')) {
+    unlink('./projects/'.$project.'/log/stats.txt');
+}
 shell_exec('php bin/stat > ./projects/'.$project.'/stats.txt');
 logProgress($project, $progress++ / $total_steps);
 
-shell_exec('rm ./projects/'.$project.'/report.md; php bin/report '.$project.' -f ./projects/'.$project.'/report -markdown');
+shell_exec('rm ./projects/'.$project.'/report.md;     php bin/report '.$project.' -f ./projects/'.$project.'/report -markdown');
 shell_exec('rm ./projects/'.$project.'/report.sqlite; php bin/report '.$project.' -f ./projects/'.$project.'/report -sqlite');
-shell_exec('rm ./projects/'.$project.'/report.html; php bin/report '.$project.' -f ./projects/'.$project.'/report -ace');
-shell_exec('rm ./projects/'.$project.'/report.html; php bin/report '.$project.' -f ./projects/'.$project.'/report -html');
-shell_exec('rm ./projects/'.$project.'/report.pdf; php bin/report '.$project.' -f ./projects/'.$project.'/report -pdf');
-shell_exec('rm ./projects/'.$project.'/report.odt; php bin/report '.$project.' -f ./projects/'.$project.'/report -odt');
-shell_exec('rm ./projects/'.$project.'/report.txt; php bin/report '.$project.' -f ./projects/'.$project.'/report -text');
+shell_exec('rm ./projects/'.$project.'/report.sqlite; php bin/report '.$project.' -f ./projects/'.$project.'/report -csv');
+shell_exec('rm -rf ./projects/'.$project.'/report;    php bin/report '.$project.' -f ./projects/'.$project.'/report -ace');
+shell_exec('rm ./projects/'.$project.'/report.html;   php bin/report '.$project.' -f ./projects/'.$project.'/report -html');
+//shell_exec('rm ./projects/'.$project.'/report.pdf;    php bin/report '.$project.' -f ./projects/'.$project.'/report -pdf');
+//shell_exec('rm ./projects/'.$project.'/report.odt;    php bin/report '.$project.' -f ./projects/'.$project.'/report -odt');
+shell_exec('rm ./projects/'.$project.'/report.txt;    php bin/report '.$project.' -f ./projects/'.$project.'/report -text');
 
 logProgress($project, $progress++ / $total_steps);
 
@@ -100,8 +106,6 @@ print "Project reported\n";
 $db->query('UPDATE project_runs SET `date_finish` = NOW() WHERE id = '.$project_run);
 
 function logProgress($project, $percent) {
-    file_put_contents("./projects/$project/progress.log", $percent);
-
     $mid = mysqli_connect('localhost', 'wordpress', 'wordpress', 'wordpress');
     mysqli_query($mid, "UPDATE exakat_projects SET progress = $percent WHERE name='$project'");
     print mysqli_error($mid);
