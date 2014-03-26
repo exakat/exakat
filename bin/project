@@ -91,14 +91,14 @@ if (file_exists('./projects/'.$project.'/log/stats.txt')) {
 shell_exec('php bin/stat > ./projects/'.$project.'/stats.txt');
 logProgress($project, $progress++ / $total_steps);
 
-shell_exec('rm ./projects/'.$project.'/report.md;     php bin/report '.$project.' -f ./projects/'.$project.'/report -markdown');
-shell_exec('rm ./projects/'.$project.'/report.sqlite; php bin/report '.$project.' -f ./projects/'.$project.'/report -sqlite');
-shell_exec('rm ./projects/'.$project.'/report.sqlite; php bin/report '.$project.' -f ./projects/'.$project.'/report -csv');
-shell_exec('rm -rf ./projects/'.$project.'/report;    php bin/report '.$project.' -f ./projects/'.$project.'/report -ace');
-shell_exec('rm ./projects/'.$project.'/report.html;   php bin/report '.$project.' -f ./projects/'.$project.'/report -html');
-//shell_exec('rm ./projects/'.$project.'/report.pdf;    php bin/report '.$project.' -f ./projects/'.$project.'/report -pdf');
-//shell_exec('rm ./projects/'.$project.'/report.odt;    php bin/report '.$project.' -f ./projects/'.$project.'/report -odt');
-shell_exec('rm ./projects/'.$project.'/report.txt;    php bin/report '.$project.' -f ./projects/'.$project.'/report -text');
+$reports = array('Premier', 'Flat');
+$formats = array('markdown', 'sqlite', 'ace', 'html', 'text', /* 'pdf', 'odt' */);
+
+foreach($reports as $report) {
+    foreach($formats as $format) {
+        print shell_exec('rm ./projects/'.$project.'/'."{$report}-{$format}".'.*;     php bin/report '.$project.' -f ./projects/'.$project.'/'."{$report}-{$format}".' -'.$format.' -r '.$report);
+    }
+}
 
 logProgress($project, $progress++ / $total_steps);
 
