@@ -43,7 +43,7 @@ class _While extends TokenAuto {
         $this->checkAuto();        
 
          //  (Instruction no ;) While( condition ) ;
-        $this->conditions = array(-2 => array('notToken'  => 'T_DO'), 
+        $this->conditions = array(-2 => array('notToken'  => array('T_DO', 'T_ELSE', 'T_ELSEIF')), 
                                   -1 => array('atom'  => 'yes',
                                               'notToken' => array('T_ELSE', 'T_ELSEIF', 'T_OPEN_CURLY')), 
                                    0 => array('token' => _While::$operators),
@@ -60,7 +60,7 @@ class _While extends TokenAuto {
         $this->checkAuto();        
         
          // { lone block } While( condition ) ;
-        $this->conditions = array(-2 => array('filterOut' => array("T_DO" , 'T_ELSE')),
+        $this->conditions = array(-2 => array('filterOut' => array("T_DO" , 'T_ELSE', 'T_ELSEIF')),
                                   -1 => array('atom'      => "Sequence"),
                                    0 => array('token'     => _While::$operators),
                                    1 => array('token'     => 'T_OPEN_PARENTHESIS'),
