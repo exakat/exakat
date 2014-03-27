@@ -98,6 +98,25 @@ if (!file_exists('neo4j')) {
     }
 }
 
+// batch-importer
+if (!file_exists('batch-import')) {
+    $stats['batch-import']['installed'] = 'No';
+} else {
+    if (!file_exists('batch-import/target/batch-import-jar-with-dependencies.jar')) {
+        $stats['batch-import']['compiled'] = 'No';
+    } else {
+        $stats['batch-import']['installed'] = 'No';
+        $stats['batch-import']['compiled'] = 'Yes';
+    
+        $file = file('batch-import/changelog.txt');
+        $stats['batch-import']['version'] = trim($file[0]);
+    }
+    
+    $res = split("\n", shell_exec('mvn -v 2>&1'));
+    $stats['batch-import']['maven'] = trim($res[0]);
+    
+    
+}
 
 foreach($stats as $section => $details) {
     print "$section : \n";

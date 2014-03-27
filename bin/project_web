@@ -11,11 +11,13 @@ if (isset($argv[1])) {
 
         $res = $db->query('SELECT id, name, vcs_url FROM exakat_projects WHERE id = '.$project_id);
         if (!$res) { 
-            print "No project for id {$exakat['id']}; Stopping\n";
+            print "No project for id {$project_id}; Stopping\n";
             die();
         }
     
         $exakat = $res->fetch_array();
+        print_r($exakat);
+        die();
         process_project($exakat);
     } elseif ($argv[1] == '-D') {
         print "Starting demon system\n";
@@ -40,6 +42,16 @@ if (isset($argv[1])) {
         } while (1);
         
     } else {
+        $project_name = $argv[1];
+        $res = $db->query('SELECT id, name, vcs_url FROM exakat_projects WHERE name = "'.$project_name.'"');
+
+        if ($res) { 
+            $exakat = $res->fetch_array();
+            print "Project $project_name has id {$exakat['id']}\n";
+            process_project($exakat);
+            die();
+        }
+    
         print "Don't know what to do. Aborting\n";
         die();
     }
