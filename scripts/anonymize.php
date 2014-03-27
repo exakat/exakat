@@ -25,12 +25,14 @@ foreach($tokens as $t) {
                 $t[1] = '$'.$variables++;
                 break;
             case T_CONSTANT_ENCAPSED_STRING:
-                if (in_array($strings++, array('IF', 'AS', 'DO', 'OR'))) { print $strings; $strings++; }
-                $t[1] = "'".$strings++."'";
+                $strings++;
+                if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { print "Skip T_CONSTANT_ENCAPSED_STRING : $strings\n"; $strings++; }
+                $t[1] = "'".$strings."'";
                 break;
             case T_STRING:
             case T_ENCAPSED_AND_WHITESPACE :
-                if (in_array($strings++, array('IF', 'AS', 'DO', 'OR'))) { print $strings; $strings++; }
+                $strings++;
+                if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { print "Skip T_ENCAPSED_AND_WHITESPACE : $strings\n"; $strings++; }
                 $t[1] = $strings;
                 break;
             case T_DOC_COMMENT:
@@ -42,7 +44,12 @@ foreach($tokens as $t) {
                 $t[1] = $strings++;
                 break;
 
+            case T_INT_CAST : 
             case T_RETURN :
+            case T_SWITCH : 
+            case T_CASE : 
+            case T_DEFAULT : 
+            case T_ENDSWITCH : 
             case T_ECHO : 
             case T_ENDFOREACH : 
             case T_EMPTY : 
@@ -104,6 +111,7 @@ foreach($tokens as $t) {
                 break;
             default: 
                 print token_name($t[0])."\n";
+                print_r($t);
         }
 
         $php .= $t[1];
