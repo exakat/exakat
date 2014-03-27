@@ -16,8 +16,6 @@ if (isset($argv[1])) {
         }
     
         $exakat = $res->fetch_array();
-        print_r($exakat);
-        die();
         process_project($exakat);
     } elseif ($argv[1] == '-D') {
         print "Starting demon system\n";
