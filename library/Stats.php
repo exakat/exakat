@@ -41,7 +41,7 @@ class Stats {
         $this->stats['NEXT_count']    = $this->queryOne("g.E.has('label', 'NEXT').inV{$this->file_filter}.count()");
         $this->stats['INDEXED_count'] = $this->queryOne("g.E.has('label', 'INDEXED').inV{$this->file_filter}.count()");
         $this->stats['file_count']    = $this->queryOne("m = [:]; g.V.inE('FILE').file.groupCount(m).iterate(); m.size();");
-        $this->stats['no_fullcode']    = $this->queryOne("g.V.except([g.v(0)]).has('fullcode', null).filter{!(it.token in ['E_FILE', 'E_NAMESPACE', 'E_CLASS', 'E_FUNCTION'])}.count();");
+        $this->stats['no_fullcode']    = $this->queryOne("g.V.except([g.v(0)]).has('fullcode', null).hasNot('index', 'true').filter{!(it.token in ['E_FILE', 'E_NAMESPACE', 'E_CLASS', 'E_FUNCTION'])}.count();");
     }
     
     function queryOne($query) {
