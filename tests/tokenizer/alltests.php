@@ -62,7 +62,7 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
             
             $diff = array_diff($sources, $methods);
             if ($diff) {
-                print "missing ".count($diff)." test methods in Test/$name.php\n";
+                print "missing ".count($diff)." test methods in Test/$name.php \n";
                 foreach($diff as $d) {
                     print "    public function test$name$d()  { \$this->generic_test('$name.$d'); }\n";
                 }
@@ -71,7 +71,7 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
 
             $diff = array_diff($methods, $exp);
             if ($diff) {
-                print "missing ".count($diff)." results for tests in Test/$name.php\n";
+                print "missing ".count($diff)." results for tests in Test/$name.php (".join(' ', $diff).")\n";
                 print "   php prepareexp.php $name\n";
                 print "\n";
             }

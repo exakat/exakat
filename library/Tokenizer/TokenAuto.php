@@ -2182,7 +2182,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_THROW', 'T_CLONE', 'T_RETURN', 
         'T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES',
         'T_ABSTRACT', 'T_FINAL', 'T_STATIC', 'T_CONST', 
-        'T_AT', 
+        'T_AT', 'T_CASE', 
         ];
 
 list_after = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
