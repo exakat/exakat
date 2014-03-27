@@ -104,6 +104,7 @@ if (!file_exists('batch-import')) {
 } else {
     if (!file_exists('batch-import/target/batch-import-jar-with-dependencies.jar')) {
         $stats['batch-import']['compiled'] = 'No';
+        // compile with "mvn clean compile assembly:single"
     } else {
         $stats['batch-import']['installed'] = 'No';
         $stats['batch-import']['compiled'] = 'Yes';
