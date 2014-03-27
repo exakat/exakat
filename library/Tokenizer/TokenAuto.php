@@ -1250,17 +1250,8 @@ e = d.out('NEXT').next();
 
 it.setProperty('code', 'Phpcodemiddle');
 
-x = g.addVertex(null, [code:'Sequence With Phpcodemiddle', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
-g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
-g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
-g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
-g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
-c.setProperty('order', 0);
-
-
-g.addEdge(a, x, 'NEXT');
-g.addEdge(x, e, 'NEXT');
-g.addEdge(x, c, 'ELEMENT');
+g.addEdge(a, c, 'NEXT');
+g.addEdge(c, e, 'NEXT');
 
 d.bothE('NEXT').each{ g.removeEdge(it); }
 it.bothE('NEXT').each{ g.removeEdge(it); }
