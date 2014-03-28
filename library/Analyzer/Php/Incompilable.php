@@ -12,7 +12,8 @@ class Incompilable extends Analyzer\Analyzer {
     }
     
     public function toArray() {
-        $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\Php\\\\Incompilable']].out.fullcode"; 
+//        $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\Php\\\\Incompilable']].out.fullcode"; 
+        $queryTemplate = "g.V.has('token', 'E_FILE').has('compile', 'false').fullcode"; 
         $vertices = $this->query($queryTemplate);
 
         $report = array();
@@ -23,6 +24,13 @@ class Incompilable extends Analyzer\Analyzer {
         } 
         
         return $report;
+    }
+
+    public function hasResults() {
+        $queryTemplate = "g.V.has('token', 'E_FILE').has('compile', 'false').count()"; 
+        $vertices = $this->query($queryTemplate);
+        
+        return $vertices[0][0] > 0;
     }
     
 }
