@@ -24,6 +24,9 @@ class Csv {
     }
 
     static function finalize() {
+        if (!file_exists('nodes.csv')) {
+            return false;
+        }
         print shell_exec(<<<SHELL
 mv nodes.csv ./batch-import/sampleme/
 mv rels.csv ./batch-import/sampleme/
@@ -35,6 +38,7 @@ cd ..
 sh scripts/restart.sh
 SHELL
 );
+        return true;
     }
     
     function save_chunk() {
