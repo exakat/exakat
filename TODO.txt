@@ -228,3 +228,9 @@ spot #! lines and mark the file as executable commandline
 check that report are all done in default
 
 Check for empty __construct();
+
+List empty scripts, just like incompilables
+Make a diagramm of the differents layers of the software
+
+Update Ace/Hastable to suppoort the actual number of columns (just like Horizontal report).
+
