@@ -12,7 +12,7 @@ class Flat {
 
     public function __construct($client) {
         $this->client = $client;
-        $this->content = new \Report\Template\Section('');
+        $this->content = new \Report\Template\Section('index', 0);
         $this->current = $this->content;
         $this->root    = $this->content;
     }
@@ -23,27 +23,27 @@ class Flat {
     
     public function prepare() {
         ///// Application analyzes 
-        $analyzes = array('Structures\\StrposCompare', 
-                          'Structures\\Iffectation',
-                          'Structures\\ErrorReportingWithInteger',
-                          'Structures\\ForWithFunctioncall',
-                          'Structures\\ForeachSourceNotVariable',
-                          'Variables\\VariableUsedOnce',
-                          'Variables\\VariableNonascii',
-                          'Structures\\EvalUsage',
-                          'Structures\\OnceUsage',
-                          'Structures\\VardumpUsage',
-                          'Structures\\PhpinfoUsage',
-                          'Classes\\NonPpp',
+        $analyzes = array('Structures/StrposCompare', 
+                          'Structures/Iffectation',
+                          'Structures/ErrorReportingWithInteger',
+                          'Structures/ForWithFunctioncall',
+                          'Structures/ForeachSourceNotVariable',
+                          'Variables/VariableUsedOnce',
+                          'Variables/VariableNonascii',
+                          'Structures/EvalUsage',
+                          'Structures/OnceUsage',
+                          'Structures/VardumpUsage',
+                          'Structures/PhpinfoUsage',
+                          'Classes/NonPpp',
                           'Php/Incompilable',
                           'Constants/ConstantStrangeNames',
 
-                          'Structures\\NotNot',
-                          'Structures\\Noscream',
-                          'Structures\\toStringThrowsException',
-                          'Structures\\CalltimePassByReference',
-                          'Structures\\Break0',
-                          'Structures\\BreakNonInteger',
+                          'Structures/NotNot',
+                          'Structures/Noscream',
+                          'Structures/toStringThrowsException',
+                          'Structures/CalltimePassByReference',
+                          'Structures/Break0',
+                          'Structures/BreakNonInteger',
                           );
 
         // hash with config
@@ -79,8 +79,11 @@ class Flat {
                     continue;
                 }
                 */
-
-                $list = $this->addContent('Horizontal', $analyzer);
+                
+                if ($analyzer->hasResults()) {  
+                    $this->createH2($analyzer->getName());
+                    $this->addContent('Horizontal', $analyzer);
+                }
             }
         }
         
@@ -133,10 +136,13 @@ class Flat {
         $class = "\\Report\\Format\\$format";
         $this->output = new $class();
         
-        foreach($this->root->getContent() as $c) {
+        $this->root->render($this->output);
+/*
+        foreach($this->root->getContent() as $id => $c) {
+            print "$id)\n";
             $c->render($this->output);
         }
-        
+        */
         if (isset($filename)) {
             return $this->output->toFile($filename.'.'.$this->output->getExtension());
         } else {
@@ -150,11 +156,19 @@ class Flat {
     }
 
     function createH1($name) {
-        $this->current = $this->content->addSection($name, 1);
+        $section = $this->root->addContent('Section', $name);
+        $section->setLevel(1);
+
+        $this->current = $section;
     }
 
     function createH2($name) {
-        $this->current = $this->content->getCurrent()->addSection($name, 2);
+        // @todo check that current is level 1 ? 
+        $section = $this->current->addContent('Section', $name);
+        $section->setLevel(2);
+
+        $this->current = $section;
+
     }
 
     function createH3($name) {

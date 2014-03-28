@@ -165,14 +165,18 @@ class Premier {
                 }
                 */
 
-                $this->createH2($analyse->getName());
-                $this->addContent('Text', $analyse->getDescription());
-                if (in_array($name, array('Php/Compilable'))) {
-                    $this->addContent('Liste', $analyse);
-                } else {
-                    $ht = $this->addContent('HashTable', $analyse);
-                    $ht->setCountedValues();
-                }
+                if ($analyse->hasResults()) {
+                    $this->createH2($analyse->getName());
+                    $this->addContent('Text', $analyse->getDescription());
+
+                    if (in_array($name, array('Php/Incompilable'))) {
+                        $this->addContent('Liste', $analyse);
+                    } else {
+                        $ht = $this->addContent('HashTable', $analyse);
+                        $ht->setCountedValues();
+                    }
+
+                } 
             }
         }
 

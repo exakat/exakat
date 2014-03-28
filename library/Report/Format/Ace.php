@@ -7,6 +7,7 @@ class Ace {
     private $last = '';
     private $files = array();
     protected static $analyzer = null;
+    private $summary = '';
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
@@ -47,6 +48,26 @@ class Ace {
         $section_name = $data->getName();
         
         $table_count = \Report\Format\Ace\Horizontal::$horizontal_counter; 
+        
+        if (empty($this->summary)) {
+            $summary = '';
+        } else {
+        $summary = <<<HTML
+			<div class="sidebar" id="sidebar">
+				<ul class="nav nav-list">
+{$this->summary}
+				</ul>
+
+				<div class="sidebar-collapse" id="sidebar-collapse">
+					<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+				</div>
+
+				<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+				</script>
+			</div>
+HTML;
+        }
         
         $html = <<<HTML
 <!DOCTYPE html>
@@ -111,19 +132,7 @@ class Ace {
 				<span class="menu-text"></span>
 			</a>
 
-			<div class="sidebar" id="sidebar">
-				<ul class="nav nav-list">
-{$this->summary}
-				</ul>
-
-				<div class="sidebar-collapse" id="sidebar-collapse">
-					<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
-				</div>
-
-				<script type="text/javascript">
-					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-				</script>
-			</div>
+$summary
 
 			<div class="main-content">
 				<div class="page-content">
@@ -217,11 +226,11 @@ class Ace {
 
 		<script type="text/javascript">
 			jQuery(function($) {
-			    for (var i=0; i < {$table_count} ;i++)
-				var oTable1 = $('#sample-table-' + i).dataTable( {
-				"aoColumns": [
-			      null, null,null, null, 
-				] } );
+			    for (var i=1; i < {$table_count} ;i++)
+    				var oTable1 = $('#sample-table-' + i).dataTable( {
+	    			"aoColumns": [
+		    	      null, null
+			    	] } );
 				
 				
 				$('table th input:checkbox').on('click' , function(){

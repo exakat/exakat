@@ -22,6 +22,7 @@ HTML;
             }
 
         $html = <<<HTML
+							<p>
 								<table id="sample-table-$count" class="table table-striped table-bordered table-hover">
 									<thead>
 										<tr>
@@ -37,7 +38,7 @@ HTML;
 $html
 									</tbody>
 								</table>
-
+							</p>
 HTML;
 
         $output->push($html);

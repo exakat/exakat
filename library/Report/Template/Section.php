@@ -3,7 +3,7 @@
 namespace Report\Template;
 
 class Section {
-    private $name = 'No named section';
+    private $name = '';
     private $level = 0;
 
     private $sections = array();
@@ -59,9 +59,13 @@ class Section {
     }
 
     public function getId() {
-        return str_replace(array(' ', '('  , ')'  ), 
-                           array('-', '', ''),
-                           $this->name);
+        if (empty($this->name)) {
+            return 'index';
+        } else {
+            return str_replace(array(' ', '('  , ')'  ), 
+                               array('-', '', ''),
+                               $this->name);
+        }
     }
     
     public function getSections() {
@@ -72,49 +76,6 @@ class Section {
         return $this->content;
     }
 
-    public function toText() {
-        if ($this->level == 0) { 
-            return ''; // case of the root section
-        }
-        $report = str_repeat('#', $this->level).$this->getName()."\n";
-        
-        if (!is_null($this->content)) {
-            foreach($this->content as $content) {
-                $report .= $content->toText();
-                $report .= "\n";
-            }
-        }
-        
-        if (count($this->sections) > 0) {
-            foreach($this->sections as $section) {
-                $report .= $section->toText();
-            }
-        }
-        
-        return $report;
-    }
-
-    public function toMarkDown() {
-        if ($this->level == 0) { 
-            return ''; // case of the root section
-        }
-        $report = str_repeat('#', $this->level)." <a name=\"".$this->getId()."\"></a>".$this->getName()."\n";
-        
-        if (!is_null($this->content)) {
-            foreach($this->content as $content) {
-                $report .= $content->toMarkDown();
-                $report .= "\n";
-            }
-        }
-        
-        if (count($this->sections) > 0) {
-            foreach($this->sections as $section) {
-                $report .= $section->toMarkDown();
-            }
-        }
-        
-        return $report;
-    }
 }
 
 ?>
