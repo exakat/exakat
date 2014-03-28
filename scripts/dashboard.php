@@ -99,11 +99,11 @@ foreach($files as $file) {
     if ($file == 'projects/default/') { continue; }
     if ($file == 'projects/tests/') { continue; }
     
-    if (!file_exists($file.'report.md')) {
+    if (!file_exists($file.'Premier-markdown.md')) {
         $report_md[] = $file;
     }
 
-    if (!file_exists($file.'report.sqlite')) {
+    if (!file_exists($file.'Premier-sqlite.sqlite')) {
         $sqlite_md[] = $file;
     }
 }
