@@ -21,7 +21,9 @@ TEXT;
             if ($row->getName() == "Summary") { continue; }
             $text .= <<<HTML
 					<li>
+						<a href="{$row->getId()}.html">
 							<span class="menu-text"> {$row->getName()} </span>
+						</a>
 					</li>
 HTML;
         }

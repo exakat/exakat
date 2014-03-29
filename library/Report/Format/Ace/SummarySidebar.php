@@ -18,7 +18,6 @@ TEXT;
         $text = '';
         foreach($data as $row) {
             if (get_class($row) != "Report\\Template\\Section") { continue; }
-            if ($row->getName() == "Summary") { continue; }
             $text .= <<<HTML
 					<li>
 						<a href="{$row->getId()}.html">
