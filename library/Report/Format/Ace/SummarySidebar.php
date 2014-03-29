@@ -2,7 +2,7 @@
 
 namespace Report\Format\Ace;
 
-class Summary extends \Report\Format\Ace { 
+class SummarySidebar extends \Report\Format\Ace { 
     public function render($output, $data) {
         $text = $this->render2($data);
 
@@ -21,12 +21,16 @@ TEXT;
             if ($row->getName() == "Summary") { continue; }
             $text .= <<<HTML
 					<li>
+						<a href="{$row->getId()}.html">
+							<i class="icon-dashboard"></i>
 							<span class="menu-text"> {$row->getName()} </span>
+						</a>
 					</li>
 HTML;
         }
         
-        return "<p><ul>$text</ul></p>"; 
+        return '				<ul class="nav nav-list">
+'.$text.'</ul>'; 
     }
 }
 

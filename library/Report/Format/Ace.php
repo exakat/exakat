@@ -21,8 +21,8 @@ class Ace {
         $this->output = '';
     }
     
-    public function setSummary($output) {
-        $this->summary = $output;
+    public function setSummaryData($data) {
+        $this->summary = $data;
     }
     
     public function toFile($filename) {
@@ -49,14 +49,14 @@ class Ace {
         
         $table_count = \Report\Format\Ace\Horizontal::$horizontal_counter; 
         
-        if (empty($this->summary)) {
-            $summary = '';
-        } else {
-        $summary = <<<HTML
+        $renderSidebar = new \Report\Format\Ace\SummarySidebar();
+        $sidebar = new static();
+        
+        $renderSidebar->render($sidebar, $this->summary->getContent());
+
+        $sidebar = <<<HTML
 			<div class="sidebar" id="sidebar">
-				<ul class="nav nav-list">
-{$this->summary}
-				</ul>
+{$sidebar->getOutput()}
 
 				<div class="sidebar-collapse" id="sidebar-collapse">
 					<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -67,7 +67,9 @@ class Ace {
 				</script>
 			</div>
 HTML;
-        }
+
+
+
         
         $html = <<<HTML
 <!DOCTYPE html>
@@ -132,7 +134,7 @@ HTML;
 				<span class="menu-text"></span>
 			</a>
 
-$summary
+$sidebar
 
 			<div class="main-content">
 				<div class="page-content">
@@ -283,6 +285,10 @@ HTML;
 
     public function setAnalyzer($name) {
         \Report\Format\Ace::$analyzer = $name;
+    }
+    
+    public function getOutput() {
+        return $this->output;
     }
 }
 

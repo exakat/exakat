@@ -180,57 +180,17 @@ class Premier {
             }
         }
 
-        $this->createH1('Documentation');
+        $this->createH1('Annexes');
+        $this->createH2('Documentation');
         $this->addContent('Definitions', $defs);
         
         return true;
     }
     
     public function render($format, $filename = null) {
-    /*
-        $this->output = new \Report\Format\Text();
-        
-        foreach($this->content->getContent() as $c) {
-            $c->render($this->output);
-        }
-        
-        if (isset($filename)) {
-            $this->output->toFile($filename.'.txt');
-        }
-
-        $this->output = new \Report\Format\Html();
-        
-        foreach($this->content->getContent() as $c) {
-            $c->render($this->output);
-        }
-        
-        if (isset($filename)) {
-            $this->output->toFile($filename.'.html');
-        }
-
-        $this->output = new \Report\Format\Csv();
-        
-        foreach($this->content->getContent() as $c) {
-            $c->render($this->output);
-        }
-        
-        if (isset($filename)) {
-            $this->output->toFile($filename.'.csv');
-        }
-
-        $this->output = new \Report\Format\Ace();
-        
-        foreach($this->content->getContent() as $c) {
-            $c->render($this->output);
-        }
-        
-        if (isset($filename)) {
-            $this->output->toFile('ace/table.html');
-        }
-        */
-
         $class = "\\Report\\Format\\$format";
         $this->output = new $class();
+        $this->output->setSummaryData($this->root);
         
         $this->summary->render($this->output);
 
@@ -245,10 +205,6 @@ class Premier {
         }
     }
     
-    public function addSummary($add) {
-        $this->summary = (bool) $add;
-    }
-
     private function createH1($name) {
         $section = $this->root->addContent('Section', $name);
         $section->setLevel(1);
