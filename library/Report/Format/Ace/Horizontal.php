@@ -3,10 +3,23 @@
 namespace Report\Format\Ace;
 
 class Horizontal extends \Report\Format\Ace { 
-    static $horizontal_counter = 1;
+    static $horizontal_counter = 0;
     
     public function render($output, $data) {
-        $count = \Report\Format\Ace\Horizontal::$horizontal_counter++;
+        $output->pushToJsLibraries( array("assets/js/jquery.dataTables.min.js",
+                                          "assets/js/jquery.dataTables.bootstrap.js"));
+
+        $counter = \Report\Format\Ace\Horizontal::$horizontal_counter++;
+        
+$js = <<<JS
+    				var oTable1 = \$('#horizontal-{$counter}').dataTable( {
+	    			"aoColumns": [
+		    	      null, null, null, null
+			    	] } );
+
+
+JS;
+        $output->pushToTheEnd($js);
 
         $html = '';
         foreach($data as $row) {
@@ -23,7 +36,7 @@ HTML;
 
         $html = <<<HTML
 							<p>
-								<table id="sample-table-$count" class="table table-striped table-bordered table-hover">
+								<table id="horizontal-{$counter}" class="table table-striped table-bordered table-hover">
 									<thead>
 										<tr>
 											<th>Code</th>

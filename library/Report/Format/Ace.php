@@ -4,6 +4,9 @@ namespace Report\Format;
 
 class Ace { 
     private $output = '';
+    private $finalJs = '';
+    private $jsLibraries = array();
+    
     private $last = '';
     private $files = array();
     protected static $analyzer = null;
@@ -16,9 +19,23 @@ class Ace {
     public function push($render) {
         $this->output .= $render;
     }
+    
+    public function pushToTheEnd($render) {
+        $this->finalJs .= "$render\n";
+    }
+
+    public function pushToJsLibraries($library) {
+        if (is_array($library)) {
+            $this->jsLibraries = array_merge($this->jsLibraries, $library);
+        } else {
+            $this->jsLibraries[] = $library;
+        }
+    }
 
     public function reset() {
-        $this->output = '';
+        $this->output  = "";
+        $this->finalJs = "";
+        $this->jsLibraries = array();
     }
     
     public function setSummaryData($data) {
@@ -53,6 +70,12 @@ class Ace {
         $sidebar = new static();
         
         $renderSidebar->render($sidebar, $this->summary->getContent());
+        
+        if (count($this->jsLibraries) > 0) {
+            $this->jsLibraries = "        <script src=\"".join("\"></script>\n        <script src=\"", $this->jsLibraries)."\"></script>\n";
+        } else {
+            $this->jsLibraries = " /* No extra libraries */ ";
+        }
 
         $sidebar = <<<HTML
 			<div class="sidebar" id="sidebar">
@@ -216,8 +239,7 @@ $sidebar
 
 		<!--page specific plugin scripts-->
 
-		<script src="assets/js/jquery.dataTables.min.js"></script>
-		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+    	{$this->jsLibraries}
 
 		<!--ace scripts-->
 
@@ -228,38 +250,9 @@ $sidebar
 
 		<script type="text/javascript">
 			jQuery(function($) {
-			    for (var i=1; i < {$table_count} ;i++)
-    				var oTable1 = $('#sample-table-' + i).dataTable( {
-	    			"aoColumns": [
-		    	      null, null
-			    	] } );
-				
-				
-				$('table th input:checkbox').on('click' , function(){
-					var that = this;
-					$(this).closest('table').find('tr > td:first-child input:checkbox')
-					.each(function(){
-						this.checked = that.checked;
-						$(this).closest('tr').toggleClass('selected');
-					});
-						
-				});
-			
-			
-				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				function tooltip_placement(context, source) {
-					var \$source = \$(source);
-					var \$parent = \$source.closest('table')
-					var off1 = \$parent.offset();
-					var w1 = \$parent.width();
-			
-					var off2 = \$source.offset();
-					var w2 = \$source.width();
-			
-					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-					return 'left';
-				}
+    			{$this->finalJs}
 			})
+			
 		</script>
 	</body>
 </html>
@@ -267,7 +260,7 @@ $sidebar
 HTML;
         $this->files[$filename] = $html;
 
-        $this->output = '';
+        $this->reset();
         
         return true;
     }

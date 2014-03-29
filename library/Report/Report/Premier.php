@@ -45,6 +45,9 @@ class Premier {
         $ht = $this->addContent('HashTable', $ReportInfo); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
         $ht->setAnalyzer('ReportInfo');
         
+        $this->createH1('Dashboard');
+        $ht = $this->addContent('Camembert', $Random); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+
         $this->createH1('Analyzer report');
 
         ///// Application analyzes 
