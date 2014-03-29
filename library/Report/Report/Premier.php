@@ -192,8 +192,6 @@ class Premier {
         $this->output = new $class();
         $this->output->setSummaryData($this->root);
         
-        $this->summary->render($this->output);
-
         foreach($this->root->getContent() as $c) {
             $c->render($this->output);
         }

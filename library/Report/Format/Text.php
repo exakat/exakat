@@ -5,6 +5,7 @@ namespace Report\Format;
 class Text { 
     private $output = '';
     protected static $analyzer = null;
+    private $summary = null;
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
@@ -29,6 +30,10 @@ class Text {
 
     public function setAnalyzer($name) {
         \Report\Format\Text::$analyzer = $name;
+    }
+
+    public function setSummaryData($data) {
+        $this->summary = $data;
     }
 }
 

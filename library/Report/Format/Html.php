@@ -5,6 +5,7 @@ namespace Report\Format;
 class Html { 
     private $output = '';
     protected static $analyzer = null;
+    private $summary = null;
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
@@ -31,6 +32,10 @@ class Html {
 
     public function setAnalyzer($name) {
         \Report\Format\Html::$analyzer = $name;
+    }
+
+    public function setSummaryData($data) {
+        $this->summary = $data;
     }
 
 }

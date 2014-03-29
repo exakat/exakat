@@ -4,6 +4,7 @@ namespace Report\Format;
 
 class Csv { 
     private $output = array();
+    private $summary = null;
     protected static $analyzer = null;
     
     public function render($output, $data) {
@@ -36,6 +37,10 @@ class Csv {
 
     public function setAnalyzer($name) {
         \Report\Format\Csv::$analyzer = $name;
+    }
+
+    public function setSummaryData($data) {
+        $this->summary = $data;
     }
 }
 

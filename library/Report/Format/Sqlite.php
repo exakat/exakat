@@ -5,6 +5,7 @@ namespace Report\Format;
 class Sqlite { 
     private $output = array();
     protected static $analyzer = null;
+    private $summary = null;
     
     public function render($output, $data) {
         // Nothing
@@ -43,6 +44,10 @@ class Sqlite {
     
     public function setAnalyzer($name) {
         \Report\Format\Sqlite::$analyzer = $name;
+    }
+
+    public function setSummaryData($data) {
+        $this->summary = $data;
     }
 }
 

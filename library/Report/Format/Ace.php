@@ -7,7 +7,7 @@ class Ace {
     private $last = '';
     private $files = array();
     protected static $analyzer = null;
-    private $summary = '';
+    private $summary = null;
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
