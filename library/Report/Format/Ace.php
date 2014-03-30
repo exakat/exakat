@@ -69,7 +69,12 @@ class Ace {
         $renderSidebar = new \Report\Format\Ace\SummarySidebar();
         $sidebar = new static();
         
-        $renderSidebar->render($sidebar, $this->summary->getContent());
+        if (is_null($this->summary)) {
+            $sidebar = '';
+        } else {
+            $renderSidebar->render($sidebar, $this->summary->getContent());
+            $sidebar = $sidebar->getOutput();
+        }
         
         if (count($this->jsLibraries) > 0) {
             $this->jsLibraries = "        <script src=\"".join("\"></script>\n        <script src=\"", $this->jsLibraries)."\"></script>\n";
@@ -79,7 +84,7 @@ class Ace {
 
         $sidebar = <<<HTML
 			<div class="sidebar" id="sidebar">
-{$sidebar->getOutput()}
+{$sidebar}
 
 				<div class="sidebar-collapse" id="sidebar-collapse">
 					<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
