@@ -46,7 +46,8 @@ class Premier {
         $ht->setAnalyzer('ReportInfo');
         
         $this->createH1('Dashboard');
-        $ht = $this->addContent('Camembert', $Random); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+        $random = new \Report\Content\Random($this->project);
+        $ht = $this->addContent('Camembert', $random); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
         $this->createH1('Analyzer report');
 

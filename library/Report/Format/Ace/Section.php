@@ -18,7 +18,7 @@ class Section extends \Report\Format\Ace {
             }
             $output->toFile2($data->getId().".html", $data);
         } else {
-            $output->push("								<h{$data->getLevel()} class=\"header smaller lighter blue\">{$data->getName()}</h{$data->getLevel()}>");
+            $output->push("\n								<h{$data->getLevel()} class=\"header smaller lighter blue\">{$data->getName()}</h{$data->getLevel()}>");
         }
     }
 

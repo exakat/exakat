@@ -4,38 +4,33 @@ namespace Report\Format\Ace;
 
 class Camembert extends \Report\Format\Ace { 
     public function render($output, $data) {
+        $jsData = "";
+        $colors = array("#68BC31", "#2091CF", "#AF4E96", "#DA5430", "#FEE074", "#CE6F9E", );
+        $i = 0;
+        $array = $data->toArray(); 
+        arsort($array);
+        $keys = array_keys($array);
+        $values = array_values($array);
+        foreach($values as $k => $v) {
+            $values[$k] = number_format($v / array_sum($array) * 100, 0)." %";
+        }
+        
+        foreach($array as $k => $v) {
+            $i++;
+            $jsData .= "				{ label: \"$k\",  data: $v, color: \"".$colors[$i % count($colors)]."\"},\n";
+        }
+        
+        $title = $data->getName();
+        
         $html = <<<HTML
 								<div class="span5">
 									<div class="widget-box">
 										<div class="widget-header widget-header-flat widget-header-small">
 											<h5>
-												<i class="icon-signal"></i>
-												Traffic Sources
+												 {$title}
 											</h5>
 
 											<div class="widget-toolbar no-border">
-												<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
-													This Week
-													<i class="icon-angle-down icon-on-right"></i>
-												</button>
-
-												<ul class="dropdown-menu dropdown-info pull-right dropdown-caret">
-													<li class="active">
-														<a href="#">This Week</a>
-													</li>
-
-													<li>
-														<a href="#">Last Week</a>
-													</li>
-
-													<li>
-														<a href="#">This Month</a>
-													</li>
-
-													<li>
-														<a href="#">Last Month</a>
-													</li>
-												</ul>
 											</div>
 										</div>
 
@@ -48,26 +43,26 @@ class Camembert extends \Report\Format\Ace {
 												<div class="clearfix">
 													<div class="grid3">
 														<span class="grey">
-															<i class="icon-facebook-sign icon-2x blue"></i>
-															&nbsp; likes
+															<i class="icon-wrench icon-2x blue"></i>
+															&nbsp; {$keys[0]}
 														</span>
-														<h4 class="bigger pull-right">1,255</h4>
+														<h4 class="bigger pull-right">{$values[0]}</h4>
 													</div>
 
 													<div class="grid3">
 														<span class="grey">
-															<i class="icon-twitter-sign icon-2x purple"></i>
-															&nbsp; tweets
+															<i class="icon-wrench icon-2x purple"></i>
+															&nbsp; {$keys[1]}
 														</span>
-														<h4 class="bigger pull-right">941</h4>
+														<h4 class="bigger pull-right">{$values[1]}</h4>
 													</div>
 
 													<div class="grid3">
 														<span class="grey">
-															<i class="icon-pinterest-sign icon-2x red"></i>
-															&nbsp; pins
+															<i class="icon-wrench icon-2x red"></i>
+															&nbsp; {$keys[2]}
 														</span>
-														<h4 class="bigger pull-right">1,050</h4>
+														<h4 class="bigger pull-right">{$values[2]}</h4>
 													</div>
 												</div>
 											</div><!--/widget-main-->
@@ -88,14 +83,14 @@ HTML;
                                           "assets/js/flot/jquery.flot.resize.min.js",
                                     ));
 
-        $js = <<<'JS'
+        $js = <<<JS
 
-				$('.easy-pie-chart.percentage').each(function(){
-					var $box = $(this).closest('.infobox');
-					var barColor = $(this).data('color') || (!$box.hasClass('infobox-dark') ? $box.css('color') : 'rgba(255,255,255,0.95)');
+				\$('.easy-pie-chart.percentage').each(function(){
+					var \$box = \$(this).closest('.infobox');
+					var barColor = \$(this).data('color') || (!\$box.hasClass('infobox-dark') ? \$box.css('color') : 'rgba(255,255,255,0.95)');
 					var trackColor = barColor == 'rgba(255,255,255,0.95)' ? 'rgba(255,255,255,0.25)' : '#E2E2E2';
-					var size = parseInt($(this).data('size')) || 50;
-					$(this).easyPieChart({
+					var size = parseInt(\$(this).data('size')) || 50;
+					\$(this).easyPieChart({
 						barColor: barColor,
 						trackColor: trackColor,
 						scaleColor: false,
@@ -106,25 +101,21 @@ HTML;
 					});
 				})
 			
-				$('.sparkline').each(function(){
-					var $box = $(this).closest('.infobox');
-					var barColor = !$box.hasClass('infobox-dark') ? $box.css('color') : '#FFF';
-					$(this).sparkline('html', {tagValuesAttribute:'data-values', type: 'bar', barColor: barColor , chartRangeMin:$(this).data('min') || 0} );
+				\$('.sparkline').each(function(){
+					var \$box = \$(this).closest('.infobox');
+					var barColor = !\$box.hasClass('infobox-dark') ? \$box.css('color') : '#FFF';
+					\$(this).sparkline('html', {tagValuesAttribute:'data-values', type: 'bar', barColor: barColor , chartRangeMin:\$(this).data('min') || 0} );
 				});
 			
 			
 			
 			
-			  var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
+			  var placeholder = \$('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
 			  var data = [
-				{ label: "social networks",  data: 38.7, color: "#68BC31"},
-				{ label: "search engines",  data: 24.5, color: "#2091CF"},
-				{ label: "ad campaings",  data: 8.2, color: "#AF4E96"},
-				{ label: "direct traffic",  data: 18.6, color: "#DA5430"},
-				{ label: "other",  data: 10, color: "#FEE074"}
+			  {$jsData}
 			  ]
 			  function drawPieChart(placeholder, data, position) {
-			 	  $.plot(placeholder, data, {
+			 	  \$.plot(placeholder, data, {
 					series: {
 						pie: {
 							show: true,

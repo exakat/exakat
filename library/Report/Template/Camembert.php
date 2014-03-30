@@ -8,7 +8,7 @@ class Camembert {
         $renderer = $output->getRenderer('Camembert');
         
 //        $renderer->setAnalyzer($this->data->getName());
-        $renderer->render($output, null);
+        $renderer->render($output, $this->data);
     }
     
     function setContent($data) {
