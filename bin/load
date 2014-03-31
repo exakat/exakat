@@ -316,7 +316,7 @@ function process_file($filename, $log_file) {
                                               ->setProperty('fullcode', ';')
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Sequence')
-                                              ->setProperty('modifiedBy', 'bin/load13')
+                                              ->setProperty('modifiedBy', 'bin/load14')
                                               ->setProperty('root', 'true')
                                               ->save();
                 $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();
@@ -327,6 +327,7 @@ function process_file($filename, $log_file) {
                                               ->setProperty('fullcode', $token[1])
                                               ->setProperty('line', $token[2])
                                               ->setProperty('order', 0)
+                                              ->setProperty('modifiedBy', 'bin/load14-2')
                                               ->setProperty('code', $token[1])
                                               ->save();
                                               ;
