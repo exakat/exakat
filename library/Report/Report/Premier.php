@@ -46,10 +46,27 @@ class Premier {
         $ht->setAnalyzer('ReportInfo');
         
         $this->createH1('Dashboard');
-        $random = new \Report\Content\Random($this->project);
-        $ht = $this->addContent('Camembert', $random); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
-        $this->createH1('Analyzer report');
+        $groupby = new \Report\Content\GroupBy($this->client);
+        $groupby->setGroupby('getCriticality');
+        $groupby->setCount('toCount');
+        $groupby->addAnalyzer(array(  'Structures\\StrposCompare', 
+                                      'Structures\\Iffectation',
+                                      'Structures\\ErrorReportingWithInteger',
+                                      'Structures\\ForWithFunctioncall',
+                                      'Structures\\ForeachSourceNotVariable',
+                                      'Variables\\VariableUsedOnce',
+                                      'Variables\\VariableNonascii',
+                                      'Structures\\EvalUsage',
+                                      'Structures\\OnceUsage',
+                                      'Structures\\VardumpUsage',
+                                      'Structures\\PhpinfoUsage',
+                                      'Classes\\NonPpp',
+                                      'Php/Incompilable',
+                                      'Constants/ConstantStrangeNames',
+                                ));
+        $groupby->setName('Task level repartition');
+        
+        $ht = $this->addContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
         ///// Application analyzes 
         $analyzes = array('Structures\\StrposCompare', 

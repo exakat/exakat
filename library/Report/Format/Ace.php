@@ -70,7 +70,7 @@ class Ace {
         $sidebar = new static();
         
         if (is_null($this->summary)) {
-            $sidebar = '';
+            $sidebar = '<!-- No sidebar -->';
         } else {
             $renderSidebar->render($sidebar, $this->summary->getContent());
             $sidebar = $sidebar->getOutput();
@@ -79,7 +79,7 @@ class Ace {
         if (count($this->jsLibraries) > 0) {
             $this->jsLibraries = "        <script src=\"".join("\"></script>\n        <script src=\"", $this->jsLibraries)."\"></script>\n";
         } else {
-            $this->jsLibraries = " /* No extra libraries */ ";
+            $this->jsLibraries = "<!-- No extra libraries -->";
         }
 
         $sidebar = <<<HTML

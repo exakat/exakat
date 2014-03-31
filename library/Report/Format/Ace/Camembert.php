@@ -2,7 +2,9 @@
 
 namespace Report\Format\Ace;
 
-class Camembert extends \Report\Format\Ace { 
+class Camembert extends \Report\Format\Ace {
+    static public $camembert_counter = 0;
+     
     public function render($output, $data) {
         $jsData = "";
         $colors = array("#68BC31", "#2091CF", "#AF4E96", "#DA5430", "#FEE074", "#CE6F9E", );
@@ -22,6 +24,8 @@ class Camembert extends \Report\Format\Ace {
         
         $title = $data->getName();
         
+        $counter = \Report\Format\Ace\Camembert::$camembert_counter++;
+        
         $html = <<<HTML
 								<div class="span5">
 									<div class="widget-box">
@@ -36,7 +40,7 @@ class Camembert extends \Report\Format\Ace {
 
 										<div class="widget-body">
 											<div class="widget-main">
-												<div id="piechart-placeholder"></div>
+												<div id="piechart-placeholder-{$counter}"></div>
 
 												<div class="hr hr8 hr-double"></div>
 
@@ -110,7 +114,7 @@ HTML;
 			
 			
 			
-			  var placeholder = \$('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
+			  var placeholder = \$('#piechart-placeholder-{$counter}').css({'width':'90%' , 'min-height':'150px'});
 			  var data = [
 			  {$jsData}
 			  ]
