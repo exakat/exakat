@@ -1399,7 +1399,7 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 }
 
 // lone instruction AFTER
-if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', ]}.any()) {
+if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 'Dowhile', 'Try' ]}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     
