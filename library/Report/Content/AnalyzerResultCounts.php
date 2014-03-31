@@ -29,13 +29,13 @@ class AnalyzerResultCounts {
             
             $count = $o->toCount();
             if ($count > 0 || $this->showEmpty) {
-                $return[$o->getName()] = $o->toCount();
+                $return[] = array( $o->getName(), $o->toCount(), $o->getSeverity() );
             }
             $total += $count;
         }
 
         if ($this->showTotal) {
-            $return['Total'] = $total;
+            $return[] = array('Total', $total, '');
         };
         
         return $return;
