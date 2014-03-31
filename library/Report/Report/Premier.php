@@ -47,8 +47,10 @@ class Premier {
         
         $this->createH1('Dashboard');
         $groupby = new \Report\Content\GroupBy($this->client);
-        $groupby->setGroupby('getCriticality');
+        $groupby->setGroupby('getSeverity');
         $groupby->setCount('toCount');
+        $groupby->setSort(array('Critical', 'Major', 'Minor'));
+        
         $groupby->addAnalyzer(array(  'Structures\\StrposCompare', 
                                       'Structures\\Iffectation',
                                       'Structures\\ErrorReportingWithInteger',
@@ -63,8 +65,15 @@ class Premier {
                                       'Classes\\NonPpp',
                                       'Php/Incompilable',
                                       'Constants/ConstantStrangeNames',
+
+                                      'Structures\\NotNot',
+                                      'Structures\\Noscream',
+                                      'Structures\\toStringThrowsException',
+                                      'Structures\\CalltimePassByReference',
+                                      'Structures\\Break0',
+                                      'Structures\\BreakNonInteger',
                                 ));
-        $groupby->setName('Task level repartition');
+        $groupby->setName('Severity repartition');
         
         $ht = $this->addContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
@@ -107,7 +116,7 @@ class Premier {
             $analyzer->setNeo4j($this->client);
             $analyzer->setAnalyzers($analyzes);
             $h = $this->createH2($analyzer->getName());
-            $h = $this->addContent('HashTable', $analyzer);
+            $h = $this->addContent('Table', $analyzer);
 
             foreach($analyzes as $a) {
                 $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
