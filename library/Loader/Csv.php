@@ -40,11 +40,21 @@ SHELL
         preg_match("/Importing (\d+) Nodes/is", $res, $nodes);
         preg_match("/Importing (\d+) Relationships/is", $res, $relations);
         
-        if (count(file('batch-import/sampleme/nodes.csv')) - 2 != $nodes[1]) {
-            print "Warning : didn't import enough nodes : ".(count(file('batch-import/sampleme/nodes.csv')) - 2)." expected, {$nodes[1]} actually imported\n";
+        $fnodes = -1;
+        $fp = fopen('batch-import/sampleme/nodes.csv', 'r');
+        while(fgetcsv($fp, 1000, "\t", '"')) { $fnodes++; }
+        fclose($fp);
+        
+        $frels = -1;
+        $fp = fopen('batch-import/sampleme/rels.csv', 'r');
+        while(fgetcsv($fp, 1000, "\t", '"')) { $frels++; }
+        fclose($fp);
+        
+        if ($fnodes != $nodes[1]) {
+            print "Warning : didn't import enough nodes : {$fnodes} expected, {$nodes[1]} actually imported\n";
         }
-        if (count(file('batch-import/sampleme/rels.csv')) - 1 != $relations[1]) {
-            print "Warning : didn't import enough relations : ".(count(file('batch-import/sampleme/rels.csv')) - 1)." expected, {$relations[1]} actually imported\n";
+        if ($frels != $relations[1]) {
+            print "Warning : didn't import enough relations : {$frels} expected, {$relations[1]} actually imported\n";
         }
 
         return true;
