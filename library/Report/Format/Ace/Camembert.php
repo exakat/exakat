@@ -4,13 +4,13 @@ namespace Report\Format\Ace;
 
 class Camembert extends \Report\Format\Ace {
     static public $camembert_counter = 0;
-     
+    
     public function render($output, $data) {
         $jsData = "";
         $colors = array("#68BC31", "#2091CF", "#AF4E96", "#DA5430", "#FEE074", "#CE6F9E", );
         $i = 0;
         $array = $data->toArray(); 
-        arsort($array);
+
         $keys = array_keys($array);
         $values = array_values($array);
         foreach($values as $k => $v) {
