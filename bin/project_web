@@ -104,6 +104,7 @@ function process_project($exakat) {
 
     print "Preparing the report\n";
     shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/web  -ace -r Premier');
+    shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/Premier-sqlite  -sqlite -r Premier');
 
     print "Project {$exakat['name']} reported\n";
     $db->query('UPDATE exakat_projects SET `progress` = 100 WHERE id = '.$exakat['id']);
