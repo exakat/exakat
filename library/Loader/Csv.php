@@ -43,8 +43,8 @@ SHELL
         if (count(file('batch-import/sampleme/nodes.csv')) - 2 != $nodes[1]) {
             print "Warning : didn't import enough nodes : ".(count(file('batch-import/sampleme/nodes.csv')) - 2)." expected, {$nodes[1]} actually imported\n";
         }
-        if (count(file('batch-import/sampleme/rels.csv')) - 2 != $relations[1]) {
-            print "Warning : didn't import enough relations : ".(count(file('batch-import/sampleme/rels.csv')) - 2)." expected, {$relations[1]} actually imported\n";
+        if (count(file('batch-import/sampleme/rels.csv')) - 1 != $relations[1]) {
+            print "Warning : didn't import enough relations : ".(count(file('batch-import/sampleme/rels.csv')) - 1)." expected, {$relations[1]} actually imported\n";
         }
 
         return true;
@@ -53,7 +53,7 @@ SHELL
     function save_chunk() {
         $fp = fopen('nodes.csv', 'a');
         // adding in_quote here, as it may not appear on the first token.
-        $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter' );
+        $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter', 'order' );
         if (static::$file_saved == 0) {
             fputcsv($fp, array_merge($les_cols), "\t");
         }
