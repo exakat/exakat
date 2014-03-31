@@ -86,7 +86,7 @@ class Phpexec {
     }
 
     public function compile($file) {
-        $shell = shell_exec($this->phpexec.' -l '.$file.' 2>&1');
+        $shell = shell_exec($this->phpexec.' -l '.escapeshellarg($file).' 2>&1');
         if (trim($shell) == 'No syntax errors detected in '.$file) {
             return true;
         } else {
