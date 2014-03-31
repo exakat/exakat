@@ -22,7 +22,8 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $shell = 'cd ../..; php bin/load -q -p test -f tests/analyzer/source/'.$file.'.php; php bin/build_root -p test; php bin/tokenizer -p test;  php bin/analyze -P '.$test_config;
         $res = shell_exec($shell);
         $shell = 'cd ../..; php bin/export_analyzer '.$analyzer.' -o -json';
-        $res = json_decode(shell_exec($shell));
+        $shell_res = shell_exec($shell);
+        $res = json_decode($shell_res);
 
         if (empty($res)) {
             $list = array();
