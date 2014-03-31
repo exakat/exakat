@@ -23,6 +23,8 @@ JS;
 
         $html = '';
         foreach($data as $row) {
+            $row['code'] = htmlentities($row['code']);
+            
 $html .= <<<HTML
 
 										<tr>
