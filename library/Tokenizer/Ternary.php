@@ -50,6 +50,7 @@ class Ternary extends TokenAuto {
                                                          2 => 'ELSE'
                                                        ),
                                'atom'         => 'Ternary',
+                               'atom1'        => 'TernaryElse',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
         $this->checkAuto(); 

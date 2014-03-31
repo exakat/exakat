@@ -126,6 +126,13 @@ it.setProperty('root', 'null');
             unset($actions['atom']);
             $this->set_atom = true;
         }
+
+        if (isset($actions['atom1'])) {
+            $qactions[] = " /* atom1 */\n   it.out('NEXT').next().setProperty('atom', '".$actions['atom1']."');
+            it.out('NEXT').next().setProperty('fullcode', it.out('NEXT').next().code);
+            ";
+            unset($actions['atom1']);
+        }
         
         if (isset($actions['property'])) {
             if (is_array($actions['property']) && !empty($actions['property'])) {
@@ -1392,7 +1399,7 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 }
 
 // lone instruction AFTER
-if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function' ]}.any()) {
+if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', ]}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     
