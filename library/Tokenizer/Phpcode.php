@@ -6,6 +6,7 @@ class Phpcode extends TokenAuto {
     static public $operators = array('T_OPEN_TAG');
 
     public function _check() {
+        // Normal PHP script
         $this->conditions = array(0 => array('token' => Phpcode::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
