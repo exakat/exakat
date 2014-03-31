@@ -1392,7 +1392,7 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 }
 
 // lone instruction AFTER
-if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode' ]}.any()) {
+if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function' ]}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     
@@ -2207,7 +2207,8 @@ if ($it.token != 'T_ELSEIF' &&
     && (!($it.out('NEXT').next().token in list_after) )
     && $it.in_quote != \"'true'\"
     && $it.in_for != \"'true'\"
-    && !($it.in('NEXT').next().atom in ['Class', 'Identifier'])
+    && !($it.in('NEXT').next().atom in ['Class', 'Identifier']) 
+    &&  ($it.in('NEXT').out('CODE').count() == 0)
     ) {
 
     $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
@@ -2233,7 +2234,8 @@ if ($it.token != 'T_ELSEIF' &&
         $it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
         g.addEdge(g.idx('racines')[['token':'DELETE']].next(), sequence2, 'DELETE');
         $it.bothE('NEXT').each{ g.removeEdge(it); }
-    } else if ($it.in('NEXT').has('atom', 'Sequence').any()) {
+    } else if ($it.in('NEXT').has('atom', 'Sequence').any() &&
+              ($it.in('NEXT').out('CODE').count() == 0)) {
         sequence = $it.in('NEXT').next();
         $it.setProperty('order', $it.in('NEXT').out('ELEMENT').count());
 
@@ -2276,13 +2278,14 @@ if ($it.token != 'T_ELSEIF' &&
     }
 
 } else {
-    $it.setProperty('makeSequence1', $it.token != 'T_ELSEIF');
-    $it.setProperty('makeSequence2', ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' ));
-    $it.setProperty('makeSequence31', $it.in('NEXT').next().atom != null);
-    $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
-    $it.setProperty('makeSequence4',  $it.out('NEXT').next().token);
-    $it.setProperty('makeSequence5', $it.in_quote != 'true' );
-    $it.setProperty('makeSequence6', $it.in_for != 'true' );
+    $it.setProperty('makeSequence1',   $it.token != 'T_ELSEIF');
+    $it.setProperty('makeSequence2',  ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' ));
+    $it.setProperty('makeSequence31',  $it.in('NEXT').next().atom != null);
+    $it.setProperty('makeSequence32',  $it.in('NEXT') .next().token) ;
+    $it.setProperty('makeSequence4',   $it.out('NEXT').next().token);
+    $it.setProperty('makeSequence5',   $it.in_quote != 'true' );
+    $it.setProperty('makeSequence6',   $it.in_for != 'true' );
+    $it.setProperty('makeSequence7',   $it.out('CODE').count() == 0);
 }
 
 ";
