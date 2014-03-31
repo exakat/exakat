@@ -2,7 +2,7 @@
 
 namespace Report\Format\Text;
 
-class HashTable extends \Report\Format\Text { 
+class Table extends \Report\Format\Text { 
     public function render($output, $data) {
 
         $text = "+---------+----------+\n";

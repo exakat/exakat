@@ -2,7 +2,7 @@
 
 namespace Report\Format\Html;
 
-class HashTable extends \Report\Format\Html { 
+class Table extends \Report\Format\Html { 
     public function render($output, $data) {
 
         $text = "<table><tbody>\n";
