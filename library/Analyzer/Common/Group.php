@@ -4,7 +4,7 @@ namespace Analyzer\Common;
 
 class Group extends \Analyzer\Analyzer {
 
-	protected function dependsOn() {
+	public function dependsOn() {
 	    $glob = dirname(__DIR__)."/".basename(str_replace('\\', '/', get_class($this)))."/*";
 	    
         $dependencies = glob($glob);

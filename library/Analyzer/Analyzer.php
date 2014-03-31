@@ -28,6 +28,20 @@ class Analyzer {
     protected $phpversion = "Any";
     protected $phpconfiguration = "Any";
 
+    protected $severity = \Analyzer\Analyzer::S_NONE; // Default to None. 
+    const S_CRITICAL = "Critical";
+    const S_MAJOR = "Major";
+    const S_MINOR = "Minor";
+    const S_NOTE = "Note";
+    const S_NONE = "None";
+
+    protected $timeToFix = \Analyzer\Analyzer::T_NONE; // Default to no time (Should not display)
+    const T_NONE = "0";
+    const T_INSTANT = "5";
+    const T_QUICK = "30";
+    const T_SLOW = "60";
+    const T_LONG = "360";
+
     public function __construct($client) {
         $this->client = $client;
         $this->analyzerIsNot(get_class($this));
@@ -457,7 +471,7 @@ GREMLIN;
 
     function hasOrder($value = "0") {
         if ($value == 'first') {
-            $this->addMethod("filter{it.order == 0}");
+            $this->addMethod("has('order','0')");
         } elseif ($value == 'last') {
             $this->addMethod("filter{it.order == it.in('ELEMENT').out('ELEMENT').count() - 1}");
         } else {
@@ -1015,6 +1029,22 @@ GREMLIN;
         $vertices = $this->query($queryTemplate);
         
         return $vertices[0][0] > 0;
+    }
+    
+    public function getSeverity() {
+        return $this->severity;
+    }
+
+    public function getTimeToFix() {
+        return $this->timeToFix;
+    }
+
+    public function getPhpversion() {
+        return $this->phpversion;
+    }
+
+    public function getPhpconfiguration() {
+        return $this->phpconfiguration;
     }
 }
 ?>

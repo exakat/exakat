@@ -5,6 +5,9 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class StrposCompare extends Analyzer\Analyzer {
+    protected $severity  = \Analyzer\Analyzer::S_MINOR;
+    protected $timeToFix = \Analyzer\Analyzer::T_QUICK;
+
     static public $operator = array('strpos', 'stripos', 'strrpos', 'strripos', 
                                     'strstr', 'stristr', );
     

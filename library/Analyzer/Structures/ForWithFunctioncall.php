@@ -5,6 +5,8 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class ForWithFunctioncall extends Analyzer\Analyzer {
+    protected $severity  = \Analyzer\Analyzer::S_MINOR;
+    protected $timeToFix = \Analyzer\Analyzer::T_QUICK;
 
     public function analyze() {
         $this->atomIs("For")
