@@ -27,16 +27,26 @@ class Csv {
         if (!file_exists('nodes.csv')) {
             return false;
         }
-        shell_exec(<<<SHELL
+        $res = shell_exec(<<<SHELL
 mv nodes.csv ./batch-import/sampleme/
 mv rels.csv ./batch-import/sampleme/
 
 cd ./batch-import
-java -server -Xmx1G -Dfile.encoding=UTF-8 -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db sampleme/nodes.csv sampleme/rels.csv 2>/dev/null 
+java -server -Xmx1G -Dfile.encoding=UTF-8 -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db sampleme/nodes.csv sampleme/rels.csv 2>/dev/null
 cd ..
 sh scripts/restart.sh
 SHELL
 );
+        preg_match("/Importing (\d+) Nodes/is", $res, $nodes);
+        preg_match("/Importing (\d+) Relationships/is", $res, $relations);
+        
+        if (count(file('batch-import/sampleme/nodes.csv')) - 2 != $nodes[1]) {
+            print "Warning : didn't import enough nodes : ".(count(file('batch-import/sampleme/nodes.csv')) - 2)." expected, {$nodes[1]} actually imported\n";
+        }
+        if (count(file('batch-import/sampleme/rels.csv')) - 2 != $relations[1]) {
+            print "Warning : didn't import enough relations : ".(count(file('batch-import/sampleme/rels.csv')) - 2)." expected, {$relations[1]} actually imported\n";
+        }
+
         return true;
     }
     
@@ -71,14 +81,13 @@ SHELL
         
         $fp = fopen('rels.csv', 'a');
         if (static::$file_saved == 0) {
-            if (isset($row['namespace'])) {
-                $row['namespace'] = str_replace("\\", "\\\\", $row['namespace']);
-                $row['namespace'] = str_replace("\"", "\\\"", $row['namespace']);
-            }
-
             fputcsv($fp, array('start', 'end', 'type', 'classname', 'function', 'namespace', 'file'), "\t");
         }
         foreach(static::$links as $link) {
+            if (isset($link['namespace'])) {
+                $link['namespace'] = $this->escapeString($link['namespace']);
+            }
+
             fputcsv($fp, $link, "\t");
         }
         fclose($fp);
