@@ -1357,7 +1357,7 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = "
 /* Check for Next */
 
-// lone instruction BEFORE
+// lone instruction BEFORE2
 if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try', 'Ternary', 'While' ]}.any() && 
     it.in('NEXT').in('NEXT').filter{ !(it.token in ['T_ECHO'])}.any()) {
     sequence = it;
