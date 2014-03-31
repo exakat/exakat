@@ -19,7 +19,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $analyzer = str_replace('_', '/', $analyzer);
         
         $test_config = 'Analyzer\\'.str_replace('_', '\\\\', str_replace('Test', '', get_class($this)));
-        $shell = 'cd ../..; php bin/load -p test -f tests/analyzer/source/'.$file.'.php; php bin/build_root -p test; php bin/tokenizer -p test;  php bin/analyze -P '.$test_config;
+        $shell = 'cd ../..; php bin/load -q -p test -f tests/analyzer/source/'.$file.'.php; php bin/build_root -p test; php bin/tokenizer -p test;  php bin/analyze -P '.$test_config;
         $res = shell_exec($shell);
         $shell = 'cd ../..; php bin/export_analyzer '.$analyzer.' -o -json';
         $res = json_decode(shell_exec($shell));

@@ -27,7 +27,7 @@ class Csv {
         if (!file_exists('nodes.csv')) {
             return false;
         }
-        print shell_exec(<<<SHELL
+        shell_exec(<<<SHELL
 mv nodes.csv ./batch-import/sampleme/
 mv rels.csv ./batch-import/sampleme/
 
