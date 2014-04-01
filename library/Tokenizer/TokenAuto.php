@@ -965,7 +965,7 @@ g.removeVertex(assignation);
             $qactions[] = "
 /* transform to const a=1 ,  b=2 => const a=1; const b=2 */
 
-sequence = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
+sequence = g.addVertex(null, [code:';', fullcode:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     sequence, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  sequence, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), sequence, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -1150,11 +1150,13 @@ clean.out('ELEMENT').inE('INDEXED').each{
             $qactions[] = "
 
 /* createSequenceForCaseWithoutSemicolon */ 
-x = g.addVertex(null, [code:'Block With Sequence For Case Without Semicolon', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'Block With Sequence For Case Without Semicolon', fullcode:'Block With Sequence For Case Without Semicolon', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
+
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
 
 fullcode = x;
 $fullcode
@@ -1194,11 +1196,13 @@ b.outE('NEXT').each{ g.removeEdge(it) ; }
             $qactions[] = "
 
 /* createSequenceForDefaultWithoutSemicolon */ 
-x = g.addVertex(null, [code:'Block With Sequence For Default Without Semicolon', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'Block With Sequence For Default Without Semicolon', fullcode:'Block With Sequence For Default Without Semicolon', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
+
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
 
 fullcode = x;
 $fullcode
@@ -1315,11 +1319,13 @@ s.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = " 
 /* to_block_for */ 
 
-x = g.addVertex(null, [code:'Block With For', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'Block With For', fullcode:'Block With For', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
+
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
 
 fullcode = x;
 $fullcode
@@ -1408,7 +1414,8 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 // lone instruction AFTER
 if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
                                          'Dowhile', 'Try', 'Class', 'Interface', 'While' ]}.any() &&
-    it.out('NEXT').out('NEXT').filter{(!it.token in ['T_CATCH'])}.any()) {
+    it.out('NEXT').filter{!(it.token in ['T_ELSEIF'])}.any() &&
+    it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_ELSEIF'])}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     
@@ -1720,11 +1727,14 @@ fullcode = clean;
                 $qactions[] = " 
 /* createSequenceWithNext */ 
 
-x = g.addVertex(null, [code:'Sequence With Next', atom:'Sequence', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'Sequence With Next', fullcode:'Sequence With Next', atom:'Sequence', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
+
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
+
 i = it.out('NEXT').next();
 
 g.addEdge(it, x, 'NEXT');
@@ -1765,11 +1775,13 @@ it.out('NEXT').has('token', 'T_COLON').each{
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), endif, 'DELETE');
 }
 
-x = g.addVertex(null, [code:'Block With else', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'Block With else', fullcode:'Block With else', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
+
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
 
 fullcode = x;
 $fullcode
@@ -1807,11 +1819,13 @@ x.out('CODE').each{
             $qactions[] = " 
 /* to_block_foreach */  
 
-x = g.addVertex(null, [code:'Block With Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, line:it.line]);
+x = g.addVertex(null, [code:'Block With Foreach', fullcode:'Block With Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
+
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
 
 fullcode = x;
 $fullcode
@@ -1881,7 +1895,7 @@ x.out('CODE').each{
                 $qactions[] = " 
 /* to_block_ifelseif_instruction */ 
 
-x = g.addVertex(null, [code:'Block With control if elseif', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'Block With control if elseif', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:'Block With control if elseif' ]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -1909,7 +1923,7 @@ a.bothE('NEXT').each{ g.removeEdge(it); }
         if (isset($actions['createBlockWithSequence']) && $actions['createBlockWithSequence']) {
                 $qactions[] = " 
 /* createBlockWithSequence */ 
-x = g.addVertex(null, [code:'Block With Next', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'Block With Next', fullcode:'Block With Next', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);

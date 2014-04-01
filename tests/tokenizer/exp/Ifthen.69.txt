@@ -1,0 +1,172 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          'C'
+        Label : LEFT
+          ->
+          Label : PROPERTY
+            B
+          Label : OBJECT
+            $a
+    Label : THEN
+      Block With if/elseif
+      Label : CODE
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            D
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : PROPERTY
+                  E
+                Label : OBJECT
+                  $b
+        Label : THEN
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              !
+              Label : NOT
+                F
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'H'
+                    Label : VARIABLE
+                      [
+                      Label : INDEX
+                        'G'
+                      Label : VARIABLE
+                        $c
+                  Label : ARGUMENT
+                    ->
+                    Label : PROPERTY
+                      I
+                    Label : OBJECT
+                      $d
+          Label : THEN
+            Block With if/elseif
+            Label : CODE
+              return
+              Label : RETURN
+                J
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            'L'
+          Label : LEFT
+            ->
+            Label : PROPERTY
+              K
+            Label : OBJECT
+              $e
+      Label : THEN
+        Block With if/elseif
+        Label : CODE
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              M
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : PROPERTY
+                    N
+                  Label : OBJECT
+                    $f
+          Label : THEN
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                !
+                Label : NOT
+                  O
+                  Label : ARGUMENTS
+                    ,
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'Q'
+                      Label : VARIABLE
+                        [
+                        Label : INDEX
+                          'P'
+                        Label : VARIABLE
+                          $g
+                    Label : ARGUMENT
+                      ->
+                      Label : PROPERTY
+                        R
+                      Label : OBJECT
+                        $h
+            Label : THEN
+              Block With if/elseif
+              Label : CODE
+                return
+                Label : RETURN
+                  S
+      Label : ELSE
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            T
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : PROPERTY
+                  U
+                Label : OBJECT
+                  $i
+        Label : THEN
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              V
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'X'
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      'W'
+                    Label : VARIABLE
+                      $j
+                Label : ARGUMENT
+                  ->
+                  Label : PROPERTY
+                    Y
+                  Label : OBJECT
+                    $k
+          Label : THEN
+            Block With if/elseif
+            Label : CODE
+              return
+              Label : RETURN
+                Z
