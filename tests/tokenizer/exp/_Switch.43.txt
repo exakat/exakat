@@ -1,0 +1,70 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    switch
+    Label : NAME
+      ->
+      Label : METHOD
+        B
+        Label : ARGUMENTS
+          void
+      Label : OBJECT
+        $a
+    Label : CASES
+      {
+      Label : CODE
+        Sequence Case Default
+        Label : ELEMENT
+          case
+          Label : CODE
+            makeSequence
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              switch
+              Label : NAME
+                ->
+                Label : METHOD
+                  D
+                  Label : ARGUMENTS
+                    void
+                Label : OBJECT
+                  $b
+              Label : CASES
+                {
+                Label : CODE
+                  void
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  =
+                  Label : RIGHT
+                    ->
+                    Label : METHOD
+                      E
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          $e
+                    Label : OBJECT
+                      $d
+                  Label : LEFT
+                    $c
+              Label : THEN
+                {
+                Label : CODE
+                  void
+          Label : CASE
+            'C'
+        Label : ELEMENT
+          default
+          Label : CODE
+            Block With Sequence For Default
+            Label : CODE
+              Void
