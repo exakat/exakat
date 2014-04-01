@@ -45,6 +45,8 @@ foreach($tokens as $t) {
                 break;
 
             case T_INT_CAST : 
+            case T_STRING_CAST : 
+            case T_ARRAY_CAST : 
             case T_RETURN :
             case T_SWITCH : 
             case T_CASE : 
