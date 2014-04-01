@@ -414,15 +414,17 @@ g.removeVertex(var);
             $_global = new _Global(Token::$client);
             $fullcode = $_global->fullcode();
 
+            $sequence = new Sequence(Token::$client);
+            $sequence_fullcode = $sequence->fullcode();
+
             $atom = $actions['to_global'];
             $qactions[] = "
 /* to global without arguments */
 var = it;
 arg = it.out('NEXT').next();
 
-root = it;
-root.setProperty('code', var.code);
-root.setProperty('token', var.token);
+var.setProperty('code', var.code);
+var.setProperty('token', var.token);
 
 c = -1;
 arg.out('ARGUMENT').each{
@@ -442,7 +444,7 @@ arg.out('ARGUMENT').each{
     $fullcode
 }
 
-g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
+g.addEdge(var, var.out('NEXT').out('NEXT').next(), 'NEXT');
 g.removeEdge(var.out('NEXT').outE('NEXT').next());
 g.removeVertex(arg);
 
@@ -450,6 +452,10 @@ var.setProperty('code', ';');
 var.setProperty('atom', 'Sequence');
 var.setProperty('token', 'T_GLOBAL');
 var.inE('INDEXED').each{ g.removeEdge(it); }
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), var, 'INDEXED');   
+
+fullcode = var;
+$sequence_fullcode
 
 ";
             unset($actions['to_global']);
@@ -1399,7 +1405,8 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 }
 
 // lone instruction AFTER
-if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 'Dowhile', 'Try' ]}.any()) {
+if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
+                                         'Dowhile', 'Try', 'Class', 'Interface', 'While' ]}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     

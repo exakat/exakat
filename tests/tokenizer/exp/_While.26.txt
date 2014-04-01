@@ -1,0 +1,60 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+    Label : NAME
+      B
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          while
+          Label : CONDITION
+            !
+            Label : NOT
+              ->
+              Label : OBJECT
+                $b
+              Label : METHOD
+                D
+                Label : ARGUMENTS
+                  void
+          Label : LOOP
+            {
+            Label : CODE
+              makeSequence
+              Label : ELEMENT
+                E
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ->
+                    Label : PROPERTY
+                      F
+                    Label : OBJECT
+                      $c
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              ->
+              Label : OBJECT
+                $a
+              Label : METHOD
+                C
+                Label : ARGUMENTS
+                  void
+          Label : THEN
+            {
+            Label : CODE
+              makeSequence
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  void
