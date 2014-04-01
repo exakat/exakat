@@ -1378,7 +1378,7 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
 
 // lone instruction BEFORE
 if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try', 'Ternary', 'While',
-                                      'Assignation', ]}.any() && 
+                                      'Assignation', 'Switch' ]}.any() && 
     it.in('NEXT').in('NEXT').filter{ !(it.token in ['T_ECHO'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
@@ -1413,7 +1413,7 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 
 // lone instruction AFTER
 if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
-                                         'Dowhile', 'Try', 'Class', 'Interface', 'While' ]}.any() &&
+                                         'Dowhile', 'Try', 'Class', 'Interface', 'While', 'Break' ]}.any() &&
     it.out('NEXT').filter{!(it.token in ['T_ELSEIF'])}.any() &&
     it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_ELSEIF'])}.any()) {
     sequence = it;
