@@ -6,8 +6,7 @@ class Table extends \Report\Template {
     private $hash = array('Empty' => 'hash');
     private $summary = false;
 
-    private $headerName = 'Item';
-    private $headerCount = 'Count';
+    private $headersName = array();
     
     private $countedValues = false;
     
@@ -18,11 +17,7 @@ class Table extends \Report\Template {
     const SORT_REV_KEY = 4;
     
     public function render($output) {
-        if ($this->countedValues) {
-            $data = $this->data->toCountedArray();
-        } else {
-            $data = $this->data->toArray();
-        }
+        $data = $this->data->toArray();
         
         $renderer = $output->getRenderer('Table');
         $renderer->render($output, $data);
@@ -32,10 +27,10 @@ class Table extends \Report\Template {
         if (!is_null($data)) {
             $this->data = $data; 
         } 
-    }
-
-    function setCountedValues($counting = true) {
-        $this->countedValues = true;
+        if (empty($this->headersName)) {
+            $a = $data->toArray();
+            $this->headersName = array_fill(0, count($a[0]), '');
+        }
     }
 
     function setSort($sort) {
@@ -48,12 +43,8 @@ class Table extends \Report\Template {
         $this->summary = (bool) $summary;
     }
 
-    function setHeaderName($name) {
-        $this->headerName = $name; 
-    }
-
-    function setHeaderCount($name) {
-        $this->headerCount = $name; 
+    function setHeadersNames($name) {
+        $this->headersName = $name; 
     }
 }
 
