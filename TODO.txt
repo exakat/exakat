@@ -234,3 +234,6 @@ Make a diagramm of the differents layers of the software
 
 Update Ace/Hastable to suppoort the actual number of columns (just like Horizontal report).
 
+Report usage of alternative syntax mixed with normal one.
+Report usage of alternative syntax in appinfo()
+Report usage of one-liner in appinfo 
