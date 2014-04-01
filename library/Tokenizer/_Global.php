@@ -33,6 +33,7 @@ class _Global extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
+
 if (fullcode.out('NAME').count() == 1) {
     fullcode.fullcode = "global " + fullcode.out("NAME").next().fullcode;
 }
