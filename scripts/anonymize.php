@@ -44,6 +44,9 @@ foreach($tokens as $t) {
                 $t[1] = $strings++;
                 break;
 
+            case T_ISSET : 
+            case T_EXIT : 
+
             case T_INT_CAST : 
             case T_STRING_CAST : 
             case T_ARRAY_CAST : 
@@ -105,8 +108,11 @@ foreach($tokens as $t) {
             case T_OPEN_TAG:
             case T_CLOSE_TAG:
             case T_INSTANCEOF:
+
             case T_IF:
             case T_ELSEIF:
+            case T_ENDIF : 
+
             case T_IS_IDENTICAL:
             case T_CONCAT_EQUAL:
                 // simply ignore
