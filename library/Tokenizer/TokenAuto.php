@@ -1370,8 +1370,9 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = "
 /* Check for Next */
 
-// lone instruction BEFORE2
-if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try', 'Ternary', 'While' ]}.any() && 
+// lone instruction BEFORE
+if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try', 'Ternary', 'While',
+                                      'Assignation', ]}.any() && 
     it.in('NEXT').in('NEXT').filter{ !(it.token in ['T_ECHO'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
@@ -1406,7 +1407,8 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 
 // lone instruction AFTER
 if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
-                                         'Dowhile', 'Try', 'Class', 'Interface', 'While' ]}.any()) {
+                                         'Dowhile', 'Try', 'Class', 'Interface', 'While' ]}.any() &&
+    it.out('NEXT').out('NEXT').filter{(!it.token in ['T_CATCH'])}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     
