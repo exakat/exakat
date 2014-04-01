@@ -98,7 +98,7 @@ $formats = array('markdown', 'sqlite', 'ace', 'html', 'text', /* 'pdf', 'odt' */
 
 foreach($reports as $report) {
     foreach($formats as $format) {
-        print shell_exec('rm ./projects/'.$project.'/'."{$report}-{$format}".'.*;     php bin/report '.$project.' -f ./projects/'.$project.'/'."{$report}-{$format}".' -'.$format.' -r '.$report);
+        print shell_exec('rm -rf ./projects/'.$project.'/'."{$report}-{$format}".'.*;     php bin/report '.$project.' -f ./projects/'.$project.'/'."{$report}-{$format}".' -'.$format.' -r '.$report);
     }
 }
 
