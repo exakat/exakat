@@ -2,10 +2,10 @@
 
 namespace Report\Content;
 
-class Groupby {
+class Groupby extends \Report\Content {
     private $analyzers = array();
     private $client = null;
-    private $name = "Unnamed Group By";
+    protected $name = "Unnamed Group By";
 
     private $sort = \Report\Content\Groupby::SORT_NONE;
 
@@ -58,14 +58,6 @@ class Groupby {
         return $array;
     }
     
-    public function getName() {
-        return $this->name;
-    }
-
-    public function setName($name) {
-        $this->name = $name;
-    }
-
     private function sort_array(&$array) {
         if (is_array($this->sort)) {
             $sort = static::SORT_ARBITRARY;

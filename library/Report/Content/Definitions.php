@@ -2,8 +2,9 @@
 
 namespace Report\Content;
 
-class Definitions {
+class Definitions extends \Report\Content {
     private $analyzers = array();
+    protected $name = 'Definitions';
     
     public function setAnalyzers($analyzers) {
         $this->analyzers = $analyzers;
@@ -20,9 +21,6 @@ class Definitions {
         return $return;
     }
     
-    public function getName() {
-        return 'Definitions';
-    }
 }
 
 ?>

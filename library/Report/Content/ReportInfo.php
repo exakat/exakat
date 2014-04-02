@@ -2,14 +2,13 @@
 
 namespace Report\Content;
 
-class ReportInfo {
+class ReportInfo extends \Report\Content {
     private $list = array();
-    private $project = null;
-    
-    public function __construct($project) {
-        $this->project = $project;
-    }
 
+    private $project = null;
+    private $neo4j = null;
+    private $mysql = null;
+    
     public function collect() {
         include(dirname(dirname(__DIR__)).'/App.php');
         $this->list['Audit software version'] = $app['version'];
@@ -41,6 +40,10 @@ class ReportInfo {
 
     public function setMysql($client) {
         $this->mysql = $client;
+    }
+
+    public function setProject($project) {
+        $this->project = $project;
     }
     
     public function toArray() {

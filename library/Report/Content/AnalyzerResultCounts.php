@@ -2,11 +2,13 @@
 
 namespace Report\Content;
 
-class AnalyzerResultCounts {
+class AnalyzerResultCounts extends \Report\Content {
     private $analyzers = array();
     private $neo4j = null;
     private $showEmpty = false;
     private $showTotal = true;
+    
+    protected $name = 'Analyzers result counts';
     
     public function setAnalyzers($analyzers) {
         $this->analyzers = $analyzers;
@@ -39,10 +41,6 @@ class AnalyzerResultCounts {
         };
         
         return $return;
-    }
-    
-    public function getName() {
-        return 'Analyzers result counts';
     }
 }
 

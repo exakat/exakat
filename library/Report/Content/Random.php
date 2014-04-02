@@ -2,15 +2,12 @@
 
 namespace Report\Content;
 
-class Random {
+class Random extends \Report\Content {
     private $type = 'Hash';
+    protected $name = "Random Content";
     
     public function setType($type) {
         $this->type = $type;
-    }
-
-    public function getName() {
-        return "Random Content";
     }
 
     public function getDescription() {

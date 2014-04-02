@@ -2,11 +2,9 @@
 
 namespace Report\Content;
 
-class NoResult {
+class NoResult extends \Report\Content {
     private $analyzers = array();
     
-    public function __construct() { }
-
     public function addAnalyzer($analyzer) {
         $a = \Analyzer\Analyzer::getInstance($analyzer, null);
         
