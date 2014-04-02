@@ -4,7 +4,7 @@ class A {
     private static $privateStatic = 0;
 
     private static function f() {
-        self::$privateStatic[$key] = "value";
+        self::$privateStatic2[$key] = "value";
     }
 }
 ?>

@@ -1415,7 +1415,7 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
                                          'Dowhile', 'Try', 'Class', 'Interface', 'While', 'Break', 'Assignation' ]}.any() &&
     it.out('NEXT').filter{!(it.token in ['T_ELSEIF'])}.any() &&
-    it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_ELSEIF'])}.any()) {
+    it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_ELSEIF', 'T_OPEN_CURLY'])}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     
