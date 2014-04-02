@@ -239,3 +239,4 @@ Report usage of alternative syntax in appinfo()
 Report usage of one-liner in appinfo 
 
 Check for double 'case' check. 
+CHeck that Classes and file have the same names.
