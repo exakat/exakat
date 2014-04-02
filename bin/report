@@ -104,6 +104,16 @@ $config = parse_ini_file('./projects/'.$project.'/config.ini');
 print "Building report ".REPORT." for project $project in file ".FILE.", with format ".FORMAT."\n";
 $begin = microtime(true);
 
+if (count(glob('library/Report/Report/'.REPORT.'.php')) == 0) {
+    $reports = glob('library/Report/Report/*.php');
+    print "Couldn't load report '".REPORT."'. Please choose among the ".count($reports)." followings : \n";
+    foreach($reports as $report) {
+        print "+ ".substr(basename($report), 0, -4)."\n";
+    }
+    
+    die('');
+}
+
 $reportClass = "\\Report\\Report\\".REPORT;
 $report = new $reportClass($client, $db);
 $report->setProject($project);
