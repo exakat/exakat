@@ -45,7 +45,7 @@ class Web {
         $ht->setAnalyzer('ReportInfo');
         
         $this->createH1('Dashboard');
-        $groupby = new \Report\Content\GroupBy($this->client);
+        $groupby = new \Report\Content\Groupby($this->client);
         $groupby->setGroupby('getSeverity');
         $groupby->setCount('toCount');
         $groupby->setSort(array('Critical', 'Major', 'Minor'));
