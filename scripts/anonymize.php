@@ -30,6 +30,8 @@ foreach($tokens as $t) {
                 $t[1] = "'".$strings."'";
                 break;
             case T_STRING:
+                if (strtolower($t[1]) == 'null') { break ; }
+                // otherwise, fall through!
             case T_ENCAPSED_AND_WHITESPACE :
                 $strings++;
                 if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { print "Skip T_ENCAPSED_AND_WHITESPACE : $strings\n"; $strings++; }
@@ -54,6 +56,9 @@ foreach($tokens as $t) {
             case T_UNSET_CAST : 
             case T_INT_CAST : 
             case T_STRING_CAST : 
+
+            case T_CONST :
+            case T_LIST :
             
             case T_ARRAY_CAST : 
             case T_RETURN :
