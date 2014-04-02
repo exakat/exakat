@@ -158,7 +158,11 @@ class Premier {
         $this->createH1('Application information');
 
         $ht = $this->addContent('Text', 'This is an overview of your application');
-//        $ht = $this->addContent('HashTable', $analyse);
+        $analyze = new \Report\Content\Appinfo();
+        $analyze->setNeo4j($this->client);
+        $analyze->collect();
+        $ht = $this->addContent('HashTable', $analyze);
+
 
         $this->createH1('Inventories');
         ///// Application analyzes 
