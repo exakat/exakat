@@ -155,10 +155,21 @@ class Premier {
             $defs->setAnalyzers($analyzes);
         }
 
+        $this->createH1('Application information');
+
+        $ht = $this->addContent('Text', 'This is an overview of your application');
+//        $ht = $this->addContent('HashTable', $analyse);
+
         $this->createH1('Inventories');
         ///// Application analyzes 
         $analyzes = array('Php/Incompilable',
                           'Variables/Variablenames',
+                          'Classes/Classnames',
+                          'Type/Integer',
+                          'Type/HttpHeader',
+                          'Type/UnicodeBlock',
+                          'Type/Md5String',
+                          'Type/Email',
                           );
         // hash with config
         /*
