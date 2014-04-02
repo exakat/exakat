@@ -1413,7 +1413,7 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 
 // lone instruction AFTER
 if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
-                                         'Dowhile', 'Try', 'Class', 'Interface', 'While', 'Break' ]}.any() &&
+                                         'Dowhile', 'Try', 'Class', 'Interface', 'While', 'Break', 'Assignation' ]}.any() &&
     it.out('NEXT').filter{!(it.token in ['T_ELSEIF'])}.any() &&
     it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_ELSEIF'])}.any()) {
     sequence = it;
@@ -2213,6 +2213,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES',
         'T_ABSTRACT', 'T_FINAL', 'T_STATIC', 'T_CONST', 
         'T_AT', 'T_CASE', 
+        'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
         ];
 
 list_after = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
