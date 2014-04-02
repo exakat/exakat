@@ -3,6 +3,8 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
+define('UPDATE_STATUS', 7); // search for update_ status in this code.
+
 $db = new Db('wordpress');
 
 if (isset($argv[1])) {
@@ -70,7 +72,9 @@ function process_project($exakat) {
     $db = new Db('wordpress');
 
     print "Running test {$exakat['id']} : {$exakat['vcs_url']}\n";
+    $step = 0;
 
+    update_status($exakat['id'], floo($step / UPDATE_STATUS, 0), "Fetching the code");
     if (!file_exists('projects/'.$exakat['name'])) {
         print "Initializing project ".$exakat['name']."\n";
         shell_exec('php bin/project_init '.$exakat['name'].' '.$exakat['vcs_url']); 
@@ -81,10 +85,12 @@ function process_project($exakat) {
     print "Cleaning neo4j\n";
     shell_exec('sh scripts/clean.sh'); // or php bin/delete
 
-    print "Getting files stats\n";
+    print "\n";
+    update_status($exakat['id'], floo($step / UPDATE_STATUS, 0), "Getting project file statistics");
     shell_exec('php bin/files '.$exakat['name'].'');
 
     print "Loading data\n";
+    update_status($exakat['id'], floo($step / UPDATE_STATUS, 0), "Tokenizing the code");
     shell_exec('php bin/load -q -r -d ./projects/'.$exakat['name'].'/code/ -p '.$exakat['name']);
 
     print "Building root\n";
@@ -100,16 +106,23 @@ function process_project($exakat) {
     sleep(2);
 
     print "Analyzing the code\n";
+    update_status($exakat['id'], floo($step / UPDATE_STATUS, 0), "Analyzing the code");
     shell_exec('php bin/analyze -P Web ');
 
     print "Preparing the report\n";
+    update_status($exakat['id'], floo($step / UPDATE_STATUS, 0), "Preparing the report");
     shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/web  -ace -r Premier');
     shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/Premier-sqlite  -sqlite -r Premier');
 
     print "Project {$exakat['name']} reported\n";
-    $db->query('UPDATE exakat_projects SET `progress` = 100 WHERE id = '.$exakat['id']);
+    update_status($exakat['id'], floo($step / UPDATE_STATUS, 0), "Project reported");
     print $db->error();
 
     print "Finished\n";
+}
+
+function update_status($id, $progress, $message) {
+    $db = new Db("wordpress");
+    $db->query("UPDATE exakat_projects SET progress = $progress, progress_human = '$message' WHERE id=$id");
 }
 ?>
