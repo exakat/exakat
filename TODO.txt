@@ -237,3 +237,5 @@ Update Ace/Hastable to suppoort the actual number of columns (just like Horizont
 Report usage of alternative syntax mixed with normal one.
 Report usage of alternative syntax in appinfo()
 Report usage of one-liner in appinfo 
+
+Check for double 'case' check. 
