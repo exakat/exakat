@@ -16,6 +16,9 @@ class Sqlite {
     }
     
     public function toFile($filename) {
+        if (file_exists($filename)) {
+            unlink($filename);
+        }
         $db = new \SQLite3($filename);
 
         $results = $db->query('CREATE TABLE reports (id INTEGER PRIMARY KEY AUTOINCREMENT, analyzer TEXT, value TEXT, count INT)');
