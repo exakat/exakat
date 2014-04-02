@@ -129,6 +129,7 @@ function process_file($filename, $log_file) {
     }
 
     if (!$Php->compile($filename)) {
+        // @todo store line error and the actual parse error.
         $environnement = new Environnement($client, $file); 
         $environnement->initFile();
         
