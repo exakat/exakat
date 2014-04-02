@@ -31,10 +31,8 @@ class Web {
         $this->createH1('Summary');
         $this->summary = $this->addContent('Summary', $this->root);
 
-        $this->createH1('Report presentation');
-
         $this->createH2('Report synopsis'); 
-        $this->addContent('Text', ' ');
+//        $this->addContent('Text', ' ');
 
         $this->createH2('Report configuration'); 
 
