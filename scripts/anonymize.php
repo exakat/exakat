@@ -47,8 +47,14 @@ foreach($tokens as $t) {
             case T_ISSET : 
             case T_EXIT : 
 
+            case T_ARRAY_CAST : 
+            case T_BOOL_CAST : 
+            case T_DOUBLE_CAST : 
+            case T_OBJECT_CAST : 
+            case T_UNSET_CAST : 
             case T_INT_CAST : 
             case T_STRING_CAST : 
+            
             case T_ARRAY_CAST : 
             case T_RETURN :
             case T_SWITCH : 
