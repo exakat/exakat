@@ -3,7 +3,7 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-define('UPDATE_STATUS', 7); // search for update_ status in this code.
+define('UPDATE_STATUS', 6); // search for update_ status in this code.
 
 $db = new Db('wordpress');
 
@@ -74,7 +74,7 @@ function process_project($exakat) {
     print "Running test {$exakat['id']} : {$exakat['vcs_url']}\n";
     $step = 0;
 
-    update_status($exakat['id'], floor($step++ / UPDATE_STATUS), "Fetching the code");
+    update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Fetching the code");
     if (!file_exists('projects/'.$exakat['name'])) {
         print "Initializing project ".$exakat['name']."\n";
         shell_exec('php bin/project_init '.$exakat['name'].' '.$exakat['vcs_url']); 
@@ -86,11 +86,11 @@ function process_project($exakat) {
     shell_exec('sh scripts/clean.sh'); // or php bin/delete
 
     print "\n";
-    update_status($exakat['id'], floor($step++ / UPDATE_STATUS), "Getting project file statistics");
+    update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Getting project file statistics");
     shell_exec('php bin/files '.$exakat['name'].'');
 
     print "Loading data\n";
-    update_status($exakat['id'], floor($step++ / UPDATE_STATUS), "Tokenizing the code");
+    update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Tokenizing the code");
     shell_exec('php bin/load -q -r -d ./projects/'.$exakat['name'].'/code/ -p '.$exakat['name']);
 
     print "Building root\n";
@@ -106,16 +106,16 @@ function process_project($exakat) {
     sleep(2);
 
     print "Analyzing the code\n";
-    update_status($exakat['id'], floor($step++ / UPDATE_STATUS), "Analyzing the code");
+    update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Analyzing the code");
     shell_exec('php bin/analyze -P Web ');
 
     print "Preparing the report\n";
-    update_status($exakat['id'], floor($step++ / UPDATE_STATUS), "Preparing the report");
+    update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Preparing the report");
     shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/web  -ace -r Web');
     shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/Premier-sqlite  -sqlite -r Web');
 
     print "Project {$exakat['name']} reported\n";
-    update_status($exakat['id'], floor($step++ / UPDATE_STATUS), "Project reported");
+    update_status($exakat['id'], 100, "Project reported");
     print $db->error();
 
     print "Finished\n";
