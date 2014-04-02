@@ -299,6 +299,7 @@ function process_file($filename, $log_file) {
                       isset($tokens[$id + 1]) && 
                       is_array($tokens[$id + 1]) && 
                       $Php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
+                      /*
                 $Tid++;
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
@@ -308,7 +309,9 @@ function process_file($filename, $log_file) {
                                               ->setProperty('modifiedBy', 'bin/load2')
                                               ->save();
 
+                */
                 $id++;
+                continue;
             } elseif ($Php->getTokenname($token[0]) == 'T_INLINE_HTML' && 
                       $id == 0) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
