@@ -4,12 +4,17 @@ include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
 define('UPDATE_STATUS', 6); // search for update_ status in this code.
+define('PROJECT_MAX_TOKENS', 150000); // maximum size of the project to be tested.
 
 $db = new Db('wordpress');
 
+$log = new Log('project_web');
+$log->log( "Starting time : ".date('r'));
+
 if (isset($argv[1])) {
     if ($project_id = intval($argv[1])) {
-        print "Doing the project id $project_id\n";
+        print "Processing the project id $project_id\n";
+        $log->log( "Processing the project id $project_id");
 
         $res = $db->query('SELECT id, name, vcs_url FROM exakat_projects WHERE id = '.$project_id);
         if (!$res) { 
@@ -19,14 +24,18 @@ if (isset($argv[1])) {
     
         $exakat = $res->fetch_array();
         process_project($exakat);
+        $log->log( "Finished the project id $project_id");
     } elseif ($argv[1] == '-D') {
+        $log->log( "Starting demon system");
         print "Starting demon system\n";
         $wait = 0;
         
         do {
             $res = $db->query('SELECT count(*) FROM exakat_projects WHERE progress = 0');
             $count = $res->fetch_array();
+
             if ($count[0] > 0) { 
+                $log->log( "Current queue : {$count[0]}");
                 $res = $db->query('SELECT name, vcs_url, id FROM exakat_projects WHERE progress = 0 ORDER BY id LIMIT 1');
                 $exakat = $res->fetch_array();
                 print ("\n");
@@ -36,6 +45,7 @@ if (isset($argv[1])) {
                 print ".";
                 if($wait % 100 == 0) {
                     print " ($wait)\n";
+                    $log->log( "Waited $wait");
                 }
                 sleep(5);
             }
@@ -47,16 +57,20 @@ if (isset($argv[1])) {
 
         if ($res) { 
             $exakat = $res->fetch_array();
+
+            $log->log( "Project $project_name has id {$exakat['id']}");
             print "Project $project_name has id {$exakat['id']}\n";
             process_project($exakat);
-            die();
+            $log->log( "Finished $project_name");
+        } else {
+            print "Don't know what to do. Aborting\n";
+            $log->log( "Don't know what to do with '$project_name'. Aborting");
         }
-    
-        print "Don't know what to do. Aborting\n";
-        die();
     }
 } else {
     print "Doing only one project\n";
+    $log->log( "Doing only one project");
+
     $res = $db->query('SELECT name, vcs_url, id FROM exakat_projects WHERE progress = 0 ORDER BY id LIMIT 1');
     if (!$res) { 
         print "No projects to process; Stopping\n";
@@ -66,6 +80,7 @@ if (isset($argv[1])) {
     // Warning : Race condition ! 
     $exakat = $res->fetch_array();
     process_project($exakat);
+    $log->log( "Finished one project");
 }
 
 function process_project($exakat) {
@@ -87,7 +102,14 @@ function process_project($exakat) {
 
     print "\n";
     update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Getting project file statistics");
-    shell_exec('php bin/files '.$exakat['name'].'');
+    $json = shell_exec('php bin/files '.$exakat['name'].' -json');
+    $results = json_decode($json);
+    
+    if ($results->tokens > PROJECT_MAX_TOKENS) {
+        update_status($exakat['id'], 101, "This project is too large to test at the moment.");
+        print "Project too big ({$results->tokens})\n";
+        return false;
+    }
 
     print "Loading data\n";
     update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Tokenizing the code");
