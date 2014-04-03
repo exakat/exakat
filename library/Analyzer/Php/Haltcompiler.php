@@ -4,7 +4,7 @@ namespace Analyzer\Php;
 
 use Analyzer;
 
-class VardumpUsage extends Analyzer\Common\FunctionUsage {
+class Haltcompiler extends Analyzer\Common\FunctionUsage {
     protected $severity  = \Analyzer\Analyzer::S_NONE;
     protected $timeToFix = \Analyzer\Analyzer::S_NONE;
 
