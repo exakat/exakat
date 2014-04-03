@@ -2,7 +2,7 @@
 
 namespace Report\Format\Html;
 
-class Liste extends Report\Format\Html { 
+class Liste extends \Report\Format\Html { 
 
     public function render($output, $data) {
         $html = "<ul>";
