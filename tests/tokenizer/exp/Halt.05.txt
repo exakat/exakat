@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    __halt_compiler
+  Label : ELEMENT
+    try
+    Label : CODE
+      {
+      Label : CODE
+        void
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception
+      Label : CODE
+        {
+        Label : CODE
+          void
+      Label : VARIABLE
+        $e
