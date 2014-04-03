@@ -22,6 +22,14 @@ class ClassUsage extends Analyzer\Analyzer {
         $this->atomIs("Staticconstant")
              ->outIs('CLASS');
         $this->prepareQuery();
+
+        $this->atomIs("Catch")
+             ->outIs('CLASS');
+        $this->prepareQuery();
+
+        $this->atomIs("Typehint")
+             ->outIs('CLASS');
+        $this->prepareQuery();
     }
 }
 
