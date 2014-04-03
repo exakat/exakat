@@ -19,7 +19,7 @@ class VariableUsedOnce extends Analyzer\Analyzer {
              ->analyzerIsNot("Analyzer\\Variables\\Blind")
              ->analyzerIsNot("Analyzer\\Variables\\InterfaceArguments")
              ->codeIsNot(VariablePhp::$variables, true)
-             ->eachCounted('fullcode', 1)
+             ->eachCounted('code', 1)
              ;
     }
 }
