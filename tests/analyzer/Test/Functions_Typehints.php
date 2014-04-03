@@ -1,0 +1,15 @@
+<?php
+
+namespace Test;
+
+include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_test');
+spl_autoload_register('Autoload::autoload_phpunit');
+
+class Functions_Typehints extends Analyzer {
+    /* 2 methods */
+
+    public function testFunctions_Typehints01()  { $this->generic_test('Functions_Typehints.01'); }
+    public function testFunctions_Typehints02()  { $this->generic_test('Functions_Typehints.02'); }
+}
+?>
