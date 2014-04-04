@@ -243,3 +243,6 @@ Check for double 'case' check.
 Extensions may defined Namespaces (check them for conflict... ?)
 CHeck that Classes and file have the same names.
 Support namespaces when searching for classes.
+
+Calculate a ratio of whitespace / comment / code
+Make stats on the type of comment (//, /*, # )
