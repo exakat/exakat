@@ -91,6 +91,10 @@ class Extension extends Analyzer\Analyzer {
                  ->fullcode($interfaces);
             $this->prepareQuery();
         }
+
+        if (!empty($namespaces)) {
+            
+        }
     }
 }
 
