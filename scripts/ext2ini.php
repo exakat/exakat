@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($argv[1]) || empty($argv[1])) {
+    print "Usage : php scripts/ext2ini.php <extension> (check php -m).\n";
+    die();
+}
 $extension = $argv[1];
 
 if (!extension_loaded($extension)) {
@@ -78,13 +82,13 @@ $code = str_replace('<SKELETON>', $extension, $code);
 file_put_contents('library/Analyzer/Extensions/Ext'.$extension.'.php', $code);
 
 // adding the class in the Appinfo
-$php = file_get_contents('library/Report/Appinfo.php');
+$php = file_get_contents('library/Report/Content/Appinfo.php');
 if (strpos($php, "'ext/$extension'") === false) {
     $php = str_replace("//                          'ext/skeleton'   => 'Extensions/Extskeleton',\n",
                        "                            'ext/$extension'   => 'Extensions/Ext$extension',
 //                          'ext/skeleton'   => 'Extensions/Extskeleton',\n",
                         $php);
-    file_put_contents('library/Report/Appinfo.php', $php);
+    file_put_contents('library/Report/Content/Appinfo.php', $php);
 }
                     
 
