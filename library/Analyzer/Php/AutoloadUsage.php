@@ -16,7 +16,8 @@ class AutoloadUsage extends Analyzer\Common\FunctionUsage {
                                  'spl_autoload_unregister',
                                  'spl_autoload',
                                  'spl_classes',
-                                 'spl_object_hash',);
+                                 'spl_object_hash',
+                                 '__autoload',);
         parent::analyze();
     }
 }
