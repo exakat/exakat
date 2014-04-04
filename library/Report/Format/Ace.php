@@ -77,6 +77,7 @@ class Ace {
         }
         
         if (count($this->jsLibraries) > 0) {
+            $this->jsLibraries = array_unique($this->jsLibraries);
             $this->jsLibraries = "        <script src=\"".join("\"></script>\n        <script src=\"", $this->jsLibraries)."\"></script>\n";
         } else {
             $this->jsLibraries = "<!-- No extra libraries -->";
