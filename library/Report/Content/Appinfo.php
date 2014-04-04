@@ -45,6 +45,7 @@ class Appinfo extends \Report\Content {
                             'ext/sqlite3'    => 'Extensions/Extsqlite3',
                             'ext/ssh2'       => 'Extensions/Extssh2',
                             'ext/standard'   => 'Extensions/Extstandard',
+                            'ext/tidy'       => 'Extensions/Exttidy',
                             'ext/tokenizer'  => 'Extensions/Exttokenizer',
                             'ext/yaml'       => 'Extensions/Extyaml',
                             'ext/zip'        => 'Extensions/Extzip',
