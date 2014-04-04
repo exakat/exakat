@@ -47,6 +47,7 @@ class Appinfo extends \Report\Content {
                             'ext/standard'   => 'Extensions/Extstandard',
                             'ext/tidy'       => 'Extensions/Exttidy',
                             'ext/tokenizer'  => 'Extensions/Exttokenizer',
+                            'ext/writer'     => 'Extensions/Extxmlwriter',
                             'ext/yaml'       => 'Extensions/Extyaml',
                             'ext/zip'        => 'Extensions/Extzip',
                             'ext/zlib'       => 'Extensions/Extzlib',
