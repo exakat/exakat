@@ -14,5 +14,4 @@
     $a = $_SESSION['key']; 
     session_write_close(); 
 
-    // Work & modify the global & private context (be ware of changing the global context!) 
  ?> 
