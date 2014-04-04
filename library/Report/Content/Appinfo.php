@@ -13,8 +13,9 @@ class Appinfo extends \Report\Content {
                             'ext/bcmath'     => 'Extensions/Extbcmath',
                             'ext/bzip2'      => 'Extensions/Extbzip2',
                             'ext/calendar'   => 'Extensions/Extcalendar',
+                            'ext/crypto'     => 'Extensions/Extcrypto',
                             'ext/ctype'      => 'Extensions/Extctype',
-                            'ext/ctype'      => 'Extensions/Extcurl',
+                            'ext/curl'       => 'Extensions/Extcurl',
                             'ext/dba'        => 'Extensions/Extdba',
                             'ext/enchant'    => 'Extensions/Extenchant',
                             'ext/ereg'       => 'Extensions/Extereg',
@@ -105,13 +106,13 @@ class Appinfo extends \Report\Content {
                     );
 
         foreach($extensions as $section => $hash) {
-            $this->list['--'.$section] = '';
+            $this->list[$section] = array();
             foreach($hash as $name => $ext) {
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].hasNot('notCompatibleWithPhpVersion', null).count()"; 
                 $vertices = $this->query($this->neo4j, $queryTemplate);
                 $v = $vertices[0][0];
                 if ($v == 1) {
-                    $this->list[$name] = "Incomp.";
+                    $this->list[$section][$name] = "Incomp.";
                     continue ;
                 } 
 
@@ -119,7 +120,7 @@ class Appinfo extends \Report\Content {
                 $vertices = $this->query($this->neo4j, $queryTemplate);
                 $v = $vertices[0][0];
                 if ($v == 0) {
-                    $this->list[$name] = "Not run";
+                    $this->list[$section][$name] = "Not run";
                     continue;
                 } 
 
@@ -128,7 +129,7 @@ class Appinfo extends \Report\Content {
                     $vertices = $this->query($this->neo4j, $queryTemplate);
     
                     $v = $vertices[0][0];
-                    $this->list[$name] = $v == "true" ? "Yes" : "No";
+                    $this->list[$section][$name] = $v == "true" ? "Yes" : "No";
                 } catch (Exception $e) {
                     // empty catch ? 
                 }
