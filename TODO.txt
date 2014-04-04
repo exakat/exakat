@@ -246,3 +246,6 @@ Support namespaces when searching for classes.
 
 Calculate a ratio of whitespace / comment / code
 Make stats on the type of comment (//, /*, # )
+
+Make a dummy project to check all the analyzers in the same time (find a way to report which are tested or not automatically. May be comments ? )
+Make an export to JSON format for testing purpose.
