@@ -7,8 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Php_AutoloadUsage extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testPhp_AutoloadUsage01()  { $this->generic_test('Php_AutoloadUsage.01'); }
+    public function testPhp_AutoloadUsage02()  { $this->generic_test('Php_AutoloadUsage.02'); }
 }
 ?>
