@@ -239,4 +239,7 @@ Report usage of alternative syntax in appinfo()
 Report usage of one-liner in appinfo 
 
 Check for double 'case' check. 
+
+Extensions may defined Namespaces (check them for conflict... ?)
 CHeck that Classes and file have the same names.
+Support namespaces when searching for classes.
