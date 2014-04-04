@@ -94,6 +94,7 @@ class Appinfo extends \Report\Content {
                     'Constants' => array(
                             'Constants'     => 'Constants/ConstantDefinition',
                             'PHP constants' => 'Constants/PhpConstantUsage',
+                            'PHP constants' => 'Constants/MagicConstantUsage',
                     ),
                     'Integers' => array(
                             'Integers'    => 'Type/Integer',
