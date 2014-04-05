@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      1
-  Label : THEN
-    {
-    Label : CODE
-      void
-  Label : ELSE
-    {
-    Label : CODE
-      void
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        1
+    Label : THEN
+      {
+      Label : CODE
+        void
+    Label : ELSE
+      {
+      Label : CODE
+        void

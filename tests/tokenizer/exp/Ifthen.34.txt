@@ -1,20 +1,22 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      $a
-  Label : THEN
-    Block With if/elseif
-    Label : CODE
-      ++
-      Label : POSTPLUSPLUS
-        $b
-  Label : ELSE
-    Block With else
-    Label : CODE
-      ++
-      Label : POSTPLUSPLUS
-        $c
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      Block With if/elseif
+      Label : CODE
+        ++
+        Label : POSTPLUSPLUS
+          $b
+    Label : ELSE
+      Block With else
+      Label : CODE
+        ++
+        Label : POSTPLUSPLUS
+          $c

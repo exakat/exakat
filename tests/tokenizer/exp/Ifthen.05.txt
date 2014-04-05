@@ -1,32 +1,34 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      1
-  Label : THEN
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        $a
-  Label : ELSE
-    elseif
+  makeSequence
+  Label : ELEMENT
+    if
     Label : CONDITION
       (
       Label : CODE
-        2
+        1
     Label : THEN
       {
       Label : CODE
         ;
         Label : ELEMENT
-          $b
+          $a
     Label : ELSE
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          $c
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          2
+      Label : THEN
+        {
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $b
+      Label : ELSE
+        {
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $c

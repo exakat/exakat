@@ -15,15 +15,13 @@ Label : CODE
             Label : ARGUMENT
               $a
     Label : THEN
-      Block With control if elseif
+      Block With if/elseif
       Label : CODE
-        Block With if/elseif
-        Label : CODE
-          .=
-          Label : RIGHT
-            'B'
-          Label : LEFT
-            $b
+        .=
+        Label : RIGHT
+          'B'
+        Label : LEFT
+          $b
   Label : ELEMENT
     .=
     Label : RIGHT

@@ -1,37 +1,37 @@
 <?php 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      $a
-  Label : THEN
-    ;
-    Label : ELEMENT
-      D
-    Label : ELEMENT
-      C
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $d
-    Label : ELEMENT
-      B
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $c
-    Label : ELEMENT
-      Block With Sequence For Case Without Semicolon
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      makeSequence
+      Label : ELEMENT
+        A
+      Label : ELEMENT
+        D
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $d
+      Label : ELEMENT
+        C
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $c
+      Label : ELEMENT
+        B
       Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $b
-      Label : ELEMENT
-        A

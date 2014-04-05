@@ -1,41 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        $b
-    Label : THEN
-      Block With if/elseif
-      Label : CODE
-        .=
-        Label : LEFT
-          $c
-        Label : RIGHT
-          "
-          Label : CONTAIN
-            Concatenation
-            Label : CONCAT
-              d
-            Label : CONCAT
-              $e
-            Label : CONCAT
-              \n
-    Label : ELSE
-      Block With else
-      Label : CODE
-        .=
-        Label : LEFT
-          $f
-        Label : RIGHT
-          "
-          Label : CONTAIN
-            Concatenation
-            Label : CONCAT
-              $g
+  makeSequence
   Label : ELEMENT
     if
     Label : CONDITION
@@ -45,17 +11,15 @@ Label : CODE
     Label : THEN
       {
       Label : CODE
-        ;
+        makeSequence
         Label : ELEMENT
           =
-          Label : LEFT
-            $a
           Label : RIGHT
             preg_replace
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                "z"
+                $f
               Label : ARGUMENT
                 "
                 Label : CONTAIN
@@ -67,4 +31,40 @@ Label : CODE
                   Label : CONCAT
                     /
               Label : ARGUMENT
-                $f
+                "z"
+          Label : LEFT
+            $a
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $b
+    Label : THEN
+      makeSequence
+      Label : ELEMENT
+        .=
+        Label : RIGHT
+          "
+          Label : CONTAIN
+            Concatenation
+            Label : CONCAT
+              d
+            Label : CONCAT
+              $e
+            Label : CONCAT
+              \n
+        Label : LEFT
+          $c
+    Label : ELSE
+      makeSequence
+      Label : ELEMENT
+        .=
+        Label : RIGHT
+          "
+          Label : CONTAIN
+            Concatenation
+            Label : CONCAT
+              $g
+        Label : LEFT
+          $f

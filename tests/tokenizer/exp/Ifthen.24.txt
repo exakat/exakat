@@ -1,38 +1,38 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      [
-      Label : INDEX
-        'b'
-      Label : VARIABLE
-        $a
-  Label : THEN
-    Block With if/elseif
-    Label : CODE
-      for
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
       Label : CODE
-        Block With For
+        [
+        Label : INDEX
+          'b'
+        Label : VARIABLE
+          $a
+    Label : THEN
+      makeSequence
+      Label : ELEMENT
+        for
         Label : CODE
           {
           Label : CODE
             void
-      Label : FINAL
-        <=
-        Label : LEFT
-          $d
-        Label : RIGHT
-          8
-      Label : INIT
-        =
-        Label : LEFT
-          $c
-        Label : RIGHT
-          1
-      Label : INCREMENT
-        ++
-        Label : POSTPLUSPLUS
-          $e
+        Label : INIT
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $c
+        Label : FINAL
+          <=
+          Label : RIGHT
+            8
+          Label : LEFT
+            $d
+        Label : INCREMENT
+          ++
+          Label : POSTPLUSPLUS
+            $e

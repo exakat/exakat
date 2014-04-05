@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     if
     Label : CONDITION
@@ -8,7 +8,7 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      ;
+      makeSequence
       Label : ELEMENT
         F
       Label : ELEMENT
@@ -18,30 +18,26 @@ Label : CODE
           Label : CODE
             $c
         Label : THEN
-          ;
+          makeSequence
+          Label : ELEMENT
+            C
           Label : ELEMENT
             E
           Label : ELEMENT
-            Block With Sequence For Case Without Semicolon
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $d
-              Label : THEN
-                D
-            Label : ELEMENT
-              C
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $d
+            Label : THEN
+              D
       Label : ELEMENT
-        Block With Sequence For Case Without Semicolon
-        Label : ELEMENT
-          A
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $b
-        Label : ELEMENT
-          B
+        A
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b

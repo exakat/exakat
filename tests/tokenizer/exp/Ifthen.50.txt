@@ -1,11 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    exit
-    Label : ARGUMENTS
-      void
+  makeSequence
   Label : ELEMENT
     if
     Label : CONDITION
@@ -15,8 +11,8 @@ Label : CODE
         Label : NOT
           $a
     Label : THEN
-      Block With if/elseif
-      Label : CODE
+      makeSequence
+      Label : ELEMENT
         b
         Label : ARGUMENTS
           void
@@ -27,20 +23,20 @@ Label : CODE
               Label : ARGUMENT
                 "C"
     Label : ELSE
-      Block With else
-      Label : CODE
+      makeSequence
+      Label : ELEMENT
         if
         Label : CONDITION
           (
           Label : CODE
             ==
-            Label : LEFT
-              $d
             Label : RIGHT
               1
+            Label : LEFT
+              $d
         Label : THEN
-          Block With if/elseif
-          Label : CODE
+          makeSequence
+          Label : ELEMENT
             e
             Label : ARGUMENTS
               void
@@ -51,20 +47,24 @@ Label : CODE
                   Label : ARGUMENT
                     "g"
         Label : ELSE
-          Block With else
-          Label : CODE
+          makeSequence
+          Label : ELEMENT
             if
             Label : CONDITION
               (
               Label : CODE
                 ==
-                Label : LEFT
-                  $h
                 Label : RIGHT
                   2
+                Label : LEFT
+                  $h
             Label : THEN
-              Block With if/elseif
-              Label : CODE
+              makeSequence
+              Label : ELEMENT
+                exit
+                Label : ARGUMENTS
+                  void
+              Label : ELEMENT
                 i
                 Label : ARGUMENTS
                   void

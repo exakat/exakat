@@ -1,48 +1,50 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      $a
-  Label : THEN
-    Block With if/elseif
-    Label : CODE
-      ->
-      Label : OBJECT
-        $b
-      Label : METHOD
-        c
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $d
-            Label : METHOD
-              e
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'f'
-  Label : ELSE
-    Block With else
-    Label : CODE
-      ->
-      Label : OBJECT
-        $bb
-      Label : METHOD
-        cc
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $dd
-            Label : METHOD
-              ee
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'ff'
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      makeSequence
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $b
+        Label : METHOD
+          c
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $d
+              Label : METHOD
+                e
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'f'
+    Label : ELSE
+      makeSequence
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $bb
+        Label : METHOD
+          cc
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $dd
+              Label : METHOD
+                ee
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'ff'

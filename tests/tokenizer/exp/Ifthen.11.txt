@@ -1,64 +1,66 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      $c
-  Label : THEN
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $e
-        Label : RIGHT
-          3
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $f
-        Label : RIGHT
-          4
-      Label : ELEMENT
-        switch
-        Label : NAME
-          $c
-        Label : CASES
-          {
-          Label : CODE
-            case
-            Label : CODE
-              Block With Sequence For Case
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  =
-                  Label : LEFT
-                    $x
-                  Label : RIGHT
-                    1
-                Label : ELEMENT
-                  break
-                  Label : LEVEL
-                    void
-            Label : CASE
-              'a'
-  Label : ELSE
-    elseif
+  makeSequence
+  Label : ELEMENT
+    if
     Label : CONDITION
       (
       Label : CODE
-        $d
+        $c
     Label : THEN
       {
       Label : CODE
-        ;
+        makeSequence
+        Label : ELEMENT
+          switch
+          Label : NAME
+            $c
+          Label : CASES
+            {
+            Label : CODE
+              Sequence Case Default
+              Label : ELEMENT
+                case
+                Label : CODE
+                  makeSequence
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      1
+                    Label : LEFT
+                      $x
+                  Label : ELEMENT
+                    break
+                    Label : LEVEL
+                      void
+                Label : CASE
+                  'a'
         Label : ELEMENT
           =
+          Label : RIGHT
+            3
+          Label : LEFT
+            $e
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            4
           Label : LEFT
             $f
-          Label : RIGHT
-            5
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          $d
+      Label : THEN
+        {
+        Label : CODE
+          makeSequence
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              5
+            Label : LEFT
+              $f

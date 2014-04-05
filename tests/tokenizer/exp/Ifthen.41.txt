@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     if
     Label : CONDITION
@@ -8,58 +8,54 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      ;
+      makeSequence
+      Label : ELEMENT
+        A
       Label : ELEMENT
         G
       Label : ELEMENT
-        Block With Sequence For Case Without Semicolon
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              $b
-          Label : THEN
-            ;
-            Label : ELEMENT
-              D
-            Label : ELEMENT
-              print
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $b
+        Label : THEN
+          makeSequence
+          Label : ELEMENT
+            D
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                .
+                Label : CONCAT
                   t
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
-                      'd'
-            Label : ELEMENT
-              C
-            Label : ELEMENT
-              print
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    t
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        'e'
-                  Label : CONCAT
-                    $f
-            Label : ELEMENT
-              F
-            Label : ELEMENT
-              Block With Sequence For Case Without Semicolon
-              Label : ELEMENT
-                print
+                      'e'
+                Label : CONCAT
+                  $f
+          Label : ELEMENT
+            F
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                t
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
-                    $c
-              Label : ELEMENT
-                B
-        Label : ELEMENT
-          A
+                    'd'
+          Label : ELEMENT
+            B
+          Label : ELEMENT
+            C
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c

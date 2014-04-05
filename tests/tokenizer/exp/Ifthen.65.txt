@@ -3,10 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    array
-    Label : ARGUMENTS
-      void
-  Label : ELEMENT
     =
     Label : RIGHT
       G
@@ -57,7 +53,9 @@ Label : CODE
       Label : CODE
         return
         Label : RETURN
-          void
+          array
+          Label : ARGUMENTS
+            void
   Label : ELEMENT
     global
     Label : NAME

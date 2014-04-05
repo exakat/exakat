@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     if
     Label : CONDITION
@@ -9,6 +9,8 @@ Label : CODE
       Label : CODE
         $x
     Label : THEN
-      $y
+      Block With if/elseif
+      Label : CODE
+        $y
     Label : ELSE
       $z

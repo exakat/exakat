@@ -1,76 +1,78 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      1
-  Label : THEN
-    {
-    Label : CODE
-      ;
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        1
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          $a
+    Label : ELSE
+      makeSequence
       Label : ELEMENT
-        $a
-  Label : ELSE
-    Block With else
-    Label : CODE
-      if
-      Label : CONDITION
-        (
-        Label : CODE
-          2
-      Label : THEN
-        {
-        Label : CODE
-          ;
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            2
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              $b
+        Label : ELSE
+          makeSequence
           Label : ELEMENT
-            $b
-      Label : ELSE
-        Block With else
-        Label : CODE
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              3
-          Label : THEN
-            {
-            Label : CODE
-              ;
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                3
+            Label : THEN
+              {
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  $c
+            Label : ELSE
+              makeSequence
               Label : ELEMENT
-                $c
-          Label : ELSE
-            Block With else
-            Label : CODE
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  4
-              Label : THEN
-                {
-                Label : CODE
-                  ;
+                if
+                Label : CONDITION
+                  (
+                  Label : CODE
+                    4
+                Label : THEN
+                  {
+                  Label : CODE
+                    ;
+                    Label : ELEMENT
+                      $d
+                Label : ELSE
+                  makeSequence
                   Label : ELEMENT
-                    $d
-              Label : ELSE
-                Block With else
-                Label : CODE
-                  if
-                  Label : CONDITION
-                    (
-                    Label : CODE
-                      5
-                  Label : THEN
-                    {
-                    Label : CODE
-                      ;
-                      Label : ELEMENT
-                        $e
-                  Label : ELSE
-                    {
-                    Label : CODE
-                      ;
-                      Label : ELEMENT
-                        $f
+                    if
+                    Label : CONDITION
+                      (
+                      Label : CODE
+                        5
+                    Label : THEN
+                      {
+                      Label : CODE
+                        ;
+                        Label : ELEMENT
+                          $e
+                    Label : ELSE
+                      {
+                      Label : CODE
+                        ;
+                        Label : ELEMENT
+                          $f

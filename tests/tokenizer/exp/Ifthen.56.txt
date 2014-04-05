@@ -1,14 +1,6 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      ::
-      Label : CLASS
-        self
-      Label : PROPERTY
-        $f
+  makeSequence
   Label : ELEMENT
     if
     Label : CONDITION
@@ -26,26 +18,38 @@ Label : CODE
               Label : PROPERTY
                 $a
     Label : THEN
-      =
-      Label : LEFT
-        ::
-        Label : CLASS
-          self
-        Label : PROPERTY
-          $b
-      Label : RIGHT
-        new
-        Label : NEW
-          C
+      Block With if/elseif
+      Label : CODE
+        =
+        Label : RIGHT
+          new
+          Label : NEW
+            C
+        Label : LEFT
+          ::
+          Label : CLASS
+            self
+          Label : PROPERTY
+            $b
     Label : ELSE
-      ->
-      Label : OBJECT
-        ::
-        Label : CLASS
-          self
-        Label : PROPERTY
-          $d
-      Label : METHOD
-        E
-        Label : ARGUMENTS
-          void
+      Block With else
+      Label : CODE
+        ->
+        Label : OBJECT
+          ::
+          Label : CLASS
+            self
+          Label : PROPERTY
+            $d
+        Label : METHOD
+          E
+          Label : ARGUMENTS
+            void
+      Label : ELEMENT
+        return
+        Label : RETURN
+          ::
+          Label : CLASS
+            self
+          Label : PROPERTY
+            $f

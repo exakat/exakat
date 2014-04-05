@@ -1,36 +1,38 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      ==
-      Label : LEFT
-        $a
-      Label : RIGHT
-        'b'
-  Label : THEN
-    {
-    Label : CODE
-      ;
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          'b'
+        Label : LEFT
+          $a
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $c
+    Label : ELSE
+      makeSequence
       Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $c
-  Label : ELSE
-    Block With else
-    Label : CODE
-      if
-      Label : CONDITION
-        (
-        Label : CODE
-          $d
-      Label : THEN
-        {
-        Label : CODE
-          ;
-          Label : ELEMENT
-            --
-            Label : PREPLUSPLUS
-              $e
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $d
+        Label : THEN
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              --
+              Label : PREPLUSPLUS
+                $e

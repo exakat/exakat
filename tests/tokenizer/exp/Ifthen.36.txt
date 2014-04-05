@@ -1,44 +1,42 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      $a
-  Label : THEN
-    Block With if/elseif
-    Label : CODE
-      =
-      Label : LEFT
-        $b
-      Label : RIGHT
-        1
-  Label : ELSE
-    Block With else
-    Label : CODE
-      =
-      Label : LEFT
-        $c
-      Label : RIGHT
-        "
-        Label : CONTAIN
-          Concatenation
-          Label : CONCAT
-            {
-            Label : NAME
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      makeSequence
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $b
+    Label : ELSE
+      makeSequence
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          "
+          Label : CONTAIN
+            Concatenation
+            Label : CONCAT
               ->
               Label : PROPERTY
                 e
               Label : OBJECT
                 $d
-          Label : CONCAT
-            :
-          Label : CONCAT
-            {
-            Label : NAME
+            Label : CONCAT
+              :
+            Label : CONCAT
               ->
               Label : PROPERTY
                 g
               Label : OBJECT
                 $f
+        Label : LEFT
+          $c

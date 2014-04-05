@@ -1,0 +1,59 @@
+;
+Label : ELEMENT
+  J
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    makeSequence
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
+      Label : THEN
+        makeSequence
+        Label : ELEMENT
+          E
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              D
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'E'
+      Label : ELSE
+        elseif
+        Label : CONDITION
+          (
+          Label : CODE
+            $b
+        Label : THEN
+          makeSequence
+          Label : ELEMENT
+            F
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                H
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    $c
+                  Label : ARGUMENT
+                    'I'
+          Label : ELEMENT
+            I
+Label : ELEMENT
+  A

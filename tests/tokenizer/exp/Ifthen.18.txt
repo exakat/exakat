@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     if
     Label : CONDITION
@@ -9,7 +9,9 @@ Label : CODE
       Label : CODE
         $x
     Label : THEN
-      $y
+      Block With if/elseif
+      Label : CODE
+        $y
     Label : ELSE
       elseif
       Label : CONDITION
@@ -17,7 +19,9 @@ Label : CODE
         Label : CODE
           $w
       Label : THEN
-        $ww
+        Block With if/elseif
+        Label : CODE
+          $ww
       Label : ELSE
         elseif
         Label : CONDITION
@@ -25,7 +29,9 @@ Label : CODE
           Label : CODE
             $v
         Label : THEN
-          $vv
+          Block With if/elseif
+          Label : CODE
+            $vv
         Label : ELSE
           elseif
           Label : CONDITION
@@ -33,7 +39,9 @@ Label : CODE
             Label : CODE
               $u
           Label : THEN
-            $uu
+            Block With if/elseif
+            Label : CODE
+              $uu
           Label : ELSE
             elseif
             Label : CONDITION
@@ -41,6 +49,8 @@ Label : CODE
               Label : CODE
                 $t
             Label : THEN
-              $tt
+              Block With if/elseif
+              Label : CODE
+                $tt
             Label : ELSE
               $z

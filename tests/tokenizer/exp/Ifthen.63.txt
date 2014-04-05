@@ -1,11 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      1
+  makeSequence
   Label : ELEMENT
     if
     Label : CONDITION
@@ -32,3 +28,7 @@ Label : CODE
                 1
             Label : VARIABLE
               $x
+  Label : ELEMENT
+    return
+    Label : RETURN
+      1

@@ -1,1 +1,37 @@
- 
+;
+Label : ELEMENT
+  '>
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    makeSequence
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          !
+          Label : NOT
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $a
+      Label : THEN
+        Block With if/elseif
+        Label : CODE
+          print
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'B'
+    Label : ELEMENT
+      C
+    Label : ELEMENT
+      print
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $d
+Label : ELEMENT
+   

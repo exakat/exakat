@@ -1,48 +1,50 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      ->
-      Label : PROPERTY
-        b
-      Label : OBJECT
-        $a
-  Label : THEN
-    Block With if/elseif
-    Label : CODE
-      =
-      Label : LEFT
-        [
-        Label : INDEX
-          d
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                $f
-              Label : VARIABLE
-                $e
-        Label : VARIABLE
-          $c
-      Label : RIGHT
-        1
-  Label : ELSE
-    Block With else
-    Label : CODE
-      =
-      Label : LEFT
-        [
-        Label : INDEX
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ->
+        Label : PROPERTY
+          b
+        Label : OBJECT
+          $a
+    Label : THEN
+      makeSequence
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
           [
           Label : INDEX
-            $i
+            d
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  $f
+                Label : VARIABLE
+                  $e
           Label : VARIABLE
-            $h
-        Label : VARIABLE
-          $g
-      Label : RIGHT
-        1
+            $c
+    Label : ELSE
+      makeSequence
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          [
+          Label : INDEX
+            [
+            Label : INDEX
+              $i
+            Label : VARIABLE
+              $h
+          Label : VARIABLE
+            $g
