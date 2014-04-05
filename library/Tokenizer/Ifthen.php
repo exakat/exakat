@@ -18,7 +18,19 @@ class Ifthen extends TokenAuto {
                                'keepIndexed' => true,
                                'cleanIndex'  => true);
         $this->checkAuto(); 
-            
+
+    // @doc if () : endif (empty )
+        $this->conditions = array( 0 => array('token' => Ifthen::$operators),
+                                   1 => array('atom' => 'Parenthesis'),
+                                   2 => array('token' => 'T_COLON'),
+                                   3 => array('token' => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE')),
+        );
+        
+        $this->actions = array('insertVoid'  => 2,
+                               'keepIndexed' => true,
+                               'cleanIndex'  => true);
+        $this->checkAuto(); 
+
     // @doc if then else
         $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom'  => 'none'),

@@ -1256,6 +1256,29 @@ semicolon.setProperty('atom', 'Void');
 ";
             unset($actions['to_void']);
         } 
+
+if (isset($actions['insertVoid'])) {
+    $out = str_repeat(".out('NEXT')", $actions['insertVoid']);
+    
+    $qactions[] = "
+/* insert_void */
+
+x = g.addVertex(null, [code:'void', fullcode:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, line:it.line]);
+g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
+
+e = it{$out}.next();
+f = e.out('NEXT').next();
+
+g.removeEdge(e.outE('NEXT').next());
+g.addEdge(e, x, 'NEXT');
+g.addEdge(x, f, 'NEXT');
+
+";
+            unset($actions['insertVoid']);
+        } 
         
 if (isset($actions['Phpcodemiddle'])) {
             $qactions[] = "
@@ -1415,7 +1438,7 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
                                          'Dowhile', 'Try', 'Class', 'Interface', 'While', 'Break', 'Assignation', 'Halt' ]}.any() &&
     it.out('NEXT').filter{!(it.token in ['T_ELSEIF'])}.any() &&
-    it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_ELSEIF', 'T_OPEN_CURLY'])}.any()) {
+    it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_ELSEIF', 'T_OPEN_CURLY']) || it.atom != null}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     
@@ -1547,7 +1570,7 @@ $fullcode
                 
                 $qactions[] = "
 /* insertEdge out */
-x = g.addVertex(null, [code:'void', atom:'$atom', virtual:true, line:it.line, line:it.line]);
+x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_VOID', virtual:true, line:it.line, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -1569,12 +1592,11 @@ fullcode = x;
 $fullcode
 ";
             } else {
-                print "No support for insertEdge with destination 0 or less\n";
+                print "No support for insertEdge with destination less than 0\n";
             }
             unset($actions['insertEdge']);
             }
         }
-
 
         if (isset($actions['addEdge'])) {
             foreach($actions['addEdge'] as $destination => $config) {
@@ -2232,14 +2254,14 @@ list_after = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMAL
         'T_ELSE', 'T_ELSEIF', 
         'T_CATCH', ];
 
-if ($it.token != 'T_ELSEIF' && 
-    ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' )
+if (    $it.token != 'T_ELSEIF'
+    && ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' )
     && ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))
     && (!($it.out('NEXT').next().token in list_after) )
-    && $it.in_quote != \"'true'\"
-    && $it.in_for != \"'true'\"
+    &&  $it.in_quote != \"'true'\"
+    &&  $it.in_for != \"'true'\"
     && !($it.in('NEXT').next().atom in ['Class', 'Identifier']) 
-    &&  ($it.in('NEXT').out('CODE').count() == 0)
+    &&  ($it.in('NEXT').filter{it.out('CODE').count() == 0 || it.atom == 'Parenthesis'}.count() == 1)
     ) {
 
     $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
@@ -2311,12 +2333,15 @@ if ($it.token != 'T_ELSEIF' &&
 } else {
     $it.setProperty('makeSequence1',   $it.token != 'T_ELSEIF');
     $it.setProperty('makeSequence2',  ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' ));
+    $it.setProperty('makeSequence3',  ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))) ;
     $it.setProperty('makeSequence31',  $it.in('NEXT').next().atom != null);
     $it.setProperty('makeSequence32',  $it.in('NEXT') .next().token) ;
-    $it.setProperty('makeSequence4',   $it.out('NEXT').next().token);
+    $it.setProperty('makeSequence41',   $it.out('NEXT').next().token);
+    $it.setProperty('makeSequence4',   (!($it.out('NEXT').next().token in list_after) ));
     $it.setProperty('makeSequence5',   $it.in_quote != 'true' );
     $it.setProperty('makeSequence6',   $it.in_for != 'true' );
-    $it.setProperty('makeSequence7',   $it.out('CODE').count() == 0);
+    $it.setProperty('makeSequence7',   !($it.in('NEXT').next().atom in ['Class', 'Identifier']) );
+    $it.setProperty('makeSequence8',   $it.in('NEXT').filter{it.out('CODE').count() == 0 || it.atom == 'Parenthesis'}.count() == 1);
 }
 
 ";
