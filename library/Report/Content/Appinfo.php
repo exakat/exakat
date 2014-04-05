@@ -52,6 +52,7 @@ class Appinfo extends \Report\Content {
                             'ext/zip'        => 'Extensions/Extzip',
                             'ext/zlib'       => 'Extensions/Extzlib',
                             'ext/wddx'   => 'Extensions/Extwddx',
+                            'ext/xsl'   => 'Extensions/Extxsl',
 //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
                     'PHP' => array(
