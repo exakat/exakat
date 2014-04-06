@@ -93,14 +93,7 @@ if (file_exists('./projects/'.$project.'/log/stats.txt')) {
 shell_exec('php bin/stat > ./projects/'.$project.'/stats.txt');
 logProgress($project, $progress++ / $total_steps);
 
-$reports = array('Premier', 'Flat');
-$formats = array('markdown', 'sqlite', 'ace', 'html', 'text', /* 'pdf', 'odt' */);
-
-foreach($reports as $report) {
-    foreach($formats as $format) {
-        print shell_exec('rm -rf ./projects/'.$project.'/'."{$report}-{$format}".'.*;     php bin/report '.$project.' -f ./projects/'.$project.'/'."{$report}-{$format}".' -'.$format.' -r '.$report);
-    }
-}
+shell_exec('php bin/report_all '.$project);
 
 logProgress($project, $progress++ / $total_steps);
 
