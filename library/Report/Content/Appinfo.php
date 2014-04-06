@@ -60,6 +60,7 @@ class Appinfo extends \Report\Content {
                             'ext/posix'   => 'Extensions/Extposix',
                             'ext/shmop'   => 'Extensions/Extshmop',
                             'ext/simplexml'   => 'Extensions/Extsimplexml',
+                            'ext/mbstring'   => 'Extensions/Extmbstring',
 //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
                     'PHP' => array(
