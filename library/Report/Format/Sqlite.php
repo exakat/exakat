@@ -2,10 +2,13 @@
 
 namespace Report\Format;
 
-class Sqlite { 
+class Sqlite extends \Report\Format { 
     private $output = array();
     protected static $analyzer = null;
     private $summary = null;
+
+    protected $format = "Sqlite";
+    protected $fileExtension ='sqlite';
     
     public function render($output, $data) {
         // Nothing
@@ -33,16 +36,6 @@ class Sqlite {
         }
         
         return true;
-    }
-    
-    public function getRenderer($class) {
-        $class = "\\Report\\Format\\Sqlite\\$class";
-
-        return new $class();
-    }
-
-    public function getExtension() {
-        return 'sqlite';
     }
     
     public function setAnalyzer($name) {

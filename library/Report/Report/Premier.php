@@ -161,7 +161,7 @@ class Premier {
         $analyze = new \Report\Content\Appinfo();
         $analyze->setNeo4j($this->client);
         $analyze->collect();
-        $ht = $this->addContent('SectionedHashTable', $analyze);
+//        $ht = $this->addContent('SectionedHashTable', $analyze);
 
 
         $this->createH1('Inventories');

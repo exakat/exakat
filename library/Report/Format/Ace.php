@@ -2,7 +2,7 @@
 
 namespace Report\Format;
 
-class Ace { 
+class Ace extends \Report\Format { 
     private $output = '';
     private $finalJs = '';
     private $jsLibraries = array();
@@ -11,6 +11,9 @@ class Ace {
     private $files = array();
     protected static $analyzer = null;
     private $summary = null;
+
+    protected $format = "Ace";    
+    protected $fileExtension = "html";
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
@@ -269,17 +272,6 @@ HTML;
         $this->reset();
         
         return true;
-    }
-    
-    public function getRenderer($class) {
-        $fullclass = "\\Report\\Format\\Ace\\$class";
-        
-        $this->classes[$class] = new $fullclass();
-        return $this->classes[$class];
-    }
-
-    public function getExtension() {
-        return 'html';
     }
 
     public function setAnalyzer($name) {

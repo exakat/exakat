@@ -2,10 +2,13 @@
 
 namespace Report\Format;
 
-class Text { 
+class Text extends \Report\Format { 
     private $output = '';
     protected static $analyzer = null;
     private $summary = null;
+
+    protected $format = "Text";
+    protected $fileExtension ='txt';
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
@@ -19,15 +22,6 @@ class Text {
         return file_put_contents($filename, $this->output);
     }
     
-    public function getRenderer($class) {
-        $class = "\\Report\\Format\\Text\\$class";
-        return new $class();
-    }
-
-    public function getExtension() {
-        return 'txt';
-    }
-
     public function setAnalyzer($name) {
         \Report\Format\Text::$analyzer = $name;
     }

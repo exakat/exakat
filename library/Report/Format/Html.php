@@ -2,10 +2,13 @@
 
 namespace Report\Format;
 
-class Html { 
+class Html extends \Report\Format { 
     private $output = '';
     protected static $analyzer = null;
     private $summary = null;
+
+    protected $format = "Html";
+    protected $fileExtension ='html';
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
@@ -19,15 +22,6 @@ class Html {
         file_put_contents($filename, "<html><header></header><body>".$this->output."</body>");
         
         return true;
-    }
-    
-    public function getRenderer($class) {
-        $class = "\\Report\\Format\\Html\\$class";
-        return new $class();
-    }
-
-    public function getExtension() {
-        return 'html';
     }
 
     public function setAnalyzer($name) {

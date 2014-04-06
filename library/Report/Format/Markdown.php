@@ -2,10 +2,13 @@
 
 namespace Report\Format;
 
-class Markdown { 
+class Markdown extends \Report\Format { 
     private $output = '';
     protected static $analyzer = null;
     private $summary = null;
+
+    protected $format = "Markdown";
+    protected $fileExtension ='md';
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
@@ -17,15 +20,6 @@ class Markdown {
     
     public function toFile($filename) {
         return file_put_contents($filename, $this->output);
-    }
-    
-    public function getRenderer($class) {
-        $class = "\\Report\\Format\\Markdown\\$class";
-        return new $class();
-    }
-
-    public function getExtension() {
-        return 'md';
     }
 
     public function setAnalyzer($name) {

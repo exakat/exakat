@@ -2,10 +2,13 @@
 
 namespace Report\Format;
 
-class Csv { 
+class Csv extends \Report\Format { 
     private $output = array();
     private $summary = null;
     protected static $analyzer = null;
+    
+    protected $format = "Csv";
+    protected $fileExtension ='csv';
     
     public function render($output, $data) {
         $output->push(array(" Text for ".get_class($this).""));
@@ -26,15 +29,6 @@ class Csv {
         return true;
     }
     
-    public function getRenderer($class) {
-        $class = "\\Report\\Format\\Csv\\$class";
-        return new $class();
-    }
-
-    public function getExtension() {
-        return 'csv';
-    }
-
     public function setAnalyzer($name) {
         \Report\Format\Csv::$analyzer = $name;
     }
