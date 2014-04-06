@@ -56,6 +56,7 @@ class Appinfo extends \Report\Content {
                             'ext/xmlreader'   => 'Extensions/Extxmlreader',
                             'ext/snmp'   => 'Extensions/Extsnmp',
                             'ext/xmlrpc'   => 'Extensions/Extxmlrpc',
+                            'ext/readline'   => 'Extensions/Extreadline',
 //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
                     'PHP' => array(
