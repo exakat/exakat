@@ -38,6 +38,7 @@ class Test {
         $this->createH2('Report configuration'); 
 
         $ReportInfo = new \Report\Content\ReportInfo($this->project);
+        $ReportInfo->setProject($this->project);
         $ReportInfo->setNeo4j($this->client);
         $ReportInfo->setMySQL($this->db);
         $ReportInfo->collect();
