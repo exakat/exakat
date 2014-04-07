@@ -256,15 +256,12 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
     g.addEdge(null, it.in('FILE').next(),      ppp, 'FILE',      [file: it.inE('FILE').next().file]);
 
     var.out('PUBLIC', 'PRIVATE', 'PROTECTED', 'STATIC').each{
-        option = g.addVertex(null, [code:it.code, atom:it.atom, token:it.token, virtual:true, line:it.line]);
+        option = g.addVertex(null, [code:it.code, fullcode:it.code, atom:it.atom, token:it.token, virtual:true, line:it.line]);
         g.addEdge(ppp, option, it.code.toUpperCase());
     }
 
-    fullcode = ppp;
-    ppp.setProperty('order', it.order);
-    $fullcode
-    
     g.addEdge(root, ppp, 'ELEMENT');
+    ppp.setProperty('order', it.order);
 
     g.addEdge(ppp, it, 'DEFINE');
     g.removeEdge(it.inE('ARGUMENT').next());
@@ -285,6 +282,9 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
     g.addEdge(null, it.in('FILE').next(),      tstatic, 'FILE',      [file: it.inE('FILE').next().file]);
 
     g.addEdge(ppp, tstatic, var.code.toUpperCase());
+
+    fullcode = ppp;
+    $fullcode
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
@@ -299,10 +299,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
         g.addEdge(ppp, option, it.code.toUpperCase());
     }
 
-    fullcode = ppp;
     ppp.setProperty('order', it.order);
-    $fullcode
-
     g.addEdge(root, ppp, 'ELEMENT');
 
     g.addEdge(ppp, it.out('LEFT').next(), 'DEFINE');
@@ -318,6 +315,9 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.addEdge(ppp, tstatic, var.code.toUpperCase());
     
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+
+    fullcode = ppp;
+    $fullcode
 }
 
 g.addEdge(root, arg.out('NEXT').next(), 'NEXT');
