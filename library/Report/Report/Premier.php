@@ -40,6 +40,7 @@ class Premier {
         $ReportInfo = new \Report\Content\ReportInfo($this->project);
         $ReportInfo->setNeo4j($this->client);
         $ReportInfo->setMySQL($this->db);
+        $ReportInfo->setProject($this->project);
         $ReportInfo->collect();
 
         $ht = $this->addContent('HashTable', $ReportInfo); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
