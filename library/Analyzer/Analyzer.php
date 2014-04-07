@@ -420,6 +420,17 @@ GREMLIN;
         
         return $this;
     }
+
+    function noAtomInside($atom) {
+        if (is_array($atom)) {
+            die('can t run this yet');
+            $this->addMethod('as("loop").out().loop("loop"){true}{it.object.atom in ***}', $atom);
+        } else {
+            $this->addMethod('filter{ it.as("loop").out().loop("loop"){true}{it.object.atom == ***}.count() == 0}', $atom);
+        }
+        
+        return $this;
+    }
     
     function trim($property, $chars = '\'\"') {
         $this->methods[] = 'transform{it.'.$property.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1")}';
