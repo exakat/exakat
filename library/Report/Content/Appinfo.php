@@ -96,11 +96,14 @@ class Appinfo extends \Report\Content {
                             'Redeclared Function'  => 'Functions/RedeclaredPhpFunctions',
                             'Closures'   => 'Functions/Closures',
                             'Typehint'   => 'Functions/Typephints',
+                            'Static variables'   => 'Variables/StaticVariables',
                     ),
                     'Classes' => array(
                             'Classes'    => 'Classes/Classnames',
                             'Interfaces' => 'Interfaces/Interfacenames',
-                            'Static variables'   => 'Variables/StaticVariables',
+                            'Static properties'   => 'Classes/StaticProperties',
+                            'Static methods'   => 'Classes/StaticMethods',
+                            'PHP 4 constructor' => 'Classes/OldStyleConstructor',
                     ),
                     'Constants' => array(
                             'Constants'     => 'Constants/ConstantDefinition',
