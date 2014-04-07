@@ -72,10 +72,10 @@ class _Static extends TokenAuto {
 
 
     // class x { static $x, $y }
-        $this->conditions = array(-1 => array('token'      => array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC')),
-                                   0 => array('token'      => _Static::$operators),
-                                   1 => array('atom'       => 'Arguments'),
-                                   2 => array('filterOut'  => 'T_COMMA'),
+        $this->conditions = array(-1 => array('token'     => array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC')),
+                                   0 => array('token'     => _Static::$operators),
+                                   1 => array('atom'      => 'Arguments'),
+                                   2 => array('filterOut' => 'T_COMMA'),
                                  );
         
         $this->actions = array('to_var_new' => 'Atom',
@@ -145,7 +145,7 @@ class _Static extends TokenAuto {
 
     // static :: ....
         $this->conditions = array( -1 => array('token' => 'T_INSTANCEOF'),
-                                   0  => array('token' => _Static::$operators),
+                                    0 => array('token' => _Static::$operators),
                                  );
         $this->actions = array('atom'     => 'Static');
         $this->checkAuto(); 

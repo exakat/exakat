@@ -95,19 +95,6 @@ class Functioncall extends TokenAuto {
                                'makeSequence' => 'it'
                                );
         $this->checkAuto();
-
-        // functioncall with static
-        $this->conditions = array(-1 => array('filterOut' => _Ppp::$operators),
-                                   0 => array('token' => 'T_STATIC',
-                                              'atom'  => 'none'),
-                                   1 => array('atom'  => 'Arguments')
-        );
-        
-        $this->actions = array('makeEdge'     => array('1' => 'ARGUMENTS'),
-                               'atom'         => 'Functioncall',
-                               'makeSequence' => 'it'
-                               );
-        $this->checkAuto();
         
         return $this->checkRemaining();
     }
