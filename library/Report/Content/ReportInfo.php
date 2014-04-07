@@ -10,15 +10,9 @@ class ReportInfo extends \Report\Content {
     private $mysql = null;
     
     public function collect() {
-        include(dirname(dirname(__DIR__)).'/App.php');
-        $this->list['Audit software version'] = $app['version'];
-        
-        $res = $this->mysql->query("SELECT * FROM project_runs WHERE folder='{$this->project}' ORDER BY date_finish DESC LIMIT 1")->fetch_assoc();
-        
-        $this->list['Audit execution date'] = date('r', strtotime($res['date_start']));
-        $this->list['Report production date'] = date('r', strtotime('now'));
-        
-        $this->list['PHP version'] = substr(shell_exec('php -v'), 0, 11);
+        $config = file_get_contents('./projects/'.$this->project.'/code/.git/config');
+        preg_match('#url = (\S+)\s#is', $config, $r);
+        $this->list['Repository URL'] = $r[1];
 
         $queryTemplate = "g.V.has('token', 'E_FILE').count()";
         $params = array('type' => 'IN');
@@ -32,6 +26,19 @@ class ReportInfo extends \Report\Content {
         $query = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryTemplate, $params);
         $vertices = $query->getResultSet();
         $this->list['Number of lines of code'] = $vertices[0][0];
+
+        include(dirname(dirname(__DIR__)).'/App.php');
+        $this->list['Audit software version'] = $app['version'];
+        
+        $res = $this->mysql->query("SELECT * FROM project_runs WHERE folder='{$this->project}' ORDER BY date_finish DESC LIMIT 1")->fetch_assoc();
+        
+        $this->list['Audit execution date'] = date('r', strtotime($res['date_start']));
+        $this->list['Report production date'] = date('r', strtotime('now'));
+        
+        $this->list['PHP version'] = substr(shell_exec('php -v'), 0, 11);
+
+        $this->list['Audit software version'] = $app['version'];
+
     }
     
     public function setNeo4j($client) {
