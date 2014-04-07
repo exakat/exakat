@@ -70,15 +70,17 @@ class Appinfo extends \Report\Content {
                             'Incompilable'   => 'Php/Incompilable',
                             
 //                            'Iffectations'   => 'Structures/Iffectation',
-                            'Variable variables' => 'Variables/VariableVariables',
 
                             '@ operator'     => 'Structures/Noscream',
                             'Eval'           => 'Structures/EvalUsage',
+                            'Die/Exit'       => 'Structures/ExitUsage',
                             'var_dump'       => 'Structures/VardumpUsage',
                             '_once'          => 'Structures/OnceUsage',
                             'halt compiler'  => 'Php/Haltcompiler',
                             'Goto'           => 'Php/Gotonames',
                             'Labels'         => 'Php/Labelnames',
+                            'Magic constants' => 'Constants/MagicConstantUsage',
+                            'Autoload'       => 'Php/AutoloadUsage',
                     ),
                     'Namespaces' => array(
                             'Namespaces' => 'Namespaces/Namespacesnames',
@@ -90,10 +92,12 @@ class Appinfo extends \Report\Content {
                             'Array'      => 'Arrays/Arrayindex',
                             'Multidimensional arrays' => 'Arrays/Multidimensional',
                             'PHP arrays' => 'Arrays/Phparrayindex',
+                            'Variable variables' => 'Variables/VariableVariables',
                     ),
                     'Functions' => array(
                             'Functions'  => 'Functions/Functionnames',
-                            'Redeclared Function'  => 'Functions/RedeclaredPhpFunctions',
+                            'Redeclared PHP Functions'  => 'Functions/RedeclaredPhpFunctions',
+                            'Recursive Functions'  => 'Functions/Recursive',
                             'Closures'   => 'Functions/Closures',
                             'Typehint'   => 'Functions/Typephints',
                             'Static variables'   => 'Variables/StaticVariables',
@@ -104,13 +108,14 @@ class Appinfo extends \Report\Content {
                             'Static properties'   => 'Classes/StaticProperties',
                             'Static methods'   => 'Classes/StaticMethods',
                             'PHP 4 constructor' => 'Classes/OldStyleConstructor',
+                            'Magic methods' => 'Classes/MagicMethod',
                     ),
                     'Constants' => array(
-                            'Constants'     => 'Constants/ConstantDefinition',
+                            'Constants'     => 'Constants/ConstantUsage',
                             'PHP constants' => 'Constants/PhpConstantUsage',
-                            'PHP constants' => 'Constants/MagicConstantUsage',
+                            'PHP Magic constants' => 'Constants/MagicConstantUsage',
                     ),
-                    'Integers' => array(
+                    'Numbers' => array(
                             'Integers'    => 'Type/Integer',
                             'Hexadecimal' => 'Type/Hexadecimal',
                             'Octal'       => 'Type/Octal',
