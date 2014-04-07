@@ -1,6 +1,6 @@
 <?php
 
 $app = array();
-$app['version'] = "0.12";
+$app['version'] = "0.13";
 
 ?>
