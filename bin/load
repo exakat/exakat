@@ -354,14 +354,17 @@ function process_file($filename, $log_file) {
             
             if ($Php->getTokenname($token[0]) == 'T_STRING' && (strtolower($token[1]) == 'true' || strtolower($token[1]) == 'false')) {
                 $T[$Tid]->setProperty('atom', 'Boolean')
+                        ->setProperty('code', $token[1])
                         ->setProperty('fullcode', $token[1])->save();
                 $to_index = ($tokens[$id + 1] == '('); // if the next is (, this may be a function or a method!!
             } elseif (isset($atoms[$Php->getTokenname($token[0])])) {
                 if ($Php->getTokenname($token[0]) == 'T_STRING') {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
+                            ->setProperty('code', $token[1])
                             ->setProperty('fullcode', $token[1])->save();
                 } elseif ($Php->getTokenname($token[0]) == 'T_STRING_VARNAME') {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
+                            ->setProperty('code', '$'.$token[1])
                             ->setProperty('fullcode', '$'.$token[1])->save();
                 } elseif ($Php->getTokenname($token[0]) == 'T_INLINE_HTML' && $id == 0) {
                     // ignore
@@ -369,10 +372,12 @@ function process_file($filename, $log_file) {
                     $T[$Tid]->setProperty('delimiter', in_array($token[1][0], array("'", '"')) ? $token[1][0] : '')
                             ->setProperty('noDelimiter', trim($token[1], '"\''))
                             ->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
+                            ->setProperty('code', $token[1])
                             ->setProperty('fullcode', $token[1])->save();
                 } else {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
                             ->setProperty('modifiedBy', 'bin/load15')
+                            ->setProperty('code', $token[1])
                             ->setProperty('fullcode', $token[1])->save();
                 }
             }
