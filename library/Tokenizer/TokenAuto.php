@@ -248,7 +248,7 @@ g.addEdge(null, it.in('FILE').next(),      root, 'FILE',      [file: it.inE('FIL
 g.addEdge(g.idx('racines')[['token':'Sequence']].next(), root, 'INDEXED');   
 
 arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
-    ppp = g.addVertex(null, [code:'ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
+    ppp = g.addVertex(null, [code:'ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line, fullcode:'ppp (to_var_new)']);
 
     g.addEdge(null, it.in('CLASS').next(),     ppp, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  ppp, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
@@ -288,14 +288,14 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    ppp = g.addVertex(null, [code:'ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line]);
+    ppp = g.addVertex(null, [code:'ppp', atom:'Ppp', token:'T_PPP', virtual:true, line:it.line, fullcode: var.code]);
     g.addEdge(null, it.in('CLASS').next(),     ppp, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  ppp, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
     g.addEdge(null, it.in('NAMESPACE').next(), ppp, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
     g.addEdge(null, it.in('FILE').next(),      ppp, 'FILE',      [file: it.inE('FILE').next().file]);
 
     var.out('PUBLIC', 'PRIVATE', 'PROTECTED', 'STATIC').each{
-        option = g.addVertex(null, [code:it.code, atom:it.atom, token:it.token, virtual:true, line:it.line]);
+        option = g.addVertex(null, [code:it.code, fullcode:it.code, atom:it.atom, token:it.token, virtual:true, line:it.line]);
         g.addEdge(ppp, option, it.code.toUpperCase());
     }
 
@@ -310,7 +310,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.removeEdge(it.outE('LEFT').next());
     g.removeEdge(it.outE('RIGHT').next());
     
-    tstatic = g.addVertex(null, [code:var.code, atom:'$atom', token:'T_STATIC', virtual:true, line:it.line, fullcode: var.code]);
+    tstatic = g.addVertex(null, [code:var.code, atom:'$atom', token:'T_STATIC', virtual:true, line:it.line, fullcode:var.code]);
     g.addEdge(null, it.in('CLASS').next(),     tstatic, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  tstatic, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
     g.addEdge(null, it.in('NAMESPACE').next(), tstatic, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -354,7 +354,7 @@ root.setProperty('code', var.code);
 root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').filter{it.atom in ['Variable', 'Static', 'Ppp']}.each{
-    x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, virtual:true, line:it.line]);
+    x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, virtual:true, line:it.line, fullcode:var.code]);
     g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
     g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -378,7 +378,7 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable', 'Static', 'Ppp']}.each{
 }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
-    x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, virtual:true, line:it.line]);
+    x = g.addVertex(null, [code:var.code, atom:'$atom', token:var.token, virtual:true, line:it.line, fullcode:var.code]);
     g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
     g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
     g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
@@ -777,7 +777,6 @@ g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('N
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
 it.out('PUBLIC', 'PRIVATE', 'PROTECTED', 'STATIC').each{
-//    ppp = g.addVertex(null, [code:it.code, atom:it.atom, token:it.token, virtual:true, line:it.line]);
     it.inE('STATIC', 'PRIVATE', 'PUBLIC', 'PROTECTED').each{ g.removeEdge( it ); }
     g.addEdge(x, it, it.code.toUpperCase());
 }
