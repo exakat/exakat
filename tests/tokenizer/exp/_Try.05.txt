@@ -1,48 +1,50 @@
 <?php
 
 Label : CODE
-  try
-  Label : CODE
-    {
-    Label : CODE
-      void
-  Label : CATCH
-    catch
-    Label : CLASS
-      Exception4
+  makeSequence
+  Label : ELEMENT
+    try
     Label : CODE
       {
       Label : CODE
         void
-    Label : VARIABLE
-      $e
-  Label : CATCH
-    catch
-    Label : CLASS
-      Exception3
-    Label : CODE
-      {
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception4
+      Label : VARIABLE
+        $e
       Label : CODE
-        void
-    Label : VARIABLE
-      $e
-  Label : CATCH
-    catch
-    Label : CLASS
-      Exception2
-    Label : CODE
-      {
+        {
+        Label : CODE
+          void
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception3
+      Label : VARIABLE
+        $e
       Label : CODE
-        void
-    Label : VARIABLE
-      $e
-  Label : CATCH
-    catch
-    Label : CLASS
-      Exception
-    Label : CODE
-      {
+        {
+        Label : CODE
+          void
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception2
+      Label : VARIABLE
+        $e
       Label : CODE
-        void
-    Label : VARIABLE
-      $e
+        {
+        Label : CODE
+          void
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception
+      Label : VARIABLE
+        $e
+      Label : CODE
+        {
+        Label : CODE
+          void

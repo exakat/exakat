@@ -1,54 +1,56 @@
 <?php
 
 Label : CODE
-  try
-  Label : CODE
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $d
-        Label : RIGHT
-          new
-          Label : NEW
-            DateTime
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                $a
-              Label : ARGUMENT
-                new
-                Label : NEW
-                  DateTimeZone
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $b
-  Label : CATCH
-    catch
-    Label : CLASS
-      Exception
+  makeSequence
+  Label : ELEMENT
+    try
     Label : CODE
       {
       Label : CODE
-        ;
+        makeSequence
         Label : ELEMENT
           =
-          Label : LEFT
-            $c
           Label : RIGHT
-            date
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                'Y-m-d-H-i-s'
-              Label : ARGUMENT
-                strtotime
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $d
-    Label : VARIABLE
-      $e
+            new
+            Label : NEW
+              DateTime
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  $a
+                Label : ARGUMENT
+                  new
+                  Label : NEW
+                    DateTimeZone
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $b
+          Label : LEFT
+            $d
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception
+      Label : VARIABLE
+        $e
+      Label : CODE
+        {
+        Label : CODE
+          makeSequence
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              date
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  'Y-m-d-H-i-s'
+                Label : ARGUMENT
+                  strtotime
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $d
+            Label : LEFT
+              $c
