@@ -72,15 +72,18 @@ class Appinfo extends \Report\Content {
 //                            'Iffectations'   => 'Structures/Iffectation',
 
                             '@ operator'     => 'Structures/Noscream',
-                            'Eval'           => 'Structures/EvalUsage',
-                            'Die/Exit'       => 'Structures/ExitUsage',
-                            'var_dump'       => 'Structures/VardumpUsage',
-                            '_once'          => 'Structures/OnceUsage',
+                            'include_once'   => 'Structures/OnceUsage',
                             'halt compiler'  => 'Php/Haltcompiler',
+                            'Throw exceptions' => 'Php/ThrowUsage',
+                            'Try/Catch'       => 'Php/TryCatchUsage',
                             'Goto'           => 'Php/Gotonames',
                             'Labels'         => 'Php/Labelnames',
                             'Magic constants' => 'Constants/MagicConstantUsage',
                             'Autoload'       => 'Php/AutoloadUsage',
+
+                            'Eval'           => 'Structures/EvalUsage',
+                            'Die/Exit'       => 'Structures/ExitUsage',
+                            'var_dump'       => 'Structures/VardumpUsage',
                     ),
                     'Namespaces' => array(
                             'Namespaces' => 'Namespaces/Namespacesnames',
