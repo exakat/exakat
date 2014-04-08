@@ -20,11 +20,11 @@ class _Throw extends TokenAuto {
                                
         $this->checkAuto();
 
-        $this->conditions = array(0 => array('token'     => _Throw::$operators,
-                                             'atom'      => 'none'),
+        $this->conditions = array(0 => array('token' => _Throw::$operators,
+                                             'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall', 
-                                                                  'Staticmethodcall', 'Staticproperty', 'Identifier', 'Assignation')),
+                                  2 => array('atom'  => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall', 
+                                                              'Staticmethodcall', 'Staticproperty', 'Identifier', 'Assignation')),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   );
         
@@ -42,7 +42,8 @@ class _Throw extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.fullcode = "throw " + fullcode.out("THROW").next().code; 
+
+fullcode.fullcode = "throw " + fullcode.out("THROW").next().fullcode; 
 GREMLIN;
     }
 }
