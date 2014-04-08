@@ -23,10 +23,3 @@ class AutoloadUsage extends Analyzer\Common\FunctionUsage {
 }
 
 ?>
-
-
-
-
-
-
-
