@@ -4,13 +4,12 @@ namespace Analyzer\Php;
 
 use Analyzer;
 
-class Haltcompiler extends Analyzer\Common\FunctionUsage {
+class Haltcompiler extends Analyzer\Analyzer {
     protected $severity  = \Analyzer\Analyzer::S_NONE;
     protected $timeToFix = \Analyzer\Analyzer::S_NONE;
 
     public function analyze() {
-        $this->functions = array('__halt_compiler');
-        parent::analyze();
+        $this->atomIs("Halt");
     }
 }
 
