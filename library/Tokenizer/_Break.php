@@ -14,7 +14,8 @@ class _Break extends TokenAuto {
         
         $this->actions = array('transform'    => array( 1 => 'LEVEL'),
                                'atom'         => 'Break',
-                               'makeSequence' => 'it');
+                               'makeSequence' => 'it',
+                               'cleanIndex'   => true);
         $this->checkAuto();
 
         return $this->checkRemaining();
