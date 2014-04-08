@@ -249,3 +249,9 @@ Make stats on the type of comment (//, /*, # )
 
 Make a dummy project to check all the analyzers in the same time (find a way to report which are tested or not automatically. May be comments ? )
 Make an export to JSON format for testing purpose.
+
+Must call parent constructor (desctructor ? )
+Must have desctructor's classes (when ? Closing resources are needed ? Like what ? )
+Empty blocks (classes, try/catch, etc.)
+in regex, several successive call will fill the same $r, and if not tested, it may lead to believe there are some results
+function whose return may be ignored
