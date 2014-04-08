@@ -538,6 +538,12 @@ GREMLIN;
         return $this;
     }
 
+    function codeIsPositiveInteger() {
+        $this->addMethod('filter{ if( it.code.isInteger()) { it.code > 0; } else { true; }}', null); // may be use toInteger() ? 
+
+        return $this;
+    }
+
     function samePropertyAs($property, $name, $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';

@@ -11,7 +11,8 @@ class BreakNonInteger extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Break")
              ->outIs('LEVEL')
-             ->atomIsnot(array('Integer', 'Void'));
+             ->atomIsnot(array('Integer', 'Void'))
+             ->codeIsPositiveInteger();
     }
 }
 
