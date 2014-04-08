@@ -20,7 +20,16 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         
         $test_config = 'Analyzer\\'.str_replace('_', '\\\\', str_replace('Test', '', get_class($this)));
         $shell = 'cd ../..; php bin/load -q -p test -f tests/analyzer/source/'.$file.'.php; php bin/build_root -p test; php bin/tokenizer -p test;  php bin/analyze -P '.$test_config;
+        
         $res = shell_exec($shell);
+        $pos = strpos($res, "won't compile");
+        
+        if ($pos !== false) {
+            $ini = parse_ini_file('../../projects/test/config.ini');
+        
+            $this->assertFalse(true, 'test '.$file.' can\'t compile with PHP version "'. (empty($ini['phpversion']) ? phpversion() : $ini['phpversion'] ).'", so no test is being run.');
+        }
+        
         $shell = 'cd ../..; php bin/export_analyzer '.$analyzer.' -o -json';
         $shell_res = shell_exec($shell);
         $res = json_decode($shell_res);
