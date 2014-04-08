@@ -75,7 +75,9 @@ class Appinfo extends \Report\Content {
                             'include_once'   => 'Structures/OnceUsage',
                             'halt compiler'  => 'Php/Haltcompiler',
                             'Throw exceptions' => 'Php/ThrowUsage',
-                            'Try/Catch'       => 'Php/TryCatchUsage',
+                            'Try/Catch'      => 'Php/TryCatchUsage',
+                            'Trigger error'  => 'Php/TriggerErrorUsage',
+                            
                             'Goto'           => 'Php/Gotonames',
                             'Labels'         => 'Php/Labelnames',
                             'Magic constants' => 'Constants/MagicConstantUsage',
