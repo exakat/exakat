@@ -1,0 +1,103 @@
+;
+Label : ELEMENT
+  S
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    makeSequence
+    Label : ELEMENT
+      O
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'Q'
+              Label : VARIABLE
+                $c
+      Label : THEN
+        makeSequence
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              R
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'S'
+                  Label : VARIABLE
+                    $d
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            'E'
+          Label : LEFT
+            C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'D'
+      Label : THEN
+        makeSequence
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              isset
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'K'
+                  Label : VARIABLE
+                    $a
+          Label : THEN
+            makeSequence
+            Label : ELEMENT
+              M
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  L
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'M'
+                      Label : VARIABLE
+                        $b
+        Label : ELEMENT
+          E
+        Label : ELEMENT
+          I
+        Label : ELEMENT
+          G
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              'H'
+            Label : ARGUMENT
+              'I'
+      Label : ELSE
+        N
+Label : ELEMENT
+  A

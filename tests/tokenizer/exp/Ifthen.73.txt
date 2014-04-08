@@ -1,0 +1,207 @@
+;
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    makeSequence
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          $a
+      Label : THEN
+        makeSequence
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              &&
+              Label : LEFT
+                $f
+              Label : RIGHT
+                ->
+                Label : OBJECT
+                  $g
+                Label : METHOD
+                  Z
+                  Label : ARGUMENTS
+                    void
+          Label : THEN
+            makeSequence
+            Label : ELEMENT
+              AG
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $i
+                  Label : METHOD
+                    AI
+                    Label : ARGUMENTS
+                      ,
+                      Label : ARGUMENT
+                        'AJ'
+                      Label : ARGUMENT
+                        array
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              'AK'
+                            Label : VALUE
+                              'AL'
+            Label : ELEMENT
+              AL
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    AF
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $h
+                        Label : METHOD
+                          AG
+                          Label : ARGUMENTS
+                            void
+                  Label : CONCAT
+                    'AE'
+                  Label : CONCAT
+                    'AA'
+                  Label : CONCAT
+                    AB
+                    Label : ARGUMENTS
+                      ,
+                      Label : ARGUMENT
+                        'AC'
+                      Label : ARGUMENT
+                        'AD'
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          I
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                P
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'Q'
+                    Label : VARIABLE
+                      $c
+              Label : CONCAT
+                'O'
+              Label : CONCAT
+                'K'
+              Label : CONCAT
+                L
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    'M'
+                  Label : ARGUMENT
+                    'N'
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              [
+              Label : INDEX
+                'R'
+              Label : VARIABLE
+                $d
+          Label : THEN
+            makeSequence
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    X
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'Y'
+                        Label : VARIABLE
+                          $e
+                  Label : CONCAT
+                    'W'
+                  Label : CONCAT
+                    'S'
+                  Label : CONCAT
+                    T
+                    Label : ARGUMENTS
+                      ,
+                      Label : ARGUMENT
+                        'U'
+                      Label : ARGUMENT
+                        'V'
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              D
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  E
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        'I'
+                      Label : CONCAT
+                        'F'
+                      Label : CONCAT
+                        G
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            ->
+                            Label : PROPERTY
+                              H
+                            Label : OBJECT
+                              $b
+      Label : ELSE
+        makeSequence
+        Label : ELEMENT
+          AM
+        Label : ELEMENT
+          AP
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              AO
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'AP'
+Label : ELEMENT
+  A

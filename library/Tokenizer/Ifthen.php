@@ -123,6 +123,21 @@ class Ifthen extends TokenAuto {
                                'cleanIndex'   => true);
         $this->checkAuto(); 
 
+    // @doc if then NO ELSE (2)
+        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => 'Parenthesis'),
+                                   2 => array('atom'  => array('Sequence', 'Void')),
+                                   3 => array('token' => array('T_ELSE', 'T_ELSEIF')),
+                                   4 => array('token' => 'T_COLON'),
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'CONDITION',
+                                                       2 => 'THEN'),
+                               'makeSequence' => 'it',
+                               'atom'         => 'Ifthen',
+                               'cleanIndex'   => true);
+        $this->checkAuto(); 
     // @doc if then NO ELSE, with a sequence behind
         $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom' => 'none'),
