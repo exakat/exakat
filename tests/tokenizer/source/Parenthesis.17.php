@@ -1,4 +1,6 @@
 <?php
 
-$x = array( 'a'=>unset(b(__FILE__).'c'),);
+$x = array( 'a' => d( b(__FILE__).'c'),);
+
+unset( ${b(__FILE__).'c'});
 ?>

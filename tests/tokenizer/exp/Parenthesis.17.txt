@@ -1,11 +1,25 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
+  Label : ELEMENT
+    unset
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $
+        Label : NAME
+          .
+          Label : CONCAT
+            b
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                __FILE__
+          Label : CONCAT
+            'c'
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -15,7 +29,7 @@ Label : CODE
           Label : KEY
             'a'
           Label : VALUE
-            unset
+            d
             Label : ARGUMENTS
               void
               Label : ARGUMENT
@@ -30,3 +44,5 @@ Label : CODE
                   'c'
         Label : ARGUMENT
           void
+    Label : LEFT
+      $x
