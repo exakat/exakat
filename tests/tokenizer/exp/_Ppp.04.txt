@@ -1,51 +1,69 @@
 <?php 
 Label : CODE
-  class
-  Label : NAME
-    x
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        function
-        Label : NAME
-          __clone
-        Label : ARGUMENTS
-          void
-        Label : BLOCK
-          {
-          Label : CODE
+  makeSequence
+  Label : ELEMENT
+    class
+    Label : NAME
+      x3
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          function
+          Label : ARGUMENTS
             void
-        Label : PRIVATE
-          private
-        Label : FINAL
-          final
-      Label : ELEMENT
-        function
-        Label : NAME
-          __clone
-        Label : ARGUMENTS
-          void
-        Label : BLOCK
-          {
-          Label : CODE
+          Label : NAME
+            __clone
+          Label : FINAL
+            final
+          Label : PROTECTED
+            protected
+          Label : BLOCK
+            {
+            Label : CODE
+              void
+  Label : ELEMENT
+    class
+    Label : NAME
+      x2
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          function
+          Label : ARGUMENTS
             void
-        Label : PUBLIC
-          public
-        Label : FINAL
-          final
-      Label : ELEMENT
-        function
-        Label : NAME
-          __clone
-        Label : ARGUMENTS
-          void
-        Label : BLOCK
-          {
-          Label : CODE
+          Label : NAME
+            __clone
+          Label : FINAL
+            final
+          Label : PUBLIC
+            public
+          Label : BLOCK
+            {
+            Label : CODE
+              void
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          function
+          Label : ARGUMENTS
             void
-        Label : PROTECTED
-          protected
-        Label : FINAL
-          final
+          Label : NAME
+            __clone
+          Label : FINAL
+            final
+          Label : PRIVATE
+            private
+          Label : BLOCK
+            {
+            Label : CODE
+              void
