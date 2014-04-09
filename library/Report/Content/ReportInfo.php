@@ -10,9 +10,13 @@ class ReportInfo extends \Report\Content {
     private $mysql = null;
     
     public function collect() {
-        $config = file_get_contents('./projects/'.$this->project.'/code/.git/config');
-        preg_match('#url = (\S+)\s#is', $config, $r);
-        $this->list['Repository URL'] = $r[1];
+        if (file_exists('./projects/'.$this->project.'/code/.git/config')) {
+            $config = file_get_contents('./projects/'.$this->project.'/code/.git/config');
+            preg_match('#url = (\S+)\s#is', $config, $r);
+            $this->list['Repository URL'] = $r[1];
+        } else {
+            $this->list['Repository URL'] = 'Downloaded archive';
+        }
 
         $queryTemplate = "g.V.has('token', 'E_FILE').count()";
         $params = array('type' => 'IN');
