@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       @
       Label : AT
@@ -18,3 +16,5 @@ Label : CODE
             void
             Label : ARGUMENT
               $d
+    Label : LEFT
+      $a

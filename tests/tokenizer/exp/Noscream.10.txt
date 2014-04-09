@@ -1,26 +1,28 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      @
-      Label : AT
-        !
-        Label : NOT
-          function_exists
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'gzopen'
-  Label : THEN
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $x
-        Label : RIGHT
-          1
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        @
+        Label : AT
+          !
+          Label : NOT
+            function_exists
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'gzopen'
+    Label : THEN
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $x

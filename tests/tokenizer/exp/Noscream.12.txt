@@ -1,15 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     =
-    Label : LEFT
-      ->
-      Label : PROPERTY
-        a
-      Label : OBJECT
-        $this
     Label : RIGHT
       @
       Label : AT
@@ -24,3 +18,11 @@ Label : CODE
               'a'
           Label : ARGUMENT
             'b'
+        Label : NAME
+          $b
+    Label : LEFT
+      ->
+      Label : PROPERTY
+        a
+      Label : OBJECT
+        $this
