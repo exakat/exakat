@@ -1415,6 +1415,21 @@ if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function',
     previous.bothE('NEXT').each{ g.removeEdge(it); }
 }
 
+if (it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any() &&
+    !it.in('NEXT').in('NEXT').has('token', 'T_OPEN_PARENTHESIS').any()) {
+    sequence = it;
+    previous = it.in('NEXT').next();
+    
+    sequence.out('ELEMENT').each{ 
+        it.setProperty('order', it.order + 1);
+    }
+    g.addEdge(sequence, previous, 'ELEMENT');
+    previous.setProperty('order', 0);
+    
+    previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
+    previous.bothE('NEXT').each{ g.removeEdge(it); }
+}
+
 if (it.out('NEXT').has('atom', 'Sequence').any()) {
     sequence = it;
     c = sequence.out('ELEMENT').count();
@@ -1434,8 +1449,8 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 }
 
 // lone instruction AFTER
-if (it.out('NEXT').filter{ it.'atom' in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
-                                         'Dowhile', 'Try', 'Class', 'Interface', 'While', 'Break', 'Assignation', 'Halt' ]}.any() &&
+if (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
+                                       'Dowhile', 'Try', 'Class', 'Interface', 'While', 'Break', 'Assignation', 'Halt' ]}.any() &&
     it.out('NEXT').filter{!(it.token in ['T_ELSEIF'])}.any() &&
     it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH'])}.filter{!(it.token in ['T_ELSEIF', 'T_OPEN_CURLY']) || it.atom != null}.any()) {
     sequence = it;
@@ -2208,6 +2223,42 @@ close_curly.bothE('NEXT').each{ g.removeEdge(it); }
             unset($actions['to_variable']);
         }
 
+        if (isset($actions['while_to_block'])) {
+            $qactions[] = " 
+/* while_to_block */  
+
+x = g.addVertex(null, [code:'Block With While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, modifiedBy:'_While', fullcode:'{ /**/ } ']);
+g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
+
+a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+
+g.addEdge(a.in('NEXT').next(), x, 'NEXT');
+g.addEdge(x, a.out('NEXT').next(), 'NEXT');
+g.addEdge(x, a, 'CODE');
+a.bothE('NEXT').each{ g.removeEdge(it); }
+
+// remove the next, if this is a ; 
+x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
+    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
+    semicolon = it;
+    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
+    g.removeVertex(semicolon);
+}
+
+/* Clean index */
+x.out('CODE').each{ 
+    it.inE('INDEXED').each{    
+        g.removeEdge(it);
+    } 
+}
+
+";
+            unset($actions['while_to_block']);
+        }        
+
         if (isset($actions['makeSequence'])) {
             $it = $actions['makeSequence'];
             
@@ -2235,6 +2286,8 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_ABSTRACT', 'T_FINAL', 'T_STATIC', 'T_CONST', 
         'T_AT', 'T_CASE', 
         'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
+        'T_DO',
+        'T_STRING',
         ];
 
 list_after = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
@@ -2256,11 +2309,13 @@ list_after = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMAL
 if (    $it.token != 'T_ELSEIF'
     && ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' )
     && ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))
-    && (!($it.out('NEXT').next().token in list_after) )
+    && ($it.in('NEXT').next().atom != null || !($it.out('NEXT').next().token in list_after) )
     &&  $it.in_quote != \"'true'\"
     &&  $it.in_for != \"'true'\"
     && !($it.in('NEXT').next().atom in ['Class', 'Identifier']) 
     &&  ($it.in('NEXT').filter{it.out('CODE').count() == 0 || it.atom == 'Parenthesis'}.count() == 1)
+    &&  !($it.out('NEXT').next().token in ['T_OBJECT_OPERATOR', 'T_STAR'])
+    &&  !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR'])
     ) {
 
     $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
@@ -2328,7 +2383,6 @@ if (    $it.token != 'T_ELSEIF'
     
         $it.bothE('NEXT').each{ g.removeEdge(it); }
     }
-
 } else {
     $it.setProperty('makeSequence1',   $it.token != 'T_ELSEIF');
     $it.setProperty('makeSequence2',  ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' ));
@@ -2341,6 +2395,8 @@ if (    $it.token != 'T_ELSEIF'
     $it.setProperty('makeSequence6',   $it.in_for != 'true' );
     $it.setProperty('makeSequence7',   !($it.in('NEXT').next().atom in ['Class', 'Identifier']) );
     $it.setProperty('makeSequence8',   $it.in('NEXT').filter{it.out('CODE').count() == 0 || it.atom == 'Parenthesis'}.count() == 1);
+    $it.setProperty('makeSequence9',   !($it.out('NEXT').next().token in ['T_OBJECT_OPERATOR', 'T_STAR']));
+    $it.setProperty('makeSequence10',   !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR']));
 }
 
 ";
@@ -2508,41 +2564,6 @@ x.out('ELEMENT').each{
             unset($actions['mergeConcat']);
         }
         
-        if (isset($actions['while_to_block'])) {
-            $qactions[] = " 
-/* while_to_block */  
-
-x = g.addVertex(null, [code:'Block With While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, modifiedBy:'_While', fullcode:'{ /**/ } ']);
-g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
-g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
-g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
-g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
-
-a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
-
-g.addEdge(a.in('NEXT').next(), x, 'NEXT');
-g.addEdge(x, a.out('NEXT').next(), 'NEXT');
-g.addEdge(x, a, 'CODE');
-a.bothE('NEXT').each{ g.removeEdge(it); }
-
-// remove the next, if this is a ; 
-x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
-    semicolon = it;
-    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    g.removeVertex(semicolon);
-}
-
-/* Clean index */
-x.out('CODE').each{ 
-    it.inE('INDEXED').each{    
-        g.removeEdge(it);
-    } 
-}
-                ";
-            unset($actions['while_to_block']);
-        }        
-
         if (isset($actions['add_to_index'])) {
             list($index, $token) = each($actions['add_to_index']);
             $qactions[] = " 
