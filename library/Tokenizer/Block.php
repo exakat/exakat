@@ -21,7 +21,8 @@ class Block extends TokenAuto {
                                                        2 => 'DROP'),
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
-                               'property'     => array('block' => 'true')
+                               'property'     => array('block' => 'true'),
+                               'makeSequence' => 'it',
                                );
         $this->checkAuto(); 
 
