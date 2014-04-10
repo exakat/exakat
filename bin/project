@@ -66,7 +66,9 @@ if (!empty($res) && strpos('javax.script.ScriptException', $res) !== false) {
     die();
 }
 
-unlink('./projects/'.$project.'/log/errors.log');
+if (file_exists('./projects/'.$project.'/log/errors.log')) {
+    unlink('./projects/'.$project.'/log/errors.log');
+}
 shell_exec('php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
 print "Got the errors (if any)\n";
 
