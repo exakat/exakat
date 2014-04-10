@@ -5,12 +5,14 @@ Label : ELEMENT
     makeSequence
     Label : ELEMENT
       foreach
-      Label : SOURCE
-        $a
       Label : VALUE
         $b
+      Label : SOURCE
+        $a
       Label : LOOP
         makeSequence
+        Label : ELEMENT
+          L
         Label : ELEMENT
           B
         Label : ELEMENT
@@ -26,10 +28,8 @@ Label : ELEMENT
                 Label : VARIABLE
                   $c
           Label : THEN
-            makeSequence
-            Label : ELEMENT
-              L
-            Label : ELEMENT
+            Block With if/elseif
+            Label : CODE
               echo
               Label : ARGUMENTS
                 void
@@ -43,10 +43,10 @@ Label : ELEMENT
                         void
                         Label : ARGUMENT
                           =>
-                          Label : VALUE
-                            'L'
                           Label : KEY
                             'K'
+                          Label : VALUE
+                            'L'
                     Label : ARGUMENT
                       .
                       Label : CONCAT

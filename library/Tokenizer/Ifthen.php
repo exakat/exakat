@@ -56,7 +56,7 @@ class Ifthen extends TokenAuto {
                                     1 => array('atom'      => 'Parenthesis'),
                                     2 => array('notAtom'   => array('Sequence', 'Void'), 
                                                'atom'      => 'yes'),
-                                    3 => array('token'     => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_ENDIF', 'T_CLOSE_TAG')),
+                                    3 => array('token'     => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML')),
         );
         
         $this->actions = array( 'to_block_ifelseif' => 2,
@@ -218,7 +218,7 @@ class Ifthen extends TokenAuto {
                                                       ),
                                'atom'         => 'Ifthen',
                                'makeSequence' => 'it',
-                               'property'     => array('Alternative' => true),
+                               'property'     => array('alternative' => true),
                                'cleanIndex'   => true
                                );
 
@@ -241,20 +241,21 @@ class Ifthen extends TokenAuto {
                                                       ),
                                'atom'         => 'Ifthen',
                                'makeSequence' => 'it',
-                               'cleanIndex'   => true
+                               'cleanIndex'   => true,
+                               'property'     => array('alternative' => 'true')
                                );
         $this->checkAuto();
 
         // @note instructions after a if, but not separated by ;
-        $this->conditions = array( 0 => array('token' => 'T_IF', 
-                                              'atom'  => 'none',),
-                                   1 => array('atom'  => 'Parenthesis'),
-                                   2 => array('token' => 'T_COLON',
-                                              'atom'  => 'none', ), 
-                                   3 => array('atom'  => 'yes', 
-                                              'notAtom' => 'Sequence'), 
-                                   4 => array('atom'  => 'yes', 
-                                              'notAtom' => 'Sequence'), 
+        $this->conditions = array( 0 => array('token'      => 'T_IF', 
+                                              'atom'       => 'none',),
+                                   1 => array('atom'       => 'Parenthesis'),
+                                   2 => array('token'      => 'T_COLON',
+                                              'atom'       => 'none', ), 
+                                   3 => array('atom'       => 'yes', 
+                                              'notAtom'    => 'Sequence'), 
+                                   4 => array('atom'       => 'yes', 
+                                              'notAtom'    => 'Sequence'), 
                                    5 => array('filterOut2' => array_merge(array('T_OPEN_PARENTHESIS'),
                                                                         Assignation::$operators, Property::$operators, StaticProperty::$operators,
                                                                         _Array::$operators, Bitshift::$operators, Comparison::$operators, Logical::$operators)),
@@ -268,9 +269,12 @@ class Ifthen extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "if " + it.out("CONDITION").next().fullcode + " " + it.out("THEN").next().fullcode;
-                ifthen = it;
-                it.out("ELSE").each{ it.fullcode = ifthen.fullcode + " else " + it.fullcode; }';
+        return <<<GREMLIN
+
+fullcode.fullcode = "if " + fullcode.out("CONDITION").next().fullcode + " " + fullcode.out("THEN").next().fullcode;
+ifthen = fullcode;
+fullcode.out("ELSE").each{ it.fullcode = ifthen.fullcode + " else " + it.fullcode; }
+GREMLIN;
     }
 
 }
