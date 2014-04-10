@@ -22,7 +22,7 @@ class _While extends TokenAuto {
         $this->actions = array('addEdge'     => array(4 => array('Void' => 'LEVEL')),
                                'keepIndexed'          => true,
                                'cleanIndex'           => true);
-        $this->checkAuto();        
+//        $this->checkAuto();        
 
          //  (instruction + ;) While( condition ) ;
         $this->conditions = array(-3 => array('notToken'  => 'T_DO'), 
@@ -40,7 +40,7 @@ class _While extends TokenAuto {
         $this->actions = array('addEdge'     => array(4 => array('Void' => 'LEVEL')),
                                'keepIndexed'          => true,
                                'cleanIndex'           => true);
-        $this->checkAuto();        
+//        $this->checkAuto();        
 
          //  (Instruction no ;) While( condition ) ;
         $this->conditions = array(-2 => array('notToken'  => array('T_DO', 'T_ELSE', 'T_ELSEIF')), 
@@ -57,11 +57,11 @@ class _While extends TokenAuto {
         $this->actions = array('addEdge'     => array(4 => array('Void' => 'LEVEL')),
                                'keepIndexed' => true,
                                'cleanIndex'  => true);
-        $this->checkAuto();        
+//        $this->checkAuto();        
         
          // { lone block } While( condition ) ;
         $this->conditions = array(-2 => array('filterOut' => array("T_DO" , 'T_ELSE', 'T_ELSEIF')),
-                                  -1 => array('atom'      => "Sequence"),
+                                  -1 => array('atom'      => "yes"),
                                    0 => array('token'     => _While::$operators),
                                    1 => array('token'     => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'      => 'yes'),
@@ -73,7 +73,7 @@ class _While extends TokenAuto {
         $this->actions = array('addEdge'     => array(4 => array('Void' => 'LEVEL')),
                                'keepIndexed' => true,
                                'cleanIndex'  => true);
-        $this->checkAuto();        
+//        $this->checkAuto();        
 
          //  syntax   While() $x++; 
         $this->conditions = array(-1 => array('filterOut2' => array('T_CLOSE_CURLY')),
@@ -87,7 +87,8 @@ class _While extends TokenAuto {
         );
         
         $this->actions = array('while_to_block' => true,
-                               'keepIndexed'    => true);
+                               'keepIndexed'    => true
+                               );
         $this->checkAuto();      
         
          //  syntax   While( ) {}
