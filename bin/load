@@ -336,15 +336,12 @@ function process_file($filename, $log_file) {
             // do.. while special
             if ($Php->getTokenname($token[0]) == 'T_DO') {
                 $dowhiles = array($T[$Tid]);
-                print "++\n";
             } elseif ($Php->getTokenname($token[0]) == 'T_WHILE') {
                 if (empty($dowhiles)) {
                     $T[$Tid]->setProperty('dowhile', 'false')->save();
-                    print "00\n";
                 } else {
                     $T[$Tid]->setProperty('dowhile', 'true')->save();
                     $dowhiles = array();
-                    print "--\n";
                 }
             }
 
@@ -425,8 +422,6 @@ function process_file($filename, $log_file) {
                                                  ->setProperty('modifiedBy', 'bin/load3')
                                                  ->save();
                     $classNode->relateTo($void);
-
-//                    $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();                
 
                     $T[$Tid]->relateTo($void, 'CODE')->save();
                 } else {
