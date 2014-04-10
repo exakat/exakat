@@ -18,7 +18,7 @@ class Ternary extends TokenAuto {
                                     1 => array('atom' => 'yes'),
                                     2 => array('token' => 'T_COLON'),
                                     3 => array('atom' => 'yes', 'notAtom' => 'Sequence'),
-                                    4 => array('filterOut' => Token::$instruction_ending),
+                                    4 => array('filterOut2' => array_merge(Token::$instruction_ending, array('T_OPEN_CURLY'))),
                                  );
         
         $this->actions = array('transform'    => array( -1 => 'CONDITION',
