@@ -1,24 +1,28 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $a
-  Label : CASES
-    {
-    Label : CODE
-      case
+  makeSequence
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      {
       Label : CODE
-        Block With Sequence For Case
-        Label : CODE
-          ++
-          Label : POSTPLUSPLUS
-            $c
-      Label : CASE
-        instanceof
-        Label : RIGHT
-          \
-          Label : ELEMENT
-            C
-        Label : LEFT
-          $b
+        Sequence Case Default
+        Label : ELEMENT
+          case
+          Label : CODE
+            Block With Sequence For Case
+            Label : CODE
+              ++
+              Label : POSTPLUSPLUS
+                $c
+          Label : CASE
+            instanceof
+            Label : RIGHT
+              \
+              Label : ELEMENT
+                C
+            Label : LEFT
+              $b

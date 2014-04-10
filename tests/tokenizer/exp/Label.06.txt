@@ -1,37 +1,27 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $e
-    Label : RIGHT
-      4
+  makeSequence
   Label : ELEMENT
     :
     Label : LABEL
-      E
+      G
   Label : ELEMENT
     =
-    Label : LEFT
-      $f
     Label : RIGHT
-      5
+      6
+    Label : LEFT
+      $g
   Label : ELEMENT
     :
     Label : LABEL
       F
   Label : ELEMENT
     =
-    Label : LEFT
-      $g
     Label : RIGHT
-      6
-  Label : ELEMENT
-    :
-    Label : LABEL
-      G
+      5
+    Label : LEFT
+      $f
   Label : ELEMENT
     :
     Label : LABEL
@@ -39,30 +29,40 @@ Label : CODE
   Label : ELEMENT
     :
     Label : LABEL
-      C
+      E
   Label : ELEMENT
     =
-    Label : LEFT
-      $c
     Label : RIGHT
-      3
-  Label : ELEMENT
-    =
+      4
     Label : LEFT
-      $a
-    Label : RIGHT
-      1
+      $e
   Label : ELEMENT
     :
     Label : LABEL
-      A
+      C
   Label : ELEMENT
     =
-    Label : LEFT
-      $b
     Label : RIGHT
-      2
+      3
+    Label : LEFT
+      $c
   Label : ELEMENT
     :
     Label : LABEL
       B
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $b
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    :
+    Label : LABEL
+      A

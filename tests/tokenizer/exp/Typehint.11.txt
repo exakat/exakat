@@ -1,36 +1,78 @@
 <?php
 
 Label : CODE
-  function
-  Label : NAME
-    a
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        \
-        Label : ELEMENT
+  makeSequence
+  Label : ELEMENT
+    function
+    Label : NAME
+      a2
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          \
+          Label : ELEMENT
+            D
+          Label : ELEMENT
+            C
+        Label : VARIABLE
+          $d
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
           A
-      Label : VARIABLE
-        =
-        Label : LEFT
-          $c
-        Label : RIGHT
-          null
-    Label : ARGUMENT
-      $b
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        \
+        Label : VARIABLE
+          =
+          Label : RIGHT
+            null
+          Label : LEFT
+            $c
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
         Label : ELEMENT
-          C
+          ++
+          Label : POSTPLUSPLUS
+            $x
+  Label : ELEMENT
+    function
+    Label : NAME
+      a
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          \
+          Label : ELEMENT
+            D
+          Label : ELEMENT
+            C
+        Label : VARIABLE
+          $d
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          \
+          Label : ELEMENT
+            A
+        Label : VARIABLE
+          =
+          Label : RIGHT
+            null
+          Label : LEFT
+            $c
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
         Label : ELEMENT
-          D
-      Label : VARIABLE
-        $d
-  Label : BLOCK
-    {
-    Label : CODE
-      void
+          ++
+          Label : POSTPLUSPLUS
+            $x
