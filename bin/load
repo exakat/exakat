@@ -224,6 +224,7 @@ function process_file($filename, $log_file) {
     $root = 0;
     $in_quote = false;
     $in_for = 0;
+    $dowhiles = array();
     
     for($id = 0; $id < $nb; $id++) {
         if (empty($tokens[$id])) { continue; }
@@ -332,6 +333,21 @@ function process_file($filename, $log_file) {
                                               ->setProperty('line', $token[2]);
             }
 
+            // do.. while special
+            if ($Php->getTokenname($token[0]) == 'T_DO') {
+                $dowhiles = array($T[$Tid]);
+                print "++\n";
+            } elseif ($Php->getTokenname($token[0]) == 'T_WHILE') {
+                if (empty($dowhiles)) {
+                    $T[$Tid]->setProperty('dowhile', 'false')->save();
+                    print "00\n";
+                } else {
+                    $T[$Tid]->setProperty('dowhile', 'true')->save();
+                    $dowhiles = array();
+                    print "--\n";
+                }
+            }
+
             $x = $T[$Tid]->getProperty('code');
             // guessing binary code : one may also use 4, 8 or any chr that is supposed to be non ascii. 
             if (strpos($x, chr(2)) !== false) { 
@@ -390,37 +406,62 @@ function process_file($filename, $log_file) {
             }
             
             if ($token == '{' && $tokens[$id + 1] == '}') {
-                $block = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
-                                              ->setProperty('code', $token)
-                                              ->setProperty('fullcode', '{ /**/ } ')
-                                              ->setProperty('line', $line)
-                                              ->setProperty('atom', 'Sequence')
-                                              ->setProperty('order', '0')
-                                              ->setProperty('modifiedBy', 'bin/load12')
-                                              ->save();
-                $classNode->relateTo($block);
+                if ( $tokens[$id - 1] == ')') {
+                    $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
+                                                  ->setProperty('code', $token)
+                                                  ->setProperty('fullcode', '{ /**/ } ')
+                                                  ->setProperty('line', $line)
+                                                  ->setProperty('atom', 'Sequence')
+                                                  ->setProperty('order', '0')
+                                                  ->setProperty('modifiedBy', 'bin/load12')
+                                                  ->save();
+                    $classNode->relateTo($T[$Tid]);
 
-                $void   = $client->makeNode()->setProperty('token', 'T_VOID')
-                                             ->setProperty('code', 'void')
-                                             ->setProperty('fullcode', ' ')
-                                             ->setProperty('line', $line)
-                                             ->setProperty('atom', 'Void')
-                                             ->setProperty('modifiedBy', 'bin/load3')
-                                             ->save();
-                $classNode->relateTo($void);
+                    $void   = $client->makeNode()->setProperty('token', 'T_VOID')
+                                                 ->setProperty('code', 'void')
+                                                 ->setProperty('fullcode', ' ')
+                                                 ->setProperty('line', $line)
+                                                 ->setProperty('atom', 'Void')
+                                                 ->setProperty('modifiedBy', 'bin/load3')
+                                                 ->save();
+                    $classNode->relateTo($void);
 
-                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
-                                             ->setProperty('code', ';')
-                                             ->setProperty('fullcode', ';')
-                                             ->setProperty('line', $line)
-                                             ->setProperty('atom', 'Sequence')
-                                             ->setProperty('modifiedBy', 'bin/load3')
-                                             ->save();
-                $T[$Tid]->relateTo($block, 'ELEMENT')->save();
-                $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();                
+//                    $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();                
 
-                $block->relateTo($void, 'CODE')->save();
+                    $T[$Tid]->relateTo($void, 'CODE')->save();
+                } else {
+                    $block = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
+                                                  ->setProperty('code', $token)
+                                                  ->setProperty('fullcode', '{ /**/ } ')
+                                                  ->setProperty('line', $line)
+                                                  ->setProperty('atom', 'Sequence')
+                                                  ->setProperty('order', '0')
+                                                  ->setProperty('modifiedBy', 'bin/load12')
+                                                  ->save();
+                    $classNode->relateTo($block);
 
+                    $void   = $client->makeNode()->setProperty('token', 'T_VOID')
+                                                 ->setProperty('code', 'void')
+                                                 ->setProperty('fullcode', ' ')
+                                                 ->setProperty('line', $line)
+                                                 ->setProperty('atom', 'Void')
+                                                 ->setProperty('modifiedBy', 'bin/load3')
+                                                 ->save();
+                    $classNode->relateTo($void);
+
+                    $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                                 ->setProperty('code', ';')
+                                                 ->setProperty('fullcode', ';')
+                                                 ->setProperty('line', $line)
+                                                 ->setProperty('atom', 'Sequence')
+                                                 ->setProperty('modifiedBy', 'bin/load3')
+                                                 ->save();
+                    $T[$Tid]->relateTo($block, 'ELEMENT')->save();
+                    $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();                
+
+                    $block->relateTo($void, 'CODE')->save();
+                }
+                
                 $classNode->process($tokens[$id + 1], $Php->getTokenName($tokens[$id + 1]));
                 unset($tokens[$id + 1]);
                 

@@ -2741,6 +2741,15 @@ it.outE.hasNot('label', 'NEXT').inV.each{
             }
             unset($cdt['in_quote']);
         }
+
+        if (isset($cdt['dowhile'])) {
+            if ( $cdt['dowhile'] == 'false' ) {
+                $qcdts[] = "has('dowhile', 'false')";
+            } else {
+                $qcdts[] = "has('dowhile', 'true')";
+            }
+            unset($cdt['dowhile']);
+        }
         
         if (isset($cdt['filterOut'])) {
             if (is_string($cdt['filterOut'])) {

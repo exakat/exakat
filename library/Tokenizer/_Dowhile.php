@@ -10,7 +10,8 @@ class _Dowhile extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Dowhile::$operators),
                                    1 => array('atom'  => 'yes'),
                                    2 => array('token'  => 'T_SEMICOLON'),
-                                   3 => array('token' => 'T_WHILE'),
+                                   3 => array('token' => 'T_WHILE',
+                                              'dowhile' => 'true'),
                                    4 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    5 => array('atom'  => 'yes'),
                                    6 => array('token' => 'T_CLOSE_PARENTHESIS')
@@ -30,7 +31,8 @@ class _Dowhile extends TokenAuto {
         // do if() {} while() (no block...)
         $this->conditions = array( 0 => array('token' => _Dowhile::$operators),
                                    1 => array('atom'  => 'yes'),
-                                   2 => array('token' => 'T_WHILE'),
+                                   2 => array('token' => 'T_WHILE',
+                                              'dowhile' => 'true'),
                                    3 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    4 => array('atom'  => 'yes'),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS')
@@ -49,7 +51,8 @@ class _Dowhile extends TokenAuto {
         // do { block } while()
         $this->conditions = array( 0 => array('token' => _Dowhile::$operators),
                                    1 => array('atom'  => 'Sequence'),
-                                   2 => array('token' => 'T_WHILE'),
+                                   2 => array('token' => 'T_WHILE',
+                                              'dowhile' => 'true'),
                                    3 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    4 => array('atom'  => 'yes'),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS')
@@ -69,7 +72,11 @@ class _Dowhile extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "do " + it.out("LOOP").next().fullcode + " while " + it.out("CONDITION").next().fullcode;';
+        return <<<GREMLIN
+
+fullcode.fullcode = "do " + fullcode.out("LOOP").next().fullcode + " while " + fullcode.out("CONDITION").next().fullcode;
+GREMLIN;
+
     }
 }
 

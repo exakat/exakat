@@ -63,7 +63,7 @@ SHELL
     function save_chunk() {
         $fp = fopen('nodes.csv', 'a');
         // adding in_quote here, as it may not appear on the first token.
-        $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter', 'order' );
+        $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter', 'order', 'dowhile' );
         if (static::$file_saved == 0) {
             fputcsv($fp, array_merge($les_cols), "\t");
         }
