@@ -22,6 +22,14 @@ class Label extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+
+    public function fullcode() {
+        return <<<GREMLIN
+
+fullcode.fullcode = fullcode.out('LABEL').next().fullcode + ' : ';
+GREMLIN;
+    }
 }
 
 ?>
