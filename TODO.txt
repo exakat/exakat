@@ -262,3 +262,5 @@ See if I can move those g.idx['index'][['token':'']].out. to something shorter (
 Check how index degrades with size (compare with the previous).
 
 Create a checker for the Format (they need a number of classes, and dependences).
+Record all scripts's running time. 
+
