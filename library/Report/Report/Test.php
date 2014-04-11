@@ -43,7 +43,7 @@ class Test {
         $ReportInfo->setMySQL($this->db);
         $ReportInfo->collect();
 
-        $ht = $this->addContent('HashTable', $ReportInfo); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+        $ht = $this->addContent('SimpleTable', $ReportInfo); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
         $ht->setAnalyzer('ReportInfo');
         
         $this->createH1('Dashboard');
@@ -77,6 +77,15 @@ class Test {
         $groupby->setName('Severity repartition');
         
         $ht = $this->addContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+
+//        $ht = $this->addContent('SimpleTable', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+
+        $infobox = new \Report\Content\Infobox();
+        $infobox->setNeo4j($this->client);
+        $infobox->setMySQL($this->db);
+        $infobox->setSeverities($groupby->toArray());
+        $infobox->collect();
+        $ht = $this->addContent('Infobox', $infobox); 
 
         ///// Application analyzes 
         $analyzes = array('Structures\\StrposCompare', 
