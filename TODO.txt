@@ -260,3 +260,5 @@ Test with Neo4j 2.0 and the batch inserter.
 
 See if I can move those g.idx['index'][['token':'']].out. to something shorter (and faster). 
 Check how index degrades with size (compare with the previous).
+
+Create a checker for the Format (they need a number of classes, and dependences).
