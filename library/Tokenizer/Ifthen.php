@@ -257,8 +257,10 @@ class Ifthen extends TokenAuto {
                                    4 => array('atom'       => 'yes', 
                                               'notAtom'    => 'Sequence'), 
                                    5 => array('filterOut2' => array_merge(array('T_OPEN_PARENTHESIS'),
-                                                                        Assignation::$operators, Property::$operators, StaticProperty::$operators,
-                                                                        _Array::$operators, Bitshift::$operators, Comparison::$operators, Logical::$operators)),
+                                                                        Assignation::$operators,    Property::$operators, 
+                                                                        StaticProperty::$operators, _Array::$operators, 
+                                                                        Bitshift::$operators,       Comparison::$operators, 
+                                                                        Logical::$operators)),
         );
         
         $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,
