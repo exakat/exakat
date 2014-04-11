@@ -39,7 +39,8 @@ class Logical extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode; 
+        
+fullcode.fullcode = fullcode.out("LEFT").next().fullcode + " " + fullcode.code + " " + it.out("RIGHT").next().fullcode; 
 
 GREMLIN;
     }
