@@ -58,6 +58,18 @@ class ReportInfo extends \Report\Content {
     }
     
     public function toArray() {
+        $return = array();
+        foreach($this->list as $k => $v) {
+            $return[] = array($k, $v);
+        }
+        return $return;
+    }
+    
+    public function getColumnTitles() {
+        return array('Label', 'Value');
+    }
+
+    public function toHash() {
         return $this->list;
     }
 }

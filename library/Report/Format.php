@@ -9,7 +9,7 @@ class Format {
         $fullclass = "\\Report\\Format\\{$this->format}\\$class";
         
         if (!class_exists($fullclass)) {
-            $fullclass = "\\Report\\Format\\{$this->format}\\Default";
+            $fullclass = "\\Report\\Format\\{$this->format}\\Missing";
         }
         
         $this->classes[$class] = new $fullclass();
