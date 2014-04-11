@@ -60,6 +60,7 @@ print "\n";
 $tokens = 0;
 $indexed = array();
 $next = array();
+$fullcode = array();
 $files = glob('projects/*/log/stat.log');
 foreach($files as $file) {
     $log = file_get_contents($file);
@@ -73,6 +74,10 @@ foreach($files as $file) {
 
     if (preg_match('/tokens_count : (\d+)/', $log, $R) && $R[1] != 0) {
         $tokens += $R[1];
+    }
+    
+    if (preg_match('/no_fullcode : (\d+)/', $log, $R) && $R[1] != 0) {
+        $fullcode[] = $file." ({$R[0]})";
     }
 }
 
@@ -88,6 +93,13 @@ if ($next) {
     print "  + ".join("\n  + ", $next)."\n\n";
 } else {
     print "All ".count($files)." stat.log are free of NEXT\n";
+}
+
+if ($fullcode) {
+    print count($fullcode)." stat.log have no fullcode\n";
+    print "  + ".join("\n  + ", $fullcode)."\n\n";
+} else {
+    print "All ".count($files)." stat.log are free of no_fullcode\n";
 }
 
 print "\n".count($files)." projects collecting ".number_format($tokens,0)." tokens\n\n";
