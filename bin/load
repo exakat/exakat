@@ -225,6 +225,7 @@ function process_file($filename, $log_file) {
     $in_quote = false;
     $in_for = 0;
     $dowhiles = array();
+    $block_level = 0;
     
     for($id = 0; $id < $nb; $id++) {
         if (empty($tokens[$id])) { continue; }
@@ -335,13 +336,17 @@ function process_file($filename, $log_file) {
 
             // do.. while special
             if ($Php->getTokenname($token[0]) == 'T_DO') {
-                $dowhiles = array($T[$Tid]);
+                $dowhiles = array('node' => $T[$Tid], 'level' => $block_level);
             } elseif ($Php->getTokenname($token[0]) == 'T_WHILE') {
                 if (empty($dowhiles)) {
                     $T[$Tid]->setProperty('dowhile', 'false')->save();
                 } else {
-                    $T[$Tid]->setProperty('dowhile', 'true')->save();
-                    $dowhiles = array();
+                    if ($block_level == $dowhiles['level']) {
+                        $T[$Tid]->setProperty('dowhile', 'true')->save();
+                        $dowhiles = array();
+                    } else {
+                        $T[$Tid]->setProperty('dowhile', 'false')->save();
+                    }
                 }
             }
 
@@ -393,6 +398,12 @@ function process_file($filename, $log_file) {
         } else {
             $token_value = $Php->getTokenname($token);
             $classNode->process($token, $token_value);
+
+            if ($token_value == 'T_OPEN_CURLY') {
+                $block_level ++;
+            } elseif ($token_value == 'T_CLOSE_CURLY') {
+                $block_level --;
+            }
             
             if (in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE'))) {
                 $delimitedStrings[$token_value]++;
