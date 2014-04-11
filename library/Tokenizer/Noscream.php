@@ -12,9 +12,10 @@ class Noscream extends TokenAuto {
                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS'))
         );
         
-        $this->actions = array('makeEdge'   => array( '1' => 'AT'),
-                               'atom'       => 'Noscream',
-                               'cleanIndex' => true);
+        $this->actions = array('makeEdge'     => array( '1' => 'AT'),
+                               'atom'         => 'Noscream',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
         
         return $this->checkRemaining();

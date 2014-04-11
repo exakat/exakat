@@ -1400,7 +1400,7 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
 
 // lone instruction BEFORE
 if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try', 'Ternary', 'While',
-                                      'Assignation', 'Switch' ]}.any() && 
+                                      'Assignation', 'Switch' ] && it.token != 'T_ELSEIF'}.any() && 
     it.in('NEXT').in('NEXT').filter{ !(it.token in ['T_ECHO'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
@@ -1450,8 +1450,7 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 
 // lone instruction AFTER
 if (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
-                                       'Dowhile', 'Try', 'Class', 'Interface', 'While', 'Break', 'Assignation', 'Halt' ]}.any() &&
-    it.out('NEXT').filter{!(it.token in ['T_ELSEIF'])}.any() &&
+                                       'Dowhile', 'Try', 'Class', 'Interface', 'While', 'Break', 'Assignation', 'Halt' ] && it.token != 'T_ELSEIF' }.any() &&
     it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH'])}.filter{!(it.token in ['T_ELSEIF', 'T_OPEN_CURLY']) || it.atom != null}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
@@ -2306,6 +2305,17 @@ list_after = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMAL
         'T_ELSE', 'T_ELSEIF', 
         'T_CATCH', ];
 
+list_after_token = [
+        'T_OBJECT_OPERATOR', 
+        
+        'T_STAR', 'T_SLASH', 'T_PERCENTAGE',
+        'T_PLUS', 'T_MINUS',
+        'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
+        'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
+        'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR'
+        
+        ];
+
 if (    $it.token != 'T_ELSEIF'
     && ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' )
     && ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))
@@ -2314,7 +2324,7 @@ if (    $it.token != 'T_ELSEIF'
     &&  $it.in_for != \"'true'\"
     && !($it.in('NEXT').next().atom in ['Class', 'Identifier']) 
     &&  ($it.in('NEXT').filter{it.out('CODE').count() == 0 || it.atom == 'Parenthesis'}.count() == 1)
-    &&  !($it.out('NEXT').next().token in ['T_OBJECT_OPERATOR', 'T_STAR'])
+    &&  !($it.out('NEXT').next().token in list_after_token)
     &&  !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR'])
     ) {
 
@@ -2395,7 +2405,7 @@ if (    $it.token != 'T_ELSEIF'
     $it.setProperty('makeSequence6',   $it.in_for != 'true' );
     $it.setProperty('makeSequence7',   !($it.in('NEXT').next().atom in ['Class', 'Identifier']) );
     $it.setProperty('makeSequence8',   $it.in('NEXT').filter{it.out('CODE').count() == 0 || it.atom == 'Parenthesis'}.count() == 1);
-    $it.setProperty('makeSequence9',   !($it.out('NEXT').next().token in ['T_OBJECT_OPERATOR', 'T_STAR']));
+    $it.setProperty('makeSequence9',   !($it.out('NEXT').next().token in list_after_token));
     $it.setProperty('makeSequence10',   !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR']));
 }
 
