@@ -4,12 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      $z
     Label : LOOP
       foreach
-      Label : SOURCE
-        $a
-      Label : VALUE
-        $b
       Label : LOOP
         {
         Label : CODE
@@ -18,5 +16,7 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $c
-    Label : CONDITION
-      $z
+      Label : SOURCE
+        $a
+      Label : VALUE
+        $b

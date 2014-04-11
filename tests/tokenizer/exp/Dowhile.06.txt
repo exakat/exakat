@@ -21,11 +21,9 @@ Label : CODE
     Label : LOOP
       {
       Label : CODE
-        ;
+        makeSequence
         Label : ELEMENT
           =
-          Label : LEFT
-            $a
           Label : RIGHT
             ->
             Label : OBJECT
@@ -38,3 +36,5 @@ Label : CODE
                   $d
                 Label : ARGUMENT
                   $e
+          Label : LEFT
+            $a

@@ -1,0 +1,4 @@
+<?php if (0): ?>
+A<?php C::D('E') ?>
+E<?php $G->H('I') ?>
+<?php endif; ?>

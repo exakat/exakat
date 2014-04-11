@@ -1,0 +1,35 @@
+<?php 
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        0
+    Label : THEN
+      Block With Sequence For Case Without Semicolon
+      Label : ELEMENT
+        ->
+        Label : METHOD
+          H
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'I'
+        Label : OBJECT
+          $G
+      Label : ELEMENT
+        E
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          C
+        Label : METHOD
+          D
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'E'
+      Label : ELEMENT
+        A

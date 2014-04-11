@@ -7,14 +7,22 @@ Label : CODE
     Label : CONDITION
       FALSE
     Label : LOOP
-      makeSequence
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            1
-        Label : THEN
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          1
+      Label : THEN
+        {
+        Label : CODE
+          makeSequence
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+      Label : ELSE
+        makeSequence
+        Label : ELEMENT
           {
           Label : CODE
             makeSequence
@@ -22,13 +30,3 @@ Label : CODE
               break
               Label : LEVEL
                 void
-        Label : ELSE
-          makeSequence
-          Label : ELEMENT
-            {
-            Label : CODE
-              makeSequence
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void

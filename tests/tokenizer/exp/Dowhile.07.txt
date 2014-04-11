@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      $z
     Label : LOOP
       if
       Label : CONDITION
@@ -18,5 +20,3 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $y
-    Label : CONDITION
-      $z

@@ -4,18 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      $z
     Label : LOOP
       for
       Label : CODE
-        Block With For
+        {
         Label : CODE
-          {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $c
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $c
       Label : INIT
         =
         Label : RIGHT
@@ -32,5 +32,3 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $a
-    Label : CONDITION
-      $z

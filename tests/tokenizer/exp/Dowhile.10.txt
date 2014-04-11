@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      $z
     Label : LOOP
       switch
       Label : NAME
@@ -12,12 +14,6 @@ Label : CODE
         {
         Label : CODE
           Sequence Case Default
-          Label : ELEMENT
-            default
-            Label : CODE
-              Block With Sequence For Default
-              Label : CODE
-                Void
           Label : ELEMENT
             case
             Label : CODE
@@ -28,5 +24,9 @@ Label : CODE
                   1
             Label : CASE
               1
-    Label : CONDITION
-      $z
+          Label : ELEMENT
+            default
+            Label : CODE
+              Block With Sequence For Default
+              Label : CODE
+                Void
