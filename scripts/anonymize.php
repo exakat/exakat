@@ -1,5 +1,9 @@
 <?php
 
+if (!file_exists($argv[1])) {
+    die("Usage : php script/anonymize.php <filename>");
+}
+
 $file = $argv[1];
 
 if (!file_exists($file)) {
@@ -120,6 +124,18 @@ foreach($tokens as $t) {
             case T_CLOSE_TAG:
             case T_INSTANCEOF:
 
+            case T_LOGICAL_AND : 
+            case T_LOGICAL_OR : 
+            case T_LOGICAL_XOR : 
+
+//            case T_ANDAND : 
+//            case T_OROR : 
+//            case T_XOR : 
+//            case T_AND : 
+//            case T_OR : 
+//            case T_BOOLEAN_OR : 
+//            case T_BOOLEAN_XOR : 
+            
             case T_IF:
             case T_ELSEIF:
             case T_ENDIF : 
