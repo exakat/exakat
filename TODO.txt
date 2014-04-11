@@ -255,3 +255,8 @@ Must have desctructor's classes (when ? Closing resources are needed ? Like what
 Empty blocks (classes, try/catch, etc.)
 in regex, several successive call will fill the same $r, and if not tested, it may lead to believe there are some results
 function whose return may be ignored
+
+Test with Neo4j 2.0 and the batch inserter.
+
+See if I can move those g.idx['index'][['token':'']].out. to something shorter (and faster). 
+Check how index degrades with size (compare with the previous).
