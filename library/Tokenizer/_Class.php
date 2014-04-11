@@ -88,6 +88,7 @@ if (fullcode.out("IMPLEMENTS").count() > 0) {
     fullcode.fullcode = fullcode.fullcode + " implements " + i.join(", ");
 }
 
+/*
 fullcode.out("EXTENDS").each{ 
     extend = it;
     g.V.has('atom', 'Class').filter{it.out('NAME').next().code == extend.code}.each{
@@ -101,7 +102,7 @@ fullcode.out("IMPLEMENTS").each{
         g.addEdge(it , fullcode, 'DEFINES');
     }
 }
-
+*/
 GREMLIN;
 // didn't added code, it seems too much....
     }
