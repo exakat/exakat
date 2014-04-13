@@ -39,6 +39,9 @@ $stats['String'] = queryColumn("g.idx('racines')[['token':'String']].out('INDEXE
 $stats['Arguments'] = queryColumn("g.idx('racines')[['token':'Arguments']].out('INDEXED').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
 $stats['PPP'] = queryColumn("g.idx('racines')[['token':'_Ppp']].out('INDEXED').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
 
+$stats['no_fullcode'] = queryColumn("g.V.has('fullcode', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE'])}.transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
+
+
 //$stats['test'] = queryOne("m = []; g.V.fill(m); m.size();");
 //print_r($stats);
 
