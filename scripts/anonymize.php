@@ -140,6 +140,14 @@ foreach($tokens as $t) {
             case T_ELSEIF:
             case T_ENDIF : 
 
+            case T_FILE : 
+            case T_CLASS_C : 
+            case T_DIR : 
+            case T_FUNC_C : 
+            case T_LINE : 
+            case T_METHOD_C : 
+            case T_NS_C : 
+
             case T_IS_IDENTICAL:
             case T_CONCAT_EQUAL:
                 // simply ignore
