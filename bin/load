@@ -336,14 +336,14 @@ function process_file($filename, $log_file) {
 
             // do.. while special
             if ($Php->getTokenname($token[0]) == 'T_DO') {
-                $dowhiles = array('node' => $T[$Tid], 'level' => $block_level);
+                $dowhiles[] = array('node' => $T[$Tid], 'level' => $block_level);
             } elseif ($Php->getTokenname($token[0]) == 'T_WHILE') {
                 if (empty($dowhiles)) {
                     $T[$Tid]->setProperty('dowhile', 'false')->save();
                 } else {
-                    if ($block_level == $dowhiles['level']) {
+                    if ($block_level == $dowhiles[count($dowhiles) - 1]['level']) {
                         $T[$Tid]->setProperty('dowhile', 'true')->save();
-                        $dowhiles = array();
+                        array_pop($dowhiles);
                     } else {
                         $T[$Tid]->setProperty('dowhile', 'false')->save();
                     }
@@ -414,6 +414,7 @@ function process_file($filename, $log_file) {
             }
             
             if ($token == '{' && $tokens[$id + 1] == '}') {
+                $block_level--;
                 if ( $tokens[$id - 1] == ')') {
                     $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                                   ->setProperty('code', $token)
