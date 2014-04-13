@@ -1,0 +1,39 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    do
+    Label : LOOP
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          do
+          Label : LOOP
+            {
+            Label : CODE
+              ;
+              Label : ELEMENT
+                do
+                Label : LOOP
+                  {
+                  Label : CODE
+                    ;
+                    Label : ELEMENT
+                      do
+                      Label : LOOP
+                        {
+                        Label : CODE
+                          ;
+                          Label : ELEMENT
+                            ++
+                            Label : POSTPLUSPLUS
+                              $x
+                      Label : CONDITION
+                        1
+                Label : CONDITION
+                  2
+          Label : CONDITION
+            3
+    Label : CONDITION
+      4

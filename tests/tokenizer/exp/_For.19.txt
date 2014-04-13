@@ -1,0 +1,67 @@
+<?php 
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    for
+    Label : CODE
+      Block With For
+      Label : CODE
+        void
+    Label : INIT
+      =
+      Label : RIGHT
+        array
+        Label : ARGUMENTS
+          void
+      Label : LEFT
+        $c
+    Label : FINAL
+      <
+      Label : RIGHT
+        C
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
+      Label : LEFT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $d
+    Label : INCREMENT
+      =
+      Label : RIGHT
+        D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            E
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                $g
+              Label : ARGUMENT
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $h
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $f
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      .
+      Label : CONCAT
+        __FILE__
+      Label : CONCAT
+        (string)
+        Label : CAST
+          $b
+    Label : LEFT
+      $a
