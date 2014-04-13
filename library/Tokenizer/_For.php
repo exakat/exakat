@@ -20,8 +20,7 @@ class _For extends TokenAuto {
         );
         $this->actions = array('addEdge'     => array(8 => array('Void' => 'LEVEL')),
                                'keepIndexed' => true,
-                               'cleanIndex'  => true,
-                               'makeSequence' => 'it');
+                               'cleanIndex'  => true);
         $this->checkAuto();
 
         // for (;;) $x++; (one line instruction, with or without )

@@ -19,6 +19,14 @@ class _Goto extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    public function fullcode() {
+        return <<<GREMLIN
+
+fullcode.fullcode = "goto " + fullcode.out('LABEL').next().fullcode;
+
+GREMLIN;
+    }
 }
 
 ?>

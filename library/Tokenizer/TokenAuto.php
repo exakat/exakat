@@ -1413,10 +1413,11 @@ if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function',
     
     previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
     previous.bothE('NEXT').each{ g.removeEdge(it); }
+    previous.setProperty('checkForNext', 'Previous');
 }
 
 if (it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any() &&
-    !it.in('NEXT').in('NEXT').has('token', 'T_OPEN_PARENTHESIS').any()) {
+    !it.in('NEXT').in('NEXT').filter{(it.token in ['T_OPEN_PARENTHESIS', 'T_VOID'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
     
@@ -1428,6 +1429,7 @@ if (it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any() &&
     
     previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
     previous.bothE('NEXT').each{ g.removeEdge(it); }
+    previous.setProperty('checkForNext', 'Previous' + it.in('NEXT').in('NEXT').next().token);
 }
 
 if (it.out('NEXT').has('atom', 'Sequence').any()) {
@@ -1452,7 +1454,7 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 if (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
                                        'Dowhile', 'Try', 'Class', 'Interface', 'While', 'Break', 'Assignation', 'Halt',
                                        'Staticmethodcall' ] && it.token != 'T_ELSEIF' }.any() &&
-    it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH'])}.filter{!(it.token in ['T_ELSEIF', 'T_OPEN_CURLY']) || it.atom != null}.any()) {
+    it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'])}.filter{!(it.token in ['T_ELSEIF', 'T_OPEN_CURLY']) || it.atom != null}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     
@@ -1461,6 +1463,9 @@ if (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function'
     
     g.addEdge(sequence, next.out('NEXT').next(), 'NEXT');
     next.bothE('NEXT').each{ g.removeEdge(it); }
+
+    next.setProperty('checkForNext', 'Next');
+
 }
 
 if (it.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).any()) {

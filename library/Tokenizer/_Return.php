@@ -33,7 +33,10 @@ class _Return extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.code + " " + it.out("RETURN").next().fullcode; ';
+        return <<<GREMLIN
+
+fullcode.fullcode = fullcode.code + " " + fullcode.out("RETURN").next().fullcode;
+GREMLIN;
     }
 }
 ?>

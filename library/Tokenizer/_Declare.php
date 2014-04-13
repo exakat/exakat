@@ -54,7 +54,7 @@ class _Declare extends TokenAuto {
                                     2 => array('atom'  =>  array('Arguments', 'Void')),
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
-                                    4 => array('atom'  => array('Sequence')),
+                                    4 => array('atom'  => 'Sequence'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
@@ -69,6 +69,17 @@ class _Declare extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    public function fullcode() {
+        return <<<GREMLIN
+
+fullcode.fullcode = "declare " + fullcode.out('TICKS').next().fullcode + " ";
+
+fullcode.out('BLOCK').each{ fullcode.fullcode = fullcode.fullcode + it.fullcode; }
+
+GREMLIN;
+    }
+
 }
 
 ?>

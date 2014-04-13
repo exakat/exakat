@@ -6,7 +6,7 @@ class _While extends TokenAuto {
     static public $operators = array('T_WHILE');
 
     public function _check() {
-         // { lone block } While( condition ) ;
+         // While( condition ) ;
         $this->conditions = array( 0 => array('token'     => _While::$operators,
                                               'dowhile'   => 'false'),
                                    1 => array('token'     => 'T_OPEN_PARENTHESIS'),
@@ -37,7 +37,7 @@ class _While extends TokenAuto {
                                );
         $this->checkAuto();      
         
-         //  syntax   While( ) {}
+         //  While( ) {}
        $this->conditions = array( 0 => array('token'   => _While::$operators,
                                              'dowhile' => 'false'),
                                   1 => array('token'   => 'T_OPEN_PARENTHESIS'),
