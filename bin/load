@@ -415,14 +415,14 @@ function process_file($filename, $log_file) {
             
             if ($token == '{' && $tokens[$id + 1] == '}') {
                 $block_level--;
-                if ( $tokens[$id - 1] == ')') {
+                if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && $Php->getTokenName($tokens[$id - 1][0]) == 'T_STRING')) {
                     $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                                   ->setProperty('code', $token)
                                                   ->setProperty('fullcode', '{ /**/ } ')
                                                   ->setProperty('line', $line)
                                                   ->setProperty('atom', 'Sequence')
                                                   ->setProperty('order', '0')
-                                                  ->setProperty('modifiedBy', 'bin/load12')
+                                                  ->setProperty('modifiedBy', 'bin/load12a')
                                                   ->save();
                     $classNode->relateTo($T[$Tid]);
 
@@ -443,7 +443,7 @@ function process_file($filename, $log_file) {
                                                   ->setProperty('line', $line)
                                                   ->setProperty('atom', 'Sequence')
                                                   ->setProperty('order', '0')
-                                                  ->setProperty('modifiedBy', 'bin/load12')
+                                                  ->setProperty('modifiedBy', 'bin/load12b')
                                                   ->save();
                     $classNode->relateTo($block);
 
