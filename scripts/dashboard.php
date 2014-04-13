@@ -6,7 +6,7 @@ spl_autoload_register('Autoload::autoload_library');
 // report errorlog problems
 $count = trim(shell_exec('ls -hla projects/*/log/errors.log| wc -l '));
 
-$r = shell_exec('ls -hla projects/*/log/errors.log| grep -v 176 ');
+$r = shell_exec('ls -hla projects/*/log/errors.log| grep -v 191 | grep -v 176 ');
 if ($c = preg_match_all('/project(\S*)/', $r, $R)) {
     print "$c error.log are wrong\n";
     print "  + ".join("\n  + ", $R[0])."\n\n";
