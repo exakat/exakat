@@ -16,6 +16,13 @@ if (in_array('-V', $argv)) {
     define('DISPLAY', true);
 }
 
+if ($id = array_search('-p', $argv)) {
+    $project = $argv[$id + 1];
+} else {
+    $project = 'None';
+}
+
+$begin = microtime(true);
 $client = new Client();
 
 $result = query("g.idx('racines')");
@@ -27,6 +34,11 @@ if (DISPLAY) print "Indexing done\n";
 
 query("g.V.has('atom', 'String').filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
 if (DISPLAY) print "String unicode done\n";
+
+$end = microtime(true);
+
+//$db = new Db('exakat');
+//$db->query("INSERT INTO build_root (tokens, duration, project) VALUES ('$project', )");
 
 function query($query) {
     global $client;
