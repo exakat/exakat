@@ -24,5 +24,18 @@ class FunctioncallArray extends TokenAuto {
         
         return $this->checkRemaining();
     }
+
+    public function fullcode() {
+        return <<<GREMLIN
+
+fullcode.fullcode = it.code + it.out("ARGUMENTS").next().fullcode;
+
+// count the number of arguments
+// filter out void ? 
+fullcode.setProperty("count", fullcode.out("ARGUMENTS").out("ARGUMENT").count()); 
+GREMLIN;
+    }
+
+
 }
 ?>
