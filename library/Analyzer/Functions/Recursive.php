@@ -15,7 +15,6 @@ class Recursive extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'name')
              ->back('first')
              ->outIs('BLOCK')
-             ->outIs('CODE')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
              ->samePropertyAs('code', 'name', false)
