@@ -14,7 +14,7 @@ if ($c = preg_match_all('/project(\S*)/', $r, $R)) {
 } else {
     print "All $count error.logs are OK\n";
 }
-print "\n\n";
+print "\n";
 
 $res = shell_exec('cd tests/analyzer/; php list.php -0');
 preg_match('/Total : (\d+) tests/is', $res, $R);
@@ -85,14 +85,14 @@ if ($indexed) {
     print count($indexed)." stat.log have INDEXED\n";
     print "  + ".join("\n  + ", $indexed)."\n\n";
 } else {
-    print "All ".count($files)." stat.log are free of INDEXED\n";
+    print "All ".count($files)." stat.log are free of INDEXED\n\n";
 }
 
 if ($next) {
     print count($next)." stat.log have NEXT\n";
     print "  + ".join("\n  + ", $next)."\n\n";
 } else {
-    print "All ".count($files)." stat.log are free of NEXT\n";
+    print "All ".count($files)." stat.log are free of NEXT\n\n";
 }
 
 if ($fullcode) {
