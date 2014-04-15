@@ -1,0 +1,1 @@
+<?php if($a) : ?>A<?php>B<<?php>C<?php>D<?php echo $location; endif; ?>

@@ -8,7 +8,10 @@ class RawString extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.code; ';
+        return <<<GREMLIN
+
+fullcode.fullcode = fullcode.code; 
+GREMLIN;
     }
 
 }

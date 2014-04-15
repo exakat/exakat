@@ -1,0 +1,15 @@
+;
+Label : ELEMENT
+  echo
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      $location
+Label : ELEMENT
+  <?php>B<
+Label : ELEMENT
+  <?php>D
+Label : ELEMENT
+  <?php>C
+Label : ELEMENT
+  A
