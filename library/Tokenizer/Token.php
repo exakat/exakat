@@ -198,9 +198,9 @@ class Token {
     }
 
     static function countLeftNext() {
-        $result = Token::query("g.E.has('label','NEXT').count()");
+        $result = Token::query("g.idx('racines')[['token':'ROOT']].out('INDEXED').out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
     	
-    	return $result[0][0];
+    	return $result[0][0] + 1;
     }
 
     static function countNextEdge() {

@@ -1,0 +1,55 @@
+;
+Label : ELEMENT
+  R
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    makeSequence
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        ?
+        Label : CONDITION
+          ::
+          Label : CLASS
+            \
+            Label : ELEMENT
+              D
+            Label : ELEMENT
+              C
+          Label : METHOD
+            E
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'F'
+                Label : VARIABLE
+                  $b
+        Label : THEN
+          0
+        Label : ELSE
+          1
+      Label : LEFT
+        $a
+    Label : ELEMENT
+      H
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          ::
+          Label : CLASS
+            \
+            Label : ELEMENT
+              I
+            Label : ELEMENT
+              J
+          Label : METHOD
+            K
+            Label : ARGUMENTS
+              void
+    Label : ELEMENT
+      F
+Label : ELEMENT
+  A
