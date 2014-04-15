@@ -1,6 +1,22 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          $a
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $b
   Label : ELEMENT
     ?
     Label : CONDITION
@@ -35,19 +51,3 @@ Label : CODE
             j
           Label : OBJECT
             $i
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          $a
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $b

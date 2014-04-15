@@ -1,58 +1,60 @@
 <?php
 
 Label : CODE
-  function
-  Label : NAME
-    a
-  Label : ARGUMENTS
-    void
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          ?
-          Label : CONDITION
-            >=
-            Label : LEFT
-              (
-              Label : CODE
-                =
-                Label : LEFT
-                  $b
-                Label : RIGHT
-                  c
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      ->
-                      Label : PROPERTY
-                        e
-                      Label : OBJECT
-                        $d
-            Label : RIGHT
-              0
-          Label : THEN
-            $f
-          Label : ELSE
-            ->
-            Label : OBJECT
-              $g
-            Label : METHOD
-              h
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $this
-                  Label : METHOD
-                    i
+  makeSequence
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+    Label : NAME
+      a
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          return
+          Label : RETURN
+            ?
+            Label : CONDITION
+              >=
+              Label : RIGHT
+                0
+              Label : LEFT
+                (
+                Label : CODE
+                  =
+                  Label : RIGHT
+                    c
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
-                        "J"
-                Label : ARGUMENT
-                  9
+                        ->
+                        Label : PROPERTY
+                          e
+                        Label : OBJECT
+                          $d
+                  Label : LEFT
+                    $b
+            Label : THEN
+              $f
+            Label : ELSE
+              ->
+              Label : METHOD
+                h
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      i
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          "J"
+                    Label : OBJECT
+                      $this
+                  Label : ARGUMENT
+                    9
+              Label : OBJECT
+                $g

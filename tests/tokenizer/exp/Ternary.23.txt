@@ -1,17 +1,13 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ?
       Label : CONDITION
         >
-        Label : LEFT
-          $b
         Label : RIGHT
           [
           Label : INDEX
@@ -22,6 +18,8 @@ Label : CODE
               d
             Label : OBJECT
               $c
+        Label : LEFT
+          $b
       Label : THEN
         [
         Label : INDEX
@@ -34,22 +32,10 @@ Label : CODE
             $f
       Label : ELSE
         ||
-        Label : LEFT
-          [
-          Label : INDEX
-            'k'
-          Label : VARIABLE
-            ->
-            Label : PROPERTY
-              j
-            Label : OBJECT
-              $i
         Label : RIGHT
           (
           Label : CODE
             /
-            Label : LEFT
-              $l
             Label : RIGHT
               [
               Label : INDEX
@@ -60,3 +46,17 @@ Label : CODE
                   n
                 Label : OBJECT
                   $m
+            Label : LEFT
+              $l
+        Label : LEFT
+          [
+          Label : INDEX
+            'k'
+          Label : VARIABLE
+            ->
+            Label : PROPERTY
+              j
+            Label : OBJECT
+              $i
+    Label : LEFT
+      $a

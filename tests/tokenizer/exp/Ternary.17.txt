@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -18,6 +16,12 @@ Label : CODE
             $e
       Label : ELSE
         ->
+        Label : METHOD
+          h
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $i
         Label : OBJECT
           ::
           Label : CLASS
@@ -28,9 +32,5 @@ Label : CODE
               void
               Label : ARGUMENT
                 'g'
-        Label : METHOD
-          h
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $i
+    Label : LEFT
+      $a

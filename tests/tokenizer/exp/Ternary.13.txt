@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -16,20 +14,20 @@ Label : CODE
           ?
           Label : CONDITION
             ==
-            Label : LEFT
-              $c
             Label : RIGHT
               'd'
+            Label : LEFT
+              $c
           Label : THEN
             substr
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                0
+                $f
               Label : ARGUMENT
                 $e
               Label : ARGUMENT
-                $f
+                0
           Label : ELSE
             substr
             Label : ARGUMENTS
@@ -48,3 +46,5 @@ Label : CODE
                   $g
       Label : ELSE
         'h'
+    Label : LEFT
+      $a

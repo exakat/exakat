@@ -1,31 +1,17 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ?
       Label : CONDITION
         ||
-        Label : LEFT
-          ==
-          Label : LEFT
-            [
-            Label : INDEX
-              'd'
-            Label : VARIABLE
-              [
-              Label : INDEX
-                'c'
-              Label : VARIABLE
-                $b
-          Label : RIGHT
-            2
         Label : RIGHT
           ==
+          Label : RIGHT
+            3
           Label : LEFT
             [
             Label : INDEX
@@ -36,9 +22,23 @@ Label : CODE
                 'f'
               Label : VARIABLE
                 $e
+        Label : LEFT
+          ==
           Label : RIGHT
-            3
+            2
+          Label : LEFT
+            [
+            Label : INDEX
+              'd'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                'c'
+              Label : VARIABLE
+                $b
       Label : THEN
         'h'
       Label : ELSE
         'i'
+    Label : LEFT
+      $a

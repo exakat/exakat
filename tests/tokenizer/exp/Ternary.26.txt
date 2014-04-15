@@ -1,21 +1,23 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     ?
     Label : CONDITION
-      return
-      Label : RETURN
-        a
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ->
-            Label : PROPERTY
-              c
-            Label : OBJECT
-              $b
+      makeSequence
+      Label : ELEMENT
+        return
+        Label : RETURN
+          a
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : PROPERTY
+                c
+              Label : OBJECT
+                $b
     Label : THEN
       ->
       Label : PROPERTY
@@ -24,12 +26,6 @@ Label : CODE
         $d
     Label : ELSE
       =
-      Label : LEFT
-        ->
-        Label : PROPERTY
-          g
-        Label : OBJECT
-          $f
       Label : RIGHT
         @
         Label : AT
@@ -42,3 +38,9 @@ Label : CODE
                 j
               Label : OBJECT
                 $i
+      Label : LEFT
+        ->
+        Label : PROPERTY
+          g
+        Label : OBJECT
+          $f
