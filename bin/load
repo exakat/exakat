@@ -328,6 +328,32 @@ function process_file($filename, $log_file) {
                                               ;
                 $classNode->relateTo($inline);
                 $T[$Tid]->relateTo($inline, 'ELEMENT')->save();
+            } elseif ($Php->getTokenname($token[0])           == 'T_INLINE_HTML' && 
+                      isset($tokens[$id + 1]) &&
+                      $Php->getTokenname($tokens[$id + 1][0]) == 'T_INLINE_HTML') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                              ->setProperty('code', ';')
+                                              ->setProperty('fullcode', ';')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('atom', 'Sequence')
+                                              ->setProperty('modifiedBy', 'bin/load15')
+                                              ->setProperty('root', 'true')
+                                              ->save();
+                $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();
+                $classNode->relateTo($T[$Tid]);
+
+    // while ici
+                $inline =  $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
+                                              ->setProperty('atom', 'RawString')
+                                              ->setProperty('fullcode', $token[1])
+                                              ->setProperty('line', $token[2])
+                                              ->setProperty('order', 0)
+                                              ->setProperty('modifiedBy', 'bin/load15-2')
+                                              ->setProperty('code', $token[1])
+                                              ->save();
+                                              ;
+                $classNode->relateTo($inline);
+                $T[$Tid]->relateTo($inline, 'ELEMENT')->save();
             } else {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
                                               ->setProperty('code', $token[1])
@@ -374,6 +400,10 @@ function process_file($filename, $log_file) {
                             ->setProperty('code', '$'.$token[1])
                             ->setProperty('fullcode', '$'.$token[1])->save();
                 } elseif ($Php->getTokenname($token[0]) == 'T_INLINE_HTML' && $id == 0) {
+                    // ignore
+                } elseif ($Php->getTokenname($token[0]) == 'T_INLINE_HTML' &&
+                          isset($tokens[$id + 1]) &&
+                          $Php->getTokenname($tokens[$id + 1][0]) == 'T_INLINE_HTML') {
                     // ignore
                 } elseif ($Php->getTokenname($token[0]) == 'T_CONSTANT_ENCAPSED_STRING') {
                     $T[$Tid]->setProperty('delimiter', in_array($token[1][0], array("'", '"')) ? $token[1][0] : '')
