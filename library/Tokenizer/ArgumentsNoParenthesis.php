@@ -10,8 +10,27 @@ class ArgumentsNoParenthesis extends Arguments {
         // @note echo 's' : no parenthesis
         $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                     0 => array('atom'       => 'none',
-                                               'token'      => ArgumentsNoParenthesis::$operators,
-                                               'notToken'   => 'T_STATIC'),
+                                               'token'      => array('T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 
+                                                                     'T_REQUIRE', 'T_EXIT') ),
+                                    1 => array('atom'       => 'yes', 
+                                               'notAtom'    => array('Sequence', 'Arguments', 'Function', 
+                                                                     'Ppp', 'Final', 'Abstract')),
+                                    2 => array('filterOut2' => array_merge(array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 
+                                                                           'T_EQUAL', 'T_QUESTION', 'T_OPEN_PARENTHESIS', 
+                                                                           'T_OPEN_BRACKET', 'T_OPEN_CURLY',),
+                                                                           Addition::$operators, Multiplication::$operators, 
+                                                                           Bitshift::$operators, Logical::$operators,
+                                                                           Postplusplus::$operators, Comparison::$operators)) 
+        );
+        
+        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
+                               'keepIndexed' => true,
+                               'property'    => array('noParenthesis' => 'true'));
+        $this->checkAuto();
+
+        $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
+                                    0 => array('atom'       => 'none',
+                                               'token'      => 'T_ECHO'),
                                     1 => array('atom'       => 'yes', 
                                                'notAtom'    => array('Sequence', 'Arguments', 'Function', 
                                                                      'Ppp', 'Final', 'Abstract')),

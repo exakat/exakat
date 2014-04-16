@@ -1,0 +1,44 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ::
+      Label : CLASS
+        C
+      Label : METHOD
+        D
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            include
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  E
+                Label : CONCAT
+                  'F'
+          Label : ARGUMENT
+            include
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  'I'
+                Label : CONCAT
+                  $b
+                Label : CONCAT
+                  G
+                Label : CONCAT
+                  'H'
+    Label : LEFT
+      ::
+      Label : CLASS
+        B
+      Label : PROPERTY
+        $a
