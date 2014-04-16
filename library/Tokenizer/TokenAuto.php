@@ -1456,7 +1456,11 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 if (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
                                        'Dowhile', 'Try', 'Class', 'Interface', 'While', 'Break', 'Assignation', 'Halt',
                                        'Staticmethodcall' ] && it.token != 'T_ELSEIF' }.any() &&
-    it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'])}.filter{!(it.token in ['T_ELSEIF', 'T_OPEN_CURLY']) || it.atom != null}.any()) {
+    it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' ,
+                                                     'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
+                                                     'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
+                                                     'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR'])}.
+                               filter{!(it.token in ['T_ELSEIF', 'T_OPEN_CURLY']) || it.atom != null}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     
@@ -1483,7 +1487,6 @@ if (it.both('NEXT').count() == 0) {
     it.inE('INDEXED').each{ g.removeEdge(it); }
 }
 
-it.setProperty('NEXT_COUNT', it.both('NEXT').count());
 ";
             unset($actions['checkForNext']);
         }
