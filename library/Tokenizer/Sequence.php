@@ -33,7 +33,8 @@ class Sequence extends TokenAuto {
                                       _Include::$operators );
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 
                                            'T_CLOSE_PARENTHESIS', 'T_CATCH', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR' ), 
-                                     Assignation::$operators, Logical::$operators, Preplusplus::$operators, Postplusplus::$operators);
+                                     Assignation::$operators, Logical::$operators, Comparison::$operators, 
+                                     Preplusplus::$operators, Postplusplus::$operators);
 
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut2' => $yield_operator,
