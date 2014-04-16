@@ -1,0 +1,56 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    &&
+    Label : LEFT
+      ::
+      Label : CLASS
+        H
+      Label : METHOD
+        I
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              J
+              Label : ARGUMENTS
+                void
+            Label : OBJECT
+              $c
+    Label : RIGHT
+      ->
+      Label : METHOD
+        K
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'L'
+      Label : OBJECT
+        $d
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      B
+    Label : METHOD
+      C
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          $a
+        Label : ARGUMENT
+          'D'
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      E
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          F
+        Label : ARGUMENT
+          'G'
+    Label : OBJECT
+      $b
