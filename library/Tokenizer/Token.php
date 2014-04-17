@@ -58,7 +58,7 @@ class Token {
                                  'Ternary',
                                  '_Return',
                                  '_Const',
-                                 '_Class', // Because to Class_tmp
+                                 '_Class',
                                  '_Abstract',
                                  '_Final',
                                  '_Case',   
@@ -87,6 +87,10 @@ class Token {
                                  'Typehint',
                                  '_Use', 
                                  'ArrayNS',
+                                 '_Insteadof',
+                                 '_As',
+                                 'Variadic',
+                                 '_Trait',
                                 );
 
     protected $phpversion = 'Any';
