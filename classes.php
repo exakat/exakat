@@ -24,6 +24,7 @@ $classes = array (
   14 => 'Not',
   15 => 'Cast',
   16 => 'Reference',
+  83 => 'Variadic',
   17 => 'Arrayappend',
   18 => '_Instanceof',
   19 => '_Break',
