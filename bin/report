@@ -58,7 +58,7 @@ if ($id = array_search('-json', $args)) {
     unset($args[$id]);
     $args = array_values($args);
 } elseif ($id = array_search('-web', $args)) {
-    die("No Web");
+    die("No Web export\n");
     define('FORMAT', 'Web');
     unset($args[$id]);
     $args = array_values($args);
