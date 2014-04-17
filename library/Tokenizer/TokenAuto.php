@@ -145,8 +145,16 @@ it.setProperty('root', 'null');
 
         if (isset($actions['propertyNext'])) {
             if (is_array($actions['propertyNext']) && !empty($actions['propertyNext'])) {
+                $qactions[] = " /* propertyNext */   
+fullcode = it.out('NEXT').next(); \n";
                 foreach($actions['propertyNext'] as $name => $value) {
-                    $qactions[] = " /* propertyNext */   fullcode = it.out('NEXT').next(); fullcode.setProperty('$name', '$value')";
+                    if (substr($value, 0, 3) == 'it.') {
+                        $value = 'fullcode.' . substr($value, 3);
+                    } else {
+                        $value = "'$value'";
+                    }
+                    $qactions[] .= "
+fullcode.setProperty('$name', $value)";
                 }
             }
             unset($actions['propertyNext']);
