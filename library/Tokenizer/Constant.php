@@ -10,7 +10,7 @@ class Constant extends TokenAuto {
         $this->conditions = array( 0 => array('token' => 'T_STRING',
                                               'atom'  => 'Identifier'), 
                                    1 => array('token' => 'T_AS'),
-                                   2 => array('atom' => 'Identifier'),
+                                   2 => array('atom'  => 'Identifier'),
         );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
@@ -22,6 +22,15 @@ class Constant extends TokenAuto {
 
         return $this->checkRemaining();
     }
+
+    public function fullcode() {
+        return <<<GREMLIN
+
+fullcode.fullcode = fullcode.code;
+
+GREMLIN;
+    }
+
 }
 
 ?>
