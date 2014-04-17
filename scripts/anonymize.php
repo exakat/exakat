@@ -124,6 +124,11 @@ foreach($tokens as $t) {
             case T_CLOSE_TAG:
             case T_INSTANCEOF:
 
+            case T_INCLUDE : 
+            case T_INCLUDE_ONCE : 
+            case T_INCLUDE : 
+            case T_REQUIRE_ONCE : 
+
             case T_LOGICAL_AND : 
             case T_LOGICAL_OR : 
             case T_LOGICAL_XOR : 
