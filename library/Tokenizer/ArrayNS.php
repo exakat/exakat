@@ -47,6 +47,15 @@ class ArrayNS extends TokenAuto {
 
         return $this->checkRemaining();
     }
+    
+    public function fullcode() {
+        return <<<GREMLIN
+
+fullcode.fullcode = "[ " + fullcode.out('ARGUMENTS').next().code + " ]";
+
+GREMLIN;
+    }
+
 }
 
 ?>
