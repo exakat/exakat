@@ -1,0 +1,96 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        M
+        Label : ARGUMENTS
+          void
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    class
+    Label : NAME
+      J
+    Label : EXTENDS
+      K
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          use
+          Label : USE
+            L
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      N
+      Label : ARGUMENTS
+        void
+    Label : OBJECT
+      $b
+  Label : ELEMENT
+    trait
+    Label : NAME
+      E
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          function
+          Label : PUBLIC
+            public
+          Label : ARGUMENTS
+            void
+          Label : NAME
+            F
+          Label : BLOCK
+            {
+            Label : CODE
+              makeSequence
+              Label : ELEMENT
+                ::
+                Label : CLASS
+                  G
+                Label : METHOD
+                  H
+                  Label : ARGUMENTS
+                    void
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'I'
+  Label : ELEMENT
+    class
+    Label : NAME
+      B
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          function
+          Label : PUBLIC
+            public
+          Label : ARGUMENTS
+            void
+          Label : NAME
+            C
+          Label : BLOCK
+            {
+            Label : CODE
+              makeSequence
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'D'

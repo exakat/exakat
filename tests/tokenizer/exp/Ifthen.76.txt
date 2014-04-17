@@ -1,0 +1,98 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      B
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              ||
+              Label : LEFT
+                !
+                Label : NOT
+                  $b
+              Label : RIGHT
+                !
+                Label : NOT
+                  C
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $c
+          Label : THEN
+            Block With if/elseif
+            Label : CODE
+              return
+              Label : RETURN
+                D
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              ->
+              Label : PROPERTY
+                H
+              Label : OBJECT
+                $f
+          Label : THEN
+            Block With if/elseif
+            Label : CODE
+              return
+              Label : RETURN
+                !
+                Label : NOT
+                  !
+                  Label : NOT
+                    makeSequence
+                    Label : ELEMENT
+                      return
+                      Label : RETURN
+                        K
+                    Label : ELEMENT
+                      I
+                      Label : ARGUMENTS
+                        ,
+                        Label : ARGUMENT
+                          ->
+                          Label : PROPERTY
+                            J
+                          Label : OBJECT
+                            $g
+                        Label : ARGUMENT
+                          $h
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              E
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  ->
+                  Label : PROPERTY
+                    F
+                  Label : OBJECT
+                    $d
+                Label : ARGUMENT
+                  $e
+          Label : THEN
+            Block With if/elseif
+            Label : CODE
+              return
+              Label : RETURN
+                G
