@@ -64,17 +64,15 @@ $regex = array();
 foreach($classes as $class) {
     $new = "Tokenizer\\$class";
     
-    $r = new $new($client);
-    if ($new == 'Tokenizer\\FunctioncallArray') {
+    $r = Tokenizer\Token::getInstance($new, $client, $config['phpversion']);
+    if (is_null($r)) {
+        // ignore 
+    } elseif ($new == 'Tokenizer\\FunctioncallArray') {
         $regex[$class] = $r;
-    } elseif ($new == 'Tokenizer\\SequenceAtom') {
-//        $regex[$class] = $r;
     } elseif ($new == 'Tokenizer\\Sequence') {
         $regex[$class] = $r;
     } elseif ($r->checkRemaining()) {
         $regex[$class] = $r;
-    } else {
-//        print "No $class to process\n";
     }
 }
 
