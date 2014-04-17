@@ -8,7 +8,6 @@ class Variadic extends TokenAuto {
     protected $phpversion = '5.6+';
 
     public function _check() { 
-        print_r(__METHOD__);
         $this->conditions = array( 0 => array('token' => Variadic::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => array('Variable'))
