@@ -11,12 +11,25 @@ if (!file_exists($file)) {
 }
 print "Processing file $file into $file.anon\n";
 
+$res = shell_exec($_ENV['_'].' -l '.$file);
+if (substr($res, 0, 28) != 'No syntax errors detected in') {
+    print "Can't compile '$file' script with PHP version ".phpversion().".\n";
+    die();
+}
+
 $php = file_get_contents($file);
 $tokens = token_get_all($php);
 
 $lnumber = 0;
 $variables = "a";
 $strings = "A";
+
+$checks = array('T_TRAIT');
+foreach($checks as $check) {
+    if (!defined($check)) { 
+        define($check, 1); 
+    } 
+}
 
 $php = '';
 foreach($tokens as $t) {
@@ -128,6 +141,10 @@ foreach($tokens as $t) {
             case T_INCLUDE_ONCE : 
             case T_INCLUDE : 
             case T_REQUIRE_ONCE : 
+
+            case T_TRAIT : 
+            case T_EXTENDS : 
+            case T_USE : 
 
             case T_LOGICAL_AND : 
             case T_LOGICAL_OR : 
