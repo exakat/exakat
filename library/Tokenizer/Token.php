@@ -332,6 +332,64 @@ g.idx('racines')[['token':'ROOT']].as('root').out('NEXT').hasNot('token', 'T_END
        ";
         Token::query($query);
     }
+
+    public static function getClass($class) {
+        if (class_exists($class)) {
+            return $class;
+        } else {
+            return false;
+        }
+    }
+    
+    public static function getInstance($name, $client, $phpversion = 'Any') {
+        if ($analyzer = Token::getClass($name)) {
+            $analyzer = new $analyzer($client);
+            if ($analyzer->checkPhpVersion($phpversion)) {
+                return $analyzer;
+            } else {
+//                print "Can't run $name ({$analyzer->phpversion} required)\n";
+                return null;
+            }
+        } else {
+            print "No such class as '$name'\n";
+            return null;
+        }
+    }
+
+    public function checkPhpVersion($version) {
+        // this handles Any version of PHP
+        if ($this->phpversion == 'Any') {
+            return true;
+        }
+
+        // version and above 
+        if ((substr($this->phpversion, -1) == '+') && version_compare($version, $this->phpversion) >= 0) {
+            return true;
+        } 
+
+        // up to version  
+        if ((substr($this->phpversion, -1) == '-') && version_compare($version, $this->phpversion) <= 0) {
+            return true;
+        } 
+
+        // version range 1.2.3-4.5.6
+        if (strpos($this->phpversion, '-') !== false) {
+            list($lower, $upper) = explode('-', $this->phpversion);
+            if (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } 
+        
+        // One version only
+        if (version_compare($version, $this->phpversion) == 0) {
+            return true;
+        } 
+        
+        // Default behavior if we don't understand : 
+        return false;
+    }
 }
 
 ?>
