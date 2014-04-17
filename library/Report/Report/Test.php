@@ -9,6 +9,8 @@ class Test {
     private $summary = null;
     private $content = null;
     private $current = null;
+    private $currentH1 = null;
+    private $currentH2 = null;
     private $root    = null;
 
     public function __construct($client, $db) {
@@ -34,6 +36,12 @@ class Test {
 
         $this->createH2('Report synopsis'); 
         $this->addContent('Text', ' ');
+
+        $this->createH2('Report synopsis2'); 
+        $this->addContent('Text', '2');
+
+        $this->createH2('Report synopsis3'); 
+        $this->addContent('Text', '3');
 
         $this->createH2('Report configuration'); 
 
@@ -263,14 +271,16 @@ class Test {
         $section->setLevel(1);
 
         $this->current = $section;
+        $this->currentH1 = $section;
     }
 
     function createH2($name) {
         // @todo check that current is level 1 ? 
-        $section = $this->current->addContent('Section', $name);
+        $section = $this->currentH1->addContent('Section', $name);
         $section->setLevel(2);
 
         $this->current = $section;
+        $this->currentH2 = $section;
     }
 
     function createH3($name) {
