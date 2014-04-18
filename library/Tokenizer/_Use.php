@@ -31,6 +31,19 @@ class _Use extends TokenAuto {
                                'atom'     => 'Use' );
         $this->checkAuto(); 
 
+    // use A {};
+        $this->conditions = array( 0 => array('token' => _Use::$operators),
+                                   1 => array('atom'  => array('Nsname', 'Identifier')),
+                                   2 => array('atom'  => 'Sequence'),
+                                 );
+        
+        $this->actions = array('transform'  => array( 1 => 'USE',
+                                                      2 => 'BLOCK'),
+                               'atom'       => 'Use',
+                               'cleanIndex' => true
+                               );
+        $this->checkAuto(); 
+
     // use A,B {};
         $this->conditions = array( 0 => array('token' => _Use::$operators),
                                    1 => array('atom'  => 'Arguments'),
