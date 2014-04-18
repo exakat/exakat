@@ -41,6 +41,7 @@ $config = parse_ini_file('./projects/'.$project.'/config.ini');
 $begin_time = microtime(true);
 if (empty($config['phpversion'])) {
     $classes = Token::getTokenizers(PHP_VERSION);
+    $config['phpversion'] = PHP_VERSION;
 } else {
     $classes = Token::getTokenizers($config['phpversion']);
 }
