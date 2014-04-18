@@ -1433,11 +1433,11 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
 
 // lone instruction BEFORE
 if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try', 'Ternary', 'While',
-                                      'Assignation', 'Switch' ] && it.token != 'T_ELSEIF'}.any() && 
+                                      'Assignation', 'Switch', 'Use' ] && it.token != 'T_ELSEIF'}.any() && 
     it.in('NEXT').in('NEXT').filter{ !(it.token in ['T_ECHO', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 
                                                     'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 
                                                     'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
-                                                    'T_INSTANCEOF', 'T_INSTEADOF', ])}.any()) {
+                                                    'T_INSTANCEOF', 'T_INSTEADOF'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
     
@@ -1454,7 +1454,7 @@ if (it.in('NEXT').filter{ it.atom in ['RawString', 'Void', 'Ifthen', 'Function',
 }
 
 if (it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any() &&
-    !it.in('NEXT').in('NEXT').filter{(it.token in ['T_OPEN_PARENTHESIS', 'T_VOID'])}.any()) {
+    !it.in('NEXT').in('NEXT').filter{!(it.token in ['T_OPEN_PARENTHESIS', 'T_VOID', 'T_USE'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
     
@@ -1466,7 +1466,7 @@ if (it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any() &&
     
     previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
     previous.bothE('NEXT').each{ g.removeEdge(it); }
-    previous.setProperty('checkForNext', 'Previous' + it.in('NEXT').in('NEXT').next().token);
+    previous.setProperty('checkForNext', 'Previous ' + it.in('NEXT').in('NEXT').next().token);
 }
 
 if (it.out('NEXT').has('atom', 'Sequence').any()) {
