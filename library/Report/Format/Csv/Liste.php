@@ -1,12 +1,12 @@
 <?php
 
-namespace Report\Format\Html;
+namespace Report\Format\Csv;
 
-class Liste extends Report\Format\Html { 
+class Liste extends \Report\Format\Csv { 
 
     public function render($output, $data) {
-        foreach($data as $k => $v) {
-            $output->push($v);
+        foreach($data as $row) {
+            $output->push(array($row));
         }
     }
 
