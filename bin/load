@@ -551,6 +551,10 @@ function process_file($filename, $log_file) {
                                               ->setProperty('line', $line)
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
+                $regexIndex["Parenthesis"]->relateTo($T[$Tid], 'INDEXED')->save();                
+                $regexIndex["ArgumentsNoComma"]->relateTo($T[$Tid], 'INDEXED')->save();                
+                $regexIndex["Typehint"]->relateTo($T[$Tid], 'INDEXED')->save();                
+                $regexIndex["ArgumentsArray"]->relateTo($T[$Tid], 'INDEXED')->save();                
 
                 $previous->relateTo($T[$Tid], 'NEXT')->save();
                 $previous = $T[$Tid];
@@ -558,9 +562,9 @@ function process_file($filename, $log_file) {
                 $Tid++;
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
-                                              ->setProperty('fullcode', '()')
+                                              ->setProperty('fullcode', ' ')
                                               ->setProperty('line', $line)
-                                              ->setProperty('atom', 'Arguments')
+                                              ->setProperty('atom', 'Void')
                                               ->setProperty('modifiedBy', 'bin/load6')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
