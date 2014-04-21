@@ -19,7 +19,6 @@ class Camembert extends \Report\Format\Ace {
         
         if ($total == 0) {
             $html = <<<HTML
-								<div class="span5">
 									<div class="widget-box">
 										<div class="widget-header widget-header-flat widget-header-small">
 											<h5>
@@ -35,7 +34,6 @@ class Camembert extends \Report\Format\Ace {
 										</div><!--/widget-body-->
 									</div><!--/widget-box-->
 								</div><!--/span-->
-							</div><!--/row-->
 
 HTML;
             $output->push($html);
@@ -54,7 +52,6 @@ HTML;
         $counter = \Report\Format\Ace\Camembert::$camembert_counter++;
         
         $html = <<<HTML
-								<div class="span5">
 									<div class="widget-box">
 										<div class="widget-header widget-header-flat widget-header-small">
 											<h5>
@@ -99,8 +96,6 @@ HTML;
 											</div><!--/widget-main-->
 										</div><!--/widget-body-->
 									</div><!--/widget-box-->
-								</div><!--/span-->
-							</div><!--/row-->
     
 HTML;
 

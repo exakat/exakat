@@ -5,8 +5,7 @@ namespace Report\Format\Ace;
 class Infobox extends \Report\Format\Ace { 
     public function render($output, $data) {
         $text = <<<HTML
-						<div class="span12">
-								<div class="span7 infobox-container">
+								<div class="infobox-container">
 HTML;
         $colors = array('green', 'black', 'orange', 'pink', 'light-wood', 'wood', 'blue', 'red', 'grey', 'purple');
         
@@ -30,7 +29,6 @@ HTML;
 
             $text .= <<<HTML
 								</div>
-						</div>
 
 HTML;
         

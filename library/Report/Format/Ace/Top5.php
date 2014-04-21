@@ -10,8 +10,6 @@ class Top5 extends \Report\Format\Ace {
     
     public function render($output, $data) {
         $html = <<<HTML
-							<div class="row-fluid">
-								<div class="span5">
 									<div class="widget-box transparent">
 										<div class="widget-header widget-header-flat">
 											<h4 class="lighter">
@@ -42,7 +40,6 @@ HTML;
         }
         
         $html .= <<<HTML
-															</th>
 														</tr>
 													</thead>
 
@@ -75,11 +72,10 @@ HTML;
 											</div><!--/widget-main-->
 										</div><!--/widget-body-->
 									</div><!--/widget-box-->
-								</div>
+
 HTML;
 
         $output->push($html);
-//        $output->pushToTheEnd($js);
     }
     
     public function setTitle($title) {
