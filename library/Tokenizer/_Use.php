@@ -9,7 +9,7 @@ class _Use extends TokenAuto {
     // use \a\b;
         $this->conditions = array( 0 => array('token' => _Use::$operators),
                                    1 => array('atom'  => array('Nsname', 'Identifier')),
-                                   2 => array('token' => 'T_SEMICOLON',
+                                   2 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'),
                                               'atom'  => 'none'),
                                  );
         
@@ -22,8 +22,7 @@ class _Use extends TokenAuto {
     // use \b\c, \a\c;
         $this->conditions = array( 0 => array('token'    => _Use::$operators),
                                    1 => array('atom'     => 'Arguments'),
-                                   2 => array('notToken' => 'T_COMMA'),
-                                   3 => array('token'    => 'T_SEMICOLON',
+                                   2 => array('token'    => array('T_SEMICOLON', 'T_CLOSE_TAG'),
                                               'atom'     => 'none'),
                                  );
         
@@ -60,7 +59,17 @@ class _Use extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.fullcode = "use " + fullcode.out("USE").next().code;
+
+s = [];
+fullcode.out("USE").sort{it.order}._().each{ 
+    a = it.fullcode;
+    it.out('AS').each{
+        a = a + ' as ' + it.code;
+    }
+    s.add(a); 
+};
+
+fullcode.setProperty('fullcode', fullcode.getProperty('code') + " " + s.join(", "));
 
 GREMLIN;
     }
