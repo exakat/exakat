@@ -43,7 +43,7 @@ class Nsname extends TokenAuto {
         // @note a\b\c as F
         $this->conditions = array( 0 => array('token' => Nsname::$operators),
                                    1 => array('token' => 'T_AS'),
-                                   2 => array('atom' => 'Identifier'),
+                                   2 => array('atom'  => 'Identifier'),
         );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
@@ -58,16 +58,22 @@ class Nsname extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
+
 s = []; 
 fullcode.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); };
 
 if (fullcode.absolutens == 'true') {
-    fullcode.setProperty('fullcode', "\\\\" + s.join("\\\\"));
+    fullcode.setProperty('fullcode', "\\\\");
 } else {
-    fullcode.setProperty('fullcode', s.join("\\\\"));
+    fullcode.setProperty('fullcode', "");
 }
 
-fullcode.out('AS').each{ fullcode.fullcode = fullcode.fullcode + ' as ' + fullcode.code; }
+if (s.size() == 0) { // no ELEMENT : simple NS
+    fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + fullcode.getProperty('code'));
+} else {
+    fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + s.join("\\\\"));
+}
+
 GREMLIN;
     }
 }
