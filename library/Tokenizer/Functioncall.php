@@ -8,10 +8,10 @@ class Functioncall extends TokenAuto {
                                            'T_EXIT', 'T_DIE', 'T_STATIC', 'T_ECHO', );
     static $operators_without_echo = array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 
                                            'T_NS_SEPARATOR', 'T_PRINT', 'T_ISSET', 'T_LIST', 'T_EVAL', 
-                                           'T_EXIT', 'T_DIE', 'T_STATIC');       
+                                           'T_EXIT', 'T_DIE', 'T_STATIC', 'T_HALT_COMPILER');       
 
     public function _check() {
-        // functioncall(with arguments or void) with a variable as name
+        // $functioncall(with arguments or void) with a variable as name
         $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
                                     -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
                                      0 => array('token' => 'T_VARIABLE'),
