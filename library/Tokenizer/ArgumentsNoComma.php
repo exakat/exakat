@@ -21,6 +21,7 @@ class ArgumentsNoComma extends Arguments {
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
         $this->checkAuto();
 
+        // @note echo (1) : no comma 
         $this->conditions = array(-1 => array('token' => 'T_ECHO'),
                                    0 => array('token' => ArgumentsNoComma::$operators,
                                               'atom'  => 'none'),

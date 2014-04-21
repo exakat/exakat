@@ -86,9 +86,9 @@ s = [];
 fullcode.out("ARGUMENT").sort{it.order}._().each{ s.add(it.fullcode); };
 
 if ((s.size() == 0) && (it.virtual == true)) {
-    fullcode.fullcode = '';
+    fullcode.setProperty('fullcode', '');
 } else {
-    fullcode.fullcode = "(" + s.join(", ") + ")";
+    fullcode.setProperty('fullcode', "(" + s.join(", ") + ")");
 }
 GREMLIN;
     }
