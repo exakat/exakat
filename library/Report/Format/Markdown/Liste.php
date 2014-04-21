@@ -11,7 +11,7 @@ class Liste extends \Report\Format\Markdown {
         }
         $text .= "\n";
         
-        $output->push($text."\n");
+        $output->push($text."\n&nbsp;\n");
     }
 
 }
