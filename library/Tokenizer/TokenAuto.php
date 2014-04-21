@@ -1195,20 +1195,35 @@ $fullcode
 
 a = it.out('NEXT').out('NEXT').out('NEXT').next();
 b = a.out('NEXT').next();
+order = 0;
 
 if (a.out('ELEMENT').count() > 0) {
     a.out('ELEMENT').each{
-        g.addEdge(x, it, 'ELEMENT');
         it.setProperty('order', it.order); // this is in case b is also a sequence. May be a is also a sequence....
         it.inE('ELEMENT').each{ g.removeEdge(it);}
+        g.addEdge(x, it, 'ELEMENT');
+        order++;
     }
     
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), a, 'DELETE');
 } else {
+    order = 1;
+    a.setProperty('order', 0);
     g.addEdge(x, a, 'ELEMENT');
 }
 
-g.addEdge(x, b, 'ELEMENT');
+if (b.out('ELEMENT').count() > 0) {
+    b.out('ELEMENT').each{
+        it.setProperty('order', it.order + order); 
+        it.inE('ELEMENT').each{ g.removeEdge(it);}
+        g.addEdge(x, it, 'ELEMENT');
+    }
+    
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), b, 'DELETE');
+} else {
+    b.setProperty('order', 1);
+    g.addEdge(x, b, 'ELEMENT');
+}
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, b.out('NEXT').next(), 'NEXT');
@@ -1241,19 +1256,35 @@ $fullcode
 
 a = it.out('NEXT').out('NEXT').next();
 b = a.out('NEXT').next();
+order = 0;
 
 if (a.out('ELEMENT').count() > 0) {
     a.out('ELEMENT').each{
-        g.addEdge(x, it, 'ELEMENT');
         it.setProperty('order', it.order); // this is in case b is also a sequence. May be a is also a sequence....
         it.inE('ELEMENT').each{ g.removeEdge(it);}
+        g.addEdge(x, it, 'ELEMENT');
+        order++;
     }
     
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), a, 'DELETE');
 } else {
+    order = 1;
+    a.setProperty('order', 0);
     g.addEdge(x, a, 'ELEMENT');
 }
-g.addEdge(x, b, 'ELEMENT');
+
+if (b.out('ELEMENT').count() > 0) {
+    b.out('ELEMENT').each{
+        it.setProperty('order', it.order + order); 
+        it.inE('ELEMENT').each{ g.removeEdge(it);}
+        g.addEdge(x, it, 'ELEMENT');
+    }
+    
+    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), b, 'DELETE');
+} else {
+    b.setProperty('order', 1);
+    g.addEdge(x, b, 'ELEMENT');
+}
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, b.out('NEXT').next(), 'NEXT');
