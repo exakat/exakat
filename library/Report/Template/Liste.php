@@ -2,7 +2,7 @@
 
 namespace Report\Template;
 
-class Liste {
+class Liste extends \Report\Template {
 
     public function render($output) {
         $renderer = $output->getRenderer('Liste');

@@ -2,7 +2,7 @@
 
 namespace Report\Template;
 
-class Summary {
+class Summary extends \Report\Template {
     private $hash = array('Empty' => 'hash');
     private $summary = false;
 

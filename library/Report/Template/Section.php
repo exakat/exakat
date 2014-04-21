@@ -2,7 +2,7 @@
 
 namespace Report\Template;
 
-class Section {
+class Section extends \Report\Template {
     private $name = '';
     private $level = 0;
 
