@@ -27,7 +27,7 @@ class _As extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.out("LEFT").next().code + " as " + fullcode.out("RIGHT").next().code;
+fullcode.setProperty('fullcode', fullcode.out("LEFT").next().fullcode + " as " + fullcode.out("RIGHT").next().fullcode);
 
 GREMLIN;
     }
