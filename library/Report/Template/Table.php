@@ -23,27 +23,28 @@ class Table extends \Report\Template {
         $renderer->render($output, $data);
     }
     
-    function setContent($data) {
+    public function setContent($data) {
         if (!is_null($data)) {
             $this->data = $data; 
         } 
+
         if (empty($this->headersName)) {
             $a = $data->toArray();
             $this->headersName = array_fill(0, count($a[0]), '');
         }
     }
 
-    function setSort($sort) {
+    public function setSort($sort) {
         if (in_array($sort, range(1, 5))) {
             $this->sort = $sort; 
         }
     }
 
-    function setSummary($summary) {
+    public function setSummary($summary) {
         $this->summary = (bool) $summary;
     }
 
-    function setHeadersNames($name) {
+    public function setHeadersNames($name) {
         $this->headersName = $name; 
     }
 }

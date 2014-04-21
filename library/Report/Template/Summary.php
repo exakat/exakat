@@ -4,7 +4,6 @@ namespace Report\Template;
 
 class Summary {
     private $hash = array('Empty' => 'hash');
-//    private $sort = HashTable::SORT_NONE;
     private $summary = false;
 
     private $headerName = 'Item';
@@ -21,47 +20,28 @@ class Summary {
         $renderer->render($output, $this->data->getContent());
     }
     
-    function setContent($data) {
+    public function setContent($data) {
         if (!is_null($data)) {
             $this->data = $data; 
         } 
     }
 
-    function setSort($sort) {
+    public function setSort($sort) {
         if (in_array($sort, range(1, 5))) {
             $this->sort = $sort; 
         }
     }
 
-    function setSummary($summary) {
+    public function setSummary($summary) {
         $this->summary = (bool) $summary;
     }
 
-    function setHeaderName($name) {
+    public function setHeaderName($name) {
         $this->headerName = $name; 
     }
 
-    function setHeaderCount($name) {
+    public function setHeaderCount($name) {
         $this->headerCount = $name; 
-    }
-
-    function toMarkdown() {
-    }
-
-    function toText() {
-        $report = "";
-        
-        foreach($this->hash as $r) {
-            $row = "";
-            foreach($r as $id => $cell) {
-                $row .= " $id : $cell\n";
-            }
-            $row .= str_repeat('-', 100)."\n";
-            
-            $report .= $row;
-        }
-        
-        return $report;
     }
 }
 

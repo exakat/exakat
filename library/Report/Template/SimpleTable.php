@@ -11,23 +11,17 @@ class SimpleTable extends \Report\Template {
         $renderer->render($output, $data);
     }
     
-    function setContent($data) {
-        if (!is_null($data)) {
-            $this->data = $data; 
-        } 
-    }
-
-    function setSort($sort) {
+    public function setSort($sort) {
         if (in_array($sort, range(1, 5))) {
             $this->sort = $sort; 
         }
     }
 
-    function setSummary($summary) {
+    public function setSummary($summary) {
         $this->summary = (bool) $summary;
     }
 
-    function setHeadersNames($name) {
+    public function setHeadersNames($name) {
         $this->headersName = $name; 
     }
 }

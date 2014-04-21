@@ -21,10 +21,12 @@ TEXT;
             
             $contents = $row->getContent();
 
-            print count($contents)." content\n";
             foreach($contents as $id => $c) {
-                print get_class($c)."\n";
-                if (get_class($c) != "Report\\Template\\Section") { unset($contents[$id]); } else { print $c->getName()."\n";}
+                if (get_class($c) != "Report\\Template\\Section") { 
+                    unset($contents[$id]); 
+                } else { 
+                    //print $c->getName()."\n";
+                }
             }
 
             if (count($contents) == 0) {
@@ -61,10 +63,8 @@ HTML;
 					</li>
 HTML;
             }
-            print "\nEnd cycle\n";
         }
         
-//        die(__METHOD__);
         return '				<ul class="nav nav-list">
 '.$text.'</ul>'; 
     }

@@ -55,6 +55,9 @@ class Test {
         $ht->setAnalyzer('ReportInfo');
         
         $this->createH1('Dashboard');
+        $this->addContent('Text', 'intro');
+
+        $this->createH2('Dashboard-2');
         $groupby = new \Report\Content\GroupBy($this->client);
         $groupby->setGroupby('getSeverity');
         $groupby->setCount('toCount');
@@ -86,14 +89,39 @@ class Test {
         
         $ht = $this->addContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
-//        $ht = $this->addContent('SimpleTable', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
         $infobox = new \Report\Content\Infobox();
         $infobox->setNeo4j($this->client);
         $infobox->setMySQL($this->db);
         $infobox->setSeverities($groupby->toArray());
         $infobox->collect();
         $ht = $this->addContent('Infobox', $infobox); 
+
+        $listBySeverity = new \Report\Content\ListBySeverity($this->client);
+        
+        $listBySeverity->addAnalyzer(array(  'Structures\\StrposCompare', 
+                                      'Structures\\Iffectation',
+                                      'Structures\\ErrorReportingWithInteger',
+                                      'Structures\\ForWithFunctioncall',
+                                      'Structures\\ForeachSourceNotVariable',
+                                      'Variables\\VariableUsedOnce',
+                                      'Variables\\VariableNonascii',
+                                      'Structures\\EvalUsage',
+                                      'Structures\\OnceUsage',
+                                      'Structures\\VardumpUsage',
+                                      'Structures\\PhpinfoUsage',
+                                      'Classes\\NonPpp',
+                                      'Php/Incompilable',
+                                      'Constants/ConstantStrangeNames',
+
+                                      'Structures\\NotNot',
+                                      'Structures\\Noscream',
+                                      'Structures\\toStringThrowsException',
+                                      'Structures\\CalltimePassByReference',
+                                      'Structures\\Break0',
+                                      'Structures\\BreakNonInteger',
+                                ));
+        $listBySeverity->setName('Top 5 errors');
+        $ht = $this->addContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
         ///// Application analyzes 
         $analyzes = array('Structures\\StrposCompare', 

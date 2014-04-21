@@ -75,7 +75,7 @@ class Premier {
                                       'Structures\\BreakNonInteger',
                                 ));
         $groupby->setName('Severity repartition');
-        
+
         $ht = $this->addContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
         ///// Application analyzes 

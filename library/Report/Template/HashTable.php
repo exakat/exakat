@@ -27,52 +27,27 @@ class HashTable extends \Report\Template {
         $renderer = $output->getRenderer('HashTable');
         $renderer->render($output, $data);
     }
-    
-    function setContent($data) {
-        if (!is_null($data)) {
-            $this->data = $data; 
-        } 
-    }
 
-    function setCountedValues($counting = true) {
+    public function setCountedValues($counting = true) {
         $this->countedValues = true;
     }
 
-    function setSort($sort) {
+    public function setSort($sort) {
         if (in_array($sort, range(1, 5))) {
             $this->sort = $sort; 
         }
     }
 
-    function setSummary($summary) {
+    public function setSummary($summary) {
         $this->summary = (bool) $summary;
     }
 
-    function setHeaderName($name) {
+    public function setHeaderName($name) {
         $this->headerName = $name; 
     }
 
-    function setHeaderCount($name) {
+    public function setHeaderCount($name) {
         $this->headerCount = $name; 
-    }
-
-    function toMarkdown() {
-    }
-
-    function toText() {
-        $report = "";
-        
-        foreach($this->hash as $r) {
-            $row = "";
-            foreach($r as $id => $cell) {
-                $row .= " $id : $cell\n";
-            }
-            $row .= str_repeat('-', 100)."\n";
-            
-            $report .= $row;
-        }
-        
-        return $report;
     }
 }
 

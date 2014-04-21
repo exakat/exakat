@@ -11,18 +11,45 @@ class Camembert extends \Report\Format\Ace {
         $i = 0;
         $array = $data->toArray(); 
 
+        $title = $data->getName();
+
         $keys = array_keys($array);
         $values = array_values($array);
+        $total = array_sum($array);
+        
+        if ($total == 0) {
+            $html = <<<HTML
+								<div class="span5">
+									<div class="widget-box">
+										<div class="widget-header widget-header-flat widget-header-small">
+											<h5>
+												 {$title}
+											</h5>
+
+											<div class="widget-toolbar no-border">
+											</div>
+										</div>
+
+										<div class="widget-body">
+											<p>No data provided</p>
+										</div><!--/widget-body-->
+									</div><!--/widget-box-->
+								</div><!--/span-->
+							</div><!--/row-->
+
+HTML;
+            $output->push($html);
+            return true;
+        }
+
         foreach($values as $k => $v) {
-            $values[$k] = number_format($v / array_sum($array) * 100, 0)." %";
+            $values[$k] = number_format($v / $total * 100, 0)." %";
         }
         
         foreach($array as $k => $v) {
             $i++;
             $jsData .= "				{ label: \"$k\",  data: $v, color: \"".$colors[$i % count($colors)]."\"},\n";
         }
-        
-        $title = $data->getName();
         
         $counter = \Report\Format\Ace\Camembert::$camembert_counter++;
         

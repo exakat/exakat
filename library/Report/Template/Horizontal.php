@@ -20,37 +20,24 @@ class Horizontal extends \Report\Template {
 
         $renderer->setAnalyzer($this->data->getName());
 
-/*
-        if (!empty($this->analyzer)) {
-            foreach($data as $k => &$v) {
-                $v['analyzer'] = $this->analyzer;
-            }
-        }
-*/      
         $renderer->render($output, $this->data->toFullArray());
     }
-    
-    function setContent($data) {
-        if (!is_null($data)) {
-            $this->data = $data; 
-        } 
-    }
 
-    function setSort($sort) {
+    public function setSort($sort) {
         if (in_array($sort, range(1, 5))) {
             $this->sort = $sort; 
         }
     }
 
-    function setSummary($summary) {
+    public function setSummary($summary) {
         $this->summary = (bool) $summary;
     }
 
-    function setHeaderName($name) {
+    public function setHeaderName($name) {
         $this->headerName = $name; 
     }
 
-    function setHeaderCount($name) {
+    public function setHeaderCount($name) {
         $this->headerCount = $name; 
     }
 }

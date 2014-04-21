@@ -7,12 +7,6 @@ class Tree extends \Report\Template {
         $renderer = $output->getRenderer('Tree');
         $renderer->render($output, $this->data );
     }
-    
-    function setContent($data) {
-        if (!is_null($data)) {
-            $this->data = $data; 
-        } 
-    }
 }
 
 ?>

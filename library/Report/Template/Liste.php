@@ -8,12 +8,6 @@ class Liste {
         $renderer = $output->getRenderer('Liste');
         $renderer->render($output, $this->data->toArray());
     }
-    
-    function setContent($data) {
-        if (!is_null($data)) {
-            $this->data = $data; 
-        } 
-    }
 }
 
 ?>

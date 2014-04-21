@@ -3,8 +3,8 @@
 namespace Report\Content;
 
 class Groupby extends \Report\Content {
-    private $analyzers = array();
-    private $client = null;
+    protected $analyzers = array();
+    protected $client = null;
     protected $name = "Unnamed Group By";
 
     private $sort = \Report\Content\Groupby::SORT_NONE;
@@ -58,7 +58,7 @@ class Groupby extends \Report\Content {
         return $array;
     }
     
-    private function sort_array(&$array) {
+    public function sort_array(&$array) {
         if (is_array($this->sort)) {
             $sort = static::SORT_ARBITRARY;
         } else {
