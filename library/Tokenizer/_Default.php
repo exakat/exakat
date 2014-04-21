@@ -88,8 +88,8 @@ class _Default extends TokenAuto {
                                               'atom'  => 'none',),
                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON'),
                                               'atom'  => 'none', ), 
-                                   2 => array('atom'  => 'yes', 'notAtom' => 'Sequence'), 
-                                   3 => array('atom'  => 'yes', 'notAtom' => 'Sequence'), 
+                                   2 => array('atom'  => 'yes'), 
+                                   3 => array('atom'  => 'yes'), 
                                    4 => array('filterOut2' => array_merge(array('T_ELSE', 'T_ELSEIF', 'T_OPEN_PARENTHESIS'),
                                                                         Assignation::$operators, Property::$operators, 
                                                                         _Array::$operators,      Bitshift::$operators, 
@@ -105,7 +105,11 @@ class _Default extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "default : " + it.out("CODE").next().fullcode; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode', "default : " + fullcode.out("CODE").next().getProperty('fullcode')); 
+
+GREMLIN;
     }
 
 }
