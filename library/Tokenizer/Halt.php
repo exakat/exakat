@@ -7,10 +7,16 @@ class Halt extends TokenAuto {
 
     public function _check() {
         $this->conditions = array(0 => array('token' => Halt::$operators,
-                                             'atom' => 'none'));
+                                             'atom'  => 'none'),
+                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  2 => array('atom'  =>  array('Arguments', 'Void')),
+                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                  );
         
-        $this->actions = array('atom'         => 'Halt',
-//                               'makeSequence' => 'it'
+        $this->actions = array('makeEdge'     => array(2 => 'ARGUMENTS'),
+                               'dropNext'     => array(1),
+                               'atom'         => 'Halt',
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto();
         
@@ -20,7 +26,7 @@ class Halt extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.code;
+fullcode.setProperty('fullcode', fullcode.code + "()");
 GREMLIN;
     }
 }
