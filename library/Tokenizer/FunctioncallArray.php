@@ -19,7 +19,14 @@ class FunctioncallArray extends TokenAuto {
                                                       2 => 'ARGUMENTS',
                                                       3 => 'DROP'),
                                'atom'        => 'Functioncall',
-                               'keepIndexed' => 'yes', );
+                               );
+        $this->checkAuto();
+
+        // $x[3]() 
+        $this->conditions = array(   0 => array('atom'     => 'Array'),
+                                     1 => array('notToken' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET')));
+
+        $this->actions = array('cleanIndex' => 'yes');
         $this->checkAuto();
         
         return $this->checkRemaining();
@@ -28,11 +35,14 @@ class FunctioncallArray extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = it.code + it.out("ARGUMENTS").next().fullcode;
+fullcode.setProperty('fullcode', fullcode.out('VARIABLE').next().getProperty('fullcode') + "[" + 
+                                 fullcode.out('INDEX').next().getProperty('fullcode')    + "]" + 
+                                 fullcode.out("ARGUMENTS").next().getProperty('fullcode'));
 
 // count the number of arguments
 // filter out void ? 
 fullcode.setProperty("count", fullcode.out("ARGUMENTS").out("ARGUMENT").count()); 
+
 GREMLIN;
     }
 
