@@ -193,6 +193,12 @@ function process_file($filename, $log_file) {
         $regexIndex['INDEX']->relateTo($regexIndex[$r], 'INDEXED');
     }
 
+    $regexIndex['S_STRING'] = $client->makeNode()->setProperty('token', 'S_STRING')
+                                                ->setProperty('code', 'Index for S_STRING')
+                                                ->setProperty('index', 'true')
+                                                ->save();
+    $regexIndex['INDEX']->relateTo($regexIndex['S_STRING'], 'INDEXED');
+
     $regexIndex['S_ARRAY'] = $client->makeNode()->setProperty('token', 'S_ARRAY')
                                                 ->setProperty('code', 'Index for S_ARRAY')
                                                 ->setProperty('index', 'true')
@@ -409,6 +415,8 @@ function process_file($filename, $log_file) {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
                             ->setProperty('code', $token[1])
                             ->setProperty('fullcode', $token[1])->save();
+                    $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
+
                 } elseif ($Php->getTokenname($token[0]) == 'T_STRING_VARNAME') {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
                             ->setProperty('code', '$'.$token[1])
@@ -425,11 +433,16 @@ function process_file($filename, $log_file) {
                             ->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
                             ->setProperty('code', $token[1])
                             ->setProperty('fullcode', $token[1])->save();
+
+                    $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
                 } else {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])
-                            ->setProperty('modifiedBy', 'bin/load15')
+                            ->setProperty('modifiedBy', 'bin/load17')
                             ->setProperty('code', $token[1])
                             ->setProperty('fullcode', $token[1])->save();
+                    if ($Php->getTokenname($token[0]) == 'T_ENCAPSED_AND_WHITESPACE') {
+                        $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
+                    }
                 }
             }
 

@@ -32,7 +32,8 @@ if ($result[0][0] != 'MANUAL[racines:Vertex]') {
 query("g.V[0..10].has('token', 'INDEX').out('INDEXED').each{ g.idx('racines').put('token', it.token, it); };");
 if (DISPLAY) print "Indexing done\n";
 
-query("g.V.has('atom', 'String').filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
+query("g.idx('racines')[['token':'S_STRING']].out('INDEXED').filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
+
 if (DISPLAY) print "String unicode done\n";
 
 $end = microtime(true);
