@@ -102,7 +102,7 @@ if ($fullcode) {
     print "All ".count($files)." stat.log are free of no_fullcode\n";
 }
 
-print "\n".count($files)." projects collecting ".number_format($tokens,0)." tokens\n\n";
+print "\n".count($files)." projects collecting ".number_format($tokens, 0)." tokens\n\n";
 
 $files = glob('projects/*/');
 $sqlite_md = array();
