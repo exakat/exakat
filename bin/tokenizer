@@ -67,6 +67,7 @@ foreach($classes as $class) {
     
     $r = Tokenizer\Token::getInstance($new, $client, $config['phpversion']);
     if (is_null($r)) {
+        display("Ignore $new\n");
         // ignore 
     } elseif ($new == 'Tokenizer\\FunctioncallArray') {
         $regex[$class] = $r;
@@ -74,10 +75,13 @@ foreach($classes as $class) {
         $regex[$class] = $r;
     } elseif ($r->checkRemaining()) {
         $regex[$class] = $r;
+    } else {
+        display("Ignore $new in else\n");
     }
 }
 
 $log->log( "Finished loading classes");
+print_r(array_keys($regex));
 
 $server_stat = new Stats($client);
 $server_stat->collect();
@@ -86,6 +90,7 @@ $stats = array('token_in' => $server_stat->tokens_count, 'token_out' => 2,
                'project' => $project);
 
 $total = Tokenizer\Token::countTotalToken();
+//$count = $total + 1;
 $count = Tokenizer\Token::countLeftToken() + 1;
 
 $extra_rounds = 4;
@@ -160,13 +165,11 @@ while(check_prev($prev, $extra_rounds)) {
         display( "$round) Remains $count of $total tokens to process! \n");
     } else {
         display( "$round) All $total tokens have been processed! \n");
-        if (Token::countLeftNext() > 3) {
-//            Token::finishSequence();
-        }
         break 1;
     }
     
 }
+
 $wend = microtime(true);
 $log->log("Total while $round)\t".(($wend - $wbegin)*1000)."");
 $log->log("Total regex time\t".(($regex_time) * 1000)."");
