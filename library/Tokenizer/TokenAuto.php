@@ -123,6 +123,11 @@ it.setProperty('root', 'null');
             } elseif (is_int($actions['atom'])) {
                 $qactions[] = " /* atom */\n  it.setProperty('atom', it.out('NEXT').next().atom)";
             }
+            
+            if ($actions['atom'] == 'Ternary') {
+                $qactions[] = " /* indexing */\n  g.idx('{$actions['atom']}').put('token', 'node', it);";
+            }
+            
             unset($actions['atom']);
             $this->set_atom = true;
         }

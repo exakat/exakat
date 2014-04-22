@@ -29,6 +29,21 @@ $result = query("g.idx('racines')");
 if ($result[0][0] != 'MANUAL[racines:Vertex]') {
     query("g.createManualIndex('racines', Vertex)");
 }
+
+foreach(Token::getTokenizers() as $class) {
+    $fullclass = "\\Tokenizer\\$class";
+    if (isset($fullclass::$atom)) {
+        $token = $fullclass::$atom;
+        print "$token\n";
+        query("g.createManualIndex('$token', Vertex)");
+
+    } else {
+        print "$class : missing token\n";
+    }
+
+}
+
+
 query("g.V[0..10].has('token', 'INDEX').out('INDEXED').each{ g.idx('racines').put('token', it.token, it); };");
 if (DISPLAY) print "Indexing done\n";
 

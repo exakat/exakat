@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Ternary extends TokenAuto {
     static public $operators = array('T_QUESTION');
+    static public $atom = 'Ternary';
     
     public function _check() {
         
