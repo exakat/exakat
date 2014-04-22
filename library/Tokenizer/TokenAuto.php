@@ -124,7 +124,7 @@ it.setProperty('root', 'null');
                 $qactions[] = " /* atom */\n  it.setProperty('atom', it.out('NEXT').next().atom)";
             }
             
-            if ($actions['atom'] == 'Ternary') {
+            if ($actions['atom'] == 'Ternary' || $actions['atom'] == 'Typehint') {
                 $qactions[] = " /* indexing */\n  g.idx('{$actions['atom']}').put('token', 'node', it);";
             }
             
@@ -1615,7 +1615,7 @@ thecatch.bothE('NEXT').each{ g.removeEdge(it); }
 
         if (isset($actions['to_typehint'])) {
             $fullcode = $this->fullcode();
-
+            
             $qactions[] = "
 /* to type hint */
 x = g.addVertex(null, [code:'Typehint', atom:'Typehint', virtual:true, line:it.line]);
@@ -1642,6 +1642,8 @@ x.outE.hasNot('label', 'NEXT').inV.each{
         g.removeEdge(it);
     } 
 }
+
+/* indexing */  g.idx('Typehint').put('token', 'node', x);
 
 fullcode = x;
 $fullcode
