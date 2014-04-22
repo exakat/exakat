@@ -294,7 +294,7 @@ class Sequence extends TokenAuto {
         
         $this->actions = array('addToSequence' => 1,
                                'keepIndexed'   => true);
-        $this->checkAuto(); 
+//        $this->checkAuto(); 
 
         // @note ; without nore more NEXT
         $this->conditions = array( 0 => array('atom'  => 'Sequence' ));
