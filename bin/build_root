@@ -11,9 +11,9 @@ include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
 if (in_array('-V', $argv)) {
-    define('DISPLAY', false);
-} else {
     define('DISPLAY', true);
+} else {
+    define('DISPLAY', false);
 }
 
 if ($id = array_search('-p', $argv)) {
@@ -30,23 +30,41 @@ if ($result[0][0] != 'MANUAL[racines:Vertex]') {
     query("g.createManualIndex('racines', Vertex)");
 }
 
-foreach(Token::getTokenizers() as $class) {
-    $fullclass = "\\Tokenizer\\$class";
-    if (isset($fullclass::$atom)) {
-        $token = $fullclass::$atom;
-        print "$token\n";
-        query("g.createManualIndex('$token', Vertex)");
-
-    } else {
-        print "$class : missing token\n";
-    }
-
+$indices = array();
+$res = query("g.getIndices()")->toArray();
+foreach($res as $r) {
+    $indices[] = substr($r[0], 7, strpos($r[0], ':') - 7);
 }
 
+$faits = array();
 
+$tokens = Token::getTokenizers();
+foreach($tokens as $id => $class) {
+    $fullclass = "\\Tokenizer\\$class";
+    if (!isset($fullclass::$atom)) {
+        print "$id) $class : missing token\n";
+        continue;
+    }
+ 
+    $token = $fullclass::$atom;
+    if (in_array($token, $faits)) {
+        continue; 
+    } elseif (in_array($token, $indices)) {
+        query("g.dropIndex('$token');");
+    }
+
+    query("g.createManualIndex('$token', Vertex)");
+    $faits[] = $token;
+}
+
+if (DISPLAY) print "Creating index done\n";
+
+// creating the neo4j Index, old style (That will be removed);
 query("g.V[0..10].has('token', 'INDEX').out('INDEXED').each{ g.idx('racines').put('token', it.token, it); };");
+
 if (DISPLAY) print "Indexing done\n";
 
+// calculating the Unicode blocks
 query("g.idx('racines')[['token':'S_STRING']].out('INDEXED').filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
 
 if (DISPLAY) print "String unicode done\n";
@@ -68,8 +86,8 @@ function query($query) {
         fwrite($fp, $query."\n");
         fclose($fp);
         
-        sleep(2);
-        query($query);
+        print $e->getMessage();
+        die('died in '.__METHOD__."\n");
     }
 }
 
