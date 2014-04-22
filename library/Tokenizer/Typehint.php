@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Typehint extends TokenAuto {
     static public $operators = array('T_COMMA', 'T_OPEN_PARENTHESIS');
+    static public $atom = 'Typehint';
     
     public function _check() {
         $this->conditions = array(-1 => array('filterOut' => 'T_CATCH'),
@@ -32,7 +33,11 @@ class Typehint extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'fullcode.fullcode = fullcode.out("CLASS").next().code + " " + fullcode.out("VARIABLE").next().code; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode', fullcode.out("CLASS").next().code + " " + fullcode.out("VARIABLE").next().code); 
+
+GREMLIN;
     }
 }
 

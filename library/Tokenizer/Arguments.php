@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Arguments extends TokenAuto {
     static public $operators = array('T_COMMA');
+    static public $atom = 'Arguments';
 
     static public $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 'Identifier', 
                                        'Integer', 'Float', 'Not', 'Variable', 'Array', 'Concatenation', 'Sign',
@@ -82,6 +83,7 @@ class Arguments extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
+
 s = [];
 fullcode.out("ARGUMENT").sort{it.order}._().each{ s.add(it.fullcode); };
 
@@ -90,6 +92,7 @@ if ((s.size() == 0) && (it.virtual == true)) {
 } else {
     fullcode.setProperty('fullcode', "(" + s.join(", ") + ")");
 }
+
 GREMLIN;
     }
 }

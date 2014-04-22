@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Addition extends TokenAuto {
     static public $operators = array('T_PLUS','T_MINUS');
+    static public $atom = 'Addition';
     
     public function _check() {
         // note : Multiplication:: and Addition:: operators are the same! 
@@ -29,7 +30,11 @@ class Addition extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'fullcode.fullcode = fullcode.out("LEFT").next().fullcode + " " + fullcode.code + " " + fullcode.out("RIGHT").next().fullcode; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode', fullcode.out("LEFT").next().fullcode + " " + fullcode.code + " " + fullcode.out("RIGHT").next().fullcode);
+
+GREMLIN;
     }
 
 }
