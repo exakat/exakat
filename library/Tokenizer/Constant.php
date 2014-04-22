@@ -6,6 +6,8 @@ class Constant extends TokenAuto {
     static public $operators = array('T_CONSTANT_ENCAPSED_STRING', 'T_STRING');
 
     public function _check() {
+        return 0;
+        
         // @note a\b\c as F
         $this->conditions = array( 0 => array('token' => 'T_STRING',
                                               'atom'  => 'Identifier'), 
@@ -26,7 +28,7 @@ class Constant extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.code;
+fullcode.setProperty('fullcode', fullcode.getProperty('code'));
 
 GREMLIN;
     }
