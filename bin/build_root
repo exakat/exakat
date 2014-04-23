@@ -42,7 +42,7 @@ $tokens = Token::getTokenizers();
 foreach($tokens as $id => $class) {
     $fullclass = "\\Tokenizer\\$class";
     if (!isset($fullclass::$atom)) {
-        print "$id) $class : missing token\n";
+        if (DISPLAY) print "$id) $class : missing token\n";
         continue;
     }
  
