@@ -81,7 +81,6 @@ foreach($classes as $class) {
 }
 
 $log->log( "Finished loading classes");
-print_r(array_keys($regex));
 
 $server_stat = new Stats($client);
 $server_stat->collect();
