@@ -235,12 +235,13 @@ GREMLIN;
     public function checkPhpConfiguration($Php) {
         // this handles Any version of PHP
         if ($this->phpconfiguration == 'Any') {
+            print "Any\n";
             return true;
         }
         
         // @todo this must be updated.
+        die("dies in ".__METHOD__."\n");
         return true;
-        die(__METHOD__);
         foreach($this->phpconfiguration as $ini => $value) {
             if (ini_get($ini) != $value) {
                 return false;
