@@ -6,7 +6,7 @@ use Analyzer;
 
 class Functionnames extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Function")
              ->isNot('lambda')
              ->classIs('Global')

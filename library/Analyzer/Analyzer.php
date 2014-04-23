@@ -775,7 +775,7 @@ GREMLIN;
             die(" I don't understand arrays in out()");
             $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.count() == 0}", $edge_name);
         } else {
-            $this->addMethod("filter{ it.out(***).count() != 0}", $edge_name);
+            $this->addMethod("filter{ it.out(***).any()}", $edge_name);
         }
         
         return $this;
