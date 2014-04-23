@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('ZipArchive()', 
+$expected     = array('ZipArchive( )', 
                       'ZipArchive');
 
 $expected_not = array();

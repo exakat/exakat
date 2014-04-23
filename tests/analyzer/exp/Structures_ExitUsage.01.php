@@ -1,10 +1,10 @@
 <?php
 
 $expected     = array("die('e')", 
-                      "die()", 
+                      "die( )", 
                       "die ", 
                       "exit('f')", 
-                      "exit()", 
+                      "exit( )", 
                       "exit ");
 
 $expected_not = array();

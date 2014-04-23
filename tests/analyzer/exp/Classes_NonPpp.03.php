@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('function nonPPP () { /**/ } ');
+$expected     = array('function nonPPP ( ) { /**/ } ');
 
 $expected_not = array();
 

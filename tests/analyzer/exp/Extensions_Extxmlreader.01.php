@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('XMLReader()');
+$expected     = array('XMLReader( )');
 
 $expected_not = array();
 

@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('enchant_broker_init()', 
+$expected     = array('enchant_broker_init( )', 
                       'enchant_broker_describe($r)', 
                       'enchant_broker_list_dicts($r)', 
                       'enchant_broker_dict_exists($r, $tag)', 

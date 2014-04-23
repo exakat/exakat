@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('function functionWithoutReturn ($x) { /**/ } ',
-                      'private function methodWithoutReturn () { /**/ } ');
+                      'private function methodWithoutReturn ( ) { /**/ } ');
 
 $expected_not = array();
 
