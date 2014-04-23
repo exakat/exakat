@@ -730,7 +730,7 @@ GREMLIN;
         return $this;
     }
 
-    function inIsnt($edge_name) {
+    function inIsnot($edge_name) {
         if (is_array($edge_name)) {
             die(" I don't understand arrays in inIsnot()");
             // @todo
