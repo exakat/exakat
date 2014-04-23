@@ -896,8 +896,8 @@ GREMLIN;
         array_splice($this->methods, 2, 0, array('as("first")'));
         $query = join('.', $this->methods);
         
-        if ($this->methods[1] == 'has("atom", arg0)' && $this->arguments['arg0'] == 'Typehint') {
-            $query = "g.idx('Typehint')[['token':'node']].{$query}";
+        if ($this->methods[1] == 'has("atom", arg0)' && in_array($this->arguments['arg0'], array('Functioncall', 'Ternary', 'Typehint'))) {
+            $query = "g.idx('{$this->arguments['arg0']}')[['token':'node']].{$query}";
         } else {
             $query = "g.V.{$query}";
         }

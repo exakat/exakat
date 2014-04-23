@@ -124,7 +124,7 @@ it.setProperty('root', 'null');
                 $qactions[] = " /* atom */\n  it.setProperty('atom', it.out('NEXT').next().atom)";
             }
             
-            if ($actions['atom'] == 'Ternary' || $actions['atom'] == 'Typehint') {
+            if (in_array($actions['atom'], array('Ternary', 'Typehint', 'Functioncall'))) {
                 $qactions[] = " /* indexing */\n  g.idx('{$actions['atom']}').put('token', 'node', it);";
             }
             

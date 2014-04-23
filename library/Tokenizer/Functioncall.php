@@ -9,6 +9,7 @@ class Functioncall extends TokenAuto {
     static $operators_without_echo = array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 
                                            'T_NS_SEPARATOR', 'T_PRINT', 'T_ISSET', 'T_LIST', 'T_EVAL', 
                                            'T_EXIT', 'T_DIE', 'T_STATIC', 'T_HALT_COMPILER');       
+    static public $atom = 'Functioncall';
 
     public function _check() {
         // $functioncall(with arguments or void) with a variable as name
