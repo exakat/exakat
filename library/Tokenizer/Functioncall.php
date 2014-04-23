@@ -44,23 +44,6 @@ class Functioncall extends TokenAuto {
                                );
         $this->checkAuto();
 
-        // functioncall(with arguments or void) but will be reused outside a sequence
-        $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
-                                    -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
-                                     0 => array('token' => Functioncall::$operators_without_echo),
-                                     1 => array('atom'  => 'none',
-                                                'token' => 'T_OPEN_PARENTHESIS' ),
-                                     2 => array('atom'  =>  array('Arguments', 'Void')),
-                                     3 => array('atom'  => 'none',
-                                                'token' => 'T_CLOSE_PARENTHESIS')
-        );
-        
-        $this->actions = array('makeEdge'     => array(2 => 'ARGUMENTS'),
-                               'dropNext'     => array(1),
-                               'atom'         => 'Functioncall'
-                               );
-//        $this->checkAuto();
-
         // functioncall special case for Echo
         $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
                                     -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
@@ -115,7 +98,8 @@ class Functioncall extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-if (fullcode.token == 'T_NS_SEPARATOR') {
+
+if (fullcode.getProperty('token') == 'T_NS_SEPARATOR') {
     s = []; 
     fullcode.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); };
 
@@ -127,12 +111,13 @@ if (fullcode.token == 'T_NS_SEPARATOR') {
         fullcode.setProperty('code', s.join("\\\\"));
     }
 } else {
-    fullcode.fullcode = it.code + it.out("ARGUMENTS").next().fullcode;
+    fullcode.setProperty('fullcode', it.getProperty('code') + it.out("ARGUMENTS").next().getProperty('fullcode'));
 }
 
 // count the number of arguments
 // filter out void ? 
 fullcode.setProperty("count", fullcode.out("ARGUMENTS").out("ARGUMENT").count()); 
+
 GREMLIN;
     }
 

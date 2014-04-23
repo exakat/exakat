@@ -285,17 +285,6 @@ class Sequence extends TokenAuto {
                                'keepIndexed' => true);
         $this->checkAuto(); 
 
-        // Sequence followed by another instruction
-        $this->conditions = array(   0 => array('token' => Sequence::$operators,
-                                                'atom'  => 'Sequence'),
-                                     1 => array('atom'  => array('Array', 'RawString', 'Functioncall',  )),
-                                     2 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_END')),
-        );
-        
-        $this->actions = array('addToSequence' => 1,
-                               'keepIndexed'   => true);
-//        $this->checkAuto(); 
-
         // @note ; without nore more NEXT
         $this->conditions = array( 0 => array('atom'  => 'Sequence' ));
         
@@ -310,7 +299,8 @@ class Sequence extends TokenAuto {
         // fullcode is not meant to reproduce the whole code, but give a quick peek at some smaller code. Just ignoring for the moment.
         return <<<GREMLIN
 
-fullcode.setProperty("fullcode", " ")
+fullcode.setProperty("fullcode", " ");
+
 GREMLIN;
     }
 }
