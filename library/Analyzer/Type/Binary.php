@@ -5,7 +5,7 @@ namespace Analyzer\Type;
 use Analyzer;
 
 class Binary extends Analyzer\Analyzer {
-    protected $phpVersion = "5.4+";
+    protected $phpversion = "5.4+";
     
     public function dependsOn() {
         return array("Analyzer\\Type\\Integer");
