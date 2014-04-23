@@ -8,7 +8,7 @@ class Closures extends Analyzer\Analyzer {
     
     protected $themes = array('Inventory', 'Appinfo');
     
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Function")
              ->is('lambda');
     }
