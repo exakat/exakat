@@ -9,7 +9,8 @@ class StrposCompare extends Analyzer\Analyzer {
     protected $timeToFix = \Analyzer\Analyzer::T_QUICK;
 
     static public $operator = array('strpos', 'stripos', 'strrpos', 'strripos', 
-                                    'strstr', 'stristr', );
+                                    'strstr', 'stristr', 'file_get_contents',
+                                    'fread', );
     
     public function analyze() {
         // if (.. == strpos(..)) {}
