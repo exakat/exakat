@@ -2,7 +2,8 @@
 
 class Phpexec {
     private $phpexec = 'php';
-    private $tokens = array();
+    private $tokens  = array();
+    private $config = array();
     
     public function __construct($phpversion) {
         switch($phpversion) {
@@ -26,10 +27,17 @@ class Phpexec {
                 $this->phpexec = 'php';
         }    
 
+
+        // prepare the configuration
+        $res = shell_exec($this->phpexec.' -i');
+        preg_match('/short_open_tag => (\w+) => (\w+)/', $res, $r);
+        $this->config['short_open_tag'] = $r[2] == 'On';
+
         shell_exec($this->phpexec.' -r "print \'<?php \\$this->tokens = \'; \\$x = get_defined_constants(true); var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > /tmp/tokennames.php');
         include('/tmp/tokennames.php');
         unlink('/tmp/tokennames.php');
 
+        // prepare the tokens
         $tphp = array(";" => 'T_SEMICOLON',
                       "=" => 'T_EQUAL',
                       "+" => 'T_PLUS',
@@ -100,6 +108,16 @@ class Phpexec {
             array_search('T_DOC_COMMENT', $this->tokens) => 1,
             array_search('T_COMMENT', $this->tokens) => 1,
         );
+    }
+
+    public function getConfiguration($name = null) {
+        if (is_null($name)) {
+            return $this->config;
+        } elseif (isset($this->config[$name])) {
+            return $this->config[$name];
+        } else {
+            return $this->config;
+        }
     }
 }
 

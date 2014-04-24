@@ -22,21 +22,35 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
         $test_config = 'Analyzer'.str_replace('_', '\\', str_replace('Test', '', get_class($this)));
 
-        $analyzer = new $test_config(null);
-        if (!$analyzer->checkPhpVersion($phpversion)) {
+        $analyzerobject = new $test_config(null);
+        if (!$analyzerobject->checkPhpVersion($phpversion)) {
             $this->markTestSkipped('Needs version '.$analyzer->getPhpVersion().'.');
         }
+
+        $Php = new \Phpexec($phpversion);
+        if ($analyzerobject->checkPhpConfiguration($Php)) {
+            $message = array();
+            $confs = $analyzerobject->getPhpConfiguration();
+            foreach($confs as $name => $value) {
+                $confs[] = "$name => $value";
+            }
+            $confs = join(', ', $confs);
+            
+            $this->markTestSkipped('Needs configuration : '.$confs.'.');
+        }
         
-        $shell = 'cd ../..; php bin/load -q -p test -f tests/analyzer/source/'.$file.'.php; php bin/build_root -p test; php bin/tokenizer -p test;  php bin/analyze -P '.$test_config;
+        $shell = 'cd ../..; php bin/load -q -p test -f tests/analyzer/source/'.$file.'.php';
         
         $res = shell_exec($shell);
         $pos = strpos($res, "won't compile");
         
         if ($pos !== false) {
-        
             $this->assertFalse(true, 'test '.$file.' can\'t compile with PHP version "'. ($phpversion).'", so no test is being run.');
         }
         
+        $shell = 'cd ../..;  php bin/build_root -p test; php bin/tokenizer -p test;  php bin/analyze -P '.escapeshellarg($test_config);
+        $res = shell_exec($shell);
+
         $shell = 'cd ../..; php bin/export_analyzer '.$analyzer.' -o -json';
         $shell_res = shell_exec($shell);
         $res = json_decode($shell_res);

@@ -239,16 +239,12 @@ GREMLIN;
             return true;
         }
         
-        // @todo this must be updated.
-        die("dies in ".__METHOD__."\n");
-        return true;
+        $wrong_config = array();
         foreach($this->phpconfiguration as $ini => $value) {
-            if (ini_get($ini) != $value) {
-                return false;
-            }
+            $wrong_config[] = $Php->getConfiguration($ini) == $value;
         }
         
-        return false;
+        return count($wrong_config) > 0;
     }
     
     public function checkPhpVersion($version) {
