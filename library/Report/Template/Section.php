@@ -5,6 +5,7 @@ namespace Report\Template;
 class Section extends \Report\Template {
     private $name = '';
     private $level = 0;
+    private $current = false;
 
     private $sections = array();
     private $currentSection = null;
@@ -35,11 +36,13 @@ class Section extends \Report\Template {
     public function render($output) {
         $renderer = $output->getRenderer('Section');
         
+        $this->current = true;
         $renderer->render($output, $this);
         
         foreach($this->content as $content) {
             $content->render($output);
         }
+        $this->current = false;
     }
 
     public function setLevel($level = 0) {
@@ -74,6 +77,14 @@ class Section extends \Report\Template {
 
     public function getContent() {
         return $this->content;
+    }
+
+    public function isCurrent() {
+        return $this->current;
+    }
+
+    public function setCurrent($current) {
+        $this->current = $current;
     }
 
 }
