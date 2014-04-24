@@ -9,6 +9,8 @@ class Premier {
     private $summary = null;
     private $content = null;
     private $current = null;
+    private $currentH1 = null;
+    private $currentH2 = null;
     private $root    = null;
 
     public function __construct($client, $db) {
@@ -35,25 +37,34 @@ class Premier {
         $this->createH2('Report synopsis'); 
         $this->addContent('Text', ' ');
 
+        $this->createH2('Report synopsis2'); 
+        $this->addContent('Text', '2');
+
+        $this->createH2('Report synopsis3'); 
+        $this->addContent('Text', '3');
+
         $this->createH2('Report configuration'); 
 
         $ReportInfo = new \Report\Content\ReportInfo($this->project);
+        $ReportInfo->setProject($this->project);
         $ReportInfo->setNeo4j($this->client);
         $ReportInfo->setMySQL($this->db);
-        $ReportInfo->setProject($this->project);
         $ReportInfo->collect();
 
-        $ht = $this->addContent('HashTable', $ReportInfo); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+        $ht = $this->addContent('SimpleTable', $ReportInfo); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
         $ht->setAnalyzer('ReportInfo');
         
         $this->createH1('Dashboard');
+        $this->addContent('Text', 'intro');
+
+        $this->createH2('Dashboard-2');
         $groupby = new \Report\Content\GroupBy($this->client);
         $groupby->setGroupby('getSeverity');
         $groupby->setCount('toCount');
         $groupby->setSort(array('Critical', 'Major', 'Minor'));
         
         $groupby->addAnalyzer(array(  'Structures\\StrposCompare', 
-                                      'Structures\\Iffectation',
+//                                      'Structures\\Iffectation',
                                       'Structures\\ErrorReportingWithInteger',
                                       'Structures\\ForWithFunctioncall',
                                       'Structures\\ForeachSourceNotVariable',
@@ -75,12 +86,46 @@ class Premier {
                                       'Structures\\BreakNonInteger',
                                 ));
         $groupby->setName('Severity repartition');
-
+        
         $ht = $this->addContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+
+        $infobox = new \Report\Content\Infobox();
+        $infobox->setNeo4j($this->client);
+        $infobox->setMySQL($this->db);
+        $infobox->setSeverities($groupby->toArray());
+        $infobox->collect();
+        $ht = $this->addContent('Infobox', $infobox); 
+
+        $listBySeverity = new \Report\Content\ListBySeverity($this->client);
+        
+        $listBySeverity->addAnalyzer(array(  'Structures\\StrposCompare', 
+//                                      'Structures\\Iffectation',
+                                      'Structures\\ErrorReportingWithInteger',
+                                      'Structures\\ForWithFunctioncall',
+                                      'Structures\\ForeachSourceNotVariable',
+                                      'Variables\\VariableUsedOnce',
+                                      'Variables\\VariableNonascii',
+                                      'Structures\\EvalUsage',
+                                      'Structures\\OnceUsage',
+                                      'Structures\\VardumpUsage',
+                                      'Structures\\PhpinfoUsage',
+                                      'Classes\\NonPpp',
+                                      'Php/Incompilable',
+                                      'Constants/ConstantStrangeNames',
+
+                                      'Structures\\NotNot',
+                                      'Structures\\Noscream',
+                                      'Structures\\toStringThrowsException',
+                                      'Structures\\CalltimePassByReference',
+                                      'Structures\\Break0',
+                                      'Structures\\BreakNonInteger',
+                                ));
+        $listBySeverity->setName('Top 5 errors');
+        $ht = $this->addContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
         ///// Application analyzes 
         $analyzes = array('Structures\\StrposCompare', 
-                          'Structures\\Iffectation',
+//                          'Structures\\Iffectation',
                           'Structures\\ErrorReportingWithInteger',
                           'Structures\\ForWithFunctioncall',
                           'Structures\\ForeachSourceNotVariable',
@@ -162,7 +207,7 @@ class Premier {
         $analyze = new \Report\Content\Appinfo();
         $analyze->setNeo4j($this->client);
         $analyze->collect();
-//        $ht = $this->addContent('SectionedHashTable', $analyze);
+        $ht = $this->addContent('Tree', $analyze);
 
 
         $this->createH1('Inventories');
@@ -254,14 +299,16 @@ class Premier {
         $section->setLevel(1);
 
         $this->current = $section;
+        $this->currentH1 = $section;
     }
 
     function createH2($name) {
         // @todo check that current is level 1 ? 
-        $section = $this->current->addContent('Section', $name);
+        $section = $this->currentH1->addContent('Section', $name);
         $section->setLevel(2);
 
         $this->current = $section;
+        $this->currentH2 = $section;
     }
 
     function createH3($name) {
