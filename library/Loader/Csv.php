@@ -14,7 +14,7 @@ class Csv {
     
     private $isLink = false;
     
-    function __construct() {
+    public function __construct() {
         if (file_exists('nodes.csv') && static::$file_saved == 0) {
             unlink('nodes.csv');
         } 
@@ -23,7 +23,7 @@ class Csv {
         }
     }
 
-    static function finalize() {
+    static public function finalize() {
         if (!file_exists('nodes.csv')) {
             return false;
         }
@@ -60,7 +60,7 @@ SHELL
         return true;
     }
     
-    function save_chunk() {
+    public function save_chunk() {
         $fp = fopen('nodes.csv', 'a');
         // adding in_quote here, as it may not appear on the first token.
         $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter', 'order', 'dowhile' );
@@ -105,11 +105,11 @@ SHELL
         static::$file_saved++;
     }
     
-    function makeNode() {
+    public function makeNode() {
         return new static();
     }
     
-    function setProperty($name, $value) {
+    public function setProperty($name, $value) {
         if ($this->isLink) {
             static::$links[count(static::$links) - 1][$name] = $value;
         } else {
@@ -123,7 +123,7 @@ SHELL
         return $this;
     }
 
-    function getProperty($name) {
+    public function getProperty($name) {
         if ($this->isLink) {
             return static::$links[count(static::$links) - 1][$name];
         } else {
@@ -131,7 +131,7 @@ SHELL
         }
     }
     
-    function save() {
+    public function save() {
         if (empty($this->id)) {
             static::$count++;
             $this->id = static::$count;
@@ -145,7 +145,7 @@ SHELL
         return $this;
     }
 
-    function relateTo($destination, $label) {
+    public function relateTo($destination, $label) {
         static::$links[] = array('origin' => $this->id, 
                                  'destination' => $destination->id, 
                                  'label' => $label,
@@ -159,7 +159,7 @@ SHELL
         return $this;
     }
     
-    function escapeString($string) {
+    public function escapeString($string) {
         $x = str_replace("\\", "\\\\", $string);
         return str_replace("\"", "\\\"", $x);
     }
