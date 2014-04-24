@@ -133,8 +133,8 @@ function process_project($exakat) {
 
     print "Preparing the report\n";
     update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Preparing the report");
-    shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/web  -ace -r Web');
-    shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/Premier-sqlite  -sqlite -r Web');
+    shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/report -ace -r Premier');
+    shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/Premier-sqlite  -sqlite -r Premier');
 
     print "Project {$exakat['name']} reported\n";
     update_status($exakat['id'], 100, "Project reported");
