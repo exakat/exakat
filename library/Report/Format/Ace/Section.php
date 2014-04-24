@@ -7,20 +7,22 @@ class Section extends \Report\Format\Ace {
         // todo link to the actual section  ?
 
         if ($data->getLevel() == 0) {
-            foreach($data->getContent() as $id => $c) {
-                $c->render($output);
-            }
-            $output->toFile2($data->getId().".html", $data);
+            die("Processin level 0 ?? ".__METHOD__);
+            
         } elseif ($data->getLevel() == 1) {
             $output->reset();
             foreach($data->getContent() as $content) {
-                $content->render($output);
+                if (get_class($content) != "Report\\Template\\Section") {
+                    $content->render($output);
+                }
             }
             $output->toFile2($data->getId().".html", $data);
         } elseif ($data->getLevel() == 2) {
             $output->reset();
             foreach($data->getContent() as $content) {
-                $content->render($output);
+                if (get_class($content) != "Report\\Template\\Section") {
+                    $content->render($output);
+                }
             }
             $output->toFile2($data->getId().".html", $data);
         } else {

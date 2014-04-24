@@ -25,11 +25,12 @@ JS;
         foreach($data as $row) {
             $row['code'] = htmlentities($row['code']);
             
+            $id = str_replace(' ', '-', strtolower($row['desc']));
 $html .= <<<HTML
 
 										<tr>
 											<td><pre class="prettyprint linenums">{$row['code']}</pre></td>
-											<td>{$row['desc']}</td>
+											<td><a href="Documentation.html#$id">{$row['desc']}</a></td>
 											<td>{$row['file']}</td>
 											<td>{$row['line']}</td>
 										</tr>

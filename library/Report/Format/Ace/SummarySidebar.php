@@ -14,6 +14,9 @@ TEXT;
         $output->push($text);
     }
 
+
+//class="active" class="active open"
+
     private function render2($data) {
         $text = '';
         foreach($data as $row) {
@@ -30,6 +33,8 @@ TEXT;
             }
 
             if (count($contents) == 0) {
+//                $class = ($content->isCurrent()) ? ' class="active"' : '';
+
                 $text .= <<<HTML
 					<li>
 						<a href="{$row->getId()}.html">
@@ -39,8 +44,10 @@ TEXT;
 					</li>
 HTML;
             } else {
+                $class = ($row->isCurrent()) ? ' class="active open"' : '';
+                
                 $text .= <<<HTML
-					<li>
+					<li$class>
 						<a href="#" class="dropdown-toggle">
     						<i class="icon-cog"></i>
 							<span class="menu-text"> {$row->getName()} </span>
@@ -49,8 +56,10 @@ HTML;
 HTML;
 
                 foreach($contents as $content) {
+                    $class = ($content->isCurrent()) ? ' class="active"' : '';
+
                     $text .= <<<HTML
-        					<li>
+        					<li$class>
 	        					<a href="{$content->getId()}.html">
     	        					<i class="icon-legal"></i>
     			    				<span class="menu-text"> {$content->getName()} </span>

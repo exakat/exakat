@@ -59,7 +59,24 @@ class Ace extends \Report\Format {
             $total += file_put_contents($dir.'/'.$name, $html);
         }
         
-        shell_exec('cd '.dirname($dir).'; zip -r web web 2 >> /dev/null');
+        $index_html = <<<HTML
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta http-equiv="refresh" content="0; url=Dashboard.html" />
+
+		<meta name="description" content="Exakat Audit report. © 2014 Exakat" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+	    <!-- Only here for the initial redirection -->
+	</body>
+</html>
+
+HTML;
+        file_put_contents($dir.'/index.html', $index_html);
+        
+        shell_exec('cd '.dirname($dir).'; zip -r '.basename($dir).' . '.basename($dir).' 2 >> /dev/null'); 
         
         return $total;
     }
@@ -110,7 +127,7 @@ HTML;
 		<meta charset="utf-8" />
 		<title>Exakat Audit Report</title>
 
-		<meta name="description" content="Static &amp; Dynamic Tables" />
+		<meta name="description" content="Exakat Audit report. © 2014 Exakat" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!--basic styles-->

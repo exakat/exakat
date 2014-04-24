@@ -10,8 +10,11 @@ HTML;
         
         uksort($data, function ($a, $b) { return strtolower($a) > strtolower($b) ;});
         foreach($data as $name => $definition) {
+            $id = str_replace(' ', '-', strtolower($name));
+            $definition = nl2br($definition);
+            
             $text .= "
-														<dt>$name</dt>
+														<dt><a name=\"$id\"></a>$name</dt>
 														<dd><p>$definition</p></dd>";
         }
 
