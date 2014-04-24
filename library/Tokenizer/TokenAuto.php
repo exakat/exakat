@@ -2574,6 +2574,9 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         if (isset($actions['make_quoted_string'])) {
             $concatenation = new Concatenation(Token::$client);
             $fullcode = $concatenation->fullcode();
+
+            $string = new String(Token::$client);
+            $fullcode2 = $string->fullcode();
             
             $atom = $actions['make_quoted_string'];
             $qactions[] = " 
@@ -2600,6 +2603,9 @@ it.setProperty('atom', '$atom');
 
 fullcode = x;
 $fullcode
+
+fullcode = it;
+$fullcode2 
 
 /* Clean index */
 x.out('CONCAT').each{ 
