@@ -1,8 +1,10 @@
 <?php
 
 print "Runnign project test for tokenizer\n";
+shell_exec('rm -rf ./projects/test/code/*');
 shell_exec('cp ./tests/tokenizer/source/* ./projects/test/code');
-shell_exec('php bin/project test');
+//shell_exec('cp ./tests/analyzer/source/* ./projects/test/code');
+//shell_exec('php bin/project test');
 
 print "Runnign UT for analyzer\n";
 $row = array('date' => '"'.date('Y-m-d H:i:s').'"', 'id' => 'NULL');
