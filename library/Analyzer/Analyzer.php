@@ -235,7 +235,6 @@ GREMLIN;
     public function checkPhpConfiguration($Php) {
         // this handles Any version of PHP
         if ($this->phpconfiguration == 'Any') {
-            print "Any\n";
             return true;
         }
         
@@ -244,7 +243,7 @@ GREMLIN;
             $wrong_config[] = $Php->getConfiguration($ini) == $value;
         }
         
-        return count($wrong_config) > 0;
+        return count($wrong_config) == 0;
     }
     
     public function checkPhpVersion($version) {
