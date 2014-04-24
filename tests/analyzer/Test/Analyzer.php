@@ -28,13 +28,15 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         }
 
         $Php = new \Phpexec($phpversion);
-        if ($analyzerobject->checkPhpConfiguration($Php)) {
+        if (!$analyzerobject->checkPhpConfiguration($Php)) {
             $message = array();
             $confs = $analyzerobject->getPhpConfiguration();
-            foreach($confs as $name => $value) {
-                $confs[] = "$name => $value";
+            if (is_array($confs)) {
+                foreach($confs as $name => $value) {
+                    $confs[] = "$name => $value";
+                }
+                $confs = join(', ', $confs);
             }
-            $confs = join(', ', $confs);
             
             $this->markTestSkipped('Needs configuration : '.$confs.'.');
         }
@@ -57,6 +59,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
 
         if (empty($res)) {
             $list = array();
+            print_r($res);
         } else {
             $list = array();
             foreach($res as $r) {
