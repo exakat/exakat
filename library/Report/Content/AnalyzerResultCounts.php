@@ -42,6 +42,10 @@ class AnalyzerResultCounts extends \Report\Content {
         
         return $return;
     }
+    
+    public function getColumnTitles() {
+        return array('Label', 'Value', 'Severity');
+    }
 }
 
 ?>
