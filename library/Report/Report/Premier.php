@@ -29,19 +29,22 @@ class Premier {
     public function prepare() {
         $this->addContent('Text', 'Audit report for application');
 
-        $this->createH1('Summary');
-        $this->summary = $this->addContent('Summary', $this->root);
-
         $this->createH1('Report presentation');
 
         $this->createH2('Report synopsis'); 
-        $this->addContent('Text', ' ');
+        $this->addContent('Text', <<<TEXT
+DISCLAIMER : This is an alpha version of the software. We are working hard to make it better, so your feedback is always appreciated : damien.seguy@gmail.com.
+        
+The PHP code is firstly tokenized by PHP itself and an AST tree is build. Then, we run on this structured representation of the code our analyzers, that will look for various situations. 
 
-        $this->createH2('Report synopsis2'); 
-        $this->addContent('Text', '2');
+Situations may be code poorly written, code that compile and run but won\'t do what is expected, security holes, performances errors. You will find them in the "Analysis" section, along with the spotted code, and its file coordinates.
 
-        $this->createH2('Report synopsis3'); 
-        $this->addContent('Text', '3');
+Along the way, we gather many informations about the application itself, which are gathered in the "Application information" tab. There, you\'ll have an overview of PHP features that are used in the code : extensions, features such as ticks, shell commands, typehint, recursive methods or variables variables. This is a good way to track all the technology invested in your code. 
+
+Finaly, some definitions are gathered in the "Annex".
+
+TEXT
+);
 
         $this->createH2('Report configuration'); 
 
@@ -54,14 +57,16 @@ class Premier {
         $ht = $this->addContent('SimpleTable', $ReportInfo); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
         $ht->setAnalyzer('ReportInfo');
         
-        $this->createH1('Dashboard');
+        $this->createH1('Analysis');
         $this->addContent('Text', 'intro');
 
-        $this->createH2('Dashboard-2');
+        $this->createH2('Dashboard');
         $groupby = new \Report\Content\GroupBy($this->client);
         $groupby->setGroupby('getSeverity');
         $groupby->setCount('toCount');
         $groupby->setSort(array('Critical', 'Major', 'Minor'));
+
+        $row = $this->addContent('Row', null);
         
         $groupby->addAnalyzer(array(  'Structures\\StrposCompare', 
 //                                      'Structures\\Iffectation',
@@ -87,15 +92,16 @@ class Premier {
                                 ));
         $groupby->setName('Severity repartition');
         
-        $ht = $this->addContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+        $row->addLeftContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
         $infobox = new \Report\Content\Infobox();
         $infobox->setNeo4j($this->client);
         $infobox->setMySQL($this->db);
         $infobox->setSeverities($groupby->toArray());
         $infobox->collect();
-        $ht = $this->addContent('Infobox', $infobox); 
+        $ht = $row->addRightContent('Infobox', $infobox); 
 
+        $row2 = $this->addContent('Row', null);
         $listBySeverity = new \Report\Content\ListBySeverity($this->client);
         
         $listBySeverity->addAnalyzer(array(  'Structures\\StrposCompare', 
@@ -121,7 +127,7 @@ class Premier {
                                       'Structures\\BreakNonInteger',
                                 ));
         $listBySeverity->setName('Top 5 errors');
-        $ht = $this->addContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+        $ht = $row2->addLeftContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
         ///// Application analyzes 
         $analyzes = array('Structures\\StrposCompare', 
@@ -162,7 +168,7 @@ class Premier {
             $analyzer->setNeo4j($this->client);
             $analyzer->setAnalyzers($analyzes);
             $h = $this->createH2($analyzer->getName());
-            $h = $this->addContent('Table', $analyzer);
+            $h = $this->addContent('SimpleTable', $analyzer);
 
             foreach($analyzes as $a) {
                 $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
@@ -203,14 +209,20 @@ class Premier {
 
         $this->createH1('Application information');
 
-        $ht = $this->addContent('Text', 'This is an overview of your application');
+        $ht = $this->addContent('Text', <<<TEXT
+This is an overview of your application.
+
+Ticked <i class="icon-ok"></i> information are features used in your application. Non-ticked are feature that are not in use in the application.
+
+TEXT
+);
         $analyze = new \Report\Content\Appinfo();
         $analyze->setNeo4j($this->client);
         $analyze->collect();
         $ht = $this->addContent('Tree', $analyze);
 
 
-        $this->createH1('Inventories');
+//        $this->createH1('Inventories');
         ///// Application analyzes 
         $analyzes = array('Php/Incompilable',
                           'Variables/Variablenames',
@@ -257,14 +269,14 @@ class Premier {
                 */
 
                 if ($analyse->hasResults()) {
-                    $this->createH2($analyse->getName());
-                    $this->addContent('Text', $analyse->getDescription());
+//                    $this->createH2($analyse->getName());
+//                    $this->addContent('Text', $analyse->getDescription());
 
                     if (in_array($name, array('Php/Incompilable'))) {
-                        $this->addContent('Liste', $analyse);
+//                        $this->addContent('Liste', $analyse);
                     } else {
-                        $ht = $this->addContent('HashTable', $analyse);
-                        $ht->setCountedValues();
+//                        $ht = $this->addContent('HashTable', $analyse);
+//                        $ht->setCountedValues();
                     }
 
                 } 
