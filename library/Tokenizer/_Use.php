@@ -19,6 +19,23 @@ class _Use extends TokenAuto {
                                );
         $this->checkAuto(); 
 
+    // use \a\b as C;
+        $this->conditions = array( 0 => array('token' => _Use::$operators),
+                                   1 => array('atom'  => array('Nsname', 'Identifier')),
+                                   2 => array('token' => 'T_AS'),
+                                   3 => array('atom'  => 'Identifier'),
+                                   4 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'),
+                                              'atom'  => 'none'),
+                                 );
+        
+        $this->actions = array('transform'  => array( 1 => 'USE',
+                                                      2 => 'DROP',
+                                                      3 => 'AS'),
+                               'atom'       => 'Use',
+                               'cleanIndex' => true
+                               );
+        $this->checkAuto(); 
+
     // use \b\c, \a\c;
         $this->conditions = array( 0 => array('token'    => _Use::$operators),
                                    1 => array('atom'     => 'Arguments'),
