@@ -24,7 +24,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
 
         $analyzerobject = new $test_config(null);
         if (!$analyzerobject->checkPhpVersion($phpversion)) {
-            $this->markTestSkipped('Needs version '.$analyzer->getPhpVersion().'.');
+            $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
 
         $Php = new \Phpexec($phpversion);
@@ -59,7 +59,6 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
 
         if (empty($res)) {
             $list = array();
-            print_r($res);
         } else {
             $list = array();
             foreach($res as $r) {
