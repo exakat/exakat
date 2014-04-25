@@ -472,13 +472,14 @@ function process_file($filename, $log_file) {
             
             if ($token == '{' && $tokens[$id + 1] == '}') {
                 $block_level--;
-                if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && $Php->getTokenName($tokens[$id - 1][0]) == 'T_STRING')) {
+                if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && in_array($Php->getTokenName($tokens[$id - 1][0]), array('T_STRING', 'T_NAMESPACE')))) {
                     $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                                   ->setProperty('code', $token)
                                                   ->setProperty('fullcode', '{ /**/ } ')
                                                   ->setProperty('line', $line)
                                                   ->setProperty('atom', 'Sequence')
                                                   ->setProperty('order', '0')
+                                                  ->setProperty('block', 'true')
                                                   ->setProperty('modifiedBy', 'bin/load12a')
                                                   ->save();
                     $classNode->relateTo($T[$Tid]);
