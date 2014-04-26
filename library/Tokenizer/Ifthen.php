@@ -56,7 +56,9 @@ class Ifthen extends TokenAuto {
                                     1 => array('atom'      => 'Parenthesis'),
                                     2 => array('notAtom'   => array('Sequence', 'Void'), 
                                                'atom'      => 'yes'),
-                                    3 => array('token'     => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML', 'T_CLOSE_CURLY')),
+                                    3 => array('token'     => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
+                                                                    'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML', 
+                                                                    'T_CLOSE_CURLY')),
         );
         
         $this->actions = array( 'to_block_ifelseif' => 2,
