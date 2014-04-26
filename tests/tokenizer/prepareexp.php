@@ -54,7 +54,7 @@ if (empty($file)) {
 
 function run($test, $number) {
     print "$test.$number\n";
-    $shell = 'cd ../..; php bin/delete -all; php ./bin/load -f ./tests/tokenizer/source/'."$test.$number".'.php; php ./bin/tokenizer; php ./bin/export -text -o ./tests/tokenizer/exp/'."$test.$number".'.txt';
+    $shell = 'cd ../..; php bin/delete -all; php ./bin/load -q -f ./tests/tokenizer/source/'."$test.$number".'.php; php ./bin/build_root -p test; php ./bin/tokenizer -p test; php ./bin/export -text -o ./tests/tokenizer/exp/'."$test.$number".'.txt';
     
     print shell_exec($shell);
     
