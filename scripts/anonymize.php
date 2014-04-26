@@ -11,7 +11,7 @@ if (!file_exists($file)) {
 }
 print "Processing file $file into $file.anon\n";
 
-$res = shell_exec($_ENV['_'].' -l '.$file);
+$res = shell_exec('php -l '.$file);
 if (substr($res, 0, 28) != 'No syntax errors detected in') {
     print "Can't compile '$file' script with PHP version ".phpversion().".\n";
     die();
