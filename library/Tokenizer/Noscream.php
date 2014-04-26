@@ -9,7 +9,9 @@ class Noscream extends TokenAuto {
         $this->conditions = array(0 => array('token' => Noscream::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
-                                  2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS'))
+                                  2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 
+                                                                  'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS',
+                                                                  'T_OPEN_CURLY'))
         );
         
         $this->actions = array('makeEdge'     => array( '1' => 'AT'),
@@ -22,7 +24,11 @@ class Noscream extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "@" + it.out("AT").next().fullcode; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode', "@" + fullcode.out("AT").next().getProperty('fullcode')); 
+
+GREMLIN;
     }
 }
 
