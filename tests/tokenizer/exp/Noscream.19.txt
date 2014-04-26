@@ -1,42 +1,32 @@
 <?php
 
-Label : NEXT
-  $a
-  Label : NEXT
-    {
-    Label : NEXT
-      $b
-      Label : NEXT
-        }
-        Label : NEXT
-          ===
-          Label : NEXT
-            'B'
-            Label : NEXT
-              &&
-              Label : NEXT
-                @
-                Label : NEXT
-                  $c
-                  Label : NEXT
-                    {
-                    Label : NEXT
-                      $d
-                      Label : NEXT
-                        +
-                        Label : NEXT
-                          0
-                          Label : NEXT
-                            }
-                            Label : NEXT
-                              ===
-                              Label : NEXT
-                                'C'
-                                Label : NEXT
-                                  ;
-                                  Label : NEXT
-                                    ?>
-                                    Label : NEXT
-                                      /**/
-                                      Label : NEXT
-                                        /* * */
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    &&
+    Label : RIGHT
+      ===
+      Label : RIGHT
+        'C'
+      Label : LEFT
+        @
+        Label : AT
+          {
+          Label : INDEX
+            +
+            Label : RIGHT
+              0
+            Label : LEFT
+              $d
+          Label : VARIABLE
+            $c
+    Label : LEFT
+      ===
+      Label : RIGHT
+        'B'
+      Label : LEFT
+        {
+        Label : INDEX
+          $b
+        Label : VARIABLE
+          $a
