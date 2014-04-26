@@ -1,0 +1,104 @@
+<?php
+
+Label : NEXT
+  trait
+  Label : NEXT
+    HelloWorld
+    Label : NEXT
+      {
+      Label : NEXT
+        public
+        Label : NEXT
+          function
+          Label : NEXT
+            sayHello
+            Label : NEXT
+              (
+              Label : NEXT
+                void
+                Label : NEXT
+                  )
+                  Label : NEXT
+                    {
+                    Label : NEXT
+                      echo
+                      Label : NEXT
+                        'Hello World!'
+                        Label : NEXT
+                          ;
+                          Label : NEXT
+                            }
+                            Label : NEXT
+                              }
+                              Label : NEXT
+                                class
+                                Label : NEXT
+                                  TheWorldIsNotEnough
+                                  Label : NEXT
+                                    {
+                                    Label : NEXT
+                                      use
+                                      Label : NEXT
+                                        HelloWorld
+                                        Label : NEXT
+                                          ;
+                                          Label : NEXT
+                                            public
+                                            Label : NEXT
+                                              function
+                                              Label : NEXT
+                                                sayHello
+                                                Label : NEXT
+                                                  (
+                                                  Label : NEXT
+                                                    void
+                                                    Label : NEXT
+                                                      )
+                                                      Label : NEXT
+                                                        {
+                                                        Label : NEXT
+                                                          echo
+                                                          Label : NEXT
+                                                            'Hello Universe!'
+                                                            Label : NEXT
+                                                              ;
+                                                              Label : NEXT
+                                                                }
+                                                                Label : NEXT
+                                                                  }
+                                                                  Label : NEXT
+                                                                    $o
+                                                                    Label : NEXT
+                                                                      =
+                                                                      Label : NEXT
+                                                                        new
+                                                                        Label : NEXT
+                                                                          TheWorldIsNotEnough
+                                                                          Label : NEXT
+                                                                            (
+                                                                            Label : NEXT
+                                                                              void
+                                                                              Label : NEXT
+                                                                                )
+                                                                                Label : NEXT
+                                                                                  ;
+                                                                                  Label : NEXT
+                                                                                    $o
+                                                                                    Label : NEXT
+                                                                                      ->
+                                                                                      Label : NEXT
+                                                                                        sayHello
+                                                                                        Label : NEXT
+                                                                                          (
+                                                                                          Label : NEXT
+                                                                                            void
+                                                                                            Label : NEXT
+                                                                                              )
+                                                                                              Label : NEXT
+                                                                                                ;
+                                                                                                Label : NEXT
+                                                                                                  ?>
+                                                                                                  Label : NEXT
+                                                                                                    /**/
+                                                                                                    Label : NEXT
+                                                                                                      /* * */

@@ -1,0 +1,42 @@
+<?php
+
+Label : NEXT
+  $a
+  Label : NEXT
+    {
+    Label : NEXT
+      $b
+      Label : NEXT
+        }
+        Label : NEXT
+          ===
+          Label : NEXT
+            'B'
+            Label : NEXT
+              &&
+              Label : NEXT
+                @
+                Label : NEXT
+                  $c
+                  Label : NEXT
+                    {
+                    Label : NEXT
+                      $d
+                      Label : NEXT
+                        +
+                        Label : NEXT
+                          0
+                          Label : NEXT
+                            }
+                            Label : NEXT
+                              ===
+                              Label : NEXT
+                                'C'
+                                Label : NEXT
+                                  ;
+                                  Label : NEXT
+                                    ?>
+                                    Label : NEXT
+                                      /**/
+                                      Label : NEXT
+                                        /* * */

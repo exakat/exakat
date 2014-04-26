@@ -1,0 +1,74 @@
+<?php
+
+Label : NEXT
+  if
+  Label : NEXT
+    (
+    Label : NEXT
+      $a
+      Label : NEXT
+        ->
+        Label : NEXT
+          B
+          Label : NEXT
+            (
+            Label : NEXT
+              void
+              Label : NEXT
+                )
+                Label : NEXT
+                  )
+                  Label : NEXT
+                    try
+                    Label : NEXT
+                      {
+                      Label : NEXT
+                        $b
+                        Label : NEXT
+                          ++
+                          Label : NEXT
+                            ;
+                            Label : NEXT
+                              }
+                              Label : NEXT
+                                catch
+                                Label : NEXT
+                                  (
+                                  Label : NEXT
+                                    C
+                                    Label : NEXT
+                                      \
+                                      Label : NEXT
+                                        D
+                                        Label : NEXT
+                                          $c
+                                          Label : NEXT
+                                            )
+                                            Label : NEXT
+                                              {
+                                              Label : NEXT
+                                                if
+                                                Label : NEXT
+                                                  (
+                                                  Label : NEXT
+                                                    $d
+                                                    Label : NEXT
+                                                      )
+                                                      Label : NEXT
+                                                        {
+                                                        Label : NEXT
+                                                          $e
+                                                          Label : NEXT
+                                                            ++
+                                                            Label : NEXT
+                                                              ;
+                                                              Label : NEXT
+                                                                }
+                                                                Label : NEXT
+                                                                  ?>
+                                                                  Label : NEXT
+                                                                    /**/
+                                                                    Label : NEXT
+                                                                      /* * */
+                                              Label : CODE
+                                                void
