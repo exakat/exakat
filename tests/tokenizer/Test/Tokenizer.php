@@ -8,7 +8,7 @@ class Tokenizer extends \PHPUnit_Framework_TestCase {
     }
 
     public function generic_test($file) {
-        $shell = 'cd ../..; php bin/load -q -f ./tests/tokenizer/source/'.$file.'.php; php bin/build_root -V; php bin/tokenizer -p test; php bin/export -text -f ./tests/tokenizer/source/'.$file.'.php';
+        $shell = 'cd ../..; php bin/load -q -f ./tests/tokenizer/source/'.$file.'.php -p test; php bin/build_root -p test; php bin/tokenizer -p test; php bin/export -text -f ./tests/tokenizer/source/'.$file.'.php';
         $res = shell_exec($shell);
         
         $exp = file_get_contents('exp/'.$file.'.txt');
