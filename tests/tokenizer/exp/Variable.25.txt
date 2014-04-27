@@ -1,0 +1,62 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    do
+    Label : CONDITION
+      <
+      Label : RIGHT
+        2
+      Label : LEFT
+        ++
+        Label : POSTPLUSPLUS
+          $e
+    Label : LOOP
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              AND
+              Label : RIGHT
+                !==
+                Label : RIGHT
+                  E
+                Label : LEFT
+                  C
+                  Label : ARGUMENTS
+                    ,
+                    Label : ARGUMENT
+                      $b
+                    Label : ARGUMENT
+                      "
+                      Label : CONTAIN
+                        Concatenation
+                        Label : CONCAT
+                          $c
+                        Label : CONCAT
+                          D
+              Label : LEFT
+                ==
+                Label : RIGHT
+                  0
+                Label : LEFT
+                  B
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $a
+          Label : THEN
+            {
+            Label : CODE
+              makeSequence
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  1
+                Label : LEFT
+                  $d
