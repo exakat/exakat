@@ -447,6 +447,10 @@ function process_file($filename, $log_file) {
             }
 
             $token_value = $Php->getTokenname($token[0]);
+            if ($token_value == 'T_CURLY_OPEN') {
+                $block_level++;
+            }
+
             if ($token_value == 'T_OPEN_CURLY') {
                 $token_value = 'T_CURLY_OPEN';
             }
