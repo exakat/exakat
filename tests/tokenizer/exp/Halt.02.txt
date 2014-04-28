@@ -3,13 +3,17 @@
 Label : CODE
   makeSequence
   Label : ELEMENT
-    __HALT_COMPILER
-  Label : ELEMENT
     =
     Label : RIGHT
       2
     Label : LEFT
       $y
+  Label : ELEMENT
+     
+
+?>
+  Label : ELEMENT
+    __HALT_COMPILER
   Label : ELEMENT
     =
     Label : RIGHT

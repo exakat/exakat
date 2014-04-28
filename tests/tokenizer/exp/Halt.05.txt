@@ -3,13 +3,19 @@
 Label : CODE
   makeSequence
   Label : ELEMENT
+    
+
+?>
+  Label : ELEMENT
     __halt_compiler
   Label : ELEMENT
     try
     Label : CODE
-      {
-      Label : CODE
-        void
+      ;
+      Label : ELEMENT
+        {
+        Label : CODE
+          void
     Label : CATCH
       catch
       Label : CLASS

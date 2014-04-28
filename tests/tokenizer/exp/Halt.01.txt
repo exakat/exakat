@@ -1,4 +1,18 @@
 <?php
 
-Label : CODE
+Label : NEXT
   __HALT_COMPILER
+  Label : NEXT
+    (
+    Label : NEXT
+      )
+      Label : NEXT
+        ;
+        Label : NEXT
+           
+
+?>
+          Label : NEXT
+            /**/
+            Label : NEXT
+              /* * */
