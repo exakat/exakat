@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Arraydollarcurly extends TokenAuto {
     static public $operators = array('T_DOLLAR_OPEN_CURLY_BRACES');
+    static public $atom = 'Array';
     
     public function _check() {
         $this->conditions = array( 0 => array('token' => _Arraydollarcurly::$operators),

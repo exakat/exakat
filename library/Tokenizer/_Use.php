@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Use extends TokenAuto {
     static public $operators = array('T_USE');
+    static public $atom = 'Use';
 
     public function _check() {
     // use \a\b;

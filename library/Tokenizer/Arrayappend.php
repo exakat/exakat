@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Arrayappend extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET');
+    static public $atom = 'Arrayappend';
     
     public function _check() {
         $this->conditions = array(-2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')), 

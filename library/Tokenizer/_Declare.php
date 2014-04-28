@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Declare extends TokenAuto {
     static public $operators = array('T_DECLARE');
+    static public $atom = 'Declare';
 
     public function _check() {
         // declare(ticks = 2) : block endblock;

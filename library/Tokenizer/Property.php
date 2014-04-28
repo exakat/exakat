@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Property extends TokenAuto {
     static public $operators = array('T_OBJECT_OPERATOR');
+    static public $atom = 'Property';
     
     public function _check() {
         $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall', 'Staticproperty', 'Methodcall', 'Functioncall');

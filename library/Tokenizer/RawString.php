@@ -3,6 +3,8 @@
 namespace Tokenizer;
 
 class RawString extends TokenAuto {
+    static public $atom = 'Rawstring';
+
     public function _check() {
         return false;
     }
@@ -10,7 +12,8 @@ class RawString extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.code; 
+fullcode.setProperty('fullcode', fullcode.getProperty('code')); 
+
 GREMLIN;
     }
 

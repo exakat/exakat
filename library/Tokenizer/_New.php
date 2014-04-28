@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _New extends TokenAuto {
     static public $operators = array('T_NEW');
+    static public $atom = 'New';
 
     public function _check() {
         $this->conditions = array(0 => array('token' => _New::$operators,

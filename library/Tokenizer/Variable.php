@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Variable extends TokenAuto {
     static public $operators = array('T_DOLLAR_OPEN_CURLY_BRACES', 'T_CURLY_OPEN');
+    static public $atom = 'Variable';
     
     public function _check() {
         // "  {$variable}  " or " ${x} "

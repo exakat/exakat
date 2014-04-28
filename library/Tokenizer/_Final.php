@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Final extends TokenAuto {
     static public $operators = array('T_FINAL');
+    static public $atom = 'Final';
 
     public function _check() {
     // final class x { final function x() }

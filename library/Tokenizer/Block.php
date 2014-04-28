@@ -4,7 +4,8 @@ namespace Tokenizer;
 
 class Block extends TokenAuto {
     static public $operators = array('T_OPEN_CURLY');
-
+    static public $atom = 'Sequence';
+    
     public function _check() {
     // @doc Block
     //'T_OPEN_CURLY' + atom not null

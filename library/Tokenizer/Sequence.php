@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Sequence extends TokenAuto {
     static public $operators = array('T_SEMICOLON');
+    static public $atom = 'Sequence';
     
     public function _check() {
         $operands = array('Addition', 'Multiplication', 'String', 'Integer', 'Sequence', 

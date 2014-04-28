@@ -18,6 +18,7 @@ class Assignation extends TokenAuto {
                                      'T_SL_EQUAL',
                                      'T_SR_EQUAL',
                                      );
+    static public $atom = 'Assignation';
     
     public function _check() {
         $operands = array('Integer', 'Multiplication', 'Addition', 'Not',

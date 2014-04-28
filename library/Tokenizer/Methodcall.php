@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Methodcall extends TokenAuto {
     static public $operators = array('T_OBJECT_OPERATOR');
+    static public $atom = 'Methodcall';
 
     public function _check() {
         $operands = array('Variable', 'Property', 'Array', 'Functioncall', 'Methodcall', 'Staticmethodcall', 'Staticproperty' );

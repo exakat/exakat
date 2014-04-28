@@ -5,7 +5,8 @@ namespace Tokenizer;
 class String extends TokenAuto {
     static public $operators = array('T_QUOTE', 'T_START_HEREDOC');
     static public $allowed_classes = array('String', 'Variable', 'Concatenation', 'Array', 'Property', 'Methodcall', 
-                                           'Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Ternary', );
+                                           'Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Ternary');
+    static public $atom = 'String';
 
     public function _check() {
 // Case of string with interpolation : "a${b}c";

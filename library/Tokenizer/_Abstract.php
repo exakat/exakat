@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Abstract extends TokenAuto {
     static public $operators = array('T_ABSTRACT');
+    static public $atom = 'Abstract';
 
     public function _check() {
     // abstract class x { abstract function x() }

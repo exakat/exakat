@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _For extends TokenAuto {
     static public $operators = array('T_FOR');
+    static public $atom = 'For';
 
     public function _check() {
         // for (;;) ; (Empty loop)

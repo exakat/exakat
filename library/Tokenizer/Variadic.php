@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Variadic extends TokenAuto {
     static public $operators = array('T_ELLIPSIS');
+    static public $atom = 'While';
 
     protected $phpversion = '5.6+';
 

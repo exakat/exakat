@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Return extends TokenAuto {
     static public $operators = array('T_RETURN');
+    static public $atom = 'Return';
 
     public function _check() {
         // return ; 

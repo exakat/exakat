@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Interface extends TokenAuto {
     static public $operators = array('T_INTERFACE');
+    static public $atom = 'Interface';
 
     public function _check() {
         $this->conditions = array(0 => array('token' => _Interface::$operators,

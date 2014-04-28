@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Postplusplus extends TokenAuto {
     static public $operators = array('T_INC', 'T_DEC');
+    static public $atom = 'Postplusplus';
     
     public function _check() {
         $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
@@ -21,7 +22,11 @@ class Postplusplus extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.out("POSTPLUSPLUS").next().fullcode + it.code; ';
+        return <<<GREMLIN
+
+it.fullcode = it.out("POSTPLUSPLUS").next().fullcode + it.code; 
+
+GREMLIN;
     }
 
 }

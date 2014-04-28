@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class FunctioncallArray extends TokenAuto {
     static public $operators = array('S_ARRAY');
+    static public $atom = 'Functioncall';
 
     public function _check() {
         // $x[3]()

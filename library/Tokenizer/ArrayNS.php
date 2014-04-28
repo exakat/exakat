@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class ArrayNS extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET');
+    static public $atom = 'ArrayNS';
     
     protected $phpversion = '5.4+';
     

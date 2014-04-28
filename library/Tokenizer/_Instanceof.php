@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Instanceof extends TokenAuto {
     static public $operators = array('T_INSTANCEOF');
+    static public $atom = 'Instanceof';
 
     public function _check() {
         $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),

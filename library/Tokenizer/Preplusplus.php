@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Preplusplus extends TokenAuto {
     static public $operators = array('T_INC', 'T_DEC');
+    static public $atom = 'Preplusplus';
     
     public function _check() {
         $this->conditions = array( 0 => array('token' => Preplusplus::$operators),
@@ -20,7 +21,11 @@ class Preplusplus extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.code + it.out("PREPLUSPLUS").next().fullcode; ';
+        return <<<GREMLIN
+
+fullcode.fullcode = fullcode.code + fullcode.out("PREPLUSPLUS").next().fullcode; 
+
+GREMLIN;
     }
 }
 

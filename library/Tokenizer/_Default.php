@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Default extends TokenAuto {
     static public $operators = array('T_DEFAULT');
+    static public $atom = 'Default';
 
     public function _check() {
         $final_token = array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_ENDSWITCH');

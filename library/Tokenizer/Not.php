@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Not extends TokenAuto {
     static public $operators = array('T_BANG', 'T_TILDE');
+    static public $atom = 'Not';
 
     public function _check() {
         $this->conditions = array(0 => array('token' => Not::$operators,

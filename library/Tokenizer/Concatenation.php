@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Concatenation extends TokenAuto {
     public static $operators = array('T_DOT');
+    static public $atom = 'Concatenation';
     
     public function _check() {
         $operands = array('String', 'Identifier', 'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign', 'Array',

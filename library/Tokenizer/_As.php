@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _As extends TokenAuto {
     static public $operators = array('T_AS');
+    static public $atom = 'As';
 
     public function _check() {
         $this->conditions = array( -1 => array('atom'  => 'Staticconstant'), 

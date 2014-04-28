@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Const extends TokenAuto {
     static public $operators = array('T_CONST');
+    static public $atom = 'Const';
 
     public function _check() {
     // class x { const a = 2, b = 2, c = 3; }
@@ -31,7 +32,9 @@ class _Const extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
+
 fullcode.fullcode = "const " + fullcode.out("NAME").next().code + " = " + fullcode.out("VALUE").next().code;
+
 GREMLIN;
     }
 }

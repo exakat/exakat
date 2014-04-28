@@ -8,7 +8,11 @@ class Real extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.code; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode', fullcode.getProperty('code')); 
+
+GREMLIN;
     }
 
 }

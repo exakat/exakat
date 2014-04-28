@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Label extends TokenAuto {
     static public $operators = array('T_COLON');
+    static public $atom = 'Label';
     
     public function _check() {
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_QUESTION','T_CASE', 'T_DOT', 'T_NS_SEPARATOR',

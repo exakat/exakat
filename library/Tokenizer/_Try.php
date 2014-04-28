@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Try extends TokenAuto {
     static public $operators = array('T_TRY');
+    static public $atom = 'Try';
 
     public function _check() {
         // Try () { } catch

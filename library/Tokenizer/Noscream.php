@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Noscream extends TokenAuto {
     static public $operators = array('T_AT');
+    static public $atom = 'Noscream';
     
     public function _check() {
         $this->conditions = array(0 => array('token' => Noscream::$operators,

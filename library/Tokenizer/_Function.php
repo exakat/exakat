@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Function extends TokenAuto {
     static public $operators = array('T_FUNCTION');
+    static public $atom = 'Function';
     
     public function _check() {
         // function x(args) {}

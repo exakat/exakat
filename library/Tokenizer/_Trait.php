@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Trait extends TokenAuto {
     static public $operators = array('T_TRAIT');
+    static public $atom = 'Trait';
     
     protected $phpversion = '5.4+';
 

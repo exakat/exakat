@@ -4,7 +4,8 @@ namespace Tokenizer;
 
 class Bitshift extends TokenAuto {
     static public $operators = array('T_SR','T_SL');
-    
+    static public $atom = 'Bitshift';
+        
     public function _check() {
         // note : Multiplication:: and Bitshift:: operators are the same! 
         $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT')),

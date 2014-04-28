@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class ArgumentsNoComma extends Arguments {
     static public $operators = array('T_OPEN_PARENTHESIS');
+    static public $atom = 'Arguments';
 
     public function _check() {
         

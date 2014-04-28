@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Continue extends TokenAuto {
     static public $operators = array('T_CONTINUE');
+    static public $atom = 'Continue';
 
     public function _check() {
         // continue ;

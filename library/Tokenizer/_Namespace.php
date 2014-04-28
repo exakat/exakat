@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Namespace extends TokenAuto {
     static public $operators = array('T_NAMESPACE');
+    static public $atom = 'Namespace';
 
     public function _check() {
         // namespace {} 

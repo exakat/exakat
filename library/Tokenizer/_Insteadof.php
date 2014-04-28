@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Insteadof extends TokenAuto {
     static public $operators = array('T_INSTEADOF');
+    static public $atom = 'Insteadof';
     
     protected $phpversion = "5.4+";
 

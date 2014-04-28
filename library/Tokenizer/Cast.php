@@ -4,7 +4,8 @@ namespace Tokenizer;
 
 class Cast extends TokenAuto {
     static public $operators = array('T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST');
-
+    static public $atom = 'Cast';
+    
     public function _check() {
         $this->conditions = array(0 => array('token'     => Cast::$operators,
                                              'atom'      => 'none'),

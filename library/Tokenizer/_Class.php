@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Class extends TokenAuto {
     static public $operators = array('T_CLASS');
+    static public $atom = 'Class';
 
     public function _check() {
     

@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Reference extends TokenAuto {
     static public $operators = array('T_AND');
+    static public $atom = 'Reference';
 
     public function _check() {
         $this->conditions = array(-1 => array('filterOut2' => array_merge(Logical::$operators, 

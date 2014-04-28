@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Array extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET', 'T_OPEN_CURLY');
+    static public $atom = 'Array';
     
     public function _check() {
         // $x[3]

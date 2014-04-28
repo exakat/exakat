@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Catch extends TokenAuto {
     static public $operators = array('T_CATCH');
+    static public $atom = 'Catch';
 
     public function _check() {
         $this->conditions = array(0 => array('token' => _Catch::$operators,

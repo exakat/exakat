@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Case extends TokenAuto {
     static public $operators = array('T_CASE');
+    static public $atom = 'Case';
     
     public function _check() {
         $final_token = array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_ENDSWITCH');

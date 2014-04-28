@@ -6,6 +6,7 @@ class Logical extends TokenAuto {
     static public $operators = array('T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
                                      'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
                                      'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR');
+    static public $atom = 'Logical';
 
     public function _check() {
         $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',

@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Staticconstant extends TokenAuto {
     static public $operators = array('T_DOUBLE_COLON');
+    static public $atom = 'Staticconstant';
 
     public function _check() {
         $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),

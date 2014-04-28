@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _While extends TokenAuto {
     static public $operators = array('T_WHILE');
+    static public $atom = 'While';
 
     public function _check() {
          // While( condition ) ;

@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Keyvalue extends TokenAuto {
     static public $operators = array('T_DOUBLE_ARROW');
+    static public $atom = 'Keyvalue';
 
     public function _check() {
         $this->conditions = array(/*-2 => array('filterOut' => array_merge(array( 'T_NS_SEPARATOR', 'T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR',  ),

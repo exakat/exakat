@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Ifthen extends TokenAuto {
     static public $operators = array('T_IF', 'T_ELSEIF');
+    static public $atom = 'Ifthen';
 
     public function _check() {
     

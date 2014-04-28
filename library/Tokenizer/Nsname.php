@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Nsname extends TokenAuto {
     static public $operators = array('T_NS_SEPARATOR');
+    static public $atom = 'Nsname';
 
     public function _check() {
         // @note \a\b\c (\ initial)

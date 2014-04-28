@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Switch extends TokenAuto {
     static public $operators = array('T_SWITCH');
+    static public $atom = 'Switch';
 
     public function _check() {
         $this->conditions = array(0 => array('token' => _Switch::$operators,

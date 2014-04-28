@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Static extends TokenAuto {
     static public $operators = array('T_STATIC');
+    static public $atom = 'Static';
 
     public function _check() {
         $values = array('T_EQUAL', 'T_COMMA');

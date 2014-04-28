@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Phpcode extends TokenAuto {
     static public $operators = array('T_OPEN_TAG');
+    static public $atom = 'Phpcode';
 
     public function _check() {
         // Normal PHP script

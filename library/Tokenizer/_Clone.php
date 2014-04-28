@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Clone extends TokenAuto {
     static public $operators = array('T_CLONE');
+    static public $atom = 'Clone';
 
     public function _check() {
         $operands = array('Variable', 'Property', 'Array', 'Staticproperty', 'Staticmethodcall', 'Staticconstant', 'Functioncall', 

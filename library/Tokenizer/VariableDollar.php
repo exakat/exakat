@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class VariableDollar extends TokenAuto {
     static public $operators = array('T_DOLLAR');
+    static public $atom = 'Variable';
     
     public function _check() {
         // $x or $$x or $$$

@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Throw extends TokenAuto {
     static public $operators = array('T_THROW');
+    static public $atom = 'Throw';
     
     public function _check() {
         $this->conditions = array(0 => array('token'     => _Throw::$operators,

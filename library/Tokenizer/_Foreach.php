@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Foreach extends TokenAuto {
     static public $operators = array('T_FOREACH');
+    static public $atom = 'Foreach';
 
     public function _check() {
         $operands = array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 

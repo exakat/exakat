@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Include extends TokenAuto {
     static public $operators = array('T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE');
+    static public $atom = 'Include';
 
     public function _check() {
         // include( );

@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Ppp extends TokenAuto {
     static public $operators = array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC');
+    static public $atom = 'Ppp';
 
     public function _check() {
         $values = array('T_EQUAL', 'T_COMMA');

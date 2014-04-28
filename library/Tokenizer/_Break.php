@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Break extends TokenAuto {
     static public $operators = array('T_BREAK');
+    static public $atom = 'Break';
     
     public function _check() {
         $this->conditions = array(0 => array('token' => _Break::$operators,

@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Staticproperty extends TokenAuto {
     static public $operators = array('T_DOUBLE_COLON');
+    static public $atom = 'Staticproperty';
 
     public function _check() {
         $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname', );
@@ -24,7 +25,11 @@ class Staticproperty extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.out("CLASS").next().fullcode + "::" + it.out("PROPERTY").next().fullcode; ';
+        return <<<GREMLIN
+
+fullcode.fullcode = fullcode.out("CLASS").next().fullcode + "::" + fullcode.out("PROPERTY").next().fullcode; 
+
+GREMLIN;
     }
 }
 

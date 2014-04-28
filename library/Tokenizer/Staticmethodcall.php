@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Staticmethodcall extends TokenAuto {
     static public $operators = array('T_DOUBLE_COLON');
+    static public $atom = 'Staticmethodcall';
 
     public function _check() {
         $operands = array('Constant', 'Identifier', 'Variable', 'Array', 'Nsname', 'Static', 'Nsname',);
@@ -24,7 +25,11 @@ class Staticmethodcall extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.out("CLASS").next().fullcode + "::" + it.out("METHOD").next().fullcode; ';
+        return <<<GREMLIN
+
+fullcode.fullcode = fullcode.out("CLASS").next().fullcode + "::" + fullcode.out("METHOD").next().fullcode; 
+
+GREMLIN;
     }
 }
 

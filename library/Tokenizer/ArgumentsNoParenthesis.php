@@ -5,6 +5,7 @@ namespace Tokenizer;
 class ArgumentsNoParenthesis extends Arguments {
     static public $operators = array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 
                                      'T_REQUIRE', 'T_EXIT', 'T_STATIC', );
+    static public $atom = 'Arguments';
 
     public function _check() {
         // @note echo 's' : no parenthesis

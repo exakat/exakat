@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Heredoc extends TokenAuto {
     static public $operators = array('T_START_HEREDOC');
+    static public $atom = 'Heredoc';
     
     public function _check() {
         $this->conditions = array(0 => array('token' => Heredoc::$operators,

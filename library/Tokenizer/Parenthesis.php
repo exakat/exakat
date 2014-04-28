@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class Parenthesis extends TokenAuto {
     static public $operators = array('T_OPEN_PARENTHESIS');
+    static public $atom = 'Parenthesis';
     
     public function _check() {
         $operands    = array('Addition', 'Multiplication', 'Sequence', 'String', 

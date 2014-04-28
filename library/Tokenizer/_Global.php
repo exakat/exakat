@@ -4,6 +4,7 @@ namespace Tokenizer;
 
 class _Global extends TokenAuto {
     static public $operators = array('T_GLOBAL');
+    static public $atom = 'Global';
 
     public function _check() {
     // global $x; (nothing more)
