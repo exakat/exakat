@@ -1320,6 +1320,9 @@ semicolon = it.out('NEXT').out('NEXT').next();
 semicolon.setProperty('code', 'Void');
 semicolon.setProperty('token', 'T_VOID');
 semicolon.setProperty('atom', 'Void');
+semicolon.setProperty('fullcode', ' ');
+semicolon.setProperty('modifiedBy', 'to_void');
+
 
 ";
             unset($actions['to_void']);
@@ -1331,7 +1334,7 @@ if (isset($actions['insertVoid'])) {
     $qactions[] = "
 /* insert_void */
 
-x = g.addVertex(null, [code:'void', fullcode:'void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, line:it.line]);
+x = g.addVertex(null, [code:'void', fullcode:' ', atom:'Void', token:'T_VOID', virtual:true, line:it.line, line:it.line]);
 g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
 g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
