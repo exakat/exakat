@@ -577,7 +577,8 @@ function process_file($filename, $log_file) {
                                               ->setProperty('modifiedBy', 'bin/load5')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
-            } elseif ($token == '(' && $tokens[$id + 1] == ')') {
+            } elseif ($token == '(' && $tokens[$id + 1] == ')' &&
+                      $Php->getTokenname($tokens[$id - 1][0]) != 'T_HALT_COMPILER') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
