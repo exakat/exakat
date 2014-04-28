@@ -1,15 +1,11 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ->
-      Label : OBJECT
-        $b
       Label : METHOD
         c
         Label : ARGUMENTS
@@ -18,59 +14,63 @@ Label : CODE
             (
             Label : CODE
               /
+              Label : RIGHT
+                $f
               Label : LEFT
                 (
                 Label : CODE
                   -
+                  Label : RIGHT
+                    $e
+                  Label : LEFT
+                    $d
+          Label : ARGUMENT
+            (
+            Label : CODE
+              /
+              Label : RIGHT
+                $i
+              Label : LEFT
+                (
+                Label : CODE
+                  -
+                  Label : RIGHT
+                    $h
+                  Label : LEFT
+                    $g
+          Label : ARGUMENT
+            (
+            Label : CODE
+              /
+              Label : RIGHT
+                $l
+              Label : LEFT
+                (
+                Label : CODE
+                  -
+                  Label : RIGHT
+                    $k
                   Label : LEFT
                     -
                     Label : SIGN
                       $j
-                  Label : RIGHT
-                    $k
-              Label : RIGHT
-                $l
           Label : ARGUMENT
             (
             Label : CODE
               /
-              Label : LEFT
-                (
-                Label : CODE
-                  -
-                  Label : LEFT
-                    $d
-                  Label : RIGHT
-                    $e
               Label : RIGHT
-                $f
-          Label : ARGUMENT
-            (
-            Label : CODE
-              /
+                $o
               Label : LEFT
                 (
                 Label : CODE
                   -
-                  Label : LEFT
-                    $g
                   Label : RIGHT
-                    $h
-              Label : RIGHT
-                $i
-          Label : ARGUMENT
-            (
-            Label : CODE
-              /
-              Label : LEFT
-                (
-                Label : CODE
-                  -
+                    $n
                   Label : LEFT
                     -
                     Label : SIGN
                       $m
-                  Label : RIGHT
-                    $n
-              Label : RIGHT
-                $o
+      Label : OBJECT
+        $b
+    Label : LEFT
+      $a

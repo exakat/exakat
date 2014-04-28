@@ -1,16 +1,16 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       -
+      Label : RIGHT
+        $c
       Label : LEFT
         -
         Label : SIGN
           $b
-      Label : RIGHT
-        $c
+    Label : LEFT
+      $a

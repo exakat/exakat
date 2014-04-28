@@ -1,19 +1,13 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         -
-        Label : LEFT
-          +
-          Label : LEFT
-            $a
-          Label : RIGHT
-            2
         Label : RIGHT
           [
           Label : INDEX
@@ -24,3 +18,9 @@ Label : CODE
                 'c'
           Label : VARIABLE
             $y
+        Label : LEFT
+          +
+          Label : RIGHT
+            2
+          Label : LEFT
+            $a

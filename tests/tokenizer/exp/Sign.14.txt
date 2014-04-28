@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      -
-      Label : SIGN
-        true
+  makeSequence
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        -
+        Label : SIGN
+          true

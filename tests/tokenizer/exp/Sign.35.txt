@@ -1,32 +1,34 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      -
-      Label : LEFT
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
         -
-        Label : LEFT
-          [
-          Label : INDEX
-            'c'
-          Label : VARIABLE
-            ->
-            Label : PROPERTY
-              b
-            Label : OBJECT
-              $a
         Label : RIGHT
-          [
-          Label : INDEX
-            'E'
-          Label : VARIABLE
-            $d
-      Label : RIGHT
-        $f
-  Label : THEN
-    {
-    Label : CODE
-      void
+          $f
+        Label : LEFT
+          -
+          Label : RIGHT
+            [
+            Label : INDEX
+              'E'
+            Label : VARIABLE
+              $d
+          Label : LEFT
+            [
+            Label : INDEX
+              'c'
+            Label : VARIABLE
+              ->
+              Label : PROPERTY
+                b
+              Label : OBJECT
+                $a
+    Label : THEN
+      {
+      Label : CODE
+        void

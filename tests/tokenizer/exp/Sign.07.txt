@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      .
-      Label : CONCAT
-        -
-        Label : SIGN
-          'a'
-      Label : CONCAT
-        -
-        Label : SIGN
-          'b'
+  makeSequence
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        .
+        Label : CONCAT
+          -
+          Label : SIGN
+            'a'
+        Label : CONCAT
+          -
+          Label : SIGN
+            'b'

@@ -1,13 +1,11 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     a
     Label : ARGUMENTS
       ,
-      Label : ARGUMENT
-        D
       Label : ARGUMENT
         $b
       Label : ARGUMENT
@@ -16,3 +14,5 @@ Label : CODE
           $c
         Label : LEFT
           -1
+      Label : ARGUMENT
+        D
