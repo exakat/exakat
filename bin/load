@@ -59,10 +59,15 @@ if (isset($config['phpversion'])) {
 }
 
 if ($id = array_search('-f', $args)) {
-    $filename = $args[$id + 1];
+    $nb_files = 0; 
     
-    $nb_tokens = process_file($filename, $log);
-    $nb_files = 1;
+     while (isset($args[$id + ++$nb_files]) && 
+            file_exists($args[$id + $nb_files])) {
+        $filename = $args[$id + $nb_files];
+        print $filename."\n";
+    
+        $nb_tokens = process_file($filename, $log);
+    }
 } elseif ($id = array_search('-d', $args)) {
     $dir = $args[$id + 1];
     
