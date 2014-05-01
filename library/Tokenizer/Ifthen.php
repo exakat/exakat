@@ -246,7 +246,7 @@ class Ifthen extends TokenAuto {
                                    3 => array('atom'  => 'yes'),
                                    4 => array('atom'  => 'Ifthen', 
                                               'token' => 'T_ELSEIF',
-                                              'property' => array('alternative', 'true') ),
+                                              'property' => array('alternative' => 'true') ),
                                    5 => array('filterOut2' => 'T_ENDIF'),
         );
         
