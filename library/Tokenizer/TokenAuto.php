@@ -1493,7 +1493,7 @@ if (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'Ifthe
 }
 
 if (it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any() &&
-    !it.in('NEXT').in('NEXT').filter{!(it.token in ['T_OPEN_PARENTHESIS', 'T_VOID', 'T_USE'])}.any()) {
+    it.in('NEXT').in('NEXT').filter{!(it.token in ['T_OPEN_PARENTHESIS', 'T_VOID', 'T_USE', 'T_IF'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
     
@@ -1505,7 +1505,7 @@ if (it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any() &&
     
     previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
     previous.bothE('NEXT').each{ g.removeEdge(it); }
-    previous.setProperty('checkForNext', 'Previous ' + it.in('NEXT').in('NEXT').next().token);
+    previous.setProperty('checkForNext', 'Previous Block ' + it.in('NEXT').in('NEXT').next().token);
 }
 
 if (it.out('NEXT').has('atom', 'Sequence').any()) {
@@ -1517,6 +1517,8 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
         g.removeEdge(it.inE('ELEMENT').next());
         
         g.addEdge(sequence, it, 'ELEMENT');
+        it.setProperty('checkForNext', 'Sequence');
+
         it.setProperty('order', c + it.order);
     }
     
@@ -1545,7 +1547,6 @@ if (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function'
     next.bothE('NEXT').each{ g.removeEdge(it); }
 
     next.setProperty('checkForNext', 'Next');
-
 }
 
 if (it.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).any()) {
@@ -1554,7 +1555,6 @@ if (it.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).any()) {
     g.addEdge(it, semicolon.out('NEXT').next(), 'NEXT');
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), semicolon, 'DELETE');
-    
 }
 
 if (it.both('NEXT').count() == 0) {
