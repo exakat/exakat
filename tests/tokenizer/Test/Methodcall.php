@@ -18,8 +18,6 @@ class Methodcall extends Tokenizer {
     public function testMethodcall07()  { $this->generic_test('Methodcall.07'); }
     public function testMethodcall08()  { $this->generic_test('Methodcall.08'); }
     public function testMethodcall09()  { $this->generic_test('Methodcall.09'); }
-    public function testMethodCall01()  { $this->generic_test('MethodCall.01'); }
-    public function testMethodCall01()  { $this->generic_test('MethodCall.01'); }
     public function testMethodcall10()  { $this->generic_test('Methodcall.10'); }
 }
 ?>
