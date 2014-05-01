@@ -264,3 +264,4 @@ Check how index degrades with size (compare with the previous).
 Create a checker for the Format (they need a number of classes, and dependences).
 Record all scripts's running time. 
 
+Check file names for special chars ($ or 把).
