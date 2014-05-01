@@ -17,6 +17,7 @@ class Ifthen extends TokenAuto {
         
         $this->actions = array('to_void'     => 2,
                                'keepIndexed' => true,
+                               'property'    => array('alternative' => 'false'),
                                'cleanIndex'  => true);
         $this->checkAuto(); 
 
@@ -29,6 +30,7 @@ class Ifthen extends TokenAuto {
         
         $this->actions = array('insertVoid'  => 2,
                                'keepIndexed' => true,
+                               'property'    => array('alternative' => 'true'),
                                'cleanIndex'  => true);
         $this->checkAuto(); 
 
@@ -47,6 +49,7 @@ class Ifthen extends TokenAuto {
                                                        3 => 'DROP',
                                                        4 => 'ELSE'),
                                'atom'         => 'Ifthen',
+                               'property'     => array('alternative' => 'false'),
                                'makeSequence' => 'it',
                                'cleanIndex'   => true);
         $this->checkAuto(); 
@@ -71,13 +74,15 @@ class Ifthen extends TokenAuto {
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => array('Void', 'Sequence')),
                                    3 => array('atom' => 'Ifthen', 
-                                              'token' => 'T_ELSEIF'),
+                                              'token' => 'T_ELSEIF',
+                                              'property' => array('alternative' => 'false'))
         );
         
         $this->actions = array('transform'    => array('1' => 'CONDITION',
                                                        '2' => 'THEN',    
                                                        '3' => 'ELSE'
                                                       ),
+                               'property'     => array('alternative' => 'false'),
                                'makeSequence' => 'it',
                                'atom'         => 'Ifthen',
                                'cleanIndex'   => true
@@ -108,6 +113,7 @@ class Ifthen extends TokenAuto {
         );
         
         $this->actions = array( 'to_block_ifelseif_instruction' => true,
+                                'property'                      => array('alternative' => 'false'),
                                 'keepIndexed'                   => true);
         $this->checkAuto(); 
 
@@ -122,6 +128,7 @@ class Ifthen extends TokenAuto {
         $this->actions = array('transform'    => array(1 => 'CONDITION',
                                                        2 => 'THEN'),
                                'makeSequence' => 'it',
+                               'property'     => array('alternative' => 'false'),
                                'atom'         => 'Ifthen',
                                'cleanIndex'   => true);
         $this->checkAuto(); 
@@ -137,10 +144,12 @@ class Ifthen extends TokenAuto {
         
         $this->actions = array('transform'    => array(1 => 'CONDITION',
                                                        2 => 'THEN'),
+                               'property'     => array('alternative' => 'true'),
                                'makeSequence' => 'it',
                                'atom'         => 'Ifthen',
                                'cleanIndex'   => true);
         $this->checkAuto(); 
+        
     // @doc if then NO ELSE, with a sequence behind
         $this->conditions = array( 0 => array('token' => Ifthen::$operators,
                                               'atom' => 'none'),
@@ -153,6 +162,7 @@ class Ifthen extends TokenAuto {
         $this->actions = array('transform'    => array(1 => 'CONDITION',
                                                        2 => 'THEN'),
                                'makeSequence' => 'it',
+                               'property'     => array('alternative' => 'false'),
                                'atom'         => 'Ifthen');
         $this->checkAuto(); 
 
@@ -169,6 +179,7 @@ class Ifthen extends TokenAuto {
                                                         2 => 'DROP',    
                                                         3 => 'THEN',    
                                                         4 => 'DROP'),
+                               'property'     => array('alternative' => 'true'),
                                'atom'         => 'Ifthen',
                                'makeSequence' => 'it',
                                'cleanIndex'   => true
@@ -197,7 +208,7 @@ class Ifthen extends TokenAuto {
                                                       ),
                                'atom'         => 'Ifthen',
                                'makeSequence' => 'it',
-                               'property'     => array('Alternative' => true),
+                               'property'     => array('alternative' => 'true'),
                                'cleanIndex'   => true
                                );
 
@@ -221,7 +232,7 @@ class Ifthen extends TokenAuto {
                                                       ),
                                'atom'         => 'Ifthen',
                                'makeSequence' => 'it',
-                               'property'     => array('alternative' => true),
+                               'property'     => array('alternative' => 'true'),
                                'cleanIndex'   => true
                                );
 
@@ -233,7 +244,9 @@ class Ifthen extends TokenAuto {
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
                                    3 => array('atom'  => 'yes'),
-                                   4 => array('atom'  => 'Ifthen', 'token' => 'T_ELSEIF' ),
+                                   4 => array('atom'  => 'Ifthen', 
+                                              'token' => 'T_ELSEIF',
+                                              'property' => array('alternative', 'true') ),
                                    5 => array('filterOut2' => 'T_ENDIF'),
         );
         
@@ -267,6 +280,7 @@ class Ifthen extends TokenAuto {
         );
         
         $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,
+                               'property'                              => array('alternative' => 'true'),
                                'keepIndexed'                           => true);
         $this->checkAuto();
 
