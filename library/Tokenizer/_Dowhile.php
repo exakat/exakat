@@ -4,7 +4,7 @@ namespace Tokenizer;
 
 class _Dowhile extends TokenAuto {
     static public $operators = array('T_DO');
-    static public $atom = 'Do';
+    static public $atom = 'Dowhile';
 
     public function _check() {
         // do ; while() (no block...)
