@@ -14,9 +14,10 @@ shell_exec('cd tests/analyzer; phpunit alltests.php > phpunit.txt');
 $end = microtime(true);
 
 $row['duration'] = ($end - $begin);
+Tests: 265, Assertions: 799, Failures: 77, Skipped: 7.
 
 $results = file_get_contents('tests/analyzer/phpunit.txt');
-if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+)\./is', $results, $R)) {
+if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+)[\.,]/is', $results, $R)) {
     $row['tests'] = $R[1];
     $row['assertions'] = $R[2];
     $row['fails'] = $R[3];
