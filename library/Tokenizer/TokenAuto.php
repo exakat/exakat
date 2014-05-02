@@ -1036,6 +1036,9 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     
     g.addEdge(sequence, x, 'ELEMENT');
 
+    /* indexing */
+    g.idx('Const').put('token', 'node', x);
+
     g.addEdge(x, it.out('LEFT').next(), 'NAME');
     g.addEdge(x, it.out('RIGHT').next(), 'VALUE');
     g.removeEdge(it.outE('LEFT').next());
@@ -1045,6 +1048,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     $fullcode
     
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+
 }
 
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');   
