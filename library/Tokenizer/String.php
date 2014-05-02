@@ -3,16 +3,16 @@
 namespace Tokenizer;
 
 class String extends TokenAuto {
-    static public $operators = array('T_QUOTE', 'T_START_HEREDOC');
+    static public $operators = array('T_QUOTE'); 
     static public $allowed_classes = array('String', 'Variable', 'Concatenation', 'Array', 'Property', 'Methodcall', 
                                            'Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Ternary');
     static public $atom = 'String';
 
     public function _check() {
 // Case of string with interpolation : "a${b}c";
-        $this->conditions = array(  0 => array('token' => String::$operators, 
-                                               'atom' => 'none'),
-                                    1 => array('atom'  => String::$allowed_classes,
+        $this->conditions = array(  0 => array('token'            => String::$operators, 
+                                               'atom'             => 'none'),
+                                    1 => array('atom'             => String::$allowed_classes,
                                                'check_for_string' => String::$allowed_classes),
                                  );
 
@@ -33,7 +33,7 @@ if (fullcode.code.length() > 1) {
     }
 
     // @note : only the first delimiter is removed, it is sufficient
-    fullcode.setProperty('unicode_block', fullcode.code.replaceAll(/^['"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString());
+//    fullcode.setProperty('unicode_block', fullcode.code.replaceAll(/^['"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString());
 }
 
 GREMLIN;
