@@ -38,7 +38,10 @@ foreach($res as $r) {
 
 $faits = array();
 
-$tokens = Token::getTokenizers();
+$tokens = array_merge(Token::getTokenizers(), 
+                      array('Integer', 'String', 'Identifier', 'Magicconstant',
+                            'RawString', 'Variable', 'Float'));
+
 foreach($tokens as $id => $class) {
     $fullclass = "\\Tokenizer\\$class";
     if (!isset($fullclass::$atom)) {
