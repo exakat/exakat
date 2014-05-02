@@ -4,13 +4,13 @@ namespace Tokenizer;
 
 class Heredoc extends TokenAuto {
     static public $operators = array('T_START_HEREDOC');
-    static public $atom = 'Heredoc';
+    static public $atom = 'String';
     
     public function _check() {
-        $this->conditions = array(0 => array('token' => Heredoc::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom'  => array('String', 'Variable', 'Concatenation', 'Array'),
-                                             'check_for_string' => true),
+        $this->conditions = array(0 => array('token'            => Heredoc::$operators,
+                                             'atom'             => 'none'),
+                                  1 => array('atom'             => String::$allowed_classes,
+                                             'check_for_string' => String::$allowed_classes),
                                  );
 
         $this->actions = array( 'make_quoted_string' => 'Heredoc');
@@ -20,7 +20,16 @@ class Heredoc extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.code + it.out("CONTAIN").next().fullcode; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode', fullcode.getProperty('code')); 
+if (fullcode.code.substring(3, 4) in ["'"]) {
+    fullcode.setProperty('nowdoc', 'true'); 
+} else {
+    fullcode.setProperty('heredoc', 'true'); 
+}
+
+GREMLIN;
     }
 }
 

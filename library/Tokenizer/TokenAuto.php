@@ -124,9 +124,9 @@ it.setProperty('root', 'null');
                 $qactions[] = " /* atom */\n  it.setProperty('atom', it.out('NEXT').next().atom)";
             }
             
-            if (in_array($actions['atom'], array('Ternary', 'Typehint', 'Functioncall', 'Sign'))) {
+//            if (in_array($actions['atom'], array('Ternary', 'Typehint', 'Functioncall', 'Sign'))) {
                 $qactions[] = " /* indexing */\n  g.idx('{$actions['atom']}').put('token', 'node', it);";
-            }
+//            }
             
             unset($actions['atom']);
             $this->set_atom = true;
@@ -2578,10 +2578,12 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $concatenation = new Concatenation(Token::$client);
             $fullcode = $concatenation->fullcode();
 
-            $string = new String(Token::$client);
+            $atom = $actions['make_quoted_string'];
+            $class = "\\Tokenizer\\$atom";
+            print "$class\n";
+            $string = new $class(Token::$client);
             $fullcode2 = $string->fullcode();
             
-            $atom = $actions['make_quoted_string'];
             $qactions[] = " 
 /* make_quoted_string */ 
 x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
@@ -2602,7 +2604,7 @@ g.addEdge(it, f.out('NEXT').out('NEXT').next(), 'NEXT');
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), f.out('NEXT').next(), 'DELETE');
 g.removeEdge(f.out('NEXT').outE('NEXT').next());
 
-it.setProperty('atom', '$atom');
+it.setProperty('atom', 'String');
 
 fullcode = x;
 $fullcode
@@ -2616,6 +2618,9 @@ x.out('CONCAT').each{
         g.removeEdge(it);
     } 
 }
+
+/* indexing */  g.idx('String').put('token', 'node', it);
+
             ";
             unset($actions['make_quoted_string']);
         }
