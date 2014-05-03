@@ -32,7 +32,8 @@ class Addition extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.out("LEFT").next().fullcode + " " + fullcode.code + " " + fullcode.out("RIGHT").next().fullcode);
+fullcode.setProperty('fullcode', fullcode.out("LEFT").next().getProperty('fullcode') + " " + fullcode.getProperty('code') + " " + 
+                                 fullcode.out("RIGHT").next().getProperty('fullcode'));
 
 GREMLIN;
     }

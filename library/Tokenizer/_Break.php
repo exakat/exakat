@@ -23,7 +23,11 @@ class _Break extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "break " + it.out("LEVEL").next().fullcode; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode',  "break " + fullcode.out("LEVEL").next().getProperty('fullcode'));
+
+GREMLIN;
     }
 
 }

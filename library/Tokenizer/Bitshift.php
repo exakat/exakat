@@ -28,7 +28,13 @@ class Bitshift extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode',  fullcode.out("LEFT").next().getProperty('fullcode') + " " + fullcode.getProperty('code') 
+                                    + " " + fullcode.out("RIGHT").next().getProperty('fullcode') );
+
+GREMLIN;
+
     }
 }
 ?>

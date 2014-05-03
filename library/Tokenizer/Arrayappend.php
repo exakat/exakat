@@ -23,7 +23,11 @@ class Arrayappend extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.out("VARIABLE").next().fullcode + "[]";';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode',  fullcode.out("VARIABLE").next().getProperty('fullcode') + "[]");
+
+GREMLIN;
     }
 }
 

@@ -41,7 +41,11 @@ class _Clone extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "clone " + it.out("CLONE").next().code; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode',  "clone " + fullcode.out("CLONE").next().getProperty('fullcode'));
+
+GREMLIN;
     }
 }
 

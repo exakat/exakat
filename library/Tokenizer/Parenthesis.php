@@ -60,7 +60,11 @@ class Parenthesis extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "(" + it.out("CODE").next().fullcode + ")"; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode',  "( " + fullcode.out("CODE").next().getProperty('fullcode') + ")");
+
+GREMLIN;
     }
 }
 ?>

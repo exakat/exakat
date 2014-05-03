@@ -23,7 +23,11 @@ class Not extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "!" + it.out("NOT").next().fullcode; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode',  "!" + fullcode.out("NOT").next().getProperty('fullcode') );
+
+GREMLIN;
     }
 }
 
