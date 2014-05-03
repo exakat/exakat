@@ -265,3 +265,5 @@ Create a checker for the Format (they need a number of classes, and dependences)
 Record all scripts's running time. 
 
 Check file names for special chars ($ or 把).
+
+analyzer names are sensitive to case. Make sure this is not a problem.
