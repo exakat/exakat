@@ -3,10 +3,8 @@
 namespace Tokenizer;
 
 class Real extends TokenAuto {
-    public function _check() {
-        return false;
-    }
-
+    static public $atom = "Real";
+    
     public function fullcode() {
         return <<<GREMLIN
 
