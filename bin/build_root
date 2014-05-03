@@ -38,9 +38,9 @@ foreach($res as $r) {
 
 $faits = array();
 
-$tokens = array_merge(Token::getTokenizers(), 
-                      array('Integer', 'String', 'Identifier', 'Magicconstant',
-                            'RawString', 'Variable', 'Float'));
+$special_tokens = array('Integer', 'String', 'Identifier', 'Magicconstant',
+                        'RawString', 'Variable', 'Float');
+$tokens = array_merge(Token::getTokenizers(), $special_tokens);
 
 foreach($tokens as $id => $class) {
     $fullclass = "\\Tokenizer\\$class";
@@ -58,6 +58,11 @@ foreach($tokens as $id => $class) {
 
     query("g.createManualIndex('$token', Vertex)");
     $faits[] = $token;
+    
+    if (in_array($class, $special_tokens)) {
+        $query = "g.V.has('atom', '$token').each{ g.idx('$token').put('token', 'node', it); }";
+        query($query);
+    }
 }
 
 if (DISPLAY) print "Creating index done\n";
