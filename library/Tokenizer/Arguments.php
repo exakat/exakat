@@ -70,8 +70,7 @@ class Arguments extends TokenAuto {
                                               'atom'      => 'none'),
         );
         
-        $this->actions = array('makeEdge'    => array(-1 => 'ARGUMENT'
-                                                      ),
+        $this->actions = array('makeEdge'    => array(-1 => 'ARGUMENT'),
                                'order'       => array( 1 => '1',
                                                       -1 => '0'),
                                'atom'        => 'Arguments',

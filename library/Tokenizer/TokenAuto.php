@@ -878,6 +878,20 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), next, 'DELETE');
 ";
                         }
+                    } elseif ($label == 'DROP2') {
+                            $qactions[] = "
+/* transform drop out (2) */
+
+first = it.out('NEXT').next();
+second  = first.out('NEXT').next();
+third  = second.out('NEXT').next();
+
+second.bothE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), second, 'DELETE');
+
+g.addEdge(first, third, 'NEXT');
+
+";
                     } elseif (substr($label, 0, 3) == 'TO_') {
                         $link = substr($label, 3);
                         $qactions[] = "

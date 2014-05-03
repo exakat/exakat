@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENTS
+          =>
+          Label : KEY
+            'B'
+          Label : VALUE
+            0
+    Label : LEFT
+      $a
