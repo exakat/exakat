@@ -5,10 +5,11 @@ namespace Tokenizer;
 class _Array extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET', 'T_OPEN_CURLY');
     static public $atom = 'Array';
+    static public $allowed_object = array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend', 'Functioncall', 'Methodcall', 'Staticmethodcall');
     
     public function _check() {
         // $x[3]
-        $this->conditions = array( -1 => array('atom'  => array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend')),
+        $this->conditions = array( -1 => array('atom'  => _Array::$allowed_object),
                                     0 => array('token' => _Array::$operators),
                                     1 => array('atom'  => 'yes'),
                                     2 => array('token' => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
@@ -26,9 +27,9 @@ class _Array extends TokenAuto {
         $this->checkAuto(); 
 
         // $x[3]
-        $this->conditions = array( -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend')),
+        $this->conditions = array( -1 => array('atom'  => _Array::$allowed_object),
                                     0 => array('token' => _Array::$operators),
-                                    1 => array('atom' => 'yes'),
+                                    1 => array('atom'  => 'yes'),
                                     2 => array('token' => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                  );
         
@@ -46,10 +47,10 @@ class _Array extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-x = it;
-it.out("NAME").each { x.fullcode = it.fullcode }
 
-it.filter{ it.out("INDEX").count() == 1}.each{ x.fullcode = it.out("VARIABLE").next().fullcode + "[" + it.out("INDEX").next().fullcode + "]"; }
+fullcode.out("NAME").each { fullcode.fullcode = it.fullcode }
+
+fullcode.filter{ it.out("INDEX").count() == 1}.each{ fullcode.fullcode = it.out("VARIABLE").next().fullcode + "[" + it.out("INDEX").next().fullcode + "]"; }
 
 GREMLIN;
     }

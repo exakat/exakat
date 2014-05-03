@@ -6,16 +6,17 @@ class ArrayNS extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET');
     static public $atom = 'ArrayNS';
     
-    protected $phpversion = '5.4+';
+    protected $phpversion = '5.4';
     
     public function _check() {
         $yields =  array('T_VARIABLE', 'T_CLOSE_BRACKET', 'T_STRING', 'T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 
-                         'T_DOLLAR', 'T_CLOSE_CURLY', 'T_DOUBLE_COLON', 'T_OPEN_CURLY' );
-        $this->conditions = array(//-2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')), 
-                                  -1 => array('filterOut2' => $yields),
-                                   0 => array('token' => ArrayNS::$operators),
-                                   1 => array('atom'  => 'yes', 'notAtom' => 'Arguments'),
-                                   2 => array('token' => 'T_CLOSE_BRACKET'),
+                         'T_DOLLAR', 'T_CLOSE_CURLY', 'T_DOUBLE_COLON', 'T_OPEN_CURLY', 'T_OPEN_PARENTHESIS', 
+                         'T_CLOSE_PARENTHESIS' );
+        $this->conditions = array(-1 => array('filterOut2' => $yields),
+                                   0 => array('token'      => ArrayNS::$operators),
+                                   1 => array('atom'       => 'yes', 
+                                              'notAtom'    => 'Arguments'),
+                                   2 => array('token'      => 'T_CLOSE_BRACKET'),
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENTS')),
@@ -52,7 +53,7 @@ class ArrayNS extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = "[ " + fullcode.out('ARGUMENTS').next().code + " ]";
+fullcode.setProperty('fullcode', "[ " + fullcode.out('ARGUMENTS').next().getProperty('fullcode') + " ]");
 
 GREMLIN;
     }
