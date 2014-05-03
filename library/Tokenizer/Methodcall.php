@@ -52,9 +52,11 @@ class Methodcall extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.out("NAME").next().setProperty('fullcode', fullcode.getProperty('code'));
+
+fullcode.out("NAME").each{ it.setProperty('fullcode', it.getProperty('code')); };
 
 fullcode.filter{ it.out("METHOD").count() == 1}.each{ fullcode.fullcode = fullcode.out("OBJECT").next().getProperty('fullcode') + "->" + fullcode.out("METHOD").next().getProperty('fullcode');  }
+
 GREMLIN;
     }
 }
