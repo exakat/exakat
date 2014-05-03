@@ -58,10 +58,10 @@ class _Function extends TokenAuto {
                                   4 => array('atom' => 'Sequence')
         );
         
-        $this->actions = array('to_lambda'  => true,
-                               'atom'       => 'Function',
+        $this->actions = array('to_lambda'     => true,
+                               'atom'          => 'Function',
                                'checkTypehint' => 'Function',
-                               'cleanIndex' => true);
+                               'cleanIndex'    => true);
         $this->checkAuto();
 
         // lambda function ($x) use ($y)
