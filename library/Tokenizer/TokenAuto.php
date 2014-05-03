@@ -5,6 +5,10 @@ namespace Tokenizer;
 class TokenAuto extends Token {
     protected $conditions = array();
     protected $set_atom = false;
+
+    public function _check() {
+        return false;
+    }
     
     public function prepareQuery() {
         $query = " ";
@@ -724,6 +728,9 @@ g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FU
 g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
 g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
 
+/* indexing */
+g.idx('Ppp').put('token', 'node', x);
+
 g.addEdge(x, it.out('NEXT').next(), 'DEFINE');
 it.out('NEXT').has('atom', 'Variable').each {
     tvoid = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
@@ -832,6 +839,9 @@ assignation.bothE('NEXT').each{ g.removeEdge(it); }
 g.removeVertex(assignation);
 
 g.removeEdge( it.inE('NEXT').next());
+
+/* indexing */
+g.idx('Ppp').put('token', 'node', x);
 
 fullcode = x;
 ";
