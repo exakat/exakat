@@ -22,7 +22,11 @@ class Void extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = ""; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode', ''); 
+
+GREMLIN;
     }
 }
 ?>

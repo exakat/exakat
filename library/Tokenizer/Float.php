@@ -11,14 +11,17 @@ class Float extends TokenAuto {
                                                'atom' => 'none')
                                  );
         
-        $this->actions = array('atom'       => 'Float',
-                               );
+        $this->actions = array('atom'       => 'Float');
         
         return $this->checkAuto();
     }
 
     public function fullcode() {
-        return 'it.fullcode = it.code; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode', fullcode.getProperty('code')); 
+
+GREMLIN;
     }
 }
 

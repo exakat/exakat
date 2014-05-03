@@ -27,7 +27,12 @@ class _Instanceof extends TokenAuto {
     } 
     
     public function fullcode() {
-        return 'it.fullcode = it.out("LEFT").next().code + " instanceof " + it.out("RIGHT").next().code;';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode', fullcode.out("LEFT").next().getProperty('code') + "instanceof " + fullcode.out("LEVEL").next().getProperty('code')); 
+
+GREMLIN;
+
     }
 }
 ?>

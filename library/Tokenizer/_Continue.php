@@ -46,7 +46,11 @@ class _Continue extends TokenAuto {
     }
 
     public function fullcode() {
-        return 'it.fullcode = "continue " + it.out("LEVEL").next().code; ';
+        return <<<GREMLIN
+
+fullcode.setProperty('fullcode', "continue " + fullcode.out("LEVEL").next().getProperty('code')); 
+
+GREMLIN;
     }
 }
 
