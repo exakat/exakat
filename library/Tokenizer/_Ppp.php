@@ -59,7 +59,7 @@ class _Ppp extends TokenAuto {
                                    1 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('to_option' => 1,
-                               'atom'   => 'Ppp');
+                               'atom'      => 'Ppp');
         $this->checkAuto(); 
 
     // class x { protected private function f()  }
@@ -68,7 +68,7 @@ class _Ppp extends TokenAuto {
                                    2 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('to_option' => 2,
-                               'atom'   => 'Ppp');
+                               'atom'      => 'Ppp');
         $this->checkAuto(); 
 
     // class x { protected private static function f()  }
@@ -78,7 +78,7 @@ class _Ppp extends TokenAuto {
                                    3 => array('token' => 'T_FUNCTION'),
                                  );
         $this->actions = array('to_option' => 3,
-                               'atom'   => 'Ppp');
+                               'atom'      => 'Ppp');
         $this->checkAuto(); 
 
     // class x { var $x, $y }
