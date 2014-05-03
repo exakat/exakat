@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class ArrayNS extends Tokenizer {
-    /* 19 methods */
+    /* 22 methods */
 
     public function testArrayNS01()  { $this->generic_test('ArrayNS.01'); }
     public function testArrayNS02()  { $this->generic_test('ArrayNS.02'); }
@@ -28,5 +28,8 @@ class ArrayNS extends Tokenizer {
     public function testArrayNS17()  { $this->generic_test('ArrayNS.17'); }
     public function testArrayNS18()  { $this->generic_test('ArrayNS.18'); }
     public function testArrayNS19()  { $this->generic_test('ArrayNS.19'); }
+    public function testArrayNS20()  { $this->generic_test('ArrayNS.20'); }
+    public function testArrayNS21()  { $this->generic_test('ArrayNS.21'); }
+    public function testArrayNS22()  { $this->generic_test('ArrayNS.22'); }
 }
 ?>

@@ -1,9 +1,15 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     =
+    Label : RIGHT
+      +
+      Label : RIGHT
+        1
+      Label : LEFT
+        $j
     Label : LEFT
       [
       Label : INDEX
@@ -18,14 +24,20 @@ Label : CODE
           $g
         Label : VARIABLE
           $f
-    Label : RIGHT
-      +
-      Label : LEFT
-        $j
-      Label : RIGHT
-        1
   Label : ELEMENT
     =
+    Label : RIGHT
+      chop
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          substr
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              $e
+            Label : ARGUMENT
+              1
     Label : LEFT
       [
       Label : INDEX
@@ -40,15 +52,3 @@ Label : CODE
           $b
         Label : VARIABLE
           $a
-    Label : RIGHT
-      chop
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          substr
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $e
-            Label : ARGUMENT
-              1

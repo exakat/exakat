@@ -8,13 +8,13 @@ class _Array extends TokenAuto {
     static public $allowed_object = array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend', 'Functioncall', 'Methodcall', 'Staticmethodcall');
     
     public function _check() {
-        // $x[3]
+        // $x[3] (and keep the indexation for doing it again, or with FunctioncallArray);
         $this->conditions = array( -1 => array('atom'  => _Array::$allowed_object),
                                     0 => array('token' => _Array::$operators),
                                     1 => array('atom'  => 'yes'),
                                     2 => array('token' => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                     3 => array('atom'  => 'none',
-                                               'token' => 'T_OPEN_PARENTHESIS' ),
+                                               'token' => array('T_OPEN_PARENTHESIS','T_OPEN_BRACKET', 'T_OPEN_CURLY')),
                                  );
         
         $this->actions = array('transform'    => array(  -1 => 'VARIABLE', 
@@ -38,7 +38,6 @@ class _Array extends TokenAuto {
                                                           2 => 'DROP'),
                                'atom'         => 'Array',
                                'cleanIndex'   => true,
-                               'add_to_index' => array('S_ARRAY' => 'S_ARRAY'),
                                );
         $this->checkAuto(); 
 
@@ -48,7 +47,7 @@ class _Array extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.out("NAME").each { fullcode.fullcode = it.fullcode }
+fullcode.out("NAME").each { fullcode.setProperty('fullcode', fullcode.fullcode); }
 
 fullcode.filter{ it.out("INDEX").count() == 1}.each{ fullcode.fullcode = it.out("VARIABLE").next().fullcode + "[" + it.out("INDEX").next().fullcode + "]"; }
 

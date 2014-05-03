@@ -1,25 +1,18 @@
 <?php
 
-Label : NEXT
-  $a
-  Label : NEXT
+Label : CODE
+  makeSequence
+  Label : ELEMENT
     =
-    Label : NEXT
+    Label : RIGHT
       [
-      Label : NEXT
-        'a'
-        Label : NEXT
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENTS
           =>
-          Label : NEXT
+          Label : KEY
+            'a'
+          Label : VALUE
             'b'
-            Label : NEXT
-              ]
-              Label : NEXT
-                ;
-                Label : NEXT
-                  ?>
-
-                  Label : NEXT
-                    /**/
-                    Label : NEXT
-                      /* * */
+    Label : LEFT
+      $a

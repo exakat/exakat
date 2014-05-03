@@ -9,12 +9,13 @@ class ArrayNS extends TokenAuto {
     protected $phpversion = '5.4';
     
     public function _check() {
-        $yields =  array('T_VARIABLE', 'T_CLOSE_BRACKET', 'T_STRING', 'T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 
-                         'T_DOLLAR', 'T_CLOSE_CURLY', 'T_DOUBLE_COLON', 'T_OPEN_CURLY', 'T_OPEN_PARENTHESIS', 
+        $yields =  array('T_VARIABLE', 'T_CLOSE_BRACKET', 'T_STRING', 'T_OBJECT_OPERATOR', 
+                         'T_DOLLAR', 'T_CLOSE_CURLY', 'T_DOUBLE_COLON', 'T_OPEN_CURLY', 
                          'T_CLOSE_PARENTHESIS' );
 
         // [ arguments , ] : prepare arguments with final comma
-        $this->conditions = array(-1 => array('filterOut2' => $yields),
+        $this->conditions = array(-1 => array('filterOut2' => $yields,
+                                              'notAtom'    => 'Parenthesis'),
                                    0 => array('token'      => ArrayNS::$operators),
                                    1 => array('atom'       => 'yes', 
                                               'notAtom'    => 'Arguments'),
@@ -47,7 +48,7 @@ class ArrayNS extends TokenAuto {
         
         $this->actions = array('addEdge'     => array(0 => array('Void' => 'ARGUMENTS')),
                                'keepIndexed' => true,
-                               'cleanIndex' => true);
+                               'cleanIndex'  => true);
         $this->checkAuto();
 
         // [ ] non-empty array
@@ -57,11 +58,11 @@ class ArrayNS extends TokenAuto {
                                    2 => array('token' => 'T_CLOSE_BRACKET'),
         );
         
-        $this->actions = array('transform'  => array( 1 => 'ARGUMENTS',
-                                                      2 => 'DROP'),
-                               'atom'       => 'Array',
-                               'property'   => array('NewStyle' => 'true'),
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( 1 => 'ARGUMENTS',
+                                                        2 => 'DROP'),
+                               'atom'         => 'Array',
+                               'property'     => array('NewStyle' => 'true'),
+                               'cleanIndex'   => true);
         $this->checkAuto();
 
         // [ ] non-empty array with final ,
@@ -72,12 +73,12 @@ class ArrayNS extends TokenAuto {
                                    3 => array('token' => 'T_CLOSE_BRACKET'),
         );
         
-        $this->actions = array('transform'  => array( 1 => 'ARGUMENTS',
-                                                      3 => 'DROP',
-                                                      2 => 'DROP'),
-                               'atom'       => 'Array',
-                               'property'   => array('NewStyle' => 'true'),
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( 1 => 'ARGUMENTS',
+                                                        3 => 'DROP',
+                                                        2 => 'DROP'),
+                               'atom'         => 'Array',
+                               'property'     => array('NewStyle' => 'true'),
+                               'cleanIndex'   => true);
         $this->checkAuto();
 
         return $this->checkRemaining();

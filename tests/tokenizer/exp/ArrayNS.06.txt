@@ -1,55 +1,42 @@
 <?php
 
-Label : NEXT
-  $a
-  Label : NEXT
+Label : CODE
+  makeSequence
+  Label : ELEMENT
     =
-    Label : NEXT
+    Label : RIGHT
       [
-      Label : NEXT
-        'a'
-        Label : NEXT
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
           =>
-          Label : NEXT
+          Label : KEY
+            'a'
+          Label : VALUE
             'b'
-            Label : NEXT
-              ,
-              Label : NEXT
-                ,
-                Label : NEXT
-                  ,
-                  Label : NEXT
-                    'i'
-                    Label : NEXT
-                      =>
-                      Label : NEXT
-                        'j'
-                        Label : NEXT
-                          ]
-                          Label : NEXT
-                            ;
-                            Label : NEXT
-                              ?>
-
-                              Label : NEXT
-                                /**/
-                                Label : NEXT
-                                  /* * */
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'e'
-                  Label : VALUE
-                    'f'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'c'
-                  Label : VALUE
-                    's'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'g'
-                  Label : VALUE
-                    'h'
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'c'
+          Label : VALUE
+            's'
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'e'
+          Label : VALUE
+            'f'
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'g'
+          Label : VALUE
+            'h'
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'i'
+          Label : VALUE
+            'j'
+    Label : LEFT
+      $a
