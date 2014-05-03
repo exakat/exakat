@@ -7,7 +7,7 @@ class Methodcall extends TokenAuto {
     static public $atom = 'Methodcall';
 
     public function _check() {
-        $operands = array('Variable', 'Property', 'Array', 'Functioncall', 'Methodcall', 'Staticmethodcall', 'Staticproperty' );
+        $operands = array('Variable', 'Property', 'Array', 'Functioncall', 'Methodcall', 'Staticmethodcall', 'Staticproperty', 'Parenthesis' );
 
         // $this->x($args);
         $this->conditions = array( -2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')),
