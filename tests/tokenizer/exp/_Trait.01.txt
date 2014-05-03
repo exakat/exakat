@@ -3,34 +3,6 @@
 Label : CODE
   makeSequence
   Label : ELEMENT
-    class
-    Label : NAME
-      H
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          use
-          Label : USE
-            J
-    Label : EXTENDS
-      I
-  Label : ELEMENT
-    class
-    Label : NAME
-      E
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          use
-          Label : USE
-            G
-    Label : EXTENDS
-      F
-  Label : ELEMENT
     trait
     Label : NAME
       B
@@ -44,6 +16,8 @@ Label : CODE
             D
           Label : ARGUMENTS
             void
+            Label : ARGUMENT
+              void
           Label : BLOCK
             {
             Label : CODE
@@ -54,7 +28,37 @@ Label : CODE
             C
           Label : ARGUMENTS
             void
+            Label : ARGUMENT
+              void
           Label : BLOCK
             {
             Label : CODE
               void
+  Label : ELEMENT
+    class
+    Label : NAME
+      H
+    Label : EXTENDS
+      I
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          use
+          Label : USE
+            J
+  Label : ELEMENT
+    class
+    Label : NAME
+      E
+    Label : EXTENDS
+      F
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          use
+          Label : USE
+            G

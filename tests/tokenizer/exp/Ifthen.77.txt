@@ -1,74 +1,58 @@
 <?php
 
-Label : NEXT
-  if
-  Label : NEXT
-    (
-    Label : NEXT
-      $a
-      Label : NEXT
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $d
+    Label : THEN
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $e
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
         ->
-        Label : NEXT
+        Label : METHOD
           B
-          Label : NEXT
-            (
-            Label : NEXT
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
               void
-              Label : NEXT
-                )
-                Label : NEXT
-                  )
-                  Label : NEXT
-                    try
-                    Label : NEXT
-                      {
-                      Label : NEXT
-                        $b
-                        Label : NEXT
-                          ++
-                          Label : NEXT
-                            ;
-                            Label : NEXT
-                              }
-                              Label : NEXT
-                                catch
-                                Label : NEXT
-                                  (
-                                  Label : NEXT
-                                    C
-                                    Label : NEXT
-                                      \
-                                      Label : NEXT
-                                        D
-                                        Label : NEXT
-                                          $c
-                                          Label : NEXT
-                                            )
-                                            Label : NEXT
-                                              {
-                                              Label : NEXT
-                                                if
-                                                Label : NEXT
-                                                  (
-                                                  Label : NEXT
-                                                    $d
-                                                    Label : NEXT
-                                                      )
-                                                      Label : NEXT
-                                                        {
-                                                        Label : NEXT
-                                                          $e
-                                                          Label : NEXT
-                                                            ++
-                                                            Label : NEXT
-                                                              ;
-                                                              Label : NEXT
-                                                                }
-                                                                Label : NEXT
-                                                                  ?>
-                                                                  Label : NEXT
-                                                                    /**/
-                                                                    Label : NEXT
-                                                                      /* * */
-                                              Label : CODE
-                                                void
+        Label : OBJECT
+          $a
+    Label : THEN
+      Block With if/elseif
+      Label : CODE
+        try
+        Label : CODE
+          {
+          Label : CODE
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $b
+        Label : CATCH
+          catch
+          Label : CLASS
+            \
+            Label : ELEMENT
+              C
+            Label : ELEMENT
+              D
+          Label : CODE
+            {
+            Label : CODE
+              void
+          Label : VARIABLE
+            $c

@@ -1,167 +1,136 @@
 <?php
 
-Label : NEXT
-  trait
-  Label : NEXT
-    Hello
-    Label : NEXT
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        MyHelloWorld
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : LEFT
+      $o
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      sayWorld
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+    Label : OBJECT
+      $o
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      sayExclamationMark
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+    Label : OBJECT
+      $o
+  Label : ELEMENT
+    ->
+    Label : METHOD
+      sayHello
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+    Label : OBJECT
+      $o
+  Label : ELEMENT
+    class
+    Label : NAME
+      MyHelloWorld
+    Label : BLOCK
       {
-      Label : NEXT
-        public
-        Label : NEXT
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          use
+          Label : USE
+            World
+          Label : USE
+            Hello
+        Label : ELEMENT
           function
-          Label : NEXT
+          Label : PUBLIC
+            public
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+          Label : NAME
+            sayExclamationMark
+          Label : BLOCK
+            {
+            Label : CODE
+              makeSequence
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    '!'
+  Label : ELEMENT
+    trait
+    Label : NAME
+      World
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          function
+          Label : PUBLIC
+            public
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+          Label : NAME
+            sayWorld
+          Label : BLOCK
+            {
+            Label : CODE
+              makeSequence
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'World'
+  Label : ELEMENT
+    trait
+    Label : NAME
+      Hello
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          function
+          Label : PUBLIC
+            public
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+          Label : NAME
             sayHello
-            Label : NEXT
-              (
-              Label : NEXT
-                void
-                Label : NEXT
-                  )
-                  Label : NEXT
-                    {
-                    Label : NEXT
-                      echo
-                      Label : NEXT
-                        'Hello '
-                        Label : NEXT
-                          ;
-                          Label : NEXT
-                            }
-                            Label : NEXT
-                              }
-                              Label : NEXT
-                                trait
-                                Label : NEXT
-                                  World
-                                  Label : NEXT
-                                    {
-                                    Label : NEXT
-                                      public
-                                      Label : NEXT
-                                        function
-                                        Label : NEXT
-                                          sayWorld
-                                          Label : NEXT
-                                            (
-                                            Label : NEXT
-                                              void
-                                              Label : NEXT
-                                                )
-                                                Label : NEXT
-                                                  {
-                                                  Label : NEXT
-                                                    echo
-                                                    Label : NEXT
-                                                      'World'
-                                                      Label : NEXT
-                                                        ;
-                                                        Label : NEXT
-                                                          }
-                                                          Label : NEXT
-                                                            }
-                                                            Label : NEXT
-                                                              class
-                                                              Label : NEXT
-                                                                MyHelloWorld
-                                                                Label : NEXT
-                                                                  {
-                                                                  Label : NEXT
-                                                                    use
-                                                                    Label : NEXT
-                                                                      Hello
-                                                                      Label : NEXT
-                                                                        ,
-                                                                        Label : NEXT
-                                                                          World
-                                                                          Label : NEXT
-                                                                            ;
-                                                                            Label : NEXT
-                                                                              public
-                                                                              Label : NEXT
-                                                                                function
-                                                                                Label : NEXT
-                                                                                  sayExclamationMark
-                                                                                  Label : NEXT
-                                                                                    (
-                                                                                    Label : NEXT
-                                                                                      void
-                                                                                      Label : NEXT
-                                                                                        )
-                                                                                        Label : NEXT
-                                                                                          {
-                                                                                          Label : NEXT
-                                                                                            echo
-                                                                                            Label : NEXT
-                                                                                              '!'
-                                                                                              Label : NEXT
-                                                                                                ;
-                                                                                                Label : NEXT
-                                                                                                  }
-                                                                                                  Label : NEXT
-                                                                                                    }
-                                                                                                    Label : NEXT
-                                                                                                      $o
-                                                                                                      Label : NEXT
-                                                                                                        =
-                                                                                                        Label : NEXT
-                                                                                                          new
-                                                                                                          Label : NEXT
-                                                                                                            MyHelloWorld
-                                                                                                            Label : NEXT
-                                                                                                              (
-                                                                                                              Label : NEXT
-                                                                                                                void
-                                                                                                                Label : NEXT
-                                                                                                                  )
-                                                                                                                  Label : NEXT
-                                                                                                                    ;
-                                                                                                                    Label : NEXT
-                                                                                                                      $o
-                                                                                                                      Label : NEXT
-                                                                                                                        ->
-                                                                                                                        Label : NEXT
-                                                                                                                          sayHello
-                                                                                                                          Label : NEXT
-                                                                                                                            (
-                                                                                                                            Label : NEXT
-                                                                                                                              void
-                                                                                                                              Label : NEXT
-                                                                                                                                )
-                                                                                                                                Label : NEXT
-                                                                                                                                  ;
-                                                                                                                                  Label : NEXT
-                                                                                                                                    $o
-                                                                                                                                    Label : NEXT
-                                                                                                                                      ->
-                                                                                                                                      Label : NEXT
-                                                                                                                                        sayWorld
-                                                                                                                                        Label : NEXT
-                                                                                                                                          (
-                                                                                                                                          Label : NEXT
-                                                                                                                                            void
-                                                                                                                                            Label : NEXT
-                                                                                                                                              )
-                                                                                                                                              Label : NEXT
-                                                                                                                                                ;
-                                                                                                                                                Label : NEXT
-                                                                                                                                                  $o
-                                                                                                                                                  Label : NEXT
-                                                                                                                                                    ->
-                                                                                                                                                    Label : NEXT
-                                                                                                                                                      sayExclamationMark
-                                                                                                                                                      Label : NEXT
-                                                                                                                                                        (
-                                                                                                                                                        Label : NEXT
-                                                                                                                                                          void
-                                                                                                                                                          Label : NEXT
-                                                                                                                                                            )
-                                                                                                                                                            Label : NEXT
-                                                                                                                                                              ;
-                                                                                                                                                              Label : NEXT
-                                                                                                                                                                ?>
-
-                                                                                                                                                                Label : NEXT
-                                                                                                                                                                  /**/
-                                                                                                                                                                  Label : NEXT
-                                                                                                                                                                    /* * */
+          Label : BLOCK
+            {
+            Label : CODE
+              makeSequence
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'Hello '

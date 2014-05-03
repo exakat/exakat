@@ -10,6 +10,8 @@ Label : CODE
         M
         Label : ARGUMENTS
           void
+          Label : ARGUMENT
+            void
     Label : LEFT
       $a
   Label : ELEMENT
@@ -32,6 +34,8 @@ Label : CODE
       N
       Label : ARGUMENTS
         void
+        Label : ARGUMENT
+          void
     Label : OBJECT
       $b
   Label : ELEMENT
@@ -48,6 +52,8 @@ Label : CODE
             public
           Label : ARGUMENTS
             void
+            Label : ARGUMENT
+              void
           Label : NAME
             F
           Label : BLOCK
@@ -62,6 +68,8 @@ Label : CODE
                   H
                   Label : ARGUMENTS
                     void
+                    Label : ARGUMENT
+                      void
               Label : ELEMENT
                 echo
                 Label : ARGUMENTS
@@ -82,6 +90,8 @@ Label : CODE
             public
           Label : ARGUMENTS
             void
+            Label : ARGUMENT
+              void
           Label : NAME
             C
           Label : BLOCK

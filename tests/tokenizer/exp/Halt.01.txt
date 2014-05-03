@@ -1,18 +1,10 @@
 <?php
 
-Label : NEXT
-  __HALT_COMPILER
-  Label : NEXT
-    (
-    Label : NEXT
-      )
-      Label : NEXT
-        ;
-        Label : NEXT
-           
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+     
 
 ?>
-          Label : NEXT
-            /**/
-            Label : NEXT
-              /* * */
+  Label : ELEMENT
+    __HALT_COMPILER
