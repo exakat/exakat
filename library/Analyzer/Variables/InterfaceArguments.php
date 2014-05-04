@@ -5,11 +5,11 @@ namespace Analyzer\Variables;
 use Analyzer;
 
 class InterfaceArguments extends Analyzer\Analyzer {
-    function dependsOn() {
+    public function dependsOn() {
         return array('Analyzer\\Variables\\Arguments');
     }
     
-    function analyze() {
+    public function analyze() {
 // When there is function in an interface, we have no sequence.
         $this->atomIs('Variable')
              ->analyzerIs("Analyzer\\Variables\\Arguments")

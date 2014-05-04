@@ -6,7 +6,7 @@ use Analyzer;
 
 class Namespacesnames extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Namespace")
              ->outIs('NAMESPACE');
     }

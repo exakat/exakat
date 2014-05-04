@@ -6,7 +6,7 @@ use Analyzer;
 
 class Arguments extends Analyzer\Analyzer {
     
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Variable")
              ->_as('x')
              ->inIs('ARGUMENT')

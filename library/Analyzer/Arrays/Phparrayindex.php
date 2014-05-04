@@ -7,7 +7,7 @@ use Analyzer,
 
 class Phparrayindex extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Array")
              ->outIs('VARIABLE')
              ->code(VariablePhp::$variables)

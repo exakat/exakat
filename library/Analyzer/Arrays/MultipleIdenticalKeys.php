@@ -6,7 +6,7 @@ use Analyzer;
 
 class MultipleIdenticalKeys extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Functioncall")
              ->code('array')
              ->raw("aggregate().findAll{ m = [:]; it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Keyvalue').out('KEY').groupCount(m){it.code}.cap.next().findAll{it.value > 1}.size() > 0}");

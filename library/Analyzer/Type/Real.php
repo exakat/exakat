@@ -6,7 +6,7 @@ use Analyzer;
 
 class Real extends Analyzer\Common\Type {
 
-    function analyze() {
+    public function analyze() {
         $this->type = 'Float';
 
         parent::analyze();

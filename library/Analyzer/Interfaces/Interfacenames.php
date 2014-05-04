@@ -6,7 +6,7 @@ use Analyzer;
 
 class Interfacenames extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Interface")
              ->outIs('NAME');
     }

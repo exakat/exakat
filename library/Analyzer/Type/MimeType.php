@@ -17,11 +17,11 @@ class MimeType extends Analyzer\Analyzer {
 'video',
     );
 
-    function dependsOn() {
+    public function dependsOn() {
         return array("Analyzer\\Type\\String");
     }
     
-    function analyze() {
+    public function analyze() {
         $this->atomIs('String')
              ->regex('code', '[\'\"]('.join('|', Analyzer\Type\MimeType::$MimeTypes).')/[a-zA-Z0-9+\\\\-]+[\'\"]');
         $this->prepareQuery();

@@ -6,7 +6,7 @@ use Analyzer;
 
 class ClassUsage extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("New")
              ->outIs('NEW');
         $this->prepareQuery();

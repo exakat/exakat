@@ -6,7 +6,7 @@ use Analyzer;
 
 class TryCatchUsage extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs('Catch')
              ->outIs ('CLASS');
     }

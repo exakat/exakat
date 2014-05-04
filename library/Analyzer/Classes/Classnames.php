@@ -6,7 +6,7 @@ use Analyzer;
 
 class Classnames extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Class")
              ->outIs('NAME');
     }

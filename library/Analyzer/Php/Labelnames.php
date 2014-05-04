@@ -6,7 +6,7 @@ use Analyzer;
 
 class Labelnames extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Label")
              ->outIs('LABEL');
     }

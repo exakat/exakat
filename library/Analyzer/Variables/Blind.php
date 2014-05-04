@@ -6,7 +6,7 @@ use Analyzer;
 
 class Blind extends Analyzer\Analyzer {
     
-    function analyze() {
+    public function analyze() {
         $this->setApplyBelow(true);
         
         $blinds = array("Variable", 'Staticproperty', 'Property', 'Array');

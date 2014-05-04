@@ -6,7 +6,7 @@ use Analyzer;
 
 class Arrayindex extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Array")
              ->outIs('INDEX');
     }

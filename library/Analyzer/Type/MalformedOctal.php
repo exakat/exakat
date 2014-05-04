@@ -5,12 +5,12 @@ namespace Analyzer\Type;
 use Analyzer;
 
 class MalformedOctal extends Analyzer\Analyzer {
-    function dependsOn() {
+    public function dependsOn() {
         return array("Analyzer\\Type\\Integer",
                      "Analyzer\\Type\\Real");
     }
     
-    function analyze() {
+    public function analyze() {
         $this->atomIs('Integer')
              ->analyzerIs("Analyzer\\Type\\Integer")
              ->regex('code', '^-?0[0-9]+\\$')

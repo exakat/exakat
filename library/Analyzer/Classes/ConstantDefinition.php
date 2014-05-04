@@ -6,7 +6,7 @@ use Analyzer;
 
 class ConstantDefinition extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Const")
              ->classIsNot('Global')
              ->functionIs('Global')

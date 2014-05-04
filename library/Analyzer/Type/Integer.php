@@ -6,7 +6,7 @@ use Analyzer;
 
 class Integer extends Analyzer\Common\Type {
 
-    function analyze() {
+    public function analyze() {
         $this->type = 'Integer';
 
         parent::analyze();

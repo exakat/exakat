@@ -5,11 +5,11 @@ namespace Analyzer\Type;
 use Analyzer;
 
 class Pcre extends Analyzer\Analyzer {
-    function dependsOn() {
+    public function dependsOn() {
         return array("Analyzer\\Type\\String");
     }
     
-    function analyze() {
+    public function analyze() {
         // regex like $....$is
         $this->atomIs('String')
              ->regex('code', '([\'\\"])\\$[^\\$].*?\\$[imsxeADSUXJu]*[\'\\"]');

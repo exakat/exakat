@@ -6,7 +6,7 @@ use Analyzer;
 
 class Gotonames extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Goto")
              ->outIs('LABEL');
     }
