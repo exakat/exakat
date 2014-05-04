@@ -88,6 +88,13 @@ class Phpexec {
         
         return $tokens;
     }
+
+    public function countTokenFromFile($file) {
+        $tmpFile = tempnam("/tmp", "Phpexec");
+        $res = shell_exec($this->phpexec.' -r "print count(token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); ?>" ');
+        
+        return (int) $res;
+    }
     
     public function getExec() {
         return $this->phpexec;
