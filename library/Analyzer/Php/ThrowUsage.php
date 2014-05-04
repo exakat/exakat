@@ -6,7 +6,7 @@ use Analyzer;
 
 class ThrowUsage extends Analyzer\Analyzer {
 
-    function analyze() {
+    public function analyze() {
         $this->atomIs("Throw");
     }
 }
