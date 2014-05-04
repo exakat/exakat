@@ -26,11 +26,12 @@ class _Array extends TokenAuto {
                                );
         $this->checkAuto(); 
 
-        // $x[3]
+        // $x[3] // will loop for each dimension
         $this->conditions = array( -1 => array('atom'  => _Array::$allowed_object),
                                     0 => array('token' => _Array::$operators),
                                     1 => array('atom'  => 'yes'),
                                     2 => array('token' => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
+                                    3 => array('notToken' => array('T_OPEN_PARENTHESIS','T_OPEN_BRACKET', 'T_OPEN_CURLY')),
                                  );
         
         $this->actions = array('transform'    => array(  -1 => 'VARIABLE', 
@@ -47,9 +48,9 @@ class _Array extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.out("NAME").each { fullcode.setProperty('fullcode', fullcode.fullcode); }
+fullcode.out("NAME").each { fullcode.setProperty('fullcode', fullcode.getProperty('fullcode')); }
 
-fullcode.filter{ it.out("INDEX").count() == 1}.each{ fullcode.fullcode = it.out("VARIABLE").next().fullcode + "[" + it.out("INDEX").next().fullcode + "]"; }
+fullcode.filter{ it.out("INDEX").count() == 1}.each{ fullcode.setProperty('fullcode', it.out("VARIABLE").next().getProperty('fullcode') + "[" + it.out("INDEX").next().getProperty('fullcode') + "]"); }
 
 GREMLIN;
     }
