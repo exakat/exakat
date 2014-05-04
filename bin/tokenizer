@@ -89,8 +89,9 @@ $stats = array('token_in' => $server_stat->tokens_count, 'token_out' => 2,
                'project' => $project);
 
 $total = Tokenizer\Token::countTotalToken();
-//$count = $total + 1;
-$count = Tokenizer\Token::countLeftToken() + 1;
+$count = $total + 1;
+//$count = Tokenizer\Token::countLeftToken() + 1;
+$log->log( "Finished counting Token");
 
 $extra_rounds = 4;
 $prev = array();
