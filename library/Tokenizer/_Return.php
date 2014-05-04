@@ -36,7 +36,8 @@ class _Return extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.code + " " + fullcode.out("RETURN").next().fullcode;
+fullcode.setProperty('fullcode', fullcode.getProperty('code') + " " + fullcode.out("RETURN").next().getProperty('fullcode'));
+
 GREMLIN;
     }
 }
