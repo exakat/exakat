@@ -54,7 +54,7 @@ shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/ -p '.$project.''
 logProgress($project, $progress++ / $total_steps);
 print "Project loaded\n";
 
-$res = shell_exec('php bin/build_root -p '.$project);
+$res = shell_exec('php bin/build_root -p '.$project.' > ./projects/'.$project.'/log/build_root.final.log');
 print "Build root\n";
 
 if (file_exists('./projects/'.$project.'/log/tokenizer.final.log')) {
