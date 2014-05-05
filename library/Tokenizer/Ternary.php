@@ -14,11 +14,12 @@ class Ternary extends TokenAuto {
                                                                             Comparison::$operators, Logical::$operators, 
                                                                             Bitshift::$operators, Multiplication::$operators, 
                                                                             Addition::$operators, Concatenation::$operators)),
-                                   -1 => array('atom' => 'yes'),
-                                    0 => array('token' => Ternary::$operators),
-                                    1 => array('atom' => 'yes'),
-                                    2 => array('token' => 'T_COLON'),
-                                    3 => array('atom' => 'yes', 'notAtom' => 'Sequence'),
+                                   -1 => array('atom'       => 'yes'),
+                                    0 => array('token'      => Ternary::$operators),
+                                    1 => array('atom'       => 'yes'),
+                                    2 => array('token'      => 'T_COLON'),
+                                    3 => array('atom'       => 'yes', 
+                                               'notAtom'    => 'Sequence'),
                                     4 => array('filterOut2' => array_merge(Token::$instruction_ending, array('T_OPEN_CURLY'))),
                                  );
         
