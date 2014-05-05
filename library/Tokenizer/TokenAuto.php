@@ -2428,7 +2428,7 @@ list_after_token = [
         'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
         'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
         'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
-        'T_AS'
+        'T_AS', 'T_DOT'
         ];
 
 if (    $it.token != 'T_ELSEIF'
