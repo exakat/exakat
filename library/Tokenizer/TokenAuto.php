@@ -2676,7 +2676,7 @@ x.out('CONCAT').each{
 
 /* indexing */  g.idx('String').put('token', 'node', it);
 
-            ";
+";
             unset($actions['make_quoted_string']);
         }
         
