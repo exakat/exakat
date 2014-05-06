@@ -47,6 +47,7 @@ foreach($tokens as $t) {
                 $t[1] = "'".$strings."'";
                 break;
             case T_STRING:
+            case T_NUM_STRING:
                 if (strtolower($t[1]) == 'null') { break ; }
                 // otherwise, fall through!
             case T_ENCAPSED_AND_WHITESPACE :
@@ -84,6 +85,7 @@ foreach($tokens as $t) {
             case T_DEFAULT : 
             case T_ENDSWITCH : 
             case T_ECHO : 
+            case T_PRINT : 
             case T_ENDFOREACH : 
             case T_EMPTY : 
             case T_ARRAY :
