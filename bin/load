@@ -294,11 +294,11 @@ function process_file($filename, $log_file) {
                 $previous = $T[$Tid];
                 
                 $Tid++;
-                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
-                                              ->setProperty('code', 'void')
-                                              ->setProperty('fullcode', ' ')
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_OPEN_TAG')
+                                              ->setProperty('code', '<?php /* empty, no closing tag */ ?>')
+                                              ->setProperty('fullcode', '<?php /* empty, no closing tag */ ?>')
                                               ->setProperty('line', $line)
-                                              ->setProperty('atom', 'Void')
+                                              ->setProperty('atom', 'Phpcode')
                                               ->setProperty('modifiedBy', 'bin/load1')
                                               ->save();
 
