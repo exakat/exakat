@@ -6,7 +6,7 @@ class Sign extends TokenAuto {
     static public $operators = array('T_PLUS', 'T_MINUS');
     static public $operands = array('Integer', 'Sign', 'String', 'Variable', 'Array', 'Float', 'Boolean', 'Functioncall',
                                     'Staticmethodcall', 'Staticproperty', 'Multiplication', 'Property', 'Parenthesis', 
-                                    'Methodcall', 'Cast', 'Constant', 'Boolean', 'Identifier');
+                                    'Methodcall', 'Cast', 'Constant', 'Boolean', 'Identifier', 'Assignation');
     static public $atom = 'Sign';
 
     public function _check() {
