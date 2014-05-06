@@ -29,12 +29,14 @@ $result = query("g.idx('racines')");
 if ($result[0][0] != 'MANUAL[racines:Vertex]') {
     query("g.createManualIndex('racines', Vertex)");
 }
+    if (DISPLAY) print "created racines index\n";
 
 $indices = array();
 $res = query("g.getIndices()")->toArray();
 foreach($res as $r) {
     $indices[] = substr($r[0], 7, strpos($r[0], ':') - 7);
 }
+    if (DISPLAY) print "getting all indices\n";
 
 $faits = array();
 
