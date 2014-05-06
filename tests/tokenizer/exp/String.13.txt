@@ -1,0 +1,101 @@
+<?php 
+Label : NEXT
+  return
+  Label : NEXT
+    $a
+    Label : NEXT
+      [
+      Label : NEXT
+        0
+        Label : NEXT
+          ]
+          Label : NEXT
+            .
+            Label : NEXT
+              "
+              Label : NEXT
+                B
+                Label : NEXT
+                  $b
+                  Label : NEXT
+                    [
+                    Label : NEXT
+                      C
+                      Label : NEXT
+                        ]
+                        Label : NEXT
+                          $c
+                          Label : NEXT
+                            [
+                            Label : NEXT
+                              D
+                              Label : NEXT
+                                ]
+                                Label : NEXT
+                                  E
+                                  Label : NEXT
+                                    $d
+                                    Label : NEXT
+                                      [
+                                      Label : NEXT
+                                        F
+                                        Label : NEXT
+                                          ]
+                                          Label : NEXT
+                                            $e
+                                            Label : NEXT
+                                              [
+                                              Label : NEXT
+                                                G
+                                                Label : NEXT
+                                                  ]
+                                                  Label : NEXT
+                                                    H
+                                                    Label : NEXT
+                                                      "_CLOSE
+                                                      Label : NEXT
+                                                        .
+                                                        Label : NEXT
+                                                          $f
+                                                          Label : NEXT
+                                                            ->
+                                                            Label : NEXT
+                                                              I
+                                                              Label : NEXT
+                                                                (
+                                                                Label : NEXT
+                                                                  'J'
+                                                                  Label : NEXT
+                                                                    .
+                                                                    Label : NEXT
+                                                                      $g
+                                                                      Label : NEXT
+                                                                        [
+                                                                        Label : NEXT
+                                                                          1
+                                                                          Label : NEXT
+                                                                            ]
+                                                                            Label : NEXT
+                                                                              .
+                                                                              Label : NEXT
+                                                                                $h
+                                                                                Label : NEXT
+                                                                                  [
+                                                                                  Label : NEXT
+                                                                                    2
+                                                                                    Label : NEXT
+                                                                                      ]
+                                                                                      Label : NEXT
+                                                                                        )
+                                                                                        Label : NEXT
+                                                                                          .
+                                                                                          Label : NEXT
+                                                                                            'K'
+                                                                                            Label : NEXT
+                                                                                              ;
+                                                                                              Label : NEXT
+                                                                                                ?>
+                                                                                                Label : NEXT
+                                                                                                  /**/
+                                                                                                  Label : NEXT
+                                                                                                    /* * */

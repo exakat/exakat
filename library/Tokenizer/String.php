@@ -24,7 +24,7 @@ class String extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.setProperty('fullcode', fullcode.out('CONTAIN').next().fullcode);
+fullcode.setProperty('fullcode', '"' + fullcode.out('CONTAIN').next().getProperty('fullcode') + '"');
 
 if (fullcode.code.length() > 1) {
     if (fullcode.code.substring(0, 1) in ["'", '"']) {
