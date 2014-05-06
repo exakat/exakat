@@ -2336,6 +2336,33 @@ close_curly.bothE('NEXT').each{ g.removeEdge(it); }
 ";
             unset($actions['to_variable']);
         }
+        
+        if (isset($actions['makeForeachSequence'])) {
+            $qactions[] = " 
+/* make Foreach Sequence */ 
+
+block = g.addVertex(null, [code:'Block With Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, modifiedBy:'_Foreach', fullcode:'{ /**/ } ']);
+g.addEdge(null, it.in('CLASS').next(),     block, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
+g.addEdge(null, it.in('FUNCTION').next(),  block, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
+g.addEdge(null, it.in('NAMESPACE').next(), block, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
+g.addEdge(null, it.in('FILE').next(),      block, 'FILE',      [file: it.inE('FILE').next().file]);
+
+element1 = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+element2 = element1.out('NEXT').next();
+
+g.addEdge(block, element1, 'ELEMENT');
+element1.setProperty('order', 0);
+g.addEdge(block, element2, 'ELEMENT');
+element2.setProperty('order', 1);
+
+g.addEdge(element1.in('NEXT').next(), block, 'NEXT');
+g.addEdge(block, element2.out('NEXT').next(), 'NEXT');
+element1.bothE('NEXT').each{ g.removeEdge(it); }
+element2.bothE('NEXT').each{ g.removeEdge(it); }
+
+";
+            unset($actions['makeForeachSequence']);
+        }
 
         if (isset($actions['while_to_block'])) {
             $qactions[] = " 

@@ -81,6 +81,24 @@ class _Foreach extends TokenAuto {
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('token' => 'T_COLON'),
                                    7 => array('atom'  => 'yes'),
+                                   8 => array('atom'  => 'yes'),
+                                   9 => array('token' => 'T_ENDFOREACH'),
+        );
+        
+        $this->actions = array( 'makeForeachSequence' => true,
+                                'keepIndexed' => true);
+        $this->checkAuto(); 
+
+    // @doc foreach($a as $b) : code endforeach
+        $this->conditions = array( 0  => array('token' => _Foreach::$operators,
+                                               'atom' => 'none'),
+                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   2 => array('atom' => $operands), 
+                                   3 => array('token' => 'T_AS'),
+                                   4 => array('atom'  => array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property' )),
+                                   5 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                   6 => array('token' => 'T_COLON'),
+                                   7 => array('atom'  => 'yes'),
                                    8 => array('token' => 'T_ENDFOREACH'),
         );
         
@@ -101,8 +119,8 @@ class _Foreach extends TokenAuto {
         $this->checkAuto(); 
 
     // @doc foreach($a as $b) : code ; endforeach
-        $this->conditions = array( 0  => array('token' => _Foreach::$operators,
-                                               'atom'  => 'none'),
+        $this->conditions = array( 0 => array('token'  => _Foreach::$operators,
+                                              'atom'   => 'none'),
                                    1 => array('token'  => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'   => $operands), 
                                    3 => array('token'  => 'T_AS'),
@@ -138,7 +156,7 @@ class _Foreach extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-it.fullcode = "foreach(" + it.out("SOURCE").next().fullcode + " as " + it.out("VALUE").next().fullcode + ")" + it.out("LOOP").next().fullcode;
+fullcode.setProperty("fullcode", "foreach(" + it.out("SOURCE").next().getProperty('fullcode') + " as " + it.out("VALUE").next().getProperty('fullcode') + ")" + it.out("LOOP").next().getProperty('fullcode'));
 
 GREMLIN;
     }
