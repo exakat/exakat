@@ -104,7 +104,7 @@ class Appinfo extends \Report\Content {
                             'Redeclared PHP Functions'  => 'Functions/RedeclaredPhpFunctions',
                             'Recursive Functions'  => 'Functions/Recursive',
                             'Closures'   => 'Functions/Closures',
-                            'Typehint'   => 'Functions/Typephints',
+                            'Typehint'   => 'Functions/Typehints',
                             'Static variables'   => 'Variables/StaticVariables',
                     ),
                     'Classes' => array(
