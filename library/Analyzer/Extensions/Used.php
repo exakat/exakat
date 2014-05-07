@@ -17,6 +17,7 @@ class Used extends Analyzer\Analyzer {
     }
 
     public function analyze() {
+        return true;
         $depends = $this->dependsOn();
 
         $this->atomIs('Index')
