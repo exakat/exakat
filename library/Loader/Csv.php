@@ -37,6 +37,29 @@ cd ..
 sh scripts/restart.sh
 SHELL
 );
+
+		$context_options = array (
+			'http' => array (
+				'method' => 'GET',
+				'ignore_errors' => true,
+				'header'=>
+					"Content-type: application/json\r\n"
+					. "Accept: application/json\r\n"
+					. "User-Agent: Exakat v 1.0\r\n"
+			)
+		);
+
+		$context = stream_context_create($context_options);
+		$response = file_get_contents('http://localhost:7474/db/data/', false, $context);
+//		var_dump($response);
+		
+		if (strpos($response, 'NOT_FOUND') !== false) {
+		    sleep(1);
+    		$response = file_get_contents('http://localhost:7474/db/data/', false, $context);
+//    		var_dump($response);
+//    		die(__METHOD__);		    
+		}
+
         preg_match("/Importing (\d+) Nodes/is", $res, $nodes);
         preg_match("/Importing (\d+) Relationships/is", $res, $relations);
         
