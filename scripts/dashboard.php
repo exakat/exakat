@@ -37,9 +37,9 @@ if (!file_exists('tests/analyzer/phpunit.txt')) {
 } else {
     $results = file_get_contents('tests/analyzer/phpunit.txt');
 
-    if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+)\./is', $results, $R)) {
+    if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+), Skipped: (\d+)\./is', $results, $R)) {
         preg_match_all('/\d+\) Test\\\\(\w+)::/is', $results, $R2);
-        print "There were {$R[3]} failures in ".count(array_unique($R2[1]))." tests! Check the tests! \n";
+        print "There were {$R[1]} failures in ".count(array_unique($R2[1]))." tests! Check the tests! \n";
         print "  + ".join("\n  + ", array_unique($R2[1]))."\n\n";
         
         if ($R[1] != $total_UT) {
@@ -53,6 +53,8 @@ if (!file_exists('tests/analyzer/phpunit.txt')) {
         } else {
             print "All tests where recently run and OK\n";
         }
+    } else {
+        print "Nothing found in the unit tests!\n";
     }
 }
 print "\n";
@@ -163,5 +165,46 @@ if ($extra_docs) {
 } else {
     print "All ".count($analyzers)." docs have analyzers\n\n";
 }
+
+$sqlite = new Sqlite3('/Users/famille/Desktop/analyze/data/analyzers.sqlite');
+$res = $sqlite->query("select folder, name from analyzers");
+
+$in_sqlite = array();
+while($row = $res->fetchArray()) {
+    $in_sqlite[] = $row['folder'].'/'.$row['name'];
+}
+
+$missing_in_sqlite = array_diff($analyzers, $in_sqlite);
+
+$id_unassigned = $sqlite->query("select id from categories where name='Unassigned'")->fetchArray();
+$id_unassigned = $id_unassigned[0];
+
+if (count($missing_in_sqlite)) {
+    print count($missing_in_sqlite)." analysers missing in Sqlite. Inserting them\n";
+    
+    foreach($missing_in_sqlite as $analyser) {
+        list($folder, $name) = explode('/', $analyser);
+        
+        $sqlite->query("insert into analyzers ('folder', 'name') values ('$folder', '$name')");
+        $id = $sqlite->lastInsertRowID();
+
+        $sqlite->query("insert into analyzers_categories values ('$id', '$id_unassigned')"); 
+    }
+}
+
+$unassigned = $sqlite->query("select count(*) from analyzers_categories as ac join categories as c on ac.id_categories = c.id")->fetchArray(); 
+if ($unassigned[0] > 0) { 
+    print $unassigned[0]." analyzers are 'unassigned'. \n";
+} else {
+    print "All ".$unassigned[0]." analyzers are assigned. \n";
+}
+
+$unassigned2 = $sqlite->query("select count(*) from analyzers as a left join analyzers_categories as ac on ac.id_analyzer = a.id where ac.id_categories IS NULL")->fetchArray(); 
+if ($unassigned2[0] > 0) { 
+    print $unassigned2[0]." analysers are not linked! \n";
+} else {
+    print "All ".$unassigned[0]." analyzers are linked. \n\n";
+}
+
 
 ?>
