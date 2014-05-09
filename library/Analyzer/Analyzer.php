@@ -41,6 +41,9 @@ class Analyzer {
     const T_QUICK = "30";
     const T_SLOW = "60";
     const T_LONG = "360";
+    
+    protected $themes = array();
+    static public $docs = null;
 
     public function __construct($client) {
         $this->client = $client;
@@ -49,6 +52,10 @@ class Analyzer {
         $this->code = get_class($this);
         
         $this->human_classname = str_replace('\\', '/', substr(get_class($this), 9));
+        
+        if (is_null(Analyzer::$docs)) {
+            Analyzer::$docs = new Docs('./data/analyzers.sqlite');
+        }
     } 
     
     public static function getClass($name) {
@@ -151,6 +158,13 @@ class Analyzer {
         return $this->name;
     }
 
+    static public function getThemeAnalyzers($theme) {
+        if (is_null(Analyzer::$docs)) {
+            Analyzer::$docs = new Docs('./data/analyzers.sqlite');
+        }
+        return Analyzer::$docs->getThemeAnalyzers($theme);
+    }
+    
     function getThemes() {
         if (empty($this->themes)) {
             return array();
