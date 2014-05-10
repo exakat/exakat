@@ -10,7 +10,7 @@ class _Return extends TokenAuto {
         // return ; 
         $this->conditions = array( 0 => array('token' => _Return::$operators,
                                               'atom' => 'none' ),
-                                   1 => array('token' => array('T_SEMICOLON'))
+                                   1 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_ENDIF'))
         );
         
         $this->actions = array('addEdge'   => array(0 => array('Void' => 'CODE')),
