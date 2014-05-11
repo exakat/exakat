@@ -24,7 +24,7 @@ class Postplusplus extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-it.fullcode = it.out("POSTPLUSPLUS").next().fullcode + it.code; 
+fullcode.setProperty('fullcode', fullcode.out("POSTPLUSPLUS").next().getProperty('fullcode') + fullcode.getProperty('code')); 
 
 GREMLIN;
     }
