@@ -472,7 +472,7 @@ function process_file($filename, $log_file) {
             }
 
             $token_value = $Php->getTokenname($token[0]);
-            if ($token_value == 'T_CURLY_OPEN') {
+            if ($token_value == 'T_CURLY_OPEN' || $token_value == 'T_DOLLAR_OPEN_CURLY_BRACES') {
                 $block_level++;
             }
 
@@ -836,10 +836,17 @@ function process_file($filename, $log_file) {
     
     $T[-1] = $client->makeNode()->setProperty('token', 'T_ROOT')
                                 ->setProperty('code', '/**/')
-                                ->setProperty('line', 0)
                                 ->setProperty('hidden', true)
                                 ->save();
     $regexIndex['ROOT']->relateTo($T[-1], 'INDEXED')->save();
+
+    $fileNode = $client->makeNode()->setProperty('token', 'T_FILENAME')
+                                   ->setProperty('filename', "$filename")
+                                   ->setProperty('code', "$filename")
+                                   ->setProperty('fullcode', "$filename")
+                                   ->save();
+    $fileNode->relateTo($T[0], 'FILE')->save();
+
     $classNode->relateTo($T[-1]);
     
     $last     = $client->makeNode()->setProperty('token', 'T_END')
