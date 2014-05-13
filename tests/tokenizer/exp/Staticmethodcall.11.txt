@@ -1,0 +1,136 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    ::
+    Label : METHOD
+      U
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            ->
+            Label : OBJECT
+              $g
+            Label : METHOD
+              V
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+          Label : METHOD
+            W
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $h
+    Label : CLASS
+      T
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : PROPERTY
+                Q
+              Label : OBJECT
+                $d
+    Label : THEN
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            ->
+            Label : PROPERTY
+              S
+            Label : OBJECT
+              $f
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $e
+            Label : INDEX
+              'R'
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ::
+        Label : METHOD
+          K
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'L'
+        Label : CLASS
+          J
+    Label : THEN
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            ::
+            Label : METHOD
+              O
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'P'
+            Label : CLASS
+              N
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'M'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ::
+      Label : METHOD
+        H
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'I'
+      Label : CLASS
+        G
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $b
+      Label : INDEX
+        'F'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ::
+      Label : METHOD
+        D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'E'
+      Label : CLASS
+        C
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'B'

@@ -15,10 +15,11 @@ class Staticmethodcall extends TokenAuto {
                                     1 => array('atom' => array('Functioncall', 'Methodcall')),
                                  );
         
-        $this->actions = array('makeEdge'   => array( -1 => 'CLASS',
-                                                       1 => 'METHOD'),
-                               'atom'       => 'Staticmethodcall',
-                               'cleanIndex' => true);
+        $this->actions = array('makeEdge'     => array( -1 => 'CLASS',
+                                                         1 => 'METHOD'),
+                               'makeSequence' => 'it',
+                               'atom'         => 'Staticmethodcall',
+                               'cleanIndex'   => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();
@@ -27,7 +28,7 @@ class Staticmethodcall extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.out("CLASS").next().fullcode + "::" + fullcode.out("METHOD").next().fullcode; 
+fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty('fullcode') + "::" + fullcode.out("METHOD").next().getProperty('fullcode')); 
 
 GREMLIN;
     }
