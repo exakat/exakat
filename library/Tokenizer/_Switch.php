@@ -42,6 +42,7 @@ class _Switch extends TokenAuto {
                                                         5 => 'CASES',
                                                         6 => 'DROP',),
                                'atom'         => 'Switch',
+                               'property'     => array('alternative' => 'true'),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
         $this->checkAuto();

@@ -75,6 +75,7 @@ class _While extends TokenAuto {
                                                          6 => 'DROP',
                                                         ),
                                'makeSequence' => 'it',
+                               'property'     => array('alternative' => 'true'),
                                'atom'         => 'While',
                                'cleanIndex'   => true);
         $this->checkAuto();
@@ -85,7 +86,8 @@ class _While extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = "while " + fullcode.out("CONDITION").next().fullcode + " " + fullcode.out("LOOP").next().fullcode;
+fullcode.setProperty('fullcode', "while " + fullcode.out("CONDITION").next().getProperty('fullcode') + " " + fullcode.out("LOOP").next().getProperty('fullcode'));
+
 GREMLIN;
 
     }

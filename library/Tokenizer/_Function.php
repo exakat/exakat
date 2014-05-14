@@ -9,12 +9,14 @@ class _Function extends TokenAuto {
     public function _check() {
         // function x(args) {}
         $this->conditions = array(0 => array('token' => _Function::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => array('Identifier', 'Boolean')),
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => array('Identifier', 'Boolean')),
                                   2 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  3 => array('atom' => 'Arguments'),
+                                  3 => array('atom'  => 'Arguments'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('atom' => 'Sequence'),
+                                  5 => array('atom'  => 'Sequence',
+                                             'property' => array('block' => 'true')
+                                             ),
         );
         
         $this->actions = array('transform'     => array( 1 => 'NAME',
@@ -30,12 +32,13 @@ class _Function extends TokenAuto {
 
         // function x(args); for interfaces
         $this->conditions = array(0 => array('token' =>  _Function::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => array('Identifier', 'Boolean')),
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => array('Identifier', 'Boolean')),
                                   2 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  3 => array('atom' => 'Arguments'),
+                                  3 => array('atom'  => 'Arguments'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('token' => 'T_SEMICOLON'),
+                                  5 => array('token' => 'T_SEMICOLON',
+                                             'atom'  => 'none'),
         );
         
         $this->actions = array('transform'     => array( 1 => 'NAME',

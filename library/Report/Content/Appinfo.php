@@ -72,16 +72,20 @@ class Appinfo extends \Report\Content {
 //                            'Iffectations'   => 'Structures/Iffectation',
 
                             '@ operator'     => 'Structures/Noscream',
-                            'include_once'   => 'Structures/OnceUsage',
+                            'Alternative syntax' => 'Php/AlternativeSyntax',
+                            'Magic constants' => 'Constants/MagicConstantUsage',
                             'halt compiler'  => 'Php/Haltcompiler',
+
+                            'Autoload'       => 'Php/AutoloadUsage',
+                            'include_once'   => 'Structures/OnceUsage',
+
                             'Throw exceptions' => 'Php/ThrowUsage',
                             'Try/Catch'      => 'Php/TryCatchUsage',
                             'Trigger error'  => 'Php/TriggerErrorUsage',
                             
                             'Goto'           => 'Php/Gotonames',
                             'Labels'         => 'Php/Labelnames',
-                            'Magic constants' => 'Constants/MagicConstantUsage',
-                            'Autoload'       => 'Php/AutoloadUsage',
+
 
                             'Eval'           => 'Structures/EvalUsage',
                             'Die/Exit'       => 'Structures/ExitUsage',
@@ -109,14 +113,27 @@ class Appinfo extends \Report\Content {
                     ),
                     'Classes' => array(
                             'Classes'    => 'Classes/Classnames',
+                            'Abstract classes' => 'Classes/Abstractclass',
+
                             'Interfaces' => 'Interfaces/Interfacenames',
+                            'Traits' => 'Classes/Traitsnames',
+
                             'Static properties'   => 'Classes/StaticProperties',
+
                             'Static methods'   => 'Classes/StaticMethods',
-                            'PHP 4 constructor' => 'Classes/OldStyleConstructor',
+                            'Abstract methods' => 'Classes/Abstractmethods',
+                            'Final methods' => 'Classes/Finalmethods',
+
+                            'Class constants' => 'Classes/ConstantDefinition',
+
                             'Magic methods' => 'Classes/MagicMethod',
+                            'Cloning' => 'Classes/CloningUsage',
+
+                            'PHP 4 constructor' => 'Classes/OldStyleConstructor',
                     ),
                     'Constants' => array(
                             'Constants'     => 'Constants/ConstantUsage',
+                            'Variable Constant' => 'Constants/VariableConstant',
                             'PHP constants' => 'Constants/PhpConstantUsage',
                             'PHP Magic constants' => 'Constants/MagicConstantUsage',
                     ),

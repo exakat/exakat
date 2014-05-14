@@ -112,7 +112,7 @@ class _Foreach extends TokenAuto {
                                                         8 => 'DROP',
                                                       ),
                                'atom'         => 'Foreach',
-                               'property'     => array('Alternative' => 'yes'),
+                               'property'     => array('alternative' => 'true'),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
@@ -144,7 +144,7 @@ class _Foreach extends TokenAuto {
                                                         9 => 'DROP',
                                                       ),
                                'atom'         => 'Foreach',
-                               'property'     => array('Alternative' => 'yes'),
+                               'property'     => array('alternative' => 'true'),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );

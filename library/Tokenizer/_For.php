@@ -98,7 +98,7 @@ class _For extends TokenAuto {
                                                        10 => 'DROP', 
                                                       ),
                                'atom'         => 'For',
-                               'property'     => array('Alternative' => 'yes'),
+                               'property'     => array('alternative' => 'true'),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
@@ -133,7 +133,7 @@ class _For extends TokenAuto {
                                                        11 => 'DROP', 
                                                       ),
                                'atom'         => 'For',
-                               'property'     => array('Alternative' => 'yes'),
+                               'property'     => array('alternative' => 'true'),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
