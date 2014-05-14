@@ -7,6 +7,8 @@ use Analyzer;
 class BreakNonInteger extends Analyzer\Analyzer {
     protected $severity  = \Analyzer\Analyzer::S_MINOR;
     protected $timeToFix = \Analyzer\Analyzer::T_QUICK;
+    
+    public $phpversion = "5.4-";
 
     public function analyze() {
         $this->atomIs("Break")
