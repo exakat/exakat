@@ -7,7 +7,8 @@ use Analyzer;
 class Alias extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Nsname")
+        $this->atomIs("Use")
+             ->outIs('USE')
              ->outIs('AS');
     }
 }

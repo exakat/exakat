@@ -9,8 +9,8 @@ class _Namespace extends TokenAuto {
     public function _check() {
         // namespace {} 
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => 'Sequence'),
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => 'Sequence'),
         );
         
         $this->actions = array('insert_global_ns' => 1,
@@ -19,9 +19,9 @@ class _Namespace extends TokenAuto {
 
         // namespace myproject {} 
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => array('Identifier', 'Nsname')),
-                                  2 => array('atom' => 'Sequence'),
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => array('Identifier', 'Nsname')),
+                                  2 => array('atom'  => 'Sequence'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'NAMESPACE',
@@ -33,9 +33,9 @@ class _Namespace extends TokenAuto {
 
         // namespace myproject ; 
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => array('Identifier', 'Nsname')),
-                                  2 => array('filterOut' => array('T_NS_SEPARATOR')),
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => array('Identifier', 'Nsname')),
+                                  2 => array('token' => 'T_SEMICOLON'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'NAMESPACE'),
@@ -50,8 +50,8 @@ class _Namespace extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.out("NAMESPACE").each{ fullcode.fullcode = "namespace " + it.fullcode;} 
-fullcode.filter{ it.out('NAMESPACE').count() == 0}.each{ fullcode.fullcode = "namespace Global";} 
+fullcode.out("NAMESPACE").each{ fullcode.setProperty('fullcode', "namespace " + it.getProperty('fullcode');} 
+fullcode.filter{ it.out('NAMESPACE').count() == 0}.each{ fullcode.setProperty('fullcode', "namespace Global");} 
 
 GREMLIN;
     }
