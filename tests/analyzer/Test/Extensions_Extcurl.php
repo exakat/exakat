@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Extensions_Extcurl extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testExtensions_Extcurl01()  { $this->generic_test('Extensions_Extcurl.01'); }
+    public function testExtensions_Extcurl02()  { $this->generic_test('Extensions_Extcurl.02'); }
 }
 ?>
