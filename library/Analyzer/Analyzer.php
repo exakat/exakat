@@ -368,6 +368,22 @@ GREMLIN;
         return $this;
     }
 
+    function classIs($class) {
+        if (is_array($class)) {
+            die('I don t know array for '.__METHOD__);
+//            $this->methods[] = 'as("classIsNot").inE("CLASS").filter{it.classname not in [\''.join("', '", $class).'\']}.back("classIsNot")';
+        } else {
+//            $this->methods[] = 'as("classIs").inE("CLASS").has("classname", "'.$class.'").back("classIs")';
+            if ($class == 'Global') {
+                $this->methods[] = 'as("classIs").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token != "T_CLASS"}.back("classIs")';
+            } else {
+                $this->methods[] = 'as("classIs").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token != "T_CLASS" || it.out("NAME").next().code != "'.$class.'"}.back("classIs")';
+            }
+        }
+        
+        return $this;
+    }
+
     function classIsNot($class) {
         if (is_array($class)) {
             die('I don t know array for '.__METHOD__);
@@ -386,9 +402,7 @@ GREMLIN;
     function functionIs($function) {
         if (is_array($function)) {
             die('I don t know array for '.__METHOD__);
-//            $this->methods[] = 'as("functionIs").inE("FUNCTION").filter{it.function in [\''.join("', '", $function).'\']}.back("functionIs")';
         } else {
-//            $this->methods[] = 'as("functionIs").inE("FUNCTION").has("function", "'.$function.'").back("functionIs")';
             if ($function == 'Global') {
                 $this->methods[] = 'as("functionIs").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token != "T_FUNCTION"}.back("functionIs")';
             } else {
@@ -410,18 +424,6 @@ GREMLIN;
             } else {
                 $this->methods[] = 'as("functionIsNot").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || it.out("NAME").next().code != "'.$class.'"}.back("functionIsNot")';
             }
-        }
-        
-        return $this;
-    }
-    
-    function classIs($class) {
-        if (is_array($class)) {
-            $this->methods[] = 'as("classIs").inE("CLASS").filter{it.classname in [\''.join("', '", $class).'\']}.back("classIs")';
-        } else {
-//            $this->methods[] = 'filter{it.inE("CLASS").classname == "'.$class.'"}';
-// @note I don't understand why filter won,t work.
-            $this->methods[] = 'as("classIs").inE("CLASS").has("classname", "'.$class.'").back("classIs")';
         }
         
         return $this;
