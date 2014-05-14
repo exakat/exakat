@@ -54,7 +54,7 @@ class Analyzer {
         $this->human_classname = str_replace('\\', '/', substr(get_class($this), 9));
         
         if (is_null(Analyzer::$docs)) {
-            Analyzer::$docs = new Docs('./data/analyzers.sqlite');
+            Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
         }
     } 
     
@@ -370,9 +370,14 @@ GREMLIN;
 
     function classIsNot($class) {
         if (is_array($class)) {
-            $this->methods[] = 'as("classIsNot").inE("CLASS").filter{it.classname not in [\''.join("', '", $class).'\']}.back("classIsNot")';
+            die('I don t know array for '.__METHOD__);
+//            $this->methods[] = 'as("classIsNot").inE("CLASS").filter{it.classname not in [\''.join("', '", $class).'\']}.back("classIsNot")';
         } else {
-            $this->methods[] = 'as("classIsNot").inE("CLASS").hasNot("classname", "'.$class.'").back("classIsNot")';
+            if ($class == 'Global') {
+                $this->methods[] = 'as("classIsNot").in.loop(1){!(it.object.token in ["T_CLASS"])}.back("classIsNot")';
+            } else {
+                $this->methods[] = 'as("classIsNot").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || it.out("NAME").next().code != "'.$class.'"}.back("classIsNot")';
+            }
         }
         
         return $this;
@@ -380,9 +385,15 @@ GREMLIN;
     
     function functionIs($function) {
         if (is_array($function)) {
-            $this->methods[] = 'as("functionIs").inE("FUNCTION").filter{it.function in [\''.join("', '", $function).'\']}.back("functionIs")';
+            die('I don t know array for '.__METHOD__);
+//            $this->methods[] = 'as("functionIs").inE("FUNCTION").filter{it.function in [\''.join("', '", $function).'\']}.back("functionIs")';
         } else {
-            $this->methods[] = 'as("functionIs").inE("FUNCTION").has("function", "'.$function.'").back("functionIs")';
+//            $this->methods[] = 'as("functionIs").inE("FUNCTION").has("function", "'.$function.'").back("functionIs")';
+            if ($function == 'Global') {
+                $this->methods[] = 'as("functionIs").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token != "T_FUNCTION"}.back("functionIs")';
+            } else {
+                $this->methods[] = 'as("functionIs").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token != "T_FILENAME" || it.out("NAME").next().code != "'.$function.'"}.back("functionIs")';
+            }
         }
         
         return $this;
@@ -390,9 +401,15 @@ GREMLIN;
 
     function functionIsNot($function) {
         if (is_array($function)) {
-            $this->methods[] = 'as("functionIsNot").inE("FUNCTION").filter{it.function not in [\''.join("', '", $function).'\']}.back("functionIsNot")';
+            die('I don t know array for '.__METHOD__);
+//            $this->methods[] = 'as("functionIs").inE("FUNCTION").filter{it.function in [\''.join("', '", $function).'\']}.back("functionIs")';
         } else {
-            $this->methods[] = 'as("functionIsNot").inE("FUNCTION").hasNot("function", "'.$function.'").back("functionIsNot")';
+//            $this->methods[] = 'as("functionIs").inE("FUNCTION").has("function", "'.$function.'").back("functionIs")';
+            if ($class == 'Global') {
+                $this->methods[] = 'as("functionIsNot").in.loop(1){!(it.object.token in ["T_FUNCTION"])}.back("functionIsNot")';
+            } else {
+                $this->methods[] = 'as("functionIsNot").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || it.out("NAME").next().code != "'.$class.'"}.back("functionIsNot")';
+            }
         }
         
         return $this;
@@ -415,8 +432,13 @@ GREMLIN;
             $this->methods[] = 'as("namespaceIs").inE("NAMESPACE").filter{it.namespace in [\''.join("', '", $namespace).'\']}.back("namespaceIs")';
         } else {
 // @note I don't understand why filter won,t work.
-            $this->methods[] = 'as("namespaceIs").inE("NAMESPACE").has("namespace", "'.$namespace.'").back("namespaceIs")';
+            if ($namespace == 'Global') {
+                $this->methods[] = 'as("namespaceIs").in.loop(1){!(it.object.token in ["T_NAMESPACE", "T_FILENAME"])}.filter{ it.token == "T_FILENAME" || it.out("NAMESPACE").next().code == "Global" }.back("namespaceIs")';
+            } else {
+                $this->methods[] = 'as("namespaceIs").in.loop(1){!(it.object.token in ["T_NAMESPACE", "T_FILENAME"])}.filter{ it.token == "T_NAMESPACE" && it.code == "'.$namespace.'" }.back("namespaceIs")';
+            }
         }
+//        $this->printQuery();
         
         return $this;
     }
@@ -458,9 +480,9 @@ GREMLIN;
 
     function analyzerIs($analyzer) {
         if (is_array($analyzer)) {
-            $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.count() != 0}', $analyzer);
+            $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any()}', $analyzer);
         } else {
-            $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).count() != 0}', $analyzer);
+            $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).any()}', $analyzer);
         }
         
         return $this;
@@ -885,10 +907,15 @@ GREMLIN;
             print_r($this->queries_arguments[$id]);
 
             foreach($this->queries_arguments[$id] as $name => $value) {
-                if (is_string($value)) {
-                    $query = str_replace($name, "'".str_replace('\\', '\\\\', $value)."'", $query);
-                } else {
+                if (is_array($value)) {
                     $query = str_replace($name, "['".join("', '", $value)."']", $query);
+                } elseif (is_string($value)) {
+                    $query = str_replace($name, "'".str_replace('\\', '\\\\', $value)."'", $query);
+                } elseif (is_int($value)) {
+                    $query = str_replace($name, $value, $query);
+                } else {
+                    print "Cannot process argument of type ".gettype($value)."\n";
+                    die(__METHOD__);
                 }
             }
             
