@@ -7,10 +7,10 @@ class _Continue extends TokenAuto {
     static public $atom = 'Continue';
 
     public function _check() {
-        // continue ;
+        // continue ; without nothing behind
         $this->conditions = array(0 => array('token' => _Continue::$operators,
                                              'atom' => 'none'),
-                                  1 => array('token' => 'T_SEMICOLON')
+                                  1 => array('token' => array('T_SEMICOLON', 'T_ENDIF'))
                                   );
         
         $this->actions = array('addEdge'     => array(0 => array('Void' => 'LEVEL')),
@@ -24,7 +24,7 @@ class _Continue extends TokenAuto {
                                   1 => array('atom' => array('Integer', 'Void'))
                                   );
         
-        $this->actions = array('transform'    => array( '1' => 'LEVEL'),
+        $this->actions = array('transform'  => array( '1' => 'LEVEL'),
                                'atom'       => 'Continue');
         $this->checkAuto();
 
@@ -36,9 +36,9 @@ class _Continue extends TokenAuto {
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   );
         
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'LEVEL',
-                                                        3 => 'DROP'),
+        $this->actions = array('transform'  => array( 1 => 'DROP',
+                                                      2 => 'LEVEL',
+                                                      3 => 'DROP'),
                                'atom'       => 'Continue');
         $this->checkAuto();
 
