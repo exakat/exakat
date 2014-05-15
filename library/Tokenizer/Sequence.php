@@ -281,16 +281,6 @@ class Sequence extends TokenAuto {
                                );
         $this->checkAuto(); 
 
-        // Sequence followed by ; followed by elseif atom.
-        $this->conditions = array(  -1 => array('atom'  => 'Sequence'),
-                                     0 => array('token' => Sequence::$operators),
-                                     1 => array('token' => 'T_ENDFOREACH')
-        );
-        
-        $this->actions = array('transform'   => array(0 => 'DROP'),
-                               'keepIndexed' => true);
-        $this->checkAuto(); 
-
         // @note ; without no more NEXT
         $this->conditions = array( 0 => array('atom'  => 'Sequence' ));
         
