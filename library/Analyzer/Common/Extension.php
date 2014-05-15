@@ -70,13 +70,9 @@ class Extension extends Analyzer\Analyzer {
                  ->code($classes);
             $this->prepareQuery();
 
-            $classes = array_map(function ($x) { return "\\".$x; } ,  $classes);
+//            $classes = array_map(function ($x) { return "\\".$x; } ,  $classes);
             $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
-                 ->fullcode($classes);
-                 ;
-            $this->prepareQuery();
-
-            $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
+                 ->outIs('ELEMENT')
                  ->code($classes);
             $this->prepareQuery();
         }
