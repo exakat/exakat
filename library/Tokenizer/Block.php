@@ -33,7 +33,7 @@ class Block extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = "{ /**/ } "; 
+fullcode.setProperty('fullcode', "{ /**/ } "); 
 GREMLIN;
     }
 }
