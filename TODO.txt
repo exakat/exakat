@@ -267,3 +267,17 @@ Record all scripts's running time.
 Check file names for special chars ($ or 把).
 
 analyzer names are sensitive to case. Make sure this is not a problem.
+Faire un Content avec des métrics (Nombre d'arguments, longueur de line, nombre de constants... etc...)
+Empty Classes / Functions
+
+Checker les différentes versions de PHP
+Paraleliser les vérifications de compilation de PHP 
+
+Export class hierarchy, UML documents, etc.
+Reference of a $value and the last array element remain even after the foreach loop. It is recommended to destroy it by unset(). : check reuse of blind variables between arrays
+Summary of traits's methods overlap (local to class, trait, inherited class). 
+Traits of Traits
+abstract, static traits.
+silently resolved conflicts in traits (overlapping local/trait/trait/class)
+Supports uploaded files 
+share standard with different chapters (files, sockets, uploaded_file, etc....)
