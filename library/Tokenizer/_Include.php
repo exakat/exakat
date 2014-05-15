@@ -42,11 +42,11 @@ class _Include extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-if (fullcode.noParenthesis == 'true') {
-    s = fullcode.out("ARGUMENTS").next().fullcode;
-    fullcode.fullcode = it.code + " " + s.substring(1, s.length() - 1);
+if (fullcode.getProperty('noParenthesis') == 'true') {
+    s = fullcode.out("ARGUMENTS").next().getProperty('fullcode');
+    fullcode.setProperty('fullcode', it.getProperty('code') + " " + s.substring(1, s.length() - 1));
 } else {
-    fullcode.fullcode = fullcode.code + fullcode.out("ARGUMENTS").next().fullcode;
+    fullcode.setProperty('fullcode', fullcode.getProperty('code') + fullcode.out("ARGUMENTS").next().getProperty('fullcode'));
 }
 
 GREMLIN;
