@@ -93,22 +93,27 @@ if (STYLE == 'BOOLEAN') {
 
     $return[] = $vertices[0][0];
 } elseif (STYLE == 'ALL') {
-     $queryTemplate = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out.as('x')
-    .inE('FILE').as('file').back('x')
+      $queryTemplate = <<<GREMLIN
+g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.fullcode, 'File':'None', 'Namespace':'Globaln', 'Class':'Globalc', 'Function':'Globalf' ]; }.as('x').
+transform{ it.in.loop(1){true}{ it.object.token in ['T_CLASS', 'T_FUNCTION', 'T_NAMESPACE', 'T_FILENAME']}.each{ m[it.atom] = it.code;} m; }.transform{ m; }
+GREMLIN;
+/*    
     .inE('NAMESPACE').as('namespace').back('x')
     .inE('CLASS').as('class').back('x')
     .inE('FUNCTION').as('function').back('x')
-    .select{it.fullcode}{it.file}{it.namespace}{it.classname}{it.function}
-GREMLIN;
+*/
+
+//{it.namespace}{it.classname}{it.function}
     $vertices = query($client, $queryTemplate);
 
     $return = array();
     foreach($vertices as $k => $v) {
         $row = array();
-        foreach($v[0] as $V) {
-            $row[] = $V;
-        }
+        $row[] = $v[0]['Fullcode'];
+        $row[] = $v[0]['File'];
+        $row[] = $v[0]['Namespace'];
+        $row[] = $v[0]['Class'];
+        $row[] = $v[0]['Function'];
         $return[] = $row;
         
     }
