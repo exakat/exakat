@@ -63,6 +63,7 @@ $tokens = 0;
 $indexed = array();
 $next = array();
 $fullcode = array();
+$lone_token = array();
 $files = glob('projects/*/log/stat.log');
 foreach($files as $file) {
     $log = file_get_contents($file);
@@ -80,6 +81,10 @@ foreach($files as $file) {
     
     if (preg_match('/no_fullcode : (\d+)/', $log, $R) && $R[1] != 0) {
         $fullcode[] = $file." ({$R[0]})";
+    }
+
+    if (preg_match('/lone_token : (\d+)/', $log, $R) && $R[1] != 0) {
+        $lone_token[] = $file." ({$R[0]})";
     }
 }
 
@@ -102,6 +107,13 @@ if ($fullcode) {
     print "  + ".join("\n  + ", $fullcode)."\n\n";
 } else {
     print "All ".count($files)." stat.log are free of no_fullcode\n";
+}
+
+if ($lone_token) {
+    print count($fullcode)." stat.log have reported lone tokens\n";
+    print "  + ".join("\n  + ", $lone_token)."\n\n";
+} else {
+    print "All ".count($files)." stat.log are free lone tokens\n";
 }
 
 print "\n".count($files)." projects collecting ".number_format($tokens, 0)." tokens\n\n";
@@ -192,7 +204,7 @@ if (count($missing_in_sqlite)) {
     }
 }
 
-$unassigned = $sqlite->query("select count(*) from analyzers_categories as ac join categories as c on ac.id_categories = c.id")->fetchArray(); 
+$unassigned = $sqlite->query("select count(*) from analyzers_categories as ac join categories as c on ac.id_categories = c.id WHERE c.name='Unassigned';")->fetchArray(); 
 if ($unassigned[0] > 0) { 
     print $unassigned[0]." analyzers are 'unassigned'. \n";
 } else {
