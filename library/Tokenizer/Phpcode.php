@@ -9,8 +9,8 @@ class Phpcode extends TokenAuto {
     public function _check() {
         // Normal PHP script
         $this->conditions = array(0 => array('token' => Phpcode::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => 'yes'),
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => 'yes'),
                                   2 => array('token' => 'T_CLOSE_TAG'),
         );
         
