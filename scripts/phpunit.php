@@ -2,8 +2,10 @@
 
 print "Runnign project test for tokenizer\n";
 shell_exec('rm -rf ./projects/test/code/*');
-shell_exec('cp ./tests/tokenizer/source/* ./projects/test/code');
-//shell_exec('cp ./tests/analyzer/source/* ./projects/test/code');
+shell_exec('cp ./tests/tokenizer/source/_* ./projects/test1/code');
+shell_exec('cp ./tests/analyzer/source/[A-Z]* ./projects/test1/code');
+
+shell_exec('cp ./tests/tokenizer/source/[A-Z]* ./projects/test2/code');
 //shell_exec('php bin/project test');
 
 print "Runnign UT for analyzer\n";
