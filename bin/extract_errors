@@ -26,21 +26,19 @@ if ($id = array_search('-json', $args)) {
 define('OUTPUT', false);
 
 $stats = array();
-$stats['files with next'] = queryColumn("g.idx('racines')[['token':'ROOT']].out('INDEXED').out('NEXT').inE('FILE').file");
-$stats['Switch'] = queryColumn("g.idx('racines')[['token':'_Switch']].out('INDEXED').filter{it.out('NEXT').count() > 0}.transform{it.inE('FILE').next().file +  ' ' + it.line}");
-$stats['Function with next'] = queryColumn("g.idx('racines')[['token':'_Function']].out('INDEXED').out('NEXT').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
-$stats['Addition'] = queryColumn("g.idx('racines')[['token':'Addition']].out('INDEXED').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
-$stats['New'] = queryColumn("g.idx('racines')[['token':'_New']].out('INDEXED').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
-$stats['Property'] = queryColumn("g.idx('racines')[['token':'Property']].out('INDEXED').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
-$stats['Not'] = queryColumn("g.idx('racines')[['token':'Not']].out('INDEXED').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
-$stats['Keyvalue'] = queryColumn("g.idx('racines')[['token':'Keyvalue']].out('INDEXED').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
-$stats['Ternary'] = queryColumn("g.idx('racines')[['token':'Ternary']].out('INDEXED').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
-$stats['String'] = queryColumn("g.idx('racines')[['token':'String']].out('INDEXED').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
-$stats['Arguments'] = queryColumn("g.idx('racines')[['token':'Arguments']].out('INDEXED').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
-$stats['PPP'] = queryColumn("g.idx('racines')[['token':'_Ppp']].out('INDEXED').transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
-
-$stats['no_fullcode'] = queryColumn("g.V.has('fullcode', null).filter{!(it.token in ['E_CLASS', 'E_FUNCTION', 'E_NAMESPACE'])}.transform{it.inE('FILE').next().file + ' ' + it.code + ' ' + it.line}");
-
+$stats['files with next'] = queryColumn("g.idx('racines')[['token':'ROOT']].out('INDEXED').out('NEXT').in.loop(1){true}{ it.object.token == 'T_FILENAME'}.code");
+$stats['Function with next'] = queryColumn("g.idx('racines')[['token':'_Function']].out('INDEXED').out('NEXT').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+$stats['Switch'] = queryColumn("g.idx('racines')[['token':'_Switch']].out('INDEXED').filter{it.out('NEXT').any()}.transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+$stats['Addition'] = queryColumn("g.idx('racines')[['token':'Addition']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+$stats['New'] = queryColumn("g.idx('racines')[['token':'_New']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+$stats['Property'] = queryColumn("g.idx('racines')[['token':'Property']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+$stats['Not'] = queryColumn("g.idx('racines')[['token':'Not']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+$stats['Keyvalue'] = queryColumn("g.idx('racines')[['token':'Keyvalue']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+$stats['Ternary'] = queryColumn("g.idx('racines')[['token':'Ternary']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+$stats['String'] = queryColumn("g.idx('racines')[['token':'String']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+$stats['Arguments'] = queryColumn("g.idx('racines')[['token':'Arguments']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+$stats['PPP'] = queryColumn("g.idx('racines')[['token':'_Ppp']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+$stats['no_fullcode'] = queryColumn("g.V.has('fullcode', null).except([g.v(0)]).hasNot('index', 'true').filter{!(it.token in ['INDEX', 'T_ROOT', 'T_END', 'E_CLASS', 'E_FUNCTION', 'E_NAMESPACE'])}.transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
 
 //$stats['test'] = queryOne("m = []; g.V.fill(m); m.size();");
 //print_r($stats);
