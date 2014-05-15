@@ -1558,8 +1558,9 @@ if (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'Ifthe
     previous.setProperty('checkForNext', 'Previous');
 }
 
-if (it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any() &&
-    it.in('NEXT').in('NEXT').filter{!(it.token in ['T_OPEN_PARENTHESIS', 'T_VOID', 'T_USE', 'T_IF'])}.count() == 0) {
+if ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any() &&
+    !it.in('NEXT').in('NEXT').filter{it.token in ['T_IF']}.any() &&
+    !it.in('NEXT').in('NEXT').filter{!(it.token in [ 'T_USE', 'T_VOID'])}.any()) { //'T_OPEN_PARENTHESIS',
     sequence = it;
     previous = it.in('NEXT').next();
     
@@ -1592,6 +1593,7 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 
     suivant.bothE('NEXT').each{ g.removeEdge(it); }
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), suivant, 'DELETE');
+    suivant.setProperty('checkForNext', 'Next sequence');
 }
 
 // lone instruction AFTER
@@ -2486,7 +2488,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_AT', 'T_CASE', 
         'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
         'T_DO',
-        'T_STRING', 'T_INSTEADOF', 'T_INSTANCEOF',
+        'T_STRING', 'T_INSTEADOF', 'T_INSTANCEOF'
         ];
 
 list_after = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
