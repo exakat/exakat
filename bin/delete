@@ -27,6 +27,11 @@ if ($id = array_search('-all', $args)) {
 }
 
 if (FORMAT == 'ALL') {
+    $queryTemplate = "neo4j = g.getRawGraph(); manager = neo4j.index(); manager.nodeIndexNames().each{ g.dropIndex( it ) }; manager.relationshipIndexNames().each{  g.dropIndex( it ) }";
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $queryTemplate, $params);
+    $edges = $query->getResultSet();
+
     $queryTemplate = "g.E.each{ g.removeEdge(it); }";
     $params = array('type' => 'IN');
     $query = new Gremlin\Query($client, $queryTemplate, $params);
