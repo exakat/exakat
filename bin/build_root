@@ -25,6 +25,12 @@ if ($id = array_search('-p', $argv)) {
 $begin = microtime(true);
 $client = new Client();
 
+$indices = array();
+$res = query("g.getIndices()")->toArray();
+foreach($res as $r) {
+    $indices[] = substr($r[0], 7, strpos($r[0], ':') - 7);
+}
+
 $result = query("g.idx('racines')");
 if ($result[0][0] != 'MANUAL[racines:Vertex]') {
     query("g.createManualIndex('racines', Vertex)");
@@ -41,7 +47,7 @@ foreach($res as $r) {
 $faits = array();
 
 $special_tokens = array('Integer', 'String', 'Identifier', 'Magicconstant',
-                        'RawString', 'Variable', 'Float');
+                        'RawString', 'Variable', 'Float', 'Boolean');
 $tokens = array_merge(Token::getTokenizers(), $special_tokens);
 
 foreach($tokens as $id => $class) {
@@ -54,6 +60,7 @@ foreach($tokens as $id => $class) {
  
     $token = $fullclass::$atom;
     if (in_array($token, $faits)) {
+        if (DISPLAY) print "$id) $class : already done as '$token'. Ignoring\n";
         continue; 
     } elseif (in_array($token, $indices)) {
         query("g.dropIndex('$token');");
@@ -61,15 +68,19 @@ foreach($tokens as $id => $class) {
 
     query("g.createManualIndex('$token', Vertex)");
     $faits[] = $token;
+    
     if (DISPLAY) print "$id) $class : created\n";
     
-    if (in_array($class, $special_tokens)) {
+    if (in_array($token, $special_tokens)) {
         if (DISPLAY) print "$id) $class : filling\n";
         $query = "g.V.has('atom', '$token').each{ g.idx('$token').put('token', 'node', it); }";
         query($query);
         if (DISPLAY) print "$id) $class : filled\n";
     }
 }
+
+// special case for the initial Rawstring. 
+query("g.V.has('root', 'true').has('atom','Sequence').each{ g.idx('Sequence').put('token', 'node', it); };");
 
 if (DISPLAY) print "Creating index done\n";
 
