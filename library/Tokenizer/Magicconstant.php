@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class Magicconstant extends TokenAuto {
-    static public $operators = array('T_CLASS_C','T_FUNC_C', 'T_DIR', 'T_FILE', 'T_LINE','T_METHOD_C', 'T_NS_C');
+    static public $operators = array('T_CLASS_C','T_FUNC_C', 'T_DIR', 'T_FILE', 'T_LINE','T_METHOD_C', 'T_NS_C', 'T_TRAIT_C');
     static public $atom = 'Magicconstant';
 
     public function _check() {
@@ -18,7 +18,7 @@ class Magicconstant extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.code; 
+fullcode.setProperty('fullcode', fullcode.getProperty('code')); 
 
 GREMLIN;
     }

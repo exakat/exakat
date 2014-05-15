@@ -241,6 +241,7 @@ function process_file($filename, $log_file) {
                     'T_LINE'                     => 'Magicconstant', 
                     'T_METHOD_C'                 => 'Magicconstant', 
                     'T_NS_C'                     => 'Magicconstant', 
+                    'T_TRAIT_C'                  => 'Magicconstant', 
                     );
             
     
@@ -841,6 +842,7 @@ function process_file($filename, $log_file) {
     $regexIndex['ROOT']->relateTo($T[-1], 'INDEXED')->save();
 
     $fileNode = $client->makeNode()->setProperty('token', 'T_FILENAME')
+                                   ->setProperty('atom', "File")
                                    ->setProperty('filename', "$filename")
                                    ->setProperty('code', "$filename")
                                    ->setProperty('fullcode', "$filename")
