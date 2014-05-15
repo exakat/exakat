@@ -50,7 +50,7 @@ class _Namespace extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.out("NAMESPACE").each{ fullcode.setProperty('fullcode', "namespace " + it.getProperty('fullcode');} 
+fullcode.out("NAMESPACE").each{ fullcode.setProperty('fullcode', "namespace " + it.getProperty('fullcode'));} 
 fullcode.filter{ it.out('NAMESPACE').count() == 0}.each{ fullcode.setProperty('fullcode', "namespace Global");} 
 
 GREMLIN;
