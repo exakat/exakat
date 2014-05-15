@@ -66,7 +66,7 @@ class Sequence extends TokenAuto {
                                               'notToken' => 'T_ELSEIF' ),
                                    0 => array('token'    => Sequence::$operators,
                                               'atom'     => 'none'),
-                                   1 => array('token'    => array('T_ENDIF', 'T_ENDWHILE', 'T_ENDDECLARE')),
+                                   1 => array('token'    => array('T_ENDIF', 'T_ENDWHILE', 'T_ENDDECLARE', 'T_ENDFOREACH')),
         );
         
         $this->actions = array('transform'   => array( 0 => 'DROP'));
