@@ -2397,7 +2397,6 @@ close_curly.bothE('NEXT').each{ g.removeEdge(it); }
         if (isset($actions['makeForeachSequence'])) {
             $qactions[] = " 
 /* make Foreach Sequence */ 
-
 block = g.addVertex(null, [code:'Block With Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, modifiedBy:'_Foreach', fullcode:'{ /**/ } ']);
 /*
 g.addEdge(null, it.in('CLASS').next(),     block, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
@@ -2470,7 +2469,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
         'T_COMMA', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
         'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 
-        'T_ECHO', 'T_PRINT' ,
+        'T_ECHO', 'T_PRINT',
         'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
         'T_PLUS', 'T_MINUS',
         'T_STAR', 'T_SLASH', 'T_PERCENTAGE',
@@ -2606,7 +2605,7 @@ if (    $it.token != 'T_ELSEIF'
 } else {
     $it.setProperty('makeSequence1',   $it.token != 'T_ELSEIF');
     $it.setProperty('makeSequence2',  ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' ));
-    $it.setProperty('makeSequence3',  ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))) ;
+    $it.setProperty('makeSequence3',  ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().getProperty('token') in list_before))) ;
     $it.setProperty('makeSequence31',  $it.in('NEXT').next().atom != null);
     $it.setProperty('makeSequence32',  $it.in('NEXT') .next().token) ;
     $it.setProperty('makeSequence41',   $it.out('NEXT').next().token);
