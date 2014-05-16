@@ -63,7 +63,7 @@ class ArrayNS extends TokenAuto {
         $this->actions = array('transform'    => array( 1 => 'ARGUMENTS',
                                                         2 => 'DROP'),
                                'atom'         => 'Array',
-                               'property'     => array('NewStyle' => 'true'),
+                               'property'     => array('short_syntax' => 'true'),
                                'cleanIndex'   => true);
         $this->checkAuto();
 
@@ -80,7 +80,7 @@ class ArrayNS extends TokenAuto {
                                                         3 => 'DROP',
                                                         2 => 'DROP'),
                                'atom'         => 'Array',
-                               'property'     => array('NewStyle' => 'true'),
+                               'property'     => array('short_syntax' => 'true'),
                                'cleanIndex'   => true);
         $this->checkAuto();
 
