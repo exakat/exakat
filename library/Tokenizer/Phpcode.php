@@ -18,6 +18,7 @@ class Phpcode extends TokenAuto {
                                                          2 => 'DROP'),
                                'makeSequence'  => 'it',
                                'atom'          => 'Phpcode',
+                               'property'      => array('closing_tag' => 'yes'),
                                'cleanIndex'    => true);
         $this->checkAuto();
 
@@ -43,6 +44,7 @@ class Phpcode extends TokenAuto {
         $this->actions = array('transform'     => array( 1 => 'DROP',
                                                          0 => 'DROP'), // Yes, 0 must be last.
                                'atom'          => 'Phpcode',
+                               'property'      => array('closing_tag' => 'yes'),
                                'transfert'     => array('root' => 2));
         $this->checkAuto();
         
