@@ -10,7 +10,8 @@ class Functionnames extends Analyzer\Analyzer {
         $this->atomIs("Function")
              ->isNot('lambda')
              ->classIs('Global')
-             ->hasNoParent('Interface', array('ELEMENT', 'CODE', 'CODE'))
+             ->hasNoParent('Interface', array('ELEMENT', 'CODE', 'BLOCK'))
+             ->hasNoParent('Trait', array('ELEMENT', 'CODE', 'BLOCK'))
              ->outIs('NAME');
     }
 }
