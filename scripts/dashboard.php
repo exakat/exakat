@@ -204,18 +204,20 @@ if (count($missing_in_sqlite)) {
     }
 }
 
+$total = $sqlite->query("select count(*) from analyzers;")->fetchArray(); 
+$total = $total[0];
 $unassigned = $sqlite->query("select count(*) from analyzers_categories as ac join categories as c on ac.id_categories = c.id WHERE c.name='Unassigned';")->fetchArray(); 
 if ($unassigned[0] > 0) { 
     print $unassigned[0]." analyzers are 'unassigned'. \n";
 } else {
-    print "All ".$unassigned[0]." analyzers are assigned. \n";
+    print "All ".$total." analyzers are assigned. \n";
 }
 
 $unassigned2 = $sqlite->query("select count(*) from analyzers as a left join analyzers_categories as ac on ac.id_analyzer = a.id where ac.id_categories IS NULL")->fetchArray(); 
 if ($unassigned2[0] > 0) { 
     print $unassigned2[0]." analysers are not linked! \n";
 } else {
-    print "All ".$unassigned[0]." analyzers are linked. \n\n";
+    print "All ".$total." analyzers are linked. \n\n";
 }
 
 
