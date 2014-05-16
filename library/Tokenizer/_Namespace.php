@@ -10,7 +10,8 @@ class _Namespace extends TokenAuto {
         // namespace {} 
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('atom'  => 'Sequence'),
+                                  1 => array('atom'  => 'Sequence',
+                                             'property' => array('block' => 'true')),
         );
         
         $this->actions = array('insert_global_ns' => 1,
@@ -36,9 +37,11 @@ class _Namespace extends TokenAuto {
                                              'atom'  => 'none'),
                                   1 => array('atom'  => array('Identifier', 'Nsname')),
                                   2 => array('token' => 'T_SEMICOLON'),
+                                  3 => array('atom'  => 'Sequence'),
+                                  4 => array('token' => array('T_CLOSE_TAG'))
         );
         
-        $this->actions = array('transform'    => array( 1 => 'NAMESPACE'),
+        $this->actions = array('insert_ns'    => true,
                                'atom'         => 'Namespace',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');

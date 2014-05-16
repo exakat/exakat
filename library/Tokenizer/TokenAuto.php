@@ -1638,12 +1638,7 @@ if (it.both('NEXT').count() == 0) {
             $qactions[] = "
 /* insert global namespace */
 x = g.addVertex(null, [code:'Global', atom:'Identifier', token:'T_STRING', virtual:true, line:it.line, fullcode:'Global']);
-/*
-g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
-g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
-g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
-g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
-*/
+
 g.addEdge(x, it.out('NEXT').next(), 'NEXT');
 it.outE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(it, x, 'NEXT');
@@ -1652,6 +1647,28 @@ g.addEdge(it, x, 'NEXT');
             unset($actions['insert_global_ns']);
         }           
 
+        if (isset($actions['insert_ns'])) {
+            $qactions[] = "
+/* insert namespace */
+
+it.setProperty('no_block', 'true');
+
+g.addEdge(it, it.out('NEXT').next(), 'NAMESPACE');
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('NEXT').out('NEXT').next(), 'DELETE');
+g.addEdge(it, it.out('NEXT').out('NEXT').out('NEXT').next(), 'BLOCK');
+
+end = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+
+it.out('NEXT').out('NEXT').out('NEXT').bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
+//it.out('NEXT').out('NEXT').bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
+it.out('NEXT').bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
+
+g.addEdge(it, end, 'NEXT');
+
+";
+            unset($actions['insert_ns']);
+        }      
+        
         if (isset($actions['sign'])) {
             $qactions[] = "
 /* Sign the integer */
