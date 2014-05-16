@@ -214,12 +214,23 @@ if ($unassigned[0] > 0) {
     print "All ".$total." analyzers are assigned. \n";
 }
 
-$unassigned2 = $sqlite->query("select count(*) from analyzers as a left join analyzers_categories as ac on ac.id_analyzer = a.id where ac.id_categories IS NULL")->fetchArray(); 
-if ($unassigned2[0] > 0) { 
-    print $unassigned2[0]." analysers are not linked! \n";
+$unassigned_res = $sqlite->query("select * from analyzers as a left join analyzers_categories as ac on ac.id_analyzer = a.id where ac.id_categories IS NULL"); 
+$unassigned2 = $unassigned_res->fetchArray();
+if (!empty($unassigned2)) { 
+    $all = array( $unassigned2['folder'].'/'.$unassigned2['name'].'('.$unassigned2['id'].')');
+    while($unassigned2 = $unassigned_res->fetchArray()) {
+        $all[] = $unassigned2['folder'].'/'.$unassigned2['name'].'('.$unassigned2['id'].')';
+    }
+
+    print count($all)." analyzers are not linked! (".join(', ', $all).")\n";
 } else {
     print "All ".$total." analyzers are linked. \n\n";
 }
+
+$analyzers_count = $sqlite->query("select count(*) from categories as c join analyzers_categories as ac on c.id = ac.id_categories where c.name='Analyze'")->fetchArray(); 
+print $analyzers_count[0]." analyzers \n";
+
+
 
 
 ?>
