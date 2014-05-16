@@ -14,7 +14,8 @@ class StaticMethods extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->_as('function')
              ->outIs('STATIC')
-             ->back('function');
+             ->back('function')
+             ->outIs('NAME');
     }
 }
 
