@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Arrays_MultipleIdenticalKeys extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testArrays_MultipleIdenticalKeys01()  { $this->generic_test('Arrays_MultipleIdenticalKeys.01'); }
+    public function testArrays_MultipleIdenticalKeys02()  { $this->generic_test('Arrays_MultipleIdenticalKeys.02'); }
 }
 ?>
