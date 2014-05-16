@@ -159,6 +159,7 @@ $missing_doc = array();
 foreach($analyzers as $a) {
     unset($extra_docs[$a]);
     $o = Analyzer\Analyzer::getInstance($a, null);
+    if (is_null($o)) { print "Couldn't get an instance for '$a'\n";}
     if ($o->getDescription() === '') {
         $missing_doc[] = $a;
     }
