@@ -77,6 +77,7 @@ class Appinfo extends \Report\Content {
                             'halt compiler'  => 'Php/Haltcompiler',
 
                             'Autoload'       => 'Php/AutoloadUsage',
+                            'inclusion'      => 'Structures/IncludeUsage',
                             'include_once'   => 'Structures/OnceUsage',
 
                             'Throw exceptions' => 'Php/ThrowUsage',
@@ -90,6 +91,8 @@ class Appinfo extends \Report\Content {
                             'Eval'           => 'Structures/EvalUsage',
                             'Die/Exit'       => 'Structures/ExitUsage',
                             'var_dump'       => 'Structures/VardumpUsage',
+
+                            'array short syntax'       => 'Structures/ArrayNSUsage',
                     ),
                     'Namespaces' => array(
                             'Namespaces' => 'Namespaces/Namespacesnames',
