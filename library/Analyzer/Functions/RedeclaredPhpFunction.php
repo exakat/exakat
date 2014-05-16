@@ -19,7 +19,6 @@ class RedeclaredPhpFunction extends Analyzer\Analyzer {
             }
         }
         
-        
         $this->atomIs("Function")
              ->outIs('NAME')
              ->analyzerIs("Analyzer\\Functions\\Functionnames")
