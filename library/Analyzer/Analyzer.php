@@ -373,7 +373,6 @@ GREMLIN;
             die('I don t know array for '.__METHOD__);
 //            $this->methods[] = 'as("classIsNot").inE("CLASS").filter{it.classname not in [\''.join("', '", $class).'\']}.back("classIsNot")';
         } else {
-//            $this->methods[] = 'as("classIs").inE("CLASS").has("classname", "'.$class.'").back("classIs")';
             if ($class == 'Global') {
                 $this->methods[] = 'as("classIs").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token != "T_CLASS"}.back("classIs")';
             } else {
@@ -418,7 +417,6 @@ GREMLIN;
             die('I don t know array for '.__METHOD__);
 //            $this->methods[] = 'as("functionIs").inE("FUNCTION").filter{it.function in [\''.join("', '", $function).'\']}.back("functionIs")';
         } else {
-//            $this->methods[] = 'as("functionIs").inE("FUNCTION").has("function", "'.$function.'").back("functionIs")';
             if ($class == 'Global') {
                 $this->methods[] = 'as("functionIsNot").in.loop(1){!(it.object.token in ["T_FUNCTION"])}.back("functionIsNot")';
             } else {
@@ -433,14 +431,12 @@ GREMLIN;
         if (is_array($namespace)) {
             $this->methods[] = 'as("namespaceIs").inE("NAMESPACE").filter{it.namespace in [\''.join("', '", $namespace).'\']}.back("namespaceIs")';
         } else {
-// @note I don't understand why filter won,t work.
             if ($namespace == 'Global') {
                 $this->methods[] = 'as("namespaceIs").in.loop(1){!(it.object.token in ["T_NAMESPACE", "T_FILENAME"])}.filter{ it.token == "T_FILENAME" || it.out("NAMESPACE").next().code == "Global" }.back("namespaceIs")';
             } else {
                 $this->methods[] = 'as("namespaceIs").in.loop(1){!(it.object.token in ["T_NAMESPACE", "T_FILENAME"])}.filter{ it.token == "T_NAMESPACE" && it.code == "'.$namespace.'" }.back("namespaceIs")';
             }
         }
-//        $this->printQuery();
         
         return $this;
     }
@@ -611,7 +607,6 @@ GREMLIN;
         
         $trim = addslashes($trim);
         if (is_array($code)) {
-            // @todo
             $this->methods[] = "filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") in ['".join("', '", $code)."']}";
         } else {
             $this->methods[] = "filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") == '$code'}";
@@ -658,7 +653,6 @@ GREMLIN;
         }
         
         if (is_array($code)) {
-            // @todo
             $this->methods[] = "filter{!(it.fullcode$caseSensitive in ['".join("', '", $code)."'])}";
         } else {
             $this->methods[] = "filter{it.fullcode$caseSensitive != '$code'}";
@@ -1027,8 +1021,10 @@ GREMLIN;
     public function toFullArray() {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').in('FILE').as('file').back('fullcode').as('line').select{it.fullcode}{it.line}{it.fullcode}
+g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').in.loop(1){ it.object.token != 'T_FILENAME'}.as('file').back('fullcode').as('line').select{it.fullcode}{it.line}{it.filename}
 GREMLIN;
+//        print $queryTemplate."\n";
+//        die();
         $vertices = $this->query($queryTemplate);
 
         $analyzer = get_class($this);
