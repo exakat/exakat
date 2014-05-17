@@ -64,7 +64,7 @@ class TokenAuto extends Token {
         $query = $this->prepareQuery();
         
         print $query;
-        die();
+        die(__METHOD__);
     }
 
     public function checkAuto() {

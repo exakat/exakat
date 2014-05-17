@@ -205,7 +205,7 @@ class Appinfo extends \Report\Content {
             print "Exception : ".$message."\n";
         
             print $queryTemplate."\n";
-            die();
+            die(__METHOD__);
         }
         return $query->getResultSet();
     }

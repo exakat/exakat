@@ -322,7 +322,7 @@ GREMLIN;
             
             print $queryString."\n";
             print_r($this->arguments);
-            die();
+            die(__METHOD__);
         }
     }
 
@@ -919,7 +919,7 @@ GREMLIN;
             
             print "\n\n";
         }
-        die();
+        die(__METHOD__);
     }
 
     public function prepareQuery() {

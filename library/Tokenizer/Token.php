@@ -225,7 +225,7 @@ class Token {
     	    print "Exception : ".$message."\n";
     	    
     	    print $queryTemplate."\n";
-    	    die();
+    	    die(__METHOD__);
     	}
     	return $query->getResultSet();
     }
