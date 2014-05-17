@@ -20,24 +20,15 @@ class ReportInfo extends \Report\Content {
 
             $res = shell_exec('cd ./projects/'.$this->project.'/code/; git rev-parse HEAD');
             $this->list['Git commit'] = trim($res);
-
-
         } else {
             $this->list['Repository URL'] = 'Downloaded archive';
         }
 
-        $queryTemplate = "g.V.has('token', 'E_FILE').count()";
-        $params = array('type' => 'IN');
-        $query = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryTemplate, $params);
-        $vertices = $query->getResultSet();
-
-        $this->list['Number of PHP files'] = $vertices[0][0];
+        $db = new \Db();
+        $res = $db->query('SELECT * FROM projects WHERE project="'.$this->project.'" ORDER BY ID DESC LIMIT 1')->fetch_assoc();
         
-        $queryTemplate = "g.V.has('token', 'E_FILE').transform{ x = it.out.line.unique().count()}.sum()";
-        $params = array('type' => 'IN');
-        $query = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryTemplate, $params);
-        $vertices = $query->getResultSet();
-        $this->list['Number of lines of code'] = $vertices[0][0];
+        $this->list['Number of PHP files'] = $res['php'];
+        $this->list['Number of lines of code'] = $res['loc'];
 
         include(dirname(dirname(__DIR__)).'/App.php');
         $this->list['Audit software version'] = $app['version'];
@@ -50,7 +41,6 @@ class ReportInfo extends \Report\Content {
         $this->list['PHP version'] = substr(shell_exec('php -v'), 0, 11);
 
         $this->list['Audit software version'] = $app['version'];
-
     }
     
     public function setNeo4j($client) {

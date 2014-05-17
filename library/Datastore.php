@@ -22,6 +22,25 @@ class Datastore {
         return true;
     }
 
+    public function getRow($table) {
+        $query = "SELECT * FROM $table";
+        $res = $this->sqlite->query($query);
+        $return = array();
+        
+        while($row = $res->fetchArray()) {
+            $return[] = $row;
+        }
+        
+        return $return;
+    }
+
+    public function hasResult($table) {
+        $query = "SELECT * FROM $table LIMIT 1";
+        $r = $this->sqlite->querySingle($query);
+
+        return !empty($r);
+    }
+
     public function cleanTable($table) {
         $this->checkTable($table);
         

@@ -5,8 +5,6 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class Incompilable extends Analyzer\Analyzer {
-    protected $severity  = \Analyzer\Analyzer::S_MAJOR;
-    protected $timeToFix = \Analyzer\Analyzer::T_QUICK;
 
     public function analyze() {
         $this->tokenIs("E_FILE")
@@ -14,38 +12,33 @@ class Incompilable extends Analyzer\Analyzer {
     }
     
     public function toArray() {
-//        $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\Php\\\\Incompilable']].out.fullcode"; 
-        $queryTemplate = "g.V.has('token', 'E_FILE').has('compile', 'false').fullcode"; 
-        $vertices = $this->query($queryTemplate);
-
-        $report = array();
-        if (count($vertices) > 0) {
-            foreach($vertices[0] as $v) {
-                $report[] = $v;
-            }   
-        } 
+        $datastore = new \Datastore('chordist');
+        $report = $datastore->getRow('compilation53');
         
         return $report;
     }
 
     public function toFullArray() {
-        $queryTemplate = "g.V.has('token', 'E_FILE').has('compile', 'false').fullcode"; 
-        $vertices = $this->query($queryTemplate);
-
-        $report = array();
-        if (count($vertices) > 0) {
-            foreach($vertices[0] as $v) {
-                $report[] = array('code' => 'n/a', 
-                                  'file' => $v, 
-                                  'line' => 'n/a', 
-                                  'desc' => $this->getName());
+        $datastore = new \Datastore('chordist');
+        $report = $datastore->getRow('compilation53');
+        
+        $return = array();
+        if (count($report) > 0) {
+            foreach($report as $r) {
+                $return[] = array('code' => 'n/a',
+                                  'file' => $r['file'],
+                                  'line' => $r['line'],
+                                  'desc' => $r['error']);
             }   
         } 
         
-        return $report;
+        return $return;
     }
     
     public function hasResults() {
+        $datastore = new \Datastore('chordist');
+        $report = $datastore->getRow('compilation53');
+
         $queryTemplate = "g.V.has('token', 'E_FILE').has('compile', 'false').count()"; 
         $vertices = $this->query($queryTemplate);
         
