@@ -281,3 +281,9 @@ abstract, static traits.
 silently resolved conflicts in traits (overlapping local/trait/trait/class)
 Supports uploaded files 
 share standard with different chapters (files, sockets, uploaded_file, etc....)
+
+parent used in class where no extension.
+Functions that return always the same value, no matter what
+
+Make a report for the classes that tells what methods are actually used (their origin, base on static/self, etc…), with an indicator for the level of complexity.
+
