@@ -73,47 +73,44 @@ $exts = array('php'      => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 
              
 
 $not_compilable = array();
-foreach($files as $file) { 
-    if (is_dir($file)) { 
-        @$stats['dir']++;
-        continue; 
-    }
 
-    if (strpos(basename($file), '.') === false) {
-        @$stats['none']++;
-    } else {
-        $found = false;
-        foreach($exts as $e => $ext) {
-            if (preg_match('#\.('.join('|', $ext).')$#', $file)) {
-                @$stats[$e]++;
-                $found = true;
+$versions = array('53', '54', '55', '56');
 
-                if ($e == 'php') {
-                    $res = shell_exec('php -l '.$file.' 2>&1' );
-                    if (substr($res, 0, 25) != 'No syntax errors detected') {
-                        @$stats['not compilable']++;
-                        $not_compilable[] = $file;
-                    } else {
-                        @$stats['tokens'] += count(token_get_all(file_get_contents($file)));
-                    }
-                }
-                break 1;
-            }
-        }
-
-        if (!$found) {  
-            @$stats['unknown']++; 
-            $unknown[] = basename($file);
+foreach($versions as $version) {
+    $res = trim(shell_exec('find ./projects/'.$dir.'/code/ -name "*.php" -print0 | xargs -0 -n1 -P5 sh scripts/php'.$version.'lint.sh'));
+    $res_files = explode("\n", $res);
+    $incompilables = array();
+    
+    foreach($res_files as $res_file) {
+        if (substr($res_file, 0, 28) == 'No syntax errors detected in') {
+            // do nothing. All is fine.
+        } elseif ($res_file == '') {
+            // do nothing. All is fine.
+        } elseif (substr($res_file, 0, 13) == 'Parse error: ') {
+            preg_match('#Parse error: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+            $incompilables[] = array('error' => $r[1], 'file' => $r[2], 'line' => $r[3]);
+        } elseif (substr($res_file, 0, 14) == 'Errors parsing') {
+            // ignore
+        } else {
+            var_dump($res_file);
+            print_r($res);
+            die(__METHOD__);
         }
     }
+    
+    $datastore = new Datastore($dir);
+    $datastore->cleanTable('compilation'.$version.'');
+    $datastore->addRow('compilation'.$version.'', $incompilables);
+    $stats['notCompilable'.$version] = count($incompilables);
 }
 
-if (count($not_compilable) != 0) {
-    file_put_contents('log/not_compilable.log', join("\n", $not_compilable));
-}
+$stats['php'] = (int) shell_exec('find ./projects/'.$dir.'/code/ -name "*.php" | wc -l');
+
+$shell = 'find ./projects/'.$dir.'/code/ -name "*.php" -print0 | xargs -0 -n1 -P5 sh scripts/php56tokens.sh | awk \'{s+=$1} END {print s}\'';
+$stats['tokens'] = (int) shell_exec($shell);
 
 $db = new Db();
-$db->insert('projects', array('notCompilable', 'project', 'php', 'tokens', 'loc'), array(count($not_compilable), $dir, $stats['php'], $stats['tokens'], $stats['loc']));
+$db->insert('projects', array('notCompilable53', 'notCompilable54', 'notCompilable55', 'notCompilable56', 'project', 'php', 'tokens', 'loc'), array($stats['notCompilable53'], $stats['notCompilable54'], $stats['notCompilable55'], $stats['notCompilable56'], $dir, $stats['php'], $stats['tokens'], $stats['loc']));
 
 if (OUTPUT == 'JSON') {
     if ($unknown) {
