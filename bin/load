@@ -843,7 +843,7 @@ function process_file($filename, $log_file) {
 
     $fileNode = $client->makeNode()->setProperty('token', 'T_FILENAME')
                                    ->setProperty('atom', "File")
-                                   ->setProperty('filename', "$filename")
+                                   ->setProperty('filename', preg_replace('#./projects/[^/]/code/#', '/', $filename))
                                    ->setProperty('code', "$filename")
                                    ->setProperty('fullcode', "$filename")
                                    ->save();
