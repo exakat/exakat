@@ -14,10 +14,13 @@ class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->codeIsNot(array('parent', 'self'))
+             ->codeIsNot(array('parent', 'self', 'static'))
              ->back('first')
-             ->outIs('METHOD')
-             ->raw("filter{ x = it;  g.V.has('atom', 'Function').out('NAME').filter{it.code.toLowerCase() == x.code.toLowerCase()}.filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\MethodDefinition').any()}.filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\StaticMethods').count() == 0}.any() }")
+             ->raw("filter{ x = it;  g.V.has('atom', 'Function').filter{ it.out('NAME').next().code.toLowerCase() == x.out('METHOD').next().code.toLowerCase()}.
+                                                                 filter{ it.in('ELEMENT').in('CODE').in('BLOCK').out('NAME').next().code.toLowerCase() == x.out('CLASS').next().code.toLowerCase()}.
+                                                                 filter{ it.out('NAME').in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\MethodDefinition').any()}.
+                                                                 filter{ it.out('NAME').in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\StaticMethods').count() == 0}
+                                                                .any() }")
              ->back('first');
     }
 }
