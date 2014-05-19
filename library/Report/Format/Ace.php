@@ -76,7 +76,8 @@ class Ace extends \Report\Format {
 HTML;
         file_put_contents($dir.'/index.html', $index_html);
         
-        shell_exec('cd '.dirname($dir).'; zip -r '.basename($dir).' . '.basename($dir).' 2 >> /dev/null'); 
+        print 'cd '.dirname($dir).'; zip -r '.basename($dir).' '.basename($dir).' 2 >> /dev/null';
+        shell_exec('cd '.dirname($dir).'; zip -r '.basename($dir).' '.basename($dir).' 2 >> /dev/null'); 
         
         return $total;
     }
