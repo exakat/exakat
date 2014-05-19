@@ -20,6 +20,7 @@ class Appinfo extends \Report\Content {
                             'ext/enchant'    => 'Extensions/Extenchant',
                             'ext/ereg'       => 'Extensions/Extereg',
                             'ext/exif'       => 'Extensions/Extexif',
+                            'ext/file'       => 'Extensions/Extfile',
                             'ext/fileinfo'   => 'Extensions/Extfileinfo',
                             'ext/filter'     => 'Extensions/Extfilter',
                             'ext/ftp'        => 'Extensions/Extftp',
