@@ -7,10 +7,9 @@ use Analyzer;
 class InconsistantCase extends Analyzer\Analyzer {
 
     public function analyze() {
-        return true;
         
-        $this->tokenIs("T_STRING")
-             ->raw("filter{it.getProperty('atom') == 'Boolean' || it.getProperty('code').toLowerCase() == 'null'}.transform{ if (it.code.toLowerCase() == it.code) { 'Lowercase'; } else if (it.code.toUpperCase() == it.code) { 'Uppercase'; } else { 'Other'; }}.groupCount()");
+        $this->atomIs("Boolean")
+             ->groupFilter("if (it.code == it.code.toLowerCase()) { x2 = 'lower'; } else if (it.code == it.code.toUpperCase()) { x2 = 'upper'; } else {x2 = 'mixed'; }", 10 / 100);
     }
 }
 
