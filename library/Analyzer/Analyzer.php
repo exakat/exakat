@@ -16,14 +16,14 @@ class Analyzer {
     
     protected $row_count = 0;
 
-    private $apply_below = false;
-
     private $queries = array();
     private $queries_arguments = array();
     private $methods = array();
     private $arguments = array();
     
     static $analyzers = array();
+    
+    protected $apply = null;
 
     protected $phpversion = "Any";
     protected $phpconfiguration = "Any";
@@ -56,6 +56,9 @@ class Analyzer {
         if (is_null(Analyzer::$docs)) {
             Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
         }
+        
+        $this->apply = new AnalyzerApply();
+        $this->apply->setAnalyzer(get_class($this));
     } 
     
     public static function getClass($name) {
@@ -236,11 +239,6 @@ x = g.addVertex(null, [analyzer:'$analyzer', analyzer:'true', description:'Analy
 
 g.idx('analyzers').put('analyzer', '$analyzer', x);
 
-g.V.has('token', 'E_CLASS')[0].each{     g.addEdge(it, x, 'CLASS'); }
-g.V.has('token', 'E_FUNCTION')[0].each{     g.addEdge(it, x, 'FUNCTION'); }
-g.V.has('token', 'E_NAMESPACE')[0].each{     g.addEdge(it, x, 'NAMESPACE'); }
-g.V.has('token', 'E_FILE')[0].each{     g.addEdge(it, x, 'FILE'); }
-
 GREMLIN;
             $this->query($query);
         }
@@ -302,7 +300,7 @@ GREMLIN;
     }
     
     function setApplyBelow($apply_below = true) {
-        $this->apply_below = $apply_below;
+        $this->apply->setApplyBelow($apply_below);
         
         return $this;
     }
@@ -877,6 +875,14 @@ GREMLIN;
         return $this;
     }
     
+    public function groupFilter($characteristic, $percentage) {
+        $this->methods[] = 'sideEffect{'.$characteristic.'}.groupCount(gf){x2}.aggregate().sideEffect{'.$characteristic.'}.filter{gf[x2] < '.$percentage.' * gf.values().sum()}';
+
+//gf=[:]; g.idx('Boolean')[['token':'node']].as("first").sideEffect{}.groupCount(gf){x2}.aggregate().sideEffect{if (it.code == it.code.toLowerCase()) { x2 = 'lower'; } else { x2 = 'upper'; }}.filter{gf[x2] < 0.1 * gf.values().sum()}.count()        
+        return $this;
+    }
+    
+    
     public function run() {
 
         $this->analyze();
@@ -939,25 +945,13 @@ GREMLIN;
         $query = <<<GREMLIN
 
 c = 0;
-m = [:];
+m = [:]; gf = [:];
 n = [];
 {$query}
 GREMLIN;
-
-        // Indexed results
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
-        if ($this->apply_below) {
-            $apply_below = <<<GREMLIN
-x = it;
-it.in("VALUE").            out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
-it.in('KEY').in("VALUE").  out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
-it.in('VALUE').in("VALUE").out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
-it.in('ARGUMENT').in("ARGUMENTS").out('BLOCK').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
-
-GREMLIN;
-        } else {
-            $apply_below = "";
-        }
+        
+        $query .= $this->apply->getGremlin();
+        /*
         $query .= <<<GREMLIN
 .each{
     g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED');
@@ -970,7 +964,7 @@ GREMLIN;
 c;
 
 GREMLIN;
-
+*/
         $this->queries[] = $query;
         $this->queries_arguments[] = $this->arguments;
 
