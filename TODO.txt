@@ -271,7 +271,6 @@ Faire un Content avec des métrics (Nombre d'arguments, longueur de line, nombre
 Empty Classes / Functions
 
 Checker les différentes versions de PHP
-Paraleliser les vérifications de compilation de PHP 
 
 Export class hierarchy, UML documents, etc.
 Reference of a $value and the last array element remain even after the foreach loop. It is recommended to destroy it by unset(). : check reuse of blind variables between arrays
@@ -287,3 +286,4 @@ Functions that return always the same value, no matter what
 
 Make a report for the classes that tells what methods are actually used (their origin, base on static/self, etc…), with an indicator for the level of complexity.
 
+Functions without returns, and not Methods.
