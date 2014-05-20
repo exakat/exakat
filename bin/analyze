@@ -19,20 +19,30 @@ if ($id = array_search('-v', $args)) {
     define('VERBOSE', false);
 }
 
-if ($id = array_search('-p', $args)) {
-    $project = $args[$id + 1];
-
-    if (!file_exists('./projects/'.$project.'/config.ini')) {
-        print "No such project as '$project'. Aborting\n";
-        die();
-    }
-} elseif ($id = array_search('-P', $args)) {
-    $project = '';
+if ($id = array_search('-P', $args)) {
     $analyzer = $args[$id + 1];
     if (Analyzer\Analyzer::getClass($analyzer)) {
         $analyzers_class = array($analyzer);
     } else {
         die("No such class as '$analyzer'. Aborting\n");
+    }
+    
+    if ($id = array_search('-p', $args)) {
+        $project = $args[$id + 1];
+
+        if (!file_exists('./projects/'.$project.'/config.ini')) {
+            print "No such project as '$project'. Aborting\n";
+            die();
+        }
+    } else {
+        $project = 'default';
+    }
+} elseif ($id = array_search('-p', $args)) {
+    $project = $args[$id + 1];
+
+    if (!file_exists('./projects/'.$project.'/config.ini')) {
+        print "No such project as '$project'. Aborting\n";
+        die();
     }
 } elseif ($id = array_search('-T', $args)) {
     $project = '';
@@ -51,15 +61,14 @@ $log = new Log('analyze');
 
 $analyzers = new NodeIndex($client, 'analyzers');
 
+$INI = parse_ini_file('./projects/'.$project.'/config.ini');
+if (!isset($INI['analyzer']) || empty($INI['analyzer'])) {
+    print "No analyzers list in config.ini. Aborting\n";
+    die();
+}
+$log->log("Analyzing project $project");
+
 if (!isset($analyzers_class)) {
-    $INI = parse_ini_file('./projects/'.$project.'/config.ini');
-
-    if (!isset($INI['analyzer']) || empty($INI['analyzer'])) {
-        print "No analyzers list in config.ini. Aborting\n";
-        die();
-    }
-    $log->log("Analyzing project $project");
-
     $analyzers_class = array();
     $log->log("Configured analyzers\t".count($INI['analyzer']));
 
@@ -177,12 +186,14 @@ GREMLIN;
     }
 }
 
+/*
 $server_stat = new Stats($client);
 $server_stat->collect();
 $log->report('analyze', array('project' => $project, 
                               'analyzer' => count($analyzers_class),
                               'tokens' => $server_stat->tokens_count,
                               'results' => $total_results));
+*/
 
 print "Done\n";
 ?>
