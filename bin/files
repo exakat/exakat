@@ -77,7 +77,7 @@ $not_compilable = array();
 $versions = array('53', '54', '55', '56');
 
 foreach($versions as $version) {
-    $res = trim(shell_exec('find ./projects/'.$dir.'/code/ -name "*.php" -print0 | xargs -0 -n1 -P5 sh scripts/php'.$version.'lint.sh'));
+    $res = trim(shell_exec('find ./projects/'.$dir.'/code/ -name "*.php"  ! -type l -print0 | xargs -0 -n1 -P5 sh scripts/php'.$version.'lint.sh'));
     $res_files = explode("\n", $res);
     $incompilables = array();
     
@@ -106,7 +106,7 @@ foreach($versions as $version) {
 
 $stats['php'] = (int) shell_exec('find ./projects/'.$dir.'/code/ -name "*.php" | wc -l');
 
-$shell = 'find ./projects/'.$dir.'/code/ -name "*.php" -print0 | xargs -0 -n1 -P5 sh scripts/php56tokens.sh | awk \'{s+=$1} END {print s}\'';
+$shell = 'find ./projects/'.$dir.'/code/ -name "*.php" ! -type l  -print0 | xargs -0 -n1 -P5 sh scripts/php56tokens.sh | awk \'{s+=$1} END {print s}\'';
 $stats['tokens'] = (int) shell_exec($shell);
 
 $db = new Db();
