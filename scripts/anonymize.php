@@ -79,6 +79,7 @@ foreach($tokens as $t) {
             case T_LIST :
             
             case T_NAMESPACE : 
+            case T_IMPLEMENTS : 
             
             case T_ARRAY_CAST : 
             case T_RETURN :
