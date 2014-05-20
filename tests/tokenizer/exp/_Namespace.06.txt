@@ -1,68 +1,72 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     namespace
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          function
+          Label : NAME
+            connect
+          Label : BLOCK
+            {
+            Label : CODE
+              void
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : ELEMENT
+          const
+          Label : NAME
+            CONNECT_OK
+          Label : VALUE
+            1
+        Label : ELEMENT
+          class
+          Label : NAME
+            Connection
+          Label : BLOCK
+            {
+            Label : CODE
+              void
     Label : NAMESPACE
       AnotherProject
   Label : ELEMENT
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        class
-        Label : NAME
-          Connection
-        Label : BLOCK
-          {
-          Label : CODE
-            void
-      Label : ELEMENT
-        const
-        Label : NAME
-          CONNECT_OK
-        Label : VALUE
-          1
-      Label : ELEMENT
-        function
-        Label : NAME
-          connect
-        Label : ARGUMENTS
-          void
-        Label : BLOCK
-          {
-          Label : CODE
-            void
-  Label : ELEMENT
     namespace
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          function
+          Label : NAME
+            connect
+          Label : BLOCK
+            {
+            Label : CODE
+              void
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : ELEMENT
+          const
+          Label : NAME
+            CONNECT_OK
+          Label : VALUE
+            1
+        Label : ELEMENT
+          class
+          Label : NAME
+            Connection
+          Label : BLOCK
+            {
+            Label : CODE
+              void
     Label : NAMESPACE
       MyProject
-  Label : ELEMENT
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        class
-        Label : NAME
-          Connection
-        Label : BLOCK
-          {
-          Label : CODE
-            void
-      Label : ELEMENT
-        const
-        Label : NAME
-          CONNECT_OK
-        Label : VALUE
-          1
-      Label : ELEMENT
-        function
-        Label : NAME
-          connect
-        Label : ARGUMENTS
-          void
-        Label : BLOCK
-          {
-          Label : CODE
-            void

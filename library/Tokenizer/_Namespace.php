@@ -50,7 +50,8 @@ class _Namespace extends TokenAuto {
         // namespace\Another : using namespace to build a namespace
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('token' => 'T_NS_SEPARATOR')
+                                  1 => array('token' => 'T_NS_SEPARATOR',
+                                             'atom'  => 'none')
         );
         
         $this->actions = array('atom'         => 'Identifier',

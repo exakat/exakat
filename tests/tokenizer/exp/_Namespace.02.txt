@@ -1,12 +1,18 @@
 <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      \
-      Label : ELEMENT
-        A
-      Label : ELEMENT
-        B
+Label : NEXT
+  namespace
+  Label : NEXT
+    \
+    Label : NEXT
+      ;
+      Label : NEXT
+        ?>
+        Label : NEXT
+          /**/
+          Label : NEXT
+            /* * */
+    Label : ELEMENT
+      A
+    Label : ELEMENT
+      B

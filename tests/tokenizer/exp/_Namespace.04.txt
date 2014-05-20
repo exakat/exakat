@@ -3,12 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      \
-      Label : ELEMENT
-        B
-      Label : ELEMENT
-        A
-      Label : ELEMENT
-        C
+    \
+    Label : ELEMENT
+      namespace
+    Label : ELEMENT
+      A
+    Label : ELEMENT
+      B
+    Label : ELEMENT
+      C
