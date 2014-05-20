@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      A
+    Label : BLOCK
+      {
+      Label : CODE
+        makeSequence
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            new
+            Label : NEW
+              \
+              Label : ELEMENT
+                namespace
+              Label : ELEMENT
+                Another
+          Label : LEFT
+            $obj
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      Global
+    Label : BLOCK
+      {
+      Label : CODE
+        ;
+        Label : ELEMENT
+          +
+          Label : RIGHT
+            2
+          Label : LEFT
+            1

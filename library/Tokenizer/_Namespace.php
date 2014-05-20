@@ -46,6 +46,16 @@ class _Namespace extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
         $this->checkAuto();
+
+        // namespace\Another : using namespace to build a namespace
+        $this->conditions = array(0 => array('token' => _Namespace::$operators,
+                                             'atom'  => 'none'),
+                                  1 => array('token' => 'T_NS_SEPARATOR')
+        );
+        
+        $this->actions = array('atom'         => 'Identifier',
+                               'cleanIndex'   => true);
+        $this->checkAuto();
         
         return $this->checkRemaining();
     }
@@ -54,7 +64,10 @@ class _Namespace extends TokenAuto {
         return <<<GREMLIN
 
 fullcode.out("NAMESPACE").each{ fullcode.setProperty('fullcode', "namespace " + it.getProperty('fullcode'));} 
-fullcode.filter{ it.out('NAMESPACE').count() == 0}.each{ fullcode.setProperty('fullcode', "namespace Global");} 
+
+fullcode.has('atom', 'Identifier').each{ fullcode.setProperty('fullcode', "namespace"); }
+
+fullcode.hasNot('fullcode', null).filter{ it.out('NAMESPACE').count() == 0}.each{ fullcode.setProperty('fullcode', "namespace Global");} 
 
 GREMLIN;
     }

@@ -8,7 +8,7 @@ class Nsname extends TokenAuto {
 
     public function _check() {
         // @note \a\b\c (\ initial)
-        $this->conditions = array( -1 => array('filterOut2' => array('T_NS_SEPARATOR', 'T_STRING')),
+        $this->conditions = array( -1 => array('filterOut2' => array('T_NS_SEPARATOR', 'T_STRING', 'T_NAMESPACE')),
                                     0 => array('token' => Nsname::$operators),
                                     1 => array('atom' => 'Identifier'),
         );
@@ -23,8 +23,7 @@ class Nsname extends TokenAuto {
         $this->checkAuto();
 
         // @note a\b\c
-        $this->conditions = array(//-2 => array('filterOut' => 'T_NS_SEPARATOR'), 
-                                  -1 => array('atom' => array('Identifier', 'Nsname') ),
+        $this->conditions = array(-1 => array('atom' => array('Identifier', 'Nsname') ),
                                    0 => array('token' => Nsname::$operators),
                                    1 => array('atom' => array('Identifier', 'Nsname')),
         );

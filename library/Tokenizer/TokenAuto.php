@@ -2498,7 +2498,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
         'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
         'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
-        
+        'T_NAMESPACE', 
         'T_THROW', 'T_CLONE', 'T_RETURN', 
         'T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES',
         'T_ABSTRACT', 'T_FINAL', 'T_STATIC', 'T_CONST', 
