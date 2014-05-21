@@ -287,3 +287,5 @@ Functions that return always the same value, no matter what
 Make a report for the classes that tells what methods are actually used (their origin, base on static/self, etc…), with an indicator for the level of complexity.
 
 Functions without returns, and not Methods.
+
+Conditional déclaration : class, const or function declared within a if block.
