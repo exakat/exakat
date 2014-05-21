@@ -659,10 +659,9 @@ GREMLIN;
         return $this;
     }
 
-    function fullcodeIsUppercase() {
-        $this->methods[] = "filter{it.fullcode == it.fullcode.toUpperCase()}";
+    function isUppercase($property = 'fullcode') {
+        $this->methods[] = "filter{it.$property == it.$property.toUpperCase()}";
     }
-
 
     function filter($filter) {
         $this->methods[] = "filter{ $filter }";
