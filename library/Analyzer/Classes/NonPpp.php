@@ -18,7 +18,12 @@ class NonPpp extends Analyzer\Analyzer {
 
         $this->atomIs("Ppp")
              ->hasNoOut(array('PUBLIC', 'PROTECTED', 'PRIVATE'))
-             ->hasOut('DEFINE');
+             ->hasOut('DEFINE')
+             ->inIs('ELEMENT')
+             ->inIs('CODE')
+             ->inIs('BLOCK')
+             ->atomIs('Class')
+             ->back('first');
         $this->prepareQuery();
         
     }
