@@ -31,7 +31,32 @@ class Docs {
         return $return;
     }
 
+    public function getSeverity($analyzer) {
+        list($foo, $folder, $name) = explode('\\', $analyzer);
+        $query = "SELECT severity FROM analyzers WHERE folder = '$folder' AND name = '$name'";
+
+        $res = $this->sqlite->query($query);
+        $res2 = $res->fetchArray();
+
+        $return = constant("\\Analyzer\\Analyzer::$res2[0]");
+        
+        if (empty($return['severity'])) { print "No Severity for $folder\\$name ( read : $res2[0]\n"; }
+
+        return $return;
+    }
+
+    public function getTimeToFix($analyzer) {
+        list($foo, $folder, $name) = explode('\\', $analyzer);
+        $query = "SELECT timetofix FROM analyzers WHERE folder = '$folder' AND name = '$name'";
+
+        $res = $this->sqlite->query($query);
+        $res2 = $res->fetchArray();
+
+        $return = constant("\\Analyzer\\Analyzer::$res2[0]");
+
+        if (empty($return['severity'])) { print "No TTF for $folder\\$name ( read : $res2[0]\n"; }
+
+        return $return;
+    }
 }
-
-
 ?>
