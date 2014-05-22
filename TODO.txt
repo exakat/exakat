@@ -298,3 +298,5 @@ Faire un rapport général type PHPLOC, mentionner la quantité de valeur litté
 
 Signaler la consommation de mémoire à la compilation : aka, les constants sont toutes chargées dès le début, si elles sont trop nombreuses, c'est pas bon. Calculer cet embonpoint. 
 Calculer les dépendances de chaque classes (dépendance obligatoire, dépendance conditionnelle, coût total).
+
+Inventory of transport (list from PHP code)
