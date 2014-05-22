@@ -289,3 +289,8 @@ Make a report for the classes that tells what methods are actually used (their o
 Functions without returns, and not Methods.
 
 Conditional déclaration : class, const or function declared within a if block.
+
+Manage non-fatal error during lint phase (list the files that are showing some STRICT errors as a bulk). 
+
+Manage a 'fullnspath' that will tell the absolute path name of a class/function/constant (either to search...)
+
