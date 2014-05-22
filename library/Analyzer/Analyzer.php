@@ -1083,7 +1083,11 @@ GREMLIN;
     }
     
     public function getSeverity() {
-        return $this->severity;
+        if (is_null(Analyzer::$docs)) {
+            Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
+        }
+        
+        return Analyzer::$docs->getSeverity(get_class($this));
     }
 
     public function getTimeToFix() {
