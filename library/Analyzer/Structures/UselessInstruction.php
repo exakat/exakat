@@ -10,7 +10,8 @@ class UselessInstruction extends Analyzer\Analyzer {
         $this->atomIs("Sequence")
              ->outIs('ELEMENT')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
-                            'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign'));
+                            'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
+                            'Constant', 'String', ));
         $this->prepareQuery();
     }
 }
