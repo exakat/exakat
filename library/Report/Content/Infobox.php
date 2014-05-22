@@ -11,7 +11,7 @@ class Infobox extends \Report\Content {
     private $mysql = null;
     
     public function collect() {
-        $queryTemplate = "g.V.has('token', 'E_FILE').count()";
+        $queryTemplate = "g.V.has('token', 'T_FILENAME').count()";
         $params = array('type' => 'IN');
         $query = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryTemplate, $params);
         $vertices = $query->getResultSet();
@@ -20,10 +20,11 @@ class Infobox extends \Report\Content {
                                  'number' => $vertices[0][0],
                                  'content' => 'PHP files');
         
-        $queryTemplate = "g.V.has('token', 'E_FILE').transform{ x = it.out.line.unique().count()}.sum()";
+        $queryTemplate = "g.V.has('token', 'T_FILENAME').out('FILE').transform{ x = it.out.loop(1){true}{true}.line.unique().count()}.sum()";
         $params = array('type' => 'IN');
         $query = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryTemplate, $params);
         $vertices = $query->getResultSet();
+        
         $this->infobox[] = array('icon'   => 'leaf',
                                  'number' => $vertices[0][0],
                                  'content' => 'Lines of code');
