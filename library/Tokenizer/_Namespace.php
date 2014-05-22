@@ -68,7 +68,7 @@ fullcode.out("NAMESPACE").each{ fullcode.setProperty('fullcode', "namespace " + 
 
 fullcode.has('atom', 'Identifier').each{ fullcode.setProperty('fullcode', "namespace"); }
 
-fullcode.hasNot('fullcode', null).filter{ it.out('NAMESPACE').count() == 0}.each{ fullcode.setProperty('fullcode', "namespace Global");} 
+fullcode.has('fullcode', null).filter{ it.out('NAMESPACE').count() == 0}.each{ fullcode.setProperty('fullcode', "namespace Global");} 
 
 GREMLIN;
     }
