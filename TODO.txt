@@ -294,3 +294,7 @@ Manage non-fatal error during lint phase (list the files that are showing some S
 
 Manage a 'fullnspath' that will tell the absolute path name of a class/function/constant (either to search...)
 
+Faire un rapport général type PHPLOC, mentionner la quantité de valeur littéral dans le code. Faire une bande avec tous les fichiers les uns après les autres (ordonné?) et assigner une couleur à chaque type de notions (structure, littéral, opérateur, variable)
+
+Signaler la consommation de mémoire à la compilation : aka, les constants sont toutes chargées dès le début, si elles sont trop nombreuses, c'est pas bon. Calculer cet embonpoint. 
+Calculer les dépendances de chaque classes (dépendance obligatoire, dépendance conditionnelle, coût total).
