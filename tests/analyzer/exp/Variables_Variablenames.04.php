@@ -1,7 +1,12 @@
 <?php
 
-$expected     = array('$dynamicFunction', '$dynamicMethod', '$dynamicStaticMethod', '$object', '$object');
+$expected     = array('$dynamicFunction', 
+                      '$dynamicMethod', 
+                      '$dynamicStaticMethod',
+                      '$object', 
+                      '$object');
 
-$expected_not = array('$staticProperty', 'aClass');
+$expected_not = array('$staticProperty', 
+                      'aClass');
 
 ?>
