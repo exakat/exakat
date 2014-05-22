@@ -128,9 +128,7 @@ it.setProperty('root', 'null');
                 $qactions[] = " /* atom */\n  it.setProperty('atom', it.out('NEXT').next().atom)";
             }
             
-//            if (in_array($actions['atom'], array('Ternary', 'Typehint', 'Functioncall', 'Sign'))) {
-                $qactions[] = " /* indexing */\n  g.idx('{$actions['atom']}').put('token', 'node', it);";
-//            }
+            $qactions[] = " /* indexing */\n  g.idx('{$actions['atom']}').put('token', 'node', it);";
             
             unset($actions['atom']);
             $this->set_atom = true;
@@ -2867,13 +2865,8 @@ it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each {
 /* create a functioncall, and hold the variable as property.  */  
 
 x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line, modifiedBy:'FunctionCall']);
-/*
-g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
-g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
-g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
-g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
-*/
 g.addEdge(it, x, 'NAME');
+g.idx('Variable').put('token', 'node', x);
                 ";
             unset($actions['variable_to_functioncall']);
         }        
