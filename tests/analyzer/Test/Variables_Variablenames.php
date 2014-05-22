@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Variables_Variablenames extends Analyzer {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testVariables_Variablenames01()  { $this->generic_test('Variables_Variablenames.01'); }
     public function testVariables_Variablenames02()  { $this->generic_test('Variables_Variablenames.02'); }
@@ -18,5 +18,6 @@ class Variables_Variablenames extends Analyzer {
     public function testVariables_Variablenames06()  { $this->generic_test('Variables_Variablenames.06'); }
     public function testVariables_Variablenames07()  { $this->generic_test('Variables_Variablenames.07'); }
     public function testVariables_Variablenames08()  { $this->generic_test('Variables_Variablenames.08'); }
+    public function testVariables_Variablenames09()  { $this->generic_test('Variables_Variablenames.09'); }
 }
 ?>
