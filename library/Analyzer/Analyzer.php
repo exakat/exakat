@@ -689,7 +689,7 @@ GREMLIN;
         $this->methods[] = <<<GREMLIN
 groupBy(m){it.$column}{it}.iterate(); 
 m.findAll{ it.value.size() == $times}.values().flatten().each{ n.add(it); };
-n
+
 GREMLIN;
 
         return $this;
