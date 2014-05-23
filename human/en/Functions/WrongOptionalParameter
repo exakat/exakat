@@ -1,0 +1,10 @@
+name = "Wrong Optional parameter";
+description = "PHP parameters are optional when they defined with a default value, like this : function x($arg = 1) {...}.
+
+When there are compulsory and optional parameters, the first ones should appear first, and the second should appear last : function x($arg, $arg2 = 2) {...}.
+
+PHP will solve this problem at runtime, assign values in the same other, but will miss some of the default values and emits warnings. 
+
+It is better to put all the optional parameters at the end of the method's signature.
+
+";
