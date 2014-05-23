@@ -95,7 +95,6 @@ Add exemples from the found code to the explanations.
 Make a summary to the report (how to share this ? When to involve the author ? Needs a special intermediate report ? )
 Apply all the old analyzers from cornac
 Check spelling in variables/classe names
-Inventory for constants
 Export tool for extensions (versioning ?)
 Long variables with "" that should actually be ' because they don't contain any variable.
 Add a config for the whole analyzer
@@ -130,7 +129,6 @@ Check for argument number (PHP doesn't, but yells at runtime).
 Faire la liste des extensions standards de PHP (et donc, celles non standards)
 Faire un extracteur d'extensions PHP (Notamment PECL, mais aussi via code source, avec versionnage).
 Mark analyzers as file or application wide analyzer. 
-Inconsistent constants casing (null/NULL)
 
 Make the php script idempotent (can be run again and finish the job, leave a note where it left...)
 Spot function that are defined with php-function names (also spot overwriting).
@@ -164,7 +162,7 @@ Update dashboard with number of analyzer and inventory or appinfo
 Test treemap to export from bin/file
 bin/file should also sort PHP files/directories by type : see fb treemap : code, scripts, media, tests, config. ...
 
-Separate analyzers in : file/application, inventory/analyse; themes
+Separate analyzers in : file/application; themes
 produce a dot graph of classes
 
 Automate testing and dashboard
@@ -238,8 +236,6 @@ Report usage of alternative syntax mixed with normal one.
 Report usage of alternative syntax in appinfo()
 Report usage of one-liner in appinfo 
 
-Check for double 'case' check. 
-
 Extensions may defined Namespaces (check them for conflict... ?)
 CHeck that Classes and file have the same names.
 Support namespaces when searching for classes.
@@ -252,7 +248,7 @@ Make an export to JSON format for testing purpose.
 
 Must call parent constructor (desctructor ? )
 Must have desctructor's classes (when ? Closing resources are needed ? Like what ? )
-Empty blocks (classes, try/catch, etc.)
+Empty blocks ( try/catch, etc.)
 in regex, several successive call will fill the same $r, and if not tested, it may lead to believe there are some results
 function whose return may be ignored
 
@@ -268,21 +264,18 @@ Check file names for special chars ($ or 把).
 
 analyzer names are sensitive to case. Make sure this is not a problem.
 Faire un Content avec des métrics (Nombre d'arguments, longueur de line, nombre de constants... etc...)
-Empty Classes / Functions
-
-Checker les différentes versions de PHP
 
 Export class hierarchy, UML documents, etc.
 Reference of a $value and the last array element remain even after the foreach loop. It is recommended to destroy it by unset(). : check reuse of blind variables between arrays
 Summary of traits's methods overlap (local to class, trait, inherited class). 
 Traits of Traits
-abstract, static traits.
 silently resolved conflicts in traits (overlapping local/trait/trait/class)
 Supports uploaded files 
 share standard with different chapters (files, sockets, uploaded_file, etc....)
 
-parent used in class where no extension.
-Functions that return always the same value, no matter what
+parent keyword used in class where no extension.
+Functions that return always the same value, no matter what 
+Constant structures
 
 Make a report for the classes that tells what methods are actually used (their origin, base on static/self, etc…), with an indicator for the level of complexity.
 
@@ -300,3 +293,6 @@ Signaler la consommation de mémoire à la compilation : aka, les constants sont
 Calculer les dépendances de chaque classes (dépendance obligatoire, dépendance conditionnelle, coût total).
 
 Inventory of transport (list from PHP code)
+UseVoidReturn : function return void/null, but result it captured (may be not used...)
+TooManyArgument : for PHP functions and for custom code
+RequiredAfterOptionalParam : optional parameters are the last on the argument list
