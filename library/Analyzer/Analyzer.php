@@ -488,7 +488,7 @@ GREMLIN;
         $analyzer = str_replace('\\', '\\\\', $analyzer);
 
         if (is_array($analyzer)) {
-            $this->methods[] = 'filter{ it.in("ANALYZED").filter{ not (it.code in [\''.join("', '", $analyzer).'\'])}.count() == 0}';
+            $this->methods[] = 'filter{ it.in("ANALYZED").filter{ it.code in [\''.join("', '", $analyzer).'\']}.count() == 0}';
         } else {
             $this->methods[] = 'filter{ it.in("ANALYZED").has("code", \''.$analyzer.'\').count() == 0}';
         }
@@ -969,7 +969,7 @@ GREMLIN;
 
         $this->methods = array();
         $this->arguments = array();
-        $this->analyzerIsNot(addslashes(get_class($this)));
+        $this->analyzerIsNot(get_class($this));
         
         return true;
     }
