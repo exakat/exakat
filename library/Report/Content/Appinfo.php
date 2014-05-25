@@ -76,6 +76,7 @@ class Appinfo extends \Report\Content {
                             'Alternative syntax' => 'Php/AlternativeSyntax',
                             'Magic constants' => 'Constants/MagicConstantUsage',
                             'halt compiler'  => 'Php/Haltcompiler',
+                            'Assertions'     => 'Php/AssertionUsage',
 
                             'Autoload'       => 'Php/AutoloadUsage',
                             'inclusion'      => 'Structures/IncludeUsage',
