@@ -366,6 +366,16 @@ GREMLIN;
         return $this;
     }
 
+    function atomIsNot($atom) {
+        if (is_array($atom)) {
+            $this->methods[] = 'filter{!(it.atom in [\''.join("', '", $atom).'\']) }';
+        } else {
+            $this->methods[] = 'hasNot("atom", "'.$atom.'")';
+        }
+        
+        return $this;
+    }
+
     function classIs($class) {
         if (is_array($class)) {
             die('I don t know array for '.__METHOD__);
@@ -462,16 +472,6 @@ GREMLIN;
     
     function trim($property, $chars = '\'\"') {
         $this->methods[] = 'transform{it.'.$property.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1")}';
-    }
-
-    function atomIsNot($atom) {
-        if (is_array($atom)) {
-            $this->methods[] = 'filter{!(it.atom in [\''.join("', '", $atom).'\']) }';
-        } else {
-            $this->methods[] = 'hasNot("atom", "'.$atom.'")';
-        }
-        
-        return $this;
     }
 
     function analyzerIs($analyzer) {
