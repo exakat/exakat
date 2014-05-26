@@ -1658,7 +1658,6 @@ g.addEdge(it, it.out('NEXT').out('NEXT').out('NEXT').next(), 'BLOCK');
 end = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 
 it.out('NEXT').out('NEXT').out('NEXT').bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
-//it.out('NEXT').out('NEXT').bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
 it.out('NEXT').bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
 
 g.addEdge(it, end, 'NEXT');
@@ -1667,6 +1666,26 @@ g.addEdge(it, end, 'NEXT');
             unset($actions['insert_ns']);
         }      
         
+        if (isset($actions['insert_ns_void'])) {
+            $qactions[] = "
+/* insert namespace with void */
+
+it.setProperty('no_block', 'true');
+
+g.addEdge(it, it.out('NEXT').next(), 'NAMESPACE');
+g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('NEXT').out('NEXT').next(), 'DELETE');
+tvoid = g.addVertex(null, [code:'', atom:'Void', virtual:true, line:it.line, token:'T_VOID']);
+g.addEdge(it, tvoid, 'BLOCK');
+
+end = it.out('NEXT').out('NEXT').out('NEXT').next();
+
+it.out('NEXT').bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
+
+g.addEdge(it, end, 'NEXT');
+
+";
+            unset($actions['insert_ns_void']);
+        }           
         if (isset($actions['sign'])) {
             $qactions[] = "
 /* Sign the integer */
@@ -1707,12 +1726,7 @@ thecatch.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = "
 /* to type hint */
 x = g.addVertex(null, [code:'Typehint', atom:'Typehint', virtual:true, line:it.line]);
-/*
-g.addEdge(null, it.in('CLASS').next(),     x, 'CLASS'    , [classname: it.inE('CLASS').next().classname]);
-g.addEdge(null, it.in('FUNCTION').next(),  x, 'FUNCTION' , [function: it.inE('FUNCTION').next().function]);
-g.addEdge(null, it.in('NAMESPACE').next(), x, 'NAMESPACE', [namespace: it.inE('NAMESPACE').next().namespace]);
-g.addEdge(null, it.in('FILE').next(),      x, 'FILE',      [file: it.inE('FILE').next().file]);
-*/
+
 a = it.out('NEXT').next();
 a.fullcode = a.code;
 
