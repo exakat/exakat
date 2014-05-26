@@ -8,6 +8,8 @@ class x {
         foreach($names as $n) {
             $this[$n];
         }
+
+        $this[] = 3;
     }
 }
 

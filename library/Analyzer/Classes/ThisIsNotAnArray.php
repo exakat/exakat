@@ -10,8 +10,7 @@ class ThisIsNotAnArray extends Analyzer\Analyzer {
         $this->atomIs("Variable")
              ->code('$this')
              ->inIs('VARIABLE')
-             ->atomIs('Array')
-             ->back('first');
+             ->atomIs(array('Array', 'Arrayappend'));
     }
 }
 
