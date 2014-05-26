@@ -37,6 +37,19 @@ class _Namespace extends TokenAuto {
                                              'atom'  => 'none'),
                                   1 => array('atom'  => array('Identifier', 'Nsname')),
                                   2 => array('token' => 'T_SEMICOLON'),
+                                  3 => array('token' => array('T_CLOSE_TAG', 'T_END'))
+        );
+        
+        $this->actions = array('insert_ns_void' => true,
+                               'atom'           => 'Namespace',
+                               'cleanIndex'     => true,
+                               'makeSequence'   => 'it');
+        $this->checkAuto();
+
+        $this->conditions = array(0 => array('token' => _Namespace::$operators,
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => array('Identifier', 'Nsname')),
+                                  2 => array('token' => 'T_SEMICOLON'),
                                   3 => array('atom'  => 'Sequence'),
                                   4 => array('token' => array('T_CLOSE_TAG', 'T_END'))
         );
