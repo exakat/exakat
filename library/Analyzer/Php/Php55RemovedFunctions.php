@@ -5,9 +5,6 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class Php55RemovedFunctions extends Analyzer\Common\FunctionUsage {
-    protected $severity  = Analyzer\Analyzer::S_NONE;
-    protected $timeToFix = Analyzer\Analyzer::T_NONE;
-    
     protected $phpversion = "5.5-";
     
     public function analyze() {

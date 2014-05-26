@@ -13,13 +13,15 @@ class Docs {
     }
     
     public function getThemeAnalyzers($theme) {
-        $query = "SELECT a.folder, a.name FROM analyzers AS a 
+        $query = <<<SQL
+        SELECT a.folder, a.name FROM analyzers AS a 
     JOIN analyzers_categories AS ac 
         ON ac.id_analyzer = a.id
     JOIN categories AS c
         ON c.id = ac.id_categories
     WHERE
-        c.name = '$theme'";
+        c.name = '$theme'
+SQL;
         
         $res = $this->sqlite->query($query);
 
