@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Functions_WrongOptionalParameter extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testFunctions_WrongOptionalParameter01()  { $this->generic_test('Functions_WrongOptionalParameter.01'); }
+    public function testFunctions_WrongOptionalParameter02()  { $this->generic_test('Functions_WrongOptionalParameter.02'); }
 }
 ?>
