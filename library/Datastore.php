@@ -27,7 +27,7 @@ class Datastore {
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $return[] = $row;
         }
         
