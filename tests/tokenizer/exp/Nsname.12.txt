@@ -1,0 +1,272 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      \
+      Label : ELEMENT
+        Foo
+      Label : ELEMENT
+        Bar
+    Label : BLOCK
+      makeSequence
+      Label : ELEMENT
+        new
+        Label : NEW
+          subnamespace\FOO
+          Label : ELEMENT
+            subnamespace
+          Label : ELEMENT
+            FOO
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          fooclassm
+        Label : METHOD
+          staticMethod
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : ELEMENT
+            fooclassm
+          Label : ELEMENT
+            namespacem
+          Label : ELEMENT
+            fullm
+        Label : METHOD
+          staticMethod
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : ELEMENT
+            subnamespacem
+          Label : ELEMENT
+            fooclassm
+        Label : METHOD
+          staticMethod
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        new
+        Label : NEW
+          \Foo\Bar\FOO
+          Label : ELEMENT
+            FOO
+          Label : ELEMENT
+            Bar
+          Label : ELEMENT
+            Foo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        instanceof
+        Label : RIGHT
+          \
+          Label : ELEMENT
+            subnamespace
+          Label : ELEMENT
+            fooclass
+        Label : LEFT
+          makeSequence
+          Label : ELEMENT
+            $x
+          Label : ELEMENT
+            instanceof
+            Label : RIGHT
+              fooclass
+            Label : LEFT
+              $x
+      Label : ELEMENT
+        instanceof
+        Label : RIGHT
+          \
+          Label : ELEMENT
+            fooclass
+          Label : ELEMENT
+            namespacepath
+          Label : ELEMENT
+            full
+        Label : LEFT
+          $x
+      Label : ELEMENT
+        new
+        Label : NEW
+          \
+          Label : ELEMENT
+            FOO
+          Label : ELEMENT
+            Bar
+          Label : ELEMENT
+            Foo
+      Label : ELEMENT
+        new
+        Label : NEW
+          \
+          Label : ELEMENT
+            subnamespace
+          Label : ELEMENT
+            FOO
+      Label : ELEMENT
+        ::
+        Label : PROPERTY
+          $property
+        Label : CLASS
+          \
+          Label : ELEMENT
+            fooclassp
+          Label : ELEMENT
+            namespacep
+          Label : ELEMENT
+            fullp
+      Label : ELEMENT
+        ::
+        Label : PROPERTY
+          $property
+        Label : CLASS
+          \
+          Label : ELEMENT
+            subnamespacep
+          Label : ELEMENT
+            fooclassp
+      Label : ELEMENT
+        new
+        Label : NEW
+          FOO
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          fooclassc
+        Label : CONSTANT
+          FOOCSONTANT
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : ELEMENT
+            subnamespacec
+          Label : ELEMENT
+            fooclassc
+        Label : CONSTANT
+          FOOCSONTANT
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : ELEMENT
+            fooclassc
+          Label : ELEMENT
+            namespacec
+          Label : ELEMENT
+            fullc
+        Label : CONSTANT
+          FOOCSONTANT
+      Label : ELEMENT
+        ::
+        Label : PROPERTY
+          $property
+        Label : CLASS
+          fooclassp
+      Label : ELEMENT
+        new
+        Label : NEW
+          FOO
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            \
+            Label : ELEMENT
+              SUBNAMESPACED
+            Label : ELEMENT
+              CONSTANTE
+      Label : ELEMENT
+        unqualified_function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        \full\namespaced\fonction
+        Label : ELEMENT
+          fonction
+        Label : ELEMENT
+          namespaced
+        Label : ELEMENT
+          full
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        ->
+        Label : METHOD
+          objectCalledMethod
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : OBJECT
+          $object
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          staticallyCalling
+        Label : METHOD
+          staticallyCalledMethod
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        subnamespaced\fonction
+        Label : ELEMENT
+          subnamespaced
+        Label : ELEMENT
+          fonction
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            \
+            Label : ELEMENT
+              CONSTANTE
+            Label : ELEMENT
+              NAMESPACED
+            Label : ELEMENT
+              FULL
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            UNQUALIFIED_CONSTANT
