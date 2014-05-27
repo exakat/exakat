@@ -1734,6 +1734,7 @@ g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').out('NEXT').next(), 'NEXT');
 
 g.addEdge(x, a, 'CLASS');
+a.has('token', 'T_ARRAY').each{ it.setProperty('atom', 'Identifier'); }
 g.addEdge(x, a.out('NEXT').next(), 'VARIABLE');
 
 a.out('NEXT').bothE('NEXT').each{ g.removeEdge(it);}    
