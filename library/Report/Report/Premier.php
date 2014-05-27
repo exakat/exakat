@@ -104,7 +104,11 @@ TEXT
 
                 if ($analyzer->hasResults()) {
                     $h = $this->createH2($analyzer->getName());
-                    $h = $this->addContent('Horizontal', $analyzer);
+                    if ($a == "Php/Incompilable") {
+                        $h = $this->addContent('TableForVersions', $analyzer);
+                    } else {
+                        $h = $this->addContent('Horizontal', $analyzer);
+                    }
                 }
             }
                 

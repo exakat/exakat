@@ -14,6 +14,8 @@ class Analyzer {
     protected $description = null;
     protected $appinfo = null;
     
+    static public $datastore = null;
+    
     protected $row_count = 0;
 
     private $queries = array();
