@@ -29,7 +29,7 @@ class _Instanceof extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.out("LEFT").next().getProperty('code') + " instanceof " + fullcode.out("RIGHT").next().getProperty('code')); 
+fullcode.setProperty('fullcode', fullcode.out("LEFT").next().getProperty('fullcode') + " instanceof " + fullcode.out("RIGHT").next().getProperty('fullcode')); 
 
 GREMLIN;
 
