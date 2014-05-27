@@ -1,0 +1,86 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        O
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              ::
+              Label : METHOD
+                Q
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'R'
+              Label : CLASS
+                P
+            Label : CONCAT
+              'S'
+    Label : THEN
+      {
+      Label : CODE
+        void
+  Label : ELEMENT
+    M
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'N'
+  Label : ELEMENT
+    J
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        'K'
+      Label : ARGUMENT
+        'L'
+  Label : ELEMENT
+    D
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        'E'
+      Label : ARGUMENT
+        array
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            =>
+            Label : KEY
+              'F'
+            Label : VALUE
+              $b
+          Label : ARGUMENT
+            =>
+            Label : KEY
+              'G'
+            Label : VALUE
+              $c
+  Label : ELEMENT
+    H
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'I'
+  Label : ELEMENT
+    B
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      B
+    Label : BLOCK
+      {
+      Label : CODE
+        void
