@@ -301,4 +301,6 @@ report "$string" or 'true'.
 Die without no argument (at least, put __METHOD__, file)
 Echo : with or without () (preferences)
 Use const or constant() for constants ? 
-Check for what happens with $x['a']; (does it create the index? )
+unsupported calls in strings ("$x[a][b]")
+inventory of registered functions (session, finalize, error...)
+Characterize function as library (not global code), or script
