@@ -307,6 +307,95 @@ g.idx('racines')[['token':'DELETE']].out('DELETE').each{
     g.removeVertex(it);
 }
 
+// calculating the full namespaces paths
+g.idx('Const')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().fullcode);}
+// function definitions
+g.idx('Function')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().fullcode);}
+
+// class definitions
+g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().fullcode);}
+
+// function usage
+g.idx('Functioncall')[['token':'node']].filter{it.in('METHOD').count() == 0}.sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}
+.each{ 
+    if (it.absolutens == true) { 
+        fullcode.setProperty('fullnspath', fullcode.code);
+    } else {
+        fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    }    
+}
+
+// class usage
+g.idx('Staticmethodcall')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
+    if (fullcode.atom == 'Nsname') {
+        if (fullcode.absolutens == 'true') { 
+            fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.fullcode.length()));
+        } else {
+            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.fullcode);
+        }    
+    } else {
+        fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    }
+}
+
+g.idx('Staticproperty')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
+    if (fullcode.atom == 'Nsname') {
+        if (fullcode.absolutens == 'true') { 
+            fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.fullcode.length()));
+        } else {
+            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.fullcode);
+        }    
+    } else {
+        fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    }
+}
+
+g.idx('Staticconstant')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
+    if (fullcode.atom == 'Nsname') {
+        if (fullcode.absolutens == 'true') { 
+            fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.fullcode.length()));
+        } else {
+            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.fullcode);
+        }    
+    } else {
+        fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    }
+}
+
+g.idx('Instanceof')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
+    if (fullcode.atom == 'Nsname') {
+        if (fullcode.absolutens == 'true') { 
+            fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.fullcode.length()));
+        } else {
+            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.fullcode);
+        }    
+    } else {
+        fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    }
+}
+
+// Constant usage
+g.idx('Identifier')[['token':'node']].filter{it.in('ELEMENT', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE').count() == 0}
+    .sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
+    fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+}
+
+g.idx('Nsname')[['token':'node']].filter{it.in('ELEMENT', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE').count() == 0}
+    .sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
+        if (fullcode.absolutens == 'true') { 
+            if (fullcode.atom == 'Functioncall') {
+                fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.code.length()));
+            } else {
+                fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.fullcode.length()));
+            }
+        } else if (fullcode.atom == 'Functioncall') {
+            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+        } else {
+            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.fullcode);
+        }    
+}
+
+// fallback to global NS for functions and constants.
 
 ";
         Token::query($query);
