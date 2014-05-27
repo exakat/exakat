@@ -89,10 +89,10 @@ foreach($versions as $version) {
             // do nothing. All is fine.
         } elseif (substr($res_file, 0, 13) == 'Parse error: ') {
             preg_match('#Parse error: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
-            $incompilables[] = array('error' => $r[1], 'file' => $r[2], 'line' => $r[3]);
+            $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
         } elseif (substr($res_file, 0, 13) == 'Fatal error: ') {
             preg_match('#Fatal error: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
-            $incompilables[] = array('error' => $r[1], 'file' => $r[2], 'line' => $r[3]);
+            $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
         } elseif (substr($res_file, 0, 14) == 'Errors parsing') {
             // ignore
         } else {
