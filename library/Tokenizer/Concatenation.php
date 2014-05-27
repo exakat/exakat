@@ -43,8 +43,9 @@ class Concatenation extends TokenAuto {
         return <<<GREMLIN
 s = [];
 fullcode.out("CONCAT").sort{it.order}._().each{ s.add(it.fullcode); };
-fullcode.fullcode = "" + s.join(" . ") + "";
-        
+fullcode.setProperty('fullcode', "" + s.join(" . ") + "");
+fullcode.setProperty('count', s.size());
+
 GREMLIN;
     }
 
