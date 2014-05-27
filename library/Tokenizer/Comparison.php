@@ -11,7 +11,7 @@ class Comparison extends TokenAuto {
                           'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall',
                            'Magicconstant', 'Staticconstant', 'String', 'Addition', 'Multiplication',
                           'Nsname', 'Not', 'Parenthesis', 'Noscream', 'Preplusplus', 'Postplusplus',
-                          'Bitshift', 'Concatenation', 'Cast', 'New', 'Include' , 'Identifier', );
+                          'Bitshift', 'Concatenation', 'Cast', 'New', 'Include' , 'Identifier', 'Instanceof');
         
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), 
                                                                          Addition::$operators, Bitshift::$operators, 
@@ -39,7 +39,8 @@ class Comparison extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-it.fullcode = it.out("LEFT").next().fullcode + " " + it.code + " " + it.out("RIGHT").next().fullcode;
+
+it.setProperty('fullcode', it.out("LEFT").next().getProperty('fullcode') + " " + it.getProperty('code') + " " + it.out("RIGHT").next().getProperty('fullcode'));
 
 GREMLIN;
     }
