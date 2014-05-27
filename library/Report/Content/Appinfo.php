@@ -78,6 +78,8 @@ class Appinfo extends \Report\Content {
                             'halt compiler'  => 'Php/Haltcompiler',
                             'Assertions'     => 'Php/AssertionUsage',
 
+                            'Casting'     => 'Php/CastingUsage',
+
                             'Autoload'       => 'Php/AutoloadUsage',
                             'inclusion'      => 'Structures/IncludeUsage',
                             'include_once'   => 'Structures/OnceUsage',
