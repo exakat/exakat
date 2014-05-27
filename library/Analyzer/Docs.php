@@ -39,10 +39,11 @@ SQL;
 
         $res = $this->sqlite->query($query);
         $res2 = $res->fetchArray();
+        if (empty($res2[0])) { print "No Severity for $folder\\$name ( read : '$res2[0]'\n"; }
 
         $return = constant("\\Analyzer\\Analyzer::$res2[0]");
         
-        if (empty($return['severity'])) { print "No Severity for $folder\\$name ( read : $res2[0]\n"; }
+        if (empty($return['severity'])) { print "No Severity for $folder\\$name ( read : '$res2[0]')\n"; }
 
         return $return;
     }
