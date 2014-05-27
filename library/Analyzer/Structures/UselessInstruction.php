@@ -11,7 +11,7 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
-                            'Constant', 'String', ));
+                            'Constant', 'String', 'Instanceof'));
         $this->prepareQuery();
     }
 }
