@@ -9,8 +9,9 @@ $expected     = array('function optionalKO23b ($x = 1, $y, $z, $a = 3) { /**/ } 
                       'function optionalKO23 ($x = 1, $y, $z) { /**/ } ', 
                       'function optionalKO3 ($x = 1, $y = 2, $z) { /**/ } ', 
                       'function optionalKO2 ($x = 1, $y) { /**/ } ', 
-                      'function optionalOK5 ($x, $y, $z = 3) { /**/ } ');
+                      );
 
-$expected_not = array();
+$expected_not = array('function optionalOK5 ($x, $y, $z = 3) { /**/ } '
+);
 
 ?>
