@@ -77,7 +77,7 @@ $not_compilable = array();
 $versions = array('53', '54', '55', '56');
 
 foreach($versions as $version) {
-    $res = trim(shell_exec('find ./projects/'.$dir.'/code/ -name "*.php"  ! -type l -print0 | xargs -0 -n1 -P5 sh scripts/php'.$version.'lint.sh'));
+    $res = trim(shell_exec('find ./projects/'.$dir.'/code/ -name "*.php"  ! -type l | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php'.$version.'lint.sh'));
     $res_files = explode("\n", $res);
     $incompilables = array();
     
