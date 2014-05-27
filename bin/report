@@ -101,6 +101,9 @@ if (!file_exists('./projects/'.$project.'/config.ini')) {
 }
 $config = parse_ini_file('./projects/'.$project.'/config.ini');
 
+$datastore = new Datastore($project);
+\Analyzer\Analyzer::$datastore = $datastore;
+
 print "Building report ".REPORT." for project $project in file ".FILE.", with format ".FORMAT."\n";
 $begin = microtime(true);
 
