@@ -296,3 +296,9 @@ Inventory of transport (list from PHP code)
 UseVoidReturn : function return void/null, but result it captured (may be not used...)
 TooManyArgument : for PHP functions and for custom code
 RequiredAfterOptionalParam : optional parameters are the last on the argument list
+report usage of casting
+report "$string" or 'true'.
+Die without no argument (at least, put __METHOD__, file)
+Echo : with or without () (preferences)
+Use const or constant() for constants ? 
+Check for what happens with $x['a']; (does it create the index? )
