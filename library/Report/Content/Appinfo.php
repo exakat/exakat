@@ -68,6 +68,8 @@ class Appinfo extends \Report\Content {
                     ),
                     'PHP' => array(
                             'Short tags'     => 'Structures/ShortTags',
+                            'Echo tags <?='  => 'Structures/EchoTagsUsage',
+//                            'Closed scripts'  => 'Php/ClosedTags',
                             'Incompilable'   => 'Php/Incompilable',
                             
 //                            'Iffectations'   => 'Structures/Iffectation',
