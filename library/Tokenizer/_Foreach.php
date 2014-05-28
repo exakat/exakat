@@ -63,7 +63,7 @@ class _Foreach extends TokenAuto {
                                                        '3' => 'DROP',
                                                        '4' => 'VALUE',
                                                        '5' => 'DROP',
-                                                       '6' => 'LOOP',
+                                                       '6' => 'BLOCK',
                                                       ),
                                'atom'         => 'Foreach',
                                'cleanIndex'   => true,
@@ -108,7 +108,7 @@ class _Foreach extends TokenAuto {
                                                         4 => 'VALUE',
                                                         5 => 'DROP',
                                                         6 => 'DROP',
-                                                        7 => 'LOOP',
+                                                        7 => 'BLOCK',
                                                         8 => 'DROP',
                                                       ),
                                'atom'         => 'Foreach',
@@ -139,7 +139,7 @@ class _Foreach extends TokenAuto {
                                                         4 => 'VALUE',
                                                         5 => 'DROP',
                                                         6 => 'DROP',
-                                                        7 => 'LOOP',
+                                                        7 => 'BLOCK',
                                                         8 => 'DROP',
                                                         9 => 'DROP',
                                                       ),
@@ -156,7 +156,7 @@ class _Foreach extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty("fullcode", "foreach(" + it.out("SOURCE").next().getProperty('fullcode') + " as " + it.out("VALUE").next().getProperty('fullcode') + ")" + it.out("LOOP").next().getProperty('fullcode'));
+fullcode.setProperty("fullcode", "foreach(" + it.out("SOURCE").next().getProperty('fullcode') + " as " + it.out("VALUE").next().getProperty('fullcode') + ")" + it.out("BLOCK").next().getProperty('fullcode'));
 
 GREMLIN;
     }

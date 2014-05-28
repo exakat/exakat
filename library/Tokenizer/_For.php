@@ -63,7 +63,7 @@ class _For extends TokenAuto {
                                                        '5' => 'DROP',
                                                        '6' => 'INCREMENT',
                                                        '7' => 'DROP',
-                                                       '8' => 'CODE',
+                                                       '8' => 'BLOCK',
                                                       ),
                                'atom'         => 'For',
                                'cleanIndex'   => true,
@@ -94,7 +94,7 @@ class _For extends TokenAuto {
                                                         6 => 'INCREMENT',
                                                         7 => 'DROP',
                                                         8 => 'DROP',
-                                                        9 => 'CODE',
+                                                        9 => 'BLOCK',
                                                        10 => 'DROP', 
                                                       ),
                                'atom'         => 'For',
@@ -128,7 +128,7 @@ class _For extends TokenAuto {
                                                         6 => 'INCREMENT',
                                                         7 => 'DROP',
                                                         8 => 'DROP',
-                                                        9 => 'CODE',
+                                                        9 => 'BLOCK',
                                                        10 => 'DROP', 
                                                        11 => 'DROP', 
                                                       ),
@@ -144,7 +144,7 @@ class _For extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-it.fullcode = "for(" + it.out("INIT").next().fullcode + " ; " + it.out("FINAL").next().fullcode + " ; " + it.out("INCREMENT").next().fullcode + ") " + it.out("CODE").next().fullcode;
+it.fullcode = "for(" + it.out("INIT").next().fullcode + " ; " + it.out("FINAL").next().fullcode + " ; " + it.out("INCREMENT").next().fullcode + ") " + it.out("BLOCK").next().fullcode;
 
 GREMLIN;
     }
