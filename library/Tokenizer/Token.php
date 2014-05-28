@@ -83,7 +83,6 @@ class Token {
                                  '_Declare',
                                  'Halt', 
                                  'Concatenation',
-                                 'Void', 
                                  'Typehint',
                                  '_Use', 
                                  'ArrayNS',
