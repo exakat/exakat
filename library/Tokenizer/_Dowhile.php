@@ -75,7 +75,7 @@ class _Dowhile extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', "do " + fullcode.out("BLOCK").next().getProperty('fullcode') + " while " + fullcode.out("CONDITION").next().getProperty('fullcode'));
+fullcode.setProperty('fullcode', "do " + fullcode.out("BLOCK").next().getProperty('fullcode') + " while (" + fullcode.out("CONDITION").next().getProperty('fullcode') + ")");
 
 GREMLIN;
 

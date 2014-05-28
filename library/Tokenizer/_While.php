@@ -86,7 +86,7 @@ class _While extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', "while " + fullcode.out("CONDITION").next().getProperty('fullcode') + " " + fullcode.out("BLOCK").next().getProperty('fullcode'));
+fullcode.setProperty('fullcode', "while (" + fullcode.out("CONDITION").next().getProperty('fullcode') + ") " + fullcode.out("BLOCK").next().getProperty('fullcode'));
 
 GREMLIN;
 
