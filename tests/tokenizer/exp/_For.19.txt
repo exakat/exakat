@@ -40,8 +40,6 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                0
-              Label : ARGUMENT
                 $g
               Label : ARGUMENT
                 F
@@ -49,6 +47,8 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     $h
+              Label : ARGUMENT
+                0
       Label : LEFT
         [
         Label : VARIABLE

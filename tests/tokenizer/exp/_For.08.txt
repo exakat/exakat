@@ -1,9 +1,9 @@
 <?php
 
 Label : CODE
-  for
-  Label : CODE
-    Block With For
+  makeSequence
+  Label : ELEMENT
+    for
     Label : CODE
       {
       Label : CODE
@@ -12,13 +12,13 @@ Label : CODE
           ++
           Label : POSTPLUSPLUS
             $j
-  Label : FINAL
-    <
-    Label : LEFT
-      $i
-    Label : RIGHT
-      5
-  Label : INIT
-    void
-  Label : INCREMENT
-    void
+    Label : INIT
+      void
+    Label : FINAL
+      <
+      Label : RIGHT
+        5
+      Label : LEFT
+        $i
+    Label : INCREMENT
+      void

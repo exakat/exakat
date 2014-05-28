@@ -1,10 +1,42 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     for
+    Label : INIT
+      ,
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          0
+        Label : LEFT
+          $i
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          count
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : PROPERTY
+                d
+              Label : OBJECT
+                $c
+        Label : LEFT
+          $n
+    Label : FINAL
+      <
+      Label : RIGHT
+        $n
+      Label : LEFT
+        $i
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $i
     Label : CODE
-      ;
+      makeSequence
       Label : ELEMENT
         ->
         Label : OBJECT
@@ -29,35 +61,3 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'j'
-    Label : FINAL
-      <
-      Label : LEFT
-        $i
-      Label : RIGHT
-        $n
-    Label : INIT
-      ,
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $i
-        Label : RIGHT
-          0
-      Label : ARGUMENT
-        =
-        Label : LEFT
-          $n
-        Label : RIGHT
-          count
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ->
-              Label : PROPERTY
-                d
-              Label : OBJECT
-                $c
-    Label : INCREMENT
-      ++
-      Label : POSTPLUSPLUS
-        $i

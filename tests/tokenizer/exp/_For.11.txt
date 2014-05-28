@@ -1,26 +1,26 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     for
-    Label : CODE
-      ++
-      Label : POSTPLUSPLUS
-        $i
-    Label : FINAL
-      <
-      Label : LEFT
-        $b
-      Label : RIGHT
-        1
     Label : INIT
       =
-      Label : LEFT
-        $a
       Label : RIGHT
         0
+      Label : LEFT
+        $a
+    Label : FINAL
+      <
+      Label : RIGHT
+        1
+      Label : LEFT
+        $b
     Label : INCREMENT
       ++
       Label : POSTPLUSPLUS
         $c
+    Label : CODE
+      ++
+      Label : POSTPLUSPLUS
+        $i

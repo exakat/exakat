@@ -1,10 +1,6 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      $n
+  makeSequence
   Label : ELEMENT
     for
     Label : CODE
@@ -27,55 +23,59 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $e
-    Label : FINAL
-      <
-      Label : LEFT
-        $i
-      Label : RIGHT
-        $b
+          Label : ELEMENT
+            foreach
+            Label : VALUE
+              =>
+              Label : KEY
+                $h
+              Label : VALUE
+                $i
+            Label : SOURCE
+              $g
+            Label : LOOP
+              Block With Foreach
+              Label : CODE
+                =
+                Label : RIGHT
+                  /
+                  Label : RIGHT
+                    (int)
+                    Label : CAST
+                      (
+                      Label : CODE
+                        $m
+                  Label : LEFT
+                    (
+                    Label : CODE
+                      $l
+                Label : LEFT
+                  $k
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              array
+              Label : ARGUMENTS
+                void
+            Label : LEFT
+              $f
     Label : INIT
       =
-      Label : LEFT
-        $i
       Label : RIGHT
         0
+      Label : LEFT
+        $i
+    Label : FINAL
+      <
+      Label : RIGHT
+        $b
+      Label : LEFT
+        $i
     Label : INCREMENT
       ++
       Label : PREPLUSPLUS
         $i
   Label : ELEMENT
-    =
-    Label : LEFT
-      $f
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        void
-  Label : ELEMENT
-    foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $h
-      Label : VALUE
-        $i
-    Label : SOURCE
-      $g
-    Label : LOOP
-      Block With Foreach
-      Label : CODE
-        =
-        Label : LEFT
-          $k
-        Label : RIGHT
-          /
-          Label : LEFT
-            (
-            Label : CODE
-              $l
-          Label : RIGHT
-            (int)
-            Label : CAST
-              (
-              Label : CODE
-                $m
+    return
+    Label : RETURN
+      $n

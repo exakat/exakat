@@ -1,15 +1,29 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence
   Label : ELEMENT
     for
+    Label : INIT
+      =
+      Label : RIGHT
+        0
+      Label : LEFT
+        $a
+    Label : FINAL
+      <
+      Label : RIGHT
+        1
+      Label : LEFT
+        $b
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $c
     Label : CODE
-      ;
+      makeSequence
       Label : ELEMENT
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           b
           Label : ARGUMENTS
@@ -18,29 +32,15 @@ Label : CODE
               'c'
             Label : ARGUMENT
               $c
+        Label : LEFT
+          $a
       Label : ELEMENT
         =
-        Label : LEFT
-          $b
         Label : RIGHT
           +
-          Label : LEFT
-            $a
           Label : RIGHT
             $c
-    Label : FINAL
-      <
-      Label : LEFT
-        $b
-      Label : RIGHT
-        1
-    Label : INIT
-      =
-      Label : LEFT
-        $a
-      Label : RIGHT
-        0
-    Label : INCREMENT
-      ++
-      Label : POSTPLUSPLUS
-        $c
+          Label : LEFT
+            $a
+        Label : LEFT
+          $b

@@ -1,36 +1,38 @@
 <?php
 
 Label : CODE
-  for
-  Label : CODE
-    Block With For
+  makeSequence
+  Label : ELEMENT
+    for
     Label : CODE
+      Block With For
+      Label : CODE
+        =
+        Label : RIGHT
+          $g
+        Label : LEFT
+          [
+          Label : VARIABLE
+            ->
+            Label : PROPERTY
+              e
+            Label : OBJECT
+              $d
+          Label : INDEX
+            $f
+    Label : INIT
       =
-      Label : LEFT
-        [
-        Label : INDEX
-          $f
-        Label : VARIABLE
-          ->
-          Label : PROPERTY
-            e
-          Label : OBJECT
-            $d
       Label : RIGHT
-        $g
-  Label : FINAL
-    <
-    Label : LEFT
-      $i
-    Label : RIGHT
-      10
-  Label : INIT
-    =
-    Label : LEFT
-      $i
-    Label : RIGHT
-      0
-  Label : INCREMENT
-    ++
-    Label : POSTPLUSPLUS
-      $i
+        0
+      Label : LEFT
+        $i
+    Label : FINAL
+      <
+      Label : RIGHT
+        10
+      Label : LEFT
+        $i
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $i
