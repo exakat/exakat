@@ -44,7 +44,7 @@ class _Default extends TokenAuto {
                                'keepIndexed'                       => true);
         $this->checkAuto();
 
-        // Case has only one instruction no semi-colon (case 'a': $x++;)
+        // default has only one instruction no semi-colon (case 'a': $x++;)
         $this->conditions = array( 0 => array('token' => _Default::$operators,
                                               'atom'  => 'none'),
                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
@@ -55,7 +55,7 @@ class _Default extends TokenAuto {
                                'keepIndexed'                       => true);
         $this->checkAuto();
 
-   // create block for Default  default : $x++ (or a sequence).
+        // create block for Default  default : $x++ (or a sequence).
         $this->conditions = array(  0 => array('token'   => _Default::$operators,
                                                'atom'    => 'none'),
                                     1 => array('token'   => array('T_COLON', 'T_SEMICOLON'),
