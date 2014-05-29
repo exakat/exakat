@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      +
+      Label : RIGHT
+        0
+      Label : LEFT
+        -
+        Label : RIGHT
+          $d
+        Label : LEFT
+          ->
+          Label : PROPERTY
+            ->
+            Label : PROPERTY
+              B
+            Label : OBJECT
+              $c
+          Label : OBJECT
+            $b
+    Label : LEFT
+      $a

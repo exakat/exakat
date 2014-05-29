@@ -10,14 +10,14 @@ Label : CODE
         $b
       Label : CONCAT
         [
+        Label : VARIABLE
+          $c
         Label : INDEX
           -
           Label : RIGHT
             1
           Label : LEFT
             $d
-        Label : VARIABLE
-          $c
       Label : CONCAT
         "
         Label : CONTAIN

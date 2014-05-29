@@ -14,10 +14,10 @@ Label : CODE
             ===
             Label : RIGHT
               ::
-              Label : CLASS
-                I
               Label : CONSTANT
                 J
+              Label : CLASS
+                I
             Label : LEFT
               ->
               Label : PROPERTY
@@ -30,10 +30,10 @@ Label : CODE
               +
               Label : SIGN
                 ::
-                Label : CLASS
-                  F
                 Label : CONSTANT
                   G
+                Label : CLASS
+                  F
             Label : LEFT
               ->
               Label : PROPERTY
@@ -44,10 +44,10 @@ Label : CODE
           ===
           Label : RIGHT
             ::
-            Label : CLASS
-              C
             Label : CONSTANT
               D
+            Label : CLASS
+              C
           Label : LEFT
             ->
             Label : PROPERTY
@@ -62,10 +62,10 @@ Label : CODE
           =
           Label : RIGHT
             ::
-            Label : CLASS
-              L
             Label : CONSTANT
               M
+            Label : CLASS
+              L
           Label : LEFT
             ->
             Label : PROPERTY
@@ -82,10 +82,10 @@ Label : CODE
             =
             Label : RIGHT
               ::
-              Label : CLASS
-                O
               Label : CONSTANT
                 P
+              Label : CLASS
+                O
             Label : LEFT
               ->
               Label : PROPERTY

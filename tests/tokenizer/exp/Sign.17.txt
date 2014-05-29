@@ -5,12 +5,16 @@ Label : CODE
   Label : ELEMENT
     +=
     Label : RIGHT
-      2
+      +
+      Label : SIGN
+        2
     Label : LEFT
       $b
   Label : ELEMENT
     =
     Label : RIGHT
-      -3
+      -
+      Label : SIGN
+        3
     Label : LEFT
       $x

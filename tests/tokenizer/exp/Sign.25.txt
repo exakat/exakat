@@ -16,23 +16,23 @@ Label : CODE
             -
             Label : RIGHT
               [
-              Label : INDEX
-                'g'
               Label : VARIABLE
                 ->
                 Label : PROPERTY
                   f
                 Label : OBJECT
                   $e
+              Label : INDEX
+                'g'
             Label : LEFT
               [
-              Label : INDEX
-                'd'
               Label : VARIABLE
                 ->
                 Label : PROPERTY
                   c
                 Label : OBJECT
                   $b
+              Label : INDEX
+                'd'
     Label : LEFT
       $a

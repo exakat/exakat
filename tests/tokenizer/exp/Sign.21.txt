@@ -8,7 +8,7 @@ Label : CODE
       2
     Label : LEFT
       [
-      Label : INDEX
-        1
       Label : VARIABLE
         $x
+      Label : INDEX
+        1
