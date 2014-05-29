@@ -361,7 +361,7 @@ g.removeVertex(arg);
 ";
             unset($actions['to_var_new']);
         }
-        
+
         if (isset($actions['to_var'])) {
             $ppp = new _Ppp(Token::$client);
             $fullcode = $ppp->fullcode();
@@ -2892,7 +2892,7 @@ g.idx('Variable').put('token', 'node', x);
         if (isset($actions['cleanIndex'])) {
             $qactions[] = " 
 /* Remove children's index */  
-it.outE.hasNot('label', 'NEXT').inV.each{ 
+it.filter{it.outE('label', 'NEXT').any() == false}.each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 
