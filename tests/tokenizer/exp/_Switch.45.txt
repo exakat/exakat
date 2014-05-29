@@ -1,0 +1,632 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    switch
+    Label : NAME
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'B'
+    Label : CASES
+      {
+      Label : CODE
+        Sequence Case Default
+        Label : ELEMENT
+          case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  !=
+                  Label : RIGHT
+                    AW
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $bl
+                  Label : LEFT
+                    $bk
+              Label : THEN
+                {
+                Label : CODE
+                  makeSequence
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      .
+                      Label : CONCAT
+                        ::
+                        Label : CLASS
+                          AX
+                        Label : CONSTANT
+                          AY
+                      Label : CONCAT
+                        'AZ'
+                      Label : CONCAT
+                        ::
+                        Label : CLASS
+                          BA
+                        Label : CONSTANT
+                          BB
+                    Label : LEFT
+                      $bm
+              Label : ELSE
+                makeSequence
+                Label : ELEMENT
+                  {
+                  Label : CODE
+                    makeSequence
+                    Label : ELEMENT
+                      =
+                      Label : RIGHT
+                        ::
+                        Label : CLASS
+                          BC
+                        Label : CONSTANT
+                          BD
+                      Label : LEFT
+                        $bn
+                Label : ELEMENT
+                  break
+                  Label : LEVEL
+                    void
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  AK
+                Label : CONSTANT
+                  AL
+              Label : LEFT
+                $aq
+            Label : ELEMENT
+              ;
+              Label : ELEMENT
+                makeSequence
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    new
+                    Label : NEW
+                      AM
+                      Label : ARGUMENTS
+                        ,
+                        Label : ARGUMENT
+                          [
+                          Label : VARIABLE
+                            $as
+                          Label : INDEX
+                            'AN'
+                        Label : ARGUMENT
+                          $at
+                  Label : LEFT
+                    $ar
+              Label : ELEMENT
+                ;
+                Label : ELEMENT
+                  makeSequence
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      AP
+                      Label : ARGUMENTS
+                        ,
+                        Label : ARGUMENT
+                          'AQ'
+                        Label : ARGUMENT
+                          ->
+                          Label : OBJECT
+                            $bc
+                          Label : METHOD
+                            AR
+                            Label : ARGUMENTS
+                              void
+                              Label : ARGUMENT
+                                'AT'
+                    Label : LEFT
+                      list
+                      Label : ARGUMENTS
+                        ,
+                        Label : ARGUMENT
+                          $aw
+                        Label : ARGUMENT
+                          $ax
+                        Label : ARGUMENT
+                          $ay
+                        Label : ARGUMENT
+                          $az
+                        Label : ARGUMENT
+                          $ba
+                        Label : ARGUMENT
+                          $bb
+                  Label : ELEMENT
+                    ->
+                    Label : OBJECT
+                      $au
+                    Label : METHOD
+                      AO
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          $av
+                Label : ELEMENT
+                  makeSequence
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      ::
+                      Label : METHOD
+                        AV
+                        Label : ARGUMENTS
+                          ,
+                          Label : ARGUMENT
+                            $be
+                          Label : ARGUMENT
+                            $bf
+                          Label : ARGUMENT
+                            $bg
+                          Label : ARGUMENT
+                            $bh
+                          Label : ARGUMENT
+                            $bi
+                          Label : ARGUMENT
+                            $bj
+                      Label : CLASS
+                        AU
+                    Label : LEFT
+                      $bd
+          Label : CASE
+            'AJ'
+        Label : ELEMENT
+          case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  BF
+                Label : CONSTANT
+                  BG
+              Label : LEFT
+                $bo
+            Label : ELEMENT
+              ;
+              Label : ELEMENT
+                makeSequence
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    ::
+                    Label : METHOD
+                      BI
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          BJ
+                          Label : ARGUMENTS
+                            void
+                            Label : ARGUMENT
+                              .
+                              Label : CONCAT
+                                'BK'
+                              Label : CONCAT
+                                BL
+                                Label : ARGUMENTS
+                                  ,
+                                  Label : ARGUMENT
+                                    'BM'
+                                  Label : ARGUMENT
+                                    BN
+                                    Label : ARGUMENTS
+                                      ,
+                                      Label : ARGUMENT
+                                        [
+                                        Label : VARIABLE
+                                          $bq
+                                        Label : INDEX
+                                          'BO'
+                                      Label : ARGUMENT
+                                        'BP'
+                    Label : CLASS
+                      BH
+                  Label : LEFT
+                    $bp
+              Label : ELEMENT
+                ;
+                Label : ELEMENT
+                  makeSequence
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      ::
+                      Label : CLASS
+                        BQ
+                      Label : CONSTANT
+                        BR
+                    Label : LEFT
+                      $br
+                Label : ELEMENT
+                  makeSequence
+                  Label : ELEMENT
+                    break
+                    Label : LEVEL
+                      void
+          Label : CASE
+            'BE'
+        Label : ELEMENT
+          case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  ==
+                  Label : RIGHT
+                    $aj
+                  Label : LEFT
+                    AI
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $ai
+              Label : THEN
+                {
+                Label : CODE
+                  makeSequence
+                  Label : ELEMENT
+                    if
+                    Label : CONDITION
+                      (
+                      Label : CODE
+                        =
+                        Label : RIGHT
+                          (integer)
+                          Label : CAST
+                            $al
+                        Label : LEFT
+                          $ak
+                    Label : THEN
+                      Block With if/elseif
+                      Label : CODE
+                        =
+                        Label : RIGHT
+                          (integer)
+                          Label : CAST
+                            $an
+                        Label : LEFT
+                          $am
+                    Label : ELSE
+                      makeSequence
+                      Label : ELEMENT
+                        =
+                        Label : RIGHT
+                          (float)
+                          Label : CAST
+                            $ap
+                        Label : LEFT
+                          $ao
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  AF
+                Label : CONSTANT
+                  AG
+              Label : LEFT
+                $af
+            Label : ELEMENT
+              makeSequence
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  (float)
+                  Label : CAST
+                    [
+                    Label : VARIABLE
+                      $ah
+                    Label : INDEX
+                      'AH'
+                Label : LEFT
+                  $ag
+          Label : CASE
+            'AE'
+        Label : ELEMENT
+          case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              makeSequence
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+            Label : ELEMENT
+              makeSequence
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  ::
+                  Label : CLASS
+                    AC
+                  Label : CONSTANT
+                    AD
+                Label : LEFT
+                  $ae
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  ==
+                  Label : RIGHT
+                    $ab
+                  Label : LEFT
+                    AB
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $aa
+              Label : THEN
+                {
+                Label : CODE
+                  makeSequence
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      (integer)
+                      Label : CAST
+                        $ad
+                    Label : LEFT
+                      $ac
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  Y
+                Label : CONSTANT
+                  Z
+              Label : LEFT
+                $x
+            Label : ELEMENT
+              makeSequence
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  (float)
+                  Label : CAST
+                    [
+                    Label : VARIABLE
+                      $z
+                    Label : INDEX
+                      'AA'
+                Label : LEFT
+                  $y
+          Label : CASE
+            'X'
+        Label : ELEMENT
+          case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              makeSequence
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+            Label : ELEMENT
+              makeSequence
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  ::
+                  Label : CLASS
+                    V
+                  Label : CONSTANT
+                    W
+                Label : LEFT
+                  $w
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  ==
+                  Label : RIGHT
+                    $t
+                  Label : LEFT
+                    U
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $s
+              Label : THEN
+                {
+                Label : CODE
+                  makeSequence
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      (integer)
+                      Label : CAST
+                        $v
+                    Label : LEFT
+                      $u
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  R
+                Label : CONSTANT
+                  S
+              Label : LEFT
+                $p
+            Label : ELEMENT
+              makeSequence
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  (float)
+                  Label : CAST
+                    [
+                    Label : VARIABLE
+                      $r
+                    Label : INDEX
+                      'T'
+                Label : LEFT
+                  $q
+          Label : CASE
+            'Q'
+        Label : ELEMENT
+          case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  L
+                Label : CONSTANT
+                  M
+              Label : LEFT
+                $m
+            Label : ELEMENT
+              ;
+              Label : ELEMENT
+                makeSequence
+                Label : ELEMENT
+                  =
+                  Label : RIGHT
+                    ?
+                    Label : CONDITION
+                      (
+                      Label : CODE
+                        ==
+                        Label : RIGHT
+                          'N'
+                        Label : LEFT
+                          $o
+                    Label : THEN
+                      O
+                    Label : ELSE
+                      P
+                  Label : LEFT
+                    $n
+              Label : ELEMENT
+                makeSequence
+                Label : ELEMENT
+                  break
+                  Label : LEVEL
+                    void
+          Label : CASE
+            'K'
+        Label : ELEMENT
+          case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                void
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  isset
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      ->
+                      Label : PROPERTY
+                        F
+                      Label : OBJECT
+                        $e
+              Label : THEN
+                {
+                Label : CODE
+                  ;
+                  Label : ELEMENT
+                    makeSequence
+                    Label : ELEMENT
+                      =
+                      Label : RIGHT
+                        ->
+                        Label : PROPERTY
+                          G
+                        Label : OBJECT
+                          $g
+                      Label : LEFT
+                        $f
+                  Label : ELEMENT
+                    ;
+                    Label : ELEMENT
+                      makeSequence
+                      Label : ELEMENT
+                        =
+                        Label : RIGHT
+                          ->
+                          Label : OBJECT
+                            $i
+                          Label : METHOD
+                            H
+                            Label : ARGUMENTS
+                              void
+                              Label : ARGUMENT
+                                [
+                                Label : VARIABLE
+                                  $j
+                                Label : INDEX
+                                  'I'
+                        Label : LEFT
+                          $h
+                    Label : ELEMENT
+                      makeSequence
+                      Label : ELEMENT
+                        =
+                        Label : RIGHT
+                          [
+                          Label : VARIABLE
+                            $l
+                          Label : INDEX
+                            'J'
+                        Label : LEFT
+                          $k
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  D
+                Label : CONSTANT
+                  E
+              Label : LEFT
+                $b
+            Label : ELEMENT
+              makeSequence
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  $d
+                Label : LEFT
+                  $c
+          Label : CASE
+            'C'

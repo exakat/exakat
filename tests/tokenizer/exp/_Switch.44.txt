@@ -1,0 +1,60 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    ;
+    Label : ELEMENT
+      void
+    Label : ELEMENT
+      void
+  Label : ELEMENT
+    makeSequence
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        +
+        Label : RIGHT
+          2
+        Label : LEFT
+          1
+      Label : LEFT
+        $y
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      {
+      Label : CODE
+        Sequence Case Default
+        Label : ELEMENT
+          default
+          Label : CODE
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                FALSE
+            Label : ELEMENT
+              void
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      {
+      Label : CODE
+        Sequence Case Default
+        Label : ELEMENT
+          case
+          Label : CASE
+            1
+          Label : CODE
+            ;
+            Label : ELEMENT
+              return
+              Label : RETURN
+                FALSE
+            Label : ELEMENT
+              void
