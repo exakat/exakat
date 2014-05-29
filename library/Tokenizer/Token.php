@@ -290,21 +290,6 @@ g.V.has('index', 'true').filter{it.out().count() == 0}.each{
     g.removeVertex(it);
 }
 
-";
-        Token::query($query);
-    }
-
-    static public function finishSequence() {
-        $query = " 
-g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
-    g.removeVertex(it.in('NEXT').in('NEXT').next()); 
-    g.removeVertex(it.out('NEXT').next()); 
-    g.removeVertex(it); 
-}
-
-g.idx('racines')[['token':'DELETE']].out('DELETE').each{
-    g.removeVertex(it);
-}
 
 // calculating the full namespaces paths
 g.idx('Const')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().fullcode);}
@@ -395,6 +380,22 @@ g.idx('Nsname')[['token':'node']].filter{it.in('ELEMENT', 'METHOD', 'CLASS', 'NA
 }
 
 // fallback to global NS for functions and constants.
+
+";
+        Token::query($query);
+    }
+
+    static public function finishSequence() {
+        $query = " 
+g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
+    g.removeVertex(it.in('NEXT').in('NEXT').next()); 
+    g.removeVertex(it.out('NEXT').next()); 
+    g.removeVertex(it); 
+}
+
+g.idx('racines')[['token':'DELETE']].out('DELETE').each{
+    g.removeVertex(it);
+}
 
 ";
         Token::query($query);
