@@ -50,11 +50,11 @@ class Sequence extends TokenAuto {
                                    2 => array('filterOut2' => $next_operator),
         );
         
-        $this->actions = array('transform'   => array( 1 => 'ELEMENT',
-                                                      -1 => 'ELEMENT'),
+        $this->actions = array( 'transform'   => array( 1 => 'ELEMENT',
+                                                       -1 => 'ELEMENT'),
                                'order'       => array( 1 => 1,
                                                       -1 => 0 ),
-                               'mergeNext'   => array('Sequence' => 'ELEMENT'), 
+//                               'mergeNext'   => array('Sequence' => 'ELEMENT'), 
                                'atom'        => 'Sequence',
                                'cleanIndex'  => true,
                                'keepIndexed' => true,
@@ -102,7 +102,7 @@ class Sequence extends TokenAuto {
                                                      -1 => 'ELEMENT'),
                                'order'      => array( 1 => 1,
                                                      -1 => 0 ),
-                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
+//                               'mergeNext'  => array('Sequence' => 'ELEMENT'), 
                                'atom'       => 'Sequence',
                                'cleanIndex' => true,
                                'keepIndexed' => true,);
@@ -125,7 +125,7 @@ class Sequence extends TokenAuto {
                                                        -1 => 'ELEMENT'),
                                'order'        => array( 1 => 1,
                                                        -1 => 0 ),
-                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+//                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
                                'keepIndexed'  => true);
@@ -148,7 +148,7 @@ class Sequence extends TokenAuto {
                                                        -1 => 'ELEMENT'),
                                'order'        => array( 1 => 1,
                                                        -1 => 0 ),
-                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+//                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
                                'keepIndexed'  => true
@@ -171,7 +171,7 @@ class Sequence extends TokenAuto {
                                                        -1 => 'ELEMENT'),
                                'order'        => array( 1 => 1,
                                                        -1 => 0 ),
-                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+//                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
                                'keepIndexed'  => true
@@ -196,7 +196,7 @@ class Sequence extends TokenAuto {
                                                        -1 => 'ELEMENT'),
                                'order'        => array( 1 => 1,
                                                        -1 => 0 ),
-                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+//                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
                                'keepIndexed'  => true
@@ -221,7 +221,7 @@ class Sequence extends TokenAuto {
                                                        -1 => 'ELEMENT'),
                                'order'        => array( 1 => 1,
                                                        -1 => 0 ),
-                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+//                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
                                'keepIndexed'  => true
@@ -274,7 +274,7 @@ class Sequence extends TokenAuto {
         
         $this->actions = array('makeEdge'     => array(-1 => 'ELEMENT'),
                                'order'        => array(-1 => 0 ),
-                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+//                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
                                'keepIndexed'  => true
