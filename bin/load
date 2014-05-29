@@ -320,6 +320,7 @@ function process_file($filename, $log_file) {
                                               ->setProperty('fullcode', '<?php /* empty, no closing tag */ ?>')
                                               ->setProperty('line', $line)
                                               ->setProperty('atom', 'Phpcode')
+                                              ->setProperty('closing_tag', 'false')
                                               ->setProperty('modifiedBy', 'bin/load1')
                                               ->save();
 
@@ -327,7 +328,9 @@ function process_file($filename, $log_file) {
             } elseif ($Php->getTokenname($token[0]) == 'T_OPEN_TAG_WITH_ECHO') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_OPEN_TAG')
                                               ->setProperty('code', str_replace('<?=', '<?php', $token[1]))
+                                              ->setProperty('tag', '<?=')
                                               ->setProperty('line', $token[2])
+                                              ->setProperty('modifiedBy', 'bin/load19a')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
                 $regexIndex["Phpcode"]->relateTo($T[$Tid], 'INDEXED')->save();
@@ -340,6 +343,7 @@ function process_file($filename, $log_file) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_ECHO')
                                               ->setProperty('code', 'echo')
                                               ->setProperty('line', $line)
+                                              ->setProperty('modifiedBy', 'bin/load19b')
                                               ->save();
                 $regexIndex["ArgumentsNoParenthesis"]->relateTo($T[$Tid], 'INDEXED')->save();
                 $regexIndex["Functioncall"]->relateTo($T[$Tid], 'INDEXED')->save();
@@ -561,47 +565,6 @@ function process_file($filename, $log_file) {
                 unset($tokens[$id + 1]);
                 
                 $to_index = false;
-            } elseif ( ($tokens[$id] == '(' || $tokens[$id] == ';') && 
-                            isset($tokens[$id + 1]) && is_string($tokens[$id + 1]) &&
-                            ( $tokens[$id + 1] == ';' || $tokens[$id + 1] == ')')) {
-                    $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
-                                                  ->setProperty('code', $token)
-                                                  ->setProperty('line', $line)
-                                                  ->setProperty('modifiedBy', 'bin/load18a')
-                                                  ->save();
-                    $classNode->relateTo($T[$Tid]);
-
-                    $previous->relateTo($T[$Tid], 'NEXT')->save();
-                    $previous = $T[$Tid];
-                
-                    $Tid++;
-                    $T[$Tid]   = $client->makeNode()->setProperty('token', 'T_VOID')
-                                                    ->setProperty('code', 'void')
-                                                    ->setProperty('fullcode', ' ')
-                                                    ->setProperty('line', $line)
-                                                    ->setProperty('atom', 'Void')
-                                                    ->setProperty('modifiedBy', 'bin/load8b')
-                                                    ->save();
-                    $classNode->relateTo($T[$Tid]);
-                } elseif ($token == ':' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  
-                      && in_array($Php->getTokenname($tokens[$id + 1][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
-                                              ->setProperty('code', $token)
-                                              ->setProperty('line', $line)
-                                              ->save();
-                $classNode->relateTo($T[$Tid]);
-                $previous->relateTo($T[$Tid], 'NEXT')->save();
-                $previous = $T[$Tid];
-
-                $Tid++;
-                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
-                                              ->setProperty('code', 'void')
-                                              ->setProperty('fullcode', ' ')
-                                              ->setProperty('line', $line)
-                                              ->setProperty('atom', 'Void')
-                                              ->setProperty('modifiedBy', 'bin/load4')
-                                              ->save();
-                $classNode->relateTo($T[$Tid]);
             } elseif ($token == ':' 
                       && isset($tokens[$id + 1]) && is_string($tokens[$id + 1])  
                       && $tokens[$id + 1] == ';'
@@ -616,7 +579,6 @@ function process_file($filename, $log_file) {
                 $previous = $T[$Tid];
 
                 $Tid++;
-                $Tid++;
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                               ->setProperty('code', 'void')
                                               ->setProperty('fullcode', ' ')
@@ -625,6 +587,7 @@ function process_file($filename, $log_file) {
                                               ->setProperty('modifiedBy', 'bin/load5')
                                               ->save();
                 $classNode->relateTo($T[$Tid]);
+                $to_index = false;
             } elseif ($token == '(' && $tokens[$id + 1] == ')' &&
                       $Php->getTokenname($tokens[$id - 1][0]) != 'T_HALT_COMPILER') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
@@ -651,6 +614,50 @@ function process_file($filename, $log_file) {
                 $classNode->relateTo($T[$Tid]);
 
                 $to_index = false;
+            } elseif ( ($tokens[$id] == '(' || $tokens[$id] == ';') && 
+                            isset($tokens[$id + 1]) && is_string($tokens[$id + 1]) &&
+                            ( $tokens[$id + 1] == ';' || $tokens[$id + 1] == ')')) {
+                    // This must be after the processing of ( and ) (right above)
+                    $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
+                                                  ->setProperty('code', $token)
+                                                  ->setProperty('line', $line)
+                                                  ->setProperty('modifiedBy', 'bin/load18a')
+                                                  ->save();
+                    $classNode->relateTo($T[$Tid]);
+
+                    $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();
+                    $previous->relateTo($T[$Tid], 'NEXT')->save();
+                    $previous = $T[$Tid];
+                
+                    $Tid++;
+                    $T[$Tid]   = $client->makeNode()->setProperty('token', 'T_VOID')
+                                                    ->setProperty('code', 'void')
+                                                    ->setProperty('fullcode', ' ')
+                                                    ->setProperty('line', $line)
+                                                    ->setProperty('atom', 'Void')
+                                                    ->setProperty('modifiedBy', 'bin/load8b')
+                                                    ->save();
+                    $classNode->relateTo($T[$Tid]);
+                    $to_index = false;
+                } elseif ($token == ':' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  
+                      && in_array($Php->getTokenname($tokens[$id + 1][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
+                                              ->setProperty('code', $token)
+                                              ->setProperty('line', $line)
+                                              ->save();
+                $classNode->relateTo($T[$Tid]);
+                $previous->relateTo($T[$Tid], 'NEXT')->save();
+                $previous = $T[$Tid];
+
+                $Tid++;
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
+                                              ->setProperty('code', 'void')
+                                              ->setProperty('fullcode', ' ')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('atom', 'Void')
+                                              ->setProperty('modifiedBy', 'bin/load4')
+                                              ->save();
+                $classNode->relateTo($T[$Tid]);
             } elseif ($token == '{' && $tokens[$id + 1] == ';') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                               ->setProperty('code', $token)
