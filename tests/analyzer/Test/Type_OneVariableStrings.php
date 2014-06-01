@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Type_OneVariableStrings extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testType_OneVariableStrings01()  { $this->generic_test('Type_OneVariableStrings.01'); }
+    public function testType_OneVariableStrings02()  { $this->generic_test('Type_OneVariableStrings.02'); }
 }
 ?>
