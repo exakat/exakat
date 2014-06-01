@@ -37,7 +37,7 @@ class Assignation extends TokenAuto {
                                                                            Preplusplus::$operators )),
                                   -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 
                                                               'Noscream', 'Not', 'Arrayappend' , 'Typehint', 'Identifier',
-                                                              'Static', 'Cast' )),
+                                                              'Static', 'Cast', 'Sign' )),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut2' => array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators, 
@@ -61,7 +61,8 @@ class Assignation extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.out("LEFT").next().fullcode + " " + fullcode.code + " " + fullcode.out("RIGHT").next().fullcode; 
+fullcode.setProperty('fullcode', fullcode.out("LEFT").next().getProperty('fullcode') + " " + fullcode.getProperty('code') + " " + fullcode.out("RIGHT").next().getProperty('fullcode')); 
+
 GREMLIN;
     }
 }
