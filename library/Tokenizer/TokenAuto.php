@@ -2899,7 +2899,8 @@ g.idx('Variable').put('token', 'node', x);
             $qactions[] = " 
 /* Remove children's index */  
 // Do not add ELEMENT here 
-it.out('NAME', 'PROPERTY', 'ELEMENT2', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 'NEW', 'RETURN', 'CONSTANT', 'CLASS', 'VARIABLE').each{ 
+it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 'NEW', 'RETURN', 'CONSTANT', 'CLASS', 'VARIABLE',
+'INDEX', 'EXTENDS', 'SUBNAME').each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 
