@@ -1597,7 +1597,8 @@ if (it.out('NEXT').has('atom', 'Sequence').any()) {
 // lone instruction AFTER
 if (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
                                        'Dowhile', 'Try', 'Class', 'Interface', 'Trait', 'While', 'Break', 'Assignation', 'Halt',
-                                       'Staticmethodcall', 'Namespace', 'Label', 'Postplusplus', 'Preplusplus', 'Include', 'Functioncall' ] && 
+                                       'Staticmethodcall', 'Namespace', 'Label', 'Postplusplus', 'Preplusplus', 'Include', 'Functioncall',
+                                       'Variable' ] && 
                                        it.token != 'T_ELSEIF' }.any() &&
     it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' ,
                                                      'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
@@ -1606,7 +1607,7 @@ if (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function'
                                                      'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL',
                                                      'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL',
                                                      'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL',
-                                                      'T_SR_EQUAL'])}.
+                                                      'T_SR_EQUAL', 'T_OPEN_BRACKET'])}.
                                filter{!(it.token in ['T_ELSEIF', 'T_OPEN_CURLY']) || it.atom != null}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
@@ -1618,6 +1619,10 @@ if (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function'
     next.bothE('NEXT').each{ g.removeEdge(it); }
 
     next.setProperty('checkForNext', 'Next');
+    
+    if (next.both('NEXT').count() == 0) {
+        next.inE('INDEXED').each{ g.removeEdge(it); }
+    }
 } 
 
 if (it.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).any()) {
@@ -2889,10 +2894,12 @@ g.idx('Variable').put('token', 'node', x);
                 ";
             unset($actions['variable_to_functioncall']);
         }        
+
         if (isset($actions['cleanIndex'])) {
             $qactions[] = " 
 /* Remove children's index */  
-it.filter{it.outE('label', 'NEXT').any() == false}.each{ 
+// Do not add ELEMENT here 
+it.out('NAME', 'PROPERTY', 'ELEMENT2', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 'NEW', 'RETURN', 'CONSTANT', 'CLASS', 'VARIABLE').each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 

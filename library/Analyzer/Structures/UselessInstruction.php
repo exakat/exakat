@@ -13,6 +13,11 @@ class UselessInstruction extends Analyzer\Analyzer {
                             'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
                             'Constant', 'String', 'Instanceof'));
         $this->prepareQuery();
+        
+        $this->atomIs("Assignation")
+             ->outIs('LEFT')
+             ->atomIs('Sign');
+        $this->prepareQuery();
     }
 }
 
