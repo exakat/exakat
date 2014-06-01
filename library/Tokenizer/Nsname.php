@@ -60,7 +60,7 @@ class Nsname extends TokenAuto {
         return <<<GREMLIN
 
 s = []; 
-fullcode.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); };
+fullcode.out("SUBNAME").sort{it.order}._().each{ s.add(it.fullcode); };
 
 if (fullcode.absolutens == 'true') {
     fullcode.setProperty('fullcode', "\\\\");

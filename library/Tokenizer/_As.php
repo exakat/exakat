@@ -30,7 +30,7 @@ class _As extends TokenAuto {
         );
         
         $this->actions = array('makeEdge'     => array( 1 => 'AS',
-                                                       -1 => 'ELEMENT'),
+                                                       -1 => 'SUBNAME'),
                                'atom'         => 'As',
                                'cleanIndex'   => true);
         $this->checkAuto();
@@ -41,7 +41,7 @@ class _As extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.out("ELEMENT").next().getProperty('fullcode') + " as " + fullcode.out("AS").next().getProperty('fullcode'));
+fullcode.setProperty('fullcode', fullcode.out("SUBNAME").next().getProperty('fullcode') + " as " + fullcode.out("AS").next().getProperty('fullcode'));
 
 GREMLIN;
     }
