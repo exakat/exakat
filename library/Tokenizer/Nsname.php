@@ -13,7 +13,7 @@ class Nsname extends TokenAuto {
                                     1 => array('atom' => 'Identifier'),
         );
         
-        $this->actions = array('transform'   => array( 1 => 'ELEMENT'),
+        $this->actions = array('transform'   => array( 1 => 'SUBNAME'),
                                'order'       => array( '1'  => '0'),
                                'atom'        => 'Nsname',
                                'keepIndexed' => true,
@@ -28,12 +28,12 @@ class Nsname extends TokenAuto {
                                    1 => array('atom' => array('Identifier', 'Nsname')),
         );
         
-        $this->actions = array('transform'   => array( 1 => 'ELEMENT',
-                                                      -1 => 'ELEMENT'
+        $this->actions = array('transform'   => array( 1 => 'SUBNAME',
+                                                      -1 => 'SUBNAME'
                                                       ),
                                'order'       => array( '1'  => '1',
                                                       '-1' => '0'),
-                               'mergeNext'   => array('Nsname' => 'ELEMENT'), 
+                               'mergeNext'   => array('Nsname' => 'SUBNAME'), 
                                'keepIndexed' => true,
                                'atom'        => 'Nsname',
                                'cleanIndex'  => true,
