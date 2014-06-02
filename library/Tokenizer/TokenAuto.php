@@ -2898,10 +2898,9 @@ g.idx('Variable').put('token', 'node', x);
         if (isset($actions['cleanIndex'])) {
             $qactions[] = " 
 /* Remove children's index */  
-// Do not add ELEMENT here 
 it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 'NEW', 'RETURN', 'CONSTANT', 'CLASS', 'VARIABLE',
 'INDEX', 'EXTENDS', 'SUBNAME', 'POSTPLUSPLUS', 'PREPLUSPLUS', 'VALUE', 'CAST', 'SOURCE', 'USE', 'KEY', 'IMPLEMENTS', 'THEN', 'AS', 
-'ELSE', 'NOT', 'CONDITION', 'CASE', 'THROW', 'METHOD', 'STATIC', 'CLONE', 'INIT', 'AT' ).each{ 
+'ELSE', 'NOT', 'CONDITION', 'CASE', 'THROW', 'METHOD', 'STATIC', 'CLONE', 'INIT', 'AT', 'ELEMENT' ).each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 
