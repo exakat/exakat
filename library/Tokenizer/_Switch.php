@@ -53,7 +53,7 @@ class _Switch extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-it.setProperty('fullcode', "switch (" + it.out("NAME").next().code + ") " + it.out("CASES").next().getProperty('code')); 
+it.setProperty('fullcode', "switch (" + it.out("NAME").next().fullcode + ") " + it.out("CASES").next().getProperty('fullcode')); 
 
 GREMLIN;
     }
