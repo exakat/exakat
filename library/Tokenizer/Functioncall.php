@@ -102,7 +102,7 @@ class Functioncall extends TokenAuto {
 
 if (fullcode.getProperty('token') == 'T_NS_SEPARATOR') {
     s = []; 
-    fullcode.out("ELEMENT").sort{it.order}._().each{ s.add(it.fullcode); };
+    fullcode.out("SUBNAME").sort{it.order}._().each{ s.add(it.fullcode); };
 
     if (fullcode.absolutens == 'true') {
         fullcode.setProperty('fullcode', "\\\\" + s.join("\\\\") + fullcode.out("ARGUMENTS").next().fullcode);
