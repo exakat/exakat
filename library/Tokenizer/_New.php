@@ -27,7 +27,8 @@ class _New extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-it.fullcode = "new " + it.out("NEW").next().code;
+
+it.setProperty('fullcode', "new " + it.out("NEW").next().getProperty('fullcode'));
 
 GREMLIN;
     }
