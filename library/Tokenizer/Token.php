@@ -300,13 +300,15 @@ g.idx('Function')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.obj
 g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().fullcode);}
 
 // function usage
-g.idx('Functioncall')[['token':'node']].filter{it.in('METHOD').count() == 0}.sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}
+g.idx('Functioncall')[['token':'node']].filter{it.in('METHOD').count() == 0}.sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}
 .each{ 
-    if (it.absolutens == true) { 
-        fullcode.setProperty('fullnspath', fullcode.code);
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', '' + fullcode.code);
+    } else if (it.atom == 'File') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
     } else {
-        fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
-    }    
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    } 
 }
 
 // class usage
@@ -358,14 +360,34 @@ g.idx('Instanceof')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in
     }
 }
 
+g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsname']}.sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.atom == 'Nsname') {
+        if (fullcode.absolutens == 'true') { 
+            fullcode.setProperty('fullnspath', fullcode.fullcode);
+        } else if (it.atom == 'File') {
+            fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
+        } else {
+            fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+        }
+    } else {
+        if (it.atom == 'File') {
+            fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
+        } else {
+            fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+        }           
+    }
+}
+
 // Constant usage
-g.idx('Identifier')[['token':'node']].filter{it.in('ELEMENT', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE').count() == 0}
+g.idx('Identifier')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW').count() == 0}
+    .filter{it.out('ARGUMENTS').count() == 0}
     .sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
     fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
 }
 
-g.idx('Nsname')[['token':'node']].filter{it.in('ELEMENT', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE').count() == 0}
-    .sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
+g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW').count() == 0}
+    .filter{it.out('ARGUMENTS').count() == 0}
+    .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom =='Namespace'}.each{ 
         if (fullcode.absolutens == 'true') { 
             if (fullcode.atom == 'Functioncall') {
                 fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.code.length()));

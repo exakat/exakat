@@ -570,6 +570,29 @@ GREMLIN;
         return $this;
     }
 
+    function fullnspath($code, $caseSensitive = false) {
+        if ($caseSensitive) {
+            $caseSensitive = '';
+        } else {
+            if (is_array($code)) {
+                foreach($code as $k => $v) { 
+                    $code[$k] = strtolower($v); 
+                }
+            } else {
+                $code = strtolower($code);
+            }
+            $caseSensitive = '.toLowerCase()';
+        }
+        
+        if (is_array($code)) {
+            $this->addMethod('filter{it.fullnspath'.$caseSensitive.' in ***}', $code);
+        } else {
+            $this->addMethod('filter{it.fullnspath'.$caseSensitive.' == ***}', $code);
+        }
+        
+        return $this;
+    }
+    
     function codeIsPositiveInteger() {
         $this->addMethod('filter{ if( it.code.isInteger()) { it.code > 0; } else { true; }}', null); // may be use toInteger() ? 
 
