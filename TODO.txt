@@ -296,11 +296,15 @@ Inventory of transport (list from PHP code)
 UseVoidReturn : function return void/null, but result it captured (may be not used...)
 TooManyArgument : for PHP functions and for custom code
 RequiredAfterOptionalParam : optional parameters are the last on the argument list
-report usage of casting
-report "$string" or 'true'.
+report 'true' (wrongly compared boolean)
 Die without no argument (at least, put __METHOD__, file)
 Echo : with or without () (preferences)
 Use const or constant() for constants ? 
 unsupported calls in strings ("$x[a][b]")
 inventory of registered functions (session, finalize, error...)
 Characterize function as library (not global code), or script
+Detect nested loops
+Detect long switch, if elseif...
+check this outside methods
+check for $THIS (and other variables with special meaning but wrong case ? )
+global versus $GLOBALS
