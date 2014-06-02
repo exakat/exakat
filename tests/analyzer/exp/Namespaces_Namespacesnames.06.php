@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('\A');
+$expected     = array();
 
-$expected_not = array();
+$expected_not = array('namespace\A');
 
 ?>

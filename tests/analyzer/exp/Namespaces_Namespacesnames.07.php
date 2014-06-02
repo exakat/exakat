@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('\A\B\C\D\E\F');
+$expected     = array();
 
-$expected_not = array();
+$expected_not = array('namespace\A\B\C\D\E\F');
 
 ?>
