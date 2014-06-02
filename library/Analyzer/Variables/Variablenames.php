@@ -12,13 +12,6 @@ class Variablenames extends Analyzer\Analyzer {
              ->hasNoParent('Staticproperty', array('VARIABLE', 'PROPERTY'))
              ->analyzerIsNot("Analyzer\\Variables\\Blind");
         $this->prepareQuery();
-
-/*
-        $this->atomIs("Functioncall")
-             ->outIs('NAME')
-             ->tokenIs('T_VARIABLE');
-        $this->prepareQuery();
-        */
     }
 }
 
