@@ -746,6 +746,18 @@ GREMLIN;
         return $this;
     }
 
+    public function nextSibling() {
+        $this->addMethod("sideEffect{sibling = it.order}.in('ELEMENT').out('ELEMENT').filter{sibling + 1 == it.order}");
+
+        return $this;
+    }
+
+    public function previousSibling() {
+        $this->addMethod("filter{it.order > 0}.sideEffect{sibling = it.order}.in('ELEMENT').out('ELEMENT').filter{sibling - 1 == it.order}");
+
+        return $this;
+    }
+    
     function inIs($edge_name) {
         if (is_array($edge_name)) {
             // @todo
