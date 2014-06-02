@@ -304,7 +304,7 @@ g.idx('Functioncall')[['token':'node']].filter{it.in('METHOD').count() == 0}.sid
 .each{ 
     if (fullcode.absolutens == 'true') { 
         fullcode.setProperty('fullnspath', '' + fullcode.code);
-    } else if (it.atom == 'File') {
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
@@ -364,13 +364,13 @@ g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
     if (fullcode.atom == 'Nsname') {
         if (fullcode.absolutens == 'true') { 
             fullcode.setProperty('fullnspath', fullcode.fullcode);
-        } else if (it.atom == 'File') {
+        } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
             fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
         } else {
             fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
         }
     } else {
-        if (it.atom == 'File') {
+        if (it.atom == 'File' || it.fullcode == 'namespace Global') {
             fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
         } else {
             fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
