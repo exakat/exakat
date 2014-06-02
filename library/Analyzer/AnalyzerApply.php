@@ -22,13 +22,16 @@ class AnalyzerApply {
     
     public function getGremlin() {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
+
         if ($this->apply_below) {
             $apply_below = <<<GREMLIN
+
 x = it;
-it.in("VALUE").            out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
-it.in('KEY').in("VALUE").  out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
-it.in('VALUE').in("VALUE").out('LOOP').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
-it.in('ARGUMENT').in("ARGUMENTS").out('BLOCK').out.loop(1){it.loops < 100}{it.object.code == x.code}.each{ g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); }
+applyBelowRoot.out.loop(1){true}{it.object.fullcode == x.fullcode}.each{ 
+    g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); 
+    it.setProperty('appliedBelow', true);
+    c = c + 1;
+}
 
 GREMLIN;
         } else {

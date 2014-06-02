@@ -304,6 +304,8 @@ GREMLIN;
     function setApplyBelow($apply_below = true) {
         $this->apply->setApplyBelow($apply_below);
         
+        $this->addMethod("sideEffect{ applyBelowRoot = it }");
+        
         return $this;
     }
 
@@ -690,8 +692,8 @@ GREMLIN;
     function eachCounted($column, $times) {
         $this->methods[] = <<<GREMLIN
 groupBy(m){it.$column}{it}.iterate(); 
-m.findAll{ it.value.size() == $times}.values().flatten().each{ n.add(it); };
-
+// This is plugged into each{}
+m.findAll{ it.value.size() == $times}.values().flatten().each{ n.add(it); }
 GREMLIN;
 
         return $this;
@@ -978,6 +980,7 @@ c;
 
 GREMLIN;
 */
+    // initializing a new query 
         $this->queries[] = $query;
         $this->queries_arguments[] = $this->arguments;
 
