@@ -97,11 +97,6 @@ if (STYLE == 'BOOLEAN') {
 g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.fullcode, 'File':'None', 'Namespace':'Globaln', 'Class':'Globalc', 'Function':'Globalf' ]; }.as('x').
 transform{ it.in.loop(1){true}{ it.object.token in ['T_CLASS', 'T_FUNCTION', 'T_NAMESPACE', 'T_FILENAME']}.each{ m[it.atom] = it.code;} m; }.transform{ m; }
 GREMLIN;
-/*    
-    .inE('NAMESPACE').as('namespace').back('x')
-    .inE('CLASS').as('class').back('x')
-    .inE('FUNCTION').as('function').back('x')
-*/
 
 //{it.namespace}{it.classname}{it.function}
     $vertices = query($client, $queryTemplate);
