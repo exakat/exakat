@@ -45,14 +45,9 @@ class Extension extends Analyzer\Analyzer {
         }
         
         if (!empty($functions)) {
-            $this->atomIs("Functioncall")
-                 ->namespaceIs('Global')
-                 ->code($functions);
-            $this->prepareQuery();
-
             $functions = array_map(function ($x) { return "\\".$x; } ,  $functions);
             $this->atomIs("Functioncall")
-                 ->code($functions);
+                 ->fullnspath($functions);
             $this->prepareQuery();
         }
         
@@ -66,14 +61,11 @@ class Extension extends Analyzer\Analyzer {
         */
 
         if (!empty($classes)) {
-            $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
-                 ->code($classes);
-            $this->prepareQuery();
+            $classes = array_map(function ($x) { return "\\".$x; } ,  $classes);
 
-//            $classes = array_map(function ($x) { return "\\".$x; } ,  $classes);
-            $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
-                 ->outIs('ELEMENT')
-                 ->code($classes);
+            $this->atomIs('New')
+                 ->outIs('NEW')
+                 ->fullnspath($classes);
             $this->prepareQuery();
         }
 
