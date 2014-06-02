@@ -72,6 +72,9 @@ if (file_exists('./projects/'.$project.'/log/errors.log')) {
 shell_exec('php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
 print "Got the errors (if any)\n";
 
+shell_exec('php bin/export_tree; mv log/network.* ./projects/'.$project.'/log/ ');
+print "Getting the tree\n";
+
 shell_exec('php bin/stat > ./projects/'.$project.'/log/stat.log');
 logProgress($project, $progress++ / $total_steps);
 print "Project tokenized\n";
