@@ -7,10 +7,12 @@ use Analyzer;
 class ConstantUsage extends Analyzer\Analyzer {
 
     public function analyze() {
+        $this->atomIs("Nsname")
+             ->hasNoIn(array('NEW', 'SUBNAME', 'USE'));
+        $this->prepareQuery();
+
         $this->atomIs("Identifier")
-             ->tokenIs('T_STRING')
-             ->hasNoIn(array('NEW', 'ELEMENT'))
-             ;
+             ->hasNoIn(array('NEW', 'SUBNAME', 'USE'));
         $this->prepareQuery();
 
         $this->atomIs("Boolean");
