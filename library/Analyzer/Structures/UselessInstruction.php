@@ -18,6 +18,12 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->outIs('LEFT')
              ->atomIs('Sign');
         $this->prepareQuery();
+
+        $this->atomIs("Sequence")
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->is('lambda', "'true'");
+//        $this->printQuery();
     }
 }
 
