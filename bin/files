@@ -93,6 +93,9 @@ foreach($versions as $version) {
         } elseif (substr($res_file, 0, 13) == 'Fatal error: ') {
             preg_match('#Fatal error: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+        } elseif (substr($res_file, 0, 9) == 'Warning: ') {
+            preg_match('#Warning: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+            $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
         } elseif (substr($res_file, 0, 14) == 'Errors parsing') {
             // ignore
         } else {
