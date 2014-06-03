@@ -45,6 +45,7 @@ class Property extends TokenAuto {
 fullcode.out("NAME").each{ fullcode.fullcode = it.fullcode }
 
 fullcode.filter{ it.out("PROPERTY").count() == 1}.each{ fullcode.fullcode = fullcode.out("OBJECT").next().fullcode + "->" + fullcode.out("PROPERTY").next().fullcode; }
+
 GREMLIN;
     }
 }
