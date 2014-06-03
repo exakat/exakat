@@ -8,5 +8,9 @@ try {
 } catch (PDOException $e) {
     print "Error!: " . $e->getMessage() . "<br/>";
     die();
+} catch (\PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
 }
+
 ?>
