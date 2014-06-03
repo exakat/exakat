@@ -610,12 +610,34 @@ GREMLIN;
         return $this;
     }
 
-    function savePropertyAs($property, $name) {
-        $this->methods[] = "sideEffect{ $name = it.$property }";
+    function notSamePropertyAs($property, $name, $caseSensitive = false) {
+        if ($caseSensitive) {
+            $caseSensitive = '';
+        } else {
+            $caseSensitive = '.toLowerCase()';
+        }
+        $this->addMethod('filter{ it.'.$property.$caseSensitive.' != '.$name.$caseSensitive.'}');
 
         return $this;
     }
 
+    function savePropertyAs($property, $name) {
+        $this->addMethod("sideEffect{ $name = it.$property }");
+
+        return $this;
+    }
+
+/*
+    public function classIs($class = 'Global') {
+        if ($class == 'Global') {
+            $this->addMethod(".as('classIs').in.loop(1){it.object.atom != 'File'}{it.object.atom == 'File'}");
+        } else {
+            $this->addMethod(".as('classIs').in.loop(1){it.object.atom != 'File'}{it.object.atom == 'Class'}.out('NAME').has('code', '$class').in('NAME')");
+        }
+    
+        return $this;
+    }
+*/
     function fullcodeTrimmed($code, $trim = "\"'", $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
