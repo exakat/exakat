@@ -131,6 +131,18 @@ TEXT
         $analyze->collect();
         $ht = $this->addContent('Tree', $analyze);
 
+        $this->createH1('Stats');
+
+        $ht = $this->addContent('Text', <<<TEXT
+These are various stats of different structures in your application.
+
+TEXT
+);
+        $analyze = new \Report\Content\AppCounts();
+        $analyze->setNeo4j($this->client);
+        $analyze->collect();
+        $ht = $this->addContent('SectionedHashTable', $analyze);
+
         $this->createH1('Annexes');
         $this->createH2('Documentation');
         $this->addContent('Definitions', $defs);
