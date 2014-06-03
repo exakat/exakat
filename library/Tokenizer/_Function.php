@@ -104,7 +104,10 @@ fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0 && it.
 fullcode.filter{it.out("USE").count() == 1}.each{ fullcode.fullcode = "function " + fullcode.out("ARGUMENTS").next().fullcode + " use " + fullcode.out("USE").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
 
 // for properties
-if (fullcode.out('DEFINE').count() == 1) { fullcode.fullcode = fullcode.fullcode + fullcode.out('DEFINE').next().fullcode; }
+if (fullcode.out('DEFINE').count() == 1) { 
+    fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + fullcode.out('DEFINE').next().getProperty('fullcode')); 
+    fullcode.setProperty('propertyname', fullcode.out('DEFINE').next().getProperty('fullcode').substring(1, fullcode.out('DEFINE').next().getProperty('fullcode').size()) ); 
+}
 if (fullcode.out('VALUE').hasNot('atom', 'Void').count() == 1) { fullcode.fullcode = fullcode.fullcode + ' = ' + fullcode.out('VALUE').next().fullcode; }
 
 // optional attributes
