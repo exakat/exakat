@@ -13,10 +13,10 @@ class Arguments extends Analyzer\Analyzer {
              ->atomIs('Arguments')
              ->inIs('ARGUMENTS')
              ->atomIs('Function')
-             ->back('x')
-             ->setApplyBelow(true);
+             ->outIs('BLOCK')
+             ->setApplyBelow(true)
+             ->back('x');
     }
-    
 }
 
 ?>
