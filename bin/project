@@ -88,7 +88,8 @@ if (file_exists('./projects/'.$project.'/log/analyze.final.log')) {
     unlink('./projects/'.$project.'/log/analyze.final.log');
 }
 
-shell_exec('php bin/analyze -T Analyze > ./projects/'.$project.'/log/analyze.final.log');
+shell_exec('php bin/analyze -T Analyze > ./projects/'.$project.'/log/analyze.analyze.final.log');
+shell_exec('php bin/analyze -T Inventory > ./projects/'.$project.'/log/analyze.inventory.final.log');
 logProgress($project, $progress++ / $total_steps);
 print "Project analyzed\n";
 
