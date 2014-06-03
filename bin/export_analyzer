@@ -98,7 +98,6 @@ g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.f
 transform{ it.in.loop(1){true}{ it.object.token in ['T_CLASS', 'T_FUNCTION', 'T_NAMESPACE', 'T_FILENAME']}.each{ m[it.atom] = it.code;} m; }.transform{ m; }
 GREMLIN;
 
-//{it.namespace}{it.classname}{it.function}
     $vertices = query($client, $queryTemplate);
 
     $return = array();
