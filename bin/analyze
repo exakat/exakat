@@ -47,11 +47,10 @@ if ($id = array_search('-P', $args)) {
 } elseif ($id = array_search('-T', $args)) {
     $project = '';
     $analyzer = $args[$id + 1];
-    if (Analyzer\Analyzer::getClass('Themes\\'.$analyzer)) {
-        $analyzers_class = array($analyzer);
-    } else {
+    if (!$analyzers_class = Analyzer\Analyzer::getThemeAnalyzers($analyzer)) {
         die("No such class as $analyzer. Aborting\n");
     }
+    $project = 'default';
 } else {
     $project = 'default';
 }
