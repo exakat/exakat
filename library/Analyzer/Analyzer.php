@@ -1108,7 +1108,6 @@ GREMLIN;
             if ($type == 'Common') { continue; }
             if ($type == 'Test') { continue; }
             if ($type == 'Group') { continue; }
-            if ($type == 'Themes') { continue; }
             $analyzers[] = $type.'/'.substr(basename($file), 0, -4);
         }
         return $analyzers;
