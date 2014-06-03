@@ -7,20 +7,7 @@ class SectionedHashTable extends \Report\Format\Ace {
     
     public function render($output, $data) {
 
-        $output->pushToJsLibraries( array("assets/js/jquery.dataTables.min.js",
-                                          "assets/js/jquery.dataTables.bootstrap.js"));
-
         $counter = \Report\Format\Ace\SectionedHashTable::$sectionedhastable_counter++;
-        
-$js = <<<JS
-    				var oTable1 = \$('#sectionedhashtable-{$counter}').dataTable( {
-	    			"aoColumns": [
-		    	      null, null
-			    	] } );
-
-
-JS;
-        $output->pushToTheEnd($js);
         
         $text = <<<HTML
 <table id="sectionedhashtable-{$counter}" class="table table-striped table-bordered table-hover">
