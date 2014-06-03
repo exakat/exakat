@@ -32,7 +32,7 @@ class _Catch extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.fullcode = "catch (" + fullcode.out("CLASS").next().code + " " + fullcode.out("VARIABLE").next().fullcode + ") " + fullcode.out("CODE").next().fullcode; 
+fullcode.setProperty('fullcode', "catch (" + fullcode.out("CLASS").next().getProperty('code') + " " + fullcode.out("VARIABLE").next().getProperty('fullcode') + ") " + fullcode.out("CODE").next().getProperty('fullcode')); 
 GREMLIN;
     }
 }
