@@ -312,52 +312,64 @@ g.idx('Functioncall')[['token':'node']].filter{it.in('METHOD').count() == 0}.sid
 }
 
 // class usage
-g.idx('Staticmethodcall')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
-    if (fullcode.atom == 'Nsname') {
-        if (fullcode.absolutens == 'true') { 
-            fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.fullcode.length()));
-        } else {
-            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.fullcode);
-        }    
+g.idx('Staticmethodcall')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', fullcode.fullcode);
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
     } else {
-        fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
-    }
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    } 
 }
 
-g.idx('Staticproperty')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
-    if (fullcode.atom == 'Nsname') {
-        if (fullcode.absolutens == 'true') { 
-            fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.fullcode.length()));
-        } else {
-            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.fullcode);
-        }    
+g.idx('Staticproperty')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', fullcode.fullcode);
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
     } else {
-        fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
-    }
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    } 
 }
 
-g.idx('Staticconstant')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
-    if (fullcode.atom == 'Nsname') {
-        if (fullcode.absolutens == 'true') { 
-            fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.fullcode.length()));
-        } else {
-            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.fullcode);
-        }    
+g.idx('Staticconstant')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', fullcode.fullcode);
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
     } else {
-        fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
-    }
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    } 
 }
 
-g.idx('Instanceof')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
-    if (fullcode.atom == 'Nsname') {
-        if (fullcode.absolutens == 'true') { 
-            fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.fullcode.length()));
-        } else {
-            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.fullcode);
-        }    
+g.idx('Instanceof')[['token':'node']].out('RIGHT').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', fullcode.fullcode);
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
     } else {
-        fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
-    }
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    } 
+}
+
+g.idx('Catch')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', fullcode.fullcode);
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    } 
+}
+
+g.idx('Typehint')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', fullcode.fullcode);
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    } 
 }
 
 g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsname']}.sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
@@ -381,8 +393,15 @@ g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
 // Constant usage
 g.idx('Identifier')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW').count() == 0}
     .filter{it.out('ARGUMENTS').count() == 0}
-    .sideEffect{fullcode = it;}.in.loop(1){true}{it.object.atom =='Namespace'}.each{ 
-    fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', fullcode.fullcode);
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    } 
 }
 
 g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW').count() == 0}
