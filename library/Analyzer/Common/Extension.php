@@ -47,6 +47,7 @@ class Extension extends Analyzer\Analyzer {
         if (!empty($functions)) {
             $functions = array_map(function ($x) { return "\\".$x; } ,  $functions);
             $this->atomIs("Functioncall")
+                 ->hasNoIn('METHOD')
                  ->fullnspath($functions);
             $this->prepareQuery();
         }
