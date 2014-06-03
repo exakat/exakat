@@ -24,8 +24,17 @@ class AppCounts extends \Report\Content {
                             'Static properties' => array('index' => 'Class', 'Below' => 'out("BLOCK").out("CODE").out("ELEMENT").has("atom", "Ppp").filter{it.out("STATIC").any()}.out("DEFINE")'),
                             'Methods'        => array('index' => 'Class', 'Below' => 'out("BLOCK").out("CODE").out("ELEMENT").has("atom", "Function").filter{!it.out("STATIC").any()}'),
                             'Static methods' => array('index' => 'Class', 'Below' => 'out("BLOCK").out("CODE").out("ELEMENT").has("atom", "Function").filter{it.out("STATIC").any()}'),
-                     )
-
+                     ),
+                    'Structures' => array(
+                            'Ifthen'        => 'Ifthen',
+                            'Switch'        => 'Switch',
+                            'For'           => 'For',
+                            'Foreach'       => 'Foreach',
+                            'While'         => 'Ifthen',
+                            'Do..while'     => 'Dowhile',
+                            'New'           => 'New',
+                            'Clone'         => 'Clone',
+                     ),
                     );
 
         foreach($extensions as $section => $hash) {
