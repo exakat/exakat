@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('throw new Exception');
+$expected     = array('throw new Exception( )');
 
 $expected_not = array();
 

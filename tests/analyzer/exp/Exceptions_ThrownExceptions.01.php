@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('new Exception',
-                      'new Exception2',
-                      '$x = new Exception',
+$expected     = array('$x = new Exception( )', 
+                      'new Exception2( )', 
+                      'new Exception( )',
                       '$x');
 
 $expected_not = array();

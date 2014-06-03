@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array("XMLWRITER");
+$expected     = array("\\XMLWRITER( )");
 
 $expected_not = array();
 

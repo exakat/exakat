@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('Hash()');
+$expected     = array('Hash( )');
 
 $expected_not = array();
 
