@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Property extends Tokenizer {
-    /* 17 methods */
+    /* 18 methods */
 
     public function testProperty01()  { $this->generic_test('Property.01'); }
     public function testProperty02()  { $this->generic_test('Property.02'); }
@@ -26,5 +26,6 @@ class Property extends Tokenizer {
     public function testProperty15()  { $this->generic_test('Property.15'); }
     public function testProperty16()  { $this->generic_test('Property.16'); }
     public function testProperty17()  { $this->generic_test('Property.17'); }
+    public function testProperty18()  { $this->generic_test('Property.18'); }
 }
 ?>

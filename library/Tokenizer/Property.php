@@ -8,6 +8,8 @@ class Property extends TokenAuto {
     
     public function _check() {
         $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall', 'Staticproperty', 'Methodcall', 'Functioncall');
+
+        // $object->property
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
                                    -1 => array('atom' => $operands), 
                                     0 => array('token' => Property::$operators),
@@ -21,7 +23,9 @@ class Property extends TokenAuto {
                                'cleanIndex' => true);
         $this->checkAuto(); 
 
-        $this->conditions = array( -1 => array('atom'  => $operands), 
+        // $object->{property}
+        $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+                                   -1 => array('atom'  => $operands), 
                                     0 => array('token' => Property::$operators),
                                     1 => array('token' => 'T_OPEN_CURLY'),
                                     2 => array('atom'  => 'yes'),
@@ -42,9 +46,14 @@ class Property extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
+// case for \$v() 
 fullcode.out("NAME").each{ fullcode.fullcode = it.fullcode }
 
-fullcode.filter{ it.out("PROPERTY").count() == 1}.each{ fullcode.fullcode = fullcode.out("OBJECT").next().fullcode + "->" + fullcode.out("PROPERTY").next().fullcode; }
+if (fullcode.out('PROPERTY').next().atom == 'Identifier') { 
+    fullcode.setProperty('fullcode', fullcode.out("OBJECT").next().getProperty('fullcode') + "->" + fullcode.out("PROPERTY").next().getProperty('fullcode'));
+} else {
+    fullcode.setProperty('fullcode', fullcode.out("OBJECT").next().getProperty('fullcode') + "->{" + fullcode.out("PROPERTY").next().getProperty('fullcode') + "}");
+}
 
 GREMLIN;
     }
