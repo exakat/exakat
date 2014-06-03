@@ -13,7 +13,6 @@ class UnusedUse extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE')
              ->analyzerIsNot('Analyzer\\Namespaces\\UsedUse');
-//        $this->printQuery();
     }
 }
 
