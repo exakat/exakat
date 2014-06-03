@@ -68,6 +68,36 @@ class Extension extends Analyzer\Analyzer {
                  ->outIs('NEW')
                  ->fullnspath($classes);
             $this->prepareQuery();
+
+            $this->atomIs('Staticconstant')
+                 ->outIs('CLASS')
+                 ->fullnspath($classes);
+            $this->prepareQuery();
+
+            $this->atomIs('Staticmethodcall')
+                 ->outIs('CLASS')
+                 ->fullnspath($classes);
+            $this->prepareQuery();
+
+            $this->atomIs('Staticproperty')
+                 ->outIs('CLASS')
+                 ->fullnspath($classes);
+            $this->prepareQuery();
+
+            $this->atomIs('Typehint')
+                 ->outIs('CLASS')
+                 ->fullnspath($classes);
+            $this->prepareQuery();
+
+            $this->atomIs('Catch')
+                 ->outIs('CLASS')
+                 ->fullnspath($classes);
+            $this->prepareQuery();
+
+            $this->atomIs('Instanceof')
+                 ->outIs('RIGHT')
+                 ->fullnspath($classes);
+            $this->prepareQuery();
         }
 
         if (!empty($interfaces)) {
