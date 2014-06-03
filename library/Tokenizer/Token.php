@@ -293,8 +293,15 @@ g.V.has('index', 'true').filter{it.out().count() == 0}.each{
 
 // calculating the full namespaces paths
 g.idx('Const')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().fullcode);}
+
 // function definitions
-g.idx('Function')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().fullcode);}
+g.idx('Function')[['token':'node']].sideEffect{fullcode = it.out('NAME').next();}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    }
+}
 
 // class definitions
 g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().fullcode);}
@@ -420,7 +427,18 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
         }    
 }
 
-// fallback to global NS for functions and constants.
+// fallback to global NS for functions and constants : but we need to know what is defined! 
+
+g.idx('Functioncall')[['token':'node']].filter{!it.in('METHOD').any()}.each{
+    functioncall = it;
+    g.idx('Function')[['token':'node']].as('Function').out('NAME').filter{it.'fullnspath'.toLowerCase() == functioncall.fullnspath.toLowerCase()}.back('Function').each{
+        g.addEdge(functioncall, it, 'DEFINED');
+    }
+}
+
+
+
+
 
 ";
         Token::query($query);
