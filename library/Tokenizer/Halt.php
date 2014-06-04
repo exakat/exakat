@@ -10,10 +10,12 @@ class Halt extends TokenAuto {
         $this->conditions = array(0 => array('token' => Halt::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                  2 => array('token' => 'T_VOID'),
+                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   );
         
-        $this->actions = array('transform'    => array(2 => 'DROP',
+        $this->actions = array('transform'    => array(3 => 'DROP',
+                                                       2 => 'DROP',
                                                        1 => 'DROP'),
                                'atom'         => 'Halt',
                                'makeSequence' => 'it'
@@ -35,7 +37,7 @@ class Halt extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.code);
+fullcode.setProperty('fullcode', fullcode.getProperty('code'));
 
 GREMLIN;
     }
