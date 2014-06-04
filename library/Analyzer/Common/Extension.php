@@ -66,6 +66,7 @@ class Extension extends Analyzer\Analyzer {
 
             $this->atomIs('New')
                  ->outIs('NEW')
+                 ->atomIsNot(array('Variable', 'Array', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall'))
                  ->fullnspath($classes);
             $this->prepareQuery();
 
