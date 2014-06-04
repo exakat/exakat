@@ -36,9 +36,13 @@ if (!file_exists('./projects/'.$project.'/log')) {
     die();
 }
 
+logTime('Start');
+
 $db = new Db();
 $db->insert('project_runs', array('date_start', 'folder'), array(date('Y-m-d h:i:s'), $project));
 $project_run = $db->insert_id();
+
+logTime('Database');
 
 $progress = 1;
 $total_steps = 9 / 100; // number of usage of logProgress - 1
@@ -47,12 +51,17 @@ logProgress($project, $progress++ / $total_steps);
 shell_exec('sh scripts/clean.sh'); // or php bin/delete
 logProgress($project, $progress++ / $total_steps);
 
+logTime('Clean');
+
 print "Running project '$project'\n";
 
 shell_exec('php bin/files '.$project.'');
+logTime('Files');
+
 shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/ -p '.$project.'');
 logProgress($project, $progress++ / $total_steps);
 print "Project loaded\n";
+logTime('Loading');
 
 $res = shell_exec('php bin/build_root -p '.$project.' > ./projects/'.$project.'/log/build_root.final.log');
 print "Build root\n";
@@ -69,6 +78,8 @@ if (!empty($res) && strpos('javax.script.ScriptException', $res) !== false) {
 if (file_exists('./projects/'.$project.'/log/errors.log')) {
     unlink('./projects/'.$project.'/log/errors.log');
 }
+logTime('Tokenizer');
+
 shell_exec('php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
 print "Got the errors (if any)\n";
 
@@ -82,6 +93,7 @@ print "Project tokenized\n";
 shell_exec('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
 sleep(2);
 
+logTime('Stats');
 logProgress($project, $progress++ / $total_steps);
 
 if (file_exists('./projects/'.$project.'/log/analyze.final.log')) {
@@ -89,26 +101,39 @@ if (file_exists('./projects/'.$project.'/log/analyze.final.log')) {
 }
 
 shell_exec('php bin/analyze -T Analyze > ./projects/'.$project.'/log/analyze.analyze.final.log');
-shell_exec('php bin/analyze -T Inventory > ./projects/'.$project.'/log/analyze.inventory.final.log');
+shell_exec('php bin/analyze -T Appinfo > ./projects/'.$project.'/log/analyze.appinfo.final.log');
 logProgress($project, $progress++ / $total_steps);
 print "Project analyzed\n";
-
-if (file_exists('./projects/'.$project.'/log/stats.txt')) {
-    unlink('./projects/'.$project.'/log/stats.txt');
-}
-shell_exec('php bin/stat > ./projects/'.$project.'/stats.txt');
-logProgress($project, $progress++ / $total_steps);
+logTime('Analyze');
 
 shell_exec('php bin/report_all '.$project);
+logTime('Report');
 
 logProgress($project, $progress++ / $total_steps);
 
 print "Project reported\n";
 $db->query('UPDATE project_runs SET `date_finish` = NOW() WHERE id = '.$project_run);
+logTime('Final');
 
 function logProgress($project, $percent) {
     $mid = mysqli_connect('localhost', 'wordpress', 'wordpress', 'wordpress');
     mysqli_query($mid, "UPDATE exakat_projects SET progress = $percent WHERE name='$project'");
     print mysqli_error($mid);
+}
+
+function logTime($step) {
+    static $log, $begin, $end, $start;
+    
+    if (is_null($log)) {
+        $log = fopen('log/project.timing.csv', 'w+');
+    }
+    $end = microtime(true);
+    if (is_null($begin)) { 
+        $begin = $end; 
+        $start = $end;
+    }
+    
+    fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
+    $begin = $end;
 }
 ?>
