@@ -429,13 +429,14 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
 
 // fallback to global NS for functions and constants : but we need to know what is defined! 
 
+/*
 g.idx('Functioncall')[['token':'node']].filter{!it.in('METHOD').any()}.each{
     functioncall = it;
     g.idx('Function')[['token':'node']].as('Function').out('NAME').filter{it.'fullnspath'.toLowerCase() == functioncall.fullnspath.toLowerCase()}.back('Function').each{
         g.addEdge(functioncall, it, 'DEFINED');
     }
 }
-
+*/
 
 
 
