@@ -134,6 +134,7 @@ foreach($files as $file) {
     }
 }
 
+/*
 if ($report_md) {
     print count($report_md)." projects are missing markdown export\n";
     print "  + ".join("\n  + ", $report_md)."\n\n";
@@ -147,6 +148,7 @@ if ($sqlite_md) {
 } else {
     print "All ".count($files)." projects have the sqlite export\n";
 }
+*/
 
 $files = glob('human/en/*/*');
 $extra_docs = array();
@@ -230,6 +232,21 @@ if (!empty($unassigned2)) {
 $analyzers_count = $sqlite->query("select count(*) from categories as c join analyzers_categories as ac on c.id = ac.id_categories where c.name='Analyze'")->fetchArray(); 
 print $analyzers_count[0]." analyzers \n";
 
+// check for analyzer log 
+$res = shell_exec('grep -r javax.script.ScriptException projects/*/log/analyze.*.final.log');
+$lines = explode("\n", trim($res));
+
+if (empty($lines)) {
+    print "All ".count($lines)." analyzer.*.final.log are clean of Exceptions. \n\n";
+} else {
+    print count($lines)." projects have Exceptions problems in analyzer.*.final.log\n";
+    foreach($lines as $line) {
+        list($file, $b) = explode(':', $line);
+        print "  + ".$file."\n";
+    }
+    
+    print "\n\n";
+}
 
 
 
