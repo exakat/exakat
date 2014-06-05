@@ -735,14 +735,10 @@ GREMLIN;
     }
 
     function eachCounted($column, $times) {
-        if ($times == intval($times)) {
-            $times == " == $times ";
-        }
-        
         $this->methods[] = <<<GREMLIN
 groupBy(m){it.$column}{it}.iterate(); 
 // This is plugged into each{}
-m.findAll{ it.value.size() $times}.values().flatten().each{ n.add(it); }
+m.findAll{ it.value.size() == $times}.values().flatten().each{ n.add(it); }
 GREMLIN;
 
         return $this;
