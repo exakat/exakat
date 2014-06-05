@@ -308,3 +308,9 @@ Detect long switch, if elseif...
 check this outside methods
 check for $THIS (and other variables with special meaning but wrong case ? )
 global versus $GLOBALS
+Overwritten methods / constante 
+Command Query Separation : Functions should either do something or answer something. That’s practical and clear advice.
+Avoid output arguments (&$arguments, that will be modified...)
+Have No Side Effects : effect on something else
+Identify the Unit tests, based on the library : simpletest, Atoum, Phpunit, phpt ? 
+Var is old technology… like old style constructor.
