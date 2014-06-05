@@ -12,13 +12,17 @@ class _Switch extends TokenAuto {
                                   1 => array('token' => array('T_OPEN_PARENTHESIS')),
                                   2 => array('atom'  => 'yes'),
                                   3 => array('token' => array('T_CLOSE_PARENTHESIS')),
-                                  4 => array('atom'  => array('Sequence')),
+                                  4 => array('token' => array('T_OPEN_CURLY')),
+                                  5 => array('atom'  => array('SequenceCaseDefault')),
+                                  6 => array('token' => array('T_CLOSE_CURLY')),
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
                                                         2 => 'NAME',
                                                         3 => 'DROP',
-                                                        4 => 'CASES'),
+                                                        4 => 'DROP',
+                                                        5 => 'CASES',
+                                                        6 => 'DROP'),
                                'atom'         => 'Switch',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');

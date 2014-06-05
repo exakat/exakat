@@ -13,7 +13,8 @@ class Block extends TokenAuto {
                                                                      'T_OPEN_BRACKET', 'T_CLOSE_BRACKET',  // $x[1]{3}, 
                                                                      'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_AT' )),
                                     0 => array('token'      => Block::$operators),
-                                    1 => array('atom'       => 'yes'),
+                                    1 => array('atom'       => 'yes',
+                                               'notAtom'    => 'SequenceCaseDefault'),
                                     2 => array('token'      => 'T_CLOSE_CURLY',
                                                'atom'       => 'none'),
         );
