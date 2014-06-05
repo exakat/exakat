@@ -111,13 +111,14 @@ if (fullcode.out('DEFINE').count() == 1) {
 if (fullcode.out('VALUE').hasNot('atom', 'Void').count() == 1) { fullcode.fullcode = fullcode.fullcode + ' = ' + fullcode.out('VALUE').next().fullcode; }
 
 // optional attributes
-if (fullcode.out('ABSTRACT').count() == 1) { fullcode.fullcode = 'abstract ' + fullcode.fullcode; }
-if (fullcode.out('FINAL').count() == 1) { fullcode.fullcode = 'final ' + fullcode.fullcode; }
-if (fullcode.out('STATIC').count() == 1) { fullcode.fullcode = 'static ' + fullcode.fullcode; }
+if (fullcode.out('ABSTRACT').count() == 1)  { fullcode.fullcode = 'abstract ' + fullcode.fullcode; }
+if (fullcode.out('FINAL').count() == 1)     { fullcode.fullcode = 'final ' + fullcode.fullcode; }
+if (fullcode.out('STATIC').count() == 1)    { fullcode.fullcode = 'static ' + fullcode.fullcode; }
+if (fullcode.out('VAR').count() == 1)       { fullcode.fullcode = 'var ' + fullcode.fullcode; }
 
-if (fullcode.out('PUBLIC').count() == 1) { fullcode.fullcode = 'public ' + fullcode.fullcode; }
+if (fullcode.out('PUBLIC').count() == 1)    { fullcode.fullcode = 'public ' + fullcode.fullcode; }
 if (fullcode.out('PROTECTED').count() == 1) { fullcode.fullcode = 'protected ' + fullcode.fullcode; }
-if (fullcode.out('PRIVATE').count() == 1) { fullcode.fullcode = 'private ' + fullcode.fullcode; }
+if (fullcode.out('PRIVATE').count() == 1)   { fullcode.fullcode = 'private ' + fullcode.fullcode; }
 
 GREMLIN;
     }

@@ -47,10 +47,8 @@ class _Var extends TokenAuto {
     }
 
     public function fullcode() {
-        return <<<GREMLIN
-if (fullcode.out('VAR').count() == 1) { fullcode.fullcode = 'var ' + fullcode.out('DEFINE').next().code; }
-if (fullcode.out('VALUE').hasNot('token', 'T_VOID').count() == 1) { fullcode.fullcode = fullcode.fullcode + ' = ' + fullcode.out('VALUE').next().fullcode; }
-GREMLIN;
+        $ppp = new _Function(Token::$client);
+        return $ppp->fullcode();
     }
 }
 ?>
