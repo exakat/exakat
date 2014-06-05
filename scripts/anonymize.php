@@ -137,6 +137,7 @@ foreach($tokens as $t) {
             case T_REQUIRE_ONCE:
             case T_DIR:
             case T_STATIC:
+            case T_VAR : 
             case T_WHITESPACE:
             case T_OPEN_TAG:
             case T_CLOSE_TAG:
