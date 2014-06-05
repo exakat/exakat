@@ -455,9 +455,9 @@ GREMLIN;
 
     function atomInside($atom) {
         if (is_array($atom)) {
-            $this->addMethod('as("loop").out().loop("loop"){true}{it.object.atom in ***}', $atom);
+            $this->addMethod('out().loop(1){true}{it.object.atom in ***}', $atom);
         } else {
-            $this->addMethod('as("loop").out().loop("loop"){true}{it.object.atom == ***}', $atom);
+            $this->addMethod('out().loop(1){true}{it.object.atom == ***}', $atom);
         }
         
         return $this;
@@ -735,12 +735,22 @@ GREMLIN;
     }
 
     function eachCounted($column, $times) {
+        if ($times == intval($times)) {
+            $times == " == $times ";
+        }
+        
         $this->methods[] = <<<GREMLIN
 groupBy(m){it.$column}{it}.iterate(); 
 // This is plugged into each{}
-m.findAll{ it.value.size() == $times}.values().flatten().each{ n.add(it); }
+m.findAll{ it.value.size() $times}.values().flatten().each{ n.add(it); }
 GREMLIN;
 
+        return $this;
+    }
+    
+    function countIs($comparison) {
+        $this->addMethod('aggregate().filter{ it.size '.$comparison.'}', null);
+        
         return $this;
     }
 
@@ -938,7 +948,6 @@ GREMLIN;
     public function groupFilter($characteristic, $percentage) {
         $this->methods[] = 'sideEffect{'.$characteristic.'}.groupCount(gf){x2}.aggregate().sideEffect{'.$characteristic.'}.filter{gf[x2] < '.$percentage.' * gf.values().sum()}';
 
-//gf=[:]; g.idx('Boolean')[['token':'node']].as("first").sideEffect{}.groupCount(gf){x2}.aggregate().sideEffect{if (it.code == it.code.toLowerCase()) { x2 = 'lower'; } else { x2 = 'upper'; }}.filter{gf[x2] < 0.1 * gf.values().sum()}.count()        
         return $this;
     }
     
