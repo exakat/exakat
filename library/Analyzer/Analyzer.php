@@ -968,7 +968,8 @@ GREMLIN;
             print_r($query);
             print_r($this->queries_arguments[$id]);
 
-            krsort($this->queries_arguments);
+            krsort($this->queries_arguments[$id]);
+            
             foreach($this->queries_arguments[$id] as $name => $value) {
                 if (is_array($value)) {
                     $query = str_replace($name, "['".join("', '", $value)."']", $query);
