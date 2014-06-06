@@ -314,3 +314,6 @@ Avoid output arguments (&$arguments, that will be modified...)
 Have No Side Effects : effect on something else
 Identify the Unit tests, based on the library : simpletest, Atoum, Phpunit, phpt ? 
 Var is old technology… like old style constructor.
+SQL Should use binded parameters, not concatenation in string
+Instanciation of interfaces ?!?
+Cyclic dependancies between traits
