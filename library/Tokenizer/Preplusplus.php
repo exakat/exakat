@@ -9,10 +9,10 @@ class Preplusplus extends TokenAuto {
     public function _check() {
         $this->conditions = array( 0 => array('token' => Preplusplus::$operators),
                                    1 => array('atom' => array('Variable', 'Array', 'Property', 'Functioncall', 'Staticproperty' )),
-                                   2 => array('filterOut' => array('T_DOUBLECOLON', 'T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_DOUBLE_COLON', 'T_OBJECT_OPEARTOR' )),
+                                   2 => array('filterOut' => array('T_DOUBLECOLON', 'T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS')),
         );
         
-        $this->actions = array('transform'    => array( 1 => 'PREPLUSPLUS'),
+        $this->actions = array('transform'  => array( 1 => 'PREPLUSPLUS'),
                                'atom'       => 'Preplusplus',
                                'cleanIndex' => true);
         $this->checkAuto();
@@ -23,7 +23,7 @@ class Preplusplus extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.code + fullcode.out("PREPLUSPLUS").next().fullcode; 
+fullcode.setProperty('fullcode', fullcode.getProperty('code') + fullcode.out("PREPLUSPLUS").next().getProperty('fullcode')); 
 
 GREMLIN;
     }
