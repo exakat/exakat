@@ -79,6 +79,7 @@ if (file_exists('./projects/'.$project.'/log/errors.log')) {
     unlink('./projects/'.$project.'/log/errors.log');
 }
 logTime('Tokenizer');
+print "Project tokenized\n";
 
 shell_exec('php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
 print "Got the errors (if any)\n";
@@ -88,10 +89,9 @@ print "Getting the tree\n";
 
 shell_exec('php bin/stat > ./projects/'.$project.'/log/stat.log');
 logProgress($project, $progress++ / $total_steps);
-print "Project tokenized\n";
+print "Stats\n";
 
 shell_exec('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
-sleep(2);
 
 logTime('Stats');
 logProgress($project, $progress++ / $total_steps);
