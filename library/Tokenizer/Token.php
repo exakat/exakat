@@ -193,8 +193,6 @@ class Token {
     }
 
     static function countLeftToken() {
-//        $result = Token::query("g.V.has('atom',null).except([g.v(0)]).hasNot('hidden', true).hasNot('index', 'yes').count()");
-//        $result = Token::query("g.V.has('root', 'true').in('NEXT').out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
         $result = Token::query("g.idx('racines')[['token':'ROOT']].out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
     	
     	return $result[0][0];
@@ -236,17 +234,6 @@ class Token {
     }
 
     public function checkRemaining() {
-        $class = str_replace("Tokenizer\\", '', get_class($this));
-        if (in_array($class, Token::$types)) {
-            $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
-
-            return Token::queryOne($query) > 0;
-        } else {
-            return true;
-        }
-    }
-
-    public function checkRemaining2() {
         $class = str_replace("Tokenizer\\", '', get_class($this));
         if (in_array($class, Token::$types)) {
             $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
@@ -460,31 +447,6 @@ g.idx('racines')[['token':'DELETE']].out('DELETE').each{
 ";
         Token::query($query);
     }
-    
-    static public function finishSequenceOld() {
-        $query = "
-g.idx('racines')[['token':'ROOT']].as('root').out('NEXT').hasNot('token', 'T_END').back('root').each{ 
-    x = g.addVertex(null, [code:'Final sequence', atom:'Sequence', token:'T_SEMICOLON', file:it.file]);
-
-    a = it.in('NEXT').next();
-  
-    g.V.hasNot('hidden', true).has('file', it.file).as('o').in('NEXT').back('o').each{
-        g.addEdge(x, it, 'ELEMENT');
-        y = it.out('NEXT').next();
-        g.removeEdge(it.inE('NEXT').next());
-    }
-
-    g.addEdge(x, y, 'NEXT');
-    g.addEdge(a, x, 'NEXT');
-    x.setProperty('root', true);
-    g.addEdge(g.idx('racines')[['token':'ROOT']].next(), it, 'INDEXED');   
-
-}
-
-
-       ";
-        Token::query($query);
-    }
 
     public static function getClass($class) {
         if (class_exists($class)) {
@@ -500,7 +462,6 @@ g.idx('racines')[['token':'ROOT']].as('root').out('NEXT').hasNot('token', 'T_END
             if ($analyzer->checkPhpVersion($phpversion)) {
                 return $analyzer;
             } else {
-//                print "Can't run $name ({$analyzer->phpversion} required)\n";
                 return null;
             }
         } else {
