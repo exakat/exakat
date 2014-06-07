@@ -6,18 +6,8 @@ class Arguments extends TokenAuto {
     static public $operators = array('T_COMMA');
     static public $atom = 'Arguments';
 
-    static public $operands_wa = array('Addition', 'Multiplication', 'Sequence', 'String', 'Identifier', 
-                                       'Integer', 'Float', 'Not', 'Variable', 'Array', 'Concatenation', 'Sign',
-                                       'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
-                                       'Magicconstant', 'Ternary', 'Assignation', 'Logical', 'Keyvalue', 'Void', 
-                                       'Property', 'Staticconstant', 'Staticproperty', 'Nsname', 'Methodcall', 'Staticmethodcall',
-                                       'Cast', 'Postplusplus', 'Preplusplus', 'Typehint', 'Bitshift', 'Noscream',
-                                       'Clone', 'New', 'Arrayappend', 'Instanceof', 'Function', 'Keyvalue', 
-                                       'ArrayNS', 'Shell', 'Heredoc', 'Include', 'As', 'Void' );
-
     public function _check() {
-        $operands = Arguments::$operands_wa;
-        $operands[] = 'Arguments';
+        $operands = 'yes';
         
         // @note arguments separated by ,
         $this->conditions = array(-2 => array('token' => array_merge(array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_ECHO', 

@@ -10,7 +10,7 @@ class ArgumentsArray extends Arguments {
         $this->conditions = array(-1 => array('atom'  => 'Array'),
                                    0 => array('token' => ArgumentsArray::$operators,
                                               'atom'  => 'none'),
-                                   1 => array('atom'  => Arguments::$operands_wa),
+                                   1 => array('atom'  => 'yes'),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
                                    3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')),
