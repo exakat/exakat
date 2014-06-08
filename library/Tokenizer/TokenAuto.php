@@ -4,14 +4,16 @@ namespace Tokenizer;
 
 class TokenAuto extends Token {
     protected $conditions = array();
-    protected $set_atom = false;
+    protected $set_atom   = false;
+    public $remaining  = null ;
+    public $done  = null ;
 
     public function _check() {
         return false;
     }
     
     public function prepareQuery() {
-        $query = " ";
+        $query = " total = 0; done = 0; ";
         $class = str_replace("Tokenizer\\", '', get_class($this));
         if (in_array($class, array('FunctioncallArray'))) {
             $query .= "g.idx('racines')[['token':'S_ARRAY']].out('INDEXED')";
@@ -19,7 +21,10 @@ class TokenAuto extends Token {
             $query .= "g.idx('racines')[['token':'$class']].out('INDEXED')";
         } else {
             $query .= "g.V";
+            print "Using g.V : $class\n";
         }
+        $query .= ".sideEffect{ total++; }";
+
         $qcdts = array();
         
         if (!empty($this->conditions[0])) {
@@ -52,7 +57,7 @@ class TokenAuto extends Token {
         
         $this->set_atom = false;
         $qactions = $this->readActions($this->actions);
-        $query .= ".each{\n fullcode = it; ".join(";\n", $qactions)."; ".($this->set_atom ? $this->fullcode() : '' )."\n};";
+        $query .= ".each{\n done++; fullcode = it; ".join(";\n", $qactions)."; ".($this->set_atom ? $this->fullcode() : '' )."\n}; [remaining:total, done:done];";
         
         return $query;
     }
@@ -65,9 +70,24 @@ class TokenAuto extends Token {
     }
 
     public function checkAuto() {
-        $query = $this->prepareQuery();
+        $this->remaining = null;
+
+        $res = Token::query($this->prepareQuery());
         
-        return Token::query($query);
+        $this->remaining += (int) $res['remaining'][0];
+        $this->done += (int) $res['done'][0];
+        
+        return $res;
+    }
+
+    public function checkRemaining() {
+        if (empty($this->remaining)) {
+            return parent::checkRemaining();
+        } else {
+            $r = $this->remaining;
+            
+            return $r; 
+        }
     }
 
     private function readActions($actions) {
@@ -81,8 +101,6 @@ class TokenAuto extends Token {
                 $qactions[] = " 
 /* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
                 ";
-            } else {
-//                print "Not removing indexing for ".get_class($this)."\n";
             }
             unset($actions['keepIndexed']);
         } else {
@@ -2459,7 +2477,6 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 
             $atom = $actions['make_quoted_string'];
             $class = "\\Tokenizer\\$atom";
-            print "$class\n";
             $string = new $class(Token::$client);
             $fullcode2 = $string->fullcode();
             

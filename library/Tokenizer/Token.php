@@ -172,6 +172,8 @@ class Token {
         if (!method_exists($this, '_check')) {
             print get_class($this). " has no check yet\n";
         } else {
+            $this->remaining = 0;
+            $this->done = 0;
             return $this->_check();
         }
 
