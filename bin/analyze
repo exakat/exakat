@@ -185,14 +185,5 @@ GREMLIN;
     }
 }
 
-/*
-$server_stat = new Stats($client);
-$server_stat->collect();
-$log->report('analyze', array('project' => $project, 
-                              'analyzer' => count($analyzers_class),
-                              'tokens' => $server_stat->tokens_count,
-                              'results' => $total_results));
-*/
-
 print "Done\n";
 ?>
