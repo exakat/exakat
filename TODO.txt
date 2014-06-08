@@ -324,3 +324,8 @@ Identify complex logical expressions (in If, while, case....) with mathd, logica
 Check that 'OR' is actually spotted as an upper case keyword
 Research that AND and && pb 
 Identify date() formats (and sprintf too)
+
+Map/Reduce : Faire marcher les analyses du tokenizer sur des intervalles dans les index 
+Ajouter des while au lieu des ifs, notamment pour les structures récursives
+Utiliser les index pour les résolutions (g.idx('resolution')[['class':name]] = g.v(100);
+Spot void in arrays 
