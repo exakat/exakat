@@ -24,7 +24,9 @@ class Functioncall extends TokenAuto {
         );
         
         $this->actions = array('variable_to_functioncall'   => 1,
-                               'keepIndexed'                => true);
+                               'keepIndexed'                => true,
+                               'property'                   => array('parenthesis' => 'false'),
+                               );
         $this->checkAuto();
         
         // functioncall(with arguments or void) that will be in a sequence
@@ -41,7 +43,8 @@ class Functioncall extends TokenAuto {
         $this->actions = array('makeEdge'     => array(2 => 'ARGUMENTS'),
                                'dropNext'     => array(1),
                                'atom'         => 'Functioncall',
-                               'makeSequence' => 'it'
+                               'makeSequence' => 'it',
+                               'property'     => array('parenthesis' => 'true'),
                                );
         $this->checkAuto();
 
@@ -60,7 +63,8 @@ class Functioncall extends TokenAuto {
         $this->actions = array('makeEdge'     => array(2 => 'ARGUMENTS'),
                                'dropNext'     => array(1),
                                'atom'         => 'Functioncall',
-                               'makeSequence' => 'it'
+                               'makeSequence' => 'it',
+                               'property'     => array('parenthesis' => 'true'),
                                );
         $this->checkAuto();
 
@@ -76,7 +80,8 @@ class Functioncall extends TokenAuto {
         
         $this->actions = array('makeEdge'     => array('1' => 'ARGUMENTS'),
                                'atom'         => 'Functioncall',
-                               'makeSequence' => 'it'
+                               'makeSequence' => 'it',
+                               'property'     => array('parenthesis' => 'false'),
                                );
         $this->checkAuto();
 
@@ -105,14 +110,20 @@ if (fullcode.getProperty('token') == 'T_NS_SEPARATOR') {
     fullcode.out("SUBNAME").sort{it.order}._().each{ s.add(it.fullcode); };
 
     if (fullcode.absolutens == 'true') {
-        fullcode.setProperty('fullcode', "\\\\" + s.join("\\\\") + fullcode.out("ARGUMENTS").next().fullcode);
+        fullcode.setProperty('fullcode', "\\\\" + s.join("\\\\"));
         fullcode.setProperty('code', "\\\\" + s.join("\\\\"));
     } else {
-        fullcode.setProperty('fullcode', s.join("\\\\") + fullcode.out("ARGUMENTS").next().fullcode);
+        fullcode.setProperty('fullcode', s.join("\\\\"));
         fullcode.setProperty('code', s.join("\\\\"));
     }
 } else {
-    fullcode.setProperty('fullcode', it.getProperty('code') + it.out("ARGUMENTS").next().getProperty('fullcode'));
+    fullcode.setProperty('fullcode', it.getProperty('code'));
+}
+
+if (fullcode.getProperty('parenthesis') == 'true') {
+    fullcode.setProperty('fullcode', it.getProperty('fullcode') + "(" + it.out("ARGUMENTS").next().getProperty('fullcode') + ")");
+} else {
+    fullcode.setProperty('fullcode', it.getProperty('fullcode') + " " + it.out("ARGUMENTS").next().getProperty('fullcode') + "");
 }
 
 // count the number of arguments

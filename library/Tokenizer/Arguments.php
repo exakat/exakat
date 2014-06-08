@@ -14,11 +14,12 @@ class Arguments extends TokenAuto {
                                                                            'T_GLOBAL', 'T_USE', 'T_IMPLEMENTS', 'T_EXTENDS', 'T_VAR', 
                                                                            'T_SEMICOLON', 'T_STATIC', 'T_DECLARE', 'T_CONST' ), 
                                                                      _Ppp::$operators)),
-                                  -1 => array('atom' => $operands),
-                                   0 => array('token' => Arguments::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('atom' => $operands),
-                                   2 => array('token' => array('T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_SEMICOLON')),
+                                  -1 => array('atom'    => $operands,
+                                              'notAtom' => 'Arguments'),
+                                   0 => array('token'   => Arguments::$operators,
+                                              'atom'    => 'none'),
+                                   1 => array('atom'    => $operands),
+                                   2 => array('token'   => array('T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_SEMICOLON')),
                                  );
         
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
@@ -53,7 +54,8 @@ class Arguments extends TokenAuto {
 
         // @note End of )
         $this->conditions = array(-2 => array('filterOut' => array("T_NS_SEPARATOR")),
-                                  -1 => array('atom'      => $operands),
+                                  -1 => array('atom'      => $operands,
+                                              'notAtom'   => 'Arguments'),
                                    0 => array('token'     => Arguments::$operators,
                                               'atom'      => 'none'),
                                    1 => array('token'     => 'T_CLOSE_PARENTHESIS',
@@ -76,11 +78,13 @@ class Arguments extends TokenAuto {
 s = [];
 fullcode.out("ARGUMENT").sort{it.order}._().each{ s.add(it.fullcode); };
 
-if ((s.size() == 0) && (it.virtual == true)) {
-    fullcode.setProperty('fullcode', '');
+if (s.size() == 0) {
+    s = '';
 } else {
-    fullcode.setProperty('fullcode', "(" + s.join(", ") + ")");
+    fullcode.setProperty('fullcode', s.join(", "));
 }
+
+// note : parenthesis are set in arguments (above), if needed.
 
 GREMLIN;
     }
