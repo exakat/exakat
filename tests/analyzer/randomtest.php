@@ -40,7 +40,7 @@ class Framework_Randomtest extends PHPUnit_Framework_TestSuite {
         }
         
         shuffle($tests);
-        $tests = array_slice($tests, 0, 5);
+        $tests = array_slice($tests, 0, 10);
         
         print "Testing with ".count($tests)." tests\n";
         $total = 0;
