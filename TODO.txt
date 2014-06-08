@@ -317,3 +317,10 @@ Var is old technology… like old style constructor.
 SQL Should use binded parameters, not concatenation in string
 Instanciation of interfaces ?!?
 Cyclic dependancies between traits
+Modified arguments (bad idea! )
+Used twice variable (set then given... Nothing between ? )
+        if ( ($counts = $r->check()) || in_array($name , array("FunctioncallArray", 'Sequence'))) { $count is ambiguous
+Identify complex logical expressions (in If, while, case....) with mathd, logical and AND
+Check that 'OR' is actually spotted as an upper case keyword
+Research that AND and && pb 
+Identify date() formats (and sprintf too)
