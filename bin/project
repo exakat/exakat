@@ -39,7 +39,7 @@ if (!file_exists('./projects/'.$project.'/log')) {
 logTime('Start');
 
 $db = new Db();
-$db->insert('project_runs', array('date_start', 'folder'), array(date('Y-m-d h:i:s'), $project));
+$db->insert('project_runs', array('date_start', 'folder'), array(date('Y-m-d H:i:s'), $project));
 $project_run = $db->insert_id();
 
 logTime('Database');
@@ -65,6 +65,7 @@ logTime('Loading');
 
 $res = shell_exec('php bin/build_root -p '.$project.' > ./projects/'.$project.'/log/build_root.final.log');
 print "Build root\n";
+logTime('Build_root');
 
 if (file_exists('./projects/'.$project.'/log/tokenizer.final.log')) {
     unlink('./projects/'.$project.'/log/tokenizer.final.log');
@@ -112,7 +113,7 @@ logTime('Report');
 logProgress($project, $progress++ / $total_steps);
 
 print "Project reported\n";
-$db->query('UPDATE project_runs SET `date_finish` = NOW() WHERE id = '.$project_run);
+$db->query('UPDATE project_runs SET `date_finish` = '.date('Y-m-d H:i:s').' WHERE id = '.$project_run);
 logTime('Final');
 
 function logProgress($project, $percent) {
