@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('if ( $alternative) $y++', 
+$expected     = array('if ( $alternative) { /**/ } ', 
                       'switch ($alternative) Sequence Case Default', 
                       'while ($alternative) $y++',
                       'for($i = 0 ; $i < 10 ; $i++) $y++', 
