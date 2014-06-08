@@ -95,9 +95,9 @@ class _Function extends TokenAuto {
 fullcode.fullcode = '';
 
 // for methods
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " " + fullcode.out("ARGUMENTS").next().fullcode + " ;";}
+fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") ;";}
 
-fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " " + fullcode.out("ARGUMENTS").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
+fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ")" + fullcode.out("BLOCK").next().fullcode;}
 
 fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = "function " + fullcode.out("ARGUMENTS").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
 
