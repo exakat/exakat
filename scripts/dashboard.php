@@ -234,11 +234,10 @@ print $analyzers_count[0]." analyzers \n";
 
 // check for analyzer log 
 $res = shell_exec('grep -r javax.script.ScriptException projects/*/log/analyze.*.final.log');
-$lines = explode("\n", trim($res));
-
-if (empty($lines)) {
-    print "All ".count($lines)." analyzer.*.final.log are clean of Exceptions. \n\n";
+if ($res === null) {
+    print "All analyzer.*.final.log are clean of Exceptions. \n\n";
 } else {
+    $lines = explode("\n", trim($res));
     print count($lines)." projects have Exceptions problems in analyzer.*.final.log\n";
     foreach($lines as $line) {
         list($file, $b) = explode(':', $line);
