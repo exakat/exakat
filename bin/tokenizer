@@ -119,14 +119,20 @@ while(check_prev($prev, $extra_rounds)) {
     $regex_next = array();
     foreach($regex as $name => $r) {
         $begin = microtime(true);
-        if ($r->check() || in_array($name , array("FunctioncallArray", 'Sequence'))) {
+        if ( ($counts = $r->check()) || in_array($name , array("FunctioncallArray", 'Sequence'))) {
             $regex_next[$name] = $r;
         }
         $end = microtime(true);
         
         $regex_time += $end - $begin;
 
-        $log->log( get_class($r)."\t".(($end - $begin) * 1000)."\t".Token::leftInIndex($name));
+        if ($r->remaining + $r->done  > 0) { 
+            $ratio =  $r->done / ($r->remaining + $r->done ); 
+        } else { 
+            $ratio = -1; 
+        }
+        
+        $log->log( get_class($r)."\t".(($end - $begin) * 1000)."\t".$r->remaining."\t".$r->done."\t".number_format(100 * $ratio, 0));
     }
     unset($precedence);
     Token::finishSequence();
