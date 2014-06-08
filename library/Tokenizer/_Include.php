@@ -20,7 +20,8 @@ class _Include extends TokenAuto {
         $this->actions = array('makeEdge'     => array('2' => 'ARGUMENTS'),
                                'dropNext'     => array(1),
                                'atom'         => 'Include',
-                               'makeSequence' => 'it'
+                               'makeSequence' => 'it',
+                               'property'     => array('parenthesis' => 'true'),
                                );
         $this->checkAuto();
 
@@ -33,7 +34,8 @@ class _Include extends TokenAuto {
         
         $this->actions = array('makeEdge'     => array(1 => 'ARGUMENTS',),
                                'atom'         => 'Include',
-                               'makeSequence' => 'it');
+                               'makeSequence' => 'it',
+                               'property'     => array('parenthesis' => 'false'),);
         $this->checkAuto();
         
         return $this->checkRemaining();
@@ -42,11 +44,11 @@ class _Include extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-if (fullcode.getProperty('noParenthesis') == 'true') {
-    s = fullcode.out("ARGUMENTS").next().getProperty('fullcode');
-    fullcode.setProperty('fullcode', it.getProperty('code') + " " + s.substring(1, s.length() - 1));
+if (fullcode.getProperty('parenthesis') == 'true') {
+    fullcode.setProperty('fullcode', fullcode.getProperty('code') + "(" + fullcode.out("ARGUMENTS").next().getProperty('fullcode') + ")");
 } else {
-    fullcode.setProperty('fullcode', fullcode.getProperty('code') + fullcode.out("ARGUMENTS").next().getProperty('fullcode'));
+    s = fullcode.out("ARGUMENTS").next().getProperty('fullcode');
+    fullcode.setProperty('fullcode', it.getProperty('code') + " " + s );
 }
 
 GREMLIN;

@@ -25,8 +25,7 @@ class ArgumentsNoParenthesis extends Arguments {
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'keepIndexed' => true,
-                               'property'    => array('noParenthesis' => 'true'));
+                               'keepIndexed' => true);
         $this->checkAuto();
 
         $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
@@ -44,8 +43,7 @@ class ArgumentsNoParenthesis extends Arguments {
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'keepIndexed' => true,
-                               'property'    => array('noParenthesis' => 'true'));
+                               'keepIndexed' => true);
         $this->checkAuto();
 
         // @note exit; no parenthesis, no argument. 
