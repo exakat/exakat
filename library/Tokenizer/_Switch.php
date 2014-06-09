@@ -11,10 +11,10 @@ class _Switch extends TokenAuto {
                                              'atom'  => 'none'),
                                   1 => array('token' => array('T_OPEN_PARENTHESIS')),
                                   2 => array('atom'  => 'yes'),
-                                  3 => array('token' => array('T_CLOSE_PARENTHESIS')),
-                                  4 => array('token' => array('T_OPEN_CURLY')),
-                                  5 => array('atom'  => array('SequenceCaseDefault')),
-                                  6 => array('token' => array('T_CLOSE_CURLY')),
+                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                  4 => array('token' => 'T_OPEN_CURLY'),
+                                  5 => array('atom'  => 'SequenceCaseDefault'),
+                                  6 => array('token' => 'T_CLOSE_CURLY'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
@@ -28,6 +28,23 @@ class _Switch extends TokenAuto {
                                'makeSequence' => 'it');
         $this->checkAuto();
 
+        $this->conditions = array(0 => array('token' => _Switch::$operators,
+                                             'atom'  => 'none'),
+                                  1 => array('token' => array('T_OPEN_PARENTHESIS')),
+                                  2 => array('atom'  => 'yes'),
+                                  3 => array('token' => array('T_CLOSE_PARENTHESIS')),
+                                  4 => array('atom'  => 'Sequence',
+                                             'property' => array('block' => 'true'))
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'DROP',
+                                                        2 => 'NAME',
+                                                        3 => 'DROP',
+                                                        4 => 'CASES'),
+                               'atom'         => 'Switch',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
+        $this->checkAuto();
         // alternative syntax
         $this->conditions = array(0 => array('token' => _Switch::$operators,
                                              'atom'  => 'none'),
