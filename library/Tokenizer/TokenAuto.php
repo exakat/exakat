@@ -2344,7 +2344,7 @@ if (    $it.token != 'T_ELSEIF'
         g.addEdge(g.idx('racines')[['token':'DELETE']].next(), sequence2, 'DELETE');
         $it.bothE('NEXT').each{ g.removeEdge(it); }
     } else if ($it.in('NEXT').has('atom', 'Sequence').any() &&
-              ($it.in('NEXT').out('CODE').count() == 0)) {
+              ($it.in('NEXT').next().block != 'true')) {
         sequence = $it.in('NEXT').next();
         $it.setProperty('order', $it.in('NEXT').out('ELEMENT').count());
         $it.setProperty('makeSequence', 'in');
