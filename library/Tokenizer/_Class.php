@@ -15,7 +15,8 @@ class _Class extends TokenAuto {
         
         $this->actions = array('transform'   => array(   1 => 'NAME'),
                                'keepIndexed' => true,
-                               'atom'        => 'Class');
+                               'atom'        => 'Class',
+                               'cleanIndex'  => true);
         $this->checkAuto(); 
 
     // class x extends y {}
@@ -27,7 +28,8 @@ class _Class extends TokenAuto {
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
                                                        2 => 'EXTENDS'),
-                               'keepIndexed' => true
+                               'keepIndexed' => true,
+                               'cleanIndex'  => true
                                );
         $this->checkAuto(); 
 
@@ -40,7 +42,8 @@ class _Class extends TokenAuto {
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
                                                        2 => 'IMPLEMENTS'),
-                               'keepIndexed' => true );
+                               'keepIndexed' => true,
+                               'cleanIndex'  => true );
         $this->checkAuto(); 
 
     // class x implements a,b,c {}
@@ -52,7 +55,8 @@ class _Class extends TokenAuto {
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
                                                        2 => 'TO_IMPLEMENTS'),
-                               'keepIndexed' => true );
+                               'keepIndexed' => true,
+                               'cleanIndex'  => true );
         $this->checkAuto(); 
 
     // class x { // some real code}
