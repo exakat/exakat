@@ -1,0 +1,142 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    switch
+    Label : NAME
+      B
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : RIGHT
+            \
+            Label : SUBNAME
+              C
+          Label : LEFT
+            $a
+        Label : CODE
+          makeSequence
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+          Label : ELEMENT
+            return
+            Label : RETURN
+              void
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : RIGHT
+            \
+            Label : SUBNAME
+              S
+            Label : SUBNAME
+              T
+            Label : SUBNAME
+              U
+            Label : SUBNAME
+              V
+            Label : SUBNAME
+              W
+          Label : LEFT
+            $h
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            return
+            Label : RETURN
+              void
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : RIGHT
+            \
+            Label : SUBNAME
+              R
+            Label : SUBNAME
+              Q
+            Label : SUBNAME
+              P
+            Label : SUBNAME
+              O
+            Label : SUBNAME
+              N
+          Label : LEFT
+            $g
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : RIGHT
+            \
+            Label : SUBNAME
+              M
+            Label : SUBNAME
+              L
+            Label : SUBNAME
+              K
+            Label : SUBNAME
+              J
+          Label : LEFT
+            $f
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : RIGHT
+            \
+            Label : SUBNAME
+              I
+            Label : SUBNAME
+              H
+            Label : SUBNAME
+              G
+          Label : LEFT
+            $e
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : RIGHT
+            D
+          Label : LEFT
+            $c
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          ::
+          Label : METHOD
+            F
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $d
+          Label : CLASS
+            E
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
