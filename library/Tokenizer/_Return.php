@@ -13,7 +13,7 @@ class _Return extends TokenAuto {
                                    1 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_ENDIF'))
         );
         
-        $this->actions = array('addEdge'   => array(0 => array('Void' => 'CODE')),
+        $this->actions = array('addEdge'     => array(0 => array('Void' => 'CODE')),
                                'keepIndexed' => true);
         $this->checkAuto();
 
