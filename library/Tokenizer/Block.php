@@ -10,7 +10,7 @@ class Block extends TokenAuto {
     // @doc Block
         $this->conditions = array( -1 => array('filterOut2' => array('T_VARIABLE', 'T_DOLLAR', 'T_CLOSE_CURLY', 'T_OPEN_CURLY',
                                                                      'T_OPEN_BRACKET', 'T_CLOSE_BRACKET',  // $x[1]{3}, 
-                                                                     'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_AT', 'T_CLOSE_PARENTHESIS' )),
+                                                                     'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_AT')), //'T_CLOSE_PARENTHESIS' 
                                     0 => array('token'      => Block::$operators),
                                     1 => array('atom'       => 'yes',
                                                'notAtom'    => 'SequenceCaseDefault'),
@@ -25,7 +25,7 @@ class Block extends TokenAuto {
                                'property'     => array('block' => 'true'),
                                'makeSequence' => 'it',
                                );
-//        $this->checkAuto(); 
+        $this->checkAuto(); 
 
         return $this->checkRemaining();
     }

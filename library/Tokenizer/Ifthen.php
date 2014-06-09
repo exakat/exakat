@@ -71,9 +71,9 @@ class Ifthen extends TokenAuto {
 
     // @doc if then elseif without else
         $this->conditions = array( 0 => array('token' => Ifthen::$operators),
-                                   1 => array('atom' => 'Parenthesis'),
-                                   2 => array('atom' => array('Void', 'Sequence')),
-                                   3 => array('atom' => 'Ifthen', 
+                                   1 => array('atom'  => 'Parenthesis'),
+                                   2 => array('atom'  => array('Void', 'Sequence')),
+                                   3 => array('atom'  => 'Ifthen', 
                                               'token' => 'T_ELSEIF',
                                               'property' => array('alternative' => 'false'))
         );
