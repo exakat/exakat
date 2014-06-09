@@ -527,7 +527,7 @@ function process_file($filename, $log_file) {
                                                  ->save();
                     $classNode->relateTo($void);
 
-                    $T[$Tid]->relateTo($void, 'CODE')->save();
+                    $T[$Tid]->relateTo($void, 'ELEMENT')->save();
                 } else {
                     $block = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                                   ->setProperty('code', $token)
