@@ -18,11 +18,9 @@ class Block extends TokenAuto {
                                                'atom'       => 'none'),
         );
         
-        $this->actions = array('transform'    => array(1 => 'ELEMENT',
-                                                       2 => 'DROP'),
+        $this->actions = array('to_block'     => true,
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
-                               'property'     => array('block' => 'true'),
                                'makeSequence' => 'it',
                                );
         $this->checkAuto(); 
@@ -34,6 +32,7 @@ class Block extends TokenAuto {
         return <<<GREMLIN
 
 fullcode.setProperty('fullcode', "{ /**/ } "); 
+
 GREMLIN;
     }
 }

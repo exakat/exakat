@@ -1321,6 +1321,26 @@ s.bothE('NEXT').each{ g.removeEdge(it); }
             unset($actions['insertConcat4']);
         }           
 
+        if (isset($actions['to_block'])) {
+            $qactions[] = " 
+/* to_block */ 
+
+it.setProperty('block', 'true');
+
+next = it.out('NEXT').next();
+
+g.addEdge(it, next, 'ELEMENT');
+next.setProperty('order', 0);
+g.addEdge(it, next.out('NEXT').out('NEXT').next(), 'NEXT');
+
+next.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+next.out('NEXT').each{ g.removeVertex(it); }
+next.bothE('NEXT').each{ g.removeEdge(it); }
+
+";
+            unset($actions['to_block']);
+        }           
+
         if (isset($actions['to_block_for']) && $actions['to_block_for']) {
             $sequence = new Block(Token::$client);
             $fullcode = $sequence->fullcode();

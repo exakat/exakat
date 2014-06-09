@@ -524,6 +524,7 @@ function process_file($filename, $log_file) {
                                                  ->setProperty('line', $line)
                                                  ->setProperty('atom', 'Void')
                                                  ->setProperty('modifiedBy', 'bin/load3')
+                                                 ->setProperty('order', 0)
                                                  ->save();
                     $classNode->relateTo($void);
 
@@ -534,7 +535,7 @@ function process_file($filename, $log_file) {
                                                   ->setProperty('fullcode', '{ /**/ } ')
                                                   ->setProperty('line', $line)
                                                   ->setProperty('atom', 'Sequence')
-                                                  ->setProperty('order', '0')
+                                                  ->setProperty('order', 0)
                                                   ->setProperty('modifiedBy', 'bin/load12b')
                                                   ->save();
                     $classNode->relateTo($block);
@@ -545,6 +546,7 @@ function process_file($filename, $log_file) {
                                                  ->setProperty('line', $line)
                                                  ->setProperty('atom', 'Void')
                                                  ->setProperty('modifiedBy', 'bin/load3')
+                                                 ->setProperty('order', 0)
                                                  ->save();
                     $classNode->relateTo($void);
 
@@ -758,6 +760,7 @@ function process_file($filename, $log_file) {
                                              ->setProperty('line', $line)
                                              ->setProperty('modifiedBy', 'bin/load11')
                                              ->setProperty('atom', 'Void')
+                                             ->setProperty('order', 0)
                                              ->save();
                 $classNode->relateTo($void);
 
@@ -766,6 +769,7 @@ function process_file($filename, $log_file) {
                                                ->setProperty('fullcode', ';')
                                                ->setProperty('line', $line)
                                                ->setProperty('atom', 'Sequence')
+                                               ->setProperty('order', 0)
                                                ->save();
                 $classNode->relateTo($T[$Tid]);
 

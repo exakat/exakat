@@ -15,8 +15,7 @@ class _Function extends TokenAuto {
                                   3 => array('atom'  => 'Arguments'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   5 => array('atom'  => 'Sequence',
-                                             'property' => array('block' => 'true')
-                                             ),
+                                             'property' => array('block' => 'true') ),
         );
         
         $this->actions = array('transform'     => array( 1 => 'NAME',

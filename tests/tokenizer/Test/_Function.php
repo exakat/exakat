@@ -57,5 +57,6 @@ class _Function extends Tokenizer {
     public function test_Function46()  { $this->generic_test('_Function.46'); }
     public function test_Function47()  { $this->generic_test('_Function.47'); }
     public function test_Function48()  { $this->generic_test('_Function.48'); }
+    public function test_Function49()  { $this->generic_test('_Function.49'); }
 }
 ?>
