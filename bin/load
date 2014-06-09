@@ -558,7 +558,7 @@ function process_file($filename, $log_file) {
                     $T[$Tid]->relateTo($block, 'ELEMENT')->save();
                     $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();                
 
-                    $block->relateTo($void, 'CODE')->save();
+                    $block->relateTo($void, 'ELEMENT')->save();
                 }
                 
                 $classNode->process($tokens[$id + 1], $Php->getTokenName($tokens[$id + 1]));
@@ -769,8 +769,8 @@ function process_file($filename, $log_file) {
                                                ->save();
                 $classNode->relateTo($T[$Tid]);
 
-                $T[$Tid]->relateTo($sequence, 'CODE')->save();
-                $sequence->relateTo($void, 'CODE')->save();
+                $T[$Tid]->relateTo($sequence, 'ELEMENT')->save();
+                $sequence->relateTo($void, 'ELEMENT')->save();
 
                 unset($tokens[$id + 1]);
                 $classNode->process($tokens[$id + 1], $Php->getTokenName($tokens[$id + 1]));
