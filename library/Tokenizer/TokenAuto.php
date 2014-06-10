@@ -1403,7 +1403,7 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
 
 // lone instruction BEFORE
 while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try', 'Ternary', 'While',
-                                      'Assignation', 'Switch', 'Use', 'Label', 'Array', 'Postplusplus', 'Preplusplus', 'Return' ] && 
+                                      'Assignation', 'Switch', 'Use', 'Label', 'Array', 'Postplusplus', 'Preplusplus', 'Return', 'Class' ] && 
                                       it.getProperty('token') != 'T_ELSEIF'}.any() && 
     it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 
                                                     'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 
@@ -1466,7 +1466,7 @@ while (it.out('NEXT').has('atom', 'Sequence').any()) {
 while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
                                        'Dowhile', 'Try', 'Class', 'Interface', 'Trait', 'While', 'Break', 'Assignation', 'Halt',
                                        'Staticmethodcall', 'Namespace', 'Label', 'Postplusplus', 'Preplusplus', 'Include', 'Functioncall',
-                                       'Variable', 'Methodcall' ] && 
+                                       'Methodcall', 'Variable' ] && 
                                        it.token != 'T_ELSEIF' }.any() &&
     it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' ,
                                                      'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
@@ -1475,7 +1475,7 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
                                                      'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL',
                                                      'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL',
                                                      'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL',
-                                                      'T_SR_EQUAL', 'T_OPEN_BRACKET'])}.
+                                                      'T_SR_EQUAL', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS'])}.
                                filter{!(it.token in ['T_ELSEIF', 'T_OPEN_CURLY']) || it.atom != null}.any()) {
     sequence = it;
     next = it.out('NEXT').next();

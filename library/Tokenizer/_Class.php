@@ -61,7 +61,8 @@ class _Class extends TokenAuto {
 
     // class x { // some real code}
         $this->conditions = array( 0 => array('token' => _Class::$operators),
-                                   1 => array('atom'  => 'Sequence')
+                                   1 => array('atom'  => 'Sequence',
+                                              'property' => array('block' => 'true'))
                                  );
         
         $this->actions = array('transform'    => array(1 => 'BLOCK'),

@@ -1,0 +1,112 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    return
+    Label : RETURN
+      $u
+  Label : ELEMENT
+    $q
+    Label : NAME
+      $q
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        array
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            =>
+            Label : KEY
+              'K'
+            Label : VALUE
+              [
+              Label : VARIABLE
+                $s
+              Label : INDEX
+                'L'
+          Label : ARGUMENT
+            =>
+            Label : KEY
+              'M'
+            Label : VALUE
+              [
+              Label : VARIABLE
+                $t
+              Label : INDEX
+                'N'
+      Label : ARGUMENT
+        'I'
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          $r
+        Label : INDEX
+          'J'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      $f
+      Label : NAME
+        $f
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          $g
+        Label : ARGUMENT
+          $h
+        Label : ARGUMENT
+          $i
+        Label : ARGUMENT
+          $j
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          $c
+        Label : ARGUMENT
+          $d
+        Label : ARGUMENT
+          $e
+  Label : ELEMENT
+    H
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        $l
+      Label : ARGUMENT
+        $m
+      Label : ARGUMENT
+        $n
+      Label : ARGUMENT
+        $o
+      Label : ARGUMENT
+        $p
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      E
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          'F'
+        Label : ARGUMENT
+          'G'
+    Label : LEFT
+      $k
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      B
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          'C'
+        Label : ARGUMENT
+          'D'
+    Label : LEFT
+      $a
