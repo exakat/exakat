@@ -941,8 +941,20 @@ GREMLIN;
         return $this;
     }
     
+    public function hasConstantDefinition() {
+        $this->addMethod("filter{ g.idx('constants')[['path':it.fullnspath]].any()}");
+    
+        return $this;
+    }
+
+    public function hasNoConstantDefinition() {
+        $this->addMethod("filter{ g.idx('constants')[['path':it.fullnspath]].any() == false}");
+    
+        return $this;
+    }
+    
     public function groupFilter($characteristic, $percentage) {
-        $this->methods[] = 'sideEffect{'.$characteristic.'}.groupCount(gf){x2}.aggregate().sideEffect{'.$characteristic.'}.filter{gf[x2] < '.$percentage.' * gf.values().sum()}';
+        $this->addMethod('sideEffect{'.$characteristic.'}.groupCount(gf){x2}.aggregate().sideEffect{'.$characteristic.'}.filter{gf[x2] < '.$percentage.' * gf.values().sum()}');
 
         return $this;
     }
