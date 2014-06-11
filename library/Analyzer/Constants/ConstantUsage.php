@@ -8,11 +8,11 @@ class ConstantUsage extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs("Nsname")
-             ->hasNoIn(array('NEW', 'SUBNAME', 'USE'));
+             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE'));
         $this->prepareQuery();
 
         $this->atomIs("Identifier")
-             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME'));
+             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE'));
         $this->prepareQuery();
 
         $this->atomIs("Boolean");
