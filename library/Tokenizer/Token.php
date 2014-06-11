@@ -279,9 +279,22 @@ g.V.has('index', 'true').filter{it.out().count() == 0}.each{
     g.removeVertex(it);
 }
 
-
+//////////////////////////////////////////////////////////////////////////////////////////
 // calculating the full namespaces paths
-g.idx('Const')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().fullcode);}
+//////////////////////////////////////////////////////////////////////////////////////////
+// const in a namespace (and not a class)
+g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').next() != 'Class'}.sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ 
+    if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.out('NAME').next().fullcode);
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().fullcode);
+    }
+}
+
+// const without class nor namspace (aka, global)
+g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false}.each{ 
+    it.setProperty('fullnspath', '\\\\' + it.out('NAME').next().fullcode);
+}
 
 // function definitions
 g.idx('Function')[['token':'node']].sideEffect{fullcode = it.out('NAME').next();}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
@@ -405,9 +418,10 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom =='Namespace'}.each{ 
         if (fullcode.absolutens == 'true') { 
             if (fullcode.atom == 'Functioncall') {
+            // bizarre...  fullcode but with code length ? 
                 fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.code.length()));
             } else {
-                fullcode.setProperty('fullnspath', fullcode.fullcode.substring(1,fullcode.fullcode.length()));
+                fullcode.setProperty('fullnspath', fullcode.fullcode);
             }
         } else if (fullcode.atom == 'Functioncall') {
             fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
@@ -427,8 +441,22 @@ g.idx('Functioncall')[['token':'node']].filter{!it.in('METHOD').any()}.each{
 }
 */
 
+// with Const (out of a class)
+g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false || it.in('ELEMENT').in('BLOCK').next().atom != 'Class'}.each{ 
+    g.idx('constants').put('path', it.fullnspath, it)
+};
 
-
+// with define
+g.idx('Functioncall')[['token':'node']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('order', 0).as('name')
+    .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.sideEffect{ ns = it; }.back('name')
+.each{ 
+    if (ns.atom == 'File') {
+        it.setProperty('fullnspath', '\\\\' + it.noDelimiter);
+    } else {
+        it.setProperty('fullnspath', '\\\\' + ns.out('NAMESPACE').next().fullcode + '\\\\' + it.noDelimiter);
+    }
+    g.idx('constants').put('path', it.fullnspath, it)
+};
 
 ";
         Token::query($query);
