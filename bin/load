@@ -265,9 +265,7 @@ function process_file($filename, $log_file) {
         $token = $tokens[$id];
         $to_index = true;
 
-            
         if (isset($tokens_newlines[$id])) {
-            print "extra lines {$tokens_newlines[$id]}\n";
             $line += $tokens_newlines[$id];
         }
         
