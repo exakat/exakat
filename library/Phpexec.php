@@ -111,7 +111,7 @@ class Phpexec {
     
     public function getWhiteCode() {
         return array(
-            array_search('T_WHITESPACE', $this->tokens) => 1,
+//            array_search('T_WHITESPACE', $this->tokens) => 1,
             array_search('T_DOC_COMMENT', $this->tokens) => 1,
             array_search('T_COMMENT', $this->tokens) => 1,
         );
