@@ -147,10 +147,16 @@ function process_file($filename, $log_file) {
 
     $delimitedStrings = array('T_QUOTE' => 0, 'T_SHELL_QUOTE' => 0);
     $whiteCode = $Php->getWhiteCode();
+    $tokens_newlines = array();
     foreach($tokens as $id => $token) {
-        if (isset($whiteCode[$token[0]])) { unset($tokens[$id]); }
+        if (isset($whiteCode[$token[0]])) { 
+            $tokens_newlines[$id - count($tokens_newlines)] = substr_count($tokens[$id][1], "\n");
+            unset($tokens[$id]); 
+        }
     }
+    
     $tokens = array_values($tokens);
+
     if (count($tokens) == 2 && 
         $Php->getTokenname($tokens[0][0]) == 'T_OPEN_TAG' &&
         $Php->getTokenname($tokens[1][0]) == 'T_CLOSE_TAG') {
@@ -258,13 +264,16 @@ function process_file($filename, $log_file) {
         $Tid++;
         $token = $tokens[$id];
         $to_index = true;
+
+            
+        if (isset($tokens_newlines[$id])) {
+            print "extra lines {$tokens_newlines[$id]}\n";
+            $line += $tokens_newlines[$id];
+        }
         
         if (is_array($token)) {
             $classNode->process($token, $Php->getTokenname($token[0]));
-            if ($Php->getTokenname($token[0]) == 'T_WHITESPACE') {
-                $line += substr_count($token[1], "\n");
-                continue;
-            } elseif ($Php->getTokenname($token[0]) == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
+            if ($Php->getTokenname($token[0]) == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])->save();
@@ -492,7 +501,7 @@ function process_file($filename, $log_file) {
         } else {
             $token_value = $Php->getTokenname($token);
             $classNode->process($token, $token_value);
-
+            
             if ($token_value == 'T_OPEN_CURLY') {
                 $block_level ++;
             } elseif ($token_value == 'T_CLOSE_CURLY') {
