@@ -524,6 +524,18 @@ GREMLIN;
         return $this;
     }
 
+    function noChildWithOrder($edge_name, $order = "0") {
+        if ($order == 'first') {
+            $this->addMethod("filter{ it.out(***).has('order','0').any() == false }");
+        } elseif ($order == 'last') {
+            $this->addMethod("filter{ it.out(***).has('order',it.in(***).count() - 1).any() == false }", $edge_name, $edge_name);
+        } else {
+            $this->addMethod("filter{ it.out(***).has('order', ***).any() == false}", $edge_name, abs(intval($order)));
+        }
+
+        return $this;
+    }
+
     function code($code, $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
