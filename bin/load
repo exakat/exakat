@@ -261,7 +261,6 @@ function process_file($filename, $log_file) {
         
         if (is_array($token)) {
             $classNode->process($token, $Php->getTokenname($token[0]));
-            print $Php->getTokenname($token[0])."\n"; 
             if ($Php->getTokenname($token[0]) == 'T_WHITESPACE') {
                 $line += substr_count($token[1], "\n");
                 continue;
