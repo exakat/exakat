@@ -99,6 +99,13 @@ query("g.idx('racines')[['token':'S_STRING']].out('INDEXED').filter{it.code.repl
 
 if (DISPLAY) print "String unicode done\n";
 
+// resolving the constants
+query("g.createManualIndex('constants', Vertex)");
+query("g.createManualIndex('functions', Vertex)");
+query("g.createManualIndex('classes', Vertex)");
+
+if (DISPLAY) print "Creating index for constant, function and classes resolution.\n";
+
 $end = microtime(true);
 
 //$db = new Db('exakat');
