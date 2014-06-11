@@ -261,7 +261,11 @@ function process_file($filename, $log_file) {
         
         if (is_array($token)) {
             $classNode->process($token, $Php->getTokenname($token[0]));
-            if ($Php->getTokenname($token[0]) == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
+            print $Php->getTokenname($token[0])."\n"; 
+            if ($Php->getTokenname($token[0]) == 'T_WHITESPACE') {
+                $line += substr_count($token[1], "\n");
+                continue;
+            } elseif ($Php->getTokenname($token[0]) == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])->save();
