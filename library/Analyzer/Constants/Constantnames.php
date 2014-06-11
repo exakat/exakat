@@ -11,6 +11,11 @@ class Constantnames extends Analyzer\Analyzer {
              ->inIsnot('METHOD')
              ->outIs('ARGUMENTS')
              ->orderIs('ARGUMENT', 0);
+        $this->prepareQuery();
+
+        $this->atomIs("Const")
+             ->hasNoParent('Class', array('ELEMENT', 'BLOCK'))
+             ->outIs('NAME');
     }
 }
 

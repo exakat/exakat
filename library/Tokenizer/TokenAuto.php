@@ -1329,13 +1329,31 @@ it.setProperty('block', 'true');
 
 next = it.out('NEXT').next();
 
-g.addEdge(it, next, 'ELEMENT');
-next.setProperty('order', 0);
-g.addEdge(it, next.out('NEXT').out('NEXT').next(), 'NEXT');
+if (next.atom == 'Sequence') {
+    init = it;
+    next.out('ELEMENT').each{
+        it.inE('ELEMENT').each{
+            g.removeEdge(it);
+        }
+        g.addEdge(init, it, 'ELEMENT');
+    }
 
-next.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-next.out('NEXT').each{ g.removeVertex(it); }
-next.bothE('NEXT').each{ g.removeEdge(it); }
+    end = next.out('NEXT').next();
+    g.addEdge(it, end.out('NEXT').next(), 'NEXT');
+    end.bothE('NEXT').each{ g.removeEdge(it); }
+    next.inE('NEXT').each{ g.removeEdge(it); }
+
+    g.removeVertex(next);
+    g.removeVertex(end);
+} else {
+    g.addEdge(it, next, 'ELEMENT');
+    next.setProperty('order', 0);
+    g.addEdge(it, next.out('NEXT').out('NEXT').next(), 'NEXT');
+
+    next.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+    next.out('NEXT').each{ g.removeVertex(it); }
+    next.bothE('NEXT').each{ g.removeEdge(it); }
+}
 
 ";
             unset($actions['to_block']);

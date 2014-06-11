@@ -12,7 +12,7 @@ class ConstantUsage extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs("Identifier")
-             ->hasNoIn(array('NEW', 'SUBNAME', 'USE'));
+             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME'));
         $this->prepareQuery();
 
         $this->atomIs("Boolean");
