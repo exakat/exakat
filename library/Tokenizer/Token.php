@@ -306,14 +306,12 @@ g.idx('Function')[['token':'node']].sideEffect{fullcode = it.out('NAME').next();
 }
 
 // class definitions
-g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ 
+g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.out('NAME').next().code);
     } else {
-        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().code);
     }
-
-    
 }
 
 // function usage
@@ -438,20 +436,13 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
         }    
 }
 
-// fallback to global NS for functions and constants : but we need to know what is defined! 
-
-/*
-g.idx('Functioncall')[['token':'node']].filter{!it.in('METHOD').any()}.each{
-    functioncall = it;
-    g.idx('Function')[['token':'node']].as('Function').out('NAME').filter{it.'fullnspath'.toLowerCase() == functioncall.fullnspath.toLowerCase()}.back('Function').each{
-        g.addEdge(functioncall, it, 'DEFINED');
-    }
-}
-*/
-
 // with Const (out of a class)
 g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false || it.in('ELEMENT').in('BLOCK').next().atom != 'Class'}.each{ 
     g.idx('constants').put('path', it.fullnspath, it)
+};
+
+g.idx('Class')[['token':'node']].each{ 
+    g.idx('classes').put('path', it.fullnspath, it)
 };
 
 // with define
