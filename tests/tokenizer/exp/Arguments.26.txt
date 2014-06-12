@@ -1,0 +1,70 @@
+makeSequence
+Label : ELEMENT
+  I
+Label : ELEMENT
+  <?php
+
+  Label : CODE
+    makeSequence
+    Label : ELEMENT
+      namespace
+      Label : NAMESPACE
+        B
+      Label : BLOCK
+        makeSequence
+        Label : ELEMENT
+          use
+          Label : USE
+            C
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              empty
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : PROPERTY
+                    D
+                  Label : OBJECT
+                    $a
+          Label : THEN
+            {
+            Label : ELEMENT
+              return
+              Label : RETURN
+                void
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              =
+              Label : RIGHT
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ->
+                    Label : PROPERTY
+                      G
+                    Label : OBJECT
+                      $c
+              Label : LEFT
+                $b
+            Label : ARGUMENT
+              ?
+              Label : CONDITION
+                >
+                Label : RIGHT
+                  0
+                Label : LEFT
+                  $d
+              Label : THEN
+                'H'
+              Label : ELSE
+                'I'
+        Label : ELEMENT
+          D
