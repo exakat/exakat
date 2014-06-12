@@ -9,7 +9,6 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Class")
              ->outIs('BLOCK')
-             ->outIs('CODE')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
              ->savePropertyAs('propertyname', 'propertyname')

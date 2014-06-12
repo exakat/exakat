@@ -16,6 +16,17 @@ class Arguments extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->setApplyBelow(true)
              ->back('x');
+        $this->prepareQuery();
+        
+        $this->setApplyBelow(false);
+        $this->atomIs("Variable")
+             ->_as('x')
+             ->inIs('ARGUMENT')
+             ->atomIs('Arguments')
+             ->inIs('ARGUMENTS')
+             ->atomIs('Function')
+             ->back('x');
+        $this->prepareQuery();
     }
 }
 

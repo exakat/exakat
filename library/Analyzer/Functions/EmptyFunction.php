@@ -9,7 +9,7 @@ class EmptyFunction extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Function")
              ->outIs('BLOCK')
-             ->outIs('CODE')
+             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
     }

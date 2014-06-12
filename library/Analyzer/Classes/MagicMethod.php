@@ -15,7 +15,6 @@ class MagicMethod extends Analyzer\Analyzer {
         
         $this->atomIs("Class")
              ->outIs('BLOCK')
-             ->outIs('CODE')
              ->atomInside('Function')
              ->outIs('NAME')
              ->code($magicMethods);

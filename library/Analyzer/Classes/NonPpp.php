@@ -20,7 +20,6 @@ class NonPpp extends Analyzer\Analyzer {
              ->hasNoOut(array('PUBLIC', 'PROTECTED', 'PRIVATE'))
              ->hasOut('DEFINE')
              ->inIs('ELEMENT')
-             ->inIs('CODE')
              ->inIs('BLOCK')
              ->atomIs('Class')
              ->back('first');

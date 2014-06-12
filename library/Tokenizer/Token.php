@@ -306,7 +306,15 @@ g.idx('Function')[['token':'node']].sideEffect{fullcode = it.out('NAME').next();
 }
 
 // class definitions
-g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().fullcode);}
+g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ 
+    if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    }
+
+    
+}
 
 // function usage
 g.idx('Functioncall')[['token':'node']].filter{it.in('METHOD').count() == 0}.sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}
@@ -415,7 +423,7 @@ g.idx('Identifier')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS',
 
 g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW').count() == 0}
     .filter{it.out('ARGUMENTS').count() == 0}
-    .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom =='Namespace'}.each{ 
+    .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
         if (fullcode.absolutens == 'true') { 
             if (fullcode.atom == 'Functioncall') {
             // bizarre...  fullcode but with code length ? 

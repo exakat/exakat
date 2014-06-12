@@ -9,10 +9,10 @@ class EmptyClass extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Class")
              ->outIs('EXTENDS')
-             ->codeIsNot('Exception')
+             ->fullnspathIsNot('\exception')
              ->back('first')
              ->outIs('BLOCK')
-             ->outIs('CODE')
+             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
@@ -20,7 +20,7 @@ class EmptyClass extends Analyzer\Analyzer {
         $this->atomIs("Class")
              ->hasNoOut('EXTENDS')
              ->outIs('BLOCK')
-             ->outIs('CODE')
+             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();

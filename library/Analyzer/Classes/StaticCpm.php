@@ -12,7 +12,6 @@ class StaticCpm extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Class")
              ->outIs("BLOCK")
-             ->outIs("CODE")
              ->atomInside('Function')
              ->hasOut('STATIC')
              ->outIs('NAME');
@@ -20,7 +19,6 @@ class StaticCpm extends Analyzer\Analyzer {
 
         $this->atomIs("Class")
              ->outIs("BLOCK")
-             ->outIs("CODE")
              ->atomInside('Ppp')
              ->hasOut('STATIC')
              ->outIs('DEFINE');

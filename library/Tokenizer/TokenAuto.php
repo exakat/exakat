@@ -1005,108 +1005,6 @@ f.each{
             unset($actions['dropNextCode']);
         }
 
-        if (isset($actions['insertSequenceCaseDefault'])) {
-            $sequence = new SequenceCaseDefault(Token::$client);
-            $fullcode = $sequence->fullcode();
-
-            $qactions[] = "
-/* insertSequenceCaseDefault */
-x = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', virtual:true, line:it.line]);
-
-fullcode = x;
-$fullcode;
-
-g.addEdge(x, it, 'ELEMENT');
-g.addEdge(x, it.out('NEXT').next(), 'ELEMENT');
-
-g.addEdge(it.in('NEXT').next(), x, 'NEXT');
-g.addEdge(x, it.out('NEXT').out('NEXT').next(), 'NEXT');
-
-it.setProperty('order', 0);
-it.out('NEXT').next().setProperty('order', 1);
-
-it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-it.bothE('NEXT').each{ g.removeEdge(it); }
-
-
-/* Adapted mergeNext */
-/* mergeNext */ 
-
-c = x.out('ELEMENT').has('order', 0).has('atom', 'SequenceCaseDefault').count();
-d = x.out('ELEMENT').has('order', 1).has('atom', 'SequenceCaseDefault').count();
-
-if (c == 1) { // there is a list of argument in order 0
-    if (d == 1) { // 0 and 1 are multiple list
-        sub = x.out('ELEMENT').has('order', 0).next();
-        n = x.out('ELEMENT').has('order', 0).out('ELEMENT').count() ;
-        
-        x.out('ELEMENT').has('order', 1).out('ELEMENT').each{
-            g.addEdge(sub, it, 'ELEMENT');
-            it.setProperty('order', it.getProperty('order') + n);
-        }
-
-        x.out('ELEMENT').has('order', 1).outE('ELEMENT').each{
-            g.removeEdge(it);
-        }
-
-        g.addEdge(x.in('NEXT').next(), sub, 'NEXT');
-        g.addEdge(sub, x.out('NEXT').next(), 'NEXT');
-
-        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');
-        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x.out('ELEMENT').has('order', 1).next(), 'DELETE');
-        x.bothE('NEXT').each{ g.removeEdge(it); }
-        x.outE('ELEMENT').each{ g.removeEdge(it); }
-
-        clean = sub;
-    } else { // 0 is multiple, 1 is single
-        sub = x.out('ELEMENT').has('order', 0).next();
-        n = sub.out('ELEMENT').count();
-
-        g.addEdge(sub, x.out('ELEMENT').has('order', 1).next(), 'ELEMENT');
-        x.out('ELEMENT').has('order', 1).next().setProperty('orderedby', 'zero_is_multiple');
-        x.out('ELEMENT').has('order', 1).next().setProperty('order', n);
-
-        g.addEdge(x.in('NEXT').next(), sub, 'NEXT');
-        g.addEdge(sub, x.out('NEXT').next(), 'NEXT');
-        
-        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');
-        x.bothE('NEXT').each{ g.removeEdge(it); }
-        x.outE('ELEMENT').each{ g.removeEdge(it); }
-
-        clean = sub;
-    }
-} else { // order 0 is single
-    if (d == 1) {
-        x.out('ELEMENT').has('order', 0).next().setProperty('orderedby', 'one_is_multiple');
-        sub = x.out('ELEMENT').has('order', 1).next();
-        sub.out('ELEMENT').each{ it.setProperty( 'order', it.order + 1); };
-        g.addEdge(sub, x.out('ELEMENT').has('order', 0).next(), 'ELEMENT');
-        
-        g.addEdge(x.in('NEXT').next(), sub, 'NEXT');
-        g.addEdge(sub, x.out('NEXT').next(), 'NEXT');
-        
-        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');
-        x.bothE('NEXT').each{ g.removeEdge(it); }
-        x.outE('ELEMENT').each{ g.removeEdge(it); }
-        clean = sub;
-
-    } else {
-        // order 1 and 0 are both singles : Nothing to do.
-        x.out('ELEMENT').each{ it.setProperty('orderedby', 'both_are_single')};
-        clean = it;
-    }
-}
-
-// automated clean Index
-clean.out('ELEMENT').inE('INDEXED').each{
-    g.removeEdge(it);
-}
-
-
-";
-            unset($actions['insertSequenceCaseDefault']);
-        }
-        
         if (isset($actions['createSequenceForCaseWithoutSemicolon'])) {
             $sequence = new Sequence(Token::$client);
             $fullcode = $sequence->fullcode();
@@ -1955,6 +1853,7 @@ a = it$offset.next();
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
+a.setProperty('order', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
@@ -2181,7 +2080,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             it.bothE('NEXT').each{ g.removeEdge(it); }
     } else {
         // no caseDefaultSequence anywhere
-        cds = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', virtual:true, line:it.line, fullcode:'Sequence Case Default']);
+        cds = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', virtual:true, line:it.line, fullcode:'{ /**/ }']);
 
         it.setProperty('order', 0);
 
@@ -2360,7 +2259,8 @@ if (    $it.token != 'T_ELSEIF'
     $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
     $it.setProperty('makeSequence4',  $it.out('NEXT').next().token);
 
-    if ($it.both('NEXT').has('atom', 'Sequence').count() == 2) {
+    if ( $it.both('NEXT').has('atom', 'Sequence').count() == 2 &&
+        ($it.in('NEXT').next().block != 'true')) {
         count = $it.in('NEXT').out('ELEMENT').count();
         sequence = $it.in('NEXT').next();
     

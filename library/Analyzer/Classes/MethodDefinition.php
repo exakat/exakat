@@ -9,7 +9,6 @@ class MethodDefinition extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Class")
              ->outIs('BLOCK')
-             ->outIs('CODE')
              ->outIs('ELEMENT')
              ->atomIs('Function')
              ->outIs('NAME');
@@ -17,7 +16,6 @@ class MethodDefinition extends Analyzer\Analyzer {
 
         $this->atomIs("Class")
              ->outIs('BLOCK')
-             ->outIs('CODE')
              ->atomIs('Function')
              ->outIs('NAME');
         $this->prepareQuery();

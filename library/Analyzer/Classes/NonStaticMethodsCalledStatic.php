@@ -18,7 +18,7 @@ class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
              ->back('first')
              ->raw("filter{ x = it;  g.idx('Function')[['token':'node']]
                                                 .filter{ it.out('NAME').next().code.toLowerCase() == x.out('METHOD').next().code.toLowerCase()}.
-                                                 filter{ it.in('ELEMENT').in('CODE').in('BLOCK').out('NAME').next().code.toLowerCase() == x.out('CLASS').next().code.toLowerCase()}.
+                                                 filter{ it.in('ELEMENT').in('BLOCK').out('NAME').next().code.toLowerCase() == x.out('CLASS').next().code.toLowerCase()}.
                                                  filter{ it.out('NAME').in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\MethodDefinition').any()}.
                                                  filter{ it.out('NAME').in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\StaticMethods').count() == 0}
                                                 .any() }")

@@ -52,14 +52,12 @@ class Extension extends Analyzer\Analyzer {
             $this->prepareQuery();
         }
         
-        /*
-        Not yet supported.
         if (!empty($constants)) {
-            $this->atomIs("ConstantUsage")
-                 ->code($functions);
+            $this->atomIs("Identifier")
+                 ->analyzerIs('ConstantUsage')
+                 ->code($constants);
             $this->prepareQuery();
         }
-        */
 
         if (!empty($classes)) {
             $classes = array_map(function ($x) { return "\\".$x; } ,  $classes);
