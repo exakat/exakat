@@ -31,6 +31,7 @@ class TokenAuto extends Token {
             $qcdts = array_merge($qcdts, $this->readConditions($this->conditions[0]));
             
             $qcdts[] = "as('origin')";
+            unset($this->conditions[0]);
         }
 
         for($i = -8; $i < 0; $i++) {
@@ -41,6 +42,7 @@ class TokenAuto extends Token {
 
                 $qcdts[] = "back('origin')";
             }
+            unset($this->conditions[$i]);
         }
 
         for($i = 1; $i < 12; $i++) {
@@ -51,6 +53,12 @@ class TokenAuto extends Token {
 
                 $qcdts[] = "back('origin')";
             }
+            unset($this->conditions[$i]);
+        }
+        
+        if (!empty($this->conditions)) {
+            print "Some condition were not used! \n".__METHOD__."\n";
+            die();
         }
         
         $query = $query.".".join('.', $qcdts);
@@ -1276,6 +1284,7 @@ a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').o
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
+a.setProperty('order', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
@@ -1783,6 +1792,7 @@ a = it.out('NEXT').next();
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
+a.setProperty('order', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
@@ -1822,6 +1832,7 @@ a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').n
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
+a.setProperty('order', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
@@ -1884,6 +1895,7 @@ a = it.out('NEXT').out('NEXT').next();
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
+a.setProperty('order', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 ";
@@ -1904,6 +1916,7 @@ x = g.addVertex(null, [code:'Block with Next', fullcode:'Block with Next', atom:
 
 g.addEdge(it.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, it, 'ELEMENT');
+it.setProperty('order', 0);
 g.addEdge(x, it.out('NEXT').next(), 'NEXT');
 
 it.bothE('NEXT').each{ g.removeEdge(it) ; }
@@ -1931,6 +1944,7 @@ a.out('NEXT').has('token', 'T_SEMICOLON').each{
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
+a.setProperty('order', 0);
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
@@ -1966,6 +1980,7 @@ a.out('NEXT').has('token', 'T_SEMICOLON').each{
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
+a.setProperty('order', 0);
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
@@ -2166,6 +2181,7 @@ a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
+a.setProperty('order', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
