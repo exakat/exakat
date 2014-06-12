@@ -89,7 +89,6 @@ foreach($tokens as $t) {
             case T_ENDSWITCH : 
             case T_ECHO : 
             case T_PRINT : 
-            case T_ENDFOREACH : 
             case T_EMPTY : 
             case T_ARRAY :
             case T_GLOBAL : 
@@ -104,6 +103,7 @@ foreach($tokens as $t) {
             case T_SL : 
             case T_SR : 
             case T_IS_EQUAL :
+            case T_IS_SMALLER_OR_EQUAL :
             case T_MINUS_EQUAL :
             case T_WHILE : 
             case T_IS_GREATER_OR_EQUAL : 
@@ -125,8 +125,12 @@ foreach($tokens as $t) {
             case T_XOR_EQUAL :
             case T_OR_EQUAL : 
             case T_IS_NOT_EQUAL : 
+
             case T_FOR :
+            case T_ENDFOR :
             case T_FOREACH : 
+            case T_ENDFOREACH : 
+
             case T_FUNCTION : 
             case T_INC:
             case T_DOUBLE_COLON:
