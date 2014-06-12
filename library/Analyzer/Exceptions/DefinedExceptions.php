@@ -9,17 +9,41 @@ class DefinedExceptions extends Analyzer\Analyzer {
         // first level
         $this->atomIs("Class")
              ->outIs('EXTENDS')
-             ->code('Exception')
+             ->fullnspath('\exception')
              ->back('first');
         $this->prepareQuery();
 
         // second level
         $this->atomIs("Class")
-             ->inIs('DEFINES')
+             ->outIs('EXTENDS')
+             ->classDefinition()
              ->analyzerIs("Analyzer\\Exceptions\\DefinedExceptions")
              ->back('first');
         $this->prepareQuery();
-//        $this->printQuery();
+
+        // third level
+        $this->atomIs("Class")
+             ->outIs('EXTENDS')
+             ->classDefinition()
+             ->analyzerIs("Analyzer\\Exceptions\\DefinedExceptions")
+             ->back('first');
+        $this->prepareQuery();
+
+        // fourth level
+        $this->atomIs("Class")
+             ->outIs('EXTENDS')
+             ->classDefinition()
+             ->analyzerIs("Analyzer\\Exceptions\\DefinedExceptions")
+             ->back('first');
+        $this->prepareQuery();
+
+        // fifth level
+        $this->atomIs("Class")
+             ->outIs('EXTENDS')
+             ->classDefinition()
+             ->analyzerIs("Analyzer\\Exceptions\\DefinedExceptions")
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
