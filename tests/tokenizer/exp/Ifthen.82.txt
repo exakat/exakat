@@ -1,0 +1,66 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    for
+    Label : INIT
+      =
+      Label : RIGHT
+        0
+      Label : LEFT
+        $a
+    Label : FINAL
+      <=
+      Label : RIGHT
+        $c
+      Label : LEFT
+        $b
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $d
+    Label : BLOCK
+      makeSequence
+      Label : ELEMENT
+        A
+      Label : ELEMENT
+        for
+        Label : INIT
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $e
+        Label : FINAL
+          <=
+          Label : RIGHT
+            $g
+          Label : LEFT
+            $f
+        Label : INCREMENT
+          ++
+          Label : POSTPLUSPLUS
+            $h
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              (int)
+              Label : CAST
+                (
+                Label : CODE
+                  *
+                  Label : RIGHT
+                    /
+                    Label : RIGHT
+                      $k
+                    Label : LEFT
+                      $j
+                  Label : LEFT
+                    2
+            Label : LEFT
+              $i
+      Label : ELEMENT
+        B
