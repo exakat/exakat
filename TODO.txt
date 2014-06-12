@@ -329,3 +329,6 @@ Map/Reduce : Faire marcher les analyses du tokenizer sur des intervalles dans le
 Ajouter des while au lieu des ifs, notamment pour les structures récursives
 Utiliser les index pour les résolutions (g.idx('resolution')[['class':name]] = g.v(100);
 Spot void in arrays 
+Expressions that should be on the same line (@ unlink, ! )
+array() may be useless instruction (warning to inner methodcall...)
+! may have pb like @ (2 on one line)
