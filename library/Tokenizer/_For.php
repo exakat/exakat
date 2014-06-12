@@ -116,7 +116,8 @@ class _For extends TokenAuto {
                                    7   => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    8   => array('token' => 'T_COLON'),
                                    9   => array('atom'  => 'yes'),
-                                   10  => array('token' => 'T_SEMICOLON'),
+                                   10  => array('token' => 'T_SEMICOLON',
+                                                'atom'  => 'none'),
                                    11  => array('token' => 'T_ENDFOR'),
         );
         
@@ -144,6 +145,7 @@ class _For extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
+
 it.fullcode = "for(" + it.out("INIT").next().fullcode + " ; " + it.out("FINAL").next().fullcode + " ; " + it.out("INCREMENT").next().fullcode + ") " + it.out("BLOCK").next().fullcode;
 
 GREMLIN;
