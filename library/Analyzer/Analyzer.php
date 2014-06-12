@@ -987,6 +987,12 @@ GREMLIN;
     
         return $this;
     }
+
+    public function classDefinition() {
+        $this->addMethod("filter{ g.idx('classes').get('path', it.fullnspath).any()}.transform{ g.idx('classes').get('path', it.fullnspath).next(); }");
+    
+        return $this;
+    }
     
     public function groupFilter($characteristic, $percentage) {
         $this->addMethod('sideEffect{'.$characteristic.'}.groupCount(gf){x2}.aggregate().sideEffect{'.$characteristic.'}.filter{gf[x2] < '.$percentage.' * gf.values().sum()}');
