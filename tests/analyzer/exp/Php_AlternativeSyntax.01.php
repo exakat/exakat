@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('if ( $alternative) { /**/ } ', 
-                      'switch ($alternative) Sequence Case Default', 
+                      'switch ($alternative) { /**/ } ', 
                       'while ($alternative) $y++',
                       'for($i = 0 ; $i < 10 ; $i++) $y++', 
                       'foreach($a as $b)$y++');
