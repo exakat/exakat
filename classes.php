@@ -82,7 +82,6 @@ $classes = array (
   75 => '_Catch',
   76 => '_Try',
   80 => 'Phpcodemiddle',
-//  82 => 'Void',
   77 => 'Sequence',
   81 => 'Phpcode',
 ); ?>
