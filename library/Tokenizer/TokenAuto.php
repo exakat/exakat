@@ -1508,6 +1508,8 @@ g.addEdge(it, nextnext, 'NEXT');
         }           
 
         if (isset($actions['to_catch'])) {
+            $fullcode = $this->fullcode();
+
             $qactions[] = "
 /* to_catch */
 thecatch = it.out('NEXT').next();
@@ -1517,6 +1519,9 @@ thecatch.setProperty('order', it.out('CATCH').count());
 g.addEdge(it, thecatch, 'CATCH');
 g.addEdge(it, next, 'NEXT');
 thecatch.bothE('NEXT').each{ g.removeEdge(it); }
+
+fullcode = it;
+$fullcode
 
 ";
             unset($actions['to_catch']);
@@ -2230,7 +2235,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_ABSTRACT', 'T_FINAL', 'T_STATIC', 'T_CONST', 
         'T_AT', 'T_CASE', 
         'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
-        'T_DO',
+        'T_DO', 'T_TRY',
         'T_STRING', 'T_INSTEADOF', 'T_INSTANCEOF', 'T_BANG',
         ];
 
