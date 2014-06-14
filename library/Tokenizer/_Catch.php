@@ -13,7 +13,8 @@ class _Catch extends TokenAuto {
                                   2 => array('atom'  => array('Identifier', 'Nsname')), 
                                   3 => array('atom'  => 'Variable'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('atom'  => 'Sequence'),
+                                  5 => array('atom'  => 'Sequence',
+                                             'property' => array('block' => 'true')),
                                   );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',

@@ -10,7 +10,8 @@ class _Try extends TokenAuto {
         // Try () { } catch
         $this->conditions = array(0 => array('token' => _Try::$operators,
                                              'atom' => 'none'),
-                                  1 => array('atom' => 'Sequence'), 
+                                  1 => array('atom' => 'Sequence',
+                                             'property' => array('block' => 'true')), 
                                   2 => array('atom' => 'Catch'),
                                   );
         
@@ -45,9 +46,10 @@ class _Try extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
+
 s = [];
-it.out("CATCH").each{ s.add(it.fullcode); }        
-it.fullcode = "try " + it.out("CODE").next().fullcode + s.join(" "); 
+fullcode.out("CATCH").each{ s.add(it.fullcode); }
+fullcode.setProperty('fullcode', "try " + it.out("CODE").next().getProperty('fullcode') + s.join(" ")); 
 
 GREMLIN;
     }
