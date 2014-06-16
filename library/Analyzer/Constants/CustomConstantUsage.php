@@ -14,12 +14,18 @@ class CustomConstantUsage extends Analyzer\Analyzer {
         $curl_constants = $this->loadConstants('curl.ini');
         $libxml_constants = $this->loadConstants('libxml.ini');
         $standard_constants = $this->loadConstants('standard.ini');
+        $php_constants = $this->loadConstants('php_constants.ini');
+        $json_constants = $this->loadConstants('json.ini');
+        $pcntl_constants = $this->loadConstants('pcntl.ini');
 
         $this->atomIs("Identifier")
              ->analyzerIs('Analyzer\\Constants\\ConstantUsage')
              ->codeIsNot($curl_constants)
              ->codeIsNot($libxml_constants)
-             ->codeIsNot($standard_constants);
+             ->codeIsNot($standard_constants)
+             ->codeIsNot($json_constants)
+             ->codeIsNot($pcntl_constants)
+             ->codeIsNot($php_constants);
         $this->prepareQuery();
 
         // @note NSnamed are OK by default (mmm, no!)
@@ -36,7 +42,6 @@ class CustomConstantUsage extends Analyzer\Analyzer {
             if (count($constants) == 1 && empty($constants[0])) {
                 $constants = array();
             }
-            
         }
         
         return $constants;
