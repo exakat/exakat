@@ -303,7 +303,6 @@ Use const or constant() for constants ?
 unsupported calls in strings ("$x[a][b]")
 inventory of registered functions (session, finalize, error...)
 Characterize function as library (not global code), or script
-Detect nested loops
 Detect long switch, if elseif...
 check this outside methods
 check for $THIS (and other variables with special meaning but wrong case ? )
@@ -332,3 +331,5 @@ Spot void in arrays
 Expressions that should be on the same line (@ unlink, ! )
 array() may be useless instruction (warning to inner methodcall...)
 ! may have pb like @ (2 on one line)
+Spot configuration that are not well used (ini_set('others', 3) => useless....)
+Spot very deep code (lots of {{{{{{{}}}}}}}
