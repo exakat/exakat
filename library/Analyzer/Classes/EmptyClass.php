@@ -6,10 +6,14 @@ use Analyzer;
 
 class EmptyClass extends Analyzer\Analyzer {
     
+    public function dependsOn() {
+        return array('Analyzer\\Exceptions\\DefinedExceptions');
+    }
+    
     public function analyze() {
         $this->atomIs("Class")
+             ->analyzerIsNot('Analyzer\\Exceptions\\DefinedExceptions')
              ->outIs('EXTENDS')
-             ->fullnspathIsNot('\exception')
              ->back('first')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
