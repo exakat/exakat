@@ -13,6 +13,18 @@ class ErrorReportingWithInteger extends Analyzer\Analyzer {
              ->atomIs('Integer')
              ->back('first');
         $this->prepareQuery();
+
+        $this->atomIs("Functioncall")
+             ->code('ini_set', false)
+             ->outIs('ARGUMENTS')
+             ->orderIs('ARGUMENT', 0)
+             ->atomIs('String')
+             ->is('noDelimiter', "'error_reporting'")
+             ->inIs('ARGUMENT')
+             ->orderIs('ARGUMENT', 1)
+             ->atomIs('Integer')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
