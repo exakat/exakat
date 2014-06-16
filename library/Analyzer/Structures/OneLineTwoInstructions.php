@@ -14,7 +14,6 @@ class OneLineTwoInstructions extends Analyzer\Analyzer {
              ->samePropertyAs('line', 'line_number')
              ->back('report');
         $this->prepareQuery();
-
     }
 }
 
