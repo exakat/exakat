@@ -32,7 +32,7 @@ class Sequence extends TokenAuto {
         $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, 
                                       Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators, 
                                       _Include::$operators );
-        $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 
+        $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_INSTANCEOF', 
                                            'T_CLOSE_PARENTHESIS', 'T_CATCH', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', 'T_AS', ), 
                                      Assignation::$operators, Logical::$operators, Comparison::$operators, 
                                      Preplusplus::$operators, Postplusplus::$operators);
@@ -268,7 +268,8 @@ class Sequence extends TokenAuto {
                                               'notToken' => 'T_ELSEIF', ),
                                    0 => array('token'    => Sequence::$operators,
                                               'atom'     => 'none'),
-                                   1 => array('token'    => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_ENDDECLARE', 'T_ENDFOREACH', ),
+                                   1 => array('token'    => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 
+                                                                  'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_ENDDECLARE', 'T_ENDFOREACH', ),
                                               'atom'     => 'none'),
         );
         
