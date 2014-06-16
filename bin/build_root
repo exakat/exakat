@@ -103,6 +103,8 @@ if (DISPLAY) print "String unicode done\n";
 query("g.createManualIndex('constants', Vertex)");
 query("g.createManualIndex('functions', Vertex)");
 query("g.createManualIndex('classes', Vertex)");
+query("g.createManualIndex('interfaces', Vertex)");
+query("g.createManualIndex('traits', Vertex)");
 
 if (DISPLAY) print "Creating index for constant, function and classes resolution.\n";
 

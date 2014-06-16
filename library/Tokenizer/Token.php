@@ -324,6 +324,35 @@ g.idx('Class')[['token':'node']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcod
     }
 }
 
+g.idx('Class')[['token':'node']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', fullcode.fullcode);
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code);
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.code);
+    }
+}
+
+// trait definitions
+g.idx('Trait')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.out('NAME').next().code);
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().code);
+    }
+}
+
+// interfaces definitions
+g.idx('Interface')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.out('NAME').next().code);
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode + '\\\\' + fullcode.out('NAME').next().code);
+    }
+}
+
+
 // also add interfaces and Traits and their respective extensions
 
 // function usage
@@ -455,6 +484,14 @@ g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == fa
 
 g.idx('Class')[['token':'node']].each{ 
     g.idx('classes').put('path', it.fullnspath, it)
+};
+
+g.idx('Interface')[['token':'node']].each{ 
+    g.idx('interfaces').put('path', it.fullnspath, it)
+};
+
+g.idx('Trait')[['token':'node']].each{ 
+    g.idx('traits').put('path', it.fullnspath, it)
 };
 
 // with define

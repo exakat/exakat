@@ -993,6 +993,36 @@ GREMLIN;
     
         return $this;
     }
+
+    public function noClassDefinition() {
+        $this->addMethod("filter{ g.idx('classes').get('path', it.fullnspath).any() == false }");
+    
+        return $this;
+    }
+
+    public function interfaceDefinition() {
+        $this->addMethod("filter{ g.idx('interfaces').get('path', it.fullnspath).any()}.transform{ g.idx('interfaces').get('path', it.fullnspath).next(); }");
+    
+        return $this;
+    }
+
+    public function noInterfaceDefinition() {
+        $this->addMethod("filter{ g.idx('interfaces').get('path', it.fullnspath).any() == false }");
+    
+        return $this;
+    }
+
+    public function traitDefinition() {
+        $this->addMethod("filter{ g.idx('traits').get('path', it.fullnspath).any()}.transform{ g.idx('traits').get('path', it.fullnspath).next(); }");
+    
+        return $this;
+    }
+
+    public function noTraitDefinition() {
+        $this->addMethod("filter{ g.idx('traits').get('path', it.fullnspath).any() == false }");
+    
+        return $this;
+    }
     
     public function groupFilter($characteristic, $percentage) {
         $this->addMethod('sideEffect{'.$characteristic.'}.groupCount(gf){x2}.aggregate().sideEffect{'.$characteristic.'}.filter{gf[x2] < '.$percentage.' * gf.values().sum()}');
