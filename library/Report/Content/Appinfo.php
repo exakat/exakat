@@ -37,6 +37,7 @@ class Appinfo extends \Report\Content {
                             'ext/mysql'      => 'Extensions/Extmysql',
                             'ext/mysqli'     => 'Extensions/Extmysqli',
                             'ext/openssl'    => 'Extensions/Extopenssl',
+                            'ext/pcntl'      => 'Extensions/Extpcntl',
                             'ext/pcre'       => 'Extensions/Extpcre',
                             'ext/pdo'        => 'Extensions/Extpdo',
                             'ext/pgsql'      => 'Extensions/Extpgsql',
