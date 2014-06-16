@@ -148,10 +148,31 @@ function process_file($filename, $log_file) {
     $delimitedStrings = array('T_QUOTE' => 0, 'T_SHELL_QUOTE' => 0);
     $whiteCode = $Php->getWhiteCode();
     $tokens_newlines = array();
+    $merge = 0;
+    $deleted = 0;
     foreach($tokens as $id => $token) {
-        if (isset($whiteCode[$token[0]])) { 
-            $tokens_newlines[$id - count($tokens_newlines)] = substr_count($tokens[$id][1], "\n");
+        if ($Php->getTokenname($token[0]) == 'T_OPEN_TAG') {
+            $merge = $id - $deleted + 1; // presetting the next id.
+            $tokens_newlines[$merge]  = substr_count($tokens[$id][1], "\n");
+        } elseif ($Php->getTokenname($token[0]) == 'T_CLOSE_TAG') {
+            if (!$merge) {
+                $merge = $id - count($tokens_newlines) + 1; // presetting the next id.
+                $tokens_newlines[$merge]  = substr_count($tokens[$id][1], "\n");
+            } else {
+                $tokens_newlines[$merge] += substr_count($tokens[$id][1], "\n");
+            }
+        } elseif (isset($whiteCode[$token[0]])) { 
+            if (!$merge) {
+                $merge = $id - $deleted;
+                $tokens_newlines[$merge]  = substr_count($tokens[$id][1], "\n");
+            } else {
+                $tokens_newlines[$merge] += substr_count($tokens[$id][1], "\n");
+            }
+            $x[] = substr_count($tokens[$id][1], "\n");
+            $deleted++;
             unset($tokens[$id]); 
+        } else {
+            $merge = false;
         }
     }
     
@@ -265,10 +286,6 @@ function process_file($filename, $log_file) {
         $token = $tokens[$id];
         $to_index = true;
 
-        if (isset($tokens_newlines[$id])) {
-            $line += $tokens_newlines[$id];
-        }
-        
         if (is_array($token)) {
             $classNode->process($token, $Php->getTokenname($token[0]));
             if ($Php->getTokenname($token[0]) == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
@@ -497,6 +514,13 @@ function process_file($filename, $log_file) {
 
             $line = $token[2];
         } else {
+/// case of the token that is not an array
+
+            if (isset($tokens_newlines[$id])) {
+                $line += $tokens_newlines[$id];
+                unset($tokens_newlines[$id]);
+            } 
+
             $token_value = $Php->getTokenname($token);
             $classNode->process($token, $token_value);
             
