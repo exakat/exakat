@@ -11,12 +11,12 @@ class ConstantUsage extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs("Nsname")
-             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'EXTENDS', 'IMPLEMENTS'));
+             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'EXTENDS', 'IMPLEMENTS', 'RIGHT'));
         $this->prepareQuery();
 
         $this->atomIs("Identifier")
              ->codeIsNot(array('true', 'false', 'null'))
-             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY', 'CLASS', 'EXTENDS', 'IMPLEMENTS'));
+             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY', 'CLASS', 'EXTENDS', 'IMPLEMENTS', 'RIGHT'));
         $this->prepareQuery();
 
         $this->atomIs("Boolean");
