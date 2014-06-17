@@ -333,3 +333,4 @@ array() may be useless instruction (warning to inner methodcall...)
 ! may have pb like @ (2 on one line)
 Spot configuration that are not well used (ini_set('others', 3) => useless....)
 Spot very deep code (lots of {{{{{{{}}}}}}}
+Super global aliases ($x = $_GET, f($_GET)...)
