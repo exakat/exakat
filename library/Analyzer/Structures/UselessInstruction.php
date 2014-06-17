@@ -7,6 +7,7 @@ use Analyzer;
 class UselessInstruction extends Analyzer\Analyzer {
     
     public function analyze() {
+        // Structures that should be put somewhere, and never left alone
         $this->atomIs("Sequence")
              ->outIs('ELEMENT')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
@@ -14,16 +15,17 @@ class UselessInstruction extends Analyzer\Analyzer {
                             'Constant', 'String', 'Instanceof'));
         $this->prepareQuery();
         
+        // -$x = 3
         $this->atomIs("Assignation")
              ->outIs('LEFT')
              ->atomIs('Sign');
         $this->prepareQuery();
 
+        // closures that are not assigned to something (argument or variable)
         $this->atomIs("Sequence")
              ->outIs('ELEMENT')
              ->atomIs('Function')
              ->is('lambda', "'true'");
-//        $this->printQuery();
     }
 }
 
