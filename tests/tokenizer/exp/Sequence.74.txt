@@ -1,0 +1,90 @@
+<?php
+
+Label : CODE
+  makeSequence
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      M
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          N
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              'O'
+            Label : ARGUMENT
+              P
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $f
+                  Label : INDEX
+                    'Q'
+    Label : LEFT
+      @
+      Label : AT
+        list
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'H'
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              'I'
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'J'
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $d
+            Label : INDEX
+              'K'
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $e
+            Label : INDEX
+              'L'
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          B
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'C'
+    Label : THEN
+      {
+      Label : ELEMENT
+        exit
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'D'
+  Label : ELEMENT
+    E
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        'F'
+      Label : ARGUMENT
+        G
