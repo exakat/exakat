@@ -334,3 +334,5 @@ array() may be useless instruction (warning to inner methodcall...)
 Spot configuration that are not well used (ini_set('others', 3) => useless....)
 Spot very deep code (lots of {{{{{{{}}}}}}}
 Super global aliases ($x = $_GET, f($_GET)...)
+method with parent:: but no actual parent.
+undefined static (using self or the class name)
