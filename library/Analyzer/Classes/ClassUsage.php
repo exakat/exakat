@@ -30,6 +30,10 @@ class ClassUsage extends Analyzer\Analyzer {
         $this->atomIs("Typehint")
              ->outIs('CLASS');
         $this->prepareQuery();
+
+        $this->atomIs("Instanceof")
+             ->outIs('RIGHT');
+        $this->prepareQuery();
     }
 }
 
