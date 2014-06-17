@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Interfaces_InterfaceUsage extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testInterfaces_InterfaceUsage01()  { $this->generic_test('Interfaces_InterfaceUsage.01'); }
+    public function testInterfaces_InterfaceUsage02()  { $this->generic_test('Interfaces_InterfaceUsage.02'); }
 }
 ?>
