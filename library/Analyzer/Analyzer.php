@@ -354,7 +354,7 @@ GREMLIN;
         if (is_array($atom)) {
             $this->addMethod('filter{!(it.token in ***)}', $atom);
         } else {
-            $this->addMethod('hasNot{"token", ***)', $atom);
+            $this->addMethod('hasNot("token", ***)', $atom);
         }
         
         return $this;
