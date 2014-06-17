@@ -1476,7 +1476,7 @@ it.setProperty('no_block', 'true');
 
 g.addEdge(it, it.out('NEXT').next(), 'NAMESPACE');
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('NEXT').out('NEXT').next(), 'DELETE');
-tvoid = g.addVertex(null, [code:'', atom:'Void', virtual:true, line:it.line, token:'T_VOID']);
+tvoid = g.addVertex(null, [code:'', atom:'Void', virtual:true, line:it.line, token:'T_VOID', fullcode:' ']);
 g.addEdge(it, tvoid, 'BLOCK');
 
 end = it.out('NEXT').out('NEXT').out('NEXT').next();
