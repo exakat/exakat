@@ -352,9 +352,9 @@ GREMLIN;
 
     function tokenIsNot($atom) {
         if (is_array($atom)) {
-            $this->methods[] = 'filter{it.token not in [\''.join("', '", $atom).'\']}';
+            $this->addMethod('filter{!(it.token in ***)}', $atom);
         } else {
-            $this->methods[] = 'hasNot("token", "'.$atom.'")';
+            $this->addMethod('hasNot{"token", ***)', $atom);
         }
         
         return $this;
@@ -662,17 +662,6 @@ GREMLIN;
         return $this;
     }
 
-/*
-    public function classIs($class = 'Global') {
-        if ($class == 'Global') {
-            $this->addMethod(".as('classIs').in.loop(1){it.object.atom != 'File'}{it.object.atom == 'File'}");
-        } else {
-            $this->addMethod(".as('classIs').in.loop(1){it.object.atom != 'File'}{it.object.atom == 'Class'}.out('NAME').has('code', '$class').in('NAME')");
-        }
-    
-        return $this;
-    }
-*/
     function fullcodeTrimmed($code, $trim = "\"'", $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
@@ -989,37 +978,37 @@ GREMLIN;
     }
 
     public function classDefinition() {
-        $this->addMethod("filter{ g.idx('classes').get('path', it.fullnspath).any()}.transform{ g.idx('classes').get('path', it.fullnspath).next(); }");
+        $this->addMethod("hasNot('fullnspath', null).transform{ g.idx('classes').get('path', it.fullnspath).next(); }");
     
         return $this;
     }
 
     public function noClassDefinition() {
-        $this->addMethod("filter{ g.idx('classes').get('path', it.fullnspath).any() == false }");
+        $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('classes').get('path', it.fullnspath).any() == false }");
     
         return $this;
     }
 
     public function interfaceDefinition() {
-        $this->addMethod("filter{ g.idx('interfaces').get('path', it.fullnspath).any()}.transform{ g.idx('interfaces').get('path', it.fullnspath).next(); }");
+        $this->addMethod("hasNot('fullnspath', null).transform{ g.idx('interfaces').get('path', it.fullnspath).next(); }");
     
         return $this;
     }
 
     public function noInterfaceDefinition() {
-        $this->addMethod("filter{ g.idx('interfaces').get('path', it.fullnspath).any() == false }");
+        $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('interfaces').get('path', it.fullnspath).any() == false }");
     
         return $this;
     }
 
     public function traitDefinition() {
-        $this->addMethod("filter{ g.idx('traits').get('path', it.fullnspath).any()}.transform{ g.idx('traits').get('path', it.fullnspath).next(); }");
+        $this->addMethod("hasNot('fullnspath', null).transform{ g.idx('traits').get('path', it.fullnspath).next(); }");
     
         return $this;
     }
 
     public function noTraitDefinition() {
-        $this->addMethod("filter{ g.idx('traits').get('path', it.fullnspath).any() == false }");
+        $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('traits').get('path', it.fullnspath).any() == false }");
     
         return $this;
     }
