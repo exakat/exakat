@@ -582,6 +582,56 @@ GREMLIN;
         return $this;
     }
 
+    function noDelimiter($code, $caseSensitive = false) {
+        $this->addMethod('has("atom", "String")', $code);
+
+        if ($caseSensitive) {
+            $caseSensitive = '';
+        } else {
+            if (is_array($code)) {
+                foreach($code as $k => $v) { 
+                    $code[$k] = strtolower($v); 
+                }
+            } else {
+                $code = strtolower($code);
+            }
+            $caseSensitive = '.toLowerCase()';
+        }
+        
+        if (is_array($code)) {
+            $this->addMethod('filter{it.noDelimiter'.$caseSensitive.' in ***}', $code);
+        } else {
+            $this->addMethod('filter{it.noDelimiter'.$caseSensitive.' == ***}', $code);
+        }
+        
+        return $this;
+    }
+
+    function noDelimiterIsNot($code, $caseSensitive = false) {
+        $this->addMethod('has("atom", "String")', $code);
+
+        if ($caseSensitive) {
+            $caseSensitive = '';
+        } else {
+            if (is_array($code)) {
+                foreach($code as $k => $v) { 
+                    $code[$k] = strtolower($v); 
+                }
+            } else {
+                $code = strtolower($code);
+            }
+            $caseSensitive = '.toLowerCase()';
+        }
+        
+        if (is_array($code)) {
+            $this->addMethod('filter{!(it.noDelimiter'.$caseSensitive.' in ***)}', $code);
+        } else {
+            $this->addMethod('filter{it.noDelimiter'.$caseSensitive.' != ***}', $code);
+        }
+        
+        return $this;
+    }
+
     function fullnspath($code, $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
