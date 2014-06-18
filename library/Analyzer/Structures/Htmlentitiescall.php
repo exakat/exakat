@@ -7,6 +7,7 @@ use Analyzer;
 class Htmlentitiescall extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD')
              ->fullnspath(array('\\htmlentities', '\\htmlspecialchars'))
              ->outIs('ARGUMENTS')
              ->noChildWithOrder('ARGUMENT', 1)
@@ -14,6 +15,7 @@ class Htmlentitiescall extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD')
              ->atomIsNot('Analyzer\\\\Structures\\\\Htmlentitiescall')
              ->fullnspath(array('\\htmlentities', '\\htmlspecialchars'))
              ->outIs('ARGUMENTS')
@@ -22,6 +24,7 @@ class Htmlentitiescall extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD')
              ->atomIsNot('Analyzer\\\\Structures\\\\Htmlentitiescall')
              ->fullnspath(array('\\htmlentities', '\\htmlspecialchars'))
              ->outIs('ARGUMENTS')
@@ -31,6 +34,7 @@ class Htmlentitiescall extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD')
              ->atomIsNot('Analyzer\\\\Structures\\\\Htmlentitiescall')
              ->fullnspath(array('\\htmlentities', '\\htmlspecialchars'))
              ->outIs('ARGUMENTS')
