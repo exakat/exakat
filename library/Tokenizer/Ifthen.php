@@ -41,7 +41,7 @@ class Ifthen extends TokenAuto {
                                    2 => array('atom'  =>  array('Sequence', 'Void')),
                                    3 => array('token' => 'T_ELSE', 
                                               'atom'  => 'none'),
-                                   4 => array('atom'  => array('Sequence')),
+                                   4 => array('atom'  => 'Sequence'),
         );
         
         $this->actions = array('transform'    => array(1 => 'CONDITION',
@@ -293,6 +293,7 @@ class Ifthen extends TokenAuto {
 fullcode.fullcode = "if " + fullcode.out("CONDITION").next().fullcode + " " + fullcode.out("THEN").next().fullcode;
 ifthen = fullcode;
 fullcode.out("ELSE").each{ it.fullcode = ifthen.fullcode + " else " + it.fullcode; }
+
 GREMLIN;
     }
 
