@@ -1786,8 +1786,7 @@ it.out('NEXT').has('token', 'T_COLON').each{
     g.addEdge(g.idx('racines')[['token':'DELETE']].next(), endif, 'DELETE');
 }
 
-x = g.addVertex(null, [code:'Block with else', fullcode:'Block with else', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
+x = g.addVertex(null, [code:'Block with else', fullcode:'Block with else', token:'T_SEMICOLON', atom:'Sequence', block:'true', virtual:true, line:it.line]);
 
 fullcode = x;
 $fullcode
@@ -2237,6 +2236,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
         'T_DO', 'T_TRY',
         'T_STRING', 'T_INSTEADOF', 'T_INSTANCEOF', 'T_BANG',
+        'T_ELSE', 
         ];
 
 list_after = [
@@ -2326,7 +2326,7 @@ if (    $it.token != 'T_ELSEIF'
 
         $it.bothE('NEXT').each{ g.removeEdge(it); }
     } else {
-        sequence = g.addVertex(null, [code:'makeSequence', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
+        sequence = g.addVertex(null, [code:'makeSequence ' + $it.in('NEXT').next().token, atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
         g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');   
         g.idx('Sequence').put('token', 'node', sequence);   
 
