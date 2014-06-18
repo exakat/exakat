@@ -501,7 +501,11 @@ GREMLIN;
     }
 
     function is($property, $value= "'true'") {
-        $this->methods[] = "filter{ it.$property == $value;}";
+        if ($value == null) {
+            $this->addMethod("has('$property', null)");
+        } else {
+            $this->addMethod("filter{ it.$property == ***;}", $value);
+        }
 
         return $this;
     }
