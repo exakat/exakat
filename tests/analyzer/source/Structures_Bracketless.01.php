@@ -1,0 +1,42 @@
+<?php
+
+if (4) 
+    $ifnoblock++;
+elseif (5) 
+    $elseifnoblock++;
+elseif (6) 
+    $elseifnoblock++;
+elseif (8) 
+    $elseifnoblock++;
+else 
+    $elsenoblock++;
+
+foreach($a2 as $b2) 
+    $foreachnoblock++;
+    
+for(7;;) $fornoblock++;
+
+while (7) $whilenoblock++;
+
+
+
+if (14) {
+    $ifblock++;
+} elseif (15) {
+    $elseifblock++;
+} else {
+    $elseblock++;
+}
+    
+while (16) {
+    $whileblock++;
+}
+
+foreach($a12 as $b12) {
+    $foreachblock++;
+}
+
+for(17;;) {
+    $forblock++;
+}
+?>
