@@ -21,7 +21,7 @@ class Reference extends TokenAuto {
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
                                'propertyNext' => array('reference' => 'true', 
-                                                       'fullcode'  => 'it.code'),
+                                                       'fullcode'  => 'it.fullcode'),
                                'fullcode'     => true,
                                );
         $this->set_atom = true;
@@ -61,7 +61,7 @@ class Reference extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = "&" + fullcode.code; 
+fullcode.fullcode = "&" + fullcode.fullcode; 
 
 GREMLIN;
     }
