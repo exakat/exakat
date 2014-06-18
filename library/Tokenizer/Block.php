@@ -22,6 +22,7 @@ class Block extends TokenAuto {
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it',
+                               'property'     => array('bracket' => 'true')
                                );
         $this->checkAuto(); 
 
