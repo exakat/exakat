@@ -23,7 +23,7 @@ JS;
 
         $html = '';
         foreach($data as $row) {
-            $row['code'] = htmlentities($row['code']);
+            $row['code'] = htmlentities($row['code'], ENT_COMPAT, 'UTF-8');
             
             $id = str_replace(' ', '-', strtolower($row['desc']));
 $html .= <<<HTML
