@@ -2,12 +2,10 @@
 
 namespace Report\Template;
 
-class Top5 extends \Report\Template {
-    
+class TextLead extends \Report\Template {
     public function render($output) {
-        $renderer = $output->getRenderer('Top5');
+        $renderer = $output->getRenderer('TextLead');
         
-        $renderer->setTitle($this->title);
         $renderer->render($output, $this->data);
     }
 }

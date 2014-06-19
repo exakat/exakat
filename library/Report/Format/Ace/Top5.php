@@ -9,6 +9,7 @@ class Top5 extends \Report\Format\Ace {
     private $columnsHeaders = array();
     
     public function render($output, $data) {
+    
         $html = <<<HTML
 									<div class="widget-box transparent">
 										<div class="widget-header widget-header-flat">
@@ -50,9 +51,11 @@ HTML;
         uasort($values, function ($a, $b) { if ($a['sort'] == $b['sort']) return 0 ; return $a['sort'] < $b['sort'] ? 1 : -1;});
         $values = array_slice($values, 0, 5);
         foreach($values as $value) {
+            // @note This is the same getId() than in Section::getId()
+            $value['id'] =  str_replace(array(' ', '('  , ')'  ), array('-', '', ''), $value['name']);
             $html .= <<<HTML
 														<tr>
-															<td>{$value['name']}</td>
+															<td><a href="{$value['id']}.html">{$value['name']}</a></td>
 
 															<td>
 																<b>{$value['count']}</b>
