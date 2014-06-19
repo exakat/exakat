@@ -91,7 +91,9 @@ class _Function extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = '';
+fullcode.setProperty('fullcode', '');
+
+fullcode.filter{ it.out("NEXT").any() }.each{ fullcode.setProperty('fullcode', fullcode.getProperty('code'));}
 
 // for methods
 fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") ;";}
