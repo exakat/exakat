@@ -1391,17 +1391,18 @@ while (it.out('NEXT').has('atom', 'Sequence').any()) {
 while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
                                        'Dowhile', 'Try', 'Class', 'Interface', 'Trait', 'While', 'Break', 'Assignation', 'Halt',
                                        'Staticmethodcall', 'Namespace', 'Label', 'Postplusplus', 'Preplusplus', 'Include', 'Functioncall',
-                                       'Methodcall', 'Variable' ] && 
+                                       'Methodcall', 'Variable', 'Label', 'Goto' ] && 
                                        it.token != 'T_ELSEIF' }.any() &&
     it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' ,
                                                      'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
                                                      'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
-                                                     'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR', 'T_AS', 'T_AND_EQUAL',
+                                                     'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR', 'T_AS',
+                                                      'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_INSTANCEOF'])}.
+                               filter{it.atom != null || !(it.token in ['T_ELSEIF', 'T_OPEN_CURLY', 'T_AND_EQUAL',
                                                      'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL',
                                                      'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL',
                                                      'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL',
-                                                      'T_SR_EQUAL', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_INSTANCEOF'])}.
-                               filter{!(it.token in ['T_ELSEIF', 'T_OPEN_CURLY']) || it.atom != null}.any()) {
+                                                      'T_SR_EQUAL'])}.any()) {
     sequence = it;
     next = it.out('NEXT').next();
     
@@ -2586,7 +2587,7 @@ g.idx('Variable').put('token', 'node', x);
 /* Remove children's index */  
 it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 'NEW', 'RETURN', 'CONSTANT', 'CLASS', 'VARIABLE',
 'INDEX', 'EXTENDS', 'SUBNAME', 'POSTPLUSPLUS', 'PREPLUSPLUS', 'VALUE', 'CAST', 'SOURCE', 'USE', 'KEY', 'IMPLEMENTS', 'THEN', 'AS', 
-'ELSE', 'NOT', 'CONDITION', 'CASE', 'THROW', 'METHOD', 'STATIC', 'CLONE', 'INIT', 'AT', 'ELEMENT','FINAL', 'FILE', 'NAMESPACE' ).each{ 
+'ELSE', 'NOT', 'CONDITION', 'CASE', 'THROW', 'METHOD', 'STATIC', 'CLONE', 'INIT', 'AT', 'ELEMENT','FINAL', 'FILE', 'NAMESPACE', 'LABEL' ).each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 
