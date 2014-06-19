@@ -342,3 +342,12 @@ Spot external libraries
 Ignore the lib folder
 Spot PEAR classes
 define/const suggestions (simple defined => const)
+Code source that mix defintiions (class, interface, const...) and actual code (except for protection against direct access..).
+Spot multiple-class files, multiple-namespace files
+Corriger le calcul du nombre de fichiers qui ne sont pas compilables
+Faire un 2eme dashboard
+Faire un Rapport de compatibilité : up and down. Sous forme de tableau (versions puis features qui limitent (rouge, vert, orange, bleu pour les gains possibles)
+Publier le site.
+Add an analyzer of the application : As documentation, version, tests, external libs, languges, template, config.... Report this, and exclude some of the elements in the code.
+Surveiller le chinois dans le HTML
+Spot expressions that are the same (cf str_replace I used...)
