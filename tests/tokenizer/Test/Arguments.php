@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Arguments extends Tokenizer {
-    /* 26 methods */
+    /* 27 methods */
 
     public function testArguments01()  { $this->generic_test('Arguments.01'); }
     public function testArguments02()  { $this->generic_test('Arguments.02'); }
@@ -35,5 +35,6 @@ class Arguments extends Tokenizer {
     public function testArguments24()  { $this->generic_test('Arguments.24'); }
     public function testArguments25()  { $this->generic_test('Arguments.25'); }
     public function testArguments26()  { $this->generic_test('Arguments.26'); }
+    public function testArguments27()  { $this->generic_test('Arguments.27'); }
 }
 ?>

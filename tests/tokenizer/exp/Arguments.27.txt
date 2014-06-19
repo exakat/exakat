@@ -1,0 +1,81 @@
+<?php 
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
+    Label : SOURCE
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'B'
+    Label : BLOCK
+      makeSequence T_INLINE_HTML
+      Label : ELEMENT
+        O
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              F
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $e
+            Label : THEN
+              G
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $f
+            Label : ELSE
+              H
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  ::
+                  Label : CLASS
+                    K
+                  Label : METHOD
+                    L
+                    Label : ARGUMENTS
+                      ,
+                      Label : ARGUMENT
+                        $g
+                      Label : ARGUMENT
+                        array
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              ::
+                              Label : CONSTANT
+                                N
+                              Label : CLASS
+                                M
+                            Label : VALUE
+                              O
+                Label : ARGUMENT
+                  'I'
+                Label : ARGUMENT
+                  'J'
+          Label : ARGUMENT
+            D
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $d
+          Label : ARGUMENT
+            'E'
