@@ -336,3 +336,9 @@ Spot very deep code (lots of {{{{{{{}}}}}}}
 Super global aliases ($x = $_GET, f($_GET)...)
 method with parent:: but no actual parent.
 undefined static (using self or the class name)
+classes extends classes, implements interfaces (cannot extends classes)
+Heavily used class/interface/etc.
+Spot external libraries
+Ignore the lib folder
+Spot PEAR classes
+define/const suggestions (simple defined => const)
