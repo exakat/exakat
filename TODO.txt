@@ -299,7 +299,7 @@ RequiredAfterOptionalParam : optional parameters are the last on the argument li
 report 'true' (wrongly compared boolean)
 Die without no argument (at least, put __METHOD__, file)
 Echo : with or without () (preferences)
-Use const or constant() for constants ? 
+Use const or define() for constants ? 
 unsupported calls in strings ("$x[a][b]")
 inventory of registered functions (session, finalize, error...)
 Characterize function as library (not global code), or script
