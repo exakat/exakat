@@ -283,7 +283,7 @@ g.V.has('index', 'true').filter{it.out().count() == 0}.each{
 // calculating the full namespaces paths
 //////////////////////////////////////////////////////////////////////////////////////////
 // const in a namespace (and not a class)
-g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').next() != 'Class'}.sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ 
+g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false}.sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ 
     if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.out('NAME').next().fullcode.toLowerCase());
     } else {
@@ -311,16 +311,6 @@ g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.obje
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.out('NAME').next().code.toLowerCase());
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.out('NAME').next().code.toLowerCase());
-    }
-}
-
-g.idx('Class')[['token':'node']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
-    if (fullcode.absolutens == 'true') { 
-        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
-    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
-    } else {
-        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
     }
 }
 
@@ -488,7 +478,7 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
 }
 
 // with Const (out of a class)
-g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false || it.in('ELEMENT').in('BLOCK').next().atom != 'Class'}.each{ 
+g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false || !(it.in('ELEMENT').in('BLOCK').next().atom in ['Class', 'Interface'])}.each{ 
     g.idx('constants').put('path', it.fullnspath.toLowerCase(), it)
 };
 
