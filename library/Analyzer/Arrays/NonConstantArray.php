@@ -16,7 +16,16 @@ class NonConstantArray extends Analyzer\Analyzer {
              ->atomIs('Identifier')
              ->analyzerIsNot('Analyzer\\Constants\\Constantnames')
              ->hasNoConstantDefinition();
+        $this->prepareQuery();
 
+        $this->atomIs("Array")
+             ->isNot('in_quote', 'true')
+             ->isNot('enclosing', null)
+             ->outIs('INDEX')
+             ->atomIs('Identifier')
+             ->analyzerIsNot('Analyzer\\Constants\\Constantnames')
+             ->hasNoConstantDefinition();
+        $this->prepareQuery();
     }
 }
 
