@@ -511,7 +511,11 @@ GREMLIN;
     }
 
     function isNot($property, $value= "'true'") {
-        $this->methods[] = "hasNot('$property', $value)";
+        if ($value == null) {
+            $this->addMethod("hasNot('$property', null)");
+        } else {
+            $this->addMethod("hasNot('$property', ***)", $value);
+        }
         
         return $this;
     }
