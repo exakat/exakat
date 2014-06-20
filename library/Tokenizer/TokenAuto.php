@@ -2141,6 +2141,7 @@ it.as('origin').out('ELEMENT').has('atom','Sequence').each{
 /* to variable */ 
 variable = it.out('NEXT').next();
 variable.setProperty('delimiter', it.code);
+variable.setProperty('enclosing', it.token);
 
 g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
 g.addEdge(it.in('NEXT').next(), variable, 'NEXT');
