@@ -14,7 +14,8 @@ spl_autoload_register('Autoload::autoload_library');
 
 $client = new Client();
 
-    $queryTemplate = "g.V.hasNot('atom', null)[0..100000].filter{!(it.token in ['T_INDEX', 'T_FILENAME'])}.sideEffect{ tin = it.token; }.out.transform{ tin + ' -> ' + it.token }.unique()"; 
+// network with tokens
+    $queryTemplate = "g.V.hasNot('atom', null).filter{!(it.token in ['T_INDEX', 'T_FILENAME'])}.sideEffect{ tin = it.token; }.out.transform{ tin + ' -> ' + it.token }.unique()"; 
     $vertices = query($client, $queryTemplate);
     
     $body = '';
@@ -61,6 +62,55 @@ $client = new Client();
     }
     file_put_contents('log/network.csv', $csv);
     
+// network with atoms
+    $queryTemplate = "g.V.hasNot('atom', null).filter{!(it.token in ['T_INDEX', 'T_FILENAME'])}.sideEffect{ tin = it.atom; }.out.transform{ tin + ' -> ' + it.atom }.unique()"; 
+    $vertices = query($client, $queryTemplate);
+    
+    $body = '';
+    $headers = '';
+    
+    $tokens = array();
+    $links = array();
+    
+    foreach($vertices as $v) {
+        list($a, $b) = explode(' -> ', $v[0]);
+        if (!isset($tokens[$a])) {
+            $tokens[$a] = count($tokens);
+            $ida = $tokens[$a];
+            $headers .= "$ida [label = \"$a\"];\n";
+        }
+        if (!isset($tokens[$b])) {
+            $tokens[$b] = count($tokens);
+            $idb = $tokens[$b];
+            $headers .= "$idb [label = \"$b\"];\n";
+        }
+        
+        @$links[$b]['in']++;
+        @$links[$b]['out']+= 0;
+        @$links[$a]['out']++;
+        @$links[$a]['in']+= 0;
+        
+        $ida = $tokens[$a];
+        $idb = $tokens[$b];
+        
+        $body .= "$ida -> $idb;\n";
+    }
+    $digraph = " digraph graphname {\n";
+    $digraph .= "$headers\n";
+    $digraph .= "$body\n";
+    $digraph .= "}\n";
+    
+    print count($vertices)." found\n";
+    
+    file_put_contents('log/network.atom.dot', $digraph);
+    
+    $csv = "Tokens\tIn\tOut\tRation\n";
+    foreach($links as $token => $row) {
+        $csv .= "$token\t{$row['in']}\t{$row['out']}\t".($row['out'] == 0 ? 0 : number_format($row['in'] / $row['out'] * 100, 0))."\n";
+    }
+    file_put_contents('log/network.atom.csv', $csv);
+
+
 
 function query($client, $query) {
     $queryTemplate = $query;
