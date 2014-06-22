@@ -280,6 +280,21 @@ g.V.has('index', 'true').filter{it.out().count() == 0}.each{
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// calculating variable namespace
+//////////////////////////////////////////////////////////////////////////////////////////
+g.idx('Variable')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'File'}{it.object.atom in ['Function', 'Class', 'Namespace', 'File']}.each{ 
+    if (it.atom == 'Namespace') {
+        fullcode.setProperty('namespace', it.out('NAMESPACE').next().code);
+    } else if (it.atom == 'Class') {
+        fullcode.setProperty('class', it.out('NAME').next().code);
+    } else if (it.atom == 'Function' && fullcode.function == null) {
+        fullcode.setProperty('method', it.out('NAME').next().code);
+    } else if (it.atom == 'File') {
+        fullcode.setProperty('File', it.code);
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 // calculating the full namespaces paths
 //////////////////////////////////////////////////////////////////////////////////////////
 // const in a namespace (and not a class)
