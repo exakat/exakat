@@ -10,8 +10,10 @@ class UnusedFunctions extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Functioncall")
-             ->hasNoIn('METHOD')
+        $this->atomIs("Function")
+             ->raw('filter{ it.in("ELEMENT").in("BLOCK").has("atom", "Class").any() == false}')
+             ->raw('filter{it.out("NAME").next().code != ""}')
+             ->outIs('NAME')
              ->analyzerIsNot('Analyzer\\Functions\\UsedFunctions');
         $this->prepareQuery();
     }

@@ -1,10 +1,9 @@
 <?php
 
-$expected     = array('undefinedFunction( )',
-                      'definedMethodUsedAsFunction( )');
+$expected     = array('unusedFunction');
 
-$expected_not = array('definedFunction( )',
-                      'definedMethod( )',
-                      'definedStaticMethod( )');
+$expected_not = array('usedFunction',
+                      'unusedMethod',
+                      'usedMethod');
 
 ?>

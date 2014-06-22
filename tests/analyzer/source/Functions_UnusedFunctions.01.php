@@ -1,21 +1,16 @@
 <?php
 
-function definedFunction() {} 
+function unusedFunction() {}
+function usedFunction() {}
 
-definedFunction();
+usedFunction();
 
-undefinedFunction();
-definedMethodUsedAsFunction();
-
-$x->definedMethod();
-x::definedStaticMethod();
-
-class x { 
-    function definedMethod() {}
-    static function definedStaticMethod() {}
-    function definedMethodUsedAsFunction() {}
+class x {
+    function unusedMethod() {}
+    function usedMethod() {
+        $this->usedMethod();
+    }
     
 }
-
 
 ?>
