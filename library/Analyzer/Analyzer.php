@@ -715,7 +715,7 @@ GREMLIN;
     }
 
     function savePropertyAs($property, $name) {
-        $this->addMethod("sideEffect{ $name = it.$property }");
+        $this->addMethod("sideEffect{ $name = it.$property; }");
 
         return $this;
     }
@@ -1031,6 +1031,18 @@ GREMLIN;
 
     public function hasNoConstantDefinition() {
         $this->addMethod("filter{ g.idx('constants')[['path':it.fullnspath]].any() == false}");
+    
+        return $this;
+    }
+
+    public function hasFunctionDefinition() {
+        $this->addMethod("filter{ g.idx('functions')[['path':it.fullnspath]].any()}");
+    
+        return $this;
+    }
+
+    public function hasNoFunctionDefinition() {
+        $this->addMethod("filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}");
     
         return $this;
     }

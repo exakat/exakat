@@ -297,12 +297,16 @@ g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == fa
 }
 
 // function definitions
-g.idx('Function')[['token':'node']].filter{it.out('NAME').next().code != ''}.sideEffect{fullcode = it.out('NAME').next();}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+g.idx('Function')[['token':'node']].filter{it.out('NAME').next().code != ''}.sideEffect{fullcode = it.out('NAME').next();}
+    .filter{it.in('ELEMENT').in('BLOCK').any() == false || !(it.in('ELEMENT').in('BLOCK').next().atom in ['Class', 'Interface'])}
+    .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
     }
+
+    g.idx('functions').put('path', fullcode.fullnspath.toLowerCase(), it);
 }
 
 // class definitions
@@ -477,9 +481,21 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
         }    
 }
 
-// with Const (out of a class)
+// Const (out of a class)
 g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false || !(it.in('ELEMENT').in('BLOCK').next().atom in ['Class', 'Interface'])}.each{ 
     g.idx('constants').put('path', it.fullnspath.toLowerCase(), it)
+};
+
+// Const (out of a class) with define
+g.idx('Functioncall')[['token':'node']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('order', 0).as('name')
+    .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.sideEffect{ ns = it; }.back('name')
+.each{ 
+    if (ns.atom == 'File') {
+        it.setProperty('fullnspath', '\\\\' + it.noDelimiter.toLowerCase());
+    } else {
+        it.setProperty('fullnspath', '\\\\' + ns.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + it.noDelimiter.toLowerCase());
+    }
+    g.idx('constants').put('path', it.fullnspath, it)
 };
 
 g.idx('Class')[['token':'node']].each{ 
@@ -492,18 +508,6 @@ g.idx('Interface')[['token':'node']].each{
 
 g.idx('Trait')[['token':'node']].each{ 
     g.idx('traits').put('path', it.fullnspath.toLowerCase(), it)
-};
-
-// with define
-g.idx('Functioncall')[['token':'node']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('order', 0).as('name')
-    .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.sideEffect{ ns = it; }.back('name')
-.each{ 
-    if (ns.atom == 'File') {
-        it.setProperty('fullnspath', '\\\\' + it.noDelimiter.toLowerCase());
-    } else {
-        it.setProperty('fullnspath', '\\\\' + ns.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + it.noDelimiter.toLowerCase());
-    }
-    g.idx('constants').put('path', it.fullnspath, it)
 };
 
 ";

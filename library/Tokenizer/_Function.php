@@ -93,8 +93,6 @@ class _Function extends TokenAuto {
 
 fullcode.setProperty('fullcode', '');
 
-fullcode.filter{ it.out("NEXT").any() }.each{ fullcode.setProperty('fullcode', fullcode.getProperty('code'));}
-
 // for methods
 fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.out("BLOCK").count() == 0}.each{ fullcode.fullcode = "function " + fullcode.out("NAME").next().fullcode + " (" + fullcode.out("ARGUMENTS").next().fullcode + ") ;";}
 
@@ -102,24 +100,27 @@ fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 1 && it.
 
 fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0 && it.out("BLOCK").count() == 1}.each{ fullcode.fullcode = "function (" + fullcode.out("ARGUMENTS").next().fullcode + ") " + fullcode.out("BLOCK").next().fullcode;}
 
-fullcode.filter{it.out("USE").count() == 1}.each{ fullcode.fullcode = "function (" + fullcode.out("ARGUMENTS").next().fullcode + ") use " + fullcode.out("USE").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
+fullcode.filter{it.out("USE").any()}.each{ fullcode.fullcode = "function (" + fullcode.out("ARGUMENTS").next().fullcode + ") use " + fullcode.out("USE").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
 
 // for properties
-if (fullcode.out('DEFINE').count() == 1) { 
+if (fullcode.out('DEFINE').any()) { 
     fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + fullcode.out('DEFINE').next().getProperty('fullcode')); 
     fullcode.setProperty('propertyname', fullcode.out('DEFINE').next().getProperty('fullcode').substring(1, fullcode.out('DEFINE').next().getProperty('fullcode').size()) ); 
 }
 if (fullcode.out('VALUE').hasNot('atom', 'Void').count() == 1) { fullcode.fullcode = fullcode.fullcode + ' = ' + fullcode.out('VALUE').next().fullcode; }
 
 // optional attributes
-if (fullcode.out('ABSTRACT').count() == 1)  { fullcode.fullcode = 'abstract ' + fullcode.fullcode; }
-if (fullcode.out('FINAL').count() == 1)     { fullcode.fullcode = 'final ' + fullcode.fullcode; }
-if (fullcode.out('STATIC').count() == 1)    { fullcode.fullcode = 'static ' + fullcode.fullcode; }
-if (fullcode.out('VAR').count() == 1)       { fullcode.fullcode = 'var ' + fullcode.fullcode; }
+if (fullcode.out('ABSTRACT').any())  { fullcode.fullcode = 'abstract ' + fullcode.fullcode; }
+if (fullcode.out('FINAL').any())     { fullcode.fullcode = 'final ' + fullcode.fullcode; }
+if (fullcode.out('STATIC').any())    { fullcode.fullcode = 'static ' + fullcode.fullcode; }
+if (fullcode.out('VAR').any())       { fullcode.fullcode = 'var ' + fullcode.fullcode; }
 
-if (fullcode.out('PUBLIC').count() == 1)    { fullcode.fullcode = 'public ' + fullcode.fullcode; }
-if (fullcode.out('PROTECTED').count() == 1) { fullcode.fullcode = 'protected ' + fullcode.fullcode; }
-if (fullcode.out('PRIVATE').count() == 1)   { fullcode.fullcode = 'private ' + fullcode.fullcode; }
+if (fullcode.out('PUBLIC').any())    { fullcode.fullcode = 'public ' + fullcode.fullcode; }
+if (fullcode.out('PROTECTED').any()) { fullcode.fullcode = 'protected ' + fullcode.fullcode; }
+if (fullcode.out('PRIVATE').any())   { fullcode.fullcode = 'private ' + fullcode.fullcode; }
+
+// for tokens that are not a class structure definition
+fullcode.has('fullcode', '').each{ fullcode.setProperty('fullcode', fullcode.getProperty('code'));}
 
 GREMLIN;
     }
