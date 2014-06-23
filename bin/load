@@ -308,6 +308,27 @@ function process_file($filename, $log_file) {
                                               ->save();
 
                 $to_index = false;
+            } elseif ($Php->getTokenname($token[0]) == 'T_STATIC' && is_string($tokens[$id + 1]) && 
+                      $tokens[$id + 1] != '(' && $Php->getTokenname($tokens[$id - 1][0]) == 'T_NEW') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
+                                              ->setProperty('code', $token[1])
+                                              ->setProperty('line', $token[2])->save();
+                $classNode->relateTo($T[$Tid]);
+
+                $previous->relateTo($T[$Tid], 'NEXT')->save();
+                $regexIndex["Functioncall"]->relateTo($T[$Tid], 'INDEXED')->save();
+                $previous = $T[$Tid];
+                
+                $Tid++;
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
+                                              ->setProperty('code', 'void')
+                                              ->setProperty('fullcode', ' ')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('modifiedBy', 'bin/load21')
+                                              ->setProperty('atom', 'Void')
+                                              ->save();
+
+                $to_index = false;
             } elseif ($Php->getTokenname($token[0]) == 'T_RETURN' && is_array($tokens[$id + 1]) && 
                       $Php->getTokenname($tokens[$id + 1][0]) == 'T_CLOSE_TAG') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
