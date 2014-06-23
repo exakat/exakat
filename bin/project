@@ -82,7 +82,7 @@ if (file_exists('./projects/'.$project.'/log/errors.log')) {
 logTime('Tokenizer');
 print "Project tokenized\n";
 
-shell_exec('php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
+shell_exec('rm -rf ./projects/'.$project.'/log/errors.log; php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
 print "Got the errors (if any)\n";
 
 shell_exec('php bin/export_tree; mv log/network.* ./projects/'.$project.'/log/ ');
@@ -117,7 +117,7 @@ $db->query('UPDATE project_runs SET `date_finish` = '.date('Y-m-d H:i:s').' WHER
 logTime('Final');
 
 function logProgress($project, $percent) {
-    $mid = mysqli_connect('localhost', 'wordpress', 'wordpress', 'wordpress');
+    $mid = mysqli_connect('127.0.0.1', 'wordpress', 'wordpress', 'wordpress');
     mysqli_query($mid, "UPDATE exakat_projects SET progress = $percent WHERE name='$project'");
     print mysqli_error($mid);
 }
