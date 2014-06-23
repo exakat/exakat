@@ -7,14 +7,7 @@ class Parenthesis extends TokenAuto {
     static public $atom = 'Parenthesis';
     
     public function _check() {
-        $operands    = array('Addition', 'Multiplication', 'Sequence', 'String', 
-                             'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign',
-                             'Functioncall', 'Boolean', 'Comparison', 'Parenthesis', 'Constant', 'Array',
-                             'Instanceof', 'Noscream', 'Magicconstant', 'Logical', 'Ternary',
-                             'Assignation', 'Property', 'Staticproperty', 'Staticconstant',
-                             'Methodcall', 'Staticmethodcall', 'Bitshift', 'Cast', 'Preplusplus', 'Postplusplus',
-                             'Include', 'New', 'Identifier', 
-                              );
+        $operands    = "yes";
 
         $this->conditions = array(-1 => array('filterOut2' => array_merge(Functioncall::$operators_without_echo, _Include::$operators, 
                                                                     array('T_STRING', 'T_CATCH', 'T_EXIT', 'T_FOR', 'T_SWITCH', 
@@ -25,8 +18,8 @@ class Parenthesis extends TokenAuto {
                                                                     'T_THROW', 'T_CONTINUE' )),
                                               'notAtom' => array('Array', 'Property')), 
                                    0 => array('token' => Parenthesis::$operators,
-                                              'atom' => 'none' ),
-                                   1 => array('atom' => $operands),
+                                              'atom'  => 'none' ),
+                                   1 => array('atom'  => $operands),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom' => 'none'),
         );

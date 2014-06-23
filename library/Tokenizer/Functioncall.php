@@ -85,12 +85,12 @@ class Functioncall extends TokenAuto {
                                );
         $this->checkAuto();
 
-        // special case for new static; 
+        // special case for new static with arguments or void
         $this->conditions = array(-1 => array('token' => 'T_NEW'),
                                    0 => array('token' => 'T_STATIC',
                                               'atom'  => 'none'),
-                                   1 => array('atom'  => 'Arguments'), // actually, T_VOID
-                                   2 => array('token' => 'T_SEMICOLON'),
+                                   1 => array('atom'  => array('Arguments', 'Void')), // actually, T_VOID
+                                   2 => array('token' => array('T_SEMICOLON', 'T_COMMA', 'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS')),
         );
         
         $this->actions = array('makeEdge'     => array('1' => 'ARGUMENTS'),
@@ -98,7 +98,7 @@ class Functioncall extends TokenAuto {
                                'makeSequence' => 'it'
                                );
         $this->checkAuto();
-        
+
         return $this->checkRemaining();
     }
 

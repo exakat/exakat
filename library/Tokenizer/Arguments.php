@@ -10,7 +10,8 @@ class Arguments extends TokenAuto {
         $operands = 'yes';
         
         // @note arguments separated by ,
-        $this->conditions = array(-2 => array('token' => array_merge(array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_ECHO', 
+        $this->conditions = array(-3 => array('notToken' => 'T_NEW'),
+                                  -2 => array('token' => array_merge(array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_ECHO', 
                                                                            'T_GLOBAL', 'T_USE', 'T_IMPLEMENTS', 'T_EXTENDS', 'T_VAR', 
                                                                            'T_SEMICOLON', 'T_STATIC', 'T_DECLARE', 'T_CONST' ), 
                                                                      _Ppp::$operators)),

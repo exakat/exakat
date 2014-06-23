@@ -111,7 +111,7 @@ class Token {
                                                  Bitshift::$operators,
                                                  Logical::$operators,
                                                  array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 
-                                                       'T_OPEN_PARENTHESIS', 'T_INSTANCEOF'));
+                                                       'T_OPEN_PARENTHESIS', 'T_INSTANCEOF', 'T_QUESTION'));
     }
 
     public static function getTokenizers($version = null) {
@@ -485,7 +485,7 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
         } else if (it.atom == 'File') {
             fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
         } else {
-            fullcode.setProperty('fullnspath', it.out('NAME').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+            fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
         }    
 }
 
