@@ -110,7 +110,8 @@ class Token {
                                                  Comparison::$operators,
                                                  Bitshift::$operators,
                                                  Logical::$operators,
-                                                 array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS'));
+                                                 array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 
+                                                       'T_OPEN_PARENTHESIS', 'T_INSTANCEOF'));
     }
 
     public static function getTokenizers($version = null) {
@@ -437,16 +438,6 @@ g.idx('Typehint')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.l
     } 
 }
 
-g.idx('Catch')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
-    if (fullcode.absolutens == 'true') { 
-        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
-    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
-    } else {
-        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
-    } 
-}
-
 g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsname']}.sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.atom == 'Nsname') {
         if (fullcode.absolutens == 'true') { 
@@ -490,9 +481,11 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
                 fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
             }
         } else if (fullcode.atom == 'Functioncall') {
-            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
+            fullcode.setProperty('fullnspath', it.out('NAME').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
+        } else if (it.atom == 'File') {
+            fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
         } else {
-            fullcode.setProperty('fullnspath', it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+            fullcode.setProperty('fullnspath', it.out('NAME').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
         }    
 }
 

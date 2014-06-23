@@ -1,0 +1,48 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      B
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        return
+        Label : RETURN
+          ?
+          Label : CONDITION
+            instanceof
+            Label : RIGHT
+              \
+              Label : SUBNAME
+                C
+              Label : SUBNAME
+                D
+            Label : LEFT
+              $b
+          Label : THEN
+            ->
+            Label : METHOD
+              E
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $d
+            Label : OBJECT
+              $c
+          Label : ELSE
+            ->
+            Label : METHOD
+              F
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $f
+            Label : OBJECT
+              $e

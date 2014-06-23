@@ -10,7 +10,7 @@ class Ternary extends TokenAuto {
         
         // $a ? $b : $c
         $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_DOUBLE_COLON', 
-                                                                                'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' ), 
+                                                                                'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_INSTANCEOF' ), 
                                                                             Comparison::$operators, Logical::$operators, 
                                                                             Bitshift::$operators, Multiplication::$operators, 
                                                                             Addition::$operators, Concatenation::$operators)),
