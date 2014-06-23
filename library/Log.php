@@ -37,7 +37,7 @@ class Log {
         $user = 'exakat';
         $pass = 'exakat';
         
-        $mysql = new PDO('mysql:host=localhost;dbname=exakat', $user, $pass);
+        $mysql = new PDO('mysql:host=127.0.0.1;dbname=exakat', $user, $pass);
         if (!$mysql) { return false; }
         
         $values = array('project' => $info['project'],

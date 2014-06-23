@@ -4,9 +4,9 @@ class Db  {
     
     public function __construct($db = 'exakat') {
         if ($db == 'exakat') {
-            $this->mysqli = new \mysqli('localhost', 'exakat', 'exakat', 'exakat');
+            $this->mysqli = new \mysqli('127.0.0.1', 'exakat', 'exakat', 'exakat');
         } else {
-            $this->mysqli = new \mysqli('localhost', 'wordpress', 'wordpress', 'wordpress');
+            $this->mysqli = new \mysqli('127.0.0.1', 'wordpress', 'wordpress', 'wordpress');
         }
     }
     
