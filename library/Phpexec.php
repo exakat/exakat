@@ -6,7 +6,8 @@ class Phpexec {
     private $config = array();
     
     public function __construct($phpversion) {
-        switch($phpversion) {
+        $phpversion3 = substr($phpversion, 0, 3);
+        switch($phpversion3) {
             case '5.3' : 
                 $this->phpexec = 'php53';
                 break 1;
