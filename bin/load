@@ -403,6 +403,24 @@ function process_file($filename, $log_file) {
                       $Php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
                 $id++;
                 continue;
+            } elseif ($Php->getTokenname($token[0]) == 'T_CLOSE_TAG' && 
+                      isset($tokens[$id + 1]) && 
+                      is_array($tokens[$id + 1]) && 
+                      $Php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG_WITH_ECHO') {
+
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_ECHO')
+                                              ->setProperty('code', 'echo')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('modifiedBy', 'bin/load22')
+                                              ->save();
+                $regexIndex["ArgumentsNoParenthesis"]->relateTo($T[$Tid], 'INDEXED')->save();
+                $regexIndex["Functioncall"]->relateTo($T[$Tid], 'INDEXED')->save();
+
+                $previous->relateTo($T[$Tid], 'NEXT')->save();
+                $previous = $T[$Tid];
+
+                $id++;
+                continue;
             } elseif ($Php->getTokenname($token[0]) == 'T_INLINE_HTML' && 
                       $id == 0) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
