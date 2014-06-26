@@ -1,0 +1,21 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $a
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          $b
+        Label : INDEX
+          'B'
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $c
