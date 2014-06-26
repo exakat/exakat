@@ -35,7 +35,7 @@ class Sequence extends TokenAuto {
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_INSTANCEOF', 
                                            'T_CLOSE_PARENTHESIS', 'T_CATCH', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', 'T_AS', ), 
                                      Assignation::$operators, Logical::$operators, Comparison::$operators, 
-                                     Preplusplus::$operators, Postplusplus::$operators);
+                                     Preplusplus::$operators, Postplusplus::$operators, Ternary::$operators);
 
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut2' => $yield_operator,
@@ -271,6 +271,23 @@ class Sequence extends TokenAuto {
                                    1 => array('token'    => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 
                                                                   'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_ENDDECLARE', 'T_ENDFOREACH', ),
                                               'atom'     => 'none'),
+        );
+        
+        $this->actions = array('makeEdge'     => array(-1 => 'ELEMENT'),
+                               'order'        => array(-1 => 0 ),
+                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
+                               'atom'         => 'Sequence',
+                               'cleanIndex'   => true,
+                               'keepIndexed'  => true
+                               );
+        $this->checkAuto(); 
+
+        // @note : <Rawstring> Sequence
+        $this->conditions = array(-2 => array('token'    => 'T_COLON',
+                                              'atom'     => 'none'), 
+                                  -1 => array('atom'     => 'RawString'),
+                                   0 => array('token'    => Sequence::$operators,
+                                              'atom'     => 'yes')
         );
         
         $this->actions = array('makeEdge'     => array(-1 => 'ELEMENT'),

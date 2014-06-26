@@ -15,7 +15,6 @@ class _Continue extends TokenAuto {
         
         $this->actions = array('addEdge'     => array(0 => array('Void' => 'LEVEL')),
                                'keepIndexed' => true);
-                               
         $this->checkAuto();
 
         // continue 2 ;
@@ -25,7 +24,8 @@ class _Continue extends TokenAuto {
                                   );
         
         $this->actions = array('transform'  => array( '1' => 'LEVEL'),
-                               'atom'       => 'Continue');
+                               'atom'       => 'Continue',
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         // continue(2);
@@ -39,7 +39,8 @@ class _Continue extends TokenAuto {
         $this->actions = array('transform'  => array( 1 => 'DROP',
                                                       2 => 'LEVEL',
                                                       3 => 'DROP'),
-                               'atom'       => 'Continue');
+                               'atom'       => 'Continue',
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         return $this->checkRemaining();

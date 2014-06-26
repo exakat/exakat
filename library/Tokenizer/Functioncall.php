@@ -57,7 +57,7 @@ class Functioncall extends TokenAuto {
                                      2 => array('atom'  =>  array('Arguments', 'Void')),
                                      3 => array('atom'  => 'none',
                                                 'token' => 'T_CLOSE_PARENTHESIS'),
-                                     4 => array('filterOut2' => 'T_COMMA'),
+                                     4 => array('filterOut2' => array('T_COMMA', 'T_QUESTION', 'T_COLON')),
         );
         
         $this->actions = array('makeEdge'     => array(2 => 'ARGUMENTS'),

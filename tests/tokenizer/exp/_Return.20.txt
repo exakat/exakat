@@ -1,0 +1,21 @@
+<?php 
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ?
+      Label : CONDITION
+        a
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
+      Label : THEN
+        (
+        Label : CODE
+          clone
+          Label : CLONE
+            $c
+      Label : ELSE
+        $d

@@ -1,0 +1,93 @@
+;
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    makeSequence T_OPEN_TAG
+    Label : ELEMENT
+      foreach
+      Label : SOURCE
+        $a
+      Label : VALUE
+        $b
+      Label : BLOCK
+        Block with Foreach
+        Label : ELEMENT
+          makeSequence T_OPEN_TAG
+          Label : ELEMENT
+            ?
+            Label : CONDITION
+              makeSequence T_OPEN_TAG
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    and
+                    Label : LEFT
+                      [
+                      Label : VARIABLE
+                        $c
+                      Label : INDEX
+                        'D'
+                    Label : RIGHT
+                      [
+                      Label : VARIABLE
+                        $d
+                      Label : INDEX
+                        'E'
+            Label : THEN
+              F
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    'G'
+                  Label : CONCAT
+                    [
+                    Label : VARIABLE
+                      $e
+                    Label : INDEX
+                      'H'
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $f
+                  Label : INDEX
+                    'I'
+            Label : ELSE
+              [
+              Label : VARIABLE
+                $g
+              Label : INDEX
+                'J'
+          Label : ELEMENT
+            J
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $i
+                Label : INDEX
+                  'N'
+          Label : ELEMENT
+            N
+          Label : ELEMENT
+            L
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $h
+                Label : INDEX
+                  'L'
+        Label : ELEMENT
+          B
+Label : ELEMENT
+  A
