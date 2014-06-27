@@ -93,8 +93,8 @@ foreach($versions as $version) {
         } elseif (substr($res_file, 0, 17) == 'PHP Parse error: ') {
             preg_match('#PHP Parse error: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 16) == 'PHP Fatal error: ') {
-            preg_match('#PHP Fatal error: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($res_file, 0, 18) == 'PHP Fatal error:  ') {
+            preg_match('#PHP Fatal error:  (.+?) in (.+?) on line (\d+)#', $res_file, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
         } elseif (substr($res_file, 0, 13) == 'Fatal error: ') {
             preg_match('#Fatal error: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
