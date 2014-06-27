@@ -52,14 +52,14 @@ class ArgumentsNoComma extends Arguments {
         $this->checkAuto();
 
         // @note a->{f}(1) : no comma 
-        $this->conditions = array(-4 => array('token' => 'T_OBJECT_OPERATOR'),
+        $this->conditions = array(-4 => array('token' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON')),
                                   -3 => array('token' => 'T_OPEN_CURLY'),
                                   -2 => array('atom' => 'yes'),
                                   -1 => array('token' => 'T_CLOSE_CURLY'),
                                    0 => array('token' => ArgumentsNoComma::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'yes',
-                                              'notAtom' => 'Arguments'),
+                                              'notAtom' => array('Arguments', 'Void')),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
                                    3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')),

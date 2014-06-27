@@ -1448,7 +1448,46 @@ g.addEdge(it, x, 'NEXT');
 ";
             unset($actions['insert_global_ns']);
         }           
+        
+        if (isset($actions['to_specialmethodcall'])) {
+            $qactions[] = "
+/* to_functioncall */
 
+funcall = it.out('NEXT').out('NEXT').next();
+funcall.setProperty('block', true);
+
+g.addEdge(it, it.in('NEXT').next(), 'CLASS');
+g.addEdge(it, funcall, 'METHOD');
+g.addEdge(funcall, funcall.out('NEXT').out('NEXT').out('NEXT').next() , 'ARGUMENTS');
+
+prec = it.in('NEXT').next();
+prec.inE('INDEXED').each{ g.removeEdge(it); }
+g.addEdge(prec.in('NEXT').next(), it, 'NEXT');
+prec.bothE('NEXT').each{ g.removeEdge(it); }
+
+suivant = funcall.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
+x = it.out('NEXT').next();
+x.bothE('NEXT').each{ g.removeEdge(it); }
+g.removeVertex(x);
+
+x = funcall.out('ARGUMENTS').out('NEXT').next();
+x.bothE('NEXT').each{ g.removeEdge(it); }
+g.removeVertex(x);
+
+x = funcall.out('NEXT').out('NEXT').next();
+x.bothE('NEXT').each{ g.removeEdge(it); }
+g.removeVertex(x);
+
+x = funcall.out('NEXT').next();
+x.inE('NEXT').each{ g.removeEdge(it); }
+g.removeVertex(x);
+
+g.addEdge(it, suivant, 'NEXT');
+
+";
+            unset($actions['to_specialmethodcall']);
+        } 
+        
         if (isset($actions['insert_ns'])) {
             $qactions[] = "
 /* insert namespace */

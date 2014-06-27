@@ -17,7 +17,8 @@ class Sequence extends TokenAuto {
                           'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
                           'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
                           'Bitshift', 'Void', 'Dowhile', 'Clone', 'Declare', 'Halt', 'Interface', 
-                          'RawString', 'Namespace', 'Boolean', 'Use', 'ArrayNS', 'Identifier', 'Trait'
+                          'RawString', 'Namespace', 'Boolean', 'Use', 'ArrayNS', 'Identifier', 'Trait',
+                          'As'
                            );
         
         $yield_operator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
