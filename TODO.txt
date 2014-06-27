@@ -351,3 +351,4 @@ Publier le site.
 Add an analyzer of the application : As documentation, version, tests, external libs, languges, template, config.... Report this, and exclude some of the elements in the code.
 Surveiller le chinois dans le HTML
 Spot expressions that are the same (cf str_replace I used...)
+Spot files that use $this, and that are actually included in PHP methods (old style PHP inclusion)
