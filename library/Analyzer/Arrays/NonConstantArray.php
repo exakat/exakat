@@ -19,7 +19,7 @@ class NonConstantArray extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs("Array")
-             ->isNot('in_quote', 'true')
+             ->isNot('in_quote', "'true'")
              ->isNot('enclosing', null)
              ->outIs('INDEX')
              ->atomIs('Identifier')
