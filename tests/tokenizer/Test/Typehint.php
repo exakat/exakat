@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Typehint extends Tokenizer {
-    /* 11 methods */
+    /* 12 methods */
 
     public function testTypehint01()  { $this->generic_test('Typehint.01'); }
     public function testTypehint02()  { $this->generic_test('Typehint.02'); }
@@ -20,5 +20,6 @@ class Typehint extends Tokenizer {
     public function testTypehint09()  { $this->generic_test('Typehint.09'); }
     public function testTypehint10()  { $this->generic_test('Typehint.10'); }
     public function testTypehint11()  { $this->generic_test('Typehint.11'); }
+    public function testTypehint12()  { $this->generic_test('Typehint.12'); }
 }
 ?>

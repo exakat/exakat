@@ -1,0 +1,52 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          C
+        Label : VARIABLE
+          $a
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          D
+        Label : VARIABLE
+          $b
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          callable
+        Label : VARIABLE
+          $c
+    Label : NAME
+      B
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        ::
+        Label : METHOD
+          F
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              $d
+            Label : ARGUMENT
+              $e
+        Label : CLASS
+          E
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $g
+        Label : LEFT
+          ->
+          Label : PROPERTY
+            G
+          Label : OBJECT
+            $f

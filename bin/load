@@ -269,6 +269,7 @@ function process_file($filename, $log_file) {
                     'T_METHOD_C'                 => 'Magicconstant', 
                     'T_NS_C'                     => 'Magicconstant', 
                     'T_TRAIT_C'                  => 'Magicconstant', 
+                    'T_CALLABLE'                 => 'Identifer', 
                     );
             
     

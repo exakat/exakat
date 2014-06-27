@@ -127,6 +127,7 @@ foreach($tokens as $t) {
             case T_IS_NOT_EQUAL : 
             
             case T_OPEN_TAG_WITH_ECHO : 
+            case T_CALLABLE : 
 
             case T_FOR :
             case T_ENDFOR :
