@@ -4,10 +4,10 @@ namespace Tokenizer;
 
 class Functioncall extends TokenAuto {
     static $operators =              array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 
-                                           'T_NS_SEPARATOR', 'T_PRINT', 'T_ISSET', 'T_LIST', 'T_EVAL', 
-                                           'T_EXIT', 'T_DIE', 'T_STATIC', 'T_ECHO', );
+                                           'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL', 
+                                           'T_EXIT', 'T_DIE', 'T_STATIC', 'T_ECHO',  'T_PRINT', );
     static $operators_without_echo = array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 
-                                           'T_NS_SEPARATOR', 'T_PRINT', 'T_ISSET', 'T_LIST', 'T_EVAL', 
+                                           'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL', 
                                            'T_EXIT', 'T_DIE', 'T_STATIC', 'T_HALT_COMPILER');       
     static public $atom = 'Functioncall';
 
