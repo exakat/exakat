@@ -1,0 +1,76 @@
+<?php
+
+Label : NEXT
+  if
+  Label : NEXT
+    (
+    Label : NEXT
+      :
+      Label : NEXT
+        function
+        Label : NEXT
+          makeSequence T_OPEN_CURLY
+          Label : NEXT
+            endif
+            Label : NEXT
+              ;
+              Label : NEXT
+                ?>
+                Label : NEXT
+                  /**/
+                  Label : NEXT
+                    /* * */
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                =
+                Label : RIGHT
+                  'G'
+                Label : LEFT
+                  $h
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                $f
+              Label : ARGUMENT
+                $g
+            Label : NAME
+              F
+            Label : BLOCK
+              {
+              Label : ELEMENT
+                void
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            =
+            Label : RIGHT
+              E
+            Label : LEFT
+              $d
+          Label : ARGUMENT
+            =
+            Label : RIGHT
+              0
+            Label : LEFT
+              $c
+          Label : ARGUMENT
+            $a
+          Label : ARGUMENT
+            $b
+        Label : NAME
+          D
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
+    Label : CODE
+      !
+      Label : NOT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'C'
