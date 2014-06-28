@@ -27,7 +27,7 @@ class Staticproperty extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.out("CLASS").next().fullcode + "::" + fullcode.out("PROPERTY").next().fullcode; 
+fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty('fullcode') + "::" + fullcode.out("PROPERTY").next().getProperty('fullcode')); 
 
 GREMLIN;
     }
