@@ -9,7 +9,7 @@ class ArrayNS extends TokenAuto {
     protected $phpversion = '5.4';
     
     public function _check() {
-        $yields =  array('T_VARIABLE', 'T_CLOSE_BRACKET', 'T_STRING', 'T_OBJECT_OPERATOR', 
+        $yields =  array('T_VARIABLE', 'T_CLOSE_BRACKET', 'T_OPEN_BRACKET', 'T_STRING', 'T_OBJECT_OPERATOR', 
                          'T_DOLLAR', 'T_CLOSE_CURLY', 'T_DOUBLE_COLON', 'T_OPEN_CURLY', 
                          'T_CLOSE_PARENTHESIS' );
 

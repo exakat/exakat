@@ -13,7 +13,7 @@ class ArgumentsArray extends Arguments {
                                    1 => array('atom'  => 'yes'),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
-                                   3 => array('filterOut' => array('T_DOUBLECOLON', 'T_OPEN_PARENTHESIS')),
+                                   3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),
         );
 
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));

@@ -286,7 +286,7 @@ class Sequence extends TokenAuto {
         // @note : <Rawstring> Sequence
         $this->conditions = array(-2 => array('token'    => 'T_COLON',
                                               'atom'     => 'none'), 
-                                  -1 => array('atom'     => 'RawString'),
+                                  -1 => array('atom'     => array('RawString', 'Function', 'Ifthen')),
                                    0 => array('token'    => Sequence::$operators,
                                               'atom'     => 'yes')
         );

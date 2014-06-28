@@ -14,7 +14,7 @@ class _Include extends TokenAuto {
                                     2 => array('atom'  => 'Arguments'),
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
-                                    4 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_EQUAL', 'T_DOT' )),
+                                    4 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_EQUAL', 'T_DOT' )),
         );
         
         $this->actions = array('makeEdge'     => array('2' => 'ARGUMENTS'),
@@ -29,7 +29,7 @@ class _Include extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Include::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Arguments'),
-                                   2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_EQUAL' )),
+                                   2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_EQUAL' )),
         );
         
         $this->actions = array('makeEdge'     => array(1 => 'ARGUMENTS',),

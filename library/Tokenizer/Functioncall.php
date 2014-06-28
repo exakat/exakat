@@ -73,7 +73,7 @@ class Functioncall extends TokenAuto {
                                    0 => array('token' => array('T_ECHO', 'T_PRINT', 'T_EXIT', ),
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Arguments'),
-                                   2 => array('filterOut2' => array_merge( array('T_OBJECT_OPERATOR', 'T_DOUBLECOLON', 'T_COMMA', 'T_QUESTION'),
+                                   2 => array('filterOut2' => array_merge( array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_QUESTION'),
                                                                            Addition::$operators, Multiplication::$operators, 
                                                                            Bitshift::$operators, Logical::$operators, array('T_COMMA'))),
         );

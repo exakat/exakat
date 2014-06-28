@@ -9,7 +9,7 @@ class Preplusplus extends TokenAuto {
     public function _check() {
         $this->conditions = array( 0 => array('token' => Preplusplus::$operators),
                                    1 => array('atom' => array('Variable', 'Array', 'Property', 'Functioncall', 'Staticproperty' )),
-                                   2 => array('filterOut' => array('T_DOUBLECOLON', 'T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS')),
+                                   2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS')),
         );
         
         $this->actions = array('transform'  => array( 1 => 'PREPLUSPLUS'),
