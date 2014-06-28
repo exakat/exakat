@@ -9,13 +9,13 @@ class ArrayNS extends TokenAuto {
     protected $phpversion = '5.4';
     
     public function _check() {
-        $yields =  array('T_VARIABLE', 'T_CLOSE_BRACKET', 'T_OPEN_BRACKET', 'T_STRING', 'T_OBJECT_OPERATOR', 
+        $yields =  array('T_VARIABLE', 'T_CLOSE_BRACKET', 'T_STRING', 'T_OBJECT_OPERATOR', 
                          'T_DOLLAR', 'T_CLOSE_CURLY', 'T_DOUBLE_COLON', 'T_OPEN_CURLY', 
                          'T_CLOSE_PARENTHESIS' );
 
         // [ arguments , ] : prepare arguments with final comma
         $this->conditions = array(-1 => array('filterOut2' => $yields,
-                                              'notAtom'    => array('Parenthesis', 'Array')),
+                                              'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
                                    0 => array('token'      => ArrayNS::$operators),
                                    1 => array('atom'       => 'yes', 
                                               'notAtom'    => 'Arguments'),
@@ -29,7 +29,7 @@ class ArrayNS extends TokenAuto {
 
         // [ arguments ] : prepare arguments
         $this->conditions = array(-1 => array('filterOut2' => $yields,
-                                              'notAtom'    => array('Parenthesis', 'Array')),
+                                              'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
                                    0 => array('token'      => ArrayNS::$operators),
                                    1 => array('atom'       => 'yes', 
                                               'notAtom'    => 'Arguments'),
@@ -42,7 +42,7 @@ class ArrayNS extends TokenAuto {
 
         // [ ] empty array
         $this->conditions = array(-1 => array('filterOut2' => $yields,
-                                              'notAtom'    => array('Parenthesis', 'Array')),
+                                              'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
                                    0 => array('token' => ArrayNS::$operators),
                                    1 => array('token' => 'T_CLOSE_BRACKET'),
         );
@@ -54,7 +54,7 @@ class ArrayNS extends TokenAuto {
 
         // [ ] non-empty array
         $this->conditions = array(-1 => array('filterOut2' => $yields,
-                                              'notAtom'    => array('Parenthesis', 'Array')),
+                                              'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
                                    0 => array('token'      => ArrayNS::$operators),
                                    1 => array('atom'       => 'Arguments'),
                                    2 => array('token'      => 'T_CLOSE_BRACKET'),
@@ -69,7 +69,7 @@ class ArrayNS extends TokenAuto {
 
         // [ ] non-empty array with final ,
         $this->conditions = array(-1 => array('filterOut2' => $yields,
-                                              'notAtom'    => array('Parenthesis', 'Array')),
+                                              'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
                                    0 => array('token' => ArrayNS::$operators),
                                    1 => array('atom'  => 'Arguments'),
                                    2 => array('token' => 'T_COMMA'),
