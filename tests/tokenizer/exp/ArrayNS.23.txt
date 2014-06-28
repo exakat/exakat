@@ -1,0 +1,27 @@
+<?php 
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !=
+        Label : RIGHT
+          'B'
+        Label : LEFT
+          $a
+    Label : THEN
+      {
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $c
+        Label : LEFT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              $b
+          Label : INDEX
+            C
