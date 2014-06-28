@@ -17,7 +17,7 @@ class ArgumentsNoComma extends Arguments {
                                               'notAtom' => 'Arguments'),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
-                                   3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS', 'T_QUESTION')),
+                                   3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')), 
         );
 
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
@@ -76,7 +76,8 @@ class ArgumentsNoComma extends Arguments {
                                               'notAtom' => 'Arguments'),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
-                                   3 => array('filterOut2' => array_merge(array('T_COMMA'), Token::$instruction_ending)),
+                                   3 => array('filterOut2' => array_merge(array('T_COMMA', 'T_QUESTION'), 
+                                                              Token::$instruction_ending)),
         );
 
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
