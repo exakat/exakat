@@ -2317,7 +2317,7 @@ if (    $it.token != 'T_ELSEIF'
     &&  $it.in_for != \"'true'\"
     && !($it.in('NEXT').next().atom in ['Class', 'Identifier']) 
     &&  !($it.out('NEXT').next().token in list_after_token)
-    &&  !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR'])
+    &&  !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
     ) {
 
     $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
