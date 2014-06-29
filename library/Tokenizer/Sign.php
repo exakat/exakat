@@ -19,8 +19,7 @@ class Sign extends TokenAuto {
                                                                           Magicconstant::$operators),
                                                'notAtom' => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication', 'Cast' )), 
                                     0 => array('token' => Sign::$operators,
-                                               'atom' => 'none'
-                                               ),
+                                               'atom' => 'none'),
                                     1 => array('atom' => 'Integer'),
                                     2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                                                                 'T_OPEN_CURLY', 'T_OPEN_BRACKET'),
@@ -37,7 +36,7 @@ class Sign extends TokenAuto {
         $this->checkAuto();
         
         //  + -1 (Normal case)
-        $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
+        $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_ARRAY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
                                                                                  'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER', 
                                                                                  'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT', 
                                                                                  'T_CLOSE_BRACKET', 'T_BANG',
@@ -77,10 +76,11 @@ class Sign extends TokenAuto {
         $this->checkAuto();
 
 //Special cases like 1 * -2 or 2 + -2         
-        $this->conditions = array( -1 => array('token' => array_merge(Addition::$operators, Multiplication::$operators), 'atom' => 'none'), 
+        $this->conditions = array( -1 => array('token' => array_merge(Addition::$operators, Multiplication::$operators), 
+                                               'atom'  => 'none'), 
                                     0 => array('token' => Sign::$operators,
-                                               'atom' => 'none'),
-                                    1 => array('atom' => Sign::$operands),
+                                               'atom'  => 'none'),
+                                    1 => array('atom'  => Sign::$operands),
                                     2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                                                     'T_OPEN_CURLY', 'T_OPEN_BRACKET')));
         
