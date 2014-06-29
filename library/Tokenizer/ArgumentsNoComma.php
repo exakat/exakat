@@ -24,7 +24,7 @@ class ArgumentsNoComma extends Arguments {
         $this->checkAuto();
 
         // @note echo (1) : no comma 
-        $this->conditions = array(-1 => array('token' => 'T_ECHO'),
+        $this->conditions = array(-1 => array('token' => array('T_ECHO', 'T_PRINT')),
                                    0 => array('token' => ArgumentsNoComma::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'yes',

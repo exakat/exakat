@@ -51,7 +51,7 @@ class Functioncall extends TokenAuto {
         // functioncall special case for Echo
         $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
                                     -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
-                                     0 => array('token' => 'T_ECHO'),
+                                     0 => array('token' => array('T_ECHO', 'T_PRINT')),
                                      1 => array('atom'  => 'none',
                                                 'token' => 'T_OPEN_PARENTHESIS' ),
                                      2 => array('atom'  =>  array('Arguments', 'Void')),
