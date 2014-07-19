@@ -4,13 +4,13 @@ namespace Analyzer\Structures;
 
 use Analyzer;
 
-class CryptWithoutSalt extends Analyzer\Common\FunctionDefaultValue {
+class McryptcreateivWithoutOption extends Analyzer\Common\FunctionDefaultValue {
     public $phpversion = "5.6-";
     
     public function analyze() {
-        $this->code = 'crypt';
+        $this->code = 'mcrypt_create_iv';
         $this->order = 1;
-        
+
         parent::analyze();
     }
 }
