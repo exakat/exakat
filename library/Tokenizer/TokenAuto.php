@@ -1331,10 +1331,10 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
                                                         'Ternary', 'While', 'Assignation', 'Switch', 'Use', 'Label', 'Array', 
                                                         'Postplusplus', 'Preplusplus', 'Return', 'Class', 'Phpcode' ] && 
                                       it.getProperty('token') != 'T_ELSEIF'}.any() && 
-    it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 
+    it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 
                                                     'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 
                                                     'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
-                                                    'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_COLON'])}.any()) {
+                                                    'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_COLON', 'T_DOT'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
     
@@ -2095,6 +2095,26 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             unset($actions['createVoidForDefault']);
         }
 
+        if (isset($actions['makeMethodCall'])) {
+            $qactions[] = " 
+/* makeMethodCall */ 
+
+g.addEdge(it, it.in('NEXT').next(), 'OBJECT');
+g.addEdge(it, it.out('NEXT').next(), 'METHOD');
+
+a = it.in('NEXT').in('NEXT').next();
+c = it.out('NEXT').out('NEXT').next();
+
+it.in('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
+it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
+
+g.addEdge(a, it, 'NEXT');
+g.addEdge(it, c, 'NEXT');
+
+//makeMethodCall
+            ";
+            unset($actions['makeMethodCall']);
+        }
         if (isset($actions['caseDefaultSequence'])) {
             $qactions[] = <<<GREMLIN
  /* caseDefaultSequence */   
@@ -2294,7 +2314,7 @@ list_after = [
         'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
 
         'T_ELSE', 'T_ELSEIF', 
-        'T_CATCH', 'T_QUESTION'];
+        'T_CATCH'];
 
 list_after_token = [
         'T_OBJECT_OPERATOR', 
@@ -2306,7 +2326,7 @@ list_after_token = [
         'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
         'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
         'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
-        'T_AS', 'T_DOT', 'T_INSTANCEOF'
+        'T_AS', 'T_DOT', 'T_INSTANCEOF', 'T_QUESTION'
         ];
 
 if (    $it.token != 'T_ELSEIF'

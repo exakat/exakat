@@ -1,0 +1,63 @@
+<?php
+Label : CODE
+  makeSequence T_OPEN_BRACKET
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        .
+        Label : CONCAT
+          (
+          Label : CODE
+            ?
+            Label : CONDITION
+              <
+              Label : RIGHT
+                $b
+              Label : LEFT
+                B
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $a
+                    Label : INDEX
+                      'C'
+            Label : THEN
+              'D'
+            Label : ELSE
+              'E'
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            'F'
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ::
+        Label : METHOD
+          I
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $d
+              Label : INDEX
+                'J'
+            Label : ARGUMENT
+              K
+            Label : ARGUMENT
+              L
+            Label : ARGUMENT
+              M
+        Label : CLASS
+          H
+  Label : ELEMENT
+    F

@@ -12,12 +12,12 @@ class Methodcall extends TokenAuto {
         // $this->x($args);
         $this->conditions = array( -2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')),
                                    -1 => array('atom'      => $operands), 
-                                    0 => array('token'     => Methodcall::$operators),
+                                    0 => array('token'     => Methodcall::$operators,
+                                               'atom'      => 'none'),
                                     1 => array('atom'      => array('Functioncall', 'Methodcall'))
                                  );
         
-        $this->actions = array('makeEdge'     => array( -1 => 'OBJECT',
-                                                         1 => 'METHOD'),
+        $this->actions = array('makeMethodCall' => true,
                                'atom'         => 'Methodcall',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
