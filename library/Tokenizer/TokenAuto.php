@@ -2349,6 +2349,7 @@ if (    $it.token != 'T_ELSEIF'
         sequence = $it.in('NEXT').next();
     
         $it.setProperty('order', count);
+        count++;
         $it.setProperty('makeSequence', 'both');
         g.addEdge(sequence, $it, 'ELEMENT');
 
@@ -2375,7 +2376,6 @@ if (    $it.token != 'T_ELSEIF'
         g.addEdge($it.in('NEXT').next(), $it, 'ELEMENT');
 
         $it.bothE('NEXT').each{ g.removeEdge(it); }
-        
     } else if ($it.out('NEXT').has('atom', 'Sequence').any()) {
         sequence = $it.out('NEXT').next();
         $it.setProperty('order', 0);
