@@ -1070,6 +1070,49 @@ b.outE('NEXT').each{ g.removeEdge(it) ; }
 ";
             unset($actions['createSequenceForCaseWithoutSemicolon']);
         }        
+
+        if (isset($actions['makeNamespace'])) {
+            $qactions[] = " 
+/* makeNamespace */  
+
+p = it;
+nsname = it;
+nsname.setProperty('atom', 'Nsname');
+order = -1;
+
+subname = p.in('NEXT').next();
+if (subname.getProperty('token') == 'T_STRING') {
+    g.addEdge(nsname, subname, 'SUBNAME');
+    subname.setProperty('order', order++);
+    
+    p2 = subname.in('NEXT').next();
+    subname.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+    g.addEdge(p2, nsname, 'NEXT');
+    p.setProperty('absolutens', 'false');
+} else {
+    order = -1;
+    p.setProperty('absolutens', 'true');
+}
+
+while(p.getProperty('token') == 'T_NS_SEPARATOR') {
+    subname = p.out('NEXT').next();
+    g.addEdge(nsname, subname, 'SUBNAME');
+    subname.setProperty('order', order++);
+
+    p2 = subname.out('NEXT').next();
+    if (p != it) {
+        p.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+        g.removeVertex(p);
+    }
+    
+    g.addEdge(nsname, p2, 'NEXT');
+    p = p2;
+    subname.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+}
+
+";
+            unset($actions['makeNamespace']);
+        }    
         
         if (isset($actions['createSequenceForDefaultWithoutSemicolon'])) {
             $sequence = new Sequence(Token::$client);

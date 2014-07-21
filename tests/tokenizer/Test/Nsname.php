@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Nsname extends Tokenizer {
-    /* 12 methods */
+    /* 13 methods */
 
     public function testNsname01()  { $this->generic_test('Nsname.01'); }
     public function testNsname02()  { $this->generic_test('Nsname.02'); }
@@ -21,5 +21,6 @@ class Nsname extends Tokenizer {
     public function testNsname10()  { $this->generic_test('Nsname.10'); }
     public function testNsname11()  { $this->generic_test('Nsname.11'); }
     public function testNsname12()  { $this->generic_test('Nsname.12'); }
+    public function testNsname13()  { $this->generic_test('Nsname.13'); }
 }
 ?>

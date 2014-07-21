@@ -13,9 +13,7 @@ class Functioncall extends TokenAuto {
 
     public function _check() {
         // $functioncall(with arguments or void) with a variable as name
-        $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
-                                    -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
-                                     0 => array('token' => 'T_VARIABLE'),
+        $this->conditions = array(   0 => array('token' => 'T_VARIABLE'),
                                      1 => array('atom'  => 'none',
                                                 'token' => 'T_OPEN_PARENTHESIS' ),
                                      2 => array('atom'  =>  array('Arguments', 'Void')),
