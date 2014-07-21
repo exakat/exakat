@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     new
     Label : NEW
-      \
+      a\b\c
+      Label : SUBNAME
+        c
+      Label : SUBNAME
+        b
+      Label : SUBNAME
+        a
       Label : ARGUMENTS
         void
-      Label : ELEMENT
-        b
-      Label : ELEMENT
-        a
-      Label : ELEMENT
-        c
+        Label : ARGUMENT
+          void
