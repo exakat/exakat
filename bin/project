@@ -17,7 +17,7 @@ if ($id = array_search('-p', $args)) {
 }
 
 if (!file_exists('./projects/'.$project)) {
-    print "Project '$project' doesn't exists in projects folder. Aborting\n";
+    print "Project '$project' doesn't exist in projects folder. Aborting\n";
     die();
 }
 
