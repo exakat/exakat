@@ -56,7 +56,8 @@ class _Static extends TokenAuto {
                                  );
         
         $this->actions = array('to_ppp_assignation' => 1,
-                               'atom'               => 'Static', );
+                               'atom'               => 'Static',
+                               'makeSequence'       => 'x' );
         $this->checkAuto(); 
 
     // class x { static public $x = 2 }
