@@ -510,6 +510,18 @@ GREMLIN;
         return $this;
     }
 
+    function isMore($property, $value= "'true'") {
+        $this->addMethod("filter{ it.$property > ***;}", $value);
+
+        return $this;
+    }
+
+    function isLess($property, $value= "'true'") {
+        $this->addMethod("filter{ it.$property < ***;}", $value);
+
+        return $this;
+    }
+
     function isNot($property, $value= "'true'") {
         if ($value == null) {
             $this->addMethod("hasNot('$property', null)");
@@ -533,9 +545,9 @@ GREMLIN;
     }
 
     function noChildWithOrder($edge_name, $order = "0") {
-        if ($order == 'first') {
-            $this->addMethod("filter{ it.out(***).has('order','0').any() == false }");
-        } elseif ($order == 'last') {
+        if ($order === 'first') {
+            $this->addMethod("filter{ it.out(***).has('order','0').any() == false }", $edge_name);
+        } elseif ($order === 'last') {
             $this->addMethod("filter{ it.out(***).has('order',it.in(***).count() - 1).any() == false }", $edge_name, $edge_name);
         } else {
             $this->addMethod("filter{ it.out(***).has('order', ***).any() == false}", $edge_name, abs(intval($order)));
