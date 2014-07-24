@@ -510,14 +510,24 @@ GREMLIN;
         return $this;
     }
 
-    function isMore($property, $value= "'true'") {
-        $this->addMethod("filter{ it.$property > ***;}", $value);
+    function isMore($property, $value = "0") {
+        if (is_int($value)) {
+            $this->addMethod("filter{ it.$property > ***;}", $value);
+        } else {
+            // this is a variable name
+            $this->addMethod("filter{ it.$property > $value;}", $value);
+        }
 
         return $this;
     }
 
-    function isLess($property, $value= "'true'") {
-        $this->addMethod("filter{ it.$property < ***;}", $value);
+    function isLess($property, $value= "0") {
+        if (is_int($value)) {
+            $this->addMethod("filter{ it.$property < ***;}", $value);
+        } else {
+            // this is a variable name
+            $this->addMethod("filter{ it.$property < $value;}", $value);
+        }
 
         return $this;
     }
@@ -1055,6 +1065,12 @@ GREMLIN;
 
     public function hasNoFunctionDefinition() {
         $this->addMethod("filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}");
+    
+        return $this;
+    }
+
+    public function functionDefinition() {
+        $this->addMethod("hasNot('fullnspath', null).transform{ g.idx('functions').get('path', it.fullnspath).next(); }");
     
         return $this;
     }

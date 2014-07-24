@@ -322,7 +322,7 @@ g.idx('Function')[['token':'node']].filter{it.out('NAME').next().code != ''}.sid
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
     }
 
-    g.idx('functions').put('path', fullcode.fullnspath.toLowerCase(), it);
+    g.idx('functions').put('path', fullcode.fullnspath.toLowerCase(), fullcode);
 }
 
 // class definitions

@@ -127,7 +127,7 @@ if (fullcode.getProperty('parenthesis') == 'true') {
 
 // count the number of arguments
 // filter out void ? 
-fullcode.setProperty("count", fullcode.out("ARGUMENTS").out("ARGUMENT").hasNot('token', 'T_VOID').count()); 
+fullcode.setProperty("args_count", fullcode.out("ARGUMENTS").out("ARGUMENT").hasNot('token', 'T_VOID').count()); 
 
 GREMLIN;
     }

@@ -24,7 +24,7 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
             $this->atomIs("Functioncall")
                  ->hasNoIn('METHOD')
                  ->fullnspath($f)
-                 ->isLess('count', $nb);
+                 ->isLess('args_count', $nb);
             $this->prepareQuery();
         }
 
@@ -32,9 +32,27 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
             $this->atomIs("Functioncall")
                  ->hasNoIn('METHOD')
                  ->fullnspath($f)
-                 ->isMore('count', $nb);
+                 ->isMore('args_count', $nb);
             $this->prepareQuery();
         }
+
+        $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD')
+             ->savePropertyAs('args_count', 'args_count')
+             ->functionDefinition()
+             ->inIs('NAME')
+             ->isMore('args_min', 'args_count')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD')
+             ->savePropertyAs('args_count', 'args_count')
+             ->functionDefinition()
+             ->inIs('NAME')
+             ->isLess('args_max', 'args_count')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
