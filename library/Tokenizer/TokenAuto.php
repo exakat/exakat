@@ -320,7 +320,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     tstatic = g.addVertex(null, [code:var.code, atom:'$atom', token:'T_STATIC', virtual:true, line:it.line, fullcode:var.code]);
     g.addEdge(ppp, tstatic, var.code.toUpperCase());
     
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+    g.idx('delete').put('node', 'delete', it);
 
     fullcode = ppp;
     $fullcode
@@ -389,7 +389,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.removeEdge(it.outE('LEFT').next());
     g.removeEdge(it.outE('RIGHT').next());
     
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+    g.idx('delete').put('node', 'delete', it);   
 }
 
 g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
@@ -509,7 +509,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     atom2 = g.addVertex(null, [code:arg2.code, atom:'$atom2', token:arg2.token, virtual:true, line:it.line, fullcode:arg2.code]);
     g.addEdge(ppp, atom2, arg2.code.toUpperCase());
     
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+    g.idx('delete').put('node', 'delete', it);   
 }
 g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
 g.removeEdge(var.out('NEXT').outE('NEXT').next());
@@ -541,7 +541,7 @@ d = it.out('NEXT').out('NEXT').next();
 it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
 
 g.addEdge(var, d, 'NEXT');
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');   
+g.idx('delete').put('node', 'delete', arg);   
 
 ";
             unset($actions['to_use']);
@@ -564,7 +564,7 @@ next = block.out('NEXT').next();
 block.bothE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(var, block, 'BLOCK');
 
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');   
+g.idx('delete').put('node', 'delete', arg);   
 it.outE('NEXT').each{ g.removeEdge(it); }
 
 g.addEdge(var, next, 'NEXT');
@@ -594,8 +594,8 @@ g.removeEdge(block.outE('NEXT').next());
 
 op.bothE('NEXT').each{ g.removeEdge(it); }
 cp.bothE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), op, 'DELETE');   
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), cp, 'DELETE');   
+g.idx('delete').put('node', 'delete', op);   
+g.idx('delete').put('node', 'delete', cp);   
 
 ";
             unset($actions['to_lambda']);
@@ -611,7 +611,7 @@ g.addEdge(it, x, 'NAME');
 it.setProperty('lambda', 'true');
 
 x = it.out('NEXT').next();
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
+g.idx('delete').put('node', 'delete', x);   
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
 
 x = x.out('NEXT').next();
@@ -620,22 +620,22 @@ g.addEdge(it, x, 'ARGUMENTS');
 
 x = x.out('NEXT').next();
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
+g.idx('delete').put('node', 'delete', x);   
 
 x = x.out('NEXT').next();
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
+g.idx('delete').put('node', 'delete', x);   
 
 x = x.out('NEXT').next();
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
+g.idx('delete').put('node', 'delete', x);   
 
 x = x.out('NEXT').next();
 g.addEdge(it, x, 'USE');
 
 x = x.out('NEXT').next();
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), x, 'DELETE');   
+g.idx('delete').put('node', 'delete', x);   
 
 x = x.out('NEXT').next();
 g.addEdge(it, x, 'BLOCK');
@@ -783,7 +783,7 @@ fullcode = x;
 g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+g.idx('delete').put('node', 'delete', it);
 ";
                             $this->set_atom = false;
                         } else {
@@ -795,7 +795,7 @@ g.addEdge(it, next.out('NEXT').next(), 'NEXT');
 
 next.bothE('NEXT').each{ g.removeEdge(it); }
 
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), next, 'DELETE');
+g.idx('delete').put('node', 'delete', next);
 ";
                         }
                     } elseif ($label == 'DROP2') {
@@ -807,7 +807,7 @@ second  = first.out('NEXT').next();
 third  = second.out('NEXT').next();
 
 second.bothE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), second, 'DELETE');
+g.idx('delete').put('node', 'delete', second);
 
 g.addEdge(first, third, 'NEXT');
 
@@ -958,7 +958,7 @@ arg = _const.out('NEXT').next();
 
 g.addEdge(_const.in('NEXT').next(), sequence, 'NEXT');
 g.addEdge(sequence, _const.out('NEXT').out('NEXT').out('NEXT').next(), 'NEXT');
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), _const.out('NEXT').out('NEXT').next(), 'DELETE');   
+g.idx('delete').put('node', 'delete', _const.out('NEXT').out('NEXT').next());   
 
 g.removeEdge(_const.out('NEXT').out('NEXT').outE('NEXT').next());
 g.removeEdge(_const.out('NEXT').outE('NEXT').next());
@@ -983,12 +983,12 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
 
     $fullcode
     
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+    g.idx('delete').put('node', 'delete', it);   
 
 }
 
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), arg, 'DELETE');   
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+g.idx('delete').put('node', 'delete', arg);   
+g.idx('delete').put('node', 'delete', it);   
 
 "; 
             unset($actions['to_const']);
@@ -1040,7 +1040,7 @@ if (a.out('ELEMENT').count() > 0) {
         order++;
     }
     
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), a, 'DELETE');
+    g.idx('delete').put('node', 'delete', a);
 } else {
     order = 1;
     a.setProperty('order', 0);
@@ -1054,7 +1054,7 @@ if (b.out('ELEMENT').count() > 0) {
         g.addEdge(x, it, 'ELEMENT');
     }
     
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), b, 'DELETE');
+    g.idx('delete').put('node', 'delete', b);
 } else {
     b.setProperty('order', 1);
     g.addEdge(x, b, 'ELEMENT');
@@ -1140,7 +1140,7 @@ if (a.out('ELEMENT').count() > 0) {
         order++;
     }
     
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), a, 'DELETE');
+    g.idx('delete').put('node', 'delete', a);
 } else {
     order = 1;
     a.setProperty('order', 0);
@@ -1154,7 +1154,7 @@ if (b.out('ELEMENT').count() > 0) {
         g.addEdge(x, it, 'ELEMENT');
     }
     
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), b, 'DELETE');
+    g.idx('delete').put('node', 'delete', b);
 } else {
     b.setProperty('order', 1);
     g.addEdge(x, b, 'ELEMENT');
@@ -1232,8 +1232,8 @@ g.addEdge(c, e, 'NEXT');
 d.bothE('NEXT').each{ g.removeEdge(it); }
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), d, 'DELETE');
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+g.idx('delete').put('node', 'delete', d);
+g.idx('delete').put('node', 'delete', it);
 
 ";
             unset($actions['Phpcodemiddle']);
@@ -1428,7 +1428,7 @@ while (it.out('NEXT').has('atom', 'Sequence').any()) {
     g.addEdge(sequence, suivant.out('NEXT').next(), 'NEXT');
 
     suivant.bothE('NEXT').each{ g.removeEdge(it); }
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), suivant, 'DELETE');
+    g.idx('delete').put('node', 'delete', suivant);
     suivant.setProperty('checkForNext', 'Next sequence');
 }
 
@@ -1469,7 +1469,7 @@ while (it.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).any()) {
     
     g.addEdge(it, semicolon.out('NEXT').next(), 'NEXT');
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), semicolon, 'DELETE');
+    g.idx('delete').put('node', 'delete', semicolon);
 }
 
 if (it.both('NEXT').count() == 0) {
@@ -1539,7 +1539,7 @@ g.addEdge(it, suivant, 'NEXT');
 it.setProperty('no_block', 'true');
 
 g.addEdge(it, it.out('NEXT').next(), 'NAMESPACE');
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('NEXT').out('NEXT').next(), 'DELETE');
+g.idx('delete').put('node', 'delete', it.out('NEXT').out('NEXT').next());
 g.addEdge(it, it.out('NEXT').out('NEXT').out('NEXT').next(), 'BLOCK');
 
 end = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
@@ -1560,7 +1560,7 @@ g.addEdge(it, end, 'NEXT');
 it.setProperty('no_block', 'true');
 
 g.addEdge(it, it.out('NEXT').next(), 'NAMESPACE');
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('NEXT').out('NEXT').next(), 'DELETE');
+g.idx('delete').put('node', 'delete', it.out('NEXT').out('NEXT').next());
 tvoid = g.addVertex(null, [code:'', atom:'Void', virtual:true, line:it.line, token:'T_VOID', fullcode:' ']);
 g.addEdge(it, tvoid, 'BLOCK');
 
@@ -1584,7 +1584,7 @@ if (it.code == '-') {
 }
 
 nextnext = it.out('NEXT').out('NEXT').next();
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('NEXT').next(), 'DELETE');
+g.idx('delete').put('node', 'delete', it.out('NEXT').next());
 it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(it, nextnext, 'NEXT');
 
@@ -1617,7 +1617,7 @@ $fullcode
             
             $qactions[] = "
 /* to type hint */
-x = g.addVertex(null, [code:'Typehint', atom:'Typehint', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'Typehint', atom:'Typehint', token:'T_TYPEHINT', virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
 a.fullcode = a.code;
@@ -1766,8 +1766,8 @@ if (c == 1) { // there is a list of argument in order 0
         g.addEdge(it.in('NEXT').next(), sub, 'NEXT');
         g.addEdge(sub, it.out('NEXT').next(), 'NEXT');
 
-        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
-        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('$link').has('order', 1).next(), 'DELETE');
+        g.idx('delete').put('node', 'delete', it);
+        g.idx('delete').put('node', 'delete', it.out('$link').has('order', 1).next());
         it.bothE('NEXT').each{ g.removeEdge(it); }
         it.outE('$link').each{ g.removeEdge(it); }
 
@@ -1783,7 +1783,7 @@ if (c == 1) { // there is a list of argument in order 0
         g.addEdge(it.in('NEXT').next(), sub, 'NEXT');
         g.addEdge(sub, it.out('NEXT').next(), 'NEXT');
         
-        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+        g.idx('delete').put('node', 'delete', it);
         it.bothE('NEXT').each{ g.removeEdge(it); }
         it.outE('$link').each{ g.removeEdge(it); }
 
@@ -1800,7 +1800,7 @@ if (c == 1) { // there is a list of argument in order 0
         g.addEdge(it.in('NEXT').next(), sub, 'NEXT');
         g.addEdge(sub, it.out('NEXT').next(), 'NEXT');
         
-        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+        g.idx('delete').put('node', 'delete', it);
         it.bothE('NEXT').each{ g.removeEdge(it); }
         it.outE('$link').each{ g.removeEdge(it); }
         clean = sub;
@@ -1863,12 +1863,12 @@ it.out('NEXT').has('token', 'T_COLON').each{
     // removing the colon
     g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
     it.bothE('NEXT').each{ g.removeEdge(it); }
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+    g.idx('delete').put('node', 'delete', it);
 
     // removing the endif
     g.addEdge(endif.in('NEXT').next(), endif.out('NEXT').next(), 'NEXT');
     endif.bothE('NEXT').each{ g.removeEdge(it); }
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), endif, 'DELETE');
+    g.idx('delete').put('node', 'delete', endif);
 }
 
 x = g.addVertex(null, [code:'Block with else', fullcode:'Block with else', token:'T_SEMICOLON', atom:'Sequence', block:'true', virtual:true, line:it.line]);
@@ -1961,7 +1961,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), semicolon, 'DELETE');   
+    g.idx('delete').put('node', 'delete', semicolon);   
 }
 
 /* Clean index */
@@ -2140,22 +2140,39 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         }
 
         if (isset($actions['makeMethodCall'])) {
+            $methodcall = new Methodcall(Token::$client);
+            $fullcode = $methodcall->fullcode();
+
             $qactions[] = " 
 /* makeMethodCall */ 
 
-g.addEdge(it, it.in('NEXT').next(), 'OBJECT');
-g.addEdge(it, it.out('NEXT').next(), 'METHOD');
+p = it;
 
-a = it.in('NEXT').in('NEXT').next();
-c = it.out('NEXT').out('NEXT').next();
+while(p.token == 'T_OBJECT_OPERATOR') {
+    g.addEdge(p, p.in('NEXT').next(), 'OBJECT');
+    g.addEdge(p, p.out('NEXT').next(), 'METHOD');
 
-it.in('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
-it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
+    a = p.in('NEXT').in('NEXT').next();
+    c = p.out('NEXT').out('NEXT').next();
 
-g.addEdge(a, it, 'NEXT');
-g.addEdge(it, c, 'NEXT');
+    p.in('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
+    p.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
 
-//makeMethodCall
+    g.addEdge(a, p, 'NEXT');
+    g.addEdge(p, c, 'NEXT');
+    
+    p.inE('INDEXED').each{ g.removeEdge(it); }
+    p.setProperty('atom', 'Methodcall');
+    
+    fullcode = p;
+    $fullcode;
+    
+    a = p;
+    p = c;
+}
+
+p = a;
+
             ";
             unset($actions['makeMethodCall']);
         }
@@ -2184,7 +2201,7 @@ g.addEdge(it, c, 'NEXT');
         cds2.bothE('NEXT').each { g.removeEdge(it); }
         it.inE('NEXT').each { g.removeEdge(it); }
         
-        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), cds2, 'DELETE');   
+        g.idx('delete').put('node', 'delete', cds2);   
     } else if (it.out('NEXT').has('atom', 'SequenceCaseDefault').any()) {
             cds = it.out('NEXT').next();
 
@@ -2233,7 +2250,7 @@ it.as('origin').out('ELEMENT').has('atom','Sequence').each{
         g.addEdge(x, it, 'ELEMENT');
     };
 
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+    g.idx('delete').put('node', 'delete', it);   
 }
 ";
             }
@@ -2247,11 +2264,11 @@ variable = it.out('NEXT').next();
 variable.setProperty('delimiter', it.code);
 variable.setProperty('enclosing', it.token);
 
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+g.idx('delete').put('node', 'delete', it);   
 g.addEdge(it.in('NEXT').next(), variable, 'NEXT');
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), variable.out('NEXT').next(), 'DELETE');   
+g.idx('delete').put('node', 'delete', variable.out('NEXT').next());   
 close_curly = variable.out('NEXT').next();
 g.addEdge(variable, variable.out('NEXT').out('NEXT').next(), 'NEXT');
 close_curly.bothE('NEXT').each{ g.removeEdge(it); }
@@ -2408,7 +2425,7 @@ if (    $it.token != 'T_ELSEIF'
 
         sequence2 = $it.out('NEXT').next();
         $it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), sequence2, 'DELETE');
+        g.idx('delete').put('node', 'delete', sequence2);
         $it.bothE('NEXT').each{ g.removeEdge(it); }
     } else if ($it.in('NEXT').has('atom', 'Sequence').any() &&
               ($it.in('NEXT').next().block != 'true')) {
@@ -2478,13 +2495,13 @@ if (    $it.token != 'T_ELSEIF'
 variable = it.out('NEXT').out('NEXT').next();
 variable.setProperty('delimiter', '\${');
 
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it.out('NEXT').next(), 'DELETE');   
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+g.idx('delete').put('node', 'delete', it.out('NEXT').next());   
+g.idx('delete').put('node', 'delete', it);   
 g.addEdge(it.in('NEXT').next(), variable, 'NEXT');
 it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), variable.out('NEXT').next(), 'DELETE');   
+g.idx('delete').put('node', 'delete', variable.out('NEXT').next());   
 close_curly = variable.out('NEXT').next();
 g.addEdge(variable, variable.out('NEXT').out('NEXT').next(), 'NEXT');
 close_curly.bothE('NEXT').each{ g.removeEdge(it); }
@@ -2521,7 +2538,7 @@ x.as('origin').out('ELEMENT').has('atom','Sequence').each{
         g.addEdge(x, it, 'ELEMENT');
     };
 
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');   
+    g.idx('delete').put('node', 'delete', it);   
 }
 
 // remove the next, if this is a ; 
@@ -2553,7 +2570,7 @@ x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT'
 it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}{!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.each{
     if (it.token in ['T_CURLY_OPEN', 'T_CLOSE_CURLY']) {
         it.inE('NEXT').each{ g.removeEdge(it);}
-        g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+        g.idx('delete').put('node', 'delete', it);
     } else {
         g.addEdge(x, it, 'CONCAT');
         it.inE('NEXT').each{ g.removeEdge(it);}
@@ -2564,7 +2581,7 @@ it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', '
 g.addEdge(it, x, 'CONTAIN');
 g.addEdge(it, f.out('NEXT').out('NEXT').next(), 'NEXT');
 
-g.addEdge(g.idx('racines')[['token':'DELETE']].next(), f.out('NEXT').next(), 'DELETE');
+g.idx('delete').put('node', 'delete', f.out('NEXT').next());
 g.removeEdge(f.out('NEXT').outE('NEXT').next());
 
 it.setProperty('atom', 'String');
@@ -2618,7 +2635,7 @@ x.as('origin').out('ELEMENT').has('atom','Concatenation').each{
         g.addEdge(x, it, 'ELEMENT');
     };
 
-    g.addEdge(g.idx('racines')[['token':'DELETE']].next(), it, 'DELETE');
+    g.idx('delete').put('node', 'delete', it);
 }
 
 fullcode = x;
