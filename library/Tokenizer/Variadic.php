@@ -4,7 +4,7 @@ namespace Tokenizer;
 
 class Variadic extends TokenAuto {
     static public $operators = array('T_ELLIPSIS');
-    static public $atom = 'While';
+    static public $atom = 'Variadic (unused)';
 
     protected $phpversion = '5.6+';
 
@@ -26,7 +26,7 @@ class Variadic extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = "..." + fullcode.code; 
+fullcode.setProperty('fullcode', "..." + fullcode.getProperty('code')); 
 
 GREMLIN;
     }
