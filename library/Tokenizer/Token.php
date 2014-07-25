@@ -262,6 +262,11 @@ class Token {
     
     static public function cleanHidden() {
         $query = " 
+
+g.idx('delete')[['node':'delete']].each{
+    g.removeVertex(it);
+}
+
 g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
     g.removeVertex(it.in('NEXT').in('NEXT').next()); 
     g.removeVertex(it.out('NEXT').next()); 
@@ -270,10 +275,6 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
 
 g.V.has('root', 'true')[0].inE('INDEXED').each{ 
     g.removeEdge(it); 
-}
-
-g.idx('racines')[['token':'DELETE']].out('DELETE').each{
-    g.removeVertex(it);
 }
 
 g.V.has('index', 'true').filter{it.out().count() == 0}.each{
@@ -529,11 +530,6 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
     g.removeVertex(it.out('NEXT').next()); 
     g.removeVertex(it); 
 }
-
-g.idx('racines')[['token':'DELETE']].out('DELETE').each{
-    g.removeVertex(it);
-}
-
 ";
         Token::query($query);
     }
