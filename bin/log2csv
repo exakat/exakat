@@ -7,11 +7,13 @@ $matrix2 = array();
 
 $result = array();
 $total = 0;
+$total_time = 0;
 while($row = fgets($in, 1000)) {
     if (preg_match("/Tokenizer\\\\(.*?)	(\d+\.\d+)	(\d+)/", $row, $r)) {
         $total++;
         if (isset($result[$r[1]])) {
             $result[$r[1]]['Time'] += $r[2];
+            $total_time += $r[2];
             $result[$r[1]]['Times']++;
             
             $matrix[$r[1]][] = $r[2];
@@ -29,10 +31,13 @@ print "Processed $total rows\n";
 fclose($in);
 
 $out = fopen('log/analyzer.csv', 'w+');
-fputcsv($out, array('Regex', 'Time', 'Times'));
+fputcsv($out, array('Regex', 'Time', 'Times', str_replace('.', ',' , $total_time), 'Times_avg'));
 foreach($result as $k => $r) {
     array_unshift( $r, $k);
     $r['Time'] = str_replace('.', ',' ,$r['Time']);
+    $r['Time_avg'] = number_format($r['Time'] / $total_time, 2, ',', '');
+    $r['Times_avg'] = number_format($r['Time'] / $r['Times'], 2, ',', '');
+    
     fputcsv($out, array_values($r));
 }
 
