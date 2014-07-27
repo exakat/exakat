@@ -16,7 +16,8 @@ class _Use extends TokenAuto {
         
         $this->actions = array('transform'  => array( 1 => 'USE'),
                                'atom'       => 'Use',
-                               'cleanIndex' => true
+                               'cleanIndex' => true,
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto(); 
 
@@ -27,8 +28,9 @@ class _Use extends TokenAuto {
                                               'atom'     => 'none'),
                                  );
         
-        $this->actions = array('to_use'   => true,
-                               'atom'     => 'Use' );
+        $this->actions = array('to_use'       => true,
+                               'atom'         => 'Use',
+                               'makeSequence' => 'it' );
         $this->checkAuto(); 
 
     // use A {};
@@ -40,7 +42,8 @@ class _Use extends TokenAuto {
         $this->actions = array('transform'  => array( 1 => 'USE',
                                                       2 => 'BLOCK'),
                                'atom'       => 'Use',
-                               'cleanIndex' => true
+                               'cleanIndex' => true,
+                               'makeSequence' => 'it' 
                                );
         $this->checkAuto(); 
 
@@ -52,7 +55,8 @@ class _Use extends TokenAuto {
         
         $this->actions = array('to_use_block' => true,
                                'atom'         => 'Use',
-                               'cleanIndex'   => true );
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it'  );
         $this->checkAuto(); 
 
         return $this->checkRemaining();
@@ -63,9 +67,9 @@ class _Use extends TokenAuto {
 
 s = [];
 fullcode.out("USE").sort{it.order}._().each{ 
-    a = it.fullcode;
+    a = it.getProperty('fullcode');
     it.out('AS').each{
-        a = a + ' as ' + it.code;
+        a = a + ' as ' + it.getProperty('code');
     }
     s.add(a); 
 };

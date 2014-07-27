@@ -684,7 +684,7 @@ variable.bothE('INDEXED').each{ g.removeEdge(it); }
 g.removeEdge( it.inE('NEXT').next());
 
 fullcode = x;
-$fullcode
+
 ";
             unset($actions['to_ppp']);
         }        
@@ -1380,7 +1380,7 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
     it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 
                                                     'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 
                                                     'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
-                                                    'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_COLON', 'T_DOT'])}.any()) {
+                                                    'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_DOT'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
     
@@ -1438,7 +1438,7 @@ while (it.out('NEXT').has('atom', 'Sequence').any()) {
 while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
                                        'Dowhile', 'Try', 'Class', 'Interface', 'Trait', 'While', 'Break', 'Assignation', 'Halt',
                                        'Staticmethodcall', 'Namespace', 'Label', 'Postplusplus', 'Preplusplus', 'Include', 'Functioncall',
-                                       'Methodcall', 'Variable', 'Label', 'Goto', 'Static' ] && 
+                                       'Methodcall', 'Variable', 'Label', 'Goto', 'Static', 'New' ] && 
                                        it.token != 'T_ELSEIF' }.any() &&
     it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' ,
                                                      'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
@@ -2345,6 +2345,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_COMMA', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
         'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 
         'T_ECHO', 'T_PRINT',
+        'T_EXTENDS', 'T_IMPLEMENTS', 'T_USE',
         'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
         'T_PLUS', 'T_MINUS',
         'T_STAR', 'T_SLASH', 'T_PERCENTAGE',
@@ -2362,7 +2363,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
         'T_DO', 'T_TRY',
         'T_STRING', 'T_INSTEADOF', 'T_INSTANCEOF', 'T_BANG',
-        'T_ELSE', 
+        'T_ELSE', 'T_INC', 'T_DEC', 'T_IF', 'T_ELSEIF'
         ];
 
 list_after = [
@@ -2381,7 +2382,7 @@ list_after = [
         'T_CATCH'];
 
 list_after_token = [
-        'T_OBJECT_OPERATOR', 
+        'T_OBJECT_OPERATOR', 'T_INC', 'T_DEC', 
         'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
         'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
         'T_AND_EQUAL', 'T_CONCAT_EQUAL', 
@@ -2471,7 +2472,7 @@ if (    $it.token != 'T_ELSEIF'
         g.addEdge($it.in('NEXT').next(), sequence, 'NEXT');
         g.addEdge(sequence, $it.out('NEXT').next(), 'NEXT');
     
-        $it.bothE('NEXT').each{ g.removeEdge(it); }
+        $it.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
     }
 } else {
     $it.setProperty('makeSequence1',   $it.token != 'T_ELSEIF');

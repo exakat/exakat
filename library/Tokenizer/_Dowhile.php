@@ -25,8 +25,9 @@ class _Dowhile extends TokenAuto {
                                                           5 => 'CONDITION',
                                                           6 => 'DROP'
                                                         ),
-                               'atom'       => 'Dowhile',
-                               'cleanIndex' => true);
+                               'atom'         => 'Dowhile',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         // do if() {} while() (no block...)
@@ -45,8 +46,9 @@ class _Dowhile extends TokenAuto {
                                                           4 => 'CONDITION',
                                                           5 => 'DROP'
                                                         ),
-                               'atom'       => 'Dowhile',
-                               'cleanIndex' => true);
+                               'atom'         => 'Dowhile',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         // do { block } while()
@@ -65,8 +67,9 @@ class _Dowhile extends TokenAuto {
                                                           4 => 'CONDITION',
                                                           5 => 'DROP'
                                                         ),
-                               'atom'       => 'Dowhile',
-                               'cleanIndex' => true);
+                               'atom'         => 'Dowhile',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
         return $this->checkRemaining();

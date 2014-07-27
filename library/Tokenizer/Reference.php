@@ -22,7 +22,7 @@ class Reference extends TokenAuto {
         $this->actions = array('transform'    => array( 0 => 'DROP'),
                                'propertyNext' => array('reference' => 'true', 
                                                        'fullcode'  => 'it.fullcode'),
-                               'fullcode'     => true,
+                               'fullcode'     => true
                                );
         $this->set_atom = true;
         $this->checkAuto();
@@ -37,12 +37,13 @@ class Reference extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
-                               'propertyNext' => array('reference' => 'true'),
+                               'propertyNext' => array('reference' => 'true')
                                );
         $this->checkAuto();
 
+        // special case for &function x() 
         $this->conditions = array(-1 => array('token' => 'T_FUNCTION',
-                                             'atom' => 'none'),
+                                              'atom' => 'none'),
                                   0 => array('token' => Reference::$operators),
                                   1 => array('atom' => 'Identifier'),
                                   2 => array('token' => 'T_OPEN_PARENTHESIS'),
@@ -61,7 +62,7 @@ class Reference extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = "&" + fullcode.fullcode; 
+fullcode.setProperty('fullcode', "&" + fullcode.getProperty('fullcode')); 
 
 GREMLIN;
     }

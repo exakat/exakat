@@ -10,7 +10,7 @@ class ArrayNS extends TokenAuto {
     
     public function _check() {
         $yields =  array('T_VARIABLE', 'T_CLOSE_BRACKET', 'T_STRING', 'T_OBJECT_OPERATOR', 
-                         'T_DOLLAR', 'T_CLOSE_CURLY', 'T_DOUBLE_COLON', 'T_OPEN_CURLY', 
+                         'T_DOLLAR', 'T_DOUBLE_COLON', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 
                          'T_CLOSE_PARENTHESIS' );
 
         // [ arguments , ] : prepare arguments with final comma
@@ -67,6 +67,7 @@ class ArrayNS extends TokenAuto {
                                'cleanIndex'   => true);
         $this->checkAuto();
 
+/*
         // [ ] non-empty array with final ,
         $this->conditions = array(-1 => array('filterOut2' => $yields,
                                               'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
@@ -83,6 +84,7 @@ class ArrayNS extends TokenAuto {
                                'property'     => array('short_syntax' => 'true'),
                                'cleanIndex'   => true);
         $this->checkAuto();
+        */
 
         return $this->checkRemaining();
     }

@@ -20,7 +20,8 @@ class Bitshift extends TokenAuto {
                                                      -1 => 'LEFT'
                                                       ),
                                'atom'       => 'Bitshift',
-                               'cleanIndex' => true
+                               'cleanIndex' => true,
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto();
         

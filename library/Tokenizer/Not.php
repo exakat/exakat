@@ -16,7 +16,8 @@ class Not extends TokenAuto {
         
         $this->actions = array('makeEdge'   => array( 1 => 'NOT'),
                                'atom'       => 'Not',
-                               'cleanIndex' => true);
+                               'cleanIndex' => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
         
         return $this->checkRemaining();

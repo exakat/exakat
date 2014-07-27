@@ -13,16 +13,17 @@ class _Global extends TokenAuto {
                                    2 => array('token' => 'T_SEMICOLON'),
                                  );
         
-        $this->actions = array('transform'  => array( 1 => 'NAME'),
-                               'atom'       => 'Global',
-                               'cleanIndex' => true
+        $this->actions = array('transform'    => array( 1 => 'NAME'),
+                               'atom'         => 'Global',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto(); 
 
     // global $x, $y, $z;
-        $this->conditions = array( 0 => array('token' => _Global::$operators),
-                                   1 => array('atom' => 'Arguments'),
-                                   2 => array('filterOut' => array('T_COMMA')),
+        $this->conditions = array( 0 => array('token'     => _Global::$operators),
+                                   1 => array('atom'      => 'Arguments'),
+                                   2 => array('filterOut' => 'T_COMMA'),
                                  );
         
         $this->actions = array('to_global'   => 'Global',
@@ -36,7 +37,7 @@ class _Global extends TokenAuto {
         return <<<GREMLIN
 
 if (fullcode.out('NAME').count() == 1) {
-    fullcode.fullcode = "global " + fullcode.out("NAME").next().fullcode;
+    fullcode.setProperty('fullcode', "global " + fullcode.out("NAME").next().getProperty('fullcode'));
 }
 
 GREMLIN;

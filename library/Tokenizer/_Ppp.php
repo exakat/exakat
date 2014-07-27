@@ -15,7 +15,8 @@ class _Ppp extends TokenAuto {
                                     2 => array('filterOut' => $values),
                                  );
         $this->actions = array('to_ppp' => 1,
-                               'atom'   => 'Ppp', );
+                               'atom'   => 'Ppp',
+                               'makeSequence' => 'x' );
         $this->checkAuto(); 
 
     // class x { static private $s }
@@ -36,6 +37,7 @@ class _Ppp extends TokenAuto {
         
         $this->actions = array('to_ppp_assignation' => true,
                                'atom'               => 'Ppp',
+                               'makeSequence' => 'x' 
                                );
 
         $this->checkAuto(); 
@@ -49,6 +51,7 @@ class _Ppp extends TokenAuto {
         
         $this->actions = array('to_ppp_assignation' => true,
                                'atom'               => 'Ppp',
+                               'makeSequence' => 'x' 
                                );
 
         $this->checkAuto(); 
@@ -81,7 +84,7 @@ class _Ppp extends TokenAuto {
                                'atom'      => 'Ppp');
         $this->checkAuto(); 
 
-    // class x { var $x, $y }
+    // class x { public $x, $y }
         $this->conditions = array(-1 => array('filterOut2' => 'T_STATIC'),
                                    0 => array('token'      => _Ppp::$operators),
                                    1 => array('atom'       => 'Arguments'),

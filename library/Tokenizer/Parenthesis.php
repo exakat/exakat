@@ -27,7 +27,8 @@ class Parenthesis extends TokenAuto {
         $this->actions = array('makeEdge' => array( '1' => 'CODE'),
                                'dropNext' => array(1),
                                'atom'     => 'Parenthesis',
-                               'cleanIndex' => true);
+                               'cleanIndex' => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
 
 // this applies to situations like print ($a * $b) + $c; where parenthesis actually belong to the following expression. 
@@ -45,7 +46,8 @@ class Parenthesis extends TokenAuto {
         $this->actions = array('makeEdge' => array( '1' => 'CODE'),
                                'dropNext' => array(1),
                                'atom'     => 'Parenthesis',
-                               'cleanIndex' => true);
+                               'cleanIndex' => true,
+                               'makeSequence' => 'it');
         
         $this->checkAuto();
         

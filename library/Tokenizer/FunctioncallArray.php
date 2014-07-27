@@ -16,10 +16,11 @@ class FunctioncallArray extends TokenAuto {
                                                 'token' => 'T_CLOSE_PARENTHESIS'),
         );
 
-        $this->actions = array('transform'   => array(1 => 'DROP',
-                                                      2 => 'ARGUMENTS',
-                                                      3 => 'DROP'),
-                               'atom'        => 'Functioncall',
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'ARGUMENTS',
+                                                       3 => 'DROP'),
+                               'atom'         => 'Functioncall',
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto();
 

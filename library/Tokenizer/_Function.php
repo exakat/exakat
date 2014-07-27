@@ -23,10 +23,10 @@ class _Function extends TokenAuto {
                                                          3 => 'ARGUMENTS',
                                                          4 => 'DROP', 
                                                          5 => 'BLOCK'),
-                               'makeSequence'  => 'it',
                                'atom'          => 'Function',
                                'checkTypehint' => 'Function',
-                               'cleanIndex'    => true);
+                               'cleanIndex'    => true,
+                               'makeSequence'  => 'it');
         $this->checkAuto();
 
         // function x(args); for interfaces
@@ -63,7 +63,8 @@ class _Function extends TokenAuto {
         $this->actions = array('to_lambda'     => true,
                                'atom'          => 'Function',
                                'checkTypehint' => 'Function',
-                               'cleanIndex'    => true);
+                               'cleanIndex'    => true,
+                               'makeSequence'  => 'it');
         $this->checkAuto();
 
         // lambda function ($x) use ($y)
@@ -82,7 +83,8 @@ class _Function extends TokenAuto {
         $this->actions = array('to_lambda_use'  => true,
                                'atom'           => 'Function',
                                'checkTypehint'  => 'Function',
-                               'cleanIndex'     => true);
+                               'cleanIndex'     => true,
+                               'makeSequence'   => 'it');
         $this->checkAuto();
 
         return $this->checkRemaining();

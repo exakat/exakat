@@ -32,7 +32,8 @@ class _As extends TokenAuto {
         $this->actions = array('makeEdge'     => array( 1 => 'AS',
                                                        -1 => 'SUBNAME'),
                                'atom'         => 'As',
-                               'cleanIndex'   => true);
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it' );
         $this->checkAuto();
         
         return $this->checkRemaining();

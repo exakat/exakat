@@ -32,9 +32,10 @@ class _Static extends TokenAuto {
                                    2 => array('filterOut' => $values)
                                  );
         
-        $this->actions = array('to_ppp'     => 1,
-                               'atom'       => 'Static',
-                               'cleanIndex' => true
+        $this->actions = array('to_ppp'       => 1,
+                               'atom'         => 'Static',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'x'
                                );
         $this->checkAuto(); 
 

@@ -25,11 +25,11 @@ class Multiplication extends TokenAuto {
                                                                           Assignation::$operators)),
         );
         
-        $this->actions = array('makeEdge'   => array(  1 => 'RIGHT',
-                                                      -1 => 'LEFT'
-                                                      ),
-                               'atom'       => 'Multiplication',
-                               'cleanIndex' => true);
+        $this->actions = array('makeEdge'     => array(  1 => 'RIGHT',
+                                                        -1 => 'LEFT'),
+                               'atom'         => 'Multiplication',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
         
         return $this->checkRemaining();

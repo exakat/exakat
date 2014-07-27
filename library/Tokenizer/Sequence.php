@@ -109,73 +109,22 @@ class Sequence extends TokenAuto {
                                'keepIndexed'  => true
                                );
         $this->checkAuto();
-        
-/*
-        // @note End of PHP script
-        $this->conditions = array(-2 => array('filterOut2' => array_merge($yield_operator, 
-                                                                        array('T_OPEN_PARENTHESIS', 'T_BREAK', 'T_USE', 
-                                                                              'T_AS', 'T_IF', 'T_ELSEIF'))), 
-                                  -1 => array('atom'       => $operands,
-                                              'notToken'   => 'T_ELSEIF', ),
-                                   0 => array('token'      => Sequence::$operators,
-                                              'atom'       => 'none'),
-                                   1 => array('token'      => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 
-                                                                    'T_ENDIF', 'T_ELSEIF', 'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 
-                                                                    'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDDECLARE'),
-                                              ),
+
+        // @note instructions separated by ; with a special case for 'foreach' and 'for'. 
+        // @note this is not sufficient, but it seems to works pretty well and be enough.
+        $this->conditions = array(-2 => array('token' => 'T_OPEN_CURLY'),
+                                  -1 => array('atom'  => array('Integer', 'String', 'Variable' )),
+                                   0 => array('token' => Sequence::$operators),
+                                   1 => array('token' => 'T_CLOSE_CURLY'),
         );
         
         $this->actions = array('transform'    => array(-1 => 'ELEMENT'),
-                               'atom'         => 'Sequence',
                                'order'        => array(-1 => 0 ),
-                               'mergePrev2'   => array('Sequence' => 'ELEMENT'),
+                               'atom'         => 'Sequence',
                                'cleanIndex'   => true,
-                               'keepIndexed'  => true);
+                               );
         $this->checkAuto();
-*/
-/*
-        // @note End of PHP script, alternative syntax
-        $this->conditions = array(-3 => array('token'    => array('T_ELSE', 'T_OPEN_PARENTHESIS', 'T_USE', 'T_AS'), 
-                                              'atom'     => 'none'), 
-                                  -2 => array('token'    => 'T_COLON',), 
-                                  -1 => array('atom'     => $operands,
-                                              'notToken' => 'T_ELSEIF', ),
-                                   0 => array('token'    => Sequence::$operators,
-                                              'atom'     => 'none'),
-                                   1 => array('token'    => array('T_CLOSE_TAG', 'T_CLOSE_CURLY', 'T_END', 'T_CASE', 'T_DEFAULT', 'T_ENDIF', 'T_ELSEIF', 
-                                                                  'T_ELSE', 'T_ENDWHILE', 'T_ENDFOR', 'T_ENDDECLARE', 'T_ENDFOREACH', ),
-                                              'atom'     => 'none'),
-        );
-        
-        $this->actions = array('makeEdge'     => array(-1 => 'ELEMENT'),
-                               'order'        => array(-1 => 0 ),
-                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
-                               'atom'         => 'Sequence',
-                               'cleanIndex'   => true,
-                               'keepIndexed'  => true
-                               );
-        $this->checkAuto(); 
-        */
-
-/*
-        // @note : <Rawstring> Sequence
-        $this->conditions = array(-2 => array('token'    => 'T_COLON',
-                                              'atom'     => 'none'), 
-                                  -1 => array('atom'     => array('RawString', 'Function', 'Ifthen')),
-                                   0 => array('token'    => Sequence::$operators,
-                                              'atom'     => 'yes')
-        );
-        
-        $this->actions = array('makeEdge'     => array(-1 => 'ELEMENT'),
-                               'order'        => array(-1 => 0 ),
-                               'mergeNext'    => array('Sequence' => 'ELEMENT'), 
-                               'atom'         => 'Sequence',
-                               'cleanIndex'   => true,
-                               'keepIndexed'  => true
-                               );
-        $this->checkAuto(); 
-*/
-
+                
         // @note ; without no more NEXT
         $this->conditions = array( 0 => array('atom'  => 'Sequence' ));
         

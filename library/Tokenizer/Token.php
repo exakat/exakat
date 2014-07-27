@@ -263,21 +263,21 @@ class Token {
     static public function cleanHidden() {
         $query = " 
 
-g.idx('delete')[['node':'delete']].each{
-    g.removeVertex(it);
-}
-
 g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
     g.removeVertex(it.in('NEXT').in('NEXT').next()); 
     g.removeVertex(it.out('NEXT').next()); 
     g.removeVertex(it); 
-}
+};
 
 g.V.has('root', 'true')[0].inE('INDEXED').each{ 
     g.removeEdge(it); 
-}
+};
 
 g.V.has('index', 'true').filter{it.out().count() == 0}.each{
+    g.removeVertex(it);
+};
+
+g.idx('delete')[['node':'delete']].each{
     g.removeVertex(it);
 }
 
@@ -294,7 +294,7 @@ g.idx('Variable')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.obj
     } else if (it.atom == 'File') {
         fullcode.setProperty('File', it.code);
     }
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // calculating the full namespaces paths
@@ -306,12 +306,12 @@ g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == fa
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.out('NAME').next().fullcode.toLowerCase());
     }
-}
+};
 
 // const without class nor namspace (aka, global)
 g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false}.each{ 
     it.setProperty('fullnspath', '\\\\' + it.out('NAME').next().fullcode.toLowerCase());
-}
+};
 
 // function definitions
 g.idx('Function')[['token':'node']].filter{it.out('NAME').next().code != ''}.sideEffect{fullcode = it.out('NAME').next();}
@@ -324,7 +324,7 @@ g.idx('Function')[['token':'node']].filter{it.out('NAME').next().code != ''}.sid
     }
 
     g.idx('functions').put('path', fullcode.fullnspath.toLowerCase(), fullcode);
-}
+};
 
 // class definitions
 g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
@@ -333,7 +333,7 @@ g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.obje
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.out('NAME').next().code.toLowerCase());
     }
-}
+};
 
 g.idx('Class')[['token':'node']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
@@ -343,7 +343,7 @@ g.idx('Class')[['token':'node']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcod
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
     }
-}
+};
 
 // trait definitions
 g.idx('Trait')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
@@ -352,7 +352,7 @@ g.idx('Trait')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.obje
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.out('NAME').next().code.toLowerCase());
     }
-}
+};
 
 // interfaces definitions
 g.idx('Interface')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
@@ -361,8 +361,7 @@ g.idx('Interface')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.out('NAME').next().code.toLowerCase());
     }
-}
-
+};
 
 // also add interfaces and Traits and their respective extensions
 
@@ -376,7 +375,7 @@ g.idx('Functioncall')[['token':'node']].filter{it.in('METHOD').count() == 0}.sid
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
     } 
-}
+};
 
 // class usage
 g.idx('Staticmethodcall')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
@@ -387,7 +386,7 @@ g.idx('Staticmethodcall')[['token':'node']].out('CLASS').sideEffect{fullcode = i
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
     } 
-}
+};
 
 g.idx('Staticproperty')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
@@ -397,7 +396,7 @@ g.idx('Staticproperty')[['token':'node']].out('CLASS').sideEffect{fullcode = it;
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
     } 
-}
+};
 
 g.idx('Staticconstant')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
@@ -407,7 +406,7 @@ g.idx('Staticconstant')[['token':'node']].out('CLASS').sideEffect{fullcode = it;
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
     } 
-}
+};
 
 g.idx('Instanceof')[['token':'node']].out('RIGHT').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
@@ -417,7 +416,7 @@ g.idx('Instanceof')[['token':'node']].out('RIGHT').sideEffect{fullcode = it;}.in
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
     } 
-}
+};
 
 g.idx('Catch')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
@@ -427,7 +426,7 @@ g.idx('Catch')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
     } 
-}
+};
 
 g.idx('Typehint')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
@@ -437,7 +436,7 @@ g.idx('Typehint')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.l
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
     } 
-}
+};
 
 g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsname']}.sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.atom == 'Nsname') {
@@ -455,7 +454,7 @@ g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
             fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
         }           
     }
-}
+};
 
 // Constant usage
 g.idx('Identifier')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').count() == 0}
@@ -469,7 +468,7 @@ g.idx('Identifier')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS',
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
     } 
-}
+};
 
 g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').count() == 0}
     .filter{it.out('ARGUMENTS').count() == 0}
@@ -488,7 +487,7 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
         } else {
             fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
         }    
-}
+};
 
 // Const (out of a class)
 g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false || !(it.in('ELEMENT').in('BLOCK').next().atom in ['Class', 'Interface'])}.each{ 

@@ -20,10 +20,11 @@ class Addition extends TokenAuto {
                                    ),
         );
         
-        $this->actions = array('makeEdge'   => array( 1 => 'RIGHT',
-                                                     -1 => 'LEFT'),
-                               'atom'       => 'Addition',
-                               'cleanIndex' => true);
+        $this->actions = array('makeEdge'     => array( 1 => 'RIGHT',
+                                                       -1 => 'LEFT'),
+                               'atom'         => 'Addition',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
         
         return $this->checkRemaining();

@@ -14,13 +14,14 @@ class Property extends TokenAuto {
                                    -1 => array('atom' => $operands), 
                                     0 => array('token' => Property::$operators),
                                     1 => array('atom' => array('String', 'Variable', 'Array', 'Identifier', 'Boolean')),
-                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS')), //'T_OPEN_BRACKET'
+                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS')), 
                                     );
         
-        $this->actions = array('makeEdge'   => array( -1 => 'OBJECT',
-                                                       1 => 'PROPERTY'),
-                               'atom'       => 'Property',
-                               'cleanIndex' => true);
+        $this->actions = array('makeEdge'     => array( -1 => 'OBJECT',
+                                                         1 => 'PROPERTY'),
+                               'atom'         => 'Property',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto(); 
 
         // $object->{property}
@@ -33,12 +34,13 @@ class Property extends TokenAuto {
                                     4 => array('filterOut' => array('T_OPEN_PARENTHESIS')),
                                     );
         
-        $this->actions = array('transform'   => array( -1 => 'OBJECT',
-                                                        1 => 'DROP',
-                                                        2 => 'PROPERTY',
-                                                        3 => 'DROP'),
-                               'atom'       => 'Property',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( -1 => 'OBJECT',
+                                                         1 => 'DROP',
+                                                         2 => 'PROPERTY',
+                                                         3 => 'DROP'),
+                               'atom'         => 'Property',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto(); 
 
         return $this->checkRemaining();

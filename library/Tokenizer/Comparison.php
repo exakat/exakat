@@ -26,11 +26,11 @@ class Comparison extends TokenAuto {
                                                            Postplusplus::$operators )),
         );
         
-        $this->actions = array('makeEdge'    => array('1' => 'RIGHT',
-                                                      '-1' => 'LEFT'
-                                                      ),
-                               'atom'       => 'Comparison',
-                               'cleanIndex' => true,
+        $this->actions = array('makeEdge'     => array( 1 => 'RIGHT',
+                                                       -1 => 'LEFT'),
+                               'atom'         => 'Comparison',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto(); 
 

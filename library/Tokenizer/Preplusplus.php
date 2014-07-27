@@ -12,9 +12,10 @@ class Preplusplus extends TokenAuto {
                                    2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS')),
         );
         
-        $this->actions = array('transform'  => array( 1 => 'PREPLUSPLUS'),
-                               'atom'       => 'Preplusplus',
-                               'cleanIndex' => true);
+        $this->actions = array('transform'    => array( 1 => 'PREPLUSPLUS'),
+                               'atom'         => 'Preplusplus',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
         $this->checkAuto();
         
         return $this->checkRemaining();

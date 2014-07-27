@@ -31,7 +31,8 @@ class Concatenation extends TokenAuto {
                                                      -1 => 0 ),
                                'mergeNext'  => array('Concatenation' => 'CONCAT'), 
                                'atom'       => 'Concatenation',
-                               'cleanIndex' => true
+                               'cleanIndex' => true,
+                               'makeSequence' => 'clean',
                                );
         
         $this->checkAuto();
