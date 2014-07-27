@@ -90,7 +90,7 @@ class Sequence extends TokenAuto {
         $this->conditions = array(-2 => array('token' => 'T_COLON',
                                               'atom'  => 'none',
                                               'property'  => array('association' => array('For', 'Foreach', 'While', 'Default', 
-                                                                                          'Case', 'Switch')) // Ternary, Label
+                                                                                          'Case', 'Switch', 'If', 'Elseif', 'Else')) // Ternary, Label
                                                ), 
                                   -1 => array('atom'  => $operands ),
                                    0 => array('token' => Sequence::$operators,
@@ -110,8 +110,7 @@ class Sequence extends TokenAuto {
                                );
         $this->checkAuto();
 
-        // @note instructions separated by ; with a special case for 'foreach' and 'for'. 
-        // @note this is not sufficient, but it seems to works pretty well and be enough.
+    // special case for { 1; }
         $this->conditions = array(-2 => array('token' => 'T_OPEN_CURLY'),
                                   -1 => array('atom'  => array('Integer', 'String', 'Variable' )),
                                    0 => array('token' => Sequence::$operators),

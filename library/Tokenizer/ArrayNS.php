@@ -67,7 +67,6 @@ class ArrayNS extends TokenAuto {
                                'cleanIndex'   => true);
         $this->checkAuto();
 
-/*
         // [ ] non-empty array with final ,
         $this->conditions = array(-1 => array('filterOut2' => $yields,
                                               'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
@@ -84,7 +83,6 @@ class ArrayNS extends TokenAuto {
                                'property'     => array('short_syntax' => 'true'),
                                'cleanIndex'   => true);
         $this->checkAuto();
-        */
 
         return $this->checkRemaining();
     }

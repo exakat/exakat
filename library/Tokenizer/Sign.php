@@ -35,7 +35,7 @@ class Sign extends TokenAuto {
                                );
         $this->checkAuto();
         
-        //  + -1 (Normal case)
+        //  + -$s (Normal case)
         $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_ARRAY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
                                                                                  'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER', 
                                                                                  'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT', 
@@ -46,15 +46,15 @@ class Sign extends TokenAuto {
                                     0 => array('token' => Sign::$operators),
                                     1 => array('atom' => Sign::$operands),
                                     2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                                                                'T_OPEN_CURLY', 'T_OPEN_BRACKET'),
-                                                                    Multiplication::$operators)),
+                                                                                'T_OPEN_CURLY', 'T_OPEN_BRACKET'))),
                                  );
         
         $this->actions = array('makeEdge'   => array( 1 => 'SIGN'),
                                'atom'       => 'Sign',
                                'property'   => array('scalar' => true,
                                                      'instruction' => true),
-                               'cleanIndex' => true
+                               'cleanIndex' => true,
+                               'makeSequence' => 'it'
                                );
         $this->checkAuto();
 
