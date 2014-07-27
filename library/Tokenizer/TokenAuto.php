@@ -1082,14 +1082,16 @@ nsname.setProperty('atom', 'Nsname');
 order = -1;
 
 subname = p.in('NEXT').next();
-if (subname.getProperty('token') == 'T_STRING') {
+if (subname.getProperty('token') in ['T_STRING', 'T_NAMESPACE']) {
     g.addEdge(nsname, subname, 'SUBNAME');
     subname.setProperty('order', order++);
+    subname.has('token', 'T_NAMESPACE').each{ it.setProperty('fullcode', it.code); }
     
     p2 = subname.in('NEXT').next();
     subname.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
     g.addEdge(p2, nsname, 'NEXT');
     p.setProperty('absolutens', 'false');
+    
 } else {
     order = -1;
     p.setProperty('absolutens', 'true');
@@ -2148,7 +2150,8 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 
 p = it;
 
-while(p.token == 'T_OBJECT_OPERATOR') {
+while(p.token == 'T_OBJECT_OPERATOR' &&
+      p.out('NEXT').has('atom', 'Functioncall').any() ) {
     g.addEdge(p, p.in('NEXT').next(), 'OBJECT');
     g.addEdge(p, p.out('NEXT').next(), 'METHOD');
 
@@ -2749,7 +2752,11 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
 
         if (isset($cdt['property'])) {
             foreach($cdt['property'] as $property => $value) {
-                $qcdts[] = "has('$property', '$value')";
+                if (is_array($value)) {
+                    $qcdts[] = "filter{it.$property in ['".join("', '", $value)."']}";
+                } else {
+                    $qcdts[] = "has('$property', '$value')";
+                }
             }
             unset($cdt['property']);
         }
