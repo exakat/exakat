@@ -25,6 +25,8 @@ if ($id = array_search('-p', $argv)) {
 $begin = microtime(true);
 $client = new Client();
 
+logTime('Start');
+
 $indices = array();
 $res = query("g.getIndices()")->toArray();
 foreach($res as $r) {
@@ -36,6 +38,8 @@ if ($result[0][0] != 'MANUAL[racines:Vertex]') {
     query("g.createManualIndex('racines', Vertex)");
 }
 if (DISPLAY) print "created racines index\n";
+
+logTime('g.idx("racines")');
 
 $indices = array();
 $res = query("g.getIndices()")->toArray();
@@ -71,6 +75,7 @@ foreach($tokens as $id => $class) {
     
     if (DISPLAY) print "$id) $class : created\n";
 }
+logTime('g.idx("classes")');
 
 if (DISPLAY) print "$id) $class : filling\n";
 $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
@@ -78,41 +83,44 @@ $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconsta
                                  g.idx(it.atom).put('token', it.atom, it); }";
 query($query);
 if (DISPLAY) print "$id) $class : filled\n";
+logTime('g.idx("xxxxx") : filling');
 
 // creating the neo4j Index
 query("g.V.has('root', 'true').each{ g.idx('racines').put('token', 'ROOT', it); };");
+logTime('g.idx("ROOT")');
 
 if (DISPLAY) print "Indexing root done\n";
 
 // special case for the initial Rawstring. 
 query("g.idx('racines')[['token':'ROOT']].has('atom','Sequence').each{ g.idx('Sequence').put('token', 'node', it); };");
+logTime('g.idx("Rawstring") special');
 
 if (DISPLAY) print "Creating index done\n";
 
 // creating the neo4j Index
 query("g.V.has('token', 'INDEX').out('INDEXED').each{ g.idx('racines').put('token', it.token, it); };");
+logTime('g.idx("racines")[[token:***]] indexing');
 
 if (DISPLAY) print "Indexing racines done\n";
 
 // calculating the Unicode blocks
 query("g.idx('String')[['token':'node']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
 query("g.idx('Rawstring')[['token':'node']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
+logTime('Unicodes block');
 
 if (DISPLAY) print "String unicode done\n";
 
 // resolving the constants
-$extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'classes', 'delete');
+$extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'delete');
 foreach($extra_indices as $indice) {
     query("g.dropIndex('$indice');");
     query("g.createManualIndex('$indice', Vertex)");
 }
+logTime('g.idx("last index")');
 
 if (DISPLAY) print "Creating index for constant, function and classes resolution.\n";
 
 $end = microtime(true);
-
-//$db = new Db('exakat');
-//$db->query("INSERT INTO build_root (tokens, duration, project) VALUES ('$project', )");
 
 function query($query) {
     global $client;
@@ -129,6 +137,22 @@ function query($query) {
         print $e->getMessage();
         die('died in '.__METHOD__."\n");
     }
+}
+
+function logTime($step) {
+    static $log, $begin, $end, $start;
+    
+    if (is_null($log)) {
+        $log = fopen('log/build_root.timing.csv', 'w+');
+    }
+    $end = microtime(true);
+    if (is_null($begin)) { 
+        $begin = $end; 
+        $start = $end;
+    }
+    
+    fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
+    $begin = $end;
 }
 
 ?>
