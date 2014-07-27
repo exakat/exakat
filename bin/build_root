@@ -35,14 +35,14 @@ $result = query("g.idx('racines')");
 if ($result[0][0] != 'MANUAL[racines:Vertex]') {
     query("g.createManualIndex('racines', Vertex)");
 }
-    if (DISPLAY) print "created racines index\n";
+if (DISPLAY) print "created racines index\n";
 
 $indices = array();
 $res = query("g.getIndices()")->toArray();
 foreach($res as $r) {
     $indices[] = substr($r[0], 7, strpos($r[0], ':') - 7);
 }
-    if (DISPLAY) print "getting all indices\n";
+if (DISPLAY) print "getting all indices\n";
 
 $faits = array();
 
@@ -70,41 +70,42 @@ foreach($tokens as $id => $class) {
     $faits[] = $token;
     
     if (DISPLAY) print "$id) $class : created\n";
-    
-    if (in_array($token, $special_tokens)) {
-        if (DISPLAY) print "$id) $class : filling\n";
-        $query = "g.V.has('atom', '$token').each{ g.idx('$token').put('token', 'node', it); }";
-        query($query);
-        if (DISPLAY) print "$id) $class : filled\n";
-    }
 }
 
-// special case for the initial Rawstring. 
-query("g.V.has('root', 'true').has('atom','Sequence').each{ g.idx('Sequence').put('token', 'node', it); };");
+if (DISPLAY) print "$id) $class : filling\n";
+$query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
+                                 'Rawstring', 'Variable', 'Float', 'Boolean']}.each{ 
+                                 g.idx(it.atom).put('token', it.atom, it); }";
+query($query);
+if (DISPLAY) print "$id) $class : filled\n";
 
-if (DISPLAY) print "Creating index done\n";
-
-// creating the neo4j Index, old style (That will be removed);
-query("g.V.has('token', 'INDEX').out('INDEXED').each{ g.idx('racines').put('token', it.token, it); };");
-
-if (DISPLAY) print "Indexing racines done\n";
-
-// creating the neo4j Index, old style (That will be removed);
+// creating the neo4j Index
 query("g.V.has('root', 'true').each{ g.idx('racines').put('token', 'ROOT', it); };");
 
 if (DISPLAY) print "Indexing root done\n";
 
+// special case for the initial Rawstring. 
+query("g.idx('racines')[['token':'ROOT']].has('atom','Sequence').each{ g.idx('Sequence').put('token', 'node', it); };");
+
+if (DISPLAY) print "Creating index done\n";
+
+// creating the neo4j Index
+query("g.V.has('token', 'INDEX').out('INDEXED').each{ g.idx('racines').put('token', it.token, it); };");
+
+if (DISPLAY) print "Indexing racines done\n";
+
 // calculating the Unicode blocks
-query("g.idx('racines')[['token':'S_STRING']].out('INDEXED').filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
+query("g.idx('String')[['token':'node']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
+query("g.idx('Rawstring')[['token':'node']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
 
 if (DISPLAY) print "String unicode done\n";
 
 // resolving the constants
-query("g.createManualIndex('constants', Vertex)");
-query("g.createManualIndex('functions', Vertex)");
-query("g.createManualIndex('classes', Vertex)");
-query("g.createManualIndex('interfaces', Vertex)");
-query("g.createManualIndex('traits', Vertex)");
+$extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'classes', 'delete');
+foreach($extra_indices as $indice) {
+    query("g.dropIndex('$indice');");
+    query("g.createManualIndex('$indice', Vertex)");
+}
 
 if (DISPLAY) print "Creating index for constant, function and classes resolution.\n";
 
