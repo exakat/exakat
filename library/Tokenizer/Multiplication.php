@@ -14,8 +14,10 @@ class Multiplication extends TokenAuto {
     
     public function _check() {
 
-        $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT'),
-                                                                    Preplusplus::$operators, Sign::$operators)),
+        $this->conditions = array(-2 => array('filterOut' => array_merge(Property::$operators, 
+                                                                         Staticproperty::$operators,
+                                                                         Concatenation::$operators, 
+                                                                         Preplusplus::$operators)),
                                   -1 => array('atom' => Multiplication::$operands ),
                                    0 => array('token' => Multiplication::$operators,
                                               'atom' => 'none'),
