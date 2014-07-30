@@ -21,6 +21,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
             $args_maxs[$method['args_max']][] = $method['name'];
         }
         
+        // case for methods
         foreach($args_mins as $nb => $f) {
             $this->atomIs(array("Methodcall", 'Staticmethodcall'))
                  ->outIs('METHOD')
