@@ -300,7 +300,7 @@ g.idx('Variable')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.obj
 // calculating the full namespaces paths
 //////////////////////////////////////////////////////////////////////////////////////////
 // const in a namespace (and not a class)
-g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false}.sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ 
+g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any()}.sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ 
     if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.out('NAME').next().fullcode.toLowerCase());
     } else {
@@ -311,6 +311,18 @@ g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == fa
 // const without class nor namspace (aka, global)
 g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false}.each{ 
     it.setProperty('fullnspath', '\\\\' + it.out('NAME').next().fullcode.toLowerCase());
+};
+
+// Const (out of a class) with define
+g.idx('Functioncall')[['token':'node']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('order', 0).as('name')
+    .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.sideEffect{ ns = it; }.back('name')
+.each{ 
+    if (ns.atom == 'File') {
+        it.setProperty('fullnspath', '\\\\' + it.noDelimiter.toLowerCase());
+    } else {
+        it.setProperty('fullnspath', '\\\\' + ns.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + it.noDelimiter.toLowerCase());
+    }
+    g.idx('constants').put('path', it.fullnspath, it)
 };
 
 // function definitions
@@ -489,23 +501,6 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
         }    
 };
 
-// Const (out of a class)
-g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false || !(it.in('ELEMENT').in('BLOCK').next().atom in ['Class', 'Interface'])}.each{ 
-    g.idx('constants').put('path', it.fullnspath.toLowerCase(), it)
-};
-
-// Const (out of a class) with define
-g.idx('Functioncall')[['token':'node']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('order', 0).as('name')
-    .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.sideEffect{ ns = it; }.back('name')
-.each{ 
-    if (ns.atom == 'File') {
-        it.setProperty('fullnspath', '\\\\' + it.noDelimiter.toLowerCase());
-    } else {
-        it.setProperty('fullnspath', '\\\\' + ns.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + it.noDelimiter.toLowerCase());
-    }
-    g.idx('constants').put('path', it.fullnspath, it)
-};
-
 g.idx('Class')[['token':'node']].each{ 
     g.idx('classes').put('path', it.fullnspath.toLowerCase(), it)
 };
@@ -517,6 +512,8 @@ g.idx('Interface')[['token':'node']].each{
 g.idx('Trait')[['token':'node']].each{ 
     g.idx('traits').put('path', it.fullnspath.toLowerCase(), it)
 };
+
+//g.dropIndex('racines');
 
 ";
         Token::query($query);
