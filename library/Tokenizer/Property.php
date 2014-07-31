@@ -9,12 +9,26 @@ class Property extends TokenAuto {
     public function _check() {
         $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall', 'Staticproperty', 'Methodcall', 'Functioncall');
 
+        // $object->property{1}
+        $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
+                                   -1 => array('atom' => $operands), 
+                                    0 => array('token' => Property::$operators),
+                                    1 => array('atom' => array('String', 'Variable', 'Array', 'Identifier', 'Boolean')),
+                                    2 => array('token' => array('T_OPEN_CURLY', 'T_OPEN_BRACKET')), 
+                                    );
+        
+        $this->actions = array('makeEdge'     => array( -1 => 'OBJECT',
+                                                         1 => 'PROPERTY'),
+                               'atom'         => 'Property',
+                               'cleanIndex'   => true);
+        $this->checkAuto(); 
+        
         // $object->property
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
                                    -1 => array('atom' => $operands), 
                                     0 => array('token' => Property::$operators),
                                     1 => array('atom' => array('String', 'Variable', 'Array', 'Identifier', 'Boolean')),
-                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS')), 
+                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')), 
                                     );
         
         $this->actions = array('makeEdge'     => array( -1 => 'OBJECT',
