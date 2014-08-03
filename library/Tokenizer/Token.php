@@ -501,9 +501,34 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
         }    
 };
 
+
+// fallback for functions : if not defined, then fallback to \
+g.idx('Functioncall')[['token':'node']]
+    .filter{ it.inE('METHOD').any() == false; }
+    .filter{ it.in('NEW').any() == false; }
+    .filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}.each{
+    it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
+}
+
 g.idx('Class')[['token':'node']].each{ 
     g.idx('classes').put('path', it.fullnspath.toLowerCase(), it)
 };
+
+g.idx('Functioncall')[['token':'node']]
+    .filter{ it.inE('METHOD').any() == false; }
+    .filter{ it.in('NEW').any()}
+    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
+    .filter{ uses = []; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').fill(uses).any() }
+    .each{
+        node = it;
+        uses.each{ 
+            path = '\\\\' + it.code + '\\\\'  + node.code; 
+            if (g.idx('classes')[['path':path]].any()) {
+                node.setProperty('fullnspath', path);
+            };
+        }
+    }; 
+
 
 g.idx('Interface')[['token':'node']].each{ 
     g.idx('interfaces').put('path', it.fullnspath.toLowerCase(), it)
