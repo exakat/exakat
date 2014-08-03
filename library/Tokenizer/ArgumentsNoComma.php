@@ -20,7 +20,9 @@ class ArgumentsNoComma extends Arguments {
                                    3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')), 
         );
 
-        $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
+        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
+                               'order'       => array(1 => '0')
+                               );
         $this->checkAuto();
 
         // @note echo (1) : no comma 
@@ -34,7 +36,8 @@ class ArgumentsNoComma extends Arguments {
                                    3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS', 'T_COMMA', 'T_OBJECT_OPERATOR', 'T_DOT', 'T_QUESTION')),
         );
 
-        $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
+        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
+                               'order'       => array(1 => '0'));
         $this->checkAuto();
 
         // @note require (1).$d : no comma 
@@ -48,7 +51,8 @@ class ArgumentsNoComma extends Arguments {
                                    3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS', 'T_DOT')),
         );
 
-        $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
+        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
+                               'order'       => array(1 => '0'));
         $this->checkAuto();
 
         // @note a->{f}(1) : no comma 
@@ -65,7 +69,8 @@ class ArgumentsNoComma extends Arguments {
                                    3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),
         );
 
-        $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
+        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
+                               'order'       => array(1 => '0'));
         $this->checkAuto();
 
         // echo $e
@@ -80,7 +85,8 @@ class ArgumentsNoComma extends Arguments {
                                                               Token::$instruction_ending)),
         );
 
-        $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
+        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
+                               'order'       => array(1 => '0'));
         $this->checkAuto();
 
         return $this->checkRemaining();
