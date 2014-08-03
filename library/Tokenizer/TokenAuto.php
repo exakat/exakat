@@ -2482,7 +2482,7 @@ if (    $it.token != 'T_ELSEIF'
     $it.setProperty('makeSequence3',  ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().getProperty('token') in list_before))) ;
     $it.setProperty('makeSequence31',  $it.in('NEXT').next().atom != null);
     $it.setProperty('makeSequence32',  $it.in('NEXT') .next().token) ;
-    $it.setProperty('makeSequence41',   $it.out('NEXT').next().token);
+    $it.setProperty('makeSequence41',  $it.out('NEXT').next().token);
     $it.setProperty('makeSequence4',   (!($it.out('NEXT').next().token in list_after) ));
     $it.setProperty('makeSequence5',   $it.in_quote != 'true' );
     $it.setProperty('makeSequence6',   $it.in_for != 'true' );
