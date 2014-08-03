@@ -501,7 +501,7 @@ GREMLIN;
     }
 
     function is($property, $value= "'true'") {
-        if ($value == null) {
+        if ($value === null) {
             $this->addMethod("has('$property', null)");
         } else {
             $this->addMethod("filter{ it.$property == ***;}", $value);
@@ -939,9 +939,7 @@ GREMLIN;
 
     function hasIn($edge_name) {
         if (is_array($edge_name)) {
-            // @todo
-            die(" I don't understand arrays in out()");
-            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.outV.count() == 0}", $edge_name);
+            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any()}", $edge_name);
         } else {
             $this->addMethod("filter{ it.in(***).count() != 0}", $edge_name);
         }
