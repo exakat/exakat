@@ -80,7 +80,7 @@ logTime('g.idx("classes")');
 if (DISPLAY) print "$id) $class : filling\n";
 $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
                                  'Rawstring', 'Variable', 'Float', 'Boolean']}.each{ 
-                                 g.idx(it.atom).put('token', it.atom, it); }";
+                                 g.idx(it.atom).put('token', 'node', it); }";
 query($query);
 if (DISPLAY) print "$id) $class : filled\n";
 logTime('g.idx("xxxxx") : filling');
