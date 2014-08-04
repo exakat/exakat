@@ -21,9 +21,9 @@ class _As extends TokenAuto {
                                'makeSequence' => 'it' );
         $this->checkAuto();
         
-        // use A as B, use \A\B as C
+        // use \A\B as C
         $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
-                                   -1 => array('atom'     => array('Namespace', 'Identifier')), 
+                                   -1 => array('atom'     => 'Namespace'), 
                                     0 => array('token'    => _As::$operators,
                                                'atom'     => 'none'),
                                     1 => array('token'    => 'T_STRING')
@@ -33,7 +33,23 @@ class _As extends TokenAuto {
                                                        -1 => 'SUBNAME'),
                                'atom'         => 'As',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it' );
+                               'makeSequence' => 'it');
+        $this->checkAuto();
+
+        // use A as B (adds order)
+        $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
+                                   -1 => array('atom'     => 'Identifier'), 
+                                    0 => array('token'    => _As::$operators,
+                                               'atom'     => 'none'),
+                                    1 => array('token'    => 'T_STRING')
+        );
+        
+        $this->actions = array('makeEdge'     => array( 1 => 'AS',
+                                                       -1 => 'SUBNAME'),
+                               'atom'         => 'As',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it',
+                               'order'        => array(-1 => '0'));
         $this->checkAuto();
         
         return $this->checkRemaining();
