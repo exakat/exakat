@@ -8,11 +8,11 @@ class Nsname extends TokenAuto {
 
     public function _check() {
         // @note \a\b\c (\ initial)
-        $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'), 
+        $this->conditions = array( -2 => array('notToken'   => 'T_NS_SEPARATOR'), 
                                    -1 => array('filterOut2' => 'T_NS_SEPARATOR'), // 'T_STRING', 'T_NAMESPACE'
                                     0 => array('token' => Nsname::$operators,
                                                'atom'  => 'none'),
-                                    1 => array('atom' => 'Identifier'),
+                                    1 => array('atom'  => 'Identifier'),
         );
 
         $this->actions = array('makeNamespace' => true,
