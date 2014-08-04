@@ -1079,7 +1079,7 @@ b.outE('NEXT').each{ g.removeEdge(it) ; }
 p = it;
 nsname = it;
 nsname.setProperty('atom', 'Nsname');
-order = -1;
+order = 0;
 
 subname = p.in('NEXT').next();
 if (subname.getProperty('token') in ['T_STRING', 'T_NAMESPACE']) {
@@ -1093,7 +1093,7 @@ if (subname.getProperty('token') in ['T_STRING', 'T_NAMESPACE']) {
     p.setProperty('absolutens', 'false');
     
 } else {
-    order = -1;
+    order = 0;
     p.setProperty('absolutens', 'true');
 }
 

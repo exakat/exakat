@@ -535,7 +535,7 @@ g.idx('Functioncall')[['token':'node']]
     .has('fullnspath', '')
     .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use')
                                      .out('USE').hasNot('atom', 'As')
-                                     .filter{ it.code == node.out('SUBNAME').has('order', -1).next().code}.fill(uses).any() }
+                                     .filter{ it.code == node.out('SUBNAME').has('order', 0).next().code}.fill(uses).any() }
     .each{
         node = it;
         uses.each{ 
@@ -555,12 +555,14 @@ g.idx('Functioncall')[['token':'node']]
     .filter{ it.in('NEW').any()}
     .has('fullnspath', '')
     .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use')
-                                     .filter{ it.out('USE').out('AS').next().code == node.out('SUBNAME').has('order', -1).next().code}.fill(uses).any() }
+                                     .filter{ it.out('USE').out('AS').next().code == node.out('SUBNAME').has('order', 0).next().code}.fill(uses).any() }
     .each{
         /* there will be only one alias that match! */
         uses.each{ 
             u = node.code.tokenize('\\\\');
-            u[0] = it.out('USE').out('SUBNAME').next().code ;
+            s = [];
+            it.out('USE').out('SUBNAME').sort{it.order}._().each{ s.add(it.fullcode); };
+            u[0] = s.join('\\\\');
             path = '\\\\' + u.join('\\\\'); 
             if (g.idx('classes')[['path':path]].any()) {
                 node.setProperty('fullnspath', path);
