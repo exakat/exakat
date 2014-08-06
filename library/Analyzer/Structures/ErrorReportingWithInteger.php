@@ -19,7 +19,7 @@ class ErrorReportingWithInteger extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->orderIs('ARGUMENT', 0)
              ->atomIs('String')
-             ->is('noDelimiter', "'error_reporting'")
+             ->noDelimiter("error_reporting")
              ->inIs('ARGUMENT')
              ->orderIs('ARGUMENT', 1)
              ->atomIs('Integer')
