@@ -1,20 +1,24 @@
 <?php
 
-$expected     = array('ba( )', 
-                      'f\\ab( )',
-                      'a\\ab( )',
-                      'e\\ab( )',
-                      'ba( )',
-                      'f\\ab( )',
-                      'e\\ab( )',
-                      'ba( )',
-                      'f\\ab( )',
-                      'a\\ab( )',
-                      'ba( )',
-                      'f\\ab( )',
-                      'ab( )',
-                      'ab( )', 
+$expected     = array('ba( )',  // namespace a
+
+                      'ab( )',   // namespace b
                       'ba( )', 
+
+                      'f\\ab( )', // namespace d12
+                      'ba( )',
+
+                      'a\\ab( )', // namespace d1
+                      'f\\ab( )',
+                      'ba( )',
+
+                      'e\\ab( )', // namespace d1
+                      'f\\ab( )',
+                      'ba( )',
+
+                      'e\\ab( )', // namespace d
+                      'a\\ab( )',
+                      'f\\ab( )',
                       'ba( )');
 
 $expected_not = array();

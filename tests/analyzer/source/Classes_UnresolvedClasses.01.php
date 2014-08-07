@@ -14,7 +14,7 @@ namespace b {
 namespace c {
     use a;
 
-    new ab(); // must be found
+    new ab(); // won't be found (lies in b)
     new ba(); // won't be found (lies in b)
 }
 
