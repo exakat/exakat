@@ -94,7 +94,7 @@ if (STYLE == 'BOOLEAN') {
     $return[] = $vertices[0][0];
 } elseif (STYLE == 'ALL') {
       $queryTemplate = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.fullcode, 'File':'None', 'Namespace':'Globaln', 'Class':'Globalc', 'Function':'Globalf' ]; }.as('x').
+g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.fullcode, 'File':'None', 'Line':it.line, 'Namespace':'Globaln', 'Class':'Globalc', 'Function':'Globalf' ]; }.as('x').
 transform{ it.in.loop(1){true}{ it.object.token in ['T_CLASS', 'T_FUNCTION', 'T_NAMESPACE', 'T_FILENAME']}.each{ m[it.atom] = it.code;} m; }.transform{ m; }
 GREMLIN;
 
@@ -105,6 +105,7 @@ GREMLIN;
         $row = array();
         $row[] = $v[0]['Fullcode'];
         $row[] = $v[0]['File'];
+        $row[] = $v[0]['Line'];
         $row[] = $v[0]['Namespace'];
         $row[] = $v[0]['Class'];
         $row[] = $v[0]['Function'];
