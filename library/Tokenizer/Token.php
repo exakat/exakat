@@ -452,8 +452,9 @@ g.idx('Typehint')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.l
     } 
 };
 
-g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsname']}.sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
-    if (fullcode.atom == 'Nsname') {
+g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsname', 'Functioncall']}.sideEffect{fullcode = it;}
+                              .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.atom in ['Nsname', 'Functioncall']) {
         if (fullcode.absolutens == 'true') { 
             fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
         } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
@@ -484,7 +485,7 @@ g.idx('Identifier')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS',
     } 
 };
 
-g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').count() == 0}
+g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
     .filter{it.out('ARGUMENTS').count() == 0}
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
         if (fullcode.absolutens == 'true') { 
@@ -500,7 +501,7 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
             fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
         } else {
             fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
-        }    
+        }
 };
 
 
@@ -508,50 +509,24 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
 g.idx('Functioncall')[['token':'node']]
     .filter{ it.inE('METHOD').any() == false; }
     .filter{ it.in('NEW').any() == false; }
-    .filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}.each{
-
-        it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
-}
-
-g.idx('Functioncall')[['token':'node']]
-    .filter{ it.inE('METHOD').any() == false; }
-    .filter{ it.in('NEW').any(); }
+    .filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}
     .each{
-        it.setProperty('fullnspath', '');
-}
+        it.setProperty('fullnspath', '\\\\' + it.code);
+    }
 
+// collecting classes
 g.idx('Class')[['token':'node']].each{ 
     g.idx('classes').put('path', it.fullnspath.toLowerCase(), it)
 };
 
-// absolute NS
-g.idx('Functioncall')[['token':'node']]
-    .has('token', 'T_NS_SEPARATOR')
-    .filter{ it.in('NEW').any()}
-    .has('fullnspath', '')
-    .has('absolutens', 'true')
-    .each{
-        it.setProperty('fullnspath', it.fullcode);
-    }; 
 
-// local class in its namespace
-g.idx('Functioncall')[['token':'node']]
-    .has('token', 'T_STRING')
-    .filter{ it.in('NEW').any()}
-    .has('fullnspath', '')
-    .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('NAMESPACE')
-                                     .filter{path = '\\\\' + it.code + '\\\\' + node.code; g.idx('classes')[['path':path.toLowerCase()]].any(); }.any();
-            }
-    .each{
-        node.setProperty('fullnspath', path.toLowerCase());
-    }; 
+////// Solving classes Namespaces
 
-// use A (No aliasing, Nsname) + new A\Class
-g.idx('Functioncall')[['token':'node']]
+// use A + new A\Class
+g.idx('New')[['token':'node']]
+    .out('NEW')
     .has('token', 'T_NS_SEPARATOR')
-    .filter{ it.inE('METHOD').any() == false; }
-    .filter{ it.in('NEW').any()}
-    .has('fullnspath', '')
+    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
     .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use')
                                      .out('USE').hasNot('atom', 'As')
                                      .filter{ it.code.toLowerCase() == node.out('SUBNAME').has('order', 0).next().code.toLowerCase()}.fill(uses).any() }
@@ -562,17 +537,16 @@ g.idx('Functioncall')[['token':'node']]
             u[0] = it.code ;
             path = '\\\\' + u.join('\\\\'); 
             if (g.idx('classes')[['path':path.toLowerCase()]].any()) {
-                node.setProperty('fullnspath', path);
+                node.setProperty('fullnspath', path.toLowerCase());
             };
         }
     }; 
 
-// use A (No aliasing, No Nsname) + new A()
-g.idx('Functioncall')[['token':'node']]
+// use A + new A()
+g.idx('New')[['token':'node']]
+    .out('NEW')
     .has('token', 'T_STRING')
-    .filter{ it.inE('METHOD').any() == false; }
-    .filter{ it.in('NEW').any()}
-    .has('fullnspath', '')
+    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
     .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use')
                                      .out('USE').hasNot('atom', 'As')
                                      .filter{ it.code.toLowerCase() == node.code.toLowerCase()}.fill(uses).any() }
@@ -581,17 +555,16 @@ g.idx('Functioncall')[['token':'node']]
         uses.each{ 
             path = '\\\\' + it.code; 
             if (g.idx('classes')[['path':path.toLowerCase()]].any()) {
-                node.setProperty('fullnspath', path);
+                node.setProperty('fullnspath', path.toLowerCase());
             };
         }
     }; 
 
-// use A\B (No aliasing, No Nsname) + new A()
-g.idx('Functioncall')[['token':'node']]
+// use A\B + new A()
+g.idx('New')[['token':'node']]
+    .out('NEW')
     .has('token', 'T_STRING')
-    .filter{ it.inE('METHOD').any() == false; }
-    .filter{ it.in('NEW').any()}
-    .has('fullnspath', '')
+    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
     .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use')
                                      .out('USE').hasNot('atom', 'As')
                                      .filter{ c = it.out('SUBNAME').count() - 1; it.out('SUBNAME').has('order', c.toInteger()).next().code.toLowerCase() == node.code.toLowerCase()}.fill(uses).any() }
@@ -600,17 +573,16 @@ g.idx('Functioncall')[['token':'node']]
         uses.each{ 
             path = '\\\\' + it.fullcode; 
             if (g.idx('classes')[['path':path.toLowerCase()]].any()) {
-                node.setProperty('fullnspath', path);
+                node.setProperty('fullnspath', path.toLowerCase());
             };
         }
     }; 
 
-// use A as B (Aliasing, no Nsname) + new B
-g.idx('Functioncall')[['token':'node']]
+// use A as B + new B
+g.idx('New')[['token':'node']]
+    .out('NEW')
     .has('token', 'T_STRING')
-    .filter{ it.inE('METHOD').any() == false; }
-    .filter{ it.in('NEW').any()}
-    .has('fullnspath', '')
+    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
     .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE')
                                      .filter{ it.out('AS').filter{it.code.toLowerCase() == node.code.toLowerCase()}.any()}.fill(uses).any() }
     .each{
@@ -620,17 +592,16 @@ g.idx('Functioncall')[['token':'node']]
             it.out('SUBNAME').sort{it.order}._().each{ s.add(it.fullcode); };
             path = '\\\\' + s.join('\\\\'); 
             if (g.idx('classes')[['path':path.toLowerCase()]].any()) {
-                node.setProperty('fullnspath', path);
+                node.setProperty('fullnspath', path.toLowerCase());
             };
         }
     }; 
 
-// use A as B (Aliasing, Nsname) + new B\Class
-g.idx('Functioncall')[['token':'node']]
+// use A as B + new B\Class
+g.idx('New')[['token':'node']]
+    .out('NEW')
     .has('token', 'T_NS_SEPARATOR')
-    .filter{ it.inE('METHOD').any() == false; }
-    .filter{ it.in('NEW').any()}
-    .has('fullnspath', '')
+    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
     .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE')
                                      .filter{ it.out('AS').filter{ it.code.toLowerCase() == node.out('SUBNAME').has('order', 0).next().code.toLowerCase()}.any() }.fill(uses).any() }
     .each{
@@ -642,13 +613,10 @@ g.idx('Functioncall')[['token':'node']]
             u[0] = s.join('\\\\');
             path = '\\\\' + u.join('\\\\'); 
             if (g.idx('classes')[['path':path.toLowerCase()]].any()) {
-                node.setProperty('fullnspath', path);
+                node.setProperty('fullnspath', path.toLowerCase());
             };
         }
     }; 
-
-
-
 
 g.idx('Interface')[['token':'node']].each{ 
     g.idx('interfaces').put('path', it.fullnspath.toLowerCase(), it)
@@ -657,8 +625,6 @@ g.idx('Interface')[['token':'node']].each{
 g.idx('Trait')[['token':'node']].each{ 
     g.idx('traits').put('path', it.fullnspath.toLowerCase(), it)
 };
-
-//g.dropIndex('racines');
 
 ";
         Token::query($query);
