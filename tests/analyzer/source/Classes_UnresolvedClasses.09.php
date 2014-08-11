@@ -1,26 +1,26 @@
 <?php
 
-namespace a\b {
+namespace f\a\b {
     class ab {        function __construct() { print __method__."\n";} }
 }
 
-namespace a2\b2 {
+namespace f\a2\b2 {
     class ab {        function __construct() { print __method__."\n";} }
 }
 
-namespace a {
+namespace f\a {
     class b {        function __construct() { print __method__."\n";} }
 }
 
-namespace a2 {
+namespace f\a2 {
     class b2 {        function __construct() { print __method__."\n";} }
 }
 
-namespace b\c {
+namespace f\b\c {
     class ba {        function __construct() { print __method__."\n";} }
 }
 
-namespace {
+namespace f {
     class g {        function __construct() { print __method__."\n";} }
     class g2 {        function __construct() { print __method__."\n";} }
 
@@ -28,13 +28,9 @@ namespace {
     class a2 {        function __construct() { print __method__."\n";} }
 }
 
-namespace d {
-    use a\b as e, a2\b2 as e2;  // import an alias for a class as a full replacement for a class 
-
-    use a, a2; // import a namespace as an authorized prefix
-
-    use g, g2; // import a namespace as an authorized prefix
-    use g as h, g2 as h2; // import a namespace as an authorized prefix
+namespace f\d {
+    use f\a\b as e, f\a2\b2 as e2;  // import an alias for a class as a full replacement for a class 
+    use f\g as h, f\g2 as h2; // import a namespace as an authorized prefix
 
     new g();
     new h();
