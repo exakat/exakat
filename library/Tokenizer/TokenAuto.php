@@ -1624,13 +1624,16 @@ $fullcode
 x = g.addVertex(null, [code:'Typehint', atom:'Typehint', token:'T_TYPEHINT', virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
-a.fullcode = a.code;
+//a.fullcode = a.code;
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').out('NEXT').next(), 'NEXT');
 
 g.addEdge(x, a, 'CLASS');
-a.has('token', 'T_ARRAY').each{ it.setProperty('atom', 'Identifier'); }
+a.has('token', 'T_ARRAY').each{ 
+    it.setProperty('atom', 'Identifier'); 
+    it.setProperty('fullcode', it.code); 
+}
 g.addEdge(x, a.out('NEXT').next(), 'VARIABLE');
 
 a.out('NEXT').bothE('NEXT').each{ g.removeEdge(it);}    
