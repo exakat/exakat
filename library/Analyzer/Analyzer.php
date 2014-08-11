@@ -892,12 +892,21 @@ GREMLIN;
     }
 
     function orderIs($edge_name, $order) {
-        $order = intval($order);
+        if ($order == 'first') {
+            $order = '0';
+        } else if ($order == 'last') {
+            $this->addMethod("sideEffect{ order = it.out(***).count() - 1;}", $edge_name);
+            $this->addMethod("out(***).filter{it.getProperty('order')  == order}", $edge_name);
+            return $this;
+        } else {
+            $order = abs(intval($order));
+        }
+        
         if (is_array($edge_name)) {
             // @todo
             die(" I don't understand arrays in orderIs()");
         } else {
-            $this->addMethod("out(***).has('order', ***)", $edge_name, $order);
+            $this->addMethod("out(***).filter{it.getProperty('order')  == ***}", $edge_name, $order);
         }
         
         return $this;
