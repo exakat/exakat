@@ -39,7 +39,8 @@ class Phpcode extends TokenAuto {
         $this->conditions = array(0 => array('token' => Phpcode::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'yes'),
-                                  2 => array('token' => 'T_SEMICOLON'),
+                                  2 => array('token' => 'T_SEMICOLON',
+                                             'atom'  => 'none'),
                                   3 => array('token' => 'T_END'),
         );
         
@@ -54,7 +55,8 @@ class Phpcode extends TokenAuto {
         $this->conditions = array(0 => array('token' => Phpcode::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'yes'),
-                                  2 => array('token' => 'T_SEMICOLON'),
+                                  2 => array('token' => 'T_SEMICOLON',
+                                             'atom'  => 'none'),
                                   3 => array('token' => 'T_CLOSE_TAG'),
         );
         
