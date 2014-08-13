@@ -261,8 +261,9 @@ class Token {
 
     
     static public function cleanHidden() {
-        $query = " 
+        $queries = array( " 
 
+// cleans root token
 g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
     g.removeVertex(it.in('NEXT').in('NEXT').next()); 
     g.removeVertex(it.out('NEXT').next()); 
@@ -273,14 +274,20 @@ g.V.has('root', 'true')[0].inE('INDEXED').each{
     g.removeEdge(it); 
 };
 
-g.V.has('index', 'true').filter{it.out().count() == 0}.each{
-    g.removeVertex(it);
-};
-
 g.idx('delete')[['node':'delete']].each{
     g.removeVertex(it);
 }
 
+// clean indexed (if no more index...)
+g.V.has('index', 'true').filter{it.out().count() == 0}.each{
+    g.removeVertex(it);
+};
+// running twice the query, for better cleaning (why so?)
+g.V.has('index', 'true').filter{it.out().count() == 0}.each{
+    g.removeVertex(it);
+};
+
+", "
 //////////////////////////////////////////////////////////////////////////////////////////
 // calculating variable namespace
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -296,6 +303,7 @@ g.idx('Variable')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){it.obj
     }
 };
 
+", "
 //////////////////////////////////////////////////////////////////////////////////////////
 // calculating the full namespaces paths
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -312,9 +320,9 @@ g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any()}.side
 g.idx('Const')[['token':'node']].filter{it.in('ELEMENT').in('BLOCK').any() == false}.each{ 
     it.setProperty('fullnspath', '\\\\' + it.out('NAME').next().fullcode.toLowerCase());
 };
-
+", "
 // Const (out of a class) with define
-g.idx('Functioncall')[['token':'node']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('order', 0).as('name')
+g.idx('Functioncall')[['token':'node']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('order', 0).as('name').has('atom', 'String')
     .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.sideEffect{ ns = it; }.back('name')
 .each{ 
     if (ns.atom == 'File') {
@@ -324,7 +332,7 @@ g.idx('Functioncall')[['token':'node']].has('code', 'define').out('ARGUMENTS').o
     }
     g.idx('constants').put('path', it.fullnspath, it)
 };
-
+", "
 // function definitions
 g.idx('Function')[['token':'node']].filter{it.out('NAME').next().code != ''}.sideEffect{fullcode = it.out('NAME').next();}
     .filter{it.in('ELEMENT').in('BLOCK').any() == false || !(it.in('ELEMENT').in('BLOCK').next().atom in ['Class', 'Interface'])}
@@ -337,7 +345,7 @@ g.idx('Function')[['token':'node']].filter{it.out('NAME').next().code != ''}.sid
 
     g.idx('functions').put('path', fullcode.fullnspath.toLowerCase(), fullcode);
 };
-
+", "
 // class definitions
 g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (it.atom == 'File' || it.fullcode == 'namespace Global') {
@@ -356,7 +364,7 @@ g.idx('Class')[['token':'node']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcod
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
     }
 };
-
+", "
 // trait definitions
 g.idx('Trait')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (it.atom == 'File' || it.fullcode == 'namespace Global') {
@@ -376,8 +384,8 @@ g.idx('Interface')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.
 };
 
 // also add interfaces and Traits and their respective extensions
+", "
 
-// function usage
 g.idx('Functioncall')[['token':'node']].filter{it.in('METHOD').any() == false}
                                        .filter{it.in('NEW').any() == false}
                                        .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}
@@ -391,6 +399,16 @@ g.idx('Functioncall')[['token':'node']].filter{it.in('METHOD').any() == false}
     } 
 };
 
+// function usage
+// fallback for functions : if not defined, then fallback to \
+g.idx('Functioncall')[['token':'node']]
+    .filter{ it.inE('METHOD').any() == false; }
+    .filter{ it.in('NEW').any() == false; }
+    .filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}
+    .each{
+        it.setProperty('fullnspath', '\\\\' + it.code);
+    }
+
 // class usage
 g.idx('Staticmethodcall')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
@@ -401,7 +419,7 @@ g.idx('Staticmethodcall')[['token':'node']].out('CLASS').sideEffect{fullcode = i
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
     } 
 };
-
+", "
 g.idx('Staticproperty')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
         fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
@@ -431,7 +449,7 @@ g.idx('Instanceof')[['token':'node']].out('RIGHT').sideEffect{fullcode = it;}.in
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
     } 
 };
-
+", "
 g.idx('Catch')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
         fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
@@ -470,8 +488,8 @@ g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
         }           
     }
 };
-
-// Constant usage
+", "
+// Constant usage (1)
 g.idx('Identifier')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').count() == 0}
     .filter{it.out('ARGUMENTS').count() == 0}
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
@@ -484,7 +502,8 @@ g.idx('Identifier')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS',
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
     } 
 };
-
+", "
+// Constant usage (2)
 g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NAME', 'CONSTANT', 'NAMESPACE', 'NEW', 'IMPLEMENTS', 'EXTENDS').any() == false}
     .filter{it.out('ARGUMENTS').count() == 0}
     .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
@@ -503,21 +522,13 @@ g.idx('Nsname')[['token':'node']].filter{it.in('SUBNAME', 'METHOD', 'CLASS', 'NA
             fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
         }
 };
-
-// fallback for functions : if not defined, then fallback to \
-g.idx('Functioncall')[['token':'node']]
-    .filter{ it.inE('METHOD').any() == false; }
-    .filter{ it.in('NEW').any() == false; }
-    .filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}
-    .each{
-        it.setProperty('fullnspath', '\\\\' + it.code);
-    }
-
+", "
 // collecting classes
 g.idx('Class')[['token':'node']].each{ 
     g.idx('classes').put('path', it.fullnspath.toLowerCase(), it)
 };
 
+", "
 ////// Solving classes Namespaces
 
 // absolute namespaces
@@ -529,7 +540,7 @@ g.idx('Functioncall')[['token':'node']]
         it.setProperty('fullnspath', it.fullcode);
     }; 
 
-
+", "
 // use A + new A\Class
 g.idx('New')[['token':'node']]
     .out('NEW')
@@ -651,7 +662,7 @@ g.idx('Nsname')[['token':'node']]
             };
         }
     }; 
-
+", "
 // local class in its namespace
 g.idx('New')[['token':'node']]
     .out('NEW')
@@ -671,12 +682,19 @@ g.idx('Trait')[['token':'node']].each{
     g.idx('traits').put('path', it.fullnspath.toLowerCase(), it)
 };
 
-";
-        Token::query($query);
+"
+);
+
+        foreach($queries as $query) {
+            // @todo make this //
+            Token::query($query);
+        }
     }
 
     static public function finishSequence() {
         $query = " 
+
+// remove root token when there are no NEXT to process 
 g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot('atom',null).out('NEXT').has('token', 'T_END').each{ 
     g.removeVertex(it.in('NEXT').in('NEXT').next()); 
     g.removeVertex(it.out('NEXT').next()); 
