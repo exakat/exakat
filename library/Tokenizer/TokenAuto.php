@@ -1398,6 +1398,7 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
     previous.setProperty('checkForNext', 'Previous');
 }
 
+// Special case for Block (Sequence + block)
 while ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any() &&
     !it.in('NEXT').in('NEXT').filter{it.token in ['T_IF']}.any() &&
     !it.in('NEXT').in('NEXT').filter{!(it.token in [ 'T_USE', 'T_VOID'])}.any()) { //'T_OPEN_PARENTHESIS',
@@ -1415,6 +1416,7 @@ while ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any(
     previous.setProperty('checkForNext', 'Previous Block ' + it.in('NEXT').in('NEXT').next().token + ' / ' + it.in('NEXT').in('NEXT').filter{!(it.token in ['T_OPEN_PARENTHESIS', 'T_VOID', 'T_USE', 'T_IF'])}.count() );
 }
 
+// processing a sequence (Only the next sequence)
 while (it.out('NEXT').has('atom', 'Sequence').any()) {
     sequence = it;
     c = sequence.out('ELEMENT').count();
@@ -1476,6 +1478,7 @@ while (it.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).any()) {
     g.idx('delete').put('node', 'delete', semicolon);
 }
 
+// cleaning INDEXED links when there are no more NEXT
 if (it.both('NEXT').count() == 0) {
     it.inE('INDEXED').each{ g.removeEdge(it); }
 }
