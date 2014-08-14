@@ -1378,7 +1378,7 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
                                                         'Postplusplus', 'Preplusplus', 'Return', 'Class', 'Phpcode' ] && 
                                       it.getProperty('token') != 'T_ELSEIF'}.any() && 
     it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 
-                                                    'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 
+                                                    'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 
                                                     'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
                                                     'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_DOT'])}.any() && 
     !it.in('NEXT').in('NEXT').filter{ it.token == 'T_COLON' && it.association == 'Ternary' }.any() 
@@ -1451,7 +1451,7 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
                                                      'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_INSTANCEOF', 'T_QUESTION'])}.
                                filter{it.atom != null || !(it.token in ['T_ELSEIF', 'T_OPEN_CURLY', 'T_AND_EQUAL',
                                                      'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL',
-                                                     'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL',
+                                                     'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 
                                                      'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL',
                                                      'T_SR_EQUAL'])}.any()) {
     sequence = it;
@@ -2349,14 +2349,14 @@ x.out('ELEMENT').each{
 
 list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
         'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE',
-        'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
+        'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
         'T_COMMA', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
         'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 
         'T_ECHO', 'T_PRINT',
         'T_EXTENDS', 'T_IMPLEMENTS', 'T_USE',
         'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
         'T_PLUS', 'T_MINUS',
-        'T_STAR', 'T_SLASH', 'T_PERCENTAGE',
+        'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_POW',
         'T_COLON', 'T_NEW', 'T_DOT', 
         'T_SR','T_SL', 'T_CURLY_OPEN',
         'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_VAR',
@@ -2379,7 +2379,7 @@ list_after = [
         'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 
         'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
         'T_PLUS', 'T_MINUS',
-        'T_STAR', 'T_SLASH', 'T_PERCENTAGE',
+        'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_POW',
         'T_COLON', 'T_NEW', 'T_DOT', 
         'T_SR','T_SL', 'T_CURLY_OPEN',
         'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
@@ -2392,9 +2392,9 @@ list_after = [
 list_after_token = [
         'T_OBJECT_OPERATOR', 'T_INC', 'T_DEC', 
         'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
-        'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
+        'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
         'T_AND_EQUAL', 'T_CONCAT_EQUAL', 
-        'T_STAR', 'T_SLASH', 'T_PERCENTAGE',
+        'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_POW',
         'T_PLUS', 'T_MINUS',
         'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
         'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',

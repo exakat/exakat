@@ -9,11 +9,11 @@ class Concatenation extends TokenAuto {
     public function _check() {
         $operands = array('String', 'Identifier', 'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign', 'Array',
                           'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
-                          'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 
+                          'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 'Power',
                           'Preplusplus', 'Postplusplus', 'Cast', 'Assignation', 'Nsname' );
         
         $this->conditions = array(-2 => array('filterOut' => array_merge(Addition::$operators, Multiplication::$operators,
-                                                                         Preplusplus::$operators, 
+                                                                         Preplusplus::$operators, Power::$operators, 
                                                             array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR'))), 
                                   -1 => array('atom'  => $operands ),
                                    0 => array('token' => Concatenation::$operators,

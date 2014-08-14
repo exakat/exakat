@@ -9,7 +9,7 @@ class Multiplication extends TokenAuto {
                                     'String', 'Identifier', 'Preplusplus', 'Postplusplus', 'Nsname', 'Functioncall',
                                     'Methodcall', 'Staticmethodcall', 'Concatenation', 'Cast',
                                     'Noscream', 'Staticconstant', 'Staticproperty', 'Constant', 
-                                    'Boolean', 'Magicconstant', 'Assignation', 'Include' );
+                                    'Boolean', 'Magicconstant', 'Assignation', 'Include', 'Power' );
     static public $atom = 'Multiplication';
     
     public function _check() {
@@ -17,14 +17,16 @@ class Multiplication extends TokenAuto {
         $this->conditions = array(-2 => array('filterOut' => array_merge(Property::$operators, 
                                                                          Staticproperty::$operators,
                                                                          Concatenation::$operators, 
-                                                                         Preplusplus::$operators)),
+                                                                         Preplusplus::$operators,
+                                                                         Power::$operators)),
                                   -1 => array('atom' => Multiplication::$operands ),
                                    0 => array('token' => Multiplication::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => Multiplication::$operands),
                                    2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
                                                                                'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR'),
-                                                                          Assignation::$operators)),
+                                                                          Assignation::$operators,
+                                                                          Power::$operators)),
         );
         
         $this->actions = array('makeEdge'     => array(  1 => 'RIGHT',

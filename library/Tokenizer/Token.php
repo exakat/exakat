@@ -33,6 +33,7 @@ class Token {
                                  'FunctioncallArray',
                                  'Methodcall',
                                  'Not', 
+                                 'Power', 
                                  'Multiplication', 
                                  'Addition', 
                                  'Parenthesis', 

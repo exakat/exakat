@@ -15,7 +15,7 @@ class Addition extends TokenAuto {
                                               'atom' => 'none'),
                                    1 => array('atom' => Multiplication::$operands),
                                    2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR',),
-                                                                        Multiplication::$operators, 
+                                                                        Multiplication::$operators, Power::$operators,
                                                                         Assignation::$operators)
                                    ),
         );

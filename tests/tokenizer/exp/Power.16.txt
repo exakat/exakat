@@ -1,0 +1,24 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    .
+    Label : CONCAT
+      **
+      Label : RIGHT
+        '3'
+      Label : LEFT
+        2
+    Label : CONCAT
+      $s2
+  Label : ELEMENT
+    **
+    Label : RIGHT
+      1
+    Label : LEFT
+      .
+      Label : CONCAT
+        '1'
+      Label : CONCAT
+        $s

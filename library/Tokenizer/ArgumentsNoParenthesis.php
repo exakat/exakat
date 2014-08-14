@@ -8,7 +8,7 @@ class ArgumentsNoParenthesis extends Arguments {
     static public $atom = 'Arguments';
 
     public function _check() {
-        // @note echo 's' : no parenthesis
+        // @note print 's' : no parenthesis
         $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                     0 => array('atom'       => 'none',
                                                'token'      => array('T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 
@@ -20,6 +20,7 @@ class ArgumentsNoParenthesis extends Arguments {
                                                                            'T_EQUAL', 'T_QUESTION', 'T_OPEN_PARENTHESIS', 
                                                                            'T_OPEN_BRACKET', 'T_OPEN_CURLY',),
                                                                            Addition::$operators, Multiplication::$operators, 
+                                                                           Power::$operators, 
                                                                            Bitshift::$operators, Logical::$operators,
                                                                            Postplusplus::$operators, Comparison::$operators)) 
         );
@@ -28,6 +29,7 @@ class ArgumentsNoParenthesis extends Arguments {
                                'keepIndexed' => true);
         $this->checkAuto();
 
+        // @note special case for echo 's' : no parenthesis
         $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                     0 => array('atom'       => 'none',
                                                'token'      => 'T_ECHO'),
@@ -38,6 +40,7 @@ class ArgumentsNoParenthesis extends Arguments {
                                                                            'T_EQUAL', 'T_QUESTION', 'T_OPEN_PARENTHESIS', 
                                                                            'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_COMMA', ),
                                                                            Addition::$operators, Multiplication::$operators, 
+                                                                           Power::$operators, 
                                                                            Bitshift::$operators, Logical::$operators,
                                                                            Postplusplus::$operators, Comparison::$operators)) 
         );
