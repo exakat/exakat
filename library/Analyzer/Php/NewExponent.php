@@ -7,7 +7,7 @@ use Analyzer;
 class NewExponent extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Functioncall")
-             ->code('pow');
+             ->fullnspath('\\pow');
         $this->prepareQuery();
     }
 }
