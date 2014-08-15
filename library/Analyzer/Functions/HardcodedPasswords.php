@@ -6,11 +6,15 @@ use Analyzer;
 
 class HardcodedPasswords extends Analyzer\Analyzer {
     public function analyze() {
-        $passwords = array('mysql_connect' => 3,
+        $passwords = array(
+                           'mysql_connect'  => 3,
                            'mysqli_connect' => 3,
-                           'ftp_login' => 3,
-                           'mssql_connect' => 3,
-                           'oci_connect' => 2);
+                           'ftp_login'      => 3,
+                           'mssql_connect'  => 3,
+                           'oci_connect'    => 2,
+                           'imap_open'      => 3,
+                           'cyrus_authenticate' => 8,
+                           );
         
         $positions = array();
         foreach($passwords as $function => $position) {
