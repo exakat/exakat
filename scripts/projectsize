@@ -1,0 +1,13 @@
+<?php
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$db = new Db('exakat');
+
+$res = $db->query('SELECT * FROM projects GROUP BY project ORDER BY tokens');
+while($row = $res->fetch_Assoc()) {
+    print substr($row['project'].str_repeat(' ', 50), 0, 50)."\t".substr('     '.number_format(($row["tokens"] / 1000), 1, '.', ' ')." kT ", -12, -1)."\n";
+}
+
+?>
