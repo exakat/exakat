@@ -1,0 +1,97 @@
+<?php
+
+namespace Analyzer\Variables;
+
+use Analyzer;
+
+class IsRead extends Analyzer\Analyzer {
+    public function analyze() {
+        $this->atomIs("Variable")
+             ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
+                           'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW' ));
+            // note : NAME is for Switch!!
+        $this->prepareQuery();
+
+        // right or left, same 
+        $this->atomIs("Variable")
+             ->inIs(array('RIGHT', 'LEFT'))
+             ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift', 'Instanceof'))
+             ->back('first');
+        $this->prepareQuery();
+
+        // right only
+        $this->atomIs("Variable")
+             ->inIs('RIGHT')
+             ->atomIs('Assignation')
+             ->back('first');
+        $this->prepareQuery();
+
+        // variable in a sequence (also useless...)
+        $this->atomIs("Variable")
+             ->inIs('ELEMENT')
+             ->atomIs('Sequence')
+             ->back('first');
+        $this->prepareQuery();    
+
+        // array only
+        $this->atomIs("Variable")
+             ->inIs('VARIABLE')
+             ->atomIs(array('Array', 'Arrayappend'))
+             ->back('first');
+        $this->prepareQuery();
+
+        // arguments : Typehint
+        $this->atomIs("Variable")
+             ->inIs('VARIABLE')
+             ->atomIs('Typehint')
+             ->back('first');
+        $this->prepareQuery();    
+
+        // arguments : normal variable
+        $this->atomIs("Variable")
+             ->inIs('ARGUMENT')
+             ->back('first');
+        $this->prepareQuery();    
+
+        // PHP functions that are passed by value
+        $data = new \Data\Methods();
+        
+        $functions = $data->getFunctionsValueArgs();
+        $references = array();
+        
+        foreach($functions as $function) {
+            if (!isset($references[$function['position']])) {
+                $references[$function['position']] = array('\\'.$function['function']);
+            } else {
+                $references[$function['position']][] = '\\'.$function['function'];
+            }
+        }
+        
+        foreach($references as $position => $functions) {
+            $this->atomIs("Variable")
+                 ->is('order', $position)
+                 ->analyzerIs('Analyzer\\Variables\\Variablenames')
+                 ->inIs('ARGUMENT')
+                 ->inIs('ARGUMENTS')
+                 ->atomIs('Functioncall')
+                 ->hasNoIn('METHOD')
+                 ->fullnspath($functions)
+                 ->back('first');
+            $this->prepareQuery();
+        }
+
+        // Class constructors
+            $this->atomIs("Variable")
+                 ->analyzerIsNot('Analyzer\\Variables\\IsRead')
+                 ->analyzerIs('Analyzer\\Variables\\Variablenames')
+                 ->inIs('ARGUMENT')
+                 ->inIs('ARGUMENTS')
+                 ->atomIs('Functioncall')
+                 ->hasNoIn('METHOD')
+                 ->hasIn('NEW')
+                 ->classDefinition();
+            $this->prepareQuery();
+    }
+}
+
+?>
