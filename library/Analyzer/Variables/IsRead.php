@@ -47,11 +47,20 @@ class IsRead extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();    
 
-        // arguments : normal variable
+        // arguments : normal variable in a custom function
         $this->atomIs("Variable")
+             ->savePropertyAs('order', 'order')
              ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->hasNoIn('METHOD') // possibly new too
+             ->functionDefinition()
+             ->inIs('NAME')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('order', 'order', true)
+             ->isNot('reference', 'true')
              ->back('first');
-        $this->prepareQuery();    
+        $this->prepareQuery();  
 
         // PHP functions that are passed by value
         $data = new \Data\Methods();
@@ -70,7 +79,6 @@ class IsRead extends Analyzer\Analyzer {
         foreach($references as $position => $functions) {
             $this->atomIs("Variable")
                  ->is('order', $position)
-                 ->analyzerIs('Analyzer\\Variables\\Variablenames')
                  ->inIs('ARGUMENT')
                  ->inIs('ARGUMENTS')
                  ->atomIs('Functioncall')

@@ -24,6 +24,21 @@ class IsModified extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // arguments : reference variable in a custom function
+        $this->atomIs("Variable")
+             ->savePropertyAs('order', 'order')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->hasNoIn('METHOD') // possibly new too
+             ->functionDefinition()
+             ->inIs('NAME')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('order', 'order', true)
+             ->is('reference', 'true')
+             ->back('first');
+        $this->prepareQuery();  
+
         // PHP functions that are references
         $data = new \Data\Methods();
         
