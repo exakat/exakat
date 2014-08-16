@@ -132,6 +132,7 @@ while(check_prev($prev, $extra_rounds)) {
         
         $log->log( get_class($r)."\t".(($end - $begin) * 1000)."\t".$r->remaining."\t".$r->done."\t".number_format(100 * $ratio, 0));
     }
+    $log->log("Finished foreach");
     unset($precedence);
     Token::finishSequence();
     
@@ -149,7 +150,6 @@ while(check_prev($prev, $extra_rounds)) {
         $count_prev = $count;
     }
     
-
     if (isset($count_file)) {
         $count_file_prev = $count_file;
         $count_file = Token::countFileToProcess();
