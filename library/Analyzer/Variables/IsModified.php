@@ -56,7 +56,6 @@ class IsModified extends Analyzer\Analyzer {
         foreach($references as $position => $functions) {
             $this->atomIs("Variable")
                  ->is('order', $position)
-                 ->analyzerIs('Analyzer\\Variables\\Variablenames')
                  ->inIs('ARGUMENT')
                  ->inIs('ARGUMENTS')
                  ->atomIs('Functioncall')
