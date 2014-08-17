@@ -26,6 +26,7 @@ class ArgumentsNoParenthesis extends Arguments {
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
+                               'order'       => array(1 => '0'),
                                'keepIndexed' => true);
         $this->checkAuto();
 
@@ -46,6 +47,7 @@ class ArgumentsNoParenthesis extends Arguments {
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
+                               'order'       => array(1 => '0'),
                                'keepIndexed' => true);
         $this->checkAuto();
 
