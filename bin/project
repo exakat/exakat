@@ -113,6 +113,11 @@ logTime('Report');
 logProgress($project, $progress++ / $total_steps);
 
 print "Project reported\n";
+
+shell_exec('php bin/stat > ./projects/'.$project.'/log/stat.log');
+logProgress($project, $progress++ / $total_steps);
+print "Stats 2\n";
+
 $db->query('UPDATE project_runs SET `date_finish` = '.date('Y-m-d H:i:s').' WHERE id = '.$project_run);
 logTime('Final');
 
