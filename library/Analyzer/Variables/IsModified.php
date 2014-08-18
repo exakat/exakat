@@ -39,6 +39,21 @@ class IsModified extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();  
 
+        // function/methods definition : all modified by incoming values
+        // simple variable
+        $this->atomIs("Function")
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Variable');
+        $this->prepareQuery();  
+
+        $this->atomIs("Function")
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Typehint')
+             ->outIs('VARIABLE');
+        $this->prepareQuery();  
+
         // PHP functions that are references
         $data = new \Data\Methods();
         
