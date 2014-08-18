@@ -403,6 +403,7 @@ g.idx('Functioncall')[['token':'node']].filter{it.in('METHOD').any() == false}
 // function usage
 // fallback for functions : if not defined, then fallback to \
 g.idx('Functioncall')[['token':'node']]
+    .has('token', 'T_STRING')
     .filter{ it.inE('METHOD').any() == false; }
     .filter{ it.in('NEW').any() == false; }
     .filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}
