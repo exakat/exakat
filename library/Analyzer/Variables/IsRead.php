@@ -5,6 +5,10 @@ namespace Analyzer\Variables;
 use Analyzer;
 
 class IsRead extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Analyzer\\Classes\\Constructor');
+    }
+    
     public function analyze() {
         $this->atomIs("Variable")
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
@@ -88,17 +92,26 @@ class IsRead extends Analyzer\Analyzer {
             $this->prepareQuery();
         }
 
-        // Class constructors
-            $this->atomIs("Variable")
-                 ->analyzerIsNot('Analyzer\\Variables\\IsRead')
-                 ->analyzerIs('Analyzer\\Variables\\Variablenames')
-                 ->inIs('ARGUMENT')
-                 ->inIs('ARGUMENTS')
-                 ->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->hasIn('NEW')
-                 ->classDefinition();
-            $this->prepareQuery();
+        // Class constructors (__construct)
+        $this->atomIs("Variable")
+             ->savePropertyAs('order', 'order')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->atomIs('Functioncall')
+             ->hasIn('NEW')
+             ->classDefinition()
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->_as('method')
+             ->outIs('NAME')
+             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->back('method')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('order', 'order', true)
+             ->isNot('reference', 'true')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

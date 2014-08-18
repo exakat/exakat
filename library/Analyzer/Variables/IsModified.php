@@ -5,6 +5,10 @@ namespace Analyzer\Variables;
 use Analyzer;
 
 class IsModified extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Analyzer\\Classes\\Constructor');
+    }
+    
     public function analyze() {
         $this->atomIs("Variable")
              ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'DEFINE', 'CAST'))
@@ -79,6 +83,27 @@ class IsModified extends Analyzer\Analyzer {
                  ->back('first');
             $this->prepareQuery();
         }
+
+        // Class constructors (__construct)
+        $this->atomIs("Variable")
+             ->savePropertyAs('order', 'order')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->atomIs('Functioncall')
+             ->hasIn('NEW')
+             ->classDefinition()
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->_as('method')
+             ->outIs('NAME')
+             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->back('method')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('order', 'order', true)
+             ->is('reference', 'true')
+             ->back('first');
+        $this->prepareQuery(); 
     }
 }
 
