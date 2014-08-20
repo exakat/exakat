@@ -69,11 +69,33 @@ s = [];
 fullcode.out("USE").sort{it.order}._().each{ 
     s.add(it.getProperty('fullcode')); 
 };
-
-// cache for fullname
-// cache for last element of the fullname
-
 fullcode.setProperty('fullcode', fullcode.getProperty('code') + " " + s.join(", "));
+
+fullcode.out('USE').has('token', 'T_NS_SEPARATOR').each{
+    s = [];
+    it.out("SUBNAME").sort{it.order}._().each{ 
+        s.add(it.getProperty('code')); 
+    };
+    it.setProperty('originpath', s.join('\\\\'));
+    
+    it.setProperty('originlastpath', s.pop());
+}
+
+fullcode.out('USE').has('token', 'T_AS').each{
+    s = [];
+    it.out("SUBNAME").sort{it.order}._().each{ 
+        s.add(it.getProperty('code')); 
+    };
+    it.setProperty('originpath', s.join('\\\\'));
+    
+    it.setProperty('originlastpath', s.pop());
+}
+
+fullcode.out('USE').has('token', 'T_STRING').each{
+    it.setProperty('originpath', it.code);
+    
+    it.setProperty('originlastpath', it.code);
+}
 
 GREMLIN;
     }
