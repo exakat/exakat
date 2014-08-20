@@ -67,12 +67,11 @@ class _Use extends TokenAuto {
 
 s = [];
 fullcode.out("USE").sort{it.order}._().each{ 
-    a = it.getProperty('fullcode');
-    it.out('AS').each{
-        a = a + ' as ' + it.getProperty('code');
-    }
-    s.add(a); 
+    s.add(it.getProperty('fullcode')); 
 };
+
+// cache for fullname
+// cache for last element of the fullname
 
 fullcode.setProperty('fullcode', fullcode.getProperty('code') + " " + s.join(", "));
 
