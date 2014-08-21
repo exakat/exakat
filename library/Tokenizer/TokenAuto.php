@@ -279,6 +279,7 @@ g.addEdge(g.idx('racines')[['token':'Sequence']].next(), root, 'INDEXED');
 
 arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
     ppp = g.addVertex(null, [code:'ppp', atom:'Ppp', token:token, virtual:true, line:it.line, fullcode:'ppp (to_var_new)']);
+    g.idx('Ppp').put('token','node', ppp);
 
     var.out('PUBLIC', 'PRIVATE', 'PROTECTED', 'STATIC').each{
         option = g.addVertex(null, [code:it.code, fullcode:it.code, atom:it.atom, token:it.token, virtual:true, line:it.line]);
@@ -308,6 +309,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
         option = g.addVertex(null, [code:it.code, fullcode:it.code, atom:it.atom, token:it.token, virtual:true, line:it.line]);
         g.addEdge(ppp, option, it.code.toUpperCase());
     }
+    g.idx('Ppp').put('token','node', ppp);
 
     ppp.setProperty('order', it.order);
     g.addEdge(root, ppp, 'ELEMENT');
@@ -470,6 +472,7 @@ root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
     ppp = g.addVertex(null, [code:'var', atom:'Ppp', token:token, virtual:true, line:it.line]);
+    g.idx('Ppp').put('token','node', ppp);
 
     fullcode = ppp;
     $fullcode
@@ -492,6 +495,7 @@ arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
     ppp = g.addVertex(null, [code:'var', atom:'Ppp', token:token, virtual:true, line:it.line]);
+    g.idx('Ppp').put('token','node', ppp);
     fullcode = ppp;
     $fullcode
     
