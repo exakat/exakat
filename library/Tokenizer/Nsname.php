@@ -21,7 +21,7 @@ class Nsname extends TokenAuto {
                                'makeSequence'  => 'it'
                                );
         $this->checkAuto();
-        
+
         // @note a\b\c as F
         $this->conditions = array( 0 => array('token' => Nsname::$operators),
                                    1 => array('token' => 'T_AS'),
@@ -30,7 +30,7 @@ class Nsname extends TokenAuto {
         
         $this->actions = array('transform'     => array( 1 => 'DROP',
                                                          2 => 'AS' ),
-                               'atom'          => 'Nsname',
+                               'atom'          => 'As',
                                'cleanIndex'    => true,
                                'makeSequence'  => 'it'
                                );
@@ -55,6 +55,10 @@ if (s.size() == 0) { // no ELEMENT : simple NS
     fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + fullcode.getProperty('code'));
 } else {
     fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + s.join("\\\\"));
+}
+
+fullcode.out('AS').each{
+    fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + ' as ' + it.code);
 }
 
 GREMLIN;
