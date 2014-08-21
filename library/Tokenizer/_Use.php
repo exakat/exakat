@@ -67,34 +67,50 @@ class _Use extends TokenAuto {
 
 s = [];
 fullcode.out("USE").sort{it.order}._().each{ 
-    s.add(it.getProperty('fullcode')); 
+    a = it.getProperty('fullcode');
+    s.add(a); 
 };
 fullcode.setProperty('fullcode', fullcode.getProperty('code') + " " + s.join(", "));
 
-fullcode.out('USE').has('token', 'T_NS_SEPARATOR').each{
-    s = [];
-    it.out("SUBNAME").sort{it.order}._().each{ 
-        s.add(it.getProperty('code')); 
-    };
-    it.setProperty('originpath', s.join('\\\\'));
-    
-    it.setProperty('originlastpath', s.pop());
-}
-
-fullcode.out('USE').has('token', 'T_AS').each{
-    s = [];
-    it.out("SUBNAME").sort{it.order}._().each{ 
-        s.add(it.getProperty('code')); 
-    };
-    it.setProperty('originpath', s.join('\\\\'));
-    
-    it.setProperty('originlastpath', s.pop());
-}
-
-fullcode.out('USE').has('token', 'T_STRING').each{
+// use a (aka c);
+fullcode.out('USE').has('atom', 'Identifier').each{
     it.setProperty('originpath', it.code);
     
-    it.setProperty('originlastpath', it.code);
+    it.setProperty('alias', it.code);
+}
+
+// use a\b\c (aka c);
+fullcode.out('USE').has('atom', 'As').each{
+    s = [];
+    it.out("SUBNAME").sort{it.order}._().each{ 
+        s.add(it.getProperty('code')); 
+    };
+    if (it.absolutens == 'true') {
+        it.setProperty('originpath', '\\\\' + s.join('\\\\'));
+    } else {
+        it.setProperty('originpath', s.join('\\\\'));
+    }
+    
+    it.setProperty('alias', it.out('AS').next().code);
+}
+
+// use a; (aka a)
+fullcode.out('USE').has('atom', 'Nsname').each{
+    s = [];
+    it.out("SUBNAME").sort{it.order}._().each{ 
+        s.add(it.getProperty('code')); 
+    };
+    if (it.absolutens == 'true') {
+        it.setProperty('originpath', '\\\\' + s.join('\\\\'));
+    } else {
+        it.setProperty('originpath', s.join('\\\\'));
+    }
+    
+    if (it.out('AS').any()) {
+        it.setProperty('alias', it.out('AS').next().code);
+    } else {
+        it.setProperty('alias', s.pop());
+    }
 }
 
 GREMLIN;
