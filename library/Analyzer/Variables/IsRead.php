@@ -112,6 +112,28 @@ class IsRead extends Analyzer\Analyzer {
              ->isNot('reference', 'true')
              ->back('first');
         $this->prepareQuery();
+
+        // Class constructors with self
+        $this->atomIs("Variable")
+             ->savePropertyAs('order', 'order')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->atomIs('Functioncall')
+             ->code('self')
+             ->hasIn('NEW')
+             ->classDefinition()
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->_as('method')
+             ->outIs('NAME')
+             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->back('method')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('order', 'order', true)
+             ->isNot('reference', 'true')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
