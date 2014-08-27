@@ -2415,6 +2415,7 @@ if (    $it.token != 'T_ELSEIF'
     && !($it.in('NEXT').next().atom in ['Class', 'Identifier']) 
     &&  !($it.out('NEXT').next().token in list_after_token)
     &&  !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
+    &&  !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET']}.any()) /* \$x{\$b - 2} */
     ) {
 
     $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
@@ -2465,7 +2466,7 @@ if (    $it.token != 'T_ELSEIF'
 
         $it.bothE('NEXT').each{ g.removeEdge(it); }
     } else {
-        sequence = g.addVertex(null, [code:'makeSequence ' + $it.in('NEXT').next().token, atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
+        sequence = g.addVertex(null, [code:'makeSequence ' + $it.in('NEXT').next().token + ' ' + $it.in('NEXT').in('NEXT').next().token, atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
         g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');   
         g.idx('Sequence').put('token', 'node', sequence);   
 
