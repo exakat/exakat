@@ -33,7 +33,11 @@ class ArgumentsNoComma extends Arguments {
                                               'notAtom' => 'Arguments'),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
-                                   3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS', 'T_COMMA', 'T_OBJECT_OPERATOR', 'T_DOT', 'T_QUESTION')),
+                                   3 => array('filterOut' => array_merge(array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS', 'T_COMMA', 
+                                                                               'T_OBJECT_OPERATOR', 'T_DOT', 'T_QUESTION'),
+                                                                        Multiplication::$operators, Addition::$operators,
+                                                                        Comparison::$operators, Logical::$operators,
+                                                                        Bitshift::$operators, Power::$operators)),
         );
 
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
@@ -67,22 +71,6 @@ class ArgumentsNoComma extends Arguments {
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
                                               'atom'  => 'none'),
                                    3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),
-        );
-
-        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'order'       => array(1 => '0'));
-        $this->checkAuto();
-
-        // echo $e
-        $this->conditions = array(-1 => array('token' => array('T_PRINT', 'T_ECHO')),
-                                   0 => array('token' => ArgumentsNoComma::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('atom'  => 'yes',
-                                              'notAtom' => 'Arguments'),
-                                   2 => array('token' => 'T_CLOSE_PARENTHESIS',
-                                              'atom'  => 'none'),
-                                   3 => array('filterOut2' => array_merge(array('T_COMMA', 'T_QUESTION'), 
-                                                              Token::$instruction_ending)),
         );
 
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
