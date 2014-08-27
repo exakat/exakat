@@ -352,3 +352,28 @@ Add an analyzer of the application : As documentation, version, tests, external 
 Surveiller le chinois dans le HTML
 Spot expressions that are the same (cf str_replace I used...)
 Spot files that use $this, and that are actually included in PHP methods (old style PHP inclusion)
+support T_ELLIPSIS in arguments for _Function
+
+support PHP 5.6 importation of functions and constants (use function xxx, use const yyy)
+Chez UnresolvedClasses 7 for conflict between aliases and declaration (Use in one namespace, class in another).
+Spot use clause that are in the same namespace (just alias ? )
+
+what happens when there are 100 arguments available for isRead and isModified ? (what happens when there is more than that? )
+WrongCase : also apply to Use instruction
+Check for use instruction for StaticProperty...
+signaler l'habitude avec use (Un use? )
+SIgnaler les use qui ne sont pas en haut du namespace)
+signaler les pb de casse avec les alias
+use that doesn't resolve
+absolute use without alias are useless.
+echo $a1,$a2,$a3 instead of echo "$a1 $a2 $a3";
+empty constructor/ destruct may be dropped (unless they prevent the call of a parent constructor)
+Function-subscripting,-old-style : not mentionned if the variable is used twice after the call().
+Incrementations : $s_thresholds[$t_project_id] = $t_report_bug_threshold[0] + 1, $t_issue_set_levels[] = $t_issue_set_levels[$l] + 1
+multiple index defintion : spot the values
+
+casting with long names (boolean, integer) instead of short ones (int, bool)
+echo($t_filter_cols - 4 - $t_project_cols) * $t_custom_cols : check for useless instructions
+            if ( $name{0} === '"' && $name{strlen( $name ) - 1} === '"' )  : check for useless instructions
+
+Add 
