@@ -11,7 +11,8 @@ class _Array extends TokenAuto {
         // $x[3] (and keep the indexation for doing it again, or with FunctioncallArray);
         $this->conditions = array( -1 => array('atom'  => _Array::$allowed_object),
                                     0 => array('token' => _Array::$operators),
-                                    1 => array('atom'  => 'yes'),
+                                    1 => array('atom'  => 'yes',
+                                               'notAtom' => 'Sequence'),
                                     2 => array('token' => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                     3 => array('token' => array('T_OPEN_PARENTHESIS','T_OPEN_BRACKET', 'T_OPEN_CURLY')),
                                  );
@@ -28,7 +29,8 @@ class _Array extends TokenAuto {
         // $x[3] (and stop the indexation
         $this->conditions = array( -1 => array('atom'  => _Array::$allowed_object),
                                     0 => array('token' => _Array::$operators),
-                                    1 => array('atom'  => 'yes'),
+                                    1 => array('atom'  => 'yes',
+                                               'notAtom' => 'Sequence'),
                                     2 => array('token' => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                     3 => array('notToken' => array('T_OPEN_PARENTHESIS','T_OPEN_BRACKET', 'T_OPEN_CURLY')),
                                  );
@@ -45,7 +47,8 @@ class _Array extends TokenAuto {
         // $x[3] // will loop for each dimension
         $this->conditions = array( -1 => array('atom'  => _Array::$allowed_object),
                                     0 => array('token' => _Array::$operators),
-                                    1 => array('atom'  => 'yes'),
+                                    1 => array('atom'  => 'yes',
+                                               'notAtom' => 'Sequence'),
                                     2 => array('token' => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
                                     3 => array('notToken' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY')),
                                  );
