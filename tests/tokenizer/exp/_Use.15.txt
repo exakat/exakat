@@ -1,0 +1,278 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_CURLY
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        use
+        Label : USE
+          one_identifier
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            path
+          Label : SUBNAME
+            complex
+      Label : ELEMENT
+        use
+        Label : USE
+          as
+          Label : AS
+            a1
+          Label : SUBNAME
+            one_identifier3
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : AS
+            a3
+          Label : SUBNAME
+            path3
+          Label : SUBNAME
+            complex
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : AS
+            a4
+          Label : SUBNAME
+            path32
+          Label : SUBNAME
+            complex
+          Label : SUBNAME
+            absolute
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : AS
+            a2
+          Label : SUBNAME
+            absolute_path3
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            path2
+          Label : SUBNAME
+            complex
+          Label : SUBNAME
+            absolute
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            absolute_path
+      Label : ELEMENT
+        try
+        Label : CODE
+          {
+          Label : ELEMENT
+            void
+        Label : CATCH
+          catch
+          Label : CLASS
+            a4
+          Label : VARIABLE
+            $e
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+        Label : CATCH
+          catch
+          Label : CLASS
+            a3
+          Label : VARIABLE
+            $e
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+        Label : CATCH
+          catch
+          Label : CLASS
+            a2
+          Label : VARIABLE
+            $e
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+        Label : CATCH
+          catch
+          Label : CLASS
+            one_identifier3
+          Label : VARIABLE
+            $e
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+        Label : CATCH
+          catch
+          Label : CLASS
+            \
+            Label : SUBNAME
+              a1
+          Label : VARIABLE
+            $e
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+        Label : CATCH
+          catch
+          Label : CLASS
+            a1
+          Label : VARIABLE
+            $e
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+        Label : CATCH
+          catch
+          Label : CLASS
+            path2
+          Label : VARIABLE
+            $e
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+        Label : CATCH
+          catch
+          Label : CLASS
+            path
+          Label : VARIABLE
+            $e
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+        Label : CATCH
+          catch
+          Label : CLASS
+            absolute_path
+          Label : VARIABLE
+            $e
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+        Label : CATCH
+          catch
+          Label : CLASS
+            one_identifier
+          Label : VARIABLE
+            $e
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+    Label : NAMESPACE
+      x
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        class
+        Label : NAME
+          a1
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+      Label : ELEMENT
+        class
+        Label : NAME
+          one_identifier3
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+      Label : ELEMENT
+        class
+        Label : NAME
+          absolute_path
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+      Label : ELEMENT
+        class
+        Label : NAME
+          one_identifier
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+    Label : NAMESPACE
+      Global
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        class
+        Label : NAME
+          path
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+    Label : NAMESPACE
+      complex
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        class
+        Label : NAME
+          path2
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        complex
+      Label : SUBNAME
+        absolute
