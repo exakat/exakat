@@ -7,26 +7,17 @@ use Analyzer;
 class UsedPrivateProperty extends Analyzer\Analyzer {
 
     public function analyze() {
-        // property used in a static methodcall \a\b::b()
-        $this->atomIs("Class")
-             ->savePropertyAs('fullnspath', 'classname')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Ppp')
-             ->analyzerIsNot('Analyzer\\Classes\\UsedPrivateProperty')
-             ->_as('ppp')
+        // property used in a staticmethodcall \a\b::$b
+        $this->atomIs("Ppp")
              ->hasOut('PRIVATE')
              ->outIs('DEFINE')
-             ->savePropertyAs('code', 'x')
-             ->inIs('DEFINE')
+             ->savePropertyAs('code', 'property')
+             ->back('first')
              ->inIs('ELEMENT')
-             ->atomInside('Staticproperty')
-             ->outIs('CLASS')
-             ->samePropertyAs('fullnspath', 'classname')
-             ->inIs('CLASS')
-             ->outIs('PROPERTY')
-             ->samePropertyAs('code', 'x')
-             ->back('ppp');
+             ->inIs('BLOCK')
+             ->savePropertyAs('fullnspath', 'classe')
+             ->raw('filter{ g.idx("Staticproperty")[["token":"node"]].filter{it.out("CLASS").has("fullnspath", classe).any()}.filter{it.out("PROPERTY").has("code", property).any()}.any()}')
+             ->back('first');
         $this->prepareQuery();
 
         // property used in a static property static::$b

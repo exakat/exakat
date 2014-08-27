@@ -21,6 +21,7 @@ class UsesDefaultArguments extends Analyzer\Analyzer {
         foreach($positions as $position => $f) {
             $this->atomIs("Functioncall")
                  ->hasNoIn('METHOD')
+                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
                  ->fullnspath($f)
                  ->outIs('ARGUMENTS')
                  ->noChildWithOrder('ARGUMENT', $position)

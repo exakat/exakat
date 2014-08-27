@@ -48,6 +48,7 @@ class Extension extends Analyzer\Analyzer {
             $functions = array_map(function ($x) { return "\\".$x; } ,  $functions);
             $this->atomIs("Functioncall")
                  ->hasNoIn('METHOD')
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->fullnspath($functions);
             $this->prepareQuery();
         }
@@ -64,6 +65,7 @@ class Extension extends Analyzer\Analyzer {
 
             $this->atomIs('New')
                  ->outIs('NEW')
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->atomIsNot(array('Variable', 'Array', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall'))
                  ->fullnspath($classes);
             $this->prepareQuery();
