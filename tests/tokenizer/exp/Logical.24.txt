@@ -1,23 +1,23 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      ||
-      Label : LEFT
-        ==
-        Label : LEFT
-          $a
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ||
         Label : RIGHT
-          $b
-      Label : RIGHT
-        $c
-  Label : THEN
-    {
-    Label : CODE
-      ;
+          $c
+        Label : LEFT
+          ==
+          Label : RIGHT
+            $b
+          Label : LEFT
+            $a
+    Label : THEN
+      {
       Label : ELEMENT
         return
         Label : RETURN

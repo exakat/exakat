@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  xor
-  Label : LEFT
-    5
-  Label : RIGHT
-    6
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    xor
+    Label : LEFT
+      5
+    Label : RIGHT
+      6

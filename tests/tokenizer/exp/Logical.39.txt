@@ -1,19 +1,19 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
     Label : RIGHT
       B
     Label : LEFT
       [
+      Label : VARIABLE
+        $c
       Label : INDEX
         --
         Label : PREPLUSPLUS
           $d
-      Label : VARIABLE
-        $c
   Label : ELEMENT
     &&
     Label : RIGHT
@@ -28,15 +28,15 @@ Label : CODE
     while
     Label : CONDITION
       [
+      Label : VARIABLE
+        $i
       Label : INDEX
         --
         Label : PREPLUSPLUS
           $j
-      Label : VARIABLE
-        $i
-    Label : LOOP
-      Block With While
-      Label : CODE
+    Label : BLOCK
+      Block with While
+      Label : ELEMENT
         continue
         Label : LEVEL
           void
@@ -46,23 +46,23 @@ Label : CODE
       &&
       Label : RIGHT
         [
+        Label : VARIABLE
+          $f
         Label : INDEX
           -
           Label : RIGHT
             2
           Label : LEFT
             $g
-        Label : VARIABLE
-          $f
       Label : LEFT
         >
         Label : RIGHT
           1
         Label : LEFT
           $e
-    Label : LOOP
-      Block With While
-      Label : CODE
+    Label : BLOCK
+      Block with While
+      Label : ELEMENT
         --
         Label : POSTPLUSPLUS
           $h
@@ -82,9 +82,9 @@ Label : CODE
       0
     Label : LEFT
       [
+      Label : VARIABLE
+        $a
       Label : INDEX
         --
         Label : PREPLUSPLUS
           $b
-      Label : VARIABLE
-        $a
