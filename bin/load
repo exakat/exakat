@@ -178,10 +178,14 @@ function process_file($filename, $log_file) {
     
     $tokens = array_values($tokens);
 
-    if (count($tokens) == 2 && 
-        $Php->getTokenname($tokens[0][0]) == 'T_OPEN_TAG' &&
-        $Php->getTokenname($tokens[1][0]) == 'T_CLOSE_TAG') {
+    while ( $Php->getTokenname($tokens[0][0]) == 'T_OPEN_TAG' &&
+            $Php->getTokenname($tokens[1][0]) == 'T_CLOSE_TAG') {
+        unset($tokens[0]);
+        unset($tokens[1]);
+        $tokens = array_values($tokens);
+    }
 
+    if (count($tokens) == 0) {
         $environnement = new Environnement($client, $file); 
         $environnement->initFile();
 
@@ -190,7 +194,6 @@ function process_file($filename, $log_file) {
     }
     
     $log['token_cleaned'] = count($tokens);
-
 
     $regexIndex = array();
     $regexIndex['INDEX'] = $client->makeNode()->setProperty('token', 'INDEX')
