@@ -2466,7 +2466,7 @@ if (    $it.token != 'T_ELSEIF'
 
         $it.bothE('NEXT').each{ g.removeEdge(it); }
     } else {
-        sequence = g.addVertex(null, [code:'makeSequence ' + $it.in('NEXT').next().token + ' ' + $it.in('NEXT').in('NEXT').next().token, atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
+        sequence = g.addVertex(null, [code:'makeSequence ' + $it.in('NEXT').next().token, atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
         g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');   
         g.idx('Sequence').put('token', 'node', sequence);   
 
@@ -2582,6 +2582,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             
             $qactions[] = " 
 /* make_quoted_string */ 
+
 x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
 
 it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}{!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.each{
