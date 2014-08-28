@@ -1,0 +1,60 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG T_ROOT
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      +
+      Label : RIGHT
+        "
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+            $d
+      Label : LEFT
+        2
+    Label : LEFT
+      $c
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      +
+      Label : RIGHT
+        `
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+            $g
+      Label : LEFT
+        4
+    Label : LEFT
+      $f
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      +
+      Label : RIGHT
+        3
+      Label : LEFT
+        `
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+            $e
+    Label : LEFT
+      $d
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      +
+      Label : RIGHT
+        1
+      Label : LEFT
+        "
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+            $b
+    Label : LEFT
+      $a

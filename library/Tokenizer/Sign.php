@@ -4,7 +4,7 @@ namespace Tokenizer;
 
 class Sign extends TokenAuto {
     static public $operators = array('T_PLUS', 'T_MINUS');
-    static public $operands = array('Integer', 'Sign', 'String', 'Variable', 'Array', 'Float', 'Boolean', 'Functioncall',
+    static public $operands = array('Sign', 'String', 'Variable', 'Array', 'Float', 'Boolean', 'Functioncall',
                                     'Staticmethodcall', 'Staticproperty', 'Multiplication', 'Property', 'Parenthesis', 
                                     'Methodcall', 'Cast', 'Constant', 'Boolean', 'Identifier', 'Assignation', 'Staticconstant');
     static public $atom = 'Sign';
@@ -14,8 +14,8 @@ class Sign extends TokenAuto {
         $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
                                                                                  'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER', 
                                                                                  'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT', 
-                                                                                 'T_CLOSE_BRACKET', 'T_BANG',
-                                                                                 'T_CLOSE_CURLY' ),
+                                                                                 'T_CLOSE_BRACKET', 'T_BANG', 'T_CLOSE_CURLY', 
+                                                                                 'T_QUOTE_CLOSE', 'T_QUOTE', 'T_SHELL_QUOTE_CLOSE', 'T_SHELL_QUOTE' ),
                                                                           Magicconstant::$operators),
                                                'notAtom' => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication', 'Cast' )), 
                                     0 => array('token' => Sign::$operators,

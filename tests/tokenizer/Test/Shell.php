@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Shell extends Tokenizer {
-    /* 11 methods */
+    /* 12 methods */
 
     public function testShell01()  { $this->generic_test('Shell.01'); }
     public function testShell02()  { $this->generic_test('Shell.02'); }
@@ -20,5 +20,6 @@ class Shell extends Tokenizer {
     public function testShell09()  { $this->generic_test('Shell.09'); }
     public function testShell10()  { $this->generic_test('Shell.10'); }
     public function testShell11()  { $this->generic_test('Shell.11'); }
+    public function testShell12()  { $this->generic_test('Shell.12'); }
 }
 ?>
