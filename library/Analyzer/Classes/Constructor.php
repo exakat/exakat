@@ -10,9 +10,10 @@ class Constructor extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
+             ->_as('constructor')
              ->outIs('NAME')
              ->code('__construct')
-             ;
+             ->back('constructor');
         $this->prepareQuery();
 
         $this->atomIs("Class")
@@ -23,8 +24,10 @@ class Constructor extends Analyzer\Analyzer {
              ->raw('filter{ it.out("ELEMENT").has("atom", "Function").out("NAME").has("code", "__construct").any() == false }')
              ->outIs('ELEMENT')
              ->atomIs('Function')
+             ->_as('constructor')
              ->outIs('NAME')
              ->samePropertyAs('code', 'code')
+             ->back('constructor')
              ;
         $this->prepareQuery();
     }
