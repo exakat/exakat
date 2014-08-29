@@ -7,7 +7,7 @@ use Analyzer;
 class MultiplyByOne extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Assignation")
-             ->code(array('*=', '/='))
+             ->code(array('*=', '/=', '%='))
              ->outIs('RIGHT')
              ->code(1)
              ->back('first');
