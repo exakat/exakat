@@ -8,6 +8,10 @@ class FunctionPreSubscripting extends Analyzer\Analyzer {
     protected $phpversion = "5.4+";
     
     public function analyze() {
+        // $x = f(); 
+        // $x['e'] 
+        // instead of f()['e']
+        
         $this->atomIs("Assignation")
              ->outIs('RIGHT')
              ->atomIs(array('Functioncall', 'Staticmethodcall', 'Methodcall'))
@@ -23,8 +27,7 @@ class FunctionPreSubscripting extends Analyzer\Analyzer {
              ->atomIs('Array')
              ->outIs('VARIABLE')
              ->samePropertyAs('code', 'varray')
-             ->back('first')
-             ;
+             ->back('first');
         $this->prepareQuery();
     }
 }
