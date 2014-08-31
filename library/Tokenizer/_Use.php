@@ -14,9 +14,9 @@ class _Use extends TokenAuto {
                                               'atom'  => 'none'),
                                  );
         
-        $this->actions = array('transform'  => array( 1 => 'USE'),
-                               'atom'       => 'Use',
-                               'cleanIndex' => true,
+        $this->actions = array('transform'    => array( 1 => 'USE'),
+                               'atom'         => 'Use',
+                               'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
         $this->checkAuto(); 
