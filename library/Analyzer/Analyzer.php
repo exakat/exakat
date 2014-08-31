@@ -1082,6 +1082,12 @@ GREMLIN;
         return $this;
     }
 
+    public function noNamespaceDefinition() {
+        $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('namespaces').get('path', it.fullnspath).any() == false }");
+    
+        return $this;
+    }
+
     public function classDefinition() {
         $this->addMethod("hasNot('fullnspath', null).transform{ g.idx('classes').get('path', it.fullnspath).next(); }");
     
