@@ -635,6 +635,14 @@ g.idx('Class')[['token':'node']].each{
 };
 
 ", "
+// collecting namespaces
+g.idx('Namespace')[['token':'node']].each{ 
+    // creating namespace's fullnspath
+    it.fullnspath = '\\\\' + it.out('NAMESPACE').next().fullcode;
+    g.idx('namespaces').put('path', it.fullnspath.toLowerCase(), it)
+};
+
+", "
 ////// Solving classes Namespaces
 // NEW + self, static, parent
 g.idx('Functioncall')[['token':'node']]
