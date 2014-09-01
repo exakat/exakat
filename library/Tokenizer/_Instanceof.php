@@ -18,8 +18,8 @@ class _Instanceof extends TokenAuto {
                                   
         );
         
-        $this->actions = array('makeEdge'     => array(  1 => 'RIGHT',
-                                                        -1 => 'LEFT'),
+        $this->actions = array('makeEdge'     => array(  1 => 'VARIABLE',
+                                                        -1 => 'CLASS'),
                                'atom'         => 'Instanceof',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it' );
@@ -31,7 +31,7 @@ class _Instanceof extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.out("LEFT").next().getProperty('fullcode') + " instanceof " + fullcode.out("RIGHT").next().getProperty('fullcode')); 
+fullcode.setProperty('fullcode', fullcode.out("VARIABLE").next().getProperty('fullcode') + " instanceof " + fullcode.out("CLASS").next().getProperty('fullcode')); 
 
 GREMLIN;
 
