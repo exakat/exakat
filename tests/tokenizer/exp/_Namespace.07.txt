@@ -1,84 +1,80 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     namespace
     Label : BLOCK
       {
-      Label : CODE
-        makeSequence
-        Label : ELEMENT
-          echo
+      Label : ELEMENT
+        session_start
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          MyProject\connect
+          Label : SUBNAME
+            connect
+          Label : SUBNAME
+            MyProject
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              ::
-              Label : METHOD
-                start
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    void
-              Label : CLASS
-                \
-                Label : ELEMENT
-                  MyProject
-                Label : ELEMENT
-                  Connection
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            MyProject\connect
-            Label : ELEMENT
-              MyProject
-            Label : ELEMENT
-              connect
-            Label : ARGUMENTS
               void
-              Label : ARGUMENT
+        Label : LEFT
+          $a
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : METHOD
+              start
+              Label : ARGUMENTS
                 void
-          Label : LEFT
-            $a
-        Label : ELEMENT
-          session_start
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              \
+              Label : SUBNAME
+                Connection
+              Label : SUBNAME
+                MyProject
     Label : NAMESPACE
       Global
   Label : ELEMENT
     namespace
     Label : BLOCK
       {
-      Label : CODE
-        makeSequence
-        Label : ELEMENT
-          function
-          Label : ARGUMENTS
+      Label : ELEMENT
+        const
+        Label : NAME
+          CONNECT_OK
+        Label : VALUE
+          1
+      Label : ELEMENT
+        class
+        Label : NAME
+          Connection
+        Label : BLOCK
+          {
+          Label : ELEMENT
             void
-            Label : ARGUMENT
-              void
-          Label : NAME
-            connect
-          Label : BLOCK
-            {
-            Label : CODE
-              void
-        Label : ELEMENT
-          const
-          Label : NAME
-            CONNECT_OK
-          Label : VALUE
-            1
-        Label : ELEMENT
-          class
-          Label : NAME
-            Connection
-          Label : BLOCK
-            {
-            Label : CODE
-              void
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          connect
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
     Label : NAMESPACE
       MyProject

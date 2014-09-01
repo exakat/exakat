@@ -1,20 +1,16 @@
 <?php
 
-Label : NEXT
-  namespace
-  Label : NEXT
-    \
-    Label : NEXT
-      ;
-      Label : NEXT
-        ?>
-        Label : NEXT
-          /**/
-          Label : NEXT
-            /* * */
-    Label : ELEMENT
-      A
-    Label : ELEMENT
-      B
-    Label : ELEMENT
-      C
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    namespace
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        A
+    Label : BLOCK
+      
