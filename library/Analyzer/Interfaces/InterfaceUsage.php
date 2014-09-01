@@ -12,7 +12,7 @@ class InterfaceUsage extends Analyzer\Analyzer {
         $this->prepareQuery();
         
         $this->atomIs('Instanceof')
-             ->outIs('RIGHT');
+             ->outIs('CLASS');
         $this->prepareQuery();
     }
 }

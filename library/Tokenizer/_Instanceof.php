@@ -18,8 +18,8 @@ class _Instanceof extends TokenAuto {
                                   
         );
         
-        $this->actions = array('makeEdge'     => array(  1 => 'VARIABLE',
-                                                        -1 => 'CLASS'),
+        $this->actions = array('makeEdge'     => array(  1 => 'CLASS',
+                                                        -1 => 'VARIABLE'),
                                'atom'         => 'Instanceof',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it' );

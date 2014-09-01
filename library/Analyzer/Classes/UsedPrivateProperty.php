@@ -20,7 +20,7 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // property used in a static property static::$b
+        // property used in a static property static::$b or self::$b
         $this->atomIs("Class")
              ->outIs('BLOCK')
              ->outIs('ELEMENT')

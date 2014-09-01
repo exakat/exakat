@@ -117,7 +117,7 @@ class UsedUse extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->inIs('BLOCK')
              ->atomInside('Instanceof')
-             ->outIs('RIGHT')
+             ->outIs('CLASS')
              ->samePropertyAs('code', 'use')
              ->back('result');
         $this->prepareQuery();

@@ -13,7 +13,7 @@ class UpperCaseKeyword extends Analyzer\Analyzer {
              ->isUpperCase('code');
         $this->prepareQuery();
         
-        // implements, as in foreach(), end* are lost anyway 
+        // some of the keywords are lost anyway : implements, extends, as in foreach(), endforeach/while/for/* are lost in tokenizer (may be keep track of that) 
 
     }
 }

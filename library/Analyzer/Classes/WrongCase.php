@@ -157,7 +157,7 @@ class WrongCase extends Analyzer\Analyzer {
 
 // instance of
         $this->atomIs("Instanceof")
-             ->outIs('RIGHT')
+             ->outIs('CLASS')
              ->tokenIs('T_STRING')
              ->codeIsNot(array('static', 'parent', 'self'))
              ->savePropertyAs('code', 'classe')
@@ -168,7 +168,7 @@ class WrongCase extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs("Instanceof")
-             ->outIs('RIGHT')
+             ->outIs('CLASS')
              ->tokenIs('T_NS_SEPARATOR')
              ->orderIs('SUBNAME', 'last')
              ->savePropertyAs('code', 'classe')

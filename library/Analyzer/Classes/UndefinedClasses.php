@@ -6,9 +6,7 @@ use Analyzer;
 
 class UndefinedClasses extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Interfaces\\IsExtInterface',
-                     );
+        return array('Analyzer\\Classes\\IsExtClass');
     }
     
     public function analyze() {
@@ -49,7 +47,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs("Instanceof")
-             ->outIs('RIGHT')
+             ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')

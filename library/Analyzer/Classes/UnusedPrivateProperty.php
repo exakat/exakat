@@ -17,8 +17,7 @@ class UnusedPrivateProperty extends Analyzer\Analyzer {
              ->atomIs('Ppp')
              ->hasOut('PRIVATE')
              ->analyzerIsNot('Analyzer\\Classes\\UsedPrivateProperty');
-        $this->prepareQuery();
-    
+        $this->prepareQuery();    
     }
 }
 

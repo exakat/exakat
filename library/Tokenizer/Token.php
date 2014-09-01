@@ -435,7 +435,7 @@ g.idx('Staticmethodcall')[['token':'node']].out('CLASS').sideEffect{fullcode = i
         } ;
         
         if (isDefault) {
-            if (it.atom == 'File') {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
                 fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
             } else {
                 fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
@@ -457,7 +457,7 @@ g.idx('Staticproperty')[['token':'node']].out('CLASS').sideEffect{fullcode = it;
         } ;
         
         if (isDefault) {
-            if (it.atom == 'File') {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
                 fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
             } else {
                 fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
@@ -479,7 +479,7 @@ g.idx('Staticconstant')[['token':'node']].out('CLASS').sideEffect{fullcode = it;
         } ;
         
         if (isDefault) {
-            if (it.atom == 'File') {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
                 fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
             } else {
                 fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
@@ -488,7 +488,7 @@ g.idx('Staticconstant')[['token':'node']].out('CLASS').sideEffect{fullcode = it;
     } 
 };
 
-g.idx('Instanceof')[['token':'node']].out('RIGHT').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+g.idx('Instanceof')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
         fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
@@ -501,7 +501,7 @@ g.idx('Instanceof')[['token':'node']].out('RIGHT').sideEffect{fullcode = it;}.in
         } ;
         
         if (isDefault) {
-            if (it.atom == 'File') {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
                 fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
             } else {
                 fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
@@ -523,7 +523,7 @@ g.idx('Catch')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop
         } ;
         
         if (isDefault) {
-            if (it.atom == 'File') {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
                 fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
             } else {
                 fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
@@ -545,7 +545,7 @@ g.idx('Typehint')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.l
         } ;
         
         if (isDefault) {
-            if (it.atom == 'File') {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
                 fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
             } else {
                 fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
@@ -567,7 +567,7 @@ g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
         } ;
         
         if (isDefault) {
-            if (it.atom == 'File') {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
                 fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
             } else {
                 fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());

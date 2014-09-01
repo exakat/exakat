@@ -32,7 +32,7 @@ class ClassUsage extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs("Instanceof")
-             ->outIs('RIGHT');
+             ->outIs('CLASS');
         $this->prepareQuery();
     }
 }

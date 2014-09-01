@@ -34,6 +34,7 @@ class IsExtClass extends Analyzer\Analyzer {
         $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->fullnspath($classes);
+        $this->prepareQuery();
     }
 }
 

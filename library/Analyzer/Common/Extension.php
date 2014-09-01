@@ -96,7 +96,7 @@ class Extension extends Analyzer\Analyzer {
             $this->prepareQuery();
 
             $this->atomIs('Instanceof')
-                 ->outIs('RIGHT')
+                 ->outIs('CLASS')
                  ->fullnspath($classes);
             $this->prepareQuery();
         }
