@@ -1,0 +1,38 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      \
+      Label : SUBNAME
+        TRUE
+    Label : LEFT
+      $x2
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      \
+      Label : SUBNAME
+        TRUE
+      Label : SUBNAME
+        a
+    Label : LEFT
+      $x4
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      \
+      Label : SUBNAME
+        TRUE
+      Label : SUBNAME
+        a
+    Label : LEFT
+      $x3
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      TRUE
+    Label : LEFT
+      $x

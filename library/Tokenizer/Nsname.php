@@ -12,7 +12,7 @@ class Nsname extends TokenAuto {
                                    -1 => array('filterOut2' => 'T_NS_SEPARATOR'), // 'T_STRING', 'T_NAMESPACE'
                                     0 => array('token' => Nsname::$operators,
                                                'atom'  => 'none'),
-                                    1 => array('atom'  => 'Identifier'),
+                                    1 => array('atom'  => array('Identifier', 'Boolean')),
         );
 
         $this->actions = array('makeNamespace' => true,
