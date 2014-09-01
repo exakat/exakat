@@ -4,5 +4,4 @@ rm -rf data
 mkdir data
 ./bin/neo4j start
 cd ..
-sleep 1
 
