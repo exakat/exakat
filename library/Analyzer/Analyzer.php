@@ -335,7 +335,7 @@ GREMLIN;
     }
 
     function back($name) {
-        $this->methods[] = 'back("'.$name.'")';
+        $this->methods[] = 'back(\''.$name.'\')';
         
         return $this;
     }
@@ -469,6 +469,16 @@ GREMLIN;
             $this->addMethod('as("loop").out().loop("loop"){true}{it.object.atom in ***}', $atom);
         } else {
             $this->addMethod('filter{ it.as("loop").out().loop("loop"){true}{it.object.atom == ***}.count() == 0}', $atom);
+        }
+        
+        return $this;
+    }
+
+    function atomAboveIs($atom) {
+        if (is_array($atom)) {
+            $this->addMethod('in().loop(1){true}{it.object.atom in ***}', $atom);
+        } else {
+            $this->addMethod('in().loop(1){true}{it.object.atom == ***}', $atom);
         }
         
         return $this;
@@ -872,7 +882,7 @@ GREMLIN;
 
     protected function outIs($edge_name) {
         if (is_array($edge_name)) {
-            $this->addMethod("outE.filter{it.label in ***}.inV", $edge_name);
+            $this->addMethod("out('".join("', '", $edge_name)."')");
         } else {
             $this->addMethod("out(***)", $edge_name);
         }
