@@ -112,13 +112,13 @@ class UsedUse extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('fullnspath', 'use')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs('BLOCK')
              ->atomInside('Instanceof')
              ->outIs('CLASS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('fullnspath', 'use')
              ->back('result');
         $this->prepareQuery();
 
@@ -237,20 +237,27 @@ class UsedUse extends Analyzer\Analyzer {
              ->back('result');
         $this->prepareQuery();
 
-    // case of simple use in a instanceof
+    // case of alias use in a instanceof
+    // @bug : can't use _as because of a null error! Only available is 'first'
         $this->atomIs("Use")
              ->outIs('USE')
+             ->analyzerIsNot('Analyzer\\Namespaces\\UsedUse')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'use')
-             ->inIs(array('AS', 'SUBNAME'))
-             ->inIs('USE')
+             ->savePropertyAs('code', 'thealias')
+             ->back('first')
              ->inIs('ELEMENT')
              ->inIs('BLOCK')
              ->atomInside('Instanceof')
-             ->outIs('RIGHT')
-             ->samePropertyAs('code', 'use')
-             ->back('result');
+             ->outIs('CLASS')
+             ->atomIs('Identifier')
+             ->samePropertyAs('code', 'thealias')
+             ->back('first')
+             ->outIs('USE')
+             ->outIs(array('AS', 'SUBNAME'))
+             ->samePropertyAs('code', 'thealias')
+             ->inIs(array('AS', 'SUBNAME'))
+             ;
         $this->prepareQuery();
     }
 }
