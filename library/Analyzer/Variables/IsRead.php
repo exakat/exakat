@@ -19,7 +19,7 @@ class IsRead extends Analyzer\Analyzer {
         // right or left, same 
         $this->atomIs("Variable")
              ->inIs(array('RIGHT', 'LEFT'))
-             ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift', 'Instanceof'))
+             ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
              ->back('first');
         $this->prepareQuery();
 
@@ -47,7 +47,7 @@ class IsRead extends Analyzer\Analyzer {
         // arguments : Typehint
         $this->atomIs("Variable")
              ->inIs('VARIABLE')
-             ->atomIs('Typehint')
+             ->atomIs(array('Typehint', 'Instanceof'))
              ->back('first');
         $this->prepareQuery();    
 
