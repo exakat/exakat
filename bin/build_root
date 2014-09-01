@@ -111,7 +111,7 @@ logTime('Unicodes block');
 if (DISPLAY) print "String unicode done\n";
 
 // resolving the constants
-$extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'delete');
+$extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'delete', 'namespaces');
 foreach($extra_indices as $indice) {
     query("g.dropIndex('$indice');");
     query("g.createManualIndex('$indice', Vertex)");
