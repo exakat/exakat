@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Namespaces_UnusedUse extends Analyzer {
-    /* 6 methods */
+    /* 7 methods */
 
     public function testNamespaces_UnusedUse01()  { $this->generic_test('Namespaces_UnusedUse.01'); }
     public function testNamespaces_UnusedUse02()  { $this->generic_test('Namespaces_UnusedUse.02'); }
@@ -16,5 +16,6 @@ class Namespaces_UnusedUse extends Analyzer {
     public function testNamespaces_UnusedUse04()  { $this->generic_test('Namespaces_UnusedUse.04'); }
     public function testNamespaces_UnusedUse05()  { $this->generic_test('Namespaces_UnusedUse.05'); }
     public function testNamespaces_UnusedUse06()  { $this->generic_test('Namespaces_UnusedUse.06'); }
+    public function testNamespaces_UnusedUse07()  { $this->generic_test('Namespaces_UnusedUse.07'); }
 }
 ?>

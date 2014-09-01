@@ -488,6 +488,7 @@ g.idx('Staticconstant')[['token':'node']].out('CLASS').sideEffect{fullcode = it;
     } 
 };
 
+", "
 g.idx('Instanceof')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
         fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
@@ -504,7 +505,7 @@ g.idx('Instanceof')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in
             if (it.atom == 'File' || it.fullcode == 'namespace Global') {
                 fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
             } else {
-                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
+                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
             }
         };
     } 

@@ -238,45 +238,35 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of alias use in a instanceof
-    // @bug : can't use _as because of a null error! Only available is 'first'
+        // subcase for the original path
         $this->atomIs("Use")
              ->outIs('USE')
              ->analyzerIsNot('Analyzer\\Namespaces\\UsedUse')
              ->_as('result')
-             ->outIs('AS')
-             ->savePropertyAs('code', 'thealias')
-             ->back('first')
+             ->raw('sideEffect{ thealias = it;}')
+             ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Instanceof')
              ->outIs('CLASS')
-             ->atomIs('Identifier')
-             ->samePropertyAs('code', 'thealias')
-             ->back('first')
-             ->outIs('USE')
-             ->outIs('AS')
-             ->samePropertyAs('code', 'thealias')
-             ->inIs('AS');
+             ->raw('filter{ it.fullcode.toLowerCase() == thealias.originpath.toLowerCase()}')
+             ->raw('transform{ thealias}');
         $this->prepareQuery();
 
+        // subcase for the alias
         $this->atomIs("Use")
              ->outIs('USE')
              ->analyzerIsNot('Analyzer\\Namespaces\\UsedUse')
              ->_as('result')
-             ->outIs('SUBNAME')
-             ->savePropertyAs('code', 'thealias')
-             ->back('first')
+             ->raw('sideEffect{ result = it;}')
+             ->savePropertyAs('alias', 'thealias')
+             ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Instanceof')
              ->outIs('CLASS')
-             ->atomIs('Identifier')
-             ->samePropertyAs('code', 'thealias')
-             ->back('first')
-             ->outIs('USE')
-             ->outIs('SUBNAME')
-             ->samePropertyAs('code', 'thealias')
-             ->inIs('SUBNAME');
+             ->samePropertyAs('fullcode', 'thealias')
+             ->raw('transform{ result}');
         $this->prepareQuery();
 
     }
