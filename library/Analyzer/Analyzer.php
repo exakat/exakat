@@ -903,7 +903,7 @@ GREMLIN;
 
     function orderIs($edge_name, $order) {
         if ($order == 'first') {
-            $order = '0';
+            $order = 0;
         } else if ($order == 'last') {
             $this->addMethod("sideEffect{ order = it.out(***).count() - 1;}", $edge_name);
             $this->addMethod("out(***).filter{it.getProperty('order')  == order}", $edge_name);
