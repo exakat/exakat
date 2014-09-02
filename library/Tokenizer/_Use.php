@@ -33,6 +33,34 @@ class _Use extends TokenAuto {
                                'makeSequence' => 'it' );
         $this->checkAuto(); 
 
+    // use const \a\b;
+        $this->conditions = array( 0 => array('token' => _Use::$operators),
+                                   1 => array('token' => array('T_CONST', 'T_FUNCTION')),
+                                   2 => array('atom'  => array('Nsname', 'Identifier', 'As')),
+                                   3 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'),
+                                              'atom'  => 'none'),
+                                 );
+        
+        $this->actions = array('to_use_const'       => true,
+                               'atom'         => 'Use',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it'
+                               );
+        $this->checkAuto(); 
+
+    // use const \b\c, \a\c;
+        $this->conditions = array( 0 => array('token' => _Use::$operators),
+                                   1 => array('token' => array('T_CONST', 'T_FUNCTION')),
+                                   2 => array('atom'  => 'Arguments'),
+                                   3 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'),
+                                              'atom'  => 'none'),
+                                 );
+        
+        $this->actions = array('to_use'       => true,
+                               'atom'         => 'Use',
+                               'makeSequence' => 'it' );
+        $this->checkAuto(); 
+
     // use A {};
         $this->conditions = array( 0 => array('token' => _Use::$operators),
                                    1 => array('atom'  => array('Nsname', 'Identifier')),
@@ -45,7 +73,7 @@ class _Use extends TokenAuto {
                                'cleanIndex' => true,
                                'makeSequence' => 'it' 
                                );
-        $this->checkAuto(); 
+//        $this->checkAuto(); 
 
     // use A,B {};
         $this->conditions = array( 0 => array('token' => _Use::$operators),
@@ -58,7 +86,7 @@ class _Use extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'  );
         $this->checkAuto(); 
-
+        
         return $this->checkRemaining();
     }
 
