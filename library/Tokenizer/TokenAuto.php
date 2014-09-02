@@ -530,14 +530,56 @@ g.removeVertex(arg2);
             unset($actions['to_var_ppp']);
         }
 
+        if (isset($actions['to_use_const'])) {
+            $qactions[] = "
+/* to use with const or function */
+
+    extra = it.out('NEXT').next();
+    if (extra.token == 'T_CONST') {
+        link = 'CONST';
+    } else {
+        link = 'FUNCTION';
+    }
+    arg = extra.out('NEXT').next();
+    end = arg.out('NEXT').next();
+
+    extra.bothE('NEXT').each{ g.removeEdge(it); }
+    arg.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+    g.addEdge(it, end, 'NEXT');
+    g.addEdge(it, arg, link);
+    
+    g.idx('delete').put('node', 'delete', extra);   
+
+";
+            unset($actions['to_use_const']);
+        }
+
         if (isset($actions['to_use'])) {
             $qactions[] = "
 /* to use with arguments */
+if (it.out('NEXT').next().token in ['T_CONST', 'T_FUNCTION']) {
+    
+    extra = it.out('NEXT').next();
+    if (extra.token == 'T_CONST') {
+        link = 'CONST';
+    } else {
+        link = 'FUNCTION';
+    }
+    arg = extra.out('NEXT').next();
+    
+    it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
+    g.addEdge(it, arg, 'NEXT');
+    
+    g.idx('delete').put('node', 'delete', extra);   
+} else {
+    link = 'USE';
+}
+
 var = it;
 arg = it.out('NEXT').next();
 
 var.out('NEXT').has('atom', 'Arguments').out('ARGUMENT').each{
-    g.addEdge(var, it, 'USE');
+    g.addEdge(var, it, link);
     g.removeEdge(it.inE('ARGUMENT').next());
 }
 
@@ -2375,7 +2417,8 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
         'T_DO', 'T_TRY',
         'T_STRING', 'T_INSTEADOF', 'T_INSTANCEOF', 'T_BANG',
-        'T_ELSE', 'T_INC', 'T_DEC', 'T_IF', 'T_ELSEIF'
+        'T_ELSE', 'T_INC', 'T_DEC', 'T_IF', 'T_ELSEIF',
+        'T_CONST', 'T_FUNCTION',
         ];
 
 list_after = [
