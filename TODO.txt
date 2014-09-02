@@ -18,34 +18,16 @@ Break done tokenizer to blocks : analyze happens within blocks, not the whole fi
 Export progress/ETA in processing (tokenizer, analyzer...)
 Prepare documentation
 
-
-Start analyzer programm
-+ Statistics
-+ Dependencies
-+ PHP version
-+ Security
-+ Maintenance
-+ Framework specific rules / Good practises
-+ Status
-
 Cooccurences : structures that are next to each other in sequences.
-
 
 Support environnment information : 
 file, namespace, class, method.
 Add link information (indexed, location, normal).
 
-
 Analyzers
 + Interpret values and have a dictionary of special meaning : 22 => port, 86400 => day list, etc.
 + Make a list of files and extensions along the way
 
-
-Variables are not variables when : 
-they are used in compact (look for collision between string and variables)
-they are indeed an argument (but unused arguments? come on)
-they are a property
-they have a { for name (variable variable)
 projects/proxyplus/code/includes/parser.php:			$parseFunction = $block == 'style' ? 'CSS' : 'JS' ;
 projects/proxyplus/code/includes/parser.php:			$new .= $this->$parseFunction(substr($input, $innerStart, $innerEnd - $innerStart));
 
@@ -106,8 +88,6 @@ Avoir un outil pour pousser le site en ligne depuis Git
 
 Namespace inventory as a tree.
 Mention file extensions/list used for testing in audit information
-Set up the themes for the analyzers
-Remove Class_tmp
 
 Check Try, and add an indexClean when we reach the end of the catchs.
 Exécuter les scripts une fois par heure, après peu de modifications. 
@@ -225,8 +205,6 @@ fix the last 'indexed' in tokenizer
 spot #! lines and mark the file as executable commandline
 check that report are all done in default
 
-Check for empty __construct();
-
 List empty scripts, just like incompilables
 Make a diagramm of the differents layers of the software
 
@@ -252,7 +230,7 @@ Empty blocks ( try/catch, etc.)
 in regex, several successive call will fill the same $r, and if not tested, it may lead to believe there are some results
 function whose return may be ignored
 
-Test with Neo4j 2.0 and the batch inserter.
+Test with Neo4j 2.1 and the batch inserter.
 
 See if I can move those g.idx['index'][['token':'']].out. to something shorter (and faster). 
 Check how index degrades with size (compare with the previous).
@@ -280,8 +258,6 @@ Constant structures
 Make a report for the classes that tells what methods are actually used (their origin, base on static/self, etc…), with an indicator for the level of complexity.
 
 Functions without returns, and not Methods.
-
-Conditional déclaration : class, const or function declared within a if block.
 
 Manage non-fatal error during lint phase (list the files that are showing some STRICT errors as a bulk). 
 
@@ -312,7 +288,6 @@ Command Query Separation : Functions should either do something or answer someth
 Avoid output arguments (&$arguments, that will be modified...)
 Have No Side Effects : effect on something else
 Identify the Unit tests, based on the library : simpletest, Atoum, Phpunit, phpt ? 
-Var is old technology… like old style constructor.
 SQL Should use binded parameters, not concatenation in string
 Instanciation of interfaces ?!?
 Cyclic dependancies between traits
@@ -341,7 +316,6 @@ Heavily used class/interface/etc.
 Spot external libraries
 Ignore the lib folder
 Spot PEAR classes
-define/const suggestions (simple defined => const)
 Code source that mix defintiions (class, interface, const...) and actual code (except for protection against direct access..).
 Spot multiple-class files, multiple-namespace files
 Corriger le calcul du nombre de fichiers qui ne sont pas compilables
@@ -364,7 +338,6 @@ Check for use instruction for StaticProperty...
 signaler l'habitude avec use (Un use? )
 SIgnaler les use qui ne sont pas en haut du namespace)
 signaler les pb de casse avec les alias
-use that doesn't resolve
 absolute use without alias are useless.
 Function-subscripting,-old-style : not mentionned if the variable is used twice after the call().
 multiple index defintion : spot the values
@@ -373,7 +346,9 @@ support arrays representation of the index with { or [ in the atom (needs to be 
 
 Lister les dépendances d'une classe (liste des autres classe, des fonctions, etc..)
 scripts with warning (but no fatal) are excluded while they should be in.
-Tag files if they are definition only, global script, or mixed. Remove some of the normal.
+Tag files if they are definition only, global script, or mixed. Remove some of the normal code.
 SPot shadowed static members (name name, )
 Spot change in PPP for members/functions
 spot uses which original is used, but not the alias
+
+Upgrade the 'randomtest' for PHPunit, with a sqlite table that track the number of test done, and randomize the oldest ones and the failed ones first.
