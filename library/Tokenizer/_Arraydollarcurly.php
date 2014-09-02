@@ -15,14 +15,14 @@ class _Arraydollarcurly extends TokenAuto {
                                    5 => array('token' => 'T_CLOSE_CURLY'),
                                  );
         
-        $this->actions = array('transform' => array(   1 => 'VARIABLE',
-                                                       2 => 'DROP',
-                                                       3 => 'INDEX',
-                                                       4 => 'DROP',
-                                                       5 => 'DROP'  ),
-                               'atom'      => 'Array',
+        $this->actions = array('transform'   => array(   1 => 'VARIABLE',
+                                                         2 => 'DROP',
+                                                         3 => 'INDEX',
+                                                         4 => 'DROP',
+                                                         5 => 'DROP'  ),
+                               'atom'        => 'Array',
                                'keepIndexed' => true,
-                               'cleanIndex' => true);
+                               'cleanIndex'  => true);
         $this->checkAuto(); 
 
         return $this->checkRemaining();
