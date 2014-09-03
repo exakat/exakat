@@ -4,7 +4,7 @@ $expected     = array('D\\A::methodcall( )',
                       'D\\A::$property',
                       'D\\A::constante',
                       'catch (D\\A $e) { /**/ } ',
-                      'function y (D\\A $a) { /**/ } ',
+                      'function ya (D\\A $a) { /**/ } ',
                       '$a instanceof D\\A');
 
 $expected_not = array('D\\b::methodcall( )',
