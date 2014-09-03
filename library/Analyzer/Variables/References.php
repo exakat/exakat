@@ -7,7 +7,8 @@ use Analyzer;
 class References extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Variable")
-             ->is('reference');
+             ->is('reference', 'true');
+        $this->prepareQuery();
     }
 }
 
