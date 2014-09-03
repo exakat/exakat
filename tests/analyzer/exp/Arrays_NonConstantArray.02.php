@@ -1,9 +1,10 @@
 <?php
 
 $expected     = array('constantwithincurly',
-                      'constantwithindollarcurly');
+                      'constantwithindollarcurly',
+                      'constantasstring',
+                      );
 
-$expected_not = array('constantasstring',
-                      'string');
+$expected_not = array('string');
 
 ?>
