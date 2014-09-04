@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array("split(':', 'asdfasdfadf')",
-                      "'dl('adsf.lo')'");
+                      "dl('adsf.lo')");
 
 $expected_not = array( "explode(':', 'asdfasdfadf')");
 
