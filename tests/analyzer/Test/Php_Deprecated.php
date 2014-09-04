@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Php_Deprecated extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testPhp_Deprecated01()  { $this->generic_test('Php_Deprecated.01'); }
+    public function testPhp_Deprecated02()  { $this->generic_test('Php_Deprecated.02'); }
 }
 ?>
