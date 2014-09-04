@@ -8,7 +8,7 @@ class Functionnames extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs("Function")
-             ->isNot('lambda')
+             ->isNot('lambda', 'true')
              ->hasNoParent('Class', array('ELEMENT', 'BLOCK'))
              ->hasNoParent('Interface', array('ELEMENT', 'BLOCK'))
              ->hasNoParent('Trait', array('ELEMENT', 'BLOCK'))
