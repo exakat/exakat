@@ -11,7 +11,7 @@ class CalltimePassByReference extends Analyzer\Analyzer {
         $this->atomIs("Functioncall")
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->is('reference');
+             ->is('reference', 'true');
     }
 }
 
