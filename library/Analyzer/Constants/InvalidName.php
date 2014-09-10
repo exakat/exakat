@@ -8,6 +8,7 @@ class InvalidName extends Analyzer\Analyzer {
     public function analyze() {
         // case-sensitive constants
         $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD')
              ->fullnspath("\\define")
              ->outIs('ARGUMENTS')
              ->orderIs('ARGUMENT', 'first')
