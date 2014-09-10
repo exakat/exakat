@@ -14,12 +14,11 @@ class UndefinedConstants extends Analyzer\Analyzer {
              ->analyzerIs('Analyzer\\Constants\\CustomConstantUsage')
              ->hasNoConstantDefinition();
         $this->prepareQuery();
-        
+
         $this->atomIs("Nsname")
              ->analyzerIs('Analyzer\\Constants\\CustomConstantUsage')
              ->hasNoConstantDefinition();
         $this->prepareQuery();
-        
     }
 }
 
