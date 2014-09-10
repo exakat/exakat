@@ -8,7 +8,7 @@ class OneVariableStrings extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('String')
              ->outIs("CONTAIN")
-             ->is('count', '1');
+             ->is('count', 1);
         $this->prepareQuery();
     }
 }
