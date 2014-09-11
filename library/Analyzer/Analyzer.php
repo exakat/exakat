@@ -1140,6 +1140,33 @@ GREMLIN;
         return $this;
     }
     
+    public function goToClass() {
+        $this->addMethod('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}');
+        
+        return $this;
+    }
+
+    public function hasClass() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.any()}');
+        
+        return $this;
+    }
+
+    public function hasNoClass() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.any() == false}');
+        
+        return $this;
+    }
+
+    public function goToMethodDefinition() {
+        // starting with a staticmethodcall 
+        $this->addMethod('out("METHOD").sideEffect{ methodname = it.code.toLowerCase() }.in("METHOD").out("CLASS").transform{ g.idx("classes").get("path", it.fullnspath).next(); }
+                .out("EXTENDS").transform{ g.idx("classes").get("path", it.fullnspath).next(); }
+                .loop(2){ it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any() == false}
+                        { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any()}');
+        
+        return $this;
+    }
     
     public function run() {
 
