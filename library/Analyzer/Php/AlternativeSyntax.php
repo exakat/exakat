@@ -7,23 +7,23 @@ use Analyzer;
 class AlternativeSyntax extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Ifthen")
-             ->is('alternative', "'true'");
+             ->is('alternative', "true");
         $this->prepareQuery();
         
         $this->atomIs("Switch")
-             ->is('alternative', "'true'");
+             ->is('alternative', "true");
         $this->prepareQuery();
 
         $this->atomIs("For")
-             ->is('alternative', "'true'");
+             ->is('alternative', "true");
         $this->prepareQuery();
 
         $this->atomIs("Foreach")
-             ->is('alternative', "'true'");
+             ->is('alternative', "true");
         $this->prepareQuery();
 
         $this->atomIs("While")
-             ->is('alternative', "'true'");
+             ->is('alternative', "true");
         $this->prepareQuery();
     }
 }
