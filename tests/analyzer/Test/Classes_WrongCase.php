@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_WrongCase extends Analyzer {
-    /* 9 methods */
+    /* 10 methods */
 
     public function testClasses_WrongCase01()  { $this->generic_test('Classes_WrongCase.01'); }
     public function testClasses_WrongCase02()  { $this->generic_test('Classes_WrongCase.02'); }
@@ -19,5 +19,6 @@ class Classes_WrongCase extends Analyzer {
     public function testClasses_WrongCase07()  { $this->generic_test('Classes_WrongCase.07'); }
     public function testClasses_WrongCase08()  { $this->generic_test('Classes_WrongCase.08'); }
     public function testClasses_WrongCase09()  { $this->generic_test('Classes_WrongCase.09'); }
+    public function testClasses_WrongCase10()  { $this->generic_test('Classes_WrongCase.10'); }
 }
 ?>

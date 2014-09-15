@@ -103,6 +103,7 @@ fullcode.setProperty('fullcode', fullcode.getProperty('code') + " " + s.join(", 
 // use a (aka c);
 fullcode.out('USE').has('atom', 'Identifier').each{
     it.setProperty('originpath', it.code);
+    it.setProperty('originclass', it.code);
     
     it.setProperty('alias', it.code);
 }
@@ -115,8 +116,10 @@ fullcode.out('USE').has('atom', 'As').each{
     };
     if (it.absolutens == 'true') {
         it.setProperty('originpath', '\\\\' + s.join('\\\\'));
+        it.setProperty('originclass', s.pop());
     } else {
         it.setProperty('originpath', s.join('\\\\'));
+        it.setProperty('originclass', s.pop());
     }
     
     it.setProperty('alias', it.out('AS').next().code);
@@ -130,8 +133,10 @@ fullcode.out('USE').has('atom', 'Nsname').each{
     };
     if (it.absolutens == 'true') {
         it.setProperty('originpath', '\\\\' + s.join('\\\\'));
+        it.setProperty('originclass', s.pop());
     } else {
         it.setProperty('originpath', s.join('\\\\'));
+        it.setProperty('originclass', s.pop());
     }
     
     if (it.out('AS').any()) {

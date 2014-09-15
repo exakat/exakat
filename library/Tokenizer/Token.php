@@ -429,8 +429,9 @@ g.idx('Staticmethodcall')[['token':'node']].out('CLASS').sideEffect{fullcode = i
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
     } else {
         isDefault = true;
-        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.has('alias', fullcode.fullcode).each{
+        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias.toLowerCase() == fullcode.fullcode.toLowerCase()}.each{
             fullcode.setProperty('fullnspath', alias.fullnspath);
+            fullcode.setProperty('aliased', 'true');
             isDefault = false;
         } ;
         
@@ -451,8 +452,9 @@ g.idx('Staticproperty')[['token':'node']].out('CLASS').sideEffect{fullcode = it;
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
     } else {
         isDefault = true;
-        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.has('alias', fullcode.fullcode).each{
+        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias.toLowerCase() == fullcode.fullcode.toLowerCase()}.each{
             fullcode.setProperty('fullnspath', alias.fullnspath);
+            fullcode.setProperty('aliased', 'true');
             isDefault = false;
         } ;
         
@@ -473,8 +475,9 @@ g.idx('Staticconstant')[['token':'node']].out('CLASS').sideEffect{fullcode = it;
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
     } else {
         isDefault = true;
-        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.has('alias', fullcode.fullcode).each{
+        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias.toLowerCase() == fullcode.fullcode.toLowerCase()}.each{
             fullcode.setProperty('fullnspath', alias.fullnspath);
+            fullcode.setProperty('aliased', 'true');
             isDefault = false;
         } ;
         
@@ -496,8 +499,9 @@ g.idx('Instanceof')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
     } else {
         isDefault = true;
-        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.has('alias', fullcode.fullcode).each{
+        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias.toLowerCase() == fullcode.fullcode.toLowerCase()}.each{
             fullcode.setProperty('fullnspath', alias.fullnspath);
+            fullcode.setProperty('aliased', 'true');
             isDefault = false;
         } ;
         
@@ -518,8 +522,9 @@ g.idx('Catch')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
     } else {
         isDefault = true;
-        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.has('alias', fullcode.fullcode).each{
+        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias.toLowerCase() == fullcode.fullcode.toLowerCase()}.each{
             fullcode.setProperty('fullnspath', alias.fullnspath);
+            fullcode.setProperty('aliased', 'true');
             isDefault = false;
         } ;
         
@@ -540,8 +545,9 @@ g.idx('Typehint')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.l
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
     } else {
         isDefault = true;
-        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.has('alias', fullcode.fullcode).each{
+        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias.toLowerCase() == fullcode.fullcode.toLowerCase()}.each{
             fullcode.setProperty('fullnspath', alias.fullnspath);
+            fullcode.setProperty('aliased', 'true');
             isDefault = false;
         } ;
         
@@ -562,8 +568,9 @@ g.idx('New')[['token':'node']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
     
     if (fullcode.token == 'T_STRING') {
         isDefault = true;
-        it.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.has('alias', fullcode.code).each{
+        it.out('BLOCK', 'CODE').out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.has('alias', fullcode.code).each{
             fullcode.setProperty('fullnspath', alias.fullnspath);
+            fullcode.setProperty('aliased', 'true');
             isDefault = false;
         } ;
         
@@ -647,7 +654,7 @@ g.idx('Namespace')[['token':'node']].each{
 ////// Solving classes Namespaces
 // NEW + self, static, parent
 g.idx('Functioncall')[['token':'node']]
-    .has('token', 'T_STRING')
+    .filter{it.token in ['T_STRING', 'T_STATIC']}
     .filter{ it.in('NEW').any()}
     .each{
         if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
@@ -659,129 +666,7 @@ g.idx('Functioncall')[['token':'node']]
         } 
     }; 
 
-", /* "
-// use A + new A\Class
-g.idx('New')[['token':'node']]
-    .out('NEW')
-    .has('token', 'T_NS_SEPARATOR')
-    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
-    .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use')
-                                     .out('USE').hasNot('atom', 'As')
-                                     .filter{ it.code.toLowerCase() == node.out('SUBNAME').has('order', 0).next().code.toLowerCase()}.fill(uses).any() }
-    .each{
-        node = it;
-        uses.each{ 
-            u = node.code.tokenize('\\\\');
-            u[0] = it.code ;
-            path = '\\\\' + u.join('\\\\'); 
-            if (g.idx('classes')[['path':path.toLowerCase()]].any()) {
-                node.setProperty('fullnspath', path.toLowerCase());
-            };
-        }
-    }; 
-
-// use A + new A()
-cases = [];
-g.idx('New')[['token':'node']]
-    .out('NEW')
-    .has('token', 'T_STRING')
-    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
-    .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use')
-                                     .out('USE').hasNot('atom', 'As')
-                                     .filter{ it.code.toLowerCase() == node.code.toLowerCase()}.fill(uses).any() }
-    .fill(cases);
-    
-    cases
-    .each{
-        node = it;
-        uses.each{ 
-            path = '\\\\' + it.code; 
-            if (g.idx('classes')[['path':path.toLowerCase()]].any()) {
-                node.setProperty('fullnspath', path.toLowerCase());
-            };
-        }
-    }; 
-
-// use A\B + new A()
-g.idx('New')[['token':'node']]
-    .out('NEW')
-    .has('token', 'T_STRING')
-    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
-    .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use')
-                                     .out('USE').hasNot('atom', 'As')
-                                     .filter{ c = it.out('SUBNAME').count() - 1; it.out('SUBNAME').has('order', c.toInteger()).next().code.toLowerCase() == node.code.toLowerCase()}.fill(uses).any() }
-    .each{
-        node = it;
-        uses.each{ 
-            path = '\\\\' + it.fullcode; 
-            if (g.idx('classes')[['path':path.toLowerCase()]].any()) {
-                node.setProperty('fullnspath', path.toLowerCase());
-            };
-        }
-    }; 
-
-// use A as B + new B
-g.idx('New')[['token':'node']]
-    .out('NEW')
-    .has('token', 'T_STRING')
-    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
-    .filter{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE')
-                                     .filter{ it.out('AS').filter{it.code.toLowerCase() == node.code.toLowerCase()}.any()}.fill(uses).any() }
-    .each{
-        node = it;
-        uses.each{ 
-            s = [];
-            it.out('SUBNAME').sort{it.order}._().each{ s.add(it.fullcode); };
-            path = '\\\\' + s.join('\\\\'); 
-            if (g.idx('classes')[['path':path.toLowerCase()]].any()) {
-                node.setProperty('fullnspath', path.toLowerCase());
-            };
-        }
-    }; 
-
-// use A as B + new B\Class
-g.idx('New')[['token':'node']]
-    .out('NEW')
-    .has('token', 'T_NS_SEPARATOR')
-    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
-    .findAll{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE')
-                                     .filter{ it.out('AS').filter{ it.code.toLowerCase() == node.out('SUBNAME').has('order', 0).next().code.toLowerCase()}.any() }.fill(uses).any() }
-    .each{
-        // there will be only one alias that match! 
-        node = it;
-        uses.each{ 
-            u = node.code.tokenize('\\\\');
-            s = [];
-            it.out('SUBNAME').sort{it.order}._().each{ s.add(it.fullcode); };
-            u[0] = s.join('\\\\');
-            path = '\\\\' + u.join('\\\\'); 
-            if (g.idx('classes')[['path':path.toLowerCase()]].any()) {
-                node.setProperty('fullnspath', path.toLowerCase());
-            };
-        }
-    }; 
-
-// use A as B + new Nsname
-g.idx('Nsname')[['token':'node']]
-    .has('token', 'T_STRING')
-    .filter{ g.idx('classes')[['path':it.fullnspath]].any() == false}
-    .findAll{ uses = []; node = it; it.in.loop(1){true}{it.object.atom == 'Namespace'}.out('BLOCK').out('ELEMENT').has('atom', 'Use').out('USE')
-                                     .filter{ it.out('AS').filter{ it.code.toLowerCase() == node.out('SUBNAME').has('order', 0).next().code.toLowerCase()}.any() }.fill(uses).any() }
-    .each{
-        // there will be only one alias that match! 
-        node = it;
-        uses.each{ 
-            u = node.fullcode.tokenize('\\\\');
-            s = [];
-            it.out('SUBNAME').sort{it.order}._().each{ s.add(it.fullcode); };
-            u[0] = s.join('\\\\');
-            path = '\\\\' + u.join('\\\\'); 
-            if (g.idx('classes')[['path':path.toLowerCase()]].any()) {
-                node.setProperty('fullnspath', path.toLowerCase());
-            };
-        }
-    }; 
-", */"
+", "
 // local class in its namespace
 g.idx('New')[['token':'node']]
     .out('NEW')
