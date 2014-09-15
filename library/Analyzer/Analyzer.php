@@ -1159,11 +1159,53 @@ GREMLIN;
     }
 
     public function goToMethodDefinition() {
-        // starting with a staticmethodcall 
-        $this->addMethod('out("METHOD").sideEffect{ methodname = it.code.toLowerCase() }.in("METHOD").out("CLASS").transform{ g.idx("classes").get("path", it.fullnspath).next(); }
+        // starting with a staticmethodcall , no support for static, self, parent
+        $this->addMethod('sideEffect{methodname = it.out("METHOD").next().code.toLowerCase();}
+                .out("CLASS").transform{
+                    if (it.code.toLowerCase() == "self") {
+                        init = it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.next();
+                    } else if (it.code.toLowerCase() == "static") {
+                        init = it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.next();
+                    } else  if (it.code.toLowerCase() == "parent") {
+                        init = it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.next().out("EXTENDS").transform{ g.idx("classes").get("path", it.fullnspath).next(); }.next();
+                    } else {
+                        init = g.idx("classes").get("path", it.fullnspath).next();
+                    };
+
+                    find = null;
+                    if (init.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any()) {
+                        found = init.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.out("NAME").next().code.toLowerCase() == methodname }.next();
+                    } else if (init.out("EXTENDS").any() == false) {
+                        found = it;
+                    } else {
+                        found = init.out("EXTENDS").transform{ g.idx("classes").get("path", it.fullnspath).next(); }
+                            .loop(2){ it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any() == false}
+                                    { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any()}
+                        .next();
+                        
+                        if (found == null) { found = it; } else {
+                            found = found.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.out("NAME").next().code.toLowerCase() == methodname }.next();
+                        }
+                    };
+                    found;
+                }.has("atom", "Function")');
+        
+        return $this;
+    }
+    
+    public function goToPropertyDefinition() {
+        // starting with a staticproperty 
+        $this->addMethod('sideEffect{ propertyname = it.out("PROPERTY").next().code.toLowerCase() }.out("CLASS").transform{ g.idx("classes").get("path", it.fullnspath).next(); }
                 .out("EXTENDS").transform{ g.idx("classes").get("path", it.fullnspath).next(); }
-                .loop(2){ it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any() == false}
-                        { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any()}');
+                .loop(2){ it.object.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").filter{ it.code.toLowerCase() == propertyname }.any() == false}
+                        { it.object.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").filter{ it.code.toLowerCase() == propertyname }.any()}
+                .out("BLOCK").out("ELEMENT").has("atom", "Ppp").filter{ it.out("DEFINE").code.toLowerCase() == methodname }');
+        
+        return $this;
+    }
+
+    public function goToNamespace() {
+        $this->addMethod('in.loop(1){it.object.atom != "Namespace"}{it.object.atom == "Namespace"}');
         
         return $this;
     }
