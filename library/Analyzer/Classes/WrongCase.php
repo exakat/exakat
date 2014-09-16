@@ -11,7 +11,6 @@ class WrongCase extends Analyzer\Analyzer {
         $this->atomIs("New")
              ->outIs('NEW')
              ->tokenIs('T_STRING')
-             ->isNot('aliased', 'true')
              ->codeIsNot(array('static', 'parent', 'self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
