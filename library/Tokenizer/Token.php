@@ -654,8 +654,51 @@ g.idx('Namespace')[['token':'node']].each{
 ////// Solving classes Namespaces
 // NEW + self, static, parent
 g.idx('Functioncall')[['token':'node']]
-    .filter{it.token in ['T_STRING', 'T_STATIC']}
+    .filter{ it.token in ['T_STRING', 'T_STATIC']}
     .filter{ it.in('NEW').any()}
+    .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
+    .each{
+        if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
+            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
+        } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
+            it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase()); // '\static'
+        } else if (it.getProperty('code').toLowerCase() == 'parent') {
+            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').transform{ g.idx('classes').get('path', it.fullnspath).next(); }.next().fullnspath);
+        } 
+    }; 
+
+// static method call
+g.idx('Staticmethodcall')[['token':'node']]
+    .out('CLASS')
+    .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
+    .each{
+        if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
+            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
+        } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
+            it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase()); // '\static'
+        } else if (it.getProperty('code').toLowerCase() == 'parent') {
+            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').transform{ g.idx('classes').get('path', it.fullnspath).next(); }.next().fullnspath);
+        } 
+    }; 
+
+// static property
+g.idx('Staticproperty')[['token':'node']]
+    .out('CLASS')
+    .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
+    .each{
+        if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
+            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
+        } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
+            it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase()); // '\static'
+        } else if (it.getProperty('code').toLowerCase() == 'parent') {
+            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').transform{ g.idx('classes').get('path', it.fullnspath).next(); }.next().fullnspath);
+        } 
+    }; 
+
+// static constant
+g.idx('Staticconstant')[['token':'node']]
+    .out('CLASS')
+    .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
     .each{
         if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
             it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
