@@ -7,10 +7,9 @@ use Analyzer;
 class NamespaceFullyQualified extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Nsname")
+             ->outIs('SUBNAME')
              ->is('order', 0)
-             ->inIs('ELEMENT')
-             ->inIs('CODE')
-             ->is('root', "'true'")
+             ->tokenIs('T_NAMESPACE')
              ->back('first');
         $this->prepareQuery();
     }
