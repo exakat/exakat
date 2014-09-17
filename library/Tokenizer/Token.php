@@ -356,7 +356,28 @@ g.idx('Class')[['token':'node']].sideEffect{fullcode = it;}.in.loop(1){!(it.obje
     }
 };
 
+", "
 g.idx('Class')[['token':'node']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+    }
+};
+", "
+g.idx('Interface')[['token':'node']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
+    } else {
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+    }
+};
+", "
+g.idx('Trait')[['token':'node']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
         fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
