@@ -103,7 +103,6 @@ class IsRead extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->_as('method')
-             ->outIs('NAME')
              ->analyzerIs('Analyzer\\Classes\\Constructor')
              ->back('method')
              ->outIs('ARGUMENTS')
