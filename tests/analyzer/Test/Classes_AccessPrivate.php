@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_AccessPrivate extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testClasses_AccessPrivate01()  { $this->generic_test('Classes_AccessPrivate.01'); }
     public function testClasses_AccessPrivate02()  { $this->generic_test('Classes_AccessPrivate.02'); }
+    public function testClasses_AccessPrivate03()  { $this->generic_test('Classes_AccessPrivate.03'); }
 }
 ?>
