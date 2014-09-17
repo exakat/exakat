@@ -133,16 +133,16 @@ fullcode.out('USE').has('atom', 'Nsname').each{
     };
     if (it.absolutens == 'true') {
         it.setProperty('originpath', '\\\\' + s.join('\\\\'));
-        it.setProperty('originclass', s.pop());
+        it.setProperty('originclass', s[s.size() - 1]);
     } else {
         it.setProperty('originpath', s.join('\\\\'));
-        it.setProperty('originclass', s.pop());
+        it.setProperty('originclass', s[s.size() - 1]);
     }
     
     if (it.out('AS').any()) {
         it.setProperty('alias', it.out('AS').next().code);
     } else {
-        it.setProperty('alias', s.pop());
+        it.setProperty('alias', s[s.size() - 1]);
     }
 }
 
