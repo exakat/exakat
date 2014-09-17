@@ -9,7 +9,9 @@ class UnresolvedUse extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE')
              ->noClassDefinition()
-             ->noNamespaceDefinition();
+             ->noNamespaceDefinition()
+             ->noInterfaceDefinition()
+             ->noTraitDefinition();
         $this->prepareQuery();
     }
 }
