@@ -661,7 +661,7 @@ g.idx('Functioncall')[['token':'node']]
         if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
             it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
-            it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase()); // '\static'
+            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
             it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').transform{ g.idx('classes').get('path', it.fullnspath).next(); }.next().fullnspath);
         } 
@@ -675,7 +675,7 @@ g.idx('Staticmethodcall')[['token':'node']]
         if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
             it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
-            it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase()); // '\static'
+            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
             it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').transform{ g.idx('classes').get('path', it.fullnspath).next(); }.next().fullnspath);
         } 
@@ -689,7 +689,7 @@ g.idx('Staticproperty')[['token':'node']]
         if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
             it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
-            it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase()); // '\static'
+            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
             it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').transform{ g.idx('classes').get('path', it.fullnspath).next(); }.next().fullnspath);
         } 
@@ -703,7 +703,7 @@ g.idx('Staticconstant')[['token':'node']]
         if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
             it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
-            it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase()); // '\static'
+            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
             it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').transform{ g.idx('classes').get('path', it.fullnspath).next(); }.next().fullnspath);
         } 
