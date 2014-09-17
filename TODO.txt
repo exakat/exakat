@@ -354,3 +354,11 @@ spot uses which original is used, but not the alias
 Upgrade the 'randomtest' for PHPunit, with a sqlite table that track the number of test done, and randomize the oldest ones and the failed ones first.
 
 Ternary that doesn't yield the same kind of results (print/ 1)
+unused constants
+
+Identify the use of static and self and mention there is a difference in usage. 
+make stats of usage of parent, self, static. 
+Classes that are not found are classified as wrong case for calling (bug)
+vérifier le support de zmq
+
+scripter la liste des extensions sur pecl.php.net
