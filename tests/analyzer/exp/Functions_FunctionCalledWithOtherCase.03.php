@@ -1,12 +1,13 @@
 <?php
 
-$expected     = array('ABC( )',
-                      'sabC( )',
-                      'Sabc( )');
+$expected     = array();
 
 $expected_not = array('abc( )',
                       'sabc( )',
                       'abc2( )',
-                      'abc3( )');
+                      'abc3( )',
+                      'ABC( )',
+                      'sabC( )',
+                      'Sabc( )');
 
 ?>
