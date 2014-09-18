@@ -947,10 +947,9 @@ GREMLIN;
 
     function inIsnot($edge_name) {
         if (is_array($edge_name)) {
-            die(" I don't understand arrays in inIsnot()");
-            // @todo
+            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any() == false}", $edge_name);
         } else {
-            $this->addMethod("filter{ it.in(***).count() == 0}", $edge_name);
+            $this->addMethod("filter{ it.in(***).any() == false}", $edge_name);
         }
         
         return $this;
@@ -960,7 +959,7 @@ GREMLIN;
         if (is_array($edge_name)) {
             $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any()}", $edge_name);
         } else {
-            $this->addMethod("filter{ it.in(***).count() != 0}", $edge_name);
+            $this->addMethod("filter{ it.in(***).any()}", $edge_name);
         }
         
         return $this;
@@ -974,9 +973,9 @@ GREMLIN;
     
     function hasNoIn($edge_name) {
         if (is_array($edge_name)) {
-            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.count() == 0}", $edge_name);
+            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any() == false}", $edge_name);
         } else {
-            $this->addMethod("filter{ it.in(***).count() == 0}", $edge_name);
+            $this->addMethod("filter{ it.in(***).any() == false}", $edge_name);
         }
         
         return $this;
@@ -984,9 +983,7 @@ GREMLIN;
 
     function hasOut($edge_name) {
         if (is_array($edge_name)) {
-            // @todo
-            die(" I don't understand arrays in out()");
-            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.count() == 0}", $edge_name);
+            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.any()}", $edge_name);
         } else {
             $this->addMethod("filter{ it.out(***).any()}", $edge_name);
         }
@@ -997,9 +994,9 @@ GREMLIN;
     function hasNoOut($edge_name) {
         if (is_array($edge_name)) {
             // @todo
-            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.count() == 0}", $edge_name);
+            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.any() == false}", $edge_name);
         } else {
-            $this->addMethod("filter{ it.out(***).count() == 0}", $edge_name);
+            $this->addMethod("filter{ it.out(***).any() == false}", $edge_name);
         }
         
         return $this;
