@@ -2,14 +2,11 @@
 
 namespace a\b;
 
-use a\b\ClassCaseNotOK as AliasCaseNotOK;
+use a\b\ClassCaseOK as AliasCaseNotOK;
 use a\b\ClassCaseOK as AliasCaseOK ;
 
 new aliascasenotok();    // find
 new AliasCaseOK();       // not find
-
-new classcasenotok();    // find
-new ClassCaseOK();       // not find
 
 print aliascasenotok::x; // find
 print AliasCaseOK::x;    // not find
@@ -31,6 +28,5 @@ catch (aliascasenotok $e) {}
 catch (AliasCaseOK $e) {}
 
 class ClassCaseOK { const x = 1;}
-class ClassCaseNotok{ const x = 2; }
 
 ?>

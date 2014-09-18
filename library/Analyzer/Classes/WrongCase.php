@@ -15,6 +15,7 @@ class WrongCase extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first');
         $this->prepareQuery();
