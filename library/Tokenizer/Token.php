@@ -737,6 +737,14 @@ g.idx('Staticconstant')[['token':'node']]
     }; 
 
 ", "
+// special case for isset, unset, array, etc.
+g.idx('Functioncall')[['token':'node']]
+    .filter{ it.token in ['T_ARRAY', 'T_UNSET', 'T_EXIT', 'T_ISSET', 'T_ECHO', 'T_PRINT', 'T_EMPTY']}
+    .each{
+        it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
+    }; 
+
+", "
 // local class in its namespace
 g.idx('New')[['token':'node']]
     .out('NEW')
