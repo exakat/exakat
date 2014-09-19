@@ -7,7 +7,10 @@ use Analyzer;
 class VariableUsedOnceByContext extends Analyzer\Analyzer {
     
     public function dependsOn() {
-        return array('Analyzer\\Variables\\VariableUsedOnce');
+        return array('Analyzer\\Variables\\VariableUsedOnce',
+                     'Analyzer\\Variables\\Variablenames',
+                     "Analyzer\\Variables\\InterfaceArguments",
+                     );
     }
     
     public function analyze() {
