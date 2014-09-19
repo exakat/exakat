@@ -362,3 +362,14 @@ Classes that are not found are classified as wrong case for calling (bug)
 vérifier le support de zmq
 
 scripter la liste des extensions sur pecl.php.net
+suggest Use and aliases to reduce code size.
+combine several uses in one (prefix instead of classes)
+understand the strategy of use.
+
+Classes/UnusedPrivateProperties : Not done on alpharpc ?? No tokenizer.final report...
+Several instructino in the same line : compare line with > not ==, so as to has f( \n g($x)) spotted.
+
+when there is no namespace, what to find? I should put a default namespace 
+
+Add a way to ignore some vendors dependings on project.
+Add a way to overwrite / add / nullify some data from within a project.
