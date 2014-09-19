@@ -34,6 +34,14 @@ class ClassUsage extends Analyzer\Analyzer {
         $this->atomIs("Instanceof")
              ->outIs('CLASS');
         $this->prepareQuery();
+
+        $this->atomIs("Class")
+             ->outIs(array('EXTENDS', 'IMPLEMENTS'));
+        $this->prepareQuery();
+
+        $this->atomIs("Use")
+             ->outIs('USE');
+        $this->prepareQuery();
     }
 }
 
