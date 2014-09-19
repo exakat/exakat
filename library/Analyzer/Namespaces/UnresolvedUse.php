@@ -6,7 +6,11 @@ use Analyzer;
 
 class UnresolvedUse extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Classes\\IsExtClass');
+        return array('Analyzer\\Classes\\IsExtClass',
+                     'Analyzer\\Interfaces\\IsExtInterface',
+                     'Analyzer\\Traits\\IsExtTrait',
+                     'Analyzer\\Namespaces\\KnownVendor'
+                     );
     }
 
     public function analyze() {
@@ -16,7 +20,11 @@ class UnresolvedUse extends Analyzer\Analyzer {
              ->noNamespaceDefinition()
              ->noInterfaceDefinition()
              ->noTraitDefinition()
-             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass');
+             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
+             ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface')
+             ->analyzerIsNot('Analyzer\\Traits\\IsExtTrait')
+             ->analyzerIsNot('Analyzer\\Namespaces\\KnownVendor')
+             ;
         $this->prepareQuery();
     }
 }
