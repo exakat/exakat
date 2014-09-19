@@ -890,6 +890,17 @@ GREMLIN;
         return $this;
     }
 
+    // follows a link if it is there (and do nothing otherwise)
+    protected function outIsIE($edge_name) {
+        if (is_array($edge_name)) {
+            die('I don\'t understand arrays in '.__METHOD__."\n");
+        } else {
+            $this->addMethod("transform{ if (it.out('$edge_name').any()) { it.out('$edge_name').next(); } else { it }}", $edge_name);
+        }
+        
+        return $this;
+    }
+
     function outIsnt($edge_name) {
         if (is_array($edge_name)) {
             // @todo
@@ -1202,7 +1213,7 @@ GREMLIN;
     }
 
     public function goToNamespace() {
-        $this->addMethod('in.loop(1){it.object.atom != "Namespace"}{it.object.atom == "Namespace"}');
+        $this->addMethod('in.loop(1){!(it.object.atom in ["Namespace", "File"])}{it.object.atom in ["Namespace", "File"]}');
         
         return $this;
     }
@@ -1415,6 +1426,14 @@ GREMLIN;
         }
         
         return Analyzer::$docs->getSeverity(get_class($this));
+    }
+
+    public function getVendors() {
+        if (is_null(Analyzer::$docs)) {
+            Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
+        }
+        
+        return Analyzer::$docs->getVendors();
     }
 
     public function getTimeToFix() {
