@@ -14,6 +14,14 @@ class InterfaceUsage extends Analyzer\Analyzer {
         $this->atomIs('Instanceof')
              ->outIs('CLASS');
         $this->prepareQuery();
+
+        $this->atomIs('Typehint')
+             ->outIs('CLASS');
+        $this->prepareQuery();
+
+        $this->atomIs('Use')
+             ->outIs('USE');
+        $this->prepareQuery();
     }
 }
 
