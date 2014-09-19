@@ -16,7 +16,7 @@ class ConstantUsage extends Analyzer\Analyzer {
 
         $this->atomIs("Identifier")
              ->codeIsNot(array('true', 'false', 'null'))
-             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY', 'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS'));
+             ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY', 'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS'));
         $this->prepareQuery();
 
         $this->atomIs("Boolean");
