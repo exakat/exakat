@@ -38,6 +38,20 @@ class UsedUse extends Analyzer\Analyzer {
              ->back('result');
         $this->prepareQuery();
 
+    // case of alias use in extends or implements
+        $this->atomIs("Use")
+             ->outIs('USE')
+             ->_as('result')
+             ->savePropertyAs('code', 'use')
+             ->inIs('USE')
+             ->inIs('ELEMENT')
+             ->inIs(array('CODE', 'BLOCK'))
+             ->atomInside('Class')
+             ->outIs('EXTENDS', 'IMPLEMENTS')
+             ->samePropertyAs('code', 'use')
+             ->back('result');
+        $this->prepareQuery();
+
     // case of simple use in a extends
         $this->atomIs("Use")
              ->outIs('USE')
