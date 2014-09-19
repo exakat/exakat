@@ -371,5 +371,9 @@ Several instructino in the same line : compare line with > not ==, so as to has 
 
 when there is no namespace, what to find? I should put a default namespace 
 
+alpharpc
+
+
 Add a way to ignore some vendors dependings on project.
 Add a way to overwrite / add / nullify some data from within a project.
+Wrong number of arguments : to be fixed
