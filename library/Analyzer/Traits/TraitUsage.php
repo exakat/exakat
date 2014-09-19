@@ -8,7 +8,9 @@ class TraitUsage extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('Use')
-             ->outIs('USE');
+             ->outIs('USE')
+             ->traitDefinition();
+        $this->prepareQuery();
     }
 }
 
