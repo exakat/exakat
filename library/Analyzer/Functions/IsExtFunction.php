@@ -24,12 +24,15 @@ class IsExtFunction extends Analyzer\Analyzer {
                 }
             }
         }
-
-        $functions = array_map(function ($functions) { return '\\'.strtolower($functions); }, $functions);
+        
+        $functions = array_keys(array_count_values($functions));
+        $functions = array_map(function ($a) { return '\\'.strtolower($a); }, $functions);
         
         $this->atomIs('Functioncall')
-             ->tokenIsNot(array('T_VARIABLE','T_OPEN_BRACKET'))
-             ->fullnspath($functions);
+             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
+             ->hasNoIn('METHOD')
+             ->fullnspath($functions, true);
+        $this->prepareQuery();
     }
 }
 
