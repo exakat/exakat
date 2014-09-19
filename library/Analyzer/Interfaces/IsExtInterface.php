@@ -33,6 +33,7 @@ class IsExtInterface extends Analyzer\Analyzer {
         
         $this->analyzerIs("Analyzer\\Interfaces\\InterfaceUsage")
              ->fullnspath($interfaces);
+        $this->prepareQuery();
     }
 }
 
