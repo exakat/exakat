@@ -32,7 +32,7 @@ class IsExtClass extends Analyzer\Analyzer {
         $classes = array_map(function ($class) { return '\\'.strtolower($class); }, $classes);
         
         $this->analyzerIs("Analyzer\\Classes\\ClassUsage")
-             ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
+             ->tokenIs(array('T_STRING','T_NS_SEPARATOR', 'T_AS'))
              ->fullnspath($classes);
         $this->prepareQuery();
     }
