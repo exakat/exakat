@@ -18,6 +18,7 @@ class PropertyNeverUsed extends Analyzer\Analyzer {
              ->atomIs('Void')
              ->inIs('VALUE')
              ->analyzerIsNot('Analyzer\\Classes\\PropertyUsedInternally');
+        $this->prepareQuery();
     }
 }
 

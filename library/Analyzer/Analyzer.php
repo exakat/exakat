@@ -895,7 +895,7 @@ GREMLIN;
         if (is_array($edge_name)) {
             die('I don\'t understand arrays in '.__METHOD__."\n");
         } else {
-            $this->addMethod("transform{ if (it.out('$edge_name').any()) { it.out('$edge_name').next(); } else { it }}", $edge_name);
+            $this->addMethod("transform{ if (it.out('$edge_name').any()) { it.out('$edge_name').next(); } else { it ;}}", $edge_name);
         }
         
         return $this;

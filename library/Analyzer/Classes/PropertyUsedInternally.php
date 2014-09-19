@@ -11,16 +11,17 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
-             ->savePropertyAs('propertyname', 'propertyname')
              ->_as('ppp')
-             ->outIs('VALUE')
-             ->atomIs('Void')
-             ->inIs('VALUE')
+             ->outIs('DEFINE')
+             ->savePropertyAs('code', 'propertyname')
+             ->inIs('DEFINE')
              ->inIs('ELEMENT')
              ->atomInside('Property')
              ->outIs('PROPERTY')
+             ->outIsIE('VARIABLE')
              ->samePropertyAs('code','propertyname')
              ->back('ppp');
+        $this->prepareQuery();
     }
 }
 
