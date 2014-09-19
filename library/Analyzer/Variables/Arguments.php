@@ -8,24 +8,50 @@ class Arguments extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs("Variable")
-             ->_as('x')
              ->inIs('ARGUMENT')
              ->atomIs('Arguments')
              ->inIs('ARGUMENTS')
              ->atomIs('Function')
              ->outIs('BLOCK')
              ->setApplyBelow(true)
-             ->back('x');
+             ->back('first');
         $this->prepareQuery();
-        
-        $this->setApplyBelow(false);
+
+        // with default value 
         $this->atomIs("Variable")
-             ->_as('x')
+             ->inIs('LEFT')
              ->inIs('ARGUMENT')
              ->atomIs('Arguments')
              ->inIs('ARGUMENTS')
              ->atomIs('Function')
-             ->back('x');
+             ->outIs('BLOCK')
+             ->setApplyBelow(true)
+             ->back('first');
+        $this->prepareQuery();
+
+        // with typehint
+        $this->atomIs("Variable")
+             ->inIs('VARIABLE')
+             ->inIs('ARGUMENT')
+             ->atomIs('Arguments')
+             ->inIs('ARGUMENTS')
+             ->atomIs('Function')
+             ->outIs('BLOCK')
+             ->setApplyBelow(true)
+             ->back('first');
+        $this->prepareQuery();
+
+        // with typehint and default value
+        $this->atomIs("Variable")
+             ->inIs('LEFT')
+             ->inIs('VARIABLE')
+             ->inIs('ARGUMENT')
+             ->atomIs('Arguments')
+             ->inIs('ARGUMENTS')
+             ->atomIs('Function')
+             ->outIs('BLOCK')
+             ->setApplyBelow(true)
+             ->back('first');
         $this->prepareQuery();
     }
 }

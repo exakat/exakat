@@ -13,15 +13,55 @@ class InterfaceArguments extends Analyzer\Analyzer {
 // When there are several functions in one interface, we have a sequence.
         $this->atomIs('Variable')
              ->analyzerIs("Analyzer\\Variables\\Arguments")
-             ->_as('x')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->atomIs('Function')
              ->inIs('ELEMENT')
              ->inIs('BLOCK')
              ->atomIs('Interface')
-             ->back('x');
+             ->back('first');
         $this->prepareQuery();
+
+        // with default value
+        $this->atomIs('Variable')
+             ->analyzerIs("Analyzer\\Variables\\Arguments")
+             ->inIs('LEFT')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->atomIs('Function')
+             ->inIs('ELEMENT')
+             ->inIs('BLOCK')
+             ->atomIs('Interface')
+             ->back('first');
+        $this->prepareQuery();
+
+        // with typehint
+        $this->atomIs('Variable')
+             ->analyzerIs("Analyzer\\Variables\\Arguments")
+             ->inIs('VARIABLE')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->atomIs('Function')
+             ->inIs('ELEMENT')
+             ->inIs('BLOCK')
+             ->atomIs('Interface')
+             ->back('first');
+        $this->prepareQuery();
+
+        // with typehint and default value
+        $this->atomIs('Variable')
+             ->analyzerIs("Analyzer\\Variables\\Arguments")
+             ->inIs('LEFT')
+             ->inIs('VARIABLE')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->atomIs('Function')
+             ->inIs('ELEMENT')
+             ->inIs('BLOCK')
+             ->atomIs('Interface')
+             ->back('first');
+        $this->prepareQuery();
+
     }
     
 }
