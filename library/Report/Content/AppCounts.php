@@ -14,26 +14,34 @@ class AppCounts extends \Report\Content {
                             'Classes'        => 'Class',
                             'Interfaces'     => 'Interface',
                             'Trait'          => 'Trait',
-                            'Function'       => array('index' => 'Function', 'Below' => 'in("ELEMENT").in("CODE").in("BLOCK").hasNot("atom", "Class")'),
+                            'Function'       => array('index' => 'Function', 'Below' => 'in("ELEMENT").in("BLOCK").hasNot("atom", "Class")'),
                             'Variables'      => array('index' => 'Variable', 'Unique' => 'code'),
+                            'Constants'      => array('index' => 'Constant'),
                      ),
                     'Classes' => array(
                             'Classes'        => 'Class',
-                            'Constants'      => array('index' => 'Class', 'Below' => 'out("BLOCK").out("CODE").out("ELEMENT").has("atom", "Const")'),
-                            'Properties'     => array('index' => 'Class', 'Below' => 'out("BLOCK").out("CODE").out("ELEMENT").has("atom", "Ppp").filter{!it.out("STATIC").any()}.out("DEFINE")'),
-                            'Static properties' => array('index' => 'Class', 'Below' => 'out("BLOCK").out("CODE").out("ELEMENT").has("atom", "Ppp").filter{it.out("STATIC").any()}.out("DEFINE")'),
-                            'Methods'        => array('index' => 'Class', 'Below' => 'out("BLOCK").out("CODE").out("ELEMENT").has("atom", "Function").filter{!it.out("STATIC").any()}'),
-                            'Static methods' => array('index' => 'Class', 'Below' => 'out("BLOCK").out("CODE").out("ELEMENT").has("atom", "Function").filter{it.out("STATIC").any()}'),
+                            'Constants'      => array('index' => 'Class', 
+                                                      'Below' => 'out("BLOCK").out("ELEMENT").has("atom", "Const")'),
+                            'Properties'     => array('index' => 'Class', 
+                                                      'Below' => 'out("BLOCK").out("ELEMENT").has("atom", "Ppp").filter{!it.out("STATIC").any()}.out("DEFINE")'),
+                            'Static properties' => array('index' => 'Class', 
+                                                         'Below' => 'out("BLOCK").out("ELEMENT").has("atom", "Ppp").filter{it.out("STATIC").any()}.out("DEFINE")'),
+                            'Methods'        => array('index' => 'Class', 
+                                                      'Below' => 'out("BLOCK").out("ELEMENT").has("atom", "Function").filter{!it.out("STATIC").any()}'),
+                            'Static methods' => array('index' => 'Class', 
+                                                                'Below' => 'out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("STATIC").any()}'),
                      ),
                     'Structures' => array(
                             'Ifthen'        => 'Ifthen',
                             'Switch'        => 'Switch',
                             'For'           => 'For',
                             'Foreach'       => 'Foreach',
-                            'While'         => 'Ifthen',
+                            'While'         => 'While',
                             'Do..while'     => 'Dowhile',
                             'New'           => 'New',
                             'Clone'         => 'Clone',
+                            'Try'           => 'Try',
+                            '?  :'          => 'Ternary',
                      ),
                     );
 
@@ -47,7 +55,7 @@ class AppCounts extends \Report\Content {
                 } elseif (isset($ext['Below'])) {
                     $queryTemplate = "g.idx('{$ext['index']}')[['token':'node']].{$ext['Below']}.count()"; 
                 } else {
-                    die("Don't know what to do!\n");
+                    $queryTemplate = "g.idx('{$ext['index']}')[['token':'node']].count()"; 
                 }
                 $vertices = $this->query($this->neo4j, $queryTemplate);
                 $v = $vertices[0][0];
