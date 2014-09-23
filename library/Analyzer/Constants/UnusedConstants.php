@@ -12,6 +12,7 @@ class UnusedConstants extends Analyzer\Analyzer {
     public function analyze() {
       $this->atomIs("Functioncall")
              ->hasNoIn('METHOD')
+             ->tokenIsNot('T_VARIABLE')
              ->fullnspath("\\define")
              ->outIs('ARGUMENTS')
              ->orderIs('ARGUMENT', 'first')
