@@ -50,6 +50,7 @@ class _Try extends TokenAuto {
 s = [];
 fullcode.out("CATCH").each{ s.add(it.fullcode); }
 fullcode.setProperty('fullcode', "try " + it.out("CODE").next().getProperty('fullcode') + s.join(" ")); 
+fullcode.setProperty('count', it.out("CATCH").count()); 
 
 GREMLIN;
     }

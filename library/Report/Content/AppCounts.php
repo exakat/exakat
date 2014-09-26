@@ -41,6 +41,7 @@ class AppCounts extends \Report\Content {
                             'New'           => 'New',
                             'Clone'         => 'Clone',
                             'Try'           => 'Try',
+                            'Catch'         => 'Catch',
                             '?  :'          => 'Ternary',
                      ),
                     );

@@ -113,6 +113,7 @@ class Appinfo extends \Report\Content {
 
                             'Throw exceptions' => 'Php/ThrowUsage',
                             'Try/Catch'        => 'Php/TryCatchUsage',
+                            'Multiple catch'   => 'Structure/MultipleCatch',
                             'Trigger error'    => 'Php/TriggerErrorUsage',
                             
                             'Goto'           => 'Php/Gotonames',
