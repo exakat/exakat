@@ -5,7 +5,7 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class TryFinally extends Analyzer\Analyzer {    
-    public static $phpversion = '5.5+';
+    public $phpversion = '5.5+';
     
     public function analyze() {
         $this->atomIs("Try")
