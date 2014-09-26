@@ -114,6 +114,7 @@ class Appinfo extends \Report\Content {
                             'Throw exceptions' => 'Php/ThrowUsage',
                             'Try/Catch'        => 'Php/TryCatchUsage',
                             'Multiple catch'   => 'Structure/MultipleCatch',
+                            'Finally'          => 'Structure/TryFinally',
                             'Trigger error'    => 'Php/TriggerErrorUsage',
                             
                             'Goto'           => 'Php/Gotonames',
@@ -152,6 +153,7 @@ class Appinfo extends \Report\Content {
                             'Dynamic functioncall' => 'Functions/Dynamiccall',
 
                             'Recursive Functions'  => 'Functions/Recursive',
+                            'Generator Functions'  => 'Functions/IsGenerator',
                             'Conditioned Function' => 'Functions/ConditionedFunction',
 
                     ),
