@@ -177,6 +177,10 @@ function process_file($filename, $log_file) {
     }
     
     $tokens = array_values($tokens);
+    
+    if (empty($tokens)) {
+        return true; // we just ignore the file.
+    }
 
     while ( $Php->getTokenname($tokens[0][0]) == 'T_OPEN_TAG' &&
             $Php->getTokenname($tokens[1][0]) == 'T_CLOSE_TAG') {
