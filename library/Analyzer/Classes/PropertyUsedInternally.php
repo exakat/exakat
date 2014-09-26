@@ -7,21 +7,30 @@ use Analyzer;
 class PropertyUsedInternally extends Analyzer\Analyzer {
 
     public function analyze() {
+        // private property + $this->property
         $this->atomIs("Class")
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
              ->_as('ppp')
-             ->outIs('DEFINE')
-             ->savePropertyAs('code', 'propertyname')
-             ->inIs('DEFINE')
+             ->hasOut('PRIVATE')
+             ->savePropertyAs('propertyname', 'propertyname')
              ->inIs('ELEMENT')
              ->atomInside('Property')
+             ->outIs('OBJECT')
+             ->code('$this')
+             ->inIs('OBJECT')
              ->outIs('PROPERTY')
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code','propertyname')
              ->back('ppp');
         $this->prepareQuery();
+
+        // private static property + class/static::property
+        
+        // protected property
+        
+        // public property (fullnspath + ...)
     }
 }
 
