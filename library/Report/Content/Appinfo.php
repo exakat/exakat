@@ -10,84 +10,84 @@ class Appinfo extends \Report\Content {
         // Which extension are being used ? 
         $extensions = array(
                     'Extensions' => array(
-                            'ext/apc'        => 'Extensions/Extapc.php',
-                            'ext/array'      => 'Extensions/Extarray.php',
-                            'ext/bcmath'     => 'Extensions/Extbcmath.php',
-                            'ext/bzip2'      => 'Extensions/Extbzip2.php',
-                            'ext/calendar'   => 'Extensions/Extcalendar.php',
-                            'ext/crypto'     => 'Extensions/Extcrypto.php',
-                            'ext/ctype'      => 'Extensions/Extctype.php',
-                            'ext/curl'       => 'Extensions/Extcurl.php',
-                            'ext/cyrus'      => 'Extensions/Extcyrus.php',
-                            'ext/date'       => 'Extensions/Extdate.php',
-                            'ext/dba'        => 'Extensions/Extdba.php',
-                            'ext/dom'        => 'Extensions/Extdom.php',
-                            'ext/enchant'    => 'Extensions/Extenchant.php',
-                            'ext/ereg'       => 'Extensions/Extereg.php',
-                            'ext/exif'       => 'Extensions/Extexif.php',
-                            'ext/fdf'        => 'Extensions/Extfdf.php',
-                            'ext/ffmpeg'     => 'Extensions/Extffmpeg.php',
-                            'ext/file'       => 'Extensions/Extfile.php',
-                            'ext/fileinfo'   => 'Extensions/Extfileinfo.php',
-                            'ext/filter'     => 'Extensions/Extfilter.php',
-                            'ext/ftp'        => 'Extensions/Extftp.php',
-                            'ext/gd'         => 'Extensions/Extgd.php',
-                            'ext/gmp'        => 'Extensions/Extgmp.php',
-                            'ext/gnupg'      => 'Extensions/Extgnupg.php',
-                            'ext/hash'       => 'Extensions/Exthash.php',
-                            'ext/iconv'      => 'Extensions/Exticonv.php',
-                            'ext/info'       => 'Extensions/Extinfo.php',
-                            'ext/json'       => 'Extensions/Extjson.php',
-                            'ext/kdm5'       => 'Extensions/Extkdm5.php',
-                            'ext/ldap'       => 'Extensions/Extldap.php',
-                            'ext/libxml'     => 'Extensions/Extlibxml.php',
-                            'ext/math'       => 'Extensions/Extmath.php',
-                            'ext/mbstring'   => 'Extensions/Extmbstring.php',
-                            'ext/mcrypt'     => 'Extensions/Extmcrypt.php',
-                            'ext/memcache'   => 'Extensions/Extmemcache.php',
-                            'ext/memcached'  => 'Extensions/Extmemcached.php',
-                            'ext/ming'       => 'Extensions/Extming.php',
-                            'ext/mongo'      => 'Extensions/Extmongo.php',
-                            'ext/mssql'      => 'Extensions/Extmssql.php',
-                            'ext/mysql'      => 'Extensions/Extmysql.php',
-                            'ext/mysqli'     => 'Extensions/Extmysqli.php',
-                            'ext/odbc'       => 'Extensions/Extodbc.php',
-                            'ext/openssl'    => 'Extensions/Extopenssl.php',
-                            'ext/pcntl'      => 'Extensions/Extpcntl.php',
-                            'ext/pcre'       => 'Extensions/Extpcre.php',
-                            'ext/pdo'        => 'Extensions/Extpdo.php',
-                            'ext/pgsql'      => 'Extensions/Extpgsql.php',
-                            'ext/phar'       => 'Extensions/Extphar.php',
-                            'ext/posix'      => 'Extensions/Extposix.php',
-                            'ext/readline'   => 'Extensions/Extreadline.php',
-                            'ext/redis'      => 'Extensions/Extredis.php',
-                            'ext/reflexion'  => 'Extensions/Extreflexion.php',
-                            'ext/sem'        => 'Extensions/Extsem.php',
-                            'ext/session'    => 'Extensions/Extsession.php',
-                            'ext/shmop'      => 'Extensions/Extshmop.php',
-                            'ext/simplexml'  => 'Extensions/Extsimplexml.php',
-                            'ext/snmp'       => 'Extensions/Extsnmp.php',
-                            'ext/soap'       => 'Extensions/Extsoap.php',
-                            'ext/sockets'    => 'Extensions/Extsockets.php',
-                            'ext/spl'        => 'Extensions/Extspl.php',
-                            'ext/sqlite'     => 'Extensions/Extsqlite.php',
-                            'ext/sqlite3'    => 'Extensions/Extsqlite3.php',
-                            'ext/sqlsrv'     => 'Extensions/Extsqlsrv.php',
-                            'ext/ssh2'       => 'Extensions/Extssh2.php',
-                            'ext/standard'   => 'Extensions/Extstandard.php',
-                            'ext/tidy'       => 'Extensions/Exttidy.php',
-                            'ext/tokenizer'  => 'Extensions/Exttokenizer.php',
-                            'ext/wddx'       => 'Extensions/Extwddx.php',
-                            'ext/xdebug'     => 'Extensions/Extxdebug.php',
-                            'ext/xmlreader'  => 'Extensions/Extxmlreader.php',
-                            'ext/xmlrpc'     => 'Extensions/Extxmlrpc.php',
-                            'ext/xmlwriter'  => 'Extensions/Extxmlwriter.php',
-                            'ext/xsl'        => 'Extensions/Extxsl.php',
-                            'ext/yaml'       => 'Extensions/Extyaml.php',
-                            'ext/yis'        => 'Extensions/Extyis.php',
-                            'ext/zip'        => 'Extensions/Extzip.php',
-                            'ext/zlib'       => 'Extensions/Extzlib.php',
-                            'ext/zmq'        => 'Extensions/Extzmq.php',
+                            'ext/apc'        => 'Extensions/Extapc',
+                            'ext/array'      => 'Extensions/Extarray',
+                            'ext/bcmath'     => 'Extensions/Extbcmath',
+                            'ext/bzip2'      => 'Extensions/Extbzip2',
+                            'ext/calendar'   => 'Extensions/Extcalendar',
+                            'ext/crypto'     => 'Extensions/Extcrypto',
+                            'ext/ctype'      => 'Extensions/Extctype',
+                            'ext/curl'       => 'Extensions/Extcurl',
+                            'ext/cyrus'      => 'Extensions/Extcyrus',
+                            'ext/date'       => 'Extensions/Extdate',
+                            'ext/dba'        => 'Extensions/Extdba',
+                            'ext/dom'        => 'Extensions/Extdom',
+                            'ext/enchant'    => 'Extensions/Extenchant',
+                            'ext/ereg'       => 'Extensions/Extereg',
+                            'ext/exif'       => 'Extensions/Extexif',
+                            'ext/fdf'        => 'Extensions/Extfdf',
+                            'ext/ffmpeg'     => 'Extensions/Extffmpeg',
+                            'ext/file'       => 'Extensions/Extfile',
+                            'ext/fileinfo'   => 'Extensions/Extfileinfo',
+                            'ext/filter'     => 'Extensions/Extfilter',
+                            'ext/ftp'        => 'Extensions/Extftp',
+                            'ext/gd'         => 'Extensions/Extgd',
+                            'ext/gmp'        => 'Extensions/Extgmp',
+                            'ext/gnupg'      => 'Extensions/Extgnupg',
+                            'ext/hash'       => 'Extensions/Exthash',
+                            'ext/iconv'      => 'Extensions/Exticonv',
+                            'ext/info'       => 'Extensions/Extinfo',
+                            'ext/json'       => 'Extensions/Extjson',
+                            'ext/kdm5'       => 'Extensions/Extkdm5',
+                            'ext/ldap'       => 'Extensions/Extldap',
+                            'ext/libxml'     => 'Extensions/Extlibxml',
+                            'ext/math'       => 'Extensions/Extmath',
+                            'ext/mbstring'   => 'Extensions/Extmbstring',
+                            'ext/mcrypt'     => 'Extensions/Extmcrypt',
+                            'ext/memcache'   => 'Extensions/Extmemcache',
+                            'ext/memcached'  => 'Extensions/Extmemcached',
+                            'ext/ming'       => 'Extensions/Extming',
+                            'ext/mongo'      => 'Extensions/Extmongo',
+                            'ext/mssql'      => 'Extensions/Extmssql',
+                            'ext/mysql'      => 'Extensions/Extmysql',
+                            'ext/mysqli'     => 'Extensions/Extmysqli',
+                            'ext/odbc'       => 'Extensions/Extodbc',
+                            'ext/openssl'    => 'Extensions/Extopenssl',
+                            'ext/pcntl'      => 'Extensions/Extpcntl',
+                            'ext/pcre'       => 'Extensions/Extpcre',
+                            'ext/pdo'        => 'Extensions/Extpdo',
+                            'ext/pgsql'      => 'Extensions/Extpgsql',
+                            'ext/phar'       => 'Extensions/Extphar',
+                            'ext/posix'      => 'Extensions/Extposix',
+                            'ext/readline'   => 'Extensions/Extreadline',
+                            'ext/redis'      => 'Extensions/Extredis',
+                            'ext/reflexion'  => 'Extensions/Extreflexion',
+                            'ext/sem'        => 'Extensions/Extsem',
+                            'ext/session'    => 'Extensions/Extsession',
+                            'ext/shmop'      => 'Extensions/Extshmop',
+                            'ext/simplexml'  => 'Extensions/Extsimplexml',
+                            'ext/snmp'       => 'Extensions/Extsnmp',
+                            'ext/soap'       => 'Extensions/Extsoap',
+                            'ext/sockets'    => 'Extensions/Extsockets',
+                            'ext/spl'        => 'Extensions/Extspl',
+                            'ext/sqlite'     => 'Extensions/Extsqlite',
+                            'ext/sqlite3'    => 'Extensions/Extsqlite3',
+                            'ext/sqlsrv'     => 'Extensions/Extsqlsrv',
+                            'ext/ssh2'       => 'Extensions/Extssh2',
+                            'ext/standard'   => 'Extensions/Extstandard',
+                            'ext/tidy'       => 'Extensions/Exttidy',
+                            'ext/tokenizer'  => 'Extensions/Exttokenizer',
+                            'ext/wddx'       => 'Extensions/Extwddx',
+                            'ext/xdebug'     => 'Extensions/Extxdebug',
+                            'ext/xmlreader'  => 'Extensions/Extxmlreader',
+                            'ext/xmlrpc'     => 'Extensions/Extxmlrpc',
+                            'ext/xmlwriter'  => 'Extensions/Extxmlwriter',
+                            'ext/xsl'        => 'Extensions/Extxsl',
+                            'ext/yaml'       => 'Extensions/Extyaml',
+                            'ext/yis'        => 'Extensions/Extyis',
+                            'ext/zip'        => 'Extensions/Extzip',
+                            'ext/zlib'       => 'Extensions/Extzlib',
+                            'ext/zmq'        => 'Extensions/Extzmq',
 //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
                     'PHP' => array(
@@ -112,12 +112,11 @@ class Appinfo extends \Report\Content {
                             'include_once'   => 'Structures/OnceUsage',
 
                             'Throw exceptions' => 'Php/ThrowUsage',
-                            'Try/Catch'      => 'Php/TryCatchUsage',
-                            'Trigger error'  => 'Php/TriggerErrorUsage',
+                            'Try/Catch'        => 'Php/TryCatchUsage',
+                            'Trigger error'    => 'Php/TriggerErrorUsage',
                             
                             'Goto'           => 'Php/Gotonames',
                             'Labels'         => 'Php/Labelnames',
-
 
                             'Eval'           => 'Structures/EvalUsage',
                             'Die/Exit'       => 'Structures/ExitUsage',
@@ -125,18 +124,22 @@ class Appinfo extends \Report\Content {
 
                             'array short syntax'       => 'Structures/ArrayNSUsage',
                     ),
+
                     'Namespaces' => array(
                             'Namespaces' => 'Namespaces/Namespacesnames',
                             'Vendor'     => 'Namespaces/Vendor',
                             'Alias'      => 'Namespaces/Alias',
                     ),
+
                     'Variables' => array(
-                            'References' => 'Variables/References',
-                            'Array'      => 'Arrays/Arrayindex',
+                            'References'              => 'Variables/References',
+                            'Array'                   => 'Arrays/Arrayindex',
                             'Multidimensional arrays' => 'Arrays/Multidimensional',
-                            'PHP arrays' => 'Arrays/Phparrayindex',
-                            'Variable variables' => 'Variables/VariableVariables',
+                            'Variable variables'      => 'Variables/VariableVariables',
+
+                            'PHP arrays'              => 'Arrays/Phparrayindex',
                     ),
+
                     'Functions' => array(
                             'Functions'            => 'Functions/Functionnames',
                             'Redeclared PHP Functions' => 'Functions/RedeclaredPhpFunctions',
@@ -219,8 +222,26 @@ class Appinfo extends \Report\Content {
                     $v = $vertices[0][0];
                     $this->list[$section][$name] = $v == "true" ? "Yes" : "No";
                 } catch (Exception $e) {
+                    print "Error for appinfo : \n";
+                    print "$queryTemplate : \n";
+                    print $e->getMessage()."\n";
+                    print "\n";
                     // empty catch ? 
                 }
+            }
+            
+            if ($section == 'Extensions') {
+                print "Sorting\n";
+                $list = $this->list[$section];
+                uksort($this->list[$section], function ($ka, $kb) use ($list) {
+                    if ($list[$ka] == $list[$kb]) {
+                        if ($ka > $kb) { return  1; }
+                        if ($ka == $kb) { return 0; }
+                        if ($ka > $kb) { return -1; }
+                    } else {
+                        return $list[$ka] == 'Yes' ? -1 : 1;
+                    }
+                });
             }
         }
     }
