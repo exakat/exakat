@@ -8,11 +8,11 @@ class _Try extends TokenAuto {
 
     public function _check() {
         // Try () { } catch
-        $this->conditions = array(0 => array('token' => _Try::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => 'Sequence',
+        $this->conditions = array(0 => array('token'    => _Try::$operators,
+                                             'atom'     => 'none'),
+                                  1 => array('atom'     => 'Sequence',
                                              'property' => array('block' => 'true')), 
-                                  2 => array('atom' => 'Catch'),
+                                  2 => array('atom'     => array('Catch', 'Finally')),
                                   );
         
         $this->actions = array('transform'    => array( 1 => 'CODE',
@@ -25,7 +25,7 @@ class _Try extends TokenAuto {
         // Try () { } catch + new catch
         $this->conditions = array(0 => array('atom'  => 'yes', 
                                              'token' => _Try::$operators),
-                                  1 => array('atom'  => 'Catch')
+                                  1 => array('atom'  => array('Catch', 'Finally'))
                                   );
         $this->actions = array('to_catch'    => array( 1 => 'CATCH' ),
                                'keepIndexed' => true,
@@ -33,9 +33,9 @@ class _Try extends TokenAuto {
         $this->checkAuto();
 
         // Try () NO catch 
-        $this->conditions = array(0 => array('atom'  => 'yes', 
-                                             'token' => _Try::$operators),
-                                  1 => array('notToken'  => 'T_CATCH')
+        $this->conditions = array(0 => array('atom'     => 'yes', 
+                                             'token'    => _Try::$operators),
+                                  1 => array('notToken' => array('T_CATCH', 'T_FINALLY'))
                                   );
         $this->actions = array('cleanIndex'  => true,
                                'makeSequence' => 'it');
