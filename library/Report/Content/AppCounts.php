@@ -43,6 +43,11 @@ class AppCounts extends \Report\Content {
                             'Try'           => 'Try',
                             'Catch'         => 'Catch',
                             '?  :'          => 'Ternary',
+                            'Variables constants' => 'Constants\\VariableConstants',
+                            'Variables variables' => 'Variables\\VariableVariable',
+                            'Variables functions' => 'Functions\\Dynamiccall',
+                            'Variables classes' => 'Classes\\VariableClasses',
+                            
                      ),
                     );
 
@@ -50,7 +55,11 @@ class AppCounts extends \Report\Content {
             $this->list[$section] = array();
             foreach($hash as $name => $ext) {
                 if (is_string($ext)) {
-                    $queryTemplate = "g.idx('$ext')[['token':'node']].count()"; 
+                    if (strpos($ext, '\\') === false) {
+                        $queryTemplate = "g.idx('$ext')[['token':'node']].count()"; 
+                    } else {
+                        $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('\\', '\\\\', $ext)."']].count()"; 
+                    }
                 } elseif (isset($ext['Unique'])) {
                     $queryTemplate = "g.idx('{$ext['index']}')[['token':'node']].{$ext['Unique']}.unique().count()"; 
                 } elseif (isset($ext['Below'])) {
