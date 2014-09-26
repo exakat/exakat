@@ -16,7 +16,7 @@ if (!is_readable($file)) {
     print "Usage : tokenlist <file>\n '$file' is not readable.\n\n";
 }
 
-$Php = new Phpexec('5.4');
+$Php = new Phpexec('5.6');
 
 $res = shell_exec($Php->getExec().' -l '.$file);
 if (strpos($res, 'No syntax errors') !== 0) {
