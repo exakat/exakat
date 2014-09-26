@@ -831,6 +831,7 @@ fullcode = x;
 g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
+it.inE('INDEXED').each{ g.removeEdge(it); }
 g.idx('delete').put('node', 'delete', it);
 ";
                             $this->set_atom = false;
@@ -842,6 +843,7 @@ next = it.out('NEXT').next();
 g.addEdge(it, next.out('NEXT').next(), 'NEXT');
 
 next.bothE('NEXT').each{ g.removeEdge(it); }
+next.inE('INDEXED').each{ g.removeEdge(it); }
 
 g.idx('delete').put('node', 'delete', next);
 ";
@@ -855,6 +857,7 @@ second  = first.out('NEXT').next();
 third  = second.out('NEXT').next();
 
 second.bothE('NEXT').each{ g.removeEdge(it); }
+second.inE('INDEXED').each{ g.removeEdge(it); }
 g.idx('delete').put('node', 'delete', second);
 
 g.addEdge(first, third, 'NEXT');
@@ -901,6 +904,7 @@ f.each{
     i = it; 
     it.in('NEXT').each{ g.addEdge(it, h, 'NEXT');}
 
+    i.inE('INDEXED').each{ g.removeEdge(it); }
     g.removeVertex(i);
 }
 
@@ -925,6 +929,7 @@ a = it.in('NEXT').next();
 b = it.out('NEXT').next();
 
 it.bothE('NEXT').each{    g.removeEdge(it); } 
+it.inE('INDEXED').each{ g.removeEdge(it); }
 
 g.removeVertex(it);
 g.addEdge(a, b, 'NEXT');
@@ -1492,7 +1497,7 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
                                        'Staticmethodcall', 'Namespace', 'Label', 'Postplusplus', 'Preplusplus', 'Include', 'Functioncall',
                                        'Methodcall', 'Variable', 'Label', 'Goto', 'Static', 'New' ] && 
                                        it.token != 'T_ELSEIF' }.any() &&
-    it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' ,
+    it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_FINALLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' ,
                                                      'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
                                                      'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
                                                      'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR', 'T_AS',
@@ -1651,7 +1656,7 @@ g.addEdge(it, nextnext, 'NEXT');
             $fullcode = $this->fullcode();
 
             $qactions[] = "
-/* to_catch */
+/* to_catch or to_finally */
 thecatch = it.out('NEXT').next();
 next = thecatch.out('NEXT').next();
 
@@ -2420,7 +2425,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_DO', 'T_TRY',
         'T_STRING', 'T_INSTEADOF', 'T_INSTANCEOF', 'T_BANG',
         'T_ELSE', 'T_INC', 'T_DEC', 'T_IF', 'T_ELSEIF',
-        'T_CONST', 'T_FUNCTION',
+        'T_CONST', 'T_FUNCTION', 'T_FINALLY'
         ];
 
 list_after = [
@@ -2777,7 +2782,8 @@ g.idx('Variable').put('token', 'node', x);
 /* Remove children's index */  
 it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 'NEW', 'RETURN', 'CONSTANT', 'CLASS', 'VARIABLE',
 'INDEX', 'EXTENDS', 'SUBNAME', 'POSTPLUSPLUS', 'PREPLUSPLUS', 'VALUE', 'CAST', 'SOURCE', 'USE', 'KEY', 'IMPLEMENTS', 'THEN', 'AS', 
-'ELSE', 'NOT', 'CONDITION', 'CASE', 'THROW', 'METHOD', 'STATIC', 'CLONE', 'INIT', 'AT', 'ELEMENT','FINAL', 'FILE', 'NAMESPACE', 'LABEL' ).each{ 
+'ELSE', 'NOT', 'CONDITION', 'CASE', 'THROW', 'METHOD', 'STATIC', 'CLONE', 'INIT', 'AT', 'ELEMENT','FINAL', 'FILE', 'NAMESPACE', 'LABEL',
+'YIELD').each{ 
     it.inE('INDEXED').each{    
         g.removeEdge(it);
     } 
