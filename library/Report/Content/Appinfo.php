@@ -152,6 +152,7 @@ class Appinfo extends \Report\Content {
                             'Dynamic functioncall' => 'Functions/Dynamiccall',
 
                             'Recursive Functions'  => 'Functions/Recursive',
+                            'Conditioned Function' => 'Functions/ConditionedFunction',
 
                     ),
 
@@ -173,6 +174,7 @@ class Appinfo extends \Report\Content {
                             'Magic methods'     => 'Classes/MagicMethod',
                             'Cloning'           => 'Classes/CloningUsage',
                             'Dynamic class call'=> 'Classes/VariableClasses',
+//                            'Conditioned class' => 'Classes/ConditionedClass',
 
                             'PHP 4 constructor' => 'Classes/OldStyleConstructor',
                     ),
@@ -182,6 +184,7 @@ class Appinfo extends \Report\Content {
                             'Variable Constant'   => 'Constants/VariableConstant',
                             'PHP constants'       => 'Constants/PhpConstantUsage',
                             'PHP Magic constants' => 'Constants/MagicConstantUsage',
+                            'Conditioned constant'=> 'Constants/ConditionedConstant',
                     ),
 
                     'Numbers' => array(

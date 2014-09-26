@@ -58,7 +58,7 @@ class AppCounts extends \Report\Content {
                     if (strpos($ext, '\\') === false) {
                         $queryTemplate = "g.idx('$ext')[['token':'node']].count()"; 
                     } else {
-                        $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('\\', '\\\\', $ext)."']].count()"; 
+                        $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('\\', '\\\\', $ext)."']].out('ANALYZED').count()"; 
                     }
                 } elseif (isset($ext['Unique'])) {
                     $queryTemplate = "g.idx('{$ext['index']}')[['token':'node']].{$ext['Unique']}.unique().count()"; 
