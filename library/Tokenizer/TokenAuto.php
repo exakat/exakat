@@ -3,6 +3,7 @@
 namespace Tokenizer;
 
 class TokenAuto extends Token {
+    static public $round = -1;
     protected $conditions = array();
     protected $set_atom   = false;
     public $remaining  = null ;
@@ -65,7 +66,8 @@ class TokenAuto extends Token {
         
         $this->set_atom = false;
         $qactions = $this->readActions($this->actions);
-        $query .= ".each{\n done++; fullcode = it; ".join(";\n", $qactions)."; ".($this->set_atom ? $this->fullcode() : '' )."\n}; [remaining:total, done:done];";
+        $query .= ".each{\n done++; fullcode = it; fullcode.round = ".(self::$round).";
+".join(";\n", $qactions)."; ".($this->set_atom ? $this->fullcode() : '' )."\n}; [remaining:total, done:done];";
         
         return $query;
     }

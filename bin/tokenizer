@@ -110,6 +110,7 @@ while(check_prev($prev, $extra_rounds)) {
     $rbegin = microtime(true);
     $round++;
     $log->log("round $round)");
+    \Tokenizer\TokenAuto::$round = $round;
     
     array_unshift($prev, $count);
 
