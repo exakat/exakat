@@ -1,0 +1,58 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$client = new Client();
+
+$classes = query("g.idx('Class')[['token':'node']].fullnspath");
+
+$headers = '';
+$ids = array();
+foreach($classes as $id => $class) {
+    $ids[strtolower($class[0])] = count($ids) + 1;
+    $ida = "C".$ids[$class[0]];
+    $headers .= "$ida [label = \"$class[0]\"];\n";
+}
+
+$classes = query("g.idx('Class')[['token':'node']].out('EXTENDS').transform{it.in('EXTENDS').next().fullnspath + ' -> ' + it.fullnspath}");
+$body = '';
+foreach($classes as $id => $class) {
+    list($a, $b) = explode(' -> ', $class[0]);
+    if (!isset($ids[strtolower($b)])) {
+        $ids[strtolower($b)] = count($ids) + 1;
+        $ida = "C".$ids[strtolower($b)];
+        $headers .= "$ida [label = \"$b\"];\n";
+    }
+
+    $ida = "C".$ids[strtolower($a)];
+    $idb = "C".$ids[strtolower($b)];
+    $headers .= "$ida -> $idb;\n";
+}
+
+
+    $digraph = " digraph graphname {\n";
+    $digraph .= "$headers\n";
+    $digraph .= "$body\n";
+    $digraph .= "}\n";
+    
+//    print count($vertices)." found\n";
+    
+    file_put_contents('classes.tree.dot', $digraph);
+
+
+function query($query) {
+    global $client;
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $query, $params);
+    return $query->getResultSet();
+}
+
+?>
