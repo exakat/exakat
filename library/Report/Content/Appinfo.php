@@ -163,7 +163,7 @@ class Appinfo extends \Report\Content {
                             'Traits'            => 'Classes/Traitsnames',
 
                             'Static properties' => 'Classes/StaticProperties',
-
+                            
                             'Static methods'    => 'Classes/StaticMethods',
                             'Abstract methods'  => 'Classes/Abstractmethods',
                             'Final methods'     => 'Classes/Finalmethods',
@@ -172,6 +172,7 @@ class Appinfo extends \Report\Content {
 
                             'Magic methods'     => 'Classes/MagicMethod',
                             'Cloning'           => 'Classes/CloningUsage',
+                            'Dynamic class call'=> 'Classes/VariableClasses',
 
                             'PHP 4 constructor' => 'Classes/OldStyleConstructor',
                     ),
