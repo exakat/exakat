@@ -381,3 +381,14 @@ Wrong number of arguments : to be fixed
 Suggest properties to be ppp depending on usage (public => outusage, properted => child/parents, private : local class)
 composer.json generator or checker 
 Suggest closures instead of functions if the function is used once. 
+Suggest replacement for str_replace/ereg/preg/strtr
+
+vérifier pourquoi Label, basé sur T_COLON, reste présent : Je pense qu'il n'est pas nettoyé par les autres qui s'en servent.
+vérifier les 		mysql_query($sql) or ($output .= mysql_error());
+et les experssion or die();!
+Conditional declarations ?
+
+Heavily used classes/functions...
+Add a top5 for files to check
+
+rethrown exceptions in a catch
