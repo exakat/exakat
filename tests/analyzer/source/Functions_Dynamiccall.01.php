@@ -7,6 +7,6 @@ normalFunctionCall();
 $variableFunctionCall();
 $arrayFunctionCall[1]();
 $object->methodFunctionCall();
-
+StdClass::staticMethodFunctionCall();
 
 ?>

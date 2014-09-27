@@ -19,6 +19,7 @@ class FunctioncallArray extends TokenAuto {
         $this->actions = array('transform'    => array(1 => 'DROP',
                                                        2 => 'ARGUMENTS',
                                                        3 => 'DROP'),
+                               'array_to_functioncall' => 1, 
                                'atom'         => 'Functioncall',
                                'makeSequence' => 'it'
                                );

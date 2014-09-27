@@ -2777,6 +2777,19 @@ g.idx('Variable').put('token', 'node', x);
             unset($actions['variable_to_functioncall']);
         }        
 
+        if (isset($actions['array_to_functioncall'])) {
+            $fullcode = $this->fullcode();
+            
+            $qactions[] = " 
+/* hold the array as property.  */  
+
+x = g.addVertex(null, [code:it.code, fullcode: it.fullcode, atom:'Array', token:'T_OPEN_BRACKET', virtual:true, line:it.line, modifiedBy:'FunctionCallArray']);
+g.addEdge(it, x, 'NAME');
+g.idx('Array').put('token', 'node', x);
+                ";
+            unset($actions['array_to_functioncall']);
+        }        
+
         if (isset($actions['cleanIndex'])) {
             $qactions[] = " 
 /* Remove children's index */  
