@@ -23,7 +23,7 @@ class Functioncall extends TokenAuto {
         
         $this->actions = array('variable_to_functioncall'   => 1,
                                'keepIndexed'                => true,
-                               'property'                   => array('parenthesis' => 'false'),
+                               'property'                   => array('parenthesis' => 'true'),
                                );
         $this->checkAuto();
         
