@@ -18,6 +18,7 @@ class IsModified extends Analyzer\Analyzer {
         $this->atomIs("Variable")
              ->inIs(array('LEFT', 'VARIABLE'))
              ->atomIs(array('Assignation', 'Arrayappend'))
+             ->hasNoIn('VARIABLE')
              ->back('first');
         $this->prepareQuery();
 
