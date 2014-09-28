@@ -1,5 +1,7 @@
 <?php
 
+// searching for Classes, not aliases
+
 namespace a\b;
 
 use a\b\ClassCaseNotOK as AliasCaseNotOK;
