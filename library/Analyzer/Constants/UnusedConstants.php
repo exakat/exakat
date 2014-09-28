@@ -17,7 +17,7 @@ class UnusedConstants extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->orderIs('ARGUMENT', 'first')
              ->atomIs('String')
-             ->raw('filter{ definition = it.fullnspath; g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").has("fullnspath", definition).any() }');
+             ->raw('filter{ name = it.noDelimiter; g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").has("code", name).any() == false }');
         $this->prepareQuery();
       }
 }
