@@ -6,8 +6,7 @@ use Analyzer;
 
 class UndefinedFunctions extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('Analyzer\\Functions\\UsedFunctions',
-                     'Analyzer\\Functions\\IsExtFunction');
+        return array('Analyzer\\Functions\\IsExtFunction');
     }
     
     public function analyze() {
@@ -15,7 +14,7 @@ class UndefinedFunctions extends Analyzer\Analyzer {
              ->hasNoIn(array('METHOD', 'NEW'))
              ->tokenIsNot(array('T_VARIABLE','T_OPEN_BRACKET'))
              ->analyzerIsNot('Analyzer\\Functions\\IsExtFunction')
-             ->analyzerIsNot('Analyzer\\Functions\\UsedFunctions');
+             ->hasNoFunctionDefinition();
         $this->prepareQuery();
     }
 }
