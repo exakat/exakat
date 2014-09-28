@@ -1,24 +1,39 @@
 <?php
 
-print "Runnign project test for tokenizer\n";
-shell_exec('rm -rf ./projects/test/code/*');
-shell_exec('cp ./tests/tokenizer/source/_* ./projects/test1/code');
-shell_exec('cp ./tests/analyzer/source/[A-Z]* ./projects/test1/code');
+if (array_search('-t', $argv)) {
+    print "Running project test for tokenizer\n";
 
-shell_exec('cp ./tests/tokenizer/source/[A-Z]* ./projects/test2/code');
-//shell_exec('php bin/project test');
+    print "Getting recent code\n";
+    shell_exec('rm -rf ./projects/test/code/*');
+    shell_exec('cp ./tests/tokenizer/source/_* ./projects/test/code');
+    shell_exec('cp ./tests/analyzer/source/[A-Z]* ./projects/test/code');
+    shell_exec('cp ./tests/tokenizer/source/[A-Z]* ./projects/test/code');
 
-print "Runnign UT for analyzer\n";
+    print "Running the project on test\n";
+    shell_exec('php bin/project test');
+} else {
+    print "Not running project test\n";
+}
+
+print "Running UT for analyzer\n";
 $row = array('date' => '"'.date('Y-m-d H:i:s').'"', 'id' => 'NULL');
 
 $begin = microtime(true);
-shell_exec('cd tests/analyzer; phpunit alltests.php > phpunit.txt');
+
+if (array_search('-a', $argv)) {
+    print "Running ALL tests\n";
+    shell_exec('cd tests/analyzer; phpunit randomtest.php > phpunit.txt');
+    $results = file_get_contents('tests/analyzer/phpunit.txt');
+} else {
+    print "Running random tests\n";
+    shell_exec('cd tests/analyzer; phpunit randomtest.php > randomtest.txt');
+    $results = file_get_contents('tests/analyzer/randomtest.txt');
+}
 $end = microtime(true);
 
 $row['duration'] = ($end - $begin);
 //Tests: 265, Assertions: 799, Failures: 77, Skipped: 7.
 
-$results = file_get_contents('tests/analyzer/phpunit.txt');
 if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+)[\.,]/is', $results, $R)) {
     $row['tests'] = $R[1];
     $row['assertions'] = $R[2];
