@@ -1,0 +1,96 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $id
+      Label : VALUE
+        list
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            $a3
+          Label : ARGUMENT
+            $b4
+    Label : SOURCE
+      $array
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            "
+            Label : CONTAIN
+              Concatenation
+              Label : CONCAT
+                First: 
+              Label : CONCAT
+                $a3
+              Label : CONCAT
+                ; Second: 
+              Label : CONCAT
+                $b4
+              Label : CONCAT
+                \n
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      list
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          $a1
+        Label : ARGUMENT
+          $b2
+    Label : SOURCE
+      $array
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            "
+            Label : CONTAIN
+              Concatenation
+              Label : CONCAT
+                First: 
+              Label : CONCAT
+                $a1
+              Label : CONCAT
+                ; Second: 
+              Label : CONCAT
+                $b2
+              Label : CONCAT
+                \n
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      [
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          [
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              10
+            Label : ARGUMENT
+              20
+        Label : ARGUMENT
+          [
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              30
+            Label : ARGUMENT
+              40
+    Label : LEFT
+      $array
