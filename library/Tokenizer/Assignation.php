@@ -25,7 +25,7 @@ class Assignation extends TokenAuto {
         $operands = array('Integer', 'Multiplication', 'Addition', 'Not',
                           'Array', 'Float', 'Concatenation', 'Property',
                           'Parenthesis', 'Noscream', 'Ternary', 'New', 'String',
-                          'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Property',
+                          'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Staticclass', 'Property',
                           'Heredoc', 'Preplusplus', 'Postplusplus', 'Methodcall', 'Nsname', 
                           'Assignation', 'Variable', 'Boolean', 'Magicconstant',
                           'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison', 

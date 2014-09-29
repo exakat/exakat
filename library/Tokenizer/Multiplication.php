@@ -9,7 +9,8 @@ class Multiplication extends TokenAuto {
                                     'String', 'Identifier', 'Preplusplus', 'Postplusplus', 'Nsname', 'Functioncall',
                                     'Methodcall', 'Staticmethodcall', 'Concatenation', 'Cast',
                                     'Noscream', 'Staticconstant', 'Staticproperty', 'Constant', 
-                                    'Boolean', 'Magicconstant', 'Assignation', 'Include', 'Power' );
+                                    'Boolean', 'Magicconstant', 'Assignation', 'Include', 'Power',
+                                    'Staticconstant', );
     static public $atom = 'Multiplication';
     
     public function _check() {

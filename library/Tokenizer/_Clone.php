@@ -7,8 +7,8 @@ class _Clone extends TokenAuto {
     static public $atom = 'Clone';
 
     public function _check() {
-        $operands = array('Variable', 'Property', 'Array', 'Staticproperty', 'Staticmethodcall', 'Staticconstant', 'Functioncall', 
-                          'Methodcall', 'New', 'Noscream', "Concatenation",  );
+        $operands = array('Variable', 'Property', 'Array', 'Staticproperty', 'Staticmethodcall', 'Staticconstant', 'Staticclass',
+                          'Functioncall', 'Methodcall', 'New', 'Noscream', "Concatenation",  );
         $this->conditions = array(0 => array('token' => _Clone::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' =>  $operands),

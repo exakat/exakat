@@ -8,7 +8,7 @@ class Concatenation extends TokenAuto {
     
     public function _check() {
         $operands = array('String', 'Identifier', 'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign', 'Array',
-                          'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
+                          'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant', 'Staticclass',
                           'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 'Power',
                           'Preplusplus', 'Postplusplus', 'Cast', 'Assignation', 'Nsname' );
         

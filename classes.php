@@ -53,6 +53,7 @@ $classes = array (
   11 => 'Staticproperty',
   42 => 'Staticmethodcall',
   43 => 'Staticconstant',
+  90 => 'Staticclass',
   82 => 'Power',
   44 => 'Multiplication',
   45 => 'Addition',

@@ -1,0 +1,164 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            ClassName1
+          Label : SUBNAME
+            NS1
+          Label : AS
+            X
+      Label : ELEMENT
+        class
+        Label : NAME
+          ParentClass
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            ClassName1
+          Label : SUBNAME
+            NS1
+      Label : ELEMENT
+        class
+        Label : NAME
+          ClassName
+        Label : EXTENDS
+          ParentClass
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            function
+            Label : STATIC
+              static
+            Label : NAME
+              x
+            Label : BLOCK
+              {
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ::
+                    Label : CONSTANT
+                      class
+                    Label : CLASS
+                      self
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ::
+                    Label : CONSTANT
+                      class
+                    Label : CLASS
+                      parent
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ::
+                    Label : CONSTANT
+                      class
+                    Label : CLASS
+                      static
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              ::
+              Label : CONSTANT
+                class
+              Label : CLASS
+                ClassName1
+            Label : CONCAT
+              "\n"
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              ::
+              Label : CONSTANT
+                class
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  ClassName1
+                Label : SUBNAME
+                  NS1
+            Label : CONCAT
+              "\n"
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              ::
+              Label : CONSTANT
+                class
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  ClassName1
+                Label : SUBNAME
+                  NS1
+            Label : CONCAT
+              "\n"
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              ::
+              Label : CONSTANT
+                class
+              Label : CLASS
+                X
+            Label : CONCAT
+              "\n"
+    Label : NAMESPACE
+      NS
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        class
+        Label : NAME
+          ClassName1
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
+    Label : NAMESPACE
+      NS1

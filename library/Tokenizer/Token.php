@@ -29,6 +29,7 @@ class Token {
                                  'Staticproperty',
                                  'Staticconstant',
                                  'Staticmethodcall',
+                                 'Staticclass',
                                  'Functioncall',
                                  'FunctioncallArray',
                                  'Methodcall',
@@ -494,6 +495,30 @@ g.idx('Staticproperty')[['token':'node']].out('CLASS').sideEffect{fullcode = it;
 };
 ", "
 g.idx('Staticconstant')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
+    if (fullcode.absolutens == 'true') { 
+        fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
+    } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+        fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
+    } else {
+        isDefault = true;
+        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias.toLowerCase() == fullcode.fullcode.toLowerCase()}.each{
+            fullcode.setProperty('fullnspath', alias.fullnspath);
+            fullcode.setProperty('aliased', 'true');
+            isDefault = false;
+        } ;
+        
+        if (isDefault) {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
+            } else {
+                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+            }
+        };
+    } 
+};
+
+", "
+g.idx('Staticclass')[['token':'node']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
         fullcode.setProperty('fullnspath', fullcode.fullcode.toLowerCase());
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
