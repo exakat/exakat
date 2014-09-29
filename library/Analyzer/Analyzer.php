@@ -939,8 +939,20 @@ GREMLIN;
         return $this;
     }
 
+    public function nextSiblings() {
+        $this->addMethod("sideEffect{sibling = it.order}.in('ELEMENT').out('ELEMENT').filter{sibling + 1 <= it.order}");
+
+        return $this;
+    }
+
     public function previousSibling() {
         $this->addMethod("filter{it.order > 0}.sideEffect{sibling = it.order}.in('ELEMENT').out('ELEMENT').filter{sibling - 1 == it.order}");
+
+        return $this;
+    }
+
+    public function previousSiblings() {
+        $this->addMethod("filter{it.order > 0}.sideEffect{sibling = it.order}.in('ELEMENT').out('ELEMENT').filter{sibling - 1 >= it.order}");
 
         return $this;
     }
