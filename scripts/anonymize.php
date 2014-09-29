@@ -24,7 +24,7 @@ $lnumber = 0;
 $variables = "a";
 $strings = "A";
 
-$checks = array('T_TRAIT');
+$checks = array('T_TRAIT', 'T_FINALLY', 'T_YIELD');
 foreach($checks as $check) {
     if (!defined($check)) { 
         define($check, 1); 
@@ -128,6 +128,10 @@ foreach($tokens as $t) {
             
             case T_OPEN_TAG_WITH_ECHO : 
             case T_CALLABLE : 
+            case T_UNSET : 
+
+            case T_FINALLY : 
+            case T_YIELD : 
 
             case T_FOR :
             case T_ENDFOR :
