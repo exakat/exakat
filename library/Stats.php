@@ -34,9 +34,9 @@ class Stats {
         }
     }
 
-    function collect($type = null) {
+    public function collect($type = null) {
         $this->stats['tokens_count']    = $this->queryOne("g.V.except([g.v(0)]){$this->file_filter}.count()");
-        $this->stats['relations_count'] = $this->queryOne("g.E.except([g.v(0)]){$this->file_filter}.count()");
+        $this->stats['relations_count'] = $this->countRelations();
         $this->stats['atoms_count']     = $this->queryOne("g.V.except([g.v(0)]).hasNot('atom', 'null'){$this->file_filter}.count()");
         $this->stats['NEXT_count']      = $this->queryOne("g.E.has('label', 'NEXT').inV{$this->file_filter}.count()");
         $this->stats['INDEXED_count']   = $this->queryOne("g.E.has('label', 'INDEXED').outV.hasNot('index', \"true\").count()");
@@ -47,12 +47,16 @@ class Stats {
         $this->stats['indexed']         = $this->queryOne("g.E.has('label', 'INDEXED').outV.out.inE.filter{!(it.label in ['ANALYZED', 'INDEXED'])}[0..100].label.unique().join(', ')");
     }
     
-    function queryOne($query) {
+    public function countRelations() {
+        return $this->queryOne("g.E.except([g.v(0)]){$this->file_filter}.count()");
+    }
+    
+    private function queryOne($query) {
         $r = $this->query($query);
         return $r[0][0];
     }
 
-    function query($query) {
+    private function query($query) {
         $params = array('type' => 'IN');
         $query = new Gremlin\Query($this->client, $query, $params);
         return $query->getResultSet();
