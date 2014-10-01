@@ -81,14 +81,12 @@ foreach($classes as $class) {
 $log->log( "Finished loading classes");
 
 $server_stat = new Stats($client);
-$server_stat->collect();
-$stats = array('token_in' => $server_stat->tokens_count, 'token_out' => 2, 
-               'relation_in' => $server_stat->relations_count, 'relation_out' => 4,
-               'project' => $project);
-
 $total = Tokenizer\Token::countTotalToken();
 $count = $total + 1;
-//$count = Tokenizer\Token::countLeftToken() + 1;
+
+$stats = array('token_in' => $count, 'token_out' => 2, 
+               'relation_in' => $server_stat->countRelations(), 'relation_out' => 4,
+               'project' => $project);
 $log->log( "Finished counting Token");
 
 $extra_rounds = 4;
