@@ -339,6 +339,11 @@ GREMLIN;
         
         return $this;
     }
+    
+    public function ignore() {
+        // used to execute some code but not collect any node
+        $this->methods[] = 'filter{ 1 == 0; }';
+    }
 
     function tokenIs($atom) {
         if (is_array($atom)) {
@@ -556,7 +561,7 @@ GREMLIN;
         if ($value == 'first') {
             $this->addMethod("has('order','0')");
         } elseif ($value == 'last') {
-            $this->addMethod("filter{it.order == it.in('ELEMENT').out('ELEMENT').count() - 1}");
+            $this->addMethod("filter{it.order == it.in('ARGUMENT').out('ARGUMENT').count() - 1}");
         } else {
             $this->addMethod("filter{it.order == ***}", abs(intval($value)));
         }
