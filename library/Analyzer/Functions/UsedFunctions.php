@@ -23,20 +23,27 @@ class UsedFunctions extends Analyzer\Analyzer {
         $positions = array(0, 1, 2);
         foreach($positions as $position) {
             $this->atomIs("Functioncall")
+                 ->hasNoIn('METHOD')
+                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->fullnspath($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('order', $position)
+                 ->atomIs('String')
                  ->raw('sideEffect{ it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;}; }')
                  ->ignore();
+//            $this->printQuery();
             $this->prepareQuery();
         }
 
         $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD')
+             ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath($ini['functions_last'])
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->hasOrder('last')
+             ->atomIs('String')
              ->raw('sideEffect{ it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;}; }')
              ->ignore();
         $this->prepareQuery();
