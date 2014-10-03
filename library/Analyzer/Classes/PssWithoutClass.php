@@ -11,6 +11,7 @@ class PssWithoutClass extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code(array('parent', 'self', 'static'))
              ->hasNoClass()
+             ->hasNoTrait()
              ->back('first');
         $this->prepareQuery();
 
@@ -19,6 +20,7 @@ class PssWithoutClass extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code(array('parent', 'self', 'static'))
              ->hasNoClass()
+             ->hasNoTrait()
              ->back('first');
         $this->prepareQuery();
 
@@ -27,6 +29,7 @@ class PssWithoutClass extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->code(array('parent', 'self', 'static'))
              ->hasNoClass()
+             ->hasNoTrait()
              ->back('first');
         $this->prepareQuery();
     }
