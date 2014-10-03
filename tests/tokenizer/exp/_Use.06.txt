@@ -1,42 +1,42 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     use
     Label : USE
       \
-      Label : ELEMENT
-        E
-      Label : ELEMENT
-        D
+      Label : SUBNAME
+        N
     Label : USE
       \
-      Label : ELEMENT
-        C
-      Label : ELEMENT
-        B
-      Label : ELEMENT
-        A
-    Label : USE
-      \
-      Label : ELEMENT
-        X
-      Label : ELEMENT
-        Z
-    Label : USE
-      \
-      Label : ELEMENT
-        K
-    Label : USE
-      \
-      Label : ELEMENT
-        L
-    Label : USE
-      \
-      Label : ELEMENT
+      Label : SUBNAME
         M
     Label : USE
       \
-      Label : ELEMENT
-        N
+      Label : SUBNAME
+        L
+    Label : USE
+      \
+      Label : SUBNAME
+        K
+    Label : USE
+      \
+      Label : SUBNAME
+        X
+      Label : SUBNAME
+        Z
+    Label : USE
+      \
+      Label : SUBNAME
+        E
+      Label : SUBNAME
+        D
+    Label : USE
+      \
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        A

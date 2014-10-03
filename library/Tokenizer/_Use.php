@@ -61,10 +61,11 @@ class _Use extends TokenAuto {
                                'makeSequence' => 'it' );
         $this->checkAuto(); 
 
-    // use A {};
+    // use A { B as C; }
         $this->conditions = array( 0 => array('token' => _Use::$operators),
                                    1 => array('atom'  => array('Nsname', 'Identifier')),
-                                   2 => array('atom'  => 'Sequence'),
+                                   2 => array('atom'  => 'Sequence',
+                                              'property' => array('block' => 'true')),
                                  );
         
         $this->actions = array('transform'  => array( 1 => 'USE',
@@ -73,12 +74,13 @@ class _Use extends TokenAuto {
                                'cleanIndex' => true,
                                'makeSequence' => 'it' 
                                );
-//        $this->checkAuto(); 
+        $this->checkAuto(); 
 
     // use A,B {};
         $this->conditions = array( 0 => array('token' => _Use::$operators),
                                    1 => array('atom'  => 'Arguments'),
-                                   2 => array('atom'  => 'Sequence'),
+                                   2 => array('atom'  => 'Sequence',
+                                              'property' => array('block' => 'true')),
                                  );
         
         $this->actions = array('to_use_block' => true,

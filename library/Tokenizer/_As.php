@@ -26,7 +26,7 @@ class _As extends TokenAuto {
                                    -1 => array('atom'     => 'Identifier'), 
                                     0 => array('token'    => _As::$operators,
                                                'atom'     => 'none'),
-                                    1 => array('token'    => 'T_STRING')
+                                    1 => array('token'    => array('T_STRING', 'T_PUBLIC', 'T_PROTECTED', 'T_PRIVATE'))
         );
         
         $this->actions = array('makeEdge'     => array( 1 => 'AS',
@@ -54,6 +54,10 @@ if (fullcode.absolutens == 'true') {
 }
 
 fullcode.setProperty('fullcode', s + " as " + fullcode.out("AS").next().getProperty('fullcode'));
+fullcode.out('AS').filter{ it.token in [ 'T_PUBLIC', 'T_PROTECTED', 'T_PRIVATE']}.each{ 
+    it.setProperty('fullcode', it.code); 
+    it.setProperty('atom', 'Ppp'); 
+}
 
 GREMLIN;
     }

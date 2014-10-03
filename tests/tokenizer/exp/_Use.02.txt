@@ -1,12 +1,12 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     use
     Label : USE
       \
-      Label : ELEMENT
+      Label : SUBNAME
         B
-      Label : ELEMENT
+      Label : SUBNAME
         A

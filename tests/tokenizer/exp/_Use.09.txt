@@ -1,66 +1,78 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    use
-    Label : USE
-      G
-      Label : AS
-        I
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     namespace
     Label : NAMESPACE
       \
-      Label : ELEMENT
-        A
-      Label : ELEMENT
+      Label : SUBNAME
         B
-  Label : ELEMENT
-    use
-    Label : USE
-      \
-      Label : ELEMENT
-        E
-      Label : AS
-        F
-  Label : ELEMENT
-    use
-    Label : USE
-      B
-    Label : USE
-      A
-    Label : USE
-      \
-      Label : ELEMENT
-        C
-      Label : ELEMENT
+      Label : SUBNAME
         A
+    Label : BLOCK
+      makeSequence T_SEMICOLON
       Label : ELEMENT
-        B
-      Label : AS
-        D
-  Label : ELEMENT
-    use
-    Label : USE
-      S
-      Label : AS
-        T
-    Label : USE
-      R
-    Label : USE
-      O
-      Label : AS
-        Q
-    Label : USE
-      O
-      Label : AS
-        P
-    Label : USE
-      N
-    Label : USE
-      L
-      Label : AS
-        M
-    Label : USE
-      K
+        use
+        Label : USE
+          as
+          Label : AS
+            T
+          Label : SUBNAME
+            S
+        Label : USE
+          R
+        Label : USE
+          as
+          Label : AS
+            Q
+          Label : SUBNAME
+            O
+        Label : USE
+          as
+          Label : AS
+            P
+          Label : SUBNAME
+            O
+        Label : USE
+          N
+        Label : USE
+          as
+          Label : AS
+            M
+          Label : SUBNAME
+            L
+        Label : USE
+          K
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : AS
+            D
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            B
+          Label : SUBNAME
+            A
+        Label : USE
+          B
+        Label : USE
+          A
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : AS
+            F
+          Label : SUBNAME
+            E
+      Label : ELEMENT
+        use
+        Label : USE
+          as
+          Label : AS
+            I
+          Label : SUBNAME
+            G

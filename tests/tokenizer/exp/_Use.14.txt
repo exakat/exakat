@@ -136,9 +136,9 @@ Label : CODE
           void
           Label : ARGUMENT
             instanceof
-            Label : RIGHT
+            Label : CLASS
               one_identifier
-            Label : LEFT
+            Label : VARIABLE
               $x
       Label : ELEMENT
         var_dump
@@ -146,9 +146,9 @@ Label : CODE
           void
           Label : ARGUMENT
             instanceof
-            Label : RIGHT
+            Label : CLASS
               path
-            Label : LEFT
+            Label : VARIABLE
               $x
       Label : ELEMENT
         var_dump
@@ -156,9 +156,9 @@ Label : CODE
           void
           Label : ARGUMENT
             instanceof
-            Label : RIGHT
+            Label : CLASS
               a1
-            Label : LEFT
+            Label : VARIABLE
               $x
       Label : ELEMENT
         var_dump
@@ -166,9 +166,9 @@ Label : CODE
           void
           Label : ARGUMENT
             instanceof
-            Label : RIGHT
+            Label : CLASS
               path2
-            Label : LEFT
+            Label : VARIABLE
               $x
       Label : ELEMENT
         var_dump
@@ -176,9 +176,9 @@ Label : CODE
           void
           Label : ARGUMENT
             instanceof
-            Label : RIGHT
+            Label : CLASS
               absolute_path
-            Label : LEFT
+            Label : VARIABLE
               $x
       Label : ELEMENT
         use
@@ -222,11 +222,11 @@ Label : CODE
           void
           Label : ARGUMENT
             instanceof
-            Label : RIGHT
+            Label : CLASS
               \
               Label : SUBNAME
                 a1
-            Label : LEFT
+            Label : VARIABLE
               $x
       Label : ELEMENT
         var_dump
@@ -234,9 +234,9 @@ Label : CODE
           void
           Label : ARGUMENT
             instanceof
-            Label : RIGHT
+            Label : CLASS
               a2
-            Label : LEFT
+            Label : VARIABLE
               $x
       Label : ELEMENT
         var_dump
@@ -244,9 +244,9 @@ Label : CODE
           void
           Label : ARGUMENT
             instanceof
-            Label : RIGHT
+            Label : CLASS
               a4
-            Label : LEFT
+            Label : VARIABLE
               $x
       Label : ELEMENT
         var_dump
@@ -254,9 +254,9 @@ Label : CODE
           void
           Label : ARGUMENT
             instanceof
-            Label : RIGHT
+            Label : CLASS
               a3
-            Label : LEFT
+            Label : VARIABLE
               $x
       Label : ELEMENT
         var_dump
@@ -264,9 +264,9 @@ Label : CODE
           void
           Label : ARGUMENT
             instanceof
-            Label : RIGHT
+            Label : CLASS
               one_identifier3
-            Label : LEFT
+            Label : VARIABLE
               $x
     Label : NAMESPACE
       x
