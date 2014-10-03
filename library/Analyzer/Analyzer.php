@@ -1213,6 +1213,18 @@ GREMLIN;
         return $this;
     }
 
+    public function hasTrait() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Trait"}{it.object.atom == "Trait"}.any()}');
+        
+        return $this;
+    }
+
+    public function hasNoTrait() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Trait"}{it.object.atom == "Trait"}.any() == false}');
+        
+        return $this;
+    }
+
     public function goToMethodDefinition() {
         // starting with a staticmethodcall , no support for static, self, parent
         $this->addMethod('sideEffect{methodname = it.out("METHOD").next().code.toLowerCase();}
