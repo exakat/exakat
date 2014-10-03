@@ -1,20 +1,10 @@
 <?php 
-Label : NEXT
+Label : CODE
   makeSequence T_OPEN_TAG
-  Label : NEXT
+  Label : ELEMENT
     {
-    Label : NEXT
+    Label : ELEMENT
       ++
-      Label : NEXT
-        ;
-        Label : NEXT
-          }
-          Label : NEXT
-            ?>
-            Label : NEXT
-              /**/
-              Label : NEXT
-                /* * */
       Label : POSTPLUSPLUS
         $a
   Label : ELEMENT
@@ -30,8 +20,10 @@ Label : NEXT
         Label : BLOCK
           {
           Label : ELEMENT
-            as
-            Label : AS
-              E
-            Label : SUBNAME
-              D
+            makeSequence T_OPEN_CURLY
+            Label : ELEMENT
+              as
+              Label : AS
+                E
+              Label : SUBNAME
+                D
