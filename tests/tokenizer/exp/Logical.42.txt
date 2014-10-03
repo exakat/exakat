@@ -1,0 +1,64 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    =
+    Label : LEFT
+      ->
+      Label : PROPERTY
+        B
+      Label : OBJECT
+        $a
+    Label : RIGHT
+      or
+      Label : LEFT
+        new
+        Label : NEW
+          \C
+          Label : SUBNAME
+            C
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                ->
+                Label : PROPERTY
+                  D
+                Label : OBJECT
+                  $b
+              Label : INDEX
+                'E'
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                ->
+                Label : PROPERTY
+                  F
+                Label : OBJECT
+                  $c
+              Label : INDEX
+                'G'
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                ->
+                Label : PROPERTY
+                  H
+                Label : OBJECT
+                  $d
+              Label : INDEX
+                'I'
+      Label : RIGHT
+        ::
+        Label : METHOD
+          K
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'L'
+        Label : CLASS
+          \
+          Label : SUBNAME
+            J
