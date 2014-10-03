@@ -10,6 +10,7 @@ class ThisIsForClasses extends Analyzer\Analyzer {
         $this->atomIs("Variable")
              ->code('$this')
              ->classIs('Global')
+             ->traitIs('Global')
              ->back('first');
     }
 }
