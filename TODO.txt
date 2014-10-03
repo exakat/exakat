@@ -392,3 +392,15 @@ Heavily used classes/functions...
 Add a top5 for files to check
 
 rethrown exceptions in a catch
+
+Array and String Literal Dereferencing ? $x = String; $x[1]... 
+Using empty() with Function Calls and Expressions : $x = $object->getProperty(); empty($x)
+
+
+PHP 5.5 : foreach loops now support non-scalar keys. I need to find the Iterator and make sure it returns array. 
+// loading (on process a file, then pour everything in the file). 
+
+        list($status, $header, $body) = $s->response()->finalize(); with $body unused : suggest list(, $h, )
+
+Attention : Use may be used to change method visibility. Report this and also note this better in the analzyer.
+Add report on aliases changing the visibility.
