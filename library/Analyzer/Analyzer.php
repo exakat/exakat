@@ -414,6 +414,36 @@ GREMLIN;
         
         return $this;
     }
+
+    function traitIs($trait) {
+        if (is_array($trait)) {
+            die('I don t know array for '.__METHOD__);
+//            $this->methods[] = 'as("classIsNot").inE("CLASS").filter{it.classname not in [\''.join("', '", $class).'\']}.back("classIsNot")';
+        } else {
+            if ($trait == 'Global') {
+                $this->methods[] = 'as("traitIs").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token != "T_TRAIT"}.back("traitIs")';
+            } else {
+                $this->methods[] = 'as("traitIs").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token != "T_TRAIT" || it.out("NAME").next().code != "'.$class.'"}.back("traitIs")';
+            }
+        }
+        
+        return $this;
+    }
+
+    function traitIsNot($trait) {
+        if (is_array($trait)) {
+            die('I don t know array for '.__METHOD__);
+//            $this->methods[] = 'as("classIsNot").inE("CLASS").filter{it.classname not in [\''.join("', '", $class).'\']}.back("classIsNot")';
+        } else {
+            if ($class == 'Global') {
+                $this->methods[] = 'as("traitIsNot").in.loop(1){!(it.object.token in ["T_TRAIT"])}.back("traitIsNot")';
+            } else {
+                $this->methods[] = 'as("traitIsNot").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || it.out("NAME").next().code != "'.$trait.'"}.back("traitIsNot")';
+            }
+        }
+        
+        return $this;
+    }
     
     function functionIs($function) {
         if (is_array($function)) {
