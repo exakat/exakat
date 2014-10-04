@@ -21,10 +21,9 @@ class NonPpp extends Analyzer\Analyzer {
              ->hasOut('DEFINE')
              ->inIs('ELEMENT')
              ->inIs('BLOCK')
-             ->atomIs('Class')
+             ->atomIs(array('Class', 'Trait'))
              ->back('first');
         $this->prepareQuery();
-        
     }
 }
 
