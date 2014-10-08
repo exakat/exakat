@@ -36,7 +36,7 @@ class _Const extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', "const " + fullcode.out("NAME").next().getProperty('code') + " = " + fullcode.out("VALUE").next().getProperty('code'));
+fullcode.setProperty('fullcode', "const " + fullcode.out("NAME").next().getProperty('code') + " = " + fullcode.out("VALUE").next().getProperty('fullcode'));
 
 GREMLIN;
     }
