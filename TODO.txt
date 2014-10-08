@@ -393,14 +393,30 @@ Add a top5 for files to check
 
 rethrown exceptions in a catch
 
-Array and String Literal Dereferencing ? $x = String; $x[1]... 
 Using empty() with Function Calls and Expressions : $x = $object->getProperty(); empty($x)
-
 
 PHP 5.5 : foreach loops now support non-scalar keys. I need to find the Iterator and make sure it returns array. 
 // loading (on process a file, then pour everything in the file). 
 
-        list($status, $header, $body) = $s->response()->finalize(); with $body unused : suggest list(, $h, )
-
 Attention : Use may be used to change method visibility. Report this and also note this better in the analzyer.
 Add report on aliases changing the visibility.
+
+== suggest to merge all those lines into one
+        $severities = array();
+        $severities['Critical'] = 3;
+        $severities['Major'] = 2;
+        $severities['Minor'] = 1;
+        $severities['None'] = 0; 
+
+Spot functions / global code mixed.
+
+Find similar files
+Spot common libraries...
+
+Finish ConstantConditions 
+
+Expose a list of difference between 2 versions of an application (API changed? existence, signature, impacted functions.)
+List of impacted methods (calling, data is changed for the original method to )
+
+Fin configuration directive that should will have an impact on the code. 
+Spot multiple aliases with the same names (compile but won't run)
