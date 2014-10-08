@@ -1,0 +1,87 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$client = new Client();
+
+$res = query("m=[:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\Structures\\\\AddZero']].out('ANALYZED').in.loop(1){true}{it.object.atom == 'File'}.groupCount(m){it.code}.iterate(); m;");
+
+foreach($res->toArray() as $k => $v) {
+    var_dump($k);
+    var_dump($v[0]);
+}
+
+function queryOne($query) {
+    $r = query($query);
+    return $r[0][0];
+}
+
+function queryArray($query) {
+    $return = array();
+    
+    $result = query($query);
+    foreach($result as $r) {
+        $return[] = (array) $r[0];
+    }
+	
+	return $return;
+}
+
+function queryColumn($query) {
+    $return = array();
+    
+    $result = query($query);
+    foreach($result as $r) {
+        $return[] = $r[0];
+    }
+	
+	return $return;
+}
+
+function query($query) {
+    global $client;
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $query, $params);
+    return $query->getResultSet();
+}
+
+function table_encode($stats) {
+    $html = "<html><body>";
+    
+    foreach($stats as $name => $value) {
+        $html .= "<tr><td>$name</td><td>$value</td></tr>\n";
+    }
+    
+    $html .= "</body></html>";
+    return $html;
+}
+
+function text_encode($stats) {
+    global $file;
+    if ($file) {
+        $html = "Statistics for the file '$file'\n\n";
+    } else {
+        $html = "Statistics for the whole server\n\n";
+    }
+    
+    foreach($stats as $name => $value) {
+        if (is_array($value)) {
+            $html .= "$name : ".join(" \n".str_repeat(' ', strlen("$name : ")), $value)."\n";
+        } else {
+            $html .= "$name : $value\n";
+        }
+    }
+    
+    $html .= "\n";
+    return $html;
+}
+
+?>
