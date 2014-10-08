@@ -754,7 +754,9 @@ g.idx('Staticconstant')[['token':'node']]
     .out('CLASS')
     .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
     .each{
-        if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
+        if ( it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.any() == false) {
+            it.setProperty('fullnspath', 'None'); // This is an error!
+        } else if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
             it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
             it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
