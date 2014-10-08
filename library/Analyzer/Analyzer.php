@@ -1487,6 +1487,19 @@ GREMLIN;
         return Analyzer::$docs->getSeverity(get_class($this));
     }
 
+    public function getFileList() {
+        $analyzer = str_replace('\\', '\\\\', get_class($this));
+        $queryTemplate = "m=[:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out('ANALYZED').in.loop(1){true}{it.object.atom == 'File'}.groupCount(m){it.filename}.iterate(); m;"; 
+        $vertices = $this->query($queryTemplate);
+        
+        $return = array();
+        foreach($vertices->toArray() as $k => $v) {
+            $return[$k] = $v[0];
+        }
+        
+        return $return;
+    }
+
     public function getVendors() {
         if (is_null(Analyzer::$docs)) {
             Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
