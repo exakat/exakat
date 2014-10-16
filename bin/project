@@ -101,8 +101,12 @@ if (file_exists('./projects/'.$project.'/log/analyze.final.log')) {
     unlink('./projects/'.$project.'/log/analyze.final.log');
 }
 
-shell_exec('php bin/analyze -T Analyze > ./projects/'.$project.'/log/analyze.analyze.final.log');
-shell_exec('php bin/analyze -T Appinfo > ./projects/'.$project.'/log/analyze.appinfo.final.log');
+$themes = array('Analyze', 'Appinfo', '"Coding Conventions"');
+foreach($themes as $theme) {
+    shell_exec('php bin/analyze -T '.$theme.' > ./projects/'.$project.'/log/analyze.analyze.final.log');
+    print "Analyzing $theme\n";
+}
+
 logProgress($project, $progress++ / $total_steps);
 print "Project analyzed\n";
 logTime('Analyze');
