@@ -51,6 +51,8 @@ print shell_exec('chmod -R g+w ./projects/'.$project);
 if (!empty($git_url) && !file_exists('./projects/'.$project.'/code/')) {
     if (strpos($git_url, 'bitbucket.org') !== false) {
         print shell_exec("cd ./projects/$project; hg clone $git_url code");
+    } elseif (strpos($git_url, '.googlecode.com/svn/') !== false) {
+        print shell_exec("cd ./projects/$project; svn checkout $git_url code");
     } elseif (strpos($git_url, 'svn.code.sf.net') !== false) {
         print shell_exec("cd ./projects/$project; svn checkout $git_url code");
     } else {
