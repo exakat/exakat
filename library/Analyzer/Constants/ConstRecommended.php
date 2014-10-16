@@ -11,6 +11,8 @@ class ConstRecommended extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD') // possibly new too
+             ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath('\\define')
              ->outIs('ARGUMENTS')
              ->_as('args')
@@ -26,6 +28,8 @@ class ConstRecommended extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD') // possibly new too
+             ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath('\\define')
              ->outIs('ARGUMENTS')
              ->_as('args')
