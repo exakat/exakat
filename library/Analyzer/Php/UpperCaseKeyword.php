@@ -10,6 +10,7 @@ class UpperCaseKeyword extends Analyzer\Analyzer {
                             'Try', 'Catch', 'Case', 'Default', 'Goto', 'Continue', 'Const', 'Break',
                             'Clone', 'DoWhile', 'While', 'Interface', 'Instanceof', 'Insteadof', 'Return',
                             'Throw', 'Trait', 'Interface', 'Var', 'Logical' ))
+             ->codeIsNot(array('&&', '||', '^', '&', '|'))
              ->isUpperCase('code');
         $this->prepareQuery();
         
