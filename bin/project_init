@@ -55,6 +55,11 @@ if (!empty($git_url) && !file_exists('./projects/'.$project.'/code/')) {
         print shell_exec("cd ./projects/$project; svn checkout $git_url code");
     } elseif (strpos($git_url, 'svn.code.sf.net') !== false) {
         print shell_exec("cd ./projects/$project; svn checkout $git_url code");
+    } elseif (strpos($git_url, '.zip') !== false) {
+        $file = basename($git_url);
+        $file_noext = str_replace('.zip', '', $file);
+        print shell_exec("cd ./projects/$project; wget $git_url; unzip -qq $file; mv $file_noext code; rm $file");
+// bz2, tar.bz, tgz, xz etc.
     } else {
         print shell_exec("cd ./projects/$project; git clone $git_url code");
     }
