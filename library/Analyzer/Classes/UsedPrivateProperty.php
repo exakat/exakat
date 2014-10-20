@@ -37,6 +37,30 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->code(array('static', 'self'))
              ->inIs('CLASS')
              ->outIs('PROPERTY')
+             ->atomIs('Variable')
+             ->samePropertyAs('code', 'x')
+             ->back('ppp');
+        $this->prepareQuery();
+
+        // property used in a static property static::$b[] or self::$b[]
+        $this->atomIs("Class")
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Ppp')
+             ->analyzerIsNot('Analyzer\\Classes\\UsedPrivateProperty')
+             ->_as('ppp')
+             ->hasOut('PRIVATE')
+             ->outIs('DEFINE')
+             ->savePropertyAs('code', 'x')
+             ->inIs('DEFINE')
+             ->inIs('ELEMENT')
+             ->atomInside('Staticproperty')
+             ->outIs('CLASS')
+             ->code(array('static', 'self'))
+             ->inIs('CLASS')
+             ->outIs('PROPERTY')
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
              ->samePropertyAs('code', 'x')
              ->back('ppp');
         $this->prepareQuery();
