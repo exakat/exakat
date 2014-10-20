@@ -34,6 +34,18 @@ class Datastore {
         return $return;
     }
 
+    public function getCol($table, $col) {
+        $query = "SELECT $col FROM $table";
+        $res = $this->sqlite->query($query);
+        $return = array();
+        
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $return[] = $row[$col];
+        }
+        
+        return $return;
+    }
+
     public function hasResult($table) {
         $query = "SELECT * FROM $table LIMIT 1";
         $r = $this->sqlite->querySingle($query);
