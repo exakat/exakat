@@ -420,3 +420,28 @@ List of impacted methods (calling, data is changed for the original method to )
 
 Fin configuration directive that should will have an impact on the code. 
 Spot multiple aliases with the same names (compile but won't run)
+
+        public $array = [
+            self::ONE => 'Eclipse',
+            'Sublime',
+            'PHPStorm',
+        ];
+        Possible overwrite of array indices (before PHP 5.6)
+
+Using File upload ? 
+Using handlers (Set_*_handlers)
+
+Functions / methods may be a tube (mixing arguments) or changing some state.
+
+// Useless code ?  (THen make this more complexe, with variable written 1, read 1, further apart.
+        $info = $this->data->getInfo();
+        $renderer->render($output, $info);
+
+Funciton subscription new style 
+
+Conservation de la skin entre les pages
+
+Display block with our without their {} really!
+
+in CHeck for Unused private properties, removed properties used as append[] or objects (methods or properties)
+Test for list to be in a namespace (\list may fail). Check for other functions that actually lead to a functioncall.
