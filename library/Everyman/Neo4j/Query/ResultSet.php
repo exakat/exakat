@@ -105,4 +105,5 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 	public function toArray() {
 	    return $this->data;
 	}
+
 }

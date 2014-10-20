@@ -7,6 +7,43 @@ namespace Everyman\Neo4j;
 class Node extends PropertyContainer
 {
 	/**
+	 * @var Label[] Our labels, or `null` if not loaded
+	 */
+	protected $labels = null;
+
+
+	/**
+	 * @inheritdoc
+	 * @param Client $client
+	 * @return Node
+	 */
+	public function setClient(Client $client)
+	{
+		parent::setClient($client);
+		// set the client of each label in case it's not set yet
+		if ($this->labels) {
+			foreach ($this->labels as $label) {
+				if (!$label->getClient()) {
+					$label->setClient($client);
+				}
+			}
+		}
+		return $this;
+	}
+
+	/**
+	 * Add labels to this node
+	 *
+	 * @param array $labels
+	 * @return array of all the Labels on this node, including those just added
+	 */
+	public function addLabels($labels)
+	{
+		$this->labels = $this->client->addLabels($this, $labels);
+		return $this->labels;
+	}
+
+	/**
 	 * Delete this node
 	 *
 	 * @return PropertyContainer
@@ -71,6 +108,20 @@ class Node extends PropertyContainer
 	}
 
 	/**
+	 * List labels for this node
+	 *
+	 * @return array
+	 * @throws Exception on failure
+	 */
+	public function getLabels()
+	{
+		if (is_null($this->labels)) {
+			$this->labels = $this->client->getLabels($this);
+		}
+		return $this->labels;
+	}
+
+	/**
 	 * Load this node
 	 *
 	 * @return PropertyContainer
@@ -100,6 +151,18 @@ class Node extends PropertyContainer
 	}
 
 	/**
+	 * Remove labels from this node
+	 *
+	 * @param array $labels
+	 * @return array of all the Labels on this node, after removing the given labels
+	 */
+	public function removeLabels($labels)
+	{
+		$this->labels = $this->client->removeLabels($this, $labels);
+		return $this->labels;
+	}
+
+	/**
 	 * Save this node
 	 *
 	 * @return PropertyContainer
@@ -110,5 +173,15 @@ class Node extends PropertyContainer
 		$this->client->saveNode($this);
 		$this->useLazyLoad(false);
 		return $this;
+	}
+
+	/**
+	 * Be sure to add our properties to the things to serialize
+	 *
+	 * @return array
+	 */
+	public function __sleep()
+	{
+		return array_merge(parent::__sleep(), array('labels'));
 	}
 }

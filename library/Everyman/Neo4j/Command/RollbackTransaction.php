@@ -4,25 +4,25 @@ namespace Everyman\Neo4j\Command;
 use Everyman\Neo4j\Command,
 	Everyman\Neo4j\Client,
 	Everyman\Neo4j\Exception,
-	Everyman\Neo4j\Index;
+	Everyman\Neo4j\Transaction;
 
 /**
- * Create an index
+ * Rollback an open Cypher transaction
  */
-class DeleteIndex extends Command
+class RollbackTransaction extends Command
 {
-	protected $index = null;
+	protected $transaction = null;
 
 	/**
-	 * Set the index to drive the command
+	 * Set the transaction to rollback
 	 *
 	 * @param Client $client
-	 * @param Index $index
+	 * @param Transaction $transaction
 	 */
-	public function __construct(Client $client, Index $index)
+	public function __construct(Client $client, Transaction $transaction)
 	{
 		parent::__construct($client);
-		$this->index = $index;
+		$this->transaction = $transaction;
 	}
 
 	/**
@@ -52,18 +52,18 @@ class DeleteIndex extends Command
 	 */
 	protected function getPath()
 	{
-		$type = trim((string)$this->index->getType());
-		if ($type != Index::TypeNode && $type != Index::TypeRelationship) {
-			throw new Exception('No type specified for index');
+		if (!$this->client->hasCapability(Client::CapabilityTransactions)) {
+			throw new Exception('Transactions unavailable');
 		}
 
-		$name = trim((string)$this->index->getName());
-		if (!$name) {
-			throw new Exception('No name specified for index');
+		$id = $this->transaction->getId();
+		if (!$id) {
+			throw new Exception('Cannot rollback a transaction without a transaction id');
 		}
-		$name = rawurlencode($name);
 
-		return '/index/'.$type.'/'.$name;
+		$path = '/transaction/'.$id;
+
+		return $path;
 	}
 
 	/**
@@ -76,9 +76,10 @@ class DeleteIndex extends Command
 	 */
 	protected function handleResult($code, $headers, $data)
 	{
-		if ((int)($code / 100) != 2 && (int)$code != 404) {
-			$this->throwException('Unable to delete index', $code, $headers, $data);
+		if ((int)($code / 100) != 2) {
+			$this->throwException('Error during transaction rollback', $code, $headers, $data);
 		}
+
 		return true;
 	}
 }

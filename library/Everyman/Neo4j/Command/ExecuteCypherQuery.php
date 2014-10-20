@@ -2,8 +2,8 @@
 namespace Everyman\Neo4j\Command;
 
 use Everyman\Neo4j\Exception,
-    Everyman\Neo4j\EntityMapper,
-    Everyman\Neo4j\Command,
+	Everyman\Neo4j\EntityMapper,
+	Everyman\Neo4j\Command,
 	Everyman\Neo4j\Client,
 	Everyman\Neo4j\Cypher\Query,
 	Everyman\Neo4j\Query\ResultSet;
@@ -59,12 +59,8 @@ class ExecuteCypherQuery extends Command
 	 */
 	protected function getPath()
 	{
-		$info = $this->client->getServerInfo();
-		if (isset($info['cypher'])) {
-			$url = $info['cypher'];
-		} else if (isset($info['extensions']['CypherPlugin']['execute_query'])) {
-			$url = $info['extensions']['CypherPlugin']['execute_query'];
-		} else {
+		$url = $this->client->hasCapability(Client::CapabilityCypher);
+		if (!$url) {
 			throw new Exception('Cypher unavailable');
 		}
 
@@ -88,4 +84,3 @@ class ExecuteCypherQuery extends Command
 		return new ResultSet($this->client, $data);
 	}
 }
-

@@ -1,7 +1,9 @@
 <?php
 namespace Everyman\Neo4j\Transport;
+
 use Everyman\Neo4j\Transport as BaseTransport,
-	Everyman\Neo4j\Version;
+	Everyman\Neo4j\Version,
+	Everyman\Neo4j\Exception;
 
 /**
  * Class for communicating with an HTTP JSON endpoint
@@ -44,13 +46,15 @@ class Curl extends BaseTransport
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_HEADER => true,
 			CURLOPT_HTTPHEADER => array(
-				'Accept: application/json',
+				'Accept: application/json;stream=true',
 				'Content-type: application/json',
 				'User-Agent: '.Version::userAgent(),
+				'X-Stream: true'
 			),
 			CURLOPT_CUSTOMREQUEST => self::GET,
 			CURLOPT_POST => false,
 			CURLOPT_POSTFIELDS => null,
+			CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
 		);
 
 		if ($this->username && $this->password) {
@@ -59,12 +63,12 @@ class Curl extends BaseTransport
 		}
 
 		switch ($method) {
-			case self::DELETE :
+			case self::DELETE:
 				$options[CURLOPT_CUSTOMREQUEST] = self::DELETE;
 				break;
 
-			case self::POST :
-			case self::PUT :
+			case self::POST:
+			case self::PUT:
 				$dataString = $this->encodeData($data);
 				$options[CURLOPT_CUSTOMREQUEST] = $method;
 				$options[CURLOPT_POSTFIELDS] = $dataString;
@@ -73,7 +77,7 @@ class Curl extends BaseTransport
 				if (self::POST == $method) {
 					$options[CURLOPT_POST] = true;
 				}
-			break;
+				break;
 		}
 
 		$ch = $this->getHandle();
@@ -82,6 +86,10 @@ class Curl extends BaseTransport
 		$response = curl_exec($ch);
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+
+		if ($response === false) {
+			throw new Exception("Can't open connection to ".$url);
+		}
 
 		if (!$code) {
 			$code = 500;
@@ -93,13 +101,13 @@ class Curl extends BaseTransport
 		$bodyData = json_decode($bodyString, true);
 
 		$headerString = substr($response, 0, $headerSize);
-		$headers = explode("\r\n",$headerString);
+		$headers = explode("\r\n", $headerString);
 		foreach ($headers as $i => $header) {
 			unset($headers[$i]);
-			$parts = explode(':',$header);
+			$parts = explode(':', $header);
 			if (isset($parts[1])) {
 				$name = trim(array_shift($parts));
-				$value = join(':',$parts);
+				$value = join(':', $parts);
 				$headers[$name] = $value;
 			}
 		}

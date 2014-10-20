@@ -24,7 +24,7 @@ class AddTo extends Operation
 	 * @param PropertyContainer $entity
 	 * @param string $key
 	 * @param string $value
- * @param integer $opId
+	 * @param integer $opId
 	 */
 	public function __construct(Batch $batch, Index $index, PropertyContainer $entity, $key, $value, $opId)
 	{
@@ -42,12 +42,19 @@ class AddTo extends Operation
 	public function getCommand()
 	{
 		if (!$this->command) {
-			$this->command = new Command\AddToIndex($this->batch->getClient(),
-				$this->index, $this->entity, $this->key, $this->value, $this->opId, $this->batch);
+			$this->command = new Command\AddToIndex(
+				$this->batch->getClient(),
+				$this->index,
+				$this->entity,
+				$this->key,
+				$this->value,
+				$this->opId,
+				$this->batch
+			);
 		}
 		return $this->command;
 	}
-	
+
 	/**
 	 * Get the index
 	 *
@@ -57,7 +64,7 @@ class AddTo extends Operation
 	{
 		return $this->index;
 	}
-	
+
 	/**
 	 * Get the key being indexed
 	 *
@@ -67,7 +74,7 @@ class AddTo extends Operation
 	{
 		return $this->key;
 	}
-	
+
 	/**
 	 * Get the value being indexed
 	 *

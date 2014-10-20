@@ -1,5 +1,6 @@
 <?php
 namespace Everyman\Neo4j\Command;
+
 use Everyman\Neo4j\Command,
 	Everyman\Neo4j\Client,
 	Everyman\Neo4j\Exception,
@@ -74,7 +75,8 @@ class GetNodeRelationships extends Command
 
 		$path = '/node/'.$this->node->getId().'/relationships/'.$this->dir;
 		if (!empty($this->types)) {
-			$path .= '/'.join('&', $this->types);
+			$types = array_map('rawurlencode', $this->types);
+			$path .= '/'.join('&', $types);
 		}
 
 		return $path;
@@ -101,4 +103,3 @@ class GetNodeRelationships extends Command
 		}
 	}
 }
-
