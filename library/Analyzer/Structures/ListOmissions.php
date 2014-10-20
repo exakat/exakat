@@ -12,7 +12,7 @@ class ListOmissions extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Functioncall")
              ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(array('T_LIST', 'T_NS_SEPARATOR'))
              ->fullnspath('\\list')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
