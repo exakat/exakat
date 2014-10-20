@@ -14,7 +14,8 @@ class UnusedFunctions extends Analyzer\Analyzer {
              ->raw('filter{ it.in("ELEMENT").in("BLOCK").has("atom", "Class").any() == false}')
              ->raw('filter{it.out("NAME").next().code != ""}')
              ->outIs('NAME')
-             ->analyzerIsNot('Analyzer\\Functions\\UsedFunctions');
+             ->analyzerIsNot('Analyzer\\Functions\\UsedFunctions')
+             ->fullnspathIsNot('__autoload');
         $this->prepareQuery();
     }
 }
