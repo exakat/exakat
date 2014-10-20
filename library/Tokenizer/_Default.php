@@ -22,14 +22,14 @@ class _Default extends TokenAuto {
 
         // default : ; // rest of the code
         $this->conditions = array(0 => array('token' => _Default::$operators,
-                                             'atom' => 'none'),
+                                             'atom'  => 'none'),
                                   1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  2 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
-                                  3 => array('token' => $final_token),
+                                  2 => array('token' => 'T_SEMICOLON', 
+                                             'atom'  => 'none')
         );
         
-        $this->actions = array('createVoidForDefault' => true,
-                               'keepIndexed'       => true);
+        $this->actions = array('insertVoid' => 1,
+                               'keepIndexed'=> true);
         $this->checkAuto();
 
         // Case has only one instruction (case 'a': $x++;)
