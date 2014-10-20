@@ -56,10 +56,15 @@ class Stats {
         return $r[0][0];
     }
 
-    private function query($query) {
+    private function query($querystring) {
         $params = array('type' => 'IN');
-        $query = new Gremlin\Query($this->client, $query, $params);
-        return $query->getResultSet();
+        try {
+            $query = new Gremlin\Query($this->client, $querystring, $params);
+            return $query->getResultSet();
+        } catch (Everyman\Neo4j\Exception $e) {
+            print "Can't execute '$querystring'\n".$e->getMessage()."\n";
+            return null;
+        }
     }
 }
 
