@@ -35,6 +35,7 @@ class IsModified extends Analyzer\Analyzer {
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->hasNoIn('METHOD') // possibly new too
+             ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
              ->inIs('NAME')
              ->outIs('ARGUMENTS')
@@ -94,6 +95,8 @@ class IsModified extends Analyzer\Analyzer {
                  ->is('order', $position)
                  ->inIs('ARGUMENT')
                  ->inIs('ARGUMENTS')
+                 ->hasNoIn('METHOD') // possibly new too
+                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->fullnspath($functions)
@@ -106,6 +109,8 @@ class IsModified extends Analyzer\Analyzer {
              ->savePropertyAs('order', 'order')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
+             ->hasNoIn('METHOD') // possibly new too
+             ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIs('Functioncall')
              ->hasIn('NEW')
              ->classDefinition()
