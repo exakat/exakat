@@ -60,7 +60,10 @@ TEXT
         $this->createH1('Analysis');
         $this->addContent('Text', 'intro');
 
-        $this->createH2('Dashboard');
+////////////////////////////////
+// Dashboard                  //
+////////////////////////////////
+        $this->createH2('Errors');
         $groupby = new \Report\Content\GroupBy($this->client);
         $groupby->setGroupby('getSeverity');
         $groupby->setCount('toCount');
@@ -82,13 +85,102 @@ TEXT
 
         $row2 = $this->addContent('Row', null);
         $listBySeverity = new \Report\Content\ListBySeverity($this->client);
-        
         $listBySeverity->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'));
         $listBySeverity->setName('Top 5 errors');
         $ht = $row2->addLeftContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
-        ///// Application analyzes 
-        $analyzes = \Analyzer\Analyzer::getThemeAnalyzers('Analyze');
+        $listByFile = new \Report\Content\listByFile($this->client);
+        $listByFile->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'));
+        $listByFile->setName('Top 5 files');
+        $ht = $row2->addRightContent('Top5', $listByFile);
+
+/////////////////////////////////
+// Dashboard Coding Convention //
+/////////////////////////////////
+        $this->createH2('Coding Conventions');
+        $groupby = new \Report\Content\GroupBy($this->client);
+        $groupby->setGroupby('getSeverity');
+        $groupby->setCount('toCount');
+        $groupby->setSort(array('Critical', 'Major', 'Minor'));
+
+        $row = $this->addContent('Row', null);
+        
+        $groupby->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions') );
+        $groupby->setName('Severity repartition');
+        
+        $row->addLeftContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+
+        $infobox = new \Report\Content\Infobox();
+        $infobox->setNeo4j($this->client);
+        $infobox->setMySQL($this->db);
+        $infobox->setSeverities($groupby->toArray());
+        $infobox->collect();
+        $ht = $row->addRightContent('Infobox', $infobox); 
+
+        $row2 = $this->addContent('Row', null);
+        $listBySeverity = new \Report\Content\ListBySeverity($this->client);
+        $listBySeverity->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
+        $listBySeverity->setName('Top 5 errors');
+        $ht = $row2->addLeftContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+
+        $listByFile = new \Report\Content\listByFile($this->client);
+        $listByFile->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
+        $listByFile->setName('Top 5 files');
+        $ht = $row2->addRightContent('Top5', $listByFile);
+
+////////////////////////////////
+// Compilations               //
+////////////////////////////////
+
+        $h = $this->createH1('Compilations');
+        $h = $this->createH2('Compile');
+        $this->addContent('Text', 'This table is a summary of compilation situation. Every PHP script has been tested for compilation with the mentionned versions. Any error that was found is displayed, along with the kind of messsages and the list of erroneous files.');
+        $d = new \Report\Content\Compilations();
+        $d->setNeo4j($this->client);
+        $c = $this->addContent('Compilations', $this->root);
+        $d->collect();
+        $c->setContent( $d );
+        
+        $h = $this->createH2('Compatibility53');
+        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.3. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.3. You must remove them before moving to this version.');
+
+        $d = new \Report\Content\Compatibility53();
+        $d->setNeo4j($this->client);
+        $d->collect();
+        $c = $this->addContent('Compatibility', $d);
+
+        $h = $this->createH2('Compatibility54');
+        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.4. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.4. You must remove them before moving to this version.');
+
+        $d = new \Report\Content\Compatibility54();
+        $d->setNeo4j($this->client);
+        $d->collect();
+        $c = $this->addContent('Compatibility', $d);
+
+        $h = $this->createH2('Compatibility55');
+        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.5. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.5. You must remove them before moving to this version.');
+
+        $d = new \Report\Content\Compatibility55();
+        $d->setNeo4j($this->client);
+        $d->collect();
+        $c = $this->addContent('Compatibility', $d);
+
+        $h = $this->createH2('Compatibility56');
+        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.6. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.6. You must remove them before moving to this version.');
+
+        $d = new \Report\Content\Compatibility56();
+        $d->setNeo4j($this->client);
+        $d->collect();
+        $c = $this->addContent('Compatibility', $d);
+        
+////////////////////////////////
+// Application analyzes       //
+////////////////////////////////
+        $this->createH1('Detailled');
+        $this->addContent('Text', 'intro');
+
+        $analyzes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
         $analyzes2 = array();
         foreach($analyzes as $a) {
             $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);

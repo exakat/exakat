@@ -2,7 +2,7 @@
 
 namespace Report\Format\Ace;
 
-class SimpleTable extends \Report\Format\Ace { 
+class CompilationTable extends \Report\Format\Ace\SimpleTable { 
     static public $table_counter = 0;
     private $titles = array();
     
@@ -32,7 +32,15 @@ HTML;
         foreach($data as $v) {
             $row = '<tr>';
             foreach($v as $V) {
-                $row .= "<td>$V</td>\n";
+                if( is_array($V)) {
+                    if (empty($V)) {
+                        $row .= "<td>&nbsp;</td>\n";
+                    } else {
+                        $row .= "<td><ul><li>".join("</li><li>", $V)."</li></ul></td>\n";
+                    }
+                } else {
+                    $row .= "<td>$V</td>\n";
+                }
             }
             $row .= "</tr>";
 

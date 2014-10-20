@@ -52,11 +52,15 @@ HTML;
         $values = array_slice($values, 0, 5);
         foreach($values as $value) {
             // @note This is the same getId() than in Section::getId()
-            $value['id'] =  str_replace(array(' ', '('  , ')'  ), array('-', '', ''), $value['name']);
+            if ($value['severity'] == '') {
+$td = "															<td>{$value['name']}</td>";
+            } else {
+                $value['id'] =  str_replace(array(' ', '('  , ')'  ), array('-', '', ''), $value['name']);
+$td = "															<td><a href=\"{$value['id']}.html\">{$value['name']}</a></td>";
+            }
             $html .= <<<HTML
 														<tr>
-															<td><a href="{$value['id']}.html">{$value['name']}</a></td>
-
+$td
 															<td>
 																<b>{$value['count']}</b>
 															</td>

@@ -45,153 +45,73 @@ class Test {
 
         $this->createH2('Report configuration'); 
 
-        $ReportInfo = new \Report\Content\ReportInfo($this->project);
-        $ReportInfo->setProject($this->project);
-        $ReportInfo->setNeo4j($this->client);
-        $ReportInfo->setMySQL($this->db);
-        $ReportInfo->collect();
+        $this->createH1('Compatibility');
+        $this->summary = $this->addContent('Summary', $this->root);
 
-        $ht = $this->addContent('SimpleTable', $ReportInfo); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-        $ht->setAnalyzer('ReportInfo');
+        $h = $this->createH2('Compilations');
+        $this->addContent('Text', 'This table is a summary of compilation situation. Every PHP script has been tested for compilation with the mentionned versions. Any error that was found is displayed, along with the kind of messsages and the list of erroneous files.');
+        $d = new \Report\Content\Compilations();
+        $d->setNeo4j($this->client);
+        $c = $this->addContent('Compilations', $this->root);
+        $d->collect();
+        $c->setContent( $d );
         
-        $this->createH1('Dashboard');
+        $h = $this->createH2('Compatibility53');
+        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.3. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.3. You must remove them before moving to this version.');
+
+        $d = new \Report\Content\Compatibility53();
+        $d->setNeo4j($this->client);
+        $d->collect();
+        $c = $this->addContent('Compatibility', $d);
+
+        $h = $this->createH2('Compatibility54');
+        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.4. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.4. You must remove them before moving to this version.');
+
+        $d = new \Report\Content\Compatibility54();
+        $d->setNeo4j($this->client);
+        $d->collect();
+        $c = $this->addContent('Compatibility', $d);
+
+        $h = $this->createH2('Compatibility55');
+        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.5. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.5. You must remove them before moving to this version.');
+
+        $d = new \Report\Content\Compatibility55();
+        $d->setNeo4j($this->client);
+        $d->collect();
+        $c = $this->addContent('Compatibility', $d);
+
+        $h = $this->createH2('Compatibility56');
+        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.6. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.6. You must remove them before moving to this version.');
+
+        $d = new \Report\Content\Compatibility56();
+        $d->setNeo4j($this->client);
+        $d->collect();
+        $c = $this->addContent('Compatibility', $d);
+
+//////////////////////////////////////////////////
+/////// Detailled list of returns           //////
+//////////////////////////////////////////////////
+        $this->createH1('Detailled');
         $this->addContent('Text', 'intro');
 
-        $this->createH2('Dashboard-2');
-        $groupby = new \Report\Content\GroupBy($this->client);
-        $groupby->setGroupby('getSeverity');
-        $groupby->setCount('toCount');
-        $groupby->setSort(array('Critical', 'Major', 'Minor'));
-        
-        $groupby->addAnalyzer(array(  'Structures\\StrposCompare', 
-                                      'Structures\\Iffectation',
-                                      'Structures\\ErrorReportingWithInteger',
-                                      'Structures\\ForWithFunctioncall',
-                                      'Structures\\ForeachSourceNotVariable',
-                                      'Variables\\VariableUsedOnce',
-                                      'Variables\\VariableNonascii',
-                                      'Structures\\EvalUsage',
-                                      'Structures\\OnceUsage',
-                                      'Structures\\VardumpUsage',
-                                      'Structures\\PhpinfoUsage',
-                                      'Classes\\NonPpp',
-                                      'Php/Incompilable',
-                                      'Constants/ConstantStrangeNames',
+        $analyzes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'));
+        print_r($analyzes);
 
-                                      'Structures\\NotNot',
-                                      'Structures\\Noscream',
-                                      'Structures\\toStringThrowsException',
-                                      'Structures\\CalltimePassByReference',
-                                      'Structures\\Break0',
-                                      'Structures\\BreakNonInteger',
-                                ));
-        $groupby->setName('Severity repartition');
-        
-        $ht = $this->addContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
-        $infobox = new \Report\Content\Infobox();
-        $infobox->setNeo4j($this->client);
-        $infobox->setMySQL($this->db);
-        $infobox->setSeverities($groupby->toArray());
-        $infobox->collect();
-        $ht = $this->addContent('Infobox', $infobox); 
-
-        $listBySeverity = new \Report\Content\ListBySeverity($this->client);
-        
-        $listBySeverity->addAnalyzer(array(  'Structures\\StrposCompare', 
-                                      'Structures\\Iffectation',
-                                      'Structures\\ErrorReportingWithInteger',
-                                      'Structures\\ForWithFunctioncall',
-                                      'Structures\\ForeachSourceNotVariable',
-                                      'Variables\\VariableUsedOnce',
-                                      'Variables\\VariableNonascii',
-                                      'Structures\\EvalUsage',
-                                      'Structures\\OnceUsage',
-                                      'Structures\\VardumpUsage',
-                                      'Structures\\PhpinfoUsage',
-                                      'Classes\\NonPpp',
-                                      'Php/Incompilable',
-                                      'Constants/ConstantStrangeNames',
-
-                                      'Structures\\NotNot',
-                                      'Structures\\Noscream',
-                                      'Structures\\toStringThrowsException',
-                                      'Structures\\CalltimePassByReference',
-                                      'Structures\\Break0',
-                                      'Structures\\BreakNonInteger',
-                                ));
-        $listBySeverity->setName('Top 5 errors');
-        $ht = $this->addContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
-        ///// Application analyzes 
-        $analyzes = array('Structures\\StrposCompare', 
-                          'Structures\\Iffectation',
-                          'Structures\\ErrorReportingWithInteger',
-                          'Structures\\ForWithFunctioncall',
-                          'Structures\\ForeachSourceNotVariable',
-                          'Variables\\VariableUsedOnce',
-                          'Variables\\VariableNonascii',
-                          'Structures\\EvalUsage',
-                          'Structures\\OnceUsage',
-                          'Structures\\VardumpUsage',
-                          'Structures\\PhpinfoUsage',
-                          'Classes\\NonPpp',
-                          'Php/Incompilable',
-                          'Constants/ConstantStrangeNames',
-
-                          'Structures\\NotNot',
-                          'Structures\\Noscream',
-                          'Structures\\toStringThrowsException',
-                          'Structures\\CalltimePassByReference',
-                          'Structures\\Break0',
-                          'Structures\\BreakNonInteger',
-                          );
-        // hash with config
-        /*
-        foreach($analyzes as $id => $a) {
-            if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
-                unset($analyzes[$id]);
-            }
+        $analyzes2 = array();
+        foreach($analyzes as $a) {
+            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
+            $analyzes2[$analyzer->getName()] = $analyzer;
         }
-        */
+        uksort($analyzes2, function($a, $b) { $a = strtolower($a); $b = strtolower($b); if ($a > $b) { return 1; } else { return $a == $b ? 0 : -1; } });
 
         if (count($analyzes) > 0) {
-            $h1 = false;
-
-            $analyzer = new \Report\Content\AnalyzerResultCounts();
-            $analyzer->setNeo4j($this->client);
-            $analyzer->setAnalyzers($analyzes);
-            $h = $this->createH2($analyzer->getName());
-            $h = $this->addContent('Table', $analyzer);
-
-            foreach($analyzes as $a) {
-                $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
-            
-//            $analyzer = \Analyzer\Analyzer::getInstance('Common/Bunch', $this->client);
-//            $analyzer->setBunch($analyzes);
-            
-                /*
-                if (!$analyzer->checkPhpVersion('5.3.26')) {
-                    $this->incompatible[] = $analyzer->getName();
-                    continue; 
-                }
-
-                if (!$analyzer->checkPhpConfiguration('aspTags')) {
-                    $this->incompatible[] = $analyzer->getName();
-                    continue; 
-                }
-                */
-                
-                /*
-                
-                if ($analyzer->hasResults()) {
-                    $this->no_output[] = $analyzer->getName();
-                    continue;
-                }
-                */
-                
+            foreach($analyzes2 as $analyzer) {
                 if ($analyzer->hasResults()) {
                     $h = $this->createH2($analyzer->getName());
+                    $h = $this->addContent('TextLead', $analyzer->getDescription());
                     $h = $this->addContent('Horizontal', $analyzer);
                 }
             }
@@ -200,80 +120,6 @@ class Test {
             $defs = new \Report\Content\Definitions($client);
             $defs->setAnalyzers($analyzes);
         }
-
-        $this->createH1('Application information');
-
-        $ht = $this->addContent('Text', 'This is an overview of your application');
-        $analyze = new \Report\Content\Appinfo();
-        $analyze->setNeo4j($this->client);
-        $analyze->collect();
-        $ht = $this->addContent('Tree', $analyze);
-
-
-        $this->createH1('Inventories');
-        ///// Application analyzes 
-        $analyzes = array('Php/Incompilable',
-                          'Variables/Variablenames',
-                          'Classes/Classnames',
-                          'Type/Integer',
-                          'Type/HttpHeader',
-                          'Type/UnicodeBlock',
-                          'Type/Md5String',
-                          'Type/Email',
-                          );
-        // hash with config
-        /*
-        foreach($analyzes as $id => $a) {
-            if (!in_array(str_replace('\\', '/', $a), $config['analyzer'])) {
-                unset($analyzes[$id]);
-            }
-        }
-        */
-
-        if (count($analyzes) > 0) {
-            $h1 = false;
-            
-            foreach($analyzes as $name) {
-                $analyse = \Analyzer\Analyzer::getInstance($name, $this->client);
-                
-                /*
-                if (!$analyzer->checkPhpVersion('5.3.26')) {
-                    $this->incompatible[] = $analyzer->getName();
-                    continue; 
-                }
-
-                if (!$analyzer->checkPhpConfiguration('aspTags')) {
-                    $this->incompatible[] = $analyzer->getName();
-                    continue; 
-                }
-                */
-                
-                /*
-                
-                if ($analyzer->hasResults()) {
-                    $this->no_output[] = $analyzer->getName();
-                    continue;
-                }
-                */
-
-                if ($analyse->hasResults()) {
-                    $this->createH2($analyse->getName());
-                    $this->addContent('Text', $analyse->getDescription());
-
-                    if (in_array($name, array('Php/Incompilable'))) {
-                        $this->addContent('Liste', $analyse);
-                    } else {
-                        $ht = $this->addContent('HashTable', $analyse);
-                        $ht->setCountedValues();
-                    }
-
-                } 
-            }
-        }
-
-        $this->createH1('Annexes');
-        $this->createH2('Documentation');
-        $this->addContent('Definitions', $defs);
         
         return true;
     }

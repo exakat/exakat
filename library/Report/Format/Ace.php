@@ -16,7 +16,7 @@ class Ace extends \Report\Format {
     protected $fileExtension = "html";
     
     public function render($output, $data) {
-        $output->push(" Text for ".get_class($this)."\n");
+        $output->push("Text for ".get_class($this)."\n");
     }
     
     public function push($render) {
@@ -63,7 +63,7 @@ class Ace extends \Report\Format {
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <meta http-equiv="refresh" content="0; url=Dashboard.html" />
+        <meta http-equiv="refresh" content="0; url=Errors.html" />
 
 		<meta name="description" content="Exakat Audit report. © 2014 Exakat" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
