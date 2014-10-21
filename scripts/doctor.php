@@ -128,7 +128,7 @@ if (!file_exists('batch-import')) {
 
 // screen
 $res = shell_exec('screen -v');
-if (preg_match('/Screen version (\d+.\d+.\d+) /is', $res, $r)) {
+if (preg_match('/Screen version (\d+.\d+.\d+)/is', $res, $r)) {
     $stats['screen']['installed'] = 'Yes';
     $stats['screen']['version'] = $r[1];
 } else {
