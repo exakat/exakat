@@ -793,7 +793,10 @@ g.idx('Trait')[['token':'node']].each{
     g.idx('traits').put('path', it.fullnspath.toLowerCase(), it)
 };
 
-"
+",
+"g.dropIndex('racines');",
+"g.dropIndex('delete');",
+
 );
 
         foreach($queries as $query) {
