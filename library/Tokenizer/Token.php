@@ -444,7 +444,7 @@ g.idx('Functioncall')[['token':'node']]
     .filter{ it.in('NEW').any() == false; }
     .filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}
     .each{
-        it.setProperty('fullnspath', '\\\\' + it.code);
+        it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
     }
 ", "
 // class usage
