@@ -16,7 +16,7 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->inIs('BLOCK')
              ->savePropertyAs('fullnspath', 'classe')
-             ->raw('filter{ g.idx("Staticproperty")[["token":"node"]].filter{it.out("CLASS").has("fullnspath", classe).any()}.filter{it.out("PROPERTY").has("code", property).any()}.any()}')
+             ->raw('filter{ g.idx("atoms")[["atom":"Staticproperty"]].filter{it.out("CLASS").has("fullnspath", classe).any()}.filter{it.out("PROPERTY").has("code", property).any()}.any()}')
              ->back('first');
         $this->prepareQuery();
 

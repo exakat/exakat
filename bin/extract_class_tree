@@ -12,7 +12,7 @@ spl_autoload_register('Autoload::autoload_library');
 
 $client = new Client();
 
-$classes = query("g.idx('Class')[['token':'node']].fullnspath");
+$classes = query("g.idx('atoms')[['atom':'Class']].fullnspath");
 
 $headers = '';
 $ids = array();
@@ -22,7 +22,7 @@ foreach($classes as $id => $class) {
     $headers .= "$ida [label = \"$class[0]\"];\n";
 }
 
-$classes = query("g.idx('Class')[['token':'node']].out('EXTENDS').transform{it.in('EXTENDS').next().fullnspath + ' -> ' + it.fullnspath}");
+$classes = query("g.idx('atoms')[['atom':'Class']].out('EXTENDS').transform{it.in('EXTENDS').next().fullnspath + ' -> ' + it.fullnspath}");
 $body = '';
 foreach($classes as $id => $class) {
     list($a, $b) = explode(' -> ', $class[0]);

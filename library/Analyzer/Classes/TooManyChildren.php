@@ -10,7 +10,7 @@ class TooManyChildren extends Analyzer\Analyzer {
         $this->atomIs("Class")
              ->raw('sideEffect{nspath = it.fullnspath;}')
              ->outIs('NAME')
-             ->raw('filter{ g.idx("Class")[["token":"node"]].out("EXTENDS", "IMPLEMENTS").has("fullnspath", nspath).count() >= 15}')
+             ->raw('filter{ g.idx("atoms")[["atom":"Class"]].out("EXTENDS", "IMPLEMENTS").has("fullnspath", nspath).count() >= 15}')
              ->back('first');
         $this->prepareQuery();    
     }

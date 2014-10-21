@@ -70,11 +70,17 @@ function queryColumn($query) {
 	return $return;
 }
 
-function query($query) {
+function query($querystring) {
     global $client;
     $params = array('type' => 'IN');
-    $query = new Gremlin\Query($client, $query, $params);
-    return $query->getResultSet();
+    try {
+        $query = new Gremlin\Query($client, $querystring, $params);
+        return $query->getResultSet();
+    } catch (Exception $e) {
+        print "'$querystring' failed\n";
+        return array();
+//        die();
+    }
 }
 
 if (FORMAT == 'JSON') {

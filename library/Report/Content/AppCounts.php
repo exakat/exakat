@@ -59,16 +59,16 @@ class AppCounts extends \Report\Content {
             foreach($hash as $name => $ext) {
                 if (is_string($ext)) {
                     if (strpos($ext, '\\') === false) {
-                        $queryTemplate = "g.idx('$ext')[['token':'node']].count()"; 
+                        $queryTemplate = "g.idx('atoms')[['atom':'$ext']].count()"; 
                     } else {
                         $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('\\', '\\\\', $ext)."']].out('ANALYZED').count()"; 
                     }
                 } elseif (isset($ext['Unique'])) {
-                    $queryTemplate = "g.idx('{$ext['index']}')[['token':'node']].{$ext['Unique']}.unique().count()"; 
+                    $queryTemplate = "g.idx('atoms')[['atom':'$ext']].{$ext['Unique']}.unique().count()"; 
                 } elseif (isset($ext['Below'])) {
-                    $queryTemplate = "g.idx('{$ext['index']}')[['token':'node']].{$ext['Below']}.count()"; 
+                    $queryTemplate = "g.idx('atoms')[['atom':'$ext']].{$ext['Below']}.count()"; 
                 } else {
-                    $queryTemplate = "g.idx('{$ext['index']}')[['token':'node']].count()"; 
+                    $queryTemplate = "g.idx('atoms')[['atom':'$ext']].count()"; 
                 }
                 $vertices = $this->query($this->neo4j, $queryTemplate);
                 $v = $vertices[0][0];

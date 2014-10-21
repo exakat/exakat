@@ -794,7 +794,9 @@ g.idx('atoms')[['atom':'Trait']].each{
 };
 
 ",
-"g.dropIndex('racines');",
+//"g.dropIndex('racines');",
+// if there is an error while processing the AST, racines is needed.
+// we need some conditional here.
 "g.dropIndex('delete');",
 
 );
