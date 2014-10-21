@@ -11,6 +11,8 @@ class Csv {
     private static $count = 0;
     private $id = 0;
     
+    private static $fp_rels = null;
+    private static $fp_nodes = null;
     
     private $isLink = false;
     
@@ -27,6 +29,10 @@ class Csv {
         if (!file_exists('nodes.csv')) {
             return false;
         }
+        
+        fclose(static::$fp_rels);
+        fclose(static::$fp_nodes);
+        
         $res = shell_exec(<<<SHELL
 mv nodes.csv ./batch-import/sampleme/
 mv rels.csv ./batch-import/sampleme/
@@ -51,19 +57,16 @@ SHELL
 
 		$context = stream_context_create($context_options);
 		$response = file_get_contents('http://localhost:7474/db/data/', false, $context);
-//		var_dump($response);
 		
 		if (strpos($response, 'NOT_FOUND') !== false) {
 		    sleep(1);
     		$response = file_get_contents('http://localhost:7474/db/data/', false, $context);
-//    		var_dump($response);
-//    		die(__METHOD__);		    
 		}
 
         preg_match("/Importing (\d+) Nodes/is", $res, $nodes);
         preg_match("/Importing (\d+) Relationships/is", $res, $relations);
         
-        $fnodes = -1;
+        $fnodes = -2;
         $fp = fopen('batch-import/sampleme/nodes.csv', 'r');
         while(fgetcsv($fp, 1000, "\t", '"')) { $fnodes++; }
         fclose($fp);
@@ -84,7 +87,10 @@ SHELL
     }
     
     public function save_chunk() {
-        $fp = fopen('nodes.csv', 'a');
+        if (static::$fp_nodes === null) {
+            static::$fp_nodes = fopen('nodes.csv', 'a');
+        }
+        $fp = static::$fp_nodes;
         // adding in_quote here, as it may not appear on the first token.
         $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter', 'order', 'dowhile', 'block', 'filename', 'tag', 'association' );
         if (static::$file_saved == 0) {
@@ -109,21 +115,22 @@ SHELL
             $row['noDelimiter'] = $this->escapeString($row['noDelimiter']);
             fputcsv($fp, $row, "\t");
         }
-        fclose($fp);
         static::$nodes = array();
         
-        $fp = fopen('rels.csv', 'a');
+        if (static::$fp_rels === null) {
+            static::$fp_rels = fopen('rels.csv', 'a');
+        }
+        $fp = static::$fp_rels;
         if (static::$file_saved == 0) {
             fputcsv($fp, array('start', 'end', 'type', 'classname', 'function', 'namespace', 'file'), "\t");
         }
-        foreach(static::$links as $link) {
+        foreach(static::$links as $id => $link) {
             if (isset($link['namespace'])) {
                 $link['namespace'] = $this->escapeString($link['namespace']);
             }
 
             fputcsv($fp, $link, "\t");
         }
-        fclose($fp);
         static::$links = array();
         static::$file_saved++;
     }
