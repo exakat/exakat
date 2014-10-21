@@ -153,7 +153,7 @@ it.setProperty('root', 'null');
                 $qactions[] = " /* atom */\n  it.setProperty('atom', it.out('NEXT').next().atom)";
             }
             
-            $qactions[] = " /* indexing */\n  g.idx('{$actions['atom']}').put('token', 'node', it);";
+            $qactions[] = " /* indexing */\n  g.idx('atoms').put('atom', '{$actions['atom']}', it);";
             
             unset($actions['atom']);
             $this->set_atom = true;
@@ -281,7 +281,7 @@ g.addEdge(g.idx('racines')[['token':'Sequence']].next(), root, 'INDEXED');
 
 arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
     ppp = g.addVertex(null, [code:'ppp', atom:'Ppp', token:token, virtual:true, line:it.line, fullcode:'ppp (to_var_new)']);
-    g.idx('Ppp').put('token','node', ppp);
+    g.idx('atoms').put('atom','Ppp', ppp);
 
     var.out('PUBLIC', 'PRIVATE', 'PROTECTED', 'STATIC').each{
         option = g.addVertex(null, [code:it.code, fullcode:it.code, atom:it.atom, token:it.token, virtual:true, line:it.line]);
@@ -311,7 +311,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
         option = g.addVertex(null, [code:it.code, fullcode:it.code, atom:it.atom, token:it.token, virtual:true, line:it.line]);
         g.addEdge(ppp, option, it.code.toUpperCase());
     }
-    g.idx('Ppp').put('token','node', ppp);
+    g.idx('atoms').put('atom','Ppp', ppp);
 
     ppp.setProperty('order', it.order);
     g.addEdge(root, ppp, 'ELEMENT');
@@ -474,7 +474,7 @@ root.setProperty('token', var.token);
 
 arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
     ppp = g.addVertex(null, [code:'var', atom:'Ppp', token:token, virtual:true, line:it.line]);
-    g.idx('Ppp').put('token','node', ppp);
+    g.idx('atoms').put('atom','Ppp', ppp);
 
     fullcode = ppp;
     $fullcode
@@ -497,7 +497,7 @@ arg.out('ARGUMENT').filter{ it.atom in ['Variable']}.each{
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
     ppp = g.addVertex(null, [code:'var', atom:'Ppp', token:token, virtual:true, line:it.line]);
-    g.idx('Ppp').put('token','node', ppp);
+    g.idx('atoms').put('atom','Ppp', ppp);
     fullcode = ppp;
     $fullcode
     
@@ -705,7 +705,7 @@ g.addEdge(it, x, 'NEXT');
 x = g.addVertex(null, [code:it.code, atom:'Ppp', token:it.token, virtual:true, line:it.line, fullcode:it.code ]);
 
 /* indexing */
-g.idx('Ppp').put('token', 'node', x);
+g.idx('atoms').put('atom', 'Ppp', x);
 
 g.addEdge(x, it.out('NEXT').next(), 'DEFINE');
 it.out('NEXT').has('atom', 'Variable').each {
@@ -809,7 +809,7 @@ g.removeVertex(assignation);
 g.removeEdge( it.inE('NEXT').next());
 
 /* indexing */
-g.idx('Ppp').put('token', 'node', x);
+g.idx('atoms').put('atom', 'Ppp', x);
 
 fullcode = x;
 ";
@@ -1026,7 +1026,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.addEdge(sequence, x, 'ELEMENT');
 
     /* indexing */
-    g.idx('Const').put('token', 'node', x);
+    g.idx('atoms').put('atom', 'Const', x);
 
     g.addEdge(x, it.out('LEFT').next(), 'NAME');
     g.addEdge(x, it.out('RIGHT').next(), 'VALUE');
@@ -1702,7 +1702,7 @@ x.outE.hasNot('label', 'NEXT').inV.each{
     } 
 }
 
-/* indexing */  g.idx('Typehint').put('token', 'node', x);
+/* indexing */  g.idx('atoms').put('atom', 'Typehint', x);
 
 fullcode = x;
 $fullcode
@@ -2518,7 +2518,7 @@ if (    $it.token != 'T_ELSEIF'
     } else {
         sequence = g.addVertex(null, [code:'makeSequence ' + $it.in('NEXT').next().token, atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
         g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');   
-        g.idx('Sequence').put('token', 'node', sequence);   
+        g.idx('atoms').put('atom', 'Sequence', sequence);   
 
         g.addEdge(sequence, $it, 'ELEMENT');
         $it.setProperty('order', 0);
@@ -2667,7 +2667,7 @@ x.out('CONCAT').each{
     } 
 }
 
-/* indexing */  g.idx('String').put('token', 'node', it);
+/* indexing */  g.idx('atoms').put('atom', 'String', it);
 
 ";
             unset($actions['make_quoted_string']);
@@ -2772,7 +2772,7 @@ it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each {
 
 x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line, modifiedBy:'FunctionCall']);
 g.addEdge(it, x, 'NAME');
-g.idx('Variable').put('token', 'node', x);
+g.idx('atoms').put('atom', 'Variable', x);
                 ";
             unset($actions['variable_to_functioncall']);
         }        
@@ -2785,7 +2785,7 @@ g.idx('Variable').put('token', 'node', x);
 
 x = g.addVertex(null, [code:it.code, fullcode: it.fullcode, atom:'Array', token:'T_OPEN_BRACKET', virtual:true, line:it.line, modifiedBy:'FunctionCallArray']);
 g.addEdge(it, x, 'NAME');
-g.idx('Array').put('token', 'node', x);
+g.idx('atoms').put('atom', 'Array', x);
                 ";
             unset($actions['array_to_functioncall']);
         }        

@@ -41,51 +41,23 @@ if (DISPLAY) print "created racines index\n";
 
 logTime('g.idx("racines")');
 
-$indices = array();
-$res = query("g.getIndices()")->toArray();
-foreach($res as $r) {
-    $indices[] = substr($r[0], 7, strpos($r[0], ':') - 7);
-}
-if (DISPLAY) print "getting all indices\n";
 
-$faits = array();
+query("g.dropIndex('atoms');");
+query("g.createManualIndex('atoms', Vertex)");
+logTime('g.idx("atoms")');
 
-$special_tokens = array('Integer', 'String', 'Identifier', 'Magicconstant',
-                        'RawString', 'Variable', 'Float', 'Boolean');
-$tokens = array_merge(Token::getTokenizers(), $special_tokens);
 
-foreach($tokens as $id => $class) {
-    $fullclass = "\\Tokenizer\\$class";
-    if (!isset($fullclass::$atom)) {
-        if (DISPLAY) print "$id) $class : missing token\n";
-        continue;
-    }
-    if (DISPLAY) print "$id) $class : creating\n";
- 
-    $token = $fullclass::$atom;
-    if (in_array($token, $faits)) {
-        if (DISPLAY) print "$id) $class : already done as '$token'. Ignoring\n";
-        continue; 
-    } elseif (in_array($token, $indices)) {
-        query("g.dropIndex('$token');");
-    }
-
-    query("g.createManualIndex('$token', Vertex)");
-    $faits[] = $token;
-    
-    if (DISPLAY) print "$id) $class : created\n";
-}
-logTime('g.idx("classes")');
 
 if (DISPLAY) print "$id) $class : filling\n";
 $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
                                  'Rawstring', 'Variable', 'Float', 'Boolean']}.each{ 
-                                 g.idx(it.atom).put('token', 'node', it); }";
+                                 g.idx('atoms').put('atom', it.atom, it); }";
 query($query);
 if (DISPLAY) print "$id) $class : filled\n";
-logTime('g.idx("xxxxx") : filling');
+logTime('g.idx("atom")[["atom":"******"]] : filling');
 
 // creating the neo4j Index
+// @todo check this index
 query("g.V.has('root', 'true').each{ g.idx('racines').put('token', 'ROOT', it); };");
 logTime('g.idx("ROOT")');
 
@@ -93,7 +65,7 @@ if (DISPLAY) print "Indexing root done\n";
 
 // special case for the initial Rawstring. 
 query("g.idx('racines')[['token':'ROOT']].has('atom','Sequence').each{ g.idx('Sequence').put('token', 'node', it); };");
-logTime('g.idx("Rawstring") special');
+logTime('g.idx("racines") ROOT special');
 
 if (DISPLAY) print "Creating index done\n";
 
@@ -104,8 +76,8 @@ logTime('g.idx("racines")[[token:***]] indexing');
 if (DISPLAY) print "Indexing racines done\n";
 
 // calculating the Unicode blocks
-query("g.idx('String')[['token':'node']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
-query("g.idx('Rawstring')[['token':'node']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
+query("g.idx('atoms')[['atom':'String']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
+query("g.idx('atoms')[['token':'Rawstring']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
 logTime('Unicodes block');
 
 if (DISPLAY) print "String unicode done\n";

@@ -1336,7 +1336,7 @@ GREMLIN;
         $query = join('.', $this->methods);
         
         if ($this->methods[1] == 'has("atom", arg0)') {
-            $query = "g.idx('{$this->arguments['arg0']}')[['token':'node']].{$query}";
+            $query = "g.idx('atoms')[['atom':'{$this->arguments['arg0']}']].{$query}";
         } else {
             $query = "g.V.{$query}";
         }
