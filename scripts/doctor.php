@@ -21,6 +21,9 @@ $stats['PHP 5.5']['version'] = shell_exec('php55 -r "echo phpversion();" 2>&1');
 // check PHP 5.6
 $stats['PHP 5.6']['version'] = shell_exec('php56 -r "echo phpversion();" 2>&1');
 
+// check PHP 7
+$stats['PHP 7']['version'] = shell_exec('php70 -r "echo phpversion();" 2>&1');
+
 // wkhtmltopdf
 $res = shell_exec('wkhtmltopdf --version 2>&1');
 if (preg_match('/command not found/is', $res)) {
@@ -113,11 +116,28 @@ if (!file_exists('batch-import')) {
         $stats['batch-import']['version'] = trim($file[0]);
     }
     
+    if (!file_exists('./batch-import/sampleme/')) {
+        $stats['batch-import']['sampleme'] = 'No';
+    } else {
+        $stats['batch-import']['sampleme'] = 'Yes';
+    }
+    
     $res = split("\n", shell_exec('mvn -v 2>&1'));
     $stats['batch-import']['maven'] = trim($res[0]);
-    
-    
 }
+
+// screen
+$res = shell_exec('screen -v');
+if (preg_match('/Screen version (\d+.\d+.\d+) /is', $res, $r)) {
+    $stats['screen']['installed'] = 'Yes';
+    $stats['screen']['version'] = $r[1];
+} else {
+    $stats['screen']['installed'] = 'No';
+}
+
+// svn
+// hg
+
 
 foreach($stats as $section => $details) {
     print "$section : \n";
