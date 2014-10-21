@@ -64,7 +64,7 @@ logTime('g.idx("ROOT")');
 if (DISPLAY) print "Indexing root done\n";
 
 // special case for the initial Rawstring. 
-query("g.idx('racines')[['token':'ROOT']].has('atom','Sequence').each{ g.idx('Sequence').put('token', 'node', it); };");
+query("g.idx('racines')[['token':'ROOT']].has('atom','Sequence').each{ g.idx('atoms').put('atom', 'Sequence', it); };");
 logTime('g.idx("racines") ROOT special');
 
 if (DISPLAY) print "Creating index done\n";
@@ -106,6 +106,7 @@ function query($query) {
         fwrite($fp, $query."\n");
         fclose($fp);
         
+        print "Query : $query\n";
         print $e->getMessage();
         die('died in '.__METHOD__."\n");
     }
