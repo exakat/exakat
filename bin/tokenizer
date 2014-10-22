@@ -116,7 +116,8 @@ while(check_prev($prev, $extra_rounds)) {
     $regex_next = array();
     foreach($regex as $name => $r) {
         $begin = microtime(true);
-        if ( ($counts = $r->check()) || in_array($name , array("FunctioncallArray", 'Sequence'))) {
+        $r->check();
+        if ( ($r->remaining != $r->done) || in_array($name , array("FunctioncallArray", 'Sequence'))) {
             $regex_next[$name] = $r;
         }
         $end = microtime(true);
