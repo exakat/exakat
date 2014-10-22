@@ -153,7 +153,7 @@ class _Static extends TokenAuto {
         $this->actions = array('atom'     => 'Static');
         $this->checkAuto(); 
 
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {

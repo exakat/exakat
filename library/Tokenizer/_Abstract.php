@@ -34,7 +34,7 @@ class _Abstract extends TokenAuto {
                                'atom'   => 'Abstract');
         $this->checkAuto(); 
 
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {

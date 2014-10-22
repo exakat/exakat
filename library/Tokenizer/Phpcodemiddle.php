@@ -18,7 +18,7 @@ class Phpcodemiddle extends TokenAuto {
                                );
         $this->checkAuto();
         
-        return $this->checkRemaining();
+        return false;
     }
 }
 

@@ -28,7 +28,7 @@ class IfthenElse extends TokenAuto {
                                'cleanIndex'  => true);
         $this->checkAuto(); 
 
-        return $this->checkRemaining();
+        return false;
     }
 }
 

@@ -34,7 +34,7 @@ class _Final extends TokenAuto {
                                'atom'      => 'Final');
         $this->checkAuto(); 
 
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {

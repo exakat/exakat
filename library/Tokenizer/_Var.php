@@ -43,7 +43,7 @@ class _Var extends TokenAuto {
                                'atom'         => 'Var');
         $this->checkAuto(); 
 
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {

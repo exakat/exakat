@@ -16,7 +16,7 @@ class Shell extends TokenAuto {
         $this->actions = array( 'make_quoted_string' => 'Shell');
         $this->checkAuto();
 
-        return $this->checkRemaining();
+        return false;
     }
 }
 

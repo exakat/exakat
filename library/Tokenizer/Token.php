@@ -240,8 +240,8 @@ class Token {
     	return $result[0][0];
     }
 
-    public function checkRemaining() {
-        $class = str_replace("Tokenizer\\", '', get_class($this));
+    public function checkRemaining() { 
+            $class = str_replace("Tokenizer\\", '', get_class($this));
         if (in_array($class, Token::$types)) {
             $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
 
@@ -250,7 +250,7 @@ class Token {
             return true;
         }
     }
-    
+
     static public function leftInIndex($class) {
         $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
 

@@ -60,6 +60,7 @@ $log->log( "Starting time : ".date('r'));
 $client = new Client();
 
 $regex = array();
+$regex2 = array();
 foreach($classes as $class) {
     $new = "Tokenizer\\$class";
     
@@ -72,7 +73,11 @@ foreach($classes as $class) {
     } elseif ($new == 'Tokenizer\\Sequence') {
         $regex[$class] = $r;
     } elseif ($r->checkRemaining()) {
-        $regex[$class] = $r;
+        if (in_array($new, array('Tokenizer\\Phpcodemiddle', 'Tokenizer\\Phpcode', ))) {
+            $regex[$class] = $r;
+        } else {
+            $regex[$class] = $r;
+        }
     } else {
         display("Ignore $new in else\n");
     }
@@ -113,24 +118,29 @@ while(check_prev($prev, $extra_rounds)) {
     array_unshift($prev, $count);
 
     $regex = $regex_next;
+    if ($round == 2) {
+        foreach($regex2 as $name => $r) {
+            $regex[$name] = $r;
+        }
+    }
     $regex_next = array();
     foreach($regex as $name => $r) {
         $begin = microtime(true);
         $r->check();
-        if ( ($r->remaining != $r->done) || in_array($name , array("FunctioncallArray", 'Sequence'))) {
+        if ( ($r->total != 0) || in_array($name , array("FunctioncallArray", 'Sequence'))) {
             $regex_next[$name] = $r;
         }
         $end = microtime(true);
         
         $regex_time += $end - $begin;
 
-        if ($r->remaining + $r->done  > 0) { 
-            $ratio =  $r->done / ($r->remaining + $r->done ); 
+        if ($r->total  > 0) { 
+            $ratio =  $r->done / $r->total; 
         } else { 
             $ratio = -1; 
         }
         
-        $log->log( get_class($r)."\t".(($end - $begin) * 1000)."\t".$r->remaining."\t".$r->done."\t".number_format(100 * $ratio, 0));
+        $log->log( get_class($r)."\t".(($end - $begin) * 1000)."\t".$r->total."\t".$r->done."\t".number_format(100 * $ratio, 0));
     }
     $log->log("Finished foreach");
     unset($precedence);

@@ -19,7 +19,7 @@ class _Finally extends TokenAuto {
                                
         $this->checkAuto();
 
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {

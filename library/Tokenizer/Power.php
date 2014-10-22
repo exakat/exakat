@@ -27,7 +27,7 @@ class Power extends TokenAuto {
                                'makeSequence' => 'it');
         $this->checkAuto();
         
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {

@@ -106,7 +106,7 @@ class _Ppp extends TokenAuto {
                                'atom'      => 'Ppp');
         $this->checkAuto(); 
 
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {

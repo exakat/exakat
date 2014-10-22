@@ -19,7 +19,7 @@ class ArgumentsArray extends Arguments {
         $this->actions = array('insertEdge'   => array(0 => array('Arguments' => 'ARGUMENT')));
         $this->checkAuto();
 
-        return $this->checkRemaining();
+        return false;
     }
 }
 ?>

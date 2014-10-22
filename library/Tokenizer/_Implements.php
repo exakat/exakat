@@ -18,7 +18,7 @@ class _Implements extends TokenAuto {
                                'cleanIndex' => true
                                );
 
-        return $this->checkRemaining();
+        return false;
     }
 }
 ?>

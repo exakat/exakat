@@ -81,7 +81,7 @@ class Phpcode extends TokenAuto {
                                'transfert'     => array('root' => 2));
         $this->checkAuto();
         
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {

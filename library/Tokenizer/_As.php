@@ -37,7 +37,7 @@ class _As extends TokenAuto {
                                'order'        => array(-1 => '0'));
         $this->checkAuto();
         
-        return $this->checkRemaining();
+        return false;
     } 
     
     public function fullcode() {

@@ -62,7 +62,7 @@ class ArgumentsNoParenthesis extends Arguments {
                                'keepIndexed' => true);
         $this->checkAuto();
 
-        return $this->checkRemaining();
+        return false;
     }
 }
 ?>

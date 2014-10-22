@@ -19,7 +19,7 @@ class String extends TokenAuto {
         $this->actions = array( 'make_quoted_string' => 'String');
         $this->checkAuto();
 
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {

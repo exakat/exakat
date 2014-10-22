@@ -6,7 +6,7 @@ class TokenAuto extends Token {
     static public $round = -1;
     protected $conditions = array();
     protected $set_atom   = false;
-    public $remaining  = null ;
+    public $total  = null ;
     public $done  = null ;
 
     public function _check() {
@@ -67,7 +67,7 @@ class TokenAuto extends Token {
         $this->set_atom = false;
         $qactions = $this->readActions($this->actions);
         $query .= ".each{\n done++; fullcode = it; fullcode.round = ".(self::$round).";
-".join(";\n", $qactions)."; ".($this->set_atom ? $this->fullcode() : '' )."\n}; [remaining:total, done:done];";
+".join(";\n", $qactions)."; ".($this->set_atom ? $this->fullcode() : '' )."\n}; [total:total, done:done];";
         
         return $query;
     }
@@ -80,24 +80,14 @@ class TokenAuto extends Token {
     }
 
     public function checkAuto() {
-        $this->remaining = null;
+        $this->total = null;
 
         $res = Token::query($this->prepareQuery());
         
-        $this->remaining += (int) $res['remaining'][0];
+        $this->total += (int) $res['total'][0];
         $this->done += (int) $res['done'][0];
         
         return $res;
-    }
-
-    public function checkRemaining() {
-        if (empty($this->remaining)) {
-            return parent::checkRemaining();
-        } else {
-            $r = $this->remaining;
-            
-            return $r; 
-        }
     }
 
     private function readActions($actions) {

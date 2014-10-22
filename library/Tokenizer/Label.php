@@ -22,7 +22,7 @@ class Label extends TokenAuto {
                                'makeSequence' => 'it');
         $this->checkAuto();
 
-        return $this->checkRemaining();
+        return false;
     }
 
 

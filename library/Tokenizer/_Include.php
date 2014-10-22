@@ -38,7 +38,7 @@ class _Include extends TokenAuto {
                                'property'     => array('parenthesis' => 'false'),);
         $this->checkAuto();
         
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {

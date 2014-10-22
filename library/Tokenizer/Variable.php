@@ -20,7 +20,7 @@ class Variable extends TokenAuto {
         
         // todo find a way to process those remainings atom that may be found in those {} 
         
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {

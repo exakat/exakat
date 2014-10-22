@@ -32,7 +32,7 @@ class FunctioncallArray extends TokenAuto {
         $this->actions = array('cleanIndex' => 'yes');
         $this->checkAuto();
         
-        return $this->checkRemaining();
+        return false;
     }
 
     public function fullcode() {
