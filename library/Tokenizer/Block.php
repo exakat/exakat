@@ -52,7 +52,11 @@ class Block extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', "{ /**/ } "); 
+if (fullcode.getProperty('bracket')) {
+    fullcode.setProperty('fullcode', "{ /**/ } "); 
+} else {
+    fullcode.setProperty('fullcode', " /**/ "); 
+}
 
 GREMLIN;
     }
