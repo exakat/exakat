@@ -14,6 +14,11 @@
     
     list($dir, $test) = explode('/', $test);
     
+    if (substr($test, -4) == '.php') {
+        $test = substr($test, 0, -4);
+        print "Dropping extension .php from the test name. Now using '$test'\n";
+    }
+    
     if (!file_exists(dirname(dirname(__DIR__)).'/library/Analyzer/'.$dir)) {
         $groups = array_map('basename', glob(dirname(dirname(__DIR__)).'/library/Analyzer/*' , GLOB_ONLYDIR));
         $closest = closest_string($dir, $groups);
