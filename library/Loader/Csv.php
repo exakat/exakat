@@ -8,7 +8,7 @@ class Csv {
     private static $file_saved = 0;
     private static $links = array();
     private static $cols = array();
-    private static $count = 0;
+    private static $count = -1; // id must start at 0 in batch-import
     private $id = 0;
     
     private static $fp_rels = null;
@@ -38,7 +38,7 @@ mv nodes.csv ./batch-import/sampleme/
 mv rels.csv ./batch-import/sampleme/
 
 cd ./batch-import
-java -server -Xmx1G -Dfile.encoding=UTF-8 -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db sampleme/nodes.csv sampleme/rels.csv 2>/dev/null
+java -server -Dfile.encoding=UTF-8 -Xmx4G -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db sampleme/nodes.csv sampleme/rels.csv 2>/dev/null
 cd ..
 sh scripts/restart.sh
 SHELL
@@ -66,7 +66,7 @@ SHELL
         preg_match("/Importing (\d+) Nodes/is", $res, $nodes);
         preg_match("/Importing (\d+) Relationships/is", $res, $relations);
         
-        $fnodes = -2;
+        $fnodes = -1;
         $fp = fopen('batch-import/sampleme/nodes.csv', 'r');
         while(fgetcsv($fp, 1000, "\t", '"')) { $fnodes++; }
         fclose($fp);
@@ -92,7 +92,7 @@ SHELL
         }
         $fp = static::$fp_nodes;
         // adding in_quote here, as it may not appear on the first token.
-        $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter', 'order', 'dowhile', 'block', 'filename', 'tag', 'association' );
+        $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter', 'rank', 'dowhile', 'block', 'filename', 'tag', 'association' );
         if (static::$file_saved == 0) {
             fputcsv($fp, array_merge($les_cols), "\t");
         }
