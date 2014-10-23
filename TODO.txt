@@ -445,3 +445,6 @@ Display block with our without their {} really!
 
 in CHeck for Unused private properties, removed properties used as append[] or objects (methods or properties)
 Test for list to be in a namespace (\list may fail). Check for other functions that actually lead to a functioncall.
+
+Some methods are meant to return nothing : construct/destruct, some of the magic methods, test/setup/teardown in phpunit...
+Functions that return nothing needs to have special things in them : global, ini_set, ...
