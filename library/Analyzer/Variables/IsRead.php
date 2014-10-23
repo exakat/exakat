@@ -30,6 +30,14 @@ class IsRead extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // $x++ + 2 (a plusplus within another 
+        $this->atomIs("Variable")
+             ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
+             ->inIs(array('RIGHT', 'LEFT'))
+             ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
+             ->back('first');
+        $this->prepareQuery();
+
         // variable in a sequence (also useless...)
         $this->atomIs("Variable")
              ->inIs('ELEMENT')
