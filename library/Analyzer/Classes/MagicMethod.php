@@ -11,7 +11,8 @@ class MagicMethod extends Analyzer\Analyzer {
                               '__call', '__callStatic', '__get', '__set', '__isset', '__unset', 
                               '__sleep', '__wakeup', 
                               '__toString', 
-                              '__invoke', '__set_state', '__clone');
+                              '__invoke', '__set_state', '__clone',
+                              '__debugInfo');
         
         $this->atomIs("Class")
              ->outIs('BLOCK')
