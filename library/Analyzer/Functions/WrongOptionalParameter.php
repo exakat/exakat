@@ -7,7 +7,7 @@ use Analyzer;
 class WrongOptionalParameter extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Function")
-             ->raw("filter{ has_default=false; it.out('ARGUMENTS').out('ARGUMENT').aggregate().sort{it.order}._().filter{
+             ->raw("filter{ has_default=false; it.out('ARGUMENTS').out('ARGUMENT').aggregate().sort{it.rank}._().filter{
              if (it.out('RIGHT').any()) { 
                 has_default = true; 
                 false; 
@@ -17,6 +17,7 @@ class WrongOptionalParameter extends Analyzer\Analyzer {
             } else { 
                 has_default; 
             }}.any()}");
+        $this->prepareQuery();
     }
 }
 
