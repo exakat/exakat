@@ -10,7 +10,7 @@ class VardumpUsage extends Analyzer\Analyzer {
              ->code(array('var_dump', 'print_r'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->is('order', 1)
+             ->is('rank', 1)
              ->codeIsNot("true")
              ->back('first');
         $this->prepareQuery();
@@ -18,10 +18,9 @@ class VardumpUsage extends Analyzer\Analyzer {
         $this->atomIs("Functioncall")
              ->code(array('var_dump', 'print_r'))
              ->outIs('ARGUMENTS')
-             ->noChildWithOrder('ARGUMENT', 1)
+             ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 

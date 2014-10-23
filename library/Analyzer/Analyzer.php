@@ -216,8 +216,10 @@ class Analyzer {
     
     public function init() {
         $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
-        if ($result[0][0] == 'false') {
-            $this->query("g.createManualIndex('analyzers', Vertex)");
+        if ($result[0][0] == 0) {
+            print __METHOD__."\n";
+            print $result[0][0]."\n";
+            $this->query("g.createIndex('analyzers', Vertex)");
         }
         
         $analyzer = str_replace('\\', '\\\\', get_class($this));
@@ -587,25 +589,25 @@ GREMLIN;
         return $this;
     }
 
-    function hasOrder($value = "0") {
+    function hasRank($value = "0") {
         if ($value == 'first') {
-            $this->addMethod("has('order','0')");
+            $this->addMethod("has('rank','0')");
         } elseif ($value == 'last') {
-            $this->addMethod("filter{it.order == it.in('ARGUMENT').out('ARGUMENT').count() - 1}");
+            $this->addMethod("filter{it.rank == it.in('ARGUMENT').out('ARGUMENT').count() - 1}");
         } else {
-            $this->addMethod("filter{it.order == ***}", abs(intval($value)));
+            $this->addMethod("filter{it.rank == ***}", abs(intval($value)));
         }
 
         return $this;
     }
 
-    function noChildWithOrder($edge_name, $order = "0") {
-        if ($order === 'first') {
-            $this->addMethod("filter{ it.out(***).has('order','0').any() == false }", $edge_name);
-        } elseif ($order === 'last') {
-            $this->addMethod("filter{ it.out(***).has('order',it.in(***).count() - 1).any() == false }", $edge_name, $edge_name);
+    function noChildWithRank($edge_name, $rank = "0") {
+        if ($rank === 'first') {
+            $this->addMethod("filter{ it.out(***).has('rank','0').any() == false }", $edge_name);
+        } elseif ($rank === 'last') {
+            $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 1).any() == false }", $edge_name, $edge_name);
         } else {
-            $this->addMethod("filter{ it.out(***).has('order', ***).any() == false}", $edge_name, abs(intval($order)));
+            $this->addMethod("filter{ it.out(***).has('rank', ***).any() == false}", $edge_name, abs(intval($rank)));
         }
 
         return $this;
@@ -951,47 +953,47 @@ GREMLIN;
         return $this;
     }
 
-    function orderIs($edge_name, $order) {
-        if ($order == 'first') {
-            $order = 0;
-        } else if ($order == 'last') {
-            $this->addMethod("sideEffect{ order = it.out(***).count() - 1;}", $edge_name);
-            $this->addMethod("out(***).filter{it.getProperty('order')  == order}", $edge_name);
+    function rankIs($edge_name, $rank) {
+        if ($rank == 'first') {
+            $rank = 0;
+        } else if ($rank == 'last') {
+            $this->addMethod("sideEffect{ rank = it.out(***).count() - 1;}", $edge_name);
+            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edge_name);
             return $this;
         } else {
-            $order = abs(intval($order));
+            $rank = abs(intval($rank));
         }
         
         if (is_array($edge_name)) {
             // @todo
-            die(" I don't understand arrays in orderIs()");
+            die(" I don't understand arrays in rankIs()");
         } else {
-            $this->addMethod("out(***).filter{it.getProperty('order')  == ***}", $edge_name, $order);
+            $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edge_name, $rank);
         }
         
         return $this;
     }
 
     public function nextSibling() {
-        $this->addMethod("sideEffect{sibling = it.order}.in('ELEMENT').out('ELEMENT').filter{sibling + 1 == it.order}");
+        $this->addMethod("sideEffect{sibling = it.rank}.in('ELEMENT').out('ELEMENT').filter{sibling + 1 == it.rank}");
 
         return $this;
     }
 
     public function nextSiblings() {
-        $this->addMethod("sideEffect{sibling = it.order}.in('ELEMENT').out('ELEMENT').filter{sibling + 1 <= it.order}");
+        $this->addMethod("sideEffect{sibling = it.rank}.in('ELEMENT').out('ELEMENT').filter{sibling + 1 <= it.rank}");
 
         return $this;
     }
 
     public function previousSibling() {
-        $this->addMethod("filter{it.order > 0}.sideEffect{sibling = it.order}.in('ELEMENT').out('ELEMENT').filter{sibling - 1 == it.order}");
+        $this->addMethod("filter{it.rank > 0}.sideEffect{sibling = it.rank}.in('ELEMENT').out('ELEMENT').filter{sibling - 1 == it.rank}");
 
         return $this;
     }
 
     public function previousSiblings() {
-        $this->addMethod("filter{it.order > 0}.sideEffect{sibling = it.order}.in('ELEMENT').out('ELEMENT').filter{sibling - 1 >= it.order}");
+        $this->addMethod("filter{it.rank > 0}.sideEffect{sibling = it.rank}.in('ELEMENT').out('ELEMENT').filter{sibling - 1 >= it.rank}");
 
         return $this;
     }

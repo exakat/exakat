@@ -12,7 +12,7 @@ class KnownVendor extends Analyzer\Analyzer {
         $this->atomIs("Nsname")
              ->hasIn('USE') // no fullnspath for namespace 
              ->outIs('SUBNAME')
-             ->is('order', 0)
+             ->is('rank', 0)
              ->code($knownVendors)
              ->back('first');
         $this->prepareQuery();
@@ -20,7 +20,7 @@ class KnownVendor extends Analyzer\Analyzer {
         $this->atomIs("Functioncall")
              ->hasIn('NEW') // special case for instantiation
              ->outIs('SUBNAME')
-             ->is('order', 0)
+             ->is('rank', 0)
              ->code($knownVendors)
              ->back('first');
         $this->prepareQuery();
@@ -28,7 +28,7 @@ class KnownVendor extends Analyzer\Analyzer {
         $this->atomIs("As")
              ->hasIn('USE') 
              ->outIs('SUBNAME')
-             ->is('order', 0)
+             ->is('rank', 0)
              ->code($knownVendors)
              ->back('first');
         $this->prepareQuery();

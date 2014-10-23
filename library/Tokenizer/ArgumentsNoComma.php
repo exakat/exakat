@@ -21,7 +21,7 @@ class ArgumentsNoComma extends Arguments {
         );
 
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'order'       => array(1 => '0')
+                               'rank'        => array(1 => '0')
                                );
         $this->checkAuto();
 
@@ -41,7 +41,7 @@ class ArgumentsNoComma extends Arguments {
         );
 
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'order'       => array(1 => '0'));
+                               'rank'        => array(1 => '0'));
         $this->checkAuto();
 
         // @note require (1).$d : no comma 
@@ -56,7 +56,7 @@ class ArgumentsNoComma extends Arguments {
         );
 
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'order'       => array(1 => '0'));
+                               'rank'        => array(1 => '0'));
         $this->checkAuto();
 
         // @note a->{f}(1) : no comma 
@@ -74,7 +74,7 @@ class ArgumentsNoComma extends Arguments {
         );
 
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'order'       => array(1 => '0'));
+                               'rank'        => array(1 => '0'));
         $this->checkAuto();
 
         return false;

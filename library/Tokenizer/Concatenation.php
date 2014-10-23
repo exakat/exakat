@@ -27,7 +27,7 @@ class Concatenation extends TokenAuto {
         $this->actions = array('makeEdge'   => array( 1 => 'CONCAT',
                                                      -1 => 'CONCAT'
                                                       ),
-                               'order'      => array( 1 => 1,
+                               'rank'       => array( 1 => 1,
                                                      -1 => 0 ),
                                'mergeNext'  => array('Concatenation' => 'CONCAT'), 
                                'atom'       => 'Concatenation',
@@ -43,7 +43,7 @@ class Concatenation extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 s = [];
-fullcode.out("CONCAT").sort{it.order}._().each{ s.add(it.fullcode); };
+fullcode.out("CONCAT").sort{it.rank}._().each{ s.add(it.fullcode); };
 fullcode.setProperty('fullcode', "" + s.join(" . ") + "");
 fullcode.setProperty('count', s.size());
 

@@ -28,11 +28,10 @@ class UsedFunctions extends Analyzer\Analyzer {
                  ->fullnspath($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
-                 ->is('order', $position)
+                 ->is('rank', $position)
                  ->atomIs('String')
                  ->raw('sideEffect{ it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;}; }')
                  ->ignore();
-//            $this->printQuery();
             $this->prepareQuery();
         }
 
@@ -42,7 +41,7 @@ class UsedFunctions extends Analyzer\Analyzer {
              ->fullnspath($ini['functions_last'])
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->hasOrder('last')
+             ->hasRank('last')
              ->atomIs('String')
              ->raw('sideEffect{ it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;}; }')
              ->ignore();

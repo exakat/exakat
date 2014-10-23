@@ -17,7 +17,7 @@ class _Try extends TokenAuto {
         
         $this->actions = array('transform'    => array( 1 => 'CODE',
                                                         2 => 'CATCH'),
-                               'order'        => array( 2 => 0),
+                               'rank'         => array( 2 => 0),
                                'atom'         => 'Try',
                                'keepIndexed'  => true);
         $this->checkAuto();
@@ -29,7 +29,7 @@ class _Try extends TokenAuto {
                                   );
         $this->actions = array('to_catch'    => array( 1 => 'CATCH' ),
                                'keepIndexed' => true,
-                               'order'       => array(1 => 0));
+                               'rank'        => array(1 => 0));
         $this->checkAuto();
 
         // Try () NO catch 

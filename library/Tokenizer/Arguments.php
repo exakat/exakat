@@ -26,7 +26,7 @@ class Arguments extends TokenAuto {
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
                                                       -1 => 'ARGUMENT'
                                                       ),
-                               'order'       => array( 1 => '1',
+                               'rank'       => array( 1 => '1',
                                                       -1 => '0'),
                                'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
                                'atom'        => 'Arguments',
@@ -45,7 +45,7 @@ class Arguments extends TokenAuto {
         $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
                                                       -1 => 'ARGUMENT'
                                                       ),
-                               'order'       => array( 1 => '1',
+                               'rank'        => array( 1 => '1',
                                                       -1 => '0'),
                                'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
                                'atom'        => 'Arguments',
@@ -64,7 +64,7 @@ class Arguments extends TokenAuto {
         );
         
         $this->actions = array('makeEdge'    => array(-1 => 'ARGUMENT'),
-                               'order'       => array( 1 => '1',
+                               'rank'        => array( 1 => '1',
                                                       -1 => '0'),
                                'atom'        => 'Arguments',
                                );
@@ -77,7 +77,7 @@ class Arguments extends TokenAuto {
         return <<<GREMLIN
 
 s = [];
-fullcode.out("ARGUMENT").sort{it.order}._().each{ s.add(it.fullcode); };
+fullcode.out("ARGUMENT").sort{it.rank}._().each{ s.add(it.fullcode); };
 
 if (s.size() == 0) {
     s = '';

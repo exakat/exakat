@@ -9,7 +9,7 @@ class McryptcreateivWithoutOption extends Analyzer\Common\FunctionDefaultValue {
     
     public function analyze() {
         $this->code = 'mcrypt_create_iv';
-        $this->order = 1;
+        $this->rank = 1;
 
         parent::analyze();
     }

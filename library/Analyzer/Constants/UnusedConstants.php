@@ -15,7 +15,7 @@ class UnusedConstants extends Analyzer\Analyzer {
              ->tokenIsNot('T_VARIABLE')
              ->fullnspath("\\define")
              ->outIs('ARGUMENTS')
-             ->orderIs('ARGUMENT', 'first')
+             ->rankIs('ARGUMENT', 'first')
              ->atomIs('String')
              ->raw('filter{ name = it.noDelimiter; g.idx("analyzers")[["analyzer":"Analyzer\\\\Constants\\\\ConstantUsage"]].out("ANALYZED").has("code", name).any() == false }');
         $this->prepareQuery();

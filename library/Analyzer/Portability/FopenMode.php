@@ -9,7 +9,7 @@ class FopenMode extends Analyzer\Analyzer {
         $this->atomIs("Functioncall")
              ->code('fopen')
              ->outIs('ARGUMENTS')
-             ->orderIs('ARGUMENT',1)
+             ->rankIs('ARGUMENT',1)
              ->regexNot('code', 'b')
              ->back('first');
         $this->prepareQuery();
@@ -17,7 +17,7 @@ class FopenMode extends Analyzer\Analyzer {
         $this->atomIs("Functioncall")
              ->code('fopen')
              ->outIs('ARGUMENTS')
-             ->orderIs('ARGUMENT', 1)
+             ->rankIs('ARGUMENT', 1)
              ->regex('code', 't')
              ->back('first');
         $this->prepareQuery();

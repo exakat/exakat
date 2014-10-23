@@ -241,7 +241,7 @@ class Token {
     }
 
     public function checkRemaining() { 
-            $class = str_replace("Tokenizer\\", '', get_class($this));
+        $class = str_replace("Tokenizer\\", '', get_class($this));
         if (in_array($class, Token::$types)) {
             $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
 
@@ -326,7 +326,7 @@ g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any() == fa
 };
 ", "
 // Const (out of a class) with define
-g.idx('atoms')[['atom':'Functioncall']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('order', 0).as('name').has('atom', 'String')
+g.idx('atoms')[['atom':'Functioncall']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('rank', 0).as('name').has('atom', 'String')
     .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.sideEffect{ ns = it; }.back('name')
 .each{ 
     if (ns.atom == 'File') {
@@ -634,7 +634,7 @@ g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
         };
     } else {
         s = [];
-        fullcode.out('SUBNAME').sort{it.order}._().each{ 
+        fullcode.out('SUBNAME').sort{it.rank}._().each{ 
             s.add(it.getProperty('code')); 
         };
         if (fullcode.absolutens == 'true') {

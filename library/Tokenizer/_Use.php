@@ -96,7 +96,7 @@ class _Use extends TokenAuto {
         return <<<GREMLIN
 
 s = [];
-fullcode.out("USE").sort{it.order}._().each{ 
+fullcode.out("USE").sort{it.rank}._().each{ 
     a = it.getProperty('fullcode');
     s.add(a); 
 };
@@ -113,7 +113,7 @@ fullcode.out('USE').has('atom', 'Identifier').each{
 // use a\b\c (aka c);
 fullcode.out('USE').has('atom', 'As').each{
     s = [];
-    it.out("SUBNAME").sort{it.order}._().each{ 
+    it.out("SUBNAME").sort{it.rank}._().each{ 
         s.add(it.getProperty('code')); 
     };
     if (it.absolutens == 'true') {
@@ -130,7 +130,7 @@ fullcode.out('USE').has('atom', 'As').each{
 // use a; (aka a)
 fullcode.out('USE').has('atom', 'Nsname').each{
     s = [];
-    it.out("SUBNAME").sort{it.order}._().each{ 
+    it.out("SUBNAME").sort{it.rank}._().each{ 
         s.add(it.getProperty('code')); 
     };
     if (it.absolutens == 'true') {

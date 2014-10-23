@@ -12,7 +12,7 @@ class InvalidName extends Analyzer\Analyzer {
              ->tokenIsNot('T_VARIABLE')
              ->fullnspath("\\define")
              ->outIs('ARGUMENTS')
-             ->orderIs('ARGUMENT', 'first')
+             ->rankIs('ARGUMENT', 'first')
              ->atomIs('String')
              ->regexNot('noDelimiter', '^[a-zA-Z_\\\\u007f-\\\\u00ff][a-zA-Z0-9_\\\\u007f-\\\\u00ff]*\\$');
         $this->prepareQuery();

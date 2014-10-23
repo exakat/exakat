@@ -10,7 +10,7 @@ class MultipleConstantDefinition extends Analyzer\Analyzer {
         $this->atomIs("Functioncall")
              ->code("define")
              ->outIs('ARGUMENTS')
-             ->orderIs('ARGUMENT', 'first')
+             ->rankIs('ARGUMENT', 'first')
              ->atomIs('String')
              ->raw('groupCount(m){it.noDelimiter}.aggregate().filter{m[it.noDelimiter] > 1}');
         $this->prepareQuery();
@@ -19,11 +19,11 @@ class MultipleConstantDefinition extends Analyzer\Analyzer {
         $this->atomIs("Functioncall")
              ->code("define")
              ->outIs('ARGUMENTS')
-             ->orderIs('ARGUMENT', 2)
+             ->rankIs('ARGUMENT', 2)
              ->atomIs('Boolean')
              ->code('true', true)
              ->inIs('ARGUMENT')
-             ->orderIs('ARGUMENT', 'first')
+             ->rankIs('ARGUMENT', 'first')
              ->atomIs('String')
              ->raw('groupCount(m){it.noDelimiter.toLowerCase()}.aggregate().filter{m[it.noDelimiter.toLowerCase()] > 1}');
         $this->prepareQuery();

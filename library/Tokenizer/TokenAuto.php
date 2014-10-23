@@ -182,8 +182,8 @@ fullcode.setProperty('$name', $value)";
             unset($actions['propertyNext']);
         }
         
-        if (isset($actions['order']) && is_array($actions['order'])) {
-            foreach($actions['order'] as $offset => $order) {
+        if (isset($actions['rank']) && is_array($actions['rank'])) {
+            foreach($actions['rank'] as $offset => $rank) {
                 if ($offset > 0) {
                     $d = str_repeat(".out('NEXT')", $offset);
                 } elseif ($offset < 0) {
@@ -191,9 +191,9 @@ fullcode.setProperty('$name', $value)";
                 } else {
                     $d = '';
                 }
-                $qactions[] = " /* order */ it$d.each{ it.setProperty('order', $order);}";
+                $qactions[] = " /* rank */ it$d.each{ it.setProperty('rank', $rank);}";
             }
-            unset($actions['order']);
+            unset($actions['rank']);
         }        
 
         if (isset($actions['makeEdge'])) {
@@ -279,7 +279,7 @@ arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
     }
 
     g.addEdge(root, ppp, 'ELEMENT');
-    ppp.setProperty('order', it.order);
+    ppp.setProperty('rank', it.rank);
 
     g.addEdge(ppp, it, 'DEFINE');
     g.removeEdge(it.inE('ARGUMENT').next());
@@ -303,7 +303,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     }
     g.idx('atoms').put('atom','Ppp', ppp);
 
-    ppp.setProperty('order', it.order);
+    ppp.setProperty('rank', it.rank);
     g.addEdge(root, ppp, 'ELEMENT');
 
     g.addEdge(ppp, it.out('LEFT').next(), 'DEFINE');
@@ -417,7 +417,7 @@ var.setProperty('token', var.token);
 c = -1;
 arg.out('ARGUMENT').each{
     c = c + 1;
-    x = g.addVertex(null, [code:'global', atom:'Global', token:'T_GLOBAL', virtual:true, line:it.line, order:c]);
+    x = g.addVertex(null, [code:'global', atom:'Global', token:'T_GLOBAL', virtual:true, line:it.line, rank:c]);
 
     g.addEdge(var, x, 'ELEMENT');
     g.addEdge(x,  it, 'NAME');
@@ -1009,7 +1009,7 @@ _const.bothE('NEXT').each{ g.removeEdge(it); }
 
 arg.out('ARGUMENT').has('atom', 'Assignation').each{
     x = g.addVertex(null, [code:'const', atom:'Const', token:'T_CONST', virtual:true, line:it.line]);
-    x.setProperty('order', it.order);
+    x.setProperty('rank', it.rank);
 
     fullcode = x;
     
@@ -1073,41 +1073,41 @@ $fullcode
 
 a = it.out('NEXT').out('NEXT').out('NEXT').next();
 b = a.out('NEXT').next();
-order = 0;
+rank = 0;
 
 if (a.out('ELEMENT').count() > 0) {
     a.out('ELEMENT').each{
-        it.setProperty('order', it.order); // this is in case b is also a sequence. May be a is also a sequence....
+        it.setProperty('rank', it.rank); // this is in case b is also a sequence. May be a is also a sequence....
         it.inE('ELEMENT').each{ g.removeEdge(it);}
         g.addEdge(x, it, 'ELEMENT');
-        order++;
+        rank++;
     }
     
     g.idx('delete').put('node', 'delete', a);
 } else {
-    order = 1;
-    a.setProperty('order', 0);
+    rank = 1;
+    a.setProperty('rank', 0);
     g.addEdge(x, a, 'ELEMENT');
 }
 
 if (b.out('ELEMENT').count() > 0) {
     b.out('ELEMENT').each{
-        it.setProperty('order', it.order + order); 
+        it.setProperty('rank', it.rank + rank); 
         it.inE('ELEMENT').each{ g.removeEdge(it);}
         g.addEdge(x, it, 'ELEMENT');
     }
     
     g.idx('delete').put('node', 'delete', b);
 } else {
-    b.setProperty('order', 1);
+    b.setProperty('rank', 1);
     g.addEdge(x, b, 'ELEMENT');
 }
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, b.out('NEXT').next(), 'NEXT');
 
-a.setProperty('order', 0);
-b.setProperty('order', 1);
+a.setProperty('rank', 0);
+b.setProperty('rank', 1);
 
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
 b.outE('NEXT').each{ g.removeEdge(it) ; }
@@ -1122,12 +1122,12 @@ b.outE('NEXT').each{ g.removeEdge(it) ; }
 p = it;
 nsname = it;
 nsname.setProperty('atom', 'Nsname');
-order = 0;
+rank = 0;
 
 subname = p.in('NEXT').next();
 if (subname.getProperty('token') in ['T_STRING', 'T_NAMESPACE']) {
     g.addEdge(nsname, subname, 'SUBNAME');
-    subname.setProperty('order', order++);
+    subname.setProperty('rank', rank++);
     subname.has('token', 'T_NAMESPACE').each{ it.setProperty('fullcode', it.code); }
     
     p2 = subname.in('NEXT').next();
@@ -1136,19 +1136,20 @@ if (subname.getProperty('token') in ['T_STRING', 'T_NAMESPACE']) {
     p.setProperty('absolutens', 'false');
     
 } else {
-    order = 0;
+    rank = 0;
     p.setProperty('absolutens', 'true');
 }
 
 while(p.getProperty('token') == 'T_NS_SEPARATOR') {
     subname = p.out('NEXT').next();
     g.addEdge(nsname, subname, 'SUBNAME');
-    subname.setProperty('order', order++);
+    subname.setProperty('rank', rank++);
 
     p2 = subname.out('NEXT').next();
     if (p != it) {
         p.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
-        g.removeVertex(p);
+        g.idx('delete').put('node', 'delete', p);
+//        g.removeVertex(p);
     }
     
     g.addEdge(nsname, p2, 'NEXT');
@@ -1175,41 +1176,41 @@ $fullcode
 
 a = it.out('NEXT').out('NEXT').next();
 b = a.out('NEXT').next();
-order = 0;
+rank = 0;
 
 if (a.out('ELEMENT').count() > 0) {
     a.out('ELEMENT').each{
-        it.setProperty('order', it.order); // this is in case b is also a sequence. May be a is also a sequence....
+        it.setProperty('rank', it.rank); // this is in case b is also a sequence. May be a is also a sequence....
         it.inE('ELEMENT').each{ g.removeEdge(it);}
         g.addEdge(x, it, 'ELEMENT');
-        order++;
+        rank++;
     }
     
     g.idx('delete').put('node', 'delete', a);
 } else {
-    order = 1;
-    a.setProperty('order', 0);
+    rank = 1;
+    a.setProperty('rank', 0);
     g.addEdge(x, a, 'ELEMENT');
 }
 
 if (b.out('ELEMENT').count() > 0) {
     b.out('ELEMENT').each{
-        it.setProperty('order', it.order + order); 
+        it.setProperty('rank', it.rank + rank); 
         it.inE('ELEMENT').each{ g.removeEdge(it);}
         g.addEdge(x, it, 'ELEMENT');
     }
     
     g.idx('delete').put('node', 'delete', b);
 } else {
-    b.setProperty('order', 1);
+    b.setProperty('rank', 1);
     g.addEdge(x, b, 'ELEMENT');
 }
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, b.out('NEXT').next(), 'NEXT');
 
-a.setProperty('order', 0);
-b.setProperty('order', 1);
+a.setProperty('rank', 0);
+b.setProperty('rank', 1);
 
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
 b.outE('NEXT').each{ g.removeEdge(it) ; }
@@ -1342,7 +1343,7 @@ if (next.atom == 'Sequence') {
     g.removeVertex(end);
 } else {
     g.addEdge(it, next, 'ELEMENT');
-    next.setProperty('order', 0);
+    next.setProperty('rank', 0);
     g.addEdge(it, next.out('NEXT').out('NEXT').next(), 'NEXT');
 
     next.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
@@ -1373,7 +1374,7 @@ a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').o
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 0);
+a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
@@ -1392,7 +1393,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 /* add to Sequence */
 next = it.out('NEXT').next();
 
-next.setProperty('order', it.out('ELEMENT').count());
+next.setProperty('rank', it.out('ELEMENT').count());
 g.addEdge(it, next, 'ELEMENT');
 
 nextnext = next.out('NEXT').next();
@@ -1430,10 +1431,10 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
     previous = it.in('NEXT').next();
     
     sequence.out('ELEMENT').each{ 
-        it.setProperty('order', it.order + 1);
+        it.setProperty('rank', it.rank + 1);
     }
     g.addEdge(sequence, previous, 'ELEMENT');
-    previous.setProperty('order', 0);
+    previous.setProperty('rank', 0);
     
     previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
     previous.bothE('NEXT').each{ g.removeEdge(it); }
@@ -1449,10 +1450,10 @@ while ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any(
     previous = it.in('NEXT').next();
     
     sequence.out('ELEMENT').each{ 
-        it.setProperty('order', it.order + 1);
+        it.setProperty('rank', it.rank + 1);
     }
     g.addEdge(sequence, previous, 'ELEMENT');
-    previous.setProperty('order', 0);
+    previous.setProperty('rank', 0);
     
     previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
     previous.bothE('NEXT').each{ g.removeEdge(it); }
@@ -1471,7 +1472,7 @@ while (it.out('NEXT').has('atom', 'Sequence').any()) {
         g.addEdge(sequence, it, 'ELEMENT');
         it.setProperty('checkForNext', 'Sequence');
 
-        it.setProperty('order', c + it.order);
+        it.setProperty('rank', c + it.rank);
     }
     
     g.addEdge(sequence, suivant.out('NEXT').next(), 'NEXT');
@@ -1500,7 +1501,7 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
     sequence = it;
     next = it.out('NEXT').next();
     
-    next.setProperty('order', sequence.out('ELEMENT').count());
+    next.setProperty('rank', sequence.out('ELEMENT').count());
     g.addEdge(sequence, next, 'ELEMENT');
     
     g.addEdge(sequence, next.out('NEXT').next(), 'NEXT');
@@ -1650,7 +1651,7 @@ g.addEdge(it, nextnext, 'NEXT');
 thecatch = it.out('NEXT').next();
 next = thecatch.out('NEXT').next();
 
-thecatch.setProperty('order', it.out('CATCH').count());
+thecatch.setProperty('rank', it.out('CATCH').count());
 g.addEdge(it, thecatch, 'CATCH');
 g.addEdge(it, next, 'NEXT');
 thecatch.bothE('NEXT').each{ g.removeEdge(it); }
@@ -1799,20 +1800,20 @@ g.addEdge(x, b, 'NEXT');
                 $qactions[] = " 
 /* mergeNext */ 
 
-c = it.out('$link').has('order', 0).has('atom', '$atom').count();
-d = it.out('$link').has('order', 1).has('atom', '$atom').count();
+c = it.out('$link').has('rank', 0).has('atom', '$atom').count();
+d = it.out('$link').has('rank', 1).has('atom', '$atom').count();
 
-if (c == 1) { // there is a list of argument in order 0
+if (c == 1) { // there is a list of argument in rank 0
     if (d == 1) { // 0 and 1 are multiple list
-        sub = it.out('$link').has('order', 0).next();
-        n = it.out('$link').has('order', 0).out('$link').count() ;
+        sub = it.out('$link').has('rank', 0).next();
+        n = it.out('$link').has('rank', 0).out('$link').count() ;
         
-        it.out('$link').has('order', 1).out('$link').each{
+        it.out('$link').has('rank', 1).out('$link').each{
             g.addEdge(sub, it, '$link');
-            it.setProperty('order', it.getProperty('order') + n);
+            it.setProperty('rank', it.getProperty('rank') + n);
         }
 
-        it.out('$link').has('order', 1).outE('$link').each{
+        it.out('$link').has('rank', 1).outE('$link').each{
             g.removeEdge(it);
         }
 
@@ -1820,18 +1821,18 @@ if (c == 1) { // there is a list of argument in order 0
         g.addEdge(sub, it.out('NEXT').next(), 'NEXT');
 
         g.idx('delete').put('node', 'delete', it);
-        g.idx('delete').put('node', 'delete', it.out('$link').has('order', 1).next());
+        g.idx('delete').put('node', 'delete', it.out('$link').has('rank', 1).next());
         it.bothE('NEXT').each{ g.removeEdge(it); }
         it.outE('$link').each{ g.removeEdge(it); }
 
         clean = sub;
     } else { // 0 is multiple, 1 is single
-        sub = it.out('$link').has('order', 0).next();
+        sub = it.out('$link').has('rank', 0).next();
         n = sub.out('$link').count();
 
-        g.addEdge(sub, it.out('$link').has('order', 1).next(), '$link');
-        it.out('$link').has('order', 1).next().setProperty('orderedby', 'zero_is_multiple');
-        it.out('$link').has('order', 1).next().setProperty('order', n);
+        g.addEdge(sub, it.out('$link').has('rank', 1).next(), '$link');
+        it.out('$link').has('rank', 1).next().setProperty('rankedby', 'zero_is_multiple');
+        it.out('$link').has('rank', 1).next().setProperty('rank', n);
         
         g.addEdge(it.in('NEXT').next(), sub, 'NEXT');
         g.addEdge(sub, it.out('NEXT').next(), 'NEXT');
@@ -1842,13 +1843,13 @@ if (c == 1) { // there is a list of argument in order 0
 
         clean = sub;
     }
-} else { // order 0 is single
+} else { // rank 0 is single
     if (d == 1) {
-        it.out('$link').has('order', 0).next().setProperty('orderedby', 'one_is_multiple');
-        sub = it.out('$link').has('order', 1).next();
-        sub.out('$link').each{ it.setProperty( 'order', it.order + 1); };
+        it.out('$link').has('rank', 0).next().setProperty('rankedby', 'one_is_multiple');
+        sub = it.out('$link').has('rank', 1).next();
+        sub.out('$link').each{ it.setProperty( 'rank', it.rank + 1); };
 
-        g.addEdge(sub, it.out('$link').has('order', 0).next(), '$link');
+        g.addEdge(sub, it.out('$link').has('rank', 0).next(), '$link');
         
         g.addEdge(it.in('NEXT').next(), sub, 'NEXT');
         g.addEdge(sub, it.out('NEXT').next(), 'NEXT');
@@ -1859,8 +1860,8 @@ if (c == 1) { // there is a list of argument in order 0
         clean = sub;
 
     } else {
-        // order 1 and 0 are both singles : Nothing to do.
-        it.out('$link').each{ it.setProperty('orderedby', 'both_are_single')};
+        // rank 1 and 0 are both singles : Nothing to do.
+        it.out('$link').each{ it.setProperty('rankedby', 'both_are_single')};
         clean = it;
     }
 }
@@ -1888,7 +1889,7 @@ i = it.out('NEXT').next();
 
 g.addEdge(it, x, 'NEXT');
 g.addEdge(x, i, 'ELEMENT');
-i.setProperty('order', 0);
+i.setProperty('rank', 0);
 g.addEdge(x, i.out('NEXT').next(), 'NEXT');
 
 i.bothE('NEXT').each{ g.removeEdge(it) ; }
@@ -1934,7 +1935,7 @@ a = it.out('NEXT').next();
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 0);
+a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
@@ -1974,7 +1975,7 @@ a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').n
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 0);
+a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
@@ -2006,7 +2007,7 @@ a = it$offset.next();
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 0);
+a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
@@ -2037,7 +2038,7 @@ a = it.out('NEXT').out('NEXT').next();
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 0);
+a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 ";
@@ -2058,7 +2059,7 @@ x = g.addVertex(null, [code:'Block with Next', fullcode:'Block with Next', atom:
 
 g.addEdge(it.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, it, 'ELEMENT');
-it.setProperty('order', 0);
+it.setProperty('rank', 0);
 g.addEdge(x, it.out('NEXT').next(), 'NEXT');
 
 it.bothE('NEXT').each{ g.removeEdge(it) ; }
@@ -2086,7 +2087,7 @@ a.out('NEXT').has('token', 'T_SEMICOLON').each{
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 0);
+a.setProperty('rank', 0);
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
@@ -2122,7 +2123,7 @@ a.out('NEXT').has('token', 'T_SEMICOLON').each{
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 0);
+a.setProperty('rank', 0);
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
@@ -2239,7 +2240,7 @@ p = a;
 
         g.addEdge(cds, it, 'ELEMENT');
         c = cds.out('ELEMENT').count();
-        it.setProperty('order', c - 1);
+        it.setProperty('rank', c - 1);
         
         cds2 = it.out('NEXT').next();
         cds2.out('ELEMENT').each{
@@ -2248,7 +2249,7 @@ p = a;
             }
 
             g.addEdge(cds, it, 'ELEMENT');
-            it.setProperty('order', c + it.order);
+            it.setProperty('rank', c + it.rank);
         }
         
         g.addEdge(cds, cds2.out('NEXT').next(), 'NEXT');
@@ -2259,8 +2260,8 @@ p = a;
     } else if (it.out('NEXT').has('atom', 'SequenceCaseDefault').any()) {
             cds = it.out('NEXT').next();
 
-            it.setProperty('order', 0);
-            cds.out('ELEMENT').each{ it.setProperty('order', it.order + 1); }
+            it.setProperty('rank', 0);
+            cds.out('ELEMENT').each{ it.setProperty('rank', it.rank + 1); }
             
             g.addEdge(it.in('NEXT').next(), cds, 'NEXT');
             g.addEdge(cds, it, 'ELEMENT');
@@ -2268,7 +2269,7 @@ p = a;
     } else if (it.in('NEXT').has('atom', 'SequenceCaseDefault').any()) {
             cds = it.in('NEXT').next();
 
-            it.setProperty('order', cds.out('ELEMENT').count());
+            it.setProperty('rank', cds.out('ELEMENT').count());
             
             g.addEdge(cds, it.out('NEXT').next(), 'NEXT');
             g.addEdge(cds, it, 'ELEMENT');
@@ -2277,7 +2278,7 @@ p = a;
         // no caseDefaultSequence anywhere
         cds = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', virtual:true, line:it.line, fullcode:'{ /**/ }']);
 
-        it.setProperty('order', 0);
+        it.setProperty('rank', 0);
 
         g.addEdge(it.in('NEXT').next(), cds, 'NEXT');
         g.addEdge(cds, it.out('NEXT').next(), 'NEXT');
@@ -2339,9 +2340,9 @@ element1 = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('N
 element2 = element1.out('NEXT').next();
 
 g.addEdge(block, element1, 'ELEMENT');
-element1.setProperty('order', 0);
+element1.setProperty('rank', 0);
 g.addEdge(block, element2, 'ELEMENT');
-element2.setProperty('order', 1);
+element2.setProperty('rank', 1);
 
 g.addEdge(element1.in('NEXT').next(), block, 'NEXT');
 g.addEdge(block, element2.out('NEXT').next(), 'NEXT');
@@ -2362,7 +2363,7 @@ a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 g.addEdge(x, a, 'ELEMENT');
-a.setProperty('order', 0);
+a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ; 
@@ -2466,13 +2467,13 @@ if (    $it.token != 'T_ELSEIF'
         count = $it.in('NEXT').out('ELEMENT').count();
         sequence = $it.in('NEXT').next();
     
-        $it.setProperty('order', count);
+        $it.setProperty('rank', count);
         count++;
         $it.setProperty('makeSequence', 'both');
         g.addEdge(sequence, $it, 'ELEMENT');
 
         $it.out('NEXT').out('ELEMENT').each{ 
-            it.setProperty('order', it.order + count);
+            it.setProperty('rank', it.rank + count);
         
             it.inE('ELEMENT').each{ g.removeEdge(it); }
             g.addEdge(sequence, it, 'ELEMENT');
@@ -2487,7 +2488,7 @@ if (    $it.token != 'T_ELSEIF'
     } else if ($it.in('NEXT').has('atom', 'Sequence').any() &&
               ($it.in('NEXT').next().block != 'true')) {
         sequence = $it.in('NEXT').next();
-        $it.setProperty('order', $it.in('NEXT').out('ELEMENT').count());
+        $it.setProperty('rank', $it.in('NEXT').out('ELEMENT').count());
         $it.setProperty('makeSequence', 'in');
 
         g.addEdge(sequence, $it.out('NEXT').next(), 'NEXT');
@@ -2496,9 +2497,9 @@ if (    $it.token != 'T_ELSEIF'
         $it.bothE('NEXT').each{ g.removeEdge(it); }
     } else if ($it.out('NEXT').has('atom', 'Sequence').any()) {
         sequence = $it.out('NEXT').next();
-        $it.setProperty('order', 0);
+        $it.setProperty('rank', 0);
         $it.setProperty('makeSequence', 'next');
-        sequence.out('ELEMENT').each{ it.setProperty('order', it.order + 1);}
+        sequence.out('ELEMENT').each{ it.setProperty('rank', it.rank + 1);}
 
         g.addEdge($it.out('NEXT').next(), $it, 'ELEMENT');
 
@@ -2511,7 +2512,7 @@ if (    $it.token != 'T_ELSEIF'
         g.idx('atoms').put('atom', 'Sequence', sequence);   
 
         g.addEdge(sequence, $it, 'ELEMENT');
-        $it.setProperty('order', 0);
+        $it.setProperty('rank', 0);
         $it.setProperty('makeSequence', 'else');
         
         if ($it.root == 'true') { 

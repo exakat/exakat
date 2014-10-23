@@ -10,7 +10,7 @@ class BadConstantnames extends Analyzer\Analyzer {
              ->code('define', false)
              ->inIsnot('METHOD')
              ->outIs('ARGUMENTS')
-             ->orderIs('ARGUMENT', "'3'")
+             ->rankIs('ARGUMENT', "'3'")
              ->regex('code', '^[\'\\"]__(.*)__[\'\\"]\\$');
     }
 }

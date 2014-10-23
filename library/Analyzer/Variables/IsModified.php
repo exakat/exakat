@@ -31,7 +31,7 @@ class IsModified extends Analyzer\Analyzer {
 
         // arguments : reference variable in a custom function
         $this->atomIs("Variable")
-             ->savePropertyAs('order', 'order')
+             ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->hasNoIn('METHOD') // possibly new too
@@ -40,7 +40,7 @@ class IsModified extends Analyzer\Analyzer {
              ->inIs('NAME')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('order', 'order', true)
+             ->samePropertyAs('rank', 'rank', true)
              ->is('reference', 'true')
              ->back('first');
         $this->prepareQuery();  
@@ -92,7 +92,7 @@ class IsModified extends Analyzer\Analyzer {
         
         foreach($references as $position => $functions) {
             $this->atomIs("Variable")
-                 ->is('order', $position)
+                 ->is('rank', $position)
                  ->inIs('ARGUMENT')
                  ->inIs('ARGUMENTS')
                  ->hasNoIn('METHOD') // possibly new too
@@ -106,7 +106,7 @@ class IsModified extends Analyzer\Analyzer {
 
         // Class constructors (__construct)
         $this->atomIs("Variable")
-             ->savePropertyAs('order', 'order')
+             ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->hasNoIn('METHOD') // possibly new too
@@ -119,7 +119,7 @@ class IsModified extends Analyzer\Analyzer {
              ->analyzerIs('Analyzer\\Classes\\Constructor')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('order', 'order', true)
+             ->samePropertyAs('rank', 'rank', true)
              ->is('reference', 'true')
              ->back('first');
         $this->prepareQuery(); 

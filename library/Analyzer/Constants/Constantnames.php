@@ -10,7 +10,7 @@ class Constantnames extends Analyzer\Analyzer {
              ->code('define', false)
              ->inIsnot('METHOD')
              ->outIs('ARGUMENTS')
-             ->orderIs('ARGUMENT', 0);
+             ->rankIs('ARGUMENT', 0);
         $this->prepareQuery();
 
         $this->atomIs("Const")

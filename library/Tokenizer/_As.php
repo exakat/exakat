@@ -21,7 +21,7 @@ class _As extends TokenAuto {
                                'makeSequence' => 'it' );
         $this->checkAuto();
 
-        // use A as B (adds order)
+        // use A as B (adds rank)
         $this->conditions = array( -2 => array('notToken' => 'T_NS_SEPARATOR'),
                                    -1 => array('atom'     => 'Identifier'), 
                                     0 => array('token'    => _As::$operators,
@@ -34,7 +34,7 @@ class _As extends TokenAuto {
                                'atom'         => 'As',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it',
-                               'order'        => array(-1 => '0'));
+                               'rank'         => array(-1 => '0'));
         $this->checkAuto();
         
         return false;
@@ -44,7 +44,7 @@ class _As extends TokenAuto {
         return <<<GREMLIN
 
 s = [];
-fullcode.out("SUBNAME").sort{it.order}._().each{ 
+fullcode.out("SUBNAME").sort{it.rank}._().each{ 
     s.add(it.getProperty('code')); 
 };
 if (fullcode.absolutens == 'true') {

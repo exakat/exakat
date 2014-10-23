@@ -9,7 +9,7 @@ class CryptWithoutSalt extends Analyzer\Common\FunctionDefaultValue {
     
     public function analyze() {
         $this->code = 'crypt';
-        $this->order = 1;
+        $this->rank = 1;
         
         parent::analyze();
     }

@@ -53,7 +53,7 @@ class IsRead extends Analyzer\Analyzer {
 
         // arguments : normal variable in a custom function
         $this->atomIs("Variable")
-             ->savePropertyAs('order', 'order')
+             ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->hasNoIn('METHOD') // possibly new too
@@ -61,7 +61,7 @@ class IsRead extends Analyzer\Analyzer {
              ->inIs('NAME')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('order', 'order', true)
+             ->samePropertyAs('rank', 'rank', true)
              ->isNot('reference', 'true')
              ->back('first');
         $this->prepareQuery();  
@@ -82,7 +82,7 @@ class IsRead extends Analyzer\Analyzer {
         
         foreach($references as $position => $functions) {
             $this->atomIs("Variable")
-                 ->is('order', $position)
+                 ->is('rank', $position)
                  ->inIs('ARGUMENT')
                  ->inIs('ARGUMENTS')
                  ->atomIs('Functioncall')
@@ -94,7 +94,7 @@ class IsRead extends Analyzer\Analyzer {
 
         // Class constructors (__construct)
         $this->atomIs("Variable")
-             ->savePropertyAs('order', 'order')
+             ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->atomIs('Functioncall')
@@ -107,14 +107,14 @@ class IsRead extends Analyzer\Analyzer {
              ->back('method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('order', 'order', true)
+             ->samePropertyAs('rank', 'rank', true)
              ->isNot('reference', 'true')
              ->back('first');
         $this->prepareQuery();
 
         // Class constructors with self
         $this->atomIs("Variable")
-             ->savePropertyAs('order', 'order')
+             ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->atomIs('Functioncall')
@@ -129,7 +129,7 @@ class IsRead extends Analyzer\Analyzer {
              ->back('method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('order', 'order', true)
+             ->samePropertyAs('rank', 'rank', true)
              ->isNot('reference', 'true')
              ->back('first');
         $this->prepareQuery();

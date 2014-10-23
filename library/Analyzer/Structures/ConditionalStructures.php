@@ -33,7 +33,7 @@ class ConditionalStructures extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->is('order', 0);
+             ->is('rank', 0);
         $this->prepareQuery();
  
     }

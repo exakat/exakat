@@ -17,11 +17,11 @@ class ErrorReportingWithInteger extends Analyzer\Analyzer {
         $this->atomIs("Functioncall")
              ->code('ini_set', false)
              ->outIs('ARGUMENTS')
-             ->orderIs('ARGUMENT', 0)
+             ->rankIs('ARGUMENT', 0)
              ->atomIs('String')
              ->noDelimiter("error_reporting")
              ->inIs('ARGUMENT')
-             ->orderIs('ARGUMENT', 1)
+             ->rankIs('ARGUMENT', 1)
              ->atomIs('Integer')
              ->back('first');
         $this->prepareQuery();
