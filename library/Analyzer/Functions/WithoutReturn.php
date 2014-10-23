@@ -7,11 +7,12 @@ use Analyzer;
 class WithoutReturn extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Function")
+             ->hasNoOut('ABSTRACT')
              ->outIs('NAME')
-             ->isNot('code', "'__construct'")
+             ->codeIsNot(array("__construct", '__destruct', '__wakeup'))
              ->back('first')
-             ->noAtomInside('Return')
-             ;
+             ->noAtomInside('Return');
+        $this->prepareQuery();
     }
 }
 
