@@ -24,18 +24,13 @@ if ($id = array_search('-p', $argv)) {
 
 $begin = microtime(true);
 $client = new Client();
+if (DISPLAY) print "Starting\n";
 
 logTime('Start');
 
-$indices = array();
-$res = query("g.getIndices()")->toArray();
-foreach($res as $r) {
-    $indices[] = substr($r[0], 7, strpos($r[0], ':') - 7);
-}
-
 $result = query("g.idx('racines')");
-if ($result[0][0] != 'MANUAL[racines:Vertex]') {
-    query("g.createManualIndex('racines', Vertex)");
+if ($result->count() == 0) {
+    query("g.createIndex('racines', Vertex)");
 }
 if (DISPLAY) print "created racines index\n";
 
@@ -43,17 +38,16 @@ logTime('g.idx("racines")');
 
 
 query("g.dropIndex('atoms');");
-query("g.createManualIndex('atoms', Vertex)");
+query("g.createIndex('atoms', Vertex)");
 logTime('g.idx("atoms")');
 
 
-
-if (DISPLAY) print "$id) $class : filling\n";
+if (DISPLAY) print "g.idx('atoms') : filling\n";
 $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
                                  'Rawstring', 'Variable', 'Float', 'Boolean']}.each{ 
                                  g.idx('atoms').put('atom', it.atom, it); }";
 query($query);
-if (DISPLAY) print "$id) $class : filled\n";
+if (DISPLAY) print "g.idx('atoms') : filled\n";
 logTime('g.idx("atom")[["atom":"******"]] : filling');
 
 // creating the neo4j Index
@@ -70,7 +64,7 @@ logTime('g.idx("racines") ROOT special');
 if (DISPLAY) print "Creating index done\n";
 
 // creating the neo4j Index
-query("g.V.has('token', 'INDEX').out('INDEXED').each{ g.idx('racines').put('token', it.token, it); };");
+query("g.V.has('index', 'true').each{ g.idx('racines').put('token', it.token, it); };");
 logTime('g.idx("racines")[[token:***]] indexing');
 
 if (DISPLAY) print "Indexing racines done\n";
@@ -86,7 +80,7 @@ if (DISPLAY) print "String unicode done\n";
 $extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'delete', 'namespaces');
 foreach($extra_indices as $indice) {
     query("g.dropIndex('$indice');");
-    query("g.createManualIndex('$indice', Vertex)");
+    query("g.createIndex('$indice', Vertex)");
 }
 logTime('g.idx("last index")');
 
