@@ -9,14 +9,14 @@ class ForgottenWhiteSpace extends Analyzer\Analyzer {
         $this->atomIs("Sequence")
              ->is('root', 'true')
              ->outIs('ELEMENT')
-             ->hasOrder('first')
+             ->hasRank('first')
              ->regex('code', '^\\\\s+\\$');
         $this->prepareQuery();
 
         $this->atomIs("Sequence")
              ->is('root', 'true')
              ->outIs('ELEMENT')
-             ->hasOrder('last')
+             ->hasRank('last')
              ->regex('code', '^\\\\s+\\$');
         $this->prepareQuery();
     }

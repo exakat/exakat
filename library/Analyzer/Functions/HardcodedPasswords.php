@@ -32,7 +32,7 @@ class HardcodedPasswords extends Analyzer\Analyzer {
                  ->fullnspath($function)
                  ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
-                 ->hasOrder($position)
+                 ->hasRank($position)
                  ->atomIs('String')
                  ->back('first');
             $this->prepareQuery();

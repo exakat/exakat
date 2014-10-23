@@ -24,7 +24,7 @@ class UsesDefaultArguments extends Analyzer\Analyzer {
                  ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
                  ->fullnspath($f)
                  ->outIs('ARGUMENTS')
-                 ->noChildWithOrder('ARGUMENT', $position)
+                 ->noChildWithRank('ARGUMENT', $position)
                  ->back('first');
             $this->prepareQuery();
         }
