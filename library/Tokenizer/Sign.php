@@ -16,7 +16,7 @@ class Sign extends TokenAuto {
                                                                                  'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT', 
                                                                                  'T_CLOSE_BRACKET', 'T_BANG', 'T_CLOSE_CURLY', 
                                                                                  'T_QUOTE_CLOSE', 'T_QUOTE', 'T_SHELL_QUOTE_CLOSE', 'T_SHELL_QUOTE' ),
-                                                                          Magicconstant::$operators),
+                                                                          Magicconstant::$operators, Preplusplus::$operators),
                                                'notAtom' => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication', 'Cast' )), 
                                     0 => array('token' => Sign::$operators,
                                                'atom' => 'none'),

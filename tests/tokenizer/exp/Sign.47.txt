@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      -
+      Label : RIGHT
+        4
+      Label : LEFT
+        ++
+        Label : PREPLUSPLUS
+          $d
+    Label : LEFT
+      $c
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      +
+      Label : RIGHT
+        4
+      Label : LEFT
+        ++
+        Label : POSTPLUSPLUS
+          $b
+    Label : LEFT
+      $a
