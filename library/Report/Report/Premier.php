@@ -89,7 +89,7 @@ TEXT
         $listBySeverity->setName('Top 5 errors');
         $ht = $row2->addLeftContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
-        $listByFile = new \Report\Content\listByFile($this->client);
+        $listByFile = new \Report\Content\ListByFile($this->client);
         $listByFile->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'));
         $listByFile->setName('Top 5 files');
         $ht = $row2->addRightContent('Top5', $listByFile);
@@ -123,7 +123,7 @@ TEXT
         $listBySeverity->setName('Top 5 errors');
         $ht = $row2->addLeftContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
-        $listByFile = new \Report\Content\listByFile($this->client);
+        $listByFile = new \Report\Content\ListByFile($this->client);
         $listByFile->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
         $listByFile->setName('Top 5 files');
         $ht = $row2->addRightContent('Top5', $listByFile);
@@ -157,7 +157,7 @@ TEXT
         $listBySeverity->setName('Top 5 errors');
         $ht = $row2->addLeftContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
-        $listByFile = new \Report\Content\listByFile($this->client);
+        $listByFile = new \Report\Content\ListByFile($this->client);
         $listByFile->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Dead code'));
         $listByFile->setName('Top 5 files');
         $ht = $row2->addRightContent('Top5', $listByFile);
