@@ -7,7 +7,7 @@ class Comparison extends TokenAuto {
     static public $atom = 'Comparison';
 
     public function _check() {
-        $operands = array('Variable', 'Array', 'Property', 'Integer', 'Sign', 'Float', 'Constant', 'Boolean',
+        $operands = array('Variable', 'Array', 'Property', 'Integer', 'Sign', 'Float', 'Constant', 'Boolean', 'Null',
                           'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall', 'Functioncall',
                            'Magicconstant', 'Staticconstant', 'String', 'Addition', 'Multiplication',
                           'Nsname', 'Not', 'Parenthesis', 'Noscream', 'Preplusplus', 'Postplusplus',

@@ -516,6 +516,11 @@ function process_file($filename, $log_file) {
                         ->setProperty('code', $token[1])
                         ->setProperty('fullcode', $token[1])->save();
                 $to_index = ($tokens[$id + 1] == '('); // if the next is (, this may be a function or a method!!
+            } elseif ($Php->getTokenname($token[0]) == 'T_STRING' && strtolower($token[1]) == 'null') {
+                $T[$Tid]->setProperty('atom', 'Null')
+                        ->setProperty('code', $token[1])
+                        ->setProperty('fullcode', $token[1])->save();
+                $to_index = ($tokens[$id + 1] == '('); // if the next is (, this may be a function or a method!!
             } elseif (isset($atoms[$Php->getTokenname($token[0])])) {
                 if ($Php->getTokenname($token[0]) == 'T_STRING') {
                     $T[$Tid]->setProperty('atom', $atoms[$Php->getTokenname($token[0])])

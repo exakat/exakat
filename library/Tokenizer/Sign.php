@@ -4,7 +4,7 @@ namespace Tokenizer;
 
 class Sign extends TokenAuto {
     static public $operators = array('T_PLUS', 'T_MINUS');
-    static public $operands = array('Sign', 'String', 'Variable', 'Array', 'Float', 'Boolean', 'Functioncall',
+    static public $operands = array('Sign', 'String', 'Variable', 'Array', 'Float', 'Boolean', 'Functioncall', 'Null',
                                     'Staticmethodcall', 'Staticproperty', 'Multiplication', 'Property', 'Parenthesis', 
                                     'Methodcall', 'Cast', 'Constant', 'Boolean', 'Identifier', 'Assignation', 'Staticconstant');
     static public $atom = 'Sign';

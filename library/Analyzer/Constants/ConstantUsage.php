@@ -19,7 +19,7 @@ class ConstantUsage extends Analyzer\Analyzer {
              ->hasNoIn(array('NEW', 'SUBNAME', 'USE', 'NAME', 'NAMESPACE', 'CONSTANT', 'PROPERTY', 'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS'));
         $this->prepareQuery();
 
-        $this->atomIs("Boolean");
+        $this->atomIs(array("Boolean", 'Null'));
         $this->prepareQuery();
     }
 }

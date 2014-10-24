@@ -10,7 +10,7 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Const")
              ->outIs('VALUE')
-             ->atomIsNot(array('Integer', 'Float', 'Boolean', 'String'))
+             ->atomIsNot(array('Integer', 'Float', 'Boolean', 'String', 'Null'))
              ->back('first');
         $this->prepareQuery();
 
@@ -19,7 +19,7 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIsNot(array('Integer', 'Float', 'Boolean', 'String'))
+             ->atomIsNot(array('Integer', 'Float', 'Boolean', 'String', 'Null'))
              ->back('first');
         $this->prepareQuery();
     }

@@ -9,6 +9,7 @@ class Token {
     protected static $types = array('Variable', 
                                  'VariableDollar',
                                  'Boolean',  
+                                 '_Null', 
                                  '_Array', 
                                  '_Arraydollarcurly', 
                                  'Constant',

@@ -17,7 +17,7 @@ class Sequence extends TokenAuto {
                           'Break', 'Goto', 'Label', 'Switch', 'Staticmethodcall',
                           'Static', 'Continue', 'Class', 'For', 'Throw', 'Try', 'Abstract', 'Final',
                           'Bitshift', 'Void', 'Dowhile', 'Clone', 'Declare', 'Halt', 'Interface', 
-                          'RawString', 'Namespace', 'Boolean', 'Use', 'ArrayNS', 'Identifier', 'Trait',
+                          'RawString', 'Namespace', 'Boolean', 'Null', 'Use', 'ArrayNS', 'Identifier', 'Trait',
                           'As', 'Power', 'Staticclass', 'Yield'
                            );
         
@@ -112,7 +112,8 @@ class Sequence extends TokenAuto {
 
     // special case for { 1; }
         $this->conditions = array(-2 => array('token' => 'T_OPEN_CURLY'),
-                                  -1 => array('atom'  => array('Boolean', 'Integer', 'String', 'Variable', 'Postplusplus', 'Preplusplus' )),
+                                  -1 => array('atom'  => array('Boolean', 'Null', 'Integer', 'String', 'Variable', 
+                                                               'Postplusplus', 'Preplusplus' )),
                                    0 => array('token' => Sequence::$operators),
                                    1 => array('token' => 'T_CLOSE_CURLY'),
         );
