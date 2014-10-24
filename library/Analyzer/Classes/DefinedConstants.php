@@ -55,7 +55,7 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->outIs('CLASS')
              ->classDefinition()
              ->raw("filter{ it.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }")
-             ->raw("filter{ it.out('EXTENDS').transform{ g.idx('classes').get('path', it.fullnspath).next(); }
+             ->raw("filter{ it.out('EXTENDS').transform{ g.idx('classes')[['path':it.fullnspath]].next(); }
                               .loop(2){true}
                                       {it.object.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any();}.any(); }")
              ->back('first');
@@ -87,7 +87,7 @@ class DefinedConstants extends Analyzer\Analyzer {
              ->interfaceDefinition()
              ->hasOut('EXTENDS')
              ->raw("filter{ it.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any() == false; }")
-             ->raw("filter{ it.out('EXTENDS').transform{ g.idx('interfaces').get('path', it.fullnspath).next(); }
+             ->raw("filter{ it.out('EXTENDS').transform{ g.idx('interfaces')[['path' : it.fullnspath]].next(); }
                               .loop(2){ true }
                                       {it.object.out('BLOCK').out('ELEMENT').has('atom', 'Const').out('NAME').filter{ it.code.toLowerCase() == constante.toLowerCase(); }.any();}.any(); }")
              ->back('first');
