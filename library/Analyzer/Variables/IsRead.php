@@ -95,6 +95,7 @@ class IsRead extends Analyzer\Analyzer {
                  ->inIs('ARGUMENTS')
                  ->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
+                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
                  ->fullnspath($functions)
                  ->back('first');
             $this->prepareQuery();
