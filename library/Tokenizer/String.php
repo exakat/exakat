@@ -24,16 +24,17 @@ class String extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.setProperty('fullcode', '"' + fullcode.out('CONTAIN').next().getProperty('fullcode') + '"');
+
+s = [];
+fullcode.out('CONTAIN').out('CONCAT').sort{it.rank}._().each{ s.add(it.fullcode); }
+fullcode.setProperty('fullcode', '"' + s.join('') + '"');
 
 if (fullcode.code.length() > 1) {
     if (fullcode.code.substring(0, 1) in ["'", '"']) {
+    // @note : only the first delimiter is removed, it is sufficient
         fullcode.setProperty("delimiter", fullcode.code.substring(0, 1));
         fullcode.setProperty("noDelimiter", fullcode.code.substring(1, fullcode.code.length() - 1));
     }
-
-    // @note : only the first delimiter is removed, it is sufficient
-//    fullcode.setProperty('unicode_block', fullcode.code.replaceAll(/^['"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString());
 }
 
 GREMLIN;

@@ -9,13 +9,13 @@ class Variable extends TokenAuto {
     public function _check() {
         // "  {$variable}  " or " ${x} "
         $this->conditions = array(0 => array('token' => Variable::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => String::$allowed_classes,),
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => String::$allowed_classes),
                                   2 => array('token' => 'T_CLOSE_CURLY'),
         );
         
         $this->actions = array( 'to_variable' => 1,
-                                'cleanIndex' => true);
+                                'cleanIndex'  => true);
         $this->checkAuto();
         
         // todo find a way to process those remainings atom that may be found in those {} 

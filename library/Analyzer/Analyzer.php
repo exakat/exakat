@@ -974,26 +974,26 @@ GREMLIN;
         return $this;
     }
 
-    public function nextSibling() {
-        $this->addMethod("sideEffect{sibling = it.rank}.in('ELEMENT').out('ELEMENT').filter{sibling + 1 == it.rank}");
+    public function nextSibling($link = 'ELEMENT') {
+        $this->addMethod("sideEffect{sibling = it.rank}.in('$link').out('$link').filter{sibling + 1 == it.rank}");
 
         return $this;
     }
 
-    public function nextSiblings() {
-        $this->addMethod("sideEffect{sibling = it.rank}.in('ELEMENT').out('ELEMENT').filter{sibling + 1 <= it.rank}");
+    public function nextSiblings($link = 'ELEMENT') {
+        $this->addMethod("sideEffect{sibling = it.rank}.in('$link').out('$link').filter{sibling + 1 <= it.rank}");
 
         return $this;
     }
 
-    public function previousSibling() {
-        $this->addMethod("filter{it.rank > 0}.sideEffect{sibling = it.rank}.in('ELEMENT').out('ELEMENT').filter{sibling - 1 == it.rank}");
+    public function previousSibling($link = 'ELEMENT') {
+        $this->addMethod("filter{it.rank > 0}.sideEffect{sibling = it.rank}.in('$link').out('$link').filter{sibling - 1 == it.rank}");
 
         return $this;
     }
 
-    public function previousSiblings() {
-        $this->addMethod("filter{it.rank > 0}.sideEffect{sibling = it.rank}.in('ELEMENT').out('ELEMENT').filter{sibling - 1 >= it.rank}");
+    public function previousSiblings($link = 'ELEMENT') {
+        $this->addMethod("filter{it.rank > 0}.sideEffect{sibling = it.rank}.in('$link').out('$link').filter{sibling - 1 >= it.rank}");
 
         return $this;
     }

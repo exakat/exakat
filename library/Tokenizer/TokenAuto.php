@@ -2626,12 +2626,15 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 
 x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
 
+rank = 0;
 it.out('NEXT').loop(1){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}{!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.each{
     if (it.token in ['T_CURLY_OPEN', 'T_CLOSE_CURLY']) {
         it.inE('NEXT').each{ g.removeEdge(it);}
         g.idx('delete').put('node', 'delete', it);
     } else {
         g.addEdge(x, it, 'CONCAT');
+        it.setProperty('rank', rank);
+        rank++;
         it.inE('NEXT').each{ g.removeEdge(it);}
         f = it;
     }
