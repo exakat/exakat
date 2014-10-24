@@ -64,7 +64,7 @@ TEXT
 // Dashboard                  //
 ////////////////////////////////
         $this->createH2('Errors');
-        $groupby = new \Report\Content\GroupBy($this->client);
+        $groupby = new \Report\Content\Groupby($this->client);
         $groupby->setGroupby('getSeverity');
         $groupby->setCount('toCount');
         $groupby->setSort(array('Critical', 'Major', 'Minor'));
@@ -98,7 +98,7 @@ TEXT
 // Dashboard Coding Convention //
 /////////////////////////////////
         $this->createH2('Coding Conventions');
-        $groupby = new \Report\Content\GroupBy($this->client);
+        $groupby = new \Report\Content\Groupby($this->client);
         $groupby->setGroupby('getSeverity');
         $groupby->setCount('toCount');
         $groupby->setSort(array('Critical', 'Major', 'Minor'));
@@ -132,7 +132,7 @@ TEXT
 // Dashboard Dead code         //
 /////////////////////////////////
         $this->createH2('Dead code');
-        $groupby = new \Report\Content\GroupBy($this->client);
+        $groupby = new \Report\Content\Groupby($this->client);
         $groupby->setGroupby('getSeverity');
         $groupby->setCount('toCount');
         $groupby->setSort(array('Critical', 'Major', 'Minor'));
