@@ -44,7 +44,7 @@ logTime('g.idx("atoms")');
 
 if (DISPLAY) print "g.idx('atoms') : filling\n";
 $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
-                                 'Rawstring', 'Variable', 'Float', 'Boolean']}.each{ 
+                                 'Rawstring', 'Variable', 'Float', 'Boolean', 'Void']}.each{ 
                                  g.idx('atoms').put('atom', it.atom, it); }";
 query($query);
 if (DISPLAY) print "g.idx('atoms') : filled\n";
