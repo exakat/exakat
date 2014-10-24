@@ -30,7 +30,7 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
              ->classDefinition()
              ->hasOut('EXTENDS')
-             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes").get("path", it.fullnspath).next(); } 
+             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); } 
                               .loop(2)
                               {true}
                               { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any()}.any()
@@ -65,7 +65,7 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any() == false}')
              ->classDefinition()
              ->hasOut('EXTENDS')
-             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes").get("path", it.fullnspath).next(); } 
+             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); } 
                               .loop(2)
                               {true}
                               { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any()}.any()
