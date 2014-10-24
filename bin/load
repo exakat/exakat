@@ -183,6 +183,10 @@ function process_file($filename, $log_file) {
         return true; // we just ignore the file.
     }
 
+    if (count($tokens) == 1) {
+        return true; // we just ignore the file. this is an empty script or a text file
+    }
+
     while ( $Php->getTokenname($tokens[0][0]) == 'T_OPEN_TAG' &&
             $Php->getTokenname($tokens[1][0]) == 'T_CLOSE_TAG') {
         unset($tokens[0]);
