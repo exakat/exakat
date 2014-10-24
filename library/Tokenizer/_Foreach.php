@@ -156,7 +156,7 @@ class _Foreach extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty("fullcode", "foreach(" + it.out("SOURCE").next().getProperty('fullcode') + " as " + it.out("VALUE").next().getProperty('fullcode') + ")" + it.out("BLOCK").next().getProperty('fullcode'));
+fullcode.setProperty("fullcode", "foreach(" + it.out("SOURCE").next().getProperty('fullcode') + " as " + it.out("VALUE").next().getProperty('fullcode') + ") " + it.out("BLOCK").next().getProperty('fullcode'));
 
 GREMLIN;
     }

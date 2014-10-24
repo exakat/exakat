@@ -597,6 +597,7 @@ function process_file($filename, $log_file) {
                                                   ->setProperty('atom', 'Sequence')
                                                   ->setProperty('rank', '0')
                                                   ->setProperty('block', 'true')
+                                                  ->setProperty('bracket', 'true')
                                                   ->setProperty('modifiedBy', 'bin/load12a')
                                                   ->save();
                     $classNode->relateTo($T[$Tid]);
@@ -620,6 +621,7 @@ function process_file($filename, $log_file) {
                                                   ->setProperty('atom', 'Sequence')
                                                   ->setProperty('rank', 0)
                                                   ->setProperty('block', 'true')
+                                                  ->setProperty('bracket', 'true')
                                                   ->setProperty('modifiedBy', 'bin/load12b')
                                                   ->save();
                     $classNode->relateTo($block);
