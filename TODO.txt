@@ -450,5 +450,3 @@ Some methods are meant to return nothing : construct/destruct, some of the magic
 Functions that return nothing needs to have special things in them : global, ini_set, ...
 
 Clean the analyzer sqlite database.
-
-spot "$x[1]()" (the () won't make this a method, but it looks like so. One must add {} "Other variations : [a], ->b 
