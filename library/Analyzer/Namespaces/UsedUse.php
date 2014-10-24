@@ -10,16 +10,34 @@ class UsedUse extends Analyzer\Analyzer {
 // case of use without alias nor namespacing (use A), single or multiple declaration
 //////////////////////////////////////////////////////////////////////////////////////////
     public function analyze() {
-    // case of simple use in a new with alias
+    // case of simple use in a new with alias :  use a\b; new b\c()
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('alias', 'use')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('New')
              ->outIs('NEW')
+             ->outIs('SUBNAME')
+             ->is('rank', 0)
+             ->samePropertyAs('code', 'use')
+             ->back('result');
+        $this->prepareQuery();
+
+    // case of simple use in a new with alias :  use a\b; new b()
+        $this->atomIs("Use")
+             ->outIs('USE')
+             ->_as('result')
+             ->atomIs('Identifier')
+             ->savePropertyAs('alias', 'use')
+             ->inIs('USE')
+             ->inIs('ELEMENT')
+             ->inIs(array('CODE', 'BLOCK'))
+             ->atomInside('New')
+             ->outIs('NEW')
+             ->tokenIs('T_STRING')
              ->samePropertyAs('code', 'use')
              ->back('result');
         $this->prepareQuery();
