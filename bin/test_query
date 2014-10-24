@@ -12,10 +12,29 @@ spl_autoload_register('Autoload::autoload_library');
 
 $client = new Client();
 
-$res = query("m=[:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\Structures\\\\AddZero']].out('ANALYZED').in.loop(1){true}{it.object.atom == 'File'}.groupCount(m){it.code}.iterate(); m;");
+/*
+$res = query("g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
+                                 'Rawstring', 'Variable', 'Float', 'Boolean']}.each{ 
+                                 g.idx('atoms').put('atom', it.atom, it); }");
+$res = query("g.idx('atoms').put('atom', 'Variable', g.v(185));");*/
+
+//g.idx('atoms')[['atom':'Functioncall']].filter{ it.in("ANALYZED").has("code", 'Analyzer\\Arrays\\MultipleIdenticalKeys').any() == false}.has("atom", 'Functioncall').as("first").out('ARGUMENTS').transform{ it.id + ' : ' + it.out('ARGUMENT').count() }
+
+$query = <<<'QUERY'
+
+g.V.transform{ it.code + ' ' + it.atom}
+
+
+
+//.transform{it.code + ' ' + use}
+//.count()
+
+QUERY;
+$res = query($query);
+
+
 
 foreach($res->toArray() as $k => $v) {
-    var_dump($k);
     var_dump($v[0]);
 }
 
