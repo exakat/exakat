@@ -128,6 +128,40 @@ TEXT
         $listByFile->setName('Top 5 files');
         $ht = $row2->addRightContent('Top5', $listByFile);
 
+/////////////////////////////////
+// Dashboard Dead code         //
+/////////////////////////////////
+        $this->createH2('Dead code');
+        $groupby = new \Report\Content\GroupBy($this->client);
+        $groupby->setGroupby('getSeverity');
+        $groupby->setCount('toCount');
+        $groupby->setSort(array('Critical', 'Major', 'Minor'));
+
+        $row = $this->addContent('Row', null);
+        
+        $groupby->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Dead code') );
+        $groupby->setName('Severity repartition');
+        
+        $row->addLeftContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+
+        $infobox = new \Report\Content\Infobox();
+        $infobox->setNeo4j($this->client);
+        $infobox->setMySQL($this->db);
+        $infobox->setSeverities($groupby->toArray());
+        $infobox->collect();
+        $ht = $row->addRightContent('Infobox', $infobox); 
+
+        $row2 = $this->addContent('Row', null);
+        $listBySeverity = new \Report\Content\ListBySeverity($this->client);
+        $listBySeverity->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Dead code'));
+        $listBySeverity->setName('Top 5 errors');
+        $ht = $row2->addLeftContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+
+        $listByFile = new \Report\Content\listByFile($this->client);
+        $listByFile->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Dead code'));
+        $listByFile->setName('Top 5 files');
+        $ht = $row2->addRightContent('Top5', $listByFile);
+
 ////////////////////////////////
 // Compilations               //
 ////////////////////////////////
