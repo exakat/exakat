@@ -27,6 +27,13 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->is('lambda', "true");
         $this->prepareQuery();
+
+        // return $a++;
+        $this->atomIs("Return")
+             ->outIs('RETURN')
+             ->atomIs('PostPlusPlus')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
