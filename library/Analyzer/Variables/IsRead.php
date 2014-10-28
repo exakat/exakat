@@ -16,6 +16,12 @@ class IsRead extends Analyzer\Analyzer {
             // note : NAME is for Switch!!
         $this->prepareQuery();
 
+        // $this is always read
+        $this->atomIs("Variable")
+             ->code('$this');
+        $this->prepareQuery();
+             
+
         // right or left, same 
         $this->atomIs("Variable")
              ->inIs(array('RIGHT', 'LEFT'))
