@@ -101,6 +101,11 @@ class IsRead extends Analyzer\Analyzer {
             $this->prepareQuery();
         }
 
+        $this->atomIs("Variable")
+             ->hasIn(array('ARGUMENT'))
+             ->analyzerIsNot('Analyzer\\\\Variables\\\\IsRead');
+            $this->prepareQuery();
+
         // Class constructors (__construct)
         $this->atomIs("Variable")
              ->savePropertyAs('rank', 'rank')
