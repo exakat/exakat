@@ -7,7 +7,32 @@ $db = new Db('exakat');
 
 $res = $db->query('SELECT * FROM projects GROUP BY project ORDER BY tokens');
 while($row = $res->fetch_Assoc()) {
-    print substr($row['project'].str_repeat(' ', 50), 0, 50)."\t".substr('     '.number_format(($row["tokens"] / 1000), 1, '.', ' ')." kT ", -12, -1)."\n";
+    if (!file_exists('./projects/'.$row['project'])) { continue; }
+    $line  = substr($row['project'].str_repeat(' ', 50), 0, 50)."\t";
+    $line .= substr('     '.number_format(($row["tokens"] / 1000), 1, '.', ' ')." kT ", -12, -1);
+    
+    $line .= "  ";
+    if (file_exists('projects/'.$row['project'].'/report')) {
+        $date = filemtime('projects/'.$row['project'].'/report');
+        $diffi = floor((time() - $date) / 3600 / 24);
+        $line .= date("m-d-Y ", $date);
+        $diff = '';
+        if ($diffi == 0) {
+            $diff .= "today )";
+        } elseif ($diffi == 1) {
+            $diff .= "1 day )";
+        } else {
+            $diff .= "$diffi days)";
+        }
+        $diff = '('.str_repeat(' ', 9 - strlen($diff)).$diff;
+        $line .= $diff;
+    } else {
+        $line .= "None";
+    }
+    
+    $line .= "\n";
+    
+    print $line;
 }
 
 ?>
