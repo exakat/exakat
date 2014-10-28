@@ -1439,7 +1439,7 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
     previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
     previous.bothE('NEXT').each{ g.removeEdge(it); }
 
-    previous.setProperty('checkForNext', 'Previous');
+//    previous.setProperty('checkForNext', 'Previous');
 }
 
 // Special case for Block (Sequence + block)
@@ -1457,7 +1457,7 @@ while ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any(
     
     previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
     previous.bothE('NEXT').each{ g.removeEdge(it); }
-    previous.setProperty('checkForNext', 'Previous Block ' + it.in('NEXT').in('NEXT').next().token + ' / ' + it.in('NEXT').in('NEXT').filter{!(it.token in ['T_OPEN_PARENTHESIS', 'T_VOID', 'T_USE', 'T_IF'])}.count() );
+//    previous.setProperty('checkForNext', 'Previous Block ' + it.in('NEXT').in('NEXT').next().token + ' / ' + it.in('NEXT').in('NEXT').filter{!(it.token in ['T_OPEN_PARENTHESIS', 'T_VOID', 'T_USE', 'T_IF'])}.count() );
 }
 
 // processing a sequence (Only the next sequence)
@@ -1470,7 +1470,7 @@ while (it.out('NEXT').has('atom', 'Sequence').any()) {
         g.removeEdge(it.inE('ELEMENT').next());
         
         g.addEdge(sequence, it, 'ELEMENT');
-        it.setProperty('checkForNext', 'Sequence');
+//        it.setProperty('checkForNext', 'Sequence');
 
         it.setProperty('rank', c + it.rank);
     }
@@ -1479,7 +1479,7 @@ while (it.out('NEXT').has('atom', 'Sequence').any()) {
 
     suivant.bothE('NEXT').each{ g.removeEdge(it); }
     g.idx('delete').put('node', 'delete', suivant);
-    suivant.setProperty('checkForNext', 'Next sequence');
+//    suivant.setProperty('checkForNext', 'Next sequence');
 }
 
 // lone instruction AFTER
@@ -1507,7 +1507,7 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
     g.addEdge(sequence, next.out('NEXT').next(), 'NEXT');
     next.bothE('NEXT').each{ g.removeEdge(it); }
 
-    next.setProperty('checkForNext', 'Next');
+//    next.setProperty('checkForNext', 'Next');
     
     if (next.both('NEXT').count() == 0) {
         next.inE('INDEXED').each{ g.removeEdge(it); }
@@ -2469,7 +2469,7 @@ if (    $it.token != 'T_ELSEIF'
     
         $it.setProperty('rank', count);
         count++;
-        $it.setProperty('makeSequence', 'both');
+//        $it.setProperty('makeSequence', 'both');
         g.addEdge(sequence, $it, 'ELEMENT');
 
         $it.out('NEXT').out('ELEMENT').each{ 
@@ -2489,7 +2489,7 @@ if (    $it.token != 'T_ELSEIF'
               ($it.in('NEXT').next().block != 'true')) {
         sequence = $it.in('NEXT').next();
         $it.setProperty('rank', $it.in('NEXT').out('ELEMENT').count());
-        $it.setProperty('makeSequence', 'in');
+//        $it.setProperty('makeSequence', 'in');
 
         g.addEdge(sequence, $it.out('NEXT').next(), 'NEXT');
         g.addEdge($it.in('NEXT').next(), $it, 'ELEMENT');
@@ -2498,7 +2498,7 @@ if (    $it.token != 'T_ELSEIF'
     } else if ($it.out('NEXT').has('atom', 'Sequence').any()) {
         sequence = $it.out('NEXT').next();
         $it.setProperty('rank', 0);
-        $it.setProperty('makeSequence', 'next');
+//        $it.setProperty('makeSequence', 'next');
         sequence.out('ELEMENT').each{ it.setProperty('rank', it.rank + 1);}
 
         g.addEdge($it.out('NEXT').next(), $it, 'ELEMENT');
@@ -2513,7 +2513,7 @@ if (    $it.token != 'T_ELSEIF'
 
         g.addEdge(sequence, $it, 'ELEMENT');
         $it.setProperty('rank', 0);
-        $it.setProperty('makeSequence', 'else');
+//        $it.setProperty('makeSequence', 'else');
         
         if ($it.root == 'true') { 
             sequence.setProperty('root', 'true'); 
@@ -2529,6 +2529,7 @@ if (    $it.token != 'T_ELSEIF'
         $it.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
     }
 } else {
+    /*
     $it.setProperty('makeSequence1',   $it.token != 'T_ELSEIF');
     $it.setProperty('makeSequence2',  ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' ));
     $it.setProperty('makeSequence3',  ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().getProperty('token') in list_before))) ;
@@ -2541,6 +2542,7 @@ if (    $it.token != 'T_ELSEIF'
     $it.setProperty('makeSequence7',   !($it.in('NEXT').next().atom in ['Class', 'Identifier']) );
     $it.setProperty('makeSequence9',   !($it.out('NEXT').next().token in list_after_token));
     $it.setProperty('makeSequence10',   !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR']));
+    */
 }
 
 ";
