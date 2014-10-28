@@ -26,6 +26,8 @@ $begin = microtime(true);
 $client = new Client();
 if (DISPLAY) print "Starting\n";
 
+file_put_contents('log/build_root.log', '');
+
 logTime('Start');
 
 $result = query("g.idx('racines')");
@@ -88,7 +90,7 @@ if (DISPLAY) print "Creating index for constant, function and classes resolution
 
 $end = microtime(true);
 
-function query($query) {
+function query($query, $retry = 1) {
     global $client;
     $params = array('type' => 'IN');
     try {
@@ -96,12 +98,15 @@ function query($query) {
         return $GremlinQuery->getResultSet();
     } catch (Exception $e) {
         $fp = fopen('log/build_root.log', 'a');
-        fwrite($fp, "Sleeping...\n");
         fwrite($fp, $query."\n");
+        fwrite($fp, $e->getMessage());
         fclose($fp);
         
-        print "Query : $query\n";
-        print $e->getMessage();
+        if ($retry) {
+            sleep (3);
+            return query($query, 0);
+        }
+        
         die('died in '.__METHOD__."\n");
     }
 }
