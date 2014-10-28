@@ -14,6 +14,7 @@ class StaticContainsThis extends Analyzer\Analyzer {
              ->atomInside('Variable')
              ->code('$this', true)
              ->back('first');
+        $this->prepareQuery();
     }
 }
 
