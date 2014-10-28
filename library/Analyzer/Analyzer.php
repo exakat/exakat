@@ -594,6 +594,8 @@ GREMLIN;
             $this->addMethod("has('rank','0')");
         } elseif ($value == 'last') {
             $this->addMethod("filter{it.rank == it.in('ARGUMENT').out('ARGUMENT').count() - 1}");
+        } elseif ($value == '2last') {
+            $this->addMethod("filter{it.rank == it.in('ARGUMENT').out('ARGUMENT').count() - 2}");
         } else {
             $this->addMethod("filter{it.rank == ***}", abs(intval($value)));
         }
@@ -606,6 +608,8 @@ GREMLIN;
             $this->addMethod("filter{ it.out(***).has('rank','0').any() == false }", $edge_name);
         } elseif ($rank === 'last') {
             $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 1).any() == false }", $edge_name, $edge_name);
+        } elseif ($rank === '2last') {
+            $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 2).any() == false }", $edge_name, $edge_name);
         } else {
             $this->addMethod("filter{ it.out(***).has('rank', ***).any() == false}", $edge_name, abs(intval($rank)));
         }
@@ -958,6 +962,10 @@ GREMLIN;
             $rank = 0;
         } else if ($rank == 'last') {
             $this->addMethod("sideEffect{ rank = it.out(***).count() - 1;}", $edge_name);
+            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edge_name);
+            return $this;
+        } else if ($rank == '2last') {
+            $this->addMethod("sideEffect{ rank = it.out(***).count() - 2;}", $edge_name);
             $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edge_name);
             return $this;
         } else {
