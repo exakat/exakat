@@ -5,10 +5,6 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class StaticCpm extends Analyzer\Analyzer {
-    public function dependsOn() {
-        return array("MethodDefinition");
-    }
-    
     public function analyze() {
         $this->atomIs("Class")
              ->outIs("BLOCK")
@@ -23,7 +19,6 @@ class StaticCpm extends Analyzer\Analyzer {
              ->hasOut('STATIC')
              ->outIs('DEFINE');
         $this->prepareQuery();
-        
     }
 }
 
