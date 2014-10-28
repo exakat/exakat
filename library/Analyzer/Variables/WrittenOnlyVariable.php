@@ -19,10 +19,14 @@ class WrittenOnlyVariable extends Analyzer\Analyzer {
              ->atomInside('Variable')
              ->analyzerIs('Analyzer\\Variables\\IsModified')
              ->analyzerIsNot('Analyzer\\Variables\\IsRead')
-             ->raw('filter{ name = it.code; itself = it; it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.out("BLOCK").
-             out().loop(1){true}{it.object.atom == "Variable"}.has("code", name).except([itself]).
-             filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsRead").any() == false}
-             .any()
+             ->raw('filter{ 
+    name = it.code; 
+    itself = it; 
+    it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.out("BLOCK").
+             out().loop(1){true}{it.object.atom == "Variable"}
+             .has("code", name)
+             .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsRead").any()}
+             .any() == false
              }')
              ;
         $this->prepareQuery();
