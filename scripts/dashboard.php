@@ -250,6 +250,18 @@ if ($res === null) {
     print "\n\n";
 }
 
+// check for errors in the analyze logs
+$shell = shell_exec('grep Exception projects/*/log/analyze.* | grep "Exception : "');
+$rows = explode("\n", trim($shell));
+
+if (count($rows) > 0) {
+    print count($rows)." errors in the analyzers\n";
+    foreach($rows as $row) {
+        print "+ $row\n";
+    }
+} else {
+    print "All project have clean analyzers\n";
+}
 
 
 ?>
