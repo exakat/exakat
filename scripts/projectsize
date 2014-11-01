@@ -25,6 +25,16 @@ while($row = $res->fetch_Assoc()) {
             $diff .= "$diffi days)";
         }
         $diff = '('.str_repeat(' ', 9 - strlen($diff)).$diff;
+        
+        $diff .= ' ';
+        if (filesize('projects/'.$row['project'].'/log/tokenizer.final.log') == 0) {
+            $diff .= "-";
+        }
+
+        if (file_exists('projects/'.$row['project'].'/report')) {
+            $diff .= "*";
+        }
+
         $line .= $diff;
     } else {
         $line .= "None";
