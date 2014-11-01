@@ -292,7 +292,9 @@ g.V.has('index', 'true').filter{it.out().count() == 0}.each{
     g.removeVertex(it);
 };
 
-", "
+", 
+/*
+"
 //////////////////////////////////////////////////////////////////////////////////////////
 // calculating variable namespace
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -308,12 +310,14 @@ g.idx('atoms')[['atom':'Variable']].sideEffect{fullcode = it;}.in.loop(1){it.obj
     }
 };
 
-", "
+",*/
+
+ "
 //////////////////////////////////////////////////////////////////////////////////////////
 // calculating the full namespaces paths
 //////////////////////////////////////////////////////////////////////////////////////////
 // const in a namespace (and not a class)
-g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any()}.sideEffect{fullcode = it;}.in.loop(1){it.object.atom != 'Class'}{it.object.atom =='Namespace'}.each{ 
+g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any()}.sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom =='Namespace'}.each{ 
     if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.out('NAME').next().fullcode.toLowerCase());
     } else {
@@ -340,7 +344,7 @@ g.idx('atoms')[['atom':'Functioncall']].has('code', 'define').out('ARGUMENTS').o
 ", "
 // function definitions
 g.idx('atoms')[['atom':'Function']].filter{it.out('NAME').next().code != ''}.sideEffect{fullcode = it.out('NAME').next();}
-    .filter{it.in('ELEMENT').in('BLOCK').any() == false || !(it.in('ELEMENT').in('BLOCK').next().atom in ['Class', 'Interface'])}
+    .filter{it.in('ELEMENT').in('BLOCK').any() == false || !(it.in('ELEMENT').in('BLOCK').next().atom in ['Class', 'Trait', 'Interface'])}
     .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
@@ -711,11 +715,11 @@ g.idx('atoms')[['atom':'Functioncall']]
     .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
     .each{
         if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.out('EXTENDS').next().fullnspath);
         } 
     }; 
 
@@ -726,11 +730,11 @@ g.idx('atoms')[['atom':'Staticmethodcall']]
     .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
     .each{
         if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.out('EXTENDS').next().fullnspath);
         } 
     }; 
 ", "
@@ -741,11 +745,11 @@ g.idx('atoms')[['atom':'Staticproperty']]
     .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
     .each{
         if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.out('EXTENDS').next().fullnspath);
         } 
     }; 
 
@@ -755,14 +759,14 @@ g.idx('atoms')[['atom':'Staticconstant']]
     .out('CLASS')
     .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
     .each{
-        if ( it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.any() == false) {
+        if ( it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.any() == false) {
             it.setProperty('fullnspath', 'None'); // This is an error!
         } else if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.next().fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
-            it.setProperty('fullnspath', it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').next().fullnspath);
+            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.out('EXTENDS').next().fullnspath);
         } 
     }; 
 
