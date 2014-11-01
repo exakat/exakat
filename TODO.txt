@@ -359,7 +359,6 @@ unused constants
 Identify the use of static and self and mention there is a difference in usage. 
 make stats of usage of parent, self, static. 
 Classes that are not found are classified as wrong case for calling (bug)
-vérifier le support de zmq
 
 scripter la liste des extensions sur pecl.php.net
 suggest Use and aliases to reduce code size.
@@ -370,9 +369,6 @@ Classes/UnusedPrivateProperties : Not done on alpharpc ?? No tokenizer.final rep
 Several instructino in the same line : compare line with > not ==, so as to has f( \n g($x)) spotted.
 
 when there is no namespace, what to find? I should put a default namespace 
-
-alpharpc
-
 
 Add a way to ignore some vendors dependings on project.
 Add a way to overwrite / add / nullify some data from within a project.
@@ -389,7 +385,6 @@ et les experssion or die();!
 Conditional declarations ?
 
 Heavily used classes/functions...
-Add a top5 for files to check
 
 rethrown exceptions in a catch
 
@@ -421,15 +416,7 @@ List of impacted methods (calling, data is changed for the original method to )
 Fin configuration directive that should will have an impact on the code. 
 Spot multiple aliases with the same names (compile but won't run)
 
-        public $array = [
-            self::ONE => 'Eclipse',
-            'Sublime',
-            'PHPStorm',
-        ];
-        Possible overwrite of array indices (before PHP 5.6)
-
 Using File upload ? 
-Using handlers (Set_*_handlers)
 
 Functions / methods may be a tube (mixing arguments) or changing some state.
 
