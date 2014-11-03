@@ -740,7 +740,7 @@ g.idx('atoms')[['atom':'Staticmethodcall']]
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
             fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.out('EXTENDS').next().fullnspath;
             if (fullnspath == null) { fullnspath = 'parent';}
-            it.setProperty('fullnspath', fullsnpath);
+            it.setProperty('fullnspath', fullnspath);
         } 
     }; 
 ", "
