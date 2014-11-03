@@ -815,7 +815,6 @@ fullcode = x;
                     $c++;
                 
                     if ($label == 'DROP') {
-                        var_dump($destination);
                         $qactions[] = "
 /* transform drop out ($c) */
 g.addEdge(a$c.in('NEXT').next(), a$c.out('NEXT').next(), 'NEXT');
