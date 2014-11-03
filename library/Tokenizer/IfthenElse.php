@@ -9,7 +9,7 @@ class IfthenElse extends TokenAuto {
         // else { /* block */ }
         $this->conditions = array(  0 => array('token'     => IfthenElse::$operators,
                                                'atom'      => 'none'),
-                                    1 => array('notAtom'   => array('Sequence', 'Void'),
+                                    1 => array('notAtom'   => 'Sequence',
                                                'atom'      => 'yes'),
                                     2 => array('filterOut' => Token::$instruction_ending),
         );
