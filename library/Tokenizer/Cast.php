@@ -11,8 +11,9 @@ class Cast extends TokenAuto {
                                              'atom'      => 'none'),
                                   1 => array('atom'      => 'yes',
                                              'notAtom'   => 'Sequence'),
-                                  2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 
-                                                                              'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'),
+                                  2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 
+                                                                              'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 
+                                                                              'T_DOUBLE_COLON'),
                                                                         Preplusplus::$operators, Postplusplus::$operators)),
         );
         
