@@ -830,48 +830,36 @@ g.idx('delete').put('node', 'delete', it);
 /* transform drop out ($c) */
 
 g.addEdge(a$c.in('NEXT').next(), a$c.out('NEXT').next(), 'NEXT');
-
-a$c.bothE('NEXT').each{ g.removeEdge(it); }
-a$c.inE('INDEXED').each{ g.removeEdge(it); }
-
+a$c.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
 g.idx('delete').put('node', 'delete', a$c);
 ";
                         }
                     } else {
                         $qactions[] = "
 /* transform out ($c) */
+
 g.addEdge(it, a$c, '$label');
 g.addEdge(it, a$c.out('NEXT').next(), 'NEXT');
-
 a$c.bothE('NEXT').each{ g.removeEdge(it); }
 ";
                     }
                 } elseif ($destination < 0) {
+                    $d = abs($destination);
                     if ($label == 'DROP') {
                         $qactions[] = "
 /* transform drop in ($c) */
-f = [];
-it.in('NEXT').fill(f);
-h = it;
-f.each{
-    i = it; 
-    it.in('NEXT').each{ g.addEdge(it, h, 'NEXT');}
 
-    i.inE('INDEXED').each{ g.removeEdge(it); }
-    g.removeVertex(i);
-}
-
+g.addEdge(b$d.in('NEXT').next(), b$d.out('NEXT').next(), 'NEXT');
+b$d.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+g.idx('delete').put('node', 'delete', b$d);
 ";
                     } else {
                         $qactions[] = "
-/* transform in ($c) */
-f =  it.in('NEXT').next();
-g.addEdge(it, f, '$label');
-g.removeEdge(f.outE('NEXT').next());
+/* transform in (-$c) */
 
-g.addEdge(f.in('NEXT').next(), it, 'NEXT');
-g.removeEdge(f.inE('NEXT').next());
-
+g.addEdge(it, b$d, '$label');
+g.addEdge(b$d.in('NEXT').next(), it, 'NEXT');
+b$d.bothE('NEXT').each{ g.removeEdge(it); }
 ";
                     }
                 } else {
@@ -881,8 +869,7 @@ g.removeEdge(f.inE('NEXT').next());
 a = it.in('NEXT').next();
 b = it.out('NEXT').next();
 
-it.bothE('NEXT').each{    g.removeEdge(it); } 
-it.inE('INDEXED').each{ g.removeEdge(it); }
+it.bothE('NEXT', 'INDEXED').each{    g.removeEdge(it); } 
 
 g.removeVertex(it);
 g.addEdge(a, b, 'NEXT');
