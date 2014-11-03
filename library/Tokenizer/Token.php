@@ -730,11 +730,17 @@ g.idx('atoms')[['atom':'Staticmethodcall']]
     .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
     .each{
         if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
-            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.next().fullnspath);
+            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.next().fullnspath;
+            if (fullnspath == null) { fullnspath = 'self';}
+            it.setProperty('fullnspath', fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution... 
-            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.next().fullnspath);
+            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.next().fullnspath;
+            if (fullnspath == null) { fullnspath = 'static';}
+            it.setProperty('fullnspath', fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
-            it.setProperty('fullnspath', it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}.out('EXTENDS').next().fullnspath);
+            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.out('EXTENDS').next().fullnspath;
+            if (fullnspath == null) { fullnspath = 'parent';}
+            it.setProperty('fullnspath', fullsnpath);
         } 
     }; 
 ", "
