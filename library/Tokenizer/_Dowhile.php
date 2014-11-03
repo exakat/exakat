@@ -7,6 +7,20 @@ class _Dowhile extends TokenAuto {
     static public $atom = 'Dowhile';
 
     public function _check() {
+        // do <void>; while() (no block...)
+        $this->conditions = array( 0 => array('token'  => _Dowhile::$operators),
+                                   1 => array('token'  => 'T_SEMICOLON'),
+                                   2 => array('token'  => 'T_WHILE',
+                                              'dowhile' => 'true'),
+                                   3 => array('token'  => 'T_OPEN_PARENTHESIS'),
+                                   4 => array('atom'   => 'yes'),
+                                   5 => array('token'  => 'T_CLOSE_PARENTHESIS')
+        );
+        
+        $this->actions = array('addEdge'     => array(0 => array('Void' => 'LEVEL')),
+                               'keepIndexed' => true);
+        $this->checkAuto();
+        
         // do ; while() (no block...)
         $this->conditions = array( 0 => array('token' => _Dowhile::$operators),
                                    1 => array('atom'  => 'yes'),
