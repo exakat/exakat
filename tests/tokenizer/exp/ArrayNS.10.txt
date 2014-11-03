@@ -1,17 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
-  Label : ELEMENT
-    [
-    Label : INDEX
-      [
-      Label : INDEX
-        'c'
-      Label : VARIABLE
-        $b
-    Label : VARIABLE
-      $a
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
     Label : RIGHT
@@ -28,44 +18,44 @@ Label : CODE
               1
     Label : LEFT
       [
-      Label : INDEX
-        [
-        Label : INDEX
-          $d
-        Label : VARIABLE
-          $c
       Label : VARIABLE
         [
-        Label : INDEX
-          $b
         Label : VARIABLE
           $a
+        Label : INDEX
+          $b
+      Label : INDEX
+        [
+        Label : VARIABLE
+          $c
+        Label : INDEX
+          $d
   Label : ELEMENT
     =
     Label : RIGHT
       $i
     Label : LEFT
       [
-      Label : INDEX
-        [
-        Label : INDEX
-          'h'
-        Label : VARIABLE
-          $g
       Label : VARIABLE
-        ::
-        Label : CLASS
-          C
-        Label : PROPERTY
-          [
-          Label : INDEX
-            $f
-          Label : VARIABLE
+        [
+        Label : VARIABLE
+          ::
+          Label : PROPERTY
             [
-            Label : INDEX
-              $e
             Label : VARIABLE
               $d
+            Label : INDEX
+              $e
+          Label : CLASS
+            C
+        Label : INDEX
+          $f
+      Label : INDEX
+        [
+        Label : VARIABLE
+          $g
+        Label : INDEX
+          'h'
   Label : ELEMENT
     =
     Label : RIGHT
@@ -76,31 +66,39 @@ Label : CODE
         $j
     Label : LEFT
       [
-      Label : INDEX
-        [
-        Label : INDEX
-          $i
-        Label : VARIABLE
-          $h
       Label : VARIABLE
         [
-        Label : INDEX
-          $g
         Label : VARIABLE
           $f
+        Label : INDEX
+          $g
+      Label : INDEX
+        [
+        Label : VARIABLE
+          $h
+        Label : INDEX
+          $i
   Label : ELEMENT
     =
     Label : RIGHT
       [
-      Label : INDEX
-        'e'
       Label : VARIABLE
         $f
+      Label : INDEX
+        'e'
     Label : LEFT
       [
       Label : VARIABLE
         [
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENTS
-            'd'
+        Label : VARIABLE
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              'c'
+        Label : INDEX
+          'd'

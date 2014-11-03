@@ -739,6 +739,30 @@ function process_file($filename, $log_file) {
                                                     ->save();
                     $classNode->relateTo($T[$Tid]);
                     $to_index = false;
+            } elseif ( $tokens[$id] == ',' && 
+                       isset($tokens[$id + 1]) && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ']') {
+                    // This must be [1, 2, ], array short syntax final comma
+                    $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
+                                                  ->setProperty('code', $token)
+                                                  ->setProperty('line', $line)
+                                                  ->setProperty('modifiedBy', 'bin/load23')
+                                                  ->save();
+                    $classNode->relateTo($T[$Tid]);
+                    $regexIndex["Arguments"]->relateTo($T[$Tid], 'INDEXED')->save();
+
+                    $previous->relateTo($T[$Tid], 'NEXT')->save();
+                    $previous = $T[$Tid];
+                
+                    $Tid++;
+                    $T[$Tid]   = $client->makeNode()->setProperty('token', 'T_VOID')
+                                                    ->setProperty('code', 'void')
+                                                    ->setProperty('fullcode', ' ')
+                                                    ->setProperty('line', $line)
+                                                    ->setProperty('atom', 'Void')
+                                                    ->setProperty('modifiedBy', 'bin/load8b')
+                                                    ->save();
+                    $classNode->relateTo($T[$Tid]);
+                    $to_index = false;
             } elseif ($token == ':' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  
                       && in_array($Php->getTokenname($tokens[$id + 1][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))

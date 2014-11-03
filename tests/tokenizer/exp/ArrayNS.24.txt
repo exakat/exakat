@@ -36,5 +36,7 @@ Label : CODE
               6
             Label : ARGUMENT
               7
+        Label : ARGUMENT
+          void
     Label : LEFT
       $a

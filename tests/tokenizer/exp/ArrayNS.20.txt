@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     function
     Label : ARGUMENTS
@@ -12,29 +12,27 @@ Label : CODE
       B
     Label : BLOCK
       {
-      Label : CODE
-        makeSequence
-        Label : ELEMENT
-          return
-          Label : RETURN
-            new
-            Label : NEW
-              \C\D\E
-              Label : ELEMENT
-                E
-              Label : ELEMENT
-                D
-              Label : ELEMENT
-                C
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
+      Label : ELEMENT
+        return
+        Label : RETURN
+          new
+          Label : NEW
+            \C\D\E
+            Label : SUBNAME
+              E
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : ARGUMENTS
+                  void
                   Label : ARGUMENTS
-                    void
-                    Label : ARGUMENTS
-                      =>
-                      Label : KEY
-                        'F'
-                      Label : VALUE
-                        'G'
+                    =>
+                    Label : KEY
+                      'F'
+                    Label : VALUE
+                      'G'

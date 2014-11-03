@@ -13,20 +13,6 @@ class ArrayNS extends TokenAuto {
                          'T_DOLLAR', 'T_DOUBLE_COLON', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 
                          'T_CLOSE_PARENTHESIS' );
 
-        // [ arguments , ] : prepare arguments with final comma
-        $this->conditions = array(-1 => array('filterOut2' => $yields,
-                                              'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
-                                   0 => array('token'      => ArrayNS::$operators),
-                                   1 => array('atom'       => 'yes', 
-                                              'notAtom'    => 'Arguments'),
-                                   2 => array('token'      => 'T_COMMA'),
-                                   3 => array('token'      => 'T_CLOSE_BRACKET'),
-        );
-        
-        $this->actions = array('transform'   => array( 2 => 'DROP2' ),
-                               'keepIndexed' => true);
-        $this->checkAuto();
-
         // [ arguments ] : prepare arguments
         $this->conditions = array(-1 => array('filterOut2' => $yields,
                                               'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
@@ -61,23 +47,6 @@ class ArrayNS extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 1 => 'ARGUMENTS',
-                                                        2 => 'DROP'),
-                               'atom'         => 'Array',
-                               'property'     => array('short_syntax' => 'true'),
-                               'cleanIndex'   => true);
-        $this->checkAuto();
-
-        // [ ] non-empty array with final ,
-        $this->conditions = array(-1 => array('filterOut2' => $yields,
-                                              'notAtom'    => array('Parenthesis', 'Array', 'Arrayappend')),
-                                   0 => array('token' => ArrayNS::$operators),
-                                   1 => array('atom'  => 'Arguments'),
-                                   2 => array('token' => 'T_COMMA'),
-                                   3 => array('token' => 'T_CLOSE_BRACKET'),
-        );
-        
-        $this->actions = array('transform'    => array( 1 => 'ARGUMENTS',
-                                                        3 => 'DROP',
                                                         2 => 'DROP'),
                                'atom'         => 'Array',
                                'property'     => array('short_syntax' => 'true'),

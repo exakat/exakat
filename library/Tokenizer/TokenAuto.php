@@ -829,30 +829,14 @@ g.idx('delete').put('node', 'delete', it);
                             $qactions[] = "
 /* transform drop out ($c) */
 
-next = it.out('NEXT').next();
-g.addEdge(it, next.out('NEXT').next(), 'NEXT');
+g.addEdge(a$c.in('NEXT').next(), a$c.out('NEXT').next(), 'NEXT');
 
-next.bothE('NEXT').each{ g.removeEdge(it); }
-next.inE('INDEXED').each{ g.removeEdge(it); }
+a$c.bothE('NEXT').each{ g.removeEdge(it); }
+a$c.inE('INDEXED').each{ g.removeEdge(it); }
 
-g.idx('delete').put('node', 'delete', next);
+g.idx('delete').put('node', 'delete', a$c);
 ";
                         }
-                    } elseif ($label == 'DROP2') {
-                            $qactions[] = "
-/* transform drop out (2) */
-
-first = it.out('NEXT').next();
-second  = first.out('NEXT').next();
-third  = second.out('NEXT').next();
-
-second.bothE('NEXT').each{ g.removeEdge(it); }
-second.inE('INDEXED').each{ g.removeEdge(it); }
-g.idx('delete').put('node', 'delete', second);
-
-g.addEdge(first, third, 'NEXT');
-
-";
                     } elseif (substr($label, 0, 3) == 'TO_') {
                         $link = substr($label, 3);
                         $qactions[] = "
@@ -874,13 +858,10 @@ g.removeVertex(n);
                     } else {
                         $qactions[] = "
 /* transform out ($c) */
-f =  it.out('NEXT').next();
-g.addEdge(it, f, '$label');
-g.removeEdge(f.inE('NEXT').next());
+g.addEdge(it, a$c, '$label');
+g.addEdge(it, a$c.out('NEXT').next(), 'NEXT');
 
-g.addEdge(it, f.out('NEXT').next(), 'NEXT');
-g.removeEdge(f.outE('NEXT').next());
-
+a$c.bothE('NEXT').each{ g.removeEdge(it); }
 ";
                     }
                 } elseif ($destination < 0) {
@@ -2815,6 +2796,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             for($i = 0; $i < $cdt['next']; $i++) {
                 $qcdts[] = "out('NEXT')";
             }
+            $qcdts[] = "sideEffect{ a{$cdt['next']} = it;}";
             unset($cdt['next']);
         }
 
@@ -2822,6 +2804,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             for($i = 0; $i < $cdt['previous']; $i++) {
                 $qcdts[] = "in('NEXT')";
             }
+            $qcdts[] = "sideEffect{ b{$cdt['previous']} = it;}";
             unset($cdt['previous']);
         }
 
