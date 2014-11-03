@@ -837,24 +837,6 @@ a$c.inE('INDEXED').each{ g.removeEdge(it); }
 g.idx('delete').put('node', 'delete', a$c);
 ";
                         }
-                    } elseif (substr($label, 0, 3) == 'TO_') {
-                        $link = substr($label, 3);
-                        $qactions[] = "
-/* transform to var out ($c) */
-n = it.out('NEXT').next();
-h = it;
-n.out('ARGUMENT').each{
-    g.addEdge(h, it, '$link');
-    g.removeEdge(it.inE('ARGUMENT').next());
-}
-
-f = it.out('NEXT').out('NEXT').next();
-g.removeEdge(it.out('NEXT').outE('NEXT').next());
-g.removeEdge(it.outE('NEXT').next());
-g.addEdge(it, f,  'NEXT');
-
-g.removeVertex(n);
-";
                     } else {
                         $qactions[] = "
 /* transform out ($c) */
