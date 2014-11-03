@@ -815,25 +815,14 @@ fullcode = x;
                     $c++;
                 
                     if ($label == 'DROP') {
-                        if ($destination == 0) {
-                            $qactions[] = "
-/* transform drop out (0) */
-g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
-it.bothE('NEXT').each{ g.removeEdge(it); }
-
-it.inE('INDEXED').each{ g.removeEdge(it); }
-g.idx('delete').put('node', 'delete', it);
-";
-                            $this->set_atom = false;
-                        } else {
-                            $qactions[] = "
+                        var_dump($destination);
+                        $qactions[] = "
 /* transform drop out ($c) */
-
 g.addEdge(a$c.in('NEXT').next(), a$c.out('NEXT').next(), 'NEXT');
 a$c.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
 g.idx('delete').put('node', 'delete', a$c);
+
 ";
-                        }
                     } else {
                         $qactions[] = "
 /* transform out ($c) */
@@ -987,26 +976,6 @@ g.idx('delete').put('node', 'delete', it);
             unset($actions['to_const']);
 }
 
-        if (isset($actions['dropNextCode'])) {
-            foreach($actions['dropNextCode'] as $destination) {
-                $d = str_repeat(".out('NEXT')", 1);
-                $qactions[] = "
-/* dropNextCode out */
-f = [];
-it.out('NEXT').has('code', '$destination').fill(f);
-h = it;
-f.each{
-    i = it; 
-    it.out('NEXT').each{ g.addEdge(h, it, 'NEXT');}
-
-    g.removeVertex(i);
-}
-
-";
-            }
-            unset($actions['dropNextCode']);
-        }
-
         if (isset($actions['createSequenceForCaseWithoutSemicolon'])) {
             $sequence = new Sequence(Token::$client);
             $fullcode = $sequence->fullcode();
@@ -1099,7 +1068,6 @@ while(p.getProperty('token') == 'T_NS_SEPARATOR') {
     if (p != it) {
         p.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
         g.idx('delete').put('node', 'delete', p);
-//        g.removeVertex(p);
     }
     
     g.addEdge(nsname, p2, 'NEXT');
@@ -1875,10 +1843,7 @@ it.out('NEXT').has('token', 'T_COLON').each{
     g.idx('delete').put('node', 'delete', endif);
 }
 
-x = g.addVertex(null, [code:'Block with else', fullcode:'Block with else', token:'T_SEMICOLON', atom:'Sequence', block:'true', virtual:true, line:it.line]);
-
-fullcode = x;
-$fullcode
+x = g.addVertex(null, [code:'Block with else', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:'true', virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
 
@@ -2307,7 +2272,7 @@ element2.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = " 
 /* while_to_block */  
 
-x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, modifiedBy:'_While', fullcode:'{ /**/ } ']);
+x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:'true', line:it.line, modifiedBy:'_While', fullcode:' /**/  ']);
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
