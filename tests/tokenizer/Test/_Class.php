@@ -72,7 +72,7 @@ class _Class extends Tokenizer {
     public function test_Class61()  { $this->generic_test('_Class.61'); }
     public function test_Class62()  { $this->generic_test('_Class.62'); }
     public function test_Class63()  { $this->generic_test('_Class.63'); }
-}
     public function test_Class64()  { $this->generic_test('_Class.64'); }
+}
 
 ?>
