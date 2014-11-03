@@ -7,10 +7,10 @@ class Concatenation extends TokenAuto {
     static public $atom = 'Concatenation';
     
     public function _check() {
-        $operands = array('String', 'Identifier', 'Integer', 'Float', 'Not', 'Variable','Array', 'Concatenation', 'Sign', 'Array',
+        $operands = array('String', 'Identifier', 'Integer', 'Float', 'Not', 'Variable', 'Array', 'Concatenation', 'Sign', 'Array',
                           'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant', 'Staticclass',
                           'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 'Power',
-                          'Preplusplus', 'Postplusplus', 'Cast', 'Assignation', 'Nsname' );
+                          'Preplusplus', 'Postplusplus', 'Cast', 'Assignation', 'Nsname', 'Boolean', 'Null' );
         
         $this->conditions = array(-2 => array('filterOut' => array_merge(Addition::$operators, Multiplication::$operators,
                                                                          Preplusplus::$operators, Power::$operators, 
