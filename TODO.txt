@@ -442,3 +442,9 @@ spot magical properties.
 Spot methods that are not compatible with typehint
 
 Add a way to configure the analyzer at file level (PHP DOC), or an external list (analyzer.ignore + others)
+
+Variable used once : Ignore arguments if func_get_args is used.
+Never used properties : check for classes below!
+Never used properties : if (in_array($key, self::$_allowableAttributes[$tag])) { ($_allowableAttributes!!
+
+methods that are never called (in general).
