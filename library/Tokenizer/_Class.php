@@ -10,7 +10,7 @@ class _Class extends TokenAuto {
     
     // class x {}
         $this->conditions = array( 0 => array('token' => _Class::$operators),
-                                   1 => array('atom'  => array('Identifier', 'Null'))
+                                   1 => array('atom'  => array('Identifier', 'Null', 'Boolean'))
                                  );
         
         $this->actions = array('transform'   => array(   1 => 'NAME'),
