@@ -54,7 +54,7 @@ class _Class extends TokenAuto {
                                  );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
-                                                       2 => 'TO_IMPLEMENTS'),
+                                                       2 => 'IMPLEMENTS'),
                                'keepIndexed' => true,
                                'cleanIndex'  => true );
         $this->checkAuto(); 
