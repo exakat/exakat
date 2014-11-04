@@ -13,6 +13,7 @@ class UnusedMethods extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->_as('unused')
              ->outIs('NAME')
+             ->codeIsNot(array('__construct', '__destruct', '__get', '__set', '__call', '__callstatic'))
              ->savePropertyAs('code', 'method')
              ->raw('filter{ g.idx("atoms")[["atom":"Methodcall"]].out("METHOD").filter{ it.code == method}.any() == false}')
              ->back('unused');
