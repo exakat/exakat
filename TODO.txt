@@ -448,3 +448,14 @@ Never used properties : check for classes below!
 Never used properties : if (in_array($key, self::$_allowableAttributes[$tag])) { ($_allowableAttributes!!
 
 methods that are never called (in general).
+
+Find nested incompatible conditions like this : (Also over multiples functions calls...)
+                if ($destination > 0) { 
+                        if ($destination == 0) {
+
+
+List stacked conditions and spot if they are incompatible
+
+Empty function that override another are not useless. 
+
+$a['b'] = 3;  print "$a[b]\n"; : b is not a constant! 
