@@ -1341,7 +1341,7 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
     it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 
                                                     'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 
                                                     'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
-                                                    'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_DOT'])}.any() && 
+                                                    'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_DOT', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_ELSE'])}.any() && 
     !it.in('NEXT').in('NEXT').filter{ it.token == 'T_COLON' && it.association == 'Ternary' }.any() 
                                                     ) {
     sequence = it;
@@ -1828,23 +1828,12 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $qactions[] = " 
 /* to_block_else */
 
-it.out('NEXT').has('token', 'T_COLON').each{
-    endif = it.out('NEXT').out('NEXT').next();
-    
-    // removing the colon
-    g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
-    it.bothE('NEXT').each{ g.removeEdge(it); }
-    g.idx('delete').put('node', 'delete', it);
-
-    // removing the endif
-    g.addEdge(endif.in('NEXT').next(), endif.out('NEXT').next(), 'NEXT');
-    endif.bothE('NEXT').each{ g.removeEdge(it); }
-    g.idx('delete').put('node', 'delete', endif);
-}
-
 x = g.addVertex(null, [code:'Block with else', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:'true', virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
+if (a.token == 'T_COLON') {
+    a = a.out('NEXT').next();
+}
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').next(), 'NEXT');
@@ -2361,16 +2350,16 @@ list_after_token = [
         'T_AS', 'T_DOT', 'T_INSTANCEOF', 'T_QUESTION'
         ];
 
-if (    $it.token != 'T_ELSEIF'
-    && ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' )
-    && ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))
-    && ($it.in('NEXT').next().atom != null || !($it.out('NEXT').next().token in list_after) )
-    &&  $it.in_quote != \"'true'\"
-    &&  $it.in_for != \"'true'\"
+if (     $it.token != 'T_ELSEIF'
+    &&  ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' )
+    &&  ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))
+    &&  ($it.in('NEXT').next().atom != null || !($it.out('NEXT').next().token in list_after) )
+    &&   $it.in_quote != \"'true'\"
+    &&   $it.in_for != \"'true'\"
     && !($it.in('NEXT').next().atom in ['Class', 'Identifier']) 
-    &&  !($it.out('NEXT').next().token in list_after_token)
-    &&  !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
-    &&  !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR']}.any()) /* \$x{\$b - 2} */
+    && !($it.out('NEXT').next().token in list_after_token)
+    && !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
+    && !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR']}.any()) /* \$x{\$b - 2} */
     ) {
 
     $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
