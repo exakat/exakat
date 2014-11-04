@@ -418,17 +418,32 @@ function process_file($filename, $log_file) {
                       isset($tokens[$id + 1]) && 
                       is_array($tokens[$id + 1]) && 
                       $Php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
+                      
+                if ($previous->getProperty('code') == ':') {
+                    $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
+                                                  ->setProperty('code', 'void')
+                                                  ->setProperty('fullcode', ' ')
+                                                  ->setProperty('line', $line)
+                                                  ->setProperty('modifiedBy', 'bin/load24b')
+                                                  ->setProperty('atom', 'Void')
+                                                  ->save();
+                    $previous->relateTo($T[$Tid], 'NEXT')->save();
+                    $previous = $T[$Tid];
 
-                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
-                                              ->setProperty('code', ';')
-                                              ->setProperty('line', $line)
-                                              ->setProperty('modifiedBy', 'bin/load24')
-                                              ->save();
-                $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();
+                    $Tid++;
+                }
+                
+                if ( $previous->getProperty('code') != ';') {
+                    $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
+                                                  ->setProperty('code', ';')
+                                                  ->setProperty('line', $line)
+                                                  ->setProperty('modifiedBy', 'bin/load24')
+                                                  ->save();
+                    $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();
 
-                $previous->relateTo($T[$Tid], 'NEXT')->save();
-                $previous = $T[$Tid];
-
+                    $previous->relateTo($T[$Tid], 'NEXT')->save();
+                    $previous = $T[$Tid];
+                }
                 $id++;
                 continue;
             } elseif ($Php->getTokenname($token[0]) == 'T_CLOSE_TAG' && 
@@ -637,7 +652,7 @@ function process_file($filename, $log_file) {
             
             if ($token == '{' && $tokens[$id + 1] == '}') {
                 $block_level--;
-                if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && in_array($Php->getTokenName($tokens[$id - 1][0]), array('T_STRING', 'T_NAMESPACE', 'T_TRY')))) {
+                if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && in_array($Php->getTokenName($tokens[$id - 1][0]), array('T_STRING', 'T_NAMESPACE', 'T_TRY', 'T_ELSE')))) {
                     $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                                   ->setProperty('code', $token)
                                                   ->setProperty('fullcode', '{ /**/ } ')
