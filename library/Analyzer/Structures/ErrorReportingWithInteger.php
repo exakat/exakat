@@ -23,6 +23,7 @@ class ErrorReportingWithInteger extends Analyzer\Analyzer {
              ->inIs('ARGUMENT')
              ->rankIs('ARGUMENT', 1)
              ->atomIs('Integer')
+             ->codeIsNot(0)
              ->back('first');
         $this->prepareQuery();
     }
