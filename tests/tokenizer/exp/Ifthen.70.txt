@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -9,16 +9,6 @@ Label : CODE
       Label : CODE
         &&
         Label : RIGHT
-          isset
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'D'
-              Label : VARIABLE
-                $c
-        Label : LEFT
           &&
           Label : RIGHT
             isset
@@ -26,22 +16,32 @@ Label : CODE
               void
               Label : ARGUMENT
                 [
-                Label : INDEX
-                  'C'
                 Label : VARIABLE
-                  $b
+                  $c
+                Label : INDEX
+                  'D'
           Label : LEFT
             isset
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 [
-                Label : INDEX
-                  'B'
                 Label : VARIABLE
-                  $a
+                  $b
+                Label : INDEX
+                  'C'
+        Label : LEFT
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $a
+              Label : INDEX
+                'B'
     Label : THEN
-      makeSequence
+      makeSequence T_SEMICOLON
       Label : ELEMENT
         if
         Label : CONDITION
@@ -103,7 +103,7 @@ Label : CODE
                   Label : OBJECT
                     $d
         Label : THEN
-          makeSequence
+          makeSequence T_SEMICOLON
           Label : ELEMENT
             ->
             Label : OBJECT
@@ -163,8 +163,8 @@ Label : CODE
                 Label : OBJECT
                   $m
           Label : THEN
-            Block With if/elseif
-            Label : CODE
+            Block with if/elseif
+            Label : ELEMENT
               ->
               Label : OBJECT
                 $n

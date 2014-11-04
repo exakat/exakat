@@ -2,15 +2,15 @@
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence
+    makeSequence T_OPEN_TAG
     Label : ELEMENT
       foreach
       Label : VALUE
         $b
       Label : SOURCE
         $a
-      Label : LOOP
-        makeSequence
+      Label : BLOCK
+        makeSequence T_INLINE_HTML
         Label : ELEMENT
           L
         Label : ELEMENT
@@ -23,13 +23,13 @@ Label : ELEMENT
               !
               Label : NOT
                 [
-                Label : INDEX
-                  'D'
                 Label : VARIABLE
                   $c
+                Label : INDEX
+                  'D'
           Label : THEN
-            Block With if/elseif
-            Label : CODE
+            Block with if/elseif
+            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 void
@@ -37,6 +37,24 @@ Label : ELEMENT
                   E
                   Label : ARGUMENTS
                     ,
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        'F'
+                      Label : CONCAT
+                        [
+                        Label : VARIABLE
+                          $d
+                        Label : INDEX
+                          'G'
+                      Label : CONCAT
+                        'H'
+                    Label : ARGUMENT
+                      I
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          'J'
                     Label : ARGUMENT
                       array
                       Label : ARGUMENTS
@@ -47,23 +65,5 @@ Label : ELEMENT
                             'K'
                           Label : VALUE
                             'L'
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        'H'
-                      Label : CONCAT
-                        'F'
-                      Label : CONCAT
-                        [
-                        Label : INDEX
-                          'G'
-                        Label : VARIABLE
-                          $d
-                    Label : ARGUMENT
-                      I
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          'J'
 Label : ELEMENT
   A

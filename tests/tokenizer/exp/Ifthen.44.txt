@@ -4,7 +4,7 @@ Label : ELEMENT
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence
+    makeSequence T_OPEN_TAG
     Label : ELEMENT
       if
       Label : CONDITION
@@ -18,8 +18,8 @@ Label : ELEMENT
               Label : ARGUMENT
                 $a
       Label : THEN
-        Block With if/elseif
-        Label : CODE
+        Block with if/elseif
+        Label : ELEMENT
           print
           Label : ARGUMENTS
             void

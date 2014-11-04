@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_SEMICOLON
   Label : ELEMENT
     if
     Label : CONDITION
@@ -11,7 +11,7 @@ Label : CODE
         Label : NOT
           $a
     Label : THEN
-      makeSequence
+      Block with if/elseif
       Label : ELEMENT
         b
         Label : ARGUMENTS
@@ -23,7 +23,7 @@ Label : CODE
               Label : ARGUMENT
                 "C"
     Label : ELSE
-      makeSequence
+      Block with else
       Label : ELEMENT
         if
         Label : CONDITION
@@ -35,7 +35,7 @@ Label : CODE
             Label : LEFT
               $d
         Label : THEN
-          makeSequence
+          Block with if/elseif
           Label : ELEMENT
             e
             Label : ARGUMENTS
@@ -47,7 +47,7 @@ Label : CODE
                   Label : ARGUMENT
                     "g"
         Label : ELSE
-          makeSequence
+          Block with else
           Label : ELEMENT
             if
             Label : CONDITION
@@ -59,11 +59,7 @@ Label : CODE
                 Label : LEFT
                   $h
             Label : THEN
-              makeSequence
-              Label : ELEMENT
-                exit
-                Label : ARGUMENTS
-                  void
+              Block with if/elseif
               Label : ELEMENT
                 i
                 Label : ARGUMENTS
@@ -74,3 +70,7 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         "l"
+  Label : ELEMENT
+    exit
+    Label : ARGUMENTS
+      void

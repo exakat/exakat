@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -8,8 +8,8 @@ Label : CODE
       Label : CODE
         true
     Label : THEN
-      Block With if/elseif
-      Label : CODE
+      Block with if/elseif
+      Label : ELEMENT
         EMPTY_TRASH_DAYS
     Label : ELSE
       elseif
@@ -18,8 +18,8 @@ Label : CODE
         Label : CODE
           EMPTY_TRASH_DAYS
       Label : THEN
-        Block With if/elseif
-        Label : CODE
+        Block with if/elseif
+        Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
             $b

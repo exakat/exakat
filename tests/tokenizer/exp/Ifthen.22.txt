@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -10,13 +10,9 @@ Label : CODE
         $x
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          $y
+      Label : ELEMENT
+        $y
     Label : ELSE
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          $z
+      Label : ELEMENT
+        $z

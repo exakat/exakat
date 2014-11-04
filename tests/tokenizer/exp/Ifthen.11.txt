@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -10,44 +10,40 @@ Label : CODE
         $c
     Label : THEN
       {
-      Label : CODE
-        makeSequence
-        Label : ELEMENT
-          switch
-          Label : NAME
-            $c
-          Label : CASES
-            {
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          4
+        Label : LEFT
+          $f
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          3
+        Label : LEFT
+          $e
+      Label : ELEMENT
+        switch
+        Label : NAME
+          $c
+        Label : CASES
+          Sequence Case Default
+          Label : ELEMENT
+            case
             Label : CODE
-              Sequence Case Default
+              makeSequence T_SEMICOLON
               Label : ELEMENT
-                case
-                Label : CODE
-                  makeSequence
-                  Label : ELEMENT
-                    =
-                    Label : RIGHT
-                      1
-                    Label : LEFT
-                      $x
-                  Label : ELEMENT
-                    break
-                    Label : LEVEL
-                      void
-                Label : CASE
-                  'a'
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $e
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            4
-          Label : LEFT
-            $f
+                =
+                Label : RIGHT
+                  1
+                Label : LEFT
+                  $x
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+            Label : CASE
+              'a'
     Label : ELSE
       elseif
       Label : CONDITION
@@ -56,11 +52,9 @@ Label : CODE
           $d
       Label : THEN
         {
-        Label : CODE
-          makeSequence
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              5
-            Label : LEFT
-              $f
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            5
+          Label : LEFT
+            $f

@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -8,31 +8,33 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      makeSequence
+      makeSequence T_SEMICOLON
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $a
-      Label : ELEMENT
-        [
-        Label : INDEX
-          d
-        Label : VARIABLE
-          ->
-          Label : PROPERTY
-            c
-          Label : OBJECT
-            $b
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            34
       Label : ELEMENT
         =
         Label : RIGHT
           1
         Label : LEFT
           $e
+      Label : ELEMENT
+        [
+        Label : VARIABLE
+          ->
+          Label : PROPERTY
+            c
+          Label : OBJECT
+            $b
+        Label : INDEX
+          d
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            34
+        Label : NAME
+          [
     Label : ELSE
       elseif
       Label : CONDITION

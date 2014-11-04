@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_CLOSE_CURLY
   Label : ELEMENT
     if
     Label : CONDITION
@@ -14,20 +14,18 @@ Label : CODE
             $y
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            [
-            Label : INDEX
-              +
-              Label : RIGHT
-                2
-              Label : LEFT
-                1
-            Label : VARIABLE
-              $x
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          [
+          Label : VARIABLE
+            $x
+          Label : INDEX
+            +
+            Label : RIGHT
+              2
+            Label : LEFT
+              1
   Label : ELEMENT
     return
     Label : RETURN

@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -8,8 +8,8 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      Block With if/elseif
-      Label : CODE
+      Block with if/elseif
+      Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $b
@@ -20,8 +20,8 @@ Label : CODE
         Label : CODE
           $b
       Label : THEN
-        Block With if/elseif
-        Label : CODE
+        Block with if/elseif
+        Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
             $c
@@ -32,8 +32,8 @@ Label : CODE
           Label : CODE
             $b
         Label : THEN
-          Block With if/elseif
-          Label : CODE
+          Block with if/elseif
+          Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $c
@@ -44,8 +44,8 @@ Label : CODE
             Label : CODE
               $b
           Label : THEN
-            Block With if/elseif
-            Label : CODE
+            Block with if/elseif
+            Label : ELEMENT
               ++
               Label : POSTPLUSPLUS
                 $c
@@ -56,8 +56,8 @@ Label : CODE
               Label : CODE
                 $b
             Label : THEN
-              Block With if/elseif
-              Label : CODE
+              Block with if/elseif
+              Label : ELEMENT
                 ++
                 Label : POSTPLUSPLUS
                   $c
@@ -68,8 +68,8 @@ Label : CODE
                 Label : CODE
                   $b
               Label : THEN
-                Block With if/elseif
-                Label : CODE
+                Block with if/elseif
+                Label : ELEMENT
                   ++
                   Label : POSTPLUSPLUS
                     $c
@@ -80,8 +80,8 @@ Label : CODE
                   Label : CODE
                     $b
                 Label : THEN
-                  Block With if/elseif
-                  Label : CODE
+                  Block with if/elseif
+                  Label : ELEMENT
                     ++
                     Label : POSTPLUSPLUS
                       $c
@@ -92,8 +92,8 @@ Label : CODE
                     Label : CODE
                       $b
                   Label : THEN
-                    Block With if/elseif
-                    Label : CODE
+                    Block with if/elseif
+                    Label : ELEMENT
                       ++
                       Label : POSTPLUSPLUS
                         $c

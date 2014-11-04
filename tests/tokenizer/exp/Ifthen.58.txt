@@ -1,6 +1,32 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a
+    Label : THEN
+      void
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            2
+          Label : LEFT
+            $b
+      Label : THEN
+        void
+      Label : ELSE
+        void
   Label : ELEMENT
     if
     Label : CONDITION
@@ -89,32 +115,6 @@ Label : CODE
           void
         Label : ELSE
           void
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          1
-        Label : LEFT
-          $a
-    Label : THEN
-      void
-    Label : ELSE
-      elseif
-      Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : RIGHT
-            2
-          Label : LEFT
-            $b
-      Label : THEN
-        void
-      Label : ELSE
-        void
   Label : ELEMENT
     if
     Label : CONDITION

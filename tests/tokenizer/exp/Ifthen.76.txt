@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     function
     Label : ARGUMENTS
@@ -12,87 +12,83 @@ Label : CODE
       B
     Label : BLOCK
       {
-      Label : CODE
-        makeSequence
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              ||
-              Label : LEFT
+      Label : ELEMENT
+        return
+        Label : RETURN
+          K
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            ->
+            Label : PROPERTY
+              H
+            Label : OBJECT
+              $f
+        Label : THEN
+          Block with if/elseif
+          Label : ELEMENT
+            return
+            Label : RETURN
+              !
+              Label : NOT
                 !
                 Label : NOT
-                  $b
-              Label : RIGHT
-                !
-                Label : NOT
-                  C
+                  I
                   Label : ARGUMENTS
-                    void
+                    ,
                     Label : ARGUMENT
-                      $c
-          Label : THEN
-            Block With if/elseif
-            Label : CODE
-              return
-              Label : RETURN
-                D
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              ->
-              Label : PROPERTY
-                H
-              Label : OBJECT
-                $f
-          Label : THEN
-            Block With if/elseif
-            Label : CODE
-              return
-              Label : RETURN
-                !
-                Label : NOT
-                  !
-                  Label : NOT
-                    makeSequence
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        K
-                    Label : ELEMENT
-                      I
-                      Label : ARGUMENTS
-                        ,
-                        Label : ARGUMENT
-                          ->
-                          Label : PROPERTY
-                            J
-                          Label : OBJECT
-                            $g
-                        Label : ARGUMENT
-                          $h
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              E
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  ->
-                  Label : PROPERTY
-                    F
-                  Label : OBJECT
-                    $d
-                Label : ARGUMENT
-                  $e
-          Label : THEN
-            Block With if/elseif
-            Label : CODE
-              return
-              Label : RETURN
-                G
+                      ->
+                      Label : PROPERTY
+                        J
+                      Label : OBJECT
+                        $g
+                    Label : ARGUMENT
+                      $h
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            E
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                ->
+                Label : PROPERTY
+                  F
+                Label : OBJECT
+                  $d
+              Label : ARGUMENT
+                $e
+        Label : THEN
+          Block with if/elseif
+          Label : ELEMENT
+            return
+            Label : RETURN
+              G
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            ||
+            Label : LEFT
+              !
+              Label : NOT
+                $b
+            Label : RIGHT
+              !
+              Label : NOT
+                C
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $c
+        Label : THEN
+          Block with if/elseif
+          Label : ELEMENT
+            return
+            Label : RETURN
+              D

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_CURLY
   Label : ELEMENT
     if
     Label : CONDITION
@@ -10,30 +10,28 @@ Label : CODE
         $a
     Label : THEN
       {
-      Label : CODE
-        makeSequence
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            preg_replace
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                "
-                Label : CONTAIN
-                  Concatenation
-                  Label : CONCAT
-                    /x
-                  Label : CONCAT
-                    $y
-                  Label : CONCAT
-                    /
-              Label : ARGUMENT
-                "z"
-          Label : LEFT
-            $a
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          preg_replace
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              "
+              Label : CONTAIN
+                Concatenation
+                Label : CONCAT
+                  /x
+                Label : CONCAT
+                  $y
+                Label : CONCAT
+                  /
+            Label : ARGUMENT
+              "z"
+            Label : ARGUMENT
+              $f
+        Label : LEFT
+          $a
   Label : ELEMENT
     if
     Label : CONDITION
@@ -41,7 +39,7 @@ Label : CODE
       Label : CODE
         $b
     Label : THEN
-      makeSequence
+      Block with if/elseif
       Label : ELEMENT
         .=
         Label : RIGHT
@@ -57,7 +55,7 @@ Label : CODE
         Label : LEFT
           $c
     Label : ELSE
-      makeSequence
+      Block with else
       Label : ELEMENT
         .=
         Label : RIGHT

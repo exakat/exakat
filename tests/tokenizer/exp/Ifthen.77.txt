@@ -1,7 +1,45 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_CATCH
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ->
+        Label : OBJECT
+          $a
+        Label : METHOD
+          B
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+    Label : THEN
+      Block with if/elseif
+      Label : ELEMENT
+        try
+        Label : CODE
+          {
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+        Label : CATCH
+          catch
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+          Label : CLASS
+            \
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              C
+          Label : VARIABLE
+            $c
   Label : ELEMENT
     if
     Label : CONDITION
@@ -10,49 +48,7 @@ Label : CODE
         $d
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $e
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ->
-        Label : METHOD
-          B
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-        Label : OBJECT
-          $a
-    Label : THEN
-      Block With if/elseif
-      Label : CODE
-        try
-        Label : CODE
-          {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $b
-        Label : CATCH
-          catch
-          Label : CLASS
-            \
-            Label : ELEMENT
-              C
-            Label : ELEMENT
-              D
-          Label : CODE
-            {
-            Label : CODE
-              void
-          Label : VARIABLE
-            $c
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $e

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_CURLY
   Label : ELEMENT
     if
     Label : CONDITION
@@ -14,52 +14,44 @@ Label : CODE
           $l
     Label : THEN
       {
-      Label : CODE
-        makeSequence
-        Label : ELEMENT
-          if
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $b
+        Label : THEN
+          {
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+        Label : ELSE
+          elseif
           Label : CONDITION
             (
             Label : CODE
               =
               Label : RIGHT
-                1
+                2
               Label : LEFT
                 $b
           Label : THEN
             {
-            Label : CODE
-              ;
-              Label : ELEMENT
-                ++
-                Label : POSTPLUSPLUS
-                  $b
-          Label : ELSE
-            elseif
-            Label : CONDITION
-              (
-              Label : CODE
-                =
-                Label : RIGHT
-                  2
-                Label : LEFT
-                  $b
-            Label : THEN
-              {
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  ++
-                  Label : POSTPLUSPLUS
-                    $a
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a
     Label : ELSE
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $d
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $d
   Label : ELEMENT
     if
     Label : CONDITION
@@ -72,16 +64,14 @@ Label : CODE
           $l
     Label : THEN
       {
-      Label : CODE
+      Label : ELEMENT
         void
     Label : ELSE
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a
   Label : ELEMENT
     if
     Label : CONDITION
@@ -94,13 +84,11 @@ Label : CODE
           $l
     Label : THEN
       {
-      Label : CODE
+      Label : ELEMENT
         void
     Label : ELSE
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $b
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $b

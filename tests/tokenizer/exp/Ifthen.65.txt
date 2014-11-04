@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
     Label : RIGHT
@@ -10,14 +10,14 @@ Label : CODE
         void
         Label : ARGUMENT
           [
-          Label : INDEX
-            'J'
           Label : VARIABLE
             [
-            Label : INDEX
-              'H'
             Label : VARIABLE
               $e
+            Label : INDEX
+              'H'
+          Label : INDEX
+            'J'
     Label : LEFT
       $d
   Label : ELEMENT
@@ -26,6 +26,8 @@ Label : CODE
       array
       Label : ARGUMENTS
         void
+        Label : ARGUMENT
+          void
     Label : LEFT
       $f
   Label : ELEMENT
@@ -40,27 +42,29 @@ Label : CODE
             void
             Label : ARGUMENT
               [
-              Label : INDEX
-                'E'
               Label : VARIABLE
                 [
-                Label : INDEX
-                  'C'
                 Label : VARIABLE
                   $c
+                Label : INDEX
+                  'C'
+              Label : INDEX
+                'E'
     Label : THEN
-      Block With if/elseif
-      Label : CODE
+      Block with if/elseif
+      Label : ELEMENT
         return
         Label : RETURN
           array
           Label : ARGUMENTS
             void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $a
+            Label : ARGUMENT
+              void
   Label : ELEMENT
     global
     Label : NAME
       $b
+  Label : ELEMENT
+    global
+    Label : NAME
+      $a

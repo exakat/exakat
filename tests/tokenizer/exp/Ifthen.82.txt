@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     for
     Label : INIT
@@ -21,7 +21,7 @@ Label : CODE
       Label : POSTPLUSPLUS
         $d
     Label : BLOCK
-      makeSequence
+      makeSequence T_CLOSE_CURLY
       Label : ELEMENT
         A
       Label : ELEMENT

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -15,7 +15,7 @@ Label : CODE
         Label : RETURN
           $b
     Label : ELSE
-      makeSequence
+      Block with else
       Label : ELEMENT
         return
         Label : RETURN

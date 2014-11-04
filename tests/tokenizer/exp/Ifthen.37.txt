@@ -1,56 +1,62 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     switch
     Label : NAME
       $a
     Label : CASES
-      {
-      Label : CODE
-        Sequence Case Default
-        Label : ELEMENT
-          case
-          Label : CODE
-            makeSequence
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $c
-              Label : THEN
-                {
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    $e
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $h
-              Label : THEN
-                {
-                Label : CODE
-                  void
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  $g
-              Label : THEN
-                {
-                Label : CODE
-                  void
-            Label : ELEMENT
-              break
-              Label : LEVEL
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block with Sequence For Case Without Semicolon
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $g
+            Label : THEN
+              {
+              Label : ELEMENT
                 void
-            Label : ELEMENT
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $h
+            Label : THEN
+              {
+              Label : ELEMENT
+                void
+          Label : ELEMENT
+            require_once
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                a
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'b'
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $c
+            Label : THEN
+              {
+              Label : ELEMENT
+                $e
+            Label : ELSE
               elseif
               Label : CONDITION
                 (
@@ -60,31 +66,21 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       [
-                      Label : INDEX
-                        'h'
                       Label : VARIABLE
                         $g
+                      Label : INDEX
+                        'h'
               Label : THEN
                 {
-                Label : CODE
+                Label : ELEMENT
                   void
-            Label : ELEMENT
-              require_once
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  a
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      'b'
-          Label : CASE
-            'b'
-        Label : ELEMENT
-          default
-          Label : CODE
-            Block With Sequence For Default
-            Label : CODE
-              return
-              Label : RETURN
-                false
+        Label : CASE
+          'b'
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block with Sequence For Default
+          Label : ELEMENT
+            return
+            Label : RETURN
+              false

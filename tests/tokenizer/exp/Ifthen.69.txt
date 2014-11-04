@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -17,8 +17,8 @@ Label : CODE
           Label : OBJECT
             $a
     Label : THEN
-      Block With if/elseif
-      Label : CODE
+      Block with if/elseif
+      Label : ELEMENT
         if
         Label : CONDITION
           (
@@ -44,14 +44,14 @@ Label : CODE
                   ,
                   Label : ARGUMENT
                     [
-                    Label : INDEX
-                      'H'
                     Label : VARIABLE
                       [
-                      Label : INDEX
-                        'G'
                       Label : VARIABLE
                         $c
+                      Label : INDEX
+                        'G'
+                    Label : INDEX
+                      'H'
                   Label : ARGUMENT
                     ->
                     Label : PROPERTY
@@ -59,8 +59,8 @@ Label : CODE
                     Label : OBJECT
                       $d
           Label : THEN
-            Block With if/elseif
-            Label : CODE
+            Block with if/elseif
+            Label : ELEMENT
               return
               Label : RETURN
                 J
@@ -79,8 +79,8 @@ Label : CODE
             Label : OBJECT
               $e
       Label : THEN
-        Block With if/elseif
-        Label : CODE
+        Block with if/elseif
+        Label : ELEMENT
           if
           Label : CONDITION
             (
@@ -106,14 +106,14 @@ Label : CODE
                     ,
                     Label : ARGUMENT
                       [
-                      Label : INDEX
-                        'Q'
                       Label : VARIABLE
                         [
-                        Label : INDEX
-                          'P'
                         Label : VARIABLE
                           $g
+                        Label : INDEX
+                          'P'
+                      Label : INDEX
+                        'Q'
                     Label : ARGUMENT
                       ->
                       Label : PROPERTY
@@ -121,8 +121,8 @@ Label : CODE
                       Label : OBJECT
                         $h
             Label : THEN
-              Block With if/elseif
-              Label : CODE
+              Block with if/elseif
+              Label : ELEMENT
                 return
                 Label : RETURN
                   S
@@ -150,14 +150,14 @@ Label : CODE
                 ,
                 Label : ARGUMENT
                   [
-                  Label : INDEX
-                    'X'
                   Label : VARIABLE
                     [
-                    Label : INDEX
-                      'W'
                     Label : VARIABLE
                       $j
+                    Label : INDEX
+                      'W'
+                  Label : INDEX
+                    'X'
                 Label : ARGUMENT
                   ->
                   Label : PROPERTY
@@ -165,8 +165,8 @@ Label : CODE
                   Label : OBJECT
                     $k
           Label : THEN
-            Block With if/elseif
-            Label : CODE
+            Block with if/elseif
+            Label : ELEMENT
               return
               Label : RETURN
                 Z

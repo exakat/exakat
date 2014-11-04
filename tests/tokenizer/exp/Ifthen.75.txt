@@ -2,7 +2,7 @@
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence
+    makeSequence T_ENDIF
     Label : ELEMENT
       if
       Label : CONDITION
@@ -14,7 +14,7 @@ Label : ELEMENT
             Label : ARGUMENT
               $a
       Label : THEN
-        makeSequence
+        makeSequence T_INLINE_HTML
         Label : ELEMENT
           E
         Label : ELEMENT
@@ -36,7 +36,7 @@ Label : ELEMENT
           Label : CODE
             $b
         Label : THEN
-          makeSequence
+          makeSequence T_INLINE_HTML
           Label : ELEMENT
             I
           Label : ELEMENT
@@ -64,7 +64,7 @@ Label : ELEMENT
             Label : ARGUMENT
               $d
       Label : THEN
-        makeSequence
+        makeSequence T_INLINE_HTML
         Label : ELEMENT
           N
         Label : ELEMENT

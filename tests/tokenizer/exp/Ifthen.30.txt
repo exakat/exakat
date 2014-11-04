@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_SEMICOLON
   Label : ELEMENT
     if
     Label : CONDITION
@@ -13,8 +13,8 @@ Label : CODE
         Label : LEFT
           $a
     Label : THEN
-      Block With if/elseif
-      Label : CODE
+      Block with if/elseif
+      Label : ELEMENT
         =
         Label : RIGHT
           1

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -13,38 +13,38 @@ Label : CODE
         Label : OBJECT
           $a
     Label : THEN
-      makeSequence
+      Block with if/elseif
       Label : ELEMENT
         =
         Label : RIGHT
           1
         Label : LEFT
           [
+          Label : VARIABLE
+            $c
           Label : INDEX
             d
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 [
-                Label : INDEX
-                  $f
                 Label : VARIABLE
                   $e
-          Label : VARIABLE
-            $c
+                Label : INDEX
+                  $f
     Label : ELSE
-      makeSequence
+      Block with else
       Label : ELEMENT
         =
         Label : RIGHT
           1
         Label : LEFT
           [
-          Label : INDEX
-            [
-            Label : INDEX
-              $i
-            Label : VARIABLE
-              $h
           Label : VARIABLE
             $g
+          Label : INDEX
+            [
+            Label : VARIABLE
+              $h
+            Label : INDEX
+              $i

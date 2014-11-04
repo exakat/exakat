@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -17,8 +17,8 @@ Label : CODE
           Label : OBJECT
             $a
     Label : THEN
-      Block With if/elseif
-      Label : CODE
+      Block with if/elseif
+      Label : ELEMENT
         ->
         Label : OBJECT
           $b
@@ -48,40 +48,38 @@ Label : CODE
               $d
       Label : THEN
         {
-        Label : CODE
-          makeSequence
-          Label : ELEMENT
-            ->
-            Label : OBJECT
-              $g
-            Label : METHOD
-              N
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  ->
-                  Label : PROPERTY
-                    O
-                  Label : OBJECT
-                    $h
-                Label : ARGUMENT
-                  'P'
-          Label : ELEMENT
-            ->
-            Label : OBJECT
-              $e
-            Label : METHOD
-              J
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  ->
-                  Label : PROPERTY
-                    K
-                  Label : OBJECT
-                    $f
-                Label : ARGUMENT
-                  'L'
+        Label : ELEMENT
+          ->
+          Label : OBJECT
+            $e
+          Label : METHOD
+            J
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                ->
+                Label : PROPERTY
+                  K
+                Label : OBJECT
+                  $f
+              Label : ARGUMENT
+                'L'
+        Label : ELEMENT
+          ->
+          Label : OBJECT
+            $g
+          Label : METHOD
+            N
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                ->
+                Label : PROPERTY
+                  O
+                Label : OBJECT
+                  $h
+              Label : ARGUMENT
+                'P'
       Label : ELSE
         elseif
         Label : CONDITION
@@ -97,8 +95,8 @@ Label : CODE
               Label : OBJECT
                 $i
         Label : THEN
-          Block With if/elseif
-          Label : CODE
+          Block with if/elseif
+          Label : ELEMENT
             ->
             Label : OBJECT
               $j
@@ -129,8 +127,8 @@ Label : CODE
                 Label : OBJECT
                   $l
           Label : THEN
-            Block With if/elseif
-            Label : CODE
+            Block with if/elseif
+            Label : ELEMENT
               ->
               Label : OBJECT
                 $m
@@ -157,7 +155,7 @@ Label : CODE
                 Label : OBJECT
                   $o
             Label : THEN
-              makeSequence
+              Block with if/elseif
               Label : ELEMENT
                 ->
                 Label : OBJECT
