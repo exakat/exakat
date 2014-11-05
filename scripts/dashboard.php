@@ -134,22 +134,6 @@ foreach($files as $file) {
     }
 }
 
-/*
-if ($report_md) {
-    print count($report_md)." projects are missing markdown export\n";
-    print "  + ".join("\n  + ", $report_md)."\n\n";
-} else {
-    print "All ".count($report_md)." projects have the markdown export\n";
-}
-
-if ($sqlite_md) {
-    print count($sqlite_md)." projects are missing sqlite export\n";
-    print "  + ".join("\n  + ", $sqlite_md)."\n\n";
-} else {
-    print "All ".count($files)." projects have the sqlite export\n";
-}
-*/
-
 $files = glob('human/en/*/*');
 $extra_docs = array();
 foreach($files as $k => $v) {
@@ -194,23 +178,48 @@ while($row = $res->fetchArray()) {
 
 $missing_in_sqlite = array_diff($analyzers, $in_sqlite);
 
-$id_unassigned = $sqlite->query("select id from categories where name='Unassigned'")->fetchArray();
-$id_unassigned = $id_unassigned[0];
 
 if (count($missing_in_sqlite)) {
     print count($missing_in_sqlite)." analysers missing in Sqlite. Inserting them\n";
+
+    $id_unassigned = $sqlite->query("SELECT id FROM categories WHERE name='Unassigned'")->fetchArray();
+    $id_unassigned = $id_unassigned[0];
     
     foreach($missing_in_sqlite as $analyser) {
         list($folder, $name) = explode('/', $analyser);
         
-        $sqlite->query("insert into analyzers ('folder', 'name') values ('$folder', '$name')");
+        $sqlite->query("INSERT INTO analyzers ('folder', 'name') VALUES ('$folder', '$name')");
         $id = $sqlite->lastInsertRowID();
 
-        $sqlite->query("insert into analyzers_categories values ('$id', '$id_unassigned')"); 
+        $sqlite->query("INSERT INTO analyzers_categories VALUES ('$id', '$id_unassigned')"); 
     }
 }
 
-$total = $sqlite->query("select count(*) from analyzers;")->fetchArray(); 
+$missing_severity = $sqlite->query("SELECT count(*) FROM categories c
+JOIN analyzers_categories ac ON c.id = ac.id_categories
+JOIN analyzers a ON ac.id_analyzer = a.id
+WHERE (c.name in ('Analyze', 'Coding Conventions', 'Dead code')) AND a.severity IS NULL")->fetchArray()[0];
+if ($missing_severity == 0) {
+    print "All analysers are missing severity in Sqlite.\n";
+
+} else {
+    print $missing_severity." analysers are missing severity in Sqlite.\n";
+
+    $res = $sqlite->query("SELECT a.folder, a.name FROM categories c
+JOIN analyzers_categories ac ON c.id = ac.id_categories
+JOIN analyzers a ON ac.id_analyzer = a.id
+WHERE (c.name in ('Analyze', 'Coding Conventions', 'Dead code')) AND a.severity IS NULL");
+
+    while ($row = $res->fetchArray()) {
+        print '+ '.$row['folder'].'/'.$row['name']."\n";
+    }
+
+//    print_r($missing_severity);
+}
+
+
+
+$total = $sqlite->query("SELECT count(*) FROM analyzers;")->fetchArray(); 
 $total = $total[0];
 $unassigned = $sqlite->query("select count(*) from analyzers_categories as ac join categories as c on ac.id_categories = c.id WHERE c.name='Unassigned';")->fetchArray(); 
 if ($unassigned[0] > 0) { 
