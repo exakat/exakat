@@ -2352,6 +2352,7 @@ list_after_token = [
 
 if (     $it.token != 'T_ELSEIF'
     &&   $it.in('NEXT').any()
+    &&   $it.out('NEXT').any()
     &&  ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' )
     &&  ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))
     &&  ($it.in('NEXT').next().atom != null || !($it.out('NEXT').next().token in list_after) )
