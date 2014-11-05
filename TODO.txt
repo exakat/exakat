@@ -459,3 +459,11 @@ List stacked conditions and spot if they are incompatible
 Empty function that override another are not useless. 
 
 $a['b'] = 3;  print "$a[b]\n"; : b is not a constant! 
+
+Validate magic methods arguments in the definition
+
+Retirer la dépendance à config.ini
+
+Installer les mdp hors du code(!!)
+
+Add support for PHP 7 and for multiple PHP installation (and for missing PHP installs).
