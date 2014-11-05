@@ -2351,6 +2351,7 @@ list_after_token = [
         ];
 
 if (     $it.token != 'T_ELSEIF'
+    &&   $it.in('NEXT').any()
     &&  ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' )
     &&  ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))
     &&  ($it.in('NEXT').next().atom != null || !($it.out('NEXT').next().token in list_after) )
@@ -2362,8 +2363,8 @@ if (     $it.token != 'T_ELSEIF'
     && !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR']}.any()) /* \$x{\$b - 2} */
     ) {
 
-    $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
-    $it.setProperty('makeSequence4',  $it.out('NEXT').next().token);
+//    $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
+//    $it.setProperty('makeSequence4',  $it.out('NEXT').next().token);
 
     if ( $it.both('NEXT').has('atom', 'Sequence').count() == 2 &&
         ($it.in('NEXT').next().block != 'true')) {
