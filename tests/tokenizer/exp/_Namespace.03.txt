@@ -13,4 +13,4 @@ Label : CODE
       Label : SUBNAME
         A
     Label : BLOCK
-      
+      void

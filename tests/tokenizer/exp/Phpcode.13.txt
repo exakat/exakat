@@ -2,7 +2,7 @@
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence
+    makeSequence T_SEMICOLON
     Label : ELEMENT
       if
       Label : CONDITION
@@ -11,17 +11,17 @@ Label : ELEMENT
           !
           Label : NOT
             ->
+            Label : OBJECT
+              $a
             Label : METHOD
               C
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
-            Label : OBJECT
-              $a
       Label : THEN
-        Block With if/elseif
-        Label : CODE
+        Block with if/elseif
+        Label : ELEMENT
           echo
           Label : ARGUMENTS
             void

@@ -7,4 +7,4 @@ Label : CODE
     Label : NAMESPACE
       A
     Label : BLOCK
-      
+      void

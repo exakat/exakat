@@ -1,38 +1,40 @@
 <?php
 
-Label : CODE
-  makeSequence
-  Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      A
-    Label : BLOCK
+Label : NEXT
+  namespace
+  Label : NEXT
+    A
+    Label : NEXT
       {
-      Label : CODE
-        makeSequence
+      Label : NEXT
+        makeSequence T_CLOSE_CURLY
+        Label : NEXT
+          ?>
+          Label : NEXT
+            /**/
+            Label : NEXT
+              /* * */
         Label : ELEMENT
-          =
-          Label : RIGHT
-            new
-            Label : NEW
-              \
-              Label : ELEMENT
-                namespace
-              Label : ELEMENT
-                Another
-          Label : LEFT
-            $obj
-  Label : ELEMENT
-    namespace
-    Label : NAMESPACE
-      Global
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          +
-          Label : RIGHT
-            2
-          Label : LEFT
-            1
+          namespace
+          Label : NAMESPACE
+            Global
+          Label : BLOCK
+            {
+            Label : ELEMENT
+              +
+              Label : RIGHT
+                2
+              Label : LEFT
+                1
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          new
+          Label : NEW
+            \
+            Label : SUBNAME
+              Another
+            Label : SUBNAME
+              namespace
+        Label : LEFT
+          $obj

@@ -1,1 +1,20 @@
-A
+;
+Label : ELEMENT
+  B
+
+Label : ELEMENT
+  <?php
+  Label : CODE
+    makeSequence T_OPEN_TAG
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            $d
+          Label : INDEX
+            'e'
+Label : ELEMENT
+  A

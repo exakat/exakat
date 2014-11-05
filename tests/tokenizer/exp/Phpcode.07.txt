@@ -1,8 +1,6 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    void
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     ++
     Label : POSTPLUSPLUS

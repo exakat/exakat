@@ -1,10 +1,10 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     ++
     Label : POSTPLUSPLUS
-      $a
+      $c
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -18,4 +18,4 @@ Label : CODE
   Label : ELEMENT
     ++
     Label : POSTPLUSPLUS
-      $c
+      $a

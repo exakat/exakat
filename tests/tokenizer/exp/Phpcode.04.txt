@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  =
-  Label : LEFT
-    $x
-  Label : RIGHT
-    'y'
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'y'
+    Label : LEFT
+      $x
