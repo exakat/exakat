@@ -10,7 +10,7 @@ class Phpcode extends TokenAuto {
         // Normal PHP script
         $this->conditions = array(0 => array('token' => Phpcode::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('atom'  => 'yes'),
+                                  1 => array('atom'  => 'Sequence'),
                                   2 => array('token' => 'T_CLOSE_TAG'),
         );
         

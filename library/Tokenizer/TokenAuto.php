@@ -1523,20 +1523,20 @@ g.addEdge(it, end, 'NEXT');
         
         if (isset($actions['insert_ns_void'])) {
             $qactions[] = "
-/* insert namespace with void */
+/* insert void for namespace */
 
 it.setProperty('no_block', 'true');
 
-g.addEdge(it, it.out('NEXT').next(), 'NAMESPACE');
-g.idx('delete').put('node', 'delete', it.out('NEXT').out('NEXT').next());
-tvoid = g.addVertex(null, [code:'', atom:'Void', virtual:true, line:it.line, token:'T_VOID', fullcode:' ']);
+g.addEdge(it, a1, 'NAMESPACE');
+
+tvoid = g.addVertex(null, [code:'void', fullcode:' ', atom:'Void', token:'T_VOID', virtual:true, line:it.line, line:it.line]);
 g.addEdge(it, tvoid, 'BLOCK');
 
-end = it.out('NEXT').out('NEXT').out('NEXT').next();
+a1.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
+a2.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
+g.idx('delete').put('node', 'delete', a2);
 
-it.out('NEXT').bothE('NEXT', 'INDEXED').each{ g.removeEdge(it) }
-
-g.addEdge(it, end, 'NEXT');
+g.addEdge(it, a3, 'NEXT');
 
 ";
             unset($actions['insert_ns_void']);
