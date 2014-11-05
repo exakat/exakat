@@ -1,0 +1,74 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $h
+    Label : RIGHT
+      &
+      Label : LEFT
+        $f
+      Label : RIGHT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $g
+  Label : ELEMENT
+    &
+    Label : LEFT
+      i
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          &&
+          Label : LEFT
+            $a
+          Label : RIGHT
+            $b
+    Label : RIGHT
+      =
+      Label : LEFT
+        $d
+      Label : RIGHT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
+  Label : ELEMENT
+    &
+    Label : LEFT
+      (
+      Label : CODE
+        &&
+        Label : LEFT
+          $a
+        Label : RIGHT
+          $b
+    Label : RIGHT
+      =
+      Label : LEFT
+        $d
+      Label : RIGHT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
+  Label : ELEMENT
+    &
+    Label : LEFT
+      $a
+    Label : RIGHT
+      =
+      Label : LEFT
+        $b
+      Label : RIGHT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $c

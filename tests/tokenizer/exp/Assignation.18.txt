@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     .=
     Label : LEFT
@@ -10,11 +10,11 @@ Label : CODE
       ^
       Label : LEFT
         [
+        Label : VARIABLE
+          $b
         Label : INDEX
           ++
           Label : PREPLUSPLUS
             $c
-        Label : VARIABLE
-          $b
       Label : RIGHT
         $d

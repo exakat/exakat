@@ -1,90 +1,82 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     switch
     Label : NAME
       [
-      Label : INDEX
-        'B'
       Label : VARIABLE
         $a
+      Label : INDEX
+        'B'
     Label : CASES
-      {
-      Label : CODE
-        Sequence Case Default
-        Label : ELEMENT
-          case
-          Label : CODE
-            makeSequence
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                (string)
-                Label : CAST
-                  makeSequence
-                  Label : ELEMENT
-                    =
-                    Label : RIGHT
-                      ->
-                      Label : PROPERTY
-                        G
-                      Label : OBJECT
-                        ->
-                        Label : PROPERTY
-                          F
-                        Label : OBJECT
-                          $e
-                    Label : LEFT
-                      $d
-                  Label : ELEMENT
-                    D
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          'E'
-                        Label : VARIABLE
-                          $c
-              Label : LEFT
-                $b
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  H
-                  Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      $f
-                    Label : ARGUMENT
-                      'I'
-              Label : THEN
-                {
-                Label : CODE
-                  makeSequence
-                  Label : ELEMENT
-                    =
-                    Label : RIGHT
-                      'J'
-                    Label : LEFT
-                      $g
-              Label : ELSE
-                {
-                Label : CODE
-                  makeSequence
-                  Label : ELEMENT
-                    =
-                    Label : RIGHT
-                      'K'
-                    Label : LEFT
-                      $h
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-          Label : CASE
-            'C'
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              (string)
+              Label : CAST
+                D
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $c
+                    Label : INDEX
+                      'E'
+            Label : LEFT
+              $b
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                H
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    $f
+                  Label : ARGUMENT
+                    'I'
+            Label : THEN
+              {
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  'J'
+                Label : LEFT
+                  $g
+            Label : ELSE
+              {
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  'K'
+                Label : LEFT
+                  $h
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ->
+              Label : PROPERTY
+                G
+              Label : OBJECT
+                ->
+                Label : PROPERTY
+                  F
+                Label : OBJECT
+                  $e
+            Label : LEFT
+              $d
+        Label : CASE
+          'C'

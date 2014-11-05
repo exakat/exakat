@@ -1,20 +1,20 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
+    Label : RIGHT
+      ++
+      Label : PREPLUSPLUS
+        ::
+        Label : PROPERTY
+          $b
+        Label : CLASS
+          self
     Label : LEFT
       ->
       Label : PROPERTY
         a
       Label : OBJECT
         $this
-    Label : RIGHT
-      ++
-      Label : PREPLUSPLUS
-        ::
-        Label : CLASS
-          self
-        Label : PROPERTY
-          $b

@@ -1,12 +1,14 @@
 <?php
 
 Label : CODE
-  =
-  Label : LEFT
-    $x
-  Label : RIGHT
-    .
-    Label : CONCAT
-      '1'
-    Label : CONCAT
-      "2"
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      .
+      Label : CONCAT
+        '1'
+      Label : CONCAT
+        "2"
+    Label : LEFT
+      $x

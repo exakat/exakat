@@ -1,16 +1,16 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      (int)
-      Label : CAST
-        $a
     Label : RIGHT
       array_pop
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           $b
+    Label : LEFT
+      (int)
+      Label : CAST
+        $a

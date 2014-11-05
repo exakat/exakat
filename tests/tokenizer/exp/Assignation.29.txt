@@ -1,27 +1,27 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       .
       Label : CONCAT
         ::
-        Label : CLASS
-          \
-          Label : ELEMENT
-            B
-          Label : ELEMENT
-            A
-          Label : ELEMENT
-            C
         Label : METHOD
           d
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'e'
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            B
+          Label : SUBNAME
+            A
       Label : CONCAT
         'f'
+    Label : LEFT
+      $a
