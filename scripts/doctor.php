@@ -99,17 +99,26 @@ if (!file_exists('neo4j')) {
     } else {
         $stats['neo4j']['port'] = $r[1];
     }
+    
+    $json = file_get_contents('http://127.0.0.1:7474/db/data/');
+    $json = json_decode($json);
+    if (isset($json->extensions->GremlinPlugin)) {
+        $stats['neo4j']['gremlin'] = 'Yes';
+        $stats['neo4j']['gremlin-url'] = $json->extensions->GremlinPlugin->execute_script;
+    } else {
+        $stats['neo4j']['gremlin'] = 'No';
+    }
 }
 
 // batch-importer
 if (!file_exists('batch-import')) {
     $stats['batch-import']['installed'] = 'No';
 } else {
-    if (!file_exists('batch-import/target/batch-import-jar-with-dependencies.jar')) {
+    if (!file_exists('./batch-import/target/batch-import-jar-with-dependencies.jar')) {
         $stats['batch-import']['compiled'] = 'No';
         // compile with "mvn clean compile assembly:single"
     } else {
-        $stats['batch-import']['installed'] = 'No';
+        $stats['batch-import']['installed'] = 'Yes';
         $stats['batch-import']['compiled'] = 'Yes';
     
         $file = file('batch-import/changelog.txt');
@@ -133,6 +142,20 @@ if (preg_match('/Screen version (\d+.\d+.\d+)/is', $res, $r)) {
     $stats['screen']['version'] = $r[1];
 } else {
     $stats['screen']['installed'] = 'No';
+}
+
+// projects
+if (!file_exists('./projects/')) {
+    $stats['projects']['created'] = 'Yes';
+} else {
+    $stats['projects']['created'] = 'No';
+}
+
+// projects
+if (!file_exists('./log/')) {
+    $stats['log']['created'] = 'Yes';
+} else {
+    $stats['log']['created'] = 'No';
 }
 
 // svn
