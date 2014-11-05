@@ -217,8 +217,6 @@ class Analyzer {
     public function init() {
         $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
         if ($result[0][0] == 0) {
-            print __METHOD__."\n";
-            print $result[0][0]."\n";
             $this->query("g.createIndex('analyzers', Vertex)");
         }
         
