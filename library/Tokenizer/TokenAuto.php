@@ -526,21 +526,19 @@ g.removeVertex(arg2);
             $qactions[] = "
 /* to use with const or function */
 
-    extra = it.out('NEXT').next();
-    if (extra.token == 'T_CONST') {
+    if (a1.token == 'T_CONST') {
         link = 'CONST';
     } else {
         link = 'FUNCTION';
     }
-    arg = extra.out('NEXT').next();
-    end = arg.out('NEXT').next();
+    end = a2.out('NEXT').next();
 
-    extra.bothE('NEXT').each{ g.removeEdge(it); }
-    arg.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+    a1.bothE('NEXT').each{ g.removeEdge(it); }
+    a2.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
     g.addEdge(it, end, 'NEXT');
-    g.addEdge(it, arg, link);
+    g.addEdge(it, a2, link);
     
-    g.idx('delete').put('node', 'delete', extra);   
+    g.idx('delete').put('node', 'delete', a1);   
 
 ";
             unset($actions['to_use_const']);
