@@ -433,7 +433,7 @@ function process_file($filename, $log_file) {
                     $Tid++;
                 }
                 
-                if ( $previous->getProperty('code') != ';') {
+                if ( !in_array($previous->getProperty('code'), array(';', '{')) {
                     $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                   ->setProperty('code', ';')
                                                   ->setProperty('line', $line)
