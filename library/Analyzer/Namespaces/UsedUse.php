@@ -69,6 +69,21 @@ class UsedUse extends Analyzer\Analyzer {
              ->samePropertyAs('code', 'use')
              ->back('result');
         $this->prepareQuery();
+        
+            // multiple implements
+        $this->atomIs("Use")
+             ->outIs('USE')
+             ->_as('result')
+             ->savePropertyAs('code', 'use')
+             ->inIs('USE')
+             ->inIs('ELEMENT')
+             ->inIs(array('CODE', 'BLOCK'))
+             ->atomInside('Class')
+             ->outIs(array('EXTENDS', 'IMPLEMENTS'))
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('code', 'use')
+             ->back('result');
+        $this->prepareQuery();
 
     // case of simple use in a extends
         $this->atomIs("Use")
@@ -97,7 +112,7 @@ class UsedUse extends Analyzer\Analyzer {
              ->samePropertyAs('code', 'use')
              ->back('result');
         $this->prepareQuery();
-
+        
     // case of simple use in a Static constant
         $this->atomIs("Use")
              ->outIs('USE')
@@ -221,6 +236,22 @@ class UsedUse extends Analyzer\Analyzer {
              ->back('result');
         $this->prepareQuery();
 
+        $this->atomIs("Use")
+             ->outIs('USE')
+             ->_as('result')
+             ->outIs(array('AS', 'SUBNAME'))
+             ->savePropertyAs('code', 'use')
+             ->inIs(array('AS', 'SUBNAME'))
+             ->inIs('USE')
+             ->inIs('ELEMENT')
+             ->inIs(array('CODE', 'BLOCK'))
+             ->atomInside('Class')
+             ->outIs('IMPLEMENTS')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('code', 'use')
+             ->back('result');
+        $this->prepareQuery();
+        
     // case of simple use in a Static constant
         $this->atomIs("Use")
              ->outIs('USE')
