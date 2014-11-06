@@ -28,7 +28,6 @@ class x {
         static::c2;
         self::c2;
         parent::c2;
-
     }
 }
 ?>

@@ -8,10 +8,11 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_PssWithoutClass extends Analyzer {
-    /* 3 methods */
+    /* 4 methods */
 
     public function testClasses_PssWithoutClass01()  { $this->generic_test('Classes_PssWithoutClass.01'); }
     public function testClasses_PssWithoutClass02()  { $this->generic_test('Classes_PssWithoutClass.02'); }
     public function testClasses_PssWithoutClass03()  { $this->generic_test('Classes_PssWithoutClass.03'); }
+    public function testClasses_PssWithoutClass04()  { $this->generic_test('Classes_PssWithoutClass.04'); }
 }
 ?>
