@@ -725,7 +725,7 @@ g.idx('atoms')[['atom':'Functioncall']]
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
             fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.next();
             if (fullnspath.out('EXTENDS').any()) { 
-                fullnspath = fullnspath.next().fullnspath;
+                fullnspath = fullnspath.out('EXTENDS').next().fullnspath;
             } else {
                 fullnspath = it.code;
             }
@@ -750,7 +750,7 @@ g.idx('atoms')[['atom':'Staticmethodcall']]
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
             fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.next();
             if (fullnspath.out('EXTENDS').any()) { 
-                fullnspath = fullnspath.next().fullnspath;
+                fullnspath = fullnspath.out('EXTENDS').next().fullnspath;
             } else {
                 fullnspath = it.code;
             }
@@ -775,7 +775,7 @@ g.idx('atoms')[['atom':'Staticproperty']]
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
             fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.next();
             if (fullnspath.out('EXTENDS').any()) { 
-                fullnspath = fullnspath.next().fullnspath;
+                fullnspath = fullnspath.out('EXTENDS').next().fullnspath;
             } else {
                 fullnspath = it.code;
             }
@@ -800,7 +800,7 @@ g.idx('atoms')[['atom':'Staticconstant']]
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
             fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.next();
             if (fullnspath.out('EXTENDS').any()) { 
-                fullnspath = fullnspath.next().fullnspath;
+                fullnspath = fullnspath.out('EXTENDS').next().fullnspath;
             } else {
                 fullnspath = it.code;
             }
