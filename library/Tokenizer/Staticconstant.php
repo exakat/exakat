@@ -14,10 +14,10 @@ class Staticconstant extends TokenAuto {
                                     2 => array('filterOut'  => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),
                                  );
         
-        $this->actions = array('makeEdge'   => array( -1 => 'CLASS',
-                                                       1 => 'CONSTANT'),
-                               'atom'       => 'Staticconstant',
-                               'cleanIndex' => true,
+        $this->actions = array('transform'    => array( -1 => 'CLASS',
+                                                         1 => 'CONSTANT'),
+                               'atom'         => 'Staticconstant',
+                               'cleanIndex'   => true,
                                'makeSequence' => 'it' );
         $this->checkAuto(); 
 

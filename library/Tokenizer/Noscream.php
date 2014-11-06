@@ -15,7 +15,7 @@ class Noscream extends TokenAuto {
                                                                   'T_OPEN_CURLY'))
         );
         
-        $this->actions = array('makeEdge'     => array( '1' => 'AT'),
+        $this->actions = array('transform'    => array( '1' => 'AT'),
                                'atom'         => 'Noscream',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');

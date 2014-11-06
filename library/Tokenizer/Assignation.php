@@ -50,10 +50,10 @@ class Assignation extends TokenAuto {
                                                                                 'T_QUESTION', 'T_NS_SEPARATOR' ))),
         );
         
-        $this->actions = array('makeEdge'    => array( 1 => 'RIGHT',
-                                                      -1 => 'LEFT'),
-                               'atom'       => 'Assignation',
-                               'cleanIndex' => true,
+        $this->actions = array('transform'    => array( 1 => 'RIGHT',
+                                                       -1 => 'LEFT'),
+                               'atom'         => 'Assignation',
+                               'cleanIndex'   => true,
                                'makeSequence' => 'it');
         $this->checkAuto();
 

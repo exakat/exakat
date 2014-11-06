@@ -24,14 +24,13 @@ class Concatenation extends TokenAuto {
                                                                     Assignation::$operators, Preplusplus::$operators)),
         ); 
         
-        $this->actions = array('makeEdge'   => array( 1 => 'CONCAT',
-                                                     -1 => 'CONCAT'
-                                                      ),
-                               'rank'       => array( 1 => 1,
-                                                     -1 => 0 ),
-                               'mergeNext'  => array('Concatenation' => 'CONCAT'), 
-                               'atom'       => 'Concatenation',
-                               'cleanIndex' => true,
+        $this->actions = array('transform'    => array( 1 => 'CONCAT',
+                                                       -1 => 'CONCAT'),
+                               'rank'         => array( 1 => 1,
+                                                       -1 => 0 ),
+                               'mergeNext'    => array('Concatenation' => 'CONCAT'), 
+                               'atom'         => 'Concatenation',
+                               'cleanIndex'   => true,
                                'makeSequence' => 'clean',
                                );
         

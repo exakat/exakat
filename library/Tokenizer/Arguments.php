@@ -24,10 +24,9 @@ class Arguments extends TokenAuto {
                                                                  'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_CLOSE_TAG', 'T_INLINE_HTML')),
                                  );
         
-        $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
-                                                      -1 => 'ARGUMENT'
-                                                      ),
-                               'rank'       => array( 1 => '1',
+        $this->actions = array('transform'   => array( 1 => 'ARGUMENT',
+                                                      -1 => 'ARGUMENT'),
+                               'rank'        => array( 1 => '1',
                                                       -1 => '0'),
                                'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
                                'atom'        => 'Arguments',
@@ -43,9 +42,8 @@ class Arguments extends TokenAuto {
                                    2 => array('token' => 'T_OPEN_CURLY')
                                  );
         
-        $this->actions = array('makeEdge'    => array( 1 => 'ARGUMENT',
-                                                      -1 => 'ARGUMENT'
-                                                      ),
+        $this->actions = array('transform'   => array( 1 => 'ARGUMENT',
+                                                      -1 => 'ARGUMENT'),
                                'rank'        => array( 1 => '1',
                                                       -1 => '0'),
                                'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
@@ -55,16 +53,16 @@ class Arguments extends TokenAuto {
         $this->checkAuto();
 
         // @note End of )
-        $this->conditions = array(-2 => array('filterOut' => array("T_NS_SEPARATOR")),
+        $this->conditions = array(-2 => array('filterOut' => 'T_NS_SEPARATOR'),
                                   -1 => array('atom'      => $operands,
                                               'notAtom'   => 'Arguments'),
                                    0 => array('token'     => Arguments::$operators,
                                               'atom'      => 'none'),
                                    1 => array('token'     => 'T_CLOSE_PARENTHESIS',
                                               'atom'      => 'none'),
-        );
+                                  );
         
-        $this->actions = array('makeEdge'    => array(-1 => 'ARGUMENT'),
+        $this->actions = array('transform'   => array(-1 => 'ARGUMENT'),
                                'rank'        => array( 1 => '1',
                                                       -1 => '0'),
                                'atom'        => 'Arguments',

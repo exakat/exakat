@@ -24,7 +24,7 @@ class _Return extends TokenAuto {
                                    2 => array('filterOut2' => Token::$instruction_ending),
         );
         
-        $this->actions = array('makeEdge'     => array( 1 => 'RETURN'),
+        $this->actions = array('transform'    => array( 1 => 'RETURN'),
                                'atom'         => 'Return',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');

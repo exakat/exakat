@@ -17,7 +17,7 @@ class Property extends TokenAuto {
                                     2 => array('token' => array('T_OPEN_CURLY', 'T_OPEN_BRACKET')), 
                                     );
         
-        $this->actions = array('makeEdge'     => array( -1 => 'OBJECT',
+        $this->actions = array('transform'    => array( -1 => 'OBJECT',
                                                          1 => 'PROPERTY'),
                                'atom'         => 'Property',
                                'cleanIndex'   => true);
@@ -31,7 +31,7 @@ class Property extends TokenAuto {
                                     2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')), 
                                     );
         
-        $this->actions = array('makeEdge'     => array( -1 => 'OBJECT',
+        $this->actions = array('transform'    => array( -1 => 'OBJECT',
                                                          1 => 'PROPERTY'),
                                'atom'         => 'Property',
                                'cleanIndex'   => true,

@@ -14,7 +14,7 @@ class _As extends TokenAuto {
                                     1 => array('token' => 'T_STRING')
         );
         
-        $this->actions = array('makeEdge'     => array( 1 => 'RIGHT',
+        $this->actions = array('transform'    => array( 1 => 'RIGHT',
                                                        -1 => 'LEFT'),
                                'atom'         => 'As',
                                'cleanIndex'   => true,
@@ -29,7 +29,7 @@ class _As extends TokenAuto {
                                     1 => array('token'    => array('T_STRING', 'T_PUBLIC', 'T_PROTECTED', 'T_PRIVATE'))
         );
         
-        $this->actions = array('makeEdge'     => array( 1 => 'AS',
+        $this->actions = array('transform'    => array( 1 => 'AS',
                                                        -1 => 'SUBNAME'),
                                'atom'         => 'As',
                                'cleanIndex'   => true,

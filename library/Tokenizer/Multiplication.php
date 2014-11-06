@@ -30,7 +30,7 @@ class Multiplication extends TokenAuto {
                                                                           Power::$operators)),
         );
         
-        $this->actions = array('makeEdge'     => array(  1 => 'RIGHT',
+        $this->actions = array('transform'    => array(  1 => 'RIGHT',
                                                         -1 => 'LEFT'),
                                'atom'         => 'Multiplication',
                                'cleanIndex'   => true,

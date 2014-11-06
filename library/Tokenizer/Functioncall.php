@@ -38,8 +38,9 @@ class Functioncall extends TokenAuto {
                                                 'token' => 'T_CLOSE_PARENTHESIS')
         );
         
-        $this->actions = array('makeEdge'     => array(2 => 'ARGUMENTS'),
-                               'dropNext'     => array(1),
+        $this->actions = array('transform'    => array( 1 => 'DROP',
+                                                        2 => 'ARGUMENTS',
+                                                        3 => 'DROP'),
                                'atom'         => 'Functioncall',
                                'makeSequence' => 'it',
                                'property'     => array('parenthesis' => 'true'),
@@ -58,8 +59,9 @@ class Functioncall extends TokenAuto {
                                      4 => array('filterOut2' => array('T_COMMA', 'T_QUESTION')),
         );
         
-        $this->actions = array('makeEdge'     => array(2 => 'ARGUMENTS'),
-                               'dropNext'     => array(1),
+        $this->actions = array('transform'    => array( 1 => 'DROP',
+                                                        2 => 'ARGUMENTS',
+                                                        3 => 'DROP'),
                                'atom'         => 'Functioncall',
                                'makeSequence' => 'it',
                                'property'     => array('parenthesis' => 'true'),
@@ -77,7 +79,7 @@ class Functioncall extends TokenAuto {
                                                                            Ternary::$operators)),
         );
         
-        $this->actions = array('makeEdge'     => array('1' => 'ARGUMENTS'),
+        $this->actions = array('transform'    => array('1' => 'ARGUMENTS'),
                                'atom'         => 'Functioncall',
                                'makeSequence' => 'it',
                                'property'     => array('parenthesis' => 'false'),
@@ -92,7 +94,7 @@ class Functioncall extends TokenAuto {
                                    2 => array('token' => array('T_SEMICOLON', 'T_COMMA', 'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS')),
         );
         
-        $this->actions = array('makeEdge'     => array('1' => 'ARGUMENTS'),
+        $this->actions = array('transform'    => array('1' => 'ARGUMENTS'),
                                'atom'         => 'Functioncall',
                                'makeSequence' => 'it'
                                );

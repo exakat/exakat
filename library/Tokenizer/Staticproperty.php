@@ -15,7 +15,7 @@ class Staticproperty extends TokenAuto {
                                     1 => array('atom' => array('Variable', 'Array', 'Property', )),
                                     2 => array('filterOut' => array('T_OPEN_PARENTHESIS')));
         
-        $this->actions = array('makeEdge'     => array( -1 => 'CLASS',
+        $this->actions = array('transform'    => array( -1 => 'CLASS',
                                                          1 => 'PROPERTY'),
                                'atom'         => 'Staticproperty',
                                'cleanIndex'   => true,

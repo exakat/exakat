@@ -17,7 +17,7 @@ class Cast extends TokenAuto {
                                                                         Preplusplus::$operators, Postplusplus::$operators)),
         );
         
-        $this->actions = array('makeEdge'   => array( '1' => 'CAST'),
+        $this->actions = array('transform'  => array( '1' => 'CAST'),
                                'atom'       => 'Cast',
                                'cleanIndex' => true);
         $this->checkAuto();

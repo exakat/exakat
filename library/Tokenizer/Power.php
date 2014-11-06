@@ -20,7 +20,7 @@ class Power extends TokenAuto {
                                                                           Assignation::$operators)),
         );
         
-        $this->actions = array('makeEdge'     => array(  1 => 'RIGHT',
+        $this->actions = array('transform'    => array(  1 => 'RIGHT',
                                                         -1 => 'LEFT'),
                                'atom'         => 'Power',
                                'cleanIndex'   => true,

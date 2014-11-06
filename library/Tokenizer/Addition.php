@@ -20,7 +20,7 @@ class Addition extends TokenAuto {
                                    ),
         );
         
-        $this->actions = array('makeEdge'     => array( 1 => 'RIGHT',
+        $this->actions = array('transform'    => array( 1 => 'RIGHT',
                                                        -1 => 'LEFT'),
                                'atom'         => 'Addition',
                                'cleanIndex'   => true,

@@ -14,9 +14,9 @@ class Not extends TokenAuto {
                                                                   'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', 'T_INC', 'T_DEC' )),
         );
         
-        $this->actions = array('makeEdge'   => array( 1 => 'NOT'),
-                               'atom'       => 'Not',
-                               'cleanIndex' => true,
+        $this->actions = array('transform'    => array( 1 => 'NOT'),
+                               'atom'         => 'Not',
+                               'cleanIndex'   => true,
                                'makeSequence' => 'it');
         $this->checkAuto();
         

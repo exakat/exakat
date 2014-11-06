@@ -185,50 +185,16 @@ fullcode.setProperty('$name', $value)";
         if (isset($actions['rank']) && is_array($actions['rank'])) {
             foreach($actions['rank'] as $offset => $rank) {
                 if ($offset > 0) {
-                    $d = str_repeat(".out('NEXT')", $offset);
+                    $d = 'a'.$offset;
                 } elseif ($offset < 0) {
-                    $d = str_repeat(".in('NEXT')", abs($offset));
+                    $d = 'b'.abs($offset);
                 } else {
                     $d = '';
                 }
-                $qactions[] = " /* rank */ it$d.each{ it.setProperty('rank', $rank);}";
+                $qactions[] = " /* rank */ $d.setProperty('rank', $rank);";
             }
             unset($actions['rank']);
         }        
-
-        if (isset($actions['makeEdge'])) {
-            krsort($actions['makeEdge']);
-            foreach($actions['makeEdge'] as $destination => $label) {
-                display("makeEdge : $label\n");
-                if ($destination > 0) {
-                    $d = str_repeat(".out('NEXT')", $destination);
-                    $qactions[] = "
-/* makeEdge out */
-f =  it".$d.".next();
-g.addEdge(it, f, '$label');
-g.removeEdge(f.inE('NEXT').next());
-
-g.addEdge(it, f.out('NEXT').next(), 'NEXT');
-g.removeEdge(f.outE('NEXT').next());
-";
-                } elseif ($destination < 0) {
-                    $d = str_repeat(".in('NEXT')", abs($destination));
-                    $qactions[] = "
-/* makeEdge in */
-f =  it".$d.".next();
-g.addEdge(it, f, '$label');
-g.removeEdge(f.outE('NEXT').next());
-
-g.addEdge(f.in('NEXT').next(), it, 'NEXT');
-g.removeEdge(f.inE('NEXT').next());
-
-";
-                } else {
-                    print "Ignoring addEdge for 0\n";
-                }
-            }
-            unset($actions['makeEdge']);
-        }
 
         if (isset($actions['add_void'])) {
             foreach($actions['add_void'] as $destination => $label) {
@@ -809,6 +775,8 @@ fullcode = x;
             
             foreach($actions['transform'] as $destination => $label) {
                 if ($label == 'NONE') { continue; }
+
+                // Destination > 0
                 if ($destination > 0) { 
                     $c++;
                 
@@ -816,7 +784,7 @@ fullcode = x;
                         $qactions[] = "
 /* transform drop out ($c) */
 g.addEdge(a$c.in('NEXT').next(), a$c.out('NEXT').next(), 'NEXT');
-a$c.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+a$c.bothE('NEXT').each{ g.removeEdge(it); }
 g.idx('delete').put('node', 'delete', a$c);
 
 ";
@@ -829,6 +797,8 @@ g.addEdge(it, a$c.out('NEXT').next(), 'NEXT');
 a$c.bothE('NEXT').each{ g.removeEdge(it); }
 ";
                     }
+
+                // Destination < 0
                 } elseif ($destination < 0) {
                     $d = abs($destination);
                     if ($label == 'DROP') {
@@ -836,7 +806,7 @@ a$c.bothE('NEXT').each{ g.removeEdge(it); }
 /* transform drop in ($c) */
 
 g.addEdge(b$d.in('NEXT').next(), b$d.out('NEXT').next(), 'NEXT');
-b$d.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+b$d.bothE('NEXT').each{ g.removeEdge(it); }
 g.idx('delete').put('node', 'delete', b$d);
 ";
                     } else {
@@ -848,6 +818,8 @@ g.addEdge(b$d.in('NEXT').next(), it, 'NEXT');
 b$d.bothE('NEXT').each{ g.removeEdge(it); }
 ";
                     }
+
+                // Destination == 0
                 } else {
                     if ($label == 'DROP') {
                         $qactions[] = "
@@ -855,7 +827,7 @@ b$d.bothE('NEXT').each{ g.removeEdge(it); }
 a = it.in('NEXT').next();
 b = it.out('NEXT').next();
 
-it.bothE('NEXT', 'INDEXED').each{    g.removeEdge(it); } 
+it.bothE('NEXT').each{    g.removeEdge(it); } 
 
 g.removeVertex(it);
 g.addEdge(a, b, 'NEXT');
@@ -868,32 +840,6 @@ g.addEdge(a, b, 'NEXT');
             }
 
             unset($actions['transform']);
-        }
-
-        if (isset($actions['dropNext'])) {
-            foreach($actions['dropNext'] as $destination) {
-                if ($destination > 0) {
-                    $d = str_repeat(".out('NEXT')", $destination);
-                    $qactions[] = "
-/* dropNext out */
-f = [];
-it".$d.".fill(f);
-h = it;
-f.each{
-    i = it; 
-    it.out('NEXT').each{ g.addEdge(h, it, 'NEXT');}
-
-    g.removeVertex(i);
-}
-
-";
-                } elseif ($destination < 0) {
-                    die('No support for negative dropNext');
-                } else {
-                    print "Ignoring addEdge for 0\n";
-                }
-            }
-            unset($actions['dropNext']);
         }
 
         if (isset($actions['to_const_assignation'])) {

@@ -27,7 +27,7 @@ class Comparison extends TokenAuto {
                                                            Postplusplus::$operators )),
         );
         
-        $this->actions = array('makeEdge'     => array( 1 => 'RIGHT',
+        $this->actions = array('transform'    => array( 1 => 'RIGHT',
                                                        -1 => 'LEFT'),
                                'atom'         => 'Comparison',
                                'cleanIndex'   => true,

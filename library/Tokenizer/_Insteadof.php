@@ -15,7 +15,7 @@ class _Insteadof extends TokenAuto {
                                     1 => array('token' => 'T_STRING')
         );
         
-        $this->actions = array('makeEdge'     => array(  1 => 'RIGHT',
+        $this->actions = array('transform'    => array(  1 => 'RIGHT',
                                                         -1 => 'LEFT'),
                                'atom'         => 'Instanceof',
                                'cleanIndex'   => true,

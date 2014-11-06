@@ -16,7 +16,7 @@ class _New extends TokenAuto {
                                                                    'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_DOUBLE_COLON' )),
         );
         
-        $this->actions = array('makeEdge'     => array( 1 => 'NEW'),
+        $this->actions = array('transform'    => array( 1 => 'NEW'),
                                'atom'         => 'New',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');

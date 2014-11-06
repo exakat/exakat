@@ -34,7 +34,7 @@ class Staticmethodcall extends TokenAuto {
                                     1 => array('atom' => array('Functioncall', 'Methodcall')),
                                  );
         
-        $this->actions = array('makeEdge'     => array( -1 => 'CLASS',
+        $this->actions = array('transform'    => array( -1 => 'CLASS',
                                                          1 => 'METHOD'),
                                'makeSequence' => 'it',
                                'atom'         => 'Staticmethodcall',

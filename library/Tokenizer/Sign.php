@@ -49,11 +49,11 @@ class Sign extends TokenAuto {
                                                                                 'T_OPEN_CURLY', 'T_OPEN_BRACKET'))),
                                  );
         
-        $this->actions = array('makeEdge'   => array( 1 => 'SIGN'),
-                               'atom'       => 'Sign',
-                               'property'   => array('scalar' => true,
-                                                     'instruction' => true),
-                               'cleanIndex' => true,
+        $this->actions = array('transform'    => array( 1 => 'SIGN'),
+                               'atom'         => 'Sign',
+                               'property'     => array('scalar' => true,
+                                                       'instruction' => true),
+                               'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
         $this->checkAuto();
@@ -68,7 +68,7 @@ class Sign extends TokenAuto {
                                                                     'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
                                  );
         
-        $this->actions = array('makeEdge'   => array( 1 => 'SIGN'),
+        $this->actions = array('transform'  => array( 1 => 'SIGN'),
                                'atom'       => 'Sign',
                                'property'   => array('scalar' => true,
                                                      'instruction' => true),
@@ -84,7 +84,7 @@ class Sign extends TokenAuto {
                                     2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                                                     'T_OPEN_CURLY', 'T_OPEN_BRACKET')));
         
-        $this->actions = array('makeEdge'   => array( 1 => 'SIGN'),
+        $this->actions = array('transform'  => array( 1 => 'SIGN'),
                                'atom'       => 'Sign',
                                'property'   => array('scalar' => true,
                                                      'instruction' => true),

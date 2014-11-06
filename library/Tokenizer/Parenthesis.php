@@ -24,10 +24,10 @@ class Parenthesis extends TokenAuto {
                                               'atom' => 'none'),
         );
         
-        $this->actions = array('makeEdge' => array( '1' => 'CODE'),
-                               'dropNext' => array(1),
-                               'atom'     => 'Parenthesis',
-                               'cleanIndex' => true,
+        $this->actions = array('transform'    => array( '1' => 'CODE',
+                                                        '2' => 'DROP'),
+                               'atom'         => 'Parenthesis',
+                               'cleanIndex'   => true,
                                'makeSequence' => 'it');
         $this->checkAuto();
 
@@ -43,10 +43,10 @@ class Parenthesis extends TokenAuto {
                                                                      Concatenation::$operators, Ternary::$operators)),
         );
         
-        $this->actions = array('makeEdge' => array( '1' => 'CODE'),
-                               'dropNext' => array(1),
-                               'atom'     => 'Parenthesis',
-                               'cleanIndex' => true,
+        $this->actions = array('transform'    => array( '1' => 'CODE',
+                                                        '2' => 'DROP'),
+                               'atom'         => 'Parenthesis',
+                               'cleanIndex'   => true,
                                'makeSequence' => 'it');
         
         $this->checkAuto();
