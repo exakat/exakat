@@ -1,47 +1,23 @@
 <?php
 
-Label : NEXT
-  if
-  Label : NEXT
-    (
-    Label : NEXT
-      :
-      Label : NEXT
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          B
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'C'
+    Label : THEN
+      makeSequence T_OPEN_CURLY
+      Label : ELEMENT
         function
-        Label : NEXT
-          makeSequence T_OPEN_CURLY
-          Label : NEXT
-            endif
-            Label : NEXT
-              ;
-              Label : NEXT
-                ?>
-                Label : NEXT
-                  /**/
-                  Label : NEXT
-                    /* * */
-          Label : ELEMENT
-            function
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                =
-                Label : RIGHT
-                  'G'
-                Label : LEFT
-                  $h
-              Label : ARGUMENT
-                $e
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                $g
-            Label : NAME
-              F
-            Label : BLOCK
-              {
-              Label : ELEMENT
-                void
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
@@ -66,11 +42,25 @@ Label : NEXT
           {
           Label : ELEMENT
             void
-    Label : CODE
-      !
-      Label : NOT
-        B
+      Label : ELEMENT
+        function
         Label : ARGUMENTS
-          void
+          ,
           Label : ARGUMENT
-            'C'
+            =
+            Label : RIGHT
+              'G'
+            Label : LEFT
+              $h
+          Label : ARGUMENT
+            $e
+          Label : ARGUMENT
+            $f
+          Label : ARGUMENT
+            $g
+        Label : NAME
+          F
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void

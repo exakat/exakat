@@ -1,33 +1,27 @@
 <?php
 
-Label : NEXT
-  makeSequence T_OPEN_TAG
-  Label : NEXT
-    class
-    Label : NEXT
-      true
-      Label : NEXT
-        {
-        Label : NEXT
-          class
-          Label : NEXT
-            false
-            Label : NEXT
-              {
-              Label : NEXT
-                ?>
-                Label : NEXT
-                  /**/
-                  Label : NEXT
-                    /* * */
-              Label : ELEMENT
-                void
-        Label : ELEMENT
-          void
+Label : CODE
+  makeSequence T_OPEN_CURLY
   Label : ELEMENT
     class
     Label : NAME
       Null
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void
+  Label : ELEMENT
+    class
+    Label : NAME
+      true
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void
+  Label : ELEMENT
+    class
+    Label : NAME
+      false
     Label : BLOCK
       {
       Label : ELEMENT
