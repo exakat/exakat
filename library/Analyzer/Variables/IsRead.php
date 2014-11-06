@@ -109,8 +109,9 @@ class IsRead extends Analyzer\Analyzer {
 
         $this->atomIs("Variable")
              ->hasIn(array('ARGUMENT'))
+             ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
              ->analyzerIsNot('Analyzer\\\\Variables\\\\IsRead');
-            $this->prepareQuery();
+        $this->prepareQuery();
 
         // Class constructors (__construct)
         $this->atomIs("Variable")
