@@ -723,8 +723,12 @@ g.idx('atoms')[['atom':'Functioncall']]
             if (fullnspath == null) { fullnspath = it.code;}
             it.setProperty('fullnspath', fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
-            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.out('EXTENDS').next().fullnspath;
-            if (fullnspath == null) { fullnspath = it.code;}
+            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.next();
+            if (fullnspath.out('EXTENDS').any()) { 
+                fullnspath = fullnspath.next().fullsnpath;
+            } else {
+                fullnspath = it.code;
+            }
             it.setProperty('fullnspath', fullnspath);
         } 
     }; 
@@ -744,8 +748,12 @@ g.idx('atoms')[['atom':'Staticmethodcall']]
             if (fullnspath == null) { fullnspath = it.code;}
             it.setProperty('fullnspath', fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
-            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.out('EXTENDS').next().fullnspath;
-            if (fullnspath == null) { fullnspath = it.code;}
+            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.next();
+            if (fullnspath.out('EXTENDS').any()) { 
+                fullnspath = fullnspath.next().fullsnpath;
+            } else {
+                fullnspath = it.code;
+            }
             it.setProperty('fullnspath', fullnspath);
         } 
     }; 
@@ -765,8 +773,12 @@ g.idx('atoms')[['atom':'Staticproperty']]
             if (fullnspath == null) { fullnspath = it.code;}
             it.setProperty('fullnspath', fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
-            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.out('EXTENDS').next().fullnspath;
-            if (fullnspath == null) { fullnspath = it.code;}
+            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.next();
+            if (fullnspath.out('EXTENDS').any()) { 
+                fullnspath = fullnspath.next().fullsnpath;
+            } else {
+                fullnspath = it.code;
+            }
             it.setProperty('fullnspath', fullnspath);
         } 
     }; 
@@ -786,8 +798,12 @@ g.idx('atoms')[['atom':'Staticconstant']]
             if (fullnspath == null) { fullnspath = it.code;}
             it.setProperty('fullnspath', fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
-            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.out('EXTENDS').next().fullnspath;
-            if (fullnspath == null) { fullnspath = it.code;}
+            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.next();
+            if (fullnspath.out('EXTENDS').any()) { 
+                fullnspath = fullnspath.next().fullsnpath;
+            } else {
+                fullnspath = it.code;
+            }
             it.setProperty('fullnspath', fullnspath);
         } 
     }; 
