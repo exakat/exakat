@@ -12,7 +12,7 @@ class _Namespace extends TokenAuto {
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'Sequence',
                                              'property' => array('block' => 'true')),
-                                  2 => array('token' => array('T_NAMESPACE', 'T_CLOSE_TAG', 'T_END')),
+                                  2 => array('token' => array('T_NAMESPACE', 'T_CLOSE_TAG', 'T_END', 'T_SEMICOLON')),
         );
         
         $this->actions = array('insert_global_ns' => 1,
@@ -24,7 +24,7 @@ class _Namespace extends TokenAuto {
                                              'atom'  => 'none'),
                                   1 => array('atom'  => array('Identifier', 'Nsname')),
                                   2 => array('atom'  => 'Sequence'),
-                                  3 => array('token' => array('T_NAMESPACE', 'T_CLOSE_TAG', 'T_END')),
+                                  3 => array('token' => array('T_NAMESPACE', 'T_CLOSE_TAG', 'T_END', 'T_SEMICOLON')),
         );
         
         $this->actions = array('transform'    => array( 1 => 'NAMESPACE',
@@ -40,7 +40,7 @@ class _Namespace extends TokenAuto {
                                   1 => array('atom'  => array('Identifier', 'Nsname')),
                                   2 => array('token' => 'T_SEMICOLON',
                                              'atom'  => 'none'),
-                                  3 => array('token' => array('T_CLOSE_TAG', 'T_END'))
+                                  3 => array('token' => array('T_CLOSE_TAG', 'T_END', 'T_SEMICOLON'))
         );
         
         $this->actions = array('insert_ns_void' => true,
