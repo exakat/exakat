@@ -1,8 +1,8 @@
 <?php
 
 $expected     = array('class b extends a', 
-                      'class g extends e',
-                      'class g2 extends \\e2');
+                      'class e extends f',
+                      'class e2 extends \\f2');
 
 $expected_not = array();
 
