@@ -74,10 +74,6 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-
-
-
-
         // properties 
         // class::$property
         $this->atomIs("Staticproperty")
