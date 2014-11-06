@@ -41,7 +41,7 @@ class _Use extends TokenAuto {
                                               'atom'  => 'none'),
                                  );
         
-        $this->actions = array('to_use_const'       => true,
+        $this->actions = array('to_use_const' => true,
                                'atom'         => 'Use',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
@@ -96,11 +96,17 @@ class _Use extends TokenAuto {
         return <<<GREMLIN
 
 s = [];
-fullcode.out("USE").sort{it.rank}._().each{ 
+fullcode.out('USE', 'FUNCTION', 'CONST').sort{it.rank}._().each{ 
     a = it.getProperty('fullcode');
     s.add(a); 
 };
-fullcode.setProperty('fullcode', fullcode.getProperty('code') + " " + s.join(", "));
+if (fullcode.out('FUNCTION').any()) {
+    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " function " + s.join(", "));
+} else if (it.out('CONST').any()) {
+    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " const " + s.join(", "));
+} else {
+    fullcode.setProperty('fullcode', fullcode.getProperty('code') + " " + s.join(", "));
+}
 
 // use a (aka c);
 fullcode.out('USE').has('atom', 'Identifier').each{
@@ -148,7 +154,30 @@ fullcode.out('USE').has('atom', 'Nsname').each{
     }
 }
 
+// use function a as b; 
+// use const a as b; 
+fullcode.out('FUNCTION', 'CONST').each{
+    s = [];
+    it.out("SUBNAME").sort{it.rank}._().each{ 
+        s.add(it.getProperty('code')); 
+    };
+    if (it.absolutens == 'true') {
+        it.setProperty('originpath', '\\\\' + s.join('\\\\'));
+        it.setProperty('originclass', s[s.size() - 1]);
+    } else {
+        it.setProperty('originpath', s.join('\\\\'));
+        it.setProperty('originclass', s[s.size() - 1]);
+    }
+    
+    if (it.out('AS').any()) {
+        it.setProperty('alias', it.out('AS').next().code);
+    } else {
+        it.setProperty('alias', s[s.size() - 1]);
+    }
+}
+
 GREMLIN;
     }
+
 }
 ?>
