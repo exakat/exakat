@@ -88,7 +88,10 @@ $_PILOT::finalize();
 $log->report('load', array('project' => $project, 'files' => $nb_files, 'tokens' => $nb_tokens));
 
 function process_dir($dir, $log) {
+    if (!file_exists($dir)) { return array('files' => -1, 'tokens' => -1); }
     $dirr = opendir($dir);
+    if ($dirr === null) { return array('files' => -1, 'tokens' => -1); }
+    
     $nb_files = 0;
     $nb_tokens = 0;
     while ($filename = readdir($dirr)) {

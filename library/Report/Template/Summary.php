@@ -21,7 +21,7 @@ class Summary extends \Report\Template {
     }
     
     public function setContent($data) {
-        if (!is_null($data)) {
+        if ($data === null) {
             $this->data = $data; 
         } 
     }

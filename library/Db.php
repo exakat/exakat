@@ -3,10 +3,18 @@
 class Db  {
     
     public function __construct($db = 'exakat') {
+        $config = \Config::factory();
+        
         if ($db == 'exakat') {
-            $this->mysqli = new \mysqli('127.0.0.1', 'exakat', 'exakat', 'exakat');
+            $this->mysqli = new \mysqli($config->mysql_host, 
+                                        $config->mysql_exakat_user, 
+                                        $config->mysql_exakat_pass,
+                                        $config->mysql_exakat_db);
         } else {
-            $this->mysqli = new \mysqli('127.0.0.1', 'wordpress', 'wordpress', 'wordpress');
+            $this->mysqli = new \mysqli($config->mysql_host, 
+                                        $config->mysql_wordpress_user, 
+                                        $config->mysql_wordpress_pass,
+                                        $config->mysql_wordpress_db);
         }
     }
     

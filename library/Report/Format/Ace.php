@@ -89,7 +89,7 @@ HTML;
         $renderSidebar = new \Report\Format\Ace\SummarySidebar();
         $sidebar = new static();
         
-        if (is_null($this->summary)) {
+        if ($this->summary === null) {
             $sidebar = '<!-- No sidebar -->';
         } else {
             $renderSidebar->render($sidebar, $this->summary->getContent());

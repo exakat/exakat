@@ -8,6 +8,10 @@ class Phpexec {
     public function __construct($phpversion) {
         $phpversion3 = substr($phpversion, 0, 3);
         switch($phpversion3) {
+            case '5.2' : 
+                $this->phpexec = 'php52';
+                break 1;
+
             case '5.3' : 
                 $this->phpexec = 'php53';
                 break 1;
@@ -22,6 +26,10 @@ class Phpexec {
 
             case '5.6' : 
                 $this->phpexec = 'php56';
+                break 1;
+
+            case '7.0' : 
+                $this->phpexec = 'php70';
                 break 1;
 
             default: 
@@ -119,7 +127,7 @@ class Phpexec {
     }
 
     public function getConfiguration($name = null) {
-        if (is_null($name)) {
+        if ($name === null) {
             return $this->config;
         } elseif (isset($this->config[$name])) {
             return $this->config[$name];

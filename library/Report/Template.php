@@ -12,7 +12,7 @@ class Template {
     }
 
     public function setContent($data) {
-        if (!is_null($data)) {
+        if ($data !== null) {
             $this->data = $data; 
         } 
     }
@@ -20,7 +20,6 @@ class Template {
     public function setTitle($title) {
         $this->title = $title; 
     }
-
 }
 
 ?>

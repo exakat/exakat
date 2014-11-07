@@ -15,7 +15,7 @@ class Datastore {
             foreach($d as $id => $e) {
                 $d[$id] = Sqlite3::escapeString($e);
             }
-            $query = "insert into $table (".join(", ", array_keys($row)).") values ('".join("', '", $d)."')";
+            $query = "INSERT INTO $table (".join(", ", array_keys($row)).") VALUES ('".join("', '", $d)."')";
             $this->sqlite->querySingle($query);
         }
         
@@ -68,9 +68,9 @@ class Datastore {
         if ($res == 1) {return true; }
 
         switch($table) {
-            case 'compilation53' : 
+           case 'compilation52' : 
                 $createTable = <<<SQLITE
-CREATE TABLE compilation53 (
+CREATE TABLE compilation52 (
   id INTEGER PRIMARY KEY,
   file TEXT,
   error TEXT,
@@ -79,9 +79,9 @@ CREATE TABLE compilation53 (
 SQLITE;
                 break;
 
-            case 'compilation54' : 
+            case 'compilation53' : 
                 $createTable = <<<SQLITE
-CREATE TABLE compilation54 (
+CREATE TABLE compilation53 (
   id INTEGER PRIMARY KEY,
   file TEXT,
   error TEXT,
@@ -115,6 +115,17 @@ SQLITE;
             case 'compilation56' : 
                 $createTable = <<<SQLITE
 CREATE TABLE compilation56 (
+  id INTEGER PRIMARY KEY,
+  file TEXT,
+  error TEXT,
+  line id
+);
+SQLITE;
+                break;
+
+            case 'compilation70' : 
+                $createTable = <<<SQLITE
+CREATE TABLE compilation70 (
   id INTEGER PRIMARY KEY,
   file TEXT,
   error TEXT,

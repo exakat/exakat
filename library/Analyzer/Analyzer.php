@@ -55,7 +55,7 @@ class Analyzer {
         
         $this->human_classname = str_replace('\\', '/', substr(get_class($this), 9));
         
-        if (is_null(Analyzer::$docs)) {
+        if (Analyzer::$docs === null) {
             Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
         }
         
@@ -124,7 +124,7 @@ class Analyzer {
     }
     
     public function getDescription($lang = 'en') {
-        if (is_null($this->description)) {
+        if ($this->description === null) {
             $filename = "./human/$lang/".str_replace("\\", "/", str_replace("Analyzer\\", "", get_class($this))).".ini";
             
             if (!file_exists($filename)) {
@@ -156,7 +156,7 @@ class Analyzer {
     }
 
     function getName($lang = 'en') {
-        if (is_null($this->name)) {
+        if ($this->name === null) {
             $this->getDescription($lang);
         }
 
@@ -164,7 +164,7 @@ class Analyzer {
     }
 
     static public function getThemeAnalyzers($theme) {
-        if (is_null(Analyzer::$docs)) {
+        if (Analyzer::$docs === null) {
             Analyzer::$docs = new Docs('./data/analyzers.sqlite');
         }
         return Analyzer::$docs->getThemeAnalyzers($theme);
@@ -179,7 +179,7 @@ class Analyzer {
     }
 
     function getAppinfoHeader($lang = 'en') {
-        if (is_null($this->appinfo)) {
+        if ($this->appinfo === null) {
             $this->getDescription($lang);
         }
 
@@ -191,7 +191,9 @@ class Analyzer {
     }
 
     private function addMethod($method, $arguments = null) {
-        if (!is_null($arguments)) {
+        if ($arguments === null) {
+            $this->methods[] = $method;
+        } else {
             if (func_num_args() > 2) {
                 $arguments = func_get_args();
                 array_shift($arguments);
@@ -207,8 +209,6 @@ class Analyzer {
                 $this->arguments[$argname] = $arguments;
                 $this->methods[] = str_replace('***', $argname, $method);
             }
-        } else {
-            $this->methods[] = $method;
         }
 
         return $this;
@@ -310,7 +310,7 @@ GREMLIN;
     }
 
     public function query($queryString, $arguments = null) {
-        if (is_null($arguments)) {
+        if ($arguments === null) {
             $arguments = array('type' => 'IN');
         }
 
@@ -1498,7 +1498,7 @@ GREMLIN;
     }
     
     public function getSeverity() {
-        if (is_null(Analyzer::$docs)) {
+        if (Analyzer::$docs === null) {
             Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
         }
         
@@ -1519,7 +1519,7 @@ GREMLIN;
     }
 
     public function getVendors() {
-        if (is_null(Analyzer::$docs)) {
+        if (Analyzer::$docs === null) {
             Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
         }
         

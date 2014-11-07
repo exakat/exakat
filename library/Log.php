@@ -18,26 +18,24 @@ class Log {
         $this->log("Duration : ".number_format(1000 * (microtime(true) - $this->begin), 2, '.', ''));
         $this->log($this->name." closed on ".date('r'));
         
-        if (!is_null($this->log)) {
+        if ($this->log !== null) {
             fclose($this->log);
             unset($this->log);
         } else {
             print "Log already destroyed.";
         }
-
     }
     
     public function log($message) {
-        if (is_null($this->log)) { return true; }
+        if ($this->log === null) { return true; }
         
         fwrite($this->log, $message."\n");
     }
 
     public function report($script, $info) {
-        $user = 'exakat';
-        $pass = 'exakat';
+        $config = \Config::factory();
         
-        $mysql = new PDO('mysql:host=127.0.0.1;dbname=exakat', $user, $pass);
+        $mysql = new \PDO($config->mysql_exakat_pdo, $config->mysql_exakat_user, $config->mysql_exakat_pass);
         if (!$mysql) { return false; }
         
         $values = array('project' => $info['project'],
