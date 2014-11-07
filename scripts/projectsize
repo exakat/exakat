@@ -12,6 +12,10 @@ if (in_array('-sl', $args) !== false) {    define('SIZE', 'large');}
 
 $db = new Db('exakat');
 
+$total = 0;
+$tokens = 0;
+$suggestions = array();
+
 $res = $db->query('SELECT * FROM projects GROUP BY project ORDER BY tokens');
 while($row = $res->fetch_Assoc()) {
     if (!file_exists('./projects/'.$row['project'])) { continue; }
@@ -31,6 +35,8 @@ while($row = $res->fetch_Assoc()) {
     
     $line .= "  ";
     if (file_exists('projects/'.$row['project'].'/report')) {
+        $total++;
+        $tokens += $row["tokens"];
         if (defined('WHEN') && (WHEN == 'none')) { continue 1; }
 
         $date = filemtime('projects/'.$row['project'].'/report');
@@ -61,11 +67,25 @@ while($row = $res->fetch_Assoc()) {
     } else {
         if (defined('WHEN') && (WHEN == 'today')) { continue 1; }
         $line .= "None";
+        $diff = 100;
     }
+    
+    $suggestions[$row['project']] = $row['tokens'] * (1 + $diffi);
     
     $line .= "\n";
     
     print $line;
+}
+
+
+
+print "\n$total projects with ".number_format($tokens)." tokens\n";
+
+print "\nTo run : \n";
+arsort($suggestions);
+$suggestions = array_slice($suggestions, 0, 3);
+foreach($suggestions as $p => $s) {
+    print "php bin/project $p;    \n";
 }
 
 ?>
