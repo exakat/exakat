@@ -8,21 +8,27 @@ $stats['php']['curl'] = extension_loaded('curl') ? 'Yes' : 'No';
 
 // check PHP 5.2
 $stats['PHP 5.2']['version'] = shell_exec('php52 -r "echo phpversion();" 2>&1');
+$stats['PHP 5.2']['short_open_tags'] = shell_exec('php52 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
 
 // check PHP 5.3
 $stats['PHP 5.3']['version'] = shell_exec('php53 -r "echo phpversion();" 2>&1');
+$stats['PHP 5.3']['short_open_tags'] = shell_exec('php53 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
 
 // check PHP 5.4
 $stats['PHP 5.4']['version'] = shell_exec('php54 -r "echo phpversion();" 2>&1');
+$stats['PHP 5.4']['short_open_tags'] = shell_exec('php54 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
 
 // check PHP 5.5
 $stats['PHP 5.5']['version'] = shell_exec('php55 -r "echo phpversion();" 2>&1');
+$stats['PHP 5.5']['short_open_tags'] = shell_exec('php55 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
 
 // check PHP 5.6
 $stats['PHP 5.6']['version'] = shell_exec('php56 -r "echo phpversion();" 2>&1');
+$stats['PHP 5.6']['short_open_tags'] = shell_exec('php56 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
 
 // check PHP 7
-$stats['PHP 7']['version'] = shell_exec('php70 -r "echo phpversion();" 2>&1');
+$stats['PHP 7.0']['version'] = shell_exec('php70 -r "echo phpversion();" 2>&1');
+$stats['PHP 7.0']['short_open_tags'] = shell_exec('php70 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
 
 // wkhtmltopdf
 $res = shell_exec('wkhtmltopdf --version 2>&1');
