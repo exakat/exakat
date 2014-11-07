@@ -479,3 +479,5 @@ Remove the 2 mysql databases and merge into one only.  (why not merge into one S
 See how checkForNext and makeSequence may be reduced to one call in neo4j (precompiled java or custom steps)
 
 Add link to clearPHP in the docs. 
+
+Spot files that are affected by short open tags and report them (one should only use normalized tags).
