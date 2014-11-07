@@ -12,7 +12,8 @@ class Label extends TokenAuto {
                                                                                'T_INSTANCEOF'),
                                                                          Assignation::$operators, Addition::$operators, 
                                                                          Multiplication::$operators, Comparison::$operators,
-                                                                         Logical::$operators, Not::$operators)), 
+                                                                         Logical::$operators, Not::$operators,
+                                                                         Cast::$operators)), 
                                   -1 => array('atom'      => 'Identifier'),
                                    0 => array('token'     => Label::$operators));
         

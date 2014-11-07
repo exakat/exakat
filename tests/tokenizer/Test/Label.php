@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Label extends Tokenizer {
-    /* 12 methods */
+    /* 13 methods */
 
     public function testLabel01()  { $this->generic_test('Label.01'); }
     public function testLabel02()  { $this->generic_test('Label.02'); }
@@ -21,5 +21,6 @@ class Label extends Tokenizer {
     public function testLabel10()  { $this->generic_test('Label.10'); }
     public function testLabel11()  { $this->generic_test('Label.11'); }
     public function testLabel12()  { $this->generic_test('Label.12'); }
+    public function testLabel13()  { $this->generic_test('Label.13'); }
 }
 ?>
