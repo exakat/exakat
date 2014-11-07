@@ -28,4 +28,8 @@
 /tests/analyzer/randomtest.txt
 /config/config.ini
 /bin/test_query
-config/config.ini
+/config/config.ini
+/projects
+/batch-import
+/neo4j
+/neo4j-community-2.1.5-unix.tar.gz
