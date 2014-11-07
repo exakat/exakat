@@ -5,18 +5,19 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class UnusedMethods extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Analyzer\\Classes\\UsedMethods',
+                     'Analyzer\\Classes\\MethodDefinition');
+    }
+    
     public function analyze() {
-        // pss::$property
-        $this->atomIs("Class")
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->_as('unused')
+        // Methods definitions
+        $this->atomIs('Function')
+             ->analyzerIsNot('Analyzer\\Classes\\UsedMethods')
              ->outIs('NAME')
+             ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
              ->codeIsNot(array('__construct', '__destruct', '__get', '__set', '__call', '__callstatic'))
-             ->savePropertyAs('code', 'method')
-             ->raw('filter{ g.idx("atoms")[["atom":"Methodcall"]].out("METHOD").filter{ it.code == method}.any() == false}')
-             ->back('unused');
+             ->back('first');
         $this->prepareQuery();
     }
 }
