@@ -13,7 +13,6 @@ class LimitCase extends Tokenizer {
     public function testLimitCase02()  { $this->generic_test('LimitCase.02'); }
     public function testLimitCase03()  { $this->generic_test('LimitCase.03'); }
     public function testLimitCase04()  { $this->generic_test('LimitCase.04'); }
-    public function testLimitCase05()  { $this->generic_test('LimitCase.05'); }
     public function testLimitCase06()  { $this->generic_test('LimitCase.06'); }
 }
 ?>
