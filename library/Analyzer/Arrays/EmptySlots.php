@@ -12,6 +12,7 @@ class EmptySlots extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Void')
+             ->isNot('rank', 0)
              ->back('first');
         $this->prepareQuery();
     }

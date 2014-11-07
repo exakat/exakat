@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Arrays_EmptySlots extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testArrays_EmptySlots01()  { $this->generic_test('Arrays_EmptySlots.01'); }
+    public function testArrays_EmptySlots02()  { $this->generic_test('Arrays_EmptySlots.02'); }
 }
 ?>
