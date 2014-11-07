@@ -2,8 +2,7 @@
 
 namespace Analyzer\Arrays;
 
-use Analyzer,
-    Analyzer\Variables\VariablePhp;
+use Analyzer\Variables\VariablePhp;
 
 class Phparrayindex extends Analyzer\Analyzer {
 
@@ -12,7 +11,7 @@ class Phparrayindex extends Analyzer\Analyzer {
              ->outIs('VARIABLE')
              ->code(VariablePhp::$variables)
              ->back('first');
-//        $this->printQuery();
+        $this->prepareQuery();
     }
 }
 
