@@ -462,8 +462,20 @@ $a['b'] = 3;  print "$a[b]\n"; : b is not a constant!
 
 Validate magic methods arguments in the definition
 
-Retirer la dépendance à config.ini
+Retirer la dépendance à projects/*/config.ini
 
-Installer les mdp hors du code(!!)
+Add support for PHP 7 and for multiple PHP installation (and for missing PHP installs)
+Merge all PHP versions into one table + 1 colon of selection
 
-Add support for PHP 7 and for multiple PHP installation (and for missing PHP installs).
+project_init store the initial URL in config.ini (git, or download or else)
+project_init works with only URL (guess some names)
+
+Add documentation automatically in human/en/*/*.ini (via dashboard but spot when they needs to be written)
+
+$fp = fopen('scripts/categories.md', 'r');   while (!feof($fp)) { (No check! This will go on if file doesn't exists...)
+
+Remove the 2 mysql databases and merge into one only.  (why not merge into one Sqlite? )
+
+See how checkForNext and makeSequence may be reduced to one call in neo4j (precompiled java or custom steps)
+
+Add link to clearPHP in the docs. 
