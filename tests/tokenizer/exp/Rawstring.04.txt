@@ -1,0 +1,141 @@
+;
+Label : ELEMENT
+  V
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    makeSequence T_OPEN_TAG
+    Label : ELEMENT
+      foreach
+      Label : VALUE
+        =>
+        Label : KEY
+          $b
+        Label : VALUE
+          $c
+      Label : SOURCE
+        $a
+      Label : BLOCK
+        makeSequence T_DOUBLE_COLON
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            ->
+            Label : METHOD
+              C
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  array
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'D'
+                      Label : VALUE
+                        $f
+            Label : OBJECT
+              $e
+          Label : LEFT
+            $d
+        Label : ELEMENT
+          D
+        Label : ELEMENT
+          U
+        Label : ELEMENT
+          foreach
+          Label : VALUE
+            $j
+          Label : SOURCE
+            $i
+          Label : BLOCK
+            Block with Foreach
+            Label : ELEMENT
+              makeSequence T_DOUBLE_COLON
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      P
+                    Label : METHOD
+                      Q
+                      Label : ARGUMENTS
+                        ,
+                        Label : ARGUMENT
+                          "
+                          Label : CONTAIN
+                            Concatenation
+                            Label : CONCAT
+                              $k
+                            Label : CONCAT
+                              R
+                            Label : CONCAT
+                              $l
+                        Label : ARGUMENT
+                          "
+                          Label : CONTAIN
+                            Concatenation
+                            Label : CONCAT
+                              $m
+                            Label : CONCAT
+                              S
+                            Label : CONCAT
+                              $n
+                        Label : ARGUMENT
+                          NULL
+                        Label : ARGUMENT
+                          NULL
+                        Label : ARGUMENT
+                          T
+              Label : ELEMENT
+                T
+            Label : ELEMENT
+              N
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                F
+              Label : METHOD
+                G
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    'H'
+                  Label : ARGUMENT
+                    'I'
+        Label : ELEMENT
+          M
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                K
+              Label : METHOD
+                L
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    $g
+                  Label : ARGUMENT
+                    $h
+                  Label : ARGUMENT
+                    NULL
+                  Label : ARGUMENT
+                    NULL
+                  Label : ARGUMENT
+                    M
+        Label : ELEMENT
+          I
+Label : ELEMENT
+  A

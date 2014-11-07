@@ -1,11 +1,21 @@
-;
-Label : ELEMENT
-  echo
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      $location
-Label : ELEMENT
-  <?php>B
-Label : ELEMENT
-  A
+<?php 
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      makeSequence T_OPEN_TAG
+      Label : ELEMENT
+        A
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $location
