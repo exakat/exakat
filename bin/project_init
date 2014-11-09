@@ -8,12 +8,12 @@ if (!isset($args[1]) ) {
 }
 $project = $args[1];
 if (isset($args[2])) {
-    $git_url = $args[2];
+    $repo_url = $args[2];
 } else {
-    $git_url = null;
+    $repo_url = null;
 }
 
-print "Initializing $project with '$git_url'\n";
+print "Initializing $project with '$repo_url'\n";
 sleep(2);
 
 if (!file_exists('./projects/'.$project)) {
@@ -48,20 +48,28 @@ if (!file_exists('./projects/'.$project.'/config.ini')) {
 
 print shell_exec('chmod -R g+w ./projects/'.$project);
 
-if (!empty($git_url) && !file_exists('./projects/'.$project.'/code/')) {
-    if (strpos($git_url, 'bitbucket.org') !== false) {
-        print shell_exec("cd ./projects/$project; hg clone $git_url code");
-    } elseif (strpos($git_url, '.googlecode.com/svn/') !== false) {
-        print shell_exec("cd ./projects/$project; svn checkout $git_url code");
-    } elseif (strpos($git_url, 'svn.code.sf.net') !== false) {
-        print shell_exec("cd ./projects/$project; svn checkout $git_url code");
-    } elseif (strpos($git_url, '.zip') !== false) {
-        $file = basename($git_url);
+if (!empty($repo_url) && !file_exists('./projects/'.$project.'/code/')) {
+    if (strpos($repo_url, 'bitbucket.org') !== false) {
+        print shell_exec("cd ./projects/$project; hg clone $repo_url code");
+    } elseif (strpos($repo_url, '.googlecode.com/svn/') !== false) {
+        print shell_exec("cd ./projects/$project; svn checkout $repo_url code");
+    } elseif (strpos($repo_url, 'svn.code.sf.net') !== false) {
+        print shell_exec("cd ./projects/$project; svn checkout $repo_url code");
+    } elseif (preg_match('#^[a-z0-9\-]+/[a-z0-9\-]+$#', $repo_url)) {
+        // composer install
+        $composer = new stdClass();
+        $composer->require = new stdClass();
+        $composer->require->$repo_url = 'dev-master';
+        $json = json_encode($composer);
+        file_put_contents('projects/'.$project.'/composer.json', $json);
+        print shell_exec("cd ./projects/$project; composer install; mv vendor code");
+    } elseif (strpos($repo_url, '.zip') !== false) {
+        $file = basename($repo_url);
         $file_noext = str_replace('.zip', '', $file);
-        print shell_exec("cd ./projects/$project; wget $git_url; unzip -qq $file; mv $file_noext code; rm $file");
+        print shell_exec("cd ./projects/$project; wget $repo_url; unzip -qq $file; mv $file_noext code; rm $file");
 // bz2, tar.bz, tgz, xz etc.
     } else {
-        print shell_exec("cd ./projects/$project; git clone $git_url code");
+        print shell_exec("cd ./projects/$project; git clone $repo_url code");
     }
 
     if (!file_exists("./projects/$project/code")) {
