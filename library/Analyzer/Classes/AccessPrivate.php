@@ -11,7 +11,7 @@ class AccessPrivate extends Analyzer\Analyzer {
         $this->atomIs("Staticmethodcall")
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
-             ->back('first')
+             ->inIs('METHOD')
              ->outIs('CLASS')
              ->codeIsNot(array('parent', 'static', 'self'))
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
@@ -24,7 +24,7 @@ class AccessPrivate extends Analyzer\Analyzer {
         $this->atomIs("Staticmethodcall")
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
-             ->back('first')
+             ->inIs('METHOD')
              ->outIs('CLASS')
              ->codeIsNot(array('parent', 'static', 'self'))
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
@@ -43,7 +43,7 @@ class AccessPrivate extends Analyzer\Analyzer {
         $this->atomIs("Staticmethodcall")
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
-             ->back('first')
+             ->inIs('METHOD')
              ->outIs('CLASS')
              ->code('parent')
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
@@ -62,11 +62,12 @@ class AccessPrivate extends Analyzer\Analyzer {
 
         // parent::method() parent class through extension (not the first one)
         $this->atomIs("Staticmethodcall")
+             ->raw('sideEffect{ first = it; }')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
-             ->back('first')
+             ->inIs('METHOD')
              ->outIs('CLASS')
-             ->code('parent', 'static', 'self')
+             ->code('parent')
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
              ->classDefinition()
              ->hasOut('EXTENDS')
@@ -76,7 +77,7 @@ class AccessPrivate extends Analyzer\Analyzer {
                               { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any()}.any()
                               
                           }')
-             ->back('first');
+             ->raw('transform{ first; }');
         $this->prepareQuery();
 
         // self / static::method() in parent class
