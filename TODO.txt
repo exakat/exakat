@@ -481,3 +481,11 @@ See how checkForNext and makeSequence may be reduced to one call in neo4j (preco
 Add link to clearPHP in the docs. 
 
 Spot files that are affected by short open tags and report them (one should only use normalized tags).
+
+Add support for Composer as code fetcher. 
+
+Make projectsize report non-bin/files'ed project 
+make projectsize update vcs
+make projectsize collect size in sqlite (not in mysql) and list of project + origin (for export )
+
+Check for the exact count of nodes and relations at the end (compare g.V.count() with the count of useful nodes and relations. Add stats about index and their amounts).
