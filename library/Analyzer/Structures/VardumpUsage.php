@@ -9,8 +9,7 @@ class VardumpUsage extends Analyzer\Analyzer {
         $this->atomIs("Functioncall")
              ->code(array('var_dump', 'print_r'))
              ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 1)
+             ->rankIs('ARGUMENT', 1)
              ->codeIsNot("true")
              ->back('first');
         $this->prepareQuery();
