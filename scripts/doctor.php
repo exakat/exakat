@@ -170,8 +170,34 @@ if (!file_exists('./log/')) {
     $stats['log']['created'] = 'No';
 }
 
+// composer
+$res = trim(shell_exec('composer about --version'));
+// remove colors from shell syntax
+$res = preg_replace('/\e\[[\d;]*m/', '', $res);
+if (preg_match('/ version ([0-9\.a-z\-]+)/', $res, $r)) {//
+    $stats['composer']['installed'] = 'Yes';
+    $stats['composer']['version'] = $r[1];
+} else {
+    $stats['composer']['installed'] = 'No';
+}
+
 // svn
+$res = trim(shell_exec('svn --version'));
+if (preg_match('/svn, version ([0-9\.]+) /', $res, $r)) {//
+    $stats['svn']['installed'] = 'Yes';
+    $stats['svn']['version'] = $r[1];
+} else {
+    $stats['svn']['installed'] = 'No';
+}
+
 // hg
+$res = trim(shell_exec('hg --version'));
+if (preg_match('/Mercurial Distributed SCM \(version ([0-9\.]+)\)/', $res, $r)) {//
+    $stats['hg']['installed'] = 'Yes';
+    $stats['hg']['version'] = $r[1];
+} else {
+    $stats['hg']['installed'] = 'No';
+}
 
 
 foreach($stats as $section => $details) {
