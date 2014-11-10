@@ -22,6 +22,7 @@ class AccessPrivate extends Analyzer\Analyzer {
 
         // classname::method() parent class through extension (not the first one)
         $this->atomIs("Staticmethodcall")
+             ->raw('sideEffect{ first = it; }')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->inIs('METHOD')
@@ -36,7 +37,7 @@ class AccessPrivate extends Analyzer\Analyzer {
                               { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any()}.any()
                               
                           }')
-             ->back('first');
+             ->raw('transform{ first; }');
         $this->prepareQuery();
 
         // parent::method() (immediate parent)
