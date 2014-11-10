@@ -50,12 +50,16 @@ print shell_exec('chmod -R g+w ./projects/'.$project);
 
 if (!empty($repo_url) && !file_exists('./projects/'.$project.'/code/')) {
     if (strpos($repo_url, 'bitbucket.org') !== false) {
+        print "Installing with git on googlecode\n";
         print shell_exec("cd ./projects/$project; hg clone $repo_url code");
     } elseif (strpos($repo_url, '.googlecode.com/svn/') !== false) {
+        print "Installing with svn on googlecode\n";
         print shell_exec("cd ./projects/$project; svn checkout $repo_url code");
     } elseif (strpos($repo_url, 'svn.code.sf.net') !== false) {
+        print "Installing with svn on sourceforge\n";
         print shell_exec("cd ./projects/$project; svn checkout $repo_url code");
     } elseif (preg_match('#^[a-z0-9\-]+/[a-z0-9\-]+$#', $repo_url)) {
+        print "Installing with composer\n";
         // composer install
         $composer = new stdClass();
         $composer->require = new stdClass();
@@ -64,11 +68,25 @@ if (!empty($repo_url) && !file_exists('./projects/'.$project.'/code/')) {
         file_put_contents('projects/'.$project.'/composer.json', $json);
         print shell_exec("cd ./projects/$project; composer install; mv vendor code");
     } elseif (strpos($repo_url, '.zip') !== false) {
+        print "Installing with URL and zip\n";
         $file = basename($repo_url);
         $file_noext = str_replace('.zip', '', $file);
         print shell_exec("cd ./projects/$project; wget $repo_url; unzip -qq $file; mv $file_noext code; rm $file");
-// bz2, tar.bz, tgz, xz etc.
+    } elseif (strpos($repo_url, '.tbz') !== false || strpos($repo_url, '.tar.bz2') !== false) {
+        print "Installing with URL and tar.bz2\n";
+        $file = basename($repo_url);
+        $file_noext = str_replace('.tbz', '', $file);
+        $file_noext = str_replace('.tar.bz2', '', $file);
+        print shell_exec("cd ./projects/$project; wget $repo_url; mkdir code; tar -jxf $file -C code; rm $file");
+    } elseif (strpos($repo_url, '.tgz') !== false || strpos($repo_url, '.tar.gz') !== false) {
+        print "Installing with URL and tar.gz\n";
+        $file = basename($repo_url);
+        $file_noext = str_replace('.tgz', '', $file);
+        $file_noext = str_replace('.tar.gz', '', $file);
+        print shell_exec("cd ./projects/$project; wget $repo_url; mkdir code; tar -zxf $file -C code; rm $file");
+// xz etc.
     } else {
+        print "Installing with git\n";
         print shell_exec("cd ./projects/$project; git clone $repo_url code");
     }
 
