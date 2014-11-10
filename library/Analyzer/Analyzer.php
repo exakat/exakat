@@ -958,11 +958,11 @@ GREMLIN;
     function rankIs($edge_name, $rank) {
         if ($rank == 'first') {
             $rank = 0;
-        } else if ($rank == 'last') {
+        } else if ($rank === 'last') {
             $this->addMethod("sideEffect{ rank = it.out(***).count() - 1;}", $edge_name);
             $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edge_name);
             return $this;
-        } else if ($rank == '2last') {
+        } else if ($rank === '2last') {
             $this->addMethod("sideEffect{ rank = it.out(***).count() - 2;}", $edge_name);
             $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edge_name);
             return $this;
