@@ -68,6 +68,7 @@ while($row = $res->fetch_Assoc()) {
         if (defined('WHEN') && (WHEN == 'today')) { continue 1; }
         $line .= "None";
         $diff = 100;
+        $diffi = 100;
     }
     
     $suggestions[$row['project']] = $row['tokens'] * (1 + $diffi);
