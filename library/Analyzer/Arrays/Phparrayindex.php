@@ -2,7 +2,7 @@
 
 namespace Analyzer\Arrays;
 
-use Analyzer\Variables\VariablePhp;
+use Analyzer;
 
 class Phparrayindex extends Analyzer\Analyzer {
 
