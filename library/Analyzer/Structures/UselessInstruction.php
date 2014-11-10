@@ -11,7 +11,7 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
-                            'Constant', 'String', 'Instanceof', 'Bitshift', 'Logical', 'Comparison', 'Null'))
+                            'Identifier', 'String', 'Instanceof', 'Bitshift', 'Logical', 'Comparison', 'Null'))
              ->noAtomInside('Functioncall');
         $this->prepareQuery();
         
@@ -31,7 +31,7 @@ class UselessInstruction extends Analyzer\Analyzer {
         // return $a++;
         $this->atomIs("Return")
              ->outIs('RETURN')
-             ->atomIs('PostPlusPlus')
+             ->atomIs('Postplusplus')
              ->back('first');
         $this->prepareQuery();
     }

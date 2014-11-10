@@ -2,7 +2,8 @@
 
 $expected     = array('\\A\\B\\C', 
                       '-( 4 + 3)', 
-                      '"String"', 
+                      '"String"',
+                      'MY_CONSTANT', 
                       '<<<HEREDOC
 ');
 
