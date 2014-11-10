@@ -36,6 +36,8 @@ class Appinfo extends \Report\Content {
                             'ext/gnupg'      => 'Extensions/Extgnupg',
                             'ext/hash'       => 'Extensions/Exthash',
                             'ext/iconv'      => 'Extensions/Exticonv',
+                            'ext/imap'       => 'Extensions/Extimap',
+                            'ext/imagick'    => 'Extensions/Extimagick',
                             'ext/info'       => 'Extensions/Extinfo',
                             'ext/json'       => 'Extensions/Extjson',
                             'ext/kdm5'       => 'Extensions/Extkdm5',
@@ -51,6 +53,7 @@ class Appinfo extends \Report\Content {
                             'ext/mssql'      => 'Extensions/Extmssql',
                             'ext/mysql'      => 'Extensions/Extmysql',
                             'ext/mysqli'     => 'Extensions/Extmysqli',
+                            'ext/oci8'       => 'Extensions/Extoci8',
                             'ext/odbc'       => 'Extensions/Extodbc',
                             'ext/openssl'    => 'Extensions/Extopenssl',
                             'ext/pcntl'      => 'Extensions/Extpcntl',
@@ -172,6 +175,7 @@ class Appinfo extends \Report\Content {
                             'Final methods'     => 'Classes/Finalmethods',
 
                             'Class constants'   => 'Classes/ConstantDefinition',
+                            'Overwritten constants' => 'Classes/OverwrittenConst',
 
                             'Magic methods'     => 'Classes/MagicMethod',
                             'Cloning'           => 'Classes/CloningUsage',
