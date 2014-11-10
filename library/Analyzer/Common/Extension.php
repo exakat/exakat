@@ -61,7 +61,7 @@ class Extension extends Analyzer\Analyzer {
         }
 
         if (!empty($classes)) {
-            $classes = array_map(function ($x) { return "\\".$x; } ,  $classes);
+            $classes = array_map(function ($x) { return "\\".strtolower($x); } ,  $classes);
 
             $this->atomIs('New')
                  ->outIs('NEW')

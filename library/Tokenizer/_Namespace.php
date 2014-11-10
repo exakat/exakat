@@ -40,7 +40,8 @@ class _Namespace extends TokenAuto {
                                   1 => array('atom'  => array('Identifier', 'Nsname')),
                                   2 => array('token' => 'T_SEMICOLON',
                                              'atom'  => 'none'),
-                                  3 => array('token' => array('T_CLOSE_TAG', 'T_END', 'T_SEMICOLON'))
+                                  3 => array('token' => array('T_CLOSE_TAG', 'T_END', 'T_SEMICOLON'),
+                                             'atom'  => 'none')
         );
         
         $this->actions = array('insert_ns_void' => true,
