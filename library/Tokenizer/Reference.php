@@ -10,7 +10,7 @@ class Reference extends TokenAuto {
         $this->conditions = array(-1 => array('filterOut2' => array_merge(Logical::$operators, 
                                                                 array('T_VARIABLE', 'T_LNUMBER', 'T_DNUMBER', 'T_STRING',
                                                                       'T_MINUS', 'T_PLUS', 'T_CLOSE_PARENTHESIS', 
-                                                                      'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS' )),
+                                                                      'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS', 'T_CONSTANT_ENCAPSED_STRING' )),
                                               'notAtom'    => array('Parenthesis', 'Array', 'Comparison', 'Bitshift', )),
                                    0 => array('token' => Reference::$operators,
                                               'atom' => 'none'),
