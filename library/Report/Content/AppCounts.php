@@ -29,7 +29,7 @@ class AppCounts extends \Report\Content {
                             'Methods'        => array('index' => 'Class', 
                                                       'Below' => 'out("BLOCK").out("ELEMENT").has("atom", "Function").filter{!it.out("STATIC").any()}'),
                             'Static methods' => array('index' => 'Class', 
-                                                                'Below' => 'out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("STATIC").any()}'),
+                                                      'Below' => 'out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("STATIC").any()}'),
                      ),
                     'Structures' => array(
                             'Ifthen'        => 'Ifthen',
@@ -64,11 +64,11 @@ class AppCounts extends \Report\Content {
                         $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('\\', '\\\\', $ext)."']].out('ANALYZED').count()"; 
                     }
                 } elseif (isset($ext['Unique'])) {
-                    $queryTemplate = "g.idx('atoms')[['atom':'$ext']].{$ext['Unique']}.unique().count()"; 
+                    $queryTemplate = "g.idx('atoms')[['atom':'{$ext['index']}']].{$ext['Unique']}.unique().count()"; 
                 } elseif (isset($ext['Below'])) {
-                    $queryTemplate = "g.idx('atoms')[['atom':'$ext']].{$ext['Below']}.count()"; 
+                    $queryTemplate = "g.idx('atoms')[['atom':'{$ext['index']}']].{$ext['Below']}.count()"; 
                 } else {
-                    $queryTemplate = "g.idx('atoms')[['atom':'$ext']].count()"; 
+                    $queryTemplate = "g.idx('atoms')[['atom':'{$ext['index']}']].count()"; 
                 }
                 $vertices = $this->query($this->neo4j, $queryTemplate);
                 $v = $vertices[0][0];
