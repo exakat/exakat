@@ -190,10 +190,15 @@ function process_file($filename, $log_file) {
         return true; // we just ignore the file. this is an empty script or a text file
     }
 
-    if (!isset($tokens[0][0])) {
-        var_dump($tokens);
-        die();
+    if (!isset($tokens[0]) ||
+        !isset($tokens[1]) ||
+        !isset($tokens[0][0]) ||
+        !isset($tokens[1][0])) {
+        print "File '$filename' has not enough tokens to start. Ignoring\n";
+
+        return true;
     }
+    
     while ( $Php->getTokenname($tokens[0][0]) == 'T_OPEN_TAG' &&
             $Php->getTokenname($tokens[1][0]) == 'T_CLOSE_TAG') {
         unset($tokens[0]);
