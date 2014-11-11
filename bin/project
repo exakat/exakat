@@ -101,7 +101,7 @@ if (file_exists('./projects/'.$project.'/log/analyze.final.log')) {
     unlink('./projects/'.$project.'/log/analyze.final.log');
 }
 
-$themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"');
+$themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security');
 foreach($themes as $theme) {
     shell_exec('php bin/analyze -T '.$theme.' > ./projects/'.$project.'/log/analyze.'.str_replace(' ', '_', trim($theme, '"')).'.final.log');
     print "Analyzing $theme\n";
