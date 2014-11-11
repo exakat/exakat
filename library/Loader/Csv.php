@@ -62,13 +62,13 @@ SHELL
 		    sleep(1);
     		$response = file_get_contents('http://localhost:7474/db/data/', false, $context);
 		}
-
+        
         preg_match("/Importing (\d+) Nodes/is", $res, $nodes);
         preg_match("/Importing (\d+) Relationships/is", $res, $relations);
         
         $fnodes = -1;
         $fp = fopen('batch-import/sampleme/nodes.csv', 'r');
-        while(fgetcsv($fp, 1000, "\t", '"')) { $fnodes++; }
+        while(fgetcsv($fp, 100000, "\t", '"')) { $fnodes++; }
         fclose($fp);
         
         $frels = -1;
