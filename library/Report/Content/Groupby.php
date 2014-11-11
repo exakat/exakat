@@ -43,14 +43,14 @@ class Groupby extends \Report\Content {
     }
 
     public function toArray() {
-        $array = array();
+        $array = array_flip($this->sort);
         
         foreach($this->analyzers as $a) {
             $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
             $m = $this->method;
             $c = $this->count;
             
-            @$array[$analyzer->$m()] += $analyzer->$c();
+            $array[$analyzer->$m()] += $analyzer->$c();
         }
         
         $this->sort_array($array);
