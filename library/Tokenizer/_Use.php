@@ -110,10 +110,10 @@ if (fullcode.out('FUNCTION').any()) {
 
 // use a (aka c);
 fullcode.out('USE').has('atom', 'Identifier').each{
-    it.setProperty('originpath', it.code);
+    it.setProperty('originpath', it.code.toLowerCase());
     it.setProperty('originclass', it.code);
     
-    it.setProperty('alias', it.code);
+    it.setProperty('alias', it.code.toLowerCase());
 }
 
 // use a\b\c (aka c);
@@ -123,14 +123,14 @@ fullcode.out('USE').has('atom', 'As').each{
         s.add(it.getProperty('code')); 
     };
     if (it.absolutens == 'true') {
-        it.setProperty('originpath', '\\\\' + s.join('\\\\'));
+        it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());
         it.setProperty('originclass', s.pop());
     } else {
-        it.setProperty('originpath', s.join('\\\\'));
+        it.setProperty('originpath', s.join('\\\\').toLowerCase());
         it.setProperty('originclass', s.pop());
     }
     
-    it.setProperty('alias', it.out('AS').next().code);
+    it.setProperty('alias', it.out('AS').next().code.toLowerCase());
 }
 
 // use a; (aka a)
@@ -140,17 +140,17 @@ fullcode.out('USE').has('atom', 'Nsname').each{
         s.add(it.getProperty('code')); 
     };
     if (it.absolutens == 'true') {
-        it.setProperty('originpath', '\\\\' + s.join('\\\\'));
+        it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());
         it.setProperty('originclass', s[s.size() - 1]);
     } else {
-        it.setProperty('originpath', s.join('\\\\'));
+        it.setProperty('originpath', s.join('\\\\').toLowerCase());
         it.setProperty('originclass', s[s.size() - 1]);
     }
     
     if (it.out('AS').any()) {
-        it.setProperty('alias', it.out('AS').next().code);
+        it.setProperty('alias', it.out('AS').next().code.toLowerCase());
     } else {
-        it.setProperty('alias', s[s.size() - 1]);
+        it.setProperty('alias', s[s.size() - 1].toLowerCase());
     }
 }
 
@@ -162,17 +162,17 @@ fullcode.out('FUNCTION', 'CONST').each{
         s.add(it.getProperty('code')); 
     };
     if (it.absolutens == 'true') {
-        it.setProperty('originpath', '\\\\' + s.join('\\\\'));
+        it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());
         it.setProperty('originclass', s[s.size() - 1]);
     } else {
-        it.setProperty('originpath', s.join('\\\\'));
+        it.setProperty('originpath', s.join('\\\\').toLowerCase());
         it.setProperty('originclass', s[s.size() - 1]);
     }
     
     if (it.out('AS').any()) {
-        it.setProperty('alias', it.out('AS').next().code);
+        it.setProperty('alias', it.out('AS').next().code.toLowerCase());
     } else {
-        it.setProperty('alias', s[s.size() - 1]);
+        it.setProperty('alias', s[s.size() - 1].toLowerCase());
     }
 }
 

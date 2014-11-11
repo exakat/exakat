@@ -811,7 +811,7 @@ g.idx('atoms')[['atom':'Staticconstant']]
 ", "
 // special case for isset, unset, array, etc.
 g.idx('atoms')[['atom':'Functioncall']]
-    .filter{ it.token in ['T_ARRAY', 'T_UNSET', 'T_EXIT', 'T_ISSET', 'T_ECHO', 'T_PRINT', 'T_EMPTY']}
+    .filter{ it.token in ['T_ARRAY', 'T_LIST', 'T_UNSET', 'T_EXIT', 'T_DIE', 'T_ISSET', 'T_ECHO', 'T_PRINT', 'T_EMPTY', 'T_EVAL', 'T_STATIC']}
     .each{
         it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
     }; 
@@ -836,6 +836,18 @@ g.idx('atoms')[['atom':'Trait']].each{
     g.idx('traits').put('path', it.fullnspath.toLowerCase(), it)
 };
 
+","
+// apply use statement to all structures
+g.idx('atoms')[['atom':'Use']].out('USE').each{ 
+    alias = it.alias.toLowerCase();
+    origin = it.originpath.toLowerCase();
+
+    it.in('USE').in('ELEMENT').out().loop(1){true}{ it.object.fullnspath != null && it.object.atom != 'Use'}.each{ 
+        if (alias == it.code.toLowerCase()) {
+            it.setProperty('fullsnpath', origin);
+        } 
+    }
+};
 ",
 //"g.dropIndex('racines');",
 // if there is an error while processing the AST, racines is needed.
