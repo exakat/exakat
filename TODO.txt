@@ -319,16 +319,14 @@ Spot PEAR classes
 Code source that mix defintiions (class, interface, const...) and actual code (except for protection against direct access..).
 Spot multiple-class files, multiple-namespace files
 Corriger le calcul du nombre de fichiers qui ne sont pas compilables
-Faire un 2eme dashboard
 Faire un Rapport de compatibilité : up and down. Sous forme de tableau (versions puis features qui limitent (rouge, vert, orange, bleu pour les gains possibles)
-Publier le site.
+
 Add an analyzer of the application : As documentation, version, tests, external libs, languges, template, config.... Report this, and exclude some of the elements in the code.
-Surveiller le chinois dans le HTML
+
 Spot expressions that are the same (cf str_replace I used...)
 Spot files that use $this, and that are actually included in PHP methods (old style PHP inclusion)
-support T_ELLIPSIS in arguments for _Function
+Suggest using ... instead of func_get_args, and ... instead of call_user_func_array
 
-support PHP 5.6 importation of functions and constants (use function xxx, use const yyy)
 Chez UnresolvedClasses 7 for conflict between aliases and declaration (Use in one namespace, class in another).
 Spot use clause that are in the same namespace (just alias ? )
 
@@ -372,7 +370,6 @@ when there is no namespace, what to find? I should put a default namespace
 
 Add a way to ignore some vendors dependings on project.
 Add a way to overwrite / add / nullify some data from within a project.
-Wrong number of arguments : to be fixed
 
 Suggest properties to be ppp depending on usage (public => outusage, properted => child/parents, private : local class)
 composer.json generator or checker 
@@ -482,10 +479,29 @@ Add link to clearPHP in the docs.
 
 Spot files that are affected by short open tags and report them (one should only use normalized tags).
 
-Add support for Composer as code fetcher. 
-
 Make projectsize report non-bin/files'ed project 
 make projectsize update vcs
 make projectsize collect size in sqlite (not in mysql) and list of project + origin (for export )
 
 Check for the exact count of nodes and relations at the end (compare g.V.count() with the count of useful nodes and relations. Add stats about index and their amounts).
+
+In this folder, this and that is always the same. Why not in this one? (extensions, use, methods, )
+
+List checks for data consistancy : 
++ php_functions list (is is all the other *.ini ? Same for interface, constant, trait, etc.)
++ aliases extensions?
++ Reference in function call ? 
++ Obsolete liste ? 
++ extensions in appinfo ? 
+
+Finish overloaded for property/methods
+
+add support for use in fullnspath : namespace a; use b; class c extend b {} (b -> b, do exists)
+
+testBySecond : testMethods are not used (neither setUp nor tearDown)
+
+directInjection : Ignore 'secure' functions such as htmlentities, intval, isset
+
+  $_GET["pi"] = ""; Don' assign incoming variable! Use Global!
+  
+List contaminated variables ($x = $_POST..)
