@@ -1286,11 +1286,15 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
                                                     'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 
                                                     'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
                                                     'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_DOT', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 
-                                                    'T_ELSE']) || it.getProperty('atom') != null}.any() && 
+                                                    'T_ELSE']) || (it.getProperty('atom') != null && it.atom != 'Parenthesis')}.any() && 
     !it.in('NEXT').in('NEXT').filter{ it.token == 'T_COLON' && it.association == 'Ternary' }.any() 
                                                     ) {
+
     sequence = it;
     previous = it.in('NEXT').next();
+
+    previous.setProperty('checkForNextIn', it.in('NEXT').next().atom);
+    previous.setProperty('checkForNextInIn', it.in('NEXT').in('NEXT').next().atom);
     
     sequence.out('ELEMENT').each{ 
         it.setProperty('rank', it.rank + 1);
@@ -1301,7 +1305,7 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
     previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
     previous.bothE('NEXT').each{ g.removeEdge(it); }
 
-//    previous.setProperty('checkForNext', 'Previous');
+    previous.setProperty('checkForNext', 'Previous');
 }
 
 // Special case for Block (Sequence + block)
@@ -1319,7 +1323,7 @@ while ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any(
     
     previous.in('NEXT').each{ g.addEdge(it, sequence, 'NEXT')};
     previous.bothE('NEXT').each{ g.removeEdge(it); }
-//    previous.setProperty('checkForNext', 'Previous Block ' + it.in('NEXT').in('NEXT').next().token + ' / ' + it.in('NEXT').in('NEXT').filter{!(it.token in ['T_OPEN_PARENTHESIS', 'T_VOID', 'T_USE', 'T_IF'])}.count() );
+    previous.setProperty('checkForNext', 'Previous Block ' + it.in('NEXT').in('NEXT').next().token + ' / ' + it.in('NEXT').in('NEXT').filter{!(it.token in ['T_OPEN_PARENTHESIS', 'T_VOID', 'T_USE', 'T_IF'])}.count() );
 }
 
 // processing a sequence (Only the next sequence)
@@ -1332,7 +1336,7 @@ while (it.out('NEXT').has('atom', 'Sequence').any()) {
         g.removeEdge(it.inE('ELEMENT').next());
         
         g.addEdge(sequence, it, 'ELEMENT');
-//        it.setProperty('checkForNext', 'Sequence');
+        it.setProperty('checkForNext', 'Sequence');
 
         it.setProperty('rank', c + it.rank);
     }
@@ -1369,7 +1373,7 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
     g.addEdge(sequence, next.out('NEXT').next(), 'NEXT');
     next.bothE('NEXT').each{ g.removeEdge(it); }
 
-//    next.setProperty('checkForNext', 'Next');
+    next.setProperty('checkForNext', 'Next');
     
     if (next.both('NEXT').count() == 0) {
         next.inE('INDEXED').each{ g.removeEdge(it); }
