@@ -370,6 +370,30 @@ function process_file($filename, $log_file) {
                 $regexIndex["Sequence"]->relateTo($T[$Tid], 'INDEXED')->save();
 
                 $to_index = false;
+            } elseif ($Php->getTokenname($token[0]) == 'T_START_HEREDOC' && 
+                      is_array($tokens[$id + 1]) && 
+                      $Php->getTokenname($tokens[$id + 1][0]) == 'T_END_HEREDOC') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
+                                              ->setProperty('code', $token[1])
+                                              ->setProperty('fullcode', $token[1])
+                                              ->setProperty('line', $token[2])->save();
+                $classNode->relateTo($T[$Tid]);
+
+                $previous->relateTo($T[$Tid], 'NEXT')->save();
+                $regexIndex["Heredoc"]->relateTo($T[$Tid], 'INDEXED')->save();
+                $in_quote = true;
+                $previous = $T[$Tid];
+
+                $Tid++;
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_ENCAPSED_AND_WHITESPACE')
+                                              ->setProperty('atom', 'String')
+                                              ->setProperty('code', ' ')
+                                              ->setProperty('fullcode', ' ')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('modifiedBy', 'bin/load26')
+                                              ->save();
+
+                $to_index = false;
             } elseif ($Php->getTokenname($token[0]) == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenname($token[0]))
                                               ->setProperty('code', $token[1])
@@ -973,14 +997,16 @@ function process_file($filename, $log_file) {
             $T[$Tid]->save();
         }
 
-        if (in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE', 'T_START_HEREDOC'))) {
+        if (!$in_quote && in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE', 'T_START_HEREDOC'))) {
+            print __LINE__."\n";
             $in_quote = true;
             if (is_array($token)) {
                 $T[$Tid]->setProperty('fullcode', $token[1])->save();
             } else {
                 $T[$Tid]->setProperty('fullcode', $token)->save();
             }
-        } elseif (in_array($token_value, array('T_QUOTE_CLOSE', 'T_SHELL_QUOTE_CLOSE', 'T_END_HEREDOC'))) {
+        } elseif ($in_quote && in_array($token_value, array('T_QUOTE_CLOSE', 'T_SHELL_QUOTE_CLOSE', 'T_END_HEREDOC'))) {
+            print 'END '.__LINE__."\n";
             $in_quote = false;
             $T[$Tid]->setProperty('in_quote', "'true'")->save();
             if (is_array($token)) {
