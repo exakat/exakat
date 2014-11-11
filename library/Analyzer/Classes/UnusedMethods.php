@@ -16,7 +16,8 @@ class UnusedMethods extends Analyzer\Analyzer {
              ->analyzerIsNot('Analyzer\\Classes\\UsedMethods')
              ->outIs('NAME')
              ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
-             ->codeIsNot(array('__construct', '__destruct', '__get', '__set', '__call', '__callstatic'))
+             ->codeIsNot(array('__construct', '__destruct', '__get', '__set', '__call', '__callstatic', '__tostring',
+                               '__debugInfo'))
              ->back('first');
         $this->prepareQuery();
     }
