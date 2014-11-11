@@ -5,7 +5,8 @@ namespace Tokenizer;
 class String extends TokenAuto {
     static public $operators = array('T_QUOTE'); 
     static public $allowed_classes = array('String', 'Variable', 'Concatenation', 'Array', 'Property', 'Methodcall', 
-                                           'Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Ternary');
+                                           'Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Ternary', 'Concatenation',
+                                           'Functioncall');
     static public $atom = 'String';
 
     public function _check() {
