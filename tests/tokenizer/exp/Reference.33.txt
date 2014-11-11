@@ -1,19 +1,21 @@
 <?php 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      &
-      Label : RIGHT
-        $c
-      Label : LEFT
-        ::
-        Label : CLASS
-          A
-        Label : CONSTANT
-          B
-  Label : THEN
-    {
-    Label : CODE
-      void
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        &
+        Label : LEFT
+          ::
+          Label : CLASS
+            A
+          Label : CONSTANT
+            B
+        Label : RIGHT
+          $c
+    Label : THEN
+      {
+      Label : ELEMENT
+        void

@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  =
-  Label : RIGHT
-    [
-    Label : INDEX
-      +
-      Label : RIGHT
-        3
-      Label : LEFT
-        1
-    Label : VARIABLE
-      $b
-  Label : LEFT
-    $a
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      [
+      Label : VARIABLE
+        $b
+      Label : INDEX
+        +
+        Label : RIGHT
+          3
+        Label : LEFT
+          1
+    Label : LEFT
+      $a

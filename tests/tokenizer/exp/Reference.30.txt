@@ -1,41 +1,41 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      &
-      Label : RIGHT
-        ==
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        &
         Label : RIGHT
-          $c
+          ==
+          Label : RIGHT
+            $c
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $a
+            Label : METHOD
+              b
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
         Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : METHOD
-            b
-            Label : ARGUMENTS
-              void
-      Label : LEFT
-        >>
-        Label : RIGHT
-          "0"
-        Label : LEFT
-          $d
-  Label : THEN
-    {
-    Label : CODE
-      ;
+          >>
+          Label : RIGHT
+            "0"
+          Label : LEFT
+            $d
+    Label : THEN
+      {
       Label : ELEMENT
         return
         Label : RETURN
           true
-  Label : ELSE
-    {
-    Label : CODE
-      ;
+    Label : ELSE
+      {
       Label : ELEMENT
         return
         Label : RETURN

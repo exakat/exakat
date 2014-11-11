@@ -1,21 +1,45 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     (
     Label : CODE
       &&
+      Label : LEFT
+        ===
+        Label : LEFT
+          ::
+          Label : CLASS
+            self
+          Label : CONSTANT
+            A
+        Label : RIGHT
+          (
+          Label : CODE
+            &
+            Label : LEFT
+              ::
+              Label : CLASS
+                self
+              Label : CONSTANT
+                B
+            Label : RIGHT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                c
       Label : RIGHT
         preg_match
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
             ->
-            Label : PROPERTY
-              d
             Label : OBJECT
               $this
+            Label : PROPERTY
+              d
           Label : ARGUMENT
             ->
             Label : OBJECT
@@ -24,27 +48,5 @@ Label : CODE
               f
               Label : ARGUMENTS
                 void
-      Label : LEFT
-        ===
-        Label : RIGHT
-          (
-          Label : CODE
-            &
-            Label : RIGHT
-              ->
-              Label : PROPERTY
-                c
-              Label : OBJECT
-                $this
-            Label : LEFT
-              ::
-              Label : CLASS
-                self
-              Label : CONSTANT
-                B
-        Label : LEFT
-          ::
-          Label : CLASS
-            self
-          Label : CONSTANT
-            A
+                Label : ARGUMENT
+                  void

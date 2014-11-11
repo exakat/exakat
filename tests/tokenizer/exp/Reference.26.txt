@@ -1,46 +1,46 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
-    &
+    |
     Label : RIGHT
-      $d
-    Label : LEFT
-      |
+      &
       Label : RIGHT
-        >>
-        Label : RIGHT
-          1.2
-        Label : LEFT
-          $c
+        $d
       Label : LEFT
-        $a
-  Label : ELEMENT
-    &
-    Label : RIGHT
-      $d
-    Label : LEFT
-      |
-      Label : RIGHT
-        >>
-        Label : RIGHT
-          1
-        Label : LEFT
-          $c
-      Label : LEFT
-        $a
-  Label : ELEMENT
-    &
-    Label : RIGHT
-      $d
-    Label : LEFT
-      |
-      Label : RIGHT
         >>
         Label : RIGHT
           -3
         Label : LEFT
           $c
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    |
+    Label : RIGHT
+      &
+      Label : RIGHT
+        $d
       Label : LEFT
-        $a
+        >>
+        Label : RIGHT
+          1.2
+        Label : LEFT
+          $c
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    |
+    Label : RIGHT
+      &
+      Label : RIGHT
+        $d
+      Label : LEFT
+        >>
+        Label : RIGHT
+          1
+        Label : LEFT
+          $c
+    Label : LEFT
+      $a
