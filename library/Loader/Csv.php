@@ -94,7 +94,10 @@ SHELL
         // adding in_quote here, as it may not appear on the first token.
         $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter', 'rank', 'dowhile', 'block', 'filename', 'tag', 'association' );
         if (static::$file_saved == 0) {
-            fputcsv($fp, array_merge($les_cols), "\t");
+            $les_cols2 = $les_cols;
+            $les_cols2[4] .= ':int';
+            fputcsv($fp, array_merge($les_cols2), "\t");
+            unset($les_cols2);
         }
         foreach(static::$nodes as $id => $node) {
             $row = array();
@@ -102,7 +105,11 @@ SHELL
                 if (isset($node[$col])) {
                     $row[$col] = $node[$col];
                 } else {
-                    $row[$col] = '';
+                    if ($col == 'line') {
+                        $row[$col] = 0;
+                    } else {
+                        $row[$col] = '';
+                    }
                 }
                 if ($diff = array_diff(array_keys($row), $les_cols, array('id'))) {
                     print_r($diff);

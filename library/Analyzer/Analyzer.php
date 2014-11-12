@@ -237,7 +237,7 @@ GREMLIN;
             print "new $analyzer\n";
             $this->code = addslashes($this->code);
             $query = <<<GREMLIN
-x = g.addVertex(null, [analyzer:'$analyzer', analyzer:'true', description:'Analyzer index for $analyzer', code:'{$this->code}', fullcode:'{$this->code}',  atom:'Index', token:'T_INDEX']);
+x = g.addVertex(null, [analyzer:'$analyzer', analyzer:'true', line:0, description:'Analyzer index for $analyzer', code:'{$this->code}', fullcode:'{$this->code}',  atom:'Index', token:'T_INDEX']);
 
 g.idx('analyzers').put('analyzer', '$analyzer', x);
 
@@ -527,6 +527,9 @@ GREMLIN;
         if (is_array($analyzer)) {
             $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any()}', $analyzer);
         } else {
+            if ($analyzer == 'self') {
+                $analyzer = get_class($this);
+            }
             $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).any()}', $analyzer);
         }
         
@@ -534,12 +537,14 @@ GREMLIN;
     }
 
     function analyzerIsNot($analyzer) {
-        $analyzer = str_replace('\\', '\\\\', $analyzer);
 
         if (is_array($analyzer)) {
-            $this->methods[] = 'filter{ it.in("ANALYZED").filter{ it.code in [\''.join("', '", $analyzer).'\']}.any() == false}';
+            $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any() == false}', $analyzer);
         } else {
-            $this->methods[] = 'filter{ it.in("ANALYZED").has("code", \''.$analyzer.'\').any() == false}';
+            if ($analyzer == 'self') {
+                $analyzer = get_class($this);
+            }
+            $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).any() == false}', $analyzer);
         }
 
         return $this;
