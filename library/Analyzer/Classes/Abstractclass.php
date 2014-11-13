@@ -10,6 +10,7 @@ class Abstractclass extends Analyzer\Analyzer {
         $this->atomIs("Class")
              ->outIs('ABSTRACT')
              ->back('first');
+        $this->prepareQuery();
     }
 }
 
