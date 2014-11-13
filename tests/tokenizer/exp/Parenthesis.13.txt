@@ -1,19 +1,19 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      include_once
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'a.php'
-  Label : THEN
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        include_once
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'a.php'
+    Label : THEN
+      {
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

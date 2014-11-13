@@ -1,19 +1,19 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      class_exists
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $d
-  Label : THEN
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        class_exists
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $d
+    Label : THEN
+      {
       Label : ELEMENT
         new
         Label : NEW
@@ -28,6 +28,8 @@ Label : CODE
                 (
                 Label : CODE
                   $c
+          Label : NAME
+            $a
       Label : ELEMENT
         if
         Label : CONDITION
@@ -40,15 +42,13 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   ->
-                  Label : PROPERTY
-                    b
                   Label : OBJECT
                     $a
+                  Label : PROPERTY
+                    b
         Label : THEN
           {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $c
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $c

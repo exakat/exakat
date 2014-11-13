@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     while
     Label : CONDITION
@@ -14,34 +14,32 @@ Label : CODE
             $c
       Label : LEFT
         $a
-    Label : LOOP
+    Label : BLOCK
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              $s
-          Label : THEN
-            {
-            Label : CODE
-              void
-          Label : ELSE
-            {
-            Label : CODE
-              void
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              $d
-          Label : THEN
-            {
-            Label : CODE
-              void
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $s
+        Label : THEN
+          {
+          Label : ELEMENT
+            void
+        Label : ELSE
+          {
+          Label : ELEMENT
+            void
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $d
+        Label : THEN
+          {
+          Label : ELEMENT
+            void
   Label : ELEMENT
     if
     Label : CONDITION
@@ -52,19 +50,17 @@ Label : CODE
           'a'
         Label : LEFT
           [
-          Label : INDEX
-            'b'
           Label : VARIABLE
             $c
+          Label : INDEX
+            'b'
     Label : THEN
       {
-      Label : CODE
+      Label : ELEMENT
         void
     Label : ELSE
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $t
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $t

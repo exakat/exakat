@@ -1,12 +1,12 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     throw
     Label : THROW
       ->
-      Label : PROPERTY
-        g
       Label : OBJECT
         $e
+      Label : PROPERTY
+        g

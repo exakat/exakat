@@ -1,33 +1,15 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      $a
-  Label : THEN
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $d
-      Label : ELEMENT
-        C
-
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $e
-      Label : ELEMENT
-        D
-
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      {
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -38,12 +20,6 @@ Label : CODE
         A
 
       Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $c
-      Label : ELEMENT
         B
 
       Label : ELEMENT
@@ -51,25 +27,34 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $h
+            $c
       Label : ELEMENT
-        G
+        H
+
+      Label : ELEMENT
+        I
 
       Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $i
+            $d
       Label : ELEMENT
-        H
-
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $g
       Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $f
+      Label : ELEMENT
+        G
+
       Label : ELEMENT
         E
 
@@ -78,10 +63,25 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $g
+            $i
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $h
       Label : ELEMENT
         F
 
       Label : ELEMENT
-        I
+        D
+
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
+      Label : ELEMENT
+        C
 

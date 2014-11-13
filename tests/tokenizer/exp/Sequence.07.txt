@@ -1,10 +1,10 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_SEMICOLON
+  Label : ELEMENT
+    $x
   Label : ELEMENT
     !
     Label : NOT
       $y
-  Label : ELEMENT
-    $x

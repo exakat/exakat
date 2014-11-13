@@ -1,47 +1,53 @@
-<?php 
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        I
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'J'
-  Label : ELEMENT
-    H
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      ::
-      Label : CLASS
-        C
-      Label : METHOD
-        D
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            __
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'F'
-    Label : METHOD
-      g
+makeSequence T_ROOT
+Label : ELEMENT
+  K
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    makeSequence T_OPEN_TAG
+    Label : ELEMENT
+      A
+    Label : ELEMENT
+      echo
       Label : ARGUMENTS
         void
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        __
+        Label : ARGUMENT
+          I
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'J'
+    Label : ELEMENT
+      H
+    Label : ELEMENT
+      ->
+      Label : METHOD
+        g
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            'B'
-  Label : ELEMENT
-    A
+            void
+      Label : OBJECT
+        ::
+        Label : CLASS
+          C
+        Label : METHOD
+          D
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              __
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'F'
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          __
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'B'

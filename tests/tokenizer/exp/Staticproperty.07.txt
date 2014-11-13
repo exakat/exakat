@@ -1,34 +1,34 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     ::
     Label : CLASS
       \
-      Label : ELEMENT
-        C
-      Label : ELEMENT
-        A
-      Label : ELEMENT
+      Label : SUBNAME
         D
-    Label : PROPERTY
-      $B
-  Label : ELEMENT
-    ::
-    Label : CLASS
-      \
-      Label : ELEMENT
-        A
-    Label : PROPERTY
-      $B
-  Label : ELEMENT
-    ::
-    Label : CLASS
-      \
-      Label : ELEMENT
-        A
-      Label : ELEMENT
+      Label : SUBNAME
         C
+      Label : SUBNAME
+        A
+    Label : PROPERTY
+      $B
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      \
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        A
+    Label : PROPERTY
+      $B
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      \
+      Label : SUBNAME
+        A
     Label : PROPERTY
       $B

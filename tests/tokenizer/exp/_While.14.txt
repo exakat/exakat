@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     while
     Label : CONDITION
@@ -10,8 +10,8 @@ Label : CODE
         10
       Label : LEFT
         $i
-    Label : LOOP
-      ;
+    Label : BLOCK
+      makeSequence T_SEMICOLON
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

@@ -1,29 +1,29 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      !
-      Label : NOT
-        ::
-        Label : CLASS
-          \
-          Label : ELEMENT
-            A
-          Label : ELEMENT
-            B
-        Label : METHOD
-          C
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $D
-  Label : THEN
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          ::
+          Label : CLASS
+            \
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              A
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $D
+    Label : THEN
+      {
       Label : ELEMENT
         throw
         Label : THROW

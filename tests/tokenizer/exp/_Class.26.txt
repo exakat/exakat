@@ -1,50 +1,50 @@
 <?php
 
 Label : CODE
-  class
-  Label : NAME
-    x
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      {
       Label : ELEMENT
-        Ppp
-        Label : NAME
-          $e
+        ppp
+        Label : DEFINE
+          $a
         Label : VALUE
-          5
+          1
         Label : VAR
           var
       Label : ELEMENT
-        Ppp
-        Label : NAME
+        ppp
+        Label : DEFINE
           $b
         Label : VALUE
           2
         Label : VAR
           var
       Label : ELEMENT
-        Ppp
-        Label : NAME
-          $d
-        Label : VALUE
-          4
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
-        Label : NAME
+        ppp
+        Label : DEFINE
           $c
         Label : VALUE
           3
         Label : VAR
           var
       Label : ELEMENT
-        Ppp
-        Label : NAME
-          $a
+        ppp
+        Label : DEFINE
+          $d
         Label : VALUE
-          1
+          4
+        Label : VAR
+          var
+      Label : ELEMENT
+        ppp
+        Label : DEFINE
+          $e
+        Label : VALUE
+          5
         Label : VAR
           var

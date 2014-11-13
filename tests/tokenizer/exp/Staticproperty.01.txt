@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  ::
-  Label : CLASS
-    T
-  Label : PROPERTY
-    $x
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      T
+    Label : PROPERTY
+      $x

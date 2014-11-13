@@ -1,61 +1,57 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     while
     Label : CONDITION
       1
-    Label : LOOP
+    Label : BLOCK
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            h
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                $g
-              Label : ARGUMENT
-                8
-          Label : LEFT
-            $f
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              ||
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          h
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              $g
+            Label : ARGUMENT
+              8
+        Label : LEFT
+          $f
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            ||
+            Label : RIGHT
+              empty
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $e
+            Label : LEFT
+              !=
               Label : RIGHT
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $e
+                'd'
               Label : LEFT
-                !=
-                Label : RIGHT
-                  'd'
-                Label : LEFT
-                  substr
-                  Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      6
-                    Label : ARGUMENT
-                      $c
-                    Label : ARGUMENT
-                      7
-          Label : THEN
-            {
-            Label : CODE
-              ;
-              Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
+                substr
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    $c
+                  Label : ARGUMENT
+                    6
+                  Label : ARGUMENT
+                    7
+        Label : THEN
+          {
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
   Label : ELEMENT
     if
     Label : CONDITION
@@ -71,9 +67,9 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                3
-              Label : ARGUMENT
                 $b
+              Label : ARGUMENT
+                3
               Label : ARGUMENT
                 4
         Label : LEFT
@@ -85,16 +81,14 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                0
-              Label : ARGUMENT
                 $a
+              Label : ARGUMENT
+                0
               Label : ARGUMENT
                 1
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            false
+      Label : ELEMENT
+        return
+        Label : RETURN
+          false

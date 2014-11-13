@@ -1,9 +1,15 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     require
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'path'
+  Label : ELEMENT
+    require_once
     Label : ARGUMENTS
       void
       Label : ARGUMENT
@@ -16,12 +22,6 @@ Label : CODE
         'path'
   Label : ELEMENT
     include_once
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        'path'
-  Label : ELEMENT
-    require_once
     Label : ARGUMENTS
       void
       Label : ARGUMENT

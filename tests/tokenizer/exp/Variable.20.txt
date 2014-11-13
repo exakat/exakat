@@ -1,58 +1,40 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    "
-    Label : CONTAIN
-      Concatenation
-      Label : CONCAT
-        a
-      Label : CONCAT
-        ${
-        Label : NAME
-          b
-      Label : CONCAT
-        c
-      Label : CONCAT
-        ${
-        Label : NAME
-          d
-      Label : CONCAT
-        ef
-      Label : CONCAT
-        ${
-        Label : NAME
-          g
-      Label : CONCAT
-        h
-      Label : CONCAT
-        ${
-        Label : NAME
-          i
-      Label : CONCAT
-        j
-      Label : CONCAT
-        ${
-        Label : NAME
-          k
-      Label : CONCAT
-        l
-      Label : CONCAT
-        {
-        Label : NAME
-          $m
-      Label : CONCAT
-        n
-      Label : CONCAT
-        ${
-        Label : NAME
-          o
-      Label : CONCAT
-        p
-      Label : CONCAT
-        ${
-        Label : NAME
-          q
-      Label : CONCAT
-        r
+  "
+  Label : CONTAIN
+    Concatenation
+    Label : CONCAT
+      a
+    Label : CONCAT
+      $b
+    Label : CONCAT
+      c
+    Label : CONCAT
+      $d
+    Label : CONCAT
+      ef
+    Label : CONCAT
+      $g
+    Label : CONCAT
+      h
+    Label : CONCAT
+      $i
+    Label : CONCAT
+      j
+    Label : CONCAT
+      $k
+    Label : CONCAT
+      l
+    Label : CONCAT
+      $m
+    Label : CONCAT
+      n
+    Label : CONCAT
+      $o
+    Label : CONCAT
+      p
+    Label : CONCAT
+      $q
+    Label : CONCAT
+      r

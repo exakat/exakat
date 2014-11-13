@@ -1,27 +1,27 @@
 <?php
 
 Label : CODE
-  function
-  Label : NAME
-    a
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      $b
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $b
+    Label : NAME
+      a
+    Label : BLOCK
+      {
       Label : ELEMENT
         return
         Label : RETURN
           ->
           Label : OBJECT
             ->
-            Label : PROPERTY
-              e
             Label : OBJECT
               $d
+            Label : PROPERTY
+              e
           Label : METHOD
             f
             Label : ARGUMENTS
@@ -29,9 +29,9 @@ Label : CODE
               Label : ARGUMENT
                 .
                 Label : CONCAT
-                  b
-                Label : CONCAT
                   "a"
+                Label : CONCAT
+                  b
                 Label : CONCAT
                   "
                   Label : CONTAIN
@@ -52,9 +52,7 @@ Label : CODE
               $c
         Label : THEN
           {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              return
-              Label : RETURN
-                false
+          Label : ELEMENT
+            return
+            Label : RETURN
+              false

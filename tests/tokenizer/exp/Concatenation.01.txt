@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  .
-  Label : CONCAT
-    '1'
-  Label : CONCAT
-    '2'
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    .
+    Label : CONCAT
+      '1'
+    Label : CONCAT
+      '2'

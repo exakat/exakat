@@ -1,26 +1,18 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    "
-    Label : CONTAIN
-      Concatenation
-      Label : CONCAT
-        a
-      Label : CONCAT
-        ${
-        Label : NAME
-          b
-      Label : CONCAT
-        c
-      Label : CONCAT
-        ${
-        Label : NAME
-          d
-      Label : CONCAT
-        e
-      Label : CONCAT
-        ${
-        Label : NAME
-          f
+  "
+  Label : CONTAIN
+    Concatenation
+    Label : CONCAT
+      a
+    Label : CONCAT
+      $b
+    Label : CONCAT
+      c
+    Label : CONCAT
+      $d
+    Label : CONCAT
+      e
+    Label : CONCAT
+      $f

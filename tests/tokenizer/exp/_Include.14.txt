@@ -1,16 +1,16 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    B
   Label : ELEMENT
     A
   Label : ELEMENT
-    include
+    b
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        'a.php'
-  Label : ELEMENT
-    B
+        'c'
   Label : ELEMENT
     include
     Label : ARGUMENTS
@@ -18,8 +18,8 @@ Label : CODE
       Label : ARGUMENT
         'b.php'
   Label : ELEMENT
-    b
+    include
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        'c'
+        'a.php'

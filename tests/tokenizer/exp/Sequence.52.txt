@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -14,29 +14,27 @@ Label : CODE
             Label : ARGUMENT
               $e
     Label : THEN
-      ;
+      makeSequence T_INLINE_HTML
+      Label : ELEMENT
+        J
+    
       Label : ELEMENT
         K
 
       Label : ELEMENT
-        Block With Sequence For Case Without Semicolon
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              .
-              Label : CONCAT
-                f
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'g'
-              Label : CONCAT
-                $h
-        Label : ELEMENT
-          J
-    
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              f
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'g'
+            Label : CONCAT
+              $h
   Label : ELEMENT
     H
 
@@ -53,21 +51,19 @@ Label : CODE
             Label : ARGUMENT
               $a
     Label : THEN
-      ;
+      makeSequence T_OPEN_TAG
+      Label : ELEMENT
+        D
+    
       Label : ELEMENT
         E
 
       Label : ELEMENT
-        Block With Sequence For Case Without Semicolon
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $b
-        Label : ELEMENT
-          D
-    
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $b
     Label : ELSE
       elseif
       Label : CONDITION
@@ -81,7 +77,10 @@ Label : CODE
               Label : ARGUMENT
                 $c
       Label : THEN
-        ;
+        makeSequence T_OPEN_TAG
+        Label : ELEMENT
+          F
+    
         Label : ELEMENT
           G
 
@@ -91,6 +90,3 @@ Label : CODE
             void
             Label : ARGUMENT
               $d
-        Label : ELEMENT
-          F
-    

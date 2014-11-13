@@ -1,28 +1,20 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    global
-    Label : NAME
-      $d
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $b
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $a
-    Label : VALUE
-      void
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     global
     Label : NAME
       $c
-    Label : VALUE
-      void
+  Label : ELEMENT
+    global
+    Label : NAME
+      $d
+  Label : ELEMENT
+    global
+    Label : NAME
+      $b
+  Label : ELEMENT
+    global
+    Label : NAME
+      $a

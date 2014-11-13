@@ -1,27 +1,27 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      =
-      Label : LEFT
-        !
-        Label : NOT
-          $handle
-      Label : RIGHT
-        fopen
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            '/tmp/test'
-          Label : ARGUMENT
-            'r+b'
-  Label : THEN
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        =
+        Label : RIGHT
+          fopen
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              '/tmp/test'
+            Label : ARGUMENT
+              'r+b'
+        Label : LEFT
+          !
+          Label : NOT
+            $handle
+    Label : THEN
+      {
       Label : ELEMENT
         echo
         Label : ARGUMENTS

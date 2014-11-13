@@ -5,36 +5,24 @@ Label : CODE
   Label : ELEMENT
     global
     Label : NAME
-      $a
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $b
-    Label : VALUE
-      void
+      $f
   Label : ELEMENT
     global
     Label : NAME
       $e
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $c
-    Label : VALUE
-      void
-  Label : ELEMENT
-    global
-    Label : NAME
-      $f
-    Label : VALUE
-      void
   Label : ELEMENT
     global
     Label : NAME
       $d
-    Label : VALUE
-      void
+  Label : ELEMENT
+    global
+    Label : NAME
+      $c
+  Label : ELEMENT
+    global
+    Label : NAME
+      $b
+  Label : ELEMENT
+    global
+    Label : NAME
+      $a

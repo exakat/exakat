@@ -1,7 +1,15 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ::
+      Label : PROPERTY
+        $y
+      Label : CLASS
+        b
   Label : ELEMENT
     return
     Label : RETURN
@@ -9,9 +17,9 @@ Label : CODE
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          $y
-        Label : ARGUMENT
           $x
+        Label : ARGUMENT
+          $y
         Label : ARGUMENT
           $z
   Label : ELEMENT
@@ -26,15 +34,7 @@ Label : CODE
     return
     Label : RETURN
       ->
-      Label : PROPERTY
-        x
       Label : OBJECT
         $this
-  Label : ELEMENT
-    return
-    Label : RETURN
-      ::
-      Label : CLASS
-        b
       Label : PROPERTY
-        $y
+        x

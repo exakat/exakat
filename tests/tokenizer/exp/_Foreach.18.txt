@@ -1,12 +1,14 @@
 <?php
 
 Label : CODE
-  foreach
-  Label : VALUE
-    $b
-  Label : SOURCE
-    $a
-  Label : LOOP
-    Block With Foreach
-    Label : CODE
-      void
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    foreach
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b
+    Label : BLOCK
+      Block with Foreach
+      Label : ELEMENT
+        void

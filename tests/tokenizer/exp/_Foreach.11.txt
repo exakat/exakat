@@ -1,32 +1,34 @@
 <?php
 
 Label : CODE
-  foreach
-  Label : VALUE
-    $e
-  Label : SOURCE
-    !
-    Label : NOT
-      (
-      Label : CODE
-        ?
-        Label : CONDITION
-          is_array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
-        Label : THEN
-          $b
-        Label : ELSE
-          explode
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              'd'
-            Label : ARGUMENT
-              $d
-  Label : LOOP
-    {
-    Label : CODE
-      void
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    foreach
+    Label : SOURCE
+      !
+      Label : NOT
+        (
+        Label : CODE
+          ?
+          Label : CONDITION
+            is_array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $a
+          Label : THEN
+            $b
+          Label : ELSE
+            explode
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                'd'
+              Label : ARGUMENT
+                $d
+    Label : VALUE
+      $e
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void

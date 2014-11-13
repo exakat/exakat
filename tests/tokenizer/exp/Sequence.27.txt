@@ -1,1 +1,15 @@
-a
+;
+Label : ELEMENT
+  b
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    makeSequence T_OPEN_TAG
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        3
+      Label : LEFT
+        $x
+Label : ELEMENT
+  a

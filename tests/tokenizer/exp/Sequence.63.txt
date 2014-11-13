@@ -1,21 +1,21 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
-    ?
-    Label : CONDITION
-      return
-      Label : RETURN
+    return
+    Label : RETURN
+      ?
+      Label : CONDITION
         $a
-    Label : THEN
-      (int)
-      Label : CAST
-        (
-        Label : CODE
-          [
-          Label : INDEX
-            'c'
-          Label : VARIABLE
-            $b
-    Label : ELSE
-      true
+      Label : THEN
+        (int)
+        Label : CAST
+          (
+          Label : CODE
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              'c'
+      Label : ELSE
+        true

@@ -1,19 +1,13 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         .
-        Label : CONCAT
-          [
-          Label : INDEX
-            'g'
-          Label : VARIABLE
-            $f
         Label : CONCAT
           ::
           Label : CLASS
@@ -24,11 +18,17 @@ Label : CODE
               void
               Label : ARGUMENT
                 [
-                Label : INDEX
-                  d
                 Label : VARIABLE
                   $c
+                Label : INDEX
+                  d
         Label : CONCAT
           'e'
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $f
+          Label : INDEX
+            'g'
         Label : CONCAT
           'h'

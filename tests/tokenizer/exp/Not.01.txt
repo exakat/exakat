@@ -1,6 +1,8 @@
 <?php
 
 Label : CODE
-  !
-  Label : NOT
-    1
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    !
+    Label : NOT
+      1

@@ -1,21 +1,21 @@
 <?php 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      $a
-  Label : THEN
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        A
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $a
+    Label : THEN
+      {
       Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $b
+      Label : ELEMENT
+        A
       Label : ELEMENT
         B

@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     break
     Label : LEVEL
-      (
-      Label : CODE
-        2
+      makeSequence T_BREAK
+      Label : ELEMENT
+        (
+        Label : CODE
+          2

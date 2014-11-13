@@ -1,19 +1,19 @@
 <?php
 
 Label : CODE
-  foreach
-  Label : VALUE
-    ->
-    Label : PROPERTY
-      d
-    Label : OBJECT
-      $b
-  Label : SOURCE
-    $a
-  Label : LOOP
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    foreach
+    Label : SOURCE
+      $a
+    Label : VALUE
+      ->
+      Label : OBJECT
+        $b
+      Label : PROPERTY
+        d
+    Label : BLOCK
+      {
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

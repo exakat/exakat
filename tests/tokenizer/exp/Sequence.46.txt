@@ -1,15 +1,15 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      $z
-  Label : THEN
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $z
+    Label : THEN
+      {
       Label : ELEMENT
         ->
         Label : OBJECT
@@ -32,15 +32,15 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   [
-                  Label : INDEX
-                    'd'
                   Label : VARIABLE
                     [
-                    Label : INDEX
-                      'c'
                     Label : VARIABLE
                       $b
+                    Label : INDEX
+                      'c'
+                  Label : INDEX
+                    'd'
         Label : THEN
           {
-          Label : CODE
+          Label : ELEMENT
             void

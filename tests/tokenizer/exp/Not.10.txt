@@ -1,11 +1,13 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     !
     Label : NOT
       $x
+      Label : NAME
+        $x
       Label : ARGUMENTS
         void
         Label : ARGUMENT

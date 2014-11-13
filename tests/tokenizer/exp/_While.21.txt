@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  while
-  Label : CONDITION
-    $x
-  Label : LOOP
-    Block With While
-    Label : CODE
-      void
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      $x
+    Label : BLOCK
+      Block with While
+      Label : ELEMENT
+        void

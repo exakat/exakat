@@ -1,36 +1,38 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    use
-    Label : USE
-      \
-      Label : ELEMENT
-        H
-      Label : ELEMENT
-        F
-      Label : ELEMENT
-        G
-      Label : ELEMENT
-        I
-    Label : AS
-      J
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     namespace
     Label : NAMESPACE
       \
-      Label : ELEMENT
-        A
-      Label : ELEMENT
+      Label : SUBNAME
         B
-  Label : ELEMENT
-    use
-    Label : USE
-      \
+      Label : SUBNAME
+        A
+    Label : BLOCK
+      makeSequence T_SEMICOLON
       Label : ELEMENT
-        D
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            I
+          Label : SUBNAME
+            H
+          Label : SUBNAME
+            G
+          Label : SUBNAME
+            F
+          Label : AS
+            J
       Label : ELEMENT
-        C
-      Label : ELEMENT
-        E
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            E
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            C

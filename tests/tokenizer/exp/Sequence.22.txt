@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     require_once
     Label : ARGUMENTS
@@ -20,9 +20,7 @@ Label : CODE
         1
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            true
+      Label : ELEMENT
+        return
+        Label : RETURN
+          true

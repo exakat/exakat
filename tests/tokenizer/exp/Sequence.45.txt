@@ -1,15 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    interface
-    Label : CODE
-      {
-      Label : CODE
-        void
-    Label : NAME
-      x
+  makeSequence T_CLOSE_CURLY
   Label : ELEMENT
     if
     Label : CONDITION
@@ -18,9 +10,15 @@ Label : CODE
         $a
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $b
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $b
+  Label : ELEMENT
+    interface
+    Label : NAME
+      x
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void

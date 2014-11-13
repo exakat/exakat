@@ -1,18 +1,18 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     ::
     Label : CLASS
       {
-      Label : INDEX
-        2
       Label : VARIABLE
         [
-        Label : INDEX
-          1
         Label : VARIABLE
           $x
+        Label : INDEX
+          1
+      Label : INDEX
+        2
     Label : PROPERTY
       $b

@@ -1,14 +1,14 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     [
-    Label : INDEX
-      [
-      Label : INDEX
-        1
-      Label : VARIABLE
-        $b
     Label : VARIABLE
       $a
+    Label : INDEX
+      [
+      Label : VARIABLE
+        $b
+      Label : INDEX
+        1
