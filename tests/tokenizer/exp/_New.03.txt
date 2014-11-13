@@ -1,6 +1,8 @@
 <?php
 
 Label : CODE
-  new
-  Label : NEW
-    stdclass
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    new
+    Label : NEW
+      stdclass

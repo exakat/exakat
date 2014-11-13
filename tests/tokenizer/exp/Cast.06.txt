@@ -3,10 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
-    (boolean)
-    Label : CAST
-      $y
-  Label : ELEMENT
     (bool)
     Label : CAST
       $x
+  Label : ELEMENT
+    (boolean)
+    Label : CAST
+      $y

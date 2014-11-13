@@ -2,10 +2,22 @@
 
 class Config {
     static private $singleton = null;
-           private $options = array();
+        private $config_file = array();
+        private $commandline = array();
+        private $project_config = array();
+        
+        private $options = array();
     
     private function __construct() {
-        $this->options = parse_ini_file('./config/config.ini');
+        $this->config_file = parse_ini_file('./config/config.ini');
+        
+        // then read the config from the commandline (if any)
+        $this->read_commandline();
+        
+        // then read the config for the project in its folder
+        
+        // build the actual config. Project overwrite commandline overwrites config, if any.
+        $this->options = array_merge($this->config_file, $this->commandline, $this->project_config);
     }
     
     static function factory() {
@@ -31,6 +43,25 @@ class Config {
     
     public function __set($name, $value) {
         print "It is not possible to modify configuration\n";
+    }
+
+    private function read_commandline() {
+        if (empty($argv)) {
+            return null;
+        }
+        
+        $args = $argv;
+        
+        $options = array('-v' => 'verbose');
+        
+        foreach($options as $key => $config) {
+            if (($id = array_search($key, $args)) !== false) {
+                $this->commandline[$config] = $args[$id + 1];
+
+                unset($args[$id]);
+                unset($args[$id + 1]);
+            }
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -13,12 +13,12 @@ Label : CODE
     Label : LABEL
       a1
   Label : ELEMENT
-    goto
-    Label : LABEL
-      a1
-  Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         'Foo'
+  Label : ELEMENT
+    goto
+    Label : LABEL
+      a1

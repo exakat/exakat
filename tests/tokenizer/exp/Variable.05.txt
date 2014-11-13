@@ -1,12 +1,8 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    "
-    Label : CONTAIN
-      Concatenation
-      Label : CONCAT
-        ${
-        Label : NAME
-          b
+  "
+  Label : CONTAIN
+    Concatenation
+    Label : CONCAT
+      $b

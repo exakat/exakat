@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -11,9 +11,9 @@ Label : CODE
   Label : ELEMENT
     :
     Label : LABEL
-      a1
+      a2
   Label : ELEMENT
-    goto
+    :
     Label : LABEL
       a1
   Label : ELEMENT
@@ -23,6 +23,6 @@ Label : CODE
       Label : ARGUMENT
         'Foo'
   Label : ELEMENT
-    :
+    goto
     Label : LABEL
-      a2
+      a1

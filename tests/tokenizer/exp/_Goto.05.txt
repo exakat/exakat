@@ -1,12 +1,12 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
-    GOTO
+    :
     Label : LABEL
       cleanupCookie
   Label : ELEMENT
-    :
+    GOTO
     Label : LABEL
       cleanupCookie

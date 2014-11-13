@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     f
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        -
-        Label : SIGN
-          1
+        -1

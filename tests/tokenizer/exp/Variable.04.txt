@@ -1,10 +1,10 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     [
-    Label : INDEX
-      'shell'
     Label : VARIABLE
       $_ENV
+    Label : INDEX
+      'shell'

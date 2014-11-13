@@ -769,7 +769,7 @@ GREMLIN;
     }
 
     function samePropertyAs($property, $name, $caseSensitive = false) {
-        if ($caseSensitive || $name != 'line') {
+        if ($caseSensitive || $property == 'line') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -780,7 +780,7 @@ GREMLIN;
     }
 
     function notSamePropertyAs($property, $name, $caseSensitive = false) {
-        if ($caseSensitive || $name != 'line') {
+        if ($caseSensitive || $property == 'line') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';

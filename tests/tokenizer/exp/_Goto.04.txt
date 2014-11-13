@@ -1,29 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    :
-    Label : LABEL
-      a1
-  Label : ELEMENT
-    goto
-    Label : LABEL
-      a2
-  Label : ELEMENT
-    goto
-    Label : LABEL
-      a1
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        'Foo'
-  Label : ELEMENT
-    :
-    Label : LABEL
-      a2
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -34,3 +12,25 @@ Label : CODE
     :
     Label : LABEL
       a3
+  Label : ELEMENT
+    :
+    Label : LABEL
+      a2
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'Foo'
+  Label : ELEMENT
+    :
+    Label : LABEL
+      a1
+  Label : ELEMENT
+    goto
+    Label : LABEL
+      a2
+  Label : ELEMENT
+    goto
+    Label : LABEL
+      a1

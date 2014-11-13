@@ -1,10 +1,12 @@
 <?php
 
 Label : CODE
-  interface
-  Label : CODE
-    {
-    Label : CODE
-      void
-  Label : NAME
-    a
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    interface
+    Label : NAME
+      a
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void

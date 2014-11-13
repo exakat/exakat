@@ -1,11 +1,23 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     a
     Label : ARGUMENTS
       ,
+      Label : ARGUMENT
+        d
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'b'
+      Label : ARGUMENT
+        e
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'c'
       Label : ARGUMENT
         f
         Label : ARGUMENTS
@@ -14,12 +26,20 @@ Label : CODE
             2
           Label : ARGUMENT
             3
+  Label : ELEMENT
+    a
+    Label : ARGUMENTS
+      void
       Label : ARGUMENT
-        e
+        d
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            'c'
+            void
+  Label : ELEMENT
+    a
+    Label : ARGUMENTS
+      void
       Label : ARGUMENT
         d
         Label : ARGUMENTS
@@ -29,11 +49,19 @@ Label : CODE
   Label : ELEMENT
     a
     Label : ARGUMENTS
-      void
+      ,
       Label : ARGUMENT
         d
         Label : ARGUMENTS
           void
+          Label : ARGUMENT
+            'b'
+      Label : ARGUMENT
+        e
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'c'
   Label : ELEMENT
     a
     Label : ARGUMENTS
@@ -58,29 +86,3 @@ Label : CODE
             'b'
       Label : ARGUMENT
         'c'
-  Label : ELEMENT
-    a
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        d
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'b'
-  Label : ELEMENT
-    a
-    Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        d
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'b'
-      Label : ARGUMENT
-        e
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'c'

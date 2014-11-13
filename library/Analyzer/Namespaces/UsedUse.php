@@ -10,11 +10,11 @@ class UsedUse extends Analyzer\Analyzer {
 // case of use without alias nor namespacing (use A), single or multiple declaration
 //////////////////////////////////////////////////////////////////////////////////////////
     public function analyze() {
-    // case of simple use in a new with alias :  use a\b; new b\c()
+    // case of simple subuse in a new with alias :  use a\b; new b\c()
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('alias', 'use')
+             ->savePropertyAs('alias', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
@@ -22,23 +22,22 @@ class UsedUse extends Analyzer\Analyzer {
              ->outIs('NEW')
              ->outIs('SUBNAME')
              ->is('rank', 0)
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
-    // case of simple use in a new with alias :  use a\b; new b()
+    // case of simple use in a new with alias :  use a; new a()
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
              ->atomIs('Identifier')
-             ->savePropertyAs('alias', 'use')
+             ->savePropertyAs('alias', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
-             ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('New')
              ->outIs('NEW')
              ->tokenIs('T_STRING')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -46,13 +45,13 @@ class UsedUse extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Typehint')
              ->outIs('CLASS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -60,13 +59,13 @@ class UsedUse extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Class')
              ->outIs('EXTENDS', 'IMPLEMENTS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -74,13 +73,13 @@ class UsedUse extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Class')
              ->outIs('EXTENDS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -88,13 +87,13 @@ class UsedUse extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Class')
              ->outIs('IMPLEMENTS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
         
@@ -102,13 +101,13 @@ class UsedUse extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Staticconstant')
              ->outIs('CLASS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -116,13 +115,13 @@ class UsedUse extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -130,13 +129,13 @@ class UsedUse extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -144,13 +143,13 @@ class UsedUse extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE')
              ->_as('result')
-             ->savePropertyAs('fullnspath', 'use')
+             ->savePropertyAs('fullnspath', 'used')
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Instanceof')
              ->outIs('CLASS')
-             ->samePropertyAs('fullnspath', 'use')
+             ->samePropertyAs('fullnspath', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -162,14 +161,14 @@ class UsedUse extends Analyzer\Analyzer {
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs(array('AS', 'SUBNAME'))
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Typehint')
              ->outIs('CLASS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -178,14 +177,14 @@ class UsedUse extends Analyzer\Analyzer {
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs(array('AS', 'SUBNAME'))
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('New')
              ->outIs('NEW')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -194,14 +193,14 @@ class UsedUse extends Analyzer\Analyzer {
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs(array('AS', 'SUBNAME'))
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Class')
              ->outIs('EXTENDS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -210,14 +209,14 @@ class UsedUse extends Analyzer\Analyzer {
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs(array('AS', 'SUBNAME'))
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Class')
              ->outIs('IMPLEMENTS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
         
@@ -226,14 +225,14 @@ class UsedUse extends Analyzer\Analyzer {
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs(array('AS', 'SUBNAME'))
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Staticconstant')
              ->outIs('CLASS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -242,14 +241,14 @@ class UsedUse extends Analyzer\Analyzer {
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs(array('AS', 'SUBNAME'))
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
@@ -258,14 +257,14 @@ class UsedUse extends Analyzer\Analyzer {
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
-             ->savePropertyAs('code', 'use')
+             ->savePropertyAs('code', 'used')
              ->inIs(array('AS', 'SUBNAME'))
              ->inIs('USE')
              ->inIs('ELEMENT')
              ->inIs(array('CODE', 'BLOCK'))
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
-             ->samePropertyAs('code', 'use')
+             ->samePropertyAs('code', 'used')
              ->back('result');
         $this->prepareQuery();
 
