@@ -323,11 +323,15 @@ g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any()}.side
     } else {
         fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.out('NAME').next().fullcode.toLowerCase());
     }
+
+    g.idx('constants').put('path', fullcode.fullnspath, it)
 };
 
 // const without class nor namspace (aka, global)
 g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any() == false}.each{ 
     it.setProperty('fullnspath', '\\\\' + it.out('NAME').next().fullcode.toLowerCase());
+
+    g.idx('constants').put('path', it.fullnspath, it)
 };
 ", "
 // Const (out of a class) with define
