@@ -842,6 +842,27 @@ g.addEdge(a, b, 'NEXT');
             unset($actions['transform']);
         }
 
+        if (isset($actions['arg2implement'])) {
+            // must be after transform
+            $qactions[] = "
+/* Move arguments to implements */
+
+if (it.out('IMPLEMENTS').out('ARGUMENT').any()) {
+    classe = it;
+    impl = it.out('IMPLEMENTS').next();
+    impl.out('ARGUMENT').each{
+        g.addEdge(classe, it, 'IMPLEMENTS');
+    }
+
+    impl.outE('ARGUMENT').{ g.removeEdge(it); }
+    g.removeVertex(impl);
+}
+
+";
+            unset($actions['arg2implement']);
+        }
+        
+
         if (isset($actions['to_const_assignation'])) {
             $fullcode = $this->fullcode();
             

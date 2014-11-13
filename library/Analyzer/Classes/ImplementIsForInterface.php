@@ -9,7 +9,7 @@ class ImplementIsForInterface extends Analyzer\Analyzer {
         // class a with implements
         $this->atomIs("Class")
              ->outIs('IMPLEMENTS')
-             ->classDefinition()
+             ->noInterfaceDefinition()
              ->back('first');
         $this->prepareQuery();    
     }

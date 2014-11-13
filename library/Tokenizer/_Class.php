@@ -40,10 +40,12 @@ class _Class extends TokenAuto {
                                    3 => array('filterOut' => array('T_COMMA', 'T_NS_SEPARATOR'))
                                  );
         
-        $this->actions = array('transform'   => array( 1 => 'DROP',
-                                                       2 => 'IMPLEMENTS'),
-                               'keepIndexed' => true,
-                               'cleanIndex'  => true );
+        $this->actions = array('transform'     => array( 1 => 'DROP',
+                                                         2 => 'IMPLEMENTS'),
+                               'property'      => array('rank' => 0),
+                               'arg2implement' => 'true',
+                               'keepIndexed'   => true,
+                               'cleanIndex'    => true );
         $this->checkAuto(); 
 
     // class x { // some real code}
