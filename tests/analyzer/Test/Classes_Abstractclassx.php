@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class Classes_AbstractClass extends Analyzer {
+class Classes_Abstractclass extends Analyzer {
     /* 1 methods */
 
     public function testClasses_Abstractclass01()  { $this->generic_test('Classes_Abstractclass.01'); }
