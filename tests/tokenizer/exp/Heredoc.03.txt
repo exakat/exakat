@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $b
     Label : RIGHT
       <<<eof
 
@@ -19,3 +17,5 @@ Label : CODE
           
 c
 
+    Label : LEFT
+      $b
