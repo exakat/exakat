@@ -36,21 +36,8 @@ class _Class extends TokenAuto {
     // class x implements a {}
         $this->conditions = array( 0 => array('token'     => _Class::$operators),
                                    1 => array('token'     => 'T_IMPLEMENTS'),
-                                   2 => array('atom'      => array('Identifier', 'Nsname')),
+                                   2 => array('atom'      => array('Identifier', 'Nsname', 'Arguments')),
                                    3 => array('filterOut' => array('T_COMMA', 'T_NS_SEPARATOR'))
-                                 );
-        
-        $this->actions = array('transform'   => array( 1 => 'DROP',
-                                                       2 => 'IMPLEMENTS'),
-                               'keepIndexed' => true,
-                               'cleanIndex'  => true );
-        $this->checkAuto(); 
-
-    // class x implements a,b,c {}
-        $this->conditions = array( 0 => array('token' => _Class::$operators),
-                                   1 => array('token' => 'T_IMPLEMENTS'),
-                                   2 => array('atom' => 'Arguments'),
-                                   3 => array('filterOut' => array('T_COMMA')),
                                  );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
