@@ -1,9 +1,37 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     &&
+    Label : RIGHT
+      g
+      Label : ARGUMENTS
+        ,
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                $l
+              Label : INDEX
+                'm'
+            Label : INDEX
+              'n'
+          Label : INDEX
+            $o
+        Label : ARGUMENT
+          $h
+        Label : ARGUMENT
+          $i
+        Label : ARGUMENT
+          $j
+        Label : ARGUMENT
+          0
+        Label : ARGUMENT
+          'k'
     Label : LEFT
       !
       Label : NOT
@@ -12,57 +40,25 @@ Label : CODE
           void
           Label : ARGUMENT
             $f
-    Label : RIGHT
-      g
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          'k'
-        Label : ARGUMENT
-          $j
-        Label : ARGUMENT
-          $h
-        Label : ARGUMENT
-          $i
-        Label : ARGUMENT
-          0
-        Label : ARGUMENT
-          [
-          Label : INDEX
-            $o
-          Label : VARIABLE
-            [
-            Label : INDEX
-              'n'
-            Label : VARIABLE
-              [
-              Label : INDEX
-                'm'
-              Label : VARIABLE
-                $l
   Label : ELEMENT
     if
     Label : CONDITION
       (
       Label : CODE
         ==
-        Label : LEFT
-          $a
         Label : RIGHT
           'b'
+        Label : LEFT
+          $a
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $c
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $c
     Label : ELSE
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $d
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $d

@@ -1,7 +1,17 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_CURLY
+  Label : ELEMENT
+    foreach
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        $c
   Label : ELEMENT
     if
     Label : CONDITION
@@ -10,19 +20,5 @@ Label : CODE
         1
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          $d
-  Label : ELEMENT
-    foreach
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $a
-    Label : LOOP
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          $c
+      Label : ELEMENT
+        $d

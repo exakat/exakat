@@ -1,29 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $loc
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          $d
-        Label : CONCAT
-           c 
-        Label : CONCAT
-          $a
-        Label : CONCAT
-          ->
-        Label : CONCAT
-          b
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $loc
     Label : RIGHT
       "
       Label : CONTAIN
@@ -33,28 +13,48 @@ Label : CODE
         Label : CONCAT
            
         Label : CONCAT
-          $a
-        Label : CONCAT
           ->
-        Label : CONCAT
-          b
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            b
         Label : CONCAT
            c
-  Label : ELEMENT
-    =
     Label : LEFT
       $loc
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          $d
+        Label : CONCAT
+           c 
+        Label : CONCAT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            b
+    Label : LEFT
+      $loc
+  Label : ELEMENT
+    =
     Label : RIGHT
       "
       Label : CONTAIN
         Concatenation
         Label : CONCAT
           ->
-          Label : PROPERTY
-            b
           Label : OBJECT
             $a
+          Label : PROPERTY
+            b
         Label : CONCAT
            c 
         Label : CONCAT
           $d
+    Label : LEFT
+      $loc

@@ -1,67 +1,35 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          x
+        Label : CONCAT
+          $y
+        Label : CONCAT
+          z
+        Label : CONCAT
+          $a
     Label : LEFT
       $f
+  Label : ELEMENT
+    =
     Label : RIGHT
       "
       Label : CONTAIN
         Concatenation
         Label : CONCAT
-          x
-        Label : CONCAT
-          {
-          Label : NAME
-            $y
-        Label : CONCAT
-          z
-        Label : CONCAT
-          {
-          Label : NAME
-            $a
-  Label : ELEMENT
-    =
+          $a
     Label : LEFT
       $d
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          ${
-          Label : NAME
-            $a
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          {
-          Label : NAME
-            $y
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $c
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          ${
-          Label : NAME
-            z
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $e
     Label : RIGHT
       "
       Label : CONTAIN
@@ -69,8 +37,28 @@ Label : CODE
         Label : CONCAT
           x
         Label : CONCAT
-          {
-          Label : NAME
-            $y
+          $y
         Label : CONCAT
           z
+    Label : LEFT
+      $e
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          $z
+    Label : LEFT
+      $c
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          $y
+    Label : LEFT
+      $a

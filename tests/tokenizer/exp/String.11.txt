@@ -1,48 +1,47 @@
-<?php
+makeSequence T_ROOT
+Label : ELEMENT
+  
 
-Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        "
-        Label : CONTAIN
-          Concatenation
-          Label : CONCAT
-            a
-          Label : CONCAT
-            {
-            Label : NAME
+Label : ELEMENT
+  <?php
+
+  Label : CODE
+    makeSequence T_OPEN_TAG
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          "
+          Label : CONTAIN
+            Concatenation
+            Label : CONCAT
+              a
+            Label : CONCAT
               [
-              Label : INDEX
-                1
               Label : VARIABLE
                 $b
-          Label : CONCAT
-            c
-          Label : CONCAT
-            {
-            Label : NAME
-              [
               Label : INDEX
-                4
+                1
+            Label : CONCAT
+              c
+            Label : CONCAT
+              [
               Label : VARIABLE
                 [
-                Label : INDEX
-                  2
                 Label : VARIABLE
                   $d
-          Label : CONCAT
-            e
-          Label : CONCAT
-            {
-            Label : NAME
+                Label : INDEX
+                  2
+              Label : INDEX
+                4
+            Label : CONCAT
+              e
+            Label : CONCAT
               ->
-              Label : PROPERTY
-                h
               Label : OBJECT
                 $f
-          Label : CONCAT
-            g
+              Label : PROPERTY
+                h
+            Label : CONCAT
+              g

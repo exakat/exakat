@@ -1,22 +1,76 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      {
-      Label : INDEX
-        "d"
-      Label : VARIABLE
-        {
-        Label : INDEX
-          {
-          Label : INDEX
-            "c"
-          Label : VARIABLE
-            $b
-        Label : VARIABLE
-          $a
     Label : RIGHT
       1
+    Label : LEFT
+      {
+      Label : VARIABLE
+        {
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          {
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            "c"
+      Label : INDEX
+        ?
+        Label : CONDITION
+          +
+          Label : RIGHT
+            *
+            Label : RIGHT
+              $e
+            Label : LEFT
+              2
+          Label : LEFT
+            "d"
+        Label : THEN
+          5
+        Label : ELSE
+          6
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      {
+      Label : VARIABLE
+        {
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          {
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            "c"
+      Label : INDEX
+        +
+        Label : RIGHT
+          2
+        Label : LEFT
+          "d"
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      {
+      Label : VARIABLE
+        {
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          {
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            "c"
+      Label : INDEX
+        "d"

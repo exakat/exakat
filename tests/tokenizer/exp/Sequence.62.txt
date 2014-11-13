@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -13,18 +13,14 @@ Label : CODE
             void
             Label : ARGUMENT
               ->
-              Label : PROPERTY
-                b
               Label : OBJECT
                 $a
+              Label : PROPERTY
+                b
         Label : THEN
           htmlspecialchars
           Label : ARGUMENTS
             ,
-            Label : ARGUMENT
-              'H'
-            Label : ARGUMENT
-              G
             Label : ARGUMENT
               ->
               Label : OBJECT
@@ -35,9 +31,13 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     ->
-                    Label : PROPERTY
-                      f
                     Label : OBJECT
                       $e
+                    Label : PROPERTY
+                      f
+            Label : ARGUMENT
+              G
+            Label : ARGUMENT
+              'H'
         Label : ELSE
           'I'

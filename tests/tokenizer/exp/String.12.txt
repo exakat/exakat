@@ -1,6 +1,14 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    "
+    Label : CONTAIN
+      Concatenation
+      Label : CONCAT
+        H: 
+      Label : CONCAT
+        $g
   Label : ELEMENT
     c
     Label : ARGUMENTS
@@ -13,15 +21,7 @@ Label : CODE
             D: 
           Label : CONCAT
             ->
-            Label : PROPERTY
-              f
             Label : OBJECT
               $e
-  Label : ELEMENT
-    "
-    Label : CONTAIN
-      Concatenation
-      Label : CONCAT
-        H: 
-      Label : CONCAT
-        $g
+            Label : PROPERTY
+              f

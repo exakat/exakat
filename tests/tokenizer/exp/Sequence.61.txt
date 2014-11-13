@@ -1,40 +1,40 @@
 <?php
 
 Label : CODE
-  for
-  Label : CODE
-    Block With For
-    Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    for
+    Label : INIT
+      =
+      Label : RIGHT
+        ?
+        Label : CONDITION
+          (
+          Label : CODE
+            $c
+        Label : THEN
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              1
+            Label : LEFT
+              $d
+        Label : ELSE
+          0
+      Label : LEFT
+        $a
+    Label : FINAL
+      <
+      Label : RIGHT
+        $f
+      Label : LEFT
+        $e
+    Label : INCREMENT
+      ++
+      Label : PREPLUSPLUS
+        $g
+    Label : BLOCK
       {
-      Label : CODE
+      Label : ELEMENT
         void
-  Label : FINAL
-    <
-    Label : LEFT
-      $e
-    Label : RIGHT
-      $f
-  Label : INIT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        (
-        Label : CODE
-          $c
-      Label : THEN
-        (
-        Label : CODE
-          +
-          Label : LEFT
-            $d
-          Label : RIGHT
-            1
-      Label : ELSE
-        0
-  Label : INCREMENT
-    ++
-    Label : PREPLUSPLUS
-      $g

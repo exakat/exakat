@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
     Label : RIGHT
@@ -14,10 +14,10 @@ Label : CODE
             Concatenation
             Label : CONCAT
               ->
-              Label : PROPERTY
-                x
               Label : OBJECT
                 $file
+              Label : PROPERTY
+                x
             Label : CONCAT
                sf 
     Label : LEFT

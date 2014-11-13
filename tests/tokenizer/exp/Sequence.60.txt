@@ -1,11 +1,41 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     for
-    Label : CODE
-      ;
+    Label : INIT
+      =
+      Label : RIGHT
+        0
+      Label : LEFT
+        $a
+    Label : FINAL
+      <
+      Label : RIGHT
+        10
+      Label : LEFT
+        $a
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $a
+    Label : BLOCK
+      makeSequence T_OPEN_CURLY
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          .
+          Label : CONCAT
+            'e'
+          Label : CONCAT
+            ->
+            Label : OBJECT
+              $f
+            Label : PROPERTY
+              g
+        Label : LEFT
+          $d
       Label : ELEMENT
         if
         Label : CONDITION
@@ -14,28 +44,12 @@ Label : CODE
             $h
         Label : THEN
           {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              .=
-              Label : LEFT
-                $i
-              Label : RIGHT
-                'j'
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $d
-        Label : RIGHT
-          .
-          Label : CONCAT
-            'e'
-          Label : CONCAT
-            ->
-            Label : PROPERTY
-              g
-            Label : OBJECT
-              $f
+          Label : ELEMENT
+            .=
+            Label : RIGHT
+              'j'
+            Label : LEFT
+              $i
       Label : ELEMENT
         if
         Label : CONDITION
@@ -44,27 +58,9 @@ Label : CODE
             $k
         Label : THEN
           {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              .=
-              Label : LEFT
-                $l
-              Label : RIGHT
-                'm'
-    Label : FINAL
-      <
-      Label : LEFT
-        $a
-      Label : RIGHT
-        10
-    Label : INIT
-      =
-      Label : LEFT
-        $a
-      Label : RIGHT
-        0
-    Label : INCREMENT
-      ++
-      Label : POSTPLUSPLUS
-        $a
+          Label : ELEMENT
+            .=
+            Label : RIGHT
+              'm'
+            Label : LEFT
+              $l

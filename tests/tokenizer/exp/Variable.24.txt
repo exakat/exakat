@@ -1,12 +1,12 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       $
       Label : NAME
         b
+    Label : LEFT
+      $a

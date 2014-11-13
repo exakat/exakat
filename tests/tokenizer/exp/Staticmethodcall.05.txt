@@ -1,7 +1,23 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_CLOSE_CURLY
+  Label : ELEMENT
+    class
+    Label : NAME
+      f
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        static
+        Label : PROTECTED
+          protected
+        Label : DEFINE
+          $g
+        Label : VALUE
+          Void
+        Label : STATIC
+          static
   Label : ELEMENT
     if
     Label : CONDITION
@@ -16,14 +32,12 @@ Label : CODE
               'A'
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          exit
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'B'
+      Label : ELEMENT
+        exit
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'B'
   Label : ELEMENT
     ::
     Label : CLASS
@@ -34,21 +48,3 @@ Label : CODE
         void
         Label : ARGUMENT
           'e'
-  Label : ELEMENT
-    class
-    Label : NAME
-      f
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          Ppp
-          Label : VALUE
-            Void
-          Label : DEFINE
-            $g
-          Label : PROTECTED
-            protected
-          Label : STATIC
-            static
