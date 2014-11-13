@@ -1,20 +1,22 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $a
-  Label : CASES
-    {
-    Label : CODE
-      case
-      Label : CODE
-        Block With Sequence For Case
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          'b'
         Label : CODE
-          require
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'c.php'
-      Label : CASE
-        'b'
+          Block with Sequence For Case
+          Label : ELEMENT
+            require
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'c.php'

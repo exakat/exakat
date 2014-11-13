@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -13,15 +13,15 @@ Label : CODE
         Label : THEN
           .
           Label : CONCAT
+            $b
+          Label : CONCAT
+            $c
+          Label : CONCAT
             e
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'h'
-          Label : CONCAT
-            $b
-          Label : CONCAT
-            $c
           Label : CONCAT
             'd'
         Label : ELSE

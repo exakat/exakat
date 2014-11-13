@@ -1,22 +1,22 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     echo
     Label : ARGUMENTS
       ,
       Label : ARGUMENT
-        $x
-      Label : ARGUMENT
         '1'
       Label : ARGUMENT
+        $x
+      Label : ARGUMENT
         [
-        Label : INDEX
-          2
         Label : VARIABLE
           [
-          Label : INDEX
-            1
           Label : VARIABLE
             $y
+          Label : INDEX
+            1
+        Label : INDEX
+          2

@@ -1,12 +1,16 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     [
+    Label : VARIABLE
+      $x
     Label : INDEX
       1
     Label : ARGUMENTS
       void
-    Label : VARIABLE
-      $x
+      Label : ARGUMENT
+        void
+    Label : NAME
+      [

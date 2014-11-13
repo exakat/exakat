@@ -1,17 +1,19 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $x
-  Label : CASES
-    {
-    Label : CODE
-      case
-      Label : CODE
-        Block With Sequence For Case
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $x
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          1
         Label : CODE
-          ;
+          makeSequence T_SEMICOLON
           Label : ELEMENT
             =
             Label : RIGHT
@@ -24,5 +26,3 @@ Label : CODE
               3
             Label : LEFT
               $y
-      Label : CASE
-        1

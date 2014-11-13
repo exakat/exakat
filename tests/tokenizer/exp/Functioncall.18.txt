@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
     Label : RIGHT
@@ -10,9 +10,9 @@ Label : CODE
         void
         Label : ARGUMENT
           =>
-          Label : VALUE
-            2
           Label : KEY
             1
+          Label : VALUE
+            2
     Label : LEFT
       $a

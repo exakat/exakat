@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
     Label : RIGHT
@@ -12,61 +12,57 @@ Label : CODE
           void
         Label : ARGUMENT
           =>
-          Label : VALUE
-            \
-            Label : ELEMENT
-              m
-            Label : ELEMENT
-              n
           Label : KEY
             \
-            Label : ELEMENT
-              k
-            Label : ELEMENT
+            Label : SUBNAME
               l
+            Label : SUBNAME
+              k
+          Label : VALUE
+            \
+            Label : SUBNAME
+              n
+            Label : SUBNAME
+              m
         Label : ARGUMENT
           =>
+          Label : KEY
+            $a
           Label : VALUE
-            ->
-            Label : OBJECT
-              $h
-            Label : PROPERTY
-              i
+            $b
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'd'
+          Label : VALUE
+            [
+            Label : VARIABLE
+              $e
+            Label : INDEX
+              'f'
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            -4
+          Label : VALUE
+            -5
+        Label : ARGUMENT
+          =>
           Label : KEY
             ->
             Label : OBJECT
               $f
             Label : PROPERTY
               g
-        Label : ARGUMENT
-          =>
           Label : VALUE
-            [
-            Label : INDEX
-              'f'
-            Label : VARIABLE
-              $e
-          Label : KEY
-            [
-            Label : INDEX
-              'd'
-            Label : VARIABLE
-              $c
-        Label : ARGUMENT
-          =>
-          Label : VALUE
-            $b
-          Label : KEY
-            $a
-        Label : ARGUMENT
-          =>
-          Label : VALUE
-            -
-            Label : SIGN
-              5
-          Label : KEY
-            -
-            Label : SIGN
-              4
+            ->
+            Label : OBJECT
+              $h
+            Label : PROPERTY
+              i
     Label : LEFT
       $a

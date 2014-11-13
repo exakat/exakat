@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $x
-  Label : CASES
-    {
-    Label : CODE
-      default
-      Label : CODE
-        Block With Sequence For Default
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $x
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        default
         Label : CODE
-          Void
+          Block with Sequence For Default
+          Label : ELEMENT
+            Void

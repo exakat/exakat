@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  f
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      1
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        1
