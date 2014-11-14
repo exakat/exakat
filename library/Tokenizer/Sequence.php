@@ -112,8 +112,7 @@ class Sequence extends TokenAuto {
 
     // special case for { 1; }
         $this->conditions = array(-2 => array('token' => 'T_OPEN_CURLY'),
-                                  -1 => array('atom'  => array('Boolean', 'Null', 'Integer', 'String', 'Variable', 
-                                                               'Postplusplus', 'Preplusplus' )),
+                                  -1 => array('atom'  => 'yes'),
                                    0 => array('token' => Sequence::$operators),
                                    1 => array('token' => 'T_CLOSE_CURLY'),
         );
