@@ -335,7 +335,8 @@ g.idx('atoms')[['atom':'Const']].filter{it.in('ELEMENT').in('BLOCK').any() == fa
 };
 ", "
 // Const (out of a class) with define
-g.idx('atoms')[['atom':'Functioncall']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('rank', 0).as('name').has('atom', 'String')
+g.idx('atoms')[['atom':'Functioncall']].has('code', 'define').out('ARGUMENTS').out('ARGUMENT').has('rank', 0).as('name')
+    .has('atom', 'String').hasNot('noDelimiter', null)
     .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.sideEffect{ ns = it; }.back('name')
 .each{ 
     if (ns.atom == 'File') {
