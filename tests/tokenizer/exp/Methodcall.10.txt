@@ -1,52 +1,56 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     ->
-    Label : METHOD
-      G
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          ->
-          Label : METHOD
-            H
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'I'
-          Label : OBJECT
-            $d
     Label : OBJECT
       ->
-      Label : METHOD
-        E
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'F'
       Label : OBJECT
         ->
+        Label : OBJECT
+          $b
         Label : METHOD
           C
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               ->
+              Label : OBJECT
+                $c
               Label : METHOD
                 D
                 Label : ARGUMENTS
                   void
-              Label : OBJECT
-                $c
-        Label : OBJECT
-          $b
+                  Label : ARGUMENT
+                    void
+      Label : METHOD
+        E
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'F'
+    Label : METHOD
+      G
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $d
+          Label : METHOD
+            H
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'I'
   Label : ELEMENT
     ->
+    Label : OBJECT
+      $a
     Label : METHOD
       B
       Label : ARGUMENTS
         void
-    Label : OBJECT
-      $a
+        Label : ARGUMENT
+          void

@@ -1,12 +1,12 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     do
     Label : CONDITION
       FALSE
-    Label : LOOP
+    Label : BLOCK
       if
       Label : CONDITION
         (
@@ -14,19 +14,17 @@ Label : CODE
           1
       Label : THEN
         {
-        Label : CODE
-          makeSequence
+        Label : ELEMENT
+          makeSequence T_OPEN_CURLY
           Label : ELEMENT
             break
             Label : LEVEL
               void
       Label : ELSE
-        makeSequence
+        {
         Label : ELEMENT
-          {
-          Label : CODE
-            makeSequence
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
+          makeSequence T_OPEN_CURLY
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void

@@ -1,23 +1,51 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_CURLY
+  Label : ELEMENT
+    function
+    Label : NAME
+      a
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          \
+          Label : SUBNAME
+            A
+        Label : VARIABLE
+          =
+          Label : RIGHT
+            null
+          Label : LEFT
+            $c
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          \
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            C
+        Label : VARIABLE
+          $d
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $x
   Label : ELEMENT
     function
     Label : NAME
       a2
     Label : ARGUMENTS
       ,
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          \
-          Label : ELEMENT
-            D
-          Label : ELEMENT
-            C
-        Label : VARIABLE
-          $d
       Label : ARGUMENT
         $b
       Label : ARGUMENT
@@ -30,48 +58,20 @@ Label : CODE
             null
           Label : LEFT
             $c
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $x
-  Label : ELEMENT
-    function
-    Label : NAME
-      a
-    Label : ARGUMENTS
-      ,
       Label : ARGUMENT
         Typehint
         Label : CLASS
           \
-          Label : ELEMENT
+          Label : SUBNAME
             D
-          Label : ELEMENT
+          Label : SUBNAME
             C
         Label : VARIABLE
           $d
-      Label : ARGUMENT
-        $b
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          \
-          Label : ELEMENT
-            A
-        Label : VARIABLE
-          =
-          Label : RIGHT
-            null
-          Label : LEFT
-            $c
     Label : BLOCK
       {
-      Label : CODE
-        ;
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS

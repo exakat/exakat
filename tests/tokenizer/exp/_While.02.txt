@@ -1,7 +1,15 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_CLOSE_CURLY
+  Label : ELEMENT
+    {
+    Label : ELEMENT
+      makeSequence T_OPEN_CURLY
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a
   Label : ELEMENT
     while
     Label : CONDITION
@@ -10,15 +18,7 @@ Label : CODE
         10
       Label : LEFT
         $a
-    Label : LOOP
-      Block With While
-      Label : CODE
-        void
-  Label : ELEMENT
-    {
-    Label : CODE
-      ;
+    Label : BLOCK
+      Block with While
       Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
+        void

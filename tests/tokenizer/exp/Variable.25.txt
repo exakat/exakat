@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     do
     Label : CONDITION
@@ -12,51 +12,49 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $e
-    Label : LOOP
+    Label : BLOCK
       {
-      Label : CODE
-        makeSequence
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              AND
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            AND
+            Label : RIGHT
+              !==
               Label : RIGHT
-                !==
-                Label : RIGHT
-                  E
-                Label : LEFT
-                  C
-                  Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      $b
-                    Label : ARGUMENT
-                      "
-                      Label : CONTAIN
-                        Concatenation
-                        Label : CONCAT
-                          $c
-                        Label : CONCAT
-                          D
+                E
               Label : LEFT
-                ==
-                Label : RIGHT
-                  0
-                Label : LEFT
-                  B
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $a
-          Label : THEN
-            {
-            Label : CODE
-              makeSequence
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  1
-                Label : LEFT
-                  $d
+                C
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    $b
+                  Label : ARGUMENT
+                    "
+                    Label : CONTAIN
+                      Concatenation
+                      Label : CONCAT
+                        $c
+                      Label : CONCAT
+                        D
+            Label : LEFT
+              ==
+              Label : RIGHT
+                0
+              Label : LEFT
+                B
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $a
+        Label : THEN
+          {
+          Label : ELEMENT
+            makeSequence T_OPEN_CURLY
+            Label : ELEMENT
+              =
+              Label : RIGHT
+                1
+              Label : LEFT
+                $d

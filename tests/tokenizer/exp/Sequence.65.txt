@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -8,9 +8,9 @@ Label : CODE
       Label : CODE
         0
     Label : THEN
-      Block With Sequence For Case Without Semicolon
+      makeSequence T_OPEN_TAG
       Label : ELEMENT
-        E
+        A
       Label : ELEMENT
         ::
         Label : CLASS
@@ -22,6 +22,8 @@ Label : CODE
             Label : ARGUMENT
               'I'
       Label : ELEMENT
+        E
+      Label : ELEMENT
         ::
         Label : CLASS
           C
@@ -31,5 +33,3 @@ Label : CODE
             void
             Label : ARGUMENT
               'E'
-      Label : ELEMENT
-        A

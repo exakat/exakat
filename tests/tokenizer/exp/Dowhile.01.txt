@@ -1,20 +1,20 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     do
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $x
     Label : CONDITION
       <
       Label : RIGHT
         4
       Label : LEFT
         $x
-    Label : LOOP
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $x

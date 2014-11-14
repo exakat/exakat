@@ -4,40 +4,42 @@ Label : ELEMENT
 Label : ELEMENT
   <?php 
   Label : CODE
-    ;
+    makeSequence T_OPEN_TAG
     Label : ELEMENT
-      *
-      Label : RIGHT
-        1
-      Label : LEFT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            /
-            Label : RIGHT
-              0
-            Label : LEFT
-              C
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  D
-                  Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      H
-                    Label : ARGUMENT
-                      ->
-                      Label : PROPERTY
-                        F
-                      Label : OBJECT
-                        [
-                        Label : INDEX
-                          'E'
-                        Label : VARIABLE
-                          $a
-                    Label : ARGUMENT
-                      'G'
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          *
+          Label : RIGHT
+            1
+          Label : LEFT
+            (
+            Label : CODE
+              /
+              Label : RIGHT
+                0
+              Label : LEFT
+                C
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    D
+                    Label : ARGUMENTS
+                      ,
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          [
+                          Label : VARIABLE
+                            $a
+                          Label : INDEX
+                            'E'
+                        Label : PROPERTY
+                          F
+                      Label : ARGUMENT
+                        'G'
+                      Label : ARGUMENT
+                        H
 Label : ELEMENT
   A

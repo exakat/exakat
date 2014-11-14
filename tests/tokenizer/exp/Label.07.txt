@@ -1,42 +1,40 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     switch
     Label : NAME
       $a
     Label : CASES
-      {
-      Label : CODE
-        Sequence Case Default
-        Label : ELEMENT
-          case
-          Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              d
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'f'
-                  Label : VARIABLE
-                    $e
-                Label : ARGUMENT
-                  'g'
-          Label : CASE
-            ==
-            Label : RIGHT
-              'c'
-            Label : LEFT
-              substr
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  1
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  0
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          ==
+          Label : RIGHT
+            'c'
+          Label : LEFT
+            substr
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                1
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            d
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $e
+                Label : INDEX
+                  'f'
+              Label : ARGUMENT
+                'g'

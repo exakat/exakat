@@ -1,7 +1,11 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_CURLY
+  Label : ELEMENT
+    
+
+?>
   Label : ELEMENT
     if
     Label : CONDITION
@@ -10,11 +14,7 @@ Label : CODE
         $a
     Label : THEN
       {
-      Label : CODE
+      Label : ELEMENT
         void
   Label : ELEMENT
     __halt_compiler
-  Label : ELEMENT
-    
-
-?>

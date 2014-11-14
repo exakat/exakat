@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -13,48 +13,46 @@ Label : CODE
         Label : LEFT
           $a
     Label : THEN
-      makeSequence
+      {
       Label : ELEMENT
-        {
-        Label : CODE
-          makeSequence
-          Label : ELEMENT
+        makeSequence T_OPEN_CURLY
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $i
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                'j'
+              Label : CONCAT
+                $k
+              Label : CONCAT
+                'l'
+        Label : ELEMENT
+          ?
+          Label : CONDITION
+            (
+            Label : CODE
+              ==
+              Label : RIGHT
+                'd'
+              Label : LEFT
+                $c
+          Label : THEN
             =
             Label : RIGHT
-              1
+              'f'
             Label : LEFT
-              $i
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                .
-                Label : CONCAT
-                  'l'
-                Label : CONCAT
-                  'j'
-                Label : CONCAT
-                  $k
-          Label : ELEMENT
-            ?
-            Label : CONDITION
-              (
-              Label : CODE
-                ==
-                Label : RIGHT
-                  'd'
-                Label : LEFT
-                  $c
-            Label : THEN
-              =
-              Label : RIGHT
-                'f'
-              Label : LEFT
-                $e
-            Label : ELSE
-              =
-              Label : RIGHT
-                'h'
-              Label : LEFT
-                $g
+              $e
+          Label : ELSE
+            =
+            Label : RIGHT
+              'h'
+            Label : LEFT
+              $g

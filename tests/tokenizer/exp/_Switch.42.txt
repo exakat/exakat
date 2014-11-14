@@ -1,118 +1,116 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     switch
     Label : NAME
       B
     Label : CASES
-      {
-      Label : CODE
-        Sequence Case Default
-        Label : ELEMENT
-          default
-          Label : CODE
-            Block With Sequence For Default
-            Label : CODE
-              throw
-              Label : THROW
-                new
-                Label : NEW
-                  \M
-                  Label : ELEMENT
-                    M
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      N
-                      Label : ARGUMENTS
-                        ,
-                        Label : ARGUMENT
-                          'O'
-                        Label : ARGUMENT
-                          P
-                          Label : ARGUMENTS
-                            void
-                            Label : ARGUMENT
-                              $f
-        Label : ELEMENT
-          case
-          Label : CODE
-            makeSequence
-            Label : ELEMENT
-              return
-              Label : RETURN
-                'L'
-          Label : CASE
-            instanceof
-            Label : RIGHT
-              \
-              Label : ELEMENT
-                K
-            Label : LEFT
-              $e
-        Label : ELEMENT
-          case
-          Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              return
-              Label : RETURN
-                'J'
-          Label : CASE
-            instanceof
-            Label : RIGHT
-              \
-              Label : ELEMENT
-                I
-            Label : LEFT
-              $d
-        Label : ELEMENT
-          case
-          Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              return
-              Label : RETURN
-                'H'
-          Label : CASE
-            instanceof
-            Label : RIGHT
-              \
-              Label : ELEMENT
-                G
-            Label : LEFT
-              $c
-        Label : ELEMENT
-          case
-          Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              return
-              Label : RETURN
-                'F'
-          Label : CASE
-            instanceof
-            Label : RIGHT
-              \
-              Label : ELEMENT
-                E
-            Label : LEFT
-              $b
-        Label : ELEMENT
-          case
-          Label : CODE
-            Block With Sequence For Case
-            Label : CODE
-              return
-              Label : RETURN
-                'D'
-          Label : CASE
-            instanceof
-            Label : RIGHT
-              \
-              Label : ELEMENT
-                C
-            Label : LEFT
-              $a
+      Sequence Case Default
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block with Sequence For Default
+          Label : ELEMENT
+            throw
+            Label : THROW
+              new
+              Label : NEW
+                \M
+                Label : SUBNAME
+                  M
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    N
+                    Label : ARGUMENTS
+                      ,
+                      Label : ARGUMENT
+                        'O'
+                      Label : ARGUMENT
+                        P
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            $f
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              C
+          Label : VARIABLE
+            $a
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'D'
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              E
+          Label : VARIABLE
+            $b
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'F'
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              G
+          Label : VARIABLE
+            $c
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'H'
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              I
+          Label : VARIABLE
+            $d
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'J'
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              K
+          Label : VARIABLE
+            $e
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'L'

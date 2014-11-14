@@ -1,27 +1,13 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     do
-    Label : CONDITION
-      !
-      Label : NOT
-        ->
-        Label : OBJECT
-          $f
-        Label : METHOD
-          g
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ++
-              Label : PREPLUSPLUS
-                $h
-    Label : LOOP
+    Label : BLOCK
       {
-      Label : CODE
-        makeSequence
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
         Label : ELEMENT
           =
           Label : RIGHT
@@ -38,3 +24,17 @@ Label : CODE
                   $e
           Label : LEFT
             $a
+    Label : CONDITION
+      !
+      Label : NOT
+        ->
+        Label : OBJECT
+          $f
+        Label : METHOD
+          g
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ++
+              Label : PREPLUSPLUS
+                $h

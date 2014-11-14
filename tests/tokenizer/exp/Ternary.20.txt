@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -9,14 +9,14 @@ Label : CODE
       Label : ARGUMENT
         ?
         Label : CONDITION
+          true
+        Label : THEN
+          'true'
+        Label : ELSE
           ?
           Label : CONDITION
-            true
-          Label : THEN
-            'true'
-          Label : ELSE
             false
-        Label : THEN
-          't'
-        Label : ELSE
-          'f'
+          Label : THEN
+            't'
+          Label : ELSE
+            'f'

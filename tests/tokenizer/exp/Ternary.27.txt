@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_IF
   Label : ELEMENT
     if
     Label : CONDITION
@@ -11,8 +11,8 @@ Label : CODE
           $a
     Label : THEN
       {
-      Label : CODE
-        ;
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
@@ -29,10 +29,10 @@ Label : CODE
         ,
         Label : ARGUMENT
           ->
-          Label : PROPERTY
-            d
           Label : OBJECT
             $c
+          Label : PROPERTY
+            d
         Label : ARGUMENT
           $e
     Label : ELSE
@@ -41,13 +41,13 @@ Label : CODE
         ,
         Label : ARGUMENT
           ->
-          Label : PROPERTY
-            h
           Label : OBJECT
             $g
+          Label : PROPERTY
+            h
         Label : ARGUMENT
           ->
-          Label : PROPERTY
-            j
           Label : OBJECT
             $i
+          Label : PROPERTY
+            j

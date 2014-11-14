@@ -1,33 +1,33 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_TRY
   Label : ELEMENT
     try
     Label : CODE
       {
-      Label : CODE
-        makeSequence
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
         Label : ELEMENT
           =
           Label : RIGHT
             [
-            Label : INDEX
-              'B'
             Label : VARIABLE
               $b
+            Label : INDEX
+              'B'
           Label : LEFT
             $a
     Label : CATCH
       catch
-      Label : CLASS
-        D
       Label : VARIABLE
         $c
+      Label : CLASS
+        D
       Label : CODE
         {
-        Label : CODE
-          makeSequence
+        Label : ELEMENT
+          makeSequence T_OPEN_CURLY
           Label : ELEMENT
             return
             Label : RETURN
@@ -36,10 +36,10 @@ Label : CODE
     ->
     Label : OBJECT
       [
-      Label : INDEX
-        'E'
       Label : VARIABLE
         $d
+      Label : INDEX
+        'E'
     Label : METHOD
       G
       Label : ARGUMENTS
@@ -59,13 +59,15 @@ Label : CODE
                 Label : CONCAT
                   ->
                   Label : OBJECT
-                    $g
+                    $e
                   Label : METHOD
-                    R
+                    L
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
-                        'S'
+                        void
+                Label : CONCAT
+                  'M'
                 Label : CONCAT
                   ->
                   Label : OBJECT
@@ -79,10 +81,10 @@ Label : CODE
                 Label : CONCAT
                   ->
                   Label : OBJECT
-                    $e
+                    $g
                   Label : METHOD
-                    L
+                    R
                     Label : ARGUMENTS
                       void
-                Label : CONCAT
-                  'M'
+                      Label : ARGUMENT
+                        'S'

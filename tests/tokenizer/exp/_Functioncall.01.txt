@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_QUESTION
   Label : ELEMENT
     foreach
     Label : VALUE
@@ -11,7 +11,7 @@ Label : CODE
         $d
     Label : SOURCE
       $b
-    Label : LOOP
+    Label : BLOCK
       F
   Label : ELEMENT
     echo

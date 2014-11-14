@@ -1,20 +1,22 @@
 <?php
 
 Label : CODE
-  do
-  Label : CONDITION
-    <
-    Label : RIGHT
-      4
-    Label : LEFT
-      $x
-  Label : LOOP
-    &&
-    Label : RIGHT
-      ++
-      Label : POSTPLUSPLUS
-        $y
-    Label : LEFT
-      ++
-      Label : POSTPLUSPLUS
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    do
+    Label : BLOCK
+      &&
+      Label : LEFT
+        ++
+        Label : POSTPLUSPLUS
+          $x
+      Label : RIGHT
+        ++
+        Label : POSTPLUSPLUS
+          $y
+    Label : CONDITION
+      <
+      Label : LEFT
         $x
+      Label : RIGHT
+        4

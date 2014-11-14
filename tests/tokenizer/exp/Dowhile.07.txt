@@ -1,12 +1,12 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     do
     Label : CONDITION
       $z
-    Label : LOOP
+    Label : BLOCK
       if
       Label : CONDITION
         (
@@ -14,8 +14,8 @@ Label : CODE
           $x
       Label : THEN
         {
-        Label : CODE
-          ;
+        Label : ELEMENT
+          makeSequence T_OPEN_CURLY
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS

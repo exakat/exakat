@@ -1,19 +1,19 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     do
-    Label : LOOP
+    Label : BLOCK
       {
-      Label : CODE
-        ;
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
         Label : ELEMENT
           do
-          Label : LOOP
+          Label : BLOCK
             ;
             Label : ELEMENT
               {
-              Label : CODE
+              Label : ELEMENT
                 void
           Label : CONDITION
             1

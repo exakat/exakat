@@ -1,12 +1,12 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     try
     Label : CODE
       {
-      Label : CODE
+      Label : ELEMENT
         void
     Label : CATCH
       catch
@@ -16,5 +16,5 @@ Label : CODE
         $e
       Label : CODE
         {
-        Label : CODE
+        Label : ELEMENT
           void

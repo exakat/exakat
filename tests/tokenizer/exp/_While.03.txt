@@ -1,22 +1,20 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_CLOSE_CURLY
+  Label : ELEMENT
+    {
+    Label : ELEMENT
+      1
   Label : ELEMENT
     while
     Label : CONDITION
       1
-    Label : LOOP
-      Block With While
-      Label : CODE
+    Label : BLOCK
+      Block with While
+      Label : ELEMENT
         =
         Label : RIGHT
           2
         Label : LEFT
           $x
-  Label : ELEMENT
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        1

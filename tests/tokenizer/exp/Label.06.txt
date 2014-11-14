@@ -1,17 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
-  Label : ELEMENT
-    :
-    Label : LABEL
-      G
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      6
-    Label : LEFT
-      $g
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     :
     Label : LABEL
@@ -23,13 +13,15 @@ Label : CODE
     Label : LEFT
       $f
   Label : ELEMENT
-    :
-    Label : LABEL
-      D
+    =
+    Label : RIGHT
+      6
+    Label : LEFT
+      $g
   Label : ELEMENT
     :
     Label : LABEL
-      E
+      G
   Label : ELEMENT
     =
     Label : RIGHT
@@ -39,13 +31,21 @@ Label : CODE
   Label : ELEMENT
     :
     Label : LABEL
-      C
+      E
   Label : ELEMENT
     =
     Label : RIGHT
       3
     Label : LEFT
       $c
+  Label : ELEMENT
+    :
+    Label : LABEL
+      C
+  Label : ELEMENT
+    :
+    Label : LABEL
+      D
   Label : ELEMENT
     :
     Label : LABEL

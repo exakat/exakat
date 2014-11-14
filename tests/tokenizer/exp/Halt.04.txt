@@ -1,13 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      $b
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
      
 
@@ -17,6 +11,12 @@ $y = 4;
 ?>
   Label : ELEMENT
     __HALT_COMPILER
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $b
   Label : ELEMENT
     =
     Label : RIGHT

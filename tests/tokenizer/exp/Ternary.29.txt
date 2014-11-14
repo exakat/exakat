@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
     Label : RIGHT
@@ -19,31 +19,31 @@ Label : CODE
                 (int)
                 Label : CAST
                   [
-                  Label : INDEX
-                    'f'
                   Label : VARIABLE
                     $e
+                  Label : INDEX
+                    'f'
         Label : CONCAT
           'g'
       Label : THEN
         .
-        Label : CONCAT
-          'k'
         Label : CONCAT
           H
         Label : CONCAT
           (int)
           Label : CAST
             [
-            Label : INDEX
-              'j'
             Label : VARIABLE
               $i
+            Label : INDEX
+              'j'
+        Label : CONCAT
+          'k'
       Label : ELSE
         'L'
     Label : LEFT
       [
-      Label : INDEX
-        'b'
       Label : VARIABLE
         $a
+      Label : INDEX
+        'b'

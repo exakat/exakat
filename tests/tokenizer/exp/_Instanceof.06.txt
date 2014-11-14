@@ -1,38 +1,36 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
-    instanceof
+    =
     Label : RIGHT
-      makeSequence
-      Label : ELEMENT
-        ?
-        Label : CONDITION
+      ?
+      Label : CONDITION
+        instanceof
+        Label : CLASS
           \
-          Label : ELEMENT
+          Label : SUBNAME
             E
-          Label : ELEMENT
+          Label : SUBNAME
             D
-          Label : ELEMENT
+          Label : SUBNAME
             C
-          Label : ELEMENT
+          Label : SUBNAME
             B
-        Label : THEN
-          ->
-          Label : OBJECT
-            $c
-          Label : METHOD
-            F
-            Label : ARGUMENTS
-              void
-        Label : ELSE
-          $d
-    Label : LEFT
-      makeSequence
-      Label : ELEMENT
-        =
-        Label : RIGHT
+        Label : VARIABLE
           $b
-        Label : LEFT
-          $a
+      Label : THEN
+        ->
+        Label : OBJECT
+          $c
+        Label : METHOD
+          F
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ELSE
+        $d
+    Label : LEFT
+      $a

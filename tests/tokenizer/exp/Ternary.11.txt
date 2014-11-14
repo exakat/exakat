@@ -1,17 +1,19 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     function
     Label : ARGUMENTS
       void
+      Label : ARGUMENT
+        void
     Label : NAME
       a
     Label : BLOCK
       {
-      Label : CODE
-        makeSequence
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
         Label : ELEMENT
           return
           Label : RETURN
@@ -30,31 +32,31 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         ->
-                        Label : PROPERTY
-                          e
                         Label : OBJECT
                           $d
+                        Label : PROPERTY
+                          e
                   Label : LEFT
                     $b
             Label : THEN
               $f
             Label : ELSE
               ->
+              Label : OBJECT
+                $g
               Label : METHOD
                 h
                 Label : ARGUMENTS
                   ,
                   Label : ARGUMENT
                     ->
+                    Label : OBJECT
+                      $this
                     Label : METHOD
                       i
                       Label : ARGUMENTS
                         void
                         Label : ARGUMENT
                           "J"
-                    Label : OBJECT
-                      $this
                   Label : ARGUMENT
                     9
-              Label : OBJECT
-                $g

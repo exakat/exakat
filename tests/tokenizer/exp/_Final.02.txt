@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     class
     Label : FINAL
@@ -10,5 +10,5 @@ Label : CODE
       y
     Label : BLOCK
       {
-      Label : CODE
+      Label : ELEMENT
         void

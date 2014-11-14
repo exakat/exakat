@@ -1,13 +1,15 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
     Label : RIGHT
       @
       Label : AT
         $b
+        Label : NAME
+          $b
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
@@ -18,11 +20,9 @@ Label : CODE
               'a'
           Label : ARGUMENT
             'b'
-        Label : NAME
-          $b
     Label : LEFT
       ->
-      Label : PROPERTY
-        a
       Label : OBJECT
         $this
+      Label : PROPERTY
+        a

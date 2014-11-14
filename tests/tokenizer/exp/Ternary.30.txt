@@ -1,16 +1,16 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     .=
     Label : RIGHT
       .
       Label : CONCAT
-        ';'
-      Label : CONCAT
         '&#'
       Label : CONCAT
         $number
+      Label : CONCAT
+        ';'
     Label : LEFT
       $out
   Label : ELEMENT
@@ -35,10 +35,10 @@ Label : CODE
               64
             Label : LEFT
               [
-              Label : INDEX
-                2
               Label : VARIABLE
                 $temp
+              Label : INDEX
+                2
         Label : LEFT
           +
           Label : RIGHT
@@ -55,10 +55,10 @@ Label : CODE
                     64
                   Label : LEFT
                     [
-                    Label : INDEX
-                      1
                     Label : VARIABLE
                       $temp
+                    Label : INDEX
+                      1
           Label : LEFT
             (
             Label : CODE
@@ -73,10 +73,10 @@ Label : CODE
                     16
                   Label : LEFT
                     [
-                    Label : INDEX
-                      0
                     Label : VARIABLE
                       $temp
+                    Label : INDEX
+                      0
       Label : ELSE
         +
         Label : RIGHT
@@ -87,10 +87,10 @@ Label : CODE
               64
             Label : LEFT
               [
-              Label : INDEX
-                1
               Label : VARIABLE
                 $temp
+              Label : INDEX
+                1
         Label : LEFT
           (
           Label : CODE
@@ -105,9 +105,9 @@ Label : CODE
                   32
                 Label : LEFT
                   [
-                  Label : INDEX
-                    0
                   Label : VARIABLE
                     $temp
+                  Label : INDEX
+                    0
     Label : LEFT
       $number

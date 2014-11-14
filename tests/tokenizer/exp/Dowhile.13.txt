@@ -1,45 +1,45 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     do
     Label : CONDITION
       $c
-    Label : LOOP
+    Label : BLOCK
       {
-      Label : CODE
-        makeSequence
-        Label : ELEMENT
-          while
-          Label : CONDITION
-            ===
-            Label : RIGHT
-              0
-            Label : LEFT
-              B
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  'C'
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $a
-                  Label : METHOD
-                    D
-                    Label : ARGUMENTS
-                      void
-          Label : LOOP
-            {
-            Label : CODE
-              makeSequence
-              Label : ELEMENT
+      Label : ELEMENT
+        while
+        Label : CONDITION
+          ===
+          Label : RIGHT
+            0
+          Label : LEFT
+            B
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                'C'
+              Label : ARGUMENT
                 ->
                 Label : OBJECT
-                  $b
+                  $a
                 Label : METHOD
-                  E
+                  D
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
-                      1
+                      void
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            makeSequence T_OPEN_CURLY
+            Label : ELEMENT
+              ->
+              Label : OBJECT
+                $b
+              Label : METHOD
+                E
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    1
