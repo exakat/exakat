@@ -1,58 +1,60 @@
 <?php
 
 Label : CODE
-  function
-  Label : NAME
-    a
-  Label : ARGUMENTS
-    void
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      a
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          function
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+          Label : NAME
+            
+          Label : BLOCK
+            {
+            Label : ELEMENT
+              return
+              Label : RETURN
+                array
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENTS
+                      ,
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          'c'
+                        Label : VALUE
+                          'd'
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          'e'
+                        Label : VALUE
+                          'f'
+                  Label : ARGUMENT
+                    void
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            b
       Label : ELEMENT
         return
         Label : RETURN
           3
-      Label : ELEMENT
-        =
-        Label : LEFT
-          ->
-          Label : PROPERTY
-            b
-          Label : OBJECT
-            $a
-        Label : RIGHT
-          function
-          Label : NAME
-            lambda
-          Label : ARGUMENTS
-            void
-          Label : BLOCK
-            {
-            Label : CODE
-              ;
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  array
-                  Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      array
-                      Label : ARGUMENTS
-                        ,
-                        Label : ARGUMENT
-                          =>
-                          Label : KEY
-                            'c'
-                          Label : VALUE
-                            'd'
-                        Label : ARGUMENT
-                          =>
-                          Label : KEY
-                            'e'
-                          Label : VALUE
-                            'f'
-                    Label : ARGUMENT
-                      void

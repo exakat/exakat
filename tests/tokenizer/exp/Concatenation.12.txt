@@ -1,26 +1,26 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $query
     Label : RIGHT
       .
-      Label : CONCAT
-        "f"
-      Label : CONCAT
-        "c"
       Label : CONCAT
         "a"
       Label : CONCAT
         $b
       Label : CONCAT
+        "c"
+      Label : CONCAT
         [
-        Label : INDEX
-          'e'
         Label : VARIABLE
           $d
+        Label : INDEX
+          'e'
+      Label : CONCAT
+        "f"
       Label : CONCAT
         $g
+    Label : LEFT
+      $query

@@ -1,16 +1,16 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       clone
       Label : CLONE
         ->
-        Label : PROPERTY
-          z
         Label : OBJECT
           $y
+        Label : PROPERTY
+          z
+    Label : LEFT
+      $x

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     array
     Label : ARGUMENTS
@@ -14,31 +14,31 @@ Label : CODE
           ?
           Label : CONDITION
             [
-            Label : INDEX
-              'c'
             Label : VARIABLE
               $b
+            Label : INDEX
+              'c'
           Label : THEN
             -
-            Label : LEFT
-              +
-              Label : LEFT
-                [
-                Label : INDEX
-                  'e'
-                Label : VARIABLE
-                  $d
-              Label : RIGHT
-                *
-                Label : LEFT
-                  [
-                  Label : INDEX
-                    'g'
-                  Label : VARIABLE
-                    $f
-                Label : RIGHT
-                  1
             Label : RIGHT
               H
+            Label : LEFT
+              +
+              Label : RIGHT
+                *
+                Label : RIGHT
+                  1
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $f
+                  Label : INDEX
+                    'g'
+              Label : LEFT
+                [
+                Label : VARIABLE
+                  $d
+                Label : INDEX
+                  'e'
           Label : ELSE
             2

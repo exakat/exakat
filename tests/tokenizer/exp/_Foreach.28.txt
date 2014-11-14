@@ -1,41 +1,41 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
       (
       Label : CODE
         ==
-        Label : LEFT
-          $a
         Label : RIGHT
           'b'
+        Label : LEFT
+          $a
     Label : THEN
       foreach
-      Label : VALUE
-        $g
       Label : SOURCE
         ->
         Label : OBJECT
           ->
-          Label : PROPERTY
-            d
           Label : OBJECT
             $c
+          Label : PROPERTY
+            d
         Label : METHOD
           e
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'f'
-      Label : LOOP
+      Label : VALUE
+        $g
+      Label : BLOCK
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ->
-            Label : PROPERTY
-              i
             Label : OBJECT
               $h
+            Label : PROPERTY
+              i

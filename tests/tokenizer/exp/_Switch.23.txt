@@ -1,65 +1,49 @@
 <?php 
 Label : CODE
-  switch
-  Label : NAME
-    $c
-  Label : CASES
-    {
-    Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $c
+    Label : CASES
       Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Block With Sequence For Case Without Semicolon
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-            Label : ELEMENT
-              {
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  ++
-                  Label : POSTPLUSPLUS
-                    $b
-        Label : CASE
-          'b'
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Block With Sequence For Case Without Semicolon
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-            Label : ELEMENT
-              {
-              Label : CODE
-                ;
-                Label : ELEMENT
-                  ++
-                  Label : POSTPLUSPLUS
-                    $a
-        Label : CASE
-          'a'
       Label : ELEMENT
         default
         Label : CODE
-          Block With Sequence For Default Without Semicolon
+          Block with Sequence For Default Without Semicolon
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $b
           Label : ELEMENT
-            {
-            Label : CODE
-              ;
-              Label : ELEMENT
-                ++
-                Label : POSTPLUSPLUS
-                  $d
+            ++
+            Label : POSTPLUSPLUS
+              $d
+      Label : ELEMENT
+        case
+        Label : CASE
+          'a'
+        Label : CODE
+          Block with Sequence For Case Without Semicolon
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $a
+      Label : ELEMENT
+        case
+        Label : CASE
+          'b'
+        Label : CODE
+          Block with Sequence For Case Without Semicolon
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b

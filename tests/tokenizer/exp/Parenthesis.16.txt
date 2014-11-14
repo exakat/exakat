@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -30,3 +28,5 @@ Label : CODE
                   'c'
         Label : ARGUMENT
           void
+    Label : LEFT
+      $x

@@ -1,32 +1,20 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $m
-    Label : RIGHT
-      new
-      Label : NEW
-        m
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $o
+  makeSequence T_SEMICOLON
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $c
     Label : SOURCE
       ->
-      Label : PROPERTY
-        b
       Label : OBJECT
         $a
-    Label : LOOP
-      Block With Foreach
-      Label : CODE
+      Label : PROPERTY
+        b
+    Label : VALUE
+      $c
+    Label : BLOCK
+      Block with Foreach
+      Label : ELEMENT
         if
         Label : CONDITION
           (
@@ -36,20 +24,18 @@ Label : CODE
               void
               Label : ARGUMENT
                 ->
-                Label : PROPERTY
-                  f
                 Label : OBJECT
                   ->
-                  Label : PROPERTY
-                    e
                   Label : OBJECT
                     $d
+                  Label : PROPERTY
+                    e
+                Label : PROPERTY
+                  f
         Label : THEN
-          Block With if/elseif
-          Label : CODE
+          Block with if/elseif
+          Label : ELEMENT
             =
-            Label : LEFT
-              $g
             Label : RIGHT
               h
               Label : ARGUMENTS
@@ -58,11 +44,25 @@ Label : CODE
                   $i
                 Label : ARGUMENT
                   ->
-                  Label : PROPERTY
-                    l
                   Label : OBJECT
                     ->
-                    Label : PROPERTY
-                      k
                     Label : OBJECT
                       $j
+                    Label : PROPERTY
+                      k
+                  Label : PROPERTY
+                    l
+            Label : LEFT
+              $g
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        m
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $o
+    Label : LEFT
+      $m

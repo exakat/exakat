@@ -1,22 +1,22 @@
 <?php 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      ===
-      Label : LEFT
-        false
-      Label : RIGHT
-        include_once
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $b
-  Label : THEN
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ===
+        Label : RIGHT
+          include_once
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $b
+        Label : LEFT
+          false
+    Label : THEN
+      {
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

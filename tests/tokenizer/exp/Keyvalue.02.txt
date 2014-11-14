@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -13,17 +11,39 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            ::
-            Label : CLASS
-              Q
+            ->
+            Label : OBJECT
+              $a
             Label : PROPERTY
-              $r
+              b
           Label : VALUE
-            ::
-            Label : CLASS
-              S
+            ->
+            Label : OBJECT
+              $c
             Label : PROPERTY
-              $t
+              d
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ->
+            Label : OBJECT
+              $e
+            Label : METHOD
+              f
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+          Label : VALUE
+            ->
+            Label : OBJECT
+              $g
+            Label : METHOD
+              h
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
         Label : ARGUMENT
           =>
           Label : KEY
@@ -41,52 +61,40 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            ->
-            Label : PROPERTY
-              b
-            Label : OBJECT
-              $a
-          Label : VALUE
-            ->
-            Label : PROPERTY
-              d
-            Label : OBJECT
-              $c
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $e
-            Label : METHOD
-              f
-              Label : ARGUMENTS
-                void
-          Label : VALUE
-            ->
-            Label : OBJECT
-              $g
-            Label : METHOD
-              h
-              Label : ARGUMENTS
-                void
-        Label : ARGUMENT
-          =>
-          Label : KEY
             ::
-            Label : CLASS
-              M
             Label : METHOD
               N
               Label : ARGUMENTS
                 void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              M
           Label : VALUE
             ::
-            Label : CLASS
-              O
             Label : METHOD
               P
               Label : ARGUMENTS
                 void
+                Label : ARGUMENT
+                  void
+            Label : CLASS
+              O
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ::
+            Label : PROPERTY
+              $r
+            Label : CLASS
+              Q
+          Label : VALUE
+            ::
+            Label : PROPERTY
+              $t
+            Label : CLASS
+              S
         Label : ARGUMENT
           void
+    Label : LEFT
+      $x

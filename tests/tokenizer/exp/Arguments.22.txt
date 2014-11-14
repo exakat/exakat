@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     ->
-    Label : OBJECT
-      $a
     Label : METHOD
       b
       Label : ARGUMENTS
@@ -32,3 +30,5 @@ Label : CODE
               void
               Label : ARGUMENT
                 $f
+    Label : OBJECT
+      $a

@@ -1,90 +1,90 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $x
-  Label : CASES
-    {
-    Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $x
+    Label : CASES
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          9
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          10
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          5
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          6
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          8
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          7
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          3
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          4
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
-        Label : CASE
-          2
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Void
         Label : CASE
           1
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          2
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          3
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          4
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          5
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          6
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          7
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          8
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          9
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          10
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void

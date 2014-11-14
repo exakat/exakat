@@ -1,32 +1,28 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       "
       Label : CONTAIN
         Concatenation
         Label : CONCAT
-          {
-          Label : NAME
-            [
-            Label : INDEX
-              'prefix'
-            Label : VARIABLE
-              ->
-              Label : PROPERTY
-                properties
-              Label : OBJECT
-                $this
-        Label : CONCAT
-          {
-          Label : NAME
+          [
+          Label : VARIABLE
             ->
-            Label : PROPERTY
-              id
             Label : OBJECT
-              $node
+              $this
+            Label : PROPERTY
+              properties
+          Label : INDEX
+            'prefix'
+        Label : CONCAT
+          ->
+          Label : OBJECT
+            $node
+          Label : PROPERTY
+            id
+    Label : LEFT
+      $x

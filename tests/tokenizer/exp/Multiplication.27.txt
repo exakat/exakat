@@ -1,32 +1,32 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      [
-      Label : INDEX
-        'b'
-      Label : VARIABLE
-        $a
     Label : RIGHT
       number_format
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
-          *
-          Label : LEFT
-            /
-            Label : LEFT
-              PHP_MAJOR_VERSION
+          /
+          Label : RIGHT
+            *
             Label : RIGHT
+              1
+            Label : LEFT
               [
-              Label : INDEX
-                'g'
               Label : VARIABLE
                 $f
-          Label : RIGHT
-            1
+              Label : INDEX
+                'g'
+          Label : LEFT
+            PHP_MAJOR_VERSION
         Label : ARGUMENT
           2
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'

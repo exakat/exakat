@@ -1,17 +1,23 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       b
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
+          trim
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $c
+        Label : ARGUMENT
           >
+          Label : RIGHT
+            'f'
           Label : LEFT
             ->
             Label : OBJECT
@@ -20,13 +26,9 @@ Label : CODE
               e
               Label : ARGUMENTS
                 void
-          Label : RIGHT
-            'f'
-        Label : ARGUMENT
-          trim
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $c
+                Label : ARGUMENT
+                  void
         Label : ARGUMENT
           G
+    Label : LEFT
+      $a

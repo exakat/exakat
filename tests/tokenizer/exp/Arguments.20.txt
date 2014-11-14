@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     c
     Label : ARGUMENTS
@@ -9,16 +9,14 @@ Label : CODE
       Label : ARGUMENT
         function
         Label : NAME
-          lambda
+          
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $a
         Label : BLOCK
           {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              return
-              Label : RETURN
-                1
+          Label : ELEMENT
+            return
+            Label : RETURN
+              1

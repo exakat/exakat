@@ -1,20 +1,20 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     declare
-    Label : BLOCK
-      =
-      Label : LEFT
-        $x
-      Label : RIGHT
-        1
     Label : TICKS
       void
       Label : ARGUMENT
         =
-        Label : LEFT
-          ticks
         Label : RIGHT
           2
+        Label : LEFT
+          ticks
+    Label : BLOCK
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $x

@@ -1,27 +1,27 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      >=
-      Label : LEFT
-        $a
-      Label : RIGHT
-        [
-        Label : INDEX
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        >=
+        Label : RIGHT
           [
-          Label : INDEX
-            'd'
           Label : VARIABLE
-            $c
-        Label : VARIABLE
-          $b
-  Label : THEN
-    {
-    Label : CODE
-      ;
+            $b
+          Label : INDEX
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'd'
+        Label : LEFT
+          $a
+    Label : THEN
+      {
       Label : ELEMENT
         break
         Label : LEVEL

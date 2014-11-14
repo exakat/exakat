@@ -1,9 +1,11 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     *
+    Label : RIGHT
+      1
     Label : LEFT
       ::
       Label : CLASS
@@ -14,5 +16,3 @@ Label : CODE
           void
           Label : ARGUMENT
             1
-    Label : RIGHT
-      1

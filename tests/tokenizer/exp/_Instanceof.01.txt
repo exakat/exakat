@@ -1,10 +1,10 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     instanceof
-    Label : LEFT
-      $x
-    Label : RIGHT
+    Label : CLASS
       $y
+    Label : VARIABLE
+      $x

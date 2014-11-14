@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     switch
     Label : NAME
@@ -10,31 +10,31 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ++
-            Label : POSTPLUSPLUS
-              $e
         Label : CASE
-          'left'
-      Label : ELEMENT
-        case
+          'b'
         Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ++
-            Label : POSTPLUSPLUS
-              $c
-        Label : CASE
-          'c'
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $b
+      Label : ELEMENT
+        case
         Label : CASE
-          'b'
+          'c'
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $c
+      Label : ELEMENT
+        case
+        Label : CASE
+          'left'
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $e

@@ -1,24 +1,24 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
+    Label : RIGHT
+      $c
     Label : LEFT
       [
       Label : VARIABLE
         [
+        Label : VARIABLE
+          $a
         Label : INDEX
-          (int)
-          Label : CAST
-            /
-            Label : LEFT
+          /
+          Label : RIGHT
+            1
+          Label : LEFT
+            (int)
+            Label : CAST
               ++
               Label : PREPLUSPLUS
                 $b
-            Label : RIGHT
-              1
-        Label : VARIABLE
-          $a
-    Label : RIGHT
-      $c

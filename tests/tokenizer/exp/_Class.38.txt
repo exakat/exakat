@@ -1,27 +1,35 @@
 <?php
 
 Label : CODE
-  class
-  Label : NAME
-    x
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      {
       Label : ELEMENT
-        Ppp
-        Label : NAME
-          $g
+        private
         Label : VALUE
-          3
+          1
+        Label : DEFINE
+          $b
         Label : PRIVATE
           private
       Label : ELEMENT
-        Ppp
-        Label : NAME
-          $e
+        ppp
         Label : VALUE
           void
+        Label : DEFINE
+          $c
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        ppp
+        Label : VALUE
+          void
+        Label : DEFINE
+          $d
         Label : PRIVATE
           private
       Label : ELEMENT
@@ -31,42 +39,34 @@ Label : CODE
         Label : VALUE
           3
       Label : ELEMENT
-        Ppp
-        Label : NAME
-          $d
+        ppp
         Label : VALUE
-          void
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        Ppp
-        Label : NAME
-          $c
-        Label : VALUE
-          void
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        Ppp
-        Label : VALUE
-          1
+          3
         Label : DEFINE
-          $b
+          $g
         Label : PRIVATE
           private
       Label : ELEMENT
-        Ppp
-        Label : NAME
-          $f
+        ppp
+        Label : VALUE
+          void
+        Label : DEFINE
+          $h
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        ppp
         Label : VALUE
           2
+        Label : DEFINE
+          $f
         Label : PRIVATE
           private
       Label : ELEMENT
-        Ppp
-        Label : NAME
-          $h
+        ppp
         Label : VALUE
           void
+        Label : DEFINE
+          $e
         Label : PRIVATE
           private

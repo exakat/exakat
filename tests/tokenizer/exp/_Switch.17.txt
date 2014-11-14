@@ -1,43 +1,29 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $a
-  Label : CASES
-    {
-    Label : CODE
-      default
-      Label : CODE
-        Block With Sequence For Default Without Semicolon
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $i
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            2
-          Label : LEFT
-            $h
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $g
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              $a
-          Label : THEN
-            {
-            Label : CODE
-              ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        default
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                $a
+            Label : THEN
+              {
               Label : ELEMENT
                 =
                 Label : RIGHT
@@ -54,9 +40,9 @@ Label : CODE
                     $c
                 Label : SOURCE
                   $a
-                Label : LOOP
+                Label : BLOCK
                   {
-                  Label : CODE
+                  Label : ELEMENT
                     if
                     Label : CONDITION
                       (
@@ -68,15 +54,27 @@ Label : CODE
                           $d
                     Label : THEN
                       {
-                      Label : CODE
-                        ;
-                        Label : ELEMENT
-                          =
-                          Label : RIGHT
-                            4
-                          Label : LEFT
-                            $f
-        Label : ELEMENT
-          break
-          Label : LEVEL
-            void
+                      Label : ELEMENT
+                        =
+                        Label : RIGHT
+                          4
+                        Label : LEFT
+                          $f
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $g
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              3
+            Label : LEFT
+              $i
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              2
+            Label : LEFT
+              $h

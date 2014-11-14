@@ -1,13 +1,13 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       2
+    Label : LEFT
+      $x
   Label : ELEMENT
     echo
     Label : ARGUMENTS

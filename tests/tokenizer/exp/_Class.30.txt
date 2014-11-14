@@ -1,18 +1,18 @@
 <?php
 
 Label : CODE
-  class
-  Label : NAME
-    x
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      {
       Label : ELEMENT
-        Ppp
-        Label : VALUE
-          1
+        var
         Label : DEFINE
           $b
+        Label : VALUE
+          1
         Label : VAR
           var

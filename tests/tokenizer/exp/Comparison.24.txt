@@ -1,49 +1,49 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      &&
-      Label : LEFT
-        [
-        Label : INDEX
-          'b'
-        Label : VARIABLE
-          $a
-      Label : RIGHT
-        (
-        Label : CODE
-          <
-          Label : LEFT
-            -
-            Label : LEFT
-              c
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    .
-                    Label : CONCAT
-                      'f'
-                    Label : CONCAT
-                      $g
-                  Label : VARIABLE
-                    [
-                    Label : INDEX
-                      'e'
-                    Label : VARIABLE
-                      $d
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        &&
+        Label : RIGHT
+          (
+          Label : CODE
+            <
             Label : RIGHT
-              $h
-          Label : RIGHT
-            0
-  Label : THEN
-    {
-    Label : CODE
-      ;
+              0
+            Label : LEFT
+              -
+              Label : RIGHT
+                $h
+              Label : LEFT
+                c
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      [
+                      Label : VARIABLE
+                        $d
+                      Label : INDEX
+                        'e'
+                    Label : INDEX
+                      .
+                      Label : CONCAT
+                        'f'
+                      Label : CONCAT
+                        $g
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            'b'
+    Label : THEN
+      {
       Label : ELEMENT
         i
         Label : ARGUMENTS

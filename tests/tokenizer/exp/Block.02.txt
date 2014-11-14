@@ -1,7 +1,15 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    {
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $b
   Label : ELEMENT
     ->
     Label : OBJECT
@@ -12,13 +20,3 @@ Label : CODE
         void
         Label : ARGUMENT
           $options
-  Label : ELEMENT
-    {
-    Label : CODE
-      ;
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
-          1

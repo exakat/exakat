@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       "
       Label : CONTAIN
@@ -17,26 +15,28 @@ Label : CODE
         Label : CONCAT
            d 
         Label : CONCAT
-          $e
-        Label : CONCAT
           ->
-        Label : CONCAT
-          f
+          Label : OBJECT
+            $e
+          Label : PROPERTY
+            f
         Label : CONCAT
            g 
         Label : CONCAT
           [
-          Label : INDEX
-            1
           Label : VARIABLE
             $h
+          Label : INDEX
+            1
         Label : CONCAT
            i 
         Label : CONCAT
           [
-          Label : INDEX
-            d
           Label : VARIABLE
             $j
+          Label : INDEX
+            d
         Label : CONCAT
            k 
+    Label : LEFT
+      $a

@@ -1,32 +1,32 @@
 <?php
 
 Label : CODE
-  function
-  Label : NAME
-    &
-    Label : REFERENCE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    function
+    Label : NAME
       b
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        CLASSE
-      Label : VARIABLE
-        $b
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        CLASSE
-      Label : VARIABLE
-        $a
-    Label : ARGUMENT
-      Typehint
-      Label : CLASS
-        CLASSE
-      Label : VARIABLE
-        $c
-  Label : BLOCK
-    {
-    Label : CODE
-      void
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          CLASSE
+        Label : VARIABLE
+          $a
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          CLASSE
+        Label : VARIABLE
+          $b
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          CLASSE
+        Label : VARIABLE
+          $c
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void

@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $siteurl
     Label : RIGHT
       a
       Label : ARGUMENTS
@@ -19,17 +17,9 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                ''
-              Label : ARGUMENT
-                "e"
-              Label : ARGUMENT
                 substr
                 Label : ARGUMENTS
                   ,
-                  Label : ARGUMENT
-                    0
-                  Label : ARGUMENT
-                    $f
                   Label : ARGUMENT
                     strrpos
                     Label : ARGUMENTS
@@ -38,11 +28,21 @@ Label : CODE
                         $g
                       Label : ARGUMENT
                         'h'
-          Label : CONCAT
-            [
-            Label : INDEX
-              'd'
-            Label : VARIABLE
-              $c
+                  Label : ARGUMENT
+                    $f
+                  Label : ARGUMENT
+                    0
+              Label : ARGUMENT
+                "e"
+              Label : ARGUMENT
+                ''
           Label : CONCAT
             'b'
+          Label : CONCAT
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'd'
+    Label : LEFT
+      $siteurl

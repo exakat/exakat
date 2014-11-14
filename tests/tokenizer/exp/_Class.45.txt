@@ -1,29 +1,75 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    class
+    Label : NAME
+      dbstuff
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $a
+        Label : VALUE
+          0
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $d
+        Label : VALUE
+          Void
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $e
+        Label : VALUE
+          Void
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $c
+        Label : VALUE
+          Void
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $b
+        Label : VALUE
+          Void
+        Label : VAR
+          var
   Label : ELEMENT
     define
     Label : ARGUMENTS
       ,
       Label : ARGUMENT
-        'k'
+        'd'
       Label : ARGUMENT
-        8
-  Label : ELEMENT
-    define
-    Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        'i'
-      Label : ARGUMENT
-        6
+        1
   Label : ELEMENT
     define
     Label : ARGUMENTS
       ,
       Label : ARGUMENT
         'g'
+      Label : ARGUMENT
+        4
+  Label : ELEMENT
+    define
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        'c'
       Label : ARGUMENT
         4
   Label : ELEMENT
@@ -39,41 +85,9 @@ Label : CODE
     Label : ARGUMENTS
       ,
       Label : ARGUMENT
-        'c'
+        'k'
       Label : ARGUMENT
-        4
-  Label : ELEMENT
-    define
-    Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        'a'
-      Label : ARGUMENT
-        0
-  Label : ELEMENT
-    define
-    Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        'b'
-      Label : ARGUMENT
-        0
-  Label : ELEMENT
-    define
-    Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        'd'
-      Label : ARGUMENT
-        1
-  Label : ELEMENT
-    define
-    Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        'f'
-      Label : ARGUMENT
-        3
+        8
   Label : ELEMENT
     define
     Label : ARGUMENTS
@@ -91,50 +105,34 @@ Label : CODE
       Label : ARGUMENT
         7
   Label : ELEMENT
-    class
-    Label : NAME
-      dbstuff
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          Ppp
-          Label : VALUE
-            Void
-          Label : DEFINE
-            $d
-          Label : VAR
-            var
-        Label : ELEMENT
-          Ppp
-          Label : VALUE
-            Void
-          Label : DEFINE
-            $b
-          Label : VAR
-            var
-        Label : ELEMENT
-          Ppp
-          Label : VALUE
-            Void
-          Label : DEFINE
-            $c
-          Label : VAR
-            var
-        Label : ELEMENT
-          Ppp
-          Label : VALUE
-            Void
-          Label : DEFINE
-            $e
-          Label : VAR
-            var
-        Label : ELEMENT
-          Ppp
-          Label : VALUE
-            0
-          Label : DEFINE
-            $a
-          Label : VAR
-            var
+    define
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        'i'
+      Label : ARGUMENT
+        6
+  Label : ELEMENT
+    define
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        'f'
+      Label : ARGUMENT
+        3
+  Label : ELEMENT
+    define
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        'b'
+      Label : ARGUMENT
+        0
+  Label : ELEMENT
+    define
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        'a'
+      Label : ARGUMENT
+        0

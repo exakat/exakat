@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     require_once
     Label : ARGUMENTS
@@ -28,63 +28,59 @@ Label : CODE
           $j
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $k
-          Label : RIGHT
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          [
+          Label : VARIABLE
             [
-            Label : INDEX
-              'm'
             Label : VARIABLE
-              [
-              Label : INDEX
-                'l'
-              Label : VARIABLE
-                $k
+              $k
+            Label : INDEX
+              'l'
+          Label : INDEX
+            'm'
+        Label : LEFT
+          $k
     Label : ELSE
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $n
-          Label : RIGHT
-            true
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          true
+        Label : LEFT
+          $n
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       str_replace
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
           [
-          Label : INDEX
-            'e'
           Label : VARIABLE
             [
-            Label : INDEX
-              'd'
             Label : VARIABLE
-              $c
+              [
+              Label : VARIABLE
+                $f
+              Label : INDEX
+                'g'
+            Label : INDEX
+              'h'
+          Label : INDEX
+            'i'
         Label : ARGUMENT
           'b'
         Label : ARGUMENT
           [
-          Label : INDEX
-            'i'
           Label : VARIABLE
             [
-            Label : INDEX
-              'h'
             Label : VARIABLE
-              [
-              Label : INDEX
-                'g'
-              Label : VARIABLE
-                $f
+              $c
+            Label : INDEX
+              'd'
+          Label : INDEX
+            'e'
+    Label : LEFT
+      $a

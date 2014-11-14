@@ -1,28 +1,28 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      ->
-      Label : OBJECT
-        $x
-      Label : METHOD
-        b
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            'c'
-          Label : ARGUMENT
-            3
-  Label : THEN
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ->
+        Label : OBJECT
+          $x
+        Label : METHOD
+          b
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              'c'
+            Label : ARGUMENT
+              3
+    Label : THEN
+      {
       Label : ELEMENT
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           1
+        Label : LEFT
+          $a

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     return
     Label : RETURN
@@ -18,22 +18,22 @@ Label : CODE
                 ,
                 Label : ARGUMENT
                   +
-                  Label : LEFT
-                    ->
-                    Label : PROPERTY
-                      month
-                    Label : OBJECT
-                      $a
                   Label : RIGHT
                     1
-                Label : ARGUMENT
-                  0
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $a
+                    Label : PROPERTY
+                      month
                 Label : ARGUMENT
                   ->
-                  Label : PROPERTY
-                    year
                   Label : OBJECT
                     $b
+                  Label : PROPERTY
+                    year
+                Label : ARGUMENT
+                  0
                 Label : ARGUMENT
                   0
                 Label : ARGUMENT

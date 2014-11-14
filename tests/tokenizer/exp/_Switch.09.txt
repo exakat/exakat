@@ -1,56 +1,50 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $a
-  Label : CASES
-    {
-    Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
       Sequence Case Default
       Label : ELEMENT
         default
         Label : CODE
-          Block With Sequence For Default
-          Label : CODE
-            ;
-            Label : ELEMENT
-              return
-              Label : RETURN
-                'f'
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'f'
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
       Label : ELEMENT
         case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              return
-              Label : RETURN
-                'e'
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-        Label : CASE
-          'd'
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              return
-              Label : RETURN
-                'c'
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
         Label : CASE
           'b'
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'c'
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+      Label : ELEMENT
+        case
+        Label : CASE
+          'd'
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'e'
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void

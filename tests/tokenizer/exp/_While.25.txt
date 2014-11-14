@@ -1,37 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'd'
-        Label : LEFT
-          [
-          Label : INDEX
-            -
-            Label : RIGHT
-              c
-            Label : LEFT
-              $b
-          Label : VARIABLE
-            $a
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          break
-          Label : LEVEL
-            void
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $x
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     while
     Label : CONDITION
@@ -42,14 +12,14 @@ Label : CODE
           'l'
         Label : LEFT
           [
+          Label : VARIABLE
+            $j
           Label : INDEX
             -
             Label : RIGHT
               3
             Label : LEFT
               $k
-          Label : VARIABLE
-            $j
       Label : LEFT
         (
         Label : CODE
@@ -70,7 +40,35 @@ Label : CODE
                 $g
           Label : LEFT
             $e
-    Label : LOOP
-      Block With While
-      Label : CODE
+    Label : BLOCK
+      Block with While
+      Label : ELEMENT
         void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          'd'
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            -
+            Label : RIGHT
+              c
+            Label : LEFT
+              $b
+    Label : THEN
+      {
+      Label : ELEMENT
+        break
+        Label : LEVEL
+          void
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $x

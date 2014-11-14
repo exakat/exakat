@@ -1,26 +1,22 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $y
-    Label : RIGHT
-      2
-  Label : ELEMENT
-    void
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $z
     Label : RIGHT
       3
-  Label : ELEMENT
-    void
+    Label : LEFT
+      $z
   Label : ELEMENT
     =
+    Label : RIGHT
+      2
     Label : LEFT
-      $x
+      $y
+  Label : ELEMENT
+    =
     Label : RIGHT
       1
+    Label : LEFT
+      $x

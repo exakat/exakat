@@ -1,118 +1,124 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     function
-    Label : NAME
-      a
     Label : ARGUMENTS
       void
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            (
-            Label : CODE
-              ?
-              Label : CONDITION
-                (
-                Label : CODE
-                  ->
-                  Label : PROPERTY
-                    b
-                  Label : OBJECT
-                    $a
-              Label : THEN
-                c
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : PROPERTY
-                      e
-                    Label : OBJECT
-                      $d
-              Label : ELSE
-                f
-                Label : ARGUMENTS
-                  void
-  Label : ELEMENT
-    function
-    Label : NAME
-      b
-    Label : ARGUMENTS
-      void
-    Label : BLOCK
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            (
-            Label : CODE
-              ?
-              Label : CONDITION
-                (
-                Label : CODE
-                  ::
-                  Label : CLASS
-                    a
-                  Label : CONSTANT
-                    b
-              Label : THEN
-                c
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : PROPERTY
-                      e
-                    Label : OBJECT
-                      $d
-              Label : ELSE
-                f
-                Label : ARGUMENTS
-                  void
-  Label : ELEMENT
-    function
+      Label : ARGUMENT
+        void
     Label : NAME
       c
-    Label : ARGUMENTS
-      void
     Label : BLOCK
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          return
-          Label : RETURN
-            (
-            Label : CODE
-              ?
-              Label : CONDITION
-                (
-                Label : CODE
-                  ::
-                  Label : CLASS
-                    a
+      Label : ELEMENT
+        return
+        Label : RETURN
+          (
+          Label : CODE
+            ?
+            Label : CONDITION
+              (
+              Label : CODE
+                ::
+                Label : PROPERTY
+                  $b
+                Label : CLASS
+                  a
+            Label : THEN
+              c
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $d
                   Label : PROPERTY
-                    $b
-              Label : THEN
-                c
-                Label : ARGUMENTS
+                    e
+            Label : ELSE
+              f
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
                   void
-                  Label : ARGUMENT
-                    ->
-                    Label : PROPERTY
-                      e
-                    Label : OBJECT
-                      $d
-              Label : ELSE
-                f
-                Label : ARGUMENTS
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      b
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        return
+        Label : RETURN
+          (
+          Label : CODE
+            ?
+            Label : CONDITION
+              (
+              Label : CODE
+                ::
+                Label : CLASS
+                  a
+                Label : CONSTANT
+                  b
+            Label : THEN
+              c
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $d
+                  Label : PROPERTY
+                    e
+            Label : ELSE
+              f
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      a
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        return
+        Label : RETURN
+          (
+          Label : CODE
+            ?
+            Label : CONDITION
+              (
+              Label : CODE
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  b
+            Label : THEN
+              c
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $d
+                  Label : PROPERTY
+                    e
+            Label : ELSE
+              f
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
                   void

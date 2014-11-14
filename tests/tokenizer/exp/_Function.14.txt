@@ -1,34 +1,34 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : NAME
-      &
-      Label : REFERENCE
-        z
-    Label : ARGUMENTS
-      void
-    Label : BLOCK
-      {
-      Label : CODE
-        void
+  makeSequence T_CLOSE_CURLY
   Label : ELEMENT
     class
     Label : NAME
       a
     Label : BLOCK
       {
-      Label : CODE
+      Label : ELEMENT
         function
         Label : NAME
-          &
-          Label : REFERENCE
-            x
+          x
         Label : ARGUMENTS
           void
+          Label : ARGUMENT
+            void
         Label : BLOCK
           {
-          Label : CODE
+          Label : ELEMENT
             void
+  Label : ELEMENT
+    function
+    Label : NAME
+      z
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void

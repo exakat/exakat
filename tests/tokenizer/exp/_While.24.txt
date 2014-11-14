@@ -1,35 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    while
-    Label : CONDITION
-      !==
-      Label : RIGHT
-        ->
-        Label : OBJECT
-          $d
-        Label : METHOD
-          e
-          Label : ARGUMENTS
-            void
-      Label : LEFT
-        false
-    Label : LOOP
-      Block With While
-      Label : CODE
-        void
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      ->
-      Label : PROPERTY
-        c
-      Label : OBJECT
-        $b
-    Label : LEFT
-      $a
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -42,19 +14,19 @@ Label : CODE
             void
             Label : ARGUMENT
               ->
-              Label : PROPERTY
-                i
               Label : OBJECT
                 $h
+              Label : PROPERTY
+                i
         Label : LEFT
           ->
-          Label : PROPERTY
-            g
           Label : OBJECT
             $f
+          Label : PROPERTY
+            g
     Label : THEN
-      Block With if/elseif
-      Label : CODE
+      Block with if/elseif
+      Label : ELEMENT
         ->
         Label : OBJECT
           $j
@@ -62,3 +34,35 @@ Label : CODE
           k
           Label : ARGUMENTS
             void
+            Label : ARGUMENT
+              void
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      !==
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          $d
+        Label : METHOD
+          e
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : LEFT
+        false
+    Label : BLOCK
+      Block with While
+      Label : ELEMENT
+        void
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        $b
+      Label : PROPERTY
+        c
+    Label : LEFT
+      $a

@@ -1,18 +1,18 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     instanceof
-    Label : LEFT
-      $x
-    Label : RIGHT
+    Label : CLASS
       \
-      Label : ELEMENT
-        C
-      Label : ELEMENT
-        A
-      Label : ELEMENT
-        B
-      Label : ELEMENT
+      Label : SUBNAME
         D
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        A
+    Label : VARIABLE
+      $x

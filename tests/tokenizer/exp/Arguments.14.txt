@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     x
     Label : ARGUMENTS
@@ -10,15 +10,15 @@ Label : CODE
         1
       Label : ARGUMENT
         {
-        Label : INDEX
-          4
         Label : VARIABLE
           [
-          Label : INDEX
-            3
           Label : VARIABLE
             ->
-            Label : PROPERTY
-              var
             Label : OBJECT
               $x
+            Label : PROPERTY
+              var
+          Label : INDEX
+            3
+        Label : INDEX
+          4

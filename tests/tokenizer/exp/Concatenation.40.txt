@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $y
     Label : RIGHT
       .
       Label : CONCAT
@@ -14,10 +12,10 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $c
+    Label : LEFT
+      $y
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       .
       Label : CONCAT
@@ -26,3 +24,5 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $b
+    Label : LEFT
+      $x

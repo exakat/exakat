@@ -1,38 +1,40 @@
 <?php
 
 Label : CODE
-  function
-  Label : NAME
-    cmp1
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      $a
-    Label : ARGUMENT
-      $b
-  Label : BLOCK
-    {
-    Label : CODE
-      if
-      Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : LEFT
-            [
-            Label : INDEX
-              'c'
-            Label : VARIABLE
-              $a
-          Label : RIGHT
-            [
-            Label : INDEX
-              'd'
-            Label : VARIABLE
-              $b
-      Label : THEN
-        Block With if/elseif
-        Label : CODE
-          return
-          Label : RETURN
-            0
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    function
+    Label : NAME
+      cmp1
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        $a
+      Label : ARGUMENT
+        $b
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            ==
+            Label : RIGHT
+              [
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                'd'
+            Label : LEFT
+              [
+              Label : VARIABLE
+                $a
+              Label : INDEX
+                'c'
+        Label : THEN
+          Block with if/elseif
+          Label : ELEMENT
+            return
+            Label : RETURN
+              0

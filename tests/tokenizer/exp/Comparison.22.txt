@@ -1,33 +1,33 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      &&
-      Label : LEFT
-        ==
-        Label : LEFT
-          $a
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        &&
         Label : RIGHT
-          1
-      Label : RIGHT
-        >
+          >
+          Label : RIGHT
+            0
+          Label : LEFT
+            --
+            Label : POSTPLUSPLUS
+              ->
+              Label : OBJECT
+                $b
+              Label : PROPERTY
+                c
         Label : LEFT
-          --
-          Label : POSTPLUSPLUS
-            ->
-            Label : PROPERTY
-              c
-            Label : OBJECT
-              $b
-        Label : RIGHT
-          0
-  Label : THEN
-    {
-    Label : CODE
-      ;
+          ==
+          Label : RIGHT
+            1
+          Label : LEFT
+            $a
+    Label : THEN
+      {
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

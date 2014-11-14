@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     require
     Label : ARGUMENTS
@@ -14,22 +14,22 @@ Label : CODE
             ?
             Label : CONDITION
               !==
-              Label : LEFT
-                ->
-                Label : PROPERTY
-                  b
-                Label : OBJECT
-                  $a
               Label : RIGHT
                 'c'
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  b
             Label : THEN
               .
               Label : CONCAT
                 ->
-                Label : PROPERTY
-                  e
                 Label : OBJECT
                   $d
+                Label : PROPERTY
+                  e
               Label : CONCAT
                 F
             Label : ELSE

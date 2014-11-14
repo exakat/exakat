@@ -1,15 +1,25 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     ->
-    Label : OBJECT
-      $a
     Label : METHOD
       b
       Label : ARGUMENTS
         ,
+        Label : ARGUMENT
+          ::
+          Label : CLASS
+            D
+          Label : METHOD
+            e
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $f
+        Label : ARGUMENT
+          2
         Label : ARGUMENT
           <<<EOF
 
@@ -22,15 +32,5 @@ Label : CODE
             Label : CONCAT
                C
 
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          ::
-          Label : CLASS
-            D
-          Label : METHOD
-            e
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $f
+    Label : OBJECT
+      $a

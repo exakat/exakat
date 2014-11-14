@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     ->
     Label : OBJECT
@@ -12,11 +12,11 @@ Label : CODE
         void
         Label : ARGUMENT
           ->
-          Label : PROPERTY
-            False
           Label : OBJECT
             ->
-            Label : PROPERTY
-              c
             Label : OBJECT
               $b
+            Label : PROPERTY
+              c
+          Label : PROPERTY
+            False

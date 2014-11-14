@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       <<<EOD
 
@@ -14,17 +12,17 @@ Label : CODE
         Label : CONCAT
           A 
         Label : CONCAT
-          {
-          Label : NAME
-            ->
-            Label : OBJECT
-              $a
-            Label : METHOD
-              b
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'c'
+          ->
+          Label : OBJECT
+            $a
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'c'
         Label : CONCAT
            B
 
+    Label : LEFT
+      $x

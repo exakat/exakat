@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  function
-  Label : NAME
-    x
-  Label : ARGUMENTS
-    ,
-    Label : ARGUMENT
-      $a
-    Label : ARGUMENT
-      $b
-  Label : BLOCK
-    {
-    Label : CODE
-      void
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    function
+    Label : NAME
+      x
+    Label : ARGUMENTS
+      ,
+      Label : ARGUMENT
+        $a
+      Label : ARGUMENT
+        $b
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void

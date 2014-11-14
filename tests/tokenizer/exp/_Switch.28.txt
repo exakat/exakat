@@ -1,62 +1,56 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $a
-  Label : CASES
-    {
-    Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
       Sequence Case Default
       Label : ELEMENT
         case
         Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            Block With Sequence For Case Without Semicolon
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-            Label : ELEMENT
-              if
-              Label : CONDITION
-                (
-                Label : CODE
-                  ==
-                  Label : RIGHT
-                    0
-                  Label : LEFT
-                    $e
-              Label : THEN
-                {
-                Label : CODE
-                  ;
-                  Label : ELEMENT
-                    return
-                    Label : RETURN
-                      $f
+          makeSequence T_CLOSE_CURLY
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ==
+                Label : RIGHT
+                  0
+                Label : LEFT
+                  $e
+            Label : THEN
+              {
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  $f
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
         Label : CASE
           '2'
       Label : ELEMENT
         case
         Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              *
               Label : RIGHT
-                *
-                Label : RIGHT
-                  $d
-                Label : LEFT
-                  $c
+                $d
               Label : LEFT
-                $b
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
+                $c
+            Label : LEFT
+              $b
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
         Label : CASE
           '1'

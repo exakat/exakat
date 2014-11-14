@@ -1,46 +1,46 @@
 <?php
 
 Label : CODE
-  class
-  Label : NAME
-    x
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      {
       Label : ELEMENT
         function
+        Label : STATIC
+          static
+        Label : PUBLIC
+          public
         Label : NAME
           FALSE
         Label : ARGUMENTS
           void
+          Label : ARGUMENT
+            void
         Label : BLOCK
           {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              return
-              Label : RETURN
-                FALSE
-        Label : PUBLIC
-          public
-        Label : STATIC
-          static
+          Label : ELEMENT
+            return
+            Label : RETURN
+              FALSE
       Label : ELEMENT
         function
+        Label : STATIC
+          static
+        Label : PUBLIC
+          public
         Label : NAME
           TRUE
         Label : ARGUMENTS
           void
+          Label : ARGUMENT
+            void
         Label : BLOCK
           {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              return
-              Label : RETURN
-                TRUE
-        Label : PUBLIC
-          public
-        Label : STATIC
-          static
+          Label : ELEMENT
+            return
+            Label : RETURN
+              TRUE

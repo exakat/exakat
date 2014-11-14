@@ -1,28 +1,30 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $a
-  Label : CASES
-    {
-    Label : CODE
-      case
-      Label : CODE
-        Block With Sequence For Case
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CASE
+          ?
+          Label : CONDITION
+            <
+            Label : RIGHT
+              3
+            Label : LEFT
+              B
+          Label : THEN
+            -4
+          Label : ELSE
+            C
         Label : CODE
-          break
-          Label : LEVEL
-            void
-      Label : CASE
-        ?
-        Label : CONDITION
-          <
-          Label : RIGHT
-            3
-          Label : LEFT
-            B
-        Label : THEN
-          -4
-        Label : ELSE
-          C
+          Block with Sequence For Case
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void

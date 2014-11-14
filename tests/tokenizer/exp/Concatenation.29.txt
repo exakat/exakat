@@ -1,86 +1,72 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       "
       Label : CONTAIN
         Concatenation
         Label : CONCAT
-          {
-          Label : NAME
-            [
-            Label : INDEX
-              'a'
-            Label : VARIABLE
-              $i
+          [
+          Label : VARIABLE
+            $i
+          Label : INDEX
+            'a'
         Label : CONCAT
           .
         Label : CONCAT
-          {
-          Label : NAME
-            [
-            Label : INDEX
-              'b'
-            Label : VARIABLE
-              $i
+          [
+          Label : VARIABLE
+            $i
+          Label : INDEX
+            'b'
         Label : CONCAT
           .
         Label : CONCAT
-          {
-          Label : NAME
-            [
-            Label : INDEX
-              'c'
-            Label : VARIABLE
-              $i
+          [
+          Label : VARIABLE
+            $i
+          Label : INDEX
+            'c'
         Label : CONCAT
           .
         Label : CONCAT
-          {
-          Label : NAME
-            [
-            Label : INDEX
-              'd'
-            Label : VARIABLE
-              $i
+          [
+          Label : VARIABLE
+            $i
+          Label : INDEX
+            'd'
         Label : CONCAT
           -
         Label : CONCAT
-          {
-          Label : NAME
-            [
-            Label : INDEX
-              'e'
-            Label : VARIABLE
-              $i
+          [
+          Label : VARIABLE
+            $i
+          Label : INDEX
+            'e'
         Label : CONCAT
-          {
-          Label : NAME
-            [
-            Label : INDEX
-              'f'
-            Label : VARIABLE
-              $i
+          [
+          Label : VARIABLE
+            $i
+          Label : INDEX
+            'f'
         Label : CONCAT
           .
         Label : CONCAT
-          {
-          Label : NAME
+          [
+          Label : VARIABLE
             [
-            Label : INDEX
-              'x'
             Label : VARIABLE
               [
-              Label : INDEX
-                'x'
               Label : VARIABLE
-                [
-                Label : INDEX
-                  'g'
-                Label : VARIABLE
-                  $i
+                $i
+              Label : INDEX
+                'g'
+            Label : INDEX
+              'x'
+          Label : INDEX
+            'x'
+    Label : LEFT
+      $x

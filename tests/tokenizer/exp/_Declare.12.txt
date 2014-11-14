@@ -1,22 +1,22 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     declare
-    Label : BLOCK
-      void
     Label : TICKS
       ,
       Label : ARGUMENT
         =
-        Label : LEFT
-          ticks
         Label : RIGHT
           2
+        Label : LEFT
+          ticks
       Label : ARGUMENT
         =
-        Label : LEFT
-          encoding
         Label : RIGHT
           'ISO-8859-1'
+        Label : LEFT
+          encoding
+    Label : BLOCK
+      void

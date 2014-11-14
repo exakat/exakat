@@ -1,33 +1,33 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      =
-      Label : LEFT
-        !
-        Label : NOT
-          ->
-          Label : PROPERTY
-            a
-          Label : OBJECT
-            $this
-      Label : RIGHT
-        b
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            $d
-          Label : ARGUMENT
-            $c
-          Label : ARGUMENT
-            $e
-  Label : THEN
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        =
+        Label : RIGHT
+          b
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              $c
+            Label : ARGUMENT
+              $d
+            Label : ARGUMENT
+              $e
+        Label : LEFT
+          !
+          Label : NOT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              a
+    Label : THEN
+      {
       Label : ELEMENT
         return
         Label : RETURN

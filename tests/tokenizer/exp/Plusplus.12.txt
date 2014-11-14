@@ -1,24 +1,24 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     +
-    Label : LEFT
-      ++
-      Label : POSTPLUSPLUS
-        $x
     Label : RIGHT
       --
       Label : PREPLUSPLUS
         $y
+    Label : LEFT
+      ++
+      Label : POSTPLUSPLUS
+        $x
   Label : ELEMENT
     +
-    Label : LEFT
-      --
-      Label : PREPLUSPLUS
-        $x
     Label : RIGHT
       ++
       Label : POSTPLUSPLUS
         $y
+    Label : LEFT
+      --
+      Label : PREPLUSPLUS
+        $x

@@ -1,19 +1,19 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      instanceof
-      Label : LEFT
-        $x
-      Label : RIGHT
-        Exception
-  Label : THEN
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        instanceof
+        Label : CLASS
+          Exception
+        Label : VARIABLE
+          $x
+    Label : THEN
+      {
       Label : ELEMENT
         return
         Label : RETURN

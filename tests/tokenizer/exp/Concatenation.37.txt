@@ -1,11 +1,9 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $fp
     Label : RIGHT
       fopen
       Label : ARGUMENTS
@@ -13,16 +11,18 @@ Label : CODE
         Label : ARGUMENT
           .
           Label : CONCAT
-            'c'
-          Label : CONCAT
             'a'
           Label : CONCAT
             $b
           Label : CONCAT
+            'c'
+          Label : CONCAT
             ->
-            Label : PROPERTY
-              e
             Label : OBJECT
               $d
+            Label : PROPERTY
+              e
         Label : ARGUMENT
           'f'
+    Label : LEFT
+      $fp

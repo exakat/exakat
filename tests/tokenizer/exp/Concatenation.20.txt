@@ -1,24 +1,24 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       .
       Label : CONCAT
-        "6"
-      Label : CONCAT
-        "4"
+        "1"
       Label : CONCAT
         "2"
       Label : CONCAT
-        "1"
-      Label : CONCAT
         "3"
+      Label : CONCAT
+        "4"
       Label : CONCAT
         "5"
       Label : CONCAT
+        "6"
+      Label : CONCAT
         "7"
+    Label : LEFT
+      $a

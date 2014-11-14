@@ -1,23 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        $y
-    Label : THEN
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $a
-          Label : RIGHT
-            2
+  makeSequence T_OPEN_CURLY
   Label : ELEMENT
     if
     Label : CONDITION
@@ -26,11 +10,23 @@ Label : CODE
         $x
     Label : THEN
       {
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          2
+        Label : LEFT
+          $a
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
       Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $a
-          Label : RIGHT
-            2
+        $y
+    Label : THEN
+      {
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          2
+        Label : LEFT
+          $a

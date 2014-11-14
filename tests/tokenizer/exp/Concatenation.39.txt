@@ -1,46 +1,46 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     .=
-    Label : LEFT
-      $a
     Label : RIGHT
       ?
       Label : CONDITION
         >
+        Label : RIGHT
+          127
         Label : LEFT
           ord
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               [
-              Label : INDEX
-                $i
               Label : VARIABLE
                 $b
-        Label : RIGHT
-          127
+              Label : INDEX
+                $i
       Label : THEN
         .
         Label : CONCAT
           [
-          Label : INDEX
-            $e
           Label : VARIABLE
             $c
+          Label : INDEX
+            $e
         Label : CONCAT
           [
+          Label : VARIABLE
+            $d
           Label : INDEX
             ++
             Label : PREPLUSPLUS
               $l
-          Label : VARIABLE
-            $d
       Label : ELSE
         [
-        Label : INDEX
-          $k
         Label : VARIABLE
           $e
+        Label : INDEX
+          $k
+    Label : LEFT
+      $a

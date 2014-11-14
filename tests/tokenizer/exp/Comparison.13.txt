@@ -1,17 +1,19 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       array
       Label : ARGUMENTS
         ,
         Label : ARGUMENT
+          1
+        Label : ARGUMENT
           >
+          Label : RIGHT
+            'c'
           Label : LEFT
             ->
             Label : OBJECT
@@ -20,9 +22,9 @@ Label : CODE
               b
               Label : ARGUMENTS
                 void
-          Label : RIGHT
-            'c'
-        Label : ARGUMENT
-          1
+                Label : ARGUMENT
+                  void
         Label : ARGUMENT
           2
+    Label : LEFT
+      $x

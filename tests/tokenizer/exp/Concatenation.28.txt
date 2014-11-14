@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -13,21 +13,19 @@ Label : CODE
           Label : CONCAT
             a 
           Label : CONCAT
-            {
-            Label : NAME
-              ->
-              Label : PROPERTY
-                b
-              Label : OBJECT
-                $this
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              b
           Label : CONCAT
              c 
           Label : CONCAT
             ->
-            Label : PROPERTY
-              d
             Label : OBJECT
               $item
+            Label : PROPERTY
+              d
           Label : CONCAT
              
           Label : CONCAT

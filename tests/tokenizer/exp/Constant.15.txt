@@ -1,56 +1,54 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $y
-    Label : RIGHT
-      a
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      \
-      Label : ELEMENT
-        a
-      Label : ELEMENT
-        b
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x2
-    Label : RIGHT
-      \
-      Label : ELEMENT
-        c
-      Label : ELEMENT
-        a
-      Label : ELEMENT
-        b
-      Label : ELEMENT
-        d
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
       (
       Label : CODE
         ==
-        Label : LEFT
-          $x
         Label : RIGHT
           \
-          Label : ELEMENT
-            a
-          Label : ELEMENT
+          Label : SUBNAME
             b
+          Label : SUBNAME
+            a
+        Label : LEFT
+          $x
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $y
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $y
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      a
+    Label : LEFT
+      $y
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      \
+      Label : SUBNAME
+        d
+      Label : SUBNAME
+        c
+      Label : SUBNAME
+        b
+      Label : SUBNAME
+        a
+    Label : LEFT
+      $x2
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      \
+      Label : SUBNAME
+        b
+      Label : SUBNAME
+        a
+    Label : LEFT
+      $x

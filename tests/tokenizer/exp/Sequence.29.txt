@@ -1,15 +1,27 @@
 <?php
 
 Label : CODE
-  function
-  Label : NAME
-    a
-  Label : ARGUMENTS
-    void
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      a
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        array_pop
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              stack
       Label : ELEMENT
         if
         Label : CONDITION
@@ -18,24 +30,12 @@ Label : CODE
             $d
         Label : THEN
           {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : LEFT
-                $e
-              Label : RIGHT
-                2
-      Label : ELEMENT
-        array_pop
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ->
-            Label : PROPERTY
-              stack
-            Label : OBJECT
-              $this
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              2
+            Label : LEFT
+              $e
       Label : ELEMENT
         if
         Label : CONDITION
@@ -44,11 +44,9 @@ Label : CODE
             $b
         Label : THEN
           {
-          Label : CODE
-            ;
-            Label : ELEMENT
-              =
-              Label : LEFT
-                $c
-              Label : RIGHT
-                1
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $c

@@ -1,13 +1,15 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     throw
     Label : THROW
       new
       Label : NEW
-        \
+        \A
+        Label : SUBNAME
+          A
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -15,14 +17,12 @@ Label : CODE
             Label : ARGUMENTS
               ,
               Label : ARGUMENT
-                ->
-                Label : PROPERTY
-                  e
-                Label : OBJECT
-                  $d
-              Label : ARGUMENT
                 'C'
               Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  e
+              Label : ARGUMENT
                 $f
-        Label : ELEMENT
-          A

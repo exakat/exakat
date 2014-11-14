@@ -1,26 +1,26 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     return
     Label : RETURN
       +
+      Label : RIGHT
+        $d
       Label : LEFT
         %
+        Label : RIGHT
+          (
+          Label : CODE
+            -
+            Label : RIGHT
+              $c
+            Label : LEFT
+              $b
         Label : LEFT
           abs
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $a
-        Label : RIGHT
-          (
-          Label : CODE
-            -
-            Label : LEFT
-              $b
-            Label : RIGHT
-              $c
-      Label : RIGHT
-        $d

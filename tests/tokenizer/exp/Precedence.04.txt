@@ -1,19 +1,19 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     print
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        .
-        Label : CONCAT
-          ++
-          Label : POSTPLUSPLUS
-            $a
-        Label : CONCAT
-          $b
+        "\n"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "\n"
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -31,22 +31,22 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        "\n"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        "\n"
+        .
+        Label : CONCAT
+          ++
+          Label : POSTPLUSPLUS
+            $a
+        Label : CONCAT
+          $b
   Label : ELEMENT
     =
-    Label : LEFT
-      $b
     Label : RIGHT
       2
+    Label : LEFT
+      $b
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       1
+    Label : LEFT
+      $a

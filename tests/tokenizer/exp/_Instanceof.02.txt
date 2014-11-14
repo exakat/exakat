@@ -1,55 +1,55 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      !
-      Label : NOT
-        (
-        Label : CODE
-          ||
-          Label : LEFT
-            is_array
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          (
+          Label : CODE
+            ||
+            Label : LEFT
+              is_array
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    [
+                    Label : VARIABLE
+                      ->
+                      Label : OBJECT
+                        $a
+                      Label : PROPERTY
+                        b
+                    Label : INDEX
+                      $c
+                  Label : PROPERTY
+                    d
+            Label : RIGHT
+              instanceof
+              Label : VARIABLE
                 ->
-                Label : PROPERTY
-                  d
                 Label : OBJECT
                   [
-                  Label : INDEX
-                    $c
                   Label : VARIABLE
                     ->
-                    Label : PROPERTY
-                      b
                     Label : OBJECT
-                      $a
-          Label : RIGHT
-            instanceof
-            Label : LEFT
-              ->
-              Label : PROPERTY
-                h
-              Label : OBJECT
-                [
-                Label : INDEX
-                  $g
-                Label : VARIABLE
-                  ->
-                  Label : PROPERTY
-                    f
-                  Label : OBJECT
-                    $e
-            Label : RIGHT
-              ArrayAccess
-  Label : THEN
-    {
-    Label : CODE
-      ;
+                      $e
+                    Label : PROPERTY
+                      f
+                  Label : INDEX
+                    $g
+                Label : PROPERTY
+                  h
+              Label : CLASS
+                ArrayAccess
+    Label : THEN
+      {
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

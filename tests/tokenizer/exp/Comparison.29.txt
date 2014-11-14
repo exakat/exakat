@@ -1,92 +1,94 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
-      ||
-      Label : LEFT
-        &&
-        Label : LEFT
-          defined
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'a'
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ||
         Label : RIGHT
-          !=
-          Label : LEFT
-            .
-            Label : CONCAT
-              [
-              Label : INDEX
-                'c'
-              Label : VARIABLE
-                $b
-            Label : CONCAT
-              d
+          &&
+          Label : RIGHT
+            !=
+            Label : RIGHT
+              substr
               Label : ARGUMENTS
                 ,
                 Label : ARGUMENT
-                  E
+                  +
+                  Label : RIGHT
+                    1
+                  Label : LEFT
+                    strrpos
+                    Label : ARGUMENTS
+                      ,
+                      Label : ARGUMENT
+                        [
+                        Label : VARIABLE
+                          $m
+                        Label : INDEX
+                          'n'
+                      Label : ARGUMENT
+                        'n'
                 Label : ARGUMENT
-                  1
-          Label : RIGHT
-            [
-            Label : INDEX
-              'g'
-            Label : VARIABLE
-              $f
-      Label : RIGHT
-        &&
+                  [
+                  Label : VARIABLE
+                    $k
+                  Label : INDEX
+                    'l'
+                Label : ARGUMENT
+                  0
+            Label : LEFT
+              [
+              Label : VARIABLE
+                $i
+              Label : INDEX
+                'j'
+          Label : LEFT
+            !
+            Label : NOT
+              defined
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'H'
         Label : LEFT
-          !
-          Label : NOT
+          &&
+          Label : RIGHT
+            !=
+            Label : RIGHT
+              [
+              Label : VARIABLE
+                $f
+              Label : INDEX
+                'g'
+            Label : LEFT
+              .
+              Label : CONCAT
+                [
+                Label : VARIABLE
+                  $b
+                Label : INDEX
+                  'c'
+              Label : CONCAT
+                d
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    E
+                  Label : ARGUMENT
+                    1
+          Label : LEFT
             defined
             Label : ARGUMENTS
               void
               Label : ARGUMENT
-                'H'
-        Label : RIGHT
-          !=
-          Label : LEFT
-            [
-            Label : INDEX
-              'j'
-            Label : VARIABLE
-              $i
-          Label : RIGHT
-            substr
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'l'
-                Label : VARIABLE
-                  $k
-              Label : ARGUMENT
-                +
-                Label : LEFT
-                  strrpos
-                  Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'n'
-                      Label : VARIABLE
-                        $m
-                    Label : ARGUMENT
-                      'n'
-                Label : RIGHT
-                  1
-  Label : THEN
-    Block With if/elseif
-    Label : CODE
-      ++
-      Label : POSTPLUSPLUS
-        $x
+                'a'
+    Label : THEN
+      Block with if/elseif
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x

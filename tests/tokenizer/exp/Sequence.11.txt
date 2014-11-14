@@ -1,7 +1,21 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    foreach
+    Label : SOURCE
+      $y
+    Label : VALUE
+      $b
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          3
+        Label : LEFT
+          $c
   Label : ELEMENT
     if
     Label : CONDITION
@@ -10,30 +24,26 @@ Label : CODE
         2
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $x
-          Label : RIGHT
-            2
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          2
+        Label : LEFT
+          $x
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $b
     Label : SOURCE
       $y
-    Label : LOOP
+    Label : VALUE
+      $b
+    Label : BLOCK
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $c
-          Label : RIGHT
-            3
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          2
+        Label : LEFT
+          $c
   Label : ELEMENT
     if
     Label : CONDITION
@@ -42,27 +52,9 @@ Label : CODE
         1
     Label : THEN
       {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $x
-          Label : RIGHT
-            1
-  Label : ELEMENT
-    foreach
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $y
-    Label : LOOP
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $c
-          Label : RIGHT
-            2
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $x

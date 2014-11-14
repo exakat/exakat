@@ -1,55 +1,55 @@
 <?php
 
 Label : CODE
-  if
-  Label : CONDITION
-    (
-    Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
       (
       Label : CODE
-        ||
-        Label : LEFT
-          (
-          Label : CODE
-            [
-            Label : INDEX
-              'b'
-            Label : VARIABLE
-              $a
-        Label : RIGHT
-          (
-          Label : CODE
-            &&
-            Label : LEFT
+        (
+        Label : CODE
+          ||
+          Label : LEFT
+            (
+            Label : CODE
               [
-              Label : INDEX
-                'e'
               Label : VARIABLE
+                $a
+              Label : INDEX
+                'b'
+          Label : RIGHT
+            (
+            Label : CODE
+              &&
+              Label : LEFT
                 [
-                Label : INDEX
-                  'd'
                 Label : VARIABLE
-                  $C
-            Label : RIGHT
-              (
-              Label : CODE
-                ||
-                Label : LEFT
                   [
-                  Label : INDEX
-                    'g'
                   Label : VARIABLE
-                    $f
-                Label : RIGHT
-                  [
+                    $C
                   Label : INDEX
-                    'i'
-                  Label : VARIABLE
-                    $h
-  Label : THEN
-    {
-    Label : CODE
-      ;
+                    'd'
+                Label : INDEX
+                  'e'
+              Label : RIGHT
+                (
+                Label : CODE
+                  ||
+                  Label : LEFT
+                    [
+                    Label : VARIABLE
+                      $f
+                    Label : INDEX
+                      'g'
+                  Label : RIGHT
+                    [
+                    Label : VARIABLE
+                      $h
+                    Label : INDEX
+                      'i'
+    Label : THEN
+      {
       Label : ELEMENT
         a
         Label : ARGUMENTS

@@ -1,47 +1,49 @@
 <?php
 
 Label : CODE
-  class
-  Label : NAME
-    x
-  Label : BLOCK
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      {
       Label : ELEMENT
-        Ppp
-        Label : VALUE
-          8
+        var
         Label : DEFINE
-          $h1
+          $a
+        Label : VALUE
+          1
         Label : VAR
           var
       Label : ELEMENT
-        Ppp
-        Label : VALUE
-          6
+        var
         Label : DEFINE
-          $f1
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
-        Label : VALUE
-          4
-        Label : DEFINE
-          $d1
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
+          $b
         Label : VALUE
           2
-        Label : DEFINE
-          $b1
         Label : VAR
           var
       Label : ELEMENT
-        Ppp
+        var
+        Label : DEFINE
+          $a1
+        Label : VALUE
+          1
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $h1
+        Label : VALUE
+          8
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $h
         Label : VALUE
           array
           Label : ARGUMENTS
@@ -50,95 +52,93 @@ Label : CODE
               1
             Label : ARGUMENT
               2
-        Label : DEFINE
-          $h
         Label : VAR
           var
       Label : ELEMENT
-        Ppp
-        Label : VALUE
-          6
-        Label : DEFINE
-          $f
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
-        Label : VALUE
-          4
+        var
         Label : DEFINE
           $d
+        Label : VALUE
+          4
         Label : VAR
           var
       Label : ELEMENT
-        Ppp
-        Label : VALUE
-          2
-        Label : DEFINE
-          $b
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
-        Label : VALUE
-          1
-        Label : DEFINE
-          $a
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
-        Label : VALUE
-          3
-        Label : DEFINE
-          $c
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
-        Label : VALUE
-          5
-        Label : DEFINE
-          $e
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
-        Label : VALUE
-          7
+        var
         Label : DEFINE
           $g
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
-        Label : VALUE
-          1
-        Label : DEFINE
-          $a1
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
-        Label : VALUE
-          3
-        Label : DEFINE
-          $c1
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
-        Label : VALUE
-          5
-        Label : DEFINE
-          $e1
-        Label : VAR
-          var
-      Label : ELEMENT
-        Ppp
         Label : VALUE
           7
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $f1
+        Label : VALUE
+          6
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $f
+        Label : VALUE
+          6
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $b1
+        Label : VALUE
+          2
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $c
+        Label : VALUE
+          3
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $e
+        Label : VALUE
+          5
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $c1
+        Label : VALUE
+          3
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $d1
+        Label : VALUE
+          4
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $e1
+        Label : VALUE
+          5
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
         Label : DEFINE
           $g1
+        Label : VALUE
+          7
         Label : VAR
           var

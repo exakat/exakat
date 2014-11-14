@@ -1,46 +1,48 @@
 <?php
 
 Label : CODE
-  while
-  Label : CONDITION
-    <
-    Label : LEFT
-      ->
-      Label : PROPERTY
-        b
-      Label : OBJECT
-        $a
-    Label : RIGHT
-      ->
-      Label : OBJECT
-        $c
-      Label : METHOD
-        d
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            $h
-          Label : ARGUMENT
-            $g
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $e
-            Label : METHOD
-              f
-              Label : ARGUMENTS
-                void
-  Label : LOOP
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      <
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          $c
+        Label : METHOD
+          d
+          Label : ARGUMENTS
+            ,
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $e
+              Label : METHOD
+                f
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    void
+            Label : ARGUMENT
+              $g
+            Label : ARGUMENT
+              $h
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          b
+    Label : BLOCK
+      {
       Label : ELEMENT
         +=
-        Label : LEFT
-          ->
-          Label : PROPERTY
-            j
-          Label : OBJECT
-            $i
         Label : RIGHT
           1
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $i
+          Label : PROPERTY
+            j

@@ -1,36 +1,20 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_CURLY
   Label : ELEMENT
     interface
-    Label : CODE
-      {
-      Label : CODE
-        function
-        Label : NAME
-          D
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              E
-            Label : VARIABLE
-              $f
     Label : NAME
       A
     Label : EXTENDS
       \
-      Label : ELEMENT
-        B
-      Label : ELEMENT
+      Label : SUBNAME
         C
-  Label : ELEMENT
-    interface
-    Label : CODE
+      Label : SUBNAME
+        B
+    Label : BLOCK
       {
-      Label : CODE
+      Label : ELEMENT
         function
         Label : NAME
           D
@@ -42,57 +26,77 @@ Label : CODE
               E
             Label : VARIABLE
               $f
-    Label : NAME
-      A
-    Label : EXTENDS
-      ,
-      Label : ARGUMENT
-        \
-        Label : ELEMENT
-          B
-        Label : ELEMENT
-          C
-      Label : ARGUMENT
-        \
-        Label : ELEMENT
-          G
-        Label : ELEMENT
-          H
   Label : ELEMENT
     interface
-    Label : CODE
-      {
-      Label : CODE
-        function
-        Label : NAME
-          D
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              E
-            Label : VARIABLE
-              $f
     Label : NAME
       A
     Label : EXTENDS
       ,
       Label : ARGUMENT
         \
-        Label : ELEMENT
-          I
-        Label : ELEMENT
-          J
-      Label : ARGUMENT
-        \
-        Label : ELEMENT
-          B
-        Label : ELEMENT
+        Label : SUBNAME
           C
+        Label : SUBNAME
+          B
       Label : ARGUMENT
         \
-        Label : ELEMENT
-          G
-        Label : ELEMENT
+        Label : SUBNAME
           H
+        Label : SUBNAME
+          G
+    Label : BLOCK
+      makeSequence T_COMMA
+      Label : ELEMENT
+        interface
+        Label : NAME
+          A
+        Label : EXTENDS
+          ,
+          Label : ARGUMENT
+            \
+            Label : SUBNAME
+              J
+            Label : SUBNAME
+              I
+          Label : ARGUMENT
+            \
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              B
+          Label : ARGUMENT
+            \
+            Label : SUBNAME
+              H
+            Label : SUBNAME
+              G
+        Label : BLOCK
+          makeSequence T_COMMA
+          Label : ELEMENT
+            {
+            Label : ELEMENT
+              function
+              Label : NAME
+                D
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  Typehint
+                  Label : CLASS
+                    E
+                  Label : VARIABLE
+                    $f
+      Label : ELEMENT
+        {
+        Label : ELEMENT
+          function
+          Label : NAME
+            D
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              Typehint
+              Label : CLASS
+                E
+              Label : VARIABLE
+                $f

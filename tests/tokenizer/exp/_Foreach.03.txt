@@ -1,22 +1,22 @@
 <?php
 
 Label : CODE
-  foreach
-  Label : VALUE
-    $y
-  Label : SOURCE
-    ->
-    Label : PROPERTY
-      b
-    Label : OBJECT
-      $x
-  Label : LOOP
-    {
-    Label : CODE
-      ;
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    foreach
+    Label : SOURCE
+      ->
+      Label : OBJECT
+        $x
+      Label : PROPERTY
+        b
+    Label : VALUE
+      $y
+    Label : BLOCK
+      {
       Label : ELEMENT
         +=
-        Label : LEFT
-          $y
         Label : RIGHT
           2
+        Label : LEFT
+          $y

@@ -1,13 +1,7 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        "\n"
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -21,13 +15,19 @@ Label : CODE
       Label : ARGUMENT
         &&
         Label : LEFT
+          2
+        Label : RIGHT
           &
           Label : LEFT
-            2
-          Label : RIGHT
             3
-        Label : RIGHT
-          4
+          Label : RIGHT
+            4
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "\n"
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -35,10 +35,10 @@ Label : CODE
       Label : ARGUMENT
         &
         Label : LEFT
+          2
+        Label : RIGHT
           &&
           Label : LEFT
-            2
-          Label : RIGHT
             3
-        Label : RIGHT
-          4
+          Label : RIGHT
+            4

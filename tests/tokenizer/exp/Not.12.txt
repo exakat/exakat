@@ -1,44 +1,32 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       "
       Label : CONTAIN
         Concatenation
         Label : CONCAT
-          {
-          Label : NAME
-            $a
+          $a
         Label : CONCAT
           A
         Label : CONCAT
-          {
-        Label : CONCAT
-          $b
-        Label : CONCAT
           ->
+          Label : OBJECT
+            $b
+          Label : PROPERTY
+            c
         Label : CONCAT
-          c
-        Label : CONCAT
-          }
-        Label : CONCAT
-          {
-          Label : NAME
-            $d
+          $d
         Label : CONCAT
           B
         Label : CONCAT
-          {
-        Label : CONCAT
-          $e
-        Label : CONCAT
           ->
-        Label : CONCAT
-          f
-        Label : CONCAT
-          }
+          Label : OBJECT
+            $e
+          Label : PROPERTY
+            f
+    Label : LEFT
+      $x

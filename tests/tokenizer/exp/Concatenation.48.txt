@@ -1,30 +1,6 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        n
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            .
-            Label : CONCAT
-              'o'
-            Label : CONCAT
-              ->
-              Label : PROPERTY
-                q
-              Label : OBJECT
-                $p
-          Label : ARGUMENT
-            r
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                's'
+  makeSequence T_CONSTANT_ENCAPSED_STRING
   Label : ELEMENT
     T
   Label : ELEMENT
@@ -36,6 +12,22 @@ Label : CODE
         Label : ARGUMENTS
           ,
           Label : ARGUMENT
+            .
+            Label : CONCAT
+              'v'
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $w
+              Label : PROPERTY
+                x
+          Label : ARGUMENT
+            y
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'z'
+          Label : ARGUMENT
             array
             Label : ARGUMENTS
               void
@@ -45,22 +37,6 @@ Label : CODE
                   'aa'
                 Label : VALUE
                   'ab'
-          Label : ARGUMENT
-            .
-            Label : CONCAT
-              'v'
-            Label : CONCAT
-              ->
-              Label : PROPERTY
-                x
-              Label : OBJECT
-                $w
-          Label : ARGUMENT
-            y
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'z'
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -77,10 +53,10 @@ Label : CODE
                 'b'
               Label : CONCAT
                 ->
-                Label : PROPERTY
-                  d
                 Label : OBJECT
                   $c
+                Label : PROPERTY
+                  d
             Label : ARGUMENT
               e
               Label : ARGUMENTS
@@ -89,14 +65,14 @@ Label : CODE
                   ?
                   Label : CONDITION
                     ==
-                    Label : LEFT
-                      ->
-                      Label : PROPERTY
-                        g
-                      Label : OBJECT
-                        $f
                     Label : RIGHT
                       'h'
+                    Label : LEFT
+                      ->
+                      Label : OBJECT
+                        $f
+                      Label : PROPERTY
+                        g
                   Label : THEN
                     'i'
                   Label : ELSE
@@ -105,5 +81,29 @@ Label : CODE
               'k'
         Label : CONCAT
           'l'
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        n
+        Label : ARGUMENTS
+          ,
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              'o'
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $p
+              Label : PROPERTY
+                q
+          Label : ARGUMENT
+            r
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                's'
   Label : ELEMENT
     M

@@ -1,64 +1,56 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $a
-  Label : CASES
-    {
-    Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
       Sequence Case Default
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              $k
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-        Label : CASE
-          3
       Label : ELEMENT
         default
         Label : CODE
-          Block With Sequence For Default
-          Label : CODE
-            ;
-            Label : ELEMENT
-              $l
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            $l
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
       Label : ELEMENT
         case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              $j
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
-        Label : CASE
-          2
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              $i
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                void
         Label : CASE
           1
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            $i
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+      Label : ELEMENT
+        case
+        Label : CASE
+          2
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            $j
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+      Label : ELEMENT
+        case
+        Label : CASE
+          3
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            $k
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void

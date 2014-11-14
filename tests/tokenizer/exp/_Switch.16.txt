@@ -1,30 +1,28 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $x
-  Label : CASES
-    {
-    Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $x
+    Label : CASES
       Sequence Case Default
       Label : ELEMENT
         default
         Label : CODE
-          Block With Sequence For Default
-          Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $y
       Label : ELEMENT
         case
-        Label : CODE
-          Block With Sequence For Case
-          Label : CODE
-            ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $x
         Label : CASE
           'a'
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $x

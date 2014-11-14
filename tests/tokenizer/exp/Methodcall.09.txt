@@ -1,9 +1,11 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     ->
+    Label : OBJECT
+      $c
     Label : METHOD
       a
       Label : ARGUMENTS
@@ -18,5 +20,3 @@ Label : CODE
                 __DIR__
               Label : CONCAT
                 '/b.php'
-    Label : OBJECT
-      $c

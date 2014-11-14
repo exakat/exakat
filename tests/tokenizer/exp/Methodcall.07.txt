@@ -1,18 +1,18 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ->
       Label : OBJECT
         $b
+      Label : METHOD
+        'c'
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           1
-      Label : METHOD
-        'c'
+    Label : LEFT
+      $a

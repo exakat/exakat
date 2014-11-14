@@ -1,73 +1,73 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    true
-  Label : CASES
-    {
-    Label : CODE
-      default
-      Label : CODE
-        Block With Sequence For Default Without Semicolon
-        Label : ELEMENT
-          .=
-          Label : RIGHT
-            str_pad
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                $a
-              Label : ARGUMENT
-                +
-                Label : RIGHT
-                  %
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    switch
+    Label : NAME
+      true
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block with Sequence For Default Without Semicolon
+          Label : ELEMENT
+            .=
+            Label : RIGHT
+              str_pad
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  $a
+                Label : ARGUMENT
+                  +
                   Label : RIGHT
-                    W
+                    %
+                    Label : RIGHT
+                      W
+                    Label : LEFT
+                      (
+                      Label : CODE
+                        *
+                        Label : RIGHT
+                          strlen
+                          Label : ARGUMENTS
+                            void
+                            Label : ARGUMENT
+                              $d
+                        Label : LEFT
+                          (
+                          Label : CODE
+                            -
+                            Label : RIGHT
+                              1
+                            Label : LEFT
+                              C
                   Label : LEFT
-                    (
-                    Label : CODE
-                      *
-                      Label : RIGHT
-                        strlen
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            $d
-                      Label : LEFT
-                        (
-                        Label : CODE
-                          -
-                          Label : RIGHT
-                            1
-                          Label : LEFT
-                            C
+                    strlen
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $b
+                Label : ARGUMENT
+                  0
+                Label : ARGUMENT
+                  F
+            Label : LEFT
+              $x
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ==
+                Label : RIGHT
+                  1
                 Label : LEFT
-                  strlen
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $b
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                F
-          Label : LEFT
-            $x
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              ==
-              Label : RIGHT
-                1
-              Label : LEFT
-                $x
-          Label : THEN
-            {
-            Label : CODE
-              ;
+                  $x
+            Label : THEN
+              {
               Label : ELEMENT
                 ++
                 Label : POSTPLUSPLUS

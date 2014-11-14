@@ -1,10 +1,10 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     /
-    Label : LEFT
-      2
     Label : RIGHT
       8
+    Label : LEFT
+      2

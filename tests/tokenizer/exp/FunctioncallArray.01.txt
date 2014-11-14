@@ -1,18 +1,20 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     [
-    Label : INDEX
-      d
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        34
     Label : VARIABLE
       ->
       Label : OBJECT
         $b
       Label : PROPERTY
         c
+    Label : INDEX
+      d
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        34
+    Label : NAME
+      [

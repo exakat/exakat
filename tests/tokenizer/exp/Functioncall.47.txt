@@ -1,14 +1,18 @@
 <?php 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         (
         Label : CODE
           &&
+          Label : LEFT
+            $b
           Label : RIGHT
             !
             Label : NOT
@@ -17,19 +21,15 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   $d
-          Label : LEFT
-            $b
       Label : THEN
         ->
-        Label : PROPERTY
-          f
         Label : OBJECT
           current
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $e
+        Label : PROPERTY
+          f
       Label : ELSE
         ''
-    Label : LEFT
-      $a
