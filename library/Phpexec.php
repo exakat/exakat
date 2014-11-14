@@ -111,6 +111,8 @@ class Phpexec {
 
     public function compile($file) {
         $shell = shell_exec($this->phpexec.' -l '.escapeshellarg($file).' 2>&1');
+        $shell = preg_replace("/PHP Warning: .*?\n/i", '', $shell);
+        var_dump($shell);
         if (trim($shell) == 'No syntax errors detected in '.$file) {
             return true;
         } else {
