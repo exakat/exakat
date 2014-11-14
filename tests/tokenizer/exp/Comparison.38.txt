@@ -1,0 +1,18 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    var_dump
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        !=
+        Label : RIGHT
+          'B'
+        Label : LEFT
+          <
+          Label : RIGHT
+            1
+          Label : LEFT
+            $b

@@ -12,12 +12,13 @@ class Comparison extends TokenAuto {
                            'Magicconstant', 'Staticconstant', 'String', 'Addition', 'Multiplication',
                           'Nsname', 'Not', 'Parenthesis', 'Noscream', 'Preplusplus', 'Postplusplus',
                           'Bitshift', 'Concatenation', 'Cast', 'New', 'Include' , 'Identifier', 'Instanceof',
-                          'Staticclass',);
+                          'Staticclass', 'Comparison');
         
         $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON'), 
                                                                          Addition::$operators, Bitshift::$operators, 
                                                                          Multiplication::$operators, Preplusplus::$operators, 
-                                                                         Concatenation::$operators, _New::$operators)), 
+                                                                         Concatenation::$operators, _New::$operators,
+                                                                         Comparison::$operators)), 
                                   -1 => array('atom' => $operands ),
                                    0 => array('token' => Comparison::$operators,
                                               'atom' => 'none'),
