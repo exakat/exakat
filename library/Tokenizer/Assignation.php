@@ -39,7 +39,7 @@ class Assignation extends TokenAuto {
                                                                            Preplusplus::$operators )),
                                   -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 
                                                               'Noscream', 'Not', 'Arrayappend' , 'Typehint', 'Identifier',
-                                                              'Static', 'Cast', 'Sign', 'Power' )),
+                                                              'Static', 'Cast', 'Sign', 'Power', 'Null', 'Boolean' )),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut2' => array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators, 
