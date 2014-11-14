@@ -190,20 +190,19 @@ function process_file($filename, $log_file) {
         return true; // we just ignore the file. this is an empty script or a text file
     }
 
-    if (!isset($tokens[0]) ||
-        !isset($tokens[1]) ||
-        !isset($tokens[0][0]) ||
-        !isset($tokens[1][0])) {
-        print "File '$filename' has not enough tokens to start. Ignoring\n";
-
-        return true;
-    }
-    
     while ( $Php->getTokenname($tokens[0][0]) == 'T_OPEN_TAG' &&
             $Php->getTokenname($tokens[1][0]) == 'T_CLOSE_TAG') {
         unset($tokens[0]);
         unset($tokens[1]);
         $tokens = array_values($tokens);
+
+        if (empty($tokens)) {
+            return true; // we just ignore the file.
+        }
+
+        if (count($tokens) == 1) {
+            return true; // we just ignore the file. this is an empty script or a text file
+        }
     }
 
     if (count($tokens) == 0) {
