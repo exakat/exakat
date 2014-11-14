@@ -11,9 +11,10 @@ $expected     = array(  "define('g', ab)",
                         "define('e', -1)",
                         "define('f', 'true')",
                         "define('i', true)",
+                        "define('A', \"a\" . \"b\")",
 );
 
-$expected_not = array(  "define('A', \"a\".\"b\")",
+$expected_not = array(  
                         "define('B', \"a \$b c\")",
                         "define('C', \$a)",
 );

@@ -10,9 +10,10 @@ class ConstRecommended extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        // define('const', literal);
         $this->atomIs("Functioncall")
              ->hasNoIn('METHOD') // possibly new too
-             ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath('\\define')
              ->outIs('ARGUMENTS')
              ->_as('args')
@@ -27,9 +28,10 @@ class ConstRecommended extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // define('const', other constant);
         $this->atomIs("Functioncall")
              ->hasNoIn('METHOD') // possibly new too
-             ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath('\\define')
              ->outIs('ARGUMENTS')
              ->_as('args')
@@ -41,6 +43,24 @@ class ConstRecommended extends Analyzer\Analyzer {
              ->is('rank', 1)
              ->atomIs(array('Identifier', 'Nsname'))
              ->analyzerIs('Analyzer\\Constants\\ConstantUsage')
+             ->back('first');
+        $this->prepareQuery();
+
+        // define('const', expression);
+        $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD') // possibly new too
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath('\\define')
+             ->outIs('ARGUMENTS')
+             ->_as('args')
+             ->outIs('ARGUMENT')
+             ->is('rank', 0)
+             ->atomIs('String')
+             ->back('args')
+             ->outIs('ARGUMENT')
+             ->is('rank', 1)
+             ->atomIsNot(array('Identifier', 'Nsname','String', 'Float', 'Integer', 'Boolean', 'Null', 'Staticconstant', 'Variable'))
+             ->raw('filter{ it.out.loop(1){true}{true}.filter{it.atom in ["Variable", "Functioncall"]}.any() == false}')
              ->back('first');
         $this->prepareQuery();
     }
