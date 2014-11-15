@@ -1,19 +1,19 @@
 <?php
 
 Label : CODE
-  makeSequence
-  Label : ELEMENT
-    $c
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     :
     Label : LABEL
       E
   Label : ELEMENT
+    $c
+  Label : ELEMENT
     try
     Label : CODE
       {
-      Label : CODE
-        makeSequence
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
         Label : ELEMENT
           C
           Label : ARGUMENTS
@@ -24,14 +24,14 @@ Label : CODE
       catch
       Label : CLASS
         \
-        Label : ELEMENT
+        Label : SUBNAME
           D
-      Label : CODE
-        {
-        Label : CODE
-          void
       Label : VARIABLE
         $b
+      Label : CODE
+        {
+        Label : ELEMENT
+          void
   Label : ELEMENT
     =
     Label : RIGHT

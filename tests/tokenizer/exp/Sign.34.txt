@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -26,8 +26,8 @@ Label : CODE
                   $e
     Label : THEN
       {
-      Label : CODE
-        makeSequence
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
         Label : ELEMENT
           =
           Label : RIGHT

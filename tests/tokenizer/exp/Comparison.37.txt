@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -16,9 +16,9 @@ Label : CODE
               G
             Label : LEFT
               instanceof
-              Label : RIGHT
+              Label : CLASS
                 F
-              Label : LEFT
+              Label : VARIABLE
                 $c
           Label : LEFT
             ==
@@ -26,9 +26,9 @@ Label : CODE
               E
             Label : LEFT
               instanceof
-              Label : RIGHT
+              Label : CLASS
                 D
-              Label : LEFT
+              Label : VARIABLE
                 $b
         Label : LEFT
           ==
@@ -36,11 +36,11 @@ Label : CODE
             C
           Label : LEFT
             instanceof
-            Label : RIGHT
+            Label : CLASS
               B
-            Label : LEFT
+            Label : VARIABLE
               $a
     Label : THEN
       {
-      Label : CODE
+      Label : ELEMENT
         void

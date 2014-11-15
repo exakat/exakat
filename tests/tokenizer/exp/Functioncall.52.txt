@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_CURLY
   Label : ELEMENT
     if
     Label : CONDITION
@@ -14,26 +14,26 @@ Label : CODE
             .
             Label : CONCAT
               ::
+              Label : CLASS
+                P
               Label : METHOD
                 Q
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     'R'
-              Label : CLASS
-                P
             Label : CONCAT
               'S'
     Label : THEN
       {
-      Label : CODE
+      Label : ELEMENT
         void
   Label : ELEMENT
-    M
+    H
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        'N'
+        'I'
   Label : ELEMENT
     J
     Label : ARGUMENTS
@@ -42,6 +42,12 @@ Label : CODE
         'K'
       Label : ARGUMENT
         'L'
+  Label : ELEMENT
+    M
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'N'
   Label : ELEMENT
     D
     Label : ARGUMENTS
@@ -65,14 +71,6 @@ Label : CODE
             Label : VALUE
               $c
   Label : ELEMENT
-    H
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        'I'
-  Label : ELEMENT
-    B
-  Label : ELEMENT
     function
     Label : ARGUMENTS
       void
@@ -82,5 +80,7 @@ Label : CODE
       B
     Label : BLOCK
       {
-      Label : CODE
+      Label : ELEMENT
         void
+  Label : ELEMENT
+    B

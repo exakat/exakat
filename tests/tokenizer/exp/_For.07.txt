@@ -1,17 +1,9 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     for
-    Label : CODE
-      {
-      Label : CODE
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $j
     Label : INIT
       =
       Label : RIGHT
@@ -22,3 +14,11 @@ Label : CODE
       void
     Label : INCREMENT
       void
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $j

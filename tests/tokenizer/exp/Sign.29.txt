@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     +
     Label : RIGHT
@@ -10,10 +10,10 @@ Label : CODE
         *
         Label : RIGHT
           ->
-          Label : PROPERTY
-            h
           Label : OBJECT
             $g
+          Label : PROPERTY
+            h
         Label : LEFT
           (
           Label : CODE
@@ -28,10 +28,10 @@ Label : CODE
               1
       Label : LEFT
         ->
-        Label : PROPERTY
-          d
         Label : OBJECT
           $c
+        Label : PROPERTY
+          d
     Label : LEFT
       ::
       Label : PROPERTY

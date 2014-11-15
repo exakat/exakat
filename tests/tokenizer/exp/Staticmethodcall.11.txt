@@ -1,7 +1,41 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $d
+              Label : PROPERTY
+                Q
+    Label : THEN
+      {
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            ->
+            Label : OBJECT
+              $f
+            Label : PROPERTY
+              S
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $e
+            Label : INDEX
+              'R'
   Label : ELEMENT
     ::
     Label : METHOD
@@ -33,40 +67,6 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ->
-              Label : PROPERTY
-                Q
-              Label : OBJECT
-                $d
-    Label : THEN
-      {
-      Label : CODE
-        makeSequence
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            ->
-            Label : PROPERTY
-              S
-            Label : OBJECT
-              $f
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $e
-            Label : INDEX
-              'R'
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
         ::
         Label : METHOD
           K
@@ -78,8 +78,8 @@ Label : CODE
           J
     Label : THEN
       {
-      Label : CODE
-        makeSequence
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
         Label : ELEMENT
           =
           Label : RIGHT

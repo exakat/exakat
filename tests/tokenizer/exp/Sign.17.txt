@@ -1,20 +1,16 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     +=
     Label : RIGHT
-      +
-      Label : SIGN
-        2
+      2
     Label : LEFT
       $b
   Label : ELEMENT
     =
     Label : RIGHT
-      -
-      Label : SIGN
-        3
+      -3
     Label : LEFT
       $x

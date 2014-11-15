@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -14,81 +14,79 @@ Label : CODE
             ===
             Label : RIGHT
               ::
-              Label : CONSTANT
-                J
               Label : CLASS
                 I
+              Label : CONSTANT
+                J
             Label : LEFT
               ->
-              Label : PROPERTY
-                H
               Label : OBJECT
                 $c
+              Label : PROPERTY
+                H
           Label : LEFT
             ==
             Label : RIGHT
               +
               Label : SIGN
                 ::
-                Label : CONSTANT
-                  G
                 Label : CLASS
                   F
+                Label : CONSTANT
+                  G
             Label : LEFT
               ->
-              Label : PROPERTY
-                E
               Label : OBJECT
                 $b
+              Label : PROPERTY
+                E
         Label : LEFT
           ===
           Label : RIGHT
             ::
-            Label : CONSTANT
-              D
             Label : CLASS
               C
+            Label : CONSTANT
+              D
           Label : LEFT
             ->
-            Label : PROPERTY
-              B
             Label : OBJECT
               $a
+            Label : PROPERTY
+              B
     Label : THEN
       {
-      Label : CODE
-        makeSequence
+      Label : ELEMENT
+        makeSequence T_OPEN_CURLY
         Label : ELEMENT
           =
           Label : RIGHT
             ::
-            Label : CONSTANT
-              M
             Label : CLASS
               L
+            Label : CONSTANT
+              M
           Label : LEFT
             ->
-            Label : PROPERTY
-              K
             Label : OBJECT
               $d
+            Label : PROPERTY
+              K
     Label : ELSE
-      makeSequence
+      {
       Label : ELEMENT
-        {
-        Label : CODE
-          makeSequence
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              ::
-              Label : CONSTANT
-                P
-              Label : CLASS
-                O
-            Label : LEFT
-              ->
-              Label : PROPERTY
-                N
-              Label : OBJECT
-                $e
+        makeSequence T_OPEN_CURLY
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            ::
+            Label : CLASS
+              O
+            Label : CONSTANT
+              P
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $e
+            Label : PROPERTY
+              N

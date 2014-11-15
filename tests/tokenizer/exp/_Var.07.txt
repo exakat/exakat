@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     class
     Label : NAME
@@ -10,65 +10,63 @@ Label : CODE
       C
     Label : BLOCK
       {
-      Label : CODE
-        makeSequence
-        Label : ELEMENT
-          function
-          Label : NAME
-            G
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-          Label : BLOCK
-            {
-            Label : CODE
-              makeSequence
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  .
-                  Label : CONCAT
-                    'H'
-                  Label : CONCAT
-                    ->
-                    Label : PROPERTY
-                      I
-                    Label : OBJECT
-                      $e
-                  Label : CONCAT
-                    'J'
-        Label : ELEMENT
-          function
-          Label : NAME
-            D
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $a
+        Label : VALUE
+          Void
+        Label : VAR
+          var
+      Label : ELEMENT
+        function
+        Label : NAME
+          D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            =
+            Label : RIGHT
+              'E'
+            Label : LEFT
+              $b
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            makeSequence T_OPEN_CURLY
+            Label : ELEMENT
               =
               Label : RIGHT
-                'E'
+                $d
               Label : LEFT
-                $b
-          Label : BLOCK
-            {
-            Label : CODE
-              makeSequence
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  $d
-                Label : LEFT
+                ->
+                Label : OBJECT
+                  $c
+                Label : PROPERTY
+                  F
+      Label : ELEMENT
+        function
+        Label : NAME
+          G
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            makeSequence T_OPEN_CURLY
+            Label : ELEMENT
+              return
+              Label : RETURN
+                .
+                Label : CONCAT
+                  'H'
+                Label : CONCAT
                   ->
-                  Label : PROPERTY
-                    F
                   Label : OBJECT
-                    $c
-        Label : ELEMENT
-          var
-          Label : DEFINE
-            $a
-          Label : VALUE
-            Void
-          Label : VAR
-            var
+                    $e
+                  Label : PROPERTY
+                    I
+                Label : CONCAT
+                  'J'

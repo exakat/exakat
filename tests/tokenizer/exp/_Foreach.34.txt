@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     foreach
     Label : VALUE
@@ -11,8 +11,8 @@ Label : CODE
         $c
     Label : SOURCE
       $a
-    Label : LOOP
-      makeSequence
+    Label : BLOCK
+      makeSequence T_OPEN_TAG
       Label : ELEMENT
         J
       Label : ELEMENT
@@ -30,7 +30,7 @@ Label : CODE
             Label : LEFT
               $e
         Label : THEN
-          makeSequence
+          makeSequence T_OPEN_TAG
           Label : ELEMENT
             D
           Label : ELEMENT
@@ -42,7 +42,7 @@ Label : CODE
               Label : ARGUMENT
                 $g
         Label : ELSE
-          makeSequence
+          makeSequence T_DOUBLE_COLON
           Label : ELEMENT
             F
           Label : ELEMENT
@@ -66,8 +66,8 @@ Label : CODE
       Label : ELEMENT
         A
       Label : ELEMENT
+        B
+      Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $d
-      Label : ELEMENT
-        B

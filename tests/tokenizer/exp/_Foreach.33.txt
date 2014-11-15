@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     foreach
     Label : VALUE
@@ -11,34 +11,36 @@ Label : CODE
         $c
     Label : SOURCE
       $a
-    Label : LOOP
-      Block With Foreach
+    Label : BLOCK
+      Block with Foreach
       Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            ||
-            Label : RIGHT
-              ==
+        makeSequence T_OPEN_CURLY
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              ||
               Label : RIGHT
-                'C'
+                ==
+                Label : RIGHT
+                  'C'
+                Label : LEFT
+                  $g
               Label : LEFT
-                $g
-            Label : LEFT
-              ==
-              Label : RIGHT
-                'B'
-              Label : LEFT
-                $f
-        Label : THEN
-          {
-          Label : CODE
-            ;
+                ==
+                Label : RIGHT
+                  'B'
+                Label : LEFT
+                  $f
+          Label : THEN
+            {
             Label : ELEMENT
-              continue
-              Label : LEVEL
-                void
+              makeSequence T_OPEN_CURLY
+              Label : ELEMENT
+                continue
+                Label : LEVEL
+                  void
       Label : ELEMENT
         if
         Label : CONDITION
@@ -51,14 +53,14 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   [
-                  Label : INDEX
-                    $e
                   Label : VARIABLE
                     $d
+                  Label : INDEX
+                    $e
         Label : THEN
           {
-          Label : CODE
-            ;
+          Label : ELEMENT
+            makeSequence T_OPEN_CURLY
             Label : ELEMENT
               continue
               Label : LEVEL

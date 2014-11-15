@@ -1,11 +1,13 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
     Label : RIGHT
       ->
+      Label : OBJECT
+        $b
       Label : METHOD
         c
         Label : ARGUMENTS
@@ -70,7 +72,5 @@ Label : CODE
                     -
                     Label : SIGN
                       $m
-      Label : OBJECT
-        $b
     Label : LEFT
       $a

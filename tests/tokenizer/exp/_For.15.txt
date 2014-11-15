@@ -1,25 +1,9 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     for
-    Label : CODE
-      Block With For
-      Label : CODE
-        >>
-        Label : RIGHT
-          $g
-        Label : LEFT
-          ::
-          Label : METHOD
-            e
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $f
-          Label : CLASS
-            $d
     Label : INIT
       =
       Label : RIGHT
@@ -36,3 +20,19 @@ Label : CODE
       ++
       Label : POSTPLUSPLUS
         $i
+    Label : BLOCK
+      Block with For
+      Label : ELEMENT
+        >>
+        Label : RIGHT
+          $g
+        Label : LEFT
+          ::
+          Label : CLASS
+            $d
+          Label : METHOD
+            e
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $f

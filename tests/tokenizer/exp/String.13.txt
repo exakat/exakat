@@ -1,16 +1,16 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     return
     Label : RETURN
       .
       Label : CONCAT
         [
-        Label : INDEX
-          0
         Label : VARIABLE
           $a
+        Label : INDEX
+          0
       Label : CONCAT
         "
         Label : CONTAIN
@@ -19,34 +19,36 @@ Label : CODE
             B
           Label : CONCAT
             [
-            Label : INDEX
-              C
             Label : VARIABLE
               $b
+            Label : INDEX
+              C
           Label : CONCAT
             [
-            Label : INDEX
-              D
             Label : VARIABLE
               $c
+            Label : INDEX
+              D
           Label : CONCAT
             E
           Label : CONCAT
             [
-            Label : INDEX
-              F
             Label : VARIABLE
               $d
+            Label : INDEX
+              F
           Label : CONCAT
             [
-            Label : INDEX
-              G
             Label : VARIABLE
               $e
+            Label : INDEX
+              G
           Label : CONCAT
             H
       Label : CONCAT
         ->
+        Label : OBJECT
+          $f
         Label : METHOD
           I
           Label : ARGUMENTS
@@ -57,17 +59,15 @@ Label : CODE
                 'J'
               Label : CONCAT
                 [
-                Label : INDEX
-                  1
                 Label : VARIABLE
                   $g
+                Label : INDEX
+                  1
               Label : CONCAT
                 [
-                Label : INDEX
-                  2
                 Label : VARIABLE
                   $h
-        Label : OBJECT
-          $f
+                Label : INDEX
+                  2
       Label : CONCAT
         'K'

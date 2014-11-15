@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     for
     Label : INIT
@@ -19,10 +19,10 @@ Label : CODE
             void
             Label : ARGUMENT
               ->
-              Label : PROPERTY
-                d
               Label : OBJECT
                 $c
+              Label : PROPERTY
+                d
         Label : LEFT
           $n
     Label : FINAL
@@ -35,8 +35,8 @@ Label : CODE
       ++
       Label : POSTPLUSPLUS
         $i
-    Label : CODE
-      makeSequence
+    Label : BLOCK
+      makeSequence T_SEMICOLON
       Label : ELEMENT
         ->
         Label : OBJECT
