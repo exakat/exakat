@@ -1555,7 +1555,6 @@ $fullcode
 x = g.addVertex(null, [code:'Typehint', atom:'Typehint', token:'T_TYPEHINT', virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
-//a.fullcode = a.code;
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').out('NEXT').next(), 'NEXT');
@@ -1577,7 +1576,8 @@ x.outE.hasNot('label', 'NEXT').inV.each{
     } 
 }
 
-/* indexing */  g.idx('atoms').put('atom', 'Typehint', x);
+/* indexing */  
+    g.idx('atoms').put('atom', 'Typehint', x);
 
 fullcode = x;
 $fullcode
@@ -2617,7 +2617,6 @@ x.setProperty('atom', 'Sequence');
 
 it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each {
     it.setProperty('atom', 'Typehint');
-    it.setProperty('code', 'Typehint');
     
     g.addEdge(it, it.out('LEFT').next(), 'CLASS');
     g.removeEdge(it.outE('LEFT').next());
@@ -2626,6 +2625,8 @@ it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each {
     g.removeEdge(it.outE('RIGHT').next());
     
     it.out('VARIABLE').next().setProperty('reference', 'true');
+    
+    g.idx('atoms').put('atom', 'Typehint', it);
 }
 
                 ";
