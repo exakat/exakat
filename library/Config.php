@@ -2,15 +2,15 @@
 
 class Config {
     static private $singleton = null;
-        private $config_file = array();
-        private $commandline = array();
-        private $project_config = array();
+           private $config_file = array();
+           private $commandline = array();
+           private $project_config = array();
         
-        private $options = array();
-    
+           private $options = array();
+     
     private function __construct() {
         $this->config_file = parse_ini_file('./config/config.ini');
-        
+
         // then read the config from the commandline (if any)
         $this->read_commandline();
         
@@ -18,6 +18,7 @@ class Config {
         
         // build the actual config. Project overwrite commandline overwrites config, if any.
         $this->options = array_merge($this->config_file, $this->commandline, $this->project_config);
+        
     }
     
     static function factory() {
@@ -46,15 +47,35 @@ class Config {
     }
 
     private function read_commandline() {
-        if (empty($argv)) {
+        global $argv;
+        $args = $argv;
+
+        if (empty($args)) {
             return null;
         }
         
-        $args = $argv;
-        
-        $options = array('-v' => 'verbose');
-        
-        foreach($options as $key => $config) {
+        $options_boolean = array('-v' => 'verbose',
+                                 '-h' => 'help',
+                                 '-r' => 'recursive',
+                                 '-l' => 'lint',
+                                 );
+
+        foreach($options_boolean as $key => $config) {
+            if (($id = array_search($key, $args)) !== false) {
+                $this->commandline[$config] = (boolean) $args[$id + 1];
+
+                unset($args[$id]);
+                unset($args[$id + 1]);
+            }
+        }
+//'-q' => 'loader',
+                                 
+        $options_value   = array('-f' => 'filename',
+                                 '-d' => 'dirname',
+                                 '-p' => 'project'
+                                 );
+
+        foreach($options_value    as $key => $config) {
             if (($id = array_search($key, $args)) !== false) {
                 $this->commandline[$config] = $args[$id + 1];
 

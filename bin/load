@@ -15,67 +15,25 @@ spl_autoload_register('Autoload::autoload_library');
 
 $log = new Log('load');
 
-$args = $argv;
-
-if ($id = array_search('-v', $args)) {
-    define('VERBOSE', true);
-} else {
-    define('VERBOSE', false);
-}
-
-if ($id = array_search('-r', $args)) {
-    define('RECURSIVE', true);
-} else {
-    define('RECURSIVE', false);
-}
-
-if ($id = array_search('-l', $args)) {
-    define('LINT', true);
-} else {
-    define('LINT', false);
-}
-
-if ($id = array_search('-q', $args)) {
-    $_PILOT = 'Loader\Csv';
-} else {
-    $_PILOT = 'Loader\Neo4jphp';
-}
-
-if ($id = array_search('-p', $args)) {
-    $project = $args[$id + 1];
-} else {
-    $project = 'default';
-}
+$config = Config::factory();
+$project = $config->project;
 
 if (!file_exists('./projects/'.$project.'/config.ini')) {
     print "No such project as '$project'. Aborting\n";
     die();
 }
 
-$config = parse_ini_file('./projects/'.$project.'/config.ini');
-if (isset($config['phpversion'])) {
-    $Php = new Phpexec($config['phpversion']);
-} else {
-    $Php = new Phpexec(phpversion());
-}
+$Php = new Phpexec($config->phpversion);
 
-if ($id = array_search('-f', $args)) {
-    $nb_files = 0; 
-    
-     while (isset($args[$id + ++$nb_files]) && 
-            file_exists($args[$id + $nb_files])) {
-        $filename = $args[$id + $nb_files];
-        print $filename."\n";
-    
-        $nb_tokens = process_file($filename, $log);
-    }
-} elseif ($id = array_search('-d', $args)) {
-    $dir = $args[$id + 1];
-    
-    if ($dir{strlen($dir) - 1} == '/') {
-        $dir = substr($dir, 0, -1);
-    }
-    
+// formerly -q option
+$client = new Loader\Csv();
+
+if ($filename = $config->filename) {
+    print $filename."\n";
+    $nb_tokens = process_file($filename, $log, $client);
+    $nb_files = 1;
+
+} elseif ($dirname = $config->dirname) {
     $res = process_dir($dir, $log);
     $nb_files = $res['files'];
     $nb_tokens = $res['tokens'];
@@ -84,7 +42,7 @@ if ($id = array_search('-f', $args)) {
     die();
 }
 
-$_PILOT::finalize();
+$client->finalize();
 $log->report('load', array('project' => $project, 'files' => $nb_files, 'tokens' => $nb_tokens));
 
 function process_dir($dir, $log) {
@@ -99,14 +57,14 @@ function process_dir($dir, $log) {
         if (is_link($filename)) { continue; }
         
         if (is_dir($dir.'/'.$filename)) {
-            if (RECURSIVE) {
+            if ($config->recursive) {
                 $res = process_dir($dir.'/'.$filename, $log);
                 $nb_tokens += $res['tokens'];
                 $nb_files  += $res['files'];
             }
         } else {
             if (!preg_match('/\\.('.join('|', array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  )).')$/', $filename)) { continue; }
-            $nb_tokens += process_file($dir.'/'.$filename, $log);
+            $nb_tokens += process_file($dir.'/'.$filename, $log, $client);
             $nb_files++;
         }
     }
@@ -114,7 +72,7 @@ function process_dir($dir, $log) {
 }
 
 
-function process_file($filename, $log_file) {
+function process_file($filename, $log_file, $client) {
     $log = array();
     $begin = microtime(true);
     
@@ -124,8 +82,7 @@ function process_file($filename, $log_file) {
         die();
     }
 
-    global $_PILOT, $Php;
-    $client = new $_PILOT();
+    global $Php;
 
     $file = realpath($filename);
     if (strpos($file, '/code/') !== false) {
