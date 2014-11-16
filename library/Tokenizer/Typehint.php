@@ -7,7 +7,7 @@ class Typehint extends TokenAuto {
     static public $atom = 'Typehint';
     
     public function _check() {
-        // norml case for classes
+        // normal case for classes
         $this->conditions = array(-1 => array('filterOut' => 'T_CATCH'),
                                    0 => array('token'     => Typehint::$operators),
                                    1 => array('atom'      => 'yes', 
@@ -20,7 +20,7 @@ class Typehint extends TokenAuto {
                                'keepIndexed'  => true);
         $this->checkAuto();
 
-        // special case for arrays
+        // special case for array 
         $this->conditions = array(-2 => array('filterOut' => 'T_CATCH'),
                                    0 => array('token' => Typehint::$operators),
                                    1 => array('token' => 'T_ARRAY', 
