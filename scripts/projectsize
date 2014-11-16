@@ -3,12 +3,15 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
+$config = \Config::factory();
+/*
 $args = $argv;
-if (in_array( '-t', $args) !== false) {    define('WHEN', 'today'); }
-if (in_array( '-n', $args) !== false) {    define('WHEN', 'none'); }
+if (in_array( '-today', $args) !== false) {    define('WHEN', 'today'); }
+if (in_array( '-none', $args) !== false) {    define('WHEN', 'none'); }
 if (in_array('-ss', $args) !== false) {    define('SIZE', 'small'); }
 if (in_array('-sm', $args) !== false) {    define('SIZE', 'medium');}
 if (in_array('-sl', $args) !== false) {    define('SIZE', 'large');}
+*/
 
 $db = new Db('exakat');
 
@@ -21,13 +24,11 @@ while($row = $res->fetch_Assoc()) {
     if (!file_exists('./projects/'.$row['project'])) { continue; }
     $line  = substr($row['project'].str_repeat(' ', 50), 0, 50)."\t";
     
-    if (!defined('SIZE')) {
-        $line .= substr('     '.number_format(($row["tokens"] / 1000), 1, '.', ' ')." kT ", -12, -1);
-    } elseif (SIZE == 'small' && $row["tokens"] > 100000) { 
+    if ($config->ss && $row["tokens"] > 100000) { 
         continue 1;
-    } elseif (SIZE == 'medium' && ($row["tokens"] < 100000 || $row["tokens"] > 1000000)) { 
+    } elseif ($config->sm && ($row["tokens"] < 100000 || $row["tokens"] > 1000000)) { 
         continue 1;
-    } elseif (SIZE == 'large' && $row["tokens"] < 1000000) { 
+    } elseif ($config->sl && $row["tokens"] < 1000000) { 
         continue 1;
     } else {
         $line .= substr('     '.number_format(($row["tokens"] / 1000), 1, '.', ' ')." kT ", -12, -1);
@@ -37,14 +38,14 @@ while($row = $res->fetch_Assoc()) {
     if (file_exists('projects/'.$row['project'].'/report')) {
         $total++;
         $tokens += $row["tokens"];
-        if (defined('WHEN') && (WHEN == 'none')) { continue 1; }
+        if ($config->none) { continue 1; }
 
         $date = filemtime('projects/'.$row['project'].'/report');
         $diffi = floor((time() - $date) / 3600 / 24);
         $line .= date("m-d-Y ", $date);
         $diff = '';
 
-        if (defined('WHEN') && (WHEN == 'today') && $diffi != 0) { continue 1; }
+        if ($config->today && $diffi != 0) { continue 1; }
         if ($diffi == 0) {
             $diff .= "today )";
         } elseif ($diffi == 1) {
@@ -65,7 +66,7 @@ while($row = $res->fetch_Assoc()) {
 
         $line .= $diff;
     } else {
-        if (defined('WHEN') && (WHEN == 'today')) { continue 1; }
+        if ($config->today) { continue 1; }
         $line .= "None";
         $diff = 100;
         $diffi = 100;

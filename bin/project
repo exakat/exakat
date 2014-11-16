@@ -55,7 +55,7 @@ logTime('Clean');
 
 print "Running project '$project'\n";
 
-shell_exec('php bin/files '.$project.'');
+shell_exec('php bin/files -p '.$project);
 logTime('Files');
 
 shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/ -p '.$project.'');

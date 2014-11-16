@@ -34,7 +34,7 @@ if ($filename = $config->filename) {
     $nb_files = 1;
 
 } elseif ($dirname = $config->dirname) {
-    $res = process_dir($dir, $log);
+    $res = process_dir($dirname, $log, $client);
     $nb_files = $res['files'];
     $nb_tokens = $res['tokens'];
 } else {
@@ -45,7 +45,9 @@ if ($filename = $config->filename) {
 $client->finalize();
 $log->report('load', array('project' => $project, 'files' => $nb_files, 'tokens' => $nb_tokens));
 
-function process_dir($dir, $log) {
+function process_dir($dir, $log, $client) {
+    $config = Config::factory();
+    
     if (!file_exists($dir)) { return array('files' => -1, 'tokens' => -1); }
     $dirr = opendir($dir);
     if ($dirr === null) { return array('files' => -1, 'tokens' => -1); }
@@ -58,7 +60,7 @@ function process_dir($dir, $log) {
         
         if (is_dir($dir.'/'.$filename)) {
             if ($config->recursive) {
-                $res = process_dir($dir.'/'.$filename, $log);
+                $res = process_dir($dir.'/'.$filename, $log, $client);
                 $nb_tokens += $res['tokens'];
                 $nb_files  += $res['files'];
             }

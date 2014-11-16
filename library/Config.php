@@ -15,6 +15,9 @@ class Config {
         $this->read_commandline();
         
         // then read the config for the project in its folder
+        if (isset($this->commandline['project'])) {
+            $this->project_config = parse_ini_file('./projects/'.$this->commandline['project'].'/config.ini');
+        } 
         
         // build the actual config. Project overwrite commandline overwrites config, if any.
         $this->options = array_merge($this->config_file, $this->commandline, $this->project_config);
@@ -35,7 +38,6 @@ class Config {
         } else if ($name == 'mysql_exakat_pdo') {
             return 'mysql:host='.$this->options['mysql_host'].';dbname='.$this->options['mysql_exakat_db'];
         } else {
-            print "No such configuration as $name\n";
             $return = null;
         }
         
@@ -54,29 +56,35 @@ class Config {
             return null;
         }
         
-        $options_boolean = array('-v' => 'verbose',
-                                 '-h' => 'help',
-                                 '-r' => 'recursive',
-                                 '-l' => 'lint',
+        $options_boolean = array('-v'     => 'verbose',
+                                 '-h'     => 'help',
+                                 '-r'     => 'recursive',
+                                 '-l'     => 'lint',
+                                 '-json'  => 'json',
+                                 '-ss'    => 'ss',
+                                 '-sm'    => 'sm',
+                                 '-sl'    => 'sl',
+                                 '-today' => 'today',
+                                 '-none'  => 'none',
                                  );
 
         foreach($options_boolean as $key => $config) {
             if (($id = array_search($key, $args)) !== false) {
-                $this->commandline[$config] = (boolean) $args[$id + 1];
+                $this->commandline[$config] = true;
 
                 unset($args[$id]);
-                unset($args[$id + 1]);
             }
         }
 //'-q' => 'loader',
                                  
         $options_value   = array('-f' => 'filename',
                                  '-d' => 'dirname',
-                                 '-p' => 'project'
+                                 '-p' => 'project',
+//                                 '-q' => 'loader'
                                  );
 
         foreach($options_value    as $key => $config) {
-            if (($id = array_search($key, $args)) !== false) {
+            if ( ($id = array_search($key, $args)) !== false) {
                 $this->commandline[$config] = $args[$id + 1];
 
                 unset($args[$id]);
