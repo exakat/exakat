@@ -3,54 +3,18 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$args = $argv;
+$config = Config::factory();
 
-$dir = $args[1];
-if ($dir == "-P") {
-    $projects = glob('projects/*');
-    foreach($projects as $project) {
-        if (!is_dir($project)) { continue; }
-
-        $p = basename($project);
-        print "$p\n";
-        if ($p == 'test') { continue; }
-        if ($p == 'default') { continue; }
-        shell_exec('php bin/files '.$p);
-    }
-    die();
-}
-
-if (in_array('-json', $args)) {
-    define('OUTPUT', 'JSON');
-} else {
-    define('OUTPUT', 'PRINT_R');
-}
+$dir = $config->project;
 
 $stats = array();
 $unknown = array();
 
-if (strpos($dir, '/') === false) {
-    // trying as a project name
-    if (file_exists('./projects/'.$dir.'/code/')) {
-        $files = glob_recursive('./projects/'.$dir.'/code/');
-    }
-
-    $res = shell_exec('phploc ./projects/'.$dir.'/code/');
-    preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
-    $stats['loc'] = $r[1];
-}
-
-if (!isset($files)) {
-    if (!file_exists($dir)) {
-        print "No such dir as '$dir'. Aborting\n";
-        die();
-    }
-    $files = glob_recursive($dir."/");
-
-    $res = shell_exec('phploc '.$dir);
-    preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
-    $stats['loc'] = $r[1];
-}
+if ($config->project === null) {
+    die("Usage : files -p project\nAborting");
+} elseif (!file_exists('./projects/'.$dir.'/code/')) {
+    die("No such project as '$dir'\nAborting");
+} 
 
 $exts = array('php'      => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  ),
               'images'   => array('jpg', 'gif', 'ico', 'png', 'svg', 'eps', 'psd', 'dot', 'dhp', 'JPG',),
@@ -70,7 +34,39 @@ $exts = array('php'      => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 
               'misc'     => array('test', 'table', 'dat', 'admin', 'cur', 'git', 'rng', 'bin',  'ser', 'mgc',),
               'security' => array('pub', 'pem', 'crt', 'xcf', ),
              );
-             
+
+$ignore_dirs = array();
+foreach($config->ignore_dirs as $ignore) {
+    if ($ignore[0] == '/') {
+        $d = './projects/'.$dir.'/code'.$ignore.'';
+        if (file_exists($d)) { 
+            $ignore_dirs[] = $d;
+        }
+    } else {
+        $ignore_dirs[] = '*'.$ignore.'*';
+    }
+}
+$shell_base = 'find ./projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -not -path "'.(join('/*" -and -not -path "', $ignore_dirs )).'/*" \\) ! -type l ';
+
+$ignore_dirs = array();
+$ignore_name = array();
+foreach($config->ignore_dirs as $ignore) {
+    if ($ignore[0] == '/') {
+        $d = './projects/'.$dir.'/code'.$ignore.'';
+        if (file_exists($d)) { 
+            $ignore_dirs[] = substr($ignore, 1);
+        }
+    } else {
+        $ignore_name[] = $ignore;
+    }
+}
+
+$shell = 'cd ./projects/'.$dir.'/code/; phploc '.(count($ignore_name) ? ' '.join(' --names-exclude ', $ignore_name).' ' : '')
+                                                .(count($ignore_dirs) ? ' '.join(' --exclude ', $ignore_dirs).' ' : '')
+                                                .' .';
+$res = shell_exec($shell);
+preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
+$stats['loc'] = $r[1];
 
 $not_compilable = array();
 
@@ -78,7 +74,8 @@ $versions = array('53', '54', '55', '56');
 
 foreach($versions as $version) {
     $stats['notCompilable'.$version] = -1;
-    $res = trim(shell_exec('find ./projects/'.$dir.'/code/ \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\)  ! -type l | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php'.$version.'lint.sh'));
+    $shell = $shell_base . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php'.$version.'lint.sh';
+    $res = trim(shell_exec($shell));
     $res_files = explode("\n", $res);
     $incompilables = array();
     
@@ -98,6 +95,18 @@ foreach($versions as $version) {
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
         } elseif (substr($res_file, 0, 18) == 'PHP Fatal error:  ') {
             preg_match('#PHP Fatal error:  (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+            $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+        } elseif (substr($res_file, 0, 22) == 'PHP Strict Standards: ') {
+            preg_match('#PHP Strict Standards:  (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+            $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+        } elseif (substr($res_file, 0, 18) == 'Strict Standards: ') {
+            preg_match('#Strict Standards: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+            $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+        } elseif (substr($res_file, 0, 17) == 'PHP Deprecated:  ') {
+            preg_match('#PHP Deprecated:  (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+            $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+        } elseif (substr($res_file, 0, 12) == 'Deprecated: ') {
+            preg_match('#Deprecated: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
         } elseif (substr($res_file, 0, 13) == 'Fatal error: ') {
             preg_match('#Fatal error: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
@@ -121,14 +130,14 @@ foreach($versions as $version) {
     $stats['notCompilable'.$version] = count($incompilables);
 }
 
-$stats['php'] = (int) shell_exec('find ./projects/'.$dir.'/code/ \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) | wc -l');
-$shell = 'find ./projects/'.$dir.'/code/ \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) ! -type l  | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php56tokens.sh | awk \'{s+=$1} END {print s}\'';
+$stats['php'] = count($res_files);
+$shell = $shell_base . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php56tokens.sh | awk \'{s+=$1} END {print s}\'';
 $stats['tokens'] = (int) shell_exec($shell);
 
 $db = new Db();
 $db->insert('projects', array('notCompilable53', 'notCompilable54', 'notCompilable55', 'notCompilable56', 'project', 'php', 'tokens', 'loc'), array($stats['notCompilable53'], $stats['notCompilable54'], $stats['notCompilable55'], $stats['notCompilable56'], $dir, $stats['php'], $stats['tokens'], $stats['loc']));
 
-if (OUTPUT == 'JSON') {
+if ($config->json) {
     if ($unknown) {
         $stats['unknown'] = $unknown;
     }
@@ -140,18 +149,4 @@ if (OUTPUT == 'JSON') {
     }
 }
 
-function glob_recursive($dir, $prefix = '') {
-  $dir = rtrim($dir, '\\/');
-  $result = array();
-
-    foreach (glob("$dir/*", GLOB_MARK) as $f) {
-      if (substr($f, -1) === '/') {
-        $result = array_merge($result, glob_recursive($f, $prefix.basename($f).'/'));
-      } else {
-        $result[] = $f;
-      }
-    }
-
-  return $result;
-}
 ?>
