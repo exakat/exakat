@@ -61,10 +61,6 @@ $log = new Log('analyze');
 $analyzers = new NodeIndex($client, 'analyzers');
 
 $INI = parse_ini_file('./projects/'.$project.'/config.ini');
-if (!isset($INI['analyzer']) || empty($INI['analyzer'])) {
-    print "No analyzers list in config.ini. Aborting\n";
-    die();
-}
 $log->log("Analyzing project $project");
 
 if (!isset($analyzers_class)) {
