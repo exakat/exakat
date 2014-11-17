@@ -505,3 +505,40 @@ directInjection : Ignore 'secure' functions such as htmlentities, intval, isset
   $_GET["pi"] = ""; Don' assign incoming variable! Use Global!
   
 List contaminated variables ($x = $_POST..)
+
+$whiteList = explode(",","xls,xlsx,ods,sxc,csv,tsv,ppt,pps,odp,sxi,doc,docx,rtf,odt,sxw"); // better make it an array directly...
+
+0 ? "wb" : "ab" <= constant condition!!
+
+die or throw ? May be die is useless and should be down by throwning all the time and adding an exception handler to stop the script. 
+
+        if (isSet($httpVars["file"])) {
+            $parts = parse_url($httpVars["file"]);
+            $getPath = $parts["path"];
+            $basename = basename($getPath);
+        }
+        if (isSet($httpVars["dlfile"])) {
+            $dlFile = $streamData["protocol"]."://".$repository->getId().AJXP_Utils::decodeSecureMagic($httpVars["dlfile"]);
+            $realFile = file_get_contents($dlFile);
+            if(empty($realFile)) throw new Exception("cannot find file $dlFile for download");
+            $parts = parse_url($realFile);
+            $getPath = $parts["path"];
+            $basename = basename($getPath);
+        }
+        basename may end up not initialized with any kind of value...
+        
+Methods returns various type (null, array, boolean...)
+
+remove 'classes.php' file from tokenizer
+
+Accept scripts that throw warnings but still compile.
+
+Clean bin and script folders
+
+Validate that all files in a project are useful (check for classes + autoload, includes, mentions of scripts in open_files, etc..)
+
+Add a check when php script has no tokens (after a bin/load cleaning of tokens).
+
+Add 'ignore_folder' to config.ini
+
+Check speed for one file processing
