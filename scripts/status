@@ -1,0 +1,13 @@
+<?php
+
+$res = shell_exec('ps aux | grep "php bin/project" | grep -v grep');
+preg_match('#php bin/project (\S+)#is', $res, $r);
+$project = $r[1];
+
+print "Running project $project\n";
+
+$res = shell_exec('ps aux | grep '.$project);
+
+
+
+?>
