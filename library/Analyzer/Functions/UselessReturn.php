@@ -8,7 +8,7 @@ class UselessReturn extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Function")
              ->outIs('NAME')
-             ->code(array('__constructor', '__destructor'))
+             ->code(array('__constructor', '__destructor', '__clone', '__unset'))
              ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Return')
