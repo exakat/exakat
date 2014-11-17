@@ -16,7 +16,7 @@ class Config {
         
         // then read the config for the project in its folder
         if (isset($this->commandline['project'])) {
-            $this->project_config = parse_ini_file('./projects/'.$this->commandline['project'].'/config.ini');
+            $this->read_project_config($this->commandline['project']);
         } 
         
         // build the actual config. Project overwrite commandline overwrites config, if any.
@@ -47,6 +47,19 @@ class Config {
         print "It is not possible to modify configuration\n";
     }
 
+    private function read_project_config($project) {
+        $this->project_config = parse_ini_file('./projects/'.$project.'/config.ini');
+        
+        // check and default values
+        $defaults = array( 'ignore_dirs' => array('tests', 'test', 'Tests'));
+        
+        foreach($defaults as $name => $value) {
+            if (!isset($this->project_config[$name])) {
+                $this->project_config[$name] = $value;
+            }
+        }
+    }
+
     private function read_commandline() {
         global $argv;
         $args = $argv;
@@ -55,39 +68,42 @@ class Config {
             return null;
         }
         
-        $options_boolean = array('-v'     => 'verbose',
-                                 '-h'     => 'help',
-                                 '-r'     => 'recursive',
-                                 '-l'     => 'lint',
-                                 '-json'  => 'json',
-                                 '-ss'    => 'ss',
-                                 '-sm'    => 'sm',
-                                 '-sl'    => 'sl',
-                                 '-today' => 'today',
-                                 '-none'  => 'none',
+        $options_boolean = array('-v'     => array('verbose',   false),
+                                 '-h'     => array('help',      false),
+                                 '-r'     => array('recursive', false),
+                                 '-l'     => array('lint',      false),
+                                 '-json'  => array('json',      false),
+                                 '-ss'    => array('ss',        false),
+                                 '-sm'    => array('sm',        false),
+                                 '-sl'    => array('sl',        false),
+                                 '-today' => array('today',     false),
+                                 '-none'  => array('none',      false),
                                  );
 
         foreach($options_boolean as $key => $config) {
             if (($id = array_search($key, $args)) !== false) {
-                $this->commandline[$config] = true;
+                $this->commandline[$config[0]] = true;
 
                 unset($args[$id]);
+            } else {
+                $this->commandline[$config[0]] = $config[1];
             }
         }
-//'-q' => 'loader',
                                  
-        $options_value   = array('-f' => 'filename',
-                                 '-d' => 'dirname',
-                                 '-p' => 'project',
-//                                 '-q' => 'loader'
+        $options_value   = array('-f' => array('filename', null),
+                                 '-d' => array('dirname',  null),
+                                 '-p' => array('project',  'default'),
+//                                 '-q' => array('loader',   'Load\Csv'),
                                  );
 
         foreach($options_value    as $key => $config) {
             if ( ($id = array_search($key, $args)) !== false) {
-                $this->commandline[$config] = $args[$id + 1];
+                $this->commandline[$config[0]] = $args[$id + 1];
 
                 unset($args[$id]);
                 unset($args[$id + 1]);
+            } else {
+                $this->commandline[$config[0]] = $config[1];
             }
         }
     }
