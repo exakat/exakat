@@ -27,7 +27,7 @@ class Sequence extends TokenAuto {
                                 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                 'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
                                 'T_THROW', 'T_CATCH', 'T_ABSTRACT', 'T_CASE', 'T_DEFAULT', 'T_CLONE', 'T_DECLARE',
-                                'T_STRING', 'T_USE', 'T_AS', 'T_NAMESPACE', 'T_DO', 'T_INSTEADOF', 'T_CONTINUE', 
+                                'T_STRING', 'T_USE', 'T_AS', 'T_NAMESPACE', 'T_DO', 'T_INSTEADOF', 'T_CONTINUE'
                                  );
                                  
         $yield_operator = array_merge($yield_operator, Assignation::$operators, Addition::$operators, Multiplication::$operators, 
@@ -36,7 +36,9 @@ class Sequence extends TokenAuto {
         $next_operator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_INSTANCEOF', 
                                            'T_CLOSE_PARENTHESIS', 'T_CATCH', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', 'T_AS', ), 
                                      Assignation::$operators, Logical::$operators, Comparison::$operators, 
-                                     Preplusplus::$operators, Postplusplus::$operators, Ternary::$operators);
+                                     Preplusplus::$operators, Postplusplus::$operators, Ternary::$operators,
+                                     Addition::$operators, Multiplication::$operators
+                                     );
 
         // @note instructions separated by ; 
         $this->conditions = array(-2 => array('filterOut2' => $yield_operator,
