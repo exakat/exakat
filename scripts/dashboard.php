@@ -221,9 +221,9 @@ WHERE (c.name in ('Analyze', 'Coding Conventions', 'Dead code')) AND a.severity 
 
 $total = $sqlite->query("SELECT count(*) FROM analyzers;")->fetchArray(); 
 $total = $total[0];
-$unassigned = $sqlite->query("select count(*) from analyzers_categories as ac join categories as c on ac.id_categories = c.id WHERE c.name='Unassigned';")->fetchArray(); 
+$unassigned = $sqlite->query("SELECT group_concat(ac.id_analyzer, ',') FROM analyzers_categories AS ac JOIN categories AS c ON ac.id_categories = c.id WHERE c.name='Unassigned';")->fetchArray(); 
 if ($unassigned[0] > 0) { 
-    print $unassigned[0]." analyzers are 'unassigned'. \n";
+    print (substr_count($unassigned[0], ',') + 1)." analyzers are 'unassigned' : {$unassigned[0]}. \n";
 } else {
     print "All ".$total." analyzers are assigned. \n";
 }
