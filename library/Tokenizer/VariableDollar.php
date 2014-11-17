@@ -30,6 +30,7 @@ class VariableDollar extends TokenAuto {
         $this->actions = array( 'transform'  => array(1 => 'DROP',
                                                       2 => 'NAME',
                                                       3 => 'DROP'),
+                                'property'   => array('bracket' => 'true'),
                                 'atom'       => 'Variable',
                                 'cleanIndex' => true);
         $this->checkAuto();
@@ -41,10 +42,10 @@ class VariableDollar extends TokenAuto {
         return <<<GREMLIN
 
 name = fullcode.out('NAME').next();
-if (name.atom in ['Variable', 'Identifier'] ) {
-    fullcode.fullcode = "\\\$" + name.fullcode; 
-} else {
+if (fullcode.bracket == 'true') {
     fullcode.fullcode = "\\\${" + name.fullcode + "}"; 
+} else {
+    fullcode.fullcode = "\\\$" + name.fullcode; 
 }
 
 GREMLIN;

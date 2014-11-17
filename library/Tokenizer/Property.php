@@ -53,6 +53,7 @@ class Property extends TokenAuto {
                                                          2 => 'PROPERTY',
                                                          3 => 'DROP'),
                                'atom'         => 'Property',
+                               'property'     => array('bracket' => true),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
         $this->checkAuto(); 
@@ -65,10 +66,10 @@ class Property extends TokenAuto {
 // case for \$v() 
 fullcode.out("NAME").each{ fullcode.fullcode = it.fullcode }
 
-if (fullcode.out('PROPERTY').next().atom == 'Identifier') { 
-    fullcode.setProperty('fullcode', fullcode.out("OBJECT").next().getProperty('fullcode') + "->" + fullcode.out("PROPERTY").next().getProperty('fullcode'));
-} else {
+if (fullcode.out('PROPERTY').next().bracket == true) { 
     fullcode.setProperty('fullcode', fullcode.out("OBJECT").next().getProperty('fullcode') + "->{" + fullcode.out("PROPERTY").next().getProperty('fullcode') + "}");
+} else {
+    fullcode.setProperty('fullcode', fullcode.out("OBJECT").next().getProperty('fullcode') + "->" + fullcode.out("PROPERTY").next().getProperty('fullcode'));
 }
 
 GREMLIN;

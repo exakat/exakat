@@ -36,7 +36,7 @@ it.has("token", "T_STRING_VARNAME").each{ x.fullcode = "\\$" + it.code; }
 it.has("token", "T_DOLLAR").filter{   it.out("NAME").next().atom in ["Variable", "Identifier"] }.out("NAME").each{ x.fullcode = "\\$" + it.fullcode; }
 it.has("token", "T_DOLLAR").filter{ !(it.out("NAME").next().atom in ["Variable", "Identifier"])}.out("NAME").each{ x.fullcode = "\\${" + it.fullcode + "}"; }
 
-it.has("token", "T_DOLLAR_OPEN_CURLY_BRACES").out("NAME").has("atom", "Identifier").each{ x.fullcode = "\\${" + it.fullcode + "}"; }
+it.has("token", "T_DOLLAR_OPEN_CURLY_BRACES").each{ x.fullcode = "\\${" + it.fullcode + "}"; }
 it.has("token", "T_CURLY_OPEN").out("NAME").each{ x.fullcode = it.fullcode; }
 
 GREMLIN;
