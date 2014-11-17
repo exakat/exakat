@@ -21,7 +21,6 @@ class Config {
         
         // build the actual config. Project overwrite commandline overwrites config, if any.
         $this->options = array_merge($this->config_file, $this->commandline, $this->project_config);
-        
     }
     
     static function factory() {
@@ -36,7 +35,7 @@ class Config {
         if (isset($this->options[$name])) {
             $return = $this->options[$name];
         } else if ($name == 'mysql_exakat_pdo') {
-            return 'mysql:host='.$this->options['mysql_host'].';dbname='.$this->options['mysql_exakat_db'];
+            $return = 'mysql:host='.$this->options['mysql_host'].';dbname='.$this->options['mysql_exakat_db'];
         } else {
             $return = null;
         }
