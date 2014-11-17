@@ -4,14 +4,6 @@ include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
 $config = \Config::factory();
-/*
-$args = $argv;
-if (in_array( '-today', $args) !== false) {    define('WHEN', 'today'); }
-if (in_array( '-none', $args) !== false) {    define('WHEN', 'none'); }
-if (in_array('-ss', $args) !== false) {    define('SIZE', 'small'); }
-if (in_array('-sm', $args) !== false) {    define('SIZE', 'medium');}
-if (in_array('-sl', $args) !== false) {    define('SIZE', 'large');}
-*/
 
 $db = new Db('exakat');
 
