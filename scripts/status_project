@@ -46,6 +46,8 @@ if ($res == "Done\nDone\nDone\nDone\nDone\n") {
 
 if (!file_exists('projects/'.$project.'/report/')) {
     print " Report folder not created!\n";
+} else {
+    print " Report folder created\n";
 }
 
 
