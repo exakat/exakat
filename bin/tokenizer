@@ -44,16 +44,6 @@ if (empty($config['phpversion'])) {
 }
 $classes = Token::getTokenizers($config['phpversion']);
 
-if (file_exists('classes.php')) {
-    include('classes.php');
-} else {
-    if (SHUFFLE) {
-        shuffle($classes);
-    }
-    
-    file_put_contents('classes.php', '<?php '."\n".'$classes = '.var_export($classes, true).'; ?>');
-}
-
 $log = new Log('tokenizer');
 $log->log( "Starting time : ".date('r'));
 
