@@ -132,7 +132,7 @@ class Appinfo extends \Report\Content {
                             'Constant scalar expression' => 'Structures/ConstantScalarExpression',
                             '... usage' => 'Structures/EllipsisUsage',
 
-                            'File uplaod' => 'Structures/FileUploadUsage',
+                            'File upload' => 'Structures/FileUploadUsage',
                     ),
 
                     'Namespaces' => array(
