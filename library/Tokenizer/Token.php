@@ -707,7 +707,7 @@ g.idx('atoms')[['atom':'Class']].each{
 ", "
 // collecting files
 g.idx('atoms')[['atom':'Phpcode']].in.loop(1){true}{it.object.atom == 'File'}.each{ 
-    g.idx('file').put('path', it.filename, it)
+    g.idx('files').put('path', it.filename, it)
 };
 
 ", "
