@@ -128,6 +128,9 @@ class Appinfo extends \Report\Content {
                             'var_dump'       => 'Structures/VardumpUsage',
 
                             'array short syntax'       => 'Structures/ArrayNSUsage',
+                            'Function dereferencing'       => 'Structures/FunctionSubscripting',
+                            'Constant scalar expression' => 'Structures/ConstantScalarExpression',
+                            '... usage' => 'Structures/EllipsisUsage',
                     ),
 
                     'Namespaces' => array(
@@ -163,8 +166,8 @@ class Appinfo extends \Report\Content {
 
                     'Classes' => array(
                             'Classes'           => 'Classes/Classnames',
-                            'Abstract classes'  => 'Classes/Abstractclass',
 
+                            'Abstract classes'  => 'Classes/Abstractclass',
                             'Interfaces'        => 'Interfaces/Interfacenames',
                             'Traits'            => 'Classes/Traitsnames',
 
@@ -180,9 +183,9 @@ class Appinfo extends \Report\Content {
                             'Magic methods'     => 'Classes/MagicMethod',
                             'Cloning'           => 'Classes/CloningUsage',
                             'Dynamic class call'=> 'Classes/VariableClasses',
-//                            'Conditioned class' => 'Classes/ConditionedClass',
 
                             'PHP 4 constructor' => 'Classes/OldStyleConstructor',
+                            'Multiple class in one file' => 'Classes/MultipleFileInFile',
                     ),
 
                     'Constants' => array(
