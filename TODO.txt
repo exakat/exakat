@@ -1,7 +1,4 @@
-Architecture
-Add a install checker, that will check how is the installation of the analyzer
 Support file updates in VCS (just change those files, not reload all the application, serve évolutions, not status)
-Make use of index for better speed
 Make so that it is possible to run simultaneous scripts on the server (Not just using delete all).
 Make analyzer concurrent proof
 Finish running shuffle tests on analyzer
@@ -83,9 +80,6 @@ Add a config for the whole analyzer
 Add logs in project : stops if tokenizer/fullcode do break. Alert me.
 Export data collected in mysql to a graph
 
-Mettre wordpress sous git
-Avoir un outil pour pousser le site en ligne depuis Git
-
 Namespace inventory as a tree.
 Mention file extensions/list used for testing in audit information
 
@@ -103,11 +97,8 @@ Suspect implicit conversion
 Marquer les analyzers non fait comme tel (pas indexistants)
 Check for unqualified names of classes : they shouldn't be too generic.
 List Nsnames aliases and overlap
-Spot obsolete functions
 
-Check for argument number (PHP doesn't, but yells at runtime).
 Faire la liste des extensions standards de PHP (et donc, celles non standards)
-Faire un extracteur d'extensions PHP (Notamment PECL, mais aussi via code source, avec versionnage).
 Mark analyzers as file or application wide analyzer. 
 
 Make the php script idempotent (can be run again and finish the job, leave a note where it left...)
@@ -115,19 +106,18 @@ Spot function that are defined with php-function names (also spot overwriting).
 Faire un dashboard avec les indicateurs du projet lui-même : manquent de tests, manques de traductions / documentations.
 
 Check for size of ODT: 
-rm: ./projects/wave/report.odt: No such file or directory
-Stack space overflow: current size 8388608 bytes.
-Use `+RTS -Ksize -RTS' to increase it.
-Aliases : Classes that extends others, but do no overloading; functionst that returns one call of other function
+Aliases : Classes that extends others, but do no overloading; 
+
+functions that returns one call of other function
 
 Useless unset() 
+Unset non existing variable (useless)
+
 Constant functions or structures (always return the same...)
 
-Intersection between use and the actual classes being used.
 Check __set_state : if there is a new in the parent, and the set state isn't overloaded, the final object is not of expected type.
 
 For UnicodeBlock, merge the blocks into languages 
-Unset non existing variable (useless)
 
 List errors of visibility between classes 
 Detect strings that are used as an Array (then, spot the index, and check for the strings in those indexes)
@@ -135,7 +125,6 @@ Detect strings that are used as an Array (then, spot the index, and check for th
 Function called with too many or too few arguments
 Prepare nodes to be added to new network (function calls, variable track...)
 
-Spot several definition for constants
 Spot variable used in definitions
 
 Update dashboard with number of analyzer and inventory or appinfo
@@ -145,9 +134,6 @@ bin/file should also sort PHP files/directories by type : see fb treemap : code,
 Separate analyzers in : file/application; themes
 produce a dot graph of classes
 
-Automate testing and dashboard
-
-hardcoded logins // pass
 paraleliser les analyzers
 
 Spot the exceptions and the one that are thrown, and the one caught. 
@@ -167,9 +153,6 @@ Commented Code
 
 Un paramètre inutilisé dans une méthode qui en étant une autre est OK (C'est alors a relier à la généralisation induite par la classe du dessus, on peut aussi commenter les autres classes.)
 
-Faire une class MySQL separée
-Faire une class Stats separée
-
 Spot identical files and avoir double analyse (.... ?)
 Spot useless namespaces (namespace x; no function/classs/interface/constant)
 
@@ -181,40 +164,21 @@ spot usage of ereg
 Mark Namespaces that are constants as such 
 
 print_r(xxx, true) is not a pb.
-Check report for incompilable : they don't show in appinfo nor as an analyzer
-Check appinfo for constant names, redeclared PHP functions, empty classes
-Report variable : warning, should not be mistaken by references
 
-SectionedHashtable : Ignore empty sections
-Report : indicate when the value is N/A (trait for PHP 5.3)
-Spot useless code, such as variable or scalar alone on an instruction.
-
-Desactiver ArrayNS en fonction des versions de PHP qui tournent.
-Spot trailing white space on PHP code (before and after <?php ?>)
 Support phar files (digg them and find the local php files).
 
 Check for ordering with case/default
 Add time of processing in the ReportInfo
 
 Create a dummy project for fast testing of installation
-Check for for() and remove arguments 
 
-reinstall sqlite export
 fix the last 'indexed' in tokenizer
 
 spot #! lines and mark the file as executable commandline
-check that report are all done in default
 
 List empty scripts, just like incompilables
 Make a diagramm of the differents layers of the software
 
-Update Ace/Hastable to suppoort the actual number of columns (just like Horizontal report).
-
-Report usage of alternative syntax mixed with normal one.
-Report usage of alternative syntax in appinfo()
-Report usage of one-liner in appinfo 
-
-Extensions may defined Namespaces (check them for conflict... ?)
 CHeck that Classes and file have the same names.
 Support namespaces when searching for classes.
 
@@ -529,16 +493,10 @@ die or throw ? May be die is useless and should be down by throwning all the tim
         
 Methods returns various type (null, array, boolean...)
 
-remove 'classes.php' file from tokenizer
-
 Accept scripts that throw warnings but still compile.
 
 Clean bin and script folders
 
 Validate that all files in a project are useful (check for classes + autoload, includes, mentions of scripts in open_files, etc..)
-
-Add a check when php script has no tokens (after a bin/load cleaning of tokens).
-
-Add 'ignore_folder' to config.ini
 
 Check speed for one file processing

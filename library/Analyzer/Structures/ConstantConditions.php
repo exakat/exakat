@@ -25,6 +25,27 @@ class ConstantConditions extends Analyzer\Analyzer {
              ->raw('filter{ it.out("BLOCK").out().loop(1){true}{it.object.atom == "Variable"}.has("code", condition).filter{it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").any() }.any() == false }');
         $this->prepareQuery();
 
+        $this->atomIs("Ifthen")
+             ->outIs('CONDITION')
+             ->atomIsNot('Variable')
+             ->noAtomInside('Variable')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs("Ternary")
+             ->outIs('CONDITION')
+             ->atomIsNot('Variable')
+             ->noAtomInside('Variable')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs("For")
+             ->outIs(array('FINAL', 'INCREMENT'))
+             ->atomIsNot(array('Variable', 'Functioncall'))
+             ->noAtomInside('Variable')
+             ->back('first');
+        $this->prepareQuery();
+        
 /*
         One of the variable inside the condition should be modified at some point
         $this->atomIs("While")

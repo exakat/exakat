@@ -66,7 +66,11 @@ class Ternary extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-it.fullcode = it.out("CONDITION").next().fullcode + " ? " + it.out("THEN").next().fullcode + " : " + it.out("ELSE").next().fullcode; 
+if (it.out("THEN").next().atom == 'TernaryElse') {
+    it.fullcode = it.out("CONDITION").next().fullcode + " ?: " + it.out("ELSE").next().fullcode; 
+} else {
+    it.fullcode = it.out("CONDITION").next().fullcode + " ? " + it.out("THEN").next().fullcode + " : " + it.out("ELSE").next().fullcode; 
+}
 
 GREMLIN;
     }
