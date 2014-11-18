@@ -906,6 +906,16 @@ GREMLIN;
         return $this;
     }
     
+    function eachNotCounted($column, $times = 1) {
+        $this->methods[] = <<<GREMLIN
+groupBy(m){it.$column}{it}.iterate(); 
+// This is plugged into each{}
+m.findAll{ it.value.size() != $times}.values().flatten().each{ n.add(it); }
+GREMLIN;
+
+        return $this;
+    }
+    
     function countIs($comparison) {
         $this->addMethod('aggregate().filter{ it.size '.$comparison.'}', null);
         
@@ -1296,6 +1306,35 @@ GREMLIN;
 
     public function goToNamespace() {
         $this->addMethod('in.loop(1){!(it.object.atom in ["Namespace", "File"])}{it.object.atom in ["Namespace", "File"]}');
+        
+        return $this;
+    }
+    
+    public function followConnexion( $iterations = 3) {
+        //it.rank in x[-2] should be better than !x[-2].intersect([it.rank]).isEmpty() but this isn't working!!
+        $this->addMethod(
+        <<<GREMLIN
+
+// Loop init
+sideEffect{ loops = 1;}
+
+//// LOOP ////
+.as('connexion')
+.transform{ if (g.idx('functions')[['path':it.fullnspath]].any()) {g.idx('functions')[['path':it.fullnspath]].next();} else { it; } }.in('NAME')
+// calculating the path AND obtaining the arguments list
+.sideEffect{ while(x.last() >= loops) { x.pop(); x.pop();}; y = it.out('ARGUMENTS').out('ARGUMENT').filter{!x[-2].intersect([it.rank]).isEmpty() }.code.toList(); x += [y];  x += loops;}
+// find outgoing function
+.out('BLOCK').out.loop(1){true}{it.object.atom == 'Functioncall'}
+
+// filter with arguments that are relayed 
+.filter{ it.out('ARGUMENTS').out('ARGUMENT').filter{ it.code in x[-2]}.any() }
+.sideEffect{ y=[]; it.out('ARGUMENTS').out('ARGUMENT').filter{ it.code in x[-2]}.rank.fill(y); x += [y]; x += loops}
+
+.loop('connexion'){ loops = it.loops; it.loops < $iterations; }{true}
+//// LOOP ////
+
+GREMLIN
+                        );
         
         return $this;
     }
