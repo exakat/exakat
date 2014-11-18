@@ -180,7 +180,6 @@ List empty scripts, just like incompilables
 Make a diagramm of the differents layers of the software
 
 CHeck that Classes and file have the same names.
-Support namespaces when searching for classes.
 
 Calculate a ratio of whitespace / comment / code
 Make stats on the type of comment (//, /*, # )
@@ -188,15 +187,11 @@ Make stats on the type of comment (//, /*, # )
 Make a dummy project to check all the analyzers in the same time (find a way to report which are tested or not automatically. May be comments ? )
 Make an export to JSON format for testing purpose.
 
-Must call parent constructor (desctructor ? )
+Must call parent constructor (destructor ? )
 Must have desctructor's classes (when ? Closing resources are needed ? Like what ? )
-Empty blocks ( try/catch, etc.)
 in regex, several successive call will fill the same $r, and if not tested, it may lead to believe there are some results
 function whose return may be ignored
 
-Test with Neo4j 2.1 and the batch inserter.
-
-See if I can move those g.idx['index'][['token':'']].out. to something shorter (and faster). 
 Check how index degrades with size (compare with the previous).
 
 Create a checker for the Format (they need a number of classes, and dependences).
@@ -208,24 +203,20 @@ analyzer names are sensitive to case. Make sure this is not a problem.
 Faire un Content avec des métrics (Nombre d'arguments, longueur de line, nombre de constants... etc...)
 
 Export class hierarchy, UML documents, etc.
-Reference of a $value and the last array element remain even after the foreach loop. It is recommended to destroy it by unset(). : check reuse of blind variables between arrays
 Summary of traits's methods overlap (local to class, trait, inherited class). 
 Traits of Traits
-silently resolved conflicts in traits (overlapping local/trait/trait/class)
+silently resolved conflicts in traits (overlapping local/trait/class)
 Supports uploaded files 
 share standard with different chapters (files, sockets, uploaded_file, etc....)
 
-parent keyword used in class where no extension.
 Functions that return always the same value, no matter what 
-Constant structures
+Constant structures (with only literals, so the whole is not changing anytime)
 
 Make a report for the classes that tells what methods are actually used (their origin, base on static/self, etc…), with an indicator for the level of complexity.
 
-Functions without returns, and not Methods.
+Functions without returns and not interacting elsewhere (ini_set changes system), and not Methods.
 
 Manage non-fatal error during lint phase (list the files that are showing some STRICT errors as a bulk). 
-
-Manage a 'fullnspath' that will tell the absolute path name of a class/function/constant (either to search...)
 
 Faire un rapport général type PHPLOC, mentionner la quantité de valeur littéral dans le code. Faire une bande avec tous les fichiers les uns après les autres (ordonné?) et assigner une couleur à chaque type de notions (structure, littéral, opérateur, variable)
 
@@ -234,26 +225,24 @@ Calculer les dépendances de chaque classes (dépendance obligatoire, dépendanc
 
 Inventory of transport (list from PHP code)
 UseVoidReturn : function return void/null, but result it captured (may be not used...)
-TooManyArgument : for PHP functions and for custom code
-RequiredAfterOptionalParam : optional parameters are the last on the argument list
+
 report 'true' (wrongly compared boolean)
 Die without no argument (at least, put __METHOD__, file)
 Echo : with or without () (preferences)
-Use const or define() for constants ? 
-unsupported calls in strings ("$x[a][b]")
+
 inventory of registered functions (session, finalize, error...)
 Characterize function as library (not global code), or script
 Detect long switch, if elseif...
-check this outside methods
-check for $THIS (and other variables with special meaning but wrong case ? )
+
 global versus $GLOBALS
 Overwritten methods / constante 
 Command Query Separation : Functions should either do something or answer something. That’s practical and clear advice.
 Avoid output arguments (&$arguments, that will be modified...)
 Have No Side Effects : effect on something else
+
 Identify the Unit tests, based on the library : simpletest, Atoum, Phpunit, phpt ? 
 SQL Should use binded parameters, not concatenation in string
-Instanciation of interfaces ?!?
+
 Cyclic dependancies between traits
 Modified arguments (bad idea! )
 Used twice variable (set then given... Nothing between ? )
@@ -264,44 +253,32 @@ Research that AND and && pb
 Identify date() formats (and sprintf too)
 
 Map/Reduce : Faire marcher les analyses du tokenizer sur des intervalles dans les index 
-Ajouter des while au lieu des ifs, notamment pour les structures récursives
-Utiliser les index pour les résolutions (g.idx('resolution')[['class':name]] = g.v(100);
-Spot void in arrays 
+
 Expressions that should be on the same line (@ unlink, ! )
-array() may be useless instruction (warning to inner methodcall...)
 ! may have pb like @ (2 on one line)
 Spot configuration that are not well used (ini_set('others', 3) => useless....)
 Spot very deep code (lots of {{{{{{{}}}}}}}
-Super global aliases ($x = $_GET, f($_GET)...)
-method with parent:: but no actual parent.
-undefined static (using self or the class name)
-classes extends classes, implements interfaces (cannot extends classes)
+
 Heavily used class/interface/etc.
 Spot external libraries
 Ignore the lib folder
-Spot PEAR classes
 Code source that mix defintiions (class, interface, const...) and actual code (except for protection against direct access..).
-Spot multiple-class files, multiple-namespace files
-Corriger le calcul du nombre de fichiers qui ne sont pas compilables
-Faire un Rapport de compatibilité : up and down. Sous forme de tableau (versions puis features qui limitent (rouge, vert, orange, bleu pour les gains possibles)
 
 Add an analyzer of the application : As documentation, version, tests, external libs, languges, template, config.... Report this, and exclude some of the elements in the code.
 
-Spot expressions that are the same (cf str_replace I used...)
+Spot expressions that are the same (cf str_replace ...)
 Spot files that use $this, and that are actually included in PHP methods (old style PHP inclusion)
 Suggest using ... instead of func_get_args, and ... instead of call_user_func_array
 
-Chez UnresolvedClasses 7 for conflict between aliases and declaration (Use in one namespace, class in another).
 Spot use clause that are in the same namespace (just alias ? )
 
 what happens when there are 100 arguments available for isRead and isModified ? (what happens when there is more than that? )
 WrongCase : also apply to Use instruction
 Check for use instruction for StaticProperty...
 signaler l'habitude avec use (Un use? )
+
 SIgnaler les use qui ne sont pas en haut du namespace)
 signaler les pb de casse avec les alias
-absolute use without alias are useless.
-Function-subscripting,-old-style : not mentionned if the variable is used twice after the call().
 multiple index defintion : spot the values
 casting with long names (boolean, integer) instead of short ones (int, bool)
 support arrays representation of the index with { or [ in the atom (needs to be collected).
@@ -330,19 +307,15 @@ understand the strategy of use.
 Classes/UnusedPrivateProperties : Not done on alpharpc ?? No tokenizer.final report...
 Several instructino in the same line : compare line with > not ==, so as to has f( \n g($x)) spotted.
 
-when there is no namespace, what to find? I should put a default namespace 
-
 Add a way to ignore some vendors dependings on project.
 Add a way to overwrite / add / nullify some data from within a project.
 
 Suggest properties to be ppp depending on usage (public => outusage, properted => child/parents, private : local class)
 composer.json generator or checker 
+
 Suggest closures instead of functions if the function is used once. 
 Suggest replacement for str_replace/ereg/preg/strtr
 
-vérifier pourquoi Label, basé sur T_COLON, reste présent : Je pense qu'il n'est pas nettoyé par les autres qui s'en servent.
-vérifier les 		mysql_query($sql) or ($output .= mysql_error());
-et les experssion or die();!
 Conditional declarations ?
 
 Heavily used classes/functions...
@@ -395,7 +368,6 @@ Test for list to be in a namespace (\list may fail). Check for other functions t
 Some methods are meant to return nothing : construct/destruct, some of the magic methods, test/setup/teardown in phpunit...
 Functions that return nothing needs to have special things in them : global, ini_set, ...
 
-Clean the analyzer sqlite database.
 $x->property but property is not defined and (class) $x is defined with __get() or __set();
 
 Spot properties that will be handled by __get et __set()
@@ -407,8 +379,6 @@ Add a way to configure the analyzer at file level (PHP DOC), or an external list
 Variable used once : Ignore arguments if func_get_args is used.
 Never used properties : check for classes below!
 Never used properties : if (in_array($key, self::$_allowableAttributes[$tag])) { ($_allowableAttributes!!
-
-methods that are never called (in general).
 
 Find nested incompatible conditions like this : (Also over multiples functions calls...)
                 if ($destination > 0) { 
@@ -466,13 +436,9 @@ testBySecond : testMethods are not used (neither setUp nor tearDown)
 
 directInjection : Ignore 'secure' functions such as htmlentities, intval, isset
 
-  $_GET["pi"] = ""; Don' assign incoming variable! Use Global!
-  
 List contaminated variables ($x = $_POST..)
 
 $whiteList = explode(",","xls,xlsx,ods,sxc,csv,tsv,ppt,pps,odp,sxi,doc,docx,rtf,odt,sxw"); // better make it an array directly...
-
-0 ? "wb" : "ab" <= constant condition!!
 
 die or throw ? May be die is useless and should be down by throwning all the time and adding an exception handler to stop the script. 
 
@@ -500,3 +466,7 @@ Clean bin and script folders
 Validate that all files in a project are useful (check for classes + autoload, includes, mentions of scripts in open_files, etc..)
 
 Check speed for one file processing
+
+Loop optimisation : anything in the loop that may be done before? 
+
+Spot methods that do not use $this (<- static ? )
