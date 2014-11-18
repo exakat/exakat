@@ -131,6 +131,8 @@ class Appinfo extends \Report\Content {
                             'Function dereferencing'       => 'Structures/FunctionSubscripting',
                             'Constant scalar expression' => 'Structures/ConstantScalarExpression',
                             '... usage' => 'Structures/EllipsisUsage',
+
+                            'File uplaod' => 'Structures/FileUploadUsage',
                     ),
 
                     'Namespaces' => array(
