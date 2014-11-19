@@ -39,6 +39,7 @@ class Appinfo extends \Report\Content {
                             'ext/imap'       => 'Extensions/Extimap',
                             'ext/imagick'    => 'Extensions/Extimagick',
                             'ext/info'       => 'Extensions/Extinfo',
+                            'ext/intl'       => 'Extensions/Extintl',
                             'ext/json'       => 'Extensions/Extjson',
                             'ext/kdm5'       => 'Extensions/Extkdm5',
                             'ext/ldap'       => 'Extensions/Extldap',
