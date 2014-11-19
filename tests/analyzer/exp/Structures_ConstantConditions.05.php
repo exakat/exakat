@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('if ( !function_exists(\'a\')) { /**/ } ',
+$expected     = array();
+
+$expected_not = array('if ( !function_exists(\'a\')) { /**/ } ',
                       'if ( !defined(\'B\')) { $b++; } '
                       );
-
-$expected_not = array();
 
 ?>
