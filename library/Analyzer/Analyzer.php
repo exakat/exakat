@@ -1314,11 +1314,22 @@ sideEffect{ loops = 1;}
 
 //// LOOP ////
 .as('connexion')
-.transform{ if (g.idx('functions')[['path':it.fullnspath]].any()) {g.idx('functions')[['path':it.fullnspath]].next();} else { it; } }.in('NAME')
+.transform{ 
+    if (it.in('METHOD').any() == false) { 
+        if (g.idx('functions')[['path':it.fullnspath]].any()) {  
+            g.idx('functions')[['path':it.fullnspath]].next(); 
+        } else {
+            it;
+        } 
+    } else if (true) { name = it.code.toLowerCase();  
+                      g.idx('classes')[['path':it.in('METHOD').out('CLASS').next().fullnspath]].out('BLOCK').out('ELEMENT').has('atom', 'Function').out('NAME').filter{it.code.toLowerCase() == name }.next(); 
+    } else { it; } 
+}.in('NAME')
 // calculating the path AND obtaining the arguments list
 .sideEffect{ while(x.last() >= loops) { x.pop(); x.pop();}; y = it.out('ARGUMENTS').out('ARGUMENT').filter{!x[-2].intersect([it.rank]).isEmpty() }.code.toList(); x += [y];  x += loops;}
 // find outgoing function
-.out('BLOCK').out.loop(1){true}{it.object.atom == 'Functioncall'}
+.out('BLOCK').out.loop(1){true}{it.object.atom in ['Functioncall', 'Staticmethodcall'] && (it.object.in('METHOD').any() == false)}
+.transform{ if (it.out('METHOD').any()) { it.out('METHOD').next(); } else { it; }}
 
 // filter with arguments that are relayed 
 .filter{ it.out('ARGUMENTS').out('ARGUMENT').filter{ it.code in x[-2]}.any() }
@@ -1403,20 +1414,7 @@ n = [];
 GREMLIN;
         
         $query .= $this->apply->getGremlin();
-        /*
-        $query .= <<<GREMLIN
-.each{
-    g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED');
-    
-    // Apply below
-    {$apply_below}
-    
-    c = c + 1;
-}
-c;
 
-GREMLIN;
-*/
     // initializing a new query 
         $this->queries[] = $query;
         $this->queries_arguments[] = $this->arguments;
