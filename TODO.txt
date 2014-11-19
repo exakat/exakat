@@ -358,8 +358,6 @@ Functions / methods may be a tube (mixing arguments) or changing some state.
         $info = $this->data->getInfo();
         $renderer->render($output, $info);
 
-Funciton subscription new style 
-
 Conservation de la skin entre les pages
 
 in CHeck for Unused private properties, removed properties used as append[] or objects (methods or properties)
@@ -392,8 +390,6 @@ Empty function that override another are not useless.
 $a['b'] = 3;  print "$a[b]\n"; : b is not a constant! 
 
 Validate magic methods arguments in the definition
-
-Retirer la dépendance à projects/*/config.ini
 
 Add support for PHP 7 and for multiple PHP installation (and for missing PHP installs)
 Merge all PHP versions into one table + 1 colon of selection
@@ -430,8 +426,6 @@ List checks for data consistancy :
 
 Finish overloaded for property/methods
 
-add support for use in fullnspath : namespace a; use b; class c extend b {} (b -> b, do exists)
-
 testBySecond : testMethods are not used (neither setUp nor tearDown)
 
 directInjection : Ignore 'secure' functions such as htmlentities, intval, isset
@@ -467,6 +461,26 @@ Validate that all files in a project are useful (check for classes + autoload, i
 
 Check speed for one file processing
 
-Loop optimisation : anything in the loop that may be done before? 
+Loop optimisation : anything in the loop that may be done outside? 
 
 Spot methods that do not use $this (<- static ? )
+
+SPot : files direct access protecion (if (!defined()) { die('No direct access'); }
+
+Suggest a list of php.ini directive that should be watched ($_FILES => s file_uploads, upload_max_filesize, upload_tmp_dir, post_max_size et max_input_time dans php.ini)
+
+Add a list of directive spotted in the code
+
+Finishes the following standard extensions : 
+recode
+pspell
+opcache
+interbase
+gettext
+dotnet
+
+
+Check on reference returning functions (they should be called with reference).
+
+Link references together
+
