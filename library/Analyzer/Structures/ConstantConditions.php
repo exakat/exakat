@@ -12,14 +12,14 @@ class ConstantConditions extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("While")
              ->outIs('CONDITION')
-             ->atomIsNot('Variable')
+             ->atomIsNot(array('Variable', 'Functioncall'))
              ->noAtomInside('Variable')
              ->back('first');
         $this->prepareQuery();
         
         $this->atomIs("While")
              ->outIs('CONDITION')
-             ->atomIs('Variable')
+             ->atomIs(array('Variable', 'Functioncall'))
              ->savePropertyAs('code', 'condition')
              ->back('first')
              ->raw('filter{ it.out("BLOCK").out().loop(1){true}{it.object.atom == "Variable"}.has("code", condition).filter{it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").any() }.any() == false }');
@@ -27,14 +27,14 @@ class ConstantConditions extends Analyzer\Analyzer {
 
         $this->atomIs("Ifthen")
              ->outIs('CONDITION')
-             ->atomIsNot('Variable')
+             ->atomIsNot(array('Variable', 'Functioncall'))
              ->noAtomInside('Variable')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs("Ternary")
              ->outIs('CONDITION')
-             ->atomIsNot('Variable')
+             ->atomIsNot(array('Variable', 'Functioncall'))
              ->noAtomInside('Variable')
              ->back('first');
         $this->prepareQuery();
