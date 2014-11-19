@@ -15,6 +15,7 @@ class Appinfo extends \Report\Content {
                             'ext/bcmath'     => 'Extensions/Extbcmath',
                             'ext/bzip2'      => 'Extensions/Extbzip2',
                             'ext/calendar'   => 'Extensions/Extcalendar',
+                            'ext/cairo'      => 'Extensions/Extcairo',
                             'ext/crypto'     => 'Extensions/Extcrypto',
                             'ext/ctype'      => 'Extensions/Extctype',
                             'ext/curl'       => 'Extensions/Extcurl',
