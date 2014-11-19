@@ -9,7 +9,7 @@ class KillsApp extends Analyzer\Analyzer {
         // first round : only die and exit
         $this->atomIs("Function")
              ->outIs('BLOCK')
-             ->atomIs('Functioncall')
+             ->atomInside('Functioncall')
              ->fullnspath(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
@@ -17,7 +17,7 @@ class KillsApp extends Analyzer\Analyzer {
         // second round
         $this->atomIs("Function")
              ->outIs('BLOCK')
-             ->atomIs('Functioncall')
+             ->atomInside('Functioncall')
              ->functionDefinition()
              ->inIs('NAME')
              ->analyzerIs('Analyzer\\Functions\\KillsApp')
