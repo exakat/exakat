@@ -114,11 +114,11 @@ function query($query, $retry = 1) {
 function logTime($step) {
     static $log, $begin, $end, $start;
     
-    if (is_null($log)) {
+    if ($log === null) {
         $log = fopen('log/build_root.timing.csv', 'w+');
     }
     $end = microtime(true);
-    if (is_null($begin)) { 
+    if ($begin === null) { 
         $begin = $end; 
         $start = $end;
     }

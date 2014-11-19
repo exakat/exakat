@@ -123,7 +123,7 @@ class TokenAuto extends Token {
         }
 
          if (isset($actions['transfert'])) {
-            list($what, $where) = each($actions['transfert']);
+            list(, $where) = each($actions['transfert']);
             $next = str_repeat(".out('NEXT')", $where);
             $qactions[] = " 
 /* transfert property root away  */  

@@ -50,7 +50,7 @@ class _Case extends TokenAuto {
         
         $this->actions = array('createBlockWithSequenceForCase' => true,
                                'keepIndexed'                    => true);
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
         // Case has only one instruction and no ; (case 'a': $x++)
         $this->conditions = array( 0 => array('token' => _Case::$operators,
@@ -63,7 +63,7 @@ class _Case extends TokenAuto {
         
         $this->actions = array('createBlockWithSequenceForCase' => true,
                                'keepIndexed'                    => true);
-        $r = $this->checkAuto();
+        $this->checkAuto();
 
     // create block for Case  case 'a' : $x++; (or a sequence).
         $this->conditions = array(  0 => array('token' => _Case::$operators,

@@ -106,7 +106,7 @@ while(!empty($dependencies) && $c > count($dependencies)) {
         foreach($diff as $k => $v) {
             if (!isset($dependencies[$v])) {
                 $x = Analyzer\Analyzer::getInstance($v, $client);
-                if (is_null($x)) {
+                if ($x === null) {
                     print "No such dependency as '$v'. Ignoring\n";
                     continue; 
                 }

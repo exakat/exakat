@@ -55,7 +55,7 @@ foreach($classes as $class) {
     $new = "Tokenizer\\$class";
     
     $r = Tokenizer\Token::getInstance($new, $client, $config['phpversion']);
-    if (is_null($r)) {
+    if ($r === null) {
         display("Ignore $new\n");
         // ignore 
     } elseif ($new == 'Tokenizer\\FunctioncallArray') {

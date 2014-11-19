@@ -134,11 +134,11 @@ function logProgress($project, $percent) {
 function logTime($step) {
     static $log, $begin, $end, $start;
     
-    if (is_null($log)) {
+    if ($log === null) {
         $log = fopen('log/project.timing.csv', 'w+');
     }
     $end = microtime(true);
-    if (is_null($begin)) { 
+    if ($begin === null) { 
         $begin = $end; 
         $start = $end;
     }

@@ -19,7 +19,7 @@ class E_file {
                            ->setProperty('code', 'Index for file "'.$this->file.'"')
                            ->setProperty('fullcode', $this->file)
                            ->save();
-        if (!is_null($index)) {
+        if (!$index === null) {
             $this->index = $index;
             $this->node->relateTo($index, 'INDEX')->save();
         } else {
