@@ -11,10 +11,20 @@ function willKillApp() {
     $unreachable_code++;
 }
 
-function willNotKillApp() {
+function willKillApp2ndround() {
     $b++;
     if ($y) {
         KillApp();
+    } else {
+        $c++;
+    }
+    $reachable_code++;
+}
+
+function willNotApp2ndround() {
+    $b++;
+    if ($y) {
+        NoKillApp();
     } else {
         $c++;
     }
