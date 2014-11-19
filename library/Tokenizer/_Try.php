@@ -48,7 +48,7 @@ class _Try extends TokenAuto {
         return <<<GREMLIN
 
 s = [];
-fullcode.out("CATCH").each{ s.add(it.fullcode); }
+fullcode.out("CATCH").sort{it.rank}.each{ s.add(it.fullcode); }
 fullcode.setProperty('fullcode', "try " + it.out("CODE").next().getProperty('fullcode') + s.join(" ")); 
 fullcode.setProperty('count', it.out("CATCH").count()); 
 
