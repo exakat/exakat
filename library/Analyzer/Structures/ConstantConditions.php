@@ -13,7 +13,7 @@ class ConstantConditions extends Analyzer\Analyzer {
         $this->atomIs("While")
              ->outIs('CONDITION')
              ->atomIsNot(array('Variable', 'Functioncall'))
-             ->noAtomInside('Variable')
+             ->noAtomInside(array('Variable', 'Functioncall'))
              ->back('first');
         $this->prepareQuery();
         
@@ -28,42 +28,29 @@ class ConstantConditions extends Analyzer\Analyzer {
         $this->atomIs("Ifthen")
              ->outIs('CONDITION')
              ->atomIsNot(array('Variable', 'Functioncall'))
-             ->noAtomInside('Variable')
+             ->noAtomInside(array('Variable', 'Functioncall'))
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs("Ternary")
              ->outIs('CONDITION')
              ->atomIsNot(array('Variable', 'Functioncall'))
-             ->noAtomInside('Variable')
+             ->noAtomInside(array('Variable', 'Functioncall'))
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs("For")
              ->outIs(array('FINAL', 'INCREMENT'))
              ->atomIsNot(array('Variable', 'Functioncall'))
-             ->noAtomInside('Variable')
+             ->noAtomInside(array('Variable', 'Functioncall'))
              ->back('first');
         $this->prepareQuery();
         
 /*
-        One of the variable inside the condition should be modified at some point
-        $this->atomIs("While")
-             ->outIs('CONDITION')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->savePropertyAs('code', 'condition')
-             ->back('first')
-             ->raw('filter{ it.out("BLOCK").out().loop(1){true}{it.object.atom == "Variable"}.has("code", condition).filter{it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").any() }.any() == false }');
-        $this->prepareQuery();
-*/
+    One of the variable inside the condition should be modified at some point : in the condition, or in the loop.
 
-/*
-    What about $i++ ? 
-    
-    What about functions calls? Only $this will be there.. May be 'methods' that change the $this or not.
-
-    // add test for Do...While, for().
+    Function calls are kept, but they should be characterized as non-stochastic 
+    (calling with the same arguments may yield different result, such as random or fread)
 */
     }
 }

@@ -495,10 +495,9 @@ GREMLIN;
 
     function noAtomInside($atom) {
         if (is_array($atom)) {
-            die('can t run this yet');
-            $this->addMethod('as("loop").out().loop("loop"){true}{it.object.atom in ***}', $atom);
+            $this->addMethod('filter{ it.as("loop").out().loop("loop"){true}{it.object.atom in ***}.any() == false}', $atom);
         } else {
-            $this->addMethod('filter{ it.as("loop").out().loop("loop"){true}{it.object.atom == ***}.count() == 0}', $atom);
+            $this->addMethod('filter{ it.as("loop").out().loop("loop"){true}{it.object.atom == ***}.any() == false}', $atom);
         }
         
         return $this;
