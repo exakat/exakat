@@ -124,7 +124,8 @@ $report->prepare();
 $size = $report->render(FORMAT, FILE);
 
 $end = microtime(true);
-print number_format($end - $begin, 2)." s\n";
+print "Processing time : ".number_format($end - $begin, 2)." s\n";
+print "Done\n";
 
 if ($size < 1024) {
     $size = "$size b";
