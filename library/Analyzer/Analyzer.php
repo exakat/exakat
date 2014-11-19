@@ -225,7 +225,6 @@ class Analyzer {
         $res = $this->query($query);
         
         if (isset($res[0]) && count($res[0]) == 1) {
-            print "cleaning {$this->human_classname}\n";
             $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].outE('ANALYZED').each{
     g.removeEdge(it);
@@ -234,7 +233,6 @@ g.idx('analyzers')[['analyzer':'$analyzer']].outE('ANALYZED').each{
 GREMLIN;
             $this->query($query);
         } else {
-            print "new $analyzer\n";
             $this->code = addslashes($this->code);
             $query = <<<GREMLIN
 x = g.addVertex(null, [analyzer:'$analyzer', analyzer:'true', line:0, description:'Analyzer index for $analyzer', code:'{$this->code}', fullcode:'{$this->code}',  atom:'Index', token:'T_INDEX']);
@@ -765,7 +763,7 @@ GREMLIN;
     }
 
     function samePropertyAs($property, $name, $caseSensitive = false) {
-        if ($caseSensitive || $property == 'line') {
+        if ($caseSensitive || $property == 'line' || $property == 'rank') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -776,7 +774,7 @@ GREMLIN;
     }
 
     function notSamePropertyAs($property, $name, $caseSensitive = false) {
-        if ($caseSensitive || $property == 'line') {
+        if ($caseSensitive || $property == 'line' || $property == 'rank') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -1472,8 +1470,6 @@ GREMLIN;
         $queryTemplate = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').in.loop(1){ it.object.token != 'T_FILENAME'}.as('file').back('fullcode').as('line').select{it.fullcode}{it.line}{it.filename}
 GREMLIN;
-//        print $queryTemplate."\n";
-//        die();
         $vertices = $this->query($queryTemplate);
 
         $analyzer = get_class($this);
