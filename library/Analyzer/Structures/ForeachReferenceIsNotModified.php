@@ -16,9 +16,9 @@ class ForeachReferenceIsNotModified extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'value')
              ->inIs('VALUE')
              ->outIs('BLOCK')
-             ->atomInside('Variable')
-             ->analyzerIs('Analyzer\\Variables\\IsModified')
+             ->raw('filter{ it.out.loop(1){true}{it.object.atom == "Variable"}.has("code",value).filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").any()}.any() == false}')
              ->back('first');
+//        $this->printQuery();
         $this->prepareQuery();
     }
 }
