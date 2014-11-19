@@ -247,7 +247,6 @@ class Appinfo extends \Report\Content {
             }
             
             if ($section == 'Extensions') {
-                print "Sorting\n";
                 $list = $this->list[$section];
                 uksort($this->list[$section], function ($ka, $kb) use ($list) {
                     if ($list[$ka] == $list[$kb]) {
