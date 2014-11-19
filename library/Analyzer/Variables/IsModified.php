@@ -96,9 +96,8 @@ class IsModified extends Analyzer\Analyzer {
                  ->inIs('ARGUMENT')
                  ->inIs('ARGUMENTS')
                  ->hasNoIn('METHOD') // possibly new too
-                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->fullnspath($functions)
                  ->back('first');
             $this->prepareQuery();
@@ -110,7 +109,7 @@ class IsModified extends Analyzer\Analyzer {
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->hasNoIn('METHOD') // possibly new too
-             ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIs('Functioncall')
              ->hasIn('NEW')
              ->classDefinition()
@@ -119,7 +118,7 @@ class IsModified extends Analyzer\Analyzer {
              ->analyzerIs('Analyzer\\Classes\\Constructor')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', true)
+             ->samePropertyAs('rank', 'rank')
              ->is('reference', 'true')
              ->back('first');
         $this->prepareQuery(); 
