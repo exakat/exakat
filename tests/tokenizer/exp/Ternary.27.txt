@@ -12,11 +12,9 @@ Label : CODE
     Label : THEN
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $b
+        ++
+        Label : POSTPLUSPLUS
+          $b
   Label : ELEMENT
     ?
     Label : CONDITION

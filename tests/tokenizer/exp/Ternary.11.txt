@@ -13,50 +13,48 @@ Label : CODE
     Label : BLOCK
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          return
-          Label : RETURN
-            ?
-            Label : CONDITION
-              >=
-              Label : RIGHT
-                0
-              Label : LEFT
-                (
-                Label : CODE
-                  =
-                  Label : RIGHT
-                    c
+        return
+        Label : RETURN
+          ?
+          Label : CONDITION
+            >=
+            Label : RIGHT
+              0
+            Label : LEFT
+              (
+              Label : CODE
+                =
+                Label : RIGHT
+                  c
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $d
+                      Label : PROPERTY
+                        e
+                Label : LEFT
+                  $b
+          Label : THEN
+            $f
+          Label : ELSE
+            ->
+            Label : OBJECT
+              $g
+            Label : METHOD
+              h
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : METHOD
+                    i
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $d
-                        Label : PROPERTY
-                          e
-                  Label : LEFT
-                    $b
-            Label : THEN
-              $f
-            Label : ELSE
-              ->
-              Label : OBJECT
-                $g
-              Label : METHOD
-                h
-                Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $this
-                    Label : METHOD
-                      i
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          "J"
-                  Label : ARGUMENT
-                    9
+                        "J"
+                Label : ARGUMENT
+                  9

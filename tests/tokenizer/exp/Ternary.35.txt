@@ -14,14 +14,14 @@ Label : ELEMENT
         Label : ELEMENT
           makeSequence T_OPEN_TAG
           Label : ELEMENT
-            ?
-            Label : CONDITION
-              makeSequence T_OPEN_TAG
-              Label : ELEMENT
-                echo
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ?
+                Label : CONDITION
+                  (
+                  Label : CODE
                     and
                     Label : LEFT
                       [
@@ -35,34 +35,36 @@ Label : ELEMENT
                         $d
                       Label : INDEX
                         'E'
-            Label : THEN
-              F
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'G'
-                  Label : CONCAT
-                    [
-                    Label : VARIABLE
-                      $e
-                    Label : INDEX
-                      'H'
-                Label : ARGUMENT
+                Label : THEN
+                  F
+                  Label : ARGUMENTS
+                    ,
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        'G'
+                      Label : CONCAT
+                        [
+                        Label : VARIABLE
+                          $e
+                        Label : INDEX
+                          'H'
+                    Label : ARGUMENT
+                      [
+                      Label : VARIABLE
+                        $f
+                      Label : INDEX
+                        'I'
+                Label : ELSE
                   [
                   Label : VARIABLE
-                    $f
+                    $g
                   Label : INDEX
-                    'I'
-            Label : ELSE
-              [
-              Label : VARIABLE
-                $g
-              Label : INDEX
-                'J'
+                    'J'
           Label : ELEMENT
             J
+          Label : ELEMENT
+            N
           Label : ELEMENT
             echo
             Label : ARGUMENTS
@@ -73,8 +75,6 @@ Label : ELEMENT
                   $i
                 Label : INDEX
                   'N'
-          Label : ELEMENT
-            N
           Label : ELEMENT
             L
           Label : ELEMENT
