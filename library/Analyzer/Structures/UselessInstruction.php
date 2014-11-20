@@ -34,6 +34,15 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->atomIs('Postplusplus')
              ->back('first');
         $this->prepareQuery();
+
+        // array_merge($a);
+        $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath(array('\\array_merge', '\\array_merge_recursive', '\\array_replace'))
+             ->atomIs('Postplusplus')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
