@@ -112,10 +112,10 @@ if (fullcode.getProperty('token') == 'T_NS_SEPARATOR') {
 
     if (fullcode.absolutens == 'true') {
         fullcode.setProperty('fullcode', "\\\\" + s.join("\\\\"));
-        fullcode.setProperty('code', "\\\\" + s.join("\\\\"));
+//        fullcode.setProperty('code', "\\\\" + s.join("\\\\"));
     } else {
         fullcode.setProperty('fullcode', s.join("\\\\"));
-        fullcode.setProperty('code', s.join("\\\\"));
+//        fullcode.setProperty('code', s.join("\\\\"));
     }
 } else {
     fullcode.setProperty('fullcode', it.getProperty('code'));
@@ -127,8 +127,6 @@ if (fullcode.getProperty('parenthesis') == 'true') {
     fullcode.setProperty('fullcode', it.getProperty('fullcode') + " " + it.out("ARGUMENTS").next().getProperty('fullcode') + "");
 }
 
-// count the number of arguments
-// filter out void ? 
 fullcode.setProperty("args_count", fullcode.out("ARGUMENTS").out("ARGUMENT").hasNot('token', 'T_VOID').count()); 
 
 GREMLIN;
