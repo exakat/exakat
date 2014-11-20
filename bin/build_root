@@ -81,7 +81,7 @@ function query($query, $retry = 1) {
     global $client;
     $params = array('type' => 'IN');
     try {
-        $GremlinQuery = new Gremlin\Query($client, $query, $params);
+        $GremlinQuery = new Query($client, $query, $params);
         return $GremlinQuery->getResultSet();
     } catch (Exception $e) {
         $fp = fopen('log/build_root.log', 'a');
