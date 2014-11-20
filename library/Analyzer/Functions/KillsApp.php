@@ -10,6 +10,8 @@ class KillsApp extends Analyzer\Analyzer {
         $this->atomIs("Function")
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
