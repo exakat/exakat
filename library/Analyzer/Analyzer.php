@@ -1321,14 +1321,16 @@ sideEffect{ loops = 1;}
         } else {
             it;
         } 
-    } else if (true) { name = it.code.toLowerCase();  
-                      g.idx('classes')[['path':it.in('METHOD').out('CLASS').next().fullnspath]].out('BLOCK').out('ELEMENT').has('atom', 'Function').out('NAME').filter{it.code.toLowerCase() == name }.next(); 
+    } else if (it.in('METHOD').any()) {  // case of Staticmethodcall or Propertycall
+                name = it.code.toLowerCase();  
+                g.idx('atoms')[['atom':'Class']].out('BLOCK').out('ELEMENT')
+                                    .has('atom', 'Function').out('NAME').filter{it.code.toLowerCase() == name }.next(); 
     } else { it; } 
 }.in('NAME')
 // calculating the path AND obtaining the arguments list
 .sideEffect{ while(x.last() >= loops) { x.pop(); x.pop();}; y = it.out('ARGUMENTS').out('ARGUMENT').filter{!x[-2].intersect([it.rank]).isEmpty() }.code.toList(); x += [y];  x += loops;}
 // find outgoing function
-.out('BLOCK').out.loop(1){true}{it.object.atom in ['Functioncall', 'Staticmethodcall'] && (it.object.in('METHOD').any() == false)}
+.out('BLOCK').out.loop(1){true}{it.object.atom in ['Functioncall', 'Staticmethodcall', 'Methodcall'] && (it.object.in('METHOD').any() == false)}
 .transform{ if (it.out('METHOD').any()) { it.out('METHOD').next(); } else { it; }}
 
 // filter with arguments that are relayed 
