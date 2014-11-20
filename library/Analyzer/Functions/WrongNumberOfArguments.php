@@ -15,7 +15,7 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
         
         $functions = $data->getFunctionsArgsInterval();
         $args_mins = array();
-        $args_max = array();
+        $args_maxs = array();
         
         foreach($functions as $function) {
             if ($function['args_min'] > 0) {
