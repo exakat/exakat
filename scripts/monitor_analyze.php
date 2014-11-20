@@ -9,7 +9,7 @@ array_shift($done);
 array_shift($done);
 
 foreach($done as $i => $v) {
-    list($a, $t, $n) = split("\t", trim($v));
+    list($a, $t,) = explode("\t", trim($v));
     $done[$i] = $a;
     $times[] = $t;
 }
