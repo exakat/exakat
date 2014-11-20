@@ -2228,8 +2228,8 @@ element2.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = " 
 /* while_to_block */  
 
-x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:'true', line:it.line, fullcode:' /**/ 
-/*, modifiedBy:'_While' */ ']);
+x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:'true', line:it.line, fullcode:' /**/ '
+/*, modifiedBy:'_While' */]);
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
