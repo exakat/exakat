@@ -465,7 +465,7 @@ Loop optimisation : anything in the loop that may be done outside?
 
 Spot methods that do not use $this (<- static ? )
 
-SPot : files direct access protecion (if (!defined()) { die('No direct access'); }
+SPot : files direct access protection (if (!defined()) { die('No direct access'); }
 
 Suggest a list of php.ini directive that should be watched ($_FILES => s file_uploads, upload_max_filesize, upload_tmp_dir, post_max_size et max_input_time dans php.ini)
 
@@ -482,5 +482,10 @@ dotnet
 
 Check on reference returning functions (they should be called with reference).
 
-Link references together
+Link referenced variables together
 
+Check on reference returning functions : are they well used received? 
+
+Evaluate the % of dynamic code in the code (% of tokens? Of variables? )
+
+Check that returning function are actually used. 
