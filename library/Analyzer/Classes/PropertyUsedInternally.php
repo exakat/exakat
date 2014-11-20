@@ -21,7 +21,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
              ->code('$this')
              ->inIs('OBJECT')
              ->outIs('PROPERTY')
-             ->outIsIE('VARIABLE')
+             ->outIsIE('VARIABLE') // for arrays
              ->samePropertyAs('code','propertyname')
              ->back('ppp');
         $this->prepareQuery();
