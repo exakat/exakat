@@ -94,7 +94,7 @@ class TokenAuto extends Token {
         $qactions = array();
 
         // @doc audit trail track
-        $qactions[] = "\n it.setProperty('modifiedBy', '".str_replace('Tokenizer\\', '', get_class($this))."'); \n";
+//        $qactions[] = "\n it.setProperty('modifiedBy', '".str_replace('Tokenizer\\', '', get_class($this))."'); \n";
 
         if (isset($actions['keepIndexed'])) {
             if(!$actions['keepIndexed']) {
@@ -1118,7 +1118,7 @@ semicolon.setProperty('code', 'Void');
 semicolon.setProperty('token', 'T_VOID');
 semicolon.setProperty('atom', 'Void');
 semicolon.setProperty('fullcode', ' ');
-semicolon.setProperty('modifiedBy', 'to_void');
+//semicolon.setProperty('modifiedBy', 'to_void');
 
 
 ";
@@ -1715,7 +1715,7 @@ if (c == 1) { // there is a list of argument in rank 0
         n = sub.out('$link').count();
 
         g.addEdge(sub, it.out('$link').has('rank', 1).next(), '$link');
-        it.out('$link').has('rank', 1).next().setProperty('rankedby', 'zero_is_multiple');
+//        it.out('$link').has('rank', 1).next().setProperty('rankedby', 'zero_is_multiple');
         it.out('$link').has('rank', 1).next().setProperty('rank', n);
         
         g.addEdge(it.in('NEXT').next(), sub, 'NEXT');
@@ -1729,7 +1729,7 @@ if (c == 1) { // there is a list of argument in rank 0
     }
 } else { // rank 0 is single
     if (d == 1) {
-        it.out('$link').has('rank', 0).next().setProperty('rankedby', 'one_is_multiple');
+//        it.out('$link').has('rank', 0).next().setProperty('rankedby', 'one_is_multiple');
         sub = it.out('$link').has('rank', 1).next();
         sub.out('$link').each{ it.setProperty( 'rank', it.rank + 1); };
 
@@ -1745,7 +1745,7 @@ if (c == 1) { // there is a list of argument in rank 0
 
     } else {
         // rank 1 and 0 are both singles : Nothing to do.
-        it.out('$link').each{ it.setProperty('rankedby', 'both_are_single')};
+//        it.out('$link').each{ it.setProperty('rankedby', 'both_are_single')};
         clean = it;
     }
 }
@@ -2205,7 +2205,8 @@ close_curly.bothE('NEXT').each{ g.removeEdge(it); }
         if (isset($actions['makeForeachSequence'])) {
             $qactions[] = " 
 /* make Foreach Sequence */ 
-block = g.addVertex(null, [code:'Block with Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, modifiedBy:'_Foreach', fullcode:'{ /**/ } ']);
+block = g.addVertex(null, [code:'Block with Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:'{ /**/ } '
+/*, modifiedBy:'_Foreach' */ ]);
 element1 = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 element2 = element1.out('NEXT').next();
 
@@ -2227,7 +2228,8 @@ element2.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = " 
 /* while_to_block */  
 
-x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:'true', line:it.line, modifiedBy:'_While', fullcode:' /**/  ']);
+x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:'true', line:it.line, fullcode:' /**/ 
+/*, modifiedBy:'_While' */ ']);
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
@@ -2639,7 +2641,8 @@ it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each {
             $qactions[] = " 
 /* create a functioncall, and hold the variable as property.  */  
 
-x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line, modifiedBy:'FunctionCall']);
+x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line
+/*, modifiedBy:'FunctionCall'*/ ]);
 g.addEdge(it, x, 'NAME');
 g.idx('atoms').put('atom', 'Variable', x);
                 ";
@@ -2652,7 +2655,8 @@ g.idx('atoms').put('atom', 'Variable', x);
             $qactions[] = " 
 /* hold the array as property.  */  
 
-x = g.addVertex(null, [code:it.code, fullcode: it.fullcode, atom:'Array', token:'T_OPEN_BRACKET', virtual:true, line:it.line, modifiedBy:'FunctionCallArray']);
+x = g.addVertex(null, [code:it.code, fullcode: it.fullcode, atom:'Array', token:'T_OPEN_BRACKET', virtual:true, line:it.line
+/*,  modifiedBy:'FunctionCallArray' */]);
 g.addEdge(it, x, 'NAME');
 g.idx('atoms').put('atom', 'Array', x);
                 ";
