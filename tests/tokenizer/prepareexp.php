@@ -3,8 +3,7 @@
 $args = $argv;
 
 if (count($args) < 2) {
-    print "Usage : prepareexp.php Test Number\n Aborting\n";
-//    die();
+    print "Building exp/* for all tests\n";
 }
 
 @$file = $argv[1];
@@ -24,7 +23,7 @@ if (empty($file)) {
     $diff = array_diff($sources, $exp);
     
     foreach($diff as $d) {
-        list($file, $d) = split('\\.', $d);
+        list($file, $d) = explode('.', $d);
         run($file, $d);
     }
 } elseif (empty($number)) {
