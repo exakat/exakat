@@ -78,6 +78,11 @@ class Config {
                                  '-sl'    => array('sl',        false),
                                  '-today' => array('today',     false),
                                  '-none'  => array('none',      false),
+                                 '-table' => array('table',     false),
+                                 '-json'  => array('json',      false),
+                                 '-text'  => array('text',      false),
+                                 '-o'     => array('output',    false),
+
                                  );
 
         foreach($options_boolean as $key => $config) {
