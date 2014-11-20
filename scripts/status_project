@@ -37,10 +37,22 @@ if (filesize('projects/'.$project.'/log/errors.log') == 191) {
 
 }
 
-$res = shell_exec('tail -n 1 projects/phplint/log/analyze.*.final.log| grep Done');
+$res = shell_exec('tail -n 1 projects/'.$project.'/log/analyze.*.final.log| grep Done');
 if ($res == "Done\nDone\nDone\nDone\nDone\n") {
     print "All analyzes were OK\n";
 } else {
+    $logs = array('analyze', 'appinfo', 'Coding_Conventions', 'Dead_code');
+    
+    foreach($logs as $log) {
+        $log_content = file_get_contents('projects/'.$project.'/log/analyze.'.$log.'.final.log');
+        if (trim(substr($log_content, -5)) != "Done") {
+            print 'projects/'.$project.'/log/analyze.'.$log.'.final.log is wrong'."\n";
+            preg_match('#\[\[\'analyzer\':\'Analyzer\\\\\\\\(.+?)\\\\\\\\(.+?)\'\]\]#s', $log_content, $r);
+            print "   php bin/analyzer -P $r[1]/$r[2] \n";
+        } else {
+            print 'projects/'.$project.'/log/analyze.'.$log.'.final.log is OK'."\n";
+        }
+    }
     print "Some analyzes are KO\n";
 }
 
