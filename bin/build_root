@@ -1,30 +1,17 @@
 #!/usr/bin/env php
 <?php
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Index\NodeIndex,
-	Everyman\Neo4j\Relationship,
-	Everyman\Neo4j\Node,
-	Everyman\Neo4j\Gremlin,
-	Tokenizer\Token;
+	Everyman\Neo4j\Gremlin\Query;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-if (in_array('-V', $argv)) {
-    define('DISPLAY', true);
-} else {
-    define('DISPLAY', false);
-}
-
-if ($id = array_search('-p', $argv)) {
-    $project = $argv[$id + 1];
-} else {
-    $project = 'None';
-}
+$config = Config::factory();
+$project = $config->project;
 
 $begin = microtime(true);
 $client = new Client();
-if (DISPLAY) print "Starting\n";
+if ($config->verbose) { print "Starting\n"; }
 
 file_put_contents('log/build_root.log', '');
 
@@ -34,7 +21,7 @@ $result = query("g.idx('racines')");
 if ($result->count() == 0) {
     query("g.createIndex('racines', Vertex)");
 }
-if (DISPLAY) print "created racines index\n";
+if ($config->verbose) { print "created racines index\n"; }
 
 logTime('g.idx("racines")');
 
@@ -44,12 +31,12 @@ query("g.createIndex('atoms', Vertex)");
 logTime('g.idx("atoms")');
 
 
-if (DISPLAY) print "g.idx('atoms') : filling\n";
+if ($config->verbose) { print "g.idx('atoms') : filling\n"; }
 $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
                                  'Rawstring', 'Variable', 'Float', 'Boolean', 'Void', 'File']}.each{ 
                                  g.idx('atoms').put('atom', it.atom, it); }";
 query($query);
-if (DISPLAY) print "g.idx('atoms') : filled\n";
+if ($config->verbose) { print "g.idx('atoms') : filled\n"; }
 logTime('g.idx("atom")[["atom":"******"]] : filling');
 
 // creating the neo4j Index
@@ -57,26 +44,26 @@ logTime('g.idx("atom")[["atom":"******"]] : filling');
 query("g.V.has('root', 'true').each{ g.idx('racines').put('token', 'ROOT', it); };");
 logTime('g.idx("ROOT")');
 
-if (DISPLAY) print "Indexing root done\n";
+if ($config->verbose) { print "Indexing root done\n"; }
 
 // special case for the initial Rawstring. 
 query("g.idx('racines')[['token':'ROOT']].has('atom','Sequence').each{ g.idx('atoms').put('atom', 'Sequence', it); };");
 logTime('g.idx("racines") ROOT special');
 
-if (DISPLAY) print "Creating index done\n";
+if ($config->verbose) { print "Creating index done\n"; }
 
 // creating the neo4j Index
 query("g.V.has('index', 'true').each{ g.idx('racines').put('token', it.token, it); };");
 logTime('g.idx("racines")[[token:***]] indexing');
 
-if (DISPLAY) print "Indexing racines done\n";
+if ($config->verbose) { print "Indexing racines done\n"; }
 
 // calculating the Unicode blocks
 query("g.idx('atoms')[['atom':'String']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
 query("g.idx('atoms')[['token':'Rawstring']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
 logTime('Unicodes block');
 
-if (DISPLAY) print "String unicode done\n";
+if ($config->verbose) { print "String unicode done\n"; }
 
 // resolving the constants
 $extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'delete', 'namespaces', 'files');
@@ -86,7 +73,7 @@ foreach($extra_indices as $indice) {
 }
 logTime('g.idx("last index")');
 
-if (DISPLAY) print "Creating index for constant, function and classes resolution.\n";
+if ($config->verbose) { print "Creating index for constant, function and classes resolution.\n"; }
 
 $end = microtime(true);
 
