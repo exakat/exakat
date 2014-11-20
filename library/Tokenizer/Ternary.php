@@ -43,7 +43,7 @@ class Ternary extends TokenAuto {
                                                                           Addition::$operators,    Concatenation::$operators,
                                                                           Not::$operators,         Noscream::$operators,
                                                                           _Instanceof::$operators, Property::$operators, 
-                                                                          Staticmethodcall::$operators),
+                                                                          Staticmethodcall::$operators)),
                                    -1 => array('atom'       => 'yes',
                                                'notAtom'    => 'Sequence'),
                                     0 => array('token'      => Ternary::$operators),
