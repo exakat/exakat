@@ -1,54 +1,24 @@
 #!/usr/bin/env php
 <?php
-use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Index\NodeIndex,
-	Everyman\Neo4j\Relationship,
-	Everyman\Neo4j\Node,
-	Everyman\Neo4j\Gremlin,
-	Tokenizer\Token;
+use Everyman\Neo4j\Client;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-
-$args = $argv;
-if ($id = array_search('-json', $args)) {
-    define('FORMAT', 'JSON');
-} elseif ($id = array_search('-text', $args)) {
-    define('FORMAT', 'TEXT');
-} elseif ($id = array_search('-table', $args)) {
-    define('FORMAT', 'TABLE');
-} else {
-    define('FORMAT', 'TEXT');
-}
-
-if ($id = array_search('-o', $args)) {
-    define('OUTPUT', $args[$id + 1]);
-} else {
-    define('OUTPUT', false);
-}
-
-if ($id = array_search('-f', $args)) {
-    $file = $args[$id + 1];
-    unset($args[$id]);
-    unset($args[$id + 1]);
-    
-    define('FILE', $file);
-} else {
-    define('FILE', false);
-}
+$config = Config::factory();
+$project = $config->project;
 
 $client = new Client();
 $stats = new Stats($client);
-if (FILE) {
-    $stats->setFileFilter(FILE);
+if ($config->filename) {
+    $stats->setFileFilter($config->filename);
 }
 $stats->collect();
 $stats = $stats->toArray();
 
-if (FORMAT == 'JSON') {
+if ($config->json) {
     $output = json_encode($stats);
-} elseif (FORMAT == 'TABLE') {
+} elseif ($config->table) {
     $output = table_encode($stats);
 } else {
     $output = text_encode($stats);
@@ -81,8 +51,8 @@ function text_encode($stats) {
     return $html;
 }
 
-if (OUTPUT) {
-    $fp = fopen(FILE, 'w+');
+if ($config->output) {
+    $fp = fopen($config->filename, 'w+');
     fwrite($fp, $output);
     fclose($fp);
 } else {
