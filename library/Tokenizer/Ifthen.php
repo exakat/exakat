@@ -139,6 +139,7 @@ class Ifthen extends TokenAuto {
         );
         
         $this->actions = array( 'to_block_ifelseif' => 3,
+                                'property'          => array('alternative' => 'true'),
                                 'keepIndexed'       => true);
         $this->checkAuto(); 
 
@@ -220,7 +221,11 @@ class Ifthen extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = "if " + fullcode.out("CONDITION").next().fullcode + " " + fullcode.out("THEN").next().fullcode;
+if (fullcode.alternative == 'true') {
+    fullcode.fullcode = "if " + fullcode.out("CONDITION").next().fullcode + " : " + fullcode.out("THEN").next().fullcode + 'endif';
+} else {
+    fullcode.fullcode = "if " + fullcode.out("CONDITION").next().fullcode + " " + fullcode.out("THEN").next().fullcode;
+}
 
 GREMLIN;
     }
