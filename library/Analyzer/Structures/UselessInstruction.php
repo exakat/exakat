@@ -40,7 +40,7 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath(array('\\array_merge', '\\array_merge_recursive', '\\array_replace'))
-             ->atomIs('Postplusplus')
+             ->isLess('args_count', 2)
              ->back('first');
         $this->prepareQuery();
     }
