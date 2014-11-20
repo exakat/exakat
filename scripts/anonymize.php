@@ -81,7 +81,6 @@ foreach($tokens as $t) {
             case T_NAMESPACE : 
             case T_IMPLEMENTS : 
             
-            case T_ARRAY_CAST : 
             case T_RETURN :
             case T_SWITCH : 
             case T_CASE : 
@@ -116,7 +115,6 @@ foreach($tokens as $t) {
             case T_BOOLEAN_AND :
             case T_IS_GREATER_OR_EQUAL :
             case T_BREAK : 
-            case T_CLASS_C : 
             case T_DEC :
             case T_DO :
             case T_FUNC_C :
@@ -156,7 +154,7 @@ foreach($tokens as $t) {
 
             case T_INCLUDE : 
             case T_INCLUDE_ONCE : 
-            case T_INCLUDE : 
+            case T_REQUIRE : 
             case T_REQUIRE_ONCE : 
 
             case T_TRAIT : 
