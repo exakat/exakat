@@ -8,9 +8,7 @@ class WrittenOnlyVariable extends Analyzer\Analyzer {
     
     public function dependsOn() {
         return array('Analyzer\\Variables\\IsModified',
-                     'Analyzer\\Variables\\IsRead',
-                     
-                     );
+                     'Analyzer\\Variables\\IsRead');
     }
     
     public function analyze() {
