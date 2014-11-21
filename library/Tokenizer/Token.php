@@ -435,14 +435,25 @@ g.idx('atoms')[['atom':'Interface']].sideEffect{fullcode = it;}.in.loop(1){!(it.
 
 g.idx('atoms')[['atom':'Functioncall']].filter{it.in('METHOD').any() == false}
                                        .filter{it.in('NEW').any() == false}
+                                       .filter{it.token in ['T_STRING', 'T_NS_SEPARATOR']}
                                        .sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}
 .each{ 
+    if (fullcode.token == 'T_NS_SEPARATOR') {
+        s = [];
+        fullcode.out('SUBNAME').sort{it.rank}._().each{ 
+            s.add(it.getProperty('code')); 
+        };
+        s = s.join('\\\\').toLowerCase();
+    } else { // T_STRING
+        s = it.code.toLowerCase();
+    }
+    
     if (fullcode.absolutens == 'true') { 
-        fullcode.setProperty('fullnspath', '' + fullcode.code.toLowerCase());
+        fullcode.setProperty('fullnspath', '\\\\' + s);
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
-        fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
+        fullcode.setProperty('fullnspath', '\\\\' + s);
     } else {
-        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
+        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + s);
     } 
 };
 
@@ -456,7 +467,9 @@ g.idx('atoms')[['atom':'Functioncall']]
     .each{
         it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
     }
+
 ", "
+
 // class usage
 g.idx('atoms')[['atom':'Staticmethodcall']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
@@ -480,6 +493,7 @@ g.idx('atoms')[['atom':'Staticmethodcall']].out('CLASS').sideEffect{fullcode = i
         };
     } 
 };
+
 ", "
 g.idx('atoms')[['atom':'Staticproperty']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
@@ -503,6 +517,7 @@ g.idx('atoms')[['atom':'Staticproperty']].out('CLASS').sideEffect{fullcode = it;
         };
     } 
 };
+
 ", "
 g.idx('atoms')[['atom':'Staticconstant']].out('CLASS').sideEffect{fullcode = it;}.in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}.each{ 
     if (fullcode.absolutens == 'true') { 
@@ -623,6 +638,7 @@ g.idx('atoms')[['atom':'Typehint']].out('CLASS').sideEffect{fullcode = it;}.in.l
 };
 
 ", "
+
 g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsname', 'Functioncall']}.sideEffect{fullcode = it;}
                               .filter{it.token in ['T_STRING', 'T_NS_SEPARATOR']}
                               .in.loop(1){!(it.object.atom in ['Namespace', 'File'])}{it.object.atom in ['Namespace', 'File']}
