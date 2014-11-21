@@ -6,12 +6,12 @@ namespace {
     use a\b\d as DefinedAlias;
     class DefinedClass {}
 
-    UndefinedClass::y();
     DefinedClass::y();
-    UndefinedAlias::y();
     DefinedAlias::y();
-    NonexistantAlias::y();
 
+    UndefinedClass::y();
+    UndefinedAlias::y();
+    NonexistantAlias::y();
 }
 
 namespace a\b {

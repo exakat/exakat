@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('new NonexistantAlias( )',
-                      'new UndefinedAlias( )',
+$expected     = array('new DefinedAliasUndefinedClass( )',
+                      'new NonexistantAlias( )',
                       'new UndefinedClass( )');
 
-$expected_not = array('new DefinedClass( )',
+$expected_not = array('new DefinedLocalClass( )',
                       'new DefinedAlias( )',
                       );
 

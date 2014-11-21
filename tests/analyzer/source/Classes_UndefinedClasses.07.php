@@ -2,16 +2,16 @@
 
 
 namespace {
-    use a\b\c as UndefinedAlias;
+    use a\b\c as DefinedAliasUndefinedClass;
     use a\b\d as DefinedAlias;
-    class DefinedClass {}
+    class DefinedLocalClass {}
 
-    new UndefinedClass();
-    new DefinedClass(); 
-    new UndefinedAlias();
+    new DefinedLocalClass(); 
     new DefinedAlias(); 
-    new NonexistantAlias(); 
 
+    new DefinedAliasUndefinedClass();
+    new NonexistantAlias(); 
+    new UndefinedClass();
 }
 
 namespace a\b {

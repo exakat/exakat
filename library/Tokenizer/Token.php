@@ -478,7 +478,7 @@ g.idx('atoms')[['atom':'Staticmethodcall']].out('CLASS').sideEffect{fullcode = i
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.fullcode.toLowerCase());
     } else {
         isDefault = true;
-        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias.toLowerCase() == fullcode.fullcode.toLowerCase()}.each{
+        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias.toLowerCase() == fullcode.code.toLowerCase()}.each{
             fullcode.setProperty('fullnspath', alias.fullnspath);
             fullcode.setProperty('aliased', 'true');
             isDefault = false;
@@ -646,8 +646,9 @@ g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
     
     if (fullcode.token == 'T_STRING') {
         isDefault = true;
-        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.has('alias', fullcode.code).each{
+        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.has('alias', fullcode.code.toLowerCase()).each{
             fullcode.setProperty('fullnspath', alias.fullnspath);
+            fullcode.setProperty('fullnspathsuresure', alias.fullnspath);
             fullcode.setProperty('aliased', 'true');
             isDefault = false;
         } ;
@@ -877,11 +878,11 @@ g.idx('atoms')[['atom':'Trait']].each{
 // apply use statement to all structures
 g.idx('atoms')[['atom':'Use']].out('USE').each{ 
     alias = it.alias.toLowerCase();
-    origin = it.originpath.toLowerCase();
+    fullnspath = it.fullnspath.toLowerCase();
 
     it.in('USE').in('ELEMENT').out().loop(1){true}{ it.object.fullnspath != null && it.object.atom != 'Use'}.each{ 
         if (alias == it.code.toLowerCase()) {
-            it.setProperty('fullsnpath', origin);
+            it.setProperty('fullnspath', fullnspath);
         } 
     }
 };
