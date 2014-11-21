@@ -10,7 +10,7 @@ function x() {
     $rw_var2 = 1;
     $other_wo_var = $rw_var2++ + 4;
     
-    $other_wo_var = $different_scopes;
+    $other_wo_var2 = $different_scopes;
 }
 
 $different_scopes = 2;
