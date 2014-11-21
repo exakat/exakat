@@ -20,7 +20,8 @@ class VariableUsedOnceByContext extends Analyzer\Analyzer {
              ->analyzerIsNot("Analyzer\\Variables\\InterfaceArguments")
              ->codeIsNot(VariablePhp::$variables, true)
              ->analyzerIsNot("Analyzer\\Variables\\VariableUsedOnceByContext")
-             ->eachCounted('code + "/" + it.method + "/" + it.class + "/" + it.namespace', 1);
+             ->fetchContext()
+             ->eachCounted('code + "/" + context.Function + "/" + context.Class + "/" + context.Namespace', 1);
         $this->prepareQuery();
     }
 }

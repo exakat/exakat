@@ -1303,6 +1303,12 @@ GREMLIN;
         
         return $this;
     }
+
+    public function fetchContext() {
+        $this->addMethod('sideEffect{ context = [:]; it.in.loop(1){true}{it.object.atom in ["Namespace", "Function", "Class"]}.each{ context[it.atom] = it.out("NAME", "NAMESPACE").next().code; }}');
+        
+        return $this;
+    }
     
     public function followConnexion( $iterations = 3) {
         //it.rank in x[-2] should be better than !x[-2].intersect([it.rank]).isEmpty() but this isn't working!!
