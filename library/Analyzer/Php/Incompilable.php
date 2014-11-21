@@ -46,7 +46,6 @@ class Incompilable extends Analyzer\Analyzer {
     public function hasResults() {
         $versions = array('53', '54', '55', '56');
         
-        $report = array();
         foreach($versions as $version) {
             $r = \Analyzer\Analyzer::$datastore->getRow('compilation'.$version);
             
