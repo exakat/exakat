@@ -1828,17 +1828,11 @@ x.out('ELEMENT').each{
         }
         
         if (isset($actions['to_block_foreach']) && $actions['to_block_foreach']) {
-            $sequence = new Block(Token::$client);
-            $fullcode = $sequence->fullcode();
-
             $qactions[] = " 
 /* to_block_foreach */  
 
-x = g.addVertex(null, [code:'Block with Foreach', fullcode:'Block with Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, line:it.line, block:'true']);
+x = g.addVertex(null, [code:'Block with Foreach', fullcode:'Block with Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, line:it.line, block:'true', fullcode:' /**/ ']);
 g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
-
-fullcode = x;
-$fullcode
 
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 

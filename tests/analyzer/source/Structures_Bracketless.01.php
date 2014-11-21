@@ -11,6 +11,17 @@ elseif (8)
 else 
     $elsenoblock++;
 
+if (24) 
+    { $ifnoblock++; }
+else if (25) 
+    { $elseifnoblock++; }
+else if (26) 
+    { $elseifnoblock++; }
+else if (28) 
+   { $elseifnoblock++; }
+else 
+   { $elsenoblock1++; }
+
 foreach($a2 as $b2) 
     $foreachnoblock++;
     
