@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('function __constructor ( ) { /**/ } ', 
-                      'function __destructor ( ) { /**/ }');
+                      'function __destructor ( ) { /**/ } ');
 
 $expected_not = array();
 
