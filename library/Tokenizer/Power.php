@@ -38,8 +38,6 @@ fullcode.setProperty('fullcode',  fullcode.out("LEFT").next().getProperty('fullc
 
 GREMLIN;
 
-
-GREMLIN;
     }
 }
 

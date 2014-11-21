@@ -17,6 +17,9 @@ class Bracketless extends Analyzer\Analyzer {
              ->outIs('ELSE')
              ->atomIs('Sequence')
              ->is('bracket', null)
+             ->outIs('ARGUMENT')
+             ->is('rank', 0)
+             ->atomIsNot('Ifthen')
              ->back('first');
         $this->prepareQuery();
 
