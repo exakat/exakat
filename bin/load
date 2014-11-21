@@ -33,8 +33,8 @@ if ($filename = $config->filename) {
     $nb_tokens = process_file($filename, $log, $client);
     $nb_files = 1;
 
-} elseif ($dirname = $config->dirname) {
-    $res = process_dir($dirname, $log, $client);
+} elseif ($dirName = $config->dirname) {
+    $res = process_dir($dirName, $log, $client);
     $nb_files = $res['files'];
     $nb_tokens = $res['tokens'];
     
@@ -99,8 +99,8 @@ function process_file($filename, $log_file, $client) {
 
     if (!$Php->compile($filename)) {
         // @todo store line error and the actual parse error.
-        $environnement = new Environnement($client, $file); 
-        $environnement->initFile();
+        $environment = new Environnement($client, $file); 
+        $environment->initFile();
         
         print "Ignoring file $filename as it won't compile\n";
         return false;
@@ -166,8 +166,8 @@ function process_file($filename, $log_file, $client) {
     }
 
     if (count($tokens) == 0) {
-        $environnement = new Environnement($client, $file); 
-        $environnement->initFile();
+        $environment = new Environnement($client, $file); 
+        $environment->initFile();
 
         print "Ignoring file $filename as it is empty\n";
         return false;
@@ -1104,15 +1104,14 @@ function process_colon($token_value) {
 }
 
 function query($query, $client) {
-    $params = array('type' => 'IN');
     try {
-        $GremlinQuery = new Gremlin\Query($client, $query, $params);
-        return $GremlinQuery->getResultSet();
+        $gremlinQuery = new Gremlin\Query($client, $query, array('type' => 'IN'));
+        return $gremlinQuery->getResultSet();
     } catch (Exception $e) {
-        $fp = fopen('log/build_root.log', 'a');
-        fwrite($fp, "Sleeping...\n");
-        fwrite($fp, $query."\n");
-        fclose($fp);
+        $filePointer = fopen('log/build_root.log', 'a');
+        fwrite($filePointer, "Sleeping...\n");
+        fwrite($filePointer, $query."\n");
+        fclose($filePointer);
         
         sleep(2);
         query($query);

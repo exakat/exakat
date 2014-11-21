@@ -369,7 +369,7 @@ g.removeVertex(var);
             $fullcode = $_global->fullcode();
 
             $sequence = new Sequence(Token::$client);
-            $sequence_fullcode = $sequence->fullcode();
+            $fullcode_sequence = $sequence->fullcode();
 
             $atom = $actions['to_global'];
             $qactions[] = "
@@ -405,7 +405,7 @@ var.inE('INDEXED').each{ g.removeEdge(it); }
 g.addEdge(g.idx('racines')[['token':'Sequence']].next(), var, 'INDEXED');   
 
 fullcode = var;
-$sequence_fullcode
+$fullcode_sequence
 
 ";
             unset($actions['to_global']);
@@ -2495,7 +2495,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $atom = $actions['make_quoted_string'];
             $class = "\\Tokenizer\\$atom";
             $string = new $class(Token::$client);
-            $fullcode2 = $string->fullcode();
+            $fullcode_string = $string->fullcode();
             
             $qactions[] = " 
 /* make_quoted_string */ 
@@ -2528,7 +2528,7 @@ fullcode = x;
 $fullcode
 
 fullcode = it;
-$fullcode2 
+$fullcode_string 
 
 /* Clean index */
 x.out('CONCAT').each{ 
