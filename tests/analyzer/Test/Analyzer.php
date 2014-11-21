@@ -44,9 +44,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $shell = 'cd ../..; php bin/load -q -p test -f tests/analyzer/source/'.$file.'.php';
         
         $res = shell_exec($shell);
-        $pos = strpos($res, "won't compile");
-        
-        if ($pos !== false) {
+        if (strpos($res, "won't compile") !== false) {
             $this->assertFalse(true, 'test '.$file.' can\'t compile with PHP version "'. ($phpversion).'", so no test is being run.');
         }
         
