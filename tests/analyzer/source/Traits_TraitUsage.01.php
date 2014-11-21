@@ -1,5 +1,9 @@
 <?php
 
+trait G {
+    function H() {  }
+}
+
 trait B {
     function C() {  }
     function D() {  }
