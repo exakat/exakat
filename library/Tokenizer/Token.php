@@ -445,7 +445,7 @@ g.idx('atoms')[['atom':'Functioncall']].filter{it.in('METHOD').any() == false}
         };
         s = s.join('\\\\').toLowerCase();
     } else { // T_STRING
-        s = it.code.toLowerCase();
+        s = fullcode.code.toLowerCase();
     }
     
     if (fullcode.absolutens == 'true') { 
@@ -457,6 +457,7 @@ g.idx('atoms')[['atom':'Functioncall']].filter{it.in('METHOD').any() == false}
     } 
 };
 
+", "
 // function usage
 // fallback for functions : if not defined, then fallback to \
 g.idx('atoms')[['atom':'Functioncall']]
