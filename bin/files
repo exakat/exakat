@@ -61,9 +61,10 @@ foreach($config->ignore_dirs as $ignore) {
     }
 }
 
-$shell = 'cd ./projects/'.$dir.'/code/; phploc '.(count($ignore_name) ? ' '.join(' --names-exclude ', $ignore_name).' ' : '')
-                                                .(count($ignore_dirs) ? ' '.join(' --exclude ', $ignore_dirs).' ' : '')
+$shell = 'cd ./projects/'.$dir.'/code/; phploc '.(count($ignore_name) ? ' --names-exclude  '.join(' --names-exclude ', $ignore_name).' ' : '')
+                                                .(count($ignore_dirs) ? ' --exclude '.join(' --exclude ', $ignore_dirs).' ' : '')
                                                 .' .';
+
 $res = shell_exec($shell);
 preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
 $stats['loc'] = $r[1];
