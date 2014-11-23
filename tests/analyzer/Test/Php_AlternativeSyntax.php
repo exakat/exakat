@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Php_AlternativeSyntax extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testPhp_AlternativeSyntax01()  { $this->generic_test('Php_AlternativeSyntax.01'); }
+    public function testPhp_AlternativeSyntax02()  { $this->generic_test('Php_AlternativeSyntax.02'); }
 }
 ?>

@@ -146,8 +146,11 @@ class _For extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-it.fullcode = "for(" + it.out("INIT").next().fullcode + " ; " + it.out("FINAL").next().fullcode + " ; " + it.out("INCREMENT").next().fullcode + ") " + it.out("BLOCK").next().fullcode;
-
+if (it.alternative == 'true') {
+    it.fullcode = "for(" + it.out("INIT").next().fullcode + " ; " + it.out("FINAL").next().fullcode + " ; " + it.out("INCREMENT").next().fullcode + ") : " + it.out("BLOCK").next().fullcode + ' endfor';
+} else {
+    it.fullcode = "for(" + it.out("INIT").next().fullcode + " ; " + it.out("FINAL").next().fullcode + " ; " + it.out("INCREMENT").next().fullcode + ") " + it.out("BLOCK").next().fullcode;
+}
 GREMLIN;
     }
 }
