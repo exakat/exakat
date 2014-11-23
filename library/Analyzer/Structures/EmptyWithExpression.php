@@ -6,6 +6,7 @@ use Analyzer;
 
 class EmptyWithExpression extends Analyzer\Analyzer {
     public function analyze() {
+        // $a = 2; empty($a) ; in a row
         $this->atomIs("Assignation")
              ->outIs('LEFT')
              ->savePropertyAs('code', 'storage')
@@ -13,8 +14,10 @@ class EmptyWithExpression extends Analyzer\Analyzer {
              ->nextSiblings()
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
+             ->tokenIs('T_EMPTY')
              ->fullnspath('\\empty')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
              ->samePropertyAs('code', 'storage')
              ->back('first');
         $this->prepareQuery();
