@@ -4,9 +4,12 @@ class Phpexec {
     private $phpexec = 'php';
     private $tokens  = array();
     private $config = array();
+    private $isCurrentVersion = false;
     
     public function __construct($phpversion) {
         $phpversion3 = substr($phpversion, 0, 3);
+        $this->isCurrentVersion = (substr(phpversion(), 0, 3) === $phpversion3);
+
         switch($phpversion3) {
             case '5.2' : 
                 $this->phpexec = 'php52';
@@ -36,17 +39,27 @@ class Phpexec {
                 $this->phpexec = 'php';
         }    
 
-
         // prepare the configuration
-        $res = shell_exec($this->phpexec.' -i');
-        preg_match('/short_open_tag => (\w+) => (\w+)/', $res, $r);
-        $this->config['short_open_tag'] = $r[2] == 'On';
+        if ($this->isCurrentVersion){
+            $shortTags = ini_get('short_open_tag');
+        } else {
+            $res = shell_exec($this->phpexec.' -i');
+            preg_match('/short_open_tag => (\w+) => (\w+)/', $res, $r);
+            $shortTags = $r[2] == 'On';
+        }
+        $this->config['short_open_tag'] = $shortTags ? 'On' : 'Off';
 
-        shell_exec($this->phpexec.' -r "print \'<?php \\$this->tokens = \'; \\$x = get_defined_constants(true); var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > /tmp/tokennames.php');
-        include('/tmp/tokennames.php');
-        unlink('/tmp/tokennames.php');
-
-        // prepare the tokens
+        if ($this->isCurrentVersion) {
+            $x = get_defined_constants(true);
+            $this->tokens = array_flip($x['tokenizer']);
+        } else {
+            $tmpFile = tempnam("/tmp", "Phpexec");
+            shell_exec($this->phpexec.' -r "print \'<?php \\$this->tokens = \'; \\$x = get_defined_constants(true); var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > '.$tmpFile);
+            include($tmpFile);
+            unlink($tmpFile);
+        }
+        
+        // prepare extra tokens
         $tphp = array(";" => 'T_SEMICOLON',
                       "=" => 'T_EQUAL',
                       "+" => 'T_PLUS',
@@ -80,9 +93,7 @@ class Phpexec {
                       '`_CLOSE' => 'T_SHELL_QUOTE_CLOSE',
                       '~' => 'T_TILDE',
                       );
-            foreach($tphp as $k => $v) {
-               $this->tokens[$k] = $v; 
-            }
+        $this->tokens += $tphp;
     }
     
     public function getTokenName($token) {
@@ -90,19 +101,26 @@ class Phpexec {
     }
     
     public function getTokenFromFile($file) {
-        $tmpFile = tempnam("/tmp", "Phpexec");
-        shell_exec($this->phpexec.' -r "print \'<?php \\$tokens = \'; var_export(token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); print \'; ?>\';" > '.$tmpFile);
-        include($tmpFile);
-        unlink($tmpFile);
+        if ($this->isCurrentVersion) {
+            $tokens = token_get_all(file_get_contents(str_replace('$', '\\\$', $file)));
+        } else {
+            $tmpFile = tempnam("/tmp", "Phpexec");
+            shell_exec($this->phpexec.' -r "print \'<?php \\$tokens = \'; var_export(token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); print \'; ?>\';" > '.$tmpFile);
+            include($tmpFile);
+            unlink($tmpFile);
+        }
         
         return $tokens;
     }
 
     public function countTokenFromFile($file) {
-        $tmpFile = tempnam("/tmp", "Phpexec");
-        $res = shell_exec($this->phpexec.' -r "print count(token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); ?>" ');
+        if ($this->isCurrentVersion) {
+            $res = count(token_get_all(file_get_contents(str_replace('$', '\\\$', $file))));
+        } else {
+            $res = (int) shell_exec($this->phpexec.' -r "print count(token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); ?>" ');
+        }
         
-        return (int) $res;
+        return $res;
     }
     
     public function getExec() {
