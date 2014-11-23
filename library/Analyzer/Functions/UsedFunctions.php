@@ -20,11 +20,12 @@ class UsedFunctions extends Analyzer\Analyzer {
             }
         }
         
+        // callable is in # position
         $positions = array(0, 1, 2, 3, 4, 5, 6);
         foreach($positions as $position) {
             $this->atomIs("Functioncall")
                  ->hasNoIn('METHOD')
-                 ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->fullnspath($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
@@ -35,9 +36,10 @@ class UsedFunctions extends Analyzer\Analyzer {
             $this->prepareQuery();
         }
 
+        // callable is in last
         $this->atomIs("Functioncall")
              ->hasNoIn('METHOD')
-             ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath($ini['functions_last'])
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -47,9 +49,10 @@ class UsedFunctions extends Analyzer\Analyzer {
              ->ignore();
         $this->prepareQuery();
 
+        // callable is in 2nd to last
         $this->atomIs("Functioncall")
              ->hasNoIn('METHOD')
-             ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath($ini['functions_2last'])
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')

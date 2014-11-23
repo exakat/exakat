@@ -35,7 +35,7 @@ class IsModified extends Analyzer\Analyzer {
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->hasNoIn('METHOD') // possibly new too
-             ->atomIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
              ->inIs('NAME')
              ->outIs('ARGUMENTS')
