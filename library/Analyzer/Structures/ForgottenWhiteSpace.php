@@ -16,7 +16,7 @@ class ForgottenWhiteSpace extends Analyzer\Analyzer {
         $this->atomIs("Sequence")
              ->is('root', 'true')
              ->outIs('ELEMENT')
-             ->hasRank('last')
+             ->hasRank('last', 'ELEMENT')
              ->regex('code', '^\\\\s+\\$');
         $this->prepareQuery();
     }

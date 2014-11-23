@@ -586,13 +586,13 @@ GREMLIN;
         return $this;
     }
 
-    function hasRank($value = "0") {
+    function hasRank($value = "0", $link = 'ARGUMENT') {
         if ($value == 'first') {
             $this->addMethod("has('rank','0')");
-        } elseif ($value == 'last') {
-            $this->addMethod("filter{it.rank == it.in('ARGUMENT').out('ARGUMENT').count() - 1}");
-        } elseif ($value == '2last') {
-            $this->addMethod("filter{it.rank == it.in('ARGUMENT').out('ARGUMENT').count() - 2}");
+        } elseif ($value === 'last') {
+            $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 1}");
+        } elseif ($value === '2last') {
+            $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 2}");
         } else {
             $this->addMethod("filter{it.rank == ***}", abs(intval($value)));
         }
