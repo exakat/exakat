@@ -14,11 +14,13 @@ class StaticMethodsCalledFromObject extends Analyzer\Analyzer {
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->raw("filter{ x = it;  g.idx('atoms')[['atom':'Function']].
-                                         filter{it.code.toLowerCase() == x.code.toLowerCase()}.
-                                         filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\MethodDefinition').any()}.
-                                         filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\StaticMethods').any()}.
-                                         any() }")
+                                         out('NAME')
+                                         .filter{it.code.toLowerCase() == x.code.toLowerCase()}
+                                         .filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\MethodDefinition').any()}
+                                         .filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\StaticMethods').any()}
+                                         .any() }")
              ->back('first');
+        $this->prepareQuery();
     }
 }
 

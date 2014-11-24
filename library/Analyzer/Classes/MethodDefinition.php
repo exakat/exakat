@@ -7,6 +7,7 @@ use Analyzer;
 class MethodDefinition extends Analyzer\Analyzer {
 
     public function analyze() {
+        // class with one method only
         $this->atomIs(array("Class", 'Trait'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -14,6 +15,7 @@ class MethodDefinition extends Analyzer\Analyzer {
              ->outIs('NAME');
         $this->prepareQuery();
 
+        // class with one method only (so no sequence... possible?)
         $this->atomIs(array("Class", 'Trait'))
              ->outIs('BLOCK')
              ->atomIs('Function')
