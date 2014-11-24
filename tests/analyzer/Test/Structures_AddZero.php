@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_AddZero extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testStructures_AddZero01()  { $this->generic_test('Structures_AddZero.01'); }
+    public function testStructures_AddZero02()  { $this->generic_test('Structures_AddZero.02'); }
 }
 ?>
