@@ -20,7 +20,9 @@ class KillsApp extends Analyzer\Analyzer {
         $this->atomIs("Function")
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
+             ->inIs('NAME')
              ->analyzerIs('Analyzer\\Functions\\KillsApp')
              ->back('first');
         $this->prepareQuery();
