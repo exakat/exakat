@@ -29,7 +29,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->back('method');
         $this->prepareQuery();
 
-        // property used in a static methodcall static::b()
+        // property used in a static methodcall static::b() or self
         $this->atomIs("Class")
              ->outIs('BLOCK')
              ->outIs('ELEMENT')

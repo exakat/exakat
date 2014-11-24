@@ -5,6 +5,7 @@ class x {
     private function privatema() {}
     private static function privatemsself() {}
     private static function privatepmstatic() {}
+
     private function privateUnused() {}
     public function publicp() {}
     
@@ -12,8 +13,8 @@ class x {
         $this->privatem();
         $this->privatema(3);
         
-        self::privatepmself();
-        static::privatemsstatic();
+        self::privatemsself();
+        static::privatepmstatic();
     }
 }
 ?>
