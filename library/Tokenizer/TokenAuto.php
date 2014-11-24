@@ -2095,6 +2095,7 @@ p = a;
             ";
             unset($actions['makeMethodCall']);
         }
+        
         if (isset($actions['caseDefaultSequence'])) {
             $qactions[] = <<<GREMLIN
  /* caseDefaultSequence */   
@@ -2140,7 +2141,7 @@ p = a;
             it.bothE('NEXT').each{ g.removeEdge(it); }
     } else {
         // no caseDefaultSequence anywhere
-        cds = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', virtual:true, line:it.line, fullcode:'{ /**/ }']);
+        cds = g.addVertex(null, [code:'Sequence Case Default', atom:'SequenceCaseDefault', token:'T_SEQUENCE_CASEDEFAULT', virtual:true, line:it.line, fullcode:' /**/ ']);
 
         it.setProperty('rank', 0);
 

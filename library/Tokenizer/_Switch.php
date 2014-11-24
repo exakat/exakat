@@ -45,6 +45,7 @@ class _Switch extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
         $this->checkAuto();
+
         // alternative syntax
         $this->conditions = array(0 => array('token' => _Switch::$operators,
                                              'atom'  => 'none'),
@@ -77,7 +78,7 @@ class _Switch extends TokenAuto {
 if (it.alternative == 'true') {
     it.setProperty('fullcode', "switch (" + it.out("NAME").next().fullcode + ") : " + it.out("CASES").next().getProperty('fullcode') + ' endswitch'); 
 } else {
-    it.setProperty('fullcode', "switch (" + it.out("NAME").next().fullcode + ") " + it.out("CASES").next().getProperty('fullcode') + ' '); 
+    it.setProperty('fullcode', "switch (" + it.out("NAME").next().fullcode + ") {" + it.out("CASES").next().getProperty('fullcode') + '} '); 
 
 }
 
