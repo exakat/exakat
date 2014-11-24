@@ -7,4 +7,4 @@ $expected     = array('UndefinedClass::y( )',
 $expected_not = array('DefinedAlias::y( )', 
                       'DefinedClass::y( )');
 
-?> 
+?>
