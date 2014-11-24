@@ -14,13 +14,6 @@ class MethodDefinition extends Analyzer\Analyzer {
              ->atomIs('Function')
              ->outIs('NAME');
         $this->prepareQuery();
-
-        // class with one method only (so no sequence... possible?)
-        $this->atomIs(array("Class", 'Trait'))
-             ->outIs('BLOCK')
-             ->atomIs('Function')
-             ->outIs('NAME');
-        $this->prepareQuery();
     }
 }
 
