@@ -64,6 +64,7 @@ class Appinfo extends \Report\Content {
                             'ext/pgsql'      => 'Extensions/Extpgsql',
                             'ext/phar'       => 'Extensions/Extphar',
                             'ext/posix'      => 'Extensions/Extposix',
+                            'ext/pspell'     => 'Extensions/Extpspell',
                             'ext/readline'   => 'Extensions/Extreadline',
                             'ext/redis'      => 'Extensions/Extredis',
                             'ext/reflexion'  => 'Extensions/Extreflexion',
