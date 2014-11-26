@@ -410,7 +410,12 @@ function process_file($filename, $log_file, $client) {
                       is_array($tokens[$id + 1]) && 
                       $Php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
                       
-                if ($previous->getProperty('code') == ':') {
+                if ($previous->getProperty('code') == ':' || 
+                   ($previous->getProperty('code') == '{' && 
+                    isset($tokens[$id + 2]) && 
+                    is_string($tokens[$id + 2]) && 
+                    $tokens[$id + 2] == '}')
+                   ) {
                     $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
                                                   ->setProperty('code', 'void')
                                                   ->setProperty('fullcode', ' ')
