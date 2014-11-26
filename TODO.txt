@@ -17,10 +17,6 @@ Prepare documentation
 
 Cooccurences : structures that are next to each other in sequences.
 
-Support environnment information : 
-file, namespace, class, method.
-Add link information (indexed, location, normal).
-
 Analyzers
 + Interpret values and have a dictionary of special meaning : 22 => port, 86400 => day list, etc.
 + Make a list of files and extensions along the way
@@ -83,13 +79,13 @@ Export data collected in mysql to a graph
 Namespace inventory as a tree.
 Mention file extensions/list used for testing in audit information
 
-Check Try, and add an indexClean when we reach the end of the catchs.
-Exécuter les scripts une fois par heure, après peu de modifications. 
-Spot fluid interfaces
-
 Spot useless extension (and suggest removing them). : how to know which extensions ? WOrk on default PHP conf. 
-Test rapide sur un seul file (Exclure les analyses impossibles).
-Identify languages in UTF8 strings by spoting the unicode groups (http://en.wikipedia.org/wiki/Unicode_block)
+Faire la liste des extensions standards de PHP (et donc, celles non standards)
+
+
+Create a quick analysis, for one file only (exclude some application wide analysis).
+Mark analyzers as file or application wide analyzer. 
+
 Spot classes with too many constants (they cost memory)
 Suppress all g.V and make this at least some Index
 Spot overwritten class constants.
@@ -98,14 +94,11 @@ Marquer les analyzers non fait comme tel (pas indexistants)
 Check for unqualified names of classes : they shouldn't be too generic.
 List Nsnames aliases and overlap
 
-Faire la liste des extensions standards de PHP (et donc, celles non standards)
-Mark analyzers as file or application wide analyzer. 
 
 Make the php script idempotent (can be run again and finish the job, leave a note where it left...)
 Spot function that are defined with php-function names (also spot overwriting).
 Faire un dashboard avec les indicateurs du projet lui-même : manquent de tests, manques de traductions / documentations.
 
-Check for size of ODT: 
 Aliases : Classes that extends others, but do no overloading; 
 
 functions that returns one call of other function
@@ -465,7 +458,7 @@ Loop optimisation : anything in the loop that may be done outside?
 
 Spot methods that do not use $this (<- static ? )
 
-SPot : files direct access protection (if (!defined()) { die('No direct access'); }
+SPot : files direct access protection (defined('_JEXEC') or die('Restricted access') }
 
 Suggest a list of php.ini directive that should be watched ($_FILES => s file_uploads, upload_max_filesize, upload_tmp_dir, post_max_size et max_input_time dans php.ini)
 
@@ -473,8 +466,6 @@ Add a list of directive spotted in the code
 
 Finishes the following standard extensions : 
 recode
-pspell
-opcache
 interbase
 gettext
 dotnet
@@ -489,3 +480,20 @@ Check on reference returning functions : are they well used received?
 Evaluate the % of dynamic code in the code (% of tokens? Of variables? )
 
 Check that returning function are actually used. 
+
+Fatal error: Cannot increment/decrement overloaded objects nor string offsets in /Users/famille/Desktop/analyze/scripts/spelling on line 48
+Can we detect that? 
+
+Find uninitialised variables (read first, then written (or not))
+
+Add support for traits when searching for properties/methods/constants….
+
+Remove require when installing with composer (no need to download everything...)
+
+if(in_array('malicious', array('a','b','c',0,1,2,3))) echo 'ok'; (in_array with integers will be erroneous...)
+
+defined('AJXP_EXEC') or die('Access not allowed'); : Constant used!
+
+Mettre logo 
+
+
