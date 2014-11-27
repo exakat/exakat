@@ -44,12 +44,14 @@ $project_run = $db->insert_id();
 
 logTime('Database');
 
+$db = new Db('wordpress');
+
 $progress = 1;
 $total_steps = 9 / 100; // number of usage of logProgress - 1
 logProgress($project, $progress++ / $total_steps);
 
 shell_exec('sh scripts/clean.sh'); // or php bin/delete
-logProgress($project, $progress++ / $total_steps);
+$db->logProgress($project, $progress++ / $total_steps);
 
 logTime('Clean');
 
@@ -59,7 +61,7 @@ shell_exec('php bin/files -p '.$project);
 logTime('Files');
 
 shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/ -p '.$project.'');
-logProgress($project, $progress++ / $total_steps);
+$db->logProgress($project, $progress++ / $total_steps);
 print "Project loaded\n";
 logTime('Loading');
 
@@ -89,13 +91,13 @@ shell_exec('php bin/export_tree; mv log/network.* ./projects/'.$project.'/log/ '
 print "Getting the tree\n";
 
 shell_exec('php bin/stat > ./projects/'.$project.'/log/stat.log');
-logProgress($project, $progress++ / $total_steps);
+$db->logProgress($project, $progress++ / $total_steps);
 print "Stats\n";
 
 shell_exec('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
 
 logTime('Stats');
-logProgress($project, $progress++ / $total_steps);
+$db->logProgress($project, $progress++ / $total_steps);
 
 if (file_exists('./projects/'.$project.'/log/analyze.final.log')) {
     unlink('./projects/'.$project.'/log/analyze.final.log');
@@ -107,29 +109,23 @@ foreach($themes as $theme) {
     print "Analyzing $theme\n";
 }
 
-logProgress($project, $progress++ / $total_steps);
+$db->logProgress($project, $progress++ / $total_steps);
 print "Project analyzed\n";
 logTime('Analyze');
 
 shell_exec('php bin/report_all '.$project);
 logTime('Report');
 
-logProgress($project, $progress++ / $total_steps);
+$db->logProgress($project, $progress++ / $total_steps);
 
 print "Project reported\n";
 
 shell_exec('php bin/stat > ./projects/'.$project.'/log/stat.log');
-logProgress($project, $progress++ / $total_steps);
+$db->logProgress($project, $progress++ / $total_steps);
 print "Stats 2\n";
 
 $db->query('UPDATE project_runs SET `date_finish` = '.date('Y-m-d H:i:s').' WHERE id = '.$project_run);
 logTime('Final');
-
-function logProgress($project, $percent) {
-    $mid = mysqli_connect('127.0.0.1', 'wordpress', 'wordpress', 'wordpress');
-    mysqli_query($mid, "UPDATE exakat_projects SET progress = $percent WHERE name='$project'");
-    print mysqli_error($mid);
-}
 
 function logTime($step) {
     static $log, $begin, $end, $start;
