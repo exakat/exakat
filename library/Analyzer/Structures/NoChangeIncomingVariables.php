@@ -6,9 +6,10 @@ use Analyzer;
 
 class NoChangeIncomingVariables extends Analyzer\Analyzer {
     public function analyze() {
-        $incoming_variables = array('$_GET','$_POST','$_REQUEST','$_COOKIE','$_FILES',
-                                    '$_SESSION', '$_ENV', '$_SERVER',
+        $incoming_variables = array('$_GET','$_POST','$_REQUEST','$_FILES',
+                                    '$_ENV', '$_SERVER',
                                     '$PHP_SELF','$HTTP_RAW_POST_DATA'); 
+        //'$_COOKIE', '$_SESSION' : those are OK
         
         // full array unset($_GET);
         $this->atomIs('Functioncall')
@@ -60,6 +61,17 @@ class NoChangeIncomingVariables extends Analyzer\Analyzer {
         // assignation index $_FILES['level1']
         $this->atomIs('Assignation')
              ->outIs('LEFT')
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->code($incoming_variables)
+             ->back('first');
+        $this->prepareQuery();
+
+        // assignation index $_FILES['level1'][]
+        $this->atomIs('Assignation')
+             ->outIs('LEFT')
+             ->atomIs('Arrayappend')
+             ->outIs('VARIABLE')
              ->atomIs('Array')
              ->outIs('VARIABLE')
              ->code($incoming_variables)

@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$_COOKIE = array( )', 
+$expected     = array('$_SERVER = array( )', 
                       '$_ENV[\'a\'] += 2', 
                       '$_FILES[\'b\'][\'3\'] .= 4',
                       'unset($_GET)',
