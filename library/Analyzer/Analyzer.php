@@ -1406,8 +1406,8 @@ GREMLIN
         array_splice($this->methods, 2, 0, array('as("first")'));
         $query = join('.', $this->methods);
         
-        if ($this->methods[1] == 'has("atom", arg0)') {
-            $query = "g.idx('atoms')[['atom':'{$this->arguments['arg0']}']].{$query}";
+        if ($this->methods[1] == 'has("atom", arg1)') {
+            $query = "g.idx('atoms')[['atom':'{$this->arguments['arg1']}']].{$query}";
         } else {
             $query = "g.V.{$query}";
         }
