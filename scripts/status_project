@@ -44,6 +44,10 @@ if ($res == "Done\nDone\nDone\nDone\nDone\n") {
     $logs = array('analyze', 'appinfo', 'Coding_Conventions', 'Dead_code');
     
     foreach($logs as $log) {
+        if (!file_exists('projects/'.$project.'/log/analyze.'.$log.'.final.log')) {
+            print 'analyze.'.$log.".final.log not yet here\n";
+            continue 1;
+        }
         $log_content = file_get_contents('projects/'.$project.'/log/analyze.'.$log.'.final.log');
         if (trim(substr($log_content, -5)) != "Done") {
             print 'projects/'.$project.'/log/analyze.'.$log.'.final.log is wrong'."\n";
