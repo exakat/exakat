@@ -263,6 +263,7 @@ function process_file($filename, $log_file, $client) {
     $in_for = 0;
     $dowhiles = array();
     $block_level = 0;
+    $regex = Tokenizer\Token::getTokenizers(); 
     
     for($id = 0; $id < $nb; $id++) {
         if (empty($tokens[$id])) { continue; }
@@ -1012,7 +1013,6 @@ function process_file($filename, $log_file, $client) {
 
         // test is for booleans. 
         if ($to_index) {
-            $regex = Tokenizer\Token::getTokenizers(); 
             foreach($regex as $r) {
                 $class = "Tokenizer\\$r";
                 if (in_array($token_value, $class::$operators)) { 
