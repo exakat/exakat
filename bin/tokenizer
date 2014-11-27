@@ -171,7 +171,6 @@ while(check_prev($prev, $extra_rounds)) {
         display( "$round) All $total tokens have been processed! \n");
         break 1;
     }
-    
 }
 
 $wend = microtime(true);
@@ -196,19 +195,6 @@ function check_prev($prev, $extra_rounds) {
         $b = $b || ($prev[$i + 1] > $prev[$i]);
     }
     return $b;
-}
-
-function array_flatten($array, $level = 1) {
-    $r = array();
-    
-    foreach($array as $a) {
-        if ($level > 1 && is_array($a)) {
-            $a = array_flatten($a, $level - 1);
-        }
-        $r = array_merge($r, $a);
-    }
-    
-    return $r;
 }
 
 function display($message) {
