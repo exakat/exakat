@@ -1,58 +1,36 @@
-#!/usr/bin/env php
+bb#!/usr/bin/env php
 <?php
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Index\NodeIndex,
-	Everyman\Neo4j\Relationship,
-	Everyman\Neo4j\Node,
-	Everyman\Neo4j\Gremlin,
-	Analyzer\Common\Type;
+	Everyman\Neo4j\Index\NodeIndex;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$args = $argv;
 $begin = microtime(true);
+$config = new Config();
 
-if ($id = array_search('-v', $args)) {
-    define('VERBOSE', true);
-} else {
-    define('VERBOSE', false);
+$project = $config->program;
+if (!file_exists('./projects/'.$project.'/config.ini')) {
+    print "No such project as '$project'. Aborting\n";
+    die();
 }
 
-if ($id = array_search('-P', $args)) {
-    $analyzer = $args[$id + 1];
+if (isset($config->program)) {
+    $analyzer = $config->program;
     if (Analyzer\Analyzer::getClass($analyzer)) {
         $analyzers_class = array($analyzer);
     } else {
         die("No such class as '$analyzer'. Aborting\n");
     }
-    
-    if ($id = array_search('-p', $args)) {
-        $project = $args[$id + 1];
-
-        if (!file_exists('./projects/'.$project.'/config.ini')) {
-            print "No such project as '$project'. Aborting\n";
-            die();
-        }
-    } else {
-        $project = 'default';
-    }
-} elseif ($id = array_search('-p', $args)) {
-    $project = $args[$id + 1];
-
-    if (!file_exists('./projects/'.$project.'/config.ini')) {
-        print "No such project as '$project'. Aborting\n";
-        die();
-    }
 } elseif ($id = array_search('-T', $args)) {
-    $project = '';
-    $analyzer = $args[$id + 1];
-    if (!$analyzers_class = Analyzer\Analyzer::getThemeAnalyzers($analyzer)) {
+    $thema = $config->thema;
+
+    if (!$analyzers_class = Analyzer\Analyzer::getThemeAnalyzers($thema)) {
         die("No such class as $analyzer. Aborting\n");
     }
-    $project = 'default';
 } else {
-    $project = 'default';
+    print "Usage :php bin/analyze -P <One_rule> -T <Thema> -p <project>\n";
+    die();
 }
 
 $client = new Client();

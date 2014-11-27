@@ -98,6 +98,8 @@ class Config {
         $options_value   = array('-f' => array('filename', null),
                                  '-d' => array('dirname',  null),
                                  '-p' => array('project',  'default'),
+                                 '-P' => array('program',  null),
+                                 '-T' => array('thema',    null),
 //                                 '-q' => array('loader',   'Load\Csv'),
                                  );
 
