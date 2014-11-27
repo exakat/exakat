@@ -9,27 +9,29 @@ spl_autoload_register('Autoload::autoload_library');
 $begin = microtime(true);
 $config = Config::factory();
 
-$project = $config->program;
+$project = $config->project;
 if (!file_exists('./projects/'.$project.'/config.ini')) {
     print "No such project as '$project'. Aborting\n";
     die();
 }
 
-if (isset($config->program)) {
+print_r($config);
+
+if ($config->program !== null) {
     $analyzer = $config->program;
     if (Analyzer\Analyzer::getClass($analyzer)) {
         $analyzers_class = array($analyzer);
     } else {
         die("No such class as '$analyzer'. Aborting\n");
     }
-} elseif ($id = array_search('-T', $args)) {
+} elseif ($config->thema !== null) {
     $thema = $config->thema;
 
     if (!$analyzers_class = Analyzer\Analyzer::getThemeAnalyzers($thema)) {
         die("No such class as $analyzer. Aborting\n");
     }
 } else {
-    print "Usage :php bin/analyze -P <One_rule> -T <Thema> -p <project>\n";
+    print "Usage :php bin/analyze -P <One/rule> -T <\"Thema\"> -p <project>\n";
     die();
 }
 

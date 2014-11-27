@@ -30,6 +30,10 @@ class Config {
         
         return Config::$singleton;
     }
+
+    public function __isset($name) {
+        return isset($this->options[$name]);
+    }
     
     public function __get($name) {
         if (isset($this->options[$name])) {
