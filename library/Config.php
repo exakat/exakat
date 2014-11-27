@@ -52,6 +52,10 @@ class Config {
     }
 
     private function read_project_config($project) {
+        if (!file_exists('./projects/'.$project.'/config.ini')) {
+            return null;
+        }
+        
         $this->project_config = parse_ini_file('./projects/'.$project.'/config.ini');
         
         // check and default values
@@ -62,6 +66,8 @@ class Config {
                 $this->project_config[$name] = $value;
             }
         }
+        
+        return null;
     }
 
     private function read_commandline() {
