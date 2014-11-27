@@ -31,6 +31,7 @@ class IsExtConstant extends Analyzer\Analyzer {
         
         $this->analyzerIs("Analyzer\\Constants\\ConstantUsage")
              ->code($constants);
+        $this->prepareQuery();
     }
 }
 
