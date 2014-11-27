@@ -1,4 +1,4 @@
-bb#!/usr/bin/env php
+#!/usr/bin/env php
 <?php
 use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Index\NodeIndex;
@@ -7,7 +7,7 @@ include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
 $begin = microtime(true);
-$config = new Config();
+$config = Config::factory();
 
 $project = $config->program;
 if (!file_exists('./projects/'.$project.'/config.ini')) {
