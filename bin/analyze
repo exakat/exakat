@@ -15,8 +15,6 @@ if (!file_exists('./projects/'.$project.'/config.ini')) {
     die();
 }
 
-print_r($config);
-
 if ($config->program !== null) {
     $analyzer = $config->program;
     if (Analyzer\Analyzer::getClass($analyzer)) {
