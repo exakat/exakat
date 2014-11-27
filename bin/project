@@ -48,7 +48,7 @@ $db = new Db('wordpress');
 
 $progress = 1;
 $total_steps = 9 / 100; // number of usage of logProgress - 1
-logProgress($project, $progress++ / $total_steps);
+$db->logProgress($project, $progress++ / $total_steps);
 
 shell_exec('sh scripts/clean.sh'); // or php bin/delete
 $db->logProgress($project, $progress++ / $total_steps);

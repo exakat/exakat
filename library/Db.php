@@ -10,7 +10,7 @@ class Db  {
                                         $config->mysql_exakat_user, 
                                         $config->mysql_exakat_pass,
                                         $config->mysql_exakat_db);
-        } elseif ($db == 'exakat') {
+        } elseif ($db == 'wordpress') {
             $this->mysqli = new \mysqli($config->mysql_host, 
                                         $config->mysql_wordpress_user, 
                                         $config->mysql_wordpress_pass,
@@ -53,7 +53,7 @@ class Db  {
     }
 
     public function logProgress($project, $percent) {
-        mysqli_query($this->mysqli, "UPDATE exakat_projects SET progress = $percent WHERE name='$project'");
+        $this->mysqli->query("UPDATE exakat_projects SET progress = $percent WHERE name='$project'");
     }
 }
 ?>
