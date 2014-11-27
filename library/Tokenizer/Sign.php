@@ -45,7 +45,8 @@ class Sign extends TokenAuto {
                                     0 => array('token' => Sign::$operators),
                                     1 => array('atom' => Sign::$operands),
                                     2 => array('filterOut' => array_merge( Methodcall::$operators, Parenthesis::$operators, 
-                                                                           _Array::$operators, Block::$operators)),
+                                                                           _Array::$operators,     Block::$operators,
+                                                                           Property::$operators,   Staticproperty::$operators)),
                                  );
         
         $this->actions = array('transform'    => array( 1 => 'SIGN'),
