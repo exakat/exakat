@@ -6,40 +6,46 @@ use Analyzer;
 
 class ConstantConditions extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Analyzer\\Variables\\IsModified");
+        return array('Analyzer\\Variables\\IsModified',
+                     'Analyzer\\Constants\\IsPhpConstant');
     }
     
     public function analyze() {
-        $this->atomIs("While")
+        $this->atomIs('While')
              ->outIs('CONDITION')
              ->atomIsNot(array('Variable', 'Functioncall'))
              ->noAtomInside(array('Variable', 'Functioncall'))
              ->back('first');
         $this->prepareQuery();
         
-        $this->atomIs("While")
+        $this->atomIs('While')
              ->outIs('CONDITION')
              ->atomIs(array('Variable', 'Functioncall'))
              ->savePropertyAs('code', 'condition')
              ->back('first')
+             // variables are only read
              ->raw('filter{ it.out("BLOCK").out().loop(1){true}{it.object.atom == "Variable"}.has("code", condition).filter{it.in("ANALYZED").has("code", "Analyzer\\\\Variables\\\\IsModified").any() }.any() == false }');
         $this->prepareQuery();
 
-        $this->atomIs("Ifthen")
+        $this->atomIs('Ifthen')
+             // constant shouldn't be PHP's 
+             ->raw('filter{it.out("CONDITION").out().loop(1){true}{it.object.atom in ["Identifier", "Nsname"]}.filter{it.in("ANALYZED").has("code", "Analyzer\\\\Constants\\\\IsPhpConstant").any() }.any() == false }')
              ->outIs('CONDITION')
              ->atomIsNot(array('Variable', 'Functioncall'))
              ->noAtomInside(array('Variable', 'Functioncall'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Ternary")
+        $this->atomIs('Ternary')
+             // constant shouldn't be PHP's 
+             ->raw('filter{it.out("CONDITION").out().loop(1){true}{it.object.atom in ["Identifier", "Nsname"]}.filter{it.in("ANALYZED").has("code", "Analyzer\\\\Constants\\\\IsPhpConstant").any() }.any() == false }')
              ->outIs('CONDITION')
              ->atomIsNot(array('Variable', 'Functioncall'))
              ->noAtomInside(array('Variable', 'Functioncall'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("For")
+        $this->atomIs('For')
              ->outIs(array('FINAL', 'INCREMENT'))
              ->atomIsNot(array('Variable', 'Functioncall'))
              ->noAtomInside(array('Variable', 'Functioncall'))
