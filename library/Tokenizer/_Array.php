@@ -22,7 +22,7 @@ class _Array extends TokenAuto {
                                                           2 => 'DROP'),
                                'atom'         => 'Array',
                                'cleanIndex'   => true,
-                               'add_to_index' => array('S_ARRAY' => 'S_ARRAY')
+                               'addToIndex'   => array('S_ARRAY' => 'S_ARRAY')
                                );
         $this->checkAuto(); 
 

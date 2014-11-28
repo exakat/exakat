@@ -34,7 +34,7 @@ SQL;
     }
 
     public function getSeverity($analyzer) {
-        list($foo, $folder, $name) = explode('\\', $analyzer);
+        list(, $folder, $name) = explode('\\', $analyzer);
         $query = "SELECT severity FROM analyzers WHERE folder = '$folder' AND name = '$name'";
 
         $res = $this->sqlite->query($query);
@@ -49,7 +49,7 @@ SQL;
     }
 
     public function getTimeToFix($analyzer) {
-        list($foo, $folder, $name) = explode('\\', $analyzer);
+        list(, $folder, $name) = explode('\\', $analyzer);
         $query = "SELECT timetofix FROM analyzers WHERE folder = '$folder' AND name = '$name'";
 
         $res = $this->sqlite->query($query);

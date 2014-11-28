@@ -2585,15 +2585,15 @@ x.out('ELEMENT').each{
             unset($actions['mergeConcat']);
         }
         
-        if (isset($actions['add_to_index'])) {
-            list($index, $token) = each($actions['add_to_index']);
+        if (isset($actions['addToIndex'])) {
+            list(, $token) = each($actions['addToIndex']);
             $qactions[] = " 
 /* add to the following index */  
 
 g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');   
 
 ";
-            unset($actions['add_to_index']);
+            unset($actions['addToIndex']);
         }        
 
         if (isset($actions['while_to_empty_block'])) {
