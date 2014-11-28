@@ -8,7 +8,7 @@ class NoDirectAccess extends Analyzer\Analyzer {
     public function analyze() {
         //defined('AJXP_EXEC') or die('Access not allowed'); : Constant used!
         $this->atomIs('Logical')
-             ->code('or')
+             ->tokenIs(array('T_BOOLEAN_AND', 'T_BOOLEAN_OR','T_LOGICAL_AND', 'T_LOGICAL_OR'))
              // find !defined and defined
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
