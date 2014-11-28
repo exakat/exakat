@@ -1,6 +1,6 @@
 <?php
 
-include_once(dirname(__DIR__).'/library/Autoload.php');
+include(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
 // report errorlog problems
@@ -253,7 +253,7 @@ if ($res === null) {
     $lines = explode("\n", trim($res));
     print count($lines)." projects have Exceptions problems in analyzer.*.final.log\n";
     foreach($lines as $line) {
-        list($file, $b) = explode(':', $line);
+        list($file,) = explode(':', $line);
         print "  + ".$file."\n";
     }
     
