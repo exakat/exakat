@@ -7,9 +7,10 @@ use Analyzer;
 class MultipleClassesInFile extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("File")
+             ->savePropertyAs('code', 'filename')
              ->outIs('FILE')
              ->atomInside('Class')
-             ->eachNotCounted('code', 1);
+             ->eachCountedMoreThan('filename', 2);
         $this->prepareQuery();
     }
 }

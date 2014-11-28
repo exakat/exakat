@@ -172,10 +172,12 @@ class Analyzer {
     
     function getThemes() {
         if (empty($this->themes)) {
-            return array();
+            $r =  array();
         } else {
-            return $this->themes;
+            $r =  $this->themes;
         }
+        
+        return $r;
     }
 
     function getAppinfoHeader($lang = 'en') {
@@ -890,9 +892,9 @@ GREMLIN;
         return $this;
     }
 
-    function eachCounted($column, $times) {
+    function eachCounted($variable, $times) {
         $this->methods[] = <<<GREMLIN
-groupBy(m){it.$column}{it}.iterate(); 
+groupBy(m){{$variable}}{it}.iterate(); 
 // This is plugged into each{}
 m.findAll{ it.value.size() == $times}.values().flatten().each{ n.add(it); }
 GREMLIN;
@@ -900,11 +902,21 @@ GREMLIN;
         return $this;
     }
     
-    function eachNotCounted($column, $times = 1) {
+    function eachNotCounted($variable, $times = 1) {
         $this->methods[] = <<<GREMLIN
-groupBy(m){it.$column}{it}.iterate(); 
+groupBy(m){{$variable}}it}.iterate(); 
 // This is plugged into each{}
 m.findAll{ it.value.size() != $times}.values().flatten().each{ n.add(it); }
+GREMLIN;
+
+        return $this;
+    }
+
+    function eachCountedMoreThan($variable, $times = 1) {
+        $this->methods[] = <<<GREMLIN
+groupBy(m){{$variable}}{it}.iterate(); 
+// This is plugged into each{}
+m.findAll{ it.value.size() >= $times}.values().flatten().each{ n.add(it); }
 GREMLIN;
 
         return $this;
@@ -965,24 +977,22 @@ GREMLIN;
     }
 
     function rankIs($edge_name, $rank) {
-        if ($rank == 'first') {
-            $rank = 0;
-        } else if ($rank === 'last') {
-            $this->addMethod("sideEffect{ rank = it.out(***).count() - 1;}", $edge_name);
-            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edge_name);
-            return $this;
-        } else if ($rank === '2last') {
-            $this->addMethod("sideEffect{ rank = it.out(***).count() - 2;}", $edge_name);
-            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edge_name);
-            return $this;
-        } else {
-            $rank = abs(intval($rank));
-        }
-        
         if (is_array($edge_name)) {
             // @todo
             die(" I don't understand arrays in rankIs()");
+        }
+
+        if ($rank == 'first') {
+            $rank = 0;
+            $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edge_name, $rank);
+        } else if ($rank === 'last') {
+            $this->addMethod("sideEffect{ rank = it.out(***).count() - 1;}", $edge_name);
+            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edge_name);
+        } else if ($rank === '2last') {
+            $this->addMethod("sideEffect{ rank = it.out(***).count() - 2;}", $edge_name);
+            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edge_name);
         } else {
+            $rank = abs(intval($rank));
             $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edge_name, $rank);
         }
         
