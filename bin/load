@@ -55,12 +55,14 @@ function process_dir($dir, $log, $client) {
 
     $ignore_dirs = array();
     foreach($config->ignore_dirs as $ignore) {
-        if ($dir[0] == '/') {
+        if ($ignore[0] === '/') {
             $ignore_dirs[] = './projects/'.$dir.'/code'.$ignore.'*';
         } else {
             $ignore_dirs[] = '*'.$ignore.'*';
         }
     }
+    
+    if (substr($dir, -1) == '/') { $dir = substr($dir, 0, -1); }
 
     $ext_php = array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  );
     $shell = 'find '.$dir.' \\( -name "*.'.(join('" -o -name "*.', $ext_php)).'" \\) \\( -not -path "*.'.(join('" -and -not -path "', $ignore_dirs )).'" \\) ! -type l';
@@ -74,15 +76,13 @@ function process_dir($dir, $log, $client) {
     return array('files' => count($files), 'tokens' => $nb_tokens);
 }
 
-
 function process_file($filename, $log_file, $client) {
     $log = array();
     $begin = microtime(true);
     
     if (is_link($filename)) { return true; }
     if (!file_exists($filename)) {
-        print "'$filename' doesn't exists. Aborting\n";
-        die();
+        die( "'$filename' doesn't exists. Aborting\n");
     }
 
     global $Php;
