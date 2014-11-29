@@ -32,5 +32,6 @@ class Cast extends Tokenizer {
     public function testCast21()  { $this->generic_test('Cast.21'); }
     public function testCast22()  { $this->generic_test('Cast.22'); }
     public function testCast23()  { $this->generic_test('Cast.23'); }
+    public function testCast24()  { $this->generic_test('Cast.24'); }
 }
 ?>

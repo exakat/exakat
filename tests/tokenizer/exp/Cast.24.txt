@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      (int)
+      Label : CAST
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            B
+        Label : METHOD
+          D
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                $b
+              Label : CONCAT
+                'E'
+    Label : LEFT
+      $a
