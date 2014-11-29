@@ -6,12 +6,15 @@ class Premier {
     private $client = null;
     private $db = null;
 
-    private $summary = null;
-    private $content = null;
-    private $current = null;
+    private $summary   = null;
+    private $content   = null;
+    private $current   = null;
     private $currentH1 = null;
     private $currentH2 = null;
-    private $root    = null;
+    private $root      = null;
+
+    private $project       = null;
+    private $projectUrl    = null;
 
     public function __construct($client, $db) {
         $this->client  = $client;
@@ -24,6 +27,10 @@ class Premier {
     
     public function setProject($project) {
         $this->project = $project;
+    }
+
+    public function setProjectUrl($projectUrl) {
+        $this->projectUrl = $projectUrl;
     }
     
     public function prepare() {
@@ -65,24 +72,24 @@ TEXT
 // Dashboard                  //
 ////////////////////////////////
         $this->createH2('Code smells');
-        $groupby = new \Report\Content\Groupby($this->client);
-        $groupby->setGroupby('getSeverity');
-        $groupby->setCount('toCount');
-        $groupby->setSort(array('Critical', 'Major', 'Minor'));
+        $groupBy = new \Report\Content\Groupby($this->client);
+        $groupBy->setGroupby('getSeverity');
+        $groupBy->setCount('toCount');
+        $groupBy->setSort(array('Critical', 'Major', 'Minor'));
 
         $row = $this->addContent('Row', null);
         
-        $groupby->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Analyze') );
-        $groupby->setName('Severity repartition');
+        $groupBy->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Analyze') );
+        $groupBy->setName('Severity repartition');
         
-        $row->addLeftContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+        $row->addLeftContent('Camembert', $groupBy); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
-        $infobox = new \Report\Content\Infobox();
-        $infobox->setNeo4j($this->client);
-        $infobox->setMySQL($this->db);
-        $infobox->setSeverities($groupby->toArray());
-        $infobox->collect();
-        $ht = $row->addRightContent('Infobox', $infobox); 
+        $infoBox = new \Report\Content\Infobox();
+        $infoBox->setNeo4j($this->client);
+        $infoBox->setMySQL($this->db);
+        $infoBox->setSeverities($groupBy->toArray());
+        $infoBox->collect();
+        $ht = $row->addRightContent('Infobox', $infoBox); 
 
         $row2 = $this->addContent('Row', null);
         $listBySeverity = new \Report\Content\ListBySeverity($this->client);
@@ -99,24 +106,24 @@ TEXT
 // Dashboard Coding Convention //
 /////////////////////////////////
         $this->createH2('Coding Conventions');
-        $groupby = new \Report\Content\Groupby($this->client);
-        $groupby->setGroupby('getSeverity');
-        $groupby->setCount('toCount');
-        $groupby->setSort(array('Critical', 'Major', 'Minor'));
+        $groupBy = new \Report\Content\Groupby($this->client);
+        $groupBy->setGroupby('getSeverity');
+        $groupBy->setCount('toCount');
+        $groupBy->setSort(array('Critical', 'Major', 'Minor'));
 
         $row = $this->addContent('Row', null);
         
-        $groupby->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions') );
-        $groupby->setName('Severity repartition');
+        $groupBy->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions') );
+        $groupBy->setName('Severity repartition');
         
-        $row->addLeftContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+        $row->addLeftContent('Camembert', $groupBy); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
-        $infobox = new \Report\Content\Infobox();
-        $infobox->setNeo4j($this->client);
-        $infobox->setMySQL($this->db);
-        $infobox->setSeverities($groupby->toArray());
-        $infobox->collect();
-        $ht = $row->addRightContent('Infobox', $infobox); 
+        $infoBox = new \Report\Content\Infobox();
+        $infoBox->setNeo4j($this->client);
+        $infoBox->setMySQL($this->db);
+        $infoBox->setSeverities($groupBy->toArray());
+        $infoBox->collect();
+        $ht = $row->addRightContent('Infobox', $infoBox); 
 
         $row2 = $this->addContent('Row', null);
         $listBySeverity = new \Report\Content\ListBySeverity($this->client);
@@ -133,24 +140,24 @@ TEXT
 // Dashboard Dead code         //
 /////////////////////////////////
         $this->createH2('Dead code');
-        $groupby = new \Report\Content\Groupby($this->client);
-        $groupby->setGroupby('getSeverity');
-        $groupby->setCount('toCount');
-        $groupby->setSort(array('Critical', 'Major', 'Minor'));
+        $groupBy = new \Report\Content\Groupby($this->client);
+        $groupBy->setGroupby('getSeverity');
+        $groupBy->setCount('toCount');
+        $groupBy->setSort(array('Critical', 'Major', 'Minor'));
 
         $row = $this->addContent('Row', null);
         
-        $groupby->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Dead code') );
-        $groupby->setName('Severity repartition');
+        $groupBy->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Dead code') );
+        $groupBy->setName('Severity repartition');
         
-        $row->addLeftContent('Camembert', $groupby); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
+        $row->addLeftContent('Camembert', $groupBy); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
 
-        $infobox = new \Report\Content\Infobox();
-        $infobox->setNeo4j($this->client);
-        $infobox->setMySQL($this->db);
-        $infobox->setSeverities($groupby->toArray());
-        $infobox->collect();
-        $ht = $row->addRightContent('Infobox', $infobox); 
+        $infoBox = new \Report\Content\Infobox();
+        $infoBox->setNeo4j($this->client);
+        $infoBox->setMySQL($this->db);
+        $infoBox->setSeverities($groupBy->toArray());
+        $infoBox->collect();
+        $ht = $row->addRightContent('Infobox', $infoBox); 
 
         $row2 = $this->addContent('Row', null);
         $listBySeverity = new \Report\Content\ListBySeverity($this->client);
@@ -245,8 +252,8 @@ TEXT
             }
                 
             // defined here, but for later use
-            $defs = new \Report\Content\Definitions($client);
-            $defs->setAnalyzers($analyzes);
+            $definitions = new \Report\Content\Definitions($client);
+            $definitions->setAnalyzers($analyzes);
         }
 
         $this->createH1('Application information');
@@ -277,7 +284,7 @@ TEXT
 
         $this->createH1('Annexes');
         $this->createH2('Documentation');
-        $this->addContent('Definitions', $defs);
+        $this->addContent('Definitions', $definitions);
         
         return true;
     }
