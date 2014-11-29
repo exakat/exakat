@@ -16,7 +16,7 @@ class AppCounts extends \Report\Content {
                             'Trait'          => 'Trait',
                             'Function'       => array('index' => 'Function', 'Below' => 'in("ELEMENT").in("BLOCK").hasNot("atom", "Class")'),
                             'Variables'      => array('index' => 'Variable', 'Unique' => 'code'),
-                            'Constants'      => array('index' => 'Constant'),
+                            'Constants'      => 'Constants\\Constantnames',
                      ),
                     'Classes' => array(
                             'Classes'        => 'Class',
@@ -34,6 +34,8 @@ class AppCounts extends \Report\Content {
                     'Structures' => array(
                             'Ifthen'        => 'Ifthen',
                             'Switch'        => 'Switch',
+                            'Case'          => 'Case',
+                            'Default'       => 'Default',
                             'For'           => 'For',
                             'Foreach'       => 'Foreach',
                             'While'         => 'While',
