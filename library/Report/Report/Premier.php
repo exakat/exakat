@@ -63,7 +63,7 @@ TEXT
 ////////////////////////////////
 // Dashboard                  //
 ////////////////////////////////
-        $this->createH2('Errors');
+        $this->createH2('Code smells');
         $groupby = new \Report\Content\Groupby($this->client);
         $groupby->setGroupby('getSeverity');
         $groupby->setCount('toCount');

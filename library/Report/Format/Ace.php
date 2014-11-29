@@ -52,18 +52,19 @@ class Ace extends \Report\Format {
             shell_exec("rm -rf $dir"); 
         }
         mkdir($dir, 0755);
-        print shell_exec('cp -r media/ace-admin/assets '.$dir);
+        mkdir($dir.'/pages/', 0755);
+        print shell_exec('cp -r media/ace-admin/assets '.$dir.'/pages/');
         
         $total = 0;
         foreach($this->files as $name => $html) {
-            $total += file_put_contents($dir.'/'.$name, $html);
+            $total += file_put_contents($dir.'/pages/'.$name, $html);
         }
         
         $index_html = <<<HTML
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <meta http-equiv="refresh" content="0; url=Errors.html" />
+        <meta http-equiv="refresh" content="0; url=pages/Code-smells.html" />
 
 		<meta name="description" content="Exakat Audit report. © 2014 Exakat" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -117,8 +118,10 @@ HTML;
 			</div>
 HTML;
 
+$project_name = "PROJECT NAME";
+$project_code_source = "http://github.com/";
 
-
+$project_code_source_html = "<a href=\"$project_code_source\" class=\"brand\">( $project_code_source )</a>";
         
         $html = <<<HTML
 <!DOCTYPE html>
@@ -168,12 +171,13 @@ HTML;
 
 			<div class="navbar-inner">
 				<div class="container-fluid">
-					<a href="#" class="brand">
-						<small>
-							<i class="icon-leaf"></i>
-							Exakat Audit Report
-						</small>
-					</a><!--/.brand-->
+					<small>
+	    				<a href="Code-smells.html" class="brand">
+							<img src="assets/img/logo-exakat.png" height="32" width="100" />
+							Exakat Audit Report for  : $project_name
+                        </a><!--/.brand-->
+						 $project_code_source_html
+					</small>
 				</div><!--/.container-fluid-->
 			</div><!--/.navbar-inner-->
 		</div>
