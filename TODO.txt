@@ -469,6 +469,8 @@ recode
 interbase
 gettext
 dotnet
+xdiff
+runkit
 
 
 Check on reference returning functions (they should be called with reference).
