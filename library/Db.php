@@ -53,7 +53,7 @@ class Db  {
     }
 
     public function logProgress($project, $percent) {
-        $this->mysqli->query("UPDATE exakat_projects SET progress = $percent WHERE name='$project'");
+        $this->mysqli->query("UPDATE `wordpress`.`exakat_projects` SET progress = $percent WHERE name='$project'");
     }
 }
 ?>
