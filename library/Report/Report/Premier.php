@@ -31,6 +31,7 @@ class Premier {
 
         $this->createH1('Report presentation');
 
+/*
         $this->createH2('Report synopsis'); 
         $this->addContent('Text', <<<TEXT
 DISCLAIMER : This is an alpha version of the software. We are working hard to make it better, so your feedback is always appreciated : damien.seguy@gmail.com.
@@ -45,7 +46,7 @@ Finaly, some definitions are gathered in the "Annex".
 
 TEXT
 );
-
+*/
         $this->createH2('Report configuration'); 
 
         $ReportInfo = new \Report\Content\ReportInfo($this->project);
@@ -282,8 +283,11 @@ TEXT
     }
     
     public function render($format, $filename = null) {
-        $class = "\\Report\\Format\\$format";
-        $this->output = new $class();
+        $format = "\\Report\\Format\\$format";
+
+        $this->output = new $format();
+        $this->output->setProjectName($this->project);
+        $this->output->setProjectUrl('');
         $this->output->setSummaryData($this->root);
         
         foreach($this->root->getContent() as $c) {
@@ -293,7 +297,7 @@ TEXT
         if (isset($filename)) {
             return $this->output->toFile($filename.'.'.$this->output->getExtension());
         } else {
-            die("No filename?");
+            die("No filename? ".__METHOD__);
         }
     }
     

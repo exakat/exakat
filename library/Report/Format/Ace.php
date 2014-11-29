@@ -118,10 +118,14 @@ HTML;
 			</div>
 HTML;
 
-$project_name = "PROJECT NAME";
-$project_code_source = "http://github.com/";
+$project_name = $this->projectName;
+$project_code_source = $this->projectUrl;
 
-$project_code_source_html = "<a href=\"$project_code_source\" class=\"brand\">( $project_code_source )</a>";
+if (empty($project_code_source)) {
+    $project_code_source_html = "";
+} else {
+    $project_code_source_html = "<a href=\"$project_code_source\" class=\"brand\">( $project_code_source )</a>";
+}
         
         $html = <<<HTML
 <!DOCTYPE html>
@@ -175,9 +179,8 @@ $project_code_source_html = "<a href=\"$project_code_source\" class=\"brand\">( 
 	    				<a href="Code-smells.html" class="brand">
 							<img src="assets/img/logo-exakat.png" height="32" width="100" />
 							Exakat Audit Report for  : $project_name
-                        </a><!--/.brand-->
-						 $project_code_source_html
-					</small>
+                        </a>$project_code_source_html
+					</small><!--/.brand-->
 				</div><!--/.container-fluid-->
 			</div><!--/.navbar-inner-->
 		</div>

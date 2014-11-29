@@ -5,6 +5,9 @@ namespace Report;
 class Format {
     protected $name = 'Content'; 
     
+    protected $projectName = '';
+    protected $projectUrl = '';
+    
     public function getRenderer($class) {
         $fullclass = "\\Report\\Format\\{$this->format}\\$class";
         
@@ -18,6 +21,14 @@ class Format {
 
     public function getExtension() {
         return $this->fileExtension;
+    }
+
+    public function setProjectName($projectName) {
+        $this->projectName = $projectName;
+    }
+
+    public function setProjectUrl($projectUrl) {
+        $this->projectUrl = $projectUrl;
     }
 
 }
