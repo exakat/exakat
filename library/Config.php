@@ -79,19 +79,21 @@ class Config {
         }
         
         $options_boolean = array(
-                                 '-v'     => array('verbose',   false),
-                                 '-h'     => array('help',      false),
-                                 '-r'     => array('recursive', false),
-                                 '-l'     => array('lint',      false),
-                                 '-json'  => array('json',      false),
-                                 '-ss'    => array('ss',        false),
-                                 '-sm'    => array('sm',        false),
-                                 '-sl'    => array('sl',        false),
-                                 '-today' => array('today',     false),
-                                 '-none'  => array('none',      false),
-                                 '-table' => array('table',     false),
-                                 '-text'  => array('text',      false),
-                                 '-o'     => array('output',    false),
+                                 '-v'     => array('verbose',    false),
+                                 '-h'     => array('help',       false),
+                                 '-r'     => array('recursive',  false),
+                                 '-u'     => array('update',     false),
+                                 '-D'     => array('delete',     false),
+                                 '-l'     => array('lint',       false),
+                                 '-json'  => array('json',       false),
+                                 '-ss'    => array('ss',         false),
+                                 '-sm'    => array('sm',         false),
+                                 '-sl'    => array('sl',         false),
+                                 '-today' => array('today',      false),
+                                 '-none'  => array('none',       false),
+                                 '-table' => array('table',      false),
+                                 '-text'  => array('text',       false),
+                                 '-o'     => array('output',     false),
                                  );
 
         foreach($options_boolean as $key => $config) {
@@ -104,11 +106,12 @@ class Config {
             }
         }
                                  
-        $options_value   = array('-f' => array('filename', null),
-                                 '-d' => array('dirname',  null),
-                                 '-p' => array('project',  'default'),
-                                 '-P' => array('program',  null),
-                                 '-T' => array('thema',    null),
+        $options_value   = array('-f' => array('filename',    null),
+                                 '-d' => array('dirname',     null),
+                                 '-p' => array('project',     'default'),
+                                 '-P' => array('program',     null),
+                                 '-R' => array('repository',  false),
+                                 '-T' => array('thema',       null),
 //                                 '-q' => array('loader',   'Load\Csv'),
                                  );
 
