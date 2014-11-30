@@ -1237,6 +1237,30 @@ GREMLIN;
         
         return $this;
     }
+    
+    public function goToExtends() {
+        $this->addMethod('out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}');
+        
+        return $this;
+    }
+
+    public function goToImplements() {
+        $this->addMethod('out("IMPLEMENTS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}');
+        
+        return $this;
+    }
+
+    public function goToAllParents() {
+        $this->addMethod('out("IMPLEMENTS", "EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}');
+        
+        return $this;
+    }
+
+    public function goToTraits() {
+        $this->addMethod('as("toTraits").out("BLOCK").out("ELEMENT").has("atom", "Use").out("USE").transform{ g.idx("traits")[["path":it.fullnspath]].next(); }.loop("toTraits"){true}{it.object.atom == "Trait"}');
+        
+        return $this;
+    }
 
     public function hasClass() {
         $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.any()}');
@@ -1358,6 +1382,12 @@ sideEffect{ loops = 1;}
 
 GREMLIN
                         );
+        
+        return $this;
+    }
+    
+    public function makeVariable($variable) {
+        $this->addMethod('sideEffect{ '.$variable.' = "\$" + '.$variable.' }');
         
         return $this;
     }
