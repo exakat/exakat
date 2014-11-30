@@ -8,10 +8,11 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Constants_ConstantUsage extends Analyzer {
-    /* 3 methods */
+    /* 4 methods */
 
     public function testConstants_ConstantUsage01()  { $this->generic_test('Constants_ConstantUsage.01'); }
     public function testConstants_ConstantUsage02()  { $this->generic_test('Constants_ConstantUsage.02'); }
     public function testConstants_ConstantUsage03()  { $this->generic_test('Constants_ConstantUsage.03'); }
+    public function testConstants_ConstantUsage04()  { $this->generic_test('Constants_ConstantUsage.04'); }
 }
 ?>
