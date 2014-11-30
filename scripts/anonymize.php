@@ -1,7 +1,7 @@
 <?php
 
-if (!file_exists($argv[1])) {
-    die("Usage : php script/anonymize.php <filename>");
+if (!isset($argv[1])) {
+    die("Usage : php script/anonymize.php <filename>\n");
 }
 
 $file = $argv[1];
