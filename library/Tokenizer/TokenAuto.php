@@ -1301,7 +1301,7 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
 // lone instruction BEFORE
 while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try', 
                                                         'Ternary', 'While', 'Assignation', 'Switch', 'Use', 'Label', 'Array', 
-                                                        'Postplusplus', 'Preplusplus', 'Return', 'Class', 'Phpcode' ] && 
+                                                        'Postplusplus', 'Preplusplus', 'Return', 'Class', 'Phpcode', 'Functioncall' ] && 
                                       it.getProperty('token') != 'T_ELSEIF'}.any() && 
     it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 
                                                     'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 
@@ -2254,8 +2254,87 @@ x.out('ELEMENT').each{
 
         if (isset($actions['makeSequence'])) {
             $it = $actions['makeSequence'];
+
+            $makeSequence = <<<GREMLIN
+//    $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
+//    $it.setProperty('makeSequence4',  $it.out('NEXT').next().token);
+
+    if ( $it.both('NEXT').has('atom', 'Sequence').count() == 2 &&
+        ($it.in('NEXT').next().block != 'true')) {
+        count = $it.in('NEXT').out('ELEMENT').count();
+        sequence = $it.in('NEXT').next();
+    
+        $it.setProperty('rank', count);
+        count++;
+//        $it.setProperty('makeSequence', 'both');
+        g.addEdge(sequence, $it, 'ELEMENT');
+
+        $it.out('NEXT').out('ELEMENT').each{ 
+            it.setProperty('rank', it.rank + count);
+        
+            it.inE('ELEMENT').each{ g.removeEdge(it); }
+            g.addEdge(sequence, it, 'ELEMENT');
+        }
+    
+        g.addEdge(sequence, $it.out('NEXT').out('NEXT').next(), 'NEXT');
+
+        sequence2 = $it.out('NEXT').next();
+        $it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+        g.idx('delete').put('node', 'delete', sequence2);
+        $it.bothE('NEXT').each{ g.removeEdge(it); }
+    } else if ($it.in('NEXT').has('atom', 'Sequence').any() &&
+              ($it.in('NEXT').next().block != 'true')) {
+        sequence = $it.in('NEXT').next();
+        $it.setProperty('rank', $it.in('NEXT').out('ELEMENT').count());
+//        $it.setProperty('makeSequence', 'in');
+
+        g.addEdge(sequence, $it.out('NEXT').next(), 'NEXT');
+        g.addEdge($it.in('NEXT').next(), $it, 'ELEMENT');
+
+        $it.bothE('NEXT').each{ g.removeEdge(it); }
+    } else if ($it.out('NEXT').has('atom', 'Sequence').any()) {
+        sequence = $it.out('NEXT').next();
+        $it.setProperty('rank', 0);
+//        $it.setProperty('makeSequence', 'next');
+        sequence.out('ELEMENT').each{ it.setProperty('rank', it.rank + 1);}
+
+        g.addEdge($it.out('NEXT').next(), $it, 'ELEMENT');
+
+        g.addEdge($it.in('NEXT').next(), $it.out('NEXT').next(), 'NEXT');
+
+        $it.bothE('NEXT').each{ g.removeEdge(it); }
+    } else {
+        sequence = g.addVertex(null, [code:'makeSequence ' + $it.in('NEXT').next().token, atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
+        g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');   
+        g.idx('atoms').put('atom', 'Sequence', sequence);   
+
+        g.addEdge(sequence, $it, 'ELEMENT');
+        $it.setProperty('rank', 0);
+//        $it.setProperty('makeSequence', 'else');
+        
+        if ($it.root == 'true') { 
+            sequence.setProperty('root', 'true'); 
+            g.addEdge($it.in('FILE').next(), sequence, 'FILE');
             
-            $qactions[] = "
+            $it.setProperty('root', 'false'); 
+            $it.inE('FILE').each{ g.removeEdge(it); }
+        }
+
+        g.addEdge($it.in('NEXT').next(), sequence, 'NEXT');
+        g.addEdge(sequence, $it.out('NEXT').next(), 'NEXT');
+    
+        $it.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
+    }
+GREMLIN;
+
+            if (isset($actions['makeSequenceAlways']) && $actions['makeSequenceAlways']) {
+                $qactions[] = "
+/* makeSequence Always */
+$makeSequence
+";
+                unset($actions['makeSequenceAlways']);
+            } else {
+                $qactions[] = "
 /* makeSequence */
 
 list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
@@ -2327,76 +2406,7 @@ if (     $it.token != 'T_ELSEIF'
     && !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
     && !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR']}.any()) /* \$x{\$b - 2} */
     ) {
-
-//    $it.setProperty('makeSequence32', $it.in('NEXT') .next().token) ;
-//    $it.setProperty('makeSequence4',  $it.out('NEXT').next().token);
-
-    if ( $it.both('NEXT').has('atom', 'Sequence').count() == 2 &&
-        ($it.in('NEXT').next().block != 'true')) {
-        count = $it.in('NEXT').out('ELEMENT').count();
-        sequence = $it.in('NEXT').next();
-    
-        $it.setProperty('rank', count);
-        count++;
-//        $it.setProperty('makeSequence', 'both');
-        g.addEdge(sequence, $it, 'ELEMENT');
-
-        $it.out('NEXT').out('ELEMENT').each{ 
-            it.setProperty('rank', it.rank + count);
-        
-            it.inE('ELEMENT').each{ g.removeEdge(it); }
-            g.addEdge(sequence, it, 'ELEMENT');
-        }
-    
-        g.addEdge(sequence, $it.out('NEXT').out('NEXT').next(), 'NEXT');
-
-        sequence2 = $it.out('NEXT').next();
-        $it.out('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-        g.idx('delete').put('node', 'delete', sequence2);
-        $it.bothE('NEXT').each{ g.removeEdge(it); }
-    } else if ($it.in('NEXT').has('atom', 'Sequence').any() &&
-              ($it.in('NEXT').next().block != 'true')) {
-        sequence = $it.in('NEXT').next();
-        $it.setProperty('rank', $it.in('NEXT').out('ELEMENT').count());
-//        $it.setProperty('makeSequence', 'in');
-
-        g.addEdge(sequence, $it.out('NEXT').next(), 'NEXT');
-        g.addEdge($it.in('NEXT').next(), $it, 'ELEMENT');
-
-        $it.bothE('NEXT').each{ g.removeEdge(it); }
-    } else if ($it.out('NEXT').has('atom', 'Sequence').any()) {
-        sequence = $it.out('NEXT').next();
-        $it.setProperty('rank', 0);
-//        $it.setProperty('makeSequence', 'next');
-        sequence.out('ELEMENT').each{ it.setProperty('rank', it.rank + 1);}
-
-        g.addEdge($it.out('NEXT').next(), $it, 'ELEMENT');
-
-        g.addEdge($it.in('NEXT').next(), $it.out('NEXT').next(), 'NEXT');
-
-        $it.bothE('NEXT').each{ g.removeEdge(it); }
-    } else {
-        sequence = g.addVertex(null, [code:'makeSequence ' + $it.in('NEXT').next().token, atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
-        g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');   
-        g.idx('atoms').put('atom', 'Sequence', sequence);   
-
-        g.addEdge(sequence, $it, 'ELEMENT');
-        $it.setProperty('rank', 0);
-//        $it.setProperty('makeSequence', 'else');
-        
-        if ($it.root == 'true') { 
-            sequence.setProperty('root', 'true'); 
-            g.addEdge($it.in('FILE').next(), sequence, 'FILE');
-            
-            $it.setProperty('root', 'false'); 
-            $it.inE('FILE').each{ g.removeEdge(it); }
-        }
-
-        g.addEdge($it.in('NEXT').next(), sequence, 'NEXT');
-        g.addEdge(sequence, $it.out('NEXT').next(), 'NEXT');
-    
-        $it.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
-    }
+$makeSequence; 
 } else {
     /*
     $it.setProperty('makeSequence1',   $it.token != 'T_ELSEIF');
@@ -2415,6 +2425,7 @@ if (     $it.token != 'T_ELSEIF'
 }
 
 ";
+            }
             unset($actions['makeSequence']);
         }
 

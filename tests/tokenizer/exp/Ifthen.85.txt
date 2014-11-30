@@ -1,0 +1,31 @@
+makeSequence T_ROOT
+Label : ELEMENT
+  T
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    makeSequence T_OPEN_TAG
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          ->
+          Label : OBJECT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'B'
+          Label : PROPERTY
+            C
+      Label : THEN
+        makeSequence T_ECHO
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              D
+        Label : ELEMENT
+          S

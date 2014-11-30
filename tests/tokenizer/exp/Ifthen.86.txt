@@ -1,0 +1,87 @@
+makeSequence T_ROOT
+Label : ELEMENT
+  T
+Label : ELEMENT
+  <?php 
+  Label : CODE
+    makeSequence T_OPEN_TAG
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          ->
+          Label : OBJECT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'B'
+          Label : PROPERTY
+            C
+      Label : THEN
+        makeSequence T_CLOSE_PARENTHESIS
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                D
+              Label : METHOD
+                E
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    F
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      G
+                    Label : METHOD
+                      H
+                      Label : ARGUMENTS
+                        ,
+                        Label : ARGUMENT
+                          ::
+                          Label : PROPERTY
+                            [
+                            Label : VARIABLE
+                              [
+                              Label : VARIABLE
+                                $b
+                              Label : INDEX
+                                'J'
+                            Label : INDEX
+                              'K'
+                          Label : CLASS
+                            I
+                        Label : ARGUMENT
+                          'L'
+                        Label : ARGUMENT
+                          M
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENTS
+                      ,
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          'N'
+                        Label : VALUE
+                          'O'
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          'P'
+                        Label : VALUE
+                          'Q'
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          'R'
+                        Label : VALUE
+                          'S'
+        Label : ELEMENT
+          S

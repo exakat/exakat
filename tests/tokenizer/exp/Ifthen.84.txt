@@ -1,0 +1,191 @@
+<?php 
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ||
+        Label : RIGHT
+          !
+          Label : NOT
+            D
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : LEFT
+          ==
+          Label : RIGHT
+            $a
+          Label : LEFT
+            B
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'C'
+    Label : THEN
+      makeSequence T_OPEN_TAG
+      Label : ELEMENT
+        O
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'P'
+      Label : ELEMENT
+        M
+      Label : ELEMENT
+        P
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            L
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'M'
+      Label : ELEMENT
+        I
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'J'
+      Label : ELEMENT
+        G
+      Label : ELEMENT
+        J
+      Label : ELEMENT
+        D
+      Label : ELEMENT
+        F
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'G'
+    Label : ELSE
+      elseif
+      Label : CONDITION
+        (
+        Label : CODE
+          ||
+          Label : RIGHT
+            !
+            Label : NOT
+              $c
+          Label : LEFT
+            !
+            Label : NOT
+              $b
+      Label : THEN
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            &&
+            Label : RIGHT
+              !
+              Label : NOT
+                $e
+            Label : LEFT
+              !
+              Label : NOT
+                $d
+        Label : THEN
+          Block with if/elseif
+          Label : ELEMENT
+            R
+            Label : ARGUMENTS
+              ,
+              Label : ARGUMENT
+                S
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'T'
+              Label : ARGUMENT
+                $f
+              Label : ARGUMENT
+                $g
+              Label : ARGUMENT
+                $h
+              Label : ARGUMENT
+                $i
+              Label : ARGUMENT
+                $j
+        Label : ELSE
+          elseif
+          Label : CONDITION
+            (
+            Label : CODE
+              !
+              Label : NOT
+                $k
+          Label : THEN
+            Block with if/elseif
+            Label : ELEMENT
+              U
+              Label : ARGUMENTS
+                ,
+                Label : ARGUMENT
+                  V
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'W'
+                Label : ARGUMENT
+                  $l
+                Label : ARGUMENT
+                  $m
+                Label : ARGUMENT
+                  $n
+          Label : ELSE
+            elseif
+            Label : CONDITION
+              (
+              Label : CODE
+                !
+                Label : NOT
+                  $o
+            Label : THEN
+              Block with if/elseif
+              Label : ELEMENT
+                X
+                Label : ARGUMENTS
+                  ,
+                  Label : ARGUMENT
+                    Y
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        'Z'
+                  Label : ARGUMENT
+                    $p
+                  Label : ARGUMENT
+                    $q
+                  Label : ARGUMENT
+                    $r
+      Label : ELSE
+        switch
+        Label : NAME
+          $s
+        Label : CASES
+          Sequence Case Default
+          Label : ELEMENT
+            case
+            Label : CODE
+              Block with Sequence For Case
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  AA
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+                Label : LEFT
+                  $t
+            Label : CASE
+              0
