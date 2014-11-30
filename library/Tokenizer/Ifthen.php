@@ -63,7 +63,7 @@ class Ifthen extends TokenAuto {
         $this->conditions = array(  0 => array('token' => Ifthen::$operators,
                                                'atom' => 'none'),
                                     1 => array('atom' => 'Parenthesis'),
-                                    2 => array('atom' => array('For', 'Switch', 'Foreach', 'While', 'Dowhile', 'Ifthen', 'Assignation', 'Return' ))
+                                    2 => array('atom' => array('For', 'Switch', 'Foreach', 'While', 'Dowhile', 'Ifthen', 'Assignation', 'Return', 'Break' ))
         );
         
         $this->actions = array( 'to_block_ifelseif_instruction' => true,
