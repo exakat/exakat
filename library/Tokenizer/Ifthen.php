@@ -88,6 +88,23 @@ class Ifthen extends TokenAuto {
                                'cleanIndex'   => true);
         $this->checkAuto(); 
 
+        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
+                                              'atom' => 'none'),
+                                   1 => array('atom' => 'Parenthesis'),
+                                   2 => array('atom' => 'Sequence',
+                                              'property' => array('block' => 'true')),
+                                   3 => array('token' => 'T_ELSE'),
+                                   4 => array('token' => 'T_COLON'),
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'CONDITION',
+                                                       2 => 'THEN'),
+                               'makeSequence' => 'it',
+                               'property'     => array('alternative' => 'false'),
+                               'atom'         => 'Ifthen',
+                               'cleanIndex'   => true);
+        $this->checkAuto(); 
+        
     // @doc if then elseif without else
         $this->conditions = array( 0 => array('token' => Ifthen::$operators),
                                    1 => array('atom'  => 'Parenthesis'),
