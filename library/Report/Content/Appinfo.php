@@ -69,6 +69,7 @@ class Appinfo extends \Report\Content {
                             'ext/pspell'     => 'Extensions/Extpspell',
                             'ext/readline'   => 'Extensions/Extreadline',
                             'ext/redis'      => 'Extensions/Extredis',
+                            'ext/recode'     => 'Extensions/Extrecode',
                             'ext/reflexion'  => 'Extensions/Extreflexion',
                             'ext/sem'        => 'Extensions/Extsem',
                             'ext/session'    => 'Extensions/Extsession',
