@@ -24,8 +24,8 @@ $variables = array_diff_key($variables, $php_variables, $short_variables);
 
 // remove compulsory variables that won't make it
 // check for case (is it important?)
-// configure for French
-// make this recursive by default
+// configure for French or languages (dictionaries for pspell)
+// make this directory-recursive by default
 // list spots for easy fixing
 // make suggestions
 // record one's dictionary
@@ -45,10 +45,15 @@ foreach($variables as $variable => $count) {
     @$volumes[$notation] += $count;
 }
 
-print_r($notations);
-print_r($volumes);
-
-print "$spell_errors / ".count($variables)." variables\n";
+print "Variable styles : \n";
+$total = array_sum($notations);
+$totalVolume = array_sum($volumes);
+foreach($notations as $notation => $count) {
+    print "  $notation".str_repeat(' ', 20 - strlen($notation)).": $count (".number_format($count / $total * 100, 2)."%) | {$volumes[$notation]} (".number_format($volumes[$notation] / $totalVolume * 100, 2)."%)\n";
+}
+print "  Total               : $total           | $totalVolume\n";
+print "\n";
+print "Spelling $spell_errors / ".count($variables)." variables\n";
 
 function spell_check($string) {
     static $pspell;
@@ -56,7 +61,9 @@ function spell_check($string) {
     
     if ($pspell === null) { $pspell = pspell_new("en"); }
     
-    if ($tolerated === null) { $tolerated = array_flip(array('conf', 'id', 'in', 'for', 'regex', 'php', 'dir', 'dirs', 'config', 'filename', 'nb',)); };
+    if ($tolerated === null) { 
+        $tolerated = array_flip(array('conf', 'id', 'in', 'for', 'regex', 'php', 'dir', 'dirs', 'config', 'filename', 'nb', 'url', 'json')); 
+    };
     
     $parts = breakIntoWords($string);
     foreach($parts as $part) {
