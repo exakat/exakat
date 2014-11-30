@@ -7,9 +7,14 @@ $stats['php']['version'] = phpversion();
 $stats['php']['curl'] = extension_loaded('curl') ? 'Yes' : 'No';
 
 // check PHP 5.2
-$stats['PHP 5.2']['version'] = shell_exec('php52 -r "echo phpversion();" 2>&1');
-$stats['PHP 5.2']['short_open_tags'] = shell_exec('php52 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-$stats['PHP 5.2']['timezone'] = shell_exec('php52 -r "echo ini_get(\'date.timezone\');" 2>&1');
+$version = shell_exec('php52 -r "echo phpversion();" 2>&1');
+if (strpos($version, 'not found') !== false) {
+    $stats['PHP 5.2']['installed'] = 'No';
+} else {
+    $stats['PHP 5.2']['version'] = $version;
+    $stats['PHP 5.2']['short_open_tags'] = shell_exec('php52 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+    $stats['PHP 5.2']['timezone'] = shell_exec('php52 -r "echo ini_get(\'date.timezone\');" 2>&1');
+}
 
 // check PHP 5.3
 $stats['PHP 5.3']['version'] = shell_exec('php53 -r "echo phpversion();" 2>&1');
@@ -32,9 +37,14 @@ $stats['PHP 5.6']['short_open_tags'] = shell_exec('php56 -r "echo ini_get(\'shor
 $stats['PHP 5.6']['timezone'] = shell_exec('php56 -r "echo ini_get(\'date.timezone\');" 2>&1');
 
 // check PHP 7
-$stats['PHP 7.0']['version'] = shell_exec('php70 -r "echo phpversion();" 2>&1');
-$stats['PHP 7.0']['short_open_tags'] = shell_exec('php70 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-$stats['PHP 7.0']['timezone'] = shell_exec('php70 -r "echo ini_get(\'date.timezone\');" 2>&1');
+$version = shell_exec('php70 -r "echo phpversion();" 2>&1');
+if (strpos($version, 'not found') !== false) {
+    $stats['PHP 7.0']['installed'] = 'No';
+} else {
+    $stats['PHP 7.0']['version'] = $version;
+    $stats['PHP 7.0']['short_open_tags'] = shell_exec('php70 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+    $stats['PHP 7.0']['timezone'] = shell_exec('php70 -r "echo ini_get(\'date.timezone\');" 2>&1');
+}
 
 // wkhtmltopdf
 $res = shell_exec('wkhtmltopdf --version 2>&1');
@@ -143,7 +153,7 @@ if (!file_exists('batch-import')) {
         $stats['batch-import']['sampleme'] = 'Yes';
     }
     
-    $res = split("\n", shell_exec('mvn -v 2>&1'));
+    $res = explode("\n", shell_exec('mvn -v 2>&1'));
     $stats['batch-import']['maven'] = trim($res[0]);
 }
 
