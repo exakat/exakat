@@ -465,7 +465,6 @@ Suggest a list of php.ini directive that should be watched ($_FILES => s file_up
 Add a list of directive spotted in the code
 
 Finishes the following standard extensions : 
-recode
 interbase
 gettext
 dotnet
@@ -494,8 +493,6 @@ Remove require when installing with composer (no need to download everything...)
 
 if(in_array('malicious', array('a','b','c',0,1,2,3))) echo 'ok'; (in_array with integers will be erroneous...)
 
-defined('AJXP_EXEC') or die('Access not allowed'); : Constant used!
-
 Mettre logo sur les rapports
 
 Mettre un fichier index.html 
@@ -509,3 +506,20 @@ Constant with only one value (For constant conditions...)
 Mark autoload sequences (so as to set them aside for the next rules. Also, make a list of dependencies as a reference list (autoload -> spotted/ignored. Config and mentionned in report).
 
 Finish the 'superglobal propagation'
+
+Spot twin lines ($x++; $x++; ...)
+
+Add a 'config.ini' class, that will create and check the config.ini files.
+
+Spot undefined properties (used with $this, but not in the PPP of the class nor its parents)
+
+Error messages like mysqli_error (or pg_error(), etc) are PHP incoming (should be treated like that)
+
+Finish DefinedProperties 
+
+Spot magic properties in parents or traits
+
+Spot traits and have them linked to class, not inside code. 
+Structure better classes (outgoing links to methods, ppp, constants, etc. No in a Sequence but keep the ranking...)
+
+Constant condition (PHPci : IS_WIN, while (fgets($sock)) { /**/ } )
