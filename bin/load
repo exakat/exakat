@@ -649,7 +649,7 @@ function process_file($filename, $log_file, $client) {
             
             if ($token == '{' && $tokens[$id + 1] == '}') {
                 $block_level--;
-                if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && in_array($Php->getTokenName($tokens[$id - 1][0]), array('T_STRING', 'T_NAMESPACE', 'T_TRY', 'T_ELSE')))) {
+                if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && in_array($Php->getTokenName($tokens[$id - 1][0]), array('T_STRING', 'T_NAMESPACE', 'T_TRY', 'T_ELSE', 'T_FINALLY')))) {
                     $T[$Tid] = $client->makeNode()->setProperty('token', $Php->getTokenName($token))
                                                   ->setProperty('code', $token)
                                                   ->setProperty('fullcode', '{ /**/ } ')
