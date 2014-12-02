@@ -1511,7 +1511,7 @@ GREMLIN;
         return $report;
     }
 
-    public function toFullArray() {
+    public function getArray() {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').in.loop(1){ it.object.token != 'T_FILENAME'}.as('file').back('fullcode').as('line').select{it.fullcode}{it.line}{it.filename}

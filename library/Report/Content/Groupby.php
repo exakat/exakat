@@ -3,11 +3,11 @@
 namespace Report\Content;
 
 class Groupby extends \Report\Content {
+    protected $array = array();
     protected $analyzers = array();
-    protected $client = null;
-    protected $name = "Unnamed Group By";
+    protected $sort = array('Critical', 'Major', 'Minor');
 
-    private $sort = \Report\Content\Groupby::SORT_NONE;
+//    private $sort = \Report\Content\Groupby::SORT_NONE;
 
     const SORT_NONE = 0;
     const SORT_VALUES = 1;
@@ -18,14 +18,6 @@ class Groupby extends \Report\Content {
     const SORT_RANDOM_KEYS = 6;
     const SORT_ARBITRARY = 7;
     
-    public function __construct($client) {
-        $this->client = $client;
-    }
-
-    public function setSort($sort) {
-        $this->sort = $sort;
-    }
-    
     public function addAnalyzer($analyzer) {
         if (is_array($analyzer)) {
             $this->analyzers = array_merge($this->analyzers, $analyzer);
@@ -34,21 +26,16 @@ class Groupby extends \Report\Content {
         }
     }
 
-    public function setGroupBy($method) {
-        $this->method = $method;
-    }
-
-    public function setCount($count) {
-        $this->count = $count;
-    }
-
-    public function toArray() {
-        $array = array_flip($this->sort);
+    public function getArray() {
+        $array = array();
+        foreach($this->sort as $s) {
+            $array[$s] = 0;
+        }
         
+        $m = 'getSeverity';
+        $c = 'toCount';
         foreach($this->analyzers as $a) {
-            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
-            $m = $this->method;
-            $c = $this->count;
+            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->neo4j);
             
             $array[$analyzer->$m()] += $analyzer->$c();
         }

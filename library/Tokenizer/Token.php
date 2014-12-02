@@ -97,26 +97,28 @@ class Token {
                                       81 => 'Phpcode',
                                     );
 
-    protected $phpversion = 'Any';
+    protected $phpVersion = 'Any';
 
-    static public $instruction_ending = array();
+    static public $instructionEnding = array();
     
     public function __construct($client) {
         // @todo typehint ? 
         Token::$client = $client; 
         
-        Token::$instruction_ending = array_merge(Preplusplus::$operators, 
-                                                 Postplusplus::$operators,
-                                                 Assignation::$operators, 
-                                                 Addition::$operators, 
-                                                 Multiplication::$operators,
-                                                 Preplusplus::$operators,
-                                                 Concatenation::$operators,
-                                                 Comparison::$operators,
-                                                 Bitshift::$operators,
-                                                 Logical::$operators,
-                                                 array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 
-                                                       'T_OPEN_PARENTHESIS', 'T_INSTANCEOF', 'T_QUESTION'));
+        Token::$instructionEnding = array_merge(Preplusplus::$operators, 
+                                                Postplusplus::$operators,
+                                                Assignation::$operators, 
+                                                Addition::$operators, 
+                                                Multiplication::$operators,
+                                                Preplusplus::$operators,
+                                                Concatenation::$operators,
+                                                Comparison::$operators,
+                                                Bitshift::$operators,
+                                                Logical::$operators,
+                                                Property::$operators,
+                                                Staticproperty::$operators,
+                                                _Instanceof::$operators,
+                                                array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_QUESTION'));
     }
 
     public static function getTokenizers($version = null) {
@@ -139,23 +141,23 @@ class Token {
     
     protected function isCompatible($version) {
         // this handles Any version of PHP
-        if ($this->phpversion == 'Any') {
+        if ($this->phpVersion == 'Any') {
             return true;
         }
 
         // version and above 
-        if ((substr($this->phpversion, -1) == '+') && version_compare($version, $this->phpversion) >= 0) {
+        if ((substr($this->phpVersion, -1) == '+') && version_compare($version, $this->phpVersion) >= 0) {
             return true;
         } 
 
         // up to version  
-        if ((substr($this->phpversion, -1) == '-') && version_compare($version, $this->phpversion) <= 0) {
+        if ((substr($this->phpVersion, -1) == '-') && version_compare($version, $this->phpVersion) <= 0) {
             return true;
         } 
 
         // version range 1.2.3-4.5.6
-        if (strpos($this->phpversion, '-') !== false) {
-            list($lower, $upper) = explode('-', $this->phpversion);
+        if (strpos($this->phpVersion, '-') !== false) {
+            list($lower, $upper) = explode('-', $this->phpVersion);
             if (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0) {
                 return true;
             } else {
@@ -164,7 +166,7 @@ class Token {
         } 
         
         // One version only
-        if (version_compare($version, $this->phpversion) == 0) {
+        if (version_compare($version, $this->phpVersion) == 0) {
             return true;
         } 
         
@@ -220,9 +222,9 @@ class Token {
 
     static public function query($query) {
     	$queryTemplate = $query;
-    	$params = array('type' => 'IN');
+    	$parameters = array('type' => 'IN');
     	try {
-    	    $query = new \Everyman\Neo4j\Gremlin\Query(Token::$client, $queryTemplate, $params);
+    	    $query = new \Everyman\Neo4j\Gremlin\Query(Token::$client, $queryTemplate, $parameters);
         	return $query->getResultSet();
     	} catch (\Exception $e) {
     	    $message = $e->getMessage();
@@ -962,10 +964,10 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
         }
     }
     
-    public static function getInstance($name, $client, $phpversion = 'Any') {
+    public static function getInstance($name, $client, $phpVersion = 'Any') {
         if ($analyzer = Token::getClass($name)) {
             $analyzer = new $analyzer($client);
-            if ($analyzer->checkPhpVersion($phpversion)) {
+            if ($analyzer->checkPhpVersion($phpVersion)) {
                 return $analyzer;
             } else {
                 return null;
@@ -978,23 +980,23 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
 
     public function checkPhpVersion($version) {
         // this handles Any version of PHP
-        if ($this->phpversion == 'Any') {
+        if ($this->phpVersion == 'Any') {
             return true;
         }
 
         // version and above 
-        if ((substr($this->phpversion, -1) == '+') && version_compare($version, $this->phpversion) >= 0) {
+        if ((substr($this->phpVersion, -1) == '+') && version_compare($version, $this->phpVersion) >= 0) {
             return true;
         } 
 
         // up to version  
-        if ((substr($this->phpversion, -1) == '-') && version_compare($version, $this->phpversion) <= 0) {
+        if ((substr($this->phpVersion, -1) == '-') && version_compare($version, $this->phpVersion) <= 0) {
             return true;
         } 
 
         // version range 1.2.3-4.5.6
-        if (strpos($this->phpversion, '-') !== false) {
-            list($lower, $upper) = explode('-', $this->phpversion);
+        if (strpos($this->phpVersion, '-') !== false) {
+            list($lower, $upper) = explode('-', $this->phpVersion);
             if (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0) {
                 return true;
             } else {
@@ -1003,7 +1005,7 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
         } 
         
         // One version only
-        if (version_compare($version, $this->phpversion) == 0) {
+        if (version_compare($version, $this->phpVersion) == 0) {
             return true;
         } 
         

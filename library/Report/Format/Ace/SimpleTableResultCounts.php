@@ -4,12 +4,11 @@ namespace Report\Format\Ace;
 
 class SimpleTableResultCounts extends \Report\Format\Ace { 
     static public $table_counter = 0;
-    private $titles = array();
     
     public function render($output, $data) {
 
         $th = '<tr>';
-        foreach($this->titles as $title) {
+        foreach($this->css->titles as $title) {
             $th .= <<<HTML
 															<th>
 																$title
@@ -46,12 +45,8 @@ HTML;
 													</tbody>
 												</table>
 HTML;
-        
-        $output->push($text);
-    }
 
-    public function setTitles($titles) {
-        $this->titles = $titles;
+        $output->push($text);
     }
 }
 

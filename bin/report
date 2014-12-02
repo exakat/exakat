@@ -1,14 +1,7 @@
 #!/usr/bin/env php
 <?php
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Index\NodeIndex,
-	Everyman\Neo4j\Relationship,
-	Everyman\Neo4j\Node,
-	Everyman\Neo4j\Gremlin,
-	Tokenizer\Token,
-	Michelf\MarkdownExtra,
-	Report\Liste,
-	Report\HashTable;
+    Report\Report;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
@@ -118,8 +111,7 @@ if (count(glob('library/Report/Report/'.REPORT.'.php')) == 0) {
 }
 
 $reportClass = "\\Report\\Report\\".REPORT;
-$report = new $reportClass($client, $db);
-$report->setProject($project);
+$report = new $reportClass($project, $client, $db);
 $report->prepare();
 $size = $report->render(FORMAT, FILE);
 

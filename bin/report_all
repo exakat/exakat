@@ -2,7 +2,7 @@
 
 $project = $argv[1];
 
-$reports = array('Premier', 'Flat');
+$reports = array('Premier');
 $formats = array('markdown', 'sqlite', 'ace', 'html', 'text', /* 'pdf', 'odt' */);
 
 print shell_exec('rm -rf ./projects/'.$project.'/report; rm -rf ./projects/'.$project.'/report.zip;  php bin/report '.$project.' -f ./projects/'.$project.'/report -ace -r Premier 2>&1 > ./projects/'.$project.'/log/report.premier.log');

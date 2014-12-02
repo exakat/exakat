@@ -21,7 +21,28 @@ $js = <<<JS
 JS;
         $output->pushToTheEnd($js);
 
-        $html = '';
+        $html = <<<HTML
+							<p>
+								<table id="horizontal-{$counter}" class="table table-striped table-bordered table-hover">
+									<thead>
+HTML;
+
+        if ($this->css->displayTitles === true) {
+            $html .= '<tr>';
+            foreach($this->css->titles as $title) {
+                $html .= <<<HTML
+															<th>
+																$title
+															</th>
+HTML;
+        }
+            $html .= "</tr>";
+        }
+        $html .= <<<HTML
+									</thead>
+									<tbody>
+HTML;
+
         foreach($data as $row) {
             $row['code'] = htmlentities($row['code'], ENT_COMPAT, 'UTF-8');
             
@@ -37,21 +58,8 @@ $html .= <<<HTML
 HTML;
             }
 
-        $html = <<<HTML
-							<p>
-								<table id="horizontal-{$counter}" class="table table-striped table-bordered table-hover">
-									<thead>
-										<tr>
-											<th>Code</th>
-											<th>Description</th>
-											<th>File</th>
-											<th>Line</th>
-										</tr>
-									</thead>
 
-
-									<tbody>
-$html
+        $html .= <<<HTML
 									</tbody>
 								</table>
 							</p>
@@ -59,7 +67,6 @@ HTML;
 
         $output->push($html);
     }
-
 }
 
 ?>

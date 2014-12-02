@@ -7,10 +7,10 @@ class Row extends \Report\Format\Markdown {
     
     public function render($output, $data) {
         // two columns are meaningless. We do one after each other
-        list($left, $right) = $data;
+        $left = $data['left'];
+        $right = $data['right'];
         
         if (is_object($left)) {
-            print "rendering\n";
             $left->render($output);
         }
 

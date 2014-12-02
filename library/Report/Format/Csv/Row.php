@@ -6,7 +6,8 @@ class Row extends \Report\Format\Csv {
     private $span = 6;
     
     public function render($output, $data) {
-        list($left, $right) = $data;
+        $left = $data['left'];
+        $right = $data['right'];
         
         if (is_object($left)) {
             $left->render($output);

@@ -23,7 +23,7 @@ class Ternary extends TokenAuto {
                                     2 => array('token'      => 'T_COLON'),
                                     3 => array('atom'       => 'yes', 
                                                'notAtom'    => 'Sequence'),
-                                    4 => array('filterOut2' => array_merge(Token::$instruction_ending, array('T_OPEN_CURLY'))),
+                                    4 => array('filterOut2' => array_merge(Token::$instructionEnding, array('T_OPEN_CURLY'))),
                                  );
         
         $this->actions = array('transform'    => array( -1 => 'CONDITION',
@@ -49,7 +49,7 @@ class Ternary extends TokenAuto {
                                     1 => array('token'      => 'T_COLON'),
                                     2 => array('atom'       => 'yes', 
                                                'notAtom'    => 'Sequence'),
-                                    3 => array('filterOut'  => array_merge(Token::$instruction_ending, array('T_OPEN_CURLY')))
+                                    3 => array('filterOut'  => array_merge(Token::$instructionEnding, array('T_OPEN_CURLY')))
                                  );
         
         $this->actions = array('transform'    => array( -1 => 'CONDITION',

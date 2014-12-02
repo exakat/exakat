@@ -6,7 +6,8 @@ class Row extends \Report\Format\Html {
     private $span = 6;
     
     public function render($output, $data) {
-        list($left, $right) = $data;
+        $left = $data['left'];
+        $right = $data['right'];
         
         $nspan = 12 - $this->span;
         $html = <<<HTML

@@ -21,29 +21,38 @@ $js = <<<JS
 
 JS;
         $output->pushToTheEnd($js);
-        
+
         $text = <<<HTML
 <table id="hashtable-{$counter}" class="table table-striped table-bordered table-hover">
 										<thead>
-											<tr>
-												<th>Label</th>
-												<th>Value</th>
-											</tr>
+HTML;
+        
+        if ($this->css->displayTitles === true) {
+            $text .= '<tr>';
+            foreach($this->css->titles as $title) {
+                $text .= <<<HTML
+															<th>$title</th>
+
+HTML;
+            }
+            $text .= "</tr>";
+        }
+
+$text .= <<<HTML
 										</thead>
 
 										<tbody>
 HTML;
         foreach($data as $k => $v) {
-            if ($v['result'] == 'OK') {
-                $k = "$k"; // @todo make this bold
+            if ($v['result'] !== 0) {
+                $k =  $this->makeLink($k);
+                $icon = '<i class="icon-remove red"></i> ';
+                $v['result'] .= " warnings";
             } else {
-                $url_file =  str_replace(array(' ', '('  , ')', ':'  ), 
-                               array('-', '', ''),
-                               $k).'.html';
-                $k = "<a href=\"$url_file\">$k</a>"; // @todo make this bold
+                $icon = '<i class="icon-ok green"></i>';
+                $v['result'] = "";
             }
-            $text .= "<tr><td>$k</td><td>".
-                ($v['result'] == 'OK' ? '<i class="icon-ok green"></i>' : '<i class="icon-remove red"></i> '.$v['result'])."</td></tr>\n";
+            $text .= "<tr><td>$k</td><td>$icon".$v['result']."</td></tr>\n";
         }
         $text .= <<<HTML
 										</tbody>

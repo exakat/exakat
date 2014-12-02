@@ -32,6 +32,10 @@ class Html extends \Report\Format {
         $this->summary = $data;
     }
 
+    public function setCss() {
+        // nothing to do
+    }
+
 }
 
 ?>

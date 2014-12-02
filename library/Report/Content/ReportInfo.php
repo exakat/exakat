@@ -3,12 +3,8 @@
 namespace Report\Content;
 
 class ReportInfo extends \Report\Content {
-    private $list = array();
+    protected $hash = array();
 
-    private $project = null;
-    private $neo4j = null;
-    private $mysql = null;
-    
     public function collect() {
         if (file_exists('./projects/'.$this->project.'/code/.git/config')) {
             $config = file_get_contents('./projects/'.$this->project.'/code/.git/config');
@@ -33,7 +29,7 @@ class ReportInfo extends \Report\Content {
         include(dirname(dirname(__DIR__)).'/App.php');
         $this->list['Audit software version'] = $app['version'];
         
-        $res = $this->mysql->query("SELECT * FROM project_runs WHERE folder='{$this->project}' ORDER BY date_finish DESC LIMIT 1")->fetch_assoc();
+        $res = $this->db->query("SELECT * FROM project_runs WHERE folder='{$this->project}' ORDER BY date_finish DESC LIMIT 1")->fetch_assoc();
         
         $this->list['Audit execution date'] = date('r', strtotime($res['date_start']));
         $this->list['Report production date'] = date('r', strtotime('now'));
@@ -42,33 +38,13 @@ class ReportInfo extends \Report\Content {
 
         $this->list['Audit software version'] = $app['version'];
     }
-    
-    public function setNeo4j($client) {
-        $this->neo4j = $client;
-    }
 
-    public function setMysql($client) {
-        $this->mysql = $client;
-    }
-
-    public function setProject($project) {
-        $this->project = $project;
-    }
-    
-    public function toArray() {
+    public function getArray() {
         $return = array();
         foreach($this->list as $k => $v) {
             $return[] = array($k, $v);
         }
         return $return;
-    }
-    
-    public function getColumnTitles() {
-        return array('Label', 'Value');
-    }
-
-    public function toHash() {
-        return $this->list;
     }
 }
 

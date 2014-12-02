@@ -53,10 +53,6 @@ $html .= <<<HTML
 HTML;
         $output->push( $html);
     }
-
-    public function setTitles($titles) {
-//        $this->titles = $titles;
-    }
 }
 
 ?>

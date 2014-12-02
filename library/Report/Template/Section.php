@@ -20,10 +20,11 @@ class Section extends \Report\Template {
         return $this->currentSection;
     }
     
-    public function addContent($type, $data = null) {
+    public function addContent($type, $data = null, $css = null) {
         $type = 'Report\\Template\\'.$type;
         $content = new $type();
         $content->setContent($data);
+        $content->setCss($css);
         $this->content[] = $content;
         
         return $content;

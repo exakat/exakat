@@ -33,13 +33,10 @@ DataSourceTree.prototype.data = function(options, callback) {
 			\$data = options.additionalParameters.children;
 		else \$data = {}//no data
 	}
-	
-	if(\$data != null)//this setTimeout is only for mimicking some random delay
+
+    if(\$data != null)  //this setTimeout is only for mimicking some random delay
 		setTimeout(function(){callback({ data: \$data });} , parseInt(Math.random() * 500) + 200);
 
-	//we have used static data here
-	//but you can retrieve your data dynamically from a server using ajax call
-	//checkout examples/treeview.html and examples/treeview.js for more info
 };
 
 $tree_data
@@ -64,7 +61,7 @@ JS;
         $text = <<<HTML
 								<div class="widget-box span6">
 									<div class="widget-header header-color-blue2">
-										<h4 class="lighter smaller">Choose Categories</h4>
+										<h4 class="lighter smaller">{$this->css->title}</h4>
 									</div>
 
 									<div class="widget-body">

@@ -35,7 +35,7 @@ class IfthenElse extends TokenAuto {
                                                'atom'      => 'none'),
                                     1 => array('notAtom'   => 'Sequence',
                                                'atom'      => 'yes'),
-                                    2 => array('filterOut' => Token::$instruction_ending),
+                                    2 => array('filterOut' => Token::$instructionEnding),
         );
         
         $this->actions = array( 'to_block_else' => true);

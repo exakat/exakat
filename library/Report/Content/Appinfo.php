@@ -4,7 +4,6 @@ namespace Report\Content;
 
 class Appinfo extends \Report\Content {
     private $list = array();
-    protected $neo4j = null;
 
     public function collect() {
         // Which extension are being used ? 
@@ -267,10 +266,6 @@ class Appinfo extends \Report\Content {
         }
     }
     
-    public function setNeo4j($client) {
-        $this->neo4j = $client;
-    }
-
     public function toArray() {
         return $this->list;
     }

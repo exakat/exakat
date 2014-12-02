@@ -3,12 +3,8 @@
 namespace Report\Content;
 
 class Compilations extends \Report\Content {
-    private $info = array();
+    protected $array = array();
 
-    private $project = null;
-    private $neo4j = null;
-    private $mysql = null;
-    
     public function collect() {
         $versions = array('5.3' => '53', '5.4' => '54', '5.5' => '55', '5.6' => '56');
 
@@ -30,33 +26,17 @@ class Compilations extends \Report\Content {
                 $total_error = count($files).' (' .number_format(count($files) / $total * 100, 0). '%)';
             }
 
-            $info = array('version'       => $version,
+            $array = array('version'       => $version,
                           'total'         => $total,
                           'total_error'   => $total_error,
                           'files'         => $files,
                           'errors'        => $errors,
                           );
 
-            $this->info[] = $info;
+            $this->array[] = $array;
         }
         
         return true;
-    }
-    
-    public function setNeo4j($client) {
-        $this->neo4j = $client;
-    }
-
-    public function setMysql($client) {
-        $this->mysql = $client;
-    }
-
-    public function setProject($project) {
-        $this->project = $project;
-    }
-
-    public function getInfo() {
-        return $this->info;
     }
 }
 

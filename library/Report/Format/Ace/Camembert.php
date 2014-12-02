@@ -7,11 +7,12 @@ class Camembert extends \Report\Format\Ace {
     
     public function render($output, $data) {
         $jsData = "";
-        $colors = array("#68BC31", "#2091CF", "#AF4E96", "#DA5430", "#FEE074", "#CE6F9E", );
-        $i = 0;
-        $array = $data->toArray(); 
+        $colors = $this->css->colors;//array("#68BC31", "#2091CF", "#AF4E96", "#DA5430", "#FEE074", "#CE6F9E", );
 
-        $title = $data->getName();
+        $i = 0;
+        $array = $data; 
+
+        $title = $this->css->title;
 
         $keys = array_keys($array);
         $values = array_values($array);

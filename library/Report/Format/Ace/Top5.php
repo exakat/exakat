@@ -5,16 +5,13 @@ namespace Report\Format\Ace;
 class Top5 extends \Report\Format\Ace {
     static public $top5_counter = 0;
     
-    private $title = '';
-    private $columnsHeaders = array();
-    
     public function render($output, $data) {
     
         $html = <<<HTML
 									<div class="widget-box transparent">
 										<div class="widget-header widget-header-flat">
 											<h4 class="lighter">
-												{$data->getName()}
+												{$this->css->title}
 											</h4>
 
 											<div class="widget-toolbar">
@@ -31,7 +28,8 @@ class Top5 extends \Report\Format\Ace {
 														<tr>
 HTML;
 
-        foreach($this->columnsHeaders as $columnHeader) {
+        $columnsHeaders = array();
+        foreach($columnsHeaders as $columnHeader) {
             $html .= <<<HTML
 															<th>
 																name
@@ -47,7 +45,7 @@ HTML;
 													<tbody>
 HTML;
 
-        $values = $data->toArray();
+        $values = $data;
         uasort($values, function ($a, $b) { if ($a['sort'] == $b['sort']) return 0 ; return $a['sort'] < $b['sort'] ? 1 : -1;});
         $values = array_slice($values, 0, 5);
         foreach($values as $value) {
@@ -83,14 +81,6 @@ HTML;
 HTML;
 
         $output->push($html);
-    }
-    
-    public function setTitle($title) {
-        $this->title = $title;
-    }
-
-    public function setColumnHeaders($columnsHeaders) {
-        $this->columnsHeaders = $columnsHeaders;
     }
 }
 

@@ -6,8 +6,8 @@ class Definitions  extends \Report\Template {
 
     public function render($output) {
         $renderer = $output->getRenderer('Definitions');
+        $renderer->setCss($this->css);
         
-        $renderer->setAnalyzer($this->data->getName());
         $renderer->render($output, $this->data->getDefinitions());
     }
 }

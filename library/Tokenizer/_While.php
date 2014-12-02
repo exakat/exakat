@@ -30,7 +30,7 @@ class _While extends TokenAuto {
                                    3 => array('token'      => 'T_CLOSE_PARENTHESIS'),
                                    4 => array('atom'       => 'yes', 
                                               'notAtom'    => 'Sequence'),
-                                   5 => array('filterOut2' => Token::$instruction_ending),
+                                   5 => array('filterOut2' => Token::$instructionEnding),
         );
         
         $this->actions = array('while_to_block' => true,

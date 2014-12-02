@@ -9,9 +9,10 @@ class Top5 extends \Report\Format\Html {
     private $columnsHeaders = array();
     
     public function render($output, $data) {
+        $title = "";
         $html = <<<HTML
 											<h4 class="lighter">
-												{$data->getName()}
+												$title
 											</h4>
 												<table class="table table-bordered table-striped">
 													<thead>
@@ -34,7 +35,7 @@ HTML;
 													<tbody>
 HTML;
 
-        $values = $data->toArray();
+        $values = $data;
         uasort($values, function ($a, $b) { if ($a['sort'] == $b['sort']) return 0 ; return $a['sort'] < $b['sort'] ? 1 : -1;});
         $values = array_slice($values, 0, 5);
         foreach($values as $value) {

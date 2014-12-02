@@ -11,7 +11,7 @@ class _Throw extends TokenAuto {
                                              'atom'      => 'none'),
                                   1 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall', 
                                                                   'Staticmethodcall', 'Staticproperty', 'Identifier', 'Assignation')),
-                                  2 => array('filterOut' => Token::$instruction_ending),
+                                  2 => array('filterOut' => Token::$instructionEnding),
                                   );
         
         $this->actions = array('transform'    => array( 1 => 'THROW'),

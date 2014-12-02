@@ -7,21 +7,8 @@ class TableForVersions extends \Report\Template {
         $data = $this->data->toArray();
         
         $renderer = $output->getRenderer('TableForVersions');
+        $renderer->setCss($this->css);
         $renderer->render($output, $data);
-    }
-    
-    public function setSort($sort) {
-        if (in_array($sort, range(1, 5))) {
-            $this->sort = $sort; 
-        }
-    }
-
-    public function setSummary($summary) {
-        $this->summary = (bool) $summary;
-    }
-
-    public function setHeadersNames($name) {
-        $this->headersName = $name; 
     }
 }
 

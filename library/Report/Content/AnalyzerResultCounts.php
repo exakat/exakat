@@ -3,48 +3,23 @@
 namespace Report\Content;
 
 class AnalyzerResultCounts extends \Report\Content {
-    private $analyzers = array();
-    private $neo4j = null;
-    private $showEmpty = false;
-    private $showTotal = true;
-    
-    protected $name = 'Analyzers result counts';
-    
-    public function setAnalyzers($analyzers) {
-        $this->analyzers = $analyzers;
-    }
+    public function collect() {
+        $analyzers = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
+                                 \Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
 
-    public function setNeo4j($neo4j) {
-        $this->neo4j = $neo4j;
-    }
-
-    public function showEmpty($show) {
-        $this->showEmpty = (bool) $show;
-    }
-    
-    public function toArray() {
-        $return = array();
         $total = 0;
-        
-        foreach($this->analyzers as $analyzer) {
+        foreach($analyzers as $analyzer) {
             $o = \Analyzer\Analyzer::getInstance($analyzer, $this->neo4j);
             
             $count = $o->toCount();
-            if ($count > 0 || $this->showEmpty) {
-                $return[] = array( $o->getName(), $o->toCount(), $o->getSeverity() );
-            }
+            // only show non-empty
+            if ($count == 0) { continue 1; }
+
             $total += $count;
+            $this->array[] = array( $o->getName(), $count, $o->getSeverity() );
         }
 
-        if ($this->showTotal) {
-            $return[] = array('Total', $total, '');
-        };
-        
-        return $return;
-    }
-    
-    public function getColumnTitles() {
-        return array('Label', 'Value', 'Severity');
+        $this->array[] = array('Total', $total, '');
     }
 }
 

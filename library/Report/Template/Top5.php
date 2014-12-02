@@ -7,8 +7,8 @@ class Top5 extends \Report\Template {
     public function render($output) {
         $renderer = $output->getRenderer('Top5');
         
-        $renderer->setTitle($this->title);
-        $renderer->render($output, $this->data);
+        $renderer->setCss($this->css);
+        $renderer->render($output, $this->data->getArray());
     }
 }
 

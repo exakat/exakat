@@ -7,16 +7,20 @@ class SimpleTable extends \Report\Format\Ace {
     private $titles = array();
     
     public function render($output, $data) {
-        $th = '<tr>';
-        foreach($this->titles as $title) {
-            $th .= <<<HTML
+        $th = '';
+        
+        if ($this->css->displayTitles === true) {
+            $th .= '<tr>';
+            foreach($this->css->titles as $title) {
+                $th .= <<<HTML
 															<th>
 																$title
 															</th>
 
 HTML;
         }
-        $th .= "</tr>";
+            $th .= "</tr>";
+        }
         
         $text = <<<HTML
 												<table class="table table-bordered table-striped">
@@ -44,10 +48,6 @@ HTML;
 HTML;
         
         $output->push($text);
-    }
-
-    public function setTitles($titles) {
-        $this->titles = $titles;
     }
 }
 

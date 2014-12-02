@@ -6,6 +6,7 @@ class Template {
     protected $analyzer = null;
     protected $data     = null;
     protected $title    = null;
+    protected $css      = null;
     
     public function setAnalyzer($name) {
         $this->analyzer = $name;
@@ -19,6 +20,10 @@ class Template {
 
     public function setTitle($title) {
         $this->title = $title; 
+    }
+
+    public function setCss($css) {
+        $this->css = $css; 
     }
 }
 

@@ -15,7 +15,10 @@ class Ace extends \Report\Format {
     protected $format = "Ace";    
     protected $fileExtension = "html";
     
+    protected $css = null;
+
     public function render($output, $data) {
+        // default behavior
         $output->push("Text for ".get_class($this)."\n");
     }
     
@@ -301,9 +304,27 @@ HTML;
     public function setAnalyzer($name) {
         \Report\Format\Ace::$analyzer = $name;
     }
+
+    public function setCss($css) {
+        $class = explode('\\', get_class($this));
+        $shortClass = array_pop($class);
+
+        $this->css = new \Report\Format\Css($css, $shortClass);
+    }
     
     public function getOutput() {
         return $this->output;
+    }
+
+    protected function makeFileName($title) {
+        return str_replace(array(' ', '(', ')', ':', '*', '.' ), 
+                           array('-', '' , '' , '' , '' , '' ),
+                               $title).'.html';
+    }
+
+    protected function makeLink($title) {
+        $file = $this->makeFileName($title);
+        return "<a href=\"$file\">$title</a>";
     }
 }
 

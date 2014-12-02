@@ -3,7 +3,8 @@
 namespace Report\Content;
 
 class ListBySeverity extends \Report\Content\GroupBy {
-    public function toArray() {
+    
+    public function getArray() {
         $array = array();
         
         $severities = array();
@@ -13,7 +14,7 @@ class ListBySeverity extends \Report\Content\GroupBy {
         $severities['None'] = 0;
         
         foreach($this->analyzers as $a) {
-            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
+            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->neo4j);
             
             $count = $analyzer->toCount();
             if ($count == 0) { continue; }

@@ -3,8 +3,7 @@
 namespace Report\Content;
 
 class AppCounts extends \Report\Content {
-    private $list = array();
-    protected $neo4j = null;
+    protected $hash = array();
 
     public function collect() {
         // Which extension are being used ? 
@@ -57,7 +56,7 @@ class AppCounts extends \Report\Content {
                     );
 
         foreach($extensions as $section => $hash) {
-            $this->list[$section] = array();
+            $this->hash[$section] = array();
             foreach($hash as $name => $ext) {
                 if (is_string($ext)) {
                     if (strpos($ext, '\\') === false) {
@@ -74,18 +73,10 @@ class AppCounts extends \Report\Content {
                 }
                 $vertices = $this->query($this->neo4j, $queryTemplate);
                 $v = $vertices[0][0];
-                $this->list[$section][$name] = $v;
+                $this->hash[$section][$name] = $v;
                 continue;
             }
         }
-    }
-    
-    public function setNeo4j($client) {
-        $this->neo4j = $client;
-    }
-
-    public function toArray() {
-        return $this->list;
     }
 
     public function query($client, $query) {
@@ -103,10 +94,6 @@ class AppCounts extends \Report\Content {
             die(__METHOD__);
         }
         return $query->getResultSet();
-    }
-    
-    public function getColumnTitles() {
-        return array('Object', 'Count');
     }
 }
 

@@ -2,27 +2,11 @@
 
 namespace Report\Report;
 
-class Premier {
-    private $client = null;
-    private $db = null;
-
-    private $summary   = null;
-    private $content   = null;
-    private $current   = null;
-    private $currentH1 = null;
-    private $currentH2 = null;
-    private $root      = null;
-
-    private $project       = null;
+class Premier extends Report {
     private $projectUrl    = null;
 
-    public function __construct($client, $db) {
-        $this->client  = $client;
-        $this->db      = $db;
-
-        $this->content = new \Report\Template\Section('');
-        $this->current = $this->content;
-        $this->root    = $this->content;
+    public function __construct($project, $client, $db) {
+        parent::__construct($project, $client, $db);
     }
     
     public function setProject($project) {
@@ -34,193 +18,54 @@ class Premier {
     }
     
     public function prepare() {
-        $this->addContent('Text', 'Audit report for application');
+        $this->createLevel1('Report presentation');
 
-        $this->createH1('Report presentation');
+        $this->createLevel2('Audit configuration'); 
+        $this->addContent('Text', 'Presentation of the audit', 'first');
+        $this->addContent('SimpleTable', 'ReportInfo', 'reportinfo'); 
 
-/*
-        $this->createH2('Report synopsis'); 
-        $this->addContent('Text', <<<TEXT
-DISCLAIMER : This is an alpha version of the software. We are working hard to make it better, so your feedback is always appreciated : damien.seguy@gmail.com.
-        
-The PHP code is firstly tokenized by PHP itself and an AST tree is build. Then, we run on this structured representation of the code our analyzers, that will look for various situations. 
+        $this->createLevel2('Application configuration'); 
+        $this->addContent('Text', 'Presentation of the application');
 
-Situations may be code poorly written, code that compile and run but won\'t do what is expected, security holes, performances errors. You will find them in the "Analysis" section, along with the spotted code, and its file coordinates.
+        $this->createLevel1('Analysis');
+        $this->createLevel2('Code smells');
+        $analyzer = $this->getContent('Dashboard');
+        $analyzer->setThema('Analyze');
+        $analyzer->collect();
+        $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
 
-Along the way, we gather many informations about the application itself, which are gathered in the "Application information" tab. There, you\'ll have an overview of PHP features that are used in the code : extensions, features such as ticks, shell commands, typehint, recursive methods or variables variables. This is a good way to track all the technology invested in your code. 
+        $this->createLevel2('Coding Conventions');
+        $analyzer = $this->getContent('Dashboard');
+        $analyzer->setThema('Coding Conventions');
+        $analyzer->collect();
+        $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
 
-Finaly, some definitions are gathered in the "Annex".
+        $this->createLevel2('Dead code');
+        $analyzer = $this->getContent('Dashboard');
+        $analyzer->setThema('Dead code');
+        $analyzer->collect();
+        $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
 
-TEXT
-);
-*/
-        $this->createH2('Report configuration'); 
+        $this->createLevel2('Security');
+        $analyzer = $this->getContent('Dashboard');
+        $analyzer->setThema('Security');
+        $analyzer->collect();
+        $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
 
-        $ReportInfo = new \Report\Content\ReportInfo($this->project);
-        $ReportInfo->setProject($this->project);
-        $ReportInfo->setNeo4j($this->client);
-        $ReportInfo->setMySQL($this->db);
-        $ReportInfo->collect();
-
-        $ht = $this->addContent('SimpleTable', $ReportInfo); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-        $ht->setAnalyzer('ReportInfo');
-        
-        $this->createH1('Analysis');
-        $this->addContent('Text', 'intro');
-
-////////////////////////////////
-// Dashboard                  //
-////////////////////////////////
-        $this->createH2('Code smells');
-        $groupBy = new \Report\Content\Groupby($this->client);
-        $groupBy->setGroupby('getSeverity');
-        $groupBy->setCount('toCount');
-        $groupBy->setSort(array('Critical', 'Major', 'Minor'));
-
-        $row = $this->addContent('Row', null);
-        
-        $groupBy->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Analyze') );
-        $groupBy->setName('Severity repartition');
-        
-        $row->addLeftContent('Camembert', $groupBy); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
-        $infoBox = new \Report\Content\Infobox();
-        $infoBox->setNeo4j($this->client);
-        $infoBox->setMySQL($this->db);
-        $infoBox->setSeverities($groupBy->toArray());
-        $infoBox->collect();
-        $ht = $row->addRightContent('Infobox', $infoBox); 
-
-        $row2 = $this->addContent('Row', null);
-        $listBySeverity = new \Report\Content\ListBySeverity($this->client);
-        $listBySeverity->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'));
-        $listBySeverity->setName('Top 5 errors');
-        $ht = $row2->addLeftContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
-        $listByFile = new \Report\Content\ListByFile($this->client);
-        $listByFile->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'));
-        $listByFile->setName('Top 5 files');
-        $ht = $row2->addRightContent('Top5', $listByFile);
-
-/////////////////////////////////
-// Dashboard Coding Convention //
-/////////////////////////////////
-        $this->createH2('Coding Conventions');
-        $groupBy = new \Report\Content\Groupby($this->client);
-        $groupBy->setGroupby('getSeverity');
-        $groupBy->setCount('toCount');
-        $groupBy->setSort(array('Critical', 'Major', 'Minor'));
-
-        $row = $this->addContent('Row', null);
-        
-        $groupBy->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions') );
-        $groupBy->setName('Severity repartition');
-        
-        $row->addLeftContent('Camembert', $groupBy); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
-        $infoBox = new \Report\Content\Infobox();
-        $infoBox->setNeo4j($this->client);
-        $infoBox->setMySQL($this->db);
-        $infoBox->setSeverities($groupBy->toArray());
-        $infoBox->collect();
-        $ht = $row->addRightContent('Infobox', $infoBox); 
-
-        $row2 = $this->addContent('Row', null);
-        $listBySeverity = new \Report\Content\ListBySeverity($this->client);
-        $listBySeverity->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
-        $listBySeverity->setName('Top 5 errors');
-        $ht = $row2->addLeftContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
-        $listByFile = new \Report\Content\ListByFile($this->client);
-        $listByFile->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
-        $listByFile->setName('Top 5 files');
-        $ht = $row2->addRightContent('Top5', $listByFile);
-
-/////////////////////////////////
-// Dashboard Dead code         //
-/////////////////////////////////
-        $this->createH2('Dead code');
-        $groupBy = new \Report\Content\Groupby($this->client);
-        $groupBy->setGroupby('getSeverity');
-        $groupBy->setCount('toCount');
-        $groupBy->setSort(array('Critical', 'Major', 'Minor'));
-
-        $row = $this->addContent('Row', null);
-        
-        $groupBy->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Dead code') );
-        $groupBy->setName('Severity repartition');
-        
-        $row->addLeftContent('Camembert', $groupBy); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
-        $infoBox = new \Report\Content\Infobox();
-        $infoBox->setNeo4j($this->client);
-        $infoBox->setMySQL($this->db);
-        $infoBox->setSeverities($groupBy->toArray());
-        $infoBox->collect();
-        $ht = $row->addRightContent('Infobox', $infoBox); 
-
-        $row2 = $this->addContent('Row', null);
-        $listBySeverity = new \Report\Content\ListBySeverity($this->client);
-        $listBySeverity->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Dead code'));
-        $listBySeverity->setName('Top 5 errors');
-        $ht = $row2->addLeftContent('Top5', $listBySeverity); // presentation of the report, its organization and extra information on its configuration (such as PHP version used, when, version of software, human reviewer...)
-
-        $listByFile = new \Report\Content\ListByFile($this->client);
-        $listByFile->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers('Dead code'));
-        $listByFile->setName('Top 5 files');
-        $ht = $row2->addRightContent('Top5', $listByFile);
-
-////////////////////////////////
-// Compilations               //
-////////////////////////////////
-
-        $h = $this->createH1('Compilations');
-        $h = $this->createH2('Compile');
+        $this->createLevel1('Compilation');
         $this->addContent('Text', 'This table is a summary of compilation situation. Every PHP script has been tested for compilation with the mentionned versions. Any error that was found is displayed, along with the kind of messsages and the list of erroneous files.');
-        $d = new \Report\Content\Compilations();
-        $d->setNeo4j($this->client);
-        $c = $this->addContent('Compilations', $this->root);
-        $d->collect();
-        $c->setContent( $d );
-        
-        $h = $this->createH2('Compatibility53');
-        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.3. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.3. You must remove them before moving to this version.');
+        $this->createLevel2('Compile');
+        $this->addContent('Compilations', 'Compilations');
 
-        $d = new \Report\Content\Compatibility53();
-        $d->setNeo4j($this->client);
-        $d->collect();
-        $c = $this->addContent('Compatibility', $d);
+        //'5.2' => '52', , '7.0' => '70'
+        $versions = array('5.3' => '53', '5.4' => '54', '5.5' => '55', '5.6' => '56');
+        foreach($versions as $version => $code) {
+            $this->createLevel2('Compatibility '.$version);
+            $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.');
+            $this->addContent('Compatibility', 'Compatibility'.$code);
+        }
 
-        $h = $this->createH2('Compatibility54');
-        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.4. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.4. You must remove them before moving to this version.');
-
-        $d = new \Report\Content\Compatibility54();
-        $d->setNeo4j($this->client);
-        $d->collect();
-        $c = $this->addContent('Compatibility', $d);
-
-        $h = $this->createH2('Compatibility55');
-        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.5. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.5. You must remove them before moving to this version.');
-
-        $d = new \Report\Content\Compatibility55();
-        $d->setNeo4j($this->client);
-        $d->collect();
-        $c = $this->addContent('Compatibility', $d);
-
-        $h = $this->createH2('Compatibility56');
-        $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP 5.6. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP 5.6. You must remove them before moving to this version.');
-
-        $d = new \Report\Content\Compatibility56();
-        $d->setNeo4j($this->client);
-        $d->collect();
-        $c = $this->addContent('Compatibility', $d);
-        
-////////////////////////////////
-// Application analyzes       //
-////////////////////////////////
-        $this->createH1('Detailled');
-        $this->addContent('Text', 'intro');
-
+        $this->createLevel1('Detailled');
         $analyzes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
         $analyzes2 = array();
@@ -233,19 +78,16 @@ TEXT
         if (count($analyzes) > 0) {
             $h1 = false;
 
-            $analyzer = new \Report\Content\AnalyzerResultCounts();
-            $analyzer->setNeo4j($this->client);
-            $analyzer->setAnalyzers($analyzes);
-            $h = $this->createH2($analyzer->getName());
-            $h = $this->addContent('SimpleTableResultCounts', $analyzer);
+            $this->createLevel2('Results counts');
+            $h = $this->addContent('SimpleTableResultCounts', 'AnalyzerResultCounts');
 
             foreach($analyzes2 as $analyzer) {
                 if ($analyzer->hasResults()) {
-                    $h = $this->createH2($analyzer->getName());
-                    if ($a == "Php/Incompilable") {
+                    $h = $this->createLevel2($analyzer->getName());
+                    if (get_class($analyzer) == "Analyzer\\Php\\Incompilable") {
                         $h = $this->addContent('TableForVersions', $analyzer);
                     } else {
-                        $h = $this->addContent('TextLead', $analyzer->getDescription());
+                        $h = $this->addContent('Text', $analyzer->getDescription(), 'textlead');
                         $h = $this->addContent('Horizontal', $analyzer);
                     }
                 }
@@ -255,9 +97,8 @@ TEXT
             $definitions = new \Report\Content\Definitions($client);
             $definitions->setAnalyzers($analyzes);
         }
-
-        $this->createH1('Application information');
-
+        
+        $this->createLevel1('Appinfo');
         $ht = $this->addContent('Text', <<<TEXT
 This is an overview of your application.
 
@@ -265,72 +106,20 @@ Ticked <i class="icon-ok"></i> information are features used in your application
 
 TEXT
 );
-        $analyze = new \Report\Content\Appinfo();
-        $analyze->setNeo4j($this->client);
-        $analyze->collect();
-        $ht = $this->addContent('Tree', $analyze);
+        $ht = $this->addContent('Tree', 'Appinfo');
 
-        $this->createH1('Stats');
-
+        $this->createLevel1('Stats');
         $ht = $this->addContent('Text', <<<TEXT
 These are various stats of different structures in your application.
 
 TEXT
 );
-        $analyze = new \Report\Content\AppCounts();
-        $analyze->setNeo4j($this->client);
-        $analyze->collect();
-        $ht = $this->addContent('SectionedHashTable', $analyze);
+        $this->addContent('SectionedHashTable', 'AppCounts');
 
-        $this->createH1('Annexes');
-        $this->createH2('Documentation');
-        $this->addContent('Definitions', $definitions);
-        
-        return true;
-    }
-    
-    public function render($format, $filename = null) {
-        $format = "\\Report\\Format\\$format";
+        $this->createLevel1('Annexes');
 
-        $this->output = new $format();
-        $this->output->setProjectName($this->project);
-        $this->output->setProjectUrl('');
-        $this->output->setSummaryData($this->root);
-        
-        foreach($this->root->getContent() as $c) {
-            $c->render($this->output);
-        }
-        
-        if (isset($filename)) {
-            return $this->output->toFile($filename.'.'.$this->output->getExtension());
-        } else {
-            die("No filename? ".__METHOD__);
-        }
-    }
-    
-    private function createH1($name) {
-        $section = $this->root->addContent('Section', $name);
-        $section->setLevel(1);
-
-        $this->current = $section;
-        $this->currentH1 = $section;
-    }
-
-    function createH2($name) {
-        // @todo check that current is level 1 ? 
-        $section = $this->currentH1->addContent('Section', $name);
-        $section->setLevel(2);
-
-        $this->current = $section;
-        $this->currentH2 = $section;
-    }
-
-    function createH3($name) {
-        $this->current = $this->content->getCurrent()->getCurrent()->addSection($name, 3);
-    }
-
-    function addContent($type, $data = null) {
-        return $this->current->addContent($type, $data);
+        $this->createLevel2('Documentation');
+        $this->addContent('Definitions', $definitions, 'annexes');
     }
 }
 

@@ -36,6 +36,10 @@ class Csv extends \Report\Format {
     public function setSummaryData($data) {
         $this->summary = $data;
     }
+
+    public function setCss() {
+        // nothing to do
+    }
 }
 
 ?>

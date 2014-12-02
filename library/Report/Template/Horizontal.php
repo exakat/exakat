@@ -19,26 +19,9 @@ class Horizontal extends \Report\Template {
         $renderer = $output->getRenderer('Horizontal');
 
         $renderer->setAnalyzer($this->data->getName());
-
-        $renderer->render($output, $this->data->toFullArray());
-    }
-
-    public function setSort($sort) {
-        if (in_array($sort, range(1, 5))) {
-            $this->sort = $sort; 
-        }
-    }
-
-    public function setSummary($summary) {
-        $this->summary = (bool) $summary;
-    }
-
-    public function setHeaderName($name) {
-        $this->headerName = $name; 
-    }
-
-    public function setHeaderCount($name) {
-        $this->headerCount = $name; 
+        $renderer->setCss($this->css);
+        
+        $renderer->render($output, $this->data->getArray());
     }
 }
 

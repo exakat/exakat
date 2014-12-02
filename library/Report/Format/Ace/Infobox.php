@@ -7,13 +7,15 @@ class Infobox extends \Report\Format\Ace {
         $text = <<<HTML
 								<div class="infobox-container">
 HTML;
-        $colors = array('green', 'black', 'orange', 'pink', 'light-wood', 'wood', 'blue', 'red', 'grey', 'purple');
+        $colors = $this->css->colors;
         
-        foreach($data as $row) {
-            $color = $colors[rand(0, count($colors) - 1)];
+        $i = -1;
+        foreach($data as $id => $row) {
+            $i = ++$i % count($colors);
+            $color = $colors[$i];
             
             $text .= <<<HTML
-									<div class="infobox infobox-$color  ">
+									<div class="infobox infobox-$color">
 										<div class="infobox-icon">
 											<i class="icon-{$row['icon']}"></i>
 										</div>

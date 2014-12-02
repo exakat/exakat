@@ -3,11 +3,11 @@
 namespace Report\Content;
 
 class ListByFile extends \Report\Content\GroupBy {
-    public function toArray() {
+    public function getArray() {
         $array = array();
         
         foreach($this->analyzers as $a) {
-            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
+            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->neo4j);
             
             $count = $analyzer->toCount();
             if ($count == 0) { continue; }
