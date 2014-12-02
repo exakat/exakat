@@ -209,7 +209,7 @@ if ($missing_severity == 0) {
     $res = $sqlite->query("SELECT a.folder, a.name FROM categories c
 JOIN analyzers_categories ac ON c.id = ac.id_categories
 JOIN analyzers a ON ac.id_analyzer = a.id
-WHERE (c.name in ('Analyze', 'Coding Conventions', 'Dead code')) AND a.severity IS NULL");
+WHERE (c.name in ('Analyze', 'Coding Conventions', 'Dead code', 'Security')) AND a.severity IS NULL");
 
     while ($row = $res->fetchArray()) {
         print '+ '.$row['folder'].'/'.$row['name']."\n";
