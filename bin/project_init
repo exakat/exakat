@@ -6,6 +6,10 @@ spl_autoload_register('Autoload::autoload_library');
 $config = Config::factory();
 $project = $config->project;
 
+if (empty($project)) {
+    die("No project name provided. Add -p option\n");
+}
+
 $repo_url = $config->repository;
 
 if ($config->delete === true) {
