@@ -19,7 +19,7 @@ class AppCounts extends \Report\Content {
                      ),
                     'Classes' => array(
                             'Classes'        => 'Class',
-                            'Constants'      => array('index' => 'Class', 
+                            'Class constants'=> array('index' => 'Class', 
                                                       'Below' => 'out("BLOCK").out("ELEMENT").has("atom", "Const")'),
                             'Properties'     => array('index' => 'Class', 
                                                       'Below' => 'out("BLOCK").out("ELEMENT").has("atom", "Ppp").filter{!it.out("STATIC").any()}.out("DEFINE")'),
