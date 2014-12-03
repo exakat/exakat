@@ -137,8 +137,11 @@ if (empty($project_code_source)) {
 		<meta charset="utf-8" />
 		<title>Exakat Audit Report</title>
 
+
 		<meta name="description" content="Exakat Audit report. © 2014 Exakat" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="shortcut icon" href="http://www.exakat.io/wp-content/themes/alterna/img/favicon.png" />
 
 		<!--basic styles-->
 

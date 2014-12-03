@@ -98,7 +98,8 @@ class Premier extends Report {
             $definitions->setAnalyzers($analyzes);
         }
         
-        $this->createLevel1('Appinfo');
+        $this->createLevel1('Application');
+        $this->createLevel2('Appinfo()');
         $ht = $this->addContent('Text', <<<TEXT
 This is an overview of your application.
 
@@ -107,6 +108,13 @@ Ticked <i class="icon-ok"></i> information are features used in your application
 TEXT
 );
         $ht = $this->addContent('Tree', 'Appinfo');
+
+        $this->createLevel2('Directive');
+        $ht = $this->addContent('Text', <<<TEXT
+This is an overview of the recommended directives for your application. 
+TEXT
+);
+        $ht = $this->addContent('Directives', 'Directives');
 
         $this->createLevel1('Stats');
         $ht = $this->addContent('Text', <<<TEXT

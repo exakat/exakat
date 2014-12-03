@@ -10,7 +10,7 @@ class Tree extends \Report\Format\Ace {
 
         $counter = \Report\Format\Ace\Tree::$tree_counter++;
         
-        $tree_data = $this->renderTreeData($data->toArray());
+        $tree_data = $this->renderTreeData($data);
         
 $js = <<<JS
 
