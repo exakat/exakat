@@ -71,29 +71,12 @@ class AppCounts extends \Report\Content {
                 } else {
                     $queryTemplate = "g.idx('atoms')[['atom':'{$ext['index']}']].count()"; 
                 }
-                $vertices = $this->query($this->neo4j, $queryTemplate);
+                $vertices = $this->query($queryTemplate);
                 $v = $vertices[0][0];
                 $this->hash[$section][$name] = $v;
                 continue;
             }
         }
-    }
-
-    public function query($client, $query) {
-        $queryTemplate = $query;
-        $params = array('type' => 'IN');
-        try {
-            $query = new \Everyman\Neo4j\Gremlin\Query($client, $queryTemplate, $params);
-            return $query->getResultSet();
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            print "Exception : ".$message."\n";
-        
-            print $queryTemplate."\n";
-            die(__METHOD__);
-        }
-        return $query->getResultSet();
     }
 }
 

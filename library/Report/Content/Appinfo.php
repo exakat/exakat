@@ -3,7 +3,7 @@
 namespace Report\Content;
 
 class Appinfo extends \Report\Content {
-    private $list = array();
+    protected $array = array();
 
     public function collect() {
         // Which extension are being used ? 
@@ -221,30 +221,30 @@ class Appinfo extends \Report\Content {
                     );
 
         foreach($extensions as $section => $hash) {
-            $this->list[$section] = array();
+            $this->array[$section] = array();
             foreach($hash as $name => $ext) {
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].hasNot('notCompatibleWithPhpVersion', null).count()"; 
-                $vertices = $this->query($this->neo4j, $queryTemplate);
+                $vertices = $this->query($queryTemplate);
                 $v = $vertices[0][0];
                 if ($v == 1) {
-                    $this->list[$section][$name] = "Incomp.";
+                    $this->array[$section][$name] = "Incomp.";
                     continue ;
                 } 
 
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].count()"; 
-                $vertices = $this->query($this->neo4j, $queryTemplate);
+                $vertices = $this->query($queryTemplate);
                 $v = $vertices[0][0];
                 if ($v == 0) {
-                    $this->list[$section][$name] = "Not run";
+                    $this->array[$section][$name] = "Not run";
                     continue;
                 } 
 
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.any()"; 
                 try {
-                    $vertices = $this->query($this->neo4j, $queryTemplate);
+                    $vertices = $this->query($queryTemplate);
     
                     $v = $vertices[0][0];
-                    $this->list[$section][$name] = $v == "true" ? "Yes" : "No";
+                    $this->array[$section][$name] = $v == "true" ? "Yes" : "No";
                 } catch (Exception $e) {
                     print "Error for appinfo : \n";
                     print "$queryTemplate : \n";
@@ -255,8 +255,8 @@ class Appinfo extends \Report\Content {
             }
             
             if ($section == 'Extensions') {
-                $list = $this->list[$section];
-                uksort($this->list[$section], function ($ka, $kb) use ($list) {
+                $list = $this->array[$section];
+                uksort($this->array[$section], function ($ka, $kb) use ($list) {
                     if ($list[$ka] == $list[$kb]) {
                         if ($ka > $kb) { return  1; }
                         if ($ka == $kb) { return 0; }
@@ -267,27 +267,6 @@ class Appinfo extends \Report\Content {
                 });
             }
         }
-    }
-    
-    public function toArray() {
-        return $this->list;
-    }
-
-    public function query($client, $query) {
-        $queryTemplate = $query;
-        $params = array('type' => 'IN');
-        try {
-            $query = new \Everyman\Neo4j\Gremlin\Query($client, $queryTemplate, $params);
-            return $query->getResultSet();
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-            $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            print "Exception : ".$message."\n";
-        
-            print $queryTemplate."\n";
-            die(__METHOD__);
-        }
-        return $query->getResultSet();
     }
 }
 
