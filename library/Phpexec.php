@@ -105,7 +105,7 @@ class Phpexec {
             $tokens = token_get_all(file_get_contents(str_replace('$', '\\\$', $file)));
         } else {
             $tmpFile = tempnam("/tmp", "Phpexec");
-            shell_exec($this->phpexec.' -r "print \'<?php \\$tokens = \'; var_export(token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); print \'; ?>\';" > '.$tmpFile);
+            shell_exec($this->phpexec.'  -d short_open_tag=1  -r "print \'<?php \\$tokens = \'; var_export(token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); print \'; ?>\';" > '.$tmpFile);
             include($tmpFile);
             unlink($tmpFile);
         }

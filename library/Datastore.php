@@ -65,7 +65,7 @@ class Datastore {
     private function checkTable($table) {
         $res = $this->sqlite->querySingle('SELECT count(*) FROM sqlite_master WHERE name="'.$table.'"');
         
-        if ($res == 1) {return true; }
+        if ($res == 1) { return true; }
 
         switch($table) {
            case 'compilation52' : 
@@ -130,6 +130,15 @@ CREATE TABLE compilation70 (
   file TEXT,
   error TEXT,
   line id
+);
+SQLITE;
+                break;
+
+            case 'shortopentag' : 
+                $createTable = <<<SQLITE
+CREATE TABLE shortopentag (
+  id INTEGER PRIMARY KEY,
+  file TEXT
 );
 SQLITE;
                 break;

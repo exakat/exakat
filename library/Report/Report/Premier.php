@@ -79,16 +79,20 @@ class Premier extends Report {
             $h1 = false;
 
             $this->createLevel2('Results counts');
-            $h = $this->addContent('SimpleTableResultCounts', 'AnalyzerResultCounts');
+            $this->addContent('SimpleTableResultCounts', 'AnalyzerResultCounts');
 
             foreach($analyzes2 as $analyzer) {
                 if ($analyzer->hasResults()) {
-                    $h = $this->createLevel2($analyzer->getName());
+                    $this->createLevel2($analyzer->getName());
                     if (get_class($analyzer) == "Analyzer\\Php\\Incompilable") {
-                        $h = $this->addContent('TableForVersions', $analyzer);
+                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
+                        $this->addContent('TableForVersions', $analyzer);
+                    } elseif (get_class($analyzer) == "Analyzer\\Php\\ShortOpenTagRequired") {
+                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
+                        $this->addContent('SimpleTable', $analyzer, 'oneColumn');
                     } else {
-                        $h = $this->addContent('Text', $analyzer->getDescription(), 'textlead');
-                        $h = $this->addContent('Horizontal', $analyzer);
+                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
+                        $this->addContent('Horizontal', $analyzer);
                     }
                 }
             }
@@ -100,24 +104,24 @@ class Premier extends Report {
         
         $this->createLevel1('Application');
         $this->createLevel2('Appinfo()');
-        $ht = $this->addContent('Text', <<<TEXT
+        $this->addContent('Text', <<<TEXT
 This is an overview of your application.
 
 Ticked <i class="icon-ok"></i> information are features used in your application. Non-ticked are feature that are not in use in the application.
 
 TEXT
 );
-        $ht = $this->addContent('Tree', 'Appinfo');
+        $this->addContent('Tree', 'Appinfo');
 
         $this->createLevel2('Directive');
-        $ht = $this->addContent('Text', <<<TEXT
+        $this->addContent('Text', <<<TEXT
 This is an overview of the recommended directives for your application. 
 TEXT
 );
-        $ht = $this->addContent('Directives', 'Directives');
+        $this->addContent('Directives', 'Directives');
 
         $this->createLevel1('Stats');
-        $ht = $this->addContent('Text', <<<TEXT
+        $this->addContent('Text', <<<TEXT
 These are various stats of different structures in your application.
 
 TEXT

@@ -132,8 +132,34 @@ foreach($versions as $version) {
 }
 
 $stats['php'] = count($res_files);
-$shell = $shell_base . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php56tokens.sh | awk \'{s+=$1} END {print s}\'';
-$stats['tokens'] = (int) shell_exec($shell);
+$shell = $shell_base . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php56tokens.sh'; // | awk \'{s+=$1} END {print s}\'
+$result_nosot = shell_exec($shell);
+$stats['tokens'] = (int) array_sum(explode("\n", $result_nosot));
+
+$shell = $shell_base . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/phpsot.sh '; //| awk \'{s+=$1} END {print s}\'
+$result_sot = shell_exec($shell);
+$stats['tokenssot'] = (int) array_sum(explode("\n", $result_sot));
+
+if ($stats['tokenssot'] != $stats['tokens']) {
+    $nosot = explode("\n", trim($result_nosot));
+    $sot = explode("\n", trim($result_sot));
+    
+    if (count($nosot) != count($sot)) { 
+        die("Error in short open tag analyze\n");
+    }
+    $shortOpenTag = array();
+    foreach($nosot as $id => $count) {
+        list($count_nosot, $file) = explode(' ', $sot[$id]);
+        
+        if ($count_nosot != $count) {
+            $shortOpenTag[] = array('file' => $file);
+        }
+    }
+    
+    $datastore = new Datastore($dir);
+    $datastore->cleanTable('shortopentag');
+    $datastore->addRow('shortopentag', $shortOpenTag);
+}
 
 $db = new Db();
 $db->insert('projects', array('notCompilable53', 'notCompilable54', 'notCompilable55', 'notCompilable56', 'project', 'php', 'tokens', 'loc'), array($stats['notCompilable53'], $stats['notCompilable54'], $stats['notCompilable55'], $stats['notCompilable56'], $dir, $stats['php'], $stats['tokens'], $stats['loc']));
