@@ -14,24 +14,24 @@ class TokenAuto extends Token {
     }
     
     public function prepareQuery() {
-        $query = " total = 0; done = 0; ";
-        $class = str_replace("Tokenizer\\", '', get_class($this));
+        $query = ' total = 0; done = 0; ';
+        $class = str_replace('Tokenizer\\', '', get_class($this));
         if (in_array($class, array('FunctioncallArray'))) {
-            $query .= "g.idx('racines')[['token':'S_ARRAY']].out('INDEXED')";
+            $query .= 'g.idx("racines")[["token":"S_ARRAY"]].out("INDEXED")';
         } elseif (in_array($class, Token::$types)) {
             $query .= "g.idx('racines')[['token':'$class']].out('INDEXED')";
         } else {
-            $query .= "g.V";
+            $query .= 'g.V';
             print "Using g.V : $class\n";
         }
-        $query .= ".sideEffect{ total++; }";
+        $query .= '.sideEffect{ total++; }';
 
         $qcdts = array();
         
         if (!empty($this->conditions[0])) {
             $qcdts = array_merge($qcdts, $this->readConditions($this->conditions[0]));
             
-            $qcdts[] = "as('origin')";
+            $qcdts[] = 'as("origin")';
             unset($this->conditions[0]);
         }
 
@@ -62,12 +62,12 @@ class TokenAuto extends Token {
             die();
         }
         
-        $query = $query.".".join('.', $qcdts);
+        $query = $query.'.'.join('.', $qcdts);
         
         $this->set_atom = false;
         $qactions = $this->readActions($this->actions);
-        $query .= ".each{\n done++; fullcode = it; fullcode.round = ".(self::$round).";
-".join(";\n", $qactions)."; ".($this->set_atom ? $this->fullcode() : '' )."\n}; [total:total, done:done];";
+        $query .= ".each{\n done++; fullcode = it; fullcode.round = ".(self::$round).';
+'.join(";\n", $qactions).'; '.($this->set_atom ? $this->fullcode() : '' )."\n}; [total:total, done:done];";
         
         return $query;
     }
@@ -199,9 +199,9 @@ fullcode.setProperty('$name', $value)";
         if (isset($actions['add_void'])) {
             foreach($actions['add_void'] as $destination => $label) {
                 if ($destination > 0) {
-                    $d = str_repeat(".out('NEXT')", $destination).".next()";
+                    $d = str_repeat(".out('NEXT')", $destination).'.next()';
                 } elseif ($destination < 0) {
-                    $d = str_repeat(".in('NEXT')", $destination).".next()";
+                    $d = str_repeat(".in('NEXT')", $destination).'.next()';
                 } else {
                     $d = '';
                 }
@@ -2685,7 +2685,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         }        
 
         if ($remainder = array_keys($actions)) {
-            print "Warning : the following ".count($remainder)." actions were ignored : ".join(', ', $remainder)."\n";
+            print 'Warning : the following '.count($remainder).' actions were ignored : '.join(', ', $remainder)."\n";
         }
 
         return $qactions;
@@ -2836,7 +2836,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         }
 
         if ($remainder = array_keys($cdt)) {
-            print "Warning : the following ".count($remainder)." conditions were ignored : ".join(', ', $remainder)." (".get_class($this).")\n";
+            print 'Warning : the following '.count($remainder).' conditions were ignored : '.join(', ', $remainder).' ('.get_class($this).")\n";
             print_r($cdt);
         }
         
