@@ -10,7 +10,6 @@ Find a way to reduce the number of stored objects and link in the loader
 Note stats at each stage of the processing for later analitical review
 Log information about speed of process (tokens, files, etc).
 Export to SQLITE
-Stabilize the Unit tests for tokenizer
 Break done tokenizer to blocks : analyze happens within blocks, not the whole file. Smaller analyze, faster results, even concurrency, and less analyzers. 
 Export progress/ETA in processing (tokenizer, analyzer...)
 Prepare documentation
@@ -29,8 +28,6 @@ Update variables with the above code
 Make report configurable (configuration of the actual analyzers to be run), and automatically build.
 
 Continue spoting the ghost bug, and find a faster reproduction case (best case : )
-Test neo4j on a linux machine : more stable ? faster ? 
-Rerun all tests unit and make them stable
 Check all unit test with the new Identifier token
 Change Class to support options like we do for functions
 
@@ -40,18 +37,14 @@ Detect databases : large arrays of values.
 Detect PHP extensions : php, php3, inc : search for the files.
 
 @$stats['dir']++; : $stats should be 
-Inventory of keys in array.
-Variables that are looking like : $var1 and $varl, $var0 and $varO, $var and $vars
+Inventory of keys in arrays, by array
 
+Variables that are looking like : $var1 and $varl, $var0 and $varO, $var and $vars, vars with a switch in the letters only
 
 Variable that bear special names (PHP variables, other library variables, global, Formating, spelling).
 
-Detect encoding for the strings ? 
-
 Reintroduce the php -l tests in the loader : add a cache to avoir re-test ? 
-Check for short tags opening and list them in the Appinfo()
 
-Centralize all option reading in one class/file.
 Scope change between a method and the one in the parent classes.
 
 Variables : 
@@ -68,11 +61,12 @@ Build a test project for the reports styles (avoid md/pdf pb)
 Brush up the report 
 Add exemples from the found code to the explanations. 
 Make a summary to the report (how to share this ? When to involve the author ? Needs a special intermediate report ? )
-Apply all the old analyzers from cornac
-Check spelling in variables/classe names
+Check spelling in variables/classe names : 
+  Spin this as an external project
+
 Export tool for extensions (versioning ?)
 Long variables with "" that should actually be ' because they don't contain any variable.
-Add a config for the whole analyzer
+
 Add logs in project : stops if tokenizer/fullcode do break. Alert me.
 Export data collected in mysql to a graph
 
@@ -82,7 +76,6 @@ Mention file extensions/list used for testing in audit information
 Spot useless extension (and suggest removing them). : how to know which extensions ? WOrk on default PHP conf. 
 Faire la liste des extensions standards de PHP (et donc, celles non standards)
 
-
 Create a quick analysis, for one file only (exclude some application wide analysis).
 Mark analyzers as file or application wide analyzer. 
 
@@ -90,7 +83,7 @@ Spot classes with too many constants (they cost memory)
 Suppress all g.V and make this at least some Index
 Spot overwritten class constants.
 Suspect implicit conversion
-Marquer les analyzers non fait comme tel (pas indexistants)
+Marquer les analyzers non fait comme tel (pas inexistants)
 Check for unqualified names of classes : they shouldn't be too generic.
 List Nsnames aliases and overlap
 
@@ -103,7 +96,7 @@ Aliases : Classes that extends others, but do no overloading;
 
 functions that returns one call of other function
 
-Useless unset() 
+Useless unset() (http://php.net/unset)
 Unset non existing variable (useless)
 
 Constant functions or structures (always return the same...)
@@ -124,33 +117,35 @@ Update dashboard with number of analyzer and inventory or appinfo
 Test treemap to export from bin/file
 bin/file should also sort PHP files/directories by type : see fb treemap : code, scripts, media, tests, config. ...
 
-Separate analyzers in : file/application; themes
 produce a dot graph of classes
 
 paraleliser les analyzers
+add an option to 
 
 Spot the exceptions and the one that are thrown, and the one caught. 
 spot use with no compound name and no namespace. They are ignored.
 Spot try {} that are stopped below by another try.
 
-add support for phar
+add support for phar (will search inside the phar for scripts)
 lighten the FILE link in the database (not the size of the produced CSV ).
 Check that Namespaces (specially Global) cannot be there several times.
 You should not throw an extension exception yourself (PDO)
 
 AND / && and OR / ||. http://stackoverflow.com/questions/2803321/and-vs-as-operator
-// display the actual hierarchy (add parenthesis?)
+// display the actual hierarchy in a complex logical expression (add parenthesis?)
 
 Complex logical expression, without ().
 Commented Code
+  First support comments in exakat
 
-Un paramètre inutilisé dans une méthode qui en étant une autre est OK (C'est alors a relier à la généralisation induite par la classe du dessus, on peut aussi commenter les autres classes.)
+Un paramètre inutilisé dans une méthode qui en étend une autre est OK (C'est alors a relier à la généralisation induite par la classe du dessus, on peut aussi commenter les autres classes.)
 
 Spot identical files and avoir double analyse (.... ?)
 Spot useless namespaces (namespace x; no function/classs/interface/constant)
 
 upgrade regex search with result from thinkphp
 Spot URL in strings
+Spot SQL in strings
 Improve regex for PCRE
 spot usage of ereg 
 
@@ -242,7 +237,6 @@ Used twice variable (set then given... Nothing between ? )
         if ( ($counts = $r->check()) || in_array($name , array("FunctioncallArray", 'Sequence'))) { $count is ambiguous
 Identify complex logical expressions (in If, while, case....) with mathd, logical and AND
 Check that 'OR' is actually spotted as an upper case keyword
-Research that AND and && pb 
 Identify date() formats (and sprintf too)
 
 Map/Reduce : Faire marcher les analyses du tokenizer sur des intervalles dans les index 
@@ -298,7 +292,7 @@ combine several uses in one (prefix instead of classes)
 understand the strategy of use.
 
 Classes/UnusedPrivateProperties : Not done on alpharpc ?? No tokenizer.final report...
-Several instructino in the same line : compare line with > not ==, so as to has f( \n g($x)) spotted.
+Several instruction in the same line : compare line with > not ==, so as to has f( \n g($x)) spotted.
 
 Add a way to ignore some vendors dependings on project.
 Add a way to overwrite / add / nullify some data from within a project.
@@ -340,7 +334,6 @@ Finish ConstantConditions
 Expose a list of difference between 2 versions of an application (API changed? existence, signature, impacted functions.)
 List of impacted methods (calling, data is changed for the original method to )
 
-Fin configuration directive that should will have an impact on the code. 
 Spot multiple aliases with the same names (compile but won't run)
 
 Using File upload ? 
@@ -400,8 +393,6 @@ See how checkForNext and makeSequence may be reduced to one call in neo4j (preco
 
 Add link to clearPHP in the docs. 
 
-Spot files that are affected by short open tags and report them (one should only use normalized tags).
-
 Make projectsize report non-bin/files'ed project 
 make projectsize update vcs
 make projectsize collect size in sqlite (not in mysql) and list of project + origin (for export )
@@ -460,17 +451,13 @@ Spot methods that do not use $this (<- static ? )
 
 SPot : files direct access protection (defined('_JEXEC') or die('Restricted access') }
 
-Suggest a list of php.ini directive that should be watched ($_FILES => s file_uploads, upload_max_filesize, upload_tmp_dir, post_max_size et max_input_time dans php.ini)
-
+Complete the list of directive in Content/Directives
 Add a list of directive spotted in the code
 
 Finishes the following standard extensions : 
 interbase
-gettext
 dotnet
 xdiff
-runkit
-
 
 Check on reference returning functions (they should be called with reference).
 
@@ -492,10 +479,6 @@ Add support for traits when searching for properties/methods/constants….
 Remove require when installing with composer (no need to download everything...)
 
 if(in_array('malicious', array('a','b','c',0,1,2,3))) echo 'ok'; (in_array with integers will be erroneous...)
-
-Mettre logo sur les rapports
-
-Mettre un fichier index.html 
 
 File should define or run but not both.
 
@@ -523,3 +506,26 @@ Spot traits and have them linked to class, not inside code.
 Structure better classes (outgoing links to methods, ppp, constants, etc. No in a Sequence but keep the ranking...)
 
 Constant condition (PHPci : IS_WIN, while (fgets($sock)) { /**/ } )
+
+remove usage of argv and replace with Config
+
+Make various stats (deep level, switch w/o default, single or double quotes, etc...). This will help running (or not) some analyzers. 
+
+Spot " if single is sufficient
+
+Check the league of extraordinary packages
+
+Enhanced Punit (for unit tests)
+
+Add favicon to report
+
+FuelPHP : 
+Views are included; most properties are dynamical (defined in an array), framework is left out (many missing functions)
+
+include PMD in the results
+
+Test are TRUE (except for empty()). Otherwise, it just gets confusing. (An exception would be using ! empty(), as testing for false here is generally more intuitive.)
+
+Add in the http://codex.wordpress.org/WordPress_Coding_Standards
+
+Spot similar arrays (with the same values) and mention them.
