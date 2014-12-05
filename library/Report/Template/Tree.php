@@ -7,7 +7,7 @@ class Tree extends \Report\Template {
         $renderer = $output->getRenderer('Tree');
 
         $renderer->setCss($this->css);
-        $renderer->render($output, $this->data->getArray());
+        $renderer->render($output, $this->data);
     }
 }
 
