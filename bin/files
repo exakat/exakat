@@ -73,6 +73,8 @@ $not_compilable = array();
 
 $versions = array('53', '54', '55', '56');
 
+$datastore = new Datastore($dir);
+
 foreach($versions as $version) {
     $stats['notCompilable'.$version] = -1;
     $shell = $shell_base . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php'.$version.'lint.sh';
@@ -125,7 +127,6 @@ foreach($versions as $version) {
         }
     }
     
-    $datastore = new Datastore($dir);
     $datastore->cleanTable('compilation'.$version.'');
     $datastore->addRow('compilation'.$version.'', $incompilables);
     $stats['notCompilable'.$version] = count($incompilables);
@@ -140,6 +141,7 @@ $shell = $shell_base . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'| 
 $result_sot = shell_exec($shell);
 $stats['tokenssot'] = (int) array_sum(explode("\n", $result_sot));
 
+$datastore->cleanTable('shortopentag');
 if ($stats['tokenssot'] != $stats['tokens']) {
     $nosot = explode("\n", trim($result_nosot));
     $sot = explode("\n", trim($result_sot));
@@ -156,8 +158,6 @@ if ($stats['tokenssot'] != $stats['tokens']) {
         }
     }
     
-    $datastore = new Datastore($dir);
-    $datastore->cleanTable('shortopentag');
     $datastore->addRow('shortopentag', $shortOpenTag);
 }
 
