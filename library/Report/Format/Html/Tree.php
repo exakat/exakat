@@ -6,7 +6,7 @@ class Tree extends \Report\Format\Html {
     static public $tree_counter = 0;
     
     public function render($output, $data) {
-        $tree = $data->toArray();
+        $tree = $data->getArray();
 
         $html = '<ul>';
         
