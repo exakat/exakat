@@ -7,7 +7,9 @@ use Analyzer;
 class VardumpUsage extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("Functioncall")
-             ->code(array('var_dump', 'print_r'))
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath(array('\\var_dump', '\\print_r'))
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 1)
              ->codeIsNot("true")
@@ -15,7 +17,9 @@ class VardumpUsage extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs("Functioncall")
-             ->code(array('var_dump', 'print_r'))
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath(array('\\var_dump', '\\print_r'))
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
