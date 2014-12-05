@@ -65,15 +65,12 @@ class Ace extends \Report\Format {
         
         $index_html = <<<HTML
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">    
 	<head>
         <meta http-equiv="refresh" content="0; url=pages/Code-smells.html" />
-
 		<meta name="description" content="Exakat Audit report. © 2014 Exakat" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
 	<body>
-	    <!-- Only here for the initial redirection -->
 	</body>
 </html>
 
