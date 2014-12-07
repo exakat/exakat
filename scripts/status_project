@@ -61,11 +61,15 @@ if ($res == "Done\nDone\nDone\nDone\nDone\n") {
     print "Some analyzes are KO\n";
 }
 
-$log = file_get_contents('projects/'.$project.'/log/report.premier.log');
-if (preg_match('#\nDone\n#s', $log, $r)) {
-    print " Report log OK\n";
+if (file_exists('projects/'.$project.'/log/report.premier.log')) {
+    $log = file_get_contents('projects/'.$project.'/log/report.premier.log');
+    if (preg_match('#\nDone\n#s', $log, $r)) {
+        print " Report log OK\n";
+    } else {
+        print " Report log KO\n";
+    }
 } else {
-    print " Report log KO\n";
+    print " Report log not done\n";
 }
 
 
