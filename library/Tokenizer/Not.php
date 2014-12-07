@@ -26,7 +26,7 @@ class Not extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode',  "!" + fullcode.out("NOT").next().getProperty('fullcode') );
+fullcode.setProperty('fullcode',  fullcode.code + fullcode.out("NOT").next().getProperty('fullcode') );
 
 GREMLIN;
     }

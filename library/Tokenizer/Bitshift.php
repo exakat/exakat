@@ -8,12 +8,14 @@ class Bitshift extends TokenAuto {
         
     public function _check() {
         // note : Multiplication:: and Bitshift:: operators are the same! 
-        $this->conditions = array(-2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_DOT')),
-                                  -1 => array('atom' => Multiplication::$operands ),
-                                   0 => array('token' => Bitshift::$operators,
-                                             'atom' => 'none'),
-                                   1 => array('atom' => Multiplication::$operands),
-                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR',)),
+        $this->conditions = array(-2 => array('filterOut' => array_merge(Property::$operators,      Staticproperty::$operators,
+                                                                         Concatenation::$operators, Bitshift::$operators)),
+                                  -1 => array('atom'      => array_merge(array('Bitshift'), Multiplication::$operands)),
+                                   0 => array('token'     => Bitshift::$operators,
+                                             'atom'       => 'none'),
+                                   1 => array('atom'      => Multiplication::$operands),
+                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_DOUBLE_COLON',
+                                                                   'T_OBJECT_OPERATOR',)),
         );
         
         $this->actions = array('transform'    => array( 1 => 'RIGHT',
