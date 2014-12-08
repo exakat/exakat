@@ -4,7 +4,7 @@ include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
 define('UPDATE_STATUS', 6); // search for update_ status in this code.
-define('PROJECT_MAX_TOKENS', 150000); // maximum size of the project to be tested.
+define('PROJECT_MAX_TOKENS', 100000); // maximum size of the project to be tested.
 
 $db = new Db('wordpress');
 
@@ -90,51 +90,57 @@ function process_project($exakat) {
     $step = 0;
 
     update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Fetching the code");
+
     if (!file_exists('projects/'.$exakat['name'])) {
         print "Initializing project ".$exakat['name']."\n";
-        shell_exec('php bin/project_init '.$exakat['name'].' '.$exakat['vcs_url']); 
+        shell_exec('php bin/project_init -p '.$exakat['name'].' -R '.$exakat['vcs_url']); 
     } else {
         print "Project ".$exakat['name']." already initialized.\n";
     }
 
     print "Cleaning neo4j\n";
-    shell_exec('sh scripts/clean.sh'); // or php bin/delete
+    shell_exec('sh scripts/clean.sh'); 
 
     print "\n";
     update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Getting project file statistics");
-    $json = shell_exec('php bin/files '.$exakat['name'].' -json');
+    $json = shell_exec('php bin/files -p '.$exakat['name'].' -json');
     $results = json_decode($json);
     
     if ($results->tokens > PROJECT_MAX_TOKENS) {
-        update_status($exakat['id'], 101, "This project is too large to test at the moment.");
+        update_status($exakat['id'], 101, "This project is too large to test (at the moment).");
         print "Project too big ({$results->tokens})\n";
         return false;
     }
 
     print "Loading data\n";
     update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Tokenizing the code");
-    shell_exec('php bin/load -q -r -d ./projects/'.$exakat['name'].'/code/ -p '.$exakat['name']);
+    shell_exec('php bin/load -r -q -d ./projects/'.$exakat['name'].'/code/ -p '.$exakat['name'].'');
 
     print "Building root\n";
-    shell_exec('php bin/build_root');
+    $res = shell_exec('php bin/build_root -p '.$exakat['name'].' > ./projects/'.$exakat['name'].'/log/build_root.final.log');
 
     print "Tokenizing the code\n";
-    $res = shell_exec('php bin/tokenizer -p '.$exakat['name'].'');
+    $res = shell_exec('php bin/tokenizer -p '.$exakat['name'].' > ./projects/'.$exakat['name'].'/log/tokenizer.final.log');
 
-    shell_exec('php bin/extract_errors > ./projects/'.$exakat['name'].'/log/errors.log');
+    shell_exec('rm -rf ./projects/'.$exakat['name'].'/log/errors.log; php bin/extract_errors > ./projects/'.$exakat['name'].'/log/errors.log');
     print "Got the errors (if any)\n";
 
+    shell_exec('php bin/export_tree; mv log/network.* ./projects/'.$exakat['name'].'/log/ ');
+    shell_exec('php bin/stat > ./projects/'.$exakat['name'].'/log/stat.log');
     shell_exec('php bin/log2csv; mv log/* ./projects/'.$exakat['name'].'/log/');
     sleep(2);
 
     print "Analyzing the code\n";
     update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Analyzing the code");
-    shell_exec('php bin/analyze -P Web ');
+    $themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security');
+    foreach($themes as $theme) {
+        shell_exec('php bin/analyze -T '.$theme.' > ./projects/'.$exakat['name'].'/log/analyze.'.str_replace(' ', '_', trim($theme, '"')).'.final.log');
+        print "Analyzing $theme\n";
+    }
 
     print "Preparing the report\n";
     update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Preparing the report");
-    shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/report -ace -r Premier');
-    shell_exec('php bin/report '.$exakat['name'].' -f ./projects/'.$exakat['name'].'/Premier-sqlite  -sqlite -r Premier');
+    shell_exec('php bin/report_all '.$exakat['name']);
 
     print "Project {$exakat['name']} reported\n";
     update_status($exakat['id'], 100, "Project reported");
@@ -145,6 +151,7 @@ function process_project($exakat) {
 
 function update_status($id, $progress, $message) {
     $db = new Db("wordpress");
+    print "UPDATE exakat_projects SET progress = $progress, progress_human = '$message' WHERE id=$id\n";
     $db->query("UPDATE exakat_projects SET progress = $progress, progress_human = '$message' WHERE id=$id");
 }
 ?>
