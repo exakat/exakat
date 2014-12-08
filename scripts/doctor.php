@@ -5,6 +5,7 @@ $stats = array();
 // check PHP
 $stats['php']['version'] = phpversion();
 $stats['php']['curl'] = extension_loaded('curl') ? 'Yes' : 'No';
+$stats['php']['sqlite3'] = extension_loaded('sqlite3') ? 'Yes' : 'No';
 
 // check PHP 5.2
 $version = shell_exec('php52 -r "echo phpversion();" 2>&1');
