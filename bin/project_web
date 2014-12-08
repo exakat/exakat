@@ -89,7 +89,7 @@ function process_project($exakat) {
     print "Running test {$exakat['id']} : {$exakat['vcs_url']}\n";
     $step = 0;
 
-    update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Fetching the code");
+    update_status($exakat['id'], floor(++$step / UPDATE_STATUS * 100), "Fetching the code");
 
     if (!file_exists('projects/'.$exakat['name'])) {
         print "Initializing project ".$exakat['name']."\n";
@@ -102,7 +102,7 @@ function process_project($exakat) {
     shell_exec('sh scripts/clean.sh'); 
 
     print "\n";
-    update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Getting project file statistics");
+    update_status($exakat['id'], floor(++$step / UPDATE_STATUS * 100), "Getting project file statistics");
     $json = shell_exec('php bin/files -p '.$exakat['name'].' -json');
     $results = json_decode($json);
     
@@ -113,7 +113,7 @@ function process_project($exakat) {
     }
 
     print "Loading data\n";
-    update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Tokenizing the code");
+    update_status($exakat['id'], floor(++$step / UPDATE_STATUS * 100), "Tokenizing the code");
     shell_exec('php bin/load -r -q -d ./projects/'.$exakat['name'].'/code/ -p '.$exakat['name'].'');
 
     print "Building root\n";
@@ -131,7 +131,7 @@ function process_project($exakat) {
     sleep(2);
 
     print "Analyzing the code\n";
-    update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Analyzing the code");
+    update_status($exakat['id'], floor(++$step / UPDATE_STATUS * 100), "Analyzing the code");
     $themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security');
     foreach($themes as $theme) {
         shell_exec('php bin/analyze -T '.$theme.' > ./projects/'.$exakat['name'].'/log/analyze.'.str_replace(' ', '_', trim($theme, '"')).'.final.log');
@@ -139,7 +139,7 @@ function process_project($exakat) {
     }
 
     print "Preparing the report\n";
-    update_status($exakat['id'], floor($step++ / UPDATE_STATUS) * 100, "Preparing the report");
+    update_status($exakat['id'], floor(++$step / UPDATE_STATUS * 100), "Preparing the report");
     shell_exec('php bin/report_all '.$exakat['name']);
 
     print "Project {$exakat['name']} reported\n";
@@ -151,7 +151,6 @@ function process_project($exakat) {
 
 function update_status($id, $progress, $message) {
     $db = new Db("wordpress");
-    print "UPDATE exakat_projects SET progress = $progress, progress_human = '$message' WHERE id=$id\n";
     $db->query("UPDATE exakat_projects SET progress = $progress, progress_human = '$message' WHERE id=$id");
 }
 ?>
