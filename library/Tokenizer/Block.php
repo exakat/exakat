@@ -14,6 +14,7 @@ class Block extends TokenAuto {
                                                'notAtom' => 'SequenceCaseDefault'),
                                     2 => array('token'   => 'T_CLOSE_CURLY',
                                                'atom'    => 'none'),
+                                    3 => array('token'   => array('T_CLOSE_CURLY')), 
         );
         
         $this->actions = array('to_block'     => true,
