@@ -957,7 +957,7 @@ GREMLIN;
     // follows a link if it is there (and do nothing otherwise)
     protected function outIsIE($edge_name) {
         if (is_array($edge_name)) {
-            die('I don\'t understand arrays in '.__METHOD__."\n");
+            $this->addMethod("transform{ if (it.out('".join("', '", $edge_name)."').any()) { it.out('".join("', '", $edge_name)."').next(); } else { it ;}}");
         } else {
             $this->addMethod("transform{ if (it.out('$edge_name').any()) { it.out('$edge_name').next(); } else { it ;}}", $edge_name);
         }
@@ -967,8 +967,7 @@ GREMLIN;
 
     function outIsnt($edge_name) {
         if (is_array($edge_name)) {
-            // @todo
-            die(" I don't understand arrays in out()");
+            $this->addMethod("filter{ it.out('".join("', '", $edge_name)."').count() == 0}");
         } else {
             $this->addMethod("filter{ it.out(***).count() == 0}", $edge_name);
         }
@@ -1110,10 +1109,9 @@ GREMLIN;
         }
         
         if (is_array($parent_class)) {
-            // @todo
-            die(" I don't understand arrays in hasParent() ".__METHOD__);
+            $this->addMethod('filter{ it.'.$in.'.filter{ it.atom in ***).count() != 0}', $parent_class);
         } else {
-            $this->methods[] = 'filter{ it.'.$in.'.has("atom", "'.$parent_class.'").count() != 0}';
+            $this->addMethod('filter{ it.'.$in.'.has("atom", ***).count() != 0}', $parent_class);
         }
         
         return $this;
@@ -1139,10 +1137,9 @@ GREMLIN;
         }
         
         if (is_array($parent_class)) {
-            // @todo
-            die(" I don't understand arrays in hasNoParent() ".__METHOD__);
+            $this->addMethod('filter{ it'.$in.'.filter{it.atom in ***}.count() == 0}', $parent_class);
         } else {
-            $this->methods[] = 'filter{ it'.$in.'.has("atom", "'.$parent_class.'").count() == 0}';
+            $this->addMethod('filter{ it'.$in.'.has("atom", ***).count() == 0}', $parent_class);
         }
         
         return $this;
@@ -1436,7 +1433,7 @@ GREMLIN
             
             print "\n\n";
         }
-        die(__METHOD__);
+        die();
     }
 
     public function prepareQuery() {
