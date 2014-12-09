@@ -25,33 +25,33 @@ class TokenAuto extends Token {
         }
         $query .= '.sideEffect{ total++; }';
 
-        $qcdts = array();
+        $queryConditions = array();
         
         if (!empty($this->conditions[0])) {
-            $qcdts = array_merge($qcdts, $this->readConditions($this->conditions[0]));
+            $queryConditions = array_merge($queryConditions, $this->readConditions($this->conditions[0]));
             
-            $qcdts[] = 'as("origin")';
+            $queryConditions[] = 'as("origin")';
             unset($this->conditions[0]);
         }
 
         for($i = -8; $i < 0; $i++) {
             if (!empty($this->conditions[$i])) {
-                $cdt = $this->conditions[$i];
-                $cdt['previous'] = abs($i);
-                $qcdts = array_merge($qcdts, $this->readConditions($cdt));
+                $conditions = $this->conditions[$i];
+                $conditions['previous'] = abs($i);
+                $queryConditions = array_merge($queryConditions, $this->readConditions($conditions));
 
-                $qcdts[] = "back('origin')";
+                $queryConditions[] = "back('origin')";
             }
             unset($this->conditions[$i]);
         }
 
         for($i = 1; $i < 12; $i++) {
             if (!empty($this->conditions[$i])) {
-                $cdt = $this->conditions[$i];
-                $cdt['next'] = $i;
-                $qcdts = array_merge($qcdts, $this->readConditions($cdt));
+                $conditions = $this->conditions[$i];
+                $conditions['next'] = $i;
+                $queryConditions = array_merge($queryConditions, $this->readConditions($conditions));
 
-                $qcdts[] = "back('origin')";
+                $queryConditions[] = "back('origin')";
             }
             unset($this->conditions[$i]);
         }
@@ -61,7 +61,7 @@ class TokenAuto extends Token {
             die();
         }
         
-        $query = $query.'.'.join('.', $qcdts);
+        $query = $query.'.'.join('.', $queryConditions);
         
         $this->set_atom = false;
         $qactions = $this->readActions($this->actions);
@@ -216,8 +216,8 @@ g.addEdge(it$d, x, '$label');
         }
 
         if (isset($actions['to_var_new'])) {
-            $ppp = new _Ppp(Token::$client);
-            $fullcode = $ppp->fullcode();
+            $token = new _Ppp(Token::$client);
+            $fullcode = $token->fullcode();
             
             $atom = $actions['to_var_new'];
             $qactions[] = "
@@ -305,8 +305,8 @@ g.removeVertex(arg);
         }
 
         if (isset($actions['to_var'])) {
-            $ppp = new _Ppp(Token::$client);
-            $fullcode = $ppp->fullcode();
+            $token = new _Ppp(Token::$client);
+            $fullcode = $token->fullcode();
 
             $atom = $actions['to_var'];
             $qactions[] = "
@@ -368,7 +368,7 @@ g.removeVertex(var);
             $fullcode = $_global->fullcode();
 
             $sequence = new Sequence(Token::$client);
-            $fullcode_sequence = $sequence->fullcode();
+            $fullCodeSequence = $sequence->fullcode();
 
             $atom = $actions['to_global'];
             $qactions[] = "
@@ -404,15 +404,15 @@ var.inE('INDEXED').each{ g.removeEdge(it); }
 g.addEdge(g.idx('racines')[['token':'Sequence']].next(), var, 'INDEXED');   
 
 fullcode = var;
-$fullcode_sequence
+$fullCodeSequence
 
 ";
             unset($actions['to_global']);
         }
 
         if (isset($actions['to_var_ppp'])) {
-            $ppp = new _Ppp(Token::$client);
-            $fullcode = $ppp->fullcode();
+            $token = new _Ppp(Token::$client);
+            $fullcode = $token->fullcode();
 
             list($atom1, $atom2) = $actions['to_var_ppp'];
             $qactions[] = "
@@ -692,8 +692,8 @@ fullcode = x;
         }        
 
         if (isset($actions['to_ppp2'])) {
-            $ppp = new _Ppp(Token::$client);
-            $fullcode = $ppp->fullcode();
+            $token = new _Ppp(Token::$client);
+            $fullcode = $token->fullcode();
 
             $qactions[] = "
 /* to ppp already ppp */
@@ -717,8 +717,8 @@ $fullcode
         if (isset($actions['to_option'])) {
             $position = str_repeat(".out('NEXT')", $actions['to_option']);
 
-            $ppp = new _Ppp(Token::$client);
-            $fullcode = $ppp->fullcode();
+            $token = new _Ppp(Token::$client);
+            $fullcode = $token->fullcode();
             
             $qactions[] = "
 /* turn the current token to an option of one of the next tokens (default 1)*/
@@ -889,7 +889,7 @@ g.removeVertex(assignation);
         
         if (isset($actions['to_const'])) {
             $sequence = new Sequence(Token::$client);
-            $fullcode_sequence = $sequence->fullcode();
+            $fullCodeSequence = $sequence->fullcode();
             $fullcode = $this->fullcode();
             
             $qactions[] = "
@@ -900,7 +900,7 @@ sequence = g.addVertex(null, [code:';', fullcode:';', atom:'Sequence', token:'T_
 g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');   
 
 fullcode = sequence;
-$fullcode_sequence
+$fullCodeSequence
 
 _const = it;
 arg = _const.out('NEXT').next(); 
@@ -2504,7 +2504,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $atom = $actions['make_quoted_string'];
             $class = "\\Tokenizer\\$atom";
             $string = new $class(Token::$client);
-            $fullcode_string = $string->fullcode();
+            $fullCodeString = $string->fullcode();
             
             $qactions[] = " 
 /* make_quoted_string */ 
@@ -2537,7 +2537,7 @@ fullcode = x;
 $fullcode
 
 fullcode = it;
-$fullcode_string 
+$fullCodeString 
 
 /* Clean index */
 x.out('CONCAT').each{ 
@@ -2694,156 +2694,156 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         return $qactions;
     }
 
-    private function readConditions($cdt) {
-        $qcdts = array();
+    private function readConditions($conditions) {
+        $queryConditions = array();
 
-        if (isset($cdt['next'])) {
-            for($i = 0; $i < $cdt['next']; $i++) {
-                $qcdts[] = "out('NEXT')";
+        if (isset($conditions['next'])) {
+            for($i = 0; $i < $conditions['next']; $i++) {
+                $queryConditions[] = "out('NEXT')";
             }
-            $qcdts[] = "sideEffect{ a{$cdt['next']} = it;}";
-            unset($cdt['next']);
+            $queryConditions[] = "sideEffect{ a{$conditions['next']} = it;}";
+            unset($conditions['next']);
         }
 
-        if (isset($cdt['previous'])) {
-            for($i = 0; $i < $cdt['previous']; $i++) {
-                $qcdts[] = "in('NEXT')";
+        if (isset($conditions['previous'])) {
+            for($i = 0; $i < $conditions['previous']; $i++) {
+                $queryConditions[] = "in('NEXT')";
             }
-            $qcdts[] = "sideEffect{ b{$cdt['previous']} = it;}";
-            unset($cdt['previous']);
+            $queryConditions[] = "sideEffect{ b{$conditions['previous']} = it;}";
+            unset($conditions['previous']);
         }
 
-        if (isset($cdt['property'])) {
-            foreach($cdt['property'] as $property => $value) {
+        if (isset($conditions['property'])) {
+            foreach($conditions['property'] as $property => $value) {
                 if (is_array($value)) {
-                    $qcdts[] = "filter{it.$property in ['".join("', '", $value)."']}";
+                    $queryConditions[] = "filter{it.$property in ['".join("', '", $value)."']}";
                 } else {
-                    $qcdts[] = "has('$property', '$value')";
+                    $queryConditions[] = "has('$property', '$value')";
                 }
             }
-            unset($cdt['property']);
+            unset($conditions['property']);
         }
 
-        if (isset($cdt['check_for_string'])) {
-            if (is_array($cdt['check_for_string'])) {
-                $classes = "'".join("', '", $cdt['check_for_string'])."'";
+        if (isset($conditions['check_for_string'])) {
+            if (is_array($conditions['check_for_string'])) {
+                $classes = "'".join("', '", $conditions['check_for_string'])."'";
             } else {
-                $classes = "'".$cdt['check_for_string']."'";
+                $classes = "'".$conditions['check_for_string']."'";
             }
-            $qcdts[] = "as('cfs').out('NEXT').filter{ it.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.back('cfs')";
-            unset($cdt['check_for_string']);
+            $queryConditions[] = "as('cfs').out('NEXT').filter{ it.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.back('cfs')";
+            unset($conditions['check_for_string']);
         }
 
-        if (isset($cdt['code'])) {
-            if (is_array($cdt['code']) && !empty($cdt['code'])) {
-                $qcdts[] = "filter{it.code in ['".join("', '", $cdt['code'])."']}";
+        if (isset($conditions['code'])) {
+            if (is_array($conditions['code']) && !empty($conditions['code'])) {
+                $queryConditions[] = "filter{it.code in ['".join("', '", $conditions['code'])."']}";
             } else {
-                $qcdts[] = "has('code', '".$cdt['code']."')";
+                $queryConditions[] = "has('code', '".$conditions['code']."')";
             }
-            unset($cdt['code']);
+            unset($conditions['code']);
         }
 
-        if (isset($cdt['icode'])) {
-            if (is_array($cdt['icode']) && !empty($cdt['icode'])) {
-                $qcdts[] = "hasNot('code', null).filter{it.code.toLowerCase() in ['".join("', '", $cdt['icode'])."']}";
+        if (isset($conditions['icode'])) {
+            if (is_array($conditions['icode']) && !empty($conditions['icode'])) {
+                $queryConditions[] = "hasNot('code', null).filter{it.code.toLowerCase() in ['".join("', '", $conditions['icode'])."']}";
             } else {
-                $qcdts[] = "hasNot('code', null).filter{it.code.toLowerCase() == '".$cdt['icode']."'}";
+                $queryConditions[] = "hasNot('code', null).filter{it.code.toLowerCase() == '".$conditions['icode']."'}";
             }
-            unset($cdt['icode']);
+            unset($conditions['icode']);
         }
 
-        if (isset($cdt['notcode']) && is_array($cdt['notcode']) && !empty($cdt['notcode'])) {
-            $qcdts[] = "filter{!(it.code in ['".join("', '", $cdt['notcode'])."'])}";
-            unset($cdt['notcode']);
+        if (isset($conditions['notcode']) && is_array($conditions['notcode']) && !empty($conditions['notcode'])) {
+            $queryConditions[] = "filter{!(it.code in ['".join("', '", $conditions['notcode'])."'])}";
+            unset($conditions['notcode']);
         }
 
-        if (isset($cdt['token'])) {
-            if ( is_array($cdt['token']) && !empty($cdt['token'])) {
-                $qcdts[] = "filter{it.token in ['".join("', '", $cdt['token'])."']}";
+        if (isset($conditions['token'])) {
+            if ( is_array($conditions['token']) && !empty($conditions['token'])) {
+                $queryConditions[] = "filter{it.token in ['".join("', '", $conditions['token'])."']}";
             } else {
-                $qcdts[] = "has('token', '".$cdt['token']."')";
+                $queryConditions[] = "has('token', '".$conditions['token']."')";
             }
-            unset($cdt['token']);
+            unset($conditions['token']);
         }
 
-        if (isset($cdt['notToken'])) {
-            if ( is_array($cdt['notToken']) && !empty($cdt['notToken'])) {
-                $qcdts[] = "filter{!(it.token in ['".join("', '", $cdt['notToken'])."'])}";
+        if (isset($conditions['notToken'])) {
+            if ( is_array($conditions['notToken']) && !empty($conditions['notToken'])) {
+                $queryConditions[] = "filter{!(it.token in ['".join("', '", $conditions['notToken'])."'])}";
             } else {
-                $qcdts[] = "hasNot('token', '".$cdt['notToken']."')";
+                $queryConditions[] = "hasNot('token', '".$conditions['notToken']."')";
             }
-            unset($cdt['notToken']);
+            unset($conditions['notToken']);
         }
         
-        if (isset($cdt['atom'])) {
-            if ( is_array($cdt['atom']) && !empty($cdt['atom'])) {
-                $qcdts[] = "filter{it.atom in ['".join("', '", $cdt['atom'])."']}";
-            } elseif ( is_string($cdt['atom']) && $cdt['atom'] == 'none') {
-                $qcdts[] = "has('atom', null)";
-            } elseif ( is_string($cdt['atom']) && $cdt['atom'] == 'yes') {
-                $qcdts[] = "hasNot('atom', null)";
+        if (isset($conditions['atom'])) {
+            if ( is_array($conditions['atom']) && !empty($conditions['atom'])) {
+                $queryConditions[] = "filter{it.atom in ['".join("', '", $conditions['atom'])."']}";
+            } elseif ( is_string($conditions['atom']) && $conditions['atom'] == 'none') {
+                $queryConditions[] = "has('atom', null)";
+            } elseif ( is_string($conditions['atom']) && $conditions['atom'] == 'yes') {
+                $queryConditions[] = "hasNot('atom', null)";
             } else {
-                $qcdts[] = "has('atom', '".$cdt['atom']."')";
+                $queryConditions[] = "has('atom', '".$conditions['atom']."')";
             }
-            unset($cdt['atom']);
+            unset($conditions['atom']);
         }
 
-        if (isset($cdt['notAtom'])) {
-            if ( is_array($cdt['notAtom']) && !empty($cdt['notAtom'])) {
-                $qcdts[] = "filter{!(it.atom in ['".join("', '", $cdt['notAtom'])."'])}";
+        if (isset($conditions['notAtom'])) {
+            if ( is_array($conditions['notAtom']) && !empty($conditions['notAtom'])) {
+                $queryConditions[] = "filter{!(it.atom in ['".join("', '", $conditions['notAtom'])."'])}";
             } else {
-                $qcdts[] = "hasNot('atom', '".$cdt['notAtom']."')";
+                $queryConditions[] = "hasNot('atom', '".$conditions['notAtom']."')";
             }
-            unset($cdt['notAtom']);
+            unset($conditions['notAtom']);
         }
 
-        if (isset($cdt['in_quote'])) {
-            if ( $cdt['in_quote'] == 'none' ) {
-                $qcdts[] = "has('in_quote', null)";
+        if (isset($conditions['in_quote'])) {
+            if ( $conditions['in_quote'] == 'none' ) {
+                $queryConditions[] = "has('in_quote', null)";
             } else {
-                $qcdts[] = "has('in_quote', 'true')";
+                $queryConditions[] = "has('in_quote', 'true')";
             }
-            unset($cdt['in_quote']);
+            unset($conditions['in_quote']);
         }
 
-        if (isset($cdt['dowhile'])) {
-            if ( $cdt['dowhile'] == 'false' ) {
-                $qcdts[] = "has('dowhile', 'false')";
+        if (isset($conditions['dowhile'])) {
+            if ( $conditions['dowhile'] == 'false' ) {
+                $queryConditions[] = "has('dowhile', 'false')";
             } else {
-                $qcdts[] = "has('dowhile', 'true')";
+                $queryConditions[] = "has('dowhile', 'true')";
             }
-            unset($cdt['dowhile']);
+            unset($conditions['dowhile']);
         }
         
-        if (isset($cdt['filterOut'])) {
-            if (is_string($cdt['filterOut'])) {
+        if (isset($conditions['filterOut'])) {
+            if (is_string($conditions['filterOut'])) {
                 // no check on atom here ? 
-                $qcdts[] = "filter{it.token != '".$cdt['filterOut']."' }";
-            } elseif (is_array($cdt['filterOut'])) {
-                $qcdts[] = "filter{it.atom != null || !(it.token in ['".join("', '", $cdt['filterOut'])."'])}";
+                $queryConditions[] = "filter{it.token != '".$conditions['filterOut']."' }";
+            } elseif (is_array($conditions['filterOut'])) {
+                $queryConditions[] = "filter{it.atom != null || !(it.token in ['".join("', '", $conditions['filterOut'])."'])}";
             } else {
                 die("Unsupported type for filterOut\n");
             }
 
-            unset($cdt['filterOut']);
+            unset($conditions['filterOut']);
         }
 
-        if (isset($cdt['filterOut2'])) {
-            if (is_string($cdt['filterOut2'])) {
-                $qcdts[] = "filter{it.token != '".$cdt['filterOut2']."' }";
+        if (isset($conditions['filterOut2'])) {
+            if (is_string($conditions['filterOut2'])) {
+                $queryConditions[] = "filter{it.token != '".$conditions['filterOut2']."' }";
             } else {
-                $qcdts[] = "filter{!(it.token in ['".join("', '", $cdt['filterOut2'])."'])}";
+                $queryConditions[] = "filter{!(it.token in ['".join("', '", $conditions['filterOut2'])."'])}";
             }
 
-            unset($cdt['filterOut2']);
+            unset($conditions['filterOut2']);
         }
 
-        if ($remainder = array_keys($cdt)) {
+        if ($remainder = array_keys($conditions)) {
             print 'Warning : the following '.count($remainder).' conditions were ignored : '.join(', ', $remainder).' ('.get_class($this).")\n";
-            print_r($cdt);
+            print_r($conditions);
         }
         
-        return $qcdts;
+        return $queryConditions;
     }
 
     public function fullcode() {

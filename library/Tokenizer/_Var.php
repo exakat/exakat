@@ -47,8 +47,8 @@ class _Var extends TokenAuto {
     }
 
     public function fullcode() {
-        $ppp = new _Function(Token::$client);
-        return $ppp->fullcode();
+        $token = new _Function(Token::$client);
+        return $token->fullcode();
     }
 }
 ?>
