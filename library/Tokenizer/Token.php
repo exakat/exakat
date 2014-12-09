@@ -282,6 +282,7 @@ g.V.has('root', 'true')[0].inE('INDEXED').each{
 };
 
 g.idx('delete')[['node':'delete']].each{
+    it.inE('INDEXED').each{ g.removeEdge(it); }
     g.removeVertex(it);
 }
 
