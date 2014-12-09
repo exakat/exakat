@@ -529,3 +529,10 @@ Test are TRUE (except for empty()). Otherwise, it just gets confusing. (An excep
 Add in the http://codex.wordpress.org/WordPress_Coding_Standards
 
 Spot similar arrays (with the same values) and mention them.
+
+separate Project name from its folder
+
+Remove S_ARRAY indexing (keepIndexed should be good)
+
+Warning
+Internally, PHP strings are byte arrays. As a result, accessing or modifying a string using array brackets is not multi-byte safe, and should only be done with strings that are in a single-byte encoding such as ISO-8859-1.
