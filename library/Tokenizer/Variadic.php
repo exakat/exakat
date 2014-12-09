@@ -6,7 +6,7 @@ class Variadic extends TokenAuto {
     static public $operators = array('T_ELLIPSIS');
     static public $atom = 'Variadic (unused)';
 
-    protected $phpversion = '5.6+';
+    protected $phpVersion = '5.6+';
 
     public function _check() { 
         // function x(...$a) {} or functioncall  x(...$a);

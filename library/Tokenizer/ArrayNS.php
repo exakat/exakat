@@ -6,7 +6,7 @@ class ArrayNS extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET');
     static public $atom = 'Array';
     
-    protected $phpversion = '5.4+';
+    protected $phpVersion = '5.4+';
     
     public function _check() {
         $yields =  array('T_VARIABLE', 'T_CLOSE_BRACKET', 'T_STRING', 'T_OBJECT_OPERATOR', 

@@ -6,7 +6,7 @@ class _Trait extends TokenAuto {
     static public $operators = array('T_TRAIT');
     static public $atom = 'Trait';
     
-    protected $phpversion = '5.4+';
+    protected $phpVersion = '5.4+';
 
     public function _check() {
         $this->conditions = array(0 => array('token' => _Trait::$operators,
