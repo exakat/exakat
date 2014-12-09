@@ -15,6 +15,11 @@ class Db  {
                                         $config->mysql_wordpress_user, 
                                         $config->mysql_wordpress_pass,
                                         $config->mysql_wordpress_db);
+        } elseif ($db == 'remote') {
+            $this->mysqli = new \mysqli($config->mysql_remote_host, 
+                                        $config->mysql_remote_user, 
+                                        $config->mysql_remote_pass,
+                                        $config->mysql_remote_db);
         } else {
             // nothing really
         }
