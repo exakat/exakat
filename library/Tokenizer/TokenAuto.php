@@ -785,6 +785,7 @@ fullcode = x;
 /* transform drop out ($c) */
 g.addEdge(a$c.in('NEXT').next(), a$c.out('NEXT').next(), 'NEXT');
 a$c.bothE('NEXT').each{ g.removeEdge(it); }
+a$c.inE('INDEXED').each{ g.removeEdge(it); }
 g.idx('delete').put('node', 'delete', a$c);
 
 ";
@@ -807,6 +808,7 @@ a$c.bothE('NEXT').each{ g.removeEdge(it); }
 
 g.addEdge(b$d.in('NEXT').next(), b$d.out('NEXT').next(), 'NEXT');
 b$d.bothE('NEXT').each{ g.removeEdge(it); }
+b$d.inE('INDEXED').each{ g.removeEdge(it); }
 g.idx('delete').put('node', 'delete', b$d);
 ";
                     } else {
@@ -828,6 +830,7 @@ a = it.in('NEXT').next();
 b = it.out('NEXT').next();
 
 it.bothE('NEXT').each{    g.removeEdge(it); } 
+it.inE('INDEXED').each{ g.removeEdge(it); }
 
 g.removeVertex(it);
 g.addEdge(a, b, 'NEXT');
