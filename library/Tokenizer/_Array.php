@@ -5,7 +5,8 @@ namespace Tokenizer;
 class _Array extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET', 'T_OPEN_CURLY');
     static public $atom = 'Array';
-    static public $allowed_object = array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend', 'Functioncall', 'Methodcall', 'Staticmethodcall');
+    static public $allowed_object = array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend', 
+                                          'Functioncall', 'Methodcall', 'Staticmethodcall', 'String');
     
     public function _check() {
         // $x[3] (and keep the indexation for doing it again, or with FunctioncallArray);
@@ -70,7 +71,11 @@ class _Array extends TokenAuto {
 
 fullcode.out("NAME").each { fullcode.setProperty('fullcode', fullcode.getProperty('fullcode')); }
 
-fullcode.filter{ it.out("INDEX").count() == 1}.each{ fullcode.setProperty('fullcode', it.out("VARIABLE").next().getProperty('fullcode') + "[" + it.out("INDEX").next().getProperty('fullcode') + "]"); }
+if (fullcode.code == '[') {
+    fullcode.filter{ it.out("INDEX").count() == 1}.each{ fullcode.setProperty('fullcode', it.out("VARIABLE").next().getProperty('fullcode') + "[" + it.out("INDEX").next().getProperty('fullcode') + "]"); }
+} else {
+    fullcode.filter{ it.out("INDEX").count() == 1}.each{ fullcode.setProperty('fullcode', it.out("VARIABLE").next().getProperty('fullcode') + "{" + it.out("INDEX").next().getProperty('fullcode') + "}"); }
+}
 
 GREMLIN;
     }

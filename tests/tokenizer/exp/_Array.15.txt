@@ -1,0 +1,46 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          {
+          Label : VARIABLE
+            $x
+          Label : INDEX
+            1
+        Label : INDEX
+          2
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        {
+        Label : VARIABLE
+          {
+          Label : VARIABLE
+            $x
+          Label : INDEX
+            1
+        Label : INDEX
+          2
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        {
+        Label : VARIABLE
+          [
+          Label : VARIABLE
+            $x
+          Label : INDEX
+            1
+        Label : INDEX
+          2
