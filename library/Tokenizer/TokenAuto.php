@@ -21,8 +21,7 @@ class TokenAuto extends Token {
         } elseif (in_array($class, Token::$types)) {
             $query .= "g.idx('racines')[['token':'$class']].out('INDEXED')";
         } else {
-            $query .= 'g.V';
-            print "Using g.V : $class\n";
+            die("Should only use atoms!");
         }
         $query .= '.sideEffect{ total++; }';
 
@@ -97,16 +96,16 @@ class TokenAuto extends Token {
 //        $qactions[] = "\n it.setProperty('modifiedBy', '".str_replace('Tokenizer\\', '', get_class($this))."'); \n";
 
         if (isset($actions['keepIndexed'])) {
-            if(!$actions['keepIndexed']) {
+            if (!$actions['keepIndexed']) { // true means All
                 $qactions[] = " 
 /* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
-                ";
-            }
+";
+            } 
             unset($actions['keepIndexed']);
         } else {
                 $qactions[] = " 
 /* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
-                ";
+";
         }
 
         if (isset($actions['cleansemicolon']) && $actions['cleansemicolon']) {
@@ -626,6 +625,7 @@ g.idx('delete').put('node', 'delete', x);
 
 x = x.out('NEXT').next();
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
+x.inE('INDEXED').each{ g.removeEdge(it); }
 g.idx('delete').put('node', 'delete', x);   
 
 x = x.out('NEXT').next();
