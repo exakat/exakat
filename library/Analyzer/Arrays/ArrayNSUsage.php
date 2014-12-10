@@ -5,7 +5,7 @@ namespace Analyzer\Arrays;
 use Analyzer;
 
 class ArrayNSUsage extends Analyzer\Analyzer {
-    public $phpversion = "5.4+";
+    public $phpVersion = "5.4+";
 
     public function analyze() {
         $this->atomIs("Array")

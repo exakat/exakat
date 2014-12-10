@@ -5,7 +5,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class ConstantScalarExpression extends Analyzer\Analyzer {
-    protected $phpversion = "5.6+";
+    protected $phpVersion = "5.6+";
     
     public function analyze() {
         $this->atomIs("Const")

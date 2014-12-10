@@ -8,7 +8,6 @@ use Everyman\Neo4j\Client,
 class Analyzer {
     protected $client = null;
     protected $code = null;
-    protected $human_classname = null;
 
     protected $name = null;
     protected $description = null;
@@ -27,7 +26,7 @@ class Analyzer {
     
     protected $apply = null;
 
-    protected $phpversion = "Any";
+    protected $phpVersion = "Any";
     protected $phpconfiguration = "Any";
 
     protected $severity = \Analyzer\Analyzer::S_NONE; // Default to None. 
@@ -52,8 +51,6 @@ class Analyzer {
         $this->analyzerIsNot(get_class($this));
 
         $this->code = get_class($this);
-        
-        $this->human_classname = str_replace('\\', '/', substr(get_class($this), 9));
         
         if (Analyzer::$docs === null) {
             Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
@@ -262,23 +259,23 @@ GREMLIN;
     
     public function checkPhpVersion($version) {
         // this handles Any version of PHP
-        if ($this->phpversion == 'Any') {
+        if ($this->phpVersion == 'Any') {
             return true;
         }
 
         // version and above 
-        if ((substr($this->phpversion, -1) == '+') && version_compare($version, $this->phpversion) >= 0) {
+        if ((substr($this->phpVersion, -1) == '+') && version_compare($version, $this->phpVersion) >= 0) {
             return true;
         } 
 
         // up to version  
-        if ((substr($this->phpversion, -1) == '-') && version_compare($version, $this->phpversion) <= 0) {
+        if ((substr($this->phpVersion, -1) == '-') && version_compare($version, $this->phpVersion) <= 0) {
             return true;
         } 
 
         // version range 1.2.3-4.5.6
-        if (strpos($this->phpversion, '-') !== false) {
-            list($lower, $upper) = explode('-', $this->phpversion);
+        if (strpos($this->phpVersion, '-') !== false) {
+            list($lower, $upper) = explode('-', $this->phpVersion);
             if (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0) {
                 return true;
             } else {
@@ -287,7 +284,7 @@ GREMLIN;
         } 
         
         // One version only
-        if (version_compare($version, $this->phpversion) == 0) {
+        if (version_compare($version, $this->phpVersion) == 0) {
             return true;
         } 
         
@@ -1610,7 +1607,7 @@ GREMLIN;
     }
 
     public function getPhpversion() {
-        return $this->phpversion;
+        return $this->phpVersion;
     }
 
     public function getPhpconfiguration() {

@@ -5,7 +5,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class CaseForPSS extends Analyzer\Analyzer {
-    protected $phpversion = '5.5-';
+    protected $phpVersion = '5.5-';
 
     public function analyze() {
         $this->atomIs("Identifier")

@@ -5,7 +5,7 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class BreakNonInteger extends Analyzer\Analyzer {
-    public $phpversion = "5.4-";
+    public $phpVersion = "5.4-";
 
     public function analyze() {
         $this->atomIs("Break")

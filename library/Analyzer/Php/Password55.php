@@ -5,7 +5,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class Password55 extends Analyzer\Analyzer {
-    public $phpversion = '5.5+';
+    public $phpVersion = '5.5+';
     
     public function analyze() {
         $this->atomIs("Functioncall")
