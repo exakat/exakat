@@ -10,41 +10,34 @@ class CustomConstantUsage extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        // @todo need generalisation here! 
-        $curl_constants = $this->loadConstants('curl.ini');
-        $libxml_constants = $this->loadConstants('libxml.ini');
-        $standard_constants = $this->loadConstants('standard.ini');
-        $php_constants = $this->loadConstants('php_constants.ini');
-        $json_constants = $this->loadConstants('json.ini');
-        $pcntl_constants = $this->loadConstants('pcntl.ini');
+        $exts = glob('library/Analyzer/Extensions/*.php');
+        $exts[] = 'php_functions.ini';
+        
+        $constants = array();
+        foreach($exts as $ext) {
+            $inifile = str_replace('library/Analyzer/Extensions/Ext', '', str_replace('.php', '.ini', $ext));
+            if ($inifile == 'library/Analyzer/Extensions/Used.ini') { continue; }
+            $ini = $this->loadIni($inifile);
+            
+            if (!isset($ini['constants']) || !is_array($ini['constants'])) {
+                print "No functions defined in $inifile\n";
+            } else {
+                if (!empty($ini['constants'][0])) {
+                    $constants = array_merge($constants, array_map( function ($x) { return '\\'. strtolower($x); }, $ini['constants']));
+                }
+            }
+        }
 
         $this->atomIs("Identifier")
              ->analyzerIs('Analyzer\\Constants\\ConstantUsage')
-             ->codeIsNot($curl_constants)
-             ->codeIsNot($libxml_constants)
-             ->codeIsNot($standard_constants)
-             ->codeIsNot($json_constants)
-             ->codeIsNot($pcntl_constants)
-             ->codeIsNot($php_constants);
+             ->fullnspathIsNot($constants);
         $this->prepareQuery();
 
         // @note NSnamed are OK by default (mmm, no!)
         $this->atomIs("Nsname")
-             ->analyzerIs('Analyzer\\Constants\\ConstantUsage');
+             ->analyzerIs('Analyzer\\Constants\\ConstantUsage')
+             ->fullnspathIsNot($constants);
         $this->prepareQuery();
-    }
-    
-    public function loadConstants($source) {
-        if (substr($source, -4) == '.ini') {
-            $ini = $this->loadIni($source);
-            extract($ini);
-            
-            if (count($constants) == 1 && empty($constants[0])) {
-                $constants = array();
-            }
-        }
-        
-        return $constants;
     }
 }
 

@@ -6,7 +6,7 @@ use Analyzer;
 
 class NoChangeIncomingVariables extends Analyzer\Analyzer {
     public function analyze() {
-        $incoming_variables = array('$_GET','$_POST','$_REQUEST','$_FILES',
+        $incomingVariables = array('$_GET','$_POST','$_REQUEST','$_FILES',
                                     '$_ENV', '$_SERVER',
                                     '$PHP_SELF','$HTTP_RAW_POST_DATA'); 
         //'$_COOKIE', '$_SESSION' : those are OK
@@ -19,7 +19,7 @@ class NoChangeIncomingVariables extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
-             ->code($incoming_variables)
+             ->code($incomingVariables)
              ->back('first');
         $this->prepareQuery();
 
@@ -32,7 +32,7 @@ class NoChangeIncomingVariables extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Array')
              ->outIs('VARIABLE')
-             ->code($incoming_variables)
+             ->code($incomingVariables)
              ->back('first');
         $this->prepareQuery();
 
@@ -46,7 +46,7 @@ class NoChangeIncomingVariables extends Analyzer\Analyzer {
              ->atomIs('Array')
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')
-             ->code($incoming_variables)
+             ->code($incomingVariables)
              ->back('first');
         $this->prepareQuery();
 
@@ -54,7 +54,7 @@ class NoChangeIncomingVariables extends Analyzer\Analyzer {
         $this->atomIs('Assignation')
              ->outIs('LEFT')
              ->atomIs('Variable')
-             ->code($incoming_variables)
+             ->code($incomingVariables)
              ->back('first');
         $this->prepareQuery();
 
@@ -63,7 +63,7 @@ class NoChangeIncomingVariables extends Analyzer\Analyzer {
              ->outIs('LEFT')
              ->atomIs('Array')
              ->outIs('VARIABLE')
-             ->code($incoming_variables)
+             ->code($incomingVariables)
              ->back('first');
         $this->prepareQuery();
 
@@ -74,7 +74,7 @@ class NoChangeIncomingVariables extends Analyzer\Analyzer {
              ->outIs('VARIABLE')
              ->atomIs('Array')
              ->outIs('VARIABLE')
-             ->code($incoming_variables)
+             ->code($incomingVariables)
              ->back('first');
         $this->prepareQuery();
 
@@ -84,7 +84,7 @@ class NoChangeIncomingVariables extends Analyzer\Analyzer {
              ->atomIs('Array')
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')
-             ->code($incoming_variables)
+             ->code($incomingVariables)
              ->back('first');
         $this->prepareQuery();
     }

@@ -1,9 +1,13 @@
 <?php
 
 $expected     = array('customConstant', 
-                      'customConstantByDefine');
+                      'customConstantByDefine',
+                      '\\customConstantUsedWithNsname', 
+                      '\\customConstantByDefineUsedWithNsname');
 
 $expected_not = array('unusedCustomConstant', 
-                      'unusedCustomConstantByDefine');
+                      'unusedCustomConstantByDefine',
+                      'MYSQLI_TYPE_STRING',
+                      '\\MYSQLI_REFRESH_SLAVE;');
 
 ?>
