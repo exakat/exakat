@@ -13,7 +13,6 @@ class FunctionCalledWithOtherCase extends Analyzer\Analyzer {
              ->samePropertyAs('code', 'name')
              ->notSamePropertyAs('code', 'name', true)
              ->back('first');
-//        $this->printQuery();
         $this->prepareQuery();
     }
 }

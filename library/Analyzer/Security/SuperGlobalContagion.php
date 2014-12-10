@@ -79,7 +79,6 @@ class SuperGlobalContagion extends Analyzer\Analyzer {
                  ->outIs('LEFT')
                  ->atomIs('Variable')
                  ->codeIsNot($vars);
-            $this->printQuery();
             $this->prepareQuery();
 
             // $_get_get[2] = $_get;
