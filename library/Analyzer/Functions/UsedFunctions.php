@@ -19,7 +19,7 @@ class UsedFunctions extends Analyzer\Analyzer {
                 $ini[$key][$id] = '\\' . $function;
             }
         }
-        
+
         // callable is in # position
         $positions = array(0, 1, 2, 3, 4, 5, 6);
         foreach($positions as $position) {
@@ -31,11 +31,11 @@ class UsedFunctions extends Analyzer\Analyzer {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs('String')
-                 ->raw('sideEffect{ it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;}; }')
+                 ->raw('sideEffect{ it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath == "" || it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;}; }')
                  ->ignore();
             $this->prepareQuery();
         }
-
+    
         // callable is in last
         $this->atomIs("Functioncall")
              ->hasNoIn('METHOD')
