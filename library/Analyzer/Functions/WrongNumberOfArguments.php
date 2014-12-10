@@ -14,17 +14,17 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
         $data = new \Data\Methods();
         
         $functions = $data->getFunctionsArgsInterval();
-        $args_mins = array();
-        $args_maxs = array();
+        $argsMins = array();
+        $argsMaxs = array();
         
         foreach($functions as $function) {
             if ($function['args_min'] > 0) {
-                $args_mins[$function['args_min']][] = '\\'.$function['name'];
+                $argsMins[$function['args_min']][] = '\\'.$function['name'];
             }
-            $args_maxs[$function['args_max']][] = '\\'.$function['name'];
+            $argsMaxs[$function['args_max']][] = '\\'.$function['name'];
         }
         
-        foreach($args_mins as $nb => $f) {
+        foreach($argsMins as $nb => $f) {
             $this->atomIs("Functioncall")
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
@@ -33,7 +33,7 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
             $this->prepareQuery();
         }
 
-        foreach($args_maxs as $nb => $f) {
+        foreach($argsMaxs as $nb => $f) {
             $this->atomIs("Functioncall")
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))

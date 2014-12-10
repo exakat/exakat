@@ -15,10 +15,10 @@ class Analyzer {
     
     static public $datastore = null;
     
-    protected $row_count = 0;
+    protected $rowCount = 0;
 
     private $queries = array();
-    private $queries_arguments = array();
+    private $queriesArguments = array();
     private $methods = array();
     private $arguments = array();
     
@@ -249,12 +249,11 @@ GREMLIN;
             return true;
         }
         
-        $wrong_config = array();
         foreach($this->phpconfiguration as $ini => $value) {
-            $wrong_config[] = $Php->getConfiguration($ini) == $value;
+            if ($Php->getConfiguration($ini) != $value) { return false; }
         }
         
-        return count($wrong_config) == 0;
+        return true;
     }
     
     public function checkPhpVersion($version) {
@@ -599,15 +598,15 @@ GREMLIN;
         return $this;
     }
 
-    function noChildWithRank($edge_name, $rank = "0") {
+    function noChildWithRank($edgeName, $rank = "0") {
         if ($rank === 'first') {
-            $this->addMethod("filter{ it.out(***).has('rank','0').any() == false }", $edge_name);
+            $this->addMethod("filter{ it.out(***).has('rank','0').any() == false }", $edgeName);
         } elseif ($rank === 'last') {
-            $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 1).any() == false }", $edge_name, $edge_name);
+            $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 1).any() == false }", $edgeName, $edgeName);
         } elseif ($rank === '2last') {
-            $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 2).any() == false }", $edge_name, $edge_name);
+            $this->addMethod("filter{ it.out(***).has('rank',it.in(***).count() - 2).any() == false }", $edgeName, $edgeName);
         } else {
-            $this->addMethod("filter{ it.out(***).has('rank', ***).any() == false}", $edge_name, abs(intval($rank)));
+            $this->addMethod("filter{ it.out(***).has('rank', ***).any() == false}", $edgeName, abs(intval($rank)));
         }
 
         return $this;
@@ -941,55 +940,55 @@ GREMLIN;
         return $this;
     }
 
-    protected function outIs($edge_name) {
-        if (is_array($edge_name)) {
-            $this->addMethod("out('".join("', '", $edge_name)."')");
+    protected function outIs($edgeName) {
+        if (is_array($edgeName)) {
+            $this->addMethod("out('".join("', '", $edgeName)."')");
         } else {
-            $this->addMethod("out(***)", $edge_name);
+            $this->addMethod("out(***)", $edgeName);
         }
         
         return $this;
     }
 
     // follows a link if it is there (and do nothing otherwise)
-    protected function outIsIE($edge_name) {
-        if (is_array($edge_name)) {
-            $this->addMethod("transform{ if (it.out('".join("', '", $edge_name)."').any()) { it.out('".join("', '", $edge_name)."').next(); } else { it ;}}");
+    protected function outIsIE($edgeName) {
+        if (is_array($edgeName)) {
+            $this->addMethod("transform{ if (it.out('".join("', '", $edgeName)."').any()) { it.out('".join("', '", $edgeName)."').next(); } else { it ;}}");
         } else {
-            $this->addMethod("transform{ if (it.out('$edge_name').any()) { it.out('$edge_name').next(); } else { it ;}}", $edge_name);
+            $this->addMethod("transform{ if (it.out('$edgeName').any()) { it.out('$edgeName').next(); } else { it ;}}", $edgeName);
         }
         
         return $this;
     }
 
-    function outIsnt($edge_name) {
-        if (is_array($edge_name)) {
-            $this->addMethod("filter{ it.out('".join("', '", $edge_name)."').count() == 0}");
+    function outIsnt($edgeName) {
+        if (is_array($edgeName)) {
+            $this->addMethod("filter{ it.out('".join("', '", $edgeName)."').count() == 0}");
         } else {
-            $this->addMethod("filter{ it.out(***).count() == 0}", $edge_name);
+            $this->addMethod("filter{ it.out(***).count() == 0}", $edgeName);
         }
         
         return $this;
     }
 
-    function rankIs($edge_name, $rank) {
-        if (is_array($edge_name)) {
+    function rankIs($edgeName, $rank) {
+        if (is_array($edgeName)) {
             // @todo
             die(" I don't understand arrays in rankIs()");
         }
 
         if ($rank == 'first') {
             $rank = 0;
-            $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edge_name, $rank);
+            $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edgeName, $rank);
         } else if ($rank === 'last') {
-            $this->addMethod("sideEffect{ rank = it.out(***).count() - 1;}", $edge_name);
-            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edge_name);
+            $this->addMethod("sideEffect{ rank = it.out(***).count() - 1;}", $edgeName);
+            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edgeName);
         } else if ($rank === '2last') {
-            $this->addMethod("sideEffect{ rank = it.out(***).count() - 2;}", $edge_name);
-            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edge_name);
+            $this->addMethod("sideEffect{ rank = it.out(***).count() - 2;}", $edgeName);
+            $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edgeName);
         } else {
             $rank = abs(intval($rank));
-            $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edge_name, $rank);
+            $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edgeName, $rank);
         }
         
         return $this;
@@ -1019,32 +1018,32 @@ GREMLIN;
         return $this;
     }
     
-    function inIs($edge_name) {
-        if (is_array($edge_name)) {
+    function inIs($edgeName) {
+        if (is_array($edgeName)) {
             // @todo
-            $this->addMethod("inE.filter{it.label in ***}.outV", $edge_name);
+            $this->addMethod("inE.filter{it.label in ***}.outV", $edgeName);
         } else {
-            $this->addMethod("in(***)", $edge_name);
+            $this->addMethod("in(***)", $edgeName);
         }
         
         return $this;
     }
 
-    function inIsnot($edge_name) {
-        if (is_array($edge_name)) {
-            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any() == false}", $edge_name);
+    function inIsnot($edgeName) {
+        if (is_array($edgeName)) {
+            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any() == false}", $edgeName);
         } else {
-            $this->addMethod("filter{ it.in(***).any() == false}", $edge_name);
+            $this->addMethod("filter{ it.in(***).any() == false}", $edgeName);
         }
         
         return $this;
     }
 
-    function hasIn($edge_name) {
-        if (is_array($edge_name)) {
-            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any()}", $edge_name);
+    function hasIn($edgeName) {
+        if (is_array($edgeName)) {
+            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any()}", $edgeName);
         } else {
-            $this->addMethod("filter{ it.in(***).any()}", $edge_name);
+            $this->addMethod("filter{ it.in(***).any()}", $edgeName);
         }
         
         return $this;
@@ -1056,38 +1055,38 @@ GREMLIN;
         return $this;
     }
     
-    function hasNoIn($edge_name) {
-        if (is_array($edge_name)) {
-            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any() == false}", $edge_name);
+    function hasNoIn($edgeName) {
+        if (is_array($edgeName)) {
+            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any() == false}", $edgeName);
         } else {
-            $this->addMethod("filter{ it.in(***).any() == false}", $edge_name);
+            $this->addMethod("filter{ it.in(***).any() == false}", $edgeName);
         }
         
         return $this;
     }
 
-    function hasOut($edge_name) {
-        if (is_array($edge_name)) {
-            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.any()}", $edge_name);
+    function hasOut($edgeName) {
+        if (is_array($edgeName)) {
+            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.any()}", $edgeName);
         } else {
-            $this->addMethod("filter{ it.out(***).any()}", $edge_name);
+            $this->addMethod("filter{ it.out(***).any()}", $edgeName);
         }
         
         return $this;
     }
     
-    function hasNoOut($edge_name) {
-        if (is_array($edge_name)) {
+    function hasNoOut($edgeName) {
+        if (is_array($edgeName)) {
             // @todo
-            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.any() == false}", $edge_name);
+            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.any() == false}", $edgeName);
         } else {
-            $this->addMethod("filter{ it.out(***).any() == false}", $edge_name);
+            $this->addMethod("filter{ it.out(***).any() == false}", $edgeName);
         }
         
         return $this;
     }
         
-    public function hasParent($parent_class, $ins = array()) {
+    public function hasParent($parentClass, $ins = array()) {
         if (empty($ins)) {
             $in = '.in';
         } else {
@@ -1105,16 +1104,16 @@ GREMLIN;
             $in = join('', $in);
         }
         
-        if (is_array($parent_class)) {
-            $this->addMethod('filter{ it.'.$in.'.filter{ it.atom in ***).count() != 0}', $parent_class);
+        if (is_array($parentClass)) {
+            $this->addMethod('filter{ it.'.$in.'.filter{ it.atom in ***).count() != 0}', $parentClass);
         } else {
-            $this->addMethod('filter{ it.'.$in.'.has("atom", ***).count() != 0}', $parent_class);
+            $this->addMethod('filter{ it.'.$in.'.has("atom", ***).count() != 0}', $parentClass);
         }
         
         return $this;
     }
 
-    public function hasNoParent($parent_class, $ins = array()) {
+    public function hasNoParent($parentClass, $ins = array()) {
         
         if (empty($ins)) {
             $in = '.in';
@@ -1133,10 +1132,10 @@ GREMLIN;
             $in = join('', $in);
         }
         
-        if (is_array($parent_class)) {
-            $this->addMethod('filter{ it'.$in.'.filter{it.atom in ***}.count() == 0}', $parent_class);
+        if (is_array($parentClass)) {
+            $this->addMethod('filter{ it'.$in.'.filter{it.atom in ***}.count() == 0}', $parentClass);
         } else {
-            $this->addMethod('filter{ it'.$in.'.has("atom", ***).count() == 0}', $parent_class);
+            $this->addMethod('filter{ it'.$in.'.has("atom", ***).count() == 0}', $parentClass);
         }
         
         return $this;
@@ -1393,11 +1392,11 @@ GREMLIN
 
         $this->execQuery();
         
-        return $this->row_count;
+        return $this->rowCount;
     }
     
     public function getRowCount() {
-        return $this->row_count;
+        return $this->rowCount;
     }
 
     public function analyze() { return true; } 
@@ -1409,11 +1408,11 @@ GREMLIN
         foreach($this->queries as $id => $query) {
             print "$id)\n";
             print_r($query);
-            print_r($this->queries_arguments[$id]);
+            print_r($this->queriesArguments[$id]);
 
-            krsort($this->queries_arguments[$id]);
+            krsort($this->queriesArguments[$id]);
             
-            foreach($this->queries_arguments[$id] as $name => $value) {
+            foreach($this->queriesArguments[$id] as $name => $value) {
                 if (is_array($value)) {
                     $query = str_replace($name, "['".join("', '", $value)."']", $query);
                 } elseif (is_string($value)) {
@@ -1459,7 +1458,7 @@ GREMLIN;
 
     // initializing a new query 
         $this->queries[] = $query;
-        $this->queries_arguments[] = $this->arguments;
+        $this->queriesArguments[] = $this->arguments;
 
         $this->methods = array();
         $this->arguments = array();
@@ -1473,17 +1472,17 @@ GREMLIN;
 
         // @todo add a test here ? 
         foreach($this->queries as $id => $query) {
-            $r = $this->query($query, $this->queries_arguments[$id]);
-            $this->row_count += $r[0][0];
+            $r = $this->query($query, $this->queriesArguments[$id]);
+            $this->rowCount += $r[0][0];
         }
 
         // reset for the next
         $this->queries = array(); 
-        $this->queries_arguments = array(); 
+        $this->queriesArguments = array(); 
         
         // @todo multiple results ? 
         // @todo store result in the object until reading. 
-        return $this->row_count;
+        return $this->rowCount;
     }
 
     public function toCount() {
