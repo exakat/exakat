@@ -363,51 +363,29 @@ g.removeVertex(var);
             unset($actions['to_var']);
         }
 
-        if (isset($actions['to_global'])) {
+        if (isset($actions['toGlobal'])) {
             $_global = new _Global(Token::$client);
             $fullcode = $_global->fullcode();
 
             $sequence = new Sequence(Token::$client);
             $fullCodeSequence = $sequence->fullcode();
 
-            $atom = $actions['to_global'];
+            $atom = $actions['toGlobal'];
             $qactions[] = "
 /* to global without arguments */
-var = it;
+
+fullcode = it;
 arg = it.out('NEXT').next();
-
-var.setProperty('code', var.code);
-var.setProperty('token', var.token);
-
-c = -1;
 arg.out('ARGUMENT').each{
-    c = c + 1;
-    x = g.addVertex(null, [code:'global', atom:'Global', token:'T_GLOBAL', virtual:true, line:it.line, rank:c]);
-
-    g.addEdge(var, x, 'ELEMENT');
-    g.addEdge(x,  it, 'NAME');
-    
-    it.inE('ARGUMENT').each{ g.removeEdge(it); }
-
-    fullcode = x;
-    $fullcode
+    g.addEdge(fullcode, it, 'GLOBAL');
 }
 
-g.addEdge(var, var.out('NEXT').out('NEXT').next(), 'NEXT');
-g.removeEdge(var.out('NEXT').outE('NEXT').next());
+g.addEdge(fullcode, arg.out('NEXT').next(), 'NEXT');
+arg.bothE('ARGUMENT').each{ g.removeEdge(it); }
 g.removeVertex(arg);
 
-var.setProperty('code', ';');
-var.setProperty('atom', 'Sequence');
-var.setProperty('token', 'T_GLOBAL');
-var.inE('INDEXED').each{ g.removeEdge(it); }
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), var, 'INDEXED');   
-
-fullcode = var;
-$fullCodeSequence
-
 ";
-            unset($actions['to_global']);
+            unset($actions['toGlobal']);
         }
 
         if (isset($actions['to_var_ppp'])) {

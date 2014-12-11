@@ -26,8 +26,8 @@ class _Global extends TokenAuto {
                                    2 => array('filterOut' => 'T_COMMA'),
                                  );
         
-        $this->actions = array('to_global'   => 'Global',
-                               'keepIndexed' => true);
+        $this->actions = array('toGlobal'     => 'Global',
+                               'makeSequence' => 'it');
         $this->checkAuto(); 
 
         return false;
