@@ -10,19 +10,19 @@ class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
         $data = new \Data\Methods();
         
         $methods = $data->getMethodsArgsInterval();
-        $args_mins = array();
-        $args_max = array();
+        $argsMins = array();
+        $argsMaxs = array();
         
         // classes are ignored at that point. No way yet to refine this.
         foreach($methods as $method) {
             if ($method['args_min'] > 0) {
-                $args_mins[$method['args_min']][] = $method['name'];
+                $argsMins[$method['args_min']][] = $method['name'];
             }
-            $args_maxs[$method['args_max']][] = $method['name'];
+            $argsMaxs[$method['args_max']][] = $method['name'];
         }
         
         // case for methods
-        foreach($args_mins as $nb => $f) {
+        foreach($argsMins as $nb => $f) {
             $this->atomIs(array("Methodcall", 'Staticmethodcall'))
                  ->outIs('METHOD')
                  ->code($f)
@@ -31,7 +31,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
             $this->prepareQuery();
         }
 
-        foreach($args_maxs as $nb => $f) {
+        foreach($argsMaxs as $nb => $f) {
             $this->atomIs(array("Methodcall", 'Staticmethodcall'))
                  ->outIs('METHOD')
                  ->code($f)
