@@ -13,7 +13,7 @@ class _Global extends TokenAuto {
                                    2 => array('token' => 'T_SEMICOLON'),
                                  );
         
-        $this->actions = array('transform'    => array( 1 => 'NAME'),
+        $this->actions = array('transform'    => array( 1 => 'GLOBAL'),
                                'atom'         => 'Global',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
@@ -26,7 +26,8 @@ class _Global extends TokenAuto {
                                    2 => array('filterOut' => 'T_COMMA'),
                                  );
         
-        $this->actions = array('toGlobal'     => 'Global',
+        $this->actions = array('toGlobal'     => true,
+                               'atom'         => 'Global',
                                'makeSequence' => 'it');
         $this->checkAuto(); 
 
@@ -36,8 +37,13 @@ class _Global extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-if (fullcode.out('NAME').count() == 1) {
-    fullcode.setProperty('fullcode', "global " + fullcode.out("NAME").next().getProperty('fullcode'));
+if (fullcode.out('GLOBAL').count() == 1) {
+    fullcode.setProperty('fullcode', "global " + fullcode.out("GLOBAL").next().getProperty('fullcode'));
+} else {
+    s = []; 
+    fullcode.out("GLOBAL").sort{it.rank}._().each{ s.add(it.fullcode); };
+
+    fullcode.setProperty('fullcode', "global " + s.join(', '));
 }
 
 GREMLIN;

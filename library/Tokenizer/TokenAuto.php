@@ -367,10 +367,6 @@ g.removeVertex(var);
             $_global = new _Global(Token::$client);
             $fullcode = $_global->fullcode();
 
-            $sequence = new Sequence(Token::$client);
-            $fullCodeSequence = $sequence->fullcode();
-
-            $atom = $actions['toGlobal'];
             $qactions[] = "
 /* to global without arguments */
 
@@ -384,6 +380,7 @@ g.addEdge(fullcode, arg.out('NEXT').next(), 'NEXT');
 arg.bothE('ARGUMENT').each{ g.removeEdge(it); }
 g.removeVertex(arg);
 
+$fullcode
 ";
             unset($actions['toGlobal']);
         }
