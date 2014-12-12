@@ -12,6 +12,7 @@ class ThisIsForClasses extends Analyzer\Analyzer {
              ->classIs('Global')
              ->traitIs('Global')
              ->back('first');
+        $this->prepareQuery();
     }
 }
 
