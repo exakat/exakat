@@ -1172,7 +1172,7 @@ GREMLIN;
     }
     
     public function goToFunction() {
-        $this->addMethod('in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}');
+        $this->addMethod('in.loop(1){it.object.atom != "Function"}{(it.object.atom == "Function") && (it.object.out("NAME").hasNot("code", "").any())}');
         
         return $this;
     }
@@ -1227,6 +1227,18 @@ GREMLIN;
     
     public function goToClass() {
         $this->addMethod('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}');
+        
+        return $this;
+    }
+
+    public function goToTrait() {
+        $this->addMethod('in.loop(1){it.object.atom != "Trait"}{it.object.atom == "Trait"}');
+        
+        return $this;
+    }
+
+    public function goToClassTrait() {
+        $this->addMethod('in.loop(1){!(it.object.atom in ["Trait","Class"])}{it.object.atom in ["Trait", "Class"]}');
         
         return $this;
     }
