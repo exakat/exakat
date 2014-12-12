@@ -555,7 +555,7 @@ g.addEdge(var, next, 'NEXT');
             $qactions[] = "
 /* to to_lambda function */
 
-x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line, fullcode:'', noDelimiter='']);
+x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line, fullcode:'', noDelimiter:'']);
 
 g.addEdge(it, x, 'NAME');
 it.setProperty('lambda', 'true');
