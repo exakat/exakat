@@ -52,6 +52,19 @@ while($row = $res->fetch_Assoc()) {
             $diff .= "-";
         }
 
+        if (!file_exists('projects/'.$row['project'].'/log/analyze.analyze.final.log')) {
+            $diff .= "_";
+        } else {
+            $a = file('projects/'.$row['project'].'/log/analyze.analyze.final.log');
+            $x = array_pop($a);
+            if ($x != "Done\n") {
+                $diff .= "-";            
+            } else {
+                $diff .= "*";            
+            }
+        }
+        
+
         if (file_exists('projects/'.$row['project'].'/report')) {
             $diff .= "*";
         }
