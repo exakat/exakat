@@ -150,13 +150,20 @@ foreach($analyzers as $a) {
         continue 1;
     }
     if ($o->getDescription() === '') {
-        $missing_doc[] = $a;
+        $missing_doc[] = $a.' (human/en/'.$a.'.ini)';
     }
 }
 
 if ($missing_doc) {
     print count($missing_doc)." analyzer are missing their documentation\n";
     print "  + ".join("\n  + ", $missing_doc)."\n\n";
+    
+    foreach($missing_doc as $document) {
+        list($documentName, ) = explode(' ', $document);
+        if (!file_exists('human/en/'.$documentName.'.ini')) {
+            file_put_contents('human/en/'.$documentName.'.ini', "name=\"\";\ndescription=\"\";\n");
+        }
+    }
 } else {
     print "All ".count($analyzers)." analyzers have their documentation\n\n";
 }
