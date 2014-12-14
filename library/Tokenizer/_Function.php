@@ -10,7 +10,7 @@ class _Function extends TokenAuto {
         // function x(args) {}
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('atom'  => array('Identifier', 'Boolean')),
+                                  1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
                                   2 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   3 => array('atom'  => 'Arguments'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
@@ -32,7 +32,7 @@ class _Function extends TokenAuto {
         // function x(args); for interfaces
         $this->conditions = array(0 => array('token' =>  _Function::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('atom'  => array('Identifier', 'Boolean')),
+                                  1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
                                   2 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   3 => array('atom'  => 'Arguments'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
