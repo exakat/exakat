@@ -31,11 +31,12 @@ class UsedFunctions extends Analyzer\Analyzer {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs('String')
+                 ->tokenIsNot('T_QUOTE')
                  ->raw('sideEffect{ it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath == "" || it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;}; }')
                  ->ignore();
             $this->prepareQuery();
         }
-    
+
         // callable is in last
         $this->atomIs("Functioncall")
              ->hasNoIn('METHOD')
