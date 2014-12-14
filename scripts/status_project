@@ -52,7 +52,7 @@ if ($res == "Done\nDone\nDone\nDone\nDone\n") {
         if (trim(substr($log_content, -5)) != "Done") {
             print 'projects/'.$project.'/log/analyze.'.$log.'.final.log is wrong'."\n";
             if (preg_match('#\[\[\'analyzer\':\'Analyzer\\\\\\\\(.+?)\\\\\\\\(.+?)\'\]\]#s', $log_content, $r)) {
-                print "   php bin/analyzer -P $r[1]/$r[2] \n";
+                print "   php bin/analyze -P $r[1]/$r[2] \n";
             }
         } else {
             print 'projects/'.$project.'/log/analyze.'.$log.'.final.log is OK'."\n";
