@@ -7,14 +7,14 @@ class Block extends TokenAuto {
     static public $atom = 'Sequence';
     
     public function _check() {
-    // @doc Block
+    // @doc {{ Block}}
         $this->conditions = array( -1 => array('token'   => array('T_OPEN_CURLY')), 
                                     0 => array('token'   => self::$operators),
                                     1 => array('atom'    => 'yes',
                                                'notAtom' => 'SequenceCaseDefault'),
                                     2 => array('token'   => 'T_CLOSE_CURLY',
                                                'atom'    => 'none'),
-                                    3 => array('token'   => array('T_CLOSE_CURLY')), 
+                                    3 => array('token'   => array('T_CLOSE_CURLY', 'T_SEMICOLON')), 
         );
         
         $this->actions = array('to_block'     => true,
