@@ -54,18 +54,17 @@ function process_dir($dir, $log, $client) {
     }
 
     $ignoreDirs = array();
+    if (substr($dir, -1) == '/') { $dir = substr($dir, 0, -1); }
     foreach($config->ignore_dirs as $ignore) {
         if ($ignore[0] === '/') {
-            $ignoreDirs[] = './projects/'.$dir.'/code'.$ignore.'*';
+            $ignoreDirs[] = $dir.$ignore.'*';
         } else {
             $ignoreDirs[] = '*'.$ignore.'*';
         }
     }
-    
-    if (substr($dir, -1) == '/') { $dir = substr($dir, 0, -1); }
 
     $extPhp = array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  );
-    $shell = 'find '.$dir.' \\( -name "*.'.(join('" -o -name "*.', $extPhp)).'" \\) \\( -not -path "*.'.(join('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l';
+    $shell = 'find '.$dir.' \\( -name "*.'.(join('" -o -name "*.', $extPhp)).'" \\) \\( -not -path "*'.(join('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l';
     $res = trim(shell_exec($shell));
     $files = explode("\n", $res);
     
