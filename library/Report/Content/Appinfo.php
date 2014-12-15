@@ -156,6 +156,10 @@ class Appinfo extends \Report\Content {
                             'Variable variables'      => 'Variables/VariableVariables',
 
                             'PHP arrays'              => 'Arrays/Phparrayindex',
+                            
+                            'Globals'                 => 'Structures/GlobalUsage',
+                            'PHP SuperGlobals'        => 'Structures/GlobalUsage',
+                            
                     ),
 
                     'Functions' => array(
