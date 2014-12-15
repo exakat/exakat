@@ -1267,6 +1267,18 @@ GREMLIN;
         return $this;
     }
 
+    public function hasFunction() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any()}');
+        
+        return $this;
+    }
+
+    public function hasNoFunction() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}');
+        
+        return $this;
+    }
+
     public function hasClass() {
         $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.any()}');
         
