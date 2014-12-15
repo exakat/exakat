@@ -43,7 +43,7 @@ class Assignation extends TokenAuto {
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
                                    2 => array('filterOut2' => array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators, 
-                                                                          Comparison::$operators, Logical::$operators, Multiplication::$operators, 
+                                                                          Comparison::$operators, Logical::$booleans, Multiplication::$operators, 
                                                                           PostPlusplus::$operators, Power::$operators, _Instanceof::$operators, 
                                                                           array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
                                                                                 'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
