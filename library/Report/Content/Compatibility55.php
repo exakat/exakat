@@ -16,7 +16,7 @@ class Compatibility55 extends \Report\Content {
                                                         'result' => $analyzer->toCount());
         }
 
-        $deprecatedExtensions = array_merge( \Report\Content\Compatibility55::$deprecatedExtensions,
+        $deprecatedExtensions = array_merge( self::$deprecatedExtensions,
                                              \Report\Content\Compatibility54::$deprecatedExtensions,
                                              \Report\Content\Compatibility53::$deprecatedExtensions);
         foreach($deprecatedExtensions as $extension) {

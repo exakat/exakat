@@ -85,8 +85,6 @@ HTML;
     protected function toFile2($filename, $data) {
         $section_name = $data->getName();
         
-        $table_count = \Report\Format\Ace\Horizontal::$horizontal_counter; 
-        
         $renderSidebar = new \Report\Format\Ace\SummarySidebar();
         $sidebar = new static();
         

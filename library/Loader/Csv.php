@@ -96,7 +96,7 @@ SHELL
         if (static::$file_saved == 0) {
             $les_cols2 = $les_cols;
             $les_cols2[4] .= ':int';
-            fputcsv($fp, array_merge($les_cols2), "\t");
+            fputcsv($fp, $les_cols2, "\t");
             unset($les_cols2);
         }
         foreach(static::$nodes as $id => $node) {

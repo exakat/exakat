@@ -8,7 +8,7 @@ class Tree extends \Report\Format\Ace {
     public function render($output, $data) {
         $output->pushToJsLibraries( "assets/js/fuelux/fuelux.tree.min.js");
 
-        $counter = \Report\Format\Ace\Tree::$tree_counter++;
+        self::$tree_counter++;
         
         $tree_data = $this->renderTreeData($data);
         

@@ -69,13 +69,11 @@ class Directives extends \Report\Content {
                                      'suggested' => '1');
             $this->array['File upload'][] = $upload_max_file;
         }
-
-
     }
     
     private function checkPresence($analyzer) {
         $vertices = $this->query("g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('\\', '\\\\', $analyzer)."']].out.any()");
-        return $vertices[0][0] == false ? 'Off' : 'On';
+        return $vertices[0][0] === false ? 'Off' : 'On';
 
     }
 }

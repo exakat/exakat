@@ -3,7 +3,7 @@ use \Everyman\Neo4j\Client;
 
 namespace Loader;
 
-class Neo4jphp extends \Everyman\Neo4j\Client {
+class Neo4jphp extends Client {
     static function save_chunk() {
     }
 

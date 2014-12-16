@@ -16,7 +16,7 @@ class Compatibility53 extends \Report\Content {
                                                         'result' => $analyzer->toCount());
         }
 
-        $deprecatedExtensions = array_merge( \Report\Content\Compatibility53::$deprecatedExtensions);
+        $deprecatedExtensions = self::$deprecatedExtensions;
         foreach($deprecatedExtensions as $extension) {
             $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Extensions\\Ext'.$extension, $this->neo4j);
             $this->array[ $analyzer->getName()] = array('id'     => 1, 

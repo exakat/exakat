@@ -51,18 +51,18 @@ class Stats {
         return $this->queryOne("g.E.except([g.v(0)]){$this->file_filter}.count()");
     }
     
-    private function queryOne($query) {
-        $r = $this->query($query);
+    private function queryOne($queryString) {
+        $r = $this->query($queryString);
         return $r[0][0];
     }
 
-    private function query($querystring) {
-        $params = array('type' => 'IN');
+    private function query($queryString) {
+        $parameters = array('type' => 'IN');
         try {
-            $query = new Gremlin\Query($this->client, $querystring, $params);
+            $query = new Gremlin\Query($this->client, $queryString, $parameters);
             return $query->getResultSet();
         } catch (Everyman\Neo4j\Exception $e) {
-            print "Can't execute '$querystring'\n".$e->getMessage()."\n";
+            print "Can't execute '$queryString'\n".$e->getMessage()."\n";
             return null;
         }
     }

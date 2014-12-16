@@ -2,9 +2,6 @@
 
 namespace Analyzer;
 
-use Everyman\Neo4j\Client,
-    Everyman\Neo4j\Index\NodeIndex;
-
 class Docs {
     private $sqlite = null;
     
