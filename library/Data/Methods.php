@@ -68,6 +68,30 @@ class Methods {
         
         return $return;
     }
+
+    public function getStochasticFunctions() {
+        $query = "SELECT name FROM methods WHERE stochastic = 'true'";
+        $res = $this->sqlite->query($query);
+        $return = array();
+        
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $return[] = $row;
+        }
+        
+        return $return;
+    }
+
+    public function getNonStochasticFunctions() {
+        $query = "SELECT name FROM methods WHERE stochastic != 0";
+        $res = $this->sqlite->query($query);
+        $return = array();
+        
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $return[] = $row['name'];
+        }
+        
+        return $return;
+    }
 }
 
 ?>

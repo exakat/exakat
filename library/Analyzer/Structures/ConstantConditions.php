@@ -11,16 +11,21 @@ class ConstantConditions extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+
+        $data = new \Data\Methods();
+        $nonStochatichFunctions = $data->getNonStochasticFunctions();
+
         $this->atomIs('While')
              ->outIs('CONDITION')
-             ->atomIsNot(array('Variable', 'Functioncall'))
-             ->noAtomInside(array('Variable', 'Functioncall'))
+             ->atomIsNot(array('Variable', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
+             ->noAtomInside(array('Variable', 'Functioncall', 'Methodcall', 'Staticmethodcall'))
              ->back('first');
         $this->prepareQuery();
         
         $this->atomIs('While')
              ->outIs('CONDITION')
              ->atomIs(array('Variable', 'Functioncall'))
+             ->codeIsNot($nonStochatichFunctions)
              ->savePropertyAs('code', 'condition')
              ->back('first')
              // variables are only read
