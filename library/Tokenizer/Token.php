@@ -370,7 +370,31 @@ g.idx('atoms')[['atom':'Class']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcod
     } else if (it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{thealias = it;}.filter{ it.alias == fullcode.code.toLowerCase()}.any() ) {
         fullcode.setProperty('fullnspath', thealias.fullnspath);
     } else {
-        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+        isDefault = true;
+        if (fullcode.token == 'T_NS_SEPARATOR') {
+            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
+        } else {
+            fullcodealias = fullcode.code.toLowerCase();
+        }
+        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
+            if (fullcode.token == 'T_NS_SEPARATOR') {
+                s=[];
+                fullcode.out('SUBNAME').filter{it.rank > 0}.sort{it.rank}._().each{ s.add(it.code);}
+                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + s.join('\\\\').toLowerCase());
+            } else {
+                fullcode.setProperty('fullnspath', alias.fullnspath);
+            }
+            fullcode.setProperty('aliased', 'true');
+            isDefault = false;
+        };
+        
+        if (isDefault) {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
+            } else {
+                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+            }
+        };
     }
 };
 ", "
@@ -380,7 +404,31 @@ g.idx('atoms')[['atom':'Interface']].out('IMPLEMENTS', 'EXTENDS').sideEffect{ful
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
     } else {
-        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+        isDefault = true;
+        if (fullcode.token == 'T_NS_SEPARATOR') {
+            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
+        } else {
+            fullcodealias = fullcode.code.toLowerCase();
+        }
+        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
+            if (fullcode.token == 'T_NS_SEPARATOR') {
+                s=[];
+                fullcode.out('SUBNAME').filter{it.rank > 0}.sort{it.rank}._().each{ s.add(it.code);}
+                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + s.join('\\\\').toLowerCase());
+            } else {
+                fullcode.setProperty('fullnspath', alias.fullnspath);
+            }
+            fullcode.setProperty('aliased', 'true');
+            isDefault = false;
+        };
+        
+        if (isDefault) {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
+            } else {
+                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+            }
+        };
     }
 };
 ", "
@@ -390,7 +438,31 @@ g.idx('atoms')[['atom':'Trait']].out('IMPLEMENTS', 'EXTENDS').sideEffect{fullcod
     } else if (it.atom == 'File' || it.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
     } else {
-        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+        isDefault = true;
+        if (fullcode.token == 'T_NS_SEPARATOR') {
+            fullcodealias = fullcode.out('SUBNAME').has('rank', 0).next().code.toLowerCase();
+        } else {
+            fullcodealias = fullcode.code.toLowerCase();
+        }
+        it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
+            if (fullcode.token == 'T_NS_SEPARATOR') {
+                s=[];
+                fullcode.out('SUBNAME').filter{it.rank > 0}.sort{it.rank}._().each{ s.add(it.code);}
+                fullcode.setProperty('fullnspath', alias.fullnspath + '\\\\' + s.join('\\\\').toLowerCase());
+            } else {
+                fullcode.setProperty('fullnspath', alias.fullnspath);
+            }
+            fullcode.setProperty('aliased', 'true');
+            isDefault = false;
+        };
+        
+        if (isDefault) {
+            if (it.atom == 'File' || it.fullcode == 'namespace Global') {
+                fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
+            } else {
+                fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.fullcode.toLowerCase());
+            }
+        };
     }
 };
 ", "
