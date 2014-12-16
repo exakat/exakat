@@ -1413,7 +1413,7 @@ g.addEdge(it, x, 'NEXT');
         
         if (isset($actions['to_specialmethodcall'])) {
             $qactions[] = "
-/* to_functioncall */
+/* to_specialmethodcall */
 
 funcall = it.out('NEXT').out('NEXT').next();
 funcall.setProperty('block', true);
@@ -2360,7 +2360,7 @@ if (     $it.token != 'T_ELSEIF'
     && !($it.in('NEXT').next().atom in ['Class', 'Identifier']) 
     && !($it.out('NEXT').next().token in list_after_token)
     && !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
-    && !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR']}.any()) /* \$x{\$b - 2} */
+    && !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR', 'T_DOUBLE_COLON']}.any()) /* \$x{\$b - 2} */
     ) {
 $makeSequence; 
 } else {
