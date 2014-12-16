@@ -23,7 +23,6 @@ class Staticmethodcall extends TokenAuto {
 
         $this->actions = array('to_specialmethodcall' => true,
                                'makeSequence'         => 'it',
-                               'atom'                 => 'Staticmethodcall',
                                'cleanIndex'           => true);
         $this->checkAuto(); 
 
