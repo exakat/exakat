@@ -7,7 +7,7 @@ use Analyzer;
 class UsedPrivateMethod extends Analyzer\Analyzer {
 
     public function analyze() {
-        // property used in a static methodcall \a\b::b()
+        // method used in a static methodcall \a\b::b()
         $this->atomIs("Class")
              ->savePropertyAs('fullnspath', 'classname')
              ->outIs('BLOCK')
@@ -29,7 +29,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->back('method');
         $this->prepareQuery();
 
-        // property used in a static methodcall static::b() or self
+        // method used in a static methodcall static::b() or self
         $this->atomIs("Class")
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -50,7 +50,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->back('method');
         $this->prepareQuery();
 
-        // property used in a normal methodcall with $this $this->b()
+        // method used in a normal methodcall with $this $this->b()
         $this->atomIs("Class")
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -69,6 +69,36 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
              ->back('method');
+        $this->prepareQuery();
+
+        // method used in a new (constructor)
+        $this->atomIs("Class")
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->hasOut('PRIVATE')
+             ->_as('method')
+             ->outIs('NAME')
+             ->code('__construct')
+             ->inIs('NAME')
+             ->inIs('ELEMENT')
+             ->inIs('BLOCK')
+             ->atomInside('New')
+             ->outIs('NEW')
+             ->samePropertyAs('fullnspath', 'fnp')
+             ->back('method');
+        $this->prepareQuery();
+
+        // __destruct is considered automatically checked
+        $this->atomIs("Class")
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Function')
+             ->hasOut('PRIVATE')
+             ->outIs('NAME')
+             ->code('__destruct')
+             ->inIs('NAME');
         $this->prepareQuery();
     }
 }

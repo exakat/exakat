@@ -18,7 +18,6 @@ class UnusedPrivateMethod extends Analyzer\Analyzer {
              ->hasOut('PRIVATE')
              ->analyzerIsNot('Analyzer\\Classes\\UsedPrivateMethod');
         $this->prepareQuery();
-    
     }
 }
 
