@@ -7,12 +7,8 @@ use Analyzer;
 class MagicMethod extends Analyzer\Analyzer {
     
     public function analyze() {
-        $magicMethods = array(' __construct', '__destruct', 
-                              '__call', '__callStatic', '__get', '__set', '__isset', '__unset', 
-                              '__sleep', '__wakeup', 
-                              '__toString', 
-                              '__invoke', '__set_state', '__clone',
-                              '__debugInfo');
+        $magicMethods = $this->loadIni('php_magic_methods.ini');
+        $magicMethods = $magicMethods['magicMethod'];
         
         $this->atomIs("Class")
              ->outIs('BLOCK')
