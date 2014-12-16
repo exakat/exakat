@@ -5,7 +5,7 @@ namespace Analyzer\Type;
 use Analyzer;
 
 class MimeType extends Analyzer\Analyzer {
-    public static $MimeTypes = array(
+    public static $mimeTypes = array(
 'application',
 'audio',
 'example',
@@ -23,7 +23,7 @@ class MimeType extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('String')
-             ->regex('code', '[\'\"]('.join('|', Analyzer\Type\MimeType::$MimeTypes).')/[a-zA-Z0-9+\\\\-]+[\'\"]');
+             ->regex('code', '[\'\"]('.join('|', self::$mimeTypes).')/[a-zA-Z0-9+\\\\-]+[\'\"]');
         $this->prepareQuery();
     }
 }

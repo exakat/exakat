@@ -10,19 +10,19 @@ class RedeclaredPhpFunction extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $exts = $this->loadIni('php_distribution_53.ini');
+        $extensions = $this->loadIni('php_distribution_53.ini');
         
-        $extensions = array();
-        foreach($exts['ext'] as $ext) {
-            if ($ext2 = $this->loadIni($ext.'.ini')) {
-                $extensions = array_merge($extensions, $ext2['functions']);
+        $extensionFunctions = array();
+        foreach($extensions['ext'] as $ext) {
+            if ($iniFile = $this->loadIni($ext.'.ini')) {
+                $extensionFunctions = array_merge($extensionFunctions, $iniFile['functions']);
             }
         }
         
         $this->atomIs("Function")
              ->outIs('NAME')
              ->analyzerIs("Analyzer\\Functions\\Functionnames")
-             ->code($extensions, true);
+             ->code($extensionFunctions, true);
     }
 }
 
