@@ -18,10 +18,11 @@ class Methodcall extends TokenAuto {
                                     1 => array('atom'      => array('Functioncall', 'Methodcall'))
                                  );
         
-        $this->actions = array('makeMethodCall' => true,
+        $this->actions = array('transform'    => array(-1 => 'OBJECT',
+                                                        1 => 'METHOD'),
                                'atom'           => 'Methodcall',
                                'cleanIndex'     => true,
-                               'makeSequence'   => 'p');
+                               'makeSequence'   => 'it');
         $this->checkAuto(); 
 
         // $this->{$x}($args);

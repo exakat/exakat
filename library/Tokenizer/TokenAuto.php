@@ -2048,45 +2048,6 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             ";
             unset($actions['createVoidForDefault']);
         }
-
-        if (isset($actions['makeMethodCall'])) {
-            $methodcall = new Methodcall(Token::$client);
-            $fullcode = $methodcall->fullcode();
-
-            $qactions[] = " 
-/* makeMethodCall */ 
-
-p = it;
-
-while(p.token == 'T_OBJECT_OPERATOR' &&
-      p.out('NEXT').has('atom', 'Functioncall').any() ) {
-    g.addEdge(p, p.in('NEXT').next(), 'OBJECT');
-    g.addEdge(p, p.out('NEXT').next(), 'METHOD');
-
-    a = p.in('NEXT').in('NEXT').next();
-    c = p.out('NEXT').out('NEXT').next();
-
-    p.in('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
-    p.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
-
-    g.addEdge(a, p, 'NEXT');
-    g.addEdge(p, c, 'NEXT');
-    
-    p.inE('INDEXED').each{ g.removeEdge(it); }
-    p.setProperty('atom', 'Methodcall');
-    
-    fullcode = p;
-    $fullcode;
-    
-    a = p;
-    p = c;
-}
-
-p = a;
-
-            ";
-            unset($actions['makeMethodCall']);
-        }
         
         if (isset($actions['caseDefaultSequence'])) {
             $qactions[] = <<<GREMLIN
