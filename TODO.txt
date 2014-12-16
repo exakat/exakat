@@ -67,7 +67,6 @@ Check spelling in variables/classe names :
 Export tool for extensions (versioning ?)
 Long variables with "" that should actually be ' because they don't contain any variable.
 
-Add logs in project : stops if tokenizer/fullcode do break. Alert me.
 Export data collected in mysql to a graph
 
 Namespace inventory as a tree.
@@ -120,7 +119,6 @@ bin/file should also sort PHP files/directories by type : see fb treemap : code,
 produce a dot graph of classes
 
 paraleliser les analyzers
-add an option to 
 
 Spot the exceptions and the one that are thrown, and the one caught. 
 spot use with no compound name and no namespace. They are ignored.
@@ -131,12 +129,11 @@ lighten the FILE link in the database (not the size of the produced CSV ).
 Check that Namespaces (specially Global) cannot be there several times.
 You should not throw an extension exception yourself (PDO)
 
-AND / && and OR / ||. http://stackoverflow.com/questions/2803321/and-vs-as-operator
 // display the actual hierarchy in a complex logical expression (add parenthesis?)
 
 Complex logical expression, without ().
 Commented Code
-  First support comments in exakat
+First support comments in exakat
 
 Un paramètre inutilisé dans une méthode qui en étend une autre est OK (C'est alors a relier à la généralisation induite par la classe du dessus, on peut aussi commenter les autres classes.)
 
@@ -147,7 +144,6 @@ upgrade regex search with result from thinkphp
 Spot URL in strings
 Spot SQL in strings
 Improve regex for PCRE
-spot usage of ereg 
 
 Mark Namespaces that are constants as such 
 
@@ -336,8 +332,6 @@ List of impacted methods (calling, data is changed for the original method to )
 
 Spot multiple aliases with the same names (compile but won't run)
 
-Using File upload ? 
-
 Functions / methods may be a tube (mixing arguments) or changing some state.
 
 // Useless code ?  (THen make this more complexe, with variable written 1, read 1, further apart.
@@ -511,18 +505,12 @@ remove usage of argv and replace with Config
 
 Make various stats (deep level, switch w/o default, single or double quotes, etc...). This will help running (or not) some analyzers. 
 
-Spot " if single is sufficient
-
 Check the league of extraordinary packages
 
 Enhanced Punit (for unit tests)
 
-Add favicon to report
-
 FuelPHP : 
 Views are included; most properties are dynamical (defined in an array), framework is left out (many missing functions)
-
-include PMD in the results
 
 Test are TRUE (except for empty()). Otherwise, it just gets confusing. (An exception would be using ! empty(), as testing for false here is generally more intuitive.)
 
@@ -536,3 +524,15 @@ Remove S_ARRAY indexing (keepIndexed should be good)
 
 Warning
 Internally, PHP strings are byte arrays. As a result, accessing or modifying a string using array brackets is not multi-byte safe, and should only be done with strings that are in a single-byte encoding such as ISO-8859-1.
+
+Detect over-used functions (same variable get the same function called several time)
+
+What size of code do I need to make a functioncall ? 
+
+Mark functions as idempotent (f(f(n)) == f(n))
+
+Suggest constant by locating identical strings/numbers in special places ( case, comparisons...) Is it faster? Can it be made faster by using constants?
+
+Separate 'files' with the official test and a script for short-tags, and the other compilation files.
+
+automatically exclude files with NEXT at the end of the tokenizer (separate script for cleaning).
