@@ -1184,7 +1184,6 @@ s.bothE('NEXT').each{ g.removeEdge(it); }
 /* to_block */ 
 
 it.setProperty('block', 'true');
-
 next = it.out('NEXT').next();
 
 if (next.atom == 'Sequence') {

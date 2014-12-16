@@ -9,7 +9,7 @@ class Ifthen extends TokenAuto {
     public function _check() {
     
     // @doc if () with only ;
-        $this->conditions = array( 0 => array('token' => Ifthen::$operators),
+        $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_SEMICOLON', 
                                               'atom'  => 'none')
@@ -23,7 +23,7 @@ class Ifthen extends TokenAuto {
 
         // @doc if () $x++;
         // Make a block from sequence after a if/elseif
-        $this->conditions = array(  0 => array('token'     => Ifthen::$operators,
+        $this->conditions = array(  0 => array('token'     => self::$operators,
                                                'atom'      => 'none'),
                                     1 => array('atom'      => 'Parenthesis'),
                                     2 => array('notAtom'   => 'Sequence', 
@@ -38,7 +38,7 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
 
     // @doc if then else
-        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
+        $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('atom'  =>  'Sequence',
@@ -60,7 +60,7 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
 
         // if, elseif followed by a single instruction without a ;
-        $this->conditions = array(  0 => array('token' => Ifthen::$operators,
+        $this->conditions = array(  0 => array('token' => self::$operators,
                                                'atom' => 'none'),
                                     1 => array('atom' => 'Parenthesis'),
                                     2 => array('atom' => array('For', 'Switch', 'Foreach', 'While', 'Dowhile', 'Ifthen', 'Assignation', 'Return', 'Break' ))
@@ -72,7 +72,7 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
 
     // @doc if then without else
-        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
+        $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => 'Sequence',
@@ -88,7 +88,8 @@ class Ifthen extends TokenAuto {
                                'cleanIndex'   => true);
         $this->checkAuto(); 
 
-        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
+    // @doc if then else: (THen, else belongs to another nested ifthen)
+        $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => 'Sequence',
@@ -106,7 +107,7 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
         
     // @doc if then elseif without else
-        $this->conditions = array( 0 => array('token' => Ifthen::$operators),
+        $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('atom'  => 'Sequence',
                                               'property' => array('block' => 'true')),
@@ -131,7 +132,7 @@ class Ifthen extends TokenAuto {
     ////////////////////////////////////////////////////////////
                 
     // @doc if () : endif (empty )
-        $this->conditions = array( 0 => array('token' => Ifthen::$operators),
+        $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
                                    3 => array('token' => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE')),
@@ -144,7 +145,7 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
 
         // Make a block from sequence after a if/elseif (alternative syntax)
-        $this->conditions = array(  0 => array('token'     => Ifthen::$operators,
+        $this->conditions = array(  0 => array('token'     => self::$operators,
                                                'atom'      => 'none'),
                                     1 => array('atom'      => 'Parenthesis'),
                                     2 => array('token'     => array('T_COLON', 'T_SEMICOLON')),
@@ -161,7 +162,7 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
 
     // @doc if ( ) : endif
-        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
+        $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
@@ -181,7 +182,7 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
 
     // @doc if ( ) : else: endif (alternative syntax)
-        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
+        $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
@@ -209,7 +210,7 @@ class Ifthen extends TokenAuto {
         $this->checkAuto(); 
 
     // @doc if ( ) : elseif
-        $this->conditions = array( 0 => array('token' => Ifthen::$operators,
+        $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_COLON'),
