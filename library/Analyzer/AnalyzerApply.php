@@ -2,14 +2,14 @@
 namespace Analyzer;
 
 class AnalyzerApply {
-    protected $apply_below = false; 
+    protected $applyBelow = false; 
 
     public function __construct() {
         // empty... 
     }
     
-    public function setApplyBelow($apply_below = true) {
-        $this->apply_below = $apply_below;
+    public function setApplyBelow($applyBelow = true) {
+        $this->applyBelow = $applyBelow;
         
         return $this;
     }
@@ -23,8 +23,8 @@ class AnalyzerApply {
     public function getGremlin() {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
 
-        if ($this->apply_below) {
-            $apply_below = <<<GREMLIN
+        if ($this->applyBelow) {
+            $applyBelow = <<<GREMLIN
 
 x = it;
 applyBelowRoot.out.loop(1){true}{it.object.fullcode == x.fullcode}.each{ 
@@ -35,7 +35,7 @@ applyBelowRoot.out.loop(1){true}{it.object.fullcode == x.fullcode}.each{
 
 GREMLIN;
         } else {
-            $apply_below = "";
+            $applyBelow = "";
         }
 
         return <<<GREMLIN
@@ -43,7 +43,7 @@ GREMLIN;
     g.addEdge(g.idx('analyzers')[['analyzer':'{$analyzer}']].next(), it, 'ANALYZED');
     
     // Apply below
-    {$apply_below}
+    {$applyBelow}
     
     c = c + 1;
 }

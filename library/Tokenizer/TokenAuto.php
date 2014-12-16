@@ -3,11 +3,11 @@
 namespace Tokenizer;
 
 class TokenAuto extends Token {
-    static public $round = -1;
+    static public $round  = -1;
     protected $conditions = array();
-    protected $set_atom   = false;
-    public $total  = null ;
-    public $done  = null ;
+    protected $setAtom    = false;
+    public $total         = null ;
+    public $done          = null ;
 
     public function _check() {
         return false;
@@ -63,10 +63,10 @@ class TokenAuto extends Token {
         
         $query = $query.'.'.join('.', $queryConditions);
         
-        $this->set_atom = false;
+        $this->setAtom = false;
         $qactions = $this->readActions($this->actions);
         $query .= ".each{\n done++; fullcode = it; fullcode.round = ".(self::$round).';
-'.join(";\n", $qactions).'; '.($this->set_atom ? $this->fullcode() : '' )."\n}; [total:total, done:done];";
+'.join(";\n", $qactions).'; '.($this->setAtom ? $this->fullcode() : '' )."\n}; [total:total, done:done];";
         
         return $query;
     }
@@ -145,7 +145,7 @@ it.setProperty('root', 'null');
             $qactions[] = " /* indexing */\n  g.idx('atoms').put('atom', '{$actions['atom']}', it);";
             
             unset($actions['atom']);
-            $this->set_atom = true;
+            $this->setAtom = true;
         }
 
         if (isset($actions['atom1'])) {
@@ -364,8 +364,8 @@ g.removeVertex(var);
         }
 
         if (isset($actions['toGlobal'])) {
-            $_global = new _Global(Token::$client);
-            $fullcode = $_global->fullcode();
+            $globalAtom = new _Global(Token::$client);
+            $fullcode = $globalAtom->fullcode();
 
             $qactions[] = "
 /* to global without arguments */
@@ -810,7 +810,7 @@ it.inE('INDEXED').each{ g.removeEdge(it); }
 g.removeVertex(it);
 g.addEdge(a, b, 'NEXT');
 ";
-                        $this->set_atom = false;
+                        $this->setAtom = false;
                     } else {
                         die("Destination 0 for transform\n");
                     }
@@ -1399,7 +1399,7 @@ if (it.both('NEXT').count() == 0) {
             unset($actions['checkForNext']);
         }
         
-        if (isset($actions['insert_global_ns'])) {
+        if (isset($actions['insertGlobalNs'])) {
             $qactions[] = "
 /* insert global namespace */
 x = g.addVertex(null, [code:'Global', atom:'Identifier', token:'T_STRING', virtual:true, line:it.line, fullcode:'Global']);
@@ -1409,7 +1409,7 @@ it.outE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(it, x, 'NEXT');
 
 ";
-            unset($actions['insert_global_ns']);
+            unset($actions['insertGlobalNs']);
         }           
         
         if (isset($actions['to_specialmethodcall'])) {
@@ -1566,12 +1566,12 @@ x.outE.hasNot('label', 'NEXT').inV.each{
 fullcode = x;
 $fullcode
 ";
-            $this->set_atom = true;
+            $this->setAtom = true;
             unset($actions['to_typehint']);
         }              
         
         if (isset($actions['fullcode'])) {
-            $this->set_atom = true;
+            $this->setAtom = true;
             unset($actions['fullcode']);
         }
         

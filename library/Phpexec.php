@@ -91,8 +91,7 @@ class Phpexec {
                       '$' => 'T_DOLLAR',
                       '`' => 'T_SHELL_QUOTE',
                       '`_CLOSE' => 'T_SHELL_QUOTE_CLOSE',
-                      '~' => 'T_TILDE',
-                      );
+                      '~' => 'T_TILDE');
         $this->tokens += $tphp;
     }
     

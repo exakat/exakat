@@ -7,7 +7,7 @@ use Analyzer;
 class NonStaticMethodsCalledStatic extends Analyzer\Analyzer {
     public function dependsOn() {
         return array("Analyzer\\Classes\\MethodDefinition",
-                     "Analyzer\\Classes\\StaticMethods",
+                     "Analyzer\\Classes\\StaticMethods"
         );
     }
 

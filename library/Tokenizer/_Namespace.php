@@ -15,8 +15,8 @@ class _Namespace extends TokenAuto {
                                   2 => array('token' => array('T_NAMESPACE', 'T_CLOSE_TAG', 'T_END', 'T_SEMICOLON')),
         );
         
-        $this->actions = array('insert_global_ns' => 1,
-                               'keepIndexed'      => true);
+        $this->actions = array('insertGlobalNs' => 1,
+                               'keepIndexed'    => true);
         $this->checkAuto();
 
         // namespace myproject {} 

@@ -9,8 +9,8 @@ class Heredoc extends TokenAuto {
     public function _check() {
         $this->conditions = array(0 => array('token'            => Heredoc::$operators,
                                              'atom'             => 'none'),
-                                  1 => array('atom'             => String::$allowed_classes,
-                                             'check_for_string' => String::$allowed_classes),
+                                  1 => array('atom'             => String::$allowedClasses,
+                                             'check_for_string' => String::$allowedClasses),
                                  );
 
         $this->actions = array( 'make_quoted_string' => 'Heredoc');

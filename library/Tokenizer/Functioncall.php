@@ -3,12 +3,12 @@
 namespace Tokenizer;
 
 class Functioncall extends TokenAuto {
-    static $operators =              array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 
-                                           'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL', 
-                                           'T_EXIT', 'T_DIE', 'T_STATIC', 'T_ECHO',  'T_PRINT', );
-    static $operators_without_echo = array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 
-                                           'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL', 
-                                           'T_EXIT', 'T_DIE', 'T_STATIC', 'T_HALT_COMPILER');       
+    static $operators            = array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 
+                                         'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL', 
+                                         'T_EXIT', 'T_DIE', 'T_STATIC', 'T_ECHO',  'T_PRINT');
+    static $operatorsWithoutEcho = array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 
+                                         'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL', 
+                                         'T_EXIT', 'T_DIE', 'T_STATIC', 'T_HALT_COMPILER');       
     static public $atom = 'Functioncall';
 
     public function _check() {
@@ -30,7 +30,7 @@ class Functioncall extends TokenAuto {
         // functioncall(with arguments or void) that will be in a sequence
         $this->conditions = array(  -2 => array('filterOut' => array('T_FUNCTION')),
                                     -1 => array('filterOut' => array('T_FUNCTION', 'T_NS_SEPARATOR')),
-                                     0 => array('token' => Functioncall::$operators_without_echo),
+                                     0 => array('token' => Functioncall::$operatorsWithoutEcho),
                                      1 => array('atom'  => 'none',
                                                 'token' => 'T_OPEN_PARENTHESIS' ),
                                      2 => array('atom'  =>  array('Arguments', 'Void')),

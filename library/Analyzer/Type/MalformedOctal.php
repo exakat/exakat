@@ -17,10 +17,10 @@ class MalformedOctal extends Analyzer\Analyzer {
              ->regex('code', '[89]');
         $this->prepareQuery();
 
-        $max_size = (log(PHP_INT_MAX) / log(2)) / 3 + 1;
+        $maxSize = (log(PHP_INT_MAX) / log(2)) / 3 + 1;
         $this->atomIs('Float')
              ->analyzerIs("Analyzer\\Type\\Real")
-             ->regex('code', '^-?0[0-7]{'.$max_size.',}\\$');
+             ->regex('code', '^-?0[0-7]{'.$maxSize.',}\\$');
         $this->prepareQuery();
     }
 }

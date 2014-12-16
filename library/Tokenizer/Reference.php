@@ -24,7 +24,7 @@ class Reference extends TokenAuto {
                                                        'fullcode'  => 'it.fullcode'),
                                'fullcode'     => true
                                );
-        $this->set_atom = true;
+        $this->setAtom = true;
         $this->checkAuto();
 
         // special case for Stdclass &$x = 

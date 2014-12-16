@@ -4,17 +4,17 @@ namespace Tokenizer;
 
 class String extends TokenAuto {
     static public $operators = array('T_QUOTE'); 
-    static public $allowed_classes = array('String', 'Variable', 'Concatenation', 'Array', 'Property', 'Methodcall', 
-                                           'Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Ternary', 'Concatenation',
-                                           'Functioncall');
+    static public $allowedClasses = array('String', 'Variable', 'Concatenation', 'Array', 'Property', 'Methodcall', 
+                                          'Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Ternary', 'Concatenation',
+                                          'Functioncall');
     static public $atom = 'String';
 
     public function _check() {
 // Case of string with interpolation : "a${b}c";
         $this->conditions = array(  0 => array('token'            => String::$operators, 
                                                'atom'             => 'none'),
-                                    1 => array('atom'             => String::$allowed_classes,
-                                               'check_for_string' => String::$allowed_classes),
+                                    1 => array('atom'             => String::$allowedClasses,
+                                               'check_for_string' => String::$allowedClasses),
                                  );
 
         $this->actions = array( 'make_quoted_string' => 'String');

@@ -10,7 +10,7 @@ class _Foreach extends TokenAuto {
         $operands = array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 
                           'Staticmethodcall', 'Methodcall','Cast', 'Parenthesis', 'Ternary', 
                           'Noscream', 'Not', 'Assignation', 'New', 'Addition', 'Clone');
-        $blind_variables = array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Functioncall' );
+        $blindVariables = array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Functioncall' );
 
         // foreach(); (empty)
         $this->conditions = array( 0 => array('token' => _Foreach::$operators,
@@ -18,7 +18,7 @@ class _Foreach extends TokenAuto {
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => $operands), 
                                    3 => array('token' => 'T_AS'),
-                                   4 => array('atom'  => $blind_variables),
+                                   4 => array('atom'  => $blindVariables),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('token' => 'T_SEMICOLON')
         );
@@ -33,7 +33,7 @@ class _Foreach extends TokenAuto {
                                    1 => array('token'   => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'    => $operands), 
                                    3 => array('token'   => 'T_AS'),
-                                   4 => array('atom'    => $blind_variables),
+                                   4 => array('atom'    => $blindVariables),
                                    5 => array('token'   => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('atom'    => 'yes', 
                                               'notAtom' => 'Sequence'),
@@ -53,7 +53,7 @@ class _Foreach extends TokenAuto {
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => $operands), 
                                    3 => array('token' => 'T_AS'),
-                                   4 => array('atom'  => $blind_variables),
+                                   4 => array('atom'  => $blindVariables),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('atom'  => 'Sequence'),
         );
@@ -77,7 +77,7 @@ class _Foreach extends TokenAuto {
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => $operands), 
                                    3 => array('token' => 'T_AS'),
-                                   4 => array('atom'  => $blind_variables),
+                                   4 => array('atom'  => $blindVariables),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('token' => 'T_COLON'),
                                    7 => array('atom'  => 'yes'),
@@ -95,7 +95,7 @@ class _Foreach extends TokenAuto {
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'  => $operands), 
                                    3 => array('token' => 'T_AS'),
-                                   4 => array('atom'  => $blind_variables),
+                                   4 => array('atom'  => $blindVariables),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('token' => 'T_COLON'),
                                    7 => array('atom'  => 'yes'),
@@ -124,7 +124,7 @@ class _Foreach extends TokenAuto {
                                    1 => array('token'  => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'   => $operands), 
                                    3 => array('token'  => 'T_AS'),
-                                   4 => array('atom'   => $blind_variables),
+                                   4 => array('atom'   => $blindVariables),
                                    5 => array('token'  => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('token'  => 'T_COLON'),
                                    7 => array('atom'   => 'yes'),

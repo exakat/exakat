@@ -7,7 +7,7 @@ class _Case extends TokenAuto {
     static public $atom = 'Case';
     
     public function _check() {
-        $final_token = array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_ENDSWITCH');
+        $finalToken = array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_ENDSWITCH');
 
         // @todo move to load
         // Case is empty (case 'a': )
@@ -15,7 +15,7 @@ class _Case extends TokenAuto {
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  3 => array('token' => $final_token),
+                                  3 => array('token' => $finalToken),
         );
         
         $this->actions = array('createVoidForCase' => true,
@@ -30,7 +30,7 @@ class _Case extends TokenAuto {
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                   3 => array('token' => array('T_COLON', 'T_SEMICOLON'), 
                                              'atom'  => 'none'),
-                                  4 => array('token' => $final_token),
+                                  4 => array('token' => $finalToken),
         );
         
         $this->actions = array('createVoidForCase' => true,
@@ -46,7 +46,7 @@ class _Case extends TokenAuto {
                                               'notAtom' => 'Sequence'), 
                                    4 => array('token' => 'T_SEMICOLON', 
                                               'atom' => 'none'),
-                                   5 => array('token' => $final_token));
+                                   5 => array('token' => $finalToken));
         
         $this->actions = array('createBlockWithSequenceForCase' => true,
                                'keepIndexed'                    => true);
@@ -59,7 +59,7 @@ class _Case extends TokenAuto {
                                    2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                    3 => array('atom'  => 'yes', 
                                               'notAtom' => 'Sequence'), 
-                                   4 => array('token' => $final_token));
+                                   4 => array('token' => $finalToken));
         
         $this->actions = array('createBlockWithSequenceForCase' => true,
                                'keepIndexed'                    => true);
@@ -75,7 +75,7 @@ class _Case extends TokenAuto {
                                                'notAtom' => array('Case', 'Default', 'SequenceCaseDefault', 'Sequence')),
                                     4 => array('token' => 'T_SEMICOLON',
                                                'atom' => 'none'),
-                                    5 => array('token' => $final_token),
+                                    5 => array('token' => $finalToken),
         );
         
         $this->actions = array('createBlockWithSequenceForCase'    => true,
@@ -88,7 +88,7 @@ class _Case extends TokenAuto {
                                   1 => array('atom'  => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                   3 => array('atom'  => array('Sequence', 'Void')), 
-                                  4 => array('token' => $final_token),
+                                  4 => array('token' => $finalToken),
         );
         
         $this->actions = array('transform'            => array( 1 => 'CASE',
@@ -111,7 +111,7 @@ class _Case extends TokenAuto {
                                                                         Assignation::$operators, Property::$operators, 
                                                                         _Array::$operators, Bitshift::$operators, 
                                                                         Comparison::$operators, Logical::$operators,
-                                                                        StaticProperty::$operators)),
+                                                                        Staticproperty::$operators)),
         );
         
         $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,

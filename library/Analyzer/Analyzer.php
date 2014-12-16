@@ -29,14 +29,14 @@ class Analyzer {
     protected $phpVersion = "Any";
     protected $phpconfiguration = "Any";
 
-    protected $severity = \Analyzer\Analyzer::S_NONE; // Default to None. 
+    protected $severity = self::S_NONE; // Default to None. 
     const S_CRITICAL = "Critical";
     const S_MAJOR = "Major";
     const S_MINOR = "Minor";
     const S_NOTE = "Note";
     const S_NONE = "None";
 
-    protected $timeToFix = \Analyzer\Analyzer::T_NONE; // Default to no time (Should not display)
+    protected $timeToFix = self::T_NONE; // Default to no time (Should not display)
     const T_NONE = "0";
     const T_INSTANT = "5";
     const T_QUICK = "30";
@@ -297,8 +297,8 @@ GREMLIN;
         return array();
     }
     
-    function setApplyBelow($apply_below = true) {
-        $this->apply->setApplyBelow($apply_below);
+    function setApplyBelow($applyBelow = true) {
+        $this->apply->setApplyBelow($applyBelow);
         
         $this->addMethod("sideEffect{ applyBelowRoot = it }");
         

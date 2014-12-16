@@ -913,7 +913,7 @@ g.idx('atoms')[['atom':'Use']].out('USE').each{
 //"g.dropIndex('racines');",
 // if there is an error while processing the AST, racines is needed.
 // we need some conditional here.
-"g.dropIndex('delete');",
+"g.dropIndex('delete');"
 
 );
 
