@@ -664,30 +664,7 @@ fullcode = x;
 
 ";
             unset($actions['to_ppp']);
-        }        
-
-        if (isset($actions['to_ppp2'])) {
-            $token = new _Ppp(Token::$client);
-            $fullcode = $token->fullcode();
-
-            $qactions[] = "
-/* to ppp already ppp */
-
-g.addEdge(it.out('NEXT').next() , it, it.code.toUpperCase());
-
-p = it.in('NEXT').next();
-ppp = it.out('NEXT').next();
-
-it.bothE('NEXT').each{ g.removeEdge(it); }
-g.addEdge(p, ppp, 'NEXT');
-it.fullcode = it.code;
-
-fullcode = ppp;
-$fullcode
-
-";
-            unset($actions['to_ppp2']);
-        }        
+        }
 
         if (isset($actions['to_option'])) {
             $position = str_repeat(".out('NEXT')", $actions['to_option']);
