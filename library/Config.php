@@ -24,11 +24,11 @@ class Config {
     }
     
     static function factory() {
-        if (Config::$singleton === null) {
-            Config::$singleton = new Config();
+        if (self::$singleton === null) {
+            self::$singleton = new Config();
         }
         
-        return Config::$singleton;
+        return self::$singleton;
     }
 
     public function __isset($name) {
