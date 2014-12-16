@@ -22,7 +22,7 @@ class Analyzer {
     private $methods = array();
     private $arguments = array();
     
-    static $analyzers = array();
+    static public $analyzers = array();
     
     protected $apply = null;
 
@@ -152,7 +152,7 @@ class Analyzer {
         return $this->description;
     }
 
-    function getName($lang = 'en') {
+    public function getName($lang = 'en') {
         if ($this->name === null) {
             $this->getDescription($lang);
         }
@@ -167,7 +167,7 @@ class Analyzer {
         return Analyzer::$docs->getThemeAnalyzers($theme);
     }
     
-    function getThemes() {
+    public function getThemes() {
         if (empty($this->themes)) {
             $r =  array();
         } else {
@@ -177,7 +177,7 @@ class Analyzer {
         return $r;
     }
 
-    function getAppinfoHeader($lang = 'en') {
+    public function getAppinfoHeader($lang = 'en') {
         if ($this->appinfo === null) {
             $this->getDescription($lang);
         }
@@ -297,7 +297,7 @@ GREMLIN;
         return array();
     }
     
-    function setApplyBelow($applyBelow = true) {
+    public function setApplyBelow($applyBelow = true) {
         $this->apply->setApplyBelow($applyBelow);
         
         $this->addMethod("sideEffect{ applyBelowRoot = it }");
@@ -324,13 +324,13 @@ GREMLIN;
         }
     }
 
-    function _as($name) {
+    public function _as($name) {
         $this->methods[] = 'as("'.$name.'")';
         
         return $this;
     }
 
-    function back($name) {
+    public function back($name) {
         $this->methods[] = 'back(\''.$name.'\')';
         
         return $this;
@@ -341,7 +341,7 @@ GREMLIN;
         $this->methods[] = 'filter{ 1 == 0; }';
     }
 
-    function tokenIs($atom) {
+    public function tokenIs($atom) {
         if (is_array($atom)) {
             $this->addMethod('filter{it.token in *** }', $atom);
         } else {
@@ -351,7 +351,7 @@ GREMLIN;
         return $this;
     }
 
-    function tokenIsNot($atom) {
+    public function tokenIsNot($atom) {
         if (is_array($atom)) {
             $this->addMethod('filter{!(it.token in ***)}', $atom);
         } else {
@@ -361,7 +361,7 @@ GREMLIN;
         return $this;
     }
     
-    function atomIs($atom) {
+    public function atomIs($atom) {
         if (is_array($atom)) {
             $this->addMethod('filter{it.atom in ***}', $atom);
         } else {
@@ -371,7 +371,7 @@ GREMLIN;
         return $this;
     }
 
-    function atomIsNot($atom) {
+    public function atomIsNot($atom) {
         if (is_array($atom)) {
             $this->addMethod('filter{!(it.atom in ***) }', $atom);
         } else {
@@ -381,7 +381,7 @@ GREMLIN;
         return $this;
     }
 
-    function classIs($class) {
+    public function classIs($class) {
         if (is_array($class)) {
             $this->addMethod('as("classIs").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token != "T_CLASS" || it.out("NAME").next().code in ***}.back("classIs")', $class);
         } else {
@@ -395,7 +395,7 @@ GREMLIN;
         return $this;
     }
 
-    function classIsNot($class) {
+    public function classIsNot($class) {
         if (is_array($class)) {
             $this->addMethod('as("classIsNot").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || !(it.out("NAME").next().code in ***)}.back("classIsNot")', $class);
         } else {
@@ -409,7 +409,7 @@ GREMLIN;
         return $this;
     }
 
-    function traitIs($trait) {
+    public function traitIs($trait) {
         if (is_array($trait)) {
             $this->addMethod('as("traitIs").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token != "T_TRAIT" || !(it.out("NAME").next().code in ***)}.back("traitIs")', $trait);
         } else {
@@ -423,7 +423,7 @@ GREMLIN;
         return $this;
     }
 
-    function traitIsNot($trait) {
+    public function traitIsNot($trait) {
         if (is_array($trait)) {
             $this->addMethod('as("traitIsNot").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || !(it.out("NAME").next().code in ***)}.back("traitIsNot")', $trait);
         } else {
@@ -437,7 +437,7 @@ GREMLIN;
         return $this;
     }
     
-    function functionIs($function) {
+    public function functionIs($function) {
         if (is_array($function)) {
             $this->addMethod('as("functionIs").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token != "T_FILENAME" || it.out("NAME").next().code in ***}.back("functionIs")', $function);
         } else {
@@ -451,7 +451,7 @@ GREMLIN;
         return $this;
     }
 
-    function functionIsNot($function) {
+    public function functionIsNot($function) {
         if (is_array($function)) {
                 $this->addMethod('as("functionIsNot").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || !(it.out("NAME").next().code in ***)}.back("functionIsNot")', $function);
         } else {
@@ -465,7 +465,7 @@ GREMLIN;
         return $this;
     }
 
-    function namespaceIs($namespace) {
+    public function namespaceIs($namespace) {
         if (is_array($namespace)) {
             $this->addMethod('as("namespaceIs").in.loop(1){!(it.object.token in ["T_NAMESPACE", "T_FILENAME"])}.filter{ it.token == "T_NAMESPACE" && it.code in *** }.back("namespaceIs")', $namespace);
         } else {
@@ -479,7 +479,7 @@ GREMLIN;
         return $this;
     }
 
-    function atomInside($atom) {
+    public function atomInside($atom) {
         if (is_array($atom)) {
             $this->addMethod('out().loop(1){true}{it.object.atom in ***}', $atom);
         } else {
@@ -489,7 +489,7 @@ GREMLIN;
         return $this;
     }
 
-    function noAtomInside($atom) {
+    public function noAtomInside($atom) {
         if (is_array($atom)) {
             $this->addMethod('filter{ it.as("loop").out().loop("loop"){true}{it.object.atom in ***}.any() == false}', $atom);
         } else {
@@ -499,7 +499,7 @@ GREMLIN;
         return $this;
     }
 
-    function atomAboveIs($atom) {
+    public function atomAboveIs($atom) {
         if (is_array($atom)) {
             $this->addMethod('in().loop(1){true}{it.object.atom in ***}', $atom);
         } else {
@@ -509,13 +509,13 @@ GREMLIN;
         return $this;
     }
     
-    function trim($property, $chars = '\'\"') {
+    public function trim($property, $chars = '\'\"') {
         $this->addMethod('transform{it.'.$property.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1")}');
         
         return $this;
     }
 
-    function analyzerIs($analyzer) {
+    public function analyzerIs($analyzer) {
         if (is_array($analyzer)) {
             $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any()}', $analyzer);
         } else {
@@ -528,7 +528,7 @@ GREMLIN;
         return $this;
     }
 
-    function analyzerIsNot($analyzer) {
+    public function analyzerIsNot($analyzer) {
 
         if (is_array($analyzer)) {
             $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any() == false}', $analyzer);
@@ -542,7 +542,7 @@ GREMLIN;
         return $this;
     }
 
-    function is($property, $value= "'true'") {
+    public function is($property, $value= "'true'") {
         if ($value === null) {
             $this->addMethod("has('$property', null)");
         } else {
@@ -552,7 +552,7 @@ GREMLIN;
         return $this;
     }
 
-    function isMore($property, $value = "0") {
+    public function isMore($property, $value = "0") {
         if (is_int($value)) {
             $this->addMethod("filter{ it.$property > ***;}", $value);
         } else {
@@ -563,7 +563,7 @@ GREMLIN;
         return $this;
     }
 
-    function isLess($property, $value= "0") {
+    public function isLess($property, $value= "0") {
         if (is_int($value)) {
             $this->addMethod("filter{ it.$property < ***;}", $value);
         } else {
@@ -574,7 +574,7 @@ GREMLIN;
         return $this;
     }
 
-    function isNot($property, $value= "'true'") {
+    public function isNot($property, $value= "'true'") {
         if ($value === null) {
             $this->addMethod("hasNot('$property', null)");
         } else {
@@ -584,7 +584,7 @@ GREMLIN;
         return $this;
     }
 
-    function hasRank($value = "0", $link = 'ARGUMENT') {
+    public function hasRank($value = "0", $link = 'ARGUMENT') {
         if ($value == 'first') {
             $this->addMethod("has('rank','0')");
         } elseif ($value === 'last') {
@@ -598,7 +598,7 @@ GREMLIN;
         return $this;
     }
 
-    function noChildWithRank($edgeName, $rank = "0") {
+    public function noChildWithRank($edgeName, $rank = "0") {
         if ($rank === 'first') {
             $this->addMethod("filter{ it.out(***).has('rank','0').any() == false }", $edgeName);
         } elseif ($rank === 'last') {
@@ -612,7 +612,7 @@ GREMLIN;
         return $this;
     }
 
-    function code($code, $caseSensitive = false) {
+    public function code($code, $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
         } else {
@@ -635,7 +635,7 @@ GREMLIN;
         return $this;
     }
 
-    function codeIsNot($code, $caseSensitive = false) {
+    public function codeIsNot($code, $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
         } else {
@@ -658,7 +658,7 @@ GREMLIN;
         return $this;
     }
 
-    function noDelimiter($code, $caseSensitive = false) {
+    public function noDelimiter($code, $caseSensitive = false) {
         $this->addMethod('has("atom", "String")', $code);
 
         if ($caseSensitive) {
@@ -683,7 +683,7 @@ GREMLIN;
         return $this;
     }
 
-    function noDelimiterIsNot($code, $caseSensitive = false) {
+    public function noDelimiterIsNot($code, $caseSensitive = false) {
         $this->addMethod('has("atom", "String")', $code);
 
         if ($caseSensitive) {
@@ -708,7 +708,7 @@ GREMLIN;
         return $this;
     }
 
-    function fullnspath($code, $caseSensitive = false) {
+    public function fullnspath($code, $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
         } else {
@@ -731,7 +731,7 @@ GREMLIN;
         return $this;
     }
 
-    function fullnspathIsNot($code, $caseSensitive = false) {
+    public function fullnspathIsNot($code, $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
         } else {
@@ -754,13 +754,13 @@ GREMLIN;
         return $this;
     }
     
-    function codeIsPositiveInteger() {
+    public function codeIsPositiveInteger() {
         $this->addMethod('filter{ if( it.code.isInteger()) { it.code > 0; } else { true; }}', null); // may be use toInteger() ? 
 
         return $this;
     }
 
-    function samePropertyAs($property, $name, $caseSensitive = false) {
+    public function samePropertyAs($property, $name, $caseSensitive = false) {
         if ($caseSensitive || $property == 'line' || $property == 'rank') {
             $caseSensitive = '';
         } else {
@@ -771,7 +771,7 @@ GREMLIN;
         return $this;
     }
 
-    function notSamePropertyAs($property, $name, $caseSensitive = false) {
+    public function notSamePropertyAs($property, $name, $caseSensitive = false) {
         if ($caseSensitive || $property == 'line' || $property == 'rank') {
             $caseSensitive = '';
         } else {
@@ -782,13 +782,13 @@ GREMLIN;
         return $this;
     }
 
-    function savePropertyAs($property, $name) {
+    public function savePropertyAs($property, $name) {
         $this->addMethod("sideEffect{ $name = it.$property; }");
 
         return $this;
     }
 
-    function fullcodeTrimmed($code, $trim = "\"'", $caseSensitive = false) {
+    public function fullcodeTrimmed($code, $trim = "\"'", $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
         } else {
@@ -812,7 +812,7 @@ GREMLIN;
         return $this;
     }
     
-    function fullcode($code, $caseSensitive = false) {
+    public function fullcode($code, $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
         } else {
@@ -835,7 +835,7 @@ GREMLIN;
         return $this;
     }
     
-    function fullcodeIsNot($code, $caseSensitive = false) {
+    public function fullcodeIsNot($code, $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
         } else {
@@ -858,37 +858,37 @@ GREMLIN;
         return $this;
     }
 
-    function isUppercase($property = 'fullcode') {
+    public function isUppercase($property = 'fullcode') {
         $this->methods[] = "filter{it.$property == it.$property.toUpperCase()}";
     }
 
-    function isNotLowercase($property = 'fullcode') {
+    public function isNotLowercase($property = 'fullcode') {
         $this->methods[] = "filter{it.$property != it.$property.toLowerCase()}";
     }
 
-    function filter($filter) {
+    public function filter($filter) {
         $this->methods[] = "filter{ $filter }";
     }
 
-    function codeLength($length = " == 1 ") {
+    public function codeLength($length = " == 1 ") {
         // @todo add some tests ? Like Operator / value ? 
         $this->methods[] = "filter{it.code.length() $length}";
     }
 
-    function fullcodeLength($length = " == 1 ") {
+    public function fullcodeLength($length = " == 1 ") {
         // @todo add some tests ? Like Operator / value ? 
         $this->methods[] = "filter{it.fullcode.length() $length}";
 
         return $this;
     }
 
-    function groupCount($column) {
+    public function groupCount($column) {
         $this->methods[] = "groupCount(m){it.$column}";
         
         return $this;
     }
 
-    function eachCounted($variable, $times) {
+    public function eachCounted($variable, $times) {
         $this->methods[] = <<<GREMLIN
 groupBy(m){{$variable}}{it}.iterate(); 
 // This is plugged into each{}
@@ -898,7 +898,7 @@ GREMLIN;
         return $this;
     }
     
-    function eachNotCounted($variable, $times = 1) {
+    public function eachNotCounted($variable, $times = 1) {
         $this->methods[] = <<<GREMLIN
 groupBy(m){{$variable}}it}.iterate(); 
 // This is plugged into each{}
@@ -908,7 +908,7 @@ GREMLIN;
         return $this;
     }
 
-    function eachCountedMoreThan($variable, $times = 1) {
+    public function eachCountedMoreThan($variable, $times = 1) {
         $this->methods[] = <<<GREMLIN
 groupBy(m){{$variable}}{it}.iterate(); 
 // This is plugged into each{}
@@ -918,13 +918,13 @@ GREMLIN;
         return $this;
     }
     
-    function countIs($comparison) {
+    public function countIs($comparison) {
         $this->addMethod('aggregate().filter{ it.size '.$comparison.'}', null);
         
         return $this;
     }
 
-    function regex($column, $regex) {
+    public function regex($column, $regex) {
         $this->methods[] = <<<GREMLIN
 filter{ (it.$column =~ "$regex" ).getCount() > 0 }
 GREMLIN;
@@ -932,7 +932,7 @@ GREMLIN;
         return $this;
     }
 
-    function regexNot($column, $regex) {
+    public function regexNot($column, $regex) {
         $this->methods[] = <<<GREMLIN
 filter{ (it.$column =~ "$regex" ).getCount() == 0 }
 GREMLIN;
@@ -961,7 +961,7 @@ GREMLIN;
         return $this;
     }
 
-    function outIsnt($edgeName) {
+    public function outIsnt($edgeName) {
         if (is_array($edgeName)) {
             $this->addMethod("filter{ it.out('".join("', '", $edgeName)."').count() == 0}");
         } else {
@@ -971,7 +971,7 @@ GREMLIN;
         return $this;
     }
 
-    function rankIs($edgeName, $rank) {
+    public function rankIs($edgeName, $rank) {
         if (is_array($edgeName)) {
             // @todo
             die(" I don't understand arrays in rankIs()");
@@ -1018,7 +1018,7 @@ GREMLIN;
         return $this;
     }
     
-    function inIs($edgeName) {
+    public function inIs($edgeName) {
         if (is_array($edgeName)) {
             // @todo
             $this->addMethod("inE.filter{it.label in ***}.outV", $edgeName);
@@ -1029,7 +1029,7 @@ GREMLIN;
         return $this;
     }
 
-    function inIsnot($edgeName) {
+    public function inIsnot($edgeName) {
         if (is_array($edgeName)) {
             $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any() == false}", $edgeName);
         } else {
@@ -1039,7 +1039,7 @@ GREMLIN;
         return $this;
     }
 
-    function hasIn($edgeName) {
+    public function hasIn($edgeName) {
         if (is_array($edgeName)) {
             $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any()}", $edgeName);
         } else {
@@ -1049,13 +1049,13 @@ GREMLIN;
         return $this;
     }
 
-    function raw($query) {
+    public function raw($query) {
         $this->methods[] = $query;
         
         return $this;
     }
     
-    function hasNoIn($edgeName) {
+    public function hasNoIn($edgeName) {
         if (is_array($edgeName)) {
             $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any() == false}", $edgeName);
         } else {
@@ -1065,7 +1065,7 @@ GREMLIN;
         return $this;
     }
 
-    function hasOut($edgeName) {
+    public function hasOut($edgeName) {
         if (is_array($edgeName)) {
             $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.any()}", $edgeName);
         } else {
@@ -1075,7 +1075,7 @@ GREMLIN;
         return $this;
     }
     
-    function hasNoOut($edgeName) {
+    public function hasNoOut($edgeName) {
         if (is_array($edgeName)) {
             // @todo
             $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.any() == false}", $edgeName);
@@ -1426,7 +1426,7 @@ GREMLIN
     public function analyze() { return true; } 
     // @todo log errors when using this ? 
 
-    function printQuery() {
+    public function printQuery() {
         $this->prepareQuery();
         
         foreach($this->queries as $id => $query) {

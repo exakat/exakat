@@ -3,7 +3,7 @@
 namespace Report\Format\Ace;
 
 class Horizontal extends \Report\Format\Ace { 
-    static $horizontal_counter = 0;
+    static public $horizontal_counter = 0;
     
     public function render($output, $data) {
         $output->pushToJsLibraries( array("assets/js/jquery.dataTables.min.js",
