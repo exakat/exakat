@@ -59,7 +59,6 @@ SHELL
 		$response = file_get_contents('http://localhost:7474/db/data/', false, $context);
 		
 		if (strpos($response, 'NOT_FOUND') !== false) {
-		    sleep(1);
     		$response = file_get_contents('http://localhost:7474/db/data/', false, $context);
 		}
         

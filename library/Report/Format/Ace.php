@@ -7,7 +7,6 @@ class Ace extends \Report\Format {
     private $finalJs = '';
     private $jsLibraries = array();
     
-    private $last = '';
     private $files = array();
     protected static $analyzer = null;
     private $summary = null;

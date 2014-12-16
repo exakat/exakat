@@ -1,5 +1,4 @@
 <?php
-use \Everyman\Neo4j\Client;
 
 namespace Loader;
 

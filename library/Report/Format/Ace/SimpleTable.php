@@ -3,9 +3,6 @@
 namespace Report\Format\Ace;
 
 class SimpleTable extends \Report\Format\Ace { 
-    static public $table_counter = 0;
-    private $titles = array();
-    
     public function render($output, $data) {
         $th = '';
         

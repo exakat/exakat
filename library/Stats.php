@@ -1,18 +1,14 @@
 <?php
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Index\NodeIndex,
-	Everyman\Neo4j\Relationship,
-	Everyman\Neo4j\Node,
-	Everyman\Neo4j\Gremlin,
-	Tokenizer\Token;
+	Everyman\Neo4j\Gremlin;
 
 class Stats {
     private $client = null;
     private $stats = array();
     private $file_filter = '';
     
-    public function __construct($client = null) {
+    public function __construct(Client $client = null) {
         $this->client = $client;
     }
 

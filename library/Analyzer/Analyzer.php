@@ -27,7 +27,7 @@ class Analyzer {
     protected $apply = null;
 
     protected $phpVersion = "Any";
-    protected $phpconfiguration = "Any";
+    protected $phpConfiguration = "Any";
 
     protected $severity = self::S_NONE; // Default to None. 
     const S_CRITICAL = "Critical";
@@ -243,13 +243,13 @@ GREMLIN;
         }
     }
 
-    public function checkPhpConfiguration($Php) {
+    public function checkphpConfiguration($Php) {
         // this handles Any version of PHP
-        if ($this->phpconfiguration == 'Any') {
+        if ($this->phpConfiguration == 'Any') {
             return true;
         }
         
-        foreach($this->phpconfiguration as $ini => $value) {
+        foreach($this->phpConfiguration as $ini => $value) {
             if ($Php->getConfiguration($ini) != $value) { return false; }
         }
         
@@ -1633,8 +1633,8 @@ GREMLIN;
         return $this->phpVersion;
     }
 
-    public function getPhpconfiguration() {
-        return $this->phpconfiguration;
+    public function getphpConfiguration() {
+        return $this->phpConfiguration;
     }
 }
 ?>

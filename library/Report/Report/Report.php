@@ -7,7 +7,6 @@ class Report {
     protected $db        = null;
     protected $project   = null;
 
-    private $summary   = null;
     private $content   = null;
     private $current   = null;
     private $currentLevel1 = null;

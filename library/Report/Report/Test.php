@@ -98,7 +98,6 @@ class Test {
                                 \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP56'));
-        print_r($analyzes);
 
         $analyzes2 = array();
         foreach($analyzes as $a) {
