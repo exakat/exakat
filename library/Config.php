@@ -89,6 +89,8 @@ class Config {
                                  '-ss'    => array('ss',         false),
                                  '-sm'    => array('sm',         false),
                                  '-sl'    => array('sl',         false),
+                                 '-nodep' => array('noDependencies', false),
+                                 '-norefresh' => array('noRefresh', false),
                                  '-today' => array('today',      false),
                                  '-none'  => array('none',       false),
                                  '-table' => array('table',      false),
