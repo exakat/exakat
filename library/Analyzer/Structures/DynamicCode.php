@@ -51,7 +51,7 @@ class DynamicCode extends Analyzer\Analyzer {
         //new $classname(); (also done here)
         $this->atomIs("Functioncall")
              ->hasNoIn('METHOD')
-             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_ISSET', 'T_ARRAY', 'T_EMPTY', 'T_LIST', 'T_UNSET'))
              ->back('first');
         $this->prepareQuery();
 
@@ -59,7 +59,7 @@ class DynamicCode extends Analyzer\Analyzer {
         $this->atomIs("Functioncall")
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_VOID'))
+             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_VOID', 'T_INTEGER', 'T_CONSTANT_ENCAPSED_STRING', 'T_VARIABLE', 'T_LNUMBER'))
              ->back('first');
         $this->prepareQuery();
 
