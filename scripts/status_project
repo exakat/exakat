@@ -72,5 +72,10 @@ if (file_exists('projects/'.$project.'/log/report.premier.log')) {
     print " Report log not done\n";
 }
 
+if (file_exists('projects/'.$project.'/report')) {
+   print " Report OK\n";
+} else {
+   print " Report KO\n";
+}
 
 ?>
