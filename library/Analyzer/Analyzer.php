@@ -1085,7 +1085,19 @@ GREMLIN;
         
         return $this;
     }
+
+    public function isInCatchBlock() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Catch"}{(it.object.atom == "Catch")}.any()');
         
+        return $this;
+    }
+
+    public function isNotInCatchBlock() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Catch"}{(it.object.atom == "Catch")}.any() == false}');
+        
+        return $this;
+    }
+
     public function hasParent($parentClass, $ins = array()) {
         if (empty($ins)) {
             $in = '.in';
@@ -1168,6 +1180,12 @@ GREMLIN;
     public function functionDefinition() {
         $this->addMethod("hasNot('fullnspath', null).transform{ g.idx('functions')[['path':it.fullnspath]].next(); }");
     
+        return $this;
+    }
+
+    public function goToCurrentScope() {
+        $this->addMethod('in.loop(1){!(it.object.atom in ["Function", "Phpcode"])}{(it.object.atom in ["Function", "Phpcode"])}');
+        
         return $this;
     }
     
