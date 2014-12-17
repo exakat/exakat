@@ -182,7 +182,7 @@ Export class hierarchy, UML documents, etc.
 Summary of traits's methods overlap (local to class, trait, inherited class). 
 Traits of Traits
 silently resolved conflicts in traits (overlapping local/trait/class)
-Supports uploaded files 
+
 share standard with different chapters (files, sockets, uploaded_file, etc....)
 
 Functions that return always the same value, no matter what 
@@ -372,6 +372,7 @@ project_init works with only URL (guess some names)
 Add documentation automatically in human/en/*/*.ini (via dashboard but spot when they needs to be written)
 
 $fp = fopen('scripts/categories.md', 'r');   while (!feof($fp)) { (No check! This will go on if file doesn't exists...)
+// usage of ressource without checking it really
 
 Remove the 2 mysql databases and merge into one only.  (why not merge into one Sqlite? )
 
@@ -528,8 +529,6 @@ Suggest constant by locating identical strings/numbers in special places ( case,
 Separate 'files' with the official test and a script for short-tags, and the other compilation files.
 
 automatically exclude files with NEXT at the end of the tokenizer (separate script for cleaning).
-
-old style constructor : if there is no __construct() to take over.
 
 Start using composer (autoload migration)
 
