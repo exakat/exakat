@@ -132,6 +132,12 @@ TEXT
 
         $this->createLevel2('Documentation');
         $this->addContent('Definitions', $definitions, 'annexes');
+
+        $this->createLevel2('Dynamic code');
+        $this->addContent('Text', 'This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.', 'textLead');
+
+        $analyzer = \Analyzer\Analyzer::getInstance('Structures/DynamicCode', $this->client);
+        $this->addContent('Horizontal', $analyzer);
     }
 }
 
