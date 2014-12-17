@@ -86,6 +86,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
              ->inIs('BLOCK')
              ->atomInside('New')
              ->outIs('NEW')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->samePropertyAs('fullnspath', 'fnp')
              ->back('method');
         $this->prepareQuery();
