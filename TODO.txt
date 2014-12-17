@@ -1,28 +1,25 @@
 Support file updates in VCS (just change those files, not reload all the application, serve évolutions, not status)
 Make so that it is possible to run simultaneous scripts on the server (Not just using delete all).
 Make analyzer concurrent proof
-Finish running shuffle tests on analyzer
-Add a instant log to show progression of analyzer / loader
+
 Make loader run simultaneous scripts
-Rank the regex in terms of probability for faster processing
+
 Make tokenizer with 2 stages : low stage, with simple expressions, and upper stage, with more complexe structures.
 Find a way to reduce the number of stored objects and link in the loader
 Note stats at each stage of the processing for later analitical review
 Log information about speed of process (tokens, files, etc).
-Export to SQLITE
-Break done tokenizer to blocks : analyze happens within blocks, not the whole file. Smaller analyze, faster results, even concurrency, and less analyzers. 
+
 Export progress/ETA in processing (tokenizer, analyzer...)
+
 Prepare documentation
 
 Cooccurences : structures that are next to each other in sequences.
 
 Analyzers
-+ Interpret values and have a dictionary of special meaning : 22 => port, 86400 => day list, etc.
 + Make a list of files and extensions along the way
 
 projects/proxyplus/code/includes/parser.php:			$parseFunction = $block == 'style' ? 'CSS' : 'JS' ;
 projects/proxyplus/code/includes/parser.php:			$new .= $this->$parseFunction(substr($input, $innerStart, $innerEnd - $innerStart));
-
 
 Update variables with the above code
 Make report configurable (configuration of the actual analyzers to be run), and automatically build.
@@ -34,9 +31,6 @@ Change Class to support options like we do for functions
 Reconcile String with some detectors : list of country, SQL code, JS code, CSS code, HTML code, regex, HTTP headers, etc. 
 Detect databases : large arrays of values. 
 
-Detect PHP extensions : php, php3, inc : search for the files.
-
-@$stats['dir']++; : $stats should be 
 Inventory of keys in arrays, by array
 
 Variables that are looking like : $var1 and $varl, $var0 and $varO, $var and $vars, vars with a switch in the letters only
@@ -52,13 +46,11 @@ Camel case, underscore separated, Spelling, $[type]Name ($sString, $iId,), varia
 
 Export analyze to Sqlite for stats
 
-Supporting different versions of PHP : in the analyzer (so as to test situations), and as the engine (can we run the application as PHP-xxx ? ).
-Centralize config.ini : add new values, have an overview of the configs.
 Centralize results : define a format for centralizing information (start with appinfo ? With some of the inventory ? )
-Export to database : CSV or Sqlite or SQL, for reuse. 
+
 Add a deamon to project, that scans then start
 Build a test project for the reports styles (avoid md/pdf pb)
-Brush up the report 
+
 Add exemples from the found code to the explanations. 
 Make a summary to the report (how to share this ? When to involve the author ? Needs a special intermediate report ? )
 Check spelling in variables/classe names : 
@@ -536,3 +528,9 @@ Suggest constant by locating identical strings/numbers in special places ( case,
 Separate 'files' with the official test and a script for short-tags, and the other compilation files.
 
 automatically exclude files with NEXT at the end of the tokenizer (separate script for cleaning).
+
+old style constructor : if there is no __construct() to take over.
+
+Start using composer (autoload migration)
+
+Add a readability test for PHP code (http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests#cite_note-10, http://en.wikipedia.org/wiki/Automated_Readability_Index)

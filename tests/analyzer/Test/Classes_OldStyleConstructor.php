@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_OldStyleConstructor extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testClasses_OldStyleConstructor01()  { $this->generic_test('Classes_OldStyleConstructor.01'); }
+    public function testClasses_OldStyleConstructor02()  { $this->generic_test('Classes_OldStyleConstructor.02'); }
 }
 ?>
