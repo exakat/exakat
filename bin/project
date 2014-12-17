@@ -50,14 +50,12 @@ $progress = 1;
 $total_steps = 9 / 100; // number of usage of logProgress - 1
 $db->logProgress($project, $progress++ / $total_steps);
 
-$b = microtime(true);
 $descriptorspec = array(
    0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
    1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
    2 => array('file', "/tmp/error-output.txt", 'a') // stderr is a file to write to
 );
 $process = proc_open('sh scripts/clean.sh &', $descriptorspec, $pipes);
-$e = microtime(true);
 
 $db->logProgress($project, $progress++ / $total_steps);
 logTime('Clean');
@@ -66,9 +64,7 @@ print "Running project '$project'\n";
 
 print "Running files\n";
 //shell_exec('php bin/files -p '.$project);
-$b = microtime(true);
-$process = proc_open('sleep 10; php bin/files -p '.$project. ' &', $descriptorspec, $pipes);
-$e = microtime(true);
+$process = proc_open('php bin/files -p '.$project. ' &', $descriptorspec, $pipes);
 logTime('Files');
 print "Loading project\n";
 
@@ -116,8 +112,10 @@ if (file_exists('./projects/'.$project.'/log/analyze.final.log')) {
 }
 
 $themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security');
+$processes = array();
 foreach($themes as $theme) {
-    shell_exec('php bin/analyze -T '.$theme.' > ./projects/'.$project.'/log/analyze.'.str_replace(' ', '_', trim($theme, '"')).'.final.log');
+//    $process[$theme] = proc_open('php bin/analyze -norefresh -T '.$theme.' > ./projects/'.$project.'/log/analyze.'.str_replace(' ', '_', trim($theme, '"')).'.final.log', $descriptorspec, $pipes);
+    shell_exec('php bin/analyze -norefresh -T '.$theme.' > ./projects/'.$project.'/log/analyze.'.str_replace(' ', '_', trim($theme, '"')).'.final.log');
     print "Analyzing $theme\n";
 }
 
