@@ -243,6 +243,20 @@ GREMLIN;
         }
     }
 
+    public function isDone() {
+        $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
+        if ($result[0][0] == 0) {
+            $this->query("g.createIndex('analyzers', Vertex)");
+
+            return false;
+        }
+        
+        $analyzer = str_replace('\\', '\\\\', get_class($this));
+         $query = "g.idx('analyzers')[['analyzer':'$analyzer']].count() == 1";
+        $res = $this->query($query);
+        return (bool) $res[0][0];
+    }
+
     public function checkphpConfiguration($Php) {
         // this handles Any version of PHP
         if ($this->phpConfiguration == 'Any') {
