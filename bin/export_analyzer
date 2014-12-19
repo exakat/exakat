@@ -73,7 +73,7 @@ if (!($analyzer = Analyzer::getClass($analyzer))) {
     
     $r = Analyzer::getSuggestionClass($analyzer);
     if (count($r) > 0) {
-        print "did you mean : ".join(', ', $r)."\n";
+        print "did you mean : ".implode(', ', $r)."\n";
     }
     
     die();
@@ -136,7 +136,7 @@ if (FORMAT == 'TEXT') {
         if (STYLE == 'COUNTED') {
             $text .= "$k => $v\n";
         } else {
-            $text .= join(', ', $v)."\n";
+            $text .= implode(', ', $v)."\n";
         }
     }
     
@@ -159,7 +159,7 @@ if (FORMAT == 'TEXT') {
         } else {
             $text .= "+ $k\n";
             if (is_array($r)) {
-                $text .= "  + ".join("\n  + ", $r)."\n";
+                $text .= "  + ".implode("\n  + ", $r)."\n";
             } else {
                 $text .= "+ $r\n";
             }

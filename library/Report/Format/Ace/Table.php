@@ -11,7 +11,7 @@ class Table extends \Report\Format\Ace {
                                           "assets/js/jquery.dataTables.bootstrap.js"));
 
         $counter = \Report\Format\Ace\Table::$table_counter++;
-        $nulls = join(', ', array_fill(0, count($data[0]), 'null'));
+        $nulls = implode(', ', array_fill(0, count($data[0]), 'null'));
         
 $js = <<<JS
     				var oTable1 = \$('#table-{$counter}').dataTable( {
@@ -36,7 +36,7 @@ JS;
 										<tbody>
 HTML;
         foreach($data as $v) {
-            $text .= "<tr><td>".join('</td><td>', $v)."</td></tr>\n";
+            $text .= "<tr><td>".implode('</td><td>', $v)."</td></tr>\n";
         }
         $text .= <<<HTML
 										</tbody>

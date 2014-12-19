@@ -818,7 +818,7 @@ GREMLIN;
         
         $trim = addslashes($trim);
         if (is_array($code)) {
-            $this->methods[] = "filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") in ['".join("', '", $code)."']}";
+            $this->methods[] = "filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") in ['".implode("', '", $code)."']}";
         } else {
             $this->methods[] = "filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") == '$code'}";
         }
@@ -864,7 +864,7 @@ GREMLIN;
         }
         
         if (is_array($code)) {
-            $this->methods[] = "filter{!(it.fullcode$caseSensitive in ['".join("', '", $code)."'])}";
+            $this->methods[] = "filter{!(it.fullcode$caseSensitive in ['".implode("', '", $code)."'])}";
         } else {
             $this->methods[] = "filter{it.fullcode$caseSensitive != '$code'}";
         }
@@ -956,7 +956,7 @@ GREMLIN;
 
     protected function outIs($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod("out('".join("', '", $edgeName)."')");
+            $this->addMethod("out('".implode("', '", $edgeName)."')");
         } else {
             $this->addMethod("out(***)", $edgeName);
         }
@@ -967,7 +967,7 @@ GREMLIN;
     // follows a link if it is there (and do nothing otherwise)
     protected function outIsIE($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod("transform{ if (it.out('".join("', '", $edgeName)."').any()) { it.out('".join("', '", $edgeName)."').next(); } else { it ;}}");
+            $this->addMethod("transform{ if (it.out('".implode("', '", $edgeName)."').any()) { it.out('".implode("', '", $edgeName)."').next(); } else { it ;}}");
         } else {
             $this->addMethod("transform{ if (it.out('$edgeName').any()) { it.out('$edgeName').next(); } else { it ;}}", $edgeName);
         }
@@ -977,7 +977,7 @@ GREMLIN;
 
     public function outIsnt($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod("filter{ it.out('".join("', '", $edgeName)."').count() == 0}");
+            $this->addMethod("filter{ it.out('".implode("', '", $edgeName)."').count() == 0}");
         } else {
             $this->addMethod("filter{ it.out(***).count() == 0}", $edgeName);
         }
@@ -1127,7 +1127,7 @@ GREMLIN;
                 }
             }
             
-            $in = join('', $in);
+            $in = implode('', $in);
         }
         
         if (is_array($parentClass)) {
@@ -1155,7 +1155,7 @@ GREMLIN;
                 }
             }
             
-            $in = join('', $in);
+            $in = implode('', $in);
         }
         
         if (is_array($parentClass)) {
@@ -1470,7 +1470,7 @@ GREMLIN
             
             foreach($this->queriesArguments[$id] as $name => $value) {
                 if (is_array($value)) {
-                    $query = str_replace($name, "['".join("', '", $value)."']", $query);
+                    $query = str_replace($name, "['".implode("', '", $value)."']", $query);
                 } elseif (is_string($value)) {
                     $query = str_replace($name, "'".str_replace('\\', '\\\\', $value)."'", $query);
                 } elseif (is_int($value)) {
@@ -1493,7 +1493,7 @@ GREMLIN
         if (count($this->methods) == 1) { return true; }
         
         array_splice($this->methods, 2, 0, array('as("first")'));
-        $query = join('.', $this->methods);
+        $query = implode('.', $this->methods);
         
         if ($this->methods[1] == 'has("atom", arg1)') {
             $query = "g.idx('atoms')[['atom':'{$this->arguments['arg1']}']].{$query}";

@@ -96,7 +96,7 @@ HTML;
         
         if (count($this->jsLibraries) > 0) {
             $this->jsLibraries = array_unique($this->jsLibraries);
-            $this->jsLibraries = "        <script src=\"".join("\"></script>\n        <script src=\"", $this->jsLibraries)."\"></script>\n";
+            $this->jsLibraries = "        <script src=\"".implode("\"></script>\n        <script src=\"", $this->jsLibraries)."\"></script>\n";
         } else {
             $this->jsLibraries = "<!-- No extra libraries -->";
         }
@@ -309,7 +309,7 @@ HTML;
     }
 
     public function setAnalyzer($name) {
-        \Report\Format\Ace::$analyzer = $name;
+        self::$analyzer = $name;
     }
 
     public function setCss($css) {

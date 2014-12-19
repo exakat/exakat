@@ -43,6 +43,8 @@ class IfthenElse extends TokenAuto {
 
         return false;
     }
+    
+    // fullcode is done in Ifthen
 }
 
 ?>

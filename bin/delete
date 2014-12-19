@@ -70,7 +70,7 @@ if (FORMAT == 'ALL') {
     }
     
     ksort($names);
-    print join("\n", array_keys($names))."\n\n";
+    print implode("\n", array_keys($names))."\n\n";
     
     print count($names)." distinct files\n";
     // Also clean index

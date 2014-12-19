@@ -41,7 +41,7 @@ class Db  {
             $cols[] = '`date`';
             $values[] = 'NOW()';
         }
-        $query = "INSERT INTO `$table` (".join(", ", $cols).") VALUES (".join(", ", $values).")";
+        $query = "INSERT INTO `$table` (".implode(", ", $cols).") VALUES (".implode(", ", $values).")";
         $this->mysqli->query($query);
     }
     

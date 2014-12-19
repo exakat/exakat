@@ -47,7 +47,7 @@ if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+)[\.,]/is', $res
 }
 
 $mysql = new mysqli('localhost', 'root', '', 'exakat');
-$query = "INSERT INTO unittests (`".join("`, `", array_keys($row))."`) VALUES (".join(", ", array_values($row)).")";
+$query = "INSERT INTO unittests (`".implode("`, `", array_keys($row))."`) VALUES (".implode(", ", array_values($row)).")";
 $mysql->query($query);
     
 print $row['tests']." tests ran : {$row['fails']} failed (".number_format($row['fails'] / $row['tests'] * 100, 2)." %)\n";

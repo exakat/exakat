@@ -518,7 +518,18 @@ g.idx('atoms')[['atom':'Functioncall']]
     .has('token', 'T_STRING')
     .filter{ it.inE('METHOD').any() == false; }
     .filter{ it.in('NEW').any() == false; }
+    .hasNot('fullnspath', null)
     .filter{ g.idx('functions')[['path':it.fullnspath]].any() == false}
+    .each{
+        it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
+    }
+
+// fallback for functions : if no fullnspath, then fallback to \
+g.idx('atoms')[['atom':'Functioncall']]
+    .has('token', 'T_STRING')
+    .filter{ it.inE('METHOD').any() == false; }
+    .filter{ it.in('NEW').any() == false; }
+    .has('fullnspath', null)
     .each{
         it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
     }

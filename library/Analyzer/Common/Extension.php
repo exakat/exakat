@@ -113,7 +113,14 @@ class Extension extends Analyzer\Analyzer {
         }
 
         if (!empty($namespaces)) {
-            
+            $this->analyzerIs("Analyzer\\Namespaces\\NamespaceUsage")
+                 ->code($namespaces);
+            $this->prepareQuery();
+
+            $interfaces = array_map(function ($x) { return "\\".$x; } ,  $interfaces);
+            $this->analyzerIs("Analyzer\\Namespaces\\NamespaceUsage")
+                 ->fullcode($namespaces);
+            $this->prepareQuery();
         }
     }
 }

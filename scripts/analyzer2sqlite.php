@@ -28,7 +28,7 @@ foreach($files as $file) {
     $res = process_file($file, $names);
     print_r($res);
     
-    $db->query("INSERT INTO analyzers (name, dir, dependsOn, severity, timeToFix, phpversion, phpconfiguration, shortname) VALUES ('".join("', '", array_values($res))."')");
+    $db->query("INSERT INTO analyzers (name, dir, dependsOn, severity, timeToFix, phpversion, phpconfiguration, shortname) VALUES ('".implode("', '", array_values($res))."')");
     
 }
 
@@ -41,7 +41,7 @@ function process_file($filename, $names) {
     $analyzer = \Analyzer\Analyzer::getInstance($return['dir'].'/'.$return['name'], null);
 
     // depends 
-    $return['dependsOn']  = join(', ', $analyzer->dependsOn());
+    $return['dependsOn']  = implode(', ', $analyzer->dependsOn());
     
     // severity
     $return['severity']  = $analyzer->getSeverity();

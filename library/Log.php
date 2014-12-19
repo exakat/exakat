@@ -50,7 +50,7 @@ class Log {
             }
         }
 
-        $query = "INSERT INTO `$script` (".join(", ", array_keys($values)).") VALUES ('".join("', '", array_values($values))."')";
+        $query = "INSERT INTO `$script` (".implode(", ", array_keys($values)).") VALUES ('".implode("', '", array_values($values))."')";
         $mysql->query($query);
         
         return true;

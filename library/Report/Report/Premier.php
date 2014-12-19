@@ -76,8 +76,6 @@ class Premier extends Report {
         uksort($analyzes2, function($a, $b) { $a = strtolower($a); $b = strtolower($b); if ($a > $b) { return 1; } else { return $a == $b ? 0 : -1; } });
 
         if (count($analyzes) > 0) {
-            $h1 = false;
-
             $this->createLevel2('Results counts');
             $this->addContent('SimpleTableResultCounts', 'AnalyzerResultCounts');
 

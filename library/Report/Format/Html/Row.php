@@ -9,7 +9,6 @@ class Row extends \Report\Format\Html {
         $left = $data['left'];
         $right = $data['right'];
         
-        $nspan = 12 - $this->span;
         $html = <<<HTML
 							<div>
 								<div>

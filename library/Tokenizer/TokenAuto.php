@@ -61,12 +61,12 @@ class TokenAuto extends Token {
             die();
         }
         
-        $query = $query.'.'.join('.', $queryConditions);
+        $query = $query.'.'.implode('.', $queryConditions);
         
         $this->setAtom = false;
         $qactions = $this->readActions($this->actions);
         $query .= ".each{\n done++; fullcode = it; fullcode.round = ".(self::$round).';
-'.join(";\n", $qactions).'; '.($this->setAtom ? $this->fullcode() : '' )."\n}; [total:total, done:done];";
+'.implode(";\n", $qactions).'; '.($this->setAtom ? $this->fullcode() : '' )."\n}; [total:total, done:done];";
         
         return $query;
     }
@@ -2566,7 +2566,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         }        
 
         if ($remainder = array_keys($actions)) {
-            print 'Warning : the following '.count($remainder).' actions were ignored : '.join(', ', $remainder)."\n";
+            print 'Warning : the following '.count($remainder).' actions were ignored : '.implode(', ', $remainder)."\n";
         }
 
         return $qactions;
@@ -2594,7 +2594,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         if (isset($conditions['property'])) {
             foreach($conditions['property'] as $property => $value) {
                 if (is_array($value)) {
-                    $queryConditions[] = "filter{it.$property in ['".join("', '", $value)."']}";
+                    $queryConditions[] = "filter{it.$property in ['".implode("', '", $value)."']}";
                 } else {
                     $queryConditions[] = "has('$property', '$value')";
                 }
@@ -2604,7 +2604,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
 
         if (isset($conditions['check_for_string'])) {
             if (is_array($conditions['check_for_string'])) {
-                $classes = "'".join("', '", $conditions['check_for_string'])."'";
+                $classes = "'".implode("', '", $conditions['check_for_string'])."'";
             } else {
                 $classes = "'".$conditions['check_for_string']."'";
             }
@@ -2614,7 +2614,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
 
         if (isset($conditions['code'])) {
             if (is_array($conditions['code']) && !empty($conditions['code'])) {
-                $queryConditions[] = "filter{it.code in ['".join("', '", $conditions['code'])."']}";
+                $queryConditions[] = "filter{it.code in ['".implode("', '", $conditions['code'])."']}";
             } else {
                 $queryConditions[] = "has('code', '".$conditions['code']."')";
             }
@@ -2623,7 +2623,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
 
         if (isset($conditions['icode'])) {
             if (is_array($conditions['icode']) && !empty($conditions['icode'])) {
-                $queryConditions[] = "hasNot('code', null).filter{it.code.toLowerCase() in ['".join("', '", $conditions['icode'])."']}";
+                $queryConditions[] = "hasNot('code', null).filter{it.code.toLowerCase() in ['".implode("', '", $conditions['icode'])."']}";
             } else {
                 $queryConditions[] = "hasNot('code', null).filter{it.code.toLowerCase() == '".$conditions['icode']."'}";
             }
@@ -2631,13 +2631,13 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         }
 
         if (isset($conditions['notcode']) && is_array($conditions['notcode']) && !empty($conditions['notcode'])) {
-            $queryConditions[] = "filter{!(it.code in ['".join("', '", $conditions['notcode'])."'])}";
+            $queryConditions[] = "filter{!(it.code in ['".implode("', '", $conditions['notcode'])."'])}";
             unset($conditions['notcode']);
         }
 
         if (isset($conditions['token'])) {
             if ( is_array($conditions['token']) && !empty($conditions['token'])) {
-                $queryConditions[] = "filter{it.token in ['".join("', '", $conditions['token'])."']}";
+                $queryConditions[] = "filter{it.token in ['".implode("', '", $conditions['token'])."']}";
             } else {
                 $queryConditions[] = "has('token', '".$conditions['token']."')";
             }
@@ -2646,7 +2646,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
 
         if (isset($conditions['notToken'])) {
             if ( is_array($conditions['notToken']) && !empty($conditions['notToken'])) {
-                $queryConditions[] = "filter{!(it.token in ['".join("', '", $conditions['notToken'])."'])}";
+                $queryConditions[] = "filter{!(it.token in ['".implode("', '", $conditions['notToken'])."'])}";
             } else {
                 $queryConditions[] = "hasNot('token', '".$conditions['notToken']."')";
             }
@@ -2655,7 +2655,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         
         if (isset($conditions['atom'])) {
             if ( is_array($conditions['atom']) && !empty($conditions['atom'])) {
-                $queryConditions[] = "filter{it.atom in ['".join("', '", $conditions['atom'])."']}";
+                $queryConditions[] = "filter{it.atom in ['".implode("', '", $conditions['atom'])."']}";
             } elseif ( is_string($conditions['atom']) && $conditions['atom'] == 'none') {
                 $queryConditions[] = "has('atom', null)";
             } elseif ( is_string($conditions['atom']) && $conditions['atom'] == 'yes') {
@@ -2668,7 +2668,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
 
         if (isset($conditions['notAtom'])) {
             if ( is_array($conditions['notAtom']) && !empty($conditions['notAtom'])) {
-                $queryConditions[] = "filter{!(it.atom in ['".join("', '", $conditions['notAtom'])."'])}";
+                $queryConditions[] = "filter{!(it.atom in ['".implode("', '", $conditions['notAtom'])."'])}";
             } else {
                 $queryConditions[] = "hasNot('atom', '".$conditions['notAtom']."')";
             }
@@ -2698,7 +2698,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
                 // no check on atom here ? 
                 $queryConditions[] = "filter{it.token != '".$conditions['filterOut']."' }";
             } elseif (is_array($conditions['filterOut'])) {
-                $queryConditions[] = "filter{it.atom != null || !(it.token in ['".join("', '", $conditions['filterOut'])."'])}";
+                $queryConditions[] = "filter{it.atom != null || !(it.token in ['".implode("', '", $conditions['filterOut'])."'])}";
             } else {
                 die("Unsupported type for filterOut\n");
             }
@@ -2710,14 +2710,14 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             if (is_string($conditions['filterOut2'])) {
                 $queryConditions[] = "filter{it.token != '".$conditions['filterOut2']."' }";
             } else {
-                $queryConditions[] = "filter{!(it.token in ['".join("', '", $conditions['filterOut2'])."'])}";
+                $queryConditions[] = "filter{!(it.token in ['".implode("', '", $conditions['filterOut2'])."'])}";
             }
 
             unset($conditions['filterOut2']);
         }
 
         if ($remainder = array_keys($conditions)) {
-            print 'Warning : the following '.count($remainder).' conditions were ignored : '.join(', ', $remainder).' ('.get_class($this).")\n";
+            print 'Warning : the following '.count($remainder).' conditions were ignored : '.implode(', ', $remainder).' ('.get_class($this).")\n";
             print_r($conditions);
         }
         

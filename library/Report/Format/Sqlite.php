@@ -22,9 +22,10 @@ class Sqlite extends \Report\Format {
         if (file_exists($filename)) {
             unlink($filename);
         }
-        $db = new \SQLite3($filename);
 
-        $results = $db->query('CREATE TABLE reports (id INTEGER PRIMARY KEY AUTOINCREMENT, analyzer TEXT, value TEXT, count INT)');
+        $db = new \SQLite3($filename);
+        $db->query('CREATE TABLE reports (id INTEGER PRIMARY KEY AUTOINCREMENT, analyzer TEXT, value TEXT, count INT)');
+
         foreach($this->output as $t) {
             foreach($t as $k => $v) {
                 $t[$k] = $db->escapeString($v);
