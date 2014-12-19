@@ -533,3 +533,5 @@ automatically exclude files with NEXT at the end of the tokenizer (separate scri
 Start using composer (autoload migration)
 
 Add a readability test for PHP code (http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests#cite_note-10, http://en.wikipedia.org/wiki/Automated_Readability_Index)
+
+remove all usage of the common log folder
