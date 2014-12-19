@@ -3,7 +3,7 @@
 namespace Tokenizer;
 
 class Phpcodemiddle extends TokenAuto {
-    static public $operators = array('T_CLOSE_TAG');
+    static public $operators = array('T_INLINE_HTML');
 
     public function _check() {
 // ? >A<?php 
@@ -13,8 +13,9 @@ class Phpcodemiddle extends TokenAuto {
                                    2 => array('token'    => 'T_OPEN_TAG',
                                               'atom'     => 'none'),
         );
-        $this->actions = array('Phpcodemiddle'       => true,
-                               'makeSequence'        => 'c',
+        $this->actions = array('transform'           => array( -1 => 'DROP',
+                                                                1 => 'DROP'),
+                               'makeSequence'        => 'it',
                                'makeSequenceAlways'  => true
                                );
         $this->checkAuto();

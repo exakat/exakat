@@ -1101,61 +1101,6 @@ g.addEdge(x, f, 'NEXT');
             unset($actions['insertVoid']);
         } 
         
-if (isset($actions['Phpcodemiddle'])) {
-            $qactions[] = "
-/* Phpcodemiddle */
-a = it.in('NEXT').next();
-c = it.out('NEXT').next();
-d = c.out('NEXT').next();
-e = d.out('NEXT').next();
-
-it.setProperty('code', 'Phpcodemiddle');
-
-g.addEdge(a, c, 'NEXT');
-g.addEdge(c, e, 'NEXT');
-
-d.bothE('NEXT').each{ g.removeEdge(it); }
-it.bothE('NEXT').each{ g.removeEdge(it); }
-
-g.idx('delete').put('node', 'delete', d);
-g.idx('delete').put('node', 'delete', it);
-
-";
-            unset($actions['Phpcodemiddle']);
-        }                
-
-        if (isset($actions['insertConcat3'])) {
-            $qactions[] = "
-/* insertConcat 3 */
-x = it;
-b = it.out('NEXT').next();
-
-g.addEdge(x, b, 'CONCAT');
-g.addEdge(x, b.out('NEXT').next(), 'NEXT');
-
-b.bothE('NEXT').each{ g.removeEdge(it); }
-    
-
-";
-            unset($actions['insertConcat3']);
-        }           
-
-        if (isset($actions['insertConcat4'])) {
-            $qactions[] = "
-/* insertConcat 4 (Scalar, Concat) */
-s = it;
-c = it.out('NEXT').next();
-
-g.addEdge(c, s, 'CONCAT');
-g.addEdge(s.in('NEXT').next(), c, 'NEXT');
-
-s.bothE('NEXT').each{ g.removeEdge(it); }
-    
-
-";
-            unset($actions['insertConcat4']);
-        }           
-
         if (isset($actions['to_block'])) {
             $qactions[] = " 
 /* to_block */ 
