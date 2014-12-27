@@ -35,99 +35,105 @@ $exts = array('php'      => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 
               'security' => array('pub', 'pem', 'crt', 'xcf', ),
              );
 
-$ignore_dirs = array();
+$ignoreDirs = array();
+foreach($config->ignore_dirs as $ignore) {
+    if ($ignore[0] == '/') {
+        $d = './projects/'.$dir.'/code'.$ignore;
+        if (!file_exists($d)) { 
+            continue; 
+        }
+        if (substr($ignore, -1) === '/') {
+            // This is a folder
+            $d .= '*';
+        } // else Files are left as is
+        $ignoreDirs[] = $d;
+    } else {
+        $ignoreDirs[] = '*'.$ignore.'*';
+    }
+}
+
+$shellBase = 'find ./projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l ';
+$ignoreDirs = array();
+$ignoreName = array();
 foreach($config->ignore_dirs as $ignore) {
     if ($ignore[0] == '/') {
         $d = './projects/'.$dir.'/code'.$ignore.'';
         if (file_exists($d)) { 
-            $ignore_dirs[] = $d;
+            $ignoreDirs[] = substr($ignore, 1);
         }
     } else {
-        $ignore_dirs[] = '*'.$ignore.'*';
-    }
-}
-$shell_base = 'find ./projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -not -path "'.(join('/*" -and -not -path "', $ignore_dirs )).'/*" \\) ! -type l ';
-
-$ignore_dirs = array();
-$ignore_name = array();
-foreach($config->ignore_dirs as $ignore) {
-    if ($ignore[0] == '/') {
-        $d = './projects/'.$dir.'/code'.$ignore.'';
-        if (file_exists($d)) { 
-            $ignore_dirs[] = substr($ignore, 1);
-        }
-    } else {
-        $ignore_name[] = $ignore;
+        $ignoreName[] = $ignore;
     }
 }
 
-$shell = 'cd ./projects/'.$dir.'/code/; phploc '.(count($ignore_name) ? ' --names-exclude  '.join(' --names-exclude ', $ignore_name).' ' : '')
-                                                .(count($ignore_dirs) ? ' --exclude '.join(' --exclude ', $ignore_dirs).' ' : '')
+$shell = 'cd ./projects/'.$dir.'/code/; phploc '.(count($ignoreName) ? ' --names-exclude  '.join(' --names-exclude ', $ignoreName).' ' : '')
+                                                .(count($ignoreDirs) ? ' --exclude '.join(' --exclude ', $ignoreDirs).' ' : '')
                                                 .' .';
 
 $res = shell_exec($shell);
 preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
 $stats['loc'] = $r[1];
 
-$not_compilable = array();
+$notCompilable = array();
 
-$versions = array('53', '54', '55', '56');
+$versions = $config->other_php_versions;
 
 $datastore = new Datastore($dir);
 
+//if (!empty($versions)) {
 foreach($versions as $version) {
     $stats['notCompilable'.$version] = -1;
-    $shell = $shell_base . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php'.$version.'lint.sh';
+    $shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php'.$version.'lint.sh';
     $res = trim(shell_exec($shell));
-    $res_files = explode("\n", $res);
+    $resFiles = explode("\n", $res);
     $incompilables = array();
     
-    foreach($res_files as $res_file) {
-        if (substr($res_file, 0, 28) == 'No syntax errors detected in') {
+    foreach($resFiles as $resFile) {
+        if (substr($resFile, 0, 28) == 'No syntax errors detected in') {
             // do nothing. All is fine.
-        } elseif ($res_file == '') {
+        } elseif ($resFile == '') {
             // do nothing. All is fine.
-        } elseif (substr($res_file, 0, 13) == 'Parse error: ') {
-            preg_match('#Parse error: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 13) == 'Parse error: ') {
+            preg_match('#Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 17) == 'PHP Parse error: ') {
-            preg_match('#PHP Parse error: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 17) == 'PHP Parse error: ') {
+            preg_match('#PHP Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 14) == 'PHP Warning:  ') {
-            preg_match('#PHP Warning:  (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 14) == 'PHP Warning:  ') {
+            preg_match('#PHP Warning:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 18) == 'PHP Fatal error:  ') {
-            preg_match('#PHP Fatal error:  (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 18) == 'PHP Fatal error:  ') {
+            preg_match('#PHP Fatal error:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 23) == 'PHP Strict Standards:  ') {
-            preg_match('#PHP Strict Standards:  (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 23) == 'PHP Strict Standards:  ') {
+            preg_match('#PHP Strict Standards:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 23) == 'PHP Strict standards:  ') {
-            preg_match('#PHP Strict standards:  (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 23) == 'PHP Strict standards:  ') {
+            preg_match('#PHP Strict standards:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 18) == 'Strict Standards: ') {
-            preg_match('#Strict Standards: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 18) == 'Strict Standards: ') {
+            preg_match('#Strict Standards: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 18) == 'Strict standards: ') {
-            preg_match('#Strict standards: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 18) == 'Strict standards: ') {
+            preg_match('#Strict standards: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 17) == 'PHP Deprecated:  ') {
-            preg_match('#PHP Deprecated:  (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 17) == 'PHP Deprecated:  ') {
+            preg_match('#PHP Deprecated:  (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 12) == 'Deprecated: ') {
-            preg_match('#Deprecated: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 12) == 'Deprecated: ') {
+            preg_match('#Deprecated: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 13) == 'Fatal error: ') {
-            preg_match('#Fatal error: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 13) == 'Fatal error: ') {
+            preg_match('#Fatal error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 9) == 'Warning: ') {
-            preg_match('#Warning: (.+?) in (.+?) on line (\d+)#', $res_file, $r);
+        } elseif (substr($resFile, 0, 9) == 'Warning: ') {
+            preg_match('#Warning: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
             $incompilables[] = array('error' => $r[1], 'file' => str_replace('./projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-        } elseif (substr($res_file, 0, 14) == 'Errors parsing') {
+        } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
             // ignore
         } else {
             print "\nCouldn't interpret on syntax error : \n";
-            var_dump($res_file);
+            var_dump($resFile);
             print_r($res);
             die("\n".__FILE__."\n");
         }
@@ -138,28 +144,28 @@ foreach($versions as $version) {
     $stats['notCompilable'.$version] = count($incompilables);
 }
 
-$stats['php'] = count($res_files);
-$shell = $shell_base . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php56tokens.sh'; // | awk \'{s+=$1} END {print s}\'
-$result_nosot = shell_exec($shell);
-$stats['tokens'] = (int) array_sum(explode("\n", $result_nosot));
+$stats['php'] = count($resFiles);
+$shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php56tokens.sh'; // | awk \'{s+=$1} END {print s}\'
+$resultNosot = shell_exec($shell);
+$stats['tokens'] = (int) array_sum(explode("\n", $resultNosot));
 
-$shell = $shell_base . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/phpsot.sh '; //| awk \'{s+=$1} END {print s}\'
-$result_sot = shell_exec($shell);
-$stats['tokenssot'] = (int) array_sum(explode("\n", $result_sot));
+$shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/phpsot.sh '; //| awk \'{s+=$1} END {print s}\'
+$resultSot = shell_exec($shell);
+$stats['tokenssot'] = (int) array_sum(explode("\n", $resultSot));
 
 $datastore->cleanTable('shortopentag');
 if ($stats['tokenssot'] != $stats['tokens']) {
-    $nosot = explode("\n", trim($result_nosot));
-    $sot = explode("\n", trim($result_sot));
+    $nosot = explode("\n", trim($resultNosot));
+    $sot = explode("\n", trim($resultSot));
     
     if (count($nosot) != count($sot)) { 
         die("Error in short open tag analyze\n");
     }
     $shortOpenTag = array();
     foreach($nosot as $id => $count) {
-        list($count_nosot, $file) = explode(' ', $sot[$id]);
+        list($countNosot, $file) = explode(' ', $sot[$id]);
         
-        if ($count_nosot != $count) {
+        if ($countNosot != $count) {
             $shortOpenTag[] = array('file' => $file);
         }
     }
