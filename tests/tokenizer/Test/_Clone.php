@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Clone extends Tokenizer {
-    /* 20 methods */
+    /* 21 methods */
 
     public function test_Clone01()  { $this->generic_test('_Clone.01'); }
     public function test_Clone02()  { $this->generic_test('_Clone.02'); }
@@ -29,5 +29,6 @@ class _Clone extends Tokenizer {
     public function test_Clone18()  { $this->generic_test('_Clone.18'); }
     public function test_Clone19()  { $this->generic_test('_Clone.19'); }
     public function test_Clone20()  { $this->generic_test('_Clone.20'); }
+    public function test_Clone21()  { $this->generic_test('_Clone.21'); }
 }
 ?>

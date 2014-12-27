@@ -8,7 +8,7 @@ class _Clone extends TokenAuto {
 
     public function _check() {
         $operands = array('Variable', 'Property', 'Array', 'Staticproperty', 'Staticmethodcall', 'Staticconstant', 'Staticclass',
-                          'Functioncall', 'Methodcall', 'New', 'Noscream', "Concatenation",  );
+                          'Functioncall', 'Methodcall', 'New', 'Noscream', 'Concatenation', 'Ternary' );
         $this->conditions = array(0 => array('token' => _Clone::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' =>  $operands),
@@ -43,7 +43,7 @@ class _Clone extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode',  "clone " + fullcode.out("CLONE").next().getProperty('fullcode'));
+fullcode.setProperty('fullcode',  'clone ' + fullcode.out('CLONE').next().getProperty('fullcode'));
 
 GREMLIN;
     }
