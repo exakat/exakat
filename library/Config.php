@@ -58,8 +58,15 @@ class Config {
         
         $this->project_config = parse_ini_file('./projects/'.$project.'/config.ini');
         
+        foreach($this->project_config as &$value) {
+            if (is_array($value) && empty($value[0])) {
+                unset($value[0]);
+            }
+        }
+        
         // check and default values
-        $defaults = array( 'ignore_dirs' => array('tests', 'test', 'Tests'));
+        $defaults = array( 'ignore_dirs'        => array('tests', 'test', 'Tests'),
+                           'other_php_versions' => array('53', '54', '55', '56'));
         
         foreach($defaults as $name => $value) {
             if (!isset($this->project_config[$name])) {
