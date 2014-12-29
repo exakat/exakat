@@ -9,6 +9,7 @@ class CalltimePassByReference extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs("Functioncall")
+             ->tokenIsNot('T_ARRAY')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('reference', 'true');
