@@ -13,13 +13,12 @@ class Variadic extends TokenAuto {
         $this->conditions = array( 0 => array('token' => Variadic::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => array('Variable', 'Property', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
-                                                               'Identifier', 'Nsname', 'Boolean', 'Null', 'Functioncall'))
+                                                               'Identifier', 'Nsname', 'Boolean', 'Null', 'Functioncall', 'Magicconstant', 'Integer'))
         );
         
         $this->actions = array('transform'    => array( 0         => 'DROP'),
                                'propertyNext' => array('variadic' => 'true'),
-                               'fullcode'     => true,
-                               );
+                               'fullcode'     => true);
         $this->checkAuto();
 
         return false;
