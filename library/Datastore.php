@@ -143,6 +143,15 @@ CREATE TABLE shortopentag (
 SQLITE;
                 break;
 
+            case 'files' : 
+                $createTable = <<<SQLITE
+CREATE TABLE files (
+  id INTEGER PRIMARY KEY,
+  file TEXT
+);
+SQLITE;
+                break;
+
             default : 
                 print "No structure for table $table\n";
                 return false;
