@@ -142,6 +142,7 @@ foreach($tokens as $t) {
             case T_THROW:
             case T_NEW:
             case T_CLONE:
+            case T_ELLIPSIS:
             case T_NS_SEPARATOR:
             case T_OBJECT_OPERATOR:
             case T_REQUIRE_ONCE:
