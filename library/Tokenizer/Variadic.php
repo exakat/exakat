@@ -11,11 +11,12 @@ class Variadic extends TokenAuto {
     public function _check() { 
         // function x(...$a) {} or functioncall  x(...$a);
         $this->conditions = array( 0 => array('token' => Variadic::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('atom' => array('Variable'))
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => array('Variable', 'Property', 'Staticproperty', 'Staticmethodcall', 'Staticconstant',
+                                                               'Identifier', 'Nsname', 'Boolean', 'Null', 'Functioncall'))
         );
         
-        $this->actions = array('transform'    => array( 0 => 'DROP'),
+        $this->actions = array('transform'    => array( 0         => 'DROP'),
                                'propertyNext' => array('variadic' => 'true'),
                                'fullcode'     => true,
                                );
@@ -27,7 +28,7 @@ class Variadic extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', "..." + fullcode.getProperty('code')); 
+fullcode.setProperty('fullcode', "..." + fullcode.getProperty('fullcode')); 
 
 GREMLIN;
     }
