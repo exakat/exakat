@@ -52,7 +52,18 @@ foreach($config->ignore_dirs as $ignore) {
     }
 }
 
+$datastore = new Datastore($dir);
+
 $shellBase = 'find ./projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l ';
+
+$files = trim(shell_exec($shellBase));
+$files = preg_replace('#/projects/.*?/code#is', '', $files);
+$files = explode("\n", $files);
+$files = array_map(function ($a) { return array('file' => $a); }, $files);
+
+$datastore->cleanTable('files');
+$datastore->addRow('files', $files);
+
 $ignoreDirs = array();
 $ignoreName = array();
 foreach($config->ignore_dirs as $ignore) {
@@ -77,8 +88,6 @@ $stats['loc'] = $r[1];
 $notCompilable = array();
 
 $versions = $config->other_php_versions;
-
-$datastore = new Datastore($dir);
 
 //if (!empty($versions)) {
 foreach($versions as $version) {
