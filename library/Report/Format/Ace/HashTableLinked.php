@@ -45,7 +45,7 @@ $text .= <<<HTML
 HTML;
         foreach($data as $k => $v) {
             if ($v['result'] !== 0) {
-                $k =  $this->makeLink($k);
+                $k = $this->makeLink($k);
                 $icon = '<i class="icon-remove red"></i> ';
                 $v['result'] .= " warnings";
             } else {

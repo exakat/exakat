@@ -324,8 +324,10 @@ HTML;
     }
 
     protected function makeFileName($title) {
-        return str_replace(array(' ', '(', ')', ':', '*', '.' ), 
-                           array('-', '' , '' , '' , '' , '' ),
+        // must sync with Template/Section.php
+        // @todo : remove this sync!
+        return str_replace(array(' ', '(', ')', ':', '*', '.', '/' ), 
+                           array('-', '' , '' , '' , '' , '', '' ),
                                $title).'.html';
     }
 
