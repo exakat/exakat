@@ -131,6 +131,13 @@ TEXT
         $this->createLevel2('Documentation');
         $this->addContent('Definitions', $definitions, 'annexes');
 
+        $this->createLevel2('Processed files');
+        $this->addContent('Text', 'This is the list of processed files. Any file that is in the project, but not in the list below was omitted in the analyze. 
+        
+This may be due to configuration file, compilation error, wrong extension (including no extension). ', 'textLead');
+
+        $this->addContent('SimpleTable', 'ProcessedFileList', 'oneColumn');
+
         $this->createLevel2('Dynamic code');
         $this->addContent('Text', 'This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.', 'textLead');
 
