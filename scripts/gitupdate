@@ -1,0 +1,12 @@
+<?php
+
+$files = glob('projects/*');
+
+foreach($files as $file) {
+    if (!file_exists($file.'/code/.git')) { continue; }
+    print "$file\n";
+    print shell_exec('cd '.$file.'/code/; git pull');
+    print "Done\n";
+}
+
+?>
