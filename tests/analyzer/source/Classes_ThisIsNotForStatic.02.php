@@ -1,14 +1,14 @@
 <?php
 
 class x {
-    static function staticMethod() {
+    function staticMethod() {
         self::$property;
         self::methodCall();
         
         function () { return self::$property; };
     }
 
-    static function nonStaticMethod() {
+    function nonStaticMethod() {
         $this->$property;
         $this->methodCall();
 
@@ -17,14 +17,14 @@ class x {
 }
 
 trait t {
-    static function staticMethodInTrait() {
+    function staticMethodInTrait() {
         self::$propertyInTrait;
         self::methodCallInTrait();
         
         function () { return self::$propertyInTrait; };
     }
 
-    static function nonStaticMethodInTrait() {
+    function nonStaticMethodInTrait() {
         $this->$propertyInTrait;
         $this->methodCallInTrait();
 

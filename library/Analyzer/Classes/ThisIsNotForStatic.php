@@ -12,7 +12,7 @@ class ThisIsNotForStatic extends Analyzer\Analyzer {
              ->code('$this')
              ->goToFunction()
              ->_as('result')
-             ->hasNoOut('STATIC')
+             ->hasOut('STATIC')
              ->goToClassTrait()
              ->back('result')
              ->analyzerIsNot('self');
