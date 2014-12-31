@@ -14,7 +14,6 @@ class DefinitionsOnly extends Analyzer\Analyzer {
     public function analyze() {
         $definitions = '"'.join('", "', self::$definitions).'"';
         $definitions = 'it.atom in ['.$definitions.'] || (it.atom == "Functioncall" && it.fullnspath == "\\\\define") || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
-//        $definitions = 'it.atom in ['.$definitions.'] || (it.atom == "Functioncall" && it.fullnspath == "\\\\define")';
         
         $this->atomIs("File")
              ->outIs('FILE')
@@ -24,9 +23,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
              ->raw('filter{ it.out("ELEMENT").filter{ '.$definitions.' }.any()}')
              // spot a non-definition
              ->raw('filter{ it.out("ELEMENT").filter{ !('.$definitions.')}.any() == false}')
-             ->back('first')
-;
-//        $this->printQuery();
+             ->back('first');
         $this->prepareQuery();
     }
 }
