@@ -26,7 +26,7 @@ class Config {
         $this->options = array_merge($this->config_file, $this->commandline, $this->project_config);
     }
     
-    static function factory($argv = array()) {
+    static public function factory($argv = array()) {
         if (self::$singleton === null) {
             self::$singleton = new Config($argv);
         }
