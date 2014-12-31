@@ -3,7 +3,7 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$config = Config::factory();
+$config = Config::factory($argv);
 $project = $config->project;
 
 if (empty($project)) {

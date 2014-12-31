@@ -15,7 +15,7 @@ spl_autoload_register('Autoload::autoload_library');
 
 $log = new Log('load');
 
-$config = Config::factory();
+$config = Config::factory($argv);
 $project = $config->project;
 
 if (!file_exists('./projects/'.$project.'/config.ini')) {
@@ -34,7 +34,7 @@ if ($filename = $config->filename) {
     $nbFiles = 1;
 
 } elseif ($dirName = $config->dirname) {
-    $res = process_dir($dirName, $log, $client);
+    $res = process_dir($dirName, $log, $client, $config);
     $nbFiles = $res['files'];
     $nbTokens = $res['tokens'];
     
@@ -46,9 +46,7 @@ if ($filename = $config->filename) {
 $client->finalize();
 $log->report('load', array('project' => $project, 'files' => $nbFiles, 'tokens' => $nbTokens));
 
-function process_dir($dir, $log, $client) {
-    $config = Config::factory();
-    
+function process_dir($dir, $log, $client, $config) {
     if (!file_exists($dir)) { 
         return array('files' => -1, 'tokens' => -1); 
     }

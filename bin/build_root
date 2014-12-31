@@ -6,7 +6,7 @@ use Everyman\Neo4j\Client,
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$config = Config::factory();
+$config = Config::factory($argv);
 $project = $config->project;
 
 $begin = microtime(true);
