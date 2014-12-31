@@ -113,7 +113,6 @@ foreach($tokens as $t) {
             case T_AS : 
             case T_BOOLEAN_OR :
             case T_BOOLEAN_AND :
-            case T_IS_GREATER_OR_EQUAL :
             case T_BREAK : 
             case T_DEC :
             case T_DO :
