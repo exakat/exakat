@@ -39,8 +39,8 @@ if (!file_exists('tests/analyzer/phpunit.txt')) {
 
     if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+), Skipped: (\d+)\./is', $results, $R)) {
         preg_match_all('/\d+\) Test\\\\(\w+)::/is', $results, $R2);
-        print "There were {$R[1]} failures in ".count(array_unique($R2[1]))." tests! Check the tests! \n";
-        print '  + '.implode("\n  + ", array_unique($R2[1]))."\n\n";
+        print "There were {$R[1]} failures in ".count(array_count_values($R2[1]))." tests! Check the tests! \n";
+        print '  + '.implode("\n  + ", array_keys(array_count_values(($R2[1]))))."\n\n";
         
         if ($R[1] != $totalUnitTests) {
             print "Not all the tests were run! Only {$R[1]} out of $totalUnitTests. Please, run php scripts/phpunit.php\n";
