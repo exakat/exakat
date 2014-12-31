@@ -12,7 +12,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $definitions = '"'.join('", "', self::$definitions).'"';
+        $definitions = '"'.implode('", "', self::$definitions).'"';
         $definitions = 'it.atom in ['.$definitions.'] || (it.atom == "Functioncall" && it.fullnspath == "\\\\define") || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
         
         $this->atomIs("File")

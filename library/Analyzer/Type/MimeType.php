@@ -23,7 +23,7 @@ class MimeType extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('String')
-             ->regex('code', '[\'\"]('.join('|', self::$mimeTypes).')/[a-zA-Z0-9+\\\\-]+[\'\"]');
+             ->regex('code', '[\'\"]('.implode('|', self::$mimeTypes).')/[a-zA-Z0-9+\\\\-]+[\'\"]');
         $this->prepareQuery();
     }
 }
