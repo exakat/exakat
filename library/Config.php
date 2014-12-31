@@ -4,11 +4,14 @@ class Config {
     static private $singleton = null;
            private $config_file = array();
            private $commandline = array();
+           private $argv = array();
            private $project_config = array();
         
            private $options = array();
      
-    private function __construct() {
+    private function __construct($argv) {
+        $this->argv = $argv;
+        
         $this->config_file = parse_ini_file('./config/config.ini');
 
         // then read the config from the commandline (if any)
@@ -23,9 +26,9 @@ class Config {
         $this->options = array_merge($this->config_file, $this->commandline, $this->project_config);
     }
     
-    static function factory() {
+    static function factory($argv = array()) {
         if (self::$singleton === null) {
-            self::$singleton = new Config();
+            self::$singleton = new Config($argv);
         }
         
         return self::$singleton;
@@ -48,7 +51,7 @@ class Config {
     }
     
     public function __set($name, $value) {
-        print "It is not possible to modify configuration\n";
+        print "It is not possible to modify configuration $name with value '$value'\n";
     }
 
     private function read_project_config($project) {
@@ -63,6 +66,7 @@ class Config {
                 unset($value[0]);
             }
         }
+        unset($value);
         
         // check and default values
         $defaults = array( 'ignore_dirs'        => array('tests', 'test', 'Tests'),
@@ -78,8 +82,7 @@ class Config {
     }
 
     private function read_commandline() {
-        global $argv;
-        $args = $argv;
+        $args = $this->argv;
 
         if (empty($args)) {
             return null;
