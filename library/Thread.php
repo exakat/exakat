@@ -18,7 +18,6 @@ class Thread {
     }
     
     public function areAllFinished() {
-    	$data = '';
 	    $w = null;
     	$e = null;
     	$pipes = $this->pipes;
