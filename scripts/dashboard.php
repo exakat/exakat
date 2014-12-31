@@ -160,7 +160,7 @@ if ($extraDocs) {
 }
 
 $sqlite = new Sqlite3('data/analyzers.sqlite');
-$res = $sqlite->query('select folder, name from analyzers');
+$res = $sqlite->query('SELECT folder, name FROM analyzers');
 
 $inSqlite = array();
 while($row = $res->fetchArray()) {
