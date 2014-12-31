@@ -1,0 +1,59 @@
+<?php
+
+$analyzer = $argv[1];
+
+list($category, $name) = explode('/', $analyzer);
+
+// create class in library/Analyzer
+$php = '<?'. <<<PHP
+php
+
+namespace Analyzer\\$category;
+
+use Analyzer;
+
+class $name extends Analyzer\Analyzer {
+    /* Remove this is useless
+    public function dependsOn() {
+        return array("MethodDefinition");
+    }
+    */
+    
+    public function analyze() {
+        \$this->atomIs("Identifier")
+             ->back('first');
+        \$this->printQuery();
+        \$this->prepareQuery();
+    }
+}
+
+?>
+
+PHP;
+
+file_put_contents('library/Analyzer/'.$analyzer.'.php', $php);
+
+// add documentation
+$ini = <<<INI
+name = "$analyzer";
+description = "";
+
+INI;
+
+file_put_contents('human/en/'.$analyzer.'.ini', $ini);
+
+// add to sqlite
+$sqlite = new Sqlite3('data/analyzers.sqlite');
+
+$idUnassigned = $sqlite->query("SELECT id FROM categories WHERE name='Unassigned'")->fetchArray();
+$idUnassigned = $idUnassigned[0];
+
+$sqlite->query("INSERT INTO analyzers ('folder', 'name') VALUES ('$category', '$name')");
+$id = $sqlite->lastInsertRowID();
+
+$sqlite->query("INSERT INTO analyzers_categories VALUES ('$id', '$idUnassigned')"); 
+
+// add test
+shell_exec("cd tests/analyzer/; php create_test.php $analyzer");
+
+?>
