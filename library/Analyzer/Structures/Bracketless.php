@@ -7,37 +7,37 @@ use Analyzer;
 class Bracketless extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Ifthen")
+        $this->atomIs('Ifthen')
              ->isNot('alternative', 'true')
              ->outIs('THEN')
              ->is('bracket', null)
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Ifthen")
+        $this->atomIs('Ifthen')
              ->isNot('alternative', 'true')
              ->outIs('ELSE')
              ->atomIs('Sequence')
              ->is('bracket', null)
-             ->raw('filter{ (it.out("ELEMENT").count() != 1) || (it.out("ELEMENT").has("atom", "Ifthen").any() == false)}')
+             ->raw("filter{ (it.out('ELEMENT').count() != 1) || (it.out('ELEMENT').has('atom', 'Ifthen').any() == false)}")
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("For")
+        $this->atomIs('For')
              ->isNot('alternative', 'true')
              ->outIs('BLOCK')
              ->is('bracket', null)
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Foreach")
+        $this->atomIs('Foreach')
              ->isNot('alternative', 'true')
              ->outIs('BLOCK')
              ->is('bracket', null)
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("While")
+        $this->atomIs('While')
              ->isNot('alternative', 'true')
              ->outIs('BLOCK')
              ->is('bracket', null)
