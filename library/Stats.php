@@ -30,7 +30,7 @@ class Stats {
         }
     }
 
-    public function collect($type = null) {
+    public function collect() {
         $this->stats['tokens_count']    = $this->queryOne("g.V.except([g.v(0)]){$this->file_filter}.count()");
         $this->stats['relations_count'] = $this->countRelations();
         $this->stats['atoms_count']     = $this->queryOne("g.V.except([g.v(0)]).hasNot('atom', 'null'){$this->file_filter}.count()");

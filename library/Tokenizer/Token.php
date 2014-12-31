@@ -196,25 +196,25 @@ class Token {
         Token::$reserved = array();
     }
 
-    static function countTotalToken() {
+    static public function countTotalToken() {
         $result = Token::query("g.V.count()");
     	
     	return $result[0][0];
     }
 
-    static function countLeftToken() {
+    static public function countLeftToken() {
         $result = Token::query("g.idx('racines')[['token':'ROOT']].out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
     	
     	return $result[0][0];
     }
 
-    static function countLeftNext() {
+    static public function countLeftNext() {
         $result = Token::query("g.idx('racines')[['token':'ROOT']].out('INDEXED').out('NEXT').loop(1){it.object.token != 'T_END'}{true}.count()");
     	
     	return $result[0][0] + 1;
     }
 
-    static function countNextEdge() {
+    static public function countNextEdge() {
         $result = Token::query("g.E.has('label','NEXT').count()");
     	
     	return $result[0][0];

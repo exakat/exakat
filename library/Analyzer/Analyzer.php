@@ -185,7 +185,7 @@ class Analyzer {
         return $this->appinfo;
     }
     
-    static function getAnalyzers($theme) {
+    static public function getAnalyzers($theme) {
         return Analyzer::$analyzers[$theme];
     }
 
@@ -441,7 +441,7 @@ GREMLIN;
         if (is_array($trait)) {
             $this->addMethod('as("traitIsNot").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || !(it.out("NAME").next().code in ***)}.back("traitIsNot")', $trait);
         } else {
-            if ($class == 'Global') {
+            if ($trait == 'Global') {
                 $this->addMethod('as("traitIsNot").in.loop(1){!(it.object.token in ["T_TRAIT"])}.back("traitIsNot")');
             } else {
                 $this->addMethod('as("traitIsNot").in.loop(1){!(it.object.token in ["T_TRAIT", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || it.out("NAME").next().code != ***}.back("traitIsNot")', $trait);
@@ -469,7 +469,7 @@ GREMLIN;
         if (is_array($function)) {
                 $this->addMethod('as("functionIsNot").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || !(it.out("NAME").next().code in ***)}.back("functionIsNot")', $function);
         } else {
-            if ($class == 'Global') {
+            if ($function == 'Global') {
                 $this->addMethod('as("functionIsNot").in.loop(1){!(it.object.token in ["T_FUNCTION"])}.back("functionIsNot")');
             } else {
                 $this->addMethod('as("functionIsNot").in.loop(1){!(it.object.token in ["T_FUNCTION", "T_FILENAME"])}.filter{it.token == "T_FILENAME" || it.out("NAME").next().code != ***}.back("functionIsNot")', $function);
