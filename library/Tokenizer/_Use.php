@@ -25,7 +25,7 @@ class _Use extends TokenAuto {
         $this->conditions = array( 0 => array('token'    => _Use::$operators),
                                    1 => array('atom'     => 'Arguments'),
                                    2 => array('token'    => array('T_SEMICOLON', 'T_CLOSE_TAG'),
-                                              'atom'     => 'none'),
+                                              'atom'     => 'none')
                                  );
         
         $this->actions = array('to_use'       => true,
@@ -38,7 +38,7 @@ class _Use extends TokenAuto {
                                    1 => array('token' => array('T_CONST', 'T_FUNCTION')),
                                    2 => array('atom'  => array('Nsname', 'Identifier', 'As')),
                                    3 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'),
-                                              'atom'  => 'none'),
+                                              'atom'  => 'none')
                                  );
         
         $this->actions = array('to_use_const' => true,
@@ -53,7 +53,7 @@ class _Use extends TokenAuto {
                                    1 => array('token' => array('T_CONST', 'T_FUNCTION')),
                                    2 => array('atom'  => 'Arguments'),
                                    3 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'),
-                                              'atom'  => 'none'),
+                                              'atom'  => 'none')
                                  );
         
         $this->actions = array('to_use'       => true,
