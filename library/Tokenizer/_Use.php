@@ -114,6 +114,7 @@ fullcode.out('USE').has('atom', 'Identifier').each{
     it.setProperty('originclass', it.code);
     
     it.setProperty('alias', it.code.toLowerCase());
+    it.setProperty('originalias', it.code);
 }
 
 // use a\b\c (aka c);
@@ -131,6 +132,7 @@ fullcode.out('USE').has('atom', 'As').each{
     }
     
     it.setProperty('alias', it.out('AS').next().code.toLowerCase());
+    it.setProperty('originalias', it.out('AS').next().code);
 }
 
 // use a; (aka a)
@@ -149,8 +151,10 @@ fullcode.out('USE').has('atom', 'Nsname').each{
     
     if (it.out('AS').any()) {
         it.setProperty('alias', it.out('AS').next().code.toLowerCase());
+        it.setProperty('originalias', it.out('AS').next().code.toLowerCase());
     } else {
         it.setProperty('alias', s[s.size() - 1].toLowerCase());
+        it.setProperty('originalias', s[s.size() - 1]);
     }
 }
 
@@ -171,8 +175,10 @@ fullcode.out('FUNCTION', 'CONST').each{
     
     if (it.out('AS').any()) {
         it.setProperty('alias', it.out('AS').next().code.toLowerCase());
+        it.setProperty('originalias', it.out('AS').next().code);
     } else {
         it.setProperty('alias', s[s.size() - 1].toLowerCase());
+        it.setProperty('originalias', s[s.size() - 1]);
     }
 }
 
