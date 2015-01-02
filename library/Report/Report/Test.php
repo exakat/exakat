@@ -2,74 +2,49 @@
 
 namespace Report\Report;
 
-class Test {
-    private $client = null;
-    private $db = null;
+class Test extends Premier {
+    private $projectUrl    = null;
 
-    private $summary = null;
-    private $content = null;
-    private $current = null;
-    private $currentH1 = null;
-    private $currentH2 = null;
-    private $root    = null;
-
-    public function __construct($client, $db) {
-        $this->client  = $client;
-        $this->db      = $db;
-
-        $this->content = new \Report\Template\Section('');
-        $this->current = $this->content;
-        $this->root    = $this->content;
+    public function __construct($project, $client, $db) {
+        parent::__construct($project, $client, $db);
     }
-    
-    public function setProject($project) {
-        $this->project = $project;
-    }
-    
+
     public function prepare() {
-        // THere goes the report building
+        $this->createLevel1('Detailled');
+        $analyzes = array('Analyzer\\Files\\DefinitionsOnly');
+        $analyzes2 = array();
+        foreach($analyzes as $a) {
+            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
+            $analyzes2[$analyzer->getName()] = $analyzer;
+        }
+        uksort($analyzes2, function($a, $b) { $a = strtolower($a); $b = strtolower($b); if ($a > $b) { return 1; } else { return $a == $b ? 0 : -1; } });
+
+        if (count($analyzes) > 0) {
+            $this->createLevel2('Results counts');
+            $this->addContent('SimpleTableResultCounts', 'AnalyzerResultCounts');
+
+            foreach($analyzes2 as $analyzer) {
+                if ($analyzer->hasResults()) {
+                    $this->createLevel2($analyzer->getName());
+                    if (get_class($analyzer) == "Analyzer\\Php\\Incompilable") {
+                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
+                        $this->addContent('TableForVersions', $analyzer);
+                    } elseif (get_class($analyzer) == "Analyzer\\Php\\ShortOpenTagRequired") {
+                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
+                        $this->addContent('SimpleTable', $analyzer, 'oneColumn');
+                    } else {
+                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
+                        $this->addContent('Horizontal', $analyzer);
+                    }
+                }
+            }
+                
+            // defined here, but for later use
+            $definitions = new \Report\Content\Definitions($client);
+            $definitions->setAnalyzers($analyzes);
+        }
+        
         return true;
-    }
-    
-    public function render($format, $filename = null) {
-        $class = "\\Report\\Format\\$format";
-        $this->output = new $class();
-        $this->output->setSummaryData($this->root);
-        
-        foreach($this->root->getContent() as $c) {
-            $c->render($this->output);
-        }
-        
-        if (isset($filename)) {
-            return $this->output->toFile($filename.'.'.$this->output->getExtension());
-        } else {
-            die("No filename?");
-        }
-    }
-    
-    private function createH1($name) {
-        $section = $this->root->addContent('Section', $name);
-        $section->setLevel(1);
-
-        $this->current = $section;
-        $this->currentH1 = $section;
-    }
-
-    function createH2($name) {
-        // @todo check that current is level 1 ? 
-        $section = $this->currentH1->addContent('Section', $name);
-        $section->setLevel(2);
-
-        $this->current = $section;
-        $this->currentH2 = $section;
-    }
-
-    function createH3($name) {
-        $this->current = $this->content->getCurrent()->getCurrent()->addSection($name, 3);
-    }
-
-    function addContent($type, $data = null) {
-        return $this->current->addContent($type, $data);
     }
 }
 
