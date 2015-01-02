@@ -1562,10 +1562,17 @@ GREMLIN;
 
     public function getArray() {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
-        $queryTemplate = <<<GREMLIN
+        if (substr($analyzer, 0, 17) === 'Analyzer\\\\Files\\\\') {
+            $query = <<<GREMLIN
+g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').as('line').as('filename').select{it.fullcode}{it.line}{it.filename}
+GREMLIN;
+            print $query;
+        } else {
+            $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').in.loop(1){ it.object.token != 'T_FILENAME'}.as('file').back('fullcode').as('line').select{it.fullcode}{it.line}{it.filename}
 GREMLIN;
-        $vertices = $this->query($queryTemplate);
+        }
+        $vertices = $this->query($query);
 
         $analyzer = get_class($this);
         $report = array();
