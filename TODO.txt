@@ -88,7 +88,7 @@ Aliases : Classes that extends others, but do no overloading;
 functions that returns one call of other function
 
 Useless unset() (http://php.net/unset)
-Unset non existing variable (useless)
+Unset non existing variable (useless), static variables, global variables (except with $GLOBALS), locals one (out of a loop)
 
 Constant functions or structures (always return the same...)
 
@@ -535,3 +535,36 @@ Start using composer (autoload migration)
 Add a readability test for PHP code (http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests#cite_note-10, http://en.wikipedia.org/wiki/Automated_Readability_Index)
 
 remove all usage of the common log folder
+
+Top 5 des analyzeurs lents
+
+Check that === null can be removed with a default object 
+Tag strings as SQL (by regex, by usage)
+List migration from PHP 5.2
+
+in project, make the main process wait for the first // one to finish. This is not needed for longer projects, but for short ones.
+
+Une global qui est utilisée dans une fonction pourrait être une static.
+
+http://stackoverflow.com/questions/6913312/integer-is-not-being-shown-as-die-argument
+Die/Exit won't display integers as argument
+
+Add severity check in analyzer.php
+
+magic number
+constant interface
+definition only
+deep defintions
+
+super global don't need to be called globals, but other PHP variables, Yes.
+
+Spot that classes in a folder all extends one class above, and then, alert if some classes is not extending
+
+Spot repeated code in a class (make this a property cache? ) 
+
+Spot useless inclusions (include_once...)
+
+Ternary is not protecting $_GET[]
+
+Spot languages files (files with arrays of values) and ignore them by default (speed up the process, no much interest in those structures).
+Suggest exporting large arrays 
