@@ -39,11 +39,11 @@ function init_project($project, $repo_url) {
         print './projects/'.$project.' already exists. Reusing'."\n";
     }
 
-
     if (!file_exists('./projects/'.$project.'/log/')) {
         mkdir('./projects/'.$project.'/log/', 0755);
     } else {
         print './projects/'.$project.'/log/ already exists. Ignoring'."\n";
+        return null; 
     }
 
     if (!file_exists('./projects/'.$project.'/config.ini')) {
@@ -51,10 +51,10 @@ function init_project($project, $repo_url) {
         $config = <<<INI
 phpversion = 5.6
 
-ignore_dirs[] = /test
-ignore_dirs[] = /tests
-ignore_dirs[] = /docs
-ignore_dirs[] = /doc
+ignore_dirs[] = /test/
+ignore_dirs[] = /tests/
+ignore_dirs[] = /docs/
+ignore_dirs[] = /doc/
 
 file_extensions = 
 
@@ -70,8 +70,12 @@ INI;
 
     print shell_exec('chmod -R g+w ./projects/'.$project);
 
-    if (!empty($repo_url) && !file_exists('./projects/'.$project.'/code/')) {
-        if (strpos($repo_url, 'bitbucket.org') !== false) {
+    if (!file_exists('./projects/'.$project.'/code/')) {
+        if ($repo_url === '' || $repo_url === false) {
+            print "Installing empty code\n";
+            print shell_exec("cd ./projects/$project; mkdir code");
+            return null;
+        } elseif (strpos($repo_url, 'bitbucket.org') !== false) {
             print "Installing with git on googlecode\n";
             print shell_exec("cd ./projects/$project; hg clone $repo_url code");
         } elseif (strpos($repo_url, '.googlecode.com/svn/') !== false) {
