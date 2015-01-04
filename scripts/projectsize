@@ -28,8 +28,6 @@ while($row = $res->fetch_Assoc()) {
     
     $line .= "  ";
     if (file_exists('projects/'.$row['project'].'/report')) {
-        $total++;
-        $tokens += $row["tokens"];
         if ($config->none) { continue 1; }
 
         $date = filemtime('projects/'.$row['project'].'/report');
@@ -45,6 +43,9 @@ while($row = $res->fetch_Assoc()) {
         } else {
             $diff .= "$timeDifference days)";
         }
+        $total++;
+        $tokens += $row["tokens"];
+
         $diff = '('.str_repeat(' ', 9 - strlen($diff)).$diff;
         
         $diff .= ' ';
