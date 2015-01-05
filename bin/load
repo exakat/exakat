@@ -278,6 +278,25 @@ function process_file($filename, $logFile, $client) {
                                               ->save();
 
                 $to_index = false;
+            } elseif ($php->getTokenname($token[0]) == 'T_YIELD' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
+                                              ->setProperty('code', $token[1])
+                                              ->setProperty('line', $token[2])->save();
+
+                $previous->relateTo($T[$Tid], 'NEXT')->save();
+                $regexIndex['_Yield']->relateTo($T[$Tid], 'INDEXED')->save();
+                $previous = $T[$Tid];
+                
+                $Tid++;
+                $T[$Tid] = $client->makeNode()->setProperty('token', 'T_VOID')
+                                              ->setProperty('code', 'void')
+                                              ->setProperty('fullcode', ' ')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('modifiedBy', 'bin/load13')
+                                              ->setProperty('atom', 'Void')
+                                              ->save();
+
+                $to_index = false;
             } elseif ($php->getTokenname($token[0]) == 'T_STATIC' && is_string($tokens[$id + 1]) && 
                       $tokens[$id + 1] != '(' && $php->getTokenname($tokens[$id - 1][0]) == 'T_NEW') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
