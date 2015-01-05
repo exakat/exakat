@@ -7,8 +7,10 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Yield extends Tokenizer {
-    /* 1 methods */
+    /* 3 methods */
 
     public function test_Yield01()  { $this->generic_test('_Yield.01'); }
+    public function test_Yield02()  { $this->generic_test('_Yield.02'); }
+    public function test_Yield03()  { $this->generic_test('_Yield.03'); }
 }
 ?>
