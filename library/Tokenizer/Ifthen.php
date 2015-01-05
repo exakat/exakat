@@ -61,10 +61,12 @@ class Ifthen extends TokenAuto {
 
         // if, elseif followed by a single instruction without a ;
         $this->conditions = array(  0 => array('token' => self::$operators,
-                                               'atom' => 'none'),
-                                    1 => array('atom' => 'Parenthesis'),
-                                    2 => array('atom' => array('For', 'Switch', 'Foreach', 'While', 'Dowhile', 'Ifthen', 'Assignation', 'Return', 'Break' ))
-        );
+                                               'atom'  => 'none'),
+                                    1 => array('atom'  => 'Parenthesis'),
+                                    2 => array('atom'  => array('For', 'Switch', 'Foreach', 'While', 'Dowhile', 'Ifthen', 'Assignation', 'Return', 'Break' )),
+                                    3 => array('filterOut' => array_merge( Staticproperty::$operators, Property::$operators,
+                                                                           Logical::$operators))
+                                    );
         
         $this->actions = array( 'to_block_ifelseif_instruction' => true,
                                 'property'                      => array('alternative' => 'false'),

@@ -1806,7 +1806,7 @@ x.out('ELEMENT').each{
                 $qactions[] = " 
 /* to_block_ifelseif_instruction */ 
 
-x = g.addVertex(null, [code:'Block with control if elseif', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:'Block with control if elseif', block:'true' ]);
+x = g.addVertex(null, [code:'Block with control if elseif', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:' /**/ ', block:'true' ]);
 a = it.out('NEXT').out('NEXT').next();
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
