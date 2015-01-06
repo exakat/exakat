@@ -568,3 +568,9 @@ Ternary is not protecting $_GET[]
 
 Spot languages files (files with arrays of values) and ignore them by default (speed up the process, no much interest in those structures).
 Suggest exporting large arrays 
+
+Defined Properties should be used at least in the class itself
+
+Support file extensions (and absence).
+add a detector for file extensions (using grep? ) 
+
