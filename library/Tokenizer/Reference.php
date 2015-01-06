@@ -29,11 +29,11 @@ class Reference extends TokenAuto {
 
         // special case for Stdclass &$x = 
         $this->conditions = array(-2 => array('filterOut' => 'T_DOUBLE_COLON'),
-                                  -1 => array('token' => 'T_STRING'), 
-                                   0 => array('token' => Reference::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('atom' => array('Variable')),
-                                   2 => array('token' => array('T_COMMA', 'T_EQUAL', 'T_CLOSE_PARENTHESIS')),
+                                  -1 => array('token'     => 'T_STRING'), 
+                                   0 => array('token'     => Reference::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('atom'      => 'Variable'),
+                                   2 => array('token'     => array('T_COMMA', 'T_EQUAL', 'T_CLOSE_PARENTHESIS'))
         );
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
@@ -42,12 +42,12 @@ class Reference extends TokenAuto {
 
         // special case for &function x() 
         $this->conditions = array(-1 => array('token' => 'T_FUNCTION',
-                                              'atom' => 'none'),
-                                  0 => array('token' => Reference::$operators),
-                                  1 => array('atom' => 'Identifier'),
-                                  2 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  3 => array('atom' => 'Arguments'),
-                                  4 => array('token' => 'T_CLOSE_PARENTHESIS')
+                                              'atom'  => 'none'),
+                                  0 => array('token'  => Reference::$operators),
+                                  1 => array('atom'   => 'Identifier'),
+                                  2 => array('token'  => 'T_OPEN_PARENTHESIS'),
+                                  3 => array('atom'   => 'Arguments'),
+                                  4 => array('token'  => 'T_CLOSE_PARENTHESIS')
         );
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
