@@ -662,7 +662,7 @@ variable.bothE('INDEXED').each{ g.removeEdge(it); }
 g.removeEdge( it.inE('NEXT').next());
 
 fullcode = x;
-
+$fullcode
 ";
             unset($actions['to_ppp']);
         }
@@ -691,6 +691,9 @@ $fullcode
         }    
         
         if (isset($actions['to_ppp_assignation'])) {
+            $token = new _Ppp(Token::$client);
+            $fullcode = $token->fullcode();
+
             $qactions[] = "
 /* to ppp with assignation */
 
@@ -719,6 +722,7 @@ g.removeEdge( it.inE('NEXT').next());
 g.idx('atoms').put('atom', 'Ppp', x);
 
 fullcode = x;
+$fullcode
 ";
             unset($actions['to_ppp_assignation']);
         }
