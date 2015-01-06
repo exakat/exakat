@@ -17,11 +17,13 @@ class Logical extends TokenAuto {
     public function _check() {
 
         // logical boolean (and, or)
-        $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                                                                 'T_NS_SEPARATOR', 'T_INSTANCEOF', 'T_NEW' ), 
-                                                                          Comparison::$operators, Bitshift::$operators, Addition::$operators,
-                                                                          Multiplication::$operators, Concatenation::$operators, 
-                                                                          Preplusplus::$operators, Assignation::$operators)),
+        $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NS_SEPARATOR'), 
+                                                                          Comparison::$operators,     Bitshift::$operators, 
+                                                                          Addition::$operators,       Multiplication::$operators, 
+                                                                          Concatenation::$operators,  _Instanceof::$operators,
+                                                                          Preplusplus::$operators,    Assignation::$operators,
+                                                                          ArgumentsNoParenthesis::$operators, _New::$operators,
+                                                                          Noscream::$operators,       Not::$operators)),
                                    -1 => array('atom'      => 'yes', 
                                                'notAtom'   => 'Sequence'), 
                                     0 => array('token'     => Logical::$logicals,
