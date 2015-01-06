@@ -7,7 +7,13 @@ $config = Config::factory($argv);
 
 $dir = $config->project;
 
-$stats = array();
+$stats = array('notCompilable52' => 'N/C',
+               'notCompilable53' => 'N/C',
+               'notCompilable54' => 'N/C',
+               'notCompilable55' => 'N/C',
+               'notCompilable56' => 'N/C',
+               'notCompilable70' => 'N/C',
+               'loc'             => 'N/C') ;
 $unknown = array();
 
 if ($config->project === null) {
