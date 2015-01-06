@@ -5,6 +5,7 @@ namespace Tokenizer;
 class TokenAuto extends Token {
     static public $round  = -1;
     protected $conditions = array();
+    protected $actions    = array();
     protected $setAtom    = false;
     public $total         = null ;
     public $done          = null ;
