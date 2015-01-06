@@ -4,18 +4,18 @@ namespace Tokenizer;
 
 class _Ppp extends TokenAuto {
     static public $operators = array('T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC');
-    static public $atom = 'Ppp';
+    static public $atom = 'Visibility';
 
     public function _check() {
         $values = array('T_EQUAL', 'T_COMMA');
     // class x { protected $x }
         $this->conditions = array( -1 => array('filterOut2' =>  'T_STATIC'),
-                                    0 => array('token' => _Ppp::$operators),
-                                    1 => array('atom' => array('Variable', 'String', 'Staticconstant')),
-                                    2 => array('filterOut' => $values),
+                                    0 => array('token'      => _Ppp::$operators),
+                                    1 => array('atom'       => array('Variable', 'String', 'Staticconstant')),
+                                    2 => array('filterOut'  => $values),
                                  );
-        $this->actions = array('to_ppp' => 1,
-                               'atom'   => 'Ppp',
+        $this->actions = array('to_ppp'       => 1,
+                               'atom'         => 'Ppp',
                                'makeSequence' => 'x' );
         $this->checkAuto(); 
 
@@ -30,28 +30,28 @@ class _Ppp extends TokenAuto {
 
     // class x { public $x = 2 }
         $this->conditions = array(-1 => array('filterOut2' =>  'STATIC'),
-                                   0 => array('token' =>  _Ppp::$operators),
-                                   1 => array('atom'  => 'Assignation'),
-                                   2 => array('token' => array('T_SEMICOLON')),
+                                   0 => array('token'      =>  _Ppp::$operators),
+                                   1 => array('atom'       => 'Assignation'),
+                                   2 => array('token'      => array('T_SEMICOLON')),
                                  );
         
         $this->actions = array('to_ppp_assignation' => true,
                                'atom'               => 'Ppp',
-                               'makeSequence' => 'x' 
+                               'makeSequence'       => 'x' 
                                );
 
         $this->checkAuto(); 
 
     // class x { public static $x = 2; }
         $this->conditions = array(-1 => array('filterOut2' =>  'STATIC'),
-                                   0 => array('token' =>  _Ppp::$operators),
-                                   1 => array('atom'  => 'Assignation'),
-                                   2 => array('token' => array('T_SEMICOLON')),
+                                   0 => array('token'      =>  _Ppp::$operators),
+                                   1 => array('atom'       => 'Assignation'),
+                                   2 => array('token'      => array('T_SEMICOLON')),
                                  );
         
         $this->actions = array('to_ppp_assignation' => true,
                                'atom'               => 'Ppp',
-                               'makeSequence' => 'x' 
+                               'makeSequence'       => 'x' 
                                );
 
         $this->checkAuto(); 
@@ -113,6 +113,5 @@ class _Ppp extends TokenAuto {
         $token = new _Function(Token::$client);
         return $token->fullcode();
     }
-    
 }
 ?>
