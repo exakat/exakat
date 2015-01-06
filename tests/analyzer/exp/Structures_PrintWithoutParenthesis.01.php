@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array();
+$expected     = array('print("\\n")');
 
-$expected_not = array();
+$expected_not = array('print "$section : \n"',
+                      'print "\n"');
 
 ?>
