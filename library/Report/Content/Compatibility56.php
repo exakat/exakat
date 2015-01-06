@@ -3,8 +3,6 @@
 namespace Report\Content;
 
 class Compatibility56 extends \Report\Content {
-    protected $array = array();
-    
     public static $deprecatedExtensions = array();
     
     public function collect() {

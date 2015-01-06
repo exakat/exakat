@@ -4,7 +4,6 @@ namespace Report\Content;
 
 class Directives extends \Report\Content {
     protected $name = 'Directives';
-    protected $array = array();
     
     public function collect() {
         $this->array['Standard'] = array();

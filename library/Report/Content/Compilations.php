@@ -3,8 +3,6 @@
 namespace Report\Content;
 
 class Compilations extends \Report\Content {
-    protected $array = array();
-
     public function collect() {
         $versions = array('5.3' => '53', '5.4' => '54', '5.5' => '55', '5.6' => '56');
 

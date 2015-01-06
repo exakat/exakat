@@ -3,8 +3,6 @@
 namespace Report\Content;
 
 class Compatibility54 extends \Report\Content {
-    protected $array = array();
-
     public static $deprecatedExtensions = array('sqlite');
     
     public function collect() {

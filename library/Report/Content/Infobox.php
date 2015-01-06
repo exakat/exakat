@@ -3,7 +3,6 @@
 namespace Report\Content;
 
 class Infobox extends \Report\Content {
-    protected $array = array();
     public $severities = array();
     
     public function setSeverities($array) {

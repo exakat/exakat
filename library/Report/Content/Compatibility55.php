@@ -3,8 +3,6 @@
 namespace Report\Content;
 
 class Compatibility55 extends \Report\Content {
-    protected $array = array();
-
     public static $deprecatedExtensions = array('apc', 'mysql');
     
     public function collect() {

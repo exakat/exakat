@@ -3,7 +3,6 @@
 namespace Report\Content;
 
 class Groupby extends \Report\Content {
-    protected $array = array();
     protected $analyzers = array();
     protected $sort = array('Critical', 'Major', 'Minor');
 

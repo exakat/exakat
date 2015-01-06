@@ -7,6 +7,7 @@ class Content {
     protected $project = null;
     protected $neo4j   = null;
     protected $mysql   = null;
+    protected $array   = array();
     
     public function setNeo4j($client) {
         $this->neo4j = $client;

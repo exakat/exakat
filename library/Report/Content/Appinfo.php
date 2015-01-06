@@ -3,8 +3,6 @@
 namespace Report\Content;
 
 class Appinfo extends \Report\Content {
-    protected $array = array();
-
     public function collect() {
         // Which extension are being used ? 
         $extensions = array(
@@ -250,10 +248,10 @@ class Appinfo extends \Report\Content {
                     $v = $vertices[0][0];
                     $this->array[$section][$name] = $v == "true" ? "Yes" : "No";
                 } catch (Exception $e) {
-                    print "Error for appinfo : \n";
-                    print "$queryTemplate : \n";
-                    print $e->getMessage()."\n";
-                    print "\n";
+                    print "Error for appinfo : \n".
+                          "$queryTemplate : \n".
+                          $e->getMessage()."\n".
+                          "\n";
                     // empty catch ? 
                 }
             }

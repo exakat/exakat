@@ -3,7 +3,6 @@
 namespace Report\Content;
 
 class Compatibility53 extends \Report\Content {
-    protected $array = array();
     public static $deprecatedExtensions = array('dba', 'fdf', 'ming');
 //Could also add 'fbsql', 'msql', 'ncurses', 'sybase', 'mhash', 
     

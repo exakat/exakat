@@ -3,7 +3,6 @@
 namespace Report\Content;
 
 class Dashboard extends \Report\Content {
-    protected $array = array();
     private $theme = null;
 
     public function collect() {
