@@ -153,7 +153,7 @@ class Web {
             }
                 
             // defined here, but for later use
-            $defs = new \Report\Content\Definitions($client);
+            $defs = new \Report\Content\Definitions($this->client);
             $defs->setAnalyzers($analyzes);
         }
 
