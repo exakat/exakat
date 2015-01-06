@@ -13,14 +13,14 @@ namespace Analyzer\\$category;
 use Analyzer;
 
 class $name extends Analyzer\Analyzer {
-    /* Remove this is useless
+    /* Remove this if useless
     public function dependsOn() {
         return array("MethodDefinition");
     }
     */
     
     public function analyze() {
-        \$this->atomIs("Identifier")
+        \$this->atomIs('Identifier')
              ->back('first');
         \$this->printQuery();
         \$this->prepareQuery();
