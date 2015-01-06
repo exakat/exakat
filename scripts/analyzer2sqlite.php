@@ -8,7 +8,6 @@ $files = glob('library/Analyzer/*/*.php');
 $names = array();
 foreach($files as $file) {
     $name = substr(basename($filename), 0, -4);
-    $dir  = basename(dirname($filename));
     $names[$name] ++;
 }
 
