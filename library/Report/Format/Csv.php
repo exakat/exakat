@@ -7,8 +7,13 @@ class Csv extends \Report\Format {
     private $summary = null;
     protected static $analyzer = null;
     
-    protected $format = "Csv";
     protected $fileExtension ='csv';
+
+    public function __construct() {
+        parent::__construct();
+        
+        $this->format = 'Csv';
+    }
     
     public function render($output, $data) {
         $output->push(array(" Text for ".get_class($this).""));

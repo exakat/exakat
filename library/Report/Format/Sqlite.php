@@ -7,8 +7,13 @@ class Sqlite extends \Report\Format {
     protected static $analyzer = null;
     private $summary = null;
 
-    protected $format = "Sqlite";
     protected $fileExtension ='sqlite';
+
+    public function __construct() {
+        parent::__construct();
+        
+        $this->format = 'Sqlite';
+    }
     
     public function render($output, $data) {
         // Nothing

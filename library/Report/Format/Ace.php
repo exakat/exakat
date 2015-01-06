@@ -11,14 +11,19 @@ class Ace extends \Report\Format {
     protected static $analyzer = null;
     private $summary = null;
 
-    protected $format = "Ace";    
     protected $fileExtension = "html";
     
     protected $css = null;
+    
+    public function __construct() {
+        parent::__construct();
+        
+        $this->format = 'Ace';
+    }
 
     public function render($output, $data) {
         // default behavior
-        $output->push("Text for ".get_class($this)."\n");
+        $output->push("Text for ".get_class($this)." (".strlen($data)." bytes).\n");
     }
     
     public function push($render) {

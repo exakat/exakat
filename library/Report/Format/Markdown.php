@@ -7,8 +7,13 @@ class Markdown extends \Report\Format {
     protected static $analyzer = null;
     private $summary = null;
 
-    protected $format = "Markdown";
     protected $fileExtension ='md';
+
+    public function __construct() {
+        parent::__construct();
+        
+        $this->format = 'Markdown';
+    }
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");

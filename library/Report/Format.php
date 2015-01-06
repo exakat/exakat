@@ -7,6 +7,12 @@ class Format {
     
     protected $projectName = '';
     protected $projectUrl = '';
+
+    protected $format = 'DefaultFormat';    
+    
+    public function __construct() {
+        
+    }
     
     public function getRenderer($class) {
         $fullclass = "\\Report\\Format\\{$this->format}\\$class";

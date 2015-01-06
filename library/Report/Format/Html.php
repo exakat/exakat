@@ -7,8 +7,13 @@ class Html extends \Report\Format {
     protected static $analyzer = null;
     private $summary = null;
 
-    protected $format = "Html";
     protected $fileExtension ='html';
+
+    public function __construct() {
+        parent::__construct();
+        
+        $this->format = 'Html';
+    }
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");

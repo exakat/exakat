@@ -7,8 +7,13 @@ class Text extends \Report\Format {
     protected static $analyzer = null;
     private $summary = null;
 
-    protected $format = "Text";
     protected $fileExtension ='txt';
+
+    public function __construct() {
+        parent::__construct();
+        
+        $this->format = 'Text';
+    }
     
     public function render($output, $data) {
         $output->push(" Text for ".get_class($this)."\n");
