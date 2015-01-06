@@ -8,9 +8,9 @@ $count = trim(shell_exec('ls -hla projects/*/log/errors.log| wc -l '));
 
 $r = shell_exec('ls -hla projects/*/log/errors.log| grep -v 191 | grep -v 176 ');
 if ($c = preg_match_all('/project(\S*)/', $r, $R)) {
-    print "$c error.log are wrong\n";
-    print '  + '.implode("\n  + ", $R[0])."\n\n";
-    print "Total of $count error.logs\n";
+    print "$c error.log are wrong\n".
+          '  + '.implode("\n  + ", $R[0])."\n\n".
+          "Total of $count error.logs\n";
 } else {
     print "All $count error.logs are OK\n";
 }
@@ -24,8 +24,8 @@ print $totalUnitTests." total analyzer tests\n";
 preg_match_all('/\s(\w*)\s*(\d+)/is', $res, $R);
 
 if (preg_match_all('/(\w+\/\w+)\s*0/is', $res, $R)) {
-    print count($R[1])." total analyzer without tests\n";
-    print '  + '.implode("\n  + ", $R[1])."\n\n";
+    print count($R[1])." total analyzer without tests\n".
+          '  + '.implode("\n  + ", $R[1])."\n\n";
 } else {
     print "All analyzers have tests\n";
 }
@@ -39,8 +39,8 @@ if (!file_exists('tests/analyzer/phpunit.txt')) {
 
     if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+), Skipped: (\d+)\./is', $results, $R)) {
         preg_match_all('/\d+\) Test\\\\(\w+)::/is', $results, $R2);
-        print "There were {$R[1]} failures in ".count(array_count_values($R2[1]))." tests! Check the tests! \n";
-        print '  + '.implode("\n  + ", array_keys(array_count_values(($R2[1]))))."\n\n";
+        print "There were {$R[1]} failures in ".count(array_count_values($R2[1]))." tests! Check the tests! \n".
+              '  + '.implode("\n  + ", array_keys(array_count_values(($R2[1]))))."\n\n";
         
         if ($R[1] != $totalUnitTests) {
             print "Not all the tests were run! Only {$R[1]} out of $totalUnitTests. Please, run php scripts/phpunit.php\n";
@@ -103,15 +103,15 @@ if ($next) {
 }
 
 if ($fullcode) {
-    print count($fullcode)." stat.log have no fullcode\n";
-    print '  + '.implode("\n  + ", $fullcode)."\n\n";
+    print count($fullcode)." stat.log have no fullcode\n".
+          '  + '.implode("\n  + ", $fullcode)."\n\n";
 } else {
     print 'All '.count($files)." stat.log are free of no_fullcode\n";
 }
 
 if ($loneToken) {
-    print count($fullcode)." stat.log have reported lone tokens\n";
-    print '  + '.implode("\n  + ", $loneToken)."\n\n";
+    print count($fullcode)." stat.log have reported lone tokens\n".
+          '  + '.implode("\n  + ", $loneToken)."\n\n";
 } else {
     print 'All '.count($files)." stat.log are free lone tokens\n";
 }
