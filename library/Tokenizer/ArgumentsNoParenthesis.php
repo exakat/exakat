@@ -21,7 +21,7 @@ class ArgumentsNoParenthesis extends Arguments {
                                                                            'T_OPEN_BRACKET', 'T_OPEN_CURLY',),
                                                                            Addition::$operators, Multiplication::$operators, 
                                                                            Power::$operators, 
-                                                                           Bitshift::$operators, Logical::$operators,
+                                                                           Bitshift::$operators, Logical::$booleans,
                                                                            Postplusplus::$operators, Comparison::$operators)) 
         );
         
