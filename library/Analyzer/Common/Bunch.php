@@ -3,6 +3,7 @@
 namespace Analyzer\Common;
 
 class Bunch extends \Analyzer\Analyzer {
+    private $bunch = array();
     
     public function setBunch($array) {
         // @todo check this
