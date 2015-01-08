@@ -116,7 +116,6 @@ foreach($tokens as $t) {
             case T_BREAK : 
             case T_DEC :
             case T_DO :
-            case T_FUNC_C :
             case T_IS_NOT_IDENTICAL : 
             case T_SR_EQUAL : 
             case T_XOR_EQUAL :
@@ -166,14 +165,6 @@ foreach($tokens as $t) {
             case T_LOGICAL_OR : 
             case T_LOGICAL_XOR : 
 
-//            case T_ANDAND : 
-//            case T_OROR : 
-//            case T_XOR : 
-//            case T_AND : 
-//            case T_OR : 
-//            case T_BOOLEAN_OR : 
-//            case T_BOOLEAN_XOR : 
-            
             case T_IF:
             case T_ELSEIF:
             case T_ENDIF : 
@@ -190,6 +181,7 @@ foreach($tokens as $t) {
             case T_CONCAT_EQUAL:
                 // simply ignore
                 break;
+
             default: 
                 print token_name($t[0])."\n";
                 print_r($t);
