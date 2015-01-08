@@ -8,56 +8,56 @@ $count = trim(shell_exec('ls -hla projects/*/log/errors.log| wc -l '));
 
 $r = shell_exec('ls -hla projects/*/log/errors.log| grep -v 191 | grep -v 176 ');
 if ($c = preg_match_all('/project(\S*)/', $r, $R)) {
-    print "$c error.log are wrong\n".
-          '  + '.implode("\n  + ", $R[0])."\n\n".
-          "Total of $count error.logs\n";
+    echo "$c error.log are wrong\n", 
+          '  + ', implode("\n  + ", $R[0]), "\n\n",
+          "Total of ", $count, " error.logs\n";
 } else {
-    print "All $count error.logs are OK\n";
+    echo 'All ', $count, " error.logs are OK\n";
 }
-print "\n";
+echo "\n";
 
 $res = shell_exec('cd tests/analyzer/; php list.php -0');
 preg_match('/Total : (\d+) tests/is', $res, $R);
 $totalUnitTests = $R[1];
-print $totalUnitTests." total analyzer tests\n";
+echo $totalUnitTests, " total analyzer tests\n";
 
 preg_match_all('/\s(\w*)\s*(\d+)/is', $res, $R);
 
 if (preg_match_all('/(\w+\/\w+)\s*0/is', $res, $R)) {
-    print count($R[1])." total analyzer without tests\n".
+    echo count($R[1]), " total analyzer without tests\n",
           '  + '.implode("\n  + ", $R[1])."\n\n";
 } else {
-    print "All analyzers have tests\n";
+    echo "All analyzers have tests\n";
 }
 
 if (!file_exists('tests/analyzer/phpunit.txt')) {
-    print "No recent unit test on Analyzers! Please, run php scripts/phpunit.php\n";
+    echo "No recent unit test on Analyzers! Please, run php scripts/phpunit.php\n";
 } elseif (time() - filemtime('tests/analyzer/phpunit.txt') > 86400) {
-    print "Phpunit test is more than a day! Please, run php scripts/phpunit.php\n";
+    echo "Phpunit test is more than a day! Please, run php scripts/phpunit.php\n";
 } else {
     $results = file_get_contents('tests/analyzer/phpunit.txt');
 
     if (preg_match('/Tests: (\d+), Assertions: (\d+), Failures: (\d+), Skipped: (\d+)\./is', $results, $R)) {
         preg_match_all('/\d+\) Test\\\\(\w+)::/is', $results, $R2);
-        print "There were {$R[1]} failures in ".count(array_count_values($R2[1]))." tests! Check the tests! \n".
-              '  + '.implode("\n  + ", array_keys(array_count_values(($R2[1]))))."\n\n";
+        echo "There were {$R[1]} failures in ", count(array_count_values($R2[1])), " tests! Check the tests! \n",
+              '  + ', implode("\n  + ", array_keys(array_count_values(($R2[1])))), "\n\n";
         
         if ($R[1] != $totalUnitTests) {
-            print "Not all the tests were run! Only {$R[1]} out of $totalUnitTests. Please, run php scripts/phpunit.php\n";
+            echo "Not all the tests were run! Only {$R[1]} out of $totalUnitTests. Please, run php scripts/phpunit.php\n";
         } else {
-            print "All tests where recently run, some are KO\n";
+            echo "All tests where recently run, some are KO\n";
         }
     } elseif (preg_match('/OK \((\d+) test, (\d+) assertions\)/is', $results, $R)) {
         if ($R[1] != $totalUnitTests) {
-            print "Not all the tests were run! Only {$R[1]} out of $totalUnitTests. Please, run php scripts/phpunit.php\n";
+            echo "Not all the tests were run! Only {$R[1]} out of $totalUnitTests. Please, run php scripts/phpunit.php\n";
         } else {
-            print "All tests where recently run and OK\n";
+            echo "All tests where recently run and OK\n";
         }
     } else {
-        print "Nothing found in the unit tests!\n";
+        echo "Nothing found in the unit tests!\n";
     }
 }
-print "\n";
+echo "\n";
 
 $tokens = 0;
 $indexed = array();
@@ -89,34 +89,34 @@ foreach($files as $file) {
 }
 
 if ($indexed) {
-    print count($indexed)." stat.log have INDEXED\n";
-    print '  + '.implode("\n  + ", $indexed)."\n\n";
+    echo count($indexed)." stat.log have INDEXED\n",
+         '  + '.implode("\n  + ", $indexed)."\n\n";
 } else {
-    print 'All '.count($files)." stat.log are free of INDEXED\n\n";
+    echo 'All '.count($files)." stat.log are free of INDEXED\n\n";
 }
 
 if ($next) {
-    print count($next)." stat.log have NEXT\n";
-    print '  + '.implode("\n  + ", $next)."\n\n";
+    echo count($next)." stat.log have NEXT\n",
+         '  + '.implode("\n  + ", $next)."\n\n";
 } else {
-    print 'All '.count($files)." stat.log are free of NEXT\n\n";
+    echo 'All '.count($files)." stat.log are free of NEXT\n\n";
 }
 
 if ($fullcode) {
-    print count($fullcode)." stat.log have no fullcode\n".
+    echo count($fullcode)." stat.log have no fullcode\n".
           '  + '.implode("\n  + ", $fullcode)."\n\n";
 } else {
-    print 'All '.count($files)." stat.log are free of no_fullcode\n";
+    echo 'All '.count($files)." stat.log are free of no_fullcode\n";
 }
 
 if ($loneToken) {
-    print count($fullcode)." stat.log have reported lone tokens\n".
-          '  + '.implode("\n  + ", $loneToken)."\n\n";
+    echo count($fullcode)." stat.log have reported lone tokens\n",
+         '  + '.implode("\n  + ", $loneToken)."\n\n";
 } else {
-    print 'All '.count($files)." stat.log are free lone tokens\n";
+    echo 'All '.count($files)." stat.log are free lone tokens\n";
 }
 
-print "\n".count($files).' projects collecting '.number_format($tokens, 0)." tokens\n\n";
+echo "\n".count($files).' projects collecting '.number_format($tokens, 0)." tokens\n\n";
 
 $files = glob('human/en/*/*');
 $extraDocs = array();
@@ -130,7 +130,7 @@ foreach($analyzers as $a) {
     unset($extraDocs[$a]);
     $o = Analyzer\Analyzer::getInstance($a, null);
     if ($o === null) { 
-        print "Couldn't get an instance for '$a'\n\n";
+        echo "Couldn't get an instance for '$a'\n\n";
         continue 1;
     }
     if ($o->getDescription() === '') {
@@ -139,8 +139,8 @@ foreach($analyzers as $a) {
 }
 
 if ($missingDoc) {
-    print count($missingDoc)." analyzer are missing their documentation\n";
-    print '  + '.implode("\n  + ", $missingDoc)."\n\n";
+    echo count($missingDoc)." analyzer are missing their documentation\n",
+         '  + '.implode("\n  + ", $missingDoc)."\n\n";
     
     foreach($missingDoc as $document) {
         list($documentName, ) = explode(' ', $document);
@@ -149,14 +149,14 @@ if ($missingDoc) {
         }
     }
 } else {
-    print 'All '.count($analyzers)." analyzers have their documentation\n\n";
+    echo 'All '.count($analyzers)." analyzers have their documentation\n\n";
 }
 
 if ($extraDocs) {
-    print count($extraDocs)." docs are available without analyzer\n";
-    print '  + '.implode("\n  + ", array_keys($extraDocs))."\n\n";
+    echo count($extraDocs)." docs are available without analyzer\n",
+         '  + '.implode("\n  + ", array_keys($extraDocs))."\n\n";
 } else {
-    print 'All '.count($analyzers)." docs have analyzers\n\n";
+    echo 'All '.count($analyzers)." docs have analyzers\n\n";
 }
 
 $sqlite = new Sqlite3('data/analyzers.sqlite');
@@ -171,7 +171,7 @@ $missingInSqlite = array_diff($analyzers, $inSqlite);
 
 
 if (count($missingInSqlite)) {
-    print count($missingInSqlite)." analysers missing in Sqlite. Inserting them\n";
+    echo count($missingInSqlite)." analysers missing in Sqlite. Inserting them\n";
 
     $idUnassigned = $sqlite->query("SELECT id FROM categories WHERE name='Unassigned'")->fetchArray();
     $idUnassigned = $idUnassigned[0];
@@ -192,10 +192,10 @@ JOIN analyzers a ON ac.id_analyzer = a.id
 WHERE (c.name in ('Analyze', 'Coding Conventions', 'Dead code')) AND a.severity IS NULL")->fetchArray();
 $missingSeverity = $missingSeverity[0];
 if ($missingSeverity == 0) {
-    print "All analysers have their severity in Sqlite.\n";
+    echo "All analysers have their severity in Sqlite.\n";
 
 } else {
-    print $missingSeverity." analysers are missing severity in Sqlite.\n";
+    echo $missingSeverity." analysers are missing severity in Sqlite.\n";
 
     $res = $sqlite->query("SELECT a.folder, a.name FROM categories c
 JOIN analyzers_categories ac ON c.id = ac.id_categories
@@ -203,7 +203,7 @@ JOIN analyzers a ON ac.id_analyzer = a.id
 WHERE (c.name in ('Analyze', 'Coding Conventions', 'Dead code', 'Security')) AND a.severity IS NULL");
 
     while ($row = $res->fetchArray()) {
-        print '+ '.$row['folder'].'/'.$row['name']."\n";
+        echo '+ '.$row['folder'].'/'.$row['name']."\n";
     }
 }
 
@@ -213,9 +213,9 @@ $total = $sqlite->query('SELECT count(*) FROM analyzers;')->fetchArray();
 $total = $total[0];
 $unassigned = $sqlite->query("SELECT group_concat(ac.id_analyzer, ',') FROM analyzers_categories AS ac JOIN categories AS c ON ac.id_categories = c.id WHERE c.name='Unassigned';")->fetchArray(); 
 if ($unassigned[0] > 0) { 
-    print (substr_count($unassigned[0], ',') + 1)." analyzers are 'unassigned' : {$unassigned[0]}. \n";
+    echo (substr_count($unassigned[0], ',') + 1)." analyzers are 'unassigned' : {$unassigned[0]}. \n";
 } else {
-    print 'All '.$total." analyzers are assigned. \n";
+    echo 'All '.$total." analyzers are assigned. \n";
 }
 
 $unassignedRes = $sqlite->query('SELECT * FROM analyzers AS a LEFT JOIN analyzers_categories AS ac ON ac.id_analyzer = a.id WHERE ac.id_categories IS NULL'); 
@@ -226,27 +226,27 @@ if (!empty($unassigned2)) {
         $all[] = $unassigned2['folder'].'/'.$unassigned2['name'].'('.$unassigned2['id'].')';
     }
 
-    print count($all).' analyzers are not linked! ('.implode(', ', $all).")\n";
+    echo count($all).' analyzers are not linked! ('.implode(', ', $all).")\n";
 } else {
-    print 'All '.$total." analyzers are linked. \n\n";
+    echo 'All '.$total." analyzers are linked. \n\n";
 }
 
 $analyzersCount = $sqlite->query("SELECT count(*) FROM categories AS c JOIN analyzers_categories AS ac ON c.id = ac.id_categories WHERE c.name='Analyze'")->fetchArray(); 
-print $analyzersCount[0]." analyzers \n";
+echo $analyzersCount[0]." analyzers \n";
 
 // check for analyzer log 
 $res = shell_exec('grep -r javax.script.ScriptException projects/*/log/analyze.*.final.log');
 if ($res === null) {
-    print "All analyzer.*.final.log are clean of Exceptions. \n\n";
+    echo "All analyzer.*.final.log are clean of Exceptions. \n\n";
 } else {
     $lines = explode("\n", trim($res));
-    print count($lines)." projects have Exceptions problems in analyzer.*.final.log\n";
+    echo count($lines)." projects have Exceptions problems in analyzer.*.final.log\n";
     foreach($lines as $line) {
         list($file,) = explode(':', $line);
-        print '  + '.$file."\n";
+        echo '  + '.$file."\n";
     }
     
-    print "\n\n";
+    echo "\n\n";
 }
 
 // check for errors in the analyze logs
@@ -254,12 +254,12 @@ $shell = shell_exec('grep Exception projects/*/log/analyze.* | grep "Exception :
 $rows = explode("\n", trim($shell));
 
 if (count($rows) > 0) {
-    print count($rows)." errors in the analyzers\n";
+    echo count($rows)." errors in the analyzers\n";
     foreach($rows as $row) {
-        print "+ $row\n";
+        echo '+ ', $row, "\n";
     }
 } else {
-    print "All project have clean analyzers\n";
+    echo "All project have clean analyzers\n";
 }
 
 
