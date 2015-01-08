@@ -1043,6 +1043,17 @@ GREMLIN;
         return $this;
     }
 
+    // follows a link if it is there (and do nothing otherwise)
+    protected function inIsIE($edgeName) {
+        if (is_array($edgeName)) {
+            $this->addMethod("transform{ if (it.in('".implode("', '", $edgeName)."').any()) { it.in('".implode("', '", $edgeName)."').next(); } else { it ;}}");
+        } else {
+            $this->addMethod("transform{ if (it.in('$edgeName').any()) { it.in('$edgeName').next(); } else { it ;}}", $edgeName);
+        }
+        
+        return $this;
+    }
+
     public function inIsnot($edgeName) {
         if (is_array($edgeName)) {
             $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any() == false}", $edgeName);

@@ -10,12 +10,14 @@ class IsModified extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
+             ->inIsIE('VARIABLE')
              ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'DEFINE', 'CAST'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
+             ->inIsIE('VARIABLE')
              ->inIs(array('LEFT', 'VARIABLE'))
              ->atomIs(array('Assignation', 'Arrayappend'))
              ->hasNoIn('VARIABLE')
@@ -23,14 +25,14 @@ class IsModified extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // catch
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->inIs('VARIABLE')
              ->atomIs(array('Catch'))
              ->back('first');
         $this->prepareQuery();
 
         // arguments : reference variable in a custom function
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -47,7 +49,7 @@ class IsModified extends Analyzer\Analyzer {
 
         // function/methods definition : all modified by incoming values
         // simple variable
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable');
@@ -56,7 +58,7 @@ class IsModified extends Analyzer\Analyzer {
         // simple variable + default value : already done in line 18
 
         // typehint
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Typehint')
@@ -65,7 +67,7 @@ class IsModified extends Analyzer\Analyzer {
         $this->prepareQuery();  
 
         // typehint + default value
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Typehint')
@@ -91,20 +93,21 @@ class IsModified extends Analyzer\Analyzer {
         }
         
         foreach($references as $position => $functions) {
-            $this->atomIs("Variable")
+            $this->atomIs('Variable')
+                 ->inIsIE('VARIABLE')
                  ->is('rank', $position)
                  ->inIs('ARGUMENT')
                  ->inIs('ARGUMENTS')
                  ->hasNoIn('METHOD') // possibly new too
                  ->atomIs('Functioncall')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_UNSET'))
                  ->fullnspath($functions)
                  ->back('first');
             $this->prepareQuery();
         }
 
         // Class constructors (__construct)
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
