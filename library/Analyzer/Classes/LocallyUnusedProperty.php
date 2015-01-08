@@ -11,6 +11,7 @@ class LocallyUnusedProperty extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Ppp')
+             ->isNot('propertyname', null)
              ->analyzerIsNot('Analyzer\\Classes\\LocallyUsedProperty');
         $this->prepareQuery();
     }

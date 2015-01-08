@@ -8,6 +8,7 @@ class LocallyUsedProperty extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Ppp')
+             ->isNot('propertyname', null)
              ->savePropertyAs('propertyname', 'property')
              ->goToClass()
              ->outIs('BLOCK')

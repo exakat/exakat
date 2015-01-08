@@ -1,10 +1,10 @@
 <?php
 
 class a {
-    public $localyUsed = 1;
-    public $usedInChild = 2;
-    public $unused = 3;
-    public $usedInGrandChild = 4;
+    private $localyUsed = 1;
+    private $usedInChild = 2;
+    private $unused = 3;
+    private $usedInGrandChild = 4;
     
     function b() {
         $this->localyUsed = 2;
