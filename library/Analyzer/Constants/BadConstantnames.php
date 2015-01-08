@@ -12,6 +12,7 @@ class BadConstantnames extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', "'3'")
              ->regex('code', '^[\'\\"]__(.*)__[\'\\"]\\$');
+        $this->prepareQuery();
     }
 }
 

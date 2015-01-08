@@ -46,7 +46,6 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'variable');
         $this->prepareQuery();
-        $this->printQuery();
         
         // todo : same with default value!
         
