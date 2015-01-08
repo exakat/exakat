@@ -3,8 +3,6 @@
 namespace Report\Report;
 
 class Test extends Premier {
-    private $projectUrl    = null;
-
     public function __construct($project, $client, $db) {
         parent::__construct($project, $client, $db);
     }
