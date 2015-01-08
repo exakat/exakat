@@ -1,31 +1,30 @@
 <?php
 
 if (array_search('-t', $argv)) {
-    print "Running project test for tokenizer\n";
-
-    print "Getting recent code\n";
+    echo "Running project test for tokenizer\n",
+         "Getting recent code\n";
     shell_exec('rm -rf ./projects/test/code/*');
     shell_exec('cp ./tests/tokenizer/source/_* ./projects/test/code');
     shell_exec('cp ./tests/analyzer/source/[A-Z]* ./projects/test/code');
     shell_exec('cp ./tests/tokenizer/source/[A-Z]* ./projects/test/code');
 
-    print "Running the project on test\n";
+    echo "Running the project on test\n";
     shell_exec('php bin/project test');
 } else {
-    print "Not running project test\n";
+    echo "Not running project test\n";
 }
 
-print "Running UT for analyzer\n";
+echo "Running UT for analyzer\n";
 $row = array('date' => '"'.date('Y-m-d H:i:s').'"', 'id' => 'NULL');
 
 $begin = microtime(true);
 
 if (array_search('-a', $argv)) {
-    print "Running ALL tests\n";
+    echo "Running ALL tests\n";
     shell_exec('cd tests/analyzer; phpunit randomtest.php > phpunit.txt');
     $results = file_get_contents('tests/analyzer/phpunit.txt');
 } else {
-    print "Running random tests\n";
+    echo "Running random tests\n";
     shell_exec('cd tests/analyzer; phpunit randomtest.php > randomtest.txt');
     $results = file_get_contents('tests/analyzer/randomtest.txt');
 }
@@ -50,6 +49,6 @@ $mysql = new mysqli('localhost', 'root', '', 'exakat');
 $query = "INSERT INTO unittests (`".implode("`, `", array_keys($row))."`) VALUES (".implode(", ", array_values($row)).")";
 $mysql->query($query);
     
-print $row['tests']." tests ran : {$row['fails']} failed (".number_format($row['fails'] / $row['tests'] * 100, 2)." %)\n";
+echo $row['tests']." tests ran : {$row['fails']} failed (".number_format($row['fails'] / $row['tests'] * 100, 2)." %)\n";
 
 ?>
