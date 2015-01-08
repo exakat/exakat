@@ -574,3 +574,7 @@ Defined Properties should be used at least in the class itself
 Support file extensions (and absence).
 add a detector for file extensions (using grep? ) 
 
+Remove the PPP from the index and give them another Atom (visibility)
+
+Unused use : inside a class, they are traits. 
+Check for unused Traits (extension or use somewhere).
