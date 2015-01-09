@@ -20,8 +20,11 @@ if (substr($res, 0, 28) != 'No syntax errors detected in') {
 $php = file_get_contents($file);
 $tokens = token_get_all($php);
 
+$lnumberValues = array();
 $lnumber = 0;
+$variableNames = array();
 $variables = "a";
+$stringsNames = array();
 $strings = "A";
 
 $checks = array('T_TRAIT', 'T_FINALLY', 'T_YIELD');
@@ -36,15 +39,34 @@ foreach($tokens as $t) {
     if (is_array($t)) {
         switch($t[0]) {
             case T_LNUMBER: 
-                $t[1] = $lnumber++;
+                if (isset($lnumberValues[$t[1]])) {
+                    $t[1] = $lnumberValues[$t[1]];
+                } else {
+                    $lnumberValues[$t[1]] = '$'.$lnumber++;
+                    $t[1] = $lnumberValues[$t[1]];
+                }
                 break;
             case T_VARIABLE: 
-                $t[1] = '$'.$variables++;
+                if ($t[1] == '$this') {
+                    // do nothing, we keep it 
+                } else {
+                    if (isset($variableNames[$t[1]])) {
+                        $t[1] = $variableNames[$t[1]];
+                    } else {
+                        $variableNames[$t[1]] = '$'.$variables++;
+                        $t[1] = $variableNames[$t[1]];
+                    }
+                }
                 break;
             case T_CONSTANT_ENCAPSED_STRING:
                 $strings++;
                 if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { print "Skip T_CONSTANT_ENCAPSED_STRING : $strings\n"; $strings++; }
-                $t[1] = "'".$strings."'";
+                if (isset($stringsNames[$t[1]])) {
+                    $t[1] = $stringsNames[$t[1]];
+                } else {
+                    $stringsNames[$t[1]] = "'".$strings."'";
+                    $t[1] = $stringsNames[$t[1]];
+                }
                 break;
             case T_STRING:
             case T_NUM_STRING:
@@ -53,7 +75,12 @@ foreach($tokens as $t) {
             case T_ENCAPSED_AND_WHITESPACE :
                 $strings++;
                 if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { print "Skip T_ENCAPSED_AND_WHITESPACE : $strings\n"; $strings++; }
-                $t[1] = $strings;
+                if (isset($stringsNames[$t[1]])) {
+                    $t[1] = $stringsNames[$t[1]];
+                } else {
+                    $stringsNames[$t[1]] = $strings;
+                    $t[1] = $stringsNames[$t[1]];
+                }
                 break;
             case T_DOC_COMMENT:
             case T_COMMENT:
@@ -61,7 +88,13 @@ foreach($tokens as $t) {
                 break;
 
             case T_INLINE_HTML : 
-                $t[1] = $strings++;
+                $strings++;
+                if (isset($stringsNames[$t[1]])) {
+                    $t[1] = $stringsNames[$t[1]];
+                } else {
+                    $stringsNames[$t[1]] = $strings;
+                    $t[1] = $stringsNames[$t[1]];
+                }
                 break;
 
             case T_ISSET : 
