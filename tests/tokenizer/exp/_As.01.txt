@@ -1,0 +1,33 @@
+<?php 
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    class
+    Label : NAME
+      B
+    Label : EXTENDS
+      C
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            F
+          Label : SUBNAME
+            E
+          Label : SUBNAME
+            D
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            as
+            Label : RIGHT
+              I
+            Label : LEFT
+              ::
+              Label : CLASS
+                F
+              Label : CONSTANT
+                H
