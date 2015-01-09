@@ -17,6 +17,9 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Typehint')
+             ->outIs('CLASS')
+             ->codeIsNot('array')
+             ->inIs('CLASS')
              ->outIs('VARIABLE')
              ->is('reference', 'true');
         $this->prepareQuery();
