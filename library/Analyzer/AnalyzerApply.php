@@ -27,7 +27,8 @@ class AnalyzerApply {
             $applyBelow = <<<GREMLIN
 
 x = it;
-applyBelowRoot.out.loop(1){true}{it.object.fullcode == x.fullcode}.each{ 
+// use code instead of fullcode (case of references!)
+applyBelowRoot.out.loop(1){true}{it.object.code == x.code}.each{ 
     g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); 
     it.setProperty('appliedBelow', true);
     c = c + 1;
