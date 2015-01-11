@@ -13,7 +13,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
-             ->raw('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}')
+             ->goToClass()
              ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").has("code", name).any()}')
              ->back('first');
         $this->prepareQuery();
@@ -26,7 +26,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
-             ->raw('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}')
+             ->goToClass()
              ->outIs('EXTENDS')
              ->classDefinition()
              ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").has("code", name).any()}')
@@ -41,7 +41,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
-             ->raw('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}')
+             ->goToClass()
              ->outIs('EXTENDS')
              ->classDefinition()
              ->outIs('EXTENDS')
@@ -58,7 +58,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('PROPERTY')
              ->outIsIE('VARIABLE')
              ->savePropertyAs('code', 'name')
-             ->raw('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}')
+             ->goToClass()
              ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").has("code", name).any()}')
              ->back('first');
         $this->prepareQuery();
@@ -72,7 +72,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('PROPERTY')
              ->outIsIE('VARIABLE')
              ->savePropertyAs('code', 'name')
-             ->raw('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}')
+             ->goToClass()
              ->outIs('EXTENDS')
              ->classDefinition()
              ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").has("code", name).any()}')
@@ -88,7 +88,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('PROPERTY')
              ->outIsIE('VARIABLE')
              ->savePropertyAs('code', 'name')
-             ->raw('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}')
+             ->goToClass()
              ->outIs('EXTENDS')
              ->classDefinition()
              ->outIs('EXTENDS')

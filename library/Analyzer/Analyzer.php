@@ -967,9 +967,9 @@ GREMLIN;
     // follows a link if it is there (and do nothing otherwise)
     protected function outIsIE($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod("transform{ if (it.out('".implode("', '", $edgeName)."').any()) { it.out('".implode("', '", $edgeName)."').next(); } else { it ;}}");
+            $this->addMethod("transform{ a = it; while (a.out('".implode("', '", $edgeName)."').any()) { a = a.out('".implode("', '", $edgeName)."').next(); }; a;}");
         } else {
-            $this->addMethod("transform{ if (it.out('$edgeName').any()) { it.out('$edgeName').next(); } else { it ;}}", $edgeName);
+            $this->addMethod("transform{ a = it; while (a.out('$edgeName').any()) { a = a.out('$edgeName').next(); };  a;}", $edgeName);
         }
         
         return $this;
@@ -1046,9 +1046,9 @@ GREMLIN;
     // follows a link if it is there (and do nothing otherwise)
     protected function inIsIE($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod("transform{ if (it.in('".implode("', '", $edgeName)."').any()) { it.in('".implode("', '", $edgeName)."').next(); } else { it ;}}");
+            $this->addMethod("transform{ a = it; while (a.in('$edgeName').any()) { a = a.in('$edgeName').next(); };  a;}", $edgeName);
         } else {
-            $this->addMethod("transform{ if (it.in('$edgeName').any()) { it.in('$edgeName').next(); } else { it ;}}", $edgeName);
+            $this->addMethod("transform{ a = it; while (a.in('$edgeName').any()) { a = a.in('$edgeName').next(); };  a;}", $edgeName);
         }
         
         return $this;
