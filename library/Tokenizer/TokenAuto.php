@@ -1214,6 +1214,9 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
     it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 
                                                     'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 
                                                     'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
+                                                    'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
+                                                    'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
+                                                    'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
                                                     'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
                                                     'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_DOT', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 
                                                     'T_ELSE', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR']) || (it.getProperty('atom') != null && it.atom != 'Parenthesis')}.any() && 
