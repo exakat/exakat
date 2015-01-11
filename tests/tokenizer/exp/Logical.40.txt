@@ -11,16 +11,16 @@ Label : CODE
         {
         Label : VARIABLE
           ->
-          Label : PROPERTY
-            E
           Label : OBJECT
             $c
+          Label : PROPERTY
+            E
         Label : INDEX
           ->
-          Label : PROPERTY
-            F
           Label : OBJECT
             $d
+          Label : PROPERTY
+            F
     Label : LEFT
       ==
       Label : RIGHT
@@ -29,13 +29,13 @@ Label : CODE
           void
           Label : ARGUMENT
             ->
-            Label : PROPERTY
-              D
             Label : OBJECT
               $b
+            Label : PROPERTY
+              D
       Label : LEFT
         ->
-        Label : PROPERTY
-          B
         Label : OBJECT
           $a
+        Label : PROPERTY
+          B

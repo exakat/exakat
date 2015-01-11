@@ -8,7 +8,7 @@ Label : CODE
       $x
     Label : RIGHT
       ->
-      Label : PROPERTY
-        z
       Label : OBJECT
         $y
+      Label : PROPERTY
+        z

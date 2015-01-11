@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Logical extends Tokenizer {
-    /* 42 methods */
+    /* 43 methods */
 
     public function testLogical01()  { $this->generic_test('Logical.01'); }
     public function testLogical02()  { $this->generic_test('Logical.02'); }
@@ -51,5 +51,6 @@ class Logical extends Tokenizer {
     public function testLogical40()  { $this->generic_test('Logical.40'); }
     public function testLogical41()  { $this->generic_test('Logical.41'); }
     public function testLogical42()  { $this->generic_test('Logical.42'); }
+    public function testLogical43()  { $this->generic_test('Logical.43'); }
 }
 ?>

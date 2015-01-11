@@ -3,19 +3,25 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    =
-    Label : LEFT
-      ->
-      Label : PROPERTY
-        B
-      Label : OBJECT
-        $a
+    or
     Label : RIGHT
-      or
-      Label : LEFT
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          J
+      Label : METHOD
+        K
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'L'
+    Label : LEFT
+      =
+      Label : RIGHT
         new
         Label : NEW
-          \C
+          \
           Label : SUBNAME
             C
           Label : ARGUMENTS
@@ -24,41 +30,35 @@ Label : CODE
               [
               Label : VARIABLE
                 ->
-                Label : PROPERTY
-                  D
                 Label : OBJECT
                   $b
+                Label : PROPERTY
+                  D
               Label : INDEX
                 'E'
             Label : ARGUMENT
               [
               Label : VARIABLE
                 ->
-                Label : PROPERTY
-                  F
                 Label : OBJECT
                   $c
+                Label : PROPERTY
+                  F
               Label : INDEX
                 'G'
             Label : ARGUMENT
               [
               Label : VARIABLE
                 ->
-                Label : PROPERTY
-                  H
                 Label : OBJECT
                   $d
+                Label : PROPERTY
+                  H
               Label : INDEX
                 'I'
-      Label : RIGHT
-        ::
-        Label : METHOD
-          K
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'L'
-        Label : CLASS
-          \
-          Label : SUBNAME
-            J
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          B

@@ -3,28 +3,6 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    =
-    Label : RIGHT
-      B
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $c
-      Label : INDEX
-        --
-        Label : PREPLUSPLUS
-          $d
-  Label : ELEMENT
-    &&
-    Label : RIGHT
-      H
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'I'
-    Label : LEFT
-      G
-  Label : ELEMENT
     while
     Label : CONDITION
       [
@@ -40,6 +18,16 @@ Label : CODE
         continue
         Label : LEVEL
           void
+  Label : ELEMENT
+    &&
+    Label : RIGHT
+      D
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'E'
+    Label : LEFT
+      C
   Label : ELEMENT
     while
     Label : CONDITION
@@ -69,13 +57,25 @@ Label : CODE
   Label : ELEMENT
     &&
     Label : RIGHT
-      D
+      H
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          'E'
+          'I'
     Label : LEFT
-      C
+      G
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      B
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $c
+      Label : INDEX
+        --
+        Label : PREPLUSPLUS
+          $d
   Label : ELEMENT
     =
     Label : RIGHT

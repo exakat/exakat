@@ -21,18 +21,18 @@ Label : CODE
                   F
           Label : OBJECT
             ::
-            Label : METHOD
-              d
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
             Label : CLASS
               \
               Label : SUBNAME
                 C
               Label : SUBNAME
                 B
+            Label : METHOD
+              d
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
         Label : LEFT
           ==
           Label : RIGHT

@@ -11,13 +11,13 @@ Label : CODE
           $d
         Label : LEFT
           instanceof
-          Label : RIGHT
+          Label : CLASS
             \
             Label : SUBNAME
               C
             Label : SUBNAME
               B
-          Label : LEFT
+          Label : VARIABLE
             $a
     Label : THEN
       {
