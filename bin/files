@@ -160,11 +160,11 @@ foreach($versions as $version) {
 }
 
 $stats['php'] = count($resFiles);
-$shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/php56tokens.sh'; // | awk \'{s+=$1} END {print s}\'
+$shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 sh scripts/phpnosot.sh'; // | awk \'{s+=$1} END {print s}\'
 $resultNosot = shell_exec($shell);
 $stats['tokens'] = (int) array_sum(explode("\n", $resultNosot));
 
-$shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/phpsot.sh '; //| awk \'{s+=$1} END {print s}\'
+$shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 sh scripts/phpsot.sh '; //| awk \'{s+=$1} END {print s}\'
 $resultSot = shell_exec($shell);
 $stats['tokenssot'] = (int) array_sum(explode("\n", $resultSot));
 
@@ -179,8 +179,9 @@ if ($stats['tokenssot'] != $stats['tokens']) {
     $shortOpenTag = array();
     foreach($nosot as $id => $count) {
         list($countNosot, $file) = explode(' ', $sot[$id]);
+        list($countSot, $file) = explode(' ', $nosot[$id]);
         
-        if ($countNosot != $count) {
+        if ($countNosot != $countSot) {
             $shortOpenTag[] = array('file' => $file);
         }
     }
