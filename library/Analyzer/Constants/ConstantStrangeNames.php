@@ -12,7 +12,11 @@ class ConstantStrangeNames extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs("String")
              ->analyzerIs("Analyzer\\Constants\\Constantnames")
-             ->regexNot('noDelimiter', '^[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*\\$');
+             ->regexNot('noDelimiter', '^(\\\\\\\\?)[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*\\$')
+             // simple constant name
+             ->regexNot('noDelimiter', '^(\\\\\\\\?)([a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*\\\\\\\\)+[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*\\$');
+             // \\\\\\\\ is equivalent to \\ (two slashes) in the final regex.
+        $this->prepareQuery();
     }
 }
 
