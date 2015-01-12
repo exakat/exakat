@@ -1399,7 +1399,7 @@ GREMLIN;
     }
 
     public function fetchContext() {
-        $this->addMethod('sideEffect{ context = [:]; it.in.loop(1){true}{it.object.atom in ["Namespace", "Function", "Class"]}.each{ context[it.atom] = it.out("NAME", "NAMESPACE").next().code; }}');
+        $this->addMethod('sideEffect{ context = [:]; it.in.loop(1){true}{it.object.atom in ["Namespace", "Function", "Class"]}.each{ if (it.atom == "Namespace") { context[it.atom] = it.out("NAMESPACE").next().fullcode; } else { context[it.atom] = it.out("NAME").next().code; } } }');
         
         return $this;
     }
