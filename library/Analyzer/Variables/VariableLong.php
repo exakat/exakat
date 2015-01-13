@@ -10,9 +10,10 @@ class VariableLong extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->analyzerIs('Analyzer\\Variables\\Variablenames')
              ->codeLength(" > 20 ");
+        $this->prepareQuery();
     }
 }
 

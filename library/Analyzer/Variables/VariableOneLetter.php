@@ -10,19 +10,18 @@ class VariableOneLetter extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->analyzerIs('Analyzer\\Variables\\Variablenames')
-             ->fullcodeLength(" == 2 ");
+             ->fullcodeLength(' == 2 ');
         $this->prepareQuery();
         
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->tokenIs('T_DOLLAR')
              ->analyzerIs('Analyzer\\Variables\\Variablenames')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
-             ->fullcodeLength(" == 1 ");
+             ->fullcodeLength(' == 1 ');
         $this->prepareQuery();
-        
     }
 }
 

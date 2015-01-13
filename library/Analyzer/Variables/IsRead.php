@@ -10,7 +10,7 @@ class IsRead extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
                            'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
                            'CASE', 'CLONE', 'FINAL', 'CLASS'));
@@ -18,27 +18,27 @@ class IsRead extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // $this is always read
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->code('$this');
         $this->prepareQuery();
              
 
         // right or left, same 
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->inIs(array('RIGHT', 'LEFT'))
              ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
              ->back('first');
         $this->prepareQuery();
 
         // right only
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->back('first');
         $this->prepareQuery();
 
         // $x++ + 2 (a plusplus within another 
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
              ->inIs(array('RIGHT', 'LEFT'))
              ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
@@ -46,28 +46,28 @@ class IsRead extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // variable in a sequence (also useless...)
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->inIs('ELEMENT')
              ->atomIs('Sequence')
              ->back('first');
         $this->prepareQuery();    
 
         // array only
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->inIs('VARIABLE')
              ->atomIs(array('Array', 'Arrayappend'))
              ->back('first');
         $this->prepareQuery();
 
         // arguments : Typehint
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->inIs('VARIABLE')
              ->atomIs(array('Typehint', 'Instanceof'))
              ->back('first');
         $this->prepareQuery();    
 
         // arguments : normal variable in a custom function
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -96,7 +96,7 @@ class IsRead extends Analyzer\Analyzer {
         }
         
         foreach($references as $position => $functions) {
-            $this->atomIs("Variable")
+            $this->atomIs('Variable')
                  ->is('rank', $position)
                  ->inIs('ARGUMENT')
                  ->inIs('ARGUMENTS')
@@ -108,14 +108,14 @@ class IsRead extends Analyzer\Analyzer {
             $this->prepareQuery();
         }
 
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->hasIn(array('ARGUMENT'))
              ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
              ->analyzerIsNot('Analyzer\\\\Variables\\\\IsRead');
         $this->prepareQuery();
 
         // Class constructors (__construct)
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -135,7 +135,7 @@ class IsRead extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // Class constructors with self
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')

@@ -11,10 +11,10 @@ class VariableVariables extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->analyzerIs('Analyzer\\Variables\\Variablenames')
-             ->tokenIs(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))
-             ;
+             ->tokenIs(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'));
+        $this->prepareQuery();
     }
 }
 

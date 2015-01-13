@@ -12,7 +12,7 @@ class WrittenOnlyVariable extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('BLOCK')
              ->atomInside('Variable')
              ->analyzerIs('Analyzer\\Variables\\IsModified')

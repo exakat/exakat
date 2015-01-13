@@ -10,9 +10,10 @@ class VariableNonascii extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->analyzerIs('Analyzer\\Variables\\Variablenames')
              ->regex('code', '[^a-zA-Z0-9\\$_]');
+        $this->prepareQuery();
     }
 }
 

@@ -6,7 +6,7 @@ use Analyzer;
 
 class References extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->is('reference', 'true');
         $this->prepareQuery();
     }

@@ -7,7 +7,7 @@ use Analyzer;
 class Arguments extends Analyzer\Analyzer {
     
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->inIs('ARGUMENT')
              ->atomIs('Arguments')
              ->inIs('ARGUMENTS')
@@ -18,7 +18,7 @@ class Arguments extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // with default value 
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->inIs('LEFT')
              ->inIs('ARGUMENT')
              ->atomIs('Arguments')
@@ -30,7 +30,7 @@ class Arguments extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // with typehint
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->inIs('VARIABLE')
              ->inIs('ARGUMENT')
              ->atomIs('Arguments')
@@ -42,7 +42,7 @@ class Arguments extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // with typehint and default value
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->inIs('LEFT')
              ->inIs('VARIABLE')
              ->inIs('ARGUMENT')

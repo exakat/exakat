@@ -9,12 +9,12 @@ class VariableUsedOnceByContext extends Analyzer\Analyzer {
     public function dependsOn() {
         return array('Analyzer\\Variables\\VariableUsedOnce',
                      'Analyzer\\Variables\\Variablenames',
-                     "Analyzer\\Variables\\InterfaceArguments",
+                     'Analyzer\\Variables\\InterfaceArguments',
                      );
     }
     
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->analyzerIs('Analyzer\\Variables\\Variablenames')
              ->analyzerIsNot("Analyzer\\Variables\\Blind")
              ->analyzerIsNot("Analyzer\\Variables\\InterfaceArguments")

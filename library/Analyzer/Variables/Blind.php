@@ -7,7 +7,7 @@ use Analyzer;
 class Blind extends Analyzer\Analyzer {
     
     public function analyze() {
-        $blinds = array("Variable", 'Staticproperty', 'Property', 'Array');
+        $blinds = array('Variable', 'Staticproperty', 'Property', 'Array');
         
 // foreach($source as $blind)
         $this->atomIs($blinds)
