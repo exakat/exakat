@@ -160,30 +160,42 @@ foreach($versions as $version) {
 }
 
 $stats['php'] = count($resFiles);
-$shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 sh scripts/phpnosot.sh'; // | awk \'{s+=$1} END {print s}\'
+$shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/phpnosot.sh'; // | awk \'{s+=$1} END {print s}\'
 $resultNosot = shell_exec($shell);
 $stats['tokens'] = (int) array_sum(explode("\n", $resultNosot));
 
-$shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 sh scripts/phpsot.sh '; //| awk \'{s+=$1} END {print s}\'
+$shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh scripts/phpsot.sh '; //| awk \'{s+=$1} END {print s}\'
 $resultSot = shell_exec($shell);
 $stats['tokenssot'] = (int) array_sum(explode("\n", $resultSot));
 
 $datastore->cleanTable('shortopentag');
 if ($stats['tokenssot'] != $stats['tokens']) {
     $nosot = explode("\n", trim($resultNosot));
+    $nosot2 = array();
+    foreach($nosot as $id => $value) {
+        list($count, $file) = explode(' ', $value);
+        $nosot2[$file] = $count;
+    }
+    $nosot = $nosot2;
+    unset($nosot2);
+
     $sot = explode("\n", trim($resultSot));
+    $sot2 = array();
+    foreach($sot as $id => $value) {
+        list($count, $file) = explode(' ', $value);
+        $sot2[$file] = $count;
+    }
+    $sot = $sot2;
+    unset($sot2);
     
     if (count($nosot) != count($sot)) { 
         die("Error in short open tag analyze\n");
     }
     $shortOpenTag = array();
-    foreach($nosot as $id => $count) {
-        list($countNosot, $file) = explode(' ', $sot[$id]);
-        list($countSot, $file) = explode(' ', $nosot[$id]);
-        
-        if ($countNosot != $countSot) {
-            $shortOpenTag[] = array('file' => $file);
-        }
+    foreach($nosot as $file => $countNoSot) {
+        if ($sot[$file] != $countNoSot) {
+            $shortOpenTag[] = array('file' => str_replace('./projects/'.$dir.'/code/', '', $file));
+        } 
     }
     
     $datastore->addRow('shortopentag', $shortOpenTag);
