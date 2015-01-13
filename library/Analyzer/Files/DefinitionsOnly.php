@@ -16,7 +16,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
         $definitionsList = '"'.implode('", "', self::$definitions).'"';
         $definitions = 'it.atom in ['.$definitionsList.', "Namespace"] || (it.atom == "Functioncall" && !(it.fullnspath in ["\\\\define", "\\\\set_session_handler", "\\\\set_error_handler"])) || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
         
-        $this->atomIs("File")
+        $this->atomIs('File')
              ->outIs('FILE')
              ->atomIs('Phpcode')
              ->outIs('CODE')
@@ -31,7 +31,6 @@ class DefinitionsOnly extends Analyzer\Analyzer {
              ->raw('filter{ it.out("ELEMENT").filter{ !('.$definitions.')}.any() == false}')
 
              ->back('first');
-//        $this->printQuery();
         $this->prepareQuery();
     }
 }

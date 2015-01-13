@@ -229,7 +229,7 @@ class Token {
     	} catch (\Exception $e) {
     	    $message = $e->getMessage();
     	    $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-    	    print "Exception : ".$message."\n";
+    	    print 'Exception : '.$message."\n";
     	    
     	    print $queryTemplate."\n";
     	    die(__METHOD__);

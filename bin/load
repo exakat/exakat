@@ -910,7 +910,7 @@ function process_file($filename, $logFile, $client) {
                                               ->save();
 
                 $previous->relateTo($T[$Tid], 'NEXT')->save();
-                $regexIndex["Arguments"]->relateTo($T[$Tid], 'INDEXED')->save();              
+                $regexIndex['Arguments']->relateTo($T[$Tid], 'INDEXED')->save();              
                 $previous = $T[$Tid];
                 
                 $Tid++;

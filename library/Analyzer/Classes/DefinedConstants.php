@@ -13,7 +13,7 @@ class DefinedConstants extends Analyzer\Analyzer {
     
     public function analyze() {
         // constants defined at the class level
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
              ->savePropertyAs('code', 'constante')
              ->back('first')
@@ -24,7 +24,7 @@ class DefinedConstants extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // constants defined at the interface level
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
              ->savePropertyAs('code', 'constante')
              ->back('first')
@@ -35,20 +35,20 @@ class DefinedConstants extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // constants defined in a class of an extension
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->outIs('CLASS')
              ->analyzerIs('Analyzer\\Classes\\IsExtClass')
              ->back('first');
         $this->prepareQuery();
 
         // constants defined in a class of an vendor library
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->analyzerIs('Analyzer\\Classes\\IsVendor')
              ->back('first');
         $this->prepareQuery();
 
         // constants defined at the parent level (one level)
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
              ->savePropertyAs('code', 'constante')
              ->back('first')
@@ -62,7 +62,7 @@ class DefinedConstants extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // constants defined at the interface level (one level)
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
              ->savePropertyAs('code', 'constante')
              ->back('first')
@@ -76,7 +76,7 @@ class DefinedConstants extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // constants defined at the interface level (several interfaces, one level)
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
              ->savePropertyAs('code', 'constante')
              ->back('first')
@@ -91,7 +91,7 @@ class DefinedConstants extends Analyzer\Analyzer {
         $this->prepareQuery();
         
         // constants defined at the interface level (level 2+)
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->outIs('CONSTANT')
              ->savePropertyAs('code', 'constante')
              ->back('first')
