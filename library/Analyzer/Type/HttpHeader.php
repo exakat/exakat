@@ -58,7 +58,7 @@ class HttpHeader extends Analyzer\Analyzer {
     );
 
     public function dependsOn() {
-        return array("Analyzer\\Type\\String");
+        return array('Analyzer\\Type\\String');
     }
     
     public function analyze() {

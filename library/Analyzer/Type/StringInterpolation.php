@@ -18,7 +18,6 @@ class StringInterpolation extends Analyzer\Analyzer {
              ;
         $this->prepareQuery();
     }
-
 }
 
 ?>

@@ -6,7 +6,7 @@ use Analyzer;
 
 class Ports extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Analyzer\\Type\\Integer");
+        return array('Analyzer\\Type\\Integer');
     }
     
     public function analyze() {
@@ -14,6 +14,7 @@ class Ports extends Analyzer\Analyzer {
         
         $this->atomIs('Integer')
              ->code(array_keys($ini['port']));
+        $this->prepareQuery();
     }
 }
 

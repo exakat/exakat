@@ -23,7 +23,7 @@ class UnicodeBlock extends Analyzer\Analyzer {
         return $report;
     }
 
-    public function toCountedArray($load = "it.fullcode") {
+    public function toCountedArray($load = 'it.fullcode') {
         $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\Type\\\\UnicodeBlock']].out.hasNot('unicode_block', null).groupCount(m){it.unicode_block}.cap"; 
         $vertices = $this->query($queryTemplate);
 

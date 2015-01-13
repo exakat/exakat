@@ -14,6 +14,7 @@ class HttpStatus extends Analyzer\Analyzer {
         
         $this->atomIs('Integer')
              ->code(array_keys($ini['code']));
+        $this->prepareQuery();
     }
 }
 

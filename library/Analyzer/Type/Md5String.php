@@ -6,7 +6,7 @@ use Analyzer;
 
 class Md5String extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("String");
+        return array('String');
     }
     
     public function analyze() {

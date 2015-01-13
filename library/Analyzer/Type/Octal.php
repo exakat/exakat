@@ -6,7 +6,7 @@ use Analyzer;
 
 class Octal extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Analyzer\\Type\\Integer");
+        return array('Analyzer\\Type\\Integer');
     }
     
     public function analyze() {

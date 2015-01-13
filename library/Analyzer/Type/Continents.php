@@ -14,6 +14,7 @@ class Continents extends Analyzer\Analyzer {
         
         $this->atomIs('String')
              ->fullcodeTrimmed(array_values($ini['continents_en']));
+        $this->prepareQuery();
     }
 }
 
