@@ -1304,7 +1304,7 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
     g.addEdge(sequence, next.out('NEXT').next(), 'NEXT');
     next.bothE('NEXT').each{ g.removeEdge(it); }
 
-//    next.setProperty('checkForNext', 'Next');
+    next.setProperty('checkForNext', 'Next');
     
     if (next.both('NEXT').count() == 0) {
         next.inE('INDEXED').each{ g.removeEdge(it); }
@@ -2152,7 +2152,7 @@ x.out('ELEMENT').each{
     
         $it.setProperty('rank', count);
         count++;
-//        $it.setProperty('makeSequence', 'both');
+        $it.setProperty('makeSequence', 'both');
         g.addEdge(sequence, $it, 'ELEMENT');
 
         $it.out('NEXT').out('ELEMENT').each{ 
@@ -2173,7 +2173,7 @@ x.out('ELEMENT').each{
               ($it.in('NEXT').next().block != 'true')) {
         sequence = $it.in('NEXT').next();
         $it.setProperty('rank', $it.in('NEXT').out('ELEMENT').count());
-//        $it.setProperty('makeSequence', 'in');
+        $it.setProperty('makeSequence', 'in');
 
         g.addEdge(sequence, $it.out('NEXT').next(), 'NEXT');
         g.addEdge($it.in('NEXT').next(), $it, 'ELEMENT');
@@ -2182,7 +2182,7 @@ x.out('ELEMENT').each{
     } else if ($it.out('NEXT').has('atom', 'Sequence').any()) {
         sequence = $it.out('NEXT').next();
         $it.setProperty('rank', 0);
-//        $it.setProperty('makeSequence', 'next');
+        $it.setProperty('makeSequence', 'next');
         sequence.out('ELEMENT').each{ it.setProperty('rank', it.rank + 1);}
 
         g.addEdge($it.out('NEXT').next(), $it, 'ELEMENT');
@@ -2197,7 +2197,7 @@ x.out('ELEMENT').each{
 
         g.addEdge(sequence, $it, 'ELEMENT');
         $it.setProperty('rank', 0);
-//        $it.setProperty('makeSequence', 'else');
+        $it.setProperty('makeSequence', 'else');
         
         if ($it.root == 'true') { 
             sequence.setProperty('root', 'true'); 
@@ -2255,7 +2255,6 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
 list_after = [
         'T_COMMA', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
         'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 
-        'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
         'T_PLUS', 'T_MINUS',
         'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_POW',
         'T_COLON', 'T_NEW', 'T_DOT', 
@@ -2271,6 +2270,7 @@ list_after_token = [
         'T_OBJECT_OPERATOR', 'T_INC', 'T_DEC', 
         'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
         'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
+        'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
         'T_AND_EQUAL', 'T_CONCAT_EQUAL', 
         'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_POW',
         'T_PLUS', 'T_MINUS',

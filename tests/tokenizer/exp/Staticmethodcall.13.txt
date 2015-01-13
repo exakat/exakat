@@ -1,0 +1,52 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    namespace
+    Label : BLOCK
+      makeSequence T_SEMICOLON
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            K
+          Label : SUBNAME
+            F
+        Label : METHOD
+          L
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'M'
+      Label : ELEMENT
+        class
+        Label : NAME
+          D
+        Label : EXTENDS
+          \
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            F
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            F
+          Label : SUBNAME
+            B
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        B
