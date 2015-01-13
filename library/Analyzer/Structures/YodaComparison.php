@@ -5,12 +5,6 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class YodaComparison extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array("MethodDefinition");
-    }
-    */
-    
     public function analyze() {
         $literals = array('String', 'Integer', 'Real', 'Boolean', 'Null', 'Identifier', 'Nsname');
         

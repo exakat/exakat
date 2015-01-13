@@ -5,12 +5,6 @@ namespace Analyzer\Variables;
 use Analyzer;
 
 class LostReferences extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array("MethodDefinition");
-    }
-    */
-    
     public function analyze() {
         $this->atomIs('Variable')
              ->is('reference', 'true')
@@ -25,7 +19,6 @@ class LostReferences extends Analyzer\Analyzer {
              ->outIs('RIGHT')
              ->is('reference', 'true')
              ->back('first');
-//        $this->printQuery();
         $this->prepareQuery();
     }
 }

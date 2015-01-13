@@ -5,12 +5,6 @@ namespace Analyzer\Constants;
 use Analyzer;
 
 class CreatedOutsideItsNamespace extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array("MethodDefinition");
-    }
-    */
-    
     public function analyze() {
         $this->atomIs('Functioncall')
              ->hasNoIn('Method')

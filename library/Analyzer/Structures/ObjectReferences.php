@@ -5,12 +5,6 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class ObjectReferences extends Analyzer\Analyzer {
-    /* Remove this is useless
-    public function dependsOn() {
-        return array("MethodDefinition");
-    }
-    */
-    
     public function analyze() {
         // f(stdclass &$x) 
         $this->atomIs('Function')
