@@ -577,6 +577,35 @@ add a detector for file extensions (using grep? )
 Remove the PPP from the index and give them another Atom (visibility)
 
 Unused use : inside a class, they are traits. 
+Double use : use with the current namespace ? 
 Check for unused Traits (extension or use somewhere).
 
 Change representation of Property, constant, methods, use in a class (remove ELEMENT, make it some other link to reduce long sequence scan)
+
+add support for composer (avoid some undefined classes, interfaces, etc.)
+
+call_user_func doesn't propage references 
+References are contagious ? 
+
+Spot PHP code in comments (separate script)
+
+Add analyzer that will search for a list of specific structures 
+
+Restore the old inventories ? 
+
+Spelling in structures names (interfaces, classes....)
+
+Spot if use script and / or web (or else ? ) 
+
+in compatibility, list for specific values in $_SERVER, list of extension (windows / unix) 
+
+Check that () are spoted as parenthesis for return, include, exit, die..., not as arguments
+
+if ($a = new ()) // constant condition si à gauche, c'est une constante. 
+
+for using ,
+						for ($currentMethod = null, $lineNumber = 1, $line = $this->adapter->fgets($srcFile); $line !== false; $lineNumber++, $line = $this->adapter->fgets($srcFile))
+
+case/default using ;
+
+Arguments extending another parent shouldn't get typehint .
