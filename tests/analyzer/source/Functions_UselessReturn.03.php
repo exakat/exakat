@@ -2,17 +2,15 @@
 
 class x {
     function __constructor() {
-        $a ++;
-        $b += 2;
-        return true;
+        $this->x = function() { return 1; };
     }
 
     function __destructor() {
-        return true;
+        $this->x = function() { return 2; };
     }
     
     function usableReturn() {
-        return true;
+        $this->x = function() { return 3; };
     }
 }
 

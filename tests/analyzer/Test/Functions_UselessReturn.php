@@ -8,8 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Functions_UselessReturn extends Analyzer {
-    /* 1 methods */
+    /* 3 methods */
 
     public function testFunctions_UselessReturn01()  { $this->generic_test('Functions_UselessReturn.01'); }
+    public function testFunctions_UselessReturn02()  { $this->generic_test('Functions_UselessReturn.02'); }
+    public function testFunctions_UselessReturn03()  { $this->generic_test('Functions_UselessReturn.03'); }
 }
 ?>
