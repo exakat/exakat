@@ -6,7 +6,8 @@ use Analyzer;
 
 class Haltcompiler extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Halt");
+        $this->atomIs('Halt');
+        $this->prepareQuery();
     }
 }
 
