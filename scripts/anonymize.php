@@ -176,11 +176,9 @@ foreach($tokens as $t) {
             case T_ELLIPSIS:
             case T_NS_SEPARATOR:
             case T_OBJECT_OPERATOR:
-            case T_REQUIRE_ONCE:
             case T_DIR:
             case T_STATIC:
             case T_VAR : 
-            case T_WHITESPACE:
             case T_OPEN_TAG:
             case T_CLOSE_TAG:
             case T_INSTANCEOF:
@@ -204,7 +202,6 @@ foreach($tokens as $t) {
 
             case T_FILE : 
             case T_CLASS_C : 
-            case T_DIR : 
             case T_FUNC_C : 
             case T_LINE : 
             case T_METHOD_C : 
