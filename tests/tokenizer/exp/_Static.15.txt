@@ -1,0 +1,48 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    new
+    Label : NEW
+      static
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          function
+          Label : NAME
+            
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $fulfill
+          Label : BLOCK
+            {
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $self
+  Label : ELEMENT
+    new
+    Label : NEW
+      static
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          function
+          Label : NAME
+            
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $fulfill
+          Label : BLOCK
+            {
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $self
+          Label : USE
+            void
+            Label : ARGUMENT
+              $self

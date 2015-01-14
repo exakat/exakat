@@ -19,6 +19,7 @@ class _Static extends TokenAuto {
 
     // class x { static public function x() }
         $this->conditions = array( 0 => array('token' => _Static::$operators),
+                                   1 => array('token' => array('T_PRIVATE', 'T_PUBLIC', 'T_PROTECTED')),
                                    2 => array('token' => array('T_FUNCTION')),
                                  );
         $this->actions = array('to_option' => 2,
