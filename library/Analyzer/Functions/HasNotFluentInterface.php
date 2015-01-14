@@ -10,7 +10,7 @@ class HasNotFluentInterface extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
              ->inIs('NAME')
@@ -21,7 +21,7 @@ class HasNotFluentInterface extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
              ->inIs('NAME')
@@ -34,7 +34,7 @@ class HasNotFluentInterface extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // no return == return null!
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
              ->inIs('NAME')

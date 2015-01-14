@@ -11,7 +11,7 @@ class HasFluentInterface extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->analyzerIsNot('Analyzer\\Functions\\HasNotFluentInterface')
              ->outIs('NAME')
              ->analyzerIs('Analyzer\\Classes\\MethodDefinition')

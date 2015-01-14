@@ -25,7 +25,7 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
         }
         
         foreach($argsMins as $nb => $f) {
-            $this->atomIs("Functioncall")
+            $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
                  ->fullnspath($f)
@@ -34,7 +34,7 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
         }
 
         foreach($argsMaxs as $nb => $f) {
-            $this->atomIs("Functioncall")
+            $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
                  ->fullnspath($f)
@@ -43,7 +43,7 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
         }
 
         // this is for custom functions 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->savePropertyAs('args_count', 'args_count')
@@ -54,7 +54,7 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->savePropertyAs('args_count', 'args_count')

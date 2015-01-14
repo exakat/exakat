@@ -6,11 +6,11 @@ use Analyzer;
 
 class Recursive extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("MethodDefinition");
+        return array('MethodDefinition');
     }
     
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->back('first')
@@ -19,8 +19,8 @@ class Recursive extends Analyzer\Analyzer {
              ->hasNoIn('METHOD')
              ->samePropertyAs('code', 'name', false)
              ->back('first')
-             ->outIs('NAME')
-             ;
+             ->outIs('NAME');
+        $this->prepareQuery();
     }
 }
 

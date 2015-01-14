@@ -6,7 +6,7 @@ use Analyzer;
 
 class UsedFunctions extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->raw('filter{ it.in("ELEMENT").in("BLOCK").has("atom", "Class").any() == false}')
              ->raw('filter{it.out("NAME").next().code != ""}')
              ->outIs('NAME')
@@ -23,7 +23,7 @@ class UsedFunctions extends Analyzer\Analyzer {
         // callable is in # position
         $positions = array(0, 1, 2, 3, 4, 5, 6);
         foreach($positions as $position) {
-            $this->atomIs("Functioncall")
+            $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->fullnspath($ini['functions'.$position])
@@ -38,7 +38,7 @@ class UsedFunctions extends Analyzer\Analyzer {
         }
 
         // callable is in last
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath($ini['functions_last'])
@@ -51,7 +51,7 @@ class UsedFunctions extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // callable is in 2nd to last
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath($ini['functions_2last'])
@@ -64,7 +64,7 @@ class UsedFunctions extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // actual search for the function in the callbacks
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->raw('filter{ f = it; g.idx("atoms")[["atom":"String"]].hasNot("fullnspath", null).filter{it.fullnspath == f.fullnspath; }.any()}');
         $this->prepareQuery();

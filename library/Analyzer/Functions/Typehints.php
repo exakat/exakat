@@ -6,8 +6,9 @@ use Analyzer;
 
 class Typehints extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Typehint")
+        $this->atomIs('Typehint')
              ->outIs('CLASS');
+        $this->prepareQuery();
     }
 }
 

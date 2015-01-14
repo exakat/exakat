@@ -6,7 +6,7 @@ use Analyzer;
 
 class RedeclaredPhpFunction extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Analyzer\\Functions\\Functionnames");
+        return array('Analyzer\\Functions\\Functionnames');
     }
     
     public function analyze() {
@@ -19,9 +19,9 @@ class RedeclaredPhpFunction extends Analyzer\Analyzer {
             }
         }
         
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
-             ->analyzerIs("Analyzer\\Functions\\Functionnames")
+             ->analyzerIs('Analyzer\\Functions\\Functionnames')
              ->code($extensionFunctions, true);
     }
 }

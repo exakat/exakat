@@ -7,7 +7,7 @@ use Analyzer;
 class LoopCalling extends Analyzer\Analyzer {
     public function analyze() {
         // loop of 2
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->back('first')
@@ -27,7 +27,7 @@ class LoopCalling extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // loop of 3
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->back('first')

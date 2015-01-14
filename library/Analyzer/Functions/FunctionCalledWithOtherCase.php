@@ -6,7 +6,7 @@ use Analyzer;
 
 class FunctionCalledWithOtherCase extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->inIsNot(array('NEW', 'METHOD'))
              ->savePropertyAs('code', 'name')
              ->functionDefinition()

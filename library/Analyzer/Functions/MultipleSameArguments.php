@@ -6,7 +6,7 @@ use Analyzer;
 
 class MultipleSameArguments extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->raw("filter{ it.out('ARGUMENTS').out('ARGUMENT').aggregate().groupCount(){
     if (it.atom == 'Typehint') { 
         if (it.out('VARIABLE').next().atom == 'Assignation') { 

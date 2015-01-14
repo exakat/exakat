@@ -7,7 +7,7 @@ use Analyzer;
 class KillsApp extends Analyzer\Analyzer {
     public function analyze() {
         // first round : only die and exit
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
@@ -17,7 +17,7 @@ class KillsApp extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // second round
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))

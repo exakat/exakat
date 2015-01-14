@@ -10,7 +10,7 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->analyzerIs('Analyzer\\Variables\\Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
@@ -22,7 +22,7 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
              ;
         $this->prepareQuery();
 
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->analyzerIs('Analyzer\\Variables\\Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')

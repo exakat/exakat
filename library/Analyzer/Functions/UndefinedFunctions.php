@@ -10,7 +10,7 @@ class UndefinedFunctions extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn(array('METHOD', 'NEW'))
              ->tokenIsNot(array('T_VARIABLE','T_OPEN_BRACKET'))
              ->analyzerIsNot('Analyzer\\Functions\\IsExtFunction')

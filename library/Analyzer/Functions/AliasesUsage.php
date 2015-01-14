@@ -10,10 +10,9 @@ class AliasesUsage extends Analyzer\Analyzer {
         $ini = $this->loadIni('aliases.ini');
         extract($ini);
 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->code(array_keys($ini['alias']));
-             
         $this->prepareQuery();
     }
 }

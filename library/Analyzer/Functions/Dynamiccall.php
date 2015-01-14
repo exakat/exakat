@@ -6,7 +6,7 @@ use Analyzer;
 
 class Dynamiccall extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->outIs('NAME')

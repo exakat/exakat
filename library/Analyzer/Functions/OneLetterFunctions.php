@@ -11,11 +11,11 @@ class OneLetterFunctions extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->analyzerIs('Analyzer\\Functions\\Functionnames')
              ->analyzerIsNot('Analyzer\\Classes\\Methoddefinition')
-             ->fullcodeLength(" == 1 ");
+             ->fullcodeLength(' == 1 ');
         $this->prepareQuery();
     }
 }

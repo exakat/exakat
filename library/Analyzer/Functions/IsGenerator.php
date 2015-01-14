@@ -6,7 +6,7 @@ use Analyzer;
 
 class IsGenerator extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('BLOCK')
              ->atomInside('Yield')
              ->back('first');

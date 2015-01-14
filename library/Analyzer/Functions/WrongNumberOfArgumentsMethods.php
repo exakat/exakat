@@ -23,7 +23,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
         
         // case for methods
         foreach($argsMins as $nb => $f) {
-            $this->atomIs(array("Methodcall", 'Staticmethodcall'))
+            $this->atomIs(array('Methodcall', 'Staticmethodcall'))
                  ->outIs('METHOD')
                  ->code($f)
                  ->isLess('count', $nb)
@@ -32,7 +32,7 @@ class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
         }
 
         foreach($argsMaxs as $nb => $f) {
-            $this->atomIs(array("Methodcall", 'Staticmethodcall'))
+            $this->atomIs(array('Methodcall', 'Staticmethodcall'))
                  ->outIs('METHOD')
                  ->code($f)
                  ->isMore('count', $nb)

@@ -6,8 +6,9 @@ use Analyzer;
 
 class Closures extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->is('lambda', 'true');
+        $this->prepareQuery();
     }
 }
 
