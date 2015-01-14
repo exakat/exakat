@@ -214,7 +214,7 @@ if (preg_match('/Mercurial Distributed SCM \(version ([0-9\.]+)\)/', $res, $r)) 
 foreach($stats as $section => $details) {
     print "$section : \n";
     foreach($details as $k => $v) {
-        print "    ".$k." : ".$v."\n";
+        print '    '.$k.' : '.$v."\n";
     }
     print "\n";
 }
