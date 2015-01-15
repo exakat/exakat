@@ -609,3 +609,23 @@ for using ,
 case/default using ;
 
 Arguments extending another parent shouldn't get typehint .
+
+$value is spotted as a used once value (exclude blin variable?)
+        foreach($this->project_config as &$value) {
+            if (is_array($value) && empty($value[0])) {
+                unset($value[0]);
+            }
+        }
+        unset($value);
+
+Spot equivalent concat (concat that are build different ways but are actually the name : 'a'.$a == "a$a";
+
+Never Used Properties : Check for static too! 
+
+Ignore auto-reference in arrayPreprocess
+            $row['code'] = $this->escapeString($row['code']);
+
+Compilation : Take into account configured version before reporting incompatible files (backward is not a pb)
+
+List error messages from the sources ? 
+(Translation, Explanation... Github document!)
