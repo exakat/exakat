@@ -8,7 +8,7 @@ class MethodDefinition extends Analyzer\Analyzer {
 
     public function analyze() {
         // class with one method only
-        $this->atomIs(array("Class", 'Trait'))
+        $this->atomIs(array('Class', 'Trait'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')

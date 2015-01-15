@@ -18,22 +18,22 @@ class Thread {
     }
     
     public function areAllFinished() {
-	    $w = null;
-    	$e = null;
-    	$pipes = $this->pipes;
-    	$n = stream_select($pipes, $w, $e, 0);
-    	
-    	if ($n > 0) {
-		    foreach($pipes as $id => $pipe) {
-		        $status = proc_get_status($this->process[$id]);
-		        if ($status['running'] === false) {
-		            unset($this->process[$id]);
-		            unset($this->pipes[$id]);
-		        }
-		    }
-    	}
-    	
-    	return count($this->process);
+        $w = null;
+        $e = null;
+        $pipes = $this->pipes;
+        $n = stream_select($pipes, $w, $e, 0);
+        
+        if ($n > 0) {
+            foreach($pipes as $id => $pipe) {
+                $status = proc_get_status($this->process[$id]);
+                if ($status['running'] === false) {
+                    unset($this->process[$id]);
+                    unset($this->pipes[$id]);
+                }
+            }
+        }
+        
+        return count($this->process);
     }
 
     public function waitForAll() {

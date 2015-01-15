@@ -1,7 +1,7 @@
 <?php
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Gremlin;
+    Everyman\Neo4j\Gremlin;
 
 class Stats {
     private $client = null;
