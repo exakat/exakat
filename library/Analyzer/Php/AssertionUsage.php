@@ -4,11 +4,11 @@ namespace Analyzer\Php;
 
 use Analyzer;
 
-class AssertionUsage extends Analyzer\Common\FunctionDefinition {
+class AssertionUsage extends Analyzer\Common\FunctionUsage {
     public function analyze() {
-        $this->atomIs("Functioncall")
-             ->code(array('assert', "assert_option"));
-        $this->prepareQuery();
+        $this->functions = array('assert', 'assert_option');
+        
+        parent::analyze();
     }
 }
 
