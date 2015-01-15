@@ -6,7 +6,8 @@ use Analyzer;
 
 class PhpinfoUsage extends Analyzer\Common\FunctionUsage {
     public function analyze() {
-        $this->functions = 'phpinfo';
+        $this->functions = array('phpinfo');
+
         parent::analyze();
     }
 }
