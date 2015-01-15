@@ -23,7 +23,7 @@ class CustomConstantUsage extends Analyzer\Analyzer {
                 print "No functions defined in $inifile\n";
             } else {
                 if (!empty($ini['constants'][0])) {
-                    $constants = array_merge($constants, array_map( function ($x) { return '\\'. strtolower($x); }, $ini['constants']));
+                    $constants = array_merge($constants, $this->makeFullNsPath($classes)($ini['constants']));
                 }
             }
         }

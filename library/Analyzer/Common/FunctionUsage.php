@@ -8,8 +8,13 @@ class FunctionUsage extends Analyzer\Analyzer {
     protected $functions = array();
     
     public function analyze() {
-        $this->atomIs("Functioncall")
-             ->code($this->functions, false);
+        $functions =  $this->makeFullNsPath($this->functions);
+        
+        $this->atomIs('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath($this->functions, false);
+        $this->prepareQuery();
     }
 }
 

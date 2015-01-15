@@ -26,7 +26,7 @@ class IsExtFunction extends Analyzer\Analyzer {
         }
         
         $functions = array_keys(array_count_values($functions));
-        $functions = array_map(function ($a) { return '\\'.strtolower($a); }, $functions);
+        $functions = $this->makeFullNsPath($functions);
         
         $this->atomIs('Functioncall')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))

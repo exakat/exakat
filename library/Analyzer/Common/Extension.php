@@ -45,7 +45,7 @@ class Extension extends Analyzer\Analyzer {
         }
         
         if (!empty($functions)) {
-            $functions = array_map(function ($x) { return "\\".$x; } ,  $functions);
+            $functions = $this->makeFullNsPath($functions);
             $this->atomIs("Functioncall")
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
@@ -61,7 +61,7 @@ class Extension extends Analyzer\Analyzer {
         }
 
         if (!empty($classes)) {
-            $classes = array_map(function ($x) { return "\\".strtolower($x); } ,  $classes);
+            $classes = $this->makeFullNsPath($classes);
 
             $this->atomIs('New')
                  ->outIs('NEW')
@@ -106,7 +106,7 @@ class Extension extends Analyzer\Analyzer {
                  ->code($interfaces);
             $this->prepareQuery();
 
-            $interfaces = array_map(function ($x) { return "\\".$x; } ,  $interfaces);
+            $interfaces = $this->makeFullNsPath($interfaces);
             $this->analyzerIs("Analyzer\\Interfaces\\InterfaceUsage")
                  ->fullcode($interfaces);
             $this->prepareQuery();
@@ -117,7 +117,7 @@ class Extension extends Analyzer\Analyzer {
                  ->code($namespaces);
             $this->prepareQuery();
 
-            $interfaces = array_map(function ($x) { return "\\".$x; } ,  $interfaces);
+            $interfaces = $this->makeFullNsPath($interfaces);
             $this->analyzerIs("Analyzer\\Namespaces\\NamespaceUsage")
                  ->fullcode($namespaces);
             $this->prepareQuery();

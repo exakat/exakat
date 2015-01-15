@@ -29,7 +29,7 @@ class IsExtTrait extends Analyzer\Analyzer {
             }
         }
 
-        $traits = array_map(function ($trait) { return '\\'.strtolower($trait); }, $traits);
+        $traits = $this->makeFullNsPath($traits)
         
         // no need to process anything!
         if (empty($traits)) { return true; } 

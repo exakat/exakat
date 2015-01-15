@@ -53,7 +53,7 @@ class ReservedNames extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // variables
-        $variablesReservedNames = array_map(function ($x) { return '$'.$x;}, $reservedNames);
+        $variablesReservedNames = $this->makeFullNsPath($reservedNames);
         $this->atomIs('Variable')
              ->code($variablesReservedNames);
         $this->prepareQuery();

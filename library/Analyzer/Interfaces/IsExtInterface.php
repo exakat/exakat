@@ -29,7 +29,7 @@ class IsExtInterface extends Analyzer\Analyzer {
             }
         }
 
-        $interfaces = array_map(function ($interface) { return '\\'.strtolower($interface); }, $interfaces);
+        $interfaces = $this->makeFullNsPath($interfaces);
         
         $this->analyzerIs("Analyzer\\Interfaces\\InterfaceUsage")
              ->fullnspath($interfaces);

@@ -48,16 +48,18 @@ class Analyzer {
 
     public function __construct($client) {
         $this->client = $client;
-        $this->analyzerIsNot(get_class($this));
+        $this->analyzer = get_class($this);
+        $this->analyzerQuoted = str_replace('\\', '\\\\', $this->analyzer);
+        $this->analyzerIsNot($this->analyzer);
 
-        $this->code = get_class($this);
+        $this->code = $this->analyzer;
         
         if (Analyzer::$docs === null) {
             Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
         }
         
         $this->apply = new AnalyzerApply();
-        $this->apply->setAnalyzer(get_class($this));
+        $this->apply->setAnalyzer($this->analyzer);
     } 
     
     public static function getClass($name) {
@@ -96,13 +98,13 @@ class Analyzer {
         }
     }
     
-    public static function getSuggestionClass($analyzer) {
+    public static function getSuggestionClass($name) {
         $list = glob('library/Analyzer/*/*.php');
         $r = array();
         foreach($list as $id => $c) {
             $c = substr($c, 17, -4);
             $c = str_replace('/', '_', $c);
-            $l = levenshtein($c, $analyzer);
+            $l = levenshtein($c, $name);
             if ($l < 8) {
                 $r[] = $c;
             }
@@ -122,7 +124,7 @@ class Analyzer {
     
     public function getDescription($lang = 'en') {
         if ($this->description === null) {
-            $filename = "./human/$lang/".str_replace("\\", "/", str_replace("Analyzer\\", "", get_class($this))).".ini";
+            $filename = "./human/$lang/".str_replace("\\", "/", str_replace("Analyzer\\", "", $this->analyzer)).".ini";
             
             if (!file_exists($filename)) {
                 $human = array();
@@ -139,13 +141,13 @@ class Analyzer {
             if (isset($human['name'])) {
                 $this->name = $human['name'];
             } else {
-                $this->name = get_class($this);
+                $this->name = $this->analyzer;
             }
 
             if (isset($human['appinfo'])) {
                 $this->appinfo = $human['appinfo'];
             } else {
-                $this->appinfo = get_class($this);
+                $this->appinfo = $this->analyzer;
             }
         }
         
@@ -219,13 +221,12 @@ class Analyzer {
             $this->query("g.createIndex('analyzers', Vertex)");
         }
         
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
-        $query = "g.idx('analyzers')[['analyzer':'$analyzer']]";
+        $query = "g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']]";
         $res = $this->query($query);
         
         if (isset($res[0]) && count($res[0]) == 1) {
             $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].outE('ANALYZED').each{
+g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']].outE('ANALYZED').each{
     g.removeEdge(it);
 }
 
@@ -234,9 +235,9 @@ GREMLIN;
         } else {
             $this->code = addslashes($this->code);
             $query = <<<GREMLIN
-x = g.addVertex(null, [analyzer:'$analyzer', analyzer:'true', line:0, description:'Analyzer index for $analyzer', code:'{$this->code}', fullcode:'{$this->code}',  atom:'Index', token:'T_INDEX']);
+x = g.addVertex(null, [analyzer:'{$this->analyzerQuoted}', analyzer:'true', line:0, description:'Analyzer index for {$this->analyzerQuoted}', code:'{$this->code}', fullcode:'{$this->code}',  atom:'Index', token:'T_INDEX']);
 
-g.idx('analyzers').put('analyzer', '$analyzer', x);
+g.idx('analyzers').put('analyzer', '{$this->analyzerQuoted}', x);
 
 GREMLIN;
             $this->query($query);
@@ -251,8 +252,7 @@ GREMLIN;
             return false;
         }
         
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
-         $query = "g.idx('analyzers')[['analyzer':'$analyzer']].count() == 1";
+        $query = "g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']].count() == 1";
         $res = $this->query($query);
         return (bool) $res[0][0];
     }
@@ -534,7 +534,7 @@ GREMLIN;
             $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any()}', $analyzer);
         } else {
             if ($analyzer == 'self') {
-                $analyzer = get_class($this);
+                $analyzer = $this->analyzer;
             }
             $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).any()}', $analyzer);
         }
@@ -548,7 +548,7 @@ GREMLIN;
             $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any() == false}', $analyzer);
         } else {
             if ($analyzer == 'self') {
-                $analyzer = get_class($this);
+                $analyzer = $this->analyzer;
             }
             $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).any() == false}', $analyzer);
         }
@@ -1553,7 +1553,7 @@ GREMLIN;
 
         $this->methods = array();
         $this->arguments = array();
-        $this->analyzerIsNot(get_class($this));
+        $this->analyzerIsNot($this->analyzer);
         
         return true;
     }
@@ -1581,8 +1581,7 @@ GREMLIN;
     }
     
     public function toArray() {
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
-        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out"; 
+        $queryTemplate = "g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']].out"; 
         $vertices = $this->query($queryTemplate);
 
         $report = array();
@@ -1596,7 +1595,7 @@ GREMLIN;
     }
 
     public function getArray() {
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
+        $analyzer = str_replace('\\', '\\\\', $this->analyzer);
         if (substr($analyzer, 0, 17) === 'Analyzer\\\\Files\\\\') {
             $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').as('line').as('filename').select{it.fullcode}{it.line}{it.fullcode}
@@ -1609,7 +1608,7 @@ GREMLIN;
         }
         $vertices = $this->query($query);
 
-        $analyzer = get_class($this);
+        $analyzer = $this->analyzer;
         $report = array();
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
@@ -1624,7 +1623,7 @@ GREMLIN;
     }
 
     public function toCountedArray($load = "it.fullcode") {
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
+        $analyzer = str_replace('\\', '\\\\', $this->analyzer);
         $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){{$load}}.cap"; 
         $vertices = $this->query($queryTemplate);
 
@@ -1663,7 +1662,7 @@ GREMLIN;
     }
     
     public function hasResults() {
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
+        $analyzer = str_replace('\\', '\\\\', $this->analyzer);
         $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out.count()"; 
         $vertices = $this->query($queryTemplate);
         
@@ -1675,11 +1674,11 @@ GREMLIN;
             Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
         }
         
-        return Analyzer::$docs->getSeverity(get_class($this));
+        return Analyzer::$docs->getSeverity($this->analyzer);
     }
 
     public function getFileList() {
-        $analyzer = str_replace('\\', '\\\\', get_class($this));
+        $analyzer = str_replace('\\', '\\\\', $this->analyzer);
         $queryTemplate = "m=[:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out('ANALYZED').in.loop(1){true}{it.object.atom == 'File'}.groupCount(m){it.filename}.iterate(); m;"; 
         $vertices = $this->query($queryTemplate);
         
@@ -1709,6 +1708,10 @@ GREMLIN;
 
     public function getphpConfiguration() {
         return $this->phpConfiguration;
+    }
+    
+    public function makeFullNsPath($functions) {
+        return array_map(function ($x) { return "\\".strtolower($x); },  $functions);
     }
 }
 ?>

@@ -13,7 +13,7 @@ class UnresolvedClasses extends Analyzer\Analyzer {
     public function analyze() {
         $classes = $this->loadIni('php_classes.ini');
         $classes = $classes['classes'];
-        $classes = array_map(function ($class) { return '\\'.strtolower($class); }, $classes);
+        $classes = $this->makeFullNsPath($classes);
         
         $this->atomIs("New")
              ->outIs('NEW')
