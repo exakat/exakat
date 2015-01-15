@@ -32,30 +32,25 @@ foreach($files as $file) {
 }
 
 function process_file($filename, $names) {
-    $return = array();
-
-    $return['name'] = substr(basename($filename), 0, -4);
-    $return['dir']  = basename(dirname($filename));
-    
     $analyzer = \Analyzer\Analyzer::getInstance($return['dir'].'/'.$return['name'], null);
 
-    // depends 
-    $return['dependsOn']  = implode(', ', $analyzer->dependsOn());
-    
+    $return = array(
+        'name'       => substr(basename($filename), 0, -4),
+        'dir'        => basename(dirname($filename)),
+
+    // depends     
+        'dependsOn'  => implode(', ', $analyzer->dependsOn()),
     // severity
-    $return['severity']  = $analyzer->getSeverity();
-
+        'severity'   => $analyzer->getSeverity(),
     // time
-    $return['timeToFix']  = $analyzer->getTimeToFix();
-
+        'timeToFix'  => $analyzer->getTimeToFix(),
     // phpversion
-    $return['phpversion']  = $analyzer->getPhpversion();
-
+        'phpversion' => $analyzer->getPhpversion(),
     // configuration
-    $return['phpconfiguration']  = $analyzer->getPhpconfiguration();
-
+        'phpconfiguration' => $analyzer->getPhpconfiguration(),
     // shortname
-    $return['shortname']  = in_array($return['name'], $names) > 1 ? 'No' : 'Yes';
+        'shortname' => in_array($return['name'], $names) > 1 ? 'No' : 'Yes'
+    );
     
     return $return;
 }
