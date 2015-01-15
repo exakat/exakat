@@ -38,7 +38,7 @@ class Test extends Premier {
             }
                 
             // defined here, but for later use
-            $definitions = new \Report\Content\Definitions($client);
+            $definitions = new \Report\Content\Definitions($this->client);
             $definitions->setAnalyzers($analyzes);
         }
         

@@ -1600,7 +1600,6 @@ GREMLIN;
             $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').as('line').as('filename').select{it.fullcode}{it.line}{it.fullcode}
 GREMLIN;
-            print $query;
         } else {
             $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].out.as('fullcode').in.loop(1){ it.object.token != 'T_FILENAME'}.as('file').back('fullcode').as('line').select{it.fullcode}{it.line}{it.fullcode}
