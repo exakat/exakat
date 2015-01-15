@@ -6,11 +6,11 @@ class useThis {
     }
 
     static public function nothingButStatic() {
-    
+        static::$a = 2;
     }
 
     public static function nothingButStatic2() {
-    
+        static::$b = 1;
     }
     
     function property() {
