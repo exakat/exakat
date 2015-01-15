@@ -629,3 +629,10 @@ Compilation : Take into account configured version before reporting incompatible
 
 List error messages from the sources ? 
 (Translation, Explanation... Github document!)
+
+Report a count : total count and count by analyzer (in a database for later merge?)
+
+Make a script to check for tabs, end of file, end of line, UTF8 compatibility, spaces at the end of the line
+
+Should have a parenthesis for readability
+		$this->checkMethod($methodName)->testMethods[$methodName]['ignore'] = $boolean == true;
