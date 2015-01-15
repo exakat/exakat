@@ -76,9 +76,9 @@ class _Switch extends TokenAuto {
         return <<<GREMLIN
 
 if (it.alternative == 'true') {
-    it.setProperty('fullcode', "switch (" + it.out("NAME").next().fullcode + ") : " + it.out("CASES").next().getProperty('fullcode') + ' endswitch'); 
+    it.setProperty('fullcode', "switch (" + it.out("NAME").next().fullcode + ") : " + it.out("CASES").next().getProperty('fullcode') + ' endswitch');
 } else {
-    it.setProperty('fullcode', "switch (" + it.out("NAME").next().fullcode + ") {" + it.out("CASES").next().getProperty('fullcode') + '} '); 
+    it.setProperty('fullcode', "switch (" + it.out("NAME").next().fullcode + ") {" + it.out("CASES").next().getProperty('fullcode') + '} ');
 
 }
 

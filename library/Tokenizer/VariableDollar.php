@@ -43,9 +43,9 @@ class VariableDollar extends TokenAuto {
 
 name = fullcode.out('NAME').next();
 if (fullcode.bracket == 'true') {
-    fullcode.fullcode = "\\\${" + name.fullcode + "}"; 
+    fullcode.fullcode = "\\\${" + name.fullcode + "}";
 } else {
-    fullcode.fullcode = "\\\$" + name.fullcode; 
+    fullcode.fullcode = "\\\$" + name.fullcode;
 }
 
 GREMLIN;

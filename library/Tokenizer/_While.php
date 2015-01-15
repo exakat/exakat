@@ -13,22 +13,22 @@ class _While extends TokenAuto {
                                    1 => array('token'     => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'      => 'yes'),
                                    3 => array('token'     => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('token'     => array('T_SEMICOLON', 'T_CLOSE_TAG'), 
+                                   4 => array('token'     => array('T_SEMICOLON', 'T_CLOSE_TAG'),
                                               'atom'      => 'none'),
         );
         
         $this->actions = array('addEdge'     => array(4 => array('Void' => 'LEVEL')),
                                'keepIndexed' => true,
                                'cleanIndex'  => true);
-        $this->checkAuto();        
+        $this->checkAuto();
 
-         //  syntax   While() $x++; 
+         //  syntax   While() $x++;
         $this->conditions = array( 0 => array('token'      => _While::$operators,
                                               'dowhile'   => 'false'),
                                    1 => array('token'      => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'       => 'yes'),
                                    3 => array('token'      => 'T_CLOSE_PARENTHESIS'),
-                                   4 => array('atom'       => 'yes', 
+                                   4 => array('atom'       => 'yes',
                                               'notAtom'    => 'Sequence'),
                                    5 => array('filterOut2' => Token::$instructionEnding),
         );
@@ -36,7 +36,7 @@ class _While extends TokenAuto {
         $this->actions = array('while_to_block' => true,
                                'keepIndexed'    => true
                                );
-        $this->checkAuto();      
+        $this->checkAuto();
         
          //  While( ) {}
        $this->conditions = array( 0 => array('token'   => _While::$operators,

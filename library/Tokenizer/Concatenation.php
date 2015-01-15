@@ -13,22 +13,22 @@ class Concatenation extends TokenAuto {
                           'Preplusplus', 'Postplusplus', 'Cast', 'Assignation', 'Nsname', 'Boolean', 'Null' );
         
         $this->conditions = array(-2 => array('filterOut' => array_merge(Addition::$operators, Multiplication::$operators,
-                                                                         Preplusplus::$operators, Power::$operators, 
-                                                            array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR'))), 
+                                                                         Preplusplus::$operators, Power::$operators,
+                                                            array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR'))),
                                   -1 => array('atom'  => $operands ),
                                    0 => array('token' => Concatenation::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => $operands),
-                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
+                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                                                                'T_OPEN_CURLY', 'T_OPEN_BRACKET'),
                                                                     Assignation::$operators, Preplusplus::$operators)),
-        ); 
+        );
         
         $this->actions = array('transform'    => array( 1 => 'CONCAT',
                                                        -1 => 'CONCAT'),
                                'rank'         => array( 1 => 1,
                                                        -1 => 0 ),
-                               'mergeNext'    => array('Concatenation' => 'CONCAT'), 
+                               'mergeNext'    => array('Concatenation' => 'CONCAT'),
                                'atom'         => 'Concatenation',
                                'cleanIndex'   => true,
                                'makeSequence' => 'clean',

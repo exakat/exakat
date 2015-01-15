@@ -45,13 +45,13 @@ class _Interface extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = "interface " + fullcode.out("NAME").next().code; 
+fullcode.fullcode = "interface " + fullcode.out("NAME").next().code;
 
 // extends
 fullcode.out("EXTENDS").each{ fullcode.fullcode = fullcode.fullcode + " extends " + it.fullcode;}
 
 /*
-fullcode.out("EXTENDS").each{ 
+fullcode.out("EXTENDS").each{
     extend = it;
     g.V.has('atom', 'Interface').filter{it.out('NAME').next().code == extend.code}.each{
         g.addEdge(it , extend, 'DEFINES');

@@ -9,7 +9,7 @@ class _Throw extends TokenAuto {
     public function _check() {
         $this->conditions = array(0 => array('token'     => _Throw::$operators,
                                              'atom'      => 'none'),
-                                  1 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall', 
+                                  1 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall',
                                                                   'Staticmethodcall', 'Staticproperty', 'Identifier', 'Assignation', 'Ternary')),
                                   2 => array('filterOut' => Token::$instructionEnding),
                                   );
@@ -24,7 +24,7 @@ class _Throw extends TokenAuto {
         $this->conditions = array(0 => array('token' => _Throw::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('atom'  => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall', 
+                                  2 => array('atom'  => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall',
                                                               'Staticmethodcall', 'Staticproperty', 'Identifier', 'Assignation')),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   );
@@ -44,7 +44,7 @@ class _Throw extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = "throw " + fullcode.out("THROW").next().fullcode; 
+fullcode.fullcode = "throw " + fullcode.out("THROW").next().fullcode;
 GREMLIN;
     }
 }

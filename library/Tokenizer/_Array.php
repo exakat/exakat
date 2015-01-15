@@ -5,7 +5,7 @@ namespace Tokenizer;
 class _Array extends TokenAuto {
     static public $operators = array('T_OPEN_BRACKET', 'T_OPEN_CURLY');
     static public $atom = 'Array';
-    static public $allowedObject = array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend', 
+    static public $allowedObject = array('Variable', 'Array', 'Property', 'Staticproperty', 'Arrayappend',
                                           'Functioncall', 'Methodcall', 'Staticmethodcall', 'String');
     
     public function _check() {
@@ -18,14 +18,14 @@ class _Array extends TokenAuto {
                                     3 => array('token' => array('T_OPEN_PARENTHESIS','T_OPEN_BRACKET', 'T_OPEN_CURLY')),
                                  );
         
-        $this->actions = array('transform'    => array(  -1 => 'VARIABLE', 
+        $this->actions = array('transform'    => array(  -1 => 'VARIABLE',
                                                           1 => 'INDEX',
                                                           2 => 'DROP'),
                                'atom'         => 'Array',
                                'cleanIndex'   => true,
                                'addToIndex'   => array('S_ARRAY' => 'S_ARRAY')
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         // $x[3] (and stop the indexation
         $this->conditions = array( -1 => array('atom'  => _Array::$allowedObject),
@@ -36,14 +36,14 @@ class _Array extends TokenAuto {
                                     3 => array('notToken' => array('T_OPEN_PARENTHESIS','T_OPEN_BRACKET', 'T_OPEN_CURLY')),
                                  );
         
-        $this->actions = array('transform'    => array(  -1 => 'VARIABLE', 
+        $this->actions = array('transform'    => array(  -1 => 'VARIABLE',
                                                           1 => 'INDEX',
                                                           2 => 'DROP'),
                                'atom'         => 'Array',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it',
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         // $x[3] // will loop for each dimension
         $this->conditions = array( -1 => array('atom'  => _Array::$allowedObject),
@@ -54,14 +54,14 @@ class _Array extends TokenAuto {
                                     3 => array('notToken' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY')),
                                  );
         
-        $this->actions = array('transform'    => array(  -1 => 'VARIABLE', 
+        $this->actions = array('transform'    => array(  -1 => 'VARIABLE',
                                                           1 => 'INDEX',
                                                           2 => 'DROP'),
                                'atom'         => 'Array',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it',
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }

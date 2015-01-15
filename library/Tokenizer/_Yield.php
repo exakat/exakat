@@ -25,7 +25,7 @@ class _Yield extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.setProperty('fullcode', "yield " + fullcode.out("YIELD").next().getProperty('fullcode')); 
+fullcode.setProperty('fullcode', "yield " + fullcode.out("YIELD").next().getProperty('fullcode'));
 GREMLIN;
     }
 }

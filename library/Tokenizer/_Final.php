@@ -13,7 +13,7 @@ class _Final extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 1,
                                'atom'      => 'Final');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // final class x { final private function x() }
         $this->conditions = array( 0 => array('token' => _Final::$operators),
@@ -22,7 +22,7 @@ class _Final extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 2,
                                'atom'      => 'Final');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // final class x { final private static function x() }
         $this->conditions = array( 0 => array('token' => _Final::$operators),
@@ -32,7 +32,7 @@ class _Final extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 3,
                                'atom'      => 'Final');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }

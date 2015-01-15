@@ -98,13 +98,13 @@ class TokenAuto extends Token {
 
         if (isset($actions['keepIndexed'])) {
             if (!$actions['keepIndexed']) { // true means All
-                $qactions[] = " 
+                $qactions[] = "
 /* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
 ";
-            } 
+            }
             unset($actions['keepIndexed']);
         } else {
-                $qactions[] = " 
+                $qactions[] = "
 /* Remove index links */  it.inE('INDEXED').each{ g.removeEdge(it); }
 ";
         }
@@ -112,7 +112,7 @@ class TokenAuto extends Token {
         if (isset($actions['cleansemicolon']) && $actions['cleansemicolon']) {
             $qactions[] = "
 /* cleansemicolon */
-    it.out('NEXT').has('code',';').has('atom', null).each{ 
+    it.out('NEXT').has('code',';').has('atom', null).each{
         g.addEdge(it.in('NEXT').next(), it.out('NEXT').next(), 'NEXT');
         g.removeEdge(it.inE('NEXT').next());
         g.removeEdge(it.outE('NEXT').next());
@@ -125,16 +125,16 @@ class TokenAuto extends Token {
          if (isset($actions['transfert'])) {
             list(, $where) = each($actions['transfert']);
             $next = str_repeat(".out('NEXT')", $where);
-            $qactions[] = " 
-/* transfert property root away  */  
-it.has('root', 'true')$next.each{ 
+            $qactions[] = "
+/* transfert property root away  */
+it.has('root', 'true')$next.each{
     it.setProperty('root', 'true');
     it.setProperty('test', 'true');
 }
 it.setProperty('root', 'null');
                 ";
             unset($actions['transfert']);
-        }                        
+        }
 
         if (isset($actions['atom'])) {
             if (is_string($actions['atom'])) {
@@ -167,7 +167,7 @@ it.setProperty('root', 'null');
 
         if (isset($actions['propertyNext'])) {
             if (is_array($actions['propertyNext']) && !empty($actions['propertyNext'])) {
-                $qactions[] = " /* propertyNext */   
+                $qactions[] = " /* propertyNext */
 fullcode = it.out('NEXT').next(); \n";
                 foreach($actions['propertyNext'] as $name => $value) {
                     if (substr($value, 0, 3) == 'it.') {
@@ -194,7 +194,7 @@ fullcode.setProperty('$name', $value)";
                 $qactions[] = " /* rank */ $d.setProperty('rank', $rank);";
             }
             unset($actions['rank']);
-        }        
+        }
 
         if (isset($actions['add_void'])) {
             foreach($actions['add_void'] as $destination => $label) {
@@ -233,7 +233,7 @@ token = it.token;
 
 root = g.addVertex(null, [code:'Sequence', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line, fullcode:';']);
 
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), root, 'INDEXED');   
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), root, 'INDEXED');
 
 arg.out('ARGUMENT').filter{it.atom in ['Variable']}.each{
     ppp = g.addVertex(null, [code:'ppp', atom:'Ppp', token:token, virtual:true, line:it.line, fullcode:'ppp (to_var_new)']);
@@ -349,7 +349,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     g.removeEdge(it.outE('LEFT').next());
     g.removeEdge(it.outE('RIGHT').next());
     
-    g.idx('delete').put('node', 'delete', it);   
+    g.idx('delete').put('node', 'delete', it);
 }
 
 g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
@@ -446,7 +446,7 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
     atom2 = g.addVertex(null, [code:arg2.code, atom:'$atom2', token:arg2.token, virtual:true, line:it.line, fullcode:arg2.code]);
     g.addEdge(ppp, atom2, arg2.code.toUpperCase());
     
-    g.idx('delete').put('node', 'delete', it);   
+    g.idx('delete').put('node', 'delete', it);
 }
 g.addEdge(root, var.out('NEXT').out('NEXT').next(), 'NEXT');
 g.removeEdge(var.out('NEXT').outE('NEXT').next());
@@ -479,7 +479,7 @@ g.removeVertex(arg2);
     g.addEdge(it, end, 'NEXT');
     g.addEdge(it, a2, link);
     
-    g.idx('delete').put('node', 'delete', a1);   
+    g.idx('delete').put('node', 'delete', a1);
 
 ";
             unset($actions['to_use_const']);
@@ -501,7 +501,7 @@ if (it.out('NEXT').next().token in ['T_CONST', 'T_FUNCTION']) {
     it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
     g.addEdge(it, arg, 'NEXT');
     
-    g.idx('delete').put('node', 'delete', extra);   
+    g.idx('delete').put('node', 'delete', extra);
 } else {
     link = 'USE';
 }
@@ -518,7 +518,7 @@ d = it.out('NEXT').out('NEXT').next();
 it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
 
 g.addEdge(var, d, 'NEXT');
-g.idx('delete').put('node', 'delete', arg);   
+g.idx('delete').put('node', 'delete', arg);
 
 ";
             unset($actions['to_use']);
@@ -541,7 +541,7 @@ next = block.out('NEXT').next();
 block.bothE('NEXT').each{ g.removeEdge(it); }
 g.addEdge(var, block, 'BLOCK');
 
-g.idx('delete').put('node', 'delete', arg);   
+g.idx('delete').put('node', 'delete', arg);
 it.outE('NEXT').each{ g.removeEdge(it); }
 
 g.addEdge(var, next, 'NEXT');
@@ -571,8 +571,8 @@ g.removeEdge(block.outE('NEXT').next());
 
 op.bothE('NEXT').each{ g.removeEdge(it); }
 cp.bothE('NEXT').each{ g.removeEdge(it); }
-g.idx('delete').put('node', 'delete', op);   
-g.idx('delete').put('node', 'delete', cp);   
+g.idx('delete').put('node', 'delete', op);
+g.idx('delete').put('node', 'delete', cp);
 
 ";
             unset($actions['to_lambda']);
@@ -588,7 +588,7 @@ g.addEdge(it, x, 'NAME');
 it.setProperty('lambda', 'true');
 
 x = it.out('NEXT').next();
-g.idx('delete').put('node', 'delete', x);   
+g.idx('delete').put('node', 'delete', x);
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
 
 x = x.out('NEXT').next();
@@ -597,30 +597,30 @@ g.addEdge(it, x, 'ARGUMENTS');
 
 x = x.out('NEXT').next();
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-g.idx('delete').put('node', 'delete', x);   
+g.idx('delete').put('node', 'delete', x);
 
 x = x.out('NEXT').next();
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
 x.inE('INDEXED').each{ g.removeEdge(it); }
-g.idx('delete').put('node', 'delete', x);   
+g.idx('delete').put('node', 'delete', x);
 
 x = x.out('NEXT').next();
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-g.idx('delete').put('node', 'delete', x);   
+g.idx('delete').put('node', 'delete', x);
 
 x = x.out('NEXT').next();
 g.addEdge(it, x, 'USE');
 
 x = x.out('NEXT').next();
 x.in('NEXT').outE('NEXT').each{ g.removeEdge(it); }
-g.idx('delete').put('node', 'delete', x);   
+g.idx('delete').put('node', 'delete', x);
 
 x = x.out('NEXT').next();
 g.addEdge(it, x, 'BLOCK');
 
 x = x.out('NEXT').next();
 g.removeEdge(x.inE('NEXT').next());
-g.addEdge(it, x, 'NEXT');   
+g.addEdge(it, x, 'NEXT');
 
 ";
             unset($actions['to_lambda_use']);
@@ -688,7 +688,7 @@ fullcode = ppp;
 $fullcode
 ";
             unset($actions['to_option']);
-        }    
+        }
         
         if (isset($actions['to_ppp_assignation'])) {
             $token = new _Ppp(Token::$client);
@@ -728,13 +728,13 @@ $fullcode
         }
         
         if (isset($actions['transform'])) {
-            $c = 0; 
+            $c = 0;
             
             foreach($actions['transform'] as $destination => $label) {
                 if ($label == 'NONE') { continue; }
 
                 // Destination > 0
-                if ($destination > 0) { 
+                if ($destination > 0) {
                     $c++;
                 
                     if ($label == 'DROP') {
@@ -786,7 +786,7 @@ b$d.bothE('NEXT').each{ g.removeEdge(it); }
 a = it.in('NEXT').next();
 b = it.out('NEXT').next();
 
-it.bothE('NEXT').each{    g.removeEdge(it); } 
+it.bothE('NEXT').each{    g.removeEdge(it); }
 it.inE('INDEXED').each{ g.removeEdge(it); }
 
 g.removeVertex(it);
@@ -840,7 +840,7 @@ g.addEdge(it, assignation.out('NEXT').next(), 'NEXT');
 assignation.bothE('NEXT').each{ g.removeEdge(it); }
 g.removeVertex(assignation);
 
-"; 
+";
             unset($actions['to_const_assignation']);
         }
         
@@ -854,17 +854,17 @@ g.removeVertex(assignation);
 
 sequence = g.addVertex(null, [code:';', fullcode:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
 
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');   
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');
 
 fullcode = sequence;
 $fullCodeSequence
 
 _const = it;
-arg = _const.out('NEXT').next(); 
+arg = _const.out('NEXT').next();
 
 g.addEdge(_const.in('NEXT').next(), sequence, 'NEXT');
 g.addEdge(sequence, _const.out('NEXT').out('NEXT').out('NEXT').next(), 'NEXT');
-g.idx('delete').put('node', 'delete', _const.out('NEXT').out('NEXT').next());   
+g.idx('delete').put('node', 'delete', _const.out('NEXT').out('NEXT').next());
 
 g.removeEdge(_const.out('NEXT').out('NEXT').outE('NEXT').next());
 g.removeEdge(_const.out('NEXT').outE('NEXT').next());
@@ -889,14 +889,14 @@ arg.out('ARGUMENT').has('atom', 'Assignation').each{
 
     $fullcode
     
-    g.idx('delete').put('node', 'delete', it);   
+    g.idx('delete').put('node', 'delete', it);
 
 }
 
-g.idx('delete').put('node', 'delete', arg);   
-g.idx('delete').put('node', 'delete', it);   
+g.idx('delete').put('node', 'delete', arg);
+g.idx('delete').put('node', 'delete', it);
 
-"; 
+";
             unset($actions['to_const']);
 }
 
@@ -906,10 +906,10 @@ g.idx('delete').put('node', 'delete', it);
 
             $qactions[] = "
 
-/* createSequenceForCaseWithoutSemicolon */ 
+/* createSequenceForCaseWithoutSemicolon */
 x = g.addVertex(null, [code:'Block with Sequence For Case Without Semicolon', fullcode:'Block with Sequence For Case Without Semicolon', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
 
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');
 
 fullcode = x;
 $fullcode
@@ -935,7 +935,7 @@ if (a.out('ELEMENT').count() > 0) {
 
 if (b.out('ELEMENT').count() > 0) {
     b.out('ELEMENT').each{
-        it.setProperty('rank', it.rank + rank); 
+        it.setProperty('rank', it.rank + rank);
         it.inE('ELEMENT').each{ g.removeEdge(it);}
         g.addEdge(x, it, 'ELEMENT');
     }
@@ -956,11 +956,11 @@ a.bothE('NEXT').each{ g.removeEdge(it) ; }
 b.outE('NEXT').each{ g.removeEdge(it) ; }
 ";
             unset($actions['createSequenceForCaseWithoutSemicolon']);
-        }        
+        }
 
         if (isset($actions['makeNamespace'])) {
-            $qactions[] = " 
-/* makeNamespace */  
+            $qactions[] = "
+/* makeNamespace */
 
 p = it;
 nsname = it;
@@ -1002,17 +1002,17 @@ while(p.getProperty('token') == 'T_NS_SEPARATOR') {
 
 ";
             unset($actions['makeNamespace']);
-        }    
+        }
         
         if (isset($actions['createSequenceForDefaultWithoutSemicolon'])) {
             $sequence = new Sequence(Token::$client);
             $fullcode = $sequence->fullcode();
             $qactions[] = "
 
-/* createSequenceForDefaultWithoutSemicolon */ 
+/* createSequenceForDefaultWithoutSemicolon */
 x = g.addVertex(null, [code:'Block with Sequence For Default Without Semicolon', fullcode:'Block with Sequence For Default Without Semicolon', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
 
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');
 
 fullcode = x;
 $fullcode
@@ -1038,7 +1038,7 @@ if (a.out('ELEMENT').count() > 0) {
 
 if (b.out('ELEMENT').count() > 0) {
     b.out('ELEMENT').each{
-        it.setProperty('rank', it.rank + rank); 
+        it.setProperty('rank', it.rank + rank);
         it.inE('ELEMENT').each{ g.removeEdge(it);}
         g.addEdge(x, it, 'ELEMENT');
     }
@@ -1058,7 +1058,7 @@ b.setProperty('rank', 1);
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
 b.outE('NEXT').each{ g.removeEdge(it) ; }
 
-// remove the next, if this is a ; 
+// remove the next, if this is a ;
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
@@ -1069,7 +1069,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 
 ";
             unset($actions['createSequenceForDefaultWithoutSemicolon']);
-        }        
+        }
         
 if (isset($actions['to_void'])) {
             $qactions[] = "
@@ -1085,7 +1085,7 @@ semicolon.setProperty('fullcode', ' ');
 
 ";
             unset($actions['to_void']);
-        } 
+        }
 
 if (isset($actions['insertVoid'])) {
     $out = str_repeat(".out('NEXT')", $actions['insertVoid']);
@@ -1104,11 +1104,11 @@ g.addEdge(x, f, 'NEXT');
 
 ";
             unset($actions['insertVoid']);
-        } 
+        }
         
         if (isset($actions['to_block'])) {
-            $qactions[] = " 
-/* to_block */ 
+            $qactions[] = "
+/* to_block */
 
 it.setProperty('block', 'true');
 next = it.out('NEXT').next();
@@ -1141,18 +1141,18 @@ if (next.atom == 'Sequence') {
 
 ";
             unset($actions['to_block']);
-        }           
+        }
 
         if (isset($actions['to_block_for']) && $actions['to_block_for']) {
             $sequence = new Block(Token::$client);
             $fullcode = $sequence->fullcode();
 
-            $qactions[] = " 
-/* to_block_for */ 
+            $qactions[] = "
+/* to_block_for */
 
 x = g.addVertex(null, [code:'Block with For', fullcode:'Block with For', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, block:'true' ]);
 
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');
 
 fullcode = x;
 $fullcode
@@ -1165,7 +1165,7 @@ g.addEdge(x, a, 'ELEMENT');
 a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
-// remove the next, if this is a ; 
+// remove the next, if this is a ;
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
@@ -1207,26 +1207,26 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
 /* Check for Next */
 
 // lone instruction BEFORE
-while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try', 
-                                                        'Ternary', 'While', 'Assignation', 'Switch', 'Use', 'Label', 'Array', 
-                                                        'Postplusplus', 'Preplusplus', 'Return', 'Class', 'Phpcode', 'Functioncall' ] && 
-                                      it.getProperty('token') != 'T_ELSEIF'}.any() && 
-    it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 
-                                                    'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 
+while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try',
+                                                        'Ternary', 'While', 'Assignation', 'Switch', 'Use', 'Label', 'Array',
+                                                        'Postplusplus', 'Preplusplus', 'Return', 'Class', 'Phpcode', 'Functioncall' ] &&
+                                      it.getProperty('token') != 'T_ELSEIF'}.any() &&
+    it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL',
+                                                    'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL',
                                                     'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
                                                     'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
                                                     'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
                                                     'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
                                                     'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
-                                                    'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_DOT', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 
-                                                    'T_ELSE', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR']) || (it.getProperty('atom') != null && it.atom != 'Parenthesis')}.any() && 
-    !it.in('NEXT').in('NEXT').filter{ it.token == 'T_COLON' && it.association == 'Ternary' }.any() 
+                                                    'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_DOT', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
+                                                    'T_ELSE', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR']) || (it.getProperty('atom') != null && it.atom != 'Parenthesis')}.any() &&
+    !it.in('NEXT').in('NEXT').filter{ it.token == 'T_COLON' && it.association == 'Ternary' }.any()
                                                     ) {
 
     sequence = it;
     previous = it.in('NEXT').next();
 
-    sequence.out('ELEMENT').each{ 
+    sequence.out('ELEMENT').each{
         it.setProperty('rank', it.rank + 1);
     }
     g.addEdge(sequence, previous, 'ELEMENT');
@@ -1245,7 +1245,7 @@ while ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any(
     sequence = it;
     previous = it.in('NEXT').next();
     
-    sequence.out('ELEMENT').each{ 
+    sequence.out('ELEMENT').each{
         it.setProperty('rank', it.rank + 1);
     }
     g.addEdge(sequence, previous, 'ELEMENT');
@@ -1280,10 +1280,10 @@ while (it.out('NEXT').has('atom', 'Sequence').any()) {
 }
 
 // lone instruction AFTER
-while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach', 
+while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach',
                                        'Dowhile', 'Try', 'Class', 'Interface', 'Trait', 'While', 'Break', 'Assignation', 'Halt',
                                        'Staticmethodcall', 'Namespace', 'Label', 'Postplusplus', 'Preplusplus', 'Include', 'Functioncall',
-                                       'Methodcall', 'Variable', 'Label', 'Goto', 'Static', 'New', 'Void', 'Identifier' ] && 
+                                       'Methodcall', 'Variable', 'Label', 'Goto', 'Static', 'New', 'Void', 'Identifier' ] &&
                                        it.token != 'T_ELSEIF' }.any() &&
     it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_FINALLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' ,
                                                      'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
@@ -1292,7 +1292,7 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
                                                      'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_INSTANCEOF', 'T_QUESTION', 'T_COLON'])}.
                                filter{it.atom != null || !(it.token in ['T_ELSEIF', 'T_OPEN_CURLY', 'T_AND_EQUAL',
                                                      'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL',
-                                                     'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 
+                                                     'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL',
                                                      'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL',
                                                      'T_SR_EQUAL'])}.any()) {
     sequence = it;
@@ -1309,7 +1309,7 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
     if (next.both('NEXT').count() == 0) {
         next.inE('INDEXED').each{ g.removeEdge(it); }
     }
-} 
+}
 
 while (it.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).any()) {
     semicolon = it.out('NEXT').next();
@@ -1340,7 +1340,7 @@ g.addEdge(it, x, 'NEXT');
 
 ";
             unset($actions['insertGlobalNs']);
-        }           
+        }
         
         if (isset($actions['to_specialmethodcall'])) {
             $qactions[] = "
@@ -1379,7 +1379,7 @@ g.addEdge(it, suivant, 'NEXT');
 
 ";
             unset($actions['to_specialmethodcall']);
-        } 
+        }
         
         if (isset($actions['insert_ns'])) {
             $qactions[] = "
@@ -1400,7 +1400,7 @@ g.addEdge(it, end, 'NEXT');
 
 ";
             unset($actions['insert_ns']);
-        }      
+        }
         
         if (isset($actions['insert_ns_void'])) {
             $qactions[] = "
@@ -1421,11 +1421,11 @@ g.addEdge(it, a3, 'NEXT');
 
 ";
             unset($actions['insert_ns_void']);
-        }           
+        }
         if (isset($actions['sign'])) {
             $qactions[] = "
 /* Sign the integer */
-if (it.code == '-') { 
+if (it.code == '-') {
     it.setProperty('code', '-' + it.out('NEXT').next().code);
 //    it.setProperty('code', - Integer.parseInt(it.out('NEXT').next().code));
 } else {
@@ -1439,7 +1439,7 @@ g.addEdge(it, nextnext, 'NEXT');
 
 ";
             unset($actions['sign']);
-        }           
+        }
 
         if (isset($actions['to_catch'])) {
             $fullcode = $this->fullcode();
@@ -1459,7 +1459,7 @@ $fullcode
 
 ";
             unset($actions['to_catch']);
-        }           
+        }
 
         if (isset($actions['to_typehint'])) {
             $fullcode = $this->fullcode();
@@ -1474,23 +1474,23 @@ g.addEdge(a.in('NEXT').next(), x, 'NEXT');
 g.addEdge(x, a.out('NEXT').out('NEXT').next(), 'NEXT');
 
 g.addEdge(x, a, 'CLASS');
-a.has('token', 'T_ARRAY').each{ 
-    it.setProperty('atom', 'Identifier'); 
-    it.setProperty('fullcode', it.code); 
+a.has('token', 'T_ARRAY').each{
+    it.setProperty('atom', 'Identifier');
+    it.setProperty('fullcode', it.code);
 }
 g.addEdge(x, a.out('NEXT').next(), 'VARIABLE');
 
-a.out('NEXT').bothE('NEXT').each{ g.removeEdge(it);}    
-a.bothE('NEXT').each{ g.removeEdge(it);}    
+a.out('NEXT').bothE('NEXT').each{ g.removeEdge(it);}
+a.bothE('NEXT').each{ g.removeEdge(it);}
 
-/* Remove children's index */  
-x.outE.hasNot('label', 'NEXT').inV.each{ 
-    it.inE('INDEXED').each{    
+/* Remove children's index */
+x.outE.hasNot('label', 'NEXT').inV.each{
+    it.inE('INDEXED').each{
         g.removeEdge(it);
-    } 
+    }
 }
 
-/* indexing */  
+/* indexing */
     g.idx('atoms').put('atom', 'Typehint', x);
 
 fullcode = x;
@@ -1498,7 +1498,7 @@ $fullcode
 ";
             $this->setAtom = true;
             unset($actions['to_typehint']);
-        }              
+        }
         
         if (isset($actions['fullcode'])) {
             $this->setAtom = true;
@@ -1525,9 +1525,9 @@ g.addEdge(x, it.out('NEXT').next(), '$link');
 g.removeEdge(it.outE('NEXT').next());
 g.removeEdge(x.out('$link').outE('NEXT').next());
 
-x.out('$link').inE('INDEXED').each{    
+x.out('$link').inE('INDEXED').each{
     g.removeEdge(it);
-} 
+}
 
 fullcode = x;
 $fullcode
@@ -1575,7 +1575,7 @@ g.addEdge(f, x, 'NEXT');
                 $next = str_repeat(".out('NEXT')", $destination - 1);
                 
                 $qactions[] = "
-/* addEdge out $destination */ 
+/* addEdge out $destination */
 x = g.addVertex(null, [code:'void', token:'T_VOID', atom:'$atom', virtual:true, line:it.line, fullcode:' ']);
 
 a = it$next.next();
@@ -1595,8 +1595,8 @@ g.addEdge(x, b, 'NEXT');
         
         if (isset($actions['mergeNext']) && $actions['mergeNext']) {
             foreach($actions['mergeNext'] as $atom => $link) {
-                $qactions[] = " 
-/* mergeNext */ 
+                $qactions[] = "
+/* mergeNext */
 
 c = it.out('$link').has('rank', 0).has('atom', '$atom').count();
 d = it.out('$link').has('rank', 1).has('atom', '$atom').count();
@@ -1676,12 +1676,12 @@ fullcode = clean;
         }
         
         if (isset($actions['createSequenceWithNext']) && $actions['createSequenceWithNext']) {
-                $qactions[] = " 
-/* createSequenceWithNext */ 
+                $qactions[] = "
+/* createSequenceWithNext */
 
 x = g.addVertex(null, [code:'Sequence With Next', fullcode:'Sequence With Next', atom:'Sequence', virtual:true, line:it.line]);
 
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');
 
 i = it.out('NEXT').next();
 
@@ -1707,7 +1707,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $sequence = new Sequence(Token::$client);
             $fullcode = $sequence->fullcode();
 
-            $qactions[] = " 
+            $qactions[] = "
 /* to_block_else */
 
 x = g.addVertex(null, [code:'Block with else', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:'true', virtual:true, line:it.line]);
@@ -1723,7 +1723,7 @@ g.addEdge(x, a, 'ELEMENT');
 a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
-// remove the next, if this is a ; 
+// remove the next, if this is a ;
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     semicolon = it;
     g.addEdge(x, it.out('NEXT').next(), 'NEXT');
@@ -1733,10 +1733,10 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 }
 
 /* Clean index */
-x.out('ELEMENT').each{ 
-    it.inE('INDEXED').each{    
+x.out('ELEMENT').each{
+    it.inE('INDEXED').each{
         g.removeEdge(it);
-    } 
+    }
 }
 
             ";
@@ -1744,11 +1744,11 @@ x.out('ELEMENT').each{
         }
         
         if (isset($actions['to_block_foreach']) && $actions['to_block_foreach']) {
-            $qactions[] = " 
-/* to_block_foreach */  
+            $qactions[] = "
+/* to_block_foreach */
 
 x = g.addVertex(null, [code:'Block with Foreach', fullcode:'Block with Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, line:it.line, block:'true', fullcode:' /**/ ']);
-g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');   
+g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');
 
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 
@@ -1758,7 +1758,7 @@ g.addEdge(x, a, 'ELEMENT');
 a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
-// remove the next, if this is a ; 
+// remove the next, if this is a ;
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
@@ -1775,8 +1775,8 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $fullcode = $block->fullcode();
             
             $offset = str_repeat(".out('NEXT')", $actions['to_block_ifelseif']);
-            $qactions[] = " 
-/* to_block_ifelseif ({$actions['to_block_ifelseif']})*/ 
+            $qactions[] = "
+/* to_block_ifelseif ({$actions['to_block_ifelseif']})*/
 
 x = g.addVertex(null, [code:'Block with if/elseif', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, block:'true' ]);
 
@@ -1791,28 +1791,28 @@ g.addEdge(x, a, 'ELEMENT');
 a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
-// remove the next, if this is a ; 
+// remove the next, if this is a ;
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
     semicolon.bothE('NEXT').each{ g.removeEdge(it); }
     semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
-    g.idx('delete').put('node', 'delete', semicolon);   
+    g.idx('delete').put('node', 'delete', semicolon);
 }
 
 /* Clean index */
-x.out('ELEMENT').each{ 
-    it.inE('INDEXED').each{    
+x.out('ELEMENT').each{
+    it.inE('INDEXED').each{
         g.removeEdge(it);
-    } 
+    }
 }
             ";
             unset($actions['to_block_ifelseif']);
         }
         
         if (isset($actions['to_block_ifelseif_instruction']) && $actions['to_block_ifelseif_instruction']) {
-                $qactions[] = " 
-/* to_block_ifelseif_instruction */ 
+                $qactions[] = "
+/* to_block_ifelseif_instruction */
 
 x = g.addVertex(null, [code:'Block with control if elseif', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:' /**/ ', block:'true' ]);
 a = it.out('NEXT').out('NEXT').next();
@@ -1828,15 +1828,15 @@ a.bothE('NEXT').each{ g.removeEdge(it); }
         }
                 
         if (isset($actions['arguments2extends']) && $actions['arguments2extends']) {
-                $qactions[] = " 
-/* arguments2extends */ 
+                $qactions[] = "
+/* arguments2extends */
             ";
             unset($actions['arguments2extends']);
         }
 
         if (isset($actions['createBlockWithSequence']) && $actions['createBlockWithSequence']) {
-                $qactions[] = " 
-/* createBlockWithSequence */ 
+                $qactions[] = "
+/* createBlockWithSequence */
 x = g.addVertex(null, [code:'Block with Next', fullcode:'Block with Next', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
 
 g.addEdge(it.in('NEXT').next(), x, 'NEXT');
@@ -1853,8 +1853,8 @@ it.bothE('NEXT').each{ g.removeEdge(it) ; }
             $sequence = new Sequence(Token::$client);
             $fullcode = $sequence->fullcode();
 
-            $qactions[] = " 
-/* createBlockWithSequenceForCase */ 
+            $qactions[] = "
+/* createBlockWithSequenceForCase */
 x = g.addVertex(null, [code:'Block with Sequence For Case', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line]);
 fullcode = x;
 $fullcode
@@ -1876,10 +1876,10 @@ g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
 
 /* Clean index */
-x.out('ELEMENT').each{ 
-    it.inE('INDEXED').each{    
+x.out('ELEMENT').each{
+    it.inE('INDEXED').each{
         g.removeEdge(it);
-    } 
+    }
 }
 
             ";
@@ -1890,8 +1890,8 @@ x.out('ELEMENT').each{
             $sequence = new Sequence(Token::$client);
             $fullcode = $sequence->fullcode();
 
-            $qactions[] = " 
-/* createBlockWithSequenceForDefault */ 
+            $qactions[] = "
+/* createBlockWithSequenceForDefault */
 x = g.addVertex(null, [code:'Block with Sequence For Default', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
 fullcode = x;
 $fullcode
@@ -1913,13 +1913,13 @@ g.addEdge(x, a.out('NEXT').next(), 'NEXT');
 a.bothE('NEXT').each{ g.removeEdge(it) ; }
 
 /* Clean index */
-x.out('ELEMENT').each{ 
-    it.inE('INDEXED').each{    
+x.out('ELEMENT').each{
+    it.inE('INDEXED').each{
         g.removeEdge(it);
-    } 
+    }
 }
 
-// remove the next, if this is a ; 
+// remove the next, if this is a ;
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
@@ -1933,8 +1933,8 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         }
 
         if (isset($actions['createVoidForCase']) && $actions['createVoidForCase']) {
-            $qactions[] = " 
-/* createVoidForCase */ 
+            $qactions[] = "
+/* createVoidForCase */
 x = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
 a = it.out('NEXT').out('NEXT').next();
 b = a.out('NEXT').next();
@@ -1943,7 +1943,7 @@ a.outE('NEXT').each{ g.removeEdge(it) ; }
 g.addEdge(a, x, 'NEXT');
 g.addEdge(x, b, 'NEXT');
 
-// remove the next, if this is a ; 
+// remove the next, if this is a ;
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
@@ -1957,8 +1957,8 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         }
 
         if (isset($actions['createVoidForDefault']) && $actions['createVoidForDefault']) {
-            $qactions[] = " 
-/* createVoidForDefault */ 
+            $qactions[] = "
+/* createVoidForDefault */
 x = g.addVertex(null, [code:'Void', atom:'Void', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
 a = it.out('NEXT').next();
 b = a.out('NEXT').next();
@@ -1967,7 +1967,7 @@ a.outE('NEXT').each{ g.removeEdge(it) ; }
 g.addEdge(a, x, 'NEXT');
 g.addEdge(x, b, 'NEXT');
 
-// remove the next, if this is a ; 
+// remove the next, if this is a ;
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
@@ -1982,7 +1982,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         
         if (isset($actions['caseDefaultSequence'])) {
             $qactions[] = <<<GREMLIN
- /* caseDefaultSequence */   
+ /* caseDefaultSequence */
 
     if (it.both('NEXT').has('atom', 'SequenceCaseDefault').count() == 2) {
         cds = it.in('NEXT').next();
@@ -2005,7 +2005,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
         cds2.bothE('NEXT').each { g.removeEdge(it); }
         it.inE('NEXT').each { g.removeEdge(it); }
         
-        g.idx('delete').put('node', 'delete', cds2);   
+        g.idx('delete').put('node', 'delete', cds2);
     } else if (it.out('NEXT').has('atom', 'SequenceCaseDefault').any()) {
             cds = it.out('NEXT').next();
 
@@ -2044,18 +2044,18 @@ GREMLIN;
 /*
         if (isset($actions['mergePrev2']) && $actions['mergePrev2']) {
             foreach($actions['mergePrev2'] as $atom => $link) {
-                $qactions[] = " 
-/* mergePrev * / 
+                $qactions[] = "
+/* mergePrev * /
 x = it;
 it.as('origin').out('ELEMENT').has('atom','Sequence').each{
     it.inE('ELEMENT').each{ g.removeEdge(it);}
   
-    it.out('ELEMENT').each{ 
+    it.out('ELEMENT').each{
         it.inE('ELEMENT').each{ g.removeEdge(it);}
         g.addEdge(x, it, 'ELEMENT');
     };
 
-    g.idx('delete').put('node', 'delete', it);   
+    g.idx('delete').put('node', 'delete', it);
 }
 ";
             }
@@ -2063,17 +2063,17 @@ it.as('origin').out('ELEMENT').has('atom','Sequence').each{
         }
 */
         if (isset($actions['to_variable'])) {
-            $qactions[] = " 
-/* to variable */ 
+            $qactions[] = "
+/* to variable */
 variable = it.out('NEXT').next();
 variable.setProperty('delimiter', it.code);
 variable.setProperty('enclosing', it.token);
 
-g.idx('delete').put('node', 'delete', it);   
+g.idx('delete').put('node', 'delete', it);
 g.addEdge(it.in('NEXT').next(), variable, 'NEXT');
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
-g.idx('delete').put('node', 'delete', variable.out('NEXT').next());   
+g.idx('delete').put('node', 'delete', variable.out('NEXT').next());
 close_curly = variable.out('NEXT').next();
 g.addEdge(variable, variable.out('NEXT').out('NEXT').next(), 'NEXT');
 close_curly.bothE('NEXT').each{ g.removeEdge(it); }
@@ -2083,8 +2083,8 @@ close_curly.bothE('NEXT').each{ g.removeEdge(it); }
         }
         
         if (isset($actions['makeForeachSequence'])) {
-            $qactions[] = " 
-/* make Foreach Sequence */ 
+            $qactions[] = "
+/* make Foreach Sequence */
 block = g.addVertex(null, [code:'Block with Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:'{ /**/ } '
 /*, modifiedBy:'_Foreach' */ ]);
 element1 = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
@@ -2105,8 +2105,8 @@ element2.bothE('NEXT').each{ g.removeEdge(it); }
         }
 
         if (isset($actions['while_to_block'])) {
-            $qactions[] = " 
-/* while_to_block */  
+            $qactions[] = "
+/* while_to_block */
 
 x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:'true', line:it.line, fullcode:' /**/ '
 /*, modifiedBy:'_While' */]);
@@ -2118,7 +2118,7 @@ g.addEdge(x, a, 'ELEMENT');
 a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
-// remove the next, if this is a ; 
+// remove the next, if this is a ;
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
@@ -2128,15 +2128,15 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
 }
 
 /* Clean index */
-x.out('ELEMENT').each{ 
-    it.inE('INDEXED').each{    
+x.out('ELEMENT').each{
+    it.inE('INDEXED').each{
         g.removeEdge(it);
-    } 
+    }
 }
 
 ";
             unset($actions['while_to_block']);
-        }        
+        }
 
         if (isset($actions['makeSequence'])) {
             $it = $actions['makeSequence'];
@@ -2155,7 +2155,7 @@ x.out('ELEMENT').each{
         $it.setProperty('makeSequence', 'both');
         g.addEdge(sequence, $it, 'ELEMENT');
 
-        $it.out('NEXT').out('ELEMENT').each{ 
+        $it.out('NEXT').out('ELEMENT').each{
             it.setProperty('rank', it.rank + count);
         
             it.inE('ELEMENT').each{ g.removeEdge(it); }
@@ -2192,18 +2192,18 @@ x.out('ELEMENT').each{
         $it.bothE('NEXT').each{ g.removeEdge(it); }
     } else {
         sequence = g.addVertex(null, [code:'makeSequence ' + $it.in('NEXT').next().token, atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
-        g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');   
-        g.idx('atoms').put('atom', 'Sequence', sequence);   
+        g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');
+        g.idx('atoms').put('atom', 'Sequence', sequence);
 
         g.addEdge(sequence, $it, 'ELEMENT');
         $it.setProperty('rank', 0);
         $it.setProperty('makeSequence', 'else');
         
-        if ($it.root == 'true') { 
-            sequence.setProperty('root', 'true'); 
+        if ($it.root == 'true') {
+            sequence.setProperty('root', 'true');
             g.addEdge($it.in('FILE').next(), sequence, 'FILE');
             
-            $it.setProperty('root', 'false'); 
+            $it.setProperty('root', 'false');
             $it.inE('FILE').each{ g.removeEdge(it); }
         }
 
@@ -2228,22 +2228,22 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE', 'T_REQUIRE',
         'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
         'T_COMMA', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
-        'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 
+        'T_OPEN_BRACKET', 'T_CLOSE_BRACKET',
         'T_ECHO', 'T_PRINT',
         'T_EXTENDS', 'T_IMPLEMENTS', 'T_USE',
         'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
         'T_PLUS', 'T_MINUS',
         'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_POW',
-        'T_COLON', 'T_NEW', 'T_DOT', 
+        'T_COLON', 'T_NEW', 'T_DOT',
         'T_SR','T_SL', 'T_CURLY_OPEN',
         'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_VAR',
         'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
         'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
         'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
         'T_NAMESPACE', 'T_DOUBLE_ARROW',
-        'T_THROW', 'T_CLONE', 'T_RETURN', 
+        'T_THROW', 'T_CLONE', 'T_RETURN',
         'T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES',
-        'T_ABSTRACT', 'T_FINAL', 'T_STATIC', 'T_CONST', 
+        'T_ABSTRACT', 'T_FINAL', 'T_STATIC', 'T_CONST',
         'T_AT', 'T_CASE', 'T_TILDE',
         'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
         'T_DO', 'T_TRY',
@@ -2254,24 +2254,24 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
 
 list_after = [
         'T_COMMA', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
-        'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 
+        'T_OPEN_BRACKET', 'T_CLOSE_BRACKET',
         'T_PLUS', 'T_MINUS',
         'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_POW',
-        'T_COLON', 'T_NEW', 'T_DOT', 
+        'T_COLON', 'T_NEW', 'T_DOT',
         'T_SR','T_SL', 'T_CURLY_OPEN',
         'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
         'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
         'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
 
-        'T_ELSE', 'T_ELSEIF', 
+        'T_ELSE', 'T_ELSEIF',
         'T_CATCH'];
 
 list_after_token = [
-        'T_OBJECT_OPERATOR', 'T_INC', 'T_DEC', 
+        'T_OBJECT_OPERATOR', 'T_INC', 'T_DEC',
         'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
         'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
         'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-        'T_AND_EQUAL', 'T_CONCAT_EQUAL', 
+        'T_AND_EQUAL', 'T_CONCAT_EQUAL',
         'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_POW',
         'T_PLUS', 'T_MINUS',
         'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
@@ -2288,12 +2288,12 @@ if (     $it.token != 'T_ELSEIF'
     &&  ($it.in('NEXT').next().atom != null || !($it.out('NEXT').next().token in list_after) )
     &&   $it.in_quote != \"'true'\"
     &&   $it.in_for != \"'true'\"
-    && !($it.in('NEXT').next().atom in ['Class', 'Identifier']) 
+    && !($it.in('NEXT').next().atom in ['Class', 'Identifier'])
     && !($it.out('NEXT').next().token in list_after_token)
     && !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
     && !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR', 'T_DOUBLE_COLON']}.any()) /* \$x{\$b - 2} */
     ) {
-$makeSequence; 
+$makeSequence;
 } else {
     /*
     $it.setProperty('makeSequence1',   $it.token != 'T_ELSEIF');
@@ -2317,18 +2317,18 @@ $makeSequence;
         }
 
         if (isset($actions['to_variable_dollar'])) {
-            $qactions[] = " 
-/* to variable */ 
+            $qactions[] = "
+/* to variable */
 variable = it.out('NEXT').out('NEXT').next();
 variable.setProperty('delimiter', '\${');
 
-g.idx('delete').put('node', 'delete', it.out('NEXT').next());   
-g.idx('delete').put('node', 'delete', it);   
+g.idx('delete').put('node', 'delete', it.out('NEXT').next());
+g.idx('delete').put('node', 'delete', it);
 g.addEdge(it.in('NEXT').next(), variable, 'NEXT');
 it.out('NEXT').bothE('NEXT').each{ g.removeEdge(it); }
 it.bothE('NEXT').each{ g.removeEdge(it); }
 
-g.idx('delete').put('node', 'delete', variable.out('NEXT').next());   
+g.idx('delete').put('node', 'delete', variable.out('NEXT').next());
 close_curly = variable.out('NEXT').next();
 g.addEdge(variable, variable.out('NEXT').out('NEXT').next(), 'NEXT');
 close_curly.bothE('NEXT').each{ g.removeEdge(it); }
@@ -2337,11 +2337,11 @@ close_curly.bothE('NEXT').each{ g.removeEdge(it); }
             unset($actions['to_variable_dollar']);
         }
 
-/*                        
+/*
         if (isset($actions['mergePrev']) && $actions['mergePrev']) {
             foreach($actions['mergePrev'] as $atom => $link) {
-                $qactions[] = " 
-/* mergePrev * / 
+                $qactions[] = "
+/* mergePrev * /
 x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
 y = it.in('NEXT').in('NEXT').next();
 z = it.in('NEXT').next();
@@ -2361,15 +2361,15 @@ a.bothE('NEXT').each{ g.removeEdge(it); }
 x.as('origin').out('ELEMENT').has('atom','Sequence').each{
     it.inE('ELEMENT').each{ g.removeEdge(it);}
   
-    it.out('ELEMENT').each{ 
+    it.out('ELEMENT').each{
         it.inE('ELEMENT').each{ g.removeEdge(it);}
         g.addEdge(x, it, 'ELEMENT');
     };
 
-    g.idx('delete').put('node', 'delete', it);   
+    g.idx('delete').put('node', 'delete', it);
 }
 
-// remove the next, if this is a ; 
+// remove the next, if this is a ;
 x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
     g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
     semicolon = it;
@@ -2392,8 +2392,8 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $string = new $class(Token::$client);
             $fullCodeString = $string->fullcode();
             
-            $qactions[] = " 
-/* make_quoted_string */ 
+            $qactions[] = "
+/* make_quoted_string */
 
 x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
 
@@ -2423,13 +2423,13 @@ fullcode = x;
 $fullcode
 
 fullcode = it;
-$fullCodeString 
+$fullCodeString
 
 /* Clean index */
-x.out('CONCAT').each{ 
-    it.inE('INDEXED').each{    
+x.out('CONCAT').each{
+    it.inE('INDEXED').each{
         g.removeEdge(it);
-    } 
+    }
 }
 
 /* indexing */  g.idx('atoms').put('atom', 'String', it);
@@ -2441,8 +2441,8 @@ x.out('CONCAT').each{
         if (isset($actions['mergeConcat'])) {
             $fullcode = $this->fullcode();
 
-            $qactions[] = " 
-/* mergeConcat */ 
+            $qactions[] = "
+/* mergeConcat */
 x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
 
 z = it.in('NEXT').next();
@@ -2463,7 +2463,7 @@ a.bothE('NEXT').each{ g.removeEdge(it); }
 x.as('origin').out('ELEMENT').has('atom','Concatenation').each{
     it.inE('ELEMENT').each{ g.removeEdge(it);}
   
-    it.out('ELEMENT').each{ 
+    it.out('ELEMENT').each{
         it.inE('ELEMENT').each{ g.removeEdge(it);}
         g.addEdge(x, it, 'ELEMENT');
     };
@@ -2475,10 +2475,10 @@ fullcode = x;
 $fullcode
 
 /* Clean index */
-x.out('ELEMENT').each{ 
-    it.inE('INDEXED').each{    
+x.out('ELEMENT').each{
+    it.inE('INDEXED').each{
         g.removeEdge(it);
-    } 
+    }
 }
 
             ";
@@ -2487,18 +2487,18 @@ x.out('ELEMENT').each{
         
         if (isset($actions['addToIndex'])) {
             list(, $token) = each($actions['addToIndex']);
-            $qactions[] = " 
-/* add to the following index */  
+            $qactions[] = "
+/* add to the following index */
 
-g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');   
+g.addEdge(g.idx('racines')[['token':'$token']].next(), it, 'INDEXED');
 
 ";
             unset($actions['addToIndex']);
-        }        
+        }
 
         if (isset($actions['while_to_empty_block'])) {
-            $qactions[] = " 
-/* create an empty Block in place of a semi colon, after a while statment.  */  
+            $qactions[] = "
+/* create an empty Block in place of a semi colon, after a while statment.  */
 
 x = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 x.setProperty('code', 'Empty Block with While');
@@ -2506,11 +2506,11 @@ x.setProperty('atom', 'Sequence');
 
                 ";
             unset($actions['while_to_empty_block']);
-        }        
+        }
 
         if (isset($actions['checkTypehint'])) {
-            $qactions[] = " 
-/* Turn a & b into a typehint  */  
+            $qactions[] = "
+/* Turn a & b into a typehint  */
 
 it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each {
     it.setProperty('atom', 'Typehint');
@@ -2528,13 +2528,13 @@ it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each {
 
                 ";
             unset($actions['checkTypehint']);
-        }  
+        }
         
         if (isset($actions['variable_to_functioncall'])) {
             $fullcode = $this->fullcode();
             
-            $qactions[] = " 
-/* create a functioncall, and hold the variable as property.  */  
+            $qactions[] = "
+/* create a functioncall, and hold the variable as property.  */
 
 x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line
 /*, modifiedBy:'FunctionCall'*/ ]);
@@ -2542,13 +2542,13 @@ g.addEdge(it, x, 'NAME');
 g.idx('atoms').put('atom', 'Variable', x);
                 ";
             unset($actions['variable_to_functioncall']);
-        }        
+        }
 
         if (isset($actions['array_to_functioncall'])) {
             $fullcode = $this->fullcode();
             
-            $qactions[] = " 
-/* hold the array as property.  */  
+            $qactions[] = "
+/* hold the array as property.  */
 
 x = g.addVertex(null, [code:it.code, fullcode: it.fullcode, atom:'Array', token:'T_OPEN_BRACKET', virtual:true, line:it.line
 /*,  modifiedBy:'FunctionCallArray' */]);
@@ -2556,22 +2556,22 @@ g.addEdge(it, x, 'NAME');
 g.idx('atoms').put('atom', 'Array', x);
                 ";
             unset($actions['array_to_functioncall']);
-        }        
+        }
 
         if (isset($actions['cleanIndex'])) {
-            $qactions[] = " 
-/* Remove children's index */  
+            $qactions[] = "
+/* Remove children's index */
 it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 'NEW', 'RETURN', 'CONSTANT', 'CLASS', 'VARIABLE',
-'INDEX', 'EXTENDS', 'SUBNAME', 'POSTPLUSPLUS', 'PREPLUSPLUS', 'VALUE', 'CAST', 'SOURCE', 'USE', 'KEY', 'IMPLEMENTS', 'THEN', 'AS', 
+'INDEX', 'EXTENDS', 'SUBNAME', 'POSTPLUSPLUS', 'PREPLUSPLUS', 'VALUE', 'CAST', 'SOURCE', 'USE', 'KEY', 'IMPLEMENTS', 'THEN', 'AS',
 'ELSE', 'NOT', 'CONDITION', 'CASE', 'THROW', 'METHOD', 'STATIC', 'CLONE', 'INIT', 'AT', 'ELEMENT','FINAL', 'FILE', 'NAMESPACE', 'LABEL',
-'YIELD').each{ 
-    it.inE('INDEXED').each{    
+'YIELD').each{
+    it.inE('INDEXED').each{
         g.removeEdge(it);
-    } 
+    }
 }
                 ";
             unset($actions['cleanIndex']);
-        }        
+        }
 
         if ($remainder = array_keys($actions)) {
             print 'Warning : the following '.count($remainder).' actions were ignored : '.implode(', ', $remainder)."\n";
@@ -2703,7 +2703,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
         
         if (isset($conditions['filterOut'])) {
             if (is_string($conditions['filterOut'])) {
-                // no check on atom here ? 
+                // no check on atom here ?
                 $queryConditions[] = "filter{it.token != '".$conditions['filterOut']."' }";
             } elseif (is_array($conditions['filterOut'])) {
                 $queryConditions[] = "filter{it.atom != null || !(it.token in ['".implode("', '", $conditions['filterOut'])."'])}";

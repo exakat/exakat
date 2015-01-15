@@ -7,7 +7,7 @@ class Arrayappend extends TokenAuto {
     static public $atom = 'Arrayappend';
     
     public function _check() {
-        $this->conditions = array(-2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')), 
+        $this->conditions = array(-2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')),
                                   -1 => array('atom' => array('Variable', 'Property', 'Staticproperty', 'Array', 'Arrayappend')),
                                    0 => array('token' => Arrayappend::$operators),
                                    1 => array('token' => 'T_CLOSE_BRACKET'),

@@ -13,7 +13,7 @@ class Cast extends TokenAuto {
                                              'notAtom'   => array('Sequence', 'Label')),
                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', ),
                                                                         Preplusplus::$operators, Postplusplus::$operators,
-                                                                        Nsname::$operators, 
+                                                                        Nsname::$operators,
                                                                         Property::$operators, Staticproperty::$operators))
         );
         
@@ -28,7 +28,7 @@ class Cast extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = fullcode.code + " " + fullcode.out("CAST").next().fullcode; 
+fullcode.fullcode = fullcode.code + " " + fullcode.out("CAST").next().fullcode;
 
 GREMLIN;
     }

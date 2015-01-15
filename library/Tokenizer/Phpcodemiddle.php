@@ -6,7 +6,7 @@ class Phpcodemiddle extends TokenAuto {
     static public $operators = array('T_INLINE_HTML');
 
     public function _check() {
-// ? >A<?php 
+// ? >A<?php
         $this->conditions = array(-1 => array('token'    => 'T_CLOSE_TAG',
                                               'atom'     => 'none'),
                                    0 => array('token'    => Phpcodemiddle::$operators),

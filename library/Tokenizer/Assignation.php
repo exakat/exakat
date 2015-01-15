@@ -26,9 +26,9 @@ class Assignation extends TokenAuto {
                           'Array', 'Float', 'Concatenation', 'Property',
                           'Parenthesis', 'Noscream', 'Ternary', 'New', 'String',
                           'Constant', 'Functioncall', 'Staticproperty', 'Staticconstant', 'Staticclass', 'Property',
-                          'Heredoc', 'Preplusplus', 'Postplusplus', 'Methodcall', 'Nsname', 
+                          'Heredoc', 'Preplusplus', 'Postplusplus', 'Methodcall', 'Nsname',
                           'Assignation', 'Variable', 'Boolean', 'Null', 'Magicconstant',
-                          'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison', 
+                          'Cast', 'Staticmethodcall', 'Sign', 'Logical', 'Bitshift', 'Comparison',
                           'Clone', 'Shell', 'Include', 'Instanceof', 'Function', 'ArrayNS', 'Identifier',
                           'Arrayappend', 'Power'
                          );
@@ -37,16 +37,16 @@ class Assignation extends TokenAuto {
         // 'T_AND' used to be here, but should be processed by reference first
         $this->conditions = array(-2 => array('filterOut2' => array_merge(array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR'),
                                                                            Preplusplus::$operators )),
-                                  -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 
+                                  -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
                                                               'Noscream', 'Not', 'Arrayappend' , 'Typehint', 'Identifier',
                                                               'Static', 'Cast', 'Sign', 'Power', 'Null', 'Boolean' )),
                                    0 => array('token' => Assignation::$operators),
                                    1 => array('atom' => $operands),
-                                   2 => array('filterOut2' => array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators, 
-                                                                          Comparison::$operators, Logical::$booleans, Multiplication::$operators, 
-                                                                          Postplusplus::$operators, Power::$operators, _Instanceof::$operators, 
-                                                                          array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
-                                                                                'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
+                                   2 => array('filterOut2' => array_merge(Assignation::$operators, Addition::$operators, Bitshift::$operators,
+                                                                          Comparison::$operators, Logical::$booleans, Multiplication::$operators,
+                                                                          Postplusplus::$operators, Power::$operators, _Instanceof::$operators,
+                                                                          array('T_DOT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                                                                'T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                                                                 'T_QUESTION', 'T_NS_SEPARATOR' ))),
         );
         
@@ -58,12 +58,12 @@ class Assignation extends TokenAuto {
         $this->checkAuto();
 
         return false;
-    } 
+    }
 
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.out("LEFT").next().getProperty('fullcode') + " " + fullcode.getProperty('code') + " " + fullcode.out("RIGHT").next().getProperty('fullcode')); 
+fullcode.setProperty('fullcode', fullcode.out("LEFT").next().getProperty('fullcode') + " " + fullcode.getProperty('code') + " " + fullcode.out("RIGHT").next().getProperty('fullcode'));
 
 GREMLIN;
     }

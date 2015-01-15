@@ -8,7 +8,7 @@ class Variadic extends TokenAuto {
 
     protected $phpVersion = '5.6+';
 
-    public function _check() { 
+    public function _check() {
         // function x(...$a) {} or functioncall  x(...$a);
         $this->conditions = array( 0 => array('token' => Variadic::$operators,
                                               'atom'  => 'none'),
@@ -27,7 +27,7 @@ class Variadic extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', "..." + fullcode.getProperty('fullcode')); 
+fullcode.setProperty('fullcode', "..." + fullcode.getProperty('fullcode'));
 
 GREMLIN;
     }

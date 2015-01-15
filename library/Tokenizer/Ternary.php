@@ -9,11 +9,11 @@ class Ternary extends TokenAuto {
     public function _check() {
         
         // $a ? $b : $c
-        $this->conditions = array( -2 => array('filterOut' => array_merge(  Comparison::$operators,  Logical::$operators, 
-                                                                            Bitshift::$operators,    Multiplication::$operators, 
+        $this->conditions = array( -2 => array('filterOut' => array_merge(  Comparison::$operators,  Logical::$operators,
+                                                                            Bitshift::$operators,    Multiplication::$operators,
                                                                             Addition::$operators,    Concatenation::$operators,
                                                                             Not::$operators,         Noscream::$operators,
-                                                                            _Instanceof::$operators, Property::$operators, 
+                                                                            _Instanceof::$operators, Property::$operators,
                                                                             Staticmethodcall::$operators)),
                                    -1 => array('atom'       => 'yes',
                                                'notAtom'    => 'Sequence'),
@@ -21,7 +21,7 @@ class Ternary extends TokenAuto {
                                     1 => array('atom'       => 'yes',
                                                'notAtom'    => 'Sequence'),
                                     2 => array('token'      => 'T_COLON'),
-                                    3 => array('atom'       => 'yes', 
+                                    3 => array('atom'       => 'yes',
                                                'notAtom'    => 'Sequence'),
                                     4 => array('filterOut2' => array_merge(Token::$instructionEnding, array('T_OPEN_CURLY'))),
                                  );
@@ -34,20 +34,20 @@ class Ternary extends TokenAuto {
                                'atom'         => 'Ternary',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         // $a ?: $b : we keep the : as 'Then', and it will have to be interpreted as $a later. May need to build a specific processing here.
-        $this->conditions = array( -2 => array('filterOut' => array_merge(Comparison::$operators,  Logical::$operators, 
-                                                                          Bitshift::$operators,    Multiplication::$operators, 
+        $this->conditions = array( -2 => array('filterOut' => array_merge(Comparison::$operators,  Logical::$operators,
+                                                                          Bitshift::$operators,    Multiplication::$operators,
                                                                           Addition::$operators,    Concatenation::$operators,
                                                                           Not::$operators,         Noscream::$operators,
-                                                                          _Instanceof::$operators, Property::$operators, 
+                                                                          _Instanceof::$operators, Property::$operators,
                                                                           Staticmethodcall::$operators)),
                                    -1 => array('atom'       => 'yes',
                                                'notAtom'    => 'Sequence'),
                                     0 => array('token'      => Ternary::$operators),
                                     1 => array('token'      => 'T_COLON'),
-                                    2 => array('atom'       => 'yes', 
+                                    2 => array('atom'       => 'yes',
                                                'notAtom'    => 'Sequence'),
                                     3 => array('filterOut'  => array_merge(Token::$instructionEnding, array('T_OPEN_CURLY')))
                                  );
@@ -60,7 +60,7 @@ class Ternary extends TokenAuto {
                                'atom1'        => 'TernaryElse',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }
@@ -69,9 +69,9 @@ class Ternary extends TokenAuto {
         return <<<GREMLIN
 
 if (it.out("THEN").next().atom == 'TernaryElse') {
-    it.fullcode = it.out("CONDITION").next().fullcode + " ?: " + it.out("ELSE").next().fullcode; 
+    it.fullcode = it.out("CONDITION").next().fullcode + " ?: " + it.out("ELSE").next().fullcode;
 } else {
-    it.fullcode = it.out("CONDITION").next().fullcode + " ? " + it.out("THEN").next().fullcode + " : " + it.out("ELSE").next().fullcode; 
+    it.fullcode = it.out("CONDITION").next().fullcode + " ? " + it.out("THEN").next().fullcode + " : " + it.out("ELSE").next().fullcode;
 }
 
 GREMLIN;

@@ -11,24 +11,24 @@ class Property extends TokenAuto {
 
         // $object->property{1}
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
-                                   -1 => array('atom' => $operands), 
+                                   -1 => array('atom' => $operands),
                                     0 => array('token' => Property::$operators),
                                     1 => array('atom' => array('String', 'Variable', 'Array', 'Identifier', 'Boolean', 'Null')),
-                                    2 => array('token' => array('T_OPEN_CURLY', 'T_OPEN_BRACKET')), 
+                                    2 => array('token' => array('T_OPEN_CURLY', 'T_OPEN_BRACKET')),
                                     );
         
         $this->actions = array('transform'    => array( -1 => 'OBJECT',
                                                          1 => 'PROPERTY'),
                                'atom'         => 'Property',
                                'cleanIndex'   => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
         
         // $object->property
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
-                                   -1 => array('atom' => $operands), 
+                                   -1 => array('atom' => $operands),
                                     0 => array('token' => Property::$operators),
                                     1 => array('atom' => array('String', 'Variable', 'Array', 'Identifier', 'Boolean', 'Null')),
-                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')), 
+                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
                                     );
         
         $this->actions = array('transform'    => array( -1 => 'OBJECT',
@@ -36,11 +36,11 @@ class Property extends TokenAuto {
                                'atom'         => 'Property',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         // $object->{property}
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
-                                   -1 => array('atom'  => $operands), 
+                                   -1 => array('atom'  => $operands),
                                     0 => array('token' => Property::$operators),
                                     1 => array('token' => 'T_OPEN_CURLY'),
                                     2 => array('atom'  => 'yes'),
@@ -56,17 +56,17 @@ class Property extends TokenAuto {
                                'property'     => array('bracket' => 'true'),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }
 
     public function fullcode() {
         return <<<GREMLIN
-// case for \$v() 
+// case for \$v()
 fullcode.out("NAME").each{ fullcode.fullcode = it.fullcode }
 
-if (fullcode.bracket == 'true') { 
+if (fullcode.bracket == 'true') {
     fullcode.setProperty('fullcode', fullcode.out("OBJECT").next().getProperty('fullcode') + "->{" + fullcode.out("PROPERTY").next().getProperty('fullcode') + "}");
 } else {
     fullcode.setProperty('fullcode', fullcode.out("OBJECT").next().getProperty('fullcode') + "->" + fullcode.out("PROPERTY").next().getProperty('fullcode'));

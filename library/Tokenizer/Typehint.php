@@ -10,7 +10,7 @@ class Typehint extends TokenAuto {
         // normal case for classes
         $this->conditions = array(-1 => array('filterOut' => 'T_CATCH'),
                                    0 => array('token'     => Typehint::$operators),
-                                   1 => array('atom'      => 'yes', 
+                                   1 => array('atom'      => 'yes',
                                               'token'     => array('T_STRING', 'T_NS_SEPARATOR')),
                                    2 => array('atom'      => array('Variable', 'Assignation', 'Identifier' )),
                                    3 => array('filterOut' => Assignation::$operators),
@@ -20,10 +20,10 @@ class Typehint extends TokenAuto {
                                'keepIndexed'  => true);
         $this->checkAuto();
 
-        // special case for array 
+        // special case for array
         $this->conditions = array(-2 => array('filterOut' => 'T_CATCH'),
                                    0 => array('token' => Typehint::$operators),
-                                   1 => array('token' => 'T_ARRAY', 
+                                   1 => array('token' => 'T_ARRAY',
                                               'atom' => 'none'),
                                    2 => array('atom' => array('Variable', 'Assignation', 'Identifier'    )),
                                    3 => array('filterOut' => Assignation::$operators),
@@ -51,7 +51,7 @@ class Typehint extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty("fullcode") + " " + fullcode.out("VARIABLE").next().getProperty('fullcode')); 
+fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty("fullcode") + " " + fullcode.out("VARIABLE").next().getProperty('fullcode'));
 
 GREMLIN;
     }

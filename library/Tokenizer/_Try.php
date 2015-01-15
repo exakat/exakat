@@ -11,7 +11,7 @@ class _Try extends TokenAuto {
         $this->conditions = array(0 => array('token'    => _Try::$operators,
                                              'atom'     => 'none'),
                                   1 => array('atom'     => 'Sequence',
-                                             'property' => array('block' => 'true')), 
+                                             'property' => array('block' => 'true')),
                                   2 => array('atom'     => array('Catch', 'Finally')),
                                   );
         
@@ -23,7 +23,7 @@ class _Try extends TokenAuto {
         $this->checkAuto();
 
         // Try () { } catch + new catch
-        $this->conditions = array(0 => array('atom'  => 'yes', 
+        $this->conditions = array(0 => array('atom'  => 'yes',
                                              'token' => _Try::$operators),
                                   1 => array('atom'  => array('Catch', 'Finally'))
                                   );
@@ -32,8 +32,8 @@ class _Try extends TokenAuto {
                                'rank'        => array(1 => 0));
         $this->checkAuto();
 
-        // Try () NO catch 
-        $this->conditions = array(0 => array('atom'     => 'yes', 
+        // Try () NO catch
+        $this->conditions = array(0 => array('atom'     => 'yes',
                                              'token'    => _Try::$operators),
                                   1 => array('notToken' => array('T_CATCH', 'T_FINALLY'))
                                   );
@@ -49,8 +49,8 @@ class _Try extends TokenAuto {
 
 s = [];
 fullcode.out("CATCH").sort{it.rank}.each{ s.add(it.fullcode); }
-fullcode.setProperty('fullcode', "try " + it.out("CODE").next().getProperty('fullcode') + s.join(" ")); 
-fullcode.setProperty('count', it.out("CATCH").count()); 
+fullcode.setProperty('fullcode', "try " + it.out("CODE").next().getProperty('fullcode') + s.join(" "));
+fullcode.setProperty('count', it.out("CATCH").count());
 
 GREMLIN;
     }

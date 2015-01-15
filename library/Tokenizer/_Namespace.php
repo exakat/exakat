@@ -7,7 +7,7 @@ class _Namespace extends TokenAuto {
     static public $atom = 'Namespace';
 
     public function _check() {
-        // namespace {} 
+        // namespace {}
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'Sequence',
@@ -19,7 +19,7 @@ class _Namespace extends TokenAuto {
                                'keepIndexed'    => true);
         $this->checkAuto();
 
-        // namespace myproject {} 
+        // namespace myproject {}
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => array('Identifier', 'Nsname')),
@@ -34,7 +34,7 @@ class _Namespace extends TokenAuto {
                                'makeSequence' => 'it');
         $this->checkAuto();
 
-        // namespace myproject ; 
+        // namespace myproject ;
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => array('Identifier', 'Nsname')),
@@ -82,11 +82,11 @@ class _Namespace extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.out("NAMESPACE").each{ fullcode.setProperty('fullcode', "namespace " + it.getProperty('fullcode'));} 
+fullcode.out("NAMESPACE").each{ fullcode.setProperty('fullcode', "namespace " + it.getProperty('fullcode'));}
 
 fullcode.has('atom', 'Identifier').each{ fullcode.setProperty('fullcode', "namespace"); }
 
-fullcode.has('fullcode', null).filter{ it.out('NAMESPACE').count() == 0}.each{ fullcode.setProperty('fullcode', "namespace Global");} 
+fullcode.has('fullcode', null).filter{ it.out('NAMESPACE').count() == 0}.each{ fullcode.setProperty('fullcode', "namespace Global");}
 
 GREMLIN;
     }

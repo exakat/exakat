@@ -3,12 +3,12 @@
 namespace Tokenizer;
 
 class Functioncall extends TokenAuto {
-    static public $operators            = array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 
-                                                'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL', 
+    static public $operators            = array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY',
+                                                'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL',
                                                 'T_EXIT', 'T_DIE', 'T_STATIC', 'T_ECHO',  'T_PRINT');
-    static public $operatorsWithoutEcho = array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY', 
-                                                'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL', 
-                                                'T_EXIT', 'T_DIE', 'T_STATIC', 'T_HALT_COMPILER');       
+    static public $operatorsWithoutEcho = array('T_VARIABLE', 'T_STRING', 'T_UNSET', 'T_EMPTY', 'T_ARRAY',
+                                                'T_NS_SEPARATOR', 'T_ISSET', 'T_LIST', 'T_EVAL',
+                                                'T_EXIT', 'T_DIE', 'T_STATIC', 'T_HALT_COMPILER');
     static public $atom = 'Functioncall';
 
     public function _check() {
@@ -74,8 +74,8 @@ class Functioncall extends TokenAuto {
                                               'atom'       => 'none'),
                                    1 => array('atom'       => 'Arguments'),
                                    2 => array('filterOut2' => array_merge( array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA'),
-                                                                           Addition::$operators, Multiplication::$operators, 
-                                                                           Bitshift::$operators, Logical::$booleans, 
+                                                                           Addition::$operators, Multiplication::$operators,
+                                                                           Bitshift::$operators, Logical::$booleans,
                                                                            Ternary::$operators)),
         );
         
@@ -107,7 +107,7 @@ class Functioncall extends TokenAuto {
         return <<<GREMLIN
 
 if (fullcode.getProperty('token') == 'T_NS_SEPARATOR') {
-    s = []; 
+    s = [];
     fullcode.out("SUBNAME").sort{it.rank}._().each{ s.add(it.fullcode); };
 
     if (fullcode.absolutens == 'true') {
@@ -127,7 +127,7 @@ if (fullcode.getProperty('parenthesis') == 'true') {
     fullcode.setProperty('fullcode', it.getProperty('fullcode') + " " + it.out("ARGUMENTS").next().getProperty('fullcode') + "");
 }
 
-fullcode.setProperty("args_count", fullcode.out("ARGUMENTS").out("ARGUMENT").hasNot('token', 'T_VOID').count()); 
+fullcode.setProperty("args_count", fullcode.out("ARGUMENTS").out("ARGUMENT").hasNot('token', 'T_VOID').count());
 
 GREMLIN;
     }

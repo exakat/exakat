@@ -22,11 +22,11 @@ class Heredoc extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.getProperty('code')); 
+fullcode.setProperty('fullcode', fullcode.getProperty('code'));
 if (fullcode.code.substring(3, 4) in ["'"]) {
-    fullcode.setProperty('nowdoc', 'true'); 
+    fullcode.setProperty('nowdoc', 'true');
 } else {
-    fullcode.setProperty('heredoc', 'true'); 
+    fullcode.setProperty('heredoc', 'true');
 }
 
 GREMLIN;

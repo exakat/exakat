@@ -28,7 +28,7 @@ class _Trait extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = "trait " + fullcode.out("NAME").next().code; 
+fullcode.fullcode = "trait " + fullcode.out("NAME").next().code;
 
 GREMLIN;
     }

@@ -9,7 +9,7 @@ class _Insteadof extends TokenAuto {
     protected $phpVersion = "5.4+";
 
     public function _check() {
-        $this->conditions = array( -1 => array('atom'  => 'Staticconstant'), 
+        $this->conditions = array( -1 => array('atom'  => 'Staticconstant'),
                                     0 => array('token' => _Insteadof::$operators,
                                                'atom'  => 'none'),
                                     1 => array('token' => 'T_STRING')
@@ -23,7 +23,7 @@ class _Insteadof extends TokenAuto {
         $this->checkAuto();
         
         return false;
-    } 
+    }
     
     public function fullcode() {
         return <<<GREMLIN

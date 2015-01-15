@@ -18,7 +18,7 @@ class _Var extends TokenAuto {
                                'makeSequence' => 'x',
                                'cleanIndex'   => true
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { var $x = 2 }
         $this->conditions = array( 0 => array('token' => _Var::$operators),
@@ -31,7 +31,7 @@ class _Var extends TokenAuto {
                                'makeSequence'       => 'x'
                                );
 
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { var $x, $y }
         $this->conditions = array( 0 => array('token' => _Var::$operators),
@@ -41,7 +41,7 @@ class _Var extends TokenAuto {
         
         $this->actions = array('to_var_new'   => 'Var',
                                'atom'         => 'Var');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }

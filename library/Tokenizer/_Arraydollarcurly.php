@@ -23,7 +23,7 @@ class _Arraydollarcurly extends TokenAuto {
                                'atom'        => 'Array',
                                'keepIndexed' => true,
                                'cleanIndex'  => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }

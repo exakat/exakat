@@ -18,7 +18,7 @@ class _Global extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // global $x, $y, $z;
         $this->conditions = array( 0 => array('token'     => _Global::$operators),
@@ -29,7 +29,7 @@ class _Global extends TokenAuto {
         $this->actions = array('toGlobal'     => true,
                                'atom'         => 'Global',
                                'makeSequence' => 'it');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }
@@ -40,7 +40,7 @@ class _Global extends TokenAuto {
 if (fullcode.out('GLOBAL').count() == 1) {
     fullcode.setProperty('fullcode', "global " + fullcode.out("GLOBAL").next().getProperty('fullcode'));
 } else {
-    s = []; 
+    s = [];
     fullcode.out("GLOBAL").sort{it.rank}._().each{ s.add(it.fullcode); };
 
     fullcode.setProperty('fullcode', "global " + s.join(', '));

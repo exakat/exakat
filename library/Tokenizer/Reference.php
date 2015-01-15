@@ -7,29 +7,29 @@ class Reference extends TokenAuto {
     static public $atom = 'Reference';
 
     public function _check() {
-        $this->conditions = array(-1 => array('filterOut2' => array_merge(Logical::$operators, 
+        $this->conditions = array(-1 => array('filterOut2' => array_merge(Logical::$operators,
                                                                 array('T_VARIABLE', 'T_LNUMBER', 'T_DNUMBER', 'T_STRING',
-                                                                      'T_MINUS', 'T_PLUS', 'T_CLOSE_PARENTHESIS', 
+                                                                      'T_MINUS', 'T_PLUS', 'T_CLOSE_PARENTHESIS',
                                                                       'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS', 'T_CONSTANT_ENCAPSED_STRING' )),
                                               'notAtom'    => array('Parenthesis', 'Array', 'Comparison', 'Bitshift', )),
                                    0 => array('token' => Reference::$operators,
                                               'atom' => 'none'),
-                                   1 => array('atom' => array('Variable', 'Array', 'Property', 'Functioncall', 'Methodcall', 'Staticmethodcall', 
+                                   1 => array('atom' => array('Variable', 'Array', 'Property', 'Functioncall', 'Methodcall', 'Staticmethodcall',
                                                               'Staticproperty', 'Staticconstant', 'New', 'Arrayappend', )),
                                    2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', )),
         );
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
-                               'propertyNext' => array('reference' => 'true', 
+                               'propertyNext' => array('reference' => 'true',
                                                        'fullcode'  => 'it.fullcode'),
                                'fullcode'     => true
                                );
         $this->setAtom = true;
         $this->checkAuto();
 
-        // special case for Stdclass &$x = 
+        // special case for Stdclass &$x =
         $this->conditions = array(-2 => array('filterOut' => 'T_DOUBLE_COLON'),
-                                  -1 => array('token'     => 'T_STRING'), 
+                                  -1 => array('token'     => 'T_STRING'),
                                    0 => array('token'     => Reference::$operators,
                                               'atom'      => 'none'),
                                    1 => array('atom'      => 'Variable'),
@@ -40,7 +40,7 @@ class Reference extends TokenAuto {
                                'propertyNext' => array('reference' => 'true'));
         $this->checkAuto();
 
-        // special case for &function x() 
+        // special case for &function x()
         $this->conditions = array(-1 => array('token' => 'T_FUNCTION',
                                               'atom'  => 'none'),
                                   0 => array('token'  => Reference::$operators),
@@ -61,7 +61,7 @@ class Reference extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', "&" + fullcode.getProperty('fullcode')); 
+fullcode.setProperty('fullcode', "&" + fullcode.getProperty('fullcode'));
 
 GREMLIN;
     }

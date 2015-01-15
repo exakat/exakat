@@ -11,7 +11,7 @@ class Staticmethodcall extends TokenAuto {
 
         // unusual call : Class::{Method}(); Only build the Functioncall
         $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),
-                                   -1 => array('atom'       => $operands), 
+                                   -1 => array('atom'       => $operands),
                                     0 => array('token'      => Staticmethodcall::$operators),
                                     1 => array('token'      => 'T_OPEN_CURLY'),
                                     2 => array('atom'       => 'yes'),
@@ -24,11 +24,11 @@ class Staticmethodcall extends TokenAuto {
         $this->actions = array('to_specialmethodcall' => true,
                                'makeSequence'         => 'it',
                                'cleanIndex'           => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         // normal call : Class::Method();
         $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),
-                                   -1 => array('atom' => $operands), 
+                                   -1 => array('atom' => $operands),
                                     0 => array('token' => Staticmethodcall::$operators),
                                     1 => array('atom' => array('Functioncall', 'Methodcall')),
                                  );
@@ -38,7 +38,7 @@ class Staticmethodcall extends TokenAuto {
                                'makeSequence' => 'it',
                                'atom'         => 'Staticmethodcall',
                                'cleanIndex'   => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }
@@ -51,7 +51,7 @@ if (fullcode.out("METHOD").next().getProperty('block') == true) {
     methode = "{" + methode + "}";
 }
 
-fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty('fullcode') + "::" + methode); 
+fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty('fullcode') + "::" + methode);
 
 GREMLIN;
     }

@@ -8,9 +8,9 @@ class Staticclass extends TokenAuto {
 
     public function _check() {
         $this->conditions = array( -2 => array('filterOut2' => array('T_NS_SEPARATOR')),
-                                   -1 => array('atom'       => array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname')), 
+                                   -1 => array('atom'       => array('Constant', 'Identifier', 'Variable', 'Array', 'Static', 'Nsname')),
                                     0 => array('token'      => Staticconstant::$operators),
-                                    1 => array('token'      => 'T_CLASS'), 
+                                    1 => array('token'      => 'T_CLASS'),
                                     2 => array('filterOut'  => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),
                                  );
         
@@ -19,7 +19,7 @@ class Staticclass extends TokenAuto {
                                'atom'         => 'Staticclass',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it' );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }
@@ -27,9 +27,9 @@ class Staticclass extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.out('CONSTANT').each{ 
-    it.setProperty('fullcode',  it.code); 
-    it.setProperty('atom',  'Identifier'); 
+fullcode.out('CONSTANT').each{
+    it.setProperty('fullcode',  it.code);
+    it.setProperty('atom',  'Identifier');
 }
 fullcode.setProperty('fullcode',  it.out("CLASS").next().getProperty('fullcode') + "::" + it.out("CONSTANT").next().getProperty('fullcode'));
 

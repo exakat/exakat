@@ -24,7 +24,7 @@ class Preplusplus extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.getProperty('code') + fullcode.out("PREPLUSPLUS").next().getProperty('fullcode')); 
+fullcode.setProperty('fullcode', fullcode.getProperty('code') + fullcode.out("PREPLUSPLUS").next().getProperty('fullcode'));
 
 GREMLIN;
     }

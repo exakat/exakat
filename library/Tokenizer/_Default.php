@@ -9,7 +9,7 @@ class _Default extends TokenAuto {
     public function _check() {
         $finalToken = array('T_CLOSE_CURLY', 'T_CASE', 'T_DEFAULT', 'T_SEQUENCE_CASEDEFAULT', 'T_ENDSWITCH');
         
-     // default : with nothing 
+     // default : with nothing
         $this->conditions = array(0 => array('token' => _Default::$operators,
                                              'atom' => 'none'),
                                   1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
@@ -24,7 +24,7 @@ class _Default extends TokenAuto {
         $this->conditions = array(0 => array('token' => _Default::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  2 => array('token' => 'T_SEMICOLON', 
+                                  2 => array('token' => 'T_SEMICOLON',
                                              'atom'  => 'none')
         );
         
@@ -36,7 +36,7 @@ class _Default extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Default::$operators,
                                               'atom'  => 'none'),
                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   2 => array('atom'  => 'yes', 'notAtom' => 'Sequence' ), 
+                                   2 => array('atom'  => 'yes', 'notAtom' => 'Sequence' ),
                                    3 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
                                    4 => array('token' => $finalToken));
         
@@ -48,7 +48,7 @@ class _Default extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Default::$operators,
                                               'atom'  => 'none'),
                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   2 => array('atom'  => 'yes', 'notAtom' => 'Sequence'), 
+                                   2 => array('atom'  => 'yes', 'notAtom' => 'Sequence'),
                                    3 => array('token' => $finalToken));
         
         $this->actions = array('createBlockWithSequenceForDefault' => true,
@@ -60,20 +60,20 @@ class _Default extends TokenAuto {
                                                'atom'    => 'none'),
                                     1 => array('token'   => array('T_COLON', 'T_SEMICOLON'),
                                                'atom'    => 'none'),
-                                    2 => array('atom'    => 'yes', 
+                                    2 => array('atom'    => 'yes',
                                                'notAtom' => array('Case', 'Default', 'SequenceCaseDefault', 'Sequence')),
                                     3 => array('token'   => $finalToken),
         );
         
         $this->actions = array('createBlockWithSequenceForDefault' => true,
                                'keepIndexed'                       => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         // Default with block
         $this->conditions = array(0 => array('token' => _Default::$operators,
                                               'atom' => 'none'),
                                   1 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  2 => array('atom' => array('Sequence')), 
+                                  2 => array('atom' => array('Sequence')),
                                   3 => array('token' => $finalToken),
         );
         
@@ -85,15 +85,15 @@ class _Default extends TokenAuto {
         $this->checkAuto();
 
         // @note instructions after a default, but not separated by ;
-        $this->conditions = array( 0 => array('token' => 'T_DEFAULT', 
+        $this->conditions = array( 0 => array('token' => 'T_DEFAULT',
                                               'atom'  => 'none',),
                                    1 => array('token' => array('T_COLON', 'T_SEMICOLON'),
-                                              'atom'  => 'none', ), 
-                                   2 => array('atom'  => 'yes'), 
-                                   3 => array('atom'  => 'yes'), 
+                                              'atom'  => 'none', ),
+                                   2 => array('atom'  => 'yes'),
+                                   3 => array('atom'  => 'yes'),
                                    4 => array('filterOut2' => array_merge(array('T_ELSE', 'T_ELSEIF', 'T_OPEN_PARENTHESIS'),
-                                                                        Assignation::$operators, Property::$operators, 
-                                                                        _Array::$operators,      Bitshift::$operators, 
+                                                                        Assignation::$operators, Property::$operators,
+                                                                        _Array::$operators,      Bitshift::$operators,
                                                                         Comparison::$operators,  Logical::$operators,
                                                                         Staticproperty::$operators)),
         );
@@ -108,7 +108,7 @@ class _Default extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', "default : " + fullcode.out("CODE").next().getProperty('fullcode')); 
+fullcode.setProperty('fullcode', "default : " + fullcode.out("CODE").next().getProperty('fullcode'));
 
 GREMLIN;
     }

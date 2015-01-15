@@ -7,7 +7,7 @@ class Bitshift extends TokenAuto {
     static public $atom = 'Bitshift';
         
     public function _check() {
-        // note : Multiplication:: and Bitshift:: operators are the same! 
+        // note : Multiplication:: and Bitshift:: operators are the same!
         $this->conditions = array(-2 => array('filterOut' => array_merge(Property::$operators,      Staticproperty::$operators,
                                                                          Concatenation::$operators, Bitshift::$operators)),
                                   -1 => array('atom'      => array_merge(array('Bitshift'), Multiplication::$operands)),
@@ -32,7 +32,7 @@ class Bitshift extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode',  fullcode.out("LEFT").next().getProperty('fullcode') + " " + fullcode.getProperty('code') 
+fullcode.setProperty('fullcode',  fullcode.out("LEFT").next().getProperty('fullcode') + " " + fullcode.getProperty('code')
                                     + " " + fullcode.out("RIGHT").next().getProperty('fullcode') );
 
 GREMLIN;

@@ -13,7 +13,7 @@ class _Abstract extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 1,
                                'atom'   => 'Abstract');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // abstract class x { abstract public function x() }
         $this->conditions = array( 0 => array('token' => _Abstract::$operators),
@@ -22,7 +22,7 @@ class _Abstract extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 2,
                                'atom'   => 'Abstract');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // abstract class x { abstract public static function x() }
         $this->conditions = array( 0 => array('token' => _Abstract::$operators),
@@ -32,7 +32,7 @@ class _Abstract extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 3,
                                'atom'   => 'Abstract');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }

@@ -30,7 +30,7 @@ class _Declare extends TokenAuto {
                                'makeSequence' => 'it');
         $this->checkAuto();
 
-        // declare(ticks = 2); 
+        // declare(ticks = 2);
         $this->conditions = array(0 => array('token' => _Declare::$operators,
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),

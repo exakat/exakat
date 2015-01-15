@@ -21,7 +21,7 @@ class _Function extends TokenAuto {
         $this->actions = array('transform'     => array( 1 => 'NAME',
                                                          2 => 'DROP',
                                                          3 => 'ARGUMENTS',
-                                                         4 => 'DROP', 
+                                                         4 => 'DROP',
                                                          5 => 'BLOCK'),
                                'atom'          => 'Function',
                                'checkTypehint' => 'Function',
@@ -43,7 +43,7 @@ class _Function extends TokenAuto {
         $this->actions = array('transform'     => array( 1 => 'NAME',
                                                          2 => 'DROP',
                                                          3 => 'ARGUMENTS',
-                                                         4 => 'DROP', 
+                                                         4 => 'DROP',
                                                          5 => 'DROP'),
                                'atom'          => 'Function',
                                'checkTypehint' => 'Function',
@@ -105,16 +105,16 @@ fullcode.filter{it.out("USE").count() == 0 && it.out("NAME").count() == 0 && it.
 fullcode.filter{it.out("USE").any()}.each{ fullcode.fullcode = "function (" + fullcode.out("ARGUMENTS").next().fullcode + ") use " + fullcode.out("USE").next().fullcode + " " + fullcode.out("BLOCK").next().fullcode;}
 
 // for properties
-if (fullcode.out('DEFINE').any()) { 
-    fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + fullcode.out('DEFINE').next().getProperty('fullcode')); 
-    fullcode.setProperty('propertyname', fullcode.out('DEFINE').next().getProperty('fullcode').substring(1, fullcode.out('DEFINE').next().getProperty('fullcode').size()) ); 
+if (fullcode.out('DEFINE').any()) {
+    fullcode.setProperty('fullcode', fullcode.getProperty('fullcode') + fullcode.out('DEFINE').next().getProperty('fullcode'));
+    fullcode.setProperty('propertyname', fullcode.out('DEFINE').next().getProperty('fullcode').substring(1, fullcode.out('DEFINE').next().getProperty('fullcode').size()) );
     fullcode.out('PROTECTED', 'PRIVATE', 'PUBLIC').each{ it.setProperty('atom', 'Visibility'); }
 } else {
-    fullcode.setProperty('args_min', fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').count()); 
+    fullcode.setProperty('args_min', fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').count());
     if (fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').has('variadic', 'true').any()) {
-        fullcode.setProperty('args_max', 100); 
+        fullcode.setProperty('args_max', 100);
     } else {
-        fullcode.setProperty('args_max', fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Assignation').count() + fullcode.getProperty('args_min')); 
+        fullcode.setProperty('args_max', fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Assignation').count() + fullcode.getProperty('args_min'));
     }
     // No support for T_ELLIPSIS yet :( => 100!
 }

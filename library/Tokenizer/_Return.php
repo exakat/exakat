@@ -7,7 +7,7 @@ class _Return extends TokenAuto {
     static public $atom = 'Return';
 
     public function _check() {
-        // return ; 
+        // return ;
         $this->conditions = array( 0 => array('token' => _Return::$operators,
                                               'atom' => 'none' ),
                                    1 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_ENDIF'))

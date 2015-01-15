@@ -7,8 +7,8 @@ class _Foreach extends TokenAuto {
     static public $atom = 'Foreach';
 
     public function _check() {
-        $operands = array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall', 
-                          'Staticmethodcall', 'Methodcall','Cast', 'Parenthesis', 'Ternary', 
+        $operands = array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
+                          'Staticmethodcall', 'Methodcall','Cast', 'Parenthesis', 'Ternary',
                           'Noscream', 'Not', 'Assignation', 'New', 'Addition', 'Clone');
         $blindVariables = array('Variable', 'Keyvalue', 'Array', 'Staticproperty', 'Property', 'Functioncall' );
 
@@ -16,7 +16,7 @@ class _Foreach extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Foreach::$operators,
                                               'atom'  => 'none'),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                   2 => array('atom'  => $operands), 
+                                   2 => array('atom'  => $operands),
                                    3 => array('token' => 'T_AS'),
                                    4 => array('atom'  => $blindVariables),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
@@ -31,15 +31,15 @@ class _Foreach extends TokenAuto {
         $this->conditions = array( 0 => array('token'   => _Foreach::$operators,
                                               'atom'    => 'none'),
                                    1 => array('token'   => 'T_OPEN_PARENTHESIS'),
-                                   2 => array('atom'    => $operands), 
+                                   2 => array('atom'    => $operands),
                                    3 => array('token'   => 'T_AS'),
                                    4 => array('atom'    => $blindVariables),
                                    5 => array('token'   => 'T_CLOSE_PARENTHESIS'),
-                                   6 => array('atom'    => 'yes', 
+                                   6 => array('atom'    => 'yes',
                                               'notAtom' => 'Sequence'),
-                                   7 => array('filterOut' => array_merge(array('T_OPEN_BRACKET', 'T_OBJECT_OPERATOR', 
-                                                                               'T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS'), 
-                                                                Assignation::$operators, Addition::$operators, 
+                                   7 => array('filterOut' => array_merge(array('T_OPEN_BRACKET', 'T_OBJECT_OPERATOR',
+                                                                               'T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS'),
+                                                                Assignation::$operators, Addition::$operators,
                                                                 Multiplication::$operators)),
         );
         $this->actions = array( 'to_block_foreach' => true,
@@ -51,7 +51,7 @@ class _Foreach extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Foreach::$operators,
                                               'atom'  => 'none'),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                   2 => array('atom'  => $operands), 
+                                   2 => array('atom'  => $operands),
                                    3 => array('token' => 'T_AS'),
                                    4 => array('atom'  => $blindVariables),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
@@ -59,7 +59,7 @@ class _Foreach extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array('1' => 'DROP',
-                                                       '2' => 'SOURCE',    
+                                                       '2' => 'SOURCE',
                                                        '3' => 'DROP',
                                                        '4' => 'VALUE',
                                                        '5' => 'DROP',
@@ -69,13 +69,13 @@ class _Foreach extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // @doc foreach($a as $b) : code endforeach
         $this->conditions = array( 0  => array('token' => _Foreach::$operators,
                                                'atom' => 'none'),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                   2 => array('atom'  => $operands), 
+                                   2 => array('atom'  => $operands),
                                    3 => array('token' => 'T_AS'),
                                    4 => array('atom'  => $blindVariables),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
@@ -87,13 +87,13 @@ class _Foreach extends TokenAuto {
         
         $this->actions = array( 'makeForeachSequence' => true,
                                 'keepIndexed' => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // @doc foreach($a as $b) : code endforeach
         $this->conditions = array( 0  => array('token' => _Foreach::$operators,
                                                'atom' => 'none'),
                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                   2 => array('atom'  => $operands), 
+                                   2 => array('atom'  => $operands),
                                    3 => array('token' => 'T_AS'),
                                    4 => array('atom'  => $blindVariables),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
@@ -103,7 +103,7 @@ class _Foreach extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'SOURCE',    
+                                                        2 => 'SOURCE',
                                                         3 => 'DROP',
                                                         4 => 'VALUE',
                                                         5 => 'DROP',
@@ -116,13 +116,13 @@ class _Foreach extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // @doc foreach($a as $b) : code ; endforeach
         $this->conditions = array( 0 => array('token'  => _Foreach::$operators,
                                               'atom'   => 'none'),
                                    1 => array('token'  => 'T_OPEN_PARENTHESIS'),
-                                   2 => array('atom'   => $operands), 
+                                   2 => array('atom'   => $operands),
                                    3 => array('token'  => 'T_AS'),
                                    4 => array('atom'   => $blindVariables),
                                    5 => array('token'  => 'T_CLOSE_PARENTHESIS'),
@@ -134,7 +134,7 @@ class _Foreach extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'SOURCE',    
+                                                        2 => 'SOURCE',
                                                         3 => 'DROP',
                                                         4 => 'VALUE',
                                                         5 => 'DROP',
@@ -148,7 +148,7 @@ class _Foreach extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }

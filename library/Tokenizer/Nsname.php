@@ -8,8 +8,8 @@ class Nsname extends TokenAuto {
 
     public function _check() {
         // @note \a\b\c (\ initial)
-        $this->conditions = array( -2 => array('filterOut'  => self::$operators), 
-                                   -1 => array('filterOut2' => 'T_NS_SEPARATOR'), 
+        $this->conditions = array( -2 => array('filterOut'  => self::$operators),
+                                   -1 => array('filterOut2' => 'T_NS_SEPARATOR'),
                                     0 => array('token'      => self::$operators,
                                                'atom'       => 'none'),
                                     1 => array('atom'       => array('Identifier', 'Boolean', 'Null')),
@@ -42,7 +42,7 @@ class Nsname extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-s = []; 
+s = [];
 fullcode.out("SUBNAME").sort{it.rank}._().each{ s.add(it.fullcode); };
 
 if (fullcode.absolutens == 'true') {

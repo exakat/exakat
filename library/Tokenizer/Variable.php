@@ -18,7 +18,7 @@ class Variable extends TokenAuto {
                                 'cleanIndex'  => true);
         $this->checkAuto();
         
-        // todo find a way to process those remainings atom that may be found in those {} 
+        // todo find a way to process those remainings atom that may be found in those {}
         
         return false;
     }
@@ -26,7 +26,7 @@ class Variable extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
         
-it.fullcode = it.code; 
+it.fullcode = it.code;
 if (it.reference == "true") {
     it.fullcode = "&" + it.fullcode;
 }

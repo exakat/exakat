@@ -19,7 +19,7 @@ class Float extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.getProperty('code')); 
+fullcode.setProperty('fullcode', fullcode.getProperty('code'));
 
 GREMLIN;
     }

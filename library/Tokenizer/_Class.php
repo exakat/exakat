@@ -17,7 +17,7 @@ class _Class extends TokenAuto {
                                'keepIndexed' => true,
                                'atom'        => 'Class',
                                'cleanIndex'  => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x extends y {}
         $this->conditions = array( 0 => array('token' => _Class::$operators),
@@ -31,7 +31,7 @@ class _Class extends TokenAuto {
                                'keepIndexed' => true,
                                'cleanIndex'  => true
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x implements a {}
         $this->conditions = array( 0 => array('token'     => _Class::$operators),
@@ -46,7 +46,7 @@ class _Class extends TokenAuto {
                                'arg2implement' => 'true',
                                'keepIndexed'   => true,
                                'cleanIndex'    => true );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { // some real code}
         $this->conditions = array( 0 => array('token' => _Class::$operators),
@@ -58,14 +58,14 @@ class _Class extends TokenAuto {
                                'atom'         => 'Class',
                                'makeSequence' => 'it',
                                'cleanIndex'   => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.fullcode = "class " + it.out("NAME").next().code; 
+fullcode.fullcode = "class " + it.out("NAME").next().code;
 
 // abstract
 fullcode.out("ABSTRACT").each{ fullcode.fullcode = 'abstract ' + fullcode.fullcode;}
@@ -84,14 +84,14 @@ if (fullcode.out("IMPLEMENTS").count() > 0) {
 }
 
 /*
-fullcode.out("EXTENDS").each{ 
+fullcode.out("EXTENDS").each{
     extend = it;
     g.V.has('atom', 'Class').filter{it.out('NAME').next().code == extend.code}.each{
         g.addEdge(it , fullcode, 'DEFINES');
     }
 }
 
-fullcode.out("IMPLEMENTS").each{ 
+fullcode.out("IMPLEMENTS").each{
     implement = it;
     g.V.has('atom', 'Interface').filter{it.out('NAME').next().code == implement.code}.each{
         g.addEdge(it , fullcode, 'DEFINES');

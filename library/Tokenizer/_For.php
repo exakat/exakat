@@ -37,7 +37,7 @@ class _For extends TokenAuto {
                                     8 => array('atom'  => 'yes',
                                                'notAtom' => 'Sequence'),
                                     9 => array('filterOut' => Token::$instructionEnding),
-        );                
+        );
         $this->actions = array('to_block_for' => true,
                                'keepIndexed'  => true,
                                'cleanIndex'   => true);
@@ -57,7 +57,7 @@ class _For extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array('1' => 'DROP',
-                                                       '2' => 'INIT',    
+                                                       '2' => 'INIT',
                                                        '3' => 'DROP',
                                                        '4' => 'FINAL',
                                                        '5' => 'DROP',
@@ -69,7 +69,7 @@ class _For extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // @doc for(a; b; c) : code endfor
         $this->conditions = array( 0  => array('token' => _For::$operators,
@@ -87,7 +87,7 @@ class _For extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'INIT',    
+                                                        2 => 'INIT',
                                                         3 => 'DROP',
                                                         4 => 'FINAL',
                                                         5 => 'DROP',
@@ -95,14 +95,14 @@ class _For extends TokenAuto {
                                                         7 => 'DROP',
                                                         8 => 'DROP',
                                                         9 => 'BLOCK',
-                                                       10 => 'DROP', 
+                                                       10 => 'DROP',
                                                       ),
                                'atom'         => 'For',
                                'property'     => array('alternative' => 'true'),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // @doc for(a; b; c) : code ; endfor
         $this->conditions = array( 0  => array('token'  => _For::$operators,
@@ -122,7 +122,7 @@ class _For extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'INIT',    
+                                                        2 => 'INIT',
                                                         3 => 'DROP',
                                                         4 => 'FINAL',
                                                         5 => 'DROP',
@@ -130,15 +130,15 @@ class _For extends TokenAuto {
                                                         7 => 'DROP',
                                                         8 => 'DROP',
                                                         9 => 'BLOCK',
-                                                       10 => 'DROP', 
-                                                       11 => 'DROP', 
+                                                       10 => 'DROP',
+                                                       11 => 'DROP',
                                                       ),
                                'atom'         => 'For',
                                'property'     => array('alternative' => 'true'),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }

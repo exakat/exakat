@@ -8,23 +8,23 @@ class Multiplication extends TokenAuto {
                                     'Parenthesis', 'Property', 'Array', 'Concatenation', 'Float',
                                     'String', 'Identifier', 'Preplusplus', 'Postplusplus', 'Nsname', 'Functioncall',
                                     'Methodcall', 'Staticmethodcall', 'Concatenation', 'Cast',
-                                    'Noscream', 'Staticconstant', 'Staticproperty', 'Constant', 
+                                    'Noscream', 'Staticconstant', 'Staticproperty', 'Constant',
                                     'Boolean', 'Magicconstant', 'Assignation', 'Include', 'Power',
                                     'Staticclass', 'Null' );
     static public $atom = 'Multiplication';
     
     public function _check() {
 
-        $this->conditions = array(-2 => array('filterOut' => array_merge(Property::$operators, 
+        $this->conditions = array(-2 => array('filterOut' => array_merge(Property::$operators,
                                                                          Staticproperty::$operators,
-                                                                         Concatenation::$operators, 
+                                                                         Concatenation::$operators,
                                                                          Preplusplus::$operators,
                                                                          Power::$operators)),
                                   -1 => array('atom' => Multiplication::$operands ),
                                    0 => array('token' => Multiplication::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => Multiplication::$operands),
-                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
+                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                                                                'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR'),
                                                                           Assignation::$operators,
                                                                           Power::$operators)),
@@ -43,7 +43,7 @@ class Multiplication extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode',  fullcode.out("LEFT").next().getProperty('fullcode') + " " + fullcode.getProperty('code') 
+fullcode.setProperty('fullcode',  fullcode.out("LEFT").next().getProperty('fullcode') + " " + fullcode.getProperty('code')
                                     + " " + fullcode.out("RIGHT").next().getProperty('fullcode'));
 
 GREMLIN;

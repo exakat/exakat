@@ -15,7 +15,7 @@ class _Const extends TokenAuto {
                                  );
         
         $this->actions = array('to_const'     => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x {const a = 2; } only one.
         $this->conditions = array( -1 => array('notToken' => 'T_USE'),
@@ -28,7 +28,7 @@ class _Const extends TokenAuto {
                                'atom'                 => 'Const',
                                'cleanIndex'           => true,
                                'makeSequence'         => 'it');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }

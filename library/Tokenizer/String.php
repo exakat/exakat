@@ -3,15 +3,15 @@
 namespace Tokenizer;
 
 class String extends TokenAuto {
-    static public $operators = array('T_QUOTE'); 
-    static public $allowedClasses = array('String', 'Variable', 'Concatenation', 'Array', 'Property', 'Methodcall', 
+    static public $operators = array('T_QUOTE');
+    static public $allowedClasses = array('String', 'Variable', 'Concatenation', 'Array', 'Property', 'Methodcall',
                                           'Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Ternary', 'Concatenation',
                                           'Functioncall');
     static public $atom = 'String';
 
     public function _check() {
 // Case of string with interpolation : "a${b}c";
-        $this->conditions = array(  0 => array('token'            => String::$operators, 
+        $this->conditions = array(  0 => array('token'            => String::$operators,
                                                'atom'             => 'none'),
                                     1 => array('atom'             => String::$allowedClasses,
                                                'check_for_string' => String::$allowedClasses),

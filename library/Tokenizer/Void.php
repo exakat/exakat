@@ -13,7 +13,7 @@ class Void extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', ''); 
+fullcode.setProperty('fullcode', '');
 
 GREMLIN;
     }

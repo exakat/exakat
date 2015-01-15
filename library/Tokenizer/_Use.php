@@ -19,7 +19,7 @@ class _Use extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // use \b\c, \a\c;
         $this->conditions = array( 0 => array('token'    => _Use::$operators),
@@ -31,7 +31,7 @@ class _Use extends TokenAuto {
         $this->actions = array('to_use'       => true,
                                'atom'         => 'Use',
                                'makeSequence' => 'it' );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // use const \a\b;
         $this->conditions = array( 0 => array('token' => _Use::$operators),
@@ -46,7 +46,7 @@ class _Use extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // use const \b\c, \a\c;
         $this->conditions = array( 0 => array('token' => _Use::$operators),
@@ -59,7 +59,7 @@ class _Use extends TokenAuto {
         $this->actions = array('to_use'       => true,
                                'atom'         => 'Use',
                                'makeSequence' => 'it' );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // use A { B as C; }
         $this->conditions = array( 0 => array('token' => _Use::$operators),
@@ -72,9 +72,9 @@ class _Use extends TokenAuto {
                                                       2 => 'BLOCK'),
                                'atom'       => 'Use',
                                'cleanIndex' => true,
-                               'makeSequence' => 'it' 
+                               'makeSequence' => 'it'
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // use A,B {};
         $this->conditions = array( 0 => array('token' => _Use::$operators),
@@ -87,7 +87,7 @@ class _Use extends TokenAuto {
                                'atom'         => 'Use',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'  );
-        $this->checkAuto(); 
+        $this->checkAuto();
         
         return false;
     }
@@ -96,9 +96,9 @@ class _Use extends TokenAuto {
         return <<<GREMLIN
 
 s = [];
-fullcode.out('USE', 'FUNCTION', 'CONST').sort{it.rank}._().each{ 
+fullcode.out('USE', 'FUNCTION', 'CONST').sort{it.rank}._().each{
     a = it.getProperty('fullcode');
-    s.add(a); 
+    s.add(a);
 };
 if (fullcode.out('FUNCTION').any()) {
     fullcode.setProperty('fullcode', fullcode.getProperty('code') + " function " + s.join(", "));
@@ -120,8 +120,8 @@ fullcode.out('USE').has('atom', 'Identifier').each{
 // use a\b\c (aka c);
 fullcode.out('USE').has('atom', 'As').each{
     s = [];
-    it.out("SUBNAME").sort{it.rank}._().each{ 
-        s.add(it.getProperty('code')); 
+    it.out("SUBNAME").sort{it.rank}._().each{
+        s.add(it.getProperty('code'));
     };
     if (it.absolutens == 'true') {
         it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());
@@ -138,8 +138,8 @@ fullcode.out('USE').has('atom', 'As').each{
 // use a; (aka a)
 fullcode.out('USE').has('atom', 'Nsname').each{
     s = [];
-    it.out("SUBNAME").sort{it.rank}._().each{ 
-        s.add(it.getProperty('code')); 
+    it.out("SUBNAME").sort{it.rank}._().each{
+        s.add(it.getProperty('code'));
     };
     if (it.absolutens == 'true') {
         it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());
@@ -158,12 +158,12 @@ fullcode.out('USE').has('atom', 'Nsname').each{
     }
 }
 
-// use function a as b; 
-// use const a as b; 
+// use function a as b;
+// use const a as b;
 fullcode.out('FUNCTION', 'CONST').each{
     s = [];
-    it.out("SUBNAME").sort{it.rank}._().each{ 
-        s.add(it.getProperty('code')); 
+    it.out("SUBNAME").sort{it.rank}._().each{
+        s.add(it.getProperty('code'));
     };
     if (it.absolutens == 'true') {
         it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());

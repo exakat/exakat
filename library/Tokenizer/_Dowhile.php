@@ -19,7 +19,7 @@ class _Dowhile extends TokenAuto {
                                    6 => array('token'   => 'T_CLOSE_PARENTHESIS')
         );
         
-        $this->actions = array('transform'    => array(   1 => 'BLOCK',  
+        $this->actions = array('transform'    => array(   1 => 'BLOCK',
                                                           2 => 'DROP',
                                                           3 => 'DROP',
                                                           4 => 'DROP',
@@ -42,7 +42,7 @@ class _Dowhile extends TokenAuto {
                                    5 => array('token'   => 'T_CLOSE_PARENTHESIS')
         );
         
-        $this->actions = array('transform'    => array(   1 => 'BLOCK',  
+        $this->actions = array('transform'    => array(   1 => 'BLOCK',
                                                           2 => 'DROP',
                                                           3 => 'DROP',
                                                           4 => 'CONDITION',
@@ -63,7 +63,7 @@ class _Dowhile extends TokenAuto {
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS')
         );
         
-        $this->actions = array('transform'    => array(   1 => 'BLOCK',  
+        $this->actions = array('transform'    => array(   1 => 'BLOCK',
                                                           2 => 'DROP',
                                                           3 => 'DROP',
                                                           4 => 'CONDITION',

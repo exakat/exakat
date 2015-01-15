@@ -7,12 +7,12 @@ class Methodcall extends TokenAuto {
     static public $atom = 'Methodcall';
 
     public function _check() {
-        $operands = array('Variable', 'Property', 'Array', 'Functioncall', 'Methodcall', 
+        $operands = array('Variable', 'Property', 'Array', 'Functioncall', 'Methodcall',
                           'Staticmethodcall', 'Staticproperty', 'Parenthesis' );
 
         // $this->x($args);
         $this->conditions = array( -2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')),
-                                   -1 => array('atom'      => $operands), 
+                                   -1 => array('atom'      => $operands),
                                     0 => array('token'     => Methodcall::$operators,
                                                'atom'      => 'none'),
                                     1 => array('atom'      => array('Functioncall', 'Methodcall'))
@@ -23,11 +23,11 @@ class Methodcall extends TokenAuto {
                                'atom'           => 'Methodcall',
                                'cleanIndex'     => true,
                                'makeSequence'   => 'it');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         // $this->{$x}($args);
         $this->conditions = array( -2 => array('filterOut' => array('T_DOUBLE_COLON')),
-                                   -1 => array('atom'      => $operands), 
+                                   -1 => array('atom'      => $operands),
                                     0 => array('token'     => Methodcall::$operators),
                                     1 => array('token'     => 'T_OPEN_CURLY'),
                                     2 => array('atom'      => 'yes'),
@@ -47,7 +47,7 @@ class Methodcall extends TokenAuto {
                                'atom'         => 'Methodcall',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
-        $this->checkAuto(); 
+        $this->checkAuto();
         
         return false;
     }

@@ -7,15 +7,15 @@ class Power extends TokenAuto {
     static public $atom = 'Power';
 
     public function _check() {
-        $this->conditions = array(-2 => array('filterOut' => array_merge(Property::$operators, 
+        $this->conditions = array(-2 => array('filterOut' => array_merge(Property::$operators,
                                                                          Staticproperty::$operators,
-                                                                         Concatenation::$operators, 
+                                                                         Concatenation::$operators,
                                                                          Preplusplus::$operators)),
                                   -1 => array('atom'  => Multiplication::$operands ),
                                    0 => array('token' => Power::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => Multiplication::$operands),
-                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
+                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                                                                'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR'),
                                                                           Assignation::$operators)),
         );
@@ -33,7 +33,7 @@ class Power extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode',  fullcode.out("LEFT").next().getProperty('fullcode') + " ** " + 
+fullcode.setProperty('fullcode',  fullcode.out("LEFT").next().getProperty('fullcode') + " ** " +
                                   fullcode.out("RIGHT").next().getProperty('fullcode'));
 
 GREMLIN;

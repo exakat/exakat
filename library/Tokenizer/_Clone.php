@@ -24,9 +24,9 @@ class _Clone extends TokenAuto {
 
         $this->conditions = array(0 => array('token' => _Clone::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('token' => 'T_OPEN_PARENTHESIS'), 
+                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom'  =>  $operands),
-                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'), 
+                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',

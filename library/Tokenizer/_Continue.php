@@ -49,7 +49,7 @@ class _Continue extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', "continue " + fullcode.out("LEVEL").next().getProperty('code')); 
+fullcode.setProperty('fullcode', "continue " + fullcode.out("LEVEL").next().getProperty('code'));
 
 GREMLIN;
     }

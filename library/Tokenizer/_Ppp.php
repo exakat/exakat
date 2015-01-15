@@ -17,7 +17,7 @@ class _Ppp extends TokenAuto {
         $this->actions = array('to_ppp'       => 1,
                                'atom'         => 'Ppp',
                                'makeSequence' => 'x' );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { static private $s }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),
@@ -26,7 +26,7 @@ class _Ppp extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 1,
                                'atom'      => 'Ppp');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { public $x = 2 }
         $this->conditions = array(-1 => array('filterOut2' =>  'STATIC'),
@@ -37,10 +37,10 @@ class _Ppp extends TokenAuto {
         
         $this->actions = array('to_ppp_assignation' => true,
                                'atom'               => 'Ppp',
-                               'makeSequence'       => 'x' 
+                               'makeSequence'       => 'x'
                                );
 
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { public static $x = 2; }
         $this->conditions = array(-1 => array('filterOut2' =>  'STATIC'),
@@ -51,10 +51,10 @@ class _Ppp extends TokenAuto {
         
         $this->actions = array('to_ppp_assignation' => true,
                                'atom'               => 'Ppp',
-                               'makeSequence'       => 'x' 
+                               'makeSequence'       => 'x'
                                );
 
-        $this->checkAuto(); 
+        $this->checkAuto();
 
 
     // class x { protected function f()  }
@@ -63,7 +63,7 @@ class _Ppp extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 1,
                                'atom'      => 'Ppp');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { protected private function f()  }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),
@@ -72,7 +72,7 @@ class _Ppp extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 2,
                                'atom'      => 'Ppp');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { protected private static function f()  }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),
@@ -82,7 +82,7 @@ class _Ppp extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 3,
                                'atom'      => 'Ppp');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { public $x, $y }
         $this->conditions = array(-1 => array('filterOut2' => 'T_STATIC'),
@@ -94,7 +94,7 @@ class _Ppp extends TokenAuto {
         $this->actions = array('to_var_new' => 'Ppp',
                                'atom'       => 'Ppp',
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { static private $x, $y }
         $this->conditions = array( 0 => array('token' => _Ppp::$operators),
@@ -104,7 +104,7 @@ class _Ppp extends TokenAuto {
         
         $this->actions = array('to_option' => 1,
                                'atom'      => 'Ppp');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }

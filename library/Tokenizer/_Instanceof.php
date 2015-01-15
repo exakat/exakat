@@ -26,12 +26,12 @@ class _Instanceof extends TokenAuto {
         $this->checkAuto();
         
         return false;
-    } 
+    }
     
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.out("VARIABLE").next().getProperty('fullcode') + " instanceof " + fullcode.out("CLASS").next().getProperty('fullcode')); 
+fullcode.setProperty('fullcode', fullcode.out("VARIABLE").next().getProperty('fullcode') + " instanceof " + fullcode.out("CLASS").next().getProperty('fullcode'));
 
 GREMLIN;
 

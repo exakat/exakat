@@ -15,7 +15,7 @@ class _Static extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 1,
                                'atom'      => 'Static');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { static public function x() }
         $this->conditions = array( 0 => array('token' => _Static::$operators),
@@ -24,7 +24,7 @@ class _Static extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 2,
                                'atom'      => 'Static');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { static $x }
         $this->conditions = array(-1 => array('filterOut2' => _Ppp::$operators),
@@ -38,7 +38,7 @@ class _Static extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'x'
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { static private $s }
         $this->conditions = array( 0 => array('token' => _Static::$operators),
@@ -47,7 +47,7 @@ class _Static extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 1,
                                'atom'      => 'Static');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
 
     // class x { static $x = 2 }
@@ -60,7 +60,7 @@ class _Static extends TokenAuto {
         $this->actions = array('to_ppp_assignation' => 1,
                                'atom'               => 'Static',
                                'makeSequence'       => 'x' );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { static public $x = 2 }
 
@@ -72,7 +72,7 @@ class _Static extends TokenAuto {
         
         $this->actions = array('to_option' => 1,
                                'atom'      => 'Static');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
 
     // class x { static $x, $y }
@@ -84,7 +84,7 @@ class _Static extends TokenAuto {
         
         $this->actions = array('to_var_new' => 'Atom',
                                'atom'       => 'Static');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { static private $x, $y }
         $this->conditions = array( 0 => array('token' => _Static::$operators),
@@ -95,7 +95,7 @@ class _Static extends TokenAuto {
         
         $this->actions = array('to_option' => 1,
                                'atom'       => 'Static');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
 
     // class x { static function f() }
@@ -104,7 +104,7 @@ class _Static extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 1,
                                'atom'      => 'Static');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { static private function f() }
         $this->conditions = array( 0 => array('token' => _Static::$operators),
@@ -113,7 +113,7 @@ class _Static extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 2,
                                'atom'      => 'Static');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { static private final function f() }
         $this->conditions = array( 0 => array('token' => _Static::$operators),
@@ -123,7 +123,7 @@ class _Static extends TokenAuto {
                                  );
         $this->actions = array('to_option' => 3,
                                'atom'      => 'Static');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // class x { static $x, $y }
         $this->conditions = array(-1 => array('filterOut2' => array('T_NEW', 'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC')),
@@ -135,7 +135,7 @@ class _Static extends TokenAuto {
         $this->actions = array('to_var_new' => 'Static',
                                'atom'       => 'Static',
                                );
-        $this->checkAuto(); 
+        $this->checkAuto();
 
 
 
@@ -145,14 +145,14 @@ class _Static extends TokenAuto {
                                  );
 
         $this->actions = array('atom'     => 'Static');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // static :: ....
         $this->conditions = array( -1 => array('token' => 'T_INSTANCEOF'),
                                     0 => array('token' => _Static::$operators),
                                  );
         $this->actions = array('atom'     => 'Static');
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }

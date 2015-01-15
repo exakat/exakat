@@ -15,7 +15,7 @@ class IfthenElse extends TokenAuto {
         $this->actions = array('insertVoid'  => 1,
                                'keepIndexed' => true,
                                'cleanIndex'  => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
     // @doc else : endif (empty )
         $this->conditions = array( 0 => array('token' => 'T_ELSE'),
@@ -28,7 +28,7 @@ class IfthenElse extends TokenAuto {
         $this->actions = array('to_block_else' => 2,
                                'keepIndexed'   => true,
                                'cleanIndex'    => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         // else { /* block */ }
         $this->conditions = array(  0 => array('token'     => IfthenElse::$operators,
@@ -39,7 +39,7 @@ class IfthenElse extends TokenAuto {
         );
         
         $this->actions = array( 'to_block_else' => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         return false;
     }

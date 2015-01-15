@@ -11,16 +11,16 @@ class Arguments extends TokenAuto {
         
         // @note arguments separated by ,
         $this->conditions = array(-3 => array('notToken' => 'T_NEW'),
-                                  -2 => array('token' => array_merge(array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_ECHO', 
-                                                                           'T_GLOBAL', 'T_USE', 'T_IMPLEMENTS', 'T_EXTENDS', 'T_VAR', 
+                                  -2 => array('token' => array_merge(array('T_COMMA', 'T_OPEN_PARENTHESIS', 'T_OPEN_BRACKET', 'T_ECHO',
+                                                                           'T_GLOBAL', 'T_USE', 'T_IMPLEMENTS', 'T_EXTENDS', 'T_VAR',
                                                                            'T_SEMICOLON', 'T_STATIC', 'T_DECLARE', 'T_CONST', 'T_FUNCTION',
-                                                                           'T_VOID' ), 
+                                                                           'T_VOID' ),
                                                                      _Ppp::$operators)),
                                   -1 => array('atom'    => $operands),
                                    0 => array('token'   => Arguments::$operators,
                                               'atom'    => 'none'),
                                    1 => array('atom'    => $operands),
-                                   2 => array('token'   => array('T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_SEMICOLON', 'T_ENDIF', 
+                                   2 => array('token'   => array('T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_SEMICOLON', 'T_ENDIF',
                                                                  'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_CLOSE_TAG', 'T_INLINE_HTML')),
                                  );
         
@@ -28,7 +28,7 @@ class Arguments extends TokenAuto {
                                                       -1 => 'ARGUMENT'),
                                'rank'        => array( 1 => '1',
                                                       -1 => '0'),
-                               'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
+                               'mergeNext'   => array('Arguments' => 'ARGUMENT'),
                                'atom'        => 'Arguments',
                                'cleanIndex'  => true
                                );
@@ -46,7 +46,7 @@ class Arguments extends TokenAuto {
                                                       -1 => 'ARGUMENT'),
                                'rank'        => array( 1 => '1',
                                                       -1 => '0'),
-                               'mergeNext'   => array('Arguments' => 'ARGUMENT'), 
+                               'mergeNext'   => array('Arguments' => 'ARGUMENT'),
                                'atom'        => 'Arguments',
                                'cleanIndex'  => true
                                );

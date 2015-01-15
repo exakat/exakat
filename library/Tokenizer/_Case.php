@@ -28,7 +28,7 @@ class _Case extends TokenAuto {
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  3 => array('token' => array('T_COLON', 'T_SEMICOLON'), 
+                                  3 => array('token' => array('T_COLON', 'T_SEMICOLON'),
                                              'atom'  => 'none'),
                                   4 => array('token' => $finalToken),
         );
@@ -42,9 +42,9 @@ class _Case extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'yes'),
                                    2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   3 => array('atom'  => 'yes', 
-                                              'notAtom' => 'Sequence'), 
-                                   4 => array('token' => 'T_SEMICOLON', 
+                                   3 => array('atom'  => 'yes',
+                                              'notAtom' => 'Sequence'),
+                                   4 => array('token' => 'T_SEMICOLON',
                                               'atom' => 'none'),
                                    5 => array('token' => $finalToken));
         
@@ -57,8 +57,8 @@ class _Case extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'yes'),
                                    2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                   3 => array('atom'  => 'yes', 
-                                              'notAtom' => 'Sequence'), 
+                                   3 => array('atom'  => 'yes',
+                                              'notAtom' => 'Sequence'),
                                    4 => array('token' => $finalToken));
         
         $this->actions = array('createBlockWithSequenceForCase' => true,
@@ -71,7 +71,7 @@ class _Case extends TokenAuto {
                                     1 => array('atom' => 'yes'),
                                     2 => array('token' => array('T_COLON', 'T_SEMICOLON'),
                                                'atom' => 'none'),
-                                    3 => array('atom' => 'yes', 
+                                    3 => array('atom' => 'yes',
                                                'notAtom' => array('Case', 'Default', 'SequenceCaseDefault', 'Sequence')),
                                     4 => array('token' => 'T_SEMICOLON',
                                                'atom' => 'none'),
@@ -80,14 +80,14 @@ class _Case extends TokenAuto {
         
         $this->actions = array('createBlockWithSequenceForCase'    => true,
                                'keepIndexed'                       => true);
-        $this->checkAuto(); 
+        $this->checkAuto();
 
         // Case is followed by a block
         $this->conditions = array(0 => array('token' => _Case::$operators,
                                               'atom' => 'none'),
                                   1 => array('atom'  => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
-                                  3 => array('atom'  => array('Sequence', 'Void')), 
+                                  3 => array('atom'  => array('Sequence', 'Void')),
                                   4 => array('token' => $finalToken),
         );
         
@@ -100,16 +100,16 @@ class _Case extends TokenAuto {
         $this->checkAuto();
 
         // @note instructions after a case, but not separated by ;
-        $this->conditions = array( 0 => array('token' => 'T_CASE', 
+        $this->conditions = array( 0 => array('token' => 'T_CASE',
                                               'atom'  => 'none',),
                                    1 => array('atom'  => 'yes'),
                                    2 => array('token' => array('T_COLON', 'T_SEMICOLON'),
-                                              'atom'  => 'none', ), 
-                                   3 => array('atom'  => 'yes'), 
-                                   4 => array('atom'  => 'yes'), 
+                                              'atom'  => 'none', ),
+                                   3 => array('atom'  => 'yes'),
+                                   4 => array('atom'  => 'yes'),
                                    5 => array('filterOut2' => array_merge(array('T_ELSE', 'T_ELSEIF', 'T_OPEN_PARENTHESIS'),
-                                                                        Assignation::$operators, Property::$operators, 
-                                                                        _Array::$operators, Bitshift::$operators, 
+                                                                        Assignation::$operators, Property::$operators,
+                                                                        _Array::$operators, Bitshift::$operators,
                                                                         Comparison::$operators, Logical::$operators,
                                                                         Staticproperty::$operators)),
         );
@@ -123,7 +123,7 @@ class _Case extends TokenAuto {
 
     public function fullcode() {
         return <<<GREMLIN
-fullcode.fullcode = "case " + fullcode.out("CASE").next().fullcode + " : " + fullcode.out("CODE").next().fullcode; 
+fullcode.fullcode = "case " + fullcode.out("CASE").next().fullcode + " : " + fullcode.out("CODE").next().fullcode;
 
 GREMLIN;
     }

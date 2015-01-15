@@ -5,19 +5,19 @@ namespace Tokenizer;
 class Sign extends TokenAuto {
     static public $operators = array('T_PLUS', 'T_MINUS');
     static public $operands = array('Sign', 'String', 'Variable', 'Array', 'Float', 'Boolean', 'Functioncall', 'Null',
-                                    'Staticmethodcall', 'Staticproperty', 'Multiplication', 'Property', 'Parenthesis', 
+                                    'Staticmethodcall', 'Staticproperty', 'Multiplication', 'Property', 'Parenthesis',
                                     'Methodcall', 'Cast', 'Constant', 'Boolean', 'Identifier', 'Assignation', 'Staticconstant');
     static public $atom = 'Sign';
 
     public function _check() {
         //  + -1  (special case for Integers)
-        $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
-                                                                                 'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER', 
-                                                                                 'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT', 
-                                                                                 'T_CLOSE_BRACKET', 'T_BANG', 'T_CLOSE_CURLY', 
+        $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                                                                 'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
+                                                                                 'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT',
+                                                                                 'T_CLOSE_BRACKET', 'T_BANG', 'T_CLOSE_CURLY',
                                                                                  'T_QUOTE_CLOSE', 'T_QUOTE', 'T_SHELL_QUOTE_CLOSE', 'T_SHELL_QUOTE' ),
                                                                           Magicconstant::$operators, Preplusplus::$operators),
-                                               'notAtom' => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication', 'Cast' )), 
+                                               'notAtom' => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication', 'Cast' )),
                                     0 => array('token' => Sign::$operators,
                                                'atom' => 'none'),
                                     1 => array('atom' => 'Integer'),
@@ -36,15 +36,15 @@ class Sign extends TokenAuto {
         $this->checkAuto();
         
         //  + -$s (Normal case)
-        $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_ARRAY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
-                                                                                 'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER', 
-                                                                                 'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT', 
+        $this->conditions = array( -1 => array('filterOut2' => array_merge(array('T_STRING', 'T_ARRAY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
+                                                                                 'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
+                                                                                 'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT',
                                                                                  'T_CLOSE_BRACKET', 'T_CLOSE_CURLY' ),
                                                                           Magicconstant::$operators, Not::$operators),
-                                               'notAtom' => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication', 'Cast',  'Integer', 'Real' )), 
+                                               'notAtom' => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication', 'Cast',  'Integer', 'Real' )),
                                     0 => array('token' => Sign::$operators),
                                     1 => array('atom' => Sign::$operands),
-                                    2 => array('filterOut' => array_merge( Methodcall::$operators, Parenthesis::$operators, 
+                                    2 => array('filterOut' => array_merge( Methodcall::$operators, Parenthesis::$operators,
                                                                            _Array::$operators,     Block::$operators,
                                                                            Property::$operators,   Staticproperty::$operators)),
                                  );
@@ -60,7 +60,7 @@ class Sign extends TokenAuto {
 
 // This special case is needed for situation like 1 . 2 + 3 and -'a' . -'b';
         $this->conditions = array( -1 => array('token' => array('T_DOT' ),
-                                               'atom' => 'none'), 
+                                               'atom' => 'none'),
                                    0  => array('token' => Sign::$operators,
                                                'atom' => 'none'),
                                    1  => array('atom' => Sign::$operands),
@@ -75,9 +75,9 @@ class Sign extends TokenAuto {
                                'cleanIndex' => true);
         $this->checkAuto();
 
-//Special cases like 1 * -2 or 2 + -2         
-        $this->conditions = array( -1 => array('token' => array_merge(Addition::$operators, Multiplication::$operators), 
-                                               'atom'  => 'none'), 
+//Special cases like 1 * -2 or 2 + -2
+        $this->conditions = array( -1 => array('token' => array_merge(Addition::$operators, Multiplication::$operators),
+                                               'atom'  => 'none'),
                                     0 => array('token' => Sign::$operators,
                                                'atom'  => 'none'),
                                     1 => array('atom'  => Sign::$operands),
@@ -97,9 +97,9 @@ class Sign extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 if (fullcode.out('SIGN').count() > 0) {
-    fullcode.fullcode = fullcode.code + fullcode.out("SIGN").next().fullcode; 
+    fullcode.fullcode = fullcode.code + fullcode.out("SIGN").next().fullcode;
 } else {
-    fullcode.fullcode = fullcode.code; 
+    fullcode.fullcode = fullcode.code;
 }
 GREMLIN;
     }
