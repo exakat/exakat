@@ -45,12 +45,16 @@ class Directives extends \Report\Content {
         }
 
         // PDO
-        $this->array['PDO'] = array();
-        $this->array['PDO'][]  = array('name' => 'pdo.dns.*',
-                                       'suggested' => 'sqlite:/opt/databases/mydb.sq3', // found value in the code
-                                       'documentation' => 'By putting aliases of URI in the php.ini, you won\'t hardcode the DSN in your code.');
-
+        $suggestion = $this->checkPresence('Extensions\\Extpdo');
+        if ($suggestion == 'On') {
+            $this->array['PDO'] = array();
+            $this->array['PDO'][]  = array('name' => 'pdo.dns.*',
+                                           'suggested' => 'sqlite:/opt/databases/mydb.sq3', // found value in the code
+                                           'documentation' => 'By putting aliases of URI in the php.ini, you won\'t hardcode the DSN in your code.');
+        }
+        
         // File Upload
+        $suggestion = $this->checkPresence('Structures\\FileUploadUsage');
         $this->array['File upload'] = array();
         $file_uploads = array('name' => 'file_uploads',
                               'documentation' => 'Since the application doesn\'t handle uploaded files, it is recommended to disable this option, saving memory, and disabling features that may be a security vulnerability later.',
@@ -69,11 +73,10 @@ class Directives extends \Report\Content {
             $this->array['File upload'][] = $upload_max_file;
         }
     }
-    
+
     private function checkPresence($analyzer) {
         $vertices = $this->query("g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('\\', '\\\\', $analyzer)."']].out.any()");
         return $vertices[0][0] === false ? 'Off' : 'On';
-
     }
 }
 
