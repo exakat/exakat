@@ -29,13 +29,13 @@ class IsExtTrait extends Analyzer\Analyzer {
             }
         }
 
-        $traits = $this->makeFullNsPath($traits)
-        
         // no need to process anything!
         if (empty($traits)) { return true; } 
+        $traits = $this->makeFullNsPath($traits);
         
         $this->analyzerIs("Analyzer\\Traits\\TraitUsage")
              ->fullnspath($traits);
+        $this->prepareQuery();
     }
 }
 
