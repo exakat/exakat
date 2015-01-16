@@ -9,6 +9,7 @@ class YodaComparison extends Analyzer\Analyzer {
         $literals = array('String', 'Integer', 'Real', 'Boolean', 'Null', 'Identifier', 'Nsname');
         
         $this->atomIs('Comparison')
+             ->code(array('==','==='))
              ->outIs('RIGHT')
              ->atomIs($literals)
              ->inIs('RIGHT')
