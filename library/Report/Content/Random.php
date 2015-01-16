@@ -4,14 +4,13 @@ namespace Report\Content;
 
 class Random extends \Report\Content {
     private $type = 'Hash';
-    protected $name = "Random Content";
     
-    public function setType($type) {
-        $this->type = $type;
+    public function __construct() {
+        $this->name = 'Random Content';
     }
-
+    
     public function getDescription() {
-        return "Random Description";
+        return 'Random Description';
     }
 
     public function toArray() {
