@@ -636,3 +636,15 @@ Make a script to check for tabs, end of file, end of line, UTF8 compatibility, s
 
 Should have a parenthesis for readability
 		$this->checkMethod($methodName)->testMethods[$methodName]['ignore'] = $boolean == true;
+
+Switch with constant : in switch of in the case. 
+		switch (true)
+		{
+			case $parameter->isArray():
+				return 'array ';
+
+			case method_exists($parameter, 'isCallable') && $parameter->isCallable():
+				return 'callable ';
+
+					->hasMessage(sprintf($generator->getLocale()->_('%s has size %d, expected size %d'), $asserter, sizeof($this), 0))
+
