@@ -60,7 +60,7 @@ foreach($config->ignore_dirs as $ignore) {
 
 $datastore = new Datastore($dir);
 
-$shellBase = 'find ./projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l ';
+$shellBase = 'find ./projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l | xargs grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
 
 $files = trim(shell_exec($shellBase));
 $files = preg_replace('#/projects/.*?/code#is', '', $files);
