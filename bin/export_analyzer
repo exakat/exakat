@@ -68,7 +68,9 @@ if ($id = array_search('-D', $args)) {
 }
 
 $analyzer = $args[1];
-if (!($analyzer == Analyzer::getClass($analyzer))) {
+$analyzerClass = Analyzer::getClass($analyzer);
+
+if ("Analyzer\\".str_replace('/', '\\', $analyzer) != $analyzerClass) {
     print "'$analyzer' doesn't exists. Aborting\n";
     
     $r = Analyzer::getSuggestionClass($analyzer);
@@ -79,7 +81,7 @@ if (!($analyzer == Analyzer::getClass($analyzer))) {
     exit;
 }
 
-$analyzer = str_replace('\\', '\\\\', $analyzer);
+$analyzer = str_replace('\\', '\\\\', $analyzerClass);
 
 $return = array();
 if (STYLE == 'BOOLEAN') {

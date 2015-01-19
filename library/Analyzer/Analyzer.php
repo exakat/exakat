@@ -92,7 +92,13 @@ class Analyzer {
         }
         
         if (class_exists($class)) {
-            return $class;
+            $actualClassName = new \ReflectionClass($class);
+            if ($class != $actualClassName->getName()) {
+                // problems with the case 
+                return false;
+            } else {
+                return $class;
+            }
         } else {
             return false;
         }
