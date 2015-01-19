@@ -773,6 +773,7 @@ g.idx('atoms')[['atom':'New']].out('NEW').filter{ it.atom in ['Identifier', 'Nsn
                               .each{
     
     if (fullcode.token == 'T_STRING') {
+        fullcodealias = fullcode.code.toLowerCase();
         isDefault = true;
         it.out('BLOCK', 'FILE').transform{ if (it.out('ELEMENT').has('atom', 'Php').out('CODE').any()) { it.out('ELEMENT').out('CODE').next(); } else { it }}.out('ELEMENT').has('atom', 'Use').out('USE').sideEffect{alias = it}.filter{it.alias == fullcodealias}.each{
             fullcode.setProperty('fullnspath', alias.fullnspath);
