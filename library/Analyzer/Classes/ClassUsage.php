@@ -42,6 +42,16 @@ class ClassUsage extends Analyzer\Analyzer {
         $this->atomIs("Use")
              ->outIs('USE');
         $this->prepareQuery();
+
+        $this->atomIs("Functioncall")
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath('\\class_alias')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->is('rank', 0)
+             ->atomIs('String');
+        $this->prepareQuery();
     }
 }
 
