@@ -26,7 +26,7 @@ if ($config->program !== null) {
     $thema = $config->thema;
 
     if (!$analyzers_class = Analyzer\Analyzer::getThemeAnalyzers($thema)) {
-        die("No such class as $analyzer. Aborting\n");
+        die("No such thema as '$thema'. Aborting\n");
     }
 } else {
     print "Usage :php bin/analyze -P <One/rule> -T <\"Thema\"> -p <project>\n";
