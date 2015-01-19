@@ -39,7 +39,7 @@ class Thread {
     public function waitForAll() {
         if (!$this->areAllFinished()) {
             while($this->areAllFinished()) {
-                sleep(rand(0.5, 1,5));
+                sleep(rand(0.5, 1.5));
             }
         }
         
