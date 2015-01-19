@@ -68,15 +68,15 @@ if ($id = array_search('-D', $args)) {
 }
 
 $analyzer = $args[1];
-if (!($analyzer = Analyzer::getClass($analyzer))) {
+if (!($analyzer == Analyzer::getClass($analyzer))) {
     print "'$analyzer' doesn't exists. Aborting\n";
     
     $r = Analyzer::getSuggestionClass($analyzer);
     if (count($r) > 0) {
-        print "did you mean : ".implode(', ', $r)."\n";
+        print "did you mean : ".implode(', ', str_replace('_', '/', $r))."\n";
     }
     
-    die();
+    exit;
 }
 
 $analyzer = str_replace('\\', '\\\\', $analyzer);
@@ -93,12 +93,12 @@ if (STYLE == 'BOOLEAN') {
 
     $return[] = $vertices[0][0];
 } elseif (STYLE == 'ALL') {
-      $queryTemplate = <<<GREMLIN
+      $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.fullcode, 'File':'None', 'Line':it.line, 'Namespace':'Globaln', 'Class':'Globalc', 'Function':'Globalf' ]; }.as('x').
 transform{ it.in.loop(1){true}{ it.object.token in ['T_CLASS', 'T_FUNCTION', 'T_NAMESPACE', 'T_FILENAME']}.each{ m[it.atom] = it.code;} m; }.transform{ m; }
 GREMLIN;
 
-    $vertices = query($client, $queryTemplate);
+    $vertices = query($client, $query);
 
     $return = array();
     foreach($vertices as $k => $v) {
@@ -110,7 +110,6 @@ GREMLIN;
         $row[] = $v[0]['Class'];
         $row[] = $v[0]['Function'];
         $return[] = $row;
-        
     }
 } elseif (STYLE == 'DISTINCT') {
     $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code.unique()"; 
