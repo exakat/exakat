@@ -73,7 +73,15 @@ class Premier extends Report {
             $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
             $analyzes2[$analyzer->getName()] = $analyzer;
         }
-        uksort($analyzes2, function($a, $b) { $a = strtolower($a); $b = strtolower($b); if ($a > $b) { return 1; } else { return $a == $b ? 0 : -1; } });
+        uksort($analyzes2, function($a, $b) { 
+            $a = strtolower($a); 
+            $b = strtolower($b); 
+            if ($a > $b) { 
+                return 1; 
+            } else { 
+                return $a == $b ? 0 : -1; 
+            } 
+        });
 
         if (count($analyzes) > 0) {
             $this->createLevel2('Results counts');
