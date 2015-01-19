@@ -1509,7 +1509,6 @@ $fullcode
             foreach($actions['insertEdge'] as $destination => $config) {
             if ($destination == 0) {
                 list($atom, $link) = each($config);
-                display("addEdge : $atom\n");
                 
                 $fullcode = $this->fullcode();
                 
@@ -1543,7 +1542,6 @@ $fullcode
             foreach($actions['addEdge'] as $destination => $config) {
             if ($destination == 0) {
                 list($atom, $link) = each($config);
-                display("addEdge : $atom\n");
                 $qactions[] = "
 /* addEdge out */
 x = g.addVertex(null, [code:'void', atom:'$atom', token:'T_VOID', virtual:true, line:it.line, fullcode:' ']);
@@ -1557,7 +1555,6 @@ g.addEdge(x,  f, 'NEXT');
 ";
             } elseif ($destination == -1) {
                 list($atom, $link) = each($config);
-                display("addEdge : $atom\n");
                 $qactions[] = "
 /* addEdge in */
 x = g.addVertex(null, [code:'void', token:'T_VOID', atom:'$atom', virtual:true, line:it.line, fullcode:' ']);
@@ -1571,7 +1568,6 @@ g.addEdge(f, x, 'NEXT');
 ";
             } elseif ($destination > 0) {
                 list($atom, $link) = each($config);
-                display("addEdge : $atom\n");
                 $next = str_repeat(".out('NEXT')", $destination - 1);
                 
                 $qactions[] = "
