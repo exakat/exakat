@@ -22,6 +22,8 @@ class Analyzer {
     private $methods = array();
     private $arguments = array();
     
+    protected $config = null;
+    
     static public $analyzers = array();
     
     protected $apply = null;
@@ -61,6 +63,10 @@ class Analyzer {
         $this->apply = new AnalyzerApply();
         $this->apply->setAnalyzer($this->analyzer);
     } 
+    
+    public function setConfig($config) {
+        $this->config = $config;
+    }
     
     public static function getClass($name) {
         // accepted names : 
@@ -1650,6 +1656,10 @@ GREMLIN;
         } else {
             return parse_ini_file($fullpath);
         }
+    }
+    
+    protected function loadConfig() {
+        
     }
     
     public static function listAnalyzers() {
