@@ -178,6 +178,7 @@ class Appinfo extends \Report\Content {
 
                     'Classes' => array(
                             'Classes'           => 'Classes/Classnames',
+                            'Class aliases'     => 'Classes/ClassAliasUsage',
 
                             'Abstract classes'  => 'Classes/Abstractclass',
                             'Interfaces'        => 'Interfaces/Interfacenames',
@@ -229,7 +230,7 @@ class Appinfo extends \Report\Content {
                 $vertices = $this->query($queryTemplate);
                 $v = $vertices[0][0];
                 if ($v == 1) {
-                    $this->array[$section][$name] = "Incomp.";
+                    $this->array[$section][$name] = 'Incomp.';
                     continue ;
                 } 
 
@@ -237,7 +238,7 @@ class Appinfo extends \Report\Content {
                 $vertices = $this->query($queryTemplate);
                 $v = $vertices[0][0];
                 if ($v == 0) {
-                    $this->array[$section][$name] = "Not run";
+                    $this->array[$section][$name] = 'Not run';
                     continue;
                 } 
 
@@ -246,7 +247,7 @@ class Appinfo extends \Report\Content {
                     $vertices = $this->query($queryTemplate);
     
                     $v = $vertices[0][0];
-                    $this->array[$section][$name] = $v == "true" ? "Yes" : "No";
+                    $this->array[$section][$name] = $v == 'true' ? 'Yes' : 'No';
                 } catch (Exception $e) {
                     print "Error for appinfo : \n".
                           "$queryTemplate : \n".
