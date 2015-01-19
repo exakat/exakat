@@ -1,30 +1,35 @@
 <?php
 
-function xp ($string, $array, $objectp1) {
+function xp ($string, $array1, $objectp1) {
     $string .= 'a';
-    $array[3] = 3;
+    $array1[3] = 3;
     
     $objectp1->property;
     $objectm1->method();
 }
 
-function xm ($string, $array, $objectm2) {
+function xm ($string, $array2, $objectm2) {
     $string .= 'a';
-    $array[3] = 3;
+    $array2[] = 3;
     
     $objectp2->property;
     $objectm2->method();
 }
 
-function xmp ($string, $array, $objectm3, $objectp4) {
+function xmp ($string, $array3, $objectm3, $objectp4) {
     $string .= 'a';
-    $array[3] = 3;
+    $array3[3]();
     
     $objectp4->property;
     $objectm3->method();
 }
 
-function xpm ($string, $array, $objectp5, $objectm6) {
+function xmp2 ($string32, $array32, $objectm32, $objectp32) {
+    $string .= 'a';
+    $array32[3][3]();
+}
+
+function xpm ($string, $array4, $objectp5, $objectm6) {
     $string .= 'a';
     $array[3] = 3;
     
