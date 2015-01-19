@@ -48,7 +48,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->assertFalse(true, 'test '.$file.' can\'t compile with PHP version "'. ($phpversion).'", so no test is being run.');
         }
         
-        $shell = 'cd ../..;  php bin/build_root -p test; sleep 2; php bin/tokenizer -p test;  php bin/analyze -P '.escapeshellarg($test_config);
+        $shell = 'cd ../..;  php bin/build_root -p test; sleep 1; php bin/tokenizer -p test;  php bin/analyze -P '.escapeshellarg($test_config).' -p test ';
         $res = shell_exec($shell);
 
         $shell = 'cd ../..; php bin/export_analyzer '.$analyzer.' -o -json';

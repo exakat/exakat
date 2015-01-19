@@ -13,6 +13,7 @@ class AvoidUsing extends Analyzer\Analyzer {
     
     public function analyze() {
         $classes = $this->config;
+        
         if (empty($classes)) { 
             return null;
         }

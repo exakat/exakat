@@ -48,6 +48,10 @@ if ($config->noDependencies) {
     $dependencies2 = array();
     foreach($analyzers_class as $a) {
         $d = Analyzer\Analyzer::getInstance($a, $client);
+        $configName = str_replace('/', '_', $a);
+        if (null !== ($analyzerConfig = $config->$configName)) {
+            $d->setConfig($analyzerConfig);
+        }
         $d = $d->dependsOn();
         if (empty($d)) {
             $dependencies2[] = $a;
@@ -111,6 +115,10 @@ $Php = new Phpexec($config->version);
 foreach($dependencies2 as $analyzer_class) {
     $begin = microtime(true);
     $analyzer = Analyzer\Analyzer::getInstance($analyzer_class, $client);
+    $configName = str_replace(array('/', '\\'), '_', str_replace('Analyzer\\', '', $analyzer_class));
+    if (null !== ($analyzerConfig = $config->$configName)) {
+        $analyzer->setConfig($analyzerConfig);
+    }
     
     if ($config->noRefresh && $analyzer->isDone()) {
         print "$analyzer_class is already done\n";
