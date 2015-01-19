@@ -648,3 +648,24 @@ Switch with constant : in switch of in the case.
 
 					->hasMessage(sprintf($generator->getLocale()->_('%s has size %d, expected size %d'), $asserter, sizeof($this), 0))
 
+Spot auto-call of the application (curl or file_get_contents to localhost or else)
+
+ArgumentNoComma : Never happens
+
+Favoring PHP over SQL : move some calculations in the database. Spot loops after a load in the database ? 
+
+Check for interfaces and Traits and their respective extensions
+
+Inconsistent conditions
+    if (fullcode.token == 'T_STRING') {
+        isDefault = true;
+        if (fullcode.token == 'T_NS_SEPARATOR') {
+
+Support for class_alias
+
+Spot Origin of values if they can be tracked back f('a'); f($a) { b($a); } b($c) { useful_function($c); }
+
+add support for wincache + mention in portability (windows only) pcntl (Linux only) posix
+no-windows : fam, ev, spplus, ev, msession, pcntl, pfpro, mcve, 
+
+Portability : (Note that DIRECTORY_SEPARATOR is still useful for things like explode-ing a path that the system gave you. Thanks to Shadowfiend for pointing this out.)
