@@ -5,11 +5,11 @@ $project = $argv[1];
 $reports = array('Premier');
 $formats = array('markdown', 'sqlite', 'ace', 'html', 'text', /* 'pdf', 'odt' */);
 
-print shell_exec('rm -rf ./projects/'.$project.'/report; rm -rf ./projects/'.$project.'/report.zip;  php bin/report '.$project.' -f ./projects/'.$project.'/report -ace -r Premier 2>&1 > ./projects/'.$project.'/log/report.premier.log');
+print shell_exec('rm -rf ./projects/'.$project.'/report; rm -rf ./projects/'.$project.'/report.zip;  php bin/report -p '.$project.' -f ./projects/'.$project.'/report -format ace -report Premier 2>&1 > ./projects/'.$project.'/log/report.premier.log');
 
 foreach($reports as $report) {
     foreach($formats as $format) {
-        print shell_exec('rm -rf ./projects/'.$project.'/'."{$report}-{$format}".'.*;     php bin/report '.$project.' -f ./projects/'.$project.'/'."{$report}-{$format}".' -'.$format.' -r '.$report);
+        print shell_exec('rm -rf ./projects/'.$project.'/'."{$report}-{$format}".'.*;     php bin/report -p '.$project.' -f ./projects/'.$project.'/'."{$report}-{$format}".' -format '.$format.' -report '.$report);
     }
 }
 
