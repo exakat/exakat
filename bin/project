@@ -108,7 +108,7 @@ if (file_exists('./projects/'.$project.'/log/analyze.final.log')) {
     unlink('./projects/'.$project.'/log/analyze.final.log');
 }
 
-$themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security');
+$themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security', 'Custom');
 $processes = array();
 foreach($themes as $theme) {
 //    $process[$theme] = proc_open('php bin/analyze -norefresh -T '.$theme.' > ./projects/'.$project.'/log/analyze.'.str_replace(' ', '_', trim($theme, '"')).'.final.log', $descriptorspec, $pipes);
