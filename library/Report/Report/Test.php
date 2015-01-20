@@ -8,39 +8,25 @@ class Test extends Premier {
     }
 
     public function prepare() {
-        $this->createLevel1('Detailled');
-        $analyzes = array('Analyzer\\Files\\DefinitionsOnly');
-        $analyzes2 = array();
-        foreach($analyzes as $a) {
-            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
-            $analyzes2[$analyzer->getName()] = $analyzer;
-        }
-        uksort($analyzes2, function($a, $b) { $a = strtolower($a); $b = strtolower($b); if ($a > $b) { return 1; } else { return $a == $b ? 0 : -1; } });
+/////////////////////////////////////////////////////////////////////////////////////
+/// Custom analyzers
+/////////////////////////////////////////////////////////////////////////////////////
+        
+        $this->createLevel1('Custom');
+        $this->createLevel2('Classes');
+        $this->addContent('Text', <<<TEXT
+This is a list of classes and their usage in the code. 
 
-        if (count($analyzes) > 0) {
-            $this->createLevel2('Results counts');
-            $this->addContent('SimpleTableResultCounts', 'AnalyzerResultCounts');
+TEXT
+);
+        $content = $this->getContent('AnalyzerConfig');
+        $content->setAnalyzer('Classes/AvoidUsing');
+        $content->collect();
+        
+        $this->addContent('SimpleTable', $content, 'oneColumn'); 
 
-            foreach($analyzes2 as $analyzer) {
-                if ($analyzer->hasResults()) {
-                    $this->createLevel2($analyzer->getName());
-                    if (get_class($analyzer) == "Analyzer\\Php\\Incompilable") {
-                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
-                        $this->addContent('TableForVersions', $analyzer);
-                    } elseif (get_class($analyzer) == "Analyzer\\Php\\ShortOpenTagRequired") {
-                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
-                        $this->addContent('SimpleTable', $analyzer, 'oneColumn');
-                    } else {
-                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
-                        $this->addContent('Horizontal', $analyzer);
-                    }
-                }
-            }
-                
-            // defined here, but for later use
-            $definitions = new \Report\Content\Definitions($this->client);
-            $definitions->setAnalyzers($analyzes);
-        }
+        $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Classes\\AvoidUsing', $this->client);
+        $this->addContent('Horizontal', $analyzer);
         
         return true;
     }

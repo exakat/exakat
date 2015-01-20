@@ -20,12 +20,20 @@ class Premier extends Report {
     public function prepare() {
         $this->createLevel1('Report presentation');
 
+/////////////////////////////////////////////////////////////////////////////////////
+/// Audit introduction
+/////////////////////////////////////////////////////////////////////////////////////
+
         $this->createLevel2('Audit configuration'); 
         $this->addContent('Text', 'Presentation of the audit', 'first');
         $this->addContent('SimpleTable', 'ReportInfo', 'reportinfo'); 
 
         $this->createLevel2('Application configuration'); 
         $this->addContent('Text', 'Presentation of the application');
+
+/////////////////////////////////////////////////////////////////////////////////////
+/// Main dashboards
+/////////////////////////////////////////////////////////////////////////////////////
 
         $this->createLevel1('Analysis');
         $this->createLevel2('Code smells');
@@ -52,6 +60,10 @@ class Premier extends Report {
         $analyzer->collect();
         $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
 
+/////////////////////////////////////////////////////////////////////////////////////
+/// Compilations
+/////////////////////////////////////////////////////////////////////////////////////
+
         $this->createLevel1('Compilation');
         $this->addContent('Text', 'This table is a summary of compilation situation. Every PHP script has been tested for compilation with the mentionned versions. Any error that was found is displayed, along with the kind of messsages and the list of erroneous files.');
         $this->createLevel2('Compile');
@@ -64,6 +76,10 @@ class Premier extends Report {
             $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.');
             $this->addContent('Compatibility', 'Compatibility'.$code);
         }
+
+/////////////////////////////////////////////////////////////////////////////////////
+/// Detailled
+/////////////////////////////////////////////////////////////////////////////////////
 
         $this->createLevel1('Detailled');
         $analyzes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
@@ -107,6 +123,10 @@ class Premier extends Report {
             $definitions = new \Report\Content\Definitions($this->client);
             $definitions->setAnalyzers($analyzes);
         }
+
+/////////////////////////////////////////////////////////////////////////////////////
+/// Application
+/////////////////////////////////////////////////////////////////////////////////////
         
         $this->createLevel1('Application');
         $this->createLevel2('Appinfo()');
@@ -134,6 +154,29 @@ TEXT
 );
         $this->addContent('SectionedHashTable', 'AppCounts');
 
+/////////////////////////////////////////////////////////////////////////////////////
+/// Custom analyzers
+/////////////////////////////////////////////////////////////////////////////////////
+        
+        $this->createLevel1('Custom');
+        $this->createLevel2('Classes');
+        $this->addContent('Text', <<<TEXT
+This is a list of classes and their usage in the code. 
+
+TEXT
+);
+        $content = $this->getContent('AnalyzerConfig');
+        $content->setAnalyzer('Classes/AvoidUsing');
+        $content->collect();
+        
+        $this->addContent('SimpleTable', $content, 'oneColumn'); 
+
+        $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Classes\\AvoidUsing', $this->client);
+        $this->addContent('Horizontal', $analyzer);
+
+/////////////////////////////////////////////////////////////////////////////////////
+/// Annexes
+/////////////////////////////////////////////////////////////////////////////////////
         $this->createLevel1('Annexes');
 
         $this->createLevel2('Documentation');
