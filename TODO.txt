@@ -662,10 +662,26 @@ Inconsistent conditions
         if (fullcode.token == 'T_NS_SEPARATOR') {
 
 Support for class_alias
-
+ list class_aliases created 
+  
 Spot Origin of values if they can be tracked back f('a'); f($a) { b($a); } b($c) { useful_function($c); }
 
 add support for wincache + mention in portability (windows only) pcntl (Linux only) posix
-no-windows : fam, ev, spplus, ev, msession, pcntl, pfpro, mcve, 
+no-windows : fam, ev, spplus, msession, pcntl, pfpro, mcve, 
 
 Portability : (Note that DIRECTORY_SEPARATOR is still useful for things like explode-ing a path that the system gave you. Thanks to Shadowfiend for pointing this out.)
+
+Spot alias to classes
+    return \Hoa\Core\Consistency::from($namespace);
+
+Spot classes of empty methods (surely something weird)
+
+create_function => replace with Closures
+
+List the return values for the PHP interfaces (if needed) so we can update the list of function that don't return;
+
+Spot ob_* sequences 
+
+Make an entry point with interfaces : Database, file systeme, shell, shmop, sockets, mail, ...
+
+Signal double quote strings that may be reduced because of less escaping
