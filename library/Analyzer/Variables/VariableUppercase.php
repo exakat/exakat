@@ -14,8 +14,9 @@ class VariableUppercase extends Analyzer\Analyzer {
              ->analyzerIs('Analyzer\\Variables\\Variablenames')
              ->codeIsNot(VariablePhp::$variables, true)
              ->codeIsNot('$_', true)
-             ->isUppercase('fullcode')
-             ;
+             ->regex('code', '^\\\\\\$[a-zA-Z0-9_]{2,}\\$')
+             ->isUppercase('fullcode');
+        $this->prepareQuery();
     }
 }
 

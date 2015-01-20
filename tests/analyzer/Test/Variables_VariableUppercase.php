@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Variables_VariableUppercase extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testVariables_VariableUppercase01()  { $this->generic_test('Variables_VariableUppercase.01'); }
     public function testVariables_VariableUppercase02()  { $this->generic_test('Variables_VariableUppercase.02'); }
+    public function testVariables_VariableUppercase03()  { $this->generic_test('Variables_VariableUppercase.03'); }
 }
 ?>
