@@ -141,6 +141,7 @@ foreach($tokens as $t) {
             case T_IS_GREATER_OR_EQUAL : 
             case T_PLUS_EQUAL : 
             case T_CLASS : 
+            case T_INTERFACE : 
             case T_CONTINUE :
             case T_WHITESPACE : 
             case T_AS : 
