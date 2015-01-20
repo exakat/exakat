@@ -14,6 +14,23 @@ class OldStyleConstructor extends Analyzer\Analyzer {
              ->atomInside('Function')
              ->outIs("NAME")
              ->samePropertyAs('code', 'name')
+             ->goToNamespace()
+             ->atomIs('File') // no namespace => Global
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Class')
+             ->outIs('NAME')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == "__construct"}.any() == false}')
+             ->atomInside('Function')
+             ->outIs("NAME")
+             ->samePropertyAs('code', 'name')
+             ->goToNamespace()
+             ->atomIs('Namespace') 
+             ->outIs('NAMESPACE')
+             ->code('Global')
              ->back('first');
         $this->prepareQuery();
     }
