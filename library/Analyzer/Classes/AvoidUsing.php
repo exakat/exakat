@@ -5,12 +5,6 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class AvoidUsing extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array("MethodDefinition");
-    }
-    */
-    
     public function analyze() {
         $classes = $this->config;
         
@@ -18,10 +12,17 @@ class AvoidUsing extends Analyzer\Analyzer {
             return null;
         }
         $classes = $this->makeFullNsPath($classes);
+
+        // class may be used in a class
+        $this->atomIs('Class')
+             ->fullnspath($classes)
+             ->back('first');
+        $this->prepareQuery();
         
         // class may be used in a new
         $this->atomIs('New')
              ->outIs('NEW')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath($classes)
              ->back('first');
         $this->prepareQuery();
@@ -83,6 +84,12 @@ class AvoidUsing extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0);
         $this->prepareQuery();
+
+        // mentions in strings
+        $this->atomIs("String")
+             ->noDelimiter($this->config);
+        $this->prepareQuery();
+
     }
 }
 
