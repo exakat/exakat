@@ -23,6 +23,7 @@ class RedeclaredPhpFunction extends Analyzer\Analyzer {
              ->outIs('NAME')
              ->analyzerIs('Analyzer\\Functions\\Functionnames')
              ->code($extensionFunctions, true);
+        $this->prepareQuery();
     }
 }
 
