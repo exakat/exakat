@@ -6,103 +6,20 @@ use Everyman\Neo4j\Client,
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
+$config = Config::factory($argv);
+
 $client = new Client();
 $db = new Db();
 
-$args = $argv;
-
-if ($id = array_search('-json', $args)) {
-    die("No JSON");
-    define('FORMAT', 'JSON');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-text', $args)) {
-    define('FORMAT', 'Text');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-ace', $args)) {
-    define('FORMAT', 'Ace');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-sqlite', $args)) {
-    define('FORMAT', 'SQLITE');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-odt', $args)) {
-    die("No ODT");
-    define('FORMAT', 'ODT');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-markdown', $args)) {
-    define('FORMAT', 'MARKDOWN');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-pdf', $args)) {
-    die("No PDF");
-    define('FORMAT', 'PDF');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-csv', $args)) {
-    define('FORMAT', 'Csv');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-html', $args)) {
-    define('FORMAT', 'Html');
-    unset($args[$id]);
-    $args = array_values($args);
-} elseif ($id = array_search('-web', $args)) {
-    die("No Web export\n");
-    define('FORMAT', 'Web');
-    unset($args[$id]);
-    $args = array_values($args);
-} else {
-    define('FORMAT', 'Text');
-}
-
-if ($id = array_search('-o', $args)) {
-    define('OUTPUT', true);
-} else {
-    define('OUTPUT', false);
-}
-
-if ($id = array_search('-f', $args)) {
-    define('FILE', $args[$id + 1]);
-    unset($args[$id]);
-    unset($args[$id + 1]);
-} else {
-    define('FILE', 'report');
-}
-
-if ($id = array_search('-r', $args)) {
-    define('REPORT', $args[$id + 1]);
-    unset($args[$id]);
-    unset($args[$id + 1]);
-} else {
-    define('REPORT', 'Premier');
-}
-
-$args = array_values($args);
-
-if (!isset($args[1])) {
-    $project = 'default';
-} else {
-    $project = $args[1];
-}
-if (!file_exists('./projects/'.$project.'/config.ini')) {
-    print "No such project as '$project'. Aborting\n";
-    die();
-}
-$config = parse_ini_file('./projects/'.$project.'/config.ini');
-
-$datastore = new Datastore($project);
+$datastore = new Datastore($config->project);
 \Analyzer\Analyzer::$datastore = $datastore;
 
-print "Building report ".REPORT." for project $project in file ".FILE.", with format ".FORMAT."\n";
+print "Building report ".$config->report." for project ".$config->project." in file ".$config->file.", with format ".$config->format."\n";
 $begin = microtime(true);
 
-if (count(glob('library/Report/Report/'.REPORT.'.php')) == 0) {
+if (count(glob('library/Report/Report/'.$config->report.'.php')) == 0) {
     $reports = glob('library/Report/Report/*.php');
-    print "Couldn't load report '".REPORT."'. Please choose among the ".count($reports)." followings : \n";
+    print "Couldn't load report '".$config->report."'. Please choose among the ".count($reports)." followings : \n";
     foreach($reports as $report) {
         print "+ ".substr(basename($report), 0, -4)."\n";
     }
@@ -110,25 +27,14 @@ if (count(glob('library/Report/Report/'.REPORT.'.php')) == 0) {
     die('');
 }
 
-$reportClass = "\\Report\\Report\\".REPORT;
-$report = new $reportClass($project, $client, $db);
+$reportClass = "\\Report\\Report\\".$config->report;
+$report = new $reportClass($config->project, $client, $db);
 $report->prepare();
-$size = $report->render(FORMAT, FILE);
+echo $config->format, ' ', $config->filename;
+$size = $report->render($config->format, $config->filename);
 
 $end = microtime(true);
 print "Processing time : ".number_format($end - $begin, 2)." s\n";
 print "Done\n";
-
-if ($size < 1024) {
-    $size = "$size b";
-} else if ($size < 1024 * 1024) {
-    $size = floor($size / 1024)." kb";
-} else {
-    $size = floor($size / pow(1024, 2))." Mb";
-}
-
-if (OUTPUT) {
-    print $text;
-}
 
 ?>
