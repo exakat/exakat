@@ -948,10 +948,10 @@ g.idx('atoms')[['atom':'Staticproperty']]
             it.setProperty('fullnspath', fullnspath);
         }
     };
-
 ", "
-// static constant
-g.idx('atoms')[['atom':'Staticconstant']]
+
+// static property
+g.idx('atoms')[['atom':'Staticproperty']]
     .out('CLASS')
     .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
     .each{
@@ -965,6 +965,36 @@ g.idx('atoms')[['atom':'Staticconstant']]
             it.setProperty('fullnspath', fullnspath);
         } else if (it.getProperty('code').toLowerCase() == 'parent') {
             fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'File']}.next();
+            if (fullnspath.out('EXTENDS').any()) {
+                fullnspath = fullnspath.out('EXTENDS').next().fullnspath;
+            } else {
+                fullnspath = it.code;
+            }
+            it.setProperty('fullnspath', fullnspath);
+        }
+    };
+
+", "
+// Type hint with parents, static, self
+g.idx('atoms')[['atom':'Function']]
+    .out('ARGUMENTS')
+    .out('ARGUMENT')
+    .has('atom', 'Assignation')
+    .out('RIGHT')
+    .has('atom', 'Staticconstant')
+    .out('CLASS')
+    .filter{ it.code.toLowerCase() in ['parent', 'static', 'self']}
+    .each{
+        if (it.getProperty('code').toLowerCase() == 'self') { // class de definition
+            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Interface', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'Interface', 'File']}.next().fullnspath;
+            if (fullnspath == null) { fullnspath = it.code;}
+            it.setProperty('fullnspath', fullnspath);
+        } else if (it.getProperty('code').toLowerCase() == 'static') { // class courante à l'exécution...
+            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Interface', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'Interface', 'File']}.next().fullnspath;
+            if (fullnspath == null) { fullnspath = it.code;}
+            it.setProperty('fullnspath', fullnspath);
+        } else if (it.getProperty('code').toLowerCase() == 'parent') {
+            fullnspath = it.in.loop(1){!(it.object.atom in ['Class', 'Interface', 'Trait'])}{it.object.atom in ['Class', 'Trait', 'Interface', 'File']}.next();
             if (fullnspath.out('EXTENDS').any()) {
                 fullnspath = fullnspath.out('EXTENDS').next().fullnspath;
             } else {
