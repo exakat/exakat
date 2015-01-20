@@ -13,7 +13,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
              ->_as('ppp')
-             ->hasOut('PRIVATE')
+             ->hasNoOut('STATIC')
              ->savePropertyAs('propertyname', 'propertyname')
              ->inIs('ELEMENT')
              ->atomInside('Property')
@@ -27,6 +27,26 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // private static property + class/static::property
+        $this->atomIs("Class")
+             ->savePropertyAs('fullnspath', 'fns')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Ppp')
+             ->_as('ppp')
+             ->hasOut('STATIC')
+             ->outIs('DEFINE')
+             ->savePropertyAs('code', 'propertyname')
+             ->inIs('DEFINE')
+             ->inIs('ELEMENT')
+             ->atomInside('Staticproperty')
+             ->outIs('CLASS')
+             ->samePropertyAs('fullnspath', 'fns')
+             ->inIs('CLASS')
+             ->outIs('PROPERTY')
+             ->outIsIE('VARIABLE') // for arrays
+             ->samePropertyAs('code','propertyname')
+             ->back('ppp');
+        $this->prepareQuery();
         
         // protected property
         
