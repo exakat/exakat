@@ -45,58 +45,54 @@ Label : CODE
         Label : SUBNAME
           G
     Label : BLOCK
-      makeSequence T_COMMA
+      {
       Label : ELEMENT
-        interface
+        function
         Label : NAME
-          A
-        Label : EXTENDS
-          ,
+          D
+        Label : ARGUMENTS
+          void
           Label : ARGUMENT
-            \
-            Label : SUBNAME
-              J
-            Label : SUBNAME
-              I
-          Label : ARGUMENT
-            \
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              B
-          Label : ARGUMENT
-            \
-            Label : SUBNAME
-              H
-            Label : SUBNAME
-              G
-        Label : BLOCK
-          makeSequence T_COMMA
-          Label : ELEMENT
-            {
-            Label : ELEMENT
-              function
-              Label : NAME
-                D
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  Typehint
-                  Label : CLASS
-                    E
-                  Label : VARIABLE
-                    $f
+            Typehint
+            Label : CLASS
+              E
+            Label : VARIABLE
+              $f
+  Label : ELEMENT
+    interface
+    Label : NAME
+      A
+    Label : EXTENDS
+      ,
+      Label : ARGUMENT
+        \
+        Label : SUBNAME
+          J
+        Label : SUBNAME
+          I
+      Label : ARGUMENT
+        \
+        Label : SUBNAME
+          C
+        Label : SUBNAME
+          B
+      Label : ARGUMENT
+        \
+        Label : SUBNAME
+          H
+        Label : SUBNAME
+          G
+    Label : BLOCK
+      {
       Label : ELEMENT
-        {
-        Label : ELEMENT
-          function
-          Label : NAME
-            D
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              Typehint
-              Label : CLASS
-                E
-              Label : VARIABLE
-                $f
+        function
+        Label : NAME
+          D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : CLASS
+              E
+            Label : VARIABLE
+              $f

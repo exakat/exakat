@@ -8,9 +8,9 @@ class _Interface extends TokenAuto {
 
     public function _check() {
         $this->conditions = array(0 => array('token' => _Interface::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => 'Identifier'),
-                                  2 => array('atom' => 'Sequence'),
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => 'Identifier'),
+                                  2 => array('atom'  => 'Sequence'),
         );
         
         $this->actions = array('transform'    => array( 1 => 'NAME',
@@ -21,11 +21,11 @@ class _Interface extends TokenAuto {
         $this->checkAuto();
 
         $this->conditions = array(0 => array('token' => _Interface::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => 'Identifier'),
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => 'Identifier'),
                                   2 => array('token' => 'T_EXTENDS'),
-                                  3 => array('atom' => array('Arguments', 'Identifier', 'Nsname')),
-                                  4 => array('atom' => 'Sequence'),
+                                  3 => array('atom'  => array('Arguments', 'Identifier', 'Nsname')),
+                                  4 => array('atom'  => 'Sequence'),
         );
         
         $this->actions = array('transform'         => array( 1 => 'NAME',

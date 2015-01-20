@@ -30,7 +30,7 @@ class Block extends TokenAuto {
                                                                      'T_CLOSE_CURLY', 'T_OPEN_CURLY',// $x{1}{3},
                                                                      'T_OPEN_BRACKET', 'T_CLOSE_BRACKET',  // $x[1]{3},
                                                                      'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_AT',
-                                                                     'T_STRING')),
+                                                                     'T_STRING', 'T_COMMA')),
                                     0 => array('token'      => self::$operators),
                                     1 => array('atom'       => 'yes',
                                                'notAtom'    => 'SequenceCaseDefault'),
@@ -49,7 +49,7 @@ class Block extends TokenAuto {
    // @doc interface xxxx { /**/ }
         $this->conditions = array( -2 => array('token'      => array('T_EXTENDS', 'T_IMPLEMENTS', 'T_INTERFACE', 'T_CLASS',
                                                                      'T_NAMESPACE', 'T_TRAIT', 'T_USE')),
-                                   -1 => array('token'      => 'T_STRING'),
+                                   -1 => array('token'      => array('T_STRING', 'T_COMMA')),
                                     0 => array('token'      => self::$operators),
                                     1 => array('atom'       => 'yes',
                                                'notAtom'    => 'SequenceCaseDefault'),
@@ -60,7 +60,6 @@ class Block extends TokenAuto {
         $this->actions = array('to_block'     => true,
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
-                               'makeSequence' => 'it',
                                'property'     => array('bracket' => 'true')
                                );
         $this->checkAuto();

@@ -15,14 +15,12 @@ Label : CODE
       Label : ARGUMENT
         c
     Label : BLOCK
-      makeSequence T_COMMA
+      {
       Label : ELEMENT
-        {
-        Label : ELEMENT
-          function
-          Label : NAME
-            x
-          Label : ARGUMENTS
+        function
+        Label : NAME
+          x
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
             void
-            Label : ARGUMENT
-              void
