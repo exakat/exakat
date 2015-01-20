@@ -1,0 +1,12 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    trait
+    Label : NAME
+      A
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void
