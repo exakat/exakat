@@ -28,22 +28,22 @@ class Analyzer {
     
     protected $apply = null;
 
-    protected $phpVersion = "Any";
-    protected $phpConfiguration = "Any";
+    protected $phpVersion = 'Any';
+    protected $phpConfiguration = 'Any';
 
     protected $severity = self::S_NONE; // Default to None. 
-    const S_CRITICAL = "Critical";
-    const S_MAJOR = "Major";
-    const S_MINOR = "Minor";
-    const S_NOTE = "Note";
-    const S_NONE = "None";
+    const S_CRITICAL = 'Critical';
+    const S_MAJOR = 'Major';
+    const S_MINOR = 'Minor';
+    const S_NOTE = 'Note';
+    const S_NONE = 'None';
 
     protected $timeToFix = self::T_NONE; // Default to no time (Should not display)
-    const T_NONE = "0";
-    const T_INSTANT = "5";
-    const T_QUICK = "30";
-    const T_SLOW = "60";
-    const T_LONG = "360";
+    const T_NONE = '0';
+    const T_INSTANT = '5';
+    const T_QUICK = '30';
+    const T_SLOW = '60';
+    const T_LONG = '360';
     
     protected $themes = array();
     static public $docs = null;
@@ -136,7 +136,7 @@ class Analyzer {
     
     public function getDescription($lang = 'en') {
         if ($this->description === null) {
-            $filename = "./human/$lang/".str_replace("\\", "/", str_replace("Analyzer\\", "", $this->analyzer)).".ini";
+            $filename = './human/$lang/'.str_replace("\\", "/", str_replace("Analyzer\\", "", $this->analyzer)).'.ini';
             
             if (!file_exists($filename)) {
                 $human = array();
@@ -147,7 +147,7 @@ class Analyzer {
             if (isset($human['description'])) {
                 $this->description = $human['description'];
             } else {
-                $this->description = "";
+                $this->description = '';
             }
 
             if (isset($human['name'])) {
@@ -210,7 +210,7 @@ class Analyzer {
             if (func_num_args() > 2) {
                 $arguments = func_get_args();
                 array_shift($arguments);
-                $argnames = array(str_replace('***', "%s", $method));
+                $argnames = array(str_replace('***', '%s', $method));
                 foreach($arguments as $arg) {
                     $argname = 'arg'.(count($this->arguments));
                     $this->arguments[$argname] = $arg;
@@ -326,7 +326,7 @@ GREMLIN;
     public function setApplyBelow($applyBelow = true) {
         $this->apply->setApplyBelow($applyBelow);
         
-        $this->addMethod("sideEffect{ applyBelowRoot = it }");
+        $this->addMethod('sideEffect{ applyBelowRoot = it }');
         
         return $this;
     }
@@ -342,7 +342,7 @@ GREMLIN;
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            print "Exception : ".$message."\n";
+            print 'Exception : '.$message."\n";
             
             print $queryString."\n";
             print_r($this->arguments);
@@ -578,23 +578,23 @@ GREMLIN;
         return $this;
     }
 
-    public function isMore($property, $value = "0") {
+    public function isMore($property, $value = '0') {
         if (is_int($value)) {
-            $this->addMethod("filter{ it.$property > ***;}", $value);
+            $this->addMethod('filter{ it.$property > ***;}', $value);
         } else {
             // this is a variable name
-            $this->addMethod("filter{ it.$property > $value;}", $value);
+            $this->addMethod('filter{ it.$property > $value;}', $value);
         }
 
         return $this;
     }
 
-    public function isLess($property, $value= "0") {
+    public function isLess($property, $value= '0') {
         if (is_int($value)) {
-            $this->addMethod("filter{ it.$property < ***;}", $value);
+            $this->addMethod('filter{ it.$property < ***;}', $value);
         } else {
             // this is a variable name
-            $this->addMethod("filter{ it.$property < $value;}", $value);
+            $this->addMethod('filter{ it.$property < $value;}', $value);
         }
 
         return $this;
@@ -610,7 +610,7 @@ GREMLIN;
         return $this;
     }
 
-    public function hasRank($value = "0", $link = 'ARGUMENT') {
+    public function hasRank($value = '0', $link = 'ARGUMENT') {
         if ($value == 'first') {
             $this->addMethod("has('rank','0')");
         } elseif ($value === 'last') {
@@ -624,7 +624,7 @@ GREMLIN;
         return $this;
     }
 
-    public function noChildWithRank($edgeName, $rank = "0") {
+    public function noChildWithRank($edgeName, $rank = '0') {
         if ($rank === 'first') {
             $this->addMethod("filter{ it.out(***).has('rank','0').any() == false }", $edgeName);
         } elseif ($rank === 'last') {
@@ -809,7 +809,7 @@ GREMLIN;
     }
 
     public function savePropertyAs($property, $name) {
-        $this->addMethod("sideEffect{ $name = it.$property; }");
+        $this->addMethod('sideEffect{ $name = it.$property; }');
 
         return $this;
     }
@@ -885,23 +885,23 @@ GREMLIN;
     }
 
     public function isUppercase($property = 'fullcode') {
-        $this->methods[] = "filter{it.$property == it.$property.toUpperCase()}";
+        $this->methods[] = 'filter{it.$property == it.$property.toUpperCase()}';
     }
 
     public function isNotLowercase($property = 'fullcode') {
-        $this->methods[] = "filter{it.$property != it.$property.toLowerCase()}";
+        $this->methods[] = 'filter{it.$property != it.$property.toLowerCase()}';
     }
 
     public function filter($filter) {
-        $this->methods[] = "filter{ $filter }";
+        $this->methods[] = 'filter{ $filter }';
     }
 
-    public function codeLength($length = " == 1 ") {
+    public function codeLength($length = ' == 1 ') {
         // @todo add some tests ? Like Operator / value ? 
         $this->methods[] = "filter{it.code.length() $length}";
     }
 
-    public function fullcodeLength($length = " == 1 ") {
+    public function fullcodeLength($length = ' == 1 ') {
         // @todo add some tests ? Like Operator / value ? 
         $this->methods[] = "filter{it.fullcode.length() $length}";
 
@@ -970,7 +970,7 @@ GREMLIN;
         if (is_array($edgeName)) {
             $this->addMethod("out('".implode("', '", $edgeName)."')");
         } else {
-            $this->addMethod("out(***)", $edgeName);
+            $this->addMethod('out(***)', $edgeName);
         }
         
         return $this;
@@ -991,7 +991,7 @@ GREMLIN;
         if (is_array($edgeName)) {
             $this->addMethod("filter{ it.out('".implode("', '", $edgeName)."').count() == 0}");
         } else {
-            $this->addMethod("filter{ it.out(***).count() == 0}", $edgeName);
+            $this->addMethod('filter{ it.out(***).count() == 0}', $edgeName);
         }
         
         return $this;
@@ -1007,10 +1007,10 @@ GREMLIN;
             $rank = 0;
             $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edgeName, $rank);
         } else if ($rank === 'last') {
-            $this->addMethod("sideEffect{ rank = it.out(***).count() - 1;}", $edgeName);
+            $this->addMethod('sideEffect{ rank = it.out(***).count() - 1;}', $edgeName);
             $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edgeName);
         } else if ($rank === '2last') {
-            $this->addMethod("sideEffect{ rank = it.out(***).count() - 2;}", $edgeName);
+            $this->addMethod('sideEffect{ rank = it.out(***).count() - 2;}', $edgeName);
             $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edgeName);
         } else {
             $rank = abs(intval($rank));
@@ -1047,9 +1047,9 @@ GREMLIN;
     public function inIs($edgeName) {
         if (is_array($edgeName)) {
             // @todo
-            $this->addMethod("inE.filter{it.label in ***}.outV", $edgeName);
+            $this->addMethod('inE.filter{it.label in ***}.outV', $edgeName);
         } else {
-            $this->addMethod("in(***)", $edgeName);
+            $this->addMethod('in(***)', $edgeName);
         }
         
         return $this;
@@ -1068,9 +1068,9 @@ GREMLIN;
 
     public function inIsnot($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any() == false}", $edgeName);
+            $this->addMethod('filter{ it.inE.filter{ it.label in ***}.any() == false}', $edgeName);
         } else {
-            $this->addMethod("filter{ it.in(***).any() == false}", $edgeName);
+            $this->addMethod('filter{ it.in(***).any() == false}', $edgeName);
         }
         
         return $this;
@@ -1078,9 +1078,9 @@ GREMLIN;
 
     public function hasIn($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any()}", $edgeName);
+            $this->addMethod('filter{ it.inE.filter{ it.label in ***}.any()}', $edgeName);
         } else {
-            $this->addMethod("filter{ it.in(***).any()}", $edgeName);
+            $this->addMethod('filter{ it.in(***).any()}', $edgeName);
         }
         
         return $this;
@@ -1094,9 +1094,9 @@ GREMLIN;
     
     public function hasNoIn($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod("filter{ it.inE.filter{ it.label in ***}.any() == false}", $edgeName);
+            $this->addMethod('filter{ it.inE.filter{ it.label in ***}.any() == false}', $edgeName);
         } else {
-            $this->addMethod("filter{ it.in(***).any() == false}", $edgeName);
+            $this->addMethod('filter{ it.in(***).any() == false}', $edgeName);
         }
         
         return $this;
@@ -1104,9 +1104,9 @@ GREMLIN;
 
     public function hasOut($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.any()}", $edgeName);
+            $this->addMethod('filter{ it.outE.filter{ it.label in ***}.inV.any()}', $edgeName);
         } else {
-            $this->addMethod("filter{ it.out(***).any()}", $edgeName);
+            $this->addMethod('filter{ it.out(***).any()}', $edgeName);
         }
         
         return $this;
@@ -1115,9 +1115,9 @@ GREMLIN;
     public function hasNoOut($edgeName) {
         if (is_array($edgeName)) {
             // @todo
-            $this->addMethod("filter{ it.outE.filter{ it.label in ***}.inV.any() == false}", $edgeName);
+            $this->addMethod('filter{ it.outE.filter{ it.label in ***}.inV.any() == false}', $edgeName);
         } else {
-            $this->addMethod("filter{ it.out(***).any() == false}", $edgeName);
+            $this->addMethod('filter{ it.out(***).any() == false}', $edgeName);
         }
         
         return $this;
@@ -1144,7 +1144,7 @@ GREMLIN;
             if (!is_array($ins)) { $ins = array($ins); }
             foreach($ins as $i) {
                 if (empty($i)) {
-                    $in[] = ".in";
+                    $in[] = '.in';
                 } else {
                     $in[] = ".in('$i')";
                 }
@@ -1172,7 +1172,7 @@ GREMLIN;
             if (!is_array($ins)) { $ins = array($ins); }
             foreach($ins as $i) {
                 if (empty($i)) {
-                    $in[] = ".in";
+                    $in[] = '.in';
                 } else {
                     $in[] = ".in('$i')";
                 }
@@ -1523,7 +1523,7 @@ GREMLIN
                 } elseif (is_int($value)) {
                     $query = str_replace($name, $value, $query);
                 } else {
-                    print "Cannot process argument of type ".gettype($value)."\n";
+                    print 'Cannot process argument of type '.gettype($value)."\n";
                     die(__METHOD__);
                 }
             }
@@ -1633,7 +1633,7 @@ GREMLIN;
         return $report;
     }
 
-    public function toCountedArray($load = "it.fullcode") {
+    public function toCountedArray($load = 'it.fullcode') {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
         $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){{$load}}.cap"; 
         $vertices = $this->query($queryTemplate);

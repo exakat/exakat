@@ -9,7 +9,12 @@ class AnalyzerConfig extends \Report\Content {
         $config = \Config::factory();
         $analyzer = str_replace('/', '_', $this->analyzer);
         
-        $this->list = array_flip($config->$analyzer);
+        $list = $config->$analyzer;
+        if (is_array($list)) {
+            $this->list = array_flip($list);
+        } else {
+            $this->list = array();
+        }
     }
 
     public function setAnalyzer($analyzer) {

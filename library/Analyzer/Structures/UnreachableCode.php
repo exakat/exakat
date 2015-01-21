@@ -10,35 +10,35 @@ class UnreachableCode extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Return")
+        $this->atomIs('Return')
              ->nextSibling();
         $this->prepareQuery();
 
-        $this->atomIs("Throw")
+        $this->atomIs('Throw')
              ->nextSibling();
         $this->prepareQuery();
 
-        $this->atomIs("Break")
+        $this->atomIs('Break')
              ->nextSibling();
         $this->prepareQuery();
 
-        $this->atomIs("Continue")
+        $this->atomIs('Continue')
              ->nextSibling();
         $this->prepareQuery();
 
-        $this->atomIs("Goto")
+        $this->atomIs('Goto')
              ->nextSibling()
              ->atomIsNot('Label');
         $this->prepareQuery();
 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_EXIT', 'T_DIE'))
              ->fullnspath(array('\\exit', '\\die'))
              ->nextSibling();
         $this->prepareQuery();
 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()

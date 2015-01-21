@@ -14,7 +14,7 @@ class SensitiveArgument extends Analyzer\Analyzer {
             $functions = $this->makeFullNsPath($unsafe['functions'.$position]);
 
             // $_GET/_POST ... directly as argument of PHP functions
-            $this->atomIs("Functioncall")
+            $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_DIE', 'T_EXIT'))
                  ->fullnspath($functions)

@@ -6,19 +6,18 @@ use Analyzer;
 
 class RemoteInjection extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Analyzer\\Security\\SensitiveArgument");
+        return array('Analyzer\\Security\\SensitiveArgument');
     }
 
     public function analyze() {
         // foreach 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->raw('sideEffect{ first = it;}')
 
              // Must change to list of incoming points
-//             ->analyzerIs('Analyzer\\Security\\ContaminatedFunction')
-             ->code(array('f011', 'f101', 'f110', 'f111'))
+             ->analyzerIs('Analyzer\\Security\\ContaminatedFunction')
 
             // Loop initialisation    .filter{ it.code == '\$a' }
              ->raw("sideEffect{ x=[]; y = it.out('ARGUMENTS').out('ARGUMENT').rank.toList(); x += [y]; x += [y] ; x += 0;}")

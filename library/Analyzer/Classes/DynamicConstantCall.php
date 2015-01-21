@@ -8,7 +8,7 @@ class DynamicConstantCall extends Analyzer\Analyzer {
     public function analyze() {
         //constant("ThingIDs::$thing");
         // probably too weak. Needs to be completed with a check on variables built before
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath('\\constant')
@@ -22,7 +22,7 @@ class DynamicConstantCall extends Analyzer\Analyzer {
         //$r = new ReflectionClass('ThingIDs');
         //$id = $r->getConstant($thing);
         // probably too weak. Needs to be completed with a check on ReflectionClass
-        $this->atomIs("Methodcall")
+        $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->code('getConstant')
              ->back('first');

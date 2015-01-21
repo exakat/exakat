@@ -7,11 +7,11 @@ use Analyzer;
 class StrposCompare extends Analyzer\Analyzer {
     static public $operator = array('strpos', 'stripos', 'strrpos', 'strripos', 
                                     'strstr', 'stristr', 'file_get_contents',
-                                    'fread', );
+                                    'fread');
     
     public function analyze() {
         // if (.. == strpos(..)) {}
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->_as('result')
              ->code(StrposCompare::$operator)
              ->inIs('RIGHT')
@@ -23,7 +23,7 @@ class StrposCompare extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // if (strpos(..) == ..) {}
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->_as('result')
              ->code(StrposCompare::$operator)
              ->inIs('LEFT')
@@ -35,7 +35,7 @@ class StrposCompare extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // if (strpos(..)) {}
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->_as('result')
              ->code(StrposCompare::$operator)
              ->inIs('CODE')
@@ -45,7 +45,7 @@ class StrposCompare extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // if ($x = strpos(..)) {}
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->code(StrposCompare::$operator)
              ->inIs('RIGHT')
              ->atomIs('Assignation')

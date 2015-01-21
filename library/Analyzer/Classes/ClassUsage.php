@@ -7,43 +7,43 @@ use Analyzer;
 class ClassUsage extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW');
         $this->prepareQuery();
         
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('CLASS');
         $this->prepareQuery();
 
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('CLASS');
         $this->prepareQuery();
 
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->outIs('CLASS');
         $this->prepareQuery();
 
-        $this->atomIs("Catch")
+        $this->atomIs('Catch')
              ->outIs('CLASS');
         $this->prepareQuery();
 
-        $this->atomIs("Typehint")
+        $this->atomIs('Typehint')
              ->outIs('CLASS');
         $this->prepareQuery();
 
-        $this->atomIs("Instanceof")
+        $this->atomIs('Instanceof')
              ->outIs('CLASS');
         $this->prepareQuery();
 
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs(array('EXTENDS', 'IMPLEMENTS'));
         $this->prepareQuery();
 
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE');
         $this->prepareQuery();
 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath('\\class_alias')

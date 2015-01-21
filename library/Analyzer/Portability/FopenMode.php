@@ -6,7 +6,7 @@ use Analyzer;
 
 class FopenMode extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->code('fopen')
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT',1)
@@ -14,7 +14,7 @@ class FopenMode extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->code('fopen')
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 1)

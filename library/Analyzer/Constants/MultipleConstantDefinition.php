@@ -7,8 +7,8 @@ use Analyzer;
 class MultipleConstantDefinition extends Analyzer\Analyzer {
     public function analyze() {
         // case-sensitive constants
-        $this->atomIs("Functioncall")
-             ->code("define")
+        $this->atomIs('Functioncall')
+             ->code('define')
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 'first')
              ->atomIs('String')
@@ -16,8 +16,8 @@ class MultipleConstantDefinition extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // case-insensitive constants
-        $this->atomIs("Functioncall")
-             ->code("define")
+        $this->atomIs('Functioncall')
+             ->code('define')
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 2)
              ->atomIs('Boolean')

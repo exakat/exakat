@@ -46,7 +46,7 @@ class Extension extends Analyzer\Analyzer {
         
         if (!empty($functions)) {
             $functions = $this->makeFullNsPath($functions);
-            $this->atomIs("Functioncall")
+            $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
                  ->fullnspath($functions);
@@ -54,7 +54,7 @@ class Extension extends Analyzer\Analyzer {
         }
         
         if (!empty($constants)) {
-            $this->atomIs("Identifier")
+            $this->atomIs('Identifier')
                  ->analyzerIs('ConstantUsage')
                  ->code($constants);
             $this->prepareQuery();

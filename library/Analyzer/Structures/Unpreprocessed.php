@@ -8,7 +8,7 @@ class Unpreprocessed extends Analyzer\Analyzer {
     public function analyze() {
         // avoid initialization build on function call. Use directly values or outsource them.
         // $x = explode(',', 'a,b,c,d,e,f') => array('a', 'b', 'c',...)
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->outIs('NAME')

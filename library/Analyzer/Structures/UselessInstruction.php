@@ -7,7 +7,7 @@ use Analyzer;
 class UselessInstruction extends Analyzer\Analyzer {
     public function analyze() {
         // Structures that should be put somewhere, and never left alone
-        $this->atomIs("Sequence")
+        $this->atomIs('Sequence')
              ->outIs('ELEMENT')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
@@ -16,27 +16,27 @@ class UselessInstruction extends Analyzer\Analyzer {
         $this->prepareQuery();
         
         // -$x = 3
-        $this->atomIs("Assignation")
+        $this->atomIs('Assignation')
              ->outIs('LEFT')
              ->atomIs('Sign');
         $this->prepareQuery();
 
         // closures that are not assigned to something (argument or variable)
-        $this->atomIs("Sequence")
+        $this->atomIs('Sequence')
              ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->is('lambda', "true");
+             ->is('lambda', 'true');
         $this->prepareQuery();
 
         // return $a++;
-        $this->atomIs("Return")
+        $this->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Postplusplus')
              ->back('first');
         $this->prepareQuery();
 
         // array_merge($a);
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath(array('\\array_merge', '\\array_merge_recursive', '\\array_replace'))

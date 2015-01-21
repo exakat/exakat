@@ -6,11 +6,11 @@ use Analyzer;
 
 class FileUploadUsage extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->code('$_FILES');
         $this->prepareQuery();
         
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath(array('\is_uploaded_file', '\move_uploaded_file'));

@@ -11,7 +11,7 @@ class ConstRecommended extends Analyzer\Analyzer {
     
     public function analyze() {
         // define('const', literal);
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD') // possibly new too
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath('\\define')
@@ -29,7 +29,7 @@ class ConstRecommended extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // define('const', other constant);
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD') // possibly new too
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath('\\define')
@@ -47,7 +47,7 @@ class ConstRecommended extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // define('const', expression);
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD') // possibly new too
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath('\\define')

@@ -7,7 +7,7 @@ use Analyzer;
 class EmptySlots extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->tokenIs('T_ARRAY')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')

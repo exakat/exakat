@@ -6,7 +6,7 @@ use Analyzer;
 
 class ErrorReportingWithInteger extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->code('error_reporting', false)
@@ -16,7 +16,7 @@ class ErrorReportingWithInteger extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->code('ini_set', false)
@@ -24,7 +24,7 @@ class ErrorReportingWithInteger extends Analyzer\Analyzer {
              ->rankIs('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIsNot('T_QUOTE')
-             ->noDelimiter("error_reporting")
+             ->noDelimiter('error_reporting')
              ->inIs('ARGUMENT')
              ->rankIs('ARGUMENT', 1)
              ->atomIs('Integer')

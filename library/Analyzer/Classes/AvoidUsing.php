@@ -56,27 +56,27 @@ class AvoidUsing extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // class may be used in a Typehint
-        $this->atomIs("Typehint")
+        $this->atomIs('Typehint')
              ->outIs('CLASS')
              ->fullnspath($classes)
              ->back('first');
         $this->prepareQuery();
 
         // class may be used in an extension
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
              ->fullnspath($classes)
              ->back('first');
         $this->prepareQuery();
 
         // class may be used in an use
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->fullnspath($classes)
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath('\\class_alias')
@@ -86,7 +86,7 @@ class AvoidUsing extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // mentions in strings
-        $this->atomIs("String")
+        $this->atomIs('String')
              ->noDelimiter($this->config);
         $this->prepareQuery();
 

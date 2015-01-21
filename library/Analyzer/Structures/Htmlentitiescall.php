@@ -6,7 +6,7 @@ use Analyzer;
 
 class Htmlentitiescall extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->fullnspath(array('\\htmlentities', '\\htmlspecialchars'))
@@ -15,7 +15,7 @@ class Htmlentitiescall extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->atomIsNot('Analyzer\\\\Structures\\\\Htmlentitiescall')
@@ -25,7 +25,7 @@ class Htmlentitiescall extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->atomIsNot('Analyzer\\\\Structures\\\\Htmlentitiescall')
@@ -36,7 +36,7 @@ class Htmlentitiescall extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Functioncall")
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->atomIsNot('Analyzer\\\\Structures\\\\Htmlentitiescall')
