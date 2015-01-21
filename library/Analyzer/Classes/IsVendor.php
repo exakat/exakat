@@ -12,7 +12,7 @@ class IsVendor extends Analyzer\Analyzer {
     public function analyze() {
         // static constants
         // for aliases 
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->outIs('CLASS')
              ->savePropertyAs('code', 'classe')
              ->goToNamespace()
@@ -29,7 +29,7 @@ class IsVendor extends Analyzer\Analyzer {
 
         // static methods
         // for aliases 
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->savePropertyAs('code', 'classe')
              ->goToNamespace()
@@ -46,7 +46,7 @@ class IsVendor extends Analyzer\Analyzer {
 
         // static properties
         // for aliases 
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->savePropertyAs('code', 'classe')
              ->goToNamespace()
@@ -63,7 +63,7 @@ class IsVendor extends Analyzer\Analyzer {
 
         // Instanceof
         // for aliases 
-        $this->atomIs("Instanceof")
+        $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->savePropertyAs('code', 'classe')
              ->goToNamespace()
@@ -80,7 +80,7 @@ class IsVendor extends Analyzer\Analyzer {
 
         // New
         // for aliases with namespaces
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW')
              ->_as('classe')
              ->savePropertyAs('code', 'classe')
@@ -97,7 +97,7 @@ class IsVendor extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // for aliases without namespaces
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW')
              ->_as('classe')
              ->savePropertyAs('code', 'classe')
@@ -112,7 +112,7 @@ class IsVendor extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // for direct naming 
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW')
              ->_as('classe')
              ->tokenIs('T_NS_SEPARATOR')

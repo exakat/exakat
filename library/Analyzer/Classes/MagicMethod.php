@@ -10,11 +10,12 @@ class MagicMethod extends Analyzer\Analyzer {
         $magicMethods = $this->loadIni('php_magic_methods.ini');
         $magicMethods = $magicMethods['magicMethod'];
         
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->atomInside('Function')
              ->outIs('NAME')
              ->code($magicMethods);
+        $this->prepareQuery();
     }
 }
 
