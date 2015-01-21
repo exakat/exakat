@@ -583,7 +583,7 @@ GREMLIN;
             $this->addMethod('filter{ it.$property > ***;}', $value);
         } else {
             // this is a variable name
-            $this->addMethod('filter{ it.$property > $value;}', $value);
+            $this->addMethod("filter{ it.$property > $value;}", $value);
         }
 
         return $this;
@@ -594,7 +594,7 @@ GREMLIN;
             $this->addMethod('filter{ it.$property < ***;}', $value);
         } else {
             // this is a variable name
-            $this->addMethod('filter{ it.$property < $value;}', $value);
+            $this->addMethod("filter{ it.$property < $value;}", $value);
         }
 
         return $this;
