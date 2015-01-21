@@ -136,7 +136,7 @@ class Analyzer {
     
     public function getDescription($lang = 'en') {
         if ($this->description === null) {
-            $filename = './human/$lang/'.str_replace("\\", "/", str_replace("Analyzer\\", "", $this->analyzer)).'.ini';
+            $filename = './human/'.$lang.'/'.str_replace("\\", "/", str_replace("Analyzer\\", "", $this->analyzer)).'.ini';
             
             if (!file_exists($filename)) {
                 $human = array();
