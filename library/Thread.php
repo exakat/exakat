@@ -3,9 +3,6 @@
 class Thread {
     private $pipes = array();
     private $process = array();
-    function __construct() {
-    
-    }
     
     public function run($command) {
         $descriptors = array( 0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
