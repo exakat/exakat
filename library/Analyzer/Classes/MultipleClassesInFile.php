@@ -6,7 +6,7 @@ use Analyzer;
 
 class MultipleClassesInFile extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("File")
+        $this->atomIs('File')
              ->savePropertyAs('code', 'filename')
              ->outIs('FILE')
              ->atomInside('Class')
