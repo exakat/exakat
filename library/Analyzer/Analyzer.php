@@ -809,7 +809,7 @@ GREMLIN;
     }
 
     public function savePropertyAs($property, $name) {
-        $this->addMethod('sideEffect{ $name = it.$property; }');
+        $this->addMethod("sideEffect{ $name = it.$property; }");
 
         return $this;
     }
