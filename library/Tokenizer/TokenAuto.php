@@ -2356,56 +2356,7 @@ close_curly.bothE('NEXT').each{ g.removeEdge(it); }
             unset($actions['to_variable_dollar']);
         }
 
-/*
-        if (isset($actions['mergePrev']) && $actions['mergePrev']) {
-            foreach($actions['mergePrev'] as $atom => $link) {
-                $qactions[] = "
-/* mergePrev * /
-x = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:it.line]);
-y = it.in('NEXT').in('NEXT').next();
-z = it.in('NEXT').next();
-a = it;
-b = it.out('NEXT').next();
-
-g.addEdge(x, z, 'ELEMENT');
-g.addEdge(x, a, 'ELEMENT');
-
-z.bothE('NEXT').each{ g.removeEdge(it); }
-
-g.addEdge(y, x, 'NEXT');
-g.addEdge(x, b, 'NEXT');
-
-a.bothE('NEXT').each{ g.removeEdge(it); }
-
-x.as('origin').out('ELEMENT').has('atom','Sequence').each{
-    it.inE('ELEMENT').each{ g.removeEdge(it);}
-  
-    it.out('ELEMENT').each{
-        it.inE('ELEMENT').each{ g.removeEdge(it);}
-        g.addEdge(x, it, 'ELEMENT');
-    };
-
-    g.idx('delete').put('node', 'delete', it);
-}
-
-// remove the next, if this is a ;
-x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
-    g.addEdge(x, x.out('NEXT').out('NEXT').next(), 'NEXT');
-    semicolon = it;
-    semicolon.bothE('NEXT').each{ g.removeEdge(it); }
-    semicolon.bothE('INDEXED').each{ g.removeEdge(it); }
-    g.removeVertex(semicolon);
-}
-
-            ";
-            }
-            unset($actions['mergePrev']);
-        }
-*/
         if (isset($actions['make_quoted_string'])) {
-            $concatenation = new Concatenation(Token::$client);
-            $fullcode = $concatenation->fullcode();
-
             $atom = $actions['make_quoted_string'];
             $class = "\\Tokenizer\\$atom";
             $string = new $class(Token::$client);
@@ -2439,7 +2390,7 @@ g.removeEdge(f.out('NEXT').outE('NEXT').next());
 it.setProperty('atom', 'String');
 
 fullcode = x;
-$fullcode
+$fullCodeString
 
 fullcode = it;
 $fullCodeString
