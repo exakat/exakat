@@ -2276,7 +2276,7 @@ list_after = [
         'T_OPEN_BRACKET', 'T_CLOSE_BRACKET',
         'T_PLUS', 'T_MINUS',
         'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_POW',
-        'T_COLON', 'T_NEW', 'T_DOT',
+        'T_COLON', 'T_NEW', 'T_DOT', 'T_DOUBLE_ARROW',
         'T_SR','T_SL', 'T_CURLY_OPEN',
         'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
         'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
