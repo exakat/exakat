@@ -814,6 +814,18 @@ GREMLIN;
         return $this;
     }
 
+    public function isGrandParent() {
+        $this->addMethod("filter{ fns = it.fullnspath; it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').transform{ g.idx('classes')[['path':it.fullnspath]].next(); }.loop(2){true}{it.object.fullnspath == fns}.any() }");
+
+        return $this;
+    }
+
+    public function isNotGrandParent() {
+        $this->addMethod("filter{ fns = it.fullnspath; it.in.loop(1){it.object.atom != 'Class'}{it.object.atom == 'Class'}.out('EXTENDS').transform{ g.idx('classes')[['path':it.fullnspath]].next(); }.loop(2){true}{it.object.fullnspath == fns}.any() == false}");
+
+        return $this;
+    }
+
     public function fullcodeTrimmed($code, $trim = "\"'", $caseSensitive = false) {
         if ($caseSensitive) {
             $caseSensitive = '';
@@ -1306,6 +1318,12 @@ GREMLIN;
     
     public function goToClass() {
         $this->addMethod('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}');
+        
+        return $this;
+    }
+    
+    public function notInClass() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.any() == false}');
         
         return $this;
     }
