@@ -685,3 +685,25 @@ Spot ob_* sequences
 Make an entry point with interfaces : Database, file systeme, shell, shmop, sockets, mail, ...
 
 Signal double quote strings that may be reduced because of less escaping
+
+echo 'foo: ' . $x+1 . ' bar'; (ordre de priorité)
+
+Also, usage of global and attempts à detecting global and their usage count (variables only once used will be removed)
+
+unserialize is unsecure
+
+Directly calling __clone is allowed but wrong (all magical functions in fact)
+
+ramuzo: pour report/pages/Non-static-methods-called-in-a-static.html, je comprend la situation. Si c’était un parent, on aurait parent::setView(), et même si setView est pas statique, c’est valide.
+[12:08pm] ramuzo: mais pour un grand parent, est-ce un pb ?
+
+Propriété/methods/constants filles utilisées par les parents.
+
+Propriété dont la visibilité pourrait être durcie
+
+Property overloading only works in object context. These magic methods will not be triggered in static context. Therefore these methods should not be declared static. As of PHP 5.3.0, a warning is issued if one of the magic overloading methods is declared static.
+
+Note:
+The return value of __set() is ignored because of the way PHP processes the assignment operator. Similarly, __get() is never called when chaining assignments together like this:
+ $a = $obj->b = 8; 
+ 
