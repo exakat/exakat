@@ -4,5 +4,5 @@ Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
     global
-    Label : NAME
+    Label : GLOBAL
       $a

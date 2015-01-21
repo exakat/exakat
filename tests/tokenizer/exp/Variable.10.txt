@@ -9,22 +9,6 @@ Label : CODE
       Label : CONTAIN
         Concatenation
         Label : CONCAT
-          x
-        Label : CONCAT
-          $y
-        Label : CONCAT
-          z
-        Label : CONCAT
-          $a
-    Label : LEFT
-      $f
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
           $a
     Label : LEFT
       $d
@@ -42,6 +26,22 @@ Label : CODE
           z
     Label : LEFT
       $e
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          x
+        Label : CONCAT
+          $y
+        Label : CONCAT
+          z
+        Label : CONCAT
+          $a
+    Label : LEFT
+      $f
   Label : ELEMENT
     =
     Label : RIGHT

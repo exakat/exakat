@@ -4,17 +4,17 @@ Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
     global
-    Label : NAME
+    Label : GLOBAL
       $c
   Label : ELEMENT
     global
-    Label : NAME
+    Label : GLOBAL
       $d
   Label : ELEMENT
     global
-    Label : NAME
+    Label : GLOBAL
       $b
   Label : ELEMENT
     global
-    Label : NAME
+    Label : GLOBAL
       $a

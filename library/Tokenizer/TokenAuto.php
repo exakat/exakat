@@ -1952,6 +1952,29 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             unset($actions['createVoidForCase']);
         }
 
+        if (isset($actions['to_functioncall']) && $actions['to_functioncall']) {
+            $qactions[] = "
+/* to_functioncall */
+a2.setProperty('atom', 'Functioncall')
+g.addEdge(a2, a5, 'ARGUMENTS');
+g.addEdge(it, a2, 'NEXT');
+g.addEdge(a2, a6.out('NEXT').next(), 'NEXT');
+
+a1.bothE('NEXT').each{ g.removeEdge(it); }
+a3.bothE('NEXT').each{ g.removeEdge(it); }
+a4.bothE('NEXT').each{ g.removeEdge(it); }
+a6.bothE('NEXT').each{ g.removeEdge(it); }
+
+g.removeVertex(a1);
+g.removeVertex(a3);
+g.removeVertex(a4);
+g.removeVertex(a6);
+
+g.idx('atoms').put('atom', 'Functioncall', a2)
+            ";
+            unset($actions['to_functioncall']);
+        }
+        
         if (isset($actions['createVoidForDefault']) && $actions['createVoidForDefault']) {
             $qactions[] = "
 /* createVoidForDefault */
