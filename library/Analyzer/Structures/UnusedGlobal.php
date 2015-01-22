@@ -31,7 +31,6 @@ class UnusedGlobal extends Analyzer\Analyzer {
              ->raw('filter{ it.out("FILE").out("CODE").out.loop(1){!(it.object.atom in ["Class", "Function", "Trait", "Interface"])}{it.object.atom == "Variable"}.has("code", theGlobal).hasNot("id", theGlobalId).any() == false}')
              ->back('result');
         $this->prepareQuery();
-
     }
 }
 
