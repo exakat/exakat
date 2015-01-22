@@ -702,3 +702,13 @@ Note:
 The return value of __set() is ignored because of the way PHP processes the assignment operator. Similarly, __get() is never called when chaining assignments together like this:
  $a = $obj->b = 8; 
  
+Add a script to remove an analyzer cleanely
+
+Glob : 
+Note: This function isn't available on some systems (e.g. old Sun OS).
+Note: The GLOB_BRACE flag is not available on some non GNU systems, like Solaris.
+
+Spot common arrays / string / values that are identical accross the files : they should be constanted.
+
+Check if a functioncall returns the compatible type for a nested functioncall
+
