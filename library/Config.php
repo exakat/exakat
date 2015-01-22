@@ -83,6 +83,7 @@ class Config {
 
     private function readCommandline() {
         $args = $this->argv;
+        unset($args[0]);
 
         if (empty($args)) {
             return null;
@@ -139,6 +140,10 @@ class Config {
             } else {
                 $this->commandline[$config[0]] = $config[1];
             }
+        }
+        
+        if (count($args) != 0) {
+            print "Found ".count($args)." arguments that are not understood.\n\n\"".join('", "', $args)."\"\n\nIgnoring them all\n";
         }
     }
 }
