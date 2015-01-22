@@ -2533,7 +2533,7 @@ g.idx('atoms').put('atom', 'Array', x);
 it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 'NEW', 'RETURN', 'CONSTANT', 'CLASS', 'VARIABLE',
 'INDEX', 'EXTENDS', 'SUBNAME', 'POSTPLUSPLUS', 'PREPLUSPLUS', 'VALUE', 'CAST', 'SOURCE', 'USE', 'KEY', 'IMPLEMENTS', 'THEN', 'AS',
 'ELSE', 'NOT', 'CONDITION', 'CASE', 'THROW', 'METHOD', 'STATIC', 'CLONE', 'INIT', 'AT', 'ELEMENT','FINAL', 'FILE', 'NAMESPACE', 'LABEL',
-'YIELD').each{
+'YIELD', 'GLOBAL').each{
     it.inE('INDEXED').each{
         g.removeEdge(it);
     }
