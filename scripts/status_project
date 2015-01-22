@@ -39,8 +39,8 @@ if (filesize('projects/'.$project.'/log/errors.log') == 191) {
 }
 
 $res = shell_exec('tail -n 1 projects/'.$project.'/log/analyze.*.final.log| grep Done');
-$logs = array('analyze', 'appinfo', 'Coding_Conventions', 'Dead_code');
-if ($res == "Done\nDone\nDone\nDone\nDone\n") {
+$logs = array('analyze', 'appinfo', 'Coding_Conventions', 'Dead_code', 'Custom');
+if ($res == "Done\nDone\nDone\nDone\nDone\nDone\n") {
     foreach($logs as $log) {
 //        print filemtime('projects/'.$project.'/log/analyze.'.$log.'.final.log').' '.$tokenizerLogTime."\n";
         if (filemtime('projects/'.$project.'/log/analyze.'.$log.'.final.log') < $tokenizerLogTime) {
