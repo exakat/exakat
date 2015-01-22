@@ -2,7 +2,37 @@
 
 $analyzer = $argv[1];
 
-list($category, $name) = explode('/', $analyzer);
+if (!preg_match('#^([A-Z][a-zA-Z0-9]*)/([A-Z][a-zA-Z0-9]*)$#is', $analyzer, $parts)) {
+    print "Usage : createAnalyzer <Dir>/<Analyzer>\n";
+    
+    $dirs = glob('library/Analyzer/*', GLOB_ONLYDIR);
+    $dirs = array_map(function ($dir) { 
+        return str_replace('library/Analyzer/', '', $dir); 
+    }, $dirs);
+    print "Dirs : ".join(', ', $dirs)."\n";
+    die();
+}
+
+list(,$category, $name) = $parts;
+
+if (!file_exists('library/Analyzer/'.$category)) {
+    print "Usage : createAnalyzer <Dir>/<Analyzer>\n";
+    print "Dir $category doesn't exists\n";
+    
+    $dirs = glob('library/Analyzer/*', GLOB_ONLYDIR);
+    $dirs = array_map(function ($dir) { 
+        return str_replace('library/Analyzer/', '', $dir); 
+    }, $dirs);
+    print "Dirs : ".join(', ', $dirs)."\n";
+    die();
+}
+
+if (file_exists('library/Analyzer/'.$category.'/'.$name.'.php')) {
+    print "Usage : createAnalyzer <Dir>/<Analyzer>\n";
+    print "Analyzer $category/$name already exists\n";
+    
+    die();
+}
 
 // create class in library/Analyzer
 $php = '<?'. <<<PHP
