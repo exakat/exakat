@@ -6,25 +6,25 @@ use Analyzer;
 
 class NestedLoops extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("For")
+        $this->atomIs('For')
              ->outIs('BLOCK')
              ->atomInside(array('For' ,'Foreach', 'While', 'Dowhile'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Foreach")
+        $this->atomIs('Foreach')
              ->outIs('BLOCK')
              ->atomInside(array('For' ,'Foreach', 'While', 'Dowhile'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Dowhile")
+        $this->atomIs('Dowhile')
              ->outIs('BLOCK')
              ->atomInside(array('For' ,'Foreach', 'While', 'Dowhile'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("While")
+        $this->atomIs('While')
              ->outIs('BLOCK')
              ->atomInside(array('For' ,'Foreach', 'While', 'Dowhile'))
              ->back('first');
