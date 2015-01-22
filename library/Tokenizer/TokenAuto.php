@@ -2360,6 +2360,7 @@ close_curly.bothE('NEXT').each{ g.removeEdge(it); }
             $atom = $actions['make_quoted_string'];
             $class = "\\Tokenizer\\$atom";
             $string = new $class(Token::$client);
+            $fullCodeString = $string->fullcode();
             
             $qactions[] = "
 /* make_quoted_string */
@@ -2389,6 +2390,9 @@ g.removeEdge(f.out('NEXT').outE('NEXT').next());
 it.setProperty('atom', 'String');
 
 fullcode = x;
+$fullCodeString
+
+it.setProperty('fullcode', x.fullcode);
 
 /* Clean index */
 x.out('CONCAT').each{

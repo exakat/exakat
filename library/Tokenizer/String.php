@@ -27,7 +27,7 @@ class String extends TokenAuto {
         return <<<GREMLIN
 
 s = [];
-fullcode.out('CONTAIN').out('CONCAT').sort{it.rank}._().each{ s.add(it.fullcode); }
+fullcode.out('CONCAT').sort{it.rank}._().each{ s.add(it.fullcode); }
 fullcode.setProperty('fullcode', '"' + s.join('') + '"');
 
 if (fullcode.code.length() > 1) {
