@@ -28,11 +28,11 @@ fullcode.setProperty('noDelimiter', s.join(""));
 
 if (fullcode.in('CONTAIN').next().code.substring(3, 4) in ["'"]) {
     // must get rid of ' in the nowdoc indicator
-    fullcode.setProperty('fullcode', it.code + s.join(" NOWDOC ") + it.code.substring(4, it.code.size() - 2));
+    fullcode.setProperty('fullcode', it.code + s.join("") + it.code.substring(4, it.code.size() - 2));
     fullcode.setProperty('nowdoc', 'true');
 } else {
     fullcode.setProperty('heredoc', 'true');
-    fullcode.setProperty('fullcode', it.code + s.join(" DD") + it.code.substring(3, it.code.size()));
+    fullcode.setProperty('fullcode', it.code + s.join("") + it.code.substring(3, it.code.size()));
 }
 
 GREMLIN;
