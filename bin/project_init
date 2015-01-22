@@ -6,7 +6,7 @@ spl_autoload_register('Autoload::autoload_library');
 $config = Config::factory($argv);
 $project = $config->project;
 
-if (empty($project)) {
+if ($project == 'default') {
     die("No project name provided. Add -p option\n");
 }
 
