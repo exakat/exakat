@@ -1244,6 +1244,18 @@ GREMLIN;
         return $this;
     }
 
+    public function notInFunction() {
+        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.any() == false}');
+        
+        return $this;
+    }
+
+    public function goToFile() {
+        $this->addMethod('in.loop(1){it.object.atom != "File"}{it.object.atom == "File"}');
+        
+        return $this;
+    }
+
     public function noNamespaceDefinition() {
         $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('namespaces')[['path':it.fullnspath]].any() == false }");
     
