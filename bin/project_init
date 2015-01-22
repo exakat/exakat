@@ -76,7 +76,7 @@ INI;
             print shell_exec("cd ./projects/$project; mkdir code");
             return null;
         } elseif (strpos($repo_url, 'bitbucket.org') !== false) {
-            print "Installing with git on googlecode\n";
+            print "Installing with git on bitbucket\n";
             print shell_exec("cd ./projects/$project; hg clone $repo_url code");
         } elseif (strpos($repo_url, '.googlecode.com/svn/') !== false) {
             print "Installing with svn on googlecode\n";
