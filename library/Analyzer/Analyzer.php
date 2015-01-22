@@ -580,7 +580,7 @@ GREMLIN;
 
     public function isMore($property, $value = '0') {
         if (is_int($value)) {
-            $this->addMethod('filter{ it.$property > ***;}', $value);
+            $this->addMethod("filter{ it.$property > ***;}", $value);
         } else {
             // this is a variable name
             $this->addMethod("filter{ it.$property > $value;}", $value);
@@ -591,7 +591,7 @@ GREMLIN;
 
     public function isLess($property, $value= '0') {
         if (is_int($value)) {
-            $this->addMethod('filter{ it.$property < ***;}', $value);
+            $this->addMethod("filter{ it.$property < ***;}", $value);
         } else {
             // this is a variable name
             $this->addMethod("filter{ it.$property < $value;}", $value);
@@ -897,11 +897,11 @@ GREMLIN;
     }
 
     public function isUppercase($property = 'fullcode') {
-        $this->methods[] = 'filter{it.$property == it.$property.toUpperCase()}';
+        $this->methods[] = "filter{it.$property == it.$property.toUpperCase()}";
     }
 
     public function isNotLowercase($property = 'fullcode') {
-        $this->methods[] = 'filter{it.$property != it.$property.toLowerCase()}';
+        $this->methods[] = "filter{it.$property != it.$property.toLowerCase()}";
     }
 
     public function filter($filter) {
