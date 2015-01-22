@@ -10,7 +10,7 @@ class _Global extends TokenAuto {
     // global $x; (nothing more)
         $this->conditions = array( 0 => array('token' => _Global::$operators),
                                    1 => array('atom' => array('Variable', 'String', 'Staticconstant', 'Static' )),
-                                   2 => array('token' => 'T_SEMICOLON'),
+                                   2 => array('token' => 'T_SEMICOLON')
                                  );
         
         $this->actions = array('transform'    => array( 1 => 'GLOBAL'),
