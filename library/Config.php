@@ -120,15 +120,15 @@ class Config {
         }
                                  
         $optionsValue   = array('-f' => array('filename',    null),
-                                 '-d' => array('dirname',     null),
-                                 '-p' => array('project',     'default'),
-                                 '-P' => array('program',     null),
-                                 '-R' => array('repository',  false),
-                                 '-T' => array('thema',       null),
-                                 '-report' => array('report',     'Premier'),
-                                 '-format' => array('format',     'Text'),
-                                 '-file' => array('file',     'report'),
-//                                 '-q' => array('loader',   'Load\Csv'),
+                                '-d' => array('dirname',     null),
+                                '-p' => array('project',     'default'),
+                                '-P' => array('program',     null),
+                                '-R' => array('repository',  false),
+                                '-T' => array('thema',       null),
+                                '-report' => array('report',     'Premier'),
+                                '-format' => array('format',     'Text'),
+                                '-file' => array('file',     'report'),
+//                                '-q' => array('loader',   'Load\Csv'),
                                  );
 
         foreach($optionsValue as $key => $config) {
