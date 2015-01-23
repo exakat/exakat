@@ -113,7 +113,11 @@ class Premier extends Report {
                         $this->addContent('Text', $analyzer->getDescription(), 'textlead');
                         $this->addContent('SimpleTable', $analyzer, 'oneColumn');
                     } else {
-                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
+                        $description = $analyzer->getDescription();
+                        if ($description == '') {
+                            $description = 'No documentation yet';
+                        }
+                        $this->addContent('Text', $description, 'textlead');
                         $this->addContent('Horizontal', $analyzer);
                     }
                 }
