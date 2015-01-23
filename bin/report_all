@@ -1,6 +1,11 @@
 <?php
 
-$project = $argv[1];
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$config = Config::factory($argv);
+
+$project = $config->project;
 
 $reports = array('Premier');
 $formats = array('markdown', 'sqlite', 'ace', 'html', 'text', /* 'pdf', 'odt' */);
@@ -9,6 +14,7 @@ print shell_exec('rm -rf ./projects/'.$project.'/report; rm -rf ./projects/'.$pr
 
 foreach($reports as $report) {
     foreach($formats as $format) {
+        print 'rm -rf ./projects/'.$project.'/'."{$report}-{$format}".'.*;     php bin/report -p '.$project.' -f ./projects/'.$project.'/'."{$report}-{$format}".' -format '.$format.' -report '.$report."\n";
         print shell_exec('rm -rf ./projects/'.$project.'/'."{$report}-{$format}".'.*;     php bin/report -p '.$project.' -f ./projects/'.$project.'/'."{$report}-{$format}".' -format '.$format.' -report '.$report);
     }
 }
