@@ -3,10 +3,13 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-if (!isset($argv[1])) {
+$config = Config::factory($argv);
+
+$file = $config->filename;
+
+if ($filename === null) {
     print "Usage : tokenlist <file>";
 }
-$file = $argv[1];
 
 if (!file_exists($file)) {
     print "Usage : tokenlist <file>\n '$file' doesn't exist.\n\n";
