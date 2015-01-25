@@ -121,7 +121,7 @@ $db->logProgress($project, $progress++ / $total_steps);
 print "Project analyzed\n";
 logTime('Analyze');
 
-shell_exec('php bin/report_all '.$project);
+shell_exec('php bin/report_all -p '.$project);
 logTime('Report');
 
 $db->logProgress($project, $progress++ / $total_steps);
