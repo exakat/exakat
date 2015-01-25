@@ -5,15 +5,14 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class StrposCompare extends Analyzer\Analyzer {
-    static public $operator = array('strpos', 'stripos', 'strrpos', 'strripos', 
-                                    'strstr', 'stristr', 'file_get_contents',
-                                    'fread');
-    
     public function analyze() {
+        $operator = $this->loadIni('php_may_return_boolean_or_zero.ini');
+        $operator = $operator['Function'];
+        
         // if (.. == strpos(..)) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->code(StrposCompare::$operator)
+             ->code($operator)
              ->inIs('RIGHT')
              ->atomIs('Comparison')
              ->code(array('==', '!='))
@@ -25,7 +24,7 @@ class StrposCompare extends Analyzer\Analyzer {
         // if (strpos(..) == ..) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->code(StrposCompare::$operator)
+             ->code($operator)
              ->inIs('LEFT')
              ->atomIs('Comparison')
              ->code(array('==', '!='))
@@ -37,7 +36,7 @@ class StrposCompare extends Analyzer\Analyzer {
         // if (strpos(..)) {}
         $this->atomIs('Functioncall')
              ->_as('result')
-             ->code(StrposCompare::$operator)
+             ->code($operator)
              ->inIs('CODE')
              ->inIs('CONDITION')
              ->atomIs('Ifthen')
@@ -46,7 +45,7 @@ class StrposCompare extends Analyzer\Analyzer {
 
         // if ($x = strpos(..)) {}
         $this->atomIs('Functioncall')
-             ->code(StrposCompare::$operator)
+             ->code($operator)
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->_as('result')
