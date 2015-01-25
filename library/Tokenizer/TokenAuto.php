@@ -1620,6 +1620,7 @@ while(a2.token == 'T_COMMA') {
 }
 
 g.addEdge(x, a1, 'ARGUMENT');
+rank += 1;
 a1.setProperty('rank', rank);
 a1.bothE('NEXT').each{ g.removeEdge(it); }
 
