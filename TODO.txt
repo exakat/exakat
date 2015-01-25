@@ -729,3 +729,5 @@ $host = strlen($host) > 0 ? $host : htmlentities($host);
 
 For backward compatibility reasons, array_key_exists() will also return TRUE if key is a property defined within an object given as array. This behaviour should not be relied upon, and care should be taken to ensure that array is an array.
 To check whether a property exists in an object, use property_exists().
+
+UselessOverridingMethodSniff.php (test on parent but on any grand-parents too :)
