@@ -7,17 +7,17 @@ Label : CODE
     Label : RIGHT
       array
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          1
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          3
+          void
         Label : ARGUMENT
           4
         Label : ARGUMENT
-          void
+          3
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          1
     Label : LEFT
       $b
   Label : ELEMENT
@@ -25,12 +25,12 @@ Label : CODE
     Label : RIGHT
       array
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          1
+          3
         Label : ARGUMENT
           2
         Label : ARGUMENT
-          3
+          1
     Label : LEFT
       $x

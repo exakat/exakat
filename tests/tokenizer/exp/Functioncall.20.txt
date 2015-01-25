@@ -7,7 +7,7 @@ Label : CODE
     Label : RIGHT
       array
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
           void
         Label : ARGUMENT
@@ -27,9 +27,23 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            $a
+            ->
+            Label : OBJECT
+              $f
+            Label : PROPERTY
+              g
           Label : VALUE
-            $b
+            ->
+            Label : OBJECT
+              $h
+            Label : PROPERTY
+              i
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            -4
+          Label : VALUE
+            -5
         Label : ARGUMENT
           =>
           Label : KEY
@@ -47,22 +61,8 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            -4
+            $a
           Label : VALUE
-            -5
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $f
-            Label : PROPERTY
-              g
-          Label : VALUE
-            ->
-            Label : OBJECT
-              $h
-            Label : PROPERTY
-              i
+            $b
     Label : LEFT
       $a

@@ -1588,6 +1588,52 @@ g.addEdge(x, b, 'NEXT');
             unset($actions['addEdge']);
             }
         }
+
+        if (isset($actions['to_argument']) && $actions['to_argument']) {
+                $qactions[] = "
+/* to Argument */
+
+x = g.addVertex(null, [code:'Arguments', atom:'Arguments', token:'T_COMMA', virtual:true, line:it.line]);
+
+// initial
+rank = 0;
+g.addEdge(x, b1, 'ARGUMENT');
+b1.setProperty('rank', rank);
+b1.bothE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(b2, x, 'NEXT');
+
+while(a2.token == 'T_COMMA') {
+    g.addEdge(x, a1, 'ARGUMENT');
+    rank += 1;
+    a1.setProperty('rank', rank);
+    g.idx('delete').put('node', 'delete', a2);
+
+    // prepare next round
+    a3 = a2.out('NEXT').next();
+    a4 = a3.out('NEXT').next();
+
+    a1.bothE('NEXT').each{ g.removeEdge(it); }
+    a2.bothE('NEXT').each{ g.removeEdge(it); }
+
+    a1 = a3;
+    a2 = a4;
+}
+
+g.addEdge(x, a1, 'ARGUMENT');
+a1.setProperty('rank', rank);
+a1.bothE('NEXT').each{ g.removeEdge(it); }
+
+a2.inE('NEXT').each{ g.removeEdge(it); }
+g.idx('delete').put('node', 'delete', it);
+g.addEdge(x, a2, 'NEXT');
+
+x.out('ARGUMENT').inE('INDEXED').each{ g.removeEdge(it);  }
+
+fullcode = x;
+
+";        
+            unset($actions['to_argument']);
+        }
         
         if (isset($actions['mergeNext']) && $actions['mergeNext']) {
             foreach($actions['mergeNext'] as $atom => $link) {
@@ -1826,6 +1872,10 @@ a.bothE('NEXT').each{ g.removeEdge(it); }
         if (isset($actions['arguments2extends']) && $actions['arguments2extends']) {
                 $qactions[] = "
 /* arguments2extends */
+    it.out('EXTENDS').sideEffect{ args = it; }.out('ARGUMENT').each{
+        g.addEdge(args, it, 'EXTENDS');
+        it.inE('ARGUMENT').each{ g.removeEdge(it); }
+    }
             ";
             unset($actions['arguments2extends']);
         }
@@ -2060,27 +2110,6 @@ GREMLIN;
             unset($actions['caseDefaultSequence']);
         }
 
-/*
-        if (isset($actions['mergePrev2']) && $actions['mergePrev2']) {
-            foreach($actions['mergePrev2'] as $atom => $link) {
-                $qactions[] = "
-/* mergePrev * /
-x = it;
-it.as('origin').out('ELEMENT').has('atom','Sequence').each{
-    it.inE('ELEMENT').each{ g.removeEdge(it);}
-  
-    it.out('ELEMENT').each{
-        it.inE('ELEMENT').each{ g.removeEdge(it);}
-        g.addEdge(x, it, 'ELEMENT');
-    };
-
-    g.idx('delete').put('node', 'delete', it);
-}
-";
-            }
-            unset($actions['mergePrev2']);
-        }
-*/
         if (isset($actions['to_variable'])) {
             $qactions[] = "
 /* to variable */
@@ -2309,7 +2338,7 @@ if (     $it.token != 'T_ELSEIF'
     &&   $it.in_for != \"'true'\"
     && !($it.in('NEXT').next().atom in ['Class', 'Identifier'])
     && !($it.out('NEXT').next().token in list_after_token)
-    && !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
+    && !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
     && !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR', 'T_DOUBLE_COLON']}.any()) /* \$x{\$b - 2} */
     ) {
 $makeSequence;
@@ -2587,6 +2616,16 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             }
             $queryConditions[] = "as('cfs').out('NEXT').filter{ it.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.back('cfs')";
             unset($conditions['check_for_string']);
+        }
+
+        if (isset($conditions['check_for_arguments'])) {
+            if (is_array($conditions['check_for_arguments'])) {
+                $classes = "'".implode("', '", $conditions['check_for_arguments'])."'";
+            } else {
+                $classes = "'".$conditions['check_for_arguments']."'";
+            }
+            $queryConditions[] = "as('cfa').out('NEXT').filter{ it.token in ['T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_COMMA', 'T_OPEN_CURLY'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_CLOSE_PARENTHESIS' , 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY' ])}.back('cfa')";
+            unset($conditions['check_for_arguments']);
         }
 
         if (isset($conditions['code'])) {

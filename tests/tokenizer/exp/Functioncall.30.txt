@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
         .
         Label : CONCAT
@@ -31,6 +31,6 @@ Label : CODE
               Label : ARGUMENT
                 3
       Label : ARGUMENT
-        '1'
-      Label : ARGUMENT
         $x
+      Label : ARGUMENT
+        '1'

@@ -7,58 +7,58 @@ Label : CODE
     Label : RIGHT
       range
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          6
+        Arguments
         Label : ARGUMENT
           9
+        Label : ARGUMENT
+          6
     Label : LEFT
       list
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          $e
+          void
         Label : ARGUMENT
           $f
         Label : ARGUMENT
-          void
+          $e
   Label : ELEMENT
     =
     Label : RIGHT
       range
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          3
+        Arguments
         Label : ARGUMENT
           5
+        Label : ARGUMENT
+          3
     Label : LEFT
       list
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          $c
+          $d
         Label : ARGUMENT
           void
         Label : ARGUMENT
-          $d
+          $c
   Label : ELEMENT
     =
     Label : RIGHT
       range
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          0
+        Arguments
         Label : ARGUMENT
           2
+        Label : ARGUMENT
+          0
     Label : LEFT
       list
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          void
+          $b
         Label : ARGUMENT
           $a
         Label : ARGUMENT
-          $b
+          void

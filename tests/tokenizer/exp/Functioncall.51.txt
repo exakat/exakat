@@ -26,7 +26,11 @@ Label : ELEMENT
                   Label : ARGUMENT
                     D
                     Label : ARGUMENTS
-                      ,
+                      Arguments
+                      Label : ARGUMENT
+                        H
+                      Label : ARGUMENT
+                        'G'
                       Label : ARGUMENT
                         ->
                         Label : OBJECT
@@ -37,9 +41,5 @@ Label : ELEMENT
                             'E'
                         Label : PROPERTY
                           F
-                      Label : ARGUMENT
-                        'G'
-                      Label : ARGUMENT
-                        H
 Label : ELEMENT
   A

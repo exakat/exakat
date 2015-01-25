@@ -7,13 +7,13 @@ Label : CODE
     Label : RIGHT
       array
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
           =>
           Label : KEY
-            1
+            5
           Label : VALUE
-            2
+            6
         Label : ARGUMENT
           =>
           Label : KEY
@@ -23,8 +23,8 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            5
+            1
           Label : VALUE
-            6
+            2
     Label : LEFT
       $a

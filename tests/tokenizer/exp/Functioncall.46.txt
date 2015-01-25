@@ -5,19 +5,9 @@ Label : CODE
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
-        (
-        Label : CODE
-          ?
-          Label : CONDITION
-            $j
-          Label : THEN
-            'A'
-          Label : ELSE
-            'H'
-      Label : ARGUMENT
-        'I'
+        'K'
       Label : ARGUMENT
         (
         Label : CODE
@@ -29,4 +19,14 @@ Label : CODE
           Label : ELSE
             "K"
       Label : ARGUMENT
-        'K'
+        'I'
+      Label : ARGUMENT
+        (
+        Label : CODE
+          ?
+          Label : CONDITION
+            $j
+          Label : THEN
+            'A'
+          Label : ELSE
+            'H'

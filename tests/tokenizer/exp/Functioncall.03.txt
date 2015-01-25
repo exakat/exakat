@@ -5,10 +5,10 @@ Label : CODE
   Label : ELEMENT
     f
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
-        1
+        3
       Label : ARGUMENT
         2
       Label : ARGUMENT
-        3
+        1

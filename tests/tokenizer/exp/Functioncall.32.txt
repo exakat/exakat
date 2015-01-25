@@ -5,17 +5,7 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-        Label : LEFT
-          $b
+      Arguments
       Label : ARGUMENT
         =
         Label : RIGHT
@@ -26,6 +16,16 @@ Label : CODE
               void
         Label : LEFT
           $c
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : LEFT
+          $b
     Label : NAME
       a
     Label : BLOCK

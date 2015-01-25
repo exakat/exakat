@@ -5,7 +5,19 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      ,
+      Arguments
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          2.3
+        Label : LEFT
+          $d
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          '2'
+        Label : LEFT
+          $c
       Label : ARGUMENT
         =
         Label : RIGHT
@@ -16,18 +28,6 @@ Label : CODE
               void
         Label : LEFT
           $b
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          '2'
-        Label : LEFT
-          $c
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          2.3
-        Label : LEFT
-          $d
     Label : NAME
       a
     Label : BLOCK

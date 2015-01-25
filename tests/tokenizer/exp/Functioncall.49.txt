@@ -4,7 +4,15 @@ Label : CODE
   Label : ELEMENT
     echo
     Label : ARGUMENTS
-      ,
+      Arguments
+      Label : ARGUMENT
+        .
+        Label : CONCAT
+          'J'
+        Label : CONCAT
+          'L'
+        Label : CONCAT
+          'N'
       Label : ARGUMENT
         .
         Label : CONCAT
@@ -20,9 +28,7 @@ Label : CODE
         Label : CONCAT
           D
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              'E'
+            Arguments
             Label : ARGUMENT
               ->
               Label : OBJECT
@@ -33,11 +39,5 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     'H'
-      Label : ARGUMENT
-        .
-        Label : CONCAT
-          'J'
-        Label : CONCAT
-          'L'
-        Label : CONCAT
-          'N'
+            Label : ARGUMENT
+              'E'

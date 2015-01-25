@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     $x
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
         y
         Label : ARGUMENTS
@@ -13,8 +13,8 @@ Label : CODE
           Label : ARGUMENT
             $z
       Label : ARGUMENT
-        1
-      Label : ARGUMENT
         2
+      Label : ARGUMENT
+        1
     Label : NAME
       $x

@@ -7,16 +7,16 @@ Label : CODE
     Label : RIGHT
       range
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          0
+        Arguments
         Label : ARGUMENT
           2
+        Label : ARGUMENT
+          0
     Label : LEFT
       list
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          $a
+        Arguments
         Label : ARGUMENT
           $b
+        Label : ARGUMENT
+          $a
