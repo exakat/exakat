@@ -7,7 +7,7 @@ use Analyzer;
 class StrposCompare extends Analyzer\Analyzer {
     public function analyze() {
         $operator = $this->loadIni('php_may_return_boolean_or_zero.ini');
-        $operator = $operator['Function'];
+        $operator = $operator['functions'];
         
         // if (.. == strpos(..)) {}
         $this->atomIs('Functioncall')
