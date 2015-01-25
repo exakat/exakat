@@ -686,7 +686,8 @@ Make an entry point with interfaces : Database, file systeme, shell, shmop, sock
 
 Signal double quote strings that may be reduced because of less escaping
 
-echo 'foo: ' . $x+1 . ' bar'; (ordre de priorité)
+echo 'foo: ' . $x+1 . ' bar'; (ordre de priorité voir aussi */% and suggest adding () )
+Spot useless parenthesis 
 
 Also, usage of global and attempts à detecting global and their usage count (variables only once used will be removed)
 
@@ -702,7 +703,7 @@ Note:
 The return value of __set() is ignored because of the way PHP processes the assignment operator. Similarly, __get() is never called when chaining assignments together like this:
  $a = $obj->b = 8; 
  
-Add a script to remove an analyzer cleanely
+Add a script to remove an update an analyzer cleanly
 
 Glob : 
 Note: This function isn't available on some systems (e.g. old Sun OS).
@@ -712,3 +713,19 @@ Spot common arrays / string / values that are identical accross the files : they
 
 Check if a functioncall returns the compatible type for a nested functioncall
 
+More Report.php to ../
+
+Spot structures that will change in PHP 7 (see nick)
+
+$host = strlen($host) > 0 ? $host : htmlentities($host);
+
+// spot getId() as double call on same value (needs to know if method is determinist)
+    $x = $v[0]->getId();
+    $V[$x] =  $v[0]->getProperties();
+    
+    if (isset($V[$x]['root'])) {
+        $root = $v[0]->getId();
+    }
+
+For backward compatibility reasons, array_key_exists() will also return TRUE if key is a property defined within an object given as array. This behaviour should not be relied upon, and care should be taken to ensure that array is an array.
+To check whether a property exists in an object, use property_exists().
