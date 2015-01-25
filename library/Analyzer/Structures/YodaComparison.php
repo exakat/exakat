@@ -6,7 +6,7 @@ use Analyzer;
 
 class YodaComparison extends Analyzer\Analyzer {
     public function analyze() {
-        $literals = array('String', 'Integer', 'Real', 'Boolean', 'Null', 'Identifier', 'Nsname');
+        $literals = array('String', 'Integer', 'Float', 'Boolean', 'Null', 'Identifier', 'Nsname');
         
         $this->atomIs('Comparison')
              ->code(array('==','==='))
