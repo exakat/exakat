@@ -41,7 +41,7 @@ while($row = $res->fetch_Assoc()) {
         } elseif ($timeDifference == 1) {
             $diff .= "1 day )";
         } else {
-            $diff .= "$timeDifference days)";
+            $diff .= $timeDifference.' days)';
         }
         $total++;
         $tokens += $row["tokens"];
@@ -50,7 +50,15 @@ while($row = $res->fetch_Assoc()) {
         
         $diff .= ' ';
         if (filesize('projects/'.$row['project'].'/log/tokenizer.final.log') == 0) {
-            $diff .= "-";
+            if (!file_exists('projects/'.$row['project'].'/log/errors.log')) {
+                $diff .= "O";
+            } elseif (filesize('projects/'.$row['project'].'/log/errors.log') == 191) {
+                $diff .= "-";
+            } else {
+                $diff .= "+";
+            }
+        } else {
+            $diff .= "|";
         }
 
         if (!file_exists('projects/'.$row['project'].'/log/analyze.analyze.final.log')) {
