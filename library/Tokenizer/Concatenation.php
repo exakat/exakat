@@ -20,7 +20,7 @@ class Concatenation extends TokenAuto {
                                   -1 => array('atom'  => $operands ),
                                    0 => array('token' => 'T_DOT'),
                                    1 => array('atom'  => $operands,
-//                                              'check_for_concatenation' => $operands
+                                              'check_for_concatenation' => $operands
                                               ),
                                    2 => array('token' => array('T_CLOSE_PARENTHESIS', 'T_COLON', 'T_SEMICOLON', 'T_CLOSE_TAG',
                                                                'T_CLOSE_CURLY', 'T_CLOSE_BRACKET', 'T_DOT', 'T_QUESTION')),
