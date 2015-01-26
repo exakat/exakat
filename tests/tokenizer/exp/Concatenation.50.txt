@@ -1,0 +1,288 @@
+<?php
+
+Label : NEXT
+  makeSequence T_OPEN_TAG
+  Label : NEXT
+    $a
+    Label : NEXT
+      =
+      Label : NEXT
+        @
+        Label : NEXT
+          B
+          Label : NEXT
+            (
+            Label : NEXT
+              Concatenation
+              Label : NEXT
+                {
+                Label : NEXT
+                  .
+                  Label : NEXT
+                    {
+                    Label : NEXT
+                      .
+                      Label : NEXT
+                        {
+                        Label : NEXT
+                          .
+                          Label : NEXT
+                            'D'
+                            Label : NEXT
+                              )
+                              Label : NEXT
+                                ;
+                                Label : NEXT
+                                  makeSequence T_SEMICOLON
+                                  Label : NEXT
+                                    $a
+                                    Label : NEXT
+                                      =
+                                      Label : NEXT
+                                        @
+                                        Label : NEXT
+                                          B
+                                          Label : NEXT
+                                            (
+                                            Label : NEXT
+                                              Concatenation
+                                              Label : NEXT
+                                                [
+                                                Label : NEXT
+                                                  .
+                                                  Label : NEXT
+                                                    [
+                                                    Label : NEXT
+                                                      .
+                                                      Label : NEXT
+                                                        [
+                                                        Label : NEXT
+                                                          .
+                                                          Label : NEXT
+                                                            'D'
+                                                            Label : NEXT
+                                                              )
+                                                              Label : NEXT
+                                                                ;
+                                                                Label : NEXT
+                                                                  makeSequence T_SEMICOLON
+                                                                  Label : NEXT
+                                                                    ?>
+                                                                    Label : NEXT
+                                                                      /**/
+                                                                      Label : NEXT
+                                                                        /* * */
+                                                                  Label : ELEMENT
+                                                                    Concatenation
+                                                                    Label : CONCAT
+                                                                      'Z'
+                                                                    Label : CONCAT
+                                                                      'Y'
+                                                                  Label : ELEMENT
+                                                                    =
+                                                                    Label : RIGHT
+                                                                      @
+                                                                      Label : AT
+                                                                        B
+                                                                        Label : ARGUMENTS
+                                                                          Arguments
+                                                                          Label : ARGUMENT
+                                                                            Concatenation
+                                                                            Label : CONCAT
+                                                                              'D'
+                                                                            Label : CONCAT
+                                                                              [
+                                                                              Label : VARIABLE
+                                                                                $f
+                                                                              Label : INDEX
+                                                                                +
+                                                                                Label : RIGHT
+                                                                                  2
+                                                                                Label : LEFT
+                                                                                  $g
+                                                                            Label : CONCAT
+                                                                              [
+                                                                              Label : VARIABLE
+                                                                                $d
+                                                                              Label : INDEX
+                                                                                +
+                                                                                Label : RIGHT
+                                                                                  1
+                                                                                Label : LEFT
+                                                                                  $e
+                                                                            Label : CONCAT
+                                                                              [
+                                                                              Label : VARIABLE
+                                                                                $b
+                                                                              Label : INDEX
+                                                                                +
+                                                                                Label : RIGHT
+                                                                                  0
+                                                                                Label : LEFT
+                                                                                  $c
+                                                                          Label : ARGUMENT
+                                                                            'H'
+                                                                          Label : ARGUMENT
+                                                                            'G'
+                                                                          Label : ARGUMENT
+                                                                            'C'
+                                                                    Label : LEFT
+                                                                      $a
+                                                        Label : VARIABLE
+                                                          $f
+                                                        Label : INDEX
+                                                          +
+                                                          Label : RIGHT
+                                                            2
+                                                          Label : LEFT
+                                                            $g
+                                                    Label : VARIABLE
+                                                      $d
+                                                    Label : INDEX
+                                                      +
+                                                      Label : RIGHT
+                                                        1
+                                                      Label : LEFT
+                                                        $e
+                                                Label : ARGUMENTS
+                                                  void
+                                                  Label : ARGUMENTS
+                                                    +
+                                                    Label : RIGHT
+                                                      0
+                                                    Label : LEFT
+                                                      $c
+                                              Label : CONCAT
+                                                'C'
+                                              Label : CONCAT
+                                                'G'
+                                              Label : CONCAT
+                                                'H'
+                                              Label : CONCAT
+                                                $b
+                                  Label : ELEMENT
+                                    =
+                                    Label : RIGHT
+                                      @
+                                      Label : AT
+                                        B
+                                        Label : ARGUMENTS
+                                          Arguments
+                                          Label : ARGUMENT
+                                            Concatenation
+                                            Label : CONCAT
+                                              'D'
+                                            Label : CONCAT
+                                              {
+                                              Label : VARIABLE
+                                                $f
+                                              Label : INDEX
+                                                +
+                                                Label : RIGHT
+                                                  2
+                                                Label : LEFT
+                                                  $g
+                                            Label : CONCAT
+                                              {
+                                              Label : VARIABLE
+                                                $d
+                                              Label : INDEX
+                                                +
+                                                Label : RIGHT
+                                                  1
+                                                Label : LEFT
+                                                  $e
+                                            Label : CONCAT
+                                              {
+                                              Label : VARIABLE
+                                                $b
+                                              Label : INDEX
+                                                +
+                                                Label : RIGHT
+                                                  0
+                                                Label : LEFT
+                                                  $c
+                                          Label : ARGUMENT
+                                            'H'
+                                          Label : ARGUMENT
+                                            'G'
+                                          Label : ARGUMENT
+                                            'C'
+                                    Label : LEFT
+                                      $a
+                        Label : VARIABLE
+                          $f
+                        Label : INDEX
+                          +
+                          Label : RIGHT
+                            2
+                          Label : LEFT
+                            $g
+                    Label : VARIABLE
+                      $d
+                    Label : INDEX
+                      +
+                      Label : RIGHT
+                        1
+                      Label : LEFT
+                        $e
+                Label : ELEMENT
+                  +
+                  Label : RIGHT
+                    0
+                  Label : LEFT
+                    $c
+              Label : CONCAT
+                'C'
+              Label : CONCAT
+                'G'
+              Label : CONCAT
+                'H'
+              Label : CONCAT
+                $b
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      @
+      Label : AT
+        B
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'D'
+            Label : CONCAT
+              {
+              Label : VARIABLE
+                $f
+              Label : INDEX
+                +
+                Label : RIGHT
+                  2
+                Label : LEFT
+                  $g
+            Label : CONCAT
+              {
+              Label : VARIABLE
+                $d
+              Label : INDEX
+                +
+                Label : RIGHT
+                  1
+                Label : LEFT
+                  $e
+            Label : CONCAT
+              {
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                +
+                Label : RIGHT
+                  0
+                Label : LEFT
+                  $c
+          Label : ARGUMENT
+            'C'
+    Label : LEFT
+      $a
