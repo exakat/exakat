@@ -407,6 +407,15 @@ GREMLIN;
         return $this;
     }
 
+    public function atomFunctionIs($atom) {
+        $this->atomIs('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath($this->makeFullNsPath($atom));
+             
+        return $this;
+    }
+
     public function classIs($class) {
         if (is_array($class)) {
             $this->addMethod('as("classIs").in.loop(1){!(it.object.token in ["T_CLASS", "T_FILENAME"])}.filter{it.token != "T_CLASS" || it.out("NAME").next().code in ***}.back("classIs")', $class);
@@ -1756,7 +1765,12 @@ GREMLIN;
     }
     
     public function makeFullNsPath($functions) {
-        return array_map(function ($x) { return "\\".strtolower($x); },  $functions);
+        if (is_string($functions)) {
+            $r = "\\".strtolower($functions);
+        } else {
+            $r = array_map(function ($x) { return "\\".strtolower($x); },  $functions);
+        }
+        return $r;
     }
 }
 ?>
