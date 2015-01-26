@@ -120,26 +120,16 @@ class Appinfo extends \Report\Content {
                             'Assertions'     => 'Php/AssertionUsage',
 
                             'Casting'        => 'Php/CastingUsage',
+                            'Resources'      => 'Structures/ResourcesUsage',
                             'Nested Loops'   => 'Structures/NestedLoops',
 
                             'Autoload'       => 'Php/AutoloadUsage',
                             'inclusion'      => 'Structures/IncludeUsage',
                             'include_once'   => 'Structures/OnceUsage',
 
-                            'Throw exceptions' => 'Php/ThrowUsage',
-                            'Try/Catch'        => 'Php/TryCatchUsage',
-                            'Multiple catch'   => 'Structure/MultipleCatch',
-                            'Finally'          => 'Structure/TryFinally',
-                            'Trigger error'    => 'Php/TriggerErrorUsage',
-                            
-                            'Goto'           => 'Php/Gotonames',
-                            'Labels'         => 'Php/Labelnames',
+                            'Goto'             => 'Php/Gotonames',
+                            'Labels'           => 'Php/Labelnames',
 
-                            'Eval'           => 'Structures/EvalUsage',
-                            'Die/Exit'       => 'Structures/ExitUsage',
-                            'var_dump'       => 'Structures/VardumpUsage',
-
-                            'array short syntax'       => 'Structures/ArrayNSUsage',
                             'Function dereferencing'       => 'Structures/FunctionSubscripting',
                             'Constant scalar expression' => 'Structures/ConstantScalarExpression',
                             '... usage' => 'Structures/EllipsisUsage',
@@ -157,13 +147,13 @@ class Appinfo extends \Report\Content {
                             'References'              => 'Variables/References',
                             'Array'                   => 'Arrays/Arrayindex',
                             'Multidimensional arrays' => 'Arrays/Multidimensional',
+                            'Array short syntax'      => 'Structures/ArrayNSUsage',
                             'Variable variables'      => 'Variables/VariableVariables',
 
                             'PHP arrays'              => 'Arrays/Phparrayindex',
-                            
+
                             'Globals'                 => 'Structures/GlobalUsage',
                             'PHP SuperGlobals'        => 'Structures/GlobalUsage',
-                            
                     ),
 
                     'Functions' => array(
@@ -179,7 +169,6 @@ class Appinfo extends \Report\Content {
                             'Recursive Functions'  => 'Functions/Recursive',
                             'Generator Functions'  => 'Functions/IsGenerator',
                             'Conditioned Function' => 'Functions/ConditionedFunction',
-
                     ),
 
                     'Classes' => array(
@@ -226,7 +215,16 @@ class Appinfo extends \Report\Content {
                     'Strings' => array(
                             'Heredoc'    => 'Type/Heredoc',
                             'Nowdoc'     => 'Type/Nowdoc',
-                        )
+                     ),
+                    
+                    'Errors' => array(
+                            'Throw exceptions' => 'Php/ThrowUsage',
+                            'Try/Catch'        => 'Php/TryCatchUsage',
+                            'Multiple catch'   => 'Structure/MultipleCatch',
+                            'Finally'          => 'Structure/TryFinally',
+                            'Trigger error'    => 'Php/TriggerErrorUsage',
+                     ),
+
                     );
 
         foreach($extensions as $section => $hash) {
