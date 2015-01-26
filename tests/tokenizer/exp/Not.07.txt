@@ -11,11 +11,11 @@ Label : CODE
         Label : RIGHT
           fopen
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              '/tmp/test'
+            Arguments
             Label : ARGUMENT
               'r+b'
+            Label : ARGUMENT
+              '/tmp/test'
         Label : LEFT
           !
           Label : NOT

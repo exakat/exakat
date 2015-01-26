@@ -9,18 +9,6 @@ Label : CODE
       Label : VARIABLE
         $y
       Label : INDEX
-        &
-        Label : LEFT
-          1
-        Label : RIGHT
-          2
-  Label : ELEMENT
-    !
-    Label : NOT
-      [
-      Label : VARIABLE
-        $y
-      Label : INDEX
         %
         Label : LEFT
           1
@@ -45,11 +33,23 @@ Label : CODE
       Label : VARIABLE
         $y
       Label : INDEX
-        .
-        Label : CONCAT
+        &
+        Label : LEFT
           1
+        Label : RIGHT
+          2
+  Label : ELEMENT
+    !
+    Label : NOT
+      [
+      Label : VARIABLE
+        $y
+      Label : INDEX
+        Concatenation
         Label : CONCAT
           2
+        Label : CONCAT
+          1
   Label : ELEMENT
     !
     Label : NOT
