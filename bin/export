@@ -35,9 +35,9 @@ if ($id = array_search('-f', $args)) {
     define('FILE', false);
 }
 
-$queryTemplate = "g.V.as('x').except([g.v(0)]).hasNot('token', 'E_FILE').hasNot('token', 'E_NAMESPACE').hasNot('token', 'E_FUNCTION').hasNot('token', 'E_CLASS')"; 
+$queryTemplate = "g.V.as('x').except([g.v(0)])"; 
 if (FILE) {
-    $queryTemplate .= ".in('FILE').has('fullcode', '".FILE."').back('x')";
+//    $queryTemplate .= ".in('FILE').has('fullcode', '".FILE."').back('x')";
 }
 
 $params = array('type' => 'IN');
@@ -56,7 +56,7 @@ foreach($vertices as $v) {
     $V[$x] =  $v[0]->getProperties();
     
     if (isset($V[$x]['root'])) {
-        $root = $v[0]->getId();
+        $root = $x;
     }
 }
 
@@ -73,10 +73,11 @@ foreach($edges as $e) {
         $E[$id] = array();
     }
     
-    if(isset($E[$id][$e[0]->getEndNode()->getId()])) {
-        $E[$id][$e[0]->getEndNode()->getId()] .= ', '.$e[0]->getType();
+    $endNodeId = $e[0]->getEndNode()->getId();
+    if(isset($E[$id][$endNodeId])) {
+        $E[$id][$endNodeId] .= ', '.$e[0]->getType();
     } else {
-        $E[$id][$e[0]->getEndNode()->getId()] = $e[0]->getType();
+        $E[$id][$endNodeId] = $e[0]->getType();
     }
 }
 
