@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Concatenation extends Tokenizer {
-    /* 53 methods */
+    /* 54 methods */
     public function testConcatenation01()  { $this->generic_test('Concatenation.01'); }
     public function testConcatenation02()  { $this->generic_test('Concatenation.02'); }
     public function testConcatenation03()  { $this->generic_test('Concatenation.03'); }
@@ -61,5 +61,6 @@ class Concatenation extends Tokenizer {
     public function testConcatenation51()  { $this->generic_test('Concatenation.51'); }
     public function testConcatenation52()  { $this->generic_test('Concatenation.52'); }
     public function testConcatenation53()  { $this->generic_test('Concatenation.53'); }
+    public function testConcatenation54()  { $this->generic_test('Concatenation.54'); }
 }
 ?>

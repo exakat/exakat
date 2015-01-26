@@ -2682,7 +2682,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             } else {
                 $classes = "'".$conditions['check_for_concatenation']."'";
             }
-            $queryConditions[] = "as('cfc').out('NEXT').filter{ it.token in ['T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_CLOSE_TAG', 'T_COLON', 'T_QUESTION', 'T_DOT', 'T_QUESTION'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_COLON', 'T_QUESTION', 'T_CLOSE_TAG', 'T_COMMA'])}.filter{!(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfc')";
+            $queryConditions[] = "as('cfc').out('NEXT').filter{ it.token in ['T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_DOUBLE_ARROW', 'T_COMMA', 'T_CLOSE_TAG', 'T_COLON', 'T_QUESTION', 'T_DOT', 'T_QUESTION'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_DOUBLE_ARROW', 'T_COLON', 'T_QUESTION', 'T_CLOSE_TAG', 'T_COMMA'])}.filter{!(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfc')";
             unset($conditions['check_for_concatenation']);
         }
 
