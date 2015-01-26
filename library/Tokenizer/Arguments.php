@@ -23,7 +23,7 @@ class Arguments extends TokenAuto {
                                                                              'Variable', 'Array', 'Assignation', 'Typehint', 'Keyvalue',
                                                                              'Float', 'Concatenation', 'Parenthesis', 'Cast', 'Sign',
                                                                              'Ternary', 'Function', 'Noscream', 'As', 'Magicconstant', 
-                                                                             'Logical', 'Preplusplus', 'Postplusplus', 'Not')),
+                                                                             'Logical', 'Preplusplus', 'Postplusplus', 'Not', 'Comparison')),
                                    2 => array('token'   => array('T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_SEMICOLON', 'T_CLOSE_TAG', 
                                                                  'T_CLOSE_BRACKET'))//'T_OPEN_CURLY',
                                  );
