@@ -7,22 +7,22 @@ Label : CODE
     Label : RIGHT
       fopen
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          .
-          Label : CONCAT
-            'a'
-          Label : CONCAT
-            $b
-          Label : CONCAT
-            'c'
+          'f'
+        Label : ARGUMENT
+          Concatenation
           Label : CONCAT
             ->
             Label : OBJECT
               $d
             Label : PROPERTY
               e
-        Label : ARGUMENT
-          'f'
+          Label : CONCAT
+            'c'
+          Label : CONCAT
+            $b
+          Label : CONCAT
+            'a'
     Label : LEFT
       $fp

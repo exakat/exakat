@@ -5,24 +5,24 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      .
-      Label : CONCAT
-        'b'
+      Concatenation
       Label : CONCAT
         ++
         Label : POSTPLUSPLUS
           $c
+      Label : CONCAT
+        'b'
     Label : LEFT
       $y
   Label : ELEMENT
     =
     Label : RIGHT
-      .
-      Label : CONCAT
-        'a'
+      Concatenation
       Label : CONCAT
         ++
         Label : POSTPLUSPLUS
           $b
+      Label : CONCAT
+        'a'
     Label : LEFT
       $x

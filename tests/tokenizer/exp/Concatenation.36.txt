@@ -7,7 +7,27 @@ Label : CODE
     Label : RIGHT
       preg_replace
       Label : ARGUMENTS
-        ,
+        Arguments
+        Label : ARGUMENT
+          $i
+        Label : ARGUMENT
+          Concatenation
+          Label : CONCAT
+            "\\2"
+          Label : CONCAT
+            (
+            Label : CODE
+              +
+              Label : RIGHT
+                1
+              Label : LEFT
+                [
+                Label : VARIABLE
+                  $g
+                Label : INDEX
+                  'h'
+          Label : CONCAT
+            "f"
         Label : ARGUMENT
           "
           Label : CONTAIN
@@ -22,25 +42,5 @@ Label : CODE
                 d
             Label : CONCAT
               e
-        Label : ARGUMENT
-          .
-          Label : CONCAT
-            "f"
-          Label : CONCAT
-            (
-            Label : CODE
-              +
-              Label : RIGHT
-                1
-              Label : LEFT
-                [
-                Label : VARIABLE
-                  $g
-                Label : INDEX
-                  'h'
-          Label : CONCAT
-            "\\2"
-        Label : ARGUMENT
-          $i
     Label : LEFT
       $a

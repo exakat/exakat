@@ -5,9 +5,9 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      .
+      Concatenation
       Label : CONCAT
-        '&nbsp;('
+        ")"
       Label : CONCAT
         @
         Label : AT
@@ -19,6 +19,6 @@ Label : CODE
             Label : INDEX
               $boucle
       Label : CONCAT
-        ")"
+        '&nbsp;('
     Label : LEFT
       $x

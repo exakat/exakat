@@ -5,9 +5,9 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      .
+      Concatenation
       Label : CONCAT
-        "a"
+        $c
       Label : CONCAT
         @
         Label : AT
@@ -17,6 +17,6 @@ Label : CODE
             Label : ARGUMENT
               1
       Label : CONCAT
-        $c
+        "a"
     Label : LEFT
       $z

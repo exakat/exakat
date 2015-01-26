@@ -12,28 +12,24 @@ class Concatenation extends TokenAuto {
                           'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 'Power',
                           'Preplusplus', 'Postplusplus', 'Cast', 'Assignation', 'Nsname', 'Boolean', 'Null' );
         
-        $this->conditions = array(-2 => array('filterOut' => array_merge(Addition::$operators, Multiplication::$operators,
-                                                                         Preplusplus::$operators, Power::$operators,
-                                                            array('T_AT', 'T_NOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR'))),
+        $this->conditions = array(-2 => array('token' => array_merge( Assignation::$operators, Comparison::$operators,
+                                                                      Logical::$operators,
+                                                                      array('T_QUESTION', 'T_COLON', 'T_COMMA', 'T_OPEN_PARENTHESIS',
+                                                                            'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_ECHO', 'T_OPEN_TAG', 
+                                                                            'T_SEMICOLON'))),
                                   -1 => array('atom'  => $operands ),
-                                   0 => array('token' => Concatenation::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('atom'  => $operands),
-                                   2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                                                               'T_OPEN_CURLY', 'T_OPEN_BRACKET'),
-                                                                    Assignation::$operators, Preplusplus::$operators)),
+                                   0 => array('token' => 'T_DOT'),
+                                   1 => array('atom'  => $operands,
+//                                              'check_for_concatenation' => $operands
+                                              ),
+                                   2 => array('token' => array('T_CLOSE_PARENTHESIS', 'T_COLON', 'T_SEMICOLON', 'T_CLOSE_TAG',
+                                                               'T_CLOSE_CURLY', 'T_CLOSE_BRACKET', 'T_DOT', 'T_QUESTION')),
         );
         
-        $this->actions = array('transform'    => array( 1 => 'CONCAT',
-                                                       -1 => 'CONCAT'),
-                               'rank'         => array( 1 => 1,
-                                                       -1 => 0 ),
-                               'mergeNext'    => array('Concatenation' => 'CONCAT'),
-                               'atom'         => 'Concatenation',
-                               'cleanIndex'   => true,
-                               'makeSequence' => 'clean',
+        $this->actions = array('to_concatenation' => true,
+                               'atom'             => 'Concatenation',
+                               'makeSequence'     => 'it',
                                );
-        
         $this->checkAuto();
 
         return false;

@@ -5,10 +5,10 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      .
-      Label : CONCAT
-        'a'
+      Concatenation
       Label : CONCAT
         "b"
+      Label : CONCAT
+        'a'
     Label : LEFT
       $x

@@ -7,7 +7,17 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        .
+        Concatenation
+        Label : CONCAT
+          'h'
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $f
+          Label : INDEX
+            'g'
+        Label : CONCAT
+          'e'
         Label : CONCAT
           ::
           Label : CLASS
@@ -22,13 +32,3 @@ Label : CODE
                   $c
                 Label : INDEX
                   d
-        Label : CONCAT
-          'e'
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $f
-          Label : INDEX
-            'g'
-        Label : CONCAT
-          'h'

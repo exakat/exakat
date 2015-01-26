@@ -19,9 +19,9 @@ Label : CODE
               Label : INDEX
                 'd'
       Label : THEN
-        .
+        Concatenation
         Label : CONCAT
-          'f'
+          'i'
         Label : CONCAT
           $g
           Label : NAME
@@ -31,7 +31,7 @@ Label : CODE
             Label : ARGUMENT
               'h'
         Label : CONCAT
-          'i'
+          'f'
       Label : ELSE
         'j'
     Label : LEFT

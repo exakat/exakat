@@ -5,13 +5,11 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      .
+      Concatenation
       Label : CONCAT
-        "a"
+        $g
       Label : CONCAT
-        $b
-      Label : CONCAT
-        "c"
+        "f"
       Label : CONCAT
         [
         Label : VARIABLE
@@ -19,8 +17,10 @@ Label : CODE
         Label : INDEX
           'e'
       Label : CONCAT
-        "f"
+        "c"
       Label : CONCAT
-        $g
+        $b
+      Label : CONCAT
+        "a"
     Label : LEFT
       $query

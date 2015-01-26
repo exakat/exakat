@@ -5,9 +5,9 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      .
+      Concatenation
       Label : CONCAT
-        "a"
+        " b"
       Label : CONCAT
         (
         Label : CODE
@@ -17,6 +17,6 @@ Label : CODE
           Label : LEFT
             1
       Label : CONCAT
-        " b"
+        "a"
     Label : LEFT
       $x

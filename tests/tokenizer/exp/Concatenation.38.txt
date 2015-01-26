@@ -1,41 +1,53 @@
 <?php
 
-Label : CODE
-  makeSequence T_OPEN_TAG
-  Label : ELEMENT
+Label : NEXT
+  $siteurl
+  Label : NEXT
     =
-    Label : RIGHT
+    Label : NEXT
       a
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          .
-          Label : CONCAT
-            'i'
-          Label : CONCAT
-            preg_replace
-            Label : ARGUMENTS
-              ,
+      Label : NEXT
+        (
+        Label : NEXT
+          Concatenation
+          Label : NEXT
+            (
+            Label : NEXT
+              .
+              Label : NEXT
+                'i'
+                Label : NEXT
+                  )
+                  Label : NEXT
+                    ;
+                    Label : NEXT
+                      ?>
+                      Label : NEXT
+                        /**/
+                        Label : NEXT
+                          /* * */
+            Label : CODE
+              Arguments
               Label : ARGUMENT
                 substr
                 Label : ARGUMENTS
-                  ,
+                  Arguments
                   Label : ARGUMENT
                     strrpos
                     Label : ARGUMENTS
-                      ,
-                      Label : ARGUMENT
-                        $g
+                      Arguments
                       Label : ARGUMENT
                         'h'
-                  Label : ARGUMENT
-                    $f
+                      Label : ARGUMENT
+                        $g
                   Label : ARGUMENT
                     0
-              Label : ARGUMENT
-                "e"
+                  Label : ARGUMENT
+                    $f
               Label : ARGUMENT
                 ''
+              Label : ARGUMENT
+                "e"
           Label : CONCAT
             'b'
           Label : CONCAT
@@ -44,5 +56,5 @@ Label : CODE
               $c
             Label : INDEX
               'd'
-    Label : LEFT
-      $siteurl
+          Label : CONCAT
+            preg_replace

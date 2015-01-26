@@ -13,18 +13,18 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        .
-        Label : CONCAT
-          'a'
+        Concatenation
         Label : CONCAT
           date
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              "Y"
+            Arguments
             Label : ARGUMENT
               strtotime
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   $b
+            Label : ARGUMENT
+              "Y"
+        Label : CONCAT
+          'a'

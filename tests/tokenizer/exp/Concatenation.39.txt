@@ -21,13 +21,7 @@ Label : CODE
               Label : INDEX
                 $i
       Label : THEN
-        .
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            $e
+        Concatenation
         Label : CONCAT
           [
           Label : VARIABLE
@@ -36,6 +30,12 @@ Label : CODE
             ++
             Label : PREPLUSPLUS
               $l
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            $e
       Label : ELSE
         [
         Label : VARIABLE

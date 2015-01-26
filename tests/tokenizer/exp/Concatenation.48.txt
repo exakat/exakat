@@ -1,109 +1,131 @@
 <?php 
-Label : CODE
-  makeSequence T_CONSTANT_ENCAPSED_STRING
-  Label : ELEMENT
-    T
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        u
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            .
-            Label : CONCAT
-              'v'
-            Label : CONCAT
-              ->
-              Label : OBJECT
-                $w
-              Label : PROPERTY
-                x
-          Label : ARGUMENT
-            y
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'z'
-          Label : ARGUMENT
-            array
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'aa'
-                Label : VALUE
-                  'ab'
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        .
-        Label : CONCAT
-          a
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              .
-              Label : CONCAT
-                'b'
-              Label : CONCAT
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
-                  d
-            Label : ARGUMENT
-              e
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ?
-                  Label : CONDITION
-                    ==
-                    Label : RIGHT
-                      'h'
-                    Label : LEFT
-                      ->
-                      Label : OBJECT
-                        $f
-                      Label : PROPERTY
-                        g
-                  Label : THEN
-                    'i'
-                  Label : ELSE
-                    'j'
-            Label : ARGUMENT
-              'k'
-        Label : CONCAT
-          'l'
-  Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        n
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            .
-            Label : CONCAT
-              'o'
-            Label : CONCAT
-              ->
-              Label : OBJECT
-                $p
-              Label : PROPERTY
-                q
-          Label : ARGUMENT
-            r
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                's'
-  Label : ELEMENT
-    M
+Label : NEXT
+  echo
+  Label : NEXT
+    a
+    Label : NEXT
+      (
+      Label : NEXT
+        'b'
+        Label : NEXT
+          .
+          Label : NEXT
+            ->
+            Label : NEXT
+              ,
+              Label : NEXT
+                e
+                Label : NEXT
+                  ,
+                  Label : NEXT
+                    'k'
+                    Label : NEXT
+                      )
+                      Label : NEXT
+                        .
+                        Label : NEXT
+                          'l'
+                          Label : NEXT
+                            makeSequence T_CONSTANT_ENCAPSED_STRING
+                            Label : NEXT
+                              echo
+                              Label : NEXT
+                                n
+                                Label : NEXT
+                                  (
+                                  Label : NEXT
+                                    'o'
+                                    Label : NEXT
+                                      .
+                                      Label : NEXT
+                                        ->
+                                        Label : NEXT
+                                          ,
+                                          Label : NEXT
+                                            r
+                                            Label : NEXT
+                                              )
+                                              Label : NEXT
+                                                ;
+                                                Label : NEXT
+                                                  makeSequence T_SEMICOLON
+                                                  Label : NEXT
+                                                    echo
+                                                    Label : NEXT
+                                                      u
+                                                      Label : NEXT
+                                                        (
+                                                        Label : NEXT
+                                                          'v'
+                                                          Label : NEXT
+                                                            .
+                                                            Label : NEXT
+                                                              ->
+                                                              Label : NEXT
+                                                                ,
+                                                                Label : NEXT
+                                                                  y
+                                                                  Label : NEXT
+                                                                    ,
+                                                                    Label : NEXT
+                                                                      array
+                                                                      Label : NEXT
+                                                                        )
+                                                                        Label : NEXT
+                                                                          ;
+                                                                          Label : NEXT
+                                                                            ?>
+                                                                            Label : NEXT
+                                                                              /**/
+                                                                              Label : NEXT
+                                                                                /* * */
+                                                                      Label : ARGUMENTS
+                                                                        void
+                                                                        Label : ARGUMENT
+                                                                          =>
+                                                                          Label : KEY
+                                                                            'aa'
+                                                                          Label : VALUE
+                                                                            'ab'
+                                                                  Label : ARGUMENTS
+                                                                    void
+                                                                    Label : ARGUMENT
+                                                                      'z'
+                                                              Label : OBJECT
+                                                                $w
+                                                              Label : PROPERTY
+                                                                x
+                                                  Label : ELEMENT
+                                                    T
+                                            Label : ARGUMENTS
+                                              void
+                                              Label : ARGUMENT
+                                                's'
+                                        Label : OBJECT
+                                          $p
+                                        Label : PROPERTY
+                                          q
+                            Label : ELEMENT
+                              M
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ?
+                    Label : CONDITION
+                      ==
+                      Label : RIGHT
+                        'h'
+                      Label : LEFT
+                        ->
+                        Label : OBJECT
+                          $f
+                        Label : PROPERTY
+                          g
+                    Label : THEN
+                      'i'
+                    Label : ELSE
+                      'j'
+            Label : OBJECT
+              $c
+            Label : PROPERTY
+              d

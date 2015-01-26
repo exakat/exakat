@@ -5,8 +5,8 @@ Label : CODE
   Label : ELEMENT
     (
     Label : CODE
-      .
-      Label : CONCAT
-        'a'
+      Concatenation
       Label : CONCAT
         'b'
+      Label : CONCAT
+        'a'

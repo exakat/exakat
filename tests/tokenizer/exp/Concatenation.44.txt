@@ -9,21 +9,21 @@ Label : CODE
       Label : AT
         unpack
         Label : ARGUMENTS
-          ,
+          Arguments
           Label : ARGUMENT
-            'b'
-          Label : ARGUMENT
-            .
+            Concatenation
+            Label : CONCAT
+              "i"
             Label : CONCAT
               {
               Label : VARIABLE
-                $c
+                $g
               Label : INDEX
                 +
                 Label : RIGHT
-                  4
+                  6
                 Label : LEFT
-                  $d
+                  $h
             Label : CONCAT
               {
               Label : VARIABLE
@@ -37,14 +37,14 @@ Label : CODE
             Label : CONCAT
               {
               Label : VARIABLE
-                $g
+                $c
               Label : INDEX
                 +
                 Label : RIGHT
-                  6
+                  4
                 Label : LEFT
-                  $h
-            Label : CONCAT
-              "i"
+                  $d
+          Label : ARGUMENT
+            'b'
     Label : LEFT
       $a

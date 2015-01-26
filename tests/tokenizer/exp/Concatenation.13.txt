@@ -5,16 +5,16 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      .
-      Label : CONCAT
-        "a"
-      Label : CONCAT
-        "b"
+      Concatenation
       Label : CONCAT
         [
         Label : VARIABLE
           $d
         Label : INDEX
           'e'
+      Label : CONCAT
+        "b"
+      Label : CONCAT
+        "a"
     Label : LEFT
       $query

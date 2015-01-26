@@ -1589,6 +1589,53 @@ g.addEdge(x, b, 'NEXT');
             }
         }
 
+        if (isset($actions['to_concatenation']) && $actions['to_concatenation']) {
+                $qactions[] = "
+/* to Concatenation */
+
+x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
+
+// initial
+rank = 0;
+g.addEdge(x, b1, 'CONCAT');
+b1.setProperty('rank', rank);
+b1.bothE('NEXT').each{ g.removeEdge(it); }
+g.addEdge(b2, x, 'NEXT');
+
+while(a2.token == 'T_DOT') {
+    g.addEdge(x, a1, 'CONCAT');
+    rank += 1;
+    a1.setProperty('rank', rank);
+    g.idx('delete').put('node', 'delete', a2);
+
+    // prepare next round
+    a3 = a2.out('NEXT').next();
+    a4 = a3.out('NEXT').next();
+
+    a1.bothE('NEXT').each{ g.removeEdge(it); }
+    a2.bothE('NEXT').each{ g.removeEdge(it); }
+
+    a1 = a3;
+    a2 = a4;
+}
+
+g.addEdge(x, a1, 'CONCAT');
+rank += 1;
+a1.setProperty('rank', rank);
+a1.bothE('NEXT').each{ g.removeEdge(it); }
+
+a2.inE('NEXT').each{ g.removeEdge(it); }
+g.idx('delete').put('node', 'delete', it);
+g.addEdge(x, a2, 'NEXT');
+
+x.out('CONCAT').inE('INDEXED').each{ g.removeEdge(it); }
+
+fullcode = x;
+
+";        
+            unset($actions['to_concatenation']);
+        }
+
         if (isset($actions['to_argument']) && $actions['to_argument']) {
                 $qactions[] = "
 /* to Argument */
@@ -2625,8 +2672,18 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             } else {
                 $classes = "'".$conditions['check_for_arguments']."'";
             }
-            $queryConditions[] = "as('cfa').out('NEXT').filter{ it.token in ['T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_COMMA', 'T_OPEN_CURLY'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_CLOSE_PARENTHESIS' , 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY' ])}.back('cfa')";
+            $queryConditions[] = "as('cfa').out('NEXT').filter{ it.token in ['T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_COMMA', 'T_CLOSE_BRACKET'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET' ])}.filter{!(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfa')";
             unset($conditions['check_for_arguments']);
+        }
+
+        if (isset($conditions['check_for_concatenation'])) {
+            if (is_array($conditions['check_for_concatenation'])) {
+                $classes = "'".implode("', '", $conditions['check_for_concatenation'])."'";
+            } else {
+                $classes = "'".$conditions['check_for_concatenation']."'";
+            }
+            $queryConditions[] = "as('cfc').out('NEXT').filter{ it.token in ['T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_CLOSE_TAG', 'T_COLON', 'T_QUESTION', 'T_DOT', 'T_QUESTION'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_COLON', 'T_QUESTION', 'T_CLOSE_TAG', 'T_COMMA'])}.filter{!(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfc')";
+            unset($conditions['check_for_concatenation']);
         }
 
         if (isset($conditions['code'])) {
