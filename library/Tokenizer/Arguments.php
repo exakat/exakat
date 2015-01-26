@@ -8,7 +8,10 @@ class Arguments extends TokenAuto {
 
     public function _check() {
         // @note arguments separated by ,
-        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_VAR', 'T_GLOBAL', 'T_EXTENDS')),
+        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_VAR', 'T_USE', 
+                                                                 'T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT',
+                                                                 'T_STATIC', 'T_GLOBAL', 'T_EXTENDS', 'T_OPEN_BRACKET', 'T_IMPLEMENTS',
+                                                                 'T_SEMICOLON')),
                                   -1 => array('atom'    => 'yes'),
                                    0 => array('token'   => Arguments::$operators,
                                               'atom'    => 'none'),
@@ -18,9 +21,11 @@ class Arguments extends TokenAuto {
                                                                              'Staticmethodcall', 'Staticconstant', 'Staticproperty',
                                                                              'New', 'Functioncall', 'Nsname', 'Identifier', 'Void',
                                                                              'Variable', 'Array', 'Assignation', 'Typehint', 'Keyvalue',
-                                                                             'Float', 'Concatenation', 'Parenthesis', 'Cast', 'Sign')),
+                                                                             'Float', 'Concatenation', 'Parenthesis', 'Cast', 'Sign',
+                                                                             'Ternary', 'Function', 'Noscream', 'As', 'Magicconstant', 
+                                                                             'Logical', 'Preplusplus', 'Postplusplus')),
                                    2 => array('token'   => array('T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_SEMICOLON', 'T_CLOSE_TAG', 
-                                                                 'T_OPEN_CURLY'))
+                                                                 'T_CLOSE_BRACKET'))//'T_OPEN_CURLY',
                                  );
         
         $this->actions = array('to_argument' => true,
