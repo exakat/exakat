@@ -2672,7 +2672,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             } else {
                 $classes = "'".$conditions['check_for_arguments']."'";
             }
-            $queryConditions[] = "as('cfa').out('NEXT').filter{ it.token in ['T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_COMMA', 'T_CLOSE_BRACKET'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET' ])}.filter{!(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfa')";
+            $queryConditions[] = "as('cfa').out('NEXT').filter{ it.token in ['T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_COMMA', 'T_CLOSE_BRACKET'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET' ])}.filter{it.out('NEXT').next().atom != null || !(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfa')";
             unset($conditions['check_for_arguments']);
         }
 
