@@ -2672,7 +2672,10 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             } else {
                 $classes = "'".$conditions['check_for_arguments']."'";
             }
-            $queryConditions[] = "as('cfa').out('NEXT').filter{ it.token in ['T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_COMMA', 'T_CLOSE_BRACKET'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET' ])}.filter{it.out('NEXT').next().atom != null || !(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfa')";
+
+            $finalTokens = array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY', 'T_CLOSE_BRACKET');
+            $finalTokens = "'".join("', '", $finalTokens)."'";
+            $queryConditions[] = "as('cfa').out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA'] || it.atom in [$classes] }.loop(2){!(it.object.token in [$finalTokens])}.filter{it.out('NEXT').next().atom != null || !(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfa')";
             unset($conditions['check_for_arguments']);
         }
 
@@ -2683,10 +2686,16 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
                 $classes = "'".$conditions['check_for_concatenation']."'";
             }
             
-            $finalTokens = array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_DOUBLE_ARROW', 'T_COMMA', 'T_CLOSE_TAG', 'T_COLON', 'T_QUESTION', 'T_QUESTION');
+            $finalTokens = array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_DOUBLE_ARROW', 'T_COMMA', 
+                                 'T_CLOSE_TAG', 'T_COLON', 'T_QUESTION', 'T_QUESTION',
+                                 'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND', 'T_OR', 
+                                 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
+                                 'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
+                                 'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 
+                                 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER', 'T_CLOSE_CURLY');
             $finalTokens = "'".join("', '", $finalTokens)."'";
 
-            $queryConditions[] = "as('cfc').out('NEXT').filter{ it.token in [$finalTokens, 'T_DOT'] || it.atom in [$classes] }.loop(2){!(it.object.token in [$finalTokens])}.filter{!(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfc')";
+            $queryConditions[] = "as('cfc').out('NEXT').filter{ it.token in [$finalTokens, 'T_DOT'] || it.atom in [$classes] }.loop(2){!(it.object.token in [$finalTokens])}.filter{it.out('NEXT').next().atom != null || !(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfc')";
             unset($conditions['check_for_concatenation']);
         }
 

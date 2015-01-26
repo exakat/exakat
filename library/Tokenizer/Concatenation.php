@@ -16,15 +16,17 @@ class Concatenation extends TokenAuto {
                                                                       Logical::$operators, _Include::$operators,
                                                                       array('T_QUESTION', 'T_COLON', 'T_COMMA', 'T_OPEN_PARENTHESIS',
                                                                             'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_ECHO', 'T_OPEN_TAG', 
-                                                                            'T_SEMICOLON', 'T_RETURN', 'T_DOUBLE_ARROW'))),
+                                                                            'T_SEMICOLON', 'T_RETURN', 'T_DOUBLE_ARROW', 'T_PRINT',
+                                                                            'T_CASE'))),
                                   -1 => array('atom'  => $operands ),
                                    0 => array('token' => 'T_DOT'),
                                    1 => array('atom'  => $operands,
                                               'check_for_concatenation' => $operands
                                               ),
-                                   2 => array('token' => array('T_CLOSE_PARENTHESIS', 'T_COLON', 'T_SEMICOLON', 'T_CLOSE_TAG',
+                                   2 => array('token' => array_merge(Comparison::$operators, Logical::$operators, 
+                                                          array('T_CLOSE_PARENTHESIS', 'T_COLON', 'T_SEMICOLON', 'T_CLOSE_TAG',
                                                                'T_CLOSE_CURLY', 'T_CLOSE_BRACKET', 'T_DOT', 'T_QUESTION', 
-                                                               'T_COMMA', 'T_DOUBLE_ARROW')),
+                                                               'T_COMMA', 'T_DOUBLE_ARROW'))),
         );
         
         $this->actions = array('to_concatenation' => true,
