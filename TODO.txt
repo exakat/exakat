@@ -731,3 +731,19 @@ For backward compatibility reasons, array_key_exists() will also return TRUE if 
 To check whether a property exists in an object, use property_exists().
 
 UselessOverridingMethodSniff.php (test on parent but on any grand-parents too :)
+
+Function whose result must be captured (assignation or expression)
+
+Spot using the persistent connexions (still possible?)
+
+Should use transport rather than specific extension (bzip2, zip, zlib...).
+Spot transport used in the code 
+
+Warning
+If your application does not catch the exception thrown from the PDO constructor, the default action taken by the zend engine is to terminate the script and display a back trace. This back trace will likely reveal the full database connection details, including the username and password. It is your responsibility to catch this exception, either explicitly (via a catch statement) or implicitly via set_exception_handler().
+
+Use Object notation if possible (xmlwriter_open_memory => XMLWriter::open_memory)
+
+Remove Parenthesis in Ifthen
+
+Simplify functions with static/global
