@@ -13,10 +13,10 @@ class Concatenation extends TokenAuto {
                           'Preplusplus', 'Postplusplus', 'Cast', 'Assignation', 'Nsname', 'Boolean', 'Null' );
         
         $this->conditions = array(-2 => array('token' => array_merge( Assignation::$operators, Comparison::$operators,
-                                                                      Logical::$operators,
+                                                                      Logical::$operators, _Include::$operators,
                                                                       array('T_QUESTION', 'T_COLON', 'T_COMMA', 'T_OPEN_PARENTHESIS',
                                                                             'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_ECHO', 'T_OPEN_TAG', 
-                                                                            'T_SEMICOLON'))),
+                                                                            'T_SEMICOLON', 'T_RETURN'))),
                                   -1 => array('atom'  => $operands ),
                                    0 => array('token' => 'T_DOT'),
                                    1 => array('atom'  => $operands,

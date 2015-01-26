@@ -1,0 +1,140 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
+    Label : SOURCE
+      ::
+      Label : CLASS
+        B
+      Label : PROPERTY
+        $a
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            ===
+            Label : RIGHT
+              0
+            Label : LEFT
+              C
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  $b
+                Label : ARGUMENT
+                  $d
+        Label : THEN
+          {
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              Concatenation
+              Label : CONCAT
+                'G'
+              Label : CONCAT
+                D
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    $d
+                  Label : ARGUMENT
+                    F
+                  Label : ARGUMENT
+                    'E'
+            Label : LEFT
+              $e
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ===
+                Label : RIGHT
+                  null
+                Label : LEFT
+                  $c
+            Label : THEN
+              {
+              Label : ELEMENT
+                if
+                Label : CONDITION
+                  (
+                  Label : CODE
+                    =
+                    Label : RIGHT
+                      H
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          $e
+                    Label : LEFT
+                      $f
+                Label : THEN
+                  {
+                  Label : ELEMENT
+                    require
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $f
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      I
+            Label : ELSE
+              {
+              Label : ELEMENT
+                foreach
+                Label : VALUE
+                  $g
+                Label : SOURCE
+                  (array)
+                  Label : CAST
+                    $c
+                Label : BLOCK
+                  {
+                  Label : ELEMENT
+                    if
+                    Label : CONDITION
+                      (
+                      Label : CODE
+                        J
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            Concatenation
+                            Label : CONCAT
+                              $e
+                            Label : CONCAT
+                              F
+                            Label : CONCAT
+                              $g
+                    Label : THEN
+                      {
+                      Label : ELEMENT
+                        require
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            Concatenation
+                            Label : CONCAT
+                              $e
+                            Label : CONCAT
+                              F
+                            Label : CONCAT
+                              $g
+                      Label : ELEMENT
+                        return
+                        Label : RETURN
+                          I
