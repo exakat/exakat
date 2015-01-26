@@ -42,7 +42,7 @@ foreach($tokens as $t) {
                 if (isset($lnumberValues[$t[1]])) {
                     $t[1] = $lnumberValues[$t[1]];
                 } else {
-                    $lnumberValues[$t[1]] = '$'.$lnumber++;
+                    $lnumberValues[$t[1]] = $lnumber++;
                     $t[1] = $lnumberValues[$t[1]];
                 }
                 break;
