@@ -6,9 +6,11 @@ class Logical extends TokenAuto {
     static public $operators = array('T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
                                      'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
                                      'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR');
+    // and or xor
     static public $logicals = array('T_LOGICAL_AND', 'T_ANDAND',
                                     'T_LOGICAL_OR' , 'T_OROR',
                                     'T_LOGICAL_XOR', );
+    // || && ^
     static public $booleans = array('T_AND', 'T_BOOLEAN_AND',
                                     'T_OR' , 'T_BOOLEAN_OR',
                                     'T_XOR', 'T_BOOLEAN_XOR');
@@ -45,7 +47,7 @@ class Logical extends TokenAuto {
                                'makeSequence' => 'it');
         $this->checkAuto();
 
-        // boolean comparison ||
+        // boolean comparison (||, &&)
         $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                                                                  'T_NS_SEPARATOR', 'T_INSTANCEOF', 'T_NEW' ),
                                                                           Comparison::$operators, Bitshift::$operators, Addition::$operators,

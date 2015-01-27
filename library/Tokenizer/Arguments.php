@@ -24,7 +24,8 @@ class Arguments extends TokenAuto {
                                                                              'Variable', 'Array', 'Assignation', 'Typehint', 'Keyvalue',
                                                                              'Float', 'Concatenation', 'Parenthesis', 'Cast', 'Sign',
                                                                              'Ternary', 'Function', 'Noscream', 'As', 'Magicconstant', 
-                                                                             'Logical', 'Preplusplus', 'Postplusplus', 'Not', 'Comparison')),
+                                                                             'Logical', 'Preplusplus', 'Postplusplus', 'Not', 'Comparison',
+                                                                             'Bitshift')),
                                    2 => array('token'   => array_merge(array('T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_SEMICOLON', 
                                                                              'T_CLOSE_TAG', 'T_OPEN_CURLY', 'T_CLOSE_BRACKET'), 
                                                                        Logical::$operators, Comparison::$operators))
