@@ -5,7 +5,21 @@ Label : CODE
   Label : ELEMENT
     new
     Label : NEW
-      \c\d
+      \
+      Label : SUBNAME
+        f
+      Label : SUBNAME
+        e
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+  Label : ELEMENT
+    new
+    Label : NEW
+      \
       Label : SUBNAME
         d
       Label : SUBNAME
@@ -17,21 +31,7 @@ Label : CODE
   Label : ELEMENT
     new
     Label : NEW
-      \e\f
-      Label : SUBNAME
-        f
-      Label : SUBNAME
-        e
-      Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          2
-  Label : ELEMENT
-    new
-    Label : NEW
-      \a\b
+      \
       Label : SUBNAME
         b
       Label : SUBNAME

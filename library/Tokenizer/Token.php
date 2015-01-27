@@ -96,15 +96,16 @@ class Token {
                                       81 => 'Phpcode',
                                     );
 
+    protected static $alternativeEnding = array();
     protected $phpVersion = 'Any';
 
     static public $instructionEnding = array();
     
     public function __construct($client) {
         // @todo typehint ?
-        Token::$client = $client;
+        self::$client = $client;
         
-        Token::$instructionEnding = array_merge(Preplusplus::$operators,
+        self::$instructionEnding = array_merge(Preplusplus::$operators,
                                                 Postplusplus::$operators,
                                                 Assignation::$operators,
                                                 Addition::$operators,
@@ -118,6 +119,13 @@ class Token {
                                                 Staticproperty::$operators,
                                                 _Instanceof::$operators,
                                                 array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_QUESTION'));
+
+        self::$alternativeEnding = array('T_ENDFOR',
+                                         'T_ENDSWITCH',
+                                         'T_ENDFOREACH',
+                                         'T_ENDWHILE',
+                                         'T_ENDIF',
+                                         'T_ENDDECLARE');
     }
 
     public static function getTokenizers($version = null) {

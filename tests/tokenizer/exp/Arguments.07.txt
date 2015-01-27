@@ -11,8 +11,8 @@ Label : CODE
   Label : ELEMENT
     define
     Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        'x'
+      Arguments
       Label : ARGUMENT
         3
+      Label : ARGUMENT
+        'x'

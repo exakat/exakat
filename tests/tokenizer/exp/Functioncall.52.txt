@@ -11,7 +11,9 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            .
+            Concatenation
+            Label : CONCAT
+              'S'
             Label : CONCAT
               ::
               Label : CLASS
@@ -22,8 +24,6 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     'R'
-            Label : CONCAT
-              'S'
     Label : THEN
       {
       Label : ELEMENT

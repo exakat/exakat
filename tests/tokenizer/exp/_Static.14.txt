@@ -4,15 +4,17 @@ Label : CODE
   Label : ELEMENT
     [
     Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
+      void
+      Label : ARGUMENTS
         new
         Label : NEW
           static
           Label : ARGUMENTS
-            void
-      Label : ARGUMENT
-        $method
+            Arguments
+            Label : ARGUMENT
+              $method
+            Label : ARGUMENT
+              void
   Label : ELEMENT
     y
     Label : ARGUMENTS

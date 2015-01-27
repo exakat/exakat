@@ -1,15 +1,31 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG T_ROOT
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    {
+    Label : ELEMENT
+      -
+      Label : RIGHT
+        1
+      Label : LEFT
+        strlen
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $ee
   Label : ELEMENT
     {
     Label : VARIABLE
       [
       Label : VARIABLE
-        $b
+        [
+        Label : VARIABLE
+          $c
+        Label : INDEX
+          3
       Label : INDEX
-        2
+        4
     Label : INDEX
       -
       Label : RIGHT
@@ -19,7 +35,13 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $bb
+            $cc
+  Label : ELEMENT
+    {
+    Label : VARIABLE
+      $e
+    Label : INDEX
+      6
   Label : ELEMENT
     {
     Label : VARIABLE
@@ -67,33 +89,11 @@ Label : CODE
   Label : ELEMENT
     {
     Label : VARIABLE
-      {
-      Label : VARIABLE
-        $e
-      Label : INDEX
-        6
-    Label : INDEX
-      -
-      Label : RIGHT
-        1
-      Label : LEFT
-        strlen
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $ee
-  Label : ELEMENT
-    {
-    Label : VARIABLE
       [
       Label : VARIABLE
-        [
-        Label : VARIABLE
-          $c
-        Label : INDEX
-          3
+        $b
       Label : INDEX
-        4
+        2
     Label : INDEX
       -
       Label : RIGHT
@@ -103,7 +103,7 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $cc
+            $bb
   Label : ELEMENT
     {
     Label : VARIABLE

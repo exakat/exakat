@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     return
     Label : RETURN
@@ -11,21 +11,11 @@ Label : CODE
     Label : NAME
       $q
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
         array
         Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            =>
-            Label : KEY
-              'K'
-            Label : VALUE
-              [
-              Label : VARIABLE
-                $s
-              Label : INDEX
-                'L'
+          Arguments
           Label : ARGUMENT
             =>
             Label : KEY
@@ -36,14 +26,50 @@ Label : CODE
                 $t
               Label : INDEX
                 'N'
-      Label : ARGUMENT
-        'I'
+          Label : ARGUMENT
+            =>
+            Label : KEY
+              'K'
+            Label : VALUE
+              [
+              Label : VARIABLE
+                $s
+              Label : INDEX
+                'L'
       Label : ARGUMENT
         [
         Label : VARIABLE
           $r
         Label : INDEX
           'J'
+      Label : ARGUMENT
+        'I'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      E
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          'G'
+        Label : ARGUMENT
+          'F'
+    Label : LEFT
+      $k
+  Label : ELEMENT
+    H
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $p
+      Label : ARGUMENT
+        $o
+      Label : ARGUMENT
+        $n
+      Label : ARGUMENT
+        $m
+      Label : ARGUMENT
+        $l
   Label : ELEMENT
     =
     Label : RIGHT
@@ -51,62 +77,36 @@ Label : CODE
       Label : NAME
         $f
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          $g
-        Label : ARGUMENT
-          $h
+          $j
         Label : ARGUMENT
           $i
         Label : ARGUMENT
-          $j
+          $h
+        Label : ARGUMENT
+          $g
     Label : LEFT
       list
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          $c
+          $e
         Label : ARGUMENT
           $d
         Label : ARGUMENT
-          $e
-  Label : ELEMENT
-    H
-    Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        $l
-      Label : ARGUMENT
-        $m
-      Label : ARGUMENT
-        $n
-      Label : ARGUMENT
-        $o
-      Label : ARGUMENT
-        $p
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      E
-      Label : ARGUMENTS
-        ,
+          $c
         Label : ARGUMENT
-          'F'
-        Label : ARGUMENT
-          'G'
-    Label : LEFT
-      $k
+          $b
   Label : ELEMENT
     =
     Label : RIGHT
       B
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          'C'
+        Arguments
         Label : ARGUMENT
           'D'
+        Label : ARGUMENT
+          'C'
     Label : LEFT
       $a

@@ -3,17 +3,7 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    \A\B
-    Label : SUBNAME
-      B
-    Label : SUBNAME
-      A
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-  Label : ELEMENT
-    \A\B\C
+    \
     Label : SUBNAME
       C
     Label : SUBNAME
@@ -25,7 +15,17 @@ Label : CODE
       Label : ARGUMENT
         void
   Label : ELEMENT
-    \A
+    \
+    Label : SUBNAME
+      B
+    Label : SUBNAME
+      A
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+  Label : ELEMENT
+    \
     Label : SUBNAME
       A
     Label : ARGUMENTS

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     switch
     Label : NAME
@@ -12,14 +12,14 @@ Label : CODE
         case
         Label : CASE
           instanceof
-          Label : RIGHT
+          Label : CLASS
             \
             Label : SUBNAME
               C
-          Label : LEFT
+          Label : VARIABLE
             $a
         Label : CODE
-          makeSequence
+          makeSequence T_SEMICOLON
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
@@ -32,19 +32,39 @@ Label : CODE
         case
         Label : CASE
           instanceof
-          Label : RIGHT
+          Label : CLASS
             \
             Label : SUBNAME
-              S
+              M
             Label : SUBNAME
-              T
+              L
             Label : SUBNAME
-              U
+              K
+            Label : SUBNAME
+              J
+          Label : VARIABLE
+            $f
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              W
             Label : SUBNAME
               V
             Label : SUBNAME
-              W
-          Label : LEFT
+              U
+            Label : SUBNAME
+              T
+            Label : SUBNAME
+              S
+          Label : VARIABLE
             $h
         Label : CODE
           Block with Sequence For Case
@@ -56,7 +76,7 @@ Label : CODE
         case
         Label : CASE
           instanceof
-          Label : RIGHT
+          Label : CLASS
             \
             Label : SUBNAME
               R
@@ -68,7 +88,7 @@ Label : CODE
               O
             Label : SUBNAME
               N
-          Label : LEFT
+          Label : VARIABLE
             $g
         Label : CODE
           Block with Sequence For Case
@@ -78,27 +98,7 @@ Label : CODE
         case
         Label : CASE
           instanceof
-          Label : RIGHT
-            \
-            Label : SUBNAME
-              M
-            Label : SUBNAME
-              L
-            Label : SUBNAME
-              K
-            Label : SUBNAME
-              J
-          Label : LEFT
-            $f
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-      Label : ELEMENT
-        case
-        Label : CASE
-          instanceof
-          Label : RIGHT
+          Label : CLASS
             \
             Label : SUBNAME
               I
@@ -106,7 +106,7 @@ Label : CODE
               H
             Label : SUBNAME
               G
-          Label : LEFT
+          Label : VARIABLE
             $e
         Label : CODE
           Block with Sequence For Case
@@ -116,9 +116,9 @@ Label : CODE
         case
         Label : CASE
           instanceof
-          Label : RIGHT
+          Label : CLASS
             D
-          Label : LEFT
+          Label : VARIABLE
             $c
         Label : CODE
           Block with Sequence For Case
@@ -128,14 +128,14 @@ Label : CODE
         case
         Label : CASE
           ::
+          Label : CLASS
+            E
           Label : METHOD
             F
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 $d
-          Label : CLASS
-            E
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT

@@ -109,9 +109,33 @@ Label : CODE
         Label : USE
           \
           Label : SUBNAME
+            absolute_path
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
+            path2
+          Label : SUBNAME
+            complex
+          Label : SUBNAME
+            absolute
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
             path
           Label : SUBNAME
             complex
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : AS
+            a2
+          Label : SUBNAME
+            absolute_path3
       Label : ELEMENT
         use
         Label : USE
@@ -120,6 +144,16 @@ Label : CODE
             a1
           Label : SUBNAME
             one_identifier3
+      Label : ELEMENT
+        var_dump
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            instanceof
+            Label : CLASS
+              path2
+            Label : VARIABLE
+              $x
       Label : ELEMENT
         use
         Label : USE
@@ -130,16 +164,6 @@ Label : CODE
             path3
           Label : SUBNAME
             complex
-      Label : ELEMENT
-        var_dump
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            instanceof
-            Label : CLASS
-              one_identifier
-            Label : VARIABLE
-              $x
       Label : ELEMENT
         var_dump
         Label : ARGUMENTS
@@ -167,16 +191,6 @@ Label : CODE
           Label : ARGUMENT
             instanceof
             Label : CLASS
-              path2
-            Label : VARIABLE
-              $x
-      Label : ELEMENT
-        var_dump
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            instanceof
-            Label : CLASS
               absolute_path
             Label : VARIABLE
               $x
@@ -193,29 +207,15 @@ Label : CODE
           Label : SUBNAME
             absolute
       Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : AS
-            a2
-          Label : SUBNAME
-            absolute_path3
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            path2
-          Label : SUBNAME
-            complex
-          Label : SUBNAME
-            absolute
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            absolute_path
+        var_dump
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            instanceof
+            Label : CLASS
+              one_identifier
+            Label : VARIABLE
+              $x
       Label : ELEMENT
         var_dump
         Label : ARGUMENTS
@@ -226,16 +226,6 @@ Label : CODE
               \
               Label : SUBNAME
                 a1
-            Label : VARIABLE
-              $x
-      Label : ELEMENT
-        var_dump
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            instanceof
-            Label : CLASS
-              a2
             Label : VARIABLE
               $x
       Label : ELEMENT
@@ -256,6 +246,16 @@ Label : CODE
             instanceof
             Label : CLASS
               a3
+            Label : VARIABLE
+              $x
+      Label : ELEMENT
+        var_dump
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            instanceof
+            Label : CLASS
+              a2
             Label : VARIABLE
               $x
       Label : ELEMENT

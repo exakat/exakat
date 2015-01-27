@@ -15,9 +15,7 @@ Label : ELEMENT
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          .
-          Label : CONCAT
-            C
+          Concatenation
           Label : CONCAT
             ::
             Label : CLASS
@@ -27,11 +25,13 @@ Label : ELEMENT
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'f'
+                  Concatenation
                   Label : CONCAT
                     $g
+                  Label : CONCAT
+                    'f'
+          Label : CONCAT
+            C
 Label : ELEMENT
   <? a('b') ?>
 

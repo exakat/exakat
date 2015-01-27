@@ -6,25 +6,15 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        .
+        Concatenation
         Label : CONCAT
-          'J'
+          'N'
         Label : CONCAT
           'L'
         Label : CONCAT
-          'N'
+          'J'
       Label : ARGUMENT
-        .
-        Label : CONCAT
-          (
-          Label : CODE
-            +
-            Label : RIGHT
-              0
-            Label : LEFT
-              $a
-        Label : CONCAT
-          'B'
+        Concatenation
         Label : CONCAT
           D
           Label : ARGUMENTS
@@ -41,3 +31,13 @@ Label : CODE
                     'H'
             Label : ARGUMENT
               'E'
+        Label : CONCAT
+          'B'
+        Label : CONCAT
+          (
+          Label : CODE
+            +
+            Label : RIGHT
+              0
+            Label : LEFT
+              $a

@@ -5,7 +5,13 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      .
+      Concatenation
+      Label : CONCAT
+        (
+        Label : CODE
+          ++
+          Label : PREPLUSPLUS
+            $h
       Label : CONCAT
         "
         Label : CONTAIN
@@ -20,12 +26,6 @@ Label : CODE
               f
           Label : CONCAT
             g
-      Label : CONCAT
-        (
-        Label : CODE
-          ++
-          Label : PREPLUSPLUS
-            $h
     Label : LEFT
       ::
       Label : CLASS

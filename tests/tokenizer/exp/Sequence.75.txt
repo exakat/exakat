@@ -8,9 +8,7 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      makeSequence T_INLINE_HTML
-      Label : ELEMENT
-        A
+      makeSequence T_COLON
       Label : ELEMENT
         D
       Label : ELEMENT
@@ -45,3 +43,5 @@ Label : CODE
               void
               Label : ARGUMENT
                 'D'
+      Label : ELEMENT
+        A

@@ -7,11 +7,11 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        .
-        Label : CONCAT
-          'D'
+        Concatenation
         Label : CONCAT
           $e
+        Label : CONCAT
+          'D'
   Label : ELEMENT
     print
     Label : ARGUMENTS

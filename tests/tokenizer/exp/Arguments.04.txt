@@ -5,8 +5,8 @@ Label : CODE
   Label : ELEMENT
     f
     Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        1.2
+      Arguments
       Label : ARGUMENT
         3.4
+      Label : ARGUMENT
+        1.2

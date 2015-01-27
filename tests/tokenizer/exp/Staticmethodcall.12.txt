@@ -5,13 +5,13 @@ Label : CODE
   Label : ELEMENT
     ::
     Label : METHOD
-      .
+      Concatenation
       Label : ARGUMENTS
         void
       Label : CONCAT
-        'B'
-      Label : CONCAT
         'C'
+      Label : CONCAT
+        'B'
     Label : CLASS
       $c
   Label : ELEMENT
@@ -20,8 +20,8 @@ Label : CODE
       $b
     Label : METHOD
       __FILE__
-    Label : ARGUMENTS
-      void
+      Label : ARGUMENTS
+        void
   Label : ELEMENT
     ::
     Label : METHOD

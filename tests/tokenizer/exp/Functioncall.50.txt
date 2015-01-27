@@ -9,8 +9,6 @@ Label : CODE
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          4
-        Label : ARGUMENT
           3
         Label : ARGUMENT
           2
@@ -22,6 +20,8 @@ Label : CODE
       static
       Label : ARGUMENTS
         Arguments
+        Label : ARGUMENT
+          4
         Label : ARGUMENT
           3
         Label : ARGUMENT

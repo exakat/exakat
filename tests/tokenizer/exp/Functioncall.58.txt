@@ -9,27 +9,29 @@ Label : CODE
       Label : ARGUMENT
         "\n"
   Label : ELEMENT
-    and
-    Label : LEFT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          (
-          Label : CODE
-            "foo"
-    Label : RIGHT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          "bar"
-  Label : ELEMENT
     print
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         "\n"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        and
+        Label : LEFT
+          (
+          Label : CODE
+            "foo"
+        Label : RIGHT
+          print
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              (
+              Label : CODE
+                "bar"
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -45,4 +47,6 @@ Label : CODE
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              "bar"
+              (
+              Label : CODE
+                "bar"

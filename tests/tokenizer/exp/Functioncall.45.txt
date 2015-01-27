@@ -15,15 +15,15 @@ Label : CODE
             Label : VARIABLE
               $b
             Label : INDEX
-              .
+              Concatenation
+              Label : CONCAT
+                '2'
               Label : CONCAT
                 [
                 Label : VARIABLE
                   $c
                 Label : INDEX
                   1
-              Label : CONCAT
-                '2'
       Label : THEN
         [
         Label : VARIABLE
@@ -37,15 +37,15 @@ Label : CODE
             Label : VARIABLE
               $e
             Label : INDEX
-              .
+              Concatenation
+              Label : CONCAT
+                '4'
               Label : CONCAT
                 [
                 Label : VARIABLE
                   $f
                 Label : INDEX
                   3
-              Label : CONCAT
-                '4'
         Label : NAME
           [
       Label : ELSE

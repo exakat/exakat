@@ -7,7 +7,7 @@ Label : CODE
     Label : RIGHT
       array
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
           void
         Label : ARGUMENT
@@ -29,9 +29,7 @@ Label : CODE
             Label : THEN
               AC
               Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  0
+                Arguments
                 Label : ARGUMENT
                   AD
                   Label : ARGUMENTS
@@ -42,6 +40,8 @@ Label : CODE
                         $d
                       Label : INDEX
                         'AE'
+                Label : ARGUMENT
+                  0
             Label : ELSE
               [
               Label : VARIABLE
@@ -63,37 +63,35 @@ Label : CODE
                 Label : METHOD
                   V
                   Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      'W'
+                    Arguments
                     Label : ARGUMENT
                       ::
-                      Label : CONSTANT
-                        Y
                       Label : CLASS
                         X
+                      Label : CONSTANT
+                        Y
+                    Label : ARGUMENT
+                      'W'
         Label : ARGUMENT
           =>
           Label : KEY
-            'B'
+            'M'
           Label : VALUE
             ::
             Label : CLASS
-              C
+              N
             Label : METHOD
-              D
+              O
               Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  'E'
+                Arguments
                 Label : ARGUMENT
                   ::
-                  Label : CONSTANT
-                    G
                   Label : CLASS
-                    F
+                    Q
+                  Label : CONSTANT
+                    R
                 Label : ARGUMENT
-                  H
+                  'P'
         Label : ARGUMENT
           =>
           Label : KEY
@@ -117,22 +115,24 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            'M'
+            'B'
           Label : VALUE
             ::
             Label : CLASS
-              N
+              C
             Label : METHOD
-              O
+              D
               Label : ARGUMENTS
-                ,
+                Arguments
                 Label : ARGUMENT
-                  'P'
+                  H
                 Label : ARGUMENT
                   ::
-                  Label : CONSTANT
-                    R
                   Label : CLASS
-                    Q
+                    F
+                  Label : CONSTANT
+                    G
+                Label : ARGUMENT
+                  'E'
     Label : LEFT
       $a

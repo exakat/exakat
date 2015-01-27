@@ -12,17 +12,11 @@ class ArgumentsNoParenthesis extends Arguments {
         $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                     0 => array('atom'       => 'none',
                                                'token'      => array('T_REQUIRE', 'T_REQUIRE_ONCE', 'T_INCLUDE_ONCE', 'T_INCLUDE', 
-                                                                     'T_PRINT', 'T_EXIT') ),
+                                                                     'T_PRINT', 'T_EXIT', 'T_ECHO') ),
                                     1 => array('atom'       => 'yes',
-                                               'notAtom'    => array('Sequence', 'Arguments', 'Function',
-                                                                     'Ppp', 'Final', 'Abstract')),
-                                    2 => array('filterOut2' => array_merge(array('T_DOT', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR',
-                                                                           'T_EQUAL', 'T_QUESTION', 'T_OPEN_PARENTHESIS',
-                                                                           'T_OPEN_BRACKET', 'T_OPEN_CURLY',),
-                                                                           Addition::$operators, Multiplication::$operators,
-                                                                           Power::$operators,
-                                                                           Bitshift::$operators, Logical::$booleans,
-                                                                           Postplusplus::$operators, Comparison::$operators))
+                                               'notAtom'    => 'Arguments'),
+                                    2 => array('token'      => array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_ENDIF', 'T_ENDSWITCH', 'T_ENDFOR', 
+                                                                     'T_ENDFOREACH', 'T_COMMA', 'T_CLOSE_PARENTHESIS'))
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
@@ -30,6 +24,7 @@ class ArgumentsNoParenthesis extends Arguments {
                                'keepIndexed' => true);
         $this->checkAuto();
 
+/*
         // @note special case for echo 's' : no parenthesis
         $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                     0 => array('atom'       => 'none',
@@ -50,11 +45,11 @@ class ArgumentsNoParenthesis extends Arguments {
                                'rank'        => array(1 => '0'),
                                'keepIndexed' => true);
         $this->checkAuto();
-
+*/
         // @note exit; no parenthesis, no argument.
         $this->conditions = array( -1 => array('notToken' => 'T_INSTANCEOF'),
                                     0 => array('atom' => 'none',
-                                               'token' => array('T_EXIT', 'T_STATIC',)),
+                                               'token' => array('T_EXIT', 'T_STATIC')),
                                     1 => array('token'  => 'T_SEMICOLON')
         );
         

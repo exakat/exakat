@@ -7,7 +7,7 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        *
+        %
         Label : RIGHT
           $c
         Label : LEFT
@@ -39,7 +39,7 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        %
+        *
         Label : RIGHT
           $c
         Label : LEFT

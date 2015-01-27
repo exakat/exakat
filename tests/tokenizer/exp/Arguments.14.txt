@@ -5,9 +5,7 @@ Label : CODE
   Label : ELEMENT
     x
     Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        1
+      Arguments
       Label : ARGUMENT
         {
         Label : VARIABLE
@@ -22,3 +20,5 @@ Label : CODE
             3
         Label : INDEX
           4
+      Label : ARGUMENT
+        1

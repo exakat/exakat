@@ -7,4 +7,6 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        7
+        (
+        Label : CODE
+          7

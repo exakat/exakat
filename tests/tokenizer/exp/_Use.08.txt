@@ -5,17 +5,17 @@ Label : CODE
   Label : ELEMENT
     use
     Label : USE
-      as
+      \
       Label : AS
-        E
+        F
       Label : SUBNAME
         A
   Label : ELEMENT
     use
     Label : USE
-      \
+      as
       Label : AS
-        F
+        E
       Label : SUBNAME
         A
   Label : ELEMENT

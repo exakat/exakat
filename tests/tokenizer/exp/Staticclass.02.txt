@@ -17,14 +17,6 @@ Label : CODE
           Label : AS
             X
       Label : ELEMENT
-        class
-        Label : NAME
-          ParentClass
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-      Label : ELEMENT
         use
         Label : USE
           \
@@ -32,6 +24,14 @@ Label : CODE
             ClassName1
           Label : SUBNAME
             NS1
+      Label : ELEMENT
+        class
+        Label : NAME
+          ParentClass
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
       Label : ELEMENT
         class
         Label : NAME
@@ -54,30 +54,30 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     ::
-                    Label : CONSTANT
-                      class
                     Label : CLASS
                       self
+                    Label : CONSTANT
+                      class
               Label : ELEMENT
                 echo
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     ::
-                    Label : CONSTANT
-                      class
-                    Label : CLASS
-                      parent
-              Label : ELEMENT
-                echo
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ::
-                    Label : CONSTANT
-                      class
                     Label : CLASS
                       static
+                    Label : CONSTANT
+                      class
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      parent
+                    Label : CONSTANT
+                      class
             Label : ARGUMENTS
               void
               Label : ARGUMENT
@@ -87,65 +87,65 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            .
+            Concatenation
+            Label : CONCAT
+              "\n"
             Label : CONCAT
               ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  ClassName1
+                Label : SUBNAME
+                  NS1
               Label : CONSTANT
                 class
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              "\n"
+            Label : CONCAT
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  ClassName1
+                Label : SUBNAME
+                  NS1
+              Label : CONSTANT
+                class
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              "\n"
+            Label : CONCAT
+              ::
               Label : CLASS
                 ClassName1
-            Label : CONCAT
-              "\n"
+              Label : CONSTANT
+                class
       Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            .
-            Label : CONCAT
-              ::
-              Label : CONSTANT
-                class
-              Label : CLASS
-                \
-                Label : SUBNAME
-                  ClassName1
-                Label : SUBNAME
-                  NS1
+            Concatenation
             Label : CONCAT
               "\n"
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            .
             Label : CONCAT
               ::
-              Label : CONSTANT
-                class
-              Label : CLASS
-                \
-                Label : SUBNAME
-                  ClassName1
-                Label : SUBNAME
-                  NS1
-            Label : CONCAT
-              "\n"
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            .
-            Label : CONCAT
-              ::
-              Label : CONSTANT
-                class
               Label : CLASS
                 X
-            Label : CONCAT
-              "\n"
+              Label : CONSTANT
+                class
     Label : NAMESPACE
       NS
   Label : ELEMENT

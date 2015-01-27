@@ -18,31 +18,31 @@ Label : CODE
           ?
           Label : CONDITION
             instanceof
-            Label : RIGHT
+            Label : CLASS
               \
               Label : SUBNAME
-                C
-              Label : SUBNAME
                 D
-            Label : LEFT
+              Label : SUBNAME
+                C
+            Label : VARIABLE
               $b
           Label : THEN
             ->
+            Label : OBJECT
+              $c
             Label : METHOD
               E
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   $d
-            Label : OBJECT
-              $c
           Label : ELSE
             ->
+            Label : OBJECT
+              $e
             Label : METHOD
               F
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   $f
-            Label : OBJECT
-              $e

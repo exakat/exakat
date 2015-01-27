@@ -10,7 +10,7 @@ class Concatenation extends TokenAuto {
         $operands = array('String', 'Identifier', 'Integer', 'Float', 'Not', 'Variable', 'Array', 'Concatenation', 'Sign', 'Array',
                           'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant', 'Staticclass',
                           'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 'Power',
-                          'Preplusplus', 'Postplusplus', 'Cast', 'Assignation', 'Nsname', 'Boolean', 'Null', 'Shell' );
+                          'Preplusplus', 'Postplusplus', 'Cast', 'Assignation', 'Nsname', 'Boolean', 'Null', 'Shell', 'Power' );
         
         $this->conditions = array(-2 => array('token' => array_merge( Assignation::$operators, Comparison::$operators,
                                                                       Logical::$operators, _Include::$operators,
@@ -24,6 +24,7 @@ class Concatenation extends TokenAuto {
                                               'check_for_concatenation' => $operands
                                               ),
                                    2 => array('token' => array_merge(Comparison::$operators, Logical::$operators, 
+                                                          Power::$operators, Addition::$operators, Multiplication::$operators,
                                                           array('T_CLOSE_PARENTHESIS', 'T_COLON', 'T_SEMICOLON', 'T_CLOSE_TAG',
                                                                'T_CLOSE_CURLY', 'T_CLOSE_BRACKET', 'T_DOT', 'T_QUESTION', 
                                                                'T_COMMA', 'T_DOUBLE_ARROW'))),

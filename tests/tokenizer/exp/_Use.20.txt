@@ -37,15 +37,15 @@ Label : CODE
               Label : ELEMENT
                 as
                 Label : AS
-                  protected
-                Label : SUBNAME
-                  N
-              Label : ELEMENT
-                as
-                Label : AS
                   private
                 Label : SUBNAME
                   M
+              Label : ELEMENT
+                as
+                Label : AS
+                  protected
+                Label : SUBNAME
+                  N
       Label : ELEMENT
         use
         Label : USE

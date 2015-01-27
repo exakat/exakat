@@ -20,10 +20,8 @@ Label : CODE
         Label : BLOCK
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
-              as
-              Label : AS
-                E
-              Label : SUBNAME
-                D
+            as
+            Label : AS
+              E
+            Label : SUBNAME
+              D

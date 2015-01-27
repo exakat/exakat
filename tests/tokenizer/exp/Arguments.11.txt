@@ -15,7 +15,9 @@ Label : CODE
           Label : NOT
             in_array
             Label : ARGUMENTS
-              ,
+              Arguments
+              Label : ARGUMENT
+                $e
               Label : ARGUMENT
                 [
                 Label : VARIABLE
@@ -26,8 +28,6 @@ Label : CODE
                     c
                 Label : INDEX
                   'd'
-              Label : ARGUMENT
-                $e
         Label : RIGHT
           (
           Label : CODE
@@ -37,9 +37,7 @@ Label : CODE
               Label : NOT
                 preg_match
                 Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    '/^\w+$/'
+                  Arguments
                   Label : ARGUMENT
                     [
                     Label : VARIABLE
@@ -50,6 +48,8 @@ Label : CODE
                         g
                     Label : INDEX
                       'h'
+                  Label : ARGUMENT
+                    '/^\w+$/'
             Label : RIGHT
               !
               Label : NOT
@@ -57,7 +57,9 @@ Label : CODE
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
-                    .
+                    Concatenation
+                    Label : CONCAT
+                      'n'
                     Label : CONCAT
                       [
                       Label : VARIABLE
@@ -69,11 +71,9 @@ Label : CODE
                       Label : INDEX
                         'm'
                     Label : CONCAT
-                      'n'
+                      'j'
                     Label : CONCAT
                       I
-                    Label : CONCAT
-                      'j'
       Label : THEN
         'o'
       Label : ELSE

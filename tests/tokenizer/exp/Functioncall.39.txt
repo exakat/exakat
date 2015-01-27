@@ -11,11 +11,9 @@ Label : CODE
         Label : CONDITION
           $a
         Label : THEN
-          .
+          Concatenation
           Label : CONCAT
-            $b
-          Label : CONCAT
-            $c
+            'd'
           Label : CONCAT
             e
             Label : ARGUMENTS
@@ -23,6 +21,8 @@ Label : CODE
               Label : ARGUMENT
                 'h'
           Label : CONCAT
-            'd'
+            $c
+          Label : CONCAT
+            $b
         Label : ELSE
           $e

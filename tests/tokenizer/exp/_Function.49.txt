@@ -1,136 +1,132 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        $a
+      Arguments
       Label : ARGUMENT
         $b
+      Label : ARGUMENT
+        $a
     Label : NAME
       B
     Label : BLOCK
       {
       Label : ELEMENT
-        makeSequence
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            $m
-          Label : LEFT
-            ->
-            Label : PROPERTY
-              L
-            Label : OBJECT
-              $l
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            array
+        =
+        Label : RIGHT
+          C
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $d
+        Label : LEFT
+          $c
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'E'
+            Label : ARGUMENT
+              'D'
+        Label : LEFT
+          $e
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            !
+            Label : NOT
+              F
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  $g
+                Label : ARGUMENT
+                  $f
+        Label : THEN
+          {
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              'G'
+            Label : LEFT
+              $h
+          Label : ELEMENT
+            H
             Label : ARGUMENTS
-              void
+              Arguments
               Label : ARGUMENT
-                void
-          Label : LEFT
-            ->
-            Label : PROPERTY
-              N
-            Label : OBJECT
-              $p
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            null
-          Label : LEFT
-            ->
-            Label : PROPERTY
-              O
-            Label : OBJECT
-              $q
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            $o
-          Label : LEFT
-            ->
-            Label : PROPERTY
-              M
-            Label : OBJECT
-              $n
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              !
-              Label : NOT
-                F
+                I
                 Label : ARGUMENTS
-                  ,
+                  Arguments
                   Label : ARGUMENT
-                    $f
+                    $k
                   Label : ARGUMENT
-                    $g
-          Label : THEN
-            {
-            Label : ELEMENT
-              makeSequence
-              Label : ELEMENT
-                throw
-                Label : THROW
-                  new
-                  Label : NEW
-                    \K
-                    Label : SUBNAME
-                      K
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        void
-              Label : ELEMENT
-                H
+                    'J'
+              Label : ARGUMENT
+                $j
+              Label : ARGUMENT
+                $i
+          Label : ELEMENT
+            throw
+            Label : THROW
+              new
+              Label : NEW
+                \
+                Label : SUBNAME
+                  K
                 Label : ARGUMENTS
-                  ,
+                  void
                   Label : ARGUMENT
-                    I
-                    Label : ARGUMENTS
-                      ,
-                      Label : ARGUMENT
-                        'J'
-                      Label : ARGUMENT
-                        $k
-                  Label : ARGUMENT
-                    $i
-                  Label : ARGUMENT
-                    $j
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  'G'
-                Label : LEFT
-                  $h
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            array
-            Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                'D'
-              Label : ARGUMENT
-                'E'
-          Label : LEFT
-            $e
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            C
-            Label : ARGUMENTS
+                    void
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
               void
-              Label : ARGUMENT
-                $d
-          Label : LEFT
-            $c
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $p
+          Label : PROPERTY
+            N
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $q
+          Label : PROPERTY
+            O
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $o
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $n
+          Label : PROPERTY
+            M
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $m
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $l
+          Label : PROPERTY
+            L

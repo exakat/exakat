@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_CLOSE_CURLY
   Label : ELEMENT
     =
     Label : RIGHT
@@ -11,9 +11,7 @@ Label : CODE
         Label : ARGUMENT
           N
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              'O'
+            Arguments
             Label : ARGUMENT
               P
               Label : ARGUMENTS
@@ -24,30 +22,20 @@ Label : CODE
                     $f
                   Label : INDEX
                     'Q'
+            Label : ARGUMENT
+              'O'
     Label : LEFT
       @
       Label : AT
         list
         Label : ARGUMENTS
-          ,
+          Arguments
           Label : ARGUMENT
             [
             Label : VARIABLE
-              $a
+              $e
             Label : INDEX
-              'H'
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $b
-            Label : INDEX
-              'I'
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $c
-            Label : INDEX
-              'J'
+              'L'
           Label : ARGUMENT
             [
             Label : VARIABLE
@@ -57,9 +45,21 @@ Label : CODE
           Label : ARGUMENT
             [
             Label : VARIABLE
-              $e
+              $c
             Label : INDEX
-              'L'
+              'J'
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $b
+            Label : INDEX
+              'I'
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'H'
   Label : ELEMENT
     if
     Label : CONDITION
@@ -83,8 +83,8 @@ Label : CODE
   Label : ELEMENT
     E
     Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        'F'
+      Arguments
       Label : ARGUMENT
         G
+      Label : ARGUMENT
+        'F'

@@ -3,31 +3,7 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    A\B
-    Label : SUBNAME
-      B
-    Label : SUBNAME
-      A
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-  Label : ELEMENT
-    A\B\C\D
-    Label : SUBNAME
-      D
-    Label : SUBNAME
-      C
-    Label : SUBNAME
-      B
-    Label : SUBNAME
-      A
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-  Label : ELEMENT
-    A\B\C\D\E\F
+    \
     Label : SUBNAME
       F
     Label : SUBNAME
@@ -45,7 +21,7 @@ Label : CODE
       Label : ARGUMENT
         void
   Label : ELEMENT
-    A\B\C\D\E\F\G\H
+    \
     Label : SUBNAME
       H
     Label : SUBNAME
@@ -67,7 +43,19 @@ Label : CODE
       Label : ARGUMENT
         void
   Label : ELEMENT
-    A\B\C\D\E\F\G\H\I
+    \
+    Label : SUBNAME
+      C
+    Label : SUBNAME
+      B
+    Label : SUBNAME
+      A
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+  Label : ELEMENT
+    \
     Label : SUBNAME
       I
     Label : SUBNAME
@@ -91,7 +79,7 @@ Label : CODE
       Label : ARGUMENT
         void
   Label : ELEMENT
-    A\B\C\D\E\F\G
+    \
     Label : SUBNAME
       G
     Label : SUBNAME
@@ -111,7 +99,7 @@ Label : CODE
       Label : ARGUMENT
         void
   Label : ELEMENT
-    A\B\C\D\E
+    \
     Label : SUBNAME
       E
     Label : SUBNAME
@@ -127,9 +115,21 @@ Label : CODE
       Label : ARGUMENT
         void
   Label : ELEMENT
-    A\B\C
+    \
+    Label : SUBNAME
+      D
     Label : SUBNAME
       C
+    Label : SUBNAME
+      B
+    Label : SUBNAME
+      A
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+  Label : ELEMENT
+    \
     Label : SUBNAME
       B
     Label : SUBNAME

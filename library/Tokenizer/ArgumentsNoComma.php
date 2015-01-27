@@ -7,16 +7,15 @@ class ArgumentsNoComma extends Arguments {
     static public $atom = 'Arguments';
 
     public function _check() {
-        
         // @note f(1) : no comma
-        $this->conditions = array(-1 => array('token' => array_merge(Functioncall::$operatorsWithoutEcho,
-                                                         array('T_FUNCTION', 'T_DECLARE', 'T_USE', 'T_OPEN_BRACKET'))),
-                                   0 => array('token' => ArgumentsNoComma::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('atom'  => 'yes',
-                                              'notAtom' => 'Arguments'),
-                                   2 => array('token' => 'T_CLOSE_PARENTHESIS',
-                                              'atom'  => 'none'),
+        $this->conditions = array(-1 => array('token'     => array_merge(Functioncall::$operatorsWithoutEcho,
+                                                                         array('T_FUNCTION', 'T_DECLARE', 'T_USE'))),
+                                   0 => array('token'     => ArgumentsNoComma::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('atom'      => 'yes',
+                                              'notAtom'   => 'Arguments'),
+                                   2 => array('token'     => 'T_CLOSE_PARENTHESIS',
+                                              'atom'      => 'none'),
                                    3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),
         );
 
@@ -25,38 +24,20 @@ class ArgumentsNoComma extends Arguments {
                                );
         $this->checkAuto();
 
-        // @note echo (1) : no comma
-        $this->conditions = array(-1 => array('token' => array('T_ECHO', 'T_PRINT')),
-                                   0 => array('token' => ArgumentsNoComma::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('atom'  => 'yes',
-                                              'notAtom' => 'Arguments'),
-                                   2 => array('token' => 'T_CLOSE_PARENTHESIS',
-                                              'atom'  => 'none'),
-                                   3 => array('filterOut' => array_merge(array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS', 'T_COMMA',
-                                                                               'T_OBJECT_OPERATOR', 'T_DOT', 'T_QUESTION'),
-                                                                        Multiplication::$operators, Addition::$operators,
-                                                                        Comparison::$operators, Logical::$operators,
-                                                                        Bitshift::$operators, Power::$operators)),
+       // @note f[1](2) : no comma
+        $this->conditions = array(-1 => array('atom'     => 'Array'),
+                                   0 => array('token'     => ArgumentsNoComma::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('atom'      => 'yes',
+                                              'notAtom'   => 'Arguments'),
+                                   2 => array('token'     => 'T_CLOSE_PARENTHESIS',
+                                              'atom'      => 'none'),
+                                   3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),
         );
 
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'rank'        => array(1 => '0'));
-        $this->checkAuto();
-
-        // @note require (1).$d : no comma
-        $this->conditions = array(-1 => array('token' => _Include::$operators),
-                                   0 => array('token' => ArgumentsNoComma::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('atom'  => 'yes',
-                                              'notAtom' => 'Arguments'),
-                                   2 => array('token' => 'T_CLOSE_PARENTHESIS',
-                                              'atom'  => 'none'),
-                                   3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS', 'T_DOT')),
-        );
-
-        $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'rank'        => array(1 => '0'));
+                               'rank'        => array(1 => '0')
+                               );
         $this->checkAuto();
 
         // @note a->{f}(1) : no comma

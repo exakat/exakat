@@ -37,10 +37,7 @@ class Parenthesis extends TokenAuto {
                                               'atom'  => 'none' ),
                                    1 => array('atom'  => $operands),
                                    2 => array('token' => 'T_CLOSE_PARENTHESIS',
-                                              'atom'  => 'none'),
-                                   3 => array('token' => array_merge(Logical::$operators, Multiplication::$operators,
-                                                                     Addition::$operators, Bitshift::$operators,
-                                                                     Concatenation::$operators, Ternary::$operators)),
+                                              'atom'  => 'none')
         );
         
         $this->actions = array('transform'    => array( '1' => 'CODE',

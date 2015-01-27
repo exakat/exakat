@@ -7,7 +7,9 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        .
+        Concatenation
+        Label : CONCAT
+          $h
         Label : CONCAT
           (
           Label : CODE
@@ -23,16 +25,14 @@ Label : CODE
                 Label : PROPERTY
                   b
             Label : THEN
-              .
+              Concatenation
+              Label : CONCAT
+                F
               Label : CONCAT
                 ->
                 Label : OBJECT
                   $d
                 Label : PROPERTY
                   e
-              Label : CONCAT
-                F
             Label : ELSE
               'g'
-        Label : CONCAT
-          $h

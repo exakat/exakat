@@ -11,7 +11,9 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            'a.php'
+            (
+            Label : CODE
+              'a.php'
     Label : THEN
       {
       Label : ELEMENT

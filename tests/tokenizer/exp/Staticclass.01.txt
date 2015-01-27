@@ -51,7 +51,7 @@ Label : CODE
                   Label : ARGUMENT
                     ::
                     Label : CLASS
-                      parent
+                      static
                     Label : CONSTANT
                       class
               Label : ELEMENT
@@ -61,9 +61,39 @@ Label : CODE
                   Label : ARGUMENT
                     ::
                     Label : CLASS
-                      static
+                      parent
                     Label : CONSTANT
                       class
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              \
+              Label : SUBNAME
+                ClassName
+              Label : SUBNAME
+                B
+              Label : SUBNAME
+                X
+            Label : CONSTANT
+              class
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              ClassName
+            Label : METHOD
+              x
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
       Label : ELEMENT
         =
         Label : RIGHT
@@ -82,36 +112,6 @@ Label : CODE
                 ClassName
               Label : SUBNAME
                 NS
-            Label : CONSTANT
-              class
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : METHOD
-              x
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-            Label : CLASS
-              ClassName
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              \
-              Label : SUBNAME
-                ClassName
-              Label : SUBNAME
-                B
-              Label : SUBNAME
-                X
             Label : CONSTANT
               class
       Label : ELEMENT

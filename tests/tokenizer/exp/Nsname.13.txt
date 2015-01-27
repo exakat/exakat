@@ -9,7 +9,7 @@ Label : CODE
     Label : BLOCK
       {
       Label : ELEMENT
-        C\D\E
+        \
         Label : SUBNAME
           E
         Label : SUBNAME
@@ -21,7 +21,17 @@ Label : CODE
           Label : ARGUMENT
             void
       Label : ELEMENT
-        \G
+        \
+        Label : SUBNAME
+          A
+        Label : SUBNAME
+          X
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+      Label : ELEMENT
+        \
         Label : SUBNAME
           G
         Label : ARGUMENTS
@@ -29,7 +39,43 @@ Label : CODE
           Label : ARGUMENT
             void
       Label : ELEMENT
-        Z\D\E\F
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            E
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            C
+        Label : CONSTANT
+          K
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            E
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            C2
+        Label : PROPERTY
+          $k
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            E
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            C
+        Label : CONSTANT
+          K
+      Label : ELEMENT
+        \
         Label : SUBNAME
           F
         Label : SUBNAME
@@ -51,54 +97,6 @@ Label : CODE
           Label : SUBNAME
             D
           Label : SUBNAME
-            C
-        Label : CONSTANT
-          K
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C
-        Label : CONSTANT
-          K
-      Label : ELEMENT
-        ::
-        Label : PROPERTY
-          $k
-        Label : CLASS
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C2
-      Label : ELEMENT
-        ::
-        Label : PROPERTY
-          $k
-        Label : CLASS
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C2
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            E
-          Label : SUBNAME
-            D
-          Label : SUBNAME
             C3
         Label : METHOD
           l
@@ -123,23 +121,25 @@ Label : CODE
             Label : ARGUMENT
               void
       Label : ELEMENT
-        Y\B\C
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            E
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            C2
+        Label : PROPERTY
+          $k
+      Label : ELEMENT
+        \
         Label : SUBNAME
           C
         Label : SUBNAME
           B
         Label : SUBNAME
           Y
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-      Label : ELEMENT
-        X\A
-        Label : SUBNAME
-          A
-        Label : SUBNAME
-          X
         Label : ARGUMENTS
           void
           Label : ARGUMENT

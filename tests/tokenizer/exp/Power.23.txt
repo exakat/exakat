@@ -7,7 +7,9 @@ Label : CODE
     Label : RIGHT
       number_format
       Label : ARGUMENTS
-        ,
+        Arguments
+        Label : ARGUMENT
+          2
         Label : ARGUMENT
           /
           Label : RIGHT
@@ -22,12 +24,10 @@ Label : CODE
                 'g'
           Label : LEFT
             ::
-            Label : PROPERTY
-              $e
             Label : CLASS
               D
-        Label : ARGUMENT
-          2
+            Label : PROPERTY
+              $e
     Label : LEFT
       [
       Label : VARIABLE

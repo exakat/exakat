@@ -16,66 +16,70 @@ Label : CODE
       Label : INDEX
         'B'
     Label : BLOCK
-      makeSequence T_INLINE_HTML
-      Label : ELEMENT
-        O
-      Label : ELEMENT
-        B
+      makeSequence T_COLON
       Label : ELEMENT
         echo
         Label : ARGUMENTS
-          ,
+          Arguments
           Label : ARGUMENT
-            ?
-            Label : CONDITION
-              F
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $e
-            Label : THEN
-              G
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $f
-            Label : ELSE
-              H
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    K
-                  Label : METHOD
-                    L
-                    Label : ARGUMENTS
-                      ,
-                      Label : ARGUMENT
-                        $g
-                      Label : ARGUMENT
-                        array
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              ::
-                              Label : CONSTANT
-                                N
-                              Label : CLASS
-                                M
-                            Label : VALUE
-                              O
-                Label : ARGUMENT
-                  'I'
-                Label : ARGUMENT
-                  'J'
-          Label : ARGUMENT
-            D
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $d
+            makeSequence T_CLOSE_PARENTHESIS
+            Label : ELEMENT
+              ?
+              Label : CONDITION
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $e
+              Label : THEN
+                G
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $f
+              Label : ELSE
+                H
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      K
+                    Label : METHOD
+                      L
+                      Label : ARGUMENTS
+                        Arguments
+                        Label : ARGUMENT
+                          array
+                          Label : ARGUMENTS
+                            void
+                            Label : ARGUMENT
+                              =>
+                              Label : KEY
+                                ::
+                                Label : CLASS
+                                  M
+                                Label : CONSTANT
+                                  N
+                              Label : VALUE
+                                O
+                        Label : ARGUMENT
+                          $g
+                  Label : ARGUMENT
+                    'J'
+                  Label : ARGUMENT
+                    'I'
+            Label : ELEMENT
+              O
           Label : ARGUMENT
             'E'
+          Label : ARGUMENT
+            void
+            Label : ARGUMENT
+              D
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $d
+      Label : ELEMENT
+        B

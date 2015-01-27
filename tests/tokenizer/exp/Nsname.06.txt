@@ -3,7 +3,7 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    a\b
+    \
     Label : SUBNAME
       b
     Label : SUBNAME

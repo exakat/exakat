@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     if
     Label : CONDITION
@@ -15,7 +15,7 @@ Label : CODE
             Label : ARGUMENT
               'E'
     Label : THEN
-      makeSequence
+      makeSequence T_CLOSE_CURLY
       Label : ELEMENT
         class
         Label : NAME
@@ -23,31 +23,29 @@ Label : CODE
         Label : BLOCK
           {
           Label : ELEMENT
-            makeSequence
-            Label : ELEMENT
-              var
-              Label : DEFINE
-                $b
-              Label : VALUE
-                array
-                Label : ARGUMENTS
+            var
+            Label : DEFINE
+              $a
+            Label : VALUE
+              array
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
                   void
-                  Label : ARGUMENT
-                    void
-              Label : VAR
-                var
-            Label : ELEMENT
+            Label : VAR
               var
-              Label : DEFINE
-                $a
-              Label : VALUE
-                array
-                Label : ARGUMENTS
+          Label : ELEMENT
+            var
+            Label : DEFINE
+              $b
+            Label : VALUE
+              array
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
                   void
-                  Label : ARGUMENT
-                    void
-              Label : VAR
-                var
+            Label : VAR
+              var
       Label : ELEMENT
         class
         Label : NAME
@@ -63,12 +61,12 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        .
+        Concatenation
+        Label : CONCAT
+          'C'
         Label : CONCAT
           B
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               __FILE__
-        Label : CONCAT
-          'C'

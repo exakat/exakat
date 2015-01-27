@@ -5,13 +5,13 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
         Typehint
         Label : CLASS
-          C
+          callable
         Label : VARIABLE
-          $a
+          $c
       Label : ARGUMENT
         Typehint
         Label : CLASS
@@ -21,32 +21,32 @@ Label : CODE
       Label : ARGUMENT
         Typehint
         Label : CLASS
-          callable
+          C
         Label : VARIABLE
-          $c
+          $a
     Label : NAME
       B
     Label : BLOCK
       {
       Label : ELEMENT
         ::
+        Label : CLASS
+          E
         Label : METHOD
           F
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $d
+            Arguments
             Label : ARGUMENT
               $e
-        Label : CLASS
-          E
+            Label : ARGUMENT
+              $d
       Label : ELEMENT
         =
         Label : RIGHT
           $g
         Label : LEFT
           ->
-          Label : PROPERTY
-            G
           Label : OBJECT
             $f
+          Label : PROPERTY
+            G

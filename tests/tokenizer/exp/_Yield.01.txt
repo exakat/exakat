@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
         =
         Label : RIGHT
@@ -13,9 +13,9 @@ Label : CODE
         Label : LEFT
           $step
       Label : ARGUMENT
-        $start
-      Label : ARGUMENT
         $end
+      Label : ARGUMENT
+        $start
     Label : BLOCK
       {
       Label : ELEMENT
@@ -49,7 +49,7 @@ Label : CODE
   Label : ELEMENT
     function
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
         =
         Label : RIGHT
@@ -57,9 +57,9 @@ Label : CODE
         Label : LEFT
           $step
       Label : ARGUMENT
-        $start
-      Label : ARGUMENT
         $end
+      Label : ARGUMENT
+        $start
     Label : BLOCK
       {
       Label : ELEMENT
@@ -84,10 +84,10 @@ Label : CODE
                 ?
                 Label : CONDITION
                   ->
-                  Label : PROPERTY
-                    y
                   Label : OBJECT
                     $i
+                  Label : PROPERTY
+                    y
                 Label : THEN
                   'd'
                 Label : ELSE
@@ -121,11 +121,11 @@ Label : CODE
     Label : SOURCE
       generateRange
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          0
+        Arguments
         Label : ARGUMENT
           1000000
+        Label : ARGUMENT
+          0
     Label : VALUE
       $number
     Label : BLOCK

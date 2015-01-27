@@ -15,17 +15,15 @@ Label : CODE
         Label : USE
           \
           Label : SUBNAME
-            path
-          Label : SUBNAME
-            complex
+            absolute_path
       Label : ELEMENT
         use
         Label : USE
-          as
-          Label : AS
-            a1
+          \
           Label : SUBNAME
-            one_identifier3
+            path
+          Label : SUBNAME
+            complex
       Label : ELEMENT
         use
         Label : USE
@@ -36,6 +34,22 @@ Label : CODE
             path3
           Label : SUBNAME
             complex
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : AS
+            a2
+          Label : SUBNAME
+            absolute_path3
+      Label : ELEMENT
+        use
+        Label : USE
+          as
+          Label : AS
+            a1
+          Label : SUBNAME
+            one_identifier3
       Label : ELEMENT
         use
         Label : USE
@@ -52,26 +66,12 @@ Label : CODE
         use
         Label : USE
           \
-          Label : AS
-            a2
-          Label : SUBNAME
-            absolute_path3
-      Label : ELEMENT
-        use
-        Label : USE
-          \
           Label : SUBNAME
             path2
           Label : SUBNAME
             complex
           Label : SUBNAME
             absolute
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            absolute_path
       Label : ELEMENT
         try
         Label : CODE

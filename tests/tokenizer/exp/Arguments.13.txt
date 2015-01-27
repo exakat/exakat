@@ -11,13 +11,13 @@ Label : CODE
         Label : VARIABLE
           $o
         Label : INDEX
-          .
+          Concatenation
           Label : CONCAT
-            'p'
+            'r'
           Label : CONCAT
             $q
           Label : CONCAT
-            'r'
+            'p'
   Label : ELEMENT
     if
     Label : CONDITION
@@ -55,7 +55,7 @@ Label : CODE
     Label : RIGHT
       str_replace
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
           [
           Label : VARIABLE
@@ -71,8 +71,6 @@ Label : CODE
           Label : INDEX
             'i'
         Label : ARGUMENT
-          'b'
-        Label : ARGUMENT
           [
           Label : VARIABLE
             [
@@ -82,5 +80,7 @@ Label : CODE
               'd'
           Label : INDEX
             'e'
+        Label : ARGUMENT
+          'b'
     Label : LEFT
       $a

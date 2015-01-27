@@ -27,11 +27,11 @@ Label : CODE
             Label : ARGUMENTS
               void
               Label : ARGUMENT
-                .
-                Label : CONCAT
-                  __FUNCTION__
+                Concatenation
                 Label : CONCAT
                   "\n"
+                Label : CONCAT
+                  __FUNCTION__
     Label : NAMESPACE
       \
       Label : SUBNAME
@@ -82,54 +82,22 @@ Label : CODE
             Name
       Label : ELEMENT
         use
-        Label : CONST
+        Label : FUNCTION
           \
-          Label : AS
-            a1
-          Label : SUBNAME
-            FOO
-          Label : SUBNAME
-            Space
-          Label : SUBNAME
-            Name
-      Label : ELEMENT
-        use
-        Label : CONST
-          \
-          Label : AS
-            a3
           Label : SUBNAME
             FOO3
           Label : SUBNAME
             Space
           Label : SUBNAME
             Name
-        Label : CONST
+        Label : FUNCTION
           \
-          Label : AS
-            a2
           Label : SUBNAME
             FOO2
           Label : SUBNAME
             Space
           Label : SUBNAME
             Name
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            .
-            Label : CONCAT
-              FOO
-            Label : CONCAT
-              "\n"
-      Label : ELEMENT
-        f2
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
       Label : ELEMENT
         use
         Label : CONST
@@ -159,22 +127,54 @@ Label : CODE
           Label : SUBNAME
             Name
       Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              "\n"
+            Label : CONCAT
+              FOO
+      Label : ELEMENT
         use
-        Label : FUNCTION
+        Label : CONST
           \
+          Label : AS
+            a3
           Label : SUBNAME
             FOO3
           Label : SUBNAME
             Space
           Label : SUBNAME
             Name
-        Label : FUNCTION
+        Label : CONST
           \
+          Label : AS
+            a2
           Label : SUBNAME
             FOO2
           Label : SUBNAME
             Space
           Label : SUBNAME
             Name
+      Label : ELEMENT
+        use
+        Label : CONST
+          \
+          Label : AS
+            a1
+          Label : SUBNAME
+            FOO
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+      Label : ELEMENT
+        f2
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
     Label : NAMESPACE
       Global

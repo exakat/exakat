@@ -1,59 +1,23 @@
-makeSequence
+makeSequence T_ROOT
 Label : ELEMENT
   I
 Label : ELEMENT
   <?php
 
   Label : CODE
-    makeSequence
+    makeSequence T_OPEN_TAG
     Label : ELEMENT
       namespace
       Label : NAMESPACE
         B
       Label : BLOCK
-        makeSequence
+        makeSequence T_SEMICOLON
         Label : ELEMENT
-          use
-          Label : USE
-            C
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              empty
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : PROPERTY
-                    D
-                  Label : OBJECT
-                    $a
-          Label : THEN
-            {
-            Label : ELEMENT
-              return
-              Label : RETURN
-                void
+          D
         Label : ELEMENT
           echo
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              =
-              Label : RIGHT
-                F
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : PROPERTY
-                      G
-                    Label : OBJECT
-                      $c
-              Label : LEFT
-                $b
+            Arguments
             Label : ARGUMENT
               ?
               Label : CONDITION
@@ -66,5 +30,41 @@ Label : ELEMENT
                 'H'
               Label : ELSE
                 'I'
+            Label : ARGUMENT
+              =
+              Label : RIGHT
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $c
+                    Label : PROPERTY
+                      G
+              Label : LEFT
+                $b
         Label : ELEMENT
-          D
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              empty
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $a
+                  Label : PROPERTY
+                    D
+          Label : THEN
+            {
+            Label : ELEMENT
+              return
+              Label : RETURN
+                void
+        Label : ELEMENT
+          use
+          Label : USE
+            C

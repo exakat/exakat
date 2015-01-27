@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     new
     Label : NEW
-      \a\b\c
+      \
       Label : SUBNAME
         c
       Label : SUBNAME

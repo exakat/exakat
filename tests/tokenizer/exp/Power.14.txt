@@ -15,7 +15,15 @@ Label : CODE
           Label : ARGUMENT
             1
     Label : LEFT
-      2
+      ->
+      Label : OBJECT
+        $a2
+      Label : METHOD
+        x2
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            12
   Label : ELEMENT
     **
     Label : RIGHT
@@ -29,15 +37,7 @@ Label : CODE
           Label : ARGUMENT
             1
     Label : LEFT
-      ->
-      Label : OBJECT
-        $a2
-      Label : METHOD
-        x2
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            12
+      2
   Label : ELEMENT
     **
     Label : RIGHT
