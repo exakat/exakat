@@ -97,6 +97,30 @@ foreach($tokens as $t) {
                 }
                 break;
 
+            case T_START_HEREDOC:
+                $strings++;
+                $short = substr($t[1], 3);
+
+                if (!isset($stringsNames[$short])) {
+                    $stringsNames[$short] = $strings;
+                }
+
+                if ($short[0] == "'") {
+                    $t[1] = "<<<'".$stringsNames[$short]."'\n";
+                } else {
+                    $t[1] = '<<<'.$stringsNames[$short]."\n";
+                }
+
+                $heredoc = "\n".$stringsNames[$short];
+                
+                break;
+                
+            case T_END_HEREDOC: 
+                $t[1] = $heredoc;
+                (unset) $heredoc;
+
+                break;
+
             case T_ISSET : 
             case T_EXIT : 
 
