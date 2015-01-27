@@ -52,7 +52,6 @@ class Token {
                                       35 => 'Arguments',
                                       36 => 'ArgumentsNoParenthesis',
                                       37 => 'ArgumentsNoComma',
-//                                      38 => 'ArgumentsArray',
                                       33 => 'Parenthesis',
                                       1 => 'Halt',
                                       39 => 'Functioncall',
