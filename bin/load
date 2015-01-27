@@ -732,7 +732,7 @@ function process_file($filename, $logFile, $client) {
                 $regexIndex['Parenthesis']->relateTo($T[$Tid], 'INDEXED')->save();                
                 $regexIndex['ArgumentsNoComma']->relateTo($T[$Tid], 'INDEXED')->save();                
                 $regexIndex['Typehint']->relateTo($T[$Tid], 'INDEXED')->save();                
-                $regexIndex['ArgumentsArray']->relateTo($T[$Tid], 'INDEXED')->save();                
+//                $regexIndex['ArgumentsArray']->relateTo($T[$Tid], 'INDEXED')->save();                
 
                 $previous->relateTo($T[$Tid], 'NEXT')->save();
                 $previous = $T[$Tid];
