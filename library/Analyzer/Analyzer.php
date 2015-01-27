@@ -935,36 +935,16 @@ GREMLIN;
         return $this;
     }
 
-    public function eachCounted($variable, $times) {
+    public function eachCounted($variable, $times, $comp = '==') {
         $this->methods[] = <<<GREMLIN
 groupBy(m){{$variable}}{it}.iterate(); 
 // This is plugged into each{}
-m.findAll{ it.value.size() == $times}.values().flatten().each{ n.add(it); }
-GREMLIN;
-
-        return $this;
-    }
-    
-    public function eachNotCounted($variable, $times = 1) {
-        $this->methods[] = <<<GREMLIN
-groupBy(m){{$variable}}it}.iterate(); 
-// This is plugged into each{}
-m.findAll{ it.value.size() != $times}.values().flatten().each{ n.add(it); }
+m.findAll{ it.value.size() $comp $times}.values().flatten().each{ n.add(it); }
 GREMLIN;
 
         return $this;
     }
 
-    public function eachCountedMoreThan($variable, $times = 1) {
-        $this->methods[] = <<<GREMLIN
-groupBy(m){{$variable}}{it}.iterate(); 
-// This is plugged into each{}
-m.findAll{ it.value.size() >= $times}.values().flatten().each{ n.add(it); }
-GREMLIN;
-
-        return $this;
-    }
-    
     public function countIs($comparison) {
         $this->addMethod('aggregate().filter{ it.size '.$comparison.'}', null);
         
