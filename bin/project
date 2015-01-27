@@ -38,9 +38,9 @@ if (!file_exists('./projects/'.$project.'/log')) {
 
 logTime('Start');
 
-$db = new Db();
-$db->insert('project_runs', array('date_start', 'folder'), array(date('Y-m-d H:i:s'), $project));
-$project_run = $db->insert_id();
+$dbexakat = new Db();
+$dbexakat->insert('project_runs', array('date_start', 'folder'), array(date('Y-m-d H:i:s'), $project));
+$project_run = $dbexakat->insert_id();
 
 logTime('Database');
 
@@ -132,7 +132,7 @@ shell_exec('php bin/stat > ./projects/'.$project.'/log/stat.log');
 $db->logProgress($project, $progress++ / $total_steps);
 print "Stats 2\n";
 
-$db->query('UPDATE project_runs SET `date_finish` = '.date('Y-m-d H:i:s').' WHERE id = '.$project_run);
+$dbexakat->query('UPDATE project_runs SET `date_finish` = "'.date('Y-m-d H:i:s').'" WHERE id = "'.$project_run.'"');
 logTime('Final');
 
 function logTime($step) {
