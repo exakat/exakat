@@ -1,0 +1,322 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    [
+    Label : VARIABLE
+      $l
+    Label : INDEX
+      ->
+      Label : OBJECT
+        ->
+        Label : OBJECT
+          ->
+          Label : OBJECT
+            ->
+            Label : OBJECT
+              $e5
+            Label : METHOD
+              F5
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    ->
+                    Label : OBJECT
+                      $a5
+                    Label : METHOD
+                      B5
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          void
+                  Label : METHOD
+                    C5
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+          Label : METHOD
+            G5
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : METHOD
+          H5
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : METHOD
+        I5
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $j
+            Label : METHOD
+              K5
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      ->
+      Label : OBJECT
+        ->
+        Label : OBJECT
+          ->
+          Label : OBJECT
+            $e5
+          Label : METHOD
+            F5
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  ->
+                  Label : OBJECT
+                    $a5
+                  Label : METHOD
+                    B5
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+                Label : METHOD
+                  C5
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+        Label : METHOD
+          G5
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : METHOD
+        H5
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : METHOD
+      I5
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $j
+          Label : METHOD
+            K5
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      ->
+      Label : OBJECT
+        ->
+        Label : OBJECT
+          $e4
+        Label : METHOD
+          F4
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                ->
+                Label : OBJECT
+                  $a4
+                Label : METHOD
+                  B4
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+              Label : METHOD
+                C4
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    void
+      Label : METHOD
+        G4
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : METHOD
+      H4
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      ->
+      Label : OBJECT
+        ->
+        Label : OBJECT
+          $e3
+        Label : METHOD
+          F3
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $a3
+              Label : METHOD
+                B3
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    void
+      Label : METHOD
+        G3
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : METHOD
+      H3
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      ->
+      Label : OBJECT
+        ->
+        Label : OBJECT
+          $e2
+        Label : METHOD
+          F2
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : METHOD
+        G2
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : METHOD
+      H2
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $a2
+          Label : METHOD
+            B2
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      ->
+      Label : OBJECT
+        ->
+        Label : OBJECT
+          $e1
+        Label : METHOD
+          F1
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : METHOD
+        G1
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $a1
+            Label : METHOD
+              B1
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+    Label : METHOD
+      H1
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      ->
+      Label : OBJECT
+        ->
+        Label : OBJECT
+          $e
+        Label : METHOD
+          F
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : METHOD
+        G
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : METHOD
+      H
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      ->
+      Label : OBJECT
+        $b
+      Label : METHOD
+        C
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : METHOD
+      D
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $a
+    Label : METHOD
+      B
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void

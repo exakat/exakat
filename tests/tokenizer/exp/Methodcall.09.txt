@@ -15,8 +15,8 @@ Label : CODE
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              .
-              Label : CONCAT
-                __DIR__
+              Concatenation
               Label : CONCAT
                 '/b.php'
+              Label : CONCAT
+                __DIR__

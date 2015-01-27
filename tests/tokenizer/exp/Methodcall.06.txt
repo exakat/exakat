@@ -10,7 +10,7 @@ Label : CODE
         $b
       Label : METHOD
         'c'
-      Label : ARGUMENTS
-        void
+        Label : ARGUMENTS
+          void
     Label : LEFT
       $a

@@ -12,5 +12,5 @@ Label : CODE
         $b
       Label : INDEX
         'c'
-    Label : ARGUMENTS
-      void
+      Label : ARGUMENTS
+        void

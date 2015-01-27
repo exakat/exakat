@@ -32,14 +32,15 @@ class Methodcall extends TokenAuto {
                                    -1 => array('atom'      => $operands),
                                     0 => array('token'     => Methodcall::$operators,
                                                'atom'      => 'none'),
-                                    1 => array('atom'      => array('Functioncall', 'Methodcall'))
+                                    1 => array('atom'      => 'Functioncall',
+                                               'check_for_methodcall' => true
+                                               )
                                  );
         
-        $this->actions = array('transform'    => array(-1 => 'OBJECT',
-                                                        1 => 'METHOD'),
-                               'atom'           => 'Methodcall',
-                               'cleanIndex'     => true,
-                               'makeSequence'   => 'it');
+        $this->actions = array('makeSequence'  => 'b1',
+                               'to_methodcall' => true,
+                               'cleanIndex'    => true,
+                               );
         $this->checkAuto();
 
         return false;

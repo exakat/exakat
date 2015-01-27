@@ -2234,6 +2234,45 @@ x.out('ELEMENT').each{
             unset($actions['while_to_block']);
         }
 
+        if (isset($actions['to_methodcall'])) {
+            $string = new Methodcall(Token::$client);
+            $fullCodeString = $string->fullcode();
+
+            $qactions[] = "
+/* to_methodcall */
+
+x = it;
+initial = it;
+a2 = a1.out('NEXT').next();
+
+while(x.token == 'T_OBJECT_OPERATOR' && a1.atom == 'Functioncall') {
+    g.addEdge(x, b1, 'OBJECT');
+    g.addEdge(x, a1, 'METHOD');
+    
+    x.out.inE('INDEXED').each{ g.removeEdge(it);}
+    x.setProperty('atom', 'Methodcall');
+    g.idx('atoms').put('atom', 'Methodcall', x);
+    
+    fullcode = x;
+    $fullCodeString
+    
+    b1.bothE('NEXT').each{ g.removeEdge(it);}
+    x.bothE('NEXT').each{ g.removeEdge(it);}
+    a1.bothE('NEXT').each{ g.removeEdge(it);}
+
+    b1 = x;
+    x  = a2;
+    a1 = x.out('NEXT').next();
+    a2 = a1.out('NEXT').next();
+}
+
+g.addEdge(b2, b1, 'NEXT'); // needed because b2 -> b1
+g.addEdge(b1, x, 'NEXT');
+
+";
+            unset($actions['to_methodcall']);
+        }
+
         if (isset($actions['makeSequence'])) {
             $it = $actions['makeSequence'];
 
@@ -2663,6 +2702,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
                 $classes = "'".$conditions['check_for_string']."'";
             }
             $queryConditions[] = "as('cfs').out('NEXT').filter{ it.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'] || it.atom in [$classes] }.loop(2){!(it.object.token in ['T_QUOTE_CLOSE', 'T_END_HEREDOC', 'T_SHELL_QUOTE_CLOSE'])}.back('cfs')";
+
             unset($conditions['check_for_string']);
         }
 
@@ -2676,6 +2716,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             $finalTokens = array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY', 'T_CLOSE_BRACKET');
             $finalTokens = "'".join("', '", $finalTokens)."'";
             $queryConditions[] = "as('cfa').out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA'] || it.atom in [$classes] }.loop(2){!(it.object.token in [$finalTokens])}.filter{it.out('NEXT').next().atom != null || !(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfa')";
+
             unset($conditions['check_for_arguments']);
         }
 
@@ -2696,7 +2737,16 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             $finalTokens = "'".join("', '", $finalTokens)."'";
 
             $queryConditions[] = "as('cfc').out('NEXT').filter{ it.token in [$finalTokens, 'T_DOT'] || it.atom in [$classes] }.loop(2){!(it.object.token in [$finalTokens])}.filter{it.out('NEXT').next().atom != null || !(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfc')";
+
             unset($conditions['check_for_concatenation']);
+        }
+
+        if (isset($conditions['check_for_methodcall']) && $conditions['check_for_methodcall']) {
+            $finalTokens = array('T_SEMICOLON', 'T_QUESTION', 'T_COLON', 'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS');
+            $finalTokens = "'".join("', '", $finalTokens)."'";
+            $queryConditions[] = "as('cfm').out('NEXT').filter{ it.token in [$finalTokens, 'T_OBJECT_OPERATOR'] || it.atom == 'Functioncall' }.loop(2){!(it.object.token in [$finalTokens])}.back('cfm')";
+
+            unset($conditions['check_for_methodcall']);
         }
 
         if (isset($conditions['code'])) {
