@@ -1,0 +1,30 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        5
+      Label : ARGUMENT
+        <<<'NOWDOC'
+
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+            BadFunctionCallException
+
+      Label : ARGUMENT
+        <<<HEREDOC
+
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+            a
+
+      Label : ARGUMENT
+        'a'
+      Label : ARGUMENT
+        1
