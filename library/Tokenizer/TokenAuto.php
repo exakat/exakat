@@ -2744,22 +2744,6 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             unset($conditions['check_for_concatenation']);
         }
 
-        if (isset($conditions['check_for_methodcall']) && $conditions['check_for_methodcall']) {
-            $finalTokens = array_merge(Token::$alternativeEnding, 
-                            array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_DOUBLE_ARROW', 'T_COMMA', 
-                                 'T_CLOSE_TAG', 'T_COLON', 'T_QUESTION', 'T_QUESTION',
-                                 'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND', 'T_OR', 
-                                 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
-                                 'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
-                                 'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 
-                                 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER', 'T_CLOSE_CURLY',
-                                 'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_PLUS','T_MINUS', 'T_DOT', 'T_POW', 'T_AS'));
-            $finalTokens = "'".join("', '", $finalTokens)."'";
-            $queryConditions[] = "as('cfm').out('NEXT').filter{ it.token in [$finalTokens, 'T_OBJECT_OPERATOR'] || it.atom == 'Functioncall' }.loop(2){!(it.object.token in [$finalTokens])}.back('cfm')";
-
-            unset($conditions['check_for_methodcall']);
-        }
-
         if (isset($conditions['code'])) {
             if (is_array($conditions['code']) && !empty($conditions['code'])) {
                 $queryConditions[] = "filter{it.code in ['".implode("', '", $conditions['code'])."']}";

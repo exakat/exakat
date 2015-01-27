@@ -32,9 +32,7 @@ class Methodcall extends TokenAuto {
                                    -1 => array('atom'      => $operands),
                                     0 => array('token'     => Methodcall::$operators,
                                                'atom'      => 'none'),
-                                    1 => array('atom'      => 'Functioncall',
-                                               'check_for_methodcall' => true
-                                               )
+                                    1 => array('atom'      => 'Functioncall')
                                  );
         
         $this->actions = array('makeSequence'  => 'b1',
