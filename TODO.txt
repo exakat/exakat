@@ -747,3 +747,9 @@ Use Object notation if possible (xmlwriter_open_memory => XMLWriter::open_memory
 Remove Parenthesis in Ifthen
 
 Simplify functions with static/global
+
+spot echo that is not on usual structure (stats ? )
+
+Consommation de mémoire : différent suivant l'accès à la propriété statique? 
+
+Spot method/functions used once only.
