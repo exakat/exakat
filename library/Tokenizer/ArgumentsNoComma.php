@@ -10,7 +10,7 @@ class ArgumentsNoComma extends Arguments {
         
         // @note f(1) : no comma
         $this->conditions = array(-1 => array('token' => array_merge(Functioncall::$operatorsWithoutEcho,
-                                                         array('T_FUNCTION', 'T_DECLARE', 'T_USE'))),
+                                                         array('T_FUNCTION', 'T_DECLARE', 'T_USE', 'T_OPEN_BRACKET'))),
                                    0 => array('token' => ArgumentsNoComma::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'yes',

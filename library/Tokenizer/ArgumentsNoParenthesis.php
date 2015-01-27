@@ -11,8 +11,8 @@ class ArgumentsNoParenthesis extends Arguments {
         // @note print 's' : no parenthesis
         $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                     0 => array('atom'       => 'none',
-                                               'token'      => array('T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE',
-                                                                     'T_REQUIRE', 'T_EXIT') ),
+                                               'token'      => array('T_REQUIRE', 'T_REQUIRE_ONCE', 'T_INCLUDE_ONCE', 'T_INCLUDE', 
+                                                                     'T_PRINT', 'T_EXIT') ),
                                     1 => array('atom'       => 'yes',
                                                'notAtom'    => array('Sequence', 'Arguments', 'Function',
                                                                      'Ppp', 'Final', 'Abstract')),
