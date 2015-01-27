@@ -19,13 +19,13 @@ Label : CODE
           Label : ELEMENT
             e
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                'f'
+              Arguments
               Label : ARGUMENT
                 round
                 Label : ARGUMENTS
-                  ,
+                  Arguments
+                  Label : ARGUMENT
+                    4
                   Label : ARGUMENT
                     /
                     Label : RIGHT
@@ -40,8 +40,8 @@ Label : CODE
                         $g
                       Label : INDEX
                         'h'
-                  Label : ARGUMENT
-                    4
+              Label : ARGUMENT
+                'f'
           Label : ELEMENT
             if
             Label : CONDITION

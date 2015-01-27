@@ -17,7 +17,7 @@ Label : CODE
             Label : THROW
               new
               Label : NEW
-                \M
+                \
                 Label : SUBNAME
                   M
                 Label : ARGUMENTS
@@ -25,15 +25,15 @@ Label : CODE
                   Label : ARGUMENT
                     N
                     Label : ARGUMENTS
-                      ,
-                      Label : ARGUMENT
-                        'O'
+                      Arguments
                       Label : ARGUMENT
                         P
                         Label : ARGUMENTS
                           void
                           Label : ARGUMENT
                             $f
+                      Label : ARGUMENT
+                        'O'
       Label : ELEMENT
         case
         Label : CASE

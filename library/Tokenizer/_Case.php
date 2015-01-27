@@ -30,7 +30,7 @@ class _Case extends TokenAuto {
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                   3 => array('token' => array('T_COLON', 'T_SEMICOLON'),
                                              'atom'  => 'none'),
-                                  4 => array('token' => $finalToken),
+//                                  4 => array('token' => $finalToken),
         );
         
         $this->actions = array('createVoidForCase' => true,

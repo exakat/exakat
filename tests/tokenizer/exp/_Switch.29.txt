@@ -33,11 +33,11 @@ Label : CODE
                       Label : METHOD
                         h
                         Label : ARGUMENTS
-                          ,
-                          Label : ARGUMENT
-                            $i
+                          Arguments
                           Label : ARGUMENT
                             $j
+                          Label : ARGUMENT
+                            $i
                     Label : LEFT
                       $f
                   Label : ELEMENT

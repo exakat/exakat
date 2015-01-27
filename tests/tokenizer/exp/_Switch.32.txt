@@ -57,15 +57,15 @@ Label : CODE
               Label : ELSE
                 array
                 Label : ARGUMENTS
-                  ,
+                  Arguments
                   Label : ARGUMENT
-                    $v
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      'w'
+                    Concatenation
                     Label : CONCAT
                       $x
+                    Label : CONCAT
+                      'w'
+                  Label : ARGUMENT
+                    $v
             Label : LEFT
               $o
           Label : ELEMENT
@@ -119,12 +119,12 @@ Label : CODE
             Label : LEFT
               list
               Label : ARGUMENTS
-                ,
+                Arguments
                 Label : ARGUMENT
-                  void
+                  $j
                 Label : ARGUMENT
                   $i
                 Label : ARGUMENT
-                  $j
+                  void
         Label : CASE
           "b"

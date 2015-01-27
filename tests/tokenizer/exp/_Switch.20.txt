@@ -35,9 +35,9 @@ Label : CODE
           Label : ELEMENT
             =
             Label : RIGHT
-              .
+              Concatenation
               Label : CONCAT
-                'h'
+                'l'
               Label : CONCAT
                 i
                 Label : ARGUMENTS
@@ -53,7 +53,7 @@ Label : CODE
                         Label : ARGUMENT
                           void
               Label : CONCAT
-                'l'
+                'h'
             Label : LEFT
               $b
       Label : ELEMENT
@@ -77,9 +77,9 @@ Label : CODE
           Label : ELEMENT
             =
             Label : RIGHT
-              .
+              Concatenation
               Label : CONCAT
-                'h'
+                'l'
               Label : CONCAT
                 i
                 Label : ARGUMENTS
@@ -95,6 +95,6 @@ Label : CODE
                         Label : ARGUMENT
                           void
               Label : CONCAT
-                'l'
+                'h'
             Label : LEFT
               $b

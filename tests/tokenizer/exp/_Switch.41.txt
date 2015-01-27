@@ -17,7 +17,7 @@ Label : CODE
             Label : RETURN
               AM
               Label : ARGUMENTS
-                ,
+                Arguments
                 Label : ARGUMENT
                   [
                   Label : VARIABLE
@@ -27,35 +27,7 @@ Label : CODE
                     Label : CAST
                       (
                       Label : CODE
-                        .
-                        Label : CONCAT
-                          (
-                          Label : CODE
-                            %
-                            Label : RIGHT
-                              31
-                            Label : LEFT
-                              $
-                              Label : NAME
-                                .
-                                Label : CONCAT
-                                  $u
-                                Label : CONCAT
-                                  'AT'
-                        Label : CONCAT
-                          (
-                          Label : CODE
-                            %
-                            Label : RIGHT
-                              32
-                            Label : LEFT
-                              $
-                              Label : NAME
-                                .
-                                Label : CONCAT
-                                  $v
-                                Label : CONCAT
-                                  'AU'
+                        Concatenation
                         Label : CONCAT
                           (
                           Label : CODE
@@ -65,31 +37,55 @@ Label : CODE
                             Label : LEFT
                               $
                               Label : NAME
-                                .
-                                Label : CONCAT
-                                  $w
+                                Concatenation
                                 Label : CONCAT
                                   'AV'
+                                Label : CONCAT
+                                  $w
+                        Label : CONCAT
+                          (
+                          Label : CODE
+                            %
+                            Label : RIGHT
+                              32
+                            Label : LEFT
+                              $
+                              Label : NAME
+                                Concatenation
+                                Label : CONCAT
+                                  'AU'
+                                Label : CONCAT
+                                  $v
+                        Label : CONCAT
+                          (
+                          Label : CODE
+                            %
+                            Label : RIGHT
+                              31
+                            Label : LEFT
+                              $
+                              Label : NAME
+                                Concatenation
+                                Label : CONCAT
+                                  'AT'
+                                Label : CONCAT
+                                  $u
                 Label : ARGUMENT
                   array
                   Label : ARGUMENTS
-                    ,
+                    Arguments
                     Label : ARGUMENT
-                      'AN'
-                    Label : ARGUMENT
-                      'AO'
-                    Label : ARGUMENT
-                      'AP'
-                Label : ARGUMENT
-                  array
-                  Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      $m
+                      $s
                     Label : ARGUMENT
                       AQ
                       Label : ARGUMENTS
-                        ,
+                        Arguments
+                        Label : ARGUMENT
+                          $r
+                        Label : ARGUMENT
+                          $q
+                        Label : ARGUMENT
+                          $p
                         Label : ARGUMENT
                           AR
                           Label : ARGUMENTS
@@ -100,14 +96,18 @@ Label : CODE
                                 $n
                               Label : INDEX
                                 $o
-                        Label : ARGUMENT
-                          $p
-                        Label : ARGUMENT
-                          $q
-                        Label : ARGUMENT
-                          $r
                     Label : ARGUMENT
-                      $s
+                      $m
+                Label : ARGUMENT
+                  array
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      'AP'
+                    Label : ARGUMENT
+                      'AO'
+                    Label : ARGUMENT
+                      'AN'
           Label : ELEMENT
             if
             Label : CONDITION
@@ -125,15 +125,15 @@ Label : CODE
                 Label : RETURN
                   E
                   Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      'F'
+                    Arguments
                     Label : ARGUMENT
                       [
                       Label : VARIABLE
                         $b
                       Label : INDEX
                         $c
+                    Label : ARGUMENT
+                      'F'
           Label : ELEMENT
             if
             Label : CONDITION
@@ -151,209 +151,43 @@ Label : CODE
             Label : THEN
               {
               Label : ELEMENT
-                makeSequence T_OPEN_CURLY
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    'AK'
-                  Label : LEFT
-                    $i
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    $h
-                  Label : LEFT
-                    $g
+                =
+                Label : RIGHT
+                  $h
+                Label : LEFT
+                  $g
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  'AK'
+                Label : LEFT
+                  $i
             Label : ELSE
               {
               Label : ELEMENT
-                makeSequence T_OPEN_CURLY
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    'AL'
-                  Label : LEFT
-                    $l
-                Label : ELEMENT
-                  =
-                  Label : RIGHT
-                    $k
-                  Label : LEFT
-                    $j
+                =
+                Label : RIGHT
+                  $k
+                Label : LEFT
+                  $j
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  'AL'
+                Label : LEFT
+                  $l
           Label : ELEMENT
             =
             Label : RIGHT
               array
               Label : ARGUMENTS
-                ,
+                Arguments
                 Label : ARGUMENT
                   =>
                   Label : KEY
-                    0
+                    29
                   Label : VALUE
-                    'G'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    1
-                  Label : VALUE
-                    'H'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    2
-                  Label : VALUE
-                    'I'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    3
-                  Label : VALUE
-                    'J'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    4
-                  Label : VALUE
-                    'K'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    5
-                  Label : VALUE
-                    'L'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    6
-                  Label : VALUE
-                    'M'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    7
-                  Label : VALUE
-                    'N'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    8
-                  Label : VALUE
-                    'O'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    9
-                  Label : VALUE
-                    'P'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    10
-                  Label : VALUE
-                    'Q'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    11
-                  Label : VALUE
-                    'R'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    12
-                  Label : VALUE
-                    'S'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    13
-                  Label : VALUE
-                    'T'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    14
-                  Label : VALUE
-                    'U'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    15
-                  Label : VALUE
-                    'V'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    16
-                  Label : VALUE
-                    'W'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    17
-                  Label : VALUE
-                    'X'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    18
-                  Label : VALUE
-                    'Y'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    19
-                  Label : VALUE
-                    'Z'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    20
-                  Label : VALUE
-                    'AA'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    21
-                  Label : VALUE
-                    'AB'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    22
-                  Label : VALUE
-                    'AC'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    23
-                  Label : VALUE
-                    'AD'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    24
-                  Label : VALUE
-                    'AE'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    25
-                  Label : VALUE
-                    'AF'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    26
-                  Label : VALUE
-                    'AG'
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    27
-                  Label : VALUE
-                    'AH'
+                    'AJ'
                 Label : ARGUMENT
                   =>
                   Label : KEY
@@ -363,9 +197,171 @@ Label : CODE
                 Label : ARGUMENT
                   =>
                   Label : KEY
-                    29
+                    27
                   Label : VALUE
-                    'AJ'
+                    'AH'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    26
+                  Label : VALUE
+                    'AG'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    25
+                  Label : VALUE
+                    'AF'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    24
+                  Label : VALUE
+                    'AE'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    23
+                  Label : VALUE
+                    'AD'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    22
+                  Label : VALUE
+                    'AC'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    21
+                  Label : VALUE
+                    'AB'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    20
+                  Label : VALUE
+                    'AA'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    19
+                  Label : VALUE
+                    'Z'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    18
+                  Label : VALUE
+                    'Y'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    17
+                  Label : VALUE
+                    'X'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    16
+                  Label : VALUE
+                    'W'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    15
+                  Label : VALUE
+                    'V'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    14
+                  Label : VALUE
+                    'U'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    13
+                  Label : VALUE
+                    'T'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    12
+                  Label : VALUE
+                    'S'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    11
+                  Label : VALUE
+                    'R'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    10
+                  Label : VALUE
+                    'Q'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    9
+                  Label : VALUE
+                    'P'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    8
+                  Label : VALUE
+                    'O'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    7
+                  Label : VALUE
+                    'N'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    6
+                  Label : VALUE
+                    'M'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    5
+                  Label : VALUE
+                    'L'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    4
+                  Label : VALUE
+                    'K'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    3
+                  Label : VALUE
+                    'J'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    2
+                  Label : VALUE
+                    'I'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    1
+                  Label : VALUE
+                    'H'
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    0
+                  Label : VALUE
+                    'G'
             Label : LEFT
               $d
         Label : CASE

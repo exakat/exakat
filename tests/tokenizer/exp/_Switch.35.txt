@@ -23,9 +23,11 @@ Label : CODE
               Label : INDEX
                 str_pad
                 Label : ARGUMENTS
-                  ,
+                  Arguments
                   Label : ARGUMENT
-                    $a
+                    F
+                  Label : ARGUMENT
+                    0
                   Label : ARGUMENT
                     +
                     Label : RIGHT
@@ -57,9 +59,7 @@ Label : CODE
                         Label : ARGUMENT
                           $b
                   Label : ARGUMENT
-                    0
-                  Label : ARGUMENT
-                    F
+                    $a
           Label : ELEMENT
             if
             Label : CONDITION
