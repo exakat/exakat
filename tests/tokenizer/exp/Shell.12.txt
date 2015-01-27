@@ -1,21 +1,21 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG T_ROOT
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     =
     Label : RIGHT
       +
       Label : RIGHT
-        "
+        3
+      Label : LEFT
+        `
         Label : CONTAIN
           Concatenation
           Label : CONCAT
-            $d
-      Label : LEFT
-        2
+            $e
     Label : LEFT
-      $c
+      $d
   Label : ELEMENT
     =
     Label : RIGHT
@@ -35,15 +35,15 @@ Label : CODE
     Label : RIGHT
       +
       Label : RIGHT
-        3
-      Label : LEFT
-        `
+        "
         Label : CONTAIN
           Concatenation
           Label : CONCAT
-            $e
+            $d
+      Label : LEFT
+        2
     Label : LEFT
-      $d
+      $c
   Label : ELEMENT
     =
     Label : RIGHT

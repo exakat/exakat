@@ -17,25 +17,23 @@ Label : CODE
         Label : CONCAT
            d 
         Label : CONCAT
-          $e
-        Label : CONCAT
           ->
-        Label : CONCAT
-          f
+          Label : OBJECT
+            $e
+          Label : PROPERTY
+            f
         Label : CONCAT
            
         Label : CONCAT
-          $g
-        Label : CONCAT
           ->
-        Label : CONCAT
-          h
-        Label : CONCAT
-          (
-        Label : CONCAT
-          void
-        Label : CONCAT
-          )
+          Label : OBJECT
+            $g
+          Label : METHOD
+            h
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
         Label : CONCAT
            i j 
         Label : CONCAT

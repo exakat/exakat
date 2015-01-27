@@ -2464,7 +2464,7 @@ g.addEdge(it, f.out('NEXT').out('NEXT').next(), 'NEXT');
 g.idx('delete').put('node', 'delete', f.out('NEXT').next());
 g.removeEdge(f.out('NEXT').outE('NEXT').next());
 
-it.setProperty('atom', 'String');
+it.setProperty('atom', '$atom');
 
 fullcode = x;
 $fullCodeString
@@ -2478,7 +2478,7 @@ x.out('CONCAT').each{
     }
 }
 
-/* indexing */  g.idx('atoms').put('atom', 'String', it);
+/* indexing */  g.idx('atoms').put('atom', '$atom', it);
 
 ";
             unset($actions['make_quoted_string']);

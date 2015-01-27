@@ -24,7 +24,9 @@ class Shell extends TokenAuto {
         // fullcode is not meant to reproduce the whole code, but give a quick peek at some smaller code. Just ignoring for the moment.
         return <<<GREMLIN
 
-fullcode.setProperty("fullcode", it.out('CONTAIN').next().fullcode);
+s = [];
+fullcode.out('CONCAT').sort{it.rank}._().each{ s.add(it.fullcode); }
+fullcode.setProperty('fullcode', '`' + s.join('') + '`');
 
 GREMLIN;
     }

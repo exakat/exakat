@@ -15,11 +15,11 @@ Label : CODE
         Label : CONCAT
            d 
         Label : CONCAT
-          $e
-        Label : CONCAT
           ->
-        Label : CONCAT
-          f
+          Label : OBJECT
+            $e
+          Label : PROPERTY
+            f
         Label : CONCAT
            g 
         Label : CONCAT
