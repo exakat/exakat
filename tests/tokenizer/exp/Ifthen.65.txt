@@ -62,9 +62,9 @@ Label : CODE
               void
   Label : ELEMENT
     global
-    Label : NAME
+    Label : GLOBAL
       $b
   Label : ELEMENT
     global
-    Label : NAME
+    Label : GLOBAL
       $a

@@ -19,7 +19,7 @@ Label : CODE
       Label : ELEMENT
         function
         Label : ARGUMENTS
-          ,
+          Arguments
           Label : ARGUMENT
             =
             Label : RIGHT
@@ -33,9 +33,9 @@ Label : CODE
             Label : LEFT
               $c
           Label : ARGUMENT
-            $a
-          Label : ARGUMENT
             $b
+          Label : ARGUMENT
+            $a
         Label : NAME
           D
         Label : BLOCK
@@ -45,7 +45,7 @@ Label : CODE
       Label : ELEMENT
         function
         Label : ARGUMENTS
-          ,
+          Arguments
           Label : ARGUMENT
             =
             Label : RIGHT
@@ -53,11 +53,11 @@ Label : CODE
             Label : LEFT
               $h
           Label : ARGUMENT
-            $e
+            $g
           Label : ARGUMENT
             $f
           Label : ARGUMENT
-            $g
+            $e
         Label : NAME
           F
         Label : BLOCK

@@ -11,10 +11,10 @@ Label : CODE
           'C'
         Label : LEFT
           ->
-          Label : PROPERTY
-            B
           Label : OBJECT
             $a
+          Label : PROPERTY
+            B
     Label : THEN
       makeSequence T_CLOSE_CURLY
       Label : ELEMENT
@@ -22,11 +22,11 @@ Label : CODE
         Label : RIGHT
           D
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $c
+            Arguments
             Label : ARGUMENT
               'E'
+            Label : ARGUMENT
+              $c
         Label : LEFT
           $b
       Label : ELEMENT
@@ -61,10 +61,10 @@ Label : CODE
             'G'
           Label : LEFT
             ->
-            Label : PROPERTY
-              F
             Label : OBJECT
               $h
+            Label : PROPERTY
+              F
       Label : THEN
         ++
         Label : POSTPLUSPLUS

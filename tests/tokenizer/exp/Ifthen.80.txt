@@ -24,10 +24,10 @@ Label : CODE
         foreach
         Label : SOURCE
           ->
-          Label : PROPERTY
-            C
           Label : OBJECT
             $b
+          Label : PROPERTY
+            C
         Label : VALUE
           $c
         Label : BLOCK
@@ -56,19 +56,19 @@ Label : CODE
                   $e
                 Label : INDEX
                   ->
-                  Label : PROPERTY
-                    E
                   Label : OBJECT
                     $f
+                  Label : PROPERTY
+                    E
       Label : ELEMENT
         return
         Label : RETURN
           F
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              'G'
+            Arguments
             Label : ARGUMENT
               $h
+            Label : ARGUMENT
+              'G'
     Label : NAME
       B

@@ -10,9 +10,7 @@ Label : ELEMENT
         Label : CODE
           $a
       Label : THEN
-        makeSequence T_INLINE_HTML
-        Label : ELEMENT
-          B
+        makeSequence T_COLON
         Label : ELEMENT
           I
         Label : ELEMENT
@@ -20,19 +18,7 @@ Label : ELEMENT
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              .
-              Label : CONCAT
-                'K'
-              Label : CONCAT
-                L
-                Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    'M'
-                  Label : ARGUMENT
-                    'N'
-              Label : CONCAT
-                'O'
+              Concatenation
               Label : CONCAT
                 P
                 Label : ARGUMENTS
@@ -43,6 +29,18 @@ Label : ELEMENT
                       $c
                     Label : INDEX
                       'Q'
+              Label : CONCAT
+                'O'
+              Label : CONCAT
+                L
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    'N'
+                  Label : ARGUMENT
+                    'M'
+              Label : CONCAT
+                'K'
         Label : ELEMENT
           if
           Label : CONDITION
@@ -60,19 +58,7 @@ Label : ELEMENT
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'S'
-                  Label : CONCAT
-                    T
-                    Label : ARGUMENTS
-                      ,
-                      Label : ARGUMENT
-                        'U'
-                      Label : ARGUMENT
-                        'V'
-                  Label : CONCAT
-                    'W'
+                  Concatenation
                   Label : CONCAT
                     X
                     Label : ARGUMENTS
@@ -83,6 +69,18 @@ Label : ELEMENT
                           $e
                         Label : INDEX
                           'Y'
+                  Label : CONCAT
+                    'W'
+                  Label : CONCAT
+                    T
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        'V'
+                      Label : ARGUMENT
+                        'U'
+                  Label : CONCAT
+                    'S'
         Label : ELEMENT
           if
           Label : CONDITION
@@ -108,7 +106,7 @@ Label : ELEMENT
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
-                  .
+                  Concatenation
                   Label : CONCAT
                     AF
                     Label : ARGUMENTS
@@ -124,17 +122,17 @@ Label : ELEMENT
                             Label : ARGUMENT
                               void
                   Label : CONCAT
-                    'AA'
+                    'AE'
                   Label : CONCAT
                     AB
                     Label : ARGUMENTS
-                      ,
-                      Label : ARGUMENT
-                        'AC'
+                      Arguments
                       Label : ARGUMENT
                         'AD'
+                      Label : ARGUMENT
+                        'AC'
                   Label : CONCAT
-                    'AE'
+                    'AA'
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -146,9 +144,7 @@ Label : ELEMENT
               Label : METHOD
                 AI
                 Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    'AJ'
+                  Arguments
                   Label : ARGUMENT
                     array
                     Label : ARGUMENTS
@@ -159,6 +155,8 @@ Label : ELEMENT
                           'AK'
                         Label : VALUE
                           'AL'
+                  Label : ARGUMENT
+                    'AJ'
         Label : ELEMENT
           AG
         Label : ELEMENT
@@ -176,25 +174,25 @@ Label : ELEMENT
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
-                      .
+                      Concatenation
                       Label : CONCAT
-                        'F'
+                        'I'
                       Label : CONCAT
                         G
                         Label : ARGUMENTS
                           void
                           Label : ARGUMENT
                             ->
-                            Label : PROPERTY
-                              H
                             Label : OBJECT
                               $b
+                            Label : PROPERTY
+                              H
                       Label : CONCAT
-                        'I'
-      Label : ELSE
-        makeSequence T_INLINE_HTML
+                        'F'
         Label : ELEMENT
-          AM
+          B
+      Label : ELSE
+        makeSequence T_COLON
         Label : ELEMENT
           AP
         Label : ELEMENT
@@ -207,5 +205,7 @@ Label : ELEMENT
                 void
                 Label : ARGUMENT
                   'AP'
+        Label : ELEMENT
+          AM
 Label : ELEMENT
   A

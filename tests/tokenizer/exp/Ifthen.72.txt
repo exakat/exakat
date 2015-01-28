@@ -10,11 +10,9 @@ Label : ELEMENT
       Label : SOURCE
         $a
       Label : BLOCK
-        makeSequence T_INLINE_HTML
+        makeSequence T_COLON
         Label : ELEMENT
           L
-        Label : ELEMENT
-          B
         Label : ELEMENT
           if
           Label : CONDITION
@@ -36,25 +34,7 @@ Label : ELEMENT
                 Label : ARGUMENT
                   E
                   Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        'F'
-                      Label : CONCAT
-                        [
-                        Label : VARIABLE
-                          $d
-                        Label : INDEX
-                          'G'
-                      Label : CONCAT
-                        'H'
-                    Label : ARGUMENT
-                      I
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          'J'
+                    Arguments
                     Label : ARGUMENT
                       array
                       Label : ARGUMENTS
@@ -65,5 +45,25 @@ Label : ELEMENT
                             'K'
                           Label : VALUE
                             'L'
+                    Label : ARGUMENT
+                      I
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          'J'
+                    Label : ARGUMENT
+                      Concatenation
+                      Label : CONCAT
+                        'H'
+                      Label : CONCAT
+                        [
+                        Label : VARIABLE
+                          $d
+                        Label : INDEX
+                          'G'
+                      Label : CONCAT
+                        'F'
+        Label : ELEMENT
+          B
 Label : ELEMENT
   A

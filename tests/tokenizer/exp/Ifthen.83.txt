@@ -7,6 +7,24 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
+        $x2
+    Label : THEN
+      {
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a
+    Label : ELSE
+      {
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $b
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
         $x
     Label : THEN
       Block with if/elseif
@@ -34,21 +52,3 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $c
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        $x2
-    Label : THEN
-      {
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
-    Label : ELSE
-      {
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $b

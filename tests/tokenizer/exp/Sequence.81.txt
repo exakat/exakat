@@ -24,14 +24,14 @@ Label : CODE
             ==
             Label : RIGHT
               ::
+              Label : CLASS
+                d
               Label : METHOD
                 e
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     $f
-              Label : CLASS
-                d
             Label : LEFT
               false
         Label : THEN

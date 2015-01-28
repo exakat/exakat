@@ -57,29 +57,29 @@ Label : CODE
                 Label : METHOD
                   K
                   Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      'L'
+                    Arguments
                     Label : ARGUMENT
                       'M'
+                    Label : ARGUMENT
+                      'L'
               Label : LEFT
                 G
                 Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    ->
-                    Label : PROPERTY
-                      H
-                    Label : OBJECT
-                      $h
+                  Arguments
                   Label : ARGUMENT
                     array
                     Label : ARGUMENTS
-                      ,
-                      Label : ARGUMENT
-                        'I'
+                      Arguments
                       Label : ARGUMENT
                         'J'
+                      Label : ARGUMENT
+                        'I'
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $h
+                    Label : PROPERTY
+                      H
             Label : LEFT
               &&
               Label : RIGHT
@@ -88,20 +88,20 @@ Label : CODE
                   $g
                 Label : LEFT
                   ->
-                  Label : PROPERTY
-                    F
                   Label : OBJECT
                     $f
+                  Label : PROPERTY
+                    F
               Label : LEFT
                 ==
                 Label : RIGHT
                   $e
                 Label : LEFT
                   ->
-                  Label : PROPERTY
-                    E
                   Label : OBJECT
                     $d
+                  Label : PROPERTY
+                    E
         Label : THEN
           makeSequence T_SEMICOLON
           Label : ELEMENT
@@ -115,23 +115,23 @@ Label : CODE
                 Label : ARGUMENT
                   O
                   Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      'P'
+                    Arguments
                     Label : ARGUMENT
                       'Q'
+                    Label : ARGUMENT
+                      'P'
           Label : ELEMENT
             V
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                'W'
+              Arguments
               Label : ARGUMENT
                 ->
-                Label : PROPERTY
-                  X
                 Label : OBJECT
                   $l
+                Label : PROPERTY
+                  X
+              Label : ARGUMENT
+                'W'
           Label : ELEMENT
             ->
             Label : OBJECT
@@ -143,11 +143,11 @@ Label : CODE
                 Label : ARGUMENT
                   S
                   Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      'T'
+                    Arguments
                     Label : ARGUMENT
                       'U'
+                    Label : ARGUMENT
+                      'T'
         Label : ELSE
           elseif
           Label : CONDITION
@@ -158,10 +158,10 @@ Label : CODE
                 'Z'
               Label : LEFT
                 ->
-                Label : PROPERTY
-                  Y
                 Label : OBJECT
                   $m
+                Label : PROPERTY
+                  Y
           Label : THEN
             Block with if/elseif
             Label : ELEMENT
@@ -175,11 +175,11 @@ Label : CODE
                   Label : ARGUMENT
                     AB
                     Label : ARGUMENTS
-                      ,
-                      Label : ARGUMENT
-                        'AC'
+                      Arguments
                       Label : ARGUMENT
                         'AD'
+                      Label : ARGUMENT
+                        'AC'
           Label : ELSE
             ->
             Label : OBJECT
@@ -191,11 +191,11 @@ Label : CODE
                 Label : ARGUMENT
                   AF
                   Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      'AG'
+                    Arguments
                     Label : ARGUMENT
                       'AH'
+                    Label : ARGUMENT
+                      'AG'
       Label : ELEMENT
         exit
         Label : ARGUMENTS

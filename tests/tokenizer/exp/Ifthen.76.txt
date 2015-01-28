@@ -22,10 +22,10 @@ Label : CODE
           (
           Label : CODE
             ->
-            Label : PROPERTY
-              H
             Label : OBJECT
               $f
+            Label : PROPERTY
+              H
         Label : THEN
           Block with if/elseif
           Label : ELEMENT
@@ -37,15 +37,15 @@ Label : CODE
                 Label : NOT
                   I
                   Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      ->
-                      Label : PROPERTY
-                        J
-                      Label : OBJECT
-                        $g
+                    Arguments
                     Label : ARGUMENT
                       $h
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $g
+                      Label : PROPERTY
+                        J
       Label : ELEMENT
         if
         Label : CONDITION
@@ -53,15 +53,15 @@ Label : CODE
           Label : CODE
             E
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                ->
-                Label : PROPERTY
-                  F
-                Label : OBJECT
-                  $d
+              Arguments
               Label : ARGUMENT
                 $e
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  F
         Label : THEN
           Block with if/elseif
           Label : ELEMENT

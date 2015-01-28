@@ -12,10 +12,10 @@ Label : CODE
           'C'
         Label : LEFT
           ->
-          Label : PROPERTY
-            B
           Label : OBJECT
             $a
+          Label : PROPERTY
+            B
     Label : THEN
       Block with if/elseif
       Label : ELEMENT
@@ -28,10 +28,10 @@ Label : CODE
               void
               Label : ARGUMENT
                 ->
-                Label : PROPERTY
-                  E
                 Label : OBJECT
                   $b
+                Label : PROPERTY
+                  E
         Label : THEN
           if
           Label : CONDITION
@@ -41,7 +41,13 @@ Label : CODE
               Label : NOT
                 F
                 Label : ARGUMENTS
-                  ,
+                  Arguments
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $d
+                    Label : PROPERTY
+                      I
                   Label : ARGUMENT
                     [
                     Label : VARIABLE
@@ -52,12 +58,6 @@ Label : CODE
                         'G'
                     Label : INDEX
                       'H'
-                  Label : ARGUMENT
-                    ->
-                    Label : PROPERTY
-                      I
-                    Label : OBJECT
-                      $d
           Label : THEN
             Block with if/elseif
             Label : ELEMENT
@@ -74,10 +74,10 @@ Label : CODE
             'L'
           Label : LEFT
             ->
-            Label : PROPERTY
-              K
             Label : OBJECT
               $e
+            Label : PROPERTY
+              K
       Label : THEN
         Block with if/elseif
         Label : ELEMENT
@@ -90,10 +90,10 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   ->
-                  Label : PROPERTY
-                    N
                   Label : OBJECT
                     $f
+                  Label : PROPERTY
+                    N
           Label : THEN
             if
             Label : CONDITION
@@ -103,7 +103,13 @@ Label : CODE
                 Label : NOT
                   O
                   Label : ARGUMENTS
-                    ,
+                    Arguments
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $h
+                      Label : PROPERTY
+                        R
                     Label : ARGUMENT
                       [
                       Label : VARIABLE
@@ -114,12 +120,6 @@ Label : CODE
                           'P'
                       Label : INDEX
                         'Q'
-                    Label : ARGUMENT
-                      ->
-                      Label : PROPERTY
-                        R
-                      Label : OBJECT
-                        $h
             Label : THEN
               Block with if/elseif
               Label : ELEMENT
@@ -136,10 +136,10 @@ Label : CODE
               void
               Label : ARGUMENT
                 ->
-                Label : PROPERTY
-                  U
                 Label : OBJECT
                   $i
+                Label : PROPERTY
+                  U
         Label : THEN
           if
           Label : CONDITION
@@ -147,7 +147,13 @@ Label : CODE
             Label : CODE
               V
               Label : ARGUMENTS
-                ,
+                Arguments
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $k
+                  Label : PROPERTY
+                    Y
                 Label : ARGUMENT
                   [
                   Label : VARIABLE
@@ -158,12 +164,6 @@ Label : CODE
                       'W'
                   Label : INDEX
                     'X'
-                Label : ARGUMENT
-                  ->
-                  Label : PROPERTY
-                    Y
-                  Label : OBJECT
-                    $k
           Label : THEN
             Block with if/elseif
             Label : ELEMENT

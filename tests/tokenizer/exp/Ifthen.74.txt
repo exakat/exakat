@@ -86,18 +86,20 @@ Label : ELEMENT
                       Label : INDEX
                         'M'
         Label : ELEMENT
-          E
-        Label : ELEMENT
           I
+        Label : ELEMENT
+          E
         Label : ELEMENT
           G
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              'H'
+            Arguments
             Label : ARGUMENT
               'I'
+            Label : ARGUMENT
+              'H'
       Label : ELSE
-        N
+        makeSequence T_COLON
+        Label : ELEMENT
+          N
 Label : ELEMENT
   A

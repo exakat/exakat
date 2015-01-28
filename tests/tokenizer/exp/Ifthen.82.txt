@@ -21,9 +21,9 @@ Label : CODE
       Label : POSTPLUSPLUS
         $d
     Label : BLOCK
-      makeSequence T_CLOSE_CURLY
+      makeSequence T_COLON
       Label : ELEMENT
-        A
+        B
       Label : ELEMENT
         for
         Label : INIT
@@ -63,4 +63,4 @@ Label : CODE
             Label : LEFT
               $i
       Label : ELEMENT
-        B
+        A

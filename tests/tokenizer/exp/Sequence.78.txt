@@ -7,45 +7,31 @@ Label : ELEMENT
   Label : CODE
     makeSequence T_CLOSE_CURLY
     Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          CA
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'CB'
-    Label : ELEMENT
-      CB
-    Label : ELEMENT
       if
       Label : CONDITION
         (
         Label : CODE
-          [
-          Label : VARIABLE
-            $x
-          Label : INDEX
-            'BR'
+          &&
+          Label : RIGHT
+            (
+            Label : CODE
+              ==
+              Label : RIGHT
+                5
+              Label : LEFT
+                $aj
+          Label : LEFT
+            (
+            Label : CODE
+              ==
+              Label : RIGHT
+                4
+              Label : LEFT
+                $ai
       Label : THEN
         {
         Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              BS
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $y
-                  Label : INDEX
-                    'BT'
-    Label : ELEMENT
-      BY
+          CW
     Label : ELEMENT
       if
       Label : CONDITION
@@ -90,46 +76,6 @@ Label : ELEMENT
             $an
           Label : INDEX
             'DB'
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        (
-        Label : CODE
-          &&
-          Label : RIGHT
-            (
-            Label : CODE
-              ==
-              Label : RIGHT
-                5
-              Label : LEFT
-                $aj
-          Label : LEFT
-            (
-            Label : CODE
-              ==
-              Label : RIGHT
-                4
-              Label : LEFT
-                $ai
-      Label : THEN
-        {
-        Label : ELEMENT
-          CW
-    Label : ELEMENT
-      CT
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          CL
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'CM'
-    Label : ELEMENT
-      CJ
     Label : ELEMENT
       if
       Label : CONDITION
@@ -191,27 +137,81 @@ Label : ELEMENT
         Label : ELEMENT
           DB
     Label : ELEMENT
+      CJ
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          CL
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'CM'
+    Label : ELEMENT
+      CF
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          CH
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'CI'
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            $ah
+          Label : INDEX
+            'CV'
+    Label : ELEMENT
       CX
+    Label : ELEMENT
+      CT
+    Label : ELEMENT
+      CV
+    Label : ELEMENT
+      CQ
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          [
+          Label : VARIABLE
+            $aa
+          Label : INDEX
+            'CD'
+      Label : THEN
+        {
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              CE
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $ab
+                  Label : INDEX
+                    'CF'
+    Label : ELEMENT
+      CM
     Label : ELEMENT
       echo
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           $ad
-    Label : ELEMENT
-      CM
-    Label : ELEMENT
-      CN
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          CP
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'CQ'
     Label : ELEMENT
       =
       Label : RIGHT
@@ -247,9 +247,9 @@ Label : ELEMENT
     Label : ELEMENT
       =
       Label : RIGHT
-        .
+        Concatenation
         Label : CONCAT
-          'N'
+          'Q'
         Label : CONCAT
           O
           Label : ARGUMENTS
@@ -257,57 +257,9 @@ Label : ELEMENT
             Label : ARGUMENT
               'P'
         Label : CONCAT
-          'Q'
+          'N'
       Label : LEFT
         $k
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : RIGHT
-            'Y'
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $n
-            Label : INDEX
-              'X'
-      Label : THEN
-        {
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            .
-            Label : CONCAT
-              'Z'
-            Label : CONCAT
-              AA
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'AB'
-            Label : CONCAT
-              'AC'
-          Label : LEFT
-            $o
-    Label : ELEMENT
-      AC
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          AE
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $p
-              Label : INDEX
-                'AF'
     Label : ELEMENT
       if
       Label : CONDITION
@@ -327,9 +279,9 @@ Label : ELEMENT
         Label : ELEMENT
           =
           Label : RIGHT
-            .
+            Concatenation
             Label : CONCAT
-              'T'
+              'W'
             Label : CONCAT
               U
               Label : ARGUMENTS
@@ -337,9 +289,57 @@ Label : ELEMENT
                 Label : ARGUMENT
                   'V'
             Label : CONCAT
-              'W'
+              'T'
           Label : LEFT
             $m
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          AE
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $p
+              Label : INDEX
+                'AF'
+    Label : ELEMENT
+      AC
+    Label : ELEMENT
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          ==
+          Label : RIGHT
+            'Y'
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $n
+            Label : INDEX
+              'X'
+      Label : THEN
+        {
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            Concatenation
+            Label : CONCAT
+              'AC'
+            Label : CONCAT
+              AA
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'AB'
+            Label : CONCAT
+              'Z'
+          Label : LEFT
+            $o
     Label : ELEMENT
       if
       Label : CONDITION
@@ -355,9 +355,9 @@ Label : ELEMENT
         Label : ELEMENT
           =
           Label : RIGHT
-            .
+            Concatenation
             Label : CONCAT
-              'G'
+              'J'
             Label : CONCAT
               H
               Label : ARGUMENTS
@@ -365,7 +365,7 @@ Label : ELEMENT
                 Label : ARGUMENT
                   'I'
             Label : CONCAT
-              'J'
+              'G'
           Label : LEFT
             $e
         Label : ELEMENT
@@ -459,7 +459,7 @@ Label : ELEMENT
         Label : ELEMENT
           AO
     Label : ELEMENT
-      BC
+      BP
     Label : ELEMENT
       echo
       Label : ARGUMENTS
@@ -467,21 +467,9 @@ Label : ELEMENT
         Label : ARGUMENT
           $w
     Label : ELEMENT
-      BP
-    Label : ELEMENT
-      BM
-    Label : ELEMENT
       BL
     Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          BK
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'BL'
+      BM
     Label : ELEMENT
       echo
       Label : ARGUMENTS
@@ -493,17 +481,7 @@ Label : ELEMENT
             Label : ARGUMENT
               'BP'
     Label : ELEMENT
-      BI
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          BE
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'BF'
+      BF
     Label : ELEMENT
       echo
       Label : ARGUMENTS
@@ -519,7 +497,17 @@ Label : ELEMENT
               Label : INDEX
                 'BI'
     Label : ELEMENT
-      BF
+      BI
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          BK
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'BL'
     Label : ELEMENT
       AZ
     Label : ELEMENT
@@ -536,6 +524,18 @@ Label : ELEMENT
                 $u
               Label : INDEX
                 'BC'
+    Label : ELEMENT
+      BC
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          BE
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'BF'
     Label : ELEMENT
       echo
       Label : ARGUMENTS
@@ -575,68 +575,6 @@ Label : ELEMENT
     Label : ELEMENT
       AP
     Label : ELEMENT
-      CF
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          CH
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'CI'
-    Label : ELEMENT
-      CQ
-    Label : ELEMENT
-      if
-      Label : CONDITION
-        (
-        Label : CODE
-          [
-          Label : VARIABLE
-            $aa
-          Label : INDEX
-            'CD'
-      Label : THEN
-        {
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              CE
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $ab
-                  Label : INDEX
-                    'CF'
-    Label : ELEMENT
-      CI
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $ac
-    Label : ELEMENT
-      CV
-    Label : ELEMENT
-      echo
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            $ah
-          Label : INDEX
-            'CV'
-    Label : ELEMENT
-      BT
-    Label : ELEMENT
       echo
       Label : ARGUMENTS
         void
@@ -646,6 +584,22 @@ Label : ELEMENT
             void
             Label : ARGUMENT
               'BW'
+    Label : ELEMENT
+      BT
+    Label : ELEMENT
+      BY
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          CA
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'CB'
+    Label : ELEMENT
+      BW
     Label : ELEMENT
       echo
       Label : ARGUMENTS
@@ -657,4 +611,50 @@ Label : ELEMENT
             Label : ARGUMENT
               $z
     Label : ELEMENT
-      BW
+      if
+      Label : CONDITION
+        (
+        Label : CODE
+          [
+          Label : VARIABLE
+            $x
+          Label : INDEX
+            'BR'
+      Label : THEN
+        {
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              BS
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $y
+                  Label : INDEX
+                    'BT'
+    Label : ELEMENT
+      CB
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $ac
+    Label : ELEMENT
+      CI
+    Label : ELEMENT
+      CN
+    Label : ELEMENT
+      echo
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          CP
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'CQ'

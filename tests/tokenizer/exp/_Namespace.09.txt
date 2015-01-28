@@ -38,10 +38,10 @@ Label : CODE
                 return
                 Label : RETURN
                   ->
-                  Label : PROPERTY
-                    K
                   Label : OBJECT
                     $c
+                  Label : PROPERTY
+                    K
           Label : ELEMENT
             function
             Label : PUBLIC
@@ -58,10 +58,10 @@ Label : CODE
                 return
                 Label : RETURN
                   ->
-                  Label : PROPERTY
-                    H
                   Label : OBJECT
                     $a
+                  Label : PROPERTY
+                    H
       Label : ELEMENT
         use
         Label : USE

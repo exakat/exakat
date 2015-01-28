@@ -27,11 +27,15 @@ Label : CODE
           Label : CODE
             C
             Label : ARGUMENTS
-              ,
+              Arguments
               Label : ARGUMENT
-                .
+                $g
+              Label : ARGUMENT
+                $f
+              Label : ARGUMENT
+                Concatenation
                 Label : CONCAT
-                  'D'
+                  'F'
                 Label : CONCAT
                   ->
                   Label : OBJECT
@@ -43,11 +47,7 @@ Label : CODE
                       Label : ARGUMENT
                         void
                 Label : CONCAT
-                  'F'
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                $g
+                  'D'
         Label : THEN
           {
           Label : ELEMENT
@@ -111,6 +111,34 @@ Label : CODE
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
+                    $o
+            Label : LEFT
+              $n
+        Label : THEN
+          {
+          Label : ELEMENT
+            .=
+            Label : RIGHT
+              Concatenation
+              Label : CONCAT
+                'H'
+              Label : CONCAT
+                $q
+            Label : LEFT
+              $p
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            &&
+            Label : RIGHT
+              !
+              Label : NOT
+                empty
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
                     $t
             Label : LEFT
               &&
@@ -130,34 +158,6 @@ Label : CODE
               I
             Label : LEFT
               $u
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            &&
-            Label : RIGHT
-              !
-              Label : NOT
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $o
-            Label : LEFT
-              $n
-        Label : THEN
-          {
-          Label : ELEMENT
-            .=
-            Label : RIGHT
-              .
-              Label : CONCAT
-                $q
-              Label : CONCAT
-                'H'
-            Label : LEFT
-              $p
   Label : ELEMENT
     if
     Label : CONDITION
@@ -178,17 +178,17 @@ Label : CODE
           $z
         Label : LEFT
           ->
-          Label : PROPERTY
-            K
           Label : OBJECT
             $y
+          Label : PROPERTY
+            K
   Label : ELEMENT
     =
     Label : RIGHT
       $w
     Label : LEFT
       ->
-      Label : PROPERTY
-        J
       Label : OBJECT
         $v
+      Label : PROPERTY
+        J

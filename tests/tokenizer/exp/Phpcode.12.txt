@@ -7,10 +7,10 @@ Label : CODE
       (
       Label : CODE
         ->
-        Label : PROPERTY
-          B
         Label : OBJECT
           $a
+        Label : PROPERTY
+          B
     Label : THEN
       makeSequence T_SEMICOLON
       Label : ELEMENT

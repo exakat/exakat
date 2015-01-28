@@ -12,10 +12,10 @@ Label : CODE
           'C'
         Label : LEFT
           ->
-          Label : PROPERTY
-            B
           Label : OBJECT
             $a
+          Label : PROPERTY
+            B
     Label : THEN
       Block with if/elseif
       Label : ELEMENT
@@ -28,10 +28,10 @@ Label : CODE
             void
             Label : ARGUMENT
               ->
-              Label : PROPERTY
-                F
               Label : OBJECT
                 $c
+              Label : PROPERTY
+                F
     Label : ELSE
       elseif
       Label : CONDITION
@@ -42,10 +42,10 @@ Label : CODE
             'H'
           Label : LEFT
             ->
-            Label : PROPERTY
-              G
             Label : OBJECT
               $d
+            Label : PROPERTY
+              G
       Label : THEN
         {
         Label : ELEMENT
@@ -55,15 +55,15 @@ Label : CODE
           Label : METHOD
             J
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                ->
-                Label : PROPERTY
-                  K
-                Label : OBJECT
-                  $f
+              Arguments
               Label : ARGUMENT
                 'L'
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $f
+                Label : PROPERTY
+                  K
         Label : ELEMENT
           ->
           Label : OBJECT
@@ -71,15 +71,15 @@ Label : CODE
           Label : METHOD
             N
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                ->
-                Label : PROPERTY
-                  O
-                Label : OBJECT
-                  $h
+              Arguments
               Label : ARGUMENT
                 'P'
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $h
+                Label : PROPERTY
+                  O
       Label : ELSE
         elseif
         Label : CONDITION
@@ -90,10 +90,10 @@ Label : CODE
               'S'
             Label : LEFT
               ->
-              Label : PROPERTY
-                R
               Label : OBJECT
                 $i
+              Label : PROPERTY
+                R
         Label : THEN
           Block with if/elseif
           Label : ELEMENT
@@ -103,15 +103,15 @@ Label : CODE
             Label : METHOD
               U
               Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  ->
-                  Label : PROPERTY
-                    V
-                  Label : OBJECT
-                    $k
+                Arguments
                 Label : ARGUMENT
                   'W'
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $k
+                  Label : PROPERTY
+                    V
         Label : ELSE
           elseif
           Label : CONDITION
@@ -122,10 +122,10 @@ Label : CODE
                 'Z'
               Label : LEFT
                 ->
-                Label : PROPERTY
-                  Y
                 Label : OBJECT
                   $l
+                Label : PROPERTY
+                  Y
           Label : THEN
             Block with if/elseif
             Label : ELEMENT
@@ -135,25 +135,25 @@ Label : CODE
               Label : METHOD
                 AB
                 Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    ->
-                    Label : PROPERTY
-                      AC
-                    Label : OBJECT
-                      $n
+                  Arguments
                   Label : ARGUMENT
                     'AD'
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $n
+                    Label : PROPERTY
+                      AC
           Label : ELSE
             elseif
             Label : CONDITION
               (
               Label : CODE
                 ->
-                Label : PROPERTY
-                  AF
                 Label : OBJECT
                   $o
+                Label : PROPERTY
+                  AF
             Label : THEN
               Block with if/elseif
               Label : ELEMENT
@@ -163,12 +163,12 @@ Label : CODE
                 Label : METHOD
                   AG
                   Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      ->
-                      Label : PROPERTY
-                        AH
-                      Label : OBJECT
-                        $q
+                    Arguments
                     Label : ARGUMENT
                       'AI'
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $q
+                      Label : PROPERTY
+                        AH
