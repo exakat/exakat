@@ -1289,7 +1289,8 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
                                                      'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
                                                      'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
                                                      'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR', 'T_AS',
-                                                     'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_INSTANCEOF', 'T_QUESTION', 'T_COLON'])}.
+                                                     'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_INSTANCEOF', 'T_QUESTION', 
+                                                     'T_COLON', 'T_DOT'])}.
                                filter{it.atom != null || !(it.token in ['T_ELSEIF', 'T_OPEN_CURLY', 'T_AND_EQUAL',
                                                      'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL',
                                                      'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL',
@@ -1304,7 +1305,7 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
     g.addEdge(sequence, next.out('NEXT').next(), 'NEXT');
     next.bothE('NEXT').each{ g.removeEdge(it); }
 
-    next.setProperty('checkForNext', 'Next');
+//    next.setProperty('checkForNext', 'Next');
     
     if (next.both('NEXT').count() == 0) {
         next.inE('INDEXED').each{ g.removeEdge(it); }
@@ -1632,7 +1633,7 @@ x.out('CONCAT').inE('INDEXED').each{ g.removeEdge(it); }
 
 fullcode = x;
 
-";        
+";
             unset($actions['to_concatenation']);
         }
 
@@ -2729,14 +2730,14 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             }
             
             $finalTokens = array_merge(Token::$alternativeEnding,
-                           array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_DOUBLE_ARROW', 'T_COMMA', 
+                           array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS', 'T_CLOSE_BRACKET', 'T_DOUBLE_ARROW', 'T_COMMA',
                                  'T_CLOSE_TAG', 'T_COLON', 'T_QUESTION', 'T_QUESTION',
-                                 'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND', 'T_OR', 
+                                 'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND', 'T_OR',
                                  'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
                                  'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
-                                 'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 
+                                 'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL',
                                  'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER', 'T_CLOSE_CURLY',
-                                 'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_PLUS','T_MINUS', 'T_POW'));
+                                 'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_PLUS','T_MINUS', 'T_POW', 'T_ELSEIF'));
             $finalTokens = "'".join("', '", $finalTokens)."'";
 
             $queryConditions[] = "as('cfc').out('NEXT').filter{ it.token in [$finalTokens, 'T_DOT'] || it.atom in [$classes] }.loop(2){!(it.object.token in [$finalTokens])}.filter{it.out('NEXT').next().atom != null || !(it.out('NEXT').next().token in ['T_OPEN_CURLY'])}.back('cfc')";
