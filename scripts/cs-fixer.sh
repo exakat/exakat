@@ -1,0 +1,1 @@
+php ~/.composer/vendor/bin/php-cs-fixer fix ./library/Tokenizer --fixers=encoding,eof_ending,elseif,trailing_spaces,indentation
