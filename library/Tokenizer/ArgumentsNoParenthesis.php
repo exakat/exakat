@@ -11,11 +11,11 @@ class ArgumentsNoParenthesis extends Arguments {
         // @note print 's' : no parenthesis
         $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                     0 => array('atom'       => 'none',
-                                               'token'      => array('T_REQUIRE', 'T_REQUIRE_ONCE', 'T_INCLUDE_ONCE', 'T_INCLUDE', 
+                                               'token'      => array('T_REQUIRE', 'T_REQUIRE_ONCE', 'T_INCLUDE_ONCE', 'T_INCLUDE',
                                                                      'T_PRINT', 'T_EXIT', 'T_ECHO') ),
                                     1 => array('atom'       => 'yes',
                                                'notAtom'    => 'Arguments'),
-                                    2 => array('token'      => array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_ENDIF', 'T_ENDSWITCH', 'T_ENDFOR', 
+                                    2 => array('token'      => array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_ENDIF', 'T_ENDSWITCH', 'T_ENDFOR',
                                                                      'T_ENDFOREACH', 'T_COMMA', 'T_CLOSE_PARENTHESIS'))
         );
         
