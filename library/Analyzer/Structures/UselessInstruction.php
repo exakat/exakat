@@ -43,6 +43,21 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->isLess('args_count', 2)
              ->back('first');
         $this->prepareQuery();
+
+        // foreach(@$a as $b);
+        $this->atomIs('Foreach')
+             ->outIs('SOURCE')
+             ->atomIs('Noscream');
+        $this->prepareQuery();
+
+        // @$x = 3;
+        $this->atomIs('Assignation')
+             ->outIs('LEFT')
+             ->atomIs('Noscream')
+             ->outIs('AT')
+             ->atomIs('Variable')
+             ->inIs('AT');
+        $this->prepareQuery();
     }
 }
 
