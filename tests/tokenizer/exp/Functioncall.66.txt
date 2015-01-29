@@ -1,0 +1,19 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    foo
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        <<<HEREDOC
+
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+            bc
+
+
+      Label : ARGUMENT
+        'd'
