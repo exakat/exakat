@@ -18,9 +18,7 @@ Label : CODE
           Label : CODE
             $c
         Label : THEN
-          makeSequence T_INLINE_HTML
-          Label : ELEMENT
-            C
+          makeSequence T_COLON
           Label : ELEMENT
             E
           Label : ELEMENT
@@ -30,11 +28,15 @@ Label : CODE
               Label : CODE
                 $d
             Label : THEN
-              D
-      Label : ELEMENT
-        A
+              makeSequence T_COLON
+              Label : ELEMENT
+                D
+          Label : ELEMENT
+            C
       Label : ELEMENT
         B
+      Label : ELEMENT
+        A
       Label : ELEMENT
         print
         Label : ARGUMENTS

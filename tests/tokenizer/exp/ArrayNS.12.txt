@@ -33,11 +33,11 @@ Label : CODE
         Label : ARGUMENT
           substr
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $e
+            Arguments
             Label : ARGUMENT
               1
+            Label : ARGUMENT
+              $e
     Label : LEFT
       [
       Label : VARIABLE

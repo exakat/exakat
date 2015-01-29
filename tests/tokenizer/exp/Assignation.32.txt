@@ -3,20 +3,6 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    =
-    Label : LEFT
-      $h
-    Label : RIGHT
-      &
-      Label : LEFT
-        $f
-      Label : RIGHT
-        B
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $g
-  Label : ELEMENT
     &
     Label : LEFT
       i
@@ -38,6 +24,20 @@ Label : CODE
           void
           Label : ARGUMENT
             $e
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $h
+    Label : RIGHT
+      &
+      Label : LEFT
+        $f
+      Label : RIGHT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $g
   Label : ELEMENT
     &
     Label : LEFT

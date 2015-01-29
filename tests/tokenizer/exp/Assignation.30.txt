@@ -43,11 +43,11 @@ Label : CODE
               Label : CODE
                 H
                 Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    $f
+                  Arguments
                   Label : ARGUMENT
                     'I'
+                  Label : ARGUMENT
+                    $f
             Label : THEN
               {
               Label : ELEMENT
@@ -68,14 +68,14 @@ Label : CODE
             =
             Label : RIGHT
               ->
-              Label : PROPERTY
-                G
               Label : OBJECT
                 ->
-                Label : PROPERTY
-                  F
                 Label : OBJECT
                   $e
+                Label : PROPERTY
+                  F
+              Label : PROPERTY
+                G
             Label : LEFT
               $d
         Label : CASE

@@ -7,12 +7,12 @@ Label : CODE
     Label : RIGHT
       [
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          'a'
+          'c'
         Label : ARGUMENT
           'b'
         Label : ARGUMENT
-          'c'
+          'a'
     Label : LEFT
       $a

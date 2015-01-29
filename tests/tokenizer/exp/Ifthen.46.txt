@@ -23,10 +23,10 @@ Label : CODE
         [
         Label : VARIABLE
           ->
-          Label : PROPERTY
-            c
           Label : OBJECT
             $b
+          Label : PROPERTY
+            c
         Label : INDEX
           d
         Label : ARGUMENTS
@@ -42,4 +42,6 @@ Label : CODE
         Label : CODE
           $b
       Label : THEN
-        B
+        makeSequence T_COLON
+        Label : ELEMENT
+          B

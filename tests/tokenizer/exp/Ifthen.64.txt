@@ -25,13 +25,9 @@ Label : CODE
   Label : ELEMENT
     .=
     Label : RIGHT
-      .
+      Concatenation
       Label : CONCAT
-        'D'
-      Label : CONCAT
-        $d
-      Label : CONCAT
-        'F'
+        'I'
       Label : CONCAT
         H
         Label : ARGUMENTS
@@ -39,6 +35,10 @@ Label : CODE
           Label : ARGUMENT
             $e
       Label : CONCAT
-        'I'
+        'F'
+      Label : CONCAT
+        $d
+      Label : CONCAT
+        'D'
     Label : LEFT
       $c

@@ -26,17 +26,17 @@ Label : CODE
             Concatenation
             Label : CONCAT
               ->
-              Label : PROPERTY
-                e
               Label : OBJECT
                 $d
+              Label : PROPERTY
+                e
             Label : CONCAT
               :
             Label : CONCAT
               ->
-              Label : PROPERTY
-                g
               Label : OBJECT
                 $f
+              Label : PROPERTY
+                g
         Label : LEFT
           $c

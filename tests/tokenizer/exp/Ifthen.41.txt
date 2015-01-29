@@ -8,9 +8,7 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      makeSequence T_INLINE_HTML
-      Label : ELEMENT
-        A
+      makeSequence T_COLON
       Label : ELEMENT
         G
       Label : ELEMENT
@@ -28,15 +26,15 @@ Label : CODE
             Label : ARGUMENTS
               void
               Label : ARGUMENT
-                .
+                Concatenation
+                Label : CONCAT
+                  $f
                 Label : CONCAT
                   t
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
                       'e'
-                Label : CONCAT
-                  $f
           Label : ELEMENT
             F
           Label : ELEMENT
@@ -50,12 +48,14 @@ Label : CODE
                   Label : ARGUMENT
                     'd'
           Label : ELEMENT
-            B
-          Label : ELEMENT
             C
+          Label : ELEMENT
+            B
           Label : ELEMENT
             print
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 $c
+      Label : ELEMENT
+        A

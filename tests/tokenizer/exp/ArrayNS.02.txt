@@ -7,18 +7,18 @@ Label : CODE
     Label : RIGHT
       [
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'a'
-          Label : VALUE
-            'b'
+        Arguments
         Label : ARGUMENT
           =>
           Label : KEY
             'c'
           Label : VALUE
             's'
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'a'
+          Label : VALUE
+            'b'
     Label : LEFT
       $a

@@ -7,7 +7,7 @@ Label : CODE
     Label : RIGHT
       [
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
           >>
           Label : RIGHT
@@ -21,22 +21,22 @@ Label : CODE
           Label : LEFT
             '2'
         Label : ARGUMENT
-          +
-          Label : RIGHT
-            2
-          Label : LEFT
-            2
-        Label : ARGUMENT
           *
           Label : RIGHT
             4
           Label : LEFT
             4
         Label : ARGUMENT
-          1
+          +
+          Label : RIGHT
+            2
+          Label : LEFT
+            2
+        Label : ARGUMENT
+          1.2
         Label : ARGUMENT
           true
         Label : ARGUMENT
-          1.2
+          1
     Label : LEFT
       $a

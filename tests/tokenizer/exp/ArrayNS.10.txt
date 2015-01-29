@@ -11,11 +11,11 @@ Label : CODE
         Label : ARGUMENT
           substr
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $e
+            Arguments
             Label : ARGUMENT
               1
+            Label : ARGUMENT
+              $e
     Label : LEFT
       [
       Label : VARIABLE
@@ -40,14 +40,14 @@ Label : CODE
         [
         Label : VARIABLE
           ::
+          Label : CLASS
+            C
           Label : PROPERTY
             [
             Label : VARIABLE
               $d
             Label : INDEX
               $e
-          Label : CLASS
-            C
         Label : INDEX
           $f
       Label : INDEX

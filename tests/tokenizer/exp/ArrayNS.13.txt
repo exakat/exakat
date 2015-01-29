@@ -7,10 +7,10 @@ Label : CODE
     Label : VARIABLE
       $
       Label : NAME
-        .
-        Label : CONCAT
-          'a'
+        Concatenation
         Label : CONCAT
           $b
+        Label : CONCAT
+          'a'
     Label : INDEX
       $c

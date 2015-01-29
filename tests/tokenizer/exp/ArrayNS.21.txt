@@ -7,22 +7,22 @@ Label : CODE
     Label : RIGHT
       [
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          [
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              0
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              2
+        Arguments
         Label : ARGUMENT
           [
           Label : ARGUMENTS
             void
             Label : ARGUMENTS
               3
+        Label : ARGUMENT
+          [
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              0
     Label : LEFT
       $a

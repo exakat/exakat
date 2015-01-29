@@ -6,10 +6,12 @@ Label : CODE
     .=
     Label : RIGHT
       ::
+      Label : CLASS
+        C
       Label : METHOD
         b
         Label : ARGUMENTS
-          ,
+          Arguments
           Label : ARGUMENT
             [
             Label : ARGUMENTS
@@ -28,8 +30,6 @@ Label : CODE
               void
               Label : ARGUMENTS
                 void
-      Label : CLASS
-        C
     Label : LEFT
       [
       Label : VARIABLE

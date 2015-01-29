@@ -7,37 +7,19 @@ Label : CODE
     Label : RIGHT
       [
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
           [
           Label : ARGUMENTS
-            ,
+            void
+            Label : ARGUMENTS
+              9
+        Label : ARGUMENT
+          [
+          Label : ARGUMENTS
+            Arguments
             Label : ARGUMENT
-              0
-            Label : ARGUMENT
-              [
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  [
-                  Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      3
-                    Label : ARGUMENT
-                      4
-                    Label : ARGUMENT
-                      5
-                Label : ARGUMENT
-                  [
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENTS
-                      6
-                Label : ARGUMENT
-                  1
-                Label : ARGUMENT
-                  2
+              8
             Label : ARGUMENT
               [
               Label : ARGUMENTS
@@ -45,12 +27,30 @@ Label : CODE
                 Label : ARGUMENTS
                   7
             Label : ARGUMENT
-              8
-        Label : ARGUMENT
-          [
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENTS
-              9
+              [
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  [
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENTS
+                      6
+                Label : ARGUMENT
+                  [
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      5
+                    Label : ARGUMENT
+                      4
+                    Label : ARGUMENT
+                      3
+                Label : ARGUMENT
+                  2
+                Label : ARGUMENT
+                  1
+            Label : ARGUMENT
+              0
     Label : LEFT
       $a

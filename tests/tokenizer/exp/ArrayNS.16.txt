@@ -7,13 +7,13 @@ Label : CODE
     Label : RIGHT
       [
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
           =>
           Label : KEY
-            'B'
+            'E'
           Label : VALUE
-            null
+            F
         Label : ARGUMENT
           =>
           Label : KEY
@@ -23,8 +23,8 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            'E'
+            'B'
           Label : VALUE
-            F
+            null
     Label : LEFT
       $a

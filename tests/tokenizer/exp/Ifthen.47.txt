@@ -10,9 +10,9 @@ Label : CODE
     Label : THEN
       makeSequence T_OPEN_TAG
       Label : ELEMENT
-        A
-      Label : ELEMENT
         B
+      Label : ELEMENT
+        A
       Label : ELEMENT
         print
         Label : ARGUMENTS
@@ -30,4 +30,6 @@ Label : CODE
         Label : CODE
           $d
       Label : THEN
-        C
+        makeSequence T_COLON
+        Label : ELEMENT
+          C

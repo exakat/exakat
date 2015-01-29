@@ -7,31 +7,7 @@ Label : CODE
     Label : RIGHT
       [
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'B'
-          Label : VALUE
-            +
-            Label : RIGHT
-              2
-            Label : LEFT
-              1
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            'C'
-          Label : VALUE
-            >>
-            Label : RIGHT
-              %
-              Label : RIGHT
-                7
-              Label : LEFT
-                5
-            Label : LEFT
-              4
+        Arguments
         Label : ARGUMENT
           =>
           Label : KEY
@@ -50,5 +26,29 @@ Label : CODE
                     void
             Label : INDEX
               3
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'C'
+          Label : VALUE
+            >>
+            Label : RIGHT
+              %
+              Label : RIGHT
+                7
+              Label : LEFT
+                5
+            Label : LEFT
+              4
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            'B'
+          Label : VALUE
+            +
+            Label : RIGHT
+              2
+            Label : LEFT
+              1
     Label : LEFT
       $a

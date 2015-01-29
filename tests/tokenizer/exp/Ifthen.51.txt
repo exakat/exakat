@@ -8,10 +8,10 @@ Label : CODE
       (
       Label : CODE
         ->
-        Label : PROPERTY
-          b
         Label : OBJECT
           $a
+        Label : PROPERTY
+          b
     Label : THEN
       Block with if/elseif
       Label : ELEMENT

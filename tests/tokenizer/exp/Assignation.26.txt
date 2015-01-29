@@ -8,10 +8,10 @@ Label : CODE
       instanceof
       Label : CLASS
         ->
-        Label : PROPERTY
-          c
         Label : OBJECT
           $z
+        Label : PROPERTY
+          c
       Label : VARIABLE
         $y
     Label : LEFT

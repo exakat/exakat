@@ -7,14 +7,14 @@ Label : CODE
     Label : RIGHT
       [
       Label : ARGUMENTS
-        ,
+        Arguments
+        Label : ARGUMENT
+          void
         Label : ARGUMENT
           =>
           Label : KEY
             'B'
           Label : VALUE
             0
-        Label : ARGUMENT
-          void
     Label : LEFT
       $a

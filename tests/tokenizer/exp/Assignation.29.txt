@@ -4,15 +4,11 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      .
+      Concatenation
+      Label : CONCAT
+        'f'
       Label : CONCAT
         ::
-        Label : METHOD
-          d
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'e'
         Label : CLASS
           \
           Label : SUBNAME
@@ -21,7 +17,11 @@ Label : CODE
             B
           Label : SUBNAME
             A
-      Label : CONCAT
-        'f'
+        Label : METHOD
+          d
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'e'
     Label : LEFT
       $a

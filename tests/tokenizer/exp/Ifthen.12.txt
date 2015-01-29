@@ -37,13 +37,7 @@ Label : CODE
         Label : RIGHT
           f
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $g
-              Label : INDEX
-                'h'
+            Arguments
             Label : ARGUMENT
               +
               Label : RIGHT
@@ -51,15 +45,21 @@ Label : CODE
               Label : LEFT
                 i
                 Label : ARGUMENTS
-                  ,
+                  Arguments
+                  Label : ARGUMENT
+                    'l'
                   Label : ARGUMENT
                     [
                     Label : VARIABLE
                       $j
                     Label : INDEX
                       'k'
-                  Label : ARGUMENT
-                    'l'
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $g
+              Label : INDEX
+                'h'
         Label : LEFT
           [
           Label : VARIABLE

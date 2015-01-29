@@ -15,13 +15,7 @@ Label : CODE
           Label : LEFT
             b
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $c
-                Label : INDEX
-                  'd'
+              Arguments
               Label : ARGUMENT
                 "
                 Label : CONTAIN
@@ -36,6 +30,12 @@ Label : CODE
                       g
                   Label : CONCAT
                     h
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $c
+                Label : INDEX
+                  'd'
           Label : RIGHT
             !
             Label : NOT

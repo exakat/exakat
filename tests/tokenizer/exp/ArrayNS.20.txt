@@ -17,7 +17,7 @@ Label : CODE
         Label : RETURN
           new
           Label : NEW
-            \C\D\E
+            \
             Label : SUBNAME
               E
             Label : SUBNAME

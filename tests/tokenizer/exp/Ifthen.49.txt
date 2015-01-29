@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_CURLY
+  makeSequence T_CLOSE_CURLY
   Label : ELEMENT
     if
     Label : CONDITION
@@ -15,7 +15,11 @@ Label : CODE
         Label : RIGHT
           preg_replace
           Label : ARGUMENTS
-            ,
+            Arguments
+            Label : ARGUMENT
+              $f
+            Label : ARGUMENT
+              "z"
             Label : ARGUMENT
               "
               Label : CONTAIN
@@ -26,10 +30,6 @@ Label : CODE
                   $y
                 Label : CONCAT
                   /
-            Label : ARGUMENT
-              "z"
-            Label : ARGUMENT
-              $f
         Label : LEFT
           $a
   Label : ELEMENT

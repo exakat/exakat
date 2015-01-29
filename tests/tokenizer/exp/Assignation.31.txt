@@ -10,16 +10,16 @@ Label : CODE
         ===
         Label : RIGHT
           ::
-          Label : CONSTANT
-            D
           Label : CLASS
             C
+          Label : CONSTANT
+            D
         Label : LEFT
           ->
-          Label : PROPERTY
-            B
           Label : OBJECT
             $a
+          Label : PROPERTY
+            B
     Label : THEN
       {
       Label : ELEMENT
@@ -34,16 +34,16 @@ Label : CODE
           ===
           Label : RIGHT
             ::
-            Label : CONSTANT
-              G
             Label : CLASS
               F
+            Label : CONSTANT
+              G
           Label : LEFT
             ->
-            Label : PROPERTY
-              E
             Label : OBJECT
               $c
+            Label : PROPERTY
+              E
       Label : THEN
         {
         Label : ELEMENT
@@ -71,7 +71,15 @@ Label : CODE
               Label : LEFT
                 I
                 Label : ARGUMENTS
-                  ,
+                  Arguments
+                  Label : ARGUMENT
+                    K
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $h
+                  Label : ARGUMENT
+                    $g
                   Label : ARGUMENT
                     ->
                     Label : OBJECT
@@ -82,14 +90,6 @@ Label : CODE
                         void
                         Label : ARGUMENT
                           void
-                  Label : ARGUMENT
-                    $g
-                  Label : ARGUMENT
-                    K
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        $h
           Label : THEN
             {
             Label : ELEMENT
@@ -103,7 +103,13 @@ Label : CODE
             Label : CAST
               M
               Label : ARGUMENTS
-                ,
+                Arguments
+                Label : ARGUMENT
+                  O
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $k
                 Label : ARGUMENT
                   ->
                   Label : OBJECT
@@ -114,12 +120,6 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-                Label : ARGUMENT
-                  O
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $k
           Label : LEFT
             $i
       Label : ELSE
