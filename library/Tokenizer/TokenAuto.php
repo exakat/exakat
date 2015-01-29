@@ -1113,7 +1113,7 @@ g.addEdge(x, f, 'NEXT');
 it.setProperty('block', 'true');
 next = it.out('NEXT').next();
 
-if (next.atom == 'Sequence') {
+if (next.atom == 'Sequence' || next.atom == 'SequenceCaseDefault') {
     init = it;
     next.out('ELEMENT').each{
         it.inE('ELEMENT').each{
@@ -1595,6 +1595,7 @@ g.addEdge(x, b, 'NEXT');
 /* to Concatenation */
 
 x = g.addVertex(null, [code:'Concatenation', atom:'Concatenation', token:'T_DOT', virtual:true, line:it.line]);
+g.idx('atoms').put('atom', 'Concatenation', x)
 
 // initial
 rank = 0;
@@ -1642,6 +1643,7 @@ fullcode = x;
 /* to Argument */
 
 x = g.addVertex(null, [code:'Arguments', atom:'Arguments', token:'T_COMMA', virtual:true, line:it.line]);
+g.idx('atoms').put('atom', 'Arguments', x)
 
 // initial
 rank = 0;

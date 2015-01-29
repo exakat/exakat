@@ -10,8 +10,7 @@ class Block extends TokenAuto {
     // @doc {{ Block}}
         $this->conditions = array( -1 => array('token'   => array('T_OPEN_CURLY')),
                                     0 => array('token'   => self::$operators),
-                                    1 => array('atom'    => 'yes',
-                                               'notAtom' => 'SequenceCaseDefault'),
+                                    1 => array('atom'    => 'yes'),
                                     2 => array('token'   => 'T_CLOSE_CURLY',
                                                'atom'    => 'none'),
                                     3 => array('token'   => array('T_CLOSE_CURLY', 'T_SEMICOLON')),
@@ -32,8 +31,7 @@ class Block extends TokenAuto {
                                                                      'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_AT',
                                                                      'T_STRING', 'T_COMMA')),
                                     0 => array('token'      => self::$operators),
-                                    1 => array('atom'       => 'yes',
-                                               'notAtom'    => 'SequenceCaseDefault'),
+                                    1 => array('atom'       => 'yes'),
                                     2 => array('token'      => 'T_CLOSE_CURLY',
                                                'atom'       => 'none'),
         );
@@ -51,8 +49,7 @@ class Block extends TokenAuto {
                                                                      'T_NAMESPACE', 'T_TRAIT', 'T_USE')),
                                    -1 => array('token'      => array('T_STRING', 'T_COMMA')),
                                     0 => array('token'      => self::$operators),
-                                    1 => array('atom'       => 'yes',
-                                               'notAtom'    => 'SequenceCaseDefault'),
+                                    1 => array('atom'       => 'yes'),
                                     2 => array('token'      => 'T_CLOSE_CURLY',
                                                'atom'       => 'none'),
         );
