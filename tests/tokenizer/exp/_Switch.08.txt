@@ -7,39 +7,23 @@ Label : CODE
     Label : NAME
       $type
     Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        default
-        Label : CODE
-          makeSequence T_SEMICOLON
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              @
-              Label : AT
-                $e
-            Label : LEFT
-              $b
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
+      {
       Label : ELEMENT
         case
         Label : CASE
-          'A'
+          'C'
         Label : CODE
           makeSequence T_SEMICOLON
           Label : ELEMENT
             =
             Label : RIGHT
-              $c
+              $d
             Label : LEFT
               $b
           Label : ELEMENT
             break
             Label : LEVEL
-              void
+              2
       Label : ELEMENT
         case
         Label : CASE
@@ -59,16 +43,32 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CASE
-          'C'
+          'A'
         Label : CODE
           makeSequence T_SEMICOLON
           Label : ELEMENT
             =
             Label : RIGHT
-              $d
+              $c
             Label : LEFT
               $b
           Label : ELEMENT
             break
             Label : LEVEL
-              2
+              void
+      Label : ELEMENT
+        default
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              @
+              Label : AT
+                $e
+            Label : LEFT
+              $b
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void

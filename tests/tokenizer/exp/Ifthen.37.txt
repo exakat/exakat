@@ -7,7 +7,15 @@ Label : CODE
     Label : NAME
       $a
     Label : CASES
-      Sequence Case Default
+      {
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block with Sequence For Default
+          Label : ELEMENT
+            return
+            Label : RETURN
+              false
       Label : ELEMENT
         case
         Label : CODE
@@ -76,11 +84,3 @@ Label : CODE
                   void
         Label : CASE
           'b'
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default
-          Label : ELEMENT
-            return
-            Label : RETURN
-              false

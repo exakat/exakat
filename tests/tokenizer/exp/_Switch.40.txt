@@ -7,7 +7,7 @@ Label : CODE
     Label : NAME
       true
     Label : CASES
-      Sequence Case Default
+      {
       Label : ELEMENT
         default
         Label : CODE

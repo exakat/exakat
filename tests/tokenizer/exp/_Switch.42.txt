@@ -7,7 +7,87 @@ Label : CODE
     Label : NAME
       B
     Label : CASES
-      Sequence Case Default
+      {
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              K
+          Label : VARIABLE
+            $e
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'L'
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              I
+          Label : VARIABLE
+            $d
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'J'
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              G
+          Label : VARIABLE
+            $c
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'H'
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              E
+          Label : VARIABLE
+            $b
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'F'
+      Label : ELEMENT
+        case
+        Label : CASE
+          instanceof
+          Label : CLASS
+            \
+            Label : SUBNAME
+              C
+          Label : VARIABLE
+            $a
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'D'
       Label : ELEMENT
         default
         Label : CODE
@@ -34,83 +114,3 @@ Label : CODE
                             $f
                       Label : ARGUMENT
                         'O'
-      Label : ELEMENT
-        case
-        Label : CASE
-          instanceof
-          Label : CLASS
-            \
-            Label : SUBNAME
-              C
-          Label : VARIABLE
-            $a
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'D'
-      Label : ELEMENT
-        case
-        Label : CASE
-          instanceof
-          Label : CLASS
-            \
-            Label : SUBNAME
-              E
-          Label : VARIABLE
-            $b
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'F'
-      Label : ELEMENT
-        case
-        Label : CASE
-          instanceof
-          Label : CLASS
-            \
-            Label : SUBNAME
-              G
-          Label : VARIABLE
-            $c
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'H'
-      Label : ELEMENT
-        case
-        Label : CASE
-          instanceof
-          Label : CLASS
-            \
-            Label : SUBNAME
-              I
-          Label : VARIABLE
-            $d
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'J'
-      Label : ELEMENT
-        case
-        Label : CASE
-          instanceof
-          Label : CLASS
-            \
-            Label : SUBNAME
-              K
-          Label : VARIABLE
-            $e
-        Label : CODE
-          makeSequence T_SEMICOLON
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'L'

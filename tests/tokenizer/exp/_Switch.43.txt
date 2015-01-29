@@ -15,7 +15,13 @@ Label : CODE
           Label : ARGUMENT
             void
     Label : CASES
-      Sequence Case Default
+      {
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block with Sequence For Default
+          Label : ELEMENT
+            Void
       Label : ELEMENT
         case
         Label : CODE
@@ -64,9 +70,3 @@ Label : CODE
               void
         Label : CASE
           'C'
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default
-          Label : ELEMENT
-            Void

@@ -7,7 +7,15 @@ Label : CODE
     Label : NAME
       $b
     Label : CASES
-      Sequence Case Default
+      {
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block with Sequence For Default
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'e'
       Label : ELEMENT
         case
         Label : CODE
@@ -66,11 +74,3 @@ Label : CODE
               $indexed
         Label : CASE
           'a'
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'e'

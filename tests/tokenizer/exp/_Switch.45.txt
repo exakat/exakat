@@ -11,7 +11,87 @@ Label : CODE
       Label : INDEX
         'B'
     Label : CASES
-      Sequence Case Default
+      {
+      Label : ELEMENT
+        case
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                isset
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $e
+                    Label : PROPERTY
+                      F
+            Label : THEN
+              {
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  ->
+                  Label : OBJECT
+                    $g
+                  Label : PROPERTY
+                    G
+                Label : LEFT
+                  $f
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  ->
+                  Label : OBJECT
+                    $i
+                  Label : METHOD
+                    H
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        [
+                        Label : VARIABLE
+                          $j
+                        Label : INDEX
+                          'I'
+                Label : LEFT
+                  $h
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  [
+                  Label : VARIABLE
+                    $l
+                  Label : INDEX
+                    'J'
+                Label : LEFT
+                  $k
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ::
+              Label : CLASS
+                D
+              Label : CONSTANT
+                E
+            Label : LEFT
+              $b
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              $d
+            Label : LEFT
+              $c
+        Label : CASE
+          'C'
       Label : ELEMENT
         case
         Label : CODE
@@ -21,21 +101,11 @@ Label : CODE
             Label : RIGHT
               ::
               Label : CLASS
-                BF
+                L
               Label : CONSTANT
-                BG
+                M
             Label : LEFT
-              $bo
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              ::
-              Label : CLASS
-                BQ
-              Label : CONSTANT
-                BR
-            Label : LEFT
-              $br
+              $m
           Label : ELEMENT
             break
             Label : LEVEL
@@ -43,43 +113,235 @@ Label : CODE
           Label : ELEMENT
             =
             Label : RIGHT
-              ::
-              Label : METHOD
-                BI
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    BJ
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        Concatenation
-                        Label : CONCAT
-                          BL
-                          Label : ARGUMENTS
-                            Arguments
-                            Label : ARGUMENT
-                              BN
-                              Label : ARGUMENTS
-                                Arguments
-                                Label : ARGUMENT
-                                  'BP'
-                                Label : ARGUMENT
-                                  [
-                                  Label : VARIABLE
-                                    $bq
-                                  Label : INDEX
-                                    'BO'
-                            Label : ARGUMENT
-                              'BM'
-                        Label : CONCAT
-                          'BK'
-              Label : CLASS
-                BH
+              ?
+              Label : CONDITION
+                (
+                Label : CODE
+                  ==
+                  Label : RIGHT
+                    'N'
+                  Label : LEFT
+                    $o
+              Label : THEN
+                O
+              Label : ELSE
+                P
             Label : LEFT
-              $bp
+              $n
         Label : CASE
-          'BE'
+          'K'
+      Label : ELEMENT
+        case
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ::
+              Label : CLASS
+                V
+              Label : CONSTANT
+                W
+            Label : LEFT
+              $w
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ==
+                Label : RIGHT
+                  $t
+                Label : LEFT
+                  U
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $s
+            Label : THEN
+              {
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  (integer)
+                  Label : CAST
+                    $v
+                Label : LEFT
+                  $u
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ::
+              Label : CLASS
+                R
+              Label : CONSTANT
+                S
+            Label : LEFT
+              $p
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              (float)
+              Label : CAST
+                [
+                Label : VARIABLE
+                  $r
+                Label : INDEX
+                  'T'
+            Label : LEFT
+              $q
+        Label : CASE
+          'Q'
+      Label : ELEMENT
+        case
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ::
+              Label : CLASS
+                AC
+              Label : CONSTANT
+                AD
+            Label : LEFT
+              $ae
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ==
+                Label : RIGHT
+                  $ab
+                Label : LEFT
+                  AB
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $aa
+            Label : THEN
+              {
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  (integer)
+                  Label : CAST
+                    $ad
+                Label : LEFT
+                  $ac
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ::
+              Label : CLASS
+                Y
+              Label : CONSTANT
+                Z
+            Label : LEFT
+              $x
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              (float)
+              Label : CAST
+                [
+                Label : VARIABLE
+                  $z
+                Label : INDEX
+                  'AA'
+            Label : LEFT
+              $y
+        Label : CASE
+          'X'
+      Label : ELEMENT
+        case
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ==
+                Label : RIGHT
+                  $aj
+                Label : LEFT
+                  AI
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $ai
+            Label : THEN
+              {
+              Label : ELEMENT
+                if
+                Label : CONDITION
+                  (
+                  Label : CODE
+                    =
+                    Label : RIGHT
+                      (integer)
+                      Label : CAST
+                        $al
+                    Label : LEFT
+                      $ak
+                Label : THEN
+                  Block with if/elseif
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      (integer)
+                      Label : CAST
+                        $an
+                    Label : LEFT
+                      $am
+                Label : ELSE
+                  Block with else
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      (float)
+                      Label : CAST
+                        $ap
+                    Label : LEFT
+                      $ao
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ::
+              Label : CLASS
+                AF
+              Label : CONSTANT
+                AG
+            Label : LEFT
+              $af
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              (float)
+              Label : CAST
+                [
+                Label : VARIABLE
+                  $ah
+                Label : INDEX
+                  'AH'
+            Label : LEFT
+              $ag
+        Label : CASE
+          'AE'
       Label : ELEMENT
         case
         Label : CODE
@@ -239,227 +501,25 @@ Label : CODE
         Label : CODE
           makeSequence T_SEMICOLON
           Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                ==
-                Label : RIGHT
-                  $aj
-                Label : LEFT
-                  AI
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $ai
-            Label : THEN
-              {
-              Label : ELEMENT
-                if
-                Label : CONDITION
-                  (
-                  Label : CODE
-                    =
-                    Label : RIGHT
-                      (integer)
-                      Label : CAST
-                        $al
-                    Label : LEFT
-                      $ak
-                Label : THEN
-                  Block with if/elseif
-                  Label : ELEMENT
-                    =
-                    Label : RIGHT
-                      (integer)
-                      Label : CAST
-                        $an
-                    Label : LEFT
-                      $am
-                Label : ELSE
-                  Block with else
-                  Label : ELEMENT
-                    =
-                    Label : RIGHT
-                      (float)
-                      Label : CAST
-                        $ap
-                    Label : LEFT
-                      $ao
+            =
+            Label : RIGHT
+              ::
+              Label : CLASS
+                BF
+              Label : CONSTANT
+                BG
+            Label : LEFT
+              $bo
           Label : ELEMENT
             =
             Label : RIGHT
               ::
               Label : CLASS
-                AF
+                BQ
               Label : CONSTANT
-                AG
+                BR
             Label : LEFT
-              $af
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              (float)
-              Label : CAST
-                [
-                Label : VARIABLE
-                  $ah
-                Label : INDEX
-                  'AH'
-            Label : LEFT
-              $ag
-        Label : CASE
-          'AE'
-      Label : ELEMENT
-        case
-        Label : CODE
-          makeSequence T_SEMICOLON
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              ::
-              Label : CLASS
-                AC
-              Label : CONSTANT
-                AD
-            Label : LEFT
-              $ae
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                ==
-                Label : RIGHT
-                  $ab
-                Label : LEFT
-                  AB
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $aa
-            Label : THEN
-              {
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  (integer)
-                  Label : CAST
-                    $ad
-                Label : LEFT
-                  $ac
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              ::
-              Label : CLASS
-                Y
-              Label : CONSTANT
-                Z
-            Label : LEFT
-              $x
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              (float)
-              Label : CAST
-                [
-                Label : VARIABLE
-                  $z
-                Label : INDEX
-                  'AA'
-            Label : LEFT
-              $y
-        Label : CASE
-          'X'
-      Label : ELEMENT
-        case
-        Label : CODE
-          makeSequence T_SEMICOLON
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              ::
-              Label : CLASS
-                V
-              Label : CONSTANT
-                W
-            Label : LEFT
-              $w
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                ==
-                Label : RIGHT
-                  $t
-                Label : LEFT
-                  U
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $s
-            Label : THEN
-              {
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  (integer)
-                  Label : CAST
-                    $v
-                Label : LEFT
-                  $u
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              ::
-              Label : CLASS
-                R
-              Label : CONSTANT
-                S
-            Label : LEFT
-              $p
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              (float)
-              Label : CAST
-                [
-                Label : VARIABLE
-                  $r
-                Label : INDEX
-                  'T'
-            Label : LEFT
-              $q
-        Label : CASE
-          'Q'
-      Label : ELEMENT
-        case
-        Label : CODE
-          makeSequence T_SEMICOLON
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              ::
-              Label : CLASS
-                L
-              Label : CONSTANT
-                M
-            Label : LEFT
-              $m
+              $br
           Label : ELEMENT
             break
             Label : LEVEL
@@ -467,100 +527,40 @@ Label : CODE
           Label : ELEMENT
             =
             Label : RIGHT
-              ?
-              Label : CONDITION
-                (
-                Label : CODE
-                  ==
-                  Label : RIGHT
-                    'N'
-                  Label : LEFT
-                    $o
-              Label : THEN
-                O
-              Label : ELSE
-                P
-            Label : LEFT
-              $n
-        Label : CASE
-          'K'
-      Label : ELEMENT
-        case
-        Label : CODE
-          makeSequence T_SEMICOLON
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                isset
+              ::
+              Label : METHOD
+                BI
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $e
-                    Label : PROPERTY
-                      F
-            Label : THEN
-              {
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  ->
-                  Label : OBJECT
-                    $g
-                  Label : PROPERTY
-                    G
-                Label : LEFT
-                  $f
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  ->
-                  Label : OBJECT
-                    $i
-                  Label : METHOD
-                    H
+                    BJ
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
-                        [
-                        Label : VARIABLE
-                          $j
-                        Label : INDEX
-                          'I'
-                Label : LEFT
-                  $h
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  [
-                  Label : VARIABLE
-                    $l
-                  Label : INDEX
-                    'J'
-                Label : LEFT
-                  $k
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              ::
+                        Concatenation
+                        Label : CONCAT
+                          BL
+                          Label : ARGUMENTS
+                            Arguments
+                            Label : ARGUMENT
+                              BN
+                              Label : ARGUMENTS
+                                Arguments
+                                Label : ARGUMENT
+                                  'BP'
+                                Label : ARGUMENT
+                                  [
+                                  Label : VARIABLE
+                                    $bq
+                                  Label : INDEX
+                                    'BO'
+                            Label : ARGUMENT
+                              'BM'
+                        Label : CONCAT
+                          'BK'
               Label : CLASS
-                D
-              Label : CONSTANT
-                E
+                BH
             Label : LEFT
-              $b
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              $d
-            Label : LEFT
-              $c
+              $bp
         Label : CASE
-          'C'
+          'BE'

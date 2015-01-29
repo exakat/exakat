@@ -6,19 +6,7 @@ Label : CODE
     Label : NAME
       $c
     Label : CASES
-      Sequence Case Default
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default Without Semicolon
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $b
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $d
+      {
       Label : ELEMENT
         case
         Label : CASE
@@ -33,3 +21,15 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $a
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block with Sequence For Default Without Semicolon
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $d

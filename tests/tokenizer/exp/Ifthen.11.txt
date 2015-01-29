@@ -27,7 +27,7 @@ Label : CODE
         Label : NAME
           $c
         Label : CASES
-          Sequence Case Default
+          {
           Label : ELEMENT
             case
             Label : CODE

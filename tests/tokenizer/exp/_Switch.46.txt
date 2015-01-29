@@ -11,7 +11,7 @@ Label : CODE
       Label : PROPERTY
         algorithm
     Label : CASES
-      Sequence Case Default
+      {
       Label : ELEMENT
         case
         Label : CASE
@@ -19,23 +19,11 @@ Label : CODE
           Label : CLASS
             self
           Label : CONSTANT
-            ALGORITHM_NONE
+            ALGORITHM_DSA
         Label : CODE
-          Block with Sequence For Case Without Semicolon
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
+          Block with Sequence For Case
           Label : ELEMENT
             Void
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default
-          Label : ELEMENT
-            return
-            Label : RETURN
-              null
       Label : ELEMENT
         case
         Label : CASE
@@ -65,14 +53,26 @@ Label : CODE
             Label : LEVEL
               void
       Label : ELEMENT
+        default
+        Label : CODE
+          Block with Sequence For Default
+          Label : ELEMENT
+            return
+            Label : RETURN
+              null
+      Label : ELEMENT
         case
         Label : CASE
           ::
           Label : CLASS
             self
           Label : CONSTANT
-            ALGORITHM_DSA
+            ALGORITHM_NONE
         Label : CODE
-          Block with Sequence For Case
+          Block with Sequence For Case Without Semicolon
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
           Label : ELEMENT
             Void

@@ -11,7 +11,7 @@ Label : CODE
       Label : INDEX
         'B'
     Label : CASES
-      Sequence Case Default
+      {
       Label : ELEMENT
         case
         Label : CODE

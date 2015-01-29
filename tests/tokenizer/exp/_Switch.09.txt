@@ -7,15 +7,17 @@ Label : CODE
     Label : NAME
       $a
     Label : CASES
-      Sequence Case Default
+      {
       Label : ELEMENT
-        default
+        case
+        Label : CASE
+          'd'
         Label : CODE
           makeSequence T_SEMICOLON
           Label : ELEMENT
             return
             Label : RETURN
-              'f'
+              'e'
           Label : ELEMENT
             break
             Label : LEVEL
@@ -35,15 +37,13 @@ Label : CODE
             Label : LEVEL
               void
       Label : ELEMENT
-        case
-        Label : CASE
-          'd'
+        default
         Label : CODE
           makeSequence T_SEMICOLON
           Label : ELEMENT
             return
             Label : RETURN
-              'e'
+              'f'
           Label : ELEMENT
             break
             Label : LEVEL

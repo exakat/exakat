@@ -7,15 +7,49 @@ Label : CODE
     Label : NAME
       $a
     Label : CASES
-      Sequence Case Default
+      {
       Label : ELEMENT
         case
         Label : CASE
-          'b'
+          "b"
         Label : CODE
-          Block with Sequence For Case
+          makeSequence T_SEMICOLON
           Label : ELEMENT
-            Void
+            =
+            Label : RIGHT
+              'a'
+            Label : LEFT
+              $a
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              'n'
+            Label : LEFT
+              $m
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              Concatenation
+              Label : CONCAT
+                'l'
+              Label : CONCAT
+                i
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $j
+                    Label : METHOD
+                      k
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          void
+              Label : CONCAT
+                'h'
+            Label : LEFT
+              $b
       Label : ELEMENT
         default
         Label : CODE
@@ -59,42 +93,8 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CASE
-          "b"
+          'b'
         Label : CODE
-          makeSequence T_SEMICOLON
+          Block with Sequence For Case
           Label : ELEMENT
-            =
-            Label : RIGHT
-              'a'
-            Label : LEFT
-              $a
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              'n'
-            Label : LEFT
-              $m
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              Concatenation
-              Label : CONCAT
-                'l'
-              Label : CONCAT
-                i
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $j
-                    Label : METHOD
-                      k
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          void
-              Label : CONCAT
-                'h'
-            Label : LEFT
-              $b
+            Void

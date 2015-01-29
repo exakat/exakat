@@ -7,7 +7,25 @@ Label : CODE
     Label : NAME
       $a
     Label : CASES
-      Sequence Case Default
+      {
+      Label : ELEMENT
+        case
+        Label : CASE
+          'j'
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              1
+      Label : ELEMENT
+        case
+        Label : CASE
+          'i'
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
       Label : ELEMENT
         case
         Label : CASE
@@ -42,21 +60,3 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $d
-      Label : ELEMENT
-        case
-        Label : CASE
-          'i'
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-      Label : ELEMENT
-        case
-        Label : CASE
-          'j'
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              1

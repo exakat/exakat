@@ -11,11 +11,19 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CASE
-          3
+          ?
+          Label : CONDITION
+            <
+            Label : RIGHT
+              3
+            Label : LEFT
+              B
+          Label : THEN
+            -4
+          Label : ELSE
+            C
         Label : CODE
-          makeSequence T_SEMICOLON
-          Label : ELEMENT
-            $k
+          Block with Sequence For Case
           Label : ELEMENT
             break
             Label : LEVEL
@@ -23,34 +31,26 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CASE
-          2
+          D
         Label : CODE
-          makeSequence T_SEMICOLON
-          Label : ELEMENT
-            $j
+          Block with Sequence For Case Without Semicolon
           Label : ELEMENT
             break
             Label : LEVEL
               void
-      Label : ELEMENT
-        case
-        Label : CASE
-          1
-        Label : CODE
-          makeSequence T_SEMICOLON
           Label : ELEMENT
-            $i
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
+            :
+            Label : LABEL
+              E
       Label : ELEMENT
         default
         Label : CODE
-          makeSequence T_SEMICOLON
-          Label : ELEMENT
-            $l
+          Block with Sequence For Default Without Semicolon
           Label : ELEMENT
             break
             Label : LEVEL
               void
+          Label : ELEMENT
+            :
+            Label : LABEL
+              F

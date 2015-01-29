@@ -7,67 +7,11 @@ Label : CODE
     Label : NAME
       $x
     Label : CASES
-      Sequence Case Default
+      {
       Label : ELEMENT
         case
         Label : CASE
-          1
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-      Label : ELEMENT
-        case
-        Label : CASE
-          2
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-      Label : ELEMENT
-        case
-        Label : CASE
-          3
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-      Label : ELEMENT
-        case
-        Label : CASE
-          4
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-      Label : ELEMENT
-        case
-        Label : CASE
-          5
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-      Label : ELEMENT
-        case
-        Label : CASE
-          6
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-      Label : ELEMENT
-        case
-        Label : CASE
-          7
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-      Label : ELEMENT
-        case
-        Label : CASE
-          8
+          10
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
@@ -83,7 +27,63 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CASE
-          10
+          8
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          7
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          6
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          5
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          4
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          3
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          2
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+      Label : ELEMENT
+        case
+        Label : CASE
+          1
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT

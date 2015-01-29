@@ -7,53 +7,17 @@ Label : CODE
     Label : NAME
       $a
     Label : CASES
-      Sequence Case Default
+      {
       Label : ELEMENT
         case
         Label : CASE
-          'm'
+          'b'
         Label : CODE
-          makeSequence T_SEMICOLON
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              'o'
-            Label : LEFT
-              $n
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                ::
-                Label : CLASS
-                  P
-                Label : METHOD
-                  q
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      'r'
-            Label : THEN
-              Block with if/elseif
-              Label : ELEMENT
-                .=
-                Label : RIGHT
-                  "t"
-                Label : LEFT
-                  $s
+          Block with Sequence For Case
           Label : ELEMENT
             return
             Label : RETURN
-              $u
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'v'
+              'c'
       Label : ELEMENT
         case
         Label : CASE
@@ -93,12 +57,48 @@ Label : CODE
             Label : RETURN
               $l
       Label : ELEMENT
-        case
-        Label : CASE
-          'b'
+        default
         Label : CODE
-          Block with Sequence For Case
+          Block with Sequence For Default
           Label : ELEMENT
             return
             Label : RETURN
-              'c'
+              'v'
+      Label : ELEMENT
+        case
+        Label : CASE
+          'm'
+        Label : CODE
+          makeSequence T_SEMICOLON
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              'o'
+            Label : LEFT
+              $n
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                ::
+                Label : CLASS
+                  P
+                Label : METHOD
+                  q
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'r'
+            Label : THEN
+              Block with if/elseif
+              Label : ELEMENT
+                .=
+                Label : RIGHT
+                  "t"
+                Label : LEFT
+                  $s
+          Label : ELEMENT
+            return
+            Label : RETURN
+              $u

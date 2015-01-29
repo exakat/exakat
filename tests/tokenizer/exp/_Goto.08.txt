@@ -3,15 +3,11 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    :
-    Label : LABEL
-      cleanupCookie
-  Label : ELEMENT
     switch
     Label : NAME
       $x
     Label : CASES
-      Sequence Case Default
+      {
       Label : ELEMENT
         case
         Label : CASE
@@ -22,6 +18,10 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $y
+  Label : ELEMENT
+    :
+    Label : LABEL
+      cleanupCookie
   Label : ELEMENT
     GOTO
     Label : LABEL

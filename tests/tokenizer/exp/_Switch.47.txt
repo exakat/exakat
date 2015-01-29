@@ -3,46 +3,40 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      $c
-  Label : ELEMENT
     switch
     Label : NAME
-      $a
+      Concatenation
+      Label : CONCAT
+        ''
+      Label : CONCAT
+        $level
     Label : CASES
       {
       Label : ELEMENT
-        default
+        case
+        Label : CASE
+          'h'
         Label : CODE
-          Block with Sequence For Default
+          Block with Sequence For Case
           Label : ELEMENT
-            =
-            Label : RIGHT
-              3
-            Label : LEFT
-              $b
+            Void
       Label : ELEMENT
         case
+        Label : CASE
+          'H'
         Label : CODE
           makeSequence T_SEMICOLON
           Label : ELEMENT
             =
             Label : RIGHT
-              2
+              QR_ECLEVEL_H
             Label : LEFT
-              $b
+              ->
+              Label : OBJECT
+                $enc
+              Label : PROPERTY
+                level
           Label : ELEMENT
             break
             Label : LEVEL
               void
-        Label : CASE
-          1
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $a
