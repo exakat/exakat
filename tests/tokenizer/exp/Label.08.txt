@@ -13,9 +13,9 @@ Label : CODE
     Label : RIGHT
       c
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          $d
+          'J'
         Label : ARGUMENT
           (
           Label : CODE
@@ -35,4 +35,4 @@ Label : CODE
             Label : ELSE
               I
         Label : ARGUMENT
-          'J'
+          $d

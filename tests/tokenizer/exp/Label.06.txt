@@ -23,6 +23,10 @@ Label : CODE
     Label : LABEL
       G
   Label : ELEMENT
+    :
+    Label : LABEL
+      E
+  Label : ELEMENT
     =
     Label : RIGHT
       4
@@ -31,21 +35,17 @@ Label : CODE
   Label : ELEMENT
     :
     Label : LABEL
-      E
+      C
+  Label : ELEMENT
+    :
+    Label : LABEL
+      D
   Label : ELEMENT
     =
     Label : RIGHT
       3
     Label : LEFT
       $c
-  Label : ELEMENT
-    :
-    Label : LABEL
-      C
-  Label : ELEMENT
-    :
-    Label : LABEL
-      D
   Label : ELEMENT
     :
     Label : LABEL

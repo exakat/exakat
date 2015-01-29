@@ -17,24 +17,24 @@ Label : CODE
           Label : LEFT
             substr
             Label : ARGUMENTS
-              ,
+              Arguments
               Label : ARGUMENT
-                $b
+                1
               Label : ARGUMENT
                 0
               Label : ARGUMENT
-                1
+                $b
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             d
             Label : ARGUMENTS
-              ,
+              Arguments
+              Label : ARGUMENT
+                'g'
               Label : ARGUMENT
                 [
                 Label : VARIABLE
                   $e
                 Label : INDEX
                   'f'
-              Label : ARGUMENT
-                'g'
