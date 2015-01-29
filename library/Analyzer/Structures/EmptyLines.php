@@ -17,8 +17,7 @@ class EmptyLines extends Analyzer\Analyzer {
              ->is('rank', '0')
              ->inIs('ELEMENT')
              ->hasNoIn('BLOCK')
-             ->back('first')
-             ;
+             ->back('first');
         $this->prepareQuery();
     }
 }
