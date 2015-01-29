@@ -22,6 +22,8 @@ class SlowFunctions extends Analyzer\Common\FunctionUsage {
 'array_search',
 'array_unshift',
 'strstr',
+'array_map',
+'array_walk',
 );
         parent::analyze();
     }
