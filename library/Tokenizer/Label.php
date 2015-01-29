@@ -7,15 +7,40 @@ class Label extends TokenAuto {
     static public $atom = 'Label';
     
     public function _check() {
-        $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_QUESTION','T_CASE', 'T_DOT', 'T_NS_SEPARATOR',
+        $this->conditions = array(-2 => array('filterOut' => array_merge(array('T_QUESTION', 'T_CASE', 'T_DOT', 'T_NS_SEPARATOR',
                                                                                'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_NEW',
-                                                                               'T_INSTANCEOF'),
+                                                                               'T_INSTANCEOF', 'T_COLON'),
                                                                          Assignation::$operators, Addition::$operators,
                                                                          Multiplication::$operators, Comparison::$operators,
                                                                          Logical::$operators, Not::$operators,
                                                                          Cast::$operators)),
                                   -1 => array('atom'      => 'Identifier'),
                                    0 => array('token'     => Label::$operators));
+        
+        $this->actions = array('transform'    => array(-1 => 'LABEL'),
+                               'atom'         => 'Label',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
+        $this->checkAuto();
+
+        // special case for default : Identifier : 
+        $this->conditions = array(-3 => array('token' => 'T_DEFAULT'),
+                                  -2 => array('token' => 'T_COLON'),
+                                  -1 => array('atom'  => 'Identifier'),
+                                   0 => array('token' => Label::$operators));
+        
+        $this->actions = array('transform'    => array(-1 => 'LABEL'),
+                               'atom'         => 'Label',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
+        $this->checkAuto();
+
+        // special case for case <atom> : Identifier : 
+        $this->conditions = array(-4 => array('token' => 'T_CASE'),
+                                  -3 => array('atom'  => 'yes'),
+                                  -2 => array('token' => 'T_COLON'),
+                                  -1 => array('atom'  => 'Identifier'),
+                                   0 => array('token' => Label::$operators));
         
         $this->actions = array('transform'    => array(-1 => 'LABEL'),
                                'atom'         => 'Label',
@@ -31,6 +56,7 @@ class Label extends TokenAuto {
         return <<<GREMLIN
 
 fullcode.fullcode = fullcode.out('LABEL').next().fullcode + ' : ';
+
 GREMLIN;
     }
 }
