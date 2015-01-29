@@ -1,5 +1,5 @@
 <?php
 
-echo 'a' ? echo 'b' : true;
+echo 'a' ? print 'b' : true;
 
 ?>

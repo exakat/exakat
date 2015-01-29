@@ -1,0 +1,22 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ?
+        Label : CONDITION
+          void
+          Label : ARGUMENT
+            'a'
+        Label : THEN
+          print
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'b'
+        Label : ELSE
+          true
