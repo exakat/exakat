@@ -48,10 +48,7 @@ foreach($config->ignore_dirs as $ignore) {
         if (!file_exists($d)) { 
             continue; 
         }
-        if (substr($ignore, -1) === '/') {
-            // This is a folder
-            $d .= '*';
-        } // else Files are left as is
+        $d .= '*';
         $ignoreDirs[] = $d;
     } else {
         $ignoreDirs[] = '*'.$ignore.'*';
