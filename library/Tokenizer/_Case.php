@@ -29,8 +29,7 @@ class _Case extends TokenAuto {
                                   1 => array('atom'  => 'yes'),
                                   2 => array('token' => array('T_COLON', 'T_SEMICOLON')),
                                   3 => array('token' => array('T_COLON', 'T_SEMICOLON'),
-                                             'atom'  => 'none'),
-//                                  4 => array('token' => $finalToken),
+                                             'atom'  => 'none')
         );
         
         $this->actions = array('createVoidForCase' => true,
@@ -111,7 +110,7 @@ class _Case extends TokenAuto {
                                                                         Assignation::$operators, Property::$operators,
                                                                         _Array::$operators, Bitshift::$operators,
                                                                         Comparison::$operators, Logical::$operators,
-                                                                        Staticproperty::$operators)),
+                                                                        Staticproperty::$operators, Label::$operators)),
         );
         
         $this->actions = array('createSequenceForCaseWithoutSemicolon' => true,
