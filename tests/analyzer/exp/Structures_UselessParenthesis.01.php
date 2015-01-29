@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('($a == 2)',
+$expected     = array('( $a == 2)',
                       '( $b + 3)', 
                       '( $d + 2)', 
                       '( $c + 1)');
