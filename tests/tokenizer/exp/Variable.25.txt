@@ -27,9 +27,7 @@ Label : CODE
               Label : LEFT
                 C
                 Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    $b
+                  Arguments
                   Label : ARGUMENT
                     "
                     Label : CONTAIN
@@ -38,6 +36,8 @@ Label : CODE
                         $c
                       Label : CONCAT
                         D
+                  Label : ARGUMENT
+                    $b
             Label : LEFT
               ==
               Label : RIGHT

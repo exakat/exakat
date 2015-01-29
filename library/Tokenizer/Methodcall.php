@@ -11,7 +11,7 @@ class Methodcall extends TokenAuto {
                           'Staticmethodcall', 'Staticproperty', 'Parenthesis' );
 
         // $this->{$x}($args);
-        $this->conditions = array( -2 => array('filterOut' => array('T_DOUBLE_COLON')),
+        $this->conditions = array( -2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_DOLLAR')),
                                    -1 => array('atom'      => $operands),
                                     0 => array('token'     => Methodcall::$operators),
                                     1 => array('token'     => 'T_OPEN_CURLY'),
@@ -28,7 +28,7 @@ class Methodcall extends TokenAuto {
         $this->checkAuto();
 
         // $this->x($args);
-        $this->conditions = array( -2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')),
+        $this->conditions = array( -2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR')),
                                    -1 => array('atom'      => $operands),
                                     0 => array('token'     => Methodcall::$operators,
                                                'atom'      => 'none'),

@@ -7,10 +7,10 @@ Label : CODE
     Label : RIGHT
       1
     Label : LEFT
-      $
-      Label : NAME
-        [
-        Label : VARIABLE
+      [
+      Label : VARIABLE
+        $
+        Label : NAME
           $c
-        Label : INDEX
-          'd'
+      Label : INDEX
+        'd'
