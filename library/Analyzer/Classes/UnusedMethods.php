@@ -11,13 +11,14 @@ class UnusedMethods extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
+        
         // Methods definitions
         $this->atomIs('Function')
              ->analyzerIsNot('Analyzer\\Classes\\UsedMethods')
              ->outIs('NAME')
              ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
-             ->codeIsNot(array('__construct', '__destruct', '__get', '__set', '__call', '__callstatic', '__tostring',
-                               '__debugInfo'))
+             ->codeIsNot($magicMethods)
              ->back('first');
         $this->prepareQuery();
     }
