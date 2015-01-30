@@ -16,7 +16,7 @@ class AnalyzerResultCounts extends \Report\Content {
             if ($count == 0) { continue 1; }
 
             $total += $count;
-            $this->array[] = array( $o->getName(), $count, $o->getSeverity() );
+            $this->array[] = array( $o->getDescription()->getName(), $count, $o->getSeverity() );
         }
 
         $this->array[] = array('Total', $total, '');

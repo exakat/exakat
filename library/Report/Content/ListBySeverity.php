@@ -19,7 +19,7 @@ class ListBySeverity extends \Report\Content\GroupBy {
             $count = $analyzer->toCount();
             if ($count == 0) { continue; }
             
-            $array[] = array('name'     => $analyzer->getName(), 
+            $array[] = array('name'     => $analyzer->getDescription()->getName(), 
                              'count'    => $count, 
                              'severity' => $analyzer->getSeverity(),
                              'sort'     => $severities[$analyzer->getSeverity()]);

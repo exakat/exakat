@@ -225,6 +225,11 @@ class Appinfo extends \Report\Content {
                             'Trigger error'    => 'Php/TriggerErrorUsage',
                      ),
 
+                    'External systems' => array(
+                            'System'           => 'Structures/ShellUsage',
+                            'Files'            => 'Structures/FileUsage',
+                     ),
+
                     );
 
         foreach($extensions as $section => $hash) {

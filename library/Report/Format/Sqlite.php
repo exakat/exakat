@@ -37,7 +37,7 @@ class Sqlite extends \Report\Format {
             }
             if (count($t) != 3) {
                 print_r($t);
-                die();
+                die(__METHOD__);
             }
             $db->query("INSERT INTO reports (analyzer, value, count) VALUES ('".join("', '", $t)."')");
         }

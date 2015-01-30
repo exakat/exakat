@@ -9,9 +9,7 @@ class Analyzer {
     protected $client = null;
     protected $code = null;
 
-    protected $name = null;
     protected $description = null;
-    protected $appinfo = null;
     
     static public $datastore = null;
     
@@ -45,7 +43,7 @@ class Analyzer {
     const T_SLOW = '60';
     const T_LONG = '360';
     
-    protected $themes = array();
+//    protected $themes = array();
     static public $docs = null;
 
     public function __construct($client) {
@@ -62,6 +60,8 @@ class Analyzer {
         
         $this->apply = new AnalyzerApply();
         $this->apply->setAnalyzer($this->analyzer);
+        
+        $this->description = new \Description(get_class($this));
     } 
     
     public function setConfig($config) {
@@ -134,44 +134,8 @@ class Analyzer {
         }
     }
     
-    public function getDescription($lang = 'en') {
-        if ($this->description === null) {
-            $filename = './human/'.$lang.'/'.str_replace('\\', '/', str_replace("Analyzer\\", "", $this->analyzer)).'.ini';
-            
-            if (!file_exists($filename)) {
-                $human = array();
-            } else {
-                $human = parse_ini_file($filename);
-            }
-
-            if (isset($human['description'])) {
-                $this->description = $human['description'];
-            } else {
-                $this->description = '';
-            }
-
-            if (isset($human['name'])) {
-                $this->name = $human['name'];
-            } else {
-                $this->name = $this->analyzer;
-            }
-
-            if (isset($human['appinfo'])) {
-                $this->appinfo = $human['appinfo'];
-            } else {
-                $this->appinfo = $this->analyzer;
-            }
-        }
-        
+    public function getDescription() {
         return $this->description;
-    }
-
-    public function getName($lang = 'en') {
-        if ($this->name === null) {
-            $this->getDescription($lang);
-        }
-
-        return $this->name;
     }
 
     static public function getThemeAnalyzers($theme) {
@@ -179,16 +143,6 @@ class Analyzer {
             Analyzer::$docs = new Docs('./data/analyzers.sqlite');
         }
         return Analyzer::$docs->getThemeAnalyzers($theme);
-    }
-    
-    public function getThemes() {
-        if (empty($this->themes)) {
-            $r =  array();
-        } else {
-            $r =  $this->themes;
-        }
-        
-        return $r;
     }
 
     public function getAppinfoHeader($lang = 'en') {
@@ -1649,7 +1603,7 @@ GREMLIN;
                 $report[] = array('code' => $v[0][0], 
                                   'file' => $v[0][2], 
                                   'line' => $v[0][1], 
-                                  'desc' => $this->getName());
+                                  'desc' => $this->description->getName());
             }   
         } 
         

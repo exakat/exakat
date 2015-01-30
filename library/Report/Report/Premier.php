@@ -87,7 +87,7 @@ class Premier extends Report {
         $analyzes2 = array();
         foreach($analyzes as $a) {
             $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
-            $analyzes2[$analyzer->getName()] = $analyzer;
+            $analyzes2[$analyzer->getDescription()->getName()] = $analyzer;
         }
         uksort($analyzes2, function($a, $b) { 
             $a = strtolower($a); 
@@ -105,15 +105,15 @@ class Premier extends Report {
 
             foreach($analyzes2 as $analyzer) {
                 if ($analyzer->hasResults()) {
-                    $this->createLevel2($analyzer->getName());
+                    $this->createLevel2($analyzer->getDescription()->getName());
                     if (get_class($analyzer) == "Analyzer\\Php\\Incompilable") {
-                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
+                        $this->addContent('Text', $analyzer->getDescription()->getDescription(), 'textlead');
                         $this->addContent('TableForVersions', $analyzer);
                     } elseif (get_class($analyzer) == "Analyzer\\Php\\ShortOpenTagRequired") {
-                        $this->addContent('Text', $analyzer->getDescription(), 'textlead');
+                        $this->addContent('Text', $analyzer->getDescription()->getDescription(), 'textlead');
                         $this->addContent('SimpleTable', $analyzer, 'oneColumn');
                     } else {
-                        $description = $analyzer->getDescription();
+                        $description = $analyzer->getDescription()->getDescription();
                         if ($description == '') {
                             $description = 'No documentation yet';
                         }
