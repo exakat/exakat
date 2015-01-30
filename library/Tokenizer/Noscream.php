@@ -10,7 +10,7 @@ class Noscream extends TokenAuto {
         $this->conditions = array(0 => array('token' => Noscream::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'yes',
-                                             'notAtom' => 'Assignation'),
+                                             'notAtom' => array('Assignation', 'Label')),
                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR',
                                                                   'T_DOUBLE_COLON', 'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS',
                                                                   'T_OPEN_CURLY'))
