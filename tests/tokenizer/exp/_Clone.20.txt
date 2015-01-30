@@ -5,9 +5,7 @@ Label : CODE
   Label : ELEMENT
     clone
     Label : CLONE
-      .
-      Label : CONCAT
-        "a"
+      Concatenation
       Label : CONCAT
         "
         Label : CONTAIN
@@ -18,3 +16,5 @@ Label : CODE
              c 
           Label : CONCAT
             $d
+      Label : CONCAT
+        "a"

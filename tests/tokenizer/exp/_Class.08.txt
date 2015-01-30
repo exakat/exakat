@@ -7,11 +7,11 @@ Label : CODE
     Label : NAME
       x
     Label : IMPLEMENTS
+      c
+    Label : IMPLEMENTS
       b
     Label : IMPLEMENTS
       a
-    Label : IMPLEMENTS
-      c
     Label : BLOCK
       {
       Label : ELEMENT

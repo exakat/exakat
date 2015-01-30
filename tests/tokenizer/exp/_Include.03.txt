@@ -7,4 +7,6 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        "literal"
+        (
+        Label : CODE
+          "literal"

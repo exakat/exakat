@@ -27,11 +27,7 @@ Label : CODE
             Label : ARGUMENTS
               void
               Label : ARGUMENT
-                .
-                Label : CONCAT
-                  "a"
-                Label : CONCAT
-                  b
+                Concatenation
                 Label : CONCAT
                   "
                   Label : CONTAIN
@@ -42,6 +38,10 @@ Label : CODE
                       $d
                     Label : CONCAT
                       '
+                Label : CONCAT
+                  b
+                Label : CONCAT
+                  "a"
       Label : ELEMENT
         if
         Label : CONDITION

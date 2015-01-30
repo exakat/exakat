@@ -7,8 +7,8 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        .
-        Label : CONCAT
-          "literal"
+        Concatenation
         Label : CONCAT
           "autre"
+        Label : CONCAT
+          "literal"

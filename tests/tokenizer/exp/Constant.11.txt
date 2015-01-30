@@ -9,10 +9,10 @@ Label : CODE
       Label : CONDITION
         $x
       Label : THEN
-        .
-        Label : CONCAT
-          'a'
+        Concatenation
         Label : CONCAT
           B
+        Label : CONCAT
+          'a'
       Label : ELSE
         'c'

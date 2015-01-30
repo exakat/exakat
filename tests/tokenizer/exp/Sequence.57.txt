@@ -19,15 +19,15 @@ Label : CODE
         Label : NEW
           $a
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $b
+            Arguments
             Label : ARGUMENT
               (array)
               Label : CAST
                 (
                 Label : CODE
                   $c
+            Label : ARGUMENT
+              $b
           Label : NAME
             $a
       Label : ELEMENT

@@ -6,31 +6,11 @@ Label : ELEMENT
   Label : CODE
     makeSequence T_OPEN_TAG
     Label : ELEMENT
-      d
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        3
-      Label : LEFT
-        $x
-    Label : ELEMENT
-      c
-    Label : ELEMENT
       =
       Label : RIGHT
         6
       Label : LEFT
         $x
-    Label : ELEMENT
-      f
-    Label : ELEMENT
-      =
-      Label : RIGHT
-        5
-      Label : LEFT
-        $x
-    Label : ELEMENT
-      e
     Label : ELEMENT
       =
       Label : RIGHT
@@ -40,7 +20,27 @@ Label : ELEMENT
     Label : ELEMENT
       =
       Label : RIGHT
+        3
+      Label : LEFT
+        $x
+    Label : ELEMENT
+      c
+    Label : ELEMENT
+      d
+    Label : ELEMENT
+      e
+    Label : ELEMENT
+      =
+      Label : RIGHT
         7
+      Label : LEFT
+        $x
+    Label : ELEMENT
+      f
+    Label : ELEMENT
+      =
+      Label : RIGHT
+        5
       Label : LEFT
         $x
     Label : ELEMENT

@@ -1,21 +1,13 @@
 <?php
 
 Label : CODE
-  ;
+  makeSequence T_OPEN_TAG
   Label : ELEMENT
     class
     Label : NAME
       x
     Label : BLOCK
       {
-      Label : ELEMENT
-        ppp
-        Label : DEFINE
-          $a
-        Label : VALUE
-          void
-        Label : PROTECTED
-          protected
       Label : ELEMENT
         ppp
         Label : DEFINE
@@ -35,6 +27,14 @@ Label : CODE
       Label : ELEMENT
         ppp
         Label : DEFINE
+          $a
+        Label : VALUE
+          void
+        Label : PROTECTED
+          protected
+      Label : ELEMENT
+        ppp
+        Label : DEFINE
           $z
         Label : VALUE
           3
@@ -42,13 +42,9 @@ Label : CODE
           protected
   Label : ELEMENT
     global
-    Label : NAME
+    Label : GLOBAL
       $c
-  Label : ELEMENT
-    global
-    Label : NAME
+    Label : GLOBAL
       $b
-  Label : ELEMENT
-    global
-    Label : NAME
+    Label : GLOBAL
       $a

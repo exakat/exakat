@@ -5,8 +5,8 @@ Label : CODE
   Label : ELEMENT
     define
     Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        'x'
+      Arguments
       Label : ARGUMENT
         1
+      Label : ARGUMENT
+        'x'

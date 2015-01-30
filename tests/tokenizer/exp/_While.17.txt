@@ -19,11 +19,11 @@ Label : CODE
           Label : RIGHT
             fread
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                $b
+              Arguments
               Label : ARGUMENT
                 1
+              Label : ARGUMENT
+                $b
           Label : LEFT
             $a
     Label : BLOCK

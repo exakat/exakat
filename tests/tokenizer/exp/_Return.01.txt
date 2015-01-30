@@ -15,13 +15,13 @@ Label : CODE
     Label : RETURN
       f
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          $x
+          $z
         Label : ARGUMENT
           $y
         Label : ARGUMENT
-          $z
+          $x
   Label : ELEMENT
     return
     Label : RETURN

@@ -1,10 +1,14 @@
 <?php 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  makeSequence T_OPEN_PARENTHESIS
   Label : ELEMENT
-    B
-  Label : ELEMENT
-    A
+    include
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        (
+        Label : CODE
+          'a.php'
   Label : ELEMENT
     b
     Label : ARGUMENTS
@@ -12,14 +16,14 @@ Label : CODE
       Label : ARGUMENT
         'c'
   Label : ELEMENT
-    include
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        'b.php'
+    B
   Label : ELEMENT
     include
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        'a.php'
+        (
+        Label : CODE
+          'b.php'
+  Label : ELEMENT
+    A

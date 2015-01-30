@@ -14,10 +14,7 @@ Label : CODE
             Label : ARGUMENT
               $e
     Label : THEN
-      makeSequence T_INLINE_HTML
-      Label : ELEMENT
-        J
-    
+      makeSequence T_COLON
       Label : ELEMENT
         K
 
@@ -26,15 +23,18 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            .
+            Concatenation
+            Label : CONCAT
+              $h
             Label : CONCAT
               f
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   'g'
-            Label : CONCAT
-              $h
+      Label : ELEMENT
+        J
+    
   Label : ELEMENT
     H
 
@@ -53,11 +53,11 @@ Label : CODE
     Label : THEN
       makeSequence T_OPEN_TAG
       Label : ELEMENT
-        D
-    
-      Label : ELEMENT
         E
 
+      Label : ELEMENT
+        D
+    
       Label : ELEMENT
         print
         Label : ARGUMENTS
@@ -79,11 +79,11 @@ Label : CODE
       Label : THEN
         makeSequence T_OPEN_TAG
         Label : ELEMENT
-          F
-    
-        Label : ELEMENT
           G
 
+        Label : ELEMENT
+          F
+    
         Label : ELEMENT
           print
           Label : ARGUMENTS

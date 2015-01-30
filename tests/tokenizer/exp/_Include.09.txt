@@ -7,10 +7,12 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        fct_lien_page_custom
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            "fonctions/sysout_agent.php"
-          Label : ARGUMENT
-            "abs"
+        (
+        Label : CODE
+          fct_lien_page_custom
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              "abs"
+            Label : ARGUMENT
+              "fonctions/sysout_agent.php"

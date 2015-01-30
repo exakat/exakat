@@ -13,11 +13,11 @@ Label : CODE
         Label : RIGHT
           h
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $g
+            Arguments
             Label : ARGUMENT
               8
+            Label : ARGUMENT
+              $g
         Label : LEFT
           $f
       Label : ELEMENT
@@ -39,13 +39,13 @@ Label : CODE
               Label : LEFT
                 substr
                 Label : ARGUMENTS
-                  ,
+                  Arguments
                   Label : ARGUMENT
-                    $c
+                    7
                   Label : ARGUMENT
                     6
                   Label : ARGUMENT
-                    7
+                    $c
         Label : THEN
           {
           Label : ELEMENT
@@ -65,13 +65,13 @@ Label : CODE
           Label : LEFT
             substr
             Label : ARGUMENTS
-              ,
+              Arguments
               Label : ARGUMENT
-                $b
+                4
               Label : ARGUMENT
                 3
               Label : ARGUMENT
-                4
+                $b
         Label : LEFT
           !=
           Label : RIGHT
@@ -79,13 +79,13 @@ Label : CODE
           Label : LEFT
             substr
             Label : ARGUMENTS
-              ,
+              Arguments
               Label : ARGUMENT
-                $a
+                1
               Label : ARGUMENT
                 0
               Label : ARGUMENT
-                1
+                $a
     Label : THEN
       {
       Label : ELEMENT

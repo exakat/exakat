@@ -7,6 +7,8 @@ Label : CODE
     Label : NAME
       x
     Label : IMPLEMENTS
+      w
+    Label : IMPLEMENTS
       v
     Label : IMPLEMENTS
       u
@@ -14,8 +16,6 @@ Label : CODE
       t
     Label : IMPLEMENTS
       s
-    Label : IMPLEMENTS
-      w
     Label : BLOCK
       {
       Label : ELEMENT
