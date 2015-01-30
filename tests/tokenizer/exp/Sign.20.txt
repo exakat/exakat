@@ -5,19 +5,17 @@ Label : CODE
   Label : ELEMENT
     .=
     Label : RIGHT
-      .
+      Concatenation
       Label : CONCAT
-        $b
-      Label : CONCAT
-        [
-        Label : VARIABLE
-          $c
-        Label : INDEX
-          -
-          Label : RIGHT
-            1
-          Label : LEFT
-            $d
+        "
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+             = 
+          Label : CONCAT
+            $f
+          Label : CONCAT
+            ;\r\n
       Label : CONCAT
         "
         Label : CONTAIN
@@ -29,14 +27,16 @@ Label : CODE
           Label : CONCAT
             ']
       Label : CONCAT
-        "
-        Label : CONTAIN
-          Concatenation
-          Label : CONCAT
-             = 
-          Label : CONCAT
-            $f
-          Label : CONCAT
-            ;\r\n
+        [
+        Label : VARIABLE
+          $c
+        Label : INDEX
+          -
+          Label : RIGHT
+            1
+          Label : LEFT
+            $d
+      Label : CONCAT
+        $b
     Label : LEFT
       $a

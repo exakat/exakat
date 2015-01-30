@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class String extends Tokenizer {
-    /* 14 methods */
+    /* 15 methods */
     public function testString01()  { $this->generic_test('String.01'); }
     public function testString02()  { $this->generic_test('String.02'); }
     public function testString03()  { $this->generic_test('String.03'); }
@@ -22,5 +22,6 @@ class String extends Tokenizer {
     public function testString12()  { $this->generic_test('String.12'); }
     public function testString13()  { $this->generic_test('String.13'); }
     public function testString14()  { $this->generic_test('String.14'); }
+    public function testString15()  { $this->generic_test('String.15'); }
 }
 ?>

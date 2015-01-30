@@ -15,14 +15,14 @@ Label : CODE
         $e
   Label : ELEMENT
     -
-    Label : SIGN
+    Label : RIGHT
       =
       Label : RIGHT
         1
       Label : LEFT
         $c
-  Label : ELEMENT
-    $b
+    Label : LEFT
+      $b
   Label : ELEMENT
     =
     Label : RIGHT

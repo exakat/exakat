@@ -9,15 +9,15 @@ Label : CODE
     Label : METHOD
       b
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
           -
           Label : SIGN
             ->
             Label : OBJECT
-              $c
+              $g
             Label : METHOD
-              d
+              h
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
@@ -39,9 +39,9 @@ Label : CODE
           Label : SIGN
             ->
             Label : OBJECT
-              $g
+              $c
             Label : METHOD
-              h
+              d
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT

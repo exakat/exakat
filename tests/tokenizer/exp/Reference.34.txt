@@ -15,7 +15,9 @@ Label : CODE
             Label : ARGUMENTS
               void
               Label : ARGUMENT
-                .
+                Concatenation
+                Label : CONCAT
+                  'F'
                 Label : CONCAT
                   ::
                   Label : CLASS
@@ -26,8 +28,6 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-                Label : CONCAT
-                  'F'
           Label : OBJECT
             $c
         Label : LEFT

@@ -27,38 +27,36 @@ Label : CODE
     Label : THEN
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            (
-            Label : CODE
+        =
+        Label : RIGHT
+          (
+          Label : CODE
+            -
+            Label : RIGHT
+              (
+              Label : CODE
+                *
+                Label : RIGHT
+                  $m
+                Label : LEFT
+                  $l
+            Label : LEFT
               -
               Label : RIGHT
                 (
                 Label : CODE
                   *
                   Label : RIGHT
-                    $m
+                    $k
                   Label : LEFT
-                    $l
+                    $j
               Label : LEFT
-                -
-                Label : RIGHT
-                  (
-                  Label : CODE
-                    *
-                    Label : RIGHT
-                      $k
-                    Label : LEFT
-                      $j
-                Label : LEFT
-                  (
-                  Label : CODE
-                    *
-                    Label : RIGHT
-                      $i
-                    Label : LEFT
-                      $h
-          Label : LEFT
-            $g
+                (
+                Label : CODE
+                  *
+                  Label : RIGHT
+                    $i
+                  Label : LEFT
+                    $h
+        Label : LEFT
+          $g

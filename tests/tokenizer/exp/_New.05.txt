@@ -7,8 +7,8 @@ Label : CODE
     Label : NEW
       stdclass
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          2
+        Arguments
         Label : ARGUMENT
           3
+        Label : ARGUMENT
+          2

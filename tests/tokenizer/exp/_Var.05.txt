@@ -27,7 +27,7 @@ Label : CODE
       Label : ELEMENT
         var
         Label : DEFINE
-          $d
+          $e
         Label : VALUE
           Void
         Label : VAR
@@ -35,7 +35,7 @@ Label : CODE
       Label : ELEMENT
         var
         Label : DEFINE
-          $e
+          $d
         Label : VALUE
           Void
         Label : VAR

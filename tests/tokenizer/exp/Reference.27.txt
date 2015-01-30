@@ -19,42 +19,46 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        &
-        Label : RIGHT
-          $d
-        Label : LEFT
-          (
-          Label : CODE
-            |
-            Label : RIGHT
-              (
-              Label : CODE
-                >>
-                Label : RIGHT
-                  1
-                Label : LEFT
-                  $c
-            Label : LEFT
-              $a
+        (
+        Label : CODE
+          &
+          Label : RIGHT
+            $d
+          Label : LEFT
+            (
+            Label : CODE
+              |
+              Label : RIGHT
+                (
+                Label : CODE
+                  >>
+                  Label : RIGHT
+                    1
+                  Label : LEFT
+                    $c
+              Label : LEFT
+                $a
   Label : ELEMENT
     print
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        |
-        Label : RIGHT
-          (
-          Label : CODE
-            &
-            Label : RIGHT
-              $d
-            Label : LEFT
-              (
-              Label : CODE
-                >>
-                Label : RIGHT
-                  1
-                Label : LEFT
-                  $c
-        Label : LEFT
-          $a
+        (
+        Label : CODE
+          |
+          Label : RIGHT
+            (
+            Label : CODE
+              &
+              Label : RIGHT
+                $d
+              Label : LEFT
+                (
+                Label : CODE
+                  >>
+                  Label : RIGHT
+                    1
+                  Label : LEFT
+                    $c
+          Label : LEFT
+            $a

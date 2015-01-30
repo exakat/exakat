@@ -11,35 +11,23 @@ Label : CODE
       Label : METHOD
         c
         Label : ARGUMENTS
-          ,
+          Arguments
           Label : ARGUMENT
             (
             Label : CODE
               /
               Label : RIGHT
-                $f
+                $o
               Label : LEFT
                 (
                 Label : CODE
                   -
                   Label : RIGHT
-                    $e
+                    $n
                   Label : LEFT
-                    $d
-          Label : ARGUMENT
-            (
-            Label : CODE
-              /
-              Label : RIGHT
-                $i
-              Label : LEFT
-                (
-                Label : CODE
-                  -
-                  Label : RIGHT
-                    $h
-                  Label : LEFT
-                    $g
+                    -
+                    Label : SIGN
+                      $m
           Label : ARGUMENT
             (
             Label : CODE
@@ -61,16 +49,28 @@ Label : CODE
             Label : CODE
               /
               Label : RIGHT
-                $o
+                $i
               Label : LEFT
                 (
                 Label : CODE
                   -
                   Label : RIGHT
-                    $n
+                    $h
                   Label : LEFT
-                    -
-                    Label : SIGN
-                      $m
+                    $g
+          Label : ARGUMENT
+            (
+            Label : CODE
+              /
+              Label : RIGHT
+                $f
+              Label : LEFT
+                (
+                Label : CODE
+                  -
+                  Label : RIGHT
+                    $e
+                  Label : LEFT
+                    $d
     Label : LEFT
       $a

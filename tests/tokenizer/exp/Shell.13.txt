@@ -5,16 +5,18 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      $b
-      Label : NAME
-        $b
+      str_replace
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          $e
+          `
+          Label : CONTAIN
+            Concatenation
+            Label : CONCAT
+              /bin/cat d
         Label : ARGUMENT
-          $d
+          "c"
         Label : ARGUMENT
-          $c
+          "b"
     Label : LEFT
       $a

@@ -7,24 +7,24 @@ Label : CODE
     Label : RIGHT
       sprintf
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          str_replace
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              C
-            Label : ARGUMENT
-              'd'
-            Label : ARGUMENT
-              __FILE__
+        Arguments
         Label : ARGUMENT
           *
           Label : RIGHT
             1
           Label : LEFT
             __LINE__
+        Label : ARGUMENT
+          str_replace
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              __FILE__
+            Label : ARGUMENT
+              'd'
+            Label : ARGUMENT
+              C
+        Label : ARGUMENT
+          $b
     Label : LEFT
       $a

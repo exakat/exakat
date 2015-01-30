@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $f
+  Label : ELEMENT
+    `
+    Label : CONTAIN
+      Concatenation
+      Label : CONCAT
+        cat /tmp/d.init > 
+      Label : CONCAT
+        $e
+  Label : ELEMENT
+    @
+    Label : AT
+      a
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $c
+        Label : ARGUMENT
+          '/tmp/b.init'

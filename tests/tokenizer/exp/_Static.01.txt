@@ -27,14 +27,6 @@ Label : CODE
       Label : ELEMENT
         static
         Label : DEFINE
-          $e
-        Label : VALUE
-          '23'
-        Label : STATIC
-          static
-      Label : ELEMENT
-        static
-        Label : DEFINE
           $d
         Label : VALUE
           array
@@ -42,5 +34,13 @@ Label : CODE
             void
             Label : ARGUMENT
               void
+        Label : STATIC
+          static
+      Label : ELEMENT
+        static
+        Label : DEFINE
+          $e
+        Label : VALUE
+          '23'
         Label : STATIC
           static

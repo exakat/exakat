@@ -33,13 +33,7 @@ Label : CODE
       Label : RIGHT
         preg_match
         Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $this
-            Label : PROPERTY
-              d
+          Arguments
           Label : ARGUMENT
             ->
             Label : OBJECT
@@ -50,3 +44,9 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              d

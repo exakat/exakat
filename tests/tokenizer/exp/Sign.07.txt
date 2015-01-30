@@ -7,12 +7,12 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        .
-        Label : CONCAT
-          -
-          Label : SIGN
-            'a'
+        Concatenation
         Label : CONCAT
           -
           Label : SIGN
             'b'
+        Label : CONCAT
+          -
+          Label : SIGN
+            'a'

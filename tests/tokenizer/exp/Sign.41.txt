@@ -5,9 +5,9 @@ Label : CODE
   Label : ELEMENT
     a
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
-        $b
+        D
       Label : ARGUMENT
         -
         Label : RIGHT
@@ -15,4 +15,4 @@ Label : CODE
         Label : LEFT
           -1
       Label : ARGUMENT
-        D
+        $b

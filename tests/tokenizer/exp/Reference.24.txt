@@ -7,19 +7,19 @@ Label : CODE
     Label : NAME
       a
     Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          b
-        Label : VARIABLE
-          $c
+      Arguments
       Label : ARGUMENT
         Typehint
         Label : CLASS
           array
         Label : VARIABLE
           $d
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          b
+        Label : VARIABLE
+          $c
     Label : BLOCK
       {
       Label : ELEMENT
