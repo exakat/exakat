@@ -60,7 +60,7 @@ class Ace extends \Report\Format {
         }
         mkdir($dir, 0755);
         mkdir($dir.'/pages/', 0755);
-        print shell_exec('cp -r media/ace-admin/assets '.$dir.'/pages/');
+        shell_exec('cp -r media/ace-admin/assets '.$dir.'/pages/');
         
         $total = 0;
         foreach($this->files as $name => $html) {

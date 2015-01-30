@@ -117,6 +117,10 @@ class Premier extends Report {
                         if ($description == '') {
                             $description = 'No documentation yet';
                         }
+                        if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
+                            $this->addContent('Text', 'clearPHP : '.$clearPHP.'<br />', 'textlead');
+                            print $analyzer->getDescription()->getName()."\n";
+                        }
                         $this->addContent('Text', $description, 'textlead');
                         $this->addContent('Horizontal', $analyzer);
                     }

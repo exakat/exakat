@@ -11,7 +11,7 @@ TEXT;
         foreach($data as $name => $definition) {
 //            $t = wordwrap(str_repeat(' ', strlen($name)).$definition, 75);
 //            $t = str_replace("\n", "\n     ", $t);
-            $text .= "\n**$name** : ".trim($definition)."\n";
+            $text .= "\n**$name** : ".trim($definition->getDescription())."\n";
         }
 
         $text .= <<<TEXT

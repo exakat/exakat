@@ -12,7 +12,7 @@ HTML;
         foreach($data as $name => $definition) {
             $text .= "
 														<dt>$name</dt>
-														<dd><p>$definition</p></dd>";
+														<dd><p>{$definition->getDescription()}</p></dd>";
         }
 
         $text .= <<<HTML

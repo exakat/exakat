@@ -8,7 +8,9 @@ class Definitions extends \Report\Format\Ace {
 													<dl id="dt-list-1" >
 HTML;
         
-        uksort($data, function ($a, $b) { return strtolower($a) > strtolower($b) ;});
+        uksort($data, function ($a, $b) { 
+            return strtolower($a) > strtolower($b) ;
+        });
         
         if (!empty($this->css->dt->class)) {
             $dt_class = ' class="'.$this->css->dt->class.'"';
@@ -24,11 +26,17 @@ HTML;
 
         foreach($data as $name => $definition) {
             $id = str_replace(' ', '-', strtolower($name));
-            $definition = nl2br(trim($definition));
+            $description = nl2br(trim($definition->getDescription()));
+
+            $clearPHP = $definition->getClearPHP();
+            if (!empty($clearPHP)) {
+                $description .= "<br />\n<br />\nThis rule is named '<a href=\"https://github.com/dseguy/clearPHP/blob/master/rules/$clearPHP.md\">$clearPHP</a>', in the clearPHP reference.";
+            }
+
             
             $text .= "
 														<dt$dt_class><a name=\"$id\"></a>$name</dt>
-														<dd$dd_class><p>$definition</p></dd>";
+														<dd$dd_class><p>$description</p></dd>";
         }
 
         $text .= <<<HTML

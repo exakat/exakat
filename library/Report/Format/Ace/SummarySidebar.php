@@ -27,14 +27,10 @@ TEXT;
             foreach($contents as $id => $c) {
                 if (get_class($c) != "Report\\Template\\Section") { 
                     unset($contents[$id]); 
-                } else { 
-                    //print $c->getName()."\n";
-                }
+                } 
             }
 
             if (count($contents) == 0) {
-//                $class = ($content->isCurrent()) ? ' class="active"' : '';
-
                 $text .= <<<HTML
 					<li>
 						<a href="{$row->getId()}.html">
