@@ -11,7 +11,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
@@ -21,7 +21,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
@@ -33,7 +33,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
@@ -45,7 +45,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
@@ -57,7 +57,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Instanceof")
+        $this->atomIs('Instanceof')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))

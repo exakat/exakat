@@ -7,7 +7,7 @@ use Analyzer;
 class PssWithoutClass extends Analyzer\Analyzer {
     public function analyze() {
         // new pss()
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW')
              ->code(array('parent', 'self', 'static'))
              ->fullnspath(array('parent', 'self', 'static'))
@@ -15,7 +15,7 @@ class PssWithoutClass extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // pss::$property
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->code(array('parent', 'self', 'static'))
              ->fullnspath(array('parent', 'self', 'static'))
@@ -23,7 +23,7 @@ class PssWithoutClass extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // pss::method
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->code(array('parent', 'self', 'static'))
              ->fullnspath(array('parent', 'self', 'static'))
@@ -31,7 +31,7 @@ class PssWithoutClass extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // pss::constant
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->outIs('CLASS')
              ->code(array('parent', 'self', 'static'))
              ->fullnspath(array('parent', 'self', 'static'))

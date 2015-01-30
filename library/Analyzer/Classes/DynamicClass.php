@@ -6,13 +6,13 @@ use Analyzer;
 
 class DynamicClass extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty'))
              ->back('first');

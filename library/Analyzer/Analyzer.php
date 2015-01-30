@@ -136,7 +136,7 @@ class Analyzer {
     
     public function getDescription($lang = 'en') {
         if ($this->description === null) {
-            $filename = './human/'.$lang.'/'.str_replace("\\", "/", str_replace("Analyzer\\", "", $this->analyzer)).'.ini';
+            $filename = './human/'.$lang.'/'.str_replace('\\', '/', str_replace("Analyzer\\", "", $this->analyzer)).'.ini';
             
             if (!file_exists($filename)) {
                 $human = array();
@@ -627,7 +627,7 @@ GREMLIN;
         } elseif ($value === '2last') {
             $this->addMethod("filter{it.rank == it.in('$link').out('$link').count() - 2}");
         } else {
-            $this->addMethod("filter{it.rank == ***}", abs(intval($value)));
+            $this->addMethod('filter{it.rank == ***}', abs(intval($value)));
         }
 
         return $this;

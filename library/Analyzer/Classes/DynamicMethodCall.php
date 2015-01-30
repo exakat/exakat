@@ -6,14 +6,14 @@ use Analyzer;
 
 class DynamicMethodCall extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Methodcall")
+        $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->outIs('NAME')
              ->atomIs('Variable')
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
              ->outIs('NAME')
              ->atomIs('Variable')

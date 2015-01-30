@@ -7,7 +7,7 @@ use Analyzer;
 class AccessProtected extends Analyzer\Analyzer {
     public function analyze() {
         // class::method()
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->back('first')
@@ -23,7 +23,7 @@ class AccessProtected extends Analyzer\Analyzer {
         // static or self ::$property
 
         // class::$property
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
              ->back('first')

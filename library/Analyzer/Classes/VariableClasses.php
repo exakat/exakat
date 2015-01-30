@@ -6,31 +6,31 @@ use Analyzer;
 
 class VariableClasses extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->atomIs(array('Variable', 'Array'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->atomIs(array('Variable', 'Array'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Staticconstant")
+        $this->atomIs('Staticconstant')
              ->outIs('CLASS')
              ->atomIs(array('Variable', 'Array'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs(array('Variable', 'Array'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs('Functioncall')
              ->tokenIs(array('T_VARIABLE', 'T_OPEN_BRACKET'))

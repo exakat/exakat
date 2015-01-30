@@ -36,7 +36,7 @@ applyBelowRoot.out.loop(1){true}{it.object.code == x.code}.each{
 
 GREMLIN;
         } else {
-            $applyBelow = "";
+            $applyBelow = '';
         }
 
         return <<<GREMLIN

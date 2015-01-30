@@ -7,8 +7,9 @@ use Analyzer;
 class Arrayindex extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Array")
+        $this->atomIs('Array')
              ->outIs('INDEX');
+        $this->prepareQuery();
     }
 }
 

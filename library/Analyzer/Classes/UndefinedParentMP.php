@@ -5,13 +5,9 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class UndefinedParentMP extends Analyzer\Analyzer {
-    public function dependsOn() {
-        return array();
-    }
-
     public function analyze() {
         // parent::method()
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->code('parent')
              ->back('first')
@@ -24,7 +20,7 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->code('parent')
              ->back('first')

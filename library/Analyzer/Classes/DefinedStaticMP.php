@@ -7,7 +7,7 @@ use Analyzer;
 class DefinedStaticMP extends Analyzer\Analyzer {
     public function analyze() {
         // static::method() 1rst level
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->code(array('static', 'self'))
              ->back('first')
@@ -19,7 +19,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // static::method() 2nd level
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->analyzerIsNot('Analyzer\\\\Classes\\\\DefinedStaticMP')
              ->outIs('CLASS')
              ->code(array('static', 'self'))
@@ -34,7 +34,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // static::method() 3rd level
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->analyzerIsNot('Analyzer\\\\Classes\\\\DefinedStaticMP')
              ->outIs('CLASS')
              ->code(array('static', 'self'))
@@ -51,7 +51,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // static::$property 1rst level
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->code(array('static', 'self'))
              ->back('first')
@@ -64,7 +64,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // static::$property 2nd level
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->analyzerIsNot('Analyzer\\\\Classes\\\\DefinedStaticMP')
              ->outIs('CLASS')
              ->code(array('static', 'self'))
@@ -80,7 +80,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // static::$property 3rd level
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->analyzerIsNot('Analyzer\\\\Classes\\\\DefinedStaticMP')
              ->outIs('CLASS')
              ->code(array('static', 'self'))

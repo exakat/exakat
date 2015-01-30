@@ -12,7 +12,7 @@ class UndefinedStaticMP extends Analyzer\Analyzer {
     
     public function analyze() {
         // static::method() 1rst level
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->code(array('self', 'static'))
              ->back('first')
@@ -21,7 +21,7 @@ class UndefinedStaticMP extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // static::$property 1rst level
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->code(array('self', 'static'))
              ->back('first')

@@ -8,7 +8,7 @@ class AccessPrivate extends Analyzer\Analyzer {
     public function analyze() {
         // methods  
         // classname::method() direct class
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->inIs('METHOD')
@@ -21,7 +21,7 @@ class AccessPrivate extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // classname::method() parent class through extension (not the first one)
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->raw('sideEffect{ first = it; }')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
@@ -41,7 +41,7 @@ class AccessPrivate extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // parent::method() (immediate parent)
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->inIs('METHOD')
@@ -62,7 +62,7 @@ class AccessPrivate extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // parent::method() parent class through extension (not the first one)
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->raw('sideEffect{ first = it; }')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
@@ -84,7 +84,7 @@ class AccessPrivate extends Analyzer\Analyzer {
         // self / static::method() in parent class
         // static : the class which is called 
         // self   : the class where the definition is 
-        $this->atomIs("Staticmethodcall")
+        $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->back('first')
@@ -104,7 +104,7 @@ class AccessPrivate extends Analyzer\Analyzer {
 
         // properties 
         // class::$property
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
              ->back('first')
@@ -117,7 +117,7 @@ class AccessPrivate extends Analyzer\Analyzer {
         $this->prepareQuery();
         
         // parent::$property
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
              ->back('first')

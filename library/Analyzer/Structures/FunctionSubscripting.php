@@ -5,10 +5,10 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class FunctionSubscripting extends Analyzer\Analyzer {
-    protected $phpVersion = "5.4+";
+    protected $phpVersion = '5.4+';
     
     public function analyze() {
-        $this->atomIs("Array")
+        $this->atomIs('Array')
              ->outIs('VARIABLE')
              ->atomIs(array('Functioncall', 'Staticmethodcall', 'Methodcall'))
              ->back('first');

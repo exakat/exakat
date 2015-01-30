@@ -7,25 +7,25 @@ use Analyzer;
 class GlobalUsage extends Analyzer\Analyzer {
     public function analyze() {
         // global
-        $this->atomIs("Global")
+        $this->atomIs('Global')
              ->outIs('GLOBAL')
              ->atomIs('Variable');
         $this->prepareQuery();
 
-        $this->atomIs("Global")
+        $this->atomIs('Global')
              ->outIs('GLOBAL')
              ->atomIs('Assignation')
              ->outIs('LEFT');
         $this->prepareQuery();
 
         // $GLOBALS as a whole
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->hasNoIn('VARIABLE')
              ->code('$GLOBALS');
         $this->prepareQuery();
 
         // $GLOBALS as a whole
-        $this->atomIs("Array")
+        $this->atomIs('Array')
              ->outIs('VARIABLE')
              ->code('$GLOBALS')
              ->inIs('VARIABLE')
