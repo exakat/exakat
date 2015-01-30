@@ -17,7 +17,7 @@ class ArgumentsNoParenthesis extends Arguments {
                                                'notAtom'    => 'Arguments'),
                                     2 => array('token'      => array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_ENDIF', 'T_ENDSWITCH', 'T_ENDFOR',
                                                                      'T_ENDFOREACH', 'T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_QUESTION', 'T_COLON',
-                                                                     'T_ELSEIF'))
+                                                                     'T_ELSEIF', 'T_ECHO'))
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
