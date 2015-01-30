@@ -1209,7 +1209,7 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
 // lone instruction BEFORE
 while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try',
                                                         'Ternary', 'While', 'Assignation', 'Switch', 'Use', 'Label', 'Array',
-                                                        'Postplusplus', 'Preplusplus', 'Return', 'Class', 'Phpcode', 'Functioncall' ] &&
+                                                        'Postplusplus', 'Preplusplus', 'Return', 'Class', 'Phpcode', 'Functioncall', 'Shell' ] &&
                                       it.getProperty('token') != 'T_ELSEIF'}.any() &&
     it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL',
                                                     'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL',
@@ -1283,7 +1283,7 @@ while (it.out('NEXT').has('atom', 'Sequence').any()) {
 while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Function', 'Ifthen', 'Switch', 'Foreach',
                                        'Dowhile', 'Try', 'Class', 'Interface', 'Trait', 'While', 'Break', 'Assignation', 'Halt',
                                        'Staticmethodcall', 'Namespace', 'Label', 'Postplusplus', 'Preplusplus', 'Include', 'Functioncall',
-                                       'Methodcall', 'Variable', 'Label', 'Goto', 'Static', 'New', 'Void', 'Identifier' ] &&
+                                       'Methodcall', 'Variable', 'Label', 'Goto', 'Static', 'New', 'Void', 'Identifier', 'Shell' ] &&
                                        it.token != 'T_ELSEIF' }.any() &&
     it.out('NEXT').out('NEXT').filter{!(it.token in ['T_CATCH', 'T_FINALLY', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON' ,
                                                      'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
