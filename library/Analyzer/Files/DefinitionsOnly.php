@@ -16,17 +16,19 @@ class DefinitionsOnly extends Analyzer\Analyzer {
         $definitionsList = '"'.implode('", "', self::$definitions).'"';
         $definitions = 'it.atom in ['.$definitionsList.', "Namespace"] || (it.atom == "Functioncall" && !(it.fullnspath in ["\\\\define", "\\\\set_session_handler", "\\\\set_error_handler"])) || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
         
+        // case without extra string before/after the script
         $this->atomIs('File')
              ->outIs('FILE')
              ->atomIs('Phpcode')
              ->outIs('CODE')
              
-             ->raw('out.loop(1){!(it.object.atom in ['.$definitionsList.'])}{!(it.object.atom in ['.$definitionsList.'])}')
+             ->raw('filter{ it.out.loop(1){!(it.object.atom in ['.$definitionsList.'])}{!(it.object.atom in ['.$definitionsList.'])}.any() == false}')
 
              // first level of the code
 
              // spot a definition
              ->raw('filter{ it.out("ELEMENT").filter{ '.$definitions.' }.any()}')
+
              // spot a non-definition
              ->raw('filter{ it.out("ELEMENT").filter{ !('.$definitions.')}.any() == false}')
 
