@@ -1671,14 +1671,20 @@ GREMLIN;
         return $report;
     }
     
-    protected function loadIni($file) {
+    protected function loadIni($file, $index = null) {
         $fullpath = dirname(dirname(__DIR__)).'/data/'.$file;
         
         if (!file_exists($fullpath)) {
             return null;
-        } else {
-            return parse_ini_file($fullpath);
         }
+
+        $iniFile = parse_ini_file($fullpath);
+        
+        if ($index != null && isset($iniFile[$index])) {
+            $iniFile = $iniFile[$index];
+        }
+        
+        return $iniFile;
     }
     
     public static function listAnalyzers() {
