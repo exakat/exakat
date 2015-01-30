@@ -907,6 +907,7 @@ g.idx('atoms')[['atom':'Functioncall']]
     };
 
 ", "
+
 // static method call
 g.idx('atoms')[['atom':'Staticmethodcall']]
     .out('CLASS')
@@ -982,9 +983,10 @@ g.idx('atoms')[['atom':'Staticconstant']]
     };
 
 ", "
-// special case for isset, unset, array, etc.
+// special case for isset, unset, array, etc. 
+// Not for Static
 g.idx('atoms')[['atom':'Functioncall']]
-    .filter{ it.token in ['T_ARRAY', 'T_LIST', 'T_UNSET', 'T_EXIT', 'T_DIE', 'T_ISSET', 'T_ECHO', 'T_PRINT', 'T_EMPTY', 'T_EVAL', 'T_STATIC']}
+    .filter{ it.token in ['T_ARRAY', 'T_LIST', 'T_UNSET', 'T_EXIT', 'T_DIE', 'T_ISSET', 'T_ECHO', 'T_PRINT', 'T_EMPTY', 'T_EVAL']}
     .each{
         it.setProperty('fullnspath', '\\\\' + it.code.toLowerCase());
     };
