@@ -102,7 +102,7 @@ function process_file($filename, $logFile, $client) {
     $tokens = $php->getTokenFromFile($filename);
     $log['token_initial'] = count($tokens);
 
-    $delimitedStrings = array('T_QUOTE' => 0, 'T_SHELL_QUOTE' => 0);
+    $delimitedStrings = array('T_QUOTE' => 0, 'T_QUOTE_2' => 0, 'T_SHELL_QUOTE' => 0);
     $whiteCode = $php->getWhiteCode();
     $tokensNewlines = array();
     $merge = 0;
@@ -631,8 +631,29 @@ function process_file($filename, $logFile, $client) {
             }
             
             if (in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE'))) {
-                $delimitedStrings[$token_value]++;
+                if ($delimitedStrings['T_QUOTE'] % 2 == 1) {
+                    if ( $delimitedStrings['T_QUOTE_2'] % 2 == 1) { 
+                        if (in_array($tokens[$id - 1], array('[', '+', '-', '*', '/', '%', '.', '('))) { // string inside a string !!
+                            throw new Exceptions\TooManyLevelInsideAStringException();
+                        } else {
+                            $delimitedStrings['T_QUOTE_2']++;
+                        }
+                    } elseif (in_array($tokens[$id - 1], array('[', '+', '-', '*', '/', '%', '.', '('))) { // string inside a string !!
+                        $delimitedStrings['T_QUOTE_2']++;
+                    } else {
+                        $delimitedStrings[$token_value]++;
+                    }
+                } else {
+                    $delimitedStrings[$token_value]++;
+                }
+                
                 if ($delimitedStrings[$token_value] % 2 == 0) {
+                    $token .= '_CLOSE';
+                    $token_value .= '_CLOSE';
+                    $delimitedStrings['T_QUOTE_2'] = 0;
+                } elseif (($delimitedStrings['T_QUOTE'] % 2 == 1   ) && 
+                          ($delimitedStrings['T_QUOTE_2'] > 0      ) &&
+                          ($delimitedStrings['T_QUOTE_2'] % 2 == 0 )   ) {
                     $token .= '_CLOSE';
                     $token_value .= '_CLOSE';
                 }
