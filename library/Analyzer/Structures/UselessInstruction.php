@@ -58,6 +58,19 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->atomIs('Variable')
              ->inIs('AT');
         $this->prepareQuery();
+
+        // Closure with some operations
+        $this->atomIs('Function')
+             ->inIs('LEFT')
+             ->atomIs(array('Addition', 'Multiplication'))
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Function')
+             ->inIs('CONCAT')
+             ->atomIs('Concatenation')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
