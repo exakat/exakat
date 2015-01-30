@@ -9,7 +9,8 @@ class ShouldPreprocess extends Analyzer\Analyzer {
         $dynamicAtoms = array('Variable', 'Property', 'Identifier', 'Magicconstant');
         //'Functioncall', 
         
-        $functionList = '"\\\\array", "\\\\strtolower", "\\\\strtoupper"';
+        $functionList = $this->loadIni('inert_functions.ini');
+        $functionList = '"' . join('", "\\\\', $functionList['functions']). '"';
         
         $this->atomIs('Addition')
              ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')

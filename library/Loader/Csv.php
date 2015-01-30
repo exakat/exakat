@@ -49,9 +49,12 @@ SHELL
 				'method' => 'GET',
 				'ignore_errors' => true,
 				'header'=>
-					"Content-type: application/json\r\n"
-					. "Accept: application/json\r\n"
-					. "User-Agent: Exakat v 1.0\r\n"
+					<<<HEADER
+Content-type: application/json
+Accept: application/json
+User-Agent: Exakat v 1.0
+
+HEADER
 			)
 		);
 

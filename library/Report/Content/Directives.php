@@ -143,7 +143,7 @@ class Directives extends \Report\Content {
                                               'documentation' => 'Authentification name.');
 
             $this->array['Xcache'][]  = array('name' => 'xcache.admin.pass',
-                                              'suggested' => '<md5($your_password)>', 
+                                              'suggested' => '<md5(your_password)>', 
                                               'documentation' => 'Should be md5($your_password), or empty to disable administration.');
 
             $this->array['Xcache'][]  = array('name' => 'xcache.optimizer',

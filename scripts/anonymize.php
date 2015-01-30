@@ -60,7 +60,10 @@ foreach($tokens as $t) {
                 break;
             case T_CONSTANT_ENCAPSED_STRING:
                 $strings++;
-                if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { print "Skip T_CONSTANT_ENCAPSED_STRING : $strings\n"; $strings++; }
+                if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { 
+                    print "Skip T_CONSTANT_ENCAPSED_STRING : $strings\n"; 
+                    $strings++; 
+                }
                 if (isset($stringsNames[$t[1]])) {
                     $t[1] = $stringsNames[$t[1]];
                 } else {
@@ -74,7 +77,10 @@ foreach($tokens as $t) {
                 // otherwise, fall through!
             case T_ENCAPSED_AND_WHITESPACE :
                 $strings++;
-                if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { print "Skip T_ENCAPSED_AND_WHITESPACE : $strings\n"; $strings++; }
+                if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { 
+                    print "Skip T_ENCAPSED_AND_WHITESPACE : $strings\n"; 
+                    $strings++; 
+                }
                 if (isset($stringsNames[$t[1]])) {
                     $t[1] = $stringsNames[$t[1]];
                 } else {

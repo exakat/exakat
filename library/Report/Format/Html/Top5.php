@@ -36,7 +36,12 @@ HTML;
 HTML;
 
         $values = $data;
-        uasort($values, function ($a, $b) { if ($a['sort'] == $b['sort']) { return 0 ;} return $a['sort'] < $b['sort'] ? 1 : -1;});
+        uasort($values, function ($a, $b) { 
+            if ($a['sort'] == $b['sort']) { 
+                return 0 ;
+            } 
+            return $a['sort'] < $b['sort'] ? 1 : -1;}
+              );
         $values = array_slice($values, 0, 5);
         foreach($values as $value) {
             $html .= <<<HTML

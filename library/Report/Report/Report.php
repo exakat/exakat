@@ -52,7 +52,7 @@ class Report {
         $this->currentLevel1 = $section;
     }
 
-    function createLevel2($name) {
+    protected function createLevel2($name) {
         // @todo check that current is level 1 ? 
         $section = $this->currentLevel1->addContent('Section', $name);
         $section->setLevel(2);

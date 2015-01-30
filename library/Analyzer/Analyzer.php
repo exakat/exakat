@@ -914,12 +914,16 @@ GREMLIN;
     }
 
     public function filter($filter) {
-        $this->methods[] = 'filter{ $filter }';
+        $this->methods[] = "filter{ $filter }";
+
+        return $this;
     }
 
     public function codeLength($length = ' == 1 ') {
         // @todo add some tests ? Like Operator / value ? 
         $this->methods[] = "filter{it.code.length() $length}";
+
+        return $this;
     }
 
     public function fullcodeLength($length = ' == 1 ') {
@@ -1675,10 +1679,6 @@ GREMLIN;
         } else {
             return parse_ini_file($fullpath);
         }
-    }
-    
-    protected function loadConfig() {
-        
     }
     
     public static function listAnalyzers() {
