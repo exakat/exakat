@@ -32,7 +32,7 @@ class Concatenation extends TokenAuto {
         
         $this->actions = array('to_concatenation' => true,
                                'atom'             => 'Concatenation',
-                               'makeSequence'     => 'it',
+                               'makeSequence'     => 'x',
                                );
         $this->checkAuto();
 
