@@ -18,14 +18,9 @@ Cooccurences : structures that are next to each other in sequences.
 Analyzers
 + Make a list of files and extensions along the way
 
-projects/proxyplus/code/includes/parser.php:			$parseFunction = $block == 'style' ? 'CSS' : 'JS' ;
-projects/proxyplus/code/includes/parser.php:			$new .= $this->$parseFunction(substr($input, $innerStart, $innerEnd - $innerStart));
-
 Update variables with the above code
 Make report configurable (configuration of the actual analyzers to be run), and automatically build.
 
-Continue spoting the ghost bug, and find a faster reproduction case (best case : )
-Check all unit test with the new Identifier token
 Change Class to support options like we do for functions
 
 Reconcile String with some detectors : list of country, SQL code, JS code, CSS code, HTML code, regex, HTTP headers, etc. 
@@ -45,8 +40,6 @@ Variables :
 Camel case, underscore separated, Spelling, $[type]Name ($sString, $iId,), variables with numbers or sharing prefixes).
 
 Export analyze to Sqlite for stats
-
-Centralize results : define a format for centralizing information (start with appinfo ? With some of the inventory ? )
 
 Add a deamon to project, that scans then start
 Build a test project for the reports styles (avoid md/pdf pb)
@@ -74,10 +67,8 @@ Spot classes with too many constants (they cost memory)
 Suppress all g.V and make this at least some Index
 Spot overwritten class constants.
 Suspect implicit conversion
-Marquer les analyzers non fait comme tel (pas inexistants)
 Check for unqualified names of classes : they shouldn't be too generic.
 List Nsnames aliases and overlap
-
 
 Make the php script idempotent (can be run again and finish the job, leave a note where it left...)
 Spot function that are defined with php-function names (also spot overwriting).
@@ -86,9 +77,6 @@ Faire un dashboard avec les indicateurs du projet lui-même : manquent de tests,
 Aliases : Classes that extends others, but do no overloading; 
 
 functions that returns one call of other function
-
-Useless unset() (http://php.net/unset)
-Unset non existing variable (useless), static variables, global variables (except with $GLOBALS), locals one (out of a loop)
 
 Constant functions or structures (always return the same...)
 
@@ -99,7 +87,6 @@ For UnicodeBlock, merge the blocks into languages
 List errors of visibility between classes 
 Detect strings that are used as an Array (then, spot the index, and check for the strings in those indexes)
 
-Function called with too many or too few arguments
 Prepare nodes to be added to new network (function calls, variable track...)
 
 Spot variable used in definitions
@@ -137,18 +124,15 @@ Spot URL in strings
 Spot SQL in strings
 Improve regex for PCRE
 
-Mark Namespaces that are constants as such 
+Mark Nsname that are constants as such 
 
 print_r(xxx, true) is not a pb.
 
 Support phar files (digg them and find the local php files).
 
-Check for ordering with case/default
 Add time of processing in the ReportInfo
 
 Create a dummy project for fast testing of installation
-
-fix the last 'indexed' in tokenizer
 
 spot #! lines and mark the file as executable commandline
 
@@ -204,7 +188,6 @@ UseVoidReturn : function return void/null, but result it captured (may be not us
 
 report 'true' (wrongly compared boolean)
 Die without no argument (at least, put __METHOD__, file)
-Echo : with or without () (preferences)
 
 inventory of registered functions (session, finalize, error...)
 Characterize function as library (not global code), or script
@@ -224,7 +207,6 @@ Modified arguments (bad idea! )
 Used twice variable (set then given... Nothing between ? )
         if ( ($counts = $r->check()) || in_array($name , array("FunctioncallArray", 'Sequence'))) { $count is ambiguous
 Identify complex logical expressions (in If, while, case....) with mathd, logical and AND
-Check that 'OR' is actually spotted as an upper case keyword
 Identify date() formats (and sprintf too)
 
 Map/Reduce : Faire marcher les analyses du tokenizer sur des intervalles dans les index 
@@ -254,9 +236,7 @@ signaler l'habitude avec use (Un use? )
 
 SIgnaler les use qui ne sont pas en haut du namespace)
 signaler les pb de casse avec les alias
-multiple index defintion : spot the values
 casting with long names (boolean, integer) instead of short ones (int, bool)
-support arrays representation of the index with { or [ in the atom (needs to be collected).
 
 Lister les dépendances d'une classe (liste des autres classe, des fonctions, etc..)
 scripts with warning (but no fatal) are excluded while they should be in.
@@ -286,7 +266,6 @@ Add a way to ignore some vendors dependings on project.
 Add a way to overwrite / add / nullify some data from within a project.
 
 Suggest properties to be ppp depending on usage (public => outusage, properted => child/parents, private : local class)
-composer.json generator or checker 
 
 Suggest closures instead of functions if the function is used once. 
 Suggest replacement for str_replace/ereg/preg/strtr
@@ -304,15 +283,6 @@ PHP 5.5 : foreach loops now support non-scalar keys. I need to find the Iterator
 
 Attention : Use may be used to change method visibility. Report this and also note this better in the analzyer.
 Add report on aliases changing the visibility.
-
-== suggest to merge all those lines into one
-        $severities = array();
-        $severities['Critical'] = 3;
-        $severities['Major'] = 2;
-        $severities['Minor'] = 1;
-        $severities['None'] = 0; 
-
-Spot functions / global code mixed.
 
 Find similar files
 Spot common libraries...
@@ -351,11 +321,8 @@ Never used properties : check for classes below!
 Never used properties : if (in_array($key, self::$_allowableAttributes[$tag])) { ($_allowableAttributes!!
 
 Find nested incompatible conditions like this : (Also over multiples functions calls...)
-                if ($destination > 0) { 
-                        if ($destination == 0) {
-
-
-List stacked conditions and spot if they are incompatible
+if ($destination > 0) { 
+        if ($destination == 0) {
 
 Empty function that override another are not useless. 
 
@@ -369,14 +336,10 @@ Merge all PHP versions into one table + 1 colon of selection
 project_init store the initial URL in config.ini (git, or download or else)
 project_init works with only URL (guess some names)
 
-Add documentation automatically in human/en/*/*.ini (via dashboard but spot when they needs to be written)
-
 $fp = fopen('scripts/categories.md', 'r');   while (!feof($fp)) { (No check! This will go on if file doesn't exists...)
 // usage of ressource without checking it really
 
 Remove the 2 mysql databases and merge into one only.  (why not merge into one Sqlite? )
-
-See how checkForNext and makeSequence may be reduced to one call in neo4j (precompiled java or custom steps)
 
 Add link to clearPHP in the docs. 
 
@@ -401,9 +364,7 @@ testBySecond : testMethods are not used (neither setUp nor tearDown)
 
 directInjection : Ignore 'secure' functions such as htmlentities, intval, isset
 
-List contaminated variables ($x = $_POST..)
-
-$whiteList = explode(",","xls,xlsx,ods,sxc,csv,tsv,ppt,pps,odp,sxi,doc,docx,rtf,odt,sxw"); // better make it an array directly...
+List tainted variables ($x = $_POST..) (the variables that may be reached in with tainted values).
 
 die or throw ? May be die is useless and should be down by throwning all the time and adding an exception handler to stop the script. 
 
@@ -429,6 +390,7 @@ Accept scripts that throw warnings but still compile.
 Clean bin and script folders
 
 Validate that all files in a project are useful (check for classes + autoload, includes, mentions of scripts in open_files, etc..)
+Make a tree of that 
 
 Check speed for one file processing
 
@@ -437,6 +399,7 @@ Loop optimisation : anything in the loop that may be done outside?
 Spot methods that do not use $this (<- static ? )
 
 SPot : files direct access protection (defined('_JEXEC') or die('Restricted access') }
+Spot useless of them
 
 Complete the list of directive in Content/Directives
 Add a list of directive spotted in the code
@@ -463,11 +426,7 @@ Find uninitialised variables (read first, then written (or not))
 
 Add support for traits when searching for properties/methods/constants….
 
-Remove require when installing with composer (no need to download everything...)
-
-if(in_array('malicious', array('a','b','c',0,1,2,3))) echo 'ok'; (in_array with integers will be erroneous...)
-
-File should define or run but not both.
+Remove required vendor when installing with composer (no need to download everything...)
 
 move all logs to be written directly in the project/<project>/log folder (no concurrency pb)
 
@@ -520,7 +479,7 @@ Internally, PHP strings are byte arrays. As a result, accessing or modifying a s
 
 Detect over-used functions (same variable get the same function called several time)
 
-What size of code do I need to make a functioncall ? 
+What size of code do I need to turn it into a functioncall ? 
 
 Mark functions as idempotent (f(f(n)) == f(n))
 
@@ -602,9 +561,6 @@ in compatibility, list for specific values in $_SERVER, list of extension (windo
 Check that () are spoted as parenthesis for return, include, exit, die..., not as arguments
 
 if ($a = new ()) // constant condition si à gauche, c'est une constante. 
-
-for using ,
-						for ($currentMethod = null, $lineNumber = 1, $line = $this->adapter->fgets($srcFile); $line !== false; $lineNumber++, $line = $this->adapter->fgets($srcFile))
 
 case/default using ;
 
@@ -753,3 +709,28 @@ spot echo that is not on usual structure (stats ? )
 Consommation de mémoire : différent suivant l'accès à la propriété statique? 
 
 Spot method/functions used once only.
+
+Add a rule to spot missing ; in legal situations (before a ?> or endif)
+
+http://stackoverflow.com/questions/3430194/performance-of-for-vs-foreach-in-php (Modifying the array with reference is faster)
+
+Multiple definitions in a file (class + function + interface ...)
+
+list() only works on numerical arrays and assumes the numerical indices start at 0. (Then it generates errors, that may be muted with @).
+
+Spot deep string expressions (BAD BAD BAD )
+
+call_user_func with function that has references in the args
+
+Duplicate calls : check that the whole call is used, not just the beginning of a fluent call.
+// also avoir variables local to a loop
+
+Always test index in arrays BEFORE (if (!isset($array['index'])) ) and not ($array['index'] == null)
+
+Spot property that are accessed via an accessor but is internal to the object : suggest speed up by going to the property.
+
+Extract analyzer from Gremlin Query Builder, so as to be able to measure size of the query, and collect dependencies automatically. 
+
+make some analyzers //
+
+Spot the slowest analyzer automatically
