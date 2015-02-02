@@ -168,6 +168,7 @@ foreach($tokens as $t) {
             case T_IS_SMALLER_OR_EQUAL :
             case T_MINUS_EQUAL :
             case T_WHILE : 
+            case T_ENDWHILE : 
             case T_IS_GREATER_OR_EQUAL : 
             case T_PLUS_EQUAL : 
             case T_CLASS : 
