@@ -30,7 +30,8 @@ class Ifthen extends TokenAuto {
                                                'atom'      => 'yes'),
                                     3 => array('token'     => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
                                                                     'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML',
-                                                                    'T_CLOSE_CURLY')),
+                                                                    'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDSWITCH', 
+                                                                    'T_ENDFOR', 'T_ENDWHILE', 'T_ENDDECLARE')),
         );
         
         $this->actions = array( 'to_block_ifelseif' => 2,
