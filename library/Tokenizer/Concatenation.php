@@ -11,7 +11,7 @@ class Concatenation extends TokenAuto {
                           'Functioncall', 'Noscream', 'Staticproperty', 'Staticmethodcall', 'Staticconstant', 'Staticclass',
                           'Methodcall', 'Parenthesis', 'Magicconstant', 'Property', 'Multiplication', 'Addition', 'Power',
                           'Preplusplus', 'Postplusplus', 'Cast', 'Assignation', 'Nsname', 'Boolean', 'Null', 'Shell', 'Power',
-                          'Heredoc' );
+                          'Heredoc', 'New' );
         
         $this->conditions = array(-2 => array('token' => array_merge( Assignation::$operators, Comparison::$operators,
                                                                       Logical::$operators, _Include::$operators,
