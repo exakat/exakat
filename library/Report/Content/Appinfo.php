@@ -228,6 +228,8 @@ class Appinfo extends \Report\Content {
                     'External systems' => array(
                             'System'           => 'Structures/ShellUsage',
                             'Files'            => 'Structures/FileUsage',
+                            'LDAP'             => 'Extensions/Extldap',
+                            'mail'             => 'Structures/MailUsage',
                      ),
 
                     );
