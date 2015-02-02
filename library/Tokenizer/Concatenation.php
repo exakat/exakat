@@ -27,7 +27,7 @@ class Concatenation extends TokenAuto {
                                                           Power::$operators, Addition::$operators, Multiplication::$operators,
                                                           array('T_CLOSE_PARENTHESIS', 'T_COLON', 'T_SEMICOLON', 'T_CLOSE_TAG',
                                                                'T_CLOSE_CURLY', 'T_CLOSE_BRACKET', 'T_DOT', 'T_QUESTION',
-                                                               'T_COMMA', 'T_DOUBLE_ARROW'))),
+                                                               'T_COMMA', 'T_DOUBLE_ARROW', 'T_ELSEIF'))),
         );
         
         $this->actions = array('to_concatenation' => true,
