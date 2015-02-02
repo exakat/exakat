@@ -15,7 +15,7 @@ class Arguments extends TokenAuto {
                            'Float', 'Concatenation', 'Parenthesis', 'Cast', 'Sign',
                            'Ternary', 'Function', 'Noscream', 'As', 'Magicconstant',
                            'Logical', 'Preplusplus', 'Postplusplus', 'Not', 'Comparison',
-                           'Bitshift', 'Heredoc', 'Power', 'Shell');
+                           'Bitshift', 'Heredoc', 'Power', 'Shell', 'Arrayappend');
         // @note arguments separated by ,
         $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_VAR', 'T_USE',
                                                                  'T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT',
