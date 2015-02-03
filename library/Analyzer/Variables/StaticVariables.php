@@ -16,6 +16,7 @@ class StaticVariables extends Analyzer\Analyzer {
              ->inIs('DEFINE')
              ->atomIs('Ppp')
              ->outIs('STATIC')
+             ->hasFunction()
              ->back('first');
         $this->prepareQuery();
     }
