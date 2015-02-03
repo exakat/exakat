@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
+    Label : SOURCE
+      require
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          (
+          Label : CODE
+            $a
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          ->
+          Label : OBJECT
+            $d
+          Label : PROPERTY
+            e
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'g'
+            Label : ARGUMENT
+              $i
+            Label : ARGUMENT
+              $h
+            Label : ARGUMENT
+              'g'
