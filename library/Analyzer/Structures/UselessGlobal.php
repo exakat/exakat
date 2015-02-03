@@ -31,6 +31,13 @@ class UselessGlobal extends Analyzer\Analyzer {
              ->inIs('INDEX')
              ->eachCounted('it.fullcode', 1);
         $this->prepareQuery();
+
+        // $_POST and co are not needed as super globals
+        $superglobals = $this->loadIni('php_superglobals', 'superglobal');        
+        $this->atomIs('Global')
+             ->outIs('GLOBAL')
+             ->code($superglobals);
+        $this->prepareQuery();
         
         // used only once
         
