@@ -12,9 +12,12 @@ class WrittenOnlyVariable extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
+        
         $this->atomIs('Function')
              ->outIs('BLOCK')
              ->atomInside('Variable')
+             ->codeIsNot($superglobals)
              ->analyzerIs('Analyzer\\Variables\\IsModified')
              ->analyzerIsNot('Analyzer\\Variables\\IsRead')
              ->raw('filter{ 
