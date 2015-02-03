@@ -6,9 +6,13 @@ use Analyzer;
 
 class ImplicitGlobal extends Analyzer\Analyzer {
     public function analyze() {
+        $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
+
         $this->atomIs("Global")
              ->hasFunction()
              ->outIs('GLOBAL')
+             ->tokenIs('T_VARIABLE')
+             ->codeIsNot($superglobals)
              ->_as('result')
              ->savePropertyAs('code', 'theGlobal')
              ->codeIsNot(array('$argv', '$argc'))
