@@ -6,10 +6,13 @@ use Analyzer;
 
 class DefinedExceptions extends Analyzer\Analyzer {
     public function analyze() {
+        $exceptions = $this->loadIni('php_exception.ini', 'classes');
+        $exceptions = $this->makeFullNSPath($exceptions);
+        
         // first level
         $this->atomIs("Class")
              ->outIs('EXTENDS')
-             ->fullnspath('\exception')
+             ->fullnspath($exceptions)
              ->back('first');
         $this->prepareQuery();
 
