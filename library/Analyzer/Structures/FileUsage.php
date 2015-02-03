@@ -12,22 +12,24 @@ class FileUsage extends Analyzer\Analyzer {
         $fileClasses = array('\\SplFileObject', '\\SplTempFileObject', '\\SplFileInfo');
 
         $this->atomIs('New')
-             ->outis('NEW')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot(array('Variable', 'Array', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall'))
+             ->outIs('NEW')
              ->fullnspath($fileClasses);
         $this->prepareQuery();
 
         $this->atomIs('Staticmethodcall')
-             ->outis('CLASS')
+             ->outIs('CLASS')
              ->fullnspath($fileClasses);
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
-             ->outis('CLASS')
+             ->outIs('CLASS')
              ->fullnspath($fileClasses);
         $this->prepareQuery();
 
         $this->atomIs('Staticconstant')
-             ->outis('CLASS')
+             ->outIs('CLASS')
              ->fullnspath($fileClasses);
         $this->prepareQuery();
     }

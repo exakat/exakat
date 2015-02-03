@@ -13,22 +13,24 @@ class MailUsage extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('New')
-             ->outis('NEW')
+             ->outIs('NEW')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot(array('Variable', 'Array', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall'))
              ->fullnspath($mailerClasses);
         $this->prepareQuery();
 
         $this->atomIs('Staticmethodcall')
-             ->outis('CLASS')
+             ->outIs('CLASS')
              ->fullnspath($mailerClasses);
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
-             ->outis('CLASS')
+             ->outIs('CLASS')
              ->fullnspath($mailerClasses);
         $this->prepareQuery();
 
         $this->atomIs('Staticconstant')
-             ->outis('CLASS')
+             ->outIs('CLASS')
              ->fullnspath($mailerClasses);
         $this->prepareQuery();
     }
