@@ -734,3 +734,15 @@ Extract analyzer from Gremlin Query Builder, so as to be able to measure size of
 make some analyzers //
 
 Spot the slowest analyzer automatically
+
+There are some tokens which still have quite a lot of links to check when we near the end of the tokenizer call : check the cleaning 
+
+Let's move Typehint to some other way (5s + each round is too much)
+
+neo4j 2.2.0 : ditch batch-import
+
+474946383961 => used to determine dimensions without getimagesize. (and not download the whole doc). 
+=> amke this a rule ? 
+=> update the inventory of special numbers / strings 
+
+Mention PHP naming conventions.
