@@ -11,7 +11,8 @@ class DirectCallToMagicMethod extends Analyzer\Analyzer {
 
         $this->atomIs('Functioncall')
              ->code($magicMethods)
-             ->inIs('METHOD');
+             ->inIs('METHOD')
+             ->raw('filter{ it.out("CLASS").filter{it.code.toLowerCase() in ["static", "parent", "self"]}.any() == false}');
         $this->prepareQuery();
     }
 }
