@@ -133,7 +133,7 @@ foreach($analyzers as $a) {
         echo "Couldn't get an instance for '$a'\n\n";
         continue 1;
     }
-    if ($o->getDescription() === '') {
+    if ($o->getDescription()->getDescription() === '') {
         $missingDoc[] = $a.' (human/en/'.$a.'.ini)';
     }
 }
