@@ -2290,7 +2290,7 @@ g.addEdge(b1, x, 'NEXT');
     
         $it.setProperty('rank', count);
         count++;
-        $it.setProperty('makeSequence', 'both');
+//        $it.setProperty('makeSequence', 'both');
         g.addEdge(sequence, $it, 'ELEMENT');
 
         $it.out('NEXT').out('ELEMENT').each{
@@ -2311,7 +2311,7 @@ g.addEdge(b1, x, 'NEXT');
               ($it.in('NEXT').next().block != 'true')) {
         sequence = $it.in('NEXT').next();
         $it.setProperty('rank', $it.in('NEXT').out('ELEMENT').count());
-        $it.setProperty('makeSequence', 'in');
+//        $it.setProperty('makeSequence', 'in');
 
         g.addEdge(sequence, $it.out('NEXT').next(), 'NEXT');
         g.addEdge($it.in('NEXT').next(), $it, 'ELEMENT');
@@ -2320,7 +2320,7 @@ g.addEdge(b1, x, 'NEXT');
     } else if ($it.out('NEXT').has('atom', 'Sequence').any()) {
         sequence = $it.out('NEXT').next();
         $it.setProperty('rank', 0);
-        $it.setProperty('makeSequence', 'next');
+//        $it.setProperty('makeSequence', 'next');
         sequence.out('ELEMENT').each{ it.setProperty('rank', it.rank + 1);}
 
         g.addEdge($it.out('NEXT').next(), $it, 'ELEMENT');
@@ -2335,7 +2335,7 @@ g.addEdge(b1, x, 'NEXT');
 
         g.addEdge(sequence, $it, 'ELEMENT');
         $it.setProperty('rank', 0);
-        $it.setProperty('makeSequence', 'else');
+//        $it.setProperty('makeSequence', 'else');
         
         if ($it.root == 'true') {
             sequence.setProperty('root', 'true');
