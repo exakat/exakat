@@ -17,6 +17,15 @@ class UseConstant extends Analyzer\Analyzer {
              ->noDelimiter(array('php://stdin', 'php://stdout', 'php://stderr'))
              ->back('first');
         $this->prepareQuery();
+        
+        // dirname(__FILE__) => __DIR__
+        $this->atomFunctionIs('dirname')
+             ->outIs('ARGUMENTS')
+             ->outIS('ARGUMENT')
+             ->atomIs('Magicconstant')
+             ->code('__FILE__')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
