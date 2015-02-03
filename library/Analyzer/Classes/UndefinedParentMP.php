@@ -13,12 +13,10 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
-             ->raw('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}')
-             ->outIs('EXTENDS')
-             ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").has("code", name).any() == false}')
+             ->goToClass()
+             ->raw('filter{ it.out("IMPLEMENTS", "EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.out("PRIVATE").any() == false}.out("NAME").has("code", name).any() == false}')
              ->back('first');
-        $this->prepareQuery();
+      $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
@@ -26,10 +24,8 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->back('first')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
-             ->raw('in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}')
-             ->outIs('EXTENDS')
-             ->classDefinition()
-             ->raw('filter{ it.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").has("code", name).any() == false}')
+             ->goToClass()
+             ->raw('filter{ it.out("IMPLEMENTS", "EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}.out("BLOCK").out("ELEMENT").has("atom", "Ppp").filter{ it.out("PRIVATE").any() == false}.out("DEFINE").has("code", name).any() == false}')
              ->back('first');
         $this->prepareQuery();
     }
