@@ -103,8 +103,8 @@ class Directives extends \Report\Content {
 
         // Intl
         $suggestion = $this->checkPresence('Extensions\\Extintl');
-        $this->array['ext/Intl'] = array();
         if ($suggestion == 'On') {
+            $this->array['ext/Intl'] = array();
             $directive = array('name' => 'intl.default_locale',
                                'suggested' => '<Your ICU Locale>',
                                'documentation' => 'The locale that will be used in intl functions when none is specified (either by omitting the corresponding argument or by passing NULL). These are ICU locales, not system locales. ');
@@ -123,7 +123,6 @@ class Directives extends \Report\Content {
 
         // Xcache
         $suggestion = $this->checkPresence('Extensions\\Extxcache');
-        $this->array['Xcache'] = array();
         if ($suggestion == 'On') {
             $this->array['Xcache'] = array();
             $this->array['Xcache'][]  = array('name' => 'xcache.cacher',
@@ -157,7 +156,6 @@ class Directives extends \Report\Content {
         
         // Wincache
         $suggestion = $this->checkPresence('Extensions\\Extwincache');
-        $this->array['Wincache'] = array();
         if ($suggestion == 'On') {
             $this->array['Wincache'] = array();
             $this->array['Wincache'][]  = array('name' => 'wincache.ocenabled',
