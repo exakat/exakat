@@ -82,9 +82,12 @@
     shell_exec('bbedit ./exp/'.$test.'.'.$next.'.php');
     shell_exec('bbedit ./source/'.$test.'.'.$next.'.php');
     
-    print "New test number : $next\n";
-    print "Run the tests with phpunit Test/$test.php\n";
+    echo "New test number : $next\n",
+         "Run the tests with   phpunit Test/$test.php\n",
     
+         "Run the tests with   phpunit --filter=$next Test/$test.php\n",
+         "\n";
+
     function closest_string($string, $array) {
         $shortest = -1;
 
