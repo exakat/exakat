@@ -36,10 +36,10 @@ class VardumpUsage extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->atomIs('String')
+             ->tokenIsNot('T_QUOTE')
              ->noDelimiter(array('print_r', 'var_dump'))
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 

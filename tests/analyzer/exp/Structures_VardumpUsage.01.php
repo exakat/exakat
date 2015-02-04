@@ -1,7 +1,6 @@
 <?php
 
-$expected     = array('var_DUMP($y)',
-                      'print_r($y)',);
+$expected     = array();
 
 $expected_not = array();
 
