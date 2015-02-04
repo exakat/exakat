@@ -16,12 +16,38 @@ class DefinitionsOnly extends Analyzer\Analyzer {
         $definitionsList = '"'.implode('", "', self::$definitions).'"';
         $definitions = 'it.atom in ['.$definitionsList.', "Namespace"] || (it.atom == "Functioncall" && !(it.fullnspath in ["\\\\define", "\\\\set_session_handler", "\\\\set_error_handler"])) || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
         
-        // case without extra string before/after the script
+        // all cases without extra string before/after the script
+        
+        // one or several namespaces
+        $this->atomIs('File')
+             ->outIs('FILE')
+             ->atomIs('Phpcode')
+             ->outIs('CODE')
+//             ->outIs('ELEMENT')
+//             ->atomIs('Namespace')
+//             ->outIs('BLOCK')
+
+             ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").out("BLOCK").out.loop(1){!(it.object.atom in ['.$definitionsList.'])}{!(it.object.atom in ['.$definitionsList.'])}.any() == false}')
+
+             // first level of the code
+
+             // spot a definition
+             ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").out("BLOCK").out("ELEMENT").filter{ '.$definitions.' }.any()}')
+
+             // spot a non-definition
+             ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").out("BLOCK").out("ELEMENT").filter{ !('.$definitions.')}.any() == false}')
+
+             ->back('first');
+        $this->prepareQuery();
+
+        // namespaces are implicit
         $this->atomIs('File')
              ->outIs('FILE')
              ->atomIs('Phpcode')
              ->outIs('CODE')
              
+             ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").any() == false}')
+
              ->raw('filter{ it.out.loop(1){!(it.object.atom in ['.$definitionsList.'])}{!(it.object.atom in ['.$definitionsList.'])}.any() == false}')
 
              // first level of the code
@@ -34,6 +60,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
 
              ->back('first');
         $this->prepareQuery();
+
     }
 }
 
