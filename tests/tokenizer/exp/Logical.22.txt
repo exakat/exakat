@@ -47,13 +47,13 @@ Label : CODE
           Label : ELEMENT
             =
             Label : RIGHT
-              .
+              Concatenation
               Label : CONCAT
-                '{'
+                '}'
               Label : CONCAT
                 $k
               Label : CONCAT
-                '}'
+                '{'
             Label : LEFT
               [
               Label : VARIABLE
@@ -71,12 +71,12 @@ Label : CODE
         Label : RIGHT
           str_replace
           Label : ARGUMENTS
-            ,
+            Arguments
             Label : ARGUMENT
-              $i
+              $k
             Label : ARGUMENT
               $j
             Label : ARGUMENT
-              $k
+              $i
         Label : LEFT
           $h

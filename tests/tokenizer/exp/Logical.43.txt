@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence T_PRINT
+  makeSequence T_OPEN_PARENTHESIS
   Label : ELEMENT
     echo
     Label : ARGUMENTS
@@ -8,21 +8,21 @@ Label : CODE
       Label : ARGUMENT
         D
         Label : ARGUMENTS
-          ,
+          Arguments
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'H'
+            Label : CONCAT
+              $a
+            Label : CONCAT
+              'G'
           Label : ARGUMENT
             E
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'F'
-          Label : ARGUMENT
-            .
-            Label : CONCAT
-              'G'
-            Label : CONCAT
-              $a
-            Label : CONCAT
-              'H'
   Label : ELEMENT
     or
     Label : LEFT
@@ -32,6 +32,8 @@ Label : CODE
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          'B'
+          (
+          Label : CODE
+            'B'
   Label : ELEMENT
     C

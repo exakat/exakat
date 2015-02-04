@@ -25,17 +25,17 @@ Label : CODE
           Label : SUBNAME
             C
           Label : ARGUMENTS
-            ,
+            Arguments
             Label : ARGUMENT
               [
               Label : VARIABLE
                 ->
                 Label : OBJECT
-                  $b
+                  $d
                 Label : PROPERTY
-                  D
+                  H
               Label : INDEX
-                'E'
+                'I'
             Label : ARGUMENT
               [
               Label : VARIABLE
@@ -51,11 +51,11 @@ Label : CODE
               Label : VARIABLE
                 ->
                 Label : OBJECT
-                  $d
+                  $b
                 Label : PROPERTY
-                  H
+                  D
               Label : INDEX
-                'I'
+                'E'
       Label : LEFT
         ->
         Label : OBJECT

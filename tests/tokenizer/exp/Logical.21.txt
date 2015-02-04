@@ -13,11 +13,11 @@ Label : CODE
           Label : RIGHT
             d
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                "e"
+              Arguments
               Label : ARGUMENT
                 $f
+              Label : ARGUMENT
+                "e"
           Label : LEFT
             ==
             Label : RIGHT

@@ -3,6 +3,16 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
+    &&
+    Label : RIGHT
+      H
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'I'
+    Label : LEFT
+      G
+  Label : ELEMENT
     while
     Label : CONDITION
       [
@@ -54,16 +64,6 @@ Label : CODE
         --
         Label : POSTPLUSPLUS
           $h
-  Label : ELEMENT
-    &&
-    Label : RIGHT
-      H
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'I'
-    Label : LEFT
-      G
   Label : ELEMENT
     =
     Label : RIGHT

@@ -7,6 +7,20 @@ Label : CODE
     Label : LEFT
       $a
     Label : RIGHT
+      |
+      Label : LEFT
+        $b
+      Label : RIGHT
+        ::
+        Label : PROPERTY
+          $E
+        Label : CLASS
+          D
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a
+    Label : RIGHT
       ^
       Label : LEFT
         $b
@@ -18,20 +32,6 @@ Label : CODE
             void
             Label : ARGUMENT
               void
-        Label : CLASS
-          D
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      |
-      Label : LEFT
-        $b
-      Label : RIGHT
-        ::
-        Label : PROPERTY
-          $E
         Label : CLASS
           D
   Label : ELEMENT

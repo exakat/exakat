@@ -17,15 +17,16 @@ class Logical extends TokenAuto {
     static public $atom = 'Logical';
 
     public function _check() {
-
+        $filterOut = array_merge(Comparison::$operators,     Bitshift::$operators,
+                                 Addition::$operators,       Multiplication::$operators,
+                                 Concatenation::$operators,  _Instanceof::$operators,
+                                 Preplusplus::$operators,    //Assignation::$operators,
+                                 _New::$operators,           Property::$operators,
+                                 Staticproperty::$operators, Nsname::$operators,
+                                 Noscream::$operators,       Not::$operators,
+                                 Reference::$operators);
         // logical boolean (and, or)
-        $this->conditions = array( -2 => array('filterOut' => array_merge(Comparison::$operators,     Bitshift::$operators,
-                                                                          Addition::$operators,       Multiplication::$operators,
-                                                                          Concatenation::$operators,  _Instanceof::$operators,
-                                                                          Preplusplus::$operators,    Assignation::$operators,
-                                                                          _New::$operators, Property::$operators,
-                                                                          Staticproperty::$operators, Nsname::$operators,
-                                                                          Noscream::$operators,       Not::$operators)),
+        $this->conditions = array( -2 => array('filterOut' => $filterOut),
                                    -1 => array('atom'      => 'yes',
                                                'notAtom'   => 'Sequence'),
                                     0 => array('token'     => Logical::$logicals,
@@ -48,11 +49,7 @@ class Logical extends TokenAuto {
         $this->checkAuto();
 
         // boolean comparison (||, &&)
-        $this->conditions = array( -2 => array('filterOut' => array_merge(array('T_BANG', 'T_AT', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                                                                 'T_NS_SEPARATOR', 'T_INSTANCEOF', 'T_NEW' ),
-                                                                          Comparison::$operators, Bitshift::$operators, Addition::$operators,
-                                                                          Multiplication::$operators, Concatenation::$operators,
-                                                                          Preplusplus::$operators)),
+        $this->conditions = array( -2 => array('filterOut' => $filterOut),
                                    -1 => array('atom'      => 'yes',
                                                'notAtom'   => 'Sequence'),
                                     0 => array('token'     => Logical::$booleans,
