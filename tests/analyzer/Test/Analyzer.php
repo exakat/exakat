@@ -20,7 +20,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         
         $ini = parse_ini_file('../../projects/test/config.ini');
         $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
-        $test_config = 'Analyzer'.str_replace('_', '\\', str_replace('Test', '', get_class($this)));
+        $test_config = 'Analyzer'.str_replace('_', '\\', substr(get_class($this), 4));
 
         $analyzerobject = new $test_config(null);
         if (!$analyzerobject->checkPhpVersion($phpversion)) {
