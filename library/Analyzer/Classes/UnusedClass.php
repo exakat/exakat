@@ -6,13 +6,15 @@ use Analyzer;
 
 class UnusedClass extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Analyzer\\Classes\\UsedClass");
+        return array("Analyzer\\Classes\\UsedClass",
+                     "Analyzer\\Classes\\TestClass");
     }
 
     public function analyze() {
         // class used in a New
         $this->atomIs("Class")
-             ->analyzerIsNot("Analyzer\\Classes\\UsedClass");
+             ->analyzerIsNot("Analyzer\\Classes\\UsedClass")
+             ->analyzerIsNot("Analyzer\\Classes\\TestClass");
         $this->prepareQuery();
     }
 }

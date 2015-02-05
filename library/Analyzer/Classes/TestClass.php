@@ -15,7 +15,18 @@ class TestClass extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+// second level of heritage
         $this->atomIs('Class')
+             ->analyzerIsNot('self')
+             ->outIs('EXTENDS')
+             ->classDefinition()
+             ->analyzerIs('self')
+             ->back('first');
+        $this->prepareQuery();
+
+// third level of heritage
+        $this->atomIs('Class')
+             ->analyzerIsNot('self')
              ->outIs('EXTENDS')
              ->classDefinition()
              ->analyzerIs('self')

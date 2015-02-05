@@ -2,7 +2,7 @@
 
 $expected     = array('class unusedClass', 
                       'class someClass extends inAExtends implements inAImplements', 
-                      'class someClass2 implements inAImplements2, inAImplements1, inAImplements3', 
+                      'class someClass2 implements inAImplements1, inAImplements2, inAImplements3', 
                       'class inAUseWithAlias', 
                       'class inAString', 
                       'class inAString2');
