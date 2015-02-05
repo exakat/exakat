@@ -746,3 +746,31 @@ neo4j 2.2.0 : ditch batch-import
 => update the inventory of special numbers / strings 
 
 Mention PHP naming conventions.
+
+http://www.javaworld.com/article/2077500/testing-debugging/java-tip-134--when-catching-exceptions--don-t-cast-your-net-too-wide.html
+
+Spot coocurrences in Analyzer (create an alias for variable/array, use the alias for functions...)
+
+Foreach with reference not modified : CHeck that the target method has reference too.
+
+How to handle structures that are ignored ? We miss definitions. 
+
+also, ignore classic octals and report special ones as possibly errnoneous
+
+Spot PHP_INT_MAX as a value, et suggest a replacement with an actual constant.
+
+Collect int/string/real/others for magic number / strings 
+(spot common strings? )
+
+Support array($this, '') dans les callbacks
+
+Exclure les PHP_Frameworks_, atoum, simpletest as tests
+
+Spot toctou (fallacies like : if (file_exists()) unlink (File may be removed between)
+
+Build a database of invariant : things that are expected as logical (if (is_array($a)) => next($a) !== null;
+
+// nested loops needs to have reference
+        foreach($ini as $key => &$lists) {
+            foreach($lists as $id => &$function) {
+
