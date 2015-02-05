@@ -78,28 +78,12 @@ fullcode.out("EXTENDS").each{ fullcode.fullcode = fullcode.fullcode + " extends 
 
 // implements
 if (fullcode.out("IMPLEMENTS").count() > 0) {
-    i = [];
-    it.out("IMPLEMENTS").each{ i.add(it.fullcode); }
-    fullcode.fullcode = fullcode.fullcode + " implements " + i.join(", ");
+    s = [];
+    fullcode.out("IMPLEMENTS").sort{it.rank}._().each{ s.add(it.fullcode); };
+    fullcode.fullcode = fullcode.fullcode + " implements " + s.join(", ");
 }
 
-/*
-fullcode.out("EXTENDS").each{
-    extend = it;
-    g.V.has('atom', 'Class').filter{it.out('NAME').next().code == extend.code}.each{
-        g.addEdge(it , fullcode, 'DEFINES');
-    }
-}
-
-fullcode.out("IMPLEMENTS").each{
-    implement = it;
-    g.V.has('atom', 'Interface').filter{it.out('NAME').next().code == implement.code}.each{
-        g.addEdge(it , fullcode, 'DEFINES');
-    }
-}
-*/
 GREMLIN;
-// didn't added code, it seems too much....
     }
 
 }
