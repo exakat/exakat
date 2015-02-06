@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array();
+$expected     = array('definedFunction');
 
 $expected_not = array();
 
