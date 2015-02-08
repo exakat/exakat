@@ -15,15 +15,13 @@ Label : CODE
       Label : ELEMENT
         return
         Label : RETURN
-          .
+          Concatenation
           Label : CONCAT
-            "a"
+            "g"
           Label : CONCAT
             b
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                "c"
+              Arguments
               Label : ARGUMENT
                 ?
                 Label : CONDITION
@@ -40,5 +38,7 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       $f
+              Label : ARGUMENT
+                "c"
           Label : CONCAT
-            "g"
+            "a"

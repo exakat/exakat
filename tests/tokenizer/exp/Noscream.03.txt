@@ -3,10 +3,10 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    .
+    Concatenation
+    Label : CONCAT
+      '23'
     Label : CONCAT
       @
       Label : AT
         $y
-    Label : CONCAT
-      '23'

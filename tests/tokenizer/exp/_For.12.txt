@@ -27,11 +27,11 @@ Label : CODE
         Label : RIGHT
           b
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              'c'
+            Arguments
             Label : ARGUMENT
               $c
+            Label : ARGUMENT
+              'c'
         Label : LEFT
           $a
       Label : ELEMENT

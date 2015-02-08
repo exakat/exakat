@@ -3,9 +3,9 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    .
+    Concatenation
     Label : CONCAT
-      'a'
+      "ak"
     Label : CONCAT
       (
       Label : CODE
@@ -21,7 +21,23 @@ Label : CODE
             Label : INDEX
               'c'
         Label : THEN
-          .
+          Concatenation
+          Label : CONCAT
+            "o"
+          Label : CONCAT
+            m
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'n'
+          Label : CONCAT
+            "l"
+          Label : CONCAT
+            j
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'k'
           Label : CONCAT
             "
             Label : CONTAIN
@@ -38,24 +54,58 @@ Label : CODE
                   $h
                 Label : INDEX
                   i
-          Label : CONCAT
-            j
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'k'
-          Label : CONCAT
-            "l"
-          Label : CONCAT
-            m
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'n'
-          Label : CONCAT
-            "o"
         Label : ELSE
-          .
+          Concatenation
+          Label : CONCAT
+            "aj"
+          Label : CONCAT
+            ah
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'ai'
+          Label : CONCAT
+            "ag"
+          Label : CONCAT
+            (
+            Label : CODE
+              ?
+              Label : CONDITION
+                (
+                Label : CODE
+                  !=
+                  Label : RIGHT
+                    X
+                  Label : LEFT
+                    [
+                    Label : VARIABLE
+                      $v
+                    Label : INDEX
+                      'w'
+              Label : THEN
+                Concatenation
+                Label : CONCAT
+                  "'ab"
+                Label : CONCAT
+                  z
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'aa'
+                Label : CONCAT
+                  "y"
+              Label : ELSE
+                Concatenation
+                Label : CONCAT
+                  "af"
+                Label : CONCAT
+                  ad
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'ae'
+                Label : CONCAT
+                  "ac"
           Label : CONCAT
             "
             Label : CONTAIN
@@ -74,55 +124,5 @@ Label : CODE
                   t
               Label : CONCAT
                 u
-          Label : CONCAT
-            (
-            Label : CODE
-              ?
-              Label : CONDITION
-                (
-                Label : CODE
-                  !=
-                  Label : RIGHT
-                    X
-                  Label : LEFT
-                    [
-                    Label : VARIABLE
-                      $v
-                    Label : INDEX
-                      'w'
-              Label : THEN
-                .
-                Label : CONCAT
-                  "y"
-                Label : CONCAT
-                  z
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      'aa'
-                Label : CONCAT
-                  "'ab"
-              Label : ELSE
-                .
-                Label : CONCAT
-                  "ac"
-                Label : CONCAT
-                  ad
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      'ae'
-                Label : CONCAT
-                  "af"
-          Label : CONCAT
-            "ag"
-          Label : CONCAT
-            ah
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'ai'
-          Label : CONCAT
-            "aj"
     Label : CONCAT
-      "ak"
+      'a'

@@ -12,11 +12,11 @@ Label : ELEMENT
         Label : METHOD
           Z
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              'AA'
+            Arguments
             Label : ARGUMENT
               null
+            Label : ARGUMENT
+              'AA'
         Label : OBJECT
           ::
           Label : CLASS
@@ -42,7 +42,21 @@ Label : ELEMENT
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              .
+              Concatenation
+              Label : CONCAT
+                [
+                Label : VARIABLE
+                  $h
+                Label : INDEX
+                  'U'
+              Label : CONCAT
+                [
+                Label : VARIABLE
+                  $g
+                Label : INDEX
+                  'T'
+              Label : CONCAT
+                'S'
               Label : CONCAT
                 (
                 Label : CODE
@@ -61,20 +75,6 @@ Label : ELEMENT
                     'Q'
                   Label : ELSE
                     'R'
-              Label : CONCAT
-                'S'
-              Label : CONCAT
-                [
-                Label : VARIABLE
-                  $g
-                Label : INDEX
-                  'T'
-              Label : CONCAT
-                [
-                Label : VARIABLE
-                  $h
-                Label : INDEX
-                  'U'
     Label : ELEMENT
       print
       Label : ARGUMENTS
@@ -120,9 +120,13 @@ Label : ELEMENT
             Label : LEFT
               $d
         Label : THEN
-          J
+          makeSequence T_COLON
+          Label : ELEMENT
+            J
         Label : ELSE
-          K
+          makeSequence T_COLON
+          Label : ELEMENT
+            K
     Label : ELEMENT
       print
       Label : ARGUMENTS

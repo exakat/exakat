@@ -19,25 +19,25 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        .
-        Label : CONCAT
-          $a
+        Concatenation
         Label : CONCAT
           ++
           Label : POSTPLUSPLUS
             $b
+        Label : CONCAT
+          $a
   Label : ELEMENT
     print
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        .
+        Concatenation
+        Label : CONCAT
+          $b
         Label : CONCAT
           ++
           Label : POSTPLUSPLUS
             $a
-        Label : CONCAT
-          $b
   Label : ELEMENT
     =
     Label : RIGHT

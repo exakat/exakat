@@ -13,10 +13,8 @@ Label : CODE
       Label : BLOCK
         {
         Label : ELEMENT
-          makeSequence T_OPEN_CURLY
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $c
+          ++
+          Label : POSTPLUSPLUS
+            $c
     Label : CONDITION
       $z

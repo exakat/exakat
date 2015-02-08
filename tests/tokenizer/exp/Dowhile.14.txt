@@ -6,34 +6,26 @@ Label : CODE
     Label : BLOCK
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          do
-          Label : BLOCK
-            {
-            Label : ELEMENT
-              makeSequence T_OPEN_CURLY
+        do
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            do
+            Label : BLOCK
+              {
               Label : ELEMENT
                 do
                 Label : BLOCK
                   {
                   Label : ELEMENT
-                    makeSequence T_OPEN_CURLY
-                    Label : ELEMENT
-                      do
-                      Label : BLOCK
-                        {
-                        Label : ELEMENT
-                          makeSequence T_OPEN_CURLY
-                          Label : ELEMENT
-                            ++
-                            Label : POSTPLUSPLUS
-                              $x
-                      Label : CONDITION
-                        1
+                    ++
+                    Label : POSTPLUSPLUS
+                      $x
                 Label : CONDITION
-                  2
-          Label : CONDITION
-            3
+                  1
+            Label : CONDITION
+              2
+        Label : CONDITION
+          3
     Label : CONDITION
       4

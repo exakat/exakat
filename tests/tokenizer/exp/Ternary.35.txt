@@ -10,16 +10,42 @@ Label : ELEMENT
       Label : VALUE
         $b
       Label : BLOCK
-        Block with Foreach
+        makeSequence T_COLON
         Label : ELEMENT
-          makeSequence T_OPEN_TAG
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ?
-                Label : CONDITION
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $h
+              Label : INDEX
+                'L'
+        Label : ELEMENT
+          L
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $i
+              Label : INDEX
+                'N'
+        Label : ELEMENT
+          N
+        Label : ELEMENT
+          J
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ?
+              Label : CONDITION
+                void
+                Label : ARGUMENT
                   (
                   Label : CODE
                     and
@@ -35,58 +61,32 @@ Label : ELEMENT
                         $d
                       Label : INDEX
                         'E'
-                Label : THEN
-                  F
-                  Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        'G'
-                      Label : CONCAT
-                        [
-                        Label : VARIABLE
-                          $e
-                        Label : INDEX
-                          'H'
-                    Label : ARGUMENT
+              Label : THEN
+                F
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $f
+                    Label : INDEX
+                      'I'
+                  Label : ARGUMENT
+                    Concatenation
+                    Label : CONCAT
                       [
                       Label : VARIABLE
-                        $f
+                        $e
                       Label : INDEX
-                        'I'
-                Label : ELSE
-                  [
-                  Label : VARIABLE
-                    $g
-                  Label : INDEX
-                    'J'
-          Label : ELEMENT
-            J
-          Label : ELEMENT
-            N
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
+                        'H'
+                    Label : CONCAT
+                      'G'
+              Label : ELSE
                 [
                 Label : VARIABLE
-                  $i
+                  $g
                 Label : INDEX
-                  'N'
-          Label : ELEMENT
-            L
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $h
-                Label : INDEX
-                  'L'
+                  'J'
         Label : ELEMENT
           B
 Label : ELEMENT

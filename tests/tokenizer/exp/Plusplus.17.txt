@@ -12,5 +12,5 @@ Label : CODE
         b
   Label : ELEMENT
     global
-    Label : NAME
+    Label : GLOBAL
       $a

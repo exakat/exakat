@@ -7,13 +7,13 @@ Label : CODE
     Label : RIGHT
       substr
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          $datafile_server
+          13
         Label : ARGUMENT
           8
         Label : ARGUMENT
-          13
+          $datafile_server
     Label : LEFT
       $backupdir
   Label : ELEMENT

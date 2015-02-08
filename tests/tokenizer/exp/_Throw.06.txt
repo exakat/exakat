@@ -7,7 +7,7 @@ Label : CODE
     Label : THROW
       new
       Label : NEW
-        \A
+        \
         Label : SUBNAME
           A
         Label : ARGUMENTS
@@ -15,9 +15,9 @@ Label : CODE
           Label : ARGUMENT
             b
             Label : ARGUMENTS
-              ,
+              Arguments
               Label : ARGUMENT
-                'C'
+                $f
               Label : ARGUMENT
                 ->
                 Label : OBJECT
@@ -25,4 +25,4 @@ Label : CODE
                 Label : PROPERTY
                   e
               Label : ARGUMENT
-                $f
+                'C'

@@ -17,34 +17,36 @@ Label : CODE
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    I
-                  Label : CONCAT
-                    'J'
+                  (
+                  Label : CODE
+                    Concatenation
+                    Label : CONCAT
+                      'J'
+                    Label : CONCAT
+                      I
             Label : LEFT
               array
               Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'C'
-                  Label : VALUE
-                    .
-                    Label : CONCAT
-                      D
-                    Label : CONCAT
-                      'E'
+                Arguments
                 Label : ARGUMENT
                   =>
                   Label : KEY
                     'F'
                   Label : VALUE
-                    .
-                    Label : CONCAT
-                      G
+                    Concatenation
                     Label : CONCAT
                       'H'
+                    Label : CONCAT
+                      G
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    'C'
+                  Label : VALUE
+                    Concatenation
+                    Label : CONCAT
+                      'E'
+                    Label : CONCAT
+                      D
     Label : LEFT
       $a

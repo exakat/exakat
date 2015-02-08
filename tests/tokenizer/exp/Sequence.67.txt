@@ -56,9 +56,7 @@ Label : CODE
         Label : RIGHT
           F
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $g
+            Arguments
             Label : ARGUMENT
               G
               Label : ARGUMENTS
@@ -73,6 +71,8 @@ Label : CODE
                       H
                   Label : PROPERTY
                     I
+            Label : ARGUMENT
+              $g
         Label : LEFT
           $f
       Label : ELEMENT
@@ -176,9 +176,9 @@ Label : CODE
                       Label : VARIABLE
                         $z
                       Label : INDEX
-                        .
+                        Concatenation
                         Label : CONCAT
-                          $aa
+                          $ac
                         Label : CONCAT
                           (
                           Label : CODE
@@ -190,7 +190,7 @@ Label : CODE
                             Label : ELSE
                               'Q'
                         Label : CONCAT
-                          $ac
+                          $aa
           Label : ELEMENT
             =
             Label : RIGHT
@@ -244,8 +244,8 @@ Label : CODE
     Label : METHOD
       V
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          $ag
+        Arguments
         Label : ARGUMENT
           $ah
+        Label : ARGUMENT
+          $ag

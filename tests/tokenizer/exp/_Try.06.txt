@@ -7,27 +7,25 @@ Label : CODE
     Label : CODE
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            new
-            Label : NEW
-              DateTime
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  $a
-                Label : ARGUMENT
-                  new
-                  Label : NEW
-                    DateTimeZone
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        $b
-          Label : LEFT
-            $d
+        =
+        Label : RIGHT
+          new
+          Label : NEW
+            DateTime
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                new
+                Label : NEW
+                  DateTimeZone
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $b
+              Label : ARGUMENT
+                $a
+        Label : LEFT
+          $d
     Label : CATCH
       catch
       Label : CLASS
@@ -37,20 +35,18 @@ Label : CODE
       Label : CODE
         {
         Label : ELEMENT
-          makeSequence T_OPEN_CURLY
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              date
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  'Y-m-d-H-i-s'
-                Label : ARGUMENT
-                  strtotime
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $d
-            Label : LEFT
-              $c
+          =
+          Label : RIGHT
+            date
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                strtotime
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $d
+              Label : ARGUMENT
+                'Y-m-d-H-i-s'
+          Label : LEFT
+            $c

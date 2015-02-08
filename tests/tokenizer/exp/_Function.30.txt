@@ -7,7 +7,7 @@ Label : CODE
     Label : NAME
       x
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
         Typehint
         Label : CLASS
@@ -17,7 +17,7 @@ Label : CODE
           Label : RIGHT
             null
           Label : LEFT
-            $x
+            $c
       Label : ARGUMENT
         Typehint
         Label : CLASS
@@ -37,7 +37,7 @@ Label : CODE
           Label : RIGHT
             null
           Label : LEFT
-            $c
+            $x
     Label : BLOCK
       {
       Label : ELEMENT

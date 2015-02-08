@@ -15,10 +15,8 @@ Label : CODE
     Label : BLOCK
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            $a
-          Label : LEFT
-            $b
+        =
+        Label : RIGHT
+          $a
+        Label : LEFT
+          $b

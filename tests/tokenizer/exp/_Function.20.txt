@@ -11,9 +11,9 @@ Label : CODE
         Label : RIGHT
           array
           Label : ARGUMENTS
-            ,
+            Arguments
             Label : ARGUMENT
-              1
+              3
             Label : ARGUMENT
               =>
               Label : KEY
@@ -21,13 +21,13 @@ Label : CODE
               Label : VALUE
                 array
                 Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    3
+                  Arguments
                   Label : ARGUMENT
                     2
+                  Label : ARGUMENT
+                    3
             Label : ARGUMENT
-              3
+              1
         Label : LEFT
           $b
     Label : NAME

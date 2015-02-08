@@ -7,19 +7,17 @@ Label : CODE
     Label : CODE
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $c
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $b
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a
+        ++
+        Label : POSTPLUSPLUS
+          $a
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $b
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $c
     Label : CATCH
       catch
       Label : CLASS

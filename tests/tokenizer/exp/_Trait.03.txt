@@ -47,13 +47,11 @@ Label : CODE
         Label : BLOCK
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'Hello Universe!'
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'Hello Universe!'
   Label : ELEMENT
     trait
     Label : NAME
@@ -73,10 +71,8 @@ Label : CODE
         Label : BLOCK
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'Hello World!'
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'Hello World!'

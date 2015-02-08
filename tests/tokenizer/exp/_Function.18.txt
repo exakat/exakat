@@ -7,9 +7,13 @@ Label : CODE
     Label : NAME
       a
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
-        $b
+        =
+        Label : RIGHT
+          4
+        Label : LEFT
+          $d
       Label : ARGUMENT
         =
         Label : RIGHT
@@ -17,11 +21,7 @@ Label : CODE
         Label : LEFT
           $c
       Label : ARGUMENT
-        =
-        Label : RIGHT
-          4
-        Label : LEFT
-          $d
+        $b
     Label : BLOCK
       {
       Label : ELEMENT

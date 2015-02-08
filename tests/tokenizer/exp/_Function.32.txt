@@ -7,31 +7,13 @@ Label : CODE
     Label : NAME
       z
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
         =
         Label : RIGHT
           null
         Label : LEFT
-          $a
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          null
-        Label : LEFT
-          $b
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          null
-        Label : LEFT
-          $c
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          null
-        Label : LEFT
-          $d
+          $f
       Label : ARGUMENT
         =
         Label : RIGHT
@@ -43,7 +25,25 @@ Label : CODE
         Label : RIGHT
           null
         Label : LEFT
-          $f
+          $d
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          $c
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          $b
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          $a
     Label : BLOCK
       {
       Label : ELEMENT

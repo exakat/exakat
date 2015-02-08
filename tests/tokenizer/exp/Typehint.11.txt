@@ -7,9 +7,17 @@ Label : CODE
     Label : NAME
       a
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
-        $b
+        Typehint
+        Label : CLASS
+          \
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            C
+        Label : VARIABLE
+          $d
       Label : ARGUMENT
         Typehint
         Label : CLASS
@@ -23,6 +31,20 @@ Label : CODE
           Label : LEFT
             $c
       Label : ARGUMENT
+        $b
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x
+  Label : ELEMENT
+    function
+    Label : NAME
+      a2
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
         Typehint
         Label : CLASS
           \
@@ -32,22 +54,6 @@ Label : CODE
             C
         Label : VARIABLE
           $d
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $x
-  Label : ELEMENT
-    function
-    Label : NAME
-      a2
-    Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        $b
       Label : ARGUMENT
         Typehint
         Label : CLASS
@@ -59,20 +65,10 @@ Label : CODE
           Label : LEFT
             $c
       Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          \
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C
-        Label : VARIABLE
-          $d
+        $b
     Label : BLOCK
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $x
+        ++
+        Label : POSTPLUSPLUS
+          $x

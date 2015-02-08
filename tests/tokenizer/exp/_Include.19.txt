@@ -6,13 +6,17 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        'E'
+        (
+        Label : CODE
+          'E'
   Label : ELEMENT
     include
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        'D'
+        (
+        Label : CODE
+          'D'
   Label : ELEMENT
     B
     Label : ARGUMENTS

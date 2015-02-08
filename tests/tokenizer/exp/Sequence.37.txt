@@ -11,15 +11,15 @@ Label : CODE
         Label : RIGHT
           in_array
           Label : ARGUMENTS
-            ,
+            Arguments
+            Label : ARGUMENT
+              $l
             Label : ARGUMENT
               [
               Label : VARIABLE
                 $j
               Label : INDEX
                 'k'
-            Label : ARGUMENT
-              $l
         Label : LEFT
           i
           Label : ARGUMENTS
@@ -45,16 +45,16 @@ Label : CODE
     Label : RIGHT
       array
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          'b'
-        Label : ARGUMENT
-          'c'
-        Label : ARGUMENT
-          'd'
+          'f'
         Label : ARGUMENT
           'e'
         Label : ARGUMENT
-          'f'
+          'd'
+        Label : ARGUMENT
+          'c'
+        Label : ARGUMENT
+          'b'
     Label : LEFT
       $a

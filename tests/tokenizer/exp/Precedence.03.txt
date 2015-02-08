@@ -17,11 +17,11 @@ Label : CODE
         Label : RIGHT
           4
         Label : LEFT
-          .
-          Label : CONCAT
-            1
+          Concatenation
           Label : CONCAT
             2
+          Label : CONCAT
+            1
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -33,12 +33,12 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        .
+        Concatenation
+        Label : CONCAT
+          5
         Label : CONCAT
           +
           Label : RIGHT
             2
           Label : LEFT
             1
-        Label : CONCAT
-          5

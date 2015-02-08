@@ -7,31 +7,13 @@ Label : CODE
     Label : NAME
       b
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
         Typehint
         Label : CLASS
           CLASSE
         Label : VARIABLE
-          $a
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          CLASSE
-        Label : VARIABLE
-          $b
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          CLASSE
-        Label : VARIABLE
-          $c
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          CLASSE
-        Label : VARIABLE
-          $d
+          $f
       Label : ARGUMENT
         Typehint
         Label : CLASS
@@ -43,7 +25,25 @@ Label : CODE
         Label : CLASS
           CLASSE
         Label : VARIABLE
-          $f
+          $d
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          CLASSE
+        Label : VARIABLE
+          $c
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          CLASSE
+        Label : VARIABLE
+          $b
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          CLASSE
+        Label : VARIABLE
+          $a
     Label : BLOCK
       {
       Label : ELEMENT

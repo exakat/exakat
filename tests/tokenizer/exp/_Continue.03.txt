@@ -24,7 +24,9 @@ Label : CODE
           Label : RIGHT
             C
             Label : ARGUMENTS
-              ,
+              Arguments
+              Label : ARGUMENT
+                'E'
               Label : ARGUMENT
                 ->
                 Label : OBJECT
@@ -35,8 +37,6 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       void
-              Label : ARGUMENT
-                'E'
           Label : LEFT
             0
       Label : THEN

@@ -3,18 +3,6 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    $m
-    Label : NAME
-      $m
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          I
-        Label : CONSTANT
-          J
-  Label : ELEMENT
     $l
     Label : NAME
       $l
@@ -26,6 +14,18 @@ Label : CODE
           G
         Label : CONSTANT
           H
+  Label : ELEMENT
+    $m
+    Label : NAME
+      $m
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ::
+        Label : CLASS
+          I
+        Label : CONSTANT
+          J
   Label : ELEMENT
     $j
     Label : NAME
@@ -55,6 +55,18 @@ Label : CODE
             Label : ARGUMENT
               void
   Label : ELEMENT
+    $f
+    Label : NAME
+      $f
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ->
+        Label : OBJECT
+          $g
+        Label : PROPERTY
+          D
+  Label : ELEMENT
     $d
     Label : NAME
       $d
@@ -70,18 +82,6 @@ Label : CODE
       void
       Label : ARGUMENT
         C
-  Label : ELEMENT
-    $f
-    Label : NAME
-      $f
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $g
-        Label : PROPERTY
-          D
   Label : ELEMENT
     $c
     Label : NAME

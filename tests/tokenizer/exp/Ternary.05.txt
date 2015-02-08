@@ -15,13 +15,13 @@ Label : CODE
           Label : LEFT
             $b
       Label : THEN
-        .
+        Concatenation
         Label : CONCAT
-          $c
+          $e
         Label : CONCAT
           "d"
         Label : CONCAT
-          $e
+          $c
       Label : ELSE
         "f"
     Label : LEFT

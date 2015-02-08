@@ -6,15 +6,15 @@ Label : CODE
     Label : RIGHT
       ?
       Label : CONDITION
-        .
+        Concatenation
+        Label : CONCAT
+          'g'
         Label : CONCAT
           c
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              .
-              Label : CONCAT
-                d
+              Concatenation
               Label : CONCAT
                 (int)
                 Label : CAST
@@ -23,12 +23,12 @@ Label : CODE
                     $e
                   Label : INDEX
                     'f'
-        Label : CONCAT
-          'g'
+              Label : CONCAT
+                d
       Label : THEN
-        .
+        Concatenation
         Label : CONCAT
-          H
+          'k'
         Label : CONCAT
           (int)
           Label : CAST
@@ -38,7 +38,7 @@ Label : CODE
             Label : INDEX
               'j'
         Label : CONCAT
-          'k'
+          H
       Label : ELSE
         'L'
     Label : LEFT

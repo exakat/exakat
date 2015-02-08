@@ -27,7 +27,7 @@ Label : CODE
           Label : RIGHT
             strpos
             Label : ARGUMENTS
-              ,
+              Arguments
               Label : ARGUMENT
                 +
                 Label : RIGHT
@@ -35,9 +35,9 @@ Label : CODE
                 Label : LEFT
                   $h
               Label : ARGUMENT
-                $f
-              Label : ARGUMENT
                 $g
+              Label : ARGUMENT
+                $f
           Label : LEFT
             $e
     Label : BLOCK

@@ -29,25 +29,25 @@ Label : CODE
               Label : RETURN
                 array
                 Label : ARGUMENTS
-                  ,
+                  Arguments
+                  Label : ARGUMENT
+                    void
                   Label : ARGUMENT
                     array
                     Label : ARGUMENTS
-                      ,
-                      Label : ARGUMENT
-                        =>
-                        Label : KEY
-                          'c'
-                        Label : VALUE
-                          'd'
+                      Arguments
                       Label : ARGUMENT
                         =>
                         Label : KEY
                           'e'
                         Label : VALUE
                           'f'
-                  Label : ARGUMENT
-                    void
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          'c'
+                        Label : VALUE
+                          'd'
         Label : LEFT
           ->
           Label : OBJECT

@@ -11,7 +11,13 @@ Label : CODE
         Label : NOT
           in_array
           Label : ARGUMENTS
-            ,
+            Arguments
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $d
+              Label : INDEX
+                $e
             Label : ARGUMENT
               ->
               Label : OBJECT
@@ -22,12 +28,6 @@ Label : CODE
                   $b
                 Label : INDEX
                   $c
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $d
-              Label : INDEX
-                $e
     Label : THEN
       {
       Label : ELEMENT

@@ -33,17 +33,15 @@ Label : CODE
         Label : BLOCK
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                $d
-              Label : LEFT
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
-                  F
+            =
+            Label : RIGHT
+              $d
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $c
+              Label : PROPERTY
+                F
       Label : ELEMENT
         function
         Label : NAME
@@ -55,18 +53,16 @@ Label : CODE
         Label : BLOCK
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
-              return
-              Label : RETURN
-                .
-                Label : CONCAT
-                  'H'
-                Label : CONCAT
-                  ->
-                  Label : OBJECT
-                    $e
-                  Label : PROPERTY
-                    I
-                Label : CONCAT
-                  'J'
+            return
+            Label : RETURN
+              Concatenation
+              Label : CONCAT
+                'J'
+              Label : CONCAT
+                ->
+                Label : OBJECT
+                  $e
+                Label : PROPERTY
+                  I
+              Label : CONCAT
+                'H'

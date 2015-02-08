@@ -21,17 +21,21 @@ Label : CODE
           Label : THEN
             substr
             Label : ARGUMENTS
-              ,
+              Arguments
               Label : ARGUMENT
-                $e
+                $f
               Label : ARGUMENT
                 0
               Label : ARGUMENT
-                $f
+                $e
           Label : ELSE
             substr
             Label : ARGUMENTS
-              ,
+              Arguments
+              Label : ARGUMENT
+                -
+                Label : SIGN
+                  $g
               Label : ARGUMENT
                 md5
                 Label : ARGUMENTS
@@ -42,10 +46,6 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-              Label : ARGUMENT
-                -
-                Label : SIGN
-                  $g
       Label : ELSE
         'h'
     Label : LEFT

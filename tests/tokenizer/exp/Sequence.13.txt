@@ -27,47 +27,9 @@ Label : CODE
       Label : ELEMENT
         var
         Label : DEFINE
-          $a1
-        Label : VALUE
-          1
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $h1
-        Label : VALUE
-          8
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $h
-        Label : VALUE
-          array
-          Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              2
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : DEFINE
           $d
         Label : VALUE
           4
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $g
-        Label : VALUE
-          7
         Label : VAR
           var
       Label : ELEMENT
@@ -97,25 +59,23 @@ Label : CODE
       Label : ELEMENT
         var
         Label : DEFINE
-          $c
+          $h
         Label : VALUE
-          3
+          array
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              1
         Label : VAR
           var
       Label : ELEMENT
         var
         Label : DEFINE
-          $e
+          $g
         Label : VALUE
-          5
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $c1
-        Label : VALUE
-          3
+          7
         Label : VAR
           var
       Label : ELEMENT
@@ -140,5 +100,45 @@ Label : CODE
           $g1
         Label : VALUE
           7
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $c1
+        Label : VALUE
+          3
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $c
+        Label : VALUE
+          3
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $a1
+        Label : VALUE
+          1
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $h1
+        Label : VALUE
+          8
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $e
+        Label : VALUE
+          5
         Label : VAR
           var

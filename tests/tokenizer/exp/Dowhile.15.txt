@@ -6,16 +6,14 @@ Label : CODE
     Label : BLOCK
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          do
-          Label : BLOCK
-            ;
+        do
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            {
             Label : ELEMENT
-              {
-              Label : ELEMENT
-                void
-          Label : CONDITION
-            1
+              void
+        Label : CONDITION
+          1
     Label : CONDITION
       2

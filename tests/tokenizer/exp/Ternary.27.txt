@@ -24,28 +24,28 @@ Label : CODE
     Label : THEN
       b
       Label : ARGUMENTS
-        ,
+        Arguments
+        Label : ARGUMENT
+          $e
         Label : ARGUMENT
           ->
           Label : OBJECT
             $c
           Label : PROPERTY
             d
-        Label : ARGUMENT
-          $e
     Label : ELSE
       f
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          ->
-          Label : OBJECT
-            $g
-          Label : PROPERTY
-            h
+        Arguments
         Label : ARGUMENT
           ->
           Label : OBJECT
             $i
           Label : PROPERTY
             j
+        Label : ARGUMENT
+          ->
+          Label : OBJECT
+            $g
+          Label : PROPERTY
+            h

@@ -7,8 +7,8 @@ Label : CODE
     Label : RIGHT
       1
     Label : LEFT
-      .
-      Label : CONCAT
-        '1'
+      Concatenation
       Label : CONCAT
         $s
+      Label : CONCAT
+        '1'

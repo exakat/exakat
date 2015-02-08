@@ -9,7 +9,9 @@ Label : CODE
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          .
+          Concatenation
+          Label : CONCAT
+            '/c.php'
           Label : CONCAT
             ->
             Label : OBJECT
@@ -20,5 +22,3 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-          Label : CONCAT
-            '/c.php'

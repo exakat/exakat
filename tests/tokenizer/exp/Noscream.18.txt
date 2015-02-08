@@ -15,11 +15,9 @@ Label : CODE
     Label : BLOCK
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $e
+        ++
+        Label : POSTPLUSPLUS
+          $e
   Label : ELEMENT
     OR
     Label : LEFT
@@ -27,25 +25,25 @@ Label : CODE
       Label : ARGUMENTS
         void
         Label : ARGUMENT
-          .
-          Label : CONCAT
-            F
+          Concatenation
           Label : CONCAT
             'G'
+          Label : CONCAT
+            F
     Label : RIGHT
       @
       Label : AT
         H
         Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            .
-            Label : CONCAT
-              I
-            Label : CONCAT
-              'J'
+          Arguments
           Label : ARGUMENT
             0
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'J'
+            Label : CONCAT
+              I
   Label : ELEMENT
     ->
     Label : OBJECT

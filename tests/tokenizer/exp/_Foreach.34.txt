@@ -42,9 +42,9 @@ Label : CODE
               Label : ARGUMENT
                 $g
         Label : ELSE
-          makeSequence T_DOUBLE_COLON
+          makeSequence T_COLON
           Label : ELEMENT
-            F
+            I
           Label : ELEMENT
             echo
             Label : ARGUMENTS
@@ -56,13 +56,13 @@ Label : CODE
                 Label : METHOD
                   I
                   Label : ARGUMENTS
-                    ,
-                    Label : ARGUMENT
-                      $h
+                    Arguments
                     Label : ARGUMENT
                       $i
+                    Label : ARGUMENT
+                      $h
           Label : ELEMENT
-            I
+            F
       Label : ELEMENT
         A
       Label : ELEMENT

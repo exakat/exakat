@@ -27,12 +27,12 @@ Label : CODE
   Label : ELEMENT
     a
     Label : ARGUMENTS
-      ,
+      Arguments
+      Label : ARGUMENT
+        -1
       Label : ARGUMENT
         [
         Label : VARIABLE
           $b
         Label : INDEX
           'c'
-      Label : ARGUMENT
-        -1

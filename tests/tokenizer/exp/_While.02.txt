@@ -5,11 +5,9 @@ Label : CODE
   Label : ELEMENT
     {
     Label : ELEMENT
-      makeSequence T_OPEN_CURLY
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
+      ++
+      Label : POSTPLUSPLUS
+        $a
   Label : ELEMENT
     while
     Label : CONDITION

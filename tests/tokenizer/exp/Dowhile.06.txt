@@ -7,23 +7,21 @@ Label : CODE
     Label : BLOCK
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            ->
-            Label : OBJECT
-              $b
-            Label : METHOD
-              c
-              Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  $d
-                Label : ARGUMENT
-                  $e
-          Label : LEFT
-            $a
+        =
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $b
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                $d
+        Label : LEFT
+          $a
     Label : CONDITION
       !
       Label : NOT

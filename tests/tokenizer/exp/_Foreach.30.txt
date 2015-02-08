@@ -23,11 +23,11 @@ Label : CODE
     Label : RIGHT
       range
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          4
+        Arguments
         Label : ARGUMENT
           5
+        Label : ARGUMENT
+          4
     Label : LEFT
       $y
   Label : ELEMENT
@@ -35,10 +35,10 @@ Label : CODE
     Label : RIGHT
       range
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          1
+        Arguments
         Label : ARGUMENT
           2
+        Label : ARGUMENT
+          1
     Label : LEFT
       $x

@@ -19,10 +19,10 @@ Label : CODE
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              .
-              Label : CONCAT
-                $b
+              Concatenation
               Label : CONCAT
                 'E'
+              Label : CONCAT
+                $b
     Label : LEFT
       $a

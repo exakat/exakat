@@ -7,15 +7,15 @@ Label : CODE
     Label : NAME
       a
     Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        $b
+      Arguments
       Label : ARGUMENT
         =
         Label : RIGHT
           3
         Label : LEFT
           $c
+      Label : ARGUMENT
+        $b
     Label : BLOCK
       {
       Label : ELEMENT

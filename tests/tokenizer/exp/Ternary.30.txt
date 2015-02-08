@@ -4,13 +4,13 @@ Label : CODE
   Label : ELEMENT
     .=
     Label : RIGHT
-      .
+      Concatenation
       Label : CONCAT
-        '&#'
+        ';'
       Label : CONCAT
         $number
       Label : CONCAT
-        ';'
+        '&#'
     Label : LEFT
       $out
   Label : ELEMENT

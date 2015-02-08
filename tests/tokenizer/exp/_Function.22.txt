@@ -7,19 +7,19 @@ Label : CODE
     Label : NAME
       a
     Label : ARGUMENTS
-      ,
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          null
-        Label : LEFT
-          $x
+      Arguments
       Label : ARGUMENT
         =
         Label : RIGHT
           true
         Label : LEFT
           $y
+      Label : ARGUMENT
+        =
+        Label : RIGHT
+          null
+        Label : LEFT
+          $x
     Label : BLOCK
       {
       Label : ELEMENT

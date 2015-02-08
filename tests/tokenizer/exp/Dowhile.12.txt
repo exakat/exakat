@@ -33,13 +33,13 @@ Label : CODE
           Label : METHOD
             f
             Label : ARGUMENTS
-              ,
+              Arguments
               Label : ARGUMENT
-                4
+                6
               Label : ARGUMENT
                 5
               Label : ARGUMENT
-                6
+                4
         Label : ELEMENT
           break
           Label : LEVEL
@@ -47,8 +47,6 @@ Label : CODE
       Label : ELSE
         {
         Label : ELEMENT
-          makeSequence T_OPEN_CURLY
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
+          break
+          Label : LEVEL
+            void

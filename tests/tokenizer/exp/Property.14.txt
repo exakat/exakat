@@ -9,10 +9,10 @@ Label : CODE
       Label : OBJECT
         a
         Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            $b
+          Arguments
           Label : ARGUMENT
             $c
+          Label : ARGUMENT
+            $b
       Label : PROPERTY
         d

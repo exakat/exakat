@@ -35,8 +35,6 @@ Label : CODE
         Label : BLOCK
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
-              return
-              Label : RETURN
-                $c
+            return
+            Label : RETURN
+              $c

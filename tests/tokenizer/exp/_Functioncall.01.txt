@@ -12,7 +12,9 @@ Label : CODE
     Label : SOURCE
       $b
     Label : BLOCK
-      F
+      makeSequence T_COLON
+      Label : ELEMENT
+        F
   Label : ELEMENT
     echo
     Label : ARGUMENTS

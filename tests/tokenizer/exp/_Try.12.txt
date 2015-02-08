@@ -22,25 +22,23 @@ Label : CODE
         Label : THEN
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
+            ->
+            Label : OBJECT
               ->
               Label : OBJECT
-                ->
-                Label : OBJECT
-                  $this
-                Label : PROPERTY
-                  f
-              Label : METHOD
-                g
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    t
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        'h'
+                $this
+              Label : PROPERTY
+                f
+            Label : METHOD
+              g
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  t
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      'h'
     Label : CATCH
       catch
       Label : VARIABLE
@@ -62,19 +60,19 @@ Label : CODE
               Label : ARGUMENT
                 f
                 Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    t
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        'g'
+                  Arguments
                   Label : ARGUMENT
                     [
                     Label : VARIABLE
                       $h
                     Label : INDEX
                       'i'
+                  Label : ARGUMENT
+                    t
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        'g'
         Label : ELEMENT
           if
           Label : CONDITION
@@ -84,17 +82,15 @@ Label : CODE
           Label : THEN
             {
             Label : ELEMENT
-              makeSequence T_OPEN_CURLY
-              Label : ELEMENT
-                ->
-                Label : OBJECT
-                  $x
-                Label : METHOD
-                  d
-                  Label : ARGUMENTS
+              ->
+              Label : OBJECT
+                $x
+              Label : METHOD
+                d
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
                     void
-                    Label : ARGUMENT
-                      void
       Label : CLASS
         ACL_RoleNoExist
     Label : CATCH
@@ -128,13 +124,11 @@ Label : CODE
     Label : THEN
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          throw
-          Label : THROW
-            new
-            Label : NEW
-              A
+        throw
+        Label : THROW
+          new
+          Label : NEW
+            A
   Label : ELEMENT
     ->
     Label : OBJECT

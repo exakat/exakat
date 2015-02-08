@@ -11,11 +11,9 @@ Label : CODE
     Label : BLOCK
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          use
-          Label : USE
-            J
+        use
+        Label : USE
+          J
   Label : ELEMENT
     class
     Label : NAME
@@ -25,11 +23,9 @@ Label : CODE
     Label : BLOCK
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          use
-          Label : USE
-            G
+        use
+        Label : USE
+          G
   Label : ELEMENT
     trait
     Label : NAME

@@ -37,6 +37,8 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $c
+            (
+            Label : CODE
+              $c
       Label : ELSE
         $d

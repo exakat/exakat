@@ -7,13 +7,11 @@ Label : CODE
     Label : VALUE
       =>
       Label : KEY
-        makeSequence T_AS
-        Label : ELEMENT
-          ->
-          Label : OBJECT
-            $x
-          Label : PROPERTY
-            a
+        ->
+        Label : OBJECT
+          $x
+        Label : PROPERTY
+          a
       Label : VALUE
         $y
     Label : SOURCE

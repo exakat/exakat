@@ -13,11 +13,11 @@ Label : CODE
           Label : ARGUMENT
             substr
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                $c
+              Arguments
               Label : ARGUMENT
                 1
+              Label : ARGUMENT
+                $c
       Label : LEFT
         1
     Label : LEFT

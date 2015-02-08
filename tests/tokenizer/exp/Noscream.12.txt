@@ -11,15 +11,15 @@ Label : CODE
         Label : NAME
           $b
         Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            .
-            Label : CONCAT
-              $host
-            Label : CONCAT
-              'a'
+          Arguments
           Label : ARGUMENT
             'b'
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              'a'
+            Label : CONCAT
+              $host
     Label : LEFT
       ->
       Label : OBJECT

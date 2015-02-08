@@ -23,13 +23,13 @@ Label : CODE
         Label : RIGHT
           array
           Label : ARGUMENTS
-            ,
+            Arguments
             Label : ARGUMENT
               =>
               Label : KEY
-                'G'
+                'I'
               Label : VALUE
-                $g
+                $i
             Label : ARGUMENT
               =>
               Label : KEY
@@ -39,9 +39,9 @@ Label : CODE
             Label : ARGUMENT
               =>
               Label : KEY
-                'I'
+                'G'
               Label : VALUE
-                $i
+                $g
         Label : LEFT
           $f
       Label : ELEMENT
@@ -69,11 +69,11 @@ Label : CODE
           Label : METHOD
             O
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                'P'
+              Arguments
               Label : ARGUMENT
                 $p
+              Label : ARGUMENT
+                'P'
         Label : LEFT
           $n
       Label : ELEMENT
@@ -91,15 +91,15 @@ Label : CODE
         Label : METHOD
           L
           Label : ARGUMENTS
-            ,
+            Arguments
+            Label : ARGUMENT
+              'N'
             Label : ARGUMENT
               ::
               Label : PROPERTY
                 $m
               Label : CLASS
                 M
-            Label : ARGUMENT
-              'N'
     Label : CATCH
       catch
       Label : VARIABLE
@@ -109,17 +109,15 @@ Label : CODE
       Label : CODE
         {
         Label : ELEMENT
-          makeSequence T_OPEN_CURLY
-          Label : ELEMENT
-            throw
-            Label : THROW
-              new
-              Label : NEW
-                AG
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'AH'
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              AG
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'AH'
     Label : CATCH
       catch
       Label : VARIABLE
@@ -129,25 +127,23 @@ Label : CODE
       Label : CODE
         {
         Label : ELEMENT
-          makeSequence T_OPEN_CURLY
-          Label : ELEMENT
-            throw
-            Label : THROW
-              new
-              Label : NEW
-                AD
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $x
-                    Label : METHOD
-                      AE
-                      Label : ARGUMENTS
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              AD
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $x
+                  Label : METHOD
+                    AE
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
                         void
-                        Label : ARGUMENT
-                          void
     Label : CATCH
       catch
       Label : VARIABLE
@@ -157,25 +153,23 @@ Label : CODE
       Label : CODE
         {
         Label : ELEMENT
-          makeSequence T_OPEN_CURLY
-          Label : ELEMENT
-            throw
-            Label : THROW
-              new
-              Label : NEW
-                AA
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $v
-                    Label : METHOD
-                      AB
-                      Label : ARGUMENTS
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              AA
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $v
+                  Label : METHOD
+                    AB
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
                         void
-                        Label : ARGUMENT
-                          void
     Label : CATCH
       catch
       Label : VARIABLE
@@ -185,29 +179,27 @@ Label : CODE
       Label : CODE
         {
         Label : ELEMENT
-          makeSequence T_OPEN_CURLY
-          Label : ELEMENT
-            throw
-            Label : THROW
-              new
-              Label : NEW
-                V
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      'W'
-                    Label : CONCAT
-                      [
-                      Label : VARIABLE
-                        ->
-                        Label : OBJECT
-                          $t
-                        Label : PROPERTY
-                          X
-                      Label : INDEX
-                        'Y'
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              V
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  Concatenation
+                  Label : CONCAT
+                    [
+                    Label : VARIABLE
+                      ->
+                      Label : OBJECT
+                        $t
+                      Label : PROPERTY
+                        X
+                    Label : INDEX
+                      'Y'
+                  Label : CONCAT
+                    'W'
     Label : CATCH
       catch
       Label : VARIABLE
@@ -217,17 +209,15 @@ Label : CODE
       Label : CODE
         {
         Label : ELEMENT
-          makeSequence T_OPEN_CURLY
-          Label : ELEMENT
-            throw
-            Label : THROW
-              new
-              Label : NEW
-                S
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'T'
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              S
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'T'
   Label : ELEMENT
     if
     Label : CONDITION
@@ -237,25 +227,23 @@ Label : CODE
         Label : NOT
           C
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $b
+            Arguments
             Label : ARGUMENT
               $c
+            Label : ARGUMENT
+              $b
     Label : THEN
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          throw
-          Label : THROW
-            new
-            Label : NEW
-              D
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'E'
+        throw
+        Label : THROW
+          new
+          Label : NEW
+            D
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'E'
   Label : ELEMENT
     =
     Label : RIGHT

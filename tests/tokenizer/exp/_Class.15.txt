@@ -23,14 +23,6 @@ Label : CODE
         Label : NAME
           b
       Label : ELEMENT
-        var
-        Label : DEFINE
-          $b
-        Label : VALUE
-          Void
-        Label : VAR
-          var
-      Label : ELEMENT
         const
         Label : VALUE
           6
@@ -50,3 +42,11 @@ Label : CODE
           4
         Label : NAME
           c
+      Label : ELEMENT
+        var
+        Label : DEFINE
+          $b
+        Label : VALUE
+          Void
+        Label : VAR
+          var

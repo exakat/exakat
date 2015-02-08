@@ -69,13 +69,11 @@ Label : CODE
         Label : BLOCK
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  '!'
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                '!'
   Label : ELEMENT
     trait
     Label : NAME
@@ -95,13 +93,11 @@ Label : CODE
         Label : BLOCK
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'Hello '
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'Hello '
   Label : ELEMENT
     trait
     Label : NAME
@@ -121,10 +117,8 @@ Label : CODE
         Label : BLOCK
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'World'
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'World'

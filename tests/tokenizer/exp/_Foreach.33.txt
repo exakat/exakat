@@ -36,11 +36,9 @@ Label : CODE
           Label : THEN
             {
             Label : ELEMENT
-              makeSequence T_OPEN_CURLY
-              Label : ELEMENT
-                continue
-                Label : LEVEL
-                  void
+              continue
+              Label : LEVEL
+                void
       Label : ELEMENT
         if
         Label : CONDITION
@@ -60,8 +58,6 @@ Label : CODE
         Label : THEN
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
-              continue
-              Label : LEVEL
-                void
+            continue
+            Label : LEVEL
+              void

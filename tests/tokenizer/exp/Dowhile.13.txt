@@ -16,9 +16,7 @@ Label : CODE
           Label : LEFT
             B
             Label : ARGUMENTS
-              ,
-              Label : ARGUMENT
-                'C'
+              Arguments
               Label : ARGUMENT
                 ->
                 Label : OBJECT
@@ -29,17 +27,17 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       void
+              Label : ARGUMENT
+                'C'
         Label : BLOCK
           {
           Label : ELEMENT
-            makeSequence T_OPEN_CURLY
-            Label : ELEMENT
-              ->
-              Label : OBJECT
-                $b
-              Label : METHOD
-                E
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    1
+            ->
+            Label : OBJECT
+              $b
+            Label : METHOD
+              E
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  1

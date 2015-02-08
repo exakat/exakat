@@ -7,11 +7,9 @@ Label : CODE
     Label : BLOCK
       {
       Label : ELEMENT
-        makeSequence T_OPEN_CURLY
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $x
+        ++
+        Label : POSTPLUSPLUS
+          $x
     Label : CONDITION
       <
       Label : RIGHT

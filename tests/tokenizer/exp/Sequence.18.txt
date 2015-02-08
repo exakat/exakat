@@ -17,13 +17,13 @@ Label : CODE
       Label : VARIABLE
         $a
       Label : INDEX
-        .
+        Concatenation
         Label : CONCAT
-          $b
+          $c
         Label : CONCAT
           'd'
         Label : CONCAT
-          $c
+          $b
   Label : ELEMENT
     =
     Label : RIGHT

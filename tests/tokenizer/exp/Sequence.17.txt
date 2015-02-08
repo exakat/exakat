@@ -13,23 +13,23 @@ Label : CODE
           Label : NOT
             in_array
             Label : ARGUMENTS
-              ,
+              Arguments
+              Label : ARGUMENT
+                array
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    'g'
+                  Label : ARGUMENT
+                    'f'
+                  Label : ARGUMENT
+                    'e'
               Label : ARGUMENT
                 [
                 Label : VARIABLE
                   $c
                 Label : INDEX
                   'd'
-              Label : ARGUMENT
-                array
-                Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    'e'
-                  Label : ARGUMENT
-                    'f'
-                  Label : ARGUMENT
-                    'g'
         Label : LEFT
           empty
           Label : ARGUMENTS

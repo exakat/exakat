@@ -39,9 +39,7 @@ Label : CODE
             Label : RIGHT
               h
               Label : ARGUMENTS
-                ,
-                Label : ARGUMENT
-                  $i
+                Arguments
                 Label : ARGUMENT
                   ->
                   Label : OBJECT
@@ -52,6 +50,8 @@ Label : CODE
                       k
                   Label : PROPERTY
                     l
+                Label : ARGUMENT
+                  $i
             Label : LEFT
               $g
   Label : ELEMENT

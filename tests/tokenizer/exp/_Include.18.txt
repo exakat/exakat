@@ -11,31 +11,31 @@ Label : CODE
       Label : METHOD
         D
         Label : ARGUMENTS
-          ,
+          Arguments
           Label : ARGUMENT
             include
             Label : ARGUMENTS
               void
               Label : ARGUMENT
-                .
+                Concatenation
                 Label : CONCAT
-                  E
-                Label : CONCAT
-                  'F'
-          Label : ARGUMENT
-            include
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                .
-                Label : CONCAT
-                  G
-                Label : CONCAT
-                  'H'
+                  'I'
                 Label : CONCAT
                   $b
                 Label : CONCAT
-                  'I'
+                  'H'
+                Label : CONCAT
+                  G
+          Label : ARGUMENT
+            include
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                Concatenation
+                Label : CONCAT
+                  'F'
+                Label : CONCAT
+                  E
     Label : LEFT
       ::
       Label : CLASS

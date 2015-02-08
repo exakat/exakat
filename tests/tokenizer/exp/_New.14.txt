@@ -29,18 +29,18 @@ Label : CODE
         Label : INDEX
           d
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $x
-              Label : INDEX
-                3
+            Arguments
             Label : ARGUMENT
               ->
               Label : OBJECT
                 $y
               Label : PROPERTY
                 d
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $x
+              Label : INDEX
+                3
       Label : INDEX
         1

@@ -35,13 +35,13 @@ Label : CODE
               Label : NOT
                 f
                 Label : ARGUMENTS
-                  ,
-                  Label : ARGUMENT
-                    $g
+                  Arguments
                   Label : ARGUMENT
                     (array)
                     Label : CAST
                       $h
+                  Label : ARGUMENT
+                    $g
         Label : THEN
           Block with if/elseif
           Label : ELEMENT

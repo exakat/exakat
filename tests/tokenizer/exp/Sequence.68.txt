@@ -39,20 +39,20 @@ Label : CODE
     Label : METHOD
       E
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          F
+        Arguments
         Label : ARGUMENT
           'G'
+        Label : ARGUMENT
+          F
   Label : ELEMENT
     ::
     Label : METHOD
       C
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          $a
+        Arguments
         Label : ARGUMENT
           'D'
+        Label : ARGUMENT
+          $a
     Label : CLASS
       B

@@ -3,7 +3,33 @@
 Label : CODE
   makeSequence T_OPEN_TAG
   Label : ELEMENT
-    .
+    Concatenation
+    Label : CONCAT
+      ->
+      Label : OBJECT
+        $e
+      Label : METHOD
+        L
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'N'
+          Label : ARGUMENT
+            'M'
+    Label : CONCAT
+      ->
+      Label : OBJECT
+        $d
+      Label : METHOD
+        H
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'K'
+          Label : ARGUMENT
+            'J'
+          Label : ARGUMENT
+            'I'
     Label : CONCAT
       ->
       Label : OBJECT
@@ -11,7 +37,11 @@ Label : CODE
       Label : METHOD
         D
         Label : ARGUMENTS
-          ,
+          Arguments
+          Label : ARGUMENT
+            'G'
+          Label : ARGUMENT
+            'F'
           Label : ARGUMENT
             ->
             Label : OBJECT
@@ -22,36 +52,6 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-          Label : ARGUMENT
-            'F'
-          Label : ARGUMENT
-            'G'
-    Label : CONCAT
-      ->
-      Label : OBJECT
-        $d
-      Label : METHOD
-        H
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            'I'
-          Label : ARGUMENT
-            'J'
-          Label : ARGUMENT
-            'K'
-    Label : CONCAT
-      ->
-      Label : OBJECT
-        $e
-      Label : METHOD
-        L
-        Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            'M'
-          Label : ARGUMENT
-            'N'
   Label : ELEMENT
     ->
     Label : OBJECT

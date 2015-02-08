@@ -9,11 +9,11 @@ Label : CODE
       Label : NAME
         
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          $b
+        Arguments
         Label : ARGUMENT
           $c
+        Label : ARGUMENT
+          $b
       Label : BLOCK
         {
         Label : ELEMENT

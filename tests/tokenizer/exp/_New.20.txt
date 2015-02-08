@@ -7,7 +7,7 @@ Label : CODE
     Label : NEW
       static
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
           ==
           Label : RIGHT
@@ -15,8 +15,8 @@ Label : CODE
           Label : LEFT
             $c
         Label : ARGUMENT
-          1
+          3
         Label : ARGUMENT
           2
         Label : ARGUMENT
-          3
+          1
