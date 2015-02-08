@@ -15,7 +15,7 @@ class Arguments extends TokenAuto {
                            'Float', 'Concatenation', 'Parenthesis', 'Cast', 'Sign',
                            'Ternary', 'Function', 'Noscream', 'As', 'Magicconstant',
                            'Logical', 'Preplusplus', 'Postplusplus', 'Not', 'Comparison',
-                           'Bitshift', 'Heredoc', 'Power', 'Shell', 'Arrayappend');
+                           'Bitshift', 'Heredoc', 'Power', 'Shell', 'Arrayappend', 'Clone');
         // @note arguments separated by ,
         $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_VAR', 'T_USE',
                                                                  'T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT',
@@ -28,7 +28,7 @@ class Arguments extends TokenAuto {
                                    1 => array('atom'    => 'yes',
                                               'check_for_arguments' => $arguments),
                                    2 => array('token'   => array_merge(array('T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_SEMICOLON',
-                                                                             'T_CLOSE_TAG', 'T_OPEN_CURLY', 'T_CLOSE_BRACKET'),
+                                                                             'T_CLOSE_TAG',  'T_CLOSE_BRACKET'), 
                                                                        Logical::$operators, Comparison::$operators,
                                                                        Token::$alternativeEnding))
                                  );

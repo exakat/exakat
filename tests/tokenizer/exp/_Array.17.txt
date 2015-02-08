@@ -1,0 +1,56 @@
+<?php
+
+Label : CODE
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      &&
+      Label : RIGHT
+        ===
+        Label : RIGHT
+          G
+        Label : LEFT
+          D
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              {
+              Label : VARIABLE
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  E
+              Label : INDEX
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  B
+            Label : ARGUMENT
+              $a
+      Label : LEFT
+        <
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            C
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            B
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            B

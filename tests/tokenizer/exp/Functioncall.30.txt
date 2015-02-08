@@ -33,4 +33,6 @@ Label : CODE
       Label : ARGUMENT
         $x
       Label : ARGUMENT
-        '1'
+        void
+        Label : ARGUMENT
+          '1'

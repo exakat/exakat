@@ -9,7 +9,9 @@ Label : CODE
       Label : ARGUMENT
         ?
         Label : CONDITION
-          $a
+          void
+          Label : ARGUMENT
+            $a
         Label : THEN
           Concatenation
           Label : CONCAT

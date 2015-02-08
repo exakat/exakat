@@ -7,17 +7,7 @@ Label : CODE
     Label : RIGHT
       array
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          +
-          Label : RIGHT
-            1
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $g
-            Label : INDEX
-              $h
+        Arguments
         Label : ARGUMENT
           -
           Label : RIGHT
@@ -28,6 +18,16 @@ Label : CODE
               $i
             Label : INDEX
               $j
+        Label : ARGUMENT
+          +
+          Label : RIGHT
+            1
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $g
+            Label : INDEX
+              $h
     Label : LEFT
       [
       Label : VARIABLE
@@ -35,7 +35,9 @@ Label : CODE
         Label : VARIABLE
           $a
       Label : INDEX
-        .
+        Concatenation
+        Label : CONCAT
+          "f"
         Label : CONCAT
           ->
           Label : OBJECT
@@ -46,5 +48,3 @@ Label : CODE
               void
               Label : ARGUMENT
                 $e
-        Label : CONCAT
-          "f"
