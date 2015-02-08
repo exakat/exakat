@@ -27,10 +27,10 @@ while($row = $res->fetch_Assoc()) {
     }
     
     $line .= "  ";
-    if (file_exists('projects/'.$row['project'].'/report')) {
+    if (file_exists('projects/'.$row['project'].'/log/errors.log')) {
         if ($config->none) { continue 1; }
 
-        $date = filemtime('projects/'.$row['project'].'/report');
+        $date = filemtime('projects/'.$row['project'].'/log/errors.log');
         $timeDifference = floor((time() - $date) / 3600 / 24);
         $line .= date("m-d-Y ", $date);
         $diff = '';
@@ -50,32 +50,38 @@ while($row = $res->fetch_Assoc()) {
         
         $diff .= ' ';
         if (filesize('projects/'.$row['project'].'/log/tokenizer.final.log') == 0) {
-            if (!file_exists('projects/'.$row['project'].'/log/errors.log')) {
-                $diff .= "O";
-            } elseif (filesize('projects/'.$row['project'].'/log/errors.log') == 191) {
-                $diff .= "-";
+            if (filesize('projects/'.$row['project'].'/log/errors.log') == 191) {
+                $diff .= "*";
             } else {
-                $diff .= "+";
+                $diff .= "E";
             }
         } else {
-            $diff .= "|";
+            $diff .= "T";
         }
 
-        if (!file_exists('projects/'.$row['project'].'/log/analyze.analyze.final.log')) {
-            $diff .= "_";
-        } else {
+        if (file_exists('projects/'.$row['project'].'/log/analyze.analyze.final.log')) {
             $a = file('projects/'.$row['project'].'/log/analyze.analyze.final.log');
             $x = array_pop($a);
             if ($x != "Done\n") {
-                $diff .= "-";            
+                $diff .= "A";            
             } else {
                 $diff .= "*";            
             }
+        } else {
+            $diff .= "_";
         }
         
 
         if (file_exists('projects/'.$row['project'].'/report')) {
             $diff .= "*";
+        } else {
+            $diff .= "R";
+        }
+
+        if (file_exists('projects/'.$row['project'].'/counts.sqlite')) {
+            $diff .= "*";
+        } else {
+            $diff .= "C";
         }
 
         $line .= $diff;
