@@ -1656,11 +1656,15 @@ GREMLIN;
     }
     
     public function hasResults() {
+        return $this->getResultsCount() > 0;
+    }
+
+    public function getResultsCount() {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
         $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out.count()"; 
         $vertices = $this->query($queryTemplate);
         
-        return $vertices[0][0] > 0;
+        return (int) $vertices[0][0];
     }
     
     public function getSeverity() {
