@@ -223,6 +223,7 @@ foreach($tokens as $t) {
             case T_TRAIT : 
             case T_EXTENDS : 
             case T_USE : 
+            case T_INSTEADOF : 
 
             case T_LOGICAL_AND : 
             case T_LOGICAL_OR : 
