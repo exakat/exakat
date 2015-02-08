@@ -1,6 +1,6 @@
 <?php
 
-namespace Report\Report;
+namespace Report;
 
 class Report {
     protected $client    = null;

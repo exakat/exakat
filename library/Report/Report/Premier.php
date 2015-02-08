@@ -2,6 +2,8 @@
 
 namespace Report\Report;
 
+use Report\Report;
+
 class Premier extends Report {
     private $projectUrl    = null;
 
