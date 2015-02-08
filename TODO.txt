@@ -774,3 +774,6 @@ Build a database of invariant : things that are expected as logical (if (is_arra
         foreach($ini as $key => &$lists) {
             foreach($lists as $id => &$function) {
 
+// Check that callable are arrays of 2 elements, not more (and not index...)
+
+Find long list and compare with a dictionary (see continent?)
