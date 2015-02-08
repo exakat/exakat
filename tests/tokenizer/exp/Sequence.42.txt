@@ -7,7 +7,7 @@ Label : CODE
     Label : RIGHT
       g
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
           [
           Label : VARIABLE
@@ -23,15 +23,15 @@ Label : CODE
           Label : INDEX
             $o
         Label : ARGUMENT
-          $h
-        Label : ARGUMENT
-          $i
-        Label : ARGUMENT
-          $j
+          'k'
         Label : ARGUMENT
           0
         Label : ARGUMENT
-          'k'
+          $j
+        Label : ARGUMENT
+          $i
+        Label : ARGUMENT
+          $h
     Label : LEFT
       !
       Label : NOT

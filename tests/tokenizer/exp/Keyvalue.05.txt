@@ -7,17 +7,7 @@ Label : CODE
     Label : RIGHT
       array
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ::
-            Label : CLASS
-              B
-            Label : CONSTANT
-              C
-          Label : VALUE
-            'd'
+        Arguments
         Label : ARGUMENT
           =>
           Label : KEY
@@ -28,5 +18,15 @@ Label : CODE
               c
           Label : VALUE
             $d
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ::
+            Label : CLASS
+              B
+            Label : CONSTANT
+              C
+          Label : VALUE
+            'd'
     Label : LEFT
       $a

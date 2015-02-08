@@ -17,15 +17,15 @@ Label : CODE
             Label : METHOD
               c
               Label : ARGUMENTS
-                ,
+                Arguments
+                Label : ARGUMENT
+                  $d
                 Label : ARGUMENT
                   array
                   Label : ARGUMENTS
                     void
                     Label : ARGUMENT
                       void
-                Label : ARGUMENT
-                  $d
           Label : LEFT
             $a
         Label : LEFT

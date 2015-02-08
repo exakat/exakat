@@ -7,19 +7,13 @@ Label : CODE
     Label : NAME
       x
     Label : ARGUMENTS
-      ,
+      Arguments
       Label : ARGUMENT
         Typehint
         Label : CLASS
           Stdclass
         Label : VARIABLE
-          $a
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          Stdclass
-        Label : VARIABLE
-          $b
+          $d
       Label : ARGUMENT
         Typehint
         Label : CLASS
@@ -31,7 +25,13 @@ Label : CODE
         Label : CLASS
           Stdclass
         Label : VARIABLE
-          $d
+          $b
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          Stdclass
+        Label : VARIABLE
+          $a
     Label : BLOCK
       {
       Label : ELEMENT

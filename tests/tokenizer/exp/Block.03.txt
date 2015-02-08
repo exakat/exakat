@@ -19,11 +19,11 @@ Label : CODE
         Label : RIGHT
           strrchr
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              $c
+            Arguments
             Label : ARGUMENT
               'd'
+            Label : ARGUMENT
+              $c
         Label : LEFT
           $b
   Label : ELEMENT

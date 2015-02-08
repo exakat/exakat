@@ -7,9 +7,7 @@ Label : CODE
     Label : RIGHT
       array_merge
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          $b
+        Arguments
         Label : ARGUMENT
           (array)
           Label : CAST
@@ -20,5 +18,7 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+        Label : ARGUMENT
+          $b
     Label : LEFT
       $a

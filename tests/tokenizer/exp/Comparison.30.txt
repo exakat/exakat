@@ -11,7 +11,11 @@ Label : CODE
         Label : METHOD
           d
           Label : ARGUMENTS
-            ,
+            Arguments
+            Label : ARGUMENT
+              $h
+            Label : ARGUMENT
+              $g
             Label : ARGUMENT
               ->
               Label : OBJECT
@@ -22,10 +26,6 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     void
-            Label : ARGUMENT
-              $g
-            Label : ARGUMENT
-              $h
         Label : CLASS
           c
       Label : LEFT

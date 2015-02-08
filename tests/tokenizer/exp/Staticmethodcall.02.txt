@@ -5,7 +5,9 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      .
+      Concatenation
+      Label : CONCAT
+        'd'
       Label : CONCAT
         ::
         Label : CLASS
@@ -16,7 +18,5 @@ Label : CODE
             void
             Label : ARGUMENT
               void
-      Label : CONCAT
-        'd'
     Label : LEFT
       $a

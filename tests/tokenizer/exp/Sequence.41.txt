@@ -15,11 +15,11 @@ Label : CODE
         Label : RIGHT
           c
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              'd'
+            Arguments
             Label : ARGUMENT
               $e
+            Label : ARGUMENT
+              'd'
         Label : LEFT
           $b
   Label : ELEMENT
@@ -27,9 +27,7 @@ Label : CODE
     Label : METHOD
       k
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          $f
+        Arguments
         Label : ARGUMENT
           array
           Label : ARGUMENTS
@@ -39,13 +37,15 @@ Label : CODE
               Label : KEY
                 'g'
               Label : VALUE
-                .
+                Concatenation
                 Label : CONCAT
-                  H
+                  $j
                 Label : CONCAT
                   "i"
                 Label : CONCAT
-                  $j
+                  H
+        Label : ARGUMENT
+          $f
     Label : OBJECT
       ::
       Label : CLASS

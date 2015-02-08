@@ -9,9 +9,7 @@ Label : CODE
     Label : METHOD
       a
       Label : ARGUMENTS
-        ,
-        Label : ARGUMENT
-          $x
+        Arguments
         Label : ARGUMENT
           ?
           Label : CONDITION
@@ -20,3 +18,5 @@ Label : CODE
             null
           Label : ELSE
             $c
+        Label : ARGUMENT
+          $x

@@ -5,7 +5,9 @@ Label : CODE
   Label : ELEMENT
     =
     Label : RIGHT
-      .
+      Concatenation
+      Label : CONCAT
+        'g'
       Label : CONCAT
         +
         Label : RIGHT
@@ -24,7 +26,5 @@ Label : CODE
                   1
               Label : LEFT
                 $c
-      Label : CONCAT
-        'g'
     Label : LEFT
       $a

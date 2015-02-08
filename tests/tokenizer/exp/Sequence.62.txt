@@ -8,19 +8,25 @@ Label : CODE
       Label : ARGUMENT
         ?
         Label : CONDITION
-          isset
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $a
-              Label : PROPERTY
-                b
+          void
+          Label : ARGUMENT
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  b
         Label : THEN
           htmlspecialchars
           Label : ARGUMENTS
-            ,
+            Arguments
+            Label : ARGUMENT
+              'H'
+            Label : ARGUMENT
+              G
             Label : ARGUMENT
               ->
               Label : OBJECT
@@ -35,9 +41,5 @@ Label : CODE
                       $e
                     Label : PROPERTY
                       f
-            Label : ARGUMENT
-              G
-            Label : ARGUMENT
-              'H'
         Label : ELSE
           'I'

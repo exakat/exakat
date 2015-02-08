@@ -31,11 +31,11 @@ Label : CODE
                     Label : INDEX
                       'e'
                   Label : INDEX
-                    .
-                    Label : CONCAT
-                      'f'
+                    Concatenation
                     Label : CONCAT
                       $g
+                    Label : CONCAT
+                      'f'
         Label : LEFT
           [
           Label : VARIABLE
@@ -47,8 +47,8 @@ Label : CODE
       Label : ELEMENT
         i
         Label : ARGUMENTS
-          ,
-          Label : ARGUMENT
-            'j'
+          Arguments
           Label : ARGUMENT
             'k'
+          Label : ARGUMENT
+            'j'

@@ -13,37 +13,37 @@ Label : CODE
           Label : RIGHT
             substr
             Label : ARGUMENTS
-              ,
+              Arguments
+              Label : ARGUMENT
+                8
+              Label : ARGUMENT
+                7
               Label : ARGUMENT
                 md5
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
-                    .
+                    Concatenation
+                    Label : CONCAT
+                      $e
                     Label : CONCAT
                       substr
                       Label : ARGUMENTS
-                        ,
-                        Label : ARGUMENT
-                          $d
+                        Arguments
                         Label : ARGUMENT
                           6
-                    Label : CONCAT
-                      $e
-              Label : ARGUMENT
-                7
-              Label : ARGUMENT
-                8
+                        Label : ARGUMENT
+                          $d
           Label : LEFT
             substr
             Label : ARGUMENTS
-              ,
+              Arguments
               Label : ARGUMENT
-                $c
+                5
               Label : ARGUMENT
                 4
               Label : ARGUMENT
-                5
+                $c
         Label : LEFT
           (
           Label : CODE
@@ -63,13 +63,13 @@ Label : CODE
                 Label : LEFT
                   substr
                   Label : ARGUMENTS
-                    ,
+                    Arguments
                     Label : ARGUMENT
-                      $b
+                      3
                     Label : ARGUMENT
                       2
                     Label : ARGUMENT
-                      3
+                      $b
             Label : LEFT
               ==
               Label : RIGHT
@@ -77,13 +77,13 @@ Label : CODE
               Label : LEFT
                 substr
                 Label : ARGUMENTS
-                  ,
+                  Arguments
                   Label : ARGUMENT
-                    $a
+                    1
                   Label : ARGUMENT
                     0
                   Label : ARGUMENT
-                    1
+                    $a
     Label : THEN
       {
       Label : ELEMENT

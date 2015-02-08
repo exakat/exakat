@@ -7,57 +7,23 @@ Label : CODE
     Label : RIGHT
       array
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $a
-            Label : PROPERTY
-              b
-          Label : VALUE
-            ->
-            Label : OBJECT
-              $c
-            Label : PROPERTY
-              d
-        Label : ARGUMENT
-          =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $e
-            Label : METHOD
-              f
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-          Label : VALUE
-            ->
-            Label : OBJECT
-              $g
-            Label : METHOD
-              h
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
+          void
         Label : ARGUMENT
           =>
           Label : KEY
             ::
+            Label : PROPERTY
+              $r
             Label : CLASS
-              I
-            Label : CONSTANT
-              J
+              Q
           Label : VALUE
             ::
+            Label : PROPERTY
+              $t
             Label : CLASS
-              K
-            Label : CONSTANT
-              L
+              S
         Label : ARGUMENT
           =>
           Label : KEY
@@ -84,17 +50,51 @@ Label : CODE
           =>
           Label : KEY
             ::
-            Label : PROPERTY
-              $r
             Label : CLASS
-              Q
+              I
+            Label : CONSTANT
+              J
           Label : VALUE
             ::
-            Label : PROPERTY
-              $t
             Label : CLASS
-              S
+              K
+            Label : CONSTANT
+              L
         Label : ARGUMENT
-          void
+          =>
+          Label : KEY
+            ->
+            Label : OBJECT
+              $e
+            Label : METHOD
+              f
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+          Label : VALUE
+            ->
+            Label : OBJECT
+              $g
+            Label : METHOD
+              h
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+        Label : ARGUMENT
+          =>
+          Label : KEY
+            ->
+            Label : OBJECT
+              $a
+            Label : PROPERTY
+              b
+          Label : VALUE
+            ->
+            Label : OBJECT
+              $c
+            Label : PROPERTY
+              d
     Label : LEFT
       $x

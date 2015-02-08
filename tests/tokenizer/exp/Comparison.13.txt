@@ -7,9 +7,9 @@ Label : CODE
     Label : RIGHT
       array
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          1
+          2
         Label : ARGUMENT
           >
           Label : RIGHT
@@ -25,6 +25,6 @@ Label : CODE
                 Label : ARGUMENT
                   void
         Label : ARGUMENT
-          2
+          1
     Label : LEFT
       $x

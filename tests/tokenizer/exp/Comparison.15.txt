@@ -11,13 +11,13 @@ Label : CODE
         Label : RIGHT
           b
           Label : ARGUMENTS
-            ,
+            Arguments
             Label : ARGUMENT
-              $c
+              $e
             Label : ARGUMENT
               $d
             Label : ARGUMENT
-              $e
+              $c
         Label : LEFT
           !
           Label : NOT

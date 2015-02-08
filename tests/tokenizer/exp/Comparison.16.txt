@@ -7,13 +7,9 @@ Label : CODE
     Label : RIGHT
       b
       Label : ARGUMENTS
-        ,
+        Arguments
         Label : ARGUMENT
-          trim
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $c
+          G
         Label : ARGUMENT
           >
           Label : RIGHT
@@ -29,6 +25,10 @@ Label : CODE
                 Label : ARGUMENT
                   void
         Label : ARGUMENT
-          G
+          trim
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $c
     Label : LEFT
       $a

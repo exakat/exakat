@@ -11,13 +11,13 @@ Label : CODE
       Label : METHOD
         b
         Label : ARGUMENTS
-          ,
+          Arguments
           Label : ARGUMENT
-            .
-            Label : CONCAT
-              __NAMESPACE__
-            Label : CONCAT
-              '\C'
+            false
+          Label : ARGUMENT
+            false
+          Label : ARGUMENT
+            ''
           Label : ARGUMENT
             array
             Label : ARGUMENTS
@@ -25,10 +25,10 @@ Label : CODE
               Label : ARGUMENT
                 void
           Label : ARGUMENT
-            ''
-          Label : ARGUMENT
-            false
-          Label : ARGUMENT
-            false
+            Concatenation
+            Label : CONCAT
+              '\C'
+            Label : CONCAT
+              __NAMESPACE__
     Label : LEFT
       $a

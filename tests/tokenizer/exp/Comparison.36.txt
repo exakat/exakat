@@ -12,7 +12,9 @@ Label : CODE
           Label : ARGUMENTS
             void
             Label : ARGUMENT
-              $b
+              (
+              Label : CODE
+                $b
         Label : LEFT
           false
     Label : THEN

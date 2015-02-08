@@ -7,21 +7,23 @@ Label : CODE
     Label : RIGHT
       array
       Label : ARGUMENTS
-        ,
+        Arguments
+        Label : ARGUMENT
+          void
         Label : ARGUMENT
           =>
           Label : KEY
-            .
-            Label : CONCAT
-              'a'
-            Label : CONCAT
-              'b'
+            *
+            Label : RIGHT
+              6
+            Label : LEFT
+              5
           Label : VALUE
-            .
-            Label : CONCAT
-              'c'
-            Label : CONCAT
-              'd'
+            *
+            Label : RIGHT
+              8
+            Label : LEFT
+              7
         Label : ARGUMENT
           =>
           Label : KEY
@@ -39,18 +41,16 @@ Label : CODE
         Label : ARGUMENT
           =>
           Label : KEY
-            *
-            Label : RIGHT
-              6
-            Label : LEFT
-              5
+            Concatenation
+            Label : CONCAT
+              'b'
+            Label : CONCAT
+              'a'
           Label : VALUE
-            *
-            Label : RIGHT
-              8
-            Label : LEFT
-              7
-        Label : ARGUMENT
-          void
+            Concatenation
+            Label : CONCAT
+              'd'
+            Label : CONCAT
+              'c'
     Label : LEFT
       $x
