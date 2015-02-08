@@ -15,11 +15,11 @@ class Arguments extends TokenAuto {
                            'Float', 'Concatenation', 'Parenthesis', 'Cast', 'Sign',
                            'Ternary', 'Function', 'Noscream', 'As', 'Magicconstant',
                            'Logical', 'Preplusplus', 'Postplusplus', 'Not', 'Comparison',
-                           'Bitshift', 'Heredoc', 'Power', 'Shell', 'Arrayappend', 'Clone');
+                           'Bitshift', 'Heredoc', 'Power', 'Shell', 'Arrayappend', 'Clone',
+                           'Include');
         // @note arguments separated by ,
-        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_VAR', 'T_USE',
+        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_VAR', 'T_STATIC', 'T_GLOBAL', 
                                                                  'T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT',
-                                                                 'T_STATIC', 'T_GLOBAL', 'T_EXTENDS', 'T_IMPLEMENTS',
                                                                  'T_SEMICOLON', 'T_CONST', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                                                  'T_FUNCTION')),
                                   -1 => array('atom'    => 'yes'),
@@ -28,7 +28,7 @@ class Arguments extends TokenAuto {
                                    1 => array('atom'    => 'yes',
                                               'check_for_arguments' => $arguments),
                                    2 => array('token'   => array_merge(array('T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_SEMICOLON',
-                                                                             'T_CLOSE_TAG',  'T_CLOSE_BRACKET'), 
+                                                                             'T_CLOSE_TAG', 'T_CLOSE_BRACKET'), 
                                                                        Logical::$operators, Comparison::$operators,
                                                                        Token::$alternativeEnding))
                                  );
@@ -37,6 +37,19 @@ class Arguments extends TokenAuto {
                                'atom'        => 'Arguments');
         $this->checkAuto();
 
+        // @note arguments separated by ,
+        $this->conditions = array(-2 => array('token'   => array('T_IMPLEMENTS', 'T_EXTENDS', 'T_USE')),
+                                  -1 => array('atom'    => 'yes'),
+                                   0 => array('token'   => Arguments::$operators,
+                                              'atom'    => 'none'),
+                                   1 => array('atom'    => 'yes',
+                                              'check_for_arguments' => $arguments),
+                                   2 => array('token'   => array('T_OPEN_CURLY', 'T_COMMA', 'T_SEMICOLON'))
+                                 );
+        
+        $this->actions = array('to_argument' => true,
+                               'atom'        => 'Arguments');
+        $this->checkAuto();
         return false;
     }
 
