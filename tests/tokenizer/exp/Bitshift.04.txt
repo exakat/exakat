@@ -7,8 +7,8 @@ Label : CODE
     Label : RIGHT
       3
     Label : LEFT
-      .
-      Label : CONCAT
-        1
+      Concatenation
       Label : CONCAT
         2
+      Label : CONCAT
+        1

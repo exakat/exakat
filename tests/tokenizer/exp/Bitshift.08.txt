@@ -7,11 +7,11 @@ Label : CODE
     Label : RIGHT
       <<
       Label : RIGHT
-        .
-        Label : CONCAT
-          4
+        Concatenation
         Label : CONCAT
           'g'
+        Label : CONCAT
+          4
       Label : LEFT
         b
         Label : ARGUMENTS

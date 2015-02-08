@@ -14,8 +14,9 @@ class Bitshift extends TokenAuto {
                                    0 => array('token'     => Bitshift::$operators,
                                              'atom'       => 'none'),
                                    1 => array('atom'      => Multiplication::$operands),
-                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET', 'T_DOUBLE_COLON',
-                                                                   'T_OBJECT_OPERATOR',)),
+                                   2 => array('filterOut' => array_merge(Functioncall::$operators, Block::$operators,
+                                                                         _Array::$operators,       Concatenation::$operators,
+                                                                         Property::$operators,     Staticproperty::$operators))
         );
         
         $this->actions = array('transform'    => array( 1 => 'RIGHT',
