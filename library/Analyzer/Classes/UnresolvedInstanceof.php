@@ -18,9 +18,11 @@ class UnresolvedInstanceof extends Analyzer\Analyzer {
         $this->atomIs("Instanceof")
              ->outIs('CLASS')
              ->noClassDefinition()
+             ->noInterfaceDefinition()
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
-             ->fullnspathIsNot($classes);
+             ->fullnspathIsNot($classes)
+             ->back('first');
         $this->prepareQuery();
     }
 }
