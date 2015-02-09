@@ -5,11 +5,11 @@ Label : CODE
   Label : ELEMENT
     global
     Label : GLOBAL
-      $c
+      $d
   Label : ELEMENT
     global
     Label : GLOBAL
-      $d
+      $c
   Label : ELEMENT
     global
     Label : GLOBAL

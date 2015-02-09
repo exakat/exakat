@@ -29,13 +29,13 @@ Label : CODE
         Label : GLOBAL
           $foo2
         Label : GLOBAL
-          $
-          Label : NAME
-            ->
-            Label : OBJECT
+          ->
+          Label : OBJECT
+            $
+            Label : NAME
               $foo2
-            Label : PROPERTY
-              bar2
+          Label : PROPERTY
+            bar2
   Label : ELEMENT
     function
     Label : NAME
@@ -49,13 +49,13 @@ Label : CODE
       Label : ELEMENT
         global
         Label : GLOBAL
-          $
-          Label : NAME
-            ->
-            Label : OBJECT
+          ->
+          Label : OBJECT
+            $
+            Label : NAME
               $foo
-            Label : PROPERTY
-              bar
+          Label : PROPERTY
+            bar
       Label : ELEMENT
         global
         Label : GLOBAL
