@@ -5,8 +5,10 @@ namespace Analyzer\Files;
 use Analyzer;
 
 class DefinitionsOnly extends Analyzer\Analyzer {
-    public static $definitions = array('Interface', 'Trait', 'Function', 'Const', 'Class', 'Use', 'Global');
+    public static $definitions = array('Interface', 'Trait', 'Function', 'Const', 'Class', 'Use', 'Global', 'Include');
     //'Namespace',  is excluded
+
+    public static $definitionsFunctions = array('define', 'set_session_handler', 'set_error_handler', 'ini_set');
     
     public function dependsOn() {
         return array('Structures/NoDirectAccess');
@@ -14,8 +16,10 @@ class DefinitionsOnly extends Analyzer\Analyzer {
     
     public function analyze() {
         $definitionsList = '"'.implode('", "', self::$definitions).'"';
-        $definitions = 'it.atom in ['.$definitionsList.', "Namespace"] || (it.atom == "Functioncall" && !(it.fullnspath in ["\\\\define", "\\\\set_session_handler", "\\\\set_error_handler"])) || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
+        $definitionsFunctionsList = '"\\\\'.implode('", "\\\\', self::$definitionsFunctions).'"';
         
+        $definitions = 'it.atom in ['.$definitionsList.', "Namespace"]  || (it.atom == "Functioncall" && it.fullnspath in ['.$definitionsFunctionsList.']) || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
+
         // all cases without extra string before/after the script
         
         // one or several namespaces
@@ -23,13 +27,6 @@ class DefinitionsOnly extends Analyzer\Analyzer {
              ->outIs('FILE')
              ->atomIs('Phpcode')
              ->outIs('CODE')
-//             ->outIs('ELEMENT')
-//             ->atomIs('Namespace')
-//             ->outIs('BLOCK')
-
-             ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").out("BLOCK").out.loop(1){!(it.object.atom in ['.$definitionsList.'])}{!(it.object.atom in ['.$definitionsList.'])}.any() == false}')
-
-             // first level of the code
 
              // spot a definition
              ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").out("BLOCK").out("ELEMENT").filter{ '.$definitions.' }.any()}')
@@ -45,22 +42,18 @@ class DefinitionsOnly extends Analyzer\Analyzer {
              ->outIs('FILE')
              ->atomIs('Phpcode')
              ->outIs('CODE')
-             
+
+             // check that there are no namespaces
              ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").any() == false}')
-
-             ->raw('filter{ it.out.loop(1){!(it.object.atom in ['.$definitionsList.'])}{!(it.object.atom in ['.$definitionsList.'])}.any() == false}')
-
-             // first level of the code
 
              // spot a definition
              ->raw('filter{ it.out("ELEMENT").filter{ '.$definitions.' }.any()}')
 
-             // spot a non-definition
+             // cannot spot a non-definition
              ->raw('filter{ it.out("ELEMENT").filter{ !('.$definitions.')}.any() == false}')
 
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 
