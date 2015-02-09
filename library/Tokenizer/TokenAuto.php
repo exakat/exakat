@@ -1608,6 +1608,7 @@ while(a2.token == 'T_DOT') {
     g.addEdge(x, a1, 'CONCAT');
     rank += 1;
     a1.setProperty('rank', rank);
+    a2.inE('INDEXED').each{ g.removeEdge(it); }
     g.idx('delete').put('node', 'delete', a2);
 
     // prepare next round
@@ -1656,6 +1657,7 @@ while(a2.token == 'T_COMMA') {
     g.addEdge(x, a1, 'ARGUMENT');
     rank += 1;
     a1.setProperty('rank', rank);
+    a2.bothE('INDEXED').each{ g.removeEdge(it); }
     g.idx('delete').put('node', 'delete', a2);
 
     // prepare next round
