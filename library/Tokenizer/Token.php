@@ -20,6 +20,7 @@ class Token {
                                       59 => 'Shell',
                                       7 => '_Arraydollarcurly',
                                       8 => 'Property',
+                                      80 => 'Phpcodemiddle',
                                       31 => 'Postplusplus',
                                       30 => 'Preplusplus',
                                       9 => 'Keyvalue',
@@ -91,7 +92,6 @@ class Token {
                                       88 => '_Finally',
                                       89 => '_Yield',
                                       76 => '_Try',
-                                      80 => 'Phpcodemiddle',
                                       77 => 'Sequence',
                                       81 => 'Phpcode',
                                     );
