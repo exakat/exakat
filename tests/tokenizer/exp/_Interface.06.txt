@@ -31,19 +31,19 @@ Label : CODE
     Label : NAME
       A
     Label : EXTENDS
-      ,
-      Label : ARGUMENT
-        \
-        Label : SUBNAME
-          C
-        Label : SUBNAME
-          B
-      Label : ARGUMENT
+      Arguments
+      Label : EXTENDS
         \
         Label : SUBNAME
           H
         Label : SUBNAME
           G
+      Label : EXTENDS
+        \
+        Label : SUBNAME
+          C
+        Label : SUBNAME
+          B
     Label : BLOCK
       {
       Label : ELEMENT
@@ -63,25 +63,25 @@ Label : CODE
     Label : NAME
       A
     Label : EXTENDS
-      ,
-      Label : ARGUMENT
+      Arguments
+      Label : EXTENDS
         \
         Label : SUBNAME
           J
         Label : SUBNAME
           I
-      Label : ARGUMENT
-        \
-        Label : SUBNAME
-          C
-        Label : SUBNAME
-          B
-      Label : ARGUMENT
+      Label : EXTENDS
         \
         Label : SUBNAME
           H
         Label : SUBNAME
           G
+      Label : EXTENDS
+        \
+        Label : SUBNAME
+          C
+        Label : SUBNAME
+          B
     Label : BLOCK
       {
       Label : ELEMENT

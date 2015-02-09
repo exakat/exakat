@@ -31,15 +31,15 @@ Label : CODE
     Label : NAME
       A
     Label : EXTENDS
-      ,
-      Label : ARGUMENT
+      Arguments
+      Label : EXTENDS
+        G
+      Label : EXTENDS
         \
         Label : SUBNAME
           C
         Label : SUBNAME
           B
-      Label : ARGUMENT
-        G
     Label : BLOCK
       {
       Label : ELEMENT
@@ -59,17 +59,17 @@ Label : CODE
     Label : NAME
       A
     Label : EXTENDS
-      ,
-      Label : ARGUMENT
+      Arguments
+      Label : EXTENDS
         I
-      Label : ARGUMENT
+      Label : EXTENDS
+        G
+      Label : EXTENDS
         \
         Label : SUBNAME
           C
         Label : SUBNAME
           B
-      Label : ARGUMENT
-        G
     Label : BLOCK
       {
       Label : ELEMENT
@@ -89,21 +89,21 @@ Label : CODE
     Label : NAME
       A
     Label : EXTENDS
-      ,
-      Label : ARGUMENT
+      Arguments
+      Label : EXTENDS
         \
         Label : SUBNAME
           H
         Label : SUBNAME
           I
-      Label : ARGUMENT
+      Label : EXTENDS
+        G
+      Label : EXTENDS
         \
         Label : SUBNAME
           C
         Label : SUBNAME
           B
-      Label : ARGUMENT
-        G
     Label : BLOCK
       {
       Label : ELEMENT

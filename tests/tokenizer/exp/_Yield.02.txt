@@ -15,19 +15,19 @@ Label : CODE
         Label : RIGHT
           array
           Label : ARGUMENTS
-            ,
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                1
-              Label : VALUE
-                2
+            Arguments
             Label : ARGUMENT
               =>
               Label : KEY
                 3
               Label : VALUE
                 4
+            Label : ARGUMENT
+              =>
+              Label : KEY
+                1
+              Label : VALUE
+                2
         Label : LEFT
           $y
       Label : ELEMENT

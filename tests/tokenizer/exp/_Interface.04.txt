@@ -7,11 +7,11 @@ Label : CODE
     Label : NAME
       a
     Label : EXTENDS
-      ,
-      Label : ARGUMENT
-        b
-      Label : ARGUMENT
+      Arguments
+      Label : EXTENDS
         c
+      Label : EXTENDS
+        b
     Label : BLOCK
       {
       Label : ELEMENT
