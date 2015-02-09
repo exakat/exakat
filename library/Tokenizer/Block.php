@@ -13,7 +13,7 @@ class Block extends TokenAuto {
                                     1 => array('atom'    => 'yes'),
                                     2 => array('token'   => 'T_CLOSE_CURLY',
                                                'atom'    => 'none'),
-                                    3 => array('token'   => array('T_CLOSE_CURLY', 'T_SEMICOLON')),
+                                    3 => array('token'   => array('T_CLOSE_CURLY', 'T_SEMICOLON', 'T_OPEN_CURLY')),
         );
         
         $this->actions = array('to_block'     => true,
