@@ -1,0 +1,50 @@
+<?php
+
+Label : CODE
+  makeSequence T_INLINE_HTML
+  Label : ELEMENT
+    use
+    Label : USE
+      \
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        C
+      Label : SUBNAME
+        B
+  Label : ELEMENT
+    E
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $this
+            Label : INDEX
+              'F'
+    Label : THEN
+      Block with if/elseif
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Concatenation
+            Label : CONCAT
+              H
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $this
+                  Label : INDEX
+                    'F'
+            Label : CONCAT
+              'G'

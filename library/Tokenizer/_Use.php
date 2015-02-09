@@ -10,9 +10,7 @@ class _Use extends TokenAuto {
     // use \a\b;
         $this->conditions = array( 0 => array('token' => _Use::$operators),
                                    1 => array('atom'  => array('Nsname', 'Identifier', 'As')),
-                                   2 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG'),
-                                              'atom'  => 'none'),
-                                 );
+                                   2 => array('token' => array('T_SEMICOLON', 'T_CLOSE_TAG')));
         
         $this->actions = array('transform'    => array( 1 => 'USE'),
                                'atom'         => 'Use',
