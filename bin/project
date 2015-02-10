@@ -89,17 +89,19 @@ if (file_exists('./projects/'.$project.'/log/errors.log')) {
 logTime('Tokenizer');
 print "Project tokenized\n";
 
-shell_exec('rm -rf ./projects/'.$project.'/log/errors.log; php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
+$thread->run('php bin/magicnumber -p '.$project);
+
+$thread->run('rm -rf ./projects/'.$project.'/log/errors.log; php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
 print "Got the errors (if any)\n";
 
-shell_exec('php bin/export_tree; mv log/network.* ./projects/'.$project.'/log/ ');
+$thread->run('php bin/export_tree; mv log/network.* ./projects/'.$project.'/log/ ');
 print "Getting the tree\n";
 
-shell_exec('php bin/stat > ./projects/'.$project.'/log/stat.log');
+$thread->run('php bin/stat > ./projects/'.$project.'/log/stat.log');
 $db->logProgress($project, $progress++ / $total_steps);
 print "Stats\n";
 
-shell_exec('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
+$thread->run('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
 
 logTime('Stats');
 $db->logProgress($project, $progress++ / $total_steps);
@@ -111,7 +113,6 @@ if (file_exists('./projects/'.$project.'/log/analyze.final.log')) {
 $themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security', 'Custom');
 $processes = array();
 foreach($themes as $theme) {
-//    $process[$theme] = proc_open('php bin/analyze -norefresh -T '.$theme.' > ./projects/'.$project.'/log/analyze.'.str_replace(' ', '_', trim($theme, '"')).'.final.log', $descriptorspec, $pipes);
     $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
     shell_exec('php bin/analyze -norefresh -T '.$theme.' > ./projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log; mv log/analyze.log ./projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
     print "Analyzing $theme\n";
