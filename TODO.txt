@@ -643,7 +643,6 @@ Make an entry point with interfaces : Database, file systeme, shell, shmop, sock
 Signal double quote strings that may be reduced because of less escaping
 
 echo 'foo: ' . $x+1 . ' bar'; (ordre de priorité voir aussi */% and suggest adding () )
-Spot useless parenthesis 
 
 Also, usage of global and attempts à detecting global and their usage count (variables only once used will be removed)
 
@@ -693,7 +692,7 @@ Function whose result must be captured (assignation or expression)
 Spot using the persistent connexions (still possible?)
 
 Should use transport rather than specific extension (bzip2, zip, zlib...).
-Spot transport used in the code 
+Spot transport, protocols, etc. used in the code 
 
 Warning
 If your application does not catch the exception thrown from the PDO constructor, the default action taken by the zend engine is to terminate the script and display a back trace. This back trace will likely reveal the full database connection details, including the username and password. It is your responsibility to catch this exception, either explicitly (via a catch statement) or implicitly via set_exception_handler().
@@ -711,8 +710,6 @@ Consommation de mémoire : différent suivant l'accès à la propriété statiqu
 Spot method/functions used once only.
 
 Add a rule to spot missing ; in legal situations (before a ?> or endif)
-
-http://stackoverflow.com/questions/3430194/performance-of-for-vs-foreach-in-php (Modifying the array with reference is faster)
 
 Multiple definitions in a file (class + function + interface ...)
 
@@ -762,8 +759,6 @@ Spot PHP_INT_MAX as a value, et suggest a replacement with an actual constant.
 Collect int/string/real/others for magic number / strings 
 (spot common strings? )
 
-Support array($this, '') dans les callbacks
-
 Exclure les PHP_Frameworks_, atoum, simpletest as tests
 
 Spot toctou (fallacies like : if (file_exists()) unlink (File may be removed between)
@@ -777,3 +772,30 @@ Build a database of invariant : things that are expected as logical (if (is_arra
 // Check that callable are arrays of 2 elements, not more (and not index...)
 
 Find long list and compare with a dictionary (see continent?)
+
+Avoid using regular expressions to validate email addresses. 
+
+comparing objects ? http://php.net/manual/en/language.oop5.object-comparison.php
+
+SHould chains exceptiosn when rethrowing 
+
+UwF: Field only ever set to null (UWF_NULL_FIELD) Property never used ? 
+UwF: Unwritten field (UWF_UNWRITTEN_FIELD)
+
+Function would like constants, not literals.
+
+setlocale is bad on windows (see doc) Warning
+The locale information is maintained per process, not per thread. If you are running PHP on a multithreaded server API like IIS or Apache on Windows, you may experience sudden changes in locale settings while a script is running, though the script itself never called setlocale(). This happens due to other scripts running in different threads of the same process at the same time, changing the process-wide locale using setlocale().
+
+spot situations where code may be mistaken with the IDE ($x = 'a '.' b'; (=> 'a  b' and not "a '.' b")
+
+wouldblock in flock
+The optional third argument is set to 1 if the lock would block (EWOULDBLOCK errno condition). (not supported on Windows)
+
+Useless \ in a string literal
+
+Spot arguments with a limited list of values (in_array or switch or direct comparisons)
+
+Add a check for php native functions (from data/*.ini to be into methods analyzers)
+
+No hardcoded PORTS or URLS.
