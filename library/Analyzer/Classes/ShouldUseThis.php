@@ -6,7 +6,8 @@ use Analyzer;
 
 class ShouldUseThis extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("UseThis");
+        return array('Analyzer\\Classes\\UseThis',
+                     'Analyzer\\Classes\\MethodDefinition');
     }
     
     public function analyze() {
@@ -17,13 +18,11 @@ class ShouldUseThis extends Analyzer\Analyzer {
              ->inIs('NAME')
              ->analyzerIsNot('Analyzer\\Classes\\UseThis')
              ->hasNoOut('STATIC')
-             ->hasNoOut('ABSTRACT')
-             ->back('first');
+             ->hasNoOut('ABSTRACT');
         $this->prepareQuery();
 
         // Static Methods must use a static call to property or variable (not constant though)
         $this->atomIs('Function')
-             ->back('first')
              ->outIs('NAME')
              ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
              ->inIs('NAME')
