@@ -39,7 +39,7 @@ $stmt = $sqlite->prepare('INSERT INTO '.$type.' (value, count) VALUES(:value, :c
 $res = query($query);
 
 $total = 0;
-foreach( as $k => $v) {
+foreach($res->toArray() as $k => $v) {
     $stmt->bindValue(':value', $k, SQLITE3_TEXT);
     $stmt->bindValue(':count', $v, SQLITE3_INTEGER);
     $stmt->execute();
