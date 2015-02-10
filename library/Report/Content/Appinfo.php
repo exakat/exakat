@@ -20,6 +20,7 @@ class Appinfo extends \Report\Content {
                             'ext/cyrus'      => 'Extensions/Extcyrus',
                             'ext/date'       => 'Extensions/Extdate',
                             'ext/dba'        => 'Extensions/Extdba',
+                            'ext/dio'        => 'Extensions/Extdio',
                             'ext/dom'        => 'Extensions/Extdom',
                             'ext/eaccelerator' => 'Extensions/Exteaccelerator',
                             'ext/enchant'    => 'Extensions/Extenchant',
