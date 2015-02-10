@@ -26,8 +26,7 @@ class ReportInfo extends \Report\Content {
         $this->list['Number of PHP files'] = $res['php'];
         $this->list['Number of lines of code'] = $res['loc'];
 
-        include(dirname(dirname(__DIR__)).'/App.php');
-        $this->list['Audit software version'] = $app['version'];
+        $this->list['Audit software version'] = \Exakat::VERSION;
         
         $res = $this->db->query("SELECT * FROM project_runs WHERE folder='{$this->project}' ORDER BY date_finish DESC LIMIT 1")->fetch_assoc();
         
@@ -36,7 +35,7 @@ class ReportInfo extends \Report\Content {
         
         $this->list['PHP version'] = substr(shell_exec('php -v'), 0, 11);
 
-        $this->list['Audit software version'] = $app['version'];
+        $this->list['Audit software version'] = \Exakat::VERSION;
     }
 
     public function getArray() {
