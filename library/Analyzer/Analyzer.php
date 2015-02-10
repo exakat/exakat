@@ -1702,7 +1702,7 @@ GREMLIN;
         $vertices = $this->query($queryTemplate);
         
         $return = array();
-        foreach($vertices->toArray() as $k => $v) {
+        foreach($vertices as $k => $v) {
             $return[$k] = $v[0];
         }
         
