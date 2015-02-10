@@ -1,0 +1,118 @@
+#!/usr/bin/env php
+<?php
+use Everyman\Neo4j\Client,
+	Everyman\Neo4j\Index\NodeIndex,
+	Everyman\Neo4j\Relationship,
+	Everyman\Neo4j\Node,
+	Everyman\Neo4j\Gremlin,
+	Tokenizer\Token;
+
+include_once(dirname(__DIR__).'/library/Autoload.php');
+spl_autoload_register('Autoload::autoload_library');
+
+$config = Config::factory($argv);
+
+$client = new Client();
+$sqliteFile = 'projects/'.$config->project.'/magicnumber.sqlite';
+if (file_exists($sqliteFile)) {
+    unlink($sqliteFile);
+}
+$sqlite = new SQLite3($sqliteFile);
+
+$types = array('Integer', 'String', 'Float');
+
+foreach( $types as $type) {
+
+$query = <<<QUERY
+
+/// insert a query here
+m = [:];
+g.idx('atoms')[['atom':'$type']].groupCount(m){it.code}{it.b+1}.iterate();
+m.findAll{it.value > 1}
+
+QUERY;
+
+
+$sqlite->exec('CREATE TABLE '.$type.' (id INTEGER PRIMARY KEY, value STRING, count INTEGER)');
+$stmt = $sqlite->prepare('INSERT INTO '.$type.' (value, count) VALUES(:value, :count)');
+
+$res = query($query);
+
+$total = 0;
+foreach( as $k => $v) {
+    $stmt->bindValue(':value', $k, SQLITE3_TEXT);
+    $stmt->bindValue(':count', $v, SQLITE3_INTEGER);
+    $stmt->execute();
+    $total++;
+}
+
+print "$type : $total\n";
+}
+
+
+function queryOne($query) {
+    $r = query($query);
+    return $r[0][0];
+}
+
+function queryArray($query) {
+    $return = array();
+    
+    $result = query($query);
+    foreach($result as $r) {
+        $return[] = (array) $r[0];
+    }
+	
+	return $return;
+}
+
+function queryColumn($query) {
+    $return = array();
+    
+    $result = query($query);
+    foreach($result as $r) {
+        $return[] = $r[0];
+    }
+	
+	return $return;
+}
+
+function query($query) {
+    global $client;
+    $params = array('type' => 'IN');
+    $query = new Gremlin\Query($client, $query, $params);
+    return $query->getResultSet();
+}
+
+function table_encode($stats) {
+    $html = "<html><body>";
+    
+    foreach($stats as $name => $value) {
+        $html .= "<tr><td>$name</td><td>$value</td></tr>\n";
+    }
+    
+    $html .= "</body></html>";
+    return $html;
+}
+
+function text_encode($stats) {
+    global $file;
+    if ($file) {
+        $html = "Statistics for the file '$file'\n\n";
+    } else {
+        $html = "Statistics for the whole server\n\n";
+    }
+    
+    foreach($stats as $name => $value) {
+        if (is_array($value)) {
+            $html .= "$name : ".join(" \n".str_repeat(' ', strlen("$name : ")), $value)."\n";
+        } else {
+            $html .= "$name : $value\n";
+        }
+    }
+    
+    $html .= "\n";
+    return $html;
+}
+
+?>
