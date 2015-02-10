@@ -84,6 +84,12 @@ while($row = $res->fetch_Assoc()) {
             $diff .= "C";
         }
 
+        if (file_exists('projects/'.$row['project'].'/magicnumber.sqlite')) {
+            $diff .= "*";
+        } else {
+            $diff .= "M";
+        }
+
         $line .= $diff;
     } else {
         if ($config->today) { continue 1; }
