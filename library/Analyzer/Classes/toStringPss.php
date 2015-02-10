@@ -6,10 +6,12 @@ use Analyzer;
 
 class toStringPss extends Analyzer\Analyzer {
     public function analyze() {
+        $methods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
+        
         $this->atomIs('Function')
              ->hasClass()
              ->outIs('NAME')
-             ->code('__toString')
+             ->code($methods)
              ->inIs('NAME')
              ->hasOut('STATIC')
              ->back('first');
@@ -18,7 +20,7 @@ class toStringPss extends Analyzer\Analyzer {
         $this->atomIs('Function')
              ->hasClass()
              ->outIs('NAME')
-             ->code('__toString')
+             ->code($methods)
              ->inIs('NAME')
              ->hasNoOut('PUBLIC')
              ->back('first');
