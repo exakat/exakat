@@ -1,0 +1,14 @@
+<?php
+
+$stats = array();
+
+$stats['analyzers'] = (int) shell_exec(' ls -Rla library/Analyzer/ | grep .php | wc -l');
+$stats['tests analyzer'] = (int) shell_exec('ls -1 ./tests/analyzer/source/ | wc -l');
+
+$stats['tests tokenizer'] = (int) shell_exec('ls -1 ./tests/tokenizer/source/ | wc -l');
+
+$stats['projects'] = (int) shell_exec('ls -1 projects/ | wc -l');
+
+print_r($stats);
+
+?>
