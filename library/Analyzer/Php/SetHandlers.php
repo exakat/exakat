@@ -27,13 +27,7 @@ use Analyzer;
 
 class SetHandlers extends Analyzer\Common\FunctionUsage {
     public function analyze() {
-        $this->functions = array(
-'set_error_handler',
-'set_exception_handler',
-'session_set_save_handler',
-'register_tick_function',
-'register_shutdown_function',
-);
+        $functions = $this->loadIni('php_handlers.ini', 'functions');
         parent::analyze();
     }
 }
