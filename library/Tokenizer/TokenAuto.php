@@ -2352,7 +2352,7 @@ g.addEdge(b1, x, 'NEXT');
 
         $it.bothE('NEXT').each{ g.removeEdge(it); }
     } else {
-        sequence = g.addVertex(null, [code:'makeSequence ' + $it.in('NEXT').next().token, atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
+        sequence = g.addVertex(null, [code:';', atom:'Sequence', token:'T_SEMICOLON', virtual:true, line:$it.line, fullcode:';']);
         g.addEdge(g.idx('racines')[['token':'Sequence']].next(), sequence, 'INDEXED');
         g.idx('atoms').put('atom', 'Sequence', sequence);
 
