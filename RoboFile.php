@@ -98,4 +98,61 @@ LICENCE;
             }
         }
     }
+    
+    /**
+     * Bundle everthing for the release
+     */
+    public function buildRelease()
+    {    
+        $this->taskExecStack()
+         ->stopOnFail()
+         ->exec('mkdir release')
+         ->exec('mkdir release/config')
+         ->exec('mkdir release/bin')
+         ->exec('cp -r bin/analyze release/bin/')
+         ->exec('cp -r bin/build_root release/bin/')
+         ->exec('cp -r bin/export_analyzer release/bin/')
+         ->exec('cp -r bin/extract_errors release/bin/')
+         ->exec('cp -r bin/files release/bin/')
+         ->exec('cp -r bin/load release/bin/')
+         ->exec('cp -r bin/log2csv release/bin/')
+         ->exec('cp -r bin/magicnumber release/bin/')
+         ->exec('cp -r bin/project release/bin/')
+         ->exec('cp -r bin/project_init release/bin/')
+         ->exec('cp -r bin/report release/bin/')
+         ->exec('cp -r bin/report_all release/bin/')
+         ->exec('cp -r bin/stat release/bin/')
+         ->exec('cp -r bin/tokenizer release/bin/')
+         ->exec('cp -r data release/')
+         ->exec('cp config/config-default.ini release/config/config-default.ini')
+         ->exec('cp -r human release/')
+         ->exec('cp -r library release/')
+         ->exec('mkdir release/log')
+         ->exec('mkdir release/media')
+         ->exec('mkdir release/project')
+         ->exec('cp -r projects/test release/projects/')
+         ->exec('cp -r projects/default release/projects/')
+         ->exec('mkdir release/scripts')
+         ->exec('cp -r scripts/*.sh release/scripts/')
+         ->exec('cp -r scripts/doctor.php release/scripts/')
+         ->exec('cp -r tests release/')
+         ->exec('cp -r composer.* release/')
+         ->exec('cp -r RoboFile.php release/')
+         ->exec('tar czf release.tgz release')
+         ->exec('mv release.tgz release.'.\Exakat::VERSION.'.tgz')
+         ->run();
+    }
+
+    /**
+     * Clean the build process
+     */
+    public function clean()
+    {    
+        $this->taskExecStack()
+         ->stopOnFail()
+         ->exec('rm -rf release')
+         ->exec('rm -rf release.'.\Exakat::VERSION.'.tgz')
+         ->run();
+    }
+    
 }
