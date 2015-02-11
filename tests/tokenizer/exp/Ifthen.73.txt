@@ -2,7 +2,7 @@
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence T_OPEN_TAG
+    ;
     Label : ELEMENT
       if
       Label : CONDITION
@@ -10,7 +10,9 @@ Label : ELEMENT
         Label : CODE
           $a
       Label : THEN
-        makeSequence T_COLON
+        ;
+        Label : ELEMENT
+          B
         Label : ELEMENT
           I
         Label : ELEMENT
@@ -189,10 +191,10 @@ Label : ELEMENT
                               H
                       Label : CONCAT
                         'F'
-        Label : ELEMENT
-          B
       Label : ELSE
-        makeSequence T_COLON
+        ;
+        Label : ELEMENT
+          AM
         Label : ELEMENT
           AP
         Label : ELEMENT
@@ -205,7 +207,5 @@ Label : ELEMENT
                 void
                 Label : ARGUMENT
                   'AP'
-        Label : ELEMENT
-          AM
 Label : ELEMENT
   A

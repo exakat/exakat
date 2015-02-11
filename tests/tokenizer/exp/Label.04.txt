@@ -1,21 +1,21 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     goto
     Label : LABEL
       A
-  Label : ELEMENT
-    :
-    Label : LABEL
-      C
   Label : ELEMENT
     =
     Label : RIGHT
       2
     Label : LEFT
       $b
+  Label : ELEMENT
+    :
+    Label : LABEL
+      C
   Label : ELEMENT
     :
     Label : LABEL

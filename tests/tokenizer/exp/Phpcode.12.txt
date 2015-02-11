@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     if
     Label : CONDITION
@@ -12,9 +12,11 @@ Label : CODE
         Label : PROPERTY
           B
     Label : THEN
-      makeSequence T_SEMICOLON
+      ;
       Label : ELEMENT
         void
+      Label : ELEMENT
+        D
       Label : ELEMENT
         ->
         Label : OBJECT
@@ -25,8 +27,6 @@ Label : CODE
             void
             Label : ARGUMENT
               void
-      Label : ELEMENT
-        D
       Label : ELEMENT
         C
         Label : ARGUMENTS

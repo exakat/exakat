@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     switch
     Label : NAME
@@ -31,7 +31,7 @@ Label : CODE
         Label : CASE
           'b'
         Label : CODE
-          makeSequence T_SEMICOLON
+          ;
           Label : ELEMENT
             g
             Label : ARGUMENTS

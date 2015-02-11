@@ -4,7 +4,7 @@ Label : ELEMENT
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence T_OPEN_TAG
+    ;
     Label : ELEMENT
       if
       Label : CONDITION
@@ -16,9 +16,11 @@ Label : ELEMENT
             Label : ARGUMENT
               $a
       Label : THEN
-        makeSequence T_COLON
+        ;
         Label : ELEMENT
           E
+        Label : ELEMENT
+          B
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -29,8 +31,6 @@ Label : ELEMENT
                 void
                 Label : ARGUMENT
                   'E'
-        Label : ELEMENT
-          B
       Label : ELSE
         elseif
         Label : CONDITION
@@ -38,9 +38,11 @@ Label : ELEMENT
           Label : CODE
             $b
         Label : THEN
-          makeSequence T_COLON
+          ;
           Label : ELEMENT
             I
+          Label : ELEMENT
+            F
           Label : ELEMENT
             echo
             Label : ARGUMENTS
@@ -53,7 +55,5 @@ Label : ELEMENT
                     'I'
                   Label : ARGUMENT
                     $c
-          Label : ELEMENT
-            F
 Label : ELEMENT
   A

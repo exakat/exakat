@@ -4,7 +4,7 @@ Label : ELEMENT
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence T_OPEN_TAG
+    ;
     Label : ELEMENT
       if
       Label : CONDITION
@@ -26,12 +26,12 @@ Label : ELEMENT
             Label : ARGUMENT
               'B'
     Label : ELEMENT
-      C
-    Label : ELEMENT
       print
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           $d
+    Label : ELEMENT
+      C
 Label : ELEMENT
    

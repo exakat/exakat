@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     if
     Label : CONDITION
@@ -41,7 +41,7 @@ Label : CODE
               Label : INDEX
                 'B'
     Label : THEN
-      makeSequence T_SEMICOLON
+      ;
       Label : ELEMENT
         if
         Label : CONDITION
@@ -103,7 +103,7 @@ Label : CODE
                   Label : PROPERTY
                     E
         Label : THEN
-          makeSequence T_SEMICOLON
+          ;
           Label : ELEMENT
             ->
             Label : OBJECT

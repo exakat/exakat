@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     switch
     Label : NAME
@@ -13,47 +13,49 @@ Label : CODE
         Label : CODE
           Block with Sequence For Default Without Semicolon
           Label : ELEMENT
+            (
+            Label : CODE
+              Arguments
+              Label : ARGUMENT
+                F
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                +
+                Label : RIGHT
+                  %
+                  Label : RIGHT
+                    W
+                  Label : LEFT
+                    (
+                    Label : CODE
+                      *
+                      Label : RIGHT
+                        strlen
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            $d
+                      Label : LEFT
+                        (
+                        Label : CODE
+                          -
+                          Label : RIGHT
+                            1
+                          Label : LEFT
+                            C
+                Label : LEFT
+                  strlen
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $b
+              Label : ARGUMENT
+                $a
+          Label : ELEMENT
             >>
             Label : RIGHT
               str_pad
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  F
-                Label : ARGUMENT
-                  0
-                Label : ARGUMENT
-                  +
-                  Label : RIGHT
-                    %
-                    Label : RIGHT
-                      W
-                    Label : LEFT
-                      (
-                      Label : CODE
-                        *
-                        Label : RIGHT
-                          strlen
-                          Label : ARGUMENTS
-                            void
-                            Label : ARGUMENT
-                              $d
-                        Label : LEFT
-                          (
-                          Label : CODE
-                            -
-                            Label : RIGHT
-                              1
-                            Label : LEFT
-                              C
-                  Label : LEFT
-                    strlen
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        $b
-                Label : ARGUMENT
-                  $a
             Label : LEFT
               $x
           Label : ELEMENT

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     switch
     Label : NAME
@@ -23,7 +23,7 @@ Label : CODE
         Label : CASE
           'd'
         Label : CODE
-          makeSequence T_SEMICOLON
+          ;
           Label : ELEMENT
             =
             Label : RIGHT
@@ -69,7 +69,7 @@ Label : CODE
         Label : CASE
           'm'
         Label : CODE
-          makeSequence T_SEMICOLON
+          ;
           Label : ELEMENT
             =
             Label : RIGHT

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     switch
     Label : NAME
@@ -19,7 +19,7 @@ Label : CODE
           Label : VARIABLE
             $e
         Label : CODE
-          makeSequence T_SEMICOLON
+          ;
           Label : ELEMENT
             return
             Label : RETURN

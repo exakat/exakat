@@ -1,15 +1,15 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     namespace
     Label : BLOCK
-      makeSequence T_SEMICOLON
+      ;
       Label : ELEMENT
         namespace
         Label : BLOCK
-          makeSequence T_SEMICOLON
+          ;
           Label : ELEMENT
             function
             Label : NAME

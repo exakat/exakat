@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     if
     Label : CONDITION
@@ -8,18 +8,18 @@ Label : CODE
       Label : CODE
         4
     Label : THEN
-      makeSequence T_OPEN_TAG
+      ;
       Label : ELEMENT
         return
         Label : RETURN
           void
       Label : ELEMENT
-        A
-
-      Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $c
+      Label : ELEMENT
+        A
+
   Label : ELEMENT
     if
     Label : CONDITION
@@ -27,18 +27,18 @@ Label : CODE
       Label : CODE
         3
     Label : THEN
-      makeSequence T_OPEN_TAG
+      ;
       Label : ELEMENT
         return
         Label : RETURN
           void
       Label : ELEMENT
-        A
-
-      Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $b
+      Label : ELEMENT
+        A
+
   Label : ELEMENT
     if
     Label : CONDITION
@@ -46,7 +46,7 @@ Label : CODE
       Label : CODE
         2
     Label : THEN
-      makeSequence T_SEMICOLON
+      ;
       Label : ELEMENT
         return
         Label : RETURN

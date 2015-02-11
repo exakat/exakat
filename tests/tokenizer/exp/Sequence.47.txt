@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     switch
     Label : NAME
@@ -29,7 +29,7 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CODE
-          makeSequence T_CLOSE_CURLY
+          ;
           Label : ELEMENT
             if
             Label : CONDITION

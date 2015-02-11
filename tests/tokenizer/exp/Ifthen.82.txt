@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     for
     Label : INIT
@@ -21,9 +21,9 @@ Label : CODE
       Label : POSTPLUSPLUS
         $d
     Label : BLOCK
-      makeSequence T_COLON
+      ;
       Label : ELEMENT
-        B
+        A
       Label : ELEMENT
         for
         Label : INIT
@@ -63,4 +63,4 @@ Label : CODE
             Label : LEFT
               $i
       Label : ELEMENT
-        A
+        B

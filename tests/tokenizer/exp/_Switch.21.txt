@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     switch
     Label : NAME
@@ -13,7 +13,7 @@ Label : CODE
         Label : CASE
           3
         Label : CODE
-          makeSequence T_SEMICOLON
+          ;
           Label : ELEMENT
             $k
           Label : ELEMENT
@@ -25,7 +25,7 @@ Label : CODE
         Label : CASE
           2
         Label : CODE
-          makeSequence T_SEMICOLON
+          ;
           Label : ELEMENT
             $j
           Label : ELEMENT
@@ -37,7 +37,7 @@ Label : CODE
         Label : CASE
           1
         Label : CODE
-          makeSequence T_SEMICOLON
+          ;
           Label : ELEMENT
             $i
           Label : ELEMENT
@@ -47,7 +47,7 @@ Label : CODE
       Label : ELEMENT
         default
         Label : CODE
-          makeSequence T_SEMICOLON
+          ;
           Label : ELEMENT
             $l
           Label : ELEMENT

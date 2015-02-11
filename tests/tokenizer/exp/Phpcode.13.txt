@@ -2,7 +2,7 @@
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence T_SEMICOLON
+    ;
     Label : ELEMENT
       if
       Label : CONDITION

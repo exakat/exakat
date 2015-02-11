@@ -4,7 +4,7 @@ Label : ELEMENT
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence T_OPEN_TAG
+    ;
     Label : ELEMENT
       foreach
       Label : VALUE
@@ -16,29 +16,7 @@ Label : ELEMENT
       Label : SOURCE
         $a
       Label : BLOCK
-        makeSequence T_CLOSE_PARENTHESIS
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            ->
-            Label : METHOD
-              C
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  array
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      =>
-                      Label : KEY
-                        'D'
-                      Label : VALUE
-                        $f
-            Label : OBJECT
-              $e
-          Label : LEFT
-            $d
+        ;
         Label : ELEMENT
           U
         Label : ELEMENT
@@ -48,9 +26,11 @@ Label : ELEMENT
           Label : SOURCE
             $i
           Label : BLOCK
-            makeSequence T_COLON
+            ;
             Label : ELEMENT
               T
+            Label : ELEMENT
+              N
             Label : ELEMENT
               echo
               Label : ARGUMENTS
@@ -89,8 +69,10 @@ Label : ELEMENT
                             R
                           Label : CONCAT
                             $l
-            Label : ELEMENT
-              N
+        Label : ELEMENT
+          I
+        Label : ELEMENT
+          M
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -114,9 +96,29 @@ Label : ELEMENT
                   Label : ARGUMENT
                     $g
         Label : ELEMENT
-          M
+          =
+          Label : RIGHT
+            ->
+            Label : METHOD
+              C
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  array
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      =>
+                      Label : KEY
+                        'D'
+                      Label : VALUE
+                        $f
+            Label : OBJECT
+              $e
+          Label : LEFT
+            $d
         Label : ELEMENT
-          I
+          D
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -133,7 +135,5 @@ Label : ELEMENT
                     'I'
                   Label : ARGUMENT
                     'H'
-        Label : ELEMENT
-          D
 Label : ELEMENT
   A

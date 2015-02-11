@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_CLOSE_CURLY
+  ;
   Label : ELEMENT
     switch
     Label : NAME

@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_CATCH
+  ;
   Label : ELEMENT
     if
     Label : CONDITION
