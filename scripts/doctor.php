@@ -207,7 +207,6 @@ if (file_exists('./config/config.ini')) {
     $stats['config']['created'] = 'Yes';
 
     $ini = parse_ini_file('config/config.ini');
-    print_r($ini);
     try {
         mysqli_report(MYSQLI_REPORT_STRICT); 
         $mysql = new mysqli($ini['mysql_host'], $ini['mysql_exakat_user'], $ini['mysql_exakat_pass']);
