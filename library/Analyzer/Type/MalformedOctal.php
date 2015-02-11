@@ -43,7 +43,8 @@ class MalformedOctal extends Analyzer\Analyzer {
         $this->atomIs('Integer')
              ->analyzerIs('Analyzer\\Type\\Integer')
              ->regex('code', '^[+-]?0[0-9]+\\$')
-             ->regex('code', '^00+');
+             ->regex('code', '^00+')
+             ->codeIsNot('0000');
         $this->prepareQuery();
 
         // integer that is defined but will be too big and will be turned into a float
