@@ -43,7 +43,7 @@ class toStringPss extends Analyzer\Analyzer {
              ->outIs('NAME')
              ->code($methods)
              ->inIs('NAME')
-             ->hasNoOut('PUBLIC')
+             ->hasOut(array('PRIVATE', 'PROTECTED'))
              ->back('first');
         $this->prepareQuery();
     }
