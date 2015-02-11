@@ -189,14 +189,14 @@ if (preg_match('/Screen version (\d+.\d+.\d+)/is', $res, $r)) {
 }
 
 // projects
-if (!file_exists('./projects/')) {
+if (file_exists('./projects/')) {
     $stats['projects']['created'] = 'Yes';
 } else {
     $stats['projects']['created'] = 'No';
 }
 
 // projects
-if (!file_exists('./log/')) {
+if (file_exists('./log/')) {
     $stats['log']['created'] = 'Yes';
 } else {
     $stats['log']['created'] = 'No';
