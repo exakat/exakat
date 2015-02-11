@@ -1,16 +1,18 @@
 <?php
 
 Label : CODE
-  Concatenation
-  Label : CONCAT
-    'f'
-  Label : CONCAT
-    'e'
-  Label : CONCAT
-    'd'
-  Label : CONCAT
-    'c'
-  Label : CONCAT
-    'b'
-  Label : CONCAT
-    'a'
+  makeSequence T_OPEN_TAG
+  Label : ELEMENT
+    Concatenation
+    Label : CONCAT
+      'f'
+    Label : CONCAT
+      'e'
+    Label : CONCAT
+      'd'
+    Label : CONCAT
+      'c'
+    Label : CONCAT
+      'b'
+    Label : CONCAT
+      'a'

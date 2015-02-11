@@ -9,13 +9,21 @@ Label : CODE
       Label : CONDITION
         Concatenation
         Label : CONCAT
-          $b
+          'a'
         Label : CONCAT
-          $c
+          !
+          Label : NOT
+            empty
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $b
+                Label : INDEX
+                  'd'
       Label : THEN
         Concatenation
-        Label : CONCAT
-          'i'
         Label : CONCAT
           $g
           Label : NAME
@@ -79,21 +87,13 @@ Label : CODE
       Label : CONDITION
         Concatenation
         Label : CONCAT
-          'a'
+          $b
         Label : CONCAT
-          !
-          Label : NOT
-            empty
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $b
-                Label : INDEX
-                  'd'
+          $c
       Label : THEN
         Concatenation
+        Label : CONCAT
+          'i'
         Label : CONCAT
           $g
           Label : NAME
@@ -175,17 +175,17 @@ Label : CODE
     Label : LEFT
       $a
   Label : ELEMENT
-    var_dump
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
-  Label : ELEMENT
     die
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
+  Label : ELEMENT
+    var_dump
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
   Label : ELEMENT
     =
     Label : RIGHT

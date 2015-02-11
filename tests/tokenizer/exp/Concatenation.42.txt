@@ -11,17 +11,14 @@ Label : CODE
     Label : THEN
       {
       Label : ELEMENT
+        A
+
+      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $b
-      Label : ELEMENT
-        A
-
-      Label : ELEMENT
-        B
-
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -29,41 +26,8 @@ Label : CODE
           Label : ARGUMENT
             $c
       Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $f
-      Label : ELEMENT
-        F
+        B
 
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $i
-      Label : ELEMENT
-        H
-
-      Label : ELEMENT
-        I
-
-      Label : ELEMENT
-        E
-
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $g
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $h
       Label : ELEMENT
         D
 
@@ -78,10 +42,46 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
+            $f
+      Label : ELEMENT
+        I
+
+      Label : ELEMENT
+        E
+
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $g
+      Label : ELEMENT
+        F
+
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $h
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
             $d
       Label : ELEMENT
-        G
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $i
+      Label : ELEMENT
+        H
 
       Label : ELEMENT
         C
+
+      Label : ELEMENT
+        G
 

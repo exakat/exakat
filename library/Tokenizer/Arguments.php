@@ -49,7 +49,7 @@ class Arguments extends TokenAuto {
                                    1 => array('atom'    => 'yes',
                                               'check_for_arguments' => $arguments),
                                    2 => array('token'   => array_merge(array('T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_SEMICOLON',
-                                                                             'T_CLOSE_TAG', 'T_CLOSE_BRACKET'), 
+                                                                             'T_CLOSE_TAG', 'T_CLOSE_BRACKET', 'T_INLINE_HTML'), 
                                                                        Logical::$operators, Comparison::$operators,
                                                                        Token::$alternativeEnding))
                                  );
@@ -64,7 +64,7 @@ class Arguments extends TokenAuto {
                                    0 => array('token'   => Arguments::$operators,
                                               'atom'    => 'none'),
                                    1 => array('atom'    => 'yes',
-                                              'check_for_arguments' => $arguments),
+                                              'check_for_namelist' => array('Identifier', 'Nsname')),
                                    2 => array('token'   => array('T_OPEN_CURLY', 'T_COMMA', 'T_SEMICOLON'))
                                  );
         

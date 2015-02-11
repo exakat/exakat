@@ -12,7 +12,7 @@ Label : CODE
         Label : INDEX
           'B'
     Label : THEN
-      makeSequence T_OPEN_TAG
+      makeSequence T_OPEN_BRACKET
       Label : ELEMENT
         G
       Label : ELEMENT
@@ -32,8 +32,6 @@ Label : CODE
       Label : ELEMENT
         B
       Label : ELEMENT
-        D
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -43,6 +41,8 @@ Label : CODE
               $b
             Label : INDEX
               'D'
+      Label : ELEMENT
+        D
     Label : ELSE
       echo
       Label : ARGUMENTS
