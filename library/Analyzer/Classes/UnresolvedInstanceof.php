@@ -28,7 +28,8 @@ use Analyzer;
 class UnresolvedInstanceof extends Analyzer\Analyzer {
     public function dependsOn() {
         return array('Analyzer\\Classes\\IsExtClass',
-                     'Analyzer\\Classes\\IsVendor',);
+                     'Analyzer\\Classes\\IsVendor',
+                     'Analyzer\\Interfaces\\IsExtInterface');
     }
 
     public function analyze() {
@@ -41,6 +42,7 @@ class UnresolvedInstanceof extends Analyzer\Analyzer {
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
+             ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
              ->fullnspathIsNot($classes)
              ->back('first');
