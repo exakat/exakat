@@ -29,7 +29,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
     public static $definitions = array('Interface', 'Trait', 'Function', 'Const', 'Class', 'Use', 'Global', 'Include');
     //'Namespace',  is excluded
 
-    public static $definitionsFunctions = array('define', 'set_session_handler', 'set_error_handler', 'ini_set');
+    public static $definitionsFunctions = array('define', 'set_session_handler', 'set_error_handler', 'ini_set', 'register_shutdown_function');
     
     public function dependsOn() {
         return array('Structures/NoDirectAccess');
