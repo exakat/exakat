@@ -195,11 +195,34 @@ if (file_exists('./projects/')) {
     $stats['projects']['created'] = 'No';
 }
 
-// projects
+// log
 if (file_exists('./log/')) {
     $stats['log']['created'] = 'Yes';
 } else {
     $stats['log']['created'] = 'No';
+}
+
+// config
+if (file_exists('./config/config.ini')) {
+    $stats['config']['created'] = 'Yes';
+
+    $ini = parse_ini_file('config/config.ini');
+    print_r($ini);
+    try {
+        mysqli_report(MYSQLI_REPORT_STRICT); 
+        $mysql = new mysqli($ini['mysql_host'], $ini['mysql_exakat_user'], $ini['mysql_exakat_pass']);
+        $stats['config']['mysql_connect'] = 'Success';
+        $stmt = $mysql->query('SHOW DATABASES LIKE "'.$ini['mysql_exakat_db'].'"');
+        if ($stmt->num_rows == 1) {
+            $stats['config']['mysql_database'] = 'Success';
+        } else {
+            $stats['config']['mysql_database'] = 'Failure';
+        }
+    } catch (mysqli_sql_exception $e) {
+        $stats['config']['mysql_connect'] = 'Failed';
+    }
+} else {
+    $stats['config']['created'] = 'No';
 }
 
 // composer
