@@ -209,6 +209,8 @@ $res = preg_replace('/\e\[[\d;]*m/', '', $res);
 if (preg_match('/ version ([0-9\.a-z\-]+)/', $res, $r)) {//
     $stats['composer']['installed'] = 'Yes';
     $stats['composer']['version'] = $r[1];
+    $stats['composer']['vendor'] = file_exists('vendor') ? 'Yes' : 'No';
+    $stats['composer']['neo4jphp'] = file_exists('vendor/everyman/neo4jphp') ? 'Yes' : 'No';
 } else {
     $stats['composer']['installed'] = 'No';
 }
