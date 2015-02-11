@@ -52,7 +52,7 @@ Label : ELEMENT
               Label : ARGUMENT
                 'D'
       Label : THEN
-        makeSequence T_OPEN_TAG
+        makeSequence T_INLINE_HTML
         Label : ELEMENT
           M
         Label : ELEMENT
@@ -86,9 +86,9 @@ Label : ELEMENT
                       Label : INDEX
                         'M'
         Label : ELEMENT
-          I
-        Label : ELEMENT
           E
+        Label : ELEMENT
+          I
         Label : ELEMENT
           G
           Label : ARGUMENTS
@@ -98,8 +98,6 @@ Label : ELEMENT
             Label : ARGUMENT
               'H'
       Label : ELSE
-        makeSequence T_COLON
-        Label : ELEMENT
-          N
+        N
 Label : ELEMENT
   A
