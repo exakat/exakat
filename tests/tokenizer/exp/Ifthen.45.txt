@@ -8,9 +8,7 @@ Label : CODE
       Label : CODE
         1
     Label : THEN
-      makeSequence T_COLON
-      Label : ELEMENT
-        A
+      A
     Label : ELSE
       elseif
       Label : CONDITION
@@ -18,10 +16,6 @@ Label : CODE
         Label : CODE
           2
       Label : THEN
-        makeSequence T_COLON
-        Label : ELEMENT
-          B
+        B
       Label : ELSE
-        makeSequence T_COLON
-        Label : ELEMENT
-          C
+        C
