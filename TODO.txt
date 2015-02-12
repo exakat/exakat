@@ -489,8 +489,6 @@ Separate 'files' with the official test and a script for short-tags, and the oth
 
 automatically exclude files with NEXT at the end of the tokenizer (separate script for cleaning).
 
-Start using composer (autoload migration)
-
 Add a readability test for PHP code (http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests#cite_note-10, http://en.wikipedia.org/wiki/Automated_Readability_Index)
 
 remove all usage of the common log folder
@@ -541,7 +539,7 @@ Check for unused Traits (extension or use somewhere).
 
 Change representation of Property, constant, methods, use in a class (remove ELEMENT, make it some other link to reduce long sequence scan)
 
-add support for composer (avoid some undefined classes, interfaces, etc.)
+add support for composer (avoid some undefined classes, interfaces, suggest to put them in the etc.)
 
 call_user_func doesn't propage references 
 References are contagious ? 
@@ -799,3 +797,48 @@ Spot arguments with a limited list of values (in_array or switch or direct compa
 Add a check for php native functions (from data/*.ini to be into methods analyzers)
 
 No hardcoded PORTS or URLS.
+
+https://www.checkmarx.com/technology/vulnerability-coverage/
+security : owasp
+
+Detect circular references and suggest 'gc.disable' them (possible?)
+
+Establish a tree-structure for methods, so as to differentiate branches inside the code 
+
+Be able to consult a Packagist database to make sure constants are there (or not). Will depends on versions, package name, classes names (separate process, based on composer.json)
+
+Spot properties that are in the parents/traits too. 
+
+/* useless unset : array contains objects
+        foreach (self::$instances as $instance) {
+            if ($instance) unset($instance);
+        }
+*/
+
+// written only variable : Not for dynamic variables
+// used once only variable : Not for dynamic variables
+
+//    protected $arguments = ''; NOT a variable in a trait (actually, property)
+
+// property unused : check for traits too
+
+// property undefined : check in traits AND hierarchy
+
+// spot methods that are actually overwritting one in the parents, and then ignore the unused arguments
+
+// manage USE in trait so as to be ignored (linked directly to the trait). 
+// same for namespaces
+// same for classes
+
+//Lurker\Event\FilesystemEvent Check in the composer file  (load the packagist in the base.
+// base should have namespaces, versions, 
+
+// list of special classes and files
+// robofile.php => Robo => task automation (like phing, bldr, etc.)
+// phpunit_framework_extension => phpunit
+
+// unused methods : methods in traits => check in used methods (is the trait used too ? )
+// used/unsued traits
+
+// DynamicParams : use may be a trait => appears in USE inside a class. 
+
