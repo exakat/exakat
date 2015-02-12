@@ -29,24 +29,28 @@ class SimpleTable extends \Report\Format\Html {
     
     public function render($output, $data) {
 
-        $th = '<tr>';
-        foreach($this->titles as $title) {
-            $th .= <<<HTML
+        if (empty($this->titles)) {
+            $th = '';
+        } else {
+            $th = '													<thead>
+														<tr>
+';
+            foreach($this->titles as $title) {
+                $th .= <<<HTML
 															<th>
 																$title
 															</th>
 
 HTML;
         }
-        $th .= "</tr>";
-        
+            $th .= '														</tr>
+													</thead>
+';
+        }
+
         $text = <<<HTML
 												<table>
-													<thead>
-														<tr>
 {$th}
-														</tr>
-													</thead>
 
 													<tbody>
 

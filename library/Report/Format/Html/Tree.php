@@ -27,19 +27,22 @@ class Tree extends \Report\Format\Html {
     static public $tree_counter = 0;
     
     public function render($output, $data) {
-        $html = '<ul>';
+        $html = "<ul>\n";
         
         foreach($data as $section => $values) {
-            $html .= '<li>'.$section."<ul>";
+            $html .= "<li>$section<ul>";
             
             foreach($values as $name => $value) {
-                $html .= '<li>'.$name." : $value </li>";
+                $name = htmlentities($name, ENT_COMPAT | ENT_HTML401, 'UTF-8');
+                $value = htmlentities($value, ENT_COMPAT | ENT_HTML401, 'UTF-8');
+                
+                $html .= "<li>$name : $value</li>\n";
             }
             
-            $html .= '</ul></li>';
+            $html .= "</ul></li>\n";
         }
 
-        $html .= '</ul>';
+        $html .= "</ul>\n";
 
         $output->push($html);
     }

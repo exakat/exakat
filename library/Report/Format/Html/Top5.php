@@ -30,28 +30,31 @@ class Top5 extends \Report\Format\Html {
     private $columnsHeaders = array();
     
     public function render($output, $data) {
-        $title = "";
+        $title = "&nbsp;";
         $html = <<<HTML
 											<h4 class="lighter">
 												$title
 											</h4>
 												<table class="table table-bordered table-striped">
-													<thead>
-														<tr>
 HTML;
-
-        foreach($this->columnsHeaders as $columnHeader) {
-            $html .= <<<HTML
+        if (!empty($this->columnsHeaders)) {
+            $html .= '													<thead>
+														<tr>
+';
+          foreach($this->columnsHeaders as $columnHeader) {
+                $html .= <<<HTML
 															<th>
 																name
 															</th>
 
 HTML;
+            }
+            $html .= '														</tr>
+													</thead>
+';
         }
         
         $html .= <<<HTML
-														</tr>
-													</thead>
 
 													<tbody>
 HTML;

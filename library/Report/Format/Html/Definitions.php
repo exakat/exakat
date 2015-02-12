@@ -31,9 +31,13 @@ HTML;
         
         uksort($data, function ($a, $b) { return strtolower($a) > strtolower($b) ;});
         foreach($data as $name => $definition) {
+            $description = $definition->getDescription();
+            $description = htmlentities($description, ENT_COMPAT | ENT_HTML401, 'UTF-8');
+            
+            $name = htmlentities($name, ENT_COMPAT | ENT_HTML401, 'UTF-8');
             $text .= "
 														<dt>$name</dt>
-														<dd><p>{$definition->getDescription()}</p></dd>";
+														<dd><p>$description</p></dd>";
         }
 
         $text .= <<<HTML

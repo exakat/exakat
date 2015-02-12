@@ -27,7 +27,7 @@ class Section extends \Report\Format\Html {
     public function render($output, $data) {
         // todo link to the actual section  ?
         $h = $data->getLevel();
-        $output->push("<h$h>".$data->getName()."</h$h>\n");
+        $output->push("<h$h>".htmlentities($data->getName(), ENT_COMPAT | ENT_HTML401, 'UTF-8')."</h$h>\n");
     }
 
 }

@@ -28,6 +28,7 @@ class Horizontal extends \Report\Format\Html {
         foreach($data as $row) {
             $text = "";
             foreach($row as $k => $v) {
+                $v = htmlentities($v, ENT_COMPAT | ENT_HTML401, 'UTF-8');
                 $text .= " $k : $v<br />\n";
             }
             $text .= "<hr />\n";

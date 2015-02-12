@@ -35,7 +35,6 @@ HTML;
             $text .= <<<HTML
 									<div>
 										{$row['number']} {$row['content']}
-										</div>
 									</div>
 HTML;
 

@@ -45,7 +45,20 @@ class Html extends \Report\Format {
     }
     
     public function toFile($filename) {
-        file_put_contents($filename, "<html><header></header><body>".$this->output."</body>");
+        file_put_contents($filename, <<<HTML
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Exakat report</title>
+    </head>
+    <body>
+    {$this->output}
+    </body>
+</html>
+
+HTML
+);
         
         return true;
     }
