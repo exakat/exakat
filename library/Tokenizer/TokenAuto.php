@@ -2395,7 +2395,7 @@ list_before = ['T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMA
         'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
         'T_PLUS', 'T_MINUS',
         'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_POW',
-        'T_COLON', 'T_NEW', 'T_DOT',
+        'T_NEW', 'T_DOT',
         'T_SR','T_SL', 'T_CURLY_OPEN',
         'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_VAR',
         'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
@@ -2454,22 +2454,25 @@ if (     $it.token != 'T_ELSEIF'
     && !($it.out('NEXT').next().token in list_after_token)
     && !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
     && !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR', 'T_DOUBLE_COLON']}.any()) /* \$x{\$b - 2} */
+    &&  (($it.in('NEXT').has('token', 'T_COLON').any() == false) || $it.out('NEXT').has('token', 'T_INLINE_HTML').any())
     ) {
 $makeSequence;
 } else {
-    /*
-    $it.setProperty('makeSequence1',   $it.token != 'T_ELSEIF');
-    $it.setProperty('makeSequence2',  ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' ));
-    $it.setProperty('makeSequence3',  ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().getProperty('token') in list_before))) ;
-    $it.setProperty('makeSequence31',  $it.in('NEXT').next().atom != null);
-    $it.setProperty('makeSequence32',  $it.in('NEXT') .next().token) ;
-    $it.setProperty('makeSequence41',  $it.out('NEXT').next().token);
-    $it.setProperty('makeSequence4',   (!($it.out('NEXT').next().token in list_after) ));
-    $it.setProperty('makeSequence5',   $it.in_quote != 'true' );
-    $it.setProperty('makeSequence6',   $it.in_for != 'true' );
-    $it.setProperty('makeSequence7',   !($it.in('NEXT').next().atom in ['Class', 'Identifier']) );
-    $it.setProperty('makeSequence9',   !($it.out('NEXT').next().token in list_after_token));
-    $it.setProperty('makeSequence10',   !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_STRING', 'T_NS_SEPARATOR']));
+/*
+    $it.setProperty('makeSequence1', $it.token != 'T_ELSEIF');
+    $it.setProperty('makeSequence2', $it.in('NEXT').any());
+    $it.setProperty('makeSequence3', $it.out('NEXT').any());
+    $it.setProperty('makeSequence4', ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' ));
+    $it.setProperty('makeSequence5', ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before)));
+    $it.setProperty('makeSequence6', ($it.in('NEXT').next().atom != null || !($it.out('NEXT').next().token in list_after) ));
+    $it.setProperty('makeSequence7', ($it.in_quote != \"'true'\"));
+    $it.setProperty('makeSequence8', $it.in_for != \"'true'\");
+    $it.setProperty('makeSequence9', !($it.in('NEXT').next().atom in ['Class', 'Identifier']));
+    $it.setProperty('makeSequence10', !($it.out('NEXT').next().token in list_after_token));
+    $it.setProperty('makeSequence11', !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE']));
+    $it.setProperty('makeSequence12', !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR', 'T_DOUBLE_COLON']}.any())); 
+    $it.setProperty('makeSequence13a', $it.in('NEXT').next().token);
+    $it.setProperty('makeSequence13b', $it.out('NEXT').next().token);
     */
 }
 

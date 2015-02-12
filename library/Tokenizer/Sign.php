@@ -62,13 +62,14 @@ class Sign extends TokenAuto {
                                                                                  'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT',
                                                                                  'T_CLOSE_BRACKET', 'T_CLOSE_CURLY' ),
                                                                           Magicconstant::$operators, Not::$operators),
-                                               'notAtom' => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication', 
-                                                                  'Cast',  'Integer', 'Float', 'Function')), 
-                                    0 => array('token' => Sign::$operators),
-                                    1 => array('atom' => Sign::$operands),
-                                    2 => array('filterOut' => array_merge( Methodcall::$operators, Parenthesis::$operators,
-                                                                           _Array::$operators,     Block::$operators,
-                                                                           Property::$operators,   Staticproperty::$operators)),
+                                               'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream',
+                                                                     'Multiplication', 'Cast',  'Integer', 'Float', 'Function',
+                                                                     'Sequence')), 
+                                    0 => array('token'      => Sign::$operators),
+                                    1 => array('atom'       => Sign::$operands),
+                                    2 => array('filterOut'  => array_merge( Methodcall::$operators, Parenthesis::$operators,
+                                                                            _Array::$operators,     Block::$operators,
+                                                                            Property::$operators,   Staticproperty::$operators)),
                                  );
         
         $this->actions = array('transform'    => array( 1 => 'SIGN'),
@@ -82,10 +83,10 @@ class Sign extends TokenAuto {
 
 // This special case is needed for situation like 1 . 2 + 3 and -'a' . -'b';
         $this->conditions = array( -1 => array('token' => array('T_DOT' ),
-                                               'atom' => 'none'),
+                                               'atom'  => 'none'),
                                    0  => array('token' => Sign::$operators,
-                                               'atom' => 'none'),
-                                   1  => array('atom' => Sign::$operands),
+                                               'atom'  => 'none'),
+                                   1  => array('atom'  => Sign::$operands),
                                    2  => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
                                                                     'T_OPEN_CURLY', 'T_OPEN_BRACKET')),
                                  );
