@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     if
     Label : CONDITION
@@ -12,7 +12,9 @@ Label : CODE
           Label : ARGUMENT
             void
     Label : THEN
-      makeSequence T_OPEN_TAG
+      ;
+      Label : ELEMENT
+        	
       Label : ELEMENT
         k
         Label : ARGUMENTS
@@ -20,15 +22,13 @@ Label : CODE
           Label : ARGUMENT
             void
       Label : ELEMENT
-        	
-      Label : ELEMENT
-        	
-      Label : ELEMENT
         l
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             'm'
+      Label : ELEMENT
+        	
       Label : ELEMENT
         while
         Label : CONDITION
@@ -38,7 +38,7 @@ Label : CODE
             Label : ARGUMENT
               void
         Label : BLOCK
-          makeSequence T_OPEN_TAG
+          ;
           Label : ELEMENT
             g
             Label : ARGUMENTS
@@ -48,8 +48,6 @@ Label : CODE
           Label : ELEMENT
             		
           Label : ELEMENT
-            			
-          Label : ELEMENT
             h
             Label : ARGUMENTS
               Arguments
@@ -57,16 +55,10 @@ Label : CODE
                 '2'
               Label : ARGUMENT
                 '1'
-      Label : ELEMENT
-        d
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
+          Label : ELEMENT
+            			
       Label : ELEMENT
         	
-      Label : ELEMENT
-        		
       Label : ELEMENT
         e
         Label : ARGUMENTS
@@ -76,7 +68,15 @@ Label : CODE
       Label : ELEMENT
         		
       Label : ELEMENT
+        		
+      Label : ELEMENT
         	
+      Label : ELEMENT
+        d
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
       Label : ELEMENT
         b
         Label : ARGUMENTS

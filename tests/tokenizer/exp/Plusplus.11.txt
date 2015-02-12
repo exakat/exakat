@@ -1,7 +1,11 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      $a
   Label : ELEMENT
     ++
     Label : POSTPLUSPLUS
@@ -10,7 +14,3 @@ Label : CODE
         $a
       Label : PROPERTY
         b
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $a

@@ -1,6 +1,8 @@
 <?php 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
+  Label : ELEMENT
+    A
   Label : ELEMENT
     =
     Label : RIGHT
@@ -11,8 +13,6 @@ Label : CODE
           void
     Label : LEFT
       $d
-  Label : ELEMENT
-    A
   Label : ELEMENT
     if
     Label : CONDITION

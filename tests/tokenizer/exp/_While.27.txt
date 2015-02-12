@@ -2,7 +2,7 @@
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence T_OPEN_TAG
+    ;
     Label : ELEMENT
       while
       Label : CONDITION

@@ -1,12 +1,12 @@
-makeSequence T_ROOT
+;
 Label : ELEMENT
   K
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence T_STRING
+    ;
     Label : ELEMENT
-      H
+      A
     Label : ELEMENT
       echo
       Label : ARGUMENTS
@@ -17,6 +17,8 @@ Label : ELEMENT
             void
             Label : ARGUMENT
               'J'
+    Label : ELEMENT
+      H
     Label : ELEMENT
       ->
       Label : METHOD
@@ -49,5 +51,3 @@ Label : ELEMENT
             void
             Label : ARGUMENT
               'B'
-    Label : ELEMENT
-      A

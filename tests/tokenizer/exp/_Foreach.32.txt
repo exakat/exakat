@@ -5,7 +5,7 @@ Label : ELEMENT
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence T_OPEN_TAG
+    ;
     Label : ELEMENT
       foreach
       Label : VALUE
@@ -17,47 +17,49 @@ Label : ELEMENT
       Label : SOURCE
         $tables
       Label : BLOCK
-        makeSequence T_COLON
+        Block with Foreach
         Label : ELEMENT
-          C
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $tpl
-              Label : METHOD
-                escape
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $label
-        Label : ELEMENT
-          D
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $tpl
-              Label : METHOD
-                escape
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $tpl
-                    Label : METHOD
-                      slug
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          $label
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $tpl
+                Label : METHOD
+                  escape
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $tpl
+                      Label : METHOD
+                        slug
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            $label
+          Label : ELEMENT
+            D
+          Label : ELEMENT
+            C
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $tpl
+                Label : METHOD
+                  escape
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $label
         Label : ELEMENT
           B
 Label : ELEMENT

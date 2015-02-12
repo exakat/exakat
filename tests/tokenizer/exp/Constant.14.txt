@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     if
     Label : CONDITION
@@ -9,7 +9,7 @@ Label : CODE
       Label : CODE
         $e
     Label : THEN
-      makeSequence T_OPEN_TAG
+      ;
       Label : ELEMENT
         a
       Label : ELEMENT

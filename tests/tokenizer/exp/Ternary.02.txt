@@ -1,14 +1,12 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
-  Label : ELEMENT
-    ?
-    Label : CONDITION
-      !
-      Label : NOT
-        $x
-    Label : THEN
-      'a'
-    Label : ELSE
-      'b'
+  ?
+  Label : CONDITION
+    !
+    Label : NOT
+      $x
+  Label : THEN
+    'a'
+  Label : ELSE
+    'b'

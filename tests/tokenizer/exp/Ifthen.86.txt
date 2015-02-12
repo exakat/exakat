@@ -1,10 +1,10 @@
-makeSequence T_ROOT
+;
 Label : ELEMENT
   T
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence T_OPEN_TAG
+    ;
     Label : ELEMENT
       if
       Label : CONDITION
@@ -20,7 +20,9 @@ Label : ELEMENT
           Label : PROPERTY
             C
       Label : THEN
-        makeSequence T_CLOSE_PARENTHESIS
+        ;
+        Label : ELEMENT
+          S
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -83,5 +85,3 @@ Label : ELEMENT
                             I
                   Label : ARGUMENT
                     F
-        Label : ELEMENT
-          S

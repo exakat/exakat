@@ -4,7 +4,7 @@ Label : ELEMENT
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence T_QUESTION
+    ;
     Label : ELEMENT
       =
       Label : RIGHT

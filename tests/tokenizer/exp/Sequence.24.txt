@@ -1,16 +1,16 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
+  Label : ELEMENT
+    b
+
   Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         $c
-  Label : ELEMENT
-    b
-
   Label : ELEMENT
     echo
     Label : ARGUMENTS

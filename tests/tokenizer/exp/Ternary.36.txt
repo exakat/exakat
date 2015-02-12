@@ -2,7 +2,7 @@
 Label : ELEMENT
   <?php 
   Label : CODE
-    makeSequence T_QUESTION
+    ;
     Label : ELEMENT
       U
     Label : ELEMENT
@@ -76,13 +76,13 @@ Label : ELEMENT
                   Label : ELSE
                     'R'
     Label : ELEMENT
+      L
+    Label : ELEMENT
       print
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           $e
-    Label : ELEMENT
-      L
     Label : ELEMENT
       M
     Label : ELEMENT
@@ -98,17 +98,17 @@ Label : ELEMENT
               Label : ARGUMENT
                 $b
       Label : THEN
-        makeSequence T_OPEN_TAG
+        ;
         Label : ELEMENT
           G
-        Label : ELEMENT
-          H
         Label : ELEMENT
           print
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $c
+        Label : ELEMENT
+          H
       Label : ELSE
         elseif
         Label : CONDITION
@@ -120,13 +120,9 @@ Label : ELEMENT
             Label : LEFT
               $d
         Label : THEN
-          makeSequence T_COLON
-          Label : ELEMENT
-            J
+          J
         Label : ELSE
-          makeSequence T_COLON
-          Label : ELEMENT
-            K
+          K
     Label : ELEMENT
       print
       Label : ARGUMENTS

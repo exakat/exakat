@@ -1,6 +1,6 @@
 <?php 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     if
     Label : CONDITION
@@ -8,9 +8,7 @@ Label : CODE
       Label : CODE
         0
     Label : THEN
-      makeSequence T_OPEN_TAG
-      Label : ELEMENT
-        A
+      ;
       Label : ELEMENT
         ->
         Label : OBJECT
@@ -23,6 +21,8 @@ Label : CODE
               'I'
       Label : ELEMENT
         E
+      Label : ELEMENT
+        A
       Label : ELEMENT
         ::
         Label : METHOD
