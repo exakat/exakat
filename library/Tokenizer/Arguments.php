@@ -64,7 +64,7 @@ class Arguments extends TokenAuto {
                                    0 => array('token'   => Arguments::$operators,
                                               'atom'    => 'none'),
                                    1 => array('atom'    => 'yes',
-                                              'check_for_namelist' => array('Identifier', 'Nsname')),
+                                              'check_for_namelist' => array('Identifier', 'Nsname', 'As')),
                                    2 => array('token'   => array('T_OPEN_CURLY', 'T_COMMA', 'T_SEMICOLON'))
                                  );
         
