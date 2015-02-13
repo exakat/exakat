@@ -1,17 +1,17 @@
-makeSequence T_ROOT
+;
 Label : ELEMENT
   I
 Label : ELEMENT
   <?php
 
   Label : CODE
-    makeSequence T_OPEN_TAG
+    ;
     Label : ELEMENT
       namespace
       Label : NAMESPACE
         B
       Label : BLOCK
-        makeSequence T_SEMICOLON
+        ;
         Label : ELEMENT
           D
         Label : ELEMENT

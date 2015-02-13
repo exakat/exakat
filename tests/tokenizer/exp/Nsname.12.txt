@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_OPEN_TAG
+  ;
   Label : ELEMENT
     namespace
     Label : NAMESPACE
@@ -11,7 +11,7 @@ Label : CODE
       Label : SUBNAME
         Foo
     Label : BLOCK
-      makeSequence T_SEMICOLON
+      ;
       Label : ELEMENT
         ::
         Label : CLASS

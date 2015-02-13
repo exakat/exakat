@@ -1,7 +1,7 @@
 <?php
 
 Label : CODE
-  makeSequence T_CLOSE_CURLY
+  ;
   Label : ELEMENT
     function
     Label : ARGUMENTS
@@ -69,7 +69,7 @@ Label : CODE
           Label : ELEMENT
             yield
             Label : YIELD
-              makeSequence T_YIELD
+              ;
               Label : ELEMENT
                 [
                 Label : VARIABLE
@@ -79,7 +79,7 @@ Label : CODE
           Label : ELEMENT
             yield
             Label : YIELD
-              makeSequence T_YIELD
+              ;
               Label : ELEMENT
                 ?
                 Label : CONDITION
