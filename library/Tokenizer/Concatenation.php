@@ -44,9 +44,9 @@ class Concatenation extends TokenAuto {
                                                                             'T_ECHO', 'T_PRINT','T_OPEN_TAG',
                                                                             'T_SEMICOLON', 'T_CASE'))),
                                   -1 => array('atom'  => $operands ),
-                                   0 => array('token' => 'T_DOT'),
-                                   1 => array('atom'  => $operands,
+                                   0 => array('token' => 'T_DOT',
                                               'check_for_concatenation' => $operands),
+                                   1 => array('atom'  => $operands),
                                    2 => array('token' => array_merge(Comparison::$operators, Logical::$operators,
                                                           Power::$operators, Addition::$operators, Multiplication::$operators,
                                                           array('T_CLOSE_PARENTHESIS', 'T_COLON', 'T_SEMICOLON', 'T_CLOSE_TAG',
@@ -58,6 +58,7 @@ class Concatenation extends TokenAuto {
                                'atom'             => 'Concatenation',
                                'makeSequence'     => 'x',
                                );
+//        $this->printQuery();
         $this->checkAuto();
 
         return false;

@@ -2784,8 +2784,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
                                  'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_PLUS','T_MINUS', 'T_POW', 'T_ELSEIF'));
             $finalTokens = "'".join("', '", $finalTokens)."'";
 
-//            $queryConditions[] = "as('cfc').out('NEXT').filter{ it.token in [$finalTokens, 'T_DOT'] || it.atom in [$classes] }.loop(2){!(it.object.token in [$finalTokens])}.filter{it.out('NEXT').next().atom != null || it.out('NEXT').next().token in ['T_OPEN_CURLY']}.back('cfc')";
-            $queryConditions[] = "filter{ it.out('NEXT').filter{ it.token in [$finalTokens, 'T_DOT'] || it.atom in [$classes] }.loop(2){!(it.object.token in [$finalTokens])}.filter{ !(it.token in ['T_OPEN_CURLY'])}.any() }";
+            $queryConditions[] = "filter{ it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_DOT']}.loop(4){!(it.object.token in [$finalTokens])}.filter{ !(it.token in ['T_OPEN_CURLY'])}.any() }";
 
             unset($conditions['check_for_concatenation']);
         }
