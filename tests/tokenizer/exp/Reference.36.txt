@@ -1,0 +1,32 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !=
+        Label : LEFT
+          (
+          Label : CODE
+            &
+            Label : LEFT
+              ~
+              Label : NOT
+                [
+                Label : VARIABLE
+                  $a
+                Label : INDEX
+                  0
+            Label : RIGHT
+              $b
+        Label : RIGHT
+          $c
+    Label : THEN
+      {
+      Label : ELEMENT
+        return
+        Label : RETURN
+          $d
