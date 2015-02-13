@@ -1,0 +1,26 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $a
+    Label : METHOD
+      b
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          'F'
+        Label : ARGUMENT
+          instanceof
+          Label : CLASS
+            e
+          Label : VARIABLE
+            new
+            Label : NEW
+              c
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $d
