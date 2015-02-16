@@ -117,7 +117,12 @@ class Token {
                                       81 => 'Phpcode',
                                     );
 
-    protected static $alternativeEnding = array();
+    protected static $alternativeEnding = array('T_ENDFOR',
+                                                'T_ENDSWITCH',
+                                                'T_ENDFOREACH',
+                                                'T_ENDWHILE',
+                                                'T_ENDIF',
+                                                'T_ENDDECLARE');
     protected $phpVersion = 'Any';
 
     static public $instructionEnding = array();
@@ -140,13 +145,6 @@ class Token {
                                                 Staticproperty::$operators,
                                                 _Instanceof::$operators,
                                                 array('T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_QUESTION'));
-
-        self::$alternativeEnding = array('T_ENDFOR',
-                                         'T_ENDSWITCH',
-                                         'T_ENDFOREACH',
-                                         'T_ENDWHILE',
-                                         'T_ENDIF',
-                                         'T_ENDDECLARE');
     }
 
     public static function getTokenizers($version = null) {
