@@ -842,3 +842,43 @@ Spot properties that are in the parents/traits too.
 
 // DynamicParams : use may be a trait => appears in USE inside a class. 
 
+Check that variables inside a string exist in the current context
+
+Inconsistent encoding : collect a wide collection of encoding usage (encode, decode) and check for inconsistencies
+
+Spot New in instanceof (useless?)
+
+Add an indication that : is for case/default, alternative, label, or ternary. 
+
+Detect environnement (production, test, dev...)
+
+Spot large arrays (in traductions?) and see how they are passed around (the less the better).
+
+avoid finding duplicate calls that are inside closures 
+
+Default values in properties at __construct or at property time? 
+Move property initialization to property definition, not construct ? 
+
+mark COLON during load so we know who they are : case/default, alternative syntax, label (default), ternary. 
+
+Synchronmize google code, and source forge for clear PHP (and others).
+
+In stats, export the count of every index avaible (how many staticmethodcall, new, functioncall, etc...)
+
+Throwing doesn't need parenthesis
+
+(new asdfasfd())->method is not possible in PHP 5.3
+
+Spot really complex code (if (array_filter($array, function() {})) {} : (Closure shouldn't be in the if).
+
+Add a way to load several files within a folder (using configuration?)
+
+Goto in switch or loop is disallowed.
+
+Not Dead Code
+        return Swoole\Error::info('MVC Error', "Controller <b>{$mvc['controller']}</b>[{$controller_path}] not exist!");
+        do_action: :
+
+Dans les array, signaler des valeurs qui sont en doubles (disons que c'est rare).
+
+check 'association' and 'in_for' realy usage.
