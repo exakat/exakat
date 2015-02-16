@@ -29,7 +29,8 @@ class IfthenElse extends TokenAuto {
     public function _check() {
         // @doc else : endif (empty )
         $this->conditions = array( 0 => array('token' => 'T_ELSE'),
-                                   1 => array('token' => 'T_COLON'),
+                                   1 => array('token' => 'T_COLON',
+                                              'property' => array('relatedAtom' => 'Ifthen')),
                                    2 => array('token' => 'T_ENDIF'),
         );
         
@@ -40,7 +41,8 @@ class IfthenElse extends TokenAuto {
 
     // @doc else : endif (empty )
         $this->conditions = array( 0 => array('token' => 'T_ELSE'),
-                                   1 => array('token' => 'T_COLON'),
+                                   1 => array('token' => 'T_COLON',
+                                              'property' => array('relatedAtom' => 'Ifthen')),
                                    2 => array('token' => 'T_VOID'),
                                    3 => array('token' => 'T_SEMICOLON'),
                                    4 => array('token' => 'T_ENDIF'),

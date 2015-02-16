@@ -158,7 +158,8 @@ class Ifthen extends TokenAuto {
     // @doc if () : endif (empty )
         $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('atom'  => 'Parenthesis'),
-                                   2 => array('token' => 'T_COLON'),
+                                   2 => array('token' => 'T_COLON',
+                                              'property' => array('relatedAtom' => 'Ifthen')),
                                    3 => array('token' => array('T_ENDIF', 'T_ELSEIF', 'T_ELSE')),
         );
         
@@ -189,7 +190,8 @@ class Ifthen extends TokenAuto {
         $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
-                                   2 => array('token' => 'T_COLON'),
+                                   2 => array('token' => 'T_COLON',
+                                              'property' => array('relatedAtom' => 'Ifthen')),
                                    3 => array('atom'  => 'yes'),
                                    4 => array('token' => 'T_ENDIF'),
         );
@@ -209,11 +211,13 @@ class Ifthen extends TokenAuto {
         $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
-                                   2 => array('token' => 'T_COLON'),
+                                   2 => array('token' => 'T_COLON',
+                                              'property' => array('relatedAtom' => 'Ifthen')),
                                    3 => array('atom'  => 'yes'),
                                    4 => array('token' => 'T_ELSE'),
-                                   5 => array('token' => 'T_COLON'),
-                                   6 => array('atom'  => 'yes',),
+                                   5 => array('token' => 'T_COLON',
+                                              'property' => array('relatedAtom' => 'Ifthen')),
+                                   6 => array('atom'  => 'yes'),
                                    7 => array('token' => array('T_ENDIF', 'T_ELSEIF')),
         );
         
@@ -237,7 +241,8 @@ class Ifthen extends TokenAuto {
         $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
-                                   2 => array('token' => 'T_COLON'),
+                                   2 => array('token' => 'T_COLON',
+                                              'property' => array('relatedAtom' => 'Ifthen')),
                                    3 => array('atom'  => 'yes'),
                                    4 => array('atom'  => 'Ifthen',
                                               'token' => 'T_ELSEIF',

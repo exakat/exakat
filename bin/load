@@ -24,12 +24,12 @@
 
 use Loader\Csv, 
     Everyman\Neo4j\Client,
-	Everyman\Neo4j\Index\NodeIndex,
-	Everyman\Neo4j\Relationship,
-	Everyman\Neo4j\Node,
-	Everyman\Neo4j\Gremlin,
-	Loader\Environnement,
-	Loader\Neo4jphp;
+    Everyman\Neo4j\Index\NodeIndex,
+    Everyman\Neo4j\Relationship,
+    Everyman\Neo4j\Node,
+    Everyman\Neo4j\Gremlin,
+    Loader\Environnement,
+    Loader\Neo4jphp;
 
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
@@ -242,6 +242,7 @@ function process_file($filename, $logFile, $client) {
 
     // load new tokens
     $line = 0;
+    $colonTokens = new Loader\ColonType();
     
     $atoms = array( 'T_STRING'                   => 'Identifier', 
                     'T_CONSTANT_ENCAPSED_STRING' => 'String', 
@@ -280,8 +281,11 @@ function process_file($filename, $logFile, $client) {
         $to_index = true;
 
         if (is_array($token)) {
-            if ($php->getTokenname($token[0]) == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
+            $token[3] = $php->getTokenname($token[0]);
+
+            $colonTokens->surveyToken($token);
+            if ($token[3] == 'T_BREAK' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $token[3])
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])->save();
 
@@ -299,8 +303,8 @@ function process_file($filename, $logFile, $client) {
                                               ->save();
 
                 $to_index = false;
-            } elseif ($php->getTokenname($token[0]) == 'T_YIELD' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
+            } elseif ($token[3] == 'T_YIELD' && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ';') {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $token[3])
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])->save();
 
@@ -318,9 +322,9 @@ function process_file($filename, $logFile, $client) {
                                               ->save();
 
                 $to_index = false;
-            } elseif ($php->getTokenname($token[0]) == 'T_STATIC' && is_string($tokens[$id + 1]) && 
+            } elseif ($token[3] == 'T_STATIC' && is_string($tokens[$id + 1]) && 
                       $tokens[$id + 1] != '(' && $php->getTokenname($tokens[$id - 1][0]) == 'T_NEW') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
+                $T[$Tid] = $client->makeNode()->setProperty('token', $token[3])
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])->save();
 
@@ -338,9 +342,9 @@ function process_file($filename, $logFile, $client) {
                                               ->save();
 
                 $to_index = false;
-            } elseif ($php->getTokenname($token[0]) == 'T_RETURN' && is_array($tokens[$id + 1]) && 
+            } elseif ($token[3] == 'T_RETURN' && is_array($tokens[$id + 1]) && 
                       $php->getTokenname($tokens[$id + 1][0]) == 'T_CLOSE_TAG') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
+                $T[$Tid] = $client->makeNode()->setProperty('token', $token[3])
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])->save();
 
@@ -358,10 +362,10 @@ function process_file($filename, $logFile, $client) {
                 $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
 
                 $to_index = false;
-            } elseif ($php->getTokenname($token[0]) == 'T_START_HEREDOC' && 
+            } elseif ($token[3] == 'T_START_HEREDOC' && 
                       is_array($tokens[$id + 1]) && 
                       $php->getTokenname($tokens[$id + 1][0]) == 'T_END_HEREDOC') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
+                $T[$Tid] = $client->makeNode()->setProperty('token', $token[3])
                                               ->setProperty('code', $token[1])
                                               ->setProperty('fullcode', $token[1])
                                               ->setProperty('line', $token[2])->save();
@@ -381,8 +385,8 @@ function process_file($filename, $logFile, $client) {
                                               ->save();
 
                 $to_index = false;
-            } elseif ($php->getTokenname($token[0]) == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
+            } elseif ($token[3] == 'T_OPEN_TAG' && !isset($tokens[$id + 1])) {
+                $T[$Tid] = $client->makeNode()->setProperty('token', $token[3])
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])
                                               ->save();
@@ -404,7 +408,7 @@ function process_file($filename, $logFile, $client) {
                                               ->save();
 
                 $to_index = false;
-            } elseif ($php->getTokenname($token[0]) == 'T_OPEN_TAG_WITH_ECHO') {
+            } elseif ($token[3] == 'T_OPEN_TAG_WITH_ECHO') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_OPEN_TAG')
                                               ->setProperty('code', str_replace('<?=', '<?php', $token[1]))
                                               ->setProperty('tag', '<?=')
@@ -426,7 +430,7 @@ function process_file($filename, $logFile, $client) {
                 $regexIndex['ArgumentsNoParenthesis']->relateTo($T[$Tid], 'INDEXED')->save();
                 $regexIndex['Functioncall']->relateTo($T[$Tid], 'INDEXED')->save();
 
-            } elseif ($php->getTokenname($token[0]) == 'T_CLOSE_TAG' && 
+            } elseif ($token[3] == 'T_CLOSE_TAG' && 
                       isset($tokens[$id + 1]) && 
                       is_array($tokens[$id + 1]) && 
                       $php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
@@ -463,7 +467,7 @@ function process_file($filename, $logFile, $client) {
                 }
                 $id++;
                 continue;
-            } elseif ($php->getTokenname($token[0]) == 'T_CLOSE_TAG' && 
+            } elseif ($token[3] == 'T_CLOSE_TAG' && 
                       isset($tokens[$id + 1]) && 
                       is_array($tokens[$id + 1]) && 
                       $php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG_WITH_ECHO') {
@@ -481,7 +485,7 @@ function process_file($filename, $logFile, $client) {
 
                 $id++;
                 continue;
-            } elseif ($php->getTokenname($token[0]) == 'T_INLINE_HTML' && 
+            } elseif ($token[3] == 'T_INLINE_HTML' && 
                       $id == 0) {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                               ->setProperty('code', ';')
@@ -493,7 +497,7 @@ function process_file($filename, $logFile, $client) {
                                               ->save();
                 $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
 
-                $inline =  $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
+                $inline =  $client->makeNode()->setProperty('token', $token[3])
                                               ->setProperty('atom', 'RawString')
                                               ->setProperty('fullcode', $token[1])
                                               ->setProperty('line', $token[2])
@@ -503,7 +507,7 @@ function process_file($filename, $logFile, $client) {
                                               ->save();
                                               ;
                 $T[$Tid]->relateTo($inline, 'ELEMENT')->save();
-            } elseif ($php->getTokenname($token[0])           == 'T_INLINE_HTML' && 
+            } elseif ($token[3]           == 'T_INLINE_HTML' && 
                       isset($tokens[$id + 1]) &&
                       $php->getTokenname($tokens[$id + 1][0]) == 'T_INLINE_HTML') {
                 $T[$Tid] = $client->makeNode()->setProperty('token', 'T_SEMICOLON')
@@ -517,7 +521,7 @@ function process_file($filename, $logFile, $client) {
                 $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
 
     // while ici
-                $inline =  $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
+                $inline =  $client->makeNode()->setProperty('token', $token[3])
                                               ->setProperty('atom', 'RawString')
                                               ->setProperty('fullcode', $token[1])
                                               ->setProperty('line', $token[2])
@@ -527,10 +531,10 @@ function process_file($filename, $logFile, $client) {
                                               ->save();
                                               ;
                 $T[$Tid]->relateTo($inline, 'ELEMENT')->save();
-            } elseif ($php->getTokenname($token[0]) == 'T_ELSE' &&
+            } elseif ($token[3] == 'T_ELSE' &&
                       is_string($tokens[$id + 1]) &&
                       $tokens[$id + 1] == ';') {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
+                $T[$Tid] = $client->makeNode()->setProperty('token', $token[3])
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2])
                                               ->setProperty('modifiedBy', 'bin/load25a')
@@ -550,15 +554,15 @@ function process_file($filename, $logFile, $client) {
                                                 ->save();
                 $to_index = false;
             } else {
-                $T[$Tid] = $client->makeNode()->setProperty('token', $php->getTokenname($token[0]))
+                $T[$Tid] = $client->makeNode()->setProperty('token', $token[3])
                                               ->setProperty('code', $token[1])
                                               ->setProperty('line', $token[2]);
             }
 
             // do.. while special
-            if ($php->getTokenname($token[0]) == 'T_DO') {
+            if ($token[3] == 'T_DO') {
                 $dowhiles[] = array('node' => $T[$Tid], 'level' => $block_level);
-            } elseif ($php->getTokenname($token[0]) == 'T_WHILE') {
+            } elseif ($token[3] == 'T_WHILE') {
                 if (empty($dowhiles)) {
                     $T[$Tid]->setProperty('dowhile', 'false')->save();
                 } else {
@@ -579,64 +583,66 @@ function process_file($filename, $logFile, $client) {
 
             $T[$Tid]->save();
             
-            if ($php->getTokenname($token[0]) == 'T_STRING' && (strtolower($token[1]) == 'true' || strtolower($token[1]) == 'false')) {
+            if ($token[3] == 'T_STRING' && (strtolower($token[1]) == 'true' || strtolower($token[1]) == 'false')) {
                 $T[$Tid]->setProperty('atom', 'Boolean')
                         ->setProperty('code', $token[1])
                         ->setProperty('fullcode', $token[1])->save();
                 $to_index = ($tokens[$id + 1] == '('); // if the next is (, this may be a function or a method!!
-            } elseif ($php->getTokenname($token[0]) == 'T_STRING' && strtolower($token[1]) == 'null') {
+            } elseif ($token[3] == 'T_STRING' && strtolower($token[1]) == 'null') {
                 $T[$Tid]->setProperty('atom', 'Null')
                         ->setProperty('code', $token[1])
                         ->setProperty('fullcode', $token[1])->save();
                 $to_index = ($tokens[$id + 1] == '('); // if the next is (, this may be a function or a method!!
-            } elseif (isset($atoms[$php->getTokenname($token[0])])) {
-                if ($php->getTokenname($token[0]) == 'T_STRING') {
-                    $T[$Tid]->setProperty('atom', $atoms[$php->getTokenname($token[0])])
+            } elseif (isset($atoms[$token[3]])) {
+                if ($token[3] == 'T_STRING') {
+                    $T[$Tid]->setProperty('atom', $atoms[$token[3]])
                             ->setProperty('code', $token[1])
                             ->setProperty('fullcode', $token[1])->save();
                     $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
 
-                } elseif ($php->getTokenname($token[0]) == 'T_STRING_VARNAME') {
-                    $T[$Tid]->setProperty('atom', $atoms[$php->getTokenname($token[0])])
+                } elseif ($token[3] == 'T_STRING_VARNAME') {
+                    $T[$Tid]->setProperty('atom', $atoms[$token[3]])
                             ->setProperty('code', '$'.$token[1])
                             ->setProperty('fullcode', '$'.$token[1])->save();
-                } elseif ($php->getTokenname($token[0]) == 'T_INLINE_HTML' && $id == 0) {
+                } elseif ($token[3] == 'T_INLINE_HTML' && $id == 0) {
                     // ignore
-                } elseif ($php->getTokenname($token[0]) == 'T_INLINE_HTML' &&
+                } elseif ($token[3] == 'T_INLINE_HTML' &&
                           isset($tokens[$id + 1]) &&
                           $php->getTokenname($tokens[$id + 1][0]) == 'T_INLINE_HTML') {
                     // ignore
-                } elseif ($php->getTokenname($token[0]) == 'T_CONSTANT_ENCAPSED_STRING') {
+                } elseif ($token[3] == 'T_CONSTANT_ENCAPSED_STRING') {
                     $T[$Tid]->setProperty('delimiter', in_array($token[1][0], array("'", '"')) ? $token[1][0] : '')
                             ->setProperty('noDelimiter', trim($token[1], '"\''))
-                            ->setProperty('atom', $atoms[$php->getTokenname($token[0])])
+                            ->setProperty('atom', $atoms[$token[3]])
                             ->setProperty('code', $token[1])
                             ->setProperty('fullcode', $token[1])->save();
 
                     $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
                 } else {
-                    $T[$Tid]->setProperty('atom', $atoms[$php->getTokenname($token[0])])
+                    $T[$Tid]->setProperty('atom', $atoms[$token[3]])
                             ->setProperty('modifiedBy', 'bin/load17')
                             ->setProperty('code', $token[1])
                             ->setProperty('fullcode', $token[1])->save();
-                    if ($php->getTokenname($token[0]) == 'T_ENCAPSED_AND_WHITESPACE') {
+                    if ($token[3] == 'T_ENCAPSED_AND_WHITESPACE') {
                         $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
                     }
                 }
             }  
 
-            $token_value = $php->getTokenname($token[0]);
-            if ($token_value == 'T_CURLY_OPEN' || $token_value == 'T_DOLLAR_OPEN_CURLY_BRACES') {
+            if ($token[3] == 'T_CURLY_OPEN' || $token[3] == 'T_DOLLAR_OPEN_CURLY_BRACES') {
                 $block_level++;
             }
 
-            if ($token_value == 'T_OPEN_CURLY') {
-                $token_value = 'T_CURLY_OPEN';
+            if ($token[3] == 'T_OPEN_CURLY') {
+                $token[3] = 'T_CURLY_OPEN';
             }
+            $token_value = $token[3];
 
             $line = $token[2];
         } else {
 /// case of the token that is not an array
+
+            $colonTokens->surveyToken($token);
 
             if (isset($tokensNewlines[$id])) {
                 $line += $tokensNewlines[$id];
@@ -750,6 +756,10 @@ function process_file($filename, $logFile, $client) {
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->save();
+                if ($token == ':') {
+                    list($label, $value) = $colonTokens->characterizeToken();
+                    $T[$Tid]->setProperty($label, $value)->save();
+                }
                 if ($type = process_colon($token_value)) {
                     $T[$Tid]->setProperty('association', $type)->save();
                 }
@@ -840,6 +850,10 @@ function process_file($filename, $logFile, $client) {
                                               ->setProperty('code', $token)
                                               ->setProperty('line', $line)
                                               ->save();
+                if ($token == ':') {
+                    list($label, $value) = $colonTokens->characterizeToken();
+                    $T[$Tid]->setProperty($label, $value)->save();
+                }
                 if ($type = process_colon($token_value)) {
                     $T[$Tid]->setProperty('association', $type)->save();
                 }
@@ -970,10 +984,17 @@ function process_file($filename, $logFile, $client) {
                                               ->setProperty('code', $token) // no fullcode at this level!
                                               ->setProperty('line', $line)
                                               ->save();
+                if ($token == ':') {
+                    list($label, $value) = $colonTokens->characterizeToken();
+                    $T[$Tid]->setProperty($label, $value)->save();
+                }
             }
+        
     
             $T[$Tid]->save();
         }
+        
+
 
         if (!$inQuote && in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE', 'T_START_HEREDOC'))) {
             $inQuote = true;
@@ -1086,7 +1107,8 @@ function process_file($filename, $logFile, $client) {
     $last->relateTo($last2, 'NEXT')->setProperty('file', $file)->save();
 
     $client->save_chunk();
-    
+    $colonTokens->dump();
+
     return $Tid;
 }
 
