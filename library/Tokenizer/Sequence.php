@@ -55,7 +55,7 @@ class Sequence extends TokenAuto {
                                       Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators,
                                       _Include::$operators, Power::$operators );
         $nextOperator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_INSTANCEOF',
-                                           'T_CLOSE_PARENTHESIS', 'T_CATCH', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', 'T_AS', ),
+                                           'T_CLOSE_PARENTHESIS', 'T_CATCH', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', 'T_AS', 'T_COLON' ),
                                      Assignation::$operators, Logical::$operators, Comparison::$operators,
                                      Preplusplus::$operators, Postplusplus::$operators, Ternary::$operators,
                                      Addition::$operators, Multiplication::$operators
