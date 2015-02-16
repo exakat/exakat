@@ -32,11 +32,10 @@ class Parenthesis extends TokenAuto {
 
         $this->conditions = array(-1 => array('filterOut2' => array_merge(Functioncall::$operatorsWithoutEcho, _Include::$operators,
                                                                     array('T_STRING', 'T_CATCH', 'T_EXIT', 'T_FOR', 'T_SWITCH',
-                                                                    'T_WHILE', 'T_UNSET', 'T_EMPTY', 'T_PRINT',
+                                                                    'T_WHILE', 'T_UNSET', 'T_EMPTY', 'T_PRINT', 'T_CONTINUE',
                                                                     'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
                                                                     'T_CLONE', 'T_DECLARE', 'T_CLOSE_BRACKET', 'T_STATIC',
-                                                                    'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
-                                                                    'T_THROW', 'T_CONTINUE')),
+                                                                    'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION')),
                                               'notAtom' => array('Array', 'Property')),
                                    0 => array('token' => Parenthesis::$operators,
                                               'atom'  => 'none' ),

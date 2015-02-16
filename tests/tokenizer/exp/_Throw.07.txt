@@ -5,10 +5,12 @@ Label : CODE
   Label : ELEMENT
     throw
     Label : THROW
-      new
-      Label : NEW
-        C
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            1
+      (
+      Label : CODE
+        new
+        Label : NEW
+          C
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              1

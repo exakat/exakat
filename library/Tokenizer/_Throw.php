@@ -28,31 +28,16 @@ class _Throw extends TokenAuto {
     static public $atom = 'Throw';
     
     public function _check() {
+        // throw (new x()) // parenthesis are useless! 
         $this->conditions = array(0 => array('token'     => _Throw::$operators,
                                              'atom'      => 'none'),
-                                  1 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall',
-                                                                  'Staticmethodcall', 'Staticproperty', 'Identifier', 'Assignation', 'Ternary')),
+                                  1 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 
+                                                                  'Methodcall', 'Staticmethodcall', 'Staticproperty', 
+                                                                  'Identifier', 'Assignation', 'Ternary', 'Parenthesis')),
                                   2 => array('filterOut' => Token::$instructionEnding),
                                   );
         
         $this->actions = array('transform'    => array( 1 => 'THROW'),
-                               'atom'         => 'Throw',
-                               'cleanIndex'   => true,
-                               'makeSequence' => 'it');
-                               
-        $this->checkAuto();
-
-        $this->conditions = array(0 => array('token' => _Throw::$operators,
-                                             'atom'  => 'none'),
-                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('atom'  => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 'Methodcall',
-                                                              'Staticmethodcall', 'Staticproperty', 'Identifier', 'Assignation')),
-                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  );
-        
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'THROW',
-                                                        3 => 'DROP',),
                                'atom'         => 'Throw',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
