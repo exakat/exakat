@@ -43,7 +43,6 @@ class ColonType {
     private $parenthesisLevel = 0;
     private $checkNext = false;
     private $parenthesedToken = array('T_IF' => 1, 
-                                      'T_ELSE' => 1,
                                       'T_ELSEIF' => 1,
                                       'T_SWITCH' => 1,
                                       'T_FOREACH' => 1,
@@ -58,6 +57,9 @@ class ColonType {
             if (!is_string($token) || $token != ':') {
                 // dropping non-alternative if.
                 $a = array_pop($this->relatedAtom);
+                if (count($this->relatedAtom) == 0) {
+//                    print "relatedAtom is Empty\n";
+                }
 //                print "Check for Next ($a)\n";
 //                  print_r($this->relatedAtom);
             }
@@ -73,6 +75,8 @@ class ColonType {
                 }
                 
                 if ($token[3] == 'T_ELSE') {
+//                    print_r($this->relatedAtom);
+//                    print "T_ELSE ++\n";
                     $this->checkNext = true;
                 }
             }
@@ -86,6 +90,8 @@ class ColonType {
             } elseif ($token == ')') {
                 $this->parenthesisLevel--;
                 if (isset($this->parenthesisStack[$this->parenthesisLevel])) {
+//                    print_r($this->parenthesisStack);
+//                    print_r($this->parenthesisLevel);
                     $this->checkNext = true;
                     unset($this->parenthesisStack[$this->parenthesisLevel]);
                 }
