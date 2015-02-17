@@ -105,7 +105,7 @@ class Analyzer {
         } elseif (strpos($name, '/') !== false) {
             $class = 'Analyzer\\'.str_replace('/', '\\', $name);
         } elseif (strpos($name, '/') === false) {
-            $files = glob('library/Analyzer/*/'.$name.'.php');
+            $files = glob(dirname(__DIR__).'/Analyzer/*/'.$name.'.php');
             if (count($files) == 0) {
                 return false; // no class found
             } elseif (count($files) == 1) {
@@ -132,7 +132,7 @@ class Analyzer {
     }
     
     public static function getSuggestionClass($name) {
-        $list = glob('library/Analyzer/*/*.php');
+        $list = glob(dirname(__DIR__).'/Analyzer/*/*.php');
         $r = array();
         foreach($list as $id => $c) {
             $c = substr($c, 17, -4);
@@ -161,7 +161,7 @@ class Analyzer {
 
     static public function getThemeAnalyzers($theme) {
         if (Analyzer::$docs === null) {
-            Analyzer::$docs = new Docs('./data/analyzers.sqlite');
+            Analyzer::$docs = new Docs(dirname(dirname(__DIR__)).'/data/analyzers.sqlite');
         }
         return Analyzer::$docs->getThemeAnalyzers($theme);
     }
@@ -781,6 +781,17 @@ GREMLIN;
         return $this;
     }
 
+    public function sameContextAs($stoage, $context = array('Namespace', 'Class', 'Function')) {
+        foreach($context as &$c) {
+            $c = 'context["'.$c.'"] == '.$context.'["'.$c.'"] ';
+        }
+        $context = join(' && ', $context);
+        
+        $this->addMethod('filter{ '.$context.' }');
+
+        return $this;
+    }
+    
     public function notSamePropertyAs($property, $name, $caseSensitive = false) {
         if ($caseSensitive || $property == 'line' || $property == 'rank') {
             $caseSensitive = '';
@@ -1038,7 +1049,8 @@ GREMLIN;
     // follows a link if it is there (and do nothing otherwise)
     protected function inIsIE($edgeName) {
         if (is_array($edgeName)) {
-            $this->addMethod("transform{ a = it; while (a.in('$edgeName').any()) { a = a.in('$edgeName').next(); };  a;}", $edgeName);
+            $edgeNames = "'" . join("', '", $edgeName)."'";
+            $this->addMethod("transform{ a = it; while (a.in($edgeNames).any()) { a = a.in($edgeNames).next(); };  a;}", $edgeName);
         } else {
             $this->addMethod("transform{ a = it; while (a.in('$edgeName').any()) { a = a.in('$edgeName').next(); };  a;}", $edgeName);
         }
@@ -1432,9 +1444,12 @@ GREMLIN;
         return $this;
     }
 
-    public function fetchContext() {
+    public function fetchContext($variable = null) {
         $this->addMethod('sideEffect{ context = ["Namespace":"Global", "Function":"Global", "Class":"Global"]; it.in.loop(1){true}{it.object.atom in ["Namespace", "Function", "Class"]}.each{ if (it.atom == "Namespace") { context[it.atom] = it.out("NAMESPACE").next().fullcode; } else { context[it.atom] = it.out("NAME").next().code; } } }');
         
+        if ($variable !== null) {
+            $this->addMethod('sideEffect{ $variable = context}');
+        }
         return $this;
     }
     
@@ -1663,7 +1678,7 @@ GREMLIN;
     }
     
     public static function listAnalyzers() {
-        $files = glob('library/Analyzer/*/*.php');
+        $files = glob(dirname(__DIR__).'/Analyzer/*/*.php');
 
         $analyzers = array();
         foreach($files as $file) {

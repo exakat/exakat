@@ -28,7 +28,7 @@ class Description {
                          'clearphp' => '');
     
     public function __construct($analyzer) {
-        $filename = './human/'.$this->language.'/'.str_replace('\\', '/', str_replace("Analyzer\\", "", $analyzer)).'.ini';
+        $filename = dirname(__DIR__).'/human/'.$this->language.'/'.str_replace('\\', '/', str_replace("Analyzer\\", "", $analyzer)).'.ini';
         
         if (!file_exists($filename)) {
             $this->ini = array();

@@ -33,7 +33,7 @@ class Config {
     private function __construct($argv) {
         $this->argv = $argv;
         
-        $this->configFile = parse_ini_file('./config/config.ini');
+        $this->configFile = parse_ini_file(dirname(__DIR__).'/config/config.ini');
 
         // then read the config from the commandline (if any)
         $this->readCommandline();
