@@ -87,9 +87,18 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // $x = 'a' . function ($a) {} (Concatenating a closure...)
         $this->atomIs('Function')
              ->inIs('CONCAT')
              ->atomIs('Concatenation')
+             ->back('first');
+        $this->prepareQuery();
+
+        // New in a instanceof (with/without parenthesis)
+        $this->atomIs('New')
+             ->inIsIE(array('CODE', 'LEFT'))
+             ->inIs('CLASS')
+             ->atomIs('Instanceof')
              ->back('first');
         $this->prepareQuery();
     }
