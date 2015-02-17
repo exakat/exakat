@@ -13,22 +13,38 @@ Label : CODE
         Label : CASE
           @
           Label : AT
-            ;
-            Label : ELEMENT
-              :
-              Label : LABEL
-                B
-            Label : ELEMENT
-              =
-              Label : RIGHT
-                D
-              Label : LEFT
-                ->
-                Label : OBJECT
-                  $this
-                Label : PROPERTY
-                  C
+            B
         Label : CODE
-          Block with Sequence For Case
+          ;
           Label : ELEMENT
-            Void
+            =
+            Label : RIGHT
+              D
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                C
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              ->
+              Label : OBJECT
+                $this
+              Label : METHOD
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'G'
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                E
