@@ -100,7 +100,7 @@ Label : ELEMENT
       Label : THEN
         ;
         Label : ELEMENT
-          G
+          H
         Label : ELEMENT
           print
           Label : ARGUMENTS
@@ -108,7 +108,7 @@ Label : ELEMENT
             Label : ARGUMENT
               $c
         Label : ELEMENT
-          H
+          G
       Label : ELSE
         elseif
         Label : CONDITION
@@ -122,7 +122,9 @@ Label : ELEMENT
         Label : THEN
           J
         Label : ELSE
-          K
+          ;
+          Label : ELEMENT
+            K
     Label : ELEMENT
       print
       Label : ARGUMENTS

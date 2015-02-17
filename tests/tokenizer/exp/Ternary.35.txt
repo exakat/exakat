@@ -10,85 +10,83 @@ Label : ELEMENT
       Label : VALUE
         $b
       Label : BLOCK
-        Block with Foreach
+        ;
         Label : ELEMENT
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ?
-                Label : CONDITION
-                  void
-                  Label : ARGUMENT
-                    (
-                    Label : CODE
-                      and
-                      Label : LEFT
-                        [
-                        Label : VARIABLE
-                          $c
-                        Label : INDEX
-                          'D'
-                      Label : RIGHT
-                        [
-                        Label : VARIABLE
-                          $d
-                        Label : INDEX
-                          'E'
-                Label : THEN
-                  F
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
+          J
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $h
+              Label : INDEX
+                'L'
+        Label : ELEMENT
+          L
+        Label : ELEMENT
+          N
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $i
+              Label : INDEX
+                'N'
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ?
+              Label : CONDITION
+                void
+                Label : ARGUMENT
+                  (
+                  Label : CODE
+                    and
+                    Label : LEFT
                       [
                       Label : VARIABLE
-                        $f
+                        $c
                       Label : INDEX
-                        'I'
-                    Label : ARGUMENT
-                      Concatenation
-                      Label : CONCAT
-                        [
-                        Label : VARIABLE
-                          $e
-                        Label : INDEX
-                          'H'
-                      Label : CONCAT
-                        'G'
-                Label : ELSE
-                  [
-                  Label : VARIABLE
-                    $g
-                  Label : INDEX
-                    'J'
-          Label : ELEMENT
-            N
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
+                        'D'
+                    Label : RIGHT
+                      [
+                      Label : VARIABLE
+                        $d
+                      Label : INDEX
+                        'E'
+              Label : THEN
+                F
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $f
+                    Label : INDEX
+                      'I'
+                  Label : ARGUMENT
+                    Concatenation
+                    Label : CONCAT
+                      [
+                      Label : VARIABLE
+                        $e
+                      Label : INDEX
+                        'H'
+                    Label : CONCAT
+                      'G'
+              Label : ELSE
                 [
                 Label : VARIABLE
-                  $i
+                  $g
                 Label : INDEX
-                  'N'
-          Label : ELEMENT
-            L
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $h
-                Label : INDEX
-                  'L'
-          Label : ELEMENT
-            J
+                  'J'
         Label : ELEMENT
           B
 Label : ELEMENT
