@@ -1,0 +1,109 @@
+<?php 
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !==
+        Label : RIGHT
+          'E'
+        Label : LEFT
+          B
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              D
+            Label : ARGUMENT
+              'C'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        F
+      Label : ELEMENT
+        Y
+      Label : ELEMENT
+        O
+      Label : ELEMENT
+        G
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'I'
+          Label : ARGUMENT
+            'Q'
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+      Label : ELEMENT
+        S
+      Label : ELEMENT
+        T
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $b
+        Label : THEN
+          Block with if/elseif
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                U
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $b
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            U
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $c
+                Label : INDEX
+                  'X'
+      Label : ELEMENT
+        V
+      Label : ELEMENT
+        Concatenation
+        Label : CONCAT
+          'N'
+        Label : CONCAT
+          K
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              B
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'M'
+        Label : CONCAT
+          'J'
+        Label : CONCAT
+          G
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              'I'
+            Label : ARGUMENT
+              'H'
+    Label : ELSE
+      Z

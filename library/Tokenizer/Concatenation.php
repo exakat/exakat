@@ -38,7 +38,7 @@ class Concatenation extends TokenAuto {
                                                                       Logical::$operators, _Include::$operators,
                                                                       Bitshift::$operators, _Clone::$operators,
                                                                       Ternary::$operators, _Return::$operators,
-                                                                      Keyvalue::$operators, 
+                                                                      Keyvalue::$operators, Rawstring::$operators,
                                                                       array('T_COLON', 'T_COMMA', 'T_OPEN_PARENTHESIS',
                                                                             'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
                                                                             'T_ECHO', 'T_PRINT','T_OPEN_TAG',

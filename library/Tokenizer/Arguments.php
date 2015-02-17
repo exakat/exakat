@@ -48,10 +48,10 @@ class Arguments extends TokenAuto {
                                               'atom'    => 'none'),
                                    1 => array('atom'    => 'yes',
                                               'check_for_arguments' => $arguments),
-                                   2 => array('token'   => array_merge(array('T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_SEMICOLON',
-                                                                             'T_CLOSE_TAG', 'T_CLOSE_BRACKET', 'T_INLINE_HTML'), 
+                                   2 => array('token'   => array_merge(array('T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET'), 
                                                                        Logical::$operators, Comparison::$operators,
-                                                                       Token::$alternativeEnding))
+                                                                       Token::$alternativeEnding, RawString::$operators,
+                                                                       Sequence::$operators, Arguments::$operators))
                                  );
         
         $this->actions = array('to_argument' => true,

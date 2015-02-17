@@ -24,6 +24,7 @@
 namespace Tokenizer;
 
 class RawString extends TokenAuto {
+    static public $operators = array('T_INLINE_HTML');
     static public $atom = 'Rawstring';
 
     public function fullcode() {
