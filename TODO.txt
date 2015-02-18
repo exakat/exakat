@@ -847,8 +847,7 @@ Check that variables inside a string exist in the current context
 Inconsistent encoding : collect a wide collection of encoding usage (encode, decode) and check for inconsistencies
 
 Spot New in instanceof (useless?)
-
-Add an indication that : is for case/default, alternative, label, or ternary. 
+instanceof should apply to arguments or incoming values, not locally created one (factory?)
 
 Detect environnement (production, test, dev...)
 
@@ -859,13 +858,9 @@ avoid finding duplicate calls that are inside closures
 Default values in properties at __construct or at property time? 
 Move property initialization to property definition, not construct ? 
 
-mark COLON during load so we know who they are : case/default, alternative syntax, label (default), ternary. 
-
 Synchronmize google code, and source forge for clear PHP (and others).
 
 In stats, export the count of every index avaible (how many staticmethodcall, new, functioncall, etc...)
-
-Throwing doesn't need parenthesis
 
 (new asdfasfd())->method is not possible in PHP 5.3
 
@@ -873,7 +868,7 @@ Spot really complex code (if (array_filter($array, function() {})) {} : (Closure
 
 Add a way to load several files within a folder (using configuration?)
 
-Goto in switch or loop is disallowed.
+Goto in switch or loop is disallowed, unless it is in the same context (jumping into a loop is not possible)
 
 Not Dead Code
         return Swoole\Error::info('MVC Error', "Controller <b>{$mvc['controller']}</b>[{$controller_path}] not exist!");
@@ -882,3 +877,11 @@ Not Dead Code
 Dans les array, signaler des valeurs qui sont en doubles (disons que c'est rare).
 
 check 'association' and 'in_for' realy usage.
+
+See if one can turn all those string into constant and make it a dev/prod config option (prod, const=>number for speed up).
+
+Spot literals used in functioncall, and compare them (f('yes'), f('yes'), f('maybe') <= may be isstrage)
+
+Move more code in classes from bin/load
+
+Attention to constant/functions that may be defined in another inclusion (with another class), and such, not available to all namespace (who's doing that?)
