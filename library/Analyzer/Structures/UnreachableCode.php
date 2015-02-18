@@ -31,32 +31,39 @@ class UnreachableCode extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        // code after a halt_compiler is expected to be unreachable.
+        
         $this->atomIs('Return')
-             ->nextSibling();
+             ->nextSiblings()
+             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
         $this->prepareQuery();
 
         $this->atomIs('Throw')
-             ->nextSibling();
+             ->nextSiblings()
+             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
         $this->prepareQuery();
 
         $this->atomIs('Break')
-             ->nextSibling();
+             ->nextSiblings()
+             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
         $this->prepareQuery();
 
         $this->atomIs('Continue')
-             ->nextSibling();
+             ->nextSiblings()
+             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
         $this->prepareQuery();
 
         $this->atomIs('Goto')
-             ->nextSibling()
-             ->atomIsNot('Label');
+             ->nextSiblings()
+             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
         $this->prepareQuery();
 
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_EXIT', 'T_DIE'))
              ->fullnspath(array('\\exit', '\\die'))
-             ->nextSibling();
+             ->nextSiblings()
+             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
         $this->prepareQuery();
 
         $this->atomIs('Functioncall')
@@ -66,7 +73,8 @@ class UnreachableCode extends Analyzer\Analyzer {
              ->inIs('NAME')
              ->analyzerIs('Analyzer\\Functions\\KillsApp')
              ->back('first')
-             ->nextSibling();
+             ->nextSibling()
+             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
         $this->prepareQuery();
     }
 }
