@@ -28,7 +28,8 @@ class Property extends TokenAuto {
     static public $atom = 'Property';
     
     public function _check() {
-        $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall', 'Staticproperty', 'Methodcall', 'Functioncall');
+        $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall', 'Staticproperty', 'Methodcall', 
+                          'Functioncall', 'Parenthesis');
 
         // $object->property{1}
         $this->conditions = array( -2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_DOUBLE_COLON')),
