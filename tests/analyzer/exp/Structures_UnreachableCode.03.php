@@ -4,7 +4,7 @@ $expected     = array();
 
 $expected_not = array('function x() { /**/ }',
                       'interface i { /**/ } ',
-                      'trait t { /**/ } '
+                      'trait t { /**/ } ',
                       'class c { /**/ } ');
 
 ?>
