@@ -9,12 +9,12 @@ Label : CODE
     Label : LEFT
       [
       Label : VARIABLE
-        ::
-        Label : CLASS
-          $a
-        Label : PROPERTY
-          [
-          Label : VARIABLE
+        [
+        Label : VARIABLE
+          ::
+          Label : CLASS
+            $a
+          Label : PROPERTY
             $b
-          Label : INDEX
-            2
+        Label : INDEX
+          2

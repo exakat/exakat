@@ -1660,6 +1660,66 @@ fullcode = x;
             unset($actions['to_concatenation']);
         }
 
+        if (isset($actions['to_array']) && $actions['to_array']) {
+            $_array = new _Array(Token::$client);
+            $fcArray = $_array->fullcode();
+
+            $Arrayappend = new Arrayappend(Token::$client);
+            $fcArrayappend = $Arrayappend->fullcode();
+
+            $qactions[] = "
+/* to Array */
+
+current = it;
+previous = b1.in('NEXT').next();
+
+while( current.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY']) {
+    if (a1.token == 'T_CLOSE_BRACKET') {
+        g.addEdge(current, b1, 'VARIABLE');
+        current.setProperty('atom', 'Arrayappend');
+
+        current.inE('INDEXED').each{ g.removeEdge(it); }
+        fullcode = current;
+        $fcArrayappend;
+
+        b1.bothE('NEXT').each{ g.removeEdge(it); }
+        a1.inE('NEXT').each{ g.removeEdge(it); }
+
+        b1 = current;
+        current = a1.out('NEXT').next();
+        g.removeVertex(a1);
+
+        a1 = current.out('NEXT').next();
+        a2 = a1.out('NEXT').next();
+    } else {
+        g.addEdge(current, b1, 'VARIABLE');
+        g.addEdge(current, a1, 'INDEX');
+        current.setProperty('atom', 'Array');
+    
+        current.inE('INDEXED').each{ g.removeEdge(it); }
+        fullcode = current;
+        $fcArray;
+
+        b1.bothE('NEXT').each{ g.removeEdge(it); }
+        a1.bothE('NEXT').each{ g.removeEdge(it); }
+        a2.inE('NEXT').each{ g.removeEdge(it); }
+
+        b1 = current;
+        current = a2.out('NEXT').next();
+        g.removeVertex(a2);
+
+        a1 = current.out('NEXT').next();
+        a2 = a1.out('NEXT').next();
+    }
+}
+
+g.addEdge(previous, b1, 'NEXT');
+g.addEdge(b1, current, 'NEXT');
+
+";
+            unset($actions['to_array']);
+        }
+
         if (isset($actions['to_argument']) && $actions['to_argument']) {
                 $qactions[] = "
 /* to Argument */
@@ -2784,6 +2844,23 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             $queryConditions[] = "filter{ it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_DOT']}.loop(4){!(it.object.token in [$finalTokens])}.filter{ !(it.token in ['T_OPEN_CURLY'])}.any() }";
 
             unset($conditions['check_for_concatenation']);
+        }
+
+        if (isset($conditions['check_for_array'])) {
+
+            $queryConditions[] = "filter{ it.as('a').out('NEXT').transform{ 
+    if (it.token == 'T_CLOSE_BRACKET') {
+        it;
+    } else {
+        it.hasNot('atom', null).out('NEXT').filter{ it.token in ['T_CLOSE_BRACKET', 'T_CLOSE_CURLY']}.next();
+    }
+}.out('NEXT').loop('a'){it.object.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY']}.any() }";
+
+/*
+            $queryConditions[] = "filter{ it.as('a').out('NEXT').hasNot('atom', null).out('NEXT').filter{ it.token in ['T_CLOSE_BRACKET', 'T_CLOSE_CURLY']}
+.out('NEXT').loop('a'){it.object.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY']}.any() }";
+*/
+            unset($conditions['check_for_array']);
         }
 
         if (isset($conditions['code'])) {

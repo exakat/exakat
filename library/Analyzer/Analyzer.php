@@ -109,7 +109,7 @@ class Analyzer {
             if (count($files) == 0) {
                 return false; // no class found
             } elseif (count($files) == 1) {
-                $class = str_replace('/', '\\', substr($files[0], 8, -4));
+                $class = str_replace('/', '\\', substr(str_replace(dirname(__DIR__), '', $files[0]), 1, -4));
             } else {
                 // too many options here...
                 return false;

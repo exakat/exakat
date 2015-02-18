@@ -28,16 +28,17 @@ class Arrayappend extends TokenAuto {
     static public $atom = 'Arrayappend';
     
     public function _check() {
-        $this->conditions = array(-2 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR')),
-                                  -1 => array('atom' => array('Variable', 'Property', 'Staticproperty', 'Array', 'Arrayappend')),
-                                   0 => array('token' => Arrayappend::$operators),
-                                   1 => array('token' => 'T_CLOSE_BRACKET'),
-        );
+        // $x[] and mutlidimensional too
+        $this->conditions = array( -2 => array('notToken' => array_merge(Staticproperty::$operators, Property::$operators)),
+                                   -1 => array('atom'    => _Array::$allowedObject),
+                                    0 => array('token'   => _Array::$operators,
+                                               'check_for_array' => true),
+                                    1 => array('token'   => 'T_CLOSE_BRACKET'),
+                                 );
         
-        $this->actions = array('transform'  => array(  -1 => 'VARIABLE',
-                                                        1 => 'DROP'),
-                               'atom'       => 'Arrayappend',
-                               'cleanIndex' => true);
+        $this->actions = array('to_array'     => true,
+                               'makeSequence' => 'b1',
+                               'cleanIndex'   => true);
         $this->checkAuto();
         
         return false;
