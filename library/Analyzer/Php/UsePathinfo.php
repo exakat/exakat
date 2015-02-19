@@ -41,6 +41,7 @@ class UsePathinfo extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
+             ->atomIs('String')
              ->noDelimiter('.')
              ->back('first')
              ->outIs('LEFT')
