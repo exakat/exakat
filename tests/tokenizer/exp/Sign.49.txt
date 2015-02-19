@@ -1,0 +1,36 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    "String"
+  Label : ELEMENT
+    MY_CONSTANT
+  Label : ELEMENT
+    <<<HEREDOC
+
+    Label : CONTAIN
+      Concatenation
+      Label : CONCAT
+        
+silly string
+
+
+  Label : ELEMENT
+    -
+    Label : SIGN
+      (
+      Label : CODE
+        +
+        Label : RIGHT
+          3
+        Label : LEFT
+          4
+  Label : ELEMENT
+    \
+    Label : SUBNAME
+      C
+    Label : SUBNAME
+      B
+    Label : SUBNAME
+      A
