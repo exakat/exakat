@@ -26,12 +26,6 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class DuplicateCalls extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         // This is counting ALL occurences as itself. 
         $this->atomIs('Methodcall')
