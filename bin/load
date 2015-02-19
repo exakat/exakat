@@ -611,8 +611,9 @@ function process_file($filename, $logFile, $client) {
                           $php->getTokenname($tokens[$id + 1][0]) == 'T_INLINE_HTML') {
                     // ignore
                 } elseif ($token[3] == 'T_CONSTANT_ENCAPSED_STRING') {
-                    $T[$Tid]->setProperty('delimiter', in_array($token[1][0], array("'", '"')) ? $token[1][0] : '')
-                            ->setProperty('noDelimiter', trim($token[1], '"\''))
+                    $delimiter = in_array($token[1][0], array("'", '"')) ? $token[1][0] : '';
+                    $T[$Tid]->setProperty('delimiter', $delimiter)
+                            ->setProperty('noDelimiter', $delimiter == '' ? $token[1] : substr($token[1], 1, -1))
                             ->setProperty('atom', $atoms[$token[3]])
                             ->setProperty('code', $token[1])
                             ->setProperty('fullcode', $token[1])->save();
