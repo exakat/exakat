@@ -25,9 +25,21 @@ namespace Analyzer;
 
 class Docs {
     private $sqlite = null;
+    private $phar_tmp = null;
     
     public function __construct($path) {
-        $this->sqlite = new \Sqlite3($path);
+        if (substr($path, 0, 4) == 'phar') {
+            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exDocs').'.sqlite';
+            copy($path, $this->phar_tmp);
+            $path = $this->phar_tmp;
+        }
+        $this->sqlite = new \Sqlite3($path, SQLITE3_OPEN_READONLY);
+    }
+
+    public function __destruct() {
+        if ($this->phar_tmp !== null) {
+            unlink($this->phar_tmp);
+        }
     }
     
     public function getThemeAnalyzers($theme) {
