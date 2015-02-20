@@ -26,6 +26,9 @@ class Config {
            private $configFile = array();
            private $commandline = array();
            private $argv = array();
+           public $dir_root = '.';
+           public $projects_root = '.';
+           public $is_phar = true;
            private $projectConfig = array();
         
            private $options = array();
@@ -33,15 +36,21 @@ class Config {
     private function __construct($argv) {
         $this->argv = $argv;
         
-        if(strpos(dirname(__DIR__), '.phar') !== false) {
-            $configFile = substr(dirname(dirname(__DIR__)).'/config/config.ini', 7); 
-            if (file_exists($configFile)) {
-                $this->configFile = parse_ini_file($configFile);
-            } else {
-                $this->configFile = parse_ini_file('phar://exakat.phar/config/config-dist.ini');
-            }
+        $this->is_phar  = (strpos(basename(dirname(__DIR__)), '.phar') !== false);
+        if ($this->is_phar) {
+            $this->dir_root = 'phar://exakat.phar';
+            $this->projects_root = substr(dirname(dirname(__DIR__)), 7);
         } else {
-            $this->configFile = parse_ini_file(dirname(__DIR__).'/config/config.ini');
+            $this->dir_root = dirname(__DIR__);
+            $this->projects_root = dirname(__DIR__);
+        }
+        
+        $configFile = $this->dir_root.'/config/config.ini'; 
+        if (file_exists($this->dir_root.'/config/config.ini')) {
+            $this->configFile = parse_ini_file($configFile);
+        } else {
+            $configFile = $this->dir_root.'/config/config-default.ini'; 
+            $this->configFile = parse_ini_file($configFile);
         }
 
         // then read the config from the commandline (if any)
@@ -174,7 +183,7 @@ class Config {
 
         $commands = array('doctor' => 1, 
                           'init' => 1, 
-                          'file' => 1, 
+                          'files' => 1, 
                           'tokenizer' => 1, 
                           'analyzer' => 1, 
                           'report' => 1, 

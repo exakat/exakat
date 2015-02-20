@@ -24,8 +24,8 @@
 class Datastore {
     private $sqlite = null;
     
-    public function __construct($project) {
-        $this->sqlite = new sqlite3('./projects/'.$project.'/datastore.sqlite');
+    public function __construct(Config $config) {
+        $this->sqlite = new sqlite3($config->projects_root.'/projects/'.$config->project.'/datastore.sqlite');
     }
 
     public function addRow($table, $data) {

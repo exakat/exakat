@@ -20,16 +20,25 @@
  *
 */
 
-
 class Exakat {
     const VERSION = '1.2.3';
-    const BUILD = '3';
+    const BUILD = '22';
     
     public function execute(Config $config) {
         switch ($config->command) {
             case 'doctor' : 
-                $doctor = new Doctor();
-                print $doctor->run();
+                $doctor = new Tasks\Doctor();
+                print $doctor->run($config);
+                break;
+
+            case 'init' : 
+                $task = new Tasks\Initproject();
+                print $task->run($config);
+                break;
+
+            case 'files' : 
+                $task = new Tasks\Files();
+                print $task->run($config);
                 break;
 
             case 'version' : 

@@ -1,8 +1,10 @@
 <?php
 
-class Doctor {
+namespace Tasks;
 
-    function run() {
+class Doctor implements Tasks {
+
+    function run(\Config $config) {
         $stats = array();
 
         // check PHP
@@ -191,7 +193,7 @@ class Doctor {
             $ini = parse_ini_file('config/config.ini');
             try {
                 mysqli_report(MYSQLI_REPORT_STRICT); 
-                $mysql = new mysqli($ini['mysql_host'], $ini['mysql_exakat_user'], $ini['mysql_exakat_pass']);
+                $mysql = new \mysqli($ini['mysql_host'], $ini['mysql_exakat_user'], $ini['mysql_exakat_pass']);
                 $stats['config']['mysql_connect'] = 'Success';
                 $stmt = $mysql->query('SHOW DATABASES LIKE "'.$ini['mysql_exakat_db'].'"');
                 if ($stmt->num_rows == 1) {

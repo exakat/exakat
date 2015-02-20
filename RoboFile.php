@@ -185,7 +185,6 @@ LICENCE;
             ->in(__DIR__);
 
         foreach ($files as $file) {
-            print "$file\n";
             $packer->addFile($file->getRelativePathname(), $file->getRealPath());
         }
 
