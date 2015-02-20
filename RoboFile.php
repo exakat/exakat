@@ -181,6 +181,7 @@ LICENCE;
             ->path('/human/')
             ->path('/library/')
             ->path('/scripts/')
+            ->path('/vendor/')
             ->notPath('media')
             ->in(__DIR__);
 
