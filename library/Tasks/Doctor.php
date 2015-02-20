@@ -173,21 +173,21 @@ class Doctor implements Tasks {
         }
 
         // projects
-        if (file_exists('./projects/')) {
+        if (file_exists($config->dir_root.'/projects/')) {
             $stats['projects']['created'] = 'Yes';
         } else {
             $stats['projects']['created'] = 'No';
         }
 
         // log
-        if (file_exists('./log/')) {
+        if (file_exists($config->dir_root.'/log/')) {
             $stats['log']['created'] = 'Yes';
         } else {
             $stats['log']['created'] = 'No';
         }
 
         // config
-        if (file_exists('./config/config.ini')) {
+        if (file_exists($config->dir_root.'/config/config.ini')) {
             $stats['config']['created'] = 'Yes';
 
             $ini = parse_ini_file('config/config.ini');
@@ -215,8 +215,6 @@ class Doctor implements Tasks {
         if (preg_match('/ version ([0-9\.a-z\-]+)/', $res, $r)) {//
             $stats['composer']['installed'] = 'Yes';
             $stats['composer']['version'] = $r[1];
-            $stats['composer']['vendor'] = file_exists('vendor') ? 'Yes' : 'No';
-            $stats['composer']['neo4jphp'] = file_exists('vendor/everyman/neo4jphp') ? 'Yes' : 'No';
         } else {
             $stats['composer']['installed'] = 'No';
         }
