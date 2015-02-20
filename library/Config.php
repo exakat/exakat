@@ -128,6 +128,7 @@ class Config {
                                  '-table'  => array('table',      false),
                                  '-text'   => array('text',       false),
                                  '-o'      => array('output',     false),
+                                 '-doctor' => array('doctor',     false),
                                  );
 
         foreach($optionsBoolean as $key => $config) {
