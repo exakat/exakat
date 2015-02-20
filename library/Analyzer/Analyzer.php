@@ -76,7 +76,13 @@ class Analyzer {
         $this->code = $this->analyzer;
         
         if (Analyzer::$docs === null) {
-            Analyzer::$docs = new Docs(dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite');
+            $is_phar  = (strpos(basename(dirname(dirname(__DIR__))), '.phar') !== false);
+            if ($is_phar) {
+                $pathDocs = 'phar://exakat.phar/data/analyzers.sqlite';
+            } else {
+                $pathDocs = dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite';
+            }
+            Analyzer::$docs = new Docs($pathDocs);
         }
         
         $this->apply = new AnalyzerApply();

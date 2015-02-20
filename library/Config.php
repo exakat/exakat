@@ -136,6 +136,7 @@ class Config {
                                  '-D'      => array('delete',     false),
                                  '-l'      => array('lint',       false),
                                  '-json'   => array('json',       false),
+                                 '-dot'    => array('dot',     false),
                                  '-ss'     => array('ss',         false),
                                  '-sm'     => array('sm',         false),
                                  '-sl'     => array('sl',         false),
@@ -167,6 +168,7 @@ class Config {
                                 '-report' => array('report',     'Premier'),
                                 '-format' => array('format',     'Text'),
                                 '-file' => array('file',     'report'),
+                                '-style' => array('style',   'ALL'), //
 //                                '-q' => array('loader',   'Load\Csv'),
                                  );
 
@@ -183,12 +185,15 @@ class Config {
 
         $commands = array('doctor' => 1, 
                           'init' => 1, 
+                          'export' => 1,
+                          'errors' => 1,
                           'files' => 1, 
                           'load' => 1, 
                           'stat' => 1, 
                           'build_root' => 1, 
                           'tokenizer' => 1, 
-                          'analyzer' => 1, 
+                          'analyze' => 1, 
+                          'results' => 1, 
                           'report' => 1, 
                           'report_all' => 1,
                           'version' => 1);
