@@ -7,9 +7,11 @@ use Everyman\Neo4j\Client,
 
 class Build_root implements Tasks {
     private $client = null;
+    private $dir_root = '.';
     
     public function run(\Config $config) {
         $project = $config->project;
+        $this->doc_root = $config->dir_root;
 
         $begin = microtime(true);
         $this->client = new Client();
@@ -104,7 +106,7 @@ class Build_root implements Tasks {
         static $log, $begin, $end, $start;
     
         if ($log === null) {
-            $log = fopen('log/build_root.timing.csv', 'w+');
+            $log = fopen($this->dir_root.'/log/build_root.timing.csv', 'w+');
         }
         $end = microtime(true);
         if ($begin === null) { 

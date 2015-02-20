@@ -13,7 +13,7 @@ class Load implements Tasks {
     public function run(\Config $config) {
         $this->client = new Client();
 
-        $this->log = new \Log('load');
+        $this->log = new \Log('load', $config->dir_root);
 
         $project = $config->project;
 
