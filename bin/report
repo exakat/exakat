@@ -35,6 +35,11 @@ $db = new Db();
 $datastore = new Datastore($config->project);
 \Analyzer\Analyzer::$datastore = $datastore;
 
+if (!class_exists("\\Report\\Format\\".$config->format)) {
+    print "Format '{$config->format}' doesn't exist.\nAborting\n";
+    die();
+}
+
 print "Building report ".$config->report." for project ".$config->project." in file ".$config->file.", with format ".$config->format."\n";
 $begin = microtime(true);
 
