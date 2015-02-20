@@ -49,7 +49,6 @@ Make a summary to the report (how to share this ? When to involve the author ? N
 Check spelling in variables/classe names : 
   Spin this as an external project
 
-Export tool for extensions (versioning ?)
 Long variables with "" that should actually be ' because they don't contain any variable.
 
 Export data collected in mysql to a graph
@@ -790,13 +789,11 @@ spot situations where code may be mistaken with the IDE ($x = 'a '.' b'; (=> 'a 
 wouldblock in flock
 The optional third argument is set to 1 if the lock would block (EWOULDBLOCK errno condition). (not supported on Windows)
 
-Useless \ in a string literal
-
 Spot arguments with a limited list of values (in_array or switch or direct comparisons)
 
 Add a check for php native functions (from data/*.ini to be into methods analyzers)
 
-No hardcoded PORTS or URLS.
+No hardcoded URLS.
 
 https://www.checkmarx.com/technology/vulnerability-coverage/
 security : owasp
@@ -809,7 +806,7 @@ Be able to consult a Packagist database to make sure constants are there (or not
 
 Spot properties that are in the parents/traits too. 
 
-/* useless unset : array contains objects
+/* useless unset : array containing objects
         foreach (self::$instances as $instance) {
             if ($instance) unset($instance);
         }
@@ -846,7 +843,6 @@ Check that variables inside a string exist in the current context
 
 Inconsistent encoding : collect a wide collection of encoding usage (encode, decode) and check for inconsistencies
 
-Spot New in instanceof (useless?)
 instanceof should apply to arguments or incoming values, not locally created one (factory?)
 
 Detect environnement (production, test, dev...)
@@ -862,17 +858,11 @@ Synchronmize google code, and source forge for clear PHP (and others).
 
 In stats, export the count of every index avaible (how many staticmethodcall, new, functioncall, etc...)
 
-(new asdfasfd())->method is not possible in PHP 5.3
-
 Spot really complex code (if (array_filter($array, function() {})) {} : (Closure shouldn't be in the if).
 
 Add a way to load several files within a folder (using configuration?)
 
 Goto in switch or loop is disallowed, unless it is in the same context (jumping into a loop is not possible)
-
-Not Dead Code
-        return Swoole\Error::info('MVC Error', "Controller <b>{$mvc['controller']}</b>[{$controller_path}] not exist!");
-        do_action: :
 
 Dans les array, signaler des valeurs qui sont en doubles (disons que c'est rare).
 
@@ -885,3 +875,11 @@ Spot literals used in functioncall, and compare them (f('yes'), f('yes'), f('may
 Move more code in classes from bin/load
 
 Attention to constant/functions that may be defined in another inclusion (with another class), and such, not available to all namespace (who's doing that?)
+
+check the impact of too many extensions in terms of time.
+(suggest dropping some extensions, and even not-compiling them, compared to a default installation).
+
+Stop analysing at __halt_compiler
+
+Spot entry point in the application and outgoing points.
+
