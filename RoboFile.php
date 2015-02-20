@@ -12,8 +12,7 @@ class RoboFile extends \Robo\Tasks
         $this->yell("Releasing Exakat");
     }
 
-    public function versionBump($version = null)
-    {
+    public function versionBump($version = null) {
         if (!$version) {
             $versionParts = explode('.', \Exakat::VERSION);
             $versionParts[count($versionParts)-1]++;
@@ -22,6 +21,15 @@ class RoboFile extends \Robo\Tasks
         $this->taskReplaceInFile(__DIR__.'/library/Exakat.php')
             ->from("VERSION = '".\Exakat::VERSION."'")
             ->to("VERSION = '".$version."'")
+            ->run();
+    }
+
+    public function updateBuild() {
+        $build = \Exakat::BUILD + 1;
+
+        $this->taskReplaceInFile(__DIR__.'/library/Exakat.php')
+            ->from("BUILD = '".\Exakat::BUILD."'")
+            ->to("BUILD = '".$build."'")
             ->run();
     }
 
@@ -146,8 +154,7 @@ LICENCE;
     /**
      * Clean the build process
      */
-    public function clean()
-    {    
+    public function clean() {    
         $this->taskExecStack()
          ->stopOnFail()
          ->exec('rm -rf release')
@@ -155,4 +162,44 @@ LICENCE;
          ->run();
     }
     
+    public function pharBuild() {
+        $packer = $this->taskPackPhar('exakat.phar');
+        
+        $this->updateBuild();
+
+        $this->taskComposerInstall()
+            ->noDev()
+            ->printed(false)
+            ->run();
+
+        $files = Finder::create()->ignoreVCS(true)
+            ->files()
+//            ->name('*.php')
+//            ->path('library')
+            ->path('/config/')
+            ->path('/data/')
+            ->path('/human/')
+            ->path('/library/')
+            ->path('/scripts/')
+            ->notPath('media')
+            ->in(__DIR__);
+
+        foreach ($files as $file) {
+            print "$file\n";
+            $packer->addFile($file->getRelativePathname(), $file->getRealPath());
+        }
+
+        $packer->addFile('exakat','exakat')
+            ->executable('exakat')
+            ->run();
+
+        $this->taskComposerInstall()
+            ->printed(false)
+            ->run();
+
+        $this->taskExecStack()
+         ->stopOnFail()
+         ->exec('mv exakat.phar ../release/')
+         ->run();
+    }
 }

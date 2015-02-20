@@ -33,7 +33,16 @@ class Config {
     private function __construct($argv) {
         $this->argv = $argv;
         
-        $this->configFile = parse_ini_file(dirname(__DIR__).'/config/config.ini');
+        if(strpos(dirname(__DIR__), '.phar') !== false) {
+            $configFile = substr(dirname(dirname(__DIR__)).'/config/config.ini', 7); 
+            if (file_exists($configFile)) {
+                $this->configFile = parse_ini_file($configFile);
+            } else {
+                $this->configFile = parse_ini_file('phar://exakat.phar/config/config-dist.ini');
+            }
+        } else {
+            $this->configFile = parse_ini_file(dirname(__DIR__).'/config/config.ini');
+        }
 
         // then read the config from the commandline (if any)
         $this->readCommandline();
@@ -91,7 +100,7 @@ class Config {
         
         // check and default values
         $defaults = array( 'ignore_dirs'        => array('tests', 'test', 'Tests'),
-                           'other_php_versions' => array('53', '54', '55', '56'));
+                           'other_php_versions' => array('53', '54', '55', '56', '70'));
         
         foreach($defaults as $name => $value) {
             if (!isset($this->projectConfig[$name])) {
@@ -128,7 +137,6 @@ class Config {
                                  '-table'  => array('table',      false),
                                  '-text'   => array('text',       false),
                                  '-o'      => array('output',     false),
-                                 '-doctor' => array('doctor',     false),
                                  );
 
         foreach($optionsBoolean as $key => $config) {
@@ -163,9 +171,29 @@ class Config {
                 $this->commandline[$config[0]] = $config[1];
             }
         }
-        
+
+        $commands = array('doctor' => 1, 
+                          'init' => 1, 
+                          'file' => 1, 
+                          'tokenizer' => 1, 
+                          'analyzer' => 1, 
+                          'report' => 1, 
+                          'report_all' => 1,
+                          'version' => 1);
+
+        if (count($args) > 0) {
+            $arg = array_shift($args);
+            if (isset($commands[$arg])) {
+                $this->commandline['command'] = $arg;
+            } else {
+                array_unshift($args, $arg);
+                $this->commandline['command'] = 'version';
+            }
+        }
+
         if (count($args) != 0) {
-            print "Found ".count($args)." arguments that are not understood.\n\n\"".join('", "', $args)."\"\n\nIgnoring them all\n";
+            $c = count($args);
+            print "Found ".$c." argument".($c > 1 ? "s" : '')." that ".($c > 1 ? "are" : 'is')." not understood.\n\n\"".join('", "', $args)."\"\n\nIgnoring ".($c > 1 ? "them all" : 'it').".\n";
         }
     }
 }

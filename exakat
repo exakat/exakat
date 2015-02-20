@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+if(strpos(basename(__FILE__), 'phar') !== false){
+    require_once 'phar://exakat.phar/library/Autoload.php';
+    spl_autoload_register('Autoload::autoload_library');
+} else {
+    include_once(__DIR__.'/library/Autoload.php');
+    spl_autoload_register('Autoload::autoload_library');
+}
+
+$config = \Config::factory($argv);
+
+$exakat = new \Exakat();
+$exakat->execute($config);

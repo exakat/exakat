@@ -23,6 +23,25 @@
 
 class Exakat {
     const VERSION = '1.2.3';
+    const BUILD = '3';
+    
+    public function execute(Config $config) {
+        switch ($config->command) {
+            case 'doctor' : 
+                $doctor = new Doctor();
+                print $doctor->run();
+                break;
+
+            case 'version' : 
+            default : 
+                $version = self::VERSION;
+                $date = date('r', filemtime(__FILE__));
+                print "Exakat : @ 2014-2015 Damien Seguy. 
+Version : {$version} - $date\n";
+                print_r($config);
+                break;
+        }
+    }
 }
 
 ?>
