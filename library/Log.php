@@ -26,10 +26,10 @@ class Log {
     private $log = null;
     private $begin = 0;
     
-    public function __construct($name = null) {
+    public function __construct($name = null, $dir = '.') {
         $this->name = $name;
 
-        $this->log = fopen('log/'.$this->name.'.log', 'w+');
+        $this->log = fopen($dir.'/log/'.$this->name.'.log', 'w+');
         $this->log($this->name." created on ".date('r'));
 
         $this->begin = microtime(true);
