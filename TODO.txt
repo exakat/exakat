@@ -733,8 +733,6 @@ There are some tokens which still have quite a lot of links to check when we nea
 
 Let's move Typehint to some other way (5s + each round is too much)
 
-neo4j 2.2.0 : ditch batch-import
-
 474946383961 => used to determine dimensions without getimagesize. (and not download the whole doc). 
 => amke this a rule ? 
 => update the inventory of special numbers / strings 
@@ -872,7 +870,7 @@ See if one can turn all those string into constant and make it a dev/prod config
 
 Spot literals used in functioncall, and compare them (f('yes'), f('yes'), f('maybe') <= may be isstrage)
 
-Move more code in classes from bin/load
+Move more code in classes out from Task/Load
 
 Attention to constant/functions that may be defined in another inclusion (with another class), and such, not available to all namespace (who's doing that?)
 
@@ -883,3 +881,31 @@ Stop analysing at __halt_compiler
 
 Spot entry point in the application and outgoing points.
 
+Suggest positive conditions when there is a if/else
+
+neo4j 2.2.0ME 4 : ditch batch-import
+    No support for Gremlin
+    Tutorial for neo4j-import
+    migration to Cypher ? 
+    
+Packaging PHar
+    Remove MySQL
+    check globs()
+    remove shell_exec() (the one that relay to other PHP tasks)
+    check for PHP versions in the .ini
+
+    Remove die, print_r, var_dump.
+    Vérifier que les tests fonctionnent
+    Que faire des scripts de tests? 
+    Check doctor for phpunit
+    
+    
+Useless '' in a concatenation ? ('' . $a. $b. ' ')
+this variable is always concatenated (added, multiplicated, process) with this function. This could be merged.
+
+DeadCode after this :  
+        if (!$res) { 
+            return null;
+        } else {
+            return $res->fetchArray(SQLITE3_ASSOC)[0];
+        }
