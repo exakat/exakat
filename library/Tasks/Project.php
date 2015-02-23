@@ -7,14 +7,19 @@ use Everyman\Neo4j\Client,
 
 class Project implements Tasks {
     private $client = null;
-    private $log = null;
-    private $php = null;
+    private $project_dir = '.';
+    private $executable = 'exakat';
     
     public function run(\Config $config) {
         $this->client = new Client();
+        $this->project_dir = $config->projects_root.'/projects/'.$config->project;
+        if ($config->is_phar) {
+            // could this be something else? Renamed phar ? 
+            $this->executable = 'exakat.phar';
+        }
 
         if ($config->project === null) {
-            print "Usage : php bin/project [Project name]\n";
+            print "Usage : php {$this->executable} project -p [Project name]\n";
             die();
         }
 
@@ -54,67 +59,62 @@ class Project implements Tasks {
         $db->logProgress($project, $progress++ / $total_steps);
 
         $thread = new \Thread();
-        $thread->run('sh scripts/clean.sh');
-
-        $db->logProgress($project, $progress++ / $total_steps);
-        $this->logTime('Clean');
-
         print "Running project '$project'\n";
 
         print "Running files\n";
-        $thread->run('php exakat files -p '.$project);
+        $thread->run('php '.$this->executable.' files -p '.$project);
         $this->logTime('Files');
         print "Loading project\n";
 
         $thread->waitForAll();
 
-        shell_exec('php exakat load -r -q -d ./projects/'.$project.'/code/ -p '.$project.'');
+        shell_exec('php '.$this->executable.' load -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project.'');
         $db->logProgress($project, $progress++ / $total_steps);
         print "Project loaded\n";
         $this->logTime('Loading');
 
-        $res = shell_exec('php exakat build_root -p '.$project.' > ./projects/'.$project.'/log/build_root.final.log');
+        $res = shell_exec('php '.$this->executable.' build_root -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
         print "Build root\n";
         $this->logTime('Build_root');
 
-        if (file_exists('./projects/'.$project.'/log/tokenizer.final.log')) {
-            unlink('./projects/'.$project.'/log/tokenizer.final.log');
+        if (file_exists($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log')) {
+            unlink($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
         }
-        $res = shell_exec('php exakat tokenizer -p '.$project.' > ./projects/'.$project.'/log/tokenizer.final.log');
+        $res = shell_exec('php '.$this->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
         if (!empty($res) && strpos('javax.script.ScriptException', $res) !== false) {
-            file_put_contents('log/tokenizer_error.log', $res);
+            file_put_contents($config->projects_root.'/log/tokenizer_error.log', $res);
             die();
         }
 
-        if (file_exists('./projects/'.$project.'/log/errors.log')) {
-            unlink('./projects/'.$project.'/log/errors.log');
+        if (file_exists($config->projects_root.'/projects/'.$project.'/log/errors.log')) {
+            unlink($config->projects_root.'/projects/'.$project.'/log/errors.log');
         }
         $this->logTime('Tokenizer');
         print "Project tokenized\n";
 
-        $thread->run('php exakat magicnumber -p '.$project);
+        $thread->run('php '.$this->executable.' magicnumber -p '.$project);
 
-        $thread->run('rm -rf ./projects/'.$project.'/log/errors.log; php exakat extract_errors > ./projects/'.$project.'/log/errors.log');
+        $thread->run('php '.$this->executable.' errors > '.$config->projects_root.'/projects/'.$project.'/log/errors.log');
         print "Got the errors (if any)\n";
 
-        $thread->run('php bin/stat > ./projects/'.$project.'/log/stat.log');
+        $thread->run('php '.$this->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
         $db->logProgress($project, $progress++ / $total_steps);
         print "Stats\n";
 
-        $thread->run('php bin/log2csv; mv log/* ./projects/'.$project.'/log/');
+        $thread->run('php '.$this->executable.' log2csv -p '.$project);
 
         $this->logTime('Stats');
         $db->logProgress($project, $progress++ / $total_steps);
 
-        if (file_exists('./projects/'.$project.'/log/analyze.final.log')) {
-            unlink('./projects/'.$project.'/log/analyze.final.log');
+        if (file_exists($config->projects_root.'/projects/'.$project.'/log/analyze.final.log')) {
+            unlink($config->projects_root.'/projects/'.$project.'/log/analyze.final.log');
         }
 
         $themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security', 'Custom');
         $processes = array();
         foreach($themes as $theme) {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
-            shell_exec('php exakat analyze -norefresh -T '.$theme.' > ./projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log; mv log/analyze.log ./projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
+            shell_exec('php '.$this->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log');
             print "Analyzing $theme\n";
         }
 
@@ -122,14 +122,14 @@ class Project implements Tasks {
         print "Project analyzed\n";
         $this->logTime('Analyze');
 
-        shell_exec('php exakat report_all -p '.$project);
+        shell_exec('php '.$this->executable.' report_all -p '.$project);
         $this->logTime('Report');
 
         $db->logProgress($project, $progress++ / $total_steps);
 
         print "Project reported\n";
 
-        shell_exec('php exakat stat > ./projects/'.$project.'/log/stat.log');
+        shell_exec('php '.$this->executable.' stat > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
         $db->logProgress($project, $progress++ / $total_steps);
         print "Stats 2\n";
 
@@ -141,7 +141,7 @@ class Project implements Tasks {
         static $log, $begin, $end, $start;
 
         if ($log === null) {
-            $log = fopen('log/project.timing.csv', 'w+');
+            $log = fopen($this->project_dir.'/log/project.timing.csv', 'w+');
         }
         $end = microtime(true);
         if ($begin === null) { 

@@ -28,7 +28,7 @@ class Tokenizer implements Tasks {
         $begin_time = microtime(true);
         $classes = \Tokenizer\Token::getTokenizers($config->phpversion);
 
-        $log = new \Log('tokenizer', $config->dir_root);
+        $log = new \Log('tokenizer', $config->projects_root.'/projects/'.$config->project);
         $log->log( "Starting time : ".date('r'));
 
         $client = new Client();

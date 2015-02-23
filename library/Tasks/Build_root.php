@@ -8,16 +8,20 @@ use Everyman\Neo4j\Client,
 class Build_root implements Tasks {
     private $client = null;
     private $dir_root = '.';
+    private $project_dir = '.';
     
     public function run(\Config $config) {
         $project = $config->project;
         $this->doc_root = $config->dir_root;
+        $this->project_dir = $config->projects_root.'/projects/'.$config->project;
 
         $begin = microtime(true);
         $this->client = new Client();
-        if ($config->verbose) { print "Starting\n"; }
+        if ($config->verbose) { 
+            print "Starting\n"; 
+        }
 
-        file_put_contents($config->dir_root.'/log/build_root.log', '');
+        file_put_contents($this->project_dir.'/log/build_root.log', '');
 
         $this->logTime('Start');
 
@@ -88,7 +92,7 @@ class Build_root implements Tasks {
             $GremlinQuery = new Query($this->client, $query, $params);
             return $GremlinQuery->getResultSet();
         } catch (Exception $e) {
-            $fp = fopen('./log/build_root.log', 'a');
+            $fp = fopen($config->projects_root.'/'.$config->project.'/log/build_root.log', 'a');
             fwrite($fp, $query."\n");
             fwrite($fp, $e->getMessage());
             fclose($fp);
@@ -106,7 +110,7 @@ class Build_root implements Tasks {
         static $log, $begin, $end, $start;
     
         if ($log === null) {
-            $log = fopen($this->dir_root.'/log/build_root.timing.csv', 'w+');
+            $log = fopen($this->project_dir.'/log/build_root.timing.csv', 'w+');
         }
         $end = microtime(true);
         if ($begin === null) { 

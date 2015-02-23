@@ -13,11 +13,11 @@ class Load implements Tasks {
     public function run(\Config $config) {
         $this->client = new Client();
 
-        $this->log = new \Log('load', $config->dir_root);
+        $this->log = new \Log('load', $config->projects_root.'/projects/'.$config->project);
 
         $project = $config->project;
 
-        if (!file_exists('./projects/'.$project.'/config.ini')) {
+        if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
             print "No such project as '$project'. Aborting\n";
             die();
         }
@@ -1062,7 +1062,7 @@ class Load implements Tasks {
                                        ->setProperty('atom', 'File')
                                        ->setProperty('filename', $filename)
                                        ->setProperty('code', $filename)
-                                       ->setProperty('fullcode', preg_replace('#^\./projects/[^/]+/code/#', '/', $filename))
+                                       ->setProperty('fullcode', preg_replace('#^.*?/projects/[^/]+/code/#', '/', $filename))
                                        ->save();
         $fileNode->relateTo($T[0], 'FILE')->save();
 

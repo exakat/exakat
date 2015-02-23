@@ -18,6 +18,10 @@ class Analyze implements Tasks {
             if (\Analyzer\Analyzer::getClass($analyzer)) {
                 $analyzers_class = array($analyzer);
             } else {
+                $r = \Analyzer\Analyzer::getSuggestionClass($analyzer);
+                if (count($r) > 0) {
+                    print "did you mean : ".implode(', ', str_replace('_', '/', $r))."\n";
+                }
                 die("No such class as '$analyzer'. Aborting\n");
             }
         } elseif ($config->thema !== null) {
@@ -32,7 +36,7 @@ class Analyze implements Tasks {
         }
 
         $client = new Client();
-        $log = new \Log('analyze', $config->dir_root);
+        $log = new \Log('analyze', $config->projects_root.'/projects/'.$config->project);
 
         $analyzers = new NodeIndex($client, 'analyzers');
 

@@ -11,60 +11,6 @@ class Results implements Tasks {
     public function run(\Config $config) {
         $client = new Client();
 
-/*
-        $args = $argv;
-        if ($id = array_search('-json', $args)) {
-            define('FORMAT', 'JSON');
-            unset($args[$id]);
-            $args = array_values($args);
-        } elseif ($id = array_search('-text', $args)) {
-            define('FORMAT', 'TEXT');
-            unset($args[$id]);
-            $args = array_values($args);
-        } elseif ($id = array_search('-odt', $args)) {
-            define('FORMAT', 'ODT');
-            unset($args[$id]);
-            $args = array_values($args);
-        } elseif ($id = array_search('-markdown', $args)) {
-            define('FORMAT', 'MARKDOWN');
-            unset($args[$id]);
-            $args = array_values($args);
-        } elseif ($id = array_search('-csv', $args)) {
-            define('FORMAT', 'CSV');
-            unset($args[$id]);
-            $args = array_values($args);
-        } elseif ($id = array_search('-html', $args)) {
-            define('FORMAT', 'HTML');
-            unset($args[$id]);
-            $args = array_values($args);
-        } else {
-            define('FORMAT', 'TEXT');
-        }
-
-        if ($id = array_search('-o', $args)) {
-            define('OUTPUT', true);
-        } else {
-            define('OUTPUT', false);
-        }
-
-        if ($id = array_search('-f', $args)) {
-            define('FILE', $args[$id + 1]);
-        } else {
-            define('FILE', false);
-        }
-
-        if ($id = array_search('-D', $args)) {
-            define('STYLE', 'DISTINCT');
-        } elseif ($id = array_search('-C', $args)) {
-            define('STYLE', 'COUNTED_ALL');
-        } elseif ($id = array_search('-B', $args)) {
-            define('STYLE', 'BOOLEAN');
-        } elseif ($id = array_search('-G', $args)) {
-            define('STYLE', 'COUNTED');
-        } else {
-            define('STYLE', 'ALL');
-        }
-*/
         $analyzer = $config->program;
         $analyzerClass = \Analyzer\Analyzer::getClass($analyzer);
 
@@ -75,7 +21,6 @@ class Results implements Tasks {
             if (count($r) > 0) {
                 print "did you mean : ".implode(', ', str_replace('_', '/', $r))."\n";
             }
-    
             exit;
         }
 

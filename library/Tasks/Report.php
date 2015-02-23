@@ -17,21 +17,13 @@ class Report implements Tasks {
 
         if (!class_exists("\\Report\\Format\\".$config->format)) {
             print "Format '{$config->format}' doesn't exist.\nAborting\n";
+            
+            // @todo suggest some reports? Use a default one. 
             die();
         }
 
         print "Building report ".$config->report." for project ".$config->project." in file ".$config->file.", with format ".$config->format."\n";
         $begin = microtime(true);
-
-        if (count(glob('library/Report/Report/'.$config->report.'.php')) == 0) {
-            $reports = glob('library/Report/Report/*.php');
-            print "Couldn't load report '".$config->report."'. Please choose among the ".count($reports)." followings : \n";
-            foreach($reports as $report) {
-                print "+ ".substr(basename($report), 0, -4)."\n";
-            }
-    
-            die('');
-        }
 
         $reportClass = "\\Report\\Report\\".$config->report;
         $report = new $reportClass($config->project, $client, $db);
