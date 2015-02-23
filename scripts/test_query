@@ -43,7 +43,8 @@ $res = query($query);
 
 
 
-foreach($res->toArray() as $k => $v) {
+foreach($res as $k => $v) {
+    print_r($k);
     print_r($v[0]);
     print "\n";
 }
