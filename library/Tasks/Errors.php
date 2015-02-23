@@ -101,12 +101,7 @@ class Errors implements Tasks {
     }
 
     private function text_encode($stats) {
-        global $file;
-        if ($file) {
-            $html = "Statistics for the file '$file'\n\n";
-        } else {
-            $html = "Statistics for the whole server\n\n";
-        }
+        $html = "Statistics for the whole server\n\n";
     
         foreach($stats as $name => $value) {
             if (is_array($value)) {
