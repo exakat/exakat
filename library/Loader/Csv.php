@@ -81,6 +81,7 @@ HEADER
 		);
 
 		$context = stream_context_create($context_options);
+		$config = \Config::factory();
 		$response = file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/', false, $context);
 		
 		if (strpos($response, 'NOT_FOUND') !== false) {
