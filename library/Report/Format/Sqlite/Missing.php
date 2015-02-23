@@ -25,7 +25,7 @@ namespace Report\Format\Sqlite;
 
 class Missing extends \Report\Format\Sqlite {
     public function render($output, $data) {
-        $output->push(array("<!-- Missing widget -->"));
+        // No rendering for missing component
     }
     
     public function __call($name, $args) {

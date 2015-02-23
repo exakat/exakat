@@ -25,11 +25,19 @@ namespace Report\Format\Sqlite;
 
 class SimpleTable extends \Report\Format\Sqlite { 
     public function render($output, $data) {
-        print_r($data);
         foreach($data as $key => $value) {
-            $array = array('analyzer' => $key,
-                           'value' => 'All',
-                           'count' => $value);
+            if (count($value) == 1) {
+                $array = array('analyzer' => $value[0],
+                               'value'    => '',
+                               'count'    => 1);
+            } elseif (count($value) == 2) {
+                $array = array('analyzer' => $value[0],
+                               'value'    => $value[1],
+                               'count'    => 1);
+            } else {
+                print_r($value);
+                print __METHOD__."\n";
+            }
         
             $output->push($array);
         }

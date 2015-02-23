@@ -54,6 +54,9 @@ class Sqlite extends \Report\Format {
 
         foreach($this->output as $t) {
             foreach($t as $k => $v) {
+                if (is_array($v)) {
+                    var_dump($v);die();
+                }
                 $t[$k] = $db->escapeString($v);
             }
             if (count($t) != 3) {
