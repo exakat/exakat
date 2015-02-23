@@ -32,21 +32,16 @@ class IsExtTrait extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $exts = glob('library/Analyzer/Extensions/*.php');
-        $exts[] = 'php_traits.ini';
+        $exts = self::$docs->listAllAnalyzer('Extensions');
+        $exts[] = 'php_traits';
         
-        $traits = array();
+        $classes = array();
         foreach($exts as $ext) {
-            $inifile = str_replace('library/Analyzer/Extensions/Ext', '', str_replace('.php', '.ini', $ext));
-            if ($inifile == 'library/Analyzer/Extensions/Used.ini') { continue; }
+            $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile);
             
-            if (!isset($ini['traits']) || !is_array($ini['traits'])) {
-//                print "No trait defined in $inifile\n";
-            } else {
-                if (!empty($ini['traits'][0])) {
-                    $traits = array_merge($traits, $ini['traits']);
-                }
+            if (!empty($ini['classes'][0])) {
+                $classes = array_merge($classes, $ini['traits']);
             }
         }
 

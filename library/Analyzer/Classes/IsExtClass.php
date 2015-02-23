@@ -32,21 +32,16 @@ class IsExtClass extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $exts = glob('library/Analyzer/Extensions/*.php');
-        $exts[] = 'php_classes.ini';
+        $exts = self::$docs->listAllAnalyzer('Extensions');
+        $exts[] = 'php_classes';
         
         $classes = array();
         foreach($exts as $ext) {
-            $inifile = str_replace('library/Analyzer/Extensions/Ext', '', str_replace('.php', '.ini', $ext));
-            if ($inifile == 'library/Analyzer/Extensions/Used.ini') { continue; }
+            $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile);
             
-            if (!isset($ini['classes']) || !is_array($ini['classes'])) {
-                print "No classes defined in $inifile\n";
-            } else {
-                if (!empty($ini['classes'][0])) {
-                    $classes = array_merge($classes, $ini['classes']);
-                }
+            if (!empty($ini['classes'][0])) {
+                $classes = array_merge($classes, $ini['classes']);
             }
         }
         

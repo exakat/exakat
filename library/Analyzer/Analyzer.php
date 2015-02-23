@@ -122,6 +122,7 @@ class Analyzer {
         } elseif (strpos($name, '/') !== false) {
             $class = 'Analyzer\\'.str_replace('/', '\\', $name);
         } elseif (strpos($name, '/') === false) {
+            self::initDocs();
             $found = self::$docs->guessAnalyzer($name);
             if (count($found) == 0) {
                 return false; // no class found
@@ -1693,17 +1694,7 @@ GREMLIN;
     }
     
     public static function listAnalyzers() {
-        $files = glob(dirname(__DIR__).'/Analyzer/*/*.php');
-
-        $analyzers = array();
-        foreach($files as $file) {
-            $type = basename(dirname($file));
-            if ($type == 'Common') { continue; }
-            if ($type == 'Test') { continue; }
-            if ($type == 'Group') { continue; }
-            $analyzers[] = $type.'/'.substr(basename($file), 0, -4);
-        }
-        return $analyzers;
+        return self::$docs->listAllAnalyzer();
     }
     
     public function hasResults() {

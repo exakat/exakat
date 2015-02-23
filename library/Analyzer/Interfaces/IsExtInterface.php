@@ -32,21 +32,16 @@ class IsExtInterface extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $exts = glob('library/Analyzer/Extensions/*.php');
-        $exts[] = 'php_interfaces.ini';
+        $exts = self::$docs->listAllAnalyzer('Extensions');
+        $exts[] = 'php_interfaces';
         
-        $interfaces = array();
+        $classes = array();
         foreach($exts as $ext) {
-            $inifile = str_replace('library/Analyzer/Extensions/Ext', '', str_replace('.php', '.ini', $ext));
-            if ($inifile == 'library/Analyzer/Extensions/Used.ini') { continue; }
+            $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile);
             
-            if (!isset($ini['interfaces']) || !is_array($ini['interfaces'])) {
-                print "No interface defined in $inifile\n";
-            } else {
-                if (!empty($ini['interfaces'][0])) {
-                    $interfaces = array_merge($interfaces, $ini['interfaces']);
-                }
+            if (!empty($ini['classes'][0])) {
+                $classes = array_merge($classes, $ini['interfaces']);
             }
         }
 

@@ -137,12 +137,19 @@ SQL;
         return $return;
     }
 
-    public function listAllAnalyzer() {
+    public function listAllAnalyzer($folder = null) {
         $query = <<<'SQL'
-SELECT folder || '\\' || name AS name FROM analyzers;
+SELECT folder || '\\' || name AS name FROM analyzers
 
 SQL;
-        $stmt = $this->sqlite->prepare($query);
+        if ($folder !== null) {
+            $query .= " WHERE folder=:folder";
+            $stmt = $this->sqlite->prepare($query);
+            
+            $stmt->bindValue(':folder', $folder, SQLITE3_TEXT);
+        } else {
+            $stmt = $this->sqlite->prepare($query);
+        }
         $res = $stmt->execute();
 
         $return = array();
