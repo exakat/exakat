@@ -118,5 +118,39 @@ SQL;
         
         return $return;
     }
+    
+    public function guessAnalyzer($name) {
+        $query = <<<'SQL'
+SELECT 'Analyzer\\' || folder || '\\' || name AS name FROM analyzers WHERE name=:name;
+
+SQL;
+        $stmt = $this->sqlite->prepare($query);
+
+        $stmt->bindValue(':name', $name, SQLITE3_TEXT);
+        $res = $stmt->execute();
+
+        $return = array();
+        while($row = $res->fetchArray()) {
+            $return[] = str_replace('\\\\', '\\', $row['name']);
+        }
+        
+        return $return;
+    }
+
+    public function listAllAnalyzer() {
+        $query = <<<'SQL'
+SELECT folder || '\\' || name AS name FROM analyzers;
+
+SQL;
+        $stmt = $this->sqlite->prepare($query);
+        $res = $stmt->execute();
+
+        $return = array();
+        while($row = $res->fetchArray()) {
+            $return[] = str_replace('\\\\', '\\', $row['name']);
+        }
+        
+        return $return;
+    }
 }
 ?>
