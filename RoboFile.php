@@ -38,11 +38,11 @@ class RoboFile extends \Robo\Tasks
      */
     public function licence()
     {
-        $files = Finder::create()->files()->name('*.php')->in('library');
-        $files = Finder::create()->files()->name('*')->in('bin');
-        $files = Finder::create()->files()->name('*')->in('scripts');
-//                             Finder::create()->files()->name('*.php')->in('bin'),
-//                             Finder::create()->files()->name('*.php')->in('scripts')
+        $files = $mit = Finder::create()->files()
+                                        ->name('*.php')
+                                        ->in('library')
+                                        ->in('bin')
+                                        ->in('scripts');
         $docs = [];
         
         $licence = <<<'LICENCE'
@@ -183,6 +183,8 @@ LICENCE;
             ->path('/scripts/')
             ->path('/vendor/')
             ->notPath('media')
+            ->notPath('batch-import')
+//            ->notPath('/neoj4')
             ->in(__DIR__);
 
         foreach ($files as $file) {
