@@ -25,9 +25,23 @@ namespace Data;
 
 class Methods {
     private $sqlite = null;
+    private $phar_tmp = null;
     
     public function __construct() {
-        $this->sqlite = new \sqlite3('./data/methods.sqlite');
+        if (substr(__DIR__, 0, 4) == 'phar') {
+            $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exMethods').'.sqlite';
+            copy('phar://'.basename(dirname(dirname(__DIR__))).'/data/methods.sqlite', $this->phar_tmp);
+            $docPath = $this->phar_tmp;
+        } else {
+            $docPath = dirname(dirname(__DIR__)).'/data/methods.sqlite';
+        }
+        $this->sqlite = new \Sqlite3($docPath, SQLITE3_OPEN_READONLY);
+    }
+
+    public function __destruct() {
+        if ($this->phar_tmp !== null) {
+            unlink($this->phar_tmp);
+        }
     }
 
     public function getMethodsArgsInterval() {
