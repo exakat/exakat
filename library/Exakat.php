@@ -21,8 +21,8 @@
 */
 
 class Exakat {
-    const VERSION = '1.2.3';
-    const BUILD = '69';
+    const VERSION = '0.1.0';
+    const BUILD = '70';
     
     public function execute(Config $config) {
         switch ($config->command) {
