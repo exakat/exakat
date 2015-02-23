@@ -107,6 +107,15 @@ class Doctor implements Tasks {
             $stats['java']['error'] = $res;
         }
 
+        // config
+        if (file_exists($config->dir_root.'/config/config.ini')) {
+            $stats['config']['created'] = 'Yes';
+
+            $ini = parse_ini_file('config/config.ini');
+        } else {
+            $stats['config']['created'] = 'No';
+        }
+
         // neo4j
         if (!file_exists('neo4j')) {
             $stats['neo4j']['installed'] = 'No';
@@ -128,7 +137,7 @@ class Doctor implements Tasks {
                 $stats['neo4j']['port'] = $r[1];
             }
     
-            $json = @file_get_contents('http://127.0.0.1:7474/db/data/');
+            $json = @file_get_contents('http://'.$ini['neo4j_host'].':'.$ini['neo4j_port'].'/db/data/');
             $json = json_decode($json);
             if (isset($json->extensions->GremlinPlugin)) {
                 $stats['neo4j']['gremlin'] = 'Yes';
@@ -163,49 +172,11 @@ class Doctor implements Tasks {
             $stats['batch-import']['maven'] = trim($res[0]);
         }
 
-        // screen
-        $res = shell_exec('screen -v');
-        if (preg_match('/Screen version (\d+.\d+.\d+)/is', $res, $r)) {
-            $stats['screen']['installed'] = 'Yes';
-            $stats['screen']['version'] = $r[1];
-        } else {
-            $stats['screen']['installed'] = 'No';
-        }
-
         // projects
         if (file_exists($config->dir_root.'/projects/')) {
             $stats['projects']['created'] = 'Yes';
         } else {
             $stats['projects']['created'] = 'No';
-        }
-
-        // log
-        if (file_exists($config->dir_root.'/log/')) {
-            $stats['log']['created'] = 'Yes';
-        } else {
-            $stats['log']['created'] = 'No';
-        }
-
-        // config
-        if (file_exists($config->dir_root.'/config/config.ini')) {
-            $stats['config']['created'] = 'Yes';
-
-            $ini = parse_ini_file('config/config.ini');
-            try {
-                mysqli_report(MYSQLI_REPORT_STRICT); 
-                $mysql = new \mysqli($ini['mysql_host'], $ini['mysql_exakat_user'], $ini['mysql_exakat_pass']);
-                $stats['config']['mysql_connect'] = 'Success';
-                $stmt = $mysql->query('SHOW DATABASES LIKE "'.$ini['mysql_exakat_db'].'"');
-                if ($stmt->num_rows == 1) {
-                    $stats['config']['mysql_database'] = 'Success';
-                } else {
-                    $stats['config']['mysql_database'] = 'Failure';
-                }
-            } catch (mysqli_sql_exception $e) {
-                $stats['config']['mysql_connect'] = 'Failed';
-            }
-        } else {
-            $stats['config']['created'] = 'No';
         }
 
         // composer
@@ -226,6 +197,7 @@ class Doctor implements Tasks {
             $stats['svn']['version'] = $r[1];
         } else {
             $stats['svn']['installed'] = 'No';
+            $stats['svn']['optional'] = 'Yes';
         }
 
         // hg
@@ -235,6 +207,7 @@ class Doctor implements Tasks {
             $stats['hg']['version'] = $r[1];
         } else {
             $stats['hg']['installed'] = 'No';
+            $stats['hg']['optional'] = 'Yes';
         }
 
         $doctor = '';
