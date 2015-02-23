@@ -60,8 +60,9 @@ mv rels.csv ./batch-import/sampleme/
 
 cd ./batch-import
 java -server -Dfile.encoding=UTF-8 -Xmx4G -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db sampleme/nodes.csv sampleme/rels.csv 2>/dev/null
-cd ..
-sh scripts/restart.sh
+cd ../neo4j/
+./bin/neo4j restart
+
 SHELL
 );
 
@@ -115,7 +116,9 @@ HEADER
         }
         $fp = static::$fp_nodes;
         // adding in_quote here, as it may not appear on the first token.
-        $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter', 'rank', 'dowhile', 'block', 'bracket', 'filename', 'tag', 'association' );
+        $les_cols = array('token', 'code', 'index', 'fullcode', 'line', 'atom', 'root', 'hidden', 'compile', 
+                          'in_quote', 'in_for', 'modifiedBy', 'delimiter', 'noDelimiter', 'rank', 'dowhile', 
+                          'block', 'bracket', 'filename', 'tag', 'association', 'relatedAtom' );
         if (static::$file_saved == 0) {
             $les_cols2 = $les_cols;
             $les_cols2[4] .= ':int';
