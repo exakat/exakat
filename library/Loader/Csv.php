@@ -55,11 +55,9 @@ class Csv {
         fclose(static::$fp_nodes);
         
         $res = shell_exec(<<<SHELL
-mv nodes.csv ./batch-import/sampleme/
-mv rels.csv ./batch-import/sampleme/
 
 cd ./batch-import
-java -server -Dfile.encoding=UTF-8 -Xmx4G -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db sampleme/nodes.csv sampleme/rels.csv 2>/dev/null
+java -server -Dfile.encoding=UTF-8 -Xmx4G -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db ../nodes.csv ../rels.csv 2>/dev/null
 cd ../neo4j/
 ./bin/neo4j restart
 
@@ -92,20 +90,24 @@ HEADER
         preg_match("/Importing (\d+) Relationships/is", $res, $relations);
         
         $fnodes = -1;
-        $fp = fopen('batch-import/sampleme/nodes.csv', 'r');
+        $fp = fopen('nodes.csv', 'r');
         while(fgetcsv($fp, 100000, "\t", '"')) { $fnodes++; }
         fclose($fp);
         
         $frels = -1;
-        $fp = fopen('batch-import/sampleme/rels.csv', 'r');
+        $fp = fopen('rels.csv', 'r');
         while(fgetcsv($fp, 1000, "\t", '"')) { $frels++; }
         fclose($fp);
         
         if ($fnodes != $nodes[1]) {
             print "Warning : didn't import enough nodes : {$fnodes} expected, {$nodes[1]} actually imported\n";
+        } else {
+            unlink('nodes.csv');
         }
         if ($frels != $relations[1]) {
             print "Warning : didn't import enough relations : {$frels} expected, {$relations[1]} actually imported\n";
+        } else {
+            unlink('rels.csv');
         }
 
         return true;
