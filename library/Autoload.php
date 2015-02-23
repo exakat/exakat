@@ -34,9 +34,7 @@ class Autoload {
         
         if (file_exists($file)) {
             include($file);
-        } else {
-            print "Couldn't load class $name in $file\n";
-        }
+        } 
     }
 
     static public function autoload_test($name) {
