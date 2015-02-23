@@ -23,7 +23,7 @@ class Analyze implements Tasks {
         } elseif ($config->thema !== null) {
             $thema = $config->thema;
 
-            if (!$analyzers_class = Analyzer\Analyzer::getThemeAnalyzers($thema)) {
+            if (!$analyzers_class = \Analyzer\Analyzer::getThemeAnalyzers($thema)) {
                 die("No such thema as '$thema'. Aborting\n");
             }
         } else {

@@ -73,6 +73,10 @@ class Config {
         return self::$singleton;
     }
 
+    static public function factorySingle($argv = array()) {
+        return new Config($argv);
+    }
+
     public function __isset($name) {
         return isset($this->options[$name]);
     }
@@ -188,10 +192,11 @@ class Config {
                           'export' => 1,
                           'errors' => 1,
                           'files' => 1, 
-                          'load' => 1, 
-                          'stat' => 1, 
+                          'project'    => 1, 
+                          'load'       => 1, 
+                          'stat'       => 1, 
                           'build_root' => 1, 
-                          'tokenizer' => 1, 
+                          'tokenizer'  => 1, 
                           'analyze' => 1, 
                           'results' => 1, 
                           'report' => 1, 

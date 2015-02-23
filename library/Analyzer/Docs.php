@@ -31,9 +31,11 @@ class Docs {
         if (substr($path, 0, 4) == 'phar') {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exDocs').'.sqlite';
             copy($path, $this->phar_tmp);
-            $path = $this->phar_tmp;
+            $docPath = $this->phar_tmp;
+        } else {
+            $docPath = $path;
         }
-        $this->sqlite = new \Sqlite3($path, SQLITE3_OPEN_READONLY);
+        $this->sqlite = new \Sqlite3($docPath, SQLITE3_OPEN_READONLY);
     }
 
     public function __destruct() {

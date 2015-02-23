@@ -128,7 +128,7 @@ class Doctor implements Tasks {
                 $stats['neo4j']['port'] = $r[1];
             }
     
-            $json = file_get_contents('http://127.0.0.1:7474/db/data/');
+            $json = @file_get_contents('http://127.0.0.1:7474/db/data/');
             $json = json_decode($json);
             if (isset($json->extensions->GremlinPlugin)) {
                 $stats['neo4j']['gremlin'] = 'Yes';

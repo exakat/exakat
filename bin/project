@@ -80,25 +80,25 @@ logTime('Clean');
 print "Running project '$project'\n";
 
 print "Running files\n";
-$thread->run('php bin/files -p '.$project);
+$thread->run('php exakat files -p '.$project);
 logTime('Files');
 print "Loading project\n";
 
 $thread->waitForAll();
 
-shell_exec('php bin/load -r -q -d ./projects/'.$project.'/code/ -p '.$project.'');
+shell_exec('php exakat load -r -q -d ./projects/'.$project.'/code/ -p '.$project.'');
 $db->logProgress($project, $progress++ / $total_steps);
 print "Project loaded\n";
 logTime('Loading');
 
-$res = shell_exec('php bin/build_root -p '.$project.' > ./projects/'.$project.'/log/build_root.final.log');
+$res = shell_exec('php exakat build_root -p '.$project.' > ./projects/'.$project.'/log/build_root.final.log');
 print "Build root\n";
 logTime('Build_root');
 
 if (file_exists('./projects/'.$project.'/log/tokenizer.final.log')) {
     unlink('./projects/'.$project.'/log/tokenizer.final.log');
 }
-$res = shell_exec('php bin/tokenizer -p '.$project.' > ./projects/'.$project.'/log/tokenizer.final.log');
+$res = shell_exec('php exakat tokenizer -p '.$project.' > ./projects/'.$project.'/log/tokenizer.final.log');
 if (!empty($res) && strpos('javax.script.ScriptException', $res) !== false) {
     file_put_contents('log/tokenizer_error.log', $res);
     die();
@@ -110,13 +110,10 @@ if (file_exists('./projects/'.$project.'/log/errors.log')) {
 logTime('Tokenizer');
 print "Project tokenized\n";
 
-$thread->run('php bin/magicnumber -p '.$project);
+$thread->run('php exakat magicnumber -p '.$project);
 
-$thread->run('rm -rf ./projects/'.$project.'/log/errors.log; php bin/extract_errors > ./projects/'.$project.'/log/errors.log');
+$thread->run('rm -rf ./projects/'.$project.'/log/errors.log; php exakat extract_errors > ./projects/'.$project.'/log/errors.log');
 print "Got the errors (if any)\n";
-
-$thread->run('php bin/export_tree; mv log/network.* ./projects/'.$project.'/log/ ');
-print "Getting the tree\n";
 
 $thread->run('php bin/stat > ./projects/'.$project.'/log/stat.log');
 $db->logProgress($project, $progress++ / $total_steps);
@@ -135,7 +132,7 @@ $themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Se
 $processes = array();
 foreach($themes as $theme) {
     $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
-    shell_exec('php bin/analyze -norefresh -T '.$theme.' > ./projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log; mv log/analyze.log ./projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
+    shell_exec('php exakat analyze -norefresh -T '.$theme.' > ./projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log; mv log/analyze.log ./projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
     print "Analyzing $theme\n";
 }
 
@@ -143,14 +140,14 @@ $db->logProgress($project, $progress++ / $total_steps);
 print "Project analyzed\n";
 logTime('Analyze');
 
-shell_exec('php bin/report_all -p '.$project);
+shell_exec('php exakat report_all -p '.$project);
 logTime('Report');
 
 $db->logProgress($project, $progress++ / $total_steps);
 
 print "Project reported\n";
 
-shell_exec('php bin/stat > ./projects/'.$project.'/log/stat.log');
+shell_exec('php exakat stat > ./projects/'.$project.'/log/stat.log');
 $db->logProgress($project, $progress++ / $total_steps);
 print "Stats 2\n";
 

@@ -22,7 +22,7 @@
 
 class Exakat {
     const VERSION = '1.2.3';
-    const BUILD = '46';
+    const BUILD = '47';
     
     public function execute(Config $config) {
         switch ($config->command) {
@@ -78,6 +78,21 @@ class Exakat {
 
             case 'errors' : 
                 $task = new Tasks\Errors();
+                print $task->run($config);
+                break;
+
+            case 'report' : 
+                $task = new Tasks\Report();
+                print $task->run($config);
+                break;
+
+            case 'report_all' : 
+                $task = new Tasks\ReportAll();
+                print $task->run($config);
+                break;
+
+            case 'project' : 
+                $task = new Tasks\Project();
                 print $task->run($config);
                 break;
 
