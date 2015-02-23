@@ -81,10 +81,10 @@ HEADER
 		);
 
 		$context = stream_context_create($context_options);
-		$response = file_get_contents('http://localhost:7474/db/data/', false, $context);
+		$response = file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/', false, $context);
 		
 		if (strpos($response, 'NOT_FOUND') !== false) {
-    		$response = file_get_contents('http://localhost:7474/db/data/', false, $context);
+    		$response = file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/', false, $context);
 		}
         
         preg_match("/Importing (\d+) Nodes/is", $res, $nodes);
