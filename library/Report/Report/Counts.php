@@ -28,8 +28,8 @@ use Report\Report;
 class Counts extends Report {
     private $projectUrl    = null;
 
-    public function __construct($project, $client, $db) {
-        parent::__construct($project, $client, $db);
+    public function __construct($project, $client) {
+        parent::__construct($project, $client);
     }
     
     public function setProject($project) {

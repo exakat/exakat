@@ -67,6 +67,20 @@ class Datastore {
         return $return;
     }
 
+    public function getHash($key) {
+        $query = "SELECT value FROM hash WHERE key=:key";
+
+        $stmt = $this->sqlite->prepare($query);
+        $stmt->bindValue(':key', $key, SQLITE3_TEXT);
+        $res = $stmt->execute();
+
+        if (!$res) { 
+            return null;
+        } else {
+            return $res->fetchArray(SQLITE3_ASSOC)['value'];
+        }
+    }
+
     public function hasResult($table) {
         $query = "SELECT * FROM $table LIMIT 1";
         $r = $this->sqlite->querySingle($query);
@@ -169,6 +183,16 @@ SQLITE;
 CREATE TABLE files (
   id INTEGER PRIMARY KEY,
   file TEXT
+);
+SQLITE;
+                break;
+
+            case 'hash' : 
+                $createTable = <<<SQLITE
+CREATE TABLE hash (
+  id INTEGER PRIMARY KEY,
+  key TEXT,
+  value TEXT
 );
 SQLITE;
                 break;

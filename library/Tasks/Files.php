@@ -89,6 +89,15 @@ class Files implements Tasks {
         preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
         $stats['loc'] = $r[1];
 
+        preg_match('/Directories\s*(\d+)/is', $res, $rdirs);
+        preg_match('/Files\s*(\d+)/is', $res, $rfiles);
+
+        $datastore->addRow('hash', array(array('key' => 'phploc',      'value' => $stats['loc']),
+                                         array('key' => 'files',       'value' => $rfiles[1]),
+                                         array('key' => 'directories', 'value' => $rdirs[1])
+                                        )
+                          ) ;
+
         $notCompilable = array();
 
         $versions = $config->other_php_versions;
@@ -200,9 +209,6 @@ class Files implements Tasks {
     
             $datastore->addRow('shortopentag', $shortOpenTag);
         }
-
-        $db = new \Db();
-        $db->insert('projects', array('notCompilable53', 'notCompilable54', 'notCompilable55', 'notCompilable56', 'project', 'php', 'tokens', 'loc'), array($stats['notCompilable53'], $stats['notCompilable54'], $stats['notCompilable55'], $stats['notCompilable56'], $dir, $stats['php'], $stats['tokens'], $stats['loc']));
 
         if ($config->json) {
             if ($unknown) {

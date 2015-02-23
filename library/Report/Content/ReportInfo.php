@@ -41,22 +41,19 @@ class ReportInfo extends \Report\Content {
             $this->list['Repository URL'] = 'Downloaded archive';
         }
 
-        $db = new \Db();
-        $res = $db->query('SELECT * FROM projects WHERE project="'.$this->project.'" ORDER BY ID DESC LIMIT 1')->fetch_assoc();
+        $datastore = new \Datastore(\Config::factory());
         
-        $this->list['Number of PHP files'] = $res['php'];
-        $this->list['Number of lines of code'] = $res['loc'];
+        $this->list['Number of PHP files'] = $datastore->getHash('files');
+        $this->list['Number of lines of code'] = $datastore->getHash('phploc');
 
         $this->list['Audit software version'] = \Exakat::VERSION;
         
-        $res = $this->db->query("SELECT * FROM project_runs WHERE folder='{$this->project}' ORDER BY date_finish DESC LIMIT 1")->fetch_assoc();
-        
-        $this->list['Audit execution date'] = date('r', strtotime($res['date_start']));
+        $this->list['Audit execution date'] = date('r', strtotime($datastore->getHash('date_start')) );
         $this->list['Report production date'] = date('r', strtotime('now'));
         
         $this->list['PHP version'] = substr(shell_exec('php -v'), 0, 11);
 
-        $this->list['Audit software version'] = \Exakat::VERSION;
+        $this->list['Audit software version'] = \Exakat::VERSION. ' ( Build '. \Exakat::VERSION . ') ';
     }
 
     public function getArray() {

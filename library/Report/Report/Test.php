@@ -24,8 +24,8 @@
 namespace Report\Report;
 
 class Test extends Premier {
-    public function __construct($project, $client, $db) {
-        parent::__construct($project, $client, $db);
+    public function __construct($project, $client) {
+        parent::__construct($project, $client);
     }
 
     public function prepare() {

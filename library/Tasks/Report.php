@@ -10,7 +10,6 @@ class Report implements Tasks {
     
     public function run(\Config $config) {
         $client = new Client();
-        $db = new \Db();
 
         $datastore = new \Datastore($config);
         \Analyzer\Analyzer::$datastore = $datastore;
@@ -26,7 +25,7 @@ class Report implements Tasks {
         $begin = microtime(true);
 
         $reportClass = "\\Report\\Report\\".$config->report;
-        $report = new $reportClass($config->project, $client, $db);
+        $report = new $reportClass($config->project, $client);
         $report->prepare();
         echo $config->format, ' ', $config->filename;
         $size = $report->render($config->format, $config->filename);

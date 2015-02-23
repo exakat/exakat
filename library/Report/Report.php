@@ -25,7 +25,6 @@ namespace Report;
 
 class Report {
     protected $client    = null;
-    protected $db        = null;
     protected $project   = null;
 
     private $content   = null;
@@ -33,10 +32,9 @@ class Report {
     private $currentLevel1 = null;
     private $currentLevel2 = null;
 
-    public function __construct($project, $client, $db) {
+    public function __construct($project, $client) {
         $this->project = $project;
         $this->client  = $client;
-        $this->db      = $db;
         
         $this->content = new \Report\Template\Section('');
         $this->current = $this->content;
@@ -49,7 +47,6 @@ class Report {
 
         $content->setProject($this->project);
         $content->setNeo4j($this->client);
-        $content->setDb($this->db);
         
         return $content;
     }
