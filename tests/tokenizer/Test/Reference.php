@@ -43,8 +43,8 @@ class Reference extends Tokenizer {
     public function testReference32()  { $this->generic_test('Reference.32'); }
     public function testReference33()  { $this->generic_test('Reference.33'); }
     public function testReference34()  { $this->generic_test('Reference.34'); }
-}    
     public function testReference35()  { $this->generic_test('Reference.35'); }
     public function testReference36()  { $this->generic_test('Reference.36'); }
+}    
 
 ?>

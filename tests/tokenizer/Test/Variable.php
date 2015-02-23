@@ -34,6 +34,6 @@ class Variable extends Tokenizer {
     public function testVariable23()  { $this->generic_test('Variable.23'); }
     public function testVariable24()  { $this->generic_test('Variable.24'); }
     public function testVariable25()  { $this->generic_test('Variable.25'); }
-}    public function testVariable26()  { $this->generic_test('Variable.26'); }
-
+    public function testVariable26()  { $this->generic_test('Variable.26'); }
+}
 ?>
