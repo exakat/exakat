@@ -226,7 +226,7 @@ if (empty($project_code_source)) {
 				<span class="menu-text"></span>
 			</a>
 
-$sidebar
+{$sidebar}
 
 			<div class="main-content">
 				<div class="page-content">
