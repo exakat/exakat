@@ -35,13 +35,13 @@ class IsExtInterface extends Analyzer\Analyzer {
         $exts = self::$docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_interfaces';
         
-        $classes = array();
+        $interfaces = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile);
             
             if (!empty($ini['classes'][0])) {
-                $classes = array_merge($classes, $ini['interfaces']);
+                $interfaces = array_merge($interfaces, $ini['interfaces']);
             }
         }
 

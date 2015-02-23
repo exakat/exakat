@@ -35,13 +35,13 @@ class IsExtTrait extends Analyzer\Analyzer {
         $exts = self::$docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_traits';
         
-        $classes = array();
+        $traits = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile);
             
-            if (!empty($ini['classes'][0])) {
-                $classes = array_merge($classes, $ini['traits']);
+            if (!empty($ini['traits'][0])) {
+                $traits = array_merge($traits, $ini['traits']);
             }
         }
 

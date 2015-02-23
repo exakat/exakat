@@ -35,13 +35,13 @@ class IsExtConstant extends Analyzer\Analyzer {
         $exts = self::$docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
         
-        $classes = array();
+        $constants = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile);
             
             if (!empty($ini['classes'][0])) {
-                $classes = array_merge($classes, $ini['constants']);
+                $constants = array_merge($constants, $ini['constants']);
             }
         }
         
