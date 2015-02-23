@@ -92,8 +92,10 @@ class Doctor implements Tasks {
         } elseif (preg_match('/PHPUnit\s+([0-9\.]+)/is', $res, $r)) {
             $stats['phpunit']['installed'] = 'Yes';
             $stats['phpunit']['version'] = $r[1];
+            $stats['phpunit']['optional'] = 'Yes';
         } else {
             $stats['phpunit']['error'] = $res;
+            $stats['phpunit']['optional'] = 'Yes';
         }
 
         // java
