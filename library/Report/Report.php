@@ -94,13 +94,12 @@ class Report {
             $c->render($this->output);
         }
         
-        if (isset($filename)) {
-            return $this->output->toFile($filename.'.'.$this->output->getExtension());
+        if ($filename !== null) {
+            $config = \Config::factory();
+            
+            return $this->output->toFile($config->projects_root.'/projects/'.$config->project.'/'.$filename.'.'.$this->output->getExtension());
         } else {
             die("No filename? ".__METHOD__);
         }
     }
-
 }
-
-?>
