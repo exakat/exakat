@@ -89,6 +89,7 @@ class Appinfo extends \Report\Content {
                             'ext/pcre'       => 'Extensions/Extpcre',
                             'ext/pdo'        => 'Extensions/Extpdo',
                             'ext/pgsql'      => 'Extensions/Extpgsql',
+                            'ext/phalcon'    => 'Extensions/Extphalcon',
                             'ext/phar'       => 'Extensions/Extphar',
                             'ext/posix'      => 'Extensions/Extposix',
                             'ext/pspell'     => 'Extensions/Extpspell',
