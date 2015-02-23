@@ -142,14 +142,14 @@ class Premier extends Report {
                         }
                         if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
                             $this->addContent('Text', 'clearPHP : '.$clearPHP.'<br />', 'textlead');
-                            print $analyzer->getDescription()->getName()."\n";
                         }
                         $this->addContent('Text', $description, 'textlead');
                         $this->addContent('Horizontal', $analyzer);
                     }
                 }
             }
-                
+            
+            
             // defined here, but for later use
             $definitions = new \Report\Content\Definitions($this->client);
             $definitions->setAnalyzers($analyzes);
