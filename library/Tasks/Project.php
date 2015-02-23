@@ -14,8 +14,9 @@ class Project implements Tasks {
         $this->client = new Client();
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
         if ($config->is_phar) {
-            // could this be something else? Renamed phar ? 
-            $this->executable = 'exakat.phar';
+            $this->executable = basename(dirname(dirname(__DIR__)));
+        } else {
+            $this->executable = $_SERVER['SCRIPT_NAME'];
         }
 
         if ($config->project === null) {
@@ -46,17 +47,9 @@ class Project implements Tasks {
 
         $this->logTime('Start');
 
-        $dbexakat = new \Db();
-        $dbexakat->insert('project_runs', array('date_start', 'folder'), array(date('Y-m-d H:i:s'), $project));
-        $project_run = $dbexakat->insert_id();
-
-        $this->logTime('Database');
-
-        $db = new \Db('wordpress');
-
-        $progress = 1;
-        $total_steps = 9 / 100; // number of usage of logProgress - 1
-        $db->logProgress($project, $progress++ / $total_steps);
+        $datastore = new \Datastore($config);
+        $datastore->cleanTable('hash');
+        $datastore->addRow('hash', array(array('key' => 'audit_start',      'value' => time())));
 
         $thread = new \Thread();
         print "Running project '$project'\n";
@@ -69,7 +62,6 @@ class Project implements Tasks {
         $thread->waitForAll();
 
         shell_exec('php '.$this->executable.' load -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project.'');
-        $db->logProgress($project, $progress++ / $total_steps);
         print "Project loaded\n";
         $this->logTime('Loading');
 
@@ -98,13 +90,11 @@ class Project implements Tasks {
         print "Got the errors (if any)\n";
 
         $thread->run('php '.$this->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
-        $db->logProgress($project, $progress++ / $total_steps);
         print "Stats\n";
 
         $thread->run('php '.$this->executable.' log2csv -p '.$project);
 
         $this->logTime('Stats');
-        $db->logProgress($project, $progress++ / $total_steps);
 
         if (file_exists($config->projects_root.'/projects/'.$project.'/log/analyze.final.log')) {
             unlink($config->projects_root.'/projects/'.$project.'/log/analyze.final.log');
@@ -118,22 +108,17 @@ class Project implements Tasks {
             print "Analyzing $theme\n";
         }
 
-        $db->logProgress($project, $progress++ / $total_steps);
         print "Project analyzed\n";
         $this->logTime('Analyze');
 
         shell_exec('php '.$this->executable.' report_all -p '.$project);
         $this->logTime('Report');
 
-        $db->logProgress($project, $progress++ / $total_steps);
-
         print "Project reported\n";
 
         shell_exec('php '.$this->executable.' stat > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
-        $db->logProgress($project, $progress++ / $total_steps);
         print "Stats 2\n";
 
-        $dbexakat->query('UPDATE project_runs SET `date_finish` = "'.date('Y-m-d H:i:s').'" WHERE id = "'.$project_run.'"');
         $this->logTime('Final');
     }
 
