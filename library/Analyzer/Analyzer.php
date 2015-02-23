@@ -49,6 +49,8 @@ class Analyzer {
 
     protected $phpVersion = 'Any';
     protected $phpConfiguration = 'Any';
+    
+    private $path_tmp = null;
 
     protected $severity = self::S_NONE; // Default to None. 
     const S_CRITICAL = 'Critical';
@@ -64,7 +66,6 @@ class Analyzer {
     const T_SLOW = '60';
     const T_LONG = '360';
     
-//    protected $themes = array();
     static public $docs = null;
 
     public function __construct($client) {
@@ -75,15 +76,7 @@ class Analyzer {
 
         $this->code = $this->analyzer;
         
-        if (Analyzer::$docs === null) {
-            $is_phar  = (strpos(basename(dirname(dirname(__DIR__))), '.phar') !== false);
-            if ($is_phar) {
-                $pathDocs = 'phar://exakat.phar/data/analyzers.sqlite';
-            } else {
-                $pathDocs = dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite';
-            }
-            Analyzer::$docs = new Docs($pathDocs);
-        }
+        self::initDocs();
         
         $this->apply = new AnalyzerApply();
         $this->apply->setAnalyzer($this->analyzer);
@@ -91,8 +84,26 @@ class Analyzer {
         $this->description = new \Description(get_class($this));
     } 
     
+    public function __destruct() {
+        if ($this->path_tmp !== null) { 
+            unlink($this->path_tmp);
+        }
+    }
+    
     public function setConfig($config) {
         $this->config = $config;
+    }
+    
+    static public function initDocs() {
+        if (Analyzer::$docs === null) {
+            $is_phar  = (strpos(basename(dirname(dirname(__DIR__))), '.phar') !== false);
+            if ($is_phar) {
+                $pathDocs = 'phar://'.basename(dirname(dirname(__DIR__))).'/data/analyzers.sqlite';
+            } else {
+                $pathDocs = dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite';
+            }
+            self::$docs = new Docs($pathDocs);
+        }
     }
     
     public static function getClass($name) {
@@ -111,11 +122,11 @@ class Analyzer {
         } elseif (strpos($name, '/') !== false) {
             $class = 'Analyzer\\'.str_replace('/', '\\', $name);
         } elseif (strpos($name, '/') === false) {
-            $files = glob(dirname(__DIR__).'/Analyzer/*/'.$name.'.php');
-            if (count($files) == 0) {
+            $found = self::$docs->guessAnalyzer($name);
+            if (count($found) == 0) {
                 return false; // no class found
-            } elseif (count($files) == 1) {
-                $class = str_replace('/', '\\', substr(str_replace(dirname(__DIR__), '', $files[0]), 1, -4));
+            } elseif (count($found) == 1) {
+                $class = $found[0];
             } else {
                 // too many options here...
                 return false;
@@ -138,12 +149,12 @@ class Analyzer {
     }
     
     public static function getSuggestionClass($name) {
-        $list = glob(dirname(__DIR__).'/Analyzer/*/*.php');
+        self::initDocs();
+        $list = self::$docs->listAllAnalyzer();
         $r = array();
         foreach($list as $id => $c) {
-            $c = substr($c, 17, -4);
-            $c = str_replace('/', '_', $c);
             $l = levenshtein($c, $name);
+
             if ($l < 8) {
                 $r[] = $c;
             }
@@ -166,9 +177,7 @@ class Analyzer {
     }
 
     static public function getThemeAnalyzers($theme) {
-        if (Analyzer::$docs === null) {
-            Analyzer::$docs = new Docs(dirname(dirname(__DIR__)).'/data/analyzers.sqlite');
-        }
+        self::initDocs();
         return Analyzer::$docs->getThemeAnalyzers($theme);
     }
 
