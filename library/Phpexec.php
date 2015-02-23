@@ -30,34 +30,36 @@ class Phpexec {
     public function __construct($phpversion) {
         $phpversion3 = substr($phpversion, 0, 3);
         $this->isCurrentVersion = (substr(phpversion(), 0, 3) === $phpversion3);
+        
+        $config = \Config::factory();
 
         switch($phpversion3) {
             case '5.2' : 
-                $this->phpexec = 'php52';
+                $this->phpexec = $config->php52;
                 break 1;
 
             case '5.3' : 
-                $this->phpexec = 'php53';
+                $this->phpexec = $config->php53;
                 break 1;
 
             case '5.4' : 
-                $this->phpexec = 'php54';
+                $this->phpexec = $config->php54;
                 break 1;
 
             case '5.5' : 
-                $this->phpexec = 'php55';
+                $this->phpexec = $config->php55;
                 break 1;
 
             case '5.6' : 
-                $this->phpexec = 'php56';
+                $this->phpexec = $config->php56;
                 break 1;
 
             case '7.0' : 
-                $this->phpexec = 'php70';
+                $this->phpexec = $config->php70;
                 break 1;
 
             default: 
-                $this->phpexec = 'php';
+                $this->phpexec = $config->php;
         }    
 
         // prepare the configuration

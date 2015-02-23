@@ -126,7 +126,15 @@ class Files implements Tasks {
         //if (!empty($versions)) {
         foreach($versions as $version) {
             $stats['notCompilable'.$version] = -1;
-            $shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 php'.$version.' -l $1 2>&1 || true ';
+            
+            $check = shell_exec($config->{'php'.$version}.' -v 2>&1');
+            if (strpos($check, "No such file or directory") !== false) {
+                print "Can't use PHP $version : binary ".$config->{'php'.$version}." is not available. Ignoring\n";
+                $stats['notCompilable'.$version] = 'No binary';
+                continue 1;
+            }
+            
+            $shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 '.$config->{'php'.$version}.' -l $1 2>&1 || true ';
             $res = trim(shell_exec($shell));
 
             $resFiles = explode("\n", $res);
