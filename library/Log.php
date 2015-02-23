@@ -52,30 +52,6 @@ class Log {
         
         fwrite($this->log, $message."\n");
     }
-
-    public function report($script, $info) {
-        $config = \Config::factory();
-        
-        $mysql = new \PDO($config->mysql_exakat_pdo, $config->mysql_exakat_user, $config->mysql_exakat_pass);
-        if (!$mysql) { return false; }
-        
-        $values = array('project' => $info['project'],
-                        'time' => (microtime(true) - $this->begin) * 1000,
-                        );
-                        
-        $query = "DESCRIBE `$script`";
-        $res = $mysql->query($query);
-        while($row = $res->fetch()) {
-            if (isset($info[$row['Field']])) {
-                $values[$row['Field']] = $info[$row['Field']];
-            }
-        }
-
-        $query = "INSERT INTO `$script` (".implode(", ", array_keys($values)).") VALUES ('".implode("', '", array_values($values))."')";
-        $mysql->query($query);
-        
-        return true;
-    }
 }
 
 ?>

@@ -43,7 +43,6 @@ class Load implements Tasks {
         }
 
         $client->finalize();
-        $this->log->report('load', array('project' => $project, 'files' => $nbFiles, 'tokens' => $nbTokens));
     }
 
     private function process_dir($dir, $log, $client, $config) {

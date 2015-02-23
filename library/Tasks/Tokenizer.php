@@ -169,7 +169,6 @@ class Tokenizer implements Tasks {
 
         $end_time = microtime(true);
         $this->display("Total time : ".number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n");
-        $log->report('tokenizer', $stats);
         // @todo display checks processed
     }
 

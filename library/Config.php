@@ -87,8 +87,6 @@ class Config {
     public function __get($name) {
         if (isset($this->options[$name])) {
             $return = $this->options[$name];
-        } else if ($name == 'mysql_exakat_pdo') {
-            $return = 'mysql:host='.$this->options['mysql_host'].';dbname='.$this->options['mysql_exakat_db'];
         } else {
             $return = null;
         }
