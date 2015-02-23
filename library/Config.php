@@ -22,14 +22,15 @@
 
 
 class Config {
-    static private $singleton = null;
-           private $configFile = array();
-           private $commandline = array();
-           private $argv = array();
-           public $dir_root = '.';
-           public $projects_root = '.';
-           public $is_phar = true;
-           private $projectConfig = array();
+    static private $singleton      = null;
+           private $configFile     = array();
+           private $commandline    = array();
+           private $argv           = array();
+           public $dir_root        = '.';
+           public $projects_root   = '.';
+           public $is_phar         = true;
+           public $executable      = '';
+           private $projectConfig  = array();
         
            private $options = array();
      
@@ -38,10 +39,12 @@ class Config {
         
         $this->is_phar  = (strpos(basename(dirname(__DIR__)), '.phar') !== false);
         if ($this->is_phar) {
-            $this->dir_root = 'phar://exakat.phar';
             $this->projects_root = substr(dirname(dirname(__DIR__)), 7);
+            $this->executable    = $_SERVER['SCRIPT_NAME'];
+            $this->dir_root      = 'phar://'.$this->executable;
         } else {
-            $this->dir_root = dirname(__DIR__);
+            $this->executable    = $_SERVER['SCRIPT_NAME'];
+            $this->dir_root      = dirname(__DIR__);
             $this->projects_root = dirname(__DIR__);
         }
         
