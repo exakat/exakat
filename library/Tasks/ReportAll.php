@@ -18,7 +18,7 @@ class ReportAll implements Tasks {
                             2 => '-p',
                             3 => $config->project,
                             4 => '-f',
-                            5 => $config->filename,
+                            5 => 'report',
                             6 => '-format',
                             7 => $format,
                             8 => '-report',
