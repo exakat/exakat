@@ -59,7 +59,7 @@ HTML;
 $severity = $value['name'];
             } else {
                 $value['id'] =  str_replace(array(' ', '('  , ')'  ), array('-', '', ''), $value['name']);
-                $severity = $this->makeLink($value['name'], $value['id']);
+                $severity = $this->makeLink($value['name']);
             }
             $html .= <<<HTML
                         <tr>
