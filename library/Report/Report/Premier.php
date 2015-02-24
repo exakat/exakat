@@ -189,21 +189,25 @@ TEXT
 /// Custom analyzers
 /////////////////////////////////////////////////////////////////////////////////////
         
-        $this->createLevel1('Custom');
-        $this->createLevel2('Classes');
-        $this->addContent('Text', <<<TEXT
+        $analyzer = \Analyzer\Analyzer::getInstance('Classes/AvoidUsing', $this->client);
+
+        if ($analyzer->hasResults()) {
+            $this->createLevel1('Custom');
+            $this->createLevel2('Classes');
+            $this->addContent('Text', <<<TEXT
 This is a list of classes and their usage in the code. 
 
 TEXT
 );
-        $content = $this->getContent('AnalyzerConfig');
-        $content->setAnalyzer('Classes/AvoidUsing');
-        $content->collect();
+            $content = $this->getContent('AnalyzerConfig');
+            $content->setAnalyzer('Classes/AvoidUsing');
+            $content->collect();
         
-        $this->addContent('SimpleTable', $content, 'oneColumn'); 
+            $this->addContent('SimpleTable', $content, 'oneColumn'); 
 
-        $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Classes\\AvoidUsing', $this->client);
-        $this->addContent('Horizontal', $analyzer);
+            $analyzer = \Analyzer\Analyzer::getInstance('Analyzer\\Classes\\AvoidUsing', $this->client);
+            $this->addContent('Horizontal', $analyzer);
+        }
 
 /////////////////////////////////////////////////////////////////////////////////////
 /// Annexes
