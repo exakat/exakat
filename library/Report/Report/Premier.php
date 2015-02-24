@@ -92,8 +92,8 @@ class Premier extends Report {
         $this->createLevel2('Compile');
         $this->addContent('Compilations', 'Compilations');
 
-        //'5.2' => '52', , '7.0' => '70'
-        $versions = array('5.3' => '53', '5.4' => '54', '5.5' => '55', '5.6' => '56');
+        //'5.2' => '52', 
+        $versions = array('5.3' => '53', '5.4' => '54', '5.5' => '55', '5.6' => '56', '7.0' => '70');
         foreach($versions as $version => $code) {
             $this->createLevel2('Compatibility '.$version);
             $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.');
@@ -130,10 +130,10 @@ class Premier extends Report {
                 if ($analyzer->hasResults()) {
                     $this->createLevel2($analyzer->getDescription()->getName());
                     if (get_class($analyzer) == "Analyzer\\Php\\Incompilable") {
-                        $this->addContent('Text', $analyzer->getDescription()->getDescription(), 'textlead');
+                        $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textlead');
                         $this->addContent('TableForVersions', $analyzer);
                     } elseif (get_class($analyzer) == "Analyzer\\Php\\ShortOpenTagRequired") {
-                        $this->addContent('Text', $analyzer->getDescription()->getDescription(), 'textlead');
+                        $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textlead');
                         $this->addContent('SimpleTable', $analyzer, 'oneColumn');
                     } else {
                         $description = $analyzer->getDescription()->getDescription();
@@ -143,7 +143,7 @@ class Premier extends Report {
                         if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
                             $this->addContent('Text', 'clearPHP : '.$clearPHP.'<br />', 'textlead');
                         }
-                        $this->addContent('Text', $description, 'textlead');
+                        $this->addContent('TextLead', $description, 'textlead');
                         $this->addContent('Horizontal', $analyzer);
                     }
                 }

@@ -21,14 +21,17 @@
 */
 
 
-namespace Report\Format\Ace;
+namespace Report\Format\Devoops;
 
-class TextLead extends \Report\Format\Ace { 
+class TextLead extends \Report\Format\Devoops { 
     public function render($output, $data) {
         $data = $this->makeHtml($data);
-        $output->push("<p class=\"lead\">".$data."</p>\n");
+        $output->push("<article><p class=\"lead\">".$data."</p></article>\n");
+
+        $output->push("<script src=\"plugins/readmore/readmore.js\"></script>\n");
+        $output->push("<script src=\"plugins/readmore/jquery.mockjax.js\"></script>\n");
+        $output->push("<script>$('article').readmore({collapsedHeight: 100});</script>\n");
     }
 
 }
 
-?>
