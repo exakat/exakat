@@ -201,9 +201,16 @@ HTML;
                                $title).'.html';
     }
 
+    protected function makeRawLink($title, $file = null) {
+        if ($file === null) {
+            $file = 'ajax/'.$this->makeFileName($title);
+        }
+        return "<a href=\"$file\" class=\"exakat-link\">$title</a>";
+    }
+
     protected function makeLink($title, $file = null) {
-        if ($file == null) {
-            $file = $this->makeFileName($title);
+        if ($file === null) {
+            $file = 'ajax/'.$this->makeFileName($title);
         }
         $title = $this->makeHtml($title);
         return "<a href=\"$file\" class=\"exakat-link\">$title</a>";
