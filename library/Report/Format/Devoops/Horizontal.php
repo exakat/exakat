@@ -30,7 +30,7 @@ class Horizontal extends \Report\Format\Devoops {
         $output->pushToJsLibraries( array("assets/js/jquery.dataTables.min.js",
                                           "assets/js/jquery.dataTables.bootstrap.js"));
 
-        $counter = \Report\Format\Ace\Horizontal::$horizontal_counter++;
+        $counter = self::$horizontal_counter++;
         
 $js = <<<JS
     				var oTable1 = \$('#horizontal-{$counter}').dataTable( {

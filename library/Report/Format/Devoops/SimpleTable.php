@@ -23,7 +23,7 @@
 
 namespace Report\Format\Devoops;
 
-class SimpleTable extends \Report\Format\Ace { 
+class SimpleTable extends \Report\Format\Devoops { 
     public function render($output, $data) {
         $th = '';
         

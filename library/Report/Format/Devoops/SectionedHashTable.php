@@ -28,7 +28,7 @@ class SectionedHashTable extends \Report\Format\Devoops {
     
     public function render($output, $data) {
 
-        $counter = \Report\Format\Ace\SectionedHashTable::$sectionedhastable_counter++;
+        $counter = self::$sectionedhastable_counter++;
         
         $text = <<<HTML
 <table id="sectionedhashtable-{$counter}" class="table">
