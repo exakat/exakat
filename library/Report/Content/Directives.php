@@ -39,6 +39,16 @@ class Directives extends \Report\Content {
         $this->array['Standard'][] = array('name' => 'date.timezone',
                                            'suggested' => 'Europe/Amsterdam',
                                            'documentation' => 'It is not safe to rely on the system\'s timezone settings. Make sure the directive date.timezone is set in php.ini.');
+
+        // Filesystem
+        $suggestion = $this->checkPresence('Php\\FileUsage');
+        if ($suggestion == 'On') {
+            $this->array['Filesystem'] = array();
+            $this->array['Filesystem'][]  = array('name' => 'allow_url_fopen',
+                                                  'suggested' => 'Off',
+                                                  'documentation' => 'Unless you need to access remote files, it is better to be safe and forbid this feature');
+        }
+
         // Assertions
         $suggestion = $this->checkPresence('Php\\AssertionUsage');
         if ($suggestion == 'On') {
@@ -50,8 +60,8 @@ class Directives extends \Report\Content {
 
         // Filter
         $suggestion = $this->checkPresence('Extensions\\Extfilter');
-        $this->array['Filter'] = array();
         if ($suggestion == 'On') {
+            $this->array['Filter'] = array();
             $this->array['Filter'] = array();
             $this->array['Filter'][]  = array('name' => 'filter.default',
                                               'suggested' => 'unsafe_raw', 
@@ -76,15 +86,81 @@ class Directives extends \Report\Content {
         ///////////////////////////////////////////////////////////////
 
         // Apache
-        $suggestion = $this->checkPresence('Extensions\\Extxcache');
-        $this->array['Apache'] = array();
+        $suggestion = $this->checkPresence('Extensions\\Extapache');
         if ($suggestion == 'On') {
+            $this->array['Apache'] = array();
             $this->array['Apache'] = array();
             $this->array['Apache'][]  = array('name' => 'child_terminate',
                                               'suggested' => 'true', 
                                               'documentation' => 'Specify whether PHP scripts may request child process termination on end of request.');
+
+            $this->array['Apache'][]  = array('name' => 'Extra configurations',
+                                              'suggested' => '&nbsp;',
+                                              'documentation' => '<a href="http://php.net/manual/en/apache.configuration.php">Apache runtime configuration</a>');
         }
         
+        // File Upload
+        $suggestion = $this->checkPresence('Structures\\FileUploadUsage');
+        $this->array['File upload'] = array();
+        if ($suggestion == 'On') {
+            $this->array['File upload'][] = array('name' => 'upload_max_filesize',
+                                                  'documentation' => 'This is the maximum uploaded size. It is recommended to keep this value as low as possible.',
+                                                  'suggested' => '2M');
+
+            $this->array['File upload'][] = array('name' => 'max_file_uploads',
+                                                  'documentation' => 'This is the maximum number of uploaded files in a single request. Each file will be .',
+                                                  'suggested' => '1');
+        } else {
+            $this->array['File upload'][] = array('name' => 'file_uploads',
+                                                 'documentation' => 'Since the application doesn\'t handle uploaded files, it is recommended to disable this option, saving memory, and disabling features that may be a security vulnerability later.',
+                                                 'suggested' => $suggestion = $this->checkPresence('Structures\\FileUploadUsage'));
+        }
+
+        // Intl
+        $suggestion = $this->checkPresence('Extensions\\Extintl');
+        if ($suggestion == 'On') {
+            $this->array['ext/Intl'] = array();
+            $this->array['ext/Intl'][] = array('name' => 'intl.default_locale',
+                                               'suggested' => '<Your ICU Locale>',
+                                               'documentation' => 'The locale that will be used in intl functions when none is specified (either by omitting the corresponding argument or by passing NULL). These are ICU locales, not system locales. ');
+
+            $this->array['ext/Intl'][] = array('name' => 'intl.error_level',
+                                               'suggested' => 'E_WARNING',
+                                               'documentation' => 'The level of the error messages generated when an error occurs in ICU functions. This is a PHP error level, such as E_WARNING. It can be set to 0 in order to inhibit the messages. This does not affect the return values indicating error or the values returned by intl_get_error_code() or by the class specific methods for retrieving error codes and messages. Choosing E_ERROR will terminate the script whenever an error condition is found on intl classes.');
+
+            $this->array['ext/Intl'][] = array('name' => 'intl.use_exceptions',
+                                               'suggested' => 'false',
+                                               'documentation' => 'If set to true, an exception will be raised whenever an error occurs in an intl function. The exception will be of type IntlException. This is possibly in addition to the error message generated due to intl.error_level.');
+
+            $this->array['ext/Intl'][]  = array('name' => 'Extra configurations',
+                                             'suggested' => '&nbsp;',
+                                             'documentation' => '<a href="http://php.net/manual/en/intl.configuration.php">Intl runtime configuration</a>');
+        } 
+
+        // Mongo
+        $suggestion = $this->checkPresence('Extensions\\Extmongo');
+        if ($suggestion == 'On') {
+            $this->array['Mongo'] = array();
+            $this->array['Mongo'][]  = array('name' => 'mongo.default_host',
+                                             'suggested' => 'localhost',
+                                             'documentation' => 'The default Mongo host to connect to.');
+            $this->array['Mongo'][]  = array('name' => 'mongo.default_port',
+                                             'suggested' => '27017',
+                                             'documentation' => 'The default Mongo port to connect to.');
+            $this->array['Mongo'][]  = array('name' => 'mongo.native_long',
+                                             'suggested' => '1',
+                                             'documentation' => 'Mongo handles integers as 64bits on plat-forms that actually handles them. If not, it will be handled as 32 bits.');
+            $this->array['Mongo'][]  = array('name' => 'mongo.long_as_object',
+                                             'suggested' => '1',
+                                             'documentation' => 'Return a BSON_LONG as an instance of MongoInt64 (instead of a primitive type).');
+            $this->array['Mongo'][]  = array('name' => 'mongo.utf8',
+                                             'suggested' => '1',
+                                             'documentation' => 'Ensure that Mongo handles UTF-8 correctly. ');
+            $this->array['Mongo'][]  = array('name' => 'Extra configurations',
+                                             'suggested' => '&nbsp;',
+                                             'documentation' => '<a href="http://php.net/manual/en/mongo.configuration.php">Mongo runtime configuration</a>');
+        }
+
         // Opcache
         $suggestion = $this->checkPresence('Extensions\\Extopcache');
         if ($suggestion == 'On') {
@@ -100,48 +176,31 @@ class Directives extends \Report\Content {
             $this->array['Opcache'][]  = array('name' => 'opcache.memory_consumption',
                                                'suggested' => '4000',
                                                'documentation' => 'The maximum number of files OPcache will cache. Estimate 32kb a file.');
+            $this->array['Opcache'][]  = array('name' => 'Extra configurations',
+                                               'suggested' => '&nbsp;',
+                                               'documentation' => '<a href="http://php.net/manual/en/opcache.configuration.php">Opcache runtime configuration</a>');
+        }
+
+        // Wincache
+        $suggestion = $this->checkPresence('Extensions\\Extwincache');
+        if ($suggestion == 'On') {
+            $this->array['Wincache'] = array();
+            $this->array['Wincache'][]  = array('name' => 'wincache.ocenabled',
+                                                'suggested' => 'true', 
+                                                'documentation' => 'Enables or disables the wincache opcode cache functionality.');
+
+            $this->array['Wincache'][]  = array('name' => 'wincache.ocachesize',
+                                                'suggested' => '255', 
+                                                'documentation' => 'Defines the maximum memory size (in megabytes) that is allocated for the opcode cache. Max value is 255 (Mb).');
+
+            $this->array['Wincache'][]  = array('name' => 'wincache.ttlmax',
+                                                'suggested' => '1200', 
+                                                'documentation' => 'Defines the maximum time to live (in seconds) for a cached entry without being used. Setting it to 0 will disable the cache scavenger, so the cached entries will never be removed from the cache during the lifetime of the IIS worker process.');
+            $this->array['Wincache'][]  = array('name' => 'Extra configurations',
+                                                'suggested' => '&nbsp;',
+                                                'documentation' => '<a href="http://php.net/manual/en/wincache.configuration.php">Wincache runtime configuration</a>');
         }
         
-        // File Upload
-        $suggestion = $this->checkPresence('Structures\\FileUploadUsage');
-        $this->array['File upload'] = array();
-        if ($suggestion == 'On') {
-            $upload_max_filesize = array('name' => 'upload_max_filesize',
-                                         'documentation' => 'This is the maximum uploaded size. It is recommended to keep this value as low as possible.',
-                                         'suggested' => '2M');
-            $this->array['File upload'][] = $upload_max_filesize;
-
-            $upload_max_file = array('name' => 'max_file_uploads',
-                                     'documentation' => 'This is the maximum number of uploaded files in a single request. Each file will be .',
-                                     'suggested' => '1');
-            $this->array['File upload'][] = $upload_max_file;
-        } else {
-            $file_uploads = array('name' => 'file_uploads',
-                                  'documentation' => 'Since the application doesn\'t handle uploaded files, it is recommended to disable this option, saving memory, and disabling features that may be a security vulnerability later.',
-                                  'suggested' => $suggestion = $this->checkPresence('Structures\\FileUploadUsage'));
-            $this->array['File upload'][] = $file_uploads;
-        }
-
-        // Intl
-        $suggestion = $this->checkPresence('Extensions\\Extintl');
-        if ($suggestion == 'On') {
-            $this->array['ext/Intl'] = array();
-            $directive = array('name' => 'intl.default_locale',
-                               'suggested' => '<Your ICU Locale>',
-                               'documentation' => 'The locale that will be used in intl functions when none is specified (either by omitting the corresponding argument or by passing NULL). These are ICU locales, not system locales. ');
-            $this->array['ext/Intl'][] = $directive;
-
-            $directive = array('name' => 'intl.error_level',
-                               'suggested' => 'E_WARNING',
-                               'documentation' => 'The level of the error messages generated when an error occurs in ICU functions. This is a PHP error level, such as E_WARNING. It can be set to 0 in order to inhibit the messages. This does not affect the return values indicating error or the values returned by intl_get_error_code() or by the class specific methods for retrieving error codes and messages. Choosing E_ERROR will terminate the script whenever an error condition is found on intl classes.');
-            $this->array['ext/Intl'][] = $directive;
-
-            $directive = array('name' => 'intl.use_exceptions',
-                               'suggested' => 'false',
-                               'documentation' => 'If set to true, an exception will be raised whenever an error occurs in an intl function. The exception will be of type IntlException. This is possibly in addition to the error message generated due to intl.error_level.');
-            $this->array['ext/Intl'][] = $directive;
-        } 
-
         // Xcache
         $suggestion = $this->checkPresence('Extensions\\Extxcache');
         if ($suggestion == 'On') {
@@ -173,23 +232,10 @@ class Directives extends \Report\Content {
             $this->array['Xcache'][]  = array('name' => 'xcache.coverager',
                                               'suggested' => 'false', 
                                               'documentation' => 'Enable xcache scavenger.');
-        }
-        
-        // Wincache
-        $suggestion = $this->checkPresence('Extensions\\Extwincache');
-        if ($suggestion == 'On') {
-            $this->array['Wincache'] = array();
-            $this->array['Wincache'][]  = array('name' => 'wincache.ocenabled',
-                                                'suggested' => 'true', 
-                                                'documentation' => 'Enables or disables the wincache opcode cache functionality.');
 
-            $this->array['Wincache'][]  = array('name' => 'wincache.ocachesize',
-                                                'suggested' => '255', 
-                                                'documentation' => 'Defines the maximum memory size (in megabytes) that is allocated for the opcode cache. Max value is 255 (Mb).');
-
-            $this->array['Wincache'][]  = array('name' => 'wincache.ttlmax',
-                                                'suggested' => '1200', 
-                                                'documentation' => 'Defines the maximum time to live (in seconds) for a cached entry without being used. Setting it to 0 will disable the cache scavenger, so the cached entries will never be removed from the cache during the lifetime of the IIS worker process.');
+            $this->array['Xcache'][]  = array('name' => 'Extra configurations',
+                                               'suggested' => '&nbsp;',
+                                               'documentation' => '<a href="http://php.net/manual/en/xcache.configuration.php">Xcache runtime configuration</a>');
         }
 
     }
