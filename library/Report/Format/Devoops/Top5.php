@@ -59,7 +59,7 @@ HTML;
 $severity = $value['name'];
             } else {
                 $value['id'] =  str_replace(array(' ', '('  , ')'  ), array('-', '', ''), $value['name']);
-$severity = "<a class=\"exakat-link\" href=\"ajax/{$value['id']}.html\">{$value['name']}</a>";
+                $severity = $this->makeLink($value['name'], $value['id']);
             }
             $html .= <<<HTML
                         <tr>
