@@ -46,6 +46,7 @@ class DynamicCalls extends Analyzer\Analyzer {
 
         // dynamic functioncall
         $this->atomIs('Functioncall')
+             ->hasNoIn('METHOD')
              ->outIs('NAME')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
              ->back('first');
@@ -83,7 +84,7 @@ class DynamicCalls extends Analyzer\Analyzer {
 
         // $o->{$m}()
         $this->atomIs('Methodcall')
-             ->outIs('PROPERTY')
+             ->outIs('METHOD')
              ->tokenIsNot('T_STRING')
              ->back('first');
         $this->prepareQuery();
