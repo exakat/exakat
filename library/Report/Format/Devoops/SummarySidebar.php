@@ -23,7 +23,7 @@
 
 namespace Report\Format\Devoops;
 
-class SummarySidebar extends \Report\Format\Ace { 
+class SummarySidebar extends \Report\Format\Devoops { 
     public function render($output, $data) {
         $text = $this->render2($data);
 
@@ -75,13 +75,10 @@ TEXT;
             }
 
             if (count($contents) == 0) {
+                $link = $this->makeRawLink("<i class=\"fa fa-dashboard\"></i><span class=\"hidden-xs\">{$row->getName()}</span>", 
+                                        'ajax/'.$this->makeFilename($row->getName()));
                 $text .= <<<HTML
-				<li>
-					<a href="ajax/{$row->getId()}.html" class="ajax-link">
-						<i class="fa fa-dashboard"></i>
-						<span class="hidden-xs">{$row->getName()}</span>
-					</a>
-				</li>
+				<li>$link</li>
 HTML;
             } else {
                 $text .= <<<HTML
@@ -95,8 +92,9 @@ HTML;
 HTML;
 
                 foreach($contents as $content) {
+                    $link = $this->makeLink($content->getName());
                     $text .= <<<HTML
-						<li><a class="ajax-link" href="ajax/{$content->getId()}.html">{$content->getName()}</a></li>
+						<li>$link</li>
 
 HTML;
                 }
