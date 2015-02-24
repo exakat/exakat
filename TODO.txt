@@ -898,6 +898,29 @@ Packaging PHar
     Vérifier que les tests fonctionnent
     Que faire des scripts de tests? 
     Check doctor for phpunit
+    add more checks on incoming values (white lists)
+    Check phar::mount with SQLITE ? 
+    Adds an error handler
+    add devoops to phar
+    Finish devoops
+        Default page
+        Mention in case of Chrome
+        Breadcrumb
+        Check internal links
+        check compability 5.3 (the tableau)
+        check internal links 
+        add (more) in the top lead
+        Tree view
+        Configuration view
+        Link to Stats
+        Custom Classes : ?
+        Removed top informations 
+        Change the icons in the menu
+        Tableau avec les rappels en haut à droite
+        Add link back to dashboard from within detailled page.
+        Add devoops to Annex
+        Check speed of production (40s?)
+        Log speed of production in database 
     
     
 Useless '' in a concatenation ? ('' . $a. $b. ' ')
@@ -909,3 +932,17 @@ DeadCode after this :
         } else {
             return $res->fetchArray(SQLITE3_ASSOC)[0];
         }
+
+Restaure project tracking in projectAdmins
+
+Create a notion of closed-circuit variables (internally created and consumed. Spot point where they collide with arguments)
+Is it possible to tag variables as internal, closed-circuited, incoming, outgoing ? 
+
+Add a check that validate the status of a project
+
+Add a status that tells if a project is being run
+
+Adds progress information in datastore
+
+Suggest moving out of rand to mt_rand.
+Suggest avoiing time for initialising srand()
