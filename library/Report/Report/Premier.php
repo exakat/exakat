@@ -96,7 +96,7 @@ class Premier extends Report {
         $versions = array('5.3' => '53', '5.4' => '54', '5.5' => '55', '5.6' => '56', '7.0' => '70');
         foreach($versions as $version => $code) {
             $this->createLevel2('Compatibility '.$version);
-            $this->addContent('Text', 'This is a summary of the compatibility issues to move to PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.');
+            $this->addContent('Text', 'This is a summary of the compatibility of the code with PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.');
             $this->addContent('Compatibility', 'Compatibility'.$code);
         }
 
