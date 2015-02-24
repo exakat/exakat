@@ -28,8 +28,7 @@ class Section extends \Report\Format\Devoops {
         // todo link to the actual section  ?
 
         if ($data->getLevel() == 0) {
-            die("Processin level 0 ?? ".__METHOD__);
-            
+            die("Processing level 0 ?? ".__METHOD__);
         } elseif ($data->getLevel() == 1) {
             $output->reset();
             foreach($data->getContent() as $content) {

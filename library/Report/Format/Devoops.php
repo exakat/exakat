@@ -146,7 +146,7 @@ HTML;
             $project_code_source_html = "<a href=\"$project_code_source\" class=\"brand\">( $project_code_source )</a>";
         }
         
-        $html = <<<HTML
+        $breadcrumb =  <<<TEXT
 <div class="row">
 	<div id="breadcrumb" class="col-xs-12">
 		<a href="#" class="show-sidebar">
@@ -154,17 +154,16 @@ HTML;
 		</a>
 		<ol class="breadcrumb pull-left">
 			<li><a href="index.html">Dashboard</a></li>
-			<li><a href="#">Typography</a></li>
+			<li><a href="#">Charts</a></li>
+			<li><a href="#">Google Chart API</a></li>
 		</ol>
-		<div id="social" class="pull-right">
-			<a href="#"><i class="fa fa-google-plus"></i></a>
-			<a href="#"><i class="fa fa-facebook"></i></a>
-			<a href="#"><i class="fa fa-twitter"></i></a>
-			<a href="#"><i class="fa fa-linkedin"></i></a>
-			<a href="#"><i class="fa fa-youtube"></i></a>
-		</div>
 	</div>
 </div>
+
+TEXT;
+        
+        $html = <<<HTML
+$breadcrumb
 <h4 class="page-header">$section_name</h4>
 <div class="row">
 	<div class="col-xs-12">
