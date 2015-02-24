@@ -128,7 +128,7 @@ HTML;
     }
     
     protected function toFile2($filename, $data) {
-        $section_name = $data->getName();
+        $section_name = $this->makeHtml($data->getName());
         
         if (count($this->jsLibraries) > 0) {
             $this->jsLibraries = array_keys(array_count_values(($this->jsLibraries)));
@@ -154,8 +154,7 @@ HTML;
 		</a>
 		<ol class="breadcrumb pull-left">
 			<li><a href="index.html">Dashboard</a></li>
-			<li><a href="#">Charts</a></li>
-			<li><a href="#">Google Chart API</a></li>
+			<li><a href="#ajax/$filename">$section_name</a></li>
 		</ol>
 	</div>
 </div>
