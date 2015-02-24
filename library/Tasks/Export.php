@@ -28,34 +28,7 @@ use Everyman\Neo4j\Client,
     Everyman\Neo4j\Index\NodeIndex;
 
 class Export implements Tasks {
-    private $client = null;
-    
     public function run(\Config $config) {
-
-        /*
-        if ($id = array_search('-dot', $args)) {
-            define('FORMAT', 'DOT');
-        } elseif ($id = array_search('-text', $args)) {
-            define('FORMAT', 'TEXT');
-        } elseif ($id = array_search('-table', $args)) {
-            define('FORMAT', 'TABLE');
-        } else {
-            define('FORMAT', 'TEXT');
-        }
-
-        if ($id = array_search('-o', $args)) {
-            define('OUTPUT', $args[$id + 1]);
-        } else {
-            define('OUTPUT', false);
-        }
-
-        if ($id = array_search('-f', $args)) {
-            define('FILE', $args[$id + 1]);
-        } else {
-            define('FILE', false);
-        }
-*/
-
         $client = new Client();
 
         $queryTemplate = "g.V.as('x').except([g.v(0)])"; 
