@@ -66,6 +66,9 @@ HTML;
 
         foreach($data as $row) {
             $row['code'] = $this->makeHtml($row['code']);
+            if (empty($row['code'])) {
+                $row['code'] = '&nbsp;';
+            }
             
             $id = str_replace(' ', '-', strtolower($row['desc']));
 $html .= <<<HTML
