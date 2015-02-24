@@ -77,7 +77,7 @@ TEXT;
             if (count($contents) == 0) {
                 $text .= <<<HTML
 				<li>
-					<a href="{$row->getId()}.html" class="ajax-link">
+					<a href="ajax/{$row->getId()}.html" class="ajax-link">
 						<i class="fa fa-dashboard"></i>
 						<span class="hidden-xs">{$row->getName()}</span>
 					</a>
