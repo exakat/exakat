@@ -27,71 +27,37 @@ class Tree extends \Report\Format\Devoops {
     static public $tree_counter = 0;
     
     public function render($output, $data) {
-
-        $text = <<<HTML
-
-HTML;
+        
+        $text = "<ul>\n";
+        foreach($data as $k => $v) {
+            $text .= "    <li>$k";
+            
+            $text .= "    <ul>\n";
+            foreach($v as $k2 => $v2) {
+                $text .= "        <li>$k2 ".($this->makeIcon($v2))."</li>";
+            
+            }
+            $text .= "    </ul>\n";
+            
+            
+            $text .= "</li>\n";
+        }
+        $text .= "</ul>\n";
         
         $output->push($text);
     }
 
-    private function renderTreeData($data) {
-/*
-var tree_data = {
-	'for-sale' : {name: 'For Sale', type: 'folder'}	,
-	'vehicles' : {name: 'Vehicles', type: 'folder'}	,
-	'rentals' : {name: 'Rentals', type: 'folder'}	,
-	'real-estate' : {name: 'Real Estate', type: 'folder'}	,
-	'pets' : {name: 'Pets', type: 'folder'}	,
-	'tickets' : {name: 'Tickets', type: 'item'}	,
-	'services' : {name: 'Services', type: 'item'}	,
-	'personals' : {name: 'Personals', type: 'item'}
-}
-
-*/
-        $return = "var tree_data = {\n";
-        $end = '';
-
-        foreach($data as $key => $value) {
-            $id = $this->makeId($key);
-            if (is_array($value)) {
-                $return .= "	'$id' : {name: '$key', type: 'folder'}	,\n";
-                $end .= $this->renderTreeData2($value, $key);
-            } else {
-                $return .= "	'$id' : {name: '$key', type: 'item'}	,\n";
-            }
+    private function makeIcon($tag) {
+        switch($tag) {
+            case 'Yes' : 
+                return '<i class="fa fa-check"></i>';
+            case 'Not run' : 
+                return '<i class="fa fa-times-circle-o"></i>';
+            case 'Not run' : 
+                return '&nbsp;';
+            default : 
+                return '&nbsp;';
         }
-        $return .= "}\n$end";
-
-        return $return;
-    }
-
-    private function renderTreeData2($data, $name) {
-/*
-
-tree_data['rentals']['additionalParameters'] = {
-	'children' : {
-		'apartments-rentals' : {name: 'Apartments', type: 'item'},
-		'office-space-rentals' : {name: 'Office Space', type: 'item'},
-		'vacation-rentals' : {name: 'Vacation Rentals', type: 'item'}
-	}
-}
-
-*/
-        $return = "tree_data['".$this->makeId($name)."']['additionalParameters']= {\n	'children' : {\n";
-        $end = '';
-
-        foreach($data as $key => $value) {
-            $id = $this->makeId($key);
-                $return .= "	'$id' : {name: '$key <i class=\"".($value == 'Yes' ? 'icon-ok' : 'icon-ko')."\"></i>', type: 'item'},\n";
-        }
-        $return .= "	}\n}\n$end";
-
-        return $return;
-    }
-    
-    private function makeId($name) {
-        return str_replace(' ', '-', strtolower($name));
     }
 }
 

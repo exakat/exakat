@@ -24,9 +24,135 @@
 namespace Report\Content;
 
 class Appinfo extends \Report\Content {
-    public function collect() {
         // Which extension are being used ? 
-        $extensions = array(
+       public $extensions = array(
+                    'PHP' => array(
+                            'Short tags'                 => 'Structures/ShortTags',
+                            'Echo tags <?='              => 'Php/EchoTagUsage',
+//                            'Closed scripts'  => 'Php/ClosedTags',
+                            'Incompilable'               => 'Php/Incompilable',
+                            
+//                            'Iffectations'   => 'Structures/Iffectation',
+
+                            '@ operator'                 => 'Structures/Noscream',
+                            'Alternative syntax'         => 'Php/AlternativeSyntax',
+                            'Magic constants'            => 'Constants/MagicConstantUsage',
+                            'halt compiler'              => 'Php/Haltcompiler',
+                            'Assertions'                 => 'Php/AssertionUsage',
+          
+                            'Casting'                    => 'Php/CastingUsage',
+                            'Resources'                  => 'Structures/ResourcesUsage',
+                            'Nested Loops'               => 'Structures/NestedLoops',
+            
+                            'Autoload'                   => 'Php/AutoloadUsage',
+                            'inclusion'                  => 'Structures/IncludeUsage',
+                            'include_once'               => 'Structures/OnceUsage',
+          
+                            'Goto'                       => 'Php/Gotonames',
+                            'Labels'                     => 'Php/Labelnames',
+
+                            'Function dereferencing'     => 'Structures/FunctionSubscripting',
+                            'Constant scalar expression' => 'Structures/ConstantScalarExpression',
+                            '... usage'                  => 'Php/EllipsisUsage',
+
+                            'File upload'                => 'Structures/FileUploadUsage',
+                    ),
+
+                    'Namespaces' => array(
+                            'Namespaces'              => 'Namespaces/Namespacesnames',
+                            'Vendor'                  => 'Namespaces/Vendor',
+                            'Alias'                   => 'Namespaces/Alias',
+                    ),
+
+                    'Variables' => array(
+                            'References'              => 'Variables/References',
+                            'Array'                   => 'Arrays/Arrayindex',
+                            'Multidimensional arrays' => 'Arrays/Multidimensional',
+                            'Array short syntax'      => 'Arrays/ArrayNSUsage',
+                            'Variable variables'      => 'Variables/VariableVariables',
+
+                            'PHP arrays'              => 'Arrays/Phparrayindex',
+
+                            'Globals'                 => 'Php/SuperGlobalUsage',
+                            'PHP SuperGlobals'        => 'Structures/GlobalUsage',
+                    ),
+
+                    'Functions' => array(
+                            'Functions'                => 'Functions/Functionnames',
+                            'Redeclared PHP Functions' => 'Functions/RedeclaredPhpFunction',
+                            'Closures'             => 'Functions/Closures',
+
+                            'Typehint'             => 'Functions/Typehints',
+                            'Static variables'     => 'Variables/StaticVariables',
+
+                            'Dynamic functioncall' => 'Functions/Dynamiccall',
+
+                            'Recursive Functions'  => 'Functions/Recursive',
+                            'Generator Functions'  => 'Functions/IsGenerator',
+                            'Conditioned Function' => 'Functions/ConditionedFunctions',
+                    ),
+
+                    'Classes' => array(
+                            'Classes'           => 'Classes/Classnames',
+                            'Class aliases'     => 'Classes/ClassAliasUsage',
+
+                            'Abstract classes'  => 'Classes/Abstractclass',
+                            'Interfaces'        => 'Interfaces/Interfacenames',
+                            'Traits'            => 'Traits/Traitnames',
+
+                            'Static properties' => 'Classes/StaticProperties',
+                            
+                            'Static methods'    => 'Classes/StaticMethods',
+                            'Abstract methods'  => 'Classes/Abstractmethods',
+                            'Final methods'     => 'Classes/Finalmethod',
+
+                            'Class constants'   => 'Classes/ConstantDefinition',
+                            'Overwritten constants' => 'Classes/OverwrittenConst',
+
+                            'Magic methods'     => 'Classes/MagicMethod',
+                            'Cloning'           => 'Classes/CloningUsage',
+                            'Dynamic class call'=> 'Classes/VariableClasses',
+
+                            'PHP 4 constructor' => 'Classes/OldStyleConstructor',
+                            'Multiple class in one file' => 'Classes/MultipleClassesInFile',
+                    ),
+
+                    'Constants' => array(
+                            'Constants'           => 'Constants/ConstantUsage',
+                            'Variable Constant'   => 'Constants/VariableConstant',
+                            'PHP constants'       => 'Constants/PhpConstantUsage',
+                            'PHP Magic constants' => 'Constants/MagicConstantUsage',
+                            'Conditioned constant'=> 'Constants/ConditionedConstants',
+                    ),
+
+                    'Numbers' => array(
+                            'Integers'    => 'Type/Integer',
+                            'Hexadecimal' => 'Type/Hexadecimal',
+                            'Octal'       => 'Type/Octal',
+                            'Binary'      => 'Type/Binary',
+                            'Real'        => 'Type/Real',
+                    ),
+
+                    'Strings' => array(
+                            'Heredoc'    => 'Type/Heredoc',
+                            'Nowdoc'     => 'Type/Nowdoc',
+                     ),
+                    
+                    'Errors' => array(
+                            'Throw exceptions' => 'Php/ThrowUsage',
+                            'Try/Catch'        => 'Php/TryCatchUsage',
+                            'Multiple catch'   => 'Structures/MultipleCatch',
+                            'Finally'          => 'Structures/TryFinally',
+                            'Trigger error'    => 'Php/TriggerErrorUsage',
+                     ),
+
+                    'External systems' => array(
+                            'System'           => 'Structures/ShellUsage',
+                            'Files'            => 'Structures/FileUsage',
+                            'LDAP'             => 'Extensions/Extldap',
+                            'mail'             => 'Structures/MailUsage',
+                     ),
+
                     'Extensions' => array(
                             'ext/apache'     => 'Extensions/Extapache',
                             'ext/apc'        => 'Extensions/Extapc',
@@ -128,138 +254,23 @@ class Appinfo extends \Report\Content {
                             'ext/zmq'        => 'Extensions/Extzmq',
 //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
-                    'PHP' => array(
-                            'Short tags'     => 'Structures/ShortTags',
-                            'Echo tags <?='  => 'Structures/EchoTagsUsage',
-//                            'Closed scripts'  => 'Php/ClosedTags',
-                            'Incompilable'   => 'Php/Incompilable',
-                            
-//                            'Iffectations'   => 'Structures/Iffectation',
+                );
 
-                            '@ operator'     => 'Structures/Noscream',
-                            'Alternative syntax' => 'Php/AlternativeSyntax',
-                            'Magic constants' => 'Constants/MagicConstantUsage',
-                            'halt compiler'  => 'Php/Haltcompiler',
-                            'Assertions'     => 'Php/AssertionUsage',
-
-                            'Casting'        => 'Php/CastingUsage',
-                            'Resources'      => 'Structures/ResourcesUsage',
-                            'Nested Loops'   => 'Structures/NestedLoops',
-
-                            'Autoload'       => 'Php/AutoloadUsage',
-                            'inclusion'      => 'Structures/IncludeUsage',
-                            'include_once'   => 'Structures/OnceUsage',
-
-                            'Goto'             => 'Php/Gotonames',
-                            'Labels'           => 'Php/Labelnames',
-
-                            'Function dereferencing'       => 'Structures/FunctionSubscripting',
-                            'Constant scalar expression' => 'Structures/ConstantScalarExpression',
-                            '... usage' => 'Structures/EllipsisUsage',
-
-                            'File upload' => 'Structures/FileUploadUsage',
-                    ),
-
-                    'Namespaces' => array(
-                            'Namespaces' => 'Namespaces/Namespacesnames',
-                            'Vendor'     => 'Namespaces/Vendor',
-                            'Alias'      => 'Namespaces/Alias',
-                    ),
-
-                    'Variables' => array(
-                            'References'              => 'Variables/References',
-                            'Array'                   => 'Arrays/Arrayindex',
-                            'Multidimensional arrays' => 'Arrays/Multidimensional',
-                            'Array short syntax'      => 'Structures/ArrayNSUsage',
-                            'Variable variables'      => 'Variables/VariableVariables',
-
-                            'PHP arrays'              => 'Arrays/Phparrayindex',
-
-                            'Globals'                 => 'Structures/GlobalUsage',
-                            'PHP SuperGlobals'        => 'Structures/GlobalUsage',
-                    ),
-
-                    'Functions' => array(
-                            'Functions'            => 'Functions/Functionnames',
-                            'Redeclared PHP Functions' => 'Functions/RedeclaredPhpFunctions',
-                            'Closures'             => 'Functions/Closures',
-
-                            'Typehint'             => 'Functions/Typehints',
-                            'Static variables'     => 'Variables/StaticVariables',
-
-                            'Dynamic functioncall' => 'Functions/Dynamiccall',
-
-                            'Recursive Functions'  => 'Functions/Recursive',
-                            'Generator Functions'  => 'Functions/IsGenerator',
-                            'Conditioned Function' => 'Functions/ConditionedFunction',
-                    ),
-
-                    'Classes' => array(
-                            'Classes'           => 'Classes/Classnames',
-                            'Class aliases'     => 'Classes/ClassAliasUsage',
-
-                            'Abstract classes'  => 'Classes/Abstractclass',
-                            'Interfaces'        => 'Interfaces/Interfacenames',
-                            'Traits'            => 'Classes/Traitsnames',
-
-                            'Static properties' => 'Classes/StaticProperties',
-                            
-                            'Static methods'    => 'Classes/StaticMethods',
-                            'Abstract methods'  => 'Classes/Abstractmethods',
-                            'Final methods'     => 'Classes/Finalmethods',
-
-                            'Class constants'   => 'Classes/ConstantDefinition',
-                            'Overwritten constants' => 'Classes/OverwrittenConst',
-
-                            'Magic methods'     => 'Classes/MagicMethod',
-                            'Cloning'           => 'Classes/CloningUsage',
-                            'Dynamic class call'=> 'Classes/VariableClasses',
-
-                            'PHP 4 constructor' => 'Classes/OldStyleConstructor',
-                            'Multiple class in one file' => 'Classes/MultipleFileInFile',
-                    ),
-
-                    'Constants' => array(
-                            'Constants'           => 'Constants/ConstantUsage',
-                            'Variable Constant'   => 'Constants/VariableConstant',
-                            'PHP constants'       => 'Constants/PhpConstantUsage',
-                            'PHP Magic constants' => 'Constants/MagicConstantUsage',
-                            'Conditioned constant'=> 'Constants/ConditionedConstant',
-                    ),
-
-                    'Numbers' => array(
-                            'Integers'    => 'Type/Integer',
-                            'Hexadecimal' => 'Type/Hexadecimal',
-                            'Octal'       => 'Type/Octal',
-                            'Binary'      => 'Type/Binary',
-                            'Real'        => 'Type/Real',
-                    ),
-
-                    'Strings' => array(
-                            'Heredoc'    => 'Type/Heredoc',
-                            'Nowdoc'     => 'Type/Nowdoc',
-                     ),
-                    
-                    'Errors' => array(
-                            'Throw exceptions' => 'Php/ThrowUsage',
-                            'Try/Catch'        => 'Php/TryCatchUsage',
-                            'Multiple catch'   => 'Structure/MultipleCatch',
-                            'Finally'          => 'Structure/TryFinally',
-                            'Trigger error'    => 'Php/TriggerErrorUsage',
-                     ),
-
-                    'External systems' => array(
-                            'System'           => 'Structures/ShellUsage',
-                            'Files'            => 'Structures/FileUsage',
-                            'LDAP'             => 'Extensions/Extldap',
-                            'mail'             => 'Structures/MailUsage',
-                     ),
-
-                    );
-
-        foreach($extensions as $section => $hash) {
+    public function collect() {
+        $themed = \Analyzer\Analyzer::getThemeAnalyzers('Appinfo');
+    
+        foreach($this->extensions as $section => $hash) {
             $this->array[$section] = array();
+
             foreach($hash as $name => $ext) {
+                if (($a = \Analyzer\Analyzer::getClass($ext)) === null) {
+                    print "'$ext' is not a class ($name).Ignoring\n";
+                    continue;
+                }
+                if (!in_array($ext, $themed)) {
+                    print "$ext was not analyzed in Appinfo\n";
+                }
+                
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].hasNot('notCompatibleWithPhpVersion', null).count()"; 
                 $vertices = $this->query($queryTemplate);
                 $v = $vertices[0][0];
