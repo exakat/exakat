@@ -3,6 +3,10 @@
 //
 "use strict";
 
+if(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())){
+   alert('Sorry, this report is not compatible with Chrome or Opera. Try Firefox or Safari.');
+}
+
 $(document).ready(function () {
 	$('body').on('click', '.exakat-link', function (e) {
 		e.preventDefault();
