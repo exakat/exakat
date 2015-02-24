@@ -87,8 +87,8 @@ class Section extends \Report\Template {
         if (empty($this->name)) {
             return 'index';
         } else {
-            return str_replace(array(' ', '('  , ')', ':', '/'  ), 
-                               array('-', '', ''),
+            return str_replace(array(' ', '('  , ')', ':', '/' , '.' ), 
+                               array('-', '', '', ''),
                                $this->name);
         }
     }
