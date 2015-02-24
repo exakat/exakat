@@ -34,7 +34,7 @@ class AppCounts extends \Report\Content {
                             'Classes'        => 'Class',
                             'Interfaces'     => 'Interface',
                             'Trait'          => 'Trait',
-                            'Function'       => array('index' => 'Function', 'Below' => 'in("ELEMENT").in("BLOCK").hasNot("atom", "Class")'),
+                            'Function'       => array('index' => 'Function', 'Below' => 'filter{ it.in("ELEMENT").in("BLOCK").has("atom", "Class").any() == false}'),
                             'Variables'      => array('index' => 'Variable', 'Unique' => 'code'),
                             'Constants'      => 'Constants\\Constantnames',
                      ),
