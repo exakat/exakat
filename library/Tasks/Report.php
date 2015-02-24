@@ -30,17 +30,25 @@ class Report implements Tasks {
     private $client = null;
     
     public function run(\Config $config) {
-        $client = new Client();
-
-        $datastore = new \Datastore($config);
-        \Analyzer\Analyzer::$datastore = $datastore;
-
         if (!class_exists("\\Report\\Format\\".$config->format)) {
             print "Format '{$config->format}' doesn't exist.\nAborting\n";
             
             // @todo suggest some reports? Use a default one. 
             die();
         }
+
+        if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
+            die("Project '{$config->project} doesn't exist yet. Run init to create it.\nAborting\n");
+        }
+
+        if (!file_exists($config->projects_root.'/projects/'.$config->project.'/datastore.sqlite')) {
+            die("Project hasn't been analyzed. Run project first.\nAborting\n");
+        }
+
+        $datastore = new \Datastore($config);
+        \Analyzer\Analyzer::$datastore = $datastore;
+
+        $client = new Client();
 
         print "Building report ".$config->report." for project ".$config->project." in file ".$config->file.", with format ".$config->format."\n";
         $begin = microtime(true);
