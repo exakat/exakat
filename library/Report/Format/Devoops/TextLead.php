@@ -30,7 +30,7 @@ class TextLead extends \Report\Format\Devoops {
 
         $output->push("<script src=\"plugins/readmore/readmore.js\"></script>\n");
         $output->push("<script src=\"plugins/readmore/jquery.mockjax.js\"></script>\n");
-        $output->push("<script>$('article').readmore({collapsedHeight: 100});</script>\n");
+        $output->push("<script>$('article').readmore({collapsedHeight: 90});</script>\n");
     }
 
 }
