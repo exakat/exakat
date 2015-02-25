@@ -84,7 +84,9 @@ class Files implements Tasks {
         $files = trim(shell_exec($shellBase));
         $files = preg_replace('#'.$config->projects_root.'/projects/.*?/code#is', '', $files);
         $files = explode("\n", $files);
-        $files = array_map(function ($a) { return array('file' => $a); }, $files);
+        $files = array_map(function ($a) { 
+            return array('file' => $a); 
+        }, $files);
 
         $datastore->cleanTable('files');
         $datastore->addRow('files', $files);
@@ -123,7 +125,6 @@ class Files implements Tasks {
 
         $versions = $config->other_php_versions;
 
-        //if (!empty($versions)) {
         foreach($versions as $version) {
             $stats['notCompilable'.$version] = -1;
             
@@ -132,7 +133,7 @@ class Files implements Tasks {
                 print "Can't use PHP $version : binary ".$config->{'php'.$version}." is not available. Ignoring\n";
                 $stats['notCompilable'.$version] = 'No binary';
                 // Create table keep it empty
-                $datastore->cleanTable('compilation'.$version.'');
+                $datastore->cleanTable('compilation'.$version);
                 continue 1;
             }
             
