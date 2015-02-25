@@ -27,15 +27,15 @@ class ReportInfo extends \Report\Content {
     protected $hash = array();
 
     public function collect() {
-        if (file_exists('./projects/'.$this->project.'/code/.git/config')) {
-            $config = file_get_contents('./projects/'.$this->project.'/code/.git/config');
+        if (file_exists($config->projects_root.'/projects/'.$this->project.'/code/.git/config')) {
+            $config = file_get_contents($config->projects_root.'/projects/'.$this->project.'/code/.git/config');
             preg_match('#url = (\S+)\s#is', $config, $r);
             $this->list['Git URL'] = $r[1];
             
-            $res = shell_exec('cd ./projects/'.$this->project.'/code/; git branch');
+            $res = shell_exec('cd '.$config->projects_root.'/projects/'.$this->project.'/code/; git branch');
             $this->list['Git branch'] = trim($res);
 
-            $res = shell_exec('cd ./projects/'.$this->project.'/code/; git rev-parse HEAD');
+            $res = shell_exec('cd '.$config->projects_root.'/projects/'.$this->project.'/code/; git rev-parse HEAD');
             $this->list['Git commit'] = trim($res);
         } else {
             $this->list['Repository URL'] = 'Downloaded archive';

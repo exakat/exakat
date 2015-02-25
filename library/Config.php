@@ -99,11 +99,11 @@ class Config {
     }
 
     private function readProjectConfig($project) {
-        if (!file_exists('./projects/'.$project.'/config.ini')) {
+        if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
             return null;
         }
         
-        $this->projectConfig = parse_ini_file('./projects/'.$project.'/config.ini');
+        $this->projectConfig = parse_ini_file($config->projects_root.'/projects/'.$project.'/config.ini');
         
         foreach($this->projectConfig as &$value) {
             if (is_array($value) && empty($value[0])) {
