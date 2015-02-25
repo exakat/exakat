@@ -68,6 +68,9 @@ class Project implements Tasks {
 
         $this->logTime('Start');
 
+        // this doesn't belong here. It should be in a 'clean' task.
+        unlink($config->projects_root.'/projects/'.$config->project.'/datastore.sqlite');
+        
         $datastore = new \Datastore($config);
         $datastore->cleanTable('hash');
         $datastore->addRow('hash', array(array('key' => 'audit_start',      'value' => time())));
