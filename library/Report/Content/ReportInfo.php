@@ -27,9 +27,11 @@ class ReportInfo extends \Report\Content {
     protected $hash = array();
 
     public function collect() {
+        $config = \Config::factory();
+        
         if (file_exists($config->projects_root.'/projects/'.$this->project.'/code/.git/config')) {
-            $config = file_get_contents($config->projects_root.'/projects/'.$this->project.'/code/.git/config');
-            preg_match('#url = (\S+)\s#is', $config, $r);
+            $gitConfig = file_get_contents($config->projects_root.'/projects/'.$this->project.'/code/.git/config');
+            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
             $this->list['Git URL'] = $r[1];
             
             $res = shell_exec('cd '.$config->projects_root.'/projects/'.$this->project.'/code/; git branch');
