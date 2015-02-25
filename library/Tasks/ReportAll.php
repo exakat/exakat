@@ -32,6 +32,7 @@ class ReportAll implements Tasks {
     public function run(\Config $config) {
         $formats = array('Markdown', 'Sqlite', 'Devoops', 'Html', 'Text', /* 'pdf', 'odt' */);
         $reportType = 'Premier';
+        $oldConfig = \Config::factory();
         
         foreach($formats as $format) {
             print "Reporting $format\n";
@@ -45,12 +46,13 @@ class ReportAll implements Tasks {
                             8 => '-report',
                             9 => $reportType,
                             );
-            $config = \Config::factorySingle($args);
+            $config = \Config::factory($args);
             
             $report = new Report();
             $report->run($config);
             unset($report);
         }
+        \Config::factory($oldConfig);
     }
 }
 
