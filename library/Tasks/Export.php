@@ -90,11 +90,11 @@ class Export implements Tasks {
         }
 
         if ($config->output) {
+            print $text;
+        } else {
             $fp = fopen($config->filename, 'w+');
             fwrite($fp, $text);
             fclose($fp);
-        } else {
-            print $text;
         }
     }
     
