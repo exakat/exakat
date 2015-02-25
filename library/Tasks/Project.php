@@ -46,22 +46,22 @@ class Project implements Tasks {
         }
 
         $project = $config->project;
-        if (!file_exists('./projects/'.$project)) {
+        if (!file_exists($config->projects_root.'/projects/'.$project)) {
             print "Project '$project' doesn't exist in projects folder. Aborting\n";
             die();
         }
 
-        if (!file_exists('./projects/'.$project.'/config.ini')) {
+        if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
             print "Project '$project' exists but has no config file. Aborting\n";
             die();
         }
 
-        if (!file_exists('./projects/'.$project.'/code')) {
+        if (!file_exists($config->projects_root.'/projects/'.$project.'/code')) {
             print "Project '$project' exists but has no code folder. Aborting\n";
             die();
         }
 
-        if (!file_exists('./projects/'.$project.'/log')) {
+        if (!file_exists($config->projects_root.'/projects/'.$project.'/log')) {
             print "Project '$project' exists but has no log folder. Aborting\n";
             die();
         }
@@ -76,7 +76,7 @@ class Project implements Tasks {
         print "Running project '$project'\n";
 
         print "Running files\n";
-        $thread->run('php '.$this->executable.' files -p '.$project);
+        print $thread->run('php '.$this->executable.' files -p '.$project);
         $this->logTime('Files');
         print "Loading project\n";
 
