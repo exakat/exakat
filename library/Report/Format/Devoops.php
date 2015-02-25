@@ -28,6 +28,8 @@ class Devoops extends \Report\Format {
     private $finalJs = '';
     private $jsLibraries = array();
     
+    const FOLDER_PRIVILEGES = 0755;
+    
     private $files = array();
     protected static $analyzer = null;
     private $summary = null;
@@ -79,12 +81,15 @@ class Devoops extends \Report\Format {
         if (file_exists($dir)) {
             shell_exec("rm -rf $dir"); 
         }
-        mkdir($dir, 0755);
-        mkdir($dir.'/ajax/', 0755);
-print        shell_exec('cp -r media/devoops/css '.$dir.'/');
-print        shell_exec('cp -r media/devoops/img '.$dir.'/');
-print        shell_exec('cp -r media/devoops/js '.$dir.'/');
-print        shell_exec('cp -r media/devoops/plugins '.$dir.'/');
+
+        $config = \Config::factory();
+        mkdir($dir, Devoops::FOLDER_PRIVILEGES);
+        mkdir($dir.'/ajax/', Devoops::FOLDER_PRIVILEGES);
+
+        $this->copyDir($config->dir_root.'/media/devoops/css', $dir.'/css');
+        $this->copyDir($config->dir_root.'/media/devoops/img', $dir.'/img');
+        $this->copyDir($config->dir_root.'/media/devoops/js', $dir.'/js');
+        $this->copyDir($config->dir_root.'/media/devoops/plugins', $dir.'/plugins');
 
         // building the summary in the index.html file
         $renderSidebar = new \Report\Format\Devoops\SummarySidebar();
@@ -97,7 +102,7 @@ print        shell_exec('cp -r media/devoops/plugins '.$dir.'/');
             $sidebar = $sidebar->getOutput();
         }
         
-        $html = file_get_contents('media/devoops/index.exakat.html');
+        $html = file_get_contents($config->dir_root.'/media/devoops/index.exakat.html');
         $html = str_replace('<menu>', $sidebar, $html);
         file_put_contents($dir.'/index.html', $html);
         
@@ -219,6 +224,21 @@ HTML;
     protected function makeHtml($text) {
         return nl2br(trim(htmlentities($text, ENT_COMPAT | ENT_HTML401 , 'UTF-8')));
     }
+
+    private function copyDir($src, $dst) { 
+        $dir = opendir($src); 
+        mkdir($dst, Devoops::FOLDER_PRIVILEGES); 
+        while(false !== ( $file = readdir($dir)) ) { 
+            if (( $file != '.' ) && ( $file != '..' )) { 
+                if ( is_dir($src . '/' . $file) ) { 
+                    $this->copyDir($src . '/' . $file,$dst . '/' . $file); 
+                } else { 
+                    copy($src . '/' . $file, $dst . '/' . $file); 
+                } 
+            } 
+        } 
+        closedir($dir); 
+    } 
 }
 
 ?>
