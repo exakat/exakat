@@ -163,7 +163,8 @@ LICENCE;
     }
     
     public function pharBuild() {
-        $packer = $this->taskPackPhar('exakat.phar');
+        $packer = $this->taskPackPhar('exakat.phar')
+                       ->compress();
         
         $this->updateBuild();
 
@@ -174,20 +175,18 @@ LICENCE;
 
         $files = Finder::create()->ignoreVCS(true)
             ->files()
-//            ->name('*.php')
-//            ->path('library')
             ->path('/config/')
             ->path('/data/')
             ->path('/human/')
             ->path('/library/')
             ->path('/scripts/')
             ->path('/vendor/')
-            ->notPath('media')
+            ->path('/devoops/') 
             ->notPath('batch-import')
-//            ->notPath('/neoj4')
             ->in(__DIR__);
 
         foreach ($files as $file) {
+            print "$file\n";
             $packer->addFile($file->getRelativePathname(), $file->getRealPath());
         }
 
