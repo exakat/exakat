@@ -92,9 +92,9 @@ class Premier extends Report {
         $this->createLevel2('Compile');
         $this->addContent('Compilations', 'Compilations');
 
-        //'5.2' => '52', 
-        $versions = array('5.3' => '53', '5.4' => '54', '5.5' => '55', '5.6' => '56', '7.0' => '70');
-        foreach($versions as $version => $code) {
+        $config = \Config::factory();
+        foreach($config->other_php_versions as $code) {
+            $version = substr($code, 0, 1).'.'.substr($code, 1);
             $this->createLevel2('Compatibility '.$version);
             $this->addContent('Text', 'This is a summary of the compatibility of the code with PHP '.$version.'. Those are the code syntax and structures that are used in the code, and that are incompatible with PHP '.$version.'. You must remove them before moving to this version.');
             $this->addContent('Compatibility', 'Compatibility'.$code);
@@ -130,10 +130,10 @@ class Premier extends Report {
                 if ($analyzer->hasResults()) {
                     $this->createLevel2($analyzer->getDescription()->getName());
                     if (get_class($analyzer) == "Analyzer\\Php\\Incompilable") {
-                        $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textlead');
+                        $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textLead');
                         $this->addContent('TableForVersions', $analyzer);
                     } elseif (get_class($analyzer) == "Analyzer\\Php\\ShortOpenTagRequired") {
-                        $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textlead');
+                        $this->addContent('TextLead', $analyzer->getDescription()->getDescription(), 'textLead');
                         $this->addContent('SimpleTable', $analyzer, 'oneColumn');
                     } else {
                         $description = $analyzer->getDescription()->getDescription();
@@ -141,9 +141,9 @@ class Premier extends Report {
                             $description = 'No documentation yet';
                         }
                         if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
-                            $this->addContent('Text', 'clearPHP : '.$clearPHP.'<br />', 'textlead');
+                            $this->addContent('Text', 'clearPHP : '.$clearPHP.'<br />', 'textLead');
                         }
-                        $this->addContent('TextLead', $description, 'textlead');
+                        $this->addContent('TextLead', $description, 'textLead');
                         $this->addContent('Horizontal', $analyzer);
                     }
                 }
