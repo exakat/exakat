@@ -90,7 +90,11 @@ class Premier extends Report {
         $this->createLevel1('Compilation');
         $this->addContent('Text', 'This table is a summary of compilation situation. Every PHP script has been tested for compilation with the mentionned versions. Any error that was found is displayed, along with the kind of messsages and the list of erroneous files.');
         $this->createLevel2('Compile');
-        $this->addContent('Compilations', 'Compilations');
+
+        $config = \Config::factory();
+        $compilations = new \Report\Content\Compilations($this->client);
+        $compilations->setVersions($config->other_php_versions);
+        $this->addContent('Compilations', $compilations);
 
         $config = \Config::factory();
         foreach($config->other_php_versions as $code) {

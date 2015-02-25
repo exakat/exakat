@@ -24,8 +24,10 @@
 namespace Report\Content;
 
 class Compilations extends \Report\Content {
+    private $versions = array();
+
     public function collect() {
-        $versions = array('5.3' => '53', '5.4' => '54', '5.5' => '55', '5.6' => '56', '7.0' => '70');
+        $allVersions = array('5.3' => '53', '5.4' => '54', '5.5' => '55', '5.6' => '56', '7.0' => '70');
 
         $queryTemplate = "g.V.has('atom', 'File').count()";
         $params = array('type' => 'IN');
@@ -33,7 +35,7 @@ class Compilations extends \Report\Content {
         $vertices = $query->getResultSet();
         $total = $vertices[0][0];
         
-        foreach($versions as $version => $suffix) {
+        foreach($this->versions as $version => $suffix) {
             $files = \Analyzer\Analyzer::$datastore->getCol('compilation'.$suffix, 'file');
             if (empty($files)) {
                 $files = "No compilation error found.";
@@ -56,6 +58,10 @@ class Compilations extends \Report\Content {
         }
         
         return true;
+    }
+    
+    public function setVersions($versions) {
+        $this->versions = $versions;
     }
 }
 

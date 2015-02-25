@@ -26,6 +26,7 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class Incompilable extends Analyzer\Analyzer {
+    private $versions = array('53', '54', '55', '56', '70');
 
     public function analyze() {
         // This is not actually done here....
@@ -33,10 +34,10 @@ class Incompilable extends Analyzer\Analyzer {
     }
     
     public function toArray() {
-        $versions = array('53', '54', '55', '56');
-        
         $report = array();
-        foreach($versions as $version) {
+        
+        $config = \Config::factory();
+        foreach($config->other_php_versions as $version) {
             $r = \Analyzer\Analyzer::$datastore->getRow('compilation'.$version);
             
             foreach($r as $l) {
@@ -48,33 +49,15 @@ class Incompilable extends Analyzer\Analyzer {
         return $report;
     }
 
-    public function toFullArray() {
-        $report = \Analyzer\Analyzer::$datastore->getRow('compilation53');
-        
-        $return = array();
-        if (count($report) > 0) {
-            foreach($report as $r) {
-                $return[] = array('code' => 'n/a',
-                                  'file' => $r['file'],
-                                  'line' => $r['line'],
-                                  'desc' => $r['error']);
-            }   
-        } 
-        
-        return $return;
-    }
-    
     public function hasResults() {
-        $versions = array('53', '54', '55', '56');
-        
-        foreach($versions as $version) {
+        $config = \Config::factory();
+        foreach($config->other_php_versions as $version) {
             $r = \Analyzer\Analyzer::$datastore->getRow('compilation'.$version);
             
             if (count($r) > 0) { return true; }
         }
         return false;
     }
-    
 }
 
 ?>
