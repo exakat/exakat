@@ -24,20 +24,27 @@
 class Thread {
     private $pipes = array();
     private $process = array();
+    private $commandId = 0;
     
     public function run($command) {
+        $this->commandId++;
         $descriptors = array( 0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
                               1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
                               2 => array('file', "/tmp/error-output.txt", 'a') // stderr is a file to write to
                             );
-        $this->process[] = proc_open($command.' &', $descriptors, $pipes);
+        $this->process[$this->commandId] = proc_open($command.' &', $descriptors, $pipes);
         // only keeping the read pipe
-        $this->pipes[] = $pipes[0];
+        $this->pipes[$this->commandId] = $pipes[0];
+        
+        return $this->commandId;
     }
     
     public function areAllFinished() {
         $w = null;
         $e = null;
+        if (count($this->pipes) == 0) {
+            return 0;
+        }
         $pipes = $this->pipes;
         $n = stream_select($pipes, $w, $e, 0);
         
@@ -62,6 +69,17 @@ class Thread {
         }
         
         return true;
+    }
+
+    public function getReturn($commandId) {
+        $commandId = abs((int) $commandId);
+        
+        if ($commandId == 0 || $comandId > $this->commandId) {
+            return null;
+        }
+        
+        return $this->return[$id];
+    
     }
 }
 
