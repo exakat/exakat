@@ -30,7 +30,7 @@ class ReportAll implements Tasks {
     private $client = null;
     
     public function run(\Config $config) {
-        $formats = array('Markdown', 'Sqlite', 'Ace', 'Html', 'Text', /* 'pdf', 'odt' */);
+        $formats = array('Markdown', 'Sqlite', 'Devoops', 'Html', 'Text', /* 'pdf', 'odt' */);
         $reportType = 'Premier';
         
         foreach($formats as $format) {
