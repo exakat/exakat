@@ -112,12 +112,12 @@ class Files implements Tasks {
         preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
         $stats['loc'] = $r[1];
 
-        preg_match('/Directories\s*(\d+)/is', $res, $rdirs);
-        preg_match('/Files\s*(\d+)/is', $res, $rfiles);
+        $rfiles = $shellBase.' | wc -l';
+        $rdirs = shell_exec('find '.$config->projects_root.'/projects/'.$dir.'/code/ -type d -path "*/\.*" | wc -l');
 
         $datastore->addRow('hash', array(array('key' => 'phploc',      'value' => $stats['loc']),
-                                         array('key' => 'files',       'value' => $rfiles[1]),
-                                         array('key' => 'directories', 'value' => $rdirs[1])
+                                         array('key' => 'files',       'value' => $rfiles),
+                                         array('key' => 'directories', 'value' => $rdirs)
                                         )
                           ) ;
 
@@ -126,6 +126,7 @@ class Files implements Tasks {
         $versions = $config->other_php_versions;
 
         foreach($versions as $version) {
+            print "Version $version\n";
             $stats['notCompilable'.$version] = -1;
             
             $check = shell_exec($config->{'php'.$version}.' -v 2>&1');
@@ -194,7 +195,8 @@ class Files implements Tasks {
                 }
             }
     
-            $datastore->cleanTable('compilation'.$version.'');
+            $datastore->cleanTable('compilation'.$version);
+            print "Cleaned $version\n";
             $datastore->addRow('compilation'.$version.'', $incompilables);
             $stats['notCompilable'.$version] = count($incompilables);
         }
