@@ -76,7 +76,7 @@ class Project implements Tasks {
         print "Running project '$project'\n";
 
         print "Running files\n";
-        print $thread->run('php '.$this->executable.' files -p '.$project);
+        shell_exec('php '.$this->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
         $this->logTime('Files');
         print "Loading project\n";
 
