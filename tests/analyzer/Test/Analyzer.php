@@ -3,17 +3,6 @@
 namespace Test;
 
 class Analyzer extends \PHPUnit_Framework_TestCase {
-    public function setUp() {
-// @doc scripts/clean is safer, but longer
-//        shell_exec("cd ../..; sh scripts/clean.sh");
-// @doc delete is faster, and will leave the query cache on. 
-        shell_exec("cd ../..; php bin/delete -all");
-    }
-
-    public function tearDown() {
-        // empty
-    }
-    
     public function generic_test($file) {
         list($analyzer, $number) = explode('.', $file);
         $analyzer = str_replace('_', '/', $analyzer);
@@ -27,6 +16,9 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
 
+        // initialize Config (needed by phpexec)
+        \Config::factory(array('foo', '-p', 'test'));
+        
         $Php = new \Phpexec($phpversion);
         if (!$analyzerobject->checkPhpConfiguration($Php)) {
             $message = array();
@@ -41,17 +33,17 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Needs configuration : '.$confs.'.');
         }
         
-        $shell = 'cd ../..; php bin/load -q -p test -f tests/analyzer/source/'.$file.'.php';
+        $shell = 'cd ../..; php exakat load -p test -f tests/analyzer/source/'.$file.'.php';
         
         $res = shell_exec($shell);
         if (strpos($res, "won't compile") !== false) {
             $this->assertFalse(true, 'test '.$file.' can\'t compile with PHP version "'. ($phpversion).'", so no test is being run.');
         }
         
-        $shell = 'cd ../..;  php bin/build_root -p test; sleep 1; php bin/tokenizer -p test;  php bin/analyze -P '.escapeshellarg($test_config).' -p test ';
+        $shell = 'cd ../..;  php exakat build_root -p test; php exakat tokenizer -p test;  php exakat analyze -P '.escapeshellarg($test_config).' -p test ';
         $res = shell_exec($shell);
 
-        $shell = 'cd ../..; php bin/export_analyzer '.$analyzer.' -o -json';
+        $shell = 'cd ../..; php exakat results  -p test -P '.$analyzer.' -o -json';
         $shell_res = shell_exec($shell);
         $res = json_decode($shell_res);
 
