@@ -69,11 +69,17 @@ class Config {
     }
     
     static public function factory($argv = array()) {
-        if (self::$singleton === null) {
-            self::$singleton = new Config($argv);
+        if (empty($argv)) {
+            return self::$singleton;
+        } else {
+            if (is_object($argv) && ($argv instanceof \Config)) {
+                self::$singleton = $argv;
+            } else {
+                self::$singleton = new Config($argv);
+            }
+            return self::$singleton;
         }
         
-        return self::$singleton;
     }
 
     static public function factorySingle($argv = array()) {
@@ -99,11 +105,11 @@ class Config {
     }
 
     private function readProjectConfig($project) {
-        if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
+        if (!file_exists($this->projects_root.'/projects/'.$project.'/config.ini')) {
             return null;
         }
         
-        $this->projectConfig = parse_ini_file($config->projects_root.'/projects/'.$project.'/config.ini');
+        $this->projectConfig = parse_ini_file($this->projects_root.'/projects/'.$project.'/config.ini');
         
         foreach($this->projectConfig as &$value) {
             if (is_array($value) && empty($value[0])) {
