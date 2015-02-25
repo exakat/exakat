@@ -131,6 +131,8 @@ class Files implements Tasks {
             if (strpos($check, "No such file or directory") !== false) {
                 print "Can't use PHP $version : binary ".$config->{'php'.$version}." is not available. Ignoring\n";
                 $stats['notCompilable'.$version] = 'No binary';
+                // Create table keep it empty
+                $datastore->cleanTable('compilation'.$version.'');
                 continue 1;
             }
             
