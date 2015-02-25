@@ -40,6 +40,9 @@ class BuriedAssignation extends Analyzer\Analyzer {
              // in a chained assignation
              ->raw('filter{ it.in("RIGHT").has("atom", "Assignation").any() == false}')
 
+             // in a for
+             ->raw('filter{ it.in("INCREMENT", "INIT").any() == false}')
+
              // in an argument (with or without typehint)
              ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
              ->raw('filter{ it.in("VARIABLE").in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}');
