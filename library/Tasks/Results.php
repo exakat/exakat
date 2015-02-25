@@ -95,17 +95,7 @@ GREMLIN;
             }
         }
 
-        if ($config->text === true) {
-            $text = '';
-            foreach($return as $k => $v) {
-                if ($config->style == 'COUNTED') {
-                    $text .= "$k => $v\n";
-                } else {
-                    $text .= implode(', ', $v)."\n";
-                }
-            }
-    
-        } elseif ($config->json === true) {
+        if ($config->json === true) {
             $text = json_encode($return);
         } elseif ($config->csv === true) {
             $text = array(array('Code', 'File', 'Namespace', 'Class', 'Function'));
@@ -131,9 +121,15 @@ GREMLIN;
                 }
             }
         } else {
-        // default behavior
-            print_r($return);
-            var_dump($config->json);
+            // count also for $config->text == 1
+            $text = '';
+            foreach($return as $k => $v) {
+                if ($config->style == 'COUNTED') {
+                    $text .= "$k => $v\n";
+                } else {
+                    $text .= implode(', ', $v)."\n";
+                }
+            }
         }
 
         if ($config->html === true || $config->odt === true) {
