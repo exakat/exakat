@@ -24,7 +24,7 @@
 namespace Report\Content;
 
 class Compatibility70 extends \Report\Content {
-    public static $deprecatedExtensions = array('dba', 'fdf', 'ming');
+    public static $deprecatedExtensions = array('mssql', 'sybase_ct', 'ereg');
 //Could also add 'fbsql', 'msql', 'ncurses', 'sybase', 'mhash', 
     
     public function collect() {
