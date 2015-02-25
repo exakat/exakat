@@ -31,14 +31,14 @@ class Results implements Tasks {
     
     public function run(\Config $config) {
         $client = new Client();
-
+        
         $analyzer = $config->program;
         $analyzerClass = \Analyzer\Analyzer::getClass($analyzer);
 
         if ("Analyzer\\".str_replace('/', '\\', $analyzer) != $analyzerClass) {
             print "'$analyzer' doesn't exists. Aborting\n";
     
-            $r = \Analyzer::getSuggestionClass($analyzer);
+            $r = \Analyzer\Analyzer::getSuggestionClass($analyzer);
             if (count($r) > 0) {
                 print "did you mean : ".implode(', ', str_replace('_', '/', $r))."\n";
             }
@@ -50,12 +50,12 @@ class Results implements Tasks {
         $return = array();
         if ($config->style == 'BOOLEAN') {
             $queryTemplate = "g.idx('analyzers')[['analyzer':'$analyzer']].out.any()"; 
-            $vertices = query($client, $queryTemplate);
+            $vertices = $this->query($client, $queryTemplate);
 
             $return[] = $vertices[0][0];
         } elseif ($config->style == 'COUNTED_ALL') {
             $queryTemplate = "g.idx('analyzers')[['analyzer':'$analyzer']].out.count()"; 
-            $vertices = query($client, $queryTemplate);
+            $vertices = $this->query($client, $queryTemplate);
 
             $return[] = $vertices[0][0];
         } elseif ($config->style == 'ALL') {
@@ -79,7 +79,7 @@ GREMLIN;
             }
         } elseif ($config->style == 'DISTINCT') {
             $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code.unique()"; 
-            $vertices = query($client, $queryTemplate);
+            $vertices = $this->query($client, $queryTemplate);
 
             $return = array();
             foreach($vertices as $k => $v) {
@@ -95,7 +95,7 @@ GREMLIN;
             }
         }
 
-        if ($config->format == 'Text') {
+        if ($config->text === true) {
             $text = '';
             foreach($return as $k => $v) {
                 if ($config->style == 'COUNTED') {
@@ -105,9 +105,9 @@ GREMLIN;
                 }
             }
     
-        } elseif ($config->format == 'JSON') {
+        } elseif ($config->json === true) {
             $text = json_encode($return);
-        } elseif ($config->format == 'CSV') {
+        } elseif ($config->csv === true) {
             $text = array(array('Code', 'File', 'Namespace', 'Class', 'Function'));
             foreach($return as $k => $v) {
                 if (is_array($v)) {
@@ -116,7 +116,7 @@ GREMLIN;
                     $text[] = array($k, $v);
                 }
             }
-        } elseif ($config->format == 'MARKDOWN' || $config->format == 'HTML' || $config->format == 'ODT') {
+        } elseif ($config->markdown === true || $config->html === true || $config->odt === true) {
             $text = '';
             foreach($return as $k => $r) {
                 if ($config->style == 'COUNTED') {
@@ -133,9 +133,10 @@ GREMLIN;
         } else {
         // default behavior
             print_r($return);
+            var_dump($config->json);
         }
 
-        if ($config->format == 'HTML'|| $config->format == 'ODT') {
+        if ($config->html === true || $config->odt === true) {
             $text = Markdown::defaultTransform($text);
         }
 
@@ -143,25 +144,40 @@ GREMLIN;
             print $text;
         }
 
-        $extensions = array('JSON' => 'json',
-                            'HTML' => 'html',
-                            'MARKDOWN' => 'md',
-                            'ODT' => 'odt',
-                            'Text' => 'txt',
-                            'CSV' => 'csv');
+        switch (1) {
+            case $config->json :
+                $extension = 'json';
+                break 1;
+            case $config->odt :
+                $extension = 'odt';
+                break 1;
+            case $config->markdown :
+                $extension = 'md';
+                break 1;
+            case $config->html :
+                $extension = 'html';
+                break 1;
+            case $config->csv :
+                $extension = 'csv';
+                break 1;
+            case $config->text :
+            default : 
+                $extension = 'txt';
+                break 1;
+        }
 
-        if ($config->file) {
-            $name = $config->file.'.'.$extensions[$config->format];
+        if ($config->filename) {
+            $name = $config->filename.'.'.$extension;
             if (file_exists($name)) {
                 print "$name already exists. Aborting\n";
                 die();
             }
 
             if ($config->format == 'ODT') {
-                $name1 = FILE.'.'.$extensions['HTML'];
+                $name1 = FILE.'.html';
                 file_put_contents($name1, $text);
 
-                $name = FILE.'.'.$extensions[$config->format];
+                $name = FILE.'.'.$extension;
                 shell_exec('pandoc -o '.$name.' '.$name1);
                 unlink($name1);
             } elseif ($config->format == 'CSV') {
