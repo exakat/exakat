@@ -53,9 +53,9 @@ if (empty($file)) {
 
 function run($test, $number) {
     print "$test.$number\n";
-    $shell = 'cd ../..; php bin/delete -all; php ./bin/load -f ./tests/tokenizer/source/'."$test.$number".'.php; php ./bin/build_root -p test; php ./bin/tokenizer -p test; php ./bin/export -text -o ./tests/tokenizer/exp/'."$test.$number".'.txt';
+    $shell = 'cd ../..; php exakat load -f ./tests/tokenizer/source/'."$test.$number".'.php -p test; php exakat build_root -p test; php exakat tokenizer -p test; php exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
     
-    print shell_exec($shell);
+    shell_exec($shell);
     
     $exp = file_get_contents('./exp/'."$test.$number".'.txt');
     if (strpos($exp, 'Parse error') !== false) {
