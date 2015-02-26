@@ -2808,7 +2808,12 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             $finalTokens = array_merge( Token::$alternativeEnding,
                             array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY', 'T_INLINE_HTML', 'T_CLOSE_BRACKET'));
             $finalTokens = "'".join("', '", $finalTokens)."'";
-            $queryConditions[] = "filter{ it.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA'] || it.atom in [$classes] }.loop(2){!(it.object.token in [$finalTokens])}.filter{ !(it.token in ['T_OPEN_CURLY'])}.any() }";
+            $queryConditions[] = <<<GREMLIN
+filter{ it.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA'] || it.atom in [$classes] }
+                      .loop(2){!(it.object.token in [$finalTokens])}
+                      .filter{ !(it.token in ['T_OPEN_CURLY'] && it.atom == null)}.any() }
+
+GREMLIN;
 
             unset($conditions['check_for_arguments']);
         }
