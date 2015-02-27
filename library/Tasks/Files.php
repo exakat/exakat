@@ -126,7 +126,6 @@ class Files implements Tasks {
         $versions = $config->other_php_versions;
 
         foreach($versions as $version) {
-            print "Version $version\n";
             $stats['notCompilable'.$version] = -1;
             
             $check = shell_exec($config->{'php'.$version}.' -v 2>&1');
@@ -196,7 +195,6 @@ class Files implements Tasks {
             }
     
             $datastore->cleanTable('compilation'.$version);
-            print "Cleaned $version\n";
             $datastore->addRow('compilation'.$version.'', $incompilables);
             $stats['notCompilable'.$version] = count($incompilables);
         }
@@ -244,15 +242,17 @@ class Files implements Tasks {
             $datastore->addRow('shortopentag', $shortOpenTag);
         }
 
+        $datastore->addRow('hash', $stats);
+        
         if ($config->json) {
             if ($unknown) {
                 $stats['unknown'] = $unknown;
             }
-            print json_encode($stats);
+            echo json_encode($stats);
         } else {
-            print_r($stats);
+            display_r($stats);
             if ($unknown) {
-                print_r($unknown);
+                display_r($unknown);
             }
         }
     }
