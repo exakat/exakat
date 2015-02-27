@@ -31,12 +31,40 @@ class Datastore {
     public function addRow($table, $data) {
         $this->checkTable($table);
         
-        foreach($data as $row) {
-            $d = array_values($row);
-            foreach($d as $id => $e) {
-                $d[$id] = Sqlite3::escapeString($e);
+        if (empty($data)) {
+            return true;
+        }
+        
+        $first = current($data);
+        if (is_array($first)) {
+            $cols = array_keys($first);
+        } else {
+            $query = "PRAGMA table_info($table)";
+            $res = $this->sqlite->query($query);
+            
+            $cols = array();
+            while($row = $res->fetchArray()) {
+                if ($row['name'] == 'id') { continue; }
+                $cols[] = $row['name'];
             }
-            $query = "INSERT INTO $table (".join(", ", array_keys($row)).") VALUES ('".join("', '", $d)."')";
+            
+            if (count($cols) != 2) {
+                throw new Exceptions\WrongNumberOfColsForAHash();
+            }
+        }
+        
+        foreach($data as $key => $row) {
+            if (is_array($row)) {
+                $d = array_values($row);
+                foreach($d as $id => $e) {
+                    $d[$id] = Sqlite3::escapeString($e);
+                }
+                
+            } else {
+                $d = array($key, $row);
+            }
+
+            $query = "INSERT INTO $table (".join(", ", $cols).") VALUES ('".join("', '", $d)."')";
             $this->sqlite->querySingle($query);
         }
         
@@ -198,7 +226,7 @@ SQLITE;
                 break;
 
             default : 
-                print "No structure for table $table\n";
+                throw new Exceptions\NoStructureForTable($table);
                 return false;
         }
 
