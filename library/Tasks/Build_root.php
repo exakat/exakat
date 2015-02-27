@@ -38,19 +38,17 @@ class Build_root implements Tasks {
 
         $begin = microtime(true);
         $this->client = new Client();
-        if ($config->verbose) { 
-            print "Starting\n"; 
-        }
-
-        file_put_contents($this->project_dir.'/log/build_root.log', '');
+        display( "Starting\n");
 
         $this->logTime('Start');
 
         $result = $this->query("g.idx('racines')");
+        display("Got racines\n");
+
         if ($result->count() == 0) {
             $this->query("g.createIndex('racines', Vertex)");
         }
-        if ($config->verbose) { print "created racines index\n"; }
+        display("Created racines index\n");
 
         $this->logTime('g.idx("racines")');
 
@@ -60,12 +58,12 @@ class Build_root implements Tasks {
         $this->logTime('g.idx("atoms")');
 
 
-        if ($config->verbose) { print "g.idx('atoms') : filling\n"; }
+        display( print "g.idx('atoms') : filling\n");
         $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
                                          'Rawstring', 'Variable', 'Float', 'Boolean', 'Void', 'File']}.each{ 
                                          g.idx('atoms').put('atom', it.atom, it); }";
         $this->query($query);
-        if ($config->verbose) { print "g.idx('atoms') : filled\n"; }
+        display( print "g.idx('atoms') : filled\n" );
         $this->logTime('g.idx("atom")[["atom":"******"]] : filling');
 
         // creating the neo4j Index
@@ -73,26 +71,26 @@ class Build_root implements Tasks {
         $this->query("g.V.has('root', 'true').each{ g.idx('racines').put('token', 'ROOT', it); };");
         $this->logTime('g.idx("ROOT")');
 
-        if ($config->verbose) { print "Indexing root done\n"; }
+        display("Indexing root done\n");
 
         // special case for the initial Rawstring. 
         $this->query("g.idx('racines')[['token':'ROOT']].has('atom','Sequence').each{ g.idx('atoms').put('atom', 'Sequence', it); };");
         $this->logTime('g.idx("racines") ROOT special');
 
-        if ($config->verbose) { print "Creating index done\n"; }
+        display("Creating index done\n");
 
         // creating the neo4j Index
         $this->query("g.V.has('index', 'true').each{ g.idx('racines').put('token', it.token, it); };");
         $this->logTime('g.idx("racines")[[token:***]] indexing');
 
-        if ($config->verbose) { print "Indexing racines done\n"; }
+        display("Indexing racines done\n");
 
         // calculating the Unicode blocks
         $this->query("g.idx('atoms')[['atom':'String']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
         $this->query("g.idx('atoms')[['token':'Rawstring']].filter{it.code.replaceAll(/^['\"]/, '').size() > 0}.each{ it.setProperty('unicode_block', it.code.replaceAll(/^['\"]/, '').toList().groupBy{ Character.UnicodeBlock.of( it as char ).toString() }.sort{-it.value.size}.find{true}.key.toString()); };");
         $this->logTime('Unicodes block');
 
-        if ($config->verbose) { print "String unicode done\n"; }
+        display("String unicode done\n");
 
         // resolving the constants
         $extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'delete', 'namespaces', 'files');
@@ -102,7 +100,7 @@ class Build_root implements Tasks {
         }
         $this->logTime('g.idx("last index")');
 
-        if ($config->verbose) { print "Creating index for constant, function and classes resolution.\n"; }
+        display("Creating index for constant, function and classes resolution.\n");
 
         $end = microtime(true);
     }
@@ -131,6 +129,7 @@ class Build_root implements Tasks {
         static $log, $begin, $end, $start;
     
         if ($log === null) {
+            file_put_contents($this->project_dir.'/log/build_root.log', '');
             $log = fopen($this->project_dir.'/log/build_root.timing.csv', 'w+');
         }
         $end = microtime(true);
