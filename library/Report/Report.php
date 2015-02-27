@@ -24,6 +24,8 @@
 namespace Report;
 
 class Report {
+    static public $formats = array('Devoops', 'Json', 'Sqlite');
+    
     protected $client    = null;
     protected $project   = null;
 
