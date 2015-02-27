@@ -28,22 +28,18 @@ use Everyman\Neo4j\Client,
 
 class Tokenizer implements Tasks {
     private $client = null;
-    private $verbose = false;
     
     public function run(\Config $config) {
         $begin = microtime(true);
 
-        $this->verbose = $config->verbose;
         $project = $config->project;
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {
-            print "No such project '$project'. Aborting\n";
-            die();
+            die( "No such project '$project'. Aborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
-            print "No such config.ini in project '$project'. Aborting\n";
-            die();
+            die("No such config.ini in project '$project'. Aborting\n");
         }
 
         $begin_time = microtime(true);
@@ -61,7 +57,7 @@ class Tokenizer implements Tasks {
     
             $r = \Tokenizer\Token::getInstance($new, $client, $config->phpversion);
             if ($r === null) {
-                $this->display("Ignore $new\n");
+                display("Ignore $new\n");
                 // ignore 
             } elseif ($new == 'Tokenizer\\FunctioncallArray') {
                 $regex[$class] = $r;
@@ -74,7 +70,7 @@ class Tokenizer implements Tasks {
                     $regex[$class] = $r;
                 }
             } else {
-                $this->display("Ignore $new in else\n");
+                display("Ignore $new in else\n");
             }
         }
 
@@ -170,9 +166,9 @@ class Tokenizer implements Tasks {
             $log->log("Remaining regex : ".count($regex_next)." (".(count($regex) - count($regex_next)).")");
     
             if ($count > 3) {
-                $this->display( "$round) Remains $count of $total tokens to process! \n");
+                display( "$round) Remains $count of $total tokens to process! \n");
             } else {
-                $this->display( "$round) All $total tokens have been processed! \n");
+                display( "$round) All $total tokens have been processed! \n");
                 break 1;
             }
         }
@@ -189,7 +185,7 @@ class Tokenizer implements Tasks {
         \Tokenizer\Token::cleanHidden();
 
         $end_time = microtime(true);
-        $this->display("Total time : ".number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n");
+        display("Total time : ".number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n");
         // @todo display checks processed
     }
 
@@ -199,13 +195,6 @@ class Tokenizer implements Tasks {
             $b = $b || ($prev[$i + 1] > $prev[$i]);
         }
         return $b;
-    }
-
-    private function display($message) {
-        if ($this->verbose) {
-            print $message;
-        }
-        // @todo put in log too ? 
     }
 }
 
