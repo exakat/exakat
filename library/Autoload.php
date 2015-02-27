@@ -23,6 +23,7 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+include 'helpers.php';
 
 class Autoload {
     static public function autoload_library($name) {
