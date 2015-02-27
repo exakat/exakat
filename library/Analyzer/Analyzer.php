@@ -1366,6 +1366,12 @@ GREMLIN;
         return $this;
     }
 
+    public function goToAllChildren() {
+        $this->addMethod('transform{root = it.fullnspath; g.idx("atoms")[["atom":"Class"]].filter{ it.getProperty("tree").findAll{it == root;}.size() > 0; }.toList()}.scatter');
+        
+        return $this;
+    }
+
     public function goToTraits() {
         $this->addMethod('as("toTraits").out("BLOCK").out("ELEMENT").has("atom", "Use").out("USE").transform{ g.idx("traits")[["path":it.fullnspath]].next(); }.loop("toTraits"){true}{it.object.atom == "Trait"}');
         
