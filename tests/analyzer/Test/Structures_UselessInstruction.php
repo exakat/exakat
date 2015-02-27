@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_UselessInstruction extends Analyzer {
-    /* 11 methods */
+    /* 12 methods */
 
     public function testStructures_UselessInstruction01()  { $this->generic_test('Structures_UselessInstruction.01'); }
     public function testStructures_UselessInstruction02()  { $this->generic_test('Structures_UselessInstruction.02'); }
@@ -21,5 +21,6 @@ class Structures_UselessInstruction extends Analyzer {
     public function testStructures_UselessInstruction09()  { $this->generic_test('Structures_UselessInstruction.09'); }
     public function testStructures_UselessInstruction10()  { $this->generic_test('Structures_UselessInstruction.10'); }
     public function testStructures_UselessInstruction11()  { $this->generic_test('Structures_UselessInstruction.11'); }
+    public function testStructures_UselessInstruction12()  { $this->generic_test('Structures_UselessInstruction.12'); }
 }
 ?>

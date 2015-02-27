@@ -32,7 +32,8 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->outIs('ELEMENT')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Float', 'Sign', 'Nsname',
-                            'Identifier', 'String', 'Instanceof', 'Bitshift', 'Logical', 'Comparison', 'Null'))
+                            'Identifier', 'String', 'Instanceof', 'Bitshift', 'Logical', 'Comparison', 'Null',
+                            'Heredoc'))
              ->noAtomInside('Functioncall');
         $this->prepareQuery();
         
@@ -99,6 +100,13 @@ class UselessInstruction extends Analyzer\Analyzer {
              ->inIsIE(array('CODE', 'LEFT'))
              ->inIs('CLASS')
              ->atomIs('Instanceof')
+             ->back('first');
+        $this->prepareQuery();
+
+        // Empty string in a concatenation
+        $this->atomIs('Concatenation')
+             ->outIs('CONCAT')
+             ->code(array("''", '""'))
              ->back('first');
         $this->prepareQuery();
     }

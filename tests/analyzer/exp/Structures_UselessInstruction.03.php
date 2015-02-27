@@ -5,6 +5,10 @@ $expected     = array('\\A\\B\\C',
                       '"String"',
                       'MY_CONSTANT', 
                       '<<<HEREDOC
+
+silly string
+
+HEREDOC
 ');
 
 $expected_not = array();
