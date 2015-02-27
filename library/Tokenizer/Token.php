@@ -27,7 +27,8 @@ class Token {
     protected static $client = null;
     protected static $reserved = array();
     
-    // the numeric indices are important for processing order
+    // the numeric indices are NOT important for processing order
+    // the order of this array is important for processing and optimization
     protected static $types = array ( 0 => 'Variable',
                                       2 => 'VariableDollar',
                                       3 => 'Boolean',
@@ -1031,10 +1032,24 @@ g.idx('atoms')[['atom':'Use']].out('USE').each{
     }
 };
 ",
-//"g.dropIndex('racines');",
-// if there is an error while processing the AST, racines is needed.
-// we need some conditional here.
-"g.dropIndex('delete');"
+"g.dropIndex('delete');",
+"// Build the classes hierarchy 
+
+g.V.has('atom', 'Class')
+.sideEffect{ 
+    s = []; 
+    s.add(it.fullnspath); 
+    it.as('a').out('EXTENDS')
+      .sideEffect{ s.add(it.fullnspath); }
+      .transform{ g.idx('classes')[['path':it.fullnspath]].next(); }
+      .loop('a'){it.object.out('EXTENDS').any()}.iterate();
+      true;
+}
+.each{
+    it.setProperty('tree', s);
+};
+
+"
 
 );
 
