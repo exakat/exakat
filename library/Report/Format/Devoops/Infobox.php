@@ -25,6 +25,7 @@ namespace Report\Format\Devoops;
 
 class Infobox extends \Report\Format\Devoops { 
     public function render($output, $data) {
+        /*
         $text = <<<HTML
 <div class="row">
 HTML;
@@ -47,7 +48,8 @@ HTML;
 								</div>
 
 HTML;
-        
+    */
+        $text = "&nbsp;";
         $output->push($text);
     }
 }
