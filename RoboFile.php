@@ -175,31 +175,54 @@ LICENCE;
 
         $files = Finder::create()->ignoreVCS(true)
             ->files()
-            ->path('/config/')
-            ->path('/data/')
-            ->path('/human/')
-            ->path('/library/')
-            ->path('/scripts/')
-            ->path('/vendor/')
-            ->path('/devoops/') 
+            ->path('config/')
+            ->path('data/')
+            ->path('human/')
+            ->path('library/')
+            ->path('scripts/')
+            ->path('vendor/')
+            ->path('devoops/') 
             ->notPath('batch-import')
-            ->in(__DIR__);
+            ->notPath('library/Report/Format/Ace')
+            ->notPath('projects/')
+            ->notPath('media/')
 
-        foreach ($files as $file) {
-            $packer->addFile($file->getRelativePathname(), $file->getRealPath());
-        }
+            ->in(__DIR__)
+            ->exclude('/neo4j/')
+            ->exclude('/batch-import/');
+        $this->addFiles($packer, $files);
+
+        $files = Finder::create()->ignoreVCS(true)
+                                 ->files()
+                                 ->notPath('bootstrapvalidator')
+                                 ->path('media/devoops/')
+                                 ->in(__DIR__);
+        $this->addFiles($packer, $files);
+        
+        $files = Finder::create()->ignoreVCS(true)
+                                 ->files()
+                                 ->in(__DIR__.'/projects/test/');
+        $this->addFiles($packer, $files);
 
         $packer->addFile('exakat','exakat')
-            ->executable('exakat')
-            ->run();
+               ->executable('exakat')
+               ->run();
 
         $this->taskComposerInstall()
-            ->printed(false)
-            ->run();
+             ->printed(false)
+             ->run();
 
         $this->taskExecStack()
-         ->stopOnFail()
-         ->exec('mv exakat.phar ../release/')
-         ->run();
+             ->stopOnFail()
+             ->exec('mv exakat.phar ../release/')
+             ->run();
+    }
+    
+    private function addFiles($packer, $files) {
+        foreach ($files as $file) {
+//            print "$file {$file->getRelativePathname()} {$file->getRealPath()}\n";
+            print "$file\n";
+            $packer->addFile($file->getRelativePathname(), $file->getRealPath());
+        }
     }
 }
