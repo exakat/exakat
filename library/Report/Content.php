@@ -27,15 +27,10 @@ class Content {
     protected $name    = 'Content'; 
     protected $project = null;
     protected $neo4j   = null;
-    protected $mysql   = null;
     protected $array   = array();
     
     public function setNeo4j($client) {
         $this->neo4j = $client;
-    }
-
-    public function setDb($db) {
-        $this->db = $db;
     }
 
     public function setProject($project) {
