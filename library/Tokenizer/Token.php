@@ -1086,11 +1086,10 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
             if ($analyzer->checkPhpVersion($phpVersion)) {
                 return $analyzer;
             } else {
-                return null;
+                throw new NoSuchTokenizer($name);
             }
         } else {
-            print "No such class as '$name'\n";
-            return null;
+            throw new NoSuchTokenizer($name);
         }
     }
 
