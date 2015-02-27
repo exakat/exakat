@@ -104,6 +104,7 @@ class Devoops extends \Report\Format {
         
         $html = file_get_contents($config->dir_root.'/media/devoops/index.exakat.html');
         $html = str_replace('<menu>', $sidebar, $html);
+        $html = str_replace('<title>Exakat report</title>', '<title>Exakat report for '.$this->projectName.'</title>', $html);
         file_put_contents($dir.'/index.html', $html);
         
         // writing the content files in the ajax folder
@@ -111,19 +112,6 @@ class Devoops extends \Report\Format {
         foreach($this->files as $name => $html) {
             $total += file_put_contents($dir.'/ajax/'.$name, $html);
         }
-        
-        $index_html = <<<HTML
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">    
-	<head>
-        <meta http-equiv="refresh" content="0; url=pages/Code-smells.html" />
-		<meta name="description" content="Exakat Audit report. © 2014 - 2015 Exakat" />
-	</head>
-	<body>
-	</body>
-</html>
-
-HTML;
         
         // @todo : check that ZIP is available
         // @todo support other format for archiving
