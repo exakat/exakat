@@ -35,8 +35,9 @@ class Compilations extends \Report\Content {
         $vertices = $query->getResultSet();
         $total = $vertices[0][0];
         
-        foreach($this->versions as $version => $suffix) {
+        foreach($this->versions as $suffix) {
             $files = \Analyzer\Analyzer::$datastore->getCol('compilation'.$suffix, 'file');
+            $version = substr($suffix, 0, 1).'.'.substr($suffix, 1);
             if (empty($files)) {
                 $files = "No compilation error found.";
                 $errors = "N/A";
@@ -48,11 +49,11 @@ class Compilations extends \Report\Content {
             }
 
             $array = array('version'       => $version,
-                          'total'         => $total,
-                          'total_error'   => $total_error,
-                          'files'         => $files,
-                          'errors'        => $errors,
-                          );
+                           'total'         => $total,
+                           'total_error'   => $total_error,
+                           'files'         => $files,
+                           'errors'        => $errors,
+                           );
 
             $this->array[] = $array;
         }
