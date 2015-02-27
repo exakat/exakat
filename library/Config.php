@@ -194,23 +194,27 @@ class Config {
             }
         }
 
-        $commands = array('doctor'      => 1, 
-                          'init'        => 1, 
-                          'export'      => 1,
+        $commands = array('analyze'     => 1, 
+                          'build_root'  => 1, 
+                          'clean'       => 1, 
+                          'doctor'      => 1, 
                           'errors'      => 1,
+                          'export'      => 1,
                           'files'       => 1, 
-                          'project'     => 1, 
+                          'help'        => 1, 
+                          'init'        => 1, 
                           'load'        => 1, 
                           'log2csv'     => 1, 
                           'magicnumber' => 1, 
-                          'stat'        => 1, 
-                          'build_root'  => 1, 
-                          'tokenizer'   => 1, 
-                          'analyze'     => 1, 
-                          'results'     => 1, 
-                          'report'      => 1, 
+                          'project'     => 1, 
                           'report_all'  => 1,
-                          'version'     => 1);
+                          'report'      => 1, 
+                          'results'     => 1, 
+                          'stat'        => 1, 
+                          'status'      => 1, 
+                          'tokenizer'   => 1, 
+                          'version'     => 1,
+                          );
 
         if (count($args) > 0) {
             $arg = array_shift($args);
