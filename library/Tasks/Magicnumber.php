@@ -62,10 +62,7 @@ QUERY;
                 $stmt->execute();
                 $total++;
             }
-        
-            if ($config->verbose) {
-                print "$type : $total\n";
-            }
+            display( "$type : $total\n");
         }
     }
 

@@ -30,11 +30,10 @@ class Report implements Tasks {
     private $client = null;
     
     public function run(\Config $config) {
+        $reportClass = "\\Report\\Report\\".ucfirst(strtolower($config->report));
+
         if (!class_exists("\\Report\\Format\\".$config->format)) {
-            print "Format '{$config->format}' doesn't exist.\nAborting\n";
-            
-            // @todo suggest some reports? Use a default one. 
-            die();
+            die("Format '{$config->format}' doesn't exist. Choose among : ".join(", ", \Report\Report::$formats)."\nAborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
@@ -50,18 +49,16 @@ class Report implements Tasks {
 
         $client = new Client();
 
-        print "Building report ".$config->report." for project ".$config->project." in file ".$config->file.", with format ".$config->format."\n";
+        display( "Building report ".$config->report." for project ".$config->project." in file ".$config->file.", with format ".$config->format."\n");
         $begin = microtime(true);
 
-        $reportClass = "\\Report\\Report\\".$config->report;
         $report = new $reportClass($config->project, $client);
         $report->prepare();
-        echo $config->format, ' ', $config->filename;
         $size = $report->render($config->format, $config->filename);
 
         $end = microtime(true);
-        print "Processing time : ".number_format($end - $begin, 2)." s\n";
-        print "Done\n";
+        display( "Processing time : ".number_format($end - $begin, 2)." s\n");
+        display( "Done\n");
     }
 }
 
