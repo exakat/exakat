@@ -92,8 +92,10 @@ class Premier extends Report {
         $this->createLevel2('Compile');
 
         $config = \Config::factory();
-        $compilations = new \Report\Content\Compilations($this->client);
+        $compilations = new \Report\Content\Compilations();
+        $compilations->setNeo4j($this->client);
         $compilations->setVersions($config->other_php_versions);
+        $compilations->collect();
         $this->addContent('Compilations', $compilations);
 
         $config = \Config::factory();
