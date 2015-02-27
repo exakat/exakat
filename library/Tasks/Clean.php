@@ -26,7 +26,7 @@ namespace Tasks;
 use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Gremlin\Query;
 
-class Status implements Tasks {
+class Clean implements Tasks {
     private $client = null;
     
     public function run(\Config $config) {
@@ -37,7 +37,7 @@ class Status implements Tasks {
                              'Premier-ace',
                              );
         foreach($dirsToErase as $dir) {
-            shell_exec('rm -rf '.$config->projects_root.'/projects/'.$config-project.'/'.$dir);
+            shell_exec('rm -rf '.$config->projects_root.'/projects/'.$config->project.'/'.$dir);
         }
 
         $filesToErase = array('Flat-html.html',
@@ -51,6 +51,7 @@ class Status implements Tasks {
                               'Premier-text.txt',
                               'datastore.sqlite',
                               'magicnumber.sqlite',
+                              'counts.sqlite',
                               'report.html',
                               'report.md',
                               'report.sqlite',
@@ -58,8 +59,15 @@ class Status implements Tasks {
                               'report.zip',
                              );
         foreach($filesToErase as $file) {
-            unlink($config->projects_root.'/projects/'.$config-project.'/'.$file);
+            $path = $config->projects_root.'/projects/'.$config->project.'/'.$file;
+            if (file_exists($path)) {
+                unlink($path);
+            }
         }
+
+        // rebuild log
+        mkdir($config->projects_root.'/projects/'.$config->project.'/log', 0755);
+
     }
 }
 
