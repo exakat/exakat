@@ -64,7 +64,7 @@ class Datastore {
                 $d = array($key, $row);
             }
 
-            $query = "INSERT INTO $table (".join(", ", $cols).") VALUES ('".join("', '", $d)."')";
+            $query = "REPLACE INTO $table (".join(", ", $cols).") VALUES ('".join("', '", $d)."')";
             $this->sqlite->querySingle($query);
         }
         
@@ -219,7 +219,7 @@ SQLITE;
                 $createTable = <<<SQLITE
 CREATE TABLE hash (
   id INTEGER PRIMARY KEY,
-  key TEXT,
+  key TEXT UNIQUE,
   value TEXT
 );
 SQLITE;
