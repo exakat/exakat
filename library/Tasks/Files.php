@@ -204,7 +204,7 @@ class Files implements Tasks {
         $resultNosot = shell_exec($shell);
         $stats['tokens'] = (int) array_sum(explode("\n", $resultNosot));
 
-        $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 php56 -d short_open_tag=1 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\"\$argv[1]\n\";" 2>>/dev/null || true ';
+        $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 php56 -d short_open_tag=1 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
 
         $resultSot = shell_exec($shell);
         $stats['tokenssot'] = (int) array_sum(explode("\n", $resultSot));
