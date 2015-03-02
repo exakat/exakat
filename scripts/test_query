@@ -45,6 +45,7 @@ $res = query($query);
 
 foreach($res as $k => $v) {
     print_r($k);
+    print " ";
     print_r($v[0]);
     print "\n";
 }
