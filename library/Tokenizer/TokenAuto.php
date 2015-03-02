@@ -1673,8 +1673,9 @@ fullcode = x;
 current = it;
 previous = b1.in('NEXT').next();
 
-while( current.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY']) {
+while( current.atom == null && current.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY']) {
     if (a1.token == 'T_CLOSE_BRACKET') {
+        /* case of a arrayappend (\$s[]) */
         g.addEdge(current, b1, 'VARIABLE');
         current.setProperty('atom', 'Arrayappend');
 
@@ -1692,6 +1693,7 @@ while( current.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY']) {
         a1 = current.out('NEXT').next();
         a2 = a1.out('NEXT').next();
     } else {
+        /* case of a array with index (\$s[1]) */
         g.addEdge(current, b1, 'VARIABLE');
         g.addEdge(current, a1, 'INDEX');
         current.setProperty('atom', 'Array');
@@ -2864,12 +2866,8 @@ GREMLIN;
     } else {
         it.hasNot('atom', null).out('NEXT').filter{ it.token in ['T_CLOSE_BRACKET', 'T_CLOSE_CURLY']}.next();
     }
-}.out('NEXT').loop('a'){it.object.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY']}.any() }";
+}.out('NEXT').loop('a'){it.object.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY'] && it.object.atom == null}.any()}";
 
-/*
-            $queryConditions[] = "filter{ it.as('a').out('NEXT').hasNot('atom', null).out('NEXT').filter{ it.token in ['T_CLOSE_BRACKET', 'T_CLOSE_CURLY']}
-.out('NEXT').loop('a'){it.object.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY']}.any() }";
-*/
             unset($conditions['check_for_array']);
         }
 

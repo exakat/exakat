@@ -1,0 +1,42 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    return
+    Label : RETURN
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          a
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $b
+          Label : INDEX
+            1
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            2
+        Label : CONCAT
+          d
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $e
+          Label : INDEX
+            3
+        Label : CONCAT
+          F
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $g
+          Label : INDEX
+            4
+        Label : CONCAT
+          h
