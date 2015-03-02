@@ -58,6 +58,11 @@ class Appinfo extends \Report\Content {
                             'File upload'                => 'Structures/FileUploadUsage',
                     ),
 
+                    'Composer' => array(
+                            'composer.json'              => 'Composer/UseComposer',
+                            'composer autoload'          => 'Composer/Autoload',
+                    ),
+
                     'Namespaces' => array(
                             'Namespaces'              => 'Namespaces/Namespacesnames',
                             'Vendor'                  => 'Namespaces/Vendor',
@@ -287,6 +292,9 @@ class Appinfo extends \Report\Content {
                     continue;
                 } 
 
+                $analyzer = \Analyzer\Analyzer::getInstance($a, $this->neo4j);
+                $this->array[$section][$name] = $analyzer->hasResults() == 'true' ? 'Yes' : 'No';
+                /*
                 $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.any()"; 
                 try {
                     $vertices = $this->query($queryTemplate);
@@ -300,6 +308,7 @@ class Appinfo extends \Report\Content {
                           "\n";
                     // empty catch ? 
                 }
+                */
             }
             
             if ($section == 'Extensions') {
