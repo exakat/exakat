@@ -58,12 +58,12 @@ class Build_root implements Tasks {
         $this->logTime('g.idx("atoms")');
 
 
-        display( print "g.idx('atoms') : filling\n");
+        display( "g.idx('atoms') : filling\n");
         $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
                                          'Rawstring', 'Variable', 'Float', 'Boolean', 'Void', 'File']}.each{ 
                                          g.idx('atoms').put('atom', it.atom, it); }";
         $this->query($query);
-        display( print "g.idx('atoms') : filled\n" );
+        display( "g.idx('atoms') : filled\n" );
         $this->logTime('g.idx("atom")[["atom":"******"]] : filling');
 
         // creating the neo4j Index
