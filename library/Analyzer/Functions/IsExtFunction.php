@@ -33,11 +33,11 @@ class IsExtFunction extends Analyzer\Analyzer {
         
         $functions = array();
         foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
-            $ini = $this->loadIni($inifile);
+            $inifile = str_replace('Extensions\\Ext', '', $ext).'.ini';
+            $ini = $this->loadIni($inifile, 'functions');
             
-            if (!empty($ini['classes'][0])) {
-                $functions = array_merge($functions, $ini['functions']);
+            if (!empty($ini)) {
+                $functions = array_merge($functions, $ini);
             }
         }
         
