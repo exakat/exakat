@@ -203,6 +203,7 @@ class Files implements Tasks {
         $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 php56                   -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
         $resultNosot = shell_exec($shell);
         $stats['tokens'] = (int) array_sum(explode("\n", $resultNosot));
+        $datastore->addRow('hash', array('tokens' => $stats['tokens']));
 
         $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 php56 -d short_open_tag=1 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
 
@@ -243,6 +244,22 @@ class Files implements Tasks {
         }
 
         $datastore->addRow('hash', $stats);
+        
+        // composer.json
+        $composerInfo = array();
+        if ($composerInfo['composer.json'] = file_exists($config->projects_root.'/projects/'.$dir.'/code/composer.json')) {
+            $composerInfo['composer.lock'] = file_exists($config->projects_root.'/projects/'.$dir.'/code/composer.lock');
+            
+            $composer = json_decode(file_get_contents($config->projects_root.'/projects/'.$dir.'/code/composer.json'));
+            
+            if (isset($composer->autoload)) {
+                $composerInfo['autoload'] = $composer->autoload->{'psr-0'} !== null ? 'psr-0' : 'psr-4';
+            } else {
+                $composerInfo['autoload'] = false;
+            }
+        }
+        $datastore->addRow('hash', $composerInfo);
+        
         
         if ($config->json) {
             if ($unknown) {
