@@ -28,12 +28,14 @@ use Analyzer;
 class ShouldUseThis extends Analyzer\Analyzer {
     public function dependsOn() {
         return array('Analyzer\\Classes\\UseThis',
-                     'Analyzer\\Classes\\MethodDefinition');
+                     'Analyzer\\Classes\\MethodDefinition',
+                     'Analyzer\\Functions\\EmptyFunction');
     }
     
     public function analyze() {
         // Non-Static Methods must use $this
         $this->atomIs('Function')
+             ->analyzerIsNot('Analyzer\\Functions\\EmptyFunction')
              ->outIs('NAME')
              ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
              ->inIs('NAME')
