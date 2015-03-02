@@ -25,7 +25,7 @@ namespace Analyzer\Php;
 
 use Analyzer;
 
-class AutoloadUsage extends Analyzer\Common\FunctionUsage {    
+class AutoloadUsage extends Analyzer\Common\FunctionUsage {
     public function analyze() {
         $this->functions = array('spl_autoload_call', 
                                  'spl_autoload_functions',
@@ -35,7 +35,7 @@ class AutoloadUsage extends Analyzer\Common\FunctionUsage {
                                  'spl_autoload',
                                  'spl_classes',
                                  'spl_object_hash',
-                                 '__autoload',);
+                                 '__autoload');
         parent::analyze();
     }
 }
