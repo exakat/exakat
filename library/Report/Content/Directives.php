@@ -99,6 +99,15 @@ class Directives extends \Report\Content {
                                               'documentation' => '<a href="http://php.net/manual/en/apache.configuration.php">Apache runtime configuration</a>');
         }
         
+        // Curl
+        $suggestion = $this->checkPresence('Extensions\\Extcurl');
+        if ($suggestion == 'On') {
+            $this->array['Curl'] = array();
+            $this->array['Curl'][]  = array('name' => 'Extra configurations',
+                                            'suggested' => '&nbsp;',
+                                            'documentation' => '<a href="http://php.net/manual/en/curl.configuration.php">Curl runtime configuration</a>');
+        } 
+
         // File Upload
         $suggestion = $this->checkPresence('Structures\\FileUploadUsage');
         $this->array['File upload'] = array();
@@ -133,8 +142,8 @@ class Directives extends \Report\Content {
                                                'documentation' => 'If set to true, an exception will be raised whenever an error occurs in an intl function. The exception will be of type IntlException. This is possibly in addition to the error message generated due to intl.error_level.');
 
             $this->array['ext/Intl'][]  = array('name' => 'Extra configurations',
-                                             'suggested' => '&nbsp;',
-                                             'documentation' => '<a href="http://php.net/manual/en/intl.configuration.php">Intl runtime configuration</a>');
+                                                'suggested' => '&nbsp;',
+                                                'documentation' => '<a href="http://php.net/manual/en/intl.configuration.php">Intl runtime configuration</a>');
         } 
 
         // Mongo
