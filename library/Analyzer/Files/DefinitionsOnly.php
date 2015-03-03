@@ -26,10 +26,12 @@ namespace Analyzer\Files;
 use Analyzer;
 
 class DefinitionsOnly extends Analyzer\Analyzer {
-    public static $definitions = array('Interface', 'Trait', 'Function', 'Const', 'Class', 'Use', 'Global', 'Include');
+    public static $definitions = array('Interface', 'Trait', 'Function', 'Const', 'Class');
+    public static $definitionsHelpers = array('Use', 'Global', 'Include');
     //'Namespace',  is excluded
 
-    public static $definitionsFunctions = array('define', 'set_session_handler', 'set_error_handler', 'ini_set', 'register_shutdown_function');
+    public static $definitionsFunctions = array('define', 'set_session_handler', 'set_error_handler', 'ini_set', 
+                                                'register_shutdown_function');
     
     public function dependsOn() {
         return array('Structures/NoDirectAccess');
@@ -37,9 +39,12 @@ class DefinitionsOnly extends Analyzer\Analyzer {
     
     public function analyze() {
         $definitionsList = '"'.implode('", "', self::$definitions).'"';
+        $nonDefinitionsList = '"'.implode('", "', array_merge(self::$definitions, self::$definitionsHelpers)).'"';
+
         $definitionsFunctionsList = '"\\\\'.implode('", "\\\\', self::$definitionsFunctions).'"';
         
         $definitions = 'it.atom in ['.$definitionsList.', "Namespace"]  || (it.atom == "Functioncall" && it.fullnspath in ['.$definitionsFunctionsList.']) || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
+        $nonDefinitions = 'it.atom in ['.$definitionsList.', '.$nonDefinitionsList.', "Namespace"]  || (it.atom == "Functioncall" && it.fullnspath in ['.$definitionsFunctionsList.']) || it.in("ANALYZED").has("code", "Analyzer\\\\Structures\\\\NoDirectAccess").any()';
 
         // all cases without extra string before/after the script
         
@@ -53,7 +58,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
              ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").out("BLOCK").out("ELEMENT").filter{ '.$definitions.' }.any()}')
 
              // spot a non-definition
-             ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").out("BLOCK").out("ELEMENT").filter{ !('.$definitions.')}.any() == false}')
+             ->raw('filter{ it.out("ELEMENT").has("atom", "Namespace").out("BLOCK").out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
 
              ->back('first');
         $this->prepareQuery();
@@ -71,7 +76,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
              ->raw('filter{ it.out("ELEMENT").filter{ '.$definitions.' }.any()}')
 
              // cannot spot a non-definition
-             ->raw('filter{ it.out("ELEMENT").filter{ !('.$definitions.')}.any() == false}')
+             ->raw('filter{ it.out("ELEMENT").filter{ !('.$nonDefinitions.')}.any() == false}')
 
              ->back('first');
         $this->prepareQuery();
