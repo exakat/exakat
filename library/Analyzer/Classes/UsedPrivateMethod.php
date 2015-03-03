@@ -29,7 +29,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
 
     public function analyze() {
         // method used in a static methodcall \a\b::b()
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'classname')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -51,7 +51,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // method used in a static methodcall static::b() or self
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
@@ -72,7 +72,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // method used in a normal methodcall with $this $this->b()
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
@@ -93,7 +93,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // method used in a new (constructor)
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -113,7 +113,7 @@ class UsedPrivateMethod extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // __destruct is considered automatically checked
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')

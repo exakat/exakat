@@ -32,7 +32,7 @@ class EmptyClass extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->analyzerIsNot('Analyzer\\Exceptions\\DefinedExceptions')
              ->outIs('EXTENDS')
              ->back('first')
@@ -42,7 +42,7 @@ class EmptyClass extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
         
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->hasNoOut('EXTENDS')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')

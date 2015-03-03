@@ -28,9 +28,10 @@ use Analyzer;
 class Finalclass extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('FINAL')
              ->back('first');
+        $this->prepareQuery();
     }
 }
 

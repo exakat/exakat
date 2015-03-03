@@ -31,41 +31,41 @@ class DefinedExceptions extends Analyzer\Analyzer {
         $exceptions = $this->makeFullNSPath($exceptions);
         
         // first level
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->fullnspath($exceptions)
              ->back('first');
         $this->prepareQuery();
 
         // second level
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->analyzerIs("Analyzer\\Exceptions\\DefinedExceptions")
+             ->analyzerIs('Analyzer\\Exceptions\\DefinedExceptions')
              ->back('first');
         $this->prepareQuery();
 
         // third level
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->analyzerIs("Analyzer\\Exceptions\\DefinedExceptions")
+             ->analyzerIs('Analyzer\\Exceptions\\DefinedExceptions')
              ->back('first');
         $this->prepareQuery();
 
         // fourth level
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->analyzerIs("Analyzer\\Exceptions\\DefinedExceptions")
+             ->analyzerIs('Analyzer\\Exceptions\\DefinedExceptions')
              ->back('first');
         $this->prepareQuery();
 
         // fifth level
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->analyzerIs("Analyzer\\Exceptions\\DefinedExceptions")
+             ->analyzerIs('Analyzer\\Exceptions\\DefinedExceptions')
              ->back('first');
         $this->prepareQuery();
     }

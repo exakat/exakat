@@ -32,7 +32,7 @@ class UselessConstructor extends Analyzer\Analyzer {
 
     public function analyze() {
         // class a (no extends, no implements)
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->hasNoOut('EXTENDS')
              ->hasNoOut('IMPLEMENTS')
              ->outIs('BLOCK')
@@ -46,7 +46,7 @@ class UselessConstructor extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // class a with extends, one level
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->hasOut('EXTENDS')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -65,7 +65,7 @@ class UselessConstructor extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // class a with extends, two level
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->hasOut('EXTENDS')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')

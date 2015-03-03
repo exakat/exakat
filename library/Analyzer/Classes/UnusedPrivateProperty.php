@@ -31,14 +31,14 @@ class UnusedPrivateProperty extends Analyzer\Analyzer {
     }
 
     public function analyze() {
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->_as('block')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
              ->hasOut('PRIVATE')
              ->analyzerIsNot('Analyzer\\Classes\\UsedPrivateProperty');
-        $this->prepareQuery();    
+        $this->prepareQuery();
     }
 }
 

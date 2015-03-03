@@ -35,7 +35,7 @@ class UsedMethods extends Analyzer\Analyzer {
         $magicMethods = $magicMethods['magicMethod'];
 
         // Normal Methodcall
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
@@ -47,7 +47,7 @@ class UsedMethods extends Analyzer\Analyzer {
              ->back('used');
         $this->prepareQuery();
 
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
@@ -61,7 +61,7 @@ class UsedMethods extends Analyzer\Analyzer {
         $this->prepareQuery();
         
         // Staticmethodcall
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
@@ -77,7 +77,7 @@ class UsedMethods extends Analyzer\Analyzer {
         // __destruct is always used, no need to spot
 
         // method used statically in a callback with an array
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -90,7 +90,7 @@ class UsedMethods extends Analyzer\Analyzer {
              ->back('used');
         $this->prepareQuery();
 
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -102,7 +102,6 @@ class UsedMethods extends Analyzer\Analyzer {
              ->raw('filter{ g.idx("atoms")[["atom":"String"]].hasNot("cbClass", null).filter{ it.cbMethod == method.toLowerCase()}.filter{ it.cbClass == fullnspath.toLowerCase()}.any()}')
              ->back('used');
         $this->prepareQuery();
-        
     }
 }
 

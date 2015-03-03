@@ -32,12 +32,12 @@ class ImplementIsForInterface extends Analyzer\Analyzer {
     
     public function analyze() {
         // class a with implements
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('IMPLEMENTS')
              ->hasClassDefinition()
              ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface')
              ->back('first');
-        $this->prepareQuery();    
+        $this->prepareQuery();
     }
 }
 

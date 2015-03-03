@@ -27,7 +27,7 @@ use Analyzer;
 
 class Constructor extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
@@ -37,7 +37,7 @@ class Constructor extends Analyzer\Analyzer {
              ->back('constructor');
         $this->prepareQuery();
 
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('NAME')
              ->savePropertyAs('code', 'code')
              ->back('first')

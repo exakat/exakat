@@ -28,7 +28,7 @@ use Analyzer;
 class MutualExtension extends Analyzer\Analyzer {
     public function analyze() {
         // A -> B 
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
              ->outIs('EXTENDS')
              ->classDefinition()
@@ -40,7 +40,7 @@ class MutualExtension extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // A -> B -> C (2 levels)
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
              ->outIs('EXTENDS')
              ->classDefinition()

@@ -29,7 +29,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
 
     public function analyze() {
         // property + $this->property
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
@@ -49,7 +49,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // property + $this->property in parents 
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
@@ -71,7 +71,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // property + $this->property in parents 
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
@@ -96,7 +96,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
         //////////////////////////////////////////////////////////////////
         // static property : inside the self class
         //////////////////////////////////////////////////////////////////
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fns')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -120,7 +120,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // static and above (static:: (special case, as fns will point to local class))
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fns')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -144,7 +144,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // static and above (not - static::)
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fns')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -169,7 +169,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // static property + class below
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fns')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -195,7 +195,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
         $this->prepareQuery();
         
         // static and below (static:: )
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fns')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')

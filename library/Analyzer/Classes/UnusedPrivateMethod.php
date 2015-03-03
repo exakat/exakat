@@ -31,7 +31,7 @@ class UnusedPrivateMethod extends Analyzer\Analyzer {
     }
 
     public function analyze() {
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->_as('block')
              ->outIs('ELEMENT')

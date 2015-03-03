@@ -32,14 +32,14 @@ class ConditionalStructures extends Analyzer\Analyzer {
     
     public function analyze() {
         // classes, interfaces, Traits
-        $this->atomIs(array("Class", 'Interface', 'Trait'))
+        $this->atomIs(array('Class', 'Interface', 'Trait'))
              ->analyzerIsNot('Analyzer\\Classes\\MethodDefinition')
              ->atomAboveIs('Ifthen')
              ->back('first');
         $this->prepareQuery();
 
         // functions 
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->analyzerIsNot('Analyzer\\Classes\\MethodDefinition')
              ->back('first')

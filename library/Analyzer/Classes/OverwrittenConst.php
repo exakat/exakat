@@ -27,7 +27,7 @@ use Analyzer;
 
 class OverwrittenConst extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Const')

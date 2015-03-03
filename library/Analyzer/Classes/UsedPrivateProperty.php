@@ -42,7 +42,7 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // property used in a static property static::$b or self::$b
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
@@ -64,7 +64,7 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // property used in a static property static::$b[] or self::$b[]
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
@@ -87,7 +87,7 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // property used in a normal methodcall with $this $this->b()
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'classname')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')

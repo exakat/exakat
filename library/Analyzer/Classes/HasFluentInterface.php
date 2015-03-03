@@ -27,7 +27,7 @@ use Analyzer;
 
 class HasFluentInterface extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Class")
+        $this->atomIs('Class')
              ->outIs('BLOCK')
              ->atomInside('Return')
              ->outIs('RETURN')
