@@ -26,6 +26,10 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class UndefinedParentMP extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Analyzer\\Composer\\IsComposerNsname');
+    }
+    
     public function analyze() {
         // parent::method()
         $this->atomIs('Staticmethodcall')
@@ -35,9 +39,26 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             ->raw('filter{ it.out("IMPLEMENTS", "EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.out("PRIVATE").any() == false}.out("NAME").has("code", name).any() == false}')
+             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
+                              .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
+                              .loop("extension"){true}{it.object.atom == "Class"}
+                              .out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.out("PRIVATE").any() == false}.out("NAME").has("code", name)
+                              .any() == false}')
+                // checking parent is not a composer class
+             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
+                              .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
+                              .any() == false;
+                              }')
+
+                // checking grand-parents are not a composer class
+             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
+                              .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
+                              .loop("extension"){true}{it.object.atom == "Class"}
+                              .filter{ it.out("IMPLEMENTS", "EXTENDS").in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
+                              .any() == false;
+                              }')
              ->back('first');
-      $this->prepareQuery();
+        $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
@@ -46,7 +67,24 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             ->raw('filter{ it.out("IMPLEMENTS", "EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.atom == "Class"}.out("BLOCK").out("ELEMENT").has("atom", "Ppp").filter{ it.out("PRIVATE").any() == false}.out("DEFINE").has("code", name).any() == false}')
+             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
+                              .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
+                              .loop("extension"){true}{it.object.atom == "Class"}
+                              .out("BLOCK").out("ELEMENT").has("atom", "Ppp").filter{ it.out("PROTECTED").any() == false}.out("DEFINE").has("code", name)
+                              .any() == false}')
+                // checking parent is not a composer class
+             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
+                              .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
+                              .any() == false;
+                              }')
+
+                // checking grand-parents are not a composer class
+             ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
+                              .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
+                              .loop("extension"){true}{it.object.atom == "Class"}
+                              .filter{ it.out("IMPLEMENTS", "EXTENDS").in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
+                              .any() == false;
+                              }')
              ->back('first');
         $this->prepareQuery();
     }
