@@ -30,8 +30,7 @@ class UnresolvedUse extends Analyzer\Analyzer {
         return array('Analyzer\\Classes\\IsExtClass',
                      'Analyzer\\Interfaces\\IsExtInterface',
                      'Analyzer\\Traits\\IsExtTrait',
-                     'Analyzer\\Namespaces\\KnownVendor'
-                     );
+                     'Analyzer\\Composer\\IsComposerNsname');
     }
 
     public function analyze() {
@@ -44,8 +43,7 @@ class UnresolvedUse extends Analyzer\Analyzer {
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
              ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface')
              ->analyzerIsNot('Analyzer\\Traits\\IsExtTrait')
-             ->analyzerIsNot('Analyzer\\Namespaces\\KnownVendor')
-             ;
+             ->analyzerIsNot('Analyzer\\Composer\\IsComposerNsname');
         $this->prepareQuery();
     }
 }
