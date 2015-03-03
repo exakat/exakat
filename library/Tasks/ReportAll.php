@@ -53,6 +53,24 @@ class ReportAll implements Tasks {
             unset($report);
         }
         \Config::factory($oldConfig);
+
+        // generating counts
+        $args = array ( 1 => 'report',
+                        2 => '-p',
+                        3 => $config->project,
+                        4 => '-f',
+                        5 => 'counts',
+                        6 => '-format',
+                        7 => 'Sqlite',
+                        8 => '-report',
+                        9 => 'Counts',
+                        );
+        \Config::factory($args);
+        
+        $report = new Report();
+        $report->run($config);
+        unset($report);
+
     }
 }
 
