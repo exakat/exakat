@@ -247,15 +247,20 @@ class Files implements Tasks {
         
         // composer.json
         $composerInfo = array();
+        $datastore->cleanTable('composer');
         if ($composerInfo['composer.json'] = file_exists($config->projects_root.'/projects/'.$dir.'/code/composer.json')) {
             $composerInfo['composer.lock'] = file_exists($config->projects_root.'/projects/'.$dir.'/code/composer.lock');
             
             $composer = json_decode(file_get_contents($config->projects_root.'/projects/'.$dir.'/code/composer.json'));
             
             if (isset($composer->autoload)) {
-                $composerInfo['autoload'] = $composer->autoload->{'psr-0'} !== null ? 'psr-0' : 'psr-4';
+                $composerInfo['autoload'] = isset($composer->autoload->{'psr-0'}) ? 'psr-0' : 'psr-4';
             } else {
                 $composerInfo['autoload'] = false;
+            }
+            
+            if (isset($composer->require)) {
+                $datastore->addRow('composer', (array) $composer->require);
             }
         }
         $datastore->addRow('hash', $composerInfo);

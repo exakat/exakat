@@ -29,11 +29,11 @@ class Datastore {
     }
 
     public function addRow($table, $data) {
-        $this->checkTable($table);
-        
         if (empty($data)) {
             return true;
         }
+
+        $this->checkTable($table);
         
         $first = current($data);
         if (is_array($first)) {
@@ -117,10 +117,10 @@ class Datastore {
     }
 
     public function cleanTable($table) {
-        $this->checkTable($table);
-        
-        $query = "DELETE FROM $table";
-        $this->sqlite->querySingle($query);
+        if ($this->checkTable($table)) {
+            $query = "DELETE FROM $table";
+            $this->sqlite->querySingle($query);
+        }
 
         return true;
     }
@@ -221,6 +221,16 @@ CREATE TABLE hash (
   id INTEGER PRIMARY KEY,
   key TEXT UNIQUE,
   value TEXT
+);
+SQLITE;
+                break;
+
+            case 'composer' : 
+                $createTable = <<<SQLITE
+CREATE TABLE composer (
+  id INTEGER PRIMARY KEY,
+  component TEXT UNIQUE,
+  version TEXT
 );
 SQLITE;
                 break;
