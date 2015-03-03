@@ -32,6 +32,14 @@ class EmptyFunction extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Function')
+             ->hasNoClass()
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Void')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->inIs('NAME')
