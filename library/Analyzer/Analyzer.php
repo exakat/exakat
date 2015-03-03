@@ -572,7 +572,7 @@ GREMLIN;
         if ($value === null) {
             $this->addMethod("has('$property', null)");
         } else {
-            $this->addMethod("filter{ it.$property == ***;}", $value);
+            $this->addMethod("filter{ it.$property in ***;}", $value);
         }
 
         return $this;
