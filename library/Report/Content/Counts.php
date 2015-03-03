@@ -48,8 +48,7 @@ class Counts extends \Report\Content {
             $this->array = array();
             foreach($analyzes2 as $analyzer) {
                 $count = $analyzer->getResultsCount();
-                print $analyzer->getDescription()->getName()." : ".$count."\n";
-                $this->array[$analyzer->getDescription()->getName()] = $count;
+                $this->array[] = array($analyzer->getDescription()->getName(), $count);
                 $total += $count;
             }
         }
