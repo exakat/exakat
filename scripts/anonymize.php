@@ -212,6 +212,8 @@ foreach($tokens as $t) {
             case T_CALLABLE : 
             case T_UNSET : 
 
+            case T_DOLLAR_OPEN_CURLY_BRACES : 
+
             case T_FINALLY : 
             case T_YIELD : 
 
