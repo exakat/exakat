@@ -45,20 +45,22 @@ class Magicnumber implements Tasks {
         foreach( $types as $type) {
             $query = <<<QUERY
         m = [:];
-        g.idx('atoms')[['atom':'$type']].groupCount(m){it.code}{it.b+1}.iterate();
-        m.findAll{it.value > 1}
+        g.idx('atoms')[['atom':'$type']].groupCount(m){it.code}.iterate();
+        m.findAll()
 
 QUERY;
+            $res = $this->query($query);
 
             $sqlite->exec('CREATE TABLE '.$type.' (id INTEGER PRIMARY KEY, value STRING, count INTEGER)');
             $stmt = $sqlite->prepare('INSERT INTO '.$type.' (value, count) VALUES(:value, :count)');
 
-            $res = $this->query($query);
-
             $total = 0;
-            foreach($res as $k => $v) {
-                $stmt->bindValue(':value', $k, SQLITE3_TEXT);
-                $stmt->bindValue(':count', $v[0], SQLITE3_INTEGER);
+            foreach($res as $v) {
+                preg_match('/^(.*)=(\d+)/is', $v[0], $r);
+                $value = $r[1];
+                $count = $r[2];
+                $stmt->bindValue(':value', $value, SQLITE3_TEXT);
+                $stmt->bindValue(':count', $count, SQLITE3_INTEGER);
                 $stmt->execute();
                 $total++;
             }
