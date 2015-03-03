@@ -63,6 +63,9 @@ class Appinfo extends \Report\Content {
                             'composer autoload'          => 'Composer/Autoload',
                     ),
 
+                    // filled later
+                    'Composer Packages' => array(),
+
                     'Namespaces' => array(
                             'Namespaces'              => 'Namespaces/Namespacesnames',
                             'Vendor'                  => 'Namespaces/Vendor',
@@ -262,6 +265,7 @@ class Appinfo extends \Report\Content {
                 );
 
     public function collect() {
+        // collecting information for Extensions
         $themed = \Analyzer\Analyzer::getThemeAnalyzers('Appinfo');
     
         foreach($this->extensions as $section => $hash) {
@@ -294,21 +298,6 @@ class Appinfo extends \Report\Content {
 
                 $analyzer = \Analyzer\Analyzer::getInstance($a, $this->neo4j);
                 $this->array[$section][$name] = $analyzer->hasResults() == 'true' ? 'Yes' : 'No';
-                /*
-                $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('/', '\\\\', $ext)."']].out.any()"; 
-                try {
-                    $vertices = $this->query($queryTemplate);
-    
-                    $v = $vertices[0][0];
-                    $this->array[$section][$name] = $v == 'true' ? 'Yes' : 'No';
-                } catch (Exception $e) {
-                    print "Error for appinfo : \n".
-                          "$queryTemplate : \n".
-                          $e->getMessage()."\n".
-                          "\n";
-                    // empty catch ? 
-                }
-                */
             }
             
             if ($section == 'Extensions') {
@@ -323,6 +312,15 @@ class Appinfo extends \Report\Content {
                     }
                 });
             }
+        }
+    
+        // collecting information for Composer
+        $packages = \Analyzer\Analyzer::getInstance('Composer/PackagesNames', $this->neo4j);
+        
+        if ($packages->hasResults()) {
+            $this->array['Composer Packages'] = $packages->toArray();
+        } else {
+            unset($this->array['Composer Packages']);
         }
     }
 }
