@@ -1,0 +1,19 @@
+<?php
+Label : CODE
+  ;
+  Label : ELEMENT
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        Concatenation
+        Label : CONCAT
+          PHP_EOL
+        Label : CONCAT
+          $line_content
+  Label : ELEMENT
+    A
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $a
