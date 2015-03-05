@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Not extends Tokenizer {
-    /* 18 methods */
+    /* 19 methods */
     public function testNot01()  { $this->generic_test('Not.01'); }
     public function testNot02()  { $this->generic_test('Not.02'); }
     public function testNot03()  { $this->generic_test('Not.03'); }
@@ -26,5 +26,6 @@ class Not extends Tokenizer {
     public function testNot16()  { $this->generic_test('Not.16'); }
     public function testNot17()  { $this->generic_test('Not.17'); }
     public function testNot18()  { $this->generic_test('Not.18'); }
+    public function testNot19()  { $this->generic_test('Not.19'); }
 }
 ?>

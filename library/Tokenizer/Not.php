@@ -32,7 +32,8 @@ class Not extends TokenAuto {
                                              'atom' => 'none'),
                                   1 => array('atom' => 'yes'),
                                   2 => array('filterOut' => array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
-                                                                  'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', 'T_INC', 'T_DEC' )),
+                                                                  'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', 'T_INC', 'T_DEC',
+                                                                  'T_INSTANCEOF' )),
         );
         
         $this->actions = array('transform'    => array( 1 => 'NOT'),
