@@ -38,7 +38,7 @@ class Vendor extends Analyzer\Analyzer {
     public function toArray() {
         $analyzer = str_replace('\\', '\\\\', get_class($this));
         $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out.fullcode.tokenize(\" \")[1]"; 
-        $vertices = $this->query($this->client, $queryTemplate);
+        $vertices = $this->query($this->neo4j, $queryTemplate);
 
         $report = array();
         if (count($vertices) > 0) {

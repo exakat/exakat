@@ -27,7 +27,7 @@ use Everyman\Neo4j\Client,
     Everyman\Neo4j\Index\NodeIndex;
 
 class Analyzer {
-    protected $client = null;
+    protected $neo4j = null;
     protected $code = null;
 
     protected $description = null;
@@ -68,8 +68,8 @@ class Analyzer {
     
     static public $docs = null;
 
-    public function __construct($client) {
-        $this->client = $client;
+    public function __construct(Client $client) {
+        $this->neo4j = $client;
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = str_replace('\\', '\\\\', $this->analyzer);
         $this->analyzerIsNot($this->analyzer);
@@ -328,7 +328,7 @@ GREMLIN;
         }
 
         try {
-            $result = new \Everyman\Neo4j\Gremlin\Query($this->client, $queryString, $arguments);
+            $result = new \Everyman\Neo4j\Gremlin\Query($this->neo4j, $queryString, $arguments);
             return $result->getResultSet();
         } catch (\Exception $e) {
             $message = $e->getMessage();
@@ -801,6 +801,7 @@ GREMLIN;
         foreach($context as &$c) {
             $c = 'context["'.$c.'"] == '.$context.'["'.$c.'"] ';
         }
+        unset($c);
         $context = join(' && ', $context);
         
         $this->addMethod('filter{ '.$context.' }');
