@@ -59,8 +59,8 @@ class Csv {
         $res = shell_exec(<<<SHELL
 
 cd ./batch-import
-java -server -Dfile.encoding=UTF-8 -Xmx4G -jar target/batch-import-jar-with-dependencies.jar ../{$config->neo4j_dir}/data/graph.db ../nodes.csv ../rels.csv 2>/dev/null
-cd ../{$config->neo4j_dir}/
+java -server -Dfile.encoding=UTF-8 -Xmx4G -jar target/batch-import-jar-with-dependencies.jar ../{$config->neo4j_folder}/data/graph.db ../nodes.csv ../rels.csv 2>/dev/null
+cd ../{$config->neo4j_folder}/
 ./bin/neo4j restart
 sleep 1
 
