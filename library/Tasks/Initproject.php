@@ -56,20 +56,20 @@ class Initproject implements Tasks {
     private function init_project($project, $repo_url) {
         $config = \Config::factory();
         
-        if (!file_exists(''.$config->projects_root.'/projects/'.$project)) {
-            mkdir(''.$config->projects_root.'/projects/'.$project, 0755);
+        if (!file_exists($config->projects_root.'/projects/'.$project)) {
+            mkdir($config->projects_root.'/projects/'.$project, 0755);
         } else {
-            print ''.$config->projects_root.'/projects/'.$project.' already exists. Reusing'."\n";
+            print $config->projects_root.'/projects/'.$project.' already exists. Reusing'."\n";
         }
 
-        if (!file_exists(''.$config->projects_root.'/projects/'.$project.'/log/')) {
-            mkdir(''.$config->projects_root.'/projects/'.$project.'/log/', 0755);
+        if (!file_exists($config->projects_root.'/projects/'.$project.'/log/')) {
+            mkdir($config->projects_root.'/projects/'.$project.'/log/', 0755);
         } else {
-            print ''.$config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring'."\n";
+            print $config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring'."\n";
             return null; 
         }
 
-        if (!file_exists(''.$config->projects_root.'/projects/'.$project.'/config.ini')) {
+        if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
             // default initial config. Found in test project.
             $configIni = <<<INI
 phpversion = 5.6
@@ -88,14 +88,14 @@ project_url = "$repo_url";
 
 INI;
 
-            file_put_contents(''.$config->projects_root.'/projects/'.$project.'/config.ini', $configIni);
+            file_put_contents($config->projects_root.'/projects/'.$project.'/config.ini', $configIni);
         } else {
-            print ''.$config->projects_root.'/projects/'.$project.'/config.ini already exists. Ignoring'."\n";
+            print $config->projects_root.'/projects/'.$project.'/config.ini already exists. Ignoring'."\n";
         }
 
-        print shell_exec('chmod -R g+w '.$config->projects_root.'/projects/'.$project);
+        shell_exec('chmod -R g+w '.$config->projects_root.'/projects/'.$project);
 
-        if (!file_exists(''.$config->projects_root.'/projects/'.$project.'/code/')) {
+        if (!file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
             if ($repo_url === '' || $repo_url === false) {
                 print "Installing empty code\n";
                 print shell_exec("cd {$config->projects_root}/projects/$project; mkdir code");
