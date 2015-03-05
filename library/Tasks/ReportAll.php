@@ -27,8 +27,6 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Gremlin\Query;
 
 class ReportAll implements Tasks {
-    private $client = null;
-    
     public function run(\Config $config) {
         $formats = array('Markdown', 'Sqlite', 'Devoops', 'Html', 'Text', /* 'pdf', 'odt' */);
         $reportType = 'Premier';

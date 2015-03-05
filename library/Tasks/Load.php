@@ -502,7 +502,7 @@ class Load implements Tasks {
                                                   ->setProperty('modifiedBy', 'bin/load14-2')
                                                   ->setProperty('code', $token[1])
                                                   ->save();
-                                                  ;
+
                     $T[$Tid]->relateTo($inline, 'ELEMENT')->save();
                 } elseif ($token[3]           == 'T_INLINE_HTML' && 
                           isset($tokens[$id + 1]) &&
@@ -526,7 +526,7 @@ class Load implements Tasks {
                                                   ->setProperty('modifiedBy', 'bin/load15-2')
                                                   ->setProperty('code', $token[1])
                                                   ->save();
-                                                  ;
+
                     $T[$Tid]->relateTo($inline, 'ELEMENT')->save();
                 } elseif ($token[3] == 'T_ELSE' &&
                           is_string($tokens[$id + 1]) &&

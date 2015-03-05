@@ -27,12 +27,10 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Gremlin\Query;
 
 class Project implements Tasks {
-    private $client = null;
     private $project_dir = '.';
     private $executable = 'exakat';
     
     public function run(\Config $config) {
-        $this->client = new Client();
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
         if ($config->is_phar) {
             $this->executable = basename(dirname(dirname(__DIR__)));

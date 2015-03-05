@@ -27,8 +27,6 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Gremlin\Query;
 
 class Tokenizer implements Tasks {
-    private $client = null;
-    
     public function run(\Config $config) {
         $begin = microtime(true);
 

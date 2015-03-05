@@ -27,8 +27,6 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Gremlin\Query;
 
 class Report implements Tasks {
-    private $client = null;
-    
     public function run(\Config $config) {
         $reportClass = "\\Report\\Report\\".ucfirst(strtolower($config->report));
 

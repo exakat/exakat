@@ -27,8 +27,6 @@ use Everyman\Neo4j\Client,
 	Everyman\Neo4j\Gremlin\Query;
 
 class Results implements Tasks {
-    private $client = null;
-    
     public function run(\Config $config) {
         $client = new Client();
         

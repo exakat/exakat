@@ -28,8 +28,6 @@ use Everyman\Neo4j\Client,
     Everyman\Neo4j\Index\NodeIndex;
 
 class Log2csv implements Tasks {
-    private $client = null;
-    
     public function run(\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project.'/log/tokenizer.log')) {
             print "No log/tokenizer.log. Aborting\n";
