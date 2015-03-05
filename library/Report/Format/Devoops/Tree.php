@@ -51,7 +51,7 @@ class Tree extends \Report\Format\Devoops {
         switch($tag) {
             case 'Yes' : 
                 return '<i class="fa fa-check"></i>';
-            case 'Not run' : 
+            case 'No' : 
                 return '<i class="fa fa-times-circle-o"></i>';
             case 'Not run' : 
                 return '&nbsp;';
