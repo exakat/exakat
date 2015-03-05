@@ -1113,21 +1113,64 @@ class Load implements Tasks {
         static $states = array();
         static $states_id = 0;
     
-        if ($token_value == 'T_QUESTION' ) { $states[] = 'Ternary'; $states_id++; return ''; }
+        if ($token_value == 'T_QUESTION' ) { 
+            $states[] = 'Ternary'; 
+            $states_id++; 
+            return ''; 
+        }
 
-        if ($token_value == 'T_SWITCH' )   { $states[] = 'Switch';  $states_id++; return ''; }
-        if ($token_value == 'T_CASE' )     { $states[] = 'Case';    $states_id++; return ''; }
-        if ($token_value == 'T_DEFAULT' )  { $states[] = 'Default'; $states_id++; return ''; }
+        if ($token_value == 'T_SWITCH' )   { 
+            $states[] = 'Switch';  
+            $states_id++; 
+            return ''; 
+        }
+        if ($token_value == 'T_CASE' )     { 
+            $states[] = 'Case';    
+            $states_id++; 
+            return ''; 
+        }
+        if ($token_value == 'T_DEFAULT' )  { 
+            $states[] = 'Default'; 
+            $states_id++; 
+            return ''; 
+        }
 
-        if ($token_value == 'T_FOR' )      { $states[] = 'For';     $states_id++; return ''; }
-        if ($token_value == 'T_FOREACH' )  { $states[] = 'Foreach'; $states_id++; return ''; }
-        if ($token_value == 'T_WHILE' )    { $states[] = 'While';   $states_id++; return ''; }
+        if ($token_value == 'T_FOR' )      { 
+            $states[] = 'For';
+            $states_id++; 
+            return ''; 
+        }
+        if ($token_value == 'T_FOREACH' )  { 
+            $states[] = 'Foreach'; 
+            $states_id++; 
+            return ''; 
+        }
+        if ($token_value == 'T_WHILE' )    { 
+            $states[] = 'While';   
+            $states_id++; 
+            return ''; 
+        }
 
-        if ($token_value == 'T_IF' )       { $states[] = 'If';      $states_id++; return ''; }
-        if ($token_value == 'T_ELSEIF' )   { $states[] = 'Elseif';  $states_id++; return ''; }
-        if ($token_value == 'T_ELSE' )     { $states[] = 'Else';    $states_id++; return ''; }
+        if ($token_value == 'T_IF' )       { 
+            $states[] = 'If';      
+            $states_id++; 
+            return ''; 
+        }
+        if ($token_value == 'T_ELSEIF' )   { 
+            $states[] = 'Elseif';  
+            $states_id++; 
+            return ''; 
+        }
+        if ($token_value == 'T_ELSE' )     { 
+            $states[] = 'Else';    
+            $states_id++; 
+            return ''; 
+        }
 
-        if ($token_value == 'T_COLON' )    { $state = array_pop($states);  return $state; }
+        if ($token_value == 'T_COLON' )    { 
+            $state = array_pop($states);  
+            return $state;
+        }
     
         return '';
     }
