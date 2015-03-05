@@ -79,8 +79,7 @@ class TokenAuto extends Token {
         }
         
         if (!empty($this->conditions)) {
-            print "Some condition were not used! \n".__METHOD__."\n";
-            die();
+            throw new UnprocessedCondition();
         }
         
         $query = $query.'.'.implode('.', $queryConditions);
