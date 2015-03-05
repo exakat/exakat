@@ -54,11 +54,13 @@ class Csv {
         fclose(static::$fp_rels);
         fclose(static::$fp_nodes);
         
+        $config = \Config::factory();
+        
         $res = shell_exec(<<<SHELL
 
 cd ./batch-import
-java -server -Dfile.encoding=UTF-8 -Xmx4G -jar target/batch-import-jar-with-dependencies.jar ../neo4j/data/graph.db ../nodes.csv ../rels.csv 2>/dev/null
-cd ../neo4j/
+java -server -Dfile.encoding=UTF-8 -Xmx4G -jar target/batch-import-jar-with-dependencies.jar ../{$config->neo4j_dir}/data/graph.db ../nodes.csv ../rels.csv 2>/dev/null
+cd ../{$config->neo4j_dir}/
 ./bin/neo4j restart
 sleep 1
 
