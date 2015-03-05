@@ -22,7 +22,7 @@
 
 class Exakat {
     const VERSION = '0.1.0';
-    const BUILD = '113';
+    const BUILD = '120';
     
     public function execute(Config $config) {
         switch ($config->command) {
@@ -124,9 +124,10 @@ class Exakat {
             case 'version' : 
             default : 
                 $version = self::VERSION;
+                $build = self::BUILD;
                 $date = date('r', filemtime(__FILE__));
                 print "Exakat : @ 2014-2015 Damien Seguy. 
-Version : {$version} - $date\n";
+Version : {$version} - Build $build - $date\n";
                 break;
         }
     }
