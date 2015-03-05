@@ -28,115 +28,42 @@ class Doctor implements Tasks {
     function run(\Config $config) {
         $stats = array();
 
-        // check PHP
+        $stats = array_merge($stats, $this->checkPreRequisite($config));
+        $stats = array_merge($stats, $this->checkAutoInstall($config));
+        $stats = array_merge($stats, $this->checkOptional($config));
+
+        $doctor = '';
+        foreach($stats as $section => $details) {
+            $doctor .= "$section : \n";
+            foreach($details as $k => $v) {
+                $doctor .= '    '.substr("$k                          ", 0, 20).' : '.$v."\n";
+            }
+            $doctor .= "\n";
+        }
+        
+        return $doctor;
+    }
+
+    private function checkPreRequisite($config) {
+// Compulsory
+        // check for PHP
         $stats['php']['version'] = phpversion();
-        $stats['php']['curl'] = extension_loaded('curl') ? 'Yes' : 'No';
+        $stats['php']['curl']    = extension_loaded('curl')    ? 'Yes' : 'No';
         $stats['php']['sqlite3'] = extension_loaded('sqlite3') ? 'Yes' : 'No';
-
-        // check PHP 5.2
-        $version = shell_exec('php52 -r "echo phpversion();" 2>&1');
-        if (strpos($version, 'not found') !== false) {
-            $stats['PHP 5.2']['installed'] = 'No';
-        } else {
-            $stats['PHP 5.2']['version'] = $version;
-            $stats['PHP 5.2']['short_open_tags'] = shell_exec('php52 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-            $stats['PHP 5.2']['timezone'] = shell_exec('php52 -r "echo ini_get(\'date.timezone\');" 2>&1');
-        }
-
-        // check PHP 5.3
-        $stats['PHP 5.3']['version'] = shell_exec('php53 -r "echo phpversion();" 2>&1');
-        $stats['PHP 5.3']['short_open_tags'] = shell_exec('php53 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-        $stats['PHP 5.3']['timezone'] = shell_exec('php53 -r "echo ini_get(\'date.timezone\');" 2>&1');
-
-        // check PHP 5.4
-        $stats['PHP 5.4']['version'] = shell_exec('php54 -r "echo phpversion();" 2>&1');
-        $stats['PHP 5.4']['short_open_tags'] = shell_exec('php54 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-        $stats['PHP 5.4']['timezone'] = shell_exec('php54 -r "echo ini_get(\'date.timezone\');" 2>&1');
-
-        // check PHP 5.5
-        $stats['PHP 5.5']['version'] = shell_exec('php55 -r "echo phpversion();" 2>&1');
-        $stats['PHP 5.5']['short_open_tags'] = shell_exec('php55 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-        $stats['PHP 5.5']['timezone'] = shell_exec('php55 -r "echo ini_get(\'date.timezone\');" 2>&1');
-
-        // check PHP 5.6
-        $stats['PHP 5.6']['version'] = shell_exec('php56 -r "echo phpversion();" 2>&1');
-        $stats['PHP 5.6']['short_open_tags'] = shell_exec('php56 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-        $stats['PHP 5.6']['timezone'] = shell_exec('php56 -r "echo ini_get(\'date.timezone\');" 2>&1');
-
-        // check PHP 7
-        $version = shell_exec('php70 -r "echo phpversion();" 2>&1');
-        if (strpos($version, 'not found') !== false) {
-            $stats['PHP 7.0']['installed'] = 'No';
-        } else {
-            $stats['PHP 7.0']['version'] = $version;
-            $stats['PHP 7.0']['short_open_tags'] = shell_exec('php70 -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-            $stats['PHP 7.0']['timezone'] = shell_exec('php70 -r "echo ini_get(\'date.timezone\');" 2>&1');
-        }
-
-        // wkhtmltopdf
-        $res = shell_exec('wkhtmltopdf --version 2>&1');
-        if (preg_match('/command not found/is', $res)) {
-            $stats['wkhtmltopdf']['installed'] = 'No';
-        } elseif (preg_match('/wkhtmltopdf\s+([0-9\.]+)/is', $res, $r)) {
-            $stats['wkhtmltopdf']['installed'] = 'Yes';
-            $stats['wkhtmltopdf']['version'] = $r[1];
-        } else {
-            $stats['wkhtmltopdf']['error'] = $res;
-        }
-
-        // zip
-        $res = shell_exec('zip -v');
-        if (preg_match('/command not found/is', $res)) {
-            $stats['zip']['installed'] = 'No';
-        } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {
-            $stats['zip']['installed'] = 'Yes';
-            $stats['zip']['version'] = $r[1];
-        } else {
-            $stats['zip']['error'] = $res;
-        }
-
-        // phploc
-        $res = shell_exec('phploc --version 2>&1');
-        if (preg_match('/command not found/is', $res)) {
-            $stats['phploc']['installed'] = 'No';
-        } elseif (preg_match('/phploc\s+([0-9\.]+)/is', $res, $r)) {
-            $stats['phploc']['installed'] = 'Yes';
-            $stats['phploc']['version'] = $r[1];
-        } else {
-            $stats['phploc']['error'] = $res;
-        }
-
-        // phpunit
-        $res = shell_exec('phpunit --version 2>&1');
-        if (preg_match('/command not found/is', $res)) {
-            $stats['phpunit']['installed'] = 'No';
-        } elseif (preg_match('/PHPUnit\s+([0-9\.]+)/is', $res, $r)) {
-            $stats['phpunit']['installed'] = 'Yes';
-            $stats['phpunit']['version'] = $r[1];
-            $stats['phpunit']['optional'] = 'Yes';
-        } else {
-            $stats['phpunit']['error'] = $res;
-            $stats['phpunit']['optional'] = 'Yes';
-        }
 
         // java
         $res = shell_exec('java -version 2>/tmp/javaversion.txt; cat /tmp/javaversion.txt; rm /tmp/javaversion.txt');
         if (preg_match('/command not found/is', $res)) {
             $stats['java']['installed'] = 'No';
+            $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
         } elseif (preg_match('/java version "(.*)"/is', $res, $r)) {
+            list($line1, $line2,) = explode("\n", $res);
             $stats['java']['installed'] = 'Yes';
+            $stats['java']['type'] = trim($line2);
             $stats['java']['version'] = $r[1];
         } else {
             $stats['java']['error'] = $res;
-        }
-
-        // config
-        if (file_exists($config->dir_root.'/config/config.ini')) {
-            $stats['config']['created'] = 'Yes';
-
-            $ini = parse_ini_file('config/config.ini');
-        } else {
-            $stats['config']['created'] = 'No';
+            $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
         }
 
         // neo4j
@@ -149,6 +76,7 @@ class Doctor implements Tasks {
             $file = file_get_contents('neo4j/conf/neo4j-wrapper.conf');
             if (!preg_match('/wrapper.java.additional=-XX:MaxPermSize=(\d+\w)/is', $file, $r)) {
                 $stats['neo4j']['MaxPermSize'] = 'Unset (64M)';
+                $stats['neo4j']['MaxPermSize warning'] = 'Set MaxPermSize to 512 or more in neo4j/conf/neo4j-wrapper.conf, with "wrapper.java.additional=-XX:MaxPermSize=512m" around line 20';
             } else {
                 $stats['neo4j']['MaxPermSize'] = $r[1];
             }
@@ -160,13 +88,19 @@ class Doctor implements Tasks {
                 $stats['neo4j']['port'] = $r[1];
             }
     
-            $json = @file_get_contents('http://'.$ini['neo4j_host'].':'.$ini['neo4j_port'].'/db/data/');
-            $json = json_decode($json);
-            if (isset($json->extensions->GremlinPlugin)) {
-                $stats['neo4j']['gremlin'] = 'Yes';
-                $stats['neo4j']['gremlin-url'] = $json->extensions->GremlinPlugin->execute_script;
+            $json = file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/');
+            if (empty($json)) {
+                $stats['neo4j']['running'] = 'No';
             } else {
-                $stats['neo4j']['gremlin'] = 'No';
+                $stats['neo4j']['running'] = 'Yes';
+                $json = json_decode($json);
+                if (isset($json->extensions->GremlinPlugin)) {
+                    $stats['neo4j']['gremlin'] = 'Yes';
+                    $stats['neo4j']['gremlin-url'] = $json->extensions->GremlinPlugin->execute_script;
+                } else {
+                    $stats['neo4j']['gremlin'] = 'No';
+                    $stats['neo4j']['gremlin-installation'] = 'Install gremlin plugin for neo4j';
+                }
             }
         }
 
@@ -185,42 +119,159 @@ class Doctor implements Tasks {
                 $stats['batch-import']['version'] = trim($file[0]);
             }
     
-            if (!file_exists('./batch-import/sampleme/')) {
-                $stats['batch-import']['sampleme'] = 'No';
-            } else {
-                $stats['batch-import']['sampleme'] = 'Yes';
-            }
-    
             $res = explode("\n", shell_exec('mvn -v 2>&1'));
             $stats['batch-import']['maven'] = trim($res[0]);
         }
 
+        // phploc
+        $res = shell_exec('phploc --version 2>&1');
+        if (preg_match('/command not found/is', $res)) {
+            $stats['phploc']['installed'] = 'No';
+        } elseif (preg_match('/phploc\s+([0-9\.]+)/is', $res, $r)) {
+            $stats['phploc']['installed'] = 'Yes';
+            $stats['phploc']['version'] = $r[1];
+        } else {
+            $stats['phploc']['error'] = $res;
+        }
+
+        // zip
+        $res = shell_exec('zip -v');
+        if (preg_match('/command not found/is', $res)) {
+            $stats['zip']['installed'] = 'No';
+        } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {
+            $stats['zip']['installed'] = 'Yes';
+            $stats['zip']['version'] = $r[1];
+        } else {
+            $stats['zip']['error'] = $res;
+        }
+
+        return $stats;
+    }
+    
+    private function checkAutoInstall(\Config $config) {
+        $stats = array();
+        
+        // config
+        if (!file_exists($config->dir_root.'/config')) {
+            $res = mkdir($config->dir_root.'/config', 0755);
+        }
+
+        if (!file_exists($config->dir_root.'/config/config.ini')) {
+            $ini = <<<INI
+neo4j_host   = '127.0.0.1';
+neo4j_port   = '7474';
+neo4j_folder = 'neo4j';
+
+; where and which PHP executable are available
+php          = /usr/local/bin/php
+
+;php53        = /usr/bin/php53
+;php54        = /usr/bin/php54
+;php55        = /usr/bin/php55
+;php56        = /usr/bin/php56
+;php70        = /usr/bin/php70
+
+INI;
+            file_put_contents($config->dir_root.'/config/config.ini', $ini);
+        }
+        
+        if (!file_exists($config->dir_root.'/config/')) {
+            $stats['folders']['config-folder'] = 'No';
+        } elseif (file_exists($config->dir_root.'/config/config.ini')) {
+            $stats['folders']['config-folder'] = 'Yes';
+            $stats['folders']['config.ini'] = 'Yes';
+
+            $ini = parse_ini_file('config/config.ini');
+        } else {
+            $stats['folders']['config-folder'] = 'Yes';
+            $stats['folders']['config.ini'] = 'No';
+        }
+
         // projects
         if (file_exists($config->dir_root.'/projects/')) {
-            $stats['projects']['created'] = 'Yes';
+            $stats['folders']['projects folder'] = 'Yes';
         } else {
-            $stats['projects']['created'] = 'No';
+            $res = mkdir($config->dir_root.'/projects/', 0755);
+            if (file_exists($config->dir_root.'/projects/')) {
+                $stats['folders']['projects folder'] = 'Yes';
+            } else {
+            $stats['folders']['projects folder'] = 'No';
+            }
         }
 
-        // composer
-        $res = trim(shell_exec('composer about --version'));
-        // remove colors from shell syntax
-        $res = preg_replace('/\e\[[\d;]*m/', '', $res);
-        if (preg_match('/ version ([0-9\.a-z\-]+)/', $res, $r)) {//
-            $stats['composer']['installed'] = 'Yes';
-            $stats['composer']['version'] = $r[1];
+        return $stats;
+    }
+
+    private function checkOptional(\Config $config) {
+        $stats = array();
+
+        // check PHP 5.2
+        if (!$config->php52) {
+            $stats['PHP 5.2']['configured'] = 'No';
         } else {
-            $stats['composer']['installed'] = 'No';
+            $version = shell_exec($config->php52.' -r "echo phpversion();" 2>&1');
+            if (strpos($version, 'not found') !== false) {
+                $stats['PHP 5.2']['installed'] = 'No';
+            } else {
+                $stats['PHP 5.2']['version'] = $version;
+                $stats['PHP 5.2']['short_open_tags'] = shell_exec($config->php52.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+                $stats['PHP 5.2']['timezone'] = shell_exec($config->php52.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+            }
         }
 
-        // svn
-        $res = trim(shell_exec('svn --version'));
-        if (preg_match('/svn, version ([0-9\.]+) /', $res, $r)) {//
-            $stats['svn']['installed'] = 'Yes';
-            $stats['svn']['version'] = $r[1];
+        // check PHP 5.3
+        if (!$config->php53) {
+            $stats['PHP 5.3']['configured'] = 'No';
         } else {
-            $stats['svn']['installed'] = 'No';
-            $stats['svn']['optional'] = 'Yes';
+            $stats['PHP 5.3']['configured'] = 'Yes';
+            $stats['PHP 5.3']['version'] = shell_exec($config->php53.' -r "echo phpversion();" 2>&1');
+            $stats['PHP 5.3']['short_open_tags'] = shell_exec($config->php53.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+            $stats['PHP 5.3']['timezone'] = shell_exec($config->php53.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+        }
+        
+        // check PHP 5.4
+        if (!$config->php54) {
+            $stats['PHP 5.4']['configured'] = 'No';
+        } else {
+            $stats['PHP 5.4']['configured'] = 'Yes';
+            $stats['PHP 5.4']['version'] = shell_exec($config->php54.' -r "echo phpversion();" 2>&1');
+            $stats['PHP 5.4']['short_open_tags'] = shell_exec($config->php54.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+            $stats['PHP 5.4']['timezone'] = shell_exec($config->php54.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+        }
+        
+        // check PHP 5.5
+        if (!$config->php55) {
+            $stats['PHP 5.5']['configured'] = 'No';
+        } else {
+            $stats['PHP 5.5']['configured'] = 'Yes';
+            $stats['PHP 5.5']['version'] = shell_exec($config->php55.' -r "echo phpversion();" 2>&1');
+            $stats['PHP 5.5']['short_open_tags'] = shell_exec($config->php55.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+            $stats['PHP 5.5']['timezone'] = shell_exec($config->php55.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+        }
+        
+        // check PHP 5.6
+        if (!$config->php56) {
+            $stats['PHP 5.6']['configured'] = 'No';
+        } else {
+            $stats['PHP 5.6']['configured'] = 'Yes';
+            $stats['PHP 5.6']['version'] = shell_exec($config->php56.' -r "echo phpversion();" 2>&1');
+            $stats['PHP 5.6']['short_open_tags'] = shell_exec($config->php56.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+            $stats['PHP 5.6']['timezone'] = shell_exec($config->php56.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+        }
+        
+        // check PHP 7
+        if (!$config->php56) {
+            $stats['PHP 7.0']['configured'] = 'No';
+        } else {
+            $stats['PHP 7.0']['configured'] = 'Yes';
+            $version = shell_exec($config->php70.' -r "echo phpversion();" 2>&1');
+            if (strpos($version, 'not found') !== false) {
+                $stats['PHP 7.0']['installed'] = 'No';
+            } else {
+                $stats['PHP 7.0']['version'] = $version;
+                $stats['PHP 7.0']['short_open_tags'] = shell_exec($config->php70.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+                $stats['PHP 7.0']['timezone'] = shell_exec($config->php70.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+            }
         }
 
         // hg
@@ -233,16 +284,58 @@ class Doctor implements Tasks {
             $stats['hg']['optional'] = 'Yes';
         }
 
-        $doctor = '';
-        foreach($stats as $section => $details) {
-            $doctor .= "$section : \n";
-            foreach($details as $k => $v) {
-                $doctor .= '    '.$k.' : '.$v."\n";
-            }
-            $doctor .= "\n";
+        // svn
+        $res = trim(shell_exec('svn --version'));
+        if (preg_match('/svn, version ([0-9\.]+) /', $res, $r)) {//
+            $stats['svn']['installed'] = 'Yes';
+            $stats['svn']['version'] = $r[1];
+        } else {
+            $stats['svn']['installed'] = 'No';
+            $stats['svn']['optional'] = 'Yes';
         }
-        
-        return $doctor;
+
+/*
+
+        // composer
+        $res = trim(shell_exec('composer about --version'));
+        // remove colors from shell syntax
+        $res = preg_replace('/\e\[[\d;]*m/', '', $res);
+        if (preg_match('/ version ([0-9\.a-z\-]+)/', $res, $r)) {//
+            $stats['composer']['installed'] = 'Yes';
+            $stats['composer']['version'] = $r[1];
+        } else {
+            $stats['composer']['installed'] = 'No';
+        }
+*/
+
+/*
+        // phpunit
+        $res = shell_exec('phpunit --version 2>&1');
+        if (preg_match('/command not found/is', $res)) {
+            $stats['phpunit']['installed'] = 'No';
+        } elseif (preg_match('/PHPUnit\s+([0-9\.]+)/is', $res, $r)) {
+            $stats['phpunit']['installed'] = 'Yes';
+            $stats['phpunit']['version'] = $r[1];
+            $stats['phpunit']['optional'] = 'Yes';
+        } else {
+            $stats['phpunit']['error'] = $res;
+            $stats['phpunit']['optional'] = 'Yes';
+        }
+*/
+
+/*
+        // wkhtmltopdf
+        $res = shell_exec('wkhtmltopdf --version 2>&1');
+        if (preg_match('/command not found/is', $res)) {
+            $stats['wkhtmltopdf']['installed'] = 'No';
+        } elseif (preg_match('/wkhtmltopdf\s+([0-9\.]+)/is', $res, $r)) {
+            $stats['wkhtmltopdf']['installed'] = 'Yes';
+            $stats['wkhtmltopdf']['version'] = $r[1];
+        } else {
+            $stats['wkhtmltopdf']['error'] = $res;
+        }
+*/
+        return $stats;
     }
 }
 
