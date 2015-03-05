@@ -323,8 +323,6 @@ Find nested incompatible conditions like this : (Also over multiples functions c
 if ($destination > 0) { 
         if ($destination == 0) {
 
-Empty function that override another are not useless. 
-
 $a['b'] = 3;  print "$a[b]\n"; : b is not a constant! 
 
 Validate magic methods arguments in the definition
@@ -837,8 +835,6 @@ Spot properties that are in the parents/traits too.
 
 // DynamicParams : use may be a trait => appears in USE inside a class. 
 
-Check that variables inside a string exist in the current context
-
 Inconsistent encoding : collect a wide collection of encoding usage (encode, decode) and check for inconsistencies
 
 instanceof should apply to arguments or incoming values, not locally created one (factory?)
@@ -889,41 +885,25 @@ neo4j 2.2.0ME 4 : ditch batch-import
     migration to Cypher ? 
     
 Packaging PHar
-    Remove MySQL
-    check globs()
-    remove shell_exec() (the one that relay to other PHP tasks)
-    check for PHP versions in the .ini
-
     Remove die, print_r, var_dump.
     Vérifier que les tests fonctionnent
     Que faire des scripts de tests? 
-    Check doctor for phpunit
     add more checks on incoming values (white lists)
     Check phar::mount with SQLITE ? 
     Adds an error handler
     add devoops to phar
     Finish devoops
-        Default page
-        Mention in case of Chrome
-        Breadcrumb
-        Check internal links
-        check compability 5.3 (the tableau)
-        check internal links 
-        add (more) in the top lead
-        Tree view
-        Configuration view
-        Link to Stats
-        Custom Classes : ?
-        Removed top informations 
         Change the icons in the menu
-        Tableau avec les rappels en haut à droite
-        Add link back to dashboard from within detailled page.
-        Add devoops to Annex
         Check speed of production (40s?)
         Log speed of production in database 
-    
+        Review infobox
+        check SEO
+        check internal links 
+        Add link back to dashboard from within detailled page.
+        Add link back to exakat.com in index.html
     
 Useless '' in a concatenation ? ('' . $a. $b. ' ')
+
 this variable is always concatenated (added, multiplicated, process) with this function. This could be merged.
 
 DeadCode after this :  
@@ -945,4 +925,79 @@ Add a status that tells if a project is being run
 Adds progress information in datastore
 
 Suggest moving out of rand to mt_rand.
-Suggest avoiing time for initialising srand()
+Suggest avoiding time for initialising srand()
+
+Add a check in appinfo (appinfo -> theme and theme -> appinfo). Shoudl go to dasboard.
+
+is allow_url_fopen useful ? 
+
+Break down 'Directive' into smaller class (or export to some external file for translation...)
+Use manual documentation
+Spot missing extensions (for upgrade)
+
+add checks in robo for cleaning the code before putting it in phar : php lint, ini lint, sqlite integrity check, etc.
+
+magick number : suggest replacement of literal if a constant is available.
+Ignore magic number if defined in a constant (define or const)
+
+Refresh the demo online (prelude, volcano, hypewall)
+
+Collect API for wordpress, spot unknown one (all prefixed with wp_?)
+
+Integrate https://wiki.php.net/rfc/remove_deprecated_functionality_in_php7 into Compatiblity 7
+
+add link to github files (in the code)
+Find a way to open a local file (how?)
+
+Inconsistent Expression : If than doesn't do the same in both branches. This way, If may inherit some of the characteristics of its elements (like finish script).
+What about unbalanced if ? 
+Switch may have this too
+
+add pandoc to the doctor
+
+Detect external binary in shell_exec calls 
+
+Publish some of the databases in a separate github folder
+
+Automate the sending of report online with Robo (in project admin)
+(remove the Chrome check)
+
+Add a task to clean a project (remove all)
+
+error reporting with integer? 
+error_reporting(0)
+
+Wordpress : 
+detect wordpress plugin (global, api call)
+Note that it's best to use the appropriate API functions when available, instead of modifying globals directly.
+List of global variable (don't break a sweat)
+Constant list : http://wpengineer.com/2382/wordpress-constants-overview/ (or extracted from history)
+Accessing other globals besides the ones listed below is not recommended.
+
+Property definedAbove
+Property definedBelow
+
+Add security checks in Config
+
+Variables written twice in a row without being read (case of overloading?)
+
+Find a way to update Report with correct format in Robofile
+
+public method/property that is not used outside the class
+check for protected
+check for methods
+check for var and forgotten public
+
+Report lines and files that have actually accumulated several notices
+Have a presentation by files (errors found in a file), helping for spotting files to fix
+
+restore dashboard
+Include test for composers (do we have all needed component?)
+
+Remove dependencies
+PHPLOC
+batch-import
+
+Get slow analyzers
+Review ->raw() calls and create separate internal fixes
+Produce stats for disk/memory recommendations
