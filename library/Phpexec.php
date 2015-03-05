@@ -29,7 +29,7 @@ class Phpexec {
     
     public function __construct($phpversion) {
         $phpversion3 = substr($phpversion, 0, 3);
-        $this->isCurrentVersion = (substr(phpversion(), 0, 3) === $phpversion3);
+        $this->isCurrentVersion = substr(phpversion(), 0, 3) === $phpversion3;
         
         $config = \Config::factory();
 
@@ -60,7 +60,7 @@ class Phpexec {
 
             default: 
                 $this->phpexec = $config->php;
-        }    
+        }
 
         // prepare the configuration
         if ($this->isCurrentVersion){
