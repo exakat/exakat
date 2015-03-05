@@ -26,10 +26,10 @@ class Config {
            private $configFile     = array();
            private $commandline    = array();
            private $argv           = array();
-           public $dir_root        = '.';
-           public $projects_root   = '.';
-           public $is_phar         = true;
-           public $executable      = '';
+           public  $dir_root       = '.';
+           public  $projects_root  = '.';
+           public  $is_phar        = true;
+           public  $executable     = '';
            private $projectConfig  = array();
         
            private $options = array();
@@ -70,6 +70,10 @@ class Config {
         
         // build the actual config. Project overwrite commandline overwrites config, if any.
         $this->options = array_merge($this->configFile, $this->commandline, $this->projectConfig);
+
+        if ($this->options['neo4j_folder'][0] != '/') {
+            $this->options['neo4j_folder'] = realpath(dirname(__DIR__).'/'.$this->options['neo4j_folder']);
+        }
     }
     
     static public function factory($argv = array()) {
@@ -174,18 +178,19 @@ class Config {
             }
         }
                                  
-        $optionsValue   = array('-f'           => array('filename',    null),
-                                '-d'           => array('dirname',     null),
-                                '-p'           => array('project',     'default'),
-                                '-P'           => array('program',     null),
-                                '-R'           => array('repository',  false),
-                                '-T'           => array('thema',       null),
-                                '-report'      => array('report',      'Premier'),
-                                '-format'      => array('format',      'Text'),
-                                '-file'        => array('file',        'report'),
-                                '-style'       => array('style',       'ALL'), 
-                                '-neo4j_host'  => array('neo4j_host',  '127.0.0.1'), 
-                                '-neo4j_port'  => array('neo4j_port',  '7474'), 
+        $optionsValue   = array('-f'            => array('filename',    null),
+                                '-d'            => array('dirname',     null),
+                                '-p'            => array('project',     'default'),
+                                '-P'            => array('program',     null),
+                                '-R'            => array('repository',  false),
+                                '-T'            => array('thema',       null),
+                                '-report'       => array('report',      'Premier'),
+                                '-format'       => array('format',      'Text'),
+                                '-file'         => array('file',        'report'),
+                                '-style'        => array('style',       'ALL'), 
+                                '-neo4j_host'   => array('neo4j_host',  '127.0.0.1'), 
+                                '-neo4j_port'   => array('neo4j_port',  '7474'), 
+                                '-neo4j_folder' => array('neo4j_folder',  dirname(__DIR__).'/neo4j'), 
                                  );
 
         foreach($optionsValue as $key => $config) {
