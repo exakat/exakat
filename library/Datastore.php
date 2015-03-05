@@ -105,7 +105,8 @@ class Datastore {
         if (!$res) { 
             return null;
         } else {
-            return $res->fetchArray(SQLITE3_ASSOC)['value'];
+            $row = $res->fetchArray(SQLITE3_ASSOC);
+            return $row['value'];
         }
     }
 
@@ -237,7 +238,6 @@ SQLITE;
 
             default : 
                 throw new Exceptions\NoStructureForTable($table);
-                return false;
         }
 
         $this->sqlite->query($createTable);
