@@ -39,6 +39,7 @@ foreach($analyzers as $a) {
 
 if ($noClearPHP) {
     print count($noClearPHP)." are missing the clearPHP : \n";
+    sort($noClearPHP);
     print "  + " . join("\n  + ", $noClearPHP)."\n";
     print "\n";
 }
