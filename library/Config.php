@@ -37,7 +37,7 @@ class Config {
     private function __construct($argv) {
         $this->argv = $argv;
         
-        $this->is_phar  = (strpos(basename(dirname(__DIR__)), '.phar') !== false);
+        $this->is_phar  = strpos(basename(dirname(__DIR__)), '.phar') !== false;
         if ($this->is_phar) {
             $this->projects_root = substr(dirname(dirname(__DIR__)), 7);
             $this->executable    = $_SERVER['SCRIPT_NAME'];
@@ -72,7 +72,7 @@ class Config {
         $this->options = array_merge($this->configFile, $this->commandline, $this->projectConfig);
 
         if ($this->options['neo4j_folder'][0] != '/') {
-            $this->options['neo4j_folder'] = realpath(dirname(__DIR__).'/'.$this->options['neo4j_folder']);
+            $this->options['neo4j_folder'] = dirname($this->projects_root).'/'.$this->options['neo4j_folder'];
         }
     }
     
@@ -190,7 +190,7 @@ class Config {
                                 '-style'        => array('style',       'ALL'), 
                                 '-neo4j_host'   => array('neo4j_host',  '127.0.0.1'), 
                                 '-neo4j_port'   => array('neo4j_port',  '7474'), 
-                                '-neo4j_folder' => array('neo4j_folder',  dirname(__DIR__).'/neo4j'), 
+                                '-neo4j_folder' => array('neo4j_folder',  $this->projects_root.'/neo4j'), 
                                  );
 
         foreach($optionsValue as $key => $config) {
