@@ -12,6 +12,7 @@ if(strpos(basename(__FILE__), 'phar') !== false){
 
 $files = glob(''.DOC_ROOT.'/human/en/*'.'/*');
 $extraDocs = array();
+$noClearPHP = array();
 foreach($files as $k => $v) {
     $extraDocs[substr($v, 40, -4)] = 1;
 }
@@ -29,6 +30,17 @@ foreach($analyzers as $a) {
     if ($o->getDescription()->getDescription() === '') {
         $missingDoc[] = $a.' (human/en/'.$a.'.ini)';
     }
+    
+    $ini = parse_ini_file("human/en/$a.ini");
+    if (!isset($ini['clearphp'])) {
+        $noClearPHP[] = $a;
+    }
+}
+
+if ($noClearPHP) {
+    print count($noClearPHP)." are missing the clearPHP : \n";
+    print "  + " . join("\n  + ", $noClearPHP)."\n";
+    print "\n";
 }
 
 if ($missingDoc) {
