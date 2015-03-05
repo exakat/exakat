@@ -68,33 +68,6 @@ QUERY;
         }
     }
 
-    private function queryOne($query) {
-        $r = query($query);
-        return $r[0][0];
-    }
-
-    private function queryArray($query) {
-        $return = array();
-    
-        $result = $this->query($query);
-        foreach($result as $r) {
-            $return[] = (array) $r[0];
-        }
-    
-        return $return;
-    }
-
-    private function queryColumn($query) {
-        $return = array();
-    
-        $result = query($query);
-        foreach($result as $r) {
-            $return[] = $r[0];
-        }
-    
-        return $return;
-    }
-
     private function query($query) {
         $params = array('type' => 'IN');
         $query = new Gremlin\Query($this->client, $query, $params);

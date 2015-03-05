@@ -118,7 +118,7 @@ class Build_root implements Tasks {
         
             if ($retry) {
                 sleep (3);
-                return query($query, 0);
+                return $this->query($query, 0);
             }
         
             die('died in '.__METHOD__."\n");

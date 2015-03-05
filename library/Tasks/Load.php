@@ -1143,7 +1143,7 @@ class Load implements Tasks {
             fclose($filePointer);
         
             sleep(2);
-            query($query);
+            $this->query($query);
         }
     }
 }

@@ -72,22 +72,6 @@ class Errors implements Tasks {
         print $output;
     }
 
-    private function queryOne($query) {
-        $r = query($query);
-        return $r[0][0];
-    }
-
-    private function queryArray($query) {
-        $return = array();
-    
-        $result = query($query);
-        foreach($result as $r) {
-            $return[] = (array) $r[0];
-        }
-    
-        return $return;
-    }
-
     private function queryColumn($query) {
         $return = array();
     
