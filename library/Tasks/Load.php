@@ -758,7 +758,7 @@ class Load implements Tasks {
                         list($label, $value) = $colonTokens->characterizeToken();
                         $T[$Tid]->setProperty($label, $value)->save();
                     }
-                    if ($type = process_colon($token_value)) {
+                    if ($type = $this->process_colon($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
                     }
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
