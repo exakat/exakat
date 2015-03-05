@@ -174,6 +174,10 @@ LICENCE;
             ->printed(false)
             ->run();
 
+        $this->taskComposerInstall()
+             ->printed(false)
+             ->run();
+
         $files = Finder::create()->ignoreVCS(true)
             ->files()
             ->path('config/')
@@ -202,19 +206,9 @@ LICENCE;
                                  ->in(__DIR__);
         $this->addFiles($packer, $files);
 
-/*        
-        $files = Finder::create()->ignoreVCS(true)
-                                 ->files()
-                                 ->in(__DIR__.'/projects/test/');
-        $this->addFiles($packer, $files);
-*/
         $packer->addFile('exakat','exakat')
                ->executable('exakat')
                ->run();
-
-        $this->taskComposerInstall()
-             ->printed(false)
-             ->run();
 
         $this->taskExecStack()
              ->stopOnFail()
