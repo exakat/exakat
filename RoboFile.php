@@ -187,19 +187,22 @@ LICENCE;
             ->notPath('library/Report/Format/Ace')
             ->notPath('projects/')
             ->notPath('media/')
+            ->notPath('config.ini')
 
             ->in(__DIR__)
             ->exclude('neo4j')
             ->exclude('batch-import');
         $this->addFiles($packer, $files);
-/*
+
         $files = Finder::create()->ignoreVCS(true)
                                  ->files()
+                                 ->notPath('projects/')
                                  ->notPath('bootstrapvalidator')
                                  ->path('media/devoops/')
                                  ->in(__DIR__);
         $this->addFiles($packer, $files);
-        
+
+/*        
         $files = Finder::create()->ignoreVCS(true)
                                  ->files()
                                  ->in(__DIR__.'/projects/test/');
