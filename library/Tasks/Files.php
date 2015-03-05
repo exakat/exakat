@@ -185,8 +185,7 @@ class Files implements Tasks {
                     preg_match('#Warning: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
                     $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
-                    preg_match('#Errors parsing: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
-                    $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                    // let it run
                 } else {
                     print "\nCouldn't interpret on syntax error : \n";
                     var_dump($resFile);
