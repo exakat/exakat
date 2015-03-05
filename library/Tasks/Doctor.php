@@ -25,7 +25,7 @@ namespace Tasks;
 
 class Doctor implements Tasks {
 
-    function run(\Config $config) {
+    public function run(\Config $config) {
         $stats = array();
 
         $stats = array_merge($stats, $this->checkPreRequisite($config));
