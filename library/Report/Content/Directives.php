@@ -122,7 +122,7 @@ class Directives extends \Report\Content {
         } else {
             $this->array['File upload'][] = array('name' => 'file_uploads',
                                                  'documentation' => 'Since the application doesn\'t handle uploaded files, it is recommended to disable this option, saving memory, and disabling features that may be a security vulnerability later.',
-                                                 'suggested' => $suggestion = $this->checkPresence('Structures\\FileUploadUsage'));
+                                                 'suggested' => 0);
         }
 
         // Intl
