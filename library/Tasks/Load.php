@@ -1105,7 +1105,6 @@ class Load implements Tasks {
         $last->relateTo($last2, 'NEXT')->setProperty('file', $file)->save();
 
         $client->save_chunk();
-        $colonTokens->dump();
 
         return $Tid;
     }
