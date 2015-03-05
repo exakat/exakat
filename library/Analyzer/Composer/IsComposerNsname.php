@@ -29,32 +29,49 @@ class IsComposerNsname extends Analyzer\Analyzer {
     public function analyze() {
         $data = new \Data\Composer();
 
+        ////////////////////////////////////////////////
+        // Use
         // namespaces in Composer
-        $packagist = $data->getComposerNamespaces();
+        $packagistNamespaces = $data->getComposerNamespaces();
         $this->atomIs('Use')
              ->outIs('USE')
-             ->is('originpath', $packagist);
+             ->is('originpath', $packagistNamespaces);
         $this->prepareQuery();
 
         // classes in Composer
-        $packagist = $data->getComposerClasses();        
+        $packagistClasses = $data->getComposerClasses();        
         $this->atomIs('Use')
              ->outIs('USE')
-             ->is('originpath', $packagist);
+             ->is('originpath', $packagistClasses);
         $this->prepareQuery();
 
         // interfaces in Composer
-        $packagist = $data->getComposerInterfaces();
+        $packagistInterfaces = $data->getComposerInterfaces();
         $this->atomIs('Use')
              ->outIs('USE')
-             ->is('originpath', $packagist);
+             ->is('originpath', $packagistInterfaces);
         $this->prepareQuery();
 
         // traits in Composer
-        $packagist = $data->getComposerTraits();
+        $packagistTraits = $data->getComposerTraits();
         $this->atomIs('Use')
              ->outIs('USE')
-             ->is('originpath', $packagist);
+             ->is('originpath', $packagistTraits);
+        $this->prepareQuery();
+
+        ////////////////////////////////////////////////
+        // Classes extends or implements 
+        // Classes in Composer
+        $packagistClasses = $this->makeFullNSpath($packagistClasses);
+        $this->atomIs('Class')
+             ->outIs(array('IMPLEMENTS', 'EXTENDS'))
+             ->is('fullnspath', $packagistClasses);
+        $this->prepareQuery();
+
+        $packagistInterfaces = $this->makeFullNSpath($packagistInterfaces);
+        $this->atomIs('Class')
+             ->outIs(array('IMPLEMENTS', 'EXTENDS'))
+             ->is('fullnspath', $packagistInterfaces);
         $this->prepareQuery();
     }
 }
