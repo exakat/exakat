@@ -52,7 +52,7 @@ class Doctor implements Tasks {
         $stats['php']['sqlite3'] = extension_loaded('sqlite3') ? 'Yes' : 'No';
 
         // java
-        $res = shell_exec('java -version 2>/tmp/javaversion.txt; cat /tmp/javaversion.txt; rm /tmp/javaversion.txt');
+        $res = shell_exec('java -version 2>&1');
         if (preg_match('/command not found/is', $res)) {
             $stats['java']['installed'] = 'No';
             $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
@@ -67,13 +67,13 @@ class Doctor implements Tasks {
         }
 
         // neo4j
-        if (!file_exists('neo4j')) {
+        if (!file_exists($config->neo4j_folder)) {
             $stats['neo4j']['installed'] = 'No';
         } else {
-            $file = file('neo4j/README.txt');
+            $file = file($config->neo4j_folder.'/README.txt');
             $stats['neo4j']['version'] = trim($file[0]);
 
-            $file = file_get_contents('neo4j/conf/neo4j-wrapper.conf');
+            $file = file_get_contents($config->neo4j_folder.'/conf/neo4j-wrapper.conf');
             if (!preg_match('/wrapper.java.additional=-XX:MaxPermSize=(\d+\w)/is', $file, $r)) {
                 $stats['neo4j']['MaxPermSize'] = 'Unset (64M)';
                 $stats['neo4j']['MaxPermSize warning'] = 'Set MaxPermSize to 512 or more in neo4j/conf/neo4j-wrapper.conf, with "wrapper.java.additional=-XX:MaxPermSize=512m" around line 20';
