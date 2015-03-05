@@ -28,6 +28,7 @@ use Analyzer;
 class toStringPss extends Analyzer\Analyzer {
     public function analyze() {
         $methods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
+        $methods = array_diff($methods, array('__construct', '__destruct'));
         
         $this->atomIs('Function')
              ->hasClass()
