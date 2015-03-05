@@ -34,7 +34,7 @@ class Autoload {
         }
         
         if (file_exists($file)) {
-            include($file);
+            include $file;
         } 
     }
 
@@ -44,13 +44,13 @@ class Autoload {
         $file = $path.'/tests/analyzer/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
         
         if (file_exists($file)) {
-            include($file);
+            include $file;
         } 
 
         $file = $path.'/tests/tokenizer/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
         
         if (file_exists($file)) {
-            include($file);
+            include $file;
         } 
     }
 
@@ -58,7 +58,7 @@ class Autoload {
         $file = str_replace('_', DIRECTORY_SEPARATOR, $name).'.php';
         $file = str_replace('Test\\', '', $file);
         if (file_exists($file)) {
-            include($file);
+            include $file;
         }
     }
 }

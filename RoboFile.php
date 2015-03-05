@@ -2,7 +2,7 @@
 
 use Symfony\Component\Finder\Finder;
 
-include_once('./library/Autoload.php');
+include_once './library/Autoload.php';
 spl_autoload_register('Autoload::autoload_library');
 
 class RoboFile extends \Robo\Tasks
@@ -164,7 +164,8 @@ LICENCE;
     
     public function pharBuild() {
         $packer = $this->taskPackPhar('exakat.phar')
-                       ->compress();
+//                       ->compress()
+                       ;
         
         $this->updateBuild();
 
@@ -188,10 +189,10 @@ LICENCE;
             ->notPath('media/')
 
             ->in(__DIR__)
-            ->exclude('/neo4j/')
-            ->exclude('/batch-import/');
+            ->exclude('neo4j')
+            ->exclude('batch-import');
         $this->addFiles($packer, $files);
-
+/*
         $files = Finder::create()->ignoreVCS(true)
                                  ->files()
                                  ->notPath('bootstrapvalidator')
@@ -203,7 +204,7 @@ LICENCE;
                                  ->files()
                                  ->in(__DIR__.'/projects/test/');
         $this->addFiles($packer, $files);
-
+*/
         $packer->addFile('exakat','exakat')
                ->executable('exakat')
                ->run();

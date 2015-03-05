@@ -78,7 +78,7 @@ class Phpexec {
         } else {
             $tmpFile = tempnam("/tmp", "Phpexec");
             shell_exec($this->phpexec.' -r "print \'<?php \\$this->tokens = \'; \\$x = get_defined_constants(true); var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > '.$tmpFile);
-            include($tmpFile);
+            include $tmpFile;
             unlink($tmpFile);
         }
         
@@ -128,7 +128,7 @@ class Phpexec {
         } else {
             $tmpFile = tempnam("/tmp", "Phpexec");
             shell_exec($this->phpexec.'  -d short_open_tag=1  -r "print \'<?php \\$tokens = \'; var_export(token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); print \'; ?>\';" > '.$tmpFile);
-            include($tmpFile);
+            include $tmpFile;
             unlink($tmpFile);
         }
         
