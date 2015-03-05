@@ -1701,6 +1701,7 @@ GREMLIN;
     }
     
     public static function listAnalyzers() {
+        self::initDocs();
         return self::$docs->listAllAnalyzer();
     }
     
