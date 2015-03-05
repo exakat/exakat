@@ -112,7 +112,10 @@ class Premier extends Report {
 
         $this->createLevel1('Detailled');
         $analyzes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
-                                \Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
+                                \Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('Security'),
+                                );
         $analyzes2 = array();
         foreach($analyzes as $a) {
             $analyzer = \Analyzer\Analyzer::getInstance($a, $this->client);
