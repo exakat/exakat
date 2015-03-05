@@ -68,7 +68,7 @@ class Analyzer {
     
     static public $docs = null;
 
-    public function __construct(Client $client) {
+    public function __construct(Client $client = null) {
         $this->neo4j = $client;
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = str_replace('\\', '\\\\', $this->analyzer);
