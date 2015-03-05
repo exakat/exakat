@@ -43,7 +43,7 @@ class RoboFile extends \Robo\Tasks
                                         ->in('library')
                                         ->in('bin')
                                         ->in('scripts');
-        $docs = [];
+        $docs = array();
         
         $licence = <<<'LICENCE'
 /*
