@@ -119,7 +119,7 @@ class Premier extends Report {
                                 \Analyzer\Analyzer::getThemeAnalyzers('Compatibility54'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('Compatibility55'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('Compatibility56'),
-                                \Analyzer\Analyzer::getThemeAnalyzers('Compatibility70'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('Compatibility70')
                                 );
         $analyzes2 = array();
         foreach($analyzes as $a) {
