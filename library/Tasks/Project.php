@@ -66,8 +66,10 @@ class Project implements Tasks {
 
         $this->logTime('Start');
 
-        // this doesn't belong here. It should be in a 'clean' task.
-        unlink($config->projects_root.'/projects/'.$config->project.'/datastore.sqlite');
+        $datastorePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
+        if (file_exists($datastorePath)) {
+            unlink($datastorePath);
+        }
         
         $datastore = new \Datastore($config);
         $datastore->cleanTable('hash');
