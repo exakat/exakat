@@ -206,6 +206,7 @@ class Config {
 
         $commands = array('analyze'     => 1, 
                           'build_root'  => 1, 
+                          'constantes'  => 1, 
                           'clean'       => 1, 
                           'doctor'      => 1, 
                           'errors'      => 1,
