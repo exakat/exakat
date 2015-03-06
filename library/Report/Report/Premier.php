@@ -114,7 +114,12 @@ class Premier extends Report {
         $analyzes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
-                                \Analyzer\Analyzer::getThemeAnalyzers('Security')
+                                \Analyzer\Analyzer::getThemeAnalyzers('Security'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('Compatibility53'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('Compatibility54'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('Compatibility55'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('Compatibility56'),
+                                \Analyzer\Analyzer::getThemeAnalyzers('Compatibility70'),
                                 );
         $analyzes2 = array();
         foreach($analyzes as $a) {
