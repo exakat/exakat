@@ -93,6 +93,12 @@ class Doctor implements Tasks {
                 $stats['neo4j']['running'] = 'No';
             } else {
                 $stats['neo4j']['running'] = 'Yes';
+                $status = shell_exec('sh '.$config->neo4j_folder.'/bin/neo4j status');
+                if (strpos($status, 'Neo4j Server is running at pid') !== false) {
+                    $stats['neo4j']['running here'] = 'Yes';
+                } else {
+                    $stats['neo4j']['running here'] = 'No';
+                }
                 $json = json_decode($json);
                 if (isset($json->extensions->GremlinPlugin)) {
                     $stats['neo4j']['gremlin'] = 'Yes';
