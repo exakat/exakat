@@ -124,7 +124,8 @@ class Project implements Tasks {
             unlink($config->projects_root.'/projects/'.$project.'/log/analyze.final.log');
         }
 
-        $themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security', 'Custom');
+        $themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security', 'Custom',
+                        'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70');
         $processes = array();
         foreach($themes as $theme) {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
