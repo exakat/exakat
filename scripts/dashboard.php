@@ -51,7 +51,7 @@ if ($missingDoc) {
     foreach($missingDoc as $document) {
         list($documentName, ) = explode(' ', $document);
         if (!file_exists(DOC_ROOT.'/human/en/'.$documentName.'.ini')) {
-            file_put_contents(DOC_ROOT.'/human/en/'.$documentName.'.ini', "name=\"\";\ndescription=\"\";\n");
+            file_put_contents(DOC_ROOT.'/human/en/'.$documentName.'.ini', "name=\"\";\ndescription=\"\";clearphp=\"\";\n");
         }
     }
 } else {
