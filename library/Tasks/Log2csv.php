@@ -61,7 +61,7 @@ class Log2csv implements Tasks {
         }
         fclose($in);
         
-        $out = fopen($config->projects_root.'/projects/'.$config->project.'/log/analyzer.csv', 'w+');
+        $out = fopen($config->projects_root.'/projects/'.$config->project.'/log/tokenizer.csv', 'w+');
         fputcsv($out, array('Regex', 'Time', 'Times', str_replace('.', ',' , $total_time), 'Times_avg'));
         foreach($result as $k => $r) {
             array_unshift( $r, $k);
@@ -73,7 +73,7 @@ class Log2csv implements Tasks {
         }
         fclose($out);
 
-        $out = fopen($config->projects_root.'/projects/'.$config->project.'/log/analyzer.csv', 'w+');
+        $out = fopen($config->projects_root.'/projects/'.$config->project.'/log/matrix.csv', 'w+');
         $titles = array_keys($matrix);
         fputcsv($out, array_merge(array('id', 'count'), $titles));
         $max = 0;
