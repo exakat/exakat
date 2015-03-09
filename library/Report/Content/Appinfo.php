@@ -164,6 +164,7 @@ class Appinfo extends \Report\Content {
                     'Extensions' => array(
                             'ext/apache'     => 'Extensions/Extapache',
                             'ext/apc'        => 'Extensions/Extapc',
+                            'ext/apcu'       => 'Extensions/Extapcu',
                             'ext/array'      => 'Extensions/Extarray',
                             'ext/bcmath'     => 'Extensions/Extbcmath',
                             'ext/bzip2'      => 'Extensions/Extbzip2',
