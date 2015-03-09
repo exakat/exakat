@@ -32,8 +32,8 @@ class InterfaceMethod extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->outIs('NAME')
-             ;
+             ->outIs('NAME');
+        $this->prepareQuery();
     }
 }
 
