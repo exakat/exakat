@@ -37,6 +37,7 @@ class Build_root implements Tasks {
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
 
         $begin = microtime(true);
+        display( "Connecting to server\n");
         $this->client = new Client();
         display( "Starting\n");
 
