@@ -73,7 +73,10 @@ class Project implements Tasks {
         
         $datastore = new \Datastore($config);
         $datastore->cleanTable('hash');
-        $datastore->addRow('hash', array(array('key' => 'audit_start',      'value' => time())));
+        $datastore->addRow('hash', array('audit_start' => time(),
+                                         'exakat_version' => \Exakat::VERSION,
+                                         'exakat_build' => \Exakat::BUILD,
+                                         ));
 
         $thread = new \Thread();
         print "Running project '$project'\n";
@@ -124,12 +127,14 @@ class Project implements Tasks {
             unlink($config->projects_root.'/projects/'.$project.'/log/analyze.final.log');
         }
 
-        $themes = array('Analyze', 'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security', 'Custom',
-                        'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70');
+        $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
+                        'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security', 'Custom',
+                        'Analyze');
         $processes = array();
         foreach($themes as $theme) {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
-            shell_exec('php '.$this->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log');
+            shell_exec('php '.$this->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;
+mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
             print "Analyzing $theme\n";
         }
 
