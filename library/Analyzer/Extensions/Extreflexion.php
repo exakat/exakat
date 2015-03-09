@@ -28,7 +28,7 @@ use Analyzer;
 class Extreflexion extends Analyzer\Common\Extension {
 
     public function analyze() {
-        $this->source = 'reflexion.ini';
+        $this->source = 'reflection.ini';
         
         parent::analyze();
     }
