@@ -79,7 +79,7 @@ class Files implements Tasks {
 
         $datastore = new \Datastore($config);
 
-        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l | xargs grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
+        $shellBase = 'find '.$config->projects_root.'/projects/'.$dir.'/code \\( -name "*.'.(join('" -o -name "*.', $exts['php'])).'" \\) \\( -not -path "'.(join('" -and -not -path "', $ignoreDirs )).'" \\) ! -type l -print0 | xargs -0 grep -H -c "^<?xml" | grep 0$ | cut -d\':\' -f1  ';
 
         $files = trim(shell_exec($shellBase));
         $files = preg_replace('#'.$config->projects_root.'/projects/.*?/code#is', '', $files);
