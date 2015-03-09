@@ -543,10 +543,15 @@ GREMLIN;
 
     public function analyzerIs($analyzer) {
         if (is_array($analyzer)) {
+            foreach($analyzer as &$a) {
+                $a = self::getClass($analyzer);
+            }
             $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any()}', $analyzer);
         } else {
             if ($analyzer == 'self') {
                 $analyzer = $this->analyzer;
+            } else {
+                $analyzer = self::getClass($analyzer);
             }
             $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).any()}', $analyzer);
         }
@@ -557,10 +562,15 @@ GREMLIN;
     public function analyzerIsNot($analyzer) {
 
         if (is_array($analyzer)) {
+            foreach($analyzer as &$a) {
+                $a = self::getClass($analyzer);
+            }
             $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any() == false}', $analyzer);
         } else {
             if ($analyzer == 'self') {
                 $analyzer = $this->analyzer;
+            } else {
+                $analyzer = self::getClass($analyzer);
             }
             $this->addMethod('filter{ it.in("ANALYZED").has("code", ***).any() == false}', $analyzer);
         }
