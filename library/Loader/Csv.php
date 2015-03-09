@@ -103,13 +103,16 @@ HEADER
         fclose($fp);
         
         if ($fnodes != $nodes[1]) {
-            print "Warning : didn't import enough nodes : {$fnodes} expected, {$nodes[1]} actually imported\n";
+            display( "Warning : didn't import enough nodes : {$fnodes} expected, {$nodes[1]} actually imported\n");
         } else {
+            display( "{$nodes[1]} nodes imported\n");
+            display( number_format(filesize('nodes.csv') / 1024, 0)." ko imported\n");
             unlink('nodes.csv');
         }
         if ($frels != $relations[1]) {
-            print "Warning : didn't import enough relations : {$frels} expected, {$relations[1]} actually imported\n";
+            display( "Warning : didn't import enough relations : {$frels} expected, {$relations[1]} actually imported\n");
         } else {
+            display( "{$relations[1]} relations imported\n");
             unlink('rels.csv');
         }
 
@@ -144,8 +147,7 @@ HEADER
                     }
                 }
                 if ($diff = array_diff(array_keys($row), $les_cols, array('id'))) {
-                    print_r($diff);
-                    print "Some columns were not processed.\n";
+                    display("Some columns were not processed : ".join(", ", $diff).".\n");
                 }
             }
             $row['code'] = $this->escapeString($row['code']);
