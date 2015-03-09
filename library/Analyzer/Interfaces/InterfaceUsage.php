@@ -40,7 +40,7 @@ class InterfaceUsage extends Analyzer\Analyzer {
 
         $this->atomIs('Typehint')
              ->outIs('CLASS')
-             ->atomIs(array('Identifier', 'Nsname');
+             ->atomIs(array('Identifier', 'Nsname'));
         $this->prepareQuery();
     }
 }
