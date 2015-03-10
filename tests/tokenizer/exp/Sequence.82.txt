@@ -1,0 +1,62 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ===
+        Label : RIGHT
+          'c'
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $a
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+    Label : THEN
+      {
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $c
+        Label : METHOD
+          d
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              Concatenation
+              Label : CONCAT
+                "
+                Label : CONTAIN
+                  Concatenation
+                  Label : CONCAT
+                     
+                  Label : CONCAT
+                    $d
+              Label : CONCAT
+                ::
+                Label : CLASS
+                  self
+                Label : CONSTANT
+                  E
+      Label : ELEMENT
+        `
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+            ls -1 
+          Label : CONCAT
+            $g
+    Label : ELSE
+      {
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $h
