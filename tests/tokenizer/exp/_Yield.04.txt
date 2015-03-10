@@ -1,0 +1,76 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        for
+        Label : INIT
+          ->
+          Label : OBJECT
+            $a
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : FINAL
+          ->
+          Label : OBJECT
+            $c
+          Label : METHOD
+            d
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : INCREMENT
+          ->
+          Label : OBJECT
+            $e
+          Label : METHOD
+            f
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            yield
+            Label : YIELD
+              =>
+              Label : KEY
+                Concatenation
+                Label : CONCAT
+                  ->
+                  Label : OBJECT
+                    $h
+                  Label : METHOD
+                    i
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+                Label : CONCAT
+                  "g"
+              Label : VALUE
+                ->
+                Label : OBJECT
+                  $j
+                Label : METHOD
+                  k
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+    Label : NAME
+      x

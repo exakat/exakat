@@ -43,7 +43,7 @@ class Concatenation extends TokenAuto {
                                                                             'T_OPEN_CURLY', 'T_OPEN_BRACKET', 
                                                                             'T_ECHO', 'T_PRINT','T_OPEN_TAG',
                                                                             'T_SEMICOLON', 'T_CASE', 'T_DOLLAR_OPEN_CURLY_BRACES',
-                                                                            'T_ELSE'))),
+                                                                            'T_ELSE', 'T_YIELD'))),
                                   -1 => array('atom'  => $operands ),
                                    0 => array('token' => 'T_DOT',
                                               'check_for_concatenation' => $operands),
