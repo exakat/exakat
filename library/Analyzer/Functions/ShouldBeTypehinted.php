@@ -59,7 +59,6 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-
         // spotting array with array[index]
         $this->atomIs('Variable')
              ->analyzerIs('Analyzer\\Variables\\Arguments')
@@ -69,6 +68,7 @@ class ShouldBeTypehinted extends Analyzer\Analyzer {
              ->isNot('lambda', 'true')
              ->outIs('BLOCK')
              ->atomInside('Array')
+             ->raw('filter{ it.out("INDEX").next().atom != "Integer"}') // attempt to avoid strings
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'name')
              ->back('first');
