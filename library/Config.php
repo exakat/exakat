@@ -128,7 +128,9 @@ class Config {
         
         // check and default values
         $defaults = array( 'ignore_dirs'        => array('tests', 'test', 'Tests'),
-                           'other_php_versions' => array('53', '54', '55', '56', '70'));
+                           'other_php_versions' => array('53', '54', '55', '56', '70'),
+                           'phpversion'         => PHP_VERSION
+                           );
         
         foreach($defaults as $name => $value) {
             if (!isset($this->projectConfig[$name])) {
