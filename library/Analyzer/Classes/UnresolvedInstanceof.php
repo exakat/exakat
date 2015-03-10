@@ -39,6 +39,7 @@ class UnresolvedInstanceof extends Analyzer\Analyzer {
         
         $this->atomIs("Instanceof")
              ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
