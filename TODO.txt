@@ -1,5 +1,5 @@
-Support file updates in VCS (just change those files, not reload all the application, serve évolutions, not status)
-Make so that it is possible to run simultaneous scripts on the server (Not just using delete all).
+Support updates in VCS (just change those files, not reload all the application, serve évolutions, not status)
+
 Make analyzer concurrent proof
 
 Make loader run simultaneous scripts
@@ -223,7 +223,7 @@ Code source that mix defintiions (class, interface, const...) and actual code (e
 Add an analyzer of the application : As documentation, version, tests, external libs, languges, template, config.... Report this, and exclude some of the elements in the code.
 
 Spot expressions that are the same (cf str_replace ...)
-Spot files that use $this, and that are actually included in PHP methods (old style PHP inclusion)
+Spot files that use $this, and that are actually included in PHP methods (old style PHP inclusion, templating system (linked to include))
 Suggest using ... instead of func_get_args, and ... instead of call_user_func_array
 
 Spot use clause that are in the same namespace (just alias ? )
@@ -272,8 +272,6 @@ Suggest replacement for str_replace/ereg/preg/strtr
 Conditional declarations ?
 
 Heavily used classes/functions...
-
-rethrown exceptions in a catch
 
 Using empty() with Function Calls and Expressions : $x = $object->getProperty(); empty($x)
 
@@ -770,8 +768,6 @@ Avoid using regular expressions to validate email addresses.
 
 comparing objects ? http://php.net/manual/en/language.oop5.object-comparison.php
 
-SHould chains exceptiosn when rethrowing 
-
 UwF: Field only ever set to null (UWF_NULL_FIELD) Property never used ? 
 UwF: Unwritten field (UWF_UNWRITTEN_FIELD)
 
@@ -845,7 +841,6 @@ Spot large arrays (in traductions?) and see how they are passed around (the less
 
 avoid finding duplicate calls that are inside closures 
 
-Default values in properties at __construct or at property time? 
 Move property initialization to property definition, not construct ? 
 
 Synchronmize google code, and source forge for clear PHP (and others).
@@ -873,7 +868,7 @@ Attention to constant/functions that may be defined in another inclusion (with a
 check the impact of too many extensions in terms of time.
 (suggest dropping some extensions, and even not-compiling them, compared to a default installation).
 
-Stop analysing at __halt_compiler
+Stop analysing code at __halt_compiler
 
 Spot entry point in the application and outgoing points.
 
@@ -883,10 +878,11 @@ neo4j 2.2.0ME 4 : ditch batch-import
     No support for Gremlin
     Tutorial for neo4j-import
     migration to Cypher ? 
+
+Remove die, print_r, var_dump.
+    Vérifier que les tests fonctionnent avec phar
     
 Packaging PHar
-    Remove die, print_r, var_dump.
-    Vérifier que les tests fonctionnent
     Que faire des scripts de tests? 
     add more checks on incoming values (white lists)
     Check phar::mount with SQLITE ? 
@@ -902,11 +898,9 @@ Packaging PHar
         Add link back to dashboard from within detailled page.
         Add link back to exakat.com in index.html
     
-Useless '' in a concatenation ? ('' . $a. $b. ' ')
-
 this variable is always concatenated (added, multiplicated, process) with this function. This could be merged.
 
-DeadCode after this :  
+DeadCode after such structures :  
         if (!$res) { 
             return null;
         } else {
@@ -1001,3 +995,42 @@ batch-import
 Get slow analyzers
 Review ->raw() calls and create separate internal fixes
 Produce stats for disk/memory recommendations
+
+to submit null + typehint, one need to put null as default values.
+
+Interrupt script with exception earlier (no repeated errors)
+
+Avoid printing non-compilable files
+
+faire une documentation d'utilisation
+
+Clean the option reading from exakat
+
+arguments are not always indexed (Can I remove this?)
+
+Gerer le cas ou le code est vide (pas d'erreur inutiles)
+
+Spot undefined exception in Catch (like undefined)
+
+interfaces : they should be used in Typehint to be useful .
+
+lines of code : It actually displays a long string
+
+Value is the same (saved as property but passed also as argument. $this->x = $a; $this->f($a); arguments == property)
+
+Client is always called without any configuration!
+
+Suggest making arguments properties when they are relayed from method to method
+
+Suggest visibility dpending on usage (not public, not private?)
+
+Could Implements I : list classes that may 'implements' an available interface but are not.
+
+"$a = &$b + $c" and "$a = $b + $c" are totally different. #php (Code that don't work as expected)
+
+implemented interface methods must be public
+
+toString throws exception, but it is intercepted.
+__tostring()-throws-exception : Wrong link building
+
+Start internationalization (report, error messages, configuration)
