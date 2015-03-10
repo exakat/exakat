@@ -55,7 +55,7 @@ class ReportInfo extends \Report\Content {
         
         $this->list['PHP version'] = substr(shell_exec('php -v'), 0, 11);
 
-        $this->list['Audit software version'] = \Exakat::VERSION. ' ( Build '. \Exakat::VERSION . ') ';
+        $this->list['Audit software version'] = \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ';
     }
 
     public function getArray() {
