@@ -37,6 +37,19 @@ foreach($components as $fullName => $version) {
         print "$vendor/$component newly inserted in reference ($componentId)\n";
     }
 
+    print "Reading $vendor/$component versions\n";
+    $res = shell_exec('composer show '.$fullName);
+
+    // remove colors
+    $res = preg_replace('/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/s', '', $res);
+    preg_match_all("#versions : (.*?)\n#s", $res, $r);
+    $versions = explode(', ', $r[1][0]);
+
+    foreach($versions as $version) {
+        if ($version[0] == 'v') { $version = substr($version, 1);}
+        $sqlite->query("INSERT OR IGNORE INTO versions (component_id, version) VALUES ($componentId, '$version');");
+    }
+
     print "Fetching $vendor/$component\n";
     $composer = new stdClass();
     $composer->require = new stdClass();
