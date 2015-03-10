@@ -63,7 +63,7 @@ class Build_root implements Tasks {
         $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
                                          'Rawstring', 'Variable', 'Float', 'Boolean', 'Void', 'File']}.each{ 
                                          g.idx('atoms').put('atom', it.atom, it); }";
-        $this->query($query);
+        $this->query($query, 1);
         display( "g.idx('atoms') : filled\n" );
         $this->logTime('g.idx("atom")[["atom":"******"]] : filling');
 
