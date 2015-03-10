@@ -59,6 +59,20 @@ class NoDirectAccess extends Analyzer\Analyzer {
              ->fullnspath(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
+
+        //if (defined('_ECRIRE_INC_VERSION')) return;
+        $this->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             // find !defined and defined
+             ->atomInside('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs('T_STRING')
+             ->fullnspath('\\defined')
+             ->back('first')
+             ->outIs('THEN')
+             ->atomInside('Return')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
