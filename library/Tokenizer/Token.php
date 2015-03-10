@@ -1086,10 +1086,10 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
             if ($analyzer->checkPhpVersion($phpVersion)) {
                 return $analyzer;
             } else {
-                throw new NoSuchTokenizer($name);
+                return null;
             }
         } else {
-            throw new NoSuchTokenizer($name);
+            throw new \Exceptions\NoSuchTokenizer($name);
         }
     }
 
