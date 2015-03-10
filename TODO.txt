@@ -1034,3 +1034,10 @@ toString throws exception, but it is intercepted.
 __tostring()-throws-exception : Wrong link building
 
 Start internationalization (report, error messages, configuration)
+
+Report old Composer recommendations
+Make a simple report with our recommendations and their composer file to download.
+
+Check for default version from config.php
+
+Check for default values in applications too
