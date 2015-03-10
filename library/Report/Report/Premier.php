@@ -65,12 +65,6 @@ class Premier extends Report {
         $analyzer->collect();
         $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
 
-        $this->createLevel2('Coding Conventions');
-        $analyzer = $this->getContent('Dashboard');
-        $analyzer->setThema('Coding Conventions');
-        $analyzer->collect();
-        $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
-
         $this->createLevel2('Dead code');
         $analyzer = $this->getContent('Dashboard');
         $analyzer->setThema('Dead code');
@@ -112,7 +106,6 @@ class Premier extends Report {
 
         $this->createLevel1('Detailled');
         $analyzes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
-                                \Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('Dead Code'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('Security'),
                                 \Analyzer\Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
