@@ -111,7 +111,7 @@ class Build_root implements Tasks {
         try {
             $GremlinQuery = new Query($this->client, $query, $params);
             return $GremlinQuery->getResultSet();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $fp = fopen($config->projects_root.'/'.$config->project.'/log/build_root.log', 'a');
             fwrite($fp, $query."\n");
             fwrite($fp, $e->getMessage());
