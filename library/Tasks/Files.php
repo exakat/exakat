@@ -112,7 +112,7 @@ class Files implements Tasks {
         preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
         $stats['loc'] = $r[1];
 
-        $rfiles = $shellBase.' | wc -l';
+        $rfiles = trim(shell_exec($shellBase.' | wc -l'));
         $rdirs = trim(shell_exec('find '.$config->projects_root.'/projects/'.$dir.'/code/ -type d -path "*/\.*" | wc -l'));
 
         $datastore->addRow('hash', array(array('key' => 'phploc',      'value' => $stats['loc']),
