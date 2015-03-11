@@ -53,9 +53,8 @@ HTML;
         foreach($data as $v) {
             $row = '<tr>';
             $V = array_shift($v);
-            $url =  str_replace(array(' ', '('  , ')'  ), array('-', '', ''), $V).'.html';
+            $url = 'ajax/'.$this->makeFileName($V);
             $row .= "<td>".$this->makeLink($V, $url)."</td>\n";
-//            <a href=\"$url\" class=\"exakat-link\">$V</a>;
             foreach($v as $V) {
                 $row .= "<td>$V</td>\n";
             }

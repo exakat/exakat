@@ -56,9 +56,8 @@ HTML;
         foreach($values as $value) {
             // @note This is the same getId() than in Section::getId()
             if ($value['severity'] == '') {
-$severity = $value['name'];
+                $severity = $value['name'];
             } else {
-                $value['id'] =  str_replace(array(' ', '('  , ')'  ), array('-', '', ''), $value['name']);
                 $severity = $this->makeLink($value['name']);
             }
             $html .= <<<HTML

@@ -189,8 +189,8 @@ HTML;
     protected function makeFileName($title) {
         // must sync with Template/Section.php
         // @todo : remove this sync!
-        return str_replace(array(' ', '(', ')', ':', '*', '.', '/' ), 
-                           array('-', '' , '' , '' , '' , '', '' ),
+        return str_replace(array(' ', '(', ')', ':', '*', '.', '/', '&', '_'), 
+                           array('-', '' , '' , '' , '' , '', '', '&', '_' ),
                                $title).'.html';
     }
 
