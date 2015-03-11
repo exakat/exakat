@@ -27,13 +27,14 @@ use Analyzer;
 
 class VardumpUsage extends Analyzer\Analyzer {
     public function analyze() {
+        // print_r (but not print_r($a, 1))
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspath(array('\\var_dump', '\\print_r'))
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 1)
-             ->codeIsNot('true')
+             ->codeIsNot(array('true', 1))
              ->back('first');
         $this->prepareQuery();
 
