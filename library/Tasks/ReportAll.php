@@ -28,12 +28,14 @@ use Everyman\Neo4j\Client,
 
 class ReportAll implements Tasks {
     public function run(\Config $config) {
-        $formats = array('Markdown', 'Sqlite', 'Devoops', 'Html', 'Text', /* 'pdf', 'odt' */);
+        display("Starting reportAll\n");
+
+        $formats = array('Markdown', 'Sqlite', 'Devoops', 'Html', 'Text');
         $reportType = 'Premier';
         $oldConfig = \Config::factory();
         
         foreach($formats as $format) {
-            print "Reporting $format\n";
+            display("Reporting $format\n");
             $args = array ( 1 => 'report',
                             2 => '-p',
                             3 => $config->project,
@@ -53,6 +55,7 @@ class ReportAll implements Tasks {
         \Config::factory($oldConfig);
 
         // generating counts
+        display("Reporting Counts (Sqlite)\n");
         $args = array ( 1 => 'report',
                         2 => '-p',
                         3 => $config->project,
@@ -63,12 +66,12 @@ class ReportAll implements Tasks {
                         8 => '-report',
                         9 => 'Counts',
                         );
-        \Config::factory($args);
         
         $report = new Report();
-        $report->run($config);
+        $report->run(\Config::factory($args));
         unset($report);
 
+        display("Done\n");
     }
 }
 
