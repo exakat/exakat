@@ -60,7 +60,11 @@ HTML;
         foreach($data as $k => $v) {
             $text .= "<tr><td style=\"background-color: {$this->css->backgroundColor}\">$k</td>".
             str_repeat("<td style=\"background-color: {$this->css->backgroundColor}\">&nbsp;</td>", count($this->css->titles) -1)."</tr>\n";
-            if (is_array($v)) {
+            if ($v instanceof \Iterator) {
+                if (empty($v)) { 
+                    continue; 
+                }
+
                 foreach($v as $v2) {
                     $text .= "<tr>";
                     foreach($readOrder as $id) {

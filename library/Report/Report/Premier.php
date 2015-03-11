@@ -169,7 +169,7 @@ class Premier extends Report {
         $this->createLevel1('Application');
         $this->createLevel2('Appinfo()');
         $this->addContent('Text', <<<TEXT
-This is an overview of your application.
+This is an overview of your application. 
 
 Ticked <i class="icon-ok"></i> information are features used in your application. Non-ticked are feature that are not in use in the application.
 
@@ -180,6 +180,12 @@ TEXT
         $this->createLevel2('Directive');
         $this->addContent('Text', <<<TEXT
 This is an overview of the recommended directives for your application. 
+The most important directives have been collected here, for a quick review. 
+The whole list of directive is available as a link to the manual, when applicable. 
+
+When an extension is missing from the list below, either it as no specific configuration directive, 
+or it is not used by the current code. 
+
 TEXT
 );
         $this->addContent('Directives', 'Directives');
