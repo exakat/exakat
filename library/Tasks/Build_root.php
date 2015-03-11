@@ -28,12 +28,12 @@ use Everyman\Neo4j\Client,
 
 class Build_root implements Tasks {
     private $client = null;
-    private $dir_root = '.';
     private $project_dir = '.';
+    private $config = null;
     
     public function run(\Config $config) {
         $project = $config->project;
-        $this->doc_root = $config->dir_root;
+        $this->config = $config;
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
 
         $begin = microtime(true);
@@ -112,13 +112,14 @@ class Build_root implements Tasks {
             $GremlinQuery = new Query($this->client, $query, $params);
             return $GremlinQuery->getResultSet();
         } catch (\Exception $e) {
-            $fp = fopen($config->projects_root.'/'.$config->project.'/log/build_root.log', 'a');
+            $fp = fopen($this->project_dir.'/log/build_root.log', 'a');
             fwrite($fp, $query."\n");
             fwrite($fp, $e->getMessage());
             fclose($fp);
         
             if ($retry) {
-                sleep (3);
+                echo shell_exec ('cd '.$this->config->dir_root.'/neo4j/; ./bin/neo4j restart');
+//                sleep (3);
                 return $this->query($query, 0);
             }
         
