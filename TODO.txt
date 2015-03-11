@@ -95,6 +95,7 @@ Test treemap to export from bin/file
 bin/file should also sort PHP files/directories by type : see fb treemap : code, scripts, media, tests, config. ...
 
 produce a dot graph of classes
+produce a dot graph of exceptions
 
 paraleliser les analyzers
 
@@ -112,8 +113,6 @@ You should not throw an extension exception yourself (PDO)
 Complex logical expression, without ().
 Commented Code
 First support comments in exakat
-
-Un paramètre inutilisé dans une méthode qui en étend une autre est OK (C'est alors a relier à la généralisation induite par la classe du dessus, on peut aussi commenter les autres classes.)
 
 Spot identical files and avoir double analyse (.... ?)
 Spot useless namespaces (namespace x; no function/classs/interface/constant)
@@ -247,7 +246,6 @@ spot uses which original is used, but not the alias
 Upgrade the 'randomtest' for PHPunit, with a sqlite table that track the number of test done, and randomize the oldest ones and the failed ones first.
 
 Ternary that doesn't yield the same kind of results (print/ 1)
-unused constants
 
 Identify the use of static and self and mention there is a difference in usage. 
 make stats of usage of parent, self, static. 
@@ -297,8 +295,6 @@ Functions / methods may be a tube (mixing arguments) or changing some state.
         $info = $this->data->getInfo();
         $renderer->render($output, $info);
 
-Conservation de la skin entre les pages
-
 in CHeck for Unused private properties, removed properties used as append[] or objects (methods or properties)
 Test for list to be in a namespace (\list may fail). Check for other functions that actually lead to a functioncall.
 
@@ -308,7 +304,6 @@ Functions that return nothing needs to have special things in them : global, ini
 $x->property but property is not defined and (class) $x is defined with __get() or __set();
 
 Spot properties that will be handled by __get et __set()
-spot magical properties.
 Spot methods that are not compatible with typehint
 
 Add a way to configure the analyzer at file level (PHP DOC), or an external list (analyzer.ignore + others)
@@ -1014,8 +1009,6 @@ Spot undefined exception in Catch (like undefined)
 
 interfaces : they should be used in Typehint to be useful .
 
-lines of code : It actually displays a long string
-
 Value is the same (saved as property but passed also as argument. $this->x = $a; $this->f($a); arguments == property)
 
 Client is always called without any configuration!
@@ -1041,3 +1034,10 @@ Make a simple report with our recommendations and their composer file to downloa
 Check for default version from config.php
 
 Check for default values in applications too
+
+Injection!
+@mail(\GOTEO_FAIL_MAIL, 'Comunicacion online', 'Este GET<pre>' . print_r($_GET, 1) . '</pre> y este POST:<pre>' . print_r($_POST, 1) . '</pre>');
+
+Mark functioncall as methods for easier scanning
+
+Should always used prepared statement
