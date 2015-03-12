@@ -81,7 +81,7 @@ class Analyzer {
         $this->apply = new AnalyzerApply();
         $this->apply->setAnalyzer($this->analyzer);
         
-        $this->description = new \Description(get_class($this));
+        $this->description = new \Description($this->analyzer);
     } 
     
     public function __destruct() {
