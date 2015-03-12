@@ -31,14 +31,19 @@ class Results implements Tasks {
         $client = new Client();
         
         $analyzer = $config->program;
+        if (empty($analyzer)) {
+            print "Provide an analyzer with -P X/Y. Aborting\n";
+            exit;
+        }
+        
         $analyzerClass = \Analyzer\Analyzer::getClass($analyzer);
 
         if ("Analyzer\\".str_replace('/', '\\', $analyzer) != $analyzerClass) {
-            print "'$analyzer' doesn't exists. Aborting\n";
+            print "'$analyzer' doesn't exist. Aborting\n";
     
             $r = \Analyzer\Analyzer::getSuggestionClass($analyzer);
             if (count($r) > 0) {
-                print "did you mean : ".implode(', ', str_replace('_', '/', $r))."\n";
+                print "Did you mean : ".implode(', ', str_replace('_', '/', $r))."\n";
             }
             exit;
         }
