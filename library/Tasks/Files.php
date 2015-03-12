@@ -126,6 +126,10 @@ class Files implements Tasks {
         $versions = $config->other_php_versions;
 
         foreach($versions as $version) {
+            if (!isset($config->{'php'.$version})) {
+                display('php'.$version.' isn\'t available. Ignoring it');
+                continue;
+            }
             $stats['notCompilable'.$version] = -1;
             
             $check = shell_exec($config->{'php'.$version}.' -v 2>&1');

@@ -48,11 +48,11 @@ class Config {
             $this->projects_root = dirname(__DIR__);
         }
         
-        $configFile = $this->dir_root.'/config/config.ini'; 
-        if (file_exists($this->dir_root.'/config/config.ini')) {
+        $configFile = $this->projects_root.'/config/config.ini'; 
+        if (file_exists($this->projects_root.'/config/config.ini')) {
             $this->configFile = parse_ini_file($configFile);
         } else {
-            $configFile = $this->dir_root.'/config/config-default.ini'; 
+            $configFile = $this->projects_root.'/config/config-default.ini'; 
             if (file_exists($configFile)) {
                 $this->configFile = parse_ini_file($configFile);
             } else {
@@ -135,6 +135,13 @@ class Config {
         foreach($defaults as $name => $value) {
             if (!isset($this->projectConfig[$name])) {
                 $this->projectConfig[$name] = $value;
+            }
+        }
+        
+        if (is_string($this->projectConfig['other_php_versions'])) {
+            $this->projectConfig['other_php_versions'] = explode(',', $this->projectConfig['other_php_versions']);
+            foreach($this->projectConfig['other_php_versions'] as &$version) {
+                $version = str_replace('.', '', trim($version));
             }
         }
         
