@@ -92,7 +92,7 @@ class Project implements Tasks {
         print "Project loaded\n";
         $this->logTime('Loading');
 
-        $res = shell_exec('php '.$this->executable.' build_root -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
+        $res = shell_exec('php '.$this->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
         print "Build root\n";
         $this->logTime('Build_root');
 
@@ -128,7 +128,7 @@ class Project implements Tasks {
         }
 
         $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
-                        'Appinfo', '"Coding Conventions"', '"Dead code"', 'Security', 'Custom',
+                        'Appinfo', '"Dead code"', 'Security', 'Custom',
                         'Analyze');
         $processes = array();
         foreach($themes as $theme) {
