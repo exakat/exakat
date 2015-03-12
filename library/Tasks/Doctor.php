@@ -158,32 +158,35 @@ class Doctor implements Tasks {
         $stats = array();
         
         // config
-        if (!file_exists($config->dir_root.'/config')) {
-            $res = mkdir($config->dir_root.'/config', 0755);
+        if (!file_exists($config->projects_root.'/config')) {
+            $res = mkdir($config->projects_root.'/config', 0755);
         }
 
-        if (!file_exists($config->dir_root.'/config/config.ini')) {
+        if (!file_exists($config->projects_root.'/config/config.ini')) {
+            $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
             $ini = <<<INI
 neo4j_host   = '127.0.0.1';
 neo4j_port   = '7474';
 neo4j_folder = 'neo4j';
 
 ; where and which PHP executable are available
-php          = /usr/local/bin/php
+php          = {$_SERVER['_']}
 
-;php53        = /usr/bin/php53
-;php54        = /usr/bin/php54
-;php55        = /usr/bin/php55
-;php56        = /usr/bin/php56
-;php70        = /usr/bin/php70
+;php52        = /path/to/php53
+;php53        = /path/to/php53
+;php54        = /path/to/php54
+;php55        = /path/to/php55
+;php56        = /path/to/php56
+;php70        = /path/to/php70
+php$version        = {$_SERVER['_']}
 
 INI;
-            file_put_contents($config->dir_root.'/config/config.ini', $ini);
+            file_put_contents($config->projects_root.'/config/config.ini', $ini);
         }
         
-        if (!file_exists($config->dir_root.'/config/')) {
+        if (!file_exists($config->projects_root.'/config/')) {
             $stats['folders']['config-folder'] = 'No';
-        } elseif (file_exists($config->dir_root.'/config/config.ini')) {
+        } elseif (file_exists($config->projects_root.'/config/config.ini')) {
             $stats['folders']['config-folder'] = 'Yes';
             $stats['folders']['config.ini'] = 'Yes';
 
@@ -194,11 +197,11 @@ INI;
         }
 
         // projects
-        if (file_exists($config->dir_root.'/projects/')) {
+        if (file_exists($config->projects_root.'/projects/')) {
             $stats['folders']['projects folder'] = 'Yes';
         } else {
-            $res = mkdir($config->dir_root.'/projects/', 0755);
-            if (file_exists($config->dir_root.'/projects/')) {
+            $res = mkdir($config->projects_root.'/projects/', 0755);
+            if (file_exists($config->projects_root.'/projects/')) {
                 $stats['folders']['projects folder'] = 'Yes';
             } else {
             $stats['folders']['projects folder'] = 'No';
@@ -219,6 +222,7 @@ INI;
             if (strpos($version, 'not found') !== false) {
                 $stats['PHP 5.2']['installed'] = 'No';
             } else {
+                $stats['PHP 5.2']['installed'] = 'Yes';
                 $stats['PHP 5.2']['version'] = $version;
                 $stats['PHP 5.2']['short_open_tags'] = shell_exec($config->php52.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
                 $stats['PHP 5.2']['timezone'] = shell_exec($config->php52.' -r "echo ini_get(\'date.timezone\');" 2>&1');
@@ -230,9 +234,15 @@ INI;
             $stats['PHP 5.3']['configured'] = 'No';
         } else {
             $stats['PHP 5.3']['configured'] = 'Yes';
-            $stats['PHP 5.3']['version'] = shell_exec($config->php53.' -r "echo phpversion();" 2>&1');
-            $stats['PHP 5.3']['short_open_tags'] = shell_exec($config->php53.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-            $stats['PHP 5.3']['timezone'] = shell_exec($config->php53.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+            $res = trim(shell_exec($config->php53.' -r "echo phpversion();" 2>&1'));
+            if (preg_match('/[^\\.0-9]/', $res)) {
+                $stats['PHP 5.3']['installed'] = 'No';
+            } else {
+                $stats['PHP 5.3']['installed'] = 'Yes';
+                $stats['PHP 5.3']['version'] = $res;
+                $stats['PHP 5.3']['short_open_tags'] = shell_exec($config->php53.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+                $stats['PHP 5.3']['timezone'] = shell_exec($config->php53.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+            }
         }
         
         // check PHP 5.4
@@ -240,9 +250,15 @@ INI;
             $stats['PHP 5.4']['configured'] = 'No';
         } else {
             $stats['PHP 5.4']['configured'] = 'Yes';
-            $stats['PHP 5.4']['version'] = shell_exec($config->php54.' -r "echo phpversion();" 2>&1');
-            $stats['PHP 5.4']['short_open_tags'] = shell_exec($config->php54.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-            $stats['PHP 5.4']['timezone'] = shell_exec($config->php54.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+            $res = trim(shell_exec($config->php54.' -r "echo phpversion();" 2>&1'));
+            if (preg_match('/[^\\.0-9]/', $res)) {
+                $stats['PHP 5.4']['installed'] = 'No';
+            } else {
+                $stats['PHP 5.4']['installed'] = 'Yes';
+                $stats['PHP 5.4']['version'] = $res;
+                $stats['PHP 5.4']['short_open_tags'] = shell_exec($config->php54.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+                $stats['PHP 5.4']['timezone'] = shell_exec($config->php54.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+            }
         }
         
         // check PHP 5.5
@@ -250,9 +266,15 @@ INI;
             $stats['PHP 5.5']['configured'] = 'No';
         } else {
             $stats['PHP 5.5']['configured'] = 'Yes';
-            $stats['PHP 5.5']['version'] = shell_exec($config->php55.' -r "echo phpversion();" 2>&1');
-            $stats['PHP 5.5']['short_open_tags'] = shell_exec($config->php55.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-            $stats['PHP 5.5']['timezone'] = shell_exec($config->php55.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+            $res = trim(shell_exec($config->php55.' -r "echo phpversion();" 2>&1'));
+            if (preg_match('/[^\\.0-9]/', $res)) {
+                $stats['PHP 5.5']['installed'] = 'No';
+            } else {
+                $stats['PHP 5.5']['installed'] = 'Yes';
+                $stats['PHP 5.5']['version'] = $res;
+                $stats['PHP 5.5']['short_open_tags'] = trim(shell_exec($config->php55.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1'));
+                $stats['PHP 5.5']['timezone'] = trim(shell_exec($config->php55.' -r "echo ini_get(\'date.timezone\');" 2>&1'));
+            }
         }
         
         // check PHP 5.6
@@ -260,9 +282,15 @@ INI;
             $stats['PHP 5.6']['configured'] = 'No';
         } else {
             $stats['PHP 5.6']['configured'] = 'Yes';
-            $stats['PHP 5.6']['version'] = shell_exec($config->php56.' -r "echo phpversion();" 2>&1');
-            $stats['PHP 5.6']['short_open_tags'] = shell_exec($config->php56.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-            $stats['PHP 5.6']['timezone'] = shell_exec($config->php56.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+            $res = trim(shell_exec($config->php56.' -r "echo phpversion();" 2>&1'));
+            if (preg_match('/[^\\.0-9]/', $res)) {
+                $stats['PHP 5.6']['installed'] = 'No';
+            } else {
+                $stats['PHP 5.6']['installed'] = 'Yes';
+                $stats['PHP 5.6']['version'] = $res;
+                $stats['PHP 5.6']['short_open_tags'] = shell_exec($config->php56.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+                $stats['PHP 5.6']['timezone'] = shell_exec($config->php56.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+            }
         }
         
         // check PHP 7
@@ -281,7 +309,7 @@ INI;
         }
 
         // hg
-        $res = trim(shell_exec('hg --version'));
+        $res = trim(shell_exec('hg --version 2>&1'));
         if (preg_match('/Mercurial Distributed SCM \(version ([0-9\.]+)\)/', $res, $r)) {//
             $stats['hg']['installed'] = 'Yes';
             $stats['hg']['version'] = $r[1];
@@ -291,7 +319,7 @@ INI;
         }
 
         // svn
-        $res = trim(shell_exec('svn --version'));
+        $res = trim(shell_exec('svn --version 2>&1'));
         if (preg_match('/svn, version ([0-9\.]+) /', $res, $r)) {//
             $stats['svn']['installed'] = 'Yes';
             $stats['svn']['version'] = $r[1];
