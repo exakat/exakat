@@ -7,7 +7,7 @@ class Tokenizer extends \PHPUnit_Framework_TestCase {
         $shell = 'cd ../..; php exakat load -r -f ./tests/tokenizer/source/'.$file.'.php -p test; php exakat build_root -p test; php exakat tokenizer -p test;';
         $res = shell_exec($shell);
         
-        $shell = 'cd ../..; php bin/export -text';
+        $shell = 'cd ../..; php exakat export -text -o';
         $res = shell_exec($shell);
         
         $exp = file_get_contents('exp/'.$file.'.txt');
