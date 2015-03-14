@@ -45,6 +45,21 @@ class _Array extends TokenAuto {
                                'cleanIndex'   => true);
         $this->checkAuto();
 
+        // Class::Constante[INDEX]
+        $this->conditions = array( -2 => array('token'   => 'T_DOUBLE_COLON'),
+                                   -1 => array('token'   => 'T_STRING'),
+                                    0 => array('token'   => _Array::$operators,
+                                               'check_for_array' => true),
+                                    1 => array('atom'    => 'yes',
+                                               'notAtom' => 'Sequence'),
+                                    2 => array('token'   => array('T_CLOSE_BRACKET', 'T_CLOSE_CURLY')),
+                                 );
+        
+        $this->actions = array('to_array'     => true,
+                               'makeSequence' => 'b1',
+                               'cleanIndex'   => true);
+        $this->checkAuto();
+
         return false;
     }
 
