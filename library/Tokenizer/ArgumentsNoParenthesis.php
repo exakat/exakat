@@ -49,10 +49,10 @@ class ArgumentsNoParenthesis extends Arguments {
 
         // @note exit; no parenthesis, no argument.
         $this->conditions = array( -1 => array('notToken' => 'T_INSTANCEOF'),
-                                    0 => array('atom' => 'none',
-                                               'token' => array('T_EXIT', 'T_STATIC')),
-                                    1 => array('token'  => 'T_SEMICOLON')
-        );
+                                    0 => array('atom'     => 'none',
+                                               'token'    => array('T_EXIT', 'T_STATIC')),
+                                    1 => array('token'    => array('T_SEMICOLON', 'T_CLOSE_TAG'))
+                                  );
         
         $this->actions = array('addEdge'     => array(0 => array('Arguments' => 'ARGUMENT')),
                                'keepIndexed' => true);
