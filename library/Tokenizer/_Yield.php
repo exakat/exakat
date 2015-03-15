@@ -31,7 +31,7 @@ class _Yield extends TokenAuto {
         $this->conditions = array(0 => array('token' => _Yield::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'yes'),
-                                  2 => array('token' => 'T_SEMICOLON')
+                                  2 => array('token' => array('T_SEMICOLON', 'T_CLOSE_PARENTHESIS'))
                                   );
         
         $this->actions = array('transform'    => array( 1 => 'YIELD' ),
