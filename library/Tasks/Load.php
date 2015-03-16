@@ -28,7 +28,6 @@ namespace Tasks;
 class Load implements Tasks {
     private $log    = null;
     private $php    = null;
-    private $loader = null;
     private $config = null;
     
     public function run(\Config $config) {
@@ -44,6 +43,7 @@ class Load implements Tasks {
         $this->php = new \Phpexec($this->config->phpversion);
 
         // formerly -q option. Currently, only one loader, via csv-batchimport;
+//        $this->client = new \Loader\Cypher();
         $this->client = new \Loader\Csv();
 
         if ($filename = $this->config->filename) {
@@ -61,6 +61,7 @@ class Load implements Tasks {
         }
 
         $this->client->finalize();
+        display("Final memory : ".number_format(memory_get_usage()/ pow(2, 20))."Mb \n");
     }
 
     private function process_dir($dir) {
@@ -597,7 +598,8 @@ class Load implements Tasks {
                     } elseif ($token[3] == 'T_STRING_VARNAME') {
                         $T[$Tid]->setProperty('atom', $atoms[$token[3]])
                                 ->setProperty('code', '$'.$token[1])
-                                ->setProperty('fullcode', '$'.$token[1])->save();
+                                ->setProperty('fullcode', '$'.$token[1])
+                                ->save();
                     } elseif ($token[3] == 'T_INLINE_HTML' && $id == 0) {
                         // ignore
                     } elseif ($token[3] == 'T_INLINE_HTML' &&
@@ -1101,6 +1103,7 @@ class Load implements Tasks {
         $last->relateTo($last2, 'NEXT')->setProperty('file', $file)->save();
 
         $this->client->save_chunk();
+        display("      memory : ".number_format(memory_get_usage()/ pow(2, 20))."Mb \n");
 
         return $Tid;
     }
