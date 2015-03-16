@@ -114,8 +114,6 @@ class TokenAuto extends Token {
         $qactions = array();
 
         // @doc audit trail track
-//        $qactions[] = "\n it.setProperty('modifiedBy', '".str_replace('Tokenizer\\', '', get_class($this))."'); \n";
-
         if (isset($actions['keepIndexed'])) {
             if (!$actions['keepIndexed']) { // true means All
                 $qactions[] = "
@@ -148,10 +146,10 @@ class TokenAuto extends Token {
             $qactions[] = "
 /* transfert property root away  */
 it.has('root', true)$next.each{
-    it.setProperty('root', 'true');
+    it.setProperty('root', true);
 }
 it.setProperty('root', 'null');
-                ";
+";
             unset($actions['transfert']);
         }
 
@@ -191,6 +189,8 @@ fullcode = it.out('NEXT').next(); \n";
                 foreach($actions['propertyNext'] as $name => $value) {
                     if (substr($value, 0, 3) == 'it.') {
                         $value = 'fullcode.' . substr($value, 3);
+                    } elseif ($value === true) {
+                        $value = 'true';
                     } else {
                         $value = "'$value'";
                     }
@@ -2422,11 +2422,11 @@ g.addEdge(b1, x, 'NEXT');
         $it.setProperty('rank', 0);
 //        $it.setProperty('makeSequence', 'else');
         
-        if ($it.root == 'true') {
-            sequence.setProperty('root', 'true');
+        if ($it.root == true) {
+            sequence.setProperty('root', true);
             g.addEdge($it.in('FILE').next(), sequence, 'FILE');
             
-            $it.setProperty('root', 'false');
+            $it.setProperty('root', false);
             $it.inE('FILE').each{ g.removeEdge(it); }
         }
 
@@ -2507,7 +2507,7 @@ list_after_token = [
 if (     $it.token != 'T_ELSEIF'
     &&   $it.in('NEXT').any()
     &&   $it.out('NEXT').any()
-    &&  ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' )
+    &&  ($it.root != true || $it.out('NEXT').next().atom == 'RawString' )
     &&  ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))
     &&  ($it.in('NEXT').next().atom != null || !($it.out('NEXT').next().token in list_after) )
     &&   $it.in_quote != true
@@ -2524,7 +2524,7 @@ $makeSequence;
     $it.setProperty('makeSequence1', $it.token != 'T_ELSEIF');
     $it.setProperty('makeSequence2', $it.in('NEXT').any());
     $it.setProperty('makeSequence3', $it.out('NEXT').any());
-    $it.setProperty('makeSequence4', ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' ));
+    $it.setProperty('makeSequence4', ($it.root != true || $it.out('NEXT').next().atom == 'RawString' ));
     $it.setProperty('makeSequence5', ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before)));
     $it.setProperty('makeSequence6', ($it.in('NEXT').next().atom != null || !($it.out('NEXT').next().token in list_after) ));
     $it.setProperty('makeSequence7', ($it.in_quote != true));
@@ -2780,6 +2780,10 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             foreach($conditions['property'] as $property => $value) {
                 if (is_array($value)) {
                     $queryConditions[] = "filter{it.$property in ['".implode("', '", $value)."']}";
+                } elseif ($value === true) {
+                    $queryConditions[] = "has('$property', true)";
+                } elseif ($value === false) {
+                    $queryConditions[] = "has('$property', false)";
                 } else {
                     $queryConditions[] = "has('$property', '$value')";
                 }
