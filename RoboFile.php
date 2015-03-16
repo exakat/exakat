@@ -2,7 +2,7 @@
 
 use Symfony\Component\Finder\Finder;
 
-include_once './library/Autoload.php';
+include './library/Autoload.php';
 spl_autoload_register('Autoload::autoload_library');
 
 class RoboFile extends \Robo\Tasks

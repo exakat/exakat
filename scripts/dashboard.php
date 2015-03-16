@@ -24,10 +24,10 @@
 define('DOC_ROOT', dirname(__DIR__));
 
 if(strpos(basename(__FILE__), 'phar') !== false){
-    require_once 'phar://exakat.phar/library/Autoload.php';
+    include 'phar://exakat.phar/library/Autoload.php';
     spl_autoload_register('Autoload::autoload_library');
 } else {
-    include_once DOC_ROOT.'/library/Autoload.php';
+    include DOC_ROOT.'/library/Autoload.php';
     spl_autoload_register('Autoload::autoload_library');
 }
 
