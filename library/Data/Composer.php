@@ -47,7 +47,7 @@ class Composer {
     public function getComposerNamespaces($vendor = null) {
         $query = "SELECT namespace FROM namespaces";
         if ($vendor !== null) {
-            list($vendor, $component) = split('/', $vendor);
+            list($vendor, $component) = explode('/', $vendor);
             $query .= " WHERE vendor = '$vendor' and component = '$component'";
         
         }
@@ -65,7 +65,7 @@ class Composer {
         $query = "SELECT namespace || '\\' || classname AS classname FROM namespaces 
 JOIN classes ON classes.namespace_id = namespaces.id";
         if ($vendor !== null) {
-            list($vendor, $component) = split('/', $vendor);
+            list($vendor, $component) = explode('/', $vendor);
             $query .= " WHERE vendor = '$vendor' and component = '$component'";
         
         }
@@ -83,7 +83,7 @@ JOIN classes ON classes.namespace_id = namespaces.id";
         $query = "SELECT namespace || '\\' || interfacename AS interfacename FROM namespaces 
 JOIN interfaces ON interfaces.namespace_id = namespaces.id";
         if ($vendor !== null) {
-            list($vendor, $component) = split('/', $vendor);
+            list($vendor, $component) = explode('/', $vendor);
             $query .= " WHERE vendor = '$vendor' and component = '$component'";
         
         }
@@ -101,7 +101,7 @@ JOIN interfaces ON interfaces.namespace_id = namespaces.id";
         $query = "SELECT namespace || '\\' || traitname AS traitname FROM namespaces 
 JOIN traits ON traits.namespace_id = namespaces.id";
         if ($vendor !== null) {
-            list($vendor, $component) = split('/', $vendor);
+            list($vendor, $component) = explode('/', $vendor);
             $query .= " WHERE vendor = '$vendor' and component = '$component'";
         
         }
