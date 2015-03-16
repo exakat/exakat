@@ -39,7 +39,7 @@ class Description {
         }
     }
 
-    private function setLanguage($language) {
+    public function setLanguage($language) {
         $this->language = $language;
     }
 
