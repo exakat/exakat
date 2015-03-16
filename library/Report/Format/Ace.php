@@ -100,7 +100,7 @@ class Ace extends \Report\Format {
 </html>
 
 HTML;
-        file_put_contents($dir.'/index.html', $index_html);
+        file_put_contents($dir.'/index.'.$this->fileExtension, $index_html);
         
         shell_exec('cd '.dirname($dir).'; zip -r '.basename($dir).' '.basename($dir).' 2 >> /dev/null'); 
         
@@ -354,7 +354,7 @@ HTML;
         // @todo : remove this sync!
         return str_replace(array(' ', '(', ')', ':', '*', '.', '/' ), 
                            array('-', '' , '' , '' , '' , '', '' ),
-                               $title).'.html';
+                               $title).'.'.$this->fileExtension;
     }
 
     protected function makeLink($title) {
