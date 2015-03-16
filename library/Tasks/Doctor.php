@@ -57,7 +57,7 @@ class Doctor implements Tasks {
             $stats['java']['installed'] = 'No';
             $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
         } elseif (preg_match('/java version "(.*)"/is', $res, $r)) {
-            list($line1, $line2,) = explode("\n", $res);
+            list(, $line2,) = explode("\n", $res);
             $stats['java']['installed'] = 'Yes';
             $stats['java']['type'] = trim($line2);
             $stats['java']['version'] = $r[1];
