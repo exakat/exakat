@@ -546,6 +546,7 @@ GREMLIN;
             foreach($analyzer as &$a) {
                 $a = self::getClass($analyzer);
             }
+            unset($a);
             $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any()}', $analyzer);
         } else {
             if ($analyzer == 'self') {
@@ -565,6 +566,7 @@ GREMLIN;
             foreach($analyzer as &$a) {
                 $a = self::getClass($analyzer);
             }
+            unset($a);
             $this->addMethod('filter{ it.in("ANALYZED").filter{ it.code in ***}.any() == false}', $analyzer);
         } else {
             if ($analyzer == 'self') {
