@@ -561,7 +561,6 @@ GREMLIN;
     }
 
     public function analyzerIsNot($analyzer) {
-
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
                 $a = self::getClass($analyzer);
@@ -580,9 +579,13 @@ GREMLIN;
         return $this;
     }
 
-    public function is($property, $value= "'true'") {
+    public function is($property, $value = true) {
         if ($value === null) {
             $this->addMethod("has('$property', null)");
+        } elseif ($value === true) {
+            $this->addMethod("has('$property', true)");
+        } elseif ($value === false) {
+            $this->addMethod("has('$property', false)");
         } else {
             $this->addMethod("filter{ it.$property in ***;}", $value);
         }
