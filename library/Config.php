@@ -158,6 +158,7 @@ class Config {
         
         $optionsBoolean = array(
                                  '-v'         => array('verbose',        false),
+                                 '-Q'         => array('quick',          false),
                                  '-h'         => array('help',           false),
                                  '-r'         => array('recursive',      false),
                                  '-u'         => array('update',         false),
@@ -217,6 +218,7 @@ class Config {
                           'build_root'  => 1, 
                           'constantes'  => 1, 
                           'clean'       => 1, 
+                          'cleandb'     => 1, 
                           'doctor'      => 1, 
                           'errors'      => 1,
                           'export'      => 1,
