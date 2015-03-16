@@ -303,7 +303,7 @@ g.idx('racines')[['token':'ROOT']].out('INDEXED').as('root').out('NEXT').hasNot(
     g.removeVertex(it);
 };
 
-g.V.has('root', 'true')[0].inE('INDEXED').each{
+g.V.has('root', true)[0].inE('INDEXED').each{
     g.removeEdge(it);
 };
 

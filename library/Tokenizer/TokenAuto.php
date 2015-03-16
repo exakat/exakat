@@ -1129,7 +1129,7 @@ g.addEdge(x, f, 'NEXT');
             $qactions[] = "
 /* to_block */
 
-it.setProperty('block', 'true');
+it.setProperty('block', true);
 next = it.out('NEXT').next();
 
 if (next.atom == 'Sequence' || next.atom == 'SequenceCaseDefault') {
@@ -1169,7 +1169,7 @@ if (next.atom == 'Sequence' || next.atom == 'SequenceCaseDefault') {
             $qactions[] = "
 /* to_block_for */
 
-x = g.addVertex(null, [code:'Block with For', fullcode:'Block with For', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, block:'true' ]);
+x = g.addVertex(null, [code:'Block with For', fullcode:'Block with For', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, block:true ]);
 
 g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');
 
@@ -1891,7 +1891,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $qactions[] = "
 /* to_block_else */
 
-x = g.addVertex(null, [code:'Block with else', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:'true', virtual:true, line:it.line]);
+x = g.addVertex(null, [code:'Block with else', fullcode:' /**/ ', token:'T_SEMICOLON', atom:'Sequence', block:true, virtual:true, line:it.line]);
 
 a = it.out('NEXT').next();
 if (a.token == 'T_COLON') {
@@ -1928,7 +1928,7 @@ x.out('ELEMENT').each{
             $qactions[] = "
 /* to_block_foreach */
 
-x = g.addVertex(null, [code:'Block with Foreach', fullcode:'Block with Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, line:it.line, block:'true', fullcode:' /**/ ']);
+x = g.addVertex(null, [code:'Block with Foreach', fullcode:'Block with Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, line:it.line, block:true, fullcode:' /**/ ']);
 g.addEdge(g.idx('racines')[['token':'Sequence']].next(), x, 'INDEXED');
 
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
@@ -1959,7 +1959,7 @@ x.out('NEXT').has('token', 'T_SEMICOLON').has('atom', null).each{
             $qactions[] = "
 /* to_block_ifelseif ({$actions['to_block_ifelseif']})*/
 
-x = g.addVertex(null, [code:'Block with if/elseif', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, block:'true' ]);
+x = g.addVertex(null, [code:'Block with if/elseif', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, block:true ]);
 
 fullcode = x;
 $fullcode
@@ -1995,7 +1995,7 @@ x.out('ELEMENT').each{
                 $qactions[] = "
 /* to_block_ifelseif_instruction */
 
-x = g.addVertex(null, [code:'Block with control if elseif', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:' /**/ ', block:'true' ]);
+x = g.addVertex(null, [code:'Block with control if elseif', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:' /**/ ', block:true ]);
 a = it.out('NEXT').out('NEXT').next();
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
@@ -2295,7 +2295,7 @@ element2.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = "
 /* while_to_block */
 
-x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:'true', line:it.line, fullcode:' /**/ '
+x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:true, line:it.line, fullcode:' /**/ '
 /*, modifiedBy:'_While' */]);
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 

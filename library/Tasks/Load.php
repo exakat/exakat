@@ -1001,7 +1001,7 @@ class Load implements Tasks {
                 }
             } elseif ($inQuote && in_array($token_value, array('T_QUOTE_CLOSE', 'T_SHELL_QUOTE_CLOSE', 'T_END_HEREDOC'))) {
                 $inQuote = false;
-                $T[$Tid]->setProperty('in_quote', "'true'")->save();
+                $T[$Tid]->setProperty('in_quote', 'true')->save();
                 if (is_array($token)) {
                     $T[$Tid]->setProperty('fullcode', $token[1])->save();
                 } else {

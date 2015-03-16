@@ -593,6 +593,20 @@ GREMLIN;
         return $this;
     }
 
+    public function isNot($property, $value = true) {
+        if ($value === null) {
+            $this->addMethod("hasNot('$property', null)");
+        } elseif ($value === true) {
+            $this->addMethod("hasNot('$property', true)");
+        } elseif ($value === false) {
+            $this->addMethod("hasNot('$property', false)");
+        } else {
+            $this->addMethod("filter{ it.$property != ***;}", $value);
+        }
+        
+        return $this;
+    }
+
     public function isMore($property, $value = '0') {
         if (is_int($value)) {
             $this->addMethod("filter{ it.$property > ***;}", $value);
@@ -612,16 +626,6 @@ GREMLIN;
             $this->addMethod("filter{ it.$property < $value;}", $value);
         }
 
-        return $this;
-    }
-
-    public function isNot($property, $value= "'true'") {
-        if ($value === null) {
-            $this->addMethod("hasNot('$property', null)");
-        } else {
-            $this->addMethod("filter{ it.$property != ***;}", $value);
-        }
-        
         return $this;
     }
 
