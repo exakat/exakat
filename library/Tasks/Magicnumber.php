@@ -73,32 +73,6 @@ QUERY;
         $query = new Gremlin\Query($this->client, $query, $params);
         return $query->getResultSet();
     }
-
-    private function table_encode($stats) {
-        $html = "<html><body>";
-    
-        foreach($stats as $name => $value) {
-            $html .= "<tr><td>$name</td><td>$value</td></tr>\n";
-        }
-    
-        $html .= "</body></html>";
-        return $html;
-    }
-
-    private function text_encode($stats) {
-        $html = "Statistics for the whole server\n\n";
-    
-        foreach($stats as $name => $value) {
-            if (is_array($value)) {
-                $html .= "$name : ".join(" \n".str_repeat(' ', strlen("$name : ")), $value)."\n";
-            } else {
-                $html .= "$name : $value\n";
-            }
-        }
-    
-        $html .= "\n";
-        return $html;
-    }
 }
 
 ?>
