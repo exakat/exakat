@@ -53,7 +53,7 @@ if (empty($file)) {
 
 function run($test, $number) {
     print "$test.$number\n";
-    $shell = 'cd ../..; php exakat load -f ./tests/tokenizer/source/'."$test.$number".'.php -p test; php exakat build_root -p test; php exakat tokenizer -p test; php exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
+    $shell = 'cd ../..; php exakat cleandb; php exakat load -f ./tests/tokenizer/source/'."$test.$number".'.php -p test; php exakat build_root -p test; php exakat tokenizer -p test; php exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
     
     shell_exec($shell);
     
