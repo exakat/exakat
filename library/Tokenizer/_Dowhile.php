@@ -34,7 +34,7 @@ class _Dowhile extends TokenAuto {
                                    2 => array('token'   => 'T_SEMICOLON',
                                               'atom'    => 'none'),
                                    3 => array('token'   => 'T_WHILE',
-                                              'dowhile' => 'true'),
+                                              'dowhile' => true),
                                    4 => array('token'   => 'T_OPEN_PARENTHESIS'),
                                    5 => array('atom'    => 'yes'),
                                    6 => array('token'   => 'T_CLOSE_PARENTHESIS')
@@ -57,7 +57,7 @@ class _Dowhile extends TokenAuto {
                                    1 => array('atom'    => 'yes',
                                               'notAtom' => 'Sequence'),
                                    2 => array('token'   => 'T_WHILE',
-                                              'dowhile' => 'true'),
+                                              'dowhile' => true),
                                    3 => array('token'   => 'T_OPEN_PARENTHESIS'),
                                    4 => array('atom'    => 'yes'),
                                    5 => array('token'   => 'T_CLOSE_PARENTHESIS')
@@ -78,7 +78,7 @@ class _Dowhile extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Dowhile::$operators),
                                    1 => array('atom'  => 'Sequence'),
                                    2 => array('token' => 'T_WHILE',
-                                              'dowhile' => 'true'),
+                                              'dowhile' => true),
                                    3 => array('token' => 'T_OPEN_PARENTHESIS'),
                                    4 => array('atom'  => 'yes'),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS')
