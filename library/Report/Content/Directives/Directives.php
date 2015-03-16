@@ -64,7 +64,8 @@ abstract class Directives implements \Iterator {
 
     protected function checkPresence($analyzer) {
         $vertices = $this->query("g.idx('analyzers')[['analyzer':'Analyzer\\\\".str_replace('\\', '\\\\', $analyzer)."']].out.any()");
-        return $this->hasDirective = ($vertices[0][0] === false ? self::OFF : self::ON);
+        $this->hasDirective = ($vertices[0][0] === false ? self::OFF : self::ON);
+        return $this->hasDirective;
     }
 
     public function query($query) {
