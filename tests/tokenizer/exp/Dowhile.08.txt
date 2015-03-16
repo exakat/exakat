@@ -6,15 +6,15 @@ Label : CODE
     do
     Label : BLOCK
       foreach
-      Label : SOURCE
-        $a
-      Label : VALUE
-        $b
       Label : BLOCK
         {
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
             $c
+      Label : SOURCE
+        $a
+      Label : VALUE
+        $b
     Label : CONDITION
       $z

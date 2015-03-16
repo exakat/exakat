@@ -11,20 +11,20 @@ Label : CODE
       Label : CASES
         {
         Label : ELEMENT
-          case
-          Label : CASE
-            1
-          Label : CODE
-            Block with Sequence For Case
-            Label : ELEMENT
-              break
-              Label : LEVEL
-                1
-        Label : ELEMENT
           default
           Label : CODE
             Block with Sequence For Default
             Label : ELEMENT
               Void
+        Label : ELEMENT
+          case
+          Label : CODE
+            ;
+            Label : ELEMENT
+              break
+              Label : LEVEL
+                1
+          Label : CASE
+            1
     Label : CONDITION
       $z

@@ -12,7 +12,7 @@ Label : CODE
           $x
     Label : CONDITION
       <
-      Label : RIGHT
-        4
       Label : LEFT
         $x
+      Label : RIGHT
+        4
