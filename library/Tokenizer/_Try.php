@@ -32,7 +32,7 @@ class _Try extends TokenAuto {
         $this->conditions = array(0 => array('token'    => _Try::$operators,
                                              'atom'     => 'none'),
                                   1 => array('atom'     => 'Sequence',
-                                             'property' => array('block' => 'true')),
+                                             'property' => array('block' => true)),
                                   2 => array('atom'     => array('Catch', 'Finally')),
                                   );
         

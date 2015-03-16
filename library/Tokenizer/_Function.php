@@ -36,7 +36,7 @@ class _Function extends TokenAuto {
                                   3 => array('atom'  => 'Arguments'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   5 => array('atom'  => 'Sequence',
-                                             'property' => array('block' => 'true') ),
+                                             'property' => array('block' => true)),
         );
         
         $this->actions = array('transform'     => array( 1 => 'NAME',
@@ -78,7 +78,8 @@ class _Function extends TokenAuto {
                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom' => 'Arguments'),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('atom' => 'Sequence')
+                                  4 => array('atom' => 'Sequence',
+                                             'property' => array('block' => true))
         );
         
         $this->actions = array('to_lambda'     => true,
@@ -98,7 +99,8 @@ class _Function extends TokenAuto {
                                   5 => array('token' => 'T_OPEN_PARENTHESIS'),
                                   6 => array('atom'  => 'Arguments'),
                                   7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  8 => array('atom'  => 'Sequence')
+                                  8 => array('atom'  => 'Sequence',
+                                             'property' => array('block' => true))
         );
         
         $this->actions = array('to_lambda_use'  => true,
@@ -132,7 +134,7 @@ if (fullcode.out('DEFINE').any()) {
     fullcode.out('PROTECTED', 'PRIVATE', 'PUBLIC').each{ it.setProperty('atom', 'Visibility'); }
 } else {
     fullcode.setProperty('args_min', fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').count());
-    if (fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').has('variadic', 'true').any()) {
+    if (fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Variable').has('variadic', true).any()) {
         fullcode.setProperty('args_max', 100);
     } else {
         fullcode.setProperty('args_max', fullcode.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Assignation').count() + fullcode.getProperty('args_min'));

@@ -32,7 +32,7 @@ class _Namespace extends TokenAuto {
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => 'Sequence',
-                                             'property' => array('block' => 'true')),
+                                             'property' => array('block' => true)),
                                   2 => array('token' => array('T_NAMESPACE', 'T_CLOSE_TAG', 'T_END', 'T_SEMICOLON')),
         );
         

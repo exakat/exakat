@@ -84,7 +84,7 @@ class _Use extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Use::$operators),
                                    1 => array('atom'  => array('Nsname', 'Identifier')),
                                    2 => array('atom'  => 'Sequence',
-                                              'property' => array('block' => 'true')),
+                                              'property' => array('block' => true)),
                                  );
         
         $this->actions = array('transform'  => array( 1 => 'USE',
@@ -99,7 +99,7 @@ class _Use extends TokenAuto {
         $this->conditions = array( 0 => array('token' => _Use::$operators),
                                    1 => array('atom'  => 'Arguments'),
                                    2 => array('atom'  => 'Sequence',
-                                              'property' => array('block' => 'true')),
+                                              'property' => array('block' => true)),
                                  );
         
         $this->actions = array('to_use_block' => true,

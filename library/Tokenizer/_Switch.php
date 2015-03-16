@@ -35,7 +35,7 @@ class _Switch extends TokenAuto {
                                   2 => array('atom'  => 'yes'),
                                   3 => array('token' => array('T_CLOSE_PARENTHESIS')),
                                   4 => array('atom'  => 'Sequence',
-                                             'property' => array('block' => 'true'))
+                                             'property' => array('block' => true))
         );
         
         $this->actions = array('transform'    => array( 1 => 'DROP',

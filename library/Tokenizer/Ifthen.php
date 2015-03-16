@@ -64,11 +64,11 @@ class Ifthen extends TokenAuto {
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('atom'  =>  'Sequence',
-                                              'property' => array('block' => 'true')),
+                                              'property' => array('block' => true)),
                                    3 => array('token' => 'T_ELSE',
                                               'atom'  => 'none'),
                                    4 => array('atom'  => 'Sequence',
-                                              'property' => array('block' => 'true')),
+                                              'property' => array('block' => true)),
         );
         
         $this->actions = array('transform'    => array(1 => 'CONDITION',
@@ -100,7 +100,7 @@ class Ifthen extends TokenAuto {
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => 'Sequence',
-                                              'property' => array('block' => 'true')),
+                                              'property' => array('block' => true)),
                                    3 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
         );
         
@@ -117,7 +117,7 @@ class Ifthen extends TokenAuto {
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Parenthesis'),
                                    2 => array('atom' => 'Sequence',
-                                              'property' => array('block' => 'true')),
+                                              'property' => array('block' => true)),
                                    3 => array('token' => 'T_ELSE'),
                                    4 => array('token' => 'T_COLON'),
         );
@@ -134,7 +134,7 @@ class Ifthen extends TokenAuto {
         $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('atom'  => 'Sequence',
-                                              'property' => array('block' => 'true')),
+                                              'property' => array('block' => true)),
                                    3 => array('atom'  => 'Ifthen',
                                               'token' => 'T_ELSEIF',
                                               'property' => array('alternative' => 'false'))
