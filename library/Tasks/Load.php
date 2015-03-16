@@ -43,8 +43,8 @@ class Load implements Tasks {
         $this->php = new \Phpexec($this->config->phpversion);
 
         // formerly -q option. Currently, only one loader, via csv-batchimport;
-//        $this->client = new \Loader\Cypher();
-        $this->client = new \Loader\Csv();
+        $this->client = new \Loader\Cypher();
+//        $this->client = new \Loader\Csv();
 
         if ($filename = $this->config->filename) {
             $nbTokens = $this->process_file($filename);
@@ -1010,7 +1010,7 @@ class Load implements Tasks {
             }
 
             if ($inQuote) {
-                $T[$Tid]->setProperty('in_quote', "'true'")->save();
+                $T[$Tid]->setProperty('in_quote', 'true')->save();
             } 
 
             if (in_array($token_value, array('T_FOR'))) {
@@ -1029,7 +1029,7 @@ class Load implements Tasks {
             }
 
             if ($in_for > 1) {
-                $T[$Tid]->setProperty('in_for', "'true'")->save();
+                $T[$Tid]->setProperty('in_for', 'true')->save();
             } 
         
             if ($type = $this->process_colon($token_value)) {
