@@ -149,8 +149,10 @@ class Files implements Tasks {
     
             foreach($resFiles as $resFile) {
                 if (substr($resFile, 0, 28) == 'No syntax errors detected in') {
+                    continue;
                     // do nothing. All is fine.
                 } elseif ($resFile == '') {
+                    continue;
                     // do nothing. All is fine.
                 } elseif (substr($resFile, 0, 13) == 'Parse error: ') {
                     preg_match('#Parse error: (.+?) in (.+?) on line (\d+)#', $resFile, $r);
