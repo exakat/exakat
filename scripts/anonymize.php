@@ -68,9 +68,7 @@ foreach($tokens as $t) {
                 }
                 break;
             case T_VARIABLE: 
-                if ($t[1] == '$this') {
-                    // do nothing, we keep it 
-                } else {
+                if ($t[1] != '$this') {
                     if (isset($variableNames[$t[1]])) {
                         $t[1] = $variableNames[$t[1]];
                     } else {
