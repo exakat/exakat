@@ -89,9 +89,7 @@ class Export implements Tasks {
             $text = $this->display_text($V, $E, $root);
         }
 
-        if ($config->output) {
-            print $text;
-        } else {
+        if ($config->filename) {
             if ($config->format == 'Dot') {
                 $fp = fopen($config->filename.'.dot', 'w+');
             } else {
@@ -99,6 +97,8 @@ class Export implements Tasks {
             }
             fwrite($fp, $text);
             fclose($fp);
+        } else {
+            print $text;
         }
     }
     
