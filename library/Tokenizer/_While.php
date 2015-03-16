@@ -30,7 +30,7 @@ class _While extends TokenAuto {
     public function _check() {
          // While( condition ) ;
         $this->conditions = array( 0 => array('token'     => _While::$operators,
-                                              'dowhile'   => 'false'),
+                                              'dowhile'   => false),
                                    1 => array('token'     => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'      => 'yes'),
                                    3 => array('token'     => 'T_CLOSE_PARENTHESIS'),
@@ -45,7 +45,7 @@ class _While extends TokenAuto {
 
          //  syntax   While() $x++;
         $this->conditions = array( 0 => array('token'      => _While::$operators,
-                                              'dowhile'   => 'false'),
+                                              'dowhile'    => false),
                                    1 => array('token'      => 'T_OPEN_PARENTHESIS'),
                                    2 => array('atom'       => 'yes'),
                                    3 => array('token'      => 'T_CLOSE_PARENTHESIS'),
@@ -61,7 +61,7 @@ class _While extends TokenAuto {
         
          //  While( ) {}
        $this->conditions = array( 0 => array('token'   => _While::$operators,
-                                             'dowhile' => 'false'),
+                                             'dowhile' => false),
                                   1 => array('token'   => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom'    => 'yes'),
                                   3 => array('token'   => 'T_CLOSE_PARENTHESIS'),
@@ -79,7 +79,7 @@ class _While extends TokenAuto {
         
         // alternative syntax While( ) : endwhile
         $this->conditions = array(0 => array('token'   => _While::$operators,
-                                             'dowhile' => 'false'),
+                                             'dowhile' => false),
                                   1 => array('token'   => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom'    => 'yes'),
                                   3 => array('token'   => 'T_CLOSE_PARENTHESIS'),
