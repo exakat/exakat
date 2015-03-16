@@ -1,0 +1,39 @@
+<?php
+
+$project = 'purl';
+
+$composer = json_decode(file_get_contents("projects/$project/code/composer.json"));
+$components = (array) $composer->require;
+
+unset($components['php']);
+foreach($components as $k => $v) {
+    if (substr($k, 0, 4) == 'ext-') {
+        unset($components[$k]);
+    }
+
+    if (substr($k, 0, 4) == 'lib-') {
+        unset($components[$k]);
+    }
+}
+
+$sqlite = new sqlite3('data/composer.sqlite');
+
+foreach($components as $fullName => $version) {
+    list($vendor, $component) = explode('/', strtolower($fullName));
+
+    print $fullName." ($version)\n";
+    
+    $res = $sqlite->query("SELECT version FROM versions 
+JOIN components
+    ON components.id = versions.component_id
+WHERE vendor='$vendor' AND component = '$component'");
+    while($available = $res->fetchArray(SQLITE3_ASSOC)['version']) {
+        if (intval($available[0]) != $available[0]) { continue; }
+        
+        if (version_compare($version, $available) < 0) {
+            print "$available\n";
+        }
+    }
+}
+
+?>
