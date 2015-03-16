@@ -147,9 +147,8 @@ class TokenAuto extends Token {
             $next = str_repeat(".out('NEXT')", $where);
             $qactions[] = "
 /* transfert property root away  */
-it.has('root', 'true')$next.each{
+it.has('root', true)$next.each{
     it.setProperty('root', 'true');
-    it.setProperty('test', 'true');
 }
 it.setProperty('root', 'null');
                 ";
@@ -2511,8 +2510,8 @@ if (     $it.token != 'T_ELSEIF'
     &&  ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' )
     &&  ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before))
     &&  ($it.in('NEXT').next().atom != null || !($it.out('NEXT').next().token in list_after) )
-    &&   $it.in_quote != \"'true'\"
-    &&   $it.in_for != \"'true'\"
+    &&   $it.in_quote != true
+    &&   $it.in_for != true
     && !($it.in('NEXT').next().atom in ['Class', 'Identifier'])
     && !($it.out('NEXT').next().token in list_after_token)
     && !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE'])
@@ -2528,8 +2527,8 @@ $makeSequence;
     $it.setProperty('makeSequence4', ($it.root != 'true' || $it.out('NEXT').next().atom == 'RawString' ));
     $it.setProperty('makeSequence5', ($it.in('NEXT').next().atom != null || !($it.in('NEXT').next().token in list_before)));
     $it.setProperty('makeSequence6', ($it.in('NEXT').next().atom != null || !($it.out('NEXT').next().token in list_after) ));
-    $it.setProperty('makeSequence7', ($it.in_quote != \"'true'\"));
-    $it.setProperty('makeSequence8', $it.in_for != \"'true'\");
+    $it.setProperty('makeSequence7', ($it.in_quote != true));
+    $it.setProperty('makeSequence8', $it.in_for != true);
     $it.setProperty('makeSequence9', !($it.in('NEXT').next().atom in ['Class', 'Identifier']));
     $it.setProperty('makeSequence10', !($it.out('NEXT').next().token in list_after_token));
     $it.setProperty('makeSequence11', !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE']));
@@ -2937,16 +2936,16 @@ GREMLIN;
             if ( $conditions['in_quote'] == 'none' ) {
                 $queryConditions[] = "has('in_quote', null)";
             } else {
-                $queryConditions[] = "has('in_quote', 'true')";
+                $queryConditions[] = "has('in_quote', true)";
             }
             unset($conditions['in_quote']);
         }
 
         if (isset($conditions['dowhile'])) {
-            if ( $conditions['dowhile'] == 'false' ) {
-                $queryConditions[] = "has('dowhile', 'false')";
+            if ( $conditions['dowhile'] === false ) {
+                $queryConditions[] = "has('dowhile', false)";
             } else {
-                $queryConditions[] = "has('dowhile', 'true')";
+                $queryConditions[] = "has('dowhile', true)";
             }
             unset($conditions['dowhile']);
         }
