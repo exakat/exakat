@@ -176,7 +176,13 @@ it.setProperty('root', 'null');
         if (isset($actions['property'])) {
             if (is_array($actions['property']) && !empty($actions['property'])) {
                 foreach($actions['property'] as $name => $value) {
-                    $qactions[] = " /* property */   it.setProperty('$name', '$value')";
+                    if ($value === true) {
+                        $qactions[] = " /* property */   it.setProperty('$name', true)";
+                    } elseif ($value === false) {
+                        $qactions[] = " /* property */   it.setProperty('$name', false)";
+                    } else {
+                        $qactions[] = " /* property */   it.setProperty('$name', '$value')";
+                    }
                 }
             }
             unset($actions['property']);
