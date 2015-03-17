@@ -4,9 +4,8 @@ namespace Test;
 
 class Tokenizer extends \PHPUnit_Framework_TestCase {
     public function generic_test($file) {
-        $shell = 'cd ../..; php exakat cleandb; php exakat load -r -f ./tests/tokenizer/source/'.$file.'.php -p test; php exakat build_root -p test; php exakat tokenizer -p test;';
+        $shell = 'cd ../..; php exakat cleandb; php exakat load -f ./tests/tokenizer/source/'.$file.'.php -p test; php exakat build_root -p test; php exakat tokenizer -p test;';
         $res = shell_exec($shell);
-        var_dump($res);
         
         $shell = 'cd ../..; php exakat export -p test -format text ';
         $res = shell_exec($shell);
