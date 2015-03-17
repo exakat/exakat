@@ -44,23 +44,19 @@ class Project implements Tasks {
 
         $project = $config->project;
         if (!file_exists($config->projects_root.'/projects/'.$project)) {
-            print "Project '$project' doesn't exist in projects folder. Aborting\n";
-            die();
+            die("Project '$project' doesn't exist in projects folder. Aborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
-            print "Project '$project' exists but has no config file. Aborting\n";
-            die();
+            die("Project '$project' exists but has no config file. Aborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/code')) {
-            print "Project '$project' exists but has no code folder. Aborting\n";
-            die();
+            die("Project '$project' exists but has no code folder. Aborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/log')) {
-            print "Project '$project' exists but has no log folder. Aborting\n";
-            die();
+            die("Project '$project' exists but has no log folder. Aborting\n");
         }
 
         $this->logTime('Start');
@@ -113,7 +109,7 @@ class Project implements Tasks {
             unlink($config->projects_root.'/projects/'.$project.'/log/errors.log');
         }
         $this->logTime('Tokenizer');
-        print "Project tokenized\n";
+        display("Project tokenized\n");
 
         $thread->run('php '.$this->executable.' magicnumber -p '.$project);
 
