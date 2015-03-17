@@ -2810,13 +2810,13 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             }
 
             $finalTokens = array_merge( Token::$alternativeEnding,
-                            array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY', 'T_INLINE_HTML', 'T_CLOSE_BRACKET'));
+                            array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY', 
+                                  'T_INLINE_HTML', 'T_CLOSE_BRACKET'));
             $finalTokens = "'".join("', '", $finalTokens)."'";
             $queryConditions[] = <<<GREMLIN
-filter{ it.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA'] || it.atom in [$classes] }
-                      .loop(2){!(it.object.token in [$finalTokens])}
-                      .filter{ !(it.token in ['T_OPEN_CURLY'] && it.atom == null)}.any() }
-
+filter{ it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
+.loop(4){!(it.object.token in [$finalTokens])}
+.filter{ !(it.token in ['T_OPEN_CURLY'])}.any() }
 GREMLIN;
 
             unset($conditions['check_for_arguments']);
@@ -2832,8 +2832,10 @@ GREMLIN;
             $finalTokens = array_merge( Token::$alternativeEnding,
                             array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY', 'T_CLOSE_BRACKET'));
             $finalTokens = "'".join("', '", $finalTokens)."'";
-            $queryConditions[] = "filter{ it.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA'] || it.atom in [$classes] }.loop(2){!(it.object.token in [$finalTokens])}.any() }";
-
+            $queryConditions[] = <<<GREMLIN
+filter{ it.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA'] || it.atom in [$classes] }
+.loop(2){!(it.object.token in [$finalTokens])}.any() }
+GREMLIN;
             unset($conditions['check_for_namelist']);
         }
 
@@ -2855,21 +2857,26 @@ GREMLIN;
                                  'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_PLUS','T_MINUS', 'T_POW', 'T_ELSEIF', 'T_INLINE_HTML'));
             $finalTokens = "'".join("', '", $finalTokens)."'";
 
-            $queryConditions[] = "filter{ it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_DOT']}.loop(4){!(it.object.token in [$finalTokens])}.filter{ !(it.token in ['T_OPEN_CURLY'])}.any() }";
+            $queryConditions[] = <<<GREMLIN
+filter{ it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_DOT']}
+.loop(4){!(it.object.token in [$finalTokens])}
+.filter{ !(it.token in ['T_OPEN_CURLY'])}.any() }
+GREMLIN;
 
             unset($conditions['check_for_concatenation']);
         }
 
         if (isset($conditions['check_for_array'])) {
 
-            $queryConditions[] = "filter{ it.as('a').out('NEXT').transform{ 
+            $queryConditions[] = <<<GREMLIN
+filter{ it.as('a').out('NEXT').transform{ 
     if (it.token == 'T_CLOSE_BRACKET') {
         it;
     } else {
         it.hasNot('atom', null).out('NEXT').filter{ it.token in ['T_CLOSE_BRACKET', 'T_CLOSE_CURLY']}.next();
     }
-}.out('NEXT').loop('a'){it.object.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY'] && it.object.atom == null}.any()}";
-
+}.out('NEXT').loop('a'){it.object.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY'] && it.object.atom == null}.any()}
+GREMLIN;
             unset($conditions['check_for_array']);
         }
 
