@@ -120,7 +120,7 @@ class _For extends TokenAuto {
                                                        10 => 'DROP',
                                                       ),
                                'atom'         => 'For',
-                               'property'     => array('alternative' => 'true'),
+                               'property'     => array('alternative' => true),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
@@ -157,7 +157,7 @@ class _For extends TokenAuto {
                                                        11 => 'DROP',
                                                       ),
                                'atom'         => 'For',
-                               'property'     => array('alternative' => 'true'),
+                               'property'     => array('alternative' => true),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
@@ -169,7 +169,7 @@ class _For extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-if (it.alternative == 'true') {
+if (it.alternative == true) {
     it.fullcode = "for(" + it.out("INIT").next().fullcode + " ; " + it.out("FINAL").next().fullcode + " ; " + it.out("INCREMENT").next().fullcode + ") : " + it.out("BLOCK").next().fullcode + ' endfor';
 } else {
     it.fullcode = "for(" + it.out("INIT").next().fullcode + " ; " + it.out("FINAL").next().fullcode + " ; " + it.out("INCREMENT").next().fullcode + ") " + it.out("BLOCK").next().fullcode;

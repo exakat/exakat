@@ -41,7 +41,7 @@ class Reference extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
-                               'propertyNext' => array('reference' => 'true',
+                               'propertyNext' => array('reference' => true,
                                                        'fullcode'  => 'it.fullcode'),
                                'fullcode'     => true
                                );
@@ -58,7 +58,7 @@ class Reference extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
-                               'propertyNext' => array('reference' => 'true'));
+                               'propertyNext' => array('reference' => true));
         $this->checkAuto();
 
         // special case for &function x()
@@ -72,7 +72,7 @@ class Reference extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
-                               'propertyNext' => array('reference' => 'true'),
+                               'propertyNext' => array('reference' => true),
 );
         $this->checkAuto();
 

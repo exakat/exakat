@@ -38,7 +38,7 @@ class Variadic extends TokenAuto {
         );
         
         $this->actions = array('transform'    => array( 0         => 'DROP'),
-                               'propertyNext' => array('variadic' => 'true'),
+                               'propertyNext' => array('variadic' => true),
                                'fullcode'     => true);
         $this->checkAuto();
 

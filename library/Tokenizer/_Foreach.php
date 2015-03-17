@@ -135,7 +135,7 @@ class _Foreach extends TokenAuto {
                                                         8 => 'DROP',
                                                       ),
                                'atom'         => 'Foreach',
-                               'property'     => array('alternative' => 'true'),
+                               'property'     => array('alternative' => true),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
@@ -168,7 +168,7 @@ class _Foreach extends TokenAuto {
                                                         9 => 'DROP',
                                                       ),
                                'atom'         => 'Foreach',
-                               'property'     => array('alternative' => 'true'),
+                               'property'     => array('alternative' => true),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
                                );
@@ -180,7 +180,7 @@ class _Foreach extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-if (it.alternative == 'true') {
+if (it.alternative == true) {
     fullcode.setProperty("fullcode", "foreach(" + it.out("SOURCE").next().getProperty('fullcode') + " as " + it.out("VALUE").next().getProperty('fullcode') + ") : " + it.out("BLOCK").next().getProperty('fullcode') + " endforeach");
 } else {
     fullcode.setProperty("fullcode", "foreach(" + it.out("SOURCE").next().getProperty('fullcode') + " as " + it.out("VALUE").next().getProperty('fullcode') + ") " + it.out("BLOCK").next().getProperty('fullcode'));

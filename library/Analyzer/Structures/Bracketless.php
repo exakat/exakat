@@ -29,14 +29,14 @@ class Bracketless extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('Ifthen')
-             ->isNot('alternative', 'true')
+             ->isNot('alternative', true)
              ->outIs('THEN')
              ->is('bracket', null)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Ifthen')
-             ->isNot('alternative', 'true')
+             ->isNot('alternative', true)
              ->outIs('ELSE')
              ->atomIs('Sequence')
              ->is('bracket', null)
@@ -45,21 +45,21 @@ class Bracketless extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('For')
-             ->isNot('alternative', 'true')
+             ->isNot('alternative', true)
              ->outIs('BLOCK')
              ->is('bracket', null)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Foreach')
-             ->isNot('alternative', 'true')
+             ->isNot('alternative', true)
              ->outIs('BLOCK')
              ->is('bracket', null)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('While')
-             ->isNot('alternative', 'true')
+             ->isNot('alternative', true)
              ->outIs('BLOCK')
              ->is('bracket', null)
              ->back('first');

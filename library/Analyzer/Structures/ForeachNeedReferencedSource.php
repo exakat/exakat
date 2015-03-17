@@ -32,7 +32,7 @@ class ForeachNeedReferencedSource extends Analyzer\Analyzer {
              ->atomIsNot(array('Variable', 'Array', 'Staticproperty', 'Property'))
              ->inIs('SOURCE')
              ->outIs('VALUE')
-             ->is('reference', 'true')
+             ->is('reference', true)
              ->back('first');
         $this->prepareQuery();
     }

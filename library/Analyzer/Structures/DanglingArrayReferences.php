@@ -29,7 +29,7 @@ class DanglingArrayReferences extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->is('reference', 'true')
+             ->is('reference', true)
              ->savePropertyAs('code', 'array')
              ->back('first')
              ->nextSibling()

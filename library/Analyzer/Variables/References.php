@@ -28,7 +28,7 @@ use Analyzer;
 class References extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Variable')
-             ->is('reference', 'true');
+             ->is('reference', true);
         $this->prepareQuery();
     }
 }

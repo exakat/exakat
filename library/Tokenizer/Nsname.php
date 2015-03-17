@@ -66,7 +66,7 @@ class Nsname extends TokenAuto {
 s = [];
 fullcode.out("SUBNAME").sort{it.rank}._().each{ s.add(it.fullcode); };
 
-if (fullcode.absolutens == 'true') {
+if (fullcode.absolutens == true) {
     fullcode.setProperty('fullcode', "\\\\");
 } else {
     fullcode.setProperty('fullcode', "");

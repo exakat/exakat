@@ -34,7 +34,7 @@ class ForeachReferenceIsNotModified extends Analyzer\Analyzer {
         // case of a variable
         $this->atomIs("Foreach")
              ->outIs('VALUE')
-             ->is('reference', 'true')
+             ->is('reference', true)
              ->savePropertyAs('code', 'value')
              ->inIs('VALUE')
              ->outIs('BLOCK')
@@ -45,7 +45,7 @@ class ForeachReferenceIsNotModified extends Analyzer\Analyzer {
         // case of a variable
         $this->atomIs("Foreach")
              ->outIs('VALUE')
-             ->is('reference', 'true')
+             ->is('reference', true)
              ->savePropertyAs('code', 'value')
              ->inIs('VALUE')
              ->outIs('BLOCK')

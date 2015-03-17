@@ -36,7 +36,7 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->codeIsNot('array')
              ->inIs('CLASS')
              ->outIs('VARIABLE')
-             ->is('reference', 'true');
+             ->is('reference', true);
         $this->prepareQuery();
 
         // f(&$x) and $x->y(); 
@@ -44,7 +44,7 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
-             ->is('reference', 'true')
+             ->is('reference', true)
              ->savePropertyAs('code', 'variable')
              ->back('first')
              ->outIs('BLOCK')
@@ -58,7 +58,7 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
-             ->is('reference', 'true')
+             ->is('reference', true)
              ->savePropertyAs('code', 'variable')
              ->back('first')
              ->outIs('BLOCK')
@@ -72,7 +72,7 @@ class ObjectReferences extends Analyzer\Analyzer {
         // foreach($a as &$b) { $b->method;}
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->is('reference', 'true')
+             ->is('reference', true)
              ->savePropertyAs('code', 'variable')
              ->back('first')
              ->outIs('BLOCK')
@@ -84,7 +84,7 @@ class ObjectReferences extends Analyzer\Analyzer {
         // foreach($a as &$b) { $b->property;}
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->is('reference', 'true')
+             ->is('reference', true)
              ->savePropertyAs('code', 'variable')
              ->back('first')
              ->outIs('BLOCK')

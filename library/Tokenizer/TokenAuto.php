@@ -575,7 +575,7 @@ g.addEdge(var, next, 'NEXT');
 x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line, fullcode:'', noDelimiter:'']);
 
 g.addEdge(it, x, 'NAME');
-it.setProperty('lambda', 'true');
+it.setProperty('lambda', true);
 
 op = it.out('NEXT').next();
 cp = it.out('NEXT').out('NEXT').out('NEXT').next();
@@ -604,7 +604,7 @@ g.idx('delete').put('node', 'delete', cp);
 x = g.addVertex(null, [code:'', atom:'String', token:'T_STRING', virtual:true, line:it.line, fullcode:'']);
 
 g.addEdge(it, x, 'NAME');
-it.setProperty('lambda', 'true');
+it.setProperty('lambda', true);
 
 x = it.out('NEXT').next();
 g.idx('delete').put('node', 'delete', x);
@@ -995,11 +995,11 @@ if (subname.getProperty('token') in ['T_STRING', 'T_NAMESPACE']) {
     p2 = subname.in('NEXT').next();
     subname.bothE('NEXT', 'INDEXED').each{ g.removeEdge(it); }
     g.addEdge(p2, nsname, 'NEXT');
-    p.setProperty('absolutens', 'false');
+    p.setProperty('absolutens', false);
     
 } else {
     rank = 0;
-    p.setProperty('absolutens', 'true');
+    p.setProperty('absolutens', true);
 }
 
 while(p.getProperty('token') == 'T_NS_SEPARATOR') {
@@ -1258,7 +1258,7 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
 }
 
 // Special case for Block (Sequence + block)
-while ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == 'true' }.any() &&
+while ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == true }.any() &&
     !it.in('NEXT').in('NEXT').filter{it.token in ['T_IF']}.any() &&
     !it.in('NEXT').in('NEXT').filter{!(it.token in [ 'T_USE', 'T_VOID'])}.any()) { //'T_OPEN_PARENTHESIS',
     sequence = it;
@@ -1405,7 +1405,7 @@ g.addEdge(it, suivant, 'NEXT');
             $qactions[] = "
 /* insert namespace */
 
-it.setProperty('no_block', 'true');
+it.setProperty('no_block', true);
 
 g.addEdge(it, it.out('NEXT').next(), 'NAMESPACE');
 g.idx('delete').put('node', 'delete', it.out('NEXT').out('NEXT').next());
@@ -1426,7 +1426,7 @@ g.addEdge(it, end, 'NEXT');
             $qactions[] = "
 /* insert void for namespace */
 
-it.setProperty('no_block', 'true');
+it.setProperty('no_block', true);
 
 g.addEdge(it, a1, 'NAMESPACE');
 
@@ -2369,7 +2369,7 @@ g.addEdge(b1, x, 'NEXT');
 
             $makeSequence = <<<GREMLIN
     if ( $it.both('NEXT').has('atom', 'Sequence').count() == 2 &&
-        ($it.in('NEXT').next().block != 'true')) {
+        ($it.in('NEXT').next().block != true)) {
         count = $it.in('NEXT').out('ELEMENT').count();
         sequence = $it.in('NEXT').next();
     
@@ -2393,7 +2393,7 @@ g.addEdge(b1, x, 'NEXT');
         sequence2.bothE('INDEXED').each{ g.removeEdge(it); }
         g.idx('delete').put('node', 'delete', sequence2);
     } else if ($it.in('NEXT').has('atom', 'Sequence').any() &&
-              ($it.in('NEXT').next().block != 'true')) {
+              ($it.in('NEXT').next().block != true)) {
         sequence = $it.in('NEXT').next();
         $it.setProperty('rank', $it.in('NEXT').out('ELEMENT').count());
 //        $it.setProperty('makeSequence', 'in');
@@ -2698,7 +2698,7 @@ it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each {
     g.addEdge(it, it.out('RIGHT').next(), 'VARIABLE');
     g.removeEdge(it.outE('RIGHT').next());
     
-    it.out('VARIABLE').next().setProperty('reference', 'true');
+    it.out('VARIABLE').next().setProperty('reference', true);
     
     g.idx('atoms').put('atom', 'Typehint', it);
 }

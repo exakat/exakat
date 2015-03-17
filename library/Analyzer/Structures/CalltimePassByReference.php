@@ -33,7 +33,7 @@ class CalltimePassByReference extends Analyzer\Analyzer {
              ->tokenIsNot('T_ARRAY')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->is('reference', 'true');
+             ->is('reference', true);
         $this->prepareQuery();
     }
 }

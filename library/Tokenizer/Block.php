@@ -41,7 +41,7 @@ class Block extends TokenAuto {
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it',
-                               'property'     => array('bracket' => 'true')
+                               'property'     => array('bracket' => true)
                                );
         $this->checkAuto();
 
@@ -61,7 +61,7 @@ class Block extends TokenAuto {
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it',
-                               'property'     => array('bracket' => 'true')
+                               'property'     => array('bracket' => true)
                                );
         $this->checkAuto();
 
@@ -78,7 +78,7 @@ class Block extends TokenAuto {
         $this->actions = array('to_block'     => true,
                                'atom'         => 'Sequence',
                                'cleanIndex'   => true,
-                               'property'     => array('bracket' => 'true')
+                               'property'     => array('bracket' => true)
                                );
         $this->checkAuto();
 

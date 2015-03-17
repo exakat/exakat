@@ -34,7 +34,7 @@ class StringHoldAVariable extends Analyzer\Analyzer {
 
         // variable inside a NOWDOC
         $this->atomIs('String')
-             ->is('nowdoc', 'true')
+             ->is('nowdoc', true)
              ->outIs('CONTAIN')
              ->outIs('CONCAT')
              ->regex('code', '\\\\\$[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*');

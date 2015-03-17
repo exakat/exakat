@@ -69,7 +69,7 @@ if (fullcode.out('SUBNAME').any()) {
     fullcode.out("SUBNAME").sort{it.rank}._().each{
         s.add(it.getProperty('code'));
     };
-    if (fullcode.absolutens == 'true') {
+    if (fullcode.absolutens == true) {
         s =  '\\\\' + s.join('\\\\');
     } else {
         s = s.join('\\\\');

@@ -98,7 +98,7 @@ class IsRead extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', true)
-             ->isNot('reference', 'true')
+             ->isNot('reference', true)
              ->back('first');
         $this->prepareQuery();  
 
@@ -151,7 +151,7 @@ class IsRead extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', true)
-             ->isNot('reference', 'true')
+             ->isNot('reference', true)
              ->back('first');
         $this->prepareQuery();
 
@@ -173,7 +173,7 @@ class IsRead extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', true)
-             ->isNot('reference', 'true')
+             ->isNot('reference', true)
              ->back('first');
         $this->prepareQuery();
     }

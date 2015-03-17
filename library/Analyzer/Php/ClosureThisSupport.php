@@ -30,7 +30,7 @@ class ClosureThisSupport extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs("Function")
-             ->is('lambda', "'true'")
+             ->is('lambda', true)
              ->outIs('BLOCK')
              ->atomInside('Variable')
              ->code('$this', true)

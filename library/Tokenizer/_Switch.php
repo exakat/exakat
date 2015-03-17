@@ -66,7 +66,7 @@ class _Switch extends TokenAuto {
                                                         5 => 'CASES',
                                                         6 => 'DROP',),
                                'atom'         => 'Switch',
-                               'property'     => array('alternative' => 'true'),
+                               'property'     => array('alternative' => true),
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
         $this->checkAuto();
@@ -77,7 +77,7 @@ class _Switch extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-if (it.alternative == 'true') {
+if (it.alternative == true) {
     it.setProperty('fullcode', "switch (" + it.out("NAME").next().fullcode + ") : " + it.out("CASES").next().getProperty('fullcode') + ' endswitch');
 } else {
     it.setProperty('fullcode', "switch (" + it.out("NAME").next().fullcode + ")" + it.out("CASES").next().getProperty('fullcode'));

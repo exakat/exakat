@@ -29,7 +29,7 @@ class PrintWithoutParenthesis extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Functioncall')
              ->tokenIs('T_PRINT')
-             ->is('parenthesis', 'true')
+             ->is('parenthesis', true)
              ->back('first');
         $this->prepareQuery();
     }

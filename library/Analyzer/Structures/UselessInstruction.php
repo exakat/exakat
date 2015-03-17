@@ -47,7 +47,7 @@ class UselessInstruction extends Analyzer\Analyzer {
         $this->atomIs('Sequence')
              ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->is('lambda', 'true');
+             ->is('lambda', true);
         $this->prepareQuery();
 
         // return $a++;

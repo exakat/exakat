@@ -238,7 +238,7 @@ GREMLIN;
         } else {
             $this->code = addslashes($this->code);
             $query = <<<GREMLIN
-x = g.addVertex(null, [analyzer:'{$this->analyzerQuoted}', analyzer:'true', line:0, description:'Analyzer index for {$this->analyzerQuoted}', code:'{$this->code}', fullcode:'{$this->code}',  atom:'Index', token:'T_INDEX']);
+x = g.addVertex(null, [analyzer:'{$this->analyzerQuoted}', analyzer:true, line:0, description:'Analyzer index for {$this->analyzerQuoted}', code:'{$this->code}', fullcode:'{$this->code}',  atom:'Index', token:'T_INDEX']);
 
 g.idx('analyzers').put('analyzer', '{$this->analyzerQuoted}', x);
 

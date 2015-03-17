@@ -44,7 +44,7 @@ class Functioncall extends TokenAuto {
         
         $this->actions = array('variable_to_functioncall'   => 1,
                                'keepIndexed'                => true,
-                               'property'                   => array('parenthesis' => 'true'),
+                               'property'                   => array('parenthesis' => true),
                                );
         $this->checkAuto();
         
@@ -64,7 +64,7 @@ class Functioncall extends TokenAuto {
                                                         3 => 'DROP'),
                                'atom'         => 'Functioncall',
                                'makeSequence' => 'it',
-                               'property'     => array('parenthesis' => 'true'),
+                               'property'     => array('parenthesis' => true),
                                );
         $this->checkAuto();
 
@@ -85,7 +85,7 @@ class Functioncall extends TokenAuto {
                                                         3 => 'DROP'),
                                'atom'         => 'Functioncall',
                                'makeSequence' => 'it',
-                               'property'     => array('parenthesis' => 'true'),
+                               'property'     => array('parenthesis' => true),
                                );
         $this->checkAuto();
 
@@ -103,7 +103,7 @@ class Functioncall extends TokenAuto {
         $this->actions = array('transform'    => array('1' => 'ARGUMENTS'),
                                'atom'         => 'Functioncall',
                                'makeSequence' => 'it',
-                               'property'     => array('parenthesis' => 'false'),
+                               'property'     => array('parenthesis' => false),
                                );
         $this->checkAuto();
 
@@ -131,18 +131,16 @@ if (fullcode.getProperty('token') == 'T_NS_SEPARATOR') {
     s = [];
     fullcode.out("SUBNAME").sort{it.rank}._().each{ s.add(it.fullcode); };
 
-    if (fullcode.absolutens == 'true') {
+    if (fullcode.absolutens == true) {
         fullcode.setProperty('fullcode', "\\\\" + s.join("\\\\"));
-//        fullcode.setProperty('code', "\\\\" + s.join("\\\\"));
     } else {
         fullcode.setProperty('fullcode', s.join("\\\\"));
-//        fullcode.setProperty('code', s.join("\\\\"));
     }
 } else {
     fullcode.setProperty('fullcode', it.getProperty('code'));
 }
 
-if (fullcode.getProperty('parenthesis') == 'true') {
+if (fullcode.getProperty('parenthesis') == true) {
     fullcode.setProperty('fullcode', it.getProperty('fullcode') + "(" + it.out("ARGUMENTS").next().getProperty('fullcode') + ")");
 } else {
     fullcode.setProperty('fullcode', it.getProperty('fullcode') + " " + it.out("ARGUMENTS").next().getProperty('fullcode') + "");

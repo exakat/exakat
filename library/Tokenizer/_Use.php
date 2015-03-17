@@ -142,7 +142,7 @@ fullcode.out('USE').has('atom', 'As').each{
     it.out("SUBNAME").sort{it.rank}._().each{
         s.add(it.getProperty('code'));
     };
-    if (it.absolutens == 'true') {
+    if (it.absolutens == true) {
         it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());
         it.setProperty('originclass', s.pop());
     } else {
@@ -160,7 +160,7 @@ fullcode.out('USE').has('atom', 'Nsname').each{
     it.out("SUBNAME").sort{it.rank}._().each{
         s.add(it.getProperty('code'));
     };
-    if (it.absolutens == 'true') {
+    if (it.absolutens == true) {
         it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());
         it.setProperty('originclass', s[s.size() - 1]);
     } else {
@@ -184,7 +184,7 @@ fullcode.out('FUNCTION', 'CONST').each{
     it.out("SUBNAME").sort{it.rank}._().each{
         s.add(it.getProperty('code'));
     };
-    if (it.absolutens == 'true') {
+    if (it.absolutens == true) {
         it.setProperty('originpath', '\\\\' + s.join('\\\\').toLowerCase());
         it.setProperty('originclass', s[s.size() - 1]);
     } else {

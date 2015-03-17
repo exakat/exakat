@@ -64,7 +64,7 @@ class IsModified extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', true)
-             ->is('reference', 'true')
+             ->is('reference', true)
              ->back('first');
         $this->prepareQuery();  
 
@@ -143,7 +143,7 @@ class IsModified extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
-             ->is('reference', 'true')
+             ->is('reference', true)
              ->back('first');
         $this->prepareQuery(); 
     }
