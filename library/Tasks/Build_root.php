@@ -69,7 +69,7 @@ class Build_root implements Tasks {
 
         // creating the neo4j Index
         // @todo check this index
-        $this->query("g.V.has('root', 'true').each{ g.idx('racines').put('token', 'ROOT', it); };");
+        $this->query("g.V.has('root', true).each{ g.idx('racines').put('token', 'ROOT', it); };");
         $this->logTime('g.idx("ROOT")');
 
         display("Indexing root done\n");
@@ -81,7 +81,7 @@ class Build_root implements Tasks {
         display("Creating index done\n");
 
         // creating the neo4j Index
-        $this->query("g.V.has('index', 'true').each{ g.idx('racines').put('token', it.token, it); };");
+        $this->query("g.V.has('index', true).each{ g.idx('racines').put('token', it.token, it); };");
         $this->logTime('g.idx("racines")[[token:***]] indexing');
 
         display("Indexing racines done\n");
