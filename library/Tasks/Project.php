@@ -38,9 +38,8 @@ class Project implements Tasks {
             $this->executable = $_SERVER['SCRIPT_NAME'];
         }
 
-        if ($config->project === null) {
-            print "Usage : php {$this->executable} project -p [Project name]\n";
-            die();
+        if ($config->project === 'default') {
+            die("Usage : php {$this->executable} project -p [Project name]\n");
         }
 
         $project = $config->project;
@@ -79,21 +78,26 @@ class Project implements Tasks {
                                          ));
 
         $thread = new \Thread();
-        print "Running project '$project'\n";
+        display("Running project '$project'\n");
 
-        print "Running files\n";
+        display("Cleaning DB\n");
+        shell_exec('php '.$this->executable.' cleandb ');
+        $this->logTime('Files');
+        display("Loading project\n");
+
+        display("Running files\n");
         shell_exec('php '.$this->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
         $this->logTime('Files');
-        print "Loading project\n";
+        display("Loading project\n");
 
         $thread->waitForAll();
 
         shell_exec('php '.$this->executable.' load -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project.'');
-        print "Project loaded\n";
+        display("Project loaded\n");
         $this->logTime('Loading');
 
         $res = shell_exec('php '.$this->executable.' build_root -v -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/build_root.final.log');
-        print "Build root\n";
+        display("Build root\n");
         $this->logTime('Build_root');
 
         if (file_exists($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log')) {
@@ -114,10 +118,10 @@ class Project implements Tasks {
         $thread->run('php '.$this->executable.' magicnumber -p '.$project);
 
         $thread->run('php '.$this->executable.' errors > '.$config->projects_root.'/projects/'.$project.'/log/errors.log');
-        print "Got the errors (if any)\n";
+        display("Got the errors (if any)\n");
 
         $thread->run('php '.$this->executable.' stat -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
-        print "Stats\n";
+        display("Stats\n");
 
         $thread->run('php '.$this->executable.' log2csv -p '.$project);
 
@@ -135,21 +139,22 @@ class Project implements Tasks {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
             shell_exec('php '.$this->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;
 mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
-            print "Analyzing $theme\n";
+            display("Analyzing $theme\n");
         }
 
-        print "Project analyzed\n";
+        display("Project analyzed\n");
         $this->logTime('Analyze');
 
         shell_exec('php '.$this->executable.' report_all -p '.$project);
         $this->logTime('Report');
 
-        print "Project reported\n";
+        display("Project reported\n");
 
         shell_exec('php '.$this->executable.' stat > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
-        print "Stats 2\n";
+        display("Stats 2\n");
 
         $this->logTime('Final');
+        display("End 2\n");
     }
 
     private function logTime($step) {
