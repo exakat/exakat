@@ -8,33 +8,33 @@ Label : CODE
       (
       Label : CODE
         -
+        Label : LEFT
+          +
+          Label : LEFT
+            +
+            Label : LEFT
+              1
+            Label : RIGHT
+              2
+          Label : RIGHT
+            !
+            Label : NOT
+              3
         Label : RIGHT
           [
           Label : VARIABLE
             $r
           Label : INDEX
             $s
-        Label : LEFT
-          +
-          Label : RIGHT
-            !
-            Label : NOT
-              3
-          Label : LEFT
-            +
-            Label : RIGHT
-              2
-            Label : LEFT
-              1
     Label : THEN
       {
       Label : ELEMENT
         void
   Label : ELEMENT
     while
-    Label : CONDITION
-      1
     Label : BLOCK
       {
       Label : ELEMENT
         void
+    Label : CONDITION
+      1

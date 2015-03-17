@@ -7,21 +7,25 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            K
-          Label : SUBNAME
-            F
-        Label : METHOD
-          L
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'M'
-      Label : ELEMENT
         class
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            ::
+            Label : METHOD
+              L
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'M'
+            Label : CLASS
+              \
+              Label : SUBNAME
+                K
+              Label : SUBNAME
+                F
+          Label : ELEMENT
+            void
         Label : NAME
           D
         Label : EXTENDS
@@ -30,10 +34,6 @@ Label : CODE
             D
           Label : SUBNAME
             F
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
       Label : ELEMENT
         use
         Label : USE

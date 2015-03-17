@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $result
     Label : RIGHT
       <<<EOF
 
@@ -43,5 +45,3 @@ D
           
 
 
-    Label : LEFT
-      $result

@@ -11,16 +11,6 @@ Label : CODE
     Label : THEN
       {
       Label : ELEMENT
-        ->
-        Label : OBJECT
-          $e
-        Label : METHOD
-          f
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $g
-      Label : ELEMENT
         if
         Label : CONDITION
           (
@@ -42,5 +32,15 @@ Label : CODE
                     'd'
         Label : THEN
           {
+          Label : ELEMENT
+            ->
+            Label : OBJECT
+              $e
+            Label : METHOD
+              f
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $g
           Label : ELEMENT
             void

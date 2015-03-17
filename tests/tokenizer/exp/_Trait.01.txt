@@ -4,55 +4,55 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      H
-    Label : EXTENDS
-      I
     Label : BLOCK
       {
       Label : ELEMENT
         use
         Label : USE
           J
+    Label : NAME
+      H
+    Label : EXTENDS
+      I
   Label : ELEMENT
     class
-    Label : NAME
-      E
-    Label : EXTENDS
-      F
     Label : BLOCK
       {
       Label : ELEMENT
         use
         Label : USE
           G
+    Label : NAME
+      E
+    Label : EXTENDS
+      F
   Label : ELEMENT
     trait
-    Label : NAME
-      B
     Label : BLOCK
       {
       Label : ELEMENT
         function
-        Label : NAME
-          D
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
         Label : BLOCK
           {
           Label : ELEMENT
             void
-      Label : ELEMENT
-        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
           C
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
+      Label : ELEMENT
+        function
         Label : BLOCK
           {
           Label : ELEMENT
             void
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          D
+    Label : NAME
+      B

@@ -4,19 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      x
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          Stdclass
-        Label : VARIABLE
-          $a
     Label : BLOCK
       {
       Label : ELEMENT
         return
         Label : RETURN
           1
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          $a
+        Label : CLASS
+          Stdclass
+    Label : NAME
+      x

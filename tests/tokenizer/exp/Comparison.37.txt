@@ -8,38 +8,38 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : RIGHT
+        Label : LEFT
           &&
-          Label : RIGHT
-            ==
-            Label : RIGHT
-              G
-            Label : LEFT
-              instanceof
-              Label : CLASS
-                F
-              Label : VARIABLE
-                $c
           Label : LEFT
             ==
-            Label : RIGHT
-              E
             Label : LEFT
               instanceof
+              Label : VARIABLE
+                $a
               Label : CLASS
-                D
+                B
+            Label : RIGHT
+              C
+          Label : RIGHT
+            ==
+            Label : LEFT
+              instanceof
               Label : VARIABLE
                 $b
-        Label : LEFT
+              Label : CLASS
+                D
+            Label : RIGHT
+              E
+        Label : RIGHT
           ==
-          Label : RIGHT
-            C
           Label : LEFT
             instanceof
-            Label : CLASS
-              B
             Label : VARIABLE
-              $a
+              $c
+            Label : CLASS
+              F
+          Label : RIGHT
+            G
     Label : THEN
       {
       Label : ELEMENT

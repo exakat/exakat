@@ -4,64 +4,64 @@ Label : CODE
   ;
   Label : ELEMENT
     while
+    Label : BLOCK
+      Block with While
+      Label : ELEMENT
+        void
     Label : CONDITION
       &&
-      Label : RIGHT
-        ==
-        Label : RIGHT
-          'l'
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $j
-          Label : INDEX
-            -
-            Label : RIGHT
-              3
-            Label : LEFT
-              $k
       Label : LEFT
         (
         Label : CODE
           =
+          Label : LEFT
+            $e
           Label : RIGHT
             strpos
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
                 +
-                Label : RIGHT
-                  2
                 Label : LEFT
                   $h
+                Label : RIGHT
+                  2
               Label : ARGUMENT
                 $g
               Label : ARGUMENT
                 $f
-          Label : LEFT
-            $e
-    Label : BLOCK
-      Block with While
-      Label : ELEMENT
-        void
+      Label : RIGHT
+        ==
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $j
+          Label : INDEX
+            -
+            Label : LEFT
+              $k
+            Label : RIGHT
+              3
+        Label : RIGHT
+          'l'
   Label : ELEMENT
     if
     Label : CONDITION
       (
       Label : CODE
         ==
-        Label : RIGHT
-          'd'
         Label : LEFT
           [
           Label : VARIABLE
             $a
           Label : INDEX
             -
-            Label : RIGHT
-              c
             Label : LEFT
               $b
+            Label : RIGHT
+              c
+        Label : RIGHT
+          'd'
     Label : THEN
       {
       Label : ELEMENT

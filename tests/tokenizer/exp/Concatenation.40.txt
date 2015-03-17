@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $y
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -12,10 +14,10 @@ Label : CODE
           $c
       Label : CONCAT
         'b'
-    Label : LEFT
-      $y
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -24,5 +26,3 @@ Label : CODE
           $b
       Label : CONCAT
         'a'
-    Label : LEFT
-      $x

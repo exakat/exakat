@@ -10,28 +10,16 @@ Label : CODE
       {
       Label : ELEMENT
         case
-        Label : CASE
-          @
-          Label : AT
-            B
         Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              D
             Label : LEFT
               ->
               Label : OBJECT
                 $this
               Label : PROPERTY
-                C
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-          Label : ELEMENT
-            =
+                E
             Label : RIGHT
               ->
               Label : OBJECT
@@ -42,9 +30,21 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     'G'
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            =
             Label : LEFT
               ->
               Label : OBJECT
                 $this
               Label : PROPERTY
-                E
+                C
+            Label : RIGHT
+              D
+        Label : CASE
+          @
+          Label : AT
+            B

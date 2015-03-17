@@ -4,19 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        var
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $a
+        Label : VAR
+          var
     Label : NAME
       x
     Label : EXTENDS
       y
     Label : IMPLEMENTS
       z
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $a
-        Label : VALUE
-          Void
-        Label : VAR
-          var

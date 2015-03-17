@@ -3,32 +3,40 @@ Label : CODE
   ;
   Label : ELEMENT
     for
+    Label : BLOCK
+      Block with For
+      Label : ELEMENT
+        void
     Label : INIT
       =
+      Label : LEFT
+        $c
       Label : RIGHT
         array
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-      Label : LEFT
-        $c
     Label : FINAL
       <
-      Label : RIGHT
-        C
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $e
       Label : LEFT
         B
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $d
+      Label : RIGHT
+        C
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
     Label : INCREMENT
       =
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $f
       Label : RIGHT
         D
         Label : ARGUMENTS
@@ -47,16 +55,10 @@ Label : CODE
                     $h
               Label : ARGUMENT
                 $g
-      Label : LEFT
-        [
-        Label : VARIABLE
-          $f
-    Label : BLOCK
-      Block with For
-      Label : ELEMENT
-        void
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -65,5 +67,3 @@ Label : CODE
           $b
       Label : CONCAT
         __FILE__
-    Label : LEFT
-      $a

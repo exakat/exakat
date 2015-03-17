@@ -43,14 +43,14 @@ Label : ELEMENT
         (
         Label : CODE
           ==
-          Label : RIGHT
-            'E'
           Label : LEFT
             C
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'D'
+          Label : RIGHT
+            'E'
       Label : THEN
         ;
         Label : ELEMENT
@@ -86,8 +86,6 @@ Label : ELEMENT
                       Label : INDEX
                         'M'
         Label : ELEMENT
-          E
-        Label : ELEMENT
           I
         Label : ELEMENT
           G
@@ -97,7 +95,11 @@ Label : ELEMENT
               'I'
             Label : ARGUMENT
               'H'
+        Label : ELEMENT
+          E
       Label : ELSE
-        N
+        ;
+        Label : ELEMENT
+          N
 Label : ELEMENT
   A

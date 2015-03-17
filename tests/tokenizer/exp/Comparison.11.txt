@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     !==
-    Label : RIGHT
-      false
     Label : LEFT
       ->
       Label : OBJECT
@@ -16,3 +14,5 @@ Label : CODE
           void
           Label : ARGUMENT
             $sql
+    Label : RIGHT
+      false

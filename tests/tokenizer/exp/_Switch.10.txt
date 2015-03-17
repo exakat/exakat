@@ -11,7 +11,7 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CODE
-          Block with Sequence For Case
+          ;
           Label : ELEMENT
             if
             Label : CONDITION
@@ -22,9 +22,9 @@ Label : CODE
               {
               Label : ELEMENT
                 =
-                Label : RIGHT
-                  1
                 Label : LEFT
                   $d
+                Label : RIGHT
+                  1
         Label : CASE
           'b'

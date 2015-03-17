@@ -4,28 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $b
-      Label : ARGUMENT
-        $a
-    Label : NAME
-      B
     Label : BLOCK
       {
       Label : ELEMENT
         =
+        Label : LEFT
+          $c
         Label : RIGHT
           C
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $d
-        Label : LEFT
-          $c
       Label : ELEMENT
         =
+        Label : LEFT
+          $e
         Label : RIGHT
           array
           Label : ARGUMENTS
@@ -34,8 +28,6 @@ Label : CODE
               'E'
             Label : ARGUMENT
               'D'
-        Label : LEFT
-          $e
       Label : ELEMENT
         if
         Label : CONDITION
@@ -54,10 +46,10 @@ Label : CODE
           {
           Label : ELEMENT
             =
-            Label : RIGHT
-              'G'
             Label : LEFT
               $h
+            Label : RIGHT
+              'G'
           Label : ELEMENT
             H
             Label : ARGUMENTS
@@ -80,53 +72,61 @@ Label : CODE
               new
               Label : NEW
                 \
-                Label : SUBNAME
-                  K
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     void
+                Label : SUBNAME
+                  K
       Label : ELEMENT
         =
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $p
-          Label : PROPERTY
-            N
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          null
         Label : LEFT
           ->
           Label : OBJECT
             $q
           Label : PROPERTY
             O
+        Label : RIGHT
+          null
       Label : ELEMENT
         =
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $p
+          Label : PROPERTY
+            N
         Label : RIGHT
-          $o
+          array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        =
         Label : LEFT
           ->
           Label : OBJECT
             $n
           Label : PROPERTY
             M
+        Label : RIGHT
+          $o
       Label : ELEMENT
         =
-        Label : RIGHT
-          $m
         Label : LEFT
           ->
           Label : OBJECT
             $l
           Label : PROPERTY
             L
+        Label : RIGHT
+          $m
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      B

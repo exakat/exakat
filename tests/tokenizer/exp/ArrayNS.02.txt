@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       [
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
           =>
-          Label : KEY
-            'c'
           Label : VALUE
             's'
+          Label : KEY
+            'c'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'a'
           Label : VALUE
             'b'
-    Label : LEFT
-      $a
+          Label : KEY
+            'a'

@@ -9,41 +9,47 @@ Label : CODE
       {
       Label : ELEMENT
         case
-        Label : CASE
-          'b'
         Label : CODE
-          Block with Sequence For Case Without Semicolon
+          ;
+          Label : ELEMENT
+            {
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a
           Label : ELEMENT
             break
             Label : LEVEL
               void
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $b
-      Label : ELEMENT
-        case
         Label : CASE
           'a'
+      Label : ELEMENT
+        case
         Label : CODE
-          Block with Sequence For Case Without Semicolon
+          ;
+          Label : ELEMENT
+            {
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $b
           Label : ELEMENT
             break
             Label : LEVEL
               void
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $a
+        Label : CASE
+          'b'
       Label : ELEMENT
         default
         Label : CODE
-          Block with Sequence For Default Without Semicolon
+          ;
+          Label : ELEMENT
+            {
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $d
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $b
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $d

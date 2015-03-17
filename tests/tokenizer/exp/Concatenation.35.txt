@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -20,5 +22,3 @@ Label : CODE
               $boucle
       Label : CONCAT
         '&nbsp;('
-    Label : LEFT
-      $x

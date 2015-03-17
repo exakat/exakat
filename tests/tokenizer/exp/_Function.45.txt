@@ -3,19 +3,19 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
     Label : BLOCK
       {
       Label : ELEMENT
         static
-        Label : DEFINE
-          $b
         Label : VALUE
           NULL
+        Label : DEFINE
+          $b
         Label : STATIC
           static
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      

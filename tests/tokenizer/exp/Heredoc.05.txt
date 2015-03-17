@@ -4,16 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          true
-        Label : LEFT
-          $b
-    Label : NAME
-      a
     Label : BLOCK
       {
       Label : ELEMENT
@@ -40,3 +30,13 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        =
+        Label : LEFT
+          $b
+        Label : RIGHT
+          true
+    Label : NAME
+      a

@@ -8,8 +8,6 @@ Label : CODE
       $u
   Label : ELEMENT
     $q
-    Label : NAME
-      $q
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -18,24 +16,24 @@ Label : CODE
           Arguments
           Label : ARGUMENT
             =>
-            Label : KEY
-              'M'
             Label : VALUE
               [
               Label : VARIABLE
                 $t
               Label : INDEX
                 'N'
+            Label : KEY
+              'M'
           Label : ARGUMENT
             =>
-            Label : KEY
-              'K'
             Label : VALUE
               [
               Label : VARIABLE
                 $s
               Label : INDEX
                 'L'
+            Label : KEY
+              'K'
       Label : ARGUMENT
         [
         Label : VARIABLE
@@ -44,18 +42,8 @@ Label : CODE
           'J'
       Label : ARGUMENT
         'I'
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      E
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          'G'
-        Label : ARGUMENT
-          'F'
-    Label : LEFT
-      $k
+    Label : NAME
+      $q
   Label : ELEMENT
     H
     Label : ARGUMENTS
@@ -72,20 +60,18 @@ Label : CODE
         $l
   Label : ELEMENT
     =
+    Label : LEFT
+      $k
     Label : RIGHT
-      $f
-      Label : NAME
-        $f
+      E
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          $j
+          'G'
         Label : ARGUMENT
-          $i
-        Label : ARGUMENT
-          $h
-        Label : ARGUMENT
-          $g
+          'F'
+  Label : ELEMENT
+    =
     Label : LEFT
       list
       Label : ARGUMENTS
@@ -98,8 +84,24 @@ Label : CODE
           $c
         Label : ARGUMENT
           $b
+    Label : RIGHT
+      $f
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $j
+        Label : ARGUMENT
+          $i
+        Label : ARGUMENT
+          $h
+        Label : ARGUMENT
+          $g
+      Label : NAME
+        $f
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       B
       Label : ARGUMENTS
@@ -108,5 +110,3 @@ Label : CODE
           'D'
         Label : ARGUMENT
           'C'
-    Label : LEFT
-      $a

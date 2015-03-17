@@ -11,14 +11,14 @@ Label : CODE
           void
           Label : ARGUMENT
             ==
-            Label : RIGHT
-              'C'
             Label : LEFT
               [
               Label : VARIABLE
                 $a
               Label : INDEX
                 'B'
+            Label : RIGHT
+              'C'
         Label : THEN
           'D'
         Label : ELSE
@@ -27,14 +27,14 @@ Label : CODE
             ?
             Label : CONDITION
               ==
-              Label : RIGHT
-                'F'
               Label : LEFT
                 [
                 Label : VARIABLE
                   $a
                 Label : INDEX
                   'B'
+              Label : RIGHT
+                'F'
             Label : THEN
               'G'
             Label : ELSE

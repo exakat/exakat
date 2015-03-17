@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -26,26 +28,24 @@ Label : CODE
         Concatenation
         Label : CONCAT
           $g
-          Label : NAME
-            $g
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'h'
+          Label : NAME
+            $g
         Label : CONCAT
           'f'
       Label : ELSE
         'j'
-    Label : LEFT
-      $a
   Label : ELEMENT
     .=
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         >
-        Label : RIGHT
-          127
         Label : LEFT
           ord
           Label : ARGUMENTS
@@ -56,6 +56,8 @@ Label : CODE
                 $b
               Label : INDEX
                 $i
+        Label : RIGHT
+          127
       Label : THEN
         Concatenation
         Label : CONCAT
@@ -78,10 +80,10 @@ Label : CODE
           $e
         Label : INDEX
           $k
-    Label : LEFT
-      $a
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -96,20 +98,20 @@ Label : CODE
           'i'
         Label : CONCAT
           $g
-          Label : NAME
-            $g
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'h'
+          Label : NAME
+            $g
         Label : CONCAT
           'f'
       Label : ELSE
         'j'
-    Label : LEFT
-      $a
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -128,20 +130,20 @@ Label : CODE
         Concatenation
         Label : CONCAT
           $g
-          Label : NAME
-            $g
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'h'
+          Label : NAME
+            $g
         Label : CONCAT
           'f'
       Label : ELSE
         'j'
-    Label : LEFT
-      $a
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -162,18 +164,16 @@ Label : CODE
           'i'
         Label : CONCAT
           $g
-          Label : NAME
-            $g
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'h'
+          Label : NAME
+            $g
         Label : CONCAT
           'f'
       Label : ELSE
         'j'
-    Label : LEFT
-      $a
   Label : ELEMENT
     die
     Label : ARGUMENTS
@@ -188,6 +188,8 @@ Label : CODE
         $a
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -196,11 +198,9 @@ Label : CODE
         !
         Label : NOT
           $b
-    Label : LEFT
-      $a
   Label : ELEMENT
     =
-    Label : RIGHT
-      'c'
     Label : LEFT
       $b
+    Label : RIGHT
+      'c'

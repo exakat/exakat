@@ -4,20 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     ->
+    Label : OBJECT
+      $a
     Label : METHOD
       b
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
           ::
-          Label : CLASS
-            D
           Label : METHOD
             e
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 $f
+          Label : CLASS
+            D
         Label : ARGUMENT
           <<<EOF
 
@@ -30,5 +32,3 @@ Label : CODE
             Label : CONCAT
                C
 
-    Label : OBJECT
-      $a

@@ -10,8 +10,6 @@ Label : CODE
         !
         Label : NOT
           $x
-          Label : NAME
-            $x
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
@@ -20,11 +18,13 @@ Label : CODE
               2
             Label : ARGUMENT
               1
+          Label : NAME
+            $x
     Label : THEN
       {
       Label : ELEMENT
         =
-        Label : RIGHT
-          1
         Label : LEFT
           $x
+        Label : RIGHT
+          1

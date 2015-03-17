@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     instanceof
+    Label : VARIABLE
+      $x
     Label : CLASS
       \
       Label : SUBNAME
@@ -14,5 +16,3 @@ Label : CODE
         B
       Label : SUBNAME
         A
-    Label : VARIABLE
-      $x

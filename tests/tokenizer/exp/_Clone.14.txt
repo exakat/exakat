@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -50,5 +52,3 @@ Label : CODE
             void
             Label : ARGUMENT
               'i'
-    Label : LEFT
-      $a

@@ -6,9 +6,9 @@ Label : CODE
     new
     Label : NEW
       $x
-      Label : NAME
-        $x
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           1
+      Label : NAME
+        $x

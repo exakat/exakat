@@ -4,16 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          b
-        Label : VARIABLE
-          $c
-    Label : NAME
-      a
     Label : BLOCK
       {
       Label : ELEMENT
@@ -22,19 +12,29 @@ Label : CODE
           (
           Label : CODE
             ==
+            Label : LEFT
+              false
             Label : RIGHT
               ::
-              Label : CLASS
-                d
               Label : METHOD
                 e
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     $f
-            Label : LEFT
-              false
+              Label : CLASS
+                d
         Label : THEN
           {
           Label : ELEMENT
             false
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          $c
+        Label : CLASS
+          b
+    Label : NAME
+      a

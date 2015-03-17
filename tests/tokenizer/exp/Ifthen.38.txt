@@ -8,10 +8,10 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          'b'
         Label : LEFT
           $a
+        Label : RIGHT
+          'b'
     Label : THEN
       {
       Label : ELEMENT

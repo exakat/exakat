@@ -20,8 +20,6 @@ Label : CODE
         Label : THEN
           ;
           Label : ELEMENT
-            C
-          Label : ELEMENT
             E
           Label : ELEMENT
             if
@@ -30,9 +28,11 @@ Label : CODE
               Label : CODE
                 $d
             Label : THEN
-              D
-      Label : ELEMENT
-        A
+              ;
+              Label : ELEMENT
+                D
+          Label : ELEMENT
+            C
       Label : ELEMENT
         B
       Label : ELEMENT
@@ -41,3 +41,5 @@ Label : CODE
           void
           Label : ARGUMENT
             $b
+      Label : ELEMENT
+        A

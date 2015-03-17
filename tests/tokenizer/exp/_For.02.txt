@@ -4,34 +4,40 @@ Label : CODE
   ;
   Label : ELEMENT
     for
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $j
     Label : INIT
       Arguments
       Label : ARGUMENT
         =
-        Label : RIGHT
-          0
         Label : LEFT
           $k
-      Label : ARGUMENT
-        =
         Label : RIGHT
           0
+      Label : ARGUMENT
+        =
         Label : LEFT
           $i
+        Label : RIGHT
+          0
     Label : FINAL
       Arguments
       Label : ARGUMENT
         <
-        Label : RIGHT
-          6
         Label : LEFT
           $k
+        Label : RIGHT
+          6
       Label : ARGUMENT
         <
-        Label : RIGHT
-          5
         Label : LEFT
           $i
+        Label : RIGHT
+          5
     Label : INCREMENT
       Arguments
       Label : ARGUMENT
@@ -42,15 +48,9 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $i
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $j
   Label : ELEMENT
     =
-    Label : RIGHT
-      0
     Label : LEFT
       $j
+    Label : RIGHT
+      0

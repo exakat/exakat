@@ -4,43 +4,43 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       {
       Label : ELEMENT
         function
-        Label : STATIC
-          static
-        Label : PUBLIC
-          public
-        Label : NAME
-          FALSE
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            return
-            Label : RETURN
-              FALSE
-      Label : ELEMENT
-        function
-        Label : STATIC
-          static
-        Label : PUBLIC
-          public
-        Label : NAME
-          TRUE
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
         Label : BLOCK
           {
           Label : ELEMENT
             return
             Label : RETURN
               TRUE
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          TRUE
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
+      Label : ELEMENT
+        function
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            return
+            Label : RETURN
+              FALSE
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          FALSE
+        Label : PUBLIC
+          public
+        Label : STATIC
+          static
+    Label : NAME
+      x

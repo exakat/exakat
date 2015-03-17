@@ -4,18 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
-    Label : SOURCE
-      ::
-      Label : CLASS
-        B
-      Label : PROPERTY
-        $a
     Label : BLOCK
       {
       Label : ELEMENT
@@ -24,8 +12,6 @@ Label : CODE
           (
           Label : CODE
             ===
-            Label : RIGHT
-              0
             Label : LEFT
               C
               Label : ARGUMENTS
@@ -34,10 +20,14 @@ Label : CODE
                   $b
                 Label : ARGUMENT
                   $d
+            Label : RIGHT
+              0
         Label : THEN
           {
           Label : ELEMENT
             =
+            Label : LEFT
+              $e
             Label : RIGHT
               Concatenation
               Label : CONCAT
@@ -52,18 +42,16 @@ Label : CODE
                     F
                   Label : ARGUMENT
                     'E'
-            Label : LEFT
-              $e
           Label : ELEMENT
             if
             Label : CONDITION
               (
               Label : CODE
                 ===
-                Label : RIGHT
-                  null
                 Label : LEFT
                   $c
+                Label : RIGHT
+                  null
             Label : THEN
               {
               Label : ELEMENT
@@ -72,14 +60,14 @@ Label : CODE
                   (
                   Label : CODE
                     =
+                    Label : LEFT
+                      $f
                     Label : RIGHT
                       H
                       Label : ARGUMENTS
                         void
                         Label : ARGUMENT
                           $e
-                    Label : LEFT
-                      $f
                 Label : THEN
                   {
                   Label : ELEMENT
@@ -96,12 +84,6 @@ Label : CODE
               {
               Label : ELEMENT
                 foreach
-                Label : VALUE
-                  $g
-                Label : SOURCE
-                  (array)
-                  Label : CAST
-                    $c
                 Label : BLOCK
                   {
                   Label : ELEMENT
@@ -138,3 +120,21 @@ Label : CODE
                         return
                         Label : RETURN
                           I
+                Label : SOURCE
+                  (array)
+                  Label : CAST
+                    $c
+                Label : VALUE
+                  $g
+    Label : SOURCE
+      ::
+      Label : PROPERTY
+        $a
+      Label : CLASS
+        B
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b

@@ -8,55 +8,55 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          3
         Label : LEFT
           (
           Label : CODE
             %
-            Label : RIGHT
-              2
             Label : LEFT
               (
               Label : CODE
                 +
-                Label : RIGHT
-                  1
                 Label : LEFT
                   $e
+                Label : RIGHT
+                  1
+            Label : RIGHT
+              2
+        Label : RIGHT
+          3
     Label : THEN
       {
       Label : ELEMENT
         =
+        Label : LEFT
+          $g
         Label : RIGHT
           (
           Label : CODE
             -
-            Label : RIGHT
-              (
-              Label : CODE
-                *
-                Label : RIGHT
-                  $m
-                Label : LEFT
-                  $l
             Label : LEFT
               -
-              Label : RIGHT
-                (
-                Label : CODE
-                  *
-                  Label : RIGHT
-                    $k
-                  Label : LEFT
-                    $j
               Label : LEFT
                 (
                 Label : CODE
                   *
-                  Label : RIGHT
-                    $i
                   Label : LEFT
                     $h
-        Label : LEFT
-          $g
+                  Label : RIGHT
+                    $i
+              Label : RIGHT
+                (
+                Label : CODE
+                  *
+                  Label : LEFT
+                    $j
+                  Label : RIGHT
+                    $k
+            Label : RIGHT
+              (
+              Label : CODE
+                *
+                Label : LEFT
+                  $l
+                Label : RIGHT
+                  $m

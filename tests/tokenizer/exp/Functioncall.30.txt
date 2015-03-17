@@ -10,14 +10,14 @@ Label : CODE
         Concatenation
         Label : CONCAT
           ::
-          Label : CLASS
-            a
           Label : METHOD
             b
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 3
+          Label : CLASS
+            a
         Label : CONCAT
           '2'
         Label : CONCAT

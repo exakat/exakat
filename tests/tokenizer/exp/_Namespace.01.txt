@@ -4,7 +4,7 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      A
     Label : BLOCK
       void
+    Label : NAMESPACE
+      A

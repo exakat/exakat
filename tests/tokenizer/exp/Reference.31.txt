@@ -8,10 +8,14 @@ Label : CODE
       (
       Label : CODE
         &
+        Label : LEFT
+          +
+          Label : LEFT
+            $d
+          Label : RIGHT
+            "0"
         Label : RIGHT
           ==
-          Label : RIGHT
-            $c
           Label : LEFT
             ->
             Label : OBJECT
@@ -22,12 +26,8 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-        Label : LEFT
-          +
           Label : RIGHT
-            "0"
-          Label : LEFT
-            $d
+            $c
     Label : THEN
       {
       Label : ELEMENT

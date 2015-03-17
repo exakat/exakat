@@ -4,23 +4,23 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      a
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        &
-        Label : CLASS
-          C
-        Label : VARIABLE
-          $d
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          b
-        Label : VARIABLE
-          $c
     Label : BLOCK
       {
       Label : ELEMENT
         void
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        &
+        Label : VARIABLE
+          $d
+        Label : CLASS
+          C
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          $c
+        Label : CLASS
+          b
+    Label : NAME
+      a

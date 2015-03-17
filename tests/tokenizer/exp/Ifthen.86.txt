@@ -29,8 +29,6 @@ Label : ELEMENT
             void
             Label : ARGUMENT
               ::
-              Label : CLASS
-                D
               Label : METHOD
                 E
                 Label : ARGUMENTS
@@ -41,26 +39,24 @@ Label : ELEMENT
                       Arguments
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'R'
                         Label : VALUE
                           'S'
+                        Label : KEY
+                          'R'
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'P'
                         Label : VALUE
                           'Q'
+                        Label : KEY
+                          'P'
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'N'
                         Label : VALUE
                           'O'
+                        Label : KEY
+                          'N'
                   Label : ARGUMENT
                     ::
-                    Label : CLASS
-                      G
                     Label : METHOD
                       H
                       Label : ARGUMENTS
@@ -70,18 +66,22 @@ Label : ELEMENT
                         Label : ARGUMENT
                           'L'
                         Label : ARGUMENT
-                          ::
-                          Label : PROPERTY
+                          [
+                          Label : VARIABLE
                             [
                             Label : VARIABLE
-                              [
-                              Label : VARIABLE
+                              ::
+                              Label : PROPERTY
                                 $b
-                              Label : INDEX
-                                'J'
+                              Label : CLASS
+                                I
                             Label : INDEX
-                              'K'
-                          Label : CLASS
-                            I
+                              'J'
+                          Label : INDEX
+                            'K'
+                    Label : CLASS
+                      G
                   Label : ARGUMENT
                     F
+              Label : CLASS
+                D

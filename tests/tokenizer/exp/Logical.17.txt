@@ -3,12 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
-    and
+    or
     Label : LEFT
-      1
-    Label : RIGHT
-      or
+      and
       Label : LEFT
-        2
+        1
       Label : RIGHT
-        3
+        2
+    Label : RIGHT
+      3

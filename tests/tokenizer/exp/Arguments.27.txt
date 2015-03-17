@@ -3,81 +3,83 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
+    Label : BLOCK
+      Block with Foreach
+      Label : ELEMENT
+        O
+      Label : ELEMENT
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              ?
+              Label : CONDITION
+                F
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $e
+              Label : THEN
+                G
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $f
+              Label : ELSE
+                H
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    ::
+                    Label : METHOD
+                      L
+                      Label : ARGUMENTS
+                        Arguments
+                        Label : ARGUMENT
+                          array
+                          Label : ARGUMENTS
+                            void
+                            Label : ARGUMENT
+                              =>
+                              Label : VALUE
+                                O
+                              Label : KEY
+                                ::
+                                Label : CLASS
+                                  M
+                                Label : CONSTANT
+                                  N
+                        Label : ARGUMENT
+                          $g
+                    Label : CLASS
+                      K
+                  Label : ARGUMENT
+                    'J'
+                  Label : ARGUMENT
+                    'I'
+            Label : ARGUMENT
+              'E'
+            Label : ARGUMENT
+              void
+              Label : ARGUMENT
+                D
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $d
+        Label : ELEMENT
+          B
     Label : SOURCE
       [
       Label : VARIABLE
         $a
       Label : INDEX
         'B'
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        O
-      Label : ELEMENT
-        B
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            ?
-            Label : CONDITION
-              F
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $e
-            Label : THEN
-              G
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $f
-            Label : ELSE
-              H
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    K
-                  Label : METHOD
-                    L
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        array
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              ::
-                              Label : CLASS
-                                M
-                              Label : CONSTANT
-                                N
-                            Label : VALUE
-                              O
-                      Label : ARGUMENT
-                        $g
-                Label : ARGUMENT
-                  'J'
-                Label : ARGUMENT
-                  'I'
-          Label : ARGUMENT
-            'E'
-          Label : ARGUMENT
-            void
-            Label : ARGUMENT
-              D
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $d
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b

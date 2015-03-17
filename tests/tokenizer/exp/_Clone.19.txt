@@ -6,17 +6,17 @@ Label : CODE
     clone
     Label : CLONE
       $x
-      Label : NAME
-        $x
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           +
-          Label : RIGHT
-            4
           Label : LEFT
             +
-            Label : RIGHT
-              3
             Label : LEFT
               1
+            Label : RIGHT
+              3
+          Label : RIGHT
+            4
+      Label : NAME
+        $x

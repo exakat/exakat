@@ -26,26 +26,18 @@ Label : CODE
             NS1
       Label : ELEMENT
         class
-        Label : NAME
-          ParentClass
         Label : BLOCK
           {
           Label : ELEMENT
             void
+        Label : NAME
+          ParentClass
       Label : ELEMENT
         class
-        Label : NAME
-          ClassName
-        Label : EXTENDS
-          ParentClass
         Label : BLOCK
           {
           Label : ELEMENT
             function
-            Label : STATIC
-              static
-            Label : NAME
-              x
             Label : BLOCK
               {
               Label : ELEMENT
@@ -82,6 +74,14 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+            Label : NAME
+              x
+            Label : STATIC
+              static
+        Label : NAME
+          ClassName
+        Label : EXTENDS
+          ParentClass
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -154,11 +154,11 @@ Label : CODE
       {
       Label : ELEMENT
         class
-        Label : NAME
-          ClassName1
         Label : BLOCK
           {
           Label : ELEMENT
             void
+        Label : NAME
+          ClassName1
     Label : NAMESPACE
       NS1

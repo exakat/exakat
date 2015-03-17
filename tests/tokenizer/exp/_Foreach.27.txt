@@ -4,25 +4,27 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            >>
+            Label : LEFT
+              $d
+            Label : RIGHT
+              1
+        Label : THEN
+          {
+          Label : ELEMENT
+            void
     Label : SOURCE
       $a
-    Label : BLOCK
-      if
-      Label : CONDITION
-        (
-        Label : CODE
-          >>
-          Label : RIGHT
-            1
-          Label : LEFT
-            $d
-      Label : THEN
-        {
-        Label : ELEMENT
-          void
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b

@@ -3,42 +3,32 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
-    Label : SOURCE
-      $a
     Label : BLOCK
-      Block with Foreach
+      ;
       Label : ELEMENT
-        ;
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              ||
-              Label : RIGHT
-                ==
-                Label : RIGHT
-                  'C'
-                Label : LEFT
-                  $g
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            ||
+            Label : LEFT
+              ==
               Label : LEFT
-                ==
-                Label : RIGHT
-                  'B'
-                Label : LEFT
-                  $f
-          Label : THEN
-            {
-            Label : ELEMENT
-              continue
-              Label : LEVEL
-                void
+                $f
+              Label : RIGHT
+                'B'
+            Label : RIGHT
+              ==
+              Label : LEFT
+                $g
+              Label : RIGHT
+                'C'
+        Label : THEN
+          {
+          Label : ELEMENT
+            continue
+            Label : LEVEL
+              void
       Label : ELEMENT
         if
         Label : CONDITION
@@ -61,3 +51,11 @@ Label : CODE
             continue
             Label : LEVEL
               void
+    Label : SOURCE
+      $a
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b

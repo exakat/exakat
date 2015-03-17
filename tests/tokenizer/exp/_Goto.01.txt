@@ -3,15 +3,15 @@
 Label : CODE
   ;
   Label : ELEMENT
+    :
+    Label : LABEL
+      a
+  Label : ELEMENT
     echo
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         'Bar'
-  Label : ELEMENT
-    :
-    Label : LABEL
-      a
   Label : ELEMENT
     echo
     Label : ARGUMENTS

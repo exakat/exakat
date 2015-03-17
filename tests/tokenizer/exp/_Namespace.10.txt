@@ -4,12 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      A
     Label : BLOCK
       {
       Label : ELEMENT
         =
+        Label : LEFT
+          $obj
         Label : RIGHT
           new
           Label : NEW
@@ -18,17 +18,17 @@ Label : CODE
               Another
             Label : SUBNAME
               namespace
-        Label : LEFT
-          $obj
+    Label : NAMESPACE
+      A
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      Global
     Label : BLOCK
       {
       Label : ELEMENT
         +
-        Label : RIGHT
-          2
         Label : LEFT
           1
+        Label : RIGHT
+          2
+    Label : NAMESPACE
+      Global

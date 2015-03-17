@@ -11,7 +11,7 @@ Label : CODE
       Label : ELEMENT
         default
         Label : CODE
-          Block with Sequence For Default
+          ;
           Label : ELEMENT
             return
             Label : RETURN
@@ -34,43 +34,43 @@ Label : CODE
                   $d
           Label : ELEMENT
             =
-            Label : RIGHT
-              0
             Label : LEFT
-              $count
+              $indexed
+            Label : RIGHT
+              array
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $associative
+            Label : RIGHT
+              array
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
           Label : ELEMENT
             foreach
-            Label : VALUE
-              =>
-              Label : KEY
-                $key
-              Label : VALUE
-                $value
-            Label : SOURCE
-              $data
             Label : BLOCK
               {
               Label : ELEMENT
                 void
+            Label : SOURCE
+              $data
+            Label : VALUE
+              =>
+              Label : VALUE
+                $value
+              Label : KEY
+                $key
           Label : ELEMENT
             =
-            Label : RIGHT
-              array
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
             Label : LEFT
-              $associative
-          Label : ELEMENT
-            =
+              $count
             Label : RIGHT
-              array
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-            Label : LEFT
-              $indexed
+              0
         Label : CASE
           'a'

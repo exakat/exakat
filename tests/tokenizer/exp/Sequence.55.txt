@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        B
-      Label : SUBNAME
-        A
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -36,3 +30,9 @@ Label : CODE
             D
           Label : SUBNAME
             C
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        B
+      Label : SUBNAME
+        A

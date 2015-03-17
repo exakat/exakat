@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : FINAL
-      final
-    Label : NAME
-      y
     Label : BLOCK
       {
       Label : ELEMENT
         void
+    Label : NAME
+      y
+    Label : FINAL
+      final

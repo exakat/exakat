@@ -9,7 +9,7 @@ Label : CODE
       Label : VARIABLE
         $y
       Label : INDEX
-        %
+        &
         Label : LEFT
           1
         Label : RIGHT
@@ -33,7 +33,7 @@ Label : CODE
       Label : VARIABLE
         $y
       Label : INDEX
-        &
+        %
         Label : LEFT
           1
         Label : RIGHT

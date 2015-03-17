@@ -8,10 +8,6 @@ Label : CODE
       (
       Label : CODE
         !=
-        Label : RIGHT
-          (bool)
-          Label : CAST
-            $c
         Label : LEFT
           (bool)
           Label : CAST
@@ -20,6 +16,10 @@ Label : CODE
               $a
             Label : INDEX
               'b'
+        Label : RIGHT
+          (bool)
+          Label : CAST
+            $c
     Label : THEN
       {
       Label : ELEMENT

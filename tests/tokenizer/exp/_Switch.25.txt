@@ -11,36 +11,36 @@ Label : CODE
       Label : ELEMENT
         default
         Label : CODE
-          Block with Sequence For Default
+          ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $e
       Label : ELEMENT
         case
-        Label : CASE
-          'b'
         Label : CODE
-          Block with Sequence For Case
+          ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $b
+        Label : CASE
+          'b'
       Label : ELEMENT
         case
-        Label : CASE
-          'c'
         Label : CODE
-          Block with Sequence For Case
+          ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $c
+        Label : CASE
+          'c'
       Label : ELEMENT
         case
-        Label : CASE
-          'left'
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             Void
+        Label : CASE
+          'left'

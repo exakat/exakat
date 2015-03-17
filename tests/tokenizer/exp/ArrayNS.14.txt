@@ -4,22 +4,20 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      $i
     Label : LEFT
       [
       Label : VARIABLE
         [
         Label : VARIABLE
-          ::
-          Label : CLASS
-            C
-          Label : PROPERTY
-            [
-            Label : VARIABLE
+          [
+          Label : VARIABLE
+            ::
+            Label : PROPERTY
               $d
-            Label : INDEX
-              $e
+            Label : CLASS
+              C
+          Label : INDEX
+            $e
         Label : INDEX
           $f
       Label : INDEX
@@ -28,3 +26,5 @@ Label : CODE
           $g
         Label : INDEX
           'h'
+    Label : RIGHT
+      $i

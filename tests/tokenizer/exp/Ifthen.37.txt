@@ -11,7 +11,7 @@ Label : CODE
       Label : ELEMENT
         default
         Label : CODE
-          Block with Sequence For Default
+          ;
           Label : ELEMENT
             return
             Label : RETURN
@@ -19,17 +19,13 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CODE
-          Block with Sequence For Case Without Semicolon
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
+          ;
           Label : ELEMENT
             if
             Label : CONDITION
               (
               Label : CODE
-                $g
+                $h
             Label : THEN
               {
               Label : ELEMENT
@@ -39,9 +35,13 @@ Label : CODE
             Label : CONDITION
               (
               Label : CODE
-                $h
+                $g
             Label : THEN
               {
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
               Label : ELEMENT
                 void
           Label : ELEMENT

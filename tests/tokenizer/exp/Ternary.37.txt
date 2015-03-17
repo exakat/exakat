@@ -19,8 +19,6 @@ Label : CODE
             ?
             Label : CONDITION
               <
-              Label : RIGHT
-                $b
               Label : LEFT
                 B
                 Label : ARGUMENTS
@@ -31,6 +29,8 @@ Label : CODE
                       $a
                     Label : INDEX
                       'C'
+              Label : RIGHT
+                $b
             Label : THEN
               'D'
             Label : ELSE
@@ -41,8 +41,6 @@ Label : CODE
       void
       Label : ARGUMENT
         ::
-        Label : CLASS
-          H
         Label : METHOD
           I
           Label : ARGUMENTS
@@ -59,5 +57,7 @@ Label : CODE
                 $d
               Label : INDEX
                 'J'
+        Label : CLASS
+          H
   Label : ELEMENT
     F

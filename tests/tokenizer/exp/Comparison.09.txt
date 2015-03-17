@@ -6,8 +6,6 @@ Label : CODE
     return
     Label : RETURN
       !==
-      Label : RIGHT
-        false
       Label : LEFT
         ->
         Label : OBJECT
@@ -18,3 +16,5 @@ Label : CODE
             void
             Label : ARGUMENT
               $sql
+      Label : RIGHT
+        false

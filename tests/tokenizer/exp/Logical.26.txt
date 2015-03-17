@@ -8,32 +8,18 @@ Label : CODE
       (
       Label : CODE
         ||
+        Label : LEFT
+          ==
+          Label : LEFT
+            $a
+          Label : RIGHT
+            $b
         Label : RIGHT
           (
           Label : CODE
             &&
-            Label : RIGHT
-              >
-              Label : RIGHT
-                4.1
-              Label : LEFT
-                ->
-                Label : OBJECT
-                  [
-                  Label : VARIABLE
-                    $f
-                  Label : INDEX
-                    'g'
-                Label : METHOD
-                  h
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      void
             Label : LEFT
               >
-              Label : RIGHT
-                4.1
               Label : LEFT
                 ->
                 Label : OBJECT
@@ -48,12 +34,26 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       void
-        Label : LEFT
-          ==
-          Label : RIGHT
-            $b
-          Label : LEFT
-            $a
+              Label : RIGHT
+                4.1
+            Label : RIGHT
+              >
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  [
+                  Label : VARIABLE
+                    $f
+                  Label : INDEX
+                    'g'
+                Label : METHOD
+                  h
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+              Label : RIGHT
+                4.1
     Label : THEN
       {
       Label : ELEMENT

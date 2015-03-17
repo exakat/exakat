@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $b
-    Label : NAME
-      a
     Label : BLOCK
       {
       Label : ELEMENT
@@ -33,11 +27,11 @@ Label : CODE
                   Label : CONTAIN
                     Concatenation
                     Label : CONCAT
-                      c
+                      '
                     Label : CONCAT
                       $d
                     Label : CONCAT
-                      '
+                      c
                 Label : CONCAT
                   b
                 Label : CONCAT
@@ -56,3 +50,9 @@ Label : CODE
             return
             Label : RETURN
               false
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $b
+    Label : NAME
+      a

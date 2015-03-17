@@ -5,15 +5,15 @@ Label : CODE
   Label : ELEMENT
     ->
     Label : OBJECT
-      ::
-      Label : CLASS
-        self
-      Label : PROPERTY
-        [
-        Label : VARIABLE
+      [
+      Label : VARIABLE
+        ::
+        Label : PROPERTY
           $a
-        Label : INDEX
-          $b
+        Label : CLASS
+          self
+      Label : INDEX
+        $b
     Label : METHOD
       d
       Label : ARGUMENTS

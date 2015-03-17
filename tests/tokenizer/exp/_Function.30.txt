@@ -4,41 +4,41 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      x
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          StdClass
-        Label : VARIABLE
-          =
-          Label : RIGHT
-            null
-          Label : LEFT
-            $c
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          StdClass
-        Label : VARIABLE
-          =
-          Label : RIGHT
-            null
-          Label : LEFT
-            $b
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          StdClass
-        Label : VARIABLE
-          =
-          Label : RIGHT
-            null
-          Label : LEFT
-            $x
     Label : BLOCK
       {
       Label : ELEMENT
         void
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          =
+          Label : LEFT
+            $c
+          Label : RIGHT
+            null
+        Label : CLASS
+          StdClass
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            null
+        Label : CLASS
+          StdClass
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            null
+        Label : CLASS
+          StdClass
+    Label : NAME
+      x

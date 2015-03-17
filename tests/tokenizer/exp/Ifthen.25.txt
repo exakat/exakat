@@ -16,11 +16,11 @@ Label : CODE
       Block with if/elseif
       Label : ELEMENT
         foreach
-        Label : SOURCE
-          $x
-        Label : VALUE
-          $y
         Label : BLOCK
           {
           Label : ELEMENT
             void
+        Label : SOURCE
+          $x
+        Label : VALUE
+          $y

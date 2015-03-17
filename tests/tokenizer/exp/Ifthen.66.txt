@@ -8,14 +8,14 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          'C'
         Label : LEFT
           ->
           Label : OBJECT
             $a
           Label : PROPERTY
             B
+        Label : RIGHT
+          'C'
     Label : THEN
       Block with if/elseif
       Label : ELEMENT
@@ -38,14 +38,14 @@ Label : CODE
         (
         Label : CODE
           ==
-          Label : RIGHT
-            'H'
           Label : LEFT
             ->
             Label : OBJECT
               $d
             Label : PROPERTY
               G
+          Label : RIGHT
+            'H'
       Label : THEN
         {
         Label : ELEMENT
@@ -86,14 +86,14 @@ Label : CODE
           (
           Label : CODE
             ==
-            Label : RIGHT
-              'S'
             Label : LEFT
               ->
               Label : OBJECT
                 $i
               Label : PROPERTY
                 R
+            Label : RIGHT
+              'S'
         Label : THEN
           Block with if/elseif
           Label : ELEMENT
@@ -118,14 +118,14 @@ Label : CODE
             (
             Label : CODE
               ==
-              Label : RIGHT
-                'Z'
               Label : LEFT
                 ->
                 Label : OBJECT
                   $l
                 Label : PROPERTY
                   Y
+              Label : RIGHT
+                'Z'
           Label : THEN
             Block with if/elseif
             Label : ELEMENT

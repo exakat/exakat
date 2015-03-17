@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       {
       Label : ELEMENT
@@ -16,9 +14,11 @@ Label : CODE
           b
       Label : ELEMENT
         var
-        Label : DEFINE
-          $a
         Label : VALUE
           Void
+        Label : DEFINE
+          $a
         Label : VAR
           var
+    Label : NAME
+      x

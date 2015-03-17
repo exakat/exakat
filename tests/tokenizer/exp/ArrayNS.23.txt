@@ -7,16 +7,14 @@ Label : CODE
       (
       Label : CODE
         !=
-        Label : RIGHT
-          'B'
         Label : LEFT
           $a
+        Label : RIGHT
+          'B'
     Label : THEN
       {
       Label : ELEMENT
         =
-        Label : RIGHT
-          $c
         Label : LEFT
           [
           Label : VARIABLE
@@ -25,3 +23,5 @@ Label : CODE
               $b
           Label : INDEX
             C
+        Label : RIGHT
+          $c

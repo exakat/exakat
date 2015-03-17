@@ -8,8 +8,6 @@ Label : CODE
       void
       Label : ARGUMENT
         =>
-        Label : KEY
-          'a'
         Label : VALUE
           ?
           Label : CONDITION
@@ -20,25 +18,27 @@ Label : CODE
               'c'
           Label : THEN
             -
-            Label : RIGHT
-              H
             Label : LEFT
               +
-              Label : RIGHT
-                *
-                Label : RIGHT
-                  1
-                Label : LEFT
-                  [
-                  Label : VARIABLE
-                    $f
-                  Label : INDEX
-                    'g'
               Label : LEFT
                 [
                 Label : VARIABLE
                   $d
                 Label : INDEX
                   'e'
+              Label : RIGHT
+                *
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $f
+                  Label : INDEX
+                    'g'
+                Label : RIGHT
+                  1
+            Label : RIGHT
+              H
           Label : ELSE
             2
+        Label : KEY
+          'a'

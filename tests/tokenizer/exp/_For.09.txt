@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     for
-    Label : INIT
-      void
-    Label : FINAL
-      void
-    Label : INCREMENT
-      void
     Label : BLOCK
       {
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $j
+    Label : INIT
+      void
+    Label : FINAL
+      void
+    Label : INCREMENT
+      void

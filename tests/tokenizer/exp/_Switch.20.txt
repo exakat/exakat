@@ -10,24 +10,18 @@ Label : CODE
       {
       Label : ELEMENT
         case
-        Label : CASE
-          "b"
         Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              'a'
-            Label : LEFT
-              $a
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              'n'
             Label : LEFT
               $m
+            Label : RIGHT
+              'n'
           Label : ELEMENT
             =
+            Label : LEFT
+              $b
             Label : RIGHT
               Concatenation
               Label : CONCAT
@@ -48,26 +42,28 @@ Label : CODE
                           void
               Label : CONCAT
                 'h'
+          Label : ELEMENT
+            =
             Label : LEFT
-              $b
+              $a
+            Label : RIGHT
+              'a'
+        Label : CASE
+          "b"
       Label : ELEMENT
         default
         Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              'a'
-            Label : LEFT
-              $a
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              'n'
             Label : LEFT
               $m
+            Label : RIGHT
+              'n'
           Label : ELEMENT
             =
+            Label : LEFT
+              $b
             Label : RIGHT
               Concatenation
               Label : CONCAT
@@ -88,13 +84,17 @@ Label : CODE
                           void
               Label : CONCAT
                 'h'
+          Label : ELEMENT
+            =
             Label : LEFT
-              $b
+              $a
+            Label : RIGHT
+              'a'
       Label : ELEMENT
         case
-        Label : CASE
-          'b'
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             Void
+        Label : CASE
+          'b'

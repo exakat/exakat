@@ -35,12 +35,12 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        |
+        &
         Label : LEFT
-          $a
-        Label : RIGHT
-          &
+          |
           Label : LEFT
-            $b
+            $a
           Label : RIGHT
-            $c
+            $b
+        Label : RIGHT
+          $c

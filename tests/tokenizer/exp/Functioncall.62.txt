@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        b
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -14,15 +20,9 @@ Label : CODE
           $e
         Label : ARGUMENT
           >
-          Label : RIGHT
-            0
           Label : LEFT
             $d
+          Label : RIGHT
+            0
         Label : ARGUMENT
           $c
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        b

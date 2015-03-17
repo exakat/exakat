@@ -12,8 +12,6 @@ Label : ELEMENT
       Label : THEN
         ;
         Label : ELEMENT
-          B
-        Label : ELEMENT
           I
         Label : ELEMENT
           echo
@@ -153,10 +151,10 @@ Label : ELEMENT
                       void
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'AK'
                         Label : VALUE
                           'AL'
+                        Label : KEY
+                          'AK'
                   Label : ARGUMENT
                     'AJ'
         Label : ELEMENT
@@ -191,10 +189,10 @@ Label : ELEMENT
                               H
                       Label : CONCAT
                         'F'
+        Label : ELEMENT
+          B
       Label : ELSE
         ;
-        Label : ELEMENT
-          AM
         Label : ELEMENT
           AP
         Label : ELEMENT
@@ -207,5 +205,7 @@ Label : ELEMENT
                 void
                 Label : ARGUMENT
                   'AP'
+        Label : ELEMENT
+          AM
 Label : ELEMENT
   A

@@ -4,13 +4,13 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       (string)
       Label : CAST
         ::
-        Label : CLASS
-          $a
         Label : PROPERTY
           $b
-    Label : LEFT
-      $x
+        Label : CLASS
+          $a

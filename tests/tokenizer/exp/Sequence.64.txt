@@ -14,16 +14,20 @@ Label : CODE
             Label : ARGUMENT
               $a
     Label : THEN
-      foreach
-      Label : VALUE
-        =>
-        Label : KEY
-          $c
+      ;
+      Label : ELEMENT
+        foreach
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $e
+        Label : SOURCE
+          $b
         Label : VALUE
-          $d
-      Label : SOURCE
-        $b
-      Label : BLOCK
-        ++
-        Label : POSTPLUSPLUS
-          $e
+          =>
+          Label : VALUE
+            $d
+          Label : KEY
+            $c

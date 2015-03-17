@@ -4,40 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $a
-    Label : VALUE
-      $b
     Label : BLOCK
       ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          Concatenation
-          Label : CONCAT
-            ->
-            Label : OBJECT
-              $f
-            Label : PROPERTY
-              g
-          Label : CONCAT
-            'e'
-        Label : LEFT
-          $d
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            $h
-        Label : THEN
-          {
-          Label : ELEMENT
-            .=
-            Label : RIGHT
-              'j'
-            Label : LEFT
-              $i
       Label : ELEMENT
         if
         Label : CONDITION
@@ -48,7 +16,39 @@ Label : CODE
           {
           Label : ELEMENT
             .=
-            Label : RIGHT
-              'm'
             Label : LEFT
               $l
+            Label : RIGHT
+              'm'
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $h
+        Label : THEN
+          {
+          Label : ELEMENT
+            .=
+            Label : LEFT
+              $i
+            Label : RIGHT
+              'j'
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $d
+        Label : RIGHT
+          Concatenation
+          Label : CONCAT
+            ->
+            Label : OBJECT
+              $f
+            Label : PROPERTY
+              g
+          Label : CONCAT
+            'e'
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b

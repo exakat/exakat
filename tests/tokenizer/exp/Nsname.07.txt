@@ -6,9 +6,9 @@ Label : CODE
     new
     Label : NEW
       \
-      Label : SUBNAME
-        a
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           void
+      Label : SUBNAME
+        a

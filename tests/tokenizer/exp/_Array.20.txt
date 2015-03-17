@@ -8,8 +8,6 @@ Label : CODE
       void
       Label : ARGUMENT
         ::
-        Label : CLASS
-          x
         Label : PROPERTY
           [
           Label : VARIABLE
@@ -24,44 +22,18 @@ Label : CODE
               3
           Label : INDEX
             +
-            Label : RIGHT
-              7
-            Label : LEFT
-              null
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          x
-        Label : PROPERTY
-          [
-          Label : VARIABLE
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                A
-              Label : INDEX
-                2
-            Label : INDEX
-              3
-          Label : INDEX
-            +
-            Label : RIGHT
-              7
             Label : LEFT
               true
+            Label : RIGHT
+              7
+        Label : CLASS
+          x
   Label : ELEMENT
     print
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         ::
-        Label : CLASS
-          x
         Label : PROPERTY
           [
           Label : VARIABLE
@@ -76,32 +48,58 @@ Label : CODE
               3
           Label : INDEX
             +
+            Label : LEFT
+              null
             Label : RIGHT
               7
-            Label : LEFT
-              $x
+        Label : CLASS
+          x
   Label : ELEMENT
     print
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         ::
+        Label : PROPERTY
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                A
+              Label : INDEX
+                2
+            Label : INDEX
+              3
+          Label : INDEX
+            +
+            Label : LEFT
+              $x
+            Label : RIGHT
+              7
         Label : CLASS
           x
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        ::
         Label : PROPERTY
           [
           Label : VARIABLE
             A
           Label : INDEX
             +
-            Label : RIGHT
-              7
             Label : LEFT
               4.3
+            Label : RIGHT
+              7
+        Label : CLASS
+          x
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       {
       Label : ELEMENT
@@ -112,11 +110,13 @@ Label : CODE
             Arguments
             Label : ARGUMENT
               =>
-              Label : KEY
-                2
               Label : VALUE
                 3
+              Label : KEY
+                2
             Label : ARGUMENT
               1
         Label : NAME
           A
+    Label : NAME
+      x

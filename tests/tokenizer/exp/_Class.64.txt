@@ -4,25 +4,25 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      Null
     Label : BLOCK
       {
       Label : ELEMENT
         void
-  Label : ELEMENT
-    class
-    Label : NAME
-      true
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
-  Label : ELEMENT
-    class
     Label : NAME
       false
+  Label : ELEMENT
+    class
     Label : BLOCK
       {
       Label : ELEMENT
         void
+    Label : NAME
+      true
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void
+    Label : NAME
+      Null

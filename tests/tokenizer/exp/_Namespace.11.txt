@@ -8,26 +8,26 @@ Label : CODE
       ;
       Label : ELEMENT
         class
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            function
+            Label : BLOCK
+              {
+              Label : ELEMENT
+                void
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+            Label : NAME
+              M
         Label : NAME
           J
         Label : EXTENDS
           K
         Label : IMPLEMENTS
           L
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            function
-            Label : NAME
-              M
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-            Label : BLOCK
-              {
-              Label : ELEMENT
-                void
       Label : ELEMENT
         use
         Label : USE

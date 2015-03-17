@@ -14,13 +14,13 @@ Label : CODE
         void
     Label : CATCH
       catch
-      Label : CLASS
-        Exception
-      Label : VARIABLE
-        $e
       Label : CODE
         {
         Label : ELEMENT
+          __halt_compiler
+        Label : ELEMENT
           void
-  Label : ELEMENT
-    __halt_compiler
+      Label : VARIABLE
+        $e
+      Label : CLASS
+        Exception

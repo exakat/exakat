@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       "
       Label : CONTAIN
@@ -68,5 +70,3 @@ Label : CODE
               'x'
           Label : INDEX
             'x'
-    Label : LEFT
-      $x

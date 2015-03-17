@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      2
     Label : LEFT
       $c
+    Label : RIGHT
+      2
   Label : ELEMENT
     switch
     Label : NAME
@@ -15,34 +15,34 @@ Label : CODE
     Label : CASES
       {
       Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              3
-            Label : LEFT
-              $b
-      Label : ELEMENT
         case
         Label : CODE
           ;
           Label : ELEMENT
-            =
-            Label : RIGHT
-              2
-            Label : LEFT
-              $b
-          Label : ELEMENT
             break
             Label : LEVEL
               void
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              2
         Label : CASE
           1
+      Label : ELEMENT
+        default
+        Label : CODE
+          ;
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              3
   Label : ELEMENT
     =
-    Label : RIGHT
-      1
     Label : LEFT
       $a
+    Label : RIGHT
+      1

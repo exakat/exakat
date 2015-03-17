@@ -3,38 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $d
-              Label : PROPERTY
-                Q
-    Label : THEN
-      {
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $f
-          Label : PROPERTY
-            S
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $e
-          Label : INDEX
-            'R'
-  Label : ELEMENT
     ::
     Label : METHOD
       U
@@ -65,6 +33,38 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $d
+              Label : PROPERTY
+                Q
+    Label : THEN
+      {
+      Label : ELEMENT
+        =
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $e
+          Label : INDEX
+            'R'
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $f
+          Label : PROPERTY
+            S
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
         ::
         Label : METHOD
           K
@@ -78,6 +78,12 @@ Label : CODE
       {
       Label : ELEMENT
         =
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            'M'
         Label : RIGHT
           ::
           Label : METHOD
@@ -88,14 +94,14 @@ Label : CODE
                 'P'
           Label : CLASS
             N
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            'M'
   Label : ELEMENT
     =
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $b
+      Label : INDEX
+        'F'
     Label : RIGHT
       ::
       Label : METHOD
@@ -106,14 +112,14 @@ Label : CODE
             'I'
       Label : CLASS
         G
+  Label : ELEMENT
+    =
     Label : LEFT
       [
       Label : VARIABLE
-        $b
+        $a
       Label : INDEX
-        'F'
-  Label : ELEMENT
-    =
+        'B'
     Label : RIGHT
       ::
       Label : METHOD
@@ -124,9 +130,3 @@ Label : CODE
             'E'
       Label : CLASS
         C
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        'B'

@@ -2,6 +2,16 @@
 Label : CODE
   ;
   Label : ELEMENT
+    y
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        new
+        Label : NEW
+          static
+          Label : ARGUMENTS
+            void
+  Label : ELEMENT
     [
     Label : ARGUMENTS
       void
@@ -15,16 +25,6 @@ Label : CODE
               $method
             Label : ARGUMENT
               void
-  Label : ELEMENT
-    y
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        new
-        Label : NEW
-          static
-          Label : ARGUMENTS
-            void
   Label : ELEMENT
     x
     Label : ARGUMENTS

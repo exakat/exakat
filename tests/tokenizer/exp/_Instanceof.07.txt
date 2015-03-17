@@ -10,36 +10,42 @@ Label : CODE
       {
       Label : ELEMENT
         case
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+        Label : CASE
+          instanceof
+          Label : VARIABLE
+            $c
+          Label : CLASS
+            D
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
         Label : CASE
           ::
-          Label : CLASS
-            E
           Label : METHOD
             F
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 $d
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-      Label : ELEMENT
-        case
-        Label : CASE
-          instanceof
           Label : CLASS
-            D
-          Label : VARIABLE
-            $c
+            E
+      Label : ELEMENT
+        case
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             Void
-      Label : ELEMENT
-        case
         Label : CASE
           instanceof
+          Label : VARIABLE
+            $e
           Label : CLASS
             \
             Label : SUBNAME
@@ -48,38 +54,38 @@ Label : CODE
               H
             Label : SUBNAME
               G
-          Label : VARIABLE
-            $e
+      Label : ELEMENT
+        case
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             Void
-      Label : ELEMENT
-        case
         Label : CASE
           instanceof
+          Label : VARIABLE
+            $f
           Label : CLASS
             \
             Label : SUBNAME
-              R
+              M
             Label : SUBNAME
-              Q
+              L
             Label : SUBNAME
-              P
+              K
             Label : SUBNAME
-              O
-            Label : SUBNAME
-              N
-          Label : VARIABLE
-            $g
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
+              J
       Label : ELEMENT
         case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              void
         Label : CASE
           instanceof
+          Label : VARIABLE
+            $h
           Label : CLASS
             \
             Label : SUBNAME
@@ -92,51 +98,45 @@ Label : CODE
               T
             Label : SUBNAME
               S
-          Label : VARIABLE
-            $h
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            return
-            Label : RETURN
-              void
       Label : ELEMENT
         case
-        Label : CASE
-          instanceof
-          Label : CLASS
-            \
-            Label : SUBNAME
-              M
-            Label : SUBNAME
-              L
-            Label : SUBNAME
-              K
-            Label : SUBNAME
-              J
-          Label : VARIABLE
-            $f
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             Void
-      Label : ELEMENT
-        case
         Label : CASE
           instanceof
+          Label : VARIABLE
+            $g
           Label : CLASS
             \
             Label : SUBNAME
-              C
-          Label : VARIABLE
-            $a
+              R
+            Label : SUBNAME
+              Q
+            Label : SUBNAME
+              P
+            Label : SUBNAME
+              O
+            Label : SUBNAME
+              N
+      Label : ELEMENT
+        case
         Label : CODE
           ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $b
           Label : ELEMENT
             return
             Label : RETURN
               void
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+        Label : CASE
+          instanceof
+          Label : VARIABLE
+            $a
+          Label : CLASS
+            \
+            Label : SUBNAME
+              C

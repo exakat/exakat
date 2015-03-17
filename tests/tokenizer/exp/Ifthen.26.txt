@@ -16,9 +16,9 @@ Label : CODE
       Block with if/elseif
       Label : ELEMENT
         while
-        Label : CONDITION
-          $x
         Label : BLOCK
           {
           Label : ELEMENT
             void
+        Label : CONDITION
+          $x

@@ -8,68 +8,68 @@ Label : CODE
       {
       Label : ELEMENT
         class
-        Label : NAME
-          a1
         Label : BLOCK
           {
           Label : ELEMENT
             public
-            Label : STATIC
-              static
-            Label : DEFINE
-              $a
-            Label : VALUE
-              38
-            Label : PUBLIC
-              public
-      Label : ELEMENT
-        class
-        Label : NAME
-          one_identifier3
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            public
-            Label : STATIC
-              static
-            Label : DEFINE
-              $a
-            Label : VALUE
-              37
-            Label : PUBLIC
-              public
-      Label : ELEMENT
-        class
-        Label : NAME
-          absolute_path
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            public
-            Label : STATIC
-              static
-            Label : DEFINE
-              $a
-            Label : VALUE
-              34
-            Label : PUBLIC
-              public
-      Label : ELEMENT
-        class
-        Label : NAME
-          one_identifier
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            public
-            Label : STATIC
-              static
-            Label : DEFINE
-              $a
             Label : VALUE
               33
+            Label : DEFINE
+              $a
             Label : PUBLIC
               public
+            Label : STATIC
+              static
+        Label : NAME
+          one_identifier
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            public
+            Label : VALUE
+              34
+            Label : DEFINE
+              $a
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static
+        Label : NAME
+          absolute_path
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            public
+            Label : VALUE
+              37
+            Label : DEFINE
+              $a
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static
+        Label : NAME
+          one_identifier3
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            public
+            Label : VALUE
+              38
+            Label : DEFINE
+              $a
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static
+        Label : NAME
+          a1
     Label : NAMESPACE
       Global
   Label : ELEMENT
@@ -78,20 +78,20 @@ Label : CODE
       {
       Label : ELEMENT
         class
-        Label : NAME
-          path
         Label : BLOCK
           {
           Label : ELEMENT
             public
-            Label : STATIC
-              static
-            Label : DEFINE
-              $a
             Label : VALUE
               35
+            Label : DEFINE
+              $a
             Label : PUBLIC
               public
+            Label : STATIC
+              static
+        Label : NAME
+          path
     Label : NAMESPACE
       complex
   Label : ELEMENT
@@ -100,20 +100,20 @@ Label : CODE
       {
       Label : ELEMENT
         class
-        Label : NAME
-          path2
         Label : BLOCK
           {
           Label : ELEMENT
             public
-            Label : STATIC
-              static
-            Label : DEFINE
-              $a
             Label : VALUE
               36
+            Label : DEFINE
+              $a
             Label : PUBLIC
               public
+            Label : STATIC
+              static
+        Label : NAME
+          path2
     Label : NAMESPACE
       \
       Label : SUBNAME
@@ -139,6 +139,14 @@ Label : CODE
         Label : USE
           \
           Label : SUBNAME
+            path
+          Label : SUBNAME
+            complex
+      Label : ELEMENT
+        use
+        Label : USE
+          \
+          Label : SUBNAME
             path2
           Label : SUBNAME
             complex
@@ -148,149 +156,141 @@ Label : CODE
         use
         Label : USE
           as
-          Label : AS
-            a1
           Label : SUBNAME
             one_identifier3
+          Label : AS
+            a1
       Label : ELEMENT
         use
         Label : USE
           \
-          Label : AS
-            a2
           Label : SUBNAME
             absolute_path3
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            path
-          Label : SUBNAME
-            complex
-      Label : ELEMENT
-        use
-        Label : USE
-          \
           Label : AS
-            a3
+            a2
+      Label : ELEMENT
+        use
+        Label : USE
+          \
           Label : SUBNAME
             path3
           Label : SUBNAME
             complex
+          Label : AS
+            a3
       Label : ELEMENT
         use
         Label : USE
           \
-          Label : AS
-            a4
           Label : SUBNAME
             path32
           Label : SUBNAME
             complex
           Label : SUBNAME
             absolute
+          Label : AS
+            a4
       Label : ELEMENT
         print
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ::
+            Label : PROPERTY
+              $a
             Label : CLASS
               one_identifier
-            Label : PROPERTY
-              $a
       Label : ELEMENT
         print
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ::
+            Label : PROPERTY
+              $a
             Label : CLASS
               absolute_path
-            Label : PROPERTY
-              $a
       Label : ELEMENT
         print
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ::
+            Label : PROPERTY
+              $a
+            Label : CLASS
+              one_identifier3
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : PROPERTY
+              $a
+            Label : CLASS
+              path2
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : PROPERTY
+              $a
             Label : CLASS
               \
               Label : SUBNAME
                 a1
-            Label : PROPERTY
-              $a
       Label : ELEMENT
         print
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ::
+            Label : PROPERTY
+              $a
             Label : CLASS
               a2
-            Label : PROPERTY
-              $a
       Label : ELEMENT
         print
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ::
+            Label : PROPERTY
+              $a
             Label : CLASS
               a4
-            Label : PROPERTY
-              $a
       Label : ELEMENT
         print
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ::
-            Label : CLASS
-              path
             Label : PROPERTY
               $a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              path2
-            Label : PROPERTY
-              $a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              one_identifier3
-            Label : PROPERTY
-              $a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
             Label : CLASS
               a3
-            Label : PROPERTY
-              $a
       Label : ELEMENT
         print
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             ::
-            Label : CLASS
-              a1
             Label : PROPERTY
               $a
+            Label : CLASS
+              path
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : PROPERTY
+              $a
+            Label : CLASS
+              a1
     Label : NAMESPACE
       x

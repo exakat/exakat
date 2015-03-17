@@ -4,16 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         (
         Label : CODE
           !=
-          Label : RIGHT
-            ""
           Label : LEFT
             $b
+          Label : RIGHT
+            ""
       Label : THEN
         Concatenation
         Label : CONCAT
@@ -24,5 +26,3 @@ Label : CODE
           $c
       Label : ELSE
         "f"
-    Label : LEFT
-      $a

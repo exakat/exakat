@@ -8,8 +8,24 @@ Label : CODE
       (
       Label : CODE
         &&
+        Label : LEFT
+          &
+          Label : LEFT
+            ==
+            Label : LEFT
+              $a
+            Label : RIGHT
+              'B'
+          Label : RIGHT
+            !=
+            Label : LEFT
+              $b
+            Label : RIGHT
+              null
         Label : RIGHT
           ->
+          Label : OBJECT
+            $c
           Label : METHOD
             C
             Label : ARGUMENTS
@@ -20,30 +36,14 @@ Label : CODE
                   'F'
                 Label : CONCAT
                   ::
-                  Label : CLASS
-                    D
                   Label : METHOD
                     E
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
                         void
-          Label : OBJECT
-            $c
-        Label : LEFT
-          &
-          Label : RIGHT
-            !=
-            Label : RIGHT
-              null
-            Label : LEFT
-              $b
-          Label : LEFT
-            ==
-            Label : RIGHT
-              'B'
-            Label : LEFT
-              $a
+                  Label : CLASS
+                    D
     Label : THEN
       {
       Label : ELEMENT

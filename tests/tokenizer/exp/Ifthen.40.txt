@@ -8,10 +8,10 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          3
         Label : LEFT
           $l
+        Label : RIGHT
+          3
     Label : THEN
       {
       Label : ELEMENT
@@ -20,10 +20,10 @@ Label : CODE
           (
           Label : CODE
             =
-            Label : RIGHT
-              1
             Label : LEFT
               $b
+            Label : RIGHT
+              1
         Label : THEN
           {
           Label : ELEMENT
@@ -36,10 +36,10 @@ Label : CODE
             (
             Label : CODE
               =
-              Label : RIGHT
-                2
               Label : LEFT
                 $b
+              Label : RIGHT
+                2
           Label : THEN
             {
             Label : ELEMENT
@@ -49,46 +49,46 @@ Label : CODE
     Label : ELSE
       {
       Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            ==
+            Label : LEFT
+              $l
+            Label : RIGHT
+              2
+        Label : THEN
+          {
+          Label : ELEMENT
+            void
+        Label : ELSE
+          {
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $b
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            ==
+            Label : LEFT
+              $l
+            Label : RIGHT
+              1
+        Label : THEN
+          {
+          Label : ELEMENT
+            void
+        Label : ELSE
+          {
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $a
+      Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $d
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          1
-        Label : LEFT
-          $l
-    Label : THEN
-      {
-      Label : ELEMENT
-        void
-    Label : ELSE
-      {
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          2
-        Label : LEFT
-          $l
-    Label : THEN
-      {
-      Label : ELEMENT
-        void
-    Label : ELSE
-      {
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $b

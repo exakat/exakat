@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     trait
-    Label : NAME
-      A
     Label : BLOCK
       {
       Label : ELEMENT
         void
+    Label : NAME
+      A

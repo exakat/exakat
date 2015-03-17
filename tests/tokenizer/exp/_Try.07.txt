@@ -20,11 +20,11 @@ Label : CODE
           $c
     Label : CATCH
       catch
-      Label : CLASS
-        Exception
-      Label : VARIABLE
-        $e
       Label : CODE
         {
         Label : ELEMENT
           void
+      Label : VARIABLE
+        $e
+      Label : CLASS
+        Exception

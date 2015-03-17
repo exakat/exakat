@@ -10,18 +10,14 @@ Label : CODE
       {
       Label : ELEMENT
         case
-        Label : CASE
-          'a'
         Label : CODE
           ;
           Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
             &&
-            Label : RIGHT
-              =
-              Label : RIGHT
-                'f'
-              Label : LEFT
-                $e
             Label : LEFT
               [
               Label : VARIABLE
@@ -32,7 +28,11 @@ Label : CODE
                   'c'
               Label : INDEX
                 'd'
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
+            Label : RIGHT
+              =
+              Label : LEFT
+                $e
+              Label : RIGHT
+                'f'
+        Label : CASE
+          'a'

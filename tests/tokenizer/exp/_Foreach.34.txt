@@ -3,14 +3,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
-    Label : SOURCE
-      $a
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -21,18 +13,18 @@ Label : CODE
           (
           Label : CODE
             ==
+            Label : LEFT
+              $e
             Label : RIGHT
               D
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   $f
-            Label : LEFT
-              $e
         Label : THEN
           ;
           Label : ELEMENT
-            D
+            E
           Label : ELEMENT
             echo
             Label : ARGUMENTS
@@ -40,21 +32,17 @@ Label : CODE
               Label : ARGUMENT
                 $g
           Label : ELEMENT
-            E
+            D
         Label : ELSE
           ;
           Label : ELEMENT
             I
-          Label : ELEMENT
-            F
           Label : ELEMENT
             echo
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 ::
-                Label : CLASS
-                  H
                 Label : METHOD
                   I
                   Label : ARGUMENTS
@@ -63,11 +51,23 @@ Label : CODE
                       $i
                     Label : ARGUMENT
                       $h
+                Label : CLASS
+                  H
+          Label : ELEMENT
+            F
       Label : ELEMENT
         B
-      Label : ELEMENT
-        A
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $d
+      Label : ELEMENT
+        A
+    Label : SOURCE
+      $a
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b

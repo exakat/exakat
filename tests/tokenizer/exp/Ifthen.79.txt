@@ -6,39 +6,39 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
-        4
-    Label : THEN
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          void
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $c
-      Label : ELEMENT
-        A
-
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
         3
     Label : THEN
       ;
       Label : ELEMENT
-        return
-        Label : RETURN
-          void
+        A
+
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $b
       Label : ELEMENT
+        return
+        Label : RETURN
+          void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        4
+    Label : THEN
+      ;
+      Label : ELEMENT
         A
 
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $c
+      Label : ELEMENT
+        return
+        Label : RETURN
+          void
   Label : ELEMENT
     if
     Label : CONDITION
@@ -48,13 +48,13 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        return
-        Label : RETURN
-          void
-      Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $a
+      Label : ELEMENT
+        return
+        Label : RETURN
+          void
   Label : ELEMENT
     if
     Label : CONDITION
@@ -62,7 +62,7 @@ Label : CODE
       Label : CODE
         1
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         return
         Label : RETURN

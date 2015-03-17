@@ -16,14 +16,14 @@ Label : CODE
               'S'
             Label : CONCAT
               ::
-              Label : CLASS
-                P
               Label : METHOD
                 Q
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     'R'
+              Label : CLASS
+                P
     Label : THEN
       {
       Label : ELEMENT
@@ -58,29 +58,29 @@ Label : CODE
           Arguments
           Label : ARGUMENT
             =>
-            Label : KEY
-              'G'
             Label : VALUE
               $c
+            Label : KEY
+              'G'
           Label : ARGUMENT
             =>
-            Label : KEY
-              'F'
             Label : VALUE
               $b
+            Label : KEY
+              'F'
       Label : ARGUMENT
         'E'
   Label : ELEMENT
     function
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        B
+      Label : ELEMENT
+        void
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         $a
     Label : NAME
       B
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
-  Label : ELEMENT
-    B

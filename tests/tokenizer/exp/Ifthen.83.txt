@@ -25,20 +25,6 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
-        $x
-    Label : THEN
-      Block with if/elseif
-      Label : ELEMENT
-        void
-    Label : ELSE
-      Block with else
-      Label : ELEMENT
-        void
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
         $x2
     Label : THEN
       Block with if/elseif
@@ -52,3 +38,17 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $c
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $x
+    Label : THEN
+      Block with if/elseif
+      Label : ELEMENT
+        void
+    Label : ELSE
+      Block with else
+      Label : ELEMENT
+        void

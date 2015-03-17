@@ -6,19 +6,19 @@ Label : CODE
     !
     Label : NOT
       ->
-      Label : METHOD
-        e
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'f'
       Label : OBJECT
         ::
-        Label : CLASS
-          C
         Label : METHOD
           D
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'd'
+        Label : CLASS
+          C
+      Label : METHOD
+        e
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'f'

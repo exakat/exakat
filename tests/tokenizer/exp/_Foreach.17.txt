@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $a
-    Label : VALUE
-      $b
     Label : BLOCK
       Block with Foreach
       Label : ELEMENT
         .=
-        Label : RIGHT
-          $d
         Label : LEFT
           $c
+        Label : RIGHT
+          $d
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b

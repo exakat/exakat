@@ -8,13 +8,13 @@ Label : CODE
       1
   Label : ELEMENT
     while
-    Label : CONDITION
-      1
     Label : BLOCK
       Block with While
       Label : ELEMENT
         =
-        Label : RIGHT
-          2
         Label : LEFT
           $x
+        Label : RIGHT
+          2
+    Label : CONDITION
+      1

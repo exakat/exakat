@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      2
     Label : LEFT
       ->
       Label : OBJECT
@@ -24,10 +22,10 @@ Label : CODE
           c
       Label : PROPERTY
         d
+    Label : RIGHT
+      2
   Label : ELEMENT
     =
-    Label : RIGHT
-      3
     Label : LEFT
       ->
       Label : OBJECT
@@ -42,10 +40,10 @@ Label : CODE
           c
       Label : PROPERTY
         d
+    Label : RIGHT
+      3
   Label : ELEMENT
     =
-    Label : RIGHT
-      1
     Label : LEFT
       ->
       Label : OBJECT
@@ -68,10 +66,10 @@ Label : CODE
           d
       Label : PROPERTY
         e
-  Label : ELEMENT
-    =
     Label : RIGHT
       1
+  Label : ELEMENT
+    =
     Label : LEFT
       ->
       Label : OBJECT
@@ -86,10 +84,10 @@ Label : CODE
           A
       Label : PROPERTY
         c
-  Label : ELEMENT
-    =
     Label : RIGHT
       1
+  Label : ELEMENT
+    =
     Label : LEFT
       ->
       Label : OBJECT
@@ -104,3 +102,5 @@ Label : CODE
           A
       Label : PROPERTY
         c
+    Label : RIGHT
+      1

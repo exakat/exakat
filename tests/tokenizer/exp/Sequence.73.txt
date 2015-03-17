@@ -18,44 +18,44 @@ Label : CODE
       ;
       Label : ELEMENT
         class
-        Label : NAME
-          F
         Label : BLOCK
           {
           Label : ELEMENT
             var
-            Label : DEFINE
-              $a
             Label : VALUE
               array
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
+            Label : DEFINE
+              $a
             Label : VAR
               var
           Label : ELEMENT
             var
-            Label : DEFINE
-              $b
             Label : VALUE
               array
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   void
+            Label : DEFINE
+              $b
             Label : VAR
               var
+        Label : NAME
+          F
       Label : ELEMENT
         class
-        Label : NAME
-          G
-        Label : EXTENDS
-          H
         Label : BLOCK
           {
           Label : ELEMENT
             void
+        Label : NAME
+          G
+        Label : EXTENDS
+          H
   Label : ELEMENT
     require_once
     Label : ARGUMENTS

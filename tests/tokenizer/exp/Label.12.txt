@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       (
       Label : CODE
@@ -20,5 +22,3 @@ Label : CODE
             c
         Label : ELSE
           1
-    Label : LEFT
-      $a

@@ -28,6 +28,8 @@ Label : CODE
                 void
           Label : ELEMENT
             =
+            Label : LEFT
+              $o
             Label : RIGHT
               ?
               Label : CONDITION
@@ -66,40 +68,38 @@ Label : CODE
                       'w'
                   Label : ARGUMENT
                     $v
-            Label : LEFT
-              $o
           Label : ELEMENT
             if
             Label : CONDITION
               (
               Label : CODE
                 ==
-                Label : RIGHT
-                  "%"
                 Label : LEFT
                   $l
+                Label : RIGHT
+                  "%"
             Label : THEN
               Block with if/elseif
               Label : ELEMENT
                 =
-                Label : RIGHT
-                  "n"
                 Label : LEFT
                   $m
+                Label : RIGHT
+                  "n"
           Label : ELEMENT
             =
-            Label : RIGHT
-              ->
-              Label : OBJECT
-                $d
-              Label : METHOD
-                e
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $f
             Label : LEFT
-              $c
+              list
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  $j
+                Label : ARGUMENT
+                  $i
+                Label : ARGUMENT
+                  void
+            Label : RIGHT
+              $k
           Label : ELEMENT
             if
             Label : CONDITION
@@ -114,17 +114,17 @@ Label : CODE
                   $h
           Label : ELEMENT
             =
-            Label : RIGHT
-              $k
             Label : LEFT
-              list
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  $j
-                Label : ARGUMENT
-                  $i
-                Label : ARGUMENT
+              $c
+            Label : RIGHT
+              ->
+              Label : OBJECT
+                $d
+              Label : METHOD
+                e
+                Label : ARGUMENTS
                   void
+                  Label : ARGUMENT
+                    $f
         Label : CASE
           "b"

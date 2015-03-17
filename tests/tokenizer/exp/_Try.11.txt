@@ -8,18 +8,12 @@ Label : CODE
       {
       Label : ELEMENT
         =
-        Label : RIGHT
-          1
         Label : LEFT
           $a
+        Label : RIGHT
+          1
     Label : CATCH
       catch
-      Label : CLASS
-        \
-        Label : SUBNAME
-          Exception
-      Label : VARIABLE
-        $e
       Label : CODE
         {
         Label : ELEMENT
@@ -30,3 +24,9 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+      Label : VARIABLE
+        $e
+      Label : CLASS
+        \
+        Label : SUBNAME
+          Exception

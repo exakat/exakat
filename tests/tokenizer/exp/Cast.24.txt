@@ -4,16 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       (int)
       Label : CAST
         ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            C
-          Label : SUBNAME
-            B
         Label : METHOD
           D
           Label : ARGUMENTS
@@ -24,5 +20,9 @@ Label : CODE
                 'E'
               Label : CONCAT
                 $b
-    Label : LEFT
-      $a
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            B

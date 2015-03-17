@@ -31,22 +31,10 @@ Label : CODE
         	
       Label : ELEMENT
         while
-        Label : CONDITION
-          f
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
         Label : BLOCK
           ;
           Label : ELEMENT
-            g
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-          Label : ELEMENT
-            		
+            			
           Label : ELEMENT
             h
             Label : ARGUMENTS
@@ -56,9 +44,27 @@ Label : CODE
               Label : ARGUMENT
                 '1'
           Label : ELEMENT
-            			
+            		
+          Label : ELEMENT
+            g
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+        Label : CONDITION
+          f
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
       Label : ELEMENT
         	
+      Label : ELEMENT
+        d
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
       Label : ELEMENT
         e
         Label : ARGUMENTS
@@ -70,19 +76,13 @@ Label : CODE
       Label : ELEMENT
         		
       Label : ELEMENT
-        	
-      Label : ELEMENT
-        d
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-      Label : ELEMENT
         b
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             'c'
+      Label : ELEMENT
+        	
     Label : ELSE
       Block with else
       Label : ELEMENT

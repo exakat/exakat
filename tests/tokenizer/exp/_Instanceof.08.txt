@@ -39,12 +39,12 @@ Label : CODE
                     &&
                     Label : LEFT
                       instanceof
+                      Label : VARIABLE
+                        $d
                       Label : CLASS
                         \
                         Label : SUBNAME
                           H
-                      Label : VARIABLE
-                        $d
                     Label : RIGHT
                       isset
                       Label : ARGUMENTS

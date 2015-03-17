@@ -32,14 +32,14 @@ Label : CODE
             {
             Label : ELEMENT
               void
+          Label : VARIABLE
+            $c
           Label : CLASS
             \
             Label : SUBNAME
               D
             Label : SUBNAME
               C
-          Label : VARIABLE
-            $c
   Label : ELEMENT
     if
     Label : CONDITION

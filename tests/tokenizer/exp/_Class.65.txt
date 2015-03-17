@@ -4,22 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      A
-    Label : IMPLEMENTS
-      C
-    Label : IMPLEMENTS
-      B
     Label : BLOCK
       {
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          d
         Label : BLOCK
           {
           Label : ELEMENT
@@ -28,3 +16,15 @@ Label : CODE
               void
               Label : ARGUMENT
                 'Yes'
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          d
+    Label : NAME
+      A
+    Label : IMPLEMENTS
+      C
+    Label : IMPLEMENTS
+      B

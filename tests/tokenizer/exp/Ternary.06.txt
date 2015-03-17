@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -24,5 +26,3 @@ Label : CODE
           'f'
       Label : ELSE
         "g"
-    Label : LEFT
-      $a

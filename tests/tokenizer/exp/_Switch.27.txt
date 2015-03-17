@@ -13,19 +13,19 @@ Label : CODE
         Label : CODE
           ;
           Label : ELEMENT
-            =
-            Label : RIGHT
-              *
-              Label : RIGHT
-                $d
-              Label : LEFT
-                $c
-            Label : LEFT
-              $b
-          Label : ELEMENT
             break
             Label : LEVEL
               void
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              *
+              Label : LEFT
+                $c
+              Label : RIGHT
+                $d
         Label : CASE
           '1'
       Label : ELEMENT
@@ -38,10 +38,10 @@ Label : CODE
               (
               Label : CODE
                 ==
-                Label : RIGHT
-                  0
                 Label : LEFT
                   $e
+                Label : RIGHT
+                  0
             Label : THEN
               {
               Label : ELEMENT

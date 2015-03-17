@@ -46,6 +46,8 @@ Label : CODE
                 void
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ->
       Label : OBJECT
@@ -64,5 +66,3 @@ Label : CODE
           void
           Label : ARGUMENT
             'D'
-    Label : LEFT
-      $a

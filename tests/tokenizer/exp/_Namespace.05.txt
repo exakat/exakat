@@ -12,8 +12,6 @@ Label : CODE
           ;
           Label : ELEMENT
             function
-            Label : NAME
-              connect
             Label : BLOCK
               {
               Label : ELEMENT
@@ -22,26 +20,26 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+            Label : NAME
+              connect
           Label : ELEMENT
             class
-            Label : NAME
-              Connection
             Label : BLOCK
               {
               Label : ELEMENT
                 void
+            Label : NAME
+              Connection
           Label : ELEMENT
             const
-            Label : NAME
-              CONNECT_OK
             Label : VALUE
               1
+            Label : NAME
+              CONNECT_OK
         Label : NAMESPACE
           AnotherProject
       Label : ELEMENT
         function
-        Label : NAME
-          connect
         Label : BLOCK
           {
           Label : ELEMENT
@@ -50,19 +48,21 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+        Label : NAME
+          connect
       Label : ELEMENT
         class
-        Label : NAME
-          Connection
         Label : BLOCK
           {
           Label : ELEMENT
             void
+        Label : NAME
+          Connection
       Label : ELEMENT
         const
-        Label : NAME
-          CONNECT_OK
         Label : VALUE
           1
+        Label : NAME
+          CONNECT_OK
     Label : NAMESPACE
       MyProject

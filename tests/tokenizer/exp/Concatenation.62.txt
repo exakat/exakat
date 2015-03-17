@@ -8,24 +8,8 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : RIGHT
-          (
-          Label : CODE
-            ||
-            Label : RIGHT
-              !
-              Label : NOT
-                $a
-            Label : LEFT
-              ==
-              Label : RIGHT
-                'F'
-              Label : LEFT
-                $a
         Label : LEFT
           ==
-          Label : RIGHT
-            'E'
           Label : LEFT
             B
             Label : ARGUMENTS
@@ -34,10 +18,28 @@ Label : CODE
                 'D'
               Label : ARGUMENT
                 'C'
+          Label : RIGHT
+            'E'
+        Label : RIGHT
+          (
+          Label : CODE
+            ||
+            Label : LEFT
+              ==
+              Label : LEFT
+                $a
+              Label : RIGHT
+                'F'
+            Label : RIGHT
+              !
+              Label : NOT
+                $a
     Label : THEN
       {
       Label : ELEMENT
         =
+        Label : LEFT
+          $a
         Label : RIGHT
           new
           Label : NEW
@@ -46,8 +48,6 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-        Label : LEFT
-          $a
       Label : ELEMENT
         print
         Label : ARGUMENTS
@@ -60,14 +60,14 @@ Label : CODE
               'a2'
       Label : ELEMENT
         =
-        Label : RIGHT
-          'I'
         Label : LEFT
           ->
           Label : OBJECT
             $a
           Label : PROPERTY
             I
+        Label : RIGHT
+          'I'
       Label : ELEMENT
         print
         Label : ARGUMENTS

@@ -8,36 +8,36 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : RIGHT
+        Label : LEFT
           &&
-          Label : RIGHT
-            d
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                "e"
           Label : LEFT
             ==
+            Label : LEFT
+              [
+              Label : VARIABLE
+                $a
+              Label : INDEX
+                3
             Label : RIGHT
-              1
+              'b'
+          Label : RIGHT
+            ==
             Label : LEFT
               [
               Label : VARIABLE
                 $c
               Label : INDEX
                 4
-        Label : LEFT
-          ==
-          Label : RIGHT
-            'b'
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              3
+            Label : RIGHT
+              1
+        Label : RIGHT
+          d
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $f
+            Label : ARGUMENT
+              "e"
     Label : THEN
       {
       Label : ELEMENT

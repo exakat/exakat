@@ -4,20 +4,20 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      f
     Label : BLOCK
       {
       Label : ELEMENT
         static
-        Label : PROTECTED
-          protected
-        Label : DEFINE
-          $g
         Label : VALUE
           Void
+        Label : DEFINE
+          $g
+        Label : PROTECTED
+          protected
         Label : STATIC
           static
+    Label : NAME
+      f
   Label : ELEMENT
     if
     Label : CONDITION
@@ -40,11 +40,11 @@ Label : CODE
             'B'
   Label : ELEMENT
     ::
-    Label : CLASS
-      C
     Label : METHOD
       d
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           'e'
+    Label : CLASS
+      C

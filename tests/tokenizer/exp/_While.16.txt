@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     while
-    Label : CONDITION
-      $a
     Label : BLOCK
       Block with While
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $c
+    Label : CONDITION
+      $a

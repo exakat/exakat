@@ -3,6 +3,14 @@
 Label : CODE
   ;
   Label : ELEMENT
+    (double)
+    Label : CAST
+      ->
+      Label : OBJECT
+        $z
+      Label : PROPERTY
+        h
+  Label : ELEMENT
     (real)
     Label : CAST
       ::
@@ -18,11 +26,3 @@ Label : CODE
         y
       Label : CONSTANT
         y
-  Label : ELEMENT
-    (double)
-    Label : CAST
-      ->
-      Label : OBJECT
-        $z
-      Label : PROPERTY
-        h

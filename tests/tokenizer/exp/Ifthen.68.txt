@@ -4,22 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $a
-    Label : VALUE
-      $b
     Label : BLOCK
       {
       Label : ELEMENT
         =
+        Label : LEFT
+          $c
         Label : RIGHT
           B
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $d
-        Label : LEFT
-          $c
       Label : ELEMENT
         if
         Label : CONDITION
@@ -51,113 +47,117 @@ Label : CODE
         Label : THEN
           {
           Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                &&
+                Label : LEFT
+                  $n
+                Label : RIGHT
+                  !
+                  Label : NOT
+                    empty
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $o
+            Label : THEN
+              {
+              Label : ELEMENT
+                if
+                Label : CONDITION
+                  (
+                  Label : CODE
+                    &&
+                    Label : LEFT
+                      &&
+                      Label : LEFT
+                        $r
+                      Label : RIGHT
+                        empty
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            $s
+                    Label : RIGHT
+                      !
+                      Label : NOT
+                        empty
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            $t
+                Label : THEN
+                  {
+                  Label : ELEMENT
+                    =
+                    Label : LEFT
+                      $u
+                    Label : RIGHT
+                      I
+              Label : ELEMENT
+                .=
+                Label : LEFT
+                  $p
+                Label : RIGHT
+                  Concatenation
+                  Label : CONCAT
+                    'H'
+                  Label : CONCAT
+                    $q
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                &&
+                Label : LEFT
+                  &&
+                  Label : LEFT
+                    $k
+                  Label : RIGHT
+                    empty
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $l
+                Label : RIGHT
+                  empty
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $m
+            Label : THEN
+              {
+              Label : ELEMENT
+                continue
+                Label : LEVEL
+                  void
+          Label : ELEMENT
             =
+            Label : LEFT
+              $h
             Label : RIGHT
               [
               Label : VARIABLE
                 $i
               Label : INDEX
                 0
-            Label : LEFT
-              $h
           Label : ELEMENT
             =
-            Label : RIGHT
-              G
             Label : LEFT
               $j
+            Label : RIGHT
+              G
           Label : ELEMENT
             continue
             Label : LEVEL
               void
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            &&
-            Label : RIGHT
-              &&
-              Label : RIGHT
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $m
-              Label : LEFT
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $l
-            Label : LEFT
-              $k
-        Label : THEN
-          {
-          Label : ELEMENT
-            continue
-            Label : LEVEL
-              void
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            &&
-            Label : RIGHT
-              !
-              Label : NOT
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $o
-            Label : LEFT
-              $n
-        Label : THEN
-          {
-          Label : ELEMENT
-            .=
-            Label : RIGHT
-              Concatenation
-              Label : CONCAT
-                'H'
-              Label : CONCAT
-                $q
-            Label : LEFT
-              $p
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            &&
-            Label : RIGHT
-              !
-              Label : NOT
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $t
-            Label : LEFT
-              &&
-              Label : RIGHT
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $s
-              Label : LEFT
-                $r
-        Label : THEN
-          {
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              I
-            Label : LEFT
-              $u
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b
   Label : ELEMENT
     if
     Label : CONDITION
@@ -174,21 +174,21 @@ Label : CODE
       {
       Label : ELEMENT
         =
-        Label : RIGHT
-          $z
         Label : LEFT
           ->
           Label : OBJECT
             $y
           Label : PROPERTY
             K
+        Label : RIGHT
+          $z
   Label : ELEMENT
     =
-    Label : RIGHT
-      $w
     Label : LEFT
       ->
       Label : OBJECT
         $v
       Label : PROPERTY
         J
+    Label : RIGHT
+      $w

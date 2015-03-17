@@ -4,31 +4,31 @@ Label : CODE
   ;
   Label : ELEMENT
     \
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
     Label : SUBNAME
       C
     Label : SUBNAME
       B
     Label : SUBNAME
       A
+  Label : ELEMENT
+    \
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
-  Label : ELEMENT
-    \
     Label : SUBNAME
       B
     Label : SUBNAME
       A
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
   Label : ELEMENT
     \
-    Label : SUBNAME
-      A
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
+    Label : SUBNAME
+      A

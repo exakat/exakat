@@ -4,39 +4,39 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       {
       Label : ELEMENT
         ppp
+        Label : VALUE
+          void
         Label : DEFINE
           $x
-        Label : VALUE
-          void
         Label : VAR
           var
       Label : ELEMENT
         ppp
+        Label : VALUE
+          void
         Label : DEFINE
           $y
-        Label : VALUE
-          void
         Label : VAR
           var
       Label : ELEMENT
         ppp
+        Label : VALUE
+          void
         Label : DEFINE
           $z
-        Label : VALUE
-          void
         Label : VAR
           var
       Label : ELEMENT
         ppp
-        Label : DEFINE
-          $a
         Label : VALUE
           void
+        Label : DEFINE
+          $a
         Label : VAR
           var
+    Label : NAME
+      x

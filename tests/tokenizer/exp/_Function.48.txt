@@ -4,24 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-    Label : NAME
-      a
     Label : BLOCK
       {
       Label : ELEMENT
         =
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            b
         Label : RIGHT
           function
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-          Label : NAME
-            
           Label : BLOCK
             {
             Label : ELEMENT
@@ -38,23 +32,29 @@ Label : CODE
                       Arguments
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'e'
                         Label : VALUE
                           'f'
+                        Label : KEY
+                          'e'
                       Label : ARGUMENT
                         =>
-                        Label : KEY
-                          'c'
                         Label : VALUE
                           'd'
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            b
+                        Label : KEY
+                          'c'
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+          Label : NAME
+            
       Label : ELEMENT
         return
         Label : RETURN
           3
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      a

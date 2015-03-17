@@ -27,6 +27,32 @@ Label : CODE
         Label : CODE
           ;
           Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                =
+                Label : LEFT
+                  $c
+                Label : RIGHT
+                  ->
+                  Label : OBJECT
+                    $d
+                  Label : METHOD
+                    E
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $e
+            Label : THEN
+              {
+              Label : ELEMENT
+                void
+          Label : ELEMENT
             switch
             Label : NAME
               ->
@@ -42,31 +68,5 @@ Label : CODE
               {
               Label : ELEMENT
                 void
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                =
-                Label : RIGHT
-                  ->
-                  Label : OBJECT
-                    $d
-                  Label : METHOD
-                    E
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        $e
-                Label : LEFT
-                  $c
-            Label : THEN
-              {
-              Label : ELEMENT
-                void
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
         Label : CASE
           'C'

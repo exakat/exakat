@@ -17,10 +17,10 @@ Label : CODE
               void
               Label : ARGUMENT
                 =>
-                Label : KEY
-                  'aa'
                 Label : VALUE
                   'ab'
+                Label : KEY
+                  'aa'
           Label : ARGUMENT
             y
             Label : ARGUMENTS
@@ -59,14 +59,14 @@ Label : CODE
                   ?
                   Label : CONDITION
                     ==
-                    Label : RIGHT
-                      'h'
                     Label : LEFT
                       ->
                       Label : OBJECT
                         $f
                       Label : PROPERTY
                         g
+                    Label : RIGHT
+                      'h'
                   Label : THEN
                     'i'
                   Label : ELSE

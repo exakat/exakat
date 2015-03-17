@@ -7,10 +7,10 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          1
         Label : LEFT
           $target
+        Label : RIGHT
+          1
     Label : THEN
       Block with if/elseif
       Label : ELEMENT

@@ -10,32 +10,6 @@ Label : CODE
       {
       Label : ELEMENT
         case
-        Label : CASE
-          3
-        Label : CODE
-          ;
-          Label : ELEMENT
-            $k
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-      Label : ELEMENT
-        case
-        Label : CASE
-          2
-        Label : CODE
-          ;
-          Label : ELEMENT
-            $j
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-      Label : ELEMENT
-        case
-        Label : CASE
-          1
         Label : CODE
           ;
           Label : ELEMENT
@@ -44,6 +18,32 @@ Label : CODE
             break
             Label : LEVEL
               void
+        Label : CASE
+          1
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $j
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+        Label : CASE
+          2
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            $k
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+        Label : CASE
+          3
       Label : ELEMENT
         default
         Label : CODE

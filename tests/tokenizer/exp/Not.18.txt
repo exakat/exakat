@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -16,5 +18,3 @@ Label : CODE
             void
             Label : ARGUMENT
               $b
-    Label : LEFT
-      $a

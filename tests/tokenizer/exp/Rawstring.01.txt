@@ -10,8 +10,6 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        A
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -19,3 +17,5 @@ Label : CODE
             $location
       Label : ELEMENT
         B
+      Label : ELEMENT
+        A

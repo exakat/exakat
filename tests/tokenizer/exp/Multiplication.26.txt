@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
     Label : RIGHT
       number_format
       Label : ARGUMENTS
@@ -11,22 +17,16 @@ Label : CODE
         Label : ARGUMENT
           2
         Label : ARGUMENT
-          /
-          Label : RIGHT
-            *
-            Label : RIGHT
-              1
+          *
+          Label : LEFT
+            /
             Label : LEFT
+              true
+            Label : RIGHT
               [
               Label : VARIABLE
                 $f
               Label : INDEX
                 'g'
-          Label : LEFT
-            true
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        'b'
+          Label : RIGHT
+            1

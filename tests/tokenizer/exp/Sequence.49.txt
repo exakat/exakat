@@ -21,16 +21,8 @@ Label : ELEMENT
       H
     Label : ELEMENT
       ->
-      Label : METHOD
-        g
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
       Label : OBJECT
         ::
-        Label : CLASS
-          C
         Label : METHOD
           D
           Label : ARGUMENTS
@@ -41,6 +33,14 @@ Label : ELEMENT
                 void
                 Label : ARGUMENT
                   'F'
+        Label : CLASS
+          C
+      Label : METHOD
+        g
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
     Label : ELEMENT
       echo
       Label : ARGUMENTS

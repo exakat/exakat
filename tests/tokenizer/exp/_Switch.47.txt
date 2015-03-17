@@ -14,29 +14,29 @@ Label : CODE
       {
       Label : ELEMENT
         case
-        Label : CASE
-          'h'
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             Void
+        Label : CASE
+          'h'
       Label : ELEMENT
         case
-        Label : CASE
-          'H'
         Label : CODE
           ;
           Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
             =
-            Label : RIGHT
-              QR_ECLEVEL_H
             Label : LEFT
               ->
               Label : OBJECT
                 $enc
               Label : PROPERTY
                 level
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
+            Label : RIGHT
+              QR_ECLEVEL_H
+        Label : CASE
+          'H'

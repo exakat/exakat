@@ -4,97 +4,97 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $a1
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      6
-    Label : LEFT
-      $f
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      4
-    Label : LEFT
-      $d1
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      8
     Label : LEFT
       $h1
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      7
-    Label : LEFT
-      $g1
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      2
-    Label : LEFT
-      $b1
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      5
-    Label : LEFT
-      $e
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      4
-    Label : LEFT
-      $d
-  Label : ELEMENT
-    =
     Label : RIGHT
       8
-    Label : LEFT
-      $h
   Label : ELEMENT
     =
-    Label : RIGHT
-      3
     Label : LEFT
-      $c
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      5
-    Label : LEFT
-      $e1
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      3
-    Label : LEFT
-      $c1
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      6
-    Label : LEFT
-      $f1
-  Label : ELEMENT
-    =
+      $g1
     Label : RIGHT
       7
-    Label : LEFT
-      $g
   Label : ELEMENT
     =
+    Label : LEFT
+      $f1
+    Label : RIGHT
+      6
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $e1
+    Label : RIGHT
+      5
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $d1
+    Label : RIGHT
+      4
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $c1
+    Label : RIGHT
+      3
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $b1
     Label : RIGHT
       2
-    Label : LEFT
-      $b
   Label : ELEMENT
     =
+    Label : LEFT
+      $a1
     Label : RIGHT
       1
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $h
+    Label : RIGHT
+      8
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $g
+    Label : RIGHT
+      7
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $f
+    Label : RIGHT
+      6
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $e
+    Label : RIGHT
+      5
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $d
+    Label : RIGHT
+      4
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $c
+    Label : RIGHT
+      3
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $b
+    Label : RIGHT
+      2
+  Label : ELEMENT
+    =
     Label : LEFT
       $a
+    Label : RIGHT
+      1

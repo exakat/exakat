@@ -3,63 +3,27 @@
 Label : CODE
   ;
   Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          $step
-      Label : ARGUMENT
-        $end
-      Label : ARGUMENT
-        $start
+    foreach
     Label : BLOCK
       {
       Label : ELEMENT
-        for
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            yield
-            Label : YIELD
-              $i
-        Label : INIT
-          =
-          Label : RIGHT
-            $start
-          Label : LEFT
-            $i
-        Label : FINAL
-          <
-          Label : RIGHT
-            $end
-          Label : LEFT
-            $i
-        Label : INCREMENT
-          +=
-          Label : RIGHT
-            $step
-          Label : LEFT
-            $i
-    Label : NAME
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $number
+    Label : SOURCE
       generateRange
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          1000000
+        Label : ARGUMENT
+          0
+    Label : VALUE
+      $number
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          $step
-      Label : ARGUMENT
-        $end
-      Label : ARGUMENT
-        $start
     Label : BLOCK
       {
       Label : ELEMENT
@@ -92,47 +56,83 @@ Label : CODE
                   'd'
                 Label : ELSE
                   +
-                  Label : RIGHT
-                    2
                   Label : LEFT
+                    2
+                  Label : RIGHT
                     2
         Label : INIT
           =
+          Label : LEFT
+            $i
           Label : RIGHT
             $start
-          Label : LEFT
-            $i
         Label : FINAL
           <
+          Label : LEFT
+            $i
           Label : RIGHT
             $end
-          Label : LEFT
-            $i
         Label : INCREMENT
           +=
-          Label : RIGHT
-            $step
           Label : LEFT
             $i
+          Label : RIGHT
+            $step
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        =
+        Label : LEFT
+          $step
+        Label : RIGHT
+          1
+      Label : ARGUMENT
+        $end
+      Label : ARGUMENT
+        $start
     Label : NAME
       generateRange2
   Label : ELEMENT
-    foreach
-    Label : SOURCE
-      generateRange
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          1000000
-        Label : ARGUMENT
-          0
-    Label : VALUE
-      $number
+    function
     Label : BLOCK
       {
       Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $number
+        for
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            yield
+            Label : YIELD
+              $i
+        Label : INIT
+          =
+          Label : LEFT
+            $i
+          Label : RIGHT
+            $start
+        Label : FINAL
+          <
+          Label : LEFT
+            $i
+          Label : RIGHT
+            $end
+        Label : INCREMENT
+          +=
+          Label : LEFT
+            $i
+          Label : RIGHT
+            $step
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        =
+        Label : LEFT
+          $step
+        Label : RIGHT
+          1
+      Label : ARGUMENT
+        $end
+      Label : ARGUMENT
+        $start
+    Label : NAME
+      generateRange

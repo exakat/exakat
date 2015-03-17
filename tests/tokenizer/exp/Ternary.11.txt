@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-    Label : NAME
-      a
     Label : BLOCK
       {
       Label : ELEMENT
@@ -18,12 +12,12 @@ Label : CODE
           ?
           Label : CONDITION
             >=
-            Label : RIGHT
-              0
             Label : LEFT
               (
               Label : CODE
                 =
+                Label : LEFT
+                  $b
                 Label : RIGHT
                   c
                   Label : ARGUMENTS
@@ -34,8 +28,8 @@ Label : CODE
                         $d
                       Label : PROPERTY
                         e
-                Label : LEFT
-                  $b
+            Label : RIGHT
+              0
           Label : THEN
             $f
           Label : ELSE
@@ -58,3 +52,9 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         "J"
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      a

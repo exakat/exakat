@@ -7,16 +7,12 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       .=
+      Label : LEFT
+        $a
       Label : RIGHT
         ?
         Label : CONDITION
           ::
-          Label : CLASS
-            \
-            Label : SUBNAME
-              D
-            Label : SUBNAME
-              C
           Label : METHOD
             E
             Label : ARGUMENTS
@@ -27,30 +23,34 @@ Label : ELEMENT
                   $b
                 Label : INDEX
                   'F'
+          Label : CLASS
+            \
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              C
         Label : THEN
           0
         Label : ELSE
           1
-      Label : LEFT
-        $a
     Label : ELEMENT
       H
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           ::
-          Label : CLASS
-            \
-            Label : SUBNAME
-              J
-            Label : SUBNAME
-              I
           Label : METHOD
             K
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 void
+          Label : CLASS
+            \
+            Label : SUBNAME
+              J
+            Label : SUBNAME
+              I
     Label : ELEMENT
       F
 Label : ELEMENT

@@ -4,10 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         instanceof
+        Label : VARIABLE
+          $b
         Label : CLASS
           \
           Label : SUBNAME
@@ -18,8 +22,6 @@ Label : CODE
             C
           Label : SUBNAME
             B
-        Label : VARIABLE
-          $b
       Label : THEN
         ->
         Label : OBJECT
@@ -32,5 +34,3 @@ Label : CODE
               void
       Label : ELSE
         $d
-    Label : LEFT
-      $a

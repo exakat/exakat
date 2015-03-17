@@ -4,52 +4,42 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      B
-    Label : EXTENDS
-      C
     Label : BLOCK
       {
       Label : ELEMENT
         var
-        Label : DEFINE
-          $a
         Label : VALUE
           Void
+        Label : DEFINE
+          $a
         Label : VAR
           var
       Label : ELEMENT
         function
-        Label : NAME
-          D
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            =
-            Label : RIGHT
-              'E'
-            Label : LEFT
-              $b
         Label : BLOCK
           {
           Label : ELEMENT
             =
-            Label : RIGHT
-              $d
             Label : LEFT
               ->
               Label : OBJECT
                 $c
               Label : PROPERTY
                 F
-      Label : ELEMENT
-        function
-        Label : NAME
-          G
+            Label : RIGHT
+              $d
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            void
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              'E'
+        Label : NAME
+          D
+      Label : ELEMENT
+        function
         Label : BLOCK
           {
           Label : ELEMENT
@@ -66,3 +56,13 @@ Label : CODE
                   I
               Label : CONCAT
                 'H'
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          G
+    Label : NAME
+      B
+    Label : EXTENDS
+      C

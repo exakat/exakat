@@ -8,22 +8,20 @@ Label : CODE
       {
       Label : ELEMENT
         const
-        Label : NAME
-          CONNECT_OK
         Label : VALUE
           1
+        Label : NAME
+          CONNECT_OK
       Label : ELEMENT
         class
-        Label : NAME
-          Connection
         Label : BLOCK
           {
           Label : ELEMENT
             void
+        Label : NAME
+          Connection
       Label : ELEMENT
         function
-        Label : NAME
-          connect
         Label : BLOCK
           {
           Label : ELEMENT
@@ -32,30 +30,30 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+        Label : NAME
+          connect
     Label : NAMESPACE
-      MyProject
+      AnotherProject
   Label : ELEMENT
     namespace
     Label : BLOCK
       {
       Label : ELEMENT
         const
-        Label : NAME
-          CONNECT_OK
         Label : VALUE
           1
+        Label : NAME
+          CONNECT_OK
       Label : ELEMENT
         class
-        Label : NAME
-          Connection
         Label : BLOCK
           {
           Label : ELEMENT
             void
+        Label : NAME
+          Connection
       Label : ELEMENT
         function
-        Label : NAME
-          connect
         Label : BLOCK
           {
           Label : ELEMENT
@@ -64,5 +62,7 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+        Label : NAME
+          connect
     Label : NAMESPACE
-      AnotherProject
+      MyProject

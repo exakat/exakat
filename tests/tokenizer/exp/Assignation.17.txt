@@ -4,31 +4,31 @@ Label : CODE
   ;
   Label : ELEMENT
     >>=
+    Label : LEFT
+      $a
     Label : RIGHT
       >>=
+      Label : LEFT
+        $b
       Label : RIGHT
         >>=
-        Label : RIGHT
-          $d
         Label : LEFT
           $c
-      Label : LEFT
-        $b
-    Label : LEFT
-      $a
+        Label : RIGHT
+          $d
   Label : ELEMENT
     >>=
+    Label : LEFT
+      $a
     Label : RIGHT
       >>=
-      Label : RIGHT
-        $c
       Label : LEFT
         $b
-    Label : LEFT
-      $a
+      Label : RIGHT
+        $c
   Label : ELEMENT
     >>=
-    Label : RIGHT
-      $b
     Label : LEFT
       $a
+    Label : RIGHT
+      $b

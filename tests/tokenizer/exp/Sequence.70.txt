@@ -20,8 +20,6 @@ Label : CODE
           (
           Label : CODE
             <
-            Label : RIGHT
-              $d
             Label : LEFT
               C
               Label : ARGUMENTS
@@ -44,10 +42,14 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
+            Label : RIGHT
+              $d
       Label : ELSE
         G
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       (int)
       Label : CAST
@@ -60,5 +62,3 @@ Label : CODE
             void
             Label : ARGUMENT
               void
-    Label : LEFT
-      $a

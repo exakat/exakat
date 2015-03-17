@@ -18,24 +18,18 @@ Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              (string)
-              Label : CAST
-                D
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    [
-                    Label : VARIABLE
-                      $c
-                    Label : INDEX
-                      'E'
             Label : LEFT
-              $b
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
+              $d
+            Label : RIGHT
+              ->
+              Label : OBJECT
+                ->
+                Label : OBJECT
+                  $e
+                Label : PROPERTY
+                  F
+              Label : PROPERTY
+                G
           Label : ELEMENT
             if
             Label : CONDITION
@@ -52,31 +46,37 @@ Label : CODE
               {
               Label : ELEMENT
                 =
-                Label : RIGHT
-                  'J'
                 Label : LEFT
                   $g
+                Label : RIGHT
+                  'J'
             Label : ELSE
               {
               Label : ELEMENT
                 =
-                Label : RIGHT
-                  'K'
                 Label : LEFT
                   $h
+                Label : RIGHT
+                  'K'
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
           Label : ELEMENT
             =
-            Label : RIGHT
-              ->
-              Label : OBJECT
-                ->
-                Label : OBJECT
-                  $e
-                Label : PROPERTY
-                  F
-              Label : PROPERTY
-                G
             Label : LEFT
-              $d
+              $b
+            Label : RIGHT
+              (string)
+              Label : CAST
+                D
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $c
+                    Label : INDEX
+                      'E'
         Label : CASE
           'C'

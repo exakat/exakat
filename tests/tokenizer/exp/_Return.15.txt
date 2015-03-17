@@ -28,11 +28,11 @@ Label : CODE
         return
         Label : RETURN
           =
-          Label : RIGHT
-            'g'
           Label : LEFT
             ->
             Label : OBJECT
               $e
             Label : PROPERTY
               f
+          Label : RIGHT
+            'g'

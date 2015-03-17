@@ -18,8 +18,6 @@ Label : ELEMENT
           Concatenation
           Label : CONCAT
             ::
-            Label : CLASS
-              D
             Label : METHOD
               e
               Label : ARGUMENTS
@@ -30,6 +28,8 @@ Label : ELEMENT
                     $g
                   Label : CONCAT
                     'f'
+            Label : CLASS
+              D
           Label : CONCAT
             C
 Label : ELEMENT

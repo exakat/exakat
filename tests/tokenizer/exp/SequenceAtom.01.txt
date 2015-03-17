@@ -9,8 +9,6 @@ Label : CODE
         ?
         Label : CONDITION
           ==
-          Label : RIGHT
-            'g'
           Label : LEFT
             @
             Label : AT
@@ -18,15 +16,15 @@ Label : CODE
               Label : VARIABLE
                 [
                 Label : VARIABLE
-                  ::
-                  Label : CLASS
-                    a
-                  Label : PROPERTY
-                    [
-                    Label : VARIABLE
+                  [
+                  Label : VARIABLE
+                    ::
+                    Label : PROPERTY
                       $b
-                    Label : INDEX
-                      $c
+                    Label : CLASS
+                      a
+                  Label : INDEX
+                    $c
                 Label : INDEX
                   [
                   Label : VARIABLE
@@ -35,6 +33,8 @@ Label : CODE
                     'e'
               Label : INDEX
                 'f'
+          Label : RIGHT
+            'g'
         Label : THEN
           'h'
         Label : ELSE
@@ -47,8 +47,6 @@ Label : CODE
         ?
         Label : CONDITION
           ==
-          Label : RIGHT
-            'G'
           Label : LEFT
             @
             Label : AT
@@ -56,15 +54,15 @@ Label : CODE
               Label : VARIABLE
                 [
                 Label : VARIABLE
-                  ::
-                  Label : CLASS
-                    A
-                  Label : PROPERTY
-                    [
-                    Label : VARIABLE
+                  [
+                  Label : VARIABLE
+                    ::
+                    Label : PROPERTY
                       $B
-                    Label : INDEX
-                      $C
+                    Label : CLASS
+                      A
+                  Label : INDEX
+                    $C
                 Label : INDEX
                   [
                   Label : VARIABLE
@@ -73,6 +71,8 @@ Label : CODE
                     'E'
               Label : INDEX
                 'F'
+          Label : RIGHT
+            'G'
         Label : THEN
           'H'
         Label : ELSE

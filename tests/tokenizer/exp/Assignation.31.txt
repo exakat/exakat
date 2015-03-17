@@ -8,18 +8,18 @@ Label : CODE
       (
       Label : CODE
         ===
-        Label : RIGHT
-          ::
-          Label : CLASS
-            C
-          Label : CONSTANT
-            D
         Label : LEFT
           ->
           Label : OBJECT
             $a
           Label : PROPERTY
             B
+        Label : RIGHT
+          ::
+          Label : CLASS
+            C
+          Label : CONSTANT
+            D
     Label : THEN
       {
       Label : ELEMENT
@@ -32,22 +32,24 @@ Label : CODE
         (
         Label : CODE
           ===
-          Label : RIGHT
-            ::
-            Label : CLASS
-              F
-            Label : CONSTANT
-              G
           Label : LEFT
             ->
             Label : OBJECT
               $c
             Label : PROPERTY
               E
+          Label : RIGHT
+            ::
+            Label : CLASS
+              F
+            Label : CONSTANT
+              G
       Label : THEN
         {
         Label : ELEMENT
           =
+          Label : LEFT
+            $d
           Label : RIGHT
             ->
             Label : OBJECT
@@ -58,16 +60,12 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-          Label : LEFT
-            $d
         Label : ELEMENT
           if
           Label : CONDITION
             (
             Label : CODE
               !==
-              Label : RIGHT
-                0
               Label : LEFT
                 I
                 Label : ARGUMENTS
@@ -90,6 +88,8 @@ Label : CODE
                         void
                         Label : ARGUMENT
                           void
+              Label : RIGHT
+                0
           Label : THEN
             {
             Label : ELEMENT
@@ -98,6 +98,8 @@ Label : CODE
                 L
         Label : ELEMENT
           =
+          Label : LEFT
+            $i
           Label : RIGHT
             (string)
             Label : CAST
@@ -120,12 +122,12 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-          Label : LEFT
-            $i
       Label : ELSE
         {
         Label : ELEMENT
           =
+          Label : LEFT
+            $l
           Label : RIGHT
             ->
             Label : OBJECT
@@ -136,5 +138,3 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-          Label : LEFT
-            $l

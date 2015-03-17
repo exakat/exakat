@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ->
       Label : OBJECT
@@ -30,5 +32,3 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-    Label : LEFT
-      $a

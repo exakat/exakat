@@ -10,10 +10,8 @@ Label : CODE
       {
       Label : ELEMENT
         case
-        Label : CASE
-          '1'
         Label : CODE
-          Block with Sequence For Case
+          ;
           Label : ELEMENT
             ?
             Label : CONDITION
@@ -22,3 +20,5 @@ Label : CODE
               'a'
             Label : ELSE
               'b'
+        Label : CASE
+          '1'

@@ -11,7 +11,7 @@ Label : CODE
       Label : ELEMENT
         case
         Label : CODE
-          Block with Sequence For Case Without Semicolon
+          ;
           Label : ELEMENT
             exit
             Label : ARGUMENTS
@@ -28,18 +28,18 @@ Label : CODE
                     4
                   Label : ARGUMENT
                     /
-                    Label : RIGHT
-                      /
-                      Label : RIGHT
-                        3
-                      Label : LEFT
-                        2
                     Label : LEFT
-                      [
-                      Label : VARIABLE
-                        $g
-                      Label : INDEX
-                        'h'
+                      /
+                      Label : LEFT
+                        [
+                        Label : VARIABLE
+                          $g
+                        Label : INDEX
+                          'h'
+                      Label : RIGHT
+                        2
+                    Label : RIGHT
+                      3
               Label : ARGUMENT
                 'f'
           Label : ELEMENT

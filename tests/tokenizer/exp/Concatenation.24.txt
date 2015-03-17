@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       <<<EOD
 
@@ -14,5 +16,3 @@ Label : CODE
 Oui
 
 
-    Label : LEFT
-      $x

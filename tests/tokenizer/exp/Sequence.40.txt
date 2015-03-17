@@ -16,7 +16,7 @@ Label : CODE
           $b
       Label : ELEMENT
         =
-        Label : RIGHT
-          3
         Label : LEFT
           $c
+        Label : RIGHT
+          3

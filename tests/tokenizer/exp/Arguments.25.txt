@@ -30,7 +30,7 @@ Label : CODE
                 Label : INDEX
                   'G'
       Label : ELEMENT
-        B
+        D
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -42,24 +42,26 @@ Label : CODE
             Label : INDEX
               'D'
       Label : ELEMENT
-        D
+        B
     Label : ELSE
-      echo
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          'L'
-        Label : ARGUMENT
-          J
-          Label : ARGUMENTS
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            'L'
+          Label : ARGUMENT
+            J
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $d
+                Label : INDEX
+                  'K'
+          Label : ARGUMENT
             void
             Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $d
-              Label : INDEX
-                'K'
-        Label : ARGUMENT
-          void
-          Label : ARGUMENT
-            'I'
+              'I'

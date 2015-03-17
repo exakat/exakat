@@ -14,10 +14,10 @@ Label : CODE
             void
             Label : ARGUMENT
               ::
-              Label : CLASS
-                C
               Label : PROPERTY
                 $a
+              Label : CLASS
+                C
     Label : THEN
       Block with if/elseif
       Label : ELEMENT
@@ -26,6 +26,12 @@ Label : CODE
           void
   Label : ELEMENT
     =
+    Label : LEFT
+      ::
+      Label : PROPERTY
+        $a
+      Label : CLASS
+        C
     Label : RIGHT
       E
       Label : ARGUMENTS
@@ -70,9 +76,3 @@ Label : CODE
                 'F'
               Label : CONCAT
                 __DIR__
-    Label : LEFT
-      ::
-      Label : CLASS
-        C
-      Label : PROPERTY
-        $a

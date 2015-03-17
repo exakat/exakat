@@ -22,6 +22,16 @@ Label : CODE
             'd'
         Label : RIGHT
           ->
+          Label : OBJECT
+            ::
+            Label : METHOD
+              t
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  'e'
+            Label : CLASS
+              C
           Label : METHOD
             f
             Label : ARGUMENTS
@@ -32,16 +42,6 @@ Label : CODE
                   $g
                 Label : INDEX
                   'h'
-          Label : OBJECT
-            ::
-            Label : CLASS
-              C
-            Label : METHOD
-              t
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'e'
       Label : THEN
         1
       Label : ELSE

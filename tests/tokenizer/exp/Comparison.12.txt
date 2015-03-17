@@ -6,15 +6,15 @@ Label : CODE
     (
     Label : CODE
       ===
+      Label : LEFT
+        false
       Label : RIGHT
         =
+        Label : LEFT
+          $a
         Label : RIGHT
           b
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               1
-        Label : LEFT
-          $a
-      Label : LEFT
-        false

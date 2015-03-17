@@ -8,6 +8,8 @@ Label : CODE
       {
       Label : ELEMENT
         =
+        Label : LEFT
+          $d
         Label : RIGHT
           new
           Label : NEW
@@ -24,18 +26,14 @@ Label : CODE
                       $b
               Label : ARGUMENT
                 $a
-        Label : LEFT
-          $d
     Label : CATCH
       catch
-      Label : CLASS
-        Exception
-      Label : VARIABLE
-        $e
       Label : CODE
         {
         Label : ELEMENT
           =
+          Label : LEFT
+            $c
           Label : RIGHT
             date
             Label : ARGUMENTS
@@ -48,5 +46,7 @@ Label : CODE
                     $d
               Label : ARGUMENT
                 'Y-m-d-H-i-s'
-          Label : LEFT
-            $c
+      Label : VARIABLE
+        $e
+      Label : CLASS
+        Exception

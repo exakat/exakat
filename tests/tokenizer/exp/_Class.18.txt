@@ -4,13 +4,13 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      x
     Label : BLOCK
       {
       Label : ELEMENT
         const
-        Label : NAME
-          a
         Label : VALUE
           1
+        Label : NAME
+          a
+    Label : NAME
+      x

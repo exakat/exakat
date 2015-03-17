@@ -4,34 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              3
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                2
-              Label : VALUE
-                array
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    3
-            Label : ARGUMENT
-              1
-        Label : LEFT
-          $b
-    Label : NAME
-      a
     Label : BLOCK
       {
       Label : ELEMENT
@@ -40,3 +12,31 @@ Label : CODE
           void
           Label : ARGUMENT
             $b
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        =
+        Label : LEFT
+          $b
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              =>
+              Label : VALUE
+                array
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    3
+              Label : KEY
+                2
+            Label : ARGUMENT
+              1
+    Label : NAME
+      a

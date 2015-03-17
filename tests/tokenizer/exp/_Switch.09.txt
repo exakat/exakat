@@ -10,41 +10,41 @@ Label : CODE
       {
       Label : ELEMENT
         case
-        Label : CASE
-          'd'
         Label : CODE
           ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'e'
           Label : ELEMENT
             break
             Label : LEVEL
               void
-      Label : ELEMENT
-        case
-        Label : CASE
-          'b'
-        Label : CODE
-          ;
           Label : ELEMENT
             return
             Label : RETURN
               'c'
+        Label : CASE
+          'b'
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
           Label : ELEMENT
             break
             Label : LEVEL
               void
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'e'
+        Label : CASE
+          'd'
       Label : ELEMENT
         default
         Label : CODE
           ;
           Label : ELEMENT
-            return
-            Label : RETURN
-              'f'
-          Label : ELEMENT
             break
             Label : LEVEL
               void
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'f'

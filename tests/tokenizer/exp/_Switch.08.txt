@@ -10,65 +10,65 @@ Label : CODE
       {
       Label : ELEMENT
         case
-        Label : CASE
-          'C'
         Label : CODE
           ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              $d
-            Label : LEFT
-              $b
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              2
-      Label : ELEMENT
-        case
-        Label : CASE
-          'B'
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              $d
-            Label : LEFT
-              $b
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              1
-      Label : ELEMENT
-        case
-        Label : CASE
-          'A'
-        Label : CODE
-          ;
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              $c
-            Label : LEFT
-              $b
           Label : ELEMENT
             break
             Label : LEVEL
               void
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              $c
+        Label : CASE
+          'A'
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              1
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              $d
+        Label : CASE
+          'B'
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              2
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              $d
+        Label : CASE
+          'C'
       Label : ELEMENT
         default
         Label : CODE
           ;
           Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
             =
+            Label : LEFT
+              $b
             Label : RIGHT
               @
               Label : AT
                 $e
-            Label : LEFT
-              $b
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void

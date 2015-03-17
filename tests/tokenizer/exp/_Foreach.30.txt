@@ -4,22 +4,24 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      +
-      Label : RIGHT
-        $y
-      Label : LEFT
-        $x
-    Label : VALUE
-      $z
     Label : BLOCK
       {
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $a
+    Label : SOURCE
+      +
+      Label : LEFT
+        $x
+      Label : RIGHT
+        $y
+    Label : VALUE
+      $z
   Label : ELEMENT
     =
+    Label : LEFT
+      $y
     Label : RIGHT
       range
       Label : ARGUMENTS
@@ -28,10 +30,10 @@ Label : CODE
           5
         Label : ARGUMENT
           4
-    Label : LEFT
-      $y
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       range
       Label : ARGUMENTS
@@ -40,5 +42,3 @@ Label : CODE
           2
         Label : ARGUMENT
           1
-    Label : LEFT
-      $x

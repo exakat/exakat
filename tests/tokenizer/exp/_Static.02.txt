@@ -4,71 +4,71 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      a
     Label : BLOCK
       {
       Label : ELEMENT
         ppp
+        Label : VALUE
+          void
         Label : DEFINE
           $b
-        Label : VALUE
-          void
         Label : STATIC
           static
       Label : ELEMENT
         ppp
+        Label : VALUE
+          void
         Label : DEFINE
           $c
-        Label : VALUE
-          void
         Label : STATIC
           static
       Label : ELEMENT
         ppp
+        Label : VALUE
+          void
         Label : DEFINE
           $d
-        Label : VALUE
-          void
         Label : STATIC
           static
       Label : ELEMENT
         ppp
+        Label : VALUE
+          void
         Label : DEFINE
           $e
-        Label : VALUE
-          void
         Label : STATIC
           static
       Label : ELEMENT
         ppp
+        Label : VALUE
+          void
         Label : DEFINE
           $f
-        Label : VALUE
-          void
         Label : STATIC
           static
       Label : ELEMENT
         ppp
+        Label : VALUE
+          void
         Label : DEFINE
           $g
-        Label : VALUE
-          void
         Label : STATIC
           static
       Label : ELEMENT
         ppp
+        Label : VALUE
+          void
         Label : DEFINE
           $h
-        Label : VALUE
-          void
         Label : STATIC
           static
       Label : ELEMENT
         ppp
-        Label : DEFINE
-          $i
         Label : VALUE
           void
+        Label : DEFINE
+          $i
         Label : STATIC
           static
+    Label : NAME
+      a

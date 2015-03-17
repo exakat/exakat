@@ -4,6 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void
     Label : SOURCE
       [
       Label : VARIABLE
@@ -12,7 +16,3 @@ Label : CODE
         'a'
     Label : VALUE
       $y
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void

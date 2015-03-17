@@ -11,9 +11,11 @@ Label : CODE
       Label : ELEMENT
         default
         Label : CODE
-          Block with Sequence For Default Without Semicolon
+          ;
           Label : ELEMENT
             ||
+            Label : LEFT
+              $x
             Label : RIGHT
               str_pad
               Label : ARGUMENTS
@@ -24,48 +26,46 @@ Label : CODE
                   0
                 Label : ARGUMENT
                   +
-                  Label : RIGHT
-                    %
-                    Label : RIGHT
-                      W
-                    Label : LEFT
-                      (
-                      Label : CODE
-                        *
-                        Label : RIGHT
-                          strlen
-                          Label : ARGUMENTS
-                            void
-                            Label : ARGUMENT
-                              $d
-                        Label : LEFT
-                          (
-                          Label : CODE
-                            -
-                            Label : RIGHT
-                              1
-                            Label : LEFT
-                              C
                   Label : LEFT
                     strlen
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
                         $b
+                  Label : RIGHT
+                    %
+                    Label : LEFT
+                      (
+                      Label : CODE
+                        *
+                        Label : LEFT
+                          (
+                          Label : CODE
+                            -
+                            Label : LEFT
+                              C
+                            Label : RIGHT
+                              1
+                        Label : RIGHT
+                          strlen
+                          Label : ARGUMENTS
+                            void
+                            Label : ARGUMENT
+                              $d
+                    Label : RIGHT
+                      W
                 Label : ARGUMENT
                   $a
-            Label : LEFT
-              $x
           Label : ELEMENT
             if
             Label : CONDITION
               (
               Label : CODE
                 ==
-                Label : RIGHT
-                  1
                 Label : LEFT
                   $x
+                Label : RIGHT
+                  1
             Label : THEN
               {
               Label : ELEMENT

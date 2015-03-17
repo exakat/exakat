@@ -7,50 +7,34 @@ Label : CODE
       $n
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $h
-      Label : VALUE
-        $i
     Label : BLOCK
       Block with Foreach
       Label : ELEMENT
         =
+        Label : LEFT
+          $k
         Label : RIGHT
           /
+          Label : LEFT
+            (
+            Label : CODE
+              $l
           Label : RIGHT
             (int)
             Label : CAST
               (
               Label : CODE
                 $m
-          Label : LEFT
-            (
-            Label : CODE
-              $l
-        Label : LEFT
-          $k
     Label : SOURCE
       $g
+    Label : VALUE
+      =>
+      Label : VALUE
+        $i
+      Label : KEY
+        $h
   Label : ELEMENT
     for
-    Label : INIT
-      =
-      Label : RIGHT
-        0
-      Label : LEFT
-        $i
-    Label : FINAL
-      <
-      Label : RIGHT
-        $b
-      Label : LEFT
-        $i
-    Label : INCREMENT
-      ++
-      Label : PREPLUSPLUS
-        $i
     Label : BLOCK
       Block with For
       Label : ELEMENT
@@ -71,13 +55,29 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $e
+    Label : INIT
+      =
+      Label : LEFT
+        $i
+      Label : RIGHT
+        0
+    Label : FINAL
+      <
+      Label : LEFT
+        $i
+      Label : RIGHT
+        $b
+    Label : INCREMENT
+      ++
+      Label : PREPLUSPLUS
+        $i
   Label : ELEMENT
     =
+    Label : LEFT
+      $f
     Label : RIGHT
       array
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           void
-    Label : LEFT
-      $f

@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      ::
-      Label : CLASS
-        self
-      Label : PROPERTY
-        $_forms
     Label : LEFT
       $forms
+    Label : RIGHT
+      ::
+      Label : PROPERTY
+        $_forms
+      Label : CLASS
+        self

@@ -4,34 +4,34 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $z
     Label : RIGHT
       array
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
           =>
-          Label : KEY
-            'd'
           Label : VALUE
             [
             Label : VARIABLE
               $i
             Label : INDEX
               6
+          Label : KEY
+            'd'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'c'
           Label : VALUE
             [
             Label : VARIABLE
               $h
             Label : INDEX
               5
+          Label : KEY
+            'c'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'b'
           Label : VALUE
             intval
             Label : ARGUMENTS
@@ -42,15 +42,15 @@ Label : CODE
                   $g
                 Label : INDEX
                   4
+          Label : KEY
+            'b'
         Label : ARGUMENT
           =>
-          Label : KEY
-            'a'
           Label : VALUE
             [
             Label : VARIABLE
               $f
             Label : INDEX
               3
-    Label : LEFT
-      $z
+          Label : KEY
+            'a'

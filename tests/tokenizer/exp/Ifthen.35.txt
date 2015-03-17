@@ -12,26 +12,22 @@ Label : CODE
       Block with if/elseif
       Label : ELEMENT
         foreach
-        Label : VALUE
-          =>
-          Label : KEY
-            $c
-          Label : VALUE
-            $d
-        Label : SOURCE
-          $b
         Label : BLOCK
           {
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $e
+        Label : SOURCE
+          $b
+        Label : VALUE
+          =>
+          Label : VALUE
+            $d
+          Label : KEY
+            $c
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $i
-    Label : SOURCE
-      $h
     Label : BLOCK
       {
       Label : ELEMENT
@@ -46,6 +42,10 @@ Label : CODE
             continue
             Label : LEVEL
               void
+    Label : SOURCE
+      $h
+    Label : VALUE
+      $i
   Label : ELEMENT
     ++
     Label : POSTPLUSPLUS

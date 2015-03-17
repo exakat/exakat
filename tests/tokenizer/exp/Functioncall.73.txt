@@ -3,17 +3,19 @@
 Label : CODE
   ;
   Label : ELEMENT
-    m
+    echo
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        $g
-      Label : ARGUMENT
         {
         Label : VARIABLE
-          $f
+          $c
         Label : INDEX
           $i
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        $a
   Label : ELEMENT
     n
     Label : ARGUMENTS
@@ -29,19 +31,17 @@ Label : CODE
       Label : ARGUMENT
         $b
   Label : ELEMENT
-    echo
+    m
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
+        $g
+      Label : ARGUMENT
         {
         Label : VARIABLE
-          $c
+          $f
         Label : INDEX
           $i
-      Label : ARGUMENT
-        $b
-      Label : ARGUMENT
-        $a
   Label : ELEMENT
     l
     Label : ARGUMENTS

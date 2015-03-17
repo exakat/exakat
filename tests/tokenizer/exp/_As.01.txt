@@ -3,14 +3,22 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      B
-    Label : EXTENDS
-      C
     Label : BLOCK
       {
       Label : ELEMENT
         use
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            as
+            Label : LEFT
+              ::
+              Label : CLASS
+                F
+              Label : CONSTANT
+                H
+            Label : RIGHT
+              I
         Label : USE
           \
           Label : SUBNAME
@@ -19,15 +27,7 @@ Label : CODE
             E
           Label : SUBNAME
             D
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            as
-            Label : RIGHT
-              I
-            Label : LEFT
-              ::
-              Label : CLASS
-                F
-              Label : CONSTANT
-                H
+    Label : NAME
+      B
+    Label : EXTENDS
+      C

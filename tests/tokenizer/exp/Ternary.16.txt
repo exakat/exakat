@@ -4,28 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
         ||
-        Label : RIGHT
-          ==
-          Label : RIGHT
-            3
-          Label : LEFT
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $e
-              Label : INDEX
-                'f'
-            Label : INDEX
-              'g'
         Label : LEFT
           ==
-          Label : RIGHT
-            2
           Label : LEFT
             [
             Label : VARIABLE
@@ -36,9 +22,23 @@ Label : CODE
                 'c'
             Label : INDEX
               'd'
+          Label : RIGHT
+            2
+        Label : RIGHT
+          ==
+          Label : LEFT
+            [
+            Label : VARIABLE
+              [
+              Label : VARIABLE
+                $e
+              Label : INDEX
+                'f'
+            Label : INDEX
+              'g'
+          Label : RIGHT
+            3
       Label : THEN
         'h'
       Label : ELSE
         'i'
-    Label : LEFT
-      $a

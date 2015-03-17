@@ -9,19 +9,19 @@ Label : CODE
         $a
   Label : ELEMENT
     class
-    Label : NAME
-      B
     Label : BLOCK
       {
       Label : ELEMENT
         use
-        Label : USE
-          C
         Label : BLOCK
           {
           Label : ELEMENT
             as
-            Label : AS
-              E
             Label : SUBNAME
               D
+            Label : AS
+              E
+        Label : USE
+          C
+    Label : NAME
+      B

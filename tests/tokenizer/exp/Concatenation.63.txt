@@ -7,8 +7,6 @@ Label : CODE
       (
       Label : CODE
         !==
-        Label : RIGHT
-          'E'
         Label : LEFT
           B
           Label : ARGUMENTS
@@ -17,12 +15,10 @@ Label : CODE
               D
             Label : ARGUMENT
               'C'
+        Label : RIGHT
+          'E'
     Label : THEN
       ;
-      Label : ELEMENT
-        F
-      Label : ELEMENT
-        Y
       Label : ELEMENT
         O
       Label : ELEMENT
@@ -82,6 +78,8 @@ Label : CODE
       Label : ELEMENT
         V
       Label : ELEMENT
+        Y
+      Label : ELEMENT
         Concatenation
         Label : CONCAT
           'N'
@@ -105,5 +103,9 @@ Label : CODE
               'I'
             Label : ARGUMENT
               'H'
+      Label : ELEMENT
+        F
     Label : ELSE
-      Z
+      ;
+      Label : ELEMENT
+        Z

@@ -14,28 +14,28 @@ Label : CODE
       {
       Label : ELEMENT
         case
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
         Label : CASE
           ::
           Label : CLASS
             self
           Label : CONSTANT
             ALGORITHM_DSA
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
       Label : ELEMENT
         case
-        Label : CASE
-          ::
-          Label : CLASS
-            self
-          Label : CONSTANT
-            ALGORITHM_RSA
         Label : CODE
           ;
           Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
             .=
+            Label : LEFT
+              $data
             Label : RIGHT
               base64_decode
               Label : ARGUMENTS
@@ -46,28 +46,14 @@ Label : CODE
                     $this
                   Label : PROPERTY
                     key
-            Label : LEFT
-              $data
-          Label : ELEMENT
-            break
-            Label : LEVEL
-              void
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default
-          Label : ELEMENT
-            return
-            Label : RETURN
-              null
-      Label : ELEMENT
-        case
         Label : CASE
           ::
           Label : CLASS
             self
           Label : CONSTANT
-            ALGORITHM_NONE
+            ALGORITHM_RSA
+      Label : ELEMENT
+        case
         Label : CODE
           Block with Sequence For Case Without Semicolon
           Label : ELEMENT
@@ -76,3 +62,17 @@ Label : CODE
               void
           Label : ELEMENT
             Void
+        Label : CASE
+          ::
+          Label : CLASS
+            self
+          Label : CONSTANT
+            ALGORITHM_NONE
+      Label : ELEMENT
+        default
+        Label : CODE
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              null

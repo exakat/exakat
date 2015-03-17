@@ -5,14 +5,6 @@ Label : CODE
   Label : ELEMENT
     return
     Label : RETURN
-      ::
-      Label : PROPERTY
-        $y
-      Label : CLASS
-        b
-  Label : ELEMENT
-    return
-    Label : RETURN
       f
       Label : ARGUMENTS
         Arguments
@@ -22,6 +14,14 @@ Label : CODE
           $y
         Label : ARGUMENT
           $x
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ::
+      Label : PROPERTY
+        $y
+      Label : CLASS
+        b
   Label : ELEMENT
     return
     Label : RETURN

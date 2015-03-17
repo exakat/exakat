@@ -13,6 +13,8 @@ Label : CODE
       Label : ELEMENT
         $y
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
-        $z
+        {
+        Label : ELEMENT
+          $z

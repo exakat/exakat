@@ -8,6 +8,8 @@ Label : CODE
       $a
     Label : METHOD
       Concatenation
+      Label : ARGUMENTS
+        void
       Label : CONCAT
         'd'
       Label : CONCAT
@@ -16,5 +18,3 @@ Label : CODE
           $b
         Label : PROPERTY
           c
-      Label : ARGUMENTS
-        void

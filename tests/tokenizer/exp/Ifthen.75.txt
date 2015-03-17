@@ -18,8 +18,6 @@ Label : ELEMENT
         Label : ELEMENT
           E
         Label : ELEMENT
-          B
-        Label : ELEMENT
           echo
           Label : ARGUMENTS
             void
@@ -29,6 +27,8 @@ Label : ELEMENT
                 void
                 Label : ARGUMENT
                   'E'
+        Label : ELEMENT
+          B
       Label : ELSE
         elseif
         Label : CONDITION
@@ -39,8 +39,6 @@ Label : ELEMENT
           ;
           Label : ELEMENT
             I
-          Label : ELEMENT
-            F
           Label : ELEMENT
             echo
             Label : ARGUMENTS
@@ -53,6 +51,8 @@ Label : ELEMENT
                     'I'
                   Label : ARGUMENT
                     $c
+          Label : ELEMENT
+            F
     Label : ELEMENT
       if
       Label : CONDITION
@@ -68,8 +68,6 @@ Label : ELEMENT
         Label : ELEMENT
           N
         Label : ELEMENT
-          K
-        Label : ELEMENT
           echo
           Label : ARGUMENTS
             void
@@ -79,6 +77,8 @@ Label : ELEMENT
                 void
                 Label : ARGUMENT
                   'N'
+        Label : ELEMENT
+          K
     Label : ELEMENT
       J
 Label : ELEMENT

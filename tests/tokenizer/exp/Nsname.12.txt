@@ -4,87 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        Bar
-      Label : SUBNAME
-        Foo
     Label : BLOCK
       ;
       Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            fooclassm
-          Label : SUBNAME
-            subnamespacem
-        Label : METHOD
-          staticMethod
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            fooclassm
-          Label : SUBNAME
-            namespacem
-          Label : SUBNAME
-            fullm
-        Label : METHOD
-          staticMethod
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-      Label : ELEMENT
-        new
-        Label : NEW
-          \
-          Label : SUBNAME
-            FOO
-          Label : SUBNAME
-            subnamespace
-      Label : ELEMENT
-        instanceof
-        Label : CLASS
-          \
-          Label : SUBNAME
-            fooclass
-          Label : SUBNAME
-            subnamespace
-        Label : VARIABLE
-          $x
-      Label : ELEMENT
-        new
-        Label : NEW
-          \
-          Label : SUBNAME
-            FOO
-          Label : SUBNAME
-            Bar
-          Label : SUBNAME
-            Foo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          fooclassm
-        Label : METHOD
-          staticMethod
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-      Label : ELEMENT
         new
         Label : NEW
           \
@@ -96,12 +18,8 @@ Label : CODE
             Foo
       Label : ELEMENT
         instanceof
-        Label : CLASS
-          fooclass
         Label : VARIABLE
           $x
-      Label : ELEMENT
-        instanceof
         Label : CLASS
           \
           Label : SUBNAME
@@ -110,8 +28,84 @@ Label : CODE
             namespacepath
           Label : SUBNAME
             full
+      Label : ELEMENT
+        instanceof
         Label : VARIABLE
           $x
+        Label : CLASS
+          fooclass
+      Label : ELEMENT
+        ::
+        Label : METHOD
+          staticMethod
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : CLASS
+          fooclassm
+      Label : ELEMENT
+        instanceof
+        Label : VARIABLE
+          $x
+        Label : CLASS
+          \
+          Label : SUBNAME
+            fooclass
+          Label : SUBNAME
+            subnamespace
+      Label : ELEMENT
+        ::
+        Label : METHOD
+          staticMethod
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : CLASS
+          \
+          Label : SUBNAME
+            fooclassm
+          Label : SUBNAME
+            namespacem
+          Label : SUBNAME
+            fullm
+      Label : ELEMENT
+        new
+        Label : NEW
+          \
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+          Label : SUBNAME
+            FOO
+          Label : SUBNAME
+            Bar
+          Label : SUBNAME
+            Foo
+      Label : ELEMENT
+        ::
+        Label : METHOD
+          staticMethod
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : CLASS
+          \
+          Label : SUBNAME
+            fooclassm
+          Label : SUBNAME
+            subnamespacem
+      Label : ELEMENT
+        new
+        Label : NEW
+          \
+          Label : SUBNAME
+            FOO
+          Label : SUBNAME
+            subnamespace
       Label : ELEMENT
         new
         Label : NEW
@@ -122,12 +116,6 @@ Label : CODE
           fooclassc
         Label : CONSTANT
           FOOCSONTANT
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          fooclassp
-        Label : PROPERTY
-          $property
       Label : ELEMENT
         ::
         Label : CLASS
@@ -152,6 +140,24 @@ Label : CODE
           FOOCSONTANT
       Label : ELEMENT
         ::
+        Label : PROPERTY
+          $property
+        Label : CLASS
+          fooclassp
+      Label : ELEMENT
+        ::
+        Label : PROPERTY
+          $property
+        Label : CLASS
+          \
+          Label : SUBNAME
+            fooclassp
+          Label : SUBNAME
+            subnamespacep
+      Label : ELEMENT
+        ::
+        Label : PROPERTY
+          $property
         Label : CLASS
           \
           Label : SUBNAME
@@ -160,30 +166,18 @@ Label : CODE
             namespacep
           Label : SUBNAME
             fullp
-        Label : PROPERTY
-          $property
-      Label : ELEMENT
-        ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            fooclassp
-          Label : SUBNAME
-            subnamespacep
-        Label : PROPERTY
-          $property
       Label : ELEMENT
         new
         Label : NEW
           \
-          Label : SUBNAME
-            FOO
-          Label : SUBNAME
-            subnamespace
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
+          Label : SUBNAME
+            FOO
+          Label : SUBNAME
+            subnamespace
       Label : ELEMENT
         new
         Label : NEW
@@ -203,27 +197,37 @@ Label : CODE
             Label : ARGUMENT
               void
       Label : ELEMENT
+        ::
+        Label : METHOD
+          staticallyCalledMethod
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : CLASS
+          staticallyCalling
+      Label : ELEMENT
         \
-        Label : SUBNAME
-          fonction
-        Label : SUBNAME
-          subnamespaced
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-      Label : ELEMENT
-        \
         Label : SUBNAME
           fonction
         Label : SUBNAME
           namespaced
         Label : SUBNAME
           full
+      Label : ELEMENT
+        \
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
+        Label : SUBNAME
+          fonction
+        Label : SUBNAME
+          subnamespaced
       Label : ELEMENT
         unqualified_function
         Label : ARGUMENTS
@@ -243,16 +247,6 @@ Label : CODE
             Label : SUBNAME
               FULL
       Label : ELEMENT
-        ::
-        Label : CLASS
-          staticallyCalling
-        Label : METHOD
-          staticallyCalledMethod
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -268,3 +262,9 @@ Label : CODE
           void
           Label : ARGUMENT
             UNQUALIFIED_CONSTANT
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        Bar
+      Label : SUBNAME
+        Foo

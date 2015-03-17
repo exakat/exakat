@@ -7,6 +7,16 @@ Label : CODE
       (
       Label : CODE
         ||
+        Label : LEFT
+          ==
+          Label : LEFT
+            B
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'C'
+          Label : RIGHT
+            $a
         Label : RIGHT
           !
           Label : NOT
@@ -15,16 +25,6 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-        Label : LEFT
-          ==
-          Label : RIGHT
-            $a
-          Label : LEFT
-            B
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'C'
     Label : THEN
       ;
       Label : ELEMENT
@@ -48,10 +48,6 @@ Label : CODE
               Label : ARGUMENT
                 'M'
       Label : ELEMENT
-        D
-      Label : ELEMENT
-        J
-      Label : ELEMENT
         G
       Label : ELEMENT
         I
@@ -60,39 +56,43 @@ Label : CODE
           Label : ARGUMENT
             'J'
       Label : ELEMENT
+        J
+      Label : ELEMENT
         F
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             'G'
+      Label : ELEMENT
+        D
     Label : ELSE
       elseif
       Label : CONDITION
         (
         Label : CODE
           ||
-          Label : RIGHT
-            !
-            Label : NOT
-              $c
           Label : LEFT
             !
             Label : NOT
               $b
+          Label : RIGHT
+            !
+            Label : NOT
+              $c
       Label : THEN
         if
         Label : CONDITION
           (
           Label : CODE
             &&
-            Label : RIGHT
-              !
-              Label : NOT
-                $e
             Label : LEFT
               !
               Label : NOT
                 $d
+            Label : RIGHT
+              !
+              Label : NOT
+                $e
         Label : THEN
           Block with if/elseif
           Label : ELEMENT
@@ -168,24 +168,26 @@ Label : CODE
                       Label : ARGUMENT
                         'Z'
       Label : ELSE
-        switch
-        Label : NAME
-          $s
-        Label : CASES
-          Sequence Case Default
-          Label : ELEMENT
-            case
-            Label : CODE
-              Block with Sequence For Case
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  AA
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
+        ;
+        Label : ELEMENT
+          switch
+          Label : NAME
+            $s
+          Label : CASES
+            Sequence Case Default
+            Label : ELEMENT
+              case
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $t
+                  Label : RIGHT
+                    AA
+                    Label : ARGUMENTS
                       void
-                Label : LEFT
-                  $t
-            Label : CASE
-              0
+                      Label : ARGUMENT
+                        void
+              Label : CASE
+                0

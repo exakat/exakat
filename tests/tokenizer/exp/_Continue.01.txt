@@ -17,7 +17,7 @@ Label : CODE
       Label : ELEMENT
         continue
         Label : LEVEL
-          void
+          23
   Label : ELEMENT
     if
     Label : CONDITION
@@ -49,4 +49,4 @@ Label : CODE
       Label : ELEMENT
         continue
         Label : LEVEL
-          23
+          void

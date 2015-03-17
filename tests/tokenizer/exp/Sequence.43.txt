@@ -8,16 +8,6 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : RIGHT
-          is_array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                'd'
         Label : LEFT
           isset
           Label : ARGUMENTS
@@ -28,47 +18,57 @@ Label : CODE
                 $a
               Label : INDEX
                 'b'
+        Label : RIGHT
+          is_array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $c
+              Label : INDEX
+                'd'
     Label : THEN
       Block with if/elseif
       Label : ELEMENT
         foreach
-        Label : VALUE
-          =>
-          Label : KEY
-            $g
-          Label : VALUE
-            $h
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $i
+            Label : RIGHT
+              1
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $j
+            Label : RIGHT
+              2
         Label : SOURCE
           [
           Label : VARIABLE
             $e
           Label : INDEX
             'f'
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              1
-            Label : LEFT
-              $i
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              2
-            Label : LEFT
-              $j
+        Label : VALUE
+          =>
+          Label : VALUE
+            $h
+          Label : KEY
+            $g
   Label : ELEMENT
     =
-    Label : RIGHT
-      [
-      Label : VARIABLE
-        $m
-      Label : INDEX
-        'n'
     Label : LEFT
       [
       Label : VARIABLE
         $k
       Label : INDEX
         'l'
+    Label : RIGHT
+      [
+      Label : VARIABLE
+        $m
+      Label : INDEX
+        'n'

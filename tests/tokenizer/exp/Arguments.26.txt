@@ -8,8 +8,6 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       namespace
-      Label : NAMESPACE
-        B
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -22,16 +20,18 @@ Label : ELEMENT
               ?
               Label : CONDITION
                 >
-                Label : RIGHT
-                  0
                 Label : LEFT
                   $d
+                Label : RIGHT
+                  0
               Label : THEN
                 'H'
               Label : ELSE
                 'I'
             Label : ARGUMENT
               =
+              Label : LEFT
+                $b
               Label : RIGHT
                 F
                 Label : ARGUMENTS
@@ -42,8 +42,6 @@ Label : ELEMENT
                       $c
                     Label : PROPERTY
                       G
-              Label : LEFT
-                $b
         Label : ELEMENT
           if
           Label : CONDITION
@@ -68,3 +66,5 @@ Label : ELEMENT
           use
           Label : USE
             C
+      Label : NAMESPACE
+        B

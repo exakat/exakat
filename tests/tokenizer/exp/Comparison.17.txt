@@ -8,8 +8,6 @@ Label : CODE
       (
       Label : CODE
         !=
-        Label : RIGHT
-          'c'
         Label : LEFT
           @
           Label : AT
@@ -18,12 +16,12 @@ Label : CODE
               $a
             Label : INDEX
               'b'
+        Label : RIGHT
+          'c'
     Label : THEN
       {
       Label : ELEMENT
         =
-        Label : RIGHT
-          'f'
         Label : LEFT
           @
           Label : AT
@@ -32,3 +30,5 @@ Label : CODE
               $d
             Label : PROPERTY
               e
+        Label : RIGHT
+          'f'

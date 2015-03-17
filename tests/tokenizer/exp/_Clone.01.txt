@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       clone
       Label : CLONE
         $b
-    Label : LEFT
-      $a

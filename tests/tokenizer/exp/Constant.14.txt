@@ -11,6 +11,6 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        a
-      Label : ELEMENT
         C
+      Label : ELEMENT
+        a

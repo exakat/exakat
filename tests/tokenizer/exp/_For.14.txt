@@ -4,22 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     for
-    Label : INIT
-      =
-      Label : RIGHT
-        0
-      Label : LEFT
-        $i
-    Label : FINAL
-      <
-      Label : RIGHT
-        10
-      Label : LEFT
-        $i
-    Label : INCREMENT
-      ++
-      Label : POSTPLUSPLUS
-        $i
     Label : BLOCK
       Block with For
       Label : ELEMENT
@@ -32,3 +16,19 @@ Label : CODE
             void
             Label : ARGUMENT
               $f
+    Label : INIT
+      =
+      Label : LEFT
+        $i
+      Label : RIGHT
+        0
+    Label : FINAL
+      <
+      Label : LEFT
+        $i
+      Label : RIGHT
+        10
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $i

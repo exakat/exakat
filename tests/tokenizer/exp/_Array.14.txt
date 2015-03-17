@@ -5,6 +5,28 @@ Label : CODE
   Label : ELEMENT
     {
     Label : VARIABLE
+      [
+      Label : VARIABLE
+        {
+        Label : VARIABLE
+          $f
+        Label : INDEX
+          3
+      Label : INDEX
+        4
+    Label : INDEX
+      -
+      Label : LEFT
+        strlen
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $dd
+      Label : RIGHT
+        1
+  Label : ELEMENT
+    {
+    Label : VARIABLE
       {
       Label : VARIABLE
         $e
@@ -12,14 +34,14 @@ Label : CODE
         6
     Label : INDEX
       -
-      Label : RIGHT
-        1
       Label : LEFT
         strlen
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $ee
+      Label : RIGHT
+        1
   Label : ELEMENT
     {
     Label : VARIABLE
@@ -34,36 +56,14 @@ Label : CODE
         4
     Label : INDEX
       -
-      Label : RIGHT
-        1
       Label : LEFT
         strlen
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $dd
-  Label : ELEMENT
-    {
-    Label : VARIABLE
-      [
-      Label : VARIABLE
-        {
-        Label : VARIABLE
-          $f
-        Label : INDEX
-          3
-      Label : INDEX
-        4
-    Label : INDEX
-      -
       Label : RIGHT
         1
-      Label : LEFT
-        strlen
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $dd
   Label : ELEMENT
     {
     Label : VARIABLE
@@ -78,14 +78,14 @@ Label : CODE
         4
     Label : INDEX
       -
-      Label : RIGHT
-        1
       Label : LEFT
         strlen
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $cc
+      Label : RIGHT
+        1
   Label : ELEMENT
     {
     Label : VARIABLE
@@ -96,25 +96,25 @@ Label : CODE
         2
     Label : INDEX
       -
-      Label : RIGHT
-        1
       Label : LEFT
         strlen
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $bb
+      Label : RIGHT
+        1
   Label : ELEMENT
     {
     Label : VARIABLE
       $a
     Label : INDEX
       -
-      Label : RIGHT
-        1
       Label : LEFT
         strlen
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $aa
+      Label : RIGHT
+        1

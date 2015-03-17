@@ -8,16 +8,16 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : RIGHT
-          'C'
         Label : LEFT
           ->
           Label : OBJECT
             $a
           Label : PROPERTY
             B
+        Label : RIGHT
+          'C'
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         if
         Label : CONDITION
@@ -33,53 +33,55 @@ Label : CODE
                 Label : PROPERTY
                   E
         Label : THEN
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              !
-              Label : NOT
-                F
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $d
-                    Label : PROPERTY
-                      I
-                  Label : ARGUMENT
-                    [
-                    Label : VARIABLE
+          ;
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                !
+                Label : NOT
+                  F
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $d
+                      Label : PROPERTY
+                        I
+                    Label : ARGUMENT
                       [
                       Label : VARIABLE
-                        $c
+                        [
+                        Label : VARIABLE
+                          $c
+                        Label : INDEX
+                          'G'
                       Label : INDEX
-                        'G'
-                    Label : INDEX
-                      'H'
-          Label : THEN
-            Block with if/elseif
-            Label : ELEMENT
-              return
-              Label : RETURN
-                J
+                        'H'
+            Label : THEN
+              Block with if/elseif
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  J
     Label : ELSE
       elseif
       Label : CONDITION
         (
         Label : CODE
           ==
-          Label : RIGHT
-            'L'
           Label : LEFT
             ->
             Label : OBJECT
               $e
             Label : PROPERTY
               K
+          Label : RIGHT
+            'L'
       Label : THEN
-        Block with if/elseif
+        ;
         Label : ELEMENT
           if
           Label : CONDITION
@@ -95,78 +97,84 @@ Label : CODE
                   Label : PROPERTY
                     N
           Label : THEN
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                !
-                Label : NOT
-                  O
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  !
+                  Label : NOT
+                    O
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $h
+                        Label : PROPERTY
+                          R
+                      Label : ARGUMENT
+                        [
+                        Label : VARIABLE
+                          [
+                          Label : VARIABLE
+                            $g
+                          Label : INDEX
+                            'P'
+                        Label : INDEX
+                          'Q'
+              Label : THEN
+                Block with if/elseif
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    S
+      Label : ELSE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              T
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $i
+                  Label : PROPERTY
+                    U
+          Label : THEN
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                (
+                Label : CODE
+                  V
                   Label : ARGUMENTS
                     Arguments
                     Label : ARGUMENT
                       ->
                       Label : OBJECT
-                        $h
+                        $k
                       Label : PROPERTY
-                        R
+                        Y
                     Label : ARGUMENT
                       [
                       Label : VARIABLE
                         [
                         Label : VARIABLE
-                          $g
+                          $j
                         Label : INDEX
-                          'P'
+                          'W'
                       Label : INDEX
-                        'Q'
-            Label : THEN
-              Block with if/elseif
-              Label : ELEMENT
-                return
-                Label : RETURN
-                  S
-      Label : ELSE
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            T
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $i
-                Label : PROPERTY
-                  U
-        Label : THEN
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              V
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $k
-                  Label : PROPERTY
-                    Y
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    [
-                    Label : VARIABLE
-                      $j
-                    Label : INDEX
-                      'W'
-                  Label : INDEX
-                    'X'
-          Label : THEN
-            Block with if/elseif
-            Label : ELEMENT
-              return
-              Label : RETURN
-                Z
+                        'X'
+              Label : THEN
+                Block with if/elseif
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    Z

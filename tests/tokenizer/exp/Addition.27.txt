@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       new
       Label : NEW
@@ -12,6 +14,30 @@ Label : CODE
           void
           Label : ARGUMENT
             +
+            Label : LEFT
+              array
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  =>
+                  Label : VALUE
+                    Concatenation
+                    Label : CONCAT
+                      'H'
+                    Label : CONCAT
+                      G
+                  Label : KEY
+                    'F'
+                Label : ARGUMENT
+                  =>
+                  Label : VALUE
+                    Concatenation
+                    Label : CONCAT
+                      'E'
+                    Label : CONCAT
+                      D
+                  Label : KEY
+                    'C'
             Label : RIGHT
               include
               Label : ARGUMENTS
@@ -24,29 +50,3 @@ Label : CODE
                       'J'
                     Label : CONCAT
                       I
-            Label : LEFT
-              array
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'F'
-                  Label : VALUE
-                    Concatenation
-                    Label : CONCAT
-                      'H'
-                    Label : CONCAT
-                      G
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'C'
-                  Label : VALUE
-                    Concatenation
-                    Label : CONCAT
-                      'E'
-                    Label : CONCAT
-                      D
-    Label : LEFT
-      $a

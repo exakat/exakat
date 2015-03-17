@@ -4,6 +4,36 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        use
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            insteadof
+            Label : LEFT
+              ::
+              Label : CLASS
+                G
+              Label : CONSTANT
+                I
+            Label : RIGHT
+              F
+          Label : ELEMENT
+            insteadof
+            Label : LEFT
+              ::
+              Label : CLASS
+                F
+              Label : CONSTANT
+                L
+            Label : RIGHT
+              G
+        Label : USE
+          G
+        Label : USE
+          F
     Label : NAME
       B
     Label : EXTENDS
@@ -14,33 +44,3 @@ Label : CODE
         D
       Label : SUBNAME
         C
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        use
-        Label : USE
-          G
-        Label : USE
-          F
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            insteadof
-            Label : RIGHT
-              F
-            Label : LEFT
-              ::
-              Label : CLASS
-                G
-              Label : CONSTANT
-                I
-          Label : ELEMENT
-            insteadof
-            Label : RIGHT
-              G
-            Label : LEFT
-              ::
-              Label : CLASS
-                F
-              Label : CONSTANT
-                L

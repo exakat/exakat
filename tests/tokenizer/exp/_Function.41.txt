@@ -4,29 +4,29 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       function
-      Label : NAME
-        
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          Typehint
-          Label : CLASS
-            Stdclass
-          Label : VARIABLE
-            $e
-        Label : ARGUMENT
-          $d
-        Label : ARGUMENT
-          $c
-        Label : ARGUMENT
-          $b
       Label : BLOCK
         {
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
             $a
-    Label : LEFT
-      $x
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          Typehint
+          Label : VARIABLE
+            $e
+          Label : CLASS
+            Stdclass
+        Label : ARGUMENT
+          $d
+        Label : ARGUMENT
+          $c
+        Label : ARGUMENT
+          $b
+      Label : NAME
+        

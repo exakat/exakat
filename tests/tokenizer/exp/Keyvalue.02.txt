@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -12,30 +14,20 @@ Label : CODE
           void
         Label : ARGUMENT
           =>
-          Label : KEY
-            ::
-            Label : PROPERTY
-              $r
-            Label : CLASS
-              Q
           Label : VALUE
             ::
             Label : PROPERTY
               $t
             Label : CLASS
               S
-        Label : ARGUMENT
-          =>
           Label : KEY
             ::
-            Label : METHOD
-              N
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
+            Label : PROPERTY
+              $r
             Label : CLASS
-              M
+              Q
+        Label : ARGUMENT
+          =>
           Label : VALUE
             ::
             Label : METHOD
@@ -46,32 +38,32 @@ Label : CODE
                   void
             Label : CLASS
               O
-        Label : ARGUMENT
-          =>
           Label : KEY
             ::
+            Label : METHOD
+              N
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
             Label : CLASS
-              I
-            Label : CONSTANT
-              J
+              M
+        Label : ARGUMENT
+          =>
           Label : VALUE
             ::
             Label : CLASS
               K
             Label : CONSTANT
               L
+          Label : KEY
+            ::
+            Label : CLASS
+              I
+            Label : CONSTANT
+              J
         Label : ARGUMENT
           =>
-          Label : KEY
-            ->
-            Label : OBJECT
-              $e
-            Label : METHOD
-              f
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
           Label : VALUE
             ->
             Label : OBJECT
@@ -82,19 +74,27 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-        Label : ARGUMENT
-          =>
           Label : KEY
             ->
             Label : OBJECT
-              $a
-            Label : PROPERTY
-              b
+              $e
+            Label : METHOD
+              f
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+        Label : ARGUMENT
+          =>
           Label : VALUE
             ->
             Label : OBJECT
               $c
             Label : PROPERTY
               d
-    Label : LEFT
-      $x
+          Label : KEY
+            ->
+            Label : OBJECT
+              $a
+            Label : PROPERTY
+              b

@@ -4,23 +4,23 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       @
       Label : AT
         $x
-        Label : NAME
-          $x
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             +
-            Label : RIGHT
-              /
-              Label : RIGHT
-                3
-              Label : LEFT
-                2
             Label : LEFT
               1
-    Label : LEFT
-      $a
+            Label : RIGHT
+              /
+              Label : LEFT
+                2
+              Label : RIGHT
+                3
+        Label : NAME
+          $x

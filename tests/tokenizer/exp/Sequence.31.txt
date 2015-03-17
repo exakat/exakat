@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      a
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $b
     Label : BLOCK
       {
       Label : ELEMENT
@@ -34,3 +28,9 @@ Label : CODE
             return
             Label : RETURN
               false
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $b
+    Label : NAME
+      a

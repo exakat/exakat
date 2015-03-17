@@ -18,10 +18,6 @@ Label : CODE
               void
     Label : CATCH
       catch
-      Label : CLASS
-        C
-      Label : VARIABLE
-        $b
       Label : CODE
         {
         Label : ELEMENT
@@ -42,3 +38,7 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     void
+      Label : VARIABLE
+        $b
+      Label : CLASS
+        C

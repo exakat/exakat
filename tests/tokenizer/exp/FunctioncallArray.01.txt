@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     [
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        34
+    Label : NAME
+      [
     Label : VARIABLE
       ->
       Label : OBJECT
@@ -12,9 +18,3 @@ Label : CODE
         c
     Label : INDEX
       d
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        34
-    Label : NAME
-      [

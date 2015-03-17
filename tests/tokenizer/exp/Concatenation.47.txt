@@ -4,10 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       Concatenation
       Label : CONCAT
         =
+        Label : LEFT
+          $c
         Label : RIGHT
           Concatenation
           Label : CONCAT
@@ -20,9 +24,5 @@ Label : CODE
                 $e
               Label : ARGUMENT
                 'd'
-        Label : LEFT
-          $c
       Label : CONCAT
         'b'
-    Label : LEFT
-      $a

@@ -24,14 +24,12 @@ Label : CODE
           void
           Label : ARGUMENT
             =
-            Label : RIGHT
-              1
             Label : LEFT
               ticks
+            Label : RIGHT
+              1
       Label : ELEMENT
         while
-        Label : CONDITION
-          true
         Label : BLOCK
           {
           Label : ELEMENT
@@ -44,3 +42,5 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
+        Label : CONDITION
+          true

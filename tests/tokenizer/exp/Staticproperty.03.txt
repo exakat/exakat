@@ -3,12 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
-    ::
-    Label : CLASS
-      self
-    Label : PROPERTY
-      [
-      Label : VARIABLE
+    [
+    Label : VARIABLE
+      ::
+      Label : PROPERTY
         $a
-      Label : INDEX
-        'b'
+      Label : CLASS
+        self
+    Label : INDEX
+      'b'

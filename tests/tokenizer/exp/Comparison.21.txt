@@ -8,6 +8,8 @@ Label : CODE
       (
       Label : CODE
         >=
+        Label : LEFT
+          $a
         Label : RIGHT
           {
           Label : VARIABLE
@@ -18,8 +20,6 @@ Label : CODE
               $c
             Label : INDEX
               'd'
-        Label : LEFT
-          $a
     Label : THEN
       {
       Label : ELEMENT

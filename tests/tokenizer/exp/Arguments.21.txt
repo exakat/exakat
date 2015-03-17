@@ -4,6 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void
     Label : NAME
       a
     Label : IMPLEMENTS
@@ -14,7 +18,3 @@ Label : CODE
       \
       Label : SUBNAME
         A
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void

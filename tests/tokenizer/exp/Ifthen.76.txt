@@ -4,18 +4,30 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
-    Label : NAME
-      B
     Label : BLOCK
       {
       Label : ELEMENT
-        return
-        Label : RETURN
-          K
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            E
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  F
+        Label : THEN
+          Block with if/elseif
+          Label : ELEMENT
+            return
+            Label : RETURN
+              G
       Label : ELEMENT
         if
         Label : CONDITION
@@ -47,27 +59,9 @@ Label : CODE
                       Label : PROPERTY
                         J
       Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            E
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $e
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
-                  F
-        Label : THEN
-          Block with if/elseif
-          Label : ELEMENT
-            return
-            Label : RETURN
-              G
+        return
+        Label : RETURN
+          K
       Label : ELEMENT
         if
         Label : CONDITION
@@ -92,3 +86,9 @@ Label : CODE
             return
             Label : RETURN
               D
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      B

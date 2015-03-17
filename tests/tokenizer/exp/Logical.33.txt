@@ -8,35 +8,21 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : RIGHT
+        Label : LEFT
           &&
-          Label : RIGHT
-            >
-            Label : RIGHT
-              *
-              Label : RIGHT
-                1
-              Label : LEFT
-                [
-                Label : VARIABLE
-                  [
-                  Label : VARIABLE
-                    $j
-                  Label : INDEX
-                    'k'
-                Label : INDEX
-                  'l'
-            Label : LEFT
-              *
-              Label : RIGHT
-                [
-                Label : VARIABLE
-                  $h
-                Label : INDEX
-                  'i'
-              Label : LEFT
-                G
           Label : LEFT
+            !
+            Label : NOT
+              [
+              Label : VARIABLE
+                [
+                Label : VARIABLE
+                  $a
+                Label : INDEX
+                  'b'
+              Label : INDEX
+                'c'
+          Label : RIGHT
             [
             Label : VARIABLE
               [
@@ -46,18 +32,32 @@ Label : CODE
                 'e'
             Label : INDEX
               'f'
-        Label : LEFT
-          !
-          Label : NOT
-            [
-            Label : VARIABLE
+        Label : RIGHT
+          >
+          Label : LEFT
+            *
+            Label : LEFT
+              G
+            Label : RIGHT
               [
               Label : VARIABLE
-                $a
+                $h
               Label : INDEX
-                'b'
-            Label : INDEX
-              'c'
+                'i'
+          Label : RIGHT
+            *
+            Label : LEFT
+              [
+              Label : VARIABLE
+                [
+                Label : VARIABLE
+                  $j
+                Label : INDEX
+                  'k'
+              Label : INDEX
+                'l'
+            Label : RIGHT
+              1
     Label : THEN
       {
       Label : ELEMENT

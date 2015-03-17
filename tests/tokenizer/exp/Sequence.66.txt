@@ -10,6 +10,8 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
+        E
+      Label : ELEMENT
         ->
         Label : OBJECT
           $G
@@ -20,10 +22,6 @@ Label : CODE
             Label : ARGUMENT
               'I'
       Label : ELEMENT
-        E
-      Label : ELEMENT
-        A
-      Label : ELEMENT
         ::
         Label : METHOD
           D
@@ -33,3 +31,5 @@ Label : CODE
               'E'
         Label : CLASS
           C
+      Label : ELEMENT
+        A

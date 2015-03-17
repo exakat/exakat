@@ -8,6 +8,12 @@ Label : CODE
       (
       Label : CODE
         !=
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $f
+          Label : PROPERTY
+            g
         Label : RIGHT
           strlen
           Label : ARGUMENTS
@@ -18,12 +24,6 @@ Label : CODE
                 $h
               Label : PROPERTY
                 i
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $f
-          Label : PROPERTY
-            g
     Label : THEN
       Block with if/elseif
       Label : ELEMENT
@@ -38,8 +38,14 @@ Label : CODE
               void
   Label : ELEMENT
     while
+    Label : BLOCK
+      Block with While
+      Label : ELEMENT
+        void
     Label : CONDITION
       !==
+      Label : LEFT
+        false
       Label : RIGHT
         ->
         Label : OBJECT
@@ -50,19 +56,13 @@ Label : CODE
             void
             Label : ARGUMENT
               void
-      Label : LEFT
-        false
-    Label : BLOCK
-      Block with While
-      Label : ELEMENT
-        void
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ->
       Label : OBJECT
         $b
       Label : PROPERTY
         c
-    Label : LEFT
-      $a

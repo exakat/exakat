@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     ::
+    Label : PROPERTY
+      $b
     Label : CLASS
       {
       Label : VARIABLE
@@ -14,5 +16,3 @@ Label : CODE
           1
       Label : INDEX
         2
-    Label : PROPERTY
-      $b

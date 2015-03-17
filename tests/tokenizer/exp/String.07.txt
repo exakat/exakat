@@ -3,116 +3,26 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          D
-        Label : CONCAT
-          $b8
-        Label : CONCAT
-          C
     Label : LEFT
-      $a8
-  Label : ELEMENT
-    =
+      $a10
     Label : RIGHT
       +
-      Label : RIGHT
-        ->
-        Label : OBJECT
-          $d3
-        Label : PROPERTY
-          $e3
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $b3
-        Label : PROPERTY
-          $c3
-    Label : LEFT
-      $a3
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          $b4
-        Label : CONCAT
-          C
-        Label : CONCAT
-          $c
-        Label : CONCAT
-          $d4
-    Label : LEFT
-      $a4
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          D
-        Label : CONCAT
-          $b6
-        Label : CONCAT
-          $c6
-        Label : CONCAT
-          C
-    Label : LEFT
-      $a6
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          D
-        Label : CONCAT
-          $b
-        Label : CONCAT
-          C
-    Label : LEFT
-      $a5
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      "
-      Label : CONTAIN
-        Concatenation
-        Label : CONCAT
-          D
-        Label : CONCAT
-          $b2
-        Label : CONCAT
-          C
-    Label : LEFT
-      $a2
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      +
-      Label : RIGHT
-        ->
-        Label : OBJECT
-          $d10
-        Label : PROPERTY
-          $e10
       Label : LEFT
         ->
         Label : OBJECT
           $b10
         Label : PROPERTY
           $c10
-    Label : LEFT
-      $a10
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          $d10
+        Label : PROPERTY
+          $e10
   Label : ELEMENT
     =
+    Label : LEFT
+      $a9
     Label : RIGHT
       "
       Label : CONTAIN
@@ -125,10 +35,24 @@ Label : CODE
           $c
         Label : CONCAT
           C
-    Label : LEFT
-      $a9
   Label : ELEMENT
     =
+    Label : LEFT
+      $a8
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          D
+        Label : CONCAT
+          $b8
+        Label : CONCAT
+          C
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a7
     Label : RIGHT
       "
       Label : CONTAIN
@@ -141,10 +65,88 @@ Label : CODE
           $c
         Label : CONCAT
           C
-    Label : LEFT
-      $a7
   Label : ELEMENT
     =
+    Label : LEFT
+      $a6
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          D
+        Label : CONCAT
+          $b6
+        Label : CONCAT
+          $c6
+        Label : CONCAT
+          C
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a5
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          D
+        Label : CONCAT
+          $b
+        Label : CONCAT
+          C
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a4
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          $b4
+        Label : CONCAT
+          C
+        Label : CONCAT
+          $c
+        Label : CONCAT
+          $d4
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a3
+    Label : RIGHT
+      +
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $b3
+        Label : PROPERTY
+          $c3
+      Label : RIGHT
+        ->
+        Label : OBJECT
+          $d3
+        Label : PROPERTY
+          $e3
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a2
+    Label : RIGHT
+      "
+      Label : CONTAIN
+        Concatenation
+        Label : CONCAT
+          D
+        Label : CONCAT
+          $b2
+        Label : CONCAT
+          C
+  Label : ELEMENT
+    =
+    Label : LEFT
+      $a1
     Label : RIGHT
       "
       Label : CONTAIN
@@ -157,10 +159,10 @@ Label : CODE
           $c
         Label : CONCAT
           C
-    Label : LEFT
-      $a1
   Label : ELEMENT
     =
+    Label : LEFT
+      $a0
     Label : RIGHT
       "
       Label : CONTAIN
@@ -171,5 +173,3 @@ Label : CODE
           $b
         Label : CONCAT
           C
-    Label : LEFT
-      $a0

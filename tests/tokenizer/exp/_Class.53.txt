@@ -4,43 +4,43 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        var
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $a
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $b
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $c
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $d
+        Label : VAR
+          var
     Label : NAME
       x
     Label : EXTENDS
       y
     Label : IMPLEMENTS
       z
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $a
-        Label : VALUE
-          Void
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $b
-        Label : VALUE
-          Void
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $d
-        Label : VALUE
-          Void
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : DEFINE
-          $c
-        Label : VALUE
-          Void
-        Label : VAR
-          var

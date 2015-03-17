@@ -10,8 +10,6 @@ Label : CODE
       {
       Label : ELEMENT
         case
-        Label : CASE
-          'b'
         Label : CODE
           ;
           Label : ELEMENT
@@ -22,30 +20,34 @@ Label : CODE
               {
               Label : ELEMENT
                 case
-                Label : CASE
-                  'd'
                 Label : CODE
                   ;
-                  Label : ELEMENT
-                    =
-                    Label : RIGHT
-                      ""
-                    Label : LEFT
-                      $e
                   Label : ELEMENT
                     break
                     Label : LEVEL
                       void
+                  Label : ELEMENT
+                    =
+                    Label : LEFT
+                      $e
+                    Label : RIGHT
+                      ""
+                Label : CASE
+                  'd'
               Label : ELEMENT
                 default
                 Label : CODE
                   ;
                   Label : ELEMENT
+                    break
+                    Label : LEVEL
+                      void
+                  Label : ELEMENT
                     =
+                    Label : LEFT
+                      $f
                     Label : RIGHT
                       ::
-                      Label : CLASS
-                        G
                       Label : METHOD
                         h
                         Label : ARGUMENTS
@@ -54,12 +56,8 @@ Label : CODE
                             $j
                           Label : ARGUMENT
                             $i
-                    Label : LEFT
-                      $f
-                  Label : ELEMENT
-                    break
-                    Label : LEVEL
-                      void
+                      Label : CLASS
+                        G
           Label : ELEMENT
             break
             Label : LEVEL
@@ -68,3 +66,5 @@ Label : CODE
             ++
             Label : PREPLUSPLUS
               $k
+        Label : CASE
+          'b'

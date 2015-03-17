@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -24,15 +26,13 @@ Label : CODE
           'i'
         Label : CONCAT
           $g
-          Label : NAME
-            $g
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'h'
+          Label : NAME
+            $g
         Label : CONCAT
           'f'
       Label : ELSE
         'j'
-    Label : LEFT
-      $a

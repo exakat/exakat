@@ -4,52 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      A1
-    Label : EXTENDS
-      B
-    Label : IMPLEMENTS
-      D
-    Label : IMPLEMENTS
-      C
     Label : BLOCK
       {
       Label : ELEMENT
         void
-  Label : ELEMENT
-    class
-    Label : NAME
-      A2
-    Label : EXTENDS
-      B
-    Label : IMPLEMENTS
-      E
-    Label : IMPLEMENTS
-      D
-    Label : IMPLEMENTS
-      C
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
-  Label : ELEMENT
-    class
-    Label : NAME
-      A3
-    Label : IMPLEMENTS
-      F
-    Label : IMPLEMENTS
-      E
-    Label : IMPLEMENTS
-      D
-    Label : IMPLEMENTS
-      C
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
-  Label : ELEMENT
-    class
     Label : NAME
       A4
     Label : IMPLEMENTS
@@ -68,7 +26,49 @@ Label : CODE
       \
       Label : SUBNAME
         C
+  Label : ELEMENT
+    class
     Label : BLOCK
       {
       Label : ELEMENT
         void
+    Label : NAME
+      A3
+    Label : IMPLEMENTS
+      F
+    Label : IMPLEMENTS
+      E
+    Label : IMPLEMENTS
+      D
+    Label : IMPLEMENTS
+      C
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void
+    Label : NAME
+      A2
+    Label : EXTENDS
+      B
+    Label : IMPLEMENTS
+      E
+    Label : IMPLEMENTS
+      D
+    Label : IMPLEMENTS
+      C
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void
+    Label : NAME
+      A1
+    Label : EXTENDS
+      B
+    Label : IMPLEMENTS
+      D
+    Label : IMPLEMENTS
+      C

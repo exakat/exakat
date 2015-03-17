@@ -18,4 +18,6 @@ Label : CODE
       Label : THEN
         B
       Label : ELSE
-        C
+        ;
+        Label : ELEMENT
+          C

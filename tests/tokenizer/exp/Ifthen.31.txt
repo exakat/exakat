@@ -20,7 +20,7 @@ Label : CODE
           Block with if/elseif
           Label : ELEMENT
             =
-            Label : RIGHT
-              3
             Label : LEFT
               $c
+            Label : RIGHT
+              3

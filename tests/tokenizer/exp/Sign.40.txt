@@ -6,65 +6,65 @@ Label : CODE
     return
     Label : RETURN
       %
-      Label : RIGHT
-        7
       Label : LEFT
         (
         Label : CODE
           +
-          Label : RIGHT
-            (int)
-            Label : CAST
-              (
-              Label : CODE
-                /
-                Label : RIGHT
-                  6
-                Label : LEFT
-                  $f
           Label : LEFT
             -
-            Label : RIGHT
-              (int)
-              Label : CAST
-                (
-                Label : CODE
-                  /
-                  Label : RIGHT
-                    5
-                  Label : LEFT
-                    $e
             Label : LEFT
               +
+              Label : LEFT
+                (int)
+                Label : CAST
+                  +
+                  Label : LEFT
+                    +
+                    Label : LEFT
+                      (
+                      Label : CODE
+                        /
+                        Label : LEFT
+                          *
+                          Label : LEFT
+                            $a
+                          Label : RIGHT
+                            $b
+                        Label : RIGHT
+                          2
+                    Label : RIGHT
+                      $c
+                  Label : RIGHT
+                    3
               Label : RIGHT
                 (int)
                 Label : CAST
                   (
                   Label : CODE
                     /
-                    Label : RIGHT
-                      4
                     Label : LEFT
                       $d
-              Label : LEFT
-                +
-                Label : RIGHT
-                  3
-                Label : LEFT
-                  (int)
-                  Label : CAST
-                    +
                     Label : RIGHT
-                      $c
-                    Label : LEFT
-                      (
-                      Label : CODE
-                        *
-                        Label : RIGHT
-                          /
-                          Label : RIGHT
-                            2
-                          Label : LEFT
-                            $b
-                        Label : LEFT
-                          $a
+                      4
+            Label : RIGHT
+              (int)
+              Label : CAST
+                (
+                Label : CODE
+                  /
+                  Label : LEFT
+                    $e
+                  Label : RIGHT
+                    5
+          Label : RIGHT
+            (int)
+            Label : CAST
+              (
+              Label : CODE
+                /
+                Label : LEFT
+                  $f
+                Label : RIGHT
+                  6
+      Label : RIGHT
+        7

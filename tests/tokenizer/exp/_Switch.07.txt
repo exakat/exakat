@@ -10,19 +10,19 @@ Label : CODE
       {
       Label : ELEMENT
         case
-        Label : CASE
-          1
         Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              1
-            Label : LEFT
-              $x
-          Label : ELEMENT
-            =
-            Label : RIGHT
-              3
             Label : LEFT
               $y
+            Label : RIGHT
+              3
+          Label : ELEMENT
+            =
+            Label : LEFT
+              $x
+            Label : RIGHT
+              1
+        Label : CASE
+          1

@@ -4,37 +4,37 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      B
     Label : BLOCK
       {
       Label : ELEMENT
         ppp
-        Label : DEFINE
-          $a
         Label : VALUE
           void
+        Label : DEFINE
+          $a
         Label : PROTECTED
           protected
       Label : ELEMENT
         ppp
-        Label : DEFINE
-          $b
         Label : VALUE
           void
+        Label : DEFINE
+          $b
         Label : PROTECTED
           protected
       Label : ELEMENT
         function
-        Label : NAME
-          C
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
         Label : BLOCK
           {
           Label : ELEMENT
             return
             Label : RETURN
               $c
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          C
+    Label : NAME
+      B

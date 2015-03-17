@@ -3,8 +3,6 @@ Label : CODE
   ;
   Label : ELEMENT
     ==
-    Label : RIGHT
-      3
     Label : LEFT
       ->
       Label : OBJECT
@@ -19,75 +17,77 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+    Label : RIGHT
+      3
   Label : ELEMENT
     =
+    Label : LEFT
+      $c
     Label : RIGHT
       (
       Label : CODE
         new
         Label : NEW
           c
-    Label : LEFT
-      $c
   Label : ELEMENT
     class
-    Label : NAME
-      a
     Label : BLOCK
       {
       Label : ELEMENT
-        public
-        Label : PUBLIC
-          public
-        Label : DEFINE
-          $p
-        Label : VALUE
-          1
-  Label : ELEMENT
-    class
-    Label : NAME
-      b
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        function
-        Label : PUBLIC
-          public
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          p
+        class
         Label : BLOCK
           {
           Label : ELEMENT
-            return
-            Label : RETURN
-              3
-  Label : ELEMENT
-    var_dump
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        ==
-        Label : RIGHT
-          2
-        Label : LEFT
-          ->
-          Label : OBJECT
-            (
-            Label : CODE
-              new
-              Label : NEW
-                a
-          Label : PROPERTY
-            p
-  Label : ELEMENT
-    class
-    Label : NAME
-      c
-    Label : BLOCK
-      {
+            void
+        Label : NAME
+          c
       Label : ELEMENT
-        void
+        var_dump
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ==
+            Label : LEFT
+              ->
+              Label : OBJECT
+                (
+                Label : CODE
+                  new
+                  Label : NEW
+                    a
+              Label : PROPERTY
+                p
+            Label : RIGHT
+              2
+      Label : ELEMENT
+        class
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            function
+            Label : BLOCK
+              {
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  3
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+            Label : NAME
+              p
+            Label : PUBLIC
+              public
+        Label : NAME
+          b
+      Label : ELEMENT
+        public
+        Label : VALUE
+          1
+        Label : DEFINE
+          $p
+        Label : PUBLIC
+          public
+    Label : NAME
+      a

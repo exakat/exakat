@@ -7,16 +7,6 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : RIGHT
-          ==
-          Label : RIGHT
-            'D'
-          Label : LEFT
-            ->
-            Label : OBJECT
-              $a
-            Label : PROPERTY
-              C
         Label : LEFT
           !
           Label : NOT
@@ -29,12 +19,20 @@ Label : CODE
                   $a
                 Label : PROPERTY
                   B
+        Label : RIGHT
+          ==
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $a
+            Label : PROPERTY
+              C
+          Label : RIGHT
+            'D'
     Label : THEN
       ;
       Label : ELEMENT
         I
-      Label : ELEMENT
-        E
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -53,3 +51,5 @@ Label : CODE
                     B
                 Label : ARGUMENT
                   'G'
+      Label : ELEMENT
+        E

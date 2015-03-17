@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     while
-    Label : CONDITION
-      1
     Label : BLOCK
       {
       Label : ELEMENT
@@ -14,9 +12,11 @@ Label : CODE
           void
       Label : ELEMENT
         while
-        Label : CONDITION
-          1
         Label : BLOCK
           Block with While
           Label : ELEMENT
             void
+        Label : CONDITION
+          1
+    Label : CONDITION
+      1

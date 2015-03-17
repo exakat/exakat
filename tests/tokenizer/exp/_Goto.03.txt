@@ -3,19 +3,19 @@
 Label : CODE
   ;
   Label : ELEMENT
-    echo
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        'Bar'
+    :
+    Label : LABEL
+      a1
   Label : ELEMENT
     :
     Label : LABEL
       a2
   Label : ELEMENT
-    :
-    Label : LABEL
-      a1
+    echo
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        'Bar'
   Label : ELEMENT
     echo
     Label : ARGUMENTS

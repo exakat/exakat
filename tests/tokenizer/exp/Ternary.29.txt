@@ -3,6 +3,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
     Label : RIGHT
       ?
       Label : CONDITION
@@ -41,9 +47,3 @@ Label : CODE
           H
       Label : ELSE
         'L'
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        'b'

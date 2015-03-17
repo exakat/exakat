@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     ::
+    Label : PROPERTY
+      $b
     Label : CLASS
       [
       Label : VARIABLE
         $x
       Label : INDEX
         1
-    Label : PROPERTY
-      $b

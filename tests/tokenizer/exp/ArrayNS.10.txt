@@ -4,50 +4,20 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : RIGHT
-      chop
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          substr
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              $e
     Label : LEFT
       [
       Label : VARIABLE
         [
         Label : VARIABLE
-          $a
-        Label : INDEX
-          $b
-      Label : INDEX
-        [
-        Label : VARIABLE
-          $c
-        Label : INDEX
-          $d
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      $i
-    Label : LEFT
-      [
-      Label : VARIABLE
-        [
-        Label : VARIABLE
-          ::
-          Label : CLASS
-            C
-          Label : PROPERTY
-            [
-            Label : VARIABLE
+          [
+          Label : VARIABLE
+            ::
+            Label : PROPERTY
               $d
-            Label : INDEX
-              $e
+            Label : CLASS
+              C
+          Label : INDEX
+            $e
         Label : INDEX
           $f
       Label : INDEX
@@ -56,14 +26,10 @@ Label : CODE
           $g
         Label : INDEX
           'h'
+    Label : RIGHT
+      $i
   Label : ELEMENT
     =
-    Label : RIGHT
-      +
-      Label : RIGHT
-        1
-      Label : LEFT
-        $j
     Label : LEFT
       [
       Label : VARIABLE
@@ -78,14 +44,42 @@ Label : CODE
           $h
         Label : INDEX
           $i
+    Label : RIGHT
+      +
+      Label : LEFT
+        $j
+      Label : RIGHT
+        1
   Label : ELEMENT
     =
-    Label : RIGHT
+    Label : LEFT
       [
       Label : VARIABLE
-        $f
+        [
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          $b
       Label : INDEX
-        'e'
+        [
+        Label : VARIABLE
+          $c
+        Label : INDEX
+          $d
+    Label : RIGHT
+      chop
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          substr
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              $e
+  Label : ELEMENT
+    =
     Label : LEFT
       [
       Label : VARIABLE
@@ -102,3 +96,9 @@ Label : CODE
               'c'
         Label : INDEX
           'd'
+    Label : RIGHT
+      [
+      Label : VARIABLE
+        $f
+      Label : INDEX
+        'e'

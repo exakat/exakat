@@ -7,12 +7,18 @@ Label : CODE
       (
       Label : CODE
         &&
+        Label : LEFT
+          >
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'b'
+          Label : RIGHT
+            0
         Label : RIGHT
           <=
-          Label : RIGHT
-            new
-            Label : NEW
-              F
           Label : LEFT
             new
             Label : NEW
@@ -25,16 +31,10 @@ Label : CODE
                     $d
                   Label : INDEX
                     'e'
-        Label : LEFT
-          >
           Label : RIGHT
-            0
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'b'
+            new
+            Label : NEW
+              F
     Label : THEN
       {
       Label : ELEMENT

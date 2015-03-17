@@ -4,41 +4,41 @@ Label : CODE
   ;
   Label : ELEMENT
     class
-    Label : NAME
-      a
     Label : BLOCK
       {
       Label : ELEMENT
         static
-        Label : PUBLIC
-          public
-        Label : DEFINE
-          $b
         Label : VALUE
           1
+        Label : DEFINE
+          $b
+        Label : PUBLIC
+          public
         Label : STATIC
           static
       Label : ELEMENT
         static
-        Label : PRIVATE
-          private
-        Label : DEFINE
-          $d
         Label : VALUE
           "2"
+        Label : DEFINE
+          $d
+        Label : PRIVATE
+          private
         Label : STATIC
           static
       Label : ELEMENT
         static
-        Label : PROTECTED
-          protected
-        Label : DEFINE
-          $c
         Label : VALUE
           array
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
+        Label : DEFINE
+          $c
+        Label : PROTECTED
+          protected
         Label : STATIC
           static
+    Label : NAME
+      a

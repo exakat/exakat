@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        c
     Label : RIGHT
       new
       Label : NEW
@@ -16,9 +22,3 @@ Label : CODE
             void
             Label : ARGUMENT
               void
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        c

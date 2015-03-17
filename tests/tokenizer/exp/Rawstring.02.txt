@@ -10,14 +10,14 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        A
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $location
       Label : ELEMENT
+        C
+      Label : ELEMENT
         B
       Label : ELEMENT
-        C
+        A

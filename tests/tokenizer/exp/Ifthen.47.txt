@@ -10,8 +10,6 @@ Label : CODE
     Label : THEN
       ;
       Label : ELEMENT
-        A
-      Label : ELEMENT
         B
       Label : ELEMENT
         print
@@ -23,6 +21,8 @@ Label : CODE
               $b
             Label : INDEX
               'c'
+      Label : ELEMENT
+        A
     Label : ELSE
       elseif
       Label : CONDITION
@@ -30,4 +30,6 @@ Label : CODE
         Label : CODE
           $d
       Label : THEN
-        C
+        ;
+        Label : ELEMENT
+          C
