@@ -34,9 +34,11 @@ class CleanDb implements Tasks {
     
     public function run(\Config $config) {
         if ($config->quick) {
+            display("Cleaning with restart\n");
             shell_exec('cd '.$config->dir_root.'/neo4j/;./bin/neo4j stop; rm -rf data; mkdir data; ./bin/neo4j start');
-            print "Database cleaned with restart\n";
+            display("Database cleaned with restart\n");
         } else {
+            display("Cleaning with cypher\n");
             $client = new Client();
         
             $queryTemplate = 'MATCH (n) 
@@ -44,7 +46,7 @@ OPTIONAL MATCH (n)-[r]-()
 DELETE n,r';
         	$query = new Query($client, $queryTemplate, array());
 	        $result = $query->getResultSet();
-            print "Database cleaned\n";
+            display("Database cleaned\n");
         }
     }
 }
