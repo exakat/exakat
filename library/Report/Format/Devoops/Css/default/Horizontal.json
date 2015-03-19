@@ -1,5 +1,5 @@
 {
 "displayTitles":true,
-"titles":["Code", "Description", "File", "Line"],
-"sort":["Code", "Description", "File", "Line"]
+"titles":["Code", "File", "Line"],
+"sort":["Code", "File", "Line"]
 }

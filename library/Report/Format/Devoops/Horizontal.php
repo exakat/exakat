@@ -75,7 +75,6 @@ $html .= <<<HTML
 
 										<tr>
 											<td><pre class="prettyprint linenums">{$row['code']}</pre></td>
-											<td><a href="Documentation.html#$id">{$row['desc']}</a></td>
 											<td>{$row['file']}</td>
 											<td>{$row['line']}</td>
 										</tr>
