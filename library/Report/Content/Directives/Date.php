@@ -25,21 +25,16 @@ namespace Report\Content\Directives;
 
 use Everyman\Neo4j\Client;
 
-class Standard extends Directives {
+class Date extends Directives {
     function __construct(Client $neo4j) {
         parent::__construct($neo4j);
-        $this->name         = 'Standard';
+        $this->name         = 'Date';
         $this->hasDirective = self::ON;
 
-        $this->directives[] = array('name' => 'memory_limit',
-                                    'suggested' => '120',
-                                    'documentation' => 'This sets the maximum amount of memory in bytes that a script is allowed to allocate. This helps prevent poorly written scripts for eating up all available memory on a server. It is recommended to set this as low as possible and avoid removing the limit.');
+        $this->directives[] = array('name' => 'date.timezone',
+                                    'suggested' => 'Europe/Amsterdam',
+                                    'documentation' => 'It is not safe to rely on the system\'s timezone settings. Make sure the directive date.timezone is set in php.ini.');
 
-        $this->directives[] = array('name' => 'expose_php',
-                                    'suggested' => 'Off',
-                                    'documentation' => 'Exposes to the world that PHP is installed on the server. For security reasons, it is better to keep this hidden.');
-
-        $this->directives[] = $this->extraConfiguration($this->name, 'info');
     }
 }
 

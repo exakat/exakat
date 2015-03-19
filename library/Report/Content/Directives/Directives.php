@@ -31,11 +31,11 @@ abstract class Directives implements \Iterator {
     
     const NO_SUGGESTION = '&nbsp';
     
-    protected $directives = array();
-    public    $name       = 'No Name';
-    private   $position   = 0;
-    private   $neo4j      = null;
-    private   $hasDirective = false;
+    protected $directives   = array();
+    public    $name         = 'No Name';
+    private   $position     = 0;
+    private   $neo4j        = null;
+    protected $hasDirective = self::OFF;
 
     public function __construct(Client $neo4j) {
         $this->neo4j    = $neo4j;
