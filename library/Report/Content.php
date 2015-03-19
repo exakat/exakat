@@ -28,6 +28,7 @@ class Content {
     protected $project = null;
     protected $neo4j   = null;
     protected $array   = array();
+    protected $hasResults = false;
     
     public function setNeo4j($client) {
         $this->neo4j = $client;
@@ -43,6 +44,10 @@ class Content {
     
     public function getArray() {
         return $this->array;
+    }
+
+    public function hasResults() {
+        return $this->hasResults;
     }
 
     public function query($query) {

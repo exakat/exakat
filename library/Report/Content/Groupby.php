@@ -27,8 +27,6 @@ class Groupby extends \Report\Content {
     protected $analyzers = array();
     protected $sort = array('Critical', 'Major', 'Minor');
 
-//    private $sort = \Report\Content\Groupby::SORT_NONE;
-
     const SORT_NONE = 0;
     const SORT_VALUES = 1;
     const SORT_RVALUES = 2;
@@ -46,10 +44,9 @@ class Groupby extends \Report\Content {
         }
     }
 
-    public function getArray() {
-        $array = array();
+    public function collect() {
         foreach($this->sort as $s) {
-            $array[$s] = 0;
+            $this->array[$s] = 0;
         }
         
         $m = 'getSeverity';
@@ -57,12 +54,17 @@ class Groupby extends \Report\Content {
         foreach($this->analyzers as $a) {
             $analyzer = \Analyzer\Analyzer::getInstance($a, $this->neo4j);
             
-            $array[$analyzer->$m()] += $analyzer->$c();
+            $this->array[$analyzer->$m()] += $analyzer->$c();
         }
         
-        $this->sort_array($array);
-        
-        return $array;
+        $this->sort_array($this->array);
+        $this->hasResults = (array_sum($this->array) !== 0);
+
+        return true;
+    }
+
+    public function getArray() {
+        return $this->array;
     }
     
     public function sort_array(&$array) {

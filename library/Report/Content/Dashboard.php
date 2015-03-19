@@ -31,7 +31,12 @@ class Dashboard extends \Report\Content {
 
         $groupBy = new \Report\Content\Groupby($this->neo4j);
         $groupBy->setNeo4j($this->neo4j);
-        $groupBy->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers($this->theme) );
+        $groupBy->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers($this->theme));
+        $groupBy->collect();
+        $this->hasResults = $groupBy->hasResults();
+        if (!$this->hasResults) {
+            return true;
+        }
         $this->array['upLeft'] = $groupBy;
         
         $infoBox = new \Report\Content\Infobox();
@@ -49,7 +54,7 @@ class Dashboard extends \Report\Content {
         $listByFile->setNeo4j($this->neo4j);
         $listByFile->addAnalyzer(\Analyzer\Analyzer::getThemeAnalyzers($this->theme));
         $this->array['downRight'] = $listByFile;
-        
+
         return true;
     }
     
