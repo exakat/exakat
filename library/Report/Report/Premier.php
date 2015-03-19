@@ -56,23 +56,36 @@ class Premier extends Report {
 /////////////////////////////////////////////////////////////////////////////////////
 
         $this->createLevel1('Analysis');
+
         $this->createLevel2('Code smells');
         $analyzer = $this->getContent('Dashboard');
         $analyzer->setThema('Analyze');
         $analyzer->collect();
-        $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
+        if ($analyzer->hasResults()) {
+            $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
+        }  else {
+            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean.');
+        }
 
         $this->createLevel2('Dead code');
         $analyzer = $this->getContent('Dashboard');
         $analyzer->setThema('Dead code');
         $analyzer->collect();
-        $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
+        if ($analyzer->hasResults()) {
+            $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
+        }  else {
+            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean.');
+        }
 
         $this->createLevel2('Security');
         $analyzer = $this->getContent('Dashboard');
         $analyzer->setThema('Security');
         $analyzer->collect();
-        $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
+        if ($analyzer->hasResults()) {
+            $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
+        } else {
+            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean.');
+        }
 
 /////////////////////////////////////////////////////////////////////////////////////
 /// Compilations
