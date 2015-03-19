@@ -52,9 +52,9 @@ class Tree extends \Report\Format\Devoops {
             case 'Yes' : 
                 return '<i class="fa fa-check"></i>';
             case 'No' : 
-                return '<i class="fa fa-times-circle-o"></i>';
-            case 'Not run' : 
                 return '&nbsp;';
+            case 'Not run' : 
+                return '<i class="fa fa-times-circle-o"></i>';
             default : 
                 return '&nbsp;';
         }
