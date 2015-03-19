@@ -29,41 +29,36 @@ class ReportInfo extends \Report\Content {
     public function collect() {
         $config = \Config::factory();
         
+        $this->array[] = array('Code name', $config->project_name);
+        if (!empty($config->project_description)) {
+            $this->array[] = array('Code description', $config->project_description);
+        }
+        if (!empty($config->project_packagist)) {
+            $this->array[] = array('Packagist', '<a href="https://packagist.org/packages/'.$config->project_packagist.'">'.$config->project_packagist.'</a>');
+        }
         if (file_exists($config->projects_root.'/projects/'.$this->project.'/code/.git/config')) {
             $gitConfig = file_get_contents($config->projects_root.'/projects/'.$this->project.'/code/.git/config');
             preg_match('#url = (\S+)\s#is', $gitConfig, $r);
-            $this->list['Git URL'] = $r[1];
+            $this->array[] = array('Git URL', $r[1]);
             
             $res = shell_exec('cd '.$config->projects_root.'/projects/'.$this->project.'/code/; git branch');
-            $this->list['Git branch'] = trim($res);
+            $this->array[] = array('Git branch', trim($res));
 
             $res = shell_exec('cd '.$config->projects_root.'/projects/'.$this->project.'/code/; git rev-parse HEAD');
-            $this->list['Git commit'] = trim($res);
+            $this->array[] = array('Git commit', trim($res));
         } else {
-            $this->list['Repository URL'] = 'Downloaded archive';
+            $this->array[] = array('Repository URL', 'Downloaded archive');
         }
 
         $datastore = new \Datastore(\Config::factory());
         
-        $this->list['Number of PHP files'] = $datastore->getHash('files');
-        $this->list['Number of lines of code'] = $datastore->getHash('phploc');
+        $this->array[] = array('Number of PHP files', $datastore->getHash('files'));
+        $this->array[] = array('Number of lines of code', $datastore->getHash('phploc'));
 
-        $this->list['Audit software version'] = \Exakat::VERSION;
+        $this->array[] = array('Report production date', date('r', strtotime('now')));
         
-        $this->list['Audit execution date'] = date('r', strtotime($datastore->getHash('date_start')) );
-        $this->list['Report production date'] = date('r', strtotime('now'));
-        
-        $this->list['PHP version'] = substr(shell_exec('php -v'), 0, 11);
-
-        $this->list['Audit software version'] = \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ';
-    }
-
-    public function getArray() {
-        $return = array();
-        foreach($this->list as $k => $v) {
-            $return[] = array($k, $v);
-        }
-        return $return;
+        $this->array[] = array('PHP used', PHP_VERSION);
+        $this->array[] = array('Exakat version', \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ');
     }
 }
 

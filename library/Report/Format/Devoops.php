@@ -104,12 +104,25 @@ class Devoops extends \Report\Format {
         
         $html = file_get_contents($config->dir_root.'/media/devoops/index.exakat.html');
         $html = str_replace('<menu>', $sidebar, $html);
-        $html = str_replace('<title>Exakat report</title>', '<title>Exakat report for '.$this->projectName.'</title>', $html);
+
+        $html = str_replace('EXAKAT_VERSION', \Exakat::VERSION, $html);
+        $html = str_replace('EXAKAT_BUILD', \Exakat::BUILD, $html);
+        $html = str_replace('PROJECT_NAME', $this->projectName, $html);
+
         file_put_contents($dir.'/index.html', $html);
         
         // writing the content files in the ajax folder
         $total = 0;
         foreach($this->files as $name => $html) {
+            $html = <<<HTML
+<script language="javascript">
+if (!document.getElementById("main")) {
+    window.location.href = "../index.html#ajax/$name";
+}
+</script>
+
+HTML
+.$html;
             $total += file_put_contents($dir.'/ajax/'.$name, $html);
         }
         

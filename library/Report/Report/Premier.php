@@ -51,9 +51,6 @@ class Premier extends Report {
         $this->addContent('Text', 'Presentation of the audit', 'first');
         $this->addContent('SimpleTable', 'ReportInfo', 'reportinfo'); 
 
-        $this->createLevel2('Application configuration'); 
-        $this->addContent('Text', 'Presentation of the application');
-
 /////////////////////////////////////////////////////////////////////////////////////
 /// Main dashboards
 /////////////////////////////////////////////////////////////////////////////////////
