@@ -75,12 +75,10 @@ class Cypher {
         $client = new Client();
         
         // Load Nodes
-        print "nodes index\n";
         $queryTemplate = 'CREATE INDEX ON :Token(id)';
     	$query = new Query($client, $queryTemplate, array());
 	    $result = $query->getResultSet();
         
-        print "nodes\n";
         $queryTemplate = 'LOAD CSV WITH HEADERS FROM "file:/Users/famille/Desktop/analyze/nodes.cypher.csv" AS csvLine
 CREATE (token:Token { 
 id: toInt(csvLine.id),
@@ -189,8 +187,7 @@ return token';
         }
         foreach(static::$links as $label => $links) {
             if (!isset(static::$fp_rels[$label])) {
-                print_r(array_keys(static::$fp_rels));
-                die(" NO $label\n");
+                die(print_r(array_keys(static::$fp_rels))."\nNO $label\n");
             }
             $fp = static::$fp_rels[$label];
             foreach($links as $id => $link) {
