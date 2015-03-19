@@ -32,7 +32,7 @@ class Directives extends \Report\Content {
         // extensions configurations
         ///////////////////////////////////////////////////////////////
 
-        $directives = array('Standard', 'Filesystem', 'FileUpload', 
+        $directives = array('Standard', 'Date', 'Filesystem', 'FileUpload', 
                             // standard extensions
                             'Apache', 'Assertion', 'Curl', 
                             'Filter', 'Image', 'Intl',
