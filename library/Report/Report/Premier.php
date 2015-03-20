@@ -87,6 +87,16 @@ class Premier extends Report {
             $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean.');
         }
 
+        $this->createLevel2('Performances');
+        $analyzer = $this->getContent('Dashboard');
+        $analyzer->setThema('Performances');
+        $analyzer->collect();
+        if ($analyzer->hasResults()) {
+            $this->addContent('Dashboard', $analyzer, 'deadCodeDashboard');
+        } else {
+            $this->addContent('Text', 'Nothing noteworthy was found. We looked hard, but it looks clean.');
+        }
+
 /////////////////////////////////////////////////////////////////////////////////////
 /// Compilations
 /////////////////////////////////////////////////////////////////////////////////////
