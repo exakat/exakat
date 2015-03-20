@@ -68,7 +68,8 @@ class Project implements Tasks {
         
         $datastore = new \Datastore($config);
         $datastore->cleanTable('hash');
-        $datastore->addRow('hash', array('audit_start' => time(),
+        $audit_start = time();
+        $datastore->addRow('hash', array('audit_start' => $audit_start,
                                          'exakat_version' => \Exakat::VERSION,
                                          'exakat_build' => \Exakat::BUILD,
                                          ));
@@ -148,6 +149,10 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
 
         shell_exec('php '.$this->executable.' stat > '.$config->projects_root.'/projects/'.$project.'/log/stat.log');
         display("Stats 2\n");
+        
+        $audit_end = time();
+        $datastore->addRow('hash', array('audit_end'    => $audit_end,
+                                         'audit_length' => $audit_end - $audit_start));
 
         $this->logTime('Final');
         display("End 2\n");
