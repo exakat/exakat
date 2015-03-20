@@ -1070,7 +1070,24 @@ GREMLIN;
 
         return $this;
     }
-    
+
+    public function nextVariable($code) {
+        $this->addMethod(<<<GREMLIN
+sideEffect{ init = it;}
+.filter{ nextVariable = []; it
+.in.loop(1){it.object.atom != "Function"}{(it.object.atom == "Function") && (it.object.out("NAME").hasNot("code", "").any())}
+.out('BLOCK').out.loop(1){true}{it.object.atom == 'Variable' && it.object.line > init.line && it.object.code == init.code}
+.fill(nextVariable);
+nextVariable.sort{ it.line}.size() > 0;
+}
+.transform{ nextVariable[0]}
+
+GREMLIN
+);
+
+        return $this;
+    }
+
     public function inIs($edgeName) {
         if (is_array($edgeName)) {
             // @todo
