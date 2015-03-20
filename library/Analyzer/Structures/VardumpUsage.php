@@ -27,25 +27,45 @@ use Analyzer;
 
 class VardumpUsage extends Analyzer\Analyzer {
     public function analyze() {
+        $debug_functions = array('\\var_dump', '\\print_r', '\\var_export');
+        
         // print_r (but not print_r($a, 1))
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\var_dump', '\\print_r'))
+             ->fullnspath(array('\\print_r', '\\var_export'))
              ->outIs('ARGUMENTS')
              ->rankIs('ARGUMENT', 1)
              ->codeIsNot(array('true', 1))
              ->back('first');
         $this->prepareQuery();
+        
+        $this->atomIs('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath('\\var_dump')
+             ->back('first');
+        $this->prepareQuery();
 
-        // var_dump($x, 1) will not print directly, so it's OK 
         // (well, we need to check if the result string is not printed now...)
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\var_dump', '\\print_r'))
+             ->fullnspath(array('\\var_export', '\\print_r'))
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
+             ->back('first');
+        $this->prepareQuery();
+
+        // echo '<pre>'.print_r($a, 1);
+        $this->atomIs('Functioncall')
+             ->tokenIs(array('T_ECHO', 'T_PRINT'))
+             ->outIs('ARGUMENTS')
+             ->atomInside('Functioncall')
+             ->fullnspath(array('\\var_export', '\\print_r'))
+             ->outIs('ARGUMENTS')
+             ->rankIs('ARGUMENT', 1)
+             ->code(array('true', 1))
              ->back('first');
         $this->prepareQuery();
         
@@ -59,7 +79,7 @@ class VardumpUsage extends Analyzer\Analyzer {
              ->is('rank', 0)
              ->atomIs('String')
              ->tokenIsNot('T_QUOTE')
-             ->noDelimiter(array('print_r', 'var_dump'))
+             ->noDelimiter(array('print_r', 'var_dump', 'var_export'))
              ->back('first');
         $this->prepareQuery();
     }
