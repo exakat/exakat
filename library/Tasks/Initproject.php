@@ -85,6 +85,8 @@ file_extensions =
 
 project_name = "$project";
 project_url = "$repo_url";
+project_description = "";
+project_packagist = "";
 
 INI;
 
