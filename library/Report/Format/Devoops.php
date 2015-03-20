@@ -109,11 +109,10 @@ class Devoops extends \Report\Format {
         $html = str_replace('EXAKAT_BUILD', \Exakat::BUILD, $html);
         $html = str_replace('PROJECT_NAME', $this->projectName, $html);
 
-        file_put_contents($dir.'/index.html', $html);
+        file_put_contents($dir.'/index.'.$this->fileExtension, $html);
         
         // writing the content files in the ajax folder
         $total = 0;
-        $sitemap = array();
         foreach($this->files as $name => $html) {
             $html = <<<HTML
 <script language="javascript">
@@ -125,27 +124,8 @@ if (!document.getElementById("main")) {
 HTML
 .$html;
             $total += file_put_contents($dir.'/ajax/'.$name, $html);
-            $date = date('Y-m-d');
-            $sitemap[] = <<<SITEMAP
-  <url>
-    <loc>http://www.exakat.com/reports/{$this->projectName}/index.html#/ajax/$name</loc>
-    <lastmod>$date</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-SITEMAP;
         }
 
-        $sitemap = join('', $sitemap);
-        $sitemap = <<<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-$sitemap
-</urlset>
-XML;
-        file_put_contents($dir.'/sitemap.xml', $html);
-        
         // @todo : check that ZIP is available
         // @todo support other format for archiving
         shell_exec('cd '.dirname($dir).'; zip -r '.basename($dir).' '.basename($dir).' 2 >> /dev/null'); 
