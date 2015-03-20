@@ -34,6 +34,7 @@ class Analyze implements Tasks {
         $project = $config->project;
         $begin = microtime(true);
 
+        $datastore = new \Datastore($config);
         if ($config->program !== null) {
             $analyzer = $config->program;
             if (\Analyzer\Analyzer::getClass($analyzer)) {
@@ -51,9 +52,9 @@ class Analyze implements Tasks {
             if (!$analyzers_class = \Analyzer\Analyzer::getThemeAnalyzers($thema)) {
                 die("No such thema as '$thema'. Aborting\n");
             }
+            $datastore->addRow('hash', array($config->thema => count($analyzers_class) ) );
         } else {
-            print "Usage :php exakat analyze -P <One/rule> -T <\"Thema\"> -p <project>\n";
-            die();
+            die( "Usage :php exakat analyze -P <One/rule> -T <\"Thema\"> -p <project>\n");
         }
 
         $client = new Client();
@@ -98,7 +99,7 @@ class Analyze implements Tasks {
                         if (!isset($dependencies[$v])) {
                             $x = \Analyzer\Analyzer::getInstance($v, $client);
                             if ($x === null) {
-                                print "No such dependency as '$v'. Ignoring\n";
+                                display( "No such dependency as '$v'. Ignoring\n");
                                 continue; 
                             }
                             $dep = $x->dependsOn();
@@ -125,10 +126,8 @@ class Analyze implements Tasks {
             }
 
             if (!empty($dependencies)) {
-                print "Dependencies depending on each other : can't finalize. Aborting\n";
-                print_r($dependencies);
-    
-                die();
+                die( "Dependencies depending on each other : can't finalize. Aborting\n".
+                      print_r($dependencies, 1));
             }
         }
 
@@ -144,7 +143,7 @@ class Analyze implements Tasks {
             }
     
             if ($config->noRefresh && $analyzer->isDone()) {
-                print "$analyzer_class is already done\n";
+                display( "$analyzer_class is already processed\n");
                 continue 1; 
             }
             $analyzer->init();
@@ -158,7 +157,7 @@ GREMLIN;
                 $arguments = array('type' => 'IN');
                 $result = new \Everyman\Neo4j\Gremlin\Query($client, $query, $arguments);
 
-                print "$analyzer_class is not compatible with PHP version $config->version. Ignoring\n";
+                display( "$analyzer_class is not compatible with PHP version $config->version. Ignoring\n");
             } elseif (!$analyzer->checkPhpConfiguration($Php)) {
                 $analyzer = str_replace('\\', '\\\\', $analyzer_class);
             
@@ -168,19 +167,19 @@ GREMLIN;
                 $arguments = array('type' => 'IN');
                 $result = new \Everyman\Neo4j\Gremlin\Query($client, $query, $arguments);
 
-                print "$analyzer_class is not compatible with PHP configuration of this version. Ignoring\n";
+                display( "$analyzer_class is not compatible with PHP configuration of this version. Ignoring\n");
             } else {
                 $analyzer->run();
 
                 $count = $analyzer->getRowCount();
                 $total_results += $count;
-                print "$analyzer_class fait ($count)\n";
+                display( "$analyzer_class fait ($count)\n");
                 $end = microtime(true);
                 $log->log("$analyzer_class\t".($end - $begin)."\t$count");
             }
         }
 
-        print "Done\n";
+        display( "Done\n");
     }
 }
 
