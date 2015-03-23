@@ -33,13 +33,23 @@ class CleanDb implements Tasks {
     private $client = null;
     
     public function run(\Config $config) {
-        if ($config->quick) {
+        $client = new Client();
+
+        $queryTemplate = 'start n=node(*)
+match n
+return count(n)';
+        $query = new Query($client, $queryTemplate, array());
+        $result = $query->getResultSet();
+        $nodes = $result[0][0];
+        display($nodes." nodes in the database\n");
+
+        $begin = microtime(true);
+        if ($config->quick || $nodes > 10000) {
             display("Cleaning with restart\n");
             shell_exec('cd '.$config->dir_root.'/neo4j/;./bin/neo4j stop; rm -rf data; mkdir data; ./bin/neo4j start');
             display("Database cleaned with restart\n");
         } else {
             display("Cleaning with cypher\n");
-            $client = new Client();
         
             $queryTemplate = 'MATCH (n) 
 OPTIONAL MATCH (n)-[r]-() 
@@ -48,6 +58,8 @@ DELETE n,r';
 	        $result = $query->getResultSet();
             display("Database cleaned\n");
         }
+        $end = microtime(true);
+        display(number_format(($end - $begin) * 1000, 0)." ms\n");
     }
 }
 
