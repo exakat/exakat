@@ -53,11 +53,11 @@ class Cypher {
         if (file_exists('nodes.cypher.csv') && static::$file_saved == 0) {
             unlink('nodes.cypher.csv');
         } 
-        if (file_exists($config->dir_root.'/rels.cypher.next.csv') && static::$file_saved == 0) {
-            unlink($config->dir_root.'/rels.cypher.next.csv');
-            unlink($config->dir_root.'/rels.cypher.element.csv');
-            unlink($config->dir_root.'/rels.cypher.file.csv');
-            unlink($config->dir_root.'/rels.cypher.indexed.csv');
+        if (file_exists($config->project_root.'/rels.cypher.next.csv') && static::$file_saved == 0) {
+            unlink($config->project_root.'/rels.cypher.next.csv');
+            unlink($config->project_root.'/rels.cypher.element.csv');
+            unlink($config->project_root.'/rels.cypher.file.csv');
+            unlink($config->project_root.'/rels.cypher.indexed.csv');
         }
     }
 
@@ -80,7 +80,7 @@ class Cypher {
     	$query = new Query($client, $queryTemplate, array());
 	    $result = $query->getResultSet();
         
-        $queryTemplate = 'LOAD CSV WITH HEADERS FROM "file:'.$config->dir_root.'/nodes.cypher.csv" AS csvLine
+        $queryTemplate = 'LOAD CSV WITH HEADERS FROM "file:'.$config->project_root.'/nodes.cypher.csv" AS csvLine
 CREATE (token:Token { 
 id: toInt(csvLine.id),
 token: csvLine.token,
@@ -118,7 +118,7 @@ return token;
                            'indexed' => 'INDEXED');
         foreach($relations as $name => $relation) {
             $queryTemplate = 'USING PERIODIC COMMIT
-LOAD CSV WITH HEADERS FROM "file:'.$config->dir_root.'/rels.cypher.'.$name.'.csv" AS csvLine
+LOAD CSV WITH HEADERS FROM "file:'.$config->project_root.'/rels.cypher.'.$name.'.csv" AS csvLine
 MATCH (token:Token { id: toInt(csvLine.start)}),(token2:Token { id: toInt(csvLine.end)})
 CREATE (token)-[:'.$relation.']->(token2)
 return token';
@@ -126,11 +126,11 @@ return token';
 	        $result = $query->getResultSet();
 	    }
 
-        unlink($config->dir_root.'/nodes.cypher.csv');
-        unlink($config->dir_root.'/rels.cypher.next.csv');
-        unlink($config->dir_root.'/rels.cypher.element.csv');
-        unlink($config->dir_root.'/rels.cypher.file.csv');
-        unlink($config->dir_root.'/rels.cypher.indexed.csv');
+        unlink($config->project_root.'/nodes.cypher.csv');
+        unlink($config->project_root.'/rels.cypher.next.csv');
+        unlink($config->project_root.'/rels.cypher.element.csv');
+        unlink($config->project_root.'/rels.cypher.file.csv');
+        unlink($config->project_root.'/rels.cypher.indexed.csv');
 
         return true;
     }

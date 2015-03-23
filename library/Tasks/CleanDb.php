@@ -46,7 +46,7 @@ return count(n)';
         $begin = microtime(true);
         if ($config->quick || $nodes > 10000) {
             display("Cleaning with restart\n");
-            shell_exec('cd '.$config->dir_root.'/neo4j/;./bin/neo4j stop; rm -rf data; mkdir data; ./bin/neo4j start');
+            shell_exec('cd '.$config->project_root.'/neo4j/;./bin/neo4j stop; rm -rf data; mkdir data; ./bin/neo4j start');
             display("Database cleaned with restart\n");
         } else {
             display("Cleaning with cypher\n");
