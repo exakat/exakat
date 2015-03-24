@@ -93,6 +93,11 @@ class Build_root implements Tasks {
 
         display("String unicode done\n");
 
+        $this->query("g.idx('atoms')[['token':'String']].has('noDelimiter', null).filter{ it.code in ['\"\"', \"''\"]}.each{ it.setProperty('noDelimiter', ''); };");
+        $this->logTime('Unicodes block');
+
+        display("Check for empty strings\n");
+
         // resolving the constants
         $extra_indices = array('constants', 'classes', 'interfaces', 'traits', 'functions', 'delete', 'namespaces', 'files');
         foreach($extra_indices as $indice) {
