@@ -1722,6 +1722,7 @@ while( current.atom == null && current.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY
 
 g.addEdge(previous, b1, 'NEXT');
 g.addEdge(b1, current, 'NEXT');
+g.idx('atoms').put('atom', 'Array', b1)
 
 if (current.token == 'T_OPEN_PARENTHESIS') {
     g.addEdge(g.idx('racines')[['token':'S_ARRAY']].next(), b1, 'INDEXED');
