@@ -151,7 +151,10 @@ class Premier extends Report {
 
         if (count($analyzes) > 0) {
             $this->createLevel2('Results counts');
-            $this->addContent('SimpleTableResultCounts', 'AnalyzerResultCounts');
+            $resultsCount = new \Report\Content\AnalyzerResultCounts();
+            $resultsCount->setAnalyzers($analyzes2);
+            $resultsCount->collect();
+            $this->addContent('SimpleTableResultCounts', $resultsCount);
 
             foreach($analyzes2 as $analyzer) {
                 if ($analyzer->hasResults()) {
@@ -168,7 +171,7 @@ class Premier extends Report {
                             $description = 'No documentation yet';
                         }
                         if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
-                            $this->addContent('Text', 'clearPHP : '.$clearPHP.'<br />', 'textLead');
+                            $this->addContent('Text', 'clearPHP : <a href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearPHP.'.md">'.$clearPHP.'</a><br />', 'textLead');
                         }
                         $this->addContent('TextLead', $description, 'textLead');
                         $this->addContent('Horizontal', $analyzer);
