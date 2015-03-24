@@ -33,8 +33,14 @@ class CleanDb implements Tasks {
     private $client = null;
     
     public function run(\Config $config) {
-        $client = new Client();
-
+        try {
+            $client = new Client();
+            $client->getServerInfo();
+        } catch (\Exception $e) {
+            display("Couldn't access Neo4j\n");
+            shell_exec('cd neo4j; ./bin/neo4j start');
+        }
+        
         $queryTemplate = 'start n=node(*)
 match n
 return count(n)';
@@ -44,10 +50,21 @@ return count(n)';
         display($nodes." nodes in the database\n");
 
         $begin = microtime(true);
-        if ($config->quick || $nodes > 10000) {
+        if ($nodes == 0) {
+            display( "No nodes in neo4j. No need to clean\n");
+        } elseif ($config->quick || $nodes > 10000) {
             display("Cleaning with restart\n");
-            shell_exec('cd '.$config->project_root.'/neo4j/;./bin/neo4j stop; rm -rf data; mkdir data; ./bin/neo4j start');
+            shell_exec('cd '.$config->projects_root.'/neo4j/;./bin/neo4j stop; rm -rf data; mkdir data; mkdir data/log');
+            shell_exec('cd '.$config->projects_root.'/neo4j/;./bin/neo4j start');
             display("Database cleaned with restart\n");
+
+            try {   
+                $client = new Client();
+                $client->getServerInfo();
+                display( "Restarted Neo4j cleanly \n");
+            } catch (\Exception $e) {
+                display( " Didn't restart neo4j cleanly\n");
+            }
         } else {
             display("Cleaning with cypher\n");
         
