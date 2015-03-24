@@ -32,15 +32,18 @@ class Directives extends \Report\Content {
         // extensions configurations
         ///////////////////////////////////////////////////////////////
 
-        $directives = array('Standard', 'Date', 'Filesystem', 'FileUpload', 
+        // @todo automate this
+        $directives = array('Standard', 'Bcmath', 'Date', 'Filesystem', 
+                            'FileUpload', 'Mail',
                             // standard extensions
-                            'Apache', 'Assertion', 'Curl', 
-                            'Filter', 'Image', 'Intl',
-                            'Mbstring', 'Opcache', 'Pcre', 'Pdo',
+                            'Apache', 'Assertion', 'Curl', 'Dba',
+                            'Filter', 'Image', 'Intl', 'Ldap',
+                            'Mbstring', 
+                            'Opcache', 'Pcre', 'Pdo', 'Pgsql',
                             'Session', 'Sqlite', 'Sqlite',
                             // pecl extensions
-                            'Imagick', 'Mongo', 
-                            'Wincache', 'Xcache'
+                            'Imagick', 'Mailparse', 'Mongo', 
+                            'Trader', 'Wincache', 'Xcache'
                              );
         
         foreach($directives as $directive) {
