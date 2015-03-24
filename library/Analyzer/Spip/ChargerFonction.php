@@ -25,6 +25,7 @@ class ChargerFonction extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 1)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
+             ->codeIsNot(array('""', "''"))
              ->savePropertyAs('noDelimiter', 'sub')
              
              ->raw('filter{ !(sub.replace("/", "_") + "_" + fonction in ["'.join('", "', $spipFunctions).'"])}')
