@@ -62,7 +62,7 @@ class IsRead extends Analyzer\Analyzer {
         $this->atomIs('Variable')
              ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
              ->inIs(array('RIGHT', 'LEFT'))
-             ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
+             ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift', 'Assignation'))
              ->back('first');
         $this->prepareQuery();
 
@@ -129,6 +129,7 @@ class IsRead extends Analyzer\Analyzer {
             $this->prepareQuery();
         }
 
+        // Variable that are not a reference in a functioncall
         $this->atomIs('Variable')
              ->hasIn(array('ARGUMENT'))
              ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("atom", "Function").any() == false}')
