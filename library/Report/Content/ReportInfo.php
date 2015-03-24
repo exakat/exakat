@@ -36,6 +36,9 @@ class ReportInfo extends \Report\Content {
         if (!empty($config->project_packagist)) {
             $this->array[] = array('Packagist', '<a href="https://packagist.org/packages/'.$config->project_packagist.'">'.$config->project_packagist.'</a>');
         }
+        if (!empty($config->project_url)) {
+            $this->array[] = array('Home page', '<a href="'.$config->project_url.'">'.$config->project_url.'</a>');
+        }
         if (file_exists($config->projects_root.'/projects/'.$this->project.'/code/.git/config')) {
             $gitConfig = file_get_contents($config->projects_root.'/projects/'.$this->project.'/code/.git/config');
             preg_match('#url = (\S+)\s#is', $gitConfig, $r);
