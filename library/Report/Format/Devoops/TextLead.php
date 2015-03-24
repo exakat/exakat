@@ -25,7 +25,7 @@ namespace Report\Format\Devoops;
 
 class TextLead extends \Report\Format\Devoops { 
     public function render($output, $data) {
-        $data = $this->makeHtml($data);
+        $data = nl2br($data);
         $output->push("<article><p class=\"lead\">".$data."</p></article>\n");
 
         $output->push("<script src=\"plugins/readmore/readmore.js\"></script>\n");
