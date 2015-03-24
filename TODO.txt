@@ -16,7 +16,7 @@ Prepare documentation
 Cooccurences : structures that are next to each other in sequences.
 
 Analyzers
-+ Make a list of files and extensions along the way
++ Make a list of files and extensions in Files task
 
 Update variables with the above code
 Make report configurable (configuration of the actual analyzers to be run), and automatically build.
@@ -49,10 +49,6 @@ Make a summary to the report (how to share this ? When to involve the author ? N
 Check spelling in variables/classe names : 
   Spin this as an external project
 
-Long variables with "" that should actually be ' because they don't contain any variable.
-
-Export data collected in mysql to a graph
-
 Namespace inventory as a tree.
 Mention file extensions/list used for testing in audit information
 
@@ -63,7 +59,7 @@ Create a quick analysis, for one file only (exclude some application wide analys
 Mark analyzers as file or application wide analyzer. 
 
 Spot classes with too many constants (they cost memory)
-Suppress all g.V and make this at least some Index
+
 Spot overwritten class constants.
 Suspect implicit conversion
 Check for unqualified names of classes : they shouldn't be too generic.
@@ -1017,8 +1013,9 @@ Suggest making arguments properties when they are relayed from method to method
 
 Suggest visibility dpending on usage (not public, not private?)
 
-Could Implements I : list classes that may 'implements' an available interface but are not.
+Could Implements I : list classes that may 'implements' an available interface but are not explicitely
 
+Tokeninzer
 "$a = &$b + $c" and "$a = $b + $c" are totally different. #php (Code that don't work as expected)
 
 implemented interface methods must be public
@@ -1041,3 +1038,45 @@ Injection!
 Mark functioncall as methods for easier scanning
 
 Should always used prepared statement
+
+instanceof is 10x faster than get_class()
+
+Method has conditions or not 
+
+Make a database of namespaces, variables, properties, etc. and see how much a script is original.
+Bring a note of originality (this has never been seen anwwhere...)
+Spot emails in the code.
+
+array are not allowed in class constants (< 5.6)
+Spot properties that are array and never changed => constants?
+
+Support des fichiers au noms chinois?
+
+Never modified property => const ? 
+
+Remove 'Description' in the doc
+Check with Christophe for keywords from each page. 
+Add top 5 files
+Make a link to clearPHP when it is available.
+
+Minify jss and css in devoops
+
+Remove X when something is not found (add some other icon if the doc isn't run).
+Suggest simplification : if ($a == 2) { $b = true; } else { $b = false;}
+
+
+Restore batch-import in installation (check for imported values-type (boolean) or else)
+Check for index in cleandb
+check that db is well restarted after cleandb
+
+
+	// Ne pas se faire manger par un bug php qui accepte ?GLOBALS[truc]=toto
+	if (isset($_REQUEST['GLOBALS'])) die();
+	Spot overridden variables ? 
+
+Stop project task if any error is dected
+Avoid using shell_exec in tasks (use the other tasks!)
+
+print_r as argument needs 2nd argument 
+                die(print_r(array_keys(static::$fp_rels))."\nNO $label\n");
+
