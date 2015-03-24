@@ -83,12 +83,12 @@ class Doctor implements Tasks {
 
             $file = file_get_contents('neo4j/conf/neo4j-server.properties');
             if (!preg_match('/org.neo4j.server.webserver.port=(\d+)/is', $file, $r)) {
-                $stats['neo4j']['port'] = 'Unset (7474)';
+                $stats['neo4j']['port'] = 'Unset (default : 7474)';
             } else {
                 $stats['neo4j']['port'] = $r[1];
             }
     
-            $json = file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/');
+            $json = @file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/');
             if (empty($json)) {
                 $stats['neo4j']['running'] = 'No';
             } else {
@@ -108,25 +108,6 @@ class Doctor implements Tasks {
                     $stats['neo4j']['gremlin-installation'] = 'Install gremlin plugin for neo4j';
                 }
             }
-        }
-
-        // batch-importer
-        if (!file_exists('batch-import')) {
-            $stats['batch-import']['installed'] = 'No';
-        } else {
-            if (!file_exists('./batch-import/target/batch-import-jar-with-dependencies.jar')) {
-                $stats['batch-import']['compiled'] = 'No';
-                // compile with "mvn clean compile assembly:single"
-            } else {
-                $stats['batch-import']['installed'] = 'Yes';
-                $stats['batch-import']['compiled'] = 'Yes';
-    
-                $file = file('batch-import/changelog.txt');
-                $stats['batch-import']['version'] = trim($file[0]);
-            }
-    
-            $res = explode("\n", shell_exec('mvn -v 2>&1'));
-            $stats['batch-import']['maven'] = trim($res[0]);
         }
 
         // phploc
@@ -214,6 +195,27 @@ INI;
     private function checkOptional(\Config $config) {
         $stats = array();
 
+        // batch-importer
+        if (!file_exists('batch-import')) {
+            $stats['batch-import']['installed'] = 'No';
+            $stats['batch-import']['optional'] = 'Yes';
+        } else {
+            if (!file_exists('./batch-import/target/batch-import-jar-with-dependencies.jar')) {
+                $stats['batch-import']['compiled'] = 'No';
+                // compile with "mvn clean compile assembly:single"
+            } else {
+                $stats['batch-import']['installed'] = 'Yes';
+                $stats['batch-import']['compiled'] = 'Yes';
+    
+                $file = file('batch-import/changelog.txt');
+                $stats['batch-import']['version'] = trim($file[0]);
+            }
+    
+            $res = explode("\n", shell_exec('mvn -v 2>&1'));
+            $stats['batch-import']['maven'] = trim($res[0]);
+            $stats['batch-import']['optional'] = 'Yes';
+        }
+        
         // check PHP 5.2
         if (!$config->php52) {
             $stats['PHP 5.2']['configured'] = 'No';
@@ -283,7 +285,7 @@ INI;
         } else {
             $stats['PHP 5.6']['configured'] = 'Yes';
             $res = trim(shell_exec($config->php56.' -r "echo phpversion();" 2>&1'));
-            if (preg_match('/[^\\.0-9]/', $res)) {
+            if (preg_match('/5\.6\.[^\\.0-9]/', $res)) {
                 $stats['PHP 5.6']['installed'] = 'No';
             } else {
                 $stats['PHP 5.6']['installed'] = 'Yes';
