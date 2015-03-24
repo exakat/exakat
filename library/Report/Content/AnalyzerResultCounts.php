@@ -24,13 +24,22 @@
 namespace Report\Content;
 
 class AnalyzerResultCounts extends \Report\Content {
+    private $analyzers = null;
+    
     public function collect() {
-        $analyzers = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
-                                 \Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
+        if ($this->analyzers === null) {
+            return false;
+        }
 
         $total = 0;
-        foreach($analyzers as $analyzer) {
-            $o = \Analyzer\Analyzer::getInstance($analyzer, $this->neo4j);
+        foreach($this->analyzers as $analyzer) {
+            if (is_string($analyzer)) {
+                $o = \Analyzer\Analyzer::getInstance($analyzer, $this->neo4j);
+            } else if ($analyzer instanceof \Analyzer\Analyzer) {
+                $o = $analyzer;
+            } else {
+                // If we reach here, there is a structural problem.
+            }
             
             $count = $o->toCount();
             // only show non-empty
@@ -41,6 +50,10 @@ class AnalyzerResultCounts extends \Report\Content {
         }
 
         $this->array[] = array('Total', $total, '');
+    }
+    
+    public function setAnalyzers($analyzers) {
+        $this->analyzers = $analyzers;
     }
 }
 
