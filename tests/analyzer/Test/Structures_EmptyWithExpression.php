@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_EmptyWithExpression extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testStructures_EmptyWithExpression01()  { $this->generic_test('Structures_EmptyWithExpression.01'); }
+    public function testStructures_EmptyWithExpression02()  { $this->generic_test('Structures_EmptyWithExpression.02'); }
 }
 ?>

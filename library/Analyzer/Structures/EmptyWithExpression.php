@@ -28,8 +28,14 @@ use Analyzer;
 class EmptyWithExpression extends Analyzer\Analyzer {
     public function analyze() {
         // $a = 2; empty($a) ; in a row
-        $this->atomIs("Assignation")
+        // only works for variables
+        $this->atomIs('Assignation')
+             ->outIs('RIGHT')
+             ->atomIsNot(array('Null', 'Boolean', 'Integer', 'Float', 'String', 'Identifier', 'Nsname'))
+             ->tokenIsNot('T_ARRAY')
+             ->inIs('RIGHT')
              ->outIs('LEFT')
+             ->atomIs('Variable')
              ->savePropertyAs('code', 'storage')
              ->inIs('LEFT')
              ->nextSiblings()
@@ -39,9 +45,13 @@ class EmptyWithExpression extends Analyzer\Analyzer {
              ->fullnspath('\\empty')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+             ->atomIs('Variable')
              ->samePropertyAs('code', 'storage')
              ->back('first');
         $this->prepareQuery();
+
+        // extends this to array, property, static property
+
     }
 }
 

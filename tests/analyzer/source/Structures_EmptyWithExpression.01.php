@@ -1,8 +1,9 @@
 <?php
 
-$c = range(3,4);
-$a = 2;
-if (empty($a)) {}
+$a = strtolower(2);
+$c = range(3,4); // untested with empty
 
-if (empty($b)){}
+if (empty($a)) {}
+if (empty($b)) {} // not assigned with expression
+
 ?>
