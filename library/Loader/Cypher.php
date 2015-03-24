@@ -45,24 +45,28 @@ class Cypher {
     
     private static $fp_rels = null;
     private static $fp_nodes = null;
+
+    private $config = null;
     
     private $isLink = false;
     
     public function __construct() {
-        $config = \Config::factory();
-        if (file_exists('nodes.cypher.csv') && static::$file_saved == 0) {
-            unlink('nodes.cypher.csv');
+        $this->config = \Config::factory();
+
+        if (file_exists($this->config->projects_root.'/nodes.cypher.csv') && static::$file_saved == 0) {
+            unlink($this->config->projects_root.'/nodes.cypher.csv');
         } 
-        if (file_exists($config->project_root.'/rels.cypher.next.csv') && static::$file_saved == 0) {
-            unlink($config->project_root.'/rels.cypher.next.csv');
-            unlink($config->project_root.'/rels.cypher.element.csv');
-            unlink($config->project_root.'/rels.cypher.file.csv');
-            unlink($config->project_root.'/rels.cypher.indexed.csv');
+        if (file_exists($this->config->projects_root.'/rels.cypher.next.csv') && static::$file_saved == 0) {
+            unlink($this->config->projects_root.'/rels.cypher.next.csv');
+            unlink($this->config->projects_root.'/rels.cypher.element.csv');
+            unlink($this->config->projects_root.'/rels.cypher.file.csv');
+            unlink($this->config->projects_root.'/rels.cypher.indexed.csv');
         }
     }
 
-    static public function finalize() {
-        if (!file_exists('nodes.cypher.csv')) {
+    public function finalize() {
+        $config = \Config::factory();
+        if (!file_exists($config->projects_root.'/nodes.cypher.csv')) {
             return false;
         }
         
@@ -70,17 +74,16 @@ class Cypher {
             fclose($fp);
         }
         fclose(static::$fp_nodes);
-        
-        $config = \Config::factory();
-    
+
         $client = new Client();
-        
+
         // Load Nodes
         $queryTemplate = 'CREATE INDEX ON :Token(id)';
     	$query = new Query($client, $queryTemplate, array());
 	    $result = $query->getResultSet();
         
-        $queryTemplate = 'LOAD CSV WITH HEADERS FROM "file:'.$config->project_root.'/nodes.cypher.csv" AS csvLine
+        $queryTemplate = <<<GREMLIN
+LOAD CSV WITH HEADERS FROM "file:'.$config->projects_root.'/nodes.cypher.csv" AS csvLine
 CREATE (token:Token { 
 id: toInt(csvLine.id),
 token: csvLine.token,
@@ -107,7 +110,7 @@ FOREACH(ignoreMe IN CASE WHEN csvLine.index <> "" THEN [1] ELSE [] END | SET tok
 
 
 return token;
-';
+GREMLIN;
     	$query = new Query($client, $queryTemplate, array());
 	    $result = $query->getResultSet();
 	    
@@ -117,27 +120,30 @@ return token;
                            'next'    => 'NEXT',
                            'indexed' => 'INDEXED');
         foreach($relations as $name => $relation) {
-            $queryTemplate = 'USING PERIODIC COMMIT
-LOAD CSV WITH HEADERS FROM "file:'.$config->project_root.'/rels.cypher.'.$name.'.csv" AS csvLine
+            $queryTemplate = <<<GREMLIN
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:'.$config->projects_root.'/rels.cypher.'.$name.'.csv" AS csvLine
 MATCH (token:Token { id: toInt(csvLine.start)}),(token2:Token { id: toInt(csvLine.end)})
 CREATE (token)-[:'.$relation.']->(token2)
-return token';
+return token
+GREMLIN;
         	$query = new Query($client, $queryTemplate, array());
 	        $result = $query->getResultSet();
 	    }
 
-        unlink($config->project_root.'/nodes.cypher.csv');
-        unlink($config->project_root.'/rels.cypher.next.csv');
-        unlink($config->project_root.'/rels.cypher.element.csv');
-        unlink($config->project_root.'/rels.cypher.file.csv');
-        unlink($config->project_root.'/rels.cypher.indexed.csv');
+        unlink($config->projects_root.'/nodes.cypher.csv');
+        unlink($config->projects_root.'/rels.cypher.next.csv');
+        unlink($config->projects_root.'/rels.cypher.element.csv');
+        unlink($config->projects_root.'/rels.cypher.file.csv');
+        unlink($config->projects_root.'/rels.cypher.indexed.csv');
 
         return true;
     }
     
     public function save_chunk() {
+        $config = \Config::factory();
         if (static::$fp_nodes === null) {
-            static::$fp_nodes = fopen('nodes.cypher.csv', 'a');
+            static::$fp_nodes = fopen($config->projects_root.'/nodes.cypher.csv', 'a');
         }
         $fp = static::$fp_nodes;
         // adding in_quote here, as it may not appear on the first token.
@@ -175,10 +181,10 @@ return token';
         static::$nodes = array();
         
         if (static::$fp_rels === null) {
-            static::$fp_rels = array('NEXT'    => fopen('rels.cypher.next.csv', 'a'),
-                                     'FILE'    => fopen('rels.cypher.file.csv', 'a'),
-                                     'INDEXED' => fopen('rels.cypher.indexed.csv', 'a'),
-                                     'ELEMENT' => fopen('rels.cypher.element.csv', 'a'),
+            static::$fp_rels = array('NEXT'    => fopen($config->projects_root.'/rels.cypher.next.csv', 'a'),
+                                     'FILE'    => fopen($config->projects_root.'/rels.cypher.file.csv', 'a'),
+                                     'INDEXED' => fopen($config->projects_root.'/rels.cypher.indexed.csv', 'a'),
+                                     'ELEMENT' => fopen($config->projects_root.'/rels.cypher.element.csv', 'a'),
                                      );
         }
         if (static::$file_saved == 0) {
@@ -188,7 +194,7 @@ return token';
         }
         foreach(static::$links as $label => $links) {
             if (!isset(static::$fp_rels[$label])) {
-                die(print_r(array_keys(static::$fp_rels))."\nNO $label\n");
+                die(print_r(array_keys(static::$fp_rels), true)."\nNO $label\n");
             }
             $fp = static::$fp_rels[$label];
             foreach($links as $id => $link) {
@@ -210,7 +216,6 @@ return token';
     public function setProperty($name, $value) {
         if ($this->isLink) {
             static::$lastLink[$name] = $value;
-//            static::$links[count(static::$links) - 1][$name] = $value;
         } else {
             if (!isset(static::$cols[$name])) { 
                 static::$cols[$name] = true; 
@@ -225,7 +230,6 @@ return token';
     public function getProperty($name) {
         if ($this->isLink) {
             return static::$lastLink[$name];
-//            return static::$links[count(static::$links) - 1][$name];
         } else {
             return $this->node[$name];
         }
