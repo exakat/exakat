@@ -97,7 +97,7 @@ class Analyzer {
     static public function initDocs() {
         if (Analyzer::$docs === null) {
             $is_phar  = (strpos(basename(dirname(dirname(__DIR__))), '.phar') !== false);
-            if ($is_phar) {
+            if ($is_phar === true) {
                 $pathDocs = 'phar://'.basename(dirname(dirname(__DIR__))).'/data/analyzers.sqlite';
             } else {
                 $pathDocs = dirname(dirname(dirname(__FILE__))).'/data/analyzers.sqlite';
@@ -658,7 +658,7 @@ GREMLIN;
     }
 
     public function code($code, $caseSensitive = false) {
-        if ($caseSensitive) {
+        if ($caseSensitive === false) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -681,7 +681,7 @@ GREMLIN;
     }
 
     public function codeIsNot($code, $caseSensitive = false) {
-        if ($caseSensitive) {
+        if ($caseSensitive === false) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -706,7 +706,7 @@ GREMLIN;
     public function noDelimiter($code, $caseSensitive = false) {
         $this->addMethod('has("atom", "String")', $code);
 
-        if ($caseSensitive) {
+        if ($caseSensitive === false) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -731,7 +731,7 @@ GREMLIN;
     public function noDelimiterIsNot($code, $caseSensitive = false) {
         $this->addMethod('has("atom", "String")', $code);
 
-        if ($caseSensitive) {
+        if ($caseSensitive === false) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -754,7 +754,7 @@ GREMLIN;
     }
 
     public function fullnspath($code, $caseSensitive = false) {
-        if ($caseSensitive) {
+        if ($caseSensitive === false) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -777,7 +777,7 @@ GREMLIN;
     }
 
     public function fullnspathIsNot($code, $caseSensitive = false) {
-        if ($caseSensitive) {
+        if ($caseSensitive === false) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -858,7 +858,7 @@ GREMLIN;
     }
 
     public function fullcodeTrimmed($code, $trim = "\"'", $caseSensitive = false) {
-        if ($caseSensitive) {
+        if ($caseSensitive === false) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -882,7 +882,7 @@ GREMLIN;
     }
     
     public function fullcode($code, $caseSensitive = false) {
-        if ($caseSensitive) {
+        if ($caseSensitive === false) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
@@ -905,7 +905,7 @@ GREMLIN;
     }
     
     public function fullcodeIsNot($code, $caseSensitive = false) {
-        if ($caseSensitive) {
+        if ($caseSensitive === false) {
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
