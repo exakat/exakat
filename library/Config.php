@@ -78,12 +78,15 @@ class Config {
     
     static public function factory($argv = array()) {
         if (empty($argv)) {
+            if (empty(self::$singleton)) {
+                self::$singleton = new self(array());
+            }
             return self::$singleton;
         } else {
             if (is_object($argv) && ($argv instanceof \Config)) {
                 self::$singleton = $argv;
             } else {
-                self::$singleton = new Config($argv);
+                self::$singleton = new self($argv);
             }
             return self::$singleton;
         }
