@@ -232,6 +232,7 @@ class Config {
                           'log2csv'     => 1, 
                           'magicnumber' => 1, 
                           'project'     => 1, 
+                          'projectspip'     => 1, 
                           'report_all'  => 1,
                           'report'      => 1, 
                           'results'     => 1, 
