@@ -1740,6 +1740,14 @@ GREMLIN;
         self::initDocs();
         return self::$docs->listAllAnalyzer();
     }
+
+    public function isRun() {
+        $analyzer = str_replace('\\', '\\\\', $this->analyzer);
+        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].any()"; 
+        $vertices = $this->query($queryTemplate);
+
+        return ($vertices[0][0] == 1);
+    }
     
     public function hasResults() {
         return $this->getResultsCount() > 0;
