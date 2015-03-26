@@ -32,20 +32,19 @@ class Results implements Tasks {
         
         $analyzer = $config->program;
         if (empty($analyzer)) {
-            print "Provide an analyzer with -P X/Y. Aborting\n";
-            exit;
+            die( "Provide an analyzer with -P X/Y. Aborting\n");
         }
         
         $analyzerClass = \Analyzer\Analyzer::getClass($analyzer);
 
         if ("Analyzer\\".str_replace('/', '\\', $analyzer) != $analyzerClass) {
-            print "'$analyzer' doesn't exist. Aborting\n";
+            $die = "'$analyzer' doesn't exist. Aborting\n";
     
             $r = \Analyzer\Analyzer::getSuggestionClass($analyzer);
             if (count($r) > 0) {
-                print "Did you mean : ".implode(', ', str_replace('_', '/', $r))."\n";
+                $die .= "Did you mean : ".implode(', ', str_replace('_', '/', $r))."\n";
             }
-            exit;
+            die($die);
         }
 
         $analyzer = str_replace('\\', '\\\\', $analyzerClass);
@@ -168,8 +167,7 @@ GREMLIN;
         if ($config->filename) {
             $name = $config->filename.'.'.$extension;
             if (file_exists($name)) {
-                print "$name already exists. Aborting\n";
-                die();
+                die( "$name already exists. Aborting\n");
             }
 
             if ($config->format == 'ODT') {
@@ -200,10 +198,8 @@ GREMLIN;
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            print "Exception : ".$message."\n";
-        
-            print $queryTemplate."\n";
-            die();
+            die( "Exception : ".$message."\n" .
+                  $queryTemplate."\n");
         }
         return $query->getResultSet();
     }
