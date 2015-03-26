@@ -32,14 +32,15 @@ class LectureGPR extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $gpr = array('$_GET', '$_POST', '$_REQUEST');
+        $gpr = array('$_GET', '$_POST');
 
         // $_GPR just read
         $this->atomIs('Variable')
              ->hasNoIn('VARIABLE') // exclude arrays
              ->code($gpr)
              ->analyzerIs('Analyzer\\Variables\\IsRead')
-             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "process_gpr").any() == false}')
+             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "_request").any() == false}')
+             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "File"}.has("fullcode", "config/ecran_securite.php").any() == false}')
              ->back('first');
         $this->prepareQuery();
 
@@ -49,7 +50,8 @@ class LectureGPR extends Analyzer\Analyzer {
              ->analyzerIs('Analyzer\\Arrays\\IsRead')
              ->outIs('VARIABLE')
              ->code($gpr)
-             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "process_gpr").any() == false}')
+             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "_request").any() == false}')
+             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "File"}.has("fullcode", "config/ecran_securite.php").any() == false}')
              ->back('first');
         $this->prepareQuery();
 
@@ -60,7 +62,8 @@ class LectureGPR extends Analyzer\Analyzer {
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')
              ->code($gpr)
-             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "process_gpr").any() == false}')
+             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "_request").any() == false}')
+             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "File"}.has("fullcode", "config/ecran_securite.php").any() == false}')
              ->back('first');
         $this->prepareQuery();
 
@@ -72,7 +75,8 @@ class LectureGPR extends Analyzer\Analyzer {
              ->outIs('VARIABLE')
              ->outIs('VARIABLE')
              ->code($gpr)
-             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "process_gpr").any() == false}')
+             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "Function"}.out("NAME").has("code", "_request").any() == false}')
+             ->raw('filter{ it.in.loop(1){true}{it.object.atom == "File"}.has("fullcode", "config/ecran_securite.php").any() == false}')
              ->back('first');
         $this->prepareQuery();
     }
