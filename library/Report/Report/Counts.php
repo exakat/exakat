@@ -31,15 +31,7 @@ class Counts extends Report {
     public function __construct($project, $client) {
         parent::__construct($project, $client);
     }
-    
-    public function setProject($project) {
-        $this->project = $project;
-    }
 
-    public function setProjectUrl($projectUrl) {
-        $this->projectUrl = $projectUrl;
-    }
-    
     public function prepare() {
         $this->createLevel1('Report presentation');
 
