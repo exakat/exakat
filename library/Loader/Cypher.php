@@ -122,7 +122,7 @@ GREMLIN;
         foreach($relations as $name => $relation) {
             $queryTemplate = <<<GREMLIN
 USING PERIODIC COMMIT
-LOAD CSV WITH HEADERS FROM "file:{$config->projects_root}/rels.cypher.$name.csv" AS csvLine
+LOAD CSV WITH HEADERS FROM "file:{$config->projects_root}/rels.cypher.{$name}.csv" AS csvLine
 MATCH (token:Token { id: toInt(csvLine.start)}),(token2:Token { id: toInt(csvLine.end)})
 CREATE (token)-[:$relation]->(token2)
 return token
