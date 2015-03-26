@@ -35,7 +35,7 @@ class Project implements Tasks {
                               'Analyze');
 
     protected $reports = array('Premier' => array('Markdown', 'Sqlite', 'Devoops', 'Html', 'Text'),
-                                 'Counts'  => array('Sqlite'));
+                               'Counts'  => array('Sqlite'));
     
     public function run(\Config $config) {
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
@@ -147,18 +147,18 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         $this->logTime('Analyze');
 
         $oldConfig = \Config::factory();
-        foreach($this->reports as $report => $formats) {
+        foreach($this->reports as $reportName => $formats) {
             foreach($formats as $format) {
-                display("Reporting $report in $format\n");
+                display("Reporting $reportName in $format\n");
                 $args = array ( 1 => 'report',
                                 2 => '-p',
                                 3 => $config->project,
                                 4 => '-f',
-                                5 => strtolower($report),
+                                5 => strtolower($reportName),
                                 6 => '-format',
                                 7 => $format,
                                 8 => '-report',
-                                9 => $report,
+                                9 => $reportName,
                                 );
                 $config = \Config::factory($args);
             
