@@ -30,6 +30,13 @@ class Project implements Tasks {
     private $project_dir = '.';
     private $executable = 'exakat';
     
+    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
+                              'Appinfo', '"Dead code"', 'Security', 'Custom',
+                              'Analyze');
+
+    protected $reports = array('Premier' => array('Markdown', 'Sqlite', 'Devoops', 'Html', 'Text'),
+                                 'Counts'  => array('Sqlite'));
+    
     public function run(\Config $config) {
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
         if ($config->is_phar) {
@@ -128,11 +135,8 @@ class Project implements Tasks {
             unlink($config->projects_root.'/projects/'.$project.'/log/analyze.final.log');
         }
 
-        $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
-                        'Appinfo', '"Dead code"', 'Security', 'Custom',
-                        'Analyze');
         $processes = array();
-        foreach($themes as $theme) {
+        foreach($this->themes as $theme) {
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
             shell_exec('php '.$this->executable.' analyze -norefresh -p '.$project.' -T '.$theme.' > '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log;
 mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
@@ -142,8 +146,28 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         display("Project analyzed\n");
         $this->logTime('Analyze');
 
-        shell_exec('php '.$this->executable.' report_all -p '.$project);
-        $this->logTime('Report');
+        $oldConfig = \Config::factory();
+        foreach($this->reports as $report => $formats) {
+            foreach($formats as $format) {
+                display("Reporting $report in $format\n");
+                $args = array ( 1 => 'report',
+                                2 => '-p',
+                                3 => $config->project,
+                                4 => '-f',
+                                5 => strtolower($report),
+                                6 => '-format',
+                                7 => $format,
+                                8 => '-report',
+                                9 => $report,
+                                );
+                $config = \Config::factory($args);
+            
+                $report = new Report();
+                $report->run($config);
+                unset($report);
+            }
+        }
+        \Config::factory($oldConfig);
 
         display("Project reported\n");
 
