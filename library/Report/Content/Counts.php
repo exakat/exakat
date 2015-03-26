@@ -25,34 +25,30 @@ namespace Report\Content;
 
 class Counts extends \Report\Content {
     public function collect() {
-        $analyzes = array_merge(\Analyzer\Analyzer::getThemeAnalyzers('Analyze'),
-                                \Analyzer\Analyzer::getThemeAnalyzers('Coding Conventions'));
+        $config = \Config::factory();
+        $datastore = new \Datastore($config);
         
-        $analyzes2 = array();
-        foreach($analyzes as $a) {
-            $analyzer = \Analyzer\Analyzer::getInstance($a, $this->neo4j);
-            $analyzes2[$analyzer->getDescription()->getName()] = $analyzer;
-        }
-        uksort($analyzes2, function($a, $b) { 
-            $a = strtolower($a); 
-            $b = strtolower($b); 
-            if ($a > $b) { 
-                return 1; 
-            } else { 
-                return $a == $b ? 0 : -1; 
-            } 
-        });
+        $themes = array('Analyze', 'Coding Conventions', 'Spip', 'Dead Code', 'Appinfo', 
+                        'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
+                        );
 
         $total = 0;
-        if (count($analyzes) > 0) {
-            $this->array = array();
-            foreach($analyzes2 as $analyzer) {
-                $count = $analyzer->getResultsCount();
-                $this->array[] = array($analyzer->getDescription()->getName(), $count);
-                $total += $count;
-            }
-        }
+        $analyzes = array();
+        foreach($themes as $theme) {
+            if (null !== $datastore->getHash($theme)) {
+                $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($theme);
+                foreach($analyzers as $analyzer) {
+                    $analyzer = \Analyzer\Analyzer::getInstance($analyzer, $this->neo4j);
+                    if (!$analyzer->isRun()) { 
+                        continue; 
+                    }
 
+                    $count = $analyzer->getResultsCount();
+                    $this->array[] = array($analyzer->getDescription()->getName(), $count);
+                    $total += $count;
+                }
+            }
+        } 
     }
 }
 
