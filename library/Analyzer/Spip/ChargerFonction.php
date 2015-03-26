@@ -49,7 +49,7 @@ class ChargerFonction extends Analyzer\Analyzer {
              ->codeIsNot(array('""', "''"))
              ->savePropertyAs('noDelimiter', 'sub')
              
-             ->raw('filter{ !(sub.replace("/", "_") + "_" + fonction in ["'.join('", "', $spipFunctions).'"])}')
+             ->raw('filter{ !(sub.replace("/", "_") + "_" + fonction in ["'.implode('", "', $spipFunctions).'"])}')
              ->back('first');
         $this->prepareQuery();
 
@@ -68,7 +68,7 @@ class ChargerFonction extends Analyzer\Analyzer {
              
              ->noChildWithRank('ARGUMENT', 1)
 
-             ->raw('filter{ !("exec_" + fonction in ["'.join('", "', $spipFunctions).'"])}')
+             ->raw('filter{ !("exec_" + fonction in ["'.implode('", "', $spipFunctions).'"])}')
              ->back('first');
         $this->prepareQuery();
     }
