@@ -64,7 +64,7 @@ class Datastore {
                 $d = array($key, $row);
             }
 
-            $query = "REPLACE INTO $table (".join(", ", $cols).") VALUES ('".join("', '", $d)."')";
+            $query = "REPLACE INTO $table (".implode(", ", $cols).") VALUES ('".implode("', '", $d)."')";
             $this->sqlite->querySingle($query);
         }
         

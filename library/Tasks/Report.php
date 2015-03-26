@@ -31,7 +31,7 @@ class Report implements Tasks {
         $reportClass = "\\Report\\Report\\".ucfirst(strtolower($config->report));
 
         if (!class_exists("\\Report\\Format\\".$config->format)) {
-            die("Format '{$config->format}' doesn't exist. Choose among : ".join(", ", \Report\Report::$formats)."\nAborting\n");
+            die("Format '{$config->format}' doesn't exist. Choose among : ".implode(", ", \Report\Report::$formats)."\nAborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {

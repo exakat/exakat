@@ -55,7 +55,7 @@ if (empty($res)) {
     preg_match_all('/PHP_FUNCTION\(([a-z0-9_]+)\)/is', $res, $functions);
     $functions = $functions[1];
     print count($functions)." functions\n  ";
-    print join("\n  ", $functions);
+    print implode("\n  ", $functions);
     print "\n\n";
 }
 
@@ -70,7 +70,7 @@ if (empty($res)) {
         preg_match_all('/PHP_EVENT_REGISTER_CLASS\("([a-z0-9_]+)", /is', $res, $classes);
         $classes = $classes[1];
         print count($classes)." classes\n  ";
-        print join("\n  ", $classes);
+        print implode("\n  ", $classes);
         print "\n\n";
     
     }
@@ -78,15 +78,15 @@ if (empty($res)) {
     if (preg_match_all('/INIT_CLASS_ENTRY\([a-z_]+, "([a-zA-Z0-9_]+)"/is', $res, $classes)) {
         $classes = $classes[1];
         print count($classes)." classes\n  "; 
-        print join("\n  ", $classes);
+        print implode("\n  ", $classes);
         print "\n\n";
     } elseif (preg_match_all('/INIT_CLASS_ENTRY\([a-z_]+,\s*([a-zA-Z0-9_]+)/is', $res, $classesDefine)) {
         $classesDefine = $classesDefine[1];
-        $res = shell_exec('grep -r "('.join('\\|', $classesDefine).')" '.substr($version, 0, -4));
-        preg_match_all("/(".join('|', $classesDefine).") \"([a-zA-Z0-9_]+)\"/is", $res, $classes);
+        $res = shell_exec('grep -r "('.implode('\\|', $classesDefine).')" '.substr($version, 0, -4));
+        preg_match_all("/(".implode('|', $classesDefine).") \"([a-zA-Z0-9_]+)\"/is", $res, $classes);
         $classes = $classes[2];
         print count($classes)." classes\n  ";
-        print join("\n  ", $classes);
+        print implode("\n  ", $classes);
         print "\n\n";
     } else {
         print "Nothing found, but having res : $res\n";
@@ -104,14 +104,14 @@ $res = shell_exec('grep -r REGISTER_LONG_CONSTANT '.substr($version, 0, -4));
         preg_match_all('/REGISTER_LONG_CONSTANT\(\s*"([a-zA-Z0-9_]+)"/is', $res, $constants);
         $constants = $constants[1];
         print count($constants)." constants\n  ";
-        print join("\n  ", $constants);
+        print implode("\n  ", $constants);
         print "\n\n";
     }
 } else {
    preg_match_all('/REGISTER_CAIRO_STATUS_LONG_CONST\(\".*?\",\s*([a-zA-Z0-9_]+)/is', $res, $constants);
    $constants = $constants[1];
    print count($constants)." constants\n  ";
-   print join("\n  ", $constants);
+   print implode("\n  ", $constants);
    print "\n\n";
 }
 

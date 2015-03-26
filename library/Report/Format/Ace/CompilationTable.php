@@ -56,7 +56,7 @@ HTML;
                     if (empty($V)) {
                         $row .= "<td>&nbsp;</td>\n";
                     } else {
-                        $row .= "<td><ul><li>".join("</li><li>", $V)."</li></ul></td>\n";
+                        $row .= "<td><ul><li>".implode("</li><li>", $V)."</li></ul></td>\n";
                     }
                 } else {
                     $row .= "<td>$V</td>\n";

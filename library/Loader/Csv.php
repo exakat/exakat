@@ -147,7 +147,7 @@ HEADER
                     }
                 }
                 if ($diff = array_diff(array_keys($row), $les_cols, array('id'))) {
-                    display("Some columns were not processed : ".join(", ", $diff).".\n");
+                    display("Some columns were not processed : ".implode(", ", $diff).".\n");
                 }
             }
             $row['code'] = $this->escapeString($row['code']);

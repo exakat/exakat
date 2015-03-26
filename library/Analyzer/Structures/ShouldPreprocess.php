@@ -31,7 +31,7 @@ class ShouldPreprocess extends Analyzer\Analyzer {
         //'Functioncall', 
         
         $functionList = $this->loadIni('inert_functions.ini');
-        $functionList = '"' . join('", "\\\\', $functionList['functions']). '"';
+        $functionList = '"' . implode('", "\\\\', $functionList['functions']). '"';
         
         $this->atomIs('Addition')
              ->raw('filter{ it.out().loop(1){true}{it.object.atom == "Functioncall"}.filter{!(it.fullnspath in ['.$functionList.'])}.any() == false}')

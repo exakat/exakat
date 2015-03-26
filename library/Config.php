@@ -254,7 +254,7 @@ class Config {
 
         if (count($args) != 0) {
             $c = count($args);
-            print "Found ".$c." argument".($c > 1 ? "s" : '')." that ".($c > 1 ? "are" : 'is')." not understood.\n\n\"".join('", "', $args)."\"\n\nIgnoring ".($c > 1 ? "them all" : 'it').".\n";
+            print "Found ".$c." argument".($c > 1 ? "s" : '')." that ".($c > 1 ? "are" : 'is')." not understood.\n\n\"".implode('", "', $args)."\"\n\nIgnoring ".($c > 1 ? "them all" : 'it').".\n";
         }
     }
 }
