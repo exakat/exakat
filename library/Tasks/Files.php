@@ -126,20 +126,7 @@ class Files implements Tasks {
         $versions = $config->other_php_versions;
 
         foreach($versions as $version) {
-            if (!isset($config->{'php'.$version})) {
-                display("php$version isn\'t available. Ignoring.\n");
-                continue;
-            }
             $stats['notCompilable'.$version] = -1;
-            
-            $check = shell_exec($config->{'php'.$version}.' -v 2>&1');
-            if (strpos($check, "No such file or directory") !== false) {
-                print "Can't use PHP $version : binary ".$config->{'php'.$version}." is not available. Ignoring\n";
-                $stats['notCompilable'.$version] = 'No binary';
-                // Create table keep it empty
-                $datastore->cleanTable('compilation'.$version);
-                continue 1;
-            }
             
             $shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh -c "'.$config->{'php'.$version}.' -l $1 2>&1" || true ';
             $res = trim(shell_exec($shell));
