@@ -127,7 +127,7 @@ class Files implements Tasks {
 
         foreach($versions as $version) {
             if (!isset($config->{'php'.$version})) {
-                display('php'.$version.' isn\'t available. Ignoring it');
+                display("php$version isn\'t available. Ignoring.\n");
                 continue;
             }
             $stats['notCompilable'.$version] = -1;
@@ -141,7 +141,7 @@ class Files implements Tasks {
                 continue 1;
             }
             
-            $shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 '.$config->{'php'.$version}.' -l $1 2>&1 || true ';
+            $shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh -c "'.$config->{'php'.$version}.' -l $1 2>&1" || true ';
             $res = trim(shell_exec($shell));
 
             $resFiles = explode("\n", $res);
@@ -206,12 +206,12 @@ class Files implements Tasks {
         }
 
         $stats['php'] = count($resFiles);
-        $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 php56                   -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
+        $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 '.$config->php.'                     -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
         $resultNosot = shell_exec($shell);
         $stats['tokens'] = (int) array_sum(explode("\n", $resultNosot));
         $datastore->addRow('hash', array('tokens' => $stats['tokens']));
 
-        $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 php56 -d short_open_tag=1 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
+        $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 '.$config->php.' -d short_open_tag=1 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
 
         $resultSot = shell_exec($shell);
         $stats['tokenssot'] = (int) array_sum(explode("\n", $resultSot));
