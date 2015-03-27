@@ -89,8 +89,8 @@ SQL;
 
         $return = constant("\\Analyzer\\Analyzer::$res2[0]");
 
-        if (empty($return['severity'])) { 
-            print "No TTF for $folder\\$name ( read : $res2[0]\n"; 
+        if (empty($return['timetofix'])) { 
+            $return = \Analyzer\Analyzer::T_NONE;
         }
 
         return $return;
