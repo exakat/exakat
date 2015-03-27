@@ -72,9 +72,14 @@ class Datastore {
     }
 
     public function getRow($table) {
-        $query = "SELECT * FROM $table";
-        $res = $this->sqlite->query($query);
         $return = array();
+        try {
+            $query = "SELECT * FROM $table";
+            $res = $this->sqlite->query($query);
+            $return = array();
+        } catch (\Exception $e) {
+            return array();
+        }
         
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $return[] = $row;
@@ -84,6 +89,8 @@ class Datastore {
     }
 
     public function getCol($table, $col) {
+        $return = array();
+
         $query = "SELECT $col FROM $table";
         $res = $this->sqlite->query($query);
         $return = array();
@@ -96,8 +103,9 @@ class Datastore {
     }
 
     public function getHash($key) {
-        $query = "SELECT value FROM hash WHERE key=:key";
+        $return = array();
 
+        $query = "SELECT value FROM hash WHERE key=:key";
         $stmt = $this->sqlite->prepare($query);
         $stmt->bindValue(':key', $key, SQLITE3_TEXT);
         $res = $stmt->execute();
