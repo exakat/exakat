@@ -50,6 +50,7 @@ class Doctor implements Tasks {
         $stats['php']['version'] = phpversion();
         $stats['php']['curl']    = extension_loaded('curl')    ? 'Yes' : 'No';
         $stats['php']['sqlite3'] = extension_loaded('sqlite3') ? 'Yes' : 'No';
+        $stats['php']['tokenizer'] = extension_loaded('tokenizer') ? 'Yes' : 'No';
 
         // java
         $res = shell_exec('java -version 2>&1');
@@ -221,13 +222,14 @@ INI;
             $stats['PHP 5.2']['configured'] = 'No';
         } else {
             $version = shell_exec($config->php52.' -r "echo phpversion();" 2>&1');
-            if (strpos($version, 'not found') !== false) {
-                $stats['PHP 5.2']['installed'] = 'No';
+            if (!preg_match('/5\.2\.[0-9]+/', $res)) {
+                $stats['PHP 5.3']['installed'] = 'No';
             } else {
                 $stats['PHP 5.2']['installed'] = 'Yes';
                 $stats['PHP 5.2']['version'] = $version;
                 $stats['PHP 5.2']['short_open_tags'] = shell_exec($config->php52.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
                 $stats['PHP 5.2']['timezone'] = shell_exec($config->php52.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+                $stats['PHP 5.2']['tokenizer'] = shell_exec($config->php52.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
             }
         }
 
@@ -237,13 +239,14 @@ INI;
         } else {
             $stats['PHP 5.3']['configured'] = 'Yes';
             $res = trim(shell_exec($config->php53.' -r "echo phpversion();" 2>&1'));
-            if (preg_match('/5\.3\.[0-9]+/', $res)) {
+            if (!preg_match('/5\.3\.[0-9]+/', $res)) {
                 $stats['PHP 5.3']['installed'] = 'No';
             } else {
                 $stats['PHP 5.3']['installed'] = 'Yes';
                 $stats['PHP 5.3']['version'] = $res;
                 $stats['PHP 5.3']['short_open_tags'] = shell_exec($config->php53.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
                 $stats['PHP 5.3']['timezone'] = shell_exec($config->php53.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+                $stats['PHP 5.3']['tokenizer'] = shell_exec($config->php53.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
             }
         }
         
@@ -253,13 +256,14 @@ INI;
         } else {
             $stats['PHP 5.4']['configured'] = 'Yes';
             $res = trim(shell_exec($config->php54.' -r "echo phpversion();" 2>&1'));
-            if (preg_match('/5\.4\.[0-9]+/', $res)) {
+            if (!preg_match('/5\.4\.[0-9]+/', $res)) {
                 $stats['PHP 5.4']['installed'] = 'No';
             } else {
                 $stats['PHP 5.4']['installed'] = 'Yes';
                 $stats['PHP 5.4']['version'] = $res;
                 $stats['PHP 5.4']['short_open_tags'] = shell_exec($config->php54.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
                 $stats['PHP 5.4']['timezone'] = shell_exec($config->php54.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+                $stats['PHP 5.4']['tokenizer'] = shell_exec($config->php54.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
             }
         }
         
@@ -269,13 +273,14 @@ INI;
         } else {
             $stats['PHP 5.5']['configured'] = 'Yes';
             $res = trim(shell_exec($config->php55.' -r "echo phpversion();" 2>&1'));
-            if (preg_match('/[^0-9+]/', $res)) {
+            if (!preg_match('/5\.5\.[^0-9+]/', $res)) {
                 $stats['PHP 5.5']['installed'] = 'No';
             } else {
                 $stats['PHP 5.5']['installed'] = 'Yes';
                 $stats['PHP 5.5']['version'] = $res;
                 $stats['PHP 5.5']['short_open_tags'] = trim(shell_exec($config->php55.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1'));
                 $stats['PHP 5.5']['timezone'] = trim(shell_exec($config->php55.' -r "echo ini_get(\'date.timezone\');" 2>&1'));
+                $stats['PHP 5.5']['tokenizer'] = shell_exec($config->php55.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
             }
         }
         
@@ -285,14 +290,14 @@ INI;
         } else {
             $stats['PHP 5.6']['configured'] = $config->php56;
             $res = trim(shell_exec($config->php56.' -r "echo phpversion();" 2>&1'));
-            var_dump($res);
-            if (preg_match('/5\.6\.[0-9]+/', $res)) {
+            if (!preg_match('/5\.6\.[0-9]+/is', $res)) {
                 $stats['PHP 5.6']['installed'] = 'No';
             } else {
                 $stats['PHP 5.6']['installed'] = 'Yes';
                 $stats['PHP 5.6']['version'] = $res;
                 $stats['PHP 5.6']['short_open_tags'] = shell_exec($config->php56.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
                 $stats['PHP 5.6']['timezone'] = shell_exec($config->php56.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+                $stats['PHP 5.6']['tokenizer'] = shell_exec($config->php56.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
             }
         }
         
@@ -308,6 +313,7 @@ INI;
                 $stats['PHP 7.0']['version'] = $version;
                 $stats['PHP 7.0']['short_open_tags'] = shell_exec($config->php70.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
                 $stats['PHP 7.0']['timezone'] = shell_exec($config->php70.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+                $stats['PHP 7.0']['tokenizer'] = shell_exec($config->php70.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
             }
         }
 
