@@ -81,7 +81,7 @@ class Cypher {
         $query = new Query($client, $queryTemplate, array());
         $result = $query->getResultSet();
         
-        $queryTemplate = <<<GREMLIN
+        $queryTemplate = <<<CYPHER
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.cypher.csv" AS csvLine
 CREATE (token:Token { 
 eid: toInt(csvLine.id),
@@ -107,9 +107,7 @@ FOREACH(ignoreMe IN CASE WHEN csvLine.fullcode <> "" THEN [1] ELSE [] END | SET 
 FOREACH(ignoreMe IN CASE WHEN csvLine.in_for <> "" THEN [1] ELSE [] END | SET token.in_for = (csvLine.in_for = "true"))
 FOREACH(ignoreMe IN CASE WHEN csvLine.index <> "" THEN [1] ELSE [] END | SET token.index = (csvLine.index = "true"))
 
-
-return token;
-GREMLIN;
+CYPHER;
         try {
             $query = new Query($client, $queryTemplate, array());
             $result = $query->getResultSet();
@@ -124,13 +122,13 @@ GREMLIN;
                            'next'    => 'NEXT',
                            'indexed' => 'INDEXED');
         foreach($relations as $name => $relation) {
-            $queryTemplate = <<<GREMLIN
+            $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/rels.cypher.{$name}.csv" AS csvLine
 MATCH (token:Token { eid: toInt(csvLine.start)}),(token2:Token { eid: toInt(csvLine.end)})
 CREATE (token)-[:$relation]->(token2)
-return token
-GREMLIN;
+
+CYPHER;
             try {
                 $query = new Query($client, $queryTemplate, array());
                 $result = $query->getResultSet();
@@ -140,17 +138,17 @@ GREMLIN;
             }
         }
 
-            $queryTemplate = <<<GREMLIN
+        $queryTemplate = <<<CYPHER
 MATCH (Token {  })
 REMOVE Token.eid
-GREMLIN;
-            try {
-                $query = new Query($client, $queryTemplate, array());
-                $result = $query->getResultSet();
-            } catch (\Exception $e) {
-                $this->cleanCsv(); 
-                die("Couldn't remove eid\n");
-            } 
+CYPHER;
+        try {
+            $query = new Query($client, $queryTemplate, array());
+            $result = $query->getResultSet();
+        } catch (\Exception $e) {
+            $this->cleanCsv(); 
+            die("Couldn't remove eid\n");
+        } 
 
         $this->cleanCsv();
 
