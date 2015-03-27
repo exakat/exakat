@@ -28,11 +28,12 @@ class ListBySeverity extends \Report\Content\GroupBy {
     public function getArray() {
         $array = array();
         
-        $severities = array();
-        $severities['Critical'] = 3;
-        $severities['Major'] = 2;
-        $severities['Minor'] = 1;
-        $severities['None'] = 0;
+        $severities = array(\Analyzer\Analyzer::S_CRITICAL => 3,
+                            \Analyzer\Analyzer::S_MAJOR    => 2,
+                            \Analyzer\Analyzer::S_MINOR    => 1,
+//                            \\Analyzer\\Analyzer::S_NOTE    => 2,
+                            \Analyzer\Analyzer::S_NONE    => 0,
+        );
         
         foreach($this->analyzers as $a) {
             $analyzer = \Analyzer\Analyzer::getInstance($a, $this->neo4j);
