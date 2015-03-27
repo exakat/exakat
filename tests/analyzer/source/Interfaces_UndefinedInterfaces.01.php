@@ -1,24 +1,19 @@
 <?php
 
-interface usedInterfaceImplements { function fui(); }
-interface usedInterfaceImplements2 { function fui(); }
-interface usedInterfaceFPImplements { function fui(); }
-interface usedInterfaceFPImplements2 { function fui(); }
+interface MyInterface{}
 
-interface unusedInterface {    function funi(); }
+$a instanceof Stdclass;
+$b instanceof MyInterface;
+$c instanceof \MyInterface;
+$d instanceof undefinedInterfacei;
+$e instanceof \undefinedInterfacei;
 
-class a implements usedInterfaceImplements { function fui() {} }
-function b(usedInterfaceTypehint $a) {}
-function c($ca) { 
-    if ($ca instanceof usedInterfaceInstanceof) {} 
-}
-interface d extends usedInterfaceImplements2 { function fui(); }
+interface MyInterface{}
 
-class a2 implements \usedInterfaceFPImplements { function fui() {} }
-function b2(\usedInterfaceFPTypehint $a) {}
-function c2($ca) { 
-    if ($ca instanceof \usedInterfaceFPInstanceof) {} 
-}
-interface d2 extends \usedInterfaceFPImplements2 { function fui(); }
+function x(Stdclass $a, 
+           MyInterface $b,
+           \MyInterface $c,
+           undefinedInterfacet $d,
+           \undefinedInterfacet $e) {}
 
 ?>

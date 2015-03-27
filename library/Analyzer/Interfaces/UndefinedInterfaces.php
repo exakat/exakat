@@ -26,18 +26,28 @@ namespace Analyzer\Interfaces;
 use Analyzer;
 
 class UndefinedInterfaces extends Analyzer\Analyzer {
+    public function dependsOn() {
+        return array('Analyzer\\Classes\\IsExtClass',
+                     'Analyzer\\Interfaces\\IsExtInterface');
+    }
+    
     public function analyze() {
         // interface used in a instanceof nor a Typehint but not defined
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->noClassDefinition()
-             ->noInterfaceDefinition();
+             ->noInterfaceDefinition()
+             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
+             ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface');
         $this->prepareQuery();
 
         $this->atomIs('Typehint')
              ->outIs('CLASS')
              ->noClassDefinition()
-             ->noInterfaceDefinition();
+             ->noInterfaceDefinition()
+             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
+             ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface')
+             ->tokenIsNot(array('T_ARRAY', 'T_CALLABLE'));
         $this->prepareQuery();
     }
 }
