@@ -237,7 +237,7 @@ INI;
         } else {
             $stats['PHP 5.3']['configured'] = 'Yes';
             $res = trim(shell_exec($config->php53.' -r "echo phpversion();" 2>&1'));
-            if (preg_match('/[^\\.0-9]/', $res)) {
+            if (preg_match('/5\.3\.[0-9]+/', $res)) {
                 $stats['PHP 5.3']['installed'] = 'No';
             } else {
                 $stats['PHP 5.3']['installed'] = 'Yes';
@@ -253,7 +253,7 @@ INI;
         } else {
             $stats['PHP 5.4']['configured'] = 'Yes';
             $res = trim(shell_exec($config->php54.' -r "echo phpversion();" 2>&1'));
-            if (preg_match('/[^\\.0-9]/', $res)) {
+            if (preg_match('/5\.4\.[0-9]+/', $res)) {
                 $stats['PHP 5.4']['installed'] = 'No';
             } else {
                 $stats['PHP 5.4']['installed'] = 'Yes';
@@ -269,7 +269,7 @@ INI;
         } else {
             $stats['PHP 5.5']['configured'] = 'Yes';
             $res = trim(shell_exec($config->php55.' -r "echo phpversion();" 2>&1'));
-            if (preg_match('/[^\\.0-9]/', $res)) {
+            if (preg_match('/[^0-9+]/', $res)) {
                 $stats['PHP 5.5']['installed'] = 'No';
             } else {
                 $stats['PHP 5.5']['installed'] = 'Yes';
@@ -283,9 +283,10 @@ INI;
         if (!$config->php56) {
             $stats['PHP 5.6']['configured'] = 'No';
         } else {
-            $stats['PHP 5.6']['configured'] = 'Yes';
+            $stats['PHP 5.6']['configured'] = $config->php56;
             $res = trim(shell_exec($config->php56.' -r "echo phpversion();" 2>&1'));
-            if (preg_match('/5\.6\.[^\\.0-9]/', $res)) {
+            var_dump($res);
+            if (preg_match('/5\.6\.[0-9]+/', $res)) {
                 $stats['PHP 5.6']['installed'] = 'No';
             } else {
                 $stats['PHP 5.6']['installed'] = 'Yes';
@@ -296,7 +297,7 @@ INI;
         }
         
         // check PHP 7
-        if (!$config->php56) {
+        if (!$config->php70) {
             $stats['PHP 7.0']['configured'] = 'No';
         } else {
             $stats['PHP 7.0']['configured'] = 'Yes';
