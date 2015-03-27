@@ -26,10 +26,10 @@ namespace Analyzer\Php;
 use Analyzer;
 
 class ClosureThisSupport extends Analyzer\Analyzer {
-    protected $phpVersion = "5.4-";
+    protected $phpVersion = '5.4-';
     
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->is('lambda', true)
              ->outIs('BLOCK')
              ->atomInside('Variable')

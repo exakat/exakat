@@ -43,7 +43,7 @@ class CitSameName extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // Interfaces - Traits
-        $this->atomIs("Interface")
+        $this->atomIs('Interface')
              ->outIs('NAME')
              ->raw('filter{ g.idx("atoms")[["atom":"Trait"]].out("NAME").next().code == it.code}')
              ->back('first');

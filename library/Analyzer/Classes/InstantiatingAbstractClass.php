@@ -27,7 +27,7 @@ use Analyzer;
 
 class InstantiatingAbstractClass extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs('Functioncall')
              ->classDefinition()

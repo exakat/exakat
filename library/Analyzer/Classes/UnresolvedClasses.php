@@ -36,7 +36,7 @@ class UnresolvedClasses extends Analyzer\Analyzer {
         $classes = $classes['classes'];
         $classes = $this->makeFullNsPath($classes);
         
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW')
              ->noClassDefinition()
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')

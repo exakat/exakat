@@ -29,7 +29,7 @@ class Break0 extends Analyzer\Analyzer {
     protected $phpVersion = '5.4-';
     
     public function analyze() {
-        $this->atomIs("Break")
+        $this->atomIs('Break')
              ->outIs('LEVEL')
              ->atomIs('Integer')
              ->code(0)

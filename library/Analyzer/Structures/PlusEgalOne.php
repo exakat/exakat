@@ -27,14 +27,14 @@ use Analyzer;
 
 class PlusEgalOne extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Assignation")
+        $this->atomIs('Assignation')
              ->code(array('+=', '-='))
              ->outIs('RIGHT')
              ->code(1)
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Assignation")
+        $this->atomIs('Assignation')
              ->code('=')
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'A')
@@ -50,7 +50,7 @@ class PlusEgalOne extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Assignation")
+        $this->atomIs('Assignation')
              ->code('=')
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'A')

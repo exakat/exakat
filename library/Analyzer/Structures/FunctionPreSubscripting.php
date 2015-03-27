@@ -26,13 +26,13 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class FunctionPreSubscripting extends Analyzer\Analyzer {
-    protected $phpVersion = "5.4+";
+    protected $phpVersion = '5.4+';
     
     public function analyze() {
         // $x = f(); 
         // $x['e'] 
         // instead of f()['e']
-        $this->atomIs("Assignation")
+        $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs(array('Functioncall', 'Staticmethodcall', 'Methodcall'))
              ->back('first')

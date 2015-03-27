@@ -27,13 +27,13 @@ use Analyzer;
 
 class DynamicPropertyCall extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Property")
+        $this->atomIs('Property')
              ->outIs('PROPERTY')
              ->atomIs(array('Variable', 'Array'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("Staticproperty")
+        $this->atomIs('Staticproperty')
              ->outIs('PROPERTY')
              ->atomIs(array('Variable', 'Array'))
              ->back('first');

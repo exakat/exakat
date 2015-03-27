@@ -76,27 +76,27 @@ class Phpexec {
             $x = get_defined_constants(true);
             $this->tokens = array_flip($x['tokenizer']);
         } else {
-            $tmpFile = tempnam("/tmp", "Phpexec");
+            $tmpFile = tempnam('/tmp', 'Phpexec');
             shell_exec($this->phpexec.' -r "print \'<?php \\$this->tokens = \'; \\$x = get_defined_constants(true); var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > '.$tmpFile);
             include $tmpFile;
             unlink($tmpFile);
         }
         
         // prepare extra tokens
-        $tphp = array(";" => 'T_SEMICOLON',
-                      "=" => 'T_EQUAL',
-                      "+" => 'T_PLUS',
-                      "-" => 'T_MINUS',
-                      "*" => 'T_STAR',
-                      "/" => 'T_SLASH',
-                      "%" => 'T_PERCENTAGE',
-                      "(" => 'T_OPEN_PARENTHESIS',
-                      ")" => 'T_CLOSE_PARENTHESIS',
-                      "!" => 'T_BANG',
-                      "[" => 'T_OPEN_BRACKET',
-                      "]" => 'T_CLOSE_BRACKET',
-                      "{" => 'T_OPEN_CURLY',
-                      "}" => 'T_CLOSE_CURLY',
+        $tphp = array(';' => 'T_SEMICOLON',
+                      '=' => 'T_EQUAL',
+                      '+' => 'T_PLUS',
+                      '-' => 'T_MINUS',
+                      '*' => 'T_STAR',
+                      '/' => 'T_SLASH',
+                      '%' => 'T_PERCENTAGE',
+                      '(' => 'T_OPEN_PARENTHESIS',
+                      ')' => 'T_CLOSE_PARENTHESIS',
+                      '!' => 'T_BANG',
+                      '[' => 'T_OPEN_BRACKET',
+                      ']' => 'T_CLOSE_BRACKET',
+                      '{' => 'T_OPEN_CURLY',
+                      '}' => 'T_CLOSE_CURLY',
                       '.' => 'T_DOT',
                       ',' => 'T_COMMA',
                       '@' => 'T_AT',
@@ -126,7 +126,7 @@ class Phpexec {
         if ($this->isCurrentVersion) {
             $tokens = token_get_all(file_get_contents(str_replace('$', '\\\$', $file)));
         } else {
-            $tmpFile = tempnam("/tmp", "Phpexec");
+            $tmpFile = tempnam('/tmp', 'Phpexec');
             shell_exec($this->phpexec.'  -d short_open_tag=1  -r "print \'<?php \\$tokens = \'; var_export(token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); print \'; ?>\';" > '.$tmpFile);
             include $tmpFile;
             unlink($tmpFile);
@@ -151,7 +151,7 @@ class Phpexec {
 
     public function compile($file) {
         $shell = shell_exec($this->phpexec.' -l '.escapeshellarg($file).' 2>&1');
-        $shell = preg_replace("/(PHP Warning|Warning|Strict Standards|PHP Warning|PHP Strict Standards|PHP Deprecated|Deprecated): .*?\n/i", '', $shell);
+        $shell = preg_replace('/(PHP Warning|Warning|Strict Standards|PHP Warning|PHP Strict Standards|PHP Deprecated|Deprecated): .*?\n/i', '', $shell);
         $shell = trim($shell);
 
         if (trim($shell) == 'No syntax errors detected in '.$file) {

@@ -29,7 +29,7 @@ class ConstWithArray extends Analyzer\Analyzer {
 
     public function analyze() {
         // method used in a static methodcall \a\b::b()
-        $this->atomIs("Const")
+        $this->atomIs('Const')
              ->outIs('VALUE')
              ->atomIs('Functioncall')
              ->fullnspath('\\array')

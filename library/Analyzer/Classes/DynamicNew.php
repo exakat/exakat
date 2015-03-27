@@ -28,14 +28,14 @@ use Analyzer;
 class DynamicNew extends Analyzer\Analyzer {
     public function analyze() {
         // new $y->d();
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs(array('Staticproperty', 'Property', 'Array'))
              ->back('first');
         $this->prepareQuery();
 
         // new $y();
-        $this->atomIs("New")
+        $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs('Functioncall')
              ->outIs('NAME')

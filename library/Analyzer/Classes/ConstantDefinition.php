@@ -28,7 +28,7 @@ use Analyzer;
 class ConstantDefinition extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Const")
+        $this->atomIs('Const')
              ->classIsNot('Global')
              ->functionIs('Global')
              ->outIs('NAME');

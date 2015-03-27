@@ -27,7 +27,7 @@ use Analyzer;
 
 class DereferencingAS extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Assignation")
+        $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs('Functioncall') // or some array-returning function
              ->hasNoIn('METHOD')
@@ -46,7 +46,7 @@ class DereferencingAS extends Analyzer\Analyzer {
              ->outIs('LEFT');
         $this->prepareQuery();
 
-        $this->atomIs("Assignation")
+        $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs('String') // or some array-returning function
              ->inIs('RIGHT')

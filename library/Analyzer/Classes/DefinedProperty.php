@@ -29,7 +29,7 @@ class DefinedProperty extends Analyzer\Analyzer {
 
     public function analyze() {
         // locally defined
-        $this->atomIs("Property")
+        $this->atomIs('Property')
              ->outIs('OBJECT')
              ->code('$this')
              ->inIs('OBJECT')
@@ -45,7 +45,7 @@ class DefinedProperty extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // defined in parents (Extended)
-        $this->atomIs("Property")
+        $this->atomIs('Property')
              ->analyzerIsNot('self')
              ->outIs('OBJECT')
              ->code('$this')
@@ -63,7 +63,7 @@ class DefinedProperty extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // defined in parents implemented
-        $this->atomIs("Property")
+        $this->atomIs('Property')
              ->analyzerIsNot('self')
              ->outIs('OBJECT')
              ->code('$this')
@@ -81,7 +81,7 @@ class DefinedProperty extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // defined in traits (use)
-        $this->atomIs("Property")
+        $this->atomIs('Property')
              ->analyzerIsNot('self')
              ->outIs('OBJECT')
              ->code('$this')
