@@ -65,8 +65,7 @@ class Cypher {
     }
 
     public function finalize() {
-        $config = \Config::factory();
-        if (!file_exists($config->projects_root.'/nodes.cypher.csv')) {
+        if (!file_exists($this->config->projects_root.'/nodes.cypher.csv')) {
             return false;
         }
         
@@ -83,7 +82,7 @@ class Cypher {
 	    $result = $query->getResultSet();
         
         $queryTemplate = <<<GREMLIN
-LOAD CSV WITH HEADERS FROM "file:{$config->projects_root}/nodes.cypher.csv" AS csvLine
+LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.cypher.csv" AS csvLine
 CREATE (token:Token { 
 id: toInt(csvLine.id),
 token: csvLine.token,
@@ -111,8 +110,14 @@ FOREACH(ignoreMe IN CASE WHEN csvLine.index <> "" THEN [1] ELSE [] END | SET tok
 
 return token;
 GREMLIN;
-    	$query = new Query($client, $queryTemplate, array());
-	    $result = $query->getResultSet();
+        try {
+        	$query = new Query($client, $queryTemplate, array());
+	        $result = $query->getResultSet();
+	    } catch (\Exception $e) {
+	        die("Couldn't load nodes in the database\n");
+	    } finally {
+	        $this->cleanCsv(); 
+	    }
 	    
         // Load relations
         $relations = array('file'    => 'FILE',
@@ -122,28 +127,36 @@ GREMLIN;
         foreach($relations as $name => $relation) {
             $queryTemplate = <<<GREMLIN
 USING PERIODIC COMMIT
-LOAD CSV WITH HEADERS FROM "file:{$config->projects_root}/rels.cypher.{$name}.csv" AS csvLine
+LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/rels.cypher.{$name}.csv" AS csvLine
 MATCH (token:Token { id: toInt(csvLine.start)}),(token2:Token { id: toInt(csvLine.end)})
 CREATE (token)-[:$relation]->(token2)
 return token
 GREMLIN;
-        	$query = new Query($client, $queryTemplate, array());
-	        $result = $query->getResultSet();
+            try {
+            	$query = new Query($client, $queryTemplate, array());
+	            $result = $query->getResultSet();
+	        } catch (\Exception $e) {
+    	        die("Couldn't load relatiosn for $name in the database\n");
+	        } finally {
+    	        $this->cleanCsv(); 
+	        }
 	    }
 
-        unlink($config->projects_root.'/nodes.cypher.csv');
-        unlink($config->projects_root.'/rels.cypher.next.csv');
-        unlink($config->projects_root.'/rels.cypher.element.csv');
-        unlink($config->projects_root.'/rels.cypher.file.csv');
-        unlink($config->projects_root.'/rels.cypher.indexed.csv');
-
+        $this->cleanCsv();
         return true;
     }
     
+    private function cleanCsv() {
+        unlink($this->config->projects_root.'/nodes.cypher.csv');
+        unlink($this->config->projects_root.'/rels.cypher.next.csv');
+        unlink($this->config->projects_root.'/rels.cypher.element.csv');
+        unlink($this->config->projects_root.'/rels.cypher.file.csv');
+        unlink($this->config->projects_root.'/rels.cypher.indexed.csv');
+    }
+    
     public function save_chunk() {
-        $config = \Config::factory();
         if (static::$fp_nodes === null) {
-            static::$fp_nodes = fopen($config->projects_root.'/nodes.cypher.csv', 'a');
+            static::$fp_nodes = fopen($this->config->projects_root.'/nodes.cypher.csv', 'a');
         }
         $fp = static::$fp_nodes;
         // adding in_quote here, as it may not appear on the first token.
@@ -181,10 +194,10 @@ GREMLIN;
         static::$nodes = array();
         
         if (static::$fp_rels === null) {
-            static::$fp_rels = array('NEXT'    => fopen($config->projects_root.'/rels.cypher.next.csv', 'a'),
-                                     'FILE'    => fopen($config->projects_root.'/rels.cypher.file.csv', 'a'),
-                                     'INDEXED' => fopen($config->projects_root.'/rels.cypher.indexed.csv', 'a'),
-                                     'ELEMENT' => fopen($config->projects_root.'/rels.cypher.element.csv', 'a'),
+            static::$fp_rels = array('NEXT'    => fopen($this->config->projects_root.'/rels.cypher.next.csv', 'a'),
+                                     'FILE'    => fopen($this->config->projects_root.'/rels.cypher.file.csv', 'a'),
+                                     'INDEXED' => fopen($this->config->projects_root.'/rels.cypher.indexed.csv', 'a'),
+                                     'ELEMENT' => fopen($this->config->projects_root.'/rels.cypher.element.csv', 'a'),
                                      );
         }
         if (static::$file_saved == 0) {
