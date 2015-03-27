@@ -22,10 +22,42 @@
 
 
 class Phpexec {
-    private $phpexec = 'php';
-    private $tokens  = array();
-    private $config = array();
+    private $phpexec          = 'php';
+    private $tokens           = array(';' => 'T_SEMICOLON',
+                                      '=' => 'T_EQUAL',
+                                      '+' => 'T_PLUS',
+                                      '-' => 'T_MINUS',
+                                      '*' => 'T_STAR',
+                                      '/' => 'T_SLASH',
+                                      '%' => 'T_PERCENTAGE',
+                                      '(' => 'T_OPEN_PARENTHESIS',
+                                      ')' => 'T_CLOSE_PARENTHESIS',
+                                      '!' => 'T_BANG',
+                                      '[' => 'T_OPEN_BRACKET',
+                                      ']' => 'T_CLOSE_BRACKET',
+                                      '{' => 'T_OPEN_CURLY',
+                                      '}' => 'T_CLOSE_CURLY',
+                                      '.' => 'T_DOT',
+                                      ',' => 'T_COMMA',
+                                      '@' => 'T_AT',
+                                      '?' => 'T_QUESTION',
+                                      ':' => 'T_COLON',
+                                      '>' => 'T_GREATER',
+                                      '<' => 'T_SMALLER',
+                                      '&' => 'T_AND',
+                                      '^' => 'T_OR',
+                                      '|' => 'T_XOR',
+                                      '&&' => 'T_ANDAND',
+                                      '||' => 'T_OROR',
+                                      '"' => 'T_QUOTE',
+                                      '"_CLOSE' => 'T_QUOTE_CLOSE',
+                                      '$' => 'T_DOLLAR',
+                                      '`' => 'T_SHELL_QUOTE',
+                                      '`_CLOSE' => 'T_SHELL_QUOTE_CLOSE',
+                                      '~' => 'T_TILDE');
+    private $config           = array();
     private $isCurrentVersion = false;
+    private $isValid          = false;
     
     public function __construct($phpversion) {
         $phpversion3 = substr($phpversion, 0, 3);
@@ -36,33 +68,88 @@ class Phpexec {
         switch($phpversion3) {
             case '5.2' : 
                 $this->phpexec = $config->php52;
+                if (!empty($this->phpexec)) {
+                    $res = shell_exec($this->phpexec.' -v 2>&1');
+                    if (substr($res, 0, 4) == 'PHP ') {
+                        $this->isValid = true;
+                    } else {
+                    
+                    }
+                }
                 break 1;
 
             case '5.3' : 
                 $this->phpexec = $config->php53;
+                if (!empty($this->phpexec)) {
+                    $res = shell_exec($this->phpexec.' -v 2>&1');
+                    if (substr($res, 0, 4) == 'PHP ') {
+                        $this->isValid = true;
+                    } else {
+                    
+                    }
+                }
                 break 1;
 
             case '5.4' : 
                 $this->phpexec = $config->php54;
+                if (!empty($this->phpexec)) {
+                    $res = shell_exec($this->phpexec.' -v 2>&1');
+                    if (substr($res, 0, 4) == 'PHP ') {
+                        $this->isValid = true;
+                    } else {
+                    
+                    }
+                }
                 break 1;
 
             case '5.5' : 
                 $this->phpexec = $config->php55;
+                if (!empty($this->phpexec)) {
+                    $res = shell_exec($this->phpexec.' -v 2>&1');
+                    if (substr($res, 0, 4) == 'PHP ') {
+                        $this->isValid = true;
+                    } else {
+                    
+                    }
+                }
                 break 1;
 
             case '5.6' : 
                 $this->phpexec = $config->php56;
+                if (!empty($this->phpexec)) {
+                    $res = shell_exec($this->phpexec.' -v 2>&1');
+                    if (substr($res, 0, 4) == 'PHP ') {
+                        $this->isValid = true;
+                    } else {
+                    
+                    }
+                }
                 break 1;
 
             case '7.0' : 
                 $this->phpexec = $config->php70;
+                if (!empty($this->phpexec)) {
+                    $res = shell_exec($this->phpexec.' -v 2>&1');
+                    if (substr($res, 0, 4) == 'PHP ') {
+                        $this->isValid = true;
+                    } else {
+                    
+                    }
+                }
                 break 1;
 
             default: 
                 $this->phpexec = $config->php;
         }
+        
+        if ($this->isValid) {
+            $this->finish();
+        }
+        
+    }
 
-        // prepare the configuration
+    private function finish() {
+        // prepare the configuration for Short tags
         if ($this->isCurrentVersion){
             $shortTags = ini_get('short_open_tag');
         } else {
@@ -72,50 +159,27 @@ class Phpexec {
         }
         $this->config['short_open_tag'] = $shortTags ? 'On' : 'Off';
 
+        // prepare the list of tokens
         if ($this->isCurrentVersion) {
+            if (!in_array('tokenizer', get_loaded_extensions())) {
+                $this->isValid = false;
+                return false;
+            }
             $x = get_defined_constants(true);
-            $this->tokens = array_flip($x['tokenizer']);
+            $tokens = array_flip($x['tokenizer']);
         } else {
             $tmpFile = tempnam('/tmp', 'Phpexec');
-            shell_exec($this->phpexec.' -r "print \'<?php \\$this->tokens = \'; \\$x = get_defined_constants(true); var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > '.$tmpFile);
+            shell_exec($this->phpexec.' -r "print \'<?php \\$tokens = \'; \\$x = get_defined_constants(true); if (!isset(\\$x[\'tokenizer\'])) { \\$x[\'tokenizer\'] = array(); }; var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > '.$tmpFile);
             include $tmpFile;
             unlink($tmpFile);
+            if (empty($tokens)) {
+                $this->isValid = false;
+                return false;
+            }
         }
         
         // prepare extra tokens
-        $tphp = array(';' => 'T_SEMICOLON',
-                      '=' => 'T_EQUAL',
-                      '+' => 'T_PLUS',
-                      '-' => 'T_MINUS',
-                      '*' => 'T_STAR',
-                      '/' => 'T_SLASH',
-                      '%' => 'T_PERCENTAGE',
-                      '(' => 'T_OPEN_PARENTHESIS',
-                      ')' => 'T_CLOSE_PARENTHESIS',
-                      '!' => 'T_BANG',
-                      '[' => 'T_OPEN_BRACKET',
-                      ']' => 'T_CLOSE_BRACKET',
-                      '{' => 'T_OPEN_CURLY',
-                      '}' => 'T_CLOSE_CURLY',
-                      '.' => 'T_DOT',
-                      ',' => 'T_COMMA',
-                      '@' => 'T_AT',
-                      '?' => 'T_QUESTION',
-                      ':' => 'T_COLON',
-                      '>' => 'T_GREATER',
-                      '<' => 'T_SMALLER',
-                      '&' => 'T_AND',
-                      '^' => 'T_OR',
-                      '|' => 'T_XOR',
-                      '&&' => 'T_ANDAND',
-                      '||' => 'T_OROR',
-                      '"' => 'T_QUOTE',
-                      '"_CLOSE' => 'T_QUOTE_CLOSE',
-                      '$' => 'T_DOLLAR',
-                      '`' => 'T_SHELL_QUOTE',
-                      '`_CLOSE' => 'T_SHELL_QUOTE_CLOSE',
-                      '~' => 'T_TILDE');
-        $this->tokens += $tphp;
+        $this->tokens += $tokens;
     }
     
     public function getTokenName($token) {
@@ -177,6 +241,10 @@ class Phpexec {
         } else {
             return $this->config;
         }
+    }
+    
+    public function isValid() {
+        return $this->isValid;
     }
 }
 

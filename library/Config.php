@@ -129,9 +129,17 @@ class Config {
         }
         unset($value);
         
+        $other_php_versions = array();
+        foreach(array('52', '53', '54', '55', '56', '70') as $version) {
+            $php = new \Phpexec($version[0].'.'.$version[1]);
+            if ($php->isValid()) {
+                $other_php_versions[] = $version;
+            }
+        }
+        
         // check and default values
         $defaults = array( 'ignore_dirs'        => array('tests', 'test', 'Tests'),
-                           'other_php_versions' => array('53', '54', '55', '56', '70'),
+                           'other_php_versions' => $other_php_versions,
                            'phpversion'         => PHP_VERSION
                            );
         
