@@ -31,6 +31,13 @@ class Magicnumber implements Tasks {
     
     public function run(\Config $config) {
         $project = $config->project;
+        if ($project == 'default') {
+            die("Magicnumber needs a -p <project>\nAborting\n");
+        }
+
+        if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {
+            die("No such project as $project.\nAborting\n");
+        }
 
         $this->client = new Client();
         
@@ -43,12 +50,11 @@ class Magicnumber implements Tasks {
         $types = array('Integer', 'String', 'Float');
 
         foreach( $types as $type) {
-            $query = <<<QUERY
-        m = [:];
-        g.idx('atoms')[['atom':'$type']].groupCount(m){it.code}.iterate();
-        m.findAll()
-
-QUERY;
+            $query = <<<SQL
+m = [:];
+g.idx('atoms')[['atom':'$type']].groupCount(m){it.code}.iterate();
+m.findAll()
+SQL;
             $res = $this->query($query);
 
             $sqlite->exec('CREATE TABLE '.$type.' (id INTEGER PRIMARY KEY, value STRING, count INTEGER)');
