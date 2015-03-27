@@ -31,8 +31,8 @@ class ProjectSpip extends Project {
                               'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70',
                               );
 
-    protected $reports = array('Spip'    => array('Devoops'),
-                               'Counts'  => array('Sqlite'));
+    protected $reports = array('Spip'    => array('Devoops' => 'spip'),
+                               'Counts'  => array('Sqlite'  => 'spip'));
 }
 
 ?>

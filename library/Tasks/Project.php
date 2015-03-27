@@ -34,8 +34,12 @@ class Project implements Tasks {
                               'Appinfo', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
 
-    protected $reports = array('Premier' => array('Markdown', 'Sqlite', 'Devoops', 'Html', 'Text'),
-                               'Counts'  => array('Sqlite'));
+    protected $reports = array('Premier' => array('Markdown' => 'report', 
+                                                  'Sqlite'   => 'report',
+                                                  'Devoops'  => 'report',
+                                                  'Html'     => 'report',
+                                                  'Text'     => 'report'),
+                               'Counts'  => array('Sqlite'   => 'report'));
     
     public function run(\Config $config) {
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
@@ -148,13 +152,13 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
 
         $oldConfig = \Config::factory();
         foreach($this->reports as $reportName => $formats) {
-            foreach($formats as $format) {
+            foreach($formats as $format => $fileName) {
                 display("Reporting $reportName in $format\n");
                 $args = array ( 1 => 'report',
                                 2 => '-p',
                                 3 => $config->project,
                                 4 => '-f',
-                                5 => strtolower($reportName),
+                                5 => $fileName,
                                 6 => '-format',
                                 7 => $format,
                                 8 => '-report',
