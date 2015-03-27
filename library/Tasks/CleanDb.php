@@ -38,7 +38,7 @@ class CleanDb implements Tasks {
             $client->getServerInfo();
         } catch (\Exception $e) {
             display("Couldn't access Neo4j\n");
-            shell_exec('cd neo4j; ./bin/neo4j start');
+            shell_exec('cd '.$config->projects_root.'/neo4j; ./bin/neo4j start');
         }
         
         $queryTemplate = 'start n=node(*)
@@ -63,7 +63,7 @@ return count(n)';
                 $client->getServerInfo();
                 display( "Restarted Neo4j cleanly \n");
             } catch (\Exception $e) {
-                display( " Didn't restart neo4j cleanly\n");
+                display( "Didn't restart neo4j cleanly\n");
             }
         } else {
             display("Cleaning with cypher\n");
