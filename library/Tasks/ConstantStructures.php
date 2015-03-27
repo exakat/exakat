@@ -29,20 +29,32 @@ use Everyman\Neo4j\Client,
 
 class ConstantStructures implements Tasks {
     private $client = null;
+    private $lastTiming = 0;
     
     public function run(\Config $config) {
         $project = $config->project;
 
         $this->client = new Client();
+
+        // First, clean it all
+        $query = 'g.V.hasNot("constante", null).each{ it.removeProperty("constante")};';
+        $this->query($query);
+        $this->displayTiming("Initial clean");
     
         // Case for Literals
-        $literals = array('Integer', 'Boolean', 'Real', 'Null', 'String', 'Void');
+        $literals = array('Integer', 'Boolean', 'Real', 'Null', 'Void');
         foreach($literals as $literal) {
             $query = 'g.idx("atoms")[["atom":"'.$literal.'"]].each{ it.setProperty("constante", true)};';
             $this->query($query);
+            $this->displayTiming($literal);
         }
 
+        // String that are concatenations are differente
+        $query = 'g.idx("atoms")[["atom":"String"]].filter{it.out("CONTAIN").any() == false}.each{ it.setProperty("constante", true)};';
+        $this->query($query);
+        $this->displayTiming('String/concatenations');
 
+        for ($i =0; $i < 3; $i++) {
         // Cases for Structures (all sub element are constante => structure is constante)
         $structures = array('Addition'       => array('LEFT', 'RIGHT'),
                             'Multiplication' => array('LEFT', 'RIGHT'),
@@ -55,8 +67,7 @@ class ConstantStructures implements Tasks {
                             );
         
         foreach($structures as $atom => $links) {
-            print "$atom\n";
-            $linksList = "'".join("', '", $links)."'";
+            $linksList = "'".implode("', '", $links)."'";
 
             $query = <<<GREMLIN
 g.idx("atoms")[["atom":"$atom"]]
@@ -65,6 +76,7 @@ g.idx("atoms")[["atom":"$atom"]]
     .each{ it.setProperty("constante", true);}
 GREMLIN;
             $this->query($query);
+            $this->displayTiming($atom);
         }
         
         // case for Arguments
@@ -76,6 +88,7 @@ g.idx("atoms")[["atom":"Functioncall"]]
     .each{ it.setProperty("constante", true);}
 GREMLIN;
         $this->query($query);
+        $this->displayTiming('Arguments');
 
         // case for Assignation
         $query = <<<GREMLIN
@@ -87,6 +100,7 @@ g.idx("atoms")[["atom":"Assignation"]]
     .each{ it.setProperty("constante", true);}
 GREMLIN;
         $this->query($query);
+        $this->displayTiming('Assignation');
 
         // case for array
         $query = <<<GREMLIN
@@ -96,12 +110,37 @@ g.idx("atoms")[["atom":"Functioncall"]]
     .each{ it.setProperty("constante", true);}
 GREMLIN;
         $this->query($query);
+        $this->displayTiming('Array');
+        }
+
+
+
+        // Final count
+        $query = <<<GREMLIN
+g.V.count();
+GREMLIN;
+        $vertices = $this->query($query);
+        display( "Total tokens : ".$vertices[0][0]." \n");
+
+        $query = <<<GREMLIN
+g.V.hasNot('constante', null).count();
+GREMLIN;
+        $vertices = $this->query($query);
+        display( "Constante tokens : ".$vertices[0][0]." \n");
+
+    }
+
+    private function displayTiming($message) {
+        display( "$message\nTime : ".number_format($this->lastTiming * 1000, 0)."ms\n");
     }
     
     private function query($query, $retry = 1) {
+        $this->lastTiming = 0;
+        $begin = microtime(true);
         $params = array('type' => 'IN');
         try {
             $GremlinQuery = new Query($this->client, $query, $params);
+            $this->lastTiming = $begin - time();
             return $GremlinQuery->getResultSet();
         } catch (Exception $e) {
             $fp = fopen($config->projects_root.'/'.$config->project.'/log/build_root.log', 'a');
@@ -113,28 +152,9 @@ GREMLIN;
                 sleep (3);
                 return $this->query($query, 0);
             }
-        
             die('died in '.__METHOD__."\n");
         }
     }
-
-    private function logTime($step) {
-        static $log, $begin, $end, $start;
-    
-        if ($log === null) {
-            file_put_contents($this->project_dir.'/log/build_root.log', '');
-            $log = fopen($this->project_dir.'/log/build_root.timing.csv', 'w+');
-        }
-        $end = microtime(true);
-        if ($begin === null) { 
-            $begin = $end; 
-            $start = $end;
-        }
-    
-        fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
-        $begin = $end;
-    }
-
 }
 
 ?>
