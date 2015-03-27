@@ -24,10 +24,10 @@
 namespace Loader;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Index\NodeIndex,
-	Everyman\Neo4j\Relationship,
-	Everyman\Neo4j\Node,
-	Everyman\Neo4j\Cypher\Query;
+    Everyman\Neo4j\Index\NodeIndex,
+    Everyman\Neo4j\Relationship,
+    Everyman\Neo4j\Node,
+    Everyman\Neo4j\Cypher\Query;
 
 class Cypher {
     const CSV_SEPARATOR = ',';
@@ -77,14 +77,14 @@ class Cypher {
         $client = new Client();
 
         // Load Nodes
-        $queryTemplate = 'CREATE INDEX ON :Token(id)';
-    	$query = new Query($client, $queryTemplate, array());
-	    $result = $query->getResultSet();
+        $queryTemplate = 'CREATE INDEX ON :Token(eid)';
+        $query = new Query($client, $queryTemplate, array());
+        $result = $query->getResultSet();
         
         $queryTemplate = <<<GREMLIN
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.cypher.csv" AS csvLine
 CREATE (token:Token { 
-id: toInt(csvLine.id),
+eid: toInt(csvLine.id),
 token: csvLine.token,
 code: csvLine.code,
 line: toInt(csvLine.line)})
@@ -111,14 +111,13 @@ FOREACH(ignoreMe IN CASE WHEN csvLine.index <> "" THEN [1] ELSE [] END | SET tok
 return token;
 GREMLIN;
         try {
-        	$query = new Query($client, $queryTemplate, array());
-	        $result = $query->getResultSet();
-	    } catch (\Exception $e) {
-	        die("Couldn't load nodes in the database\n");
-	    } finally {
-	        $this->cleanCsv(); 
-	    }
-	    
+            $query = new Query($client, $queryTemplate, array());
+            $result = $query->getResultSet();
+        } catch (\Exception $e) {
+            $this->cleanCsv(); 
+            die("Couldn't load nodes in the database\n");
+        }
+        
         // Load relations
         $relations = array('file'    => 'FILE',
                            'element' => 'ELEMENT',
@@ -128,21 +127,33 @@ GREMLIN;
             $queryTemplate = <<<GREMLIN
 USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/rels.cypher.{$name}.csv" AS csvLine
-MATCH (token:Token { id: toInt(csvLine.start)}),(token2:Token { id: toInt(csvLine.end)})
+MATCH (token:Token { eid: toInt(csvLine.start)}),(token2:Token { eid: toInt(csvLine.end)})
 CREATE (token)-[:$relation]->(token2)
 return token
 GREMLIN;
             try {
-            	$query = new Query($client, $queryTemplate, array());
-	            $result = $query->getResultSet();
-	        } catch (\Exception $e) {
-    	        die("Couldn't load relatiosn for $name in the database\n");
-	        } finally {
-    	        $this->cleanCsv(); 
-	        }
-	    }
+                $query = new Query($client, $queryTemplate, array());
+                $result = $query->getResultSet();
+            } catch (\Exception $e) {
+                $this->cleanCsv(); 
+                die("Couldn't load relations for $name in the database\n");
+            }
+        }
+
+            $queryTemplate = <<<GREMLIN
+MATCH (Token {  })
+REMOVE Token.eid
+GREMLIN;
+            try {
+                $query = new Query($client, $queryTemplate, array());
+                $result = $query->getResultSet();
+            } catch (\Exception $e) {
+                $this->cleanCsv(); 
+                die("Couldn't remove eid\n");
+            } 
 
         $this->cleanCsv();
+
         return true;
     }
     
