@@ -1125,8 +1125,6 @@ Faire une tache 'progress' pour savoir ou est le project / le system
 Check that compilation tables are all available or not.
 robo : deploy to release, spartacus
 
-PHP functions called with hardcoded IP (string, and string -> variable -> argument)
-
 tri dans analyzer result count
 
 methods vides sur-classées -> OK
