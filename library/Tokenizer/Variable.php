@@ -48,7 +48,7 @@ class Variable extends TokenAuto {
         return <<<GREMLIN
         
 it.fullcode = it.code;
-if (it.reference == "true") {
+if (it.reference == true) {
     it.fullcode = "&" + it.fullcode;
 }
 
