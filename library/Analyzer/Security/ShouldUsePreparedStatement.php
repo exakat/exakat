@@ -27,12 +27,27 @@ use Analyzer;
 
 class ShouldUsePreparedStatement extends Analyzer\Analyzer {
     public function analyze() {
-        $functions = array( '\\sqlite_query',
-                            '\\mysql_query',
-                            '\\mysqli_query',
-                            '\\pg_query');
+        $functions = array( '\\pg_query',
+                            '\\sqlsrv_query',
+                            '\\cubrid_query',
+                            '\\sqlite_query',
+                            '\\sybase_query',
+                            '\\ingres_query',
+                            '\\pg_send_query',
+                            '\\msql_db_query',
+                            '\\mysql_db_query',
+                            '\\fbsql_db_query',
+                            '\\pg_cancel_query',
+                            '\\ifx_query',
+                            '\\ibase_free_query',
+                            '\\dbx_query',
+                            '\\maxdb_multi_query',
+                            '\\sqlite_array_query',
+                            '\\mysqli_slave_query',
+                            '\\mysqli_master_query',
+                            '\\sqlite_single_query');
         
-        // dynamic type in the code
+        // dynamic type in the code : mysql_query($res, "select ".$a." from table");
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
@@ -40,14 +55,11 @@ class ShouldUsePreparedStatement extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 1)
-             ->atomIs(array('Concatenation', 'Variable', 'Property'))
-             /*
-             ->isNot('constante', true)
-             */
+             ->atomIs('Concatenation')
              ->back('first');
         $this->prepareQuery();
 
-        // dynamic type in the code
+        // dynamic type in the code : mysql_query($res, "select $a from table");
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
@@ -55,6 +67,43 @@ class ShouldUsePreparedStatement extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 1)
+             ->atomIs('String')
+             ->outIs('CONTAIN')
+             ->back('first');
+        $this->prepareQuery();
+
+        // dynamic type in the code : mysql_query($res, <<<HEREDOC select $a from table HEREDOC);
+        $this->atomIs('Functioncall')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->fullnspath($functions)
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->is('rank', 1)
+             ->atomIs('Heredoc')
+             ->outIs('CONTAIN')
+             ->is('heredoc', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        // method call $someObject->query('select '. 'b') (probably too wide...) 
+        $this->atomIs('Methodcall')
+             ->outIs('METHOD')
+             ->code('query')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->is('rank', 0)
+             ->atomIs('Concatenation')
+             ->back('first');
+        $this->prepareQuery();
+
+        // method call $someObject->query("select $b") (probably too wide...) 
+        $this->atomIs('Methodcall')
+             ->outIs('METHOD')
+             ->code('query')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->is('rank', 0)
              ->atomIs('String')
              ->outIs('CONTAIN')
              ->back('first');
