@@ -26,12 +26,6 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class ShellUsage extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         // backtick shell calls
         $this->atomIs('Shell');

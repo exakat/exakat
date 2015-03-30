@@ -26,12 +26,6 @@ namespace Analyzer\Functions;
 use Analyzer;
 
 class UseConstantAsArguments extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $functions = $this->loadIni('php_constant_arguments.ini');
 

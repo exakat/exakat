@@ -26,12 +26,6 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class NoHardcodedPath extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $functions = array('glob', 'fopen', 'file', 'file_get_contents', 'file_put_contents', 'unlink',
                            'opendir', 'rmdir', 'mkdir');

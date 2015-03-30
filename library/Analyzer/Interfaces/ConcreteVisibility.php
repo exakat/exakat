@@ -26,12 +26,6 @@ namespace Analyzer\Interfaces;
 use Analyzer;
 
 class ConcreteVisibility extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $this->atomIs('Function')
              ->hasOut(array('PRIVATE', 'PROTECTED'))

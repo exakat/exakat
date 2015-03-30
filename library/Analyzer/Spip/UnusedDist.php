@@ -5,12 +5,6 @@ namespace Analyzer\Spip;
 use Analyzer;
 
 class UnusedDist extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $this->atomIs('Function')
              ->outIs('NAME')

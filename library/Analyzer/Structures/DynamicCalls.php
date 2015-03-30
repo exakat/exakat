@@ -26,12 +26,6 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class DynamicCalls extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         // dynamic constants
         $this->atomFunctionIs('constant');

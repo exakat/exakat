@@ -26,12 +26,6 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class ShouldChainException extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         // omitted 3rd argument
         $this->atomIs('Catch')
