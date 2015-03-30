@@ -104,9 +104,11 @@ class Files implements Tasks {
             }
         }
 
+        display("Built ignore-dir/files list\n");
         $shell = 'cd '.$config->projects_root.'/projects/'.$dir.'/code/; phploc '.(count($ignoreName) ? ' --names-exclude  '.join(' --names-exclude ', $ignoreName).' ' : '')
                                                         .(count($ignoreDirs) ? ' --exclude '.join(' --exclude ', $ignoreDirs).' ' : '')
                                                         .' .';
+        display("Ran phploc\n");
 
         $res = shell_exec($shell);
         preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
@@ -120,12 +122,14 @@ class Files implements Tasks {
                                          array('key' => 'directories', 'value' => $rdirs)
                                         )
                           ) ;
+        display("Counted files\n");
 
         $notCompilable = array();
 
         $versions = $config->other_php_versions;
 
         foreach($versions as $version) {
+            display("Check compilation for $version\n");
             $stats['notCompilable'.$version] = -1;
             
             $shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh -c "'.$config->{'php'.$version}.' -l $1 2>&1" || true ';
@@ -235,6 +239,7 @@ class Files implements Tasks {
     
             $datastore->addRow('shortopentag', $shortOpenTag);
         }
+        display("Check short tag\n");
 
         $datastore->addRow('hash', $stats);
         
@@ -257,7 +262,7 @@ class Files implements Tasks {
             }
         }
         $datastore->addRow('hash', $composerInfo);
-        
+        display("Check composer\n");
         
         if ($config->json) {
             if ($unknown) {
