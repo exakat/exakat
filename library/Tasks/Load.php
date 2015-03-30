@@ -92,6 +92,7 @@ class Load implements Tasks {
     }
 
     private function process_file($filename) {
+        display($filename."\n");
         $log = array();
         $begin = microtime(true);
     
