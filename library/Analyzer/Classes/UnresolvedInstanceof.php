@@ -37,7 +37,7 @@ class UnresolvedInstanceof extends Analyzer\Analyzer {
         $classes = $classes['classes'];
         $classes = $this->makeFullNsPath($classes);
         
-        $this->atomIs("Instanceof")
+        $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->noClassDefinition()

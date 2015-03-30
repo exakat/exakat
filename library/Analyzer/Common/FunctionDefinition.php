@@ -35,7 +35,7 @@ class FunctionDefinition extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->analyzerIsNot('Analyzer\\Classes\\MethodDefinition')
              ->analyzerIsNot('Analyzer\\Interfaces\\InterfaceMethod')

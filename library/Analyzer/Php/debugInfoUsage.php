@@ -27,7 +27,7 @@ use Analyzer;
 
 class debugInfoUsage extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Function")
+        $this->atomIs('Function')
              ->outIs('NAME')
              ->code('__debugInfo')
              ->inIs('NAME')

@@ -28,7 +28,7 @@ use Analyzer;
 class EmptyInterface extends Analyzer\Analyzer {
     
     public function analyze() {
-        $this->atomIs("Interface")
+        $this->atomIs('Interface')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Void')

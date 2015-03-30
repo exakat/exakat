@@ -27,10 +27,10 @@ use Analyzer;
 
 class UseWithFullyQualifiedNS extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->atomIs(array('Nsname', 'As'))
-             ->is('absolutens', "true");
+             ->is('absolutens', true);
         $this->prepareQuery();
     }
 }

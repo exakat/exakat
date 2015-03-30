@@ -28,7 +28,8 @@ use Analyzer;
 class ThrowUsage extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Throw");
+        $this->atomIs('Throw');
+        $this->prepareQuery();
     }
 }
 

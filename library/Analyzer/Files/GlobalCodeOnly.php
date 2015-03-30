@@ -27,7 +27,7 @@ use Analyzer;
 
 class GlobalCodeOnly extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("File")
+        $this->atomIs('File')
              ->noAtomInside(DefinitionsOnly::$definitions)
              ->back('first');
         $this->prepareQuery();

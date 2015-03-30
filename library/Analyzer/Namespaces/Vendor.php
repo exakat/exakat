@@ -27,11 +27,11 @@ use Analyzer;
 
 class Vendor extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array("Analyzer\\Namespaces\\Namespacesnames");
+        return array('Analyzer\\Namespaces\\Namespacesnames');
     }
     
     public function analyze() {
-        $this->atomIs("Namespace")
+        $this->atomIs('Namespace')
              ->regex('fullcode', '^namespace [a-zA-Z0-9_]+\\\\\\\\');
     }
 
@@ -50,8 +50,8 @@ class Vendor extends Analyzer\Analyzer {
         return $report;
     }
 
-    public function toCountedArray($load = "it.fullcode") {
-        return parent::toCountedArray("it.fullcode.tokenize(\" \\\\\")[1]");
+    public function toCountedArray($load = 'it.fullcode') {
+        return parent::toCountedArray('it.fullcode.tokenize(" \\\\")[1]');
     }
 
 }

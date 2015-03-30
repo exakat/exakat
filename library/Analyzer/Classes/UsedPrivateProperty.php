@@ -29,7 +29,7 @@ class UsedPrivateProperty extends Analyzer\Analyzer {
 
     public function analyze() {
         // property used in a staticmethodcall \a\b::$b
-        $this->atomIs("Ppp")
+        $this->atomIs('Ppp')
              ->hasOut('PRIVATE')
              ->outIs('DEFINE')
              ->savePropertyAs('code', 'property')

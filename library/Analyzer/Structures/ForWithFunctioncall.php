@@ -27,13 +27,13 @@ use Analyzer;
 
 class ForWithFunctioncall extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("For")
+        $this->atomIs('For')
              ->outIs('FINAL')
              ->atomInside('Functioncall')
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs("For")
+        $this->atomIs('For')
              ->outIs('INCREMENT')
              ->atomInside('Functioncall')
              ->back('first');

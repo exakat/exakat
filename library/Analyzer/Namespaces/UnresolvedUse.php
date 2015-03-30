@@ -34,7 +34,7 @@ class UnresolvedUse extends Analyzer\Analyzer {
     }
 
     public function analyze() {
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->noClassDefinition()
              ->noNamespaceDefinition()

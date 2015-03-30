@@ -28,8 +28,9 @@ use Analyzer;
 class Gotonames extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Goto")
+        $this->atomIs('Goto')
              ->outIs('LABEL');
+        $this->prepareQuery();
     }
 }
 

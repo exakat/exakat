@@ -27,10 +27,10 @@ use Analyzer;
 
 class ExponentUsage extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Power");
+        $this->atomIs('Power');
         $this->prepareQuery();
 
-        $this->atomIs("Assignation")
+        $this->atomIs('Assignation')
              ->tokenIs('T_POW_EQUAL');
         $this->prepareQuery();
     }

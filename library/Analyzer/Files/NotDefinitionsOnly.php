@@ -32,7 +32,7 @@ class NotDefinitionsOnly extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("File")
+        $this->atomIs('File')
              ->analyzerIsNot('Analyzer\\Files\\DefinitionsOnly')
              ->analyzerIsNot('Analyzer\\Files\\GlobalCodeOnly');
         $this->prepareQuery();

@@ -28,7 +28,7 @@ use Analyzer;
 class ThisIsForClasses extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Variable")
+        $this->atomIs('Variable')
              ->code('$this')
              ->classIs('Global')
              ->traitIs('Global')

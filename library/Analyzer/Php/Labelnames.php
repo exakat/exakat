@@ -28,7 +28,7 @@ use Analyzer;
 class Labelnames extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Label")
+        $this->atomIs('Label')
              ->outIs('LABEL');
     }
 }

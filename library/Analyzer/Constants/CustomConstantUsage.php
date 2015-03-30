@@ -44,13 +44,13 @@ class CustomConstantUsage extends Analyzer\Analyzer {
             }
         }
 
-        $this->atomIs("Identifier")
+        $this->atomIs('Identifier')
              ->analyzerIs('Analyzer\\Constants\\ConstantUsage')
              ->fullnspathIsNot($constants);
         $this->prepareQuery();
 
         // @note NSnamed are OK by default (mmm, no!)
-        $this->atomIs("Nsname")
+        $this->atomIs('Nsname')
              ->analyzerIs('Analyzer\\Constants\\ConstantUsage')
              ->fullnspathIsNot($constants);
         $this->prepareQuery();

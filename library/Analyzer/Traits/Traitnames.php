@@ -28,7 +28,7 @@ use Analyzer;
 class Traitnames extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Trait")
+        $this->atomIs('Trait')
              ->outIs('NAME');
     }
 }

@@ -28,7 +28,7 @@ use Analyzer;
 class WhileListEach extends Analyzer\Analyzer {
     public function analyze() {
         // while (list($a, $b) = each($c)) {}
-        $this->atomIs("While")
+        $this->atomIs('While')
              ->outIs('CONDITION')
              ->atomIs('Assignation')
              ->_as('assignation')

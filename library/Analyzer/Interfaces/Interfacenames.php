@@ -28,8 +28,9 @@ use Analyzer;
 class Interfacenames extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Interface")
+        $this->atomIs('Interface')
              ->outIs('NAME');
+        $this->prepareQuery();
     }
 }
 

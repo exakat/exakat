@@ -27,7 +27,7 @@ use Analyzer;
 
 class NamespaceFullyQualified extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Nsname")
+        $this->atomIs('Nsname')
              ->outIs('SUBNAME')
              ->is('rank', 0)
              ->tokenIs('T_NAMESPACE')

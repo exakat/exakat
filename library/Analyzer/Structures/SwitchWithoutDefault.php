@@ -27,7 +27,7 @@ use Analyzer;
 
 class SwitchWithoutDefault extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Switch")
+        $this->atomIs('Switch')
              ->outIs('CASES')
              ->noAtomInside('Default')
              ->back('first');

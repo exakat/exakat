@@ -32,7 +32,7 @@ class UsedUse extends Analyzer\Analyzer {
 //////////////////////////////////////////////////////////////////////////////////////////
     public function analyze() {
     // case of simple subuse in a new with alias :  use a\b; new b\c()
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->savePropertyAs('alias', 'used')
@@ -48,7 +48,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in a new with alias :  use a; new a()
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->atomIs('Identifier')
@@ -63,7 +63,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in Typehint
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->savePropertyAs('code', 'used')
@@ -77,7 +77,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of alias use in extends or implements
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->savePropertyAs('code', 'used')
@@ -91,7 +91,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in a extends
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->savePropertyAs('code', 'used')
@@ -105,7 +105,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in a implements
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->savePropertyAs('code', 'used')
@@ -119,7 +119,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
         
     // case of simple use in a Static constant
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->savePropertyAs('code', 'used')
@@ -133,7 +133,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in a Static property
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->savePropertyAs('code', 'used')
@@ -147,7 +147,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in a Static method
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->savePropertyAs('code', 'used')
@@ -161,7 +161,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in a instanceof
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->savePropertyAs('fullnspath', 'used')
@@ -178,7 +178,7 @@ class UsedUse extends Analyzer\Analyzer {
 // case of use with alias (use A as B), single or multiple declaration
 //////////////////////////////////////////////////////////////////////////////////////////
     // case of simple use in Typehint
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
@@ -194,7 +194,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in a new
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
@@ -210,7 +210,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in a extends
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
@@ -226,7 +226,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in a implements
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
@@ -242,7 +242,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
         
     // case of simple use in a Static constant
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
@@ -258,7 +258,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in a Static property
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
@@ -274,7 +274,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
     // case of simple use in a Static method
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->_as('result')
              ->outIs(array('AS', 'SUBNAME'))
@@ -291,7 +291,7 @@ class UsedUse extends Analyzer\Analyzer {
 
     // case of alias use in a instanceof
         // subcase for the original path
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->analyzerIsNot('Analyzer\\Namespaces\\UsedUse')
              ->_as('result')
@@ -306,7 +306,7 @@ class UsedUse extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // subcase for the alias
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->analyzerIsNot('Analyzer\\Namespaces\\UsedUse')
              ->_as('result')

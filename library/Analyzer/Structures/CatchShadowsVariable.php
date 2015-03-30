@@ -28,7 +28,7 @@ use Analyzer;
 class CatchShadowsVariable extends Analyzer\Analyzer {
     public function analyze() {
         // Catch inside a function
-        $this->atomIs("Catch")
+        $this->atomIs('Catch')
              ->outIs('VARIABLE')
              ->savePropertyAs('code', 'catchVariable')
              ->goToCurrentScope()

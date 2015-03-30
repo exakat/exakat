@@ -28,7 +28,7 @@ use Analyzer;
 class EmptyTryCatch extends Analyzer\Analyzer {
     
     public function analyze() {
-        $this->atomIs("Try")
+        $this->atomIs('Try')
              ->outIs('CATCH')
              ->outIs('CODE')
              ->outIs('ELEMENT')

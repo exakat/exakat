@@ -28,7 +28,8 @@ use Analyzer;
 class CastingUsage extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Cast");
+        $this->atomIs('Cast');
+        $this->prepareQuery();
     }
 }
 

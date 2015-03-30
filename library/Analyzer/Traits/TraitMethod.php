@@ -1,4 +1,4 @@
-<?php
+'Trait'<?php
 /*
  * Copyright 2012-2015 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,12 +28,12 @@ use Analyzer;
 class TraitMethod extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Trait")
+        $this->atomIs('Trait')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->outIs('NAME')
-             ;
+             ->outIs('NAME');
+        $this->prepareQuery();
     }
 }
 

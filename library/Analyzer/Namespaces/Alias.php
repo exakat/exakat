@@ -1,4 +1,4 @@
-<?php
+'Nsname'<?php
 /*
  * Copyright 2012-2015 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
@@ -28,9 +28,10 @@ use Analyzer;
 class Alias extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Use")
+        $this->atomIs('Use')
              ->outIs('USE')
              ->outIs('AS');
+        $this->prepareQuery();
     }
 }
 

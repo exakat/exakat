@@ -27,7 +27,7 @@ use Analyzer;
 
 class OneLineTwoInstructions extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Sequence")
+        $this->atomIs('Sequence')
              ->outIs('ELEMENT')
              ->_as('report')
              ->atomIsNot(array('Ppp', 'Global', 'Const', 'RawString'))

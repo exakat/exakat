@@ -27,9 +27,10 @@ use Analyzer;
 
 class ThrowsAndAssign extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Throw")
+        $this->atomIs('Throw')
              ->outIs('THROW')
              ->atomIs('Assignation');
+        $this->prepareQuery();
     }
 }
 

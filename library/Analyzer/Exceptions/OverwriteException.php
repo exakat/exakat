@@ -31,7 +31,7 @@ class OverwriteException extends Analyzer\Analyzer {
     }
 
     public function analyze() {
-        $this->atomIs("Try")
+        $this->atomIs('Try')
              ->outIs('CATCH')
              ->_as('result')
              ->outIs('VARIABLE')

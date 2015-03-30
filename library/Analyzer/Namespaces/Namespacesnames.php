@@ -28,8 +28,9 @@ use Analyzer;
 class Namespacesnames extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs("Namespace")
+        $this->atomIs('Namespace')
              ->outIs('NAMESPACE');
+        $this->prepareQuery();
     }
 }
 

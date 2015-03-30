@@ -31,7 +31,7 @@ class PropertyVariableConfusion extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs("Ppp")
+        $this->atomIs('Ppp')
              ->outIs('DEFINE')
              ->savePropertyAs('code', 'name')
              ->inIs('DEFINE')

@@ -27,7 +27,7 @@ use Analyzer;
 
 class ForeachNeedReferencedSource extends Analyzer\Analyzer {
     public function analyze() {
-        $this->atomIs("Foreach")
+        $this->atomIs('Foreach')
              ->outIs('SOURCE')
              ->atomIsNot(array('Variable', 'Array', 'Staticproperty', 'Property'))
              ->inIs('SOURCE')
