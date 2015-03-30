@@ -43,6 +43,14 @@ class UnresolvedClasses extends Analyzer\Analyzer {
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
              ->fullnspathIsNot($classes);
         $this->prepareQuery();
+
+        $this->atomIs('CATCH')
+             ->outIs('CLASS')
+             ->noClassDefinition()
+             ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
+             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->fullnspathIsNot($classes);
+        $this->prepareQuery();
         
         // also add property/constant/methods/catch/try/typehint
     }
