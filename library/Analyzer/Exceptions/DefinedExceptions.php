@@ -41,7 +41,7 @@ class DefinedExceptions extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->analyzerIs('Analyzer\\Exceptions\\DefinedExceptions')
+             ->analyzerIs('self')
              ->back('first');
         $this->prepareQuery();
 
@@ -49,7 +49,7 @@ class DefinedExceptions extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->analyzerIs('Analyzer\\Exceptions\\DefinedExceptions')
+             ->analyzerIs('self')
              ->back('first');
         $this->prepareQuery();
 
@@ -57,7 +57,7 @@ class DefinedExceptions extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->analyzerIs('Analyzer\\Exceptions\\DefinedExceptions')
+             ->analyzerIs('self')
              ->back('first');
         $this->prepareQuery();
 
@@ -65,7 +65,7 @@ class DefinedExceptions extends Analyzer\Analyzer {
         $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->classDefinition()
-             ->analyzerIs('Analyzer\\Exceptions\\DefinedExceptions')
+             ->analyzerIs('self')
              ->back('first');
         $this->prepareQuery();
     }
