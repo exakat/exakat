@@ -1721,7 +1721,8 @@ GREMLIN;
     }
     
     protected function loadIni($file, $index = null) {
-        $fullpath = dirname(dirname(__DIR__)).'/data/'.$file;
+        $config = \Config::factory();
+        $fullpath = $config->dir_root.'/data/'.$file;
         
         if (!file_exists($fullpath)) {
             return null;
@@ -1734,6 +1735,19 @@ GREMLIN;
         }
         
         return $iniFile;
+    }
+
+    protected function loadJson($file) {
+        $config = \Config::factory();
+        $fullpath = $config->dir_root.'/data/'.$file;
+
+        if (!file_exists($fullpath)) {
+            return null;
+        }
+
+        $jsonFile = json_decode(file_get_contents($fullpath));
+        
+        return $jsonFile;
     }
     
     public static function listAnalyzers() {
