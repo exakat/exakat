@@ -162,7 +162,7 @@ GREMLIN;
                 $analyzer = str_replace('\\', '\\\\', $analyzer_class);
             
                 $query = <<<GREMLIN
-        g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpConfiguration', '$version');
+        g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpConfiguration', '{$config->version}');
 GREMLIN;
                 $arguments = array('type' => 'IN');
                 $result = new \Everyman\Neo4j\Gremlin\Query($client, $query, $arguments);
