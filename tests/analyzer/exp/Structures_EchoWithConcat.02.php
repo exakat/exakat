@@ -7,9 +7,6 @@ $expected     = array('print "should" . "really $be with comma"',
 should\' too $be with comma
 HEREDOC
 ',
-'print <<<\'NOWDOC\'
-nowdoc even with $var is fine.
-NOWDOC',
                       'print "should$be with comma"',
                       'print <<<HEREDOC
 should", $be, " all", "ok"
