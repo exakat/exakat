@@ -1,0 +1,31 @@
+{
+ "opendir":{"function0":["rewinddir","rewinddir","closedir"]},
+
+ "fopen":      {"function0":["fclose", "foef", "fflush", "fgetcsv", "fgets", "fgetss", "flock", "fputcsv", "fputs", "fread", "fscanf", "fseek", "fstat", "ftell", "ftruncate", "fwrite", "rewind"]},
+ "tmpfile":    {"function0":["fclose", "foef", "fflush", "fgetcsv", "fgets", "fgetss", "flock", "fputcsv", "fputs", "fread", "fscanf", "fseek", "fstat", "ftell", "ftruncate", "fwrite", "rewind"]},
+ "popen":      {"function0":["pclose", "foef", "fflush", "fgetcsv", "fgets", "fgetss",          "fputcsv", "fputs", "fread",                    "fstat",                       "fwrite" ]},
+ "fsockopen":  {"function0":["fclose", "foef", "fflush", "fgetcsv", "fgets", "fgetss",          "fputcsv", "fputs", "fread",                    "fstat",                       "fwrite" ]},
+ "pfsockopen": {"function0":["fclose", "foef", "fflush", "fgetcsv", "fgets", "fgetss",          "fputcsv", "fputs", "fread",                    "fstat",                       "fwrite" ]},
+
+ "pspell_new":         {"function0":["pspell_add_to_personal","pspell_add_to_session","pspell_check","pspell_clear_session","pspell_save_wordlist","pspell_store_replacement","pspell_suggest"]},
+ "pspell_new_config":  {"function0":["pspell_add_to_personal","pspell_add_to_session","pspell_check","pspell_clear_session","pspell_save_wordlist","pspell_store_replacement","pspell_suggest"]},
+ "pspell_new_personal":{"function0":["pspell_add_to_personal","pspell_add_to_session","pspell_check","pspell_clear_session","pspell_save_wordlist","pspell_store_replacement","pspell_suggest"]},
+
+ "pspell_config_create":{"function0":["pspell_config_data_dir","pspell_config_dict_dir","pspell_config_ignore","pspell_config_mode","pspell_config_personal","pspell_config_repl","pspell_config_runtogether","pspell_config_save_repl","pspell_new_config"]},
+
+ "bzopen":{"function0":["bzclose","bzerrno","bzerror","bzerrstr","bzflush","bzwrite","bzread"]},
+ 
+ "ftp_connect":    {"function0":["ftp_alloc","ftp_cdup","ftp_chdir","ftp_chmod","ftp_close","ftp_delete","ftp_exec","ftp_fget","ftp_fput","ftp_get_option","ftp_get","ftp_login","ftp_mdtm","ftp_mkdir","ftp_nb_continue","ftp_nb_fget","ftp_nb_fput","ftp_nb_get","ftp_nb_put","ftp_nlist","ftp_pasv","ftp_put","ftp_pwd","ftp_quit","ftp_raw","ftp_rawlist","ftp_rename","ftp_rmdir","ftp_set_option","ftp_site","ftp_size","ftp_systype"]},
+ "ftp_ssl_connect":{"function0":["ftp_alloc","ftp_cdup","ftp_chdir","ftp_chmod","ftp_close","ftp_delete","ftp_exec","ftp_fget","ftp_fput","ftp_get_option","ftp_get","ftp_login","ftp_mdtm","ftp_mkdir","ftp_nb_continue","ftp_nb_fget","ftp_nb_fput","ftp_nb_get","ftp_nb_put","ftp_nlist","ftp_pasv","ftp_put","ftp_pwd","ftp_quit","ftp_raw","ftp_rawlist","ftp_rename","ftp_rmdir","ftp_set_option","ftp_site","ftp_size","ftp_systype"]},
+
+ "sem_get": {"function0":["sem_release","sem_remove"]},
+ "shm_attach": {"function0":["shm_detach","shm_get_var","shm_has_var","shm_put_var","shm_remove","shm_remove_var"]},
+ "msg_get_queue": {"function0":["msg_queue_exists","msg_receive","msg_remove_queue","msg_send","msg_set_queue","msg_stat_queue"]},
+
+ "gzopen": {"function0":["gzclose","gzeof","gzgetc","gzgets","gzgetss","gzpassthru","gzputs","gzread","gzrewind","gzseek","gztell","gzwrite"]},
+
+ "xml_parser_create":    {"function0":["xml_parser_free","xml_parser_get_option","xml_parser_set_option","xml_set_character_data_handler","xml_set_default_handler","xml_set_element_handler","xml_set_end_namespace_decl_handler","xml_set_external_entity_ref_handler","xml_set_notation_decl_handler","xml_set_object","xml_set_processing_instruction_handler","xml_set_start_namespace_decl_handler","xml_set_unparsed_entity_decl_handler","xml_get_current_byte_index","xml_get_current_column_number","xml_get_current_line_number","xml_get_error_code","xml_parse_into_struct"]},
+ "xml_parser_create_ns": {"function0":["xml_parser_free","xml_parser_get_option","xml_parser_set_option","xml_set_character_data_handler","xml_set_default_handler","xml_set_element_handler","xml_set_end_namespace_decl_handler","xml_set_external_entity_ref_handler","xml_set_notation_decl_handler","xml_set_object","xml_set_processing_instruction_handler","xml_set_start_namespace_decl_handler","xml_set_unparsed_entity_decl_handler","xml_get_current_byte_index","xml_get_current_column_number","xml_get_current_line_number","xml_get_error_code","xml_parse_into_struct"]},
+
+ "wddx_packet_start ": {"function0":["wddx_packet_end","wddx_add_vars","wddx_add_vars"]}
+}

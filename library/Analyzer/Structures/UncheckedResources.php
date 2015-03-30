@@ -27,29 +27,41 @@ use Analyzer;
 
 class UncheckedResources extends Analyzer\Analyzer {
     public function analyze() {
-        //readdir(opendir('uncheckedDir4'));
-        $this->atomFunctionIs('opendir')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->fullnspath(array('\\readdir', '\\rewinddir', '\\closedir'));
-        $this->prepareQuery();
+        $rw = $this->loadJson('resource_usage.json');
 
-        //$dir = opendir('uncheckedDir4'); readdir($dir);
-        $this->atomFunctionIs('opendir')
-             ->inIs('RIGHT')
-             ->atomIs('Assignation')
-             ->raw('filter{ it.in("CODE").in("CONDITION").any() == false }')
-             ->_as('result')
-             ->outIs('LEFT')
-//             ->savePropertyAs('code', 'resource')
-//             ->inIs('LEFT')
-             ->nextVariable('resource')
-             ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\is_resource").any() == false }')
-             ->raw('filter{ it.in("NOT").any() == false }')
-             ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").in("RIGHT").in("CODE").in("RIGHT").has("atom", "Comparison").in("CONDITION").any() == false }')
-             ->back('result');
-//        $this->printQuery();
-        $this->prepareQuery();
+        $positions = array(0,1,2);
+        foreach($rw as $creation => $usage) {
+            foreach($positions as $pos) {
+                if (!isset($usage->{"function$pos"})) { continue; }
+                $functions = $this->makeFullNsPath((array) $usage->{"function$pos"});
+
+                //direct usage of the resource : 
+                // readdir(opendir('uncheckedDir4'));
+                $this->atomFunctionIs($creation)
+                     ->inIs('ARGUMENT')
+                     ->inIs('ARGUMENTS')
+                     ->fullnspath(array('\\readdir', '\\rewinddir', '\\closedir'));
+                $this->prepareQuery();
+
+                // deferred usage of the resource
+                //$dir = opendir('uncheckedDir4'); readdir($dir);
+                $this->atomFunctionIs($creation)
+                     ->inIs('RIGHT')
+                     ->atomIs('Assignation')
+                     ->raw('filter{ it.in("CODE").in("CONDITION").any() == false }')
+                     ->_as('result')
+                     ->outIs('LEFT')
+                     ->nextVariable('resource')
+                     // checked with a is_resource
+                     ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\is_resource").any() == false }')
+                     // checked with a !$variable
+                     ->raw('filter{ it.in("NOT").any() == false }')
+                     // checked with a if ($resource) or while($resource) 
+                     ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").in("RIGHT").in("CODE").in("RIGHT").has("atom", "Comparison").in("CONDITION").any() == false }')
+                     ->back('result');
+                $this->prepareQuery();
+            }
+        }
     }
 }
 
