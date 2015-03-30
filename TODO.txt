@@ -1059,7 +1059,7 @@ Check with Christophe for keywords from each page.
 Add top 5 files
 Make a link to clearPHP when it is available.
 
-Minify jss and css in devoops
+Minify jss and css in devoops (It fails)
 
 Remove X when something is not found (add some other icon if the doc isn't run).
 Suggest simplification : if ($a == 2) { $b = true; } else { $b = false;}
@@ -1070,9 +1070,9 @@ Check for index in cleandb
 check that db is well restarted after cleandb
 
 
-	// Ne pas se faire manger par un bug php qui accepte ?GLOBALS[truc]=toto
-	if (isset($_REQUEST['GLOBALS'])) die();
-	Spot overridden variables ? 
+// Ne pas se faire manger par un bug php qui accepte ?GLOBALS[truc]=toto
+if (isset($_REQUEST['GLOBALS'])) die();
+Spot overridden variables ? 
 
 Stop project task if any error is dected
 Avoid using shell_exec in tasks (use the other tasks!)
@@ -1080,3 +1080,79 @@ Avoid using shell_exec in tasks (use the other tasks!)
 print_r as argument needs 2nd argument 
                 die(print_r(array_keys(static::$fp_rels))."\nNO $label\n");
 
+
+Retirer les print dans Tasks (et dans le reste du code)
+Gérer les interruptions de processus au niveau de project
+Revoir Project pour le configurer
+Corriger la page d'accueil pour un projet non-default (SPIP)
+Externaliser les rapports
+Eviter shell_exec dans Project (appels de classes)
+Vider tower 
+CSV avec les rapports de spip
+
+Rapport de cohérence (always do the same ... )
+Exporter uniquement les définitions des règles (référence documentaire)
+Make themas configurable in config.ini
+
+Move support for spip out of tasks
+Detect early and remove non-composer dependencies (pclzip, krumo...)
+
+add other composer classes (silex, ..) Automate the process
+definitions only
+Check undefined parent (when the parent is a composer component )
+method that MUST be overloaded (abstract) may be empty
+
+incompilable files (set a limit in the config file)
+
+composer class may be array interface ($this is an array)
+
+What is a method/function that MUST return (no interactions with $this, 
+
+arbre de dépendences entre les plug-ins via les _dist
+
+_dist mais pas le charger_fonction 
+
+GPR : 
+pas de REQUEST 
+
+config/ecran_securite.php => ignorer GPR detecitons
+_request
+Exclure PCLZIP
+
+Check that phploc is executable in doctor
+Faire une tache 'check project' pour savoir ou est le project
+Faire une tache 'progress' pour savoir ou est le project / le system 
+Check that compilation tables are all available or not.
+robo : deploy to release, spartacus
+
+PHP functions called with hardcoded IP (string, and string -> variable -> argument)
+
+tri dans analyzer result count
+
+methods vides sur-classées -> OK
+
+detect tests and exclude them from analyze
+
+unmodified reference argument : useless, PHP does it for us. Unrelayed arguments!! 
+
+special cases for parent, self, static and $this when checking for methods arguments.
+
+special case for methods defined only once
+spot easy cases for variable's object class
+
+Build the classes tree (dot) with Use, extends, implements, staticcalls... 
+
+Mark files as non-PHP (but with .php extensions, and vice versa).
+Make such a list of file at Files time. 
+
+Start a dictionary of concepts used in exakat. 
+List of characters that may be bad for PHP ? 15, 39, 92
+Unexpected character in input:  '' (ASCII= -31 -19 -21 -92 -39 -30 -2 -12 -11 -22 -8 -4 -7 -27 -26 -20 -18 -25 -16 
+
+
+Avoid searching (always know what to search... avoir substr(function0, -1), => but foreach(positions))
+
+Validate JSON (resource_usage.json, check internal consistencies, check all spellings, duplicates)
+Add 'string encoding' to report.
+
+magicnumber : report names of all structures.
