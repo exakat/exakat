@@ -25,10 +25,6 @@ namespace Analyzer;
 class AnalyzerApply {
     protected $applyBelow = false; 
 
-    public function __construct() {
-        // empty... 
-    }
-    
     public function setApplyBelow($applyBelow = true) {
         $this->applyBelow = $applyBelow;
         
