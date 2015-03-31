@@ -42,23 +42,23 @@ abstract class Directives implements \Iterator {
         $this->position = 0;
     }
 
-    function rewind() {
+    public function rewind() {
         $this->position = 0;
     }
 
-    function current() {
+    public function current() {
         return $this->directives[$this->position];
     }
 
-    function key() {
+    public function key() {
         return $this->position;
     }
 
-    function next() {
+    public function next() {
         ++$this->position;
     }
 
-    function valid() {
+    public function valid() {
         return isset($this->directives[$this->position]);
     }
 
