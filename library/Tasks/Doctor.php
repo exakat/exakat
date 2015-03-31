@@ -94,7 +94,7 @@ class Doctor implements Tasks {
                 $stats['neo4j']['running'] = 'No';
             } else {
                 $stats['neo4j']['running'] = 'Yes';
-                $status = shell_exec('sh '.$config->neo4j_folder.'/bin/neo4j status');
+                $status = shell_exec('cd '.$config->neo4j_folder.'; ./bin/neo4j status');
                 if (strpos($status, 'Neo4j Server is running at pid') !== false) {
                     $stats['neo4j']['running here'] = 'Yes';
                 } else {
