@@ -63,7 +63,7 @@ class Analyze implements Tasks {
         $analyzers = new NodeIndex($client, 'analyzers');
 
         $log->log("Analyzing project $project");
-        $log->log("Runnable analyzers\t".count($analyzers_class)."");
+        $log->log("Runnable analyzers\t".count($analyzers_class));
 
         if ($config->noDependencies) {
             $dependencies2 = $analyzers_class;

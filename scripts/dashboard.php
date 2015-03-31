@@ -31,7 +31,7 @@ if(strpos(basename(__FILE__), 'phar') !== false){
     spl_autoload_register('Autoload::autoload_library');
 }
 
-$files = glob(''.DOC_ROOT.'/human/en/*'.'/*');
+$files = glob(DOC_ROOT.'/human/en/*'.'/*');
 $extraDocs = array();
 $noClearPHP = array();
 foreach($files as $k => $v) {

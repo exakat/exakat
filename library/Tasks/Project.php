@@ -104,7 +104,7 @@ class Project implements Tasks {
         shell_exec('curl 127.0.0.1:7474/db/data/ 2>&1');
 //        var_dump(file_get_contents('127.0.0.1:7474/db/data/'));
 
-        shell_exec('php '.$this->executable.' load -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project.'');
+        shell_exec('php '.$this->executable.' load -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project);
         display("Project loaded\n");
         $this->logTime('Loading');
 

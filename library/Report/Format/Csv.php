@@ -37,7 +37,7 @@ class Csv extends \Report\Format {
     }
     
     public function render($output, $data) {
-        $output->push(array(" Text for ".get_class($this).""));
+        $output->push(array(" Text for ".get_class($this)));
     }
     
     public function push($render) {

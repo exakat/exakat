@@ -95,7 +95,7 @@ class Files implements Tasks {
         $ignoreName = array();
         foreach($config->ignore_dirs as $ignore) {
             if ($ignore[0] == '/') {
-                $d = $config->projects_root.'/projects/'.$dir.'/code'.$ignore.'';
+                $d = $config->projects_root.'/projects/'.$dir.'/code'.$ignore;
                 if (file_exists($d)) { 
                     $ignoreDirs[] = substr($ignore, 1);
                 }

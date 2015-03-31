@@ -157,7 +157,7 @@ class Tokenizer implements Tasks {
             }
     
             $end = microtime(true);
-            $log->log("countLeftNext time : ".(($end - $begin) * 1000)."");
+            $log->log("countLeftNext time : ".(($end - $begin) * 1000));
 
             $log->log("Remaining token to process : $count (".($count - $count_prev).")");
             $log->log("Remaining files to process : $count_file (".($count_file - $count_file_prev).")");
@@ -172,8 +172,8 @@ class Tokenizer implements Tasks {
         }
 
         $wend = microtime(true);
-        $log->log("Total while $round)\t".(($wend - $wbegin)*1000)."");
-        $log->log("Total regex time\t".(($regex_time) * 1000)."");
+        $log->log("Total while $round)\t".(($wend - $wbegin)*1000));
+        $log->log("Total regex time\t".(($regex_time) * 1000));
         $log->log("final cost : $cost");
 
         $server_stat->collect();
