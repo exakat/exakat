@@ -29,11 +29,11 @@ class InconsistantCase extends Analyzer\Analyzer {
 
     public function analyze() {
         $this->atomIs('Null')
-             ->groupFilter("if (it.code == it.code.toLowerCase()) { x2 = 'lower'; } else if (it.code == it.code.toUpperCase()) { x2 = 'upper'; } else {x2 = 'mixed'; }", 10 / 100);
+             ->groupFilter("if (it.code == it.code.toLowerCase()) { x2 = 'lower'; } else if (it.code == it.code.toUpperCase()) { x2 = 'upper'; } else {x2 = 'mixed'; }", 0.1);
         $this->prepareQuery();
 
         $this->atomIs('Null')
-             ->groupFilter("if (it.code == it.code.toLowerCase()) { x2 = 'lower'; } else if (it.code == it.code.toUpperCase()) { x2 = 'upper'; } else {x2 = 'mixed'; }", 10 / 100);
+             ->groupFilter("if (it.code == it.code.toLowerCase()) { x2 = 'lower'; } else if (it.code == it.code.toUpperCase()) { x2 = 'upper'; } else {x2 = 'mixed'; }", 0.1);
         $this->prepareQuery();
     }
 }
