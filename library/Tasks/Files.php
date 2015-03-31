@@ -184,10 +184,10 @@ class Files implements Tasks {
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
                     // let it run
                 } else {
-                    print "\nCouldn't interpret on syntax error : \n";
-                    var_dump($resFile);
-                    print_r($res);
-                    die("\n".__FILE__."\n");
+                    die( "\nCouldn't interpret on syntax error : \n".
+                         print_r($resFile, true).
+                         print_r($res, true).
+                         "\n".__FILE__."\n");
                 }
             }
     
