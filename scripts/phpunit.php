@@ -21,7 +21,7 @@
 */
 
 
-if (array_search('-t', $argv)) {
+if (array_search('-t', $argv) !== false) {
     echo "Running project test for tokenizer\n",
          "Getting recent code\n";
     shell_exec('rm -rf ./projects/test/code/*');
@@ -40,7 +40,7 @@ $row = array('date' => '"'.date('Y-m-d H:i:s').'"', 'id' => 'NULL');
 
 $begin = microtime(true);
 
-if (array_search('-a', $argv)) {
+if (array_search('-a', $argv) !== false) {
     echo "Running ALL tests\n";
     shell_exec('cd tests/analyzer; phpunit randomtest.php > phpunit.txt');
     $results = file_get_contents('tests/analyzer/phpunit.txt');
