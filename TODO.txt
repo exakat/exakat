@@ -525,7 +525,7 @@ Check for unused Traits (extension or use somewhere).
 
 Change representation of Property, constant, methods, use in a class (remove ELEMENT, make it some other link to reduce long sequence scan)
 
-add support for composer (avoid some undefined classes, interfaces, suggest to put them in the etc.)
+add support for composer (avoid some undefined classes, interfaces, suggest to put them in the composer.json, spot unused classes, etc.)
 
 call_user_func doesn't propage references 
 References are contagious ? 
@@ -1095,7 +1095,7 @@ Exporter uniquement les définitions des règles (référence documentaire)
 Make themas configurable in config.ini
 
 Move support for spip out of tasks
-Detect early and remove non-composer dependencies (pclzip, krumo...)
+Detect early and remove non-composer dependencies (pclzip, krumo, jpgraph, fpdf...)
 
 add other composer classes (silex, ..) Automate the process
 definitions only
@@ -1154,3 +1154,9 @@ Validate JSON (resource_usage.json, check internal consistencies, check all spel
 Add 'string encoding' to report.
 
 magicnumber : report names of all structures.
+
+iconv_set_encoding : INI SET!
+
+Spot old code in the codebase? 
+Code older than (xxx months) may be omitted.
+
