@@ -2,11 +2,22 @@
 
 //print_r(processFile('/private/var/folders/3j/pf24y7cx7j71yg0h59t16xqr0000gn/T/exComposer8TRJo9/vendor/monolog/monolog/tests/Monolog/Processor/IntrospectionProcessorTest.php')); die();
 
+$project = $argv[1];
+if (empty($project)) {
+    die( "getComposer <project>\n");
+}
+if (!file_exists('./projects/'.$project.'')) {
+    die( "No such project as $project\n");
+}
 
-$project = 'neoxygen';
+if (!file_exists('./projects/'.$project.'/code/composer.json')) {
+    die( "No composer for project $project\n");
+}
 
 $composer = json_decode(file_get_contents("projects/$project/code/composer.json"));
-$components = (array) $composer->require;
+$components = array_merge((array) @$composer->require,
+                          (array) @$composer->{'require-dev'},
+                          (array) @$composer->suggest);
 
 //$components = array('monolog/monolog' => '~1.3');
 unset($components['php']);
@@ -18,6 +29,11 @@ foreach($components as $k => $v) {
     if (substr($k, 0, 4) == 'lib-') {
         unset($components[$k]);
     }
+}
+
+print "About to check for ".count($components)." components\n";
+foreach($components as $fullName => $version) {
+    print " + $fullName\n";
 }
 
 $sqlite = new sqlite3('data/composer.sqlite');
@@ -88,44 +104,60 @@ foreach($components as $fullName => $version) {
         }
     }
     
-    foreach($all['Class'] as $ns => $classes) {
-        foreach($classes as $class) {
-            $res = $sqlite->query("SELECT id FROM classes WHERE namespace_id = '{$namespacesIds[$ns]}' AND classname = '$class'");
-            $nsid = $res->fetchArray(SQLITE3_ASSOC)['id'];
-            if ($nsid) {
-//                print "   $class found in $nsid\n";
-            } else {
-                $sqlite->query("INSERT INTO classes (namespace_id, classname) VALUES ('{$namespacesIds[$ns]}', '$class');");
+    if (isset($all['Class'])) {
+        foreach($all['Class'] as $ns => $classes) {
+            foreach($classes as $class) {
+                $res = $sqlite->query("SELECT id FROM classes WHERE namespace_id = '{$namespacesIds[$ns]}' AND classname = '$class'");
+                $nsid = $res->fetchArray(SQLITE3_ASSOC)['id'];
+                if ($nsid) {
+    //                print "   $class found in $nsid\n";
+                } else {
+                    $sqlite->query("INSERT INTO classes (namespace_id, classname) VALUES ('{$namespacesIds[$ns]}', '$class');");
+                }
             }
         }
     }
 
-    foreach($all['Interface'] as $ns => $interfaces) {
-        foreach($interfaces as $interface) {
-            $res = $sqlite->query("SELECT id FROM interfaces WHERE namespace_id = '{$namespacesIds[$ns]}' AND interfacename = '$interface'");
-            $nsid = $res->fetchArray(SQLITE3_ASSOC)['id'];
-            if ($nsid) {
-//                print "   $class found in $nsid\n";
-            } else {
-                $sqlite->query("INSERT INTO interfaces (namespace_id, interfacename) VALUES ('{$namespacesIds[$ns]}', '$interface');");
+    if (isset($all['Interface'])) {
+        foreach($all['Interface'] as $ns => $interfaces) {
+            foreach($interfaces as $interface) {
+                $res = $sqlite->query("SELECT id FROM interfaces WHERE namespace_id = '{$namespacesIds[$ns]}' AND interfacename = '$interface'");
+                $nsid = $res->fetchArray(SQLITE3_ASSOC)['id'];
+                if ($nsid) {
+    //                print "   $class found in $nsid\n";
+                } else {
+                    $sqlite->query("INSERT INTO interfaces (namespace_id, interfacename) VALUES ('{$namespacesIds[$ns]}', '$interface');");
+                }
             }
         }
     }
 
-    foreach($all['Trait'] as $ns => $traits) {
-        foreach($traits as $trait) {
-            $res = $sqlite->query("SELECT id FROM traits WHERE namespace_id = '{$namespacesIds[$ns]}' AND traitname = '$trait'");
-            $nsid = $res->fetchArray(SQLITE3_ASSOC)['id'];
-            if ($nsid) {
-//                print "   $class found in $nsid\n";
-            } else {
-                $sqlite->query("INSERT INTO traits (namespace_id, traitname) VALUES ('{$namespacesIds[$ns]}', '$trait');");
+    if (isset($all['Trait'])) {
+        foreach($all['Trait'] as $ns => $traits) {
+            foreach($traits as $trait) {
+                $res = $sqlite->query("SELECT id FROM traits WHERE namespace_id = '{$namespacesIds[$ns]}' AND traitname = '$trait'");
+                $nsid = $res->fetchArray(SQLITE3_ASSOC)['id'];
+                if ($nsid) {
+    //                print "   $class found in $nsid\n";
+                } else {
+                    $sqlite->query("INSERT INTO traits (namespace_id, traitname) VALUES ('{$namespacesIds[$ns]}', '$trait');");
+                }
             }
         }
     }
-
-    
 }
+
+$res = $sqlite->query("SELECT count(*) AS nb FROM components");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." components\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM versions");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." versions\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM classes");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." classes\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM interfaces");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." interfaces\n";
+$res = $sqlite->query("SELECT count(*) AS nb FROM traits");
+print $res->fetchArray(SQLITE3_ASSOC)['nb']." traits\n";
+
 
 function recursiveReaddir($tmpdir) {
     $dir = opendir($tmpdir);
