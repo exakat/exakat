@@ -168,7 +168,7 @@ class Analyzer {
         if ($analyzer = Analyzer::getClass($name)) {
             return new $analyzer($client);
         } else {
-            print "No such class as '$name'\n";
+            echo "No such class as '$name'\n";
             return null;
         }
     }
@@ -333,11 +333,10 @@ GREMLIN;
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            print 'Exception : '.$message."\n";
-            
-            print $queryString."\n";
-            print_r($this->arguments);
-            die(__METHOD__);
+            die( 'Exception : '.$message."\n".
+                 $queryString."\n".
+                 print_r($this->arguments, true).
+                 __METHOD__);
         }
     }
 
@@ -1581,9 +1580,7 @@ GREMLIN
         $this->prepareQuery();
         
         foreach($this->queries as $id => $query) {
-            print "$id)\n";
-            print_r($query);
-            print_r($this->queriesArguments[$id]);
+            echo $id, ")\n", print_r($query, true), print_r($this->queriesArguments[$id], true);
 
             krsort($this->queriesArguments[$id]);
             
@@ -1595,14 +1592,11 @@ GREMLIN
                 } elseif (is_int($value)) {
                     $query = str_replace($name, $value, $query);
                 } else {
-                    print 'Cannot process argument of type '.gettype($value)."\n";
-                    die(__METHOD__);
+                    die( 'Cannot process argument of type '.gettype($value)."\n".__METHOD__);
                 }
             }
             
-            print $query;
-            
-            print "\n\n";
+            echo $query, "\n\n";
         }
         die();
     }

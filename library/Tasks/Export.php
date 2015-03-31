@@ -38,9 +38,7 @@ class Export implements Tasks {
         try { 
             $vertices = $query->getResultSet();
         } catch (Exception $e) {
-            print "Error reading the Vertices\n";
-            print $e->getmessage()."\n";
-            die();
+            die( "Error reading the Vertices\n{$e->getmessage()}\n");
         }
 
         $V = array();
@@ -75,10 +73,7 @@ class Export implements Tasks {
         }
 
         if (!isset($root)) {
-            print "No root! Check the tree in Neo4j\n Aborting\n";
-            print number_format(memory_get_usage() / 1024 / 1024, 0)." Mo\n";
-    
-            die();
+            die( "No root! Check the tree in Neo4j\n Aborting\n".number_format(memory_get_usage() / 1024 / 1024, 0).' Mo'. "\n");
         }
 
         if ($config->format == 'Dot') {
@@ -98,7 +93,7 @@ class Export implements Tasks {
             fwrite($fp, $text);
             fclose($fp);
         } else {
-            print $text;
+            echo $text;
         }
     }
     

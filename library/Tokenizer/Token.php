@@ -204,7 +204,7 @@ class Token {
     final public function check() {
         
         if (!method_exists($this, '_check')) {
-            print get_class($this). " has no check yet\n";
+            echo get_class($this), ' has no check yet', "\n";
         } else {
             $this->remaining = 0;
             $this->done = 0;
@@ -255,9 +255,9 @@ class Token {
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $message = preg_replace('#^.*\[message\](.*?)\[exception\].*#is', '\1', $message);
-            print 'Exception : '.$message."\n";
+            echo 'Exception : ', $message, "\n";
             
-            print $queryTemplate."\n";
+            echo $queryTemplate, "\n";
             die(__METHOD__);
         }
         return $query->getResultSet();
