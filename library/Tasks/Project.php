@@ -39,7 +39,7 @@ class Project implements Tasks {
                                                   'Devoops'  => 'report',
                                                   'Html'     => 'report',
                                                   'Text'     => 'report'),
-                               'Counts'  => array('Sqlite'   => 'report'));
+                               'Counts'  => array('Sqlite'   => 'counts'));
     
     public function run(\Config $config) {
         $this->project_dir = $config->projects_root.'/projects/'.$config->project;
@@ -91,7 +91,6 @@ class Project implements Tasks {
         display("Cleaning DB\n");
         shell_exec('php '.$this->executable.' cleandb ');
         $this->logTime('Files');
-        display("Loading project\n");
 
         display("Running files\n");
         shell_exec('php '.$this->executable.' files -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/files.final.log');
@@ -99,6 +98,11 @@ class Project implements Tasks {
         display("Loading project\n");
 
         $thread->waitForAll();
+        display("waited For All\n");
+        
+        // This is to make sure the database is started and running. 
+        shell_exec('curl 127.0.0.1:7474/db/data/ 2>&1');
+//        var_dump(file_get_contents('127.0.0.1:7474/db/data/'));
 
         shell_exec('php '.$this->executable.' load -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project.'');
         display("Project loaded\n");
