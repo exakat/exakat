@@ -25,7 +25,7 @@ namespace Report\Content;
 
 class Groupby extends \Report\Content {
     protected $analyzers = array();
-    protected $sort = array('Critical', 'Major', 'Minor');
+    protected $sort = array('Critical', 'Major', 'Minor', 'None');
 
     const SORT_NONE = 0;
     const SORT_VALUES = 1;
