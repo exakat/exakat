@@ -40,7 +40,7 @@ class IsExtConstant extends Analyzer\Analyzer {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile);
             
-            if (!empty($ini['classes'][0])) {
+            if (!empty($ini['constants'][0])) {
                 $constants = array_merge($constants, $ini['constants']);
             }
         }
