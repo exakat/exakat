@@ -1,4 +1,4 @@
-'Trait'<?php
+<?php
 /*
  * Copyright 2012-2015 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
