@@ -84,9 +84,7 @@ class Phpexec {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
                     if (substr($res, 0, 4) == 'PHP ') {
                         $this->isValid = true;
-                    } else {
-                    
-                    }
+                    } 
                 }
                 break 1;
 
@@ -96,9 +94,7 @@ class Phpexec {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
                     if (substr($res, 0, 4) == 'PHP ') {
                         $this->isValid = true;
-                    } else {
-                    
-                    }
+                    } 
                 }
                 break 1;
 
@@ -108,9 +104,7 @@ class Phpexec {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
                     if (substr($res, 0, 4) == 'PHP ') {
                         $this->isValid = true;
-                    } else {
-                    
-                    }
+                    } 
                 }
                 break 1;
 
@@ -120,9 +114,7 @@ class Phpexec {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
                     if (substr($res, 0, 4) == 'PHP ') {
                         $this->isValid = true;
-                    } else {
-                    
-                    }
+                    } 
                 }
                 break 1;
 
@@ -132,9 +124,7 @@ class Phpexec {
                     $res = shell_exec($this->phpexec.' -v 2>&1');
                     if (substr($res, 0, 4) == 'PHP ') {
                         $this->isValid = true;
-                    } else {
-                    
-                    }
+                    } 
                 }
                 break 1;
 
