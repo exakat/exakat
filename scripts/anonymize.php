@@ -30,12 +30,11 @@ $file = $argv[1];
 if (!file_exists($file)) {
     die("Usage : php script/anonymize.php <filename>");
 }
-print "Processing file $file into $file.anon\n";
+echo "Processing file $file into $file.anon\n";
 
 $res = shell_exec($_SERVER['_'].' -l '.$file);
 if (substr($res, 0, 28) != 'No syntax errors detected in') {
-    print "Can't compile '$file' script with PHP version ".phpversion().".\n";
-    die();
+    die( "Can't compile '$file' script with PHP version ".phpversion().".\n");
 }
 
 $php = file_get_contents($file);
@@ -80,7 +79,7 @@ foreach($tokens as $t) {
             case T_CONSTANT_ENCAPSED_STRING:
                 $strings++;
                 if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { 
-                    print "Skip T_CONSTANT_ENCAPSED_STRING : $strings\n"; 
+                    echo 'Skip T_CONSTANT_ENCAPSED_STRING : ', $strings, "\n"; 
                     $strings++; 
                 }
                 if (isset($stringsNames[$t[1]])) {
@@ -97,7 +96,7 @@ foreach($tokens as $t) {
             case T_ENCAPSED_AND_WHITESPACE :
                 $strings++;
                 if (in_array($strings, array('IF', 'AS', 'DO', 'OR'))) { 
-                    print "Skip T_ENCAPSED_AND_WHITESPACE : $strings\n"; 
+                    echo 'Skip T_ENCAPSED_AND_WHITESPACE : ', $strings, "\n"; 
                     $strings++; 
                 }
                 if (isset($stringsNames[$t[1]])) {
@@ -267,8 +266,7 @@ foreach($tokens as $t) {
                 break;
 
             default: 
-                print token_name($t[0])."\n";
-                print_r($t);
+                echo token_name($t[0]), "\n", print_r($t, true);
         }
 
         $php .= $t[1];
