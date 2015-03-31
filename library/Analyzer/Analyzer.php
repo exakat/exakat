@@ -1760,7 +1760,7 @@ GREMLIN;
         $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].any()"; 
         $vertices = $this->query($queryTemplate);
 
-        return ($vertices[0][0] == 1);
+        return $vertices[0][0] == 1;
     }
     
     public function hasResults() {
