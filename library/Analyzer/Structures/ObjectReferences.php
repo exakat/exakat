@@ -33,9 +33,25 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Typehint')
              ->outIs('CLASS')
-             ->codeIsNot('array')
+             ->tokenIsNot('T_ARRAY') // also accepts callable
              ->inIs('CLASS')
              ->outIs('VARIABLE')
+             ->atomIs('Variable')
+             ->is('reference', true);
+        $this->prepareQuery();
+
+        // f(stdclass &$x = null) 
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Typehint')
+             ->outIs('CLASS')
+             ->tokenIsNot('T_ARRAY') // also accepts callable
+             ->inIs('CLASS')
+             ->outIs('VARIABLE')
+             ->atomIs('Assignation')
+             ->outIs('LEFT')
+             ->atomIs('Variable')
              ->is('reference', true);
         $this->prepareQuery();
 
@@ -66,8 +82,6 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'variable');
         $this->prepareQuery();
-        
-        // todo : same with default value!
         
         // foreach($a as &$b) { $b->method;}
         $this->atomIs('Foreach')
