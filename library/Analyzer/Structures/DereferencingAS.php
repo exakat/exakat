@@ -27,12 +27,15 @@ use Analyzer;
 
 class DereferencingAS extends Analyzer\Analyzer {
     public function analyze() {
+        // $x = array(1,2,3)
+        // $x[3];
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs('Functioncall') // or some array-returning function
              ->hasNoIn('METHOD')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
+             ->tokenIs('T_ARRAY')
              ->fullnspath('\\array')
+             ->raw('filter{ it.out("ARGUMENTS").out("ARGUMENT").has("atom", "Void").any() == false}')
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->savePropertyAs('code', 'storage')
@@ -46,9 +49,12 @@ class DereferencingAS extends Analyzer\Analyzer {
              ->outIs('LEFT');
         $this->prepareQuery();
 
+        // $x = "abc"
+        // $x[3];
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIs('String') // or some array-returning function
+             ->atomIs('String') // or some array-returning function ?
+             ->fullcodeIsNot(array("''", '""'))
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->savePropertyAs('code', 'storage')

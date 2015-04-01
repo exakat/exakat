@@ -5,7 +5,9 @@ $expected     = array('$a',
                       '$s');
 
 $expected_not = array('$y',
-                      '$s2'
+                      '$s2',
+                      '$emptyString',
+                      '$emptyArray'
 );
 
 ?>
