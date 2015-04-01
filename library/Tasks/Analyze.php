@@ -147,22 +147,22 @@ class Analyze implements Tasks {
                 continue 1; 
             }
             $analyzer->init();
-
-            if (!$analyzer->checkPhpVersion($config->version)) {
+    
+            if (!$analyzer->checkPhpVersion($config->phpversion)) {
                 $analyzer = str_replace('\\', '\\\\', $analyzer_class);
             
                 $query = <<<GREMLIN
-        g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpVersion', '$config->version');
+g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpVersion', '$config->phpversion');
 GREMLIN;
                 $arguments = array('type' => 'IN');
                 $result = new \Everyman\Neo4j\Gremlin\Query($client, $query, $arguments);
 
-                display( "$analyzer_class is not compatible with PHP version $config->version. Ignoring\n");
+                display( "$analyzer_class is not compatible with PHP version {$config->phpversion}. Ignoring\n");
             } elseif (!$analyzer->checkPhpConfiguration($Php)) {
                 $analyzer = str_replace('\\', '\\\\', $analyzer_class);
             
                 $query = <<<GREMLIN
-        g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpConfiguration', '{$config->version}');
+g.idx('analyzers')[['analyzer':'$analyzer']].next().setProperty('notCompatibleWithPhpConfiguration', '{$config->phpversion}');
 GREMLIN;
                 $arguments = array('type' => 'IN');
                 $result = new \Everyman\Neo4j\Gremlin\Query($client, $query, $arguments);
