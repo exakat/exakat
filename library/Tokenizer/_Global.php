@@ -30,7 +30,7 @@ class _Global extends TokenAuto {
     public function _check() {
     // global $x; (nothing more)
         $this->conditions = array( 0 => array('token' => _Global::$operators),
-                                   1 => array('atom'  => array('Variable', 'String', 'Staticconstant', 'Static', 'Property' )),
+                                   1 => array('atom'  => array('Variable', 'String', 'Staticconstant', 'Static', 'Property', 'Array' )),
                                    2 => array('token' => 'T_SEMICOLON')
                                  );
         

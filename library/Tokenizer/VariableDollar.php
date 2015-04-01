@@ -28,12 +28,27 @@ class VariableDollar extends TokenAuto {
     static public $atom = 'Variable';
     
     public function _check() {
-        // $x or $$x or $$$
-        $this->conditions = array(0 => array('token' => VariableDollar::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('atom' => array('Variable', 'Array', 'Property'))
+        // $x or $$x or $$$ (Except for global)
+        $this->conditions = array(-1 => array('notToken'  => 'T_GLOBAL'),
+                                   0 => array('token'     => VariableDollar::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('atom'      => array('Variable', 'Array', 'Property')),
+                                   2 => array('filterOut' => array('T_OPEN_BRACKET', 'T_OPEN_CURLY')),
         );
         
+        $this->actions = array( 'transform'  => array(1 => 'NAME'),
+                                'atom'       => 'Variable',
+                                'cleanIndex' => true);
+        $this->checkAuto();
+
+        // global $$x->c
+        $this->conditions = array(-1 => array('token'     => 'T_GLOBAL'),
+                                   0 => array('token'     => VariableDollar::$operators,
+                                              'atom'      => 'none'),
+                                   1 => array('atom'      => array('Variable', 'Array', 'Property')),
+                                   2 => array('filterOut' => array('T_OBJECT_OPERATOR', 'T_OPEN_BRACKET', 'T_OPEN_CURLY')),
+        );
+
         $this->actions = array( 'transform'  => array(1 => 'NAME'),
                                 'atom'       => 'Variable',
                                 'cleanIndex' => true);
