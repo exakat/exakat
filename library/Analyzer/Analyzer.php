@@ -928,10 +928,14 @@ GREMLIN;
 
     public function isUppercase($property = 'fullcode') {
         $this->addMethod("filter{it.$property == it.$property.toUpperCase()}");
+
+        return $this;
     }
 
     public function isNotLowercase($property = 'fullcode') {
-        $this->("filter{it.$property != it.$property.toLowerCase()}");
+        $this->addMethod("filter{it.$property != it.$property.toLowerCase()}");
+
+        return $this;
     }
 
     public function filter($filter) {
