@@ -918,9 +918,9 @@ GREMLIN;
         }
         
         if (is_array($code)) {
-            $this->methods[] = "filter{!(it.fullcode$caseSensitive in ['".implode("', '", $code)."'])}";
+            $this->addMethod("filter{!(it.fullcode$caseSensitive in ***)}", $code);
         } else {
-            $this->methods[] = "filter{it.fullcode$caseSensitive != '$code'}";
+            $this->addMethod("filter{it.fullcode$caseSensitive != ***}", $code);
         }
         
         return $this;
