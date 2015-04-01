@@ -195,6 +195,8 @@ fullcode = it.out('NEXT').next(); \n";
                 foreach($actions['propertyNext'] as $name => $value) {
                     if (substr($value, 0, 3) == 'it.') {
                         $value = 'fullcode.' . substr($value, 3);
+                    } elseif (substr($value, 0, 3) == '"&"') {
+                        // Just let it go
                     } elseif ($value === true) {
                         $value = 'true';
                     } else {
@@ -1487,7 +1489,7 @@ $fullcode
             unset($actions['to_catch']);
         }
 
-        if (isset($actions['to_typehint'])) {
+        if (isset($actions['toTypehint'])) {
             $fullcode = $this->fullcode();
             
             $qactions[] = "
@@ -1523,7 +1525,7 @@ fullcode = x;
 $fullcode
 ";
             $this->setAtom = true;
-            unset($actions['to_typehint']);
+            unset($actions['toTypehint']);
         }
         
         if (isset($actions['fullcode'])) {
@@ -2386,8 +2388,8 @@ g.addEdge(b1, x, 'NEXT');
 
 it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each{
     // set early or it will fail
-    it.setProperty('atom', 'TypehintFromLogical');
-    it.out('RIGHT').each{
+    it.setProperty('atom', 'Typehint');
+    it.out('RIGHT').has('atom', 'Variable').each{
         it.setProperty('reference', true);
         fullcode = it;
         $fullcodeReference

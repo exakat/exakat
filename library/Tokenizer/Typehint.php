@@ -39,8 +39,8 @@ class Typehint extends TokenAuto {
                                    3 => array('filterOut' => Assignation::$operators),
         );
         
-        $this->actions = array('to_typehint'  => true,
-                               'keepIndexed'  => true);
+        $this->actions = array('toTypehint'  => true,
+                               'keepIndexed' => true);
         $this->checkAuto();
 
         // special case for array
@@ -52,8 +52,8 @@ class Typehint extends TokenAuto {
                                    3 => array('filterOut' => Assignation::$operators),
         );
         
-        $this->actions = array('to_typehint'  => true,
-                               'keepIndexed'  => true);
+        $this->actions = array('toTypehint'  => true,
+                               'keepIndexed' => true);
         $this->checkAuto();
 
         // special case for callable
@@ -64,8 +64,8 @@ class Typehint extends TokenAuto {
                                    3 => array('filterOut' => Assignation::$operators),
         );
         
-        $this->actions = array('to_typehint'  => true,
-                               'keepIndexed'  => true);
+        $this->actions = array('toTypehint'  => true,
+                               'keepIndexed' => true);
         $this->checkAuto();
 
         return false;

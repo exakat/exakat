@@ -56,7 +56,8 @@ class Assignation extends TokenAuto {
         
         // check for preplusplus in the yield filterout.
         // 'T_AND' used to be here, but should be processed by reference first
-        $this->conditions = array(-2 => array('filterOut2' => array_merge(array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR', 'T_AT'),
+        $this->conditions = array(-2 => array('filterOut2' => array_merge(array('T_DOUBLE_COLON', 'T_OBJECT_OPERATOR', 'T_DOLLAR',
+                                                                                'T_AT', 'T_AND'),
                                                                            Preplusplus::$operators )),
                                   -1 => array('atom' => array('Variable', 'Array', 'Property', 'Staticproperty', 'Functioncall',
                                                               'Noscream', 'Not', 'Arrayappend' , 'Typehint', 'Identifier',

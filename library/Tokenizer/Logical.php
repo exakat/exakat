@@ -76,7 +76,7 @@ class Logical extends TokenAuto {
                                     0 => array('token'     => Logical::$booleans,
                                                'atom'      => 'none'),
                                     1 => array('atom'      => 'yes',
-                                               'notAtom'   => 'Sequence'),
+                                               'notAtom'   => array('Sequence', 'Assignation')),
                                     2 => array('filterOut' => array_merge(Comparison::$operators, Assignation::$operators,
                                                                           Addition::$operators, Multiplication::$operators,
                                                                           Bitshift::$operators, Concatenation::$operators,
