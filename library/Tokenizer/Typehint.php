@@ -74,7 +74,7 @@ class Typehint extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty("fullcode") + " || " + fullcode.out("VARIABLE").next().getProperty('fullcode'));
+fullcode.setProperty('fullcode', fullcode.out("CLASS").next().getProperty("fullcode") + " " + fullcode.out("VARIABLE").next().getProperty('fullcode'));
 
 GREMLIN;
     }
