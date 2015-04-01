@@ -73,7 +73,7 @@ class Reference extends TokenAuto {
         
         $this->actions = array('transform'    => array( 0 => 'DROP'),
                                'propertyNext' => array('reference' => true),
-);
+        );
         $this->checkAuto();
 
         return false;
@@ -82,7 +82,7 @@ class Reference extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.setProperty('fullcode', "&" + fullcode.getProperty('fullcode'));
+fullcode.setProperty("fullcode", "&" + fullcode.getProperty("code"));
 
 GREMLIN;
     }

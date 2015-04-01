@@ -83,7 +83,7 @@ fullcode.out("ARGUMENT").sort{it.rank}._().each{ s.add(it.fullcode); };
 if (s.size() == 0) {
     s = '';
 } else {
-    fullcode.setProperty('fullcode', s.join(", "));
+    fullcode.setProperty("fullcode", s.join(", "));
 }
 
 // note : parenthesis are set in arguments (above), if needed.

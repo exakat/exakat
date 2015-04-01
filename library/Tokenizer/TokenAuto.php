@@ -1517,7 +1517,7 @@ x.outE.hasNot('label', 'NEXT').inV.each{
 }
 
 /* indexing */
-    g.idx('atoms').put('atom', 'Typehint', x);
+g.idx('atoms').put('atom', 'Typehint', x);
 
 fullcode = x;
 $fullcode
@@ -2371,6 +2371,51 @@ g.addEdge(b1, x, 'NEXT');
             unset($actions['to_methodcall']);
         }
 
+        if (isset($actions['checkTypehint'])) {
+            $reference = new Reference(Token::$client);
+            $fullcodeReference = $reference->fullcode();
+
+            $typehint = new Typehint(Token::$client);
+            $fullcodeTypehint = $typehint->fullcode();
+
+            $arguments = new Arguments(Token::$client);
+            $fullcodeArguments = $arguments->fullcode();
+
+            $qactions[] = <<<GREMLIN
+/* Turn a & b into a typehint  */
+
+it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each{
+    // set early or it will fail
+    it.setProperty('atom', 'TypehintFromLogical');
+    it.out('RIGHT').each{
+        it.setProperty('reference', true);
+        fullcode = it;
+        $fullcodeReference
+    }
+
+    // removed from g.idx('logical')? 
+    g.idx('atoms').put('atom', 'Typehint', it);
+    g.idx('atoms').remove('atom', 'Logical', it);
+
+    g.addEdge(it, it.out('LEFT').next(), 'CLASS');
+    g.removeEdge(it.outE('LEFT').next());
+
+    g.addEdge(it, it.out('RIGHT').next(), 'VARIABLE');
+    g.removeEdge(it.outE('RIGHT').next());
+    
+    fullcode = it;
+    $fullcodeTypehint
+}
+
+fullcode = it.out('ARGUMENTS').next();
+$fullcodeArguments
+
+fullcode = it;
+
+GREMLIN;
+            unset($actions['checkTypehint']);
+        }
+
         if (isset($actions['makeSequence'])) {
             $it = $actions['makeSequence'];
 
@@ -2692,28 +2737,6 @@ x.setProperty('atom', 'Sequence');
             unset($actions['while_to_empty_block']);
         }
 
-        if (isset($actions['checkTypehint'])) {
-            $qactions[] = "
-/* Turn a & b into a typehint  */
-
-it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each {
-    it.setProperty('atom', 'Typehint');
-    
-    g.addEdge(it, it.out('LEFT').next(), 'CLASS');
-    g.removeEdge(it.outE('LEFT').next());
-
-    g.addEdge(it, it.out('RIGHT').next(), 'VARIABLE');
-    g.removeEdge(it.outE('RIGHT').next());
-    
-    it.out('VARIABLE').next().setProperty('reference', true);
-    
-    g.idx('atoms').put('atom', 'Typehint', it);
-}
-
-                ";
-            unset($actions['checkTypehint']);
-        }
-        
         if (isset($actions['variable_to_functioncall'])) {
             $fullcode = $this->fullcode();
             

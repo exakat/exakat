@@ -29,13 +29,13 @@ class _Function extends TokenAuto {
     
     public function _check() {
         // function x(args) {}
-        $this->conditions = array(0 => array('token' => _Function::$operators,
-                                             'atom'  => 'none'),
-                                  1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
-                                  2 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  3 => array('atom'  => 'Arguments'),
-                                  4 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('atom'  => 'Sequence',
+        $this->conditions = array(0 => array('token'    => _Function::$operators,
+                                             'atom'     => 'none'),
+                                  1 => array('atom'     => array('Identifier', 'Boolean', 'Null')),
+                                  2 => array('token'    => 'T_OPEN_PARENTHESIS'),
+                                  3 => array('atom'     => 'Arguments'),
+                                  4 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+                                  5 => array('atom'     => 'Sequence',
                                              'property' => array('block' => true)),
         );
         
@@ -73,12 +73,12 @@ class _Function extends TokenAuto {
         $this->checkAuto();
 
         // lambda function (no name)
-        $this->conditions = array(0 => array('token' =>  _Function::$operators,
-                                             'atom' => 'none'),
-                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('atom' => 'Arguments'),
-                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('atom' => 'Sequence',
+        $this->conditions = array(0 => array('token'    =>  _Function::$operators,
+                                             'atom'     => 'none'),
+                                  1 => array('token'    => 'T_OPEN_PARENTHESIS'),
+                                  2 => array('atom'     => 'Arguments'),
+                                  3 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+                                  4 => array('atom'     => 'Sequence',
                                              'property' => array('block' => true))
         );
         
