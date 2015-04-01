@@ -872,9 +872,9 @@ GREMLIN;
         
         $trim = addslashes($trim);
         if (is_array($code)) {
-            $this->methods[] = "filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") in ['".implode("', '", $code)."']}";
+            $this->addMethod("filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") in ***}", $code);
         } else {
-            $this->methods[] = "filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") == '$code'}";
+            $this->addMethod("filter{it.fullcode$caseSensitive.replaceFirst(\"^[$trim]?(.*?)[$trim]?\\\$\", \"\\\$1\") == ***}", $code);
         }
         
         return $this;
@@ -927,45 +927,46 @@ GREMLIN;
     }
 
     public function isUppercase($property = 'fullcode') {
-        $this->methods[] = "filter{it.$property == it.$property.toUpperCase()}";
+        $this->addMethod("filter{it.$property == it.$property.toUpperCase()}");
     }
 
     public function isNotLowercase($property = 'fullcode') {
-        $this->methods[] = "filter{it.$property != it.$property.toLowerCase()}";
+        $this->("filter{it.$property != it.$property.toLowerCase()}");
     }
 
     public function filter($filter) {
-        $this->methods[] = "filter{ $filter }";
+        $this->addMethod("filter{ $filter }");
 
         return $this;
     }
 
     public function codeLength($length = ' == 1 ') {
         // @todo add some tests ? Like Operator / value ? 
-        $this->methods[] = "filter{it.code.length() $length}";
+        $this->addMethod("filter{it.code.length() $length}");
 
         return $this;
     }
 
     public function fullcodeLength($length = ' == 1 ') {
         // @todo add some tests ? Like Operator / value ? 
-        $this->methods[] = "filter{it.fullcode.length() $length}";
+        $this->addMethod("filter{it.fullcode.length() $length}");
 
         return $this;
     }
 
     public function groupCount($column) {
-        $this->methods[] = "groupCount(m){it.$column}";
+        $this->addMethod("groupCount(m){it.$column}");
         
         return $this;
     }
 
     public function eachCounted($variable, $times, $comp = '==') {
-        $this->methods[] = <<<GREMLIN
+        $this->addMethod(<<<GREMLIN
 groupBy(m){{$variable}}{it}.iterate(); 
 // This is plugged into each{}
 m.findAll{ it.value.size() $comp $times}.values().flatten().each{ n.add(it); }
-GREMLIN;
+GREMLIN
+);
 
         return $this;
     }
@@ -977,17 +978,19 @@ GREMLIN;
     }
 
     public function regex($column, $regex) {
-        $this->methods[] = <<<GREMLIN
+        $this->addMethod(<<<GREMLIN
 filter{ (it.$column =~ "$regex" ).getCount() > 0 }
-GREMLIN;
+GREMLIN
+);
 
         return $this;
     }
 
     public function regexNot($column, $regex) {
-        $this->methods[] = <<<GREMLIN
+        $this->addMethod(<<<GREMLIN
 filter{ (it.$column =~ "$regex" ).getCount() == 0 }
-GREMLIN;
+GREMLIN
+);
 
         return $this;
     }
@@ -1131,7 +1134,7 @@ GREMLIN
     }
 
     public function raw($query) {
-        $this->methods[] = $query;
+        $this->addMethod($query);
         
         return $this;
     }
