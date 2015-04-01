@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array();
+$expected     = array('PARENT::$A', 
+                      'parent::$a'
+                      );
 
 $expected_not = array('self',
-                      'parent',
                       'static',
                       'SELF',
-                      'PARENT',
                       'STATIC');
 
 ?>

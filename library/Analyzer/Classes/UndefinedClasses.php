@@ -32,6 +32,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        // in a New
         $this->atomIs('New')
              ->outIs('NEW')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
@@ -42,6 +43,7 @@ class UndefinedClasses extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // in a class::Method()
         $this->atomIs('Staticmethodcall')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
              ->outIs('CLASS')
@@ -54,6 +56,17 @@ class UndefinedClasses extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // in a parent::Method()
+        $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->outIs('CLASS')
+             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
+             ->code('parent')
+             ->fullnspath('parent')
+             ->back('first');
+        $this->prepareQuery();
+
+        // in a class::$property
         $this->atomIs('Staticproperty')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
              ->outIs('CLASS')
@@ -66,6 +79,16 @@ class UndefinedClasses extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // in a parent::$property
+        $this->atomIs('Staticproperty')
+             ->outIs('CLASS')
+             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
+             ->code('parent')
+             ->fullnspath('parent')
+             ->back('first');
+        $this->prepareQuery();
+
+        // in a class::constante
         $this->atomIs('Staticconstant')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
              ->outIs('CLASS')
@@ -78,6 +101,17 @@ class UndefinedClasses extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // in a parent::constante
+        $this->atomIs('Staticconstant')
+             ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
+             ->outIs('CLASS')
+             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
+             ->code('parent')
+             ->fullnspath('parent')
+             ->back('first');
+        $this->prepareQuery();
+
+        // in a class::instanceof
         $this->atomIs('Instanceof')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
              ->outIs('CLASS')
