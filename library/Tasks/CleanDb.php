@@ -33,13 +33,7 @@ class CleanDb implements Tasks {
     private $client = null;
     
     public function run(\Config $config) {
-        try {
-            $client = new Client();
-            $client->getServerInfo();
-        } catch (\Exception $e) {
-            display("Couldn't access Neo4j\n");
-            shell_exec('cd '.$config->projects_root.'/neo4j; ./bin/neo4j start');
-        }
+        $client = $this->getClient();
         
         $queryTemplate = 'start n=node(*)
 match n
@@ -77,6 +71,22 @@ DELETE n,r';
         }
         $end = microtime(true);
         display(number_format(($end - $begin) * 1000, 0)." ms\n");
+    }
+    
+    private function getClient() {
+        try {
+            $client = new Client();
+            $client->getServerInfo();
+        } catch (\Exception $e) {
+            display("Couldn't access Neo4j\n");
+            shell_exec('cd '.$config->projects_root.'/neo4j; ./bin/neo4j start');
+            $res = shell_exec('curl 127.0.0.1:7474/db/data/');
+            var_dump($res);
+            
+            $this->getClient();
+        }
+
+        return $client;
     }
 }
 
