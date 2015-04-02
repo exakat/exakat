@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      +
-      Label : LEFT
-        $x
-      Label : RIGHT
-        1
+  return
+  Label : RETURN
+    +
+    Label : RIGHT
+      1
+    Label : LEFT
+      $x

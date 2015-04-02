@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       preg_replace
       Label : ARGUMENTS
@@ -20,14 +18,14 @@ Label : CODE
             (
             Label : CODE
               +
+              Label : RIGHT
+                1
               Label : LEFT
                 [
                 Label : VARIABLE
                   $g
                 Label : INDEX
                   'h'
-              Label : RIGHT
-                1
           Label : CONCAT
             "f"
         Label : ARGUMENT
@@ -44,3 +42,5 @@ Label : CODE
                 d
             Label : CONCAT
               e
+    Label : LEFT
+      $a

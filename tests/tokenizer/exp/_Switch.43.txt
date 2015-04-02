@@ -15,13 +15,7 @@ Label : CODE
           Label : ARGUMENT
             void
     Label : CASES
-      {
-      Label : ELEMENT
-        default
-        Label : CODE
-          Block with Sequence For Default
-          Label : ELEMENT
-            Void
+      Sequence Case Default
       Label : ELEMENT
         case
         Label : CODE
@@ -36,8 +30,6 @@ Label : CODE
               (
               Label : CODE
                 =
-                Label : LEFT
-                  $c
                 Label : RIGHT
                   ->
                   Label : OBJECT
@@ -48,6 +40,8 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         $e
+                Label : LEFT
+                  $c
             Label : THEN
               {
               Label : ELEMENT
@@ -70,3 +64,9 @@ Label : CODE
                 void
         Label : CASE
           'C'
+      Label : ELEMENT
+        default
+        Label : CODE
+          Block with Sequence For Default
+          Label : ELEMENT
+            Void

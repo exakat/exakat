@@ -4,6 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      new
+      Label : NEW
+        $e
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          $e
     Label : LEFT
       ->
       Label : OBJECT
@@ -18,13 +28,3 @@ Label : CODE
           $b
       Label : PROPERTY
         d
-    Label : RIGHT
-      new
-      Label : NEW
-        $e
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          $e

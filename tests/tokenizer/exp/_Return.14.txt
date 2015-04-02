@@ -1,26 +1,24 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    return
-    Label : RETURN
-      +
-      Label : LEFT
-        %
-        Label : LEFT
-          abs
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
-        Label : RIGHT
-          (
-          Label : CODE
-            -
-            Label : LEFT
-              $b
-            Label : RIGHT
-              $c
+  return
+  Label : RETURN
+    +
+    Label : RIGHT
+      $d
+    Label : LEFT
+      %
       Label : RIGHT
-        $d
+        (
+        Label : CODE
+          -
+          Label : RIGHT
+            $c
+          Label : LEFT
+            $b
+      Label : LEFT
+        abs
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a

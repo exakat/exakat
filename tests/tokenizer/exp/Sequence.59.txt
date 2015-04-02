@@ -13,13 +13,13 @@ Label : CODE
           Label : CODE
             $k
         Label : THEN
-          {
+          ;
           Label : ELEMENT
             .=
-            Label : LEFT
-              $l
             Label : RIGHT
               'm'
+            Label : LEFT
+              $l
       Label : ELEMENT
         if
         Label : CONDITION
@@ -27,17 +27,15 @@ Label : CODE
           Label : CODE
             $h
         Label : THEN
-          {
+          ;
           Label : ELEMENT
             .=
-            Label : LEFT
-              $i
             Label : RIGHT
               'j'
+            Label : LEFT
+              $i
       Label : ELEMENT
         =
-        Label : LEFT
-          $d
         Label : RIGHT
           Concatenation
           Label : CONCAT
@@ -48,7 +46,9 @@ Label : CODE
               g
           Label : CONCAT
             'e'
-    Label : SOURCE
-      $a
+        Label : LEFT
+          $d
     Label : VALUE
       $b
+    Label : SOURCE
+      $a

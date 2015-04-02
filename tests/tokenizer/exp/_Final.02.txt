@@ -8,7 +8,7 @@ Label : CODE
       {
       Label : ELEMENT
         void
-    Label : NAME
-      y
     Label : FINAL
       final
+    Label : NAME
+      y

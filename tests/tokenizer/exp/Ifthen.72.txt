@@ -5,6 +5,8 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       foreach
+      Label : VALUE
+        $b
       Label : BLOCK
         Block with Foreach
         Label : ELEMENT
@@ -24,7 +26,7 @@ Label : ELEMENT
                   Label : INDEX
                     'D'
             Label : THEN
-              Block with if/elseif
+              ;
               Label : ELEMENT
                 echo
                 Label : ARGUMENTS
@@ -39,10 +41,10 @@ Label : ELEMENT
                           void
                           Label : ARGUMENT
                             =>
-                            Label : VALUE
-                              'L'
                             Label : KEY
                               'K'
+                            Label : VALUE
+                              'L'
                       Label : ARGUMENT
                         I
                         Label : ARGUMENTS
@@ -65,7 +67,5 @@ Label : ELEMENT
             B
       Label : SOURCE
         $a
-      Label : VALUE
-        $b
 Label : ELEMENT
   A

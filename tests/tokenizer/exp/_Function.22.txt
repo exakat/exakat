@@ -12,15 +12,15 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         =
-        Label : LEFT
-          $y
         Label : RIGHT
           true
+        Label : LEFT
+          $y
       Label : ARGUMENT
         =
-        Label : LEFT
-          $x
         Label : RIGHT
           null
+        Label : LEFT
+          $x
     Label : NAME
       a

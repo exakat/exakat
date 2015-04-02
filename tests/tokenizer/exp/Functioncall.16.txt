@@ -4,14 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $b
-        Label : ARGUMENT
-          $a
     Label : RIGHT
       range
       Label : ARGUMENTS
@@ -20,3 +12,11 @@ Label : CODE
           2
         Label : ARGUMENT
           0
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $b
+        Label : ARGUMENT
+          $a

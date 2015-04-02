@@ -8,18 +8,16 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $a
-          Label : INDEX
-            'b'
         Label : RIGHT
           (
           Label : CODE
             <
+            Label : RIGHT
+              0
             Label : LEFT
               *
+              Label : RIGHT
+                $h
               Label : LEFT
                 c
                 Label : ARGUMENTS
@@ -38,12 +36,14 @@ Label : CODE
                         $g
                       Label : CONCAT
                         'f'
-              Label : RIGHT
-                $h
-            Label : RIGHT
-              0
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            'b'
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         i
         Label : ARGUMENTS

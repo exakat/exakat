@@ -4,58 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
     Label : BLOCK
-      {
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            !
-            Label : NOT
-              empty
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $i
-                  Label : INDEX
-                    'j'
-        Label : THEN
-          {
-          Label : ELEMENT
-            =
-            Label : LEFT
-              [
-              Label : VARIABLE
-                $items
-              Label : INDEX
-                "
-                Label : CONTAIN
-                  Concatenation
-                  Label : CONCAT
-                    k 
-                  Label : CONCAT
-                    ->
-                    Label : OBJECT
-                      $l
-                    Label : PROPERTY
-                      m
-                  Label : CONCAT
-                     
-                  Label : CONCAT
-                    $n
-                  Label : CONCAT
-                     o
-            Label : RIGHT
-              array
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
+      ;
       Label : ELEMENT
         =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
         Label : LEFT
           [
           Label : VARIABLE
@@ -80,21 +44,57 @@ Label : CODE
                  
               Label : CONCAT
                 $h
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
     Label : SOURCE
       a
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           void
-    Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $i
+              Label : INDEX
+                'j'
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $items
+          Label : INDEX
+            "
+            Label : CONTAIN
+              Concatenation
+              Label : CONCAT
+                k 
+              Label : CONCAT
+                ->
+                Label : OBJECT
+                  $l
+                Label : PROPERTY
+                  m
+              Label : CONCAT
+                 
+              Label : CONCAT
+                $n
+              Label : CONCAT
+                 o

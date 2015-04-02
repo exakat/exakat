@@ -4,41 +4,41 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         =
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
         Label : LEFT
           $d
+      Label : ARGUMENT
+        =
         Label : RIGHT
           array
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
-      Label : ARGUMENT
-        =
         Label : LEFT
           $c
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
       Label : ARGUMENT
         =
-        Label : LEFT
-          $b
         Label : RIGHT
           array
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
+        Label : LEFT
+          $b
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void
     Label : NAME
       a

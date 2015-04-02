@@ -10,13 +10,13 @@ Label : CODE
         void
         Label : ARGUMENT
           +
-          Label : LEFT
-            +
-            Label : LEFT
-              1
-            Label : RIGHT
-              3
           Label : RIGHT
             4
+          Label : LEFT
+            +
+            Label : RIGHT
+              3
+            Label : LEFT
+              1
       Label : NAME
         $x

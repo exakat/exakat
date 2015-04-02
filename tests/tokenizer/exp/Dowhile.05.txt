@@ -4,19 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      <
+      Label : RIGHT
+        4
+      Label : LEFT
+        $x
     Label : BLOCK
       &&
-      Label : LEFT
-        ++
-        Label : POSTPLUSPLUS
-          $x
       Label : RIGHT
         ++
         Label : POSTPLUSPLUS
           $y
-    Label : CONDITION
-      <
       Label : LEFT
-        $x
-      Label : RIGHT
-        4
+        ++
+        Label : POSTPLUSPLUS
+          $x

@@ -12,24 +12,6 @@ Label : CODE
           (
           Label : CODE
             ||
-            Label : LEFT
-              is_array
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    [
-                    Label : VARIABLE
-                      ->
-                      Label : OBJECT
-                        $a
-                      Label : PROPERTY
-                        b
-                    Label : INDEX
-                      $c
-                  Label : PROPERTY
-                    d
             Label : RIGHT
               instanceof
               Label : VARIABLE
@@ -48,8 +30,26 @@ Label : CODE
                   h
               Label : CLASS
                 ArrayAccess
+            Label : LEFT
+              is_array
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    [
+                    Label : VARIABLE
+                      ->
+                      Label : OBJECT
+                        $a
+                      Label : PROPERTY
+                        b
+                    Label : INDEX
+                      $c
+                  Label : PROPERTY
+                    d
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

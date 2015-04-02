@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       array_merge
       Label : ARGUMENTS
@@ -22,3 +20,5 @@ Label : CODE
               $c
         Label : ARGUMENT
           $b
+    Label : LEFT
+      $a

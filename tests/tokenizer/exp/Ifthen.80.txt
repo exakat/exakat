@@ -4,20 +4,26 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
-        =
-        Label : LEFT
-          $a
-        Label : RIGHT
-          array
+        return
+        Label : RETURN
+          F
           Label : ARGUMENTS
-            void
+            Arguments
             Label : ARGUMENT
-              void
+              $h
+            Label : ARGUMENT
+              'G'
       Label : ELEMENT
         foreach
+        Label : VALUE
+          $c
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -35,9 +41,11 @@ Label : CODE
                     Label : ARGUMENT
                       void
             Label : THEN
-              Block with if/elseif
+              ;
               Label : ELEMENT
                 =
+                Label : RIGHT
+                  $g
                 Label : LEFT
                   [
                   Label : VARIABLE
@@ -48,29 +56,21 @@ Label : CODE
                       $f
                     Label : PROPERTY
                       E
-                Label : RIGHT
-                  $g
         Label : SOURCE
           ->
           Label : OBJECT
             $b
           Label : PROPERTY
             C
-        Label : VALUE
-          $c
       Label : ELEMENT
-        return
-        Label : RETURN
-          F
+        =
+        Label : RIGHT
+          array
           Label : ARGUMENTS
-            Arguments
+            void
             Label : ARGUMENT
-              $h
-            Label : ARGUMENT
-              'G'
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
+              void
+        Label : LEFT
+          $a
     Label : NAME
       B

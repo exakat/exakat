@@ -8,34 +8,18 @@ Label : CODE
       (
       Label : CODE
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           $b
+        Label : LEFT
+          $a
     Label : THEN
-      {
+      ;
       Label : ELEMENT
-        ?
-        Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : LEFT
-              $c
-            Label : RIGHT
-              'd'
-        Label : THEN
-          =
-          Label : LEFT
-            $e
-          Label : RIGHT
-            'f'
-        Label : ELSE
-          =
-          Label : LEFT
-            $g
-          Label : RIGHT
-            'h'
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $i
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -49,8 +33,24 @@ Label : CODE
             Label : CONCAT
               'j'
       Label : ELEMENT
-        =
-        Label : LEFT
-          $i
-        Label : RIGHT
-          1
+        ?
+        Label : CONDITION
+          (
+          Label : CODE
+            ==
+            Label : RIGHT
+              'd'
+            Label : LEFT
+              $c
+        Label : THEN
+          =
+          Label : RIGHT
+            'f'
+          Label : LEFT
+            $e
+        Label : ELSE
+          =
+          Label : RIGHT
+            'h'
+          Label : LEFT
+            $g

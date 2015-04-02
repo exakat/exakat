@@ -4,18 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       sprintf
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
           *
-          Label : LEFT
-            __LINE__
           Label : RIGHT
             1
+          Label : LEFT
+            __LINE__
         Label : ARGUMENT
           str_replace
           Label : ARGUMENTS
@@ -28,3 +26,5 @@ Label : CODE
               C
         Label : ARGUMENT
           $b
+    Label : LEFT
+      $a

@@ -8,6 +8,8 @@ Label : CODE
       (
       Label : CODE
         ==
+        Label : RIGHT
+          false
         Label : LEFT
           ->
           Label : OBJECT
@@ -18,10 +20,8 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-        Label : RIGHT
-          false
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         return
         Label : RETURN

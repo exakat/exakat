@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     function
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         global
         Label : GLOBAL
@@ -23,13 +23,13 @@ Label : CODE
         Label : GLOBAL
           $foo2
         Label : GLOBAL
-          ->
-          Label : OBJECT
-            $
-            Label : NAME
+          $
+          Label : NAME
+            ->
+            Label : OBJECT
               $foo2
-          Label : PROPERTY
-            bar2
+            Label : PROPERTY
+              bar2
     Label : ARGUMENTS
       void
       Label : ARGUMENT
@@ -39,17 +39,7 @@ Label : CODE
   Label : ELEMENT
     function
     Label : BLOCK
-      {
-      Label : ELEMENT
-        global
-        Label : GLOBAL
-          ->
-          Label : OBJECT
-            $
-            Label : NAME
-              $foo
-          Label : PROPERTY
-            bar
+      ;
       Label : ELEMENT
         global
         Label : GLOBAL
@@ -64,6 +54,16 @@ Label : CODE
                 'bar'
             Label : INDEX
               'baz'
+      Label : ELEMENT
+        global
+        Label : GLOBAL
+          $
+          Label : NAME
+            ->
+            Label : OBJECT
+              $foo
+            Label : PROPERTY
+              bar
     Label : ARGUMENTS
       void
       Label : ARGUMENT

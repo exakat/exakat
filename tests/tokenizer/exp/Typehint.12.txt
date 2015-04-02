@@ -5,7 +5,17 @@ Label : CODE
   Label : ELEMENT
     function
     Label : BLOCK
-      {
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $g
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $f
+          Label : PROPERTY
+            G
       Label : ELEMENT
         ::
         Label : METHOD
@@ -18,16 +28,6 @@ Label : CODE
               $d
         Label : CLASS
           E
-      Label : ELEMENT
-        =
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $f
-          Label : PROPERTY
-            G
-        Label : RIGHT
-          $g
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT

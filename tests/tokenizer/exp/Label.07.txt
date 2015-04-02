@@ -7,7 +7,7 @@ Label : CODE
     Label : NAME
       $a
     Label : CASES
-      {
+      Sequence Case Default
       Label : ELEMENT
         case
         Label : CODE
@@ -26,6 +26,8 @@ Label : CODE
                   'f'
         Label : CASE
           ==
+          Label : RIGHT
+            'c'
           Label : LEFT
             substr
             Label : ARGUMENTS
@@ -36,5 +38,3 @@ Label : CODE
                 0
               Label : ARGUMENT
                 $b
-          Label : RIGHT
-            'c'

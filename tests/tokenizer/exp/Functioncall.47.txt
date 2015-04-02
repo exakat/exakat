@@ -3,16 +3,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ?
       Label : CONDITION
         (
         Label : CODE
           &&
-          Label : LEFT
-            $b
           Label : RIGHT
             !
             Label : NOT
@@ -21,6 +17,8 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   $d
+          Label : LEFT
+            $b
       Label : THEN
         ->
         Label : OBJECT
@@ -33,3 +31,5 @@ Label : CODE
           f
       Label : ELSE
         ''
+    Label : LEFT
+      $a

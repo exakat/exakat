@@ -11,13 +11,13 @@ Label : CODE
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
-        &
+        Typehint
         Label : VARIABLE
           $b
         Label : CLASS
           StdClass
       Label : ARGUMENT
-        &
+        Typehint
         Label : VARIABLE
           $x
         Label : CLASS

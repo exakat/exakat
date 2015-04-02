@@ -13,13 +13,13 @@ $y = 4;
     __HALT_COMPILER
   Label : ELEMENT
     =
-    Label : LEFT
-      $b
     Label : RIGHT
       2
+    Label : LEFT
+      $b
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       1
+    Label : LEFT
+      $a

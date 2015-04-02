@@ -3,77 +3,17 @@
 Label : CODE
   ;
   Label : ELEMENT
-    [
-    Label : VARIABLE
-      ->
-      Label : OBJECT
-        $foo
-      Label : PROPERTY
-        $bar
-    Label : INDEX
-      'baz'
-  Label : ELEMENT
-    (
-    Label : CODE
-      void
-  Label : ELEMENT
-    [
-    Label : VARIABLE
-      ->
-      Label : OBJECT
-        $foo
-      Label : PROPERTY
-        $bar
-    Label : INDEX
-      'baz'
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      $foo
-    Label : PROPERTY
+    $
+    Label : NAME
       [
       Label : VARIABLE
-        $bar
+        [
+        Label : VARIABLE
+          $foo
+        Label : INDEX
+          'bar'
       Label : INDEX
         'baz'
-  Label : ELEMENT
-    ::
-    Label : METHOD
-      [
-      Label : ARGUMENTS
-        void
-      Label : VARIABLE
-        $bar
-      Label : INDEX
-        'baz'
-    Label : CLASS
-      Foo
-  Label : ELEMENT
-    ->
-    Label : OBJECT
-      $foo
-    Label : METHOD
-      [
-      Label : ARGUMENTS
-        void
-      Label : VARIABLE
-        $bar
-      Label : INDEX
-        'baz'
-  Label : ELEMENT
-    [
-    Label : VARIABLE
-      ::
-      Label : PROPERTY
-        $bar
-      Label : CLASS
-        Foo
-    Label : INDEX
-      'baz'
-  Label : ELEMENT
-    (
-    Label : CODE
-      void
   Label : ELEMENT
     $
     Label : NAME
@@ -89,12 +29,76 @@ Label : CODE
   Label : ELEMENT
     [
     Label : VARIABLE
+      ::
+      Label : PROPERTY
+        $bar
+      Label : CLASS
+        Foo
+    Label : INDEX
+      'baz'
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      [
+  Label : ELEMENT
+    ::
+    Label : CLASS
+      Foo
+    Label : METHOD
       [
       Label : VARIABLE
-        $
-        Label : NAME
-          $foo
+        $bar
       Label : INDEX
-        'bar'
+        'baz'
+      Label : ARGUMENTS
+        void
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $foo
+    Label : METHOD
+      [
+      Label : VARIABLE
+        $bar
+      Label : INDEX
+        'baz'
+      Label : ARGUMENTS
+        void
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      $foo
+    Label : PROPERTY
+      [
+      Label : VARIABLE
+        $bar
+      Label : INDEX
+        'baz'
+  Label : ELEMENT
+    [
+    Label : VARIABLE
+      ->
+      Label : OBJECT
+        $foo
+      Label : PROPERTY
+        $bar
+    Label : INDEX
+      'baz'
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      [
+  Label : ELEMENT
+    [
+    Label : VARIABLE
+      ->
+      Label : OBJECT
+        $foo
+      Label : PROPERTY
+        $bar
     Label : INDEX
       'baz'

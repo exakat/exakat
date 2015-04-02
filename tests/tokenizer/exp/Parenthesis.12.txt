@@ -4,16 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      [
-      Label : VARIABLE
-        ::
-        Label : PROPERTY
-          $b
-        Label : CLASS
-          a
-      Label : INDEX
-        'c'
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -36,3 +26,13 @@ Label : CODE
               f
           Label : CONCAT
             g
+    Label : LEFT
+      [
+      Label : VARIABLE
+        ::
+        Label : PROPERTY
+          $b
+        Label : CLASS
+          a
+      Label : INDEX
+        'c'

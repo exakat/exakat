@@ -4,15 +4,15 @@ Label : CODE
   Label : ELEMENT
     function
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         static
         Label : VALUE
           NULL
-        Label : DEFINE
-          $b
         Label : STATIC
           static
+        Label : DEFINE
+          $b
     Label : ARGUMENTS
       void
       Label : ARGUMENT

@@ -3,6 +3,10 @@
 Label : CODE
   ;
   Label : ELEMENT
+    :
+    Label : LABEL
+      E
+  Label : ELEMENT
     $c
   Label : ELEMENT
     try
@@ -19,10 +23,6 @@ Label : CODE
       Label : CODE
         {
         Label : ELEMENT
-          :
-          Label : LABEL
-            E
-        Label : ELEMENT
           void
       Label : VARIABLE
         $b
@@ -32,10 +32,10 @@ Label : CODE
           D
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       0
+    Label : LEFT
+      $a
   Label : ELEMENT
     :
     Label : LABEL

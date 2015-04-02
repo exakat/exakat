@@ -3,6 +3,12 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
     Label : BLOCK
       Block with Foreach
       Label : ELEMENT
@@ -43,14 +49,14 @@ Label : CODE
                             void
                             Label : ARGUMENT
                               =>
-                              Label : VALUE
-                                O
                               Label : KEY
                                 ::
                                 Label : CLASS
                                   M
                                 Label : CONSTANT
                                   N
+                              Label : VALUE
+                                O
                         Label : ARGUMENT
                           $g
                     Label : CLASS
@@ -77,9 +83,3 @@ Label : CODE
         $a
       Label : INDEX
         'B'
-    Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b

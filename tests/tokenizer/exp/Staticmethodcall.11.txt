@@ -45,21 +45,21 @@ Label : CODE
               Label : PROPERTY
                 Q
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $e
-          Label : INDEX
-            'R'
         Label : RIGHT
           ->
           Label : OBJECT
             $f
           Label : PROPERTY
             S
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $e
+          Label : INDEX
+            'R'
   Label : ELEMENT
     if
     Label : CONDITION
@@ -75,15 +75,9 @@ Label : CODE
         Label : CLASS
           J
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            'M'
         Label : RIGHT
           ::
           Label : METHOD
@@ -94,14 +88,14 @@ Label : CODE
                 'P'
           Label : CLASS
             N
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            'M'
   Label : ELEMENT
     =
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $b
-      Label : INDEX
-        'F'
     Label : RIGHT
       ::
       Label : METHOD
@@ -112,14 +106,14 @@ Label : CODE
             'I'
       Label : CLASS
         G
-  Label : ELEMENT
-    =
     Label : LEFT
       [
       Label : VARIABLE
-        $a
+        $b
       Label : INDEX
-        'B'
+        'F'
+  Label : ELEMENT
+    =
     Label : RIGHT
       ::
       Label : METHOD
@@ -130,3 +124,9 @@ Label : CODE
             'E'
       Label : CLASS
         C
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'B'

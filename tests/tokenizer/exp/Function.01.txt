@@ -4,25 +4,25 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         =
-        Label : LEFT
-          $d
         Label : RIGHT
           false
+        Label : LEFT
+          $d
       Label : ARGUMENT
         =
-        Label : LEFT
-          $c
         Label : RIGHT
           ''
+        Label : LEFT
+          $c
       Label : ARGUMENT
         $b
     Label : NAME
       a
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void

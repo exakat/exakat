@@ -4,34 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     while
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            B
     Label : CONDITION
       &&
-      Label : LEFT
-        <
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            B
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $this
-          Label : PROPERTY
-            C
       Label : RIGHT
         ===
+        Label : RIGHT
+          G
         Label : LEFT
           D
           Label : ARGUMENTS
@@ -52,5 +30,27 @@ Label : CODE
                   B
             Label : ARGUMENT
               $a
+      Label : LEFT
+        <
         Label : RIGHT
-          G
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            C
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            B

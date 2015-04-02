@@ -8,16 +8,16 @@ Label : CODE
       $a
   Label : ELEMENT
     =
-    Label : LEFT
-      $b
     Label : RIGHT
       2
+    Label : LEFT
+      $b
   Label : ELEMENT
     =
-    Label : LEFT
-      $c
     Label : RIGHT
       3
+    Label : LEFT
+      $c
   Label : ELEMENT
     try
     Label : CODE
@@ -29,7 +29,7 @@ Label : CODE
     Label : CATCH
       catch
       Label : CODE
-        {
+        ;
         Label : ELEMENT
           continue
           Label : LEVEL
@@ -55,7 +55,7 @@ Label : CODE
               Label : INDEX
                 'w'
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         continue
         Label : LEVEL

@@ -8,7 +8,7 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
@@ -20,7 +20,7 @@ Label : CODE
         Label : CODE
           $b
       Label : THEN
-        {
+        ;
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS

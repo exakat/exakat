@@ -11,16 +11,18 @@ Label : CODE
       ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $e
         Label : RIGHT
           1
-      Label : ELEMENT
-        (
-        Label : CODE
-          34
+        Label : LEFT
+          $e
       Label : ELEMENT
         [
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            34
+        Label : NAME
+          [
         Label : VARIABLE
           ->
           Label : OBJECT

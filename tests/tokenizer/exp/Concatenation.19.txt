@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $z
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -20,3 +18,5 @@ Label : CODE
               1
       Label : CONCAT
         "a"
+    Label : LEFT
+      $z

@@ -11,15 +11,7 @@ Label : CODE
       Label : CONCAT
         $level
     Label : CASES
-      {
-      Label : ELEMENT
-        case
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
-        Label : CASE
-          'h'
+      Sequence Case Default
       Label : ELEMENT
         case
         Label : CODE
@@ -30,13 +22,21 @@ Label : CODE
               void
           Label : ELEMENT
             =
+            Label : RIGHT
+              QR_ECLEVEL_H
             Label : LEFT
               ->
               Label : OBJECT
                 $enc
               Label : PROPERTY
                 level
-            Label : RIGHT
-              QR_ECLEVEL_H
         Label : CASE
           'H'
+      Label : ELEMENT
+        case
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void
+        Label : CASE
+          'h'

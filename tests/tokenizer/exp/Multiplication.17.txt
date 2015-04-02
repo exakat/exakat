@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     *
+    Label : RIGHT
+      1
     Label : LEFT
       ::
       Label : METHOD
@@ -14,5 +16,3 @@ Label : CODE
             1
       Label : CLASS
         a
-    Label : RIGHT
-      1

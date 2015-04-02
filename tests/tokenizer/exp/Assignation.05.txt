@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     !==
-    Label : LEFT
-      $x
     Label : RIGHT
       +=
+      Label : RIGHT
+        4
       Label : LEFT
         [
         Label : VARIABLE
           $y
         Label : INDEX
           3
-      Label : RIGHT
-        4
+    Label : LEFT
+      $x

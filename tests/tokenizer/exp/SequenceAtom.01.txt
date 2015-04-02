@@ -9,6 +9,8 @@ Label : CODE
         ?
         Label : CONDITION
           ==
+          Label : RIGHT
+            'g'
           Label : LEFT
             @
             Label : AT
@@ -33,8 +35,6 @@ Label : CODE
                     'e'
               Label : INDEX
                 'f'
-          Label : RIGHT
-            'g'
         Label : THEN
           'h'
         Label : ELSE
@@ -47,6 +47,8 @@ Label : CODE
         ?
         Label : CONDITION
           ==
+          Label : RIGHT
+            'G'
           Label : LEFT
             @
             Label : AT
@@ -71,8 +73,6 @@ Label : CODE
                     'E'
               Label : INDEX
                 'F'
-          Label : RIGHT
-            'G'
         Label : THEN
           'H'
         Label : ELSE

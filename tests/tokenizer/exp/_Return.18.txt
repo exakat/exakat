@@ -1,55 +1,53 @@
 <?php 
 Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
+  if
+  Label : CONDITION
+    (
+    Label : CODE
+      !
+      Label : NOT
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              0
+  Label : THEN
+    ;
+    Label : ELEMENT
+      return
+      Label : RETURN
+        null
+  Label : ELSE
+    Block with else
+    Label : ELEMENT
+      return
+      Label : RETURN
+        &&
+        Label : RIGHT
+          [
+          Label : VARIABLE
+            [
+            Label : VARIABLE
+              $d
+            Label : INDEX
+              0
+          Label : INDEX
+            'e'
+        Label : LEFT
           isset
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               [
               Label : VARIABLE
-                $a
-              Label : INDEX
-                0
-    Label : THEN
-      Block with if/elseif
-      Label : ELEMENT
-        return
-        Label : RETURN
-          null
-    Label : ELSE
-      Block with else
-      Label : ELEMENT
-        return
-        Label : RETURN
-          &&
-          Label : LEFT
-            isset
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
                 [
                 Label : VARIABLE
-                  [
-                  Label : VARIABLE
-                    $b
-                  Label : INDEX
-                    0
+                  $b
                 Label : INDEX
-                  'c'
-          Label : RIGHT
-            [
-            Label : VARIABLE
-              [
-              Label : VARIABLE
-                $d
+                  0
               Label : INDEX
-                0
-            Label : INDEX
-              'e'
+                'c'

@@ -14,20 +14,20 @@ Label : CODE
         Typehint
         Label : VARIABLE
           =
-          Label : LEFT
-            $b
           Label : RIGHT
             null
+          Label : LEFT
+            $b
         Label : CLASS
           StdClass
       Label : ARGUMENT
         Typehint
         Label : VARIABLE
           =
-          Label : LEFT
-            $x
           Label : RIGHT
             null
+          Label : LEFT
+            $x
         Label : CLASS
           StdClass
     Label : NAME

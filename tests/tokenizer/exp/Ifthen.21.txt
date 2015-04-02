@@ -9,7 +9,7 @@ Label : CODE
       Label : CODE
         $x
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         $y
     Label : ELSE
@@ -19,7 +19,7 @@ Label : CODE
         Label : CODE
           $w
       Label : THEN
-        Block with if/elseif
+        ;
         Label : ELEMENT
           $ww
       Label : ELSE
@@ -29,7 +29,7 @@ Label : CODE
           Label : CODE
             $v
         Label : THEN
-          Block with if/elseif
+          ;
           Label : ELEMENT
             $vv
         Label : ELSE
@@ -39,7 +39,7 @@ Label : CODE
             Label : CODE
               $u
           Label : THEN
-            Block with if/elseif
+            ;
             Label : ELEMENT
               $uu
           Label : ELSE
@@ -49,7 +49,7 @@ Label : CODE
               Label : CODE
                 $t
             Label : THEN
-              Block with if/elseif
+              ;
               Label : ELEMENT
                 $tt
             Label : ELSE

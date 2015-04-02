@@ -15,17 +15,7 @@ Label : CODE
       Label : INDEX
         'c'
     Label : CASES
-      {
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $h
-        Label : CASE
-          'G'
+      Sequence Case Default
       Label : ELEMENT
         case
         Label : CODE
@@ -37,7 +27,7 @@ Label : CODE
               Label : CODE
                 $e
             Label : THEN
-              {
+              ;
               Label : ELEMENT
                 ++
                 Label : POSTPLUSPLUS
@@ -48,3 +38,13 @@ Label : CODE
               void
         Label : CASE
           'D'
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $h
+        Label : CASE
+          'G'

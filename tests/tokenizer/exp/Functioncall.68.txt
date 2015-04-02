@@ -17,7 +17,7 @@ Label : CODE
             Label : INDEX
               'B'
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -37,7 +37,7 @@ Label : CODE
             Label : INDEX
               'D'
       Label : THEN
-        Block with if/elseif
+        ;
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -66,16 +66,16 @@ Label : CODE
           (
           Label : CODE
             ==
+            Label : RIGHT
+              'J'
             Label : LEFT
               [
               Label : VARIABLE
                 $a
               Label : INDEX
                 'D'
-            Label : RIGHT
-              'J'
         Label : THEN
-          Block with if/elseif
+          ;
           Label : ELEMENT
             echo
             Label : ARGUMENTS

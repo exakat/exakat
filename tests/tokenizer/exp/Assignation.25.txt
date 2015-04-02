@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       include
       Label : ARGUMENTS
@@ -14,3 +12,5 @@ Label : CODE
           (
           Label : CODE
             'y.php'
+    Label : LEFT
+      $x

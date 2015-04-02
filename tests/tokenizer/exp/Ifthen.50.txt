@@ -11,7 +11,7 @@ Label : CODE
         Label : NOT
           $a
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         b
         Label : ARGUMENTS
@@ -30,12 +30,12 @@ Label : CODE
           (
           Label : CODE
             ==
-            Label : LEFT
-              $d
             Label : RIGHT
               1
+            Label : LEFT
+              $d
         Label : THEN
-          Block with if/elseif
+          ;
           Label : ELEMENT
             e
             Label : ARGUMENTS
@@ -54,12 +54,12 @@ Label : CODE
               (
               Label : CODE
                 ==
-                Label : LEFT
-                  $h
                 Label : RIGHT
                   2
+                Label : LEFT
+                  $h
             Label : THEN
-              Block with if/elseif
+              ;
               Label : ELEMENT
                 i
                 Label : ARGUMENTS

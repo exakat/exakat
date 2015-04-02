@@ -20,10 +20,6 @@ Label : CODE
       void
       Label : ARGUMENT
         and
-        Label : LEFT
-          (
-          Label : CODE
-            "foo"
         Label : RIGHT
           print
           Label : ARGUMENTS
@@ -32,16 +28,16 @@ Label : CODE
               (
               Label : CODE
                 "bar"
+        Label : LEFT
+          (
+          Label : CODE
+            "foo"
   Label : ELEMENT
     print
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         &&
-        Label : LEFT
-          (
-          Label : CODE
-            "foo"
         Label : RIGHT
           print
           Label : ARGUMENTS
@@ -50,3 +46,7 @@ Label : CODE
               (
               Label : CODE
                 "bar"
+        Label : LEFT
+          (
+          Label : CODE
+            "foo"

@@ -7,7 +7,33 @@ Label : CODE
     Label : NAME
       B
     Label : CASES
-      {
+      Sequence Case Default
+      Label : ELEMENT
+        default
+        Label : CODE
+          ;
+          Label : ELEMENT
+            throw
+            Label : THROW
+              new
+              Label : NEW
+                \
+                Label : SUBNAME
+                  M
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    N
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        P
+                        Label : ARGUMENTS
+                          void
+                          Label : ARGUMENT
+                            $f
+                      Label : ARGUMENT
+                        'O'
       Label : ELEMENT
         case
         Label : CODE
@@ -15,47 +41,15 @@ Label : CODE
           Label : ELEMENT
             return
             Label : RETURN
-              'D'
+              'L'
         Label : CASE
           instanceof
           Label : VARIABLE
-            $a
+            $e
           Label : CLASS
             \
             Label : SUBNAME
-              C
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'F'
-        Label : CASE
-          instanceof
-          Label : VARIABLE
-            $b
-          Label : CLASS
-            \
-            Label : SUBNAME
-              E
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'H'
-        Label : CASE
-          instanceof
-          Label : VARIABLE
-            $c
-          Label : CLASS
-            \
-            Label : SUBNAME
-              G
+              K
       Label : ELEMENT
         case
         Label : CODE
@@ -79,38 +73,44 @@ Label : CODE
           Label : ELEMENT
             return
             Label : RETURN
-              'L'
+              'H'
         Label : CASE
           instanceof
           Label : VARIABLE
-            $e
+            $c
           Label : CLASS
             \
             Label : SUBNAME
-              K
+              G
       Label : ELEMENT
-        default
+        case
         Label : CODE
           ;
           Label : ELEMENT
-            throw
-            Label : THROW
-              new
-              Label : NEW
-                \
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    N
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        P
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            $f
-                      Label : ARGUMENT
-                        'O'
-                Label : SUBNAME
-                  M
+            return
+            Label : RETURN
+              'F'
+        Label : CASE
+          instanceof
+          Label : VARIABLE
+            $b
+          Label : CLASS
+            \
+            Label : SUBNAME
+              E
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              'D'
+        Label : CASE
+          instanceof
+          Label : VARIABLE
+            $a
+          Label : CLASS
+            \
+            Label : SUBNAME
+              C

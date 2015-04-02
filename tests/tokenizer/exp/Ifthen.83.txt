@@ -9,7 +9,7 @@ Label : CODE
       Label : CODE
         $x2
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
@@ -27,7 +27,7 @@ Label : CODE
       Label : CODE
         $x2
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
@@ -45,7 +45,7 @@ Label : CODE
       Label : CODE
         $x
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         void
     Label : ELSE

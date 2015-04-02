@@ -4,6 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      range
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          9
+        Label : ARGUMENT
+          6
     Label : LEFT
       list
       Label : ARGUMENTS
@@ -14,16 +22,16 @@ Label : CODE
           $f
         Label : ARGUMENT
           $e
+  Label : ELEMENT
+    =
     Label : RIGHT
       range
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          9
+          5
         Label : ARGUMENT
-          6
-  Label : ELEMENT
-    =
+          3
     Label : LEFT
       list
       Label : ARGUMENTS
@@ -34,16 +42,16 @@ Label : CODE
           void
         Label : ARGUMENT
           $c
+  Label : ELEMENT
+    =
     Label : RIGHT
       range
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
-          5
+          2
         Label : ARGUMENT
-          3
-  Label : ELEMENT
-    =
+          0
     Label : LEFT
       list
       Label : ARGUMENTS
@@ -54,11 +62,3 @@ Label : CODE
           $a
         Label : ARGUMENT
           void
-    Label : RIGHT
-      range
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          0

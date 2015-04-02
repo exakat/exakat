@@ -6,30 +6,6 @@ Label : CODE
     (
     Label : CODE
       &&
-      Label : LEFT
-        ===
-        Label : LEFT
-          ::
-          Label : CLASS
-            self
-          Label : CONSTANT
-            A
-        Label : RIGHT
-          (
-          Label : CODE
-            &
-            Label : LEFT
-              ::
-              Label : CLASS
-                self
-              Label : CONSTANT
-                B
-            Label : RIGHT
-              ->
-              Label : OBJECT
-                $this
-              Label : PROPERTY
-                c
       Label : RIGHT
         preg_match
         Label : ARGUMENTS
@@ -50,3 +26,27 @@ Label : CODE
               $this
             Label : PROPERTY
               d
+      Label : LEFT
+        ===
+        Label : RIGHT
+          (
+          Label : CODE
+            &
+            Label : RIGHT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                c
+            Label : LEFT
+              ::
+              Label : CLASS
+                self
+              Label : CONSTANT
+                B
+        Label : LEFT
+          ::
+          Label : CLASS
+            self
+          Label : CONSTANT
+            A

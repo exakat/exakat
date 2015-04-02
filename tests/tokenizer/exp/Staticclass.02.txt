@@ -39,7 +39,7 @@ Label : CODE
           Label : ELEMENT
             function
             Label : BLOCK
-              {
+              ;
               Label : ELEMENT
                 echo
                 Label : ARGUMENTS
@@ -47,7 +47,7 @@ Label : CODE
                   Label : ARGUMENT
                     ::
                     Label : CLASS
-                      self
+                      parent
                     Label : CONSTANT
                       class
               Label : ELEMENT
@@ -67,7 +67,7 @@ Label : CODE
                   Label : ARGUMENT
                     ::
                     Label : CLASS
-                      parent
+                      self
                     Label : CONSTANT
                       class
             Label : ARGUMENTS

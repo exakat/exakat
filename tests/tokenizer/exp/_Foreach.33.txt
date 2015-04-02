@@ -3,6 +3,14 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      $a
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -11,20 +19,20 @@ Label : CODE
           (
           Label : CODE
             ||
-            Label : LEFT
-              ==
-              Label : LEFT
-                $f
-              Label : RIGHT
-                'B'
             Label : RIGHT
               ==
-              Label : LEFT
-                $g
               Label : RIGHT
                 'C'
+              Label : LEFT
+                $g
+            Label : LEFT
+              ==
+              Label : RIGHT
+                'B'
+              Label : LEFT
+                $f
         Label : THEN
-          {
+          ;
           Label : ELEMENT
             continue
             Label : LEVEL
@@ -46,16 +54,8 @@ Label : CODE
                   Label : INDEX
                     $e
         Label : THEN
-          {
+          ;
           Label : ELEMENT
             continue
             Label : LEVEL
               void
-    Label : SOURCE
-      $a
-    Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b

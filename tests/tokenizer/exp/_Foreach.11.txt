@@ -4,10 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : SOURCE
       !
       Label : NOT
@@ -32,3 +28,7 @@ Label : CODE
                 'd'
     Label : VALUE
       $e
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void

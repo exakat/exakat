@@ -2,151 +2,43 @@
 Label : CODE
   ;
   Label : ELEMENT
-    return
-    Label : RETURN
-      $ai
-  Label : ELEMENT
     if
     Label : CONDITION
       (
       Label : CODE
         0
     Label : THEN
-      {
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $f
-        Label : RIGHT
-          F
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              G
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    ->
-                    Label : OBJECT
-                      $h
-                    Label : PROPERTY
-                      H
-                  Label : PROPERTY
-                    I
-            Label : ARGUMENT
-              $g
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            =
-            Label : LEFT
-              !
-              Label : NOT
-                $a
-            Label : RIGHT
-              ->
-              Label : OBJECT
-                $b
-              Label : METHOD
-                B
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $c
-        Label : THEN
-          Block with if/elseif
-          Label : ELEMENT
-            =
-            Label : LEFT
-              [
-              Label : VARIABLE
-                $d
-              Label : INDEX
-                'C'
-            Label : RIGHT
-              (string)
-              Label : CAST
-                ->
-                Label : OBJECT
-                  ->
-                  Label : OBJECT
-                    $e
-                  Label : PROPERTY
-                    D
-                Label : PROPERTY
-                  E
+      ;
       Label : ELEMENT
         for
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             =
-            Label : LEFT
-              $m
             Label : RIGHT
+              $af
+            Label : LEFT
               [
               Label : VARIABLE
-                ->
-                Label : OBJECT
-                  ->
-                  Label : OBJECT
-                    $n
-                  Label : PROPERTY
-                    J
-                Label : PROPERTY
-                  K
-              Label : INDEX
-                $o
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $r
-            Label : RIGHT
-              array
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $p
-            Label : RIGHT
-              +
-              Label : LEFT
-                array
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    =>
-                    Label : VALUE
-                      NULL
-                    Label : KEY
-                      'L'
-              Label : RIGHT
-                ->
-                Label : OBJECT
-                  $q
-                Label : METHOD
-                  M
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      N
+                [
+                Label : VARIABLE
+                  $ae
+                Label : INDEX
+                  'R'
           Label : ELEMENT
             foreach
             Label : BLOCK
-              Block with Foreach
+              ;
               Label : ELEMENT
                 foreach
                 Label : BLOCK
-                  Block with Foreach
+                  ;
                   Label : ELEMENT
                     =
+                    Label : RIGHT
+                      (string)
+                      Label : CAST
+                        $ad
                     Label : LEFT
                       [
                       Label : VARIABLE
@@ -167,10 +59,12 @@ Label : CODE
                               'Q'
                         Label : CONCAT
                           $aa
-                    Label : RIGHT
-                      (string)
-                      Label : CAST
-                        $ad
+                Label : VALUE
+                  =>
+                  Label : KEY
+                    $x
+                  Label : VALUE
+                    $y
                 Label : SOURCE
                   ->
                   Label : OBJECT
@@ -181,71 +75,177 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         $w
-                Label : VALUE
-                  =>
-                  Label : VALUE
-                    $y
-                  Label : KEY
-                    $x
-            Label : SOURCE
-              $s
             Label : VALUE
               =>
-              Label : VALUE
-                $u
               Label : KEY
                 $t
+              Label : VALUE
+                $u
+            Label : SOURCE
+              $s
           Label : ELEMENT
             =
+            Label : RIGHT
+              +
+              Label : RIGHT
+                ->
+                Label : OBJECT
+                  $q
+                Label : METHOD
+                  M
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      N
+              Label : LEFT
+                array
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    =>
+                    Label : KEY
+                      'L'
+                    Label : VALUE
+                      NULL
             Label : LEFT
+              $p
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              array
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : LEFT
+              $r
+          Label : ELEMENT
+            =
+            Label : RIGHT
               [
               Label : VARIABLE
-                [
-                Label : VARIABLE
-                  $ae
-                Label : INDEX
-                  'R'
-            Label : RIGHT
-              $af
+                ->
+                Label : OBJECT
+                  ->
+                  Label : OBJECT
+                    $n
+                  Label : PROPERTY
+                    J
+                Label : PROPERTY
+                  K
+              Label : INDEX
+                $o
+            Label : LEFT
+              $m
         Label : INIT
           =
-          Label : LEFT
-            $i
           Label : RIGHT
             1
+          Label : LEFT
+            $i
         Label : FINAL
           <
-          Label : LEFT
-            $j
           Label : RIGHT
             $k
+          Label : LEFT
+            $j
         Label : INCREMENT
           ++
           Label : POSTPLUSPLUS
             $l
-    Label : ELSE
-      Block with else
       Label : ELEMENT
-        ->
-        Label : OBJECT
-          ::
-          Label : METHOD
-            U
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-          Label : CLASS
-            T
-        Label : METHOD
-          V
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            =
+            Label : RIGHT
+              ->
+              Label : OBJECT
+                $b
+              Label : METHOD
+                B
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $c
+            Label : LEFT
+              !
+              Label : NOT
+                $a
+        Label : THEN
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              (string)
+              Label : CAST
+                ->
+                Label : OBJECT
+                  ->
+                  Label : OBJECT
+                    $e
+                  Label : PROPERTY
+                    D
+                Label : PROPERTY
+                  E
+            Label : LEFT
+              [
+              Label : VARIABLE
+                $d
+              Label : INDEX
+                'C'
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          F
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
-              $ah
+              G
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    ->
+                    Label : OBJECT
+                      $h
+                    Label : PROPERTY
+                      H
+                  Label : PROPERTY
+                    I
             Label : ARGUMENT
-              $ag
+              $g
+        Label : LEFT
+          $f
+    Label : ELSE
+      Block with else
       Label : ELEMENT
         return
         Label : RETURN
           S
+  Label : ELEMENT
+    return
+    Label : RETURN
+      $ai
+  Label : ELEMENT
+    ->
+    Label : OBJECT
+      ::
+      Label : CLASS
+        T
+      Label : METHOD
+        U
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : METHOD
+      V
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $ah
+        Label : ARGUMENT
+          $ag

@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    while
-    Label : BLOCK
-      Block with While
-      Label : ELEMENT
-        void
-    Label : CONDITION
-      1
+  while
+  Label : BLOCK
+    Block with While
+    Label : ELEMENT
+      void
+  Label : CONDITION
+    1

@@ -8,12 +8,12 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : LEFT
-          $a
         Label : RIGHT
           'b'
+        Label : LEFT
+          $a
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
@@ -27,7 +27,7 @@ Label : CODE
           Label : CODE
             $d
         Label : THEN
-          {
+          ;
           Label : ELEMENT
             --
             Label : PREPLUSPLUS

@@ -4,8 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      $a
+    Label : VALUE
+      $b
     Label : BLOCK
-      Block with Foreach
+      ;
       Label : ELEMENT
         call_user_func_array
         Label : ARGUMENTS
@@ -20,7 +24,3 @@ Label : CODE
                 $d
           Label : ARGUMENT
             $c
-    Label : SOURCE
-      $a
-    Label : VALUE
-      $b

@@ -8,28 +8,6 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : LEFT
-          &&
-          Label : LEFT
-            ==
-            Label : LEFT
-              [
-              Label : VARIABLE
-                $a
-              Label : INDEX
-                3
-            Label : RIGHT
-              'b'
-          Label : RIGHT
-            ==
-            Label : LEFT
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                4
-            Label : RIGHT
-              1
         Label : RIGHT
           d
           Label : ARGUMENTS
@@ -38,6 +16,28 @@ Label : CODE
               $f
             Label : ARGUMENT
               "e"
+        Label : LEFT
+          &&
+          Label : RIGHT
+            ==
+            Label : RIGHT
+              1
+            Label : LEFT
+              [
+              Label : VARIABLE
+                $c
+              Label : INDEX
+                4
+          Label : LEFT
+            ==
+            Label : RIGHT
+              'b'
+            Label : LEFT
+              [
+              Label : VARIABLE
+                $a
+              Label : INDEX
+                3
     Label : THEN
       {
       Label : ELEMENT

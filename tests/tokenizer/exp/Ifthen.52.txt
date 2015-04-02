@@ -7,12 +7,12 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : LEFT
-          $target
         Label : RIGHT
           1
+        Label : LEFT
+          $target
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         void
     Label : ELSE

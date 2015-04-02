@@ -8,16 +8,16 @@ Label : CODE
       (
       Label : CODE
         ==
+        Label : RIGHT
+          'C'
         Label : LEFT
           ->
           Label : OBJECT
             $a
           Label : PROPERTY
             B
-        Label : RIGHT
-          'C'
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         ->
         Label : OBJECT
@@ -38,32 +38,16 @@ Label : CODE
         (
         Label : CODE
           ==
+          Label : RIGHT
+            'H'
           Label : LEFT
             ->
             Label : OBJECT
               $d
             Label : PROPERTY
               G
-          Label : RIGHT
-            'H'
       Label : THEN
-        {
-        Label : ELEMENT
-          ->
-          Label : OBJECT
-            $e
-          Label : METHOD
-            J
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                'L'
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $f
-                Label : PROPERTY
-                  K
+        ;
         Label : ELEMENT
           ->
           Label : OBJECT
@@ -80,22 +64,38 @@ Label : CODE
                   $h
                 Label : PROPERTY
                   O
+        Label : ELEMENT
+          ->
+          Label : OBJECT
+            $e
+          Label : METHOD
+            J
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                'L'
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $f
+                Label : PROPERTY
+                  K
       Label : ELSE
         elseif
         Label : CONDITION
           (
           Label : CODE
             ==
+            Label : RIGHT
+              'S'
             Label : LEFT
               ->
               Label : OBJECT
                 $i
               Label : PROPERTY
                 R
-            Label : RIGHT
-              'S'
         Label : THEN
-          Block with if/elseif
+          ;
           Label : ELEMENT
             ->
             Label : OBJECT
@@ -118,16 +118,16 @@ Label : CODE
             (
             Label : CODE
               ==
+              Label : RIGHT
+                'Z'
               Label : LEFT
                 ->
                 Label : OBJECT
                   $l
                 Label : PROPERTY
                   Y
-              Label : RIGHT
-                'Z'
           Label : THEN
-            Block with if/elseif
+            ;
             Label : ELEMENT
               ->
               Label : OBJECT
@@ -155,7 +155,7 @@ Label : CODE
                 Label : PROPERTY
                   AF
             Label : THEN
-              Block with if/elseif
+              ;
               Label : ELEMENT
                 ->
                 Label : OBJECT

@@ -10,12 +10,12 @@ Label : CODE
         static
         Label : VALUE
           Void
+        Label : STATIC
+          static
         Label : DEFINE
           $a
         Label : PRIVATE
           private
-        Label : STATIC
-          static
       Label : ELEMENT
         function
         Label : BLOCK
@@ -42,9 +42,9 @@ Label : CODE
             void
         Label : NAME
           b
-        Label : PRIVATE
-          private
         Label : STATIC
           static
+        Label : PRIVATE
+          private
     Label : NAME
       x

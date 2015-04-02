@@ -9,7 +9,7 @@ Label : CODE
       Label : ELEMENT
         function
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             print
             Label : ARGUMENTS

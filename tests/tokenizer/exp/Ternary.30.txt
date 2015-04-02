@@ -3,8 +3,6 @@ Label : CODE
   ;
   Label : ELEMENT
     .=
-    Label : LEFT
-      $out
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -13,101 +11,103 @@ Label : CODE
         $number
       Label : CONCAT
         '&#'
+    Label : LEFT
+      $out
   Label : ELEMENT
     =
-    Label : LEFT
-      $number
     Label : RIGHT
       ?
       Label : CONDITION
         (
         Label : CODE
           ===
-          Label : LEFT
-            $count
           Label : RIGHT
             3
+          Label : LEFT
+            $count
       Label : THEN
         +
-        Label : LEFT
-          +
-          Label : LEFT
-            (
-            Label : CODE
-              *
-              Label : LEFT
-                (
-                Label : CODE
-                  %
-                  Label : LEFT
-                    [
-                    Label : VARIABLE
-                      $temp
-                    Label : INDEX
-                      0
-                  Label : RIGHT
-                    16
-              Label : RIGHT
-                4096
-          Label : RIGHT
-            (
-            Label : CODE
-              *
-              Label : LEFT
-                (
-                Label : CODE
-                  %
-                  Label : LEFT
-                    [
-                    Label : VARIABLE
-                      $temp
-                    Label : INDEX
-                      1
-                  Label : RIGHT
-                    64
-              Label : RIGHT
-                64
         Label : RIGHT
           (
           Label : CODE
             %
+            Label : RIGHT
+              64
             Label : LEFT
               [
               Label : VARIABLE
                 $temp
               Label : INDEX
                 2
-            Label : RIGHT
-              64
+        Label : LEFT
+          +
+          Label : RIGHT
+            (
+            Label : CODE
+              *
+              Label : RIGHT
+                64
+              Label : LEFT
+                (
+                Label : CODE
+                  %
+                  Label : RIGHT
+                    64
+                  Label : LEFT
+                    [
+                    Label : VARIABLE
+                      $temp
+                    Label : INDEX
+                      1
+          Label : LEFT
+            (
+            Label : CODE
+              *
+              Label : RIGHT
+                4096
+              Label : LEFT
+                (
+                Label : CODE
+                  %
+                  Label : RIGHT
+                    16
+                  Label : LEFT
+                    [
+                    Label : VARIABLE
+                      $temp
+                    Label : INDEX
+                      0
       Label : ELSE
         +
-        Label : LEFT
-          (
-          Label : CODE
-            *
-            Label : LEFT
-              (
-              Label : CODE
-                %
-                Label : LEFT
-                  [
-                  Label : VARIABLE
-                    $temp
-                  Label : INDEX
-                    0
-                Label : RIGHT
-                  32
-            Label : RIGHT
-              64
         Label : RIGHT
           (
           Label : CODE
             %
+            Label : RIGHT
+              64
             Label : LEFT
               [
               Label : VARIABLE
                 $temp
               Label : INDEX
                 1
+        Label : LEFT
+          (
+          Label : CODE
+            *
             Label : RIGHT
               64
+            Label : LEFT
+              (
+              Label : CODE
+                %
+                Label : RIGHT
+                  32
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $temp
+                  Label : INDEX
+                    0
+    Label : LEFT
+      $number

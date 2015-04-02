@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     +
-    Label : LEFT
-      1
     Label : RIGHT
       (
       Label : CODE
         1
+    Label : LEFT
+      1

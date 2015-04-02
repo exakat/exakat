@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      +
+      Label : RIGHT
+        1
+      Label : LEFT
+        $j
     Label : LEFT
       [
       Label : VARIABLE
@@ -18,14 +24,20 @@ Label : CODE
           $h
         Label : INDEX
           $i
-    Label : RIGHT
-      +
-      Label : LEFT
-        $j
-      Label : RIGHT
-        1
   Label : ELEMENT
     =
+    Label : RIGHT
+      chop
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          substr
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              $e
     Label : LEFT
       [
       Label : VARIABLE
@@ -40,15 +52,3 @@ Label : CODE
           $c
         Label : INDEX
           $d
-    Label : RIGHT
-      chop
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          substr
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              $e

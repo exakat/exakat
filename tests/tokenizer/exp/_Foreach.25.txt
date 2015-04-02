@@ -4,8 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      new
+      Label : NEW
+        \
+        Label : SUBNAME
+          A
+    Label : VALUE
+      $b
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         unlink
         Label : ARGUMENTS
@@ -20,11 +28,3 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-    Label : SOURCE
-      new
-      Label : NEW
-        \
-        Label : SUBNAME
-          A
-    Label : VALUE
-      $b

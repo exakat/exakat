@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     function
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
@@ -26,10 +26,10 @@ Label : CODE
         Typehint
         Label : VARIABLE
           =
-          Label : LEFT
-            $c
           Label : RIGHT
             null
+          Label : LEFT
+            $c
         Label : CLASS
           A
       Label : ARGUMENT
@@ -39,7 +39,7 @@ Label : CODE
   Label : ELEMENT
     function
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
@@ -60,10 +60,10 @@ Label : CODE
         Typehint
         Label : VARIABLE
           =
-          Label : LEFT
-            $c
           Label : RIGHT
             null
+          Label : LEFT
+            $c
         Label : CLASS
           \
           Label : SUBNAME

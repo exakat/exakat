@@ -7,15 +7,7 @@ Label : CODE
     Label : NAME
       $a
     Label : CASES
-      {
-      Label : ELEMENT
-        default
-        Label : CODE
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              false
+      Sequence Case Default
       Label : ELEMENT
         case
         Label : CODE
@@ -39,11 +31,11 @@ Label : CODE
             Label : THEN
               {
               Label : ELEMENT
-                break
-                Label : LEVEL
-                  void
-              Label : ELEMENT
                 void
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
           Label : ELEMENT
             require_once
             Label : ARGUMENTS
@@ -61,7 +53,7 @@ Label : CODE
               Label : CODE
                 $c
             Label : THEN
-              {
+              ;
               Label : ELEMENT
                 $e
             Label : ELSE
@@ -84,3 +76,11 @@ Label : CODE
                   void
         Label : CASE
           'b'
+      Label : ELEMENT
+        default
+        Label : CODE
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              false

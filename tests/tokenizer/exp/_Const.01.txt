@@ -18,12 +18,12 @@ Label : CODE
         static
         Label : VALUE
           Void
-        Label : DEFINE
-          $E
-        Label : PROTECTED
-          protected
         Label : STATIC
           static
+        Label : PROTECTED
+          protected
+        Label : DEFINE
+          $E
       Label : ELEMENT
         const
         Label : VALUE
@@ -58,9 +58,9 @@ Label : CODE
             void
         Label : NAME
           f
-        Label : PUBLIC
-          public
         Label : STATIC
           static
+        Label : PUBLIC
+          public
     Label : NAME
       x

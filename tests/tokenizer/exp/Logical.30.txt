@@ -4,20 +4,30 @@ Label : CODE
   ;
   Label : ELEMENT
     &&
+    Label : RIGHT
+      f
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            $g
+          Label : INDEX
+            'h'
     Label : LEFT
       ->
       Label : OBJECT
         ->
         Label : OBJECT
           ::
+          Label : CLASS
+            C
           Label : METHOD
             a
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 void
-          Label : CLASS
-            C
         Label : PROPERTY
           b
       Label : METHOD
@@ -30,13 +40,3 @@ Label : CODE
               $d
             Label : INDEX
               'e'
-    Label : RIGHT
-      f
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          [
-          Label : VARIABLE
-            $g
-          Label : INDEX
-            'h'

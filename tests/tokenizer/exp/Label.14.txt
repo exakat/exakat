@@ -7,19 +7,13 @@ Label : CODE
     Label : NAME
       $a
     Label : CASES
-      {
+      Sequence Case Default
       Label : ELEMENT
         case
         Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : LEFT
-              ->
-              Label : OBJECT
-                $this
-              Label : PROPERTY
-                E
             Label : RIGHT
               ->
               Label : OBJECT
@@ -30,20 +24,26 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     'G'
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                E
           Label : ELEMENT
             break
             Label : LEVEL
               void
           Label : ELEMENT
             =
+            Label : RIGHT
+              D
             Label : LEFT
               ->
               Label : OBJECT
                 $this
               Label : PROPERTY
                 C
-            Label : RIGHT
-              D
         Label : CASE
           @
           Label : AT

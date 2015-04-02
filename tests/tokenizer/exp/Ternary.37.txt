@@ -19,6 +19,8 @@ Label : CODE
             ?
             Label : CONDITION
               <
+              Label : RIGHT
+                $b
               Label : LEFT
                 B
                 Label : ARGUMENTS
@@ -29,8 +31,6 @@ Label : CODE
                       $a
                     Label : INDEX
                       'C'
-              Label : RIGHT
-                $b
             Label : THEN
               'D'
             Label : ELSE

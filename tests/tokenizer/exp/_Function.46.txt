@@ -9,7 +9,7 @@ Label : CODE
       Label : ELEMENT
         function
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             return
             Label : RETURN
@@ -20,14 +20,14 @@ Label : CODE
             void
         Label : NAME
           TRUE
-        Label : PUBLIC
-          public
         Label : STATIC
           static
+        Label : PUBLIC
+          public
       Label : ELEMENT
         function
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             return
             Label : RETURN
@@ -38,9 +38,9 @@ Label : CODE
             void
         Label : NAME
           FALSE
-        Label : PUBLIC
-          public
         Label : STATIC
           static
+        Label : PUBLIC
+          public
     Label : NAME
       x

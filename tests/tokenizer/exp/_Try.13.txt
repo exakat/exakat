@@ -8,26 +8,26 @@ Label : CODE
       {
       Label : ELEMENT
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           [
           Label : VARIABLE
             $b
           Label : INDEX
             'B'
+        Label : LEFT
+          $a
     Label : CATCH
       catch
-      Label : CODE
-        {
-        Label : ELEMENT
-          return
-          Label : RETURN
-            void
       Label : VARIABLE
         $c
       Label : CLASS
         D
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            void
   Label : ELEMENT
     ->
     Label : OBJECT
@@ -46,6 +46,8 @@ Label : CODE
             void
             Label : ARGUMENT
               =>
+              Label : KEY
+                'J'
               Label : VALUE
                 Concatenation
                 Label : CONCAT
@@ -80,7 +82,5 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-              Label : KEY
-                'J'
         Label : ARGUMENT
           'H'

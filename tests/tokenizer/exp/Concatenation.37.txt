@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $fp
     Label : RIGHT
       fopen
       Label : ARGUMENTS
@@ -26,3 +24,5 @@ Label : CODE
             $b
           Label : CONCAT
             'a'
+    Label : LEFT
+      $fp

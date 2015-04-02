@@ -10,12 +10,12 @@ Label : CODE
         static
         Label : VALUE
           Void
-        Label : DEFINE
-          $g
-        Label : PROTECTED
-          protected
         Label : STATIC
           static
+        Label : PROTECTED
+          protected
+        Label : DEFINE
+          $g
     Label : NAME
       f
   Label : ELEMENT
@@ -31,7 +31,7 @@ Label : CODE
             Label : ARGUMENT
               'A'
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         exit
         Label : ARGUMENTS

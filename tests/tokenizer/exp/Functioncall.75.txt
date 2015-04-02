@@ -3,8 +3,14 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      a4
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         $handler
         Label : ARGUMENTS
@@ -13,26 +19,26 @@ Label : CODE
             yield
             Label : YIELD
               ::
+              Label : CLASS
+                $server
               Label : METHOD
                 accept
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     void
-              Label : CLASS
-                $server
         Label : NAME
           $handler
+  Label : ELEMENT
+    function
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
     Label : NAME
-      a4
-  Label : ELEMENT
-    function
+      a3
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         $handler
         Label : ARGUMENTS
@@ -51,16 +57,16 @@ Label : CODE
                     void
         Label : NAME
           $handler
+  Label : ELEMENT
+    function
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
     Label : NAME
-      a3
-  Label : ELEMENT
-    function
+      a2
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         $handler
         Label : ARGUMENTS
@@ -79,16 +85,16 @@ Label : CODE
                     void
         Label : NAME
           $handler
+  Label : ELEMENT
+    function
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
     Label : NAME
-      a2
-  Label : ELEMENT
-    function
+      a
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         h
         Label : ARGUMENTS
@@ -97,9 +103,3 @@ Label : CODE
             yield
             Label : YIELD
               3
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-    Label : NAME
-      a

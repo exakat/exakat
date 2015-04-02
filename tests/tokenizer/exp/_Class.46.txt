@@ -10,12 +10,12 @@ Label : CODE
         static
         Label : VALUE
           Void
-        Label : DEFINE
-          $a
-        Label : PROTECTED
-          protected
         Label : STATIC
           static
+        Label : PROTECTED
+          protected
+        Label : DEFINE
+          $a
       Label : ELEMENT
         function
         Label : BLOCK
@@ -42,9 +42,9 @@ Label : CODE
             void
         Label : NAME
           b
-        Label : PROTECTED
-          protected
         Label : STATIC
           static
+        Label : PROTECTED
+          protected
     Label : NAME
       x

@@ -27,11 +27,9 @@ Label : CODE
         Label : NOT
           $j
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $k
         Label : RIGHT
           [
           Label : VARIABLE
@@ -42,18 +40,18 @@ Label : CODE
               'l'
           Label : INDEX
             'm'
+        Label : LEFT
+          $k
     Label : ELSE
       {
       Label : ELEMENT
         =
-        Label : LEFT
-          $n
         Label : RIGHT
           true
+        Label : LEFT
+          $n
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       str_replace
       Label : ARGUMENTS
@@ -84,3 +82,5 @@ Label : CODE
             'e'
         Label : ARGUMENT
           'b'
+    Label : LEFT
+      $a

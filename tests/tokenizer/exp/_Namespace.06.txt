@@ -14,24 +14,24 @@ Label : CODE
           CONNECT_OK
       Label : ELEMENT
         class
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
         Label : NAME
           Connection
-      Label : ELEMENT
-        function
         Label : BLOCK
           {
           Label : ELEMENT
             void
+      Label : ELEMENT
+        function
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
         Label : NAME
           connect
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
     Label : NAMESPACE
       AnotherProject
   Label : ELEMENT
@@ -46,23 +46,23 @@ Label : CODE
           CONNECT_OK
       Label : ELEMENT
         class
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
         Label : NAME
           Connection
-      Label : ELEMENT
-        function
         Label : BLOCK
           {
           Label : ELEMENT
             void
+      Label : ELEMENT
+        function
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
         Label : NAME
           connect
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
     Label : NAMESPACE
       MyProject

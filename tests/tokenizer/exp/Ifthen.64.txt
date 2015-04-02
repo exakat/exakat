@@ -15,17 +15,15 @@ Label : CODE
             Label : ARGUMENT
               $a
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         .=
-        Label : LEFT
-          $b
         Label : RIGHT
           'B'
+        Label : LEFT
+          $b
   Label : ELEMENT
     .=
-    Label : LEFT
-      $c
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -42,3 +40,5 @@ Label : CODE
         $d
       Label : CONCAT
         'D'
+    Label : LEFT
+      $c

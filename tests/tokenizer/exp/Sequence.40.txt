@@ -9,14 +9,14 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      {
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          3
+        Label : LEFT
+          $c
       Label : ELEMENT
         @
         Label : AT
           $b
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $c
-        Label : RIGHT
-          3

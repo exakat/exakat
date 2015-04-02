@@ -1,74 +1,72 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    class
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $b
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $c
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $d
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $e
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $f
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $g
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $h
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $i
-        Label : VAR
-          var
-    Label : NAME
-      a
+  class
+  Label : NAME
+    a
+  Label : BLOCK
+    {
+    Label : ELEMENT
+      ppp
+      Label : DEFINE
+        $b
+      Label : VALUE
+        void
+      Label : VAR
+        var
+    Label : ELEMENT
+      ppp
+      Label : DEFINE
+        $c
+      Label : VALUE
+        void
+      Label : VAR
+        var
+    Label : ELEMENT
+      ppp
+      Label : DEFINE
+        $d
+      Label : VALUE
+        void
+      Label : VAR
+        var
+    Label : ELEMENT
+      ppp
+      Label : DEFINE
+        $e
+      Label : VALUE
+        void
+      Label : VAR
+        var
+    Label : ELEMENT
+      ppp
+      Label : DEFINE
+        $f
+      Label : VALUE
+        void
+      Label : VAR
+        var
+    Label : ELEMENT
+      ppp
+      Label : DEFINE
+        $g
+      Label : VALUE
+        void
+      Label : VAR
+        var
+    Label : ELEMENT
+      ppp
+      Label : DEFINE
+        $h
+      Label : VALUE
+        void
+      Label : VAR
+        var
+    Label : ELEMENT
+      ppp
+      Label : DEFINE
+        $i
+      Label : VALUE
+        void
+      Label : VAR
+        var

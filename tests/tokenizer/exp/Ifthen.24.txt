@@ -13,7 +13,7 @@ Label : CODE
         Label : INDEX
           'b'
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         for
         Label : BLOCK
@@ -22,16 +22,16 @@ Label : CODE
             void
         Label : INIT
           =
-          Label : LEFT
-            $c
           Label : RIGHT
             1
+          Label : LEFT
+            $c
         Label : FINAL
           <=
-          Label : LEFT
-            $d
           Label : RIGHT
             8
+          Label : LEFT
+            $d
         Label : INCREMENT
           ++
           Label : POSTPLUSPLUS

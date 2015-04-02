@@ -4,12 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      $c
     Label : BLOCK
-      {
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
+      ;
       Label : ELEMENT
         {
         Label : ELEMENT
@@ -18,18 +16,22 @@ Label : CODE
             void
             Label : ARGUMENT
               '3'
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a
     Label : SOURCE
       ->
       Label : OBJECT
         $a
       Label : PROPERTY
         b
-    Label : VALUE
-      $c
   Label : ELEMENT
     foreach
+    Label : VALUE
+      $c
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         {
         Label : ELEMENT
@@ -48,12 +50,12 @@ Label : CODE
         $a
       Label : PROPERTY
         b
-    Label : VALUE
-      $c
   Label : ELEMENT
     foreach
+    Label : VALUE
+      $c
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         {
         Label : ELEMENT
@@ -68,5 +70,3 @@ Label : CODE
         $a
       Label : PROPERTY
         b
-    Label : VALUE
-      $c

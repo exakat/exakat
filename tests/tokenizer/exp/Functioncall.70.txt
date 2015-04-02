@@ -4,6 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      array
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          1
     Label : LEFT
       list
       Label : ARGUMENTS
@@ -32,13 +42,3 @@ Label : CODE
           [
           Label : VARIABLE
             $a
-    Label : RIGHT
-      array
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          3
-        Label : ARGUMENT
-          2
-        Label : ARGUMENT
-          1

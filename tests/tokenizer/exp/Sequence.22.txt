@@ -19,7 +19,7 @@ Label : CODE
       Label : CODE
         1
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         return
         Label : RETURN

@@ -17,10 +17,10 @@ Label : CODE
       Label : CODE
         {
         Label : ELEMENT
-          __halt_compiler
-        Label : ELEMENT
           void
       Label : VARIABLE
         $e
       Label : CLASS
         Exception
+  Label : ELEMENT
+    __halt_compiler

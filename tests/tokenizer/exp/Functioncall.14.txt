@@ -13,7 +13,7 @@ Label : CODE
           Label : ARGUMENT
             $x
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         $x
     Label : ELSE

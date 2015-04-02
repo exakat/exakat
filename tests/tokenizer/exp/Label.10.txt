@@ -7,7 +7,7 @@ Label : CODE
     Label : NAME
       $a
     Label : CASES
-      {
+      Sequence Case Default
       Label : ELEMENT
         case
         Label : CODE

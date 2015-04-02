@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       +
-      Label : LEFT
-        1
       Label : RIGHT
         3
+      Label : LEFT
+        1
+    Label : LEFT
+      $x

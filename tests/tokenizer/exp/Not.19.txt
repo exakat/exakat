@@ -4,10 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          b
       Label : METHOD
         instance
         Label : ARGUMENTS
@@ -26,7 +28,5 @@ Label : CODE
             null
           Label : ARGUMENT
             $d
-      Label : CLASS
-        \
-        Label : SUBNAME
-          b
+    Label : LEFT
+      $a

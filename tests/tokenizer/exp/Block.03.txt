@@ -15,17 +15,17 @@ Label : CODE
             Label : ARGUMENT
               $f
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         =
+        Label : RIGHT
+          $i
         Label : LEFT
           [
           Label : VARIABLE
             $g
           Label : INDEX
             'h'
-        Label : RIGHT
-          $i
   Label : ELEMENT
     if
     Label : CONDITION
@@ -37,11 +37,9 @@ Label : CODE
           Label : ARGUMENT
             $a
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $b
         Label : RIGHT
           strrchr
           Label : ARGUMENTS
@@ -50,9 +48,11 @@ Label : CODE
               'd'
             Label : ARGUMENT
               $c
+        Label : LEFT
+          $b
   Label : ELEMENT
     =
-    Label : LEFT
-      $e
     Label : RIGHT
       1
+    Label : LEFT
+      $e

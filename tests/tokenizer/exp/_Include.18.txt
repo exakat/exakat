@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      ::
-      Label : PROPERTY
-        $a
-      Label : CLASS
-        B
     Label : RIGHT
       ::
       Label : METHOD
@@ -42,3 +36,9 @@ Label : CODE
                   E
       Label : CLASS
         C
+    Label : LEFT
+      ::
+      Label : PROPERTY
+        $a
+      Label : CLASS
+        B

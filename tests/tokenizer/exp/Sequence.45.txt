@@ -9,16 +9,16 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $b
   Label : ELEMENT
     interface
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
         void
-    Label : NAME
-      x

@@ -10,23 +10,23 @@ Label : CODE
         $a
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       **
-      Label : LEFT
-        $a
       Label : RIGHT
         3
+      Label : LEFT
+        $a
+    Label : LEFT
+      $a
   Label : ELEMENT
     **=
-    Label : LEFT
-      $a
     Label : RIGHT
       3
-  Label : ELEMENT
-    =
     Label : LEFT
       $a
+  Label : ELEMENT
+    =
     Label : RIGHT
       2
+    Label : LEFT
+      $a

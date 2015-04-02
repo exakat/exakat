@@ -4,8 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      require
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          (
+          Label : CODE
+            $a
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         ->
         Label : OBJECT
@@ -26,17 +40,3 @@ Label : CODE
               $h
             Label : ARGUMENT
               'g'
-    Label : SOURCE
-      require
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          (
-          Label : CODE
-            $a
-    Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b

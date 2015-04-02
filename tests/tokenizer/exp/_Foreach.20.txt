@@ -4,24 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      $a
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b
     Label : BLOCK
-      Block with Foreach
+      ;
       Label : ELEMENT
         if
         Label : CONDITION
           (
           Label : CODE
             &&
-            Label : LEFT
-              isset
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $d
-                  Label : INDEX
-                    'e'
             Label : RIGHT
               !
               Label : NOT
@@ -34,8 +32,18 @@ Label : CODE
                       $h
                   Label : ARGUMENT
                     $g
+            Label : LEFT
+              isset
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  [
+                  Label : VARIABLE
+                    $d
+                  Label : INDEX
+                    'e'
         Label : THEN
-          Block with if/elseif
+          ;
           Label : ELEMENT
             unset
             Label : ARGUMENTS
@@ -46,11 +54,3 @@ Label : CODE
                   $j
                 Label : INDEX
                   $k
-    Label : SOURCE
-      $a
-    Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b

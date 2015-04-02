@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -14,6 +12,8 @@ Label : CODE
           2
         Label : ARGUMENT
           >
+          Label : RIGHT
+            'c'
           Label : LEFT
             ->
             Label : OBJECT
@@ -24,7 +24,7 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-          Label : RIGHT
-            'c'
         Label : ARGUMENT
           1
+    Label : LEFT
+      $x

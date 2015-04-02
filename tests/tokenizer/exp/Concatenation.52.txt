@@ -4,14 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         if
         Label : CONDITION
           (
           Label : CODE
             ===
+            Label : RIGHT
+              0
             Label : LEFT
               C
               Label : ARGUMENTS
@@ -20,72 +28,54 @@ Label : CODE
                   $b
                 Label : ARGUMENT
                   $d
-            Label : RIGHT
-              0
         Label : THEN
-          {
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $e
-            Label : RIGHT
-              Concatenation
-              Label : CONCAT
-                'G'
-              Label : CONCAT
-                D
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    $d
-                  Label : ARGUMENT
-                    F
-                  Label : ARGUMENT
-                    'E'
+          ;
           Label : ELEMENT
             if
             Label : CONDITION
               (
               Label : CODE
                 ===
-                Label : LEFT
-                  $c
                 Label : RIGHT
                   null
+                Label : LEFT
+                  $c
             Label : THEN
-              {
+              ;
               Label : ELEMENT
                 if
                 Label : CONDITION
                   (
                   Label : CODE
                     =
-                    Label : LEFT
-                      $f
                     Label : RIGHT
                       H
                       Label : ARGUMENTS
                         void
                         Label : ARGUMENT
                           $e
+                    Label : LEFT
+                      $f
                 Label : THEN
-                  {
+                  ;
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      I
                   Label : ELEMENT
                     require
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
                         $f
-                  Label : ELEMENT
-                    return
-                    Label : RETURN
-                      I
             Label : ELSE
               {
               Label : ELEMENT
                 foreach
+                Label : VALUE
+                  $g
                 Label : BLOCK
-                  {
+                  ;
                   Label : ELEMENT
                     if
                     Label : CONDITION
@@ -103,7 +93,11 @@ Label : CODE
                             Label : CONCAT
                               $g
                     Label : THEN
-                      {
+                      ;
+                      Label : ELEMENT
+                        return
+                        Label : RETURN
+                          I
                       Label : ELEMENT
                         require
                         Label : ARGUMENTS
@@ -116,25 +110,31 @@ Label : CODE
                               F
                             Label : CONCAT
                               $g
-                      Label : ELEMENT
-                        return
-                        Label : RETURN
-                          I
                 Label : SOURCE
                   (array)
                   Label : CAST
                     $c
-                Label : VALUE
-                  $g
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              Concatenation
+              Label : CONCAT
+                'G'
+              Label : CONCAT
+                D
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    $d
+                  Label : ARGUMENT
+                    F
+                  Label : ARGUMENT
+                    'E'
+            Label : LEFT
+              $e
     Label : SOURCE
       ::
-      Label : PROPERTY
-        $a
       Label : CLASS
         B
-    Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b
+      Label : PROPERTY
+        $a

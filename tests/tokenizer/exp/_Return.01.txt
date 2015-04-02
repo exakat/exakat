@@ -25,16 +25,16 @@ Label : CODE
   Label : ELEMENT
     return
     Label : RETURN
-      ::
-      Label : CLASS
-        a
-      Label : CONSTANT
-        y
-  Label : ELEMENT
-    return
-    Label : RETURN
       ->
       Label : OBJECT
         $this
       Label : PROPERTY
         x
+  Label : ELEMENT
+    return
+    Label : RETURN
+      ::
+      Label : CLASS
+        a
+      Label : CONSTANT
+        y

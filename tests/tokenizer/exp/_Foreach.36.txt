@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $d
     Label : SOURCE
       $a
     Label : VALUE
@@ -22,3 +16,9 @@ Label : CODE
           $b
         Label : PROPERTY
           c
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $d

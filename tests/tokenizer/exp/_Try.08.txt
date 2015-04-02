@@ -10,12 +10,16 @@ Label : CODE
         void
     Label : CATCH
       catch
+      Label : VARIABLE
+        $e
+      Label : CLASS
+        Exception
       Label : CODE
-        {
+        ;
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
-            $a
+            $c
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
@@ -23,8 +27,4 @@ Label : CODE
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
-            $c
-      Label : VARIABLE
-        $e
-      Label : CLASS
-        Exception
+            $a

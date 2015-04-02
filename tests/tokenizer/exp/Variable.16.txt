@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      3
     Label : LEFT
       [
       Label : VARIABLE
@@ -22,5 +24,3 @@ Label : CODE
             $__GET
           Label : INDEX
             1
-    Label : RIGHT
-      3

@@ -13,7 +13,7 @@ Label : CODE
         Label : CLASS
           Exception
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         return
         Label : RETURN

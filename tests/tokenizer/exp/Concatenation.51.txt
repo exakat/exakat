@@ -3,9 +3,77 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
+    .=
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        >
+        Label : RIGHT
+          127
+        Label : LEFT
+          ord
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              [
+              Label : VARIABLE
+                $b
+              Label : INDEX
+                $i
+      Label : THEN
+        Concatenation
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $d
+          Label : INDEX
+            ++
+            Label : PREPLUSPLUS
+              $l
+        Label : CONCAT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            $e
+      Label : ELSE
+        [
+        Label : VARIABLE
+          $e
+        Label : INDEX
+          $k
     Label : LEFT
       $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        Concatenation
+        Label : CONCAT
+          $b
+        Label : CONCAT
+          $c
+      Label : THEN
+        Concatenation
+        Label : CONCAT
+          'i'
+        Label : CONCAT
+          $g
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'h'
+          Label : NAME
+            $g
+        Label : CONCAT
+          'f'
+      Label : ELSE
+        'j'
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    =
     Label : RIGHT
       ?
       Label : CONDITION
@@ -38,80 +106,10 @@ Label : CODE
           'f'
       Label : ELSE
         'j'
-  Label : ELEMENT
-    .=
     Label : LEFT
       $a
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        >
-        Label : LEFT
-          ord
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $b
-              Label : INDEX
-                $i
-        Label : RIGHT
-          127
-      Label : THEN
-        Concatenation
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $d
-          Label : INDEX
-            ++
-            Label : PREPLUSPLUS
-              $l
-        Label : CONCAT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            $e
-      Label : ELSE
-        [
-        Label : VARIABLE
-          $e
-        Label : INDEX
-          $k
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        Concatenation
-        Label : CONCAT
-          $b
-        Label : CONCAT
-          $c
-      Label : THEN
-        Concatenation
-        Label : CONCAT
-          'i'
-        Label : CONCAT
-          $g
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'h'
-          Label : NAME
-            $g
-        Label : CONCAT
-          'f'
-      Label : ELSE
-        'j'
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -140,10 +138,10 @@ Label : CODE
           'f'
       Label : ELSE
         'j'
-  Label : ELEMENT
-    =
     Label : LEFT
       $a
+  Label : ELEMENT
+    =
     Label : RIGHT
       ?
       Label : CONDITION
@@ -174,6 +172,8 @@ Label : CODE
           'f'
       Label : ELSE
         'j'
+    Label : LEFT
+      $a
   Label : ELEMENT
     die
     Label : ARGUMENTS
@@ -188,8 +188,6 @@ Label : CODE
         $a
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -198,9 +196,11 @@ Label : CODE
         !
         Label : NOT
           $b
+    Label : LEFT
+      $a
   Label : ELEMENT
     =
-    Label : LEFT
-      $b
     Label : RIGHT
       'c'
+    Label : LEFT
+      $b

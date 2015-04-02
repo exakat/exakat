@@ -12,24 +12,24 @@ Label : CODE
           {
           Label : ELEMENT
             insteadof
+            Label : RIGHT
+              F
             Label : LEFT
               ::
               Label : CLASS
                 G
               Label : CONSTANT
                 I
-            Label : RIGHT
-              F
           Label : ELEMENT
             insteadof
+            Label : RIGHT
+              G
             Label : LEFT
               ::
               Label : CLASS
                 F
               Label : CONSTANT
                 L
-            Label : RIGHT
-              G
         Label : USE
           G
         Label : USE

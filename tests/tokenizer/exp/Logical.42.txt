@@ -4,18 +4,26 @@ Label : CODE
   ;
   Label : ELEMENT
     or
+    Label : RIGHT
+      ::
+      Label : CLASS
+        \
+        Label : SUBNAME
+          J
+      Label : METHOD
+        K
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'L'
     Label : LEFT
       =
-      Label : LEFT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          B
       Label : RIGHT
         new
         Label : NEW
           \
+          Label : SUBNAME
+            C
           Label : ARGUMENTS
             Arguments
             Label : ARGUMENT
@@ -48,17 +56,9 @@ Label : CODE
                   D
               Label : INDEX
                 'E'
-          Label : SUBNAME
-            C
-    Label : RIGHT
-      ::
-      Label : METHOD
-        K
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            'L'
-      Label : CLASS
-        \
-        Label : SUBNAME
-          J
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          B

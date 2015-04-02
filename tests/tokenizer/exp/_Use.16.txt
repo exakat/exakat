@@ -12,10 +12,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           one_identifier
       Label : ELEMENT
@@ -24,10 +24,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           absolute_path
       Label : ELEMENT
@@ -36,10 +36,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           one_identifier3
       Label : ELEMENT
@@ -48,10 +48,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           a1
     Label : NAMESPACE
@@ -66,10 +66,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           path
     Label : NAMESPACE
@@ -84,10 +84,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           path2
     Label : NAMESPACE
@@ -168,10 +168,6 @@ Label : CODE
             a4
       Label : ELEMENT
         function
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
@@ -236,6 +232,10 @@ Label : CODE
               $a
             Label : CLASS
               one_identifier
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
         Label : NAME
           y
     Label : NAMESPACE

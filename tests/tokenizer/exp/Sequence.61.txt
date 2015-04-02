@@ -10,8 +10,6 @@ Label : CODE
         void
     Label : INIT
       =
-      Label : LEFT
-        $a
       Label : RIGHT
         ?
         Label : CONDITION
@@ -22,18 +20,20 @@ Label : CODE
           (
           Label : CODE
             +
-            Label : LEFT
-              $d
             Label : RIGHT
               1
+            Label : LEFT
+              $d
         Label : ELSE
           0
+      Label : LEFT
+        $a
     Label : FINAL
       <
-      Label : LEFT
-        $e
       Label : RIGHT
         $f
+      Label : LEFT
+        $e
     Label : INCREMENT
       ++
       Label : PREPLUSPLUS

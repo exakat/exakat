@@ -54,10 +54,10 @@ Label : CODE
             ?
             Label : CONDITION
               ===
-              Label : LEFT
-                $h
               Label : RIGHT
                 N
+              Label : LEFT
+                $h
             Label : THEN
               $i
             Label : ELSE

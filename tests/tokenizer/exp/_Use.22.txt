@@ -29,7 +29,7 @@ Label : CODE
             Label : INDEX
               'F'
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         echo
         Label : ARGUMENTS

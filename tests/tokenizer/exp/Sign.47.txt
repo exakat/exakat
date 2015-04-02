@@ -4,25 +4,25 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $c
     Label : RIGHT
       -
+      Label : RIGHT
+        4
       Label : LEFT
         ++
         Label : PREPLUSPLUS
           $d
-      Label : RIGHT
-        4
+    Label : LEFT
+      $c
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       +
+      Label : RIGHT
+        4
       Label : LEFT
         ++
         Label : POSTPLUSPLUS
           $b
-      Label : RIGHT
-        4
+    Label : LEFT
+      $a

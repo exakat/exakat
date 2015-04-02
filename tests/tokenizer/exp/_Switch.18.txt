@@ -1,76 +1,74 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $b
-    Label : CASES
-      {
-      Label : ELEMENT
-        default
-        Label : CODE
-          ;
-          Label : ELEMENT
-            return
-            Label : RETURN
-              'e'
-      Label : ELEMENT
-        case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            if
-            Label : CONDITION
-              (
-              Label : CODE
-                $c
-            Label : THEN
-              {
-              Label : ELEMENT
-                ++
-                Label : POSTPLUSPLUS
-                  $d
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $indexed
-            Label : RIGHT
-              array
-              Label : ARGUMENTS
+  switch
+  Label : NAME
+    $b
+  Label : CASES
+    Sequence Case Default
+    Label : ELEMENT
+      case
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            (
+            Label : CODE
+              $c
+          Label : THEN
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $d
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            0
+          Label : LEFT
+            $count
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
                 void
-                Label : ARGUMENT
-                  void
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $associative
-            Label : RIGHT
-              array
-              Label : ARGUMENTS
+          Label : LEFT
+            $indexed
+        Label : ELEMENT
+          =
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
                 void
-                Label : ARGUMENT
-                  void
-          Label : ELEMENT
-            foreach
-            Label : BLOCK
-              {
-              Label : ELEMENT
-                void
-            Label : SOURCE
-              $data
+          Label : LEFT
+            $associative
+        Label : ELEMENT
+          foreach
+          Label : VALUE
+            =>
             Label : VALUE
-              =>
-              Label : VALUE
-                $value
-              Label : KEY
-                $key
-          Label : ELEMENT
-            =
-            Label : LEFT
-              $count
-            Label : RIGHT
-              0
-        Label : CASE
-          'a'
+              $value
+            Label : KEY
+              $key
+          Label : BLOCK
+            {
+            Label : ELEMENT
+              void
+          Label : SOURCE
+            $data
+      Label : CASE
+        'a'
+    Label : ELEMENT
+      default
+      Label : CODE
+        Block with Sequence For Default
+        Label : ELEMENT
+          return
+          Label : RETURN
+            'e'

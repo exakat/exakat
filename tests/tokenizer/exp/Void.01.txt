@@ -8,8 +8,6 @@ Label : CODE
       (
       Label : CODE
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           B
           Label : ARGUMENTS
@@ -18,32 +16,18 @@ Label : CODE
               'C'
             Label : ARGUMENT
               $b
+        Label : LEFT
+          $a
     Label : THEN
-      {
+      ;
+      Label : ELEMENT
+        void
       Label : ELEMENT
         if
         Label : CONDITION
           (
           Label : CODE
             &&
-            Label : LEFT
-              !
-              Label : NOT
-                D
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    $e
-                  Label : ARGUMENT
-                    E
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        $d
-                      Label : ARGUMENT
-                        0
-                      Label : ARGUMENT
-                        $c
             Label : RIGHT
               !
               Label : NOT
@@ -68,8 +52,26 @@ Label : CODE
                         1
                       Label : ARGUMENT
                         $f
+            Label : LEFT
+              !
+              Label : NOT
+                D
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    $e
+                  Label : ARGUMENT
+                    E
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        $d
+                      Label : ARGUMENT
+                        0
+                      Label : ARGUMENT
+                        $c
         Label : THEN
-          Block with if/elseif
+          ;
           Label : ELEMENT
             unset
             Label : ARGUMENTS
@@ -80,5 +82,3 @@ Label : CODE
                   $i
                 Label : INDEX
                   $j
-      Label : ELEMENT
-        void

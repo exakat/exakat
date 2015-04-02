@@ -8,35 +8,35 @@ Label : CODE
       (
       Label : CODE
         >
+        Label : RIGHT
+          0
         Label : LEFT
           [
           Label : VARIABLE
             ::
-            Label : PROPERTY
-              $a
             Label : CLASS
               self
+            Label : PROPERTY
+              $a
           Label : INDEX
             'b'
-        Label : RIGHT
-          0
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         =
+        Label : RIGHT
+          [
+          Label : VARIABLE
+            ::
+            Label : CLASS
+              e
+            Label : PROPERTY
+              $f
+          Label : INDEX
+            'g'
         Label : LEFT
           [
           Label : VARIABLE
             $c
           Label : INDEX
             'd'
-        Label : RIGHT
-          [
-          Label : VARIABLE
-            ::
-            Label : PROPERTY
-              $f
-            Label : CLASS
-              e
-          Label : INDEX
-            'g'

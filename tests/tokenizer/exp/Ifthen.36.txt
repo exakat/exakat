@@ -9,19 +9,17 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $b
         Label : RIGHT
           1
+        Label : LEFT
+          $b
     Label : ELSE
       Block with else
       Label : ELEMENT
         =
-        Label : LEFT
-          $c
         Label : RIGHT
           "
           Label : CONTAIN
@@ -40,3 +38,5 @@ Label : CODE
                 $f
               Label : PROPERTY
                 g
+        Label : LEFT
+          $c

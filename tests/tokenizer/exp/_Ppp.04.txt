@@ -3,10 +3,14 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x3
     Label : BLOCK
       {
       Label : ELEMENT
         function
+        Label : NAME
+          __clone
         Label : BLOCK
           {
           Label : ELEMENT
@@ -15,42 +19,42 @@ Label : CODE
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          __clone
         Label : FINAL
           final
         Label : PROTECTED
           protected
-    Label : NAME
-      x3
   Label : ELEMENT
     class
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        function
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          __clone
-        Label : FINAL
-          final
-        Label : PUBLIC
-          public
     Label : NAME
       x2
-  Label : ELEMENT
-    class
     Label : BLOCK
       {
       Label : ELEMENT
         function
+        Label : NAME
+          __clone
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
+        Label : PUBLIC
+          public
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : FINAL
+          final
+  Label : ELEMENT
+    class
+    Label : NAME
+      x
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        function
+        Label : NAME
+          __clone
         Label : BLOCK
           {
           Label : ELEMENT
@@ -59,11 +63,7 @@ Label : CODE
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          __clone
         Label : FINAL
           final
         Label : PRIVATE
           private
-    Label : NAME
-      x

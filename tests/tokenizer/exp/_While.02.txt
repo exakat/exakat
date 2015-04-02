@@ -10,13 +10,13 @@ Label : CODE
         $a
   Label : ELEMENT
     while
+    Label : CONDITION
+      <
+      Label : RIGHT
+        10
+      Label : LEFT
+        $a
     Label : BLOCK
       Block with While
       Label : ELEMENT
         void
-    Label : CONDITION
-      <
-      Label : LEFT
-        $a
-      Label : RIGHT
-        10

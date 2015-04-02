@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     function
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         return
         Label : RETURN
@@ -14,9 +14,9 @@ Label : CODE
       void
       Label : ARGUMENT
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           1
+        Label : LEFT
+          $a
     Label : NAME
       x

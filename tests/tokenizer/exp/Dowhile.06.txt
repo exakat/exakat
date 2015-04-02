@@ -4,24 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     do
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $a
-        Label : RIGHT
-          ->
-          Label : OBJECT
-            $b
-          Label : METHOD
-            c
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $e
-              Label : ARGUMENT
-                $d
     Label : CONDITION
       !
       Label : NOT
@@ -36,3 +18,21 @@ Label : CODE
               ++
               Label : PREPLUSPLUS
                 $h
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          ->
+          Label : OBJECT
+            $b
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                $d
+        Label : LEFT
+          $a

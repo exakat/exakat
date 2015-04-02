@@ -6,10 +6,10 @@ Label : CODE
     {
     Label : ELEMENT
       =
-      Label : LEFT
-        $b
       Label : RIGHT
         1
+      Label : LEFT
+        $b
   Label : ELEMENT
     ->
     Label : OBJECT

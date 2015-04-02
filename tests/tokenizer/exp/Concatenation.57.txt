@@ -7,20 +7,18 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : LEFT
-          $type
         Label : RIGHT
           is_array
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $type
+        Label : LEFT
+          $type
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         .=
-        Label : LEFT
-          $sql
         Label : RIGHT
           Concatenation
           Label : CONCAT
@@ -39,6 +37,8 @@ Label : CODE
                 ','
           Label : CONCAT
             ' AND thread.thread_type IN('
+        Label : LEFT
+          $sql
     Label : ELSE
       elseif
       Label : CONDITION
@@ -46,11 +46,9 @@ Label : CODE
         Label : CODE
           $type
       Label : THEN
-        Block with if/elseif
+        ;
         Label : ELEMENT
           .=
-          Label : LEFT
-            $sql
           Label : RIGHT
             Concatenation
             Label : CONCAT
@@ -61,3 +59,5 @@ Label : CODE
                   $type
             Label : CONCAT
               ' AND thread.thread_type='
+          Label : LEFT
+            $sql

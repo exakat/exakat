@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ?
       Label : CONDITION
@@ -26,3 +24,5 @@ Label : CODE
             4
         Label : INDEX
           5
+    Label : LEFT
+      $a

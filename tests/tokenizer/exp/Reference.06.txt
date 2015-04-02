@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       ::
+      Label : CLASS
+        y
       Label : METHOD
         $c
         Label : ARGUMENTS
@@ -16,29 +16,29 @@ Label : CODE
             void
         Label : NAME
           $c
-      Label : CLASS
-        y
-  Label : ELEMENT
-    =
     Label : LEFT
       $x
+  Label : ELEMENT
+    =
     Label : RIGHT
       ::
+      Label : CLASS
+        y
       Label : METHOD
         c
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-      Label : CLASS
-        y
-  Label : ELEMENT
-    =
     Label : LEFT
       $x
+  Label : ELEMENT
+    =
     Label : RIGHT
       ::
       Label : PROPERTY
         $c
       Label : CLASS
         y
+    Label : LEFT
+      $x

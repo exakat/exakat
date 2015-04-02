@@ -8,8 +8,16 @@ Label : CODE
       (
       Label : CODE
         -
+        Label : RIGHT
+          $f
         Label : LEFT
           -
+          Label : RIGHT
+            [
+            Label : VARIABLE
+              $d
+            Label : INDEX
+              'E'
           Label : LEFT
             [
             Label : VARIABLE
@@ -20,14 +28,6 @@ Label : CODE
                 b
             Label : INDEX
               'c'
-          Label : RIGHT
-            [
-            Label : VARIABLE
-              $d
-            Label : INDEX
-              'E'
-        Label : RIGHT
-          $f
     Label : THEN
       {
       Label : ELEMENT

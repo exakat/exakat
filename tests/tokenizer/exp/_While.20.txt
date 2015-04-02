@@ -1,46 +1,44 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        while
-        Label : BLOCK
-          Block with While
-          Label : ELEMENT
-            for
-            Label : BLOCK
-              Block with For
-              Label : ELEMENT
-                void
-            Label : INIT
-              =
-              Label : LEFT
-                $i
-              Label : RIGHT
-                1
-            Label : FINAL
-              <
-              Label : LEFT
-                $i
-              Label : RIGHT
-                2
-            Label : INCREMENT
-              ++
-              Label : POSTPLUSPLUS
-                $i
-        Label : CONDITION
-          >=
-          Label : LEFT
-            $b
-          Label : RIGHT
-            1
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $n
-    Label : NAME
-      a2
+  function
+  Label : NAME
+    a2
+  Label : ARGUMENTS
+    void
+    Label : ARGUMENT
+      $n
+  Label : BLOCK
+    ;
+    Label : ELEMENT
+      while
+      Label : BLOCK
+        Block with While
+        Label : ELEMENT
+          for
+          Label : BLOCK
+            Block with For
+            Label : ELEMENT
+              void
+          Label : FINAL
+            <
+            Label : RIGHT
+              2
+            Label : LEFT
+              $i
+          Label : INIT
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $i
+          Label : INCREMENT
+            ++
+            Label : POSTPLUSPLUS
+              $i
+      Label : CONDITION
+        >=
+        Label : RIGHT
+          1
+        Label : LEFT
+          $b

@@ -8,14 +8,14 @@ Label : CODE
       (
       Label : CODE
         ==
+        Label : RIGHT
+          'C'
         Label : LEFT
           ->
           Label : OBJECT
             $a
           Label : PROPERTY
             B
-        Label : RIGHT
-          'C'
     Label : THEN
       ;
       Label : ELEMENT
@@ -61,7 +61,7 @@ Label : CODE
                       Label : INDEX
                         'H'
             Label : THEN
-              Block with if/elseif
+              ;
               Label : ELEMENT
                 return
                 Label : RETURN
@@ -72,14 +72,14 @@ Label : CODE
         (
         Label : CODE
           ==
+          Label : RIGHT
+            'L'
           Label : LEFT
             ->
             Label : OBJECT
               $e
             Label : PROPERTY
               K
-          Label : RIGHT
-            'L'
       Label : THEN
         ;
         Label : ELEMENT
@@ -125,7 +125,7 @@ Label : CODE
                         Label : INDEX
                           'Q'
               Label : THEN
-                Block with if/elseif
+                ;
                 Label : ELEMENT
                   return
                   Label : RETURN
@@ -173,7 +173,7 @@ Label : CODE
                       Label : INDEX
                         'X'
               Label : THEN
-                Block with if/elseif
+                ;
                 Label : ELEMENT
                   return
                   Label : RETURN

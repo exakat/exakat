@@ -13,13 +13,13 @@ Label : CODE
           Label : ELEMENT
             use
             Label : BLOCK
-              {
+              ;
               Label : ELEMENT
                 as
                 Label : SUBNAME
-                  L
+                  N
                 Label : AS
-                  public
+                  protected
               Label : ELEMENT
                 as
                 Label : SUBNAME
@@ -29,9 +29,9 @@ Label : CODE
               Label : ELEMENT
                 as
                 Label : SUBNAME
-                  N
+                  L
                 Label : AS
-                  protected
+                  public
             Label : USE
               \
               Label : SUBNAME

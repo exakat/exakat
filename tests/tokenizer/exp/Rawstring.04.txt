@@ -7,18 +7,24 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       foreach
+      Label : VALUE
+        =>
+        Label : KEY
+          $b
+        Label : VALUE
+          $c
       Label : BLOCK
         ;
         Label : ELEMENT
           D
-        Label : ELEMENT
-          M
         Label : ELEMENT
           echo
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               ::
+              Label : CLASS
+                K
               Label : METHOD
                 L
                 Label : ARGUMENTS
@@ -33,14 +39,14 @@ Label : ELEMENT
                     $h
                   Label : ARGUMENT
                     $g
-              Label : CLASS
-                K
         Label : ELEMENT
           U
         Label : ELEMENT
           I
         Label : ELEMENT
           foreach
+          Label : VALUE
+            $j
           Label : BLOCK
             Block with Foreach
             Label : ELEMENT
@@ -53,6 +59,8 @@ Label : ELEMENT
                   void
                   Label : ARGUMENT
                     ::
+                    Label : CLASS
+                      P
                     Label : METHOD
                       Q
                       Label : ARGUMENTS
@@ -83,20 +91,20 @@ Label : ELEMENT
                               R
                             Label : CONCAT
                               $l
-                    Label : CLASS
-                      P
               Label : ELEMENT
                 N
           Label : SOURCE
             $i
-          Label : VALUE
-            $j
+        Label : ELEMENT
+          M
         Label : ELEMENT
           echo
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               ::
+              Label : CLASS
+                F
               Label : METHOD
                 G
                 Label : ARGUMENTS
@@ -105,12 +113,8 @@ Label : ELEMENT
                     'I'
                   Label : ARGUMENT
                     'H'
-              Label : CLASS
-                F
         Label : ELEMENT
           =
-          Label : LEFT
-            $d
           Label : RIGHT
             ->
             Label : OBJECT
@@ -125,17 +129,13 @@ Label : ELEMENT
                     void
                     Label : ARGUMENT
                       =>
-                      Label : VALUE
-                        $f
                       Label : KEY
                         'D'
+                      Label : VALUE
+                        $f
+          Label : LEFT
+            $d
       Label : SOURCE
         $a
-      Label : VALUE
-        =>
-        Label : VALUE
-          $c
-        Label : KEY
-          $b
 Label : ELEMENT
   A

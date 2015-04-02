@@ -15,6 +15,6 @@ Label : CODE
     Label : THEN
       {
       Label : ELEMENT
-        __halt_compiler
-      Label : ELEMENT
         void
+  Label : ELEMENT
+    __halt_compiler

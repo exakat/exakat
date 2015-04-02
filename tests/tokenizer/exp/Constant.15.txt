@@ -8,30 +8,28 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : LEFT
-          $x
         Label : RIGHT
           \
           Label : SUBNAME
             b
           Label : SUBNAME
             a
+        Label : LEFT
+          $x
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $y
   Label : ELEMENT
     =
-    Label : LEFT
-      $y
     Label : RIGHT
       a
+    Label : LEFT
+      $y
   Label : ELEMENT
     =
-    Label : LEFT
-      $x2
     Label : RIGHT
       \
       Label : SUBNAME
@@ -42,13 +40,15 @@ Label : CODE
         b
       Label : SUBNAME
         a
+    Label : LEFT
+      $x2
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       \
       Label : SUBNAME
         b
       Label : SUBNAME
         a
+    Label : LEFT
+      $x

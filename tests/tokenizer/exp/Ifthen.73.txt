@@ -52,7 +52,7 @@ Label : ELEMENT
               Label : INDEX
                 'R'
           Label : THEN
-            Block with if/elseif
+            ;
             Label : ELEMENT
               echo
               Label : ARGUMENTS
@@ -87,8 +87,6 @@ Label : ELEMENT
             (
             Label : CODE
               &&
-              Label : LEFT
-                $f
               Label : RIGHT
                 ->
                 Label : OBJECT
@@ -99,8 +97,10 @@ Label : ELEMENT
                     void
                     Label : ARGUMENT
                       void
+              Label : LEFT
+                $f
           Label : THEN
-            Block with if/elseif
+            ;
             Label : ELEMENT
               echo
               Label : ARGUMENTS
@@ -151,10 +151,10 @@ Label : ELEMENT
                       void
                       Label : ARGUMENT
                         =>
-                        Label : VALUE
-                          'AL'
                         Label : KEY
                           'AK'
+                        Label : VALUE
+                          'AL'
                   Label : ARGUMENT
                     'AJ'
         Label : ELEMENT

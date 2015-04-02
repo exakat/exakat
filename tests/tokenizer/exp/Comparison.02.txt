@@ -8,7 +8,7 @@ Label : CODE
       void
       Label : ARGUMENT
         ==
-        Label : LEFT
-          2
         Label : RIGHT
           3
+        Label : LEFT
+          2

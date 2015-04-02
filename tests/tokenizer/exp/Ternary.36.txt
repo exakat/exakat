@@ -7,8 +7,6 @@ Label : ELEMENT
       U
     Label : ELEMENT
       =
-      Label : LEFT
-        $i
       Label : RIGHT
         ->
         Label : OBJECT
@@ -33,6 +31,8 @@ Label : ELEMENT
               null
             Label : ARGUMENT
               'AA'
+      Label : LEFT
+        $i
     Label : ELEMENT
       print
       Label : ARGUMENTS
@@ -115,10 +115,10 @@ Label : ELEMENT
           (
           Label : CODE
             ==
-            Label : LEFT
-              $d
             Label : RIGHT
               'J'
+            Label : LEFT
+              $d
         Label : THEN
           J
         Label : ELSE
@@ -133,10 +133,10 @@ Label : ELEMENT
           ?
           Label : CONDITION
             ==
-            Label : LEFT
-              $a
             Label : RIGHT
               'C'
+            Label : LEFT
+              $a
           Label : THEN
             'D'
           Label : ELSE

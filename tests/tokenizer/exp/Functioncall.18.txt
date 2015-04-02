@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       array
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           =>
-          Label : VALUE
-            2
           Label : KEY
             1
+          Label : VALUE
+            2
+    Label : LEFT
+      $a

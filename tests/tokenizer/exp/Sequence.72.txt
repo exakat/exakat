@@ -8,6 +8,8 @@ Label : CODE
       $u
   Label : ELEMENT
     $q
+    Label : NAME
+      $q
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -16,24 +18,24 @@ Label : CODE
           Arguments
           Label : ARGUMENT
             =>
+            Label : KEY
+              'M'
             Label : VALUE
               [
               Label : VARIABLE
                 $t
               Label : INDEX
                 'N'
-            Label : KEY
-              'M'
           Label : ARGUMENT
             =>
+            Label : KEY
+              'K'
             Label : VALUE
               [
               Label : VARIABLE
                 $s
               Label : INDEX
                 'L'
-            Label : KEY
-              'K'
       Label : ARGUMENT
         [
         Label : VARIABLE
@@ -42,8 +44,6 @@ Label : CODE
           'J'
       Label : ARGUMENT
         'I'
-    Label : NAME
-      $q
   Label : ELEMENT
     H
     Label : ARGUMENTS
@@ -60,8 +60,6 @@ Label : CODE
         $l
   Label : ELEMENT
     =
-    Label : LEFT
-      $k
     Label : RIGHT
       E
       Label : ARGUMENTS
@@ -70,8 +68,24 @@ Label : CODE
           'G'
         Label : ARGUMENT
           'F'
+    Label : LEFT
+      $k
   Label : ELEMENT
     =
+    Label : RIGHT
+      $f
+      Label : NAME
+        $f
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $j
+        Label : ARGUMENT
+          $i
+        Label : ARGUMENT
+          $h
+        Label : ARGUMENT
+          $g
     Label : LEFT
       list
       Label : ARGUMENTS
@@ -84,24 +98,8 @@ Label : CODE
           $c
         Label : ARGUMENT
           $b
-    Label : RIGHT
-      $f
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $j
-        Label : ARGUMENT
-          $i
-        Label : ARGUMENT
-          $h
-        Label : ARGUMENT
-          $g
-      Label : NAME
-        $f
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       B
       Label : ARGUMENTS
@@ -110,3 +108,5 @@ Label : CODE
           'D'
         Label : ARGUMENT
           'C'
+    Label : LEFT
+      $a

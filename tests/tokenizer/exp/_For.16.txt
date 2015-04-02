@@ -33,8 +33,6 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         =
-        Label : LEFT
-          $n
         Label : RIGHT
           count
           Label : ARGUMENTS
@@ -45,18 +43,20 @@ Label : CODE
                 $c
               Label : PROPERTY
                 d
+        Label : LEFT
+          $n
       Label : ARGUMENT
         =
-        Label : LEFT
-          $i
         Label : RIGHT
           0
+        Label : LEFT
+          $i
     Label : FINAL
       <
-      Label : LEFT
-        $i
       Label : RIGHT
         $n
+      Label : LEFT
+        $i
     Label : INCREMENT
       ++
       Label : POSTPLUSPLUS

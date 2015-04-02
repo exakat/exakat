@@ -8,6 +8,8 @@ Label : CODE
       (
       Label : CODE
         ===
+        Label : RIGHT
+          'c'
         Label : LEFT
           ->
           Label : OBJECT
@@ -18,10 +20,16 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-        Label : RIGHT
-          'c'
     Label : THEN
-      {
+      ;
+      Label : ELEMENT
+        `
+        Label : CONTAIN
+          Concatenation
+          Label : CONCAT
+            ls -1 
+          Label : CONCAT
+            $g
       Label : ELEMENT
         ->
         Label : OBJECT
@@ -46,14 +54,6 @@ Label : CODE
                   self
                 Label : CONSTANT
                   E
-      Label : ELEMENT
-        `
-        Label : CONTAIN
-          Concatenation
-          Label : CONCAT
-            ls -1 
-          Label : CONCAT
-            $g
     Label : ELSE
       {
       Label : ELEMENT

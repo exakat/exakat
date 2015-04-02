@@ -25,52 +25,52 @@ Label : CODE
             Label : NOT
               $a
         Label : THEN
-          {
+          ;
           Label : ELEMENT
             function
-            Label : BLOCK
-              {
-              Label : ELEMENT
-                void
+            Label : NAME
+              D
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
                 =
-                Label : LEFT
-                  $d
                 Label : RIGHT
                   E
+                Label : LEFT
+                  $d
               Label : ARGUMENT
                 =
-                Label : LEFT
-                  $c
                 Label : RIGHT
                   0
+                Label : LEFT
+                  $c
               Label : ARGUMENT
                 $b
               Label : ARGUMENT
                 $a
-            Label : NAME
-              D
+            Label : BLOCK
+              {
+              Label : ELEMENT
+                void
       Label : ELEMENT
         function
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+        Label : NAME
+          F
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
             =
-            Label : LEFT
-              $h
             Label : RIGHT
               'G'
+            Label : LEFT
+              $h
           Label : ARGUMENT
             $g
           Label : ARGUMENT
             $f
           Label : ARGUMENT
             $e
-        Label : NAME
-          F
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void

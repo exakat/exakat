@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -32,3 +30,5 @@ Label : CODE
                         __FILE__
           Label : KEY
             'a'
+    Label : LEFT
+      $x

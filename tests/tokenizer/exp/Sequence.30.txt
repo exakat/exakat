@@ -4,8 +4,28 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $b
+    Label : NAME
+      a
     Label : BLOCK
-      {
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            !
+            Label : NOT
+              $c
+        Label : THEN
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              false
       Label : ELEMENT
         return
         Label : RETURN
@@ -27,32 +47,12 @@ Label : CODE
                   Label : CONTAIN
                     Concatenation
                     Label : CONCAT
-                      '
+                      c
                     Label : CONCAT
                       $d
                     Label : CONCAT
-                      c
+                      '
                 Label : CONCAT
                   b
                 Label : CONCAT
                   "a"
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            !
-            Label : NOT
-              $c
-        Label : THEN
-          {
-          Label : ELEMENT
-            return
-            Label : RETURN
-              false
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $b
-    Label : NAME
-      a

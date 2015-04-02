@@ -8,28 +8,6 @@ Label : CODE
       (
       Label : CODE
         &&
-        Label : LEFT
-          &&
-          Label : LEFT
-            isset
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $a
-                Label : INDEX
-                  'B'
-          Label : RIGHT
-            isset
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $b
-                Label : INDEX
-                  'C'
         Label : RIGHT
           isset
           Label : ARGUMENTS
@@ -40,6 +18,28 @@ Label : CODE
                 $c
               Label : INDEX
                 'D'
+        Label : LEFT
+          &&
+          Label : RIGHT
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $b
+                Label : INDEX
+                  'C'
+          Label : LEFT
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $a
+                Label : INDEX
+                  'B'
     Label : THEN
       ;
       Label : ELEMENT
@@ -66,30 +66,20 @@ Label : CODE
           (
           Label : CODE
             &&
-            Label : LEFT
-              &&
-              Label : LEFT
-                ==
-                Label : LEFT
-                  ->
-                  Label : OBJECT
-                    $d
-                  Label : PROPERTY
-                    E
-                Label : RIGHT
-                  $e
-              Label : RIGHT
-                ==
-                Label : LEFT
-                  ->
-                  Label : OBJECT
-                    $f
-                  Label : PROPERTY
-                    F
-                Label : RIGHT
-                  $g
             Label : RIGHT
               &&
+              Label : RIGHT
+                ->
+                Label : OBJECT
+                  $i
+                Label : METHOD
+                  K
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      'M'
+                    Label : ARGUMENT
+                      'L'
               Label : LEFT
                 G
                 Label : ARGUMENTS
@@ -108,18 +98,28 @@ Label : CODE
                       $h
                     Label : PROPERTY
                       H
+            Label : LEFT
+              &&
               Label : RIGHT
-                ->
-                Label : OBJECT
-                  $i
-                Label : METHOD
-                  K
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      'M'
-                    Label : ARGUMENT
-                      'L'
+                ==
+                Label : RIGHT
+                  $g
+                Label : LEFT
+                  ->
+                  Label : OBJECT
+                    $f
+                  Label : PROPERTY
+                    F
+              Label : LEFT
+                ==
+                Label : RIGHT
+                  $e
+                Label : LEFT
+                  ->
+                  Label : OBJECT
+                    $d
+                  Label : PROPERTY
+                    E
         Label : THEN
           ;
           Label : ELEMENT
@@ -172,14 +172,14 @@ Label : CODE
             (
             Label : CODE
               !=
+              Label : RIGHT
+                'Z'
               Label : LEFT
                 ->
                 Label : OBJECT
                   $m
                 Label : PROPERTY
                   Y
-              Label : RIGHT
-                'Z'
           Label : THEN
             ;
             Label : ELEMENT

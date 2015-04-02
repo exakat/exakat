@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       (string)
       Label : CAST
@@ -14,3 +12,5 @@ Label : CODE
           $b
         Label : CLASS
           $a
+    Label : LEFT
+      $x

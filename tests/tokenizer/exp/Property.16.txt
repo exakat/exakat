@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      foo
     Label : BLOCK
       {
       Label : ELEMENT
@@ -20,5 +22,3 @@ Label : CODE
           $bar
         Label : PUBLIC
           public
-    Label : NAME
-      foo

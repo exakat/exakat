@@ -3,18 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : LEFT
-      $o
-    Label : RIGHT
-      new
-      Label : NEW
-        TheWorldIsNotEnough
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-  Label : ELEMENT
     ->
     Label : OBJECT
       $o
@@ -25,7 +13,21 @@ Label : CODE
         Label : ARGUMENT
           void
   Label : ELEMENT
+    =
+    Label : RIGHT
+      new
+      Label : NEW
+        TheWorldIsNotEnough
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+    Label : LEFT
+      $o
+  Label : ELEMENT
     class
+    Label : NAME
+      TheWorldIsNotEnough
     Label : BLOCK
       {
       Label : ELEMENT
@@ -34,45 +36,43 @@ Label : CODE
           HelloWorld
       Label : ELEMENT
         function
+        Label : NAME
+          sayHello
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             echo
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'Hello Universe!'
+        Label : PUBLIC
+          public
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          sayHello
-        Label : PUBLIC
-          public
-    Label : NAME
-      TheWorldIsNotEnough
   Label : ELEMENT
     trait
+    Label : NAME
+      HelloWorld
     Label : BLOCK
       {
       Label : ELEMENT
         function
+        Label : NAME
+          sayHello
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             echo
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'Hello World!'
+        Label : PUBLIC
+          public
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          sayHello
-        Label : PUBLIC
-          public
-    Label : NAME
-      HelloWorld

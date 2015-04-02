@@ -7,16 +7,6 @@ Label : CODE
       (
       Label : CODE
         ||
-        Label : LEFT
-          ==
-          Label : LEFT
-            B
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'C'
-          Label : RIGHT
-            $a
         Label : RIGHT
           !
           Label : NOT
@@ -25,6 +15,16 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+        Label : LEFT
+          ==
+          Label : RIGHT
+            $a
+          Label : LEFT
+            B
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'C'
     Label : THEN
       ;
       Label : ELEMENT
@@ -71,30 +71,30 @@ Label : CODE
         (
         Label : CODE
           ||
-          Label : LEFT
-            !
-            Label : NOT
-              $b
           Label : RIGHT
             !
             Label : NOT
               $c
+          Label : LEFT
+            !
+            Label : NOT
+              $b
       Label : THEN
         if
         Label : CONDITION
           (
           Label : CODE
             &&
-            Label : LEFT
-              !
-              Label : NOT
-                $d
             Label : RIGHT
               !
               Label : NOT
                 $e
+            Label : LEFT
+              !
+              Label : NOT
+                $d
         Label : THEN
-          Block with if/elseif
+          ;
           Label : ELEMENT
             R
             Label : ARGUMENTS
@@ -124,7 +124,7 @@ Label : CODE
               Label : NOT
                 $k
           Label : THEN
-            Block with if/elseif
+            ;
             Label : ELEMENT
               U
               Label : ARGUMENTS
@@ -150,7 +150,7 @@ Label : CODE
                 Label : NOT
                   $o
             Label : THEN
-              Block with if/elseif
+              ;
               Label : ELEMENT
                 X
                 Label : ARGUMENTS
@@ -181,13 +181,13 @@ Label : CODE
                 ;
                 Label : ELEMENT
                   =
-                  Label : LEFT
-                    $t
                   Label : RIGHT
                     AA
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
                         void
+                  Label : LEFT
+                    $t
               Label : CASE
                 0

@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      c
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $d
     Label : LEFT
       list
       Label : ARGUMENTS
@@ -16,9 +22,3 @@ Label : CODE
               $a
             Label : INDEX
               'b'
-    Label : RIGHT
-      c
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $d

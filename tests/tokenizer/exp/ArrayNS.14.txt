@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      $i
     Label : LEFT
       [
       Label : VARIABLE
@@ -26,5 +28,3 @@ Label : CODE
           $g
         Label : INDEX
           'h'
-    Label : RIGHT
-      $i

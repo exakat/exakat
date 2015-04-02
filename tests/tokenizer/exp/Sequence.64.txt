@@ -23,11 +23,11 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $e
-        Label : SOURCE
-          $b
         Label : VALUE
           =>
-          Label : VALUE
-            $d
           Label : KEY
             $c
+          Label : VALUE
+            $d
+        Label : SOURCE
+          $b

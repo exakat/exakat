@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     ===
-    Label : LEFT
-      $x
     Label : RIGHT
       =
-      Label : LEFT
-        $y
       Label : RIGHT
         3
+      Label : LEFT
+        $y
+    Label : LEFT
+      $x

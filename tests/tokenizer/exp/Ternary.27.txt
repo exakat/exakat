@@ -10,7 +10,7 @@ Label : CODE
         Label : NOT
           $a
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

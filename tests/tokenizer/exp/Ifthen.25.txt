@@ -13,14 +13,14 @@ Label : CODE
         Label : INDEX
           'b'
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         foreach
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
         Label : SOURCE
           $x
         Label : VALUE
           $y
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void

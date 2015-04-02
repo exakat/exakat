@@ -9,7 +9,7 @@ Label : CODE
       Label : CODE
         $z
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         if
         Label : CONDITION
@@ -33,14 +33,14 @@ Label : CODE
         Label : THEN
           {
           Label : ELEMENT
-            ->
-            Label : OBJECT
-              $e
-            Label : METHOD
-              f
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $g
-          Label : ELEMENT
             void
+      Label : ELEMENT
+        ->
+        Label : OBJECT
+          $e
+        Label : METHOD
+          f
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $g

@@ -20,18 +20,16 @@ Label : ELEMENT
               ?
               Label : CONDITION
                 >
-                Label : LEFT
-                  $d
                 Label : RIGHT
                   0
+                Label : LEFT
+                  $d
               Label : THEN
                 'H'
               Label : ELSE
                 'I'
             Label : ARGUMENT
               =
-              Label : LEFT
-                $b
               Label : RIGHT
                 F
                 Label : ARGUMENTS
@@ -42,6 +40,8 @@ Label : ELEMENT
                       $c
                     Label : PROPERTY
                       G
+              Label : LEFT
+                $b
         Label : ELEMENT
           if
           Label : CONDITION
@@ -57,7 +57,7 @@ Label : ELEMENT
                   Label : PROPERTY
                     D
           Label : THEN
-            {
+            ;
             Label : ELEMENT
               return
               Label : RETURN

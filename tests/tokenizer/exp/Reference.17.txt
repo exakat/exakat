@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       ::
+      Label : CLASS
+        classe
       Label : METHOD
         method_static
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-      Label : CLASS
-        classe
+    Label : LEFT
+      $x

@@ -3,13 +3,15 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $i
+  Label : ELEMENT
     while
     Label : BLOCK
       ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $x
       Label : ELEMENT
         ?
         Label : CONDITION
@@ -18,15 +20,13 @@ Label : CODE
           $b
         Label : ELSE
           $c
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x
     Label : CONDITION
       <=
-      Label : LEFT
-        $i
       Label : RIGHT
         10
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $i
-    Label : RIGHT
-      1
+      Label : LEFT
+        $i

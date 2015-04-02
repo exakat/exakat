@@ -4,52 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ?
       Label : CONDITION
         &&
-        Label : LEFT
-          !
-          Label : NOT
-            in_array
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $e
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  ->
-                  Label : OBJECT
-                    $b
-                  Label : PROPERTY
-                    c
-                Label : INDEX
-                  'd'
         Label : RIGHT
           (
           Label : CODE
             ||
-            Label : LEFT
-              !
-              Label : NOT
-                preg_match
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    [
-                    Label : VARIABLE
-                      ->
-                      Label : OBJECT
-                        $f
-                      Label : PROPERTY
-                        g
-                    Label : INDEX
-                      'h'
-                  Label : ARGUMENT
-                    '/^\w+$/'
             Label : RIGHT
               !
               Label : NOT
@@ -74,6 +36,42 @@ Label : CODE
                       'j'
                     Label : CONCAT
                       I
+            Label : LEFT
+              !
+              Label : NOT
+                preg_match
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      ->
+                      Label : OBJECT
+                        $f
+                      Label : PROPERTY
+                        g
+                    Label : INDEX
+                      'h'
+                  Label : ARGUMENT
+                    '/^\w+$/'
+        Label : LEFT
+          !
+          Label : NOT
+            in_array
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $b
+                  Label : PROPERTY
+                    c
+                Label : INDEX
+                  'd'
       Label : THEN
         'o'
       Label : ELSE
@@ -86,3 +84,5 @@ Label : CODE
             q
         Label : INDEX
           'r'
+    Label : LEFT
+      $a

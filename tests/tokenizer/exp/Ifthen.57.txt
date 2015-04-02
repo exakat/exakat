@@ -14,17 +14,17 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $c
-      Label : ELEMENT
-        D
+            $d
       Label : ELEMENT
         C
+      Label : ELEMENT
+        D
       Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $d
+            $c
       Label : ELEMENT
         B
       Label : ELEMENT

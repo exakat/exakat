@@ -5,22 +5,22 @@ Label : CODE
   Label : ELEMENT
     for
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $j
     Label : INIT
       =
-      Label : LEFT
-        $i
       Label : RIGHT
         0
-    Label : FINAL
-      <
       Label : LEFT
         $i
+    Label : FINAL
+      <
       Label : RIGHT
         5
+      Label : LEFT
+        $i
     Label : INCREMENT
       void

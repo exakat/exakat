@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     .=
-    Label : LEFT
-      $a
     Label : RIGHT
       ^
+      Label : RIGHT
+        $d
       Label : LEFT
         [
         Label : VARIABLE
@@ -16,5 +16,5 @@ Label : CODE
           ++
           Label : PREPLUSPLUS
             $c
-      Label : RIGHT
-        $d
+    Label : LEFT
+      $a

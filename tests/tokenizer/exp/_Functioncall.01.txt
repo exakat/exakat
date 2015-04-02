@@ -19,10 +19,6 @@ Label : CODE
           'D'
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        F
     Label : SOURCE
       $b
     Label : VALUE
@@ -31,5 +27,9 @@ Label : CODE
         $d
       Label : KEY
         $c
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        F
   Label : ELEMENT
     E

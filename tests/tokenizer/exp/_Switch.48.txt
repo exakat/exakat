@@ -7,27 +7,19 @@ Label : CODE
     Label : NAME
       $a
     Label : CASES
-      {
+      Sequence Case Default
       Label : ELEMENT
-        case
+        default
         Label : CODE
           ;
+          Label : ELEMENT
+            :
+            Label : LABEL
+              F
           Label : ELEMENT
             break
             Label : LEVEL
               void
-        Label : CASE
-          ?
-          Label : CONDITION
-            <
-            Label : LEFT
-              B
-            Label : RIGHT
-              3
-          Label : THEN
-            -4
-          Label : ELSE
-            C
       Label : ELEMENT
         case
         Label : CODE
@@ -43,14 +35,22 @@ Label : CODE
         Label : CASE
           D
       Label : ELEMENT
-        default
+        case
         Label : CODE
           ;
-          Label : ELEMENT
-            :
-            Label : LABEL
-              F
           Label : ELEMENT
             break
             Label : LEVEL
               void
+        Label : CASE
+          ?
+          Label : CONDITION
+            <
+            Label : RIGHT
+              3
+            Label : LEFT
+              B
+          Label : THEN
+            -4
+          Label : ELSE
+            C

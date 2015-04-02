@@ -24,12 +24,6 @@ Label : CODE
           e
       Label : ELSE
         =
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $f
-          Label : PROPERTY
-            g
         Label : RIGHT
           @
           Label : AT
@@ -42,3 +36,9 @@ Label : CODE
                   $i
                 Label : PROPERTY
                   j
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $f
+          Label : PROPERTY
+            g

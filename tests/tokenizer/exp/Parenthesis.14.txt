@@ -26,14 +26,14 @@ Label : CODE
                   0
                 Label : ARGUMENT
                   +
+                  Label : RIGHT
+                    1
                   Label : LEFT
                     ->
                     Label : OBJECT
                       $a
                     Label : PROPERTY
                       month
-                  Label : RIGHT
-                    1
                 Label : ARGUMENT
                   0
                 Label : ARGUMENT

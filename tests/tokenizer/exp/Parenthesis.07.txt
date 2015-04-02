@@ -19,10 +19,10 @@ Label : CODE
             Label : ARGUMENT
               'c'
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           1
+        Label : LEFT
+          $a

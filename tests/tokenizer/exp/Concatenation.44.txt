@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       @
       Label : AT
@@ -22,29 +20,31 @@ Label : CODE
                 $g
               Label : INDEX
                 +
-                Label : LEFT
-                  $h
                 Label : RIGHT
                   6
+                Label : LEFT
+                  $h
             Label : CONCAT
               {
               Label : VARIABLE
                 $e
               Label : INDEX
                 +
-                Label : LEFT
-                  $f
                 Label : RIGHT
                   5
+                Label : LEFT
+                  $f
             Label : CONCAT
               {
               Label : VARIABLE
                 $c
               Label : INDEX
                 +
-                Label : LEFT
-                  $d
                 Label : RIGHT
                   4
+                Label : LEFT
+                  $d
           Label : ARGUMENT
             'b'
+    Label : LEFT
+      $a

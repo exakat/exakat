@@ -18,20 +18,12 @@ Label : ELEMENT
               Label : ARGUMENT
                 $a
       Label : THEN
-        Block with if/elseif
+        ;
         Label : ELEMENT
           print
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'B'
-    Label : ELEMENT
-      print
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          $d
-    Label : ELEMENT
-      C
 Label : ELEMENT
    

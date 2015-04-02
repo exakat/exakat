@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $c
     Label : RIGHT
       ::
       Label : METHOD
@@ -16,13 +14,15 @@ Label : CODE
             void
       Label : CLASS
         D
+    Label : LEFT
+      $c
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ::
       Label : CLASS
         B
       Label : CONSTANT
         TRUE
+    Label : LEFT
+      $a

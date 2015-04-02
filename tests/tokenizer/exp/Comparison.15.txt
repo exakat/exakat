@@ -8,14 +8,6 @@ Label : CODE
       (
       Label : CODE
         =
-        Label : LEFT
-          !
-          Label : NOT
-            ->
-            Label : OBJECT
-              $this
-            Label : PROPERTY
-              a
         Label : RIGHT
           b
           Label : ARGUMENTS
@@ -26,8 +18,16 @@ Label : CODE
               $d
             Label : ARGUMENT
               $c
+        Label : LEFT
+          !
+          Label : NOT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              a
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         return
         Label : RETURN

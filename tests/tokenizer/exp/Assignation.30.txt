@@ -11,15 +11,13 @@ Label : CODE
       Label : INDEX
         'B'
     Label : CASES
-      {
+      Sequence Case Default
       Label : ELEMENT
         case
         Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : LEFT
-              $d
             Label : RIGHT
               ->
               Label : OBJECT
@@ -30,6 +28,8 @@ Label : CODE
                   F
               Label : PROPERTY
                 G
+            Label : LEFT
+              $d
           Label : ELEMENT
             if
             Label : CONDITION
@@ -43,29 +43,27 @@ Label : CODE
                   Label : ARGUMENT
                     $f
             Label : THEN
-              {
+              ;
               Label : ELEMENT
                 =
-                Label : LEFT
-                  $g
                 Label : RIGHT
                   'J'
+                Label : LEFT
+                  $g
             Label : ELSE
               {
               Label : ELEMENT
                 =
-                Label : LEFT
-                  $h
                 Label : RIGHT
                   'K'
+                Label : LEFT
+                  $h
           Label : ELEMENT
             break
             Label : LEVEL
               void
           Label : ELEMENT
             =
-            Label : LEFT
-              $b
             Label : RIGHT
               (string)
               Label : CAST
@@ -78,5 +76,7 @@ Label : CODE
                       $c
                     Label : INDEX
                       'E'
+            Label : LEFT
+              $b
         Label : CASE
           'C'

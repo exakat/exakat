@@ -37,14 +37,6 @@ Label : CODE
                   ?
                   Label : CONDITION
                     &&
-                    Label : LEFT
-                      instanceof
-                      Label : VARIABLE
-                        $d
-                      Label : CLASS
-                        \
-                        Label : SUBNAME
-                          H
                     Label : RIGHT
                       isset
                       Label : ARGUMENTS
@@ -55,6 +47,14 @@ Label : CODE
                             $e
                           Label : PROPERTY
                             I
+                    Label : LEFT
+                      instanceof
+                      Label : VARIABLE
+                        $d
+                      Label : CLASS
+                        \
+                        Label : SUBNAME
+                          H
                   Label : THEN
                     ->
                     Label : OBJECT

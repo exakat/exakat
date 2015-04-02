@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $q
     Label : RIGHT
       <<<EOF
 
@@ -14,3 +12,5 @@ Label : CODE
         Label : CONCAT
           a
 
+    Label : LEFT
+      $q

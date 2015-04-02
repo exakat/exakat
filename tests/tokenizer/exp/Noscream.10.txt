@@ -17,10 +17,10 @@ Label : CODE
               Label : ARGUMENT
                 'gzopen'
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $x
         Label : RIGHT
           1
+        Label : LEFT
+          $x

@@ -4,17 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      $z
     Label : BLOCK
       foreach
+      Label : VALUE
+        $b
       Label : BLOCK
-        {
+        ;
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
             $c
       Label : SOURCE
         $a
-      Label : VALUE
-        $b
-    Label : CONDITION
-      $z

@@ -1,12 +1,10 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    switch
-    Label : NAME
-      $x
-    Label : CASES
-      {
-      Label : ELEMENT
-        void
+  switch
+  Label : NAME
+    $x
+  Label : CASES
+    {
+    Label : ELEMENT
+      void

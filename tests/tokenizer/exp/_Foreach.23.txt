@@ -4,10 +4,20 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      $a
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b
     Label : BLOCK
-      Block with Foreach
+      ;
       Label : ELEMENT
         >>
+        Label : RIGHT
+          $g
         Label : LEFT
           ::
           Label : METHOD
@@ -18,13 +28,3 @@ Label : CODE
                 $f
           Label : CLASS
             $d
-        Label : RIGHT
-          $g
-    Label : SOURCE
-      $a
-    Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b

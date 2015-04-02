@@ -14,10 +14,10 @@ Label : CODE
             void
         Label : NAME
           a
-        Label : PUBLIC
-          public
         Label : ABSTRACT
           abstract
+        Label : PUBLIC
+          public
       Label : ELEMENT
         function
         Label : ARGUMENTS

@@ -4,10 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       +
+      Label : RIGHT
+        1
       Label : LEFT
         \
         Label : SUBNAME
@@ -16,12 +16,10 @@ Label : CODE
           k
         Label : SUBNAME
           j
-      Label : RIGHT
-        1
+    Label : LEFT
+      $a
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       \
       Label : SUBNAME
@@ -30,6 +28,8 @@ Label : CODE
         h
       Label : SUBNAME
         g
+    Label : LEFT
+      $x
   Label : ELEMENT
     print
     Label : ARGUMENTS

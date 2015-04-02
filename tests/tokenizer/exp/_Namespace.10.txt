@@ -8,8 +8,6 @@ Label : CODE
       {
       Label : ELEMENT
         =
-        Label : LEFT
-          $obj
         Label : RIGHT
           new
           Label : NEW
@@ -18,6 +16,8 @@ Label : CODE
               Another
             Label : SUBNAME
               namespace
+        Label : LEFT
+          $obj
     Label : NAMESPACE
       A
   Label : ELEMENT
@@ -26,9 +26,9 @@ Label : CODE
       {
       Label : ELEMENT
         +
-        Label : LEFT
-          1
         Label : RIGHT
           2
+        Label : LEFT
+          1
     Label : NAMESPACE
       Global

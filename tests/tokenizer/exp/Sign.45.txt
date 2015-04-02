@@ -4,12 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       +
+      Label : RIGHT
+        0
       Label : LEFT
         -
+        Label : RIGHT
+          $d
         Label : LEFT
           ->
           Label : OBJECT
@@ -20,7 +22,5 @@ Label : CODE
               $c
             Label : PROPERTY
               B
-        Label : RIGHT
-          $d
-      Label : RIGHT
-        0
+    Label : LEFT
+      $a

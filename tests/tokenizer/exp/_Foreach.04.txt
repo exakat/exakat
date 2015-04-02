@@ -4,10 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : SOURCE
       $x
       Label : ARGUMENTS
@@ -18,3 +14,7 @@ Label : CODE
         $x
     Label : VALUE
       $y
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void

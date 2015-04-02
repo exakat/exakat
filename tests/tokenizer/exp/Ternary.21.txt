@@ -4,14 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ?
       Label : CONDITION
         >
-        Label : LEFT
-          $b
         Label : RIGHT
           [
           Label : VARIABLE
@@ -22,6 +18,8 @@ Label : CODE
               d
           Label : INDEX
             'e'
+        Label : LEFT
+          $b
       Label : THEN
         [
         Label : VARIABLE
@@ -34,22 +32,10 @@ Label : CODE
           'h'
       Label : ELSE
         +
-        Label : LEFT
-          [
-          Label : VARIABLE
-            ->
-            Label : OBJECT
-              $i
-            Label : PROPERTY
-              j
-          Label : INDEX
-            'k'
         Label : RIGHT
           (
           Label : CODE
             /
-            Label : LEFT
-              $l
             Label : RIGHT
               [
               Label : VARIABLE
@@ -60,3 +46,17 @@ Label : CODE
                   n
               Label : INDEX
                 'o'
+            Label : LEFT
+              $l
+        Label : LEFT
+          [
+          Label : VARIABLE
+            ->
+            Label : OBJECT
+              $i
+            Label : PROPERTY
+              j
+          Label : INDEX
+            'k'
+    Label : LEFT
+      $a

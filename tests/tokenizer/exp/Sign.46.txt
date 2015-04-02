@@ -4,18 +4,268 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        B
     Label : RIGHT
       +
+      Label : RIGHT
+        array
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            void
+          Label : ARGUMENT
+            =>
+            Label : VALUE
+              array
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  void
+                Label : ARGUMENT
+                  =>
+                  Label : VALUE
+                    array
+                    Label : ARGUMENTS
+                      Arguments
+                      Label : ARGUMENT
+                        void
+                      Label : ARGUMENT
+                        =>
+                        Label : VALUE
+                          array
+                          Label : ARGUMENTS
+                            Arguments
+                            Label : ARGUMENT
+                              void
+                            Label : ARGUMENT
+                              =>
+                              Label : VALUE
+                                ::
+                                Label : METHOD
+                                  DR
+                                  Label : ARGUMENTS
+                                    void
+                                    Label : ARGUMENT
+                                      void
+                                Label : CLASS
+                                  DQ
+                              Label : KEY
+                                'DP'
+                            Label : ARGUMENT
+                              =>
+                              Label : VALUE
+                                DN
+                              Label : KEY
+                                'DM'
+                            Label : ARGUMENT
+                              =>
+                              Label : VALUE
+                                ::
+                                Label : CLASS
+                                  DK
+                                Label : CONSTANT
+                                  DL
+                              Label : KEY
+                                'DJ'
+                            Label : ARGUMENT
+                              =>
+                              Label : VALUE
+                                DH
+                                Label : ARGUMENTS
+                                  void
+                                  Label : ARGUMENT
+                                    'DI'
+                              Label : KEY
+                                'DG'
+                            Label : ARGUMENT
+                              =>
+                              Label : VALUE
+                                'DF'
+                              Label : KEY
+                                'DE'
+                        Label : KEY
+                          'DD'
+                  Label : KEY
+                    'DC'
+                Label : ARGUMENT
+                  =>
+                  Label : VALUE
+                    'DB'
+                  Label : KEY
+                    'DA'
+                Label : ARGUMENT
+                  =>
+                  Label : VALUE
+                    'CZ'
+                  Label : KEY
+                    'CY'
+            Label : KEY
+              'CX'
       Label : LEFT
         +
+        Label : RIGHT
+          array
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              void
+            Label : ARGUMENT
+              =>
+              Label : VALUE
+                array
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    void
+                  Label : ARGUMENT
+                    =>
+                    Label : VALUE
+                      array
+                      Label : ARGUMENTS
+                        Arguments
+                        Label : ARGUMENT
+                          void
+                        Label : ARGUMENT
+                          =>
+                          Label : VALUE
+                            array
+                            Label : ARGUMENTS
+                              Arguments
+                              Label : ARGUMENT
+                                void
+                              Label : ARGUMENT
+                                =>
+                                Label : VALUE
+                                  ::
+                                  Label : CLASS
+                                    CV
+                                  Label : CONSTANT
+                                    CW
+                                Label : KEY
+                                  'CU'
+                              Label : ARGUMENT
+                                =>
+                                Label : VALUE
+                                  $c
+                                Label : KEY
+                                  'CT'
+                              Label : ARGUMENT
+                                =>
+                                Label : VALUE
+                                  ::
+                                  Label : CLASS
+                                    CR
+                                  Label : CONSTANT
+                                    CS
+                                Label : KEY
+                                  'CQ'
+                              Label : ARGUMENT
+                                =>
+                                Label : VALUE
+                                  CO
+                                  Label : ARGUMENTS
+                                    void
+                                    Label : ARGUMENT
+                                      'CP'
+                                Label : KEY
+                                  'CN'
+                          Label : KEY
+                            'CM'
+                    Label : KEY
+                      'CL'
+                  Label : ARGUMENT
+                    =>
+                    Label : VALUE
+                      array
+                      Label : ARGUMENTS
+                        Arguments
+                        Label : ARGUMENT
+                          void
+                        Label : ARGUMENT
+                          =>
+                          Label : VALUE
+                            array
+                            Label : ARGUMENTS
+                              void
+                              Label : ARGUMENT
+                                =>
+                                Label : VALUE
+                                  CK
+                                Label : KEY
+                                  'CJ'
+                          Label : KEY
+                            'CI'
+                        Label : ARGUMENT
+                          =>
+                          Label : VALUE
+                            array
+                            Label : ARGUMENTS
+                              void
+                              Label : ARGUMENT
+                                =>
+                                Label : VALUE
+                                  CH
+                                Label : KEY
+                                  'CG'
+                          Label : KEY
+                            'CF'
+                        Label : ARGUMENT
+                          =>
+                          Label : VALUE
+                            array
+                            Label : ARGUMENTS
+                              Arguments
+                              Label : ARGUMENT
+                                void
+                              Label : ARGUMENT
+                                =>
+                                Label : VALUE
+                                  CE
+                                Label : KEY
+                                  'CD'
+                              Label : ARGUMENT
+                                =>
+                                Label : VALUE
+                                  CB
+                                  Label : ARGUMENTS
+                                    void
+                                    Label : ARGUMENT
+                                      'CC'
+                                Label : KEY
+                                  'CA'
+                          Label : KEY
+                            'BZ'
+                    Label : KEY
+                      'BY'
+                  Label : ARGUMENT
+                    =>
+                    Label : VALUE
+                      'BX'
+                    Label : KEY
+                      'BW'
+              Label : KEY
+                'BV'
         Label : LEFT
           +
+          Label : RIGHT
+            ->
+            Label : OBJECT
+              $b
+            Label : METHOD
+              BR
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  array
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      void
+                Label : ARGUMENT
+                  BU
+                Label : ARGUMENT
+                  BT
+                Label : ARGUMENT
+                  BS
           Label : LEFT
             array
             Label : ARGUMENTS
@@ -330,259 +580,9 @@ Label : CODE
                         'D'
                 Label : KEY
                   'C'
-          Label : RIGHT
-            ->
-            Label : OBJECT
-              $b
-            Label : METHOD
-              BR
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  array
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      void
-                Label : ARGUMENT
-                  BU
-                Label : ARGUMENT
-                  BT
-                Label : ARGUMENT
-                  BS
-        Label : RIGHT
-          array
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              void
-            Label : ARGUMENT
-              =>
-              Label : VALUE
-                array
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    void
-                  Label : ARGUMENT
-                    =>
-                    Label : VALUE
-                      array
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          void
-                        Label : ARGUMENT
-                          =>
-                          Label : VALUE
-                            array
-                            Label : ARGUMENTS
-                              Arguments
-                              Label : ARGUMENT
-                                void
-                              Label : ARGUMENT
-                                =>
-                                Label : VALUE
-                                  ::
-                                  Label : CLASS
-                                    CV
-                                  Label : CONSTANT
-                                    CW
-                                Label : KEY
-                                  'CU'
-                              Label : ARGUMENT
-                                =>
-                                Label : VALUE
-                                  $c
-                                Label : KEY
-                                  'CT'
-                              Label : ARGUMENT
-                                =>
-                                Label : VALUE
-                                  ::
-                                  Label : CLASS
-                                    CR
-                                  Label : CONSTANT
-                                    CS
-                                Label : KEY
-                                  'CQ'
-                              Label : ARGUMENT
-                                =>
-                                Label : VALUE
-                                  CO
-                                  Label : ARGUMENTS
-                                    void
-                                    Label : ARGUMENT
-                                      'CP'
-                                Label : KEY
-                                  'CN'
-                          Label : KEY
-                            'CM'
-                    Label : KEY
-                      'CL'
-                  Label : ARGUMENT
-                    =>
-                    Label : VALUE
-                      array
-                      Label : ARGUMENTS
-                        Arguments
-                        Label : ARGUMENT
-                          void
-                        Label : ARGUMENT
-                          =>
-                          Label : VALUE
-                            array
-                            Label : ARGUMENTS
-                              void
-                              Label : ARGUMENT
-                                =>
-                                Label : VALUE
-                                  CK
-                                Label : KEY
-                                  'CJ'
-                          Label : KEY
-                            'CI'
-                        Label : ARGUMENT
-                          =>
-                          Label : VALUE
-                            array
-                            Label : ARGUMENTS
-                              void
-                              Label : ARGUMENT
-                                =>
-                                Label : VALUE
-                                  CH
-                                Label : KEY
-                                  'CG'
-                          Label : KEY
-                            'CF'
-                        Label : ARGUMENT
-                          =>
-                          Label : VALUE
-                            array
-                            Label : ARGUMENTS
-                              Arguments
-                              Label : ARGUMENT
-                                void
-                              Label : ARGUMENT
-                                =>
-                                Label : VALUE
-                                  CE
-                                Label : KEY
-                                  'CD'
-                              Label : ARGUMENT
-                                =>
-                                Label : VALUE
-                                  CB
-                                  Label : ARGUMENTS
-                                    void
-                                    Label : ARGUMENT
-                                      'CC'
-                                Label : KEY
-                                  'CA'
-                          Label : KEY
-                            'BZ'
-                    Label : KEY
-                      'BY'
-                  Label : ARGUMENT
-                    =>
-                    Label : VALUE
-                      'BX'
-                    Label : KEY
-                      'BW'
-              Label : KEY
-                'BV'
-      Label : RIGHT
-        array
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            void
-          Label : ARGUMENT
-            =>
-            Label : VALUE
-              array
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  void
-                Label : ARGUMENT
-                  =>
-                  Label : VALUE
-                    array
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        void
-                      Label : ARGUMENT
-                        =>
-                        Label : VALUE
-                          array
-                          Label : ARGUMENTS
-                            Arguments
-                            Label : ARGUMENT
-                              void
-                            Label : ARGUMENT
-                              =>
-                              Label : VALUE
-                                ::
-                                Label : METHOD
-                                  DR
-                                  Label : ARGUMENTS
-                                    void
-                                    Label : ARGUMENT
-                                      void
-                                Label : CLASS
-                                  DQ
-                              Label : KEY
-                                'DP'
-                            Label : ARGUMENT
-                              =>
-                              Label : VALUE
-                                DN
-                              Label : KEY
-                                'DM'
-                            Label : ARGUMENT
-                              =>
-                              Label : VALUE
-                                ::
-                                Label : CLASS
-                                  DK
-                                Label : CONSTANT
-                                  DL
-                              Label : KEY
-                                'DJ'
-                            Label : ARGUMENT
-                              =>
-                              Label : VALUE
-                                DH
-                                Label : ARGUMENTS
-                                  void
-                                  Label : ARGUMENT
-                                    'DI'
-                              Label : KEY
-                                'DG'
-                            Label : ARGUMENT
-                              =>
-                              Label : VALUE
-                                'DF'
-                              Label : KEY
-                                'DE'
-                        Label : KEY
-                          'DD'
-                  Label : KEY
-                    'DC'
-                Label : ARGUMENT
-                  =>
-                  Label : VALUE
-                    'DB'
-                  Label : KEY
-                    'DA'
-                Label : ARGUMENT
-                  =>
-                  Label : VALUE
-                    'CZ'
-                  Label : KEY
-                    'CY'
-            Label : KEY
-              'CX'
+    Label : LEFT
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        B

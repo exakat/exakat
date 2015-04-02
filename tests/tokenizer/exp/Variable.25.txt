@@ -4,26 +4,26 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      <
+      Label : RIGHT
+        2
+      Label : LEFT
+        ++
+        Label : POSTPLUSPLUS
+          $e
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         if
         Label : CONDITION
           (
           Label : CODE
             AND
-            Label : LEFT
-              ==
-              Label : LEFT
-                B
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $a
-              Label : RIGHT
-                0
             Label : RIGHT
               !==
+              Label : RIGHT
+                E
               Label : LEFT
                 C
                 Label : ARGUMENTS
@@ -38,21 +38,21 @@ Label : CODE
                         D
                   Label : ARGUMENT
                     $b
+            Label : LEFT
+              ==
               Label : RIGHT
-                E
+                0
+              Label : LEFT
+                B
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $a
         Label : THEN
-          {
+          ;
           Label : ELEMENT
             =
-            Label : LEFT
-              $d
             Label : RIGHT
               1
-    Label : CONDITION
-      <
-      Label : LEFT
-        ++
-        Label : POSTPLUSPLUS
-          $e
-      Label : RIGHT
-        2
+            Label : LEFT
+              $d

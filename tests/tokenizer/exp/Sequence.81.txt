@@ -4,30 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : LEFT
-              false
-            Label : RIGHT
-              ::
-              Label : METHOD
-                e
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $f
-              Label : CLASS
-                d
-        Label : THEN
-          {
-          Label : ELEMENT
-            false
     Label : ARGUMENTS
       void
       Label : ARGUMENT
@@ -38,3 +14,27 @@ Label : CODE
           b
     Label : NAME
       a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            ==
+            Label : RIGHT
+              ::
+              Label : CLASS
+                d
+              Label : METHOD
+                e
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $f
+            Label : LEFT
+              false
+        Label : THEN
+          ;
+          Label : ELEMENT
+            false

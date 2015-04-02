@@ -7,8 +7,6 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       =
-      Label : LEFT
-        $a
       Label : RIGHT
         ?
         Label : CONDITION
@@ -33,6 +31,8 @@ Label : ELEMENT
           0
         Label : ELSE
           1
+      Label : LEFT
+        $a
     Label : ELEMENT
       H
       Label : ARGUMENTS

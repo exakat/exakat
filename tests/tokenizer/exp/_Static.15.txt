@@ -10,18 +10,22 @@ Label : CODE
         void
         Label : ARGUMENT
           function
-          Label : BLOCK
-            {
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $self
+          Label : NAME
+            
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $fulfill
-          Label : NAME
-            
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $self
+          Label : USE
+            void
+            Label : ARGUMENT
+              $self
   Label : ELEMENT
     new
     Label : NEW
@@ -30,19 +34,15 @@ Label : CODE
         void
         Label : ARGUMENT
           function
-          Label : BLOCK
-            {
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $self
+          Label : NAME
+            
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $fulfill
-          Label : NAME
-            
-          Label : USE
-            void
-            Label : ARGUMENT
-              $self
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $self

@@ -7,8 +7,6 @@ Label : CODE
       (
       Label : CODE
         ===
-        Label : LEFT
-          false
         Label : RIGHT
           include_once
           Label : ARGUMENTS
@@ -17,8 +15,10 @@ Label : CODE
               (
               Label : CODE
                 $b
+        Label : LEFT
+          false
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

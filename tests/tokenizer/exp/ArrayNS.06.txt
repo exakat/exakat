@@ -4,39 +4,39 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       [
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
           =>
-          Label : VALUE
-            'j'
           Label : KEY
             'i'
+          Label : VALUE
+            'j'
         Label : ARGUMENT
           =>
-          Label : VALUE
-            'h'
           Label : KEY
             'g'
+          Label : VALUE
+            'h'
         Label : ARGUMENT
           =>
-          Label : VALUE
-            'f'
           Label : KEY
             'e'
+          Label : VALUE
+            'f'
         Label : ARGUMENT
           =>
-          Label : VALUE
-            's'
           Label : KEY
             'c'
+          Label : VALUE
+            's'
         Label : ARGUMENT
           =>
-          Label : VALUE
-            'b'
           Label : KEY
             'a'
+          Label : VALUE
+            'b'
+    Label : LEFT
+      $a

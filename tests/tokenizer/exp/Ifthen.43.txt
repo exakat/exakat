@@ -9,7 +9,7 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         ->
         Label : OBJECT

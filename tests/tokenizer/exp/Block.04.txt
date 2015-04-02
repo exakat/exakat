@@ -9,12 +9,12 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      {
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $b
-        Label : RIGHT
-          $c
+      ;
       Label : ELEMENT
         void
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          $c
+        Label : LEFT
+          $b

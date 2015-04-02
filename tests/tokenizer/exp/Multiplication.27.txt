@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $a
-      Label : INDEX
-        'b'
     Label : RIGHT
       number_format
       Label : ARGUMENTS
@@ -18,15 +12,21 @@ Label : CODE
           2
         Label : ARGUMENT
           *
+          Label : RIGHT
+            1
           Label : LEFT
             /
-            Label : LEFT
-              PHP_MAJOR_VERSION
             Label : RIGHT
               [
               Label : VARIABLE
                 $f
               Label : INDEX
                 'g'
-          Label : RIGHT
-            1
+            Label : LEFT
+              PHP_MAJOR_VERSION
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'

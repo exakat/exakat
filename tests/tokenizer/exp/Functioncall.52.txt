@@ -58,29 +58,29 @@ Label : CODE
           Arguments
           Label : ARGUMENT
             =>
-            Label : VALUE
-              $c
             Label : KEY
               'G'
+            Label : VALUE
+              $c
           Label : ARGUMENT
             =>
-            Label : VALUE
-              $b
             Label : KEY
               'F'
+            Label : VALUE
+              $b
       Label : ARGUMENT
         'E'
   Label : ELEMENT
     function
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        B
-      Label : ELEMENT
-        void
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         $a
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void
     Label : NAME
       B
+  Label : ELEMENT
+    B

@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       "
       Label : CONTAIN
@@ -30,3 +28,5 @@ Label : CODE
             $e
           Label : PROPERTY
             f
+    Label : LEFT
+      $x

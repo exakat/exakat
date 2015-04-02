@@ -22,7 +22,7 @@ Label : ELEMENT
               Label : INDEX
                 'Q'
       Label : THEN
-        Block with if/elseif
+        ;
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -43,14 +43,14 @@ Label : ELEMENT
         (
         Label : CODE
           ==
+          Label : RIGHT
+            'E'
           Label : LEFT
             C
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'D'
-          Label : RIGHT
-            'E'
       Label : THEN
         ;
         Label : ELEMENT
@@ -70,7 +70,7 @@ Label : ELEMENT
                   Label : INDEX
                     'K'
           Label : THEN
-            Block with if/elseif
+            ;
             Label : ELEMENT
               echo
               Label : ARGUMENTS

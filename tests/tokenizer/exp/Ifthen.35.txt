@@ -9,50 +9,20 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         foreach
+        Label : VALUE
+          =>
+          Label : KEY
+            $c
+          Label : VALUE
+            $d
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $e
         Label : SOURCE
           $b
-        Label : VALUE
-          =>
-          Label : VALUE
-            $d
-          Label : KEY
-            $c
-  Label : ELEMENT
-    foreach
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            $j
-        Label : THEN
-          Block with if/elseif
-          Label : ELEMENT
-            continue
-            Label : LEVEL
-              void
-    Label : SOURCE
-      $h
-    Label : VALUE
-      $i
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $g
-  Label : ELEMENT
-    f
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void

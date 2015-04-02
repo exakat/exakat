@@ -8,30 +8,24 @@ Label : CODE
       (
       Label : CODE
         ||
+        Label : RIGHT
+          ===
+          Label : RIGHT
+            ::
+            Label : CLASS
+              I
+            Label : CONSTANT
+              J
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $c
+            Label : PROPERTY
+              H
         Label : LEFT
           ||
-          Label : LEFT
-            ===
-            Label : LEFT
-              ->
-              Label : OBJECT
-                $a
-              Label : PROPERTY
-                B
-            Label : RIGHT
-              ::
-              Label : CLASS
-                C
-              Label : CONSTANT
-                D
           Label : RIGHT
             ==
-            Label : LEFT
-              ->
-              Label : OBJECT
-                $b
-              Label : PROPERTY
-                E
             Label : RIGHT
               +
               Label : SIGN
@@ -40,49 +34,55 @@ Label : CODE
                   F
                 Label : CONSTANT
                   G
-        Label : RIGHT
-          ===
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $b
+              Label : PROPERTY
+                E
           Label : LEFT
-            ->
-            Label : OBJECT
-              $c
-            Label : PROPERTY
-              H
-          Label : RIGHT
-            ::
-            Label : CLASS
-              I
-            Label : CONSTANT
-              J
+            ===
+            Label : RIGHT
+              ::
+              Label : CLASS
+                C
+              Label : CONSTANT
+                D
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                B
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $d
-          Label : PROPERTY
-            K
         Label : RIGHT
           ::
           Label : CLASS
             L
           Label : CONSTANT
             M
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $d
+          Label : PROPERTY
+            K
     Label : ELSE
       {
       Label : ELEMENT
         =
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $e
-          Label : PROPERTY
-            N
         Label : RIGHT
           ::
           Label : CLASS
             O
           Label : CONSTANT
             P
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $e
+          Label : PROPERTY
+            N

@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Declare extends Tokenizer {
-    /* 12 methods */
+    /* 13 methods */
 
     public function test_Declare01()  { $this->generic_test('_Declare.01'); }
     public function test_Declare02()  { $this->generic_test('_Declare.02'); }
@@ -21,5 +21,6 @@ class _Declare extends Tokenizer {
     public function test_Declare10()  { $this->generic_test('_Declare.10'); }
     public function test_Declare11()  { $this->generic_test('_Declare.11'); }
     public function test_Declare12()  { $this->generic_test('_Declare.12'); }
+    public function test_Declare13()  { $this->generic_test('_Declare.13'); }
 }
 ?>

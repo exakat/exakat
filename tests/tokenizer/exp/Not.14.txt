@@ -10,20 +10,20 @@ Label : CODE
         !
         Label : NOT
           ::
-          Label : METHOD
-            C
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $D
           Label : CLASS
             \
             Label : SUBNAME
               B
             Label : SUBNAME
               A
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $D
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         throw
         Label : THROW

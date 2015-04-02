@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       ::
       Label : PROPERTY
         $c
       Label : CLASS
         y
+    Label : LEFT
+      $x

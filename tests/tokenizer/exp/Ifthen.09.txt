@@ -9,7 +9,7 @@ Label : CODE
       Label : CODE
         1
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         $a
     Label : ELSE
@@ -21,7 +21,7 @@ Label : CODE
           Label : CODE
             2
         Label : THEN
-          {
+          ;
           Label : ELEMENT
             $b
         Label : ELSE
@@ -33,7 +33,7 @@ Label : CODE
               Label : CODE
                 3
             Label : THEN
-              {
+              ;
               Label : ELEMENT
                 $c
             Label : ELSE
@@ -45,7 +45,7 @@ Label : CODE
                   Label : CODE
                     4
                 Label : THEN
-                  {
+                  ;
                   Label : ELEMENT
                     $d
                 Label : ELSE
@@ -57,7 +57,7 @@ Label : CODE
                       Label : CODE
                         5
                     Label : THEN
-                      {
+                      ;
                       Label : ELEMENT
                         $e
                     Label : ELSE

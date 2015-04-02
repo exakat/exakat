@@ -13,7 +13,7 @@ Label : CODE
           Label : ARGUMENT
             $b
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         continue
         Label : LEVEL
@@ -29,7 +29,7 @@ Label : CODE
           Label : ARGUMENT
             $b
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         continue
         Label : LEVEL
@@ -45,7 +45,7 @@ Label : CODE
           Label : ARGUMENT
             $b
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         continue
         Label : LEVEL

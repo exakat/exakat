@@ -10,9 +10,9 @@ Label : CODE
         D
       Label : ARGUMENT
         -
-        Label : LEFT
-          -1
         Label : RIGHT
           $c
+        Label : LEFT
+          -1
       Label : ARGUMENT
         $b

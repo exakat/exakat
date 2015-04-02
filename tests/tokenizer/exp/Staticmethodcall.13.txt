@@ -7,23 +7,23 @@ Label : CODE
     Label : BLOCK
       ;
       Label : ELEMENT
+        ::
+        Label : METHOD
+          L
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'M'
+        Label : CLASS
+          \
+          Label : SUBNAME
+            K
+          Label : SUBNAME
+            F
+      Label : ELEMENT
         class
         Label : BLOCK
           {
-          Label : ELEMENT
-            ::
-            Label : METHOD
-              L
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  'M'
-            Label : CLASS
-              \
-              Label : SUBNAME
-                K
-              Label : SUBNAME
-                F
           Label : ELEMENT
             void
         Label : NAME

@@ -4,12 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       function
       Label : BLOCK
-        {
+        ;
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
@@ -26,3 +24,5 @@ Label : CODE
           $b
       Label : NAME
         
+    Label : LEFT
+      $x

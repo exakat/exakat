@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      ->
-      Label : OBJECT
-        $this
-      Label : PROPERTY
-        a
     Label : RIGHT
       @
       Label : AT
@@ -26,3 +20,9 @@ Label : CODE
               $host
         Label : NAME
           $b
+    Label : LEFT
+      ->
+      Label : OBJECT
+        $this
+      Label : PROPERTY
+        a

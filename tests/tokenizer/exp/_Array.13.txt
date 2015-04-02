@@ -3,9 +3,23 @@
 Label : CODE
   ;
   Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        [
+        Label : VARIABLE
+          x
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : INDEX
+          1
+  Label : ELEMENT
     function
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         return
         Label : RETURN
@@ -22,17 +36,3 @@ Label : CODE
         void
     Label : NAME
       x
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        [
-        Label : VARIABLE
-          x
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-        Label : INDEX
-          1

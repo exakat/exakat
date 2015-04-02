@@ -10,10 +10,10 @@ Label : CODE
       1
     Label : ELSE
       **
-      Label : LEFT
-        4
       Label : RIGHT
         5
+      Label : LEFT
+        4
   Label : ELEMENT
     ?
     Label : CONDITION
@@ -24,10 +24,10 @@ Label : CODE
       ?
       Label : CONDITION
         **
-        Label : LEFT
-          4
         Label : RIGHT
           $x
+        Label : LEFT
+          4
       Label : THEN
         2
       Label : ELSE
@@ -36,10 +36,10 @@ Label : CODE
     ?
     Label : CONDITION
       **
-      Label : LEFT
-        '1'
       Label : RIGHT
         $x
+      Label : LEFT
+        '1'
     Label : THEN
       2
     Label : ELSE

@@ -8,22 +8,12 @@ Label : CODE
       (
       Label : CODE
         >
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $a
-          Label : INDEX
-            'b'
         Label : RIGHT
           -
-          Label : LEFT
-            ->
-            Label : OBJECT
-              $c
-            Label : PROPERTY
-              d
           Label : RIGHT
             *
+            Label : RIGHT
+              1
             Label : LEFT
               [
               Label : VARIABLE
@@ -34,10 +24,20 @@ Label : CODE
                   f
               Label : INDEX
                 'g'
-            Label : RIGHT
-              1
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $c
+            Label : PROPERTY
+              d
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            'b'
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         return
         Label : RETURN

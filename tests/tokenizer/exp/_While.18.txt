@@ -3,9 +3,53 @@
 Label : CODE
   ;
   Label : ELEMENT
-    while
-    Label : BLOCK
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          'a'
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $c
+          Label : INDEX
+            'b'
+    Label : THEN
       {
+      Label : ELEMENT
+        void
+    Label : ELSE
+      {
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $t
+  Label : ELEMENT
+    while
+    Label : CONDITION
+      =
+      Label : RIGHT
+        b
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $c
+      Label : LEFT
+        $a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $d
+        Label : THEN
+          {
+          Label : ELEMENT
+            void
       Label : ELEMENT
         if
         Label : CONDITION
@@ -20,47 +64,3 @@ Label : CODE
           {
           Label : ELEMENT
             void
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            $d
-        Label : THEN
-          {
-          Label : ELEMENT
-            void
-    Label : CONDITION
-      =
-      Label : LEFT
-        $a
-      Label : RIGHT
-        b
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $c
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $c
-          Label : INDEX
-            'b'
-        Label : RIGHT
-          'a'
-    Label : THEN
-      {
-      Label : ELEMENT
-        void
-    Label : ELSE
-      {
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $t

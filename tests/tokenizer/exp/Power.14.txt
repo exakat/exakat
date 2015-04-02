@@ -4,6 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     **
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        $a
+      Label : METHOD
+        x
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            1
     Label : LEFT
       ->
       Label : OBJECT
@@ -14,6 +24,8 @@ Label : CODE
           void
           Label : ARGUMENT
             12
+  Label : ELEMENT
+    **
     Label : RIGHT
       ->
       Label : OBJECT
@@ -24,22 +36,12 @@ Label : CODE
           void
           Label : ARGUMENT
             1
-  Label : ELEMENT
-    **
     Label : LEFT
       2
-    Label : RIGHT
-      ->
-      Label : OBJECT
-        $a
-      Label : METHOD
-        x
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            1
   Label : ELEMENT
     **
+    Label : RIGHT
+      2
     Label : LEFT
       ->
       Label : OBJECT
@@ -50,5 +52,3 @@ Label : CODE
           void
           Label : ARGUMENT
             1
-    Label : RIGHT
-      2

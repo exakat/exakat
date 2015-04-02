@@ -8,7 +8,7 @@ Label : CODE
       Label : CODE
         true
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         EMPTY_TRASH_DAYS
     Label : ELSE
@@ -18,7 +18,7 @@ Label : CODE
         Label : CODE
           EMPTY_TRASH_DAYS
       Label : THEN
-        Block with if/elseif
+        ;
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS

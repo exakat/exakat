@@ -99,28 +99,6 @@ Label : CODE
           Label : ARGUMENT
             ::
             Label : CLASS
-              a4
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              \
-              Label : SUBNAME
-                a1
-            Label : CONSTANT
-              a
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
               a3
             Label : CONSTANT
               a
@@ -131,7 +109,7 @@ Label : CODE
           Label : ARGUMENT
             ::
             Label : CLASS
-              a1
+              path2
             Label : CONSTANT
               a
       Label : ELEMENT
@@ -161,7 +139,7 @@ Label : CODE
           Label : ARGUMENT
             ::
             Label : CLASS
-              path2
+              path
             Label : CONSTANT
               a
       Label : ELEMENT
@@ -171,7 +149,29 @@ Label : CODE
           Label : ARGUMENT
             ::
             Label : CLASS
-              path
+              \
+              Label : SUBNAME
+                a1
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              a1
+            Label : CONSTANT
+              a
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              a4
             Label : CONSTANT
               a
     Label : NAMESPACE
@@ -186,10 +186,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           path2
     Label : NAMESPACE
@@ -208,10 +208,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           path
     Label : NAMESPACE
@@ -226,10 +226,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           one_identifier
       Label : ELEMENT
@@ -238,10 +238,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           absolute_path
       Label : ELEMENT
@@ -250,10 +250,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           one_identifier3
       Label : ELEMENT
@@ -262,10 +262,10 @@ Label : CODE
           {
           Label : ELEMENT
             const
-            Label : VALUE
-              2
             Label : NAME
               a
+            Label : VALUE
+              2
         Label : NAME
           a1
     Label : NAMESPACE

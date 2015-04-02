@@ -4,29 +4,29 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      $z
     Label : BLOCK
       for
+      Label : FINAL
+        <
+        Label : RIGHT
+          10
+        Label : LEFT
+          $a
       Label : BLOCK
-        {
+        ;
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
             $c
       Label : INIT
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           0
-      Label : FINAL
-        <
         Label : LEFT
           $a
-        Label : RIGHT
-          10
       Label : INCREMENT
         ++
         Label : POSTPLUSPLUS
           $a
-    Label : CONDITION
-      $z

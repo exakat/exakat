@@ -5,18 +5,18 @@ Label : CODE
   Label : ELEMENT
     declare
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $b
         Label : RIGHT
           $a
+        Label : LEFT
+          $b
     Label : TICKS
       void
       Label : ARGUMENT
         =
-        Label : LEFT
-          ticks
         Label : RIGHT
           1
+        Label : LEFT
+          ticks

@@ -4,14 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       [
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
           =>
+          Label : KEY
+            'E'
           Label : VALUE
             [
             Label : VARIABLE
@@ -26,29 +26,29 @@ Label : CODE
                     void
             Label : INDEX
               3
-          Label : KEY
-            'E'
         Label : ARGUMENT
           =>
-          Label : VALUE
-            >>
-            Label : LEFT
-              4
-            Label : RIGHT
-              %
-              Label : LEFT
-                5
-              Label : RIGHT
-                7
           Label : KEY
             'C'
+          Label : VALUE
+            >>
+            Label : RIGHT
+              %
+              Label : RIGHT
+                7
+              Label : LEFT
+                5
+            Label : LEFT
+              4
         Label : ARGUMENT
           =>
-          Label : VALUE
-            +
-            Label : LEFT
-              1
-            Label : RIGHT
-              2
           Label : KEY
             'B'
+          Label : VALUE
+            +
+            Label : RIGHT
+              2
+            Label : LEFT
+              1
+    Label : LEFT
+      $a

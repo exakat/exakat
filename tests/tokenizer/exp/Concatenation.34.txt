@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       "
       Label : CONTAIN
@@ -26,3 +24,5 @@ Label : CODE
             $node
           Label : PROPERTY
             id
+    Label : LEFT
+      $x

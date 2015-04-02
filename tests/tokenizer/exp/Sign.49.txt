@@ -22,10 +22,10 @@ silly string
       (
       Label : CODE
         +
-        Label : LEFT
-          4
         Label : RIGHT
           3
+        Label : LEFT
+          4
   Label : ELEMENT
     \
     Label : SUBNAME

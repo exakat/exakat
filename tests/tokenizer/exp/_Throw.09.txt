@@ -18,8 +18,12 @@ Label : CODE
               void
     Label : CATCH
       catch
+      Label : VARIABLE
+        $b
+      Label : CLASS
+        C
       Label : CODE
-        {
+        ;
         Label : ELEMENT
           throw
           Label : THROW
@@ -38,7 +42,3 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     void
-      Label : VARIABLE
-        $b
-      Label : CLASS
-        C

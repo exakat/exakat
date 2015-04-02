@@ -11,14 +11,14 @@ Label : CODE
           ?
           Label : CONDITION
             ===
+            Label : RIGHT
+              'L'
             Label : LEFT
               [
               Label : VARIABLE
                 $c
               Label : INDEX
                 'K'
-            Label : RIGHT
-              'L'
           Label : THEN
             $d
           Label : ELSE

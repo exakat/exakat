@@ -7,6 +7,8 @@ Label : CODE
       (
       Label : CODE
         !==
+        Label : RIGHT
+          'E'
         Label : LEFT
           B
           Label : ARGUMENTS
@@ -15,8 +17,6 @@ Label : CODE
               D
             Label : ARGUMENT
               'C'
-        Label : RIGHT
-          'E'
     Label : THEN
       ;
       Label : ELEMENT
@@ -50,7 +50,7 @@ Label : CODE
               Label : ARGUMENT
                 $b
         Label : THEN
-          Block with if/elseif
+          ;
           Label : ELEMENT
             echo
             Label : ARGUMENTS

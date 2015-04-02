@@ -4,12 +4,72 @@ Label : CODE
   ;
   Label : ELEMENT
     namespace
+    Label : NAMESPACE
+      \
+      Label : SUBNAME
+        Bar
+      Label : SUBNAME
+        Foo
     Label : BLOCK
       ;
+      Label : ELEMENT
+        instanceof
+        Label : VARIABLE
+          $x
+        Label : CLASS
+          fooclass
+      Label : ELEMENT
+        instanceof
+        Label : VARIABLE
+          $x
+        Label : CLASS
+          \
+          Label : SUBNAME
+            fooclass
+          Label : SUBNAME
+            subnamespace
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          \
+          Label : SUBNAME
+            fooclassm
+          Label : SUBNAME
+            subnamespacem
+        Label : METHOD
+          staticMethod
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
       Label : ELEMENT
         new
         Label : NEW
           \
+          Label : SUBNAME
+            FOO
+          Label : SUBNAME
+            Bar
+          Label : SUBNAME
+            Foo
+      Label : ELEMENT
+        ::
+        Label : CLASS
+          fooclassm
+        Label : METHOD
+          staticMethod
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+      Label : ELEMENT
+        new
+        Label : NEW
+          \
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
           Label : SUBNAME
             FOO
           Label : SUBNAME
@@ -29,39 +89,7 @@ Label : CODE
           Label : SUBNAME
             full
       Label : ELEMENT
-        instanceof
-        Label : VARIABLE
-          $x
-        Label : CLASS
-          fooclass
-      Label : ELEMENT
         ::
-        Label : METHOD
-          staticMethod
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-        Label : CLASS
-          fooclassm
-      Label : ELEMENT
-        instanceof
-        Label : VARIABLE
-          $x
-        Label : CLASS
-          \
-          Label : SUBNAME
-            fooclass
-          Label : SUBNAME
-            subnamespace
-      Label : ELEMENT
-        ::
-        Label : METHOD
-          staticMethod
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
         Label : CLASS
           \
           Label : SUBNAME
@@ -70,34 +98,12 @@ Label : CODE
             namespacem
           Label : SUBNAME
             fullm
-      Label : ELEMENT
-        new
-        Label : NEW
-          \
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
-          Label : SUBNAME
-            FOO
-          Label : SUBNAME
-            Bar
-          Label : SUBNAME
-            Foo
-      Label : ELEMENT
-        ::
         Label : METHOD
           staticMethod
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
-        Label : CLASS
-          \
-          Label : SUBNAME
-            fooclassm
-          Label : SUBNAME
-            subnamespacem
       Label : ELEMENT
         new
         Label : NEW
@@ -198,14 +204,14 @@ Label : CODE
               void
       Label : ELEMENT
         ::
+        Label : CLASS
+          staticallyCalling
         Label : METHOD
           staticallyCalledMethod
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
-        Label : CLASS
-          staticallyCalling
       Label : ELEMENT
         \
         Label : ARGUMENTS
@@ -262,9 +268,3 @@ Label : CODE
           void
           Label : ARGUMENT
             UNQUALIFIED_CONSTANT
-    Label : NAMESPACE
-      \
-      Label : SUBNAME
-        Bar
-      Label : SUBNAME
-        Foo

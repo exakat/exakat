@@ -8,6 +8,8 @@ Label : CODE
       new
       Label : NEW
         \
+        Label : SUBNAME
+          A
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -24,5 +26,3 @@ Label : CODE
                   e
               Label : ARGUMENT
                 'C'
-        Label : SUBNAME
-          A

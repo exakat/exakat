@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     do
+    Label : CONDITION
+      FALSE
     Label : BLOCK
       if
       Label : CONDITION
@@ -11,7 +13,7 @@ Label : CODE
         Label : CODE
           1
       Label : THEN
-        {
+        ;
         Label : ELEMENT
           break
           Label : LEVEL
@@ -22,5 +24,3 @@ Label : CODE
           break
           Label : LEVEL
             void
-    Label : CONDITION
-      FALSE

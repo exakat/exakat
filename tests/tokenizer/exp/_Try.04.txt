@@ -3,6 +3,12 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      2
+    Label : LEFT
+      $x
+  Label : ELEMENT
     try
     Label : CODE
       {
@@ -38,9 +44,3 @@ Label : CODE
         $e
       Label : CLASS
         Exception
-  Label : ELEMENT
-    =
-    Label : LEFT
-      $x
-    Label : RIGHT
-      2

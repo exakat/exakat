@@ -5,13 +5,13 @@ Label : CODE
   Label : ELEMENT
     function
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $x
         Label : RIGHT
           1
+        Label : LEFT
+          $x
     Label : ARGUMENTS
       void
       Label : ARGUMENT

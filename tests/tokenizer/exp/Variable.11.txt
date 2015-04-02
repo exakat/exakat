@@ -4,13 +4,13 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      [
-      Label : VARIABLE
-        $
-        Label : NAME
-          $c
-      Label : INDEX
-        'd'
     Label : RIGHT
       1
+    Label : LEFT
+      $
+      Label : NAME
+        [
+        Label : VARIABLE
+          $c
+        Label : INDEX
+          'd'

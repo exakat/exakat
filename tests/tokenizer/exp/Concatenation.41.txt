@@ -8,9 +8,9 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      {
+      ;
       Label : ELEMENT
-        A
+        B
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -18,4 +18,4 @@ Label : CODE
           Label : ARGUMENT
             $b
       Label : ELEMENT
-        B
+        A

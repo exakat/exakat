@@ -8,24 +8,24 @@ Label : CODE
       (
       Label : CODE
         ||
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            b
         Label : RIGHT
           <
+          Label : RIGHT
+            2
           Label : LEFT
             `
             Label : CONTAIN
               Concatenation
               Label : CONCAT
                 c d
-          Label : RIGHT
-            2
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            b
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         return
         Label : RETURN
@@ -44,10 +44,10 @@ Label : CODE
         6
       Label : ARGUMENT
         <<
-        Label : LEFT
-          4
         Label : RIGHT
           5
+        Label : LEFT
+          4
       Label : ARGUMENT
         3
       Label : ARGUMENT

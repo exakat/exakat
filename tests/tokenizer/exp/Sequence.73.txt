@@ -18,6 +18,8 @@ Label : CODE
       ;
       Label : ELEMENT
         class
+        Label : NAME
+          F
         Label : BLOCK
           {
           Label : ELEMENT
@@ -44,16 +46,14 @@ Label : CODE
               $b
             Label : VAR
               var
-        Label : NAME
-          F
       Label : ELEMENT
         class
+        Label : NAME
+          G
         Label : BLOCK
           {
           Label : ELEMENT
             void
-        Label : NAME
-          G
         Label : EXTENDS
           H
   Label : ELEMENT

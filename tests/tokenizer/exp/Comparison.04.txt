@@ -8,20 +8,20 @@ Label : CODE
       (
       Label : CODE
         !=
-        Label : LEFT
-          [
-          Label : VARIABLE
-            $ligne
-          Label : INDEX
-            0
         Label : RIGHT
           [
           Label : VARIABLE
             $ligne
           Label : INDEX
             1
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $ligne
+          Label : INDEX
+            0
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         1
     Label : ELSE

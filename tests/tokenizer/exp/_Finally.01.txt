@@ -5,31 +5,21 @@ Label : CODE
   Label : ELEMENT
     function
     Label : BLOCK
-      {
-      Label : ELEMENT
-        =
-        Label : LEFT
-          $resource
-        Label : RIGHT
-          createResource
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              void
+      ;
       Label : ELEMENT
         try
         Label : CODE
           {
           Label : ELEMENT
             =
-            Label : LEFT
-              $result
             Label : RIGHT
               useResource
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   $resource
+            Label : LEFT
+              $result
           Label : ELEMENT
             return
             Label : RETURN
@@ -47,7 +37,11 @@ Label : CODE
         Label : CATCH
           catch
           Label : CODE
-            {
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                $e
             Label : ELEMENT
               log
               Label : ARGUMENTS
@@ -62,10 +56,6 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-            Label : ELEMENT
-              throw
-              Label : THROW
-                $e
           Label : VARIABLE
             $e
           Label : CLASS
@@ -73,7 +63,11 @@ Label : CODE
         Label : CATCH
           catch
           Label : CODE
-            {
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                $e
             Label : ELEMENT
               log
               Label : ARGUMENTS
@@ -88,10 +82,6 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-            Label : ELEMENT
-              throw
-              Label : THROW
-                $e
           Label : VARIABLE
             $e
           Label : CLASS
@@ -99,7 +89,11 @@ Label : CODE
         Label : CATCH
           catch
           Label : CODE
-            {
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                $e
             Label : ELEMENT
               log
               Label : ARGUMENTS
@@ -114,10 +108,6 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-            Label : ELEMENT
-              throw
-              Label : THROW
-                $e
           Label : VARIABLE
             $e
           Label : CLASS
@@ -125,7 +115,11 @@ Label : CODE
         Label : CATCH
           catch
           Label : CODE
-            {
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                $e
             Label : ELEMENT
               log
               Label : ARGUMENTS
@@ -140,10 +134,6 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-            Label : ELEMENT
-              throw
-              Label : THROW
-                $e
           Label : VARIABLE
             $e
           Label : CLASS
@@ -151,7 +141,11 @@ Label : CODE
         Label : CATCH
           catch
           Label : CODE
-            {
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                $e
             Label : ELEMENT
               log
               Label : ARGUMENTS
@@ -166,14 +160,20 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-            Label : ELEMENT
-              throw
-              Label : THROW
-                $e
           Label : VARIABLE
             $e
           Label : CLASS
             Exception
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          createResource
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : LEFT
+          $resource
     Label : ARGUMENTS
       void
       Label : ARGUMENT

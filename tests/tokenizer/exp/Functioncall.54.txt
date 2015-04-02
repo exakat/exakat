@@ -22,12 +22,6 @@ Label : CODE
           (
           Label : CODE
             &&
-            Label : LEFT
-              isset
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $f
             Label : RIGHT
               !
               Label : NOT
@@ -36,20 +30,30 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     $g
+            Label : LEFT
+              isset
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $f
         Label : THEN
           $h
         Label : ELSE
           'E'
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       ?
       Label : CONDITION
         (
         Label : CODE
           ||
+          Label : RIGHT
+            empty
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $c
           Label : LEFT
             !
             Label : NOT
@@ -58,13 +62,9 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   $b
-          Label : RIGHT
-            empty
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $c
       Label : THEN
         'B'
       Label : ELSE
         $d
+    Label : LEFT
+      $a

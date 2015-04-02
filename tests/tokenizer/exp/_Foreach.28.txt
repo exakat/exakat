@@ -7,26 +7,14 @@ Label : CODE
       (
       Label : CODE
         ==
-        Label : LEFT
-          $a
         Label : RIGHT
           'b'
+        Label : LEFT
+          $a
     Label : THEN
       ;
       Label : ELEMENT
         foreach
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $h
-                Label : PROPERTY
-                  i
         Label : SOURCE
           ->
           Label : OBJECT
@@ -43,3 +31,15 @@ Label : CODE
                 'f'
         Label : VALUE
           $g
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $h
+                Label : PROPERTY
+                  i

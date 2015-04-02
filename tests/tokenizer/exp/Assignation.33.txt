@@ -4,22 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       &&
-      Label : LEFT
-        instanceof
-        Label : VARIABLE
-          $b
-        Label : CLASS
-          \
-          Label : SUBNAME
-            C
-          Label : SUBNAME
-            B
       Label : RIGHT
         ==
+        Label : RIGHT
+          [
+          Label : VARIABLE
+            $d
+          Label : INDEX
+            0
         Label : LEFT
           ->
           Label : OBJECT
@@ -30,9 +24,15 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-        Label : RIGHT
-          [
-          Label : VARIABLE
-            $d
-          Label : INDEX
-            0
+      Label : LEFT
+        instanceof
+        Label : VARIABLE
+          $b
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            B
+    Label : LEFT
+      $a

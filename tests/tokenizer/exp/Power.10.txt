@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     **
-    Label : LEFT
-      -
-      Label : SIGN
-        $x
     Label : RIGHT
       +
       Label : SIGN
         1.2
+    Label : LEFT
+      -
+      Label : SIGN
+        $x

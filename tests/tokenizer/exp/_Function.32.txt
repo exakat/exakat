@@ -12,39 +12,39 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         =
+        Label : RIGHT
+          null
         Label : LEFT
           $f
-        Label : RIGHT
-          null
       Label : ARGUMENT
         =
+        Label : RIGHT
+          null
         Label : LEFT
           $e
-        Label : RIGHT
-          null
       Label : ARGUMENT
         =
+        Label : RIGHT
+          null
         Label : LEFT
           $d
-        Label : RIGHT
-          null
       Label : ARGUMENT
         =
+        Label : RIGHT
+          null
         Label : LEFT
           $c
-        Label : RIGHT
-          null
       Label : ARGUMENT
         =
+        Label : RIGHT
+          null
         Label : LEFT
           $b
-        Label : RIGHT
-          null
       Label : ARGUMENT
         =
-        Label : LEFT
-          $a
         Label : RIGHT
           null
+        Label : LEFT
+          $a
     Label : NAME
       z

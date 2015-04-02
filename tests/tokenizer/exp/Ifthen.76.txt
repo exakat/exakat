@@ -4,30 +4,40 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         if
         Label : CONDITION
           (
           Label : CODE
-            E
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $e
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
-                  F
+            ||
+            Label : RIGHT
+              !
+              Label : NOT
+                C
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $c
+            Label : LEFT
+              !
+              Label : NOT
+                $b
         Label : THEN
-          Block with if/elseif
+          ;
           Label : ELEMENT
             return
             Label : RETURN
-              G
+              D
+      Label : ELEMENT
+        return
+        Label : RETURN
+          K
       Label : ELEMENT
         if
         Label : CONDITION
@@ -39,7 +49,7 @@ Label : CODE
             Label : PROPERTY
               H
         Label : THEN
-          Block with if/elseif
+          ;
           Label : ELEMENT
             return
             Label : RETURN
@@ -59,36 +69,26 @@ Label : CODE
                       Label : PROPERTY
                         J
       Label : ELEMENT
-        return
-        Label : RETURN
-          K
-      Label : ELEMENT
         if
         Label : CONDITION
           (
           Label : CODE
-            ||
-            Label : LEFT
-              !
-              Label : NOT
-                $b
-            Label : RIGHT
-              !
-              Label : NOT
-                C
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $c
+            E
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  F
         Label : THEN
-          Block with if/elseif
+          ;
           Label : ELEMENT
             return
             Label : RETURN
-              D
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a
+              G
     Label : NAME
       B

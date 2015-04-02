@@ -9,13 +9,13 @@ Label : CODE
       Label : CODE
         1
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $b
         Label : RIGHT
           2
+        Label : LEFT
+          $b
   Label : ELEMENT
     if
     Label : CONDITION
@@ -23,24 +23,24 @@ Label : CODE
       Label : CODE
         3
     Label : THEN
-      {
+      ;
       Label : ELEMENT
         =
-        Label : LEFT
-          $c
         Label : RIGHT
           3
+        Label : LEFT
+          $c
     Label : ELSE
       {
       Label : ELEMENT
         =
-        Label : LEFT
-          $d
         Label : RIGHT
           4
+        Label : LEFT
+          $d
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       1
+    Label : LEFT
+      $a

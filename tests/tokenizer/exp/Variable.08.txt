@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a
     Label : RIGHT
       "
       Label : CONTAIN
         Concatenation
         Label : CONCAT
           $b
+    Label : LEFT
+      $a

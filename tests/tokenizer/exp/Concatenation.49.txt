@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $x
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -18,3 +16,5 @@ Label : CODE
         __DIR__
       Label : CONCAT
         'A'
+    Label : LEFT
+      $x

@@ -1,30 +1,28 @@
 <?php
 
 Label : CODE
-  ;
-  Label : ELEMENT
-    try
+  try
+  Label : CODE
+    {
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        $b
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        $a
+    Label : ELEMENT
+      ++
+      Label : POSTPLUSPLUS
+        $c
+  Label : CATCH
+    catch
     Label : CODE
       {
       Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $a
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $b
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $c
-    Label : CATCH
-      catch
-      Label : CODE
-        {
-        Label : ELEMENT
-          void
-      Label : VARIABLE
-        $e
-      Label : CLASS
-        Exception
+        void
+    Label : VARIABLE
+      $e
+    Label : CLASS
+      Exception

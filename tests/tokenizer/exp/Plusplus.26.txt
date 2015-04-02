@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : RIGHT
+      $c
     Label : LEFT
       [
       Label : VARIABLE
@@ -12,13 +14,11 @@ Label : CODE
           $a
         Label : INDEX
           /
+          Label : RIGHT
+            1
           Label : LEFT
             (int)
             Label : CAST
               ++
               Label : PREPLUSPLUS
                 $b
-          Label : RIGHT
-            1
-    Label : RIGHT
-      $c

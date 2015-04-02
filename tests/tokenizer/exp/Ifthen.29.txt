@@ -13,16 +13,16 @@ Label : CODE
         Label : INDEX
           'b'
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         do
         Label : BLOCK
           {
           Label : ELEMENT
             =
-            Label : LEFT
-              $c
             Label : RIGHT
               3
+            Label : LEFT
+              $c
         Label : CONDITION
           $x

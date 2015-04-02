@@ -3,6 +3,14 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : SOURCE
+      $a
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -13,14 +21,14 @@ Label : CODE
           (
           Label : CODE
             ==
-            Label : LEFT
-              $e
             Label : RIGHT
               D
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   $f
+            Label : LEFT
+              $e
         Label : THEN
           ;
           Label : ELEMENT
@@ -63,11 +71,3 @@ Label : CODE
           $d
       Label : ELEMENT
         A
-    Label : SOURCE
-      $a
-    Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b

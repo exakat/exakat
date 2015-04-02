@@ -1,0 +1,28 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    class
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        use
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
+        Label : USE
+          G
+        Label : USE
+          F
+    Label : NAME
+      B
+    Label : EXTENDS
+      \
+      Label : SUBNAME
+        E
+      Label : SUBNAME
+        D
+      Label : SUBNAME
+        C

@@ -6,8 +6,6 @@ Label : CODE
     throw
     Label : THROW
       =
-      Label : LEFT
-        $a
       Label : RIGHT
         new
         Label : NEW
@@ -16,3 +14,5 @@ Label : CODE
             void
             Label : ARGUMENT
               void
+      Label : LEFT
+        $a
