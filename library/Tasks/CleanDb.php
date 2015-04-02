@@ -31,8 +31,10 @@ use Everyman\Neo4j\Client,
 
 class CleanDb implements Tasks {
     private $client = null;
+    private $config = null;
     
     public function run(\Config $config) {
+        $this->config = $config;
         $client = $this->getClient();
         
         $queryTemplate = 'start n=node(*)
@@ -79,9 +81,10 @@ DELETE n,r';
             $client->getServerInfo();
         } catch (\Exception $e) {
             display("Couldn't access Neo4j\n");
-            shell_exec('cd '.$config->projects_root.'/neo4j; ./bin/neo4j start');
-            $res = shell_exec('curl 127.0.0.1:7474/db/data/');
+            print shell_exec('cd '.$this->config->projects_root.'/neo4j; ./bin/neo4j start');
+            $res = shell_exec('curl 127.0.0.1:7474/db/data/ 2>&1');
             var_dump($res);
+            sleep(1);
             
             $this->getClient();
         }
