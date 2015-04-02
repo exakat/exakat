@@ -37,11 +37,11 @@ class ArgumentsNoComma extends Arguments {
                                               'notAtom'   => 'Arguments'),
                                    2 => array('token'     => 'T_CLOSE_PARENTHESIS',
                                               'atom'      => 'none'),
-                                   3 => array('filterOut' => array('T_DOUBLE_COLON', 'T_OPEN_PARENTHESIS')),
+                                   3 => array('filterOut' => array('T_DOUBLE_COLON')), //, 'T_OPEN_PARENTHESIS'
         );
 
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'rank'        => array(1 => '0')
+                               'rank'        => array(1 => 0)
                                );
         $this->checkAuto();
 
@@ -57,7 +57,7 @@ class ArgumentsNoComma extends Arguments {
         );
 
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'rank'        => array(1 => '0')
+                               'rank'        => array(1 => 0)
                                );
         $this->checkAuto();
 
@@ -76,7 +76,7 @@ class ArgumentsNoComma extends Arguments {
         );
 
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'rank'        => array(1 => '0'));
+                               'rank'        => array(1 => 0));
         $this->checkAuto();
 
         return false;

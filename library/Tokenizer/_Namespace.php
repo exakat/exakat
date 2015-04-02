@@ -29,11 +29,9 @@ class _Namespace extends TokenAuto {
 
     public function _check() {
         // namespace {}
-        $this->conditions = array(0 => array('token' => _Namespace::$operators,
-                                             'atom'  => 'none'),
-                                  1 => array('atom'  => 'Sequence',
-                                             'property' => array('block' => true)),
-                                  2 => array('token' => array('T_NAMESPACE', 'T_CLOSE_TAG', 'T_END', 'T_SEMICOLON')),
+        $this->conditions = array(0 => array('token'  => _Namespace::$operators,
+                                             'atom'   => 'none'),
+                                  1 => array('token'  => 'T_OPEN_CURLY'),
         );
         
         $this->actions = array('insertGlobalNs' => 1,

@@ -77,6 +77,29 @@ class _While extends TokenAuto {
                                'cleanIndex'   => true);
         $this->checkAuto();
         
+         //  While( ) { normal code ; }
+       $this->conditions = array( 0 => array('token'   => _While::$operators,
+                                             'dowhile' => false),
+                                  1 => array('token'   => 'T_OPEN_PARENTHESIS'),
+                                  2 => array('atom'    => 'yes'),
+                                  3 => array('token'   => 'T_CLOSE_PARENTHESIS'),
+                                  4 => array('token'   => 'T_OPEN_CURLY'),
+                                  5 => array('atom'    => 'yes'),
+                                  6 => array('token'   => 'T_CLOSE_CURLY'),
+        );
+        
+        $this->actions = array('transform'    => array(  1 => 'DROP',
+                                                         2 => 'CONDITION',
+                                                         3 => 'DROP',
+                                                         4 => 'DROP',
+                                                         5 => 'BLOCK',
+                                                         6 => 'DROP'
+                                                       ),
+                               'makeSequence' => 'it',
+                               'atom'         => 'While',
+                               'cleanIndex'   => true);
+        $this->checkAuto();
+        
         // alternative syntax While( ) : endwhile
         $this->conditions = array(0 => array('token'   => _While::$operators,
                                              'dowhile' => false),

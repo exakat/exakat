@@ -30,6 +30,7 @@ class _Trait extends TokenAuto {
     protected $phpVersion = '5.4+';
 
     public function _check() {
+        // trait t { empty code }
         $this->conditions = array(0 => array('token' => _Trait::$operators,
                                              'atom' => 'none'),
                                   1 => array('atom' => 'Identifier'),
@@ -38,6 +39,25 @@ class _Trait extends TokenAuto {
         
         $this->actions = array('transform'    => array( 1 => 'NAME',
                                                         2 => 'BLOCK'),
+                               'atom'         => 'Trait',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it');
+        $this->checkAuto();
+
+        // trait t { normal code }
+        $this->conditions = array(0 => array('token' => _Trait::$operators,
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => 'Identifier'),
+                                  2 => array('token' => 'T_OPEN_CURLY'),
+                                  3 => array('atom'  => 'Sequence'),
+                                  4 => array('token' => 'T_CLOSE_CURLY'),
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'NAME',
+                                                        2 => 'DROP',
+                                                        3 => 'BLOCK',
+                                                        4 => 'DROP',
+                                                        ),
                                'atom'         => 'Trait',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');

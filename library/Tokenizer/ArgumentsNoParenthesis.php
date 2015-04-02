@@ -43,7 +43,7 @@ class ArgumentsNoParenthesis extends Arguments {
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),
-                               'rank'        => array(1 => '0'),
+                               'rank'        => array(1 => 0),
                                'keepIndexed' => true);
         $this->checkAuto();
 

@@ -28,14 +28,41 @@ class _Function extends TokenAuto {
     static public $atom = 'Function';
     
     public function _check() {
-        // function x(args) {}
-        $this->conditions = array(0 => array('token'    => _Function::$operators,
-                                             'atom'     => 'none'),
-                                  1 => array('atom'     => array('Identifier', 'Boolean', 'Null')),
-                                  2 => array('token'    => 'T_OPEN_PARENTHESIS'),
-                                  3 => array('atom'     => 'Arguments'),
-                                  4 => array('token'    => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('atom'     => 'Sequence',
+        // function x(args) { normal code }
+        $this->conditions = array(0 => array('token' => _Function::$operators,
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
+                                  2 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  3 => array('atom'  => 'Arguments'),
+                                  4 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                  5 => array('token' => 'T_OPEN_CURLY',
+                                             'atom'  => 'none',
+                                             'property' => array('association' => 'Function')),
+                                  6 => array('atom'  => 'Sequence'),
+                                  7 => array('token' => 'T_CLOSE_CURLY'),
+        );
+        
+        $this->actions = array('transform'     => array( 1 => 'NAME',
+                                                         2 => 'DROP',
+                                                         3 => 'ARGUMENTS',
+                                                         4 => 'DROP',
+                                                         5 => 'DROP',
+                                                         6 => 'BLOCK',
+                                                         7 => 'DROP'),
+                               'atom'          => 'Function',
+                               'checkTypehint' => 'Function',
+                               'cleanIndex'    => true,
+                               'makeSequence'  => 'it');
+        $this->checkAuto();
+
+        // function x(args) { empty code }
+        $this->conditions = array(0 => array('token' => _Function::$operators,
+                                             'atom'  => 'none'),
+                                  1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
+                                  2 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  3 => array('atom'  => 'Arguments'),
+                                  4 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                  5 => array('atom'  => 'Sequence',
                                              'property' => array('block' => true)),
         );
         
@@ -78,11 +105,31 @@ class _Function extends TokenAuto {
                                   1 => array('token'    => 'T_OPEN_PARENTHESIS'),
                                   2 => array('atom'     => 'Arguments'),
                                   3 => array('token'    => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('atom'     => 'Sequence',
-                                             'property' => array('block' => true))
+                                  4 => array('token'    => 'T_OPEN_CURLY'),
+                                  5 => array('atom'     => 'Sequence'),
+                                  6 => array('token'    => 'T_CLOSE_CURLY')
         );
         
-        $this->actions = array('to_lambda'     => true,
+        $this->actions = array('toLambda'      => true,
+                               'atom'          => 'Function',
+                               'checkTypehint' => 'Function',
+                               'cleanIndex'    => true,
+                               'makeSequence'  => 'it');
+        $this->checkAuto();
+
+        // lambda function (no name) no body
+        $this->conditions = array(0 => array('token'    =>  _Function::$operators,
+                                             'atom'     => 'none'),
+                                  1 => array('token'    => 'T_OPEN_PARENTHESIS'),
+                                  2 => array('atom'     => 'Arguments'),
+                                  3 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+                                  4 => array('atom'     => 'Sequence')
+        );
+        
+        $this->actions = array('transform'     => array( 1 => 'DROP',
+                                                         2 => 'ARGUMENTS',
+                                                         3 => 'DROP',
+                                                         4 => 'BLOCK'),
                                'atom'          => 'Function',
                                'checkTypehint' => 'Function',
                                'cleanIndex'    => true,
@@ -90,20 +137,21 @@ class _Function extends TokenAuto {
         $this->checkAuto();
 
         // lambda function ($x) use ($y)
-        $this->conditions = array(0 => array('token' =>  _Function::$operators,
-                                             'atom'  => 'none'),
-                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('atom'  => 'Arguments'),
-                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('token' => 'T_USE'),
-                                  5 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  6 => array('atom'  => 'Arguments'),
-                                  7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  8 => array('atom'  => 'Sequence',
-                                             'property' => array('block' => true))
+        $this->conditions = array(0  => array('token' =>  _Function::$operators,
+                                              'atom'  => 'none'),
+                                  1  => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  2  => array('atom'  => 'Arguments'),
+                                  3  => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                  4  => array('token' => 'T_USE'),
+                                  5  => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  6  => array('atom'  => 'Arguments'),
+                                  7  => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                  8  => array('token' => 'T_OPEN_CURLY'),
+                                  9  => array('atom'  => 'Sequence'),
+                                  10 => array('token' => 'T_CLOSE_CURLY'),
         );
         
-        $this->actions = array('to_lambda_use'  => true,
+        $this->actions = array('toLambdaUse'    => true,
                                'atom'           => 'Function',
                                'checkTypehint'  => 'Function',
                                'cleanIndex'     => true,

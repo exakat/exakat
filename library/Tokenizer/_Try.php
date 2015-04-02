@@ -48,7 +48,7 @@ class _Try extends TokenAuto {
                                              'token' => _Try::$operators),
                                   1 => array('atom'  => array('Catch', 'Finally'))
                                   );
-        $this->actions = array('to_catch'    => array( 1 => 'CATCH' ),
+        $this->actions = array('toCatch'     => array( 1 => 'CATCH' ),
                                'keepIndexed' => true,
                                'rank'        => array(1 => 0));
         $this->checkAuto();

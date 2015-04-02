@@ -46,7 +46,6 @@ class Block extends TokenAuto {
         $this->checkAuto();
 
     // @doc Block
-    /*
         $this->conditions = array( -1 => array('filterOut2' => array('T_VARIABLE', 'T_DOLLAR',
                                                                      'T_CLOSE_CURLY', 'T_OPEN_CURLY',// $x{1}{3},
                                                                      'T_CLOSE_PARENTHESIS', 'T_OPEN_PARENTHESIS',// x(1){3},
@@ -66,7 +65,6 @@ class Block extends TokenAuto {
                                'property'     => array('bracket' => true)
                                );
         $this->checkAuto();
-        */
 
    // @doc interface xxxx { /**/ }
         $this->conditions = array( -2 => array('token'      => array('T_EXTENDS', 'T_IMPLEMENTS', 'T_INTERFACE', 'T_CLASS',

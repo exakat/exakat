@@ -37,7 +37,8 @@ class Bitshift extends TokenAuto {
                                    1 => array('atom'      => Multiplication::$operands),
                                    2 => array('filterOut' => array_merge(Functioncall::$operators, Block::$operators,
                                                                          _Array::$operators,       Concatenation::$operators,
-                                                                         Property::$operators,     Staticproperty::$operators))
+                                                                         Property::$operators,     Staticproperty::$operators,
+                                                                         Parenthesis::$operators))
         );
         
         $this->actions = array('transform'    => array( 1 => 'RIGHT',

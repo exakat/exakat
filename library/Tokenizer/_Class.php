@@ -66,19 +66,22 @@ class _Class extends TokenAuto {
                                'property'      => array('rank' => 0),
                                'arg2implement' => true,
                                'keepIndexed'   => true,
-                               'cleanIndex'    => true );
+                               'cleanIndex'    => true 
+                               );
         $this->checkAuto();
 
     // class x { // some real code}
         $this->conditions = array( 0 => array('token' => _Class::$operators),
                                    1 => array('atom'  => 'Sequence',
                                               'property' => array('block' => true))
-                                 );
+                                  );
         
         $this->actions = array('transform'    => array(1 => 'BLOCK'),
                                'atom'         => 'Class',
                                'makeSequence' => 'it',
-                               'cleanIndex'   => true);
+                               'makeSequenceAlways' => true,
+                               'cleanIndex'   => true
+                               );
         $this->checkAuto();
 
         return false;

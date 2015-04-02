@@ -44,7 +44,7 @@ class _Continue extends TokenAuto {
                                   1 => array('atom' => array('Integer', 'Void'))
                                   );
         
-        $this->actions = array('transform'  => array( '1' => 'LEVEL'),
+        $this->actions = array('transform'  => array( 1 => 'LEVEL'),
                                'atom'       => 'Continue',
                                'makeSequence' => 'it');
         $this->checkAuto();

@@ -77,6 +77,30 @@ class _Declare extends TokenAuto {
                                     2 => array('atom'  =>  array('Arguments', 'Void')),
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
+                                    4 => array('token' => 'T_OPEN_CURLY'),
+                                    5 => array('atom'  => 'Sequence'),
+                                    6 => array('token' => 'T_CLOSE_CURLY'),
+        );
+        
+        $this->actions = array('transform'    => array( 1 => 'DROP',
+                                                        2 => 'TICKS',
+                                                        3 => 'DROP',
+                                                        4 => 'DROP',
+                                                        5 => 'BLOCK',
+                                                        6 => 'DROP'),
+                               'atom'         => 'Declare',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it'
+                               );
+        $this->checkAuto();
+
+        // declare(ticks = 2) { block }
+        $this->conditions = array(  0 => array('token' => _Declare::$operators),
+                                    1 => array('atom'  => 'none',
+                                               'token' => 'T_OPEN_PARENTHESIS' ),
+                                    2 => array('atom'  =>  array('Arguments', 'Void')),
+                                    3 => array('atom'  => 'none',
+                                               'token' => 'T_CLOSE_PARENTHESIS' ),
                                     4 => array('atom'  => 'Sequence'),
         );
         
@@ -89,7 +113,7 @@ class _Declare extends TokenAuto {
                                'makeSequence' => 'it'
                                );
         $this->checkAuto();
-        
+
         return false;
     }
 

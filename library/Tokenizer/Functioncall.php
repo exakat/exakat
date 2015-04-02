@@ -65,6 +65,7 @@ class Functioncall extends TokenAuto {
                                'atom'         => 'Functioncall',
                                'makeSequence' => 'it',
                                'property'     => array('parenthesis' => true),
+                               'keepIndexed'  => true,
                                );
         $this->checkAuto();
 
@@ -100,7 +101,7 @@ class Functioncall extends TokenAuto {
                                                                            Ternary::$operators)),
         );
         
-        $this->actions = array('transform'    => array('1' => 'ARGUMENTS'),
+        $this->actions = array('transform'    => array(1 => 'ARGUMENTS'),
                                'atom'         => 'Functioncall',
                                'makeSequence' => 'it',
                                'property'     => array('parenthesis' => false),
@@ -115,7 +116,7 @@ class Functioncall extends TokenAuto {
                                    2 => array('token' => array('T_SEMICOLON', 'T_COMMA', 'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS')),
         );
         
-        $this->actions = array('transform'    => array('1' => 'ARGUMENTS'),
+        $this->actions = array('transform'    => array(1 => 'ARGUMENTS'),
                                'atom'         => 'Functioncall',
                                'makeSequence' => 'it'
                                );

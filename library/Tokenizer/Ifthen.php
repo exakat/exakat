@@ -28,8 +28,7 @@ class Ifthen extends TokenAuto {
     static public $atom = 'Ifthen';
 
     public function _check() {
-    
-    // @doc if () with only ;
+        // @doc if () with only ;
         $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_SEMICOLON',
@@ -55,16 +54,40 @@ class Ifthen extends TokenAuto {
                                                                     'T_ENDFOR', 'T_ENDWHILE', 'T_ENDDECLARE')),
         );
         
-        $this->actions = array( 'to_block_ifelseif' => 2,
-                                'keepIndexed'       => true);
+        $this->actions = array( 'toBlockIfelseif' => 2,
+                                'keepIndexed'     => true);
         $this->checkAuto();
 
-    // @doc if then else
+        // @doc if { sequence } then else
         $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom'  => 'none'),
                                    1 => array('atom'  => 'Parenthesis'),
-                                   2 => array('atom'  =>  'Sequence',
-                                              'property' => array('block' => true)),
+                                   2 => array('token' => 'T_OPEN_CURLY'),
+                                   3 => array('atom'  =>  'Sequence'),
+                                   4 => array('token'  => 'T_CLOSE_CURLY'),
+                                   5 => array('token' => 'T_ELSE',
+                                              'atom'  => 'none'),
+                                   6 => array('atom'  => 'Sequence',
+                                              'property' => array('block' => true))
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'CONDITION',
+                                                       2 => 'DROP',
+                                                       3 => 'THEN',
+                                                       4 => 'DROP',
+                                                       5 => 'DROP',
+                                                       6 => 'ELSE'),
+                               'atom'         => 'Ifthen',
+                               'property'     => array('alternative' => false),
+                               'makeSequence' => 'it',
+                               'cleanIndex'   => true);
+        $this->checkAuto();
+
+        // @doc if { empty } then else
+        $this->conditions = array( 0 => array('token' => self::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => 'Parenthesis'),
+                                   2 => array('atom'  =>  'Sequence'),
                                    3 => array('token' => 'T_ELSE',
                                               'atom'  => 'none'),
                                    4 => array('atom'  => 'Sequence',
@@ -80,7 +103,7 @@ class Ifthen extends TokenAuto {
                                'makeSequence' => 'it',
                                'cleanIndex'   => true);
         $this->checkAuto();
-
+        
         // if, elseif followed by a single instruction without a ;
         $this->conditions = array(  0 => array('token' => self::$operators,
                                                'atom'  => 'none'),
@@ -95,24 +118,66 @@ class Ifthen extends TokenAuto {
                                 'keepIndexed'                   => true);
         $this->checkAuto();
 
-    // @doc if then without else
-        $this->conditions = array( 0 => array('token' => self::$operators,
-                                              'atom' => 'none'),
-                                   1 => array('atom' => 'Parenthesis'),
-                                   2 => array('atom' => 'Sequence',
+        // @doc if then without else
+        $this->conditions = array( 0 => array('token'   => self::$operators,
+                                              'atom'    => 'none'),
+                                   1 => array('atom'    => 'Parenthesis'),
+                                   2 => array('atom'    => 'Sequence',
                                               'property' => array('block' => true)),
                                    3 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
         );
         
         $this->actions = array('transform'    => array(1 => 'CONDITION',
-                                                       2 => 'THEN'),
+                                                       2 => 'THEN',
+                                                       ),
                                'makeSequence' => 'it',
                                'property'     => array('alternative' => false),
                                'atom'         => 'Ifthen',
                                'cleanIndex'   => true);
         $this->checkAuto();
 
-    // @doc if then else: (THen, else belongs to another nested ifthen)
+        // @doc if then { block } without else
+        $this->conditions = array( 0 => array('token' => self::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => 'Parenthesis'),
+                                   2 => array('token' => 'T_OPEN_CURLY'),
+                                   3 => array('atom'  => 'Sequence'),
+                                   4 => array('token' => 'T_CLOSE_CURLY'),
+                                   5 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'CONDITION',
+                                                       2 => 'DROP',
+                                                       3 => 'THEN',
+                                                       4 => 'DROP'),
+                               'makeSequence' => 'it',
+                               'property'     => array('alternative' => false),
+                               'atom'         => 'Ifthen',
+                               'cleanIndex'   => true);
+        $this->checkAuto();
+
+        // @doc if then { block } without else (but within a else alternatif)
+        $this->conditions = array( 0 => array('token' => self::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('atom'  => 'Parenthesis'),
+                                   2 => array('token' => 'T_OPEN_CURLY'),
+                                   3 => array('atom'  => 'Sequence'),
+                                   4 => array('token' => 'T_CLOSE_CURLY'),
+                                   5 => array('token' => array('T_ELSE', 'T_ELSEIF')),
+                                   6 => array('token' => 'T_COLON'),
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'CONDITION',
+                                                       2 => 'DROP',
+                                                       3 => 'THEN',
+                                                       4 => 'DROP'),
+                               'makeSequence' => 'it',
+                               'property'     => array('alternative' => false),
+                               'atom'         => 'Ifthen',
+                               'cleanIndex'   => true);
+        $this->checkAuto();
+
+        // @doc if then else: (THen, else belongs to another nested ifthen)
         $this->conditions = array( 0 => array('token' => self::$operators,
                                               'atom' => 'none'),
                                    1 => array('atom' => 'Parenthesis'),
@@ -130,19 +195,22 @@ class Ifthen extends TokenAuto {
                                'cleanIndex'   => true);
         $this->checkAuto();
         
-    // @doc if then elseif without else
+        // @doc if then elseif without else
         $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('atom'  => 'Parenthesis'),
-                                   2 => array('atom'  => 'Sequence',
-                                              'property' => array('block' => true)),
-                                   3 => array('atom'  => 'Ifthen',
+                                   2 => array('token' => 'T_OPEN_CURLY'),
+                                   3 => array('atom'  => 'Sequence'),
+                                   4 => array('token' => 'T_CLOSE_CURLY'),
+                                   5 => array('atom'  => 'Ifthen',
                                               'token' => 'T_ELSEIF',
                                               'property' => array('alternative' => false))
         );
         
-        $this->actions = array('transform'    => array('1' => 'CONDITION',
-                                                       '2' => 'THEN',
-                                                       '3' => 'ELSE'
+        $this->actions = array('transform'    => array(1 => 'CONDITION',
+                                                       2 => 'DROP',
+                                                       3 => 'THEN',
+                                                       4 => 'DROP',
+                                                       5 => 'ELSE'
                                                       ),
                                'property'     => array('alternative' => false),
                                'makeSequence' => 'it',
@@ -181,9 +249,9 @@ class Ifthen extends TokenAuto {
                                     5 => array('token'     => array('T_ELSEIF', 'T_ENDIF', 'T_ELSE'))
         );
         
-        $this->actions = array( 'to_block_ifelseif' => 3,
-                                'property'          => array('alternative' => true),
-                                'keepIndexed'       => true);
+        $this->actions = array( 'toBlockIfelseifAlternative' => 3,
+                                'property'        => array('alternative' => true),
+                                'keepIndexed'     => true);
         $this->checkAuto();
 
     // @doc if ( ) : endif

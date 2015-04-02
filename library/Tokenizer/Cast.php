@@ -39,7 +39,7 @@ class Cast extends TokenAuto {
                                                                         Property::$operators, Staticproperty::$operators))
         );
         
-        $this->actions = array('transform'  => array( '1' => 'CAST'),
+        $this->actions = array('transform'  => array( 1 => 'CAST'),
                                'atom'       => 'Cast',
                                'cleanIndex' => true);
         $this->checkAuto();

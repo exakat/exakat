@@ -63,7 +63,7 @@ class _Foreach extends TokenAuto {
                                                                 Assignation::$operators, Addition::$operators,
                                                                 Multiplication::$operators)),
         );
-        $this->actions = array( 'to_block_foreach' => true,
+        $this->actions = array( 'toBlockForeach'   => 6,
                                 'keepIndexed'      => true,
                                 'cleanIndex'       => true);
         $this->checkAuto();
@@ -76,15 +76,43 @@ class _Foreach extends TokenAuto {
                                    3 => array('token' => 'T_AS'),
                                    4 => array('atom'  => $blindVariables),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
+                                   6 => array('token' => 'T_OPEN_CURLY'),
+                                   7 => array('atom'  => 'Sequence'),
+                                   8 => array('token' => 'T_CLOSE_CURLY'),
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'SOURCE',
+                                                       3 => 'DROP',
+                                                       4 => 'VALUE',
+                                                       5 => 'DROP',
+                                                       6 => 'DROP',
+                                                       7 => 'BLOCK',
+                                                       8 => 'DROP',
+                                                      ),
+                               'atom'         => 'Foreach',
+                               'cleanIndex'   => true,
+                               'makeSequence' => 'it'
+                               );
+        $this->checkAuto();
+
+    // @doc foreach($x as $y) { empty }
+        $this->conditions = array( 0 => array('token' => _Foreach::$operators,
+                                              'atom'  => 'none'),
+                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   2 => array('atom'  => $operands),
+                                   3 => array('token' => 'T_AS'),
+                                   4 => array('atom'  => $blindVariables),
+                                   5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('atom'  => 'Sequence'),
         );
         
-        $this->actions = array('transform'    => array('1' => 'DROP',
-                                                       '2' => 'SOURCE',
-                                                       '3' => 'DROP',
-                                                       '4' => 'VALUE',
-                                                       '5' => 'DROP',
-                                                       '6' => 'BLOCK',
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'SOURCE',
+                                                       3 => 'DROP',
+                                                       4 => 'VALUE',
+                                                       5 => 'DROP',
+                                                       6 => 'BLOCK',
                                                       ),
                                'atom'         => 'Foreach',
                                'cleanIndex'   => true,

@@ -35,7 +35,8 @@ class Parenthesis extends TokenAuto {
                                                                     'T_WHILE', 'T_UNSET', 'T_EMPTY', 'T_PRINT', 'T_CONTINUE',
                                                                     'T_VARIABLE', 'T_ISSET', 'T_ARRAY', 'T_EVAL', 'T_LIST',
                                                                     'T_CLONE', 'T_DECLARE', 'T_CLOSE_BRACKET', 'T_STATIC',
-                                                                    'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION')),
+                                                                    'T_USE', 'T_NS_SEPARATOR', 'T_CLOSE_CURLY', 'T_FUNCTION',
+                                                                    'T_CLOSE_PARENTHESIS')),
                                               'notAtom' => array('Array', 'Property')),
                                    0 => array('token' => Parenthesis::$operators,
                                               'atom'  => 'none' ),
@@ -44,8 +45,8 @@ class Parenthesis extends TokenAuto {
                                               'atom' => 'none'),
         );
         
-        $this->actions = array('transform'    => array( '1' => 'CODE',
-                                                        '2' => 'DROP'),
+        $this->actions = array('transform'    => array( 1 => 'CODE',
+                                                        2 => 'DROP'),
                                'atom'         => 'Parenthesis',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
@@ -60,8 +61,8 @@ class Parenthesis extends TokenAuto {
                                               'atom'  => 'none')
         );
         
-        $this->actions = array('transform'    => array( '1' => 'CODE',
-                                                        '2' => 'DROP'),
+        $this->actions = array('transform'    => array( 1 => 'CODE',
+                                                        2 => 'DROP'),
                                'atom'         => 'Parenthesis',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');

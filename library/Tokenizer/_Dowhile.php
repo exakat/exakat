@@ -54,8 +54,7 @@ class _Dowhile extends TokenAuto {
 
         // do if() {} while() (no block...)
         $this->conditions = array( 0 => array('token'   => _Dowhile::$operators),
-                                   1 => array('atom'    => 'yes',
-                                              'notAtom' => 'Sequence'),
+                                   1 => array('atom'    => 'yes'),
                                    2 => array('token'   => 'T_WHILE',
                                               'dowhile' => true),
                                    3 => array('token'   => 'T_OPEN_PARENTHESIS'),
@@ -76,19 +75,23 @@ class _Dowhile extends TokenAuto {
 
         // do { block } while()
         $this->conditions = array( 0 => array('token' => _Dowhile::$operators),
-                                   1 => array('atom'  => 'Sequence'),
-                                   2 => array('token' => 'T_WHILE',
+                                   1 => array('token' => 'T_OPEN_CURLY'),
+                                   2 => array('atom'  => 'Sequence'),
+                                   3 => array('token' => 'T_CLOSE_CURLY'),
+                                   4 => array('token' => 'T_WHILE',
                                               'dowhile' => true),
-                                   3 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                   4 => array('atom'  => 'yes'),
-                                   5 => array('token' => 'T_CLOSE_PARENTHESIS')
+                                   5 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   6 => array('atom'  => 'yes'),
+                                   7 => array('token' => 'T_CLOSE_PARENTHESIS')
         );
         
-        $this->actions = array('transform'    => array(   1 => 'BLOCK',
-                                                          2 => 'DROP',
+        $this->actions = array('transform'    => array(   1 => 'DROP',
+                                                          2 => 'BLOCK',
                                                           3 => 'DROP',
-                                                          4 => 'CONDITION',
-                                                          5 => 'DROP'
+                                                          4 => 'DROP',
+                                                          5 => 'DROP',
+                                                          6 => 'CONDITION',
+                                                          7 => 'DROP'
                                                         ),
                                'atom'         => 'Dowhile',
                                'cleanIndex'   => true,
