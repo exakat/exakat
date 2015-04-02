@@ -761,6 +761,10 @@ class Load implements Tasks {
                     if ($type = $this->process_colon($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
                     }
+                    if ($type = $this->process_blocks($token_value)) {
+                        $T[$Tid]->setProperty('association', $type)->save();
+                    }
+                    
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
 
@@ -852,6 +856,9 @@ class Load implements Tasks {
                         $T[$Tid]->setProperty($label, $value)->save();
                     }
                     if ($type = $this->process_colon($token_value)) {
+                        $T[$Tid]->setProperty('association', $type)->save();
+                    }
+                    if ($type = $this->process_blocks($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
                     }
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
@@ -990,8 +997,6 @@ class Load implements Tasks {
     
                 $T[$Tid]->save();
             }
-        
-
 
             if (!$inQuote && in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE', 'T_START_HEREDOC'))) {
                 $inQuote = true;
@@ -1034,6 +1039,9 @@ class Load implements Tasks {
             } 
         
             if ($type = $this->process_colon($token_value)) {
+                $T[$Tid]->setProperty('association', $type)->save();
+            }
+            if ($type = $this->process_blocks($token_value)) {
                 $T[$Tid]->setProperty('association', $type)->save();
             }
 
@@ -1109,6 +1117,46 @@ class Load implements Tasks {
         return $Tid;
     }
 
+    private function process_blocks($token_value) {
+        static $states = array();
+        static $states_id = 0;
+
+        if ($token_value == 'T_CLASS' ) { 
+            $states[] = 'Class'; 
+            $states_id++; 
+            return ''; 
+        }
+
+        if ($token_value == 'T_FUNCTION' ) { 
+            $states[] = 'Function'; 
+            $states_id++; 
+            return ''; 
+        }
+
+        if ($token_value == 'T_INTERFACE' ) { 
+            $states[] = 'Function'; 
+            $states_id++; 
+            return ''; 
+        }
+
+        if ($token_value == 'T_TRAIT' ) { 
+            $states[] = 'Trait'; 
+            $states_id++; 
+            return ''; 
+        }
+
+        if ($token_value == 'T_OPEN_CURLY' )    { 
+            if (count($states) == 1) {
+                $state = array_pop($states);  
+                return $state;
+            } else {
+                return '';
+            }
+        }
+    
+        return '';
+    }
+    
     private function process_colon($token_value) {
         static $states = array();
         static $states_id = 0;
