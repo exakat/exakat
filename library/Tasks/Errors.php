@@ -47,6 +47,7 @@ class Errors implements Tasks {
         */
 
         $stats = array();
+
         $stats['files with next'] = $this->queryColumn("g.idx('racines')[['token':'ROOT']].out('INDEXED').out('NEXT').in.loop(1){true}{ it.object.token == 'T_FILENAME'}.code");
         $stats['Function with next'] = $this->queryColumn("g.idx('atoms')[['atom':'_Function']].out('INDEXED').out('NEXT').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
         $stats['Switch'] = $this->queryColumn("g.idx('atoms')[['atom':'_Switch']].out('INDEXED').filter{it.out('NEXT').any()}.transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
@@ -59,7 +60,7 @@ class Errors implements Tasks {
         $stats['String'] = $this->queryColumn("g.idx('atoms')[['atom':'String']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
         $stats['Arguments'] = $this->queryColumn("g.idx('atoms')[['atom':'Arguments']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
         $stats['PPP'] = $this->queryColumn("g.idx('atoms')[['atom':'_Ppp']].out('INDEXED').transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
-        $stats['no_fullcode'] = $this->queryColumn("g.V.has('fullcode', null).except([g.v(0)]).hasNot('index', 'true').filter{!(it.token in ['INDEX', 'T_ROOT', 'T_END', 'E_CLASS', 'E_FUNCTION', 'E_NAMESPACE'])}.transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
+        $stats['no_fullcode'] = $this->queryColumn("g.V.has('fullcode', null).except([g.v(0)]).hasNot('index', 'true').filter{!(it.token in ['INDEX', 'T_ROOT', 'ROOT', 'T_END'])}.transform{it.in.loop(1){true}{ it.object.token == 'T_FILENAME'}.next().code + ' ' + it.line }");
 
         if ($config->format == 'Json') {
             $output = json_encode($stats);
