@@ -6,17 +6,17 @@ Label : CODE
     =
     Label : RIGHT
       function
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           void
       Label : NAME
         
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $a
     Label : LEFT
       $x

@@ -4,22 +4,22 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
         function
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
         Label : NAME
           a
-    Label : NAME
-      x
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
     Label : EXTENDS
       y
     Label : IMPLEMENTS

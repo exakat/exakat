@@ -4,77 +4,77 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
         public
+        Label : PUBLIC
+          public
         Label : VALUE
           Void
         Label : DEFINE
           $a
-        Label : PUBLIC
-          public
       Label : ELEMENT
         public
+        Label : PUBLIC
+          public
         Label : VALUE
           1
         Label : DEFINE
           $b
-        Label : PUBLIC
-          public
       Label : ELEMENT
         ppp
+        Label : PUBLIC
+          public
         Label : VALUE
           void
         Label : DEFINE
           $c
-        Label : PUBLIC
-          public
       Label : ELEMENT
         ppp
+        Label : PUBLIC
+          public
         Label : VALUE
           void
         Label : DEFINE
           $d
-        Label : PUBLIC
-          public
       Label : ELEMENT
         const
-        Label : VALUE
-          3
         Label : NAME
           b
+        Label : VALUE
+          3
       Label : ELEMENT
         ppp
+        Label : PUBLIC
+          public
         Label : VALUE
           3
         Label : DEFINE
           $g
-        Label : PUBLIC
-          public
       Label : ELEMENT
         ppp
+        Label : PUBLIC
+          public
         Label : VALUE
           void
         Label : DEFINE
           $h
-        Label : PUBLIC
-          public
       Label : ELEMENT
         ppp
+        Label : PUBLIC
+          public
         Label : VALUE
           2
         Label : DEFINE
           $f
-        Label : PUBLIC
-          public
       Label : ELEMENT
         ppp
+        Label : PUBLIC
+          public
         Label : VALUE
           void
         Label : DEFINE
           $e
-        Label : PUBLIC
-          public
-    Label : NAME
-      x

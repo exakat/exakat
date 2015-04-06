@@ -14,8 +14,6 @@ Label : CODE
           $a
     Label : CATCH
       catch
-      Label : VARIABLE
-        $e
       Label : CLASS
         \
         Label : SUBNAME
@@ -30,3 +28,5 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+      Label : VARIABLE
+        $e

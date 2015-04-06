@@ -3,21 +3,15 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      1
-    Label : LEFT
-      $i
-  Label : ELEMENT
     while
+    Label : CONDITION
+      <=
+      Label : RIGHT
+        10
+      Label : LEFT
+        $i
     Label : BLOCK
       ;
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $i
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
@@ -28,9 +22,15 @@ Label : CODE
           void
           Label : ARGUMENT
             "\n"
-    Label : CONDITION
-      <=
-      Label : RIGHT
-        10
-      Label : LEFT
-        $i
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $i
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      1
+    Label : LEFT
+      $i

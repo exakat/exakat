@@ -26,13 +26,13 @@ Label : CODE
                 void
       Label : LEFT
         instanceof
-        Label : VARIABLE
-          $b
         Label : CLASS
           \
           Label : SUBNAME
             C
           Label : SUBNAME
             B
+        Label : VARIABLE
+          $b
     Label : LEFT
       $a

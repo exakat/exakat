@@ -6,6 +6,8 @@ Label : CODE
     =
     Label : RIGHT
       ::
+      Label : CLASS
+        C
       Label : METHOD
         D
         Label : ARGUMENTS
@@ -34,8 +36,6 @@ Label : CODE
                   'F'
                 Label : CONCAT
                   E
-      Label : CLASS
-        C
     Label : LEFT
       ::
       Label : PROPERTY

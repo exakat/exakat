@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
@@ -32,10 +34,10 @@ Label : CODE
           private
       Label : ELEMENT
         const
-        Label : VALUE
-          3
         Label : NAME
           b
+        Label : VALUE
+          3
       Label : ELEMENT
         ppp
         Label : VALUE
@@ -68,5 +70,3 @@ Label : CODE
           $e
         Label : PRIVATE
           private
-    Label : NAME
-      x

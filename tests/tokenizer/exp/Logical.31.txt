@@ -16,10 +16,6 @@ Label : CODE
             'f'
     Label : LEFT
       ::
-      Label : CLASS
-        $
-        Label : NAME
-          x
       Label : METHOD
         a
         Label : ARGUMENTS
@@ -30,3 +26,7 @@ Label : CODE
               $b
             Label : INDEX
               'c'
+      Label : CLASS
+        $
+        Label : NAME
+          x

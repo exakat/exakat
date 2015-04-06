@@ -4,11 +4,11 @@ Label : CODE
   ;
   Label : ELEMENT
     instanceof
-    Label : VARIABLE
-      $x
     Label : CLASS
       [
       Label : VARIABLE
         $y
       Label : INDEX
         3
+    Label : VARIABLE
+      $x

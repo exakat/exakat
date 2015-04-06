@@ -134,6 +134,32 @@ Label : CODE
                 Label : ARGUMENT
                   'I'
   Label : ELEMENT
+    =
+    Label : RIGHT
+      ->
+      Label : OBJECT
+        $b
+      Label : METHOD
+        H
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            ->
+            Label : OBJECT
+              $this
+            Label : METHOD
+              J
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  $e
+                Label : ARGUMENT
+                  $c
+          Label : ARGUMENT
+            'I'
+    Label : LEFT
+      $d
+  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -163,32 +189,6 @@ Label : CODE
                 void
         Label : LEFT
           $c
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      ->
-      Label : OBJECT
-        $b
-      Label : METHOD
-        H
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            ->
-            Label : OBJECT
-              $this
-            Label : METHOD
-              J
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  $e
-                Label : ARGUMENT
-                  $c
-          Label : ARGUMENT
-            'I'
-    Label : LEFT
-      $d
   Label : ELEMENT
     =
     Label : RIGHT

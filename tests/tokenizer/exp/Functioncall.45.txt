@@ -26,6 +26,8 @@ Label : CODE
                   1
       Label : THEN
         [
+        Label : NAME
+          [
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -42,8 +44,6 @@ Label : CODE
                   $f
                 Label : INDEX
                   3
-        Label : NAME
-          [
         Label : VARIABLE
           $d
         Label : INDEX

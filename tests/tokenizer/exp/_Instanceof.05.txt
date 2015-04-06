@@ -7,17 +7,17 @@ Label : CODE
       (
       Label : CODE
         instanceof
-        Label : VARIABLE
-          $a
         Label : CLASS
           static
+        Label : VARIABLE
+          $a
     Label : THEN
       ;
       Label : ELEMENT
         void
   Label : ELEMENT
     instanceof
-    Label : VARIABLE
-      $a
     Label : CLASS
       static
+    Label : VARIABLE
+      $a

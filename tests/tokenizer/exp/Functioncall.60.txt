@@ -4,16 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
         function
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $c
-          Label : ARGUMENT
-            $b
+        Label : NAME
+          a
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -34,9 +32,11 @@ Label : CODE
                 return
                 Label : RETURN
                   null
-        Label : NAME
-          a
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $c
+          Label : ARGUMENT
+            $b
         Label : PRIVATE
           private
-    Label : NAME
-      x

@@ -8,10 +8,10 @@ Label : CODE
       (
       Label : CODE
         instanceof
-        Label : VARIABLE
-          $x
         Label : CLASS
           Exception
+        Label : VARIABLE
+          $x
     Label : THEN
       ;
       Label : ELEMENT

@@ -17,14 +17,14 @@ Label : CODE
       void
       Label : ARGUMENT
         function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $x
         Label : BLOCK
           {
           Label : ELEMENT
             void
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $x
   Label : ELEMENT
     echo
     Label : ARGUMENTS

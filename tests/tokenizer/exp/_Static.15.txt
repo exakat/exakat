@@ -10,12 +10,32 @@ Label : CODE
         void
         Label : ARGUMENT
           function
-          Label : NAME
-            
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               $fulfill
+          Label : NAME
+            
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $self
+  Label : ELEMENT
+    new
+    Label : NEW
+      static
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          function
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $fulfill
+          Label : NAME
+            
           Label : BLOCK
             ;
             Label : ELEMENT
@@ -26,23 +46,3 @@ Label : CODE
             void
             Label : ARGUMENT
               $self
-  Label : ELEMENT
-    new
-    Label : NEW
-      static
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          function
-          Label : NAME
-            
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $fulfill
-          Label : BLOCK
-            ;
-            Label : ELEMENT
-              ++
-              Label : POSTPLUSPLUS
-                $self

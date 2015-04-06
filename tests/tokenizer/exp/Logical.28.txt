@@ -4,27 +4,27 @@ Label : CODE
   ;
   Label : ELEMENT
     while
-    Label : CONDITION
-      &&
-      Label : RIGHT
-        =
-        Label : RIGHT
-          ::
-          Label : CLASS
-            C
-          Label : METHOD
-            d
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $e
-        Label : LEFT
-          $b
-      Label : LEFT
-        $a
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $f
+    Label : CONDITION
+      &&
+      Label : RIGHT
+        =
+        Label : RIGHT
+          ::
+          Label : METHOD
+            d
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                $e
+          Label : CLASS
+            C
+        Label : LEFT
+          $b
+      Label : LEFT
+        $a

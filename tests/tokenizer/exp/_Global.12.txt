@@ -7,7 +7,7 @@ Label : CODE
     Label : GLOBAL
       $
       Label : NAME
-        {
+        [
         Label : VARIABLE
           $b
         Label : INDEX
@@ -31,17 +31,7 @@ Label : CODE
     Label : GLOBAL
       $
       Label : NAME
-        $a
-  Label : ELEMENT
-    $
-    Label : NAME
-      $a
-  Label : ELEMENT
-    global
-    Label : GLOBAL
-      $
-      Label : NAME
-        [
+        {
         Label : VARIABLE
           $b
         Label : INDEX
@@ -53,11 +43,23 @@ Label : CODE
       Label : ARGUMENT
         $
         Label : NAME
-          {
+          [
           Label : VARIABLE
             $foo
           Label : INDEX
             'bar'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      'a'
+    Label : LEFT
+      $Yes
+  Label : ELEMENT
+    global
+    Label : GLOBAL
+      $
+      Label : NAME
+        $a
   Label : ELEMENT
     print
     Label : ARGUMENTS
@@ -65,7 +67,7 @@ Label : CODE
       Label : ARGUMENT
         $
         Label : NAME
-          [
+          {
           Label : VARIABLE
             $foo
           Label : INDEX
@@ -85,11 +87,9 @@ Label : CODE
     Label : LEFT
       $foo
   Label : ELEMENT
-    =
-    Label : RIGHT
-      'a'
-    Label : LEFT
-      $Yes
+    $
+    Label : NAME
+      $a
   Label : ELEMENT
     =
     Label : RIGHT

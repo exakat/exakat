@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     interface
+    Label : NAME
+      A
     Label : BLOCK
       {
       Label : ELEMENT
@@ -12,14 +14,12 @@ Label : CODE
           void
           Label : ARGUMENT
             Typehint
-            Label : VARIABLE
-              $f
             Label : CLASS
               E
+            Label : VARIABLE
+              $f
         Label : NAME
           D
-    Label : NAME
-      A
     Label : EXTENDS
       Arguments
       Label : EXTENDS
@@ -38,6 +38,8 @@ Label : CODE
           B
   Label : ELEMENT
     interface
+    Label : NAME
+      A
     Label : BLOCK
       {
       Label : ELEMENT
@@ -46,14 +48,12 @@ Label : CODE
           void
           Label : ARGUMENT
             Typehint
-            Label : VARIABLE
-              $f
             Label : CLASS
               E
+            Label : VARIABLE
+              $f
         Label : NAME
           D
-    Label : NAME
-      A
     Label : EXTENDS
       Arguments
       Label : EXTENDS
@@ -68,6 +68,8 @@ Label : CODE
           B
   Label : ELEMENT
     interface
+    Label : NAME
+      A
     Label : BLOCK
       {
       Label : ELEMENT
@@ -76,14 +78,12 @@ Label : CODE
           void
           Label : ARGUMENT
             Typehint
-            Label : VARIABLE
-              $f
             Label : CLASS
               E
+            Label : VARIABLE
+              $f
         Label : NAME
           D
-    Label : NAME
-      A
     Label : EXTENDS
       Arguments
       Label : EXTENDS
@@ -96,6 +96,8 @@ Label : CODE
           B
   Label : ELEMENT
     interface
+    Label : NAME
+      A
     Label : BLOCK
       {
       Label : ELEMENT
@@ -104,14 +106,12 @@ Label : CODE
           void
           Label : ARGUMENT
             Typehint
-            Label : VARIABLE
-              $f
             Label : CLASS
               E
+            Label : VARIABLE
+              $f
         Label : NAME
           D
-    Label : NAME
-      A
     Label : EXTENDS
       \
       Label : SUBNAME

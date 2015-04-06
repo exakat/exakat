@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      a
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -56,5 +58,3 @@ Label : CODE
       void
       Label : ARGUMENT
         void
-    Label : NAME
-      a

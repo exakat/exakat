@@ -24,12 +24,12 @@ Label : CODE
         {
         Label : ELEMENT
           void
-      Label : VARIABLE
-        $b
       Label : CLASS
         \
         Label : SUBNAME
           D
+      Label : VARIABLE
+        $b
   Label : ELEMENT
     =
     Label : RIGHT

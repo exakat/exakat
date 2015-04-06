@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     $x
+    Label : NAME
+      $x
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
-    Label : NAME
-      $x

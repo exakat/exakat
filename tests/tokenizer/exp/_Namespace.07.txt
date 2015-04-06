@@ -52,10 +52,10 @@ Label : CODE
       {
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           CONNECT_OK
+        Label : VALUE
+          1
       Label : ELEMENT
         class
         Label : NAME

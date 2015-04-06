@@ -10,6 +10,8 @@ Label : CODE
         use
         Label : USE
           \
+          Label : AS
+            J
           Label : SUBNAME
             I
           Label : SUBNAME
@@ -18,8 +20,6 @@ Label : CODE
             G
           Label : SUBNAME
             F
-          Label : AS
-            J
       Label : ELEMENT
         use
         Label : USE

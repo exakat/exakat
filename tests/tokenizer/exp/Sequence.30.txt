@@ -4,10 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $b
     Label : NAME
       a
     Label : BLOCK
@@ -56,3 +52,7 @@ Label : CODE
                   b
                 Label : CONCAT
                   "a"
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $b

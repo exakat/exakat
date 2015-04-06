@@ -3,6 +3,34 @@
 Label : CODE
   ;
   Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        Concatenation
+        Label : CONCAT
+          $b
+        Label : CONCAT
+          $c
+      Label : THEN
+        Concatenation
+        Label : CONCAT
+          'i'
+        Label : CONCAT
+          $g
+          Label : NAME
+            $g
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'h'
+        Label : CONCAT
+          'f'
+      Label : ELSE
+        'j'
+    Label : LEFT
+      $a
+  Label : ELEMENT
     .=
     Label : RIGHT
       ?
@@ -51,34 +79,6 @@ Label : CODE
       Label : CONDITION
         Concatenation
         Label : CONCAT
-          $b
-        Label : CONCAT
-          $c
-      Label : THEN
-        Concatenation
-        Label : CONCAT
-          'i'
-        Label : CONCAT
-          $g
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'h'
-          Label : NAME
-            $g
-        Label : CONCAT
-          'f'
-      Label : ELSE
-        'j'
-    Label : LEFT
-      $a
-  Label : ELEMENT
-    =
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        Concatenation
-        Label : CONCAT
           'a'
         Label : CONCAT
           !
@@ -96,12 +96,12 @@ Label : CODE
         Concatenation
         Label : CONCAT
           $g
+          Label : NAME
+            $g
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'h'
-          Label : NAME
-            $g
         Label : CONCAT
           'f'
       Label : ELSE
@@ -128,12 +128,12 @@ Label : CODE
         Concatenation
         Label : CONCAT
           $g
+          Label : NAME
+            $g
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'h'
-          Label : NAME
-            $g
         Label : CONCAT
           'f'
       Label : ELSE
@@ -162,12 +162,12 @@ Label : CODE
           'i'
         Label : CONCAT
           $g
+          Label : NAME
+            $g
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'h'
-          Label : NAME
-            $g
         Label : CONCAT
           'f'
       Label : ELSE

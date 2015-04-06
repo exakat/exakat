@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      dbstuff
     Label : BLOCK
       {
       Label : ELEMENT
@@ -46,8 +48,6 @@ Label : CODE
           $b
         Label : VAR
           var
-    Label : NAME
-      dbstuff
   Label : ELEMENT
     define
     Label : ARGUMENTS

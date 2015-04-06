@@ -4,26 +4,28 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           a
+        Label : VALUE
+          1
       Label : ELEMENT
         const
-        Label : VALUE
-          2
         Label : NAME
           b
+        Label : VALUE
+          2
       Label : ELEMENT
         const
-        Label : VALUE
-          3
         Label : NAME
           c
+        Label : VALUE
+          3
       Label : ELEMENT
         var
         Label : VALUE
@@ -34,15 +36,13 @@ Label : CODE
           var
       Label : ELEMENT
         const
-        Label : VALUE
-          4
         Label : NAME
           d
+        Label : VALUE
+          4
       Label : ELEMENT
         const
-        Label : VALUE
-          5
         Label : NAME
           e
-    Label : NAME
-      x
+        Label : VALUE
+          5

@@ -8,16 +8,16 @@ Label : CODE
       new
       Label : NEW
         ::
+        Label : CLASS
+          C
         Label : METHOD
           $y
-          Label : NAME
-            $y
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
-        Label : CLASS
-          C
+          Label : NAME
+            $y
     Label : LEFT
       $x
   Label : ELEMENT
@@ -28,16 +28,20 @@ Label : CODE
       {
       Label : ELEMENT
         static
+        Label : STATIC
+          static
         Label : PUBLIC
           public
         Label : VALUE
           'f'
         Label : DEFINE
           $y
-        Label : STATIC
-          static
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
           a
         Label : BLOCK
@@ -46,10 +50,6 @@ Label : CODE
             return
             Label : RETURN
               'b'
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
   Label : ELEMENT
     =
     Label : RIGHT

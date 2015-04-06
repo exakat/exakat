@@ -3,12 +3,14 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      B
     Label : BLOCK
       {
       Label : ELEMENT
         use
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             as
             Label : RIGHT
@@ -27,7 +29,5 @@ Label : CODE
             E
           Label : SUBNAME
             D
-    Label : NAME
-      B
     Label : EXTENDS
       C

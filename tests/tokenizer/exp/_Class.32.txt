@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
@@ -30,5 +32,3 @@ Label : CODE
           $h
         Label : VAR
           var
-    Label : NAME
-      x

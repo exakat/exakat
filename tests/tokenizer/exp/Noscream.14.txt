@@ -8,6 +8,8 @@ Label : CODE
       @
       Label : AT
         $x
+        Label : NAME
+          $x
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -20,7 +22,5 @@ Label : CODE
                 2
             Label : LEFT
               1
-        Label : NAME
-          $x
     Label : LEFT
       $a

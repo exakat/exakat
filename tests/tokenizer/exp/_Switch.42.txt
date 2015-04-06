@@ -44,12 +44,12 @@ Label : CODE
               'L'
         Label : CASE
           instanceof
-          Label : VARIABLE
-            $e
           Label : CLASS
             \
             Label : SUBNAME
               K
+          Label : VARIABLE
+            $e
       Label : ELEMENT
         case
         Label : CODE
@@ -60,12 +60,12 @@ Label : CODE
               'J'
         Label : CASE
           instanceof
-          Label : VARIABLE
-            $d
           Label : CLASS
             \
             Label : SUBNAME
               I
+          Label : VARIABLE
+            $d
       Label : ELEMENT
         case
         Label : CODE
@@ -76,12 +76,12 @@ Label : CODE
               'H'
         Label : CASE
           instanceof
-          Label : VARIABLE
-            $c
           Label : CLASS
             \
             Label : SUBNAME
               G
+          Label : VARIABLE
+            $c
       Label : ELEMENT
         case
         Label : CODE
@@ -92,12 +92,12 @@ Label : CODE
               'F'
         Label : CASE
           instanceof
-          Label : VARIABLE
-            $b
           Label : CLASS
             \
             Label : SUBNAME
               E
+          Label : VARIABLE
+            $b
       Label : ELEMENT
         case
         Label : CODE
@@ -108,9 +108,9 @@ Label : CODE
               'D'
         Label : CASE
           instanceof
-          Label : VARIABLE
-            $a
           Label : CLASS
             \
             Label : SUBNAME
               C
+          Label : VARIABLE
+            $a

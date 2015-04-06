@@ -4,13 +4,13 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      clone
-      Label : CLONE
-        $x
-    Label : VALUE
-      $y
     Label : BLOCK
       {
       Label : ELEMENT
         void
+    Label : VALUE
+      $y
+    Label : SOURCE
+      clone
+      Label : CLONE
+        $x

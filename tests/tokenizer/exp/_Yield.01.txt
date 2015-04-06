@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $number
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -14,6 +12,8 @@ Label : CODE
           void
           Label : ARGUMENT
             $number
+    Label : VALUE
+      $number
     Label : SOURCE
       generateRange
       Label : ARGUMENTS
@@ -42,12 +42,6 @@ Label : CODE
       ;
       Label : ELEMENT
         for
-        Label : FINAL
-          <
-          Label : RIGHT
-            $end
-          Label : LEFT
-            $i
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -80,6 +74,12 @@ Label : CODE
                   $i
                 Label : INDEX
                   1
+        Label : FINAL
+          <
+          Label : RIGHT
+            $end
+          Label : LEFT
+            $i
         Label : INIT
           =
           Label : RIGHT
@@ -112,18 +112,18 @@ Label : CODE
       ;
       Label : ELEMENT
         for
-        Label : FINAL
-          <
-          Label : RIGHT
-            $end
-          Label : LEFT
-            $i
         Label : BLOCK
           ;
           Label : ELEMENT
             yield
             Label : YIELD
               $i
+        Label : FINAL
+          <
+          Label : RIGHT
+            $end
+          Label : LEFT
+            $i
         Label : INIT
           =
           Label : RIGHT

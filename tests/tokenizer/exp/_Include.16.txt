@@ -1,14 +1,16 @@
 <?php
 
 Label : CODE
-  require
-  Label : ARGUMENTS
-    void
-    Label : ARGUMENT
-      fct_lien_page_custom
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          "abs"
-        Label : ARGUMENT
-          "fonctions/sysout_agent.php"
+  ;
+  Label : ELEMENT
+    require
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        fct_lien_page_custom
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            "abs"
+          Label : ARGUMENT
+            "fonctions/sysout_agent.php"

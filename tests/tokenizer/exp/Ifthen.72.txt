@@ -5,8 +5,6 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       foreach
-      Label : VALUE
-        $b
       Label : BLOCK
         Block with Foreach
         Label : ELEMENT
@@ -65,6 +63,8 @@ Label : ELEMENT
                           'F'
           Label : ELEMENT
             B
+      Label : VALUE
+        $b
       Label : SOURCE
         $a
 Label : ELEMENT

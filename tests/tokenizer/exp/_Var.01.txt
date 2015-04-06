@@ -1,20 +1,22 @@
 <?php
 
 Label : CODE
-  class
-  Label : NAME
-    a
-  Label : BLOCK
-    {
-    Label : ELEMENT
-      var
-      Label : DEFINE
-        $b
-      Label : VALUE
-        array
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-      Label : VAR
+  ;
+  Label : ELEMENT
+    class
+    Label : NAME
+      a
+    Label : BLOCK
+      {
+      Label : ELEMENT
         var
+        Label : VALUE
+          array
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+        Label : DEFINE
+          $b
+        Label : VAR
+          var

@@ -1,8 +1,10 @@
 <?php
 
 Label : CODE
-  ::
-  Label : PROPERTY
-    $B
-  Label : CLASS
-    static
+  ;
+  Label : ELEMENT
+    ::
+    Label : PROPERTY
+      $B
+    Label : CLASS
+      static

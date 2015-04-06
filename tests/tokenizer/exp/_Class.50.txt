@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
@@ -14,8 +16,6 @@ Label : CODE
           $a
         Label : VAR
           var
-    Label : NAME
-      x
     Label : EXTENDS
       y
     Label : IMPLEMENTS

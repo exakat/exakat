@@ -3,12 +3,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
     Label : BLOCK
       Block with Foreach
       Label : ELEMENT
@@ -77,6 +71,12 @@ Label : CODE
                     $d
         Label : ELEMENT
           B
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
     Label : SOURCE
       [
       Label : VARIABLE

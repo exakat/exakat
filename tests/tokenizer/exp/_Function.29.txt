@@ -4,31 +4,31 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         Typehint
+        Label : CLASS
+          StdClass
         Label : VARIABLE
           =
           Label : RIGHT
             null
           Label : LEFT
             $b
-        Label : CLASS
-          StdClass
       Label : ARGUMENT
         Typehint
+        Label : CLASS
+          StdClass
         Label : VARIABLE
           =
           Label : RIGHT
             null
           Label : LEFT
             $x
-        Label : CLASS
-          StdClass
     Label : NAME
       a
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void

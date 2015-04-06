@@ -21,10 +21,10 @@ Label : CODE
                   [
                   Label : VARIABLE
                     ::
-                    Label : PROPERTY
-                      $b
                     Label : CLASS
                       a
+                    Label : PROPERTY
+                      $b
                   Label : INDEX
                     $c
                 Label : INDEX
@@ -59,10 +59,10 @@ Label : CODE
                   [
                   Label : VARIABLE
                     ::
-                    Label : PROPERTY
-                      $B
                     Label : CLASS
                       A
+                    Label : PROPERTY
+                      $B
                   Label : INDEX
                     $C
                 Label : INDEX

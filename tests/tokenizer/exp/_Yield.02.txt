@@ -14,12 +14,6 @@ Label : CODE
       ;
       Label : ELEMENT
         foreach
-        Label : VALUE
-          =>
-          Label : KEY
-            $k
-          Label : VALUE
-            $v
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -30,6 +24,12 @@ Label : CODE
                 $k
               Label : VALUE
                 $v
+        Label : VALUE
+          =>
+          Label : KEY
+            $k
+          Label : VALUE
+            $v
         Label : SOURCE
           $y
       Label : ELEMENT
@@ -54,12 +54,6 @@ Label : CODE
           $y
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $k
-      Label : VALUE
-        $v
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -78,6 +72,12 @@ Label : CODE
                 $v
               Label : CONCAT
                 \n
+    Label : VALUE
+      =>
+      Label : KEY
+        $k
+      Label : VALUE
+        $v
     Label : SOURCE
       x
       Label : ARGUMENTS

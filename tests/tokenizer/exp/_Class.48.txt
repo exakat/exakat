@@ -4,47 +4,47 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
         static
-        Label : VALUE
-          Void
         Label : STATIC
           static
-        Label : DEFINE
-          $a
         Label : PUBLIC
           public
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $a
       Label : ELEMENT
         function
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
         Label : NAME
           c
-        Label : PUBLIC
-          public
-      Label : ELEMENT
-        function
         Label : BLOCK
           {
           Label : ELEMENT
             void
+        Label : PUBLIC
+          public
+      Label : ELEMENT
+        function
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
         Label : NAME
           b
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
         Label : STATIC
           static
         Label : PUBLIC
           public
-    Label : NAME
-      x

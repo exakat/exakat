@@ -29,6 +29,8 @@ Label : CODE
           void
           Label : ARGUMENT
             ::
+            Label : CLASS
+              D
             Label : METHOD
               E
               Label : ARGUMENTS
@@ -49,12 +51,12 @@ Label : CODE
                             I
                     Label : LEFT
                       instanceof
-                      Label : VARIABLE
-                        $d
                       Label : CLASS
                         \
                         Label : SUBNAME
                           H
+                      Label : VARIABLE
+                        $d
                   Label : THEN
                     ->
                     Label : OBJECT
@@ -85,5 +87,3 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
-            Label : CLASS
-              D

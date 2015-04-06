@@ -1,16 +1,28 @@
 <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
-    function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
+Label : NEXT
+  function
+  Label : NEXT
+    x
+    Label : NEXT
+      (
+      Label : NEXT
         void
-    Label : NAME
-      x
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        void
+        Label : NEXT
+          )
+          Label : NEXT
+            {
+            Label : NEXT
+              ;
+              Label : NEXT
+                }
+                Label : NEXT
+                  ?>
+                  Label : NEXT
+                    /**/
+                    Label : NEXT
+                      /* * */
+              Label : ELEMENT
+                void
+        Label : ARGUMENT
+          void

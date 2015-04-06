@@ -5,10 +5,6 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       foreach
-      Label : SOURCE
-        $a
-      Label : VALUE
-        $b
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -26,6 +22,8 @@ Label : ELEMENT
         Label : ELEMENT
           L
         Label : ELEMENT
+          N
+        Label : ELEMENT
           echo
           Label : ARGUMENTS
             void
@@ -35,8 +33,6 @@ Label : ELEMENT
                 $i
               Label : INDEX
                 'N'
-        Label : ELEMENT
-          N
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -89,5 +85,9 @@ Label : ELEMENT
                   'J'
         Label : ELEMENT
           B
+      Label : VALUE
+        $b
+      Label : SOURCE
+        $a
 Label : ELEMENT
   A

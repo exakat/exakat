@@ -54,6 +54,20 @@ Label : CODE
           ;
           Label : ELEMENT
             while
+            Label : BLOCK
+              Block with While
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  [
+                  Label : VARIABLE
+                    $g
+                  Label : INDEX
+                    T
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $h
             Label : CONDITION
               (
               Label : CODE
@@ -70,20 +84,6 @@ Label : CODE
                         $c
                 Label : LEFT
                   $g
-            Label : BLOCK
-              Block with While
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  [
-                  Label : VARIABLE
-                    $g
-                  Label : INDEX
-                    T
-                Label : LEFT
-                  [
-                  Label : VARIABLE
-                    $h
         Label : ELSE
           Block with else
           Label : ELEMENT
@@ -202,6 +202,20 @@ Label : CODE
               ;
               Label : ELEMENT
                 while
+                Label : BLOCK
+                  Block with While
+                  Label : ELEMENT
+                    =
+                    Label : RIGHT
+                      [
+                      Label : VARIABLE
+                        $g
+                      Label : INDEX
+                        T
+                    Label : LEFT
+                      [
+                      Label : VARIABLE
+                        $h
                 Label : CONDITION
                   (
                   Label : CODE
@@ -218,20 +232,6 @@ Label : CODE
                             $c
                     Label : LEFT
                       $g
-                Label : BLOCK
-                  Block with While
-                  Label : ELEMENT
-                    =
-                    Label : RIGHT
-                      [
-                      Label : VARIABLE
-                        $g
-                      Label : INDEX
-                        T
-                    Label : LEFT
-                      [
-                      Label : VARIABLE
-                        $h
             Label : ELSE
               Block with else
               Label : ELEMENT

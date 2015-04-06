@@ -123,63 +123,7 @@ Label : CODE
           Label : ARGUMENT
             ::
             Label : CLASS
-              path
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              a4
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
               a2
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              a3
-            Label : METHOD
-              a
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-      Label : ELEMENT
-        print
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            ::
-            Label : CLASS
-              one_identifier3
             Label : METHOD
               a
               Label : ARGUMENTS
@@ -207,7 +151,63 @@ Label : CODE
           Label : ARGUMENT
             ::
             Label : CLASS
+              a4
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              a3
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
               a1
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              one_identifier3
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+      Label : ELEMENT
+        print
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              path
             Label : METHOD
               a
               Label : ARGUMENTS
@@ -222,6 +222,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
+        Label : NAME
+          path2
         Label : BLOCK
           {
           Label : ELEMENT
@@ -230,18 +232,16 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+            Label : NAME
+              a
             Label : BLOCK
               {
               Label : ELEMENT
                 void
-            Label : NAME
-              a
             Label : STATIC
               static
             Label : PUBLIC
               public
-        Label : NAME
-          path2
     Label : NAMESPACE
       \
       Label : SUBNAME
@@ -254,6 +254,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
+        Label : NAME
+          path
         Label : BLOCK
           {
           Label : ELEMENT
@@ -262,18 +264,16 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+            Label : NAME
+              a
             Label : BLOCK
               {
               Label : ELEMENT
                 void
-            Label : NAME
-              a
             Label : STATIC
               static
             Label : PUBLIC
               public
-        Label : NAME
-          path
     Label : NAMESPACE
       complex
   Label : ELEMENT
@@ -282,28 +282,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            function
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
-            Label : BLOCK
-              {
-              Label : ELEMENT
-                void
-            Label : NAME
-              a
-            Label : STATIC
-              static
-            Label : PUBLIC
-              public
         Label : NAME
           one_identifier
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -312,20 +292,20 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+            Label : NAME
+              a
             Label : BLOCK
               {
               Label : ELEMENT
                 void
-            Label : NAME
-              a
             Label : STATIC
               static
             Label : PUBLIC
               public
+      Label : ELEMENT
+        class
         Label : NAME
           absolute_path
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -334,20 +314,20 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+            Label : NAME
+              a
             Label : BLOCK
               {
               Label : ELEMENT
                 void
-            Label : NAME
-              a
             Label : STATIC
               static
             Label : PUBLIC
               public
+      Label : ELEMENT
+        class
         Label : NAME
           one_identifier3
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -356,17 +336,37 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
+            Label : NAME
+              a
             Label : BLOCK
               {
               Label : ELEMENT
                 void
-            Label : NAME
-              a
             Label : STATIC
               static
             Label : PUBLIC
               public
+      Label : ELEMENT
+        class
         Label : NAME
           a1
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            function
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+            Label : NAME
+              a
+            Label : BLOCK
+              {
+              Label : ELEMENT
+                void
+            Label : STATIC
+              static
+            Label : PUBLIC
+              public
     Label : NAMESPACE
       Global

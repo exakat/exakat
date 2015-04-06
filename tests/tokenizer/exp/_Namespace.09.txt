@@ -14,8 +14,6 @@ Label : CODE
           {
           Label : ELEMENT
             function
-            Label : PUBLIC
-              public
             Label : ARGUMENTS
               void
               Label : ARGUMENT
@@ -32,10 +30,10 @@ Label : CODE
                     $a
                   Label : PROPERTY
                     H
-          Label : ELEMENT
-            function
             Label : PUBLIC
               public
+          Label : ELEMENT
+            function
             Label : ARGUMENTS
               void
               Label : ARGUMENT
@@ -62,6 +60,8 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       void
+            Label : PUBLIC
+              public
       Label : ELEMENT
         use
         Label : USE

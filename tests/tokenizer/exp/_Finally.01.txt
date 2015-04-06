@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
+    Label : NAME
+      doSomething
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -36,32 +42,8 @@ Label : CODE
                   $resource
         Label : CATCH
           catch
-          Label : CODE
-            ;
-            Label : ELEMENT
-              throw
-              Label : THROW
-                $e
-            Label : ELEMENT
-              log
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $e
-                  Label : METHOD
-                    getMessage
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        void
-          Label : VARIABLE
-            $e
           Label : CLASS
             Exception5
-        Label : CATCH
-          catch
           Label : CODE
             ;
             Label : ELEMENT
@@ -84,10 +66,10 @@ Label : CODE
                         void
           Label : VARIABLE
             $e
+        Label : CATCH
+          catch
           Label : CLASS
             Exception4
-        Label : CATCH
-          catch
           Label : CODE
             ;
             Label : ELEMENT
@@ -110,10 +92,10 @@ Label : CODE
                         void
           Label : VARIABLE
             $e
+        Label : CATCH
+          catch
           Label : CLASS
             Exception3
-        Label : CATCH
-          catch
           Label : CODE
             ;
             Label : ELEMENT
@@ -136,10 +118,10 @@ Label : CODE
                         void
           Label : VARIABLE
             $e
+        Label : CATCH
+          catch
           Label : CLASS
             Exception2
-        Label : CATCH
-          catch
           Label : CODE
             ;
             Label : ELEMENT
@@ -162,8 +144,32 @@ Label : CODE
                         void
           Label : VARIABLE
             $e
+        Label : CATCH
+          catch
           Label : CLASS
             Exception
+          Label : CODE
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                $e
+            Label : ELEMENT
+              log
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $e
+                  Label : METHOD
+                    getMessage
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void
+          Label : VARIABLE
+            $e
       Label : ELEMENT
         =
         Label : RIGHT
@@ -174,9 +180,3 @@ Label : CODE
               void
         Label : LEFT
           $resource
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
-    Label : NAME
-      doSomething

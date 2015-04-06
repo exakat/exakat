@@ -4,40 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $x
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        Typehint
-        Label : VARIABLE
-          $d
-        Label : CLASS
-          \
-          Label : SUBNAME
-            D
-          Label : SUBNAME
-            C
-      Label : ARGUMENT
-        Typehint
-        Label : VARIABLE
-          =
-          Label : RIGHT
-            null
-          Label : LEFT
-            $c
-        Label : CLASS
-          A
-      Label : ARGUMENT
-        $b
     Label : NAME
       a2
-  Label : ELEMENT
-    function
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -48,27 +16,59 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         Typehint
-        Label : VARIABLE
-          $d
         Label : CLASS
           \
           Label : SUBNAME
             D
           Label : SUBNAME
             C
+        Label : VARIABLE
+          $d
       Label : ARGUMENT
         Typehint
+        Label : CLASS
+          A
         Label : VARIABLE
           =
           Label : RIGHT
             null
           Label : LEFT
             $c
+      Label : ARGUMENT
+        $b
+  Label : ELEMENT
+    function
+    Label : NAME
+      a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        Typehint
+        Label : CLASS
+          \
+          Label : SUBNAME
+            D
+          Label : SUBNAME
+            C
+        Label : VARIABLE
+          $d
+      Label : ARGUMENT
+        Typehint
         Label : CLASS
           \
           Label : SUBNAME
             A
+        Label : VARIABLE
+          =
+          Label : RIGHT
+            null
+          Label : LEFT
+            $c
       Label : ARGUMENT
         $b
-    Label : NAME
-      a

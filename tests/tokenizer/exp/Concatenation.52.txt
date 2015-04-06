@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -72,8 +66,6 @@ Label : CODE
               {
               Label : ELEMENT
                 foreach
-                Label : VALUE
-                  $g
                 Label : BLOCK
                   ;
                   Label : ELEMENT
@@ -110,6 +102,8 @@ Label : CODE
                               F
                             Label : CONCAT
                               $g
+                Label : VALUE
+                  $g
                 Label : SOURCE
                   (array)
                   Label : CAST
@@ -132,6 +126,12 @@ Label : CODE
                     'E'
             Label : LEFT
               $e
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
     Label : SOURCE
       ::
       Label : CLASS

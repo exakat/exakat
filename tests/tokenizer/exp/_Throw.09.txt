@@ -18,8 +18,6 @@ Label : CODE
               void
     Label : CATCH
       catch
-      Label : VARIABLE
-        $b
       Label : CLASS
         C
       Label : CODE
@@ -42,3 +40,5 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     void
+      Label : VARIABLE
+        $b

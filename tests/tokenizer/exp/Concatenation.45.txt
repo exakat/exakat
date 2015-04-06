@@ -4,12 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -44,6 +38,12 @@ Label : CODE
                  
               Label : CONCAT
                 $h
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
     Label : SOURCE
       a
       Label : ARGUMENTS

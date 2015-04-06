@@ -58,6 +58,10 @@ Label : CODE
           Hello
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
           sayExclamationMark
         Label : BLOCK
@@ -70,10 +74,6 @@ Label : CODE
                 '!'
         Label : PUBLIC
           public
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
   Label : ELEMENT
     trait
     Label : NAME
@@ -82,6 +82,10 @@ Label : CODE
       {
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
           sayWorld
         Label : BLOCK
@@ -94,10 +98,6 @@ Label : CODE
                 'World'
         Label : PUBLIC
           public
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
   Label : ELEMENT
     trait
     Label : NAME
@@ -106,6 +106,10 @@ Label : CODE
       {
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
           sayHello
         Label : BLOCK
@@ -118,7 +122,3 @@ Label : CODE
                 'Hello '
         Label : PUBLIC
           public
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void

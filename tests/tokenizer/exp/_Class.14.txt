@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
@@ -16,9 +18,7 @@ Label : CODE
           var
       Label : ELEMENT
         const
-        Label : VALUE
-          2
         Label : NAME
           b
-    Label : NAME
-      x
+        Label : VALUE
+          2

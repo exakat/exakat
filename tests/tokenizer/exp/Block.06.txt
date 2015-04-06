@@ -12,10 +12,10 @@ Label : CODE
           {
           Label : VARIABLE
             ::
-            Label : PROPERTY
-              $e
             Label : CLASS
               C
+            Label : PROPERTY
+              $e
           Label : INDEX
             ++
             Label : POSTPLUSPLUS

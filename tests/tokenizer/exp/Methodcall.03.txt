@@ -8,9 +8,9 @@ Label : CODE
       $c
     Label : METHOD
       $e
+      Label : NAME
+        $e
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           void
-      Label : NAME
-        $e

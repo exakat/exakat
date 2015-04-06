@@ -15,13 +15,13 @@ Label : CODE
       {
       Label : ELEMENT
         use
-        Label : USE
-          C
         Label : BLOCK
           ;
           Label : ELEMENT
             as
-            Label : AS
-              E
             Label : SUBNAME
               D
+            Label : AS
+              E
+        Label : USE
+          C

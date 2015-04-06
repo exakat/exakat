@@ -4,47 +4,47 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         Typehint
+        Label : CLASS
+          CLASSE
         Label : VARIABLE
           $f
-        Label : CLASS
-          CLASSE
       Label : ARGUMENT
         Typehint
+        Label : CLASS
+          CLASSE
         Label : VARIABLE
           $e
-        Label : CLASS
-          CLASSE
       Label : ARGUMENT
         Typehint
+        Label : CLASS
+          CLASSE
         Label : VARIABLE
           $d
-        Label : CLASS
-          CLASSE
       Label : ARGUMENT
         Typehint
+        Label : CLASS
+          CLASSE
         Label : VARIABLE
           $c
-        Label : CLASS
-          CLASSE
       Label : ARGUMENT
         Typehint
+        Label : CLASS
+          CLASSE
         Label : VARIABLE
           $b
-        Label : CLASS
-          CLASSE
       Label : ARGUMENT
         Typehint
-        Label : VARIABLE
-          $a
         Label : CLASS
           CLASSE
+        Label : VARIABLE
+          $a
     Label : NAME
       b
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void

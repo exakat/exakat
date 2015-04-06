@@ -14,10 +14,10 @@ Label : CODE
             G
           Label : LEFT
             instanceof
-            Label : VARIABLE
-              $c
             Label : CLASS
               F
+            Label : VARIABLE
+              $c
         Label : LEFT
           &&
           Label : RIGHT
@@ -26,20 +26,20 @@ Label : CODE
               E
             Label : LEFT
               instanceof
-              Label : VARIABLE
-                $b
               Label : CLASS
                 D
+              Label : VARIABLE
+                $b
           Label : LEFT
             ==
             Label : RIGHT
               C
             Label : LEFT
               instanceof
-              Label : VARIABLE
-                $a
               Label : CLASS
                 B
+              Label : VARIABLE
+                $a
     Label : THEN
       {
       Label : ELEMENT

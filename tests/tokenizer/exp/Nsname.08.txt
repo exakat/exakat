@@ -6,10 +6,6 @@ Label : CODE
     new
     Label : NEW
       \
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          void
       Label : SUBNAME
         d
       Label : SUBNAME
@@ -18,3 +14,7 @@ Label : CODE
         b
       Label : SUBNAME
         a
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          void

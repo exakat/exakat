@@ -8,6 +8,8 @@ Label : CODE
       ;
       Label : ELEMENT
         class
+        Label : NAME
+          F
         Label : BLOCK
           {
           Label : ELEMENT
@@ -42,8 +44,6 @@ Label : CODE
                 I
               Label : SUBNAME
                 H
-        Label : NAME
-          F
         Label : EXTENDS
           G
       Label : ELEMENT

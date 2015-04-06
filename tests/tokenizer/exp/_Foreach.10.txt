@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        void
+    Label : VALUE
+      $e
     Label : SOURCE
       ?
       Label : CONDITION
@@ -22,9 +28,3 @@ Label : CODE
             $d
           Label : ARGUMENT
             'd'
-    Label : VALUE
-      $e
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void

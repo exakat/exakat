@@ -9,6 +9,12 @@ Label : CODE
         'f'
       Label : CONCAT
         ::
+        Label : METHOD
+          d
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'e'
         Label : CLASS
           \
           Label : SUBNAME
@@ -17,11 +23,5 @@ Label : CODE
             B
           Label : SUBNAME
             A
-        Label : METHOD
-          d
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'e'
     Label : LEFT
       $a

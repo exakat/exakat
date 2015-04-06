@@ -14,6 +14,8 @@ Label : CODE
             ||
             Label : RIGHT
               instanceof
+              Label : CLASS
+                ArrayAccess
               Label : VARIABLE
                 ->
                 Label : OBJECT
@@ -28,8 +30,6 @@ Label : CODE
                     $g
                 Label : PROPERTY
                   h
-              Label : CLASS
-                ArrayAccess
             Label : LEFT
               is_array
               Label : ARGUMENTS

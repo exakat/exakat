@@ -102,8 +102,6 @@ Label : CODE
                 M
     Label : CATCH
       catch
-      Label : VARIABLE
-        $y
       Label : CLASS
         AF
       Label : CODE
@@ -118,10 +116,10 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'AH'
+      Label : VARIABLE
+        $y
     Label : CATCH
       catch
-      Label : VARIABLE
-        $w
       Label : CLASS
         AC
       Label : CODE
@@ -144,10 +142,10 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
+      Label : VARIABLE
+        $w
     Label : CATCH
       catch
-      Label : VARIABLE
-        $u
       Label : CLASS
         Z
       Label : CODE
@@ -170,10 +168,10 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         void
+      Label : VARIABLE
+        $u
     Label : CATCH
       catch
-      Label : VARIABLE
-        $s
       Label : CLASS
         U
       Label : CODE
@@ -200,10 +198,10 @@ Label : CODE
                       'Y'
                   Label : CONCAT
                     'W'
+      Label : VARIABLE
+        $s
     Label : CATCH
       catch
-      Label : VARIABLE
-        $r
       Label : CLASS
         R
       Label : CODE
@@ -218,6 +216,8 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   'T'
+      Label : VARIABLE
+        $r
   Label : ELEMENT
     if
     Label : CONDITION

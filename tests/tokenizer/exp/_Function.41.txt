@@ -6,20 +6,14 @@ Label : CODE
     =
     Label : RIGHT
       function
-      Label : BLOCK
-        ;
-        Label : ELEMENT
-          ++
-          Label : POSTPLUSPLUS
-            $a
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
           Typehint
-          Label : VARIABLE
-            $e
           Label : CLASS
             Stdclass
+          Label : VARIABLE
+            $e
         Label : ARGUMENT
           $d
         Label : ARGUMENT
@@ -28,5 +22,11 @@ Label : CODE
           $b
       Label : NAME
         
+      Label : BLOCK
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $a
     Label : LEFT
       $x

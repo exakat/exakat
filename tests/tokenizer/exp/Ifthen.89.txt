@@ -4,12 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $b
-      Label : ARGUMENT
-        $a
+    Label : NAME
+      C
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -22,8 +18,12 @@ Label : CODE
               "\n"
             Label : CONCAT
               __METHOD__
-    Label : NAME
-      C
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        $a
   Label : ELEMENT
     if
     Label : CONDITION

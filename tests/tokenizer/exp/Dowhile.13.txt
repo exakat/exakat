@@ -3,12 +3,22 @@ Label : CODE
   ;
   Label : ELEMENT
     do
-    Label : CONDITION
-      $c
     Label : BLOCK
       ;
       Label : ELEMENT
         while
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            ->
+            Label : OBJECT
+              $b
+            Label : METHOD
+              E
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  1
         Label : CONDITION
           ===
           Label : RIGHT
@@ -29,15 +39,5 @@ Label : CODE
                       void
               Label : ARGUMENT
                 'C'
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            ->
-            Label : OBJECT
-              $b
-            Label : METHOD
-              E
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  1
+    Label : CONDITION
+      $c

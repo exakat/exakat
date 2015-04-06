@@ -9,20 +9,20 @@ Label : CODE
       {
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
           __clone
         Label : BLOCK
           {
           Label : ELEMENT
             void
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : FINAL
-          final
         Label : PROTECTED
           protected
+        Label : FINAL
+          final
   Label : ELEMENT
     class
     Label : NAME
@@ -31,6 +31,10 @@ Label : CODE
       {
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
           __clone
         Label : BLOCK
@@ -39,10 +43,6 @@ Label : CODE
             void
         Label : PUBLIC
           public
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
         Label : FINAL
           final
   Label : ELEMENT
@@ -53,17 +53,17 @@ Label : CODE
       {
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
         Label : NAME
           __clone
         Label : BLOCK
           {
           Label : ELEMENT
             void
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : FINAL
-          final
         Label : PRIVATE
           private
+        Label : FINAL
+          final

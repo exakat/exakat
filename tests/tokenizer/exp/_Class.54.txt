@@ -4,14 +4,16 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
         var
-        Label : DEFINE
-          $a
         Label : VALUE
           Void
+        Label : DEFINE
+          $a
         Label : VAR
           var
       Label : ELEMENT
@@ -19,19 +21,19 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            void
-        Label : BLOCK
-          {
-          Label : ELEMENT
             void
         Label : NAME
           b
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
       Label : ELEMENT
         var
-        Label : DEFINE
-          $c
         Label : VALUE
           Void
+        Label : DEFINE
+          $c
         Label : VAR
           var
       Label : ELEMENT
@@ -40,22 +42,20 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+        Label : NAME
+          c
         Label : BLOCK
           {
           Label : ELEMENT
             void
-        Label : NAME
-          c
       Label : ELEMENT
         var
-        Label : DEFINE
-          $d
         Label : VALUE
           Void
+        Label : DEFINE
+          $d
         Label : VAR
           var
-    Label : NAME
-      x
     Label : EXTENDS
       y
     Label : IMPLEMENTS

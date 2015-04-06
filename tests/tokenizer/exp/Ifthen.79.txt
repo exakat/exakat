@@ -6,25 +6,6 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
-        4
-    Label : THEN
-      ;
-      Label : ELEMENT
-        A
-
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $c
-      Label : ELEMENT
-        return
-        Label : RETURN
-          void
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
         3
     Label : THEN
       ;
@@ -35,6 +16,25 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $b
+      Label : ELEMENT
+        return
+        Label : RETURN
+          void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        4
+    Label : THEN
+      ;
+      Label : ELEMENT
+        A
+
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $c
       Label : ELEMENT
         return
         Label : RETURN

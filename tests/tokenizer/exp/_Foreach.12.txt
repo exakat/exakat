@@ -4,13 +4,13 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      @
-      Label : AT
-        $array
-    Label : VALUE
-      $e
     Label : BLOCK
       {
       Label : ELEMENT
         void
+    Label : VALUE
+      $e
+    Label : SOURCE
+      @
+      Label : AT
+        $array

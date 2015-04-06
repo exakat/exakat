@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      B
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -32,21 +34,19 @@ Label : CODE
       Arguments
       Label : ARGUMENT
         Typehint
-        Label : VARIABLE
-          $c
         Label : CLASS
           callable
+        Label : VARIABLE
+          $c
       Label : ARGUMENT
         Typehint
-        Label : VARIABLE
-          $b
         Label : CLASS
           D
+        Label : VARIABLE
+          $b
       Label : ARGUMENT
         Typehint
-        Label : VARIABLE
-          $a
         Label : CLASS
           C
-    Label : NAME
-      B
+        Label : VARIABLE
+          $a

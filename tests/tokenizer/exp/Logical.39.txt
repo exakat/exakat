@@ -29,16 +29,6 @@ Label : CODE
     Label : LEFT
       G
   Label : ELEMENT
-    &&
-    Label : RIGHT
-      D
-      Label : ARGUMENTS
-        void
-        Label : ARGUMENT
-          'E'
-    Label : LEFT
-      C
-  Label : ELEMENT
     while
     Label : BLOCK
       Block with While
@@ -64,6 +54,16 @@ Label : CODE
           1
         Label : LEFT
           $e
+  Label : ELEMENT
+    &&
+    Label : RIGHT
+      D
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          'E'
+    Label : LEFT
+      C
   Label : ELEMENT
     =
     Label : RIGHT

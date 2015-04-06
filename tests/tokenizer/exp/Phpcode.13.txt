@@ -20,7 +20,7 @@ Label : ELEMENT
                 Label : ARGUMENT
                   void
       Label : THEN
-        Block with if/elseif
+        ;
         Label : ELEMENT
           echo
           Label : ARGUMENTS

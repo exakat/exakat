@@ -12,12 +12,12 @@ Label : CODE
           (array)
           Label : CAST
             $c
+            Label : NAME
+              $c
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 void
-            Label : NAME
-              $c
         Label : ARGUMENT
           $b
     Label : LEFT

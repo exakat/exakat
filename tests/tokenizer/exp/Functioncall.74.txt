@@ -14,7 +14,7 @@ Label : CODE
             Label : ARGUMENT
               'A'
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         exit
         Label : ARGUMENTS

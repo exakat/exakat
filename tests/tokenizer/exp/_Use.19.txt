@@ -63,6 +63,34 @@ Label : CODE
           Label : SUBNAME
             Name
       Label : ELEMENT
+        use
+        Label : CONST
+          \
+          Label : SUBNAME
+            FOO3
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+          Label : AS
+            a6
+        Label : CONST
+          as
+          Label : SUBNAME
+            Name
+          Label : AS
+            a5
+        Label : CONST
+          \
+          Label : SUBNAME
+            FOO2
+          Label : SUBNAME
+            Space
+          Label : SUBNAME
+            Name
+          Label : AS
+            a4
+      Label : ELEMENT
         f2
         Label : ARGUMENTS
           void
@@ -112,34 +140,6 @@ Label : CODE
             Name
           Label : AS
             a2
-      Label : ELEMENT
-        use
-        Label : CONST
-          \
-          Label : SUBNAME
-            FOO3
-          Label : SUBNAME
-            Space
-          Label : SUBNAME
-            Name
-          Label : AS
-            a6
-        Label : CONST
-          as
-          Label : SUBNAME
-            Name
-          Label : AS
-            a5
-        Label : CONST
-          \
-          Label : SUBNAME
-            FOO2
-          Label : SUBNAME
-            Space
-          Label : SUBNAME
-            Name
-          Label : AS
-            a4
     Label : NAMESPACE
       Global
   Label : ELEMENT
@@ -158,6 +158,8 @@ Label : CODE
           void
           Label : ARGUMENT
             void
+        Label : NAME
+          f
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -170,8 +172,6 @@ Label : CODE
                   "\n"
                 Label : CONCAT
                   __FUNCTION__
-        Label : NAME
-          f
     Label : NAMESPACE
       \
       Label : SUBNAME

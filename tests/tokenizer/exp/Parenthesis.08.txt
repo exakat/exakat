@@ -8,8 +8,6 @@ Label : CODE
       (
       Label : CODE
         ::
-        Label : CLASS
-          x
         Label : METHOD
           b
           Label : ARGUMENTS
@@ -18,6 +16,8 @@ Label : CODE
               3
             Label : ARGUMENT
               'c'
+        Label : CLASS
+          x
     Label : THEN
       ;
       Label : ELEMENT

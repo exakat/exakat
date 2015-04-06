@@ -80,106 +80,106 @@ Label : CODE
             void
         Label : CATCH
           catch
-          Label : VARIABLE
-            $e
-          Label : CODE
-            {
-            Label : ELEMENT
-              void
           Label : CLASS
             a4
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
           Label : CODE
             {
             Label : ELEMENT
               void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
           Label : CLASS
             a3
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
           Label : CODE
             {
             Label : ELEMENT
               void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
           Label : CLASS
             a2
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
           Label : CODE
             {
             Label : ELEMENT
               void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
           Label : CLASS
             one_identifier3
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
           Label : CODE
             {
             Label : ELEMENT
               void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
           Label : CLASS
             \
             Label : SUBNAME
               a1
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
           Label : CODE
             {
             Label : ELEMENT
               void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
           Label : CLASS
             a1
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
           Label : CODE
             {
             Label : ELEMENT
               void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
           Label : CLASS
             path2
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
           Label : CODE
             {
             Label : ELEMENT
               void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
           Label : CLASS
             path
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
           Label : CODE
             {
             Label : ELEMENT
               void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
           Label : CLASS
             absolute_path
-        Label : CATCH
-          catch
-          Label : VARIABLE
-            $e
           Label : CODE
             {
             Label : ELEMENT
               void
+          Label : VARIABLE
+            $e
+        Label : CATCH
+          catch
           Label : CLASS
             one_identifier
+          Label : CODE
+            {
+            Label : ELEMENT
+              void
+          Label : VARIABLE
+            $e
     Label : NAMESPACE
       x
   Label : ELEMENT
@@ -188,6 +188,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
+        Label : NAME
+          path2
         Label : BLOCK
           {
           Label : ELEMENT
@@ -196,8 +198,6 @@ Label : CODE
               a
             Label : VALUE
               2
-        Label : NAME
-          path2
     Label : NAMESPACE
       \
       Label : SUBNAME
@@ -210,6 +210,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
+        Label : NAME
+          path
         Label : BLOCK
           {
           Label : ELEMENT
@@ -218,8 +220,6 @@ Label : CODE
               a
             Label : VALUE
               2
-        Label : NAME
-          path
     Label : NAMESPACE
       complex
   Label : ELEMENT
@@ -228,18 +228,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
         Label : NAME
           one_identifier
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -248,10 +238,10 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           absolute_path
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -260,10 +250,10 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           one_identifier3
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -272,7 +262,17 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           a1
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
     Label : NAMESPACE
       Global

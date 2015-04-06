@@ -107,15 +107,15 @@ Label : CODE
       Label : ELEMENT
         new
         Label : NEW
-          a2
-      Label : ELEMENT
-        new
-        Label : NEW
           a4
       Label : ELEMENT
         new
         Label : NEW
           one_identifier3
+      Label : ELEMENT
+        new
+        Label : NEW
+          a2
     Label : NAMESPACE
       x
   Label : ELEMENT
@@ -124,6 +124,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
+        Label : NAME
+          path2
         Label : BLOCK
           {
           Label : ELEMENT
@@ -132,8 +134,6 @@ Label : CODE
               a
             Label : VALUE
               2
-        Label : NAME
-          path2
     Label : NAMESPACE
       \
       Label : SUBNAME
@@ -146,6 +146,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
+        Label : NAME
+          path
         Label : BLOCK
           {
           Label : ELEMENT
@@ -154,8 +156,6 @@ Label : CODE
               a
             Label : VALUE
               2
-        Label : NAME
-          path
     Label : NAMESPACE
       complex
   Label : ELEMENT
@@ -164,18 +164,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
         Label : NAME
           one_identifier
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -184,10 +174,10 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           absolute_path
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -196,10 +186,10 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           one_identifier3
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -208,7 +198,17 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           a1
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
     Label : NAMESPACE
       Global

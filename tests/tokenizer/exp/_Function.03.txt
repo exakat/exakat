@@ -4,15 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          1
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         $a
     Label : NAME
       x
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          1

@@ -17,12 +17,12 @@ Label : CODE
           $e
       Label : ELEMENT
         [
+        Label : NAME
+          [
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             34
-        Label : NAME
-          [
         Label : VARIABLE
           ->
           Label : OBJECT

@@ -1,62 +1,64 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $a
-  Label : CASES
-    Sequence Case Default
-    Label : ELEMENT
-      case
-      Label : CODE
-        Block with Sequence For Case Without Semicolon
-        Label : ELEMENT
-          exit
-          Label : ARGUMENTS
-            void
-        Label : ELEMENT
-          e
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              round
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  4
-                Label : ARGUMENT
-                  /
-                  Label : RIGHT
-                    3
-                  Label : LEFT
+  ;
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            exit
+            Label : ARGUMENTS
+              void
+          Label : ELEMENT
+            e
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                round
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    4
+                  Label : ARGUMENT
                     /
                     Label : RIGHT
-                      2
+                      3
                     Label : LEFT
-                      [
-                      Label : VARIABLE
-                        $g
-                      Label : INDEX
-                        'h'
-            Label : ARGUMENT
-              'f'
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            (
-            Label : CODE
-              !
-              Label : NOT
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
-                  d
-          Label : THEN
-            ;
-            Label : ELEMENT
-              exit
-              Label : ARGUMENTS
-                void
-      Label : CASE
-        'b'
+                      /
+                      Label : RIGHT
+                        2
+                      Label : LEFT
+                        [
+                        Label : VARIABLE
+                          $g
+                        Label : INDEX
+                          'h'
+              Label : ARGUMENT
+                'f'
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                !
+                Label : NOT
+                  ->
+                  Label : OBJECT
+                    $c
+                  Label : PROPERTY
+                    d
+            Label : THEN
+              ;
+              Label : ELEMENT
+                exit
+                Label : ARGUMENTS
+                  void
+        Label : CASE
+          'b'

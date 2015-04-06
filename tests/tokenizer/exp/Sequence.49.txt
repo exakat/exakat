@@ -23,8 +23,6 @@ Label : ELEMENT
       ->
       Label : OBJECT
         ::
-        Label : CLASS
-          C
         Label : METHOD
           D
           Label : ARGUMENTS
@@ -35,6 +33,8 @@ Label : ELEMENT
                 void
                 Label : ARGUMENT
                   'F'
+        Label : CLASS
+          C
       Label : METHOD
         g
         Label : ARGUMENTS

@@ -4,20 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     do
-    Label : CONDITION
-      !
-      Label : NOT
-        ->
-        Label : OBJECT
-          $f
-        Label : METHOD
-          g
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ++
-              Label : PREPLUSPLUS
-                $h
     Label : BLOCK
       {
       Label : ELEMENT
@@ -36,3 +22,17 @@ Label : CODE
                 $d
         Label : LEFT
           $a
+    Label : CONDITION
+      !
+      Label : NOT
+        ->
+        Label : OBJECT
+          $f
+        Label : METHOD
+          g
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ++
+              Label : PREPLUSPLUS
+                $h

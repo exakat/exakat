@@ -8,18 +8,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            const
-            Label : NAME
-              a
-            Label : VALUE
-              2
         Label : NAME
           one_identifier
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -28,10 +18,10 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           absolute_path
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -40,10 +30,10 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           one_identifier3
-      Label : ELEMENT
-        class
         Label : BLOCK
           {
           Label : ELEMENT
@@ -52,8 +42,18 @@ Label : CODE
               a
             Label : VALUE
               2
+      Label : ELEMENT
+        class
         Label : NAME
           a1
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            const
+            Label : NAME
+              a
+            Label : VALUE
+              2
     Label : NAMESPACE
       Global
   Label : ELEMENT
@@ -62,6 +62,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
+        Label : NAME
+          path
         Label : BLOCK
           {
           Label : ELEMENT
@@ -70,8 +72,6 @@ Label : CODE
               a
             Label : VALUE
               2
-        Label : NAME
-          path
     Label : NAMESPACE
       complex
   Label : ELEMENT
@@ -80,6 +80,8 @@ Label : CODE
       {
       Label : ELEMENT
         class
+        Label : NAME
+          path2
         Label : BLOCK
           {
           Label : ELEMENT
@@ -88,8 +90,6 @@ Label : CODE
               a
             Label : VALUE
               2
-        Label : NAME
-          path2
     Label : NAMESPACE
       \
       Label : SUBNAME
@@ -172,71 +172,71 @@ Label : CODE
           Arguments
           Label : ARGUMENT
             Typehint
-            Label : VARIABLE
-              $a
             Label : CLASS
               a4
-          Label : ARGUMENT
-            Typehint
             Label : VARIABLE
               $a
+          Label : ARGUMENT
+            Typehint
             Label : CLASS
               a3
-          Label : ARGUMENT
-            Typehint
             Label : VARIABLE
               $a
+          Label : ARGUMENT
+            Typehint
             Label : CLASS
               a2
-          Label : ARGUMENT
-            Typehint
             Label : VARIABLE
               $a
+          Label : ARGUMENT
+            Typehint
             Label : CLASS
               one_identifier3
-          Label : ARGUMENT
-            Typehint
             Label : VARIABLE
               $a
+          Label : ARGUMENT
+            Typehint
             Label : CLASS
               \
               Label : SUBNAME
                 a1
-          Label : ARGUMENT
-            Typehint
             Label : VARIABLE
               $a
+          Label : ARGUMENT
+            Typehint
             Label : CLASS
               a1
-          Label : ARGUMENT
-            Typehint
             Label : VARIABLE
               $a
+          Label : ARGUMENT
+            Typehint
             Label : CLASS
               path2
-          Label : ARGUMENT
-            Typehint
             Label : VARIABLE
               $a
+          Label : ARGUMENT
+            Typehint
             Label : CLASS
               path
-          Label : ARGUMENT
-            Typehint
             Label : VARIABLE
               $a
+          Label : ARGUMENT
+            Typehint
             Label : CLASS
               absolute_path
-          Label : ARGUMENT
-            Typehint
             Label : VARIABLE
               $a
+          Label : ARGUMENT
+            Typehint
             Label : CLASS
               one_identifier
+            Label : VARIABLE
+              $a
+        Label : NAME
+          y
         Label : BLOCK
           {
           Label : ELEMENT
             void
-        Label : NAME
-          y
     Label : NAMESPACE
       x

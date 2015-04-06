@@ -1,18 +1,20 @@
 <?php
 
 Label : CODE
-  try
-  Label : CODE
-    {
-    Label : ELEMENT
-      void
-  Label : CATCH
-    catch
+  ;
+  Label : ELEMENT
+    try
     Label : CODE
       {
       Label : ELEMENT
         void
-    Label : VARIABLE
-      $e
-    Label : CLASS
-      Exception
+    Label : CATCH
+      catch
+      Label : CLASS
+        Exception
+      Label : CODE
+        {
+        Label : ELEMENT
+          void
+      Label : VARIABLE
+        $e

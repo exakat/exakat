@@ -1,136 +1,138 @@
 <?php
 
 Label : CODE
-  switch
-  Label : NAME
-    $a
-  Label : CASES
-    Sequence Case Default
-    Label : ELEMENT
-      case
-      Label : CODE
-        Block with Sequence For Case
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $x
-      Label : CASE
-        'e'
-    Label : ELEMENT
-      default
-      Label : CODE
-        Block with Sequence For Default
-        Label : ELEMENT
-          break
-          Label : LEVEL
-            void
-    Label : ELEMENT
-      case
-      Label : CODE
-        Block with Sequence For Case
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            2
-          Label : LEFT
-            $x
-      Label : CASE
-        'f'
-    Label : ELEMENT
-      case
-      Label : CODE
-        ;
-        Label : ELEMENT
-          &&
-          Label : RIGHT
+  ;
+  Label : ELEMENT
+    switch
+    Label : NAME
+      $a
+    Label : CASES
+      Sequence Case Default
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              1
+            Label : LEFT
+              $x
+        Label : CASE
+          'e'
+      Label : ELEMENT
+        default
+        Label : CODE
+          ;
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              2
+            Label : LEFT
+              $x
+        Label : CASE
+          'f'
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
             &&
             Label : RIGHT
               =
               Label : RIGHT
-                'i'
+                'p'
               Label : LEFT
-                $h
+                $o
             Label : LEFT
-              [
-              Label : VARIABLE
+              &&
+              Label : RIGHT
                 [
                 Label : VARIABLE
-                  $e
+                  [
+                  Label : VARIABLE
+                    $l
+                  Label : INDEX
+                    'm'
                 Label : INDEX
-                  'f'
-              Label : INDEX
-                'g'
-          Label : LEFT
-            (
-            Label : CODE
-              ||
-              Label : RIGHT
-                ==
-                Label : RIGHT
-                  'd'
-                Label : LEFT
-                  $c
+                  'n'
               Label : LEFT
                 ==
                 Label : RIGHT
-                  'b'
+                  'k'
                 Label : LEFT
-                  $a
-        Label : ELEMENT
-          &&
-          Label : RIGHT
-            =
-            Label : RIGHT
-              'p'
-            Label : LEFT
-              $o
-          Label : LEFT
+                  $j
+          Label : ELEMENT
+            break
+            Label : LEVEL
+              void
+          Label : ELEMENT
             &&
             Label : RIGHT
-              [
-              Label : VARIABLE
+              &&
+              Label : RIGHT
+                =
+                Label : RIGHT
+                  'i'
+                Label : LEFT
+                  $h
+              Label : LEFT
                 [
                 Label : VARIABLE
-                  $l
+                  [
+                  Label : VARIABLE
+                    $e
+                  Label : INDEX
+                    'f'
                 Label : INDEX
-                  'm'
-              Label : INDEX
-                'n'
+                  'g'
             Label : LEFT
-              ==
-              Label : RIGHT
-                'k'
-              Label : LEFT
-                $j
-        Label : ELEMENT
-          break
-          Label : LEVEL
-            void
-      Label : CASE
-        'd'
-    Label : ELEMENT
-      case
-      Label : CODE
-        Block with Sequence For Case
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            3
-          Label : LEFT
-            $x
-      Label : CASE
-        'c'
-    Label : ELEMENT
-      case
-      Label : CODE
-        Block with Sequence For Case
-        Label : ELEMENT
-          =
-          Label : RIGHT
-            4
-          Label : LEFT
-            $x
-      Label : CASE
-        'b'
+              (
+              Label : CODE
+                ||
+                Label : RIGHT
+                  ==
+                  Label : RIGHT
+                    'd'
+                  Label : LEFT
+                    $c
+                Label : LEFT
+                  ==
+                  Label : RIGHT
+                    'b'
+                  Label : LEFT
+                    $a
+        Label : CASE
+          'd'
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              3
+            Label : LEFT
+              $x
+        Label : CASE
+          'c'
+      Label : ELEMENT
+        case
+        Label : CODE
+          ;
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              4
+            Label : LEFT
+              $x
+        Label : CASE
+          'b'

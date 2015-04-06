@@ -8,7 +8,7 @@ Label : CODE
       void
       Label : ARGUMENT
         instanceof
-        Label : VARIABLE
-          $b
         Label : CLASS
           c
+        Label : VARIABLE
+          $b

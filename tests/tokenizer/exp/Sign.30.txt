@@ -34,11 +34,11 @@ Label : CODE
           d
     Label : LEFT
       ::
-      Label : CLASS
-        a
       Label : METHOD
         b
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
+      Label : CLASS
+        a

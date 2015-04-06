@@ -4,6 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     for
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          g
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $h
+        Label : LEFT
+          $f
     Label : FINAL
       <=
       Label : RIGHT
@@ -20,18 +32,6 @@ Label : CODE
               'c'
       Label : LEFT
         $b
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          g
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $h
-        Label : LEFT
-          $f
     Label : INIT
       =
       Label : RIGHT

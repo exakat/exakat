@@ -6,6 +6,8 @@ Label : CODE
     =
     Label : RIGHT
       $b
+      Label : NAME
+        $b
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
@@ -14,7 +16,5 @@ Label : CODE
           $d
         Label : ARGUMENT
           $c
-      Label : NAME
-        $b
     Label : LEFT
       $a

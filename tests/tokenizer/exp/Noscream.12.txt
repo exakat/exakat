@@ -8,6 +8,8 @@ Label : CODE
       @
       Label : AT
         $b
+        Label : NAME
+          $b
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
@@ -18,8 +20,6 @@ Label : CODE
               'a'
             Label : CONCAT
               $host
-        Label : NAME
-          $b
     Label : LEFT
       ->
       Label : OBJECT

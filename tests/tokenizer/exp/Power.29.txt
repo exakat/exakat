@@ -6,29 +6,15 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
+        " "
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         +
         Label : RIGHT
-          4
-        Label : LEFT
           **
-          Label : RIGHT
-            3
-          Label : LEFT
-            2
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        "\n"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        +
-        Label : RIGHT
-          *
           Label : RIGHT
             4
           Label : LEFT
@@ -40,6 +26,32 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
+        "\n"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        +
+        Label : RIGHT
+          4
+        Label : LEFT
+          **
+          Label : RIGHT
+            3
+          Label : LEFT
+            2
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        "\n"
+  Label : ELEMENT
+    print
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
         +
         Label : RIGHT
           4
@@ -66,21 +78,9 @@ Label : CODE
     Label : ARGUMENTS
       void
       Label : ARGUMENT
-        "\n"
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        " "
-  Label : ELEMENT
-    print
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
         +
         Label : RIGHT
-          **
+          *
           Label : RIGHT
             4
           Label : LEFT

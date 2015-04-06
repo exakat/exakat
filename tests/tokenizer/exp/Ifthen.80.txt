@@ -4,10 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
+    Label : NAME
+      B
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -22,8 +20,6 @@ Label : CODE
               'G'
       Label : ELEMENT
         foreach
-        Label : VALUE
-          $c
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -56,6 +52,8 @@ Label : CODE
                       $f
                     Label : PROPERTY
                       E
+        Label : VALUE
+          $c
         Label : SOURCE
           ->
           Label : OBJECT
@@ -72,5 +70,7 @@ Label : CODE
               void
         Label : LEFT
           $a
-    Label : NAME
-      B
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void

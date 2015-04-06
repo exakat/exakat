@@ -34,10 +34,10 @@ Label : CODE
           continue
           Label : LEVEL
             void
-      Label : VARIABLE
-        $e
       Label : CLASS
         Exception
+      Label : VARIABLE
+        $e
   Label : ELEMENT
     if
     Label : CONDITION

@@ -8,8 +8,6 @@ Label : CODE
       ?
       Label : CONDITION
         instanceof
-        Label : VARIABLE
-          $b
         Label : CLASS
           \
           Label : SUBNAME
@@ -20,6 +18,8 @@ Label : CODE
             C
           Label : SUBNAME
             B
+        Label : VARIABLE
+          $b
       Label : THEN
         ->
         Label : OBJECT

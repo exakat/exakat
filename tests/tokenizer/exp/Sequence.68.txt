@@ -16,8 +16,6 @@ Label : CODE
             'L'
     Label : LEFT
       ::
-      Label : CLASS
-        H
       Label : METHOD
         I
         Label : ARGUMENTS
@@ -32,6 +30,8 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
+      Label : CLASS
+        H
   Label : ELEMENT
     ->
     Label : OBJECT
@@ -46,8 +46,6 @@ Label : CODE
           F
   Label : ELEMENT
     ::
-    Label : CLASS
-      B
     Label : METHOD
       C
       Label : ARGUMENTS
@@ -56,3 +54,5 @@ Label : CODE
           'D'
         Label : ARGUMENT
           $a
+    Label : CLASS
+      B

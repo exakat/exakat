@@ -21,7 +21,7 @@ Label : CODE
                 Label : CONCAT
                   'E'
     Label : THEN
-      Block with if/elseif
+      ;
       Label : ELEMENT
         echo
         Label : ARGUMENTS

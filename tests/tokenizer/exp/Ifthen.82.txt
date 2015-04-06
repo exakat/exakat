@@ -4,44 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     for
-    Label : INIT
-      =
-      Label : RIGHT
-        0
-      Label : LEFT
-        $a
-    Label : FINAL
-      <=
-      Label : RIGHT
-        $c
-      Label : LEFT
-        $b
-    Label : INCREMENT
-      ++
-      Label : POSTPLUSPLUS
-        $d
     Label : BLOCK
       ;
       Label : ELEMENT
         B
       Label : ELEMENT
         for
-        Label : INIT
-          =
-          Label : RIGHT
-            1
-          Label : LEFT
-            $e
-        Label : FINAL
-          <=
-          Label : RIGHT
-            $g
-          Label : LEFT
-            $f
-        Label : INCREMENT
-          ++
-          Label : POSTPLUSPLUS
-            $h
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -62,5 +30,37 @@ Label : CODE
                       2
             Label : LEFT
               $i
+        Label : FINAL
+          <=
+          Label : RIGHT
+            $g
+          Label : LEFT
+            $f
+        Label : INIT
+          =
+          Label : RIGHT
+            1
+          Label : LEFT
+            $e
+        Label : INCREMENT
+          ++
+          Label : POSTPLUSPLUS
+            $h
       Label : ELEMENT
         A
+    Label : FINAL
+      <=
+      Label : RIGHT
+        $c
+      Label : LEFT
+        $b
+    Label : INIT
+      =
+      Label : RIGHT
+        0
+      Label : LEFT
+        $a
+    Label : INCREMENT
+      ++
+      Label : POSTPLUSPLUS
+        $d

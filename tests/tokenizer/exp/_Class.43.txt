@@ -4,12 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
         void
-    Label : NAME
-      x
     Label : IMPLEMENTS
       v
     Label : IMPLEMENTS

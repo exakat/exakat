@@ -16,7 +16,7 @@ Label : CODE
             b
           Label : CONSTANT
             c
-        Label : DEFINE
-          $a
         Label : PROTECTED
           protected
+        Label : DEFINE
+          $a

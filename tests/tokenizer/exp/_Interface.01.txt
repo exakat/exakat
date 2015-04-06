@@ -4,9 +4,9 @@ Label : CODE
   ;
   Label : ELEMENT
     interface
+    Label : NAME
+      a
     Label : BLOCK
       {
       Label : ELEMENT
         void
-    Label : NAME
-      a

@@ -1,35 +1,51 @@
 <?php
 
-Label : CODE
+Label : NEXT
   ;
-  Label : ELEMENT
+  Label : NEXT
     foreach
-    Label : VALUE
-      $c
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        {
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              '3'
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
+    Label : NEXT
+      (
+      Label : NEXT
+        ->
+        Label : NEXT
+          as
+          Label : NEXT
+            $c
+            Label : NEXT
+              )
+              Label : NEXT
+                {
+                Label : NEXT
+                  ;
+                  Label : NEXT
+                    ;
+                    Label : NEXT
+                      }
+                      Label : NEXT
+                        ?>
+                        Label : NEXT
+                          /**/
+                          Label : NEXT
+                            /* * */
+                    Label : ELEMENT
+                      ++
+                      Label : POSTPLUSPLUS
+                        $a
+                  Label : ELEMENT
+                    {
+                    Label : ELEMENT
+                      echo
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          '3'
+        Label : OBJECT
           $a
-    Label : SOURCE
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        b
+        Label : PROPERTY
+          b
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -44,6 +60,8 @@ Label : CODE
         ++
         Label : POSTPLUSPLUS
           $a
+    Label : VALUE
+      $c
     Label : SOURCE
       ->
       Label : OBJECT
@@ -52,8 +70,6 @@ Label : CODE
         b
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -64,6 +80,8 @@ Label : CODE
             void
             Label : ARGUMENT
               '1'
+    Label : VALUE
+      $c
     Label : SOURCE
       ->
       Label : OBJECT

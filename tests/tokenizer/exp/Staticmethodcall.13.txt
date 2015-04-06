@@ -22,12 +22,12 @@ Label : CODE
             F
       Label : ELEMENT
         class
+        Label : NAME
+          D
         Label : BLOCK
           {
           Label : ELEMENT
             void
-        Label : NAME
-          D
         Label : EXTENDS
           \
           Label : SUBNAME

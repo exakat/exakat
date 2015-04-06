@@ -4,16 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : SOURCE
-      $array
-    Label : VALUE
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $b2
-        Label : ARGUMENT
-          $a1
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -34,22 +24,18 @@ Label : CODE
                 $b2
               Label : CONCAT
                 \n
-  Label : ELEMENT
-    foreach
+    Label : VALUE
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $b2
+        Label : ARGUMENT
+          $a1
     Label : SOURCE
       $array
-    Label : VALUE
-      =>
-      Label : VALUE
-        list
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $b4
-          Label : ARGUMENT
-            $a3
-      Label : KEY
-        $id
+  Label : ELEMENT
+    foreach
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -70,6 +56,20 @@ Label : CODE
                 $b4
               Label : CONCAT
                 \n
+    Label : VALUE
+      =>
+      Label : KEY
+        $id
+      Label : VALUE
+        list
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $b4
+          Label : ARGUMENT
+            $a3
+    Label : SOURCE
+      $array
   Label : ELEMENT
     =
     Label : RIGHT

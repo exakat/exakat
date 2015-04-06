@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
@@ -26,10 +28,10 @@ Label : CODE
             void
         Label : NAME
           b
-        Label : PROTECTED
-          protected
         Label : ABSTRACT
           abstract
+        Label : PROTECTED
+          protected
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -38,11 +40,9 @@ Label : CODE
             void
         Label : NAME
           d
-        Label : STATIC
-          static
         Label : ABSTRACT
           abstract
-    Label : NAME
-      x
+        Label : STATIC
+          static
     Label : ABSTRACT
       abstract

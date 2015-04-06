@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     interface
+    Label : NAME
+      B
     Label : BLOCK
       {
       Label : ELEMENT
@@ -16,8 +18,6 @@ Label : CODE
           E
         Label : PUBLIC
           public
-    Label : NAME
-      B
     Label : EXTENDS
       Arguments
       Label : EXTENDS

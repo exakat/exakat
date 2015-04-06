@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     class
+    Label : NAME
+      x
     Label : BLOCK
       {
       Label : ELEMENT
@@ -16,51 +18,49 @@ Label : CODE
           private
       Label : ELEMENT
         static
-        Label : VALUE
-          Void
         Label : STATIC
           static
         Label : PROTECTED
           protected
+        Label : VALUE
+          Void
         Label : DEFINE
           $E
       Label : ELEMENT
         const
+        Label : NAME
+          E
         Label : VALUE
           ::
           Label : CLASS
             F
           Label : CONSTANT
             G
-        Label : NAME
-          E
       Label : ELEMENT
         const
-        Label : VALUE
-          '2'
         Label : NAME
           D
+        Label : VALUE
+          '2'
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           C
+        Label : VALUE
+          1
       Label : ELEMENT
         function
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
         Label : NAME
           f
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
         Label : STATIC
           static
         Label : PUBLIC
           public
-    Label : NAME
-      x

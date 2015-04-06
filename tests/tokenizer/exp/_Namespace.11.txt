@@ -10,8 +10,6 @@ Label : CODE
         class
         Label : NAME
           J
-        Label : EXTENDS
-          K
         Label : BLOCK
           {
           Label : ELEMENT
@@ -26,6 +24,8 @@ Label : CODE
               {
               Label : ELEMENT
                 void
+        Label : EXTENDS
+          K
         Label : IMPLEMENTS
           L
       Label : ELEMENT

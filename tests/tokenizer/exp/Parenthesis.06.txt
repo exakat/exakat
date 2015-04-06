@@ -6,10 +6,6 @@ Label : CODE
     function
     Label : NAME
       c
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -22,10 +18,10 @@ Label : CODE
               (
               Label : CODE
                 ::
-                Label : PROPERTY
-                  $b
                 Label : CLASS
                   a
+                Label : PROPERTY
+                  $b
             Label : THEN
               c
               Label : ARGUMENTS
@@ -42,14 +38,14 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-  Label : ELEMENT
-    function
-    Label : NAME
-      b
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
+  Label : ELEMENT
+    function
+    Label : NAME
+      b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -82,14 +78,14 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-  Label : ELEMENT
-    function
-    Label : NAME
-      a
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
+  Label : ELEMENT
+    function
+    Label : NAME
+      a
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -122,3 +118,7 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void

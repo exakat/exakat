@@ -24,10 +24,10 @@ Label : CODE
                 'g'
           Label : LEFT
             ::
-            Label : PROPERTY
-              $e
             Label : CLASS
               D
+            Label : PROPERTY
+              $e
     Label : LEFT
       [
       Label : VARIABLE

@@ -7,46 +7,12 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       foreach
-      Label : VALUE
-        =>
-        Label : KEY
-          $b
-        Label : VALUE
-          $c
       Label : BLOCK
         ;
-        Label : ELEMENT
-          D
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                K
-              Label : METHOD
-                L
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    M
-                  Label : ARGUMENT
-                    NULL
-                  Label : ARGUMENT
-                    NULL
-                  Label : ARGUMENT
-                    $h
-                  Label : ARGUMENT
-                    $g
-        Label : ELEMENT
-          U
         Label : ELEMENT
           I
         Label : ELEMENT
           foreach
-          Label : VALUE
-            $j
           Label : BLOCK
             Block with Foreach
             Label : ELEMENT
@@ -59,8 +25,6 @@ Label : ELEMENT
                   void
                   Label : ARGUMENT
                     ::
-                    Label : CLASS
-                      P
                     Label : METHOD
                       Q
                       Label : ARGUMENTS
@@ -91,20 +55,48 @@ Label : ELEMENT
                               R
                             Label : CONCAT
                               $l
+                    Label : CLASS
+                      P
               Label : ELEMENT
                 N
+          Label : VALUE
+            $j
           Label : SOURCE
             $i
         Label : ELEMENT
-          M
+          D
         Label : ELEMENT
           echo
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               ::
+              Label : METHOD
+                L
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    M
+                  Label : ARGUMENT
+                    NULL
+                  Label : ARGUMENT
+                    NULL
+                  Label : ARGUMENT
+                    $h
+                  Label : ARGUMENT
+                    $g
               Label : CLASS
-                F
+                K
+        Label : ELEMENT
+          M
+        Label : ELEMENT
+          U
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ::
               Label : METHOD
                 G
                 Label : ARGUMENTS
@@ -113,6 +105,8 @@ Label : ELEMENT
                     'I'
                   Label : ARGUMENT
                     'H'
+              Label : CLASS
+                F
         Label : ELEMENT
           =
           Label : RIGHT
@@ -135,6 +129,12 @@ Label : ELEMENT
                         $f
           Label : LEFT
             $d
+      Label : VALUE
+        =>
+        Label : KEY
+          $b
+        Label : VALUE
+          $c
       Label : SOURCE
         $a
 Label : ELEMENT

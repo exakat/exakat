@@ -12,17 +12,17 @@ Label : CODE
       ;
       Label : ELEMENT
         foreach
-        Label : VALUE
-          =>
-          Label : KEY
-            $c
-          Label : VALUE
-            $d
         Label : BLOCK
           ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $e
+        Label : VALUE
+          =>
+          Label : KEY
+            $c
+          Label : VALUE
+            $d
         Label : SOURCE
           $b

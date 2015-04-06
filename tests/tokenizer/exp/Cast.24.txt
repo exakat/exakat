@@ -8,12 +8,6 @@ Label : CODE
       (int)
       Label : CAST
         ::
-        Label : CLASS
-          \
-          Label : SUBNAME
-            C
-          Label : SUBNAME
-            B
         Label : METHOD
           D
           Label : ARGUMENTS
@@ -24,5 +18,11 @@ Label : CODE
                 'E'
               Label : CONCAT
                 $b
+        Label : CLASS
+          \
+          Label : SUBNAME
+            C
+          Label : SUBNAME
+            B
     Label : LEFT
       $a
