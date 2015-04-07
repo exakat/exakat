@@ -33,9 +33,11 @@ class UnresolvedInstanceof extends Analyzer\Analyzer {
     }
 
     public function analyze() {
-        $classes = $this->loadIni('php_classes.ini');
-        $classes = $classes['classes'];
+        $classes = $this->loadIni('php_classes.ini', 'classes');
         $classes = $this->makeFullNsPath($classes);
+
+        $interfaces = $this->loadIni('php_interfaces.ini', 'interfaces');
+        $interfaces = $this->makeFullNsPath($interfaces);
         
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
@@ -45,7 +47,7 @@ class UnresolvedInstanceof extends Analyzer\Analyzer {
              ->analyzerIsNot('Analyzer\\Classes\\IsExtClass')
              ->analyzerIsNot('Analyzer\\Interfaces\\IsExtInterface')
              ->analyzerIsNot('Analyzer\\Classes\\IsVendor')
-             ->fullnspathIsNot($classes)
+             ->fullnspathIsNot(array_merge($classes, $interfaces))
              ->back('first');
         $this->prepareQuery();
     }
