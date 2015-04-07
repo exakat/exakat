@@ -30,8 +30,7 @@ use Everyman\Neo4j\Client,
 class Log2csv implements Tasks {
     public function run(\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project.'/log/tokenizer.log')) {
-            print "No log/tokenizer.log. Aborting\n";
-            die();
+            die( "No log/tokenizer.log. Aborting\n");
         }
         $in = fopen($config->projects_root.'/projects/'.$config->project.'/log/tokenizer.log', 'r');
 

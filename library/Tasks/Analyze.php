@@ -42,7 +42,7 @@ class Analyze implements Tasks {
             } else {
                 $r = \Analyzer\Analyzer::getSuggestionClass($analyzer);
                 if (count($r) > 0) {
-                    print "did you mean : ".implode(', ', str_replace('_', '/', $r))."\n";
+                    echo "did you mean : ", implode(', ', str_replace('_', '/', $r)), "\n";
                 }
                 die("No such class as '$analyzer'. Aborting\n");
             }

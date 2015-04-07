@@ -51,7 +51,7 @@ class Stat implements Tasks {
             fwrite($fp, $output);
             fclose($fp);
         } else {
-            print $output;
+            echo $output;
         }
     }
 

@@ -70,7 +70,7 @@ class Errors implements Tasks {
             $output = $this->text_encode($stats);
         }
         
-        print $output;
+        echo $output;
     }
 
     private function queryColumn($query) {
@@ -90,7 +90,7 @@ class Errors implements Tasks {
             $query = new Gremlin\Query($this->client, $querystring, $params);
             return $query->getResultSet();
         } catch (Exception $e) {
-            print "'$querystring' failed\n";
+            echo "'".$querystring."' failed\n";
             return array();
         }
     }

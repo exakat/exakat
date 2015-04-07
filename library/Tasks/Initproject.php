@@ -34,7 +34,7 @@ class Initproject implements Tasks {
 
         if ($config->delete === true) {
             $this->check_project_dir($project);
-            print "Deleting $project\n";
+            display( "Deleting $project\n");
     
             // final wait..., just in case
             sleep(2);
@@ -42,15 +42,15 @@ class Initproject implements Tasks {
             shell_exec('rm -rf '.$config->projects_root.'/projects/'.$project.'/');
         } elseif ($config->update === true) {
             $this->scheck_project_dir($project);
-            print "Updating $project\n";
+            display( "Updating $project\n");
     
-            print shell_exec('cd '.$config->projects_root.'/projects/'.$project.'/code/; git pull');
+            shell_exec('cd '.$config->projects_root.'/projects/'.$project.'/code/; git pull');
         } else {
-            print "Initializing $project with '$repo_url'\n";
+            display( "Initializing $project with '$repo_url'\n");
             $this->init_project($project, $repo_url);
         }
 
-        print "Done\n";
+        display( "Done\n");
     }
     
     private function init_project($project, $repo_url) {
@@ -59,13 +59,13 @@ class Initproject implements Tasks {
         if (!file_exists($config->projects_root.'/projects/'.$project)) {
             mkdir($config->projects_root.'/projects/'.$project, 0755);
         } else {
-            print $config->projects_root.'/projects/'.$project.' already exists. Reusing'."\n";
+            display( $config->projects_root.'/projects/'.$project.' already exists. Reusing'."\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/log/')) {
             mkdir($config->projects_root.'/projects/'.$project.'/log/', 0755);
         } else {
-            print $config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring'."\n";
+            display( $config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring'."\n");
             return null; 
         }
 
@@ -92,27 +92,27 @@ INI;
 
             file_put_contents($config->projects_root.'/projects/'.$project.'/config.ini', $configIni);
         } else {
-            print $config->projects_root.'/projects/'.$project.'/config.ini already exists. Ignoring'."\n";
+            display( $config->projects_root.'/projects/'.$project.'/config.ini already exists. Ignoring'."\n");
         }
 
         shell_exec('chmod -R g+w '.$config->projects_root.'/projects/'.$project);
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
             if ($repo_url === '' || $repo_url === false) {
-                print "Installing empty code\n";
-                print shell_exec("cd {$config->projects_root}/projects/$project; mkdir code");
+                display( "Installing empty code\n");
+                mkdir($config->projects_root.'/projects/'.$project.'/code', 0777);
                 return null;
             } elseif (strpos($repo_url, 'bitbucket.org') !== false) {
-                print "Installing with git on bitbucket\n";
+                display( "Installing with git on bitbucket\n");
                 print shell_exec("cd {$config->projects_root}/projects/$project; hg clone $repo_url code");
             } elseif (strpos($repo_url, '.googlecode.com/svn/') !== false) {
-                print "Installing with svn on googlecode\n";
+                display( "Installing with svn on googlecode\n");
                 print shell_exec("cd {$config->projects_root}/projects/$project; svn checkout $repo_url code");
             } elseif (strpos($repo_url, 'svn.code.sf.net') !== false) {
-                print "Installing with svn on sourceforge\n";
+                display( "Installing with svn on sourceforge\n");
                 print shell_exec("cd {$config->projects_root}/projects/$project; svn checkout $repo_url code");
             } elseif (preg_match('#^[a-z0-9\-]+/[a-z0-9\-]+$#', $repo_url)) {
-                print "Installing with composer\n";
+                display( "Installing with composer\n");
                 // composer install
                 $composer = new stdClass();
                 $composer->require = new stdClass();
@@ -121,50 +121,48 @@ INI;
                 file_put_contents($config->projects_root.'projects/'.$project.'/composer.json', $json);
                 print shell_exec("cd {$config->projects_root}/projects/$project; composer install; mv vendor code");
             } elseif (strpos($repo_url, '.zip') !== false) {
-                print "Installing with URL and zip\n";
+                display( "Installing with URL and zip\n");
                 $file = basename($repo_url);
                 $file_noext = str_replace('.zip', '', $file);
                 print shell_exec("cd {$config->projects_root}/projects/$project; wget $repo_url; unzip -qq $file; mv $file_noext code; rm $file");
             } elseif (strpos($repo_url, '.tbz') !== false || strpos($repo_url, '.tar.bz2') !== false) {
-                print "Installing with URL and tar.bz2\n";
+                display( "Installing with URL and tar.bz2\n");
                 $file = basename($repo_url);
                 $file_noext = str_replace('.tbz', '', $file);
                 $file_noext = str_replace('.tar.bz2', '', $file);
                 print shell_exec("cd {$config->projects_root}/projects/$project; wget $repo_url; mkdir code; tar -jxf $file -C code; rm $file");
             } elseif (strpos($repo_url, '.tgz') !== false || strpos($repo_url, '.tar.gz') !== false) {
-                print "Installing with URL and tar.gz\n";
+                display( "Installing with URL and tar.gz\n");
                 $file = basename($repo_url);
                 $file_noext = str_replace('.tgz', '', $file);
                 $file_noext = str_replace('.tar.gz', '', $file);
                 print shell_exec("cd {$config->projects_root}/projects/$project; wget $repo_url; mkdir code; tar -zxf $file -C code; rm $file");
         // xz etc.
             } else {
-                print "Installing with git\n";
+                display( "Installing with git\n");
                 print shell_exec("cd {$config->projects_root}/projects/$project; git clone $repo_url code");
             }
 
             if (!file_exists("{$config->projects_root}/projects/$project/code")) {
-                print "Error : code was not cloned\n";
+                display( "Error : code was not cloned\n");
             }
         } elseif (file_exists($config->projects_root.'/projects/'.$project.'/code/')) {
-            print "Code folder is already there. Leaving it intact.\n";
+            display( "Code folder is already there. Leaving it intact.\n");
         }
     
-        print "Counting files\n";
-        print shell_exec('php '.$config->executable.' files -p '.$project);
+        display( "Counting files\n");
+        shell_exec('php '.$config->executable.' files -p '.$project);
     }
 
     private function check_project_dir($project) {
         $config = \Config::factory();
         
         if ($project === null ) {
-            print "Usage : php ".$config->executable." project_init -p project_name -R repository";
-            die();
+            die( "Usage : php ".$config->executable." project_init -p project_name -R repository");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project) ) {
-            print "Project $project doesn't exists.\n Aborting\n";
-            die();
+            die( "Project $project doesn't exists.\n Aborting\n");
         }
     }
 

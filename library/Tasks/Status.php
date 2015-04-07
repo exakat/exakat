@@ -39,26 +39,25 @@ class Status implements Tasks {
         }
 
         if (filesize($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log') == 0) {
-            print "tokenizer.final.log is OK\n";
+            echo "tokenizer.final.log is OK\n";
         } else {
-            print "tokenizer.final.log is KO : \n";
-            print file_get_contents($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
+            echo "tokenizer.final.log is KO : \n",
+                 file_get_contents($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
         }
         $tokenizerLogTime = filemtime($config->projects_root.'/projects/'.$project.'/log/tokenizer.log');
 
         $res = shell_exec('tail '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.log | grep "Remaining token to process :"');
         if (preg_match('/Remaining token to process : 1/s', $res)) {
-            print "Tokenizing was OK\n";
+            echo "Tokenizing was OK\n";
         } else {
-            print "Tokenizing failed : \n";
-            print $res;
+            echo "Tokenizing failed : \n", $res;
         }
 
         if (filesize($config->projects_root.'/projects/'.$project.'/log/errors.log') == 191) {
-            print "Error.log is OK\n";
+            echo "Error.log is OK\n";
         } else {
-            print "Error.log signal some problems : \n";
-            print file_get_contents($config->projects_root.'/projects/'.$project.'/log/errors.log');
+            echo "Error.log signal some problems : \n", 
+                 file_get_contents($config->projects_root.'/projects/'.$project.'/log/errors.log');
 
         }
 
@@ -67,39 +66,38 @@ class Status implements Tasks {
         if ($res == "Done\nDone\nDone\nDone\nDone\nDone\n") {
             foreach($logs as $log) {
                 if (filemtime($config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log') < $tokenizerLogTime) {
-                    print "analyze.$log.final.log is too old\n";
+                    echo "analyze.$log.final.log is too old\n";
                 }
             }
-            print "All analyzes were OK\n";
+            echo "All analyzes were OK\n";
         } else {
             foreach($logs as $log) {
                 if (!file_exists($config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log')) {
-                    print 'analyze.'.$log.".final.log not yet here\n";
+                    echo 'analyze.',$log,'.final.log not yet here', "\n";
                     continue 1;
                 }
                 $log_content = file_get_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log');
                 if (trim(substr($log_content, -5)) != "Done") {
-                    print $config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log is wrong'."\n";
+                    echo $config->projects_root, '/projects/', $project, '/log/analyze.', $log, '.final.log is wrong'."\n";
                     if (preg_match('#\[\[\'analyzer\':\'Analyzer\\\\\\\\(.+?)\\\\\\\\(.+?)\'\]\]#s', $log_content, $r) !== false) {
-                        print "   php bin/analyze -P $r[1]/$r[2] \n";
+                        echo "   php bin/analyze -P ", $r[1], '/', $r[2], " \n";
                     }
                 } else {
-                    print $config->projects_root.'/projects/'.$project.'/log/analyze.'.$log.'.final.log is OK'."\n";
+                    echo $config->projects_root, '/projects/', $project, '/log/analyze.', $log, '.final.log is OK', "\n";
                 }
             }
-            print "Some analyzes are KO\n";
+            echo "Some analyzes are KO\n";
         }
 
         if (file_exists($config->projects_root.'/projects/'.$project.'/report')) {
             if (filemtime($config->projects_root.'/projects/'.$project.'/report') < $tokenizerLogTime) {
-                print " Report is too old\n";
+                echo " Report is too old\n";
             } else {       
-               print " Report OK\n";
+               echo " Report OK\n";
             }
         } else {
-           print " Report KO\n";
+           echo " Report KO\n";
         }
-        
     }
 }
 

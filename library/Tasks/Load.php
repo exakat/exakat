@@ -176,7 +176,7 @@ class Load implements Tasks {
         }
 
         if (count($tokens) == 0) {
-            print "Ignoring file $filename as it is empty\n";
+            echo 'Ignoring file ', $filename, " as it is empty\n";
             return false;
         }
     
@@ -1074,7 +1074,7 @@ class Load implements Tasks {
         $this->log->log("$filename\t".(($end - $begin)*1000)."\t".join("\t", $log));
 
         if (!isset($T)) { 
-            print "Empty script. Ignoring\n";    
+            echo "Empty script. Ignoring\n";    
             return false;
         }
         $T[0]->setProperty('root', 'true')->save();

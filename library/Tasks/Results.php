@@ -139,7 +139,7 @@ GREMLIN;
         }
 
         if ($config->output) {
-            print $text;
+            echo $text;
         }
 
         switch (1) {
