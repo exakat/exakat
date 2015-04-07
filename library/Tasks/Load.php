@@ -873,13 +873,19 @@ class Load implements Tasks {
                                                   ->setProperty('modifiedBy', 'bin/load4')
                                                   ->save();
                 } elseif ($token == '{' && $tokens[$id + 1] == ';' && $tokens[$id + 2] == '}' ) {
+                    
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
-                                                  ->setProperty('code', $token)
-                                                  ->setProperty('line', $line)
-                                                  ->save();
+                                                        ->setProperty('code', $token)
+                                                        ->setProperty('line', $line)
+                                                        ->save();
+
+                    if ($type = $this->process_blocks($token_value)) {
+                        $T[$Tid]->setProperty('association', $type)->save();
+                    }
+
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
-                    $regexIndex['Block']->relateTo($T[$Tid], 'INDEXED')->save();                
+                    $regexIndex['Block']->relateTo($T[$Tid], 'INDEXED')->save();
 
                     $void   = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                  ->setProperty('code', 'void')
