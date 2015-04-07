@@ -1298,12 +1298,10 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
 //    previous.setProperty('checkForNext', 'Previous');
 }
 
-// && it.out('ELEMENT').has('atom', 'Void').any() == false
-
 // Special case for Block (Sequence + block)
 while ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == true && it.association == null }.any() &&
-    !it.in('NEXT').in('NEXT').filter{it.token in ['T_IF']}.any() &&
-    !it.in('NEXT').in('NEXT').filter{!(it.token in [ 'T_USE', 'T_VOID'])}.any()) { //'T_OPEN_PARENTHESIS',
+        !it.in('NEXT').in('NEXT').filter{it.token in ['T_IF']}.any() &&
+        !it.in('NEXT').in('NEXT').filter{!(it.token in [ 'T_USE', 'T_VOID'])}.any()) { 
     sequence = it;
     previous = it.in('NEXT').next();
     
