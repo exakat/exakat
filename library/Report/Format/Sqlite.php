@@ -55,13 +55,12 @@ class Sqlite extends \Report\Format {
         foreach($this->output as $t) {
             foreach($t as $k => $v) {
                 if (is_array($v)) {
-                    var_dump($v);die();
+                    die(print_r($v,true));
                 }
                 $t[$k] = $db->escapeString($v);
             }
             if (count($t) != 3) {
-                print_r($t);
-                die(__METHOD__);
+                die(print_r($t, true).__METHOD__);
             }
             $db->query("INSERT INTO reports (analyzer, value, count) VALUES ('".join("', '", $t)."')");
         }
@@ -76,11 +75,6 @@ class Sqlite extends \Report\Format {
     public function setSummaryData($data) {
         $this->summary = $data;
     }
-
-    public function setCss() {
-        // nothing to do
-    }
-
 }
 
 ?>
