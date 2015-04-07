@@ -24,11 +24,11 @@
 namespace Report\Format\Ace;
 
 class SectionedHashTable extends \Report\Format\Ace { 
-    static public $sectionedhastable_counter = 0;
+    static public $sectionedHashTableCounter = 0;
     
     public function render($output, $data) {
 
-        $counter = \Report\Format\Ace\SectionedHashTable::$sectionedhastable_counter++;
+        $counter = self::$sectionedHashTableCounter++;
         
         $text = <<<HTML
 <table id="sectionedhashtable-{$counter}" class="table table-striped table-bordered table-hover">

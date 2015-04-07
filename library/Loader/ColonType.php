@@ -42,13 +42,13 @@ class ColonType {
     private $relatedAtom = array('Label');
     private $parenthesisLevel = 0;
     private $checkNext = false;
-    private $parenthesedToken = array('T_IF' => 1, 
-                                      'T_ELSEIF' => 1,
-                                      'T_SWITCH' => 1,
-                                      'T_FOREACH' => 1,
-                                      'T_WHILE' => 1,
-                                      'T_FOR' => 1,
-                                      'T_DECLARE' => 1);
+    private $tokenWithParenthesis = array('T_IF'      => 1, 
+                                          'T_ELSEIF'  => 1,
+                                          'T_SWITCH'  => 1,
+                                          'T_FOREACH' => 1,
+                                          'T_WHILE'   => 1,
+                                          'T_FOR'     => 1,
+                                          'T_DECLARE' => 1);
     
     public function surveyToken($token) {
         if ($this->checkNext) {
@@ -64,7 +64,7 @@ class ColonType {
             if (isset($this->waitFor['array'][$token[3]])) {
                 $this->relatedAtom[] = $this->waitFor['array'][$token[3]];
                 
-                if (isset($this->parenthesedToken[$token[3]])) {
+                if (isset($this->tokenWithParenthesis[$token[3]])) {
                     $this->parenthesisStack[$this->parenthesisLevel] = 1;
                 }
                 

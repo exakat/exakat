@@ -27,10 +27,10 @@ use Analyzer;
 
 class UncheckedResources extends Analyzer\Analyzer {
     public function analyze() {
-        $rw = $this->loadJson('resource_usage.json');
+        $resourceUsage = $this->loadJson('resource_usage.json');
 
         $positions = array(0,1,2);
-        foreach($rw as $creation => $usage) {
+        foreach($resourceUsage as $creation => $usage) {
             foreach($positions as $pos) {
                 if (!isset($usage->{"function$pos"})) { continue; }
                 $functions = $this->makeFullNsPath((array) $usage->{"function$pos"});

@@ -24,8 +24,6 @@
 namespace Report\Format\Devoops;
 
 class Camembert extends \Report\Format\Devoops {
-    static public $camembert_counter = 0;
-    
     public function render($output, $data) {
         $datajs = '';
         foreach($data as $k => $v) {
@@ -34,7 +32,7 @@ class Camembert extends \Report\Format\Devoops {
         
         $html = <<<HTML
  <label class="label label-success">Pie Chart</label>
-      <div id="pie-chart"  style="height: 200px;" ></div>
+      <div id="pie-chart" style="height: 200px;" ></div>
 
 <script type="text/javascript">
 function DrawAllMorrisCharts(){

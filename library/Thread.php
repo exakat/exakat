@@ -74,7 +74,7 @@ class Thread {
     public function getReturn($commandId) {
         $commandId = abs((int) $commandId);
         
-        if ($commandId == 0 || $comandId > $this->commandId) {
+        if ($commandId == 0 || $commandId > $this->commandId) {
             return null;
         }
         

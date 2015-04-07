@@ -24,11 +24,10 @@
 namespace Report\Format\Devoops;
 
 class TableForVersions extends \Report\Format\Devoops { 
-    static public $tableforversions_counter = 0;
+    static public $tableForVersionsCounter = 0;
 
     public function render($output, $data) {
-
-        $counter = self::$tableforversions_counter++;
+        $counter = self::$tableForVersionsCounter++;
 
         $html = <<<HTML
 <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="tableforversions-{$counter}">

@@ -1700,11 +1700,11 @@ fullcode = x;
         }
 
         if (isset($actions['to_array']) && $actions['to_array']) {
-            $_array = new _Array(Token::$client);
-            $fcArray = $_array->fullcode();
+            $array = new _Array(Token::$client);
+            $fullcodeArray = $array->fullcode();
 
-            $Arrayappend = new Arrayappend(Token::$client);
-            $fcArrayappend = $Arrayappend->fullcode();
+            $arrayAppend = new Arrayappend(Token::$client);
+            $fullcodeArrayappend = $arrayAppend->fullcode();
 
             $qactions[] = "
 /* to Array */
@@ -1720,7 +1720,7 @@ while( current.atom == null && current.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY
 
         current.inE('INDEXED').each{ g.removeEdge(it); }
         fullcode = current;
-        $fcArrayappend;
+        $fullcodeArrayappend;
 
         b1.bothE('NEXT').each{ g.removeEdge(it); }
         a1.inE('NEXT').each{ g.removeEdge(it); }
@@ -1741,7 +1741,7 @@ while( current.atom == null && current.token in ['T_OPEN_BRACKET', 'T_OPEN_CURLY
         a1.inE('INDEXED').each{ g.removeEdge(it); }
         current.inE('INDEXED').each{ g.removeEdge(it); }
         fullcode = current;
-        $fcArray;
+        $fullcodeArray;
 
         b1.bothE('NEXT').each{ g.removeEdge(it); }
         a1.bothE('NEXT').each{ g.removeEdge(it); }

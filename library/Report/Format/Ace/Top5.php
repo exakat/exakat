@@ -78,14 +78,14 @@ HTML;
         foreach($values as $value) {
             // @note This is the same getId() than in Section::getId()
             if ($value['severity'] == '') {
-$td = "															<td>{$value['name']}</td>";
+$cell = "															<td>{$value['name']}</td>";
             } else {
                 $value['id'] =  str_replace(array(' ', '('  , ')'  ), array('-', '', ''), $value['name']);
-$td = "															<td><a href=\"{$value['id']}.html\">{$value['name']}</a></td>";
+$cell = "															<td><a href=\"{$value['id']}.html\">{$value['name']}</a></td>";
             }
             $html .= <<<HTML
 														<tr>
-$td
+$cell
 															<td>
 																<b>{$value['count']}</b>
 															</td>

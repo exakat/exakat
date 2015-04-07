@@ -24,10 +24,10 @@
 namespace Report\Format\Devoops;
 
 class HashTableLinked extends \Report\Format\Devoops { 
-    static public $hastable_counter = 0;
+    static public $hastableCounter = 0;
     
     public function render($output, $data) {
-
+        $counter = self::$hastableCounter++;
         $output->pushToJsLibraries( array("assets/js/jquery.dataTables.min.js",
                                           "assets/js/jquery.dataTables.bootstrap.js"));
 
