@@ -33,7 +33,7 @@ class _Trait extends TokenAuto {
         // trait t { empty code }
         $this->conditions = array(0 => array('token' => _Trait::$operators,
                                              'atom' => 'none'),
-                                  1 => array('atom' => 'Identifier'),
+                                  1 => array('atom' => array('Identifier', 'Boolean', 'Null')),
                                   2 => array('atom' => 'Sequence'),
         );
         
@@ -47,7 +47,7 @@ class _Trait extends TokenAuto {
         // trait t { normal code }
         $this->conditions = array(0 => array('token' => _Trait::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('atom'  => 'Identifier'),
+                                  1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
                                   2 => array('token' => 'T_OPEN_CURLY'),
                                   3 => array('atom'  => 'Sequence'),
                                   4 => array('token' => 'T_CLOSE_CURLY'),

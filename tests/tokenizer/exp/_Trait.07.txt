@@ -1,0 +1,64 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    trait
+    Label : NAME
+      int
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          a
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
+        Label : PUBLIC
+          public
+  Label : ELEMENT
+    trait
+    Label : NAME
+      true
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          a
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
+        Label : PUBLIC
+          public
+  Label : ELEMENT
+    trait
+    Label : NAME
+      null
+    Label : BLOCK
+      {
+      Label : ELEMENT
+        function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : NAME
+          a
+        Label : BLOCK
+          {
+          Label : ELEMENT
+            void
+        Label : PUBLIC
+          public
