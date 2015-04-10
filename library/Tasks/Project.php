@@ -89,7 +89,7 @@ class Project implements Tasks {
         display("Running project '$project'\n");
 
         display("Cleaning DB\n");
-        shell_exec('php '.$this->executable.' cleandb ');
+        shell_exec('php '.$this->executable.' cleandb -v');
         $this->logTime('Files');
 
         display("Running files\n");
@@ -99,10 +99,6 @@ class Project implements Tasks {
 
         $thread->waitForAll();
         display("waited For All\n");
-        
-        // This is to make sure the database is started and running. 
-        shell_exec('curl 127.0.0.1:7474/db/data/ 2>&1');
-//        var_dump(file_get_contents('127.0.0.1:7474/db/data/'));
 
         shell_exec('php '.$this->executable.' load -r -d '.$config->projects_root.'/projects/'.$project.'/code/ -p '.$project);
         display("Project loaded\n");
