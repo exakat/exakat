@@ -29,7 +29,7 @@ function display($text) {
     }
     
     if ($config->verbose) {
-        print $text;
+        echo trim($text)."\n";
     }
 }
 
