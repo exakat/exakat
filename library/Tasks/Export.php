@@ -31,14 +31,18 @@ class Export implements Tasks {
     public function run(\Config $config) {
         $client = new Client();
 
-        $queryTemplate = "g.V.as('x').except([g.v(0)])"; 
+        $queryTemplate = 'g.V.as("x").except([g.v(0)])'; 
+        
+        if (!empty($config->filename)) {
+            $queryTemplate .= '.filter{ it.in.loop(1){true}{true}.has("token", "T_FILENAME").has("code", "'.$config->filename.'").any()}';
+        }
 
         $params = array('type' => 'IN');
         $query = new Gremlin\Query($client, $queryTemplate, $params);
         try { 
             $vertices = $query->getResultSet();
         } catch (Exception $e) {
-            die( "Error reading the Vertices\n{$e->getmessage()}\n");
+            die( 'Error reading the Vertices\n{$e->getmessage()}'."\n");
         }
 
         $V = array();
@@ -51,7 +55,7 @@ class Export implements Tasks {
             }
         }
 
-        $queryTemplate .= ".outE()";
+        $queryTemplate .= '.outE()';
         $params = array('type' => 'IN');
         $query = new Gremlin\Query($client, $queryTemplate, $params);
         $edges = $query->getResultSet();
@@ -123,9 +127,9 @@ class Export implements Tasks {
                     $v['fullcode'] =  'NO CODE PROVIDED';
                 }
             }
-             $R = $id." [label=\"".addslashes($v['fullcode'])."\"";
+             $R = $id.' [label="'.addslashes($v['fullcode']).'"';
              if (isset($v['atom'])) {
-                $R .= " shape=box ";
+                $R .= ' shape=box ';
              }
              $R .= "];\n";
      
@@ -177,10 +181,10 @@ class Export implements Tasks {
             }
     
 
-            $row = "<td>".join("</td><td>", $row)."</td>";
+            $row = '<td>'.join('</td><td>', $row).'</td>';
             $r .= "<tr>$row</tr>\n";
         }
-        $r .= "</table>";
+        $r .= '</table>';
 
         return $r;
     }
