@@ -13,6 +13,8 @@
                      "array_unique":["SORT_REGULAR","SORT_NUMERIC","SORT_STRING","SORT_LOCALE_STRING"],
                      "array_multisort":["SORT_ASC","SORT_DESC"],
                      "array_change_key_case":["CASE_UPPER","CASE_LOWER"],
+                     "dns_get_record":["DNS_A","DNS_CNAME","DNS_HINFO","DNS_MX","DNS_NS","DNS_PTR","DNS_SOA","DNS_TXT","DNS_AAAA","DNS_SRV","DNS_NAPTR","DNS_A6","DNS_ALL","DNS_ANY."],
+                     "filter_var":["FILTER_SANITIZE_EMAIL","FILTER_SANITIZE_ENCODED","FILTER_SANITIZE_MAGIC_QUOTES","FILTER_SANITIZE_NUMBER_FLOAT","FILTER_SANITIZE_NUMBER_INT","FILTER_SANITIZE_SPECIAL_CHARS","FILTER_SANITIZE_FULL_SPECIAL_CHARS","FILTER_SANITIZE_STRING","FILTER_SANITIZE_STRIPPED","FILTER_SANITIZE_URL","FILTER_UNSAFE_RAW"],
                      "scandir":["SCANDIR_SORT_DESCENDING","SCANDIR_SORT_ASCENDING","SCANDIR_SORT_NONE"],
                      "trigger_error":["E_USER_ERROR","E_USER_WARNING","E_USER_NOTICE","E_USER_DEPRECATED"],
                      "posix_access":["POSIX_F_OK","POSIX_R_OK","POSIX_W_OK","POSIX_X_OK"],
@@ -31,12 +33,17 @@
                      "round":["PHP_ROUND_HALF_UP","PHP_ROUND_HALF_DOWN","PHP_ROUND_HALF_EVEN","PHP_ROUND_HALF_ODD","PHP_NORMAL_READ"],
                      "socket_read":["PHP_BINARY_READ","PHP_NORMAL_READ"],
                      "parse_ini_file":["INI_SCANNER_NORMAL","INI_SCANNER_RAW"],
-                     "parse_ini_string":["INI_SCANNER_NORMAL","INI_SCANNER_RAW"]},
+                     "parse_ini_string":["INI_SCANNER_NORMAL","INI_SCANNER_RAW"],
+                     "filter_input":["FILTER_SANITIZE_EMAIL","FILTER_SANITIZE_ENCODED","FILTER_SANITIZE_MAGIC_QUOTES","FILTER_SANITIZE_NUMBER_FLOAT","FILTER_SANITIZE_NUMBER_INT","FILTER_SANITIZE_SPECIAL_CHARS","FILTER_SANITIZE_FULL_SPECIAL_CHARS","FILTER_SANITIZE_STRING","FILTER_SANITIZE_STRIPPED","FILTER_SANITIZE_URL","FILTER_UNSAFE_RAW"],
+                     "gmp_div_q":["GMP_ROUND_ZERO","GMP_ROUND_PLUSINF","GMP_ROUND_MINUSINF"],
+                     "gmp_div_qr":["GMP_ROUND_ZERO","GMP_ROUND_PLUSINF","GMP_ROUND_MINUSINF"],
+                     "gmp_div_r":["GMP_ROUND_ZERO","GMP_ROUND_PLUSINF","GMP_ROUND_MINUSINF"]},
 
                 "3":{"http_build_query":["PHP_QUERY_RFC1738","PHP_QUERY_RFC3986"],
                      "pg_select":["PGSQL_CONV_FORCE_NULL","PGSQL_DML_NO_CONV","PGSQL_DML_ESCAPE","PGSQL_DML_EXEC","PGSQL_DML_ASYNC","PGSQL_DML_STRING"],
                      "str_pad":["STR_PAD_RIGHT","STR_PAD_LEFT","STR_PAD_BOTH"],
-                     "http_redirect":["HTTP_REDIRECT","HTTP_REDIRECT_PERM","HTTP_REDIRECT_FOUND","HTTP_REDIRECT_POST","HTTP_REDIRECT_PROXY","HTTP_REDIRECT_TEMP"]}},
+                     "http_redirect":["HTTP_REDIRECT","HTTP_REDIRECT_PERM","HTTP_REDIRECT_FOUND","HTTP_REDIRECT_POST","HTTP_REDIRECT_PROXY","HTTP_REDIRECT_TEMP"]}
+},
 
  "combinaison":{"0":{"error_reporting":["E_ERROR","E_WARNING","E_PARSE","E_NOTICE","E_ERROR","E_WARNING","E_ERROR","E_WARNING","E_ERROR","E_WARNING","E_NOTICE","E_ALL","E_ERROR","E_DEPRECATED","E_DEPRECATED","E_ALL"],
                      "phpcredits":["CREDITS_ALL","CREDITS_DOCS","CREDITS_FULLPAGE","CREDITS_GENERAL","CREDITS_GROUP","CREDITS_MODULES","CREDITS_SAPI"],
@@ -53,6 +60,7 @@
                 "3":{"preg_split":["PREG_SPLIT_NO_EMPTY","PREG_SPLIT_DELIM_CAPTURE","PREG_SPLIT_OFFSET_CAPTURE"],
                      "stream_socket_server":["STREAM_SERVER_BIND","STREAM_SERVER_LISTEN"]},
 
-                "4":{"preg_match":["PREG_OFFSET_CAPTURE"], 
-                     "stream_socket_client":["STREAM_CLIENT_CONNECT","STREAM_CLIENT_ASYNC_CONNECT","STREAM_CLIENT_PERSISTENT"]}} 
+                "4":{"preg_match":["PREG_OFFSET_CAPTURE"],
+                     "stream_socket_client":["STREAM_CLIENT_CONNECT","STREAM_CLIENT_ASYNC_CONNECT","STREAM_CLIENT_PERSISTENT"]}
+                    } 
 }
