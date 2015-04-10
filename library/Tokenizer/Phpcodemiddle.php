@@ -30,7 +30,7 @@ class Phpcodemiddle extends TokenAuto {
 // ? >A<?php
         $this->conditions = array(-1 => array('token'    => 'T_CLOSE_TAG',
                                               'atom'     => 'none'),
-                                   0 => array('token'    => array_merge(Phpcodemiddle::$operators, 
+                                   0 => array('token'    => array_merge(Phpcodemiddle::$operators,
                                                                         Sequence::$operators)),
                                    1 => array('token'    => 'T_OPEN_TAG',
                                               'atom'     => 'none'),

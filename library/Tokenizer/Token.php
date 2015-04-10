@@ -1033,12 +1033,12 @@ g.idx('atoms')[['atom':'Use']].out('USE').each{
 };
 ",
 "g.dropIndex('delete');",
-"// Build the classes hierarchy 
+"// Build the classes hierarchy
 
 g.V.has('atom', 'Class')
-.sideEffect{ 
-    s = []; 
-    s.add(it.fullnspath); 
+.sideEffect{
+    s = [];
+    s.add(it.fullnspath);
     it.as('a').out('EXTENDS')
       .sideEffect{ s.add(it.fullnspath); }
       .transform{ g.idx('classes')[['path':it.fullnspath]].next(); }

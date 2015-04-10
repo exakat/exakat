@@ -28,11 +28,11 @@ class _Throw extends TokenAuto {
     static public $atom = 'Throw';
     
     public function _check() {
-        // throw (new x()) // parenthesis are useless! 
+        // throw (new x()) // parenthesis are useless!
         $this->conditions = array(0 => array('token'     => _Throw::$operators,
                                              'atom'      => 'none'),
-                                  1 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array', 
-                                                                  'Methodcall', 'Staticmethodcall', 'Staticproperty', 
+                                  1 => array('atom'      => array('New', 'Variable', 'Functioncall', 'Property', 'Array',
+                                                                  'Methodcall', 'Staticmethodcall', 'Staticproperty',
                                                                   'Identifier', 'Assignation', 'Ternary', 'Parenthesis')),
                                   2 => array('filterOut' => Token::$instructionEnding),
                                   );

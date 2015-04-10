@@ -66,7 +66,7 @@ class _Class extends TokenAuto {
                                'property'      => array('rank' => 0),
                                'arg2implement' => true,
                                'keepIndexed'   => true,
-                               'cleanIndex'    => true 
+                               'cleanIndex'    => true
                                );
         $this->checkAuto();
 

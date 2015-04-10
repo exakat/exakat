@@ -28,7 +28,7 @@ class Property extends TokenAuto {
     static public $atom = 'Property';
     
     public function _check() {
-        $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall', 'Staticproperty', 'Methodcall', 
+        $operands = array('Variable', 'Property', 'Array', 'Staticmethodcall', 'Staticproperty', 'Methodcall',
                           'Functioncall', 'Parenthesis');
 
         // $object->property{1}

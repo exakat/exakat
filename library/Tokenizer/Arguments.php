@@ -39,7 +39,7 @@ class Arguments extends TokenAuto {
                            'Bitshift', 'Heredoc', 'Power', 'Shell', 'Arrayappend', 'Clone',
                            'Include', 'Instanceof', 'Yield');
         // @note arguments separated by ,
-        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_VAR', 'T_STATIC', 'T_GLOBAL', 
+        $this->conditions = array(-2 => array('token'   => array('T_OPEN_PARENTHESIS', 'T_ECHO', 'T_VAR', 'T_STATIC', 'T_GLOBAL',
                                                                  'T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT',
                                                                  'T_SEMICOLON', 'T_CONST', 'T_OPEN_CURLY', 'T_OPEN_BRACKET',
                                                                  'T_FUNCTION')),
@@ -48,7 +48,7 @@ class Arguments extends TokenAuto {
                                               'atom'    => 'none',
                                               'check_for_arguments' => $arguments),
                                    1 => array('atom'    => 'yes'),
-                                   2 => array('token'   => array_merge(array('T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET'), 
+                                   2 => array('token'   => array_merge(array('T_CLOSE_PARENTHESIS', 'T_CLOSE_TAG', 'T_CLOSE_BRACKET'),
                                                                        Logical::$operators, Comparison::$operators,
                                                                        Token::$alternativeEnding, RawString::$operators,
                                                                        Sequence::$operators, Arguments::$operators))

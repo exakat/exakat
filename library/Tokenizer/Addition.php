@@ -29,7 +29,7 @@ class Addition extends TokenAuto {
     
     public function _check() {
         // note : Multiplication:: and Addition:: operators are the same!
-        $this->conditions = array(-2 => array('filterOut' => array_merge(Property::$operators,      Staticproperty::$operators, 
+        $this->conditions = array(-2 => array('filterOut' => array_merge(Property::$operators,      Staticproperty::$operators,
                                                                          Concatenation::$operators, Sign::$operators,
                                                                          Multiplication::$operators)),
                                   -1 => array('atom' => Multiplication::$operands ),
@@ -37,7 +37,7 @@ class Addition extends TokenAuto {
                                               'atom' => 'none'),
                                    1 => array('atom' => Multiplication::$operands),
                                    2 => array('filterOut' => array_merge(array('T_OPEN_PARENTHESIS', 'T_OPEN_CURLY', 'T_OPEN_BRACKET'),
-                                                                         Property::$operators,      Staticproperty::$operators, 
+                                                                         Property::$operators,      Staticproperty::$operators,
                                                                          Multiplication::$operators, Power::$operators,
                                                                          Assignation::$operators)
                                    ),

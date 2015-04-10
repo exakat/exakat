@@ -36,7 +36,7 @@ class ArgumentsNoParenthesis extends Arguments {
                                                                      'T_PRINT', 'T_EXIT', 'T_ECHO') ),
                                     1 => array('atom'       => 'yes',
                                                'notAtom'    => 'Arguments'),
-                                    2 => array('token'      => array_merge(self::$alternativeEnding, 
+                                    2 => array('token'      => array_merge(self::$alternativeEnding,
                                                                array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_ENDIF', 'T_ENDSWITCH', 'T_ENDFOR',
                                                                      'T_ENDFOREACH', 'T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_QUESTION', 'T_COLON',
                                                                      'T_ELSEIF', 'T_ECHO', 'T_AS', 'T_INLINE_HTML')))

@@ -1268,7 +1268,7 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
 // lone instruction BEFORE
 while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'Ifthen', 'Function', 'For', 'Foreach', 'Try',
                                                         'Ternary', 'While', 'Assignation', 'Switch', 'Use', 'Label', 'Array',
-                                                        'Postplusplus', 'Preplusplus', 'Return', 'Class', 'Phpcode', 'Functioncall', 
+                                                        'Postplusplus', 'Preplusplus', 'Return', 'Class', 'Phpcode', 'Functioncall',
                                                         'Shell' ] &&
                                       it.getProperty('token') != 'T_ELSEIF'}.any() &&
     it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL',
@@ -1301,7 +1301,7 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
 // Special case for Block (Sequence + block)
 while ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == true && it.association == null }.any() &&
         !it.in('NEXT').in('NEXT').filter{it.token in ['T_IF']}.any() &&
-        !it.in('NEXT').in('NEXT').filter{!(it.token in [ 'T_USE', 'T_VOID'])}.any()) { 
+        !it.in('NEXT').in('NEXT').filter{!(it.token in [ 'T_USE', 'T_VOID'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
     
@@ -1349,7 +1349,7 @@ while (it.out('NEXT').filter{ it.atom in ['RawString', 'For', 'Phpcode', 'Functi
                                                      'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
                                                      'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
                                                      'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR', 'T_AS',
-                                                     'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_INSTANCEOF', 'T_QUESTION', 
+                                                     'T_OPEN_BRACKET', 'T_OPEN_PARENTHESIS', 'T_INSTANCEOF', 'T_QUESTION',
                                                      'T_COLON', 'T_DOT'])}.
                                filter{it.atom != null || !(it.token in ['T_ELSEIF', 'T_OPEN_CURLY', 'T_AND_EQUAL',
                                                      'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL',
@@ -2462,7 +2462,7 @@ it.out('ARGUMENTS').out('ARGUMENT').has('atom', 'Logical').each{
         $fullcodeReference
     }
 
-    // removed from g.idx('logical')? 
+    // removed from g.idx('logical')?
     g.idx('atoms').put('atom', 'Typehint', it);
     g.idx('atoms').remove('atom', 'Logical', it);
 
@@ -2606,13 +2606,13 @@ list_after = [
         'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
         'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
         'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR',
-        'T_INSTEADOF', 
+        'T_INSTEADOF',
 
         'T_ELSE', 'T_ELSEIF',
         'T_CATCH'];
 
 list_after_token = [
-        'T_OBJECT_OPERATOR', 'T_INC', 'T_DEC','T_OPEN_PARENTHESIS', 
+        'T_OBJECT_OPERATOR', 'T_INC', 'T_DEC','T_OPEN_PARENTHESIS',
         'T_IS_EQUAL','T_IS_NOT_EQUAL', 'T_IS_GREATER_OR_EQUAL', 'T_IS_SMALLER_OR_EQUAL', 'T_IS_IDENTICAL', 'T_IS_NOT_IDENTICAL', 'T_GREATER', 'T_SMALLER',
         'T_EQUAL', 'T_DIV_EQUAL', 'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
         'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON',
@@ -2653,7 +2653,7 @@ $makeSequence;
     $it.setProperty('makeSequence9', !($it.in('NEXT').next().atom in ['Class', 'Identifier']));
     $it.setProperty('makeSequence10', !($it.out('NEXT').next().token in list_after_token));
     $it.setProperty('makeSequence11', !($it.in('NEXT').next().token in ['T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS', 'T_COMMA', 'T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE']));
-    $it.setProperty('makeSequence12', !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR', 'T_DOUBLE_COLON']}.any())); 
+    $it.setProperty('makeSequence12', !($it.in('NEXT').has('token', 'T_OPEN_CURLY').any() && $it.in('NEXT').in('NEXT').filter{ it.token in ['T_VARIABLE', 'T_OPEN_CURLY', 'T_CLOSE_CURLY', 'T_OPEN_BRACKET', 'T_CLOSE_BRACKET', 'T_OBJECT_OPERATOR', 'T_DOLLAR', 'T_DOUBLE_COLON']}.any()));
     $it.setProperty('makeSequence13a', $it.in('NEXT').next().token);
     $it.setProperty('makeSequence13b', $it.out('NEXT').next().token);
     */
@@ -2909,7 +2909,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             }
 
             $finalTokens = array_merge( Token::$alternativeEnding,
-                            array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY', 
+                            array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY',
                                   'T_INLINE_HTML', 'T_CLOSE_BRACKET'));
             $finalTokens = "'".implode("', '", $finalTokens)."'";
             $queryConditions[] = <<<GREMLIN
@@ -2968,7 +2968,7 @@ GREMLIN;
         if (isset($conditions['check_for_array'])) {
 
             $queryConditions[] = <<<GREMLIN
-filter{ it.as('a').out('NEXT').transform{ 
+filter{ it.as('a').out('NEXT').transform{
     if (it.token == 'T_CLOSE_BRACKET') {
         it;
     } else {
