@@ -31,8 +31,6 @@ class HashTableLinked extends \Report\Format\Devoops {
         $output->pushToJsLibraries( array("assets/js/jquery.dataTables.min.js",
                                           "assets/js/jquery.dataTables.bootstrap.js"));
 
-        $counter = self::$hastable_counter++;
-        
 $js = <<<JS
     				var oTable1 = \$('#hashtable-{$counter}').dataTable( {
 	    			"aoColumns": [
