@@ -163,6 +163,7 @@ class Sequence extends TokenAuto {
         return <<<GREMLIN
 
 fullcode.setProperty("fullcode", " ");
+fullcode.setProperty("count", fullcode.out('ELEMENT').count());
 
 GREMLIN;
     }
