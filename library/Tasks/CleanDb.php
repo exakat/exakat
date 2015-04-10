@@ -43,36 +43,54 @@ return count(n)';
         $query = new Query($client, $queryTemplate, array());
         $result = $query->getResultSet();
         $nodes = $result[0][0];
-        display($nodes." nodes in the database\n");
+        display($nodes.' nodes in the database');
 
         $begin = microtime(true);
         if ($nodes == 0) {
-            display( "No nodes in neo4j. No need to clean\n");
+            display('No nodes in neo4j. No need to clean');
         } elseif ($config->quick || $nodes > 10000) {
-            display("Cleaning with restart\n");
-            shell_exec('cd '.$config->projects_root.'/neo4j/;./bin/neo4j stop; rm -rf data; mkdir data; mkdir data/log');
-            shell_exec('cd '.$config->projects_root.'/neo4j/;./bin/neo4j start');
-            display("Database cleaned with restart\n");
+            display('Cleaning with restart');
+            shell_exec('cd '.$config->projects_root.'/neo4j/;./bin/neo4j stop; rm -rf data; mkdir data');
+            
+            // checking that the server has indeed restarted
+            $round = 0;
+            do {
+                $round++;
+                if ($round > 0) {
+                    sleep($round);
+                }
+                shell_exec('cd '.$config->projects_root.'/neo4j/;sh ./bin/neo4j start-no-wait 2>&1');
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, 'http://'.$config->neo4j_host);
+                curl_setopt($ch, CURLOPT_PORT, $config->neo4j_port);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                $res = curl_exec($ch);
+                curl_close($ch);
+            } while ( $res === false);
+            
+            display('Database cleaned with restart');
 
             try {   
                 $client = new Client();
                 $client->getServerInfo();
-                display( "Restarted Neo4j cleanly \n");
+                display('Restarted Neo4j cleanly');
             } catch (\Exception $e) {
-                display( "Didn't restart neo4j cleanly\n");
+                display('Didn\'t restart neo4j cleanly');
             }
         } else {
-            display("Cleaning with cypher\n");
+            display('Cleaning with cypher');
         
             $queryTemplate = 'MATCH (n) 
 OPTIONAL MATCH (n)-[r]-() 
 DELETE n,r';
         	$query = new Query($client, $queryTemplate, array());
 	        $result = $query->getResultSet();
-            display("Database cleaned\n");
+            display('Database cleaned');
         }
         $end = microtime(true);
-        display(number_format(($end - $begin) * 1000, 0)." ms\n");
+        display(number_format(($end - $begin) * 1000, 0).' ms');
     }
     
     private function getClient() {
@@ -80,10 +98,9 @@ DELETE n,r';
             $client = new Client();
             $client->getServerInfo();
         } catch (\Exception $e) {
-            display("Couldn't access Neo4j\n");
-            print shell_exec('cd '.$this->config->projects_root.'/neo4j; ./bin/neo4j start');
+            display('Couldn\'t access Neo4j');
+            shell_exec('cd '.$this->config->projects_root.'/neo4j; ./bin/neo4j start');
             $res = shell_exec('curl 127.0.0.1:7474/db/data/ 2>&1');
-            var_dump($res);
             sleep(1);
             
             $this->getClient();
