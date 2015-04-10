@@ -1160,3 +1160,15 @@ iconv_set_encoding : INI SET!
 Spot old code in the codebase? 
 Code older than (xxx months) may be omitted.
 
+URL_Fopen : how to detect its usage/availability ?
+elseif empty is not empty (it means the test intercepts some situation)
+empty else or empty final elseif is bad.
+
+$$foo['bar']['baz'] or Foo::$bar['baz'](). 
+Currently, a statement like global $$foo->bar; is allowed in PHP. For PHP 7 it has to be rewritten as global ${$foo->bar};.
+
+add checks in robo for pictures (they should be smallest), report (they should be tidy).
+
+Find a way to add 'association' for foreach/for/if/ifelse, etc. They are not compulsory but should be used when building instructions to reduce checking. 
+
+Review : https://wiki.php.net/rfc#php_70 for PHP 7 compatibility.
