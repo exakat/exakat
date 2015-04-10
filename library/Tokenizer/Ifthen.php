@@ -195,7 +195,7 @@ class Ifthen extends TokenAuto {
                                'cleanIndex'   => true);
         $this->checkAuto();
         
-        // @doc if then elseif without else
+        // @doc if then elseif (without else)
         $this->conditions = array( 0 => array('token' => self::$operators),
                                    1 => array('atom'  => 'Parenthesis'),
                                    2 => array('token' => 'T_OPEN_CURLY'),
@@ -219,6 +219,26 @@ class Ifthen extends TokenAuto {
                                );
         $this->checkAuto();
 
+        // @doc if then elseif (without else)
+        $this->conditions = array( 0 => array('token' => self::$operators),
+                                   1 => array('atom'  => 'Parenthesis'),
+                                   2 => array('atom'  => 'Sequence'),
+                                   3 => array('atom'  => 'Ifthen',
+                                              'token' => 'T_ELSEIF',
+                                              'property' => array('alternative' => false))
+        );
+        
+        $this->actions = array('transform'    => array(1 => 'CONDITION',
+                                                       2 => 'THEN',
+                                                       3 => 'ELSE'
+                                                      ),
+                               'property'     => array('alternative' => false),
+                               'makeSequence' => 'it',
+                               'atom'         => 'Ifthen',
+                               'cleanIndex'   => true
+                               );
+        $this->checkAuto();
+        
     ////////////////////////////////////////////////////////////
     //// Alternative syntax                                 ////
     ////////////////////////////////////////////////////////////
