@@ -41,7 +41,6 @@ class RoboFile extends \Robo\Tasks
         $files = $mit = Finder::create()->files()
                                         ->name('*.php')
                                         ->in('library')
-                                        ->in('bin')
                                         ->in('scripts');
         $docs = array();
         
@@ -164,8 +163,7 @@ LICENCE;
     
     public function pharBuild() {
         $packer = $this->taskPackPhar('exakat.phar')
-//                       ->compress()
-                       ;
+                       ->compress();
         
         $this->updateBuild();
 
@@ -223,4 +221,83 @@ LICENCE;
             $packer->addFile($file->getRelativePathname(), $file->getRealPath());
         }
     }
+    
+    public function checkSyntax() {
+        // checking json files
+        $files = Finder::create()->ignoreVCS(true)
+            ->in('data/')
+            ->files()
+            ->name('*.json');
+        
+        $errors = array();
+        $total = 0;
+        
+        foreach($files as $file) {
+            $total++;
+            $raw = file_get_contents($file);
+            $json = json_decode($raw);
+            if (empty($json)) {
+                $errors[] = "$file is JSON invalid\n";
+            }
+        }
+
+
+        // checking inifile files
+        $files = Finder::create()->ignoreVCS(true)
+            ->in('data/')
+            ->files()
+            ->name('*.ini');
+        
+        $errors = array();
+        $total = 0;
+        
+        set_error_handler('error_handler');
+        
+        foreach($files as $file) {
+            $total++;
+            $ini = parse_ini_file($file);
+            if (empty($ini)) {
+                $errors[] = "$file is INI invalid\n";
+            }
+        }
+        set_error_handler(NULL);
+        
+        // checking sqlite files
+        $files = Finder::create()->ignoreVCS(true)
+            ->in('data/')
+            ->files()
+            ->name('*.sqlite');
+        
+        foreach($files as $file) {
+            $total++;
+            $sqlite = new sqlite3($file);
+            $results = $sqlite->query('pragma integrity_check');
+            $response = $results->fetchArray()['integrity_check'];
+            if ($response != 'ok') {
+                $errors[] = "$file is SQLITE3 invalid (integrity check : $response)\n";
+                continue;
+            }
+
+            $results = $sqlite->query('PRAGMA foreign_key_check');
+            $response = $results->fetchArray()['foreign_key_check'];
+            if ($response !== null) {
+                $errors[] = "$file is SQLITE3 invalid (foreign key check : $response)\n";
+                continue;
+            }
+        }
+
+
+        // results
+        if (empty($errors)) {
+            print "No error found in $total files tested.\n";
+        } else {
+            echo count($errors).' errors found'."\n";
+            print_r($errors);
+        }
+    }
+}
+
+function error_handler ( $errno , $errstr , $errfile = '', $errline = null, $errcontext = array()) {
+    print __METHOD__."\n";
+    return true;
 }
