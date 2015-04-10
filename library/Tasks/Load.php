@@ -36,7 +36,7 @@ class Load implements Tasks {
         $this->log = new \Log('load', $this->config->projects_root.'/projects/'.$this->config->project);
 
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
-            display( "No such project as '{$this->config->project}'. Aborting\n");
+            display('No such project as "'.$this->config->project.'". Aborting');
             die();
         }
 
@@ -56,12 +56,12 @@ class Load implements Tasks {
             $nbTokens = $res['tokens'];
     
         } else {
-            display("No file to process. Aborting\n");
+            display('No file to process. Aborting');
             die();
         }
 
         $this->client->finalize();
-        display("Final memory : ".number_format(memory_get_usage()/ pow(2, 20))."Mb \n");
+        display('Final memory : '.number_format(memory_get_usage()/ pow(2, 20)).'Mb');
     }
 
     private function process_dir($dir) {
@@ -92,13 +92,13 @@ class Load implements Tasks {
     }
 
     private function process_file($filename) {
-        display($filename."\n");
+        display($filename);
         $log = array();
         $begin = microtime(true);
     
         if (is_link($filename)) { return true; }
         if (!file_exists($filename)) {
-            die( "'$filename' doesn't exists. Aborting\n");
+            die( '"'.$filename.'" doesn\'t exists. Aborting');
         }
 
         $file = realpath($filename);
@@ -112,7 +112,7 @@ class Load implements Tasks {
         }
 
         if (!$this->php->compile($filename)) {
-            display( "Ignoring file $filename as it won't compile with the configure PHP version (".$this->config->phpversion.")\n");
+            display('Ignoring file '.$filename.' as it won\'t compile with the configure PHP version ('.$this->config->phpversion.')');
             return false;
         }
     
@@ -1118,7 +1118,7 @@ class Load implements Tasks {
         $last->relateTo($last2, 'NEXT')->setProperty('file', $file)->save();
 
         $this->client->save_chunk();
-        display("      memory : ".number_format(memory_get_usage()/ pow(2, 20))."Mb \n");
+        display('      memory : '.number_format(memory_get_usage()/ pow(2, 20)).'Mb');
 
         return $Tid;
     }
