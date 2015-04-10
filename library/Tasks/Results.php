@@ -32,7 +32,7 @@ class Results implements Tasks {
         
         $analyzer = $config->program;
         if (empty($analyzer)) {
-            die( "Provide an analyzer with -P X/Y. Aborting\n");
+            die('Provide an analyzer with -P X/Y. Aborting'."\n");
         }
         
         $analyzerClass = \Analyzer\Analyzer::getClass($analyzer);
@@ -51,19 +51,19 @@ class Results implements Tasks {
 
         $return = array();
         if ($config->style == 'BOOLEAN') {
-            $queryTemplate = "g.idx('analyzers')[['analyzer':'$analyzer']].out.any()"; 
+            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.any()'; 
             $vertices = $this->query($client, $queryTemplate);
 
             $return[] = $vertices[0][0];
         } elseif ($config->style == 'COUNTED_ALL') {
-            $queryTemplate = "g.idx('analyzers')[['analyzer':'$analyzer']].out.count()"; 
+            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.count()'; 
             $vertices = $this->query($client, $queryTemplate);
 
             $return[] = $vertices[0][0];
         } elseif ($config->style == 'ALL') {
               $query = <<<GREMLIN
-        g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.fullcode, 'File':'None', 'Line':it.line, 'Namespace':'Globaln', 'Class':'Globalc', 'Function':'Globalf' ]; }.as('x').
-        transform{ it.in.loop(1){true}{ it.object.token in ['T_CLASS', 'T_FUNCTION', 'T_NAMESPACE', 'T_FILENAME']}.each{ m[it.atom] = it.code;} m; }.transform{ m; }
+g.idx('analyzers')[['analyzer':'$analyzer']].out.sideEffect{m = ['Fullcode':it.fullcode, 'File':'None', 'Line':it.line, 'Namespace':'Globaln', 'Class':'Globalc', 'Function':'Globalf' ]; }.as('x')
+                                            .transform{ it.in.loop(1){true}{ it.object.token in ['T_CLASS', 'T_FUNCTION', 'T_NAMESPACE', 'T_FILENAME']}.each{ m[it.atom] = it.code;} m; }.transform{ m; }
 GREMLIN;
 
             $vertices = $this->query($client, $query);
@@ -80,7 +80,7 @@ GREMLIN;
                 $return[] = $row;
             }
         } elseif ($config->style == 'DISTINCT') {
-            $queryTemplate = "g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.code.unique()"; 
+            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.code.unique()'; 
             $vertices = $this->query($client, $queryTemplate);
 
             $return = array();
@@ -88,7 +88,7 @@ GREMLIN;
                 $return[] = $v[0];
             }
         } elseif ($config->style == 'COUNTED') {
-            $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'Analyzer\\\\$analyzer']].out.groupCount(m){it.code}.cap"; 
+            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.groupCount(m){it.code}.cap'; 
             $vertices = $this->query($client, $queryTemplate);
 
             $return = array();
