@@ -1126,7 +1126,7 @@ class Load implements Tasks {
     private function process_blocks($token_value) {
         static $states = array();
         static $states_id = 0;
-
+        
         if ($token_value == 'T_CLASS' ) { 
             $states[] = 'Class'; 
             $states_id++; 
@@ -1152,7 +1152,7 @@ class Load implements Tasks {
         }
 
         if ($token_value == 'T_OPEN_CURLY' )    { 
-            if (count($states) == 1) {
+            if (count($states) > 0) {
                 $state = array_pop($states);  
                 return $state;
             } else {
