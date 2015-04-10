@@ -32,10 +32,6 @@ class Export implements Tasks {
         $client = new Client();
 
         $queryTemplate = 'g.V.as("x").except([g.v(0)])'; 
-        
-        if (!empty($config->filename)) {
-            $queryTemplate .= '.filter{ it.in.loop(1){true}{true}.has("token", "T_FILENAME").has("code", "'.$config->filename.'").any()}';
-        }
 
         $params = array('type' => 'IN');
         $query = new Gremlin\Query($client, $queryTemplate, $params);
