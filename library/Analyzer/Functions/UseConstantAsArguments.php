@@ -27,32 +27,20 @@ use Analyzer;
 
 class UseConstantAsArguments extends Analyzer\Analyzer {
     public function analyze() {
-        $functions = $this->loadIni('php_constant_arguments.ini');
+        $functions = $this->loadJson('php_constant_arguments.json');
 
         // combinaison : several constants may be combined.
-        $positions = array(0, 1, 2, 3, 4, 5);
+        $positions = range(0, count((array) $functions->combinaison) - 1);
         foreach($positions as $position) {
-            if (!isset($functions["combinaison$position"])) { continue; }
-
-            foreach($functions["combinaison$position"] as $function => $constants) {
-                $constants = $this->makeFullNsPath(explode(',', $constants));
-
-                // we don't like anything else than a legit constant
-                $this->atomFunctionIs($function)
-                     ->outIs('ARGUMENTS')
-                     ->outIs('ARGUMENT')
-                     ->is('rank', $position)
-                     ->atomIsNot(array('Identifier', 'Logical', 'Variable', 'Property', 'Functioncall',
-                                       'Methodcall', 'Staticproperty', 'Staticmethodcall', 'Array'))
-                     ->back('first');
-                $this->prepareQuery();
+            foreach($functions->combinaison->{$position} as $function => $constants) {
+                $constants = $this->makeFullNsPath($constants);
 
                 // if it's a constant, check that constant
                 $this->atomFunctionIs($function)
                      ->outIs('ARGUMENTS')
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
-                     ->atomIs('Identifier')
+                     ->atomIs(array('Identifier', 'Nsname'))
                      ->fullnspathIsNot($constants)
                      ->back('first');
                 $this->prepareQuery();
@@ -63,30 +51,18 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs('Logical')
-                     ->atomInside('Identifier')
+                     ->atomInside(array('Identifier', 'Nsname', 'Variable'))
                      ->hasNoIn('SUBNAME')
                      ->fullnspathIsNot($constants)
                      ->back('first');
                 $this->prepareQuery();
             }
         }
-
-        $positions = array(0, 1, 2, 3, 4, 5);
+        
+        $positions = range(0, count((array) $functions->alternative) - 1);
         foreach($positions as $position) {
-            if (!isset($functions["alternative$position"])) { continue; }
-
-            foreach($functions["alternative$position"] as $function => $constants) {
-                $constants = $this->makeFullNsPath(explode(',', $constants));
-
-                // we don't like anything else than a legit constant
-                $this->atomFunctionIs($function)
-                     ->outIs('ARGUMENTS')
-                     ->outIs('ARGUMENT')
-                     ->is('rank', $position)
-                     ->atomIsNot(array('Identifier', 'Nsname', 'Variable', 'Property', 'Functioncall',
-                                       'Methodcall', 'Staticproperty', 'Staticmethodcall', 'Array'))
-                     ->back('first');
-                $this->prepareQuery();
+            foreach($functions->alternative->{$position} as $function => $constants) {
+                $constants = $this->makeFullNsPath($constants);
 
                 $this->atomFunctionIs($function)
                      ->outIs('ARGUMENTS')
