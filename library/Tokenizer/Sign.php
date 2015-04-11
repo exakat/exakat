@@ -63,7 +63,7 @@ class Sign extends TokenAuto {
                                                                                  'T_CONSTANT_ENCAPSED_STRING', 'T_LNUMBER', 'T_DNUMBER',
                                                                                  'T_CLOSE_PARENTHESIS', 'T_VARIABLE', 'T_DOT',
                                                                                  'T_CLOSE_BRACKET','T_DOLLAR', 'T_CLOSE_CURLY', 'T_OPEN_CURLY',
-                                                                                 'T_FUNCTION'),
+                                                                                 'T_FUNCTION', 'T_INC', 'T_DEC'),
                                                                           Magicconstant::$operators, Not::$operators),
                                                'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream',
                                                                      'Multiplication', 'Cast', 'Integer', 'Float', 'Function')),
