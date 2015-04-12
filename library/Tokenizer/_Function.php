@@ -51,6 +51,7 @@ class _Function extends TokenAuto {
                                                          7 => 'DROP'),
                                'atom'          => 'Function',
                                'checkTypehint' => 'Function',
+                               'makeBlock'     => true,
                                'cleanIndex'    => true,
                                'makeSequence'  => 'it');
         $this->checkAuto();
