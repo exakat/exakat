@@ -32,7 +32,8 @@ class Reference extends TokenAuto {
                                                                 array('T_VARIABLE', 'T_LNUMBER', 'T_DNUMBER', 'T_STRING',
                                                                       'T_MINUS', 'T_PLUS', 'T_CLOSE_PARENTHESIS',
                                                                       'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS', 'T_CONSTANT_ENCAPSED_STRING')),
-                                              'notAtom'    => array('Parenthesis', 'Array', 'Comparison', 'Bitshift', 'Not')),
+                                              'notAtom'    => array('Parenthesis', 'Array', 'Comparison', 'Bitshift', 'Not', 'Functioncall',
+                                                                    'Noscream')),
                                    0 => array('token'      => Reference::$operators,
                                               'atom'       => 'none'),
                                    1 => array('atom'       => array('Variable', 'Array', 'Property', 'Functioncall',
@@ -52,7 +53,8 @@ class Reference extends TokenAuto {
 
         // special case for Stdclass &$x =
         $this->conditions = array(-2 => array('filterOut' => 'T_DOUBLE_COLON'),
-                                  -1 => array('token'     => 'T_STRING'),
+                                  -1 => array('token'     => 'T_STRING',
+                                              'atom'      => 'none'),
                                    0 => array('token'     => Reference::$operators,
                                               'atom'      => 'none'),
                                    1 => array('atom'      => 'Variable'),
@@ -78,7 +80,7 @@ class Reference extends TokenAuto {
                                'propertyNext' => array('reference' => true),
         );
         $this->checkAuto();
-
+        
         return false;
     }
 

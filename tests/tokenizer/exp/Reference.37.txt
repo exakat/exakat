@@ -46,10 +46,10 @@ Label : CODE
       {
       Label : ELEMENT
         const
-        Label : VALUE
-          1
         Label : NAME
           B
+        Label : VALUE
+          1
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -66,6 +66,8 @@ Label : CODE
               1
       Label : ELEMENT
         function
+        Label : STATIC
+          static
         Label : ARGUMENTS
           void
           Label : ARGUMENT
@@ -78,8 +80,6 @@ Label : CODE
             return
             Label : RETURN
               1
-        Label : STATIC
-          static
   Label : ELEMENT
     =
     Label : RIGHT

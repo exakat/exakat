@@ -31,7 +31,7 @@ class Typehint extends TokenAuto {
         $atoms = array('Variable', 'Assignation', 'Identifier');
         
         // normal case for classes
-        $this->conditions = array(-1 => array('filterOut' => 'T_CATCH'),
+        $this->conditions = array(-1 => array('filterOut' => array('T_CATCH', 'T_IF')),
                                    0 => array('token'     => Typehint::$operators),
                                    1 => array('atom'      => 'yes',
                                               'token'     => array('T_STRING', 'T_NS_SEPARATOR')),

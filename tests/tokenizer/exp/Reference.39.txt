@@ -1,0 +1,90 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        &
+        Label : RIGHT
+          $a
+        Label : LEFT
+          ~
+          Label : NOT
+            B
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+    Label : THEN
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          C
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        &
+        Label : RIGHT
+          $a
+        Label : LEFT
+          !
+          Label : NOT
+            B
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+    Label : THEN
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          C
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        &
+        Label : RIGHT
+          $a
+        Label : LEFT
+          @
+          Label : AT
+            B
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                void
+    Label : THEN
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          C
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        &
+        Label : RIGHT
+          $a
+        Label : LEFT
+          B
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              void
+    Label : THEN
+      ;
+      Label : ELEMENT
+        return
+        Label : RETURN
+          C

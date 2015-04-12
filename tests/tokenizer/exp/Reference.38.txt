@@ -1,0 +1,222 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    function
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $d
+      Label : ARGUMENT
+        $c
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        $a
+    Label : NAME
+      B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            &
+            Label : RIGHT
+              $a
+            Label : LEFT
+              ~
+              Label : NOT
+                C
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    void
+        Label : THEN
+          ;
+          Label : ELEMENT
+            return
+            Label : RETURN
+              D
+      Label : ELEMENT
+        switch
+        Label : NAME
+          $a
+        Label : CASES
+          Sequence Case Default
+          Label : ELEMENT
+            default
+            Label : CODE
+              ;
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+              Label : ELEMENT
+                ::
+                Label : CLASS
+                  static
+                Label : METHOD
+                  G
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      $d
+                    Label : ARGUMENT
+                      $c
+                    Label : ARGUMENT
+                      "
+                      Label : CONTAIN
+                        Concatenation
+                        Label : CONCAT
+                          Z
+                        Label : CONCAT
+                          $b
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        H
+                      Label : CONSTANT
+                        Y
+          Label : ELEMENT
+            case
+            Label : CASE
+              @
+              Label : AT
+                M
+            Label : CODE
+              ;
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+              Label : ELEMENT
+                ::
+                Label : CLASS
+                  static
+                Label : METHOD
+                  G
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      $d
+                    Label : ARGUMENT
+                      $c
+                    Label : ARGUMENT
+                      "
+                      Label : CONTAIN
+                        Concatenation
+                        Label : CONCAT
+                          Q
+                        Label : CONCAT
+                          $b
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        H
+                      Label : CONSTANT
+                        P
+          Label : ELEMENT
+            case
+            Label : CASE
+              @
+              Label : AT
+                R
+            Label : CODE
+              ;
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+              Label : ELEMENT
+                ::
+                Label : CLASS
+                  static
+                Label : METHOD
+                  G
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      $d
+                    Label : ARGUMENT
+                      $c
+                    Label : ARGUMENT
+                      "
+                      Label : CONTAIN
+                        Concatenation
+                        Label : CONCAT
+                          V
+                        Label : CONCAT
+                          $b
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        H
+                      Label : CONSTANT
+                        U
+          Label : ELEMENT
+            case
+            Label : CASE
+              K
+            Label : CODE
+              Block with Sequence For Case
+              Label : ELEMENT
+                Void
+          Label : ELEMENT
+            case
+            Label : CASE
+              L
+            Label : CODE
+              Block with Sequence For Case
+              Label : ELEMENT
+                Void
+          Label : ELEMENT
+            case
+            Label : CASE
+              F
+            Label : CODE
+              ;
+              Label : ELEMENT
+                break
+                Label : LEVEL
+                  void
+              Label : ELEMENT
+                ::
+                Label : CLASS
+                  static
+                Label : METHOD
+                  G
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      $d
+                    Label : ARGUMENT
+                      $c
+                    Label : ARGUMENT
+                      "
+                      Label : CONTAIN
+                        Concatenation
+                        Label : CONCAT
+                          J
+                        Label : CONCAT
+                          $b
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        H
+                      Label : CONSTANT
+                        I
+          Label : ELEMENT
+            case
+            Label : CASE
+              E
+            Label : CODE
+              Block with Sequence For Case
+              Label : ELEMENT
+                Void
+      Label : ELEMENT
+        return
+        Label : RETURN
+          AA
