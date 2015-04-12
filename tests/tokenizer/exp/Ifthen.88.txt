@@ -38,6 +38,8 @@ Label : CODE
       Label : ELEMENT
         K
       Label : ELEMENT
+        N
+      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -48,7 +50,7 @@ Label : CODE
               Label : ARGUMENT
                 $c
       Label : ELEMENT
-        S
+        K
       Label : ELEMENT
         echo
         Label : ARGUMENTS
@@ -68,9 +70,7 @@ Label : CODE
                 Label : INDEX
                   'R'
       Label : ELEMENT
-        K
-      Label : ELEMENT
-        N
+        S
       Label : ELEMENT
         foreach
         Label : BLOCK
@@ -115,14 +115,14 @@ Label : CODE
                         G
                     Label : CONCAT
                       'F'
-        Label : VALUE
-          $e
         Label : SOURCE
           [
           Label : VARIABLE
             $d
           Label : INDEX
             $b
+        Label : VALUE
+          $e
       Label : ELEMENT
         C
       Label : ELEMENT
@@ -133,11 +133,11 @@ Label : CODE
             $c
       Label : ELEMENT
         B
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
     Label : SOURCE
       $a
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b

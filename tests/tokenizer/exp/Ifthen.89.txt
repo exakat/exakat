@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : ARGUMENTS
+      Arguments
+      Label : ARGUMENT
+        $b
+      Label : ARGUMENT
+        $a
     Label : NAME
       C
     Label : BLOCK
@@ -18,12 +24,6 @@ Label : CODE
               "\n"
             Label : CONCAT
               __METHOD__
-    Label : ARGUMENTS
-      Arguments
-      Label : ARGUMENT
-        $b
-      Label : ARGUMENT
-        $a
   Label : ELEMENT
     if
     Label : CONDITION
@@ -44,6 +44,44 @@ Label : CODE
           ;
           Label : ELEMENT
             B
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            C
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $c
+              Label : ARGUMENT
+                'D'
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            C
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $c
+              Label : ARGUMENT
+                'D'
+      Label : ELEMENT
+        E
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $b
+        Label : THEN
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $c
   Label : ELEMENT
     =
     Label : RIGHT

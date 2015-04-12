@@ -4,6 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void
     Label : NAME
       B
     Label : BLOCK
@@ -52,14 +56,14 @@ Label : CODE
                       $f
                     Label : PROPERTY
                       E
-        Label : VALUE
-          $c
         Label : SOURCE
           ->
           Label : OBJECT
             $b
           Label : PROPERTY
             C
+        Label : VALUE
+          $c
       Label : ELEMENT
         =
         Label : RIGHT
@@ -70,7 +74,3 @@ Label : CODE
               void
         Label : LEFT
           $a
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        void

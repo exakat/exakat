@@ -40,3 +40,15 @@ Label : CODE
               C
           Label : VARIABLE
             $c
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        $d
+    Label : THEN
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $e

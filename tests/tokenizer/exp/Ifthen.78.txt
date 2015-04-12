@@ -35,10 +35,10 @@ Label : CODE
               {
               Label : ELEMENT
                 void
-            Label : VALUE
-              $f
             Label : SOURCE
               $e
+            Label : VALUE
+              $f
       Label : ELEMENT
         =
         Label : RIGHT

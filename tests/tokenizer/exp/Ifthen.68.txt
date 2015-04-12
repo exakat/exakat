@@ -19,34 +19,6 @@ Label : CODE
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
-                    $o
-            Label : LEFT
-              $n
-        Label : THEN
-          ;
-          Label : ELEMENT
-            .=
-            Label : RIGHT
-              Concatenation
-              Label : CONCAT
-                'H'
-              Label : CONCAT
-                $q
-            Label : LEFT
-              $p
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            &&
-            Label : RIGHT
-              !
-              Label : NOT
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
                     $t
             Label : LEFT
               &&
@@ -66,6 +38,34 @@ Label : CODE
               I
             Label : LEFT
               $u
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            &&
+            Label : RIGHT
+              !
+              Label : NOT
+                empty
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $o
+            Label : LEFT
+              $n
+        Label : THEN
+          ;
+          Label : ELEMENT
+            .=
+            Label : RIGHT
+              Concatenation
+              Label : CONCAT
+                'H'
+              Label : CONCAT
+                $q
+            Label : LEFT
+              $p
       Label : ELEMENT
         if
         Label : CONDITION
@@ -154,10 +154,10 @@ Label : CODE
               $d
         Label : LEFT
           $c
-    Label : VALUE
-      $b
     Label : SOURCE
       $a
+    Label : VALUE
+      $b
   Label : ELEMENT
     if
     Label : CONDITION

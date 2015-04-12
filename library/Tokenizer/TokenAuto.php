@@ -2011,7 +2011,8 @@ ainstruction = instruction.out('NEXT').next();
 instruction.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ;
-if (ainstruction.getProperty('token') == 'T_SEMICOLON') {
+if (ainstruction.getProperty('token') == 'T_SEMICOLON' && 
+    ainstruction.getProperty('atom') == null) {
     semicolon = ainstruction;
     ainstruction = semicolon.out('NEXT').next();
     
@@ -2067,9 +2068,9 @@ g.addEdge(sequence, ainstruction, 'NEXT');
             unset($actions['toBlockIfelseifAlternative']);
         }
 
-        if (isset($actions['to_block_ifelseif_instruction']) && $actions['to_block_ifelseif_instruction']) {
+        if (isset($actions['toBlockIfelseifInstruction']) && $actions['toBlockIfelseifInstruction']) {
                 $qactions[] = "
-/* to_block_ifelseif_instruction */
+/* toBlockIfelseifInstruction */
 
 x = g.addVertex(null, [code:'Block with control if elseif', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:' /**/ ', block:true ]);
 a = it.out('NEXT').out('NEXT').next();
@@ -2081,7 +2082,7 @@ a.setProperty('rank', 0);
 a.bothE('NEXT').each{ g.removeEdge(it); }
 
 ";
-            unset($actions['to_block_ifelseif_instruction']);
+            unset($actions['toBlockIfelseifInstruction']);
         }
                 
         if (isset($actions['arguments2extends']) && $actions['arguments2extends']) {

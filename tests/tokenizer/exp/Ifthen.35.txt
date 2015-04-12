@@ -18,11 +18,41 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $e
-        Label : VALUE
-          =>
-          Label : KEY
-            $c
-          Label : VALUE
-            $d
         Label : SOURCE
           $b
+        Label : VALUE
+          =>
+          Label : VALUE
+            $d
+          Label : KEY
+            $c
+  Label : ELEMENT
+    foreach
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            $j
+        Label : THEN
+          ;
+          Label : ELEMENT
+            continue
+            Label : LEVEL
+              void
+    Label : SOURCE
+      $h
+    Label : VALUE
+      $i
+  Label : ELEMENT
+    ++
+    Label : POSTPLUSPLUS
+      $g
+  Label : ELEMENT
+    f
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        void

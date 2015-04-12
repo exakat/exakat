@@ -16,6 +16,8 @@ Label : CODE
       ;
       Label : ELEMENT
         do
+        Label : CONDITION
+          $x
         Label : BLOCK
           {
           Label : ELEMENT
@@ -24,5 +26,3 @@ Label : CODE
               3
             Label : LEFT
               $c
-        Label : CONDITION
-          $x

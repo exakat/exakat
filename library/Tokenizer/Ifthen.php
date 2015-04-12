@@ -43,15 +43,15 @@ class Ifthen extends TokenAuto {
 
         // @doc if () $x++;
         // Make a block from sequence after a if/elseif
-        $this->conditions = array(  0 => array('token'     => self::$operators,
-                                               'atom'      => 'none'),
-                                    1 => array('atom'      => 'Parenthesis'),
-                                    2 => array('notAtom'   => 'Sequence',
-                                               'atom'      => 'yes'),
-                                    3 => array('token'     => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
-                                                                    'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML',
-                                                                    'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDSWITCH',
-                                                                    'T_ENDFOR', 'T_ENDWHILE', 'T_ENDDECLARE')),
+        $this->conditions = array(  0 => array('token'   => self::$operators,
+                                               'atom'    => 'none'),
+                                    1 => array('atom'    => 'Parenthesis'),
+                                    2 => array('notAtom' => 'Sequence',
+                                               'atom'    => 'yes'),
+                                    3 => array('token'   => array('T_SEMICOLON', 'T_ELSEIF', 'T_ELSE', 'T_IF',
+                                                                  'T_ENDIF', 'T_CLOSE_TAG', 'T_INLINE_HTML',
+                                                                  'T_CLOSE_CURLY', 'T_ENDFOREACH', 'T_ENDSWITCH',
+                                                                  'T_ENDFOR', 'T_ENDWHILE', 'T_ENDDECLARE')),
         );
         
         $this->actions = array( 'toBlockIfelseif' => 2,
@@ -104,26 +104,12 @@ class Ifthen extends TokenAuto {
                                'cleanIndex'   => true);
         $this->checkAuto();
         
-        // if, elseif followed by a single instruction without a ;
-        $this->conditions = array(  0 => array('token' => self::$operators,
-                                               'atom'  => 'none'),
-                                    1 => array('atom'  => 'Parenthesis'),
-                                    2 => array('atom'  => array('For', 'Switch', 'Foreach', 'While', 'Dowhile', 'Ifthen', 'Assignation', 'Return', 'Break' )),
-                                    3 => array('filterOut' => array_merge( Staticproperty::$operators, Property::$operators,
-                                                                           Logical::$operators))
-                                    );
-        
-        $this->actions = array( 'to_block_ifelseif_instruction' => true,
-                                'property'                      => array('alternative' => false),
-                                'keepIndexed'                   => true);
-        $this->checkAuto();
-
         // @doc if then without else
-        $this->conditions = array( 0 => array('token'   => self::$operators,
-                                              'atom'    => 'none'),
-                                   1 => array('atom'    => 'Parenthesis'),
-                                   2 => array('atom'    => 'Sequence',
-                                              'property' => array('block' => true)),
+        $this->conditions = array( 0 => array('token'      => self::$operators,
+                                              'atom'       => 'none'),
+                                   1 => array('atom'       => 'Parenthesis'),
+                                   2 => array('atom'       => 'Sequence',
+                                              'property'   => array('block' => true)),
                                    3 => array('filterOut2' => array('T_ELSE', 'T_ELSEIF')),
         );
         

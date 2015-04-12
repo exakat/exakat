@@ -12,7 +12,7 @@ Label : CODE
         Label : PROPERTY
           h
     Label : THEN
-      Block with control if elseif
+      ;
       Label : ELEMENT
         if
         Label : CONDITION

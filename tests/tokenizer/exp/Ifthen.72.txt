@@ -39,10 +39,10 @@ Label : ELEMENT
                           void
                           Label : ARGUMENT
                             =>
-                            Label : KEY
-                              'K'
                             Label : VALUE
                               'L'
+                            Label : KEY
+                              'K'
                       Label : ARGUMENT
                         I
                         Label : ARGUMENTS
@@ -63,9 +63,9 @@ Label : ELEMENT
                           'F'
           Label : ELEMENT
             B
-      Label : VALUE
-        $b
       Label : SOURCE
         $a
+      Label : VALUE
+        $b
 Label : ELEMENT
   A

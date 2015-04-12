@@ -20,7 +20,7 @@ Label : CODE
           {
           Label : ELEMENT
             void
-        Label : VALUE
-          $y
         Label : SOURCE
           $x
+        Label : VALUE
+          $y

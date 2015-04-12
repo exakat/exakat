@@ -14,7 +14,7 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $c
+            $d
       Label : ELEMENT
         D
       Label : ELEMENT
@@ -24,7 +24,7 @@ Label : CODE
         Label : ARGUMENTS
           void
           Label : ARGUMENT
-            $d
+            $c
       Label : ELEMENT
         B
       Label : ELEMENT

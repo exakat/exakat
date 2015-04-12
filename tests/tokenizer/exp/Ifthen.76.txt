@@ -4,6 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        $a
     Label : NAME
       B
     Label : BLOCK
@@ -88,7 +92,3 @@ Label : CODE
             return
             Label : RETURN
               G
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        $a

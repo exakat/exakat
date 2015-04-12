@@ -5,10 +5,10 @@ Label : CODE
     return
     Label : RETURN
       ::
-      Label : CLASS
-        self
       Label : PROPERTY
         $f
+      Label : CLASS
+        self
   Label : ELEMENT
     if
     Label : CONDITION
@@ -21,10 +21,10 @@ Label : CODE
             void
             Label : ARGUMENT
               ::
-              Label : CLASS
-                self
               Label : PROPERTY
                 $a
+              Label : CLASS
+                self
     Label : THEN
       ;
       Label : ELEMENT
@@ -35,20 +35,20 @@ Label : CODE
             C
         Label : LEFT
           ::
-          Label : CLASS
-            self
           Label : PROPERTY
             $b
+          Label : CLASS
+            self
     Label : ELSE
       ;
       Label : ELEMENT
         ->
         Label : OBJECT
           ::
-          Label : CLASS
-            self
           Label : PROPERTY
             $d
+          Label : CLASS
+            self
         Label : METHOD
           E
           Label : ARGUMENTS

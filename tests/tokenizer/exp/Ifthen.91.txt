@@ -40,10 +40,10 @@ Label : CODE
             (
             Label : CODE
               instanceof
-              Label : VARIABLE
-                $a
               Label : CLASS
                 E
+              Label : VARIABLE
+                $a
           Label : THEN
             ;
             Label : ELEMENT
@@ -84,12 +84,6 @@ Label : CODE
                 ;
                 Label : ELEMENT
                   foreach
-                  Label : VALUE
-                    =>
-                    Label : KEY
-                      $b
-                    Label : VALUE
-                      $c
                   Label : BLOCK
                     ;
                     Label : ELEMENT
@@ -314,6 +308,12 @@ Label : CODE
                             $b
                   Label : SOURCE
                     $a
+                  Label : VALUE
+                    =>
+                    Label : VALUE
+                      $c
+                    Label : KEY
+                      $b
                 Label : ELEMENT
                   I
                   Label : ARGUMENTS
