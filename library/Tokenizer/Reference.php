@@ -33,7 +33,7 @@ class Reference extends TokenAuto {
                                                                       'T_MINUS', 'T_PLUS', 'T_CLOSE_PARENTHESIS',
                                                                       'T_CLOSE_BRACKET', 'T_CLOSE_PARENTHESIS', 'T_CONSTANT_ENCAPSED_STRING')),
                                               'notAtom'    => array('Parenthesis', 'Array', 'Comparison', 'Bitshift', 'Not', 'Functioncall',
-                                                                    'Noscream')),
+                                                                    'Noscream', 'Methodcall')),
                                    0 => array('token'      => Reference::$operators,
                                               'atom'       => 'none'),
                                    1 => array('atom'       => array('Variable', 'Array', 'Property', 'Functioncall',
