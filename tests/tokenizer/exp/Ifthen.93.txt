@@ -1,0 +1,60 @@
+<?php
+
+Label : CODE
+  ;
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      (
+      Label : CODE
+        ==
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a
+    Label : THEN
+      ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            ==
+            Label : RIGHT
+              2
+            Label : LEFT
+              $a
+        Label : THEN
+          ;
+          Label : ELEMENT
+            if
+            Label : CONDITION
+              (
+              Label : CODE
+                !
+                Label : NOT
+                  empty
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $newHash
+            Label : THEN
+              {
+              Label : ELEMENT
+                void
+          Label : ELEMENT
+            return
+            Label : RETURN
+              true
+        Label : ELSE
+          {
+          Label : ELEMENT
+            return
+            Label : RETURN
+              false
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          ''
+        Label : LEFT
+          $newHash
