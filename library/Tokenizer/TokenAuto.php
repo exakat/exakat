@@ -869,6 +869,12 @@ if (it.out('IMPLEMENTS').out('ARGUMENT').any()) {
             unset($actions['arg2implement']);
         }
         
+        if (isset($actions['makeBlock'])) {
+            $qactions[] = " /* makeBlock */
+   it.out('BLOCK').next().setProperty('block', true);
+            ";
+            unset($actions['makeBlock']);
+        }
 
         if (isset($actions['to_const_assignation'])) {
             $fullcode = $this->fullcode();
@@ -1127,8 +1133,6 @@ semicolon.setProperty('code', 'Void');
 semicolon.setProperty('token', 'T_VOID');
 semicolon.setProperty('atom', 'Void');
 semicolon.setProperty('fullcode', ' ');
-//semicolon.setProperty('modifiedBy', 'to_void');
-
 
 ";
             unset($actions['to_void']);
@@ -1300,7 +1304,7 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
 
 // Special case for Block (Sequence + block)
 while ( it.in('NEXT').filter{ it.atom == 'Sequence' && it.block == true && it.association == null }.any() &&
-        !it.in('NEXT').in('NEXT').filter{it.token in ['T_IF']}.any() &&
+        !it.in('NEXT').in('NEXT').filter{it.token in ['T_IF', 'T_CLOSE_PARENTHESIS']}.any() &&
         !it.in('NEXT').in('NEXT').filter{!(it.token in [ 'T_USE', 'T_VOID'])}.any()) {
     sequence = it;
     previous = it.in('NEXT').next();
@@ -2349,8 +2353,7 @@ close_curly.bothE('NEXT').each{ g.removeEdge(it); }
         if (isset($actions['makeForeachSequence'])) {
             $qactions[] = "
 /* make Foreach Sequence */
-block = g.addVertex(null, [code:'Block with Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:'{ /**/ } '
-/*, modifiedBy:'_Foreach' */ ]);
+block = g.addVertex(null, [code:'Block with Foreach', token:'T_SEMICOLON', atom:'Sequence', virtual:true, line:it.line, fullcode:'{ /**/ } ']);
 element1 = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 element2 = element1.out('NEXT').next();
 
@@ -2372,8 +2375,7 @@ element2.bothE('NEXT').each{ g.removeEdge(it); }
             $qactions[] = "
 /* while_to_block */
 
-x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:true, line:it.line, fullcode:' /**/ '
-/*, modifiedBy:'_While' */]);
+x = g.addVertex(null, [code:'Block with While', token:'T_SEMICOLON', atom:'Sequence', virtual:true, block:true, line:it.line, fullcode:' /**/ ']);
 a = it.out('NEXT').out('NEXT').out('NEXT').out('NEXT').next();
 
 g.addEdge(a.in('NEXT').next(), x, 'NEXT');
@@ -2813,8 +2815,7 @@ x.setProperty('atom', 'Sequence');
             $qactions[] = "
 /* create a functioncall, and hold the variable as property.  */
 
-x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line
-/*, modifiedBy:'FunctionCall'*/ ]);
+x = g.addVertex(null, [code:it.code, fullcode: it.code, atom:'Variable', token:'T_VARIABLE', virtual:true, line:it.line]);
 g.addEdge(it, x, 'NAME');
 g.idx('atoms').put('atom', 'Variable', x);
                 ";
@@ -2827,8 +2828,7 @@ g.idx('atoms').put('atom', 'Variable', x);
             $qactions[] = "
 /* hold the array as property.  */
 
-x = g.addVertex(null, [code:it.code, fullcode: it.fullcode, atom:'Array', token:'T_OPEN_BRACKET', virtual:true, line:it.line
-/*,  modifiedBy:'FunctionCallArray' */]);
+x = g.addVertex(null, [code:it.code, fullcode: it.fullcode, atom:'Array', token:'T_OPEN_BRACKET', virtual:true, line:it.line]);
 g.addEdge(it, x, 'NAME');
 g.idx('atoms').put('atom', 'Array', x);
                 ";
