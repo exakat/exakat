@@ -37,11 +37,11 @@ class Files implements Tasks {
         $unknown = array();
 
         if ($config->project === null) {
-            die("Usage : exakat files -p project\nAborting");
+            die("Usage : exakat files -p project\nAborting\n");
         } elseif (!file_exists($config->projects_root.'/projects/'.$dir)) {
-            die("No such project as '{$config->projects_root}/projects/$dir'\nAborting");
+            die("No such project as '{$config->projects_root}/projects/$dir'\nAborting\n");
         } elseif (!file_exists($config->projects_root.'/projects/'.$dir.'/code/')) {
-            die("No code in project '$dir'\nAborting");
+            die("No code in project '$dir'\nAborting\n");
         } 
 
         $exts = array('php'      => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  ),
@@ -104,15 +104,21 @@ class Files implements Tasks {
             }
         }
 
-        display("Built ignore-dir/files list\n");
+        display('Built ignore-dir/files list');
         $shell = 'cd '.$config->projects_root.'/projects/'.$dir.'/code/; phploc '.(count($ignoreName) ? ' --names-exclude  '.join(' --names-exclude ', $ignoreName).' ' : '')
                                                         .(count($ignoreDirs) ? ' --exclude '.join(' --exclude ', $ignoreDirs).' ' : '')
                                                         .' .';
-        display("Ran phploc\n");
+        display('Ran phploc');
 
         $res = shell_exec($shell);
-        preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r);
-        $stats['loc'] = $r[1];
+        if (trim($res) == 'No files found to scan') {
+            die("Project $project is empty.\n");
+        } 
+        if (preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r)) {
+            $stats['loc'] = $r[1];
+        } else {
+            $stats['loc'] = 0;
+        }
 
         $rfiles = trim(shell_exec($shellBase.' | wc -l'));
         $rdirs = trim(shell_exec('find '.$config->projects_root.'/projects/'.$dir.'/code/ -type d -path "*/\.*" | wc -l'));
@@ -122,14 +128,14 @@ class Files implements Tasks {
                                          array('key' => 'directories', 'value' => $rdirs)
                                         )
                           ) ;
-        display("Counted files\n");
+        display('Counted files');
 
         $notCompilable = array();
 
         $versions = $config->other_php_versions;
 
         foreach($versions as $version) {
-            display("Check compilation for $version\n");
+            display('Check compilation for '.$version);
             $stats['notCompilable'.$version] = -1;
             
             $shell = $shellBase . ' | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 sh -c "'.$config->{'php'.$version}.' -l $1 2>&1" || true ';
@@ -184,10 +190,10 @@ class Files implements Tasks {
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
                     // let it run
                 } else {
-                    die( "\nCouldn't interpret on syntax error : \n".
-                         print_r($resFile, true).
-                         print_r($res, true).
-                         "\n".__FILE__."\n");
+                    die( "\nCouldn't interpret on syntax error : \n" .
+                         print_r($resFile, true) .
+                         print_r($res, true) .
+                         "\n" . __FILE__ . "\n");
                 }
             }
     
@@ -239,7 +245,7 @@ class Files implements Tasks {
     
             $datastore->addRow('shortopentag', $shortOpenTag);
         }
-        display("Check short tag\n");
+        display('Check short tag');
 
         $datastore->addRow('hash', $stats);
         
@@ -262,7 +268,7 @@ class Files implements Tasks {
             }
         }
         $datastore->addRow('hash', $composerInfo);
-        display("Check composer\n");
+        display('Check composer');
         
         if ($config->json) {
             if ($unknown) {
