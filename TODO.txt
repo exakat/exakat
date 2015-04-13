@@ -1172,3 +1172,10 @@ add checks in robo for pictures (they should be smallest), report (they should b
 Find a way to add 'association' for foreach/for/if/ifelse, etc. They are not compulsory but should be used when building instructions to reduce checking. 
 
 Review : https://wiki.php.net/rfc#php_70 for PHP 7 compatibility.
+
+& new x() => fatal error.
+
+Unmodified Referenced Argument
+
+Spot IsRead/IsModified Static property
+Spot IsRead/IsModified Static array 
