@@ -29,18 +29,24 @@ class ConstantScalarExpression extends Analyzer\Analyzer {
     protected $phpVersion = '5.6+';
     
     public function analyze() {
+        $validAtoms = array('Integer', 'Float', 'Boolean', 'String', 'Null');
+
+        // const x = 1 + 2;
         $this->atomIs('Const')
              ->outIs('VALUE')
-             ->atomIsNot(array('Integer', 'Float', 'Boolean', 'String', 'Null'))
+             ->atomIsNot($validAtoms)
+             ->tokenIsNot('T_ARRAY')
              ->back('first');
         $this->prepareQuery();
 
+        // function x( $a = 3 . '3', $b = array())
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIsNot(array('Integer', 'Float', 'Boolean', 'String', 'Null'))
+             ->atomIsNot($validAtoms)
+             ->tokenIsNot('T_ARRAY')
              ->back('first');
         $this->prepareQuery();
     }
