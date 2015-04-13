@@ -35,6 +35,16 @@ class UndefinedParentMP extends Analyzer\Analyzer {
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->code('parent')
+             ->goToClass()
+             ->hasNoOut('EXTENDS')
+             ->back('first');
+        $this->prepareQuery();
+
+        // parent::method()
+        $this->atomIs('Staticmethodcall')
+             ->outIs('CLASS')
+             ->code('parent')
+             ->hasClassDefinition()
              ->back('first')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
@@ -44,6 +54,7 @@ class UndefinedParentMP extends Analyzer\Analyzer {
                               .loop("extension"){true}{it.object.atom == "Class"}
                               .out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.out("PRIVATE").any() == false}.out("NAME").has("code", name)
                               .any() == false}')
+
                 // checking parent is not a composer class
              ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
                               .filter{ it.in("ANALYZED").has("code", "Analyzer\\\\Composer\\\\IsComposerNsname").any()}
@@ -60,9 +71,20 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // parent::method()
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->code('parent')
+             ->goToClass()
+             ->hasNoOut('EXTENDS')
+             ->back('first');
+        $this->prepareQuery();
+
+        // parent::property
+        $this->atomIs('Staticproperty')
+             ->outIs('CLASS')
+             ->code('parent')
+             ->hasClassDefinition()
              ->back('first')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
@@ -70,7 +92,7 @@ class UndefinedParentMP extends Analyzer\Analyzer {
              ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")
                               .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                               .loop("extension"){true}{it.object.atom == "Class"}
-                              .out("BLOCK").out("ELEMENT").has("atom", "Ppp").filter{ it.out("PROTECTED").any() == false}.out("DEFINE").has("code", name)
+                              .out("BLOCK").out("ELEMENT").has("atom", "Ppp").filter{ it.out("PRIVATE").any() == false}.out("DEFINE").has("code", name)
                               .any() == false}')
                 // checking parent is not a composer class
              ->raw('filter{ it.as("extension").out("IMPLEMENTS", "EXTENDS")

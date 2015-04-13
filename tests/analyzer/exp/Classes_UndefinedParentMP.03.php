@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('parent::undefinedMethod( )');
+$expected     = array('parent::undefinedMethod( )',
+                      'parent::definedPrivateMethod( )');
 
-$expected_not = array('parent::definedMethod( )');
+$expected_not = array('parent::definedPublicMethod( )',
+                      'parent::definedProtectedMethod( )');
 
 ?>

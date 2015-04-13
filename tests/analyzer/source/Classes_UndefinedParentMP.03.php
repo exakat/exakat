@@ -1,7 +1,9 @@
 <?php
 
 class a extends c {
-    private function definedMethod() {}
+    private   function definedMethod() {}
+    protected function definedProtectedMethod() {}
+    public    function definedPublicMethod() {}
 }
 
 class b extends a {
@@ -9,7 +11,9 @@ class b extends a {
      
      function x() {
         parent::undefinedMethod();
-        parent::definedMethod();
+        parent::definedPrivateMethod();
+        parent::definedPublicMethod();
+        parent::definedProtectedMethod();
      }
 }
 
