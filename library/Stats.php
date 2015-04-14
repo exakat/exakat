@@ -62,6 +62,7 @@ class Stats {
         $this->stats['lone_token']      = $this->queryOne("g.V.hasNot('atom', null).hasNot('atom', 'File').hasNot('token', 'T_INDEX').filter{ it.in.count() == 0}.count()");
         $this->stats['isrm_variable']   = $this->queryOne("g.V.has('atom', 'Variable').filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Variables\\\\IsRead').any() == false}.filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Variables\\\\IsModified').any() == false}.count()");
         $this->stats['isrm_property']   = $this->queryOne("g.V.has('atom', 'Property').filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\IsRead').any() == false}.filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\IsModified').any() == false}.count()");
+        $this->stats['isrm_staticproperty']   = $this->queryOne("g.V.has('atom', 'Staticproperty').filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\IsRead').any() == false}.filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\IsModified').any() == false}.count()");
         $this->stats['indexed']         = $this->queryOne("g.E.has('label', 'INDEXED').outV.out.inE.filter{!(it.label in ['ANALYZED', 'INDEXED'])}[0..100].label.unique().join(', ')");
     }
     
