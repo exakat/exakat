@@ -31,7 +31,13 @@ class IsModified extends Analyzer\Analyzer {
     }
     
     public function analyze() {
+        // all is doubled for Property and Staticproperty
         $this->atomIs('Property')
+             ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'DEFINE', 'CAST'))
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Staticproperty')
              ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'DEFINE', 'CAST'))
              ->back('first');
         $this->prepareQuery();
@@ -44,8 +50,31 @@ class IsModified extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        $this->atomIs('Staticproperty')
+             ->inIsIE('VARIABLE')
+             ->inIs(array('LEFT', 'VARIABLE'))
+             ->atomIs(array('Assignation', 'Arrayappend'))
+             ->hasNoIn('VARIABLE')
+             ->back('first');
+        $this->prepareQuery();
+
         // arguments : reference variable in a custom function
         $this->atomIs('Property')
+             ->savePropertyAs('rank', 'rank')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->hasNoIn('METHOD') // possibly new too
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->functionDefinition()
+             ->inIs('NAME')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('rank', 'rank', true)
+             ->is('reference', true)
+             ->back('first');
+        $this->prepareQuery();  
+
+        $this->atomIs('Staticproperty')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -86,10 +115,41 @@ class IsModified extends Analyzer\Analyzer {
                  ->fullnspath($functions)
                  ->back('first');
             $this->prepareQuery();
+
+            $this->atomIs('Staticproperty')
+                 ->inIsIE('VARIABLE')
+                 ->is('rank', $position)
+                 ->inIs('ARGUMENT')
+                 ->inIs('ARGUMENTS')
+                 ->hasNoIn('METHOD') // possibly new too
+                 ->atomIs('Functioncall')
+                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_UNSET'))
+                 ->fullnspath($functions)
+                 ->back('first');
+            $this->prepareQuery();
         }
 
         // Class constructors (__construct)
         $this->atomIs('Property')
+             ->savePropertyAs('rank', 'rank')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->hasNoIn('METHOD') // possibly new too
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIs('Functioncall')
+             ->hasIn('NEW')
+             ->classDefinition()
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->analyzerIs('Analyzer\\Classes\\Constructor')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('rank', 'rank')
+             ->is('reference', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Staticproperty')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
