@@ -363,7 +363,7 @@ g.idx('atoms')[['atom':'Function']].filter{it.out('NAME').next().code != ''}.sid
     if (namespace.atom == 'File' || namespace.fullcode == 'namespace Global') {
         fullcode.setProperty('fullnspath', '\\\\' + fullcode.code.toLowerCase());
     } else {
-        fullcode.setProperty('fullnspath', '\\\\' + it.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
+        fullcode.setProperty('fullnspath', '\\\\' + namespace.out('NAMESPACE').next().fullcode.toLowerCase() + '\\\\' + fullcode.code.toLowerCase());
     }
 
     g.idx('functions').put('path', fullcode.fullnspath.toLowerCase(), fullcode);
