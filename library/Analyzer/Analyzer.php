@@ -267,7 +267,9 @@ GREMLIN;
         }
         
         foreach($this->phpConfiguration as $ini => $value) {
-            if ($Php->getConfiguration($ini) != $value) { return false; }
+            if ($Php->getConfiguration($ini) != $value) { 
+                return false; 
+            }
         }
         
         return true;
@@ -661,9 +663,10 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => $v) { 
-                    $code[$k] = strtolower($v); 
+                foreach($code as $k => &$v) { 
+                    $v = strtolower($v); 
                 }
+                unset($v);
             } else {
                 $code = strtolower($code);
             }
@@ -684,9 +687,10 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => $v) { 
-                    $code[$k] = strtolower($v); 
+                foreach($code as $k => &$v) { 
+                    $v = strtolower($v); 
                 }
+                unset($v);
             } else {
                 $code = strtolower($code);
             }
@@ -709,9 +713,10 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => $v) { 
-                    $code[$k] = strtolower($v); 
+                foreach($code as $k => &$v) { 
+                    $v = strtolower($v); 
                 }
+                unset($v);
             } else {
                 $code = strtolower($code);
             }
@@ -734,9 +739,10 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => $v) { 
-                    $code[$k] = strtolower($v); 
+                foreach($code as $k => &$v) { 
+                    $v = strtolower($v); 
                 }
+                unset($v);
             } else {
                 $code = strtolower($code);
             }
@@ -757,9 +763,10 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => $v) { 
-                    $code[$k] = strtolower($v); 
+                foreach($code as $k => &$v) { 
+                    $v = strtolower($v); 
                 }
+                unset($v);
             } else {
                 $code = strtolower($code);
             }
@@ -780,9 +787,10 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => $v) { 
-                    $code[$k] = strtolower($v); 
+                foreach($code as $k => &$v) { 
+                    $v = strtolower($v); 
                 }
+                unset($v);
             } else {
                 $code = strtolower($code);
             }
@@ -861,9 +869,10 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => $v) { 
-                    $code[$k] = strtolower($v); 
+                foreach($code as $k => &$v) { 
+                    $v = strtolower($v); 
                 }
+                unset($v);
             } else {
                 $code = strtolower($code);
             }
@@ -885,9 +894,10 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => $v) { 
-                    $code[$k] = strtolower($v); 
+                foreach($code as $k => &$v) { 
+                    $v = strtolower($v); 
                 }
+                unset($v);
             } else {
                 $code = strtolower($code);
             }
@@ -908,9 +918,10 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => $v) { 
-                    $code[$k] = strtolower($v); 
+                foreach($code as $k => &$v) { 
+                    $v = strtolower($v); 
                 }
+                unset($v);
             } else {
                 $code = strtolower($code);
             }
@@ -1192,7 +1203,9 @@ GREMLIN
         } else {
             $in = array();
             
-            if (!is_array($ins)) { $ins = array($ins); }
+            if (!is_array($ins)) { 
+                $ins = array($ins); 
+            }
             foreach($ins as $i) {
                 if (empty($i)) {
                     $in[] = '.in';
@@ -1220,7 +1233,9 @@ GREMLIN
         } else {
             $in = array();
             
-            if (!is_array($ins)) { $ins = array($ins); }
+            if (!is_array($ins)) { 
+                $ins = array($ins); 
+            }
             foreach($ins as $i) {
                 if (empty($i)) {
                     $in[] = '.in';
@@ -1599,7 +1614,7 @@ GREMLIN
                 } elseif (is_int($value)) {
                     $query = str_replace($name, $value, $query);
                 } else {
-                    die( 'Cannot process argument of type '.gettype($value)."\n".__METHOD__);
+                    die( 'Cannot process argument of type '.gettype($value)."\n".__METHOD__."\n");
                 }
             }
             
