@@ -870,8 +870,12 @@ if (it.out('IMPLEMENTS').out('ARGUMENT').any()) {
         }
         
         if (isset($actions['makeBlock'])) {
+            $link = $actions['makeBlock'];
             $qactions[] = " /* makeBlock */
-   it.out('BLOCK').next().setProperty('block', true);
+it.out('$link').each{
+    it.setProperty('block', true);
+    it.setProperty('fullcode', '{ /**/ } ');
+}
             ";
             unset($actions['makeBlock']);
         }
