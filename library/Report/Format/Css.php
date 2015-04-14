@@ -25,7 +25,7 @@ namespace Report\Format;
 
 class Css { 
     private $css         = null;
-    private $css_default = null;
+    private $cssDefault  = null;
     private $cssName     = null; 
     
     public function __construct($cssName, $className) {
@@ -44,23 +44,23 @@ class Css {
             print "Couldn't find '$cssName.json' file.\n";
         }
 
-        $this->css_default = json_decode(file_get_contents(__DIR__.'/Ace/Css/default/'.$className.'.json'));
+        $this->cssDefault = json_decode(file_get_contents(__DIR__.'/Ace/Css/default/'.$className.'.json'));
     }
     
     public function __get($name) {
         if (isset($this->css->$name)) {
             return $this->css->$name;
         } else {
-            if (!property_exists($this->css_default, $name)) { 
+            if (!property_exists($this->cssDefault, $name)) { 
                 print "Warning : No such default as '$name' in '$this->cssName'\n";
                 print_r($this); 
             }
-            return $this->css_default->$name;
+            return $this->cssDefault->$name;
         }
     }
     
     public function __isset($name) {
-        return isset($this->css->$name) && isset($this->css_default->$name);
+        return isset($this->css->$name) && isset($this->cssDefault->$name);
     }
 }
 

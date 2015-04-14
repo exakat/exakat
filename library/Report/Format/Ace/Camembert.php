@@ -24,11 +24,11 @@
 namespace Report\Format\Ace;
 
 class Camembert extends \Report\Format\Ace {
-    static public $camembert_counter = 0;
+    static public $camembertCounter = 0;
     
     public function render($output, $data) {
         $jsData = "";
-        $colors = $this->css->colors;//array("#68BC31", "#2091CF", "#AF4E96", "#DA5430", "#FEE074", "#CE6F9E", );
+        $colors = $this->css->colors;
 
         $i = 0;
         $array = $data; 
@@ -71,7 +71,7 @@ HTML;
             $jsData .= "				{ label: \"$k\",  data: $v, color: \"".$colors[$i % count($colors)]."\"},\n";
         }
         
-        $counter = \Report\Format\Ace\Camembert::$camembert_counter++;
+        $counter = \Report\Format\Ace\Camembert::$camembertCounter++;
         
         $html = <<<HTML
 									<div class="widget-box">

@@ -24,14 +24,14 @@
 namespace Report\Format\Ace;
 
 class HashTable extends \Report\Format\Ace { 
-    static public $hastable_counter = 0;
+    static public $hastableCounter = 0;
     
     public function render($output, $data) {
 
         $output->pushToJsLibraries( array("assets/js/jquery.dataTables.min.js",
                                           "assets/js/jquery.dataTables.bootstrap.js"));
 
-        $counter = \Report\Format\Ace\HashTable::$hastable_counter++;
+        $counter = \Report\Format\Ace\HashTable::$hastableCounter++;
         
 $js = <<<JS
     				var oTable1 = \$('#hashtable-{$counter}').dataTable( {
