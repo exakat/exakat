@@ -54,7 +54,7 @@ class UselessGlobal extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // $_POST and co are not needed as super globals
-        $superglobals = $this->loadIni('php_superglobals', 'superglobal');        
+        $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');        
         $this->atomIs('Global')
              ->outIs('GLOBAL')
              ->code($superglobals);
