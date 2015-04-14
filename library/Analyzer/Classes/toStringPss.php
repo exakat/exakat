@@ -28,7 +28,11 @@ use Analyzer;
 class toStringPss extends Analyzer\Analyzer {
     public function analyze() {
         $methods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
-        $methods = array_diff($methods, array('__construct', '__destruct'));
+        $methods = array_values(array_diff($methods, array('__construct', '__destruct')));
+        foreach($methods as &$method) {
+            $method = strtolower($method);
+        }
+        unset($method);
         
         $this->atomIs('Function')
              ->hasClass()
@@ -37,7 +41,7 @@ class toStringPss extends Analyzer\Analyzer {
              ->inIs('NAME')
              ->hasOut('STATIC')
              ->back('first');
-        $this->prepareQuery();
+            $this->prepareQuery();
 
         $this->atomIs('Function')
              ->hasClass()
