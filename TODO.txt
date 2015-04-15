@@ -1179,3 +1179,8 @@ Unmodified Referenced Argument
 
 Spot IsRead/IsModified Static property
 Spot IsRead/IsModified Static array 
+
+Check that analyze has a project (compulsory option)
+Restore log2csv exports
+
+Separate Ppp (public, Private or property or var) from definitions for properties.
