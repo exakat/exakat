@@ -2914,8 +2914,8 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             }
 
             $finalTokens = array_merge( Token::$alternativeEnding,
-                            array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 'T_OPEN_CURLY',
-                                  'T_INLINE_HTML', 'T_CLOSE_BRACKET'));
+                                        array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 
+                                              'T_OPEN_CURLY', 'T_INLINE_HTML', 'T_CLOSE_BRACKET'));
             $finalTokens = "'".implode("', '", $finalTokens)."'";
             $queryConditions[] = <<<GREMLIN
 filter{ it.out('NEXT').filter{it.atom in [$classes]}.out('NEXT').filter{ it.token in [$finalTokens, 'T_COMMA']}
