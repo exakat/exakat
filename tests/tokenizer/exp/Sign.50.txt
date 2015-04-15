@@ -4,18 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     for
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          g
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $h
-        Label : LEFT
-          $f
+    Label : INIT
+      =
+      Label : RIGHT
+        1
+      Label : LEFT
+        $a
     Label : FINAL
       <=
       Label : RIGHT
@@ -32,13 +26,19 @@ Label : CODE
               'c'
       Label : LEFT
         $b
-    Label : INIT
-      =
-      Label : RIGHT
-        1
-      Label : LEFT
-        $a
     Label : INCREMENT
       ++
       Label : POSTPLUSPLUS
         $e
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          g
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $h
+        Label : LEFT
+          $f

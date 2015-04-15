@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     =
-    Label : LEFT
-      $a4
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -16,16 +14,16 @@ Label : CODE
             'e'
           Label : VALUE
             -
+            Label : RIGHT
+              $j
             Label : LEFT
               --
               Label : PREPLUSPLUS
                 $i
-            Label : RIGHT
-              $j
+    Label : LEFT
+      $a4
   Label : ELEMENT
     =
-    Label : LEFT
-      $a3
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -36,16 +34,16 @@ Label : CODE
             'd'
           Label : VALUE
             -
+            Label : RIGHT
+              $j
             Label : LEFT
               --
               Label : POSTPLUSPLUS
                 $i
-            Label : RIGHT
-              $j
+    Label : LEFT
+      $a3
   Label : ELEMENT
     =
-    Label : LEFT
-      $a2
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -56,16 +54,16 @@ Label : CODE
             'c'
           Label : VALUE
             -
+            Label : RIGHT
+              $j
             Label : LEFT
               ++
               Label : PREPLUSPLUS
                 $i
-            Label : RIGHT
-              $j
+    Label : LEFT
+      $a2
   Label : ELEMENT
     =
-    Label : LEFT
-      $a1
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -76,9 +74,11 @@ Label : CODE
             'b'
           Label : VALUE
             -
+            Label : RIGHT
+              $j
             Label : LEFT
               ++
               Label : POSTPLUSPLUS
                 $i
-            Label : RIGHT
-              $j
+    Label : LEFT
+      $a1
