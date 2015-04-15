@@ -32,6 +32,11 @@ class Analyze implements Tasks {
     
     public function run(\Config $config) {
         $project = $config->project;
+        
+        if ($project == 'default') {
+            die("analyze require -p <project> option. Aborting\n");
+        }
+        
         $begin = microtime(true);
 
         $datastore = new \Datastore($config);
@@ -54,7 +59,8 @@ class Analyze implements Tasks {
             }
             $datastore->addRow('hash', array($config->thema => count($analyzers_class) ) );
         } else {
-            die( "Usage :php exakat analyze -P <One/rule> -T <\"Thema\"> -p <project>\n");
+            die( "Usage :php exakat analyze -T <\"Thema\"> -p <project>\n
+php exakat analyze -P <One/rule> -p <project>\n");
         }
 
         $client = new Client();
