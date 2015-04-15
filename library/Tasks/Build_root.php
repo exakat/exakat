@@ -24,7 +24,7 @@
 namespace Tasks;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Gremlin\Query;
+    Everyman\Neo4j\Gremlin\Query;
 
 class Build_root implements Tasks {
     private $client = null;
@@ -61,7 +61,7 @@ class Build_root implements Tasks {
 
         display( "g.idx('atoms') : filling\n");
         $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
-                                         'Rawstring', 'Variable', 'Float', 'Boolean', 'Void', 'File']}.each{ 
+                                         'Rawstring', 'Variable', 'Float', 'Boolean', 'Void', 'File']}.each{
                                          g.idx('atoms').put('atom', it.atom, it); }";
         $this->query($query, 1);
         display( "g.idx('atoms') : filled\n" );
@@ -74,7 +74,7 @@ class Build_root implements Tasks {
 
         display("Indexing root done\n");
 
-        // special case for the initial Rawstring. 
+        // special case for the initial Rawstring.
         $this->query("g.idx('racines')[['token':'ROOT']].has('atom','Sequence').each{ g.idx('atoms').put('atom', 'Sequence', it); };");
         $this->logTime('g.idx("racines") ROOT special');
 
@@ -139,8 +139,8 @@ class Build_root implements Tasks {
             $log = fopen($this->project_dir.'/log/build_root.timing.csv', 'w+');
         }
         $end = microtime(true);
-        if ($begin === null) { 
-            $begin = $end; 
+        if ($begin === null) {
+            $begin = $end;
             $start = $end;
         }
     

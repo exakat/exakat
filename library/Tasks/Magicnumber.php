@@ -24,7 +24,7 @@
 namespace Tasks;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Gremlin;
+    Everyman\Neo4j\Gremlin;
 
 class Magicnumber implements Tasks {
     private $client = null;

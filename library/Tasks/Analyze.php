@@ -24,7 +24,7 @@
 namespace Tasks;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Gremlin\Query,
+    Everyman\Neo4j\Gremlin\Query,
     Everyman\Neo4j\Index\NodeIndex;
 
 class Analyze implements Tasks {
@@ -106,7 +106,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
                             $x = \Analyzer\Analyzer::getInstance($v, $client);
                             if ($x === null) {
                                 display( "No such dependency as '$v'. Ignoring\n");
-                                continue; 
+                                continue;
                             }
                             $dep = $x->dependsOn();
                             if (count($dep) == 0) {
@@ -150,7 +150,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
     
             if ($config->noRefresh && $analyzer->isDone()) {
                 display( "$analyzer_class is already processed\n");
-                continue 1; 
+                continue 1;
             }
             $analyzer->init();
     

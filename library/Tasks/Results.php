@@ -24,7 +24,7 @@
 namespace Tasks;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Gremlin\Query;
+    Everyman\Neo4j\Gremlin\Query;
 
 class Results implements Tasks {
     public function run(\Config $config) {
@@ -51,12 +51,12 @@ class Results implements Tasks {
 
         $return = array();
         if ($config->style == 'BOOLEAN') {
-            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.any()'; 
+            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.any()';
             $vertices = $this->query($client, $queryTemplate);
 
             $return[] = $vertices[0][0];
         } elseif ($config->style == 'COUNTED_ALL') {
-            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.count()'; 
+            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.count()';
             $vertices = $this->query($client, $queryTemplate);
 
             $return[] = $vertices[0][0];
@@ -80,7 +80,7 @@ GREMLIN;
                 $return[] = $row;
             }
         } elseif ($config->style == 'DISTINCT') {
-            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.code.unique()'; 
+            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.code.unique()';
             $vertices = $this->query($client, $queryTemplate);
 
             $return = array();
@@ -88,7 +88,7 @@ GREMLIN;
                 $return[] = $v[0];
             }
         } elseif ($config->style == 'COUNTED') {
-            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.groupCount(m){it.code}.cap'; 
+            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.groupCount(m){it.code}.cap';
             $vertices = $this->query($client, $queryTemplate);
 
             $return = array();
@@ -159,7 +159,7 @@ GREMLIN;
                 $extension = 'csv';
                 break 1;
             case $config->text :
-            default : 
+            default :
                 $extension = 'txt';
                 break 1;
         }

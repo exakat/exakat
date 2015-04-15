@@ -24,7 +24,7 @@
 namespace Tasks;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Gremlin\Query;
+    Everyman\Neo4j\Gremlin\Query;
 
 class Tokenizer implements Tasks {
     public function run(\Config $config) {
@@ -56,7 +56,7 @@ class Tokenizer implements Tasks {
             $r = \Tokenizer\Token::getInstance($new, $client, $config->phpversion);
             if ($r === null) {
                 display("Ignore $new (Version incompatible)\n");
-                // ignore 
+                // ignore
             } elseif ($new == 'Tokenizer\\FunctioncallArray') {
                 $regex[$class] = $r;
             } elseif ($new == 'Tokenizer\\Sequence') {
@@ -78,7 +78,7 @@ class Tokenizer implements Tasks {
         $total = \Tokenizer\Token::countTotalToken();
         $count = $total + 1;
 
-        $stats = array('token_in' => $count, 'token_out' => 2, 
+        $stats = array('token_in' => $count, 'token_out' => 2,
                        'relation_in' => $server_stat->countRelations(), 'relation_out' => 4,
                        'project' => $project);
         $log->log( "Finished counting Token");
@@ -97,7 +97,7 @@ class Tokenizer implements Tasks {
         $end = microtime(true);
         $log->log( "initialisation : ".(($end - $begin) * 1000));
 
-        while($this->check_prev($prev, $extra_rounds)) { 
+        while($this->check_prev($prev, $extra_rounds)) {
             $rbegin = microtime(true);
             $round++;
             $log->log("round $round)");
@@ -122,10 +122,10 @@ class Tokenizer implements Tasks {
         
                 $regex_time += $end - $begin;
 
-                if ($r->total  > 0) { 
-                    $ratio =  $r->done / $r->total; 
-                } else { 
-                    $ratio = -1; 
+                if ($r->total  > 0) {
+                    $ratio =  $r->done / $r->total;
+                } else {
+                    $ratio = -1;
                 }
         
                 $log->log( get_class($r)."\t".(($end - $begin) * 1000)."\t".$r->total."\t".$r->done."\t".number_format(100 * $ratio, 0));

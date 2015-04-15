@@ -66,7 +66,7 @@ class Initproject implements Tasks {
             mkdir($config->projects_root.'/projects/'.$project.'/log/', 0755);
         } else {
             display( $config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring'."\n");
-            return null; 
+            return null;
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
@@ -81,7 +81,7 @@ ignore_dirs[] = /doc
 ignore_dirs[] = /tmp
 ignore_dirs[] = /version
 
-file_extensions = 
+file_extensions =
 
 project_name = "$project";
 project_url = "$repo_url";

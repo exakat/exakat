@@ -42,12 +42,12 @@ class Files implements Tasks {
             die("No such project as '{$config->projects_root}/projects/$dir'\nAborting\n");
         } elseif (!file_exists($config->projects_root.'/projects/'.$dir.'/code/')) {
             die("No code in project '$dir'\nAborting\n");
-        } 
+        }
 
         $exts = array('php'      => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'  ),
                       'images'   => array('jpg', 'gif', 'ico', 'png', 'svg', 'eps', 'psd', 'dot', 'dhp', 'JPG',),
                       'media'    => array('ttf', 'swf', 'woff', 'eot', 'otf', ),
-                      'text'     => array('xml', 'txt', 'rst', 'md', 'markdown', 'po', 'mo', 'pot', 'dtd', 'TXT', 
+                      'text'     => array('xml', 'txt', 'rst', 'md', 'markdown', 'po', 'mo', 'pot', 'dtd', 'TXT',
                                           'WEBHELP', 'mxml', 'mime', 'latte', 'MIT', 'python', 'text'),
                       'config'   => array('neon', 'ini', 'yml', 'yaml') ,
                       'web'      => array('html', 'htm', 'css', 'js', 'json', 'less', 'webloc', 'wsdl',  ),
@@ -55,9 +55,9 @@ class Files implements Tasks {
                       'archives' => array('tgz', 'bz2' ,'z', 'zip', 'gz', 'tar', 'bz', 'tbz', ),
                       'audio'    => array('mp3', 'fla', 'wav', 'xap', 'ses'),
                       'video'    => array('avi', 'pxm') ,
-                      'data'     => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install', 
+                      'data'     => array('sql', 'properties', 'yml', 'dist', 'csv', 'log', 'profile', 'info', 'module','install',
                                           'sqlite', 'lang', 'conf', 'config', 'db', 'phar', 'db3', 'neon', 'data', 'ast'),
-                      'prog'     => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt', 'sass', 'scss', 
+                      'prog'     => array('py', 'bat', 'c', 'h', 'twig', 'sh', 'jar', 'java', 'rb', 'phpt', 'sass', 'scss',
                                           'xsl', 'as', 'cmd','m4', 'dsp', 'sln', 'vcproj', 'w32', 'diff', 'pl', 'dsw', 'am', 'in', 'ac', ),
                       'misc'     => array('test', 'table', 'dat', 'admin', 'cur', 'git', 'rng', 'bin',  'ser', 'mgc',),
                       'security' => array('pub', 'pem', 'crt', 'xcf', ),
@@ -67,8 +67,8 @@ class Files implements Tasks {
         foreach($config->ignore_dirs as $ignore) {
             if ($ignore[0] == '/') {
                 $d = $config->projects_root.'/projects/'.$dir.'/code'.$ignore;
-                if (!file_exists($d)) { 
-                    continue; 
+                if (!file_exists($d)) {
+                    continue;
                 }
                 $d .= '*';
                 $ignoreDirs[] = $d;
@@ -84,8 +84,8 @@ class Files implements Tasks {
         $files = trim(shell_exec($shellBase));
         $files = preg_replace('#'.$config->projects_root.'/projects/.*?/code#is', '', $files);
         $files = explode("\n", $files);
-        $files = array_map(function ($a) { 
-            return array('file' => $a); 
+        $files = array_map(function ($a) {
+            return array('file' => $a);
         }, $files);
 
         $datastore->cleanTable('files');
@@ -96,7 +96,7 @@ class Files implements Tasks {
         foreach($config->ignore_dirs as $ignore) {
             if ($ignore[0] == '/') {
                 $d = $config->projects_root.'/projects/'.$dir.'/code'.$ignore;
-                if (file_exists($d)) { 
+                if (file_exists($d)) {
                     $ignoreDirs[] = substr($ignore, 1);
                 }
             } else {
@@ -113,7 +113,7 @@ class Files implements Tasks {
         $res = shell_exec($shell);
         if (trim($res) == 'No files found to scan') {
             die("Project $project is empty.\n");
-        } 
+        }
         if (preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r)) {
             $stats['loc'] = $r[1];
         } else {
@@ -233,14 +233,14 @@ class Files implements Tasks {
             $sot = $sot2;
             unset($sot2);
     
-            if (count($nosot) != count($sot)) { 
+            if (count($nosot) != count($sot)) {
                 die("Error in short open tag analyze\n");
             }
             $shortOpenTag = array();
             foreach($nosot as $file => $countNoSot) {
                 if ($sot[$file] != $countNoSot) {
                     $shortOpenTag[] = array('file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $file));
-                } 
+                }
             }
     
             $datastore->addRow('shortopentag', $shortOpenTag);

@@ -65,8 +65,8 @@ class Load implements Tasks {
     }
 
     private function process_dir($dir) {
-        if (!file_exists($dir)) { 
-            return array('files' => -1, 'tokens' => -1); 
+        if (!file_exists($dir)) {
+            return array('files' => -1, 'tokens' => -1);
         }
 
         $ignoreDirs = array();
@@ -135,7 +135,7 @@ class Load implements Tasks {
                 } else {
                     $tokensNewlines[$merge] += substr_count($tokens[$id][1], "\n");
                 }
-            } elseif (isset($whiteCode[$token[0]])) { 
+            } elseif (isset($whiteCode[$token[0]])) {
                 if (!$merge) {
                     $merge = $id - $deleted;
                     $tokensNewlines[$merge]  = substr_count($tokens[$id][1], "\n");
@@ -144,7 +144,7 @@ class Load implements Tasks {
                 }
                 $x[] = substr_count($tokens[$id][1], "\n");
                 $deleted++;
-                unset($tokens[$id]); 
+                unset($tokens[$id]);
             } else {
                 $merge = false;
             }
@@ -202,7 +202,7 @@ class Load implements Tasks {
                                                   ->save();
         $regexIndex['INDEX']->relateTo($regexIndex['CLASS'], 'INDEXED');
 
-        $regex = \Tokenizer\Token::getTokenizers(); 
+        $regex = \Tokenizer\Token::getTokenizers();
 
         foreach($regex as $r) {
             $regexIndex[$r] = $this->client->makeNode()->setProperty('token', $r)
@@ -240,24 +240,24 @@ class Load implements Tasks {
         $line = 0;
         $colonTokens = new \Loader\ColonType();
     
-        $atoms = array( 'T_STRING'                   => 'Identifier', 
-                        'T_CONSTANT_ENCAPSED_STRING' => 'String', 
+        $atoms = array( 'T_STRING'                   => 'Identifier',
+                        'T_CONSTANT_ENCAPSED_STRING' => 'String',
                         'T_ENCAPSED_AND_WHITESPACE'  => 'String',
                         'T_INLINE_HTML'              => 'RawString',
                         'T_VARIABLE'                 => 'Variable',
                         'T_STRING_VARNAME'           => 'Variable',
-                        'T_LNUMBER'                  => 'Integer', 
+                        'T_LNUMBER'                  => 'Integer',
                         'T_NUM_STRING'               => 'Integer',
-                        'T_DNUMBER'                  => 'Float', 
-                        'T_CLASS_C'                  => 'Magicconstant', 
-                        'T_FUNC_C'                   => 'Magicconstant', 
-                        'T_DIR'                      => 'Magicconstant', 
-                        'T_FILE'                     => 'Magicconstant', 
-                        'T_LINE'                     => 'Magicconstant', 
-                        'T_METHOD_C'                 => 'Magicconstant', 
-                        'T_NS_C'                     => 'Magicconstant', 
-                        'T_TRAIT_C'                  => 'Magicconstant', 
-                        'T_CALLABLE'                 => 'Identifer', 
+                        'T_DNUMBER'                  => 'Float',
+                        'T_CLASS_C'                  => 'Magicconstant',
+                        'T_FUNC_C'                   => 'Magicconstant',
+                        'T_DIR'                      => 'Magicconstant',
+                        'T_FILE'                     => 'Magicconstant',
+                        'T_LINE'                     => 'Magicconstant',
+                        'T_METHOD_C'                 => 'Magicconstant',
+                        'T_NS_C'                     => 'Magicconstant',
+                        'T_TRAIT_C'                  => 'Magicconstant',
+                        'T_CALLABLE'                 => 'Identifer',
                         );
             
     
@@ -268,7 +268,7 @@ class Load implements Tasks {
         $in_for = 0;
         $dowhiles = array();
         $block_level = 0;
-        $regex = \Tokenizer\Token::getTokenizers(); 
+        $regex = \Tokenizer\Token::getTokenizers();
     
         for($id = 0; $id < $nb; $id++) {
             if (empty($tokens[$id])) { continue; }
@@ -318,7 +318,7 @@ class Load implements Tasks {
                                                   ->save();
 
                     $to_index = false;
-                } elseif ($token[3] == 'T_STATIC' && is_string($tokens[$id + 1]) && 
+                } elseif ($token[3] == 'T_STATIC' && is_string($tokens[$id + 1]) &&
                           $tokens[$id + 1] != '(' && $this->php->getTokenname($tokens[$id - 1][0]) == 'T_NEW') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                   ->setProperty('code', $token[1])
@@ -338,7 +338,7 @@ class Load implements Tasks {
                                                   ->save();
 
                     $to_index = false;
-                } elseif ($token[3] == 'T_RETURN' && is_array($tokens[$id + 1]) && 
+                } elseif ($token[3] == 'T_RETURN' && is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_CLOSE_TAG') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                   ->setProperty('code', $token[1])
@@ -358,8 +358,8 @@ class Load implements Tasks {
                     $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
 
                     $to_index = false;
-                } elseif ($token[3] == 'T_START_HEREDOC' && 
-                          is_array($tokens[$id + 1]) && 
+                } elseif ($token[3] == 'T_START_HEREDOC' &&
+                          is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_END_HEREDOC') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $token[3])
                                                   ->setProperty('code', $token[1])
@@ -426,15 +426,15 @@ class Load implements Tasks {
                     $regexIndex['ArgumentsNoParenthesis']->relateTo($T[$Tid], 'INDEXED')->save();
                     $regexIndex['Functioncall']->relateTo($T[$Tid], 'INDEXED')->save();
 
-                } elseif ($token[3] == 'T_CLOSE_TAG' && 
-                          isset($tokens[$id + 1]) && 
-                          is_array($tokens[$id + 1]) && 
+                } elseif ($token[3] == 'T_CLOSE_TAG' &&
+                          isset($tokens[$id + 1]) &&
+                          is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
                       
-                    if ($previous->getProperty('code') == ':' || 
-                       ($previous->getProperty('code') == '{' && 
-                        isset($tokens[$id + 2]) && 
-                        is_string($tokens[$id + 2]) && 
+                    if ($previous->getProperty('code') == ':' ||
+                       ($previous->getProperty('code') == '{' &&
+                        isset($tokens[$id + 2]) &&
+                        is_string($tokens[$id + 2]) &&
                         $tokens[$id + 2] == '}')
                        ) {
                         $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
@@ -463,9 +463,9 @@ class Load implements Tasks {
                     }
                     $id++;
                     continue;
-                } elseif ($token[3] == 'T_CLOSE_TAG' && 
-                          isset($tokens[$id + 1]) && 
-                          is_array($tokens[$id + 1]) && 
+                } elseif ($token[3] == 'T_CLOSE_TAG' &&
+                          isset($tokens[$id + 1]) &&
+                          is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG_WITH_ECHO') {
 
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_ECHO')
@@ -481,7 +481,7 @@ class Load implements Tasks {
 
                     $id++;
                     continue;
-                } elseif ($token[3] == 'T_INLINE_HTML' && 
+                } elseif ($token[3] == 'T_INLINE_HTML' &&
                           $id == 0) {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
                                                   ->setProperty('code', ';')
@@ -503,7 +503,7 @@ class Load implements Tasks {
                                                   ->save();
 
                     $T[$Tid]->relateTo($inline, 'ELEMENT')->save();
-                } elseif ($token[3]           == 'T_INLINE_HTML' && 
+                } elseif ($token[3]           == 'T_INLINE_HTML' &&
                           isset($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_INLINE_HTML') {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
@@ -572,8 +572,8 @@ class Load implements Tasks {
                 }
 
                 $x = $T[$Tid]->getProperty('code');
-                // guessing binary code : one may also use 4, 8 or any chr that is supposed to be non ascii. 
-                if (strpos($x, chr(2)) !== false) { 
+                // guessing binary code : one may also use 4, 8 or any chr that is supposed to be non ascii.
+                if (strpos($x, chr(2)) !== false) {
                     $T[$Tid]->setProperty('code', 'Binary data <length '.strlen($x).' bytes>');
                 }
 
@@ -625,7 +625,7 @@ class Load implements Tasks {
                             $regexIndex['S_STRING']->relateTo($T[$Tid], 'INDEXED');
                         }
                     }
-                }  
+                }
 
                 if ($token[3] == 'T_CURLY_OPEN' || $token[3] == 'T_DOLLAR_OPEN_CURLY_BRACES') {
                     $block_level++;
@@ -645,7 +645,7 @@ class Load implements Tasks {
                 if (isset($tokensNewlines[$id])) {
                     $line += $tokensNewlines[$id];
                     unset($tokensNewlines[$id]);
-                } 
+                }
 
                 $token_value = $this->php->getTokenname($token);
             
@@ -657,7 +657,7 @@ class Load implements Tasks {
             
                 if (in_array($token_value, array('T_QUOTE', 'T_SHELL_QUOTE'))) {
                     if ($delimitedStrings['T_QUOTE'] % 2 == 1) {
-                        if ( $delimitedStrings['T_QUOTE_2'] % 2 == 1) { 
+                        if ( $delimitedStrings['T_QUOTE_2'] % 2 == 1) {
                             if (in_array($tokens[$id - 1], array('[', '+', '-', '*', '/', '%', '.', '('))) { // string inside a string !!
                                 throw new Exceptions\TooManyLevelInsideAStringException();
                             } else {
@@ -676,7 +676,7 @@ class Load implements Tasks {
                         $token .= '_CLOSE';
                         $token_value .= '_CLOSE';
                         $delimitedStrings['T_QUOTE_2'] = 0;
-                    } elseif (($delimitedStrings['T_QUOTE'] % 2 == 1   ) && 
+                    } elseif (($delimitedStrings['T_QUOTE'] % 2 == 1   ) &&
                               ($delimitedStrings['T_QUOTE_2'] > 0      ) &&
                               ($delimitedStrings['T_QUOTE_2'] % 2 == 0 )   ) {
                         $token .= '_CLOSE';
@@ -737,7 +737,7 @@ class Load implements Tasks {
                                                      ->setProperty('modifiedBy', 'bin/load3')
                                                      ->save();
                         $T[$Tid]->relateTo($block, 'ELEMENT')->save();
-                        $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();                
+                        $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
 
                         $block->relateTo($void, 'ELEMENT')->save();
                     }
@@ -745,10 +745,10 @@ class Load implements Tasks {
                     unset($tokens[$id + 1]);
                 
                     $to_index = false;
-                } elseif ($token == ':' 
-                          && isset($tokens[$id + 1]) && is_string($tokens[$id + 1])  
+                } elseif ($token == ':'
+                          && isset($tokens[$id + 1]) && is_string($tokens[$id + 1])
                           && $tokens[$id + 1] == ';'
-                          && isset($tokens[$id + 2]) && is_array($tokens[$id + 2])  
+                          && isset($tokens[$id + 2]) && is_array($tokens[$id + 2])
                           && in_array($this->php->getTokenname($tokens[$id + 2][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
                                                   ->setProperty('code', $token)
@@ -783,9 +783,9 @@ class Load implements Tasks {
                                                   ->setProperty('code', $token)
                                                   ->setProperty('line', $line)
                                                   ->save();
-                    $regexIndex['Parenthesis']->relateTo($T[$Tid], 'INDEXED')->save();                
-                    $regexIndex['ArgumentsNoComma']->relateTo($T[$Tid], 'INDEXED')->save();                
-                    $regexIndex['Typehint']->relateTo($T[$Tid], 'INDEXED')->save();                
+                    $regexIndex['Parenthesis']->relateTo($T[$Tid], 'INDEXED')->save();
+                    $regexIndex['ArgumentsNoComma']->relateTo($T[$Tid], 'INDEXED')->save();
+                    $regexIndex['Typehint']->relateTo($T[$Tid], 'INDEXED')->save();
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
@@ -800,7 +800,7 @@ class Load implements Tasks {
                                                   ->save();
 
                     $to_index = false;
-                } elseif ( ($tokens[$id] == '(' || $tokens[$id] == ';') && 
+                } elseif ( ($tokens[$id] == '(' || $tokens[$id] == ';') &&
                                 isset($tokens[$id + 1]) && is_string($tokens[$id + 1]) &&
                                 ( $tokens[$id + 1] == ';' || $tokens[$id + 1] == ')')) {
                         // This must be after the processing of ( and ) (right above)
@@ -823,7 +823,7 @@ class Load implements Tasks {
                                                         ->setProperty('modifiedBy', 'bin/load8b')
                                                         ->save();
                         $to_index = false;
-                } elseif ( $tokens[$id] == ',' && 
+                } elseif ( $tokens[$id] == ',' &&
                            isset($tokens[$id + 1]) && is_string($tokens[$id + 1]) && $tokens[$id + 1] == ']') {
                         // This must be [1, 2, ], array short syntax final comma
                         $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
@@ -845,7 +845,7 @@ class Load implements Tasks {
                                                         ->setProperty('modifiedBy', 'bin/load8b')
                                                         ->save();
                         $to_index = false;
-                } elseif ($token == ':' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])  
+                } elseif ($token == ':' && isset($tokens[$id + 1]) && is_array($tokens[$id + 1])
                           && in_array($this->php->getTokenname($tokens[$id + 1][0]), array('T_ELSE', 'T_ELSEIF', 'T_ENDIF', 'T_ENDFOR', 'T_ENDFOREACH', 'T_ENDWHILE', 'T_ENDDECLARE'))) {
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
                                                   ->setProperty('code', $token)
@@ -918,7 +918,7 @@ class Load implements Tasks {
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
-                    $regexIndex['Block']->relateTo($T[$Tid], 'INDEXED')->save();                
+                    $regexIndex['Block']->relateTo($T[$Tid], 'INDEXED')->save();
                 
                     $Tid++;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
@@ -956,7 +956,7 @@ class Load implements Tasks {
                                                   ->save();
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
-                    $regexIndex['Arguments']->relateTo($T[$Tid], 'INDEXED')->save();              
+                    $regexIndex['Arguments']->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous = $T[$Tid];
                 
                     $Tid++;
@@ -976,7 +976,7 @@ class Load implements Tasks {
                                                   ->save();
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
-                    $regexIndex['Arguments']->relateTo($T[$Tid], 'INDEXED')->save();              
+                    $regexIndex['Arguments']->relateTo($T[$Tid], 'INDEXED')->save();
                     $previous = $T[$Tid];
                 
                     $Tid++;
@@ -1023,7 +1023,7 @@ class Load implements Tasks {
 
             if ($inQuote) {
                 $T[$Tid]->setProperty('in_quote', 'true')->save();
-            } 
+            }
 
             if (in_array($token_value, array('T_FOR'))) {
                 $in_for = 1;
@@ -1037,12 +1037,12 @@ class Load implements Tasks {
                     if ($in_for == 1) {
                         $in_for = 0;
                     }
-                } 
+                }
             }
 
             if ($in_for > 1) {
                 $T[$Tid]->setProperty('in_for', 'true')->save();
-            } 
+            }
         
             if ($type = $this->process_colon($token_value)) {
                 $T[$Tid]->setProperty('association', $type)->save();
@@ -1051,11 +1051,11 @@ class Load implements Tasks {
                 $T[$Tid]->setProperty('association', $type)->save();
             }
 
-            // test is for booleans. 
+            // test is for booleans.
             if ($to_index) {
                 foreach($regex as $r) {
                     $class = "Tokenizer\\$r";
-                    if (in_array($token_value, $class::$operators)) { 
+                    if (in_array($token_value, $class::$operators)) {
                         $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
                     }
                 }
@@ -1079,8 +1079,8 @@ class Load implements Tasks {
         $log['memory_max_usage'] = memory_get_peak_usage(true);
         $this->log->log("$filename\t".(($end - $begin)*1000)."\t".join("\t", $log));
 
-        if (!isset($T)) { 
-            echo "Empty script. Ignoring\n";    
+        if (!isset($T)) {
+            echo "Empty script. Ignoring\n";
             return false;
         }
         $T[0]->setProperty('root', 'true')->save();
@@ -1127,33 +1127,33 @@ class Load implements Tasks {
         static $states = array();
         static $states_id = 0;
         
-        if ($token_value == 'T_CLASS' ) { 
-            $states[] = 'Class'; 
-            $states_id++; 
-            return ''; 
+        if ($token_value == 'T_CLASS' ) {
+            $states[] = 'Class';
+            $states_id++;
+            return '';
         }
 
-        if ($token_value == 'T_FUNCTION' ) { 
-            $states[] = 'Function'; 
-            $states_id++; 
-            return ''; 
+        if ($token_value == 'T_FUNCTION' ) {
+            $states[] = 'Function';
+            $states_id++;
+            return '';
         }
 
-        if ($token_value == 'T_INTERFACE' ) { 
-            $states[] = 'Function'; 
-            $states_id++; 
-            return ''; 
+        if ($token_value == 'T_INTERFACE' ) {
+            $states[] = 'Function';
+            $states_id++;
+            return '';
         }
 
-        if ($token_value == 'T_TRAIT' ) { 
-            $states[] = 'Trait'; 
-            $states_id++; 
-            return ''; 
+        if ($token_value == 'T_TRAIT' ) {
+            $states[] = 'Trait';
+            $states_id++;
+            return '';
         }
 
-        if ($token_value == 'T_OPEN_CURLY' )    { 
+        if ($token_value == 'T_OPEN_CURLY' )    {
             if (count($states) > 0) {
-                $state = array_pop($states);  
+                $state = array_pop($states);
                 return $state;
             } else {
                 return '';
@@ -1167,62 +1167,62 @@ class Load implements Tasks {
         static $states = array();
         static $states_id = 0;
     
-        if ($token_value == 'T_QUESTION' ) { 
-            $states[] = 'Ternary'; 
-            $states_id++; 
-            return ''; 
+        if ($token_value == 'T_QUESTION' ) {
+            $states[] = 'Ternary';
+            $states_id++;
+            return '';
         }
 
-        if ($token_value == 'T_SWITCH' )   { 
-            $states[] = 'Switch';  
-            $states_id++; 
-            return ''; 
+        if ($token_value == 'T_SWITCH' )   {
+            $states[] = 'Switch';
+            $states_id++;
+            return '';
         }
-        if ($token_value == 'T_CASE' )     { 
-            $states[] = 'Case';    
-            $states_id++; 
-            return ''; 
+        if ($token_value == 'T_CASE' )     {
+            $states[] = 'Case';
+            $states_id++;
+            return '';
         }
-        if ($token_value == 'T_DEFAULT' )  { 
-            $states[] = 'Default'; 
-            $states_id++; 
-            return ''; 
+        if ($token_value == 'T_DEFAULT' )  {
+            $states[] = 'Default';
+            $states_id++;
+            return '';
         }
 
-        if ($token_value == 'T_FOR' )      { 
+        if ($token_value == 'T_FOR' )      {
             $states[] = 'For';
-            $states_id++; 
-            return ''; 
+            $states_id++;
+            return '';
         }
-        if ($token_value == 'T_FOREACH' )  { 
-            $states[] = 'Foreach'; 
-            $states_id++; 
-            return ''; 
+        if ($token_value == 'T_FOREACH' )  {
+            $states[] = 'Foreach';
+            $states_id++;
+            return '';
         }
-        if ($token_value == 'T_WHILE' )    { 
-            $states[] = 'While';   
-            $states_id++; 
-            return ''; 
-        }
-
-        if ($token_value == 'T_IF' )       { 
-            $states[] = 'If';      
-            $states_id++; 
-            return ''; 
-        }
-        if ($token_value == 'T_ELSEIF' )   { 
-            $states[] = 'Elseif';  
-            $states_id++; 
-            return ''; 
-        }
-        if ($token_value == 'T_ELSE' )     { 
-            $states[] = 'Else';    
-            $states_id++; 
-            return ''; 
+        if ($token_value == 'T_WHILE' )    {
+            $states[] = 'While';
+            $states_id++;
+            return '';
         }
 
-        if ($token_value == 'T_COLON' )    { 
-            $state = array_pop($states);  
+        if ($token_value == 'T_IF' )       {
+            $states[] = 'If';
+            $states_id++;
+            return '';
+        }
+        if ($token_value == 'T_ELSEIF' )   {
+            $states[] = 'Elseif';
+            $states_id++;
+            return '';
+        }
+        if ($token_value == 'T_ELSE' )     {
+            $states[] = 'Else';
+            $states_id++;
+            return '';
+        }
+
+        if ($token_value == 'T_COLON' )    {
+            $state = array_pop($states);
             return $state;
         }
     

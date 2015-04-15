@@ -24,7 +24,7 @@
 namespace Tasks;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Gremlin\Query;
+    Everyman\Neo4j\Gremlin\Query;
 
 class Status implements Tasks {
     public function run(\Config $config) {
@@ -56,7 +56,7 @@ class Status implements Tasks {
         if (filesize($config->projects_root.'/projects/'.$project.'/log/errors.log') == 191) {
             echo "Error.log is OK\n";
         } else {
-            echo "Error.log signal some problems : \n", 
+            echo "Error.log signal some problems : \n",
                  file_get_contents($config->projects_root.'/projects/'.$project.'/log/errors.log');
 
         }
@@ -92,7 +92,7 @@ class Status implements Tasks {
         if (file_exists($config->projects_root.'/projects/'.$project.'/report')) {
             if (filemtime($config->projects_root.'/projects/'.$project.'/report') < $tokenizerLogTime) {
                 echo " Report is too old\n";
-            } else {       
+            } else {
                echo " Report OK\n";
             }
         } else {

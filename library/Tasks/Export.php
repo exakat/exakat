@@ -24,18 +24,18 @@
 namespace Tasks;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Gremlin,
+    Everyman\Neo4j\Gremlin,
     Everyman\Neo4j\Index\NodeIndex;
 
 class Export implements Tasks {
     public function run(\Config $config) {
         $client = new Client();
 
-        $queryTemplate = 'g.V.as("x").except([g.v(0)])'; 
+        $queryTemplate = 'g.V.as("x").except([g.v(0)])';
 
         $params = array('type' => 'IN');
         $query = new Gremlin\Query($client, $queryTemplate, $params);
-        try { 
+        try {
             $vertices = $query->getResultSet();
         } catch (Exception $e) {
             die( 'Error reading the Vertices\n{$e->getmessage()}'."\n");
@@ -155,22 +155,22 @@ class Export implements Tasks {
         foreach($V as $id => $v) {
             $row = array();
             $row[] = highlight_string($v['code'], true);
-            if (isset($v['atom'])) { 
+            if (isset($v['atom'])) {
                 $row[] = $v['atom'];
             } else {
                 $row[] = 'No atom';
             }
-            if (isset($v['token'])) { 
+            if (isset($v['token'])) {
                 $row[] = $v['token'];
             } else {
                 $row[] = 'No token';
             }
-            if (isset($v['file'])) { 
+            if (isset($v['file'])) {
                 $row[] = $v['file'];
             } else {
                 $row[] = 'No file';
             }
-            if (isset($v['order'])) { 
+            if (isset($v['order'])) {
                 $row[] = $v['order'];
             } else {
                 $row[] = '';

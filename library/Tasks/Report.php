@@ -24,7 +24,7 @@
 namespace Tasks;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Gremlin\Query;
+    Everyman\Neo4j\Gremlin\Query;
 
 class Report implements Tasks {
     public function run(\Config $config) {

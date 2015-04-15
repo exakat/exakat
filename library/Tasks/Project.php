@@ -24,7 +24,7 @@
 namespace Tasks;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Gremlin\Query;
+    Everyman\Neo4j\Gremlin\Query;
 
 class Project implements Tasks {
     private $project_dir = '.';
@@ -34,7 +34,7 @@ class Project implements Tasks {
                               'Appinfo', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
 
-    protected $reports = array('Premier' => array('Markdown' => 'report', 
+    protected $reports = array('Premier' => array('Markdown' => 'report',
                                                   'Sqlite'   => 'report',
                                                   'Devoops'  => 'report',
                                                   'Html'     => 'report',
@@ -201,8 +201,8 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
             $log = fopen($this->project_dir.'/log/project.timing.csv', 'w+');
         }
         $end = microtime(true);
-        if ($begin === null) { 
-            $begin = $end; 
+        if ($begin === null) {
+            $begin = $end;
             $start = $end;
         }
 

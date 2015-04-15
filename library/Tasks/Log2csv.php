@@ -24,7 +24,7 @@
 namespace Tasks;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Gremlin\Query,
+    Everyman\Neo4j\Gremlin\Query,
     Everyman\Neo4j\Index\NodeIndex;
 
 class Log2csv implements Tasks {
@@ -56,7 +56,7 @@ class Log2csv implements Tasks {
                     $matrix[$r[1]] = array($r[2]);
                     $matrix2[$r[1]] = array($r[3]);
                 }
-            } 
+            }
         }
         fclose($in);
         

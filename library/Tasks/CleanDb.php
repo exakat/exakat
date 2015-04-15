@@ -24,10 +24,10 @@
 namespace Tasks;
 
 use Everyman\Neo4j\Client,
-	Everyman\Neo4j\Index\NodeIndex,
-	Everyman\Neo4j\Relationship,
-	Everyman\Neo4j\Node,
-	Everyman\Neo4j\Cypher\Query;
+    Everyman\Neo4j\Index\NodeIndex,
+    Everyman\Neo4j\Relationship,
+    Everyman\Neo4j\Node,
+    Everyman\Neo4j\Cypher\Query;
 
 class CleanDb implements Tasks {
     private $client = null;
@@ -65,14 +65,14 @@ return count(n)';
                 curl_setopt($ch, CURLOPT_URL, 'http://'.$config->neo4j_host);
                 curl_setopt($ch, CURLOPT_PORT, $config->neo4j_port);
                 curl_setopt($ch, CURLOPT_HEADER, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 $res = curl_exec($ch);
                 curl_close($ch);
             } while ( $res === false);
             
             display('Database cleaned with restart');
 
-            try {   
+            try {
                 $client = new Client();
                 $client->getServerInfo();
                 display('Restarted Neo4j cleanly');
@@ -82,11 +82,11 @@ return count(n)';
         } else {
             display('Cleaning with cypher');
         
-            $queryTemplate = 'MATCH (n) 
-OPTIONAL MATCH (n)-[r]-() 
+            $queryTemplate = 'MATCH (n)
+OPTIONAL MATCH (n)-[r]-()
 DELETE n,r';
-        	$query = new Query($client, $queryTemplate, array());
-	        $result = $query->getResultSet();
+            $query = new Query($client, $queryTemplate, array());
+            $result = $query->getResultSet();
             display('Database cleaned');
         }
         $end = microtime(true);
