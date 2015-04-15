@@ -38,7 +38,7 @@ class Arguments extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // with default value 
+        // with default value
         $this->atomIs('Variable')
              ->inIs('LEFT')
              ->inIs('ARGUMENT')

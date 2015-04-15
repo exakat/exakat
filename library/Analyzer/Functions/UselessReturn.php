@@ -37,7 +37,7 @@ class UselessReturn extends Analyzer\Analyzer {
         $this->prepareQuery();
 
 // @todo : spot such functions
-//Also `__autoload`, methods used for autoloading and methods registered for shutdown, have no need to return anything. 
+//Also `__autoload`, methods used for autoloading and methods registered for shutdown, have no need to return anything.
 
     }
 }

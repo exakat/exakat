@@ -66,7 +66,7 @@ class IsModified extends Analyzer\Analyzer {
              ->samePropertyAs('rank', 'rank', true)
              ->is('reference', true)
              ->back('first');
-        $this->prepareQuery();  
+        $this->prepareQuery();
 
         // function/methods definition : all modified by incoming values
         // simple variable
@@ -74,7 +74,7 @@ class IsModified extends Analyzer\Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable');
-        $this->prepareQuery();  
+        $this->prepareQuery();
 
         // simple variable + default value : already done in line 18
 
@@ -85,7 +85,7 @@ class IsModified extends Analyzer\Analyzer {
              ->atomIs('Typehint')
              ->outIs('VARIABLE')
              ->atomIs('Variable');
-        $this->prepareQuery();  
+        $this->prepareQuery();
 
         // typehint + default value
         $this->atomIs('Function')
@@ -95,7 +95,7 @@ class IsModified extends Analyzer\Analyzer {
              ->outIs('VARIABLE')
              ->atomIs('Assignation')
              ->outIs('LEFT');
-        $this->prepareQuery();  
+        $this->prepareQuery();
 
         // missing default values + typehint + default values.
 
@@ -145,7 +145,7 @@ class IsModified extends Analyzer\Analyzer {
              ->samePropertyAs('rank', 'rank')
              ->is('reference', true)
              ->back('first');
-        $this->prepareQuery(); 
+        $this->prepareQuery();
     }
 }
 

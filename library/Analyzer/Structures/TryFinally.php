@@ -25,7 +25,7 @@ namespace Analyzer\Structures;
 
 use Analyzer;
 
-class TryFinally extends Analyzer\Analyzer {    
+class TryFinally extends Analyzer\Analyzer {
     public $phpVersion = '5.5+';
     
     public function analyze() {

@@ -35,7 +35,7 @@ class UncheckedResources extends Analyzer\Analyzer {
                 if (!isset($usage->{"function$pos"})) { continue; }
                 $functions = $this->makeFullNsPath((array) $usage->{"function$pos"});
 
-                //direct usage of the resource : 
+                //direct usage of the resource :
                 // readdir(opendir('uncheckedDir4'));
                 $this->atomFunctionIs($creation)
                      ->inIs('ARGUMENT')
@@ -56,7 +56,7 @@ class UncheckedResources extends Analyzer\Analyzer {
                      ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\is_resource").any() == false }')
                      // checked with a !$variable
                      ->raw('filter{ it.in("NOT").any() == false }')
-                     // checked with a if ($resource) or while($resource) 
+                     // checked with a if ($resource) or while($resource)
                      ->raw('filter{ it.in("ARGUMENT").in("ARGUMENTS").in("RIGHT").in("CODE").in("RIGHT").has("atom", "Comparison").in("CONDITION").any() == false }')
                      ->back('result');
                 $this->prepareQuery();

@@ -30,7 +30,7 @@ class ChargerFonction extends Analyzer\Analyzer {
 //-* charger_fonction('toto') -> implique la présence d'une fonction toto_dist()
         $spipFunctions = $this->loadIni('spip/_dist.ini', 'functions');
         
-        // two arguments 
+        // two arguments
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))

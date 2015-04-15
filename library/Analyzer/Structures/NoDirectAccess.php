@@ -43,7 +43,7 @@ class NoDirectAccess extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        //if(!defined('CMS'))die/exit 
+        //if(!defined('CMS'))die/exit
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              // find !defined and defined

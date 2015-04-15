@@ -27,7 +27,7 @@ use Analyzer;
 
 class AccessPrivate extends Analyzer\Analyzer {
     public function analyze() {
-        // methods  
+        // methods
         // classname::method() direct class
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
@@ -52,7 +52,7 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
              ->classDefinition()
              ->hasOut('EXTENDS')
-             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); } 
+             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                               .loop(2)
                               {true}
                               { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any()}.any()
@@ -93,7 +93,7 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.has("fullnspath", inside).any() == false}')
              ->classDefinition()
              ->hasOut('EXTENDS')
-             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); } 
+             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                               .loop(2)
                               {true}
                               { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any()}.any()
@@ -103,8 +103,8 @@ class AccessPrivate extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // self / static::method() in parent class
-        // static : the class which is called 
-        // self   : the class where the definition is 
+        // static : the class which is called
+        // self   : the class where the definition is
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
@@ -114,7 +114,7 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->raw('filter{ inside = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any() == false}')
              ->classDefinition()
              ->hasOut('EXTENDS')
-             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); } 
+             ->raw('filter{ it.out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                               .loop(2)
                               {true}
                               { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{it.out("NAME").next().code == name}.out("PRIVATE").any()}.any()
@@ -123,7 +123,7 @@ class AccessPrivate extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // properties 
+        // properties
         // class::$property
         $this->atomIs('Staticproperty')
              ->outIs('PROPERTY')

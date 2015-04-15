@@ -46,7 +46,7 @@ class IsExtTrait extends Analyzer\Analyzer {
         }
 
         // no need to process anything!
-        if (empty($traits)) { return true; } 
+        if (empty($traits)) { return true; }
         $traits = $this->makeFullNsPath($traits);
         
         $this->analyzerIs("Analyzer\\Traits\\TraitUsage")

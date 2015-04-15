@@ -30,7 +30,7 @@ class UsePathinfo extends Analyzer\Analyzer {
         // getting the file extension with explode
         /*
         $temp = explode('.', $config);
-		$ext = array_pop($temp);
+        $ext = array_pop($temp);
         */
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
@@ -61,12 +61,12 @@ class UsePathinfo extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         /*
-		$exploded = explode('.', $filename);
-		
-		if (count($exploded) > 1) {
-			$extension = array_pop($exploded);
-		}
-		*/
+        $exploded = explode('.', $filename);
+        
+        if (count($exploded) > 1) {
+            $extension = array_pop($exploded);
+        }
+        */
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs('Functioncall')

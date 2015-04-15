@@ -34,14 +34,14 @@ class MarkCallable extends Analyzer\Analyzer {
             }
         }
 
-        /* Supports : 
+        /* Supports :
             string as callable : array_map($array, 'string');
             array with static call : array_map($array, array('string', 'string'));
             call_user_func('MyClass::myCallbackMethod');
             
-           Don't support : 
+           Don't support :
 call_user_func(array('B', 'parent::who')); // A
-call_user_func(array('B', 'parent::who')); // check with USE too 
+call_user_func(array('B', 'parent::who')); // check with USE too
 
 call_user_func(array($obj, 'myCallbackMethod'));
 
@@ -50,15 +50,15 @@ call_user_func(array($obj, 'myCallbackMethod'));
         ////////////////////////////////////////////////////////////////////////////////////////////////
         // working with functions (not methods)
 
-        $apply = 'sideEffect{ 
+        $apply = 'sideEffect{
 i = it.noDelimiter.indexOf("::");
 if (i > 0) {
     it.cbClass = it.noDelimiter.substring(0, i).toLowerCase();
     if (it.cbClass.toString()[0] != "\\\\") {it.cbClass = "\\\\" + it.cbClass;};
     it.cbMethod = it.noDelimiter.substring(2 + i).toLowerCase();
 } else {
-    it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath == "" || it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;}; 
-}                 
+    it.fullnspath = it.noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" ); if (it.fullnspath == "" || it.fullnspath.toString()[0] != "\\\\") {it.fullnspath = "\\\\" + it.fullnspath;};
+}
             }';
 
         // callable is in # position
@@ -106,7 +106,7 @@ if (i > 0) {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // array('Class', 'method');
 
-        $apply = 'sideEffect{ 
+        $apply = 'sideEffect{
     theArray.cbClass = it.out("ARGUMENT").has("rank", 0).next().noDelimiter.toLowerCase().replaceAll( "\\\\\\\\\\\\\\\\", "\\\\\\\\" );
     if (theArray.cbClass.toString()[0] != "\\\\") {theArray.cbClass = "\\\\" + theArray.cbClass;};
 
@@ -118,7 +118,7 @@ if (i > 0) {
         theArray.cbMethod = theArray.cbMethod.substring(i + 2);
         theArray.cbHere = "yes";
         
-        // we assume it is only parent. 
+        // we assume it is only parent.
         theArray.cbClass = g.idx("classes")[["path":theArray.cbClass]].out("EXTENDS").next().fullnspath;
     }
 }';
@@ -178,7 +178,7 @@ if (i > 0) {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // array($this, 'method');
-        $apply = 'sideEffect{ 
+        $apply = 'sideEffect{
     theArray.cbClass = it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.next().fullnspath;
 
     theArray.cbMethod = it.out("ARGUMENT").has("rank", 1).next().noDelimiter.toLowerCase();

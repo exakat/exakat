@@ -30,7 +30,7 @@ class ImpliedIf extends Analyzer\Analyzer {
         $this->atomIs('Logical')
              ->code(array('or', '||', 'and', '&&'))
              ->inIsIE('CODE')
-             ->hasIn('ELEMENT') 
+             ->hasIn('ELEMENT')
              ->back('first');
         $this->prepareQuery();
     }

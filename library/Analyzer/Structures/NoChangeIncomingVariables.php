@@ -29,7 +29,7 @@ class NoChangeIncomingVariables extends Analyzer\Analyzer {
     public function analyze() {
         $incomingVariables = array('$_GET','$_POST','$_REQUEST','$_FILES',
                                     '$_ENV', '$_SERVER',
-                                    '$PHP_SELF','$HTTP_RAW_POST_DATA'); 
+                                    '$PHP_SELF','$HTTP_RAW_POST_DATA');
         //'$_COOKIE', '$_SESSION' : those are OK
         
         // full array unset($_GET);

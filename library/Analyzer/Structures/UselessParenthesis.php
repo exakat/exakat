@@ -26,7 +26,7 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class UselessParenthesis extends Analyzer\Analyzer {
-    // if ( ($condition) ) 
+    // if ( ($condition) )
     public function analyze() {
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')

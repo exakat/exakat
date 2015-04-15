@@ -32,7 +32,7 @@ class IsVendor extends Analyzer\Analyzer {
     
     public function analyze() {
         // static constants
-        // for aliases 
+        // for aliases
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
              ->savePropertyAs('code', 'classe')
@@ -46,10 +46,10 @@ class IsVendor extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // for direct naming 
+        // for direct naming
 
         // static methods
-        // for aliases 
+        // for aliases
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->savePropertyAs('code', 'classe')
@@ -63,10 +63,10 @@ class IsVendor extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // for direct naming 
+        // for direct naming
 
         // static properties
-        // for aliases 
+        // for aliases
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->savePropertyAs('code', 'classe')
@@ -80,10 +80,10 @@ class IsVendor extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // for direct naming 
+        // for direct naming
 
         // Instanceof
-        // for aliases 
+        // for aliases
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->savePropertyAs('code', 'classe')
@@ -97,7 +97,7 @@ class IsVendor extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // for direct naming 
+        // for direct naming
 
         // New
         // for aliases with namespaces
@@ -132,7 +132,7 @@ class IsVendor extends Analyzer\Analyzer {
              ->back('classe');
         $this->prepareQuery();
 
-        // for direct naming 
+        // for direct naming
         $this->atomIs('New')
              ->outIs('NEW')
              ->_as('classe')

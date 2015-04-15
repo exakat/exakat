@@ -54,7 +54,7 @@ class ConstantConditions extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Ifthen')
-             // constant shouldn't be PHP's 
+             // constant shouldn't be PHP's
              ->raw('filter{it.out("CONDITION").out().loop(1){true}{it.object.atom in ["Identifier", "Nsname"]}.filter{it.in("ANALYZED").has("code", "Analyzer\\\\Constants\\\\IsPhpConstant").any() }.any() == false }')
              ->outIs('CONDITION')
              ->atomIsNot(array('Variable', 'Functioncall'))
@@ -63,7 +63,7 @@ class ConstantConditions extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Ternary')
-             // constant shouldn't be PHP's 
+             // constant shouldn't be PHP's
              ->raw('filter{it.out("CONDITION").out().loop(1){true}{it.object.atom in ["Identifier", "Nsname"]}.filter{it.in("ANALYZED").has("code", "Analyzer\\\\Constants\\\\IsPhpConstant").any() }.any() == false }')
              ->outIs('CONDITION')
              ->atomIsNot(array('Variable', 'Functioncall'))
@@ -81,7 +81,7 @@ class ConstantConditions extends Analyzer\Analyzer {
 /*
     One of the variable inside the condition should be modified at some point : in the condition, or in the loop.
 
-    Function calls are kept, but they should be characterized as non-stochastic 
+    Function calls are kept, but they should be characterized as non-stochastic
     (calling with the same arguments may yield different result, such as random or fread)
 */
     }

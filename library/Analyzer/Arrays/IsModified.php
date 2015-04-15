@@ -58,7 +58,7 @@ class IsModified extends Analyzer\Analyzer {
              ->samePropertyAs('rank', 'rank', true)
              ->is('reference', true)
              ->back('first');
-        $this->prepareQuery();  
+        $this->prepareQuery();
 
         // function/methods definition : all modified by incoming values
         // simple variable
@@ -113,7 +113,7 @@ class IsModified extends Analyzer\Analyzer {
              ->samePropertyAs('rank', 'rank')
              ->is('reference', true)
              ->back('first');
-        $this->prepareQuery(); 
+        $this->prepareQuery();
     }
 }
 

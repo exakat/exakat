@@ -27,7 +27,7 @@ use Analyzer;
 
 class AutoloadUsage extends Analyzer\Common\FunctionUsage {
     public function analyze() {
-        $this->functions = array('spl_autoload_call', 
+        $this->functions = array('spl_autoload_call',
                                  'spl_autoload_functions',
                                  'spl_autoload_extensions',
                                  'spl_autoload_register',

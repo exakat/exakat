@@ -42,7 +42,7 @@ class UseThis extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // Case for statics 
+        // Case for statics
         $this->atomIs('Function')
              ->outIs('NAME')
              ->analyzerIs('Analyzer\\Classes\\MethodDefinition')
@@ -71,7 +71,7 @@ class UseThis extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-    // static constant are excluded. 
+    // static constant are excluded.
     }
 }
 

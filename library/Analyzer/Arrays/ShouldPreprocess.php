@@ -74,7 +74,7 @@ class ShouldPreprocess extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // same as above with $array[] 
+        // same as above with $array[]
         // in case this is the first one in the sequence
         $this->atomIs('Arrayappend')
              ->outIs('VARIABLE')

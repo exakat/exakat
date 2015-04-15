@@ -86,7 +86,7 @@ class ShouldUsePreparedStatement extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // method call $someObject->query('select '. 'b') (probably too wide...) 
+        // method call $someObject->query('select '. 'b') (probably too wide...)
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->code('query')
@@ -97,7 +97,7 @@ class ShouldUsePreparedStatement extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // method call $someObject->query("select $b") (probably too wide...) 
+        // method call $someObject->query("select $b") (probably too wide...)
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->code('query')

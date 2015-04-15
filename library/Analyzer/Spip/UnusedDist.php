@@ -33,8 +33,8 @@ class UnusedDist extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'name')
              ->raw(<<<GREMLIN
 filter{ g.idx("atoms")[["atom":"Functioncall"]].has("fullnspath", "\\\\charger_fonction")
-                                               .sideEffect{ 
-                                                    fonction = it.out("ARGUMENTS").out("ARGUMENT").has('token', 'T_CONSTANT_ENCAPSED_STRING').has("rank", 0).next().noDelimiter.replace("/", "_").toLowerCase(); 
+                                               .sideEffect{
+                                                    fonction = it.out("ARGUMENTS").out("ARGUMENT").has('token', 'T_CONSTANT_ENCAPSED_STRING').has("rank", 0).next().noDelimiter.replace("/", "_").toLowerCase();
                                                     sub = "exec";
                                                     if (it.out("ARGUMENTS").out("ARGUMENT").has('token', 'T_CONSTANT_ENCAPSED_STRING').has("rank", 1).any()) {
                                                         sub = it.out("ARGUMENTS").out("ARGUMENT").has('token', 'T_CONSTANT_ENCAPSED_STRING').has("rank", 1).next().noDelimiter.toLowerCase();

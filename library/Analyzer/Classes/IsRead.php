@@ -46,14 +46,14 @@ class IsRead extends Analyzer\Analyzer {
             // note : NAME is for Switch!!
         $this->prepareQuery();
 
-        // right or left, same 
+        // right or left, same
         $this->atomIs('Property')
              ->inIs(array('RIGHT', 'LEFT'))
              ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
              ->back('first');
         $this->prepareQuery();
 
-        // right or left, same 
+        // right or left, same
         $this->atomIs('Staticproperty')
              ->inIs(array('RIGHT', 'LEFT'))
              ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
@@ -74,7 +74,7 @@ class IsRead extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $x++ + 2 (a plusplus within another 
+        // $x++ + 2 (a plusplus within another
         $this->atomIs('Property')
              ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
              ->inIs(array('RIGHT', 'LEFT'))
@@ -82,7 +82,7 @@ class IsRead extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $x++ + 2 (a plusplus within another 
+        // $x++ + 2 (a plusplus within another
         $this->atomIs('Staticproperty')
              ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
              ->inIs(array('RIGHT', 'LEFT'))
@@ -95,14 +95,14 @@ class IsRead extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomIs('Sequence')
              ->back('first');
-        $this->prepareQuery();    
+        $this->prepareQuery();
 
         // variable in a sequence (also useless...)
         $this->atomIs('Staticproperty')
              ->inIs('ELEMENT')
              ->atomIs('Sequence')
              ->back('first');
-        $this->prepareQuery();    
+        $this->prepareQuery();
 
         // array only
         $this->atomIs('Property')

@@ -48,7 +48,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
              ->back('ppp');
         $this->prepareQuery();
 
-        // property + $this->property in parents 
+        // property + $this->property in parents
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -70,7 +70,7 @@ class PropertyUsedInternally extends Analyzer\Analyzer {
              ->back('ppp');
         $this->prepareQuery();
 
-        // property + $this->property in parents 
+        // property + $this->property in parents
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')

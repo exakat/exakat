@@ -39,7 +39,7 @@ class IsComposerNsname extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // classes in Composer
-        $packagistClasses = $data->getComposerClasses();        
+        $packagistClasses = $data->getComposerClasses();
         $this->atomIs('Use')
              ->outIs('USE')
              ->is('originpath', $packagistClasses);
@@ -60,7 +60,7 @@ class IsComposerNsname extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         ////////////////////////////////////////////////
-        // Classes extends or implements 
+        // Classes extends or implements
         // Classes in Composer
         $packagistClasses = $this->makeFullNSpath($packagistClasses);
         $this->atomIs('Class')

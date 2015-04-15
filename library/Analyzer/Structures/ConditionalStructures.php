@@ -38,7 +38,7 @@ class ConditionalStructures extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // functions 
+        // functions
         $this->atomIs('Function')
              ->outIs('NAME')
              ->analyzerIsNot('Analyzer\\Classes\\MethodDefinition')

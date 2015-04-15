@@ -29,7 +29,7 @@ class Php55RemovedFunctions extends Analyzer\Common\FunctionUsage {
     protected $phpVersion = "5.5-";
     
     public function analyze() {
-        $this->functions = array('php_logo_guid', 
+        $this->functions = array('php_logo_guid',
                                  'php_egg_logo_guid',
                                  'php_real_logo_guid',
                                  'zend_logo_guid',

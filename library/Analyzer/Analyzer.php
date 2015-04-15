@@ -52,7 +52,7 @@ class Analyzer {
     
     private $path_tmp = null;
 
-    protected $severity = self::S_NONE; // Default to None. 
+    protected $severity = self::S_NONE; // Default to None.
     const S_CRITICAL = 'Critical';
     const S_MAJOR = 'Major';
     const S_MINOR = 'Minor';
@@ -82,10 +82,10 @@ class Analyzer {
         $this->apply->setAnalyzer($this->analyzer);
         
         $this->description = new \Description($this->analyzer);
-    } 
+    }
     
     public function __destruct() {
-        if ($this->path_tmp !== null) { 
+        if ($this->path_tmp !== null) {
             unlink($this->path_tmp);
         }
     }
@@ -107,7 +107,7 @@ class Analyzer {
     }
     
     public static function getClass($name) {
-        // accepted names : 
+        // accepted names :
         // PHP full name : Analyzer\\Type\\Class
         // PHP short name : Type\\Class
         // Human short name : Type/Class
@@ -139,7 +139,7 @@ class Analyzer {
         if (class_exists($class)) {
             $actualClassName = new \ReflectionClass($class);
             if ($class != $actualClassName->getName()) {
-                // problems with the case 
+                // problems with the case
                 return false;
             } else {
                 return $class;
@@ -267,8 +267,8 @@ GREMLIN;
         }
         
         foreach($this->phpConfiguration as $ini => $value) {
-            if ($Php->getConfiguration($ini) != $value) { 
-                return false; 
+            if ($Php->getConfiguration($ini) != $value) {
+                return false;
             }
         }
         
@@ -281,15 +281,15 @@ GREMLIN;
             return true;
         }
 
-        // version and above 
+        // version and above
         if ((substr($this->phpVersion, -1) == '+') && version_compare($version, $this->phpVersion) >= 0) {
             return true;
-        } 
+        }
 
-        // up to version  
+        // up to version
         if ((substr($this->phpVersion, -1) == '-') && version_compare($version, $this->phpVersion) <= 0) {
             return true;
-        } 
+        }
 
         // version range 1.2.3-4.5.6
         if (strpos($this->phpVersion, '-') !== false) {
@@ -299,19 +299,19 @@ GREMLIN;
             } else {
                 return false;
             }
-        } 
+        }
         
         // One version only
         if (version_compare($version, $this->phpVersion) == 0) {
             return true;
-        } 
+        }
         
-        // Default behavior if we don't understand : 
+        // Default behavior if we don't understand :
         return false;
     }
 
     // @doc return the list of dependences that must be prepared before the execution of an analyzer
-    // @doc by default, nothing. 
+    // @doc by default, nothing.
     public function dependsOn() {
         return array();
     }
@@ -663,8 +663,8 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => &$v) { 
-                    $v = strtolower($v); 
+                foreach($code as $k => &$v) {
+                    $v = strtolower($v);
                 }
                 unset($v);
             } else {
@@ -687,8 +687,8 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => &$v) { 
-                    $v = strtolower($v); 
+                foreach($code as $k => &$v) {
+                    $v = strtolower($v);
                 }
                 unset($v);
             } else {
@@ -713,8 +713,8 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => &$v) { 
-                    $v = strtolower($v); 
+                foreach($code as $k => &$v) {
+                    $v = strtolower($v);
                 }
                 unset($v);
             } else {
@@ -739,8 +739,8 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => &$v) { 
-                    $v = strtolower($v); 
+                foreach($code as $k => &$v) {
+                    $v = strtolower($v);
                 }
                 unset($v);
             } else {
@@ -763,8 +763,8 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => &$v) { 
-                    $v = strtolower($v); 
+                foreach($code as $k => &$v) {
+                    $v = strtolower($v);
                 }
                 unset($v);
             } else {
@@ -787,8 +787,8 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => &$v) { 
-                    $v = strtolower($v); 
+                foreach($code as $k => &$v) {
+                    $v = strtolower($v);
                 }
                 unset($v);
             } else {
@@ -807,7 +807,7 @@ GREMLIN;
     }
     
     public function codeIsPositiveInteger() {
-        $this->addMethod('filter{ if( it.code.isInteger()) { it.code > 0; } else { true; }}', null); // may be use toInteger() ? 
+        $this->addMethod('filter{ if( it.code.isInteger()) { it.code > 0; } else { true; }}', null); // may be use toInteger() ?
 
         return $this;
     }
@@ -869,8 +869,8 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => &$v) { 
-                    $v = strtolower($v); 
+                foreach($code as $k => &$v) {
+                    $v = strtolower($v);
                 }
                 unset($v);
             } else {
@@ -894,8 +894,8 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => &$v) { 
-                    $v = strtolower($v); 
+                foreach($code as $k => &$v) {
+                    $v = strtolower($v);
                 }
                 unset($v);
             } else {
@@ -918,8 +918,8 @@ GREMLIN;
             $caseSensitive = '';
         } else {
             if (is_array($code)) {
-                foreach($code as $k => &$v) { 
-                    $v = strtolower($v); 
+                foreach($code as $k => &$v) {
+                    $v = strtolower($v);
                 }
                 unset($v);
             } else {
@@ -956,14 +956,14 @@ GREMLIN;
     }
 
     public function codeLength($length = ' == 1 ') {
-        // @todo add some tests ? Like Operator / value ? 
+        // @todo add some tests ? Like Operator / value ?
         $this->addMethod("filter{it.code.length() $length}");
 
         return $this;
     }
 
     public function fullcodeLength($length = ' == 1 ') {
-        // @todo add some tests ? Like Operator / value ? 
+        // @todo add some tests ? Like Operator / value ?
         $this->addMethod("filter{it.fullcode.length() $length}");
 
         return $this;
@@ -977,7 +977,7 @@ GREMLIN;
 
     public function eachCounted($variable, $times, $comp = '==') {
         $this->addMethod(<<<GREMLIN
-groupBy(m){{$variable}}{it}.iterate(); 
+groupBy(m){{$variable}}{it}.iterate();
 // This is plugged into each{}
 m.findAll{ it.value.size() $comp $times}.values().flatten().each{ n.add(it); }
 GREMLIN
@@ -1050,10 +1050,10 @@ GREMLIN
         if ($rank == 'first') {
             $rank = 0;
             $this->addMethod("out(***).filter{it.getProperty('rank')  == ***}", $edgeName, $rank);
-        } else if ($rank === 'last') {
+        } elseif ($rank === 'last') {
             $this->addMethod('sideEffect{ rank = it.out(***).count() - 1;}', $edgeName);
             $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edgeName);
-        } else if ($rank === '2last') {
+        } elseif ($rank === '2last') {
             $this->addMethod('sideEffect{ rank = it.out(***).count() - 2;}', $edgeName);
             $this->addMethod("out(***).filter{it.getProperty('rank')  == rank}", $edgeName);
         } else {
@@ -1203,8 +1203,8 @@ GREMLIN
         } else {
             $in = array();
             
-            if (!is_array($ins)) { 
-                $ins = array($ins); 
+            if (!is_array($ins)) {
+                $ins = array($ins);
             }
             foreach($ins as $i) {
                 if (empty($i)) {
@@ -1233,8 +1233,8 @@ GREMLIN
         } else {
             $in = array();
             
-            if (!is_array($ins)) { 
-                $ins = array($ins); 
+            if (!is_array($ins)) {
+                $ins = array($ins);
             }
             foreach($ins as $i) {
                 if (empty($i)) {
@@ -1508,7 +1508,7 @@ GREMLIN
     }
     
     public function goToPropertyDefinition() {
-        // starting with a staticproperty 
+        // starting with a staticproperty
         $this->addMethod('sideEffect{ propertyname = it.out("PROPERTY").next().code.toLowerCase() }.out("CLASS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                 .out("EXTENDS").transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
                 .loop(2){ it.object.out("BLOCK").out("ELEMENT").has("atom", "Ppp").out("DEFINE").filter{ it.code.toLowerCase() == propertyname }.any() == false}
@@ -1543,18 +1543,18 @@ sideEffect{ loops = 1;}
 
 //// LOOP ////
 .as('connexion')
-.transform{ 
-    if (it.in('METHOD').any() == false) { 
-        if (g.idx('functions')[['path':it.fullnspath]].any()) {  
-            g.idx('functions')[['path':it.fullnspath]].next(); 
+.transform{
+    if (it.in('METHOD').any() == false) {
+        if (g.idx('functions')[['path':it.fullnspath]].any()) {
+            g.idx('functions')[['path':it.fullnspath]].next();
         } else {
             it;
-        } 
+        }
     } else if (it.in('METHOD').any()) {  // case of Staticmethodcall or Propertycall
-                name = it.code.toLowerCase();  
+                name = it.code.toLowerCase();
                 g.idx('atoms')[['atom':'Class']].out('BLOCK').out('ELEMENT')
-                                    .has('atom', 'Function').out('NAME').filter{it.code.toLowerCase() == name }.next(); 
-    } else { it; } 
+                                    .has('atom', 'Function').out('NAME').filter{it.code.toLowerCase() == name }.next();
+    } else { it; }
 }.in('NAME')
 // calculating the path AND obtaining the arguments list
 .sideEffect{ while(x.last() >= loops) { x.pop(); x.pop();}; y = it.out('ARGUMENTS').out('ARGUMENT').filter{!x[-2].intersect([it.rank]).isEmpty() }.code.toList(); x += [y];  x += loops;}
@@ -1562,7 +1562,7 @@ sideEffect{ loops = 1;}
 .out('BLOCK').out.loop(1){true}{it.object.atom in ['Functioncall', 'Staticmethodcall', 'Methodcall'] && (it.object.in('METHOD').any() == false)}
 .transform{ if (it.out('METHOD').any()) { it.out('METHOD').next(); } else { it; }}
 
-// filter with arguments that are relayed 
+// filter with arguments that are relayed
 .filter{ it.out('ARGUMENTS').out('ARGUMENT').filter{ it.code in x[-2]}.any() }
 .sideEffect{ y=[]; it.out('ARGUMENTS').out('ARGUMENT').filter{ it.code in x[-2]}.rank.fill(y); x += [y]; x += loops}
 
@@ -1595,8 +1595,8 @@ GREMLIN
         return $this->rowCount;
     }
 
-    public function analyze() { return true; } 
-    // @todo log errors when using this ? 
+    public function analyze() { return true; }
+    // @todo log errors when using this ?
 
     public function printQuery() {
         $this->prepareQuery();
@@ -1624,7 +1624,7 @@ GREMLIN
     }
 
     public function prepareQuery() {
-        // @doc This is when the object is a placeholder for others. 
+        // @doc This is when the object is a placeholder for others.
         if (count($this->methods) == 1) { return true; }
         
         array_splice($this->methods, 2, 0, array('as("first")'));
@@ -1636,7 +1636,7 @@ GREMLIN
             $query = "g.V.{$query}";
         }
         
-        // search what ? All ? 
+        // search what ? All ?
         $query = <<<GREMLIN
 
 c = 0;
@@ -1647,7 +1647,7 @@ GREMLIN;
         
         $query .= $this->apply->getGremlin();
 
-    // initializing a new query 
+    // initializing a new query
         $this->queries[] = $query;
         $this->queriesArguments[] = $this->arguments;
 
@@ -1661,18 +1661,18 @@ GREMLIN;
     public function execQuery() {
         if (empty($this->queries)) { return true; }
 
-        // @todo add a test here ? 
+        // @todo add a test here ?
         foreach($this->queries as $id => $query) {
             $r = $this->query($query, $this->queriesArguments[$id]);
             $this->rowCount += $r[0][0];
         }
 
         // reset for the next
-        $this->queries = array(); 
-        $this->queriesArguments = array(); 
+        $this->queries = array();
+        $this->queriesArguments = array();
         
-        // @todo multiple results ? 
-        // @todo store result in the object until reading. 
+        // @todo multiple results ?
+        // @todo store result in the object until reading.
         return $this->rowCount;
     }
 
@@ -1681,15 +1681,15 @@ GREMLIN;
     }
     
     public function toArray() {
-        $queryTemplate = "g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']].out"; 
+        $queryTemplate = "g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']].out";
         $vertices = $this->query($queryTemplate);
 
         $report = array();
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
                 $report[] = $v[0]->fullcode;
-            }   
-        } 
+            }
+        }
         
         return $report;
     }
@@ -1711,27 +1711,27 @@ GREMLIN;
         $report = array();
         if (count($vertices) > 0) {
             foreach($vertices as $v) {
-                $report[] = array('code' => $v[0][0], 
-                                  'file' => $v[0][2], 
-                                  'line' => $v[0][1], 
+                $report[] = array('code' => $v[0][0],
+                                  'file' => $v[0][2],
+                                  'line' => $v[0][1],
                                   'desc' => $this->description->getName());
-            }   
-        } 
+            }
+        }
         
         return $report;
     }
 
     public function toCountedArray($load = 'it.fullcode') {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){{$load}}.cap"; 
+        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){{$load}}.cap";
         $vertices = $this->query($queryTemplate);
 
         $report = array();
         if (count($vertices) > 0) {
             foreach($vertices[0][0] as $k => $v) {
                 $report[$k] = $v;
-            }   
-        } 
+            }
+        }
         
         return $report;
     }
@@ -1773,7 +1773,7 @@ GREMLIN;
 
     public function isRun() {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].any()"; 
+        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].any()";
         $vertices = $this->query($queryTemplate);
 
         return $vertices[0][0] == 1;
@@ -1785,7 +1785,7 @@ GREMLIN;
 
     public function getResultsCount() {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out.count()"; 
+        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].out.count()";
         $vertices = $this->query($queryTemplate);
         
         return (int) $vertices[0][0];
@@ -1801,7 +1801,7 @@ GREMLIN;
 
     public function getFileList() {
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = "m=[:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out('ANALYZED').in.loop(1){true}{it.object.atom == 'File'}.groupCount(m){it.filename}.iterate(); m;"; 
+        $queryTemplate = "m=[:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out('ANALYZED').in.loop(1){true}{it.object.atom == 'File'}.groupCount(m){it.filename}.iterate(); m;";
         $vertices = $this->query($queryTemplate);
         
         $return = array();

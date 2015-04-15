@@ -63,7 +63,7 @@ class WrongNumberOfArguments extends Analyzer\Analyzer {
             $this->prepareQuery();
         }
 
-        // this is for custom functions 
+        // this is for custom functions
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))

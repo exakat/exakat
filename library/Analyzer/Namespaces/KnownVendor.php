@@ -27,11 +27,11 @@ use Analyzer;
 
 class KnownVendor extends Analyzer\Analyzer {
     public function analyze() {
-        // @todo move this to a SQL table! 
+        // @todo move this to a SQL table!
         $knownVendors = $this->getVendors();
         
         $this->atomIs('Nsname')
-             ->hasIn('USE') // no fullnspath for namespace 
+             ->hasIn('USE') // no fullnspath for namespace
              ->outIs('SUBNAME')
              ->is('rank', 0)
              ->code($knownVendors)
@@ -47,7 +47,7 @@ class KnownVendor extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('As')
-             ->hasIn('USE') 
+             ->hasIn('USE')
              ->outIs('SUBNAME')
              ->is('rank', 0)
              ->code($knownVendors)

@@ -23,7 +23,7 @@
 namespace Analyzer;
 
 class AnalyzerApply {
-    protected $applyBelow = false; 
+    protected $applyBelow = false;
 
     public function setApplyBelow($applyBelow = true) {
         $this->applyBelow = $applyBelow;
@@ -45,8 +45,8 @@ class AnalyzerApply {
 
 x = it;
 // use code instead of fullcode (case of references!)
-applyBelowRoot.out.loop(1){true}{it.object.code == x.code}.each{ 
-    g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED'); 
+applyBelowRoot.out.loop(1){true}{it.object.code == x.code}.each{
+    g.addEdge(g.idx('analyzers')[['analyzer':'$analyzer']].next(), it, 'ANALYZED');
     it.setProperty('appliedBelow', true);
     c = c + 1;
 }

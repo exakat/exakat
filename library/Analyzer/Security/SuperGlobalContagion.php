@@ -82,7 +82,7 @@ class SuperGlobalContagion extends Analyzer\Analyzer {
              ->atomInside('Variable')
              ->codeIsNot($vars)
              ->back('result');
-        $this->prepareQuery();        
+        $this->prepareQuery();
         
         // propagation is not implemented yet.
     }

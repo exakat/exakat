@@ -5,8 +5,8 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class ElseIfElseif extends Analyzer\Analyzer {
-    // if () {} else  if {} 
-    // but not if () {} elseif {} 
+    // if () {} else  if {}
+    // but not if () {} elseif {}
     public function analyze() {
         $this->atomIs('Ifthen')
              ->outIs('ELSE')

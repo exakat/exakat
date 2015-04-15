@@ -33,7 +33,7 @@ class MixedKeys extends Analyzer\Analyzer {
              ->tokenIs('T_ARRAY')
              ->fullnspath('\\array')
              ->outIs('ARGUMENTS')
-             ->raw('filter{ m=[:]; 
+             ->raw('filter{ m=[:];
                             it.out("ARGUMENT").groupBy(m){
               if (it.out("KEY").any() && it.out("KEY").next().atom in ["Identifier", "Staticconstant"]) { "a" } else { "b" }
              }{it}{it.size()}.iterate();

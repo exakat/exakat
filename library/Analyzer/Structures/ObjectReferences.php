@@ -27,7 +27,7 @@ use Analyzer;
 
 class ObjectReferences extends Analyzer\Analyzer {
     public function analyze() {
-        // f(stdclass &$x) 
+        // f(stdclass &$x)
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -40,7 +40,7 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->is('reference', true);
         $this->prepareQuery();
 
-        // f(stdclass &$x = null) 
+        // f(stdclass &$x = null)
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -55,7 +55,7 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->is('reference', true);
         $this->prepareQuery();
 
-        // f(&$x) and $x->y(); 
+        // f(&$x) and $x->y();
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -69,7 +69,7 @@ class ObjectReferences extends Analyzer\Analyzer {
              ->samePropertyAs('code', 'variable');
         $this->prepareQuery();
 
-        // f(&$x) and $x->y; 
+        // f(&$x) and $x->y;
         $this->atomIs('Function')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')

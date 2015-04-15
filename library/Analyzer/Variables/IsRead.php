@@ -44,7 +44,7 @@ class IsRead extends Analyzer\Analyzer {
         $this->prepareQuery();
              
 
-        // right or left, same 
+        // right or left, same
         $this->atomIs('Variable')
              ->inIs(array('RIGHT', 'LEFT'))
              ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
@@ -58,7 +58,7 @@ class IsRead extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $x++ + 2 (a plusplus within another 
+        // $x++ + 2 (a plusplus within another
         $this->atomIs('Variable')
              ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
              ->inIs(array('RIGHT', 'LEFT'))
@@ -71,7 +71,7 @@ class IsRead extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomIs('Sequence')
              ->back('first');
-        $this->prepareQuery();    
+        $this->prepareQuery();
 
         // array only
         $this->atomIs('Variable')
@@ -85,7 +85,7 @@ class IsRead extends Analyzer\Analyzer {
              ->inIs('VARIABLE')
              ->atomIs(array('Typehint', 'Instanceof'))
              ->back('first');
-        $this->prepareQuery();    
+        $this->prepareQuery();
 
         // arguments : normal variable in a custom function
         $this->atomIs('Variable')
@@ -100,7 +100,7 @@ class IsRead extends Analyzer\Analyzer {
              ->samePropertyAs('rank', 'rank', true)
              ->isNot('reference', true)
              ->back('first');
-        $this->prepareQuery();  
+        $this->prepareQuery();
 
         // PHP functions that are passed by value
         $data = new \Data\Methods();

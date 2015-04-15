@@ -35,7 +35,7 @@ class AddZero extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // 0 + 2 
+        // 0 + 2
         $this->atomIs('Addition')
              ->tokenIs('T_PLUS')
              ->outIs('LEFT')

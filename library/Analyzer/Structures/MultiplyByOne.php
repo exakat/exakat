@@ -35,7 +35,7 @@ class MultiplyByOne extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $x = $y * 1 
+        // $x = $y * 1
         $this->atomIs('Multiplication')
              ->code('*')
              ->outIs('LEFT')
@@ -49,7 +49,7 @@ class MultiplyByOne extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $x = $y ** 1 
+        // $x = $y ** 1
         $this->atomIs('Power')
              ->outIs('RIGHT')
              ->code('1')
@@ -63,7 +63,7 @@ class MultiplyByOne extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
         
-        // -0 
+        // -0
         $this->atomIs('Integer')
              ->code('-0');
         $this->prepareQuery();

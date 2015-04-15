@@ -72,7 +72,7 @@ class IsModified extends Analyzer\Analyzer {
              ->samePropertyAs('rank', 'rank', true)
              ->is('reference', true)
              ->back('first');
-        $this->prepareQuery();  
+        $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
              ->savePropertyAs('rank', 'rank')
@@ -87,7 +87,7 @@ class IsModified extends Analyzer\Analyzer {
              ->samePropertyAs('rank', 'rank', true)
              ->is('reference', true)
              ->back('first');
-        $this->prepareQuery();  
+        $this->prepareQuery();
 
         // PHP functions that are references
         $data = new \Data\Methods();

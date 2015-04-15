@@ -30,7 +30,7 @@ class DefinitionsOnly extends Analyzer\Analyzer {
     public static $definitionsHelpers = array('Use', 'Global', 'Include');
     //'Namespace',  is excluded
 
-    public static $definitionsFunctions = array('define', 'set_session_handler', 'set_error_handler', 'ini_set', 
+    public static $definitionsFunctions = array('define', 'set_session_handler', 'set_error_handler', 'ini_set',
                                                 'register_shutdown_function');
     
     public function dependsOn() {

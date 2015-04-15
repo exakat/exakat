@@ -39,7 +39,7 @@ class Autoload extends Analyzer\Analyzer {
 
     public function hasResults() {
         \Analyzer\Analyzer::initDocs();
-        $report = (\Analyzer\Analyzer::$datastore->getHash('autoload') === 'psr-0' || 
+        $report = (\Analyzer\Analyzer::$datastore->getHash('autoload') === 'psr-0' ||
                    \Analyzer\Analyzer::$datastore->getHash('autoload') === 'psr-4' );
 
         return $report;

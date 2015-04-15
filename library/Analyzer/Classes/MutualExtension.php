@@ -27,7 +27,7 @@ use Analyzer;
 
 class MutualExtension extends Analyzer\Analyzer {
     public function analyze() {
-        // A -> B 
+        // A -> B
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
              ->outIs('EXTENDS')

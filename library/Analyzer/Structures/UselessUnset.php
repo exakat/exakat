@@ -42,7 +42,7 @@ class UselessUnset extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // unset on global 
+        // unset on global
         $this->atomIs('Functioncall')
              ->tokenIs('T_UNSET')
              ->fullnspath('\\unset')
@@ -58,7 +58,7 @@ class UselessUnset extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // unset on static 
+        // unset on static
         $this->atomIs('Functioncall')
              ->tokenIs('T_UNSET')
              ->fullnspath('\\unset')
@@ -123,7 +123,7 @@ class UselessUnset extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // unset on global 
+        // unset on global
         $this->atomIs('Cast')
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')
@@ -137,7 +137,7 @@ class UselessUnset extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // unset on static 
+        // unset on static
         $this->atomIs('Cast')
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')

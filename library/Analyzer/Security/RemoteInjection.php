@@ -31,7 +31,7 @@ class RemoteInjection extends Analyzer\Analyzer {
     }
 
     public function analyze() {
-        // foreach 
+        // foreach
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
@@ -52,11 +52,11 @@ class RemoteInjection extends Analyzer\Analyzer {
 }
 
 // handle functions : OK (Test 1,2);
-// Handle methods 
+// Handle methods
 // Handle staticmethods
 // handle multiple arguments : OK (arguments 2,3,4)
 // handle non relayed arguments : OK (arugments 2,3,4)
-// handle default values, references and typehint 
+// handle default values, references and typehint
 // check on retro-feedback (function calling back another function already called : limiter by Iternation number, or by finding something early. Otherwise, good reaction.
 // check on drive-by functions call (the one not at the end of the path)
 

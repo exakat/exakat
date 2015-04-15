@@ -29,14 +29,14 @@ class WrongOptionalParameter extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              ->raw("filter{ has_default=false; it.out('ARGUMENTS').out('ARGUMENT').aggregate().sort{it.rank}._().filter{
-             if (it.out('RIGHT').any()) { 
-                has_default = true; 
-                false; 
-            } else if (it.out('VARIABLE').out('RIGHT').any()) { 
-                has_default = true; 
-                false; 
-            } else { 
-                has_default; 
+             if (it.out('RIGHT').any()) {
+                has_default = true;
+                false;
+            } else if (it.out('VARIABLE').out('RIGHT').any()) {
+                has_default = true;
+                false;
+            } else {
+                has_default;
             }}.any()}");
         $this->prepareQuery();
     }

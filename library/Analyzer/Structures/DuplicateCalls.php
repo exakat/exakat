@@ -27,7 +27,7 @@ use Analyzer;
 
 class DuplicateCalls extends Analyzer\Analyzer {
     public function analyze() {
-        // This is counting ALL occurences as itself. 
+        // This is counting ALL occurences as itself.
         $this->atomIs('Methodcall')
              ->hasNoIn('METHOD')
              ->fetchContext()

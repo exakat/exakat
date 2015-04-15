@@ -29,8 +29,8 @@ class FunctionPreSubscripting extends Analyzer\Analyzer {
     protected $phpVersion = '5.4+';
     
     public function analyze() {
-        // $x = f(); 
-        // $x['e'] 
+        // $x = f();
+        // $x['e']
         // instead of f()['e']
         $this->atomIs('Assignation')
              ->outIs('RIGHT')

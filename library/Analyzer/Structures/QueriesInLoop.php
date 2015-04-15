@@ -32,11 +32,11 @@ class QueriesInLoop extends Analyzer\Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->code(array('mssql_query',
-                          'mysqli_query',   
+                          'mysqli_query',
                           'mysqli_unbuffered_query',
                           'mysqli_db_query',
                           
-                          'mysql_query',   
+                          'mysql_query',
                           'mysql_unbuffered_query',
                           'mysql_db_query',
                           

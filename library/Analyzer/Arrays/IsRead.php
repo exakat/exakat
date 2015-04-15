@@ -38,7 +38,7 @@ class IsRead extends Analyzer\Analyzer {
             // note : NAME is for Switch!!
         $this->prepareQuery();
 
-        // right or left, same 
+        // right or left, same
         $this->atomIs('Array')
              ->inIs(array('RIGHT', 'LEFT'))
              ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
@@ -52,7 +52,7 @@ class IsRead extends Analyzer\Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $x++ + 2 (a plusplus within another 
+        // $x++ + 2 (a plusplus within another
         $this->atomIs('Array')
              ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
              ->inIs(array('RIGHT', 'LEFT'))
@@ -65,7 +65,7 @@ class IsRead extends Analyzer\Analyzer {
              ->inIs('ELEMENT')
              ->atomIs('Sequence')
              ->back('first');
-        $this->prepareQuery();    
+        $this->prepareQuery();
 
         // array only
         $this->atomIs('Array')
@@ -87,7 +87,7 @@ class IsRead extends Analyzer\Analyzer {
              ->samePropertyAs('rank', 'rank', true)
              ->isNot('reference', true)
              ->back('first');
-        $this->prepareQuery();  
+        $this->prepareQuery();
 
         // PHP functions that are passed by value
         $data = new \Data\Methods();

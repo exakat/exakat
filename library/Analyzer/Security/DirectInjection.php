@@ -67,7 +67,7 @@ class DirectInjection extends Analyzer\Analyzer {
              ->inIs('CONCAT');
         $this->prepareQuery();
 
-        // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation! 
+        // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
 
         // foreach (looping on incoming variables)
         $this->atomIs('Variable')

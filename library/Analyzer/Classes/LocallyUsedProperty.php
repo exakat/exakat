@@ -76,7 +76,7 @@ class LocallyUsedProperty extends Analyzer\Analyzer {
              ->outIs('VARIABLE')
              ->samePropertyAs('code', 'property')
              ->back('first');
-        $this->prepareQuery();        
+        $this->prepareQuery();
         // static property
     }
 }

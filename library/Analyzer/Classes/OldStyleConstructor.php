@@ -49,7 +49,7 @@ class OldStyleConstructor extends Analyzer\Analyzer {
              ->outIs("NAME")
              ->samePropertyAs('code', 'name')
              ->goToNamespace()
-             ->atomIs('Namespace') 
+             ->atomIs('Namespace')
              ->outIs('NAMESPACE')
              ->code('Global')
              ->back('first');

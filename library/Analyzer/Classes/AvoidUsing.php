@@ -29,7 +29,7 @@ class AvoidUsing extends Analyzer\Analyzer {
     public function analyze() {
         $classes = $this->config;
         
-        if (empty($classes)) { 
+        if (empty($classes)) {
             return null;
         }
         $classes = $this->makeFullNsPath($classes);

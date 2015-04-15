@@ -43,8 +43,8 @@ class ShouldUseConstants extends Analyzer\Analyzer {
                  ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
-                 ->atomIs('Logical') 
-                 ->raw('filter{ it.out.loop(1){!(it.object.atom in ["Identifier", "Nsname"])}{!(it.object.atom in ["Identifier", "Nsname", "Parenthesis", "Logical"])}.any()}') 
+                 ->atomIs('Logical')
+                 ->raw('filter{ it.out.loop(1){!(it.object.atom in ["Identifier", "Nsname"])}{!(it.object.atom in ["Identifier", "Nsname", "Parenthesis", "Logical"])}.any()}')
                  ->back('first');
             $this->prepareQuery();
         }

@@ -46,8 +46,8 @@ class Docs {
     
     public function getThemeAnalyzers($theme) {
         $query = <<<SQL
-        SELECT a.folder, a.name FROM analyzers AS a 
-    JOIN analyzers_categories AS ac 
+        SELECT a.folder, a.name FROM analyzers AS a
+    JOIN analyzers_categories AS ac
         ON ac.id_analyzer = a.id
     JOIN categories AS c
         ON c.id = ac.id_categories
@@ -71,7 +71,7 @@ SQL;
 
         $res = $this->sqlite->query($query);
         $res2 = $res->fetchArray();
-        if (empty($res2[0])) { 
+        if (empty($res2[0])) {
             $return = \Analyzer\Analyzer::S_NONE;
         } else {
             $return = constant("\\Analyzer\\Analyzer::$res2[0]");
@@ -89,7 +89,7 @@ SQL;
 
         $return = constant("\\Analyzer\\Analyzer::$res2[0]");
 
-        if (empty($return['timetofix'])) { 
+        if (empty($return['timetofix'])) {
             $return = \Analyzer\Analyzer::T_NONE;
         }
 

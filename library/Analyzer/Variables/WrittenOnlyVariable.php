@@ -41,9 +41,9 @@ class WrittenOnlyVariable extends Analyzer\Analyzer {
              ->codeIsNot($superglobals)
              ->analyzerIs('Analyzer\\Variables\\IsModified')
              ->analyzerIsNot('Analyzer\\Variables\\IsRead')
-             ->raw('filter{ 
-    name = it.code; 
-    itself = it; 
+             ->raw('filter{
+    name = it.code;
+    itself = it;
     it.in.loop(1){it.object.atom != "Function"}{it.object.atom == "Function"}.out("BLOCK").
              out().loop(1){true}{it.object.atom == "Variable"}
              .has("code", name)
