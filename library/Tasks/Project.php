@@ -77,6 +77,7 @@ class Project implements Tasks {
             unlink($datastorePath);
         }
         
+        // cleaning datastore
         $datastore = new \Datastore($config);
         $datastore->cleanTable('hash');
         $audit_start = time();
@@ -84,6 +85,12 @@ class Project implements Tasks {
                                          'exakat_version' => \Exakat::VERSION,
                                          'exakat_build' => \Exakat::BUILD,
                                          ));
+
+        // cleaning log directory
+        $logs = glob($config->projects_root.'/projects/log/*');
+        foreach($logs as $log) {
+            unlink($log);
+        }
 
         $thread = new \Thread();
         display("Running project '$project'\n");
@@ -182,6 +189,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
         $datastore->addRow('hash', array('audit_end'    => $audit_end,
                                          'audit_length' => $audit_end - $audit_start));
 
+        shell_exec('php '.$this->executable.' results -P Structures/EchoWithConcat -json -f '.$config->projects_root.'/projects/'.$project.'/EchoWithConcat');
         $this->logTime('Final');
         display("End 2\n");
     }
