@@ -87,7 +87,7 @@ class Project implements Tasks {
                                          ));
 
         // cleaning log directory
-        $logs = glob($config->projects_root.'/projects/log/*');
+        $logs = glob($config->projects_root.'/projects/'.$project.'/log/*');
         foreach($logs as $log) {
             unlink($log);
         }
