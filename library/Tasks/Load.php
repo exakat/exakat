@@ -915,6 +915,9 @@ class Load implements Tasks {
                                                   ->setProperty('code', $token)
                                                   ->setProperty('line', $line)
                                                   ->save();
+                    if ($type = $this->process_blocks($token_value)) {
+                        $T[$Tid]->setProperty('association', $type)->save();
+                    }
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
