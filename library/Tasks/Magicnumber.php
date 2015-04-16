@@ -72,6 +72,16 @@ SQL;
             }
             display( "$type : $total\n");
         }
+
+        // export big arrays (more than 10)
+        $res = $this->query("g.V.has('token', 'T_ARRAY').filter{ it.out('ARGUMENTS').out('ARGUMENT').count() > 10}.fullcode");
+        
+        $fp = fopen($config->projects_root.'/projects/'.$config->project.'/bigArrays.txt', 'w+');
+        foreach($res as $v) {
+            fwrite($fp, $v[0]);
+            fwrite($fp, "\n");
+        }
+        fclose($fp);
     }
 
     private function query($query) {
