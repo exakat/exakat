@@ -115,18 +115,12 @@ class Project implements Tasks {
         display("Build root\n");
         $this->logTime('Build_root');
 
-        if (file_exists($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log')) {
-            unlink($config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
-        }
         $res = shell_exec('php '.$this->executable.' tokenizer -p '.$project.' > '.$config->projects_root.'/projects/'.$project.'/log/tokenizer.final.log');
         if (!empty($res) && strpos('javax.script.ScriptException', $res) !== false) {
             file_put_contents($config->projects_root.'/log/tokenizer_error.log', $res);
             die();
         }
 
-        if (file_exists($config->projects_root.'/projects/'.$project.'/log/errors.log')) {
-            unlink($config->projects_root.'/projects/'.$project.'/log/errors.log');
-        }
         $this->logTime('Tokenizer');
         display("Project tokenized\n");
 
@@ -141,10 +135,6 @@ class Project implements Tasks {
         $thread->run('php '.$this->executable.' log2csv -p '.$project);
 
         $this->logTime('Stats');
-
-        if (file_exists($config->projects_root.'/projects/'.$project.'/log/analyze.final.log')) {
-            unlink($config->projects_root.'/projects/'.$project.'/log/analyze.final.log');
-        }
 
         $processes = array();
         foreach($this->themes as $theme) {
