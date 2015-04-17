@@ -52,13 +52,10 @@ class Build_root implements Tasks {
         display("Created racines index\n");
 
         $this->logTime('g.idx("racines")');
-
-
         $this->query("g.dropIndex('atoms');");
         $this->query("g.createIndex('atoms', Vertex)");
+
         $this->logTime('g.idx("atoms")');
-
-
         display( "g.idx('atoms') : filling\n");
         $query = "g.V.filter{it.atom in ['Integer', 'String', 'Identifier', 'Magicconstant',
                                          'Rawstring', 'Variable', 'Float', 'Boolean', 'Void', 'File']}.each{
