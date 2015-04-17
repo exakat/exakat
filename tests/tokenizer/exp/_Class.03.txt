@@ -6,33 +6,29 @@ Label : CODE
     class
     Label : NAME
       x
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          __construct
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            void
-        Label : NAME
-          __destruct
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
     Label : EXTENDS
       y
     Label : IMPLEMENTS
       z
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : NAME
+          __destruct
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        function
+        Label : NAME
+          __construct
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            void
+        Label : BLOCK
+          void

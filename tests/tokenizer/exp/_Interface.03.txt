@@ -6,15 +6,15 @@ Label : CODE
     interface
     Label : NAME
       a
+    Label : EXTENDS
+      b
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
+        Label : NAME
+          x
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          x
-    Label : EXTENDS
-      b

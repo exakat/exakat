@@ -19,16 +19,16 @@ Label : CODE
           'D'
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        F
     Label : VALUE
       =>
       Label : KEY
         $c
       Label : VALUE
         $d
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        F
     Label : SOURCE
       $b
   Label : ELEMENT

@@ -7,35 +7,13 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
-      Label : ELEMENT
-        var
-        Label : VALUE
-          Void
-        Label : DEFINE
-          $a
-        Label : VAR
-          var
+      ;
       Label : ELEMENT
         const
+        Label : VALUE
+          6
         Label : NAME
-          b
-        Label : VALUE
-          2
-      Label : ELEMENT
-        var
-        Label : VALUE
-          Void
-        Label : DEFINE
-          $b
-        Label : VAR
-          var
-      Label : ELEMENT
-        const
-        Label : NAME
-          c
-        Label : VALUE
-          4
+          e
       Label : ELEMENT
         var
         Label : VALUE
@@ -46,7 +24,29 @@ Label : CODE
           var
       Label : ELEMENT
         const
-        Label : NAME
-          e
         Label : VALUE
-          6
+          4
+        Label : NAME
+          c
+      Label : ELEMENT
+        var
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $b
+        Label : VAR
+          var
+      Label : ELEMENT
+        const
+        Label : VALUE
+          2
+        Label : NAME
+          b
+      Label : ELEMENT
+        var
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $a
+        Label : VAR
+          var

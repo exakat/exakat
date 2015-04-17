@@ -1,8 +1,6 @@
 <?php
 
 
-class x extends y {
-
-}
+class x extends y { }
 
 ?>

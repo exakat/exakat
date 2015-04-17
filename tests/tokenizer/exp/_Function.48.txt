@@ -4,12 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      a
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
-    Label : NAME
-      a
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -18,14 +18,20 @@ Label : CODE
           3
       Label : ELEMENT
         =
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $a
+          Label : PROPERTY
+            b
         Label : RIGHT
           function
+          Label : NAME
+            
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               void
-          Label : NAME
-            
           Label : BLOCK
             ;
             Label : ELEMENT
@@ -52,9 +58,3 @@ Label : CODE
                           'c'
                         Label : VALUE
                           'd'
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            b

@@ -7,10 +7,10 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         const
-        Label : NAME
-          a
         Label : VALUE
           1
+        Label : NAME
+          a

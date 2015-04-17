@@ -6,37 +6,29 @@ Label : CODE
     interface
     Label : NAME
       true
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : EXTENDS
       i
+    Label : BLOCK
+      void
   Label : ELEMENT
     interface
     Label : NAME
       int
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : EXTENDS
       i
+    Label : BLOCK
+      void
   Label : ELEMENT
     interface
     Label : NAME
       null
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : EXTENDS
       i
+    Label : BLOCK
+      void
   Label : ELEMENT
     interface
     Label : NAME
       i
     Label : BLOCK
-      {
-      Label : ELEMENT
-        void
+      void

@@ -4,18 +4,18 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      a
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         =
-        Label : RIGHT
-          3
         Label : LEFT
           $c
+        Label : RIGHT
+          3
       Label : ARGUMENT
         $b
-    Label : NAME
-      a
     Label : BLOCK
       ;
       Label : ELEMENT

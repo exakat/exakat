@@ -7,29 +7,13 @@ Label : CODE
     Label : NAME
       dbstuff
     Label : BLOCK
-      {
-      Label : ELEMENT
-        var
-        Label : VALUE
-          0
-        Label : DEFINE
-          $a
-        Label : VAR
-          var
+      ;
       Label : ELEMENT
         var
         Label : VALUE
           Void
         Label : DEFINE
-          $e
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          Void
-        Label : DEFINE
-          $d
+          $b
         Label : VAR
           var
       Label : ELEMENT
@@ -45,7 +29,23 @@ Label : CODE
         Label : VALUE
           Void
         Label : DEFINE
-          $b
+          $d
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $e
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          0
+        Label : DEFINE
+          $a
         Label : VAR
           var
   Label : ELEMENT

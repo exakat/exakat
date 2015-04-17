@@ -5,26 +5,20 @@ Label : CODE
   Label : ELEMENT
     try
     Label : CODE
-      {
-      Label : ELEMENT
-        void
+      void
     Label : CATCH
       catch
+      Label : VARIABLE
+        $e
       Label : CLASS
         Exception2
       Label : CODE
-        {
-        Label : ELEMENT
-          void
-      Label : VARIABLE
-        $e
+        void
     Label : CATCH
       catch
+      Label : VARIABLE
+        $e
       Label : CLASS
         Exception
       Label : CODE
-        {
-        Label : ELEMENT
-          void
-      Label : VARIABLE
-        $e
+        void

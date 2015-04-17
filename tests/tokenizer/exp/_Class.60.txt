@@ -6,11 +6,9 @@ Label : CODE
     class
     Label : NAME
       A
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : IMPLEMENTS
       \
       Label : SUBNAME
         B
+    Label : BLOCK
+      void

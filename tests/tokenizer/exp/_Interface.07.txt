@@ -6,20 +6,6 @@ Label : CODE
     interface
     Label : NAME
       A
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        function
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            Typehint
-            Label : CLASS
-              E
-            Label : VARIABLE
-              $f
-        Label : NAME
-          D
     Label : EXTENDS
       Arguments
       Label : EXTENDS
@@ -36,24 +22,24 @@ Label : CODE
           C
         Label : SUBNAME
           B
-  Label : ELEMENT
-    interface
-    Label : NAME
-      A
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
+        Label : NAME
+          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             Typehint
-            Label : CLASS
-              E
             Label : VARIABLE
               $f
-        Label : NAME
-          D
+            Label : CLASS
+              E
+  Label : ELEMENT
+    interface
+    Label : NAME
+      A
     Label : EXTENDS
       Arguments
       Label : EXTENDS
@@ -66,24 +52,24 @@ Label : CODE
           C
         Label : SUBNAME
           B
-  Label : ELEMENT
-    interface
-    Label : NAME
-      A
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
+        Label : NAME
+          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             Typehint
-            Label : CLASS
-              E
             Label : VARIABLE
               $f
-        Label : NAME
-          D
+            Label : CLASS
+              E
+  Label : ELEMENT
+    interface
+    Label : NAME
+      A
     Label : EXTENDS
       Arguments
       Label : EXTENDS
@@ -94,27 +80,41 @@ Label : CODE
           C
         Label : SUBNAME
           B
-  Label : ELEMENT
-    interface
-    Label : NAME
-      A
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
+        Label : NAME
+          D
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             Typehint
-            Label : CLASS
-              E
             Label : VARIABLE
               $f
-        Label : NAME
-          D
+            Label : CLASS
+              E
+  Label : ELEMENT
+    interface
+    Label : NAME
+      A
     Label : EXTENDS
       \
       Label : SUBNAME
         C
       Label : SUBNAME
         B
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        function
+        Label : NAME
+          D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            Typehint
+            Label : VARIABLE
+              $f
+            Label : CLASS
+              E

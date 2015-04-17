@@ -4,21 +4,21 @@ Label : CODE
   Label : ELEMENT
     try
     Label : CODE
-      {
+      ;
       Label : ELEMENT
         if
         Label : CONDITION
           (
           Label : CODE
             ==
-            Label : RIGHT
-              't'
             Label : LEFT
               [
               Label : VARIABLE
                 $e
               Label : INDEX
                 'r'
+            Label : RIGHT
+              't'
         Label : THEN
           ;
           Label : ELEMENT
@@ -41,6 +41,8 @@ Label : CODE
                       'h'
     Label : CATCH
       catch
+      Label : VARIABLE
+        $e
       Label : CLASS
         ACL_RoleNoExist
       Label : CODE
@@ -91,28 +93,22 @@ Label : CODE
                       void
                       Label : ARGUMENT
                         'g'
-      Label : VARIABLE
-        $e
     Label : CATCH
       catch
+      Label : VARIABLE
+        $e
       Label : CLASS
         Ugmanager_GroupNoExist
       Label : CODE
-        {
-        Label : ELEMENT
-          void
-      Label : VARIABLE
-        $e
+        void
     Label : CATCH
       catch
+      Label : VARIABLE
+        $e
       Label : CLASS
         Router_ArgNoExist
       Label : CODE
-        {
-        Label : ELEMENT
-          void
-      Label : VARIABLE
-        $e
+        void
   Label : ELEMENT
     if
     Label : CONDITION

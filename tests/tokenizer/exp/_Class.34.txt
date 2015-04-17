@@ -7,13 +7,19 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      Sequence
+      Label : ELEMENT
+        const
+        Label : VALUE
+          2
+        Label : NAME
+          b
       Label : ELEMENT
         ppp
         Label : VALUE
-          void
+          4
         Label : DEFINE
-          $e
+          $g
         Label : VAR
           var
       Label : ELEMENT
@@ -27,14 +33,8 @@ Label : CODE
       Label : ELEMENT
         ppp
         Label : VALUE
-          4
+          void
         Label : DEFINE
-          $g
+          $e
         Label : VAR
           var
-      Label : ELEMENT
-        const
-        Label : NAME
-          b
-        Label : VALUE
-          2

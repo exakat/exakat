@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $o
     Label : RIGHT
       new
       Label : NEW
@@ -12,8 +14,6 @@ Label : CODE
           void
           Label : ARGUMENT
             void
-    Label : LEFT
-      $o
   Label : ELEMENT
     ->
     Label : OBJECT
@@ -49,21 +49,17 @@ Label : CODE
     Label : NAME
       MyHelloWorld
     Label : BLOCK
-      {
-      Label : ELEMENT
-        use
-        Label : USE
-          World
-        Label : USE
-          Hello
+      ;
       Label : ELEMENT
         function
+        Label : PUBLIC
+          public
+        Label : NAME
+          sayExclamationMark
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          sayExclamationMark
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -72,22 +68,28 @@ Label : CODE
               void
               Label : ARGUMENT
                 '!'
-        Label : PUBLIC
-          public
+      Label : ELEMENT
+        use
+        Label : USE
+          World
+        Label : USE
+          Hello
   Label : ELEMENT
     trait
     Label : NAME
       World
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
+        Label : PUBLIC
+          public
+        Label : NAME
+          sayWorld
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          sayWorld
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -96,22 +98,22 @@ Label : CODE
               void
               Label : ARGUMENT
                 'World'
-        Label : PUBLIC
-          public
   Label : ELEMENT
     trait
     Label : NAME
       Hello
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
+        Label : PUBLIC
+          public
+        Label : NAME
+          sayHello
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          sayHello
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -120,5 +122,3 @@ Label : CODE
               void
               Label : ARGUMENT
                 'Hello '
-        Label : PUBLIC
-          public

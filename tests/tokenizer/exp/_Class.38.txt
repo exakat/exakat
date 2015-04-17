@@ -7,51 +7,13 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
-      Label : ELEMENT
-        private
-        Label : VALUE
-          1
-        Label : DEFINE
-          $b
-        Label : PRIVATE
-          private
+      ;
       Label : ELEMENT
         ppp
         Label : VALUE
           void
         Label : DEFINE
-          $c
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $d
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        const
-        Label : NAME
-          b
-        Label : VALUE
-          3
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          3
-        Label : DEFINE
-          $g
-        Label : PRIVATE
-          private
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $h
+          $e
         Label : PRIVATE
           private
       Label : ELEMENT
@@ -67,6 +29,44 @@ Label : CODE
         Label : VALUE
           void
         Label : DEFINE
-          $e
+          $h
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        ppp
+        Label : VALUE
+          3
+        Label : DEFINE
+          $g
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        const
+        Label : VALUE
+          3
+        Label : NAME
+          b
+      Label : ELEMENT
+        ppp
+        Label : VALUE
+          void
+        Label : DEFINE
+          $d
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        ppp
+        Label : VALUE
+          void
+        Label : DEFINE
+          $c
+        Label : PRIVATE
+          private
+      Label : ELEMENT
+        private
+        Label : VALUE
+          1
+        Label : DEFINE
+          $b
         Label : PRIVATE
           private

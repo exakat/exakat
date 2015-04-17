@@ -5,19 +5,21 @@ Label : CODE
   Label : ELEMENT
     try
     Label : CODE
-      {
+      ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $a
         Label : RIGHT
           [
           Label : VARIABLE
             $b
           Label : INDEX
             'B'
-        Label : LEFT
-          $a
     Label : CATCH
       catch
+      Label : VARIABLE
+        $c
       Label : CLASS
         D
       Label : CODE
@@ -26,8 +28,6 @@ Label : CODE
           return
           Label : RETURN
             void
-      Label : VARIABLE
-        $c
   Label : ELEMENT
     ->
     Label : OBJECT

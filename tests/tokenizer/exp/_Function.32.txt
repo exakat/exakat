@@ -4,47 +4,45 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      z
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         =
-        Label : RIGHT
-          null
         Label : LEFT
           $f
-      Label : ARGUMENT
-        =
         Label : RIGHT
           null
+      Label : ARGUMENT
+        =
         Label : LEFT
           $e
-      Label : ARGUMENT
-        =
         Label : RIGHT
           null
+      Label : ARGUMENT
+        =
         Label : LEFT
           $d
-      Label : ARGUMENT
-        =
         Label : RIGHT
           null
+      Label : ARGUMENT
+        =
         Label : LEFT
           $c
-      Label : ARGUMENT
-        =
         Label : RIGHT
           null
+      Label : ARGUMENT
+        =
         Label : LEFT
           $b
-      Label : ARGUMENT
-        =
         Label : RIGHT
           null
+      Label : ARGUMENT
+        =
         Label : LEFT
           $a
-    Label : NAME
-      z
+        Label : RIGHT
+          null
     Label : BLOCK
-      {
-      Label : ELEMENT
-        void
+      void

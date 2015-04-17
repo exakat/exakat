@@ -6,10 +6,6 @@ Label : CODE
     class
     Label : NAME
       A
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : EXTENDS
       \
       Label : SUBNAME
@@ -22,3 +18,5 @@ Label : CODE
         C
       Label : SUBNAME
         B
+    Label : BLOCK
+      void

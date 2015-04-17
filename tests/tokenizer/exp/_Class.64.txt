@@ -7,22 +7,16 @@ Label : CODE
     Label : NAME
       false
     Label : BLOCK
-      {
-      Label : ELEMENT
-        void
+      void
   Label : ELEMENT
     class
     Label : NAME
       true
     Label : BLOCK
-      {
-      Label : ELEMENT
-        void
+      void
   Label : ELEMENT
     class
     Label : NAME
       Null
     Label : BLOCK
-      {
-      Label : ELEMENT
-        void
+      void

@@ -7,25 +7,19 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         const
-        Label : NAME
-          a
         Label : VALUE
-          1
+          5
+        Label : NAME
+          e
       Label : ELEMENT
         const
-        Label : NAME
-          b
         Label : VALUE
-          2
-      Label : ELEMENT
-        const
+          4
         Label : NAME
-          c
-        Label : VALUE
-          3
+          d
       Label : ELEMENT
         var
         Label : VALUE
@@ -36,13 +30,19 @@ Label : CODE
           var
       Label : ELEMENT
         const
-        Label : NAME
-          d
         Label : VALUE
-          4
+          3
+        Label : NAME
+          c
       Label : ELEMENT
         const
-        Label : NAME
-          e
         Label : VALUE
-          5
+          2
+        Label : NAME
+          b
+      Label : ELEMENT
+        const
+        Label : VALUE
+          1
+        Label : NAME
+          a

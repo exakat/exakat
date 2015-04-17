@@ -7,6 +7,4 @@ Label : CODE
     Label : NAME
       A
     Label : BLOCK
-      {
-      Label : ELEMENT
-        void
+      void

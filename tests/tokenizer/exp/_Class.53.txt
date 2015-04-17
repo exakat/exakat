@@ -6,22 +6,18 @@ Label : CODE
     class
     Label : NAME
       x
+    Label : EXTENDS
+      y
+    Label : IMPLEMENTS
+      z
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         var
         Label : VALUE
           Void
         Label : DEFINE
-          $a
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          Void
-        Label : DEFINE
-          $b
+          $d
         Label : VAR
           var
       Label : ELEMENT
@@ -37,10 +33,14 @@ Label : CODE
         Label : VALUE
           Void
         Label : DEFINE
-          $d
+          $b
         Label : VAR
           var
-    Label : EXTENDS
-      y
-    Label : IMPLEMENTS
-      z
+      Label : ELEMENT
+        var
+        Label : VALUE
+          Void
+        Label : DEFINE
+          $a
+        Label : VAR
+          var

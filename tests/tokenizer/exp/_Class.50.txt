@@ -6,8 +6,12 @@ Label : CODE
     class
     Label : NAME
       x
+    Label : EXTENDS
+      y
+    Label : IMPLEMENTS
+      z
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         var
         Label : VALUE
@@ -16,7 +20,3 @@ Label : CODE
           $a
         Label : VAR
           var
-    Label : EXTENDS
-      y
-    Label : IMPLEMENTS
-      z

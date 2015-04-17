@@ -7,29 +7,13 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $a
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          void
-        Label : DEFINE
-          $b
-        Label : VAR
-          var
+      Sequence
       Label : ELEMENT
         ppp
         Label : VALUE
           3
         Label : DEFINE
-          $c
+          $d2
         Label : VAR
           var
       Label : ELEMENT
@@ -37,7 +21,7 @@ Label : CODE
         Label : VALUE
           void
         Label : DEFINE
-          $a2
+          $c2
         Label : VAR
           var
       Label : ELEMENT
@@ -53,7 +37,7 @@ Label : CODE
         Label : VALUE
           void
         Label : DEFINE
-          $c2
+          $a2
         Label : VAR
           var
       Label : ELEMENT
@@ -61,6 +45,22 @@ Label : CODE
         Label : VALUE
           3
         Label : DEFINE
-          $d2
+          $c
+        Label : VAR
+          var
+      Label : ELEMENT
+        ppp
+        Label : VALUE
+          void
+        Label : DEFINE
+          $b
+        Label : VAR
+          var
+      Label : ELEMENT
+        ppp
+        Label : VALUE
+          void
+        Label : DEFINE
+          $a
         Label : VAR
           var

@@ -7,29 +7,21 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      Sequence
       Label : ELEMENT
         ppp
         Label : VALUE
-          1
+          5
         Label : DEFINE
-          $a
+          $e
         Label : VAR
           var
       Label : ELEMENT
         ppp
         Label : VALUE
-          2
+          6
         Label : DEFINE
-          $b
-        Label : VAR
-          var
-      Label : ELEMENT
-        ppp
-        Label : VALUE
-          3
-        Label : DEFINE
-          $c
+          $f
         Label : VAR
           var
       Label : ELEMENT
@@ -43,16 +35,24 @@ Label : CODE
       Label : ELEMENT
         ppp
         Label : VALUE
-          6
+          3
         Label : DEFINE
-          $f
+          $c
         Label : VAR
           var
       Label : ELEMENT
         ppp
         Label : VALUE
-          5
+          2
         Label : DEFINE
-          $e
+          $b
+        Label : VAR
+          var
+      Label : ELEMENT
+        ppp
+        Label : VALUE
+          1
+        Label : DEFINE
+          $a
         Label : VAR
           var

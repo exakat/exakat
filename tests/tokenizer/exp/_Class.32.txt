@@ -7,13 +7,13 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      Sequence
       Label : ELEMENT
         ppp
         Label : VALUE
-          void
+          5
         Label : DEFINE
-          $g
+          $h
         Label : VAR
           var
       Label : ELEMENT
@@ -27,8 +27,8 @@ Label : CODE
       Label : ELEMENT
         ppp
         Label : VALUE
-          5
+          void
         Label : DEFINE
-          $h
+          $g
         Label : VAR
           var

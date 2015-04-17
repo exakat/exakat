@@ -6,11 +6,9 @@ Label : CODE
     class
     Label : NAME
       x
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : EXTENDS
       y
     Label : IMPLEMENTS
       z
+    Label : BLOCK
+      void

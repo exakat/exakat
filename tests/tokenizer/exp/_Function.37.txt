@@ -4,21 +4,21 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       function
+      Label : NAME
+        
       Label : ARGUMENTS
         Arguments
         Label : ARGUMENT
           $c
         Label : ARGUMENT
           $b
-      Label : NAME
-        
       Label : BLOCK
         ;
         Label : ELEMENT
           ++
           Label : POSTPLUSPLUS
             $a
-    Label : LEFT
-      $x

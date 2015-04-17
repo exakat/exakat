@@ -6,10 +6,6 @@ Label : CODE
     class
     Label : NAME
       x
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : IMPLEMENTS
       d
     Label : IMPLEMENTS
@@ -18,3 +14,5 @@ Label : CODE
       b
     Label : IMPLEMENTS
       a
+    Label : BLOCK
+      void

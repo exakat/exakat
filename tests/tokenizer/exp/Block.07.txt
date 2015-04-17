@@ -46,6 +46,8 @@ Label : NEXT
           b
   Label : ELEMENT
     foreach
+    Label : VALUE
+      $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -60,8 +62,6 @@ Label : NEXT
         ++
         Label : POSTPLUSPLUS
           $a
-    Label : VALUE
-      $c
     Label : SOURCE
       ->
       Label : OBJECT
@@ -70,6 +70,8 @@ Label : NEXT
         b
   Label : ELEMENT
     foreach
+    Label : VALUE
+      $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -80,8 +82,6 @@ Label : NEXT
             void
             Label : ARGUMENT
               '1'
-    Label : VALUE
-      $c
     Label : SOURCE
       ->
       Label : OBJECT

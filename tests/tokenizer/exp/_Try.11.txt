@@ -5,15 +5,17 @@ Label : CODE
   Label : ELEMENT
     try
     Label : CODE
-      {
+      ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          1
         Label : LEFT
           $a
+        Label : RIGHT
+          1
     Label : CATCH
       catch
+      Label : VARIABLE
+        $e
       Label : CLASS
         \
         Label : SUBNAME
@@ -28,5 +30,3 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-      Label : VARIABLE
-        $e

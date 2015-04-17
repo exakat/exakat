@@ -7,12 +7,12 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
+        Label : NAME
+          y
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             void
-        Label : NAME
-          y

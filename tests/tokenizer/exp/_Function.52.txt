@@ -16,10 +16,10 @@ Label : CODE
         ->
         Label : OBJECT
           ::
-          Label : CLASS
-            static
           Label : PROPERTY
             $a
+          Label : CLASS
+            static
         Label : METHOD
           D
           Label : ARGUMENTS
@@ -30,6 +30,12 @@ Label : CODE
         void
       Label : ELEMENT
         =
+        Label : LEFT
+          ::
+          Label : PROPERTY
+            $a
+          Label : CLASS
+            static
         Label : RIGHT
           new
           Label : NEW
@@ -38,9 +44,3 @@ Label : CODE
               void
               Label : ARGUMENT
                 void
-        Label : LEFT
-          ::
-          Label : CLASS
-            static
-          Label : PROPERTY
-            $a

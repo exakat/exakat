@@ -4,14 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      x
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         $b
       Label : ARGUMENT
         $a
-    Label : NAME
-      x
     Label : BLOCK
       ;
       Label : ELEMENT
