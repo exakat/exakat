@@ -1,5 +1,0 @@
-{
-    "require": {
-        "everyman/neo4jphp": "dev-master"
-    }
-}
