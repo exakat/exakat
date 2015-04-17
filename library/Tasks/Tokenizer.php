@@ -44,7 +44,7 @@ class Tokenizer implements Tasks {
         $classes = \Tokenizer\Token::getTokenizers($config->phpversion);
 
         $log = new \Log('tokenizer', $config->projects_root.'/projects/'.$config->project);
-        $log->log( "Starting time : ".date('r'));
+        $log->log( 'Starting time : '.date('r'));
 
         $client = new Client();
 
@@ -78,10 +78,12 @@ class Tokenizer implements Tasks {
         $total = \Tokenizer\Token::countTotalToken();
         $count = $total + 1;
 
-        $stats = array('token_in' => $count, 'token_out' => 2,
-                       'relation_in' => $server_stat->countRelations(), 'relation_out' => 4,
-                       'project' => $project);
-        $log->log( "Finished counting Token");
+        $stats = array('token_in'     => $count, 
+                       'token_out'    => 2,
+                       'relation_in'  => $server_stat->countRelations(), 
+                       'relation_out' => 4,
+                       'project'      => $project);
+        $log->log('Finished counting Token');
 
         $extra_rounds = 4;
         $prev = array();
@@ -95,7 +97,7 @@ class Tokenizer implements Tasks {
         $regex_time = 0;
         $regex_next = $regex;
         $end = microtime(true);
-        $log->log( "initialisation : ".(($end - $begin) * 1000));
+        $log->log('initialisation : '.(($end - $begin) * 1000));
 
         while($this->check_prev($prev, $extra_rounds)) {
             $rbegin = microtime(true);
@@ -115,7 +117,7 @@ class Tokenizer implements Tasks {
             foreach($regex as $name => $r) {
                 $begin = microtime(true);
                 $r->check();
-                if ( ($r->total != 0) || in_array($name , array("FunctioncallArray", 'Sequence'))) {
+                if ( ($r->total != 0) || in_array($name , array('FunctioncallArray', 'Sequence'))) {
                     $regex_next[$name] = $r;
                 }
                 $end = microtime(true);
@@ -130,7 +132,7 @@ class Tokenizer implements Tasks {
         
                 $log->log( get_class($r)."\t".(($end - $begin) * 1000)."\t".$r->total."\t".$r->done."\t".number_format(100 * $ratio, 0));
             }
-            $log->log("Finished foreach");
+            $log->log('Finished foreach');
             unset($precedence);
             \Tokenizer\Token::finishSequence();
     
@@ -157,11 +159,11 @@ class Tokenizer implements Tasks {
             }
     
             $end = microtime(true);
-            $log->log("countLeftNext time : ".(($end - $begin) * 1000));
+            $log->log('countLeftNext time : '.(($end - $begin) * 1000));
 
-            $log->log("Remaining token to process : $count (".($count - $count_prev).")");
-            $log->log("Remaining files to process : $count_file (".($count_file - $count_file_prev).")");
-            $log->log("Remaining regex : ".count($regex_next)." (".(count($regex) - count($regex_next)).")");
+            $log->log("Remaining token to process : $count (".($count - $count_prev).')');
+            $log->log("Remaining files to process : $count_file (".($count_file - $count_file_prev).')');
+            $log->log('Remaining regex : '.count($regex_next).' ('.(count($regex) - count($regex_next)).')');
     
             if ($count > 3) {
                 display( "$round) Remains $count of $total tokens to process! \n");
@@ -183,7 +185,7 @@ class Tokenizer implements Tasks {
         \Tokenizer\Token::cleanHidden();
 
         $end_time = microtime(true);
-        display("Total time : ".number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n");
+        display('Total time : '.number_format(($end_time - $begin_time) * 1000, 2, '.', ' ')."ms\n");
         // @todo display checks processed
     }
 
