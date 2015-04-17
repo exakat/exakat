@@ -686,17 +686,20 @@ class Load implements Tasks {
             
                 if ($token == '{' && $tokens[$id + 1] == '}') {
                     $block_level--;
+                    // This will be a structure with Association
                     if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && in_array($this->php->getTokenName($tokens[$id - 1][0]), array('T_STRING', 'T_NAMESPACE', 'T_TRY', 'T_ELSE', 'T_FINALLY')))) {
                         $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
-                                                      ->setProperty('code', $token)
-                                                      ->setProperty('fullcode', '{ /**/ } ')
-                                                      ->setProperty('line', $line)
-                                                      ->setProperty('atom', 'Sequence')
-                                                      ->setProperty('rank', '0')
-                                                      ->setProperty('block', 'true')
-                                                      ->setProperty('bracket', 'true')
-                                                      ->setProperty('modifiedBy', 'bin/load12a')
-                                                      ->save();
+                                                            ->setProperty('code', $token)
+                                                            ->setProperty('fullcode', '{')
+                                                            ->setProperty('line', $line)
+                                                            ->setProperty('modifiedBy', 'bin/load12a')
+                                                            ->save();
+                        if ($type = $this->process_blocks($token_value)) {
+                            $T[$Tid]->setProperty('association', $type)->save();
+                        }
+
+                        $previous->relateTo($T[$Tid], 'NEXT')->save();
+                        $previous = $T[$Tid];
 
                         $void   = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                      ->setProperty('code', 'void')
@@ -707,7 +710,8 @@ class Load implements Tasks {
                                                      ->setProperty('rank', 0)
                                                      ->save();
 
-                        $T[$Tid]->relateTo($void, 'ELEMENT')->save();
+                        $Tid++;
+                        $T[$Tid] = $void;
                     } else {
                         $block = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
                                                       ->setProperty('code', $token)
@@ -740,10 +744,9 @@ class Load implements Tasks {
                         $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
 
                         $block->relateTo($void, 'ELEMENT')->save();
+                        unset($tokens[$id + 1]);
                     }
-                
-                    unset($tokens[$id + 1]);
-                
+
                     $to_index = false;
                 } elseif ($token == ':'
                           && isset($tokens[$id + 1]) && is_string($tokens[$id + 1])
@@ -881,11 +884,13 @@ class Load implements Tasks {
 
                     if ($type = $this->process_blocks($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
+                    } else {
+                        // Only index for block is not associated
+                        $regexIndex['Block']->relateTo($T[$Tid], 'INDEXED')->save();
                     }
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
-                    $regexIndex['Block']->relateTo($T[$Tid], 'INDEXED')->save();
 
                     $void   = $this->client->makeNode()->setProperty('token', 'T_VOID')
                                                  ->setProperty('code', 'void')
@@ -917,11 +922,12 @@ class Load implements Tasks {
                                                   ->save();
                     if ($type = $this->process_blocks($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
+                    } else {
+                        $regexIndex['Block']->relateTo($T[$Tid], 'INDEXED')->save();
                     }
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
-                    $regexIndex['Block']->relateTo($T[$Tid], 'INDEXED')->save();
                 
                     $Tid++;
                     $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
@@ -1059,7 +1065,17 @@ class Load implements Tasks {
                 foreach($regex as $r) {
                     $class = "Tokenizer\\$r";
                     if (in_array($token_value, $class::$operators)) {
-                        $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
+                        if ($token_value == 'T_OPEN_CURLY') {
+                            if (!$T[$Tid]->hasProperty('association')) {
+                                $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
+                            }
+                        } elseif ($token_value == 'T_COLON') {
+                            if (!$T[$Tid]->hasProperty('association')) {
+                                $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
+                            }
+                        } else {
+                            $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
+                        }
                     }
                 }
             }
@@ -1142,8 +1158,26 @@ class Load implements Tasks {
             return '';
         }
 
+        if ($token_value == 'T_FINALLY' ) {
+            $states[] = 'Finally';
+            $states_id++;
+            return '';
+        }
+
+        if ($token_value == 'T_CATCH' ) {
+            $states[] = 'Catch';
+            $states_id++;
+            return '';
+        }
+
+        if ($token_value == 'T_TRY' ) {
+            $states[] = 'Try';
+            $states_id++;
+            return '';
+        }
+
         if ($token_value == 'T_INTERFACE' ) {
-            $states[] = 'Function';
+            $states[] = 'Interface';
             $states_id++;
             return '';
         }

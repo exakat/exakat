@@ -2019,7 +2019,7 @@ ainstruction = instruction.out('NEXT').next();
 instruction.bothE('NEXT').each{ g.removeEdge(it); }
 
 // remove the next, if this is a ;
-if (ainstruction.getProperty('token') == 'T_SEMICOLON' && 
+if (ainstruction.getProperty('token') == 'T_SEMICOLON' &&
     ainstruction.getProperty('atom') == null) {
     semicolon = ainstruction;
     ainstruction = semicolon.out('NEXT').next();
@@ -2888,6 +2888,8 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
                     $queryConditions[] = "has('$property', true)";
                 } elseif ($value === false) {
                     $queryConditions[] = "has('$property', false)";
+                } elseif ($value === 'none') {
+                    $queryConditions[] = "has('$property', null)";
                 } else {
                     $queryConditions[] = "has('$property', '$value')";
                 }
@@ -2914,7 +2916,7 @@ it.out('NAME', 'PROPERTY', 'OBJECT', 'DEFINE', 'CODE', 'LEFT', 'RIGHT', 'SIGN', 
             }
 
             $finalTokens = array_merge( Token::$alternativeEnding,
-                                        array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG', 
+                                        array('T_CLOSE_PARENTHESIS', 'T_SEMICOLON', 'T_CLOSE_TAG',
                                               'T_OPEN_CURLY', 'T_INLINE_HTML', 'T_CLOSE_BRACKET'));
             $finalTokens = "'".implode("', '", $finalTokens)."'";
             $queryConditions[] = <<<GREMLIN

@@ -202,7 +202,6 @@ class Token {
     }
 
     final public function check() {
-        
         if (!method_exists($this, '_check')) {
             echo get_class($this), ' has no check yet', "\n";
         } else {

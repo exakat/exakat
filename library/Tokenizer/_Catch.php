@@ -29,15 +29,16 @@ class _Catch extends TokenAuto {
 
     public function _check() {
         // non-empty catch
-        $this->conditions = array(0 => array('token' => _Catch::$operators,
-                                             'atom'  => 'none'),
-                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('atom'  => array('Identifier', 'Nsname')),
-                                  3 => array('atom'  => 'Variable'),
-                                  4 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('token' => 'T_OPEN_CURLY'),
-                                  6 => array('atom'  => 'Sequence'),
-                                  7 => array('token' => 'T_CLOSE_CURLY'),
+        $this->conditions = array(0 => array('token'    => _Catch::$operators,
+                                             'atom'     => 'none'),
+                                  1 => array('token'    => 'T_OPEN_PARENTHESIS'),
+                                  2 => array('atom'     => array('Identifier', 'Nsname')),
+                                  3 => array('atom'     => 'Variable'),
+                                  4 => array('token'    => 'T_CLOSE_PARENTHESIS'),
+                                  5 => array('token'    => 'T_OPEN_CURLY',
+                                             'property' => array('association' => 'Catch')),
+                                  6 => array('atom'     => array('Sequence', 'Void')),
+                                  7 => array('token'    => 'T_CLOSE_CURLY'),
                                   );
         
         $this->actions = array('transform'   => array( 1 => 'DROP',
@@ -47,27 +48,6 @@ class _Catch extends TokenAuto {
                                                        5 => 'DROP',
                                                        6 => 'CODE',
                                                        7 => 'DROP',
-                                                       ),
-                               'cleanIndex' => true,
-                               'atom'       => 'Catch');
-                               
-        $this->checkAuto();
-
-        // empty catch
-        $this->conditions = array(0 => array('token' => _Catch::$operators,
-                                             'atom'  => 'none'),
-                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('atom'  => array('Identifier', 'Nsname')),
-                                  3 => array('atom'  => 'Variable'),
-                                  4 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                  5 => array('atom'  => 'Sequence'),
-                                  );
-        
-        $this->actions = array('transform'   => array( 1 => 'DROP',
-                                                       2 => 'CLASS',
-                                                       3 => 'VARIABLE',
-                                                       4 => 'DROP',
-                                                       5 => 'CODE',
                                                        ),
                                'cleanIndex' => true,
                                'atom'       => 'Catch');

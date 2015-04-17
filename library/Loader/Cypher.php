@@ -80,8 +80,12 @@ class Cypher {
         $queryTemplate = 'CREATE INDEX ON :Token(eid)';
         $query = new Query($client, $queryTemplate, array());
         $result = $query->getResultSet();
-        
+
+// Desactivate modifiedBy 
+//FOREACH(ignoreMe IN CASE WHEN csvLine.modifiedBy <> "" THEN [1] ELSE [] END | SET token.modifiedBy = csvLine.modifiedBy)
+
         $queryTemplate = <<<CYPHER
+USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.cypher.csv" AS csvLine
 CREATE (token:Token { 
 eid: toInt(csvLine.id),
@@ -91,7 +95,6 @@ line: toInt(csvLine.line)})
 FOREACH(ignoreMe IN CASE WHEN csvLine.atom <> "" THEN [1] ELSE [] END | SET token.atom = csvLine.atom)
 FOREACH(ignoreMe IN CASE WHEN csvLine.hidden <> "" THEN [1] ELSE [] END | SET token.hidden = (csvLine.hidden = "true"))
 FOREACH(ignoreMe IN CASE WHEN csvLine.in_quote <> "" THEN [1] ELSE [] END | SET token.in_quote = (csvLine.in_quote = "true"))
-FOREACH(ignoreMe IN CASE WHEN csvLine.modifiedBy <> "" THEN [1] ELSE [] END | SET token.modifiedBy = csvLine.modifiedBy)
 FOREACH(ignoreMe IN CASE WHEN csvLine.relatedAtom <> "" THEN [1] ELSE [] END | SET token.relatedAtom = csvLine.relatedAtom)
 FOREACH(ignoreMe IN CASE WHEN csvLine.association <> "" THEN [1] ELSE [] END | SET token.association = csvLine.association)
 FOREACH(ignoreMe IN CASE WHEN csvLine.tag <> "" THEN [1] ELSE [] END | SET token.tag = csvLine.tag)
@@ -247,6 +250,14 @@ CYPHER;
         }
         
         return $this;
+    }
+
+    public function hasProperty($name) {
+        if ($this->isLink) {
+            return isset(static::$lastLink[$name]);
+        } else {
+            return isset($this->node[$name]);
+        }
     }
 
     public function getProperty($name) {

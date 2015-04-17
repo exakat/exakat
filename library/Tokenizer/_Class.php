@@ -28,8 +28,7 @@ class _Class extends TokenAuto {
     static public $atom = 'Class';
 
     public function _check() {
-    
-    // class x {}
+    // class x {} Get the name
         $this->conditions = array( 0 => array('token' => _Class::$operators),
                                    1 => array('atom'  => array('Identifier', 'Null', 'Boolean'))
                                  );
@@ -40,7 +39,7 @@ class _Class extends TokenAuto {
                                'cleanIndex'  => true);
         $this->checkAuto();
 
-    // class x extends y {}
+    // class x extends y {} get the extends
         $this->conditions = array( 0 => array('token' => _Class::$operators),
                                    1 => array('token' => 'T_EXTENDS'),
                                    2 => array('atom'  => array('Identifier', 'Nsname')),
@@ -54,7 +53,7 @@ class _Class extends TokenAuto {
                                );
         $this->checkAuto();
 
-    // class x implements a {}
+    // class x implements a {} get the implements
         $this->conditions = array( 0 => array('token'     => _Class::$operators),
                                    1 => array('token'     => 'T_IMPLEMENTS'),
                                    2 => array('atom'      => array('Identifier', 'Nsname', 'Arguments')),
@@ -70,15 +69,20 @@ class _Class extends TokenAuto {
                                );
         $this->checkAuto();
 
-    // class x { // some real code}
-        $this->conditions = array( 0 => array('token' => _Class::$operators),
-                                   1 => array('atom'  => 'Sequence',
-                                              'property' => array('block' => true))
+    // class x { // some real code} get the block
+        $this->conditions = array( 0 => array('token'    => _Class::$operators),
+                                   1 => array('token'    => 'T_OPEN_CURLY',
+                                              'property' => array('association' => 'Class')),
+                                   2 => array('atom'     => array('Sequence', 'Void')),
+                                   3 => array('token'    => 'T_CLOSE_CURLY')
                                   );
         
-        $this->actions = array('transform'    => array(1 => 'BLOCK'),
+        $this->actions = array('transform'    => array(1 => 'DROP',
+                                                       2 => 'BLOCK',
+                                                       3 => 'DROP'),
                                'atom'         => 'Class',
                                'makeSequence' => 'it',
+                               'makeBlock'    => 'BLOCK',
                                'makeSequenceAlways' => true,
                                'cleanIndex'   => true
                                );
