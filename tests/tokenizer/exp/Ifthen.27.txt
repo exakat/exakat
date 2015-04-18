@@ -21,6 +21,4 @@ Label : CODE
         Label : INDEX
           'b'
     Label : THEN
-      {
-      Label : ELEMENT
-        void
+      void

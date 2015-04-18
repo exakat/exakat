@@ -23,6 +23,6 @@ Label : CODE
         Label : ELEMENT
           $b
       Label : ELSE
-        {
+        ;
         Label : ELEMENT
           $c

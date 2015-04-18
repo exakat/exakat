@@ -4,8 +4,38 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      $b
     Label : BLOCK
       ;
+      Label : ELEMENT
+        if
+        Label : CONDITION
+          (
+          Label : CODE
+            &&
+            Label : RIGHT
+              !
+              Label : NOT
+                empty
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $o
+            Label : LEFT
+              $n
+        Label : THEN
+          ;
+          Label : ELEMENT
+            .=
+            Label : RIGHT
+              Concatenation
+              Label : CONCAT
+                'H'
+              Label : CONCAT
+                $q
+            Label : LEFT
+              $p
       Label : ELEMENT
         if
         Label : CONDITION
@@ -38,34 +68,6 @@ Label : CODE
               I
             Label : LEFT
               $u
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          (
-          Label : CODE
-            &&
-            Label : RIGHT
-              !
-              Label : NOT
-                empty
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $o
-            Label : LEFT
-              $n
-        Label : THEN
-          ;
-          Label : ELEMENT
-            .=
-            Label : RIGHT
-              Concatenation
-              Label : CONCAT
-                'H'
-              Label : CONCAT
-                $q
-            Label : LEFT
-              $p
       Label : ELEMENT
         if
         Label : CONDITION
@@ -156,8 +158,6 @@ Label : CODE
           $c
     Label : SOURCE
       $a
-    Label : VALUE
-      $b
   Label : ELEMENT
     if
     Label : CONDITION

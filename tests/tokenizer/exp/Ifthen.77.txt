@@ -21,7 +21,7 @@ Label : CODE
       Label : ELEMENT
         try
         Label : CODE
-          {
+          ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
@@ -29,9 +29,7 @@ Label : CODE
         Label : CATCH
           catch
           Label : CODE
-            {
-            Label : ELEMENT
-              void
+            void
           Label : CLASS
             \
             Label : SUBNAME

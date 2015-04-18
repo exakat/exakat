@@ -4,17 +4,17 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $j
     Label : VALUE
       [
       Label : VARIABLE
         $b
       Label : INDEX
         3
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $j
     Label : SOURCE
       $a

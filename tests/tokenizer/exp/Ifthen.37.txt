@@ -19,9 +19,7 @@ Label : CODE
               Label : CODE
                 $h
             Label : THEN
-              {
-              Label : ELEMENT
-                void
+              void
           Label : ELEMENT
             if
             Label : CONDITION
@@ -29,9 +27,7 @@ Label : CODE
               Label : CODE
                 $g
             Label : THEN
-              {
-              Label : ELEMENT
-                void
+              void
           Label : ELEMENT
             break
             Label : LEVEL
@@ -71,9 +67,7 @@ Label : CODE
                       Label : INDEX
                         'h'
               Label : THEN
-                {
-                Label : ELEMENT
-                  void
+                void
         Label : CASE
           'b'
       Label : ELEMENT

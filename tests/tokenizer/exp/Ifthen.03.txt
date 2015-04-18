@@ -9,10 +9,6 @@ Label : CODE
       Label : CODE
         1
     Label : THEN
-      {
-      Label : ELEMENT
-        void
+      void
     Label : ELSE
-      {
-      Label : ELEMENT
-        void
+      void

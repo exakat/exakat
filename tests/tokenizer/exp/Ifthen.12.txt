@@ -9,29 +9,9 @@ Label : CODE
       Label : CODE
         0
     Label : THEN
-      {
-      Label : ELEMENT
-        void
+      void
     Label : ELSE
-      {
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          $a
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          2
-        Label : LEFT
-          $b
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          3
-        Label : LEFT
-          $c
+      ;
       Label : ELEMENT
         =
         Label : RIGHT
@@ -66,3 +46,21 @@ Label : CODE
             $d
           Label : INDEX
             'e'
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          3
+        Label : LEFT
+          $c
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          2
+        Label : LEFT
+          $b
+      Label : ELEMENT
+        =
+        Label : RIGHT
+          1
+        Label : LEFT
+          $a

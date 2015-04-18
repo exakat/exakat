@@ -28,7 +28,7 @@ Label : CODE
             Label : LEFT
               $c
         Label : ELSE
-          {
+          ;
           Label : ELEMENT
             =
             Label : RIGHT

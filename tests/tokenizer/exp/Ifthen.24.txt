@@ -1,38 +1,50 @@
 <?php
 
-Label : CODE
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          'b'
-    Label : THEN
-      ;
-      Label : ELEMENT
-        for
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
-        Label : INIT
+Label : NEXT
+  if
+  Label : NEXT
+    (
+    Label : NEXT
+      for
+      Label : NEXT
+        (
+        Label : NEXT
           =
+          Label : NEXT
+            ;
+            Label : NEXT
+              <=
+              Label : NEXT
+                ;
+                Label : NEXT
+                  ++
+                  Label : NEXT
+                    )
+                    Label : NEXT
+                      {
+                      Label : NEXT
+                        void
+                        Label : NEXT
+                          }
+                          Label : NEXT
+                            ?>
+                            Label : NEXT
+                              /**/
+                              Label : NEXT
+                                /* * */
+                  Label : POSTPLUSPLUS
+                    $e
+              Label : RIGHT
+                8
+              Label : LEFT
+                $d
           Label : RIGHT
             1
           Label : LEFT
             $c
-        Label : FINAL
-          <=
-          Label : RIGHT
-            8
-          Label : LEFT
-            $d
-        Label : INCREMENT
-          ++
-          Label : POSTPLUSPLUS
-            $e
+    Label : CODE
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'

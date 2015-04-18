@@ -19,6 +19,4 @@ Label : CODE
         Label : CONDITION
           $x
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void

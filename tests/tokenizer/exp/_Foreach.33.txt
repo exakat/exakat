@@ -3,6 +3,12 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -51,11 +57,5 @@ Label : CODE
             continue
             Label : LEVEL
               void
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
     Label : SOURCE
       $a

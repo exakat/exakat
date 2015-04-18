@@ -61,6 +61,6 @@ Label : CODE
                       Label : ELEMENT
                         $e
                     Label : ELSE
-                      {
+                      ;
                       Label : ELEMENT
                         $f

@@ -9,9 +9,7 @@ Label : CODE
       Label : CODE
         $a
     Label : THEN
-      {
-      Label : ELEMENT
-        void
+      void
     Label : ELSE
       Block with else
       Label : ELEMENT

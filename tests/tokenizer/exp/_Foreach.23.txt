@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -12,19 +18,13 @@ Label : CODE
           $g
         Label : LEFT
           ::
-          Label : CLASS
-            $d
           Label : METHOD
             e
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 $f
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
+          Label : CLASS
+            $d
     Label : SOURCE
       $a

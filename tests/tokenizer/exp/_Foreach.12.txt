@@ -4,12 +4,10 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : VALUE
       $e
+    Label : BLOCK
+      void
     Label : SOURCE
       @
       Label : AT

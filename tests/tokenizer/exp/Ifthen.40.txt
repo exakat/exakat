@@ -47,7 +47,7 @@ Label : CODE
               Label : POSTPLUSPLUS
                 $a
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
@@ -63,11 +63,9 @@ Label : CODE
         Label : LEFT
           $l
     Label : THEN
-      {
-      Label : ELEMENT
-        void
+      void
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
@@ -83,11 +81,9 @@ Label : CODE
         Label : LEFT
           $l
     Label : THEN
-      {
-      Label : ELEMENT
-        void
+      void
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

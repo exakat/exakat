@@ -43,6 +43,6 @@ Label : CODE
             Label : ELEMENT
               $d
           Label : ELSE
-            {
+            ;
             Label : ELEMENT
               $e

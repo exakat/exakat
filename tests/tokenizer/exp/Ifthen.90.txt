@@ -315,21 +315,21 @@ Label : CODE
           Label : ELEMENT
             =
             Label : RIGHT
-              AF
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  $m
-            Label : LEFT
-              $m
-          Label : ELEMENT
-            =
-            Label : RIGHT
               [
               Label : VARIABLE
                 $j
               Label : INDEX
                 $i
+            Label : LEFT
+              $m
+          Label : ELEMENT
+            =
+            Label : RIGHT
+              AF
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $m
             Label : LEFT
               $m
           Label : ELEMENT

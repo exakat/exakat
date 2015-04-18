@@ -4,14 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      $y
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $i
-    Label : VALUE
-      $y
     Label : SOURCE
       (array)
       Label : CAST

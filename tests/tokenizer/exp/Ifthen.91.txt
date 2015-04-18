@@ -67,9 +67,7 @@ Label : CODE
                   Label : ARGUMENT
                     $a
             Label : THEN
-              {
-              Label : ELEMENT
-                void
+              void
             Label : ELSE
               elseif
               Label : CONDITION
@@ -84,6 +82,12 @@ Label : CODE
                 ;
                 Label : ELEMENT
                   foreach
+                  Label : VALUE
+                    =>
+                    Label : VALUE
+                      $c
+                    Label : KEY
+                      $b
                   Label : BLOCK
                     ;
                     Label : ELEMENT
@@ -255,7 +259,7 @@ Label : CODE
                             Label : LEFT
                               $d
                         Label : ELSE
-                          {
+                          ;
                           Label : ELEMENT
                             =
                             Label : RIGHT
@@ -308,12 +312,6 @@ Label : CODE
                             $b
                   Label : SOURCE
                     $a
-                  Label : VALUE
-                    =>
-                    Label : VALUE
-                      $c
-                    Label : KEY
-                      $b
                 Label : ELEMENT
                   I
                   Label : ARGUMENTS

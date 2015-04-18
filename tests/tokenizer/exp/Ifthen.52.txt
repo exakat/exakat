@@ -16,6 +16,4 @@ Label : CODE
       Label : ELEMENT
         void
     Label : ELSE
-      Block with else
-      Label : ELEMENT
-        void
+      void

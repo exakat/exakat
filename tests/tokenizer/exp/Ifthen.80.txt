@@ -24,6 +24,8 @@ Label : CODE
               'G'
       Label : ELEMENT
         foreach
+        Label : VALUE
+          $c
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -62,8 +64,6 @@ Label : CODE
             $b
           Label : PROPERTY
             C
-        Label : VALUE
-          $c
       Label : ELEMENT
         =
         Label : RIGHT

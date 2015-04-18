@@ -13,6 +13,6 @@ Label : CODE
       Label : ELEMENT
         2
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         3

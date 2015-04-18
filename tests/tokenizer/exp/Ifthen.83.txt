@@ -15,7 +15,7 @@ Label : CODE
         Label : POSTPLUSPLUS
           $a
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

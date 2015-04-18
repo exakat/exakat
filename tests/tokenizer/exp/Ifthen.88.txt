@@ -3,6 +3,12 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      =>
+      Label : VALUE
+        $c
+      Label : KEY
+        $b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -50,8 +56,6 @@ Label : CODE
               Label : ARGUMENT
                 $c
       Label : ELEMENT
-        K
-      Label : ELEMENT
         echo
         Label : ARGUMENTS
           void
@@ -70,9 +74,13 @@ Label : CODE
                 Label : INDEX
                   'R'
       Label : ELEMENT
+        K
+      Label : ELEMENT
         S
       Label : ELEMENT
         foreach
+        Label : VALUE
+          $e
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -121,8 +129,6 @@ Label : CODE
             $d
           Label : INDEX
             $b
-        Label : VALUE
-          $e
       Label : ELEMENT
         C
       Label : ELEMENT
@@ -135,9 +141,3 @@ Label : CODE
         B
     Label : SOURCE
       $a
-    Label : VALUE
-      =>
-      Label : VALUE
-        $c
-      Label : KEY
-        $b

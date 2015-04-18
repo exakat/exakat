@@ -8,6 +8,12 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       foreach
+      Label : VALUE
+        =>
+        Label : VALUE
+          $data
+        Label : KEY
+          $label
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -52,12 +58,6 @@ Label : ELEMENT
                           $label
         Label : ELEMENT
           B
-      Label : VALUE
-        =>
-        Label : KEY
-          $label
-        Label : VALUE
-          $data
       Label : SOURCE
         $tables
 Label : ELEMENT

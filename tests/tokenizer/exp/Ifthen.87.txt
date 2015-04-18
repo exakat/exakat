@@ -25,6 +25,24 @@ Label : CODE
         Label : LEFT
           $s
       Label : ELEMENT
+        =
+        Label : RIGHT
+          (int)
+          Label : CAST
+            (
+            Label : CODE
+              ->
+              Label : OBJECT
+                $q
+              Label : METHOD
+                O
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $r
+        Label : LEFT
+          $p
+      Label : ELEMENT
         if
         Label : CONDITION
           (
@@ -130,21 +148,3 @@ Label : CODE
                           $mM
               Label : LEFT
                 $j
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          (int)
-          Label : CAST
-            (
-            Label : CODE
-              ->
-              Label : OBJECT
-                $q
-              Label : METHOD
-                O
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $r
-        Label : LEFT
-          $p
