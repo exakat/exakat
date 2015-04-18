@@ -39,29 +39,15 @@ class IfthenElse extends TokenAuto {
                                'cleanIndex'  => true);
         $this->checkAuto();
 
-    // @doc else : endif (empty )
-        $this->conditions = array( 0 => array('token' => 'T_ELSE'),
-                                   1 => array('token' => 'T_COLON',
-                                              'property' => array('relatedAtom' => 'Ifthen')),
-                                   2 => array('token' => 'T_VOID'),
-                                   3 => array('token' => 'T_SEMICOLON'),
-                                   4 => array('token' => 'T_ENDIF'),
-        );
-        
-        $this->actions = array('to_block_else' => 2,
-                               'keepIndexed'   => true,
-                               'cleanIndex'    => true);
-        $this->checkAuto();
-
-        // else { /* block */ }
-        $this->conditions = array(  0 => array('token'     => IfthenElse::$operators,
-                                               'atom'      => 'none'),
-                                    1 => array('notAtom'   => 'Sequence',
-                                               'atom'      => 'yes'),
+        // else 1 instruction, no {}
+        $this->conditions = array(  0 => array('token'   => IfthenElse::$operators,
+                                               'atom'    => 'none'),
+                                    1 => array('notAtom' => 'Sequence',
+                                               'atom'    => 'yes'),
                                     2 => array('filterOut' => Token::$instructionEnding),
         );
         
-        $this->actions = array( 'to_block_else' => true);
+        $this->actions = array( 'toBlockElse' => true);
         $this->checkAuto();
 
         return false;

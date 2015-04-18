@@ -557,7 +557,8 @@ class Load implements Tasks {
 
                 // do.. while special
                 if ($token[3] == 'T_DO') {
-                    $dowhiles[] = array('node' => $T[$Tid], 'level' => $block_level);
+                    $dowhiles[] = array('node' => $T[$Tid], 
+                                        'level' => $block_level);
                 } elseif ($token[3] == 'T_WHILE') {
                     if (empty($dowhiles)) {
                         $T[$Tid]->setProperty('dowhile', 'false')->save();
@@ -685,7 +686,6 @@ class Load implements Tasks {
                 }
             
                 if ($token == '{' && $tokens[$id + 1] == '}') {
-                    $block_level--;
                     // This will be a structure with Association
                     if ( $tokens[$id - 1] == ')' || (is_array($tokens[$id - 1]) && in_array($this->php->getTokenName($tokens[$id - 1][0]), array('T_STRING', 'T_NAMESPACE', 'T_TRY', 'T_ELSE', 'T_FINALLY')))) {
                         $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
@@ -713,6 +713,7 @@ class Load implements Tasks {
                         $Tid++;
                         $T[$Tid] = $void;
                     } else {
+                        $block_level--;
                         $block = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
                                                       ->setProperty('code', $token)
                                                       ->setProperty('fullcode', '{ /**/ } ')
@@ -1160,6 +1161,12 @@ class Load implements Tasks {
 
         if ($token_value == 'T_FINALLY' ) {
             $states[] = 'Finally';
+            $states_id++;
+            return '';
+        }
+
+        if ($token_value == 'T_USE' ) {
+            $states[] = 'Use';
             $states_id++;
             return '';
         }

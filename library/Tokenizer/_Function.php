@@ -108,7 +108,8 @@ class _Function extends TokenAuto {
                                   6  => array('atom'  => 'Arguments'),
                                   7  => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   8  => array('token' => 'T_OPEN_CURLY',
-                                              'property' => array('association' => 'Function')),
+                                              'property' => array('association' => 'Use')
+                                              ),
                                   9  => array('atom'  => array('Sequence', 'Void')),
                                   10 => array('token' => 'T_CLOSE_CURLY'),
         );

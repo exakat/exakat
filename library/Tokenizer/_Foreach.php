@@ -77,7 +77,7 @@ class _Foreach extends TokenAuto {
                                    4 => array('atom'  => $blindVariables),
                                    5 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                    6 => array('token' => 'T_OPEN_CURLY'),
-                                   7 => array('atom'  => 'Sequence'),
+                                   7 => array('atom'  => array('Sequence', 'Void')),
                                    8 => array('token' => 'T_CLOSE_CURLY'),
         );
         
@@ -96,6 +96,7 @@ class _Foreach extends TokenAuto {
                                );
         $this->checkAuto();
 
+/*
     // @doc foreach($x as $y) { empty }
         $this->conditions = array( 0 => array('token' => _Foreach::$operators,
                                               'atom'  => 'none'),
@@ -119,6 +120,7 @@ class _Foreach extends TokenAuto {
                                'makeSequence' => 'it'
                                );
         $this->checkAuto();
+*/
 
     // @doc foreach($a as $b) : code endforeach
         $this->conditions = array( 0  => array('token' => _Foreach::$operators,

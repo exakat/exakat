@@ -102,11 +102,13 @@ class _Use extends TokenAuto {
     // use A,B {};
         $this->conditions = array( 0 => array('token' => _Use::$operators),
                                    1 => array('atom'  => 'Arguments'),
-                                   2 => array('atom'  => 'Sequence',
-                                              'property' => array('block' => true)),
+                                   2 => array('token' => 'T_OPEN_CURLY',
+                                              'property' => array('association' => 'Use')),
+                                   3 => array('atom'  => 'Sequence'),
+                                   4 => array('token' => 'T_CLOSE_CURLY'),
                                  );
         
-        $this->actions = array('to_use_block' => true,
+        $this->actions = array('toUseBlock' => true,
                                'atom'         => 'Use',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'  );
