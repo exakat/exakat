@@ -22,6 +22,8 @@ Label : CODE
               'f'
       Label : ELEMENT
         case
+        Label : CASE
+          'd'
         Label : CODE
           ;
           Label : ELEMENT
@@ -32,10 +34,10 @@ Label : CODE
             return
             Label : RETURN
               'e'
-        Label : CASE
-          'd'
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
         Label : CODE
           ;
           Label : ELEMENT
@@ -46,5 +48,3 @@ Label : CODE
             return
             Label : RETURN
               'c'
-        Label : CASE
-          'b'

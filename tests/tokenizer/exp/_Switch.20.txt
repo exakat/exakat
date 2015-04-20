@@ -10,12 +10,12 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             Void
-        Label : CASE
-          'b'
       Label : ELEMENT
         default
         Label : CODE
@@ -58,6 +58,8 @@ Label : CODE
               $a
       Label : ELEMENT
         case
+        Label : CASE
+          "b"
         Label : CODE
           ;
           Label : ELEMENT
@@ -96,5 +98,3 @@ Label : CODE
               'a'
             Label : LEFT
               $a
-        Label : CASE
-          "b"

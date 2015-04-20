@@ -6,6 +6,12 @@ Label : CODE
     foreach
     Label : VALUE
       $b
+    Label : SOURCE
+      new
+      Label : NEW
+        \
+        Label : SUBNAME
+          A
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -22,9 +28,3 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-    Label : SOURCE
-      new
-      Label : NEW
-        \
-        Label : SUBNAME
-          A

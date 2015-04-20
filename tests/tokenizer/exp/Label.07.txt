@@ -10,20 +10,6 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CODE
-          ;
-          Label : ELEMENT
-            d
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                'g'
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $e
-                Label : INDEX
-                  'f'
         Label : CASE
           ==
           Label : RIGHT
@@ -38,3 +24,17 @@ Label : CODE
                 0
               Label : ARGUMENT
                 $b
+        Label : CODE
+          ;
+          Label : ELEMENT
+            d
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                'g'
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $e
+                Label : INDEX
+                  'f'

@@ -10,6 +10,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          "b"
         Label : CODE
           ;
           Label : ELEMENT
@@ -23,9 +25,7 @@ Label : CODE
                   Label : ARGUMENT
                     $y
             Label : THEN
-              {
-              Label : ELEMENT
-                void
+              void
           Label : ELEMENT
             =
             Label : RIGHT
@@ -126,5 +126,3 @@ Label : CODE
                     $f
             Label : LEFT
               $c
-        Label : CASE
-          "b"

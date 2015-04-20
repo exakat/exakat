@@ -14,8 +14,6 @@ Label : CODE
           ;
           Label : ELEMENT
             ::
-            Label : CLASS
-              $x
             Label : METHOD
               str_pad
               Label : ARGUMENTS
@@ -56,6 +54,8 @@ Label : CODE
                         $b
                 Label : ARGUMENT
                   $a
+            Label : CLASS
+              $x
           Label : ELEMENT
             if
             Label : CONDITION

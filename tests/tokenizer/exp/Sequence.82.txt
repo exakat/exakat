@@ -55,7 +55,7 @@ Label : CODE
                 Label : CONSTANT
                   E
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

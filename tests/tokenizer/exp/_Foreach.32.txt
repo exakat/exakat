@@ -10,10 +10,12 @@ Label : ELEMENT
       foreach
       Label : VALUE
         =>
-        Label : VALUE
-          $data
         Label : KEY
           $label
+        Label : VALUE
+          $data
+      Label : SOURCE
+        $tables
       Label : BLOCK
         ;
         Label : ELEMENT
@@ -58,7 +60,5 @@ Label : ELEMENT
                           $label
         Label : ELEMENT
           B
-      Label : SOURCE
-        $tables
 Label : ELEMENT
   A

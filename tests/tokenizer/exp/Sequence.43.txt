@@ -32,6 +32,18 @@ Label : CODE
       ;
       Label : ELEMENT
         foreach
+        Label : VALUE
+          =>
+          Label : KEY
+            $g
+          Label : VALUE
+            $h
+        Label : SOURCE
+          [
+          Label : VARIABLE
+            $e
+          Label : INDEX
+            'f'
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -46,15 +58,17 @@ Label : CODE
               1
             Label : LEFT
               $i
-        Label : VALUE
-          =>
-          Label : KEY
-            $g
-          Label : VALUE
-            $h
-        Label : SOURCE
-          [
-          Label : VARIABLE
-            $e
-          Label : INDEX
-            'f'
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      [
+      Label : VARIABLE
+        $m
+      Label : INDEX
+        'n'
+    Label : LEFT
+      [
+      Label : VARIABLE
+        $k
+      Label : INDEX
+        'l'

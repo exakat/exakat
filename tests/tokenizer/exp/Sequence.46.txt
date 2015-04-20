@@ -31,9 +31,7 @@ Label : CODE
                   Label : INDEX
                     'd'
         Label : THEN
-          {
-          Label : ELEMENT
-            void
+          void
       Label : ELEMENT
         ->
         Label : OBJECT

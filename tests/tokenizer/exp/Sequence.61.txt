@@ -5,15 +5,7 @@ Label : CODE
   Label : ELEMENT
     for
     Label : BLOCK
-      {
-      Label : ELEMENT
-        void
-    Label : FINAL
-      <
-      Label : RIGHT
-        $f
-      Label : LEFT
-        $e
+      void
     Label : INIT
       =
       Label : RIGHT
@@ -34,6 +26,12 @@ Label : CODE
           0
       Label : LEFT
         $a
+    Label : FINAL
+      <
+      Label : RIGHT
+        $f
+      Label : LEFT
+        $e
     Label : INCREMENT
       ++
       Label : PREPLUSPLUS

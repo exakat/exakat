@@ -26,6 +26,8 @@ Label : CODE
               $b
       Label : ELEMENT
         case
+        Label : CASE
+          'C'
         Label : CODE
           ;
           Label : ELEMENT
@@ -38,10 +40,10 @@ Label : CODE
               $d
             Label : LEFT
               $b
-        Label : CASE
-          'C'
       Label : ELEMENT
         case
+        Label : CASE
+          'B'
         Label : CODE
           ;
           Label : ELEMENT
@@ -54,10 +56,10 @@ Label : CODE
               $d
             Label : LEFT
               $b
-        Label : CASE
-          'B'
       Label : ELEMENT
         case
+        Label : CASE
+          'A'
         Label : CODE
           ;
           Label : ELEMENT
@@ -70,5 +72,3 @@ Label : CODE
               $c
             Label : LEFT
               $b
-        Label : CASE
-          'A'

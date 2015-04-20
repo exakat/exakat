@@ -7,53 +7,13 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         var
         Label : VALUE
-          1
+          8
         Label : DEFINE
-          $a
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          2
-        Label : DEFINE
-          $b
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          3
-        Label : DEFINE
-          $c
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          4
-        Label : DEFINE
-          $d
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          5
-        Label : DEFINE
-          $e
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          6
-        Label : DEFINE
-          $f
+          $h1
         Label : VAR
           var
       Label : ELEMENT
@@ -61,7 +21,55 @@ Label : CODE
         Label : VALUE
           7
         Label : DEFINE
-          $g
+          $g1
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          6
+        Label : DEFINE
+          $f1
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          5
+        Label : DEFINE
+          $e1
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          4
+        Label : DEFINE
+          $d1
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          3
+        Label : DEFINE
+          $c1
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          2
+        Label : DEFINE
+          $b1
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          1
+        Label : DEFINE
+          $a1
         Label : VAR
           var
       Label : ELEMENT
@@ -81,41 +89,9 @@ Label : CODE
       Label : ELEMENT
         var
         Label : VALUE
-          1
+          7
         Label : DEFINE
-          $a1
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          2
-        Label : DEFINE
-          $b1
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          3
-        Label : DEFINE
-          $c1
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          4
-        Label : DEFINE
-          $d1
-        Label : VAR
-          var
-      Label : ELEMENT
-        var
-        Label : VALUE
-          5
-        Label : DEFINE
-          $e1
+          $g
         Label : VAR
           var
       Label : ELEMENT
@@ -123,22 +99,46 @@ Label : CODE
         Label : VALUE
           6
         Label : DEFINE
-          $f1
+          $f
         Label : VAR
           var
       Label : ELEMENT
         var
         Label : VALUE
-          7
+          5
         Label : DEFINE
-          $g1
+          $e
         Label : VAR
           var
       Label : ELEMENT
         var
         Label : VALUE
-          8
+          4
         Label : DEFINE
-          $h1
+          $d
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          3
+        Label : DEFINE
+          $c
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          2
+        Label : DEFINE
+          $b
+        Label : VAR
+          var
+      Label : ELEMENT
+        var
+        Label : VALUE
+          1
+        Label : DEFINE
+          $a
         Label : VAR
           var

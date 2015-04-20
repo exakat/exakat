@@ -54,8 +54,9 @@ class Sequence extends TokenAuto {
         $yieldOperator = array_merge($yieldOperator, Assignation::$operators, Addition::$operators, Multiplication::$operators,
                                       Comparison::$operators, Cast::$operators, Logical::$operators, Bitshift::$operators,
                                       _Include::$operators, Power::$operators );
-        $nextOperator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 'T_COMMA', 'T_INSTANCEOF',
-                                           'T_CLOSE_PARENTHESIS', 'T_CATCH', 'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', 'T_AS', 'T_COLON' ),
+        $nextOperator = array_merge(array('T_OPEN_PARENTHESIS', 'T_OBJECT_OPERATOR', 'T_DOUBLE_COLON', 
+                                          'T_COMMA', 'T_INSTANCEOF', 'T_CLOSE_PARENTHESIS', 'T_CATCH', 
+                                          'T_OPEN_BRACKET', 'T_OPEN_CURLY', 'T_NS_SEPARATOR', 'T_AS', 'T_COLON'),
                                      Assignation::$operators, Logical::$operators, Comparison::$operators,
                                      Preplusplus::$operators, Postplusplus::$operators, Ternary::$operators,
                                      Addition::$operators, Multiplication::$operators
@@ -110,15 +111,15 @@ class Sequence extends TokenAuto {
 
         // @note instructions separated by ; with a special case for 'foreach' and 'for'.
         // @note this is not sufficient, but it seems to works pretty well and be enough.
-        $this->conditions = array(-2 => array('token' => 'T_COLON',
-                                              'atom'  => 'none',
-                                              'property'  => array('association' => array('For', 'Foreach', 'While', 'Default',
-                                                                                          'Case', 'Switch', 'If', 'Elseif', 'Else')) // Ternary, Label
+        $this->conditions = array(-2 => array('token'     => 'T_COLON',
+                                              'atom'      => 'none',
+                                              'property'  => array('relatedAtom' => array('For', 'Foreach', 'While', 'Default',
+                                                                                          'Case', 'Switch', 'If', 'Elseif', 'Else'))
                                                ),
-                                  -1 => array('atom'  => $operands ),
-                                   0 => array('token' => Sequence::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('atom'  => $operands),
+                                  -1 => array('atom'       => $operands ),
+                                   0 => array('token'      => Sequence::$operators,
+                                              'atom'       => 'none'),
+                                   1 => array('atom'       => $operands),
                                    2 => array('filterOut2' => $nextOperator),
         );
         

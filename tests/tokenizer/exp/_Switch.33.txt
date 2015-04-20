@@ -10,6 +10,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
         Label : CODE
           ;
           Label : ELEMENT
@@ -60,5 +62,3 @@ Label : CODE
                 exit
                 Label : ARGUMENTS
                   void
-        Label : CASE
-          'b'

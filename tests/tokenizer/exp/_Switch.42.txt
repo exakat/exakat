@@ -18,8 +18,6 @@ Label : CODE
               new
               Label : NEW
                 \
-                Label : SUBNAME
-                  M
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
@@ -34,83 +32,85 @@ Label : CODE
                             $f
                       Label : ARGUMENT
                         'O'
+                Label : SUBNAME
+                  M
       Label : ELEMENT
         case
+        Label : CASE
+          instanceof
+          Label : VARIABLE
+            $e
+          Label : CLASS
+            \
+            Label : SUBNAME
+              K
         Label : CODE
           ;
           Label : ELEMENT
             return
             Label : RETURN
               'L'
+      Label : ELEMENT
+        case
         Label : CASE
           instanceof
+          Label : VARIABLE
+            $d
           Label : CLASS
             \
             Label : SUBNAME
-              K
-          Label : VARIABLE
-            $e
-      Label : ELEMENT
-        case
+              I
         Label : CODE
           ;
           Label : ELEMENT
             return
             Label : RETURN
               'J'
+      Label : ELEMENT
+        case
         Label : CASE
           instanceof
+          Label : VARIABLE
+            $c
           Label : CLASS
             \
             Label : SUBNAME
-              I
-          Label : VARIABLE
-            $d
-      Label : ELEMENT
-        case
+              G
         Label : CODE
           ;
           Label : ELEMENT
             return
             Label : RETURN
               'H'
+      Label : ELEMENT
+        case
         Label : CASE
           instanceof
+          Label : VARIABLE
+            $b
           Label : CLASS
             \
             Label : SUBNAME
-              G
-          Label : VARIABLE
-            $c
-      Label : ELEMENT
-        case
+              E
         Label : CODE
           ;
           Label : ELEMENT
             return
             Label : RETURN
               'F'
+      Label : ELEMENT
+        case
         Label : CASE
           instanceof
+          Label : VARIABLE
+            $a
           Label : CLASS
             \
             Label : SUBNAME
-              E
-          Label : VARIABLE
-            $b
-      Label : ELEMENT
-        case
+              C
         Label : CODE
           ;
           Label : ELEMENT
             return
             Label : RETURN
               'D'
-        Label : CASE
-          instanceof
-          Label : CLASS
-            \
-            Label : SUBNAME
-              C
-          Label : VARIABLE
-            $a

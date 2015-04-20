@@ -18,11 +18,11 @@ Label : CODE
               $y
       Label : ELEMENT
         case
+        Label : CASE
+          'a'
         Label : CODE
           ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $x
-        Label : CASE
-          'a'

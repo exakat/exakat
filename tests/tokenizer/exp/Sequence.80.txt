@@ -30,10 +30,6 @@ Label : CODE
             function
             Label : NAME
               D
-            Label : BLOCK
-              {
-              Label : ELEMENT
-                void
             Label : ARGUMENTS
               Arguments
               Label : ARGUMENT
@@ -52,14 +48,12 @@ Label : CODE
                 $b
               Label : ARGUMENT
                 $a
+            Label : BLOCK
+              void
       Label : ELEMENT
         function
         Label : NAME
           F
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
         Label : ARGUMENTS
           Arguments
           Label : ARGUMENT
@@ -74,3 +68,5 @@ Label : CODE
             $f
           Label : ARGUMENT
             $e
+        Label : BLOCK
+          void

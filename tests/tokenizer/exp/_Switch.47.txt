@@ -14,6 +14,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'H'
         Label : CODE
           ;
           Label : ELEMENT
@@ -30,13 +32,11 @@ Label : CODE
                 $enc
               Label : PROPERTY
                 level
-        Label : CASE
-          'H'
       Label : ELEMENT
         case
+        Label : CASE
+          'h'
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             Void
-        Label : CASE
-          'h'

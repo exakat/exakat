@@ -18,6 +18,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'C'
         Label : CODE
           ;
           Label : ELEMENT
@@ -43,9 +45,7 @@ Label : CODE
                 Label : LEFT
                   $c
             Label : THEN
-              {
-              Label : ELEMENT
-                void
+              void
           Label : ELEMENT
             switch
             Label : NAME
@@ -59,11 +59,7 @@ Label : CODE
                   Label : ARGUMENT
                     void
             Label : CASES
-              {
-              Label : ELEMENT
-                void
-        Label : CASE
-          'C'
+              void
       Label : ELEMENT
         default
         Label : CODE

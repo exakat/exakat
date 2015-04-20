@@ -10,31 +10,31 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'left'
         Label : CODE
           ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $e
-        Label : CASE
-          'left'
       Label : ELEMENT
         case
+        Label : CASE
+          'c'
         Label : CODE
           ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $c
-        Label : CASE
-          'c'
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
         Label : CODE
           ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $b
-        Label : CASE
-          'b'

@@ -18,6 +18,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'D'
         Label : CODE
           ;
           Label : ELEMENT
@@ -36,15 +38,13 @@ Label : CODE
             break
             Label : LEVEL
               void
-        Label : CASE
-          'D'
       Label : ELEMENT
         case
+        Label : CASE
+          'G'
         Label : CODE
           ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $h
-        Label : CASE
-          'G'

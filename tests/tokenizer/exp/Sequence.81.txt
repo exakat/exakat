@@ -6,6 +6,14 @@ Label : CODE
     function
     Label : NAME
       a
+    Label : ARGUMENTS
+      void
+      Label : ARGUMENT
+        Typehint
+        Label : VARIABLE
+          $c
+        Label : CLASS
+          b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -30,11 +38,3 @@ Label : CODE
           ;
           Label : ELEMENT
             false
-    Label : ARGUMENTS
-      void
-      Label : ARGUMENT
-        Typehint
-        Label : CLASS
-          b
-        Label : VARIABLE
-          $c

@@ -34,6 +34,8 @@ Label : CODE
               void
       Label : ELEMENT
         case
+        Label : CASE
+          '1'
         Label : CODE
           ;
           Label : ELEMENT
@@ -50,5 +52,3 @@ Label : CODE
                 $c
             Label : LEFT
               $b
-        Label : CASE
-          '1'

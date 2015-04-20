@@ -6,9 +6,9 @@ Label : CODE
     foreach
     Label : VALUE
       $y
-    Label : BLOCK
-      void
     Label : SOURCE
       clone
       Label : CLONE
         $x
+    Label : BLOCK
+      void

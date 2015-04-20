@@ -10,6 +10,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
         Label : CODE
           ;
           Label : ELEMENT
@@ -20,5 +22,3 @@ Label : CODE
                 (
                 Label : CODE
                   'c.php'
-        Label : CASE
-          'b'

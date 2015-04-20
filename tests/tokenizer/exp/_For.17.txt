@@ -7,6 +7,14 @@ Label : CODE
       $n
   Label : ELEMENT
     foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $h
+      Label : VALUE
+        $i
+    Label : SOURCE
+      $g
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -25,14 +33,6 @@ Label : CODE
               $l
         Label : LEFT
           $k
-    Label : VALUE
-      =>
-      Label : KEY
-        $h
-      Label : VALUE
-        $i
-    Label : SOURCE
-      $g
   Label : ELEMENT
     for
     Label : BLOCK
@@ -55,16 +55,16 @@ Label : CODE
             ++
             Label : POSTPLUSPLUS
               $e
-    Label : FINAL
-      <
-      Label : RIGHT
-        $b
-      Label : LEFT
-        $i
     Label : INIT
       =
       Label : RIGHT
         0
+      Label : LEFT
+        $i
+    Label : FINAL
+      <
+      Label : RIGHT
+        $b
       Label : LEFT
         $i
     Label : INCREMENT

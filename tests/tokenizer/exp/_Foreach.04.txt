@@ -6,13 +6,13 @@ Label : CODE
     foreach
     Label : VALUE
       $y
-    Label : BLOCK
-      void
     Label : SOURCE
       $x
+      Label : NAME
+        $x
       Label : ARGUMENTS
         void
         Label : ARGUMENT
           'a'
-      Label : NAME
-        $x
+    Label : BLOCK
+      void

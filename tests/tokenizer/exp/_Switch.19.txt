@@ -16,9 +16,9 @@ Label : CODE
             void
       Label : ELEMENT
         case
+        Label : CASE
+          "b"
         Label : CODE
           Block with Sequence For Case
           Label : ELEMENT
             Void
-        Label : CASE
-          "b"

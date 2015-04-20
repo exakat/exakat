@@ -6,13 +6,13 @@ Label : CODE
     foreach
     Label : VALUE
       $y
+    Label : SOURCE
+      (array)
+      Label : CAST
+        $x
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $i
-    Label : SOURCE
-      (array)
-      Label : CAST
-        $x

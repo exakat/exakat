@@ -29,12 +29,6 @@ Label : CODE
             void
             Label : ARGUMENT
               $g
-    Label : FINAL
-      <
-      Label : RIGHT
-        $n
-      Label : LEFT
-        $i
     Label : INIT
       Arguments
       Label : ARGUMENT
@@ -57,6 +51,12 @@ Label : CODE
           0
         Label : LEFT
           $i
+    Label : FINAL
+      <
+      Label : RIGHT
+        $n
+      Label : LEFT
+        $i
     Label : INCREMENT
       ++
       Label : POSTPLUSPLUS

@@ -10,6 +10,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
         Label : CODE
           ;
           Label : ELEMENT
@@ -26,5 +28,3 @@ Label : CODE
                   1
                 Label : LEFT
                   $d
-        Label : CASE
-          'b'

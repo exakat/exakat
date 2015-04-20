@@ -30,7 +30,7 @@ class Label extends TokenAuto {
     public function _check() {
         $this->conditions = array(-1 => array('atom'      => 'Identifier'),
                                    0 => array('token'     => Label::$operators,
-                                              'property' => array('relatedAtom' => 'Label')));
+                                              'property'  => array('relatedAtom' => 'Label')));
         
         $this->actions = array('transform'    => array(-1 => 'LABEL'),
                                'atom'         => 'Label',

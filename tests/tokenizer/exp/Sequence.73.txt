@@ -21,19 +21,7 @@ Label : CODE
         Label : NAME
           F
         Label : BLOCK
-          {
-          Label : ELEMENT
-            var
-            Label : VALUE
-              array
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  void
-            Label : DEFINE
-              $a
-            Label : VAR
-              var
+          ;
           Label : ELEMENT
             var
             Label : VALUE
@@ -46,14 +34,24 @@ Label : CODE
               $b
             Label : VAR
               var
+          Label : ELEMENT
+            var
+            Label : VALUE
+              array
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  void
+            Label : DEFINE
+              $a
+            Label : VAR
+              var
       Label : ELEMENT
         class
         Label : NAME
           G
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void
         Label : EXTENDS
           H
   Label : ELEMENT

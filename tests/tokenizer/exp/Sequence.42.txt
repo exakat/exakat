@@ -57,7 +57,7 @@ Label : CODE
         Label : POSTPLUSPLUS
           $c
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS

@@ -35,7 +35,7 @@ class _Switch extends TokenAuto {
                                   2 => array('atom'  => 'yes'),
                                   3 => array('token' => array('T_CLOSE_PARENTHESIS')),
                                   4 => array('token' => 'T_OPEN_CURLY'),
-                                  5 => array('atom'  => 'SequenceCaseDefault'),
+                                  5 => array('atom'  => array('SequenceCaseDefault', 'Void')),
                                   6 => array('token' => 'T_CLOSE_CURLY')
         );
         
@@ -68,6 +68,7 @@ class _Switch extends TokenAuto {
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');
         $this->checkAuto();
+
         // alternative syntax
         $this->conditions = array(0 => array('token' => _Switch::$operators,
                                              'atom'  => 'none'),

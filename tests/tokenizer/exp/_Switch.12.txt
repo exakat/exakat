@@ -10,6 +10,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'e'
         Label : CODE
           ;
           Label : ELEMENT
@@ -18,8 +20,6 @@ Label : CODE
               1
             Label : LEFT
               $x
-        Label : CASE
-          'e'
       Label : ELEMENT
         default
         Label : CODE
@@ -30,6 +30,8 @@ Label : CODE
               void
       Label : ELEMENT
         case
+        Label : CASE
+          'f'
         Label : CODE
           ;
           Label : ELEMENT
@@ -38,10 +40,10 @@ Label : CODE
               2
             Label : LEFT
               $x
-        Label : CASE
-          'f'
       Label : ELEMENT
         case
+        Label : CASE
+          'd'
         Label : CODE
           ;
           Label : ELEMENT
@@ -110,10 +112,10 @@ Label : CODE
                     'b'
                   Label : LEFT
                     $a
-        Label : CASE
-          'd'
       Label : ELEMENT
         case
+        Label : CASE
+          'c'
         Label : CODE
           ;
           Label : ELEMENT
@@ -122,10 +124,10 @@ Label : CODE
               3
             Label : LEFT
               $x
-        Label : CASE
-          'c'
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
         Label : CODE
           ;
           Label : ELEMENT
@@ -134,5 +136,3 @@ Label : CODE
               4
             Label : LEFT
               $x
-        Label : CASE
-          'b'

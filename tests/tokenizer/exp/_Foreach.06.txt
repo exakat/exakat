@@ -10,11 +10,11 @@ Label : CODE
         $b
       Label : INDEX
         3
+    Label : SOURCE
+      $a
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $j
-    Label : SOURCE
-      $a

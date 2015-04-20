@@ -6,7 +6,7 @@ Label : CODE
     foreach
     Label : VALUE
       $b
-    Label : BLOCK
-      void
     Label : SOURCE
       $a
+    Label : BLOCK
+      void

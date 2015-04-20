@@ -10,6 +10,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'a'
         Label : CODE
           ;
           Label : ELEMENT
@@ -34,5 +36,3 @@ Label : CODE
                   'c'
               Label : INDEX
                 'd'
-        Label : CASE
-          'a'

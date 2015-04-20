@@ -10,6 +10,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'B'
         Label : CODE
           ;
           Label : ELEMENT
@@ -163,19 +165,19 @@ Label : CODE
                 Label : LEFT
                   $g
             Label : ELSE
-              {
-              Label : ELEMENT
-                =
-                Label : RIGHT
-                  $k
-                Label : LEFT
-                  $j
+              ;
               Label : ELEMENT
                 =
                 Label : RIGHT
                   'AL'
                 Label : LEFT
                   $l
+              Label : ELEMENT
+                =
+                Label : RIGHT
+                  $k
+                Label : LEFT
+                  $j
           Label : ELEMENT
             =
             Label : RIGHT
@@ -364,5 +366,3 @@ Label : CODE
                     'G'
             Label : LEFT
               $d
-        Label : CASE
-          'B'

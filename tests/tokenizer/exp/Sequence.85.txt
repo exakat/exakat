@@ -5,44 +5,12 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       for
-      Label : INIT
-        =
-        Label : RIGHT
-          2
-        Label : LEFT
-          $b
-      Label : FINAL
-        <
-        Label : RIGHT
-          3
-        Label : LEFT
-          $b
-      Label : INCREMENT
-        ++
-        Label : POSTPLUSPLUS
-          $b
       Label : BLOCK
         ;
         Label : ELEMENT
           AC
         Label : ELEMENT
           for
-          Label : INIT
-            =
-            Label : RIGHT
-              2
-            Label : LEFT
-              $e
-          Label : FINAL
-            <
-            Label : RIGHT
-              3
-            Label : LEFT
-              $e
-          Label : INCREMENT
-            ++
-            Label : POSTPLUSPLUS
-              $e
           Label : BLOCK
             ;
             Label : ELEMENT
@@ -56,13 +24,13 @@ Label : ELEMENT
             Label : ELEMENT
               P
             Label : ELEMENT
+              Q
+            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   $c
-            Label : ELEMENT
-              Q
             Label : ELEMENT
               echo
               Label : ARGUMENTS
@@ -102,13 +70,13 @@ Label : ELEMENT
             Label : ELEMENT
               V
             Label : ELEMENT
-              AA
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 void
                 Label : ARGUMENT
                   $c
+            Label : ELEMENT
+              AA
             Label : ELEMENT
               AB
             Label : ELEMENT
@@ -159,6 +127,22 @@ Label : ELEMENT
                 $f
             Label : ELEMENT
               I
+          Label : INIT
+            =
+            Label : RIGHT
+              2
+            Label : LEFT
+              $e
+          Label : FINAL
+            <
+            Label : RIGHT
+              3
+            Label : LEFT
+              $e
+          Label : INCREMENT
+            ++
+            Label : POSTPLUSPLUS
+              $e
         Label : ELEMENT
           H
         Label : ELEMENT
@@ -183,6 +167,22 @@ Label : ELEMENT
             $c
         Label : ELEMENT
           F
+      Label : INIT
+        =
+        Label : RIGHT
+          2
+        Label : LEFT
+          $b
+      Label : FINAL
+        <
+        Label : RIGHT
+          3
+        Label : LEFT
+          $b
+      Label : INCREMENT
+        ++
+        Label : POSTPLUSPLUS
+          $b
     Label : ELEMENT
       B
     Label : ELEMENT

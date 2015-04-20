@@ -11,7 +11,7 @@ Label : CODE
   Label : ELEMENT
     try
     Label : CODE
-      {
+      ;
       Label : ELEMENT
         C
         Label : ARGUMENTS
@@ -21,15 +21,13 @@ Label : CODE
     Label : CATCH
       catch
       Label : CODE
-        {
-        Label : ELEMENT
-          void
+        void
+      Label : VARIABLE
+        $b
       Label : CLASS
         \
         Label : SUBNAME
           D
-      Label : VARIABLE
-        $b
   Label : ELEMENT
     =
     Label : RIGHT

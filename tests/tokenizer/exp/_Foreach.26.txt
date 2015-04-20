@@ -6,6 +6,12 @@ Label : CODE
     foreach
     Label : VALUE
       $c
+    Label : SOURCE
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        b
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -48,12 +54,6 @@ Label : CODE
                   $i
             Label : LEFT
               $g
-    Label : SOURCE
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        b
   Label : ELEMENT
     =
     Label : RIGHT

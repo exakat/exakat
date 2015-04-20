@@ -6,9 +6,9 @@ Label : CODE
     foreach
     Label : VALUE
       $e
-    Label : BLOCK
-      void
     Label : SOURCE
       @
       Label : AT
         $array
+    Label : BLOCK
+      void

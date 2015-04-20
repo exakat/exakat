@@ -6,15 +6,15 @@ Label : CODE
     foreach
     Label : VALUE
       =>
-      Label : VALUE
-        $y
       Label : KEY
         $x
+      Label : VALUE
+        $y
+    Label : SOURCE
+      $a
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $z
-    Label : SOURCE
-      $a

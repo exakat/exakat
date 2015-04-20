@@ -20,6 +20,8 @@ Label : CODE
       ;
       Label : ELEMENT
         while
+        Label : CONDITION
+          true
         Label : BLOCK
           ;
           Label : ELEMENT
@@ -32,8 +34,6 @@ Label : CODE
                 void
                 Label : ARGUMENT
                   void
-        Label : CONDITION
-          true
       Label : ELEMENT
         declare
         Label : TICKS

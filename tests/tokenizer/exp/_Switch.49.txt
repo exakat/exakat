@@ -5,6 +5,6 @@ Label : CODE
   Label : ELEMENT
     switch
     Label : NAME
-      $x
+      $foo
     Label : CASES
       void

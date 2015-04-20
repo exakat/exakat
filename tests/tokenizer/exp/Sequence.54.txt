@@ -4,14 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        $c
     Label : VALUE
       $b
     Label : SOURCE
       $a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        $c
   Label : ELEMENT
     if
     Label : CONDITION

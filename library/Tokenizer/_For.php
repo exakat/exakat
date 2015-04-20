@@ -30,21 +30,22 @@ class _For extends TokenAuto {
     public function _check() {
         // for (;;) ; (Empty loop)
         $this->conditions = array(  0 => array('token' => _For::$operators,
-                                               'atom' => 'none'),
+                                               'atom'  => 'none'),
                                     1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                    2 => array('atom' => 'yes'),
+                                    2 => array('atom'  => 'yes'),
                                     3 => array('token' => 'T_SEMICOLON'),
-                                    4 => array('atom' => 'yes'),
+                                    4 => array('atom'  => 'yes'),
                                     5 => array('token' => 'T_SEMICOLON'),
-                                    6 => array('atom' => 'yes'),
+                                    6 => array('atom'  => 'yes'),
                                     7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                    8 => array('token' => 'T_SEMICOLON', 'atom' => 'none'),
+                                    8 => array('token' => 'T_SEMICOLON', 
+                                               'atom'  => 'none'),
         );
         $this->actions = array('addEdge'     => array(8 => array('Void' => 'LEVEL')),
                                'keepIndexed' => true,
                                'cleanIndex'  => true);
         $this->checkAuto();
-
+        
         // for (;;) $x++; (one line instruction, with or without )
         $this->conditions = array(  0 => array('token'     => _For::$operators,
                                                'atom'      => 'none'),
@@ -75,7 +76,7 @@ class _For extends TokenAuto {
                                     6 => array('atom'  => 'yes'),
                                     7 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                     8 => array('token' => 'T_OPEN_CURLY'),
-                                    9 => array('atom'  => 'Sequence'),
+                                    9 => array('atom'  => array('Sequence', 'Void')),
                                    10 => array('token' => 'T_CLOSE_CURLY')
         );
         

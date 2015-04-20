@@ -2,6 +2,9 @@
 Label : CODE
   ;
   Label : ELEMENT
+    H
+
+  Label : ELEMENT
     if
     Label : CONDITION
       (
@@ -35,9 +38,6 @@ Label : CODE
       Label : ELEMENT
         J
     
-  Label : ELEMENT
-    H
-
   Label : ELEMENT
     if
     Label : CONDITION

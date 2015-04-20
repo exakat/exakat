@@ -22,6 +22,12 @@ Label : CODE
               null
       Label : ELEMENT
         case
+        Label : CASE
+          ::
+          Label : CLASS
+            self
+          Label : CONSTANT
+            ALGORITHM_NONE
         Label : CODE
           Block with Sequence For Case Without Semicolon
           Label : ELEMENT
@@ -30,14 +36,14 @@ Label : CODE
               void
           Label : ELEMENT
             Void
+      Label : ELEMENT
+        case
         Label : CASE
           ::
           Label : CLASS
             self
           Label : CONSTANT
-            ALGORITHM_NONE
-      Label : ELEMENT
-        case
+            ALGORITHM_RSA
         Label : CODE
           ;
           Label : ELEMENT
@@ -58,21 +64,15 @@ Label : CODE
                     key
             Label : LEFT
               $data
-        Label : CASE
-          ::
-          Label : CLASS
-            self
-          Label : CONSTANT
-            ALGORITHM_RSA
       Label : ELEMENT
         case
-        Label : CODE
-          Block with Sequence For Case
-          Label : ELEMENT
-            Void
         Label : CASE
           ::
           Label : CLASS
             self
           Label : CONSTANT
             ALGORITHM_DSA
+        Label : CODE
+          Block with Sequence For Case
+          Label : ELEMENT
+            Void

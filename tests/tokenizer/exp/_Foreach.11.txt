@@ -6,8 +6,6 @@ Label : CODE
     foreach
     Label : VALUE
       $e
-    Label : BLOCK
-      void
     Label : SOURCE
       !
       Label : NOT
@@ -30,3 +28,5 @@ Label : CODE
                 $d
               Label : ARGUMENT
                 'd'
+    Label : BLOCK
+      void

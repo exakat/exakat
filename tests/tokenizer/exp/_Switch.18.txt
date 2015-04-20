@@ -10,6 +10,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'a'
         Label : CODE
           ;
           Label : ELEMENT
@@ -46,10 +48,6 @@ Label : CODE
               $associative
           Label : ELEMENT
             foreach
-            Label : BLOCK
-              {
-              Label : ELEMENT
-                void
             Label : VALUE
               =>
               Label : KEY
@@ -58,14 +56,14 @@ Label : CODE
                 $value
             Label : SOURCE
               $data
+            Label : BLOCK
+              void
           Label : ELEMENT
             =
             Label : RIGHT
               0
             Label : LEFT
               $count
-        Label : CASE
-          'a'
       Label : ELEMENT
         default
         Label : CODE

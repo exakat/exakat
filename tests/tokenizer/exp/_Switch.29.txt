@@ -10,6 +10,8 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
+        Label : CASE
+          'b'
         Label : CODE
           ;
           Label : ELEMENT
@@ -30,8 +32,6 @@ Label : CODE
                     =
                     Label : RIGHT
                       ::
-                      Label : CLASS
-                        G
                       Label : METHOD
                         h
                         Label : ARGUMENTS
@@ -40,10 +40,14 @@ Label : CODE
                             $j
                           Label : ARGUMENT
                             $i
+                      Label : CLASS
+                        G
                     Label : LEFT
                       $f
               Label : ELEMENT
                 case
+                Label : CASE
+                  'd'
                 Label : CODE
                   ;
                   Label : ELEMENT
@@ -56,8 +60,6 @@ Label : CODE
                       ""
                     Label : LEFT
                       $e
-                Label : CASE
-                  'd'
           Label : ELEMENT
             break
             Label : LEVEL
@@ -66,5 +68,3 @@ Label : CODE
             ++
             Label : PREPLUSPLUS
               $k
-        Label : CASE
-          'b'

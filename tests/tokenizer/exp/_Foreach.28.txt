@@ -17,18 +17,6 @@ Label : CODE
         foreach
         Label : VALUE
           $g
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            echo
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $h
-                Label : PROPERTY
-                  i
         Label : SOURCE
           ->
           Label : OBJECT
@@ -43,3 +31,15 @@ Label : CODE
               void
               Label : ARGUMENT
                 'f'
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            echo
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $h
+                Label : PROPERTY
+                  i
