@@ -34,11 +34,12 @@ class Project implements Tasks {
                               'Appinfo', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
 
-    protected $reports = array('Premier' => array('Markdown' => 'report',
-                                                  'Sqlite'   => 'report',
+    protected $reports = array('Premier' => array(//'Markdown' => 'report',
+                                                  //'Sqlite'   => 'report',
                                                   'Devoops'  => 'report',
-                                                  'Html'     => 'report',
-                                                  'Text'     => 'report'),
+                                                  //'Html'     => 'report',
+                                                  //'Text'     => 'report'
+                                                  ),
                                'Counts'  => array('Sqlite'   => 'counts'));
     
     public function run(\Config $config) {
@@ -180,6 +181,7 @@ mv '.$config->projects_root.'/projects/'.$project.'/log/analyze.log '.$config->p
                                          'audit_length' => $audit_end - $audit_start));
 
         shell_exec('php '.$this->executable.' results -P Structures/EchoWithConcat -json -f '.$config->projects_root.'/projects/'.$project.'/EchoWithConcat');
+        shell_exec('php '.$this->executable.' results -P Functions/IsExtFunction   -json -f '.$config->projects_root.'/projects/'.$project.'/PhpFunctions');
         $this->logTime('Final');
         display("End 2\n");
     }
