@@ -1289,6 +1289,8 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
     it.in('NEXT').in('NEXT').filter{ !(it.getProperty('token') in ['T_ECHO', 'T_PRINT', 'T_AND_EQUAL', 'T_CONCAT_EQUAL', 'T_EQUAL', 'T_DIV_EQUAL',
                                                     'T_MINUS_EQUAL', 'T_MOD_EQUAL', 'T_MUL_EQUAL', 'T_OR_EQUAL', 'T_PLUS_EQUAL', 'T_POW_EQUAL',
                                                     'T_SL_EQUAL', 'T_SR_EQUAL', 'T_XOR_EQUAL', 'T_SL_EQUAL', 'T_SR_EQUAL',
+                                                    'T_PLUS', 'T_MINUS',
+                                                    'T_STAR', 'T_SLASH', 'T_PERCENTAGE', 'T_POW',
                                                     'T_AND', 'T_LOGICAL_AND', 'T_BOOLEAN_AND', 'T_ANDAND',
                                                     'T_OR' , 'T_LOGICAL_OR' , 'T_BOOLEAN_OR', 'T_OROR',
                                                     'T_XOR', 'T_LOGICAL_XOR', 'T_BOOLEAN_XOR', 'T_NEW',
