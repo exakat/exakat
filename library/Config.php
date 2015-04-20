@@ -240,7 +240,7 @@ class Config {
                           'log2csv'     => 1, 
                           'magicnumber' => 1, 
                           'project'     => 1, 
-                          'projectspip'     => 1, 
+                          'projectspip' => 1, 
                           'report_all'  => 1,
                           'report'      => 1, 
                           'results'     => 1, 
@@ -248,6 +248,7 @@ class Config {
                           'status'      => 1, 
                           'tokenizer'   => 1, 
                           'version'     => 1,
+                          'onepage'     => 1,
                           );
 
         if (count($args) > 0) {
