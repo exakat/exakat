@@ -32,6 +32,8 @@ class Export implements Tasks {
         $client = new Client();
 
         $queryTemplate = 'g.V.as("x").except([g.v(0)])';
+        
+//        $queryTemplate .= 'filter{ it.in.loop(1){true}{it.object.code == "/Users/famille/Desktop/analyze/projects/jeophpardy/code/template.php"}.any()}';
 
         $params = array('type' => 'IN');
         $query = new Gremlin\Query($client, $queryTemplate, $params);

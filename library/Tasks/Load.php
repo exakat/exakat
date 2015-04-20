@@ -557,7 +557,7 @@ class Load implements Tasks {
 
                 // do.. while special
                 if ($token[3] == 'T_DO') {
-                    $dowhiles[] = array('node' => $T[$Tid], 
+                    $dowhiles[] = array('node' => $T[$Tid],
                                         'level' => $block_level);
                 } elseif ($token[3] == 'T_WHILE') {
                     if (empty($dowhiles)) {

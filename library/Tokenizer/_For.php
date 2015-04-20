@@ -38,7 +38,7 @@ class _For extends TokenAuto {
                                     5 => array('token' => 'T_SEMICOLON'),
                                     6 => array('atom'  => 'yes'),
                                     7 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                    8 => array('token' => 'T_SEMICOLON', 
+                                    8 => array('token' => 'T_SEMICOLON',
                                                'atom'  => 'none'),
         );
         $this->actions = array('addEdge'     => array(8 => array('Void' => 'LEVEL')),

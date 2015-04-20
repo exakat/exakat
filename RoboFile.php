@@ -222,6 +222,12 @@ LICENCE;
         }
     }
     
+    public function checkFormat() {
+        shell_exec('php ~/.composer/vendor/bin/php-cs-fixer fix ./library/Tokenizer --fixers=encoding,eof_ending,elseif,trailing_spaces,indentation');
+        shell_exec('php ~/.composer/vendor/bin/php-cs-fixer fix ./library/Analyzer --fixers=encoding,eof_ending,elseif,trailing_spaces,indentation');
+        shell_exec('php ~/.composer/vendor/bin/php-cs-fixer fix ./library/Tasks --fixers=encoding,eof_ending,elseif,trailing_spaces,indentation');
+    }
+
     public function checkSyntax() {
         // checking json files
         $files = Finder::create()->ignoreVCS(true)

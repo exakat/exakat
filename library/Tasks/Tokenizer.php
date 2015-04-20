@@ -78,9 +78,9 @@ class Tokenizer implements Tasks {
         $total = \Tokenizer\Token::countTotalToken();
         $count = $total + 1;
 
-        $stats = array('token_in'     => $count, 
+        $stats = array('token_in'     => $count,
                        'token_out'    => 2,
-                       'relation_in'  => $server_stat->countRelations(), 
+                       'relation_in'  => $server_stat->countRelations(),
                        'relation_out' => 4,
                        'project'      => $project);
         $log->log('Finished counting Token');
