@@ -24,18 +24,18 @@
 namespace Loader;
 
 class ColonType {
-    private $waitFor = array('string' => array('?' => 'Ternary'),
-                             'array'  => array('T_IF' => 'Ifthen',
-                                               'T_ELSEIF' => 'Ifthen',
-                                               'T_WHILE' => 'While',
+    private $waitFor = array('string' => array('?'         => 'Ternary'),
+                             'array'  => array('T_IF'      => 'Ifthen',
+                                               'T_ELSEIF'  => 'Ifthen',
+                                               'T_WHILE'   => 'While',
                                                'T_FOREACH' => 'Foreach',
-                                               'T_FOR' => 'For',
-                                               'T_SWITCH' => 'Switch',
+                                               'T_FOR'     => 'For',
+                                               'T_SWITCH'  => 'Switch',
 
-                                               'T_CASE' => '_Case',
-                                               'T_DEFAULT' => '_Default',
+                                               'T_CASE'    => 'Case',
+                                               'T_DEFAULT' => 'Default',
 
-                                               'T_ELSE' => 'Ifthen', 
+                                               'T_ELSE'    => 'Ifthen', 
                                                'T_DECLARE' => 'Declare', 
                                                ));
     private $parenthesisStack = array();

@@ -762,9 +762,6 @@ class Load implements Tasks {
                         list($label, $value) = $colonTokens->characterizeToken();
                         $T[$Tid]->setProperty($label, $value)->save();
                     }
-                    if ($type = $this->process_colon($token_value)) {
-                        $T[$Tid]->setProperty('association', $type)->save();
-                    }
                     if ($type = $this->process_blocks($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
                     }
@@ -858,9 +855,6 @@ class Load implements Tasks {
                     if ($token == ':') {
                         list($label, $value) = $colonTokens->characterizeToken();
                         $T[$Tid]->setProperty($label, $value)->save();
-                    }
-                    if ($type = $this->process_colon($token_value)) {
-                        $T[$Tid]->setProperty('association', $type)->save();
                     }
                     if ($type = $this->process_blocks($token_value)) {
                         $T[$Tid]->setProperty('association', $type)->save();
@@ -1054,9 +1048,6 @@ class Load implements Tasks {
                 $T[$Tid]->setProperty('in_for', 'true')->save();
             }
         
-            if ($type = $this->process_colon($token_value)) {
-                $T[$Tid]->setProperty('association', $type)->save();
-            }
             if ($type = $this->process_blocks($token_value)) {
                 $T[$Tid]->setProperty('association', $type)->save();
             }
@@ -1070,11 +1061,11 @@ class Load implements Tasks {
                             if (!$T[$Tid]->hasProperty('association')) {
                                 $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
                             }
-                        } elseif ($token_value == 'T_COLON') {
+                        } /*elseif ($token_value == 'T_COLON') {
                             if (!$T[$Tid]->hasProperty('association')) {
                                 $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
                             }
-                        } else {
+                        } */ else {
                             $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
                         }
                     }
@@ -1202,72 +1193,6 @@ class Load implements Tasks {
             } else {
                 return '';
             }
-        }
-    
-        return '';
-    }
-    
-    private function process_colon($token_value) {
-        static $states = array();
-        static $states_id = 0;
-    
-        if ($token_value == 'T_QUESTION' ) {
-            $states[] = 'Ternary';
-            $states_id++;
-            return '';
-        }
-
-        if ($token_value == 'T_SWITCH' )   {
-            $states[] = 'Switch';
-            $states_id++;
-            return '';
-        }
-        if ($token_value == 'T_CASE' )     {
-            $states[] = 'Case';
-            $states_id++;
-            return '';
-        }
-        if ($token_value == 'T_DEFAULT' )  {
-            $states[] = 'Default';
-            $states_id++;
-            return '';
-        }
-
-        if ($token_value == 'T_FOR' )      {
-            $states[] = 'For';
-            $states_id++;
-            return '';
-        }
-        if ($token_value == 'T_FOREACH' )  {
-            $states[] = 'Foreach';
-            $states_id++;
-            return '';
-        }
-        if ($token_value == 'T_WHILE' )    {
-            $states[] = 'While';
-            $states_id++;
-            return '';
-        }
-
-        if ($token_value == 'T_IF' )       {
-            $states[] = 'If';
-            $states_id++;
-            return '';
-        }
-        if ($token_value == 'T_ELSEIF' )   {
-            $states[] = 'Elseif';
-            $states_id++;
-            return '';
-        }
-        if ($token_value == 'T_ELSE' )     {
-            $states[] = 'Else';
-            $states_id++;
-            return '';
-        }
-
-        if ($token_value == 'T_COLON' )    {
-            $state = array_pop($states);
-            return $state;
         }
     
         return '';

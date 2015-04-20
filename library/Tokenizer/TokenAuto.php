@@ -1276,7 +1276,6 @@ next.bothE('NEXT').each{ g.removeEdge(it); }
         }
 
         if (isset($actions['checkForNext'])) {
-            
             $qactions[] = "
 /* Check for Next */
 
@@ -1297,7 +1296,7 @@ while (it.in('NEXT').filter{ it.getProperty('atom') in ['RawString', 'Void', 'If
                                                     'T_ARRAY_CAST','T_BOOL_CAST', 'T_DOUBLE_CAST','T_INT_CAST','T_OBJECT_CAST','T_STRING_CAST','T_UNSET_CAST',
                                                     'T_INSTANCEOF', 'T_INSTEADOF', 'T_QUESTION', 'T_DOT', 'T_OPEN_PARENTHESIS', 'T_CLOSE_PARENTHESIS',
                                                     'T_ELSE', 'T_DOUBLE_COLON', 'T_OBJECT_OPERATOR']) || (it.getProperty('atom') != null && it.atom != 'Parenthesis')}.any() &&
-    !it.in('NEXT').in('NEXT').filter{ it.token == 'T_COLON' && it.association == 'Ternary' }.any()
+    !(it.in('NEXT').in('NEXT').filter{ it.token == 'T_COLON' && it.relatedAtom == 'Ternary' }.any())
                                                     ) {
 
     sequence = it;
