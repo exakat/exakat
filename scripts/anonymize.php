@@ -189,6 +189,7 @@ foreach($tokens as $t) {
             case T_ENDWHILE : 
             case T_IS_GREATER_OR_EQUAL : 
             case T_PLUS_EQUAL : 
+            case T_POW : 
             case T_CLASS : 
             case T_INTERFACE : 
             case T_CONTINUE :
