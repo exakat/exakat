@@ -56,9 +56,9 @@ class Stats {
         $this->stats['relations_count'] = $this->countRelations();
         $this->stats['atoms_count']     = $this->queryOne("g.V.except([g.v(0)]).hasNot('atom', 'null'){$this->file_filter}.count()");
         $this->stats['NEXT_count']      = $this->queryOne("g.E.has('label', 'NEXT').inV{$this->file_filter}.count()");
-        $this->stats['INDEXED_count']   = $this->queryOne("g.E.has('label', 'INDEXED').outV.hasNot('index', \"true\").count()");
+        $this->stats['INDEXED_count']   = $this->queryOne("g.E.has('label', 'INDEXED').outV.hasNot('index', true).count()");
         $this->stats['file_count']      = $this->queryOne("g.V.inE('FILE').file.count(); ");
-        $this->stats['no_fullcode']     = $this->queryOne("g.V.except([g.v(0)]).has('fullcode', null).hasNot('index', 'true').filter{!(it.token in ['E_FILE', 'E_NAMESPACE', 'E_CLASS', 'E_FUNCTION'])}.count();");
+        $this->stats['no_fullcode']     = $this->queryOne("g.V.except([g.v(0)]).has('fullcode', null).hasNot('index', true).filter{!(it.token in ['E_FILE', 'E_NAMESPACE', 'E_CLASS', 'E_FUNCTION'])}.count();");
         $this->stats['lone_token']      = $this->queryOne("g.V.hasNot('atom', null).hasNot('atom', 'File').hasNot('token', 'T_INDEX').filter{ it.in.count() == 0}.count()");
         $this->stats['isrm_variable']   = $this->queryOne("g.V.has('atom', 'Variable').filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Variables\\\\IsRead').any() == false}.filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Variables\\\\IsModified').any() == false}.count()");
         $this->stats['isrm_property']   = $this->queryOne("g.V.has('atom', 'Property').filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\IsRead').any() == false}.filter{ it.in('ANALYZED').has('code', 'Analyzer\\\\Classes\\\\IsModified').any() == false}.count()");
