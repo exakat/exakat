@@ -57,7 +57,7 @@ class _Try extends TokenAuto {
                                'rank'        => array(1 => 0));
         $this->checkAuto();
 
-        // Try () NO catch
+        // Try () no more catch (final case, cleaning up)
         $this->conditions = array(0 => array('atom'     => 'yes',
                                              'token'    => _Try::$operators),
                                   1 => array('notToken' => array('T_CATCH', 'T_FINALLY'))
