@@ -19,23 +19,19 @@ Label : CODE
             Label : NAME
               connect
             Label : BLOCK
-              {
-              Label : ELEMENT
-                void
+              void
           Label : ELEMENT
             class
             Label : NAME
               Connection
             Label : BLOCK
-              {
-              Label : ELEMENT
-                void
+              void
           Label : ELEMENT
             const
-            Label : NAME
-              CONNECT_OK
             Label : VALUE
               1
+            Label : NAME
+              CONNECT_OK
         Label : NAMESPACE
           AnotherProject
       Label : ELEMENT
@@ -47,22 +43,18 @@ Label : CODE
         Label : NAME
           connect
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void
       Label : ELEMENT
         class
         Label : NAME
           Connection
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void
       Label : ELEMENT
         const
-        Label : NAME
-          CONNECT_OK
         Label : VALUE
           1
+        Label : NAME
+          CONNECT_OK
     Label : NAMESPACE
       MyProject

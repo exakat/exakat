@@ -42,12 +42,17 @@ class _Namespace extends TokenAuto {
         $this->conditions = array(0 => array('token' => _Namespace::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => array('Identifier', 'Nsname')),
-                                  2 => array('atom'  => 'Sequence'),
-                                  3 => array('token' => array('T_NAMESPACE', 'T_CLOSE_TAG', 'T_END', 'T_SEMICOLON')),
+                                  2 => array('token' => 'T_OPEN_CURLY'),
+                                  3 => array('atom'  => 'Sequence'),
+                                  4 => array('token' => 'T_CLOSE_CURLY'),
+                                  5 => array('token' => array('T_NAMESPACE', 'T_CLOSE_TAG', 'T_END', 'T_SEMICOLON')),
         );
         
         $this->actions = array('transform'    => array( 1 => 'NAMESPACE',
-                                                        2 => 'BLOCK'),
+                                                        2 => 'DROP',
+                                                        3 => 'BLOCK',
+                                                        4 => 'DROP',
+                                                        ),
                                'atom'         => 'Namespace',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it');

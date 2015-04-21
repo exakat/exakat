@@ -5,21 +5,7 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
-      Label : ELEMENT
-        const
-        Label : NAME
-          CONNECT_OK
-        Label : VALUE
-          1
-      Label : ELEMENT
-        class
-        Label : NAME
-          Connection
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+      ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -29,29 +15,25 @@ Label : CODE
         Label : NAME
           connect
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void
+      Label : ELEMENT
+        class
+        Label : NAME
+          Connection
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        const
+        Label : VALUE
+          1
+        Label : NAME
+          CONNECT_OK
     Label : NAMESPACE
       AnotherProject
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
-      Label : ELEMENT
-        const
-        Label : NAME
-          CONNECT_OK
-        Label : VALUE
-          1
-      Label : ELEMENT
-        class
-        Label : NAME
-          Connection
-        Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+      ;
       Label : ELEMENT
         function
         Label : ARGUMENTS
@@ -61,8 +43,18 @@ Label : CODE
         Label : NAME
           connect
         Label : BLOCK
-          {
-          Label : ELEMENT
-            void
+          void
+      Label : ELEMENT
+        class
+        Label : NAME
+          Connection
+        Label : BLOCK
+          void
+      Label : ELEMENT
+        const
+        Label : VALUE
+          1
+        Label : NAME
+          CONNECT_OK
     Label : NAMESPACE
       MyProject

@@ -10,8 +10,10 @@ Label : CODE
         class
         Label : NAME
           J
+        Label : EXTENDS
+          K
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             function
             Label : ARGUMENTS
@@ -21,11 +23,7 @@ Label : CODE
             Label : NAME
               M
             Label : BLOCK
-              {
-              Label : ELEMENT
-                void
-        Label : EXTENDS
-          K
+              void
         Label : IMPLEMENTS
           L
       Label : ELEMENT

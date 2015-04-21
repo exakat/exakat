@@ -5,7 +5,7 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         =
         Label : RIGHT
@@ -23,7 +23,7 @@ Label : CODE
   Label : ELEMENT
     namespace
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         +
         Label : RIGHT
