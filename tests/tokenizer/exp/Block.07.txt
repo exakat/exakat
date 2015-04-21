@@ -1,57 +1,45 @@
 <?php
 
-Label : NEXT
+Label : CODE
   ;
-  Label : NEXT
-    foreach
-    Label : NEXT
-      (
-      Label : NEXT
-        ->
-        Label : NEXT
-          as
-          Label : NEXT
-            $c
-            Label : NEXT
-              )
-              Label : NEXT
-                {
-                Label : NEXT
-                  ;
-                  Label : NEXT
-                    ;
-                    Label : NEXT
-                      }
-                      Label : NEXT
-                        ?>
-                        Label : NEXT
-                          /**/
-                          Label : NEXT
-                            /* * */
-                    Label : ELEMENT
-                      ++
-                      Label : POSTPLUSPLUS
-                        $a
-                  Label : ELEMENT
-                    {
-                    Label : ELEMENT
-                      echo
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          '3'
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          b
   Label : ELEMENT
     foreach
     Label : VALUE
       $c
+    Label : SOURCE
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        b
     Label : BLOCK
       ;
       Label : ELEMENT
-        {
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              '3'
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $a
+  Label : ELEMENT
+    foreach
+    Label : VALUE
+      $c
+    Label : SOURCE
+      ->
+      Label : OBJECT
+        $a
+      Label : PROPERTY
+        b
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ;
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -62,29 +50,21 @@ Label : NEXT
         ++
         Label : POSTPLUSPLUS
           $a
-    Label : SOURCE
-      ->
-      Label : OBJECT
-        $a
-      Label : PROPERTY
-        b
   Label : ELEMENT
     foreach
     Label : VALUE
       $c
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        {
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              '1'
     Label : SOURCE
       ->
       Label : OBJECT
         $a
       Label : PROPERTY
         b
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            '1'

@@ -37,12 +37,7 @@ class Block extends TokenAuto {
                                     3 => array('token'   => array('T_CLOSE_CURLY', 'T_SEMICOLON', 'T_OPEN_CURLY')),
         );
         
-        $this->actions = array('to_block'     => true,
-                               'atom'         => 'Sequence',
-                               'cleanIndex'   => true,
-                               'makeSequence' => 'it',
-                               'property'     => array('bracket' => true)
-                               );
+        $this->actions = array('toBlock'      => true);
         $this->checkAuto();
 
     // @doc Block
@@ -59,12 +54,8 @@ class Block extends TokenAuto {
                                                'atom'       => 'none'),
         );
 
-        $this->actions = array('to_block'     => true,
-                               'atom'         => 'Sequence',
-                               'cleanIndex'   => true,
-                               'makeSequence' => 'it',
-                               'property'     => array('bracket' => true)
-                               );
+        $this->actions = array('toBlock'      => true,
+                               'makeSequence' => 'toBlockSequence');
         $this->checkAuto();
 
         return false;

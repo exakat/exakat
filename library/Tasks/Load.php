@@ -430,7 +430,7 @@ class Load implements Tasks {
                           isset($tokens[$id + 1]) &&
                           is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
-                      
+                      /*
                     if ($previous->getProperty('code') == ':' ||
                        ($previous->getProperty('code') == '{' &&
                         isset($tokens[$id + 2]) &&
@@ -460,7 +460,7 @@ class Load implements Tasks {
 
                         $previous->relateTo($T[$Tid], 'NEXT')->save();
                         $previous = $T[$Tid];
-                    }
+                    }*/
                     $id++;
                     continue;
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&

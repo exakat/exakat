@@ -31,38 +31,28 @@ Label : CODE
       Label : ELEMENT
         ;
         Label : ELEMENT
-          =
-          Label : RIGHT
-            array
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                void
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'Q'
-                Label : VALUE
-                  'R'
-          Label : LEFT
+          ++
+          Label : POSTPLUSPLUS
             $b
       Label : ELEMENT
         ;
         Label : ELEMENT
           =
           Label : RIGHT
-            ->
-            Label : OBJECT
-              $this
-            Label : METHOD
-              AW
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $c
-                  Label : PROPERTY
-                    AX
+            ++
+            Label : POSTPLUSPLUS
+              $e
           Label : LEFT
             $d
+        Label : ELEMENT
+          +=
+          Label : RIGHT
+            ++
+            Label : POSTPLUSPLUS
+              $e
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $f
+            Label : INDEX
+              2
