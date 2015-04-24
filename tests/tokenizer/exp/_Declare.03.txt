@@ -5,10 +5,8 @@ Label : CODE
   Label : ELEMENT
     declare
     Label : TICKS
-      void
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          'ISO-8859-1'
-        Label : LEFT
-          encoding
+      =
+      Label : LEFT
+        encoding
+      Label : RIGHT
+        'ISO-8859-1'

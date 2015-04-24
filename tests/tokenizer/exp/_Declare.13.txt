@@ -5,14 +5,10 @@ Label : CODE
   Label : ELEMENT
     declare
     Label : BLOCK
-      {
-      Label : ELEMENT
-        void
-    Label : TICKS
       void
-      Label : ARGUMENT
-        =
-        Label : RIGHT
-          1
-        Label : LEFT
-          ticks
+    Label : TICKS
+      =
+      Label : LEFT
+        ticks
+      Label : RIGHT
+        1

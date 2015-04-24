@@ -33,7 +33,7 @@ class _Declare extends TokenAuto {
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
                                              'property' => array('association' => 'Declare')),
-                                  2 => array('atom'  => 'Arguments'),
+                                  2 => array('atom'  => array('Assignation', 'Arguments')),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token' => 'T_COLON',
                                               'property' => array('relatedAtom' => 'Declare')),
@@ -58,7 +58,7 @@ class _Declare extends TokenAuto {
                                              'atom'  => 'none'),
                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
                                              'property' => array('association' => 'Declare')),
-                                  2 => array('atom'  => 'Arguments'),
+                                  2 => array('atom'  => array('Assignation', 'Arguments')),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token'  => 'T_SEMICOLON')
         );
@@ -77,11 +77,11 @@ class _Declare extends TokenAuto {
                                     1 => array('atom'  => 'none',
                                                'token' => 'T_OPEN_PARENTHESIS',
                                                'property' => array('association' => 'Declare') ),
-                                    2 => array('atom'  =>  array('Arguments', 'Void')),
+                                    2 => array('atom'  => array('Assignation', 'Arguments')),
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
                                     4 => array('token' => 'T_OPEN_CURLY'),
-                                    5 => array('atom'  => 'Sequence'),
+                                    5 => array('atom'  => array('Sequence', 'Void')),
                                     6 => array('token' => 'T_CLOSE_CURLY'),
         );
         
@@ -91,27 +91,6 @@ class _Declare extends TokenAuto {
                                                         4 => 'DROP',
                                                         5 => 'BLOCK',
                                                         6 => 'DROP'),
-                               'atom'         => 'Declare',
-                               'cleanIndex'   => true,
-                               'makeSequence' => 'it'
-                               );
-        $this->checkAuto();
-
-        // declare(ticks = 2) { block }
-        $this->conditions = array(  0 => array('token' => _Declare::$operators),
-                                    1 => array('atom'  => 'none',
-                                               'token' => 'T_OPEN_PARENTHESIS',
-                                             'property' => array('association' => 'Declare') ),
-                                    2 => array('atom'  =>  array('Arguments', 'Void')),
-                                    3 => array('atom'  => 'none',
-                                               'token' => 'T_CLOSE_PARENTHESIS' ),
-                                    4 => array('atom'  => 'Sequence'),
-        );
-        
-        $this->actions = array('transform'    => array( 1 => 'DROP',
-                                                        2 => 'TICKS',
-                                                        3 => 'DROP',
-                                                        4 => 'BLOCK'),
                                'atom'         => 'Declare',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
