@@ -270,9 +270,14 @@ class Token {
 
     public function checkRemaining() {
         $class = str_replace("Tokenizer\\", '', get_class($this));
-        if (in_array($class, Token::$types)) {
+        if (in_array($class, array('Staticclass','Staticconstant','Staticmethodcall','Staticproperty'))) {
+            $query = "g.idx('racines')[['token':'Staticproperty']].out('INDEXED').count()";
+            return Token::queryOne($query) > 0;
+        } elseif (in_array($class, array('Property','Methodcall'))) {
+            $query = "g.idx('racines')[['token':'Property']].out('INDEXED').count()";
+            return Token::queryOne($query) > 0;
+        } elseif (in_array($class, Token::$types)) {
             $query = "g.idx('racines')[['token':'$class']].out('INDEXED').count()";
-
             return Token::queryOne($query) > 0;
         } else {
             return true;
