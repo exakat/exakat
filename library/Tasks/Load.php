@@ -1030,7 +1030,6 @@ class Load implements Tasks {
                 $T[$Tid]->setProperty('association', $type)->save();
             }
             if ($type = $this->process_parenthesis($token_value)) {
-                print "parenthesis : $token_value\n";
                 $T[$Tid]->setProperty('association', $type)->save();
             }
 
@@ -1204,8 +1203,6 @@ class Load implements Tasks {
         static $states = array();
         static $statesId = 0;
         
-        print $tokenValue."\n";
-        
         if ($display) {
             print "Display\n";
             var_dump($states);
@@ -1248,7 +1245,7 @@ class Load implements Tasks {
         }
 
 /*
-Something with the arguments is wrong
+Will stress Arguments too much
         if ($tokenValue == 'T_FUNCTION' ) {
             $states[] = 'Function';
             $statesId++;
@@ -1256,12 +1253,13 @@ Something with the arguments is wrong
         }
 
 Too many updates (If expected a Parenthesis, not a ( ... )
+*/
         if ($tokenValue == 'T_IF' || $tokenValue == 'T_ELSEIF') {
             $states[] = 'If';
             $statesId++;
             return '';
         }
-*/
+
         if ($tokenValue == 'T_OPEN_PARENTHESIS' )    {
             if (count($states) > 0) {
                 $state = array_pop($states);
