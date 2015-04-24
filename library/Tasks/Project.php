@@ -43,7 +43,10 @@ class Project implements Tasks {
                                'Counts'  => array('Sqlite'   => 'counts'));
     
     public function run(\Config $config) {
-        $this->project_dir = $config->projects_root.'/projects/'.$config->project;
+        $project = $config->project;
+
+        $this->project_dir = $config->projects_root.'/projects/'.$project;
+
         if ($config->is_phar) {
             $this->executable = basename(dirname(dirname(__DIR__)));
         } else {
@@ -54,7 +57,6 @@ class Project implements Tasks {
             die("Usage : php {$this->executable} project -p [Project name]\n");
         }
 
-        $project = $config->project;
         if (!file_exists($config->projects_root.'/projects/'.$project)) {
             die("Project '$project' doesn't exist in projects folder. Aborting\n");
         }
@@ -69,6 +71,12 @@ class Project implements Tasks {
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/log')) {
             die("Project '$project' exists but has no log folder. Aborting\n");
+        }
+
+        // cleaning log directory (possibly logs)
+        $logs = glob($config->projects_root.'/projects/'.$project.'/log/*');
+        foreach($logs as $log) {
+            unlink($log);
         }
 
         $this->logTime('Start');
@@ -86,12 +94,6 @@ class Project implements Tasks {
                                          'exakat_version' => \Exakat::VERSION,
                                          'exakat_build' => \Exakat::BUILD,
                                          ));
-
-        // cleaning log directory
-        $logs = glob($config->projects_root.'/projects/'.$project.'/log/*');
-        foreach($logs as $log) {
-            unlink($log);
-        }
 
         $thread = new \Thread();
         display("Running project '$project'\n");
