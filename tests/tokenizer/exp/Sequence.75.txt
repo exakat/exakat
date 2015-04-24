@@ -4,11 +4,21 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $a
+      $a
     Label : THEN
       ;
+      Label : ELEMENT
+        G
+      Label : ELEMENT
+        echo
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            I
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                'J'
       Label : ELEMENT
         D
       Label : ELEMENT
@@ -21,18 +31,6 @@ Label : CODE
               void
               Label : ARGUMENT
                 'G'
-      Label : ELEMENT
-        echo
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            I
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'J'
-      Label : ELEMENT
-        G
       Label : ELEMENT
         echo
         Label : ARGUMENTS

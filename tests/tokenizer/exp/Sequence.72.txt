@@ -60,6 +60,8 @@ Label : CODE
         $l
   Label : ELEMENT
     =
+    Label : LEFT
+      $k
     Label : RIGHT
       E
       Label : ARGUMENTS
@@ -68,10 +70,20 @@ Label : CODE
           'G'
         Label : ARGUMENT
           'F'
-    Label : LEFT
-      $k
   Label : ELEMENT
     =
+    Label : LEFT
+      list
+      Label : ARGUMENTS
+        Arguments
+        Label : ARGUMENT
+          $e
+        Label : ARGUMENT
+          $d
+        Label : ARGUMENT
+          $c
+        Label : ARGUMENT
+          $b
     Label : RIGHT
       $f
       Label : NAME
@@ -86,20 +98,10 @@ Label : CODE
           $h
         Label : ARGUMENT
           $g
-    Label : LEFT
-      list
-      Label : ARGUMENTS
-        Arguments
-        Label : ARGUMENT
-          $e
-        Label : ARGUMENT
-          $d
-        Label : ARGUMENT
-          $c
-        Label : ARGUMENT
-          $b
   Label : ELEMENT
     =
+    Label : LEFT
+      $a
     Label : RIGHT
       B
       Label : ARGUMENTS
@@ -108,5 +110,3 @@ Label : CODE
           'D'
         Label : ARGUMENT
           'C'
-    Label : LEFT
-      $a

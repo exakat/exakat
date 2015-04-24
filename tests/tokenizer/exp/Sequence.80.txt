@@ -5,25 +5,21 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          B
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'C'
+      !
+      Label : NOT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'C'
     Label : THEN
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            !
-            Label : NOT
-              $a
+          !
+          Label : NOT
+            $a
         Label : THEN
           ;
           Label : ELEMENT
@@ -34,16 +30,16 @@ Label : CODE
               Arguments
               Label : ARGUMENT
                 =
-                Label : RIGHT
-                  E
                 Label : LEFT
                   $d
+                Label : RIGHT
+                  E
               Label : ARGUMENT
                 =
-                Label : RIGHT
-                  0
                 Label : LEFT
                   $c
+                Label : RIGHT
+                  0
               Label : ARGUMENT
                 $b
               Label : ARGUMENT
@@ -58,10 +54,10 @@ Label : CODE
           Arguments
           Label : ARGUMENT
             =
-            Label : RIGHT
-              'G'
             Label : LEFT
               $h
+            Label : RIGHT
+              'G'
           Label : ARGUMENT
             $g
           Label : ARGUMENT

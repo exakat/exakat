@@ -15,9 +15,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        1
+      1
     Label : THEN
       ;
       Label : ELEMENT

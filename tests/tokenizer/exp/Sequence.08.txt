@@ -5,28 +5,24 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $y
+      $y
     Label : THEN
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          2
         Label : LEFT
           $a
+        Label : RIGHT
+          2
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $x
+      $x
     Label : THEN
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          2
         Label : LEFT
           $a
+        Label : RIGHT
+          2

@@ -5,50 +5,48 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ||
-        Label : RIGHT
-          !
-          Label : NOT
-            in_array
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                array
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    'g'
-                  Label : ARGUMENT
-                    'f'
-                  Label : ARGUMENT
-                    'e'
-              Label : ARGUMENT
-                [
-                Label : VARIABLE
-                  $c
-                Label : INDEX
-                  'd'
-        Label : LEFT
-          empty
+      ||
+      Label : LEFT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'b'
+      Label : RIGHT
+        !
+        Label : NOT
+          in_array
           Label : ARGUMENTS
-            void
+            Arguments
+            Label : ARGUMENT
+              array
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  'g'
+                Label : ARGUMENT
+                  'f'
+                Label : ARGUMENT
+                  'e'
             Label : ARGUMENT
               [
               Label : VARIABLE
-                $a
+                $c
               Label : INDEX
-                'b'
+                'd'
     Label : THEN
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          'j'
         Label : LEFT
           [
           Label : VARIABLE
             $h
           Label : INDEX
             'i'
+        Label : RIGHT
+          'j'

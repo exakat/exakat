@@ -43,7 +43,7 @@ class Sequence extends TokenAuto {
                            );
         
         $yieldOperator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
-                               'T_DOUBLE_COLON', 'T_NEW', 'T_INSTANCEOF', 'T_RETURN',
+                               'T_DOUBLE_COLON', 'T_COLON', 'T_NEW', 'T_INSTANCEOF', 'T_RETURN',
                                'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_COMMA',
                                'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
@@ -86,6 +86,29 @@ class Sequence extends TokenAuto {
                                );
         $this->checkAuto();
 
+        // @note instructions separated by ;
+        $this->conditions = array(-2 => array('token'      => 'T_COLON',
+                                              'property'   => array('relatedAtom' => array('Ifthen', 'Case', 'Default', 'Declare', 'For', 'Foreach'))),
+                                  -1 => array('atom'       => $operands,
+                                              'notToken'   => 'T_ELSEIF' ),
+                                   0 => array('token'      => Sequence::$operators,
+                                              'atom'       => 'none'),
+                                   1 => array('atom'       => $operands,
+                                              'notToken'   => 'T_ELSEIF'),
+                                   2 => array('filterOut2' => $nextOperator),
+        );
+        
+        $this->actions = array('transform'   => array( 1 => 'ELEMENT',
+                                                      -1 => 'ELEMENT'),
+                               'rank'        => array( 1 => 1,
+                                                      -1 => 0 ),
+                               'mergeNext'   => array('Sequence' => 'ELEMENT'),
+                               'atom'        => 'Sequence',
+                               'cleanIndex'  => true,
+                               'keepIndexed' => true,
+                               );
+        $this->checkAuto();
+        
         // @note instructions separated by ; but ; is useless
         $this->conditions = array(-1 => array('atom'     => $operands,
                                               'notToken' => 'T_ELSEIF' ),

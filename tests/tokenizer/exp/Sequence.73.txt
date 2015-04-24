@@ -5,15 +5,13 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          D
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'E'
+      !
+      Label : NOT
+        D
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'E'
     Label : THEN
       ;
       Label : ELEMENT

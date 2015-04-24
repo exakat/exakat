@@ -4,13 +4,9 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        0
+      0
     Label : THEN
       ;
-      Label : ELEMENT
-        E
       Label : ELEMENT
         ->
         Label : OBJECT
@@ -22,14 +18,16 @@ Label : CODE
             Label : ARGUMENT
               'I'
       Label : ELEMENT
+        E
+      Label : ELEMENT
         ::
+        Label : CLASS
+          C
         Label : METHOD
           D
           Label : ARGUMENTS
             void
             Label : ARGUMENT
               'E'
-        Label : CLASS
-          C
       Label : ELEMENT
         A

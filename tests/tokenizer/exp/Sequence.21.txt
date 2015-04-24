@@ -5,17 +5,15 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $x
+      $x
     Label : THEN
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          2
         Label : LEFT
           $y
+        Label : RIGHT
+          2
   Label : ELEMENT
     switch
     Label : NAME
@@ -24,13 +22,13 @@ Label : CODE
       Sequence Case Default
       Label : ELEMENT
         case
-        Label : CASE
-          1
         Label : CODE
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              1
             Label : LEFT
               $x
+            Label : RIGHT
+              1
+        Label : CASE
+          1

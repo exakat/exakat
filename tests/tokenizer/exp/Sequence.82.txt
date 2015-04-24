@@ -5,21 +5,19 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ===
-        Label : RIGHT
-          'c'
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : METHOD
-            b
-            Label : ARGUMENTS
+      ===
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : METHOD
+          b
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
               void
-              Label : ARGUMENT
-                void
+      Label : RIGHT
+        'c'
     Label : THEN
       ;
       Label : ELEMENT

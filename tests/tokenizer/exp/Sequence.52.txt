@@ -2,20 +2,15 @@
 Label : CODE
   ;
   Label : ELEMENT
-    H
-
-  Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $e
+      !
+      Label : NOT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $e
     Label : THEN
       ;
       Label : ELEMENT
@@ -39,17 +34,18 @@ Label : CODE
         J
     
   Label : ELEMENT
+    H
+
+  Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
+      !
+      Label : NOT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
     Label : THEN
       ;
       Label : ELEMENT
@@ -67,15 +63,13 @@ Label : CODE
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          !
-          Label : NOT
-            empty
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $c
+        !
+        Label : NOT
+          empty
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $c
       Label : THEN
         ;
         Label : ELEMENT

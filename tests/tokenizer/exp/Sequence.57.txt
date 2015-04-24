@@ -5,31 +5,27 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        class_exists
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $d
+      class_exists
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $d
     Label : THEN
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            !
-            Label : NOT
-              isset
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $a
-                  Label : PROPERTY
-                    b
+          !
+          Label : NOT
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  b
         Label : THEN
           ;
           Label : ELEMENT

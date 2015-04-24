@@ -10,30 +10,28 @@ Label : CODE
       void
       Label : ARGUMENT
         Typehint
-        Label : VARIABLE
-          $c
         Label : CLASS
           b
+        Label : VARIABLE
+          $c
     Label : BLOCK
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : RIGHT
-              ::
-              Label : METHOD
-                e
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $f
-              Label : CLASS
-                d
-            Label : LEFT
-              false
+          ==
+          Label : LEFT
+            false
+          Label : RIGHT
+            ::
+            Label : CLASS
+              d
+            Label : METHOD
+              e
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $f
         Label : THEN
           ;
           Label : ELEMENT

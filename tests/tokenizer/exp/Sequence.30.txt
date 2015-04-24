@@ -15,11 +15,9 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            !
-            Label : NOT
-              $c
+          !
+          Label : NOT
+            $c
         Label : THEN
           ;
           Label : ELEMENT

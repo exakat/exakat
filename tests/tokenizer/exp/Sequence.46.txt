@@ -5,31 +5,27 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $z
+      $z
     Label : THEN
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            !
-            Label : NOT
-              empty
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
+          !
+          Label : NOT
+            empty
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
                   [
                   Label : VARIABLE
-                    [
-                    Label : VARIABLE
-                      $b
-                    Label : INDEX
-                      'c'
+                    $b
                   Label : INDEX
-                    'd'
+                    'c'
+                Label : INDEX
+                  'd'
         Label : THEN
           void
       Label : ELEMENT

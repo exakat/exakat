@@ -4,19 +4,23 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
+      !
+      Label : NOT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
     Label : THEN
       ;
       Label : ELEMENT
         foreach
+        Label : BLOCK
+          ;
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $e
         Label : VALUE
           =>
           Label : KEY
@@ -25,9 +29,3 @@ Label : CODE
             $d
         Label : SOURCE
           $b
-        Label : BLOCK
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-              $e

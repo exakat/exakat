@@ -4,6 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     &&
+    Label : LEFT
+      !
+      Label : NOT
+        e
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $f
     Label : RIGHT
       g
       Label : ARGUMENTS
@@ -32,24 +40,14 @@ Label : CODE
           $i
         Label : ARGUMENT
           $h
-    Label : LEFT
-      !
-      Label : NOT
-        e
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $f
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'b'
-        Label : LEFT
-          $a
+      ==
+      Label : LEFT
+        $a
+      Label : RIGHT
+        'b'
     Label : THEN
       ;
       Label : ELEMENT

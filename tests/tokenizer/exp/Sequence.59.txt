@@ -4,42 +4,36 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $b
-    Label : SOURCE
-      $a
     Label : BLOCK
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $k
+          $k
         Label : THEN
           ;
           Label : ELEMENT
             .=
-            Label : RIGHT
-              'm'
             Label : LEFT
               $l
+            Label : RIGHT
+              'm'
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $h
+          $h
         Label : THEN
           ;
           Label : ELEMENT
             .=
-            Label : RIGHT
-              'j'
             Label : LEFT
               $i
+            Label : RIGHT
+              'j'
       Label : ELEMENT
         =
+        Label : LEFT
+          $d
         Label : RIGHT
           Concatenation
           Label : CONCAT
@@ -50,5 +44,7 @@ Label : CODE
               g
           Label : CONCAT
             'e'
-        Label : LEFT
-          $d
+    Label : VALUE
+      $b
+    Label : SOURCE
+      $a

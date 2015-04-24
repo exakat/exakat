@@ -9,33 +9,31 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $k
+          $k
         Label : THEN
           ;
           Label : ELEMENT
             .=
-            Label : RIGHT
-              'm'
             Label : LEFT
               $l
+            Label : RIGHT
+              'm'
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $h
+          $h
         Label : THEN
           ;
           Label : ELEMENT
             .=
-            Label : RIGHT
-              'j'
             Label : LEFT
               $i
+            Label : RIGHT
+              'j'
       Label : ELEMENT
         =
+        Label : LEFT
+          $d
         Label : RIGHT
           Concatenation
           Label : CONCAT
@@ -46,20 +44,18 @@ Label : CODE
               g
           Label : CONCAT
             'e'
-        Label : LEFT
-          $d
     Label : INIT
       =
+      Label : LEFT
+        $a
       Label : RIGHT
         0
-      Label : LEFT
-        $a
     Label : FINAL
       <
-      Label : RIGHT
-        10
       Label : LEFT
         $a
+      Label : RIGHT
+        10
     Label : INCREMENT
       ++
       Label : POSTPLUSPLUS

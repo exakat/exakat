@@ -5,42 +5,38 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        1
+      3
     Label : THEN
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          2
-        Label : LEFT
-          $b
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        3
-    Label : THEN
-      ;
-      Label : ELEMENT
-        =
-        Label : RIGHT
-          3
         Label : LEFT
           $c
+        Label : RIGHT
+          3
     Label : ELSE
       ;
       Label : ELEMENT
         =
-        Label : RIGHT
-          4
         Label : LEFT
           $d
+        Label : RIGHT
+          4
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      1
+    Label : THEN
+      ;
+      Label : ELEMENT
+        =
+        Label : LEFT
+          $b
+        Label : RIGHT
+          2
   Label : ELEMENT
     =
-    Label : RIGHT
-      1
     Label : LEFT
       $a
+    Label : RIGHT
+      1
