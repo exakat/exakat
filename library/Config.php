@@ -241,6 +241,7 @@ class Config {
                           'magicnumber' => 1, 
                           'project'     => 1, 
                           'projectspip' => 1, 
+                          'phploc'      => 1, 
                           'report_all'  => 1,
                           'report'      => 1, 
                           'results'     => 1, 

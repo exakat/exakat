@@ -111,17 +111,6 @@ class Doctor implements Tasks {
             }
         }
 
-        // phploc
-        $res = shell_exec('phploc --version 2>&1');
-        if (preg_match('/command not found/is', $res)) {
-            $stats['phploc']['installed'] = 'No';
-        } elseif (preg_match('/phploc\s+([0-9\.]+)/is', $res, $r)) {
-            $stats['phploc']['installed'] = 'Yes';
-            $stats['phploc']['version'] = $r[1];
-        } else {
-            $stats['phploc']['error'] = $res;
-        }
-
         // zip
         $res = shell_exec('zip -v');
         if (preg_match('/command not found/is', $res)) {

@@ -22,7 +22,7 @@
 
 class Exakat {
     const VERSION = '0.1.0';
-    const BUILD = '153';
+    const BUILD = '154';
     
     public function execute(Config $config) {
         switch ($config->command) {
@@ -133,6 +133,16 @@ class Exakat {
 
             case 'cleandb' : 
                 $task = new Tasks\CleanDb();
+                print $task->run($config);
+                break;
+
+            case 'onepage' : 
+                $task = new Tasks\OnePage();
+                print $task->run($config);
+                break;
+
+            case 'phploc' : 
+                $task = new Tasks\Phploc();
                 print $task->run($config);
                 break;
 

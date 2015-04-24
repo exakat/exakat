@@ -104,30 +104,9 @@ class Files implements Tasks {
             }
         }
 
-        display('Built ignore-dir/files list');
-        $shell = 'cd '.$config->projects_root.'/projects/'.$dir.'/code/; phploc '.(count($ignoreName) ? ' --names-exclude  '.join(' --names-exclude ', $ignoreName).' ' : '')
-                                                        .(count($ignoreDirs) ? ' --exclude '.join(' --exclude ', $ignoreDirs).' ' : '')
-                                                        .' .';
-        display('Ran phploc');
-
-        $res = shell_exec($shell);
-        if (trim($res) == 'No files found to scan') {
-            die("Project $project is empty.\n");
-        }
-        if (preg_match('/Lines of Code \(LOC\)\s*(\d+)/is', $res, $r)) {
-            $stats['loc'] = $r[1];
-        } else {
-            $stats['loc'] = 0;
-        }
-
-        $rfiles = trim(shell_exec($shellBase.' | wc -l'));
-        $rdirs = trim(shell_exec('find '.$config->projects_root.'/projects/'.$dir.'/code/ -type d -path "*/\.*" | wc -l'));
-
-        $datastore->addRow('hash', array(array('key' => 'phploc',      'value' => $stats['loc']),
-                                         array('key' => 'files',       'value' => $rfiles),
-                                         array('key' => 'directories', 'value' => $rdirs)
-                                        )
-                          ) ;
+        display('Counting files');
+        $counting = new Phploc();
+        $counting->run($config);
         display('Counted files');
 
         $notCompilable = array();
