@@ -2023,6 +2023,7 @@ if (ainstruction.getProperty('token') == 'T_SEMICOLON' &&
 }
 
 g.addEdge(sequence, instruction, 'ELEMENT');
+instruction.bothE('INDEXED').each{ g.removeEdge(it); }
 instruction.setProperty('rank', 0);
 
 g.addEdge(binstruction, oc, 'NEXT');

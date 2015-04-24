@@ -4,14 +4,14 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      C
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         $b
       Label : ARGUMENT
         $a
-    Label : NAME
-      C
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -27,9 +27,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $a
+      $a
     Label : THEN
       ;
       Label : ELEMENT
@@ -37,9 +35,7 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $b
+          $b
         Label : THEN
           ;
           Label : ELEMENT
@@ -73,9 +69,7 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $b
+          $b
         Label : THEN
           ;
           Label : ELEMENT
@@ -84,19 +78,19 @@ Label : CODE
               $c
   Label : ELEMENT
     =
-    Label : RIGHT
-      3
     Label : LEFT
       $c
+    Label : RIGHT
+      3
   Label : ELEMENT
     =
-    Label : RIGHT
-      0
     Label : LEFT
       $b
+    Label : RIGHT
+      0
   Label : ELEMENT
     =
-    Label : RIGHT
-      1
     Label : LEFT
       $a
+    Label : RIGHT
+      1

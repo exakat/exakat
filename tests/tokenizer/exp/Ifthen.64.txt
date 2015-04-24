@@ -5,25 +5,25 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
+      !
+      Label : NOT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
     Label : THEN
       ;
       Label : ELEMENT
         .=
-        Label : RIGHT
-          'B'
         Label : LEFT
           $b
+        Label : RIGHT
+          'B'
   Label : ELEMENT
     .=
+    Label : LEFT
+      $c
     Label : RIGHT
       Concatenation
       Label : CONCAT
@@ -40,5 +40,3 @@ Label : CODE
         $d
       Label : CONCAT
         'D'
-    Label : LEFT
-      $c

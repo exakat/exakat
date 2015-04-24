@@ -5,9 +5,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $c
+      $c
     Label : THEN
       ;
       Label : ELEMENT
@@ -26,35 +24,33 @@ Label : CODE
                   void
               Label : ELEMENT
                 =
-                Label : RIGHT
-                  1
                 Label : LEFT
                   $x
+                Label : RIGHT
+                  1
             Label : CASE
               'a'
       Label : ELEMENT
         =
-        Label : RIGHT
-          3
         Label : LEFT
           $e
+        Label : RIGHT
+          3
       Label : ELEMENT
         =
-        Label : RIGHT
-          4
         Label : LEFT
           $f
+        Label : RIGHT
+          4
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          $d
+        $d
       Label : THEN
         ;
         Label : ELEMENT
           =
-          Label : RIGHT
-            5
           Label : LEFT
             $f
+          Label : RIGHT
+            5

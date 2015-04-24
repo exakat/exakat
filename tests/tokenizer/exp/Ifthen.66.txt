@@ -5,17 +5,15 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'C'
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            B
+      ==
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          B
+      Label : RIGHT
+        'C'
     Label : THEN
       ;
       Label : ELEMENT
@@ -35,17 +33,15 @@ Label : CODE
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : RIGHT
-            'H'
-          Label : LEFT
-            ->
-            Label : OBJECT
-              $d
-            Label : PROPERTY
-              G
+        ==
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $d
+          Label : PROPERTY
+            G
+        Label : RIGHT
+          'H'
       Label : THEN
         ;
         Label : ELEMENT
@@ -83,17 +79,15 @@ Label : CODE
       Label : ELSE
         elseif
         Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : RIGHT
-              'S'
-            Label : LEFT
-              ->
-              Label : OBJECT
-                $i
-              Label : PROPERTY
-                R
+          ==
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $i
+            Label : PROPERTY
+              R
+          Label : RIGHT
+            'S'
         Label : THEN
           ;
           Label : ELEMENT
@@ -115,17 +109,15 @@ Label : CODE
         Label : ELSE
           elseif
           Label : CONDITION
-            (
-            Label : CODE
-              ==
-              Label : RIGHT
-                'Z'
-              Label : LEFT
-                ->
-                Label : OBJECT
-                  $l
-                Label : PROPERTY
-                  Y
+            ==
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $l
+              Label : PROPERTY
+                Y
+            Label : RIGHT
+              'Z'
           Label : THEN
             ;
             Label : ELEMENT
@@ -147,13 +139,11 @@ Label : CODE
           Label : ELSE
             elseif
             Label : CONDITION
-              (
-              Label : CODE
-                ->
-                Label : OBJECT
-                  $o
-                Label : PROPERTY
-                  AF
+              ->
+              Label : OBJECT
+                $o
+              Label : PROPERTY
+                AF
             Label : THEN
               ;
               Label : ELEMENT

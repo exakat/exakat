@@ -5,8 +5,6 @@ Label : ELEMENT
     ;
     Label : ELEMENT
       foreach
-      Label : VALUE
-        $b
       Label : BLOCK
         Block with Foreach
         Label : ELEMENT
@@ -16,15 +14,13 @@ Label : ELEMENT
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                !
-                Label : NOT
-                  [
-                  Label : VARIABLE
-                    $c
-                  Label : INDEX
-                    'D'
+              !
+              Label : NOT
+                [
+                Label : VARIABLE
+                  $c
+                Label : INDEX
+                  'D'
             Label : THEN
               ;
               Label : ELEMENT
@@ -41,10 +37,10 @@ Label : ELEMENT
                           void
                           Label : ARGUMENT
                             =>
-                            Label : VALUE
-                              'L'
                             Label : KEY
                               'K'
+                            Label : VALUE
+                              'L'
                       Label : ARGUMENT
                         I
                         Label : ARGUMENTS
@@ -65,6 +61,8 @@ Label : ELEMENT
                           'F'
           Label : ELEMENT
             B
+      Label : VALUE
+        $b
       Label : SOURCE
         $a
 Label : ELEMENT

@@ -5,24 +5,22 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          'b'
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
     Label : THEN
       ;
       Label : ELEMENT
         do
-        Label : CONDITION
-          $x
         Label : BLOCK
-          {
+          ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              3
             Label : LEFT
               $c
+            Label : RIGHT
+              3
+        Label : CONDITION
+          $x

@@ -10,17 +10,15 @@ Label : ELEMENT
     Label : ELEMENT
       if
       Label : CONDITION
-        (
-        Label : CODE
-          isset
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $c
-              Label : INDEX
-                'Q'
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $c
+            Label : INDEX
+              'Q'
       Label : THEN
         ;
         Label : ELEMENT
@@ -40,35 +38,33 @@ Label : ELEMENT
     Label : ELEMENT
       if
       Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : RIGHT
-            'E'
-          Label : LEFT
-            C
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                'D'
+        ==
+        Label : LEFT
+          C
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'D'
+        Label : RIGHT
+          'E'
       Label : THEN
         ;
         Label : ELEMENT
           M
         Label : ELEMENT
+          I
+        Label : ELEMENT
           if
           Label : CONDITION
-            (
-            Label : CODE
-              isset
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $a
-                  Label : INDEX
-                    'K'
+            isset
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $a
+                Label : INDEX
+                  'K'
           Label : THEN
             ;
             Label : ELEMENT
@@ -85,8 +81,6 @@ Label : ELEMENT
                         $b
                       Label : INDEX
                         'M'
-        Label : ELEMENT
-          I
         Label : ELEMENT
           G
           Label : ARGUMENTS

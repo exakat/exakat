@@ -4,9 +4,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $a
+      $a
     Label : THEN
       ;
       Label : ELEMENT
@@ -14,13 +12,21 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $b
+          $b
         Label : THEN
           ;
           Label : ELEMENT
-            D
+            C
+          Label : ELEMENT
+            print
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                t
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    'd'
           Label : ELEMENT
             print
             Label : ARGUMENTS
@@ -36,19 +42,9 @@ Label : CODE
                     Label : ARGUMENT
                       'e'
           Label : ELEMENT
+            D
+          Label : ELEMENT
             F
-          Label : ELEMENT
-            print
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                t
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    'd'
-          Label : ELEMENT
-            C
           Label : ELEMENT
             print
             Label : ARGUMENTS

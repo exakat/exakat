@@ -8,17 +8,15 @@ Label : ELEMENT
     Label : ELEMENT
       if
       Label : CONDITION
-        (
-        Label : CODE
-          ->
-          Label : OBJECT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'B'
-          Label : PROPERTY
-            C
+        ->
+        Label : OBJECT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            'B'
+        Label : PROPERTY
+          C
       Label : THEN
         ;
         Label : ELEMENT

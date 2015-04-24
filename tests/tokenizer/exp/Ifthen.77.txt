@@ -5,17 +5,15 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ->
-        Label : OBJECT
-          $a
-        Label : METHOD
-          B
-          Label : ARGUMENTS
+      ->
+      Label : OBJECT
+        $a
+      Label : METHOD
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
             void
-            Label : ARGUMENT
-              void
     Label : THEN
       ;
       Label : ELEMENT
@@ -28,8 +26,6 @@ Label : CODE
               $b
         Label : CATCH
           catch
-          Label : CODE
-            void
           Label : CLASS
             \
             Label : SUBNAME
@@ -38,12 +34,12 @@ Label : CODE
               C
           Label : VARIABLE
             $c
+          Label : CODE
+            void
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $d
+      $d
     Label : THEN
       ;
       Label : ELEMENT

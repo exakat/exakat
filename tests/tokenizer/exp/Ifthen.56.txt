@@ -5,50 +5,48 @@ Label : CODE
     return
     Label : RETURN
       ::
-      Label : PROPERTY
-        $f
       Label : CLASS
         self
+      Label : PROPERTY
+        $f
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          isset
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ::
-              Label : PROPERTY
-                $a
-              Label : CLASS
-                self
+      !
+      Label : NOT
+        isset
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              self
+            Label : PROPERTY
+              $a
     Label : THEN
       ;
       Label : ELEMENT
         =
+        Label : LEFT
+          ::
+          Label : CLASS
+            self
+          Label : PROPERTY
+            $b
         Label : RIGHT
           new
           Label : NEW
             C
-        Label : LEFT
-          ::
-          Label : PROPERTY
-            $b
-          Label : CLASS
-            self
     Label : ELSE
       ;
       Label : ELEMENT
         ->
         Label : OBJECT
           ::
-          Label : PROPERTY
-            $d
           Label : CLASS
             self
+          Label : PROPERTY
+            $d
         Label : METHOD
           E
           Label : ARGUMENTS

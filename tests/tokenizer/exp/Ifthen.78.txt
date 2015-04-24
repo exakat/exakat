@@ -4,17 +4,15 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'C'
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            B
+      ==
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          B
+      Label : RIGHT
+        'C'
     Label : THEN
       ;
       Label : ELEMENT
@@ -24,21 +22,21 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $d
+          $d
         Label : THEN
           ;
           Label : ELEMENT
             foreach
-            Label : VALUE
-              $f
             Label : BLOCK
               void
+            Label : VALUE
+              $f
             Label : SOURCE
               $e
       Label : ELEMENT
         =
+        Label : LEFT
+          $b
         Label : RIGHT
           D
           Label : ARGUMENTS
@@ -47,22 +45,18 @@ Label : CODE
               'E'
             Label : ARGUMENT
               $c
-        Label : LEFT
-          $b
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : RIGHT
-            'G'
-          Label : LEFT
-            ->
-            Label : OBJECT
-              $h
-            Label : PROPERTY
-              F
+        ==
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $h
+          Label : PROPERTY
+            F
+        Label : RIGHT
+          'G'
       Label : THEN
         ;
         Label : ELEMENT

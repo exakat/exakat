@@ -15,17 +15,13 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                $h
+              $h
             Label : THEN
               void
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                $g
+              $g
             Label : THEN
               void
           Label : ELEMENT
@@ -45,9 +41,7 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                $c
+              $c
             Label : THEN
               ;
               Label : ELEMENT
@@ -55,17 +49,15 @@ Label : CODE
             Label : ELSE
               elseif
               Label : CONDITION
-                (
-                Label : CODE
-                  empty
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      [
-                      Label : VARIABLE
-                        $g
-                      Label : INDEX
-                        'h'
+                empty
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
+                      $g
+                    Label : INDEX
+                      'h'
               Label : THEN
                 void
         Label : CASE

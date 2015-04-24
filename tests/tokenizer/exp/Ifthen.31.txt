@@ -5,22 +5,18 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $a
+      $a
     Label : THEN
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $b
+          $b
         Label : THEN
           ;
           Label : ELEMENT
             =
-            Label : RIGHT
-              3
             Label : LEFT
               $c
+            Label : RIGHT
+              3

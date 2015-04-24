@@ -4,27 +4,25 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ||
-        Label : RIGHT
-          !
-          Label : NOT
-            D
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                void
+      ||
+      Label : LEFT
+        ==
         Label : LEFT
-          ==
-          Label : RIGHT
-            $a
-          Label : LEFT
-            B
-            Label : ARGUMENTS
+          B
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'C'
+        Label : RIGHT
+          $a
+      Label : RIGHT
+        !
+        Label : NOT
+          D
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
               void
-              Label : ARGUMENT
-                'C'
     Label : THEN
       ;
       Label : ELEMENT
@@ -48,6 +46,8 @@ Label : CODE
               Label : ARGUMENT
                 'M'
       Label : ELEMENT
+        J
+      Label : ELEMENT
         G
       Label : ELEMENT
         I
@@ -55,8 +55,6 @@ Label : CODE
           void
           Label : ARGUMENT
             'J'
-      Label : ELEMENT
-        J
       Label : ELEMENT
         F
         Label : ARGUMENTS
@@ -68,31 +66,27 @@ Label : CODE
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          ||
-          Label : RIGHT
-            !
-            Label : NOT
-              $c
-          Label : LEFT
-            !
-            Label : NOT
-              $b
+        ||
+        Label : LEFT
+          !
+          Label : NOT
+            $b
+        Label : RIGHT
+          !
+          Label : NOT
+            $c
       Label : THEN
         if
         Label : CONDITION
-          (
-          Label : CODE
-            &&
-            Label : RIGHT
-              !
-              Label : NOT
-                $e
-            Label : LEFT
-              !
-              Label : NOT
-                $d
+          &&
+          Label : LEFT
+            !
+            Label : NOT
+              $d
+          Label : RIGHT
+            !
+            Label : NOT
+              $e
         Label : THEN
           ;
           Label : ELEMENT
@@ -118,11 +112,9 @@ Label : CODE
         Label : ELSE
           elseif
           Label : CONDITION
-            (
-            Label : CODE
-              !
-              Label : NOT
-                $k
+            !
+            Label : NOT
+              $k
           Label : THEN
             ;
             Label : ELEMENT
@@ -144,11 +136,9 @@ Label : CODE
           Label : ELSE
             elseif
             Label : CONDITION
-              (
-              Label : CODE
-                !
-                Label : NOT
-                  $o
+              !
+              Label : NOT
+                $o
             Label : THEN
               ;
               Label : ELEMENT
@@ -181,13 +171,13 @@ Label : CODE
                 ;
                 Label : ELEMENT
                   =
+                  Label : LEFT
+                    $t
                   Label : RIGHT
                     AA
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
                         void
-                  Label : LEFT
-                    $t
               Label : CASE
                 0

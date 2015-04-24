@@ -5,9 +5,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        1
+      1
     Label : THEN
       ;
       Label : ELEMENT
@@ -17,9 +15,7 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            2
+          2
         Label : THEN
           ;
           Label : ELEMENT
@@ -29,9 +25,7 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                3
+              3
             Label : THEN
               ;
               Label : ELEMENT
@@ -41,9 +35,7 @@ Label : CODE
               Label : ELEMENT
                 if
                 Label : CONDITION
-                  (
-                  Label : CODE
-                    4
+                  4
                 Label : THEN
                   ;
                   Label : ELEMENT
@@ -53,9 +45,7 @@ Label : CODE
                   Label : ELEMENT
                     if
                     Label : CONDITION
-                      (
-                      Label : CODE
-                        5
+                      5
                     Label : THEN
                       ;
                       Label : ELEMENT

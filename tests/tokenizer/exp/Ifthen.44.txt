@@ -8,15 +8,13 @@ Label : ELEMENT
     Label : ELEMENT
       if
       Label : CONDITION
-        (
-        Label : CODE
-          !
-          Label : NOT
-            isset
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $a
+        !
+        Label : NOT
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $a
       Label : THEN
         ;
         Label : ELEMENT

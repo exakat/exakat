@@ -4,32 +4,30 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      B
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         $a
-    Label : NAME
-      B
     Label : BLOCK
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            ||
-            Label : RIGHT
-              !
-              Label : NOT
-                C
-                Label : ARGUMENTS
-                  void
-                  Label : ARGUMENT
-                    $c
-            Label : LEFT
-              !
-              Label : NOT
-                $b
+          ||
+          Label : LEFT
+            !
+            Label : NOT
+              $b
+          Label : RIGHT
+            !
+            Label : NOT
+              C
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
+                  $c
         Label : THEN
           ;
           Label : ELEMENT
@@ -43,13 +41,11 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            ->
-            Label : OBJECT
-              $f
-            Label : PROPERTY
-              H
+          ->
+          Label : OBJECT
+            $f
+          Label : PROPERTY
+            H
         Label : THEN
           ;
           Label : ELEMENT
@@ -73,19 +69,17 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            E
-            Label : ARGUMENTS
-              Arguments
-              Label : ARGUMENT
-                $e
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
-                  F
+          E
+          Label : ARGUMENTS
+            Arguments
+            Label : ARGUMENT
+              $e
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $d
+              Label : PROPERTY
+                F
         Label : THEN
           ;
           Label : ELEMENT

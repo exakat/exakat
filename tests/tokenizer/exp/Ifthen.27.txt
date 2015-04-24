@@ -4,21 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     while
-    Label : CONDITION
-      $x
     Label : BLOCK
       Block with While
       Label : ELEMENT
         void
+    Label : CONDITION
+      $x
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          'b'
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
     Label : THEN
       void

@@ -43,7 +43,7 @@ class Sequence extends TokenAuto {
                            );
         
         $yieldOperator = array('T_ECHO', 'T_PRINT', 'T_DOT', 'T_AT', 'T_OBJECT_OPERATOR', 'T_BANG',
-                               'T_DOUBLE_COLON', 'T_COLON', 'T_NEW', 'T_INSTANCEOF', 'T_RETURN',
+                               'T_DOUBLE_COLON', 'T_NEW', 'T_INSTANCEOF', 'T_RETURN',
                                'T_AND', 'T_QUOTE', 'T_DOLLAR', 'T_VAR', 'T_CONST', 'T_COMMA',
                                'T_PROTECTED', 'T_PRIVATE', 'T_PUBLIC', 'T_INC', 'T_DEC', 'T_GLOBAL', 'T_NS_SEPARATOR',
                                'T_GOTO', 'T_STATIC', 'T_OPEN_PARENTHESIS', 'T_ELSE', 'T_ELSEIF', 'T_CLOSE_PARENTHESIS',
@@ -148,7 +148,8 @@ class Sequence extends TokenAuto {
                                'cleanIndex'   => true,
                                );
         $this->checkAuto();
-                
+
+
         // @note ; without no more NEXT
         $this->conditions = array( 0 => array('atom'  => 'Sequence' ));
         

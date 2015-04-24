@@ -6,9 +6,7 @@ Label : ELEMENT
     Label : ELEMENT
       if
       Label : CONDITION
-        (
-        Label : CODE
-          $a
+        $a
       Label : THEN
         ;
         Label : ELEMENT
@@ -44,13 +42,11 @@ Label : ELEMENT
         Label : ELEMENT
           if
           Label : CONDITION
-            (
-            Label : CODE
-              [
-              Label : VARIABLE
-                $d
-              Label : INDEX
-                'R'
+            [
+            Label : VARIABLE
+              $d
+            Label : INDEX
+              'R'
           Label : THEN
             ;
             Label : ELEMENT
@@ -84,21 +80,19 @@ Label : ELEMENT
         Label : ELEMENT
           if
           Label : CONDITION
-            (
-            Label : CODE
-              &&
-              Label : RIGHT
-                ->
-                Label : OBJECT
-                  $g
-                Label : METHOD
-                  Z
-                  Label : ARGUMENTS
+            &&
+            Label : LEFT
+              $f
+            Label : RIGHT
+              ->
+              Label : OBJECT
+                $g
+              Label : METHOD
+                Z
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
                     void
-                    Label : ARGUMENT
-                      void
-              Label : LEFT
-                $f
           Label : THEN
             ;
             Label : ELEMENT
@@ -151,10 +145,10 @@ Label : ELEMENT
                       void
                       Label : ARGUMENT
                         =>
-                        Label : VALUE
-                          'AL'
                         Label : KEY
                           'AK'
+                        Label : VALUE
+                          'AL'
                   Label : ARGUMENT
                     'AJ'
         Label : ELEMENT

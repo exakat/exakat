@@ -5,27 +5,27 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          $b
-        Label : LEFT
-          B
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
+      ==
+      Label : LEFT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
+      Label : RIGHT
+        $b
     Label : THEN
       ;
       Label : ELEMENT
         +=
-        Label : RIGHT
-          $t
         Label : LEFT
           $s
+        Label : RIGHT
+          $t
       Label : ELEMENT
         =
+        Label : LEFT
+          $p
         Label : RIGHT
           (int)
           Label : CAST
@@ -40,50 +40,30 @@ Label : CODE
                   void
                   Label : ARGUMENT
                     $r
-        Label : LEFT
-          $p
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : RIGHT
-              'D'
-            Label : LEFT
-              ->
-              Label : OBJECT
-                $c
-              Label : METHOD
-                C
-                Label : ARGUMENTS
+          ==
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $c
+            Label : METHOD
+              C
+              Label : ARGUMENTS
+                void
+                Label : ARGUMENT
                   void
-                  Label : ARGUMENT
-                    void
+          Label : RIGHT
+            'D'
         Label : THEN
           ;
           Label : ELEMENT
             or
-            Label : RIGHT
-              (
-              Label : CODE
-                =
-                Label : RIGHT
-                  ->
-                  Label : OBJECT
-                    $i
-                  Label : METHOD
-                    I
-                    Label : ARGUMENTS
-                      void
-                      Label : ARGUMENT
-                        void
-                Label : LEFT
-                  [
-                  Label : VARIABLE
-                    $h
             Label : LEFT
               =
+              Label : LEFT
+                $d
               Label : RIGHT
                 ->
                 Label : OBJECT
@@ -102,32 +82,32 @@ Label : CODE
                           $fG
                         Label : CONCAT
                           $gH
-              Label : LEFT
-                $d
-        Label : ELSE
-          Block with else
-          Label : ELEMENT
-            or
             Label : RIGHT
               (
               Label : CODE
                 =
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $h
                 Label : RIGHT
                   ->
                   Label : OBJECT
-                    $o
+                    $i
                   Label : METHOD
-                    N
+                    I
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
                         void
-                Label : LEFT
-                  [
-                  Label : VARIABLE
-                    $n
+        Label : ELSE
+          Block with else
+          Label : ELEMENT
+            or
             Label : LEFT
               =
+              Label : LEFT
+                $j
               Label : RIGHT
                 ->
                 Label : OBJECT
@@ -146,5 +126,21 @@ Label : CODE
                           $lL
                         Label : CONCAT
                           $mM
-              Label : LEFT
-                $j
+            Label : RIGHT
+              (
+              Label : CODE
+                =
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $n
+                Label : RIGHT
+                  ->
+                  Label : OBJECT
+                    $o
+                  Label : METHOD
+                    N
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        void

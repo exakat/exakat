@@ -5,61 +5,55 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          'C'
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            B
+      ==
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          B
+      Label : RIGHT
+        'C'
     Label : THEN
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            D
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $b
-                Label : PROPERTY
-                  E
+          D
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              ->
+              Label : OBJECT
+                $b
+              Label : PROPERTY
+                E
         Label : THEN
           ;
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                !
-                Label : NOT
-                  F
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      ->
-                      Label : OBJECT
-                        $d
-                      Label : PROPERTY
-                        I
-                    Label : ARGUMENT
+              !
+              Label : NOT
+                F
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $d
+                    Label : PROPERTY
+                      I
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
                       [
                       Label : VARIABLE
-                        [
-                        Label : VARIABLE
-                          $c
-                        Label : INDEX
-                          'G'
+                        $c
                       Label : INDEX
-                        'H'
+                        'G'
+                    Label : INDEX
+                      'H'
             Label : THEN
               ;
               Label : ELEMENT
@@ -69,61 +63,55 @@ Label : CODE
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : RIGHT
-            'L'
-          Label : LEFT
-            ->
-            Label : OBJECT
-              $e
-            Label : PROPERTY
-              K
+        ==
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $e
+          Label : PROPERTY
+            K
+        Label : RIGHT
+          'L'
       Label : THEN
         ;
         Label : ELEMENT
           if
           Label : CONDITION
-            (
-            Label : CODE
-              M
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $f
-                  Label : PROPERTY
-                    N
+            M
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $f
+                Label : PROPERTY
+                  N
           Label : THEN
             ;
             Label : ELEMENT
               if
               Label : CONDITION
-                (
-                Label : CODE
-                  !
-                  Label : NOT
-                    O
-                    Label : ARGUMENTS
-                      Arguments
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $h
-                        Label : PROPERTY
-                          R
-                      Label : ARGUMENT
+                !
+                Label : NOT
+                  O
+                  Label : ARGUMENTS
+                    Arguments
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $h
+                      Label : PROPERTY
+                        R
+                    Label : ARGUMENT
+                      [
+                      Label : VARIABLE
                         [
                         Label : VARIABLE
-                          [
-                          Label : VARIABLE
-                            $g
-                          Label : INDEX
-                            'P'
+                          $g
                         Label : INDEX
-                          'Q'
+                          'P'
+                      Label : INDEX
+                        'Q'
               Label : THEN
                 ;
                 Label : ELEMENT
@@ -135,43 +123,39 @@ Label : CODE
         Label : ELEMENT
           if
           Label : CONDITION
-            (
-            Label : CODE
-              T
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $i
-                  Label : PROPERTY
-                    U
+            T
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  $i
+                Label : PROPERTY
+                  U
           Label : THEN
             ;
             Label : ELEMENT
               if
               Label : CONDITION
-                (
-                Label : CODE
-                  V
-                  Label : ARGUMENTS
-                    Arguments
-                    Label : ARGUMENT
-                      ->
-                      Label : OBJECT
-                        $k
-                      Label : PROPERTY
-                        Y
-                    Label : ARGUMENT
+                V
+                Label : ARGUMENTS
+                  Arguments
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $k
+                    Label : PROPERTY
+                      Y
+                  Label : ARGUMENT
+                    [
+                    Label : VARIABLE
                       [
                       Label : VARIABLE
-                        [
-                        Label : VARIABLE
-                          $j
-                        Label : INDEX
-                          'W'
+                        $j
                       Label : INDEX
-                        'X'
+                        'W'
+                    Label : INDEX
+                      'X'
               Label : THEN
                 ;
                 Label : ELEMENT

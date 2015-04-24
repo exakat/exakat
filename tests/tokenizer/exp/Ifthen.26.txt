@@ -5,18 +5,16 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          'b'
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
     Label : THEN
       ;
       Label : ELEMENT
         while
-        Label : CONDITION
-          $x
         Label : BLOCK
           void
+        Label : CONDITION
+          $x

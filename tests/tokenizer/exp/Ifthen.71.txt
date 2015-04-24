@@ -8,13 +8,11 @@ Label : ELEMENT
     Label : ELEMENT
       if
       Label : CONDITION
-        (
-        Label : CODE
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $a
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
       Label : THEN
         ;
         Label : ELEMENT
@@ -34,9 +32,7 @@ Label : ELEMENT
       Label : ELSE
         elseif
         Label : CONDITION
-          (
-          Label : CODE
-            $b
+          $b
         Label : THEN
           ;
           Label : ELEMENT

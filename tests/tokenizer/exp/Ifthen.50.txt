@@ -5,11 +5,9 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          $a
+      !
+      Label : NOT
+        $a
     Label : THEN
       ;
       Label : ELEMENT
@@ -27,13 +25,11 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : RIGHT
-              1
-            Label : LEFT
-              $d
+          ==
+          Label : LEFT
+            $d
+          Label : RIGHT
+            1
         Label : THEN
           ;
           Label : ELEMENT
@@ -51,13 +47,11 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                ==
-                Label : RIGHT
-                  2
-                Label : LEFT
-                  $h
+              ==
+              Label : LEFT
+                $h
+              Label : RIGHT
+                2
             Label : THEN
               ;
               Label : ELEMENT

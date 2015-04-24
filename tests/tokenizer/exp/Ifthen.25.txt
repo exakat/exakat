@@ -5,20 +5,18 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          'b'
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'b'
     Label : THEN
       ;
       Label : ELEMENT
         foreach
-        Label : VALUE
-          $y
         Label : BLOCK
           void
+        Label : VALUE
+          $y
         Label : SOURCE
           $x

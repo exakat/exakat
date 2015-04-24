@@ -5,39 +5,33 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          1
-        Label : LEFT
-          $a
+      ==
+      Label : LEFT
+        $a
+      Label : RIGHT
+        1
     Label : THEN
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : RIGHT
-              2
-            Label : LEFT
-              $a
+          ==
+          Label : LEFT
+            $a
+          Label : RIGHT
+            2
         Label : THEN
           ;
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                !
-                Label : NOT
-                  empty
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $newHash
+              !
+              Label : NOT
+                empty
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $newHash
             Label : THEN
               void
           Label : ELEMENT
@@ -52,7 +46,7 @@ Label : CODE
               false
       Label : ELEMENT
         =
-        Label : RIGHT
-          ''
         Label : LEFT
           $newHash
+        Label : RIGHT
+          ''

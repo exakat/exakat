@@ -4,28 +4,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        4
-    Label : THEN
-      ;
-      Label : ELEMENT
-        A
-
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $c
-      Label : ELEMENT
-        return
-        Label : RETURN
-          void
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      (
-      Label : CODE
-        3
+      3
     Label : THEN
       ;
       Label : ELEMENT
@@ -42,9 +21,24 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        2
+      4
+    Label : THEN
+      ;
+      Label : ELEMENT
+        A
+
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $c
+      Label : ELEMENT
+        return
+        Label : RETURN
+          void
+  Label : ELEMENT
+    if
+    Label : CONDITION
+      2
     Label : THEN
       ;
       Label : ELEMENT
@@ -58,9 +52,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        1
+      1
     Label : THEN
       ;
       Label : ELEMENT

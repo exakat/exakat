@@ -4,9 +4,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $a
+      $a
     Label : THEN
       ;
       Label : ELEMENT
@@ -14,9 +12,7 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $c
+          $c
         Label : THEN
           ;
           Label : ELEMENT
@@ -24,9 +20,7 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                $d
+              $d
             Label : THEN
               ;
               Label : ELEMENT

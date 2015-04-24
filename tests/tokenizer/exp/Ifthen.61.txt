@@ -4,9 +4,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        true
+      true
     Label : THEN
       ;
       Label : ELEMENT
@@ -14,9 +12,7 @@ Label : CODE
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          EMPTY_TRASH_DAYS
+        EMPTY_TRASH_DAYS
       Label : THEN
         ;
         Label : ELEMENT

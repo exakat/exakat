@@ -4,17 +4,13 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        1
+      1
     Label : THEN
       A
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          2
+        2
       Label : THEN
         B
       Label : ELSE

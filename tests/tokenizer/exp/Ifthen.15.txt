@@ -5,9 +5,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $x
+      $x
     Label : THEN
       ;
       Label : ELEMENT
@@ -15,9 +13,7 @@ Label : CODE
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          $w
+        $w
       Label : THEN
         ;
         Label : ELEMENT

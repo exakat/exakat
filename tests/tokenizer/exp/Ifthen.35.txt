@@ -5,45 +5,41 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $a
+      $a
     Label : THEN
       ;
       Label : ELEMENT
         foreach
-        Label : VALUE
-          =>
-          Label : VALUE
-            $d
-          Label : KEY
-            $c
         Label : BLOCK
           ;
           Label : ELEMENT
             ++
             Label : POSTPLUSPLUS
               $e
+        Label : VALUE
+          =>
+          Label : KEY
+            $c
+          Label : VALUE
+            $d
         Label : SOURCE
           $b
   Label : ELEMENT
     foreach
-    Label : VALUE
-      $i
     Label : BLOCK
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            $j
+          $j
         Label : THEN
           ;
           Label : ELEMENT
             continue
             Label : LEVEL
               void
+    Label : VALUE
+      $i
     Label : SOURCE
       $h
   Label : ELEMENT
