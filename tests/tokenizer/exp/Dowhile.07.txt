@@ -7,9 +7,7 @@ Label : CODE
     Label : BLOCK
       if
       Label : CONDITION
-        (
-        Label : CODE
-          $x
+        $x
       Label : THEN
         ;
         Label : ELEMENT

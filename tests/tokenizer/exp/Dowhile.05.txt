@@ -6,17 +6,17 @@ Label : CODE
     do
     Label : BLOCK
       &&
-      Label : RIGHT
-        ++
-        Label : POSTPLUSPLUS
-          $y
       Label : LEFT
         ++
         Label : POSTPLUSPLUS
           $x
+      Label : RIGHT
+        ++
+        Label : POSTPLUSPLUS
+          $y
     Label : CONDITION
       <
-      Label : RIGHT
-        4
       Label : LEFT
         $x
+      Label : RIGHT
+        4

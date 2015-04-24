@@ -5,9 +5,11 @@ Label : CODE
   Label : ELEMENT
     do
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         =
+        Label : LEFT
+          $a
         Label : RIGHT
           ->
           Label : OBJECT
@@ -20,8 +22,6 @@ Label : CODE
                 $e
               Label : ARGUMENT
                 $d
-        Label : LEFT
-          $a
     Label : CONDITION
       !
       Label : NOT

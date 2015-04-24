@@ -35,7 +35,8 @@ class _Dowhile extends TokenAuto {
                                               'atom'    => 'none'),
                                    3 => array('token'   => 'T_WHILE',
                                               'dowhile' => true),
-                                   4 => array('token'   => 'T_OPEN_PARENTHESIS'),
+                                   4 => array('token'   => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'While')),
                                    5 => array('atom'    => 'yes'),
                                    6 => array('token'   => 'T_CLOSE_PARENTHESIS')
         );
@@ -57,7 +58,8 @@ class _Dowhile extends TokenAuto {
                                    1 => array('atom'    => 'yes'),
                                    2 => array('token'   => 'T_WHILE',
                                               'dowhile' => true),
-                                   3 => array('token'   => 'T_OPEN_PARENTHESIS'),
+                                   3 => array('token'   => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'While')),
                                    4 => array('atom'    => 'yes'),
                                    5 => array('token'   => 'T_CLOSE_PARENTHESIS')
         );
@@ -80,7 +82,8 @@ class _Dowhile extends TokenAuto {
                                    3 => array('token' => 'T_CLOSE_CURLY'),
                                    4 => array('token' => 'T_WHILE',
                                               'dowhile' => true),
-                                   5 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   5 => array('token' => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'While')),
                                    6 => array('atom'  => 'yes'),
                                    7 => array('token' => 'T_CLOSE_PARENTHESIS')
         );

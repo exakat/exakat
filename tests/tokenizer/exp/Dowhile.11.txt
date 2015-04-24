@@ -7,9 +7,7 @@ Label : CODE
     Label : BLOCK
       if
       Label : CONDITION
-        (
-        Label : CODE
-          1
+        1
       Label : THEN
         ;
         Label : ELEMENT
@@ -17,7 +15,7 @@ Label : CODE
           Label : LEVEL
             void
       Label : ELSE
-        {
+        ;
         Label : ELEMENT
           break
           Label : LEVEL

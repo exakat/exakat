@@ -21,8 +21,6 @@ Label : CODE
                   1
         Label : CONDITION
           ===
-          Label : RIGHT
-            0
           Label : LEFT
             B
             Label : ARGUMENTS
@@ -39,5 +37,7 @@ Label : CODE
                       void
               Label : ARGUMENT
                 'C'
+          Label : RIGHT
+            0
     Label : CONDITION
       $c
