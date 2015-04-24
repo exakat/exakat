@@ -4,13 +4,15 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       clone
       Label : CLONE
-        y
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
+        (
+        Label : CODE
+          y
+          Label : ARGUMENTS
             void
-    Label : LEFT
-      $x
+            Label : ARGUMENT
+              void

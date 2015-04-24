@@ -4,17 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       clone
       Label : CLONE
-        ::
-        Label : CLASS
-          y
-        Label : METHOD
-          w
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
+        (
+        Label : CODE
+          ::
+          Label : CLASS
+            y
+          Label : METHOD
+            w
+            Label : ARGUMENTS
               void
-    Label : LEFT
-      $x
+              Label : ARGUMENT
+                void

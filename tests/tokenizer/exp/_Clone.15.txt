@@ -4,6 +4,8 @@ Label : CODE
   ;
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -11,6 +13,6 @@ Label : CODE
         Label : ARGUMENT
           clone
           Label : CLONE
-            $a
-    Label : LEFT
-      $x
+            (
+            Label : CODE
+              $a

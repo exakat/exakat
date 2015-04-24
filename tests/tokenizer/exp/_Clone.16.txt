@@ -4,12 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     function
+    Label : NAME
+      c
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
-    Label : NAME
-      c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -26,13 +26,11 @@ Label : CODE
                   $b
   Label : ELEMENT
     function
+    Label : NAME
+      d
     Label : ARGUMENTS
       void
       Label : ARGUMENT
         void
-    Label : NAME
-      d
     Label : BLOCK
-      {
-      Label : ELEMENT
-        void
+      void
