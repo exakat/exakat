@@ -5,9 +5,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        2
+      2
     Label : THEN
       ;
       Label : ELEMENT
@@ -24,18 +22,18 @@ Label : CODE
             $x
           Label : INDEX
             ->
+            Label : PROPERTY
+              p
             Label : OBJECT
               ->
-              Label : OBJECT
-                $c
               Label : METHOD
                 m
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     void
-            Label : PROPERTY
-              p
+              Label : OBJECT
+                $c
   Label : ELEMENT
     Concatenation
     Label : CONCAT

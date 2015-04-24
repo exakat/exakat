@@ -8,6 +8,10 @@ Label : CODE
       void
       Label : ARGUMENT
         function
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $a
         Label : NAME
           
         Label : BLOCK
@@ -16,7 +20,3 @@ Label : CODE
             return
             Label : RETURN
               1
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $a

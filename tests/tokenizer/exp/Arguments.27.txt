@@ -3,6 +3,12 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
     Label : BLOCK
       Block with Foreach
       Label : ELEMENT
@@ -33,6 +39,8 @@ Label : CODE
                   Arguments
                   Label : ARGUMENT
                     ::
+                    Label : CLASS
+                      K
                     Label : METHOD
                       L
                       Label : ARGUMENTS
@@ -53,8 +61,6 @@ Label : CODE
                                 O
                         Label : ARGUMENT
                           $g
-                    Label : CLASS
-                      K
                   Label : ARGUMENT
                     'J'
                   Label : ARGUMENT
@@ -71,12 +77,6 @@ Label : CODE
                     $d
         Label : ELEMENT
           B
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
     Label : SOURCE
       [
       Label : VARIABLE

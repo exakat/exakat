@@ -4,13 +4,11 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !=
-        Label : RIGHT
-          'B'
-        Label : LEFT
-          $a
+      !=
+      Label : RIGHT
+        'B'
+      Label : LEFT
+        $a
     Label : THEN
       ;
       Label : ELEMENT

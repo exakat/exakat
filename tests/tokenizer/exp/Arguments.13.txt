@@ -21,11 +21,9 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          $j
+      !
+      Label : NOT
+        $j
     Label : THEN
       ;
       Label : ELEMENT
@@ -43,7 +41,7 @@ Label : CODE
         Label : LEFT
           $k
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         =
         Label : RIGHT

@@ -7,47 +7,45 @@ Label : CODE
     Label : CONDITION
       (
       Label : CODE
-        (
-        Label : CODE
-          ||
-          Label : RIGHT
-            (
-            Label : CODE
-              &&
-              Label : RIGHT
-                (
-                Label : CODE
-                  ||
-                  Label : RIGHT
-                    [
-                    Label : VARIABLE
-                      $h
-                    Label : INDEX
-                      'i'
-                  Label : LEFT
-                    [
-                    Label : VARIABLE
-                      $f
-                    Label : INDEX
-                      'g'
-              Label : LEFT
-                [
-                Label : VARIABLE
+        ||
+        Label : RIGHT
+          (
+          Label : CODE
+            &&
+            Label : RIGHT
+              (
+              Label : CODE
+                ||
+                Label : RIGHT
                   [
                   Label : VARIABLE
-                    $C
+                    $h
                   Label : INDEX
-                    'd'
-                Label : INDEX
-                  'e'
-          Label : LEFT
-            (
-            Label : CODE
+                    'i'
+                Label : LEFT
+                  [
+                  Label : VARIABLE
+                    $f
+                  Label : INDEX
+                    'g'
+            Label : LEFT
               [
               Label : VARIABLE
-                $a
+                [
+                Label : VARIABLE
+                  $C
+                Label : INDEX
+                  'd'
               Label : INDEX
-                'b'
+                'e'
+        Label : LEFT
+          (
+          Label : CODE
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'b'
     Label : THEN
       ;
       Label : ELEMENT

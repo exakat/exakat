@@ -6,13 +6,13 @@ Label : CODE
     =
     Label : RIGHT
       instanceof
-      Label : CLASS
-        ->
-        Label : OBJECT
-          $z
-        Label : PROPERTY
-          c
       Label : VARIABLE
         $y
+      Label : CLASS
+        ->
+        Label : PROPERTY
+          c
+        Label : OBJECT
+          $z
     Label : LEFT
       $x

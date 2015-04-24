@@ -36,26 +36,24 @@ Label : ELEMENT
                   void
                   Label : ARGUMENT
                     ->
-                    Label : OBJECT
-                      $c
                     Label : PROPERTY
                       G
+                    Label : OBJECT
+                      $c
               Label : LEFT
                 $b
         Label : ELEMENT
           if
           Label : CONDITION
-            (
-            Label : CODE
-              empty
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $a
-                  Label : PROPERTY
-                    D
+            empty
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                ->
+                Label : PROPERTY
+                  D
+                Label : OBJECT
+                  $a
           Label : THEN
             ;
             Label : ELEMENT

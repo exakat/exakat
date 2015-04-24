@@ -12,10 +12,10 @@ Label : CODE
           [
           Label : VARIABLE
             ->
-            Label : OBJECT
-              $x
             Label : PROPERTY
               var
+            Label : OBJECT
+              $x
           Label : INDEX
             3
         Label : INDEX

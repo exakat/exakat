@@ -26,10 +26,10 @@ Label : CODE
                       [
                       Label : VARIABLE
                         ->
-                        Label : OBJECT
-                          $k
                         Label : PROPERTY
                           l
+                        Label : OBJECT
+                          $k
                       Label : INDEX
                         'm'
                     Label : CONCAT
@@ -46,10 +46,10 @@ Label : CODE
                     [
                     Label : VARIABLE
                       ->
-                      Label : OBJECT
-                        $f
                       Label : PROPERTY
                         g
+                      Label : OBJECT
+                        $f
                     Label : INDEX
                       'h'
                   Label : ARGUMENT
@@ -66,10 +66,10 @@ Label : CODE
                 [
                 Label : VARIABLE
                   ->
-                  Label : OBJECT
-                    $b
                   Label : PROPERTY
                     c
+                  Label : OBJECT
+                    $b
                 Label : INDEX
                   'd'
       Label : THEN
@@ -78,10 +78,10 @@ Label : CODE
         [
         Label : VARIABLE
           ->
-          Label : OBJECT
-            $p
           Label : PROPERTY
             q
+          Label : OBJECT
+            $p
         Label : INDEX
           'r'
     Label : LEFT

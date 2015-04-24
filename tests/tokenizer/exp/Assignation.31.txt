@@ -5,21 +5,19 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ===
-        Label : RIGHT
-          ::
-          Label : CLASS
-            C
-          Label : CONSTANT
-            D
-        Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            B
+      ===
+      Label : RIGHT
+        ::
+        Label : CLASS
+          C
+        Label : CONSTANT
+          D
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          B
     Label : THEN
       ;
       Label : ELEMENT
@@ -29,21 +27,19 @@ Label : CODE
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          ===
-          Label : RIGHT
-            ::
-            Label : CLASS
-              F
-            Label : CONSTANT
-              G
-          Label : LEFT
-            ->
-            Label : OBJECT
-              $c
-            Label : PROPERTY
-              E
+        ===
+        Label : RIGHT
+          ::
+          Label : CLASS
+            F
+          Label : CONSTANT
+            G
+        Label : LEFT
+          ->
+          Label : OBJECT
+            $c
+          Label : PROPERTY
+            E
       Label : THEN
         ;
         Label : ELEMENT
@@ -75,33 +71,31 @@ Label : CODE
         Label : ELEMENT
           if
           Label : CONDITION
-            (
-            Label : CODE
-              !==
-              Label : RIGHT
-                0
-              Label : LEFT
-                I
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    K
+            !==
+            Label : RIGHT
+              0
+            Label : LEFT
+              I
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  K
+                  Label : ARGUMENTS
+                    void
+                    Label : ARGUMENT
+                      $h
+                Label : ARGUMENT
+                  $g
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $f
+                  Label : METHOD
+                    J
                     Label : ARGUMENTS
                       void
                       Label : ARGUMENT
-                        $h
-                  Label : ARGUMENT
-                    $g
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $f
-                    Label : METHOD
-                      J
-                      Label : ARGUMENTS
                         void
-                        Label : ARGUMENT
-                          void
           Label : THEN
             ;
             Label : ELEMENT
@@ -123,7 +117,7 @@ Label : CODE
           Label : LEFT
             $d
       Label : ELSE
-        {
+        ;
         Label : ELEMENT
           =
           Label : RIGHT

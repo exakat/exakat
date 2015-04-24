@@ -16,14 +16,14 @@ Label : CODE
             [
             Label : VARIABLE
               ->
-              Label : OBJECT
-                $y
               Label : METHOD
                 z
                 Label : ARGUMENTS
                   void
                   Label : ARGUMENT
                     void
+              Label : OBJECT
+                $y
             Label : INDEX
               3
         Label : ARGUMENT

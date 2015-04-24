@@ -4,13 +4,11 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        [
-        Label : VARIABLE
-          $a
-        Label : INDEX
-          'B'
+      [
+      Label : VARIABLE
+        $a
+      Label : INDEX
+        'B'
     Label : THEN
       ;
       Label : ELEMENT

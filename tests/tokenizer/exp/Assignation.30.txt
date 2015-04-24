@@ -33,15 +33,13 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                H
-                Label : ARGUMENTS
-                  Arguments
-                  Label : ARGUMENT
-                    'I'
-                  Label : ARGUMENT
-                    $f
+              H
+              Label : ARGUMENTS
+                Arguments
+                Label : ARGUMENT
+                  'I'
+                Label : ARGUMENT
+                  $f
             Label : THEN
               ;
               Label : ELEMENT
@@ -51,7 +49,7 @@ Label : CODE
                 Label : LEFT
                   $g
             Label : ELSE
-              {
+              ;
               Label : ELEMENT
                 =
                 Label : RIGHT
