@@ -16,14 +16,14 @@ Label : CODE
             ?
             Label : CONDITION
               !==
-              Label : RIGHT
-                'c'
               Label : LEFT
                 ->
                 Label : OBJECT
                   $a
                 Label : PROPERTY
                   b
+              Label : RIGHT
+                'c'
             Label : THEN
               Concatenation
               Label : CONCAT

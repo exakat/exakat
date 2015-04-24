@@ -20,6 +20,8 @@ Label : CODE
                 __FILE__
   Label : ELEMENT
     =
+    Label : LEFT
+      $x
     Label : RIGHT
       array
       Label : ARGUMENTS
@@ -44,5 +46,3 @@ Label : CODE
                     void
                     Label : ARGUMENT
                       __FILE__
-    Label : LEFT
-      $x
