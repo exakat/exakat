@@ -47,7 +47,7 @@ class _Use extends TokenAuto {
                                               'atom'     => 'none')
                                  );
         
-        $this->actions = array('to_use'       => true,
+        $this->actions = array('toUse'        => true,
                                'atom'         => 'Use',
                                'makeSequence' => 'it' );
         $this->checkAuto();
@@ -60,7 +60,7 @@ class _Use extends TokenAuto {
                                               'atom'  => 'none')
                                  );
         
-        $this->actions = array('to_use_const' => true,
+        $this->actions = array('toUseConst'   => true,
                                'atom'         => 'Use',
                                'cleanIndex'   => true,
                                'makeSequence' => 'it'
@@ -75,7 +75,7 @@ class _Use extends TokenAuto {
                                               'atom'  => 'none')
                                  );
         
-        $this->actions = array('to_use'       => true,
+        $this->actions = array('toUse'        => true,
                                'atom'         => 'Use',
                                'makeSequence' => 'it' );
         $this->checkAuto();
@@ -83,7 +83,9 @@ class _Use extends TokenAuto {
     // use A { B as C; }
         $this->conditions = array( 0 => array('token' => _Use::$operators),
                                    1 => array('atom'  => array('Nsname', 'Identifier')),
-                                   2 => array('token' => 'T_OPEN_CURLY'),
+                                   2 => array('token' => 'T_OPEN_CURLY',
+                                              'property' => array('association' => 'Use')
+                                   ),
                                    3 => array('atom'  => 'Sequence'),
                                    4 => array('token' => 'T_CLOSE_CURLY'),
                                  );

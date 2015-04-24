@@ -31,7 +31,8 @@ class _For extends TokenAuto {
         // for (;;) ; (Empty loop)
         $this->conditions = array(  0 => array('token' => _For::$operators,
                                                'atom'  => 'none'),
-                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                               'property' => array('association' => 'For')),
                                     2 => array('atom'  => 'yes'),
                                     3 => array('token' => 'T_SEMICOLON'),
                                     4 => array('atom'  => 'yes'),
@@ -49,7 +50,8 @@ class _For extends TokenAuto {
         // for (;;) $x++; (one line instruction, with or without )
         $this->conditions = array(  0 => array('token'     => _For::$operators,
                                                'atom'      => 'none'),
-                                    1 => array('token'     => 'T_OPEN_PARENTHESIS'),
+                                    1 => array('token'     => 'T_OPEN_PARENTHESIS',
+                                               'property'  => array('association' => 'For')),
                                     2 => array('atom'      => 'yes'),
                                     3 => array('token'     => 'T_SEMICOLON'),
                                     4 => array('atom'      => 'yes'),
@@ -68,7 +70,8 @@ class _For extends TokenAuto {
     // @doc for(a; b; c) { code }
         $this->conditions = array(  0 => array('token' => _For::$operators,
                                                'atom'  => 'none'),
-                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                               'property' => array('association' => 'For')),
                                     2 => array('atom'  => 'yes'),
                                     3 => array('token' => 'T_SEMICOLON'),
                                     4 => array('atom'  => 'yes'),
@@ -100,7 +103,8 @@ class _For extends TokenAuto {
     // @doc for(a; b; c) { code }
         $this->conditions = array(  0 => array('token' => _For::$operators,
                                                'atom'  => 'none'),
-                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                               'property' => array('association' => 'For')),
                                     2 => array('atom'  => 'yes'),
                                     3 => array('token' => 'T_SEMICOLON'),
                                     4 => array('atom'  => 'yes'),
@@ -128,7 +132,8 @@ class _For extends TokenAuto {
     // @doc for(a; b; c) : code endfor
         $this->conditions = array(  0 => array('token' => _For::$operators,
                                                'atom' => 'none'),
-                                    1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                    1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                               'property' => array('association' => 'For')),
                                     2 => array('atom' => 'yes'),
                                     3 => array('token' => 'T_SEMICOLON'),
                                     4 => array('atom' => 'yes'),
@@ -162,7 +167,8 @@ class _For extends TokenAuto {
     // @doc for(a; b; c) : code ; endfor
         $this->conditions = array( 0  => array('token'  => _For::$operators,
                                                'atom'   => 'none'),
-                                   1   => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   1   => array('token' => 'T_OPEN_PARENTHESIS',
+                                               'property' => array('association' => 'For')),
                                    2   => array('atom'  => 'yes'),
                                    3   => array('token' => 'T_SEMICOLON'),
                                    4   => array('atom'  => 'yes'),

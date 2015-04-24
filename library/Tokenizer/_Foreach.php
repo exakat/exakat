@@ -36,7 +36,8 @@ class _Foreach extends TokenAuto {
         // foreach(); (empty)
         $this->conditions = array( 0 => array('token' => _Foreach::$operators,
                                               'atom'  => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'Foreach')),
                                    2 => array('atom'  => $operands),
                                    3 => array('token' => 'T_AS'),
                                    4 => array('atom'  => $blindVariables),
@@ -51,7 +52,8 @@ class _Foreach extends TokenAuto {
         // foreach() $x++; (one instruction)
         $this->conditions = array( 0 => array('token'   => _Foreach::$operators,
                                               'atom'    => 'none'),
-                                   1 => array('token'   => 'T_OPEN_PARENTHESIS'),
+                                   1 => array('token'   => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'Foreach')),
                                    2 => array('atom'    => $operands),
                                    3 => array('token'   => 'T_AS'),
                                    4 => array('atom'    => $blindVariables),
@@ -71,7 +73,8 @@ class _Foreach extends TokenAuto {
     // @doc foreach($x as $y) { code }
         $this->conditions = array( 0 => array('token' => _Foreach::$operators,
                                               'atom'  => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'Foreach')),
                                    2 => array('atom'  => $operands),
                                    3 => array('token' => 'T_AS'),
                                    4 => array('atom'  => $blindVariables),
@@ -96,36 +99,11 @@ class _Foreach extends TokenAuto {
                                );
         $this->checkAuto();
 
-/*
-    // @doc foreach($x as $y) { empty }
-        $this->conditions = array( 0 => array('token' => _Foreach::$operators,
-                                              'atom'  => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
-                                   2 => array('atom'  => $operands),
-                                   3 => array('token' => 'T_AS'),
-                                   4 => array('atom'  => $blindVariables),
-                                   5 => array('token' => 'T_CLOSE_PARENTHESIS'),
-                                   6 => array('atom'  => 'Sequence'),
-        );
-        
-        $this->actions = array('transform'    => array(1 => 'DROP',
-                                                       2 => 'SOURCE',
-                                                       3 => 'DROP',
-                                                       4 => 'VALUE',
-                                                       5 => 'DROP',
-                                                       6 => 'BLOCK',
-                                                      ),
-                               'atom'         => 'Foreach',
-                               'cleanIndex'   => true,
-                               'makeSequence' => 'it'
-                               );
-        $this->checkAuto();
-*/
-
     // @doc foreach($a as $b) : code endforeach
         $this->conditions = array( 0  => array('token' => _Foreach::$operators,
                                                'atom' => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'Foreach')),
                                    2 => array('atom'  => $operands),
                                    3 => array('token' => 'T_AS'),
                                    4 => array('atom'  => $blindVariables),
@@ -144,7 +122,8 @@ class _Foreach extends TokenAuto {
     // @doc foreach($a as $b) : code endforeach
         $this->conditions = array( 0  => array('token' => _Foreach::$operators,
                                                'atom' => 'none'),
-                                   1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                   1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'Foreach')),
                                    2 => array('atom'  => $operands),
                                    3 => array('token' => 'T_AS'),
                                    4 => array('atom'  => $blindVariables),
@@ -174,7 +153,8 @@ class _Foreach extends TokenAuto {
     // @doc foreach($a as $b) : code ; endforeach
         $this->conditions = array( 0 => array('token'  => _Foreach::$operators,
                                               'atom'   => 'none'),
-                                   1 => array('token'  => 'T_OPEN_PARENTHESIS'),
+                                   1 => array('token'  => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'Foreach')),
                                    2 => array('atom'   => $operands),
                                    3 => array('token'  => 'T_AS'),
                                    4 => array('atom'   => $blindVariables),

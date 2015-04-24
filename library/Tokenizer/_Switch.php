@@ -31,9 +31,10 @@ class _Switch extends TokenAuto {
         // switch ( $cdt ) Block
         $this->conditions = array(0 => array('token' => _Switch::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('token' => array('T_OPEN_PARENTHESIS')),
+                                  1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                             'property' => array('association' => 'Switch')),
                                   2 => array('atom'  => 'yes'),
-                                  3 => array('token' => array('T_CLOSE_PARENTHESIS')),
+                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token' => 'T_OPEN_CURLY'),
                                   5 => array('atom'  => array('SequenceCaseDefault', 'Void')),
                                   6 => array('token' => 'T_CLOSE_CURLY')
@@ -54,9 +55,10 @@ class _Switch extends TokenAuto {
         // switch ( $cdt ) Block
         $this->conditions = array(0 => array('token' => _Switch::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('token' => array('T_OPEN_PARENTHESIS')),
+                                  1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                             'property' => array('association' => 'Switch')),
                                   2 => array('atom'  => 'yes'),
-                                  3 => array('token' => array('T_CLOSE_PARENTHESIS')),
+                                  3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('atom'  => 'Sequence')
         );
         
@@ -72,11 +74,12 @@ class _Switch extends TokenAuto {
         // alternative syntax
         $this->conditions = array(0 => array('token' => _Switch::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                             'property' => array('association' => 'Switch')),
                                   2 => array('atom'  => 'yes'),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token' => 'T_COLON',
-                                              'property' => array('relatedAtom' => 'Switch')),
+                                             'property' => array('relatedAtom' => 'Switch')),
                                   5 => array('atom'  => 'SequenceCaseDefault'),
                                   6 => array('token' => 'T_ENDSWITCH'),
         );

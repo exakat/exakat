@@ -31,7 +31,8 @@ class _While extends TokenAuto {
          // While( condition ) ;
         $this->conditions = array( 0 => array('token'     => _While::$operators,
                                               'dowhile'   => false),
-                                   1 => array('token'     => 'T_OPEN_PARENTHESIS'),
+                                   1 => array('token'     => 'T_OPEN_PARENTHESIS',
+                                              'property'  => array('association' => 'While')),
                                    2 => array('atom'      => 'yes'),
                                    3 => array('token'     => 'T_CLOSE_PARENTHESIS'),
                                    4 => array('token'     => array('T_SEMICOLON', 'T_CLOSE_TAG'),
@@ -46,7 +47,8 @@ class _While extends TokenAuto {
          //  syntax   While() $x++;
         $this->conditions = array( 0 => array('token'      => _While::$operators,
                                               'dowhile'    => false),
-                                   1 => array('token'      => 'T_OPEN_PARENTHESIS'),
+                                   1 => array('token'      => 'T_OPEN_PARENTHESIS',
+                                              'property'   => array('association' => 'While')),
                                    2 => array('atom'       => 'yes'),
                                    3 => array('token'      => 'T_CLOSE_PARENTHESIS'),
                                    4 => array('atom'       => 'yes',
@@ -60,12 +62,13 @@ class _While extends TokenAuto {
         $this->checkAuto();
         
          //  While( ) {}
-       $this->conditions = array( 0 => array('token'   => _While::$operators,
-                                             'dowhile' => false),
-                                  1 => array('token'   => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('atom'    => 'yes'),
-                                  3 => array('token'   => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('atom'    => array('Sequence', 'Void')),
+       $this->conditions = array( 0 => array('token'     => _While::$operators,
+                                             'dowhile'   => false),
+                                  1 => array('token'     => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'While')),
+                                  2 => array('atom'      => 'yes'),
+                                  3 => array('token'     => 'T_CLOSE_PARENTHESIS'),
+                                  4 => array('atom'      => array('Sequence', 'Void')),
         );
         
         $this->actions = array('transform'    => array(  1 => 'DROP',
@@ -78,14 +81,15 @@ class _While extends TokenAuto {
         $this->checkAuto();
         
          //  While( ) { normal code ; }
-       $this->conditions = array( 0 => array('token'   => _While::$operators,
-                                             'dowhile' => false),
-                                  1 => array('token'   => 'T_OPEN_PARENTHESIS'),
-                                  2 => array('atom'    => 'yes'),
-                                  3 => array('token'   => 'T_CLOSE_PARENTHESIS'),
-                                  4 => array('token'   => 'T_OPEN_CURLY'),
-                                  5 => array('atom'    => 'yes'),
-                                  6 => array('token'   => 'T_CLOSE_CURLY'),
+       $this->conditions = array( 0 => array('token'     => _While::$operators,
+                                             'dowhile'   => false),
+                                  1 => array('token'     => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'While')),
+                                  2 => array('atom'      => 'yes'),
+                                  3 => array('token'     => 'T_CLOSE_PARENTHESIS'),
+                                  4 => array('token'     => 'T_OPEN_CURLY'),
+                                  5 => array('atom'      => 'yes'),
+                                  6 => array('token'     => 'T_CLOSE_CURLY'),
         );
         
         $this->actions = array('transform'    => array(  1 => 'DROP',
@@ -103,7 +107,8 @@ class _While extends TokenAuto {
         // alternative syntax While( ) : endwhile
         $this->conditions = array(0 => array('token'   => _While::$operators,
                                              'dowhile' => false),
-                                  1 => array('token'   => 'T_OPEN_PARENTHESIS'),
+                                  1 => array('token'   => 'T_OPEN_PARENTHESIS',
+                                              'property' => array('association' => 'While')),
                                   2 => array('atom'    => 'yes'),
                                   3 => array('token'   => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token'   => 'T_COLON',

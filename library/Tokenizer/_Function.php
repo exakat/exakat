@@ -32,12 +32,15 @@ class _Function extends TokenAuto {
         $this->conditions = array(0 => array('token' => _Function::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
-                                  2 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  2 => array('token' => 'T_OPEN_PARENTHESIS',
+//                                             'property' => array('association' => 'Function')
+                                             ),
                                   3 => array('atom'  => 'Arguments'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   5 => array('token' => 'T_OPEN_CURLY',
                                              'atom'  => 'none',
-                                             'property' => array('association' => 'Function')),
+                                             'property' => array('association' => 'Function')
+                                             ),
                                   6 => array('atom'  => array('Sequence', 'Void')),
                                   7 => array('token' => 'T_CLOSE_CURLY'),
         );
@@ -60,7 +63,9 @@ class _Function extends TokenAuto {
         $this->conditions = array(0 => array('token' =>  _Function::$operators,
                                              'atom'  => 'none'),
                                   1 => array('atom'  => array('Identifier', 'Boolean', 'Null')),
-                                  2 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  2 => array('token' => 'T_OPEN_PARENTHESIS',
+//                                             'property' => array('association' => 'Function')
+                                             ),
                                   3 => array('atom'  => 'Arguments'),
                                   4 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   5 => array('token' => 'T_SEMICOLON',
@@ -81,11 +86,14 @@ class _Function extends TokenAuto {
         // lambda function (no name)
         $this->conditions = array(0 => array('token'    =>  _Function::$operators,
                                              'atom'     => 'none'),
-                                  1 => array('token'    => 'T_OPEN_PARENTHESIS'),
+                                  1 => array('token'    => 'T_OPEN_PARENTHESIS',
+//                                             'property' => array('association' => 'Function')
+                                             ),
                                   2 => array('atom'     => 'Arguments'),
                                   3 => array('token'    => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token'    => 'T_OPEN_CURLY',
-                                             'property' => array('association' => 'Function')),
+                                             'property' => array('association' => 'Function')
+                                             ),
                                   5 => array('atom'     => array('Sequence', 'Void')),
                                   6 => array('token'    => 'T_CLOSE_CURLY')
         );
@@ -100,7 +108,9 @@ class _Function extends TokenAuto {
         // lambda function ($x) use ($y)
         $this->conditions = array(0  => array('token' =>  _Function::$operators,
                                               'atom'  => 'none'),
-                                  1  => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  1  => array('token' => 'T_OPEN_PARENTHESIS',
+//                                              'property' => array('association' => 'Function')
+                                              ),
                                   2  => array('atom'  => 'Arguments'),
                                   3  => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   4  => array('token' => 'T_USE'),

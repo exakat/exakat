@@ -20,10 +20,7 @@
  *
 */
 
-
 namespace Tasks;
-
-//use Everyman\Neo4j\Client;
 
 class Load implements Tasks {
     private $log    = null;
@@ -430,37 +427,7 @@ class Load implements Tasks {
                           isset($tokens[$id + 1]) &&
                           is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
-                      /*
-                    if ($previous->getProperty('code') == ':' ||
-                       ($previous->getProperty('code') == '{' &&
-                        isset($tokens[$id + 2]) &&
-                        is_string($tokens[$id + 2]) &&
-                        $tokens[$id + 2] == '}')
-                       ) {
-                        $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_VOID')
-                                                      ->setProperty('code', 'void')
-                                                      ->setProperty('fullcode', ' ')
-                                                      ->setProperty('line', $line)
-                                                      ->setProperty('modifiedBy', 'bin/load24b')
-                                                      ->setProperty('atom', 'Void')
-                                                      ->save();
-                        $previous->relateTo($T[$Tid], 'NEXT')->save();
-                        $previous = $T[$Tid];
-
-                        $Tid++;
-                    }
-                
-                    if ( !in_array($previous->getProperty('code'), array(';', '{'))) {
-                        $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_SEMICOLON')
-                                                      ->setProperty('code', ';')
-                                                      ->setProperty('line', $line)
-                                                      ->setProperty('modifiedBy', 'bin/load24')
-                                                      ->save();
-                        $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
-
-                        $previous->relateTo($T[$Tid], 'NEXT')->save();
-                        $previous = $T[$Tid];
-                    }*/
+                          // Just skip this. 
                     $id++;
                     continue;
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
@@ -784,9 +751,13 @@ class Load implements Tasks {
                                                   ->setProperty('code', $token)
                                                   ->setProperty('line', $line)
                                                   ->save();
-                    $regexIndex['Parenthesis']->relateTo($T[$Tid], 'INDEXED')->save();
-                    $regexIndex['ArgumentsNoComma']->relateTo($T[$Tid], 'INDEXED')->save();
-                    $regexIndex['Typehint']->relateTo($T[$Tid], 'INDEXED')->save();
+                    if ($type = $this->process_parenthesis($token_value)) {
+                        $T[$Tid]->setProperty('association', $type)->save();
+                    } else {
+                        $regexIndex['Parenthesis']->relateTo($T[$Tid], 'INDEXED')->save();
+                        $regexIndex['ArgumentsNoComma']->relateTo($T[$Tid], 'INDEXED')->save();
+                        $regexIndex['Typehint']->relateTo($T[$Tid], 'INDEXED')->save();
+                    }
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
@@ -804,12 +775,16 @@ class Load implements Tasks {
                 } elseif ( ($tokens[$id] == '(' || $tokens[$id] == ';') &&
                                 isset($tokens[$id + 1]) && is_string($tokens[$id + 1]) &&
                                 ( $tokens[$id + 1] == ';' || $tokens[$id + 1] == ')')) {
-                        // This must be after the processing of ( and ) (right above)
+                        // This must be after the processing of case with ( and ) (right above)
                         $T[$Tid] = $this->client->makeNode()->setProperty('token', $this->php->getTokenName($token))
                                                       ->setProperty('code', $token)
                                                       ->setProperty('line', $line)
                                                       ->setProperty('modifiedBy', 'bin/load18a')
                                                       ->save();
+                        // ';' will not be processed by process_parenthesis
+                        if ($type = $this->process_parenthesis($token_value)) {
+                            $T[$Tid]->setProperty('association', $type)->save();
+                        } 
 
                         $regexIndex['Sequence']->relateTo($T[$Tid], 'INDEXED')->save();
                         $previous->relateTo($T[$Tid], 'NEXT')->save();
@@ -939,6 +914,9 @@ class Load implements Tasks {
                                                   ->setProperty('code', $token)
                                                   ->setProperty('line', $line)
                                                   ->save();
+                    if ($type = $this->process_parenthesis($token_value)) {
+                        $T[$Tid]->setProperty('association', $type)->save();
+                    } 
 
                     $previous->relateTo($T[$Tid], 'NEXT')->save();
                     $previous = $T[$Tid];
@@ -1051,13 +1029,17 @@ class Load implements Tasks {
             if ($type = $this->process_blocks($token_value)) {
                 $T[$Tid]->setProperty('association', $type)->save();
             }
+            if ($type = $this->process_parenthesis($token_value)) {
+                print "parenthesis : $token_value\n";
+                $T[$Tid]->setProperty('association', $type)->save();
+            }
 
             // test is for booleans.
             if ($to_index) {
                 foreach($regex as $r) {
                     $class = "Tokenizer\\$r";
                     if (in_array($token_value, $class::$operators)) {
-                        if ($token_value == 'T_OPEN_CURLY') {
+                        if (in_array($token_value, array('T_OPEN_CURLY', 'T_OPEN_PARENTHESIS'))) {
                             if (!$T[$Tid]->hasProperty('association')) {
                                 $regexIndex[$r]->relateTo($T[$Tid], 'INDEXED')->save();
                             }
@@ -1128,65 +1110,77 @@ class Load implements Tasks {
 
         $last->relateTo($last2, 'NEXT')->setProperty('file', $file)->save();
 
+        if (!empty($this->process_blocks('T_OPEN_CURLY'))) {
+            print "Alert, all blocks were not flushed in '$filename'\n";
+        }
+        if (!empty($this->process_blocks('T_OPEN_PARENTHESIS'))) {
+            print "Alert, all parenthesis were not flushed in '$filename'\n";
+        }
+
         $this->client->save_chunk();
         display('      memory : '.number_format(memory_get_usage()/ pow(2, 20)).'Mb');
 
         return $Tid;
     }
 
-    private function process_blocks($token_value) {
+    private function process_blocks($tokenValue, $display = false) {
         static $states = array();
-        static $states_id = 0;
+        static $statesId = 0;
         
-        if ($token_value == 'T_CLASS' ) {
+        if ($display) {
+            print "Display\n";
+            var_dump($states);
+        }
+        
+        if ($tokenValue == 'T_CLASS' ) {
             $states[] = 'Class';
-            $states_id++;
+            $statesId++;
             return '';
         }
 
-        if ($token_value == 'T_FUNCTION' ) {
+        if ($tokenValue == 'T_FUNCTION' ) {
             $states[] = 'Function';
-            $states_id++;
+            $statesId++;
             return '';
         }
 
-        if ($token_value == 'T_FINALLY' ) {
+        if ($tokenValue == 'T_FINALLY' ) {
             $states[] = 'Finally';
-            $states_id++;
+            $statesId++;
             return '';
         }
 
-        if ($token_value == 'T_USE' ) {
+        if ($tokenValue == 'T_USE' ) {
             $states[] = 'Use';
-            $states_id++;
+            $statesId++;
             return '';
         }
 
-        if ($token_value == 'T_CATCH' ) {
+        if ($tokenValue == 'T_CATCH' ) {
             $states[] = 'Catch';
-            $states_id++;
+            $statesId++;
             return '';
         }
 
-        if ($token_value == 'T_TRY' ) {
+        if ($tokenValue == 'T_TRY' ) {
             $states[] = 'Try';
-            $states_id++;
+            $statesId++;
             return '';
         }
 
-        if ($token_value == 'T_INTERFACE' ) {
+        if ($tokenValue == 'T_INTERFACE' ) {
             $states[] = 'Interface';
-            $states_id++;
+            $statesId++;
             return '';
         }
 
-        if ($token_value == 'T_TRAIT' ) {
+        if ($tokenValue == 'T_TRAIT' ) {
             $states[] = 'Trait';
-            $states_id++;
+            $statesId++;
             return '';
         }
 
-        if ($token_value == 'T_OPEN_CURLY' )    {
+        if ($tokenValue == 'T_OPEN_CURLY' )    {
             if (count($states) > 0) {
                 $state = array_pop($states);
                 return $state;
@@ -1194,7 +1188,97 @@ class Load implements Tasks {
                 return '';
             }
         }
+        
+        if ($tokenValue == 'T_SEMICOLON' && 
+            count($states) > 0) {
+                if (in_array($states[count($states) - 1], array('Use', 'Function'))) {
+                    array_pop($states);
+                    return '';
+                }
+        }
     
+        return '';
+    }
+
+    private function process_parenthesis($tokenValue, $display = false) {
+        static $states = array();
+        static $statesId = 0;
+        
+        print $tokenValue."\n";
+        
+        if ($display) {
+            print "Display\n";
+            var_dump($states);
+        }
+        
+        if ($tokenValue == 'T_FOR' ) {
+            $states[] = 'For';
+            $statesId++;
+            return '';
+        }
+
+        if ($tokenValue == 'T_FOREACH' ) {
+            $states[] = 'Foreach';
+            $statesId++;
+            return '';
+        }
+        
+        if ($tokenValue == 'T_WHILE' ) {
+            $states[] = 'While';
+            $statesId++;
+            return '';
+        }
+
+        if ($tokenValue == 'T_SWITCH' ) {
+            $states[] = 'Switch';
+            $statesId++;
+            return '';
+        }
+
+        if ($tokenValue == 'T_DECLARE' ) {
+            $states[] = 'Declare';
+            $statesId++;
+            return '';
+        }
+
+        if ($tokenValue == 'T_CATCH' ) {
+            $states[] = 'Catch';
+            $statesId++;
+            return '';
+        }
+
+/*
+Something with the arguments is wrong
+        if ($tokenValue == 'T_FUNCTION' ) {
+            $states[] = 'Function';
+            $statesId++;
+            return '';
+        }
+
+Too many updates (If expected a Parenthesis, not a ( ... )
+        if ($tokenValue == 'T_IF' || $tokenValue == 'T_ELSEIF') {
+            $states[] = 'If';
+            $statesId++;
+            return '';
+        }
+*/
+        if ($tokenValue == 'T_OPEN_PARENTHESIS' )    {
+            if (count($states) > 0) {
+                $state = array_pop($states);
+                return $state;
+            } else {
+                return '';
+            }
+        }
+/*        
+        if ($tokenValue == 'T_SEMICOLON' && 
+            count($states) > 0) {
+                if (in_array($states[count($states) - 1], array('Use', 'Function'))) {
+                    array_pop($states);
+                    return '';
+                }
+        }
+    */
         return '';
     }
 }

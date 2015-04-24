@@ -31,7 +31,8 @@ class _Declare extends TokenAuto {
         // declare(ticks = 2) : block endblock;
         $this->conditions = array(0 => array('token' => _Declare::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                             'property' => array('association' => 'Declare')),
                                   2 => array('atom'  => 'Arguments'),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token' => 'T_COLON',
@@ -55,7 +56,8 @@ class _Declare extends TokenAuto {
         // declare(ticks = 2);
         $this->conditions = array(0 => array('token' => _Declare::$operators,
                                              'atom'  => 'none'),
-                                  1 => array('token' => 'T_OPEN_PARENTHESIS'),
+                                  1 => array('token' => 'T_OPEN_PARENTHESIS',
+                                             'property' => array('association' => 'Declare')),
                                   2 => array('atom'  => 'Arguments'),
                                   3 => array('token' => 'T_CLOSE_PARENTHESIS'),
                                   4 => array('token'  => 'T_SEMICOLON')
@@ -73,7 +75,8 @@ class _Declare extends TokenAuto {
         // declare(ticks = 2) { block }
         $this->conditions = array(  0 => array('token' => _Declare::$operators),
                                     1 => array('atom'  => 'none',
-                                               'token' => 'T_OPEN_PARENTHESIS' ),
+                                               'token' => 'T_OPEN_PARENTHESIS',
+                                               'property' => array('association' => 'Declare') ),
                                     2 => array('atom'  =>  array('Arguments', 'Void')),
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
@@ -97,7 +100,8 @@ class _Declare extends TokenAuto {
         // declare(ticks = 2) { block }
         $this->conditions = array(  0 => array('token' => _Declare::$operators),
                                     1 => array('atom'  => 'none',
-                                               'token' => 'T_OPEN_PARENTHESIS' ),
+                                               'token' => 'T_OPEN_PARENTHESIS',
+                                             'property' => array('association' => 'Declare') ),
                                     2 => array('atom'  =>  array('Arguments', 'Void')),
                                     3 => array('atom'  => 'none',
                                                'token' => 'T_CLOSE_PARENTHESIS' ),
