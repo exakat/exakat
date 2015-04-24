@@ -6,10 +6,6 @@ Label : CODE
     function
     Label : NAME
       a
-    Label : BLOCK
-      {
-      Label : ELEMENT
-        void
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -26,3 +22,5 @@ Label : CODE
           $c
       Label : ARGUMENT
         $b
+    Label : BLOCK
+      void

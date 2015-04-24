@@ -5,9 +5,7 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        $e
+      $e
     Label : THEN
       ;
       Label : ELEMENT
