@@ -8,11 +8,11 @@ Label : CODE
       (array)
       Label : CAST
         $b
-        Label : NAME
-          $b
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $c
+        Label : NAME
+          $b
     Label : LEFT
       $a

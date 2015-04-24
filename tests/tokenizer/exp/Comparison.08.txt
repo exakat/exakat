@@ -5,21 +5,19 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        >
-        Label : RIGHT
-          0
-        Label : LEFT
-          [
-          Label : VARIABLE
-            ::
-            Label : CLASS
-              self
-            Label : PROPERTY
-              $a
-          Label : INDEX
-            'b'
+      >
+      Label : RIGHT
+        0
+      Label : LEFT
+        [
+        Label : VARIABLE
+          ::
+          Label : PROPERTY
+            $a
+          Label : CLASS
+            self
+        Label : INDEX
+          'b'
     Label : THEN
       ;
       Label : ELEMENT
@@ -28,10 +26,10 @@ Label : CODE
           [
           Label : VARIABLE
             ::
-            Label : CLASS
-              e
             Label : PROPERTY
               $f
+            Label : CLASS
+              e
           Label : INDEX
             'g'
         Label : LEFT

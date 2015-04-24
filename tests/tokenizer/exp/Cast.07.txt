@@ -14,10 +14,10 @@ Label : CODE
     (real)
     Label : CAST
       ::
-      Label : CLASS
-        x
       Label : PROPERTY
         $y
+      Label : CLASS
+        x
   Label : ELEMENT
     (float)
     Label : CAST

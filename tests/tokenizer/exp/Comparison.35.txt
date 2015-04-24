@@ -4,38 +4,34 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        &&
+      &&
+      Label : RIGHT
+        <=
         Label : RIGHT
-          <=
-          Label : RIGHT
-            new
-            Label : NEW
-              F
-          Label : LEFT
-            new
-            Label : NEW
-              C
-              Label : ARGUMENTS
-                void
-                Label : ARGUMENT
-                  [
-                  Label : VARIABLE
-                    $d
-                  Label : INDEX
-                    'e'
+          new
+          Label : NEW
+            F
         Label : LEFT
-          >
-          Label : RIGHT
-            0
-          Label : LEFT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'b'
+          new
+          Label : NEW
+            C
+            Label : ARGUMENTS
+              void
+              Label : ARGUMENT
+                [
+                Label : VARIABLE
+                  $d
+                Label : INDEX
+                  'e'
+      Label : LEFT
+        >
+        Label : RIGHT
+          0
+        Label : LEFT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            'b'
     Label : THEN
-      {
-      Label : ELEMENT
-        void
+      void

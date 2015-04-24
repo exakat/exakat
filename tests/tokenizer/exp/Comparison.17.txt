@@ -5,19 +5,17 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !=
-        Label : RIGHT
-          'c'
-        Label : LEFT
-          @
-          Label : AT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'b'
+      !=
+      Label : RIGHT
+        'c'
+      Label : LEFT
+        @
+        Label : AT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            'b'
     Label : THEN
       ;
       Label : ELEMENT

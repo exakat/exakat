@@ -5,27 +5,25 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        =
-        Label : RIGHT
-          b
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              $e
-            Label : ARGUMENT
-              $d
-            Label : ARGUMENT
-              $c
-        Label : LEFT
-          !
-          Label : NOT
-            ->
-            Label : OBJECT
-              $this
-            Label : PROPERTY
-              a
+      =
+      Label : RIGHT
+        b
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $e
+          Label : ARGUMENT
+            $d
+          Label : ARGUMENT
+            $c
+      Label : LEFT
+        !
+        Label : NOT
+          ->
+          Label : OBJECT
+            $this
+          Label : PROPERTY
+            a
     Label : THEN
       ;
       Label : ELEMENT

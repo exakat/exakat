@@ -5,13 +5,11 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        instanceof
-        Label : CLASS
-          Exception
-        Label : VARIABLE
-          $x
+      instanceof
+      Label : VARIABLE
+        $x
+      Label : CLASS
+        Exception
     Label : THEN
       ;
       Label : ELEMENT

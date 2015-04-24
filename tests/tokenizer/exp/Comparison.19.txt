@@ -5,37 +5,35 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        >
+      >
+      Label : RIGHT
+        -
         Label : RIGHT
-          -
+          *
           Label : RIGHT
-            *
-            Label : RIGHT
-              1
-            Label : LEFT
-              [
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $e
-                Label : PROPERTY
-                  f
-              Label : INDEX
-                'g'
+            1
           Label : LEFT
-            ->
-            Label : OBJECT
-              $c
-            Label : PROPERTY
-              d
+            [
+            Label : VARIABLE
+              ->
+              Label : OBJECT
+                $e
+              Label : PROPERTY
+                f
+            Label : INDEX
+              'g'
         Label : LEFT
-          [
-          Label : VARIABLE
-            $a
-          Label : INDEX
-            'b'
+          ->
+          Label : OBJECT
+            $c
+          Label : PROPERTY
+            d
+      Label : LEFT
+        [
+        Label : VARIABLE
+          $a
+        Label : INDEX
+          'b'
     Label : THEN
       ;
       Label : ELEMENT

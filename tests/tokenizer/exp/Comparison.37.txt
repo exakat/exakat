@@ -5,42 +5,38 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
+      &&
+      Label : RIGHT
+        ==
+        Label : RIGHT
+          G
+        Label : LEFT
+          instanceof
+          Label : VARIABLE
+            $c
+          Label : CLASS
+            F
+      Label : LEFT
         &&
         Label : RIGHT
           ==
           Label : RIGHT
-            G
+            E
           Label : LEFT
             instanceof
-            Label : CLASS
-              F
             Label : VARIABLE
-              $c
+              $b
+            Label : CLASS
+              D
         Label : LEFT
-          &&
+          ==
           Label : RIGHT
-            ==
-            Label : RIGHT
-              E
-            Label : LEFT
-              instanceof
-              Label : CLASS
-                D
-              Label : VARIABLE
-                $b
+            C
           Label : LEFT
-            ==
-            Label : RIGHT
-              C
-            Label : LEFT
-              instanceof
-              Label : CLASS
-                B
-              Label : VARIABLE
-                $a
+            instanceof
+            Label : VARIABLE
+              $a
+            Label : CLASS
+              B
     Label : THEN
-      {
-      Label : ELEMENT
-        void
+      void
