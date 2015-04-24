@@ -42,6 +42,8 @@ $tokens = token_get_all($php);
 
 $lnumberValues = array();
 $lnumber = 0;
+$dnumberValues = array();
+$dnumber = 0;
 $variableNames = array();
 $variables = "a";
 $stringsNames = array();
@@ -58,12 +60,20 @@ $php = '';
 foreach($tokens as $t) {
     if (is_array($t)) {
         switch($t[0]) {
-            case T_LNUMBER: 
+            case T_LNUMBER:  // integers
                 if (isset($lnumberValues[$t[1]])) {
                     $t[1] = $lnumberValues[$t[1]];
                 } else {
                     $lnumberValues[$t[1]] = $lnumber++;
                     $t[1] = $lnumberValues[$t[1]];
+                }
+                break;
+            case T_DNUMBER:  // real numbers
+                if (isset($dnumberValues[$t[1]])) {
+                    $t[1] = floor(rand(0, 100000) ) / 100;
+                } else {
+                    $dnumberValues[$t[1]] = $dnumber++;
+                    $t[1] = floor(rand(0, 100000) ) / 100;
                 }
                 break;
             case T_VARIABLE: 
