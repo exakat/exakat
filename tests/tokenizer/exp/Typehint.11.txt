@@ -6,12 +6,6 @@ Label : CODE
     function
     Label : NAME
       a2
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $x
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -30,22 +24,22 @@ Label : CODE
           A
         Label : VARIABLE
           =
-          Label : RIGHT
-            null
           Label : LEFT
             $c
+          Label : RIGHT
+            null
       Label : ARGUMENT
         $b
-  Label : ELEMENT
-    function
-    Label : NAME
-      a
     Label : BLOCK
       ;
       Label : ELEMENT
         ++
         Label : POSTPLUSPLUS
           $x
+  Label : ELEMENT
+    function
+    Label : NAME
+      a
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -66,9 +60,15 @@ Label : CODE
             A
         Label : VARIABLE
           =
-          Label : RIGHT
-            null
           Label : LEFT
             $c
+          Label : RIGHT
+            null
       Label : ARGUMENT
         $b
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $x

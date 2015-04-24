@@ -31,35 +31,9 @@ class Typehint extends TokenAuto {
         $atoms = array('Variable', 'Assignation', 'Identifier');
         
         // normal case for classes
-        $this->conditions = array(-1 => array('filterOut' => array('T_CATCH', 'T_IF')),
-                                   0 => array('token'     => Typehint::$operators),
+        $this->conditions = array( 0 => array('token'     => Typehint::$operators),
                                    1 => array('atom'      => 'yes',
-                                              'token'     => array('T_STRING', 'T_NS_SEPARATOR')),
-                                   2 => array('atom'      => $atoms),
-                                   3 => array('filterOut' => Assignation::$operators),
-        );
-        
-        $this->actions = array('toTypehint'  => true,
-                               'keepIndexed' => true);
-        $this->checkAuto();
-
-        // special case for array
-        $this->conditions = array(-1 => array('filterOut' => 'T_CATCH'),
-                                   0 => array('token'     => Typehint::$operators),
-                                   1 => array('token'     => 'T_ARRAY',
-                                              'atom'      => 'none'),
-                                   2 => array('atom'      => $atoms),
-                                   3 => array('filterOut' => Assignation::$operators),
-        );
-        
-        $this->actions = array('toTypehint'  => true,
-                               'keepIndexed' => true);
-        $this->checkAuto();
-
-        // special case for callable
-        $this->conditions = array(-1 => array('filterOut' => 'T_CATCH'),
-                                   0 => array('token'     => Typehint::$operators),
-                                   1 => array('token'     => 'T_CALLABLE'),
+                                              'token'     => array('T_STRING', 'T_NS_SEPARATOR', 'T_CALLABLE', 'T_ARRAY')),
                                    2 => array('atom'      => $atoms),
                                    3 => array('filterOut' => Assignation::$operators),
         );

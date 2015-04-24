@@ -6,12 +6,6 @@ Label : CODE
     function
     Label : NAME
       B
-    Label : BLOCK
-      ;
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $c
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -20,13 +14,19 @@ Label : CODE
           callable
         Label : VARIABLE
           =
-          Label : RIGHT
-            null
           Label : LEFT
             $b
+          Label : RIGHT
+            null
       Label : ARGUMENT
         Typehint
         Label : CLASS
           C
         Label : VARIABLE
           $a
+    Label : BLOCK
+      ;
+      Label : ELEMENT
+        ++
+        Label : POSTPLUSPLUS
+          $c
