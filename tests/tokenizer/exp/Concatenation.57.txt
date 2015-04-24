@@ -4,17 +4,15 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        &&
-        Label : RIGHT
-          is_array
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $type
-        Label : LEFT
-          $type
+      &&
+      Label : RIGHT
+        is_array
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $type
+      Label : LEFT
+        $type
     Label : THEN
       ;
       Label : ELEMENT
@@ -42,9 +40,7 @@ Label : CODE
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          $type
+        $type
       Label : THEN
         ;
         Label : ELEMENT

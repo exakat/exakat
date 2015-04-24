@@ -4,52 +4,52 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
     Label : BLOCK
       ;
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            ===
-            Label : RIGHT
-              0
-            Label : LEFT
-              C
-              Label : ARGUMENTS
-                Arguments
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  $d
+          ===
+          Label : RIGHT
+            0
+          Label : LEFT
+            C
+            Label : ARGUMENTS
+              Arguments
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                $d
         Label : THEN
           ;
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                ===
-                Label : RIGHT
-                  null
-                Label : LEFT
-                  $c
+              ===
+              Label : RIGHT
+                null
+              Label : LEFT
+                $c
             Label : THEN
               ;
               Label : ELEMENT
                 if
                 Label : CONDITION
-                  (
-                  Label : CODE
-                    =
-                    Label : RIGHT
-                      H
-                      Label : ARGUMENTS
-                        void
-                        Label : ARGUMENT
-                          $e
-                    Label : LEFT
-                      $f
+                  =
+                  Label : RIGHT
+                    H
+                    Label : ARGUMENTS
+                      void
+                      Label : ARGUMENT
+                        $e
+                  Label : LEFT
+                    $f
                 Label : THEN
                   ;
                   Label : ELEMENT
@@ -63,27 +63,27 @@ Label : CODE
                       Label : ARGUMENT
                         $f
             Label : ELSE
-              {
+              ;
               Label : ELEMENT
                 foreach
+                Label : VALUE
+                  $g
                 Label : BLOCK
                   ;
                   Label : ELEMENT
                     if
                     Label : CONDITION
-                      (
-                      Label : CODE
-                        J
-                        Label : ARGUMENTS
-                          void
-                          Label : ARGUMENT
-                            Concatenation
-                            Label : CONCAT
-                              $e
-                            Label : CONCAT
-                              F
-                            Label : CONCAT
-                              $g
+                      J
+                      Label : ARGUMENTS
+                        void
+                        Label : ARGUMENT
+                          Concatenation
+                          Label : CONCAT
+                            $e
+                          Label : CONCAT
+                            F
+                          Label : CONCAT
+                            $g
                     Label : THEN
                       ;
                       Label : ELEMENT
@@ -102,8 +102,6 @@ Label : CODE
                               F
                             Label : CONCAT
                               $g
-                Label : VALUE
-                  $g
                 Label : SOURCE
                   (array)
                   Label : CAST
@@ -126,15 +124,9 @@ Label : CODE
                     'E'
             Label : LEFT
               $e
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
     Label : SOURCE
       ::
-      Label : CLASS
-        B
       Label : PROPERTY
         $a
+      Label : CLASS
+        B

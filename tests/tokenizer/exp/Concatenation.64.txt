@@ -5,21 +5,19 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              $
-              Label : NAME
-                Concatenation
-                Label : CONCAT
-                  $a
-                Label : CONCAT
-                  'E'
+      !
+      Label : NOT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            $
+            Label : NAME
+              Concatenation
+              Label : CONCAT
+                $a
+              Label : CONCAT
+                'E'
     Label : THEN
       ;
       Label : ELEMENT

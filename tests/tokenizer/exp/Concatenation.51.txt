@@ -3,34 +3,6 @@
 Label : CODE
   ;
   Label : ELEMENT
-    =
-    Label : RIGHT
-      ?
-      Label : CONDITION
-        Concatenation
-        Label : CONCAT
-          $b
-        Label : CONCAT
-          $c
-      Label : THEN
-        Concatenation
-        Label : CONCAT
-          'i'
-        Label : CONCAT
-          $g
-          Label : NAME
-            $g
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'h'
-        Label : CONCAT
-          'f'
-      Label : ELSE
-        'j'
-    Label : LEFT
-      $a
-  Label : ELEMENT
     .=
     Label : RIGHT
       ?
@@ -70,6 +42,34 @@ Label : CODE
           $e
         Label : INDEX
           $k
+    Label : LEFT
+      $a
+  Label : ELEMENT
+    =
+    Label : RIGHT
+      ?
+      Label : CONDITION
+        Concatenation
+        Label : CONCAT
+          $b
+        Label : CONCAT
+          $c
+      Label : THEN
+        Concatenation
+        Label : CONCAT
+          'i'
+        Label : CONCAT
+          $g
+          Label : NAME
+            $g
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              'h'
+        Label : CONCAT
+          'f'
+      Label : ELSE
+        'j'
     Label : LEFT
       $a
   Label : ELEMENT

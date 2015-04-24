@@ -20,6 +20,8 @@ Label : CODE
           'e'
         Label : CONCAT
           ::
+          Label : CLASS
+            a
           Label : METHOD
             b
             Label : ARGUMENTS
@@ -30,5 +32,3 @@ Label : CODE
                   $c
                 Label : INDEX
                   d
-          Label : CLASS
-            a

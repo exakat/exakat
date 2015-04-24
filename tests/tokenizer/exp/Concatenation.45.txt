@@ -4,6 +4,12 @@ Label : CODE
   ;
   Label : ELEMENT
     foreach
+    Label : VALUE
+      =>
+      Label : KEY
+        $b
+      Label : VALUE
+        $c
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -38,12 +44,6 @@ Label : CODE
                  
               Label : CONCAT
                 $h
-    Label : VALUE
-      =>
-      Label : KEY
-        $b
-      Label : VALUE
-        $c
     Label : SOURCE
       a
       Label : ARGUMENTS
@@ -53,19 +53,17 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          empty
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              [
-              Label : VARIABLE
-                $i
-              Label : INDEX
-                'j'
+      !
+      Label : NOT
+        empty
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            [
+            Label : VARIABLE
+              $i
+            Label : INDEX
+              'j'
     Label : THEN
       ;
       Label : ELEMENT

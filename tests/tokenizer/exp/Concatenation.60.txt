@@ -5,13 +5,11 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          B
-        Label : LEFT
-          $a
+      ==
+      Label : RIGHT
+        B
+      Label : LEFT
+        $a
     Label : THEN
       ;
       Label : ELEMENT
@@ -43,13 +41,11 @@ Label : CODE
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          ==
-          Label : RIGHT
-            E
-          Label : LEFT
-            $a
+        ==
+        Label : RIGHT
+          E
+        Label : LEFT
+          $a
       Label : THEN
         ;
         Label : ELEMENT

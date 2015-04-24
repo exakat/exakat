@@ -13,14 +13,14 @@ Label : CODE
           A 
         Label : CONCAT
           ::
+          Label : CLASS
+            $a
           Label : METHOD
             b
             Label : ARGUMENTS
               void
               Label : ARGUMENT
                 'c'
-          Label : CLASS
-            $a
         Label : CONCAT
            B
 

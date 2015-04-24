@@ -4,19 +4,17 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !==
-        Label : RIGHT
-          'E'
-        Label : LEFT
-          B
-          Label : ARGUMENTS
-            Arguments
-            Label : ARGUMENT
-              D
-            Label : ARGUMENT
-              'C'
+      !==
+      Label : RIGHT
+        'E'
+      Label : LEFT
+        B
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            D
+          Label : ARGUMENT
+            'C'
     Label : THEN
       ;
       Label : ELEMENT
@@ -42,13 +40,11 @@ Label : CODE
       Label : ELEMENT
         if
         Label : CONDITION
-          (
-          Label : CODE
-            isset
-            Label : ARGUMENTS
-              void
-              Label : ARGUMENT
-                $b
+          isset
+          Label : ARGUMENTS
+            void
+            Label : ARGUMENT
+              $b
         Label : THEN
           ;
           Label : ELEMENT
