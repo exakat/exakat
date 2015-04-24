@@ -30,6 +30,10 @@ class Report implements Tasks {
     public function run(\Config $config) {
         $reportClass = "\\Report\\Report\\".ucfirst(strtolower($config->report));
 
+        if (!class_exists($reportClass)) {
+            die("Report '{$config->report}' doesn't exist.\nAborting\n");
+        }
+
         if (!class_exists("\\Report\\Format\\".$config->format)) {
             die("Format '{$config->format}' doesn't exist. Choose among : ".implode(", ", \Report\Report::$formats)."\nAborting\n");
         }
