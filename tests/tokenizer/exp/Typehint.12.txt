@@ -4,44 +4,42 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      B
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         Typehint
-        Label : CLASS
-          callable
         Label : VARIABLE
           $c
+        Label : CLASS
+          callable
       Label : ARGUMENT
         Typehint
-        Label : CLASS
-          D
         Label : VARIABLE
           $b
+        Label : CLASS
+          D
       Label : ARGUMENT
         Typehint
-        Label : CLASS
-          C
         Label : VARIABLE
           $a
+        Label : CLASS
+          C
+    Label : NAME
+      B
     Label : BLOCK
       ;
       Label : ELEMENT
         =
+        Label : RIGHT
+          $g
         Label : LEFT
           ->
           Label : OBJECT
             $f
           Label : PROPERTY
             G
-        Label : RIGHT
-          $g
       Label : ELEMENT
         ::
-        Label : CLASS
-          E
         Label : METHOD
           F
           Label : ARGUMENTS
@@ -50,3 +48,5 @@ Label : CODE
               $e
             Label : ARGUMENT
               $d
+        Label : CLASS
+          E

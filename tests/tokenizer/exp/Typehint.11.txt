@@ -4,32 +4,32 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      a2
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         Typehint
+        Label : VARIABLE
+          $d
         Label : CLASS
           \
           Label : SUBNAME
             D
           Label : SUBNAME
             C
-        Label : VARIABLE
-          $d
       Label : ARGUMENT
         Typehint
-        Label : CLASS
-          A
         Label : VARIABLE
           =
-          Label : LEFT
-            $c
           Label : RIGHT
             null
+          Label : LEFT
+            $c
+        Label : CLASS
+          A
       Label : ARGUMENT
         $b
+    Label : NAME
+      a2
     Label : BLOCK
       ;
       Label : ELEMENT
@@ -38,34 +38,34 @@ Label : CODE
           $x
   Label : ELEMENT
     function
-    Label : NAME
-      a
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         Typehint
+        Label : VARIABLE
+          $d
         Label : CLASS
           \
           Label : SUBNAME
             D
           Label : SUBNAME
             C
-        Label : VARIABLE
-          $d
       Label : ARGUMENT
         Typehint
+        Label : VARIABLE
+          =
+          Label : RIGHT
+            null
+          Label : LEFT
+            $c
         Label : CLASS
           \
           Label : SUBNAME
             A
-        Label : VARIABLE
-          =
-          Label : LEFT
-            $c
-          Label : RIGHT
-            null
       Label : ARGUMENT
         $b
+    Label : NAME
+      a
     Label : BLOCK
       ;
       Label : ELEMENT

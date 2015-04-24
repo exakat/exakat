@@ -4,24 +4,24 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      x
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         Typehint
-        Label : CLASS
-          Stdclass
         Label : VARIABLE
           $c
+        Label : CLASS
+          Stdclass
       Label : ARGUMENT
         $b
       Label : ARGUMENT
         Typehint
-        Label : CLASS
-          Stdclass
         Label : VARIABLE
           $a
+        Label : CLASS
+          Stdclass
+    Label : NAME
+      x
     Label : BLOCK
       ;
       Label : ELEMENT

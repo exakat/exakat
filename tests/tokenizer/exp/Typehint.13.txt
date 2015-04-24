@@ -4,26 +4,26 @@ Label : CODE
   ;
   Label : ELEMENT
     function
-    Label : NAME
-      B
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         Typehint
-        Label : CLASS
-          callable
         Label : VARIABLE
           =
-          Label : LEFT
-            $b
           Label : RIGHT
             null
+          Label : LEFT
+            $b
+        Label : CLASS
+          callable
       Label : ARGUMENT
         Typehint
-        Label : CLASS
-          C
         Label : VARIABLE
           $a
+        Label : CLASS
+          C
+    Label : NAME
+      B
     Label : BLOCK
       ;
       Label : ELEMENT
