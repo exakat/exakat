@@ -489,7 +489,7 @@ g.removeVertex(arg2);
             unset($actions['to_var_ppp']);
         }
 
-        if (isset($actions['to_use_const'])) {
+        if (isset($actions['toUseConst'])) {
             $qactions[] = "
 /* to use with const or function */
 
@@ -508,10 +508,10 @@ g.removeVertex(arg2);
     g.idx('delete').put('node', 'delete', a1);
 
 ";
-            unset($actions['to_use_const']);
+            unset($actions['toUseConst']);
         }
 
-        if (isset($actions['to_use'])) {
+        if (isset($actions['toUse'])) {
             $qactions[] = "
 /* to use with arguments */
 if (it.out('NEXT').next().token in ['T_CONST', 'T_FUNCTION']) {
@@ -547,7 +547,7 @@ g.addEdge(var, d, 'NEXT');
 g.idx('delete').put('node', 'delete', arg);
 
 ";
-            unset($actions['to_use']);
+            unset($actions['toUse']);
         }
 
         if (isset($actions['toUseBlock'])) {
