@@ -5,25 +5,23 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ==
-        Label : RIGHT
-          3
-        Label : LEFT
-          (
-          Label : CODE
-            %
-            Label : RIGHT
-              2
-            Label : LEFT
-              (
-              Label : CODE
-                +
-                Label : RIGHT
-                  1
-                Label : LEFT
-                  $e
+      ==
+      Label : RIGHT
+        3
+      Label : LEFT
+        (
+        Label : CODE
+          %
+          Label : RIGHT
+            2
+          Label : LEFT
+            (
+            Label : CODE
+              +
+              Label : RIGHT
+                1
+              Label : LEFT
+                $e
     Label : THEN
       ;
       Label : ELEMENT

@@ -48,14 +48,14 @@ Label : CODE
                                 'DP'
                               Label : VALUE
                                 ::
+                                Label : CLASS
+                                  DQ
                                 Label : METHOD
                                   DR
                                   Label : ARGUMENTS
                                     void
                                     Label : ARGUMENT
                                       void
-                                Label : CLASS
-                                  DQ
                             Label : ARGUMENT
                               =>
                               Label : KEY

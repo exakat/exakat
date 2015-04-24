@@ -5,57 +5,71 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
+      ||
+      Label : RIGHT
         ||
         Label : RIGHT
           ||
           Label : RIGHT
-            ||
+            ===
             Label : RIGHT
-              ===
-              Label : RIGHT
-                ::
-                Label : CLASS
-                  R
-                Label : CONSTANT
-                  S
-              Label : LEFT
-                ->
-                Label : OBJECT
-                  $f
-                Label : PROPERTY
-                  Q
-            Label : LEFT
-              ===
-              Label : RIGHT
-                ::
-                Label : CLASS
-                  O
-                Label : CONSTANT
-                  P
-              Label : LEFT
-                ->
-                Label : OBJECT
-                  $e
-                Label : PROPERTY
-                  N
-          Label : LEFT
-            ==
-            Label : RIGHT
-              +
-              Label : SIGN
-                ::
-                Label : CLASS
-                  L
-                Label : CONSTANT
-                  M
+              ::
+              Label : CLASS
+                R
+              Label : CONSTANT
+                S
             Label : LEFT
               ->
               Label : OBJECT
-                $d
+                $f
               Label : PROPERTY
-                K
+                Q
+          Label : LEFT
+            ===
+            Label : RIGHT
+              ::
+              Label : CLASS
+                O
+              Label : CONSTANT
+                P
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $e
+              Label : PROPERTY
+                N
+        Label : LEFT
+          ==
+          Label : RIGHT
+            +
+            Label : SIGN
+              ::
+              Label : CLASS
+                L
+              Label : CONSTANT
+                M
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $d
+            Label : PROPERTY
+              K
+      Label : LEFT
+        ||
+        Label : RIGHT
+          ===
+          Label : RIGHT
+            ::
+            Label : CLASS
+              I
+            Label : CONSTANT
+              J
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $c
+            Label : PROPERTY
+              H
         Label : LEFT
           ||
           Label : RIGHT
@@ -63,45 +77,29 @@ Label : CODE
             Label : RIGHT
               ::
               Label : CLASS
-                I
+                F
               Label : CONSTANT
-                J
+                G
             Label : LEFT
               ->
               Label : OBJECT
-                $c
+                $b
               Label : PROPERTY
-                H
+                E
           Label : LEFT
-            ||
+            ===
             Label : RIGHT
-              ===
-              Label : RIGHT
-                ::
-                Label : CLASS
-                  F
-                Label : CONSTANT
-                  G
-              Label : LEFT
-                ->
-                Label : OBJECT
-                  $b
-                Label : PROPERTY
-                  E
+              ::
+              Label : CLASS
+                C
+              Label : CONSTANT
+                D
             Label : LEFT
-              ===
-              Label : RIGHT
-                ::
-                Label : CLASS
-                  C
-                Label : CONSTANT
-                  D
-              Label : LEFT
-                ->
-                Label : OBJECT
-                  $a
-                Label : PROPERTY
-                  B
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                B
     Label : THEN
       ;
       Label : ELEMENT
@@ -119,7 +117,7 @@ Label : CODE
           Label : PROPERTY
             T
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         =
         Label : RIGHT

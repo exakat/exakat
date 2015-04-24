@@ -34,7 +34,7 @@ Label : CODE
           d
     Label : LEFT
       ::
-      Label : CLASS
-        a
       Label : PROPERTY
         $b
+      Label : CLASS
+        a

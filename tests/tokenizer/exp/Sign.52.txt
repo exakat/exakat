@@ -5,13 +5,11 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        instanceof
-        Label : CLASS
-          B
-        Label : VARIABLE
-          $a
+      instanceof
+      Label : VARIABLE
+        $a
+      Label : CLASS
+        B
     Label : THEN
       ;
       Label : ELEMENT
@@ -29,7 +27,7 @@ Label : CODE
         Label : LEFT
           $c
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         =
         Label : RIGHT

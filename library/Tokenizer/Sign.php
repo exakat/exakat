@@ -39,7 +39,7 @@ class Sign extends TokenAuto {
                                                                                  'T_QUOTE_CLOSE', 'T_QUOTE', 'T_SHELL_QUOTE_CLOSE',
                                                                                  'T_DOLLAR', 'T_CLOSE_CURLY', 'T_FUNCTION'),
                                                                           Magicconstant::$operators, Preplusplus::$operators),
-                                               'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication', 'Cast' )),
+                                               'notAtom'    => array('Sign', 'Addition', 'Array', 'Parenthesis', 'Noscream', 'Multiplication', 'Cast', 'Integer' )),
                                     0 => array('token'      => Sign::$operators,
                                                'atom'       => 'none'),
                                     1 => array('atom'       => 'Integer'),
