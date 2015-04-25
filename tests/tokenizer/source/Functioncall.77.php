@@ -1,0 +1,1 @@
+<?php if ($a): ?>B<?php echo $b['C']->D($a); ?>E<?php endif; ?>F<?php echo $b->G($b['C']->D($c, array(), $d)) ?><?php if ($a): ?>J<?php endif; ?>K

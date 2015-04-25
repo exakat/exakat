@@ -25,7 +25,7 @@ namespace Tokenizer;
 
 class ArgumentsNoParenthesis extends Arguments {
     static public $operators = array('T_ECHO', 'T_PRINT', 'T_INCLUDE_ONCE', 'T_INCLUDE', 'T_REQUIRE_ONCE',
-                                     'T_REQUIRE', 'T_EXIT', 'T_STATIC', );
+                                     'T_REQUIRE', 'T_EXIT', 'T_STATIC');
     static public $atom = 'Arguments';
 
     public function _check() {
@@ -33,13 +33,13 @@ class ArgumentsNoParenthesis extends Arguments {
         $this->conditions = array( -1 => array('filterOut'  => array('T_PUBLIC', 'T_PRIVATE', 'T_PROTECTED', 'T_FINAL', 'T_ABSTRACT')),
                                     0 => array('atom'       => 'none',
                                                'token'      => array('T_REQUIRE', 'T_REQUIRE_ONCE', 'T_INCLUDE_ONCE', 'T_INCLUDE',
-                                                                     'T_PRINT', 'T_EXIT', 'T_ECHO') ),
+                                                                     'T_PRINT',   'T_EXIT', 'T_ECHO') ),
                                     1 => array('atom'       => 'yes',
                                                'notAtom'    => 'Arguments'),
                                     2 => array('token'      => array_merge(self::$alternativeEnding,
                                                                array('T_SEMICOLON', 'T_CLOSE_TAG', 'T_ENDIF', 'T_ENDSWITCH', 'T_ENDFOR',
                                                                      'T_ENDFOREACH', 'T_COMMA', 'T_CLOSE_PARENTHESIS', 'T_QUESTION', 'T_COLON',
-                                                                     'T_ELSEIF', 'T_ECHO', 'T_AS', 'T_INLINE_HTML')))
+                                                                     'T_ELSEIF', 'T_ECHO', 'T_AS', 'T_INLINE_HTML', 'T_IF')))
         );
         
         $this->actions = array('insertEdge'  => array(0 => array('Arguments' => 'ARGUMENT')),

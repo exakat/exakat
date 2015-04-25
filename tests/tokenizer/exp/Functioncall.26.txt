@@ -28,10 +28,10 @@ Label : CODE
               void
       Label : ARGUMENT
         ::
-        Label : CLASS
-          Stdclass
         Label : PROPERTY
           $g
+        Label : CLASS
+          Stdclass
       Label : ARGUMENT
         \
         Label : SUBNAME

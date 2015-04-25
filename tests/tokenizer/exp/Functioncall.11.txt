@@ -4,19 +4,19 @@ Label : CODE
   ;
   Label : ELEMENT
     $x
-    Label : NAME
-      $x
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
         $y
-        Label : NAME
-          $y
         Label : ARGUMENTS
           void
           Label : ARGUMENT
             $z
+        Label : NAME
+          $y
       Label : ARGUMENT
         2
       Label : ARGUMENT
         1
+    Label : NAME
+      $x

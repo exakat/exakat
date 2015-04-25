@@ -5,19 +5,17 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          B
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                C
-              Label : PROPERTY
-                $a
+      !
+      Label : NOT
+        B
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            ::
+            Label : PROPERTY
+              $a
+            Label : CLASS
+              C
     Label : THEN
       ;
       Label : ELEMENT
@@ -72,7 +70,7 @@ Label : CODE
                 __DIR__
     Label : LEFT
       ::
-      Label : CLASS
-        C
       Label : PROPERTY
         $a
+      Label : CLASS
+        C

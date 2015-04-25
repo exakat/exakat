@@ -4,8 +4,6 @@ Label : CODE
   ;
   Label : ELEMENT
     $x
-    Label : NAME
-      $x
     Label : ARGUMENTS
       Arguments
       Label : ARGUMENT
@@ -18,3 +16,5 @@ Label : CODE
         2
       Label : ARGUMENT
         1
+    Label : NAME
+      $x

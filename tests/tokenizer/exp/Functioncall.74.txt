@@ -4,15 +4,13 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        !
-        Label : NOT
-          defined
-          Label : ARGUMENTS
-            void
-            Label : ARGUMENT
-              'A'
+      !
+      Label : NOT
+        defined
+        Label : ARGUMENTS
+          void
+          Label : ARGUMENT
+            'A'
     Label : THEN
       ;
       Label : ELEMENT

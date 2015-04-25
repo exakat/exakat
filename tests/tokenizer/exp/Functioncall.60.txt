@@ -7,9 +7,15 @@ Label : CODE
     Label : NAME
       x
     Label : BLOCK
-      {
+      ;
       Label : ELEMENT
         function
+        Label : ARGUMENTS
+          Arguments
+          Label : ARGUMENT
+            $c
+          Label : ARGUMENT
+            $b
         Label : NAME
           a
         Label : BLOCK
@@ -17,26 +23,18 @@ Label : CODE
           Label : ELEMENT
             if
             Label : CONDITION
-              (
-              Label : CODE
-                !
-                Label : NOT
-                  e
-                  Label : ARGUMENTS
-                    void
-                    Label : ARGUMENT
-                      $f
+              !
+              Label : NOT
+                e
+                Label : ARGUMENTS
+                  void
+                  Label : ARGUMENT
+                    $f
             Label : THEN
               ;
               Label : ELEMENT
                 return
                 Label : RETURN
                   null
-        Label : ARGUMENTS
-          Arguments
-          Label : ARGUMENT
-            $c
-          Label : ARGUMENT
-            $b
         Label : PRIVATE
           private

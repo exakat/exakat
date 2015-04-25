@@ -5,25 +5,23 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        ||
+      ||
+      Label : RIGHT
+        <
         Label : RIGHT
-          <
-          Label : RIGHT
-            2
-          Label : LEFT
-            `
-            Label : CONTAIN
-              Concatenation
-              Label : CONCAT
-                c d
+          2
         Label : LEFT
-          ->
-          Label : OBJECT
-            $a
-          Label : PROPERTY
-            b
+          `
+          Label : CONTAIN
+            Concatenation
+            Label : CONCAT
+              c d
+      Label : LEFT
+        ->
+        Label : OBJECT
+          $a
+        Label : PROPERTY
+          b
     Label : THEN
       ;
       Label : ELEMENT

@@ -5,17 +5,15 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'B'
+      isset
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            'B'
     Label : THEN
       ;
       Label : ELEMENT
@@ -27,15 +25,13 @@ Label : CODE
     Label : ELSE
       elseif
       Label : CONDITION
-        (
-        Label : CODE
-          !
-          Label : NOT
-            [
-            Label : VARIABLE
-              $a
-            Label : INDEX
-              'D'
+        !
+        Label : NOT
+          [
+          Label : VARIABLE
+            $a
+          Label : INDEX
+            'D'
       Label : THEN
         ;
         Label : ELEMENT
@@ -63,17 +59,15 @@ Label : CODE
       Label : ELSE
         elseif
         Label : CONDITION
-          (
-          Label : CODE
-            ==
-            Label : RIGHT
-              'J'
-            Label : LEFT
-              [
-              Label : VARIABLE
-                $a
-              Label : INDEX
-                'D'
+          ==
+          Label : RIGHT
+            'J'
+          Label : LEFT
+            [
+            Label : VARIABLE
+              $a
+            Label : INDEX
+              'D'
         Label : THEN
           ;
           Label : ELEMENT

@@ -5,18 +5,16 @@ Label : CODE
   Label : ELEMENT
     if
     Label : CONDITION
-      (
-      Label : CODE
-        isset
-        Label : ARGUMENTS
-          void
-          Label : ARGUMENT
-            $x
+      isset
+      Label : ARGUMENTS
+        void
+        Label : ARGUMENT
+          $x
     Label : THEN
       ;
       Label : ELEMENT
         $x
     Label : ELSE
-      {
+      ;
       Label : ELEMENT
         $y
