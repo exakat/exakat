@@ -326,6 +326,13 @@ INI;
             $stats['svn']['optional'] = 'Yes';
         }
 
+        // neo4jphp
+        if (file_exists('vendor/everyman/neo4jphp/')) {
+            $stats['neo4jphp']['installed'] = 'Yes';
+        } else {
+            $stats['neo4jphp']['installed'] = 'No';
+        }
+
 /*
 
         // composer
