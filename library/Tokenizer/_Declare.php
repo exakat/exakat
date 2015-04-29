@@ -103,7 +103,7 @@ class _Declare extends TokenAuto {
     public function fullcode() {
         return <<<GREMLIN
 
-fullcode.fullcode = "declare " + fullcode.out('TICKS').next().fullcode + " ";
+fullcode.fullcode = "declare (" + fullcode.out('TICKS').next().fullcode + ") ";
 
 fullcode.out('BLOCK').each{ fullcode.fullcode = fullcode.fullcode + it.fullcode; }
 
