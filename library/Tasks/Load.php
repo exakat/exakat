@@ -423,13 +423,50 @@ class Load implements Tasks {
                     $regexIndex['ArgumentsNoParenthesis']->relateTo($T[$Tid], 'INDEXED')->save();
                     $regexIndex['Functioncall']->relateTo($T[$Tid], 'INDEXED')->save();
 
+                } elseif ($token[3] == 'T_OPEN_TAG' &&
+                          isset($tokens[$id + 1]) &&
+                          is_string($tokens[$id + 1]) &&
+                          $tokens[$id + 1] == ';') {
+
+                    $T[$Tid] = $this->client->makeNode()->setProperty('token', 'T_OPEN_TAG')
+                                                  ->setProperty('code', $token[1])
+                                                  ->setProperty('tag', '<?php')
+                                                  ->setProperty('line', $token[2])
+                                                  ->setProperty('modifiedBy', 'bin/load27')
+                                                  ->save();
+                    $regexIndex['Phpcode']->relateTo($T[$Tid], 'INDEXED')->save();
+                    if (isset($previous)) {
+                        $previous->relateTo($T[$Tid], 'NEXT')->save();
+                    }
+                    $previous = $T[$Tid];
+                
+                    $Tid++;
+                    $T[$Tid]   = $this->client->makeNode()->setProperty('token', 'T_VOID')
+                                              ->setProperty('code', 'void')
+                                              ->setProperty('fullcode', ' ')
+                                              ->setProperty('line', $line)
+                                              ->setProperty('atom', 'Void')
+                                              ->setProperty('modifiedBy', 'bin/load27b')
+                                              ->save();
+                    $to_index = false;
+
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
                           isset($tokens[$id + 1]) &&
                           is_array($tokens[$id + 1]) &&
                           $this->php->getTokenname($tokens[$id + 1][0]) == 'T_OPEN_TAG') {
-                          // Just skip this. 
-                    $id++;
-                    continue;
+
+                          $T[$Tid]   = $this->client->makeNode()->setProperty('token', 'T_VOID')
+                                                    ->setProperty('code', 'void')
+                                                    ->setProperty('fullcode', ' ')
+                                                    ->setProperty('line', $line)
+                                                    ->setProperty('atom', 'Void')
+                                                    ->setProperty('modifiedBy', 'bin/load26')
+                                                    ->save();
+                          $to_index = false;
+
+
+                          // Just skip those two. 
+                        $id++;
                 } elseif ($token[3] == 'T_CLOSE_TAG' &&
                           isset($tokens[$id + 1]) &&
                           is_array($tokens[$id + 1]) &&
