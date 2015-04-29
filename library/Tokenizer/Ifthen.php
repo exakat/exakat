@@ -319,9 +319,9 @@ class Ifthen extends TokenAuto {
         return <<<GREMLIN
 
 if (fullcode.alternative == true) {
-    fullcode.fullcode = fullcode.code + " " + fullcode.out("CONDITION").next().fullcode + " : " + fullcode.out("THEN").next().fullcode + ' endif';
+    fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") : " + fullcode.out("THEN").next().fullcode + ' endif';
 } else {
-    fullcode.fullcode = fullcode.code + " " + fullcode.out("CONDITION").next().fullcode + " " + fullcode.out("THEN").next().fullcode;
+    fullcode.fullcode = fullcode.code + " (" + fullcode.out("CONDITION").next().fullcode + ") " + fullcode.out("THEN").next().fullcode;
 }
 
 GREMLIN;
