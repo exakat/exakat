@@ -4,7 +4,7 @@ include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Framework_Randomtest extends PHPUnit_Framework_TestSuite {
+class Framework_Randomtest extends \PHPUnit_Framework_TestSuite {
 
     public static function suite() {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
