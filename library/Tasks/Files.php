@@ -32,8 +32,7 @@ class Files implements Tasks {
                        'notCompilable54' => 'N/C',
                        'notCompilable55' => 'N/C',
                        'notCompilable56' => 'N/C',
-                       'notCompilable70' => 'N/C',
-                       'loc'             => 'N/C') ;
+                       'notCompilable70' => 'N/C') ;
         $unknown = array();
 
         if ($config->project === null) {
@@ -184,16 +183,16 @@ class Files implements Tasks {
         $stats['php'] = count($resFiles);
         $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 '.$config->php.'                     -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
         $resultNosot = shell_exec($shell);
-        $stats['tokens'] = (int) array_sum(explode("\n", $resultNosot));
-        $datastore->addRow('hash', array('tokens' => $stats['tokens']));
+        $tokens = (int) array_sum(explode("\n", $resultNosot));
+//        $datastore->addRow('hash', array('tokens' => $stats['tokens']));
 
         $shell = $shellBase . ' | sort | sed -e \'s/^/"/g\' -e \'s/$/"/g\' | tr \'\n\' \' \'|  xargs -n1 -P5 '.$config->php.' -d short_open_tag=1 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
 
         $resultSot = shell_exec($shell);
-        $stats['tokenssot'] = (int) array_sum(explode("\n", $resultSot));
+        $tokenssot = (int) array_sum(explode("\n", $resultSot));
 
         $datastore->cleanTable('shortopentag');
-        if ($stats['tokenssot'] != $stats['tokens']) {
+        if ($tokenssot != $tokens) {
             $nosot = explode("\n", trim($resultNosot));
             $nosot2 = array();
             foreach($nosot as $id => $value) {
