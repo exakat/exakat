@@ -81,13 +81,12 @@ class _Use extends TokenAuto {
         $this->checkAuto();
 
     // use A { B as C; }
-        $this->conditions = array( 0 => array('token' => _Use::$operators),
-                                   1 => array('atom'  => array('Nsname', 'Identifier')),
-                                   2 => array('token' => 'T_OPEN_CURLY',
-                                              'property' => array('association' => 'Use')
-                                   ),
-                                   3 => array('atom'  => 'Sequence'),
-                                   4 => array('token' => 'T_CLOSE_CURLY'),
+        $this->conditions = array( 0 => array('token'    => _Use::$operators),
+                                   1 => array('atom'     => array('Nsname', 'Identifier')),
+                                   2 => array('token'    => 'T_OPEN_CURLY',
+                                              'property' => array('association' => 'Use')),
+                                   3 => array('atom'     => array('Sequence', 'Void')),
+                                   4 => array('token'    => 'T_CLOSE_CURLY'),
                                  );
         
         $this->actions = array('transform'  => array( 1 => 'USE',
@@ -102,12 +101,12 @@ class _Use extends TokenAuto {
         $this->checkAuto();
 
     // use A,B {};
-        $this->conditions = array( 0 => array('token' => _Use::$operators),
-                                   1 => array('atom'  => 'Arguments'),
-                                   2 => array('token' => 'T_OPEN_CURLY',
+        $this->conditions = array( 0 => array('token'    => _Use::$operators),
+                                   1 => array('atom'     => 'Arguments'),
+                                   2 => array('token'    => 'T_OPEN_CURLY',
                                               'property' => array('association' => 'Use')),
-                                   3 => array('atom'  => 'Sequence'),
-                                   4 => array('token' => 'T_CLOSE_CURLY'),
+                                   3 => array('atom'     => array('Sequence', 'Void')),
+                                   4 => array('token'    => 'T_CLOSE_CURLY'),
                                  );
         
         $this->actions = array('toUseBlock' => true,
