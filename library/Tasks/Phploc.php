@@ -35,13 +35,19 @@ class Phploc implements Tasks {
             $project = $config->project;
             $dirPath = $config->projects_root.'/projects/'.$config->project.'/code';
 
+            if (!file_exists($dirPath)) {
+                die("Project '$project' doesn't exists\n");
+            }
+
             $ignoreDirs = array();
             $ignoreName = array();
             foreach($config->ignore_dirs as $ignore) {
                 if ($ignore[0] == '/') {
                     $d = $config->projects_root.'/projects/'.$config->project.'/code'.$ignore;
-                    if (file_exists($d)) {
-                        $ignoreDirs[] = $d;
+                    if ($toIgnore = glob($d."*")) {
+                        foreach($toIgnore as $x) {
+                            $ignoreDirs[] = $x;
+                        }
                     }
                 } else {
                     $ignoreName[] = $ignore;
@@ -58,6 +64,7 @@ class Phploc implements Tasks {
             $datastore->addRow('hash', array(array('key' => 'loc',         'value' => $loc['code']),
                                              array('key' => 'locTotal',    'value' => $loc['total']),
                                              array('key' => 'files',       'value' => $loc['files']),
+                                             array('key' => 'tokens',      'value' => $loc['tokens']),
 //                                             array('key' => 'directories', 'value' => $loc['dirs']),
                                         )
                           );
@@ -84,6 +91,8 @@ class Phploc implements Tasks {
             }
         } elseif (!empty($config->filename)) {
             $loc = $this->countLocInFile($config->filename);
+        } else {
+            die("Usage : php exakat phploc <-p project> <-d dirname> <-f filename>\n");
         }
         
         if ($config->json) {
@@ -94,7 +103,7 @@ class Phploc implements Tasks {
     }
 
     private function readRecursiveDir($dirname, $excludeFiles = array(), $excludeDirs = array()) { 
-        $dir = opendir($dirname); 
+        $dir = opendir($dirname);
         
         $return = array();
         while(false !== ($file = readdir($dir))) {
